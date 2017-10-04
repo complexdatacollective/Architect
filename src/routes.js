@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import {
   HashRouter as Router,
@@ -7,7 +5,6 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
   Start,
 } from './containers';
