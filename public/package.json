@@ -14,5 +14,9 @@
   "dependencies": {
     "electron-log": "^2.2.7",
     "electron-updater": "^2.7.2"
-  }
+  },
+  "browser": {
+     "canvas": false,
+     "jsdom": false
+   }
 }
