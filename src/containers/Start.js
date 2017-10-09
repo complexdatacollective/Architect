@@ -9,8 +9,7 @@ class Start extends PureComponent {
   // constructor() => {
   // }
   //
-  addStage = (index) => {
-    console.log('addStage', index);
+  addStage = () => {
     // const surfaceHeight = window.innerHeight;
     //
     // this.setState({
@@ -22,16 +21,13 @@ class Start extends PureComponent {
     // });
   };
 
-  editStage = (index) => {
-    console.log('editStage', index);
+  editStage = () => {
   };
 
-  editSkip = (index) => {
-    console.log('editSkip', index);
+  editSkip = () => {
   };
 
   render() {
-    console.log(items);
     return (
       <Timeline
         items={items}

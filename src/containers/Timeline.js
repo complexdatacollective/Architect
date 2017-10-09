@@ -1,10 +1,9 @@
-/* eslint-disable */
 /* eslint-disable react/sort-comp, no-underscore-dangle */
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Layer, Stage, Group, Rect } from 'react-konva';
-import { map, sum, filter, compact } from 'lodash';
+import { map, sum, filter } from 'lodash';
 import Scroller from 'scroller';
 import TimelineStage from './TimelineStage';
 
@@ -15,6 +14,9 @@ class Timeline extends PureComponent {
     scrollingDeceleration: PropTypes.number,
     scrollingPenetrationAcceleration: PropTypes.number,
     onScroll: PropTypes.func,
+    addStage: PropTypes.func,
+    editStage: PropTypes.func,
+    editSkip: PropTypes.func,
   };
 
   defaultProps = {
@@ -22,6 +24,9 @@ class Timeline extends PureComponent {
     snapping: false,
     scrollingDeceleration: 0.95,
     scrollingPenetrationAcceleration: 0.08,
+    addStage: () => {},
+    editStage: () => {},
+    editSkip: () => {},
   };
 
   constructor(props) {
@@ -36,8 +41,6 @@ class Timeline extends PureComponent {
       height: surfaceHeight,
       items: this.itemStates(),
     };
-
-    console.log(this.state.items);
   }
 
   componentDidMount() {
@@ -200,10 +203,10 @@ class Timeline extends PureComponent {
 
     const itemsOnScreen = map(
       items,
-      (item, index) => isOnScreen(item.height, item.y - scrollTop, height) ? index : null,
+      (item, index) => (isOnScreen(item.height, item.y - scrollTop, height) ? index : null),
     );
 
-    return filter(itemsOnScreen, (index) => index !== null);
+    return filter(itemsOnScreen, index => index !== null);
   }
 
   updateScrollingDeceleration() {
