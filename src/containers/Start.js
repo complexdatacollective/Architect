@@ -1,42 +1,48 @@
 import React, { PureComponent } from 'react';
-import { times, random } from 'lodash';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Timeline from './Timeline';
-
-
-const items = times(5, () => ({ title: `foo ${random(0, 100)}`, type: 'name-generator' }));
+import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 class Start extends PureComponent {
-  // constructor() => {
-  // }
-  //
-  addStage = () => {
-    // const surfaceHeight = window.innerHeight;
-    //
-    // this.setState({
-    //   items: [
-    //     ...this.state.items.slice(0, index + 1),
-    //     { title: 'bar', height: surfaceHeight / 2, scaleY: 0.01 },
-    //     ...this.state.items.slice(index + 1),
-    //   ],
-    // });
+  static propTypes = {
+    addStage: PropTypes.func.isRequired,
+    stages: PropTypes.array.isRequired,
   };
 
-  editStage = () => {
+  onAddStage = (index) => {
+    this.props.addStage('name-generator', index);
   };
 
-  editSkip = () => {
+  onEditStage = () => {
+  };
+
+  onEditSkip = () => {
   };
 
   render() {
     return (
       <Timeline
-        items={items}
-        addStage={this.addStage}
-        editStage={this.editStage}
-        editSkip={this.editSkip}
+        items={this.props.stages}
+        onAddStage={this.onAddStage}
+        onEditStage={this.onEditStage}
+        onEditSkip={this.onEditSkip}
       />
     );
   }
 }
 
-export default Start;
+function mapStateToProps(state) {
+  return {
+    stages: state.stages,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addStage: bindActionCreators(stageActions.addStage, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Start);
