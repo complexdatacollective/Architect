@@ -1,6 +1,9 @@
-const initialState = {
-};
+import { combineReducers } from 'redux';
 
-const appReducer = (state = initialState) => state;
+import stages from './stages';
+
+const appReducer = combineReducers({
+  stages,
+});
 
 export default appReducer;
