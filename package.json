@@ -1,7 +1,7 @@
 {
-    "name": "network-canvas",
-    "version": "4.0.0-alpha.1",
-    "productName": "Network Canvas",
+    "name": "architect",
+    "version": " 0.0.1",
+    "productName": "Architect",
     "description": "Simplifying complex network data collection.",
     "author": "Complex Data Collective",
     "private": true,
