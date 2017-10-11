@@ -1,18 +1,4 @@
 @import '~network-canvas-ui/src/styles/all';
-
-// Remove touch and focus outlines
-* {
-  outline-style: none;
-  -webkit-touch-callout: none;
-  &:focus {
-    outline: none;
-   }
-}
-
-html,
-body {
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  user-select: none;
-}
+@import './reset';
+@import './app';
+@import './containers';

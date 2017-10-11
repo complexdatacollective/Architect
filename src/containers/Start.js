@@ -25,9 +25,9 @@ class Start extends PureComponent {
     return (
       <Timeline
         items={this.props.stages}
-        onAddStage={this.onAddStage}
-        onEditStage={this.onEditStage}
-        onEditSkip={this.onEditSkip}
+        addStage={this.onAddStage}
+        editStage={this.editStage}
+        editSkip={this.editSkip}
       />
     );
   }
