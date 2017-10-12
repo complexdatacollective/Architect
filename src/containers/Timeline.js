@@ -6,25 +6,26 @@ import TimelineStage from './TimelineStage';
 class Timeline extends PureComponent {
   static propTypes = {
     items: PropTypes.array,
-    addStage: PropTypes.func,
-    editStage: PropTypes.func,
-    editSkip: PropTypes.func,
+    onInsertStage: PropTypes.func,
+    onEditStage: PropTypes.func,
+    onEditSkip: PropTypes.func,
   };
 
   static defaultProps = {
     items: [],
-    addStage: () => {},
-    editStage: () => {},
-    editSkip: () => {},
+    onInsertStage: () => {},
+    onEditStage: () => {},
+    onEditSkip: () => {},
   };
 
   renderItem = (item, index) => (
     <TimelineStage
       key={item.id}
+      index={index}
       {...item}
-      addStage={() => this.props.addStage(index)}
-      editStage={() => this.props.editStage(index)}
-      editSkip={() => this.props.editSkip(index)}
+      onInsertStage={() => this.props.onInsertStage(index + 1)}
+      onEditStage={this.props.onEditStage}
+      onEditSkip={this.props.onEditSkip}
     />
   );
 

@@ -1,2 +1,3 @@
 export { default as App } from './App';
-export { default as Start } from './Start';
+export { default as Interview } from './Interview';
+export { default as Stage } from './Stage';

@@ -6,15 +6,14 @@ import {
   Switch,
 } from 'react-router-dom';
 import {
-  Start,
+  Interview,
 } from './containers';
-
 
 export default () => (
   <Router>
     <Switch>
-      <Route path="/start" component={Start} />
-      <Redirect to={{ pathname: '/start' }} />
+      <Route path="/interview" component={Interview} />
+      <Redirect to={{ pathname: '/interview' }} />
     </Switch>
   </Router>
 );

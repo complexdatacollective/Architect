@@ -32,6 +32,8 @@ class Zoom extends PureComponent {
       elasticity: 0,
       easing: 'easeInOutQuad',
       duration: 300,
+    }).finished.then(() => {
+      document.getElementsByTagName('body')[0].removeChild(zoom);
     });
   }
 

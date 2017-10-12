@@ -6,18 +6,15 @@ class TimelineStage extends PureComponent {
   static propTypes = {
     type: PropTypes.string.isRequired,
     title: PropTypes.string,
-    addStage: PropTypes.func,
-    editStage: PropTypes.func,
-    editSkip: PropTypes.func,
+    onInsertStage: PropTypes.func.isRequired,
+    onEditStage: PropTypes.func.isRequired,
+    onEditSkip: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     width: 0,
     height: 0,
     title: '',
-    addStage: () => {},
-    editStage: () => {},
-    editSkip: () => {},
   };
 
   snapshotSrc() {
@@ -25,12 +22,19 @@ class TimelineStage extends PureComponent {
   }
 
   render() {
+    const {
+      title,
+      onInsertStage,
+      onEditStage,
+      onEditSkip,
+    } = this.props;
+
     return (
       <div>
-        { this.props.title }
+        { title }
         <div
           role="button"
-          onClick={this.props.editStage}
+          onClick={onEditStage}
           tabIndex="0"
         >
           <img src={this.snapshotSrc()} alt="" />
@@ -39,7 +43,7 @@ class TimelineStage extends PureComponent {
         <Zoom>
           <div
             role="button"
-            onClick={this.props.addStage}
+            onClick={onInsertStage}
             tabIndex="0"
             style={{ display: 'inline-block' }}
           >
@@ -49,7 +53,7 @@ class TimelineStage extends PureComponent {
 
         <div
           role="button"
-          onClick={this.props.editSkip}
+          onClick={onEditSkip}
           tabIndex="0"
         >
           Edit skip
