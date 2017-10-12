@@ -31,7 +31,7 @@ class TimelineStage extends PureComponent {
 
     return (
       <div>
-        { title }
+        <div>{ title }</div>
         <div
           role="button"
           onClick={onEditStage}

@@ -12,7 +12,7 @@ class Stage extends PureComponent {
   render() {
     return (
       <div className="stage">
-        {this.props.match.params.id}
+        Stage
       </div>
     );
   }

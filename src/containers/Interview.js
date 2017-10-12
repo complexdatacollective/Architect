@@ -1,17 +1,42 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Transition } from 'react-transition-group';
+import { animation } from 'network-canvas-ui';
+import anime from 'animejs';
 import Timeline from './Timeline';
 import Stage from './Stage';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
+const Fade = ({ show, children }) => (
+  <Transition
+    key="timeline"
+    in={show}
+    onExit={
+      (el) => {
+        anime({
+          targets: el,
+          opacity: 0,
+          elasticity: 0,
+          easing: 'easeInOutQuad',
+          duration: 300,
+        });
+      }
+    }
+    timeout={animation.duration.standard}
+  >
+    {state => state !== 'exited' && children}
+  </Transition>
+);
+
+Fade.propTypes = {
+  children: PropTypes.any.isRequired,
+  show: PropTypes.bool.isRequired,
+};
+
 class Interview extends PureComponent {
   static propTypes = {
-    addStage: PropTypes.func.isRequired,
     stages: PropTypes.array.isRequired,
   };
 
@@ -26,7 +51,7 @@ class Interview extends PureComponent {
   onInsertStage = (index) => {
     this.setState({
       stage: {
-        index: 0,
+        index,
       },
     });
   };
@@ -34,18 +59,17 @@ class Interview extends PureComponent {
   render() {
     return (
       <div className="interview">
-        { !this.state.stage &&
+        <Fade show={!this.state.stage}>
           <Timeline
             items={this.props.stages}
             onInsertStage={this.onInsertStage}
           />
-        }
-
-        { this.state.stage &&
+        </Fade>
+        <Fade show={!!this.state.stage}>
           <Stage
             stage={this.state.stage}
           />
-        }
+        </Fade>
       </div>
     );
   }
