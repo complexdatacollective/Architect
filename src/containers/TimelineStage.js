@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Zoom from '../components/Zoom';
 
 class TimelineStage extends PureComponent {
   static propTypes = {
@@ -35,13 +36,16 @@ class TimelineStage extends PureComponent {
           <img src={this.snapshotSrc()} alt="" />
         </div>
 
-        <div
-          role="button"
-          onClick={this.props.addStage}
-          tabIndex="0"
-        >
-          Add Stage
-        </div>
+        <Zoom>
+          <div
+            role="button"
+            onClick={this.props.addStage}
+            tabIndex="0"
+            style={{ display: 'inline-block' }}
+          >
+            Add Stage
+          </div>
+        </Zoom>
 
         <div
           role="button"
