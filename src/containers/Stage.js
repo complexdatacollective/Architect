@@ -1,31 +1,66 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { find } from 'lodash';
+import { actionCreators as stageActions } from '../ducks/modules/stages';
+import StageForm from './StageForm';
 
 class Stage extends PureComponent {
   static propTypes = {
-    stages: PropTypes.array.isRequired,
+    addStage: PropTypes.func.isRequired,
+    initialValues: PropTypes.object.isRequired,
+    // id: PropTypes.string,
+    index: PropTypes.number,
+    onComplete: PropTypes.func,
   };
+
+  static defaultProps = {
+    onComplete: () => {},
+    id: null,
+    index: null,
+  }
+
+  onSubmit = (values) => {
+    const {
+      index,
+    } = this.props;
+
+    if (index) {
+      this.props.addStage(values, index);
+    }
+    this.props.onComplete();
+  }
 
   render() {
     return (
       <div className="stage">
         Stage
+        <StageForm
+          initialValues={this.props.initialValues}
+          onSubmit={this.onSubmit}
+        />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
+  let initialValues = {};
+
+  if (props.id) {
+    initialValues = find(this.props.stages, props.id);
+  }
+
   return {
     stages: state.stages,
+    initialValues,
   };
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
   return {
+    addStage: bindActionCreators(stageActions.addStage, dispatch),
   };
 }
 

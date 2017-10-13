@@ -35,6 +35,11 @@ Fade.propTypes = {
   show: PropTypes.bool.isRequired,
 };
 
+const defaultStageState = {
+  insertAtIndex: null,
+  editId: null,
+};
+
 class Interview extends PureComponent {
   static propTypes = {
     stages: PropTypes.array.isRequired,
@@ -44,30 +49,50 @@ class Interview extends PureComponent {
     super(props);
 
     this.state = {
-      stage: null,
+      stage: { ...defaultStageState },
     };
+  }
+
+  onStageUpdated = () => {
+    this.setState({
+      stage: { ...defaultStageState },
+    });
   }
 
   onInsertStage = (index) => {
     this.setState({
       stage: {
-        index,
+        ...this.state.stage,
+        insertAtIndex: index,
       },
     });
   };
 
+  onEditStage = (id) => {
+    this.setState({
+      stage: {
+        ...this.state.stage,
+        editId: id,
+      },
+    });
+  };
+
+  showStage = () => (!!this.state.stage.editId || !!this.state.stage.insertAtIndex);
+
   render() {
     return (
       <div className="interview">
-        <Fade show={!this.state.stage}>
+        <Fade show={!this.showStage()}>
           <Timeline
             items={this.props.stages}
             onInsertStage={this.onInsertStage}
           />
         </Fade>
-        <Fade show={!!this.state.stage}>
+        <Fade show={this.showStage()}>
           <Stage
-            stage={this.state.stage}
+            id={this.state.stage.editId}
+            index={this.state.stage.insertAtIndex}
+            onComplete={this.onStageUpdated}
           />
         </Fade>
       </div>
