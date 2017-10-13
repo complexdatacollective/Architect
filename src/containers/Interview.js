@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -5,12 +7,14 @@ import { connect } from 'react-redux';
 import { TransitionGroup } from 'react-transition-group';
 import Timeline from './Timeline';
 import Stage from './Stage';
-import Fade from '../components/Fade';
+import CardTransition from '../components/CardTransition';
+import ScreenTransition from '../components/ScreenTransition';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const defaultStageState = {
   insertAtIndex: null,
   editId: null,
+  cancel: false,
 };
 
 class Interview extends PureComponent {
@@ -26,6 +30,20 @@ class Interview extends PureComponent {
     };
   }
 
+  onStageCancel = () => {
+    this.setState({
+      stage: {
+        cancel: true,
+      },
+    }, () => {
+      this.setState({
+        stage: {
+          ...defaultStageState,
+        },
+      });
+    });
+  }
+
   onStageUpdated = () => {
     this.setState({
       stage: { ...defaultStageState },
@@ -35,7 +53,7 @@ class Interview extends PureComponent {
   onInsertStage = (index) => {
     this.setState({
       stage: {
-        ...this.state.stage,
+        ...defaultStageState,
         insertAtIndex: index,
       },
     });
@@ -44,7 +62,7 @@ class Interview extends PureComponent {
   onEditStage = (id) => {
     this.setState({
       stage: {
-        ...this.state.stage,
+        ...defaultStageState,
         editId: id,
       },
     });
@@ -55,25 +73,29 @@ class Interview extends PureComponent {
   render() {
     return (
       <div className="interview">
-        <TransitionGroup>
-          {!this.showStage() &&
-            <Fade key="timeline">
-              <Timeline
-                items={this.props.stages}
-                onInsertStage={this.onInsertStage}
-              />
-            </Fade>
-          }
-          {this.showStage() &&
-            <Fade key="stage">
-              <Stage
-                id={this.state.stage.editId}
-                index={this.state.stage.insertAtIndex}
-                onComplete={this.onStageUpdated}
-              />
-            </Fade>
-          }
-        </TransitionGroup>
+        <ScreenTransition
+          key="timeline"
+          in={!this.showStage()}
+          unmountOnExit
+        >
+          <Timeline
+            items={this.props.stages}
+            onInsertStage={this.onInsertStage}
+          />
+        </ScreenTransition>
+        <CardTransition
+          key="stage"
+          in={this.showStage()}
+          unmountOnExit
+          cancel={this.state.stage.cancel}
+        >
+          <Stage
+            id={this.state.stage.editId}
+            index={this.state.stage.insertAtIndex}
+            onComplete={this.onStageUpdated}
+            onCancel={this.onStageCancel}
+          />
+        </CardTransition>
       </div>
     );
   }

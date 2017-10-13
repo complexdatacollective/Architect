@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Zoom from '../components/Zoom';
@@ -40,16 +42,14 @@ class TimelineStage extends PureComponent {
           <img src={this.snapshotSrc()} alt="" />
         </div>
 
-        <Zoom>
-          <div
-            role="button"
-            onClick={onInsertStage}
-            tabIndex="0"
-            style={{ display: 'inline-block' }}
-          >
-            Add Stage
-          </div>
-        </Zoom>
+        <div
+          role="button"
+          onClick={onInsertStage}
+          tabIndex="0"
+          style={{ display: 'inline-block' }}
+        >
+          Add Stage
+        </div>
 
         <div
           role="button"

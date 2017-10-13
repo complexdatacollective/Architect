@@ -13,10 +13,12 @@ class Stage extends PureComponent {
     // id: PropTypes.string,
     index: PropTypes.number,
     onComplete: PropTypes.func,
+    onCancel: PropTypes.func,
   };
 
   static defaultProps = {
     onComplete: () => {},
+    onCancel: () => {},
     id: null,
     index: null,
   }
@@ -40,6 +42,7 @@ class Stage extends PureComponent {
           initialValues={this.props.initialValues}
           onSubmit={this.onSubmit}
         />
+        <button onClick={this.props.onCancel}>cancel</button>
       </div>
     );
   }
