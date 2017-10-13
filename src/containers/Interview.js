@@ -2,38 +2,11 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Transition } from 'react-transition-group';
-import { animation } from 'network-canvas-ui';
-import anime from 'animejs';
+import { TransitionGroup } from 'react-transition-group';
 import Timeline from './Timeline';
 import Stage from './Stage';
+import Fade from '../components/Fade';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
-
-const Fade = ({ show, children }) => (
-  <Transition
-    key="timeline"
-    in={show}
-    onExit={
-      (el) => {
-        anime({
-          targets: el,
-          opacity: 0,
-          elasticity: 0,
-          easing: 'easeInOutQuad',
-          duration: 300,
-        });
-      }
-    }
-    timeout={animation.duration.standard}
-  >
-    {state => state !== 'exited' && children}
-  </Transition>
-);
-
-Fade.propTypes = {
-  children: PropTypes.any.isRequired,
-  show: PropTypes.bool.isRequired,
-};
 
 const defaultStageState = {
   insertAtIndex: null,
@@ -82,19 +55,25 @@ class Interview extends PureComponent {
   render() {
     return (
       <div className="interview">
-        <Fade show={!this.showStage()}>
-          <Timeline
-            items={this.props.stages}
-            onInsertStage={this.onInsertStage}
-          />
-        </Fade>
-        <Fade show={this.showStage()}>
-          <Stage
-            id={this.state.stage.editId}
-            index={this.state.stage.insertAtIndex}
-            onComplete={this.onStageUpdated}
-          />
-        </Fade>
+        <TransitionGroup>
+          {!this.showStage() &&
+            <Fade key="timeline">
+              <Timeline
+                items={this.props.stages}
+                onInsertStage={this.onInsertStage}
+              />
+            </Fade>
+          }
+          {this.showStage() &&
+            <Fade key="stage">
+              <Stage
+                id={this.state.stage.editId}
+                index={this.state.stage.insertAtIndex}
+                onComplete={this.onStageUpdated}
+              />
+            </Fade>
+          }
+        </TransitionGroup>
       </div>
     );
   }

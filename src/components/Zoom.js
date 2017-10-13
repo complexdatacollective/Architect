@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
+import { animation } from 'network-canvas-ui';
 import getAbsoluteBoundingRect from '../utils/getAbsoluteBoundingRect';
 
 class Zoom extends PureComponent {
@@ -31,7 +32,7 @@ class Zoom extends PureComponent {
       opacity: 1,
       elasticity: 0,
       easing: 'easeInOutQuad',
-      duration: 300,
+      duration: animation.duration.slow,
     }).finished.then(() => {
       document.getElementsByTagName('body')[0].removeChild(zoom);
     });
