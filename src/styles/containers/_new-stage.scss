@@ -1,0 +1,34 @@
+.new-stage {
+  @extend %card;
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  &__option {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    &-preview {
+      width: 300px;
+
+      img {
+        width: 300px;
+      }
+    }
+
+    &-details {
+      padding-left: 20px;
+    }
+
+    &:hover {
+      border-color: palette('selected');
+    }
+  }
+}

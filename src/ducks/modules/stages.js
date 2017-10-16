@@ -2,7 +2,7 @@ import { map, max } from 'lodash';
 
 const ADD_STAGE = 'ADD_STAGE';
 
-const initialState = [{ id: 1, type: 'name-generator' }, { id: 2, type: 'name-generator' }];
+const initialState = [{ id: 1, type: 'NameGenerator' }, { id: 2, type: 'Sociogram' }];
 
 const nextId = state => (max(map(state, 'id')) + 1);
 

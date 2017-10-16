@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Timeline from './Timeline';
-import Stage from './Stage';
+import NewStage from './NewStage';
 import { ScreenTransition, CardTransition } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const defaultStageState = {
   insertAtIndex: null,
-  editId: null,
   cancel: false,
 };
 
@@ -26,7 +25,7 @@ class Interview extends PureComponent {
     };
   }
 
-  onStageCancel = () => {
+  onCancelNewStage = () => {
     this.setState({
       stage: {
         ...defaultStageState,
@@ -35,9 +34,11 @@ class Interview extends PureComponent {
     });
   }
 
-  onStageUpdated = () => {
+  onNewStageAdded = () => {
     this.setState({
-      stage: { ...defaultStageState },
+      stage: {
+        ...defaultStageState,
+      },
     });
   }
 
@@ -50,23 +51,15 @@ class Interview extends PureComponent {
     });
   };
 
-  onEditStage = (id) => {
-    this.setState({
-      stage: {
-        ...defaultStageState,
-        editId: id,
-      },
-    });
-  };
-
-  showStage = () => (!!this.state.stage.editId || !!this.state.stage.insertAtIndex);
+  showNewStage = () => !!this.state.stage.insertAtIndex;
+  showTimeline = () => !this.showNewStage();
 
   render() {
     return (
       <div className="interview">
         <ScreenTransition
           key="timeline"
-          in={!this.showStage()}
+          in={this.showTimeline()}
         >
           <Timeline
             items={this.props.stages}
@@ -74,15 +67,14 @@ class Interview extends PureComponent {
           />
         </ScreenTransition>
         <CardTransition
-          key="stage"
-          in={this.showStage()}
+          key="new-stage"
+          in={this.showNewStage()}
           cancel={this.state.stage.cancel}
         >
-          <Stage
-            id={this.state.stage.editId}
+          <NewStage
             index={this.state.stage.insertAtIndex}
-            onComplete={this.onStageUpdated}
-            onCancel={this.onStageCancel}
+            onComplete={this.onNewStageAdded}
+            onCancel={this.onCancelNewStage}
           />
         </CardTransition>
       </div>
