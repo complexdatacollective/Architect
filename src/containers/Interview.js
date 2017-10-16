@@ -1,10 +1,7 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { TransitionGroup } from 'react-transition-group';
 import Timeline from './Timeline';
 import Stage from './Stage';
 import { ScreenTransition, CardTransition } from '../components';
@@ -32,14 +29,9 @@ class Interview extends PureComponent {
   onStageCancel = () => {
     this.setState({
       stage: {
+        ...defaultStageState,
         cancel: true,
       },
-    }, () => {
-      this.setState({
-        stage: {
-          ...defaultStageState,
-        },
-      });
     });
   }
 
@@ -75,7 +67,6 @@ class Interview extends PureComponent {
         <ScreenTransition
           key="timeline"
           in={!this.showStage()}
-          unmountOnExit
         >
           <Timeline
             items={this.props.stages}
@@ -85,7 +76,6 @@ class Interview extends PureComponent {
         <CardTransition
           key="stage"
           in={this.showStage()}
-          unmountOnExit
           cancel={this.state.stage.cancel}
         >
           <Stage

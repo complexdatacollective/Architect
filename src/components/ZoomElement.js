@@ -1,26 +1,22 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { animation } from 'network-canvas-ui';
+
 class ZoomElement extends PureComponent {
   static propTypes = {
     children: PropTypes.any.isRequired,
-    color: PropTypes.string,
+    colors: PropTypes.array,
   };
 
   static defaultProps = {
-    color: 'white',
+    colors: ['#ffffff', '#2d2955'],
   };
 
   onClick = (e) => {
     const start = e.target.getBoundingClientRect();
     const pseudoElement = document.createElement('div');
-    pseudoElement.setAttribute(
-      'style',
-      `position:absolute;`,
-    );
+    pseudoElement.setAttribute('style', 'position:absolute;');
     document.getElementsByTagName('body')[0].appendChild(pseudoElement);
 
     anime({
@@ -31,7 +27,7 @@ class ZoomElement extends PureComponent {
       width: [start.width, window.innerWidth],
       height: [start.height, window.innerHeight],
       opacity: [1, 0],
-      backgroundColor: ['#ffffff', '#2d2955'],
+      backgroundColor: this.props.colors,
       top: [start.top, 0],
       left: [start.left, 0],
     }).finished.then(() => {

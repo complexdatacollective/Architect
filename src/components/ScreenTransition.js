@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
@@ -19,6 +18,7 @@ const expand = {
 const ScreenTransition = ({ children, timeout, ...props }) => (
   <Transition
     timeout={timeout}
+    unmountOnExit
     appear
     onEnter={
       (el) => {

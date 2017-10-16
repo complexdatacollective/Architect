@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
@@ -19,49 +18,50 @@ const wipeOut = {
   translateX: [0, '100%'],
 };
 
-const CardTransition = ({ children, cancel, timeout, ...props }) => {
-  return (
-    <Transition
-      timeout={timeout}
-      appear
-      onEnter={
-        (el) => {
-          anime({
-            targets: el,
-            elasticity: 0,
-            easing: 'easeInOutQuad',
-            duration: timeout,
-            delay: 0.5 * animation.duration.fast,
-            ...fadeIn,
-          });
-        }
+const CardTransition = ({ children, cancel, timeout, ...props }) => (
+  <Transition
+    timeout={timeout}
+    unmountOnExit
+    appear
+    onEnter={
+      (el) => {
+        anime({
+          targets: el,
+          elasticity: 0,
+          easing: 'easeInOutQuad',
+          duration: timeout,
+          delay: 0.5 * animation.duration.fast,
+          ...fadeIn,
+        });
       }
-      onExit={
-        (el) => {
-          anime({
-            targets: el,
-            elasticity: 0,
-            easing: 'easeInOutQuad',
-            duration: timeout,
-            ...(cancel ? wipeOut : fadeOut),
-          });
-        }
+    }
+    onExit={
+      (el) => {
+        anime({
+          targets: el,
+          elasticity: 0,
+          easing: 'easeInOutQuad',
+          duration: timeout,
+          ...(cancel ? wipeOut : fadeOut),
+        });
       }
-      {...props}
-    >
-      { children }
-    </Transition>
-  );
-}
+    }
+    {...props}
+  >
+    { children }
+  </Transition>
+);
 
 CardTransition.propTypes = {
   children: PropTypes.any.isRequired,
   timeout: PropTypes.number,
+  cancel: PropTypes.bool,
 };
 
 CardTransition.defaultProps = {
   children: PropTypes.any.isRequired,
   timeout: (2 * animation.duration.standard),
+  cancel: true,
 };
 
 export default CardTransition;
