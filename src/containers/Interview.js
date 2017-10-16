@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 import { TransitionGroup } from 'react-transition-group';
 import Timeline from './Timeline';
 import Stage from './Stage';
-import CardTransition from '../components/CardTransition';
-import ScreenTransition from '../components/ScreenTransition';
+import { ScreenTransition, CardTransition } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const defaultStageState = {

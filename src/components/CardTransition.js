@@ -7,7 +7,6 @@ import anime from 'animejs';
 
 const fadeIn = {
   opacity: [0, 1],
-  translateX: [0, 0],
   duration: animation.duration.fast,
 };
 
@@ -32,6 +31,7 @@ const CardTransition = ({ children, cancel, timeout, ...props }) => {
             elasticity: 0,
             easing: 'easeInOutQuad',
             duration: timeout,
+            delay: 0.5 * animation.duration.fast,
             ...fadeIn,
           });
         }
@@ -61,7 +61,7 @@ CardTransition.propTypes = {
 
 CardTransition.defaultProps = {
   children: PropTypes.any.isRequired,
-  timeout: animation.duration.slow,
+  timeout: (2 * animation.duration.standard),
 };
 
 export default CardTransition;
