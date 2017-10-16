@@ -9,7 +9,6 @@ const fadeOut = {
   duration: animation.duration.fast,
 };
 
-// Needs to happen from center,
 const expand = {
   scale: [0, 1],
   opacity: [0, 1],
@@ -22,6 +21,8 @@ const ScreenTransition = ({ children, timeout, ...props }) => (
     appear
     onEnter={
       (el) => {
+        el.setAttribute('style', `${el.getAttribute('style')}; transform-origin: 50vw 50vh;`);
+
         anime({
           targets: el,
           elasticity: 0,
@@ -33,6 +34,8 @@ const ScreenTransition = ({ children, timeout, ...props }) => (
     }
     onExit={
       (el) => {
+        el.setAttribute('style', `${el.getAttribute('style')}; transform-origin: 50vw 50vh;`);
+
         anime({
           targets: el,
           elasticity: 0,
