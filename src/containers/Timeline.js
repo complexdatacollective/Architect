@@ -2,45 +2,53 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { map } from 'lodash';
+import { map, flatten, zip } from 'lodash';
 import TimelineStage from './TimelineStage';
 import TimelineAddNew from './TimelineAddNew';
 
 class Timeline extends PureComponent {
   static propTypes = {
-    items: PropTypes.array,
+    stages: PropTypes.array,
     onInsertStage: PropTypes.func,
     onEditStage: PropTypes.func,
     onEditSkip: PropTypes.func,
   };
 
   static defaultProps = {
-    items: [],
+    stages: [],
     onInsertStage: () => {},
     onEditStage: () => {},
     onEditSkip: () => {},
   };
 
-  renderItem = (item, index) => (
-    <span
-      key={item.id}
-    >
-      <TimelineStage
-        {...item}
-        onEditStage={() => this.props.onEditStage(item.id)}
-        onEditSkip={() => this.props.onEditSkip(item.id)}
-      />
-      <TimelineAddNew
-        onInsertStage={() => this.props.onInsertStage(index + 1)}
-      />
-    </span>
+  renderStage = (stage, index) => (
+    <TimelineStage
+      key={`stage_${stage.id}`}
+      {...stage}
+      onEditStage={() => this.props.onEditStage(stage.id)}
+      onEditSkip={() => this.props.onEditSkip(stage.id)}
+    />
+  );
+
+  renderAddNew = (item, index) => (
+    <TimelineAddNew
+      key={`add-new_${index}`}
+      onInsertStage={() => this.props.onInsertStage(index + 1)}
+    />
   );
 
   render() {
-    const items = this.props.items.map(this.renderItem);
+    const stages = this.props.stages.map(this.renderStage);
+    const addNew = this.props.stages.map(this.renderAddNew);
+
+    const items = flatten(zip(stages, addNew));
 
     return (
       <div className="timeline">
+        <TimelineAddNew
+          key={`add-new_0`}
+          onInsertStage={() => this.props.onInsertStage(0)}
+        />
         {items}
       </div>
     );

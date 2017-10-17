@@ -51,7 +51,7 @@ class Interview extends PureComponent {
     });
   };
 
-  showNewStage = () => !!this.state.stage.insertAtIndex;
+  showNewStage = () => this.state.stage.insertAtIndex !== null;
   showTimeline = () => !this.showNewStage();
 
   render() {
@@ -62,7 +62,7 @@ class Interview extends PureComponent {
           in={this.showTimeline()}
         >
           <Timeline
-            items={this.props.stages}
+            stages={this.props.stages}
             onInsertStage={this.onInsertStage}
           />
         </ScreenTransition>

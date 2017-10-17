@@ -45,9 +45,7 @@ class NewStage extends PureComponent {
   onClickStageType = (type) => {
     const index = this.props.index;
 
-    if (index) {
-      this.props.addStage({ type }, index);
-    }
+    this.props.addStage({ type }, index);
 
     this.props.onComplete();
   }

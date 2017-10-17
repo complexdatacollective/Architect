@@ -1,7 +1,9 @@
 @include palette-set('panel-background', color('platinum'));
 
 .timeline {
-  @include grid-container
+  @include grid-container;
+  @include flex-stack;
+  @include flex-align(flex-start, center);
   position: absolute;
   top: 0;
   left: 0;
