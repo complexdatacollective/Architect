@@ -21,21 +21,21 @@ class TimelineStage extends PureComponent {
     return (
       <div className="timeline-stage">
         <div
-          className="timeline-stage__preview"
-          role="button"
-          onClick={onEditStage}
-          tabIndex="0"
-        >
-          <img src={this.snapshotSrc()} alt="" />
-        </div>
-
-        <div
           className="timeline-stage__skip"
           role="button"
           onClick={onEditSkip}
           tabIndex="0"
         >
-          Edit skip
+          Skip stage
+        </div>
+
+        <div
+          className="timeline-stage__preview"
+          role="button"
+          onClick={onEditStage}
+          tabIndex="0"
+        >
+          <img src={this.snapshotSrc()} alt="" className="timeline-stage__preview-image" />
         </div>
 
       </div>

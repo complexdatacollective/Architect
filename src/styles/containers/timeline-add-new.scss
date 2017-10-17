@@ -1,0 +1,29 @@
+$component-name: timeline-add-new;
+
+.#{$component-name} {
+  @include vertical-rail;
+  padding: 150px;
+
+  &__button {
+    cursor: pointer;
+    border-radius: 5px;
+    transform: translateZ(0);
+    transition: all $animation-default-easing $animation-fast-duration;
+    padding: 15px 60px;
+  }
+
+  &__icon {
+    width: 60px !important;  // why is the default difficult to override?
+    height: 60px !important;
+  }
+
+  &:hover {
+    .#{$component-name} {
+      &__button {
+        background-color: palette('background');
+        transform: translateZ(0) scale(1.5);
+      }
+    }
+  }
+
+}

@@ -1,0 +1,46 @@
+@include palette-set('intent', color('mustard'));
+@include palette-set('rail', color('neon-coral'));
+
+@mixin vertical-rail {
+  position: relative;
+
+  &::after {
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    transform: translateX(-50%);
+    border-left-width: 6px;
+    border-left-color: palette('rail');
+    border-left-style: solid;
+    height: 100%;
+    z-index: -1;
+  }
+}
+
+.timeline-stage {
+  @include vertical-rail;
+  padding: 100px 0;
+
+  &__preview {
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent;
+    transition: border-color $animation-default-easing $animation-fast-duration;
+    cursor: pointer;
+
+    &-image {
+      width: 50vw;
+    }
+
+    &:hover {
+      border-color: palette('intent');
+    }
+  }
+
+  &__skip {
+  }
+
+}

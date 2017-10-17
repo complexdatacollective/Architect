@@ -68,7 +68,7 @@ class NewStage extends PureComponent {
 
   render() {
     return (
-      <div className="new-stage" style={{ backgroundColor: 'silver' }}>
+      <div className="new-stage">
         <h1 className="new-stage__heading">Add New Screen</h1>
         <div className="new-stage__options">
           {interfaceOptions.map(this.renderOption)}
