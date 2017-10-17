@@ -1,7 +1,12 @@
 .new-stage {
   @extend %card;
 
+  &__heading {
+    @include grid-item-percent(100%);
+  }
+
   &__options {
+    @include grid-item-percent(100%);
     display: flex;
     flex-direction: column;
     width: 90vw;

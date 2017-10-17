@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { map } from 'lodash';
 import TimelineStage from './TimelineStage';
+import TimelineAddNew from './TimelineAddNew';
 
 class Timeline extends PureComponent {
   static propTypes = {
@@ -21,18 +22,22 @@ class Timeline extends PureComponent {
   };
 
   renderItem = (item, index) => (
-    <TimelineStage
+    <span
       key={item.id}
-      index={index}
-      {...item}
-      onInsertStage={() => this.props.onInsertStage(index + 1)}
-      onEditStage={this.props.onEditStage}
-      onEditSkip={this.props.onEditSkip}
-    />
+    >
+      <TimelineStage
+        {...item}
+        onEditStage={() => this.props.onEditStage(item.id)}
+        onEditSkip={() => this.props.onEditSkip(item.id)}
+      />
+      <TimelineAddNew
+        onInsertStage={() => this.props.onInsertStage(index + 1)}
+      />
+    </span>
   );
 
   render() {
-    const items = map(this.props.items, this.renderItem);
+    const items = this.props.items.map(this.renderItem);
 
     return (
       <div className="timeline">

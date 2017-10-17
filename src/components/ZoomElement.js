@@ -37,9 +37,9 @@ class ZoomElement extends PureComponent {
 
   render() {
     return (
-      <div onClick={this.onClick}>
+      <span onClick={this.onClick}>
         {this.props.children}
-      </div>
+      </span>
     );
   }
 }

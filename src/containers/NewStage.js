@@ -62,8 +62,8 @@ class NewStage extends PureComponent {
         <img alt="" src={`/images/timeline/stage--${type}.png`} />
       </div>
       <div className="new-stage__option-details">
-        <h2>{ title }</h2>
-        <p>{ description }</p>
+        <h2 className="new-stage__option-title">{ title }</h2>
+        <p className="new-stage__option-description">{ description }</p>
       </div>
     </div>
   );
@@ -71,7 +71,7 @@ class NewStage extends PureComponent {
   render() {
     return (
       <div className="new-stage" style={{ backgroundColor: 'silver' }}>
-        <h1>Add New Screen</h1>
+        <h1 className="new-stage__heading">Add New Screen</h1>
         <div className="new-stage__options">
           {interfaceOptions.map(this.renderOption)}
         </div>
