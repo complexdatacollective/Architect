@@ -14,7 +14,8 @@ const TimelineAddNew = ({ onInsertStage }) => (
       tabIndex="0"
       style={{ display: 'inline-block' }}
     >
-      <Icon name="add-a-screen" className="timeline-add-new__icon" />
+      <div className="timeline-add-new__button-label">Add new stage here</div>
+      <Icon name="add-a-screen" className="timeline-add-new__button-icon" />
     </div>
   </ZoomElement>
 );

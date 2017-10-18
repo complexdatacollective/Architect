@@ -3,25 +3,32 @@ $component-name: timeline-add-new;
 .#{$component-name} {
   @include vertical-rail;
   padding: 150px;
+  text-align: center;
 
   &__button {
     cursor: pointer;
+    background-color: transparent;
     border-radius: 5px;
-    transform: translateZ(0);
-    transition: all $animation-default-easing $animation-fast-duration;
+    transform: translateZ(0) scale(.75);
+    transition: background-color $animation-default-easing $animation-fast-duration, transform $animation-default-easing $animation-fast-duration;
     padding: 15px 60px;
-  }
 
-  &__icon {
-    width: 60px !important;  // why is the default difficult to override?
-    height: 60px !important;
-  }
+    &-label {
+      transition: opacity $animation-default-easing $animation-fast-duration;
+      opacity: 0;
+    }
 
-  &:hover {
-    .#{$component-name} {
-      &__button {
-        background-color: palette('background');
-        transform: translateZ(0) scale(1.5);
+    &-icon {
+      width: 80px !important;  // why is the default difficult to override?
+      height: 80px !important;
+    }
+
+    &:hover {
+      background-color: palette('background');
+      transform: translateZ(0) scale(1);
+
+      .#{$component-name}__button-label {
+        opacity: 1;
       }
     }
   }
