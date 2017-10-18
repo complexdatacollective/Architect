@@ -35,7 +35,7 @@ class ZoomElement extends PureComponent {
       elasticity: 0,
       easing: 'easeInOutQuad',
       duration: animation.duration.standard,
-      opacity: [1, 1],
+      opacity: [1, 0],
       scale: [0, 1],
       backgroundColor: this.props.colors,
     }).finished.then(() => {
