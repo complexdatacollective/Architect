@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { Button } from 'network-canvas-ui';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const interfaceOptions = [
@@ -78,7 +79,7 @@ class NewStage extends PureComponent {
           </div>
         </div>
         <div className="new-stage__control-bar">
-          <button onClick={this.props.onCancel}>cancel</button>
+          <Button size="small" onClick={this.props.onCancel}>cancel</Button>
         </div>
       </div>
     );

@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { map, flatten, zip } from 'lodash';
+import { Button } from 'network-canvas-ui';
 import TimelineStage from './TimelineStage';
 import TimelineAddNew from './TimelineAddNew';
 
@@ -46,11 +47,16 @@ class Timeline extends PureComponent {
 
     return (
       <div className="timeline">
-        <TimelineAddNew
-          key={`add-new_0`}
-          onInsertStage={() => this.props.onInsertStage(0)}
-        />
-        {items}
+        <div className="timeline__main">
+          <TimelineAddNew
+            key={`add-new_0`}
+            onInsertStage={() => this.props.onInsertStage(0)}
+          />
+          {items}
+        </div>
+        <div className="timeline__control-bar">
+          <Button size="small" onClick={this.props.onCancel}>Save</Button>
+        </div>
       </div>
     );
   }
