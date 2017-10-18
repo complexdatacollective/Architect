@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
@@ -14,9 +16,9 @@ class ZoomElement extends PureComponent {
   };
 
   onClick = (e) => {
-    const start = e.target.getBoundingClientRect();
+    const start = this.node.getBoundingClientRect();
     const pseudoElement = document.createElement('div');
-    pseudoElement.setAttribute('style', 'position:absolute;');
+    pseudoElement.setAttribute('style', 'position: absolute; transform: translateZ(0);');
     document.getElementsByTagName('body')[0].appendChild(pseudoElement);
 
     anime({
@@ -42,7 +44,7 @@ class ZoomElement extends PureComponent {
     } = this.props;
 
     return (
-      <div onClick={this.onClick} {...props} >
+      <div ref={(node) => {this.node = node; }} onClick={this.onClick} {...props} >
         {children}
       </div>
     );
