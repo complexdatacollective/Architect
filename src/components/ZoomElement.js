@@ -21,12 +21,18 @@ class ZoomElement extends PureComponent {
     const body = document.getElementsByTagName('body')[0];
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const startX = start.left + start.width / 2;
-    const startY = start.top + start.height / 2;
+    const originY = 100 * (start.top + start.height / 2) / height;
+    const originX = 100 * (start.left + start.width / 2) / width;
 
     pseudoElement.setAttribute(
       'style',
-      `position: absolute; transform-origin: ${startX}px ${startY}px; transform: translateZ(0); top: 0; left: 0; width: ${width}px; height: ${height}px;`,
+      `position: absolute;
+      transform: translateZ(0);
+      transform-origin: ${originX}% ${originY}%;
+      top: ${start.top}px;
+      left: ${start.left}px;
+      width: ${start.width}px;
+      height: ${start.height}px;`,
     );
     body.appendChild(pseudoElement);
 
@@ -36,7 +42,8 @@ class ZoomElement extends PureComponent {
       easing: 'easeInOutQuad',
       duration: animation.duration.standard,
       opacity: [1, 0],
-      scale: [0, 1],
+      scaleY: [1, height / start.height * 1.1],  // 1.1 fudge factor for scale Y origin
+      scaleX: [1, width / start.width],
       backgroundColor: this.props.colors,
     }).finished.then(() => {
       body.removeChild(pseudoElement);

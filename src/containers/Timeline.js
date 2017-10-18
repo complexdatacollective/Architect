@@ -24,6 +24,7 @@ class Timeline extends PureComponent {
   renderStage = (stage, index) => (
     <TimelineStage
       key={`stage_${stage.id}`}
+      id={`stage_${index}`}
       {...stage}
       onEditStage={() => this.props.onEditStage(stage.id)}
       onEditSkip={() => this.props.onEditSkip(stage.id)}
