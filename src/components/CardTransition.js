@@ -41,7 +41,7 @@ const CardTransition = ({ children, cancel, timeout, ...props }) => (
           targets: el,
           elasticity: 0,
           easing: 'easeInOutQuad',
-          duration: timeout,
+          duration: timeout / 2,
           ...(cancel ? wipeOut : fadeOut),
         });
       }

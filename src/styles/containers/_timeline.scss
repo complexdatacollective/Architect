@@ -1,7 +1,6 @@
 .timeline {
-  @include grid-container;
-  @include flex-stack;
-  @include flex-align(flex-start, center);
+  @include no-scrollbars;
+  @include layout-container;
   margin: 0 auto;
   position: absolute;
   top: 0;

@@ -69,11 +69,17 @@ class NewStage extends PureComponent {
   render() {
     return (
       <div className="new-stage">
-        <h1 className="new-stage__heading">Add New Screen</h1>
-        <div className="new-stage__options">
-          {interfaceOptions.map(this.renderOption)}
+        <div className="new-stage__title-bar">
+          <h1 className="new-stage__heading">Add New Screen</h1>
         </div>
-        <button onClick={this.props.onCancel}>cancel</button>
+        <div className="new-stage__main">
+          <div className="new-stage__options">
+            {interfaceOptions.map(this.renderOption)}
+          </div>
+        </div>
+        <div className="new-stage__control-bar">
+          <button onClick={this.props.onCancel}>cancel</button>
+        </div>
       </div>
     );
   }
