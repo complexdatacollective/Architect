@@ -12,7 +12,7 @@ const defaultStageState = {
   cancel: false,
 };
 
-class Interview extends PureComponent {
+class Protocol extends PureComponent {
   static propTypes = {
     stages: PropTypes.array.isRequired,
   };
@@ -56,7 +56,7 @@ class Interview extends PureComponent {
 
   render() {
     return (
-      <div className="interview">
+      <div className="protocol">
         <ScreenTransition
           key="timeline"
           in={this.showTimeline()}
@@ -94,4 +94,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Interview);
+export default connect(mapStateToProps, mapDispatchToProps)(Protocol);
