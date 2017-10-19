@@ -4,7 +4,8 @@ const ADD_STAGE = 'ADD_STAGE';
 
 const initialState = [{ id: 1, type: 'NameGenerator' }, { id: 2, type: 'Sociogram' }];
 
-const nextId = state => (max(map(state, 'id')) + 1);
+const maxId = state => max(map(state, 'id'));
+const nextId = state => ((maxId(state) || 0) + 1);
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
