@@ -28,4 +28,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+export { Start };
 export default connect(mapStateToProps, mapDispatchToProps)(Start);

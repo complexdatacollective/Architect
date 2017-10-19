@@ -7,11 +7,11 @@ require('../styles/main.scss');
 
 const isAtIndex = pathname => pathname === '/';
 
-const App = ({ children, location }) => {
+const App = ({ children, location: { pathname } }) => {
   const appClasses = cx(
     'app',
     {
-      'app--start': isAtIndex(location.pathname),
+      'app--start': isAtIndex(pathname),
     },
   );
 
@@ -35,4 +35,5 @@ App.defaultProps = {
   children: null,
 };
 
+export { App };
 export default withRouter(App);

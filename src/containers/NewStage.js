@@ -92,4 +92,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+export { NewStage };
 export default connect(null, mapDispatchToProps)(NewStage);

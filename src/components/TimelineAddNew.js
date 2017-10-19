@@ -8,7 +8,7 @@ import { ZoomElement } from '../components';
 const zoomColors = [colors.background, colors['light-background']];
 
 const TimelineAddNew = ({ onInsertStage }) => (
-  <div class="timeline-add-new">
+  <div className="timeline-add-new">
     <ZoomElement colors={zoomColors}>
       <div
         className="timeline-add-new__button"

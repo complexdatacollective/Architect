@@ -2,9 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Timeline from './Timeline';
 import NewStage from './NewStage';
-import { ScreenTransition, CardTransition } from '../components';
+import { Timeline, ScreenTransition, CardTransition } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const defaultStageState = {
@@ -94,4 +93,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+export { Protocol };
 export default connect(mapStateToProps, mapDispatchToProps)(Protocol);
