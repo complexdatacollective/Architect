@@ -4,8 +4,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { map, flatten, zip } from 'lodash';
 import { Button } from 'network-canvas-ui';
-import TimelineStage from './TimelineStage';
-import TimelineAddNew from './TimelineAddNew';
+import { TimelineStage, TimelineAddNew } from '../components';
 
 class Timeline extends PureComponent {
   static propTypes = {
