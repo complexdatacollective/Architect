@@ -57,9 +57,9 @@ class ZoomElement extends PureComponent {
     } = this.props;
 
     return (
-      <div ref={(node) => {this.node = node; }} onClick={this.onClick} {...props} >
+      <span ref={(node) => {this.node = node; }} onClick={this.onClick} {...props} >
         {children}
-      </div>
+      </span>
     );
   }
 }
