@@ -11,14 +11,13 @@
 
   &__title-bar {
     flex: 0 0 100px;
-    display: flex;
-    @include flex-align(center, flex-start);
+    @include flex-align(flex-start, center);
   }
 
   &__control-bar {
     flex: 0 0 60px;
     background-color: palette('background');
-    @include flex-align(center, flex-end);
+    @include flex-align(flex-end, center);
   }
 
   &__main {
@@ -31,7 +30,7 @@
   &__options {
     box-sizing: border-box;
     width: 100%;
-    margin: 20px auto;
+    margin: 0 auto 20px;
   }
 
   &__option {
@@ -51,6 +50,10 @@
 
     &-details {
       padding-left: 20px;
+    }
+
+    &__heading {
+      padding: 0;
     }
 
     &:hover {

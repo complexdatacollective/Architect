@@ -7,7 +7,6 @@
 
 @mixin layout-container {
   @include grid-container;
-  @include flex-stack;
   @include flex-align(flex-start, flex-start);
   padding: 0 100px;
   box-sizing: border-box;

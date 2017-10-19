@@ -55,7 +55,7 @@ class Timeline extends PureComponent {
           {items}
         </div>
         <div className="timeline__control-bar">
-          <Button size="small" onClick={this.props.onCancel}>Save</Button>
+          <Button size="small">Save</Button>
         </div>
       </div>
     );

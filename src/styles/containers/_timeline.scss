@@ -16,9 +16,11 @@
   }
 
   &__control-bar {
+    @include layout-container;
+    @include flex-inline;
+    @include flex-align(flex-start, center);
     flex: 0 0 60px;
     background-color: palette('background');
-    @include flex-align(center, flex-end);
   }
 
 }
