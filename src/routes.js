@@ -1,20 +1,18 @@
 import React from 'react';
 import {
-  HashRouter as Router,
   Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
 import {
+  Protocol,
   Start,
 } from './containers';
 
-
 export default () => (
-  <Router>
-    <Switch>
-      <Route path="/start" component={Start} />
-      <Redirect to={{ pathname: '/start' }} />
-    </Switch>
-  </Router>
+  <Switch>
+    <Route path="/protocol" component={Protocol} />
+    <Route exact path="/" component={Start} />
+    <Redirect to={{ pathname: '/' }} />
+  </Switch>
 );

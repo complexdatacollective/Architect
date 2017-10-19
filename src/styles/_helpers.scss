@@ -1,0 +1,16 @@
+@mixin no-scrollbars {
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+}
+
+@mixin layout-container {
+  @include grid-container;
+  @include flex-align(flex-start, flex-start);
+  padding: 0 100px;
+  box-sizing: border-box;
+}
+
+@mixin fade-scroll {
+}

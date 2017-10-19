@@ -1,0 +1,25 @@
+$component-name: app;
+
+.#{$component-name} {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: palette('panel-background');
+
+  &__title-bar {
+    background: palette('background');
+    flex-basis: 60px;
+    transition: flex-basis $animation-default-easing $animation-fast-duration;
+  }
+
+  &--start {
+    .#{$component-name} {
+      &__title-bar {
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: 50%;
+      }
+    }
+  }
+}

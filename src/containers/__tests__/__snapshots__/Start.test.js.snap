@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Start /> can render 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Start />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        "Welcome.",
+        <Link
+          replace={false}
+          to="/protocol"
+>
+          Protocol
+</Link>,
+      ],
+      "className": "start",
+    },
+    "ref": null,
+    "rendered": Array [
+      "Welcome.",
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "class",
+        "props": Object {
+          "children": "Protocol",
+          "replace": false,
+          "to": "/protocol",
+        },
+        "ref": null,
+        "rendered": "Protocol",
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          "Welcome.",
+          <Link
+            replace={false}
+            to="/protocol"
+>
+            Protocol
+</Link>,
+        ],
+        "className": "start",
+      },
+      "ref": null,
+      "rendered": Array [
+        "Welcome.",
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Protocol",
+            "replace": false,
+            "to": "/protocol",
+          },
+          "ref": null,
+          "rendered": "Protocol",
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

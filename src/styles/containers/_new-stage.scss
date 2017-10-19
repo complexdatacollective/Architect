@@ -1,0 +1,63 @@
+.new-stage {
+  @extend %card;
+  display: flex;
+  flex-direction: column;
+
+  &__title-bar,
+  &__control-bar,
+  &__main {
+    @include layout-container;
+  }
+
+  &__title-bar {
+    flex: 0 0 100px;
+    @include flex-align(flex-start, center);
+  }
+
+  &__control-bar {
+    flex: 0 0 60px;
+    background-color: palette('background');
+    @include flex-align(flex-end, center);
+  }
+
+  &__main {
+    @include no-scrollbars;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  &__options {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto 20px;
+  }
+
+  &__option {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid transparent;
+    cursor: pointer;
+
+    &-preview {
+      width: 300px;
+
+      img {
+        width: 300px;
+      }
+    }
+
+    &-details {
+      padding-left: 20px;
+    }
+
+    &__heading {
+      padding: 0;
+    }
+
+    &:hover {
+      border-color: palette('selected');
+    }
+  }
+}

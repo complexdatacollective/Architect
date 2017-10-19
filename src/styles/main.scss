@@ -1,18 +1,11 @@
 @import '~network-canvas-ui/src/styles/all';
+@import './colors';
+@import './helpers';
+@import './reset';
+@import './app';
 
-// Remove touch and focus outlines
-* {
-  outline-style: none;
-  -webkit-touch-callout: none;
-  &:focus {
-    outline: none;
-   }
-}
+// CSS modules
+@import './card';
 
-html,
-body {
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  user-select: none;
-}
+// React containers
+@import './containers';
