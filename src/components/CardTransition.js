@@ -22,7 +22,6 @@ const CardTransition = ({ children, cancel, timeout, ...props }) => (
   <Transition
     timeout={timeout}
     unmountOnExit
-    appear
     onEnter={
       (el) => {
         anime({

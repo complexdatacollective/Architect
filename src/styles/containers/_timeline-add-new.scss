@@ -2,7 +2,7 @@ $component-name: timeline-add-new;
 
 .#{$component-name} {
   @include vertical-rail;
-  padding: 150px;
+  padding: 20px 0;
   text-align: center;
 
   &__button {
@@ -30,6 +30,12 @@ $component-name: timeline-add-new;
       .#{$component-name}__button-label {
         opacity: 1;
       }
+    }
+  }
+
+  &:last-child {
+    &::after {
+      height: 50%;
     }
   }
 

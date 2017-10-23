@@ -1,10 +1,8 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { map, flatten, zip } from 'lodash';
+import { flatten, zip } from 'lodash';
 import { Button } from 'network-canvas-ui';
-import { TimelineStage, TimelineAddNew } from '../components';
+import { TimelineOverview, TimelineStage, TimelineAddNew } from '../components';
 
 class Timeline extends PureComponent {
   static propTypes = {
@@ -47,8 +45,11 @@ class Timeline extends PureComponent {
     return (
       <div className="timeline">
         <div className="timeline__main">
+          <TimelineOverview
+            title="My protocol"
+          />
           <TimelineAddNew
-            key={`add-new_0`}
+            key={'add-new_0'}
             onInsertStage={() => this.props.onInsertStage(0)}
           />
           {items}

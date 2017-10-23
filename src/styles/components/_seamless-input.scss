@@ -1,0 +1,13 @@
+.seamless-input {
+  display: block;
+
+  &__input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid transparent;
+
+    &:focus {
+      border-bottom-color: palette('input-focus');
+    }
+  }
+}

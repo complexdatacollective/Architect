@@ -1,0 +1,49 @@
+.timeline-overview {
+  @include vertical-rail;
+  padding: 20px 0;
+
+  &::after {
+    top: 50%;  // over-ride vertical-rail to start late.
+  }
+
+  &__title {
+    input {
+      font-family: inherit;
+      font-size: 1.75rem;
+      font-weight: 400;
+      letter-spacing: .05rem;
+      line-height: 1.1;
+      color: palette('panel-text');
+      text-align: center;
+    }
+  }
+
+  &__variables {
+    &-node,
+    &-edge {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+
+      &::before {
+        content: '';
+        display: inline-block;
+        border-radius: 40px;
+        width: 40px;
+        height: 40px;
+        background-color: palette('node-base');
+        margin-right: 10px;
+      }
+    }
+
+    &-edge {
+      &::before {
+        background-color: palette('edge-base');
+        height: 4px;
+        margin: 18px 10px 18px 0;
+        border-radius: 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
