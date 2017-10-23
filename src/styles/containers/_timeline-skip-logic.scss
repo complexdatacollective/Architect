@@ -1,0 +1,20 @@
+$component-name: timeline-skip-logic;
+
+.#{$component-name} {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  background: green;
+
+  &__track {
+    position: absolute;
+    fill: none;
+    width: 40vw;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    display: block;
+  }
+}

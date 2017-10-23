@@ -9,14 +9,14 @@ class Timeline extends PureComponent {
     stages: PropTypes.array,
     onInsertStage: PropTypes.func,
     onEditStage: PropTypes.func,
-    onEditSkip: PropTypes.func,
+    onEditSkipLogic: PropTypes.func,
   };
 
   static defaultProps = {
     stages: [],
     onInsertStage: () => {},
     onEditStage: () => {},
-    onEditSkip: () => {},
+    onEditSkipLogic: () => {},
   };
 
   renderStage = (stage, index) => (
@@ -25,7 +25,7 @@ class Timeline extends PureComponent {
       id={`stage_${index}`}
       {...stage}
       onEditStage={() => this.props.onEditStage(stage.id)}
-      onEditSkip={() => this.props.onEditSkip(stage.id)}
+      onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
     />
   );
 

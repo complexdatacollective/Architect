@@ -20,7 +20,17 @@
     }
   }
 
-  &__skip {
+  &__skip-track {
+    position: absolute;
+    fill: none;
+    width: 40vw;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    display: block;
+  }
+
+  &__skip-button {
   }
 
 }
