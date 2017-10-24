@@ -24,6 +24,8 @@ class ZoomElement extends PureComponent {
     const originY = 100 * (start.top + start.height / 2) / height;
     const originX = 100 * (start.left + start.width / 2) / width;
 
+    console.log(start);
+
     pseudoElement.setAttribute(
       'style',
       `position: absolute;
@@ -57,7 +59,7 @@ class ZoomElement extends PureComponent {
     } = this.props;
 
     return (
-      <span ref={(node) => {this.node = node; }} onClick={this.onClick} {...props} >
+      <span style={{ display: 'inline-block' }} ref={(node) => {this.node = node; }} onClick={this.onClick} {...props} >
         {children}
       </span>
     );
