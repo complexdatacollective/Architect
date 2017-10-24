@@ -19,6 +19,7 @@ $component-name: timeline-add-new;
     }
 
     &-icon {
+      transform: translateX(6px);
       width: 80px !important;  // why is the default difficult to override?
       height: 80px !important;
     }
