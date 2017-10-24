@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { getProtocol } from '../selectors/protocol';
 import NewStage from './NewStage';
 import { Timeline, ScreenTransition, CardTransition } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
@@ -82,8 +83,10 @@ class Protocol extends PureComponent {
 }
 
 function mapStateToProps(state) {
+  const protocol = getProtocol(state);
+
   return {
-    stages: state.protocol.stages,
+    stages: protocol.stages,
   };
 }
 

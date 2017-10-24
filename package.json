@@ -128,7 +128,9 @@
         "whatwg-fetch": "2.0.3",
         "xss": "^0.3.4"
     },
-    "dependencies": {},
+    "dependencies": {
+        "redux-undo": "^0.6.1"
+    },
     "homepage": ".",
     "main": "www/electron-starter.js",
     "build": {
