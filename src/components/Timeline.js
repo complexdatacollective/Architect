@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { flatten, zip } from 'lodash';
-import { Button } from 'network-canvas-ui';
 import { TimelineOverview, TimelineStage, TimelineAddNew } from '../components';
 
 class Timeline extends PureComponent {
@@ -53,9 +52,6 @@ class Timeline extends PureComponent {
             onInsertStage={() => this.props.onInsertStage(0)}
           />
           {items}
-        </div>
-        <div className="timeline__control-bar">
-          <Button size="small">Save</Button>
         </div>
       </div>
     );

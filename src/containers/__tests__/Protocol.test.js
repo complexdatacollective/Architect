@@ -14,7 +14,7 @@ const mockProps = {
 const mockStore = () =>
   createStore(
     () => ({
-      protocol: { options: { title: '' }},
+      protocol: { present: { options: { title: '' } } },
     }),
   );
 

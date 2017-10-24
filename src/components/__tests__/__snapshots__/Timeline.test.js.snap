@@ -22,8 +22,71 @@ ShallowWrapper {
     "key": null,
     "nodeType": "host",
     "props": Object {
-      "children": Array [
-        <div
+      "children": <div
+        className="timeline__main"
+>
+        <Connect(TimelineOverview)
+                title="My protocol"
+        />
+        <TimelineAddNew
+                onInsertStage={[Function]}
+        />
+</div>,
+      "className": "timeline",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Connect(TimelineOverview)
+            title="My protocol"
+/>,
+          <TimelineAddNew
+            onInsertStage={[Function]}
+/>,
+          Array [],
+        ],
+        "className": "timeline__main",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "class",
+          "props": Object {
+            "title": "My protocol",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": "add-new_0",
+          "nodeType": "function",
+          "props": Object {
+            "onInsertStage": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
           className="timeline__main"
 >
           <Connect(TimelineOverview)
@@ -33,26 +96,10 @@ ShallowWrapper {
                     onInsertStage={[Function]}
           />
 </div>,
-        <div
-          className="timeline__control-bar"
->
-          <Button
-                    color=""
-                    content=""
-                    icon=""
-                    iconPosition="right"
-                    onClick={[Function]}
-                    size="small"
-          >
-                    Save
-          </Button>
-</div>,
-      ],
-      "className": "timeline",
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
+        "className": "timeline",
+      },
+      "ref": null,
+      "rendered": Object {
         "instance": null,
         "key": null,
         "nodeType": "host",
@@ -95,163 +142,6 @@ ShallowWrapper {
         ],
         "type": "div",
       },
-      Object {
-        "instance": null,
-        "key": null,
-        "nodeType": "host",
-        "props": Object {
-          "children": <Button
-            color=""
-            content=""
-            icon=""
-            iconPosition="right"
-            onClick={[Function]}
-            size="small"
->
-            Save
-</Button>,
-          "className": "timeline__control-bar",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "class",
-          "props": Object {
-            "children": "Save",
-            "color": "",
-            "content": "",
-            "icon": "",
-            "iconPosition": "right",
-            "onClick": [Function],
-            "size": "small",
-          },
-          "ref": null,
-          "rendered": "Save",
-          "type": [Function],
-        },
-        "type": "div",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": null,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            className="timeline__main"
->
-            <Connect(TimelineOverview)
-                        title="My protocol"
-            />
-            <TimelineAddNew
-                        onInsertStage={[Function]}
-            />
-</div>,
-          <div
-            className="timeline__control-bar"
->
-            <Button
-                        color=""
-                        content=""
-                        icon=""
-                        iconPosition="right"
-                        onClick={[Function]}
-                        size="small"
-            >
-                        Save
-            </Button>
-</div>,
-        ],
-        "className": "timeline",
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <Connect(TimelineOverview)
-                title="My protocol"
-/>,
-              <TimelineAddNew
-                onInsertStage={[Function]}
-/>,
-              Array [],
-            ],
-            "className": "timeline__main",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": null,
-              "nodeType": "class",
-              "props": Object {
-                "title": "My protocol",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": "add-new_0",
-              "nodeType": "function",
-              "props": Object {
-                "onInsertStage": [Function],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": <Button
-              color=""
-              content=""
-              icon=""
-              iconPosition="right"
-              onClick={[Function]}
-              size="small"
->
-              Save
-</Button>,
-            "className": "timeline__control-bar",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": null,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Save",
-              "color": "",
-              "content": "",
-              "icon": "",
-              "iconPosition": "right",
-              "onClick": [Function],
-              "size": "small",
-            },
-            "ref": null,
-            "rendered": "Save",
-            "type": [Function],
-          },
-          "type": "div",
-        },
-      ],
       "type": "div",
     },
   ],
