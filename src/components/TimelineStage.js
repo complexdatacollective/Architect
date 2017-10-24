@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
-import { Icon } from 'network-canvas-ui';
+import { Icon, animation } from 'network-canvas-ui';
 
 class TimelineStage extends PureComponent {
   static propTypes = {
@@ -10,15 +10,31 @@ class TimelineStage extends PureComponent {
     onEditSkipLogic: PropTypes.func.isRequired,
   };
 
-  onHoverSkipLogic = () => {
-    console.log('mouse enter');
-    anime({
-      targets: this.track,
-      strokeDashoffset: [anime.setDashoffset, 0],
-      duration: anime.random(1000, 3000),
-      delay: anime.random(0, 2000),
+  onMouseEnterSkipLogic = () => {
+    const el = this.track;
+    const rect = el.getBoundingClientRect();
+    const offset = rect.width + rect.width + rect.height;
+
+    el.setAttribute('stroke-dasharray', offset);
+    el.setAttribute('stroke-dashoffset', offset);
+
+    this.animateSkip = anime({
+      targets: el,
+      opacity: [0, 1],
+      strokeDashoffset: [offset, 0],
+      duration: animation.duration.standard,
       easing: 'easeInOutSine',
+      autoplay: false,
     });
+
+    this.animateSkip.restart();
+  }
+
+  onMouseLeaveSkipLogic = () => {
+    if (!this.animateSkip) { return; }
+
+    this.animateSkip.reverse();
+    this.animateSkip.play();
   }
 
   snapshotSrc() {
@@ -33,14 +49,6 @@ class TimelineStage extends PureComponent {
 
     return (
       <div className="timeline-stage">
-
-        <Icon
-          name="add-a-screen"
-          className="timeline-add-new__button-icon"
-          onMouseEnter={this.onHoverSkipLogic}
-          onClick={onEditSkipLogic}
-        />
-
         <div
           className="timeline-stage__preview"
           role="button"
@@ -52,21 +60,25 @@ class TimelineStage extends PureComponent {
 
         <svg
           preserveAspectRatio="none"
-          className="timeline-skip-logic__track"
+          className="timeline-stage__skip-logic-track"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 100 100"
         >
-          <g fill="none" fillRule="evenodd">
-            <path
-              ref={(track) => { this.track = track; }}
-              stroke="#31B495"
-              d="M 0 0 L 100 0 L 100 100 L 0 100"
-              strokeWidth="5"
-              vectorEffect="non-scaling-stroke"
-            />
-          </g>
+          <path
+            ref={(track) => { this.track = track; }}
+            d="M 0 0 L 100 0 L 100 100 L 0 100"
+            vectorEffect="non-scaling-stroke"
+          />
         </svg>
 
+        <div
+          className="timeline-stage__skip-logic-button"
+          onMouseEnter={this.onMouseEnterSkipLogic}
+          onMouseLeave={this.onMouseLeaveSkipLogic}
+          onClick={onEditSkipLogic}
+        >
+          <Icon name="error" className="timeline-stage__skip-logic-button-icon" />
+        </div>
       </div>
     );
   }

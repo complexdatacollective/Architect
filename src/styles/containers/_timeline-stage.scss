@@ -1,6 +1,6 @@
 .timeline-stage {
   @include vertical-rail;
-  padding: 20px 0;
+  padding: 60px 0;
 
   &__preview {
     border-width: 5px;
@@ -8,7 +8,7 @@
     border-color: transparent;
     transition: border-color $animation-default-easing $animation-fast-duration;
     cursor: pointer;
-    width: 50vw;
+    width: 45vw;
     margin: 0 auto;
 
     &-image {
@@ -20,17 +20,49 @@
     }
   }
 
-  &__skip-track {
-    position: absolute;
-    fill: none;
-    width: 40vw;
-    height: 100%;
-    left: 50%;
-    top: 0;
-    display: block;
-  }
+  &__skip-logic {
+    &-track {
+      position: absolute;
+      fill: none;
+      width: 40vw;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      display: block;
 
-  &__skip-button {
+      path {
+        stroke-width: 12;
+        stroke: palette('intent');
+        opacity: 0;
+      }
+    }
+
+    &-button {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%) translateZ(0) scale(.75);
+      transition: background-color $animation-default-easing $animation-fast-duration, transform $animation-default-easing $animation-fast-duration;
+      background-color: silver;
+      border-radius: 80px;
+      width: 70px;
+      height: 70px;
+
+      &-icon {
+        width: 45px !important;
+        height: 45px !important;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:hover {
+        transform: translate(-50%, -50%) translateZ(0) scale(1);
+        background-color: palette('intent');
+      }
+    }
   }
 
 }
