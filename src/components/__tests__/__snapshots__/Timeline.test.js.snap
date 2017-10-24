@@ -26,6 +26,9 @@ ShallowWrapper {
         <div
           className="timeline__main"
 >
+          <Connect(TimelineOverview)
+                    title="My protocol"
+          />
           <TimelineAddNew
                     onInsertStage={[Function]}
           />
@@ -55,6 +58,9 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
+            <Connect(TimelineOverview)
+              title="My protocol"
+/>,
             <TimelineAddNew
               onInsertStage={[Function]}
 />,
@@ -64,6 +70,17 @@ ShallowWrapper {
         },
         "ref": null,
         "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "class",
+            "props": Object {
+              "title": "My protocol",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
           Object {
             "instance": null,
             "key": "add-new_0",
@@ -128,6 +145,9 @@ ShallowWrapper {
           <div
             className="timeline__main"
 >
+            <Connect(TimelineOverview)
+                        title="My protocol"
+            />
             <TimelineAddNew
                         onInsertStage={[Function]}
             />
@@ -157,6 +177,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
+              <Connect(TimelineOverview)
+                title="My protocol"
+/>,
               <TimelineAddNew
                 onInsertStage={[Function]}
 />,
@@ -166,6 +189,17 @@ ShallowWrapper {
           },
           "ref": null,
           "rendered": Array [
+            Object {
+              "instance": null,
+              "key": null,
+              "nodeType": "class",
+              "props": Object {
+                "title": "My protocol",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
             Object {
               "instance": null,
               "key": "add-new_0",

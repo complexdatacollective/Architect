@@ -13,7 +13,9 @@ const mockProps = {
 
 const mockStore = () =>
   createStore(
-    () => ({}), // empty object
+    () => ({
+      protocol: { options: { title: '' }},
+    }),
   );
 
 describe('<Protocol />', () => {

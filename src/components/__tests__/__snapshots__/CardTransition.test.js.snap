@@ -22,7 +22,7 @@ ShallowWrapper {
     "key": null,
     "nodeType": "class",
     "props": Object {
-      "appear": true,
+      "appear": false,
       "children": [Function],
       "enter": true,
       "exit": true,
@@ -47,7 +47,7 @@ ShallowWrapper {
       "key": null,
       "nodeType": "class",
       "props": Object {
-        "appear": true,
+        "appear": false,
         "children": [Function],
         "enter": true,
         "exit": true,

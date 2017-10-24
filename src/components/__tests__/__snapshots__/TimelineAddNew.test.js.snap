@@ -47,7 +47,6 @@ ShallowWrapper {
                         className="timeline-add-new__button-icon"
                         color=""
                         name="add-a-screen"
-                        size=""
                         style={Object {}}
                 />
         </div>
@@ -80,7 +79,6 @@ ShallowWrapper {
                     className="timeline-add-new__button-icon"
                     color=""
                     name="add-a-screen"
-                    size=""
                     style={Object {}}
           />
 </div>,
@@ -105,7 +103,6 @@ ShallowWrapper {
               className="timeline-add-new__button-icon"
               color=""
               name="add-a-screen"
-              size=""
               style={Object {}}
 />,
           ],
@@ -139,7 +136,6 @@ ShallowWrapper {
               "className": "timeline-add-new__button-icon",
               "color": "",
               "name": "add-a-screen",
-              "size": "",
               "style": Object {},
             },
             "ref": null,
@@ -187,7 +183,6 @@ ShallowWrapper {
                               className="timeline-add-new__button-icon"
                               color=""
                               name="add-a-screen"
-                              size=""
                               style={Object {}}
                     />
           </div>
@@ -220,7 +215,6 @@ ShallowWrapper {
                         className="timeline-add-new__button-icon"
                         color=""
                         name="add-a-screen"
-                        size=""
                         style={Object {}}
             />
 </div>,
@@ -245,7 +239,6 @@ ShallowWrapper {
                 className="timeline-add-new__button-icon"
                 color=""
                 name="add-a-screen"
-                size=""
                 style={Object {}}
 />,
             ],
@@ -279,7 +272,6 @@ ShallowWrapper {
                 "className": "timeline-add-new__button-icon",
                 "color": "",
                 "name": "add-a-screen",
-                "size": "",
                 "style": Object {},
               },
               "ref": null,
