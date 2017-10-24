@@ -1,6 +1,6 @@
 import { map, max } from 'lodash';
 
-const ADD_STAGE = 'ADD_STAGE';
+const ADD_STAGE = 'STAGES/ADD_STAGE';
 
 const initialState = [{ id: 1, type: 'NameGenerator' }, { id: 2, type: 'Sociogram' }];
 

@@ -1,4 +1,4 @@
-const UPDATE_OPTIONS = Symbol('UPDATE_OPTIONS');
+const UPDATE_OPTIONS = Symbol('PROTOCOL/UPDATE_OPTIONS');
 
 const initialState = {
   title: 'My Protocol',
