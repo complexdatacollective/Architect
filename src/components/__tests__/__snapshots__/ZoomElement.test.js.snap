@@ -32,6 +32,9 @@ ShallowWrapper {
         "#2d2955",
       ],
       "onClick": [Function],
+      "style": Object {
+        "display": "inline-block",
+      },
     },
     "ref": [Function],
     "rendered": "Foo",
@@ -49,6 +52,9 @@ ShallowWrapper {
           "#2d2955",
         ],
         "onClick": [Function],
+        "style": Object {
+          "display": "inline-block",
+        },
       },
       "ref": [Function],
       "rendered": "Foo",
