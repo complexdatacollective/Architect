@@ -5,6 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Protocol
+    hasChanges={false}
     stages={Array []}
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -25,12 +26,27 @@ ShallowWrapper {
           timeout={1000}
 >
           <Timeline
+                    hasChanges={false}
                     onEditSkipLogic={[Function]}
                     onEditStage={[Function]}
                     onInsertStage={[Function]}
                     stages={Array []}
           />
 </ScreenTransition>,
+        <div
+          className="protocol__control-bar"
+>
+          <Button
+                    color=""
+                    content=""
+                    icon=""
+                    iconPosition="right"
+                    onClick={[Function]}
+                    size="small"
+          >
+                    Save
+          </Button>
+</div>,
         <CardTransition
           cancel={false}
           in={false}
@@ -53,6 +69,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": <Timeline
+            hasChanges={false}
             onEditSkipLogic={[Function]}
             onEditStage={[Function]}
             onInsertStage={[Function]}
@@ -67,6 +84,7 @@ ShallowWrapper {
           "key": null,
           "nodeType": "class",
           "props": Object {
+            "hasChanges": false,
             "onEditSkipLogic": [Function],
             "onEditStage": [Function],
             "onInsertStage": [Function],
@@ -77,6 +95,43 @@ ShallowWrapper {
           "type": [Function],
         },
         "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": <Button
+            color=""
+            content=""
+            icon=""
+            iconPosition="right"
+            onClick={[Function]}
+            size="small"
+>
+            Save
+</Button>,
+          "className": "protocol__control-bar",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Save",
+            "color": "",
+            "content": "",
+            "icon": "",
+            "iconPosition": "right",
+            "onClick": [Function],
+            "size": "small",
+          },
+          "ref": null,
+          "rendered": "Save",
+          "type": [Function],
+        },
+        "type": "div",
       },
       Object {
         "instance": null,
@@ -123,12 +178,27 @@ ShallowWrapper {
             timeout={1000}
 >
             <Timeline
+                        hasChanges={false}
                         onEditSkipLogic={[Function]}
                         onEditStage={[Function]}
                         onInsertStage={[Function]}
                         stages={Array []}
             />
 </ScreenTransition>,
+          <div
+            className="protocol__control-bar"
+>
+            <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+            >
+                        Save
+            </Button>
+</div>,
           <CardTransition
             cancel={false}
             in={false}
@@ -151,6 +221,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": <Timeline
+              hasChanges={false}
               onEditSkipLogic={[Function]}
               onEditStage={[Function]}
               onInsertStage={[Function]}
@@ -165,6 +236,7 @@ ShallowWrapper {
             "key": null,
             "nodeType": "class",
             "props": Object {
+              "hasChanges": false,
               "onEditSkipLogic": [Function],
               "onEditStage": [Function],
               "onInsertStage": [Function],
@@ -175,6 +247,43 @@ ShallowWrapper {
             "type": [Function],
           },
           "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": <Button
+              color=""
+              content=""
+              icon=""
+              iconPosition="right"
+              onClick={[Function]}
+              size="small"
+>
+              Save
+</Button>,
+            "className": "protocol__control-bar",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Save",
+              "color": "",
+              "content": "",
+              "icon": "",
+              "iconPosition": "right",
+              "onClick": [Function],
+              "size": "small",
+            },
+            "ref": null,
+            "rendered": "Save",
+            "type": [Function],
+          },
+          "type": "div",
         },
         Object {
           "instance": null,
