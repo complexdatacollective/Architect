@@ -47,7 +47,7 @@ class SeamlessInput extends PureComponent {
     } = this.props;
 
     return (
-      <div className={cx('seamless-input', className, { 'seamless-input--hasFocus': this.state.focus })}>
+      <div className={cx('seamless-input', className, { 'seamless-input--hasFocus': this.state.hasFocus })}>
         <input
           className={cx('seamless-input__input')}
           value={value}
@@ -57,7 +57,7 @@ class SeamlessInput extends PureComponent {
           onFocus={this.onFocusChange}
           onBlur={this.onFocusChange}
         />
-        { !this.state.hasFocus && <Icon name="edit" style={{ verticalAlign: 'bottom', width: '20px', height: '20px' }} /> }
+        <Icon name="edit" className="seamless-input__icon" />
       </div>
     );
   }

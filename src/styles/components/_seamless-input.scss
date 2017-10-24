@@ -1,13 +1,31 @@
-.seamless-input {
+$module-name: seamless-input;
+
+.#{$module-name} {
   display: block;
 
   &__input {
     background-color: transparent;
     border: 0;
     border-bottom: 1px solid transparent;
+    transition: border-bottom-color $animation-default-easing $animation-standard-duration;
 
     &:focus {
       border-bottom-color: palette('input-focus');
+    }
+  }
+
+  &__icon {
+    vertical-align: bottom;
+    width: 20px !important;
+    height: 20px !important;
+    transition: opacity $animation-default-easing $animation-fast-duration;
+  }
+
+  &--hasFocus {
+    .#{$module-name} {
+      &__icon {
+        opacity: 0;
+      }
     }
   }
 }
