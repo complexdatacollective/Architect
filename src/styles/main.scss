@@ -1,11 +1,13 @@
 @import '~network-canvas-ui/src/styles/all';
 @import './colors';
 @import './helpers';
+@import './mixins';
 @import './reset';
 @import './app';
 
 // CSS modules
 @import './card';
 
-// React containers
+// React containers/components
 @import './containers';
+@import './components';

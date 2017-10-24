@@ -83,7 +83,7 @@ class Protocol extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    stages: state.stages,
+    stages: state.protocol.stages,
   };
 }
 

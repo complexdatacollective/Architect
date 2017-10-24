@@ -1,0 +1,29 @@
+.panel {
+  background-color: palette('panel');
+  color: palette('panel-text');
+  margin: 0 auto;
+  width: 50vw;
+  padding: 20px;
+  border-radius: 10px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__groups {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 50% 50%;
+  }
+
+  &__group {
+    margin: 20px;
+    border: 1px solid palette('panel-divider');;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  &__group-title {
+    text-align: center;
+  }
+}

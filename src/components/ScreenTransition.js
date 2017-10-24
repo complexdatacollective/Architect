@@ -18,7 +18,6 @@ const ScreenTransition = ({ children, timeout, ...props }) => (
   <Transition
     timeout={timeout}
     unmountOnExit
-    appear
     onEnter={
       (el) => {
         el.setAttribute('style', `${el.getAttribute('style')}; transform-origin: 50vw 50vh;`);
