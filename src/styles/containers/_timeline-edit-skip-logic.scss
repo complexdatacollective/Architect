@@ -1,0 +1,44 @@
+.timeline-edit-skip-logic {
+  &__track {
+    position: absolute;
+    fill: none;
+    width: 40vw;
+    height: 100%;
+    left: calc(50% + 3px); // Half rail width
+    top: 0;
+    display: block;
+
+    path {
+      stroke-width: 12; // Only for HDPI screens? Rail is only 6
+      stroke: palette('intent');
+      opacity: 0;
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(0) scale(.75);
+    transition: background-color $animation-default-easing $animation-fast-duration, transform $animation-default-easing $animation-fast-duration;
+    background-color: palette('intent-inactive');
+    border-radius: 80px;
+    width: 70px;
+    height: 70px;
+
+    &-icon {
+      width: 45px !important;
+      height: 45px !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      transform: translate(-50%, -50%) translateZ(0) scale(1);
+      background-color: palette('intent');
+    }
+  }
+}

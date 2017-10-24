@@ -1,6 +1,6 @@
 .timeline-stage {
   @include vertical-rail;
-  padding: 20px 0;
+  padding: 60px 0;
 
   &__preview {
     border-width: 5px;
@@ -8,7 +8,7 @@
     border-color: transparent;
     transition: border-color $animation-default-easing $animation-fast-duration;
     cursor: pointer;
-    width: 50vw;
+    width: 45vw;
     margin: 0 auto;
 
     &-image {
@@ -19,8 +19,4 @@
       border-color: palette('intent');
     }
   }
-
-  &__skip {
-  }
-
 }

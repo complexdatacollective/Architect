@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import TimelineEditSkipLogic from './TimelineEditSkipLogic';
 
 class TimelineStage extends PureComponent {
   static propTypes = {
     type: PropTypes.string.isRequired,
     onEditStage: PropTypes.func.isRequired,
-    onEditSkip: PropTypes.func.isRequired,
+    onEditSkipLogic: PropTypes.func.isRequired,
   };
 
   snapshotSrc() {
@@ -15,20 +16,11 @@ class TimelineStage extends PureComponent {
   render() {
     const {
       onEditStage,
-      onEditSkip,
+      onEditSkipLogic,
     } = this.props;
 
     return (
       <div className="timeline-stage">
-        <div
-          className="timeline-stage__skip"
-          role="button"
-          onClick={onEditSkip}
-          tabIndex="0"
-        >
-          Skip stage
-        </div>
-
         <div
           className="timeline-stage__preview"
           role="button"
@@ -38,6 +30,7 @@ class TimelineStage extends PureComponent {
           <img src={this.snapshotSrc()} alt="" className="timeline-stage__preview-image" />
         </div>
 
+        <TimelineEditSkipLogic onEditSkipLogic={onEditSkipLogic} />
       </div>
     );
   }
