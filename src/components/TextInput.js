@@ -40,6 +40,7 @@ class TextInput extends PureComponent {
           value={value}
           id={this.id}
           type="text"
+          onChange={this.onChange}
           ref={(input) => { this.input = input; }}
         />
       </label>

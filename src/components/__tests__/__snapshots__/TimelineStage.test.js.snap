@@ -5,7 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TimelineStage
-    onEditSkip={[Function]}
+    onEditSkipLogic={[Function]}
     onEditStage={[Function]}
     type="Foo"
 />,
@@ -23,14 +23,6 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <div
-          className="timeline-stage__skip"
-          onClick={[Function]}
-          role="button"
-          tabIndex="0"
->
-          Skip stage
-</div>,
-        <div
           className="timeline-stage__preview"
           onClick={[Function]}
           role="button"
@@ -42,26 +34,14 @@ ShallowWrapper {
                     src="/images/timeline/stage--Foo.png"
           />
 </div>,
+        <TimelineEditSkipLogic
+          onEditSkipLogic={[Function]}
+/>,
       ],
       "className": "timeline-stage",
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": null,
-        "nodeType": "host",
-        "props": Object {
-          "children": "Skip stage",
-          "className": "timeline-stage__skip",
-          "onClick": [Function],
-          "role": "button",
-          "tabIndex": "0",
-        },
-        "ref": null,
-        "rendered": "Skip stage",
-        "type": "div",
-      },
       Object {
         "instance": null,
         "key": null,
@@ -93,6 +73,17 @@ ShallowWrapper {
         },
         "type": "div",
       },
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "class",
+        "props": Object {
+          "onEditSkipLogic": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
     ],
     "type": "div",
   },
@@ -103,14 +94,6 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <div
-            className="timeline-stage__skip"
-            onClick={[Function]}
-            role="button"
-            tabIndex="0"
->
-            Skip stage
-</div>,
           <div
             className="timeline-stage__preview"
             onClick={[Function]}
@@ -123,26 +106,14 @@ ShallowWrapper {
                         src="/images/timeline/stage--Foo.png"
             />
 </div>,
+          <TimelineEditSkipLogic
+            onEditSkipLogic={[Function]}
+/>,
         ],
         "className": "timeline-stage",
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Skip stage",
-            "className": "timeline-stage__skip",
-            "onClick": [Function],
-            "role": "button",
-            "tabIndex": "0",
-          },
-          "ref": null,
-          "rendered": "Skip stage",
-          "type": "div",
-        },
         Object {
           "instance": null,
           "key": null,
@@ -173,6 +144,17 @@ ShallowWrapper {
             "type": "img",
           },
           "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "class",
+          "props": Object {
+            "onEditSkipLogic": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",

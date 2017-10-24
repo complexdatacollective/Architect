@@ -13,6 +13,7 @@ class TimelineOverview extends PureComponent {
 
     this.state = {
       options: {
+        protocol_location: 'http://northwestern.edu/my-study',
       },
     };
   }
@@ -59,7 +60,11 @@ class TimelineOverview extends PureComponent {
             <div className="panel__group" style={{ gridRow: 2, gridColumn: 1 }}>
               <h2 className="panel__group-title">Deployment</h2>
               <div>
-                <TextInput label="Protocol location" value="http://northwestern.edu/my-study" />
+                <TextInput
+                  label="Protocol location"
+                  onChange={(value) => { this.onOptionChange('protocol_location', value); }}
+                  value={this.state.options.protocol_location}
+                />
                 <img
                   style={{ margin: '0 auto', width: '100px', height: '100px', border: '1px solid grey', display: 'block' }}
                   src=""

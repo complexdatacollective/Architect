@@ -25,7 +25,7 @@ ShallowWrapper {
           timeout={1000}
 >
           <Timeline
-                    onEditSkip={[Function]}
+                    onEditSkipLogic={[Function]}
                     onEditStage={[Function]}
                     onInsertStage={[Function]}
                     stages={Array []}
@@ -53,7 +53,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "children": <Timeline
-            onEditSkip={[Function]}
+            onEditSkipLogic={[Function]}
             onEditStage={[Function]}
             onInsertStage={[Function]}
             stages={Array []}
@@ -67,7 +67,7 @@ ShallowWrapper {
           "key": null,
           "nodeType": "class",
           "props": Object {
-            "onEditSkip": [Function],
+            "onEditSkipLogic": [Function],
             "onEditStage": [Function],
             "onInsertStage": [Function],
             "stages": Array [],
@@ -123,7 +123,7 @@ ShallowWrapper {
             timeout={1000}
 >
             <Timeline
-                        onEditSkip={[Function]}
+                        onEditSkipLogic={[Function]}
                         onEditStage={[Function]}
                         onInsertStage={[Function]}
                         stages={Array []}
@@ -151,7 +151,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "children": <Timeline
-              onEditSkip={[Function]}
+              onEditSkipLogic={[Function]}
               onEditStage={[Function]}
               onInsertStage={[Function]}
               stages={Array []}
@@ -165,7 +165,7 @@ ShallowWrapper {
             "key": null,
             "nodeType": "class",
             "props": Object {
-              "onEditSkip": [Function],
+              "onEditSkipLogic": [Function],
               "onEditStage": [Function],
               "onInsertStage": [Function],
               "stages": Array [],

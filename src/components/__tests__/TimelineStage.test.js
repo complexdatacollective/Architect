@@ -7,7 +7,7 @@ import TimelineStage from '../TimelineStage';
 const mockProps = {
   type: 'Foo',
   onEditStage: () => {},
-  onEditSkip: () => {},
+  onEditSkipLogic: () => {},
 };
 
 describe('<TimelineStage />', () => {
