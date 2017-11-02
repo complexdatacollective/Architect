@@ -16,6 +16,18 @@ export default function reducer(state = initialState, action = {}) {
         { ...action.options, id: nextId(state) },
         ...state.slice(action.index),
       ];
+    case UPDATE_STAGE:
+      return state.map((stage) => {
+        if (stage.id !== action.id) { return stage; }
+
+        if (action.overwrite) { return { ...action.stage, id: stage.id }; }
+
+        return {
+          ...stage,
+          ...action.stage,
+          id: stage.id,
+        };
+      });
     default:
       return state;
   }
@@ -29,11 +41,12 @@ function addStage(options, index) {
   };
 }
 
-function updateStage(stageId, options) {
+function updateStage(stageId, stage, overwrite = false) {
   return {
     type: UPDATE_STAGE,
-    stageId,
-    options,
+    id: stageId,
+    stage,
+    overwrite,
   };
 }
 
