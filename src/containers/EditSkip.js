@@ -1,45 +1,43 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
-import { Button } from 'network-canvas-ui';
+import Card from './Card';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 class EditSkip extends PureComponent {
   static propTypes = {
+    onCancel: PropTypes.func.isRequired,
     updateStage: PropTypes.func.isRequired,
-    stageId: PropTypes.string.isRequired,
+    index: PropTypes.number,
     onComplete: PropTypes.func,
-    onCancel: PropTypes.func,
   };
 
   static defaultProps = {
     onComplete: () => {},
-    onCancel: () => {},
+    id: null,
+    index: null,
   }
 
-  onUpdateSkip = () => {
-    const { updateStage, onComplete, stageId } = this.props;
-    const options = {};
-    updateStage(stageId, options);
-    onComplete();
+  onClickStageType = (type) => {
+    const index = this.props.index;
+
+    this.props.updateStage({ type }, index);
+
+    this.props.onComplete();
   }
 
   render() {
     return (
-      <div className="edit-skip">
-        <div className="edit-skip__title-bar">
-          <h1 className="edit-skip__heading">Edit Skip</h1>
+      <Card
+        title="Edit skip logic"
+        type="intent"
+        onCancel={this.props.onCancel}
+      >
+        <div className="edit-skip">
+          Test
         </div>
-        <div className="edit-skip__main">
-          <div className="edit-skip__options">
-            Foo.
-          </div>
-        </div>
-        <div className="edit-skip__control-bar">
-          <Button size="small" onClick={this.props.onCancel}>cancel</Button>
-        </div>
-      </div>
+      </Card>
     );
   }
 }
@@ -51,4 +49,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export { EditSkip };
-export default connect(null, mapDispatchToProps)(EditSkip);
+
+export default compose(
+  connect(null, mapDispatchToProps),
+)(EditSkip);

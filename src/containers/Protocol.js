@@ -94,6 +94,8 @@ class Protocol extends PureComponent {
           cancel={this.state.activeCard.cancel}
         >
           <NewStage
+            title="Add a new stage"
+            color=""
             index={this.state.activeCard.insertAtIndex}
             onComplete={this.onCardComplete}
             onCancel={this.onCardCancel}
@@ -106,6 +108,8 @@ class Protocol extends PureComponent {
           cancel={this.state.activeCard.cancel}
         >
           <EditSkip
+            title="Edit skip logic"
+            color=""
             stageId={this.state.activeCard.stageId}
             onComplete={this.onCardComplete}
             onCancel={this.onCardCancel}

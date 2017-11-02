@@ -1,4 +1,4 @@
-%card {
+.card {
   @include no-scrollbars;
   position: absolute;
   top: 0;
@@ -8,4 +8,34 @@
   overflow-y: scroll;
   background: palette('light-background');
   transform: translateZ(0);
+  display: flex;
+  flex-direction: column;
+
+  &__title-bar,
+  &__control-bar,
+  &__main {
+    @include layout-container;
+  }
+
+  &__title-bar {
+    flex: 0 0 100px;
+    @include flex-align(flex-start, center);
+  }
+
+  &__control-bar {
+    flex: 0 0 60px;
+    background-color: palette('background');
+    @include flex-align(flex-end, center);
+  }
+
+  &__main {
+    @include no-scrollbars;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  &--intent {
+    background: palette('intent');
+  }
 }
