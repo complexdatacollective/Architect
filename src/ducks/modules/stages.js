@@ -1,6 +1,7 @@
 import { map, max } from 'lodash';
 
-const ADD_STAGE = 'STAGES/ADD_STAGE';
+const ADD_STAGE = Symbol('STAGES/ADD_STAGE');
+const UPDATE_STAGE = Symbol('STAGES/UPDATE_STAGE');
 
 const initialState = [{ id: 1, type: 'NameGenerator' }, { id: 2, type: 'Sociogram' }];
 
@@ -28,12 +29,22 @@ function addStage(options, index) {
   };
 }
 
+function updateStage(stageId, options) {
+  return {
+    type: UPDATE_STAGE,
+    stageId,
+    options,
+  };
+}
+
 const actionCreators = {
   addStage,
+  updateStage,
 };
 
 const actionTypes = {
   ADD_STAGE,
+  UPDATE_STAGE,
 };
 
 export {

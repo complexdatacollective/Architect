@@ -6,13 +6,17 @@ import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
 import { getProtocol } from '../selectors/protocol';
 import NewStage from './NewStage';
+import EditSkip from './EditSkip';
 import { Timeline, ScreenTransition, CardTransition } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
-const EditSkip = () => null;
+const cards = {
+  newStage: Symbol('newStage'),
+  editSkip: Symbol('editSkip'),
+};
 
-const defaultModalState = {
-  type: null,
+const defaultActiveCardState = {
+  cardType: null,
   cancel: false,
 };
 
@@ -30,39 +34,40 @@ class Protocol extends PureComponent {
     super(props);
 
     this.state = {
-      modal: { ...defaultModalState },
+      activeCard: { ...defaultActiveCardState },
     };
   }
 
-  onModalComplete = () => {
+  onCardComplete = () => {
     this.setState({
-      modal: {
-        ...defaultModalState,
+      activeCard: {
+        ...defaultActiveCardState,
       },
     });
   }
 
-  onModalCancel = () => {
+  onCardCancel = () => {
     this.setState({
-      modal: {
-        ...defaultModalState,
+      activeCard: {
+        ...defaultActiveCardState,
         cancel: true,
       },
     });
   }
 
-  showModal = ({ type, ...options }) => {
+  showCard = (card, { ...options }) => {
     this.setState({
-      modal: {
-        ...defaultModalState,
-        type,
+      activeCard: {
+        ...defaultActiveCardState,
+        cardType: card,
         ...options,
       },
     });
   }
-  isAnyModalVisible = () => this.state.modal.type !== null;
-  isModalVisible = type => this.state.modal.type === type;
-  isTimelineVisible = () => !this.isAnyModalVisible();
+
+  isAnyCardVisible = () => this.state.activeCard.cardType !== null;
+  isCardVisible = cardType => this.state.activeCard.cardType === cardType;
+  isTimelineVisible = () => !this.isAnyCardVisible();
 
   render() {
     return (
@@ -73,7 +78,8 @@ class Protocol extends PureComponent {
         >
           <Timeline
             stages={this.props.stages}
-            onInsertStage={index => this.showModal({ type: 'NEW_STAGE', insertAtIndex: index })}
+            onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
+            onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
             hasChanges={this.props.hasChanges}
           />
         </ScreenTransition>
@@ -84,25 +90,25 @@ class Protocol extends PureComponent {
 
         <CardTransition
           key="new-stage"
-          in={this.isModalVisible('NEW_STAGE')}
-          cancel={this.state.modal.cancel}
+          in={this.isCardVisible(cards.newStage)}
+          cancel={this.state.activeCard.cancel}
         >
           <NewStage
-            index={this.state.modal.insertAtIndex}
-            onComplete={this.onModalComplete}
-            onCancel={this.onModalCancel}
+            index={this.state.activeCard.insertAtIndex}
+            onComplete={this.onCardComplete}
+            onCancel={this.onCardCancel}
           />
         </CardTransition>
 
         <CardTransition
           key="edit-skip"
-          in={this.isModalVisible('EDIT_SKIP')}
-          cancel={this.state.modal.cancel}
+          in={this.isCardVisible(cards.editSkip)}
+          cancel={this.state.activeCard.cancel}
         >
           <EditSkip
-            stageId={this.state.modal.stageId}
-            onComplete={this.onModalComplete}
-            onCancel={this.onModalCancel}
+            stageId={this.state.activeCard.stageId}
+            onComplete={this.onCardComplete}
+            onCancel={this.onCardCancel}
           />
         </CardTransition>
       </div>
