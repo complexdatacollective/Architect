@@ -1,9 +1,12 @@
+/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
-import { has } from 'lodash';
+import { has, uniqueId as _uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import { makeGetStage } from '../selectors/stage';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
@@ -18,6 +21,44 @@ import Selectors from '../components/Selectors';
   ]
 }
 */
+
+const uniqueId = () => _uniqueId(new Date().getTime());
+
+class AddSelectorButton extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpen: false,
+    };
+  }
+
+  onShowAddChoices = () => { this.setState({ isOpen: true }); };
+  onHideAddChoices = () => { this.setState({ isOpen: false }); };
+
+  render() {
+    return (
+      <div
+        className={cx('edit-skip__add', { 'edit-skip__add--is-open': this.state.isOpen })}
+        onMouseLeave={this.onHideAddChoices}
+      >
+        <Button
+          className="button edit-skip__add-open"
+          onMouseEnter={this.onShowAddChoices}
+          disabled
+        >
+          +
+        </Button>
+
+        <div className="edit-skip__add-choices">
+          <Button size="small" onClick={() => this.props.onAddSelector('alter')}>Alter</Button>
+          <Button size="small" onClick={() => this.props.onAddSelector('ego')}>Ego</Button>
+          <Button size="small" onClick={() => this.props.onAddSelector('edge')}>Edge</Button>
+        </div>
+      </div>
+    );
+  }
+}
 
 const defaultLogic = {
   operator: 'or',
@@ -90,7 +131,7 @@ class EditSkip extends PureComponent {
       },
       this.updateStage,
     );
-  }
+  };
 
   onSave = () => {
     const stageId = this.props.stageId;
@@ -103,7 +144,7 @@ class EditSkip extends PureComponent {
     );
 
     this.props.onComplete();
-  }
+  };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState(
@@ -111,7 +152,19 @@ class EditSkip extends PureComponent {
         ...state,
         skipLogic: {
           ...state.skipLogic,
-          selectors: arrayMove(state.selectors, oldIndex, newIndex),
+          selectors: arrayMove(state.skipLogic.selectors, oldIndex, newIndex),
+        },
+      }),
+    );
+  };
+
+  onAddSelector = (type) => {
+    this.setState(
+      state => ({
+        ...state,
+        skipLogic: {
+          ...state.skipLogic,
+          selectors: [...state.skipLogic.selectors, { select: type, id: uniqueId() }],
         },
       }),
     );
@@ -154,6 +207,7 @@ class EditSkip extends PureComponent {
             onChangeOption={this.onChangeOption}
             onSortEnd={this.onSortEnd}
           />
+          <AddSelectorButton onAddSelector={this.onAddSelector} />
         </div>
       </Card>
     );

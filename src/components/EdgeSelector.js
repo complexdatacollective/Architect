@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import SelectorDragHandle from './SelectorDragHandle';
 
@@ -9,10 +10,10 @@ const edgeTypes = [
   'family',
 ];
 
-const EdgeSelector = SortableElement((
-  ({ select, id, onChangeOption, options: { type }, sortIndex }) => (
+const EdgeSelector = (
+  ({ id, onChangeOption, options: { type } }) => (
     <div className="selector">
-      <SelectorDragHandle /> {sortIndex} {select}
+      <SelectorDragHandle /> Edge
       <form>
         <label>
           Type:
@@ -27,6 +28,24 @@ const EdgeSelector = SortableElement((
       </form>
     </div>
   )
-));
+);
 
-export default EdgeSelector;
+EdgeSelector.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+  onChangeOption: PropTypes.func,
+  options: PropTypes.shape({
+    type: PropTypes.string,
+  }),
+};
+
+EdgeSelector.defaultProps = {
+  options: {
+    type: null,
+  },
+  onChangeOption: () => {},
+};
+
+export default SortableElement(EdgeSelector);
