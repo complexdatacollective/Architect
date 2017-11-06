@@ -8,7 +8,7 @@ import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
 import { has, uniqueId as _uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import { makeGetStage } from '../selectors/stage';
+import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
 import { Selectors, AddSelectorButton } from '../components';

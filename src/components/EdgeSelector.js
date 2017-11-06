@@ -5,13 +5,8 @@ import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import SelectorDragHandle from './SelectorDragHandle';
 
-const edgeTypes = [
-  'friend',
-  'family',
-];
-
 const EdgeSelector = (
-  ({ id, onChangeOption, options: { type } }) => (
+  ({ id, edgeTypes, onChangeOption, options: { type } }) => (
     <div className="selector">
       <SelectorDragHandle /> Edge
       <form>
@@ -39,12 +34,14 @@ EdgeSelector.propTypes = {
   options: PropTypes.shape({
     type: PropTypes.string,
   }),
+  edgeTypes: PropTypes.array,
 };
 
 EdgeSelector.defaultProps = {
   options: {
     type: null,
   },
+  edgeTypes: [],
   onChangeOption: () => {},
 };
 

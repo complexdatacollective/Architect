@@ -6,3 +6,6 @@ export { default as TimelineStage } from './TimelineStage';
 export { default as TimelineOverview } from './TimelineOverview';
 export { default as Selectors } from './Selectors';
 export { default as AddSelectorButton } from './AddSelectorButton';
+export { default as EgoSelector } from './EgoSelector';
+export { default as EdgeSelector } from './EdgeSelector';
+export { default as AlterSelector } from './AlterSelector';

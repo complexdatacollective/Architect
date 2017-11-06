@@ -30,9 +30,24 @@ class AddSelectorButton extends PureComponent {
         </Button>
 
         <div className="edit-skip__add-choices">
-          <Button size="small" onClick={() => this.props.onAddSelector('alter')}>Alter</Button>
-          <Button size="small" onClick={() => this.props.onAddSelector('ego')}>Ego</Button>
-          <Button size="small" onClick={() => this.props.onAddSelector('edge')}>Edge</Button>
+          <Button
+            size="small"
+            onClick={() => { this.onHideAddChoices(); this.props.onAddSelector('alter'); }}
+          >
+          Alter
+          </Button>
+          <Button
+            size="small"
+            onClick={() => { this.onHideAddChoices(); this.props.onAddSelector('ego'); }}
+          >
+          Ego
+          </Button>
+          <Button
+            size="small"
+            onClick={() => { this.onHideAddChoices(); this.props.onAddSelector('edge'); }}
+          >
+          Edge
+          </Button>
         </div>
       </div>
     );

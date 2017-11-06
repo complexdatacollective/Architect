@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { toPairs } from 'lodash';
+import { toPairs, has } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import SelectorDragHandle from './SelectorDragHandle';
 
@@ -16,23 +16,20 @@ const operators = {
   EXISTS: 'Exists',
 };
 
-const nodeTypes = [
-  'person',
-  'place',
-];
-
-const nodeAttributes = [
-  'name',
-  'nick',
-];
-
-const AlterSelector = ({ id, onChangeOption, options: { type, operator, attribute, value } }) => (
+const AlterSelector = ({
+  id,
+  nodeTypes,
+  nodeAttributes,
+  onChangeOption,
+  options: { type, operator, attribute, value },
+}) => (
   <div className="selector">
     <SelectorDragHandle />
     <form>
       <label>
         Type:
         <select defaultValue={type} onChange={event => onChangeOption(event, id, 'type')}>
+          <option value="">Please select</option>
           {nodeTypes.map(
             (typeOption, index) => (
               <option key={index} value={typeOption}>{typeOption}</option>
@@ -43,7 +40,8 @@ const AlterSelector = ({ id, onChangeOption, options: { type, operator, attribut
       <label>
         Attribute:
         <select defaultValue={attribute} onChange={event => onChangeOption(event, id, 'attribute')}>
-          {nodeAttributes.map(
+          <option value="">Please select</option>
+          {has(nodeAttributes, type) && nodeAttributes[type].map(
             (attributeOption, index) => (
               <option key={index} value={value}>{attributeOption}</option>
             ),
@@ -53,6 +51,7 @@ const AlterSelector = ({ id, onChangeOption, options: { type, operator, attribut
       <label>
         Operator:
         <select defaultValue={operator} onChange={event => onChangeOption(event, id, 'operator')}>
+          <option value="">Please select</option>
           {toPairs(operators).map(
             ([operatorOption, operatorLabel], index) => (
               <option key={index} value={operatorOption}>{operatorLabel}</option>
@@ -80,6 +79,8 @@ AlterSelector.propTypes = {
     attribute: PropTypes.string,
     value: PropTypes.string,
   }),
+  nodeTypes: PropTypes.array,
+  nodeAttributes: PropTypes.object,
 };
 
 AlterSelector.defaultProps = {
@@ -90,6 +91,8 @@ AlterSelector.defaultProps = {
     value: '',
   },
   onChangeOption: () => {},
+  nodeTypes: [],
+  nodeAttributes: {},
 };
 
 export default SortableElement(AlterSelector);

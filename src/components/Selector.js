@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AlterSelector from './AlterSelector';
-import EgoSelector from './EgoSelector';
-import EdgeSelector from './EdgeSelector';
+import {
+  AlterSelector,
+  EgoSelector,
+  EdgeSelector,
+} from '../containers';
 
 const Selector = ({ select, ...otherProps }) => {
   const props = { select, ...otherProps };

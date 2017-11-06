@@ -16,18 +16,19 @@ const operators = {
   EXISTS: 'Exists',
 };
 
-const nodeAttributes = [
-  'name',
-  'nick',
-];
-
-const EgoSelector = ({ id, onChangeOption, options: { operator, attribute, value } }) => (
+const EgoSelector = ({
+  id,
+  nodeAttributes,
+  onChangeOption,
+  options: { operator, attribute, value },
+}) => (
   <div className="selector">
     <SelectorDragHandle />
     <form>
       <label>
         Attribute:
         <select defaultValue={attribute} onChange={event => onChangeOption(event, id, 'attribute')}>
+          <option value="">Please select</option>
           {nodeAttributes.map(
             (attributeOption, index) => (
               <option key={index} value={value}>{attributeOption}</option>
@@ -38,6 +39,7 @@ const EgoSelector = ({ id, onChangeOption, options: { operator, attribute, value
       <label>
         Operator:
         <select defaultValue={operator} onChange={event => onChangeOption(event, id, 'operator')}>
+          <option value="">Please select</option>
           {toPairs(operators).map(
             ([operatorOption, operatorLabel], index) => (
               <option key={index} value={operatorOption}>{operatorLabel}</option>
@@ -64,6 +66,7 @@ EgoSelector.propTypes = {
     attribute: PropTypes.string,
     value: PropTypes.string,
   }),
+  nodeAttributes: [],
 };
 
 EgoSelector.defaultProps = {
@@ -73,6 +76,7 @@ EgoSelector.defaultProps = {
     value: '',
   },
   onChangeOption: () => {},
+  nodeAttributes: [],
 };
 
 export default SortableElement(EgoSelector);
