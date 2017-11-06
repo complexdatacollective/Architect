@@ -9,18 +9,16 @@ const EdgeSelector = (
   ({ id, edgeTypes, onChangeOption, options: { type } }) => (
     <div className="selector">
       <SelectorDragHandle /> Edge
-      <form>
-        <label>
-          Type:
-          <select defaultValue={type} onChange={event => onChangeOption(event, id, 'type')} >
-            {edgeTypes.map(
-              (typeOption, index) => (
-                <option key={index} value={typeOption}>{typeOption}</option>
-              ),
-            )}
-          </select>
-        </label>
-      </form>
+      <label>
+        Type:
+        <select defaultValue={type} onChange={event => onChangeOption(event, id, 'type')} >
+          {edgeTypes.map(
+            (typeOption, index) => (
+              <option key={index} value={typeOption}>{typeOption}</option>
+            ),
+          )}
+        </select>
+      </label>
     </div>
   )
 );

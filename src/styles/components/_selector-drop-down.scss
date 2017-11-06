@@ -1,0 +1,27 @@
+.selector-drop-down {
+  display: block;
+  margin: 0 0 0 20px;
+  overflow: hidden;
+  position: relative;
+
+  &__value {
+    color: palette('text');
+    font-size: 1.2rem;
+    // visibility: hidden;
+  }
+
+  &__options {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    color: palette('text');
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: 0;
+    line-height: 1.2rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+}

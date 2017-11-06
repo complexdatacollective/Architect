@@ -24,34 +24,32 @@ const EgoSelector = ({
 }) => (
   <div className="selector">
     <SelectorDragHandle />
-    <form>
-      <label>
-        Attribute:
-        <select defaultValue={attribute} onChange={event => onChangeOption(event, id, 'attribute')}>
-          <option value="">Please select</option>
-          {nodeAttributes.map(
-            (attributeOption, index) => (
-              <option key={index} value={value}>{attributeOption}</option>
-            ),
-          )}
-        </select>
-      </label>
-      <label>
-        Operator:
-        <select defaultValue={operator} onChange={event => onChangeOption(event, id, 'operator')}>
-          <option value="">Please select</option>
-          {toPairs(operators).map(
-            ([operatorOption, operatorLabel], index) => (
-              <option key={index} value={operatorOption}>{operatorLabel}</option>
-            ),
-          )}
-        </select>
-      </label>
-      <label>
-        Value:
-        <input type="text" value={value} onChange={event => onChangeOption(event, id, 'value')} />
-      </label>
-    </form>
+    <label>
+      Attribute:
+      <select value={attribute} onChange={event => onChangeOption(event, id, 'attribute')}>
+        <option value="">Please select</option>
+        {nodeAttributes.map(
+          (attributeOption, index) => (
+            <option key={index} value={attributeOption}>{attributeOption}</option>
+          ),
+        )}
+      </select>
+    </label>
+    <label>
+      Operator:
+      <select value={operator} onChange={event => onChangeOption(event, id, 'operator')}>
+        <option value="">Please select</option>
+        {toPairs(operators).map(
+          ([operatorOption, operatorLabel], index) => (
+            <option key={index} value={operatorOption}>{operatorLabel}</option>
+          ),
+        )}
+      </select>
+    </label>
+    <label>
+      Value:
+      <input type="text" value={value} onChange={event => onChangeOption(event, id, 'value')} />
+    </label>
   </div>
 );
 
@@ -66,13 +64,13 @@ EgoSelector.propTypes = {
     attribute: PropTypes.string,
     value: PropTypes.string,
   }),
-  nodeAttributes: [],
+  nodeAttributes: PropTypes.array,
 };
 
 EgoSelector.defaultProps = {
   options: {
-    operator: null,
-    attribute: null,
+    operator: '',
+    attribute: '',
     value: '',
   },
   onChangeOption: () => {},

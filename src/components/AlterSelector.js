@@ -5,16 +5,17 @@ import PropTypes from 'prop-types';
 import { toPairs, has } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import SelectorDragHandle from './SelectorDragHandle';
+import SelectorDropDown from './SelectorDropDown';
 
-const operators = {
-  GREATER_THAN: 'Greater than',
-  GREATER_THAN_OR_EQUAL: 'Greater than or exactly',
-  LESS_THAN: 'Less than',
-  LESS_THAN_OR_EQUAL: 'Less than or exactly',
-  EXACTLY: 'Exactly',
-  NOT: 'Not',
+const operators = toPairs({
+  EXACTLY: 'is Exactly',
   EXISTS: 'Exists',
-};
+  NOT: 'is Not',
+  GREATER_THAN: 'is Greater Than',
+  GREATER_THAN_OR_EQUAL: 'is Greater Than or Exactly',
+  LESS_THAN: 'is Less Than',
+  LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
+});
 
 const AlterSelector = ({
   id,
@@ -25,45 +26,28 @@ const AlterSelector = ({
 }) => (
   <div className="selector">
     <SelectorDragHandle />
-    <form>
+    <div className="selector__options">
+      <SelectorDropDown
+        options={nodeTypes}
+        value={type}
+        placeholder="{node}"
+        onChange={event => onChangeOption(event, id, 'type')}
+      />
+      <SelectorDropDown
+        options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
+        value={attribute}
+        placeholder="{variable}"
+        onChange={event => onChangeOption(event, id, 'attribute')}
+      />
+      <SelectorDropDown
+        options={operators}
+        value={operator}
+        onChange={event => onChangeOption(event, id, 'operator')}
+      />
       <label>
-        Type:
-        <select defaultValue={type} onChange={event => onChangeOption(event, id, 'type')}>
-          <option value="">Please select</option>
-          {nodeTypes.map(
-            (typeOption, index) => (
-              <option key={index} value={typeOption}>{typeOption}</option>
-            ),
-          )}
-        </select>
-      </label>
-      <label>
-        Attribute:
-        <select defaultValue={attribute} onChange={event => onChangeOption(event, id, 'attribute')}>
-          <option value="">Please select</option>
-          {has(nodeAttributes, type) && nodeAttributes[type].map(
-            (attributeOption, index) => (
-              <option key={index} value={value}>{attributeOption}</option>
-            ),
-          )}
-        </select>
-      </label>
-      <label>
-        Operator:
-        <select defaultValue={operator} onChange={event => onChangeOption(event, id, 'operator')}>
-          <option value="">Please select</option>
-          {toPairs(operators).map(
-            ([operatorOption, operatorLabel], index) => (
-              <option key={index} value={operatorOption}>{operatorLabel}</option>
-            ),
-          )}
-        </select>
-      </label>
-      <label>
-        Value:
         <input type="text" value={value} onChange={event => onChangeOption(event, id, 'value')} />
       </label>
-    </form>
+    </div>
   </div>
 );
 
@@ -85,9 +69,9 @@ AlterSelector.propTypes = {
 
 AlterSelector.defaultProps = {
   options: {
-    type: null,
-    operator: null,
-    attribute: null,
+    type: '',
+    operator: '',
+    attribute: '',
     value: '',
   },
   onChangeOption: () => {},

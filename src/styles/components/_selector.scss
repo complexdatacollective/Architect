@@ -1,0 +1,21 @@
+.selector {
+  @include flex-inline;
+  color: palette('text-dark');
+  width: 100%;
+  margin-top: 10px;
+
+  .selector-drag-handle {
+    @include flex-inline;
+    @include flex-align(center, center);
+    width: 50px
+  }
+
+  .selector__options {
+    @include flex-inline;
+    @include flex-align(flex-start, center);
+    flex: 1 0 auto;
+    background: palette('intent-border');
+    padding: 20px;
+    border-radius: 20px;
+  }
+}

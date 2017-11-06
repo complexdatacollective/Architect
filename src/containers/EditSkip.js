@@ -25,7 +25,7 @@ import { Selectors, AddSelectorButton } from '../components';
 const uniqueId = () => _uniqueId(new Date().getTime());
 
 const defaultLogic = {
-  operator: null,
+  operator: '',
   selectors: [],
 };
 
@@ -60,6 +60,20 @@ class EditSkip extends PureComponent {
 
   componentWillReceiveProps(props) {
     this.loadSkipLogicFromProps(props);
+  }
+
+  onChangeOperator = (event) => {
+    const value = event.target.value;
+
+    this.setState(
+      (state) => ({
+        ...this.state,
+        skipLogic: {
+          ...this.state.skipLogic,
+          operator: value,
+        }
+      }),
+    )
   }
 
   onChangeOption = (event, id, option) => {
@@ -149,12 +163,14 @@ class EditSkip extends PureComponent {
   );
 
   render() {
-    const { skipLogic: { selectors } } = this.state;
+    const { skipLogic: { operator, selectors } } = this.state;
 
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
       <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
     ];
+
+    console.log( this.state );
 
     return (
       <Card
@@ -163,6 +179,12 @@ class EditSkip extends PureComponent {
         buttons={buttons}
       >
         <div className="edit-skip">
+          <select value={operator} onChange={this.onChangeOperator}>
+            <option value="">Select mode</option>
+            <option value="OR">OR</option>
+            <option value="AND">AND</option>
+          </select>
+
           <Selectors
             selectors={selectors}
             lockAxis="y"

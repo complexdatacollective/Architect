@@ -15,8 +15,6 @@ function mapStateToProps(state) {
     fromPairs,
   );
 
-  console.log('alterSelector', nodeAttributes(variableRegistry.node));
-
   return {
     nodeTypes: keys(variableRegistry.node),
     nodeAttributes: nodeAttributes(variableRegistry.node),
