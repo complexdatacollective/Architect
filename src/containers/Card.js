@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button } from 'network-canvas-ui';
 
 class Card extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
-    onCancel: PropTypes.func,
+    buttons: PropTypes.arrayOf(PropTypes.node),
     title: PropTypes.string.isRequired,
     type: PropTypes.string,
   };
@@ -14,11 +13,14 @@ class Card extends PureComponent {
   static defaultProps = {
     type: 'default',
     children: null,
-    onCancel: () => {},
+    buttons: [],
   }
+
+  anyButtons = () => this.props.buttons.length > 0;
 
   render() {
     const classes = cx('card', `card--${this.props.type}`);
+    const { buttons } = this.props;
 
     return (
       <div className={classes}>
@@ -28,9 +30,11 @@ class Card extends PureComponent {
         <div className="card__main">
           { this.props.children }
         </div>
-        <div className="card__control-bar">
-          <Button size="small" onClick={this.props.onCancel}>cancel</Button>
-        </div>
+        { this.anyButtons() &&
+          <div className="card__control-bar">
+            { buttons }
+          </div>
+        }
       </div>
     );
   }

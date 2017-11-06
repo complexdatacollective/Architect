@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
+import { Button } from 'network-canvas-ui';
 import Card from './Card';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
@@ -67,10 +68,12 @@ class NewStage extends PureComponent {
   );
 
   render() {
+    const buttons = [<Button key="cancel" size="small" onClick={this.props.onCancel}>cancel</Button>];
+
     return (
       <Card
         title="Add New Stage"
-        onCancel={this.props.onCancel}
+        buttons={buttons}
       >
         <div className="new-stage">
           <div className="new-stage__options">
