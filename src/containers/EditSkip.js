@@ -6,7 +6,7 @@ import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
-import { has, uniqueId as _uniqueId } from 'lodash';
+import { has, uniqueId as _uniqueId, isEqual } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
@@ -25,17 +25,12 @@ import { Selectors, AddSelectorButton } from '../components';
 const uniqueId = () => _uniqueId(new Date().getTime());
 
 const defaultLogic = {
-  operator: 'or',
-  selectors: [
-    { id: 1, select: 'alter', options: { foo: 'bar', hi: 'world' } },
-    { id: 2, select: 'edge', options: { baz: 'buzz' } },
-  ],
+  operator: null,
+  selectors: [],
 };
 
 const defaultState = {
-  skipLogic: {
-    selectors: [],
-  },
+  skipLogic: { ...defaultLogic },
 };
 
 class EditSkip extends PureComponent {
@@ -143,6 +138,10 @@ class EditSkip extends PureComponent {
     );
   }
 
+  hasChanges() {
+    return isEqual(this.state.skipLogic, this.props.skipLogic);
+  }
+
   renderSelector = selector => (
     <div className="selector">
       Select {selector.select}
@@ -153,7 +152,7 @@ class EditSkip extends PureComponent {
     const { skipLogic: { selectors } } = this.state;
 
     const buttons = [
-      <Button key="save" size="small" onClick={this.onSave}>Save</Button>,
+      !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
       <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
     ];
 
