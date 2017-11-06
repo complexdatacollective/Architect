@@ -11,7 +11,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import { makeGetStage } from '../selectors/stage';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
-import Selectors from '../components/Selectors';
+import { Selectors, AddSelectorButton } from '../components';
 
 /*
 {
@@ -23,42 +23,6 @@ import Selectors from '../components/Selectors';
 */
 
 const uniqueId = () => _uniqueId(new Date().getTime());
-
-class AddSelectorButton extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false,
-    };
-  }
-
-  onShowAddChoices = () => { this.setState({ isOpen: true }); };
-  onHideAddChoices = () => { this.setState({ isOpen: false }); };
-
-  render() {
-    return (
-      <div
-        className={cx('edit-skip__add', { 'edit-skip__add--is-open': this.state.isOpen })}
-        onMouseLeave={this.onHideAddChoices}
-      >
-        <Button
-          className="button edit-skip__add-open"
-          onMouseEnter={this.onShowAddChoices}
-          disabled
-        >
-          +
-        </Button>
-
-        <div className="edit-skip__add-choices">
-          <Button size="small" onClick={() => this.props.onAddSelector('alter')}>Alter</Button>
-          <Button size="small" onClick={() => this.props.onAddSelector('ego')}>Ego</Button>
-          <Button size="small" onClick={() => this.props.onAddSelector('edge')}>Edge</Button>
-        </div>
-      </div>
-    );
-  }
-}
 
 const defaultLogic = {
   operator: 'or',
