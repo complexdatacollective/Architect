@@ -1,5 +1,6 @@
 .rule-filter {
-  background-color: palette('edge-alt-5');
+  background-color: palette('rules');
+  transition: background-color $animation-default-easing $animation-standard-duration;
   border-radius: 10px;
   padding: 10px;
   @include flex-inline;
@@ -25,5 +26,13 @@
 
   &__add {
     margin-top: 20px;
+  }
+
+  &--and {
+    background-color: palette('rules--and');
+  }
+
+  &--or {
+    background-color: palette('rules--or');
   }
 }

@@ -170,7 +170,13 @@ class EditSkip extends PureComponent {
       <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
     ];
 
-    console.log( this.state );
+    const ruleFilterClasses = cx(
+      'rule-filter',
+      {
+        'rule-filter--and': operator === 'AND',
+        'rule-filter--or': operator === 'OR',
+      }
+    );
 
     return (
       <Card
@@ -179,8 +185,8 @@ class EditSkip extends PureComponent {
         buttons={buttons}
       >
         <div className="edit-skip">
-          <div class="rule-filter">
-            <div class="rule-filter__operator">
+          <div className={ruleFilterClasses}>
+            <div className="rule-filter__operator">
               <RuleDropDown
                 options={operatorOptions}
                 value={operator}
@@ -188,7 +194,7 @@ class EditSkip extends PureComponent {
                 onChange={this.onChangeOperator}
               />
             </div>
-            <div class="rule-filter__rules">
+            <div className="rule-filter__rules">
               <Rules
                 rules={rules}
                 lockAxis="y"
@@ -197,7 +203,7 @@ class EditSkip extends PureComponent {
                 onSortEnd={this.onSortEnd}
               />
 
-              <div class="rule-filter__add">
+              <div className="rule-filter__add">
                 <RuleAddButton onAddRule={this.onAddRule} />
               </div>
             </div>

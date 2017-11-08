@@ -2,7 +2,6 @@
   @include flex-inline;
   @include flex-align(flex-start, center);
   color: palette('text-dark');
-  // width: 100%;
   margin-top: 10px;
   padding: 10px;
 
@@ -13,7 +12,7 @@
   .rule-drag-handle {
     @include flex-inline;
     @include flex-align(center, center);
-    background-color: palette('edge-alt-1');
+    background-color: palette('rule-control');
     color: palette('text');
     border: 0;
     border-radius: 40px;
@@ -36,7 +35,6 @@
   &__option {
     @include flex-inline;
     @include flex-align(flex-start, center);
-    background: palette('intent-border');
     height: 100%;
     padding: 0 20px;
     position: relative;
@@ -51,8 +49,8 @@
       border-bottom-right-radius: 10px;
     }
 
-    &--target {
-      background: palette('edge-alt-1');
+    &--type {
+      background: palette('rule-type');
       // padding-right: 30px;
 
       &::after {
@@ -65,23 +63,23 @@
         top: 0;
         width: 0;
         height: 0;
-        border-top: 30px solid palette('edge-alt-2');
-        border-bottom: 30px solid palette('edge-alt-2');
-        border-left: 20px solid palette('edge-alt-1');
+        border-top: 30px solid palette('rule-attribute');
+        border-bottom: 30px solid palette('rule-attribute');
+        border-left: 20px solid palette('rule-type');
       }
     }
 
     &--attribute {
-      background: palette('edge-alt-2');
+      background: palette('rule-attribute');
       // padding-left: 15px;
     }
 
     &--operator {
-      background: palette('edge-alt-3');
+      background: palette('rule-operator');
     }
 
     &--value {
-      background: palette('edge-alt-4');
+      background: palette('rule-value');
     }
   }
 }
