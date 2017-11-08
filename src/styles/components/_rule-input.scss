@@ -1,14 +1,29 @@
 .rule-input {
   margin: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 0 0 4px 0;
+  border-bottom: 2px solid white;
+
+  &__spacer {
+    font-size: 1.2rem;
+    visibility: hidden;
+    height: 1.2rem;
+    min-width: 50px;
+    padding: 0 5px;
+  }
 
   &__text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    left: 0px;
     background-color: transparent;
     color: palette('text');
     font-size: 1.2rem;
     padding: 0 5px;
     border: 0;
-    min-width: 50px;
-    border-bottom: 2px solid white;
 
     &:focus {
       color: palette('text-dark');

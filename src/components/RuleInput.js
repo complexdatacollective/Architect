@@ -10,6 +10,7 @@ const RuleInput = ({
   className,
 }) => (
   <label className={cx('rule-input', className)}>
+    <div className="rule-input__spacer">{ value }</div>
     <input
       className="rule-input__text"
       type="text"
