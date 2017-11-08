@@ -6,6 +6,7 @@ import { toPairs, has } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import SelectorDragHandle from './SelectorDragHandle';
 import SelectorDropDown from './SelectorDropDown';
+import SelectorInput from './SelectorInput';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -27,26 +28,36 @@ const AlterSelector = ({
   <div className="selector">
     <SelectorDragHandle />
     <div className="selector__options">
-      <SelectorDropDown
-        options={nodeTypes}
-        value={type}
-        placeholder="{node}"
-        onChange={event => onChangeOption(event, id, 'type')}
-      />
-      <SelectorDropDown
-        options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
-        value={attribute}
-        placeholder="{variable}"
-        onChange={event => onChangeOption(event, id, 'attribute')}
-      />
-      <SelectorDropDown
-        options={operators}
-        value={operator}
-        onChange={event => onChangeOption(event, id, 'operator')}
-      />
-      <label>
-        <input type="text" value={value} onChange={event => onChangeOption(event, id, 'value')} />
-      </label>
+      <div className="selector__option selector__option--target">
+        <SelectorDropDown
+          options={nodeTypes}
+          value={type}
+          placeholder="{node}"
+          onChange={event => onChangeOption(event, id, 'type')}
+        />
+      </div>
+      <div className="selector__option selector__option--attribute">
+        <SelectorDropDown
+          options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
+          value={attribute}
+          placeholder="{variable}"
+          onChange={event => onChangeOption(event, id, 'attribute')}
+        />
+      </div>
+      <div className="selector__option selector__option--operator">
+        <SelectorDropDown
+          options={operators}
+          value={operator}
+          placeholder="{rule}"
+          onChange={event => onChangeOption(event, id, 'operator')}
+        />
+      </div>
+      <div className="selector__option selector__option--value">
+        <SelectorInput
+          value={value}
+          onChange={event => onChangeOption(event, id, 'value')}
+        />
+      </div>
     </div>
   </div>
 );

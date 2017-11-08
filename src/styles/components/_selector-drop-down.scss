@@ -1,20 +1,21 @@
 .selector-drop-down {
   display: block;
-  margin: 0 0 0 20px;
+  margin: 0;
   overflow: hidden;
   position: relative;
 
-  &__value {
-    color: palette('text');
+  &__spacer {
     font-size: 1.2rem;
-    // visibility: hidden;
+    visibility: hidden;
+    height: 1.2rem;
   }
 
   &__options {
     position: absolute;
-    top: 0;
+    top: 50%;
     width: 100%;
-    left: 0;
+    transform: translateY(-50%);
+    left: 0px;
     color: palette('text');
     font-size: 1.2rem;
     background-color: transparent;

@@ -1,0 +1,18 @@
+.selector-input {
+  margin: 0;
+
+  &__text {
+    background-color: transparent;
+    color: palette('text');
+    font-size: 1.2rem;
+    padding: 0 5px;
+    border: 0;
+    min-width: 50px;
+    border-bottom: 2px solid white;
+
+    &:focus {
+      color: palette('text-dark');
+      background-color: palette('text');
+    }
+  }
+}
