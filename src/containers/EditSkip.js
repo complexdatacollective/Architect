@@ -11,7 +11,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
-import { Rules, AddRuleButton } from '../components';
+import { Rules, AddRuleButton, RuleDropDown } from '../components';
 
 /*
 {
@@ -32,6 +32,11 @@ const defaultLogic = {
 const defaultState = {
   skipLogic: { ...defaultLogic },
 };
+
+const operatorOptions = [
+  'OR',
+  'AND',
+];
 
 class EditSkip extends PureComponent {
   static propTypes = {
@@ -176,11 +181,12 @@ class EditSkip extends PureComponent {
         <div className="edit-skip">
           <div class="rule-filter">
             <div class="rule-filter__operator">
-              <select value={operator} onChange={this.onChangeOperator}>
-                <option value="">Select mode</option>
-                <option value="OR">OR</option>
-                <option value="AND">AND</option>
-              </select>
+              <RuleDropDown
+                options={operatorOptions}
+                value={operator}
+                placeholder="{rule}"
+                onChange={this.onChangeOperator}
+              />
             </div>
             <div class="rule-filter__rules">
               <Rules

@@ -6,6 +6,7 @@ export { default as TimelineStage } from './TimelineStage';
 export { default as TimelineOverview } from './TimelineOverview';
 export { default as Rules } from './Rules';
 export { default as AddRuleButton } from './AddRuleButton';
+export { default as RuleDropDown } from './RuleDropDown';
 export { default as EgoRule } from './EgoRule';
 export { default as EdgeRule } from './EdgeRule';
 export { default as AlterRule } from './AlterRule';
