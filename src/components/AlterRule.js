@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toPairs, has } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
-import SelectorDragHandle from './SelectorDragHandle';
-import SelectorDropDown from './SelectorDropDown';
-import SelectorInput from './SelectorInput';
+import RuleDragHandle from './RuleDragHandle';
+import RuleDropDown from './RuleDropDown';
+import RuleInput from './RuleInput';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -18,42 +18,42 @@ const operators = toPairs({
   LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
 });
 
-const AlterSelector = ({
+const AlterRule = ({
   id,
   nodeTypes,
   nodeAttributes,
   onChangeOption,
   options: { type, operator, attribute, value },
 }) => (
-  <div className="selector">
-    <SelectorDragHandle />
-    <div className="selector__options">
-      <div className="selector__option selector__option--target">
-        <SelectorDropDown
+  <div className="rule">
+    <RuleDragHandle />
+    <div className="rule__options">
+      <div className="rule__option rule__option--target">
+        <RuleDropDown
           options={nodeTypes}
           value={type}
           placeholder="{node}"
           onChange={event => onChangeOption(event, id, 'type')}
         />
       </div>
-      <div className="selector__option selector__option--attribute">
-        <SelectorDropDown
+      <div className="rule__option rule__option--attribute">
+        <RuleDropDown
           options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
           value={attribute}
           placeholder="{variable}"
           onChange={event => onChangeOption(event, id, 'attribute')}
         />
       </div>
-      <div className="selector__option selector__option--operator">
-        <SelectorDropDown
+      <div className="rule__option rule__option--operator">
+        <RuleDropDown
           options={operators}
           value={operator}
           placeholder="{rule}"
           onChange={event => onChangeOption(event, id, 'operator')}
         />
       </div>
-      <div className="selector__option selector__option--value">
-        <SelectorInput
+      <div className="rule__option rule__option--value">
+        <RuleInput
           value={value}
           onChange={event => onChangeOption(event, id, 'value')}
         />
@@ -62,7 +62,7 @@ const AlterSelector = ({
   </div>
 );
 
-AlterSelector.propTypes = {
+AlterRule.propTypes = {
   id: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -78,7 +78,7 @@ AlterSelector.propTypes = {
   nodeAttributes: PropTypes.object,
 };
 
-AlterSelector.defaultProps = {
+AlterRule.defaultProps = {
   options: {
     type: '',
     operator: '',
@@ -90,4 +90,4 @@ AlterSelector.defaultProps = {
   nodeAttributes: {},
 };
 
-export default SortableElement(AlterSelector);
+export default SortableElement(AlterRule);

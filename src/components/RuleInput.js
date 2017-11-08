@@ -4,14 +4,14 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-const SelectorInput = ({
+const RuleInput = ({
   value,
   onChange,
   className,
 }) => (
-  <label className={cx('selector-input', className)}>
+  <label className={cx('rule-input', className)}>
     <input
-      className="selector-input__text"
+      className="rule-input__text"
       type="text"
       value={value}
       onChange={onChange}
@@ -19,14 +19,14 @@ const SelectorInput = ({
   </label>
 );
 
-SelectorInput.propTypes = {
+RuleInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
 
-SelectorInput.defaultProps = {
+RuleInput.defaultProps = {
   className: null,
 };
 
-export default SelectorInput;
+export default RuleInput;

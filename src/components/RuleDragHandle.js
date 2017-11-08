@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { SortableHandle } from 'react-sortable-hoc';
 
-const SelectorDragHandle = ({ className, ...props }) => (
+const RuleDragHandle = ({ className, ...props }) => (
   <span
-    className={cx('selector-drag-handle', className)}
+    className={cx('rule-drag-handle', className)}
     {...props}
   >
     ::
   </span>
 );
 
-SelectorDragHandle.propTypes = {
+RuleDragHandle.propTypes = {
   className: PropTypes.string,
 };
 
-SelectorDragHandle.defaultProps = {
+RuleDragHandle.defaultProps = {
   className: null,
 };
 
-export default SortableHandle(SelectorDragHandle);
+export default SortableHandle(RuleDragHandle);

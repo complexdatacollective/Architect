@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
 
-class AddSelectorButton extends PureComponent {
+class AddRuleButton extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -32,19 +32,19 @@ class AddSelectorButton extends PureComponent {
         <div className="edit-skip__add-choices">
           <Button
             size="small"
-            onClick={() => { this.onHideAddChoices(); this.props.onAddSelector('alter'); }}
+            onClick={() => { this.onHideAddChoices(); this.props.onAddRule('alter'); }}
           >
           Alter
           </Button>
           <Button
             size="small"
-            onClick={() => { this.onHideAddChoices(); this.props.onAddSelector('ego'); }}
+            onClick={() => { this.onHideAddChoices(); this.props.onAddRule('ego'); }}
           >
           Ego
           </Button>
           <Button
             size="small"
-            onClick={() => { this.onHideAddChoices(); this.props.onAddSelector('edge'); }}
+            onClick={() => { this.onHideAddChoices(); this.props.onAddRule('edge'); }}
           >
           Edge
           </Button>
@@ -54,8 +54,8 @@ class AddSelectorButton extends PureComponent {
   }
 }
 
-AddSelectorButton.propTypes = {
-  onAddSelector: PropTypes.func.isRequired,
+AddRuleButton.propTypes = {
+  onAddRule: PropTypes.func.isRequired,
 };
 
-export default AddSelectorButton;
+export default AddRuleButton;

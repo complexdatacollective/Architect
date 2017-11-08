@@ -1,4 +1,4 @@
-.selector {
+.rule {
   @include flex-inline;
   color: palette('text-dark');
   width: 100%;
@@ -7,13 +7,13 @@
   padding: 10px;
   border-radius: 10px;
 
-  .selector-drag-handle {
+  .rule-drag-handle {
     @include flex-inline;
     @include flex-align(center, center);
     width: 50px
   }
 
-  .selector__options {
+  &__options {
     @include flex-inline;
     @include flex-align(flex-start, center);
     flex: 1 0 auto;
@@ -22,7 +22,7 @@
     height: 60px;
   }
 
-  .selector__option {
+  &__option {
     @include flex-inline;
     @include flex-align(flex-start, center);
     background: palette('intent-border');

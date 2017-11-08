@@ -3,12 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
-import SelectorDragHandle from './SelectorDragHandle';
+import RuleDragHandle from './RuleDragHandle';
 
-const EdgeSelector = (
+const EdgeRule = (
   ({ id, edgeTypes, onChangeOption, options: { type } }) => (
-    <div className="selector">
-      <SelectorDragHandle /> Edge
+    <div className="rule">
+      <RuleDragHandle /> Edge
       <label>
         Type:
         <select defaultValue={type} onChange={event => onChangeOption(event, id, 'type')} >
@@ -23,7 +23,7 @@ const EdgeSelector = (
   )
 );
 
-EdgeSelector.propTypes = {
+EdgeRule.propTypes = {
   id: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -35,7 +35,7 @@ EdgeSelector.propTypes = {
   edgeTypes: PropTypes.array,
 };
 
-EdgeSelector.defaultProps = {
+EdgeRule.defaultProps = {
   options: {
     type: null,
   },
@@ -43,4 +43,4 @@ EdgeSelector.defaultProps = {
   onChangeOption: () => {},
 };
 
-export default SortableElement(EdgeSelector);
+export default SortableElement(EdgeRule);

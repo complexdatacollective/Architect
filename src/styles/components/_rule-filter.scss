@@ -1,0 +1,18 @@
+.rule-filter {
+  background-color: palette('edge-alt-5');
+  border-radius: 10px;
+  padding: 20px;
+  @include flex-inline;
+  @include flex-align(center, center);
+
+  &__operator {
+    flex: 0 0 200px;
+  }
+
+  &__rules {
+    flex: 1 1 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}

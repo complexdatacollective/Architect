@@ -14,7 +14,7 @@ const getSpacer = (optionsWithLabels, placeholder, value) =>
     placeholder :  // return placeholder text
     find(optionsWithLabels, [0, value])[1];  // return matching label
 
-const SelectorDropDown = ({
+const RuleDropDown = ({
   options,
   value,
   onChange,
@@ -22,19 +22,19 @@ const SelectorDropDown = ({
   className,
 }) => {
   if (options.length === 0) {
-    return <label className={cx('selector-drop-down', className)} ></label>;
+    return <label className={cx('rule-drop-down', className)} ></label>;
   }
 
   const optionsWithLabels = withLabels(options);
   const spacer = getSpacer(optionsWithLabels, placeholder, value);
 
   return (
-    <label className={cx('selector-drop-down', className)} >
-      <div className="selector-drop-down__spacer">{ spacer }</div>
+    <label className={cx('rule-drop-down', className)} >
+      <div className="rule-drop-down__spacer">{ spacer }</div>
       <select
         value={value}
         onChange={onChange}
-        className="selector-drop-down__options"
+        className="rule-drop-down__options"
       >
         { placeholder && <option value="" disabled>{placeholder}</option> }
         {optionsWithLabels.map(
@@ -47,7 +47,7 @@ const SelectorDropDown = ({
   );
 };
 
-SelectorDropDown.propTypes = {
+RuleDropDown.propTypes = {
   options: PropTypes.array.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -55,9 +55,9 @@ SelectorDropDown.propTypes = {
   className: PropTypes.string,
 };
 
-SelectorDropDown.defaultProps = {
+RuleDropDown.defaultProps = {
   placeholder: '',
   className: null,
 };
 
-export default SelectorDropDown;
+export default RuleDropDown;

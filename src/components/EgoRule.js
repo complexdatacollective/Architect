@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toPairs } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
-import SelectorDragHandle from './SelectorDragHandle';
+import RuleDragHandle from './RuleDragHandle';
 
 const operators = {
   GREATER_THAN: 'Greater than',
@@ -16,14 +16,14 @@ const operators = {
   EXISTS: 'Exists',
 };
 
-const EgoSelector = ({
+const EgoRule = ({
   id,
   nodeAttributes,
   onChangeOption,
   options: { operator, attribute, value },
 }) => (
-  <div className="selector">
-    <SelectorDragHandle />
+  <div className="rule">
+    <RuleDragHandle />
     <label>
       Attribute:
       <select value={attribute} onChange={event => onChangeOption(event, id, 'attribute')}>
@@ -53,7 +53,7 @@ const EgoSelector = ({
   </div>
 );
 
-EgoSelector.propTypes = {
+EgoRule.propTypes = {
   id: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -67,7 +67,7 @@ EgoSelector.propTypes = {
   nodeAttributes: PropTypes.array,
 };
 
-EgoSelector.defaultProps = {
+EgoRule.defaultProps = {
   options: {
     operator: '',
     attribute: '',
@@ -77,4 +77,4 @@ EgoSelector.defaultProps = {
   nodeAttributes: [],
 };
 
-export default SortableElement(EgoSelector);
+export default SortableElement(EgoRule);

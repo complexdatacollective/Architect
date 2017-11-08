@@ -11,7 +11,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
-import { Selectors, AddSelectorButton } from '../components';
+import { Rules, AddRuleButton } from '../components';
 
 /*
 {
@@ -26,7 +26,7 @@ const uniqueId = () => _uniqueId(new Date().getTime());
 
 const defaultLogic = {
   operator: '',
-  selectors: [],
+  rules: [],
 };
 
 const defaultState = {
@@ -79,16 +79,17 @@ class EditSkip extends PureComponent {
   onChangeOption = (event, id, option) => {
     const value = event.target.value;
 
+    // TODO: won't just updating props do?
     this.setState(
       (state) => {
-        const selectors = state.skipLogic.selectors.map(
-          (selector) => {
-            if (id !== selector.id) { return selector; }
+        const rules = state.skipLogic.rules.map(
+          (rule) => {
+            if (id !== rule.id) { return rule; }
 
             return {
-              ...selector,
+              ...rule,
               options: {
-                ...selector.options,
+                ...rule.options,
                 [option]: value,
               },
             };
@@ -98,11 +99,10 @@ class EditSkip extends PureComponent {
         return {
           skipLogic: {
             ...state.skipLogic,
-            selectors,
+            rules,
           },
         };
       },
-      this.updateStage,
     );
   };
 
@@ -125,24 +125,25 @@ class EditSkip extends PureComponent {
         ...state,
         skipLogic: {
           ...state.skipLogic,
-          selectors: arrayMove(state.skipLogic.selectors, oldIndex, newIndex),
+          rules: arrayMove(state.skipLogic.rules, oldIndex, newIndex),
         },
       }),
     );
   };
 
-  onAddSelector = (type) => {
+  onAddRule = (type) => {
     this.setState(
       state => ({
         ...state,
         skipLogic: {
           ...state.skipLogic,
-          selectors: [...state.skipLogic.selectors, { select: type, id: uniqueId() }],
+          rules: [...state.skipLogic.rules, { type: type, id: uniqueId() }],
         },
       }),
     );
   };
 
+  // TODO: replace or update?
   loadSkipLogicFromProps(props) {
     this.setState(
       state => ({
@@ -156,14 +157,8 @@ class EditSkip extends PureComponent {
     return isEqual(this.state.skipLogic, this.props.skipLogic);
   }
 
-  renderSelector = selector => (
-    <div className="selector">
-      Select {selector.select}
-    </div>
-  );
-
   render() {
-    const { skipLogic: { operator, selectors } } = this.state;
+    const { skipLogic: { operator, rules } } = this.state;
 
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
@@ -179,20 +174,28 @@ class EditSkip extends PureComponent {
         buttons={buttons}
       >
         <div className="edit-skip">
-          <select value={operator} onChange={this.onChangeOperator}>
-            <option value="">Select mode</option>
-            <option value="OR">OR</option>
-            <option value="AND">AND</option>
-          </select>
+          <div class="rule-filter">
+            <div class="rule-filter__operator">
+              <select value={operator} onChange={this.onChangeOperator}>
+                <option value="">Select mode</option>
+                <option value="OR">OR</option>
+                <option value="AND">AND</option>
+              </select>
+            </div>
+            <div class="rule-filter__rules">
+              <Rules
+                rules={rules}
+                lockAxis="y"
+                useDragHandle
+                onChangeOption={this.onChangeOption}
+                onSortEnd={this.onSortEnd}
+              />
 
-          <Selectors
-            selectors={selectors}
-            lockAxis="y"
-            useDragHandle
-            onChangeOption={this.onChangeOption}
-            onSortEnd={this.onSortEnd}
-          />
-          <AddSelectorButton onAddSelector={this.onAddSelector} />
+              <div class="rule-filter__add">
+                <AddRuleButton onAddRule={this.onAddRule} />
+              </div>
+            </div>
+          </div>
         </div>
       </Card>
     );
