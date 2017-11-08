@@ -4,21 +4,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import RuleDragHandle from './RuleDragHandle';
+import RuleDropDown from './RuleDropDown';
 
 const EdgeRule = (
   ({ id, edgeTypes, onChangeOption, options: { type } }) => (
     <div className="rule">
-      <RuleDragHandle /> Edge
-      <label>
-        Type:
-        <select defaultValue={type} onChange={event => onChangeOption(event, id, 'type')} >
-          {edgeTypes.map(
-            (typeOption, index) => (
-              <option key={index} value={typeOption}>{typeOption}</option>
-            ),
-          )}
-        </select>
-      </label>
+      <RuleDragHandle />
+      <div className="rule__options">
+        <div className="rule__option rule__option--type">
+          <RuleDropDown
+            options={edgeTypes}
+            value={type}
+            placeholder="{type}"
+            onChange={event => onChangeOption(event, id, 'type')}
+          />
+        </div>
+      </div>
     </div>
   )
 );

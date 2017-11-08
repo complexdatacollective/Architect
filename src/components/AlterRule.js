@@ -28,7 +28,7 @@ const AlterRule = ({
   <div className="rule">
     <RuleDragHandle />
     <div className="rule__options">
-      <div className="rule__option rule__option--target">
+      <div className="rule__option rule__option--type">
         <RuleDropDown
           options={nodeTypes}
           value={type}

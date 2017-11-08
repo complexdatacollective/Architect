@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 import { toPairs } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import RuleDragHandle from './RuleDragHandle';
+import RuleDropDown from './RuleDropDown';
+import RuleInput from './RuleInput';
 
-const operators = {
+const operators = toPairs({
   GREATER_THAN: 'Greater than',
   GREATER_THAN_OR_EQUAL: 'Greater than or exactly',
   LESS_THAN: 'Less than',
@@ -14,7 +16,7 @@ const operators = {
   EXACTLY: 'Exactly',
   NOT: 'Not',
   EXISTS: 'Exists',
-};
+});
 
 const EgoRule = ({
   id,
@@ -24,32 +26,30 @@ const EgoRule = ({
 }) => (
   <div className="rule">
     <RuleDragHandle />
-    <label>
-      Attribute:
-      <select value={attribute} onChange={event => onChangeOption(event, id, 'attribute')}>
-        <option value="">Please select</option>
-        {nodeAttributes.map(
-          (attributeOption, index) => (
-            <option key={index} value={attributeOption}>{attributeOption}</option>
-          ),
-        )}
-      </select>
-    </label>
-    <label>
-      Operator:
-      <select value={operator} onChange={event => onChangeOption(event, id, 'operator')}>
-        <option value="">Please select</option>
-        {toPairs(operators).map(
-          ([operatorOption, operatorLabel], index) => (
-            <option key={index} value={operatorOption}>{operatorLabel}</option>
-          ),
-        )}
-      </select>
-    </label>
-    <label>
-      Value:
-      <input type="text" value={value} onChange={event => onChangeOption(event, id, 'value')} />
-    </label>
+    <div className="rule__options">
+      <div className="rule__option rule__option--attribute">
+        <RuleDropDown
+          options={nodeAttributes}
+          value={attribute}
+          placeholder="{variable}"
+          onChange={event => onChangeOption(event, id, 'attribute')}
+        />
+      </div>
+      <div className="rule__option rule__option--operator">
+        <RuleDropDown
+          options={operators}
+          value={operator}
+          placeholder="{rule}"
+          onChange={event => onChangeOption(event, id, 'operator')}
+        />
+      </div>
+      <div className="rule__option rule__option--value">
+        <RuleInput
+          value={value}
+          onChange={event => onChangeOption(event, id, 'value')}
+        />
+      </div>
+    </div>
   </div>
 );
 
