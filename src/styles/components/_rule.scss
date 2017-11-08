@@ -1,22 +1,32 @@
 .rule {
   @include flex-inline;
+  @include flex-align(flex-start, center);
   color: palette('text-dark');
-  width: 100%;
+  // width: 100%;
   margin-top: 10px;
-  background: palette('intent-border');
   padding: 10px;
-  border-radius: 10px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 
   .rule-drag-handle {
     @include flex-inline;
     @include flex-align(center, center);
-    width: 50px
+    background-color: palette('edge-alt-1');
+    color: palette('text');
+    border: 0;
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5em;
+    font-weight: bold;
   }
 
   &__options {
     @include flex-inline;
     @include flex-align(flex-start, center);
-    flex: 1 0 auto;
+    margin-left: 20px;
     padding: 0;
     border-radius: 20px;
     height: 60px;

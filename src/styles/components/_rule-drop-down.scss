@@ -3,11 +3,11 @@
   margin: 0;
   overflow: hidden;
   position: relative;
+  font-size: 1.2rem;
+  line-height: 1.2em;
 
   &__spacer {
-    font-size: 1.2rem;
     visibility: hidden;
-    height: 1.2rem;
   }
 
   &__options {
@@ -17,10 +17,8 @@
     transform: translateY(-50%);
     left: 0px;
     color: palette('text');
-    font-size: 1.2rem;
     background-color: transparent;
     border: 0;
-    line-height: 1.2rem;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

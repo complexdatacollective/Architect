@@ -1,0 +1,68 @@
+
+  .rule-add-button {
+    width: 100%;
+    position: relative;
+    text-align: center;
+
+    &__open {
+      transition: all ease 200ms;
+      background-color: palette('edge-alt-1');
+      color: palette('text');
+      border: 0;
+      border-radius: 60px;
+      width: 60px;
+      height: 60px;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    &__choices {
+      transition: all ease 200ms;
+      opacity: 0;
+      transform: translateY(-50%) scale(0);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    &__choice {
+      border: 0;
+      cursor: pointer;
+      padding: 0 40px;
+      margin-left: 10px;
+      background-color: palette('edge-alt-2');
+      color: palette('text');
+      border-radius: 40px;
+      height: 40px;
+      font-size: 1.5em;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &--alter {
+        background-color: palette('edge-alt-1');
+      }
+
+      &--ego {
+        background-color: palette('edge-alt-3');
+      }
+
+      &--edge {
+        background-color: palette('edge-alt-4');
+      }
+    }
+
+    &--is-open {
+      .rule-add-button__open {
+        opacity: 0;
+        transform: scale(0);
+      }
+      .rule-add-button__choices {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+      }
+    }
+  }

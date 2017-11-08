@@ -11,7 +11,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
-import { Rules, AddRuleButton, RuleDropDown } from '../components';
+import { Rules, RuleAddButton, RuleDropDown } from '../components';
 
 /*
 {
@@ -198,7 +198,7 @@ class EditSkip extends PureComponent {
               />
 
               <div class="rule-filter__add">
-                <AddRuleButton onAddRule={this.onAddRule} />
+                <RuleAddButton onAddRule={this.onAddRule} />
               </div>
             </div>
           </div>
