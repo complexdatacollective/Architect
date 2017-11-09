@@ -6,7 +6,7 @@
 
     &__open {
       transition: all ease 200ms;
-      background-color: palette('rule-control');
+      background-color: palette('primary');
       color: palette('text');
       border: 0;
       border-radius: 60px;
@@ -43,15 +43,15 @@
       }
 
       &--alter {
-        background-color: palette('edge-alt-1');
+        background-color: palette('alter-rule');
       }
 
       &--ego {
-        background-color: palette('edge-alt-3');
+        background-color: palette('ego-rule');
       }
 
       &--edge {
-        background-color: palette('edge-alt-4');
+        background-color: palette('edge-rule');
       }
     }
 
