@@ -1,21 +1,26 @@
+/* eslint-disable */
+
 import React from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
+import { TransitionGroup } from 'react-transition-group';
 import Rule from './Rule';
+import AppearTransition from './AppearTransition';
 
 const Rules = SortableContainer(
   ({ rules, onUpdateRule, onDeleteRule }) => (
-    <div className="rules">
+    <TransitionGroup className="rules">
       {rules.map((rule, index) => (
-        <Rule
-          {...rule}
-          key={`rule-${rule.id}`}
-          index={index}
-          sortIndex={index}
-          onUpdateRule={onUpdateRule}
-          onDeleteRule={onDeleteRule}
-        />
+        <AppearTransition key={`rule-${rule.id}`}>
+          <Rule
+            {...rule}
+            index={index}
+            sortIndex={index}
+            onUpdateRule={onUpdateRule}
+            onDeleteRule={onDeleteRule}
+          />
+        </AppearTransition>
       ))}
-    </div>
+    </TransitionGroup>
   ),
 );
 
