@@ -21,7 +21,7 @@ const operators = toPairs({
 const EgoRule = ({
   id,
   nodeAttributes,
-  onChangeOption,
+  onUpdateRule,
   onDeleteRule,
   options: { operator, attribute, value },
 }) => (
@@ -33,7 +33,7 @@ const EgoRule = ({
           options={nodeAttributes}
           value={attribute}
           placeholder="{variable}"
-          onChange={event => onChangeOption(event, id, 'attribute')}
+          onChange={event => onUpdateRule(event, id, 'attribute')}
         />
       </div>
       <div className="rule__option rule__option--operator">
@@ -41,13 +41,13 @@ const EgoRule = ({
           options={operators}
           value={operator}
           placeholder="{rule}"
-          onChange={event => onChangeOption(event, id, 'operator')}
+          onChange={event => onUpdateRule(event, id, 'operator')}
         />
       </div>
       <div className="rule__option rule__option--value">
         <RuleInput
           value={value}
-          onChange={event => onChangeOption(event, id, 'value')}
+          onChange={event => onUpdateRule(event, id, 'value')}
         />
       </div>
     </div>
@@ -60,7 +60,7 @@ EgoRule.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
-  onChangeOption: PropTypes.func,
+  onUpdateRule: PropTypes.func,
   onDeleteRule: PropTypes.func,
   options: PropTypes.shape({
     operator: PropTypes.string,
@@ -76,7 +76,7 @@ EgoRule.defaultProps = {
     attribute: '',
     value: '',
   },
-  onChangeOption: () => {},
+  onUpdateRule: () => {},
   onDeleteRule: () => {},
   nodeAttributes: [],
 };

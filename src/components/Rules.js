@@ -3,7 +3,7 @@ import { SortableContainer } from 'react-sortable-hoc';
 import Rule from './Rule';
 
 const Rules = SortableContainer(
-  ({ rules, onChangeOption, onDeleteRule }) => (
+  ({ rules, onUpdateRule, onDeleteRule }) => (
     <div className="rules">
       {rules.map((rule, index) => (
         <Rule
@@ -11,7 +11,7 @@ const Rules = SortableContainer(
           key={`rule-${rule.id}`}
           index={index}
           sortIndex={index}
-          onChangeOption={onChangeOption}
+          onUpdateRule={onUpdateRule}
           onDeleteRule={onDeleteRule}
         />
       ))}

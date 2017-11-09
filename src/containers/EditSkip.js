@@ -67,6 +67,21 @@ class EditSkip extends PureComponent {
     this.loadSkipLogicFromProps(props);
   }
 
+  onSave = () => {
+    const stageId = this.props.stageId;
+
+    this.props.updateStage(
+      stageId,
+      {
+        skipLogic: this.state.skipLogic,
+      },
+    );
+
+    this.props.onComplete();
+  };
+
+
+
   onChangeOperator = (event) => {
     const value = event.target.value;
 
@@ -81,10 +96,9 @@ class EditSkip extends PureComponent {
     )
   }
 
-  onChangeOption = (event, id, option) => {
+  onUpdateRule = (event, id, option) => {
     const value = event.target.value;
 
-    // TODO: won't just updating props do?
     this.setState(
       (state) => {
         const rules = state.skipLogic.rules.map(
@@ -111,20 +125,7 @@ class EditSkip extends PureComponent {
     );
   };
 
-  onSave = () => {
-    const stageId = this.props.stageId;
-
-    this.props.updateStage(
-      stageId,
-      {
-        skipLogic: this.state.skipLogic,
-      },
-    );
-
-    this.props.onComplete();
-  };
-
-  onSortEnd = ({ oldIndex, newIndex }) => {
+  onSortRule = ({ oldIndex, newIndex }) => {
     this.setState(
       state => ({
         ...state,
@@ -211,9 +212,9 @@ class EditSkip extends PureComponent {
                 rules={rules}
                 lockAxis="y"
                 useDragHandle
-                onChangeOption={this.onChangeOption}
+                onUpdateRule={this.onUpdateRule}
                 onDeleteRule={this.onDeleteRule}
-                onSortEnd={this.onSortEnd}
+                onSortEnd={this.onSortRule}
               />
 
               <div className="rule-filter__add">

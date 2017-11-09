@@ -10,7 +10,7 @@ const EdgeRule = (
   ({
     id,
     edgeTypes,
-    onChangeOption,
+    onUpdateRule,
     onDeleteRule,
     options: { type },
   }) => (
@@ -22,7 +22,7 @@ const EdgeRule = (
             options={edgeTypes}
             value={type}
             placeholder="{type}"
-            onChange={event => onChangeOption(event, id, 'type')}
+            onChange={event => onUpdateRule(event, id, 'type')}
           />
         </div>
       </div>
@@ -36,7 +36,7 @@ EdgeRule.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
-  onChangeOption: PropTypes.func,
+  onUpdateRule: PropTypes.func,
   onDeleteRule: PropTypes.func,
   options: PropTypes.shape({
     type: PropTypes.string,
@@ -49,7 +49,7 @@ EdgeRule.defaultProps = {
     type: null,
   },
   edgeTypes: [],
-  onChangeOption: () => {},
+  onUpdateRule: () => {},
   onDeleteRule: () => {},
 };
 

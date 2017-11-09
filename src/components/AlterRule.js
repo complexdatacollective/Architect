@@ -22,7 +22,7 @@ const AlterRule = ({
   id,
   nodeTypes,
   nodeAttributes,
-  onChangeOption,
+  onUpdateRule,
   onDeleteRule,
   options: { type, operator, attribute, value },
 }) => (
@@ -34,7 +34,7 @@ const AlterRule = ({
           options={nodeTypes}
           value={type}
           placeholder="{node}"
-          onChange={event => onChangeOption(event, id, 'type')}
+          onChange={event => onUpdateRule(event, id, 'type')}
         />
       </div>
       <div className="rule__option rule__option--attribute">
@@ -42,7 +42,7 @@ const AlterRule = ({
           options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
           value={attribute}
           placeholder="{variable}"
-          onChange={event => onChangeOption(event, id, 'attribute')}
+          onChange={event => onUpdateRule(event, id, 'attribute')}
         />
       </div>
       <div className="rule__option rule__option--operator">
@@ -50,13 +50,13 @@ const AlterRule = ({
           options={operators}
           value={operator}
           placeholder="{rule}"
-          onChange={event => onChangeOption(event, id, 'operator')}
+          onChange={event => onUpdateRule(event, id, 'operator')}
         />
       </div>
       <div className="rule__option rule__option--value">
         <RuleInput
           value={value}
-          onChange={event => onChangeOption(event, id, 'value')}
+          onChange={event => onUpdateRule(event, id, 'value')}
         />
       </div>
     </div>
@@ -69,7 +69,7 @@ AlterRule.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
-  onChangeOption: PropTypes.func,
+  onUpdateRule: PropTypes.func,
   onDeleteRule: PropTypes.func,
   options: PropTypes.shape({
     type: PropTypes.string,
@@ -88,7 +88,7 @@ AlterRule.defaultProps = {
     attribute: '',
     value: '',
   },
-  onChangeOption: () => {},
+  onUpdateRule: () => {},
   onDeleteRule: () => {},
   nodeTypes: [],
   nodeAttributes: {},
