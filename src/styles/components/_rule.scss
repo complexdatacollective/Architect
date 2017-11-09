@@ -76,13 +76,6 @@
       background: palette('rule-type');
     }
 
-    &--attribute {
-      background: palette('rule-attribute');
-
-      &:empty {
-        display: none;
-      }
-    }
 
     &--type + &--attribute {
       padding-left: 40px;
@@ -100,6 +93,24 @@
         border-top: 30px solid palette('rule-attribute');
         border-bottom: 30px solid palette('rule-attribute');
         border-left: 20px solid palette('rule-type');
+      }
+
+      &:empty {
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    &--attribute {
+      background: palette('rule-attribute');
+      max-width: 500px;
+      transition: max-width $animation-default-easing $animation-standard-duration,
+        padding $animation-default-easing $animation-standard-duration;
+
+      &:empty {
+        max-width: 0;
+        padding: 0;
       }
     }
 
