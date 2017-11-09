@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-  grid-auto-rows: minmax(100px, auto);
 
   &__section {
     grid-column: 1/3;

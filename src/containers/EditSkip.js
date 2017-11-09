@@ -91,6 +91,9 @@ class EditSkip extends PureComponent {
       >
         <div className="edit-skip">
           <div className="edit-skip__section">
+            Skip this stage if:
+          </div>
+          <div className="edit-skip__section">
             {this.props.stageId &&
               <LogicEditor
                 key={`logic_${this.props.stageId}`}
