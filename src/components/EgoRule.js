@@ -25,7 +25,7 @@ const EgoRule = ({
   onDeleteRule,
   options: { operator, attribute, value },
 }) => (
-  <div className="rule">
+  <div className="rule rule--ego">
     <RuleDragHandle />
     <div className="rule__options">
       <div className="rule__option rule__option--attribute">

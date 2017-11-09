@@ -76,7 +76,6 @@
       background: palette('rule-type');
     }
 
-
     &--type + &--attribute {
       padding-left: 40px;
 
@@ -120,6 +119,24 @@
 
     &--value {
       background: palette('rule-value');
+    }
+  }
+
+  &--alter {
+    .rule__option--type {
+      background: palette('alter-rule');
+    }
+  }
+
+  &--ego {
+    .rule__option--attribute {
+      background: palette('ego-rule');
+    }
+  }
+
+  &--edge {
+    .rule__option--type {
+      background: palette('edge-rule');
     }
   }
 }

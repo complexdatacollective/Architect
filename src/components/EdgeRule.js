@@ -14,7 +14,7 @@ const EdgeRule = (
     onDeleteRule,
     options: { type },
   }) => (
-    <div className="rule">
+    <div className="rule rule--edge">
       <RuleDragHandle />
       <div className="rule__options">
         <div className="rule__option rule__option--type">

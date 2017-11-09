@@ -26,7 +26,7 @@ const AlterRule = ({
   onDeleteRule,
   options: { type, operator, attribute, value },
 }) => (
-  <div className="rule">
+  <div className="rule rule--alter">
     <RuleDragHandle />
     <div className="rule__options">
       <div className="rule__option rule__option--type">
