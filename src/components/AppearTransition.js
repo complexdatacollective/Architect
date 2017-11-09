@@ -23,7 +23,6 @@ const disappear = {
 const AppearTransition = ({ children, timeout, ...props }) => (
   <Transition
     timeout={animation.duration.fast}
-    appear
     onEnter={
       (el) => {
         anime({

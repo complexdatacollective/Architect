@@ -11,14 +11,14 @@
   display: flex;
   flex-direction: column;
 
-  &__title-bar,
   &__control-bar,
   &__main {
     @include layout-container;
   }
 
   &__title-bar {
-    flex: 0 0 100px;
+    height: 100px;
+    @include flex-inline;
     @include flex-align(flex-start, center);
   }
 
@@ -33,6 +33,7 @@
     flex: 1 1 auto;
     overflow-x: hidden;
     overflow-y: scroll;
+    padding-bottom: 100px;
   }
 
   &--intent {
