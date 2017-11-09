@@ -51,13 +51,24 @@
 
     &--type {
       background: palette('rule-type');
-      // padding-right: 30px;
+    }
 
-      &::after {
+    &--attribute {
+      background: palette('rule-attribute');
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    &--type + &--attribute {
+      padding-left: 40px;
+
+      &::before {
         display: block;
         content: '';
         position: absolute;
-        right: 0;
+        left: -10px;
         transform: translateX(10px);
         z-index: 2;
         top: 0;
@@ -67,11 +78,6 @@
         border-bottom: 30px solid palette('rule-attribute');
         border-left: 20px solid palette('rule-type');
       }
-    }
-
-    &--attribute {
-      background: palette('rule-attribute');
-      // padding-left: 15px;
     }
 
     &--operator {

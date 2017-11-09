@@ -21,18 +21,18 @@
     flex: 1 1 auto;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.15);
   }
 
   &__add {
     margin-top: 20px;
   }
 
-  &--and {
-    background-color: palette('rules--and');
-  }
+  // &--and {
+  //   background-color: palette('rules--and');
+  // }
 
-  &--or {
-    background-color: palette('rules--or');
-  }
+  // &--or {
+  //   background-color: palette('rules--or');
+  // }
 }

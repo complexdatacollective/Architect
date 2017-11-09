@@ -12,20 +12,15 @@
 
 // rule
 @include palette-set('rule-control', color('sea-green'));
-@include palette-set('rule-type', color('sea-serpent'));
 @include palette-set('rule-type', color('neon-coral'));
-// @include palette-set('rule-type', color('neon-coral'));
 @include palette-set('rule-attribute', color('neon-coral--dark'));
-// @include palette-set('rule-attribute', color('sea-green'));
 @include palette-set('rule-operator', color('navy-taupe'));
-// @include palette-set('rule-operator', color('rich-black'));
-// @include palette-set('rule-operator', color('charcoal'));
 @include palette-set('rule-value', color('barbie-pink'));
 
 // logic
 @include palette-set('rules', color('charcoal'));
-@include palette-set('rules--and', color('cerulean-blue'));
-@include palette-set('rules--or', color('neon-carrot'))
+// @include palette-set('rules--and', color('slate-blue'));
+// @include palette-set('rules--or', color('neon-carrot'));
 
 // alter/ego/edgo
 @include palette-set('alter-rule', color('neon-coral'));

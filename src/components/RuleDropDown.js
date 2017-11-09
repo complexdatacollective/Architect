@@ -21,9 +21,8 @@ const RuleDropDown = ({
   placeholder,
   className,
 }) => {
-  if (options.length === 0) {
-    return <label className={cx('rule-drop-down', className)} ></label>;
-  }
+  console.log(options, options.length === 0);
+  if (options.length === 0) { return null; }
 
   const optionsWithLabels = withLabels(options);
   const spacer = getSpacer(optionsWithLabels, placeholder, value);
@@ -33,10 +32,11 @@ const RuleDropDown = ({
       <div className="rule-drop-down__spacer">{ spacer }</div>
       <select
         value={value}
+        defaultValue={value}
         onChange={onChange}
         className="rule-drop-down__options"
       >
-        { placeholder && <option value="" disabled>{placeholder}</option> }
+        { placeholder && <option value="">{placeholder}</option> }
         {optionsWithLabels.map(
           ([optionValue, optionLabel], index) => {
             return <option key={index} value={optionValue}>{optionLabel}</option>;

@@ -2,11 +2,11 @@
   .rule-add-button {
     width: 100%;
     position: relative;
-    text-align: center;
+    text-align: left;
 
     &__open {
       transition: all ease 200ms;
-      background-color: palette('edge-alt-1');
+      background-color: palette('rule-control');
       color: palette('text');
       border: 0;
       border-radius: 60px;
@@ -19,12 +19,12 @@
     &__choices {
       transition: all ease 200ms;
       opacity: 0;
-      transform: translateY(-50%) scale(0);
+      transform-origin: 0 50%;
+      transform: translateY(-50%) scale(0.5);
       position: absolute;
       top: 50%;
       left: 0;
       width: 100%;
-      text-align: center;
     }
 
     &__choice {
@@ -36,7 +36,7 @@
       color: palette('text');
       border-radius: 40px;
       height: 40px;
-      font-size: 1.5em;
+      text-transform: uppercase;
 
       &:first-child {
         margin-left: 0;

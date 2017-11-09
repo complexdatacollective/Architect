@@ -7,9 +7,7 @@ const RuleDragHandle = ({ className, ...props }) => (
   <span
     className={cx('rule-drag-handle', className)}
     {...props}
-  >
-    ::
-  </span>
+  >&#8597;</span>
 );
 
 RuleDragHandle.propTypes = {
