@@ -16,6 +16,7 @@
 @include palette-set('rule-attribute', color('neon-coral--dark'));
 @include palette-set('rule-operator', color('navy-taupe'));
 @include palette-set('rule-value', color('barbie-pink'));
+@include palette-set('rule-delete', color('tomato'));
 
 // logic
 @include palette-set('rules', color('charcoal'));

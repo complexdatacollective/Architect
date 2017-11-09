@@ -22,6 +22,7 @@ const EgoRule = ({
   id,
   nodeAttributes,
   onChangeOption,
+  onDeleteRule,
   options: { operator, attribute, value },
 }) => (
   <div className="rule">
@@ -50,6 +51,7 @@ const EgoRule = ({
         />
       </div>
     </div>
+    <div className="rule__delete" onClick={() => onDeleteRule(id)} />
   </div>
 );
 
@@ -59,6 +61,7 @@ EgoRule.propTypes = {
     PropTypes.number,
   ]).isRequired,
   onChangeOption: PropTypes.func,
+  onDeleteRule: PropTypes.func,
   options: PropTypes.shape({
     operator: PropTypes.string,
     attribute: PropTypes.string,
@@ -74,6 +77,7 @@ EgoRule.defaultProps = {
     value: '',
   },
   onChangeOption: () => {},
+  onDeleteRule: () => {},
   nodeAttributes: [],
 };
 

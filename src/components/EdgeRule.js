@@ -7,7 +7,13 @@ import RuleDragHandle from './RuleDragHandle';
 import RuleDropDown from './RuleDropDown';
 
 const EdgeRule = (
-  ({ id, edgeTypes, onChangeOption, options: { type } }) => (
+  ({
+    id,
+    edgeTypes,
+    onChangeOption,
+    onDeleteRule,
+    options: { type },
+  }) => (
     <div className="rule">
       <RuleDragHandle />
       <div className="rule__options">
@@ -20,6 +26,7 @@ const EdgeRule = (
           />
         </div>
       </div>
+      <div className="rule__delete" onClick={() => onDeleteRule(id)} />
     </div>
   )
 );
@@ -30,6 +37,7 @@ EdgeRule.propTypes = {
     PropTypes.number,
   ]).isRequired,
   onChangeOption: PropTypes.func,
+  onDeleteRule: PropTypes.func,
   options: PropTypes.shape({
     type: PropTypes.string,
   }),
@@ -42,6 +50,7 @@ EdgeRule.defaultProps = {
   },
   edgeTypes: [],
   onChangeOption: () => {},
+  onDeleteRule: () => {},
 };
 
 export default SortableElement(EdgeRule);

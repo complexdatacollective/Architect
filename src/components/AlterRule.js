@@ -23,6 +23,7 @@ const AlterRule = ({
   nodeTypes,
   nodeAttributes,
   onChangeOption,
+  onDeleteRule,
   options: { type, operator, attribute, value },
 }) => (
   <div className="rule">
@@ -59,6 +60,7 @@ const AlterRule = ({
         />
       </div>
     </div>
+    <div className="rule__delete" onClick={() => onDeleteRule(id)} />
   </div>
 );
 
@@ -68,6 +70,7 @@ AlterRule.propTypes = {
     PropTypes.number,
   ]).isRequired,
   onChangeOption: PropTypes.func,
+  onDeleteRule: PropTypes.func,
   options: PropTypes.shape({
     type: PropTypes.string,
     operator: PropTypes.string,
@@ -86,6 +89,7 @@ AlterRule.defaultProps = {
     value: '',
   },
   onChangeOption: () => {},
+  onDeleteRule: () => {},
   nodeTypes: [],
   nodeAttributes: {},
 };

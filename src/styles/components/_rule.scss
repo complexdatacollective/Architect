@@ -19,6 +19,25 @@
     cursor: pointer;
   }
 
+  &__delete {
+    @include flex-inline;
+    @include flex-align(center, center);
+    background-color: palette('rule-delete');
+    color: palette('text');
+    border: 0;
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 20px;
+    cursor: pointer;
+
+    &:after {
+      content: 'x';
+    }
+  }
+
   &__options {
     @include flex-inline;
     @include flex-align(flex-start, center);

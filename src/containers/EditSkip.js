@@ -148,6 +148,18 @@ class EditSkip extends PureComponent {
     );
   };
 
+  onDeleteRule = (id) => {
+    this.setState(
+      state => ({
+        ...state,
+        skipLogic: {
+          ...state.skipLogic,
+          rules: state.skipLogic.rules.filter(rule => rule.id !== id),
+        },
+      }),
+    );
+  };
+
   // TODO: replace or update?
   loadSkipLogicFromProps(props) {
     this.setState(
@@ -200,6 +212,7 @@ class EditSkip extends PureComponent {
                 lockAxis="y"
                 useDragHandle
                 onChangeOption={this.onChangeOption}
+                onDeleteRule={this.onDeleteRule}
                 onSortEnd={this.onSortEnd}
               />
 
