@@ -21,7 +21,6 @@ const RuleDropDown = ({
   placeholder,
   className,
 }) => {
-  console.log(options, options.length === 0);
   if (options.length === 0) { return null; }
 
   const optionsWithLabels = withLabels(options);

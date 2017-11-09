@@ -1,28 +1,13 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
-import { has, uniqueId as _uniqueId, isEqual } from 'lodash';
-import { arrayMove } from 'react-sortable-hoc';
+import { has, isEqual } from 'lodash';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
-import { Rules, RuleAddButton, RuleDropDown } from '../components';
-
-/*
-{
-  operator: 'or',
-  selectors: [
-    { select: 'edge', options: { type, attribute, operator, value } },
-  ]
-}
-*/
-
-const uniqueId = () => _uniqueId(new Date().getTime());
+import LogicEditor from '../containers/LogicEditor';
 
 const defaultLogic = {
   operator: '',
@@ -33,17 +18,13 @@ const defaultState = {
   skipLogic: { ...defaultLogic },
 };
 
-const operatorOptions = [
-  'OR',
-  'AND',
-];
-
 class EditSkip extends PureComponent {
   static propTypes = {
     onCancel: PropTypes.func.isRequired,
     updateStage: PropTypes.func.isRequired,
     stageId: PropTypes.number,
     onComplete: PropTypes.func,
+    skipLogic: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -60,11 +41,11 @@ class EditSkip extends PureComponent {
   }
 
   componentDidMount() {
-    this.loadSkipLogicFromProps(this.props);
+    this.loadLogicFromProps(this.props);
   }
 
   componentWillReceiveProps(props) {
-    this.loadSkipLogicFromProps(props);
+    this.loadLogicFromProps(props);
   }
 
   onSave = () => {
@@ -80,116 +61,27 @@ class EditSkip extends PureComponent {
     this.props.onComplete();
   };
 
-
-
-  onChangeOperator = (event) => {
-    const value = event.target.value;
-
-    this.setState(
-      (state) => ({
-        ...this.state,
-        skipLogic: {
-          ...this.state.skipLogic,
-          operator: value,
-        }
-      }),
-    )
-  }
-
-  onUpdateRule = (event, id, option) => {
-    const value = event.target.value;
-
-    this.setState(
-      (state) => {
-        const rules = state.skipLogic.rules.map(
-          (rule) => {
-            if (id !== rule.id) { return rule; }
-
-            return {
-              ...rule,
-              options: {
-                ...rule.options,
-                [option]: value,
-              },
-            };
-          },
-        );
-
-        return {
-          skipLogic: {
-            ...state.skipLogic,
-            rules,
-          },
-        };
-      },
-    );
+  onLogicChange = (logic) => {
+    this.setState({
+      skipLogic: logic,
+    }, () => { console.log(this.state); });
   };
-
-  onSortRule = ({ oldIndex, newIndex }) => {
-    this.setState(
-      state => ({
-        ...state,
-        skipLogic: {
-          ...state.skipLogic,
-          rules: arrayMove(state.skipLogic.rules, oldIndex, newIndex),
-        },
-      }),
-    );
-  };
-
-  onAddRule = (type) => {
-    this.setState(
-      state => ({
-        ...state,
-        skipLogic: {
-          ...state.skipLogic,
-          rules: [...state.skipLogic.rules, { type: type, id: uniqueId() }],
-        },
-      }),
-    );
-  };
-
-  onDeleteRule = (id) => {
-    this.setState(
-      state => ({
-        ...state,
-        skipLogic: {
-          ...state.skipLogic,
-          rules: state.skipLogic.rules.filter(rule => rule.id !== id),
-        },
-      }),
-    );
-  };
-
-  // TODO: replace or update?
-  loadSkipLogicFromProps(props) {
-    this.setState(
-      state => ({
-        ...state,
-        skipLogic: props.skipLogic,
-      }),
-    );
-  }
 
   hasChanges() {
     return isEqual(this.state.skipLogic, this.props.skipLogic);
   }
 
-  render() {
-    const { skipLogic: { operator, rules } } = this.state;
+  loadLogicFromProps(props) {
+    this.setState({
+      skipLogic: props.skipLogic,
+    });
+  }
 
+  render() {
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
       <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
     ];
-
-    const ruleFilterClasses = cx(
-      'rule-filter',
-      {
-        'rule-filter--and': operator === 'AND',
-        'rule-filter--or': operator === 'OR',
-      }
-    );
 
     return (
       <Card
@@ -198,30 +90,7 @@ class EditSkip extends PureComponent {
         buttons={buttons}
       >
         <div className="edit-skip">
-          <div className={ruleFilterClasses}>
-            <div className="rule-filter__operator">
-              <RuleDropDown
-                options={operatorOptions}
-                value={operator}
-                placeholder="{rule}"
-                onChange={this.onChangeOperator}
-              />
-            </div>
-            <div className="rule-filter__rules">
-              <Rules
-                rules={rules}
-                lockAxis="y"
-                useDragHandle
-                onUpdateRule={this.onUpdateRule}
-                onDeleteRule={this.onDeleteRule}
-                onSortEnd={this.onSortRule}
-              />
-
-              <div className="rule-filter__add">
-                <RuleAddButton onAddRule={this.onAddRule} />
-              </div>
-            </div>
-          </div>
+          <LogicEditor logic={this.state.skipLogic} onChange={this.onLogicChange} />
         </div>
       </Card>
     );
