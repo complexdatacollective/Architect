@@ -64,7 +64,7 @@ class EditSkip extends PureComponent {
   onLogicChange = (logic) => {
     this.setState({
       skipLogic: logic,
-    }, () => { console.log(this.state); });
+    });
   };
 
   hasChanges() {
@@ -90,7 +90,13 @@ class EditSkip extends PureComponent {
         buttons={buttons}
       >
         <div className="edit-skip">
-          <LogicEditor logic={this.state.skipLogic} onChange={this.onLogicChange} />
+          {this.props.stageId &&
+            <LogicEditor
+              key={`logic_${this.props.stageId}`}
+              logic={this.props.skipLogic}
+              onChange={this.onLogicChange}
+            />
+          }
         </div>
       </Card>
     );

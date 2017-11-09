@@ -19,7 +19,7 @@ const operatorOptions = [
 
 class LogicEditor extends PureComponent {
   static propTypes = {
-    // logic: PropTypes.func.isRequired,
+    logic: PropTypes.func.isRequired,
     onChange: PropTypes.func,
   };
 
@@ -36,11 +36,7 @@ class LogicEditor extends PureComponent {
   }
 
   componentDidMount() {
-    this.loadLogicFromProps(this.props);
-  }
-
-  componentWillReceiveProps(props) {
-    this.loadLogicFromProps(props);
+    this.loadLogicFromProps();
   }
 
   onChange = () => {
@@ -113,10 +109,9 @@ class LogicEditor extends PureComponent {
     );
   };
 
-  // TODO: replace or update?
-  loadLogicFromProps(props) {
+  loadLogicFromProps() {
     this.setState({
-      ...props.logic,
+      ...this.props.logic,
     });
   }
 
