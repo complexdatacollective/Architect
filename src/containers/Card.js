@@ -24,11 +24,13 @@ class Card extends PureComponent {
 
     return (
       <div className={classes}>
-        <div className="card__main">
+        <div className="card__container">
           <div className="card__title-bar">
             <h1 className="card__heading">{ this.props.title }</h1>
           </div>
-          { this.props.children }
+          <div className="card__main">
+            { this.props.children }
+          </div>
         </div>
         { this.anyButtons() &&
           <div className="card__control-bar">
