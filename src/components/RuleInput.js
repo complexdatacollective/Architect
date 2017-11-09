@@ -21,13 +21,14 @@ const RuleInput = ({
 );
 
 RuleInput.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
 
 RuleInput.defaultProps = {
   className: null,
+  value: '',
 };
 
 export default RuleInput;

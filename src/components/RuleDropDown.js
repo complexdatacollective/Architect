@@ -16,15 +16,16 @@ const getSpacer = (optionsWithLabels, placeholder, value) =>
 
 const RuleDropDown = ({
   options,
-  value,
   onChange,
   placeholder,
   className,
+  ...props,
 }) => {
   if (options.length === 0) { return null; }
+  const value = !!props.value ? value : ''; // Why is this necessary?
 
   const optionsWithLabels = withLabels(options);
-  const spacer = getSpacer(optionsWithLabels, placeholder, value);
+  const spacer = getSpacer(optionsWithLabels, placeholder, props.value);
 
   return (
     <label className={cx('rule-drop-down', className)} >
@@ -48,7 +49,7 @@ const RuleDropDown = ({
 
 RuleDropDown.propTypes = {
   options: PropTypes.array.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   className: PropTypes.string,
@@ -57,6 +58,7 @@ RuleDropDown.propTypes = {
 RuleDropDown.defaultProps = {
   placeholder: '',
   className: null,
+  value: '',
 };
 
 export default RuleDropDown;

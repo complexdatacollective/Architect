@@ -19,7 +19,7 @@ const operatorOptions = [
 
 class LogicEditor extends PureComponent {
   static propTypes = {
-    logic: PropTypes.func.isRequired,
+    logic: PropTypes.object.isRequired,
     onChange: PropTypes.func,
   };
 

@@ -14,6 +14,9 @@
       height: 60px;
       font-size: 2em;
       font-weight: bold;
+      &:focus {
+        outline: none;
+      }
     }
 
     &__choices {
@@ -37,6 +40,10 @@
       border-radius: 10px;
       height: 60px;
       text-transform: uppercase;
+
+      &:focus {
+        outline: none;
+      }
 
       &:first-child {
         margin-left: 0;
