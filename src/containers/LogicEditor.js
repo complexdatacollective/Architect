@@ -118,17 +118,17 @@ class LogicEditor extends PureComponent {
   render() {
     const { operator, rules } = this.state;
 
-    const ruleFilterClasses = cx(
-      'rule-filter',
+    const logicEditorClasses = cx(
+      'logic-editor',
       {
-        'rule-filter--and': operator === 'AND',
-        'rule-filter--or': operator === 'OR',
+        'logic-editor--and': operator === 'AND',
+        'logic-editor--or': operator === 'OR',
       },
     );
 
     return (
-      <div className={ruleFilterClasses}>
-        <div className="rule-filter__operator">
+      <div className={logicEditorClasses}>
+        <div className="logic-editor__operator">
           <RuleDropDown
             options={operatorOptions}
             value={operator}
@@ -136,7 +136,7 @@ class LogicEditor extends PureComponent {
             onChange={this.onChangeOperator}
           />
         </div>
-        <div className="rule-filter__rules">
+        <div className="logic-editor__rules">
           <Rules
             rules={rules}
             lockAxis="y"
@@ -146,7 +146,7 @@ class LogicEditor extends PureComponent {
             onSortEnd={this.onSortRule}
           />
 
-          <div className="rule-filter__add">
+          <div className="logic-editor__add">
             <RuleAddButton onAddRule={this.onAddRule} />
           </div>
         </div>

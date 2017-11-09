@@ -18,11 +18,11 @@ class RuleAddButton extends PureComponent {
     return (
       <div
         className={cx('rule-add-button', { 'rule-add-button--is-open': this.state.isOpen })}
+        onMouseEnter={this.onShowAddChoices}
         onMouseLeave={this.onHideAddChoices}
       >
         <button
           className="rule-add-button__open"
-          onMouseEnter={this.onShowAddChoices}
           disabled
         >
           +

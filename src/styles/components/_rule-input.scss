@@ -6,9 +6,9 @@
   border-bottom: 2px solid white;
 
   &__spacer {
-    font-size: 1.2rem;
     visibility: hidden;
-    height: 1.2rem;
+    font-size: 1rem;
+    height: 1.2em;
     min-width: 50px;
     padding: 0 5px;
   }
@@ -21,7 +21,7 @@
     left: 0px;
     background-color: transparent;
     color: palette('text');
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0 5px;
     border: 0;
 
