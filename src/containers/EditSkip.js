@@ -90,13 +90,21 @@ class EditSkip extends PureComponent {
         buttons={buttons}
       >
         <div className="edit-skip">
-          {this.props.stageId &&
-            <LogicEditor
-              key={`logic_${this.props.stageId}`}
-              logic={this.props.skipLogic}
-              onChange={this.onLogicChange}
-            />
-          }
+          <div className="edit-skip__section">
+            {this.props.stageId &&
+              <LogicEditor
+                key={`logic_${this.props.stageId}`}
+                logic={this.props.skipLogic}
+                onChange={this.onLogicChange}
+              />
+            }
+          </div>
+          <div className="edit-skip__guidance">
+            <div className="edit-skip__bubble">
+              Skip logic tells Network Canvas when to skip past a stage. Using it,
+              you can create different pathways through your interview.
+            </div>
+          </div>
         </div>
       </Card>
     );
