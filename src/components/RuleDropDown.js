@@ -19,13 +19,12 @@ const RuleDropDown = ({
   onChange,
   placeholder,
   className,
-  ...props,
+  value,
 }) => {
   if (options.length === 0) { return null; }
-  const value = !!props.value ? value : ''; // Why is this necessary?
 
   const optionsWithLabels = withLabels(options);
-  const spacer = getSpacer(optionsWithLabels, placeholder, props.value);
+  const spacer = getSpacer(optionsWithLabels, placeholder, value);
 
   return (
     <label className={cx('rule-drop-down', className)} >

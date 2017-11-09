@@ -50,15 +50,15 @@
       }
 
       &--alter {
-        background-color: palette('alter-rule');
+        background-color: palette('rule-type--alter');
       }
 
       &--ego {
-        background-color: palette('ego-rule');
+        background-color: palette('rule-attribute--ego');
       }
 
       &--edge {
-        background-color: palette('edge-rule');
+        background-color: palette('rule-type--edge');
       }
     }
 

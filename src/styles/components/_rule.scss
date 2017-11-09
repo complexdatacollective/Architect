@@ -124,19 +124,29 @@
 
   &--alter {
     .rule__option--type {
-      background: palette('alter-rule');
+      background: palette('rule-type--alter');
     }
   }
 
   &--ego {
     .rule__option--attribute {
-      background: palette('ego-rule');
+      background: palette('rule-attribute--ego');
     }
   }
 
   &--edge {
     .rule__option--type {
-      background: palette('edge-rule');
+      background: palette('rule-type--edge');
+    }
+
+    .rule__option--attribute {
+      background: palette('rule-attribute--edge');
+
+      &::before {
+        border-top: 30px solid palette('rule-attribute--edge');
+        border-bottom: 30px solid palette('rule-attribute--edge');
+        border-left: 20px solid palette('rule-type--edge');
+      }
     }
   }
 }

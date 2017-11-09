@@ -18,13 +18,13 @@
 @include palette-set('rule-value', color('barbie-pink'));
 @include palette-set('rule-delete', color('rich-black'));
 
+@include palette-set('rule-type--alter', color('neon-coral'));
+@include palette-set('rule-attribute--ego', color('mustard--dark'));
+@include palette-set('rule-type--edge', color('sea-green'));
+@include palette-set('rule-attribute--edge', color('sea-green--dark'));
+
 // logic
 @include palette-set('rules', color('charcoal'));
 @include palette-set('rules-background', color('intent'));
 @include palette-set('rules--and', color('slate-blue--dark'));
 @include palette-set('rules--or', color('neon-carrot--dark'));
-
-// alter/ego/edgo
-@include palette-set('alter-rule', color('neon-coral'));
-@include palette-set('ego-rule', color('mustard'));
-@include palette-set('edge-rule', color('sea-green'));
