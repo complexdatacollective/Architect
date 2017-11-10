@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -7,7 +8,7 @@ import { Button } from 'network-canvas-ui';
 import { getProtocol } from '../selectors/protocol';
 import NewStage from './NewStage';
 import EditSkip from './EditSkip';
-import { Timeline, ScreenTransition, CardTransition } from '../components';
+import { Timeline } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const cards = {
@@ -72,49 +73,36 @@ class Protocol extends PureComponent {
   render() {
     return (
       <div className={cx('protocol', { 'protocol--has-changes': this.props.hasChanges })}>
-        <ScreenTransition
-          key="timeline"
-          in={this.isTimelineVisible()}
-        >
-          <Timeline
-            stages={this.props.stages}
-            onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
-            onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
-            hasChanges={this.props.hasChanges}
-          />
-        </ScreenTransition>
+        <Timeline
+          stages={this.props.stages}
+          onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
+          onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
+          hasChanges={this.props.hasChanges}
+        />
 
         <div className="protocol__control-bar">
           <Button size="small">Save</Button>
         </div>
 
-        <CardTransition
-          key="new-stage"
-          in={this.isCardVisible(cards.newStage)}
+        <NewStage
+          title="Add a new stage"
+          color=""
+          index={this.state.activeCard.insertAtIndex}
+          show={this.isCardVisible(cards.newStage)}
           cancel={this.state.activeCard.cancel}
-        >
-          <NewStage
-            title="Add a new stage"
-            color=""
-            index={this.state.activeCard.insertAtIndex}
-            onComplete={this.onCardComplete}
-            onCancel={this.onCardCancel}
-          />
-        </CardTransition>
+          onComplete={this.onCardComplete}
+          onCancel={this.onCardCancel}
+        />
 
-        <CardTransition
-          key="edit-skip"
-          in={this.isCardVisible(cards.editSkip)}
+        <EditSkip
+          title="Edit skip logic"
+          color=""
+          show={this.isCardVisible(cards.editSkip)}
           cancel={this.state.activeCard.cancel}
-        >
-          <EditSkip
-            title="Edit skip logic"
-            color=""
-            stageId={this.state.activeCard.stageId}
-            onComplete={this.onCardComplete}
-            onCancel={this.onCardCancel}
-          />
-        </CardTransition>
+          stageId={this.state.activeCard.stageId}
+          onComplete={this.onCardComplete}
+          onCancel={this.onCardCancel}
+        />
       </div>
     );
   }

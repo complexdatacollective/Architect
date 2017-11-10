@@ -58,13 +58,14 @@ const Zoom = (WrappedComponent) =>
         targets: pseudoElement,
         elasticity: 0,
         easing: 'easeInOutQuad',
-        duration: animation.duration.standard,
-        opacity: [1, 0],
+        duration: animation.duration.fast,
         scaleY: [1, height / start.height],
         scaleX: [1, width / start.width],
         backgroundColor: this.props.zoomColors,
       }).finished.then(() => {
-        this.root.removeChild(pseudoElement);
+        setTimeout(() => {
+          this.root.removeChild(pseudoElement);
+        }, 20); // Give a little overlap
       });
     }
 

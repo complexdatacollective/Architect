@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
@@ -35,12 +36,16 @@ class NewStage extends PureComponent {
     addStage: PropTypes.func.isRequired,
     index: PropTypes.number,
     onComplete: PropTypes.func,
+    show: PropTypes.bool,
+    cancel: PropTypes.bool,
   };
 
   static defaultProps = {
     onComplete: () => {},
     id: null,
     index: null,
+    show: false,
+    cancel: false,
   }
 
   onClickStageType = (type) => {
@@ -74,6 +79,8 @@ class NewStage extends PureComponent {
       <Card
         title="Add New Stage"
         buttons={buttons}
+        show={this.props.show}
+        cancel={this.props.cancel}
       >
         <div className="new-stage">
           <div className="new-stage__options">

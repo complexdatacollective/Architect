@@ -1,15 +1,21 @@
 .card {
-  @include no-scrollbars;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  overflow: hidden;
   background: palette('light-background');
   transform: translateZ(0);
-  display: flex;
-  flex-direction: column;
+
+  &__container {
+    @include flex-stack;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
   &__control-bar,
   &__title-bar,
@@ -29,7 +35,7 @@
     @include flex-align(flex-end, center);
   }
 
-  &__container {
+  &__content {
     @include no-scrollbars;
     flex: 1 1 auto;
     overflow-x: hidden;

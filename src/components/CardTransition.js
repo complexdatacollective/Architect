@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
@@ -25,7 +26,7 @@ const CardTransition = ({ children, cancel, timeout, ...props }) => (
     onEnter={
       (el) => {
         anime({
-          targets: el,
+          targets: props.el,
           elasticity: 0,
           easing: 'easeInOutQuad',
           duration: timeout,
@@ -55,12 +56,14 @@ CardTransition.propTypes = {
   children: PropTypes.any.isRequired,
   timeout: PropTypes.number,
   cancel: PropTypes.bool,
+  el: PropTypes.node,
 };
 
 CardTransition.defaultProps = {
   children: PropTypes.any.isRequired,
   timeout: (2 * animation.duration.standard),
   cancel: true,
+  el: null,
 };
 
 export default CardTransition;

@@ -25,11 +25,15 @@ class EditSkip extends PureComponent {
     stageId: PropTypes.number,
     onComplete: PropTypes.func,
     skipLogic: PropTypes.object.isRequired,
+    show: PropTypes.bool,
+    cancel: PropTypes.bool,
   };
 
   static defaultProps = {
     onComplete: () => {},
     stageId: null,
+    show: false,
+    cancel: false,
   }
 
   constructor(props) {
@@ -78,6 +82,7 @@ class EditSkip extends PureComponent {
   }
 
   render() {
+    const { show, cancel } = this.props;
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
       <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
@@ -88,6 +93,8 @@ class EditSkip extends PureComponent {
         title="Edit skip logic"
         type="intent"
         buttons={buttons}
+        show={show}
+        cancel={cancel}
       >
         <div className="edit-skip">
           <div className="edit-skip__section">
