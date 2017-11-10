@@ -10,10 +10,12 @@ const Zoom = (WrappedComponent) =>
   class extends PureComponent {
     static propTypes = {
       zoomColors: PropTypes.array,
+      constrain: PropTypes.array,
     };
 
     static defaultProps = {
       zoomColors: ['#ffffff', '#2d2955'],
+      constrain: [0, 0, 0, 0],
     };
 
     componentDidMount() {
@@ -29,13 +31,15 @@ const Zoom = (WrappedComponent) =>
     onClick = (e) => {
       // const root = document.getElementsByTagName('body')[0];
 
+      const [top, right, bottom, left] = this.props.constrain;
+
       const start = this.node.getBoundingClientRect();
       const pseudoElement = document.createElement('div');
 
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const originY = 100 * (start.top + start.height / 2) / height;
-      const originX = 100 * (start.left + start.width / 2) / width;
+      const width = window.innerWidth - right - left;
+      const height = window.innerHeight - top - bottom;
+      const originY = 100 * (start.top + start.height / 2) / height - (100 * top / window.innerHeight);
+      const originX = 100 * (start.left + start.width / 2) / width - (100 * left / window.innerWidth);
 
       pseudoElement.setAttribute(
         'style',
@@ -56,7 +60,7 @@ const Zoom = (WrappedComponent) =>
         easing: 'easeInOutQuad',
         duration: animation.duration.standard,
         opacity: [1, 0],
-        scaleY: [1, height / start.height * 1.1],  // 1.1 fudge factor for scale Y origin
+        scaleY: [1, height / start.height],
         scaleX: [1, width / start.width],
         backgroundColor: this.props.zoomColors,
       }).finished.then(() => {
