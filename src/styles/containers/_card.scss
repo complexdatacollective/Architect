@@ -33,6 +33,13 @@
     flex: 0 0 60px;
     background-color: palette('background');
     @include flex-align(flex-end, center);
+    transform: translateZ(0) translateY(100%);
+    transition: transform $animation-fast-duration $animation-default-easing $animation-fast-duration;
+
+    &--entering,
+    &--entered {
+      transform: translateZ(0) translateY(0);
+    }
   }
 
   &__content {

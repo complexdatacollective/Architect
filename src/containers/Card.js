@@ -79,23 +79,25 @@ class Card extends PureComponent {
         }
         in={show}
       >
-        <div className={classes}>
-          <div className="card__container" ref={(el) => { this.el = el; }}>
-            <div className="card__content">
-              <div className="card__title-bar">
-                <h1 className="card__heading">{ this.props.title }</h1>
+        {(state) => (
+          <div className={classes}>
+            <div className="card__container" ref={(el) => { this.el = el; }}>
+              <div className="card__content">
+                <div className="card__title-bar">
+                  <h1 className="card__heading">{ this.props.title }</h1>
+                </div>
+                <div className="card__main">
+                  { this.props.children }
+                </div>
               </div>
-              <div className="card__main">
-                { this.props.children }
-              </div>
+              { this.anyButtons() &&
+                <div className={cx('card__control-bar', `card__control-bar--${state}`)}>
+                  { buttons }
+                </div>
+              }
             </div>
-            { this.anyButtons() &&
-              <div className="card__control-bar">
-                { buttons }
-              </div>
-            }
           </div>
-        </div>
+        )}
       </Transition>
     );
   }
