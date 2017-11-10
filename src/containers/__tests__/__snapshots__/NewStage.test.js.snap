@@ -6,10 +6,11 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <NewStage
     addStage={[Function]}
+    cancel={false}
     id={null}
     index={null}
-    onCancel={[Function]}
     onComplete={[Function]}
+    show={false}
 />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -21,20 +22,813 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": null,
-    "nodeType": "host",
+    "nodeType": "class",
     "props": Object {
-      "children": Array [
-        <div
-          className="new-stage__title-bar"
+      "buttons": Array [
+        <Button
+          color=""
+          content=""
+          icon=""
+          iconPosition="right"
+          onClick={[Function]}
+          size="small"
 >
-          <h1
-                    className="new-stage__heading"
-          >
-                    Add New Screen
-          </h1>
-</div>,
+          cancel
+</Button>,
+      ],
+      "cancel": false,
+      "children": <div
+        className="new-stage"
+>
         <div
-          className="new-stage__main"
+                className="new-stage__options"
+        >
+                <div
+                        className="new-stage__option"
+                        onClick={[Function]}
+                >
+                        <div
+                                className="new-stage__option-preview"
+                        >
+                                <img
+                                        alt=""
+                                        src="/images/timeline/stage--NameGenerator.png"
+                                />
+                        </div>
+                        <div
+                                className="new-stage__option-details"
+                        >
+                                <h2
+                                        className="new-stage__option-title"
+                                >
+                                        Name Generator
+                                </h2>
+                                <p
+                                        className="new-stage__option-description"
+                                />
+                        </div>
+                </div>
+                <div
+                        className="new-stage__option"
+                        onClick={[Function]}
+                >
+                        <div
+                                className="new-stage__option-preview"
+                        >
+                                <img
+                                        alt=""
+                                        src="/images/timeline/stage--Sociogram.png"
+                                />
+                        </div>
+                        <div
+                                className="new-stage__option-details"
+                        >
+                                <h2
+                                        className="new-stage__option-title"
+                                >
+                                        Sociogram
+                                </h2>
+                                <p
+                                        className="new-stage__option-description"
+                                />
+                        </div>
+                </div>
+                <div
+                        className="new-stage__option"
+                        onClick={[Function]}
+                >
+                        <div
+                                className="new-stage__option-preview"
+                        >
+                                <img
+                                        alt=""
+                                        src="/images/timeline/stage--Ordinal.png"
+                                />
+                        </div>
+                        <div
+                                className="new-stage__option-details"
+                        >
+                                <h2
+                                        className="new-stage__option-title"
+                                >
+                                        Ordinal
+                                </h2>
+                                <p
+                                        className="new-stage__option-description"
+                                />
+                        </div>
+                </div>
+                <div
+                        className="new-stage__option"
+                        onClick={[Function]}
+                >
+                        <div
+                                className="new-stage__option-preview"
+                        >
+                                <img
+                                        alt=""
+                                        src="/images/timeline/stage--Categorize.png"
+                                />
+                        </div>
+                        <div
+                                className="new-stage__option-details"
+                        >
+                                <h2
+                                        className="new-stage__option-title"
+                                >
+                                        Categorize
+                                </h2>
+                                <p
+                                        className="new-stage__option-description"
+                                />
+                        </div>
+                </div>
+        </div>
+</div>,
+      "show": false,
+      "title": "Add New Stage",
+      "type": "default",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="new-stage__options"
+>
+          <div
+                    className="new-stage__option"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="new-stage__option-preview"
+                    >
+                              <img
+                                        alt=""
+                                        src="/images/timeline/stage--NameGenerator.png"
+                              />
+                    </div>
+                    <div
+                              className="new-stage__option-details"
+                    >
+                              <h2
+                                        className="new-stage__option-title"
+                              >
+                                        Name Generator
+                              </h2>
+                              <p
+                                        className="new-stage__option-description"
+                              />
+                    </div>
+          </div>
+          <div
+                    className="new-stage__option"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="new-stage__option-preview"
+                    >
+                              <img
+                                        alt=""
+                                        src="/images/timeline/stage--Sociogram.png"
+                              />
+                    </div>
+                    <div
+                              className="new-stage__option-details"
+                    >
+                              <h2
+                                        className="new-stage__option-title"
+                              >
+                                        Sociogram
+                              </h2>
+                              <p
+                                        className="new-stage__option-description"
+                              />
+                    </div>
+          </div>
+          <div
+                    className="new-stage__option"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="new-stage__option-preview"
+                    >
+                              <img
+                                        alt=""
+                                        src="/images/timeline/stage--Ordinal.png"
+                              />
+                    </div>
+                    <div
+                              className="new-stage__option-details"
+                    >
+                              <h2
+                                        className="new-stage__option-title"
+                              >
+                                        Ordinal
+                              </h2>
+                              <p
+                                        className="new-stage__option-description"
+                              />
+                    </div>
+          </div>
+          <div
+                    className="new-stage__option"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="new-stage__option-preview"
+                    >
+                              <img
+                                        alt=""
+                                        src="/images/timeline/stage--Categorize.png"
+                              />
+                    </div>
+                    <div
+                              className="new-stage__option-details"
+                    >
+                              <h2
+                                        className="new-stage__option-title"
+                              >
+                                        Categorize
+                              </h2>
+                              <p
+                                        className="new-stage__option-description"
+                              />
+                    </div>
+          </div>
+</div>,
+        "className": "new-stage",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="new-stage__option"
+              onClick={[Function]}
+>
+              <div
+                            className="new-stage__option-preview"
+              >
+                            <img
+                                          alt=""
+                                          src="/images/timeline/stage--NameGenerator.png"
+                            />
+              </div>
+              <div
+                            className="new-stage__option-details"
+              >
+                            <h2
+                                          className="new-stage__option-title"
+                            >
+                                          Name Generator
+                            </h2>
+                            <p
+                                          className="new-stage__option-description"
+                            />
+              </div>
+</div>,
+            <div
+              className="new-stage__option"
+              onClick={[Function]}
+>
+              <div
+                            className="new-stage__option-preview"
+              >
+                            <img
+                                          alt=""
+                                          src="/images/timeline/stage--Sociogram.png"
+                            />
+              </div>
+              <div
+                            className="new-stage__option-details"
+              >
+                            <h2
+                                          className="new-stage__option-title"
+                            >
+                                          Sociogram
+                            </h2>
+                            <p
+                                          className="new-stage__option-description"
+                            />
+              </div>
+</div>,
+            <div
+              className="new-stage__option"
+              onClick={[Function]}
+>
+              <div
+                            className="new-stage__option-preview"
+              >
+                            <img
+                                          alt=""
+                                          src="/images/timeline/stage--Ordinal.png"
+                            />
+              </div>
+              <div
+                            className="new-stage__option-details"
+              >
+                            <h2
+                                          className="new-stage__option-title"
+                            >
+                                          Ordinal
+                            </h2>
+                            <p
+                                          className="new-stage__option-description"
+                            />
+              </div>
+</div>,
+            <div
+              className="new-stage__option"
+              onClick={[Function]}
+>
+              <div
+                            className="new-stage__option-preview"
+              >
+                            <img
+                                          alt=""
+                                          src="/images/timeline/stage--Categorize.png"
+                            />
+              </div>
+              <div
+                            className="new-stage__option-details"
+              >
+                            <h2
+                                          className="new-stage__option-title"
+                            >
+                                          Categorize
+                            </h2>
+                            <p
+                                          className="new-stage__option-description"
+                            />
+              </div>
+</div>,
+          ],
+          "className": "new-stage__options",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": "NameGenerator",
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="new-stage__option-preview"
+>
+                  <img
+                                    alt=""
+                                    src="/images/timeline/stage--NameGenerator.png"
+                  />
+</div>,
+                <div
+                  className="new-stage__option-details"
+>
+                  <h2
+                                    className="new-stage__option-title"
+                  >
+                                    Name Generator
+                  </h2>
+                  <p
+                                    className="new-stage__option-description"
+                  />
+</div>,
+              ],
+              "className": "new-stage__option",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <img
+                    alt=""
+                    src="/images/timeline/stage--NameGenerator.png"
+/>,
+                  "className": "new-stage__option-preview",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": null,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "",
+                    "src": "/images/timeline/stage--NameGenerator.png",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <h2
+                      className="new-stage__option-title"
+>
+                      Name Generator
+</h2>,
+                    <p
+                      className="new-stage__option-description"
+/>,
+                  ],
+                  "className": "new-stage__option-details",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Name Generator",
+                      "className": "new-stage__option-title",
+                    },
+                    "ref": null,
+                    "rendered": "Name Generator",
+                    "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                      "className": "new-stage__option-description",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "p",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "Sociogram",
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="new-stage__option-preview"
+>
+                  <img
+                                    alt=""
+                                    src="/images/timeline/stage--Sociogram.png"
+                  />
+</div>,
+                <div
+                  className="new-stage__option-details"
+>
+                  <h2
+                                    className="new-stage__option-title"
+                  >
+                                    Sociogram
+                  </h2>
+                  <p
+                                    className="new-stage__option-description"
+                  />
+</div>,
+              ],
+              "className": "new-stage__option",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <img
+                    alt=""
+                    src="/images/timeline/stage--Sociogram.png"
+/>,
+                  "className": "new-stage__option-preview",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": null,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "",
+                    "src": "/images/timeline/stage--Sociogram.png",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <h2
+                      className="new-stage__option-title"
+>
+                      Sociogram
+</h2>,
+                    <p
+                      className="new-stage__option-description"
+/>,
+                  ],
+                  "className": "new-stage__option-details",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Sociogram",
+                      "className": "new-stage__option-title",
+                    },
+                    "ref": null,
+                    "rendered": "Sociogram",
+                    "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                      "className": "new-stage__option-description",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "p",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "Ordinal",
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="new-stage__option-preview"
+>
+                  <img
+                                    alt=""
+                                    src="/images/timeline/stage--Ordinal.png"
+                  />
+</div>,
+                <div
+                  className="new-stage__option-details"
+>
+                  <h2
+                                    className="new-stage__option-title"
+                  >
+                                    Ordinal
+                  </h2>
+                  <p
+                                    className="new-stage__option-description"
+                  />
+</div>,
+              ],
+              "className": "new-stage__option",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <img
+                    alt=""
+                    src="/images/timeline/stage--Ordinal.png"
+/>,
+                  "className": "new-stage__option-preview",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": null,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "",
+                    "src": "/images/timeline/stage--Ordinal.png",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <h2
+                      className="new-stage__option-title"
+>
+                      Ordinal
+</h2>,
+                    <p
+                      className="new-stage__option-description"
+/>,
+                  ],
+                  "className": "new-stage__option-details",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Ordinal",
+                      "className": "new-stage__option-title",
+                    },
+                    "ref": null,
+                    "rendered": "Ordinal",
+                    "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                      "className": "new-stage__option-description",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "p",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": "Categorize",
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="new-stage__option-preview"
+>
+                  <img
+                                    alt=""
+                                    src="/images/timeline/stage--Categorize.png"
+                  />
+</div>,
+                <div
+                  className="new-stage__option-details"
+>
+                  <h2
+                                    className="new-stage__option-title"
+                  >
+                                    Categorize
+                  </h2>
+                  <p
+                                    className="new-stage__option-description"
+                  />
+</div>,
+              ],
+              "className": "new-stage__option",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <img
+                    alt=""
+                    src="/images/timeline/stage--Categorize.png"
+/>,
+                  "className": "new-stage__option-preview",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": null,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "",
+                    "src": "/images/timeline/stage--Categorize.png",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <h2
+                      className="new-stage__option-title"
+>
+                      Categorize
+</h2>,
+                    <p
+                      className="new-stage__option-description"
+/>,
+                  ],
+                  "className": "new-stage__option-details",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Categorize",
+                      "className": "new-stage__option-title",
+                    },
+                    "ref": null,
+                    "rendered": "Categorize",
+                    "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                      "className": "new-stage__option-description",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "p",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+      "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "class",
+      "props": Object {
+        "buttons": Array [
+          <Button
+            color=""
+            content=""
+            icon=""
+            iconPosition="right"
+            onClick={[Function]}
+            size="small"
+>
+            cancel
+</Button>,
+        ],
+        "cancel": false,
+        "children": <div
+          className="new-stage"
 >
           <div
                     className="new-stage__options"
@@ -141,53 +935,12 @@ ShallowWrapper {
                     </div>
           </div>
 </div>,
-        <div
-          className="new-stage__control-bar"
->
-          <Button
-                    color=""
-                    content=""
-                    icon=""
-                    iconPosition="right"
-                    onClick={[Function]}
-                    size="small"
-          >
-                    cancel
-          </Button>
-</div>,
-      ],
-      "className": "new-stage",
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": null,
-        "nodeType": "host",
-        "props": Object {
-          "children": <h1
-            className="new-stage__heading"
->
-            Add New Screen
-</h1>,
-          "className": "new-stage__title-bar",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": "Add New Screen",
-            "className": "new-stage__heading",
-          },
-          "ref": null,
-          "rendered": "Add New Screen",
-          "type": "h1",
-        },
-        "type": "div",
+        "show": false,
+        "title": "Add New Stage",
+        "type": "default",
       },
-      Object {
+      "ref": null,
+      "rendered": Object {
         "instance": null,
         "key": null,
         "nodeType": "host",
@@ -296,7 +1049,7 @@ ShallowWrapper {
                         </div>
             </div>
 </div>,
-          "className": "new-stage__main",
+          "className": "new-stage",
         },
         "ref": null,
         "rendered": Object {
@@ -843,911 +1596,7 @@ ShallowWrapper {
         },
         "type": "div",
       },
-      Object {
-        "instance": null,
-        "key": null,
-        "nodeType": "host",
-        "props": Object {
-          "children": <Button
-            color=""
-            content=""
-            icon=""
-            iconPosition="right"
-            onClick={[Function]}
-            size="small"
->
-            cancel
-</Button>,
-          "className": "new-stage__control-bar",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "class",
-          "props": Object {
-            "children": "cancel",
-            "color": "",
-            "content": "",
-            "icon": "",
-            "iconPosition": "right",
-            "onClick": [Function],
-            "size": "small",
-          },
-          "ref": null,
-          "rendered": "cancel",
-          "type": [Function],
-        },
-        "type": "div",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": null,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            className="new-stage__title-bar"
->
-            <h1
-                        className="new-stage__heading"
-            >
-                        Add New Screen
-            </h1>
-</div>,
-          <div
-            className="new-stage__main"
->
-            <div
-                        className="new-stage__options"
-            >
-                        <div
-                                    className="new-stage__option"
-                                    onClick={[Function]}
-                        >
-                                    <div
-                                                className="new-stage__option-preview"
-                                    >
-                                                <img
-                                                            alt=""
-                                                            src="/images/timeline/stage--NameGenerator.png"
-                                                />
-                                    </div>
-                                    <div
-                                                className="new-stage__option-details"
-                                    >
-                                                <h2
-                                                            className="new-stage__option-title"
-                                                >
-                                                            Name Generator
-                                                </h2>
-                                                <p
-                                                            className="new-stage__option-description"
-                                                />
-                                    </div>
-                        </div>
-                        <div
-                                    className="new-stage__option"
-                                    onClick={[Function]}
-                        >
-                                    <div
-                                                className="new-stage__option-preview"
-                                    >
-                                                <img
-                                                            alt=""
-                                                            src="/images/timeline/stage--Sociogram.png"
-                                                />
-                                    </div>
-                                    <div
-                                                className="new-stage__option-details"
-                                    >
-                                                <h2
-                                                            className="new-stage__option-title"
-                                                >
-                                                            Sociogram
-                                                </h2>
-                                                <p
-                                                            className="new-stage__option-description"
-                                                />
-                                    </div>
-                        </div>
-                        <div
-                                    className="new-stage__option"
-                                    onClick={[Function]}
-                        >
-                                    <div
-                                                className="new-stage__option-preview"
-                                    >
-                                                <img
-                                                            alt=""
-                                                            src="/images/timeline/stage--Ordinal.png"
-                                                />
-                                    </div>
-                                    <div
-                                                className="new-stage__option-details"
-                                    >
-                                                <h2
-                                                            className="new-stage__option-title"
-                                                >
-                                                            Ordinal
-                                                </h2>
-                                                <p
-                                                            className="new-stage__option-description"
-                                                />
-                                    </div>
-                        </div>
-                        <div
-                                    className="new-stage__option"
-                                    onClick={[Function]}
-                        >
-                                    <div
-                                                className="new-stage__option-preview"
-                                    >
-                                                <img
-                                                            alt=""
-                                                            src="/images/timeline/stage--Categorize.png"
-                                                />
-                                    </div>
-                                    <div
-                                                className="new-stage__option-details"
-                                    >
-                                                <h2
-                                                            className="new-stage__option-title"
-                                                >
-                                                            Categorize
-                                                </h2>
-                                                <p
-                                                            className="new-stage__option-description"
-                                                />
-                                    </div>
-                        </div>
-            </div>
-</div>,
-          <div
-            className="new-stage__control-bar"
->
-            <Button
-                        color=""
-                        content=""
-                        icon=""
-                        iconPosition="right"
-                        onClick={[Function]}
-                        size="small"
-            >
-                        cancel
-            </Button>
-</div>,
-        ],
-        "className": "new-stage",
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": <h1
-              className="new-stage__heading"
->
-              Add New Screen
-</h1>,
-            "className": "new-stage__title-bar",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": null,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Add New Screen",
-              "className": "new-stage__heading",
-            },
-            "ref": null,
-            "rendered": "Add New Screen",
-            "type": "h1",
-          },
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": <div
-              className="new-stage__options"
->
-              <div
-                            className="new-stage__option"
-                            onClick={[Function]}
-              >
-                            <div
-                                          className="new-stage__option-preview"
-                            >
-                                          <img
-                                                        alt=""
-                                                        src="/images/timeline/stage--NameGenerator.png"
-                                          />
-                            </div>
-                            <div
-                                          className="new-stage__option-details"
-                            >
-                                          <h2
-                                                        className="new-stage__option-title"
-                                          >
-                                                        Name Generator
-                                          </h2>
-                                          <p
-                                                        className="new-stage__option-description"
-                                          />
-                            </div>
-              </div>
-              <div
-                            className="new-stage__option"
-                            onClick={[Function]}
-              >
-                            <div
-                                          className="new-stage__option-preview"
-                            >
-                                          <img
-                                                        alt=""
-                                                        src="/images/timeline/stage--Sociogram.png"
-                                          />
-                            </div>
-                            <div
-                                          className="new-stage__option-details"
-                            >
-                                          <h2
-                                                        className="new-stage__option-title"
-                                          >
-                                                        Sociogram
-                                          </h2>
-                                          <p
-                                                        className="new-stage__option-description"
-                                          />
-                            </div>
-              </div>
-              <div
-                            className="new-stage__option"
-                            onClick={[Function]}
-              >
-                            <div
-                                          className="new-stage__option-preview"
-                            >
-                                          <img
-                                                        alt=""
-                                                        src="/images/timeline/stage--Ordinal.png"
-                                          />
-                            </div>
-                            <div
-                                          className="new-stage__option-details"
-                            >
-                                          <h2
-                                                        className="new-stage__option-title"
-                                          >
-                                                        Ordinal
-                                          </h2>
-                                          <p
-                                                        className="new-stage__option-description"
-                                          />
-                            </div>
-              </div>
-              <div
-                            className="new-stage__option"
-                            onClick={[Function]}
-              >
-                            <div
-                                          className="new-stage__option-preview"
-                            >
-                                          <img
-                                                        alt=""
-                                                        src="/images/timeline/stage--Categorize.png"
-                                          />
-                            </div>
-                            <div
-                                          className="new-stage__option-details"
-                            >
-                                          <h2
-                                                        className="new-stage__option-title"
-                                          >
-                                                        Categorize
-                                          </h2>
-                                          <p
-                                                        className="new-stage__option-description"
-                                          />
-                            </div>
-              </div>
-</div>,
-            "className": "new-stage__main",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": null,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <div
-                  className="new-stage__option"
-                  onClick={[Function]}
->
-                  <div
-                                    className="new-stage__option-preview"
-                  >
-                                    <img
-                                                      alt=""
-                                                      src="/images/timeline/stage--NameGenerator.png"
-                                    />
-                  </div>
-                  <div
-                                    className="new-stage__option-details"
-                  >
-                                    <h2
-                                                      className="new-stage__option-title"
-                                    >
-                                                      Name Generator
-                                    </h2>
-                                    <p
-                                                      className="new-stage__option-description"
-                                    />
-                  </div>
-</div>,
-                <div
-                  className="new-stage__option"
-                  onClick={[Function]}
->
-                  <div
-                                    className="new-stage__option-preview"
-                  >
-                                    <img
-                                                      alt=""
-                                                      src="/images/timeline/stage--Sociogram.png"
-                                    />
-                  </div>
-                  <div
-                                    className="new-stage__option-details"
-                  >
-                                    <h2
-                                                      className="new-stage__option-title"
-                                    >
-                                                      Sociogram
-                                    </h2>
-                                    <p
-                                                      className="new-stage__option-description"
-                                    />
-                  </div>
-</div>,
-                <div
-                  className="new-stage__option"
-                  onClick={[Function]}
->
-                  <div
-                                    className="new-stage__option-preview"
-                  >
-                                    <img
-                                                      alt=""
-                                                      src="/images/timeline/stage--Ordinal.png"
-                                    />
-                  </div>
-                  <div
-                                    className="new-stage__option-details"
-                  >
-                                    <h2
-                                                      className="new-stage__option-title"
-                                    >
-                                                      Ordinal
-                                    </h2>
-                                    <p
-                                                      className="new-stage__option-description"
-                                    />
-                  </div>
-</div>,
-                <div
-                  className="new-stage__option"
-                  onClick={[Function]}
->
-                  <div
-                                    className="new-stage__option-preview"
-                  >
-                                    <img
-                                                      alt=""
-                                                      src="/images/timeline/stage--Categorize.png"
-                                    />
-                  </div>
-                  <div
-                                    className="new-stage__option-details"
-                  >
-                                    <h2
-                                                      className="new-stage__option-title"
-                                    >
-                                                      Categorize
-                                    </h2>
-                                    <p
-                                                      className="new-stage__option-description"
-                                    />
-                  </div>
-</div>,
-              ],
-              "className": "new-stage__options",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": "NameGenerator",
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <div
-                      className="new-stage__option-preview"
->
-                      <img
-                                            alt=""
-                                            src="/images/timeline/stage--NameGenerator.png"
-                      />
-</div>,
-                    <div
-                      className="new-stage__option-details"
->
-                      <h2
-                                            className="new-stage__option-title"
-                      >
-                                            Name Generator
-                      </h2>
-                      <p
-                                            className="new-stage__option-description"
-                      />
-</div>,
-                  ],
-                  "className": "new-stage__option",
-                  "onClick": [Function],
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <img
-                        alt=""
-                        src="/images/timeline/stage--NameGenerator.png"
-/>,
-                      "className": "new-stage__option-preview",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": null,
-                      "nodeType": "host",
-                      "props": Object {
-                        "alt": "",
-                        "src": "/images/timeline/stage--NameGenerator.png",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "img",
-                    },
-                    "type": "div",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <h2
-                          className="new-stage__option-title"
->
-                          Name Generator
-</h2>,
-                        <p
-                          className="new-stage__option-description"
-/>,
-                      ],
-                      "className": "new-stage__option-details",
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "Name Generator",
-                          "className": "new-stage__option-title",
-                        },
-                        "ref": null,
-                        "rendered": "Name Generator",
-                        "type": "h2",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "",
-                          "className": "new-stage__option-description",
-                        },
-                        "ref": null,
-                        "rendered": "",
-                        "type": "p",
-                      },
-                    ],
-                    "type": "div",
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": "Sociogram",
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <div
-                      className="new-stage__option-preview"
->
-                      <img
-                                            alt=""
-                                            src="/images/timeline/stage--Sociogram.png"
-                      />
-</div>,
-                    <div
-                      className="new-stage__option-details"
->
-                      <h2
-                                            className="new-stage__option-title"
-                      >
-                                            Sociogram
-                      </h2>
-                      <p
-                                            className="new-stage__option-description"
-                      />
-</div>,
-                  ],
-                  "className": "new-stage__option",
-                  "onClick": [Function],
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <img
-                        alt=""
-                        src="/images/timeline/stage--Sociogram.png"
-/>,
-                      "className": "new-stage__option-preview",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": null,
-                      "nodeType": "host",
-                      "props": Object {
-                        "alt": "",
-                        "src": "/images/timeline/stage--Sociogram.png",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "img",
-                    },
-                    "type": "div",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <h2
-                          className="new-stage__option-title"
->
-                          Sociogram
-</h2>,
-                        <p
-                          className="new-stage__option-description"
-/>,
-                      ],
-                      "className": "new-stage__option-details",
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "Sociogram",
-                          "className": "new-stage__option-title",
-                        },
-                        "ref": null,
-                        "rendered": "Sociogram",
-                        "type": "h2",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "",
-                          "className": "new-stage__option-description",
-                        },
-                        "ref": null,
-                        "rendered": "",
-                        "type": "p",
-                      },
-                    ],
-                    "type": "div",
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": "Ordinal",
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <div
-                      className="new-stage__option-preview"
->
-                      <img
-                                            alt=""
-                                            src="/images/timeline/stage--Ordinal.png"
-                      />
-</div>,
-                    <div
-                      className="new-stage__option-details"
->
-                      <h2
-                                            className="new-stage__option-title"
-                      >
-                                            Ordinal
-                      </h2>
-                      <p
-                                            className="new-stage__option-description"
-                      />
-</div>,
-                  ],
-                  "className": "new-stage__option",
-                  "onClick": [Function],
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <img
-                        alt=""
-                        src="/images/timeline/stage--Ordinal.png"
-/>,
-                      "className": "new-stage__option-preview",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": null,
-                      "nodeType": "host",
-                      "props": Object {
-                        "alt": "",
-                        "src": "/images/timeline/stage--Ordinal.png",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "img",
-                    },
-                    "type": "div",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <h2
-                          className="new-stage__option-title"
->
-                          Ordinal
-</h2>,
-                        <p
-                          className="new-stage__option-description"
-/>,
-                      ],
-                      "className": "new-stage__option-details",
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "Ordinal",
-                          "className": "new-stage__option-title",
-                        },
-                        "ref": null,
-                        "rendered": "Ordinal",
-                        "type": "h2",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "",
-                          "className": "new-stage__option-description",
-                        },
-                        "ref": null,
-                        "rendered": "",
-                        "type": "p",
-                      },
-                    ],
-                    "type": "div",
-                  },
-                ],
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": "Categorize",
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <div
-                      className="new-stage__option-preview"
->
-                      <img
-                                            alt=""
-                                            src="/images/timeline/stage--Categorize.png"
-                      />
-</div>,
-                    <div
-                      className="new-stage__option-details"
->
-                      <h2
-                                            className="new-stage__option-title"
-                      >
-                                            Categorize
-                      </h2>
-                      <p
-                                            className="new-stage__option-description"
-                      />
-</div>,
-                  ],
-                  "className": "new-stage__option",
-                  "onClick": [Function],
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <img
-                        alt=""
-                        src="/images/timeline/stage--Categorize.png"
-/>,
-                      "className": "new-stage__option-preview",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": null,
-                      "nodeType": "host",
-                      "props": Object {
-                        "alt": "",
-                        "src": "/images/timeline/stage--Categorize.png",
-                      },
-                      "ref": null,
-                      "rendered": null,
-                      "type": "img",
-                    },
-                    "type": "div",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": null,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [
-                        <h2
-                          className="new-stage__option-title"
->
-                          Categorize
-</h2>,
-                        <p
-                          className="new-stage__option-description"
-/>,
-                      ],
-                      "className": "new-stage__option-details",
-                    },
-                    "ref": null,
-                    "rendered": Array [
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "Categorize",
-                          "className": "new-stage__option-title",
-                        },
-                        "ref": null,
-                        "rendered": "Categorize",
-                        "type": "h2",
-                      },
-                      Object {
-                        "instance": null,
-                        "key": null,
-                        "nodeType": "host",
-                        "props": Object {
-                          "children": "",
-                          "className": "new-stage__option-description",
-                        },
-                        "ref": null,
-                        "rendered": "",
-                        "type": "p",
-                      },
-                    ],
-                    "type": "div",
-                  },
-                ],
-                "type": "div",
-              },
-            ],
-            "type": "div",
-          },
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": <Button
-              color=""
-              content=""
-              icon=""
-              iconPosition="right"
-              onClick={[Function]}
-              size="small"
->
-              cancel
-</Button>,
-            "className": "new-stage__control-bar",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": null,
-            "nodeType": "class",
-            "props": Object {
-              "children": "cancel",
-              "color": "",
-              "content": "",
-              "icon": "",
-              "iconPosition": "right",
-              "onClick": [Function],
-              "size": "small",
-            },
-            "ref": null,
-            "rendered": "cancel",
-            "type": [Function],
-          },
-          "type": "div",
-        },
-      ],
-      "type": "div",
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
