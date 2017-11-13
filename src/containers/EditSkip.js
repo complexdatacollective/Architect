@@ -8,10 +8,15 @@ import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
 import LogicGroup from '../containers/LogicGroup';
+import NetworkRule from '../containers/NetworkRule';
 
 const defaultLogic = {
   operator: '',
-  rules: [],
+  value: '',
+  filter: {
+    join: '',
+    rules: [],
+  },
 };
 
 const defaultState = {
@@ -71,6 +76,19 @@ class EditSkip extends PureComponent {
     });
   };
 
+  onFilterChange = (logic) => {
+    this.setState(
+      state => ({
+        skipLogic: {
+          ...state.skipLogic,
+          filter: {
+            logic,
+          },
+        },
+      }),
+    );
+  };
+
   hasChanges() {
     return isEqual(this.state.skipLogic, this.props.skipLogic);
   }
@@ -82,7 +100,15 @@ class EditSkip extends PureComponent {
   }
 
   render() {
-    const { show, cancel } = this.props;
+    const {
+      show,
+      cancel,
+      skipLogic: {
+        filter,
+        ...predicate
+      },
+    } = this.props;
+
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
       <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
@@ -98,14 +124,23 @@ class EditSkip extends PureComponent {
       >
         <div className="edit-skip">
           <div className="edit-skip__section">
-            Skip this stage if:
+            [Skip] this stage if:
+          </div>
+          <div className="edit-skip__section">
+            {this.props.stageId &&
+              <NetworkRule
+                key={`network-rule_${this.props.stageId}`}
+                logic={predicate}
+                onChange={this.onPredicateChange}
+              />
+            }
           </div>
           <div className="edit-skip__section">
             {this.props.stageId &&
               <LogicGroup
                 key={`logic-group_${this.props.stageId}`}
-                logic={this.props.skipLogic}
-                onChange={this.onLogicChange}
+                logic={filter}
+                onChange={this.onFilterChange}
               />
             }
           </div>

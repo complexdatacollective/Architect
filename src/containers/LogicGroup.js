@@ -9,11 +9,11 @@ const uniqueId = () => _uniqueId(new Date().getTime());
 const componentClassName = 'logic-group';
 
 const defaultLogic = {
-  operator: '',
+  join: '',
   rules: [],
 };
 
-const operatorOptions = [
+const joinOptions = [
   'OR',
   'AND',
 ];
@@ -44,13 +44,13 @@ class LogicGroup extends PureComponent {
     this.props.onChange(this.state);
   };
 
-  onChangeOperator = (event) => {
+  onChangeJoin = (event) => {
     const value = event.target.value;
 
     this.setState(
       state => ({
         ...state,
-        operator: value,
+        join: value,
       }),
       this.onChange,
     );
@@ -117,24 +117,24 @@ class LogicGroup extends PureComponent {
   }
 
   render() {
-    const { operator, rules } = this.state;
+    const { join, rules } = this.state;
 
     const LogicGroupClasses = cx(
       componentClassName,
       {
-        [`${componentClassName}--and`]: operator === 'AND',
-        [`${componentClassName}--or`]: operator === 'OR',
+        [`${componentClassName}--and`]: join === 'AND',
+        [`${componentClassName}--or`]: join === 'OR',
       },
     );
 
     return (
       <div className={LogicGroupClasses}>
-        <div className={`${componentClassName}__operator`}>
+        <div className={`${componentClassName}__join`}>
           <RuleDropDown
-            options={operatorOptions}
-            value={operator}
-            placeholder="{rule}"
-            onChange={this.onChangeOperator}
+            options={joinOptions}
+            value={join}
+            placeholder="{join}"
+            onChange={this.onChangeJoin}
           />
         </div>
         <div className={`${componentClassName}__rules`}>
