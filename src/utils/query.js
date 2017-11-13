@@ -7,8 +7,9 @@ import {
   unionWith,
   isEqual,
   flow as and,
-  isNull,
 } from 'lodash';
+
+import predicate from './predicate';
 
 /*
 
@@ -34,33 +35,18 @@ const emptyNetwork = {
   edges: [],
 };
 
-const predicate = ({ operator, value }) =>
-  (input) => {
-    switch (operator) {
-      case 'gt':
-        return input > value;
-      case 'lt':
-        return input < value;
-      case 'gte':
-        return input >= value;
-      case 'lte':
-        return input <= value;
-      case 'eq':
-        return input == value; // eslint-disable-line eqeqeq
-      case 'not':
-        return input != value; // eslint-disable-line eqeqeq
-      case 'exists':
-        return isNull(input);
-      default:
-        return false;
-    }
-  };
-
-const edge = ({
+const edgeRule = ({
   type,
+  attribute,
+  operator,
+  value: other,
 }) =>
   (network) => {
-    const edges = filter(network.edges, ['type', type]);
+    const sourceEdges = filter(network.edges, ['type', type]);
+    const edges = filter(
+      sourceEdges,
+      edge => predicate(operator)({ value: edge[attribute], other })
+    );
     // TODO: extract next two lines into reusable method, and do one for node -> edge
     const ids = flatMap(edges, ({ from, to }) => [from, to]);
     const nodes = filter(network.nodes, ({ id }) => includes(ids, id));
@@ -71,15 +57,18 @@ const edge = ({
     };
   };
 
-const alter = ({
+const alterRule = ({
   type,
   attribute,
   operator,
-  value,
+  value: other,
 }) =>
   (network) => {
     const sourceNodes = attribute ? filter(network.nodes, ['type', type]) : network.nodes;
-    const nodes = filter(sourceNodes, node => predicate({ operator, value })(node[attribute]));
+    const nodes = filter(
+      sourceNodes,
+      node => predicate(operator)({ value: node[attribute], other }),
+    );
     const ids = map(nodes, 'id');
     const edges = filter(
       network.edges,
@@ -92,14 +81,14 @@ const alter = ({
     };
   };
 
-const ego = ({
+const egoRule = ({
   attribute,
   operator,
-  value,
+  value: other,
 }) =>
   (network) => {
     const egoNode = filter(network.nodes, ['id', 1]); // `id` 1 assumed to be ego
-    if (predicate(operator, value)(ego[attribute])) {
+    if (predicate(operator)({ value: ego[attribute], other })) {
       const edges = filter(network.edges, ({ from, to }) => includes([from, to], 1));
       return {
         nodes: [egoNode],
@@ -108,7 +97,6 @@ const ego = ({
     }
     return { ...emptyNetwork };
   };
-
 
 const or = steps =>
   network => reduce(
@@ -126,7 +114,7 @@ const or = steps =>
 export {
   or,
   and,
-  alter,
-  ego,
-  edge,
+  alterRule,
+  egoRule,
+  edgeRule,
 };
