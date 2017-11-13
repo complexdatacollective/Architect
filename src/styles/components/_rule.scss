@@ -19,6 +19,7 @@
     font-size: 1.5em;
     font-weight: bold;
     cursor: pointer;
+    margin-right: 10px;
   }
 
   $delete-button-size: 30px;
@@ -49,7 +50,6 @@
   &__options {
     @include flex-inline;
     @include flex-align(flex-start, center);
-    margin-left: 10px;
     padding: 0;
     border-radius: 20px;
     height: 60px;
@@ -70,6 +70,10 @@
     &:last-child {
       border-top-right-radius: 10px;
       border-bottom-right-radius: 10px;
+    }
+
+    &--action {
+      background: palette('rule-type');
     }
 
     &--type {

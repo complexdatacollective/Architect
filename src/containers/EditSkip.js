@@ -7,7 +7,7 @@ import { has, isEqual } from 'lodash';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import Card from '../containers/Card';
-import LogicEditor from '../containers/LogicEditor';
+import LogicGroup from '../containers/LogicGroup';
 
 const defaultLogic = {
   operator: '',
@@ -102,8 +102,8 @@ class EditSkip extends PureComponent {
           </div>
           <div className="edit-skip__section">
             {this.props.stageId &&
-              <LogicEditor
-                key={`logic_${this.props.stageId}`}
+              <LogicGroup
+                key={`logic-group_${this.props.stageId}`}
                 logic={this.props.skipLogic}
                 onChange={this.onLogicChange}
               />

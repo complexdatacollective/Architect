@@ -6,6 +6,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import { Rules, RuleAddButton, RuleDropDown } from '../components';
 
 const uniqueId = () => _uniqueId(new Date().getTime());
+const componentClassName = 'logic-group';
 
 const defaultLogic = {
   operator: '',
@@ -17,7 +18,7 @@ const operatorOptions = [
   'AND',
 ];
 
-class LogicEditor extends PureComponent {
+class LogicGroup extends PureComponent {
   static propTypes = {
     logic: PropTypes.object.isRequired,
     onChange: PropTypes.func,
@@ -118,17 +119,17 @@ class LogicEditor extends PureComponent {
   render() {
     const { operator, rules } = this.state;
 
-    const logicEditorClasses = cx(
-      'logic-editor',
+    const LogicGroupClasses = cx(
+      componentClassName,
       {
-        'logic-editor--and': operator === 'AND',
-        'logic-editor--or': operator === 'OR',
+        [`${componentClassName}--and`]: operator === 'AND',
+        [`${componentClassName}--or`]: operator === 'OR',
       },
     );
 
     return (
-      <div className={logicEditorClasses}>
-        <div className="logic-editor__operator">
+      <div className={LogicGroupClasses}>
+        <div className={`${componentClassName}__operator`}>
           <RuleDropDown
             options={operatorOptions}
             value={operator}
@@ -136,7 +137,7 @@ class LogicEditor extends PureComponent {
             onChange={this.onChangeOperator}
           />
         </div>
-        <div className="logic-editor__rules">
+        <div className={`${componentClassName}__rules`}>
           <Rules
             rules={rules}
             lockAxis="y"
@@ -146,7 +147,7 @@ class LogicEditor extends PureComponent {
             onSortEnd={this.onSortRule}
           />
 
-          <div className="logic-editor__add">
+          <div className={`${componentClassName}__add`}>
             <RuleAddButton onAddRule={this.onAddRule} />
           </div>
         </div>
@@ -155,4 +156,4 @@ class LogicEditor extends PureComponent {
   }
 }
 
-export default LogicEditor;
+export default LogicGroup;
