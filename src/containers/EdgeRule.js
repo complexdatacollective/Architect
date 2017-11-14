@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { keys, flow, map, fromPairs, toPairs } from 'lodash';
 import { getVariableRegistry } from '../selectors/protocol';
-import { EdgeRule } from '../components';
+import EdgeRule from '../components/EdgeRule';
 
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);

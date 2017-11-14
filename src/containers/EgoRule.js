@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 import { keys } from 'lodash';
 import { getVariableRegistry } from '../selectors/protocol';
-import { EgoRule } from '../components';
+import EgoRule from '../components/EgoRule';
 
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);

@@ -32,8 +32,8 @@ const interfaceOptions = [
 
 class NewStage extends PureComponent {
   static propTypes = {
-    onCancel: PropTypes.func.isRequired,
-    addStage: PropTypes.func.isRequired,
+    onCancel: PropTypes.func,
+    addStage: PropTypes.func,
     index: PropTypes.number,
     onComplete: PropTypes.func,
     show: PropTypes.bool,
@@ -41,7 +41,9 @@ class NewStage extends PureComponent {
   };
 
   static defaultProps = {
+    addStage: () => {},
     onComplete: () => {},
+    onCancel: () => {},
     id: null,
     index: null,
     show: false,

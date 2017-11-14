@@ -6,7 +6,3 @@ export { default as TimelineOverview } from './TimelineOverview';
 export { default as Rules } from './Rules';
 export { default as RuleAddButton } from './RuleAddButton';
 export { default as RuleDropDown } from './RuleDropDown';
-export { default as EgoRule } from './EgoRule';
-export { default as EdgeRule } from './EdgeRule';
-export { default as AlterRule } from './AlterRule';
-export { default as NetworkRule } from './NetworkRule';

@@ -9,6 +9,7 @@ ShallowWrapper {
     cancel={false}
     id={null}
     index={null}
+    onCancel={[Function]}
     onComplete={[Function]}
     show={false}
 />,
