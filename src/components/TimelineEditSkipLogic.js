@@ -9,14 +9,14 @@ const constrain = [60, 0, 0, 0];
 
 const SkipLogicButton = Zoom(
   ({ onEditSkipLogic, onMouseEnterSkipLogic, onMouseLeaveSkipLogic }) => (
-    <div
+    <button
       className="timeline-edit-skip-logic__button"
       onMouseEnter={onMouseEnterSkipLogic}
       onMouseLeave={onMouseLeaveSkipLogic}
       onClick={onEditSkipLogic}
     >
       <Icon name="error" className="timeline-edit-skip-logic__button-icon" />
-    </div>
+    </button>
   ),
 );
 

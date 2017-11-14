@@ -8,16 +8,14 @@ const constrain = [60, 0, 0, 0];
 
 const AddNewButton = Zoom(
   ({ onInsertStage }) => (
-    <div
+    <button
       className="timeline-add-new__button"
-      role="button"
-      tabIndex="0"
       onClick={onInsertStage}
       style={{ display: 'inline-block' }}
     >
       <div className="timeline-add-new__button-label">Add new stage here</div>
       <Icon name="add-a-screen" className="timeline-add-new__button-icon" />
-    </div>
+    </button>
   ),
 );
 

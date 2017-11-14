@@ -6,7 +6,13 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Protocol
     hasChanges={false}
-    stages={Array []}
+    stages={
+        Array [
+            Object {
+              "type": "Foo",
+            },
+          ]
+    }
 />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -26,7 +32,13 @@ ShallowWrapper {
           onEditSkipLogic={[Function]}
           onEditStage={[Function]}
           onInsertStage={[Function]}
-          stages={Array []}
+          stages={
+                    Array [
+                              Object {
+                                "type": "Foo",
+                              },
+                            ]
+          }
 />,
         <div
           className="protocol__control-bar"
@@ -74,7 +86,11 @@ ShallowWrapper {
           "onEditSkipLogic": [Function],
           "onEditStage": [Function],
           "onInsertStage": [Function],
-          "stages": Array [],
+          "stages": Array [
+            Object {
+              "type": "Foo",
+            },
+          ],
         },
         "ref": null,
         "rendered": null,
@@ -166,7 +182,13 @@ ShallowWrapper {
             onEditSkipLogic={[Function]}
             onEditStage={[Function]}
             onInsertStage={[Function]}
-            stages={Array []}
+            stages={
+                        Array [
+                                    Object {
+                                      "type": "Foo",
+                                    },
+                                  ]
+            }
 />,
           <div
             className="protocol__control-bar"
@@ -214,7 +236,11 @@ ShallowWrapper {
             "onEditSkipLogic": [Function],
             "onEditStage": [Function],
             "onInsertStage": [Function],
-            "stages": Array [],
+            "stages": Array [
+              Object {
+                "type": "Foo",
+              },
+            ],
           },
           "ref": null,
           "rendered": null,
