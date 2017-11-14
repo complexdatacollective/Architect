@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
@@ -20,7 +18,7 @@ const disappear = {
   duration: animation.duration.fast,
 };
 
-const AppearTransition = ({ children, timeout, ...props }) => (
+const AppearTransition = ({ children, ...props }) => (
   <Transition
     timeout={animation.duration.fast}
     onEnter={

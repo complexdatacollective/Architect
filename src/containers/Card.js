@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -79,7 +78,7 @@ class Card extends PureComponent {
         }
         in={show}
       >
-        {(state) => (
+        {state => (
           <div className={classes}>
             <div className="card__container" ref={(el) => { this.el = el; }}>
               <div className="card__content">

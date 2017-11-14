@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import { TransitionGroup } from 'react-transition-group';

@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { connect } from 'react-redux';
 import { keys } from 'lodash';
 import { getVariableRegistry } from '../selectors/protocol';

@@ -1,12 +1,10 @@
-/*eslint-disable*/
-
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { animation } from 'network-canvas-ui';
 
-const Zoom = (WrappedComponent) =>
+const Zoom = WrappedComponent =>
   class extends PureComponent {
     static propTypes = {
       zoomColors: PropTypes.array,
@@ -20,7 +18,7 @@ const Zoom = (WrappedComponent) =>
 
     componentDidMount() {
       this.root = document.getElementsByTagName('body')[0];
-      this.node = ReactDOM.findDOMNode(this);
+      this.node = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
       this.node.addEventListener('click', this.onClick);
     }
 
@@ -28,9 +26,7 @@ const Zoom = (WrappedComponent) =>
       this.node.removeEventListener('click', this.onClick);
     }
 
-    onClick = (e) => {
-      // const root = document.getElementsByTagName('body')[0];
-
+    onClick = () => {
       const [top, right, bottom, left] = this.props.constrain;
 
       const start = this.node.getBoundingClientRect();
@@ -38,8 +34,12 @@ const Zoom = (WrappedComponent) =>
 
       const width = window.innerWidth - right - left;
       const height = window.innerHeight - top - bottom;
-      const originY = 100 * (start.top + start.height / 2) / height - (100 * top / window.innerHeight);
-      const originX = 100 * (start.left + start.width / 2) / width - (100 * left / window.innerWidth);
+      const percentageFromTop = 100 * top / window.innerHeight;
+      const percentageFromLeft = 100 * left / window.innerWidth;
+      const percentageFromCenterTop = 100 * (start.top + (start.height / 2)) / height;
+      const percentageFromCenterLeft = 100 * (start.left + (start.width / 2)) / width;
+      const originY = percentageFromCenterTop - percentageFromTop;
+      const originX = percentageFromCenterLeft - percentageFromLeft;
 
       pseudoElement.setAttribute(
         'style',
@@ -54,6 +54,7 @@ const Zoom = (WrappedComponent) =>
 
       this.root.appendChild(pseudoElement);
 
+      // TODO: Why not just fade this out rather than the complex card animation?
       anime({
         targets: pseudoElement,
         elasticity: 0,
@@ -67,6 +68,8 @@ const Zoom = (WrappedComponent) =>
           this.root.removeChild(pseudoElement);
         }, 20); // Give a little overlap
       });
+
+
     }
 
     render() {
