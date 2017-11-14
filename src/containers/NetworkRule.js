@@ -9,50 +9,29 @@ const defaultLogic = {
 
 export default class extends PureComponent {
   static propTypes = {
-    logic: PropTypes.object.isRequired,
+    logic: PropTypes.object,
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
     onChange: () => {},
+    logic: defaultLogic,
   }
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      ...defaultLogic,
-    };
-  }
-
-  componentDidMount() {
-    this.loadLogicFromProps();
-  }
-
-  onChange = () => {
-    this.props.onChange(this.state);
-  };
 
   onUpdateRule = (event, option) => {
     const value = event.target.value;
 
-    this.setState(
-      { [option]: value },
-      this.onChange,
-    );
-  };
-
-  loadLogicFromProps() {
-    this.setState({
+    this.props.onChange({
       ...this.props.logic,
+      [option]: value,
     });
-  }
+  };
 
   render() {
     return (
       <div className="network-rule">
         <NetworkRule
-          options={{ ...this.state }}
+          options={{ ...this.props.logic }}
           onUpdateRule={this.onUpdateRule}
         />
       </div>

@@ -20,104 +20,77 @@ const joinOptions = [
 
 class LogicGroup extends PureComponent {
   static propTypes = {
-    logic: PropTypes.object.isRequired,
+    logic: PropTypes.object,
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
     onChange: () => {},
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
+    logic: {
       ...defaultLogic,
-    };
+    },
   }
-
-  componentDidMount() {
-    this.loadLogicFromProps();
-  }
-
-  onChange = () => {
-    this.props.onChange(this.state);
-  };
 
   onChangeJoin = (event) => {
+    const {
+      logic,
+      onChange,
+    } = this.props;
+
     const value = event.target.value;
 
-    this.setState(
-      state => ({
-        ...state,
-        join: value,
-      }),
-      this.onChange,
-    );
-  }
+    onChange({
+      ...logic,
+      join: value,
+    });
+  };
 
   onUpdateRule = (event, id, option) => {
     const value = event.target.value;
 
-    this.setState(
-      (state) => {
-        const rules = state.rules.map(
-          (rule) => {
-            if (id !== rule.id) { return rule; }
-
-            return {
-              ...rule,
-              options: {
-                ...rule.options,
-                [option]: value,
-              },
-            };
-          },
-        );
+    const rules = this.props.logic.rules.map(
+      (rule) => {
+        if (id !== rule.id) { return rule; }
 
         return {
-          rules,
+          ...rule,
+          options: {
+            ...rule.options,
+            [option]: value,
+          },
         };
       },
-      this.onChange,
     );
+
+    this.props.onChange({
+      ...this.props.logic,
+      rules,
+    });
   };
 
   onSortRule = ({ oldIndex, newIndex }) => {
-    this.setState(
-      state => ({
-        rules: arrayMove(state.rules, oldIndex, newIndex),
-      }),
-      this.onChange,
-    );
+    this.props.onChange({
+      ...this.props.logic,
+      rules: arrayMove(this.props.logic.rules, oldIndex, newIndex),
+    });
   };
 
   onAddRule = (type) => {
-    this.setState(
-      state => ({
-        rules: [...state.rules, { type, id: uniqueId() }],
-      }),
-      this.onChange,
-    );
+    this.props.onChange({
+      ...this.props.logic,
+      rules: [...this.props.logic.rules, { type, id: uniqueId() }],
+    });
   };
 
   onDeleteRule = (id) => {
-    this.setState(
-      state => ({
-        rules: state.rules.filter(rule => rule.id !== id),
-      }),
-      this.onChange,
-    );
+    this.props.onChange({
+      ...this.props.logic,
+      rules: this.props.logic.rules.filter(rule => rule.id !== id),
+    });
   };
 
-  loadLogicFromProps() {
-    this.setState({
-      ...this.props.logic,
-    });
-  }
-
   render() {
-    const { join, rules } = this.state;
+    const { join, rules } = this.props.logic;
 
     const LogicGroupClasses = cx(
       componentClassName,

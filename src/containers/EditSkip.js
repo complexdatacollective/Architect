@@ -71,19 +71,11 @@ class EditSkip extends PureComponent {
   };
 
   onLogicChange = (logic) => {
-    this.setState({
-      skipLogic: logic,
-    });
-  };
-
-  onFilterChange = (logic) => {
     this.setState(
       state => ({
         skipLogic: {
           ...state.skipLogic,
-          filter: {
-            logic,
-          },
+          ...logic,
         },
       }),
     );
@@ -103,11 +95,16 @@ class EditSkip extends PureComponent {
     const {
       show,
       cancel,
+    } = this.props;
+
+    const {
       skipLogic: {
         filter,
         ...predicate
       },
-    } = this.props;
+    } = this.state;
+
+    console.log('render', filter);
 
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
@@ -131,7 +128,7 @@ class EditSkip extends PureComponent {
               <NetworkRule
                 key={`network-rule_${this.props.stageId}`}
                 logic={predicate}
-                onChange={this.onPredicateChange}
+                onChange={logic => this.onLogicChange(logic)}
               />
             }
           </div>
@@ -140,7 +137,7 @@ class EditSkip extends PureComponent {
               <LogicGroup
                 key={`logic-group_${this.props.stageId}`}
                 logic={filter}
-                onChange={this.onFilterChange}
+                onChange={logic => this.onLogicChange({ filter: logic })}
               />
             }
           </div>
