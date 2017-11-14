@@ -31,11 +31,10 @@ const RuleDropDown = ({
       <div className="rule-drop-down__spacer">{ spacer }</div>
       <select
         value={value}
-        defaultValue={value}
         onChange={onChange}
         className="rule-drop-down__options"
       >
-        { placeholder && <option value="">{placeholder}</option> }
+        { placeholder && <option value="" selected disabled>{placeholder}</option> }
         {optionsWithLabels.map(
           ([optionValue, optionLabel], index) => {
             return <option key={index} value={optionValue}>{optionLabel}</option>;
