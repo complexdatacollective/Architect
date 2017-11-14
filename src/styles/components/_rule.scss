@@ -2,7 +2,6 @@
   @include flex-inline;
   @include flex-align(flex-start, center);
   color: palette('text-dark');
-  margin-bottom: 30px;
   position: relative;
 
   $drag-button-size: 60px;

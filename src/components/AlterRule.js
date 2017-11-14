@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { toPairs, has, includes } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import RuleDragHandle from './RuleDragHandle';
@@ -33,6 +34,7 @@ class AlterRule extends PureComponent {
     }),
     nodeTypes: PropTypes.array,
     nodeAttributes: PropTypes.object,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -46,6 +48,7 @@ class AlterRule extends PureComponent {
     onDeleteRule: () => {},
     nodeTypes: [],
     nodeAttributes: {},
+    className: '',
   };
 
   showAttributes() {
@@ -69,10 +72,11 @@ class AlterRule extends PureComponent {
       onUpdateRule,
       onDeleteRule,
       options: { type, operator, attribute, value },
+      className,
     } = this.props;
 
     return (
-      <div className="rule rule--alter">
+      <div className={cx('rule', 'rule--alter', className)}>
         <RuleDragHandle />
         <div className="rule__options">
           <div className="rule__option rule__option--type">

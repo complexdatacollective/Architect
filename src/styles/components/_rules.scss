@@ -1,4 +1,8 @@
 .rules {
   @include flex-stack;
   @include flex-align(flex-start, flex-start);
+
+  &__rule {
+    margin-bottom: 30px;
+  }
 }

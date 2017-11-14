@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { toPairs, has, includes } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import RuleDragHandle from './RuleDragHandle';
@@ -32,7 +33,8 @@ class EdgeRule extends PureComponent {
       value: PropTypes.string,
     }),
     edgeTypes: PropTypes.array,
-    edgeAttributes: PropTypes.array,
+    edgeAttributes: PropTypes.object,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -43,9 +45,10 @@ class EdgeRule extends PureComponent {
       value: '',
     },
     edgeTypes: [],
-    edgeAttributes: [],
+    edgeAttributes: {},
     onUpdateRule: () => {},
     onDeleteRule: () => {},
+    className: '',
   };
 
   showAttributes() {
@@ -69,10 +72,11 @@ class EdgeRule extends PureComponent {
       onUpdateRule,
       onDeleteRule,
       options: { type, operator, attribute, value },
+      className,
     } = this.props;
 
     return (
-      <div className="rule rule--edge">
+      <div className={cx('rule', 'rule--edge', className)}>
         <RuleDragHandle />
         <div className="rule__options">
           <div className="rule__option rule__option--type">

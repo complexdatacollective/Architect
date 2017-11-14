@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* eslint-disable jsx-a11y/label-has-for */
 
 import React from 'react';
@@ -6,13 +5,14 @@ import { isArray, find, isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const withLabels = (options) =>
+const withLabels = options =>
   options.map(option => (isArray(option) ? option : [option, option]));
 
-const getSpacer = (optionsWithLabels, placeholder, value) =>
+const getSpacer = (optionsWithLabels, placeholder, value) => (
   isEmpty(value) ?
-    placeholder :  // return placeholder text
-    find(optionsWithLabels, [0, value])[1];  // return matching label
+    placeholder : // return placeholder text
+    find(optionsWithLabels, [0, value])[1] // return matching label
+);
 
 const RuleDropDown = ({
   options,
@@ -47,9 +47,9 @@ const RuleDropDown = ({
 };
 
 RuleDropDown.propTypes = {
-  options: PropTypes.array.isRequired,
+  options: PropTypes.array,
   value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
   className: PropTypes.string,
 };
@@ -58,6 +58,8 @@ RuleDropDown.defaultProps = {
   placeholder: '',
   className: null,
   value: '',
+  onChange: () => {},
+  options: [],
 };
 
 export default RuleDropDown;

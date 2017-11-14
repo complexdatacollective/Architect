@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 const RuleInput = ({
   value,
+  type,
   onChange,
   className,
 }) => (
@@ -13,7 +14,7 @@ const RuleInput = ({
     <div className="rule-input__spacer">{ value }</div>
     <input
       className="rule-input__text"
-      type="text"
+      type={type}
       value={value}
       onChange={onChange}
     />
@@ -22,13 +23,16 @@ const RuleInput = ({
 
 RuleInput.propTypes = {
   value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   className: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'number']),
 };
 
 RuleInput.defaultProps = {
   className: null,
+  onChange: () => {},
   value: '',
+  type: 'text',
 };
 
 export default RuleInput;

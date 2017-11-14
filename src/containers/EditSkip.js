@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { Button } from 'network-canvas-ui';
-import { has, isEqual } from 'lodash';
+import { has, isEqual, toPairs } from 'lodash';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
-import Card from '../containers/Card';
-import LogicGroup from '../containers/LogicGroup';
-import NetworkRule from '../containers/NetworkRule';
+import { Card, LogicGroup, NetworkRule } from '../containers';
+import { RuleDropDown } from '../components';
 
 const defaultLogic = {
   operator: '',
@@ -104,8 +103,6 @@ class EditSkip extends PureComponent {
       },
     } = this.state;
 
-    console.log('render', filter);
-
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
       <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
@@ -121,16 +118,23 @@ class EditSkip extends PureComponent {
       >
         <div className="edit-skip">
           <div className="edit-skip__section">
-            [Skip] this stage if:
+            <div className="edit-skip__action">
+              <RuleDropDown
+                options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
+                value="SKIP"
+              />
+            </div>
           </div>
           <div className="edit-skip__section">
-            {this.props.stageId &&
-              <NetworkRule
-                key={`network-rule_${this.props.stageId}`}
-                logic={predicate}
-                onChange={logic => this.onLogicChange(logic)}
-              />
-            }
+            <div className="edit-skip__rule">
+              {this.props.stageId &&
+                <NetworkRule
+                  key={`network-rule_${this.props.stageId}`}
+                  logic={predicate}
+                  onChange={logic => this.onLogicChange(logic)}
+                />
+              }
+            </div>
           </div>
           <div className="edit-skip__section">
             {this.props.stageId &&

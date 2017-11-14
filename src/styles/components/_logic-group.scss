@@ -6,7 +6,7 @@
   @include flex-inline;
   @include flex-align(center, center);
 
-  &__operator {
+  &__join {
     flex: 0 0 100px;
     @include flex-inline;
     @include flex-align(center, center);

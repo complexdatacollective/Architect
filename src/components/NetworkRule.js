@@ -57,6 +57,7 @@ class NetworkRule extends PureComponent {
           {this.showValue() && (
             <div className="rule__option rule__option--value">
               <RuleInput
+                type="number"
                 value={value}
                 onChange={event => onUpdateRule(event, 'value')}
               />
