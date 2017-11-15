@@ -10,6 +10,7 @@ import { Card, LogicGroup, NetworkRule } from '../containers';
 import { RuleDropDown } from '../components';
 
 const defaultLogic = {
+  action: 'SKIP',
   operator: '',
   value: '',
   filter: {
@@ -99,6 +100,7 @@ class EditSkip extends PureComponent {
     const {
       skipLogic: {
         filter,
+        action,
         ...predicate
       },
     } = this.state;
@@ -121,29 +123,24 @@ class EditSkip extends PureComponent {
             <div className="edit-skip__action">
               <RuleDropDown
                 options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
-                value="SKIP"
+                onChange={e => this.onLogicChange({ action: e.target.value })}
+                value={action}
               />
             </div>
           </div>
           <div className="edit-skip__section">
             <div className="edit-skip__rule">
-              {this.props.stageId &&
-                <NetworkRule
-                  key={`network-rule_${this.props.stageId}`}
-                  logic={predicate}
-                  onChange={logic => this.onLogicChange(logic)}
-                />
-              }
+              <NetworkRule
+                logic={predicate}
+                onChange={logic => this.onLogicChange(logic)}
+              />
             </div>
           </div>
           <div className="edit-skip__section">
-            {this.props.stageId &&
-              <LogicGroup
-                key={`logic-group_${this.props.stageId}`}
-                logic={filter}
-                onChange={logic => this.onLogicChange({ filter: logic })}
-              />
-            }
+            <LogicGroup
+              logic={filter}
+              onChange={logic => this.onLogicChange({ filter: logic })}
+            />
           </div>
           <div className="edit-skip__guidance">
             <div className="edit-skip__bubble">

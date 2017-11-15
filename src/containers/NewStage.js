@@ -74,7 +74,9 @@ class NewStage extends PureComponent {
   );
 
   render() {
-    const buttons = [<Button key="cancel" size="small" onClick={this.props.onCancel}>cancel</Button>];
+    const buttons = [
+      <Button key="cancel" size="small" onClick={this.props.onCancel}>cancel</Button>
+    ];
 
     return (
       <Card
