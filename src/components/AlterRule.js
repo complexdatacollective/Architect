@@ -122,4 +122,6 @@ class AlterRule extends PureComponent {
   }
 }
 
+export { AlterRule };
+
 export default SortableElement(AlterRule);
