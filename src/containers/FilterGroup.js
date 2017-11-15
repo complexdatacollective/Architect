@@ -6,7 +6,6 @@ import { arrayMove } from 'react-sortable-hoc';
 import { Rules, RuleAddButton, RuleDropDown } from '../components';
 
 const uniqueId = () => _uniqueId(new Date().getTime());
-const componentClassName = 'filter-group';
 
 const defaultFilter = {
   join: '',
@@ -17,6 +16,24 @@ const joinOptions = [
   'OR',
   'AND',
 ];
+
+const filterGroupClasses = join =>
+  cx(
+    'filter-group',
+    {
+      'filter-group--and': join === 'AND',
+      'filter-group--or': join === 'OR',
+    },
+  );
+
+const updateRuleOption = (rule, option, value) => ({
+  ...rule,
+  options: {
+    ...rule.options,
+    [option]: value,
+  },
+});
+
 
 class FilterGroup extends PureComponent {
   static propTypes = {
@@ -44,61 +61,51 @@ class FilterGroup extends PureComponent {
   };
 
   onUpdateRule = (value, id, option) => {
-    const rules = this.props.filter.rules.map(
-      (rule) => {
-        if (id !== rule.id) { return rule; }
+    const { filter, onChange } = this.props;
 
-        return {
-          ...rule,
-          options: {
-            ...rule.options,
-            [option]: value,
-          },
-        };
-      },
+    const rules = filter.rules.map(
+      rule => (id !== rule.id ? rule : updateRuleOption(rule, option, value)),
     );
 
-    this.props.onChange({
-      ...this.props.filter,
+    onChange({
+      ...filter,
       rules,
     });
   };
 
   onSortRule = ({ oldIndex, newIndex }) => {
-    this.props.onChange({
-      ...this.props.filter,
-      rules: arrayMove(this.props.filter.rules, oldIndex, newIndex),
+    const { filter, onChange } = this.props;
+
+    onChange({
+      ...filter,
+      rules: arrayMove(filter.rules, oldIndex, newIndex),
     });
   };
 
   onAddRule = (type) => {
-    this.props.onChange({
-      ...this.props.filter,
-      rules: [...this.props.filter.rules, { type, id: uniqueId() }],
+    const { filter, onChange } = this.props;
+
+    onChange({
+      ...filter,
+      rules: [...filter.rules, { type, id: uniqueId() }],
     });
   };
 
   onDeleteRule = (id) => {
-    this.props.onChange({
-      ...this.props.filter,
-      rules: this.props.filter.rules.filter(rule => rule.id !== id),
+    const { filter, onChange } = this.props;
+
+    onChange({
+      ...filter,
+      rules: filter.rules.filter(rule => rule.id !== id),
     });
   };
 
   render() {
     const { join, rules } = this.props.filter;
 
-    const filterGroupClasses = cx(
-      componentClassName,
-      {
-        [`${componentClassName}--and`]: join === 'AND',
-        [`${componentClassName}--or`]: join === 'OR',
-      },
-    );
-
     return (
-      <div className={filterGroupClasses}>
-        <div className={`${componentClassName}__join`}>
+      <div className={filterGroupClasses(join)}>
+        <div className="filter-group__join">
           <RuleDropDown
             options={joinOptions}
             value={join}
@@ -106,7 +113,7 @@ class FilterGroup extends PureComponent {
             onChange={this.onChangeJoin}
           />
         </div>
-        <div className={`${componentClassName}__rules`}>
+        <div className="filter-group__rules">
           <Rules
             rules={rules}
             lockAxis="y"
@@ -116,7 +123,7 @@ class FilterGroup extends PureComponent {
             onSortEnd={this.onSortRule}
           />
 
-          <div className={`${componentClassName}__add`}>
+          <div className="filter-group__add">
             <RuleAddButton onAddRule={this.onAddRule} />
           </div>
         </div>
