@@ -6,7 +6,7 @@ import { has, isEqual, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
-import { Card, NetworkRule, LogicGroup } from '../containers';
+import { Card, NetworkRule, FilterGroup } from '../containers';
 import { RuleDropDown } from '../components';
 
 const defaultLogic = {
@@ -121,9 +121,9 @@ class EditSkipLogic extends PureComponent {
         show={show}
         cancel={cancel}
       >
-        <div className="edit-skip">
-          <div className="edit-skip__section">
-            <div className="edit-skip__action">
+        <div className="edit-skip-logic">
+          <div className="edit-skip-logic__section">
+            <div className="edit-skip-logic__action">
               <RuleDropDown
                 options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
                 onChange={value => this.onLogicChange({ action: value })}
@@ -131,22 +131,22 @@ class EditSkipLogic extends PureComponent {
               />
             </div>
           </div>
-          <div className="edit-skip__section">
-            <div className="edit-skip__rule">
+          <div className="edit-skip-logic__section">
+            <div className="edit-skip-logic__rule">
               <NetworkRule
                 logic={predicate}
                 onChange={logic => this.onLogicChange(logic)}
               />
             </div>
           </div>
-          <div className="edit-skip__section">
-            <LogicGroup
-              logic={filter}
-              onChange={logic => this.onLogicChange({ filter: logic })}
+          <div className="edit-skip-logic__section">
+            <FilterGroup
+              filter={filter}
+              onChange={newFilter => this.onLogicChange({ filter: newFilter })}
             />
           </div>
-          <div className="edit-skip__guidance">
-            <div className="edit-skip__bubble">
+          <div className="edit-skip-logic__guidance">
+            <div className="edit-skip-logic__bubble">
               Skip logic tells Network Canvas when to skip past a stage. Using it,
               you can create different pathways through your interview.
             </div>

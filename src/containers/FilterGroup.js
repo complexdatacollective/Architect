@@ -6,9 +6,9 @@ import { arrayMove } from 'react-sortable-hoc';
 import { Rules, RuleAddButton, RuleDropDown } from '../components';
 
 const uniqueId = () => _uniqueId(new Date().getTime());
-const componentClassName = 'logic-group';
+const componentClassName = 'filter-group';
 
-const defaultLogic = {
+const defaultFilter = {
   join: '',
   rules: [],
 };
@@ -18,33 +18,33 @@ const joinOptions = [
   'AND',
 ];
 
-class LogicGroup extends PureComponent {
+class FilterGroup extends PureComponent {
   static propTypes = {
-    logic: PropTypes.object,
+    filter: PropTypes.object,
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
     onChange: () => {},
-    logic: {
-      ...defaultLogic,
+    filter: {
+      ...defaultFilter,
     },
   }
 
   onChangeJoin = (value) => {
     const {
-      logic,
+      filter,
       onChange,
     } = this.props;
 
     onChange({
-      ...logic,
+      ...filter,
       join: value,
     });
   };
 
   onUpdateRule = (value, id, option) => {
-    const rules = this.props.logic.rules.map(
+    const rules = this.props.filter.rules.map(
       (rule) => {
         if (id !== rule.id) { return rule; }
 
@@ -59,36 +59,36 @@ class LogicGroup extends PureComponent {
     );
 
     this.props.onChange({
-      ...this.props.logic,
+      ...this.props.filter,
       rules,
     });
   };
 
   onSortRule = ({ oldIndex, newIndex }) => {
     this.props.onChange({
-      ...this.props.logic,
-      rules: arrayMove(this.props.logic.rules, oldIndex, newIndex),
+      ...this.props.filter,
+      rules: arrayMove(this.props.filter.rules, oldIndex, newIndex),
     });
   };
 
   onAddRule = (type) => {
     this.props.onChange({
-      ...this.props.logic,
-      rules: [...this.props.logic.rules, { type, id: uniqueId() }],
+      ...this.props.filter,
+      rules: [...this.props.filter.rules, { type, id: uniqueId() }],
     });
   };
 
   onDeleteRule = (id) => {
     this.props.onChange({
-      ...this.props.logic,
-      rules: this.props.logic.rules.filter(rule => rule.id !== id),
+      ...this.props.filter,
+      rules: this.props.filter.rules.filter(rule => rule.id !== id),
     });
   };
 
   render() {
-    const { join, rules } = this.props.logic;
+    const { join, rules } = this.props.filter;
 
-    const LogicGroupClasses = cx(
+    const filterGroupClasses = cx(
       componentClassName,
       {
         [`${componentClassName}--and`]: join === 'AND',
@@ -97,7 +97,7 @@ class LogicGroup extends PureComponent {
     );
 
     return (
-      <div className={LogicGroupClasses}>
+      <div className={filterGroupClasses}>
         <div className={`${componentClassName}__join`}>
           <RuleDropDown
             options={joinOptions}
@@ -125,4 +125,4 @@ class LogicGroup extends PureComponent {
   }
 }
 
-export default LogicGroup;
+export default FilterGroup;
