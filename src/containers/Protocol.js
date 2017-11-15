@@ -6,7 +6,7 @@ import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
 import { getProtocol } from '../selectors/protocol';
 import NewStage from './NewStage';
-import EditSkip from './EditSkip';
+import EditSkipLogic from './EditSkipLogic';
 import { Timeline } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
@@ -93,7 +93,7 @@ class Protocol extends PureComponent {
           onCancel={this.onCardCancel}
         />
 
-        <EditSkip
+        <EditSkipLogic
           title="Edit skip logic"
           color=""
           show={this.isCardVisible(cards.editSkip)}

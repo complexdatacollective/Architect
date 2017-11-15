@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Button } from 'network-canvas-ui';
 import { has, isEqual, toPairs } from 'lodash';
+import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
-import { Card, LogicGroup, NetworkRule } from '../containers';
+import { Card, NetworkRule, LogicGroup } from '../containers';
 import { RuleDropDown } from '../components';
 
 const defaultLogic = {
@@ -23,7 +23,7 @@ const defaultState = {
   skipLogic: { ...defaultLogic },
 };
 
-class EditSkip extends PureComponent {
+class EditSkipLogic extends PureComponent {
   static propTypes = {
     onCancel: PropTypes.func.isRequired,
     updateStage: PropTypes.func.isRequired,
@@ -86,6 +86,8 @@ class EditSkip extends PureComponent {
   }
 
   loadLogicFromProps(props) {
+    if (props.stageId === null) { return; } // Keep state visble in transitions
+
     this.setState({
       skipLogic: props.skipLogic,
     });
@@ -95,6 +97,7 @@ class EditSkip extends PureComponent {
     const {
       show,
       cancel,
+      onCancel,
     } = this.props;
 
     const {
@@ -107,7 +110,7 @@ class EditSkip extends PureComponent {
 
     const buttons = [
       !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
-      <Button key="cancel" size="small" onClick={this.props.onCancel}>Cancel</Button>,
+      <Button key="cancel" size="small" onClick={onCancel}>Cancel</Button>,
     ];
 
     return (
@@ -172,8 +175,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { EditSkip };
+export { EditSkipLogic };
 
-export default compose(
-  connect(makeMapStateToProps, mapDispatchToProps),
-)(EditSkip);
+export default connect(makeMapStateToProps, mapDispatchToProps)(EditSkipLogic);
