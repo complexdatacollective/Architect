@@ -65,7 +65,7 @@ ShallowWrapper {
           show={false}
           title="Add a new stage"
 />,
-        <Connect(EditSkip)
+        <Connect(EditSkipLogic)
           cancel={false}
           color=""
           onCancel={[Function]}
@@ -217,7 +217,7 @@ ShallowWrapper {
             show={false}
             title="Add a new stage"
 />,
-          <Connect(EditSkip)
+          <Connect(EditSkipLogic)
             cancel={false}
             color=""
             onCancel={[Function]}

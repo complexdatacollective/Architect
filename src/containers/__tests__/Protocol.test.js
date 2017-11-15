@@ -57,10 +57,10 @@ describe('<Protocol />', () => {
 
     it('Shows/hides edit skip logic screen', () => {
       subject.find('TimelineEditSkipLogic').find('button').first().simulate('click');
-      expect(subject.find('EditSkip').prop('show')).toBe(true);
-      subject.find('EditSkip').find('button').last().simulate('click');
-      expect(subject.find('EditSkip').prop('cancel')).toBe(true);
-      expect(subject.find('EditSkip').prop('show')).toBe(false);
+      expect(subject.find('EditSkipLogic').prop('show')).toBe(true);
+      subject.find('EditSkipLogic').find('button').last().simulate('click');
+      expect(subject.find('EditSkipLogic').prop('cancel')).toBe(true);
+      expect(subject.find('EditSkipLogic').prop('show')).toBe(false);
     });
 
     it('Hides add stage screen when screen added', () => {
