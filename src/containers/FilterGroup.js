@@ -34,7 +34,6 @@ const updateRuleOption = (rule, option, value) => ({
   },
 });
 
-
 class FilterGroup extends PureComponent {
   static propTypes = {
     filter: PropTypes.object,
