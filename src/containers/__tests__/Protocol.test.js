@@ -8,8 +8,10 @@ import { shallow, mount } from 'enzyme';
 import { Protocol } from '../Protocol';
 import TimelineStage from '../../components/TimelineStage';
 
+let subject = null;
+
 const mockProps = {
-  stages: [{ type: 'Foo' }],
+  stages: [{ id: 1, type: 'Foo' }],
 };
 
 const mockStore = () =>
@@ -19,38 +21,57 @@ const mockStore = () =>
     }),
   );
 
+const makeSubject = () =>
+  mount(
+    <Provider store={mockStore()}>
+      <Protocol {...mockProps} store={mockStore()} />
+    </Provider>,
+  );
+
 describe('<Protocol />', () => {
   it('can render', () => {
-    const component = shallow(<Protocol {...mockProps} />);
+    subject = shallow(<Protocol {...mockProps} />);
 
-    expect(component).toMatchSnapshot();
+    expect(subject).toMatchSnapshot();
   });
 
   it('intial state', () => {
-    const component = shallow(<Protocol {...mockProps} />);
-    component.update();
-    expect(component.find('NewStage').length).toEqual(0);
+    subject = shallow(<Protocol {...mockProps} />);
+    subject.update();
+    expect(subject.find('NewStage').length).toEqual(0);
   });
 
-  it('Shows add stage screen when new stage is clicked', () => {
-    const component = mount(
-      <Provider store={mockStore()}>
-        <Protocol {...mockProps} store={mockStore()} />
-      </Provider>,
-    );
+  describe('Screen change interactions', () => {
 
-    component.find('TimelineAddNew').find('button').first().simulate('click');
-    expect(component.find('NewStage').prop('show')).toBe(true);
-  });
+    beforeEach(() => {
+      subject = makeSubject();
+    });
 
-  it('Shows edit screen when edit skip logic is clicked', () => {
-    const component = mount(
-      <Provider store={mockStore()}>
-        <Protocol {...mockProps} store={mockStore()} />
-      </Provider>,
-    );
+    it('Shows/hides add stage screen', () => {
+      subject.find('TimelineAddNew').find('button').first().simulate('click');
+      expect(subject.find('NewStage').prop('show')).toBe(true);
+      subject.find('NewStage').find('button').last().simulate('click');
+      expect(subject.find('NewStage').prop('cancel')).toBe(true);
+      expect(subject.find('NewStage').prop('show')).toBe(false);
+    });
 
-    component.find('TimelineEditSkipLogic').find('button').first().simulate('click');
-    expect(component.find('EditSkip').prop('show')).toBe(true);
+    it('Shows/hides edit skip logic screen', () => {
+      subject.find('TimelineEditSkipLogic').find('button').first().simulate('click');
+      expect(subject.find('EditSkip').prop('show')).toBe(true);
+      subject.find('EditSkip').find('button').last().simulate('click');
+      expect(subject.find('EditSkip').prop('cancel')).toBe(true);
+      expect(subject.find('EditSkip').prop('show')).toBe(false);
+    });
+
+    it('Hides add stage screen when screen added', () => {
+      subject.find('TimelineAddNew').find('button').first().simulate('click');
+      expect(subject.find('NewStage').prop('show')).toBe(true);
+      subject.find('.new-stage__option').first().simulate('click');
+      expect(subject.find('NewStage').prop('cancel')).toBe(false);
+      expect(subject.find('NewStage').prop('show')).toBe(false);
+    });
+
+    it('Hides edit skip logic screen when saving');
+
   });
 });

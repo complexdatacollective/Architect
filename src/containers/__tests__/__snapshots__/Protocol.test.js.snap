@@ -9,6 +9,7 @@ ShallowWrapper {
     stages={
         Array [
             Object {
+              "id": 1,
               "type": "Foo",
             },
           ]
@@ -35,6 +36,7 @@ ShallowWrapper {
           stages={
                     Array [
                               Object {
+                                "id": 1,
                                 "type": "Foo",
                               },
                             ]
@@ -88,6 +90,7 @@ ShallowWrapper {
           "onInsertStage": [Function],
           "stages": Array [
             Object {
+              "id": 1,
               "type": "Foo",
             },
           ],
@@ -185,6 +188,7 @@ ShallowWrapper {
             stages={
                         Array [
                                     Object {
+                                      "id": 1,
                                       "type": "Foo",
                                     },
                                   ]
@@ -238,6 +242,7 @@ ShallowWrapper {
             "onInsertStage": [Function],
             "stages": Array [
               Object {
+                "id": 1,
                 "type": "Foo",
               },
             ],
