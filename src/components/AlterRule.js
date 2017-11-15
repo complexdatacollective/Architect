@@ -84,7 +84,7 @@ class AlterRule extends PureComponent {
               options={nodeTypes}
               value={type}
               placeholder="{type}"
-              onChange={event => onUpdateRule(event, id, 'type')}
+              onChange={newValue => onUpdateRule(newValue, id, 'type')}
             />
           </div>
           {this.showAttributes() && (
@@ -93,7 +93,7 @@ class AlterRule extends PureComponent {
                 options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
                 value={attribute}
                 placeholder="{variable}"
-                onChange={event => onUpdateRule(event, id, 'attribute')}
+                onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
               />
             </div>
           )}
@@ -103,7 +103,7 @@ class AlterRule extends PureComponent {
                 options={operators}
                 value={operator}
                 placeholder="{rule}"
-                onChange={event => onUpdateRule(event, id, 'operator')}
+                onChange={newValue => onUpdateRule(newValue, id, 'operator')}
               />
             </div>
           )}
@@ -111,7 +111,7 @@ class AlterRule extends PureComponent {
             <div className="rule__option rule__option--value">
               <RuleInput
                 value={value}
-                onChange={event => onUpdateRule(event, id, 'value')}
+                onChange={newValue => onUpdateRule(newValue, id, 'value')}
               />
             </div>
           )}

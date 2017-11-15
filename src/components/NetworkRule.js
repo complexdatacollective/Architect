@@ -51,7 +51,7 @@ class NetworkRule extends PureComponent {
               options={operators}
               value={operator}
               placeholder="{rule}"
-              onChange={event => onUpdateRule(event, 'operator')}
+              onChange={newValue => onUpdateRule(newValue, 'operator')}
             />
           </div>
           {this.showValue() && (
@@ -59,7 +59,7 @@ class NetworkRule extends PureComponent {
               <RuleInput
                 type="number"
                 value={value}
-                onChange={event => onUpdateRule(event, 'value')}
+                onChange={newValue => onUpdateRule(newValue, 'value')}
               />
             </div>
           )}

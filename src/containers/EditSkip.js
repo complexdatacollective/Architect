@@ -123,7 +123,7 @@ class EditSkip extends PureComponent {
             <div className="edit-skip__action">
               <RuleDropDown
                 options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
-                onChange={e => this.onLogicChange({ action: e.target.value })}
+                onChange={value => this.onLogicChange({ action: value })}
                 value={action}
               />
             </div>

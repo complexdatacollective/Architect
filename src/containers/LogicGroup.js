@@ -31,13 +31,11 @@ class LogicGroup extends PureComponent {
     },
   }
 
-  onChangeJoin = (event) => {
+  onChangeJoin = (value) => {
     const {
       logic,
       onChange,
     } = this.props;
-
-    const value = event.target.value;
 
     onChange({
       ...logic,
@@ -45,9 +43,7 @@ class LogicGroup extends PureComponent {
     });
   };
 
-  onUpdateRule = (event, id, option) => {
-    const value = event.target.value;
-
+  onUpdateRule = (value, id, option) => {
     const rules = this.props.logic.rules.map(
       (rule) => {
         if (id !== rule.id) { return rule; }

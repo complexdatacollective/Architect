@@ -18,9 +18,7 @@ export default class extends PureComponent {
     logic: defaultLogic,
   }
 
-  onUpdateRule = (event, option) => {
-    const value = event.target.value;
-
+  onUpdateRule = (value, option) => {
     this.props.onChange({
       ...this.props.logic,
       [option]: value,

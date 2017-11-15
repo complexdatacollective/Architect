@@ -75,7 +75,7 @@ class EgoRule extends PureComponent {
               options={nodeAttributes}
               value={attribute}
               placeholder="{variable}"
-              onChange={event => onUpdateRule(event, id, 'attribute')}
+              onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
             />
           </div>
           { this.showOperator() && (
@@ -84,7 +84,7 @@ class EgoRule extends PureComponent {
                 options={operators}
                 value={operator}
                 placeholder="{rule}"
-                onChange={event => onUpdateRule(event, id, 'operator')}
+                onChange={newValue => onUpdateRule(newValue, id, 'operator')}
               />
             </div>
           )}
@@ -92,7 +92,7 @@ class EgoRule extends PureComponent {
             <div className="rule__option rule__option--value">
               <RuleInput
                 value={value}
-                onChange={event => onUpdateRule(event, id, 'value')}
+                onChange={newValue => onUpdateRule(newValue, id, 'value')}
               />
             </div>
           )}

@@ -30,11 +30,12 @@ const RuleDropDown = ({
     <label className={cx('rule-drop-down', className)} >
       <div className="rule-drop-down__spacer">{ spacer }</div>
       <select
+        defaultValue=""
         value={value}
-        onChange={onChange}
+        onChange={e => onChange(e.target.value)}
         className="rule-drop-down__options"
       >
-        { placeholder && <option value="" selected disabled>{placeholder}</option> }
+        { placeholder && <option value="" disabled>{placeholder}</option> }
         {optionsWithLabels.map(
           ([optionValue, optionLabel], index) => {
             return <option key={index} value={optionValue}>{optionLabel}</option>;

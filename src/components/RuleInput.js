@@ -16,7 +16,7 @@ const RuleInput = ({
       className="rule-input__text"
       type={type}
       value={value}
-      onChange={onChange}
+      onChange={e => onChange(e.target.value)}
     />
   </label>
 );
