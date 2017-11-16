@@ -72,7 +72,7 @@ class FilterGroup extends PureComponent {
     });
   };
 
-  onSortRule = ({ oldIndex, newIndex }) => {
+  onMoveRule = ({ oldIndex, newIndex }) => {
     const { filter, onChange } = this.props;
 
     onChange({
@@ -119,7 +119,7 @@ class FilterGroup extends PureComponent {
             useDragHandle
             onUpdateRule={this.onUpdateRule}
             onDeleteRule={this.onDeleteRule}
-            onSortEnd={this.onSortRule}
+            onSortEnd={this.onMoveRule}
           />
 
           <div className="filter-group__add">
