@@ -30,7 +30,6 @@ const RuleDropDown = ({
     <label className={cx('rule-drop-down', className)} >
       <div className="rule-drop-down__spacer">{ spacer }</div>
       <select
-        defaultValue=""
         value={value}
         onChange={e => onChange(e.target.value)}
         className="rule-drop-down__options"

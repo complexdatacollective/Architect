@@ -35,7 +35,6 @@ ShallowWrapper {
 />,
         <select
           className="rule-drop-down__options"
-          defaultValue=""
           onChange={[Function]}
           value=""
 >
@@ -99,7 +98,6 @@ ShallowWrapper {
             ],
           ],
           "className": "rule-drop-down__options",
-          "defaultValue": "",
           "onChange": [Function],
           "value": "",
         },
@@ -160,7 +158,6 @@ ShallowWrapper {
 />,
           <select
             className="rule-drop-down__options"
-            defaultValue=""
             onChange={[Function]}
             value=""
 >
@@ -224,7 +221,6 @@ ShallowWrapper {
               ],
             ],
             "className": "rule-drop-down__options",
-            "defaultValue": "",
             "onChange": [Function],
             "value": "",
           },
@@ -324,7 +320,6 @@ ShallowWrapper {
 />,
         <select
           className="rule-drop-down__options"
-          defaultValue=""
           onChange={[Function]}
           value=""
 >
@@ -378,7 +373,6 @@ ShallowWrapper {
             ],
           ],
           "className": "rule-drop-down__options",
-          "defaultValue": "",
           "onChange": [Function],
           "value": "",
         },
@@ -427,7 +421,6 @@ ShallowWrapper {
 />,
           <select
             className="rule-drop-down__options"
-            defaultValue=""
             onChange={[Function]}
             value=""
 >
@@ -481,7 +474,6 @@ ShallowWrapper {
               ],
             ],
             "className": "rule-drop-down__options",
-            "defaultValue": "",
             "onChange": [Function],
             "value": "",
           },
