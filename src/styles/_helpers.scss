@@ -7,7 +7,7 @@
 
 @mixin layout-container {
   @include grid-container;
-  @include flex-align(flex-start, flex-start);
+  @include flex-align(left, top);
   padding: 0 100px;
   box-sizing: border-box;
 }

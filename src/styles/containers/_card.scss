@@ -26,13 +26,13 @@
   &__title-bar {
     height: 100px;
     @include flex-inline;
-    @include flex-align(flex-start, center);
+    @include flex-align(left, middle);
   }
 
   &__control-bar {
     flex: 0 0 60px;
     background-color: palette('background');
-    @include flex-align(flex-end, center);
+    @include flex-align(right, middle);
     transform: translateZ(0) translateY(100%);
     transition: transform $animation-fast-duration $animation-default-easing $animation-fast-duration;
 

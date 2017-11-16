@@ -1,6 +1,6 @@
 .rules {
   @include flex-stack;
-  @include flex-align(flex-start, flex-start);
+  @include flex-align(left, top);
 
   &__rule {
     margin-bottom: 30px;

@@ -1,6 +1,6 @@
 .rule {
   @include flex-inline;
-  @include flex-align(flex-start, center);
+  @include flex-align(left, middle);
   color: palette('text-dark');
   position: relative;
 
@@ -8,7 +8,7 @@
 
   .rule-drag-handle {
     @include flex-inline;
-    @include flex-align(center, center);
+    @include flex-align(center, middle);
     background-color: palette('rule-control');
     color: palette('text');
     border: 0;
@@ -25,7 +25,7 @@
 
   &__delete {
     @include flex-inline;
-    @include flex-align(center, center);
+    @include flex-align(center, middle);
     background-color: palette('rule-delete');
     color: palette('text');
     border: 0;
@@ -48,7 +48,7 @@
 
   &__options {
     @include flex-inline;
-    @include flex-align(flex-start, center);
+    @include flex-align(left, middle);
     padding: 0;
     border-radius: 20px;
     height: 60px;
@@ -56,7 +56,7 @@
 
   &__option {
     @include flex-inline;
-    @include flex-align(flex-start, center);
+    @include flex-align(left, middle);
     height: 100%;
     padding: 0 20px;
     position: relative;
