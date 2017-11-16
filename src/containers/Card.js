@@ -55,14 +55,6 @@ class Card extends PureComponent {
               delay: animation.duration.fast,
               ...fadeIn,
             });
-            anime({
-              targets: this.el,
-              elasticity: 0,
-              easing: 'easeInOutQuad',
-              duration: animation.duration.fast,
-              delay: animation.duration.fast,
-              ...fadeIn,
-            });
           }
         }
         onExit={
@@ -80,7 +72,7 @@ class Card extends PureComponent {
       >
         {state => (
           <div className={classes}>
-            <div className="card__container" ref={(el) => { this.el = el; }}>
+            <div className="card__container">
               <div className="card__content">
                 <div className="card__title-bar">
                   <h1 className="card__heading">{ this.props.title }</h1>

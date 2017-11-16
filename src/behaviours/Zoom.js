@@ -54,8 +54,7 @@ const Zoom = WrappedComponent =>
 
       this.root.appendChild(pseudoElement);
 
-      // TODO: Why not just fade this out rather than the complex card animation?
-      anime({
+      anime.timeline().add({
         targets: pseudoElement,
         elasticity: 0,
         easing: 'easeInOutQuad',
@@ -63,13 +62,15 @@ const Zoom = WrappedComponent =>
         scaleY: [1, height / start.height],
         scaleX: [1, width / start.width],
         backgroundColor: this.props.zoomColors,
+      }).add({
+        targets: pseudoElement,
+        elasticity: 0,
+        easing: 'easeInOutQuad',
+        duration: animation.duration.fast,
+        opacity: [1, 0],
       }).finished.then(() => {
-        setTimeout(() => {
-          this.root.removeChild(pseudoElement);
-        }, 20); // Give a little overlap
+        this.root.removeChild(pseudoElement);
       });
-
-
     }
 
     render() {
@@ -77,6 +78,6 @@ const Zoom = WrappedComponent =>
         <WrappedComponent {...this.props} />
       );
     }
-  }
+  };
 
-  export default Zoom;
+export default Zoom;
