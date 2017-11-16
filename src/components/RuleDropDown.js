@@ -37,9 +37,8 @@ const RuleDropDown = ({
       >
         { placeholder && <option value="" disabled>{placeholder}</option> }
         {optionsWithLabels.map(
-          ([optionValue, optionLabel], index) => {
-            return <option key={index} value={optionValue}>{optionLabel}</option>;
-          },
+          ([optionValue, optionLabel], index) =>
+            <option key={index} value={optionValue}>{optionLabel}</option>,
         )}
       </select>
     </label>

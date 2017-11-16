@@ -23,7 +23,7 @@ describe('<RuleDropDown />', () => {
     const firstOption = component.find('option').at(0);
     expect([
       firstOption.prop('value'),
-      firstOption.text()
+      firstOption.text(),
     ]).toEqual(['foo', 'bar']);
   });
 
@@ -37,7 +37,7 @@ describe('<RuleDropDown />', () => {
 
     expect([
       firstOption.prop('value'),
-      firstOption.text()
+      firstOption.text(),
     ]).toEqual(['foo', 'foo']);
   });
 

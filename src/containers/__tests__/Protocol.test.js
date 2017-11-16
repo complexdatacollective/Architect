@@ -1,4 +1,3 @@
-/* eslint-disable */
 /* eslint-env jest */
 
 import React from 'react';
@@ -6,7 +5,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
 import { Protocol } from '../Protocol';
-import TimelineStage from '../../components/TimelineStage';
 
 let subject = null;
 
@@ -42,7 +40,6 @@ describe('<Protocol />', () => {
   });
 
   describe('Screen change interactions', () => {
-
     beforeEach(() => {
       subject = makeSubject();
     });
@@ -72,6 +69,5 @@ describe('<Protocol />', () => {
     });
 
     it('Hides edit skip logic screen when saving');
-
   });
 });

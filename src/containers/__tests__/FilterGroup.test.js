@@ -1,33 +1,13 @@
-/* eslint-disable */
 /* eslint-env jest */
 
 import React from 'react';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import FilterGroup from '../FilterGroup';
 
-const mockFilter = {
-  join: '',
-  rules: [],
-};
 const mockProps = {
 };
 
-const mockStore = () =>
-  createStore(
-    () => ({
-      protocol: {
-        present: {
-          variableRegistry: {
-
-          }
-        }
-      },
-    }),
-  );
-
-const makeSubject = (props) =>
+const makeSubject = props =>
   shallow(<FilterGroup {...mockProps} {...props} />);
 
 describe('<FilterGroup />', () => {
@@ -40,7 +20,7 @@ describe('<FilterGroup />', () => {
     const onChange = jest.fn();
     const subject = makeSubject({ onChange });
     subject.instance().onChangeJoin('foo');
-    expect(onChange.mock.calls[0]).toEqual([{ "join": "foo", "rules": [] }]);
+    expect(onChange.mock.calls[0]).toEqual([{ join: 'foo', rules: [] }]);
   });
 
   it('onUpdateRule(value, id, option)', () => {
@@ -50,19 +30,19 @@ describe('<FilterGroup />', () => {
       onChange,
       filter: {
         rules: [
-          {id: 'foo', options: { baz: 'hello' }},
-          {id: 'bar', options: { buzz: 'world' }},
+          { id: 'foo', options: { baz: 'hello' } },
+          { id: 'bar', options: { buzz: 'world' } },
         ],
-      }
+      },
     });
 
     subject.instance().onUpdateRule('hi', 'foo', 'baz');
 
     expect(onChange.mock.calls[0]).toEqual([{
-      "rules": [
-        {id: 'foo', options: { baz: 'hi' }},
-        {id: 'bar', options: { buzz: 'world' }},
-      ]
+      rules: [
+        { id: 'foo', options: { baz: 'hi' } },
+        { id: 'bar', options: { buzz: 'world' } },
+      ],
     }]);
   });
 
@@ -78,18 +58,18 @@ describe('<FilterGroup />', () => {
           { id: 'baz' },
           { id: 'buzz' },
         ],
-      }
+      },
     });
 
     subject.instance().onMoveRule({ oldIndex: 2, newIndex: 1 });
 
     expect(onChange.mock.calls[0]).toEqual([{
-      "rules": [
+      rules: [
         { id: 'foo' },
         { id: 'baz' },
         { id: 'bar' },
         { id: 'buzz' },
-      ]
+      ],
     }]);
   });
 
@@ -101,7 +81,7 @@ describe('<FilterGroup />', () => {
       filter: {
         rules: [
         ],
-      }
+      },
     });
 
     subject.instance().onAddRule('foo');
@@ -126,7 +106,7 @@ describe('<FilterGroup />', () => {
           { id: 'foo' },
           { id: 'bar' },
         ],
-      }
+      },
     });
 
     subject.instance().onDeleteRule('foo');
@@ -135,5 +115,4 @@ describe('<FilterGroup />', () => {
       onChange.mock.calls[0],
     ).toEqual([{ rules: [{ id: 'bar' }] }]);
   });
-
 });
