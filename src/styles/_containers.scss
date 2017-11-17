@@ -1,3 +1,4 @@
+@import './containers/start';
 @import './containers/protocol';
 @import './containers/timeline';
 @import './containers/timeline-overview';
@@ -5,4 +6,6 @@
 @import './containers/timeline-add-new';
 @import './containers/timeline-edit-skip-logic';
 @import './containers/panel';
+@import './containers/card';
 @import './containers/new-stage';
+@import './containers/edit-skip-logic';

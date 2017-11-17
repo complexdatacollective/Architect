@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { Button } from 'network-canvas-ui';
+import Card from './Card';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const interfaceOptions = [
@@ -30,17 +31,22 @@ const interfaceOptions = [
 
 class NewStage extends PureComponent {
   static propTypes = {
-    addStage: PropTypes.func.isRequired,
+    onCancel: PropTypes.func,
+    addStage: PropTypes.func,
     index: PropTypes.number,
     onComplete: PropTypes.func,
-    onCancel: PropTypes.func,
+    show: PropTypes.bool,
+    cancel: PropTypes.bool,
   };
 
   static defaultProps = {
+    addStage: () => {},
     onComplete: () => {},
     onCancel: () => {},
     id: null,
     index: null,
+    show: false,
+    cancel: false,
   }
 
   onClickStageType = (type) => {
@@ -68,20 +74,23 @@ class NewStage extends PureComponent {
   );
 
   render() {
+    const buttons = [
+      <Button key="cancel" size="small" onClick={this.props.onCancel}>cancel</Button>,
+    ];
+
     return (
-      <div className="new-stage">
-        <div className="new-stage__title-bar">
-          <h1 className="new-stage__heading">Add New Screen</h1>
-        </div>
-        <div className="new-stage__main">
+      <Card
+        title="Add New Stage"
+        buttons={buttons}
+        show={this.props.show}
+        cancel={this.props.cancel}
+      >
+        <div className="new-stage">
           <div className="new-stage__options">
             {interfaceOptions.map(this.renderOption)}
           </div>
         </div>
-        <div className="new-stage__control-bar">
-          <Button size="small" onClick={this.props.onCancel}>cancel</Button>
-        </div>
-      </div>
+      </Card>
     );
   }
 }
@@ -93,4 +102,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export { NewStage };
-export default connect(null, mapDispatchToProps)(NewStage);
+
+export default compose(
+  connect(null, mapDispatchToProps),
+)(NewStage);

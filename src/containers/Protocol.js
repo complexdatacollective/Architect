@@ -6,11 +6,17 @@ import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
 import { getProtocol } from '../selectors/protocol';
 import NewStage from './NewStage';
-import { Timeline, ScreenTransition, CardTransition } from '../components';
+import EditSkipLogic from './EditSkipLogic';
+import { Timeline } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
-const defaultStageState = {
-  insertAtIndex: null,
+const cards = {
+  newStage: Symbol('newStage'),
+  editSkip: Symbol('editSkip'),
+};
+
+const defaultActiveCardState = {
+  cardType: null,
   cancel: false,
 };
 
@@ -28,68 +34,74 @@ class Protocol extends PureComponent {
     super(props);
 
     this.state = {
-      stage: { ...defaultStageState },
+      activeCard: { ...defaultActiveCardState },
     };
   }
 
-  onCancelNewStage = () => {
+  onCardComplete = () => {
     this.setState({
-      stage: {
-        ...defaultStageState,
+      activeCard: {
+        ...defaultActiveCardState,
+      },
+    });
+  }
+
+  onCardCancel = () => {
+    this.setState({
+      activeCard: {
+        ...defaultActiveCardState,
         cancel: true,
       },
     });
   }
 
-  onNewStageAdded = () => {
+  showCard = (card, { ...options }) => {
     this.setState({
-      stage: {
-        ...defaultStageState,
+      activeCard: {
+        ...defaultActiveCardState,
+        cardType: card,
+        ...options,
       },
     });
   }
 
-  onInsertStage = (index) => {
-    this.setState({
-      stage: {
-        ...defaultStageState,
-        insertAtIndex: index,
-      },
-    });
-  };
-
-  showNewStage = () => this.state.stage.insertAtIndex !== null;
-  showTimeline = () => !this.showNewStage();
+  isAnyCardVisible = () => this.state.activeCard.cardType !== null;
+  isCardVisible = cardType => this.state.activeCard.cardType === cardType;
+  isTimelineVisible = () => !this.isAnyCardVisible();
 
   render() {
     return (
       <div className={cx('protocol', { 'protocol--has-changes': this.props.hasChanges })}>
-        <ScreenTransition
-          key="timeline"
-          in={this.showTimeline()}
-        >
-          <Timeline
-            stages={this.props.stages}
-            onInsertStage={this.onInsertStage}
-            hasChanges={this.props.hasChanges}
-          />
-        </ScreenTransition>
+        <Timeline
+          stages={this.props.stages}
+          onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
+          onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
+          hasChanges={this.props.hasChanges}
+        />
 
         <div className="protocol__control-bar">
           <Button size="small">Save</Button>
         </div>
 
-        <CardTransition
-          key="new-stage"
-          in={this.showNewStage()}
-          cancel={this.state.stage.cancel}
-        >
-          <NewStage
-            index={this.state.stage.insertAtIndex}
-            onComplete={this.onNewStageAdded}
-            onCancel={this.onCancelNewStage}
-          />
-        </CardTransition>
+        <NewStage
+          title="Add a new stage"
+          color=""
+          index={this.state.activeCard.insertAtIndex}
+          show={this.isCardVisible(cards.newStage)}
+          cancel={this.state.activeCard.cancel}
+          onComplete={this.onCardComplete}
+          onCancel={this.onCardCancel}
+        />
+
+        <EditSkipLogic
+          title="Edit skip logic"
+          color=""
+          show={this.isCardVisible(cards.editSkip)}
+          cancel={this.state.activeCard.cancel}
+          stageId={this.state.activeCard.stageId}
+          onComplete={this.onCardComplete}
+          onCancel={this.onCardCancel}
+        />
       </div>
     );
   }

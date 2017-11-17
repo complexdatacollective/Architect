@@ -1,7 +1,24 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
-import { Icon, animation } from 'network-canvas-ui';
+import { Icon, animation, colorDictionary } from 'network-canvas-ui';
+import { Zoom } from '../behaviours';
+
+const zoomColors = [colorDictionary.mustard, colorDictionary.mustard];
+const constrain = [60, 0, 0, 0];
+
+const SkipLogicButton = Zoom(
+  ({ onEditSkipLogic, onMouseEnterSkipLogic, onMouseLeaveSkipLogic }) => (
+    <button
+      className="timeline-edit-skip-logic__button"
+      onMouseEnter={onMouseEnterSkipLogic}
+      onMouseLeave={onMouseLeaveSkipLogic}
+      onClick={onEditSkipLogic}
+    >
+      <Icon name="error" className="timeline-edit-skip-logic__button-icon" />
+    </button>
+  ),
+);
 
 class TimelineEditSkipLogic extends PureComponent {
   static propTypes = {
@@ -36,8 +53,6 @@ class TimelineEditSkipLogic extends PureComponent {
   }
 
   render() {
-    const { onEditSkipLogic } = this.props;
-
     return (
       <div className="timeline-edit-skip-logic">
         <svg
@@ -53,14 +68,14 @@ class TimelineEditSkipLogic extends PureComponent {
           />
         </svg>
 
-        <div
-          className="timeline-edit-skip-logic__button"
-          onMouseEnter={this.onMouseEnterSkipLogic}
-          onMouseLeave={this.onMouseLeaveSkipLogic}
-          onClick={onEditSkipLogic}
-        >
-          <Icon name="error" className="timeline-edit-skip-logic__button-icon" />
-        </div>
+        <SkipLogicButton
+          onEditSkipLogic={this.props.onEditSkipLogic}
+          onMouseEnterSkipLogic={this.onMouseEnterSkipLogic}
+          onMouseLeaveSkipLogic={this.onMouseLeaveSkipLogic}
+          zoomColors={zoomColors}
+          constrain={constrain}
+        />
+
       </div>
     );
   }

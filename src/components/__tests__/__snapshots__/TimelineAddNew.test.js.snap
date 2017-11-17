@@ -19,38 +19,23 @@ ShallowWrapper {
     "key": null,
     "nodeType": "host",
     "props": Object {
-      "children": <ZoomElement
-        colors={
+      "children": <_class
+        constrain={
                 Array [
-                        "#2d2955",
+                        60,
+                        0,
+                        0,
+                        0,
+                      ]
+        }
+        onInsertStage={[Function]}
+        zoomColors={
+                Array [
+                        "#3a3a75",
                         "#3a3a75",
                       ]
         }
->
-        <div
-                className="timeline-add-new__button"
-                onClick={[Function]}
-                role="button"
-                style={
-                        Object {
-                                "display": "inline-block",
-                              }
-                }
-                tabIndex="0"
-        >
-                <div
-                        className="timeline-add-new__button-label"
-                >
-                        Add new stage here
-                </div>
-                <Icon
-                        className="timeline-add-new__button-icon"
-                        color=""
-                        name="add-a-screen"
-                        style={Object {}}
-                />
-        </div>
-</ZoomElement>,
+/>,
       "className": "timeline-add-new",
     },
     "ref": null,
@@ -59,92 +44,20 @@ ShallowWrapper {
       "key": null,
       "nodeType": "class",
       "props": Object {
-        "children": <div
-          className="timeline-add-new__button"
-          onClick={[Function]}
-          role="button"
-          style={
-                    Object {
-                              "display": "inline-block",
-                            }
-          }
-          tabIndex="0"
->
-          <div
-                    className="timeline-add-new__button-label"
-          >
-                    Add new stage here
-          </div>
-          <Icon
-                    className="timeline-add-new__button-icon"
-                    color=""
-                    name="add-a-screen"
-                    style={Object {}}
-          />
-</div>,
-        "colors": Array [
-          "#2d2955",
+        "constrain": Array [
+          60,
+          0,
+          0,
+          0,
+        ],
+        "onInsertStage": [Function],
+        "zoomColors": Array [
+          "#3a3a75",
           "#3a3a75",
         ],
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": null,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <div
-              className="timeline-add-new__button-label"
->
-              Add new stage here
-</div>,
-            <Icon
-              className="timeline-add-new__button-icon"
-              color=""
-              name="add-a-screen"
-              style={Object {}}
-/>,
-          ],
-          "className": "timeline-add-new__button",
-          "onClick": [Function],
-          "role": "button",
-          "style": Object {
-            "display": "inline-block",
-          },
-          "tabIndex": "0",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": null,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Add new stage here",
-              "className": "timeline-add-new__button-label",
-            },
-            "ref": null,
-            "rendered": "Add new stage here",
-            "type": "div",
-          },
-          Object {
-            "instance": null,
-            "key": null,
-            "nodeType": "class",
-            "props": Object {
-              "className": "timeline-add-new__button-icon",
-              "color": "",
-              "name": "add-a-screen",
-              "style": Object {},
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-        ],
-        "type": "div",
-      },
+      "rendered": null,
       "type": [Function],
     },
     "type": "div",
@@ -155,38 +68,23 @@ ShallowWrapper {
       "key": null,
       "nodeType": "host",
       "props": Object {
-        "children": <ZoomElement
-          colors={
+        "children": <_class
+          constrain={
                     Array [
-                              "#2d2955",
+                              60,
+                              0,
+                              0,
+                              0,
+                            ]
+          }
+          onInsertStage={[Function]}
+          zoomColors={
+                    Array [
+                              "#3a3a75",
                               "#3a3a75",
                             ]
           }
->
-          <div
-                    className="timeline-add-new__button"
-                    onClick={[Function]}
-                    role="button"
-                    style={
-                              Object {
-                                        "display": "inline-block",
-                                      }
-                    }
-                    tabIndex="0"
-          >
-                    <div
-                              className="timeline-add-new__button-label"
-                    >
-                              Add new stage here
-                    </div>
-                    <Icon
-                              className="timeline-add-new__button-icon"
-                              color=""
-                              name="add-a-screen"
-                              style={Object {}}
-                    />
-          </div>
-</ZoomElement>,
+/>,
         "className": "timeline-add-new",
       },
       "ref": null,
@@ -195,92 +93,20 @@ ShallowWrapper {
         "key": null,
         "nodeType": "class",
         "props": Object {
-          "children": <div
-            className="timeline-add-new__button"
-            onClick={[Function]}
-            role="button"
-            style={
-                        Object {
-                                    "display": "inline-block",
-                                  }
-            }
-            tabIndex="0"
->
-            <div
-                        className="timeline-add-new__button-label"
-            >
-                        Add new stage here
-            </div>
-            <Icon
-                        className="timeline-add-new__button-icon"
-                        color=""
-                        name="add-a-screen"
-                        style={Object {}}
-            />
-</div>,
-          "colors": Array [
-            "#2d2955",
+          "constrain": Array [
+            60,
+            0,
+            0,
+            0,
+          ],
+          "onInsertStage": [Function],
+          "zoomColors": Array [
+            "#3a3a75",
             "#3a3a75",
           ],
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <div
-                className="timeline-add-new__button-label"
->
-                Add new stage here
-</div>,
-              <Icon
-                className="timeline-add-new__button-icon"
-                color=""
-                name="add-a-screen"
-                style={Object {}}
-/>,
-            ],
-            "className": "timeline-add-new__button",
-            "onClick": [Function],
-            "role": "button",
-            "style": Object {
-              "display": "inline-block",
-            },
-            "tabIndex": "0",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": null,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Add new stage here",
-                "className": "timeline-add-new__button-label",
-              },
-              "ref": null,
-              "rendered": "Add new stage here",
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": null,
-              "nodeType": "class",
-              "props": Object {
-                "className": "timeline-add-new__button-icon",
-                "color": "",
-                "name": "add-a-screen",
-                "style": Object {},
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": "div",
-        },
+        "rendered": null,
         "type": [Function],
       },
       "type": "div",

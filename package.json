@@ -129,6 +129,7 @@
         "xss": "^0.3.4"
     },
     "dependencies": {
+        "react-sortable-hoc": "^0.6.8",
         "redux-undo": "^0.6.1"
     },
     "homepage": ".",

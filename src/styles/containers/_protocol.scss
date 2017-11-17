@@ -5,7 +5,7 @@
   &__control-bar {
     @include layout-container;
     @include flex-inline;
-    @include flex-align(flex-start, center);
+    @include flex-align(left, middle);
     position: absolute;
     bottom: 0;
     left: 0;

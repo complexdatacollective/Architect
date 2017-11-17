@@ -1,0 +1,65 @@
+@mixin guided {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: min-content;
+  grid-gap: 0 20px;
+
+  &__section {
+    grid-column: 1/3;
+  }
+
+  &__guidance {
+    grid-column: 3/3;
+  }
+}
+
+.edit-skip-logic {
+  @include guided;
+  width: 100%;
+
+  &__section,
+  &__guidance {
+    padding-top: 20px;
+  }
+
+  &__section {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 30px;
+      display: 'block';
+      width: 0;
+      height: 20px;
+      border-left: 8px solid palette('rule-control');
+    }
+
+    &:first-child {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &__bubble {
+    background: palette('intent-border');
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  &__action {
+    background: palette('rule-operator');
+    border-radius: 10px;
+    padding: 20px;
+    @include flex-inline;
+  }
+
+  &__rule {
+    // background: palette('intent-border');
+    // border-radius: 10px;
+    // padding: 20px;
+    // @include flex-stack;
+  }
+}

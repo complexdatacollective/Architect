@@ -1,26 +1,31 @@
-/*eslint-disable*/
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, colorDictionary as colors } from 'network-canvas-ui';
-import { ZoomElement } from '../components';
+import { Icon, colorDictionary } from 'network-canvas-ui';
+import { Zoom } from '../behaviours';
 
-const zoomColors = [colors.background, colors['light-background']];
+const zoomColors = [colorDictionary['light-background'], colorDictionary['light-background']];
+const constrain = [60, 0, 0, 0];
+
+const AddNewButton = Zoom(
+  ({ onInsertStage }) => (
+    <button
+      className="timeline-add-new__button"
+      onClick={onInsertStage}
+      style={{ display: 'inline-block' }}
+    >
+      <div className="timeline-add-new__button-label">Add new stage here</div>
+      <Icon name="add-a-screen" className="timeline-add-new__button-icon" />
+    </button>
+  ),
+);
 
 const TimelineAddNew = ({ onInsertStage }) => (
   <div className="timeline-add-new">
-    <ZoomElement colors={zoomColors}>
-      <div
-        className="timeline-add-new__button"
-        role="button"
-        tabIndex="0"
-        onClick={onInsertStage}
-        style={{ display: 'inline-block' }}
-      >
-        <div className="timeline-add-new__button-label">Add new stage here</div>
-        <Icon name="add-a-screen" className="timeline-add-new__button-icon" />
-      </div>
-    </ZoomElement>
+    <AddNewButton
+      zoomColors={zoomColors}
+      onInsertStage={onInsertStage}
+      constrain={constrain}
+    />
   </div>
 );
 

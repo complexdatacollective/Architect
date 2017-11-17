@@ -1,0 +1,31 @@
+.filter-group {
+  background-color: palette('rules');
+  transition: background-color $animation-default-easing $animation-standard-duration;
+  border-radius: 10px;
+  padding: 10px;
+  @include flex-inline;
+  @include flex-align(center, middle);
+
+  &__join {
+    flex: 0 0 100px;
+    @include flex-inline;
+    @include flex-align(center, middle);
+    padding-right: 10px;
+  }
+
+  &__rules {
+    flex: 1 1 auto;
+    padding: 30px;
+    border-radius: 10px;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    overflow: hidden;
+  }
+
+  &--and {
+    background-color: palette('rules--and');
+  }
+
+  &--or {
+    background-color: palette('rules--or');
+  }
+}

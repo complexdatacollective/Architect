@@ -25,6 +25,7 @@
     transition: background-color $animation-default-easing $animation-fast-duration, transform $animation-default-easing $animation-fast-duration;
     background-color: palette('intent-inactive');
     border-radius: 80px;
+    border: 0;
     width: 70px;
     height: 70px;
 
@@ -40,6 +41,10 @@
     &:hover {
       transform: translate(-50%, -50%) translateZ(0) scale(1);
       background-color: palette('intent');
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 }

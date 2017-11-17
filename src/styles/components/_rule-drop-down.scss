@@ -1,0 +1,26 @@
+.rule-drop-down {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  font-size: 1rem;
+  height: 1.2em;
+
+  &__spacer {
+    visibility: hidden;
+  }
+
+  &__options {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    left: 0px;
+    color: palette('text');
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+}
