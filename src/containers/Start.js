@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Start = () => (
   <div className="start">
-    Welcome.
-
-    <Link to="/protocol">Protocol</Link>
+    <Link className="start__protocol" to="/protocol">View protocol</Link>
   </div>
 );
 

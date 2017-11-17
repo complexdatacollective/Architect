@@ -1,0 +1,16 @@
+.start {
+  padding: 20px;
+
+  &__protocol {
+    display: inline-block;
+    background: palette('intent-border');
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+
+    &:hover {
+      background: palette('intent');
+      text-decoration: none;
+    }
+  }
+}
