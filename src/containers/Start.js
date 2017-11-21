@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import exporter from '../utils/exporter';
 
 class Start extends PureComponent {
-  constructor(props) {
-    super(props);
-
+  export = () => {
     exporter();
   }
 
@@ -13,6 +11,7 @@ class Start extends PureComponent {
     return (
       <div className="start">
         <Link className="start__protocol" to="/protocol">View protocol</Link>
+        <button onClick={() => this.export()}>Export</button>
       </div>
     );
   }
