@@ -23,21 +23,53 @@ const writeFile = (filename, content) =>
     });
   });
 
-// FIXME: Could actually pass in zip instance?
-const exporter = () => {
+const getAssetData = (asset) =>
+  new Promise((reject, resolve) => {
+    if (has(asset, 'data')) { resolve(asset); }
+    if (has(asset, 'filename') {
+      // TODO: load file data here
+      const fileData = '';
+
+      resolve({ ...asset, data: fileData });
+    }
+
+    reject();
+  });
+
+const createPackage = (state) => {
   const zip = new Zip();
+  zip.file('protocol.json', JSON.stringify(state));
 
-  // TODO: Add data to the export here.
-  zip.file('Hello.txt', 'Hello World\n');
-  // const img = zip.folder("images");
-  // img.file("smile.gif", imgData, {base64: true});
+  return Promise.all(
+    state.assetRegistry.map((asset) => {
+      const imageData = getAssetData(asset);
+    }),
+  ).then((assets) => {
+    const assetsDir = zip.folder('assets');
+    state.assetRegistry.forEach((asset) => {
+      assetsDir.file(asset.name, asset.data, { base64: true });
+    });
+  }).then(() => {
+    return zip.generateAsync({ type: 'blob' });
+  })
+};
 
-  return Promise.all([
-    saveDialog(),
-    zip.generateAsync({ type: 'blob' }),
-  ]).then(([ filename, content ]) =>
-    writeFile(filename, content)
+// Expects data blog e.g.
+// const zip = new Zip();
+// zip.file('Hello.txt', 'Hello World\n');
+// zip.generateAsync({ type: 'blob' }),
+const saveToDisk = content =>
+  saveDialog().then(
+    filename => writeFile(filename, content),
   );
+
+const exporter = (state) => {
+  createPackage(state).then(saveToDisk);
+};
+
+export {
+  createPackage,
+  saveToDisk,
 };
 
 export default exporter;
