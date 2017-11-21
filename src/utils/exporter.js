@@ -1,6 +1,7 @@
 import { remote } from 'electron';
 import fs from 'fs';
 import Zip from 'jszip';
+import { has } from 'lodash';
 
 const options = {
   buttonLabel: 'Save',
@@ -23,10 +24,10 @@ const writeFile = (filename, content) =>
     });
   });
 
-const getAssetData = (asset) =>
+const getAssetData = asset =>
   new Promise((reject, resolve) => {
     if (has(asset, 'data')) { resolve(asset); }
-    if (has(asset, 'filename') {
+    if (has(asset, 'filename')) {
       // TODO: load file data here
       const fileData = '';
 
@@ -41,17 +42,15 @@ const createPackage = (state) => {
   zip.file('protocol.json', JSON.stringify(state));
 
   return Promise.all(
-    state.assetRegistry.map((asset) => {
-      const imageData = getAssetData(asset);
-    }),
+    state.assetRegistry.map(
+      asset => getAssetData(asset),
+    ),
   ).then((assets) => {
     const assetsDir = zip.folder('assets');
-    state.assetRegistry.forEach((asset) => {
+    assets.forEach((asset) => {
       assetsDir.file(asset.name, asset.data, { base64: true });
     });
-  }).then(() => {
-    return zip.generateAsync({ type: 'blob' });
-  })
+  }).then(() => zip.generateAsync({ type: 'blob' }));
 };
 
 // Expects data blog e.g.
