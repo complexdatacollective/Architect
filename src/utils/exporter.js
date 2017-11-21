@@ -37,12 +37,12 @@ const getAssetData = asset =>
     reject();
   });
 
-const createPackage = (state) => {
+const createPackage = (protocol) => {
   const zip = new Zip();
-  zip.file('protocol.json', JSON.stringify(state));
+  zip.file('protocol.json', JSON.stringify(protocol));
 
   return Promise.all(
-    state.assetRegistry.map(
+    protocol.assetRegistry.map(
       asset => getAssetData(asset),
     ),
   ).then((assets) => {

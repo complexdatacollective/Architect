@@ -1,12 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import exporter from '../utils/exporter';
 
 class Start extends PureComponent {
-  export = () => {
-    exporter();
-  }
-
   render() {
     return (
       <div className="start">

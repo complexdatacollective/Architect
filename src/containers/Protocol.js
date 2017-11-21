@@ -8,6 +8,7 @@ import { getProtocol } from '../selectors/protocol';
 import NewStage from './NewStage';
 import EditSkipLogic from './EditSkipLogic';
 import { Timeline } from '../components';
+import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const cards = {
@@ -24,6 +25,7 @@ class Protocol extends PureComponent {
   static propTypes = {
     stages: PropTypes.array.isRequired,
     hasChanges: PropTypes.bool,
+    exportProtocol: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -36,6 +38,8 @@ class Protocol extends PureComponent {
     this.state = {
       activeCard: { ...defaultActiveCardState },
     };
+
+    console.log(protocolActions);
   }
 
   onCardComplete = () => {
@@ -70,8 +74,15 @@ class Protocol extends PureComponent {
   isTimelineVisible = () => !this.isAnyCardVisible();
 
   render() {
+    const protocolClasses = cx(
+      'protocol',
+      {
+        'protocol--has-changes': this.props.hasChanges,
+        // 'protocol--has-changes': true,
+      },
+    );
     return (
-      <div className={cx('protocol', { 'protocol--has-changes': this.props.hasChanges })}>
+      <div className={protocolClasses}>
         <Timeline
           stages={this.props.stages}
           onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
@@ -80,7 +91,7 @@ class Protocol extends PureComponent {
         />
 
         <div className="protocol__control-bar">
-          <Button size="small">Save</Button>
+          <Button size="small" onClick={this.props.exportProtocol}>Save</Button>
         </div>
 
         <NewStage
@@ -119,6 +130,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addStage: bindActionCreators(stageActions.addStage, dispatch),
+    exportProtocol: bindActionCreators(protocolActions.exportProtocol, dispatch),
   };
 }
 
