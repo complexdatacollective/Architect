@@ -37,14 +37,20 @@ const getAssetData = asset =>
     reject();
   });
 
+const getAssetsData = (assetRegistry) => {
+  if (!assetRegistry) { return []; }
+
+  return assetRegistry.map(
+    asset => getAssetData(asset),
+  );
+};
+
 const createPackage = (protocol) => {
   const zip = new Zip();
   zip.file('protocol.json', JSON.stringify(protocol));
 
   return Promise.all(
-    protocol.assetRegistry.map(
-      asset => getAssetData(asset),
-    ),
+    getAssetsData(protocol.assetRegistry),
   ).then((assets) => {
     const assetsDir = zip.folder('assets');
     assets.forEach((asset) => {
@@ -62,8 +68,8 @@ const saveToDisk = content =>
     filename => writeFile(filename, content),
   );
 
-const exporter = (state) => {
-  createPackage(state).then(saveToDisk);
+const exporter = (protocol) => {
+  return createPackage(protocol).then(saveToDisk);
 };
 
 export {

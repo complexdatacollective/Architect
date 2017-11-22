@@ -38,8 +38,6 @@ class Protocol extends PureComponent {
     this.state = {
       activeCard: { ...defaultActiveCardState },
     };
-
-    console.log(protocolActions);
   }
 
   onCardComplete = () => {
@@ -78,7 +76,6 @@ class Protocol extends PureComponent {
       'protocol',
       {
         'protocol--has-changes': this.props.hasChanges,
-        // 'protocol--has-changes': true,
       },
     );
     return (
