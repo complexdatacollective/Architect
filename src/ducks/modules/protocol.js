@@ -1,4 +1,5 @@
 import 'rxjs/add/operator/mergeMap'; // Each rx operator has to be manually imported
+import 'rxjs/add/operator/do'; // Each rx operator has to be manually imported
 import { combineReducers } from 'redux';
 import stages from './stages';
 import variableRegistry from './variableRegistry';
