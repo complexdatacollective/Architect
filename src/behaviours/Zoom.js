@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { animation } from 'network-canvas-ui';
 
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
 const Zoom = WrappedComponent =>
   class extends PureComponent {
     static propTypes = {
@@ -15,6 +19,8 @@ const Zoom = WrappedComponent =>
       zoomColors: ['#ffffff', '#2d2955'],
       constrain: [0, 0, 0, 0],
     };
+
+    static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
 
     componentDidMount() {
       this.root = document.getElementsByTagName('body')[0];

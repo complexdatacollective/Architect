@@ -58,16 +58,14 @@ ShallowWrapper {
 </div>,
         <Connect(NewStage)
           cancel={false}
-          color=""
           index={undefined}
           onCancel={[Function]}
           onComplete={[Function]}
           show={false}
           title="Add a new stage"
 />,
-        <Connect(EditSkipLogic)
+        <Connect(Draft(EditSkipLogic))
           cancel={false}
-          color=""
           onCancel={[Function]}
           onComplete={[Function]}
           show={false}
@@ -142,7 +140,6 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "cancel": false,
-          "color": "",
           "index": undefined,
           "onCancel": [Function],
           "onComplete": [Function],
@@ -159,7 +156,6 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "cancel": false,
-          "color": "",
           "onCancel": [Function],
           "onComplete": [Function],
           "show": false,
@@ -210,16 +206,14 @@ ShallowWrapper {
 </div>,
           <Connect(NewStage)
             cancel={false}
-            color=""
             index={undefined}
             onCancel={[Function]}
             onComplete={[Function]}
             show={false}
             title="Add a new stage"
 />,
-          <Connect(EditSkipLogic)
+          <Connect(Draft(EditSkipLogic))
             cancel={false}
-            color=""
             onCancel={[Function]}
             onComplete={[Function]}
             show={false}
@@ -294,7 +288,6 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "cancel": false,
-            "color": "",
             "index": undefined,
             "onCancel": [Function],
             "onComplete": [Function],
@@ -311,7 +304,6 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "cancel": false,
-            "color": "",
             "onCancel": [Function],
             "onComplete": [Function],
             "show": false,

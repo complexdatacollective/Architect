@@ -19,7 +19,7 @@ ShallowWrapper {
     "key": null,
     "nodeType": "host",
     "props": Object {
-      "children": <_class
+      "children": <Draft(Component)
         constrain={
                 Array [
                         60,
@@ -68,7 +68,7 @@ ShallowWrapper {
       "key": null,
       "nodeType": "host",
       "props": Object {
-        "children": <_class
+        "children": <Draft(Component)
           constrain={
                     Array [
                               60,

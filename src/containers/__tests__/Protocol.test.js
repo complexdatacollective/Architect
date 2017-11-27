@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
 import { Protocol } from '../Protocol';
+import { EditSkipLogic } from '../';
 
 let subject = null;
 
@@ -54,10 +55,10 @@ describe('<Protocol />', () => {
 
     it('Shows/hides edit skip logic screen', () => {
       subject.find('TimelineEditSkipLogic').find('button').first().simulate('click');
-      expect(subject.find('EditSkipLogic').prop('show')).toBe(true);
-      subject.find('EditSkipLogic').find('button').last().simulate('click');
-      expect(subject.find('EditSkipLogic').prop('cancel')).toBe(true);
-      expect(subject.find('EditSkipLogic').prop('show')).toBe(false);
+      expect(subject.find('Draft(EditSkipLogic)').prop('show')).toBe(true);
+      subject.find('Draft(EditSkipLogic)').find('button').last().simulate('click');
+      expect(subject.find('Draft(EditSkipLogic)').prop('cancel')).toBe(true);
+      expect(subject.find('Draft(EditSkipLogic)').prop('show')).toBe(false);
     });
 
     it('Hides add stage screen when screen added', () => {

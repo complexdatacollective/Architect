@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
-import { has, isEqual, toPairs } from 'lodash';
+import { has, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import { Card, NetworkRule, FilterGroup } from '../containers';
-import draft from '../behaviours/draft';
+import Draft from '../behaviours/Draft';
 import { RuleDropDown } from '../components';
 
 const defaultLogic = {
@@ -24,11 +24,23 @@ class EditSkipLogic extends PureComponent {
   static propTypes = {
     show: PropTypes.bool,
     cancel: PropTypes.bool,
+    hasChanges: PropTypes.bool,
+    stageId: PropTypes.number,
+    onComplete: PropTypes.func,
+    onCancel: PropTypes.func,
+    draft: PropTypes.any.isRequired,
+    updateStage: PropTypes.func.isRequired,
+    updateDraft: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     show: false,
     cancel: false,
+    draft: null,
+    stageId: null,
+    hasChanges: false,
+    onComplete: () => {},
+    onCancel: () => {},
   }
 
   onSave = () => {
@@ -118,9 +130,9 @@ function makeMapStateToProps() {
 
   return function mapStateToProps(state, props) {
     const stage = getStage(state, props);
-    const draft = getSkipLogic(stage);
+    const skipLogic = getSkipLogic(stage);
 
-    return { draft };
+    return { draft: skipLogic };
   };
 }
 
@@ -134,5 +146,5 @@ export { EditSkipLogic };
 
 export default compose(
   connect(makeMapStateToProps, mapDispatchToProps),
-  draft,
+  Draft,
 )(EditSkipLogic);

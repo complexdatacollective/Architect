@@ -7,3 +7,4 @@ export { default as EdgeRule } from './EdgeRule';
 export { default as Card } from './Card';
 export { default as FilterGroup } from './FilterGroup';
 export { default as NetworkRule } from './NetworkRule';
+export { default as EditSkipLogic } from './EditSkipLogic';

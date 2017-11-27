@@ -2,11 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 
-export default function (WrappedComponent) {
-  return class draft extends Component {
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
+const Draft = WrappedComponent =>
+  class extends Component {
     static propTypes = {
-      draft: PropTypes.any.isRequired,
+      draft: PropTypes.any,
     };
+
+    static defaultProps = {
+      draft: null,
+    };
+
+    static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
 
     constructor(props) {
       super(props);
@@ -58,4 +68,5 @@ export default function (WrappedComponent) {
       );
     }
   };
-}
+
+export default Draft;
