@@ -3,14 +3,14 @@ import fs from 'fs';
 import Zip from 'jszip';
 import { has } from 'lodash';
 
-const options = {
+const saveDialogOptions = {
   buttonLabel: 'Save',
   nameFieldLabel: 'Save as:',
 };
 
 const saveDialog = () =>
   new Promise((resolve, reject) => {
-    remote.dialog.showSaveDialog(options, (filename) => {
+    remote.dialog.showSaveDialog(saveDialogOptions, (filename) => {
       if (filename === undefined) { reject(); }
       resolve(filename);
     });
