@@ -1,34 +1,30 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { has, isEqual, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import { Card, NetworkRule, FilterGroup } from '../containers';
-import draft from '../behaviours/draft';
 import { RuleDropDown } from '../components';
 
-const defaultLogic = {
-  action: 'SKIP',
-  operator: '',
-  value: '',
-  filter: {
-    join: '',
-    rules: [],
-  },
+const defaultState = {
 };
 
-class EditSkipLogic extends PureComponent {
+class EditStage extends PureComponent {
   static propTypes = {
-    show: PropTypes.bool,
-    cancel: PropTypes.bool,
   };
 
   static defaultProps = {
-    show: false,
-    cancel: false,
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...defaultState,
+    };
   }
 
   onSave = () => {
@@ -37,29 +33,51 @@ class EditSkipLogic extends PureComponent {
     this.props.updateStage(
       stageId,
       {
-        skipLogic: this.props.draft,
+        skipLogic: this.state.skipLogic,
       },
     );
 
     this.props.onComplete();
   };
 
+  onLogicChange = (logic) => {
+    this.setState(
+      state => ({
+        ...state,
+        ...stage,
+      }),
+    );
+  };
+
+  hasChanges() {
+    return isEqual(this.state.skipLogic, this.props.skipLogic);
+  }
+
+  loadLogicFromProps(props) {
+    if (props.stageId === null) { return; } // Keep state visble in transitions
+
+    this.setState({
+      skipLogic: props.skipLogic,
+    });
+  }
+
   render() {
     const {
       show,
       cancel,
       onCancel,
-      hasChanges,
-      updateDraft,
-      draft: {
+    } = this.props;
+
+    const {
+      skipLogic: {
         filter,
         action,
         ...predicate
       },
-    } = this.props;
+    } = this.state;
 
     const buttons = [
-      hasChanges ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
+      !this.hasChanges() ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
       <Button key="cancel" size="small" onClick={onCancel}>Cancel</Button>,
     ];
 
@@ -76,7 +94,7 @@ class EditSkipLogic extends PureComponent {
             <div className="edit-skip-logic__action">
               <RuleDropDown
                 options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
-                onChange={value => updateDraft({ action: value })}
+                onChange={value => this.onLogicChange({ action: value })}
                 value={action}
               />
             </div>
@@ -85,14 +103,14 @@ class EditSkipLogic extends PureComponent {
             <div className="edit-skip-logic__rule">
               <NetworkRule
                 logic={predicate}
-                onChange={logic => updateDraft(logic)}
+                onChange={logic => this.onLogicChange(logic)}
               />
             </div>
           </div>
           <div className="edit-skip-logic__section">
             <FilterGroup
               filter={filter}
-              onChange={newFilter => updateDraft({ filter: newFilter })}
+              onChange={newFilter => this.onLogicChange({ filter: newFilter })}
             />
           </div>
           <div className="edit-skip-logic__guidance">
@@ -107,20 +125,15 @@ class EditSkipLogic extends PureComponent {
   }
 }
 
-function getSkipLogic(stage) {
-  if (!stage) { return null; }
-
-  return (has(stage, 'skipLogic') ? stage.skipLogic : defaultLogic);
-}
-
 function makeMapStateToProps() {
   const getStage = makeGetStage();
 
   return function mapStateToProps(state, props) {
     const stage = getStage(state, props);
-    const draft = getSkipLogic(stage);
 
-    return { draft };
+    return {
+      ...stage,
+    };
   };
 }
 
@@ -130,9 +143,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { EditSkipLogic };
+export { EditStage };
 
-export default compose(
-  connect(makeMapStateToProps, mapDispatchToProps),
-  draft,
-)(EditSkipLogic);
+export default connect(makeMapStateToProps, mapDispatchToProps)(EditStage);
