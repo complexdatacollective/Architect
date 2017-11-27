@@ -16,8 +16,8 @@ jest.mock(
   ),
 );
 
-describe('async actions', () => {
-  it('calls exporter() and EXPORT_COMPLETE when done', (done) => {
+describe('protocol module', () => {
+  it('EXPORT_COMPLETE action calls exporter() and EXPORT_COMPLETE when done', (done) => {
     const expectedActions = [
       { type: types.EXPORT_PROTOCOL },
       { type: types.EXPORT_COMPLETE },
