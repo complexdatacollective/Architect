@@ -3,7 +3,7 @@
 module.exports = {
   remote: {
     dialog: {
-      showSaveDialog: (_, callback) => { callback('demo.netcanvas'); },
+      showSaveDialog: (_, callback) => { callback('demo.canvas'); },
     },
   },
 };
