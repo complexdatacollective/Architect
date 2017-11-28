@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
@@ -8,14 +6,14 @@ import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import { ProtocolCard } from '../containers/ProtocolCard';
+import EditStage from '../components/EditStage';
 import { Draft } from '../behaviours';
 
 const defaultStage = {
 };
 
-class EditStage extends PureComponent {
+class EditStageContainer extends PureComponent {
   static propTypes = {
-    show: PropTypes.bool,
     hasChanges: PropTypes.bool,
     stageId: PropTypes.number,
     onComplete: PropTypes.func,
@@ -25,7 +23,6 @@ class EditStage extends PureComponent {
   };
 
   static defaultProps = {
-    show: false,
     draft: null,
     stageId: null,
     hasChanges: false,
@@ -53,18 +50,25 @@ class EditStage extends PureComponent {
 
   render() {
     const {
-      show,
-      onCancel,
+      hasChanges,
+      stageId,
+      onComplete,
+      draft,
+      updateStage,
+      updateDraft,
+      ...rest
     } = this.props;
 
     return (
       <ProtocolCard
         title="Edit Stage"
         buttons={this.renderButtons()}
-        show={show}
-        onCancel={onCancel}
+        {...rest}
       >
-        <div className="edit-stage" />
+        <EditStage
+          stage={draft}
+          onChange={this.props.updateDraft}
+        />
       </ProtocolCard>
     );
   }
@@ -85,9 +89,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { EditStage };
+export { EditStageContainer as EditStage };
 
 export default compose(
   connect(makeMapStateToProps, mapDispatchToProps),
   Draft,
-)(EditStage);
+)(EditStageContainer);
