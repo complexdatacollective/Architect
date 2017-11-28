@@ -86,7 +86,6 @@ class Protocol extends PureComponent {
         </div>
 
         <NewStage
-          title="Add a new stage"
           index={this.state.activeCard.insertAtIndex}
           show={this.isCardVisible(cards.newStage)}
           cancel={this.state.activeCard.cancel}
@@ -95,7 +94,6 @@ class Protocol extends PureComponent {
         />
 
         <EditSkipLogic
-          title="Edit skip logic"
           show={this.isCardVisible(cards.editSkip)}
           cancel={this.state.activeCard.cancel}
           stageId={this.state.activeCard.stageId}
@@ -104,9 +102,7 @@ class Protocol extends PureComponent {
         />
 
         <EditStage
-          title="Edit Stage"
           show={this.isCardVisible(cards.editStage)}
-          cancel={this.state.activeCard.cancel}
           stageId={this.state.activeCard.stageId}
           onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
