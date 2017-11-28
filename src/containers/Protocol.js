@@ -7,6 +7,7 @@ import { Button } from 'network-canvas-ui';
 import { getProtocol } from '../selectors/protocol';
 import NewStage from './NewStage';
 import EditSkipLogic from './EditSkipLogic';
+import EditStage from './EditStage';
 import { Timeline } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
@@ -76,6 +77,7 @@ class Protocol extends PureComponent {
           stages={this.props.stages}
           onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
           onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
+          onEditStage={stageId => this.showCard(cards.editStage, { stageId })}
           hasChanges={this.props.hasChanges}
         />
 
@@ -95,6 +97,15 @@ class Protocol extends PureComponent {
         <EditSkipLogic
           title="Edit skip logic"
           show={this.isCardVisible(cards.editSkip)}
+          cancel={this.state.activeCard.cancel}
+          stageId={this.state.activeCard.stageId}
+          onComplete={this.onCardComplete}
+          onCancel={this.onCardCancel}
+        />
+
+        <EditStage
+          title="Edit Stage"
+          show={this.isCardVisible(cards.editStage)}
           cancel={this.state.activeCard.cancel}
           stageId={this.state.activeCard.stageId}
           onComplete={this.onCardComplete}
