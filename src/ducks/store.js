@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
+import { createEpicMiddleware } from 'redux-observable';
 import thunk from 'redux-thunk';
 import logger from './middleware/logger';
-import epics from './middleware/epics';
-import rootReducer from './modules/rootReducer';
+import { rootEpic, rootReducer } from './modules/root';
+
+const epics = createEpicMiddleware(rootEpic);
 
 export const store = createStore(
   rootReducer,

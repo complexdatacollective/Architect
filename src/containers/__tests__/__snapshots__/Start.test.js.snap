@@ -17,49 +17,25 @@ ShallowWrapper {
     "key": null,
     "nodeType": "host",
     "props": Object {
-      "children": <Link
-        className="start__protocol"
-        replace={false}
-        to="/protocol"
->
-        View protocol
-</Link>,
-      "className": "start",
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": null,
-      "nodeType": "class",
-      "props": Object {
-        "children": "View protocol",
-        "className": "start__protocol",
-        "replace": false,
-        "to": "/protocol",
-      },
-      "ref": null,
-      "rendered": "View protocol",
-      "type": [Function],
-    },
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": null,
-      "nodeType": "host",
-      "props": Object {
-        "children": <Link
+      "children": Array [
+        <Link
           className="start__protocol"
           replace={false}
           to="/protocol"
 >
           View protocol
 </Link>,
-        "className": "start",
-      },
-      "ref": null,
-      "rendered": Object {
+        <button
+          onClick={[Function]}
+>
+          Export
+</button>,
+      ],
+      "className": "start",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
         "instance": null,
         "key": null,
         "nodeType": "class",
@@ -73,6 +49,72 @@ ShallowWrapper {
         "rendered": "View protocol",
         "type": [Function],
       },
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Export",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "Export",
+        "type": "button",
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <Link
+            className="start__protocol"
+            replace={false}
+            to="/protocol"
+>
+            View protocol
+</Link>,
+          <button
+            onClick={[Function]}
+>
+            Export
+</button>,
+        ],
+        "className": "start",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "class",
+          "props": Object {
+            "children": "View protocol",
+            "className": "start__protocol",
+            "replace": false,
+            "to": "/protocol",
+          },
+          "ref": null,
+          "rendered": "View protocol",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Export",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "Export",
+          "type": "button",
+        },
+      ],
       "type": "div",
     },
   ],
