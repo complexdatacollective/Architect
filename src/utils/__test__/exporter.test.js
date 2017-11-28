@@ -12,7 +12,6 @@ const mockProtocol = {
 };
 
 describe('exporter module', () => {
-
   describe('createPackage(protocol)', () => {
     it('returns a promise',
       () => createPackage(mockProtocol),

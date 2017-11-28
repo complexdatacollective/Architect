@@ -9,6 +9,7 @@ import { Protocol } from '../Protocol';
 let subject = null;
 
 const mockProps = {
+  exportProtocol: () => {},
   stages: [{ id: 1, type: 'Foo' }],
 };
 

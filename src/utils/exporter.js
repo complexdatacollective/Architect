@@ -68,9 +68,8 @@ const saveToDisk = content =>
     filename => writeFile(filename, content),
   );
 
-const exporter = (protocol) => {
-  return createPackage(protocol).then(saveToDisk);
-};
+const exporter = protocol =>
+  createPackage(protocol).then(saveToDisk);
 
 export {
   createPackage,

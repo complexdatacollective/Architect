@@ -9,7 +9,6 @@ import NewStage from './NewStage';
 import EditSkipLogic from './EditSkipLogic';
 import { Timeline } from '../components';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
-import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -126,7 +125,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addStage: bindActionCreators(stageActions.addStage, dispatch),
     exportProtocol: bindActionCreators(protocolActions.exportProtocol, dispatch),
   };
 }
