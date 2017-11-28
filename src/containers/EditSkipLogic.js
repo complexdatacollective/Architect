@@ -6,7 +6,7 @@ import { has, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
-import { Card, NetworkRule, FilterGroup } from '../containers';
+import { ProtocolCard, NetworkRule, FilterGroup } from '../containers';
 import { Draft } from '../behaviours';
 import { RuleDropDown } from '../components';
 
@@ -23,7 +23,6 @@ const defaultLogic = {
 class EditSkipLogic extends PureComponent {
   static propTypes = {
     show: PropTypes.bool,
-    cancel: PropTypes.bool,
     hasChanges: PropTypes.bool,
     stageId: PropTypes.number,
     onComplete: PropTypes.func,
@@ -35,7 +34,6 @@ class EditSkipLogic extends PureComponent {
 
   static defaultProps = {
     show: false,
-    cancel: false,
     draft: null,
     stageId: null,
     hasChanges: false,
@@ -56,12 +54,16 @@ class EditSkipLogic extends PureComponent {
     this.props.onComplete();
   };
 
+  renderButtons() {
+    return [].concat(
+      this.props.hasChanges ? [<Button key="save" size="small" onClick={this.onSave}>Save</Button>] : [],
+    );
+  }
+
   render() {
     const {
       show,
-      cancel,
       onCancel,
-      hasChanges,
       updateDraft,
       draft: {
         filter,
@@ -70,18 +72,13 @@ class EditSkipLogic extends PureComponent {
       },
     } = this.props;
 
-    const buttons = [
-      hasChanges ? <Button key="save" size="small" onClick={this.onSave}>Save</Button> : undefined,
-      <Button key="cancel" size="small" onClick={onCancel}>Cancel</Button>,
-    ];
-
     return (
-      <Card
+      <ProtocolCard
         title="Edit skip logic"
         type="intent"
-        buttons={buttons}
+        buttons={this.renderButtons()}
         show={show}
-        cancel={cancel}
+        onCancel={onCancel}
       >
         <div className="edit-skip-logic">
           <div className="edit-skip-logic__section">
@@ -114,7 +111,7 @@ class EditSkipLogic extends PureComponent {
             </div>
           </div>
         </div>
-      </Card>
+      </ProtocolCard>
     );
   }
 }

@@ -45,6 +45,7 @@ class Card extends PureComponent {
       <Transition
         timeout={animation.duration.fast * 2}
         unmountOnExit
+        appear
         onEnter={
           (el) => {
             anime({
