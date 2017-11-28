@@ -7,7 +7,7 @@ import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 import { Card, NetworkRule, FilterGroup } from '../containers';
-import Draft from '../behaviours/Draft';
+import { Draft } from '../behaviours';
 import { RuleDropDown } from '../components';
 
 const defaultLogic = {
