@@ -19,15 +19,7 @@ ShallowWrapper {
     "key": null,
     "nodeType": "host",
     "props": Object {
-      "children": <Draft(Component)
-        constrain={
-                Array [
-                        60,
-                        0,
-                        0,
-                        0,
-                      ]
-        }
+      "children": <getContext(Draft(Component))
         onInsertStage={[Function]}
         zoomColors={
                 Array [
@@ -42,14 +34,8 @@ ShallowWrapper {
     "rendered": Object {
       "instance": null,
       "key": null,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "constrain": Array [
-          60,
-          0,
-          0,
-          0,
-        ],
         "onInsertStage": [Function],
         "zoomColors": Array [
           "#3a3a75",
@@ -68,15 +54,7 @@ ShallowWrapper {
       "key": null,
       "nodeType": "host",
       "props": Object {
-        "children": <Draft(Component)
-          constrain={
-                    Array [
-                              60,
-                              0,
-                              0,
-                              0,
-                            ]
-          }
+        "children": <getContext(Draft(Component))
           onInsertStage={[Function]}
           zoomColors={
                     Array [
@@ -91,14 +69,8 @@ ShallowWrapper {
       "rendered": Object {
         "instance": null,
         "key": null,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "constrain": Array [
-            60,
-            0,
-            0,
-            0,
-          ],
           "onInsertStage": [Function],
           "zoomColors": Array [
             "#3a3a75",

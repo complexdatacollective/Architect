@@ -5,7 +5,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
 import { Protocol } from '../Protocol';
-import { EditSkipLogic } from '../';
 
 let subject = null;
 

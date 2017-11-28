@@ -6,7 +6,6 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <NewStage
     addStage={[Function]}
-    cancel={false}
     id={null}
     index={null}
     onCancel={[Function]}
@@ -25,19 +24,7 @@ ShallowWrapper {
     "key": null,
     "nodeType": "class",
     "props": Object {
-      "buttons": Array [
-        <Button
-          color=""
-          content=""
-          icon=""
-          iconPosition="right"
-          onClick={[Function]}
-          size="small"
->
-          cancel
-</Button>,
-      ],
-      "cancel": false,
+      "buttons": Array [],
       "children": <div
         className="new-stage"
 >
@@ -146,9 +133,9 @@ ShallowWrapper {
                 </div>
         </div>
 </div>,
+      "onCancel": [Function],
       "show": false,
       "title": "Add New Stage",
-      "type": "default",
     },
     "ref": null,
     "rendered": Object {
@@ -815,19 +802,7 @@ ShallowWrapper {
       "key": null,
       "nodeType": "class",
       "props": Object {
-        "buttons": Array [
-          <Button
-            color=""
-            content=""
-            icon=""
-            iconPosition="right"
-            onClick={[Function]}
-            size="small"
->
-            cancel
-</Button>,
-        ],
-        "cancel": false,
+        "buttons": Array [],
         "children": <div
           className="new-stage"
 >
@@ -936,9 +911,9 @@ ShallowWrapper {
                     </div>
           </div>
 </div>,
+        "onCancel": [Function],
         "show": false,
         "title": "Add New Stage",
-        "type": "default",
       },
       "ref": null,
       "rendered": Object {

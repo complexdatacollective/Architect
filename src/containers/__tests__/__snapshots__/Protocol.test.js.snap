@@ -28,7 +28,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Timeline
+        <withContext(Timeline)
           hasChanges={false}
           onEditSkipLogic={[Function]}
           onEditStage={[Function]}
@@ -62,7 +62,6 @@ ShallowWrapper {
           onCancel={[Function]}
           onComplete={[Function]}
           show={false}
-          title="Add a new stage"
 />,
         <Connect(Draft(EditSkipLogic))
           cancel={false}
@@ -70,7 +69,12 @@ ShallowWrapper {
           onComplete={[Function]}
           show={false}
           stageId={undefined}
-          title="Edit skip logic"
+/>,
+        <Connect(Draft(EditStageContainer))
+          onCancel={[Function]}
+          onComplete={[Function]}
+          show={false}
+          stageId={undefined}
 />,
       ],
       "className": "protocol",
@@ -144,7 +148,6 @@ ShallowWrapper {
           "onCancel": [Function],
           "onComplete": [Function],
           "show": false,
-          "title": "Add a new stage",
         },
         "ref": null,
         "rendered": null,
@@ -160,7 +163,20 @@ ShallowWrapper {
           "onComplete": [Function],
           "show": false,
           "stageId": undefined,
-          "title": "Edit skip logic",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "class",
+        "props": Object {
+          "onCancel": [Function],
+          "onComplete": [Function],
+          "show": false,
+          "stageId": undefined,
         },
         "ref": null,
         "rendered": null,
@@ -176,7 +192,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Timeline
+          <withContext(Timeline)
             hasChanges={false}
             onEditSkipLogic={[Function]}
             onEditStage={[Function]}
@@ -210,7 +226,6 @@ ShallowWrapper {
             onCancel={[Function]}
             onComplete={[Function]}
             show={false}
-            title="Add a new stage"
 />,
           <Connect(Draft(EditSkipLogic))
             cancel={false}
@@ -218,7 +233,12 @@ ShallowWrapper {
             onComplete={[Function]}
             show={false}
             stageId={undefined}
-            title="Edit skip logic"
+/>,
+          <Connect(Draft(EditStageContainer))
+            onCancel={[Function]}
+            onComplete={[Function]}
+            show={false}
+            stageId={undefined}
 />,
         ],
         "className": "protocol",
@@ -292,7 +312,6 @@ ShallowWrapper {
             "onCancel": [Function],
             "onComplete": [Function],
             "show": false,
-            "title": "Add a new stage",
           },
           "ref": null,
           "rendered": null,
@@ -308,7 +327,20 @@ ShallowWrapper {
             "onComplete": [Function],
             "show": false,
             "stageId": undefined,
-            "title": "Edit skip logic",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "class",
+          "props": Object {
+            "onCancel": [Function],
+            "onComplete": [Function],
+            "show": false,
+            "stageId": undefined,
           },
           "ref": null,
           "rendered": null,

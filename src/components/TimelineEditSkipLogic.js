@@ -5,7 +5,6 @@ import { Icon, animation, colorDictionary } from 'network-canvas-ui';
 import { Zoom } from '../behaviours';
 
 const zoomColors = [colorDictionary.mustard, colorDictionary.mustard];
-const constrain = [60, 0, 0, 0];
 
 const SkipLogicButton = Zoom(
   ({ onEditSkipLogic, onMouseEnterSkipLogic, onMouseLeaveSkipLogic }) => (
@@ -73,7 +72,6 @@ class TimelineEditSkipLogic extends PureComponent {
           onMouseEnterSkipLogic={this.onMouseEnterSkipLogic}
           onMouseLeaveSkipLogic={this.onMouseLeaveSkipLogic}
           zoomColors={zoomColors}
-          constrain={constrain}
         />
 
       </div>
