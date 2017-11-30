@@ -18,15 +18,8 @@
   }
 
   &__control-bar,
-  &__title-bar,
   &__main {
     @include layout-container;
-  }
-
-  &__title-bar {
-    height: 100px;
-    @include flex-inline;
-    @include flex-align(left, middle);
   }
 
   &__control-bar {

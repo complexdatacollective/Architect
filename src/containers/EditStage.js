@@ -61,7 +61,6 @@ class EditStageContainer extends PureComponent {
 
     return (
       <ProtocolCard
-        title="Edit Stage"
         buttons={this.renderButtons()}
         {...rest}
       >

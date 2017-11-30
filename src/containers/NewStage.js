@@ -73,7 +73,6 @@ class NewStage extends PureComponent {
   render() {
     return (
       <ProtocolCard
-        title="Add New Stage"
         show={this.props.show}
         onCancel={this.props.onCancel}
       >

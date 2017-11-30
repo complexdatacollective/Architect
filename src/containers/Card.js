@@ -21,7 +21,6 @@ class Card extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     buttons: PropTypes.arrayOf(PropTypes.node),
-    title: PropTypes.string.isRequired,
     type: PropTypes.string,
     show: PropTypes.bool,
     cancel: PropTypes.bool,
@@ -75,9 +74,6 @@ class Card extends PureComponent {
           <div className={classes}>
             <div className="card__container">
               <div className="card__content">
-                <div className="card__title-bar">
-                  <h1 className="card__heading">{ this.props.title }</h1>
-                </div>
                 <div className="card__main">
                   { this.props.children }
                 </div>
