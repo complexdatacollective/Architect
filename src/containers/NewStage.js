@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
-import { Button } from 'network-canvas-ui';
-import Card from './Card';
+import { ProtocolCard } from '../containers';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
 
 const interfaceOptions = [
@@ -36,7 +35,6 @@ class NewStage extends PureComponent {
     index: PropTypes.number,
     onComplete: PropTypes.func,
     show: PropTypes.bool,
-    cancel: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -46,7 +44,6 @@ class NewStage extends PureComponent {
     id: null,
     index: null,
     show: false,
-    cancel: false,
   }
 
   onClickStageType = (type) => {
@@ -74,23 +71,18 @@ class NewStage extends PureComponent {
   );
 
   render() {
-    const buttons = [
-      <Button key="cancel" size="small" onClick={this.props.onCancel}>cancel</Button>,
-    ];
-
     return (
-      <Card
+      <ProtocolCard
         title="Add New Stage"
-        buttons={buttons}
         show={this.props.show}
-        cancel={this.props.cancel}
+        onCancel={this.props.onCancel}
       >
         <div className="new-stage">
           <div className="new-stage__options">
             {interfaceOptions.map(this.renderOption)}
           </div>
         </div>
-      </Card>
+      </ProtocolCard>
     );
   }
 }

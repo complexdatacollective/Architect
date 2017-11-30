@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { flatten, zip } from 'lodash';
 import { TimelineOverview, TimelineStage, TimelineAddNew } from '../components';
+import constrain from '../behaviours/constrain';
 
 class Timeline extends PureComponent {
   static propTypes = {
@@ -58,4 +59,6 @@ class Timeline extends PureComponent {
   }
 }
 
-export default Timeline;
+export { Timeline };
+
+export default constrain([60, 0, 0, 0])(Timeline);

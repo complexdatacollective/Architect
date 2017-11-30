@@ -4,7 +4,6 @@ import { Icon, colorDictionary } from 'network-canvas-ui';
 import { Zoom } from '../behaviours';
 
 const zoomColors = [colorDictionary['light-background'], colorDictionary['light-background']];
-const constrain = [60, 0, 0, 0];
 
 const AddNewButton = Zoom(
   ({ onInsertStage }) => (
@@ -24,7 +23,6 @@ const TimelineAddNew = ({ onInsertStage }) => (
     <AddNewButton
       zoomColors={zoomColors}
       onInsertStage={onInsertStage}
-      constrain={constrain}
     />
   </div>
 );

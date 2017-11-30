@@ -1,6 +1,27 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Zoom } from '../behaviours';
 import TimelineEditSkipLogic from './TimelineEditSkipLogic';
+
+const EditStageButton = Zoom(
+  ({
+    onEditStage,
+    snapshotSrc,
+  }) => (
+    <div
+      className="timeline-stage__preview"
+      role="button"
+      onClick={onEditStage}
+      tabIndex="0"
+    >
+      <img
+        src={snapshotSrc}
+        alt=""
+        className="timeline-stage__preview-image"
+      />
+    </div>
+  ),
+);
 
 class TimelineStage extends PureComponent {
   static propTypes = {
@@ -21,16 +42,13 @@ class TimelineStage extends PureComponent {
 
     return (
       <div className="timeline-stage">
-        <div
-          className="timeline-stage__preview"
-          role="button"
-          onClick={onEditStage}
-          tabIndex="0"
-        >
-          <img src={this.snapshotSrc()} alt="" className="timeline-stage__preview-image" />
-        </div>
-
-        <TimelineEditSkipLogic onEditSkipLogic={onEditSkipLogic} />
+        <EditStageButton
+          onEditStage={onEditStage}
+          snapshotSrc={this.snapshotSrc()}
+        />
+        <TimelineEditSkipLogic
+          onEditSkipLogic={onEditSkipLogic}
+        />
       </div>
     );
   }

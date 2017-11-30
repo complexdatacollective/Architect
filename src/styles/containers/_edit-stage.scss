@@ -1,0 +1,9 @@
+.edit-stage {
+  @include guided;
+  width: 100%;
+
+  &__section,
+  &__guidance {
+    padding-top: 20px;
+  }
+}
