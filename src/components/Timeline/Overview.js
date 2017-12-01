@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { ToggleInput } from 'network-canvas-ui';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as protocolActions } from '../../ducks/modules/protocol/protocolOptions';
-import TextInput from '../TextInput';
+import { TextInput } from '../Form';
 import SeamlessInput from '../SeamlessInput';
 
 class TimelineOverview extends PureComponent {

@@ -75,7 +75,7 @@ class EditSkipLogic extends PureComponent {
 
     return (
       <ProtocolCard
-        type="intent"
+        type="rules"
         buttons={this.renderButtons()}
         show={show}
         onCancel={onCancel}

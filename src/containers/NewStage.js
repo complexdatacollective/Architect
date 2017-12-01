@@ -75,6 +75,7 @@ class NewStage extends PureComponent {
       <ProtocolCard
         show={this.props.show}
         onCancel={this.props.onCancel}
+        type="choice"
       >
         <div className="new-stage">
           <div className="new-stage__options">

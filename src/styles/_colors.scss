@@ -10,6 +10,14 @@
 @include palette-set('intent-border', color('mustard--dark'));
 @include palette-set('rail', color('neon-coral'));
 
+
+@include palette-set('card-background', color('white'));
+@include palette-set('card-text', color('charcoal'));
+@include palette-set('card-background--rules', color('mustard'));
+@include palette-set('card-text--rules', color('white'));
+@include palette-set('card-background--choice', palette('light-background'));
+@include palette-set('card-text--choice', color('white'));
+
 // rule
 @include palette-set('rule-control', color('cyber-grape'));
 @include palette-set('rule-type', color('neon-coral'));

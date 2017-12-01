@@ -6,4 +6,11 @@
   &__guidance {
     padding-top: 20px;
   }
+
+  &__title {
+    &-input {
+      @include typography('title-1');
+      text-align: left;
+    }
+  }
 }

@@ -1,15 +1,16 @@
+/* eslint-disable */
 import React from 'react';
+import Title from './Title';
 
-const StageTitle = () => null;
 const StageNodeType = () => null;
 const StageForm = () => null;
 const StagePrompts = () => null;
 const StagePanels = () => null;
 
-const EditStage = () => (
+const EditStage = ({ stage, onChange }) => (
   <div className="edit-stage">
     <div className="edit-stage__section">
-      <StageTitle />
+      <Title title={stage.title} onChange={title => { onChange({ title }); } }/>
       <StageNodeType />
       <StageForm />
       <StagePrompts />

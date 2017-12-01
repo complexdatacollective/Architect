@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { colorDictionary } from 'network-canvas-ui';
 import { Zoom } from '../../behaviours';
 import EditSkipLogic from './EditSkipLogic';
+
+const zoomColors = [colorDictionary.lightBackground, colorDictionary.white];
 
 const EditStageButton = Zoom(
   ({
@@ -45,6 +48,7 @@ class TimelineStage extends PureComponent {
         <EditStageButton
           onEditStage={onEditStage}
           snapshotSrc={this.snapshotSrc()}
+          zoomColors={zoomColors}
         />
         <EditSkipLogic
           onEditSkipLogic={onEditSkipLogic}
