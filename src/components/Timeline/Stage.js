@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Zoom } from '../behaviours';
-import TimelineEditSkipLogic from './TimelineEditSkipLogic';
+import { Zoom } from '../../behaviours';
+import EditSkipLogic from './EditSkipLogic';
 
 const EditStageButton = Zoom(
   ({
@@ -46,7 +46,7 @@ class TimelineStage extends PureComponent {
           onEditStage={onEditStage}
           snapshotSrc={this.snapshotSrc()}
         />
-        <TimelineEditSkipLogic
+        <EditSkipLogic
           onEditSkipLogic={onEditSkipLogic}
         />
       </div>

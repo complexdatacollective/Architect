@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { flatten, zip } from 'lodash';
-import { TimelineOverview, TimelineStage, TimelineAddNew } from '../components';
-import constrain from '../behaviours/constrain';
+import Overview from './Overview';
+import Stage from './Stage';
+import AddNew from './AddNew';
+import constrain from '../../behaviours/constrain';
 
 class Timeline extends PureComponent {
   static propTypes = {
@@ -20,7 +22,7 @@ class Timeline extends PureComponent {
   };
 
   renderStage = (stage, index) => (
-    <TimelineStage
+    <Stage
       key={`stage_${stage.id}`}
       id={`stage_${index}`}
       {...stage}
@@ -30,7 +32,7 @@ class Timeline extends PureComponent {
   );
 
   renderAddNew = (item, index) => (
-    <TimelineAddNew
+    <AddNew
       key={`add-new_${index}`}
       onInsertStage={() => this.props.onInsertStage(index + 1)}
     />
@@ -45,10 +47,10 @@ class Timeline extends PureComponent {
     return (
       <div className="timeline">
         <div className="timeline__main">
-          <TimelineOverview
+          <Overview
             title="My protocol"
           />
-          <TimelineAddNew
+          <AddNew
             key={'add-new_0'}
             onInsertStage={() => this.props.onInsertStage(0)}
           />

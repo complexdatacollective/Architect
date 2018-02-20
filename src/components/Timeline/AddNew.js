@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, colorDictionary } from 'network-canvas-ui';
-import { Zoom } from '../behaviours';
+import { Zoom } from '../../behaviours';
 
 const zoomColors = [colorDictionary['light-background'], colorDictionary['light-background']];
 

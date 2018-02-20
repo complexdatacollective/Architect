@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import TimelineStage from '../TimelineStage';
+import Stage from '../Stage';
 
 const mockProps = {
   type: 'Foo',
@@ -10,9 +10,9 @@ const mockProps = {
   onEditSkipLogic: () => {},
 };
 
-describe('<TimelineStage />', () => {
+describe('<Stage />', () => {
   it('can render', () => {
-    const component = shallow(<TimelineStage {...mockProps} />);
+    const component = shallow(<Stage {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });

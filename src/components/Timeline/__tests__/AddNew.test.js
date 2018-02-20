@@ -2,15 +2,15 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import TimelineAddNew from '../TimelineAddNew';
+import AddNew from '../AddNew';
 
 const mockProps = {
   onInsertStage: () => {},
 };
 
-describe('<TimelineAddNew />', () => {
+describe('<AddNew />', () => {
   it('can render', () => {
-    const component = shallow(<TimelineAddNew {...mockProps} />);
+    const component = shallow(<AddNew {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });

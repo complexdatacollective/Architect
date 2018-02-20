@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { Icon, animation, colorDictionary } from 'network-canvas-ui';
-import { Zoom } from '../behaviours';
+import { Zoom } from '../../behaviours';
 
 const zoomColors = [colorDictionary.mustard, colorDictionary.mustard];
 

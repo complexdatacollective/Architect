@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { ToggleInput } from 'network-canvas-ui';
-import { getProtocol } from '../selectors/protocol';
-import { actionCreators as protocolActions } from '../ducks/modules/protocolOptions';
-import TextInput from './TextInput';
-import SeamlessInput from './SeamlessInput';
+import { getProtocol } from '../../selectors/protocol';
+import { actionCreators as protocolActions } from '../../ducks/modules/protocolOptions';
+import TextInput from '../TextInput';
+import SeamlessInput from '../SeamlessInput';
 
 class TimelineOverview extends PureComponent {
   constructor(props) {
