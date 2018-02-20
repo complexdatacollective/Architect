@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, has, includes } from 'lodash';
+import { toPairs, includes } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
-import RuleDragHandle from './RuleDragHandle';
-import RuleDropDown from './RuleDropDown';
-import RuleInput from './RuleInput';
+import DragHandle from './DragHandle';
+import DropDown from './DropDown';
+import Input from './Input';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -18,7 +18,7 @@ const operators = toPairs({
   LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
 });
 
-class EdgeRule extends PureComponent {
+class EgoRule extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([
       PropTypes.string,
@@ -27,33 +27,25 @@ class EdgeRule extends PureComponent {
     onUpdateRule: PropTypes.func,
     onDeleteRule: PropTypes.func,
     options: PropTypes.shape({
-      type: PropTypes.string,
-      operator: PropTypes.string,
       attribute: PropTypes.string,
+      operator: PropTypes.string,
       value: PropTypes.string,
     }),
-    edgeTypes: PropTypes.array,
-    edgeAttributes: PropTypes.object,
+    nodeAttributes: PropTypes.array,
     className: PropTypes.string,
   };
 
   static defaultProps = {
     options: {
-      type: '',
-      operator: '',
       attribute: '',
+      operator: '',
       value: '',
     },
-    edgeTypes: [],
-    edgeAttributes: {},
     onUpdateRule: () => {},
     onDeleteRule: () => {},
+    nodeAttributes: [],
     className: '',
   };
-
-  showAttributes() {
-    return has(this.props.edgeAttributes, this.props.options.type);
-  }
 
   showOperator() {
     return !!this.props.options.attribute;
@@ -67,39 +59,28 @@ class EdgeRule extends PureComponent {
   render() {
     const {
       id,
-      edgeTypes,
-      edgeAttributes,
+      nodeAttributes,
       onUpdateRule,
       onDeleteRule,
-      options: { type, operator, attribute, value },
+      options: { operator, attribute, value },
       className,
     } = this.props;
 
     return (
-      <div className={cx('rule', 'rule--edge', className)}>
-        <RuleDragHandle />
+      <div className={cx('rule', 'rule--ego', className)}>
+        <DragHandle />
         <div className="rule__options">
-          <div className="rule__option rule__option--type">
-            <RuleDropDown
-              options={edgeTypes}
-              value={type}
-              placeholder="{type}"
-              onChange={newValue => onUpdateRule(newValue, id, 'type')}
+          <div className="rule__option rule__option--attribute">
+            <DropDown
+              options={nodeAttributes}
+              value={attribute}
+              placeholder="{variable}"
+              onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
             />
           </div>
-          {this.showAttributes() && (
-            <div className="rule__option rule__option--attribute">
-              <RuleDropDown
-                options={has(edgeAttributes, type) ? edgeAttributes[type] : []}
-                value={attribute}
-                placeholder="{variable}"
-                onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
-              />
-            </div>
-          )}
           { this.showOperator() && (
             <div className="rule__option rule__option--operator">
-              <RuleDropDown
+              <DropDown
                 options={operators}
                 value={operator}
                 placeholder="{rule}"
@@ -107,9 +88,9 @@ class EdgeRule extends PureComponent {
               />
             </div>
           )}
-          { this.showValue() && (
+          {this.showValue() && (
             <div className="rule__option rule__option--value">
-              <RuleInput
+              <Input
                 value={value}
                 onChange={newValue => onUpdateRule(newValue, id, 'value')}
               />
@@ -122,4 +103,4 @@ class EdgeRule extends PureComponent {
   }
 }
 
-export default SortableElement(EdgeRule);
+export default SortableElement(EgoRule);

@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { toPairs, includes } from 'lodash';
-import RuleDropDown from './RuleDropDown';
-import RuleInput from './RuleInput';
+import DropDown from './DropDown';
+import Input from './Input';
 
 const operators = toPairs({
   ANY: 'Any',
@@ -47,7 +47,7 @@ class NetworkRule extends PureComponent {
       <div className="rule rule--outer">
         <div className="rule__options">
           <div className="rule__option rule__option--operator">
-            <RuleDropDown
+            <DropDown
               options={operators}
               value={operator}
               placeholder="{rule}"
@@ -56,7 +56,7 @@ class NetworkRule extends PureComponent {
           </div>
           {this.showValue() && (
             <div className="rule__option rule__option--value">
-              <RuleInput
+              <Input
                 type="number"
                 value={value}
                 onChange={newValue => onUpdateRule(newValue, 'value')}

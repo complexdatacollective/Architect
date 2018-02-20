@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, includes } from 'lodash';
+import { toPairs, has, includes } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
-import RuleDragHandle from './RuleDragHandle';
-import RuleDropDown from './RuleDropDown';
-import RuleInput from './RuleInput';
+import DragHandle from './DragHandle';
+import DropDown from './DropDown';
+import Input from './Input';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -18,7 +18,7 @@ const operators = toPairs({
   LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
 });
 
-class EgoRule extends PureComponent {
+class AlterRule extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([
       PropTypes.string,
@@ -27,25 +27,33 @@ class EgoRule extends PureComponent {
     onUpdateRule: PropTypes.func,
     onDeleteRule: PropTypes.func,
     options: PropTypes.shape({
-      attribute: PropTypes.string,
+      type: PropTypes.string,
       operator: PropTypes.string,
+      attribute: PropTypes.string,
       value: PropTypes.string,
     }),
-    nodeAttributes: PropTypes.array,
+    nodeTypes: PropTypes.array,
+    nodeAttributes: PropTypes.object,
     className: PropTypes.string,
   };
 
   static defaultProps = {
     options: {
-      attribute: '',
+      type: '',
       operator: '',
+      attribute: '',
       value: '',
     },
     onUpdateRule: () => {},
     onDeleteRule: () => {},
-    nodeAttributes: [],
+    nodeTypes: [],
+    nodeAttributes: {},
     className: '',
   };
+
+  showAttributes() {
+    return has(this.props.nodeAttributes, this.props.options.type);
+  }
 
   showOperator() {
     return !!this.props.options.attribute;
@@ -59,28 +67,39 @@ class EgoRule extends PureComponent {
   render() {
     const {
       id,
+      nodeTypes,
       nodeAttributes,
       onUpdateRule,
       onDeleteRule,
-      options: { operator, attribute, value },
+      options: { type, operator, attribute, value },
       className,
     } = this.props;
 
     return (
-      <div className={cx('rule', 'rule--ego', className)}>
-        <RuleDragHandle />
+      <div className={cx('rule', 'rule--alter', className)}>
+        <DragHandle />
         <div className="rule__options">
-          <div className="rule__option rule__option--attribute">
-            <RuleDropDown
-              options={nodeAttributes}
-              value={attribute}
-              placeholder="{variable}"
-              onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
+          <div className="rule__option rule__option--type">
+            <DropDown
+              options={nodeTypes}
+              value={type}
+              placeholder="{type}"
+              onChange={newValue => onUpdateRule(newValue, id, 'type')}
             />
           </div>
-          { this.showOperator() && (
+          {this.showAttributes() && (
+            <div className="rule__option rule__option--attribute">
+              <DropDown
+                options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
+                value={attribute}
+                placeholder="{variable}"
+                onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
+              />
+            </div>
+          )}
+          {this.showOperator() && (
             <div className="rule__option rule__option--operator">
-              <RuleDropDown
+              <DropDown
                 options={operators}
                 value={operator}
                 placeholder="{rule}"
@@ -90,7 +109,7 @@ class EgoRule extends PureComponent {
           )}
           {this.showValue() && (
             <div className="rule__option rule__option--value">
-              <RuleInput
+              <Input
                 value={value}
                 onChange={newValue => onUpdateRule(newValue, id, 'value')}
               />
@@ -103,4 +122,6 @@ class EgoRule extends PureComponent {
   }
 }
 
-export default SortableElement(EgoRule);
+export { AlterRule };
+
+export default SortableElement(AlterRule);

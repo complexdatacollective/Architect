@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-class RuleAddButton extends PureComponent {
+class AddButton extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -53,8 +53,8 @@ class RuleAddButton extends PureComponent {
   }
 }
 
-RuleAddButton.propTypes = {
+AddButton.propTypes = {
   onAddRule: PropTypes.func.isRequired,
 };
 
-export default RuleAddButton;
+export default AddButton;

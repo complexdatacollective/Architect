@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import NetworkRule from '../components/NetworkRule';
+import NetworkRule from '../../components/Rule/NetworkRule';
 
 const defaultLogic = {
   operator: '',

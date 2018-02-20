@@ -4,7 +4,7 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-const RuleInput = ({
+const Input = ({
   value,
   type,
   onChange,
@@ -21,18 +21,18 @@ const RuleInput = ({
   </label>
 );
 
-RuleInput.propTypes = {
+Input.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   className: PropTypes.string,
   type: PropTypes.oneOf(['text', 'number']),
 };
 
-RuleInput.defaultProps = {
+Input.defaultProps = {
   className: null,
   onChange: () => {},
   value: '',
   type: 'text',
 };
 
-export default RuleInput;
+export default Input;

@@ -6,9 +6,10 @@ import { has, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/stages';
-import { ProtocolCard, NetworkRule, FilterGroup } from '../containers';
+import { ProtocolCard, FilterGroup } from '../containers';
+import { NetworkRule } from '../containers/Rule';
 import { Draft } from '../behaviours';
-import { RuleDropDown } from '../components';
+import DropDown from '../components/Rule/DropDown';
 
 const defaultLogic = {
   action: 'SKIP',
@@ -83,7 +84,7 @@ class EditSkipLogic extends PureComponent {
         <div className="edit-skip-logic">
           <div className="edit-skip-logic__section">
             <div className="edit-skip-logic__action">
-              <RuleDropDown
+              <DropDown
                 options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
                 onChange={value => updateDraft({ action: value })}
                 value={action}

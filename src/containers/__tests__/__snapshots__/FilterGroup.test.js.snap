@@ -29,7 +29,7 @@ ShallowWrapper {
         <div
           className="filter-group__join"
 >
-          <RuleDropDown
+          <DropDown
                     className={null}
                     onChange={[Function]}
                     options={
@@ -67,7 +67,7 @@ ShallowWrapper {
           <div
                     className="filter-group__add"
           >
-                    <RuleAddButton
+                    <AddButton
                               onAddRule={[Function]}
                     />
           </div>
@@ -82,7 +82,7 @@ ShallowWrapper {
         "key": null,
         "nodeType": "host",
         "props": Object {
-          "children": <RuleDropDown
+          "children": <DropDown
             className={null}
             onChange={[Function]}
             options={
@@ -145,7 +145,7 @@ ShallowWrapper {
             <div
               className="filter-group__add"
 >
-              <RuleAddButton
+              <AddButton
                             onAddRule={[Function]}
               />
 </div>,
@@ -186,7 +186,7 @@ ShallowWrapper {
             "key": null,
             "nodeType": "host",
             "props": Object {
-              "children": <RuleAddButton
+              "children": <AddButton
                 onAddRule={[Function]}
 />,
               "className": "filter-group__add",
@@ -221,7 +221,7 @@ ShallowWrapper {
           <div
             className="filter-group__join"
 >
-            <RuleDropDown
+            <DropDown
                         className={null}
                         onChange={[Function]}
                         options={
@@ -259,7 +259,7 @@ ShallowWrapper {
             <div
                         className="filter-group__add"
             >
-                        <RuleAddButton
+                        <AddButton
                                     onAddRule={[Function]}
                         />
             </div>
@@ -274,7 +274,7 @@ ShallowWrapper {
           "key": null,
           "nodeType": "host",
           "props": Object {
-            "children": <RuleDropDown
+            "children": <DropDown
               className={null}
               onChange={[Function]}
               options={
@@ -337,7 +337,7 @@ ShallowWrapper {
               <div
                 className="filter-group__add"
 >
-                <RuleAddButton
+                <AddButton
                                 onAddRule={[Function]}
                 />
 </div>,
@@ -378,7 +378,7 @@ ShallowWrapper {
               "key": null,
               "nodeType": "host",
               "props": Object {
-                "children": <RuleAddButton
+                "children": <AddButton
                   onAddRule={[Function]}
 />,
                 "className": "filter-group__add",

@@ -14,7 +14,7 @@ const getSpacer = (optionsWithLabels, placeholder, value) => (
     find(optionsWithLabels, [0, value])[1] // return matching label
 );
 
-const RuleDropDown = ({
+const DropDown = ({
   options,
   onChange,
   placeholder,
@@ -44,7 +44,7 @@ const RuleDropDown = ({
   );
 };
 
-RuleDropDown.propTypes = {
+DropDown.propTypes = {
   options: PropTypes.array,
   value: PropTypes.string,
   onChange: PropTypes.func,
@@ -52,7 +52,7 @@ RuleDropDown.propTypes = {
   className: PropTypes.string,
 };
 
-RuleDropDown.defaultProps = {
+DropDown.defaultProps = {
   placeholder: '',
   className: null,
   value: '',
@@ -60,4 +60,4 @@ RuleDropDown.defaultProps = {
   options: [],
 };
 
-export default RuleDropDown;
+export default DropDown;

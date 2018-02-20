@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { toPairs, has, includes } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
-import RuleDragHandle from './RuleDragHandle';
-import RuleDropDown from './RuleDropDown';
-import RuleInput from './RuleInput';
+import DragHandle from './DragHandle';
+import DropDown from './DropDown';
+import Input from './Input';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -18,7 +18,7 @@ const operators = toPairs({
   LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
 });
 
-class AlterRule extends PureComponent {
+class EdgeRule extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([
       PropTypes.string,
@@ -32,8 +32,8 @@ class AlterRule extends PureComponent {
       attribute: PropTypes.string,
       value: PropTypes.string,
     }),
-    nodeTypes: PropTypes.array,
-    nodeAttributes: PropTypes.object,
+    edgeTypes: PropTypes.array,
+    edgeAttributes: PropTypes.object,
     className: PropTypes.string,
   };
 
@@ -44,15 +44,15 @@ class AlterRule extends PureComponent {
       attribute: '',
       value: '',
     },
+    edgeTypes: [],
+    edgeAttributes: {},
     onUpdateRule: () => {},
     onDeleteRule: () => {},
-    nodeTypes: [],
-    nodeAttributes: {},
     className: '',
   };
 
   showAttributes() {
-    return has(this.props.nodeAttributes, this.props.options.type);
+    return has(this.props.edgeAttributes, this.props.options.type);
   }
 
   showOperator() {
@@ -67,8 +67,8 @@ class AlterRule extends PureComponent {
   render() {
     const {
       id,
-      nodeTypes,
-      nodeAttributes,
+      edgeTypes,
+      edgeAttributes,
       onUpdateRule,
       onDeleteRule,
       options: { type, operator, attribute, value },
@@ -76,12 +76,12 @@ class AlterRule extends PureComponent {
     } = this.props;
 
     return (
-      <div className={cx('rule', 'rule--alter', className)}>
-        <RuleDragHandle />
+      <div className={cx('rule', 'rule--edge', className)}>
+        <DragHandle />
         <div className="rule__options">
           <div className="rule__option rule__option--type">
-            <RuleDropDown
-              options={nodeTypes}
+            <DropDown
+              options={edgeTypes}
               value={type}
               placeholder="{type}"
               onChange={newValue => onUpdateRule(newValue, id, 'type')}
@@ -89,17 +89,17 @@ class AlterRule extends PureComponent {
           </div>
           {this.showAttributes() && (
             <div className="rule__option rule__option--attribute">
-              <RuleDropDown
-                options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
+              <DropDown
+                options={has(edgeAttributes, type) ? edgeAttributes[type] : []}
                 value={attribute}
                 placeholder="{variable}"
                 onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
               />
             </div>
           )}
-          {this.showOperator() && (
+          { this.showOperator() && (
             <div className="rule__option rule__option--operator">
-              <RuleDropDown
+              <DropDown
                 options={operators}
                 value={operator}
                 placeholder="{rule}"
@@ -107,9 +107,9 @@ class AlterRule extends PureComponent {
               />
             </div>
           )}
-          {this.showValue() && (
+          { this.showValue() && (
             <div className="rule__option rule__option--value">
-              <RuleInput
+              <Input
                 value={value}
                 onChange={newValue => onUpdateRule(newValue, id, 'value')}
               />
@@ -122,6 +122,4 @@ class AlterRule extends PureComponent {
   }
 }
 
-export { AlterRule };
-
-export default SortableElement(AlterRule);
+export default SortableElement(EdgeRule);

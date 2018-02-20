@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { uniqueId as _uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import { Rules, RuleAddButton, RuleDropDown } from '../components';
+import AddButton from '../components/Rule/AddButton';
+import DropDown from '../components/Rule/DropDown';
+import { Rules } from '../components';
 
 const uniqueId = () => _uniqueId(new Date().getTime());
 
@@ -105,7 +107,7 @@ class FilterGroup extends PureComponent {
     return (
       <div className={filterGroupClasses(join)}>
         <div className="filter-group__join">
-          <RuleDropDown
+          <DropDown
             options={joinOptions}
             value={join}
             placeholder="{join}"
@@ -123,7 +125,7 @@ class FilterGroup extends PureComponent {
           />
 
           <div className="filter-group__add">
-            <RuleAddButton onAddRule={this.onAddRule} />
+            <AddButton onAddRule={this.onAddRule} />
           </div>
         </div>
       </div>

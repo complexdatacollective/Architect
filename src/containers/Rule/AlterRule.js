@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { toPairs, keys, flow, map, fromPairs } from 'lodash';
-import { getVariableRegistry } from '../selectors/protocol';
-import AlterRule from '../components/AlterRule';
+import { getVariableRegistry } from '../../selectors/protocol';
+import AlterRule from '../../components/Rule/AlterRule';
 
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
