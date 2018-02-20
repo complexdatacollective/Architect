@@ -5,7 +5,7 @@ const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
 
 const initialState = [
   { id: 1, type: 'Information' },
-  { id: 1, type: 'NameGenerator' },
+  { id: 2, type: 'NameGenerator' },
 ];
 
 const maxId = state => max(map(state, 'id'));
