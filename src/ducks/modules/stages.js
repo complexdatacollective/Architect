@@ -3,7 +3,10 @@ import { map, max } from 'lodash';
 const ADD_STAGE = Symbol('STAGES/ADD_STAGE');
 const UPDATE_STAGE = Symbol('STAGES/UPDATE_STAGE');
 
-const initialState = [{ id: 1, type: 'NameGenerator' }, { id: 2, type: 'Sociogram' }];
+const initialState = [
+  { id: 1, type: 'Information' },
+  { id: 1, type: 'NameGenerator' },
+];
 
 const maxId = state => max(map(state, 'id'));
 const nextId = state => ((maxId(state) || 0) + 1);
