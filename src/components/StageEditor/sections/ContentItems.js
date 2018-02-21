@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, SeamlessTextInput } from '../../../components/Form';
+import { Button, MarkdownInput } from '../../../components/Form';
 
-const contentTypes = {
-  text: SeamlessTextInput,
-  image: SeamlessTextInput,
-  audio: SeamlessTextInput,
-  video: SeamlessTextInput,
-};
+// const contentTypes = {
+//   text: MarkdownInput,
+//   image: MarkdownInput,
+//   audio: MarkdownInput,
+//   video: MarkdownInput,
+// };
 
 const ContentItem = ({ type, content, onChange }) => {
-  const ContentType = SeamlessTextInput; // contentTypes[type];
+  const ContentType = MarkdownInput; // contentTypes[type];
 
   return (
     <div styles={{ borderTop: '2px', borderColor: 'black' }}>

@@ -135,7 +135,9 @@
         "whatwg-fetch": "2.0.3",
         "xss": "^0.3.4"
     },
-    "dependencies": {},
+    "dependencies": {
+        "react-markdown": "^3.2.1"
+    },
     "homepage": ".",
     "main": "www/electron-starter.js",
     "build": {
