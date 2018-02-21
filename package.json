@@ -136,6 +136,7 @@
         "xss": "^0.3.4"
     },
     "dependencies": {
+        "react-dropzone": "^4.2.8",
         "react-markdown": "^3.2.1"
     },
     "homepage": ".",

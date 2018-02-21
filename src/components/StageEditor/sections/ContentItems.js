@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, MarkdownInput } from '../../../components/Form';
+import { Button, MarkdownInput, FileInput } from '../../../components/Form';
 
-// const contentTypes = {
-//   text: MarkdownInput,
-//   image: MarkdownInput,
-//   audio: MarkdownInput,
-//   video: MarkdownInput,
-// };
+const contentTypes = {
+  text: MarkdownInput,
+  image: (value, onChange) => (
+    <FileInput value={value} onChange={onChange}>{ src => (<img src={src} alt="preview" />) }</FileInput>
+  ),
+  audio: FileInput,
+  video: FileInput,
+};
 
 const ContentItem = ({ type, content, onChange }) => {
-  const ContentType = MarkdownInput; // contentTypes[type];
+  const ContentType = contentTypes[type];
 
   return (
     <div styles={{ borderTop: '2px', borderColor: 'black' }}>
