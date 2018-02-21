@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
 import undoable, { excludeAction } from 'redux-undo';
-import protocol, { protocolEpic } from './protocol';
+import protocol, { epics as protocolEpics } from './protocol';
 
 export const rootEpic = combineEpics(
-  protocolEpic,
+  protocolEpics,
 );
 
 export const rootReducer = combineReducers({

@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
-import { actionCreators as stageActions } from '../ducks/modules/stages';
+import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 import { ProtocolCard } from '../containers/ProtocolCard';
 import EditStage from '../components/EditStage';
 import { Draft } from '../behaviours';

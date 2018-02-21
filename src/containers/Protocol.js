@@ -9,7 +9,7 @@ import NewStage from './NewStage';
 import EditSkipLogic from './EditSkipLogic';
 import EditStage from './EditStage';
 import { Timeline } from '../components';
-import { actionCreators as protocolActions } from '../ducks/modules/protocol';
+import { actionCreators as protocolActions } from '../ducks/modules/protocol/export';
 
 const cards = {
   newStage: Symbol('newStage'),

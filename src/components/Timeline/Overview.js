@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { ToggleInput } from 'network-canvas-ui';
 import { getProtocol } from '../../selectors/protocol';
-import { actionCreators as protocolActions } from '../../ducks/modules/protocolOptions';
+import { actionCreators as protocolActions } from '../../ducks/modules/protocol/protocolOptions';
 import TextInput from '../TextInput';
 import SeamlessInput from '../SeamlessInput';
 
