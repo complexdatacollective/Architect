@@ -23,7 +23,7 @@ const create = () =>
     const protocolPath = path.join(filename, 'protocol.json');
     fs.mkdirSync(filename);
     fs.mkdirSync(assetsPath);
-    fs.closeSync(fs.openSync(protocolPath, 'w')); // TODO: create a valid blank protocol
+    fs.writeFileSync(protocolPath, '{}');
     return filename;
   });
 

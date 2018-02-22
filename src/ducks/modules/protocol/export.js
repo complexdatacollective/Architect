@@ -1,8 +1,6 @@
 import { combineEpics } from 'redux-observable';
-import { Observable } from 'rxjs';
-import { exporter, create } from '../../../other/protocols';
+import { exporter } from '../../../other/protocols';
 import { getProtocol } from '../../../selectors/protocol';
-import { actionCreators as protocolsActions } from '../protocols';
 
 const EXPORT_PROTOCOL = Symbol('PROTOCOL/EXPORT');
 const EXPORT_COMPLETE = Symbol('PROTOCOL/EXPORT_COMPLETE');
