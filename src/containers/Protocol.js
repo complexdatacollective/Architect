@@ -9,7 +9,7 @@ import NewStage from './NewStage';
 import EditSkipLogic from './EditSkipLogic';
 import EditStage from './EditStage';
 import { Timeline } from '../components';
-import { actionCreators as protocolActions } from '../ducks/modules/protocol/export';
+import { actionCreators as protocolExportActions } from '../ducks/modules/protocol/export';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -130,7 +130,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    exportProtocol: bindActionCreators(protocolActions.exportProtocol, dispatch),
+    exportProtocol: bindActionCreators(protocolExportActions.exportProtocol, dispatch),
   };
 }
 

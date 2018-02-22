@@ -3,6 +3,7 @@ const path = require('path');
 const url = require('url');
 const log = require('electron-log');
 require('./components/updater');
+const registerProtocolProtocol = require('./components/protocolProtocol').registerProtocolProtocol;
 
 // Module to control application life.
 const app = electron.app;
@@ -16,6 +17,8 @@ log.info('App starting...');
 let mainWindow;
 
 function createWindow() {
+  registerProtocolProtocol();
+
   // Create the browser window.
   mainWindow = new BrowserWindow({ width: 800, height: 600, center: true, title: 'Network Canvas' });
   mainWindow.maximize();
