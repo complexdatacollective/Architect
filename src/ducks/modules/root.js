@@ -1,14 +1,11 @@
+/* eslint-disable import/prefer-default-export */
+
 import { combineReducers } from 'redux';
-import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
 import undoable, { excludeAction } from 'redux-undo';
-import protocol, { epics as protocolEpics } from './protocol';
-import protocols, { epics as protocolsEpics } from './protocols';
-
-export const rootEpic = combineEpics(
-  protocolEpics,
-  protocolsEpics,
-);
+import protocol from './protocol';
+import meta from './meta';
+import protocols from './protocols';
 
 /*
  * state: {
@@ -16,9 +13,9 @@ export const rootEpic = combineEpics(
  *   protocols: {} // list of knowe protocols (persistent)
  * }
  */
-
 export const rootReducer = combineReducers({
   form: formReducer,
+  meta,
   protocol: undoable(
     protocol,
     {

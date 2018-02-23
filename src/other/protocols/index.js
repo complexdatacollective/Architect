@@ -1,3 +1,4 @@
-export { default as exporter } from './exporter';
-export { default as create } from './create';
-export { default as load } from './load';
+export { default as exportProtocol } from './exportProtocol';
+export { default as createProtocol } from './createProtocol';
+export { default as loadProtocol } from './loadProtocol';
+export { default as importAsset } from './importAsset';

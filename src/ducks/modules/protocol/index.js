@@ -1,15 +1,17 @@
 import { combineReducers, compose } from 'redux';
-import { combineEpics } from 'redux-observable';
 import stages from './stages';
 import variableRegistry from './variableRegistry';
 import protocolOptions from './protocolOptions';
-import { epics as exportEpics } from './export';
 
 const initialState = {};
 
 const SET_PROTOCOL = Symbol('PROTOCOL/SET_PROTOCOL');
 
-const setProtocol = protocol => ({ type: SET_PROTOCOL, protocol });
+const setProtocol = (protocol, path = '') => ({
+  type: SET_PROTOCOL,
+  path,
+  protocol,
+});
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -27,10 +29,6 @@ const actionCreators = {
 const actionTypes = {
   SET_PROTOCOL,
 };
-
-export const epics = combineEpics(
-  exportEpics,
-);
 
 export {
   actionCreators,

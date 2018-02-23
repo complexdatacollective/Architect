@@ -1,7 +1,7 @@
 import { remote } from 'electron';
-import fs from 'fs';
 import Zip from 'jszip';
 import { has } from 'lodash';
+import { writeFile } from '../filesystem';
 
 const saveDialogOptions = {
   buttonLabel: 'Save',
@@ -13,14 +13,6 @@ const saveDialog = () =>
     remote.dialog.showSaveDialog(saveDialogOptions, (filename) => {
       if (filename === undefined) { reject(); }
       resolve(filename);
-    });
-  });
-
-const writeFile = (filename, content) =>
-  new Promise((resolve, reject) => {
-    fs.writeFile(filename, content, (err) => {
-      if (err) { reject(err); }
-      resolve();
     });
   });
 

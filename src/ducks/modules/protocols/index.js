@@ -1,13 +1,14 @@
-import { combineEpics } from 'redux-observable';
-import { epics as fileEpics } from './files';
+import { createProtocol, loadProtocol } from '../../../other/protocols';
+import { actionCreators as protocolActions } from '../protocol';
+import { actionCreators as protocolsActions } from '../protocols';
 
-const ADD_PROTOCOL = Symbol('PROTOCOLS/ADD');
+const ADD_PROTOCOL_TO_DASHBOARD = Symbol('PROTOCOLS/ADD_PROTOCOL_TO_DASHBOARD');
 
-const initialState = [{ path: '/foo/bar' }];
+const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ADD_PROTOCOL:
+    case ADD_PROTOCOL_TO_DASHBOARD:
       return [
         ...state,
         action.protocol,
@@ -17,24 +18,30 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-function addProtocol(path) {
-  return {
-    type: ADD_PROTOCOL,
+const addProtocolToDashboard = path =>
+  ({
+    type: ADD_PROTOCOL_TO_DASHBOARD,
     protocol: { path },
-  };
-}
+  });
+
+const createProtocolAction = () =>
+  dispatch =>
+    createProtocol()
+      .map(protocolPath => dispatch(protocolsActions.addProtocolToDashboard(protocolPath)));
+
+const loadProtocolAction = path =>
+  dispatch =>
+    dispatch(protocolActions.setProtocol(loadProtocol(path), path));
 
 const actionCreators = {
-  addProtocol,
+  addProtocolToDashboard,
+  createProtocol: createProtocolAction,
+  loadProtocol: loadProtocolAction,
 };
 
 const actionTypes = {
-  ADD_PROTOCOL,
+  ADD_PROTOCOL_TO_DASHBOARD,
 };
-
-export const epics = combineEpics(
-  fileEpics,
-);
 
 export {
   actionCreators,
