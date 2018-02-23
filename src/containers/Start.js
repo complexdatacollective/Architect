@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { actionCreators as protocolFilesActions } from '../ducks/modules/protocols/files';
+import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 class Start extends PureComponent {
   static propTypes = {
@@ -34,8 +34,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createProtocol: bindActionCreators(protocolFilesActions.createProtocol, dispatch),
-  loadProtocol: bindActionCreators(protocolFilesActions.loadProtocol, dispatch),
+  createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
+  loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
 });
 
 export { Start };
