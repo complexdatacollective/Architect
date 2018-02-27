@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 class Start extends PureComponent {
@@ -11,26 +11,20 @@ class Start extends PureComponent {
     protocols: PropTypes.array.isRequired,
     createProtocol: PropTypes.func.isRequired,
     loadProtocol: PropTypes.func.isRequired,
+    locateAndLoadProtocol: PropTypes.func.isRequired,
   };
 
   render() {
-    const {
-      createProtocol,
-      protocols,
-      loadProtocol,
-      activeProtocol,
-    } = this.props;
-
-    if (activeProtocol) { return <Redirect to={{ pathname: '/edit' }} />; }
+    if (this.props.activeProtocol) { return <Redirect to={{ pathname: '/edit' }} />; }
 
     return (
       <div className="start">
-        <Link className="start__protocol" to="/edit">View protocol</Link>
         <button onClick={() => this.export()}>Export</button>
-        <button onClick={() => createProtocol()}>Create new Protocol</button>
+        <button onClick={() => this.props.createProtocol()}>Create new Protocol</button>
+        <button onClick={() => this.props.locateAndLoadProtocol()}>Open a protocol</button>
 
-        { protocols.map(protocol => (
-          <button onClick={() => loadProtocol(protocol.path)}>
+        { this.props.protocols.map(protocol => (
+          <button onClick={() => this.props.loadProtocol(protocol.path)}>
             Load &quot;{protocol.path}&quot;
           </button>
         )) }
@@ -41,12 +35,13 @@ class Start extends PureComponent {
 
 const mapStateToProps = state => ({
   protocols: state.protocols,
-  activeProtocol: state.protocolMeta.activeProtocol,
+  activeProtocol: state.session.activeProtocol,
 });
 
 const mapDispatchToProps = dispatch => ({
   createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
   loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
+  locateAndLoadProtocol: bindActionCreators(protocolsActions.locateAndLoadProtocol, dispatch),
 });
 
 export { Start };

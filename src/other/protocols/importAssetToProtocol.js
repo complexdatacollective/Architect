@@ -1,7 +1,7 @@
 import path from 'path';
 import { readFile, writeFile } from '../filesystem';
 
-const importAsset = (protocolPath, file) => {
+const importAssetToProtocol = (protocolPath, file) => {
   const destinationPath = path.join(protocolPath, file.name);
 
   return readFile(file)
@@ -9,4 +9,4 @@ const importAsset = (protocolPath, file) => {
     .then(() => file.name);
 };
 
-export default importAsset;
+export default importAssetToProtocol;

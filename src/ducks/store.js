@@ -16,4 +16,4 @@ export const store = createStore(
   ),
 );
 
-export const persistor = persistStore(store, { blacklist: ['form', 'stages'] });
+export const persistor = persistStore(store, { blacklist: ['form', 'protocol', 'session'] });

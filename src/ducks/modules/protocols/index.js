@@ -1,4 +1,4 @@
-import { createProtocol, loadProtocol } from '../../../other/protocols';
+import { createProtocol, loadProtocolData, locateProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as protocolsActions } from '../protocols';
 
@@ -27,16 +27,24 @@ const addProtocolToDashboard = path =>
 const createProtocolAction = () =>
   dispatch =>
     createProtocol()
-      .then(protocolPath => dispatch(protocolsActions.addProtocolToDashboard(protocolPath)));
+      .then(protocolPath =>
+        dispatch(protocolsActions.addProtocolToDashboard(protocolPath)));
 
 const loadProtocolAction = path =>
   dispatch =>
-    dispatch(protocolActions.setProtocol(loadProtocol(path), path));
+    dispatch(protocolActions.setProtocol(loadProtocolData(path), path));
+
+const locateAndLoadProtocolAction = () =>
+  dispatch =>
+    locateProtocol()
+      .then(protocolPath =>
+        dispatch(loadProtocolAction(protocolPath)));
 
 const actionCreators = {
   addProtocolToDashboard,
   createProtocol: createProtocolAction,
   loadProtocol: loadProtocolAction,
+  locateAndLoadProtocol: locateAndLoadProtocolAction,
 };
 
 const actionTypes = {

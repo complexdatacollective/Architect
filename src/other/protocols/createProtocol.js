@@ -17,7 +17,7 @@ const saveDialog = () =>
     });
   });
 
-const create = () =>
+const createProtocol = () =>
   saveDialog().then((filename) => {
     const assetsPath = path.join(filename, 'assets');
     const protocolPath = path.join(filename, 'protocol.json');
@@ -27,4 +27,4 @@ const create = () =>
     return filename;
   });
 
-export default create;
+export default createProtocol;
