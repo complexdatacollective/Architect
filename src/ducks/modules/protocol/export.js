@@ -8,7 +8,8 @@ const exportComplete = () => ({ type: EXPORT_COMPLETE });
 const exportProtocolAction = () =>
   (dispatch, getState) => {
     const protocol = getProtocol(getState());
-    return exportProtocol(protocol).then(() => exportComplete());
+    exportProtocol(protocol)
+      .then(() => dispatch(exportComplete()));
   };
 
 const actionCreators = {

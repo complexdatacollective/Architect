@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Button } from 'network-canvas-ui';
 import { getProtocol } from '../selectors/protocol';
-import NewStage from './NewStage';
-import EditSkipLogic from './EditSkipLogic';
-import EditStage from './EditStage';
+import NewStage from '../containers/NewStage';
+import EditSkipLogic from '../containers/EditSkipLogic';
+import EditStage from '../containers/EditStage';
 import { Timeline } from '../components';
 import { actionCreators as protocolExportActions } from '../ducks/modules/protocol/export';
 
@@ -135,4 +135,55 @@ function mapDispatchToProps(dispatch) {
 }
 
 export { Protocol };
-export default connect(mapStateToProps, mapDispatchToProps)(Protocol);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Protocol);
+
+// import React, { PureComponent } from 'react';
+// import PropTypes from 'prop-types';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
+
+// class Protocol extends PureComponent {
+//   static propTypes = {
+
+//   };
+
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       protocol,
+//     };
+//   }
+
+
+//   render() {
+//     // if(active!=index) do load
+//     // else:
+//     return (
+//       <ProtocolView />
+//     );
+//   }
+// }
+
+// function mapStateToProps(state) {
+//   const protocol = getProtocol(state);
+
+//   return {
+//     stages: protocol.stages,
+//     hasChanges: (state.protocol.past.length > 0),
+//   };
+// }
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
+//   };
+// }
+
+// export { Protocol };
+// export default connect(mapStateToProps, mapDispatchToProps)(Protocol);

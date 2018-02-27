@@ -11,7 +11,7 @@ import {
 
 export default () => (
   <Switch>
-    <Route exact path="/protocol" component={Protocol} />
+    <Route exact path="/edit/" component={Protocol} />
     <Route exact path="/" component={Start} />
     <Redirect to={{ pathname: '/' }} />
   </Switch>

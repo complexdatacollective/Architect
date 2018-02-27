@@ -1,18 +1,19 @@
-import { actionCreators as protocolActions } from './protocol';
+import { actionTypes as protocolActionTypes } from './protocol';
 
 const UPDATE_META = Symbol('UPDATE_META');
 
 const initialState = {
-  location: '', // local path
+  activeProtocol: '', // local path
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case protocolActions.SET_PROTOCOL:
+    case protocolActionTypes.SET_PROTOCOL: {
       return {
         ...state,
         activeProtocol: action.path,
       };
+    }
     case UPDATE_META:
       return {
         ...state,

@@ -27,7 +27,7 @@ const addProtocolToDashboard = path =>
 const createProtocolAction = () =>
   dispatch =>
     createProtocol()
-      .map(protocolPath => dispatch(protocolsActions.addProtocolToDashboard(protocolPath)));
+      .then(protocolPath => dispatch(protocolsActions.addProtocolToDashboard(protocolPath)));
 
 const loadProtocolAction = path =>
   dispatch =>

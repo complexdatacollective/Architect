@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import undoable, { excludeAction } from 'redux-undo';
 import protocol from './protocol';
-import meta from './meta';
+import protocolMeta from './protocolMeta';
 import protocols from './protocols';
 
 /*
@@ -15,7 +15,7 @@ import protocols from './protocols';
  */
 export const rootReducer = combineReducers({
   form: formReducer,
-  meta,
+  protocolMeta,
   protocol: undoable(
     protocol,
     {
