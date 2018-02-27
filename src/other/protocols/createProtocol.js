@@ -9,6 +9,9 @@ const saveDialogOptions = {
   filters: [{ name: 'Protocols', extensions: ['canvas'] }],
 };
 
+/**
+ * Shows a save dialog (wrapped in a promise)
+ */
 const saveDialog = () =>
   new Promise((resolve, reject) => {
     remote.dialog.showSaveDialog(saveDialogOptions, (filename) => {
@@ -17,6 +20,9 @@ const saveDialog = () =>
     });
   });
 
+/**
+ * Shows a save dialog and then creates an empty protocol there
+ */
 const createProtocol = () =>
   saveDialog().then((filename) => {
     const assetsPath = path.join(filename, 'assets');

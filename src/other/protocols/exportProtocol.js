@@ -41,6 +41,7 @@ const createPackage = (protocol) => {
   const zip = new Zip();
   zip.file('protocol.json', JSON.stringify(protocol));
 
+  // TODO: This is defunct, we will include all files in the assets dir
   return Promise.all(
     getAssetsData(protocol.assetRegistry),
   ).then((assets) => {
@@ -60,7 +61,11 @@ const saveToDisk = content =>
     filename => writeFile(filename, content),
   );
 
-const exporter = protocol =>
+/**
+ * Given a protocol object exports that data as a zip
+ * @param {object} protocol - The protocol itself.
+ */
+const exportProtocol = protocol =>
   createPackage(protocol).then(saveToDisk);
 
 export {
@@ -68,4 +73,4 @@ export {
   saveToDisk,
 };
 
-export default exporter;
+export default exportProtocol;

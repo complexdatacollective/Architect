@@ -8,6 +8,10 @@ const openDialogOptions = {
   properties: ['openFile'],
 };
 
+/**
+ * Shows a open dialog and returns a filename
+ * Can only select *.json files, but returns the path *without* 'protocol.json'
+ */
 const openDialog = () =>
   new Promise((resolve, reject) => {
     remote.dialog.showOpenDialog(openDialogOptions, (filename) => {
