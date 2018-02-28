@@ -1,7 +1,7 @@
 import { map, max } from 'lodash';
 
-const ADD_STAGE = Symbol('STAGES/ADD_STAGE');
-const UPDATE_STAGE = Symbol('STAGES/UPDATE_STAGE');
+const ADD_STAGE = Symbol('PROTOCOL/ADD_STAGE');
+const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
 
 const initialState = [
   { id: 1, type: 'Information' },

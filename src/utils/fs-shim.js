@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+const mockProtocol = require('./mockProtocol.json');
+
 window.saveAs || ( window.saveAs = (window.navigator.msSaveBlob ? function(b,n){ return window.navigator.msSaveBlob(b,n); } : false) || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs || (function(){
 
     // URL's
@@ -38,9 +40,31 @@ window.saveAs || ( window.saveAs = (window.navigator.msSaveBlob ? function(b,n){
 
   })() );
 
+const writeFile = (filename, content, callback) => {
+  // saveAs seems to be broken?
+  // window.saveAs(content, filename);
+  callback();
+};
+
+const writeFileSync = (filename, content) => {
+  // saveAs seems to be broken?
+  // window.saveAs(content, filename);
+};
+
+const mkdirSync = () => {};
+
+const readFileSync = (filename) => {
+  switch(true) {
+    case /\.json$/.test(filename):
+      return JSON.stringify(mockProtocol);
+    default:
+      return '';
+  }
+}
+
 module.exports = {
-  writeFile: (filename, content, callback) => {
-    window.saveAs(content, filename);
-    callback();
-  },
+  writeFile,
+  writeFileSync,
+  mkdirSync,
+  readFileSync,
 };

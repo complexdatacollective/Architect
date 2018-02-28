@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { has, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
-import { actionCreators as stageActions } from '../ducks/modules/stages';
+import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 import { ProtocolCard, FilterGroup } from '../containers';
 import { NetworkRule } from '../containers/Rule';
 import { Draft } from '../behaviours';

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { ProtocolCard } from '../containers';
-import { actionCreators as stageActions } from '../ducks/modules/stages';
+import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 
 const interfaceOptions = [
   {

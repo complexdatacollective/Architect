@@ -1,15 +1,21 @@
+/* eslint-disable import/prefer-default-export */
+
 import { combineReducers } from 'redux';
-import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
 import undoable, { excludeAction } from 'redux-undo';
-import protocol, { protocolEpic } from './protocol';
+import protocol from './protocol';
+import session from './session';
+import protocols from './protocols';
 
-export const rootEpic = combineEpics(
-  protocolEpic,
-);
-
+/*
+ * state: {
+ *   protocol: {} // current loaded protocol
+ *   protocols: {} // list of knowe protocols (persistent)
+ * }
+ */
 export const rootReducer = combineReducers({
   form: formReducer,
+  session,
   protocol: undoable(
     protocol,
     {
@@ -17,4 +23,5 @@ export const rootReducer = combineReducers({
       filter: excludeAction(['persist/REHYDRATE']),
     },
   ),
+  protocols,
 });
