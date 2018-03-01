@@ -2,12 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 class Start extends PureComponent {
   static propTypes = {
-    activeProtocol: PropTypes.string.isRequired,
     protocols: PropTypes.array.isRequired,
     createProtocol: PropTypes.func.isRequired,
     loadProtocol: PropTypes.func.isRequired,
@@ -15,8 +13,6 @@ class Start extends PureComponent {
   };
 
   render() {
-    if (this.props.activeProtocol) { return <Redirect to={{ pathname: '/edit' }} />; }
-
     return (
       <div className="start">
         <button onClick={() => this.export()}>Export</button>
@@ -35,7 +31,6 @@ class Start extends PureComponent {
 
 const mapStateToProps = state => ({
   protocols: state.protocols,
-  activeProtocol: state.session.activeProtocol,
 });
 
 const mapDispatchToProps = dispatch => ({

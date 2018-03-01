@@ -13,26 +13,28 @@ import {
   Start,
 } from './containers';
 
-const RedirectToDashboard = () => <Redirect to="/" />;
-
-const routes = ({ activeProtocol }) => (
+const routes = ({ isProtocolLoaded }) => (
   <Switch>
     <Route
       exact
       path="/edit/"
-      render={() => (activeProtocol ? <Protocol /> : <RedirectToDashboard />)}
-    />,
-    <Route exact path="/" component={Start} />,
-    <RedirectToDashboard />,
+      render={() => (isProtocolLoaded ? <Protocol /> : <Redirect to="/" />)}
+    />
+    <Route
+      exact
+      path="/"
+      render={() => (!isProtocolLoaded ? <Start /> : <Redirect to="/edit/" />)}
+    />
+    <Redirect to="/" />
   </Switch>
 );
 
 routes.propTypes = {
-  activeProtocol: PropTypes.string.isRequired,
+  isProtocolLoaded: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  activeProtocol: !!state.session.activeProtocol,
+  isProtocolLoaded: !!state.session.activeProtocol,
 });
 
 export default compose(
