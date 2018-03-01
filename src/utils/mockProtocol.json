@@ -1,1 +1,9 @@
-{}
+{
+  "options": {
+    "title": ""
+  },
+  "stages": [
+    { "id": 1, "type": "Information" },
+    { "id": 2, "type": "Information" }
+  ]
+}
