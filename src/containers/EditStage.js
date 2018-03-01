@@ -88,7 +88,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { EditStage as EditStage };
+export { EditStage };
 
 export default compose(
   connect(makeMapStateToProps, mapDispatchToProps),

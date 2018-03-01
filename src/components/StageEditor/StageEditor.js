@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Title,
   ContentItems,
@@ -14,13 +15,28 @@ const informationInterface = [
   ContentItems,
 ];
 
-const StageEditor = props => (
-  <div className="edit-stage">
-    {
-      informationInterface.map((Section, index) =>
-        <Section key={index} {...props} />)
-    }
-  </div>
-);
+const renderSections = (sections, props) => {
+  if (sections.length === 0) { return (<div>Not yet editable.</div>); }
+
+  return sections.map(
+    (Section, index) => <Section {...props} key={index} />,
+  );
+};
+
+const StageEditor = (props) => {
+  const interfaceSections = props.stage.type === 'Information' ?
+    informationInterface :
+    [];
+
+  return (
+    <div className="edit-stage">
+      { renderSections(interfaceSections, props) }
+    </div>
+  );
+};
+
+StageEditor.propTypes = {
+  stage: PropTypes.object.isRequired,
+};
 
 export default StageEditor;
