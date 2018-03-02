@@ -9,7 +9,7 @@ import { actionCreators as assetActions } from '../../ducks/modules/protocol/ass
 
 class FileInput extends PureComponent {
   static propTypes = {
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
     importAsset: PropTypes.func.isRequired,
     label: PropTypes.string,
     value: PropTypes.string,
@@ -19,7 +19,6 @@ class FileInput extends PureComponent {
   static defaultProps = {
     label: '',
     value: '',
-    onChange: () => {},
     children: value => value,
   };
 
@@ -27,13 +26,12 @@ class FileInput extends PureComponent {
     this.id = uniqueId('label');
   }
 
-  onChange = () => {
-    this.props.onChange();
-  }
-
   onDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
-      this.props.importAsset(file);
+      this.props.importAsset(file)
+        .then(({ filename }) => {
+          this.props.onChange(filename);
+        });
     });
   }
 

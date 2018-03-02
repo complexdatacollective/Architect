@@ -9,7 +9,7 @@ import { readFileAsBuffer } from '../filesystem/web';
  * @param {buffer} file - The file buffer to copy.
  */
 const importAssetToProtocol = (protocolPath, file) => {
-  const destinationName = `${uuid()}.${path.extname(file.name)}`;
+  const destinationName = `${uuid()}${path.extname(file.name)}`;
   const destinationPath = path.join(protocolPath, 'assets', destinationName);
 
   return readFileAsBuffer(file)

@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MarkdownInput, FileInput } from '../../../components/Form';
+import { Image } from '../../../components/Assets';
 
 const contentTypes = {
   text: MarkdownInput,
-  image: (value, onChange) => (
-    <FileInput value={value} onChange={onChange}>{ src => (<img src={src} alt="preview" />) }</FileInput>
+  image: ({ value, onChange }) => ( // eslint-disable-line
+    <FileInput value={value} onChange={onChange}>{ url => (<Image url={url} alt="preview" />) }</FileInput>
   ),
   audio: FileInput,
   video: FileInput,

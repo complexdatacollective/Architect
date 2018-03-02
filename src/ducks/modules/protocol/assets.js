@@ -4,21 +4,21 @@ const IMPORT_ASSET_COMPLETE = Symbol('PROTOCOL/IMPORT_ASSET_COMPLETE');
 const IMPORT_ASSET_FAILED = Symbol('PROTOCOL/IMPORT_ASSET_FAILED');
 
 /**
- * @param {string} name - Name of file
+ * @param {string} filename - Name of file
  */
-const importAssetComplete = name =>
+const importAssetComplete = filename =>
   ({
     type: IMPORT_ASSET_COMPLETE,
-    name,
+    filename,
   });
 
   /**
- * @param {string} name - Name of file
+ * @param {string} filename - Name of file
  */
-const importAssetFailed = name =>
+const importAssetFailed = filename =>
   ({
     type: IMPORT_ASSET_FAILED,
-    name,
+    filename,
   });
 
 /**
@@ -28,7 +28,7 @@ const importAssetAction = asset =>
   (dispatch, getState) => {
     const protocolPath = getState().session.activeProtocol;
     return importAssetToProtocol(protocolPath, asset)
-      .then(name => dispatch(importAssetComplete(name)))
+      .then(filename => dispatch(importAssetComplete(filename)))
       .catch(() => dispatch(importAssetFailed()));
   };
 
