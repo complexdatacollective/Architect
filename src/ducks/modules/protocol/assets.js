@@ -1,4 +1,4 @@
-import { importAsset } from '../../../other/protocols';
+import { importAssetToProtocol } from '../../../other/protocols';
 
 const IMPORT_ASSET_COMPLETE = Symbol('PROTOCOL/IMPORT_ASSET_COMPLETE');
 const IMPORT_ASSET_FAILED = Symbol('PROTOCOL/IMPORT_ASSET_FAILED');
@@ -22,14 +22,14 @@ const importAssetFailed = name =>
   });
 
 /**
- * @param {FileReader} asset - File to import
+ * @param {File} asset - File to import
  */
 const importAssetAction = asset =>
   (dispatch, getState) => {
-    const protocolPath = getState().meta.activeProtocolPath;
-    return importAsset(protocolPath, asset)
-      .then(importAssetComplete())
-      .catch(() => importAssetFailed());
+    const protocolPath = getState().session.activeProtocol;
+    return importAssetToProtocol(protocolPath, asset)
+      .then(name => dispatch(importAssetComplete(name)))
+      .catch(() => dispatch(importAssetFailed()));
   };
 
 const actionCreators = {

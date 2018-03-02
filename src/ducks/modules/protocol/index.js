@@ -35,17 +35,6 @@ export {
   actionTypes,
 };
 
-// export default function myreducer(state, action) {
-//   return reducer(
-//     combineReducers({
-//       options: protocolOptions,
-//       stages,
-//       variableRegistry,
-//     })(state, action),
-//     action
-//   );
-// }
-
 const flatCombineReducers = (...reducers) =>
   (previousState, action) =>
     reducers.reduce((state, reducer) => reducer(state, action), previousState);

@@ -1,5 +1,7 @@
 import path from 'path';
-import { readFile, writeFile } from '../filesystem';
+import uuid from 'uuid/v1';
+import { writeFile } from '../filesystem';
+import { readFileAsBuffer } from '../filesystem/web';
 
 /**
  * Makes a copy of a file buffer to `protocolPath`
@@ -7,11 +9,12 @@ import { readFile, writeFile } from '../filesystem';
  * @param {buffer} file - The file buffer to copy.
  */
 const importAssetToProtocol = (protocolPath, file) => {
-  const destinationPath = path.join(protocolPath, file.name);
+  const destinationName = `${uuid()}.${path.extname(file.name)}`;
+  const destinationPath = path.join(protocolPath, 'assets', destinationName);
 
-  return readFile(file)
+  return readFileAsBuffer(file)
     .then(data => writeFile(destinationPath, data))
-    .then(() => file.name);
+    .then(() => destinationName);
 };
 
 export default importAssetToProtocol;

@@ -1,12 +1,16 @@
 import React, { PureComponent } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { uniqueId } from 'lodash';
 import cx from 'classnames';
+import { actionCreators as assetActions } from '../../ducks/modules/protocol/assets';
 
 class FileInput extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
+    importAsset: PropTypes.func.isRequired,
     label: PropTypes.string,
     value: PropTypes.string,
     children: PropTypes.func,
@@ -29,16 +33,7 @@ class FileInput extends PureComponent {
 
   onDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const fileAsBinaryString = reader.result;
-        console.log(fileAsBinaryString);
-        // do whatever you want with the file content
-      };
-      reader.onabort = () => console.log('file reading was aborted');
-      reader.onerror = () => console.log('file reading has failed');
-
-      reader.readAsBinaryString(file);
+      this.props.importAsset(file);
     });
   }
 
@@ -59,5 +54,10 @@ class FileInput extends PureComponent {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  importAsset: bindActionCreators(assetActions.importAsset, dispatch),
+});
 
-export default FileInput;
+export { FileInput };
+
+export default connect(null, mapDispatchToProps)(FileInput);
