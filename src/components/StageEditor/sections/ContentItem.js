@@ -1,23 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MarkdownInput, FileInput } from '../../../components/Form';
-import { Image } from '../../../components/Assets';
+import { Image, Audio, Video } from '../../../components/Assets';
 
-const contentTypes = {
+// eslint-disable-next-line
+const ImageInput = ({ value, onChange }) =>
+  <FileInput value={value} onChange={onChange}>{ url => (<Image url={url} alt="preview" />) }</FileInput>;
+
+// eslint-disable-next-line
+const AudioInput = ({ value, onChange }) => (
+  <FileInput value={value} onChange={onChange}>
+    { url => (<Audio url={url} autoplay controls />) }
+  </FileInput>
+);
+
+// eslint-disable-next-line
+const VideoInput = ({ value, onChange }) => (
+  <FileInput value={value} onChange={onChange}>
+    { url => (<Video controls url={url} />) }
+  </FileInput>
+);
+
+const contentInputs = {
   text: MarkdownInput,
-  image: ({ value, onChange }) => ( // eslint-disable-line
-    <FileInput value={value} onChange={onChange}>{ url => (<Image url={url} alt="preview" />) }</FileInput>
-  ),
-  audio: FileInput,
-  video: FileInput,
+  image: ImageInput,
+  audio: AudioInput,
+  video: VideoInput,
 };
 
 const ContentItem = ({ type, content, onChange }) => {
-  const ContentType = contentTypes[type];
+  const ContentInput = contentInputs[type];
 
   return (
     <div styles={{ borderTop: '2px', borderColor: 'black' }}>
-      <ContentType value={content} onChange={value => onChange({ type, content: value })} />
+      <ContentInput value={content} onChange={value => onChange({ type, content: value })} />
     </div>
   );
 };

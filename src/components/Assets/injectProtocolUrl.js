@@ -3,7 +3,7 @@ import { compose, setPropTypes, mapProps } from 'recompose';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
-  getProtocolUrl: url => `protocol:/${state.session.activeProtocol}assets/${url}`,
+  getProtocolUrl: url => (url ? `protocol:/${state.session.activeProtocol}assets/${url}` : ''),
 });
 
 const injectProtocolUrl = compose(
