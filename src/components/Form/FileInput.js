@@ -13,12 +13,14 @@ class FileInput extends PureComponent {
     importAsset: PropTypes.func.isRequired,
     label: PropTypes.string,
     value: PropTypes.string,
+    accept: PropTypes.string,
     children: PropTypes.func,
   };
 
   static defaultProps = {
     label: '',
     value: '',
+    accept: '',
     children: value => value,
   };
 
@@ -39,6 +41,7 @@ class FileInput extends PureComponent {
     const {
       value,
       label,
+      accept,
     } = this.props;
 
     return (
@@ -47,7 +50,11 @@ class FileInput extends PureComponent {
           {label}
         </div>
         <div>{this.props.children(value)}</div>
-        <Dropzone onDrop={this.onDrop} multiple={false} />,
+        <Dropzone
+          onDrop={this.onDrop}
+          multiple={false}
+          accept={accept}
+        />,
       </label>
     );
   }

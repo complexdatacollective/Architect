@@ -4,19 +4,34 @@ import { MarkdownInput, FileInput } from '../../../components/Form';
 import { Image, Audio, Video } from '../../../components/Assets';
 
 // eslint-disable-next-line
-const ImageInput = ({ value, onChange }) =>
-  <FileInput value={value} onChange={onChange}>{ url => (<Image url={url} alt="preview" />) }</FileInput>;
+const ImageInput = ({ value, onChange }) => (
+  <FileInput
+    value={value}
+    onChange={onChange}
+    accept="image/*"
+  >
+    { url => (<Image url={url} alt="preview" />) }
+  </FileInput>
+);
 
 // eslint-disable-next-line
 const AudioInput = ({ value, onChange }) => (
-  <FileInput value={value} onChange={onChange}>
+  <FileInput
+    value={value}
+    onChange={onChange}
+    accept="audio/*"
+  >
     { url => (<Audio url={url} autoplay controls />) }
   </FileInput>
 );
 
 // eslint-disable-next-line
 const VideoInput = ({ value, onChange }) => (
-  <FileInput value={value} onChange={onChange}>
+  <FileInput
+    value={value}
+    onChange={onChange}
+    accept="video/*"
+  >
     { url => (<Video controls url={url} />) }
   </FileInput>
 );
