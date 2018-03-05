@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { MarkdownInput, ImageInput, AudioInput, VideoInput } from '../../../components/Form';
 
 const contentInputs = {
@@ -9,11 +10,15 @@ const contentInputs = {
   video: VideoInput,
 };
 
+const Handle = SortableHandle(() => (<span>::</span>));
+
 const ContentItem = ({ type, content, onChange }) => {
   const ContentInput = contentInputs[type];
 
   return (
-    <div styles={{ borderTop: '2px', borderColor: 'black' }}>
+    <div style={{ border: '2px solid black', background: 'pink' }}>
+      <Handle />
+      CONTENT ITEM
       <ContentInput value={content} onChange={value => onChange({ type, content: value })} />
     </div>
   );
@@ -29,4 +34,4 @@ ContentItem.defaultProps = {
   content: '',
 };
 
-export default ContentItem;
+export default SortableElement(ContentItem);

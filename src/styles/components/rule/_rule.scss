@@ -1,0 +1,155 @@
+.rule {
+  @include flex-inline;
+  @include flex-align(left, middle);
+  color: palette('text-dark');
+  position: relative;
+
+  $drag-button-size: 60px;
+
+  .rule-drag-handle {
+    @include flex-inline;
+    @include flex-align(center, middle);
+    background-color: palette('rule-control');
+    color: palette('text');
+    border: 0;
+    border-radius: $drag-button-size;
+    width: $drag-button-size;
+    height: $drag-button-size;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  $delete-button-size: 30px;
+
+  &__delete {
+    @include flex-inline;
+    @include flex-align(center, middle);
+    background-color: palette('rule-delete');
+    color: palette('text');
+    border: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    border-radius: $delete-button-size;
+    width: $delete-button-size;
+    height: $delete-button-size;
+    font-size: 1.1em;
+    margin-left: 20px;
+    cursor: pointer;
+
+    &:after {
+      display: block;
+      content: 'x';
+    }
+  }
+
+  &__options {
+    @include flex-inline;
+    @include flex-align(left, middle);
+    padding: 0;
+    border-radius: 20px;
+    height: 60px;
+  }
+
+  &__option {
+    @include flex-inline;
+    @include flex-align(left, middle);
+    height: 100%;
+    padding: 0 20px;
+    position: relative;
+
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    &--action {
+      background: palette('rule-type');
+    }
+
+    &--type {
+      background: palette('rule-type');
+    }
+
+    &--type + &--attribute {
+      padding-left: 40px;
+
+      &::before {
+        display: block;
+        content: '';
+        position: absolute;
+        left: -10px;
+        transform: translateX(10px);
+        z-index: 2;
+        top: 0;
+        width: 0;
+        height: 0;
+        border-top: 30px solid palette('rule-attribute');
+        border-bottom: 30px solid palette('rule-attribute');
+        border-left: 20px solid palette('rule-type');
+      }
+
+      &:empty {
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    &--attribute {
+      background: palette('rule-attribute');
+      max-width: 500px;
+      transition: max-width $animation-default-easing $animation-standard-duration,
+        padding $animation-default-easing $animation-standard-duration;
+
+      &:empty {
+        max-width: 0;
+        padding: 0;
+      }
+    }
+
+    &--operator {
+      background: palette('rule-operator');
+    }
+
+    &--value {
+      background: palette('rule-value');
+    }
+  }
+
+  &--alter {
+    .rule__option--type {
+      background: palette('rule-type--alter');
+    }
+  }
+
+  &--ego {
+    .rule__option--attribute {
+      background: palette('rule-attribute--ego');
+    }
+  }
+
+  &--edge {
+    .rule__option--type {
+      background: palette('rule-type--edge');
+    }
+
+    .rule__option--attribute {
+      background: palette('rule-attribute--edge');
+
+      &::before {
+        border-top: 30px solid palette('rule-attribute--edge');
+        border-bottom: 30px solid palette('rule-attribute--edge');
+        border-left: 20px solid palette('rule-type--edge');
+      }
+    }
+  }
+}

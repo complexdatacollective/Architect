@@ -11,7 +11,6 @@ class FileInput extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     importAsset: PropTypes.func.isRequired,
-    label: PropTypes.string,
     value: PropTypes.string,
     accept: PropTypes.string,
     children: PropTypes.func,
@@ -40,22 +39,25 @@ class FileInput extends PureComponent {
   render() {
     const {
       value,
-      label,
       accept,
     } = this.props;
 
     return (
-      <label htmlFor={this.id} className={cx('rich-text')}>
-        <div className={cx('rich-text__label')}>
-          {label}
-        </div>
-        <div>{this.props.children(value)}</div>
+      <div className="file-input">
+        { value &&
+          <div className="file-input__preview">{this.props.children(value)}</div>
+        }
         <Dropzone
           onDrop={this.onDrop}
           multiple={false}
           accept={accept}
-        />,
-      </label>
+          className={cx('file-input__dropzone', { 'file-input__dropzone--replace': !!value })}
+          activeClassName="file-input__dropzone--active"
+          acceptClassName="file-input__dropzone--accept"
+          rejectClassName="file-input__dropzone--reject"
+          disabledClassName="file-input__dropzone--disabled"
+        />
+      </div>
     );
   }
 }

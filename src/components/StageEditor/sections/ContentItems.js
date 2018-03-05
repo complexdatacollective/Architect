@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { Button } from '../../../components/Form';
 import ContentItem from './ContentItem';
+
+const SortableItems = SortableContainer(
+  ({ contentItems, updateItem }) => (
+    <div className="content-items__items">
+      { contentItems.map(
+        (props, index) => (
+          <ContentItem
+            {...props}
+            index={index}
+            key={index}
+            onChange={item => updateItem(item, index)}
+          />
+        ),
+      ) }
+    </div>
+  ),
+);
 
 class ContentItems extends Component {
   static propTypes = {
@@ -16,6 +34,14 @@ class ContentItems extends Component {
       contentItems: [],
     },
     onChange: () => {},
+  };
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    const reorderedContentItems = arrayMove(this.props.stage.contentItems, oldIndex, newIndex);
+
+    this.props.onChange({
+      contentItems: reorderedContentItems,
+    });
   };
 
   createNewItem = (type) => {
@@ -40,22 +66,44 @@ class ContentItems extends Component {
 
     return ([
       <div className="edit-stage__section" key="edit">
-        { contentItems &&
-          contentItems.map(
-            (props, index) => (
-              <ContentItem
-                {...props}
-                key={index}
-                onChange={item => this.updateItem(item, index)}
-              />
-            ),
-          )
-        }
-        <div>
-          <Button onClick={() => this.createNewItem('text')}>Add copy</Button>
-          <Button onClick={() => this.createNewItem('image')}>Add image</Button>
-          <Button onClick={() => this.createNewItem('audio')}>Add audio</Button>
-          <Button onClick={() => this.createNewItem('video')}>Add video</Button>
+        <div className="content-items">
+          {
+            contentItems &&
+            <SortableItems
+              contentItems={contentItems}
+              updateItem={this.updateItem}
+              onSortEnd={this.onSortEnd}
+              lockAxis="y"
+              useDragHandle
+            />
+          }
+
+          <div className="content-items__controls">
+            <Button
+              className="content-items__control"
+              onClick={() => this.createNewItem('text')}
+            >
+              Add copy
+            </Button>
+            <Button
+              className="content-items__control"
+              onClick={() => this.createNewItem('image')}
+            >
+              Add image
+            </Button>
+            <Button
+              className="content-items__control"
+              onClick={() => this.createNewItem('audio')}
+            >
+              Add audio
+            </Button>
+            <Button
+              className="content-items__control"
+              onClick={() => this.createNewItem('video')}
+            >
+              Add video
+            </Button>
+          </div>
         </div>
       </div>,
       <div className="edit-skip-logic__guidance" key="guidance">
