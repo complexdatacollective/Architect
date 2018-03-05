@@ -7,7 +7,6 @@ import cx from 'classnames';
 class MarkdownInput extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
-    label: PropTypes.string,
     value: PropTypes.string,
   };
 
@@ -28,22 +27,18 @@ class MarkdownInput extends PureComponent {
   render() {
     const {
       value,
-      label,
     } = this.props;
 
     return (
-      <label htmlFor={this.id} className={cx('rich-text')}>
-        <div className={cx('rich-text__label')}>
-          {label}
-        </div>
+      <label htmlFor={this.id} className={cx('markdown-input')}>
         <textarea
-          className={cx('rich-text__input')}
+          className={cx('markdown-input__input')}
           value={value}
           id={this.id}
           onChange={this.onChange}
           ref={(input) => { this.input = input; }}
         />
-        <Markdown source={value} />,
+        <Markdown className="markdown-input__preview" source={value} />
       </label>
     );
   }

@@ -10,15 +10,17 @@ const contentInputs = {
   video: VideoInput,
 };
 
-const Handle = SortableHandle(() => (<span>::</span>));
+const Handle = SortableHandle(() => (
+  <div className="content-item__handle">&#8597;</div>
+));
 
 const ContentItem = ({ type, content, onChange }) => {
   const ContentInput = contentInputs[type];
 
   return (
-    <div style={{ border: '2px solid black', background: 'pink' }}>
+    <div className="content-item">
       <Handle />
-      CONTENT ITEM
+
       <ContentInput value={content} onChange={value => onChange({ type, content: value })} />
     </div>
   );

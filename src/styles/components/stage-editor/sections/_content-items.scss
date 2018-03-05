@@ -1,5 +1,11 @@
 .content-items {
+  &__items {
+    display: flex;
+    flex-flow: column;
+  }
+
   &__controls {
+    margin-top: 20px;
   }
 
   &__control {
