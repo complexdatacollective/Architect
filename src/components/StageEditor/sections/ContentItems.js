@@ -5,7 +5,7 @@ import { Button } from '../../../components/Form';
 import ContentItem from './ContentItem';
 
 const SortableItems = SortableContainer(
-  ({ contentItems, updateItem }) => (
+  ({ contentItems, updateItem, deleteItem }) => (
     <div className="content-items__items">
       { contentItems.map(
         (props, index) => (
@@ -14,6 +14,7 @@ const SortableItems = SortableContainer(
             index={index}
             key={index}
             onChange={item => updateItem(item, index)}
+            onDelete={() => deleteItem(index)}
           />
         ),
       ) }
@@ -36,7 +37,7 @@ class ContentItems extends Component {
     onChange: () => {},
   };
 
-  onSortEnd = ({ oldIndex, newIndex }) => {
+  moveItem = ({ oldIndex, newIndex }) => {
     const reorderedContentItems = arrayMove(this.props.stage.contentItems, oldIndex, newIndex);
 
     this.props.onChange({
@@ -59,6 +60,13 @@ class ContentItems extends Component {
     this.props.onChange({ contentItems });
   }
 
+  deleteItem = (index) => {
+    const contentItems = this.props.stage.contentItems
+      .filter((_, i) => i !== index);
+
+    this.props.onChange({ contentItems });
+  }
+
   render() {
     const {
       stage: { contentItems },
@@ -72,7 +80,8 @@ class ContentItems extends Component {
             <SortableItems
               contentItems={contentItems}
               updateItem={this.updateItem}
-              onSortEnd={this.onSortEnd}
+              deleteItem={this.deleteItem}
+              onSortEnd={this.moveItem}
               lockAxis="y"
               useDragHandle
             />
