@@ -8,8 +8,13 @@ const ImageInput = ({ value, onChange }) => (
     value={value}
     onChange={onChange}
     accept="image/*"
+    className="image-input"
   >
-    { url => (<Image url={url} alt="preview" />) }
+    { url => (
+      <div className="image-input__preview">
+        <Image url={url} alt="" />
+      </div>
+    ) }
   </FileInput>
 );
 

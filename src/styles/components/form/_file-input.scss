@@ -1,34 +1,5 @@
 .file-input {
   display: block;
-
-  &__dropzone {
-    height: 100px;
-    width: 200px;
-    background: red;
-
-    &--replace {
-      height: auto;
-      width: auto;
-
-      &::before {
-        content: 'Replace content';
-      }
-    }
-
-    &--active {
-
-    }
-
-    &--accept {
-
-    }
-
-    &--reject {
-
-    }
-
-    &--disabled {
-
-    }
-  }
+  overflow: hidden;
+  position: relative;
 }

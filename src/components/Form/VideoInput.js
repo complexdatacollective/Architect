@@ -8,8 +8,13 @@ const VideoInput = ({ value, onChange }) => (
     value={value}
     onChange={onChange}
     accept="video/*"
+    className="video-input"
   >
-    { url => (<Video controls url={url} />) }
+    { url => (
+      <div className="video-input__preview">
+        <Video controls url={url} />
+      </div>
+    ) }
   </FileInput>
 );
 

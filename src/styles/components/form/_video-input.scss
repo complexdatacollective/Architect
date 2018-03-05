@@ -1,0 +1,33 @@
+$component-name: video-input;
+
+.#{$component-name} {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  min-height: 300px;
+
+  &__preview {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: opacity 200ms;
+    pointer-events: none;
+    background: red;
+
+    video {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &:hover {
+    .#{$component-name}__preview {
+      opacity: 0;
+    }
+  }
+}

@@ -8,8 +8,14 @@ const AudioInput = ({ value, onChange }) => (
     value={value}
     onChange={onChange}
     accept="audio/*"
+    className="audio-input"
+    completeClassName="audio-input--complete"
   >
-    { url => (<Audio url={url} controls />) }
+    { url => (
+      <div className="audio-input__preview">
+        <Audio url={url} controls />
+      </div>
+    ) }
   </FileInput>
 );
 

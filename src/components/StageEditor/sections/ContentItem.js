@@ -21,10 +21,12 @@ const ContentItem = ({ type, content, onChange, onDelete }) => {
     <div className="content-item">
       <Handle />
 
-      <ContentInput
-        value={content}
-        onChange={value => onChange({ type, content: value })}
-      />
+      <div className="content-item__content">
+        <ContentInput
+          value={content}
+          onChange={value => onChange({ type, content: value })}
+        />
+      </div>
 
       <Button
         className="content-item__delete"

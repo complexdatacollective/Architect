@@ -1,9 +1,40 @@
 .markdown-input {
-  display: flex;
+  width: 100%;
+  vertical-align: top;
+  position: relative;
 
   &__input {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    opacity: 0;
+    transition: opacity 200ms, transform 200ms;
+    border: 1px solid palette('divider');
+    height: 100%;
+    width: 50%;
+    vertical-align: top;
+    resize: none;
+    transform-origin: 100% 50%;
+    transform: scale(0, 1);
   }
 
   &__preview {
+    display: inline-block;
+    background-color: palette('divider');
+    padding: 20px;
+    width: 100%;
+    transition: width 200ms;
+    vertical-align: top;
+  }
+
+  &--is-focussed {
+    .markdown-input__input {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+
+    .markdown-input__preview {
+      width: 50%;
+    }
   }
 }

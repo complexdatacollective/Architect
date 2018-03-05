@@ -1,18 +1,31 @@
+%content-item-control {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
 .content-item {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
 
   &__handle {
-    background-color: red;
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
+    @extend %content-item-control;
+    margin-right: 10px;
+    flex: 0 0 auto;
   }
 
-  &__preview {
+  &__content {
+    flex: 1 0 auto;
+  }
+
+  &__delete {
+    @extend %content-item-control;
+    margin-left: 10px;
+    flex: 0 0 auto;
   }
 }

@@ -1,0 +1,34 @@
+$component-name: image-input;
+
+.#{$component-name} {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  min-height: 300px;
+
+  &__preview {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    opacity: 1;
+    transition: opacity 200ms;
+    pointer-events: none;
+    background: red;
+
+    img {
+      max-width: 100%;
+      min-height: 300px;
+    }
+  }
+
+  &:hover {
+    .#{$component-name}__preview {
+      opacity: 0;
+    }
+  }
+}

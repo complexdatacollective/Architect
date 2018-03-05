@@ -11,14 +11,17 @@ class FileInput extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     importAsset: PropTypes.func.isRequired,
+    className: PropTypes.string,
+    completeClassName: PropTypes.string,
     value: PropTypes.string,
     accept: PropTypes.string,
     children: PropTypes.func,
   };
 
   static defaultProps = {
-    label: '',
     value: '',
+    className: 'file-input',
+    completeClassName: 'file-input--complete',
     accept: '',
     children: value => value,
   };
@@ -40,22 +43,22 @@ class FileInput extends PureComponent {
     const {
       value,
       accept,
+      className,
+      completeClassName,
     } = this.props;
 
     return (
-      <div className="file-input">
-        { value &&
-          <div className="file-input__preview">{this.props.children(value)}</div>
-        }
+      <div className={cx(className, { [completeClassName]: !!value })}>
+        { value && this.props.children(value) }
         <Dropzone
           onDrop={this.onDrop}
           multiple={false}
           accept={accept}
-          className={cx('file-input__dropzone', { 'file-input__dropzone--replace': !!value })}
-          activeClassName="file-input__dropzone--active"
-          acceptClassName="file-input__dropzone--accept"
-          rejectClassName="file-input__dropzone--reject"
-          disabledClassName="file-input__dropzone--disabled"
+          className={cx('input-dropzone', { 'input-dropzone--replace': !!value })}
+          activeClassName="input-dropzone--active"
+          acceptClassName="input-dropzone--accept"
+          rejectClassName="input-dropzone--reject"
+          disabledClassName="input-dropzone--disabled"
         />
       </div>
     );

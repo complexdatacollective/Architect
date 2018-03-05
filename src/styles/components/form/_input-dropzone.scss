@@ -1,0 +1,38 @@
+.input-dropzone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 2px dashed palette('divider');
+  border-radius: spacing('small');
+  background: white;
+
+  &::before {
+    display: inline-block;
+    padding: spacing('medium');
+    content: 'Drop content here or click to upload';
+  }
+
+  &--replace {
+    &::before {
+      content: 'Drop content here or click to update';
+    }
+  }
+
+  &--active {
+
+  }
+
+  &--accept {
+
+  }
+
+  &--reject {
+
+  }
+
+  &--disabled {
+
+  }
+}
