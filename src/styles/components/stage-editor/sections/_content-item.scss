@@ -1,21 +1,25 @@
 %content-item-control {
-  background-color: red;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
+  font-size: 1.75rem;
+  color: palette('text');
+  width: unit(5);
+  height: unit(5);
+  border-radius: unit(5);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
+  cursor: grab;
 }
 
 .content-item {
-  margin-top: 10px;
+  margin-top: unit(1);
   display: flex;
 
   &__handle {
     @extend %content-item-control;
-    margin-right: 10px;
+
+  @include button-background(palette('background'));
+    margin-right: unit(1);
     flex: 0 0 auto;
   }
 
@@ -25,7 +29,14 @@
 
   &__delete {
     @extend %content-item-control;
-    margin-left: 10px;
+    @include button-background(palette('dark-background'));
+    margin-left: unit(1);
     flex: 0 0 auto;
+    cursor: pointer;
+
+    .icon {
+      width: 60%;
+      height: 60%;
+    }
   }
 }

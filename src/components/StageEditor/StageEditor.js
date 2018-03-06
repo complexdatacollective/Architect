@@ -29,7 +29,7 @@ const StageEditor = (props) => {
     [];
 
   return (
-    <div className="edit-stage">
+    <div className="stage-editor">
       { renderSections(interfaceSections, props) }
     </div>
   );

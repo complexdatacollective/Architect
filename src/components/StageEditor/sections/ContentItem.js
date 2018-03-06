@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
+import { Icon } from 'network-canvas-ui';
 import { Button, MarkdownInput, ImageInput, AudioInput, VideoInput } from '../../../components/Form';
 
 const contentInputs = {
@@ -31,7 +32,7 @@ const ContentItem = ({ type, content, onChange, onDelete }) => {
       <Button
         className="content-item__delete"
         onClick={onDelete}
-      >Delete</Button>
+      ><Icon name="close" /></Button>
     </div>
   );
 };

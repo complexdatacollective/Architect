@@ -4,8 +4,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  border: 2px dashed palette('divider');
-  border-radius: spacing('small');
+  border: 2px dashed palette('panel-background');
   background: white;
 
   &::before {

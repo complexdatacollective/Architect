@@ -4,7 +4,7 @@ $component-name: audio-input;
   display: block;
   overflow: hidden;
   position: relative;
-  min-height: 150px;
+  min-height: 100px;
 
   &__preview {
     position: absolute;
@@ -17,12 +17,10 @@ $component-name: audio-input;
     opacity: 1;
     transition: opacity 200ms;
     pointer-events: none;
-    background: red;
-
-    audio {
-      width: 100%;
-      height: 100%;
-    }
+    background: palette('panel-background');
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &:hover {

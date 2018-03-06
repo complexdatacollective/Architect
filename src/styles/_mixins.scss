@@ -24,12 +24,24 @@
   grid-auto-rows: min-content;
   grid-gap: 0 20px;
 
+  &__guidance,
+  &__section {
+    padding: 0 spacing('large') spacing('huge');
+
+    // First row needs top padding;
+    &:nth-child(1),
+    &:nth-child(2) {
+      padding: spacing('huge') spacing('large');
+    }
+  }
+
   &__section {
     grid-column: 1/3;
   }
 
   &__guidance {
     grid-column: 3/3;
+    background-color: palette('panel-background');
   }
 }
 

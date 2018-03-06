@@ -5,11 +5,50 @@
   }
 
   &__controls {
-    margin-top: 20px;
+    margin-top: unit(2);
+    margin-left: unit(6);
   }
 
   &__control {
-    width: 50px;
-    height: 50px;
+    height: unit(5);
+    border-radius: unit(5);
+    margin-right: unit(1);
+    padding: 0 unit(2);
+    @include typography('copy-large');
+    color: palette('text');
+    border: 0;
+    text-transform: uppercase;
+    background-color: red;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &::before {
+      content: '+';
+      font-size: 1.75rem;
+      line-height: 1.75rem;
+      position: relative;
+      top: unit(-.25);
+      margin-right: unit(1);
+    }
+
+    &--text {
+      @include button-background(palette('variant--1'));
+    }
+
+    &--image {
+      @include button-background(palette('variant--2'));
+    }
+
+    &--audio {
+      @include button-background(palette('variant--3'));
+    }
+
+    &--video {
+      @include button-background(palette('variant--4'));
+    }
+
+
   }
 }

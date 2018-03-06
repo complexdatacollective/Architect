@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { SeamlessTextInput } from '../../../components/Form';
 
 const Title = ({ stage: { title }, onChange }) => ([
-  <div className="edit-stage__section" key="edit">
+  <div className="stage-editor__section" key="edit">
     <SeamlessTextInput value={title} onChange={newTitle => onChange({ title: newTitle })} />
   </div>,
-  <div className="edit-skip-logic__guidance" key="guidance">
+  <div className="stage-editor__guidance" key="guidance">
     What is the title for this interface?
   </div>,
 ]);

@@ -1,3 +1,5 @@
+// Destined for network canvas UI
+
 @include palette-set('panel-background', color('platinum'));
 @include palette-set('panel', color('platinum--dark'));
 @include palette-set('panel-text', color('charcoal'));
@@ -36,3 +38,15 @@
 @include palette-set('rules-background', color('intent'));
 @include palette-set('rules--and', color('slate-blue--dark'));
 @include palette-set('rules--or', color('neon-carrot--dark'));
+
+// content item types
+@include palette-set('variant--1', color('neon-coral'));
+@include palette-set('variant--2', color('mustard--dark'));
+@include palette-set('variant--3', color('sea-green'));
+@include palette-set('variant--4', color('sea-green--dark'));
+
+@include palette-set('asset-background', color('charcoal'));
+
+@function unit($number: 1) {
+  @return .6rem * $number;
+}

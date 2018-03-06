@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FileInput from './FileInput';
-import { Audio } from '../Assets';
 
 const AudioInput = ({ value, onChange }) => (
   <FileInput
@@ -11,9 +10,9 @@ const AudioInput = ({ value, onChange }) => (
     className="audio-input"
     completeClassName="audio-input--complete"
   >
-    { url => (
+    { () => (
       <div className="audio-input__preview">
-        <Audio url={url} controls />
+        { value }
       </div>
     ) }
   </FileInput>

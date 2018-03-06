@@ -18,7 +18,8 @@ $component-name: image-input;
     opacity: 1;
     transition: opacity 200ms;
     pointer-events: none;
-    background: red;
+    background: palette('panel-background');
+    text-align: center;
 
     img {
       max-width: 100%;

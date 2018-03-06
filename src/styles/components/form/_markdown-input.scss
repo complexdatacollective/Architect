@@ -2,6 +2,7 @@
   width: 100%;
   vertical-align: top;
   position: relative;
+  min-height: 75px;
 
   &__input {
     position: absolute;
@@ -9,20 +10,25 @@
     top: 0;
     opacity: 0;
     transition: opacity 200ms, transform 200ms;
-    border: 1px solid palette('divider');
+    background-color: palette('panel-background');
+    border: 0;
+    padding: spacing('medium');
     height: 100%;
     width: 50%;
     vertical-align: top;
     resize: none;
     transform-origin: 100% 50%;
     transform: scale(0, 1);
+    @include typography('copy-large');
   }
 
   &__preview {
     display: inline-block;
-    background-color: palette('divider');
-    padding: 20px;
+    border: 2px solid palette('panel-background');
+    background-color: palette('card-background');
+    padding: spacing('medium');
     width: 100%;
+    min-height: 75px;
     transition: width 200ms;
     vertical-align: top;
   }

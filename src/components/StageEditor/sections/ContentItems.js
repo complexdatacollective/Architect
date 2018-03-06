@@ -4,6 +4,16 @@ import { SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { Button } from '../../../components/Form';
 import ContentItem from './ContentItem';
 
+// eslint-disable-next-line
+const AddButton = ({ onClick, type, children }) => (
+  <Button
+    className={`content-items__control content-items__control--${type}`}
+    onClick={onClick}
+  >
+    {children}
+  </Button>
+);
+
 const SortableItems = SortableContainer(
   ({ contentItems, updateItem, deleteItem }) => (
     <div className="content-items__items">
@@ -73,7 +83,7 @@ class ContentItems extends Component {
     } = this.props;
 
     return ([
-      <div className="edit-stage__section" key="edit">
+      <div className="stage-editor__section" key="edit">
         <div className="content-items">
           {
             contentItems &&
@@ -88,34 +98,14 @@ class ContentItems extends Component {
           }
 
           <div className="content-items__controls">
-            <Button
-              className="content-items__control"
-              onClick={() => this.createNewItem('text')}
-            >
-              Add copy
-            </Button>
-            <Button
-              className="content-items__control"
-              onClick={() => this.createNewItem('image')}
-            >
-              Add image
-            </Button>
-            <Button
-              className="content-items__control"
-              onClick={() => this.createNewItem('audio')}
-            >
-              Add audio
-            </Button>
-            <Button
-              className="content-items__control"
-              onClick={() => this.createNewItem('video')}
-            >
-              Add video
-            </Button>
+            <AddButton onClick={() => this.createNewItem('text')} type="text">Copy</AddButton>
+            <AddButton onClick={() => this.createNewItem('image')} type="image">Image</AddButton>
+            <AddButton onClick={() => this.createNewItem('audio')} type="audio">Audio</AddButton>
+            <AddButton onClick={() => this.createNewItem('video')} type="video">Video</AddButton>
           </div>
         </div>
       </div>,
-      <div className="edit-skip-logic__guidance" key="guidance">
+      <div className="stage-editor__guidance" key="guidance">
         Add your content here
       </div>,
     ]);

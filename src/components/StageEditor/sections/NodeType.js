@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { OptionsInput } from '../../components/Form';
+import { OptionsInput } from '../../../components/Form';
 
 const options = [
   'foo',

@@ -1,3 +1,9 @@
 .stage-editor {
+  @include guided;
+  width: 100%;
 
+  &__section,
+  &__guidance {
+
+  }
 }
