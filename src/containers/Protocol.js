@@ -10,6 +10,7 @@ import EditSkipLogic from '../containers/EditSkipLogic';
 import EditStage from '../containers/EditStage';
 import { Timeline } from '../components';
 import { actionCreators as protocolExportActions } from '../ducks/modules/protocol/export';
+import { actionCreators as protocolSaveActions } from '../ducks/modules/protocol/save';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -26,6 +27,7 @@ class Protocol extends PureComponent {
     stages: PropTypes.array.isRequired,
     hasChanges: PropTypes.bool,
     exportProtocol: PropTypes.func.isRequired,
+    saveProtocol: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -89,7 +91,8 @@ class Protocol extends PureComponent {
         />
 
         <div className="protocol__control-bar">
-          <Button size="small" onClick={this.props.exportProtocol}>Save</Button>
+          <Button size="small" onClick={this.props.saveProtocol}>Save</Button>
+          <Button size="small" onClick={this.props.exportProtocol}>Export</Button>
         </div>
 
         <NewStage
@@ -131,6 +134,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     exportProtocol: bindActionCreators(protocolExportActions.exportProtocol, dispatch),
+    saveProtocol: bindActionCreators(protocolSaveActions.saveProtocol, dispatch),
   };
 }
 
