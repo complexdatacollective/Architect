@@ -9,7 +9,7 @@
 
   &__title {
     &-input {
-      @include typography('title-1');
+      @include preset('title-1');
       text-align: left;
     }
   }

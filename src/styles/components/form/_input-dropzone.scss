@@ -4,12 +4,13 @@
   left: 0;
   height: 100%;
   width: 100%;
-  border: 2px dashed palette('panel-background');
+  border: unit(.2) dashed palette('panel-background');
   background: white;
 
   &::before {
+    @include preset('copy-medium');
     display: inline-block;
-    padding: spacing('medium');
+    padding: unit(1);
     content: 'Drop content here or click to upload';
   }
 

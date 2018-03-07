@@ -1,4 +1,16 @@
 // Destined for network canvas UI
+@function unit($units: 1) {
+  @return .6rem * $units;
+}
+
+// rename these methods, since they are actually generalisable
+@mixin preset-set($type-name, $breakpoint-name, $type-properties) {
+  @include type-set($type-name, $breakpoint-name, $type-properties);
+}
+
+@mixin preset($type-name, $type-property: null) {
+  @include typography($type-name, $type-property);
+}
 
 @include palette-set('panel-background', color('platinum'));
 @include palette-set('panel', color('platinum--dark'));
@@ -46,7 +58,3 @@
 @include palette-set('variant--4', color('sea-green--dark'));
 
 @include palette-set('asset-background', color('charcoal'));
-
-@function unit($number: 1) {
-  @return .6rem * $number;
-}

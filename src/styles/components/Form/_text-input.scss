@@ -2,10 +2,10 @@
   display: block;
 
   &__input {
-    border: 1px solid palette('input-border');
+    border: unit(.1) solid palette('input-border');
     color: palette('input-text');
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: unit(.5);
+    padding: unit(.5) unit(1);
     width: 100%;
 
     &:focus {

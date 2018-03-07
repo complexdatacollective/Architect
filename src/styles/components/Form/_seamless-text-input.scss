@@ -6,7 +6,7 @@ $module-name: seamless-text-input;
   &__input {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid transparent;
+    border-bottom: unit(.1) solid transparent;
     transition: border-bottom-color $animation-default-easing $animation-standard-duration;
 
     &:focus {
@@ -16,8 +16,8 @@ $module-name: seamless-text-input;
 
   &__icon {
     vertical-align: bottom;
-    width: 20px !important;
-    height: 20px !important;
+    width: unit(2) !important;
+    height: unit(2) !important;
     transition: opacity $animation-default-easing $animation-fast-duration;
   }
 

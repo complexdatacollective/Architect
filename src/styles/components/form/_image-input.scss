@@ -4,7 +4,7 @@ $component-name: image-input;
   display: block;
   overflow: hidden;
   position: relative;
-  min-height: 300px;
+  min-height: unit(30);
 
   &__preview {
     position: absolute;
@@ -23,7 +23,7 @@ $component-name: image-input;
 
     img {
       max-width: 100%;
-      min-height: 300px;
+      min-height: unit(30);
     }
   }
 

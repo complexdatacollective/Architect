@@ -12,23 +12,23 @@
     transition: opacity 200ms, transform 200ms;
     background-color: palette('panel-background');
     border: 0;
-    padding: spacing('medium');
+    padding: unit(1);
     height: 100%;
     width: 50%;
     vertical-align: top;
     resize: none;
     transform-origin: 100% 50%;
     transform: scale(0, 1);
-    @include typography('copy-large');
+    @include preset('copy-large');
   }
 
   &__preview {
     display: inline-block;
-    border: 2px solid palette('panel-background');
+    border: unit(.2) solid palette('panel-background');
     background-color: palette('card-background');
-    padding: spacing('medium');
+    padding: unit(1);
     width: 100%;
-    min-height: 75px;
+    min-height: unit(8);
     transition: width 200ms;
     vertical-align: top;
   }

@@ -1,5 +1,5 @@
 %content-item-control {
-  font-size: 1.75rem;
+  font-size: unit(3);
   color: palette('text');
   width: unit(5);
   height: unit(5);
@@ -17,8 +17,7 @@
 
   &__handle {
     @extend %content-item-control;
-
-  @include button-background(palette('background'));
+    @include button-background(palette('background'));
     margin-right: unit(1);
     flex: 0 0 auto;
   }

@@ -14,11 +14,10 @@
     border-radius: unit(5);
     margin-right: unit(1);
     padding: 0 unit(2);
-    @include typography('copy-large');
+    @include preset('copy-large');
     color: palette('text');
     border: 0;
     text-transform: uppercase;
-    background-color: red;
     display: inline-flex;
     align-items: center;
     justify-content: center;
