@@ -30,6 +30,14 @@ const StageEditor = (props) => {
 
   return (
     <div className="stage-editor">
+      <div className="stage-editor-section">
+        <div className="stage-editor-section__edit">
+          <h1>{props.stage.type}</h1>
+        </div>
+        <div className="stage-editor-section__guidance">
+          What is the title for this interface?
+        </div>
+      </div>
       { renderSections(interfaceSections, props) }
     </div>
   );

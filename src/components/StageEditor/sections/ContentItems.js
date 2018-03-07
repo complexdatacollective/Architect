@@ -7,7 +7,7 @@ import ContentItem from './ContentItem';
 // eslint-disable-next-line
 const AddButton = ({ onClick, type, children }) => (
   <Button
-    className={`content-items__control content-items__control--${type}`}
+    className={`stage-editor-section-content-items__control stage-editor-section-content-items__control--${type}`}
     onClick={onClick}
   >
     {children}
@@ -16,7 +16,7 @@ const AddButton = ({ onClick, type, children }) => (
 
 const SortableItems = SortableContainer(
   ({ contentItems, updateItem, deleteItem }) => (
-    <div className="content-items__items">
+    <div className="stage-editor-section-content-items__items">
       { contentItems.map(
         (props, index) => (
           <ContentItem
@@ -77,38 +77,49 @@ class ContentItems extends Component {
     this.props.onChange({ contentItems });
   }
 
+  hasContentItems = () =>
+    this.props.stage.contentItems && this.props.stage.contentItems.length > 0;
+
   render() {
     const {
       stage: { contentItems },
     } = this.props;
 
-    return ([
-      <div className="stage-editor__section" key="edit">
-        <div className="content-items">
-          {
-            contentItems &&
-            <SortableItems
-              contentItems={contentItems}
-              updateItem={this.updateItem}
-              deleteItem={this.deleteItem}
-              onSortEnd={this.moveItem}
-              lockAxis="y"
-              useDragHandle
-            />
-          }
+    return (
+      <div className="stage-editor-section">
+        <div className="stage-editor-section__edit" key="edit">
+          <div className="stage-editor-section-content-items">
+            <h2>Content</h2>
+            {
+              !this.hasContentItems() &&
+              <p>Choose a content type from below.<br /><br /></p>
+            }
 
-          <div className="content-items__controls">
-            <AddButton onClick={() => this.createNewItem('text')} type="text">Copy</AddButton>
-            <AddButton onClick={() => this.createNewItem('image')} type="image">Image</AddButton>
-            <AddButton onClick={() => this.createNewItem('audio')} type="audio">Audio</AddButton>
-            <AddButton onClick={() => this.createNewItem('video')} type="video">Video</AddButton>
+            {
+              this.hasContentItems() &&
+              <SortableItems
+                contentItems={contentItems}
+                updateItem={this.updateItem}
+                deleteItem={this.deleteItem}
+                onSortEnd={this.moveItem}
+                lockAxis="y"
+                useDragHandle
+              />
+            }
+
+            <div className="stage-editor-section-content-items__controls">
+              <AddButton onClick={() => this.createNewItem('text')} type="text">Copy</AddButton>
+              <AddButton onClick={() => this.createNewItem('image')} type="image">Image</AddButton>
+              <AddButton onClick={() => this.createNewItem('audio')} type="audio">Audio</AddButton>
+              <AddButton onClick={() => this.createNewItem('video')} type="video">Video</AddButton>
+            </div>
           </div>
         </div>
-      </div>,
-      <div className="stage-editor__guidance" key="guidance">
-        Add your content here
-      </div>,
-    ]);
+        <div className="stage-editor-section__guidance">
+          Add your content here
+        </div>
+      </div>
+    );
   }
 }
 

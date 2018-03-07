@@ -12,6 +12,7 @@
   @include typography($type-name, $type-property);
 }
 
+@include palette-set('divider-light', color('platinum'));
 @include palette-set('panel-background', color('platinum'));
 @include palette-set('panel', color('platinum--dark'));
 @include palette-set('panel-text', color('charcoal'));

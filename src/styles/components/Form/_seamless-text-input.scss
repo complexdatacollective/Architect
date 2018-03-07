@@ -4,9 +4,11 @@ $module-name: seamless-text-input;
   display: block;
 
   &__input {
+    @include preset('copy-large', font-size);
     background-color: transparent;
+    width: calc(100% - #{unit(3)});
     border: 0;
-    border-bottom: unit(.1) solid transparent;
+    border-bottom: unit(.2) solid palette('divider-light');
     transition: border-bottom-color $animation-default-easing $animation-standard-duration;
 
     &:focus {
@@ -15,6 +17,7 @@ $module-name: seamless-text-input;
   }
 
   &__icon {
+    margin-left: unit(1);
     vertical-align: bottom;
     width: unit(2) !important;
     height: unit(2) !important;

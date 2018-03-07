@@ -12,17 +12,17 @@ const contentInputs = {
 };
 
 const Handle = SortableHandle(() => (
-  <div className="content-item__handle">&#8597;</div>
+  <div className="stage-editor-section-content-item__handle" />
 ));
 
 const ContentItem = ({ type, content, onChange, onDelete }) => {
   const ContentInput = contentInputs[type];
 
   return (
-    <div className="content-item">
+    <div className="stage-editor-section-content-item">
       <Handle />
 
-      <div className="content-item__content">
+      <div className="stage-editor-section-content-item__content">
         <ContentInput
           value={content}
           onChange={value => onChange({ type, content: value })}
@@ -30,7 +30,7 @@ const ContentItem = ({ type, content, onChange, onDelete }) => {
       </div>
 
       <Button
-        className="content-item__delete"
+        className="stage-editor-section-content-item__delete"
         onClick={onDelete}
       ><Icon name="close" /></Button>
     </div>

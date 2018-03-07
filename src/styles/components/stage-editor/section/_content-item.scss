@@ -1,9 +1,9 @@
 %content-item-control {
   font-size: unit(3);
   color: palette('text');
-  width: unit(5);
-  height: unit(5);
-  border-radius: unit(5);
+  width: unit(4);
+  height: unit(4);
+  border-radius: unit(4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +11,7 @@
   cursor: grab;
 }
 
-.content-item {
+.stage-editor-section-content-item {
   margin-top: unit(1);
   display: flex;
 
@@ -20,6 +20,14 @@
     @include button-background(palette('background'));
     margin-right: unit(1);
     flex: 0 0 auto;
+
+    &::before {
+      content: '\2195';
+      color: white;
+      display: block;
+      position: relative;
+      top: unit(0.2);
+    }
   }
 
   &__content {

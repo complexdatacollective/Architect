@@ -1,9 +1,14 @@
+@import 'section/content-items';
+@import 'section/content-item';
+@import 'section/title';
+
 .stage-editor {
   @include guided;
   width: 100%;
 
-  &__section,
-  &__guidance {
-
+  &-section {
+    &__guidance {
+      background-color: palette('panel-background');
+    }
   }
 }

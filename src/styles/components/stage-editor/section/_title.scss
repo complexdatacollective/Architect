@@ -1,0 +1,6 @@
+.stage-editor-section-title {
+  .seamless-text-input__input {
+    @include preset(title-1, font-size);
+    @include preset(title-1, font-weight);
+  }
+}
