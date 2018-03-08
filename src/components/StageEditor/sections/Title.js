@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Section, Edit, Guidance } from '../../Guided';
 import { SeamlessTextInput } from '../../../components/Form';
 
-const Title = ({ stage: { title }, onChange }) => (
-  <div className="stage-editor-section">
-    <div className="stage-editor-section__edit" key="edit">
+const Title = ({ stage: { title }, onChange, ...props }) => (
+  <Section className="stage-editor-section" {...props}>
+    <Edit className="stage-editor-section__edit">
       <h2>Title</h2>
       <SeamlessTextInput
         value={title}
@@ -12,11 +13,11 @@ const Title = ({ stage: { title }, onChange }) => (
         className="stage-editor-section-title"
         onChange={newTitle => onChange({ title: newTitle })}
       />
-    </div>
-    <div className="stage-editor-section__guidance">
+    </Edit>
+    <Guidance className="stage-editor-section__guidance">
       What is the title for this interface?
-    </div>
-  </div>
+    </Guidance>
+  </Section>
 );
 
 Title.propTypes = {

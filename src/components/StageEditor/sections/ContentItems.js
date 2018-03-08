@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SortableContainer, arrayMove } from 'react-sortable-hoc';
+import { Section, Edit, Guidance } from '../../Guided';
 import { Button } from '../../../components/Form';
 import ContentItem from './ContentItem';
 
@@ -83,11 +84,13 @@ class ContentItems extends Component {
   render() {
     const {
       stage: { contentItems },
+      onChange,
+      ...props
     } = this.props;
 
     return (
-      <div className="stage-editor-section">
-        <div className="stage-editor-section__edit" key="edit">
+      <Section className="stage-editor-section" {...props}>
+        <Edit className="stage-editor-section__edit">
           <div className="stage-editor-section-content-items">
             <h2>Content</h2>
             {
@@ -114,11 +117,11 @@ class ContentItems extends Component {
               <AddButton onClick={() => this.createNewItem('video')} type="video">Video</AddButton>
             </div>
           </div>
-        </div>
-        <div className="stage-editor-section__guidance">
+        </Edit>
+        <Guidance className="stage-editor-section__guidance">
           Add your content here
-        </div>
-      </div>
+        </Guidance>
+      </Section>
     );
   }
 }

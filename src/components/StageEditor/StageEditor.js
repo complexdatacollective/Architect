@@ -1,65 +1,10 @@
-/* eslint-disable */
-
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Title,
   ContentItems,
 } from './sections';
-
-class Guided extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      active: 1,
-    };
-  }
-
-  onMouseOver = (index) =>
-    this.setState({ active: index });
-
-  render() {
-    const isActive = this.state.isActive;
-
-    return React.Children.toArray(this.props.children)
-      .map((child, index) => {
-        const isActive = this.state.active === index;
-        return React.cloneElement(
-          child,
-          {
-            isActive,
-            onMouseOver: () => this.onMouseOver(index)
-          }
-        );
-      });
-  }
-}
-
-const Section = ({ children, isActive, onMouseOver }) => (
-  <div onMouseOver={onMouseOver}>
-    {
-      React.Children.toArray(children)
-        .map((child) =>
-          React.cloneElement(child, { isActive }),
-        )
-    }
-  </div>
-);
-
-const Edit = ({ isActive, children }) => (
-  <div>
-    {isActive && 'Yes' }
-    {children}
-  </div>
-);
-
-const Guidance = ({ isActive, children }) => (
-  <div>
-    {isActive && 'Yes' }
-    {children}
-  </div>
-);
+import { Guided, Section, Edit } from '../Guided';
 
 /*
  * Renders the relevant interface editor
@@ -71,11 +16,12 @@ const informationInterface = [
   ContentItems,
 ];
 
-const renderSections = (sections, props) => {
-  if (sections.length === 0) { return (<div>Not yet editable.</div>); }
+const renderSections = (interfaceSections, props) => {
+  if (interfaceSections.length === 0) { return (<div>Not yet editable.</div>); }
 
-  return sections.map(
-    (Section, index) => <Section {...props} key={index} />,
+  return interfaceSections.map(
+    (InterfaceSection, index) =>
+      <InterfaceSection {...props} key={index} />,
   );
 };
 
@@ -87,34 +33,13 @@ const StageEditor = (props) => {
   return (
     <div className="stage-editor">
       <Guided>
-        <Section>
-          <Edit>
-            Editor goes here
+        <Section className="stage-editor-section">
+          <Edit className="stage-editor-section__edit">
+            <h1>Edit {props.stage.type} Screen</h1>
           </Edit>
-
-          <Guidance>
-            Some content here.
-          </Guidance>
         </Section>
-        <Section>
-          <Edit>
-            Editor goes here
-          </Edit>
-
-          <Guidance>
-            Some content here.
-          </Guidance>
-        </Section>
+        { renderSections(interfaceSections, props) }
       </Guided>
-      <div className="stage-editor-section">
-        <div className="stage-editor-section__edit">
-          <h1>{props.stage.type}</h1>
-        </div>
-        <div className="stage-editor-section__guidance">
-          What is the title for this interface?
-        </div>
-      </div>
-      { renderSections(interfaceSections, props) }
     </div>
   );
 };
