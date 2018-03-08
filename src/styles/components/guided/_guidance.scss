@@ -1,5 +1,4 @@
 .guided-guidance {
-  display: none;
   position: fixed;
   right: 0;
   top: 0;
@@ -7,8 +6,12 @@
   width: 35%;
   max-width: unit(45);
   padding: unit(4) unit(4);
+  transition: opacity $animation-standard-duration $animation-default-easing;
+  opacity: 0;
+  z-index: -1;
 
   &--is-active {
-    display: block;
+    transition: opacity $animation-fast-duration $animation-default-easing;
+    opacity: 1;
   }
 }
