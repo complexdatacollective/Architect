@@ -4,6 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { has, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
+import { Guided, Section as GuidedSection, Edit as GuidedEdit, Guidance } from '../components/Guided';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 import { ProtocolCard, FilterGroup } from '../containers';
@@ -80,37 +81,43 @@ class EditSkipLogic extends PureComponent {
         show={show}
         onCancel={onCancel}
       >
-        <div className="edit-skip-logic">
-          <div className="edit-skip-logic__section">
-            <div className="edit-skip-logic__action">
-              <DropDown
-                options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
-                onChange={value => updateDraft({ action: value })}
-                value={action}
+        <Guided className="edit-skip-logic">
+          <GuidedSection>
+            <GuidedEdit>
+              <div className="edit-skip-logic__action">
+                <DropDown
+                  options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
+                  onChange={value => updateDraft({ action: value })}
+                  value={action}
+                />
+              </div>
+            </GuidedEdit>
+          </GuidedSection>
+          <GuidedSection>
+            <GuidedEdit>
+              <div className="edit-skip-logic__rule">
+                <NetworkRule
+                  logic={predicate}
+                  onChange={logic => updateDraft(logic)}
+                />
+              </div>
+            </GuidedEdit>
+          </GuidedSection>
+          <GuidedSection>
+            <GuidedEdit>
+              <FilterGroup
+                filter={filter}
+                onChange={newFilter => updateDraft({ filter: newFilter })}
               />
-            </div>
-          </div>
-          <div className="edit-skip-logic__section">
-            <div className="edit-skip-logic__rule">
-              <NetworkRule
-                logic={predicate}
-                onChange={logic => updateDraft(logic)}
-              />
-            </div>
-          </div>
-          <div className="edit-skip-logic__section">
-            <FilterGroup
-              filter={filter}
-              onChange={newFilter => updateDraft({ filter: newFilter })}
-            />
-          </div>
-          <div className="edit-skip-logic__guidance">
-            <div className="edit-skip-logic__bubble">
-              Skip logic tells Network Canvas when to skip past a stage. Using it,
-              you can create different pathways through your interview.
-            </div>
-          </div>
-        </div>
+            </GuidedEdit>
+            <Guidance className="edit-skip-logic__guidance">
+              <div className="edit-skip-logic__bubble">
+                Skip logic tells Network Canvas when to skip past a stage. Using it,
+                you can create different pathways through your interview.
+              </div>
+            </Guidance>
+          </GuidedSection>
+        </Guided>
       </ProtocolCard>
     );
   }

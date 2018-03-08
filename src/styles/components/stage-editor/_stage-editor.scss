@@ -3,7 +3,6 @@
 @import 'section/title';
 
 .stage-editor {
-  @include guided;
   width: 100%;
 
   &-section {

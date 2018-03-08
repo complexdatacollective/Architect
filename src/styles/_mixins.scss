@@ -17,34 +17,3 @@
     z-index: -1;
   }
 }
-
-@mixin guided {
-  // display: flex;
-  // flex-direction: column;
-
-  // &-section {
-  //   display: flex;
-  //   flex-direction: row;
-  //   width: 100%;
-
-  //   &__edit,
-  //   &__guidance {
-  //     padding: 0 spacing('large') spacing('huge');
-  //   }
-
-  //   &__edit {
-  //     flex: 0 1 65%;
-  //   }
-
-  //   &__guidance {
-  //     flex: 0 0 unit(45);
-  //   }
-
-  //   &:nth-child(1) {
-  //     & > div {
-  //       padding: spacing('huge') spacing('large');
-  //     }
-  //   }
-
-  // }
-}
