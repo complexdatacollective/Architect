@@ -44,7 +44,7 @@ class EditStage extends PureComponent {
 
   renderButtons() {
     return [].concat(
-      this.props.hasChanges ? [<Button key="save" size="small" onClick={this.onSave}>Save</Button>] : [],
+      this.props.hasChanges ? [<Button key="continue" size="small" onClick={this.onSave}>Continue</Button>] : [],
     );
   }
 

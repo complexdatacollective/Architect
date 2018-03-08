@@ -26,6 +26,11 @@ const interfaceOptions = [
     title: 'Categorize',
     description: '',
   },
+  {
+    type: 'Information',
+    title: 'Information',
+    description: '',
+  },
 ];
 
 class NewStage extends PureComponent {

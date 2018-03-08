@@ -1,9 +1,8 @@
 {
   "options": {
-    "title": ""
+    "title": "Mock protocol"
   },
   "stages": [
-    { "id": 1, "type": "Information" },
-    { "id": 2, "type": "Information" }
+    { "id": 1, "type": "Information" }
   ]
 }
