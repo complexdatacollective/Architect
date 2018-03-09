@@ -6,6 +6,8 @@ import { writeFile, readFile } from '../filesystem';
 const saveDialogOptions = {
   buttonLabel: 'Save',
   nameFieldLabel: 'Save as:',
+  defaultPath: 'Protocol.netcanvas',
+  filters: [{ name: 'Protocols', extensions: ['netcanvas'] }],
 };
 
 const saveDialog = () =>
