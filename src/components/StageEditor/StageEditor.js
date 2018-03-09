@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import {
   Title,
   ContentItems,
 } from './sections';
 import { Guided, Section, Edit } from '../Guided';
 
-/*
- * Renders the relevant interface editor
- */
-
-// Example interface layout
-const informationInterface = [
-  Title,
-  ContentItems,
-];
+const interfaces = {
+  Information: [
+    Title,
+    ContentItems,
+  ],
+};
 
 const renderSections = (interfaceSections, props) => {
   if (interfaceSections.length === 0) { return (<div>Not yet editable.</div>); }
@@ -25,10 +23,11 @@ const renderSections = (interfaceSections, props) => {
   );
 };
 
+/*
+ * Renders the relevant interface editor
+ */
 const StageEditor = (props) => {
-  const interfaceSections = props.stage.type === 'Information' ?
-    informationInterface :
-    [];
+  const interfaceSections = get(interfaces, props.stage.type, []);
 
   return (
     <div className="stage-editor">
