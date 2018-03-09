@@ -6,7 +6,7 @@ import undoable, { excludeAction } from 'redux-undo';
 import protocol from './protocol';
 import session from './session';
 import protocols from './protocols';
-import { actionTypes as protocolSaveActionTypes } from './protocol/save';
+import { actionTypes as protocolFileActionTypes } from './protocol/file';
 
 /*
  * state: {
@@ -23,7 +23,7 @@ export const rootReducer = combineReducers({
       limit: 25,
       filter: excludeAction([
         'persist/REHYDRATE',
-        protocolSaveActionTypes.SAVE_COMPLETE,
+        protocolFileActionTypes.SAVE_COMPLETE,
       ]),
     },
   ),
