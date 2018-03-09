@@ -20,7 +20,10 @@ const exportProtocolAction = () =>
   (dispatch, getState) => {
     const state = getState();
     const protocolPath = state.session.activeProtocol;
-    exportProtocol(protocolPath)
+    const protocol = getProtocol(state);
+    saveProtocol(protocolPath, protocol)
+      .then(() => dispatch(saveComplete(state.protocol.past.length)))
+      .then(() => exportProtocol(protocolPath))
       .then(() => dispatch(exportComplete()));
   };
 
