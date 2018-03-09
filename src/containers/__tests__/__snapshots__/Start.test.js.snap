@@ -4,7 +4,12 @@ exports[`<Start /> can render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Start />,
+  Symbol(enzyme.__unrendered__): <Start
+    createProtocol={[Function]}
+    loadProtocol={[Function]}
+    locateAndLoadProtocol={[Function]}
+    protocols={Array []}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -18,37 +23,27 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Link
-          className="start__protocol"
-          replace={false}
-          to="/protocol"
->
-          View protocol
-</Link>,
         <button
           onClick={[Function]}
 >
           Export
 </button>,
+        <button
+          onClick={[Function]}
+>
+          Create new Protocol
+</button>,
+        <button
+          onClick={[Function]}
+>
+          Open a protocol
+</button>,
+        Array [],
       ],
       "className": "start",
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": null,
-        "nodeType": "class",
-        "props": Object {
-          "children": "View protocol",
-          "className": "start__protocol",
-          "replace": false,
-          "to": "/protocol",
-        },
-        "ref": null,
-        "rendered": "View protocol",
-        "type": [Function],
-      },
       Object {
         "instance": null,
         "key": null,
@@ -61,6 +56,30 @@ ShallowWrapper {
         "rendered": "Export",
         "type": "button",
       },
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Create new Protocol",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "Create new Protocol",
+        "type": "button",
+      },
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Open a protocol",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "Open a protocol",
+        "type": "button",
+      },
     ],
     "type": "div",
   },
@@ -71,37 +90,27 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Link
-            className="start__protocol"
-            replace={false}
-            to="/protocol"
->
-            View protocol
-</Link>,
           <button
             onClick={[Function]}
 >
             Export
 </button>,
+          <button
+            onClick={[Function]}
+>
+            Create new Protocol
+</button>,
+          <button
+            onClick={[Function]}
+>
+            Open a protocol
+</button>,
+          Array [],
         ],
         "className": "start",
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "class",
-          "props": Object {
-            "children": "View protocol",
-            "className": "start__protocol",
-            "replace": false,
-            "to": "/protocol",
-          },
-          "ref": null,
-          "rendered": "View protocol",
-          "type": [Function],
-        },
         Object {
           "instance": null,
           "key": null,
@@ -112,6 +121,30 @@ ShallowWrapper {
           },
           "ref": null,
           "rendered": "Export",
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Create new Protocol",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "Create new Protocol",
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Open a protocol",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "Open a protocol",
           "type": "button",
         },
       ],

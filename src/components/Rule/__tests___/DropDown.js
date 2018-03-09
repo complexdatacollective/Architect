@@ -3,7 +3,7 @@
 import React from 'react';
 import { toPairs } from 'lodash';
 import { shallow } from 'enzyme';
-import RuleDropDown from '../RuleDropDown';
+import DropDown from '../DropDown';
 
 const mockProps = {
   options: toPairs({
@@ -14,9 +14,9 @@ const mockProps = {
   onChange: () => {},
 };
 
-describe('<RuleDropDown />', () => {
+describe('<DropDown />', () => {
   it('can render without labels', () => {
-    const component = shallow(<RuleDropDown {...mockProps} />);
+    const component = shallow(<DropDown {...mockProps} />);
 
     expect(component).toMatchSnapshot();
 
@@ -29,7 +29,7 @@ describe('<RuleDropDown />', () => {
 
   it('can render with labels', () => {
     const options = ['foo', 'bar', 'baz'];
-    const component = shallow(<RuleDropDown {...mockProps} options={options} />);
+    const component = shallow(<DropDown {...mockProps} options={options} />);
 
     expect(component).toMatchSnapshot();
 
@@ -43,7 +43,7 @@ describe('<RuleDropDown />', () => {
 
   it('it triggers on change with the option value', () => {
     const onChange = jest.fn();
-    const component = shallow(<RuleDropDown {...mockProps} onChange={onChange} />);
+    const component = shallow(<DropDown {...mockProps} onChange={onChange} />);
 
     component.find('select').simulate('change', { target: { value: 'foo' } });
     expect(onChange.mock.calls).toEqual([['foo']]);

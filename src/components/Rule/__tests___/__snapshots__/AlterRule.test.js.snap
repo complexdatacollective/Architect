@@ -45,14 +45,14 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <sortableHandle(RuleDragHandle) />,
+        <sortableHandle(DragHandle) />,
         <div
           className="rule__options"
 >
           <div
                     className="rule__option rule__option--type"
           >
-                    <RuleDropDown
+                    <DropDown
                               className={null}
                               onChange={[Function]}
                               options={
@@ -93,7 +93,7 @@ ShallowWrapper {
             <div
               className="rule__option rule__option--type"
 >
-              <RuleDropDown
+              <DropDown
                             className={null}
                             onChange={[Function]}
                             options={
@@ -119,7 +119,7 @@ ShallowWrapper {
             "key": null,
             "nodeType": "host",
             "props": Object {
-              "children": <RuleDropDown
+              "children": <DropDown
                 className={null}
                 onChange={[Function]}
                 options={
@@ -182,14 +182,14 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <sortableHandle(RuleDragHandle) />,
+          <sortableHandle(DragHandle) />,
           <div
             className="rule__options"
 >
             <div
                         className="rule__option rule__option--type"
             >
-                        <RuleDropDown
+                        <DropDown
                                     className={null}
                                     onChange={[Function]}
                                     options={
@@ -230,7 +230,7 @@ ShallowWrapper {
               <div
                 className="rule__option rule__option--type"
 >
-                <RuleDropDown
+                <DropDown
                                 className={null}
                                 onChange={[Function]}
                                 options={
@@ -256,7 +256,7 @@ ShallowWrapper {
               "key": null,
               "nodeType": "host",
               "props": Object {
-                "children": <RuleDropDown
+                "children": <DropDown
                   className={null}
                   onChange={[Function]}
                   options={

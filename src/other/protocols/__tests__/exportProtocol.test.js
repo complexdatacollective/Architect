@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import Zip from 'jszip';
 import fs from 'fs';
-import exporter, { createPackage, saveToDisk } from '../exporter';
+import exporter, { createPackage, saveToDisk } from '../exportProtocol';
 
 jest.mock('fs');
 

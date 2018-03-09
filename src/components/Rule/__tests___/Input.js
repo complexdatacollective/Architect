@@ -2,16 +2,16 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import RuleInput from '../RuleInput';
+import Input from '../Input';
 
 const mockProps = {
   value: '',
   onChange: () => {},
 };
 
-describe('<RuleInput />', () => {
+describe('<Input />', () => {
   it('can render', () => {
-    const component = shallow(<RuleInput {...mockProps} />);
+    const component = shallow(<Input {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });
@@ -22,7 +22,7 @@ describe('<RuleInput />', () => {
       type: 'number',
     };
 
-    const component = shallow(<RuleInput {...options} />);
+    const component = shallow(<Input {...options} />);
 
     expect(component).toMatchSnapshot();
     expect(component.find('input').prop('type')).toEqual('number');
@@ -34,7 +34,7 @@ describe('<RuleInput />', () => {
       value: 'foo',
     };
 
-    const component = shallow(<RuleInput {...options} />);
+    const component = shallow(<Input {...options} />);
 
     expect(component).toMatchSnapshot();
 
@@ -48,7 +48,7 @@ describe('<RuleInput />', () => {
       onChange,
     };
 
-    const component = shallow(<RuleInput {...options} />);
+    const component = shallow(<Input {...options} />);
 
     component.find('input').simulate('change', { target: { value: 'bar' } });
 

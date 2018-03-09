@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { get } from 'lodash';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 class Start extends PureComponent {
@@ -10,6 +11,10 @@ class Start extends PureComponent {
     createProtocol: PropTypes.func.isRequired,
     loadProtocol: PropTypes.func.isRequired,
     locateAndLoadProtocol: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    protocols: [],
   };
 
   render() {
@@ -30,7 +35,7 @@ class Start extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  protocols: state.protocols,
+  protocols: get(state, 'protocols', []),
 });
 
 const mapDispatchToProps = dispatch => ({
