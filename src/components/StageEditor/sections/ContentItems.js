@@ -111,7 +111,7 @@ class ContentItems extends Component {
             }
 
             <div className="stage-editor-section-content-items__controls">
-              <AddButton onClick={() => this.createNewItem('text')} type="text">Copy</AddButton>
+              <AddButton onClick={() => this.createNewItem('text')} type="text">Text</AddButton>
               <AddButton onClick={() => this.createNewItem('image')} type="image">Image</AddButton>
               <AddButton onClick={() => this.createNewItem('audio')} type="audio">Audio</AddButton>
               <AddButton onClick={() => this.createNewItem('video')} type="video">Video</AddButton>
