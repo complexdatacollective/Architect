@@ -1,0 +1,34 @@
+$module-name: seamless-text-input;
+
+.#{$module-name} {
+  display: block;
+
+  &__input {
+    @include preset('copy-large', font-size);
+    background-color: transparent;
+    width: calc(100% - #{unit(3)});
+    border: 0;
+    border-bottom: unit(.2) solid palette('divider-light');
+    transition: border-bottom-color var(--animation-default-easing) var(--animation-standard-duration);
+
+    &:focus {
+      border-bottom-color: palette('input-focus');
+    }
+  }
+
+  &__icon {
+    margin-left: unit(1);
+    vertical-align: bottom;
+    width: unit(2) !important;
+    height: unit(2) !important;
+    transition: opacity var(--animation-default-easing) var(--animation-fast-duration);
+  }
+
+  &--hasFocus {
+    .#{$module-name} {
+      &__icon {
+        opacity: 0;
+      }
+    }
+  }
+}

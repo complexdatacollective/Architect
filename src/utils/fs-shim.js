@@ -40,16 +40,9 @@ window.saveAs || ( window.saveAs = (window.navigator.msSaveBlob ? function(b,n){
 
   })() );
 
-const writeFile = (filename, content, callback) => {
-  // saveAs seems to be broken?
-  // window.saveAs(content, filename);
-  callback();
-};
+const writeFile = (filename, content, callback) => { callback(); };
 
-const writeFileSync = (filename, content) => {
-  // saveAs seems to be broken?
-  // window.saveAs(content, filename);
-};
+const writeFileSync = (filename, content) => {};
 
 const mkdirSync = () => {};
 

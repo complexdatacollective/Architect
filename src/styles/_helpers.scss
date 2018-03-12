@@ -8,9 +8,17 @@
 @mixin layout-container {
   @include grid-container;
   @include flex-align(left, top);
-  padding: 0 100px;
+  // padding: 0 100px;
   box-sizing: border-box;
 }
 
 @mixin fade-scroll {
+}
+
+@mixin button-background($color: red) {
+  background-color: $color;
+
+  &:hover {
+    background-color: $color;
+  }
 }

@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Zoom } from '../../behaviours';
 import EditSkipLogic from './EditSkipLogic';
+import getCSSVariable from '../../utils/getCSSVariable';
+
+const zoomColors = [getCSSVariable('--light-background'), getCSSVariable('--white')];
 
 const EditStageButton = Zoom(
   ({
@@ -45,6 +48,7 @@ class TimelineStage extends PureComponent {
         <EditStageButton
           onEditStage={onEditStage}
           snapshotSrc={this.snapshotSrc()}
+          zoomColors={zoomColors}
         />
         <EditSkipLogic
           onEditSkipLogic={onEditSkipLogic}

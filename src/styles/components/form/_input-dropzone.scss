@@ -1,0 +1,38 @@
+.input-dropzone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: unit(.2) dashed palette('panel-background');
+  background: white;
+
+  &::before {
+    @include preset('copy-medium');
+    display: inline-block;
+    padding: unit(1);
+    content: 'Drop content here or click to upload';
+  }
+
+  &--replace {
+    &::before {
+      content: 'Drop content here or click to update';
+    }
+  }
+
+  &--active {
+
+  }
+
+  &--accept {
+
+  }
+
+  &--reject {
+
+  }
+
+  &--disabled {
+
+  }
+}

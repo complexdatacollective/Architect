@@ -6,13 +6,13 @@ import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 import { ProtocolCard } from '../containers/ProtocolCard';
-import EditStage from '../components/EditStage';
+import StageEditor from '../components/StageEditor';
 import { Draft } from '../behaviours';
 
 const defaultStage = {
 };
 
-class EditStageContainer extends PureComponent {
+class EditStage extends PureComponent {
   static propTypes = {
     hasChanges: PropTypes.bool,
     stageId: PropTypes.number,
@@ -44,7 +44,7 @@ class EditStageContainer extends PureComponent {
 
   renderButtons() {
     return [].concat(
-      this.props.hasChanges ? [<Button key="save" size="small" onClick={this.onSave}>Save</Button>] : [],
+      this.props.hasChanges ? [<Button key="continue" size="small" onClick={this.onSave}>Continue</Button>] : [],
     );
   }
 
@@ -61,11 +61,10 @@ class EditStageContainer extends PureComponent {
 
     return (
       <ProtocolCard
-        title="Edit Stage"
         buttons={this.renderButtons()}
         {...rest}
       >
-        <EditStage
+        <StageEditor
           stage={draft}
           onChange={this.props.updateDraft}
         />
@@ -89,9 +88,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export { EditStageContainer as EditStage };
+export { EditStage };
 
 export default compose(
   connect(makeMapStateToProps, mapDispatchToProps),
   Draft,
-)(EditStageContainer);
+)(EditStage);

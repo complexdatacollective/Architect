@@ -9,7 +9,7 @@ import NewStage from '../containers/NewStage';
 import EditSkipLogic from '../containers/EditSkipLogic';
 import EditStage from '../containers/EditStage';
 import { Timeline } from '../components';
-import { actionCreators as protocolExportActions } from '../ducks/modules/protocol/export';
+import { actionCreators as protocolSaveActions } from '../ducks/modules/protocol/save';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -24,12 +24,12 @@ const defaultActiveCardState = {
 class Protocol extends PureComponent {
   static propTypes = {
     stages: PropTypes.array.isRequired,
-    hasChanges: PropTypes.bool,
-    exportProtocol: PropTypes.func.isRequired,
+    hasUnsavedChanges: PropTypes.bool,
+    saveProtocol: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    hasChanges: false,
+    hasUnsavedChanges: false,
   };
 
   constructor(props) {
@@ -75,7 +75,7 @@ class Protocol extends PureComponent {
     const protocolClasses = cx(
       'protocol',
       {
-        'protocol--has-changes': this.props.hasChanges,
+        'protocol--has-changes': this.props.hasUnsavedChanges,
       },
     );
     return (
@@ -85,11 +85,11 @@ class Protocol extends PureComponent {
           onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
           onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
           onEditStage={stageId => this.showCard(cards.editStage, { stageId })}
-          hasChanges={this.props.hasChanges}
+          hasUnsavedChanges={this.props.hasUnsavedChanges}
         />
 
         <div className="protocol__control-bar">
-          <Button size="small" onClick={this.props.exportProtocol}>Save</Button>
+          <Button size="small" onClick={this.props.saveProtocol}>Save</Button>
         </div>
 
         <NewStage
@@ -124,13 +124,13 @@ function mapStateToProps(state) {
 
   return {
     stages: protocol.stages,
-    hasChanges: (state.protocol.past.length > 0),
+    hasUnsavedChanges: (state.protocol.past.length > state.session.lastSaved),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    exportProtocol: bindActionCreators(protocolExportActions.exportProtocol, dispatch),
+    saveProtocol: bindActionCreators(protocolSaveActions.saveProtocol, dispatch),
   };
 }
 
@@ -140,50 +140,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Protocol);
-
-// import React, { PureComponent } from 'react';
-// import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
-// import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
-
-// class Protocol extends PureComponent {
-//   static propTypes = {
-
-//   };
-
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       protocol,
-//     };
-//   }
-
-
-//   render() {
-//     // if(active!=index) do load
-//     // else:
-//     return (
-//       <ProtocolView />
-//     );
-//   }
-// }
-
-// function mapStateToProps(state) {
-//   const protocol = getProtocol(state);
-
-//   return {
-//     stages: protocol.stages,
-//     hasChanges: (state.protocol.past.length > 0),
-//   };
-// }
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
-//   };
-// }
-
-// export { Protocol };
-// export default connect(mapStateToProps, mapDispatchToProps)(Protocol);

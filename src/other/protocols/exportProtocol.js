@@ -1,11 +1,13 @@
 import { remote } from 'electron';
 import Zip from 'jszip';
 import { has } from 'lodash';
-import { writeFile } from '../filesystem';
+import { writeFile, readFile } from '../filesystem';
 
 const saveDialogOptions = {
   buttonLabel: 'Save',
   nameFieldLabel: 'Save as:',
+  defaultPath: 'Protocol.netcanvas',
+  filters: [{ name: 'Protocols', extensions: ['netcanvas'] }],
 };
 
 const saveDialog = () =>
@@ -16,12 +18,11 @@ const saveDialog = () =>
     });
   });
 
-const getAssetData = asset =>
+const getDataForAsset = asset =>
   new Promise((reject, resolve) => {
-    if (has(asset, 'data')) { resolve(asset); }
+    if (has(asset, 'data')) { resolve(asset); } // TODO: Should we keep this?
     if (has(asset, 'filename')) {
-      // TODO: load file data here
-      const fileData = '';
+      const fileData = readFile(asset.filename);
 
       resolve({ ...asset, data: fileData });
     }
@@ -29,11 +30,11 @@ const getAssetData = asset =>
     reject();
   });
 
-const getAssetsData = (assetRegistry) => {
+const getDataForAssets = (assetRegistry) => {
   if (!assetRegistry) { return []; }
 
   return assetRegistry.map(
-    asset => getAssetData(asset),
+    asset => getDataForAsset(asset),
   );
 };
 
@@ -43,7 +44,7 @@ const createPackage = (protocol) => {
 
   // TODO: This is defunct, we will include all files in the assets dir
   return Promise.all(
-    getAssetsData(protocol.assetRegistry),
+    getDataForAssets(protocol.assetRegistry),
   ).then((assets) => {
     const assetsDir = zip.folder('assets');
     assets.forEach((asset) => {
@@ -52,7 +53,7 @@ const createPackage = (protocol) => {
   }).then(() => zip.generateAsync({ type: 'blob' }));
 };
 
-// Expects data blog e.g.
+// Expects data blob e.g.
 // const zip = new Zip();
 // zip.file('Hello.txt', 'Hello World\n');
 // zip.generateAsync({ type: 'blob' }),

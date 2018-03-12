@@ -1,0 +1,13 @@
+@import 'section/content-items';
+@import 'section/content-item';
+@import 'section/title';
+
+.stage-editor {
+  width: 100%;
+
+  &-section {
+    &__guidance {
+      background-color: palette('panel-background');
+    }
+  }
+}

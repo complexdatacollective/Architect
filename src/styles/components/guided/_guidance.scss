@@ -1,0 +1,17 @@
+.guided-guidance {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 35%;
+  max-width: unit(45);
+  padding: unit(4) unit(4);
+  transition: opacity var(--animation-standard-duration) var(--animation-default-easing);
+  opacity: 0;
+  z-index: -1;
+
+  &--is-active {
+    transition: opacity var(--animation-fast-duration) var(--animation-default-easing);
+    opacity: 1;
+  }
+}

@@ -5,6 +5,9 @@ import { shallow } from 'enzyme';
 import { Start } from '../Start';
 
 const mockProps = {
+  createProtocol: () => {},
+  loadProtocol: () => {},
+  locateAndLoadProtocol: () => {},
 };
 
 describe('<Start />', () => {

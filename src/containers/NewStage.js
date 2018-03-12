@@ -26,6 +26,11 @@ const interfaceOptions = [
     title: 'Categorize',
     description: '',
   },
+  {
+    type: 'Information',
+    title: 'Information',
+    description: '',
+  },
 ];
 
 class NewStage extends PureComponent {
@@ -73,9 +78,9 @@ class NewStage extends PureComponent {
   render() {
     return (
       <ProtocolCard
-        title="Add New Stage"
         show={this.props.show}
         onCancel={this.props.onCancel}
+        type="choice"
       >
         <div className="new-stage">
           <div className="new-stage__options">

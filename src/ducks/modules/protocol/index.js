@@ -1,4 +1,4 @@
-import { combineReducers, compose } from 'redux';
+import { combineReducers } from 'redux';
 import stages from './stages';
 import variableRegistry from './variableRegistry';
 import protocolOptions from './protocolOptions';
@@ -13,14 +13,14 @@ const setProtocol = (protocol, path = '') => ({
   protocol,
 });
 
-const reducer = (state = initialState, action = {}) => {
+function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_PROTOCOL:
       return { ...action.protocol };
     default:
       return state;
   }
-};
+}
 
 const actionCreators = {
   setProtocol,
@@ -35,11 +35,15 @@ export {
   actionTypes,
 };
 
-export default compose(
+const flatCombineReducers = (...reducers) =>
+  (previousState, action) =>
+    reducers.reduce((state, reducer) => reducer(state, action), previousState);
+
+export default flatCombineReducers(
+  protocolReducer,
   combineReducers({
     options: protocolOptions,
     stages,
     variableRegistry,
   }),
-  reducer,
 );

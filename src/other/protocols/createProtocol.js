@@ -5,8 +5,8 @@ import path from 'path';
 const saveDialogOptions = {
   buttonLabel: 'Create',
   nameFieldLabel: 'Create as:',
-  defaultPath: 'Protocol.canvas',
-  filters: [{ name: 'Protocols', extensions: ['canvas'] }],
+  defaultPath: 'Protocol.netcanvas',
+  filters: [{ name: 'Protocols', extensions: ['netcanvas'] }],
 };
 
 /**

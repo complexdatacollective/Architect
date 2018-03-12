@@ -3,15 +3,13 @@ import { map, max } from 'lodash';
 const ADD_STAGE = Symbol('PROTOCOL/ADD_STAGE');
 const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
 
-const initialState = [
-  { id: 1, type: 'Information' },
-  { id: 1, type: 'NameGenerator' },
-];
+const initialState = [];
 
 const maxId = state => max(map(state, 'id'));
 const nextId = state => ((maxId(state) || 0) + 1);
 
 export default function reducer(state = initialState, action = {}) {
+  // console.log('stages', state, action);
   switch (action.type) {
     case ADD_STAGE:
       return [

@@ -1,0 +1,33 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Section, Edit, Guidance } from '../../Guided';
+import { SeamlessTextInput } from '../../../components/Form';
+
+const Title = ({ stage: { title }, onChange, ...props }) => (
+  <Section className="stage-editor-section" {...props}>
+    <Edit className="stage-editor-section__edit">
+      <h2>Title</h2>
+      <SeamlessTextInput
+        value={title}
+        placeholder="Enter your title here"
+        className="stage-editor-section-title"
+        onChange={newTitle => onChange({ title: newTitle })}
+      />
+    </Edit>
+    <Guidance className="stage-editor-section__guidance">
+      What is the title for this interface?
+    </Guidance>
+  </Section>
+);
+
+Title.propTypes = {
+  stage: PropTypes.object,
+  onChange: PropTypes.func,
+};
+
+Title.defaultProps = {
+  stage: {},
+  onChange: () => {},
+};
+
+export default Title;

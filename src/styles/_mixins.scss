@@ -17,19 +17,3 @@
     z-index: -1;
   }
 }
-
-@mixin guided {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  grid-gap: 0 20px;
-
-  &__section {
-    grid-column: 1/3;
-  }
-
-  &__guidance {
-    grid-column: 3/3;
-  }
-}
-

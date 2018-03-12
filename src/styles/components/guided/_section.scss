@@ -1,0 +1,9 @@
+.guided-section {
+  flex-direction: row;
+  width: 100%;
+  padding: 0 35% 0 0;
+
+  &:first-child {
+    padding-top: unit(4);
+  }
+}

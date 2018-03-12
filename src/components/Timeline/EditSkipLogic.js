@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
-import { Icon, animation, colorDictionary } from 'network-canvas-ui';
+import { Icon, animation } from 'network-canvas-ui';
 import { Zoom } from '../../behaviours';
+import getCSSVariable from '../../utils/getCSSVariable';
 
-const zoomColors = [colorDictionary.mustard, colorDictionary.mustard];
+const zoomColors = [getCSSVariable('--mustard'), getCSSVariable('--mustard')];
 
 const SkipLogicButton = Zoom(
   ({ onEditSkipLogic, onMouseEnterSkipLogic, onMouseLeaveSkipLogic }) => (

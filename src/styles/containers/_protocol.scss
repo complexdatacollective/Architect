@@ -15,7 +15,7 @@
     padding-bottom: 10px;
     background-color: palette('background');
     transform: translateZ(0) translateY(100%);
-    transition: transform $animation-default-easing $animation-fast-duration;
+    transition: transform var(--animation-default-easing) var(--animation-fast-duration);
   }
 
   &--has-changes {

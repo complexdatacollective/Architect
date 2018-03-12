@@ -1,1 +1,8 @@
-{}
+{
+  "options": {
+    "title": "Mock protocol"
+  },
+  "stages": [
+    { "id": 1, "type": "Information" }
+  ]
+}
