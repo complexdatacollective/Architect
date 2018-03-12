@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, colorDictionary } from 'network-canvas-ui';
+import { Icon } from 'network-canvas-ui';
 import { Zoom } from '../../behaviours';
+import getCSSVariable from '../../utils/getCSSVariable';
 
-const zoomColors = [colorDictionary['light-background'], colorDictionary['light-background']];
+const zoomColors = [getCSSVariable('--light-background'), getCSSVariable('--light-background')];
 
 const AddNewButton = Zoom(
   ({ onInsertStage }) => (

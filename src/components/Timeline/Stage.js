@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { colorDictionary } from 'network-canvas-ui';
 import { Zoom } from '../../behaviours';
 import EditSkipLogic from './EditSkipLogic';
+import getCSSVariable from '../../utils/getCSSVariable';
 
-const zoomColors = [colorDictionary.lightBackground, colorDictionary.white];
+const zoomColors = [getCSSVariable('--light-background'), getCSSVariable('--white')];
 
 const EditStageButton = Zoom(
   ({

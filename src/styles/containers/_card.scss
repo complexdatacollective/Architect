@@ -28,7 +28,7 @@
     background-color: palette('background');
     @include flex-align(right, middle);
     transform: translateZ(0) translateY(100%);
-    transition: transform $animation-fast-duration $animation-default-easing $animation-fast-duration;
+    transition: transform var(--animation-fast-duration) var(--animation-default-easing) var(--animation-fast-duration);
 
     &--entering,
     &--entered {

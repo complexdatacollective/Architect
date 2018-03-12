@@ -12,50 +12,53 @@
   @include typography($type-name, $type-property);
 }
 
-@include palette-set('divider-light', color('platinum'));
-@include palette-set('panel-background', color('platinum'));
-@include palette-set('panel', color('platinum--dark'));
-@include palette-set('panel-text', color('charcoal'));
-@include palette-set('panel-divider', darken(color('platinum--dark'), 7%));
-@include palette-set('input-border', color('charcoal'));
-@include palette-set('input-text', color('charcoal'));
-@include palette-set('input-focus', color('sea-green'));
-@include palette-set('intent-inactive', color('charcoal'));
-@include palette-set('intent', color('mustard'));
-@include palette-set('intent-border', color('mustard--dark'));
-@include palette-set('rail', color('neon-coral'));
+:root {
+
+  --divider-light: var(--color-platinum);
+  --panel-background: var(--color-platinum);
+  --panel: var(--color-platinum--dark);
+  --panel-text: var(--color-charcoal);
+  --panel-divider: var(--color-platinum--dark);
+  --input-border: var(--color-charcoal);
+  --input-text: var(--color-charcoal);
+  --input-focus: var(--color-sea-green);
+  --intent-inactive: var(--color-charcoal);
+  --intent: var(--color-mustard);
+  --intent-border: var(--color-mustard--dark);
+  --rail: var(--color-neon-coral);
 
 
-@include palette-set('card-background', color('white'));
-@include palette-set('card-text', color('charcoal'));
-@include palette-set('card-background--rules', color('mustard'));
-@include palette-set('card-text--rules', color('white'));
-@include palette-set('card-background--choice', palette('light-background'));
-@include palette-set('card-text--choice', color('white'));
+  --card-background: var(--color-white);
+  --card-text: var(--color-charcoal);
+  --card-background--rules: var(--color-mustard);
+  --card-text--rules: var(--color-white);
+  --card-background--choice: var(--light-background);
+  --card-text--choice: var(--color-white);
 
 // rule
-@include palette-set('rule-control', color('cyber-grape'));
-@include palette-set('rule-type', color('neon-coral'));
-@include palette-set('rule-attribute', color('neon-coral--dark'));
-@include palette-set('rule-operator', color('navy-taupe'));
-@include palette-set('rule-value', color('barbie-pink'));
-@include palette-set('rule-delete', color('rich-black'));
+  --rule-control: var(--color-cyber-grape);
+  --rule-type: var(--color-neon-coral);
+  --rule-attribute: var(--color-neon-coral--dark);
+  --rule-operator: var(--color-navy-taupe);
+  --rule-value: var(--color-barbie-pink);
+  --rule-delete: var(--color-rich-black);
 
-@include palette-set('rule-type--alter', color('neon-coral'));
-@include palette-set('rule-attribute--ego', color('mustard--dark'));
-@include palette-set('rule-type--edge', color('sea-green'));
-@include palette-set('rule-attribute--edge', color('sea-green--dark'));
+  --rule-type--alter: var(--color-neon-coral);
+  --rule-attribute--ego: var(--color-mustard--dark);
+  --rule-type--edge: var(--color-sea-green);
+  --rule-attribute--edge: var(--color-sea-green--dark);
 
 // logic
-@include palette-set('rules', color('charcoal'));
-@include palette-set('rules-background', color('intent'));
-@include palette-set('rules--and', color('slate-blue--dark'));
-@include palette-set('rules--or', color('neon-carrot--dark'));
+  --rules: var(--color-charcoal);
+  --rules-background: var(--color-intent);
+  --rules--and: var(--color-slate-blue--dark);
+  --rules--or: var(--color-neon-carrot--dark);
 
 // content item types
-@include palette-set('variant--1', color('neon-coral'));
-@include palette-set('variant--2', color('mustard--dark'));
-@include palette-set('variant--3', color('sea-green'));
-@include palette-set('variant--4', color('sea-green--dark'));
+  --variant--1: var(--color-neon-coral);
+  --variant--2: var(--color-mustard--dark);
+  --variant--3: var(--color-sea-green);
+  --variant--4: var(--color-sea-green--dark);
 
-@include palette-set('asset-background', color('charcoal'));
+  --asset-background: var(--color-charcoal);
+}

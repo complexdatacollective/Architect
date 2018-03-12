@@ -19,6 +19,6 @@
   background-color: $color;
 
   &:hover {
-    background-color: mix($color, #808080, 85%);
+    background-color: $color;
   }
 }

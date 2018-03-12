@@ -5,8 +5,8 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Protocol
-    exportProtocol={[Function]}
-    hasChanges={false}
+    hasUnsavedChanges={false}
+    saveProtocol={[Function]}
     stages={
         Array [
             Object {
@@ -30,7 +30,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <withContext(Timeline)
-          hasChanges={false}
+          hasUnsavedChanges={false}
           onEditSkipLogic={[Function]}
           onEditStage={[Function]}
           onInsertStage={[Function]}
@@ -71,7 +71,7 @@ ShallowWrapper {
           show={false}
           stageId={undefined}
 />,
-        <Connect(Draft(EditStageContainer))
+        <Connect(Draft(EditStage))
           onCancel={[Function]}
           onComplete={[Function]}
           show={false}
@@ -87,7 +87,7 @@ ShallowWrapper {
         "key": null,
         "nodeType": "class",
         "props": Object {
-          "hasChanges": false,
+          "hasUnsavedChanges": false,
           "onEditSkipLogic": [Function],
           "onEditStage": [Function],
           "onInsertStage": [Function],
@@ -194,7 +194,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <withContext(Timeline)
-            hasChanges={false}
+            hasUnsavedChanges={false}
             onEditSkipLogic={[Function]}
             onEditStage={[Function]}
             onInsertStage={[Function]}
@@ -235,7 +235,7 @@ ShallowWrapper {
             show={false}
             stageId={undefined}
 />,
-          <Connect(Draft(EditStageContainer))
+          <Connect(Draft(EditStage))
             onCancel={[Function]}
             onComplete={[Function]}
             show={false}
@@ -251,7 +251,7 @@ ShallowWrapper {
           "key": null,
           "nodeType": "class",
           "props": Object {
-            "hasChanges": false,
+            "hasUnsavedChanges": false,
             "onEditSkipLogic": [Function],
             "onEditStage": [Function],
             "onInsertStage": [Function],

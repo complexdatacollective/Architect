@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Stage /> can render 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <TimelineStage
+    onEditSkipLogic={[Function]}
+    onEditStage={[Function]}
+    type="Foo"
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": null,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <getContext(Draft(Component))
+          onEditStage={[Function]}
+          snapshotSrc="/images/timeline/stage--Foo.png"
+          zoomColors={
+                    Array [
+                              "#FFF000",
+                              "#FFF000",
+                            ]
+          }
+/>,
+        <TimelineEditSkipLogic
+          onEditSkipLogic={[Function]}
+/>,
+      ],
+      "className": "timeline-stage",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "function",
+        "props": Object {
+          "onEditStage": [Function],
+          "snapshotSrc": "/images/timeline/stage--Foo.png",
+          "zoomColors": Array [
+            "#FFF000",
+            "#FFF000",
+          ],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": null,
+        "nodeType": "class",
+        "props": Object {
+          "onEditSkipLogic": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": null,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <getContext(Draft(Component))
+            onEditStage={[Function]}
+            snapshotSrc="/images/timeline/stage--Foo.png"
+            zoomColors={
+                        Array [
+                                    "#FFF000",
+                                    "#FFF000",
+                                  ]
+            }
+/>,
+          <TimelineEditSkipLogic
+            onEditSkipLogic={[Function]}
+/>,
+        ],
+        "className": "timeline-stage",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "function",
+          "props": Object {
+            "onEditStage": [Function],
+            "snapshotSrc": "/images/timeline/stage--Foo.png",
+            "zoomColors": Array [
+              "#FFF000",
+              "#FFF000",
+            ],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": null,
+          "nodeType": "class",
+          "props": Object {
+            "onEditSkipLogic": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

@@ -131,11 +131,36 @@ ShallowWrapper {
                                 />
                         </div>
                 </div>
+                <div
+                        className="new-stage__option"
+                        onClick={[Function]}
+                >
+                        <div
+                                className="new-stage__option-preview"
+                        >
+                                <img
+                                        alt=""
+                                        src="/images/timeline/stage--Information.png"
+                                />
+                        </div>
+                        <div
+                                className="new-stage__option-details"
+                        >
+                                <h2
+                                        className="new-stage__option-title"
+                                >
+                                        Information
+                                </h2>
+                                <p
+                                        className="new-stage__option-description"
+                                />
+                        </div>
+                </div>
         </div>
 </div>,
       "onCancel": [Function],
       "show": false,
-      "title": "Add New Stage",
+      "type": "choice",
     },
     "ref": null,
     "rendered": Object {
@@ -246,6 +271,31 @@ ShallowWrapper {
                               />
                     </div>
           </div>
+          <div
+                    className="new-stage__option"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="new-stage__option-preview"
+                    >
+                              <img
+                                        alt=""
+                                        src="/images/timeline/stage--Information.png"
+                              />
+                    </div>
+                    <div
+                              className="new-stage__option-details"
+                    >
+                              <h2
+                                        className="new-stage__option-title"
+                              >
+                                        Information
+                              </h2>
+                              <p
+                                        className="new-stage__option-description"
+                              />
+                    </div>
+          </div>
 </div>,
         "className": "new-stage",
       },
@@ -350,6 +400,31 @@ ShallowWrapper {
                                           className="new-stage__option-title"
                             >
                                           Categorize
+                            </h2>
+                            <p
+                                          className="new-stage__option-description"
+                            />
+              </div>
+</div>,
+            <div
+              className="new-stage__option"
+              onClick={[Function]}
+>
+              <div
+                            className="new-stage__option-preview"
+              >
+                            <img
+                                          alt=""
+                                          src="/images/timeline/stage--Information.png"
+                            />
+              </div>
+              <div
+                            className="new-stage__option-details"
+              >
+                            <h2
+                                          className="new-stage__option-title"
+                            >
+                                          Information
                             </h2>
                             <p
                                           className="new-stage__option-description"
@@ -789,6 +864,113 @@ ShallowWrapper {
             ],
             "type": "div",
           },
+          Object {
+            "instance": null,
+            "key": "Information",
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="new-stage__option-preview"
+>
+                  <img
+                                    alt=""
+                                    src="/images/timeline/stage--Information.png"
+                  />
+</div>,
+                <div
+                  className="new-stage__option-details"
+>
+                  <h2
+                                    className="new-stage__option-title"
+                  >
+                                    Information
+                  </h2>
+                  <p
+                                    className="new-stage__option-description"
+                  />
+</div>,
+              ],
+              "className": "new-stage__option",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <img
+                    alt=""
+                    src="/images/timeline/stage--Information.png"
+/>,
+                  "className": "new-stage__option-preview",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": null,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "",
+                    "src": "/images/timeline/stage--Information.png",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": null,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <h2
+                      className="new-stage__option-title"
+>
+                      Information
+</h2>,
+                    <p
+                      className="new-stage__option-description"
+/>,
+                  ],
+                  "className": "new-stage__option-details",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Information",
+                      "className": "new-stage__option-title",
+                    },
+                    "ref": null,
+                    "rendered": "Information",
+                    "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                      "className": "new-stage__option-description",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "p",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
         ],
         "type": "div",
       },
@@ -909,11 +1091,36 @@ ShallowWrapper {
                                         />
                               </div>
                     </div>
+                    <div
+                              className="new-stage__option"
+                              onClick={[Function]}
+                    >
+                              <div
+                                        className="new-stage__option-preview"
+                              >
+                                        <img
+                                                  alt=""
+                                                  src="/images/timeline/stage--Information.png"
+                                        />
+                              </div>
+                              <div
+                                        className="new-stage__option-details"
+                              >
+                                        <h2
+                                                  className="new-stage__option-title"
+                                        >
+                                                  Information
+                                        </h2>
+                                        <p
+                                                  className="new-stage__option-description"
+                                        />
+                              </div>
+                    </div>
           </div>
 </div>,
         "onCancel": [Function],
         "show": false,
-        "title": "Add New Stage",
+        "type": "choice",
       },
       "ref": null,
       "rendered": Object {
@@ -1024,6 +1231,31 @@ ShallowWrapper {
                                     />
                         </div>
             </div>
+            <div
+                        className="new-stage__option"
+                        onClick={[Function]}
+            >
+                        <div
+                                    className="new-stage__option-preview"
+                        >
+                                    <img
+                                                alt=""
+                                                src="/images/timeline/stage--Information.png"
+                                    />
+                        </div>
+                        <div
+                                    className="new-stage__option-details"
+                        >
+                                    <h2
+                                                className="new-stage__option-title"
+                                    >
+                                                Information
+                                    </h2>
+                                    <p
+                                                className="new-stage__option-description"
+                                    />
+                        </div>
+            </div>
 </div>,
           "className": "new-stage",
         },
@@ -1128,6 +1360,31 @@ ShallowWrapper {
                                                 className="new-stage__option-title"
                                 >
                                                 Categorize
+                                </h2>
+                                <p
+                                                className="new-stage__option-description"
+                                />
+                </div>
+</div>,
+              <div
+                className="new-stage__option"
+                onClick={[Function]}
+>
+                <div
+                                className="new-stage__option-preview"
+                >
+                                <img
+                                                alt=""
+                                                src="/images/timeline/stage--Information.png"
+                                />
+                </div>
+                <div
+                                className="new-stage__option-details"
+                >
+                                <h2
+                                                className="new-stage__option-title"
+                                >
+                                                Information
                                 </h2>
                                 <p
                                                 className="new-stage__option-description"
@@ -1547,6 +1804,113 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Categorize",
+                      "type": "h2",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": null,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "",
+                        "className": "new-stage__option-description",
+                      },
+                      "ref": null,
+                      "rendered": "",
+                      "type": "p",
+                    },
+                  ],
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": "Information",
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="new-stage__option-preview"
+>
+                    <img
+                                        alt=""
+                                        src="/images/timeline/stage--Information.png"
+                    />
+</div>,
+                  <div
+                    className="new-stage__option-details"
+>
+                    <h2
+                                        className="new-stage__option-title"
+                    >
+                                        Information
+                    </h2>
+                    <p
+                                        className="new-stage__option-description"
+                    />
+</div>,
+                ],
+                "className": "new-stage__option",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": null,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <img
+                      alt=""
+                      src="/images/timeline/stage--Information.png"
+/>,
+                    "className": "new-stage__option-preview",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": null,
+                    "nodeType": "host",
+                    "props": Object {
+                      "alt": "",
+                      "src": "/images/timeline/stage--Information.png",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "img",
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": null,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <h2
+                        className="new-stage__option-title"
+>
+                        Information
+</h2>,
+                      <p
+                        className="new-stage__option-description"
+/>,
+                    ],
+                    "className": "new-stage__option-details",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": null,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Information",
+                        "className": "new-stage__option-title",
+                      },
+                      "ref": null,
+                      "rendered": "Information",
                       "type": "h2",
                     },
                     Object {
