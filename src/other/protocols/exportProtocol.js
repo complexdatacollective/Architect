@@ -41,7 +41,6 @@ const createPackage = (protocolPath) => {
     Promise.all(
       getAssets(protocolPath),
     ).then((assets) => {
-      console.log(assets);
       const assetsDir = zip.folder('assets');
       assets.forEach((asset) => {
         assetsDir.file(asset.filename, asset.data);
@@ -60,7 +59,7 @@ const saveToDisk = zip =>
           .on('error', reject)
           .on('finish', resolve);
       }),
-  );
+    );
 
 /**
  * Given a protocol object exports that data as a zip
