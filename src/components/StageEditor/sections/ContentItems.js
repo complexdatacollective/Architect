@@ -16,9 +16,9 @@ const AddButton = ({ onClick, type, children }) => (
 );
 
 const SortableItems = SortableContainer(
-  ({ contentItems, updateItem, deleteItem }) => (
+  ({ items, updateItem, deleteItem }) => (
     <div className="stage-editor-section-content-items__items">
-      { contentItems.map(
+      { items.map(
         (props, index) => (
           <ContentItem
             {...props}
@@ -36,54 +36,54 @@ const SortableItems = SortableContainer(
 class ContentItems extends Component {
   static propTypes = {
     stage: PropTypes.shape({
-      contentItems: PropTypes.array,
+      items: PropTypes.array,
     }),
     onChange: PropTypes.func,
   };
 
   static defaultProps = {
     stage: {
-      contentItems: [],
+      items: [],
     },
     onChange: () => {},
   };
 
   moveItem = ({ oldIndex, newIndex }) => {
-    const reorderedContentItems = arrayMove(this.props.stage.contentItems, oldIndex, newIndex);
+    const reorderedContentItems = arrayMove(this.props.stage.items, oldIndex, newIndex);
 
     this.props.onChange({
-      contentItems: reorderedContentItems,
+      items: reorderedContentItems,
     });
   };
 
   createNewItem = (type) => {
-    const contentItems = this.props.stage.contentItems || [];
-    this.props.onChange({ contentItems: [...contentItems, { type, content: undefined }] });
+    const items = this.props.stage.items || [];
+    this.props.onChange({ items: [...items, { type, content: undefined }] });
   }
 
   updateItem = (newItem, index) => {
-    const contentItems = this.props.stage.contentItems
+    const items = this.props.stage.items
       .map((item, i) => {
         if (i !== index) { return item; }
         return newItem;
       });
 
-    this.props.onChange({ contentItems });
+    this.props.onChange({ items });
   }
 
   deleteItem = (index) => {
-    const contentItems = this.props.stage.contentItems
+    const items = this.props.stage.items
       .filter((_, i) => i !== index);
 
-    this.props.onChange({ contentItems });
+    this.props.onChange({ items });
   }
 
   hasContentItems = () =>
-    this.props.stage.contentItems && this.props.stage.contentItems.length > 0;
+    this.props.stage.items && this.props.stage.items.length > 0;
 
   render() {
     const {
-      stage: { contentItems },
+      stage: { items },
       onChange,
       ...props
     } = this.props;
@@ -101,7 +101,7 @@ class ContentItems extends Component {
             {
               this.hasContentItems() &&
               <SortableItems
-                contentItems={contentItems}
+                items={items}
                 updateItem={this.updateItem}
                 deleteItem={this.deleteItem}
                 onSortEnd={this.moveItem}

@@ -10,6 +10,7 @@ let subject = null;
 
 const mockProps = {
   saveProtocol: () => {},
+  exportProtocol: () => {},
   stages: [{ id: 1, type: 'Foo' }],
 };
 

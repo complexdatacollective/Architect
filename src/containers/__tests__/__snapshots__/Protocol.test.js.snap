@@ -5,6 +5,8 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Protocol
+    exportProtocol={[Function]}
+    hasChanges={false}
     hasUnsavedChanges={false}
     saveProtocol={[Function]}
     stages={
@@ -54,7 +56,7 @@ ShallowWrapper {
                     onClick={[Function]}
                     size="small"
           >
-                    Save
+                    Export
           </Button>
 </div>,
         <Connect(NewStage)
@@ -107,36 +109,42 @@ ShallowWrapper {
         "key": null,
         "nodeType": "host",
         "props": Object {
-          "children": <Button
-            color=""
-            content=""
-            icon=""
-            iconPosition="right"
-            onClick={[Function]}
-            size="small"
+          "children": Array [
+            <Button
+              color=""
+              content=""
+              icon=""
+              iconPosition="right"
+              onClick={[Function]}
+              size="small"
 >
-            Save
+              Export
 </Button>,
+            false,
+          ],
           "className": "protocol__control-bar",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": null,
-          "nodeType": "class",
-          "props": Object {
-            "children": "Save",
-            "color": "",
-            "content": "",
-            "icon": "",
-            "iconPosition": "right",
-            "onClick": [Function],
-            "size": "small",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": null,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Export",
+              "color": "",
+              "content": "",
+              "icon": "",
+              "iconPosition": "right",
+              "onClick": [Function],
+              "size": "small",
+            },
+            "ref": null,
+            "rendered": "Export",
+            "type": [Function],
           },
-          "ref": null,
-          "rendered": "Save",
-          "type": [Function],
-        },
+          false,
+        ],
         "type": "div",
       },
       Object {
@@ -218,7 +226,7 @@ ShallowWrapper {
                         onClick={[Function]}
                         size="small"
             >
-                        Save
+                        Export
             </Button>
 </div>,
           <Connect(NewStage)
@@ -271,36 +279,42 @@ ShallowWrapper {
           "key": null,
           "nodeType": "host",
           "props": Object {
-            "children": <Button
-              color=""
-              content=""
-              icon=""
-              iconPosition="right"
-              onClick={[Function]}
-              size="small"
+            "children": Array [
+              <Button
+                color=""
+                content=""
+                icon=""
+                iconPosition="right"
+                onClick={[Function]}
+                size="small"
 >
-              Save
+                Export
 </Button>,
+              false,
+            ],
             "className": "protocol__control-bar",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": null,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Save",
-              "color": "",
-              "content": "",
-              "icon": "",
-              "iconPosition": "right",
-              "onClick": [Function],
-              "size": "small",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": null,
+              "nodeType": "class",
+              "props": Object {
+                "children": "Export",
+                "color": "",
+                "content": "",
+                "icon": "",
+                "iconPosition": "right",
+                "onClick": [Function],
+                "size": "small",
+              },
+              "ref": null,
+              "rendered": "Export",
+              "type": [Function],
             },
-            "ref": null,
-            "rendered": "Save",
-            "type": [Function],
-          },
+            false,
+          ],
           "type": "div",
         },
         Object {

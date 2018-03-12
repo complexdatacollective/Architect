@@ -1,5 +1,5 @@
 import { actionTypes as protocolActionTypes } from './protocol';
-import { actionTypes as protocolSaveActionTypes } from './protocol/save';
+import { actionTypes as protocolFileActionTypes } from './protocol/file';
 
 const initialState = {
   activeProtocol: '', // local path
@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action = {}) {
         activeProtocol: action.path,
       };
     }
-    case protocolSaveActionTypes.SAVE_COMPLETE:
+    case protocolFileActionTypes.SAVE_COMPLETE:
       return {
         ...state,
         lastSaved: action.lastSaved,

@@ -1,20 +1,19 @@
-import { map, max } from 'lodash';
+import uuid from 'uuid/v1';
 
 const ADD_STAGE = Symbol('PROTOCOL/ADD_STAGE');
 const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
 
 const initialState = [];
-
-const maxId = state => max(map(state, 'id'));
-const nextId = state => ((maxId(state) || 0) + 1);
+const initialStage = {
+  label: '',
+};
 
 export default function reducer(state = initialState, action = {}) {
-  // console.log('stages', state, action);
   switch (action.type) {
     case ADD_STAGE:
       return [
         ...state.slice(0, action.index),
-        { ...action.options, id: nextId(state) },
+        { ...initialStage, ...action.options, id: uuid() },
         ...state.slice(action.index),
       ];
     case UPDATE_STAGE:

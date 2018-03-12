@@ -10,9 +10,9 @@ export const writeFile = (filePath, data) =>
 
 export const readFile = filePath =>
   new Promise((resolve, reject) => {
-    fs.readFile(filePath, (error) => {
+    fs.readFile(filePath, (error, data) => {
       if (error) { reject(error); }
-      resolve(filePath);
+      resolve(data);
     });
   });
 

@@ -9,7 +9,7 @@ import NewStage from '../containers/NewStage';
 import EditSkipLogic from '../containers/EditSkipLogic';
 import EditStage from '../containers/EditStage';
 import { Timeline } from '../components';
-import { actionCreators as protocolSaveActions } from '../ducks/modules/protocol/save';
+import { actionCreators as protocolFileActions } from '../ducks/modules/protocol/file';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -25,11 +25,14 @@ class Protocol extends PureComponent {
   static propTypes = {
     stages: PropTypes.array.isRequired,
     hasUnsavedChanges: PropTypes.bool,
+    hasChanges: PropTypes.bool,
     saveProtocol: PropTypes.func.isRequired,
+    exportProtocol: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     hasUnsavedChanges: false,
+    hasChanges: false,
   };
 
   constructor(props) {
@@ -75,7 +78,8 @@ class Protocol extends PureComponent {
     const protocolClasses = cx(
       'protocol',
       {
-        'protocol--has-changes': this.props.hasUnsavedChanges,
+        'protocol--has-changes': this.props.hasChanges,
+        'protocol--has-unsaved-changes': this.props.hasUnsavedChanges,
       },
     );
     return (
@@ -89,7 +93,10 @@ class Protocol extends PureComponent {
         />
 
         <div className="protocol__control-bar">
-          <Button size="small" onClick={this.props.saveProtocol}>Save</Button>
+          <Button size="small" onClick={this.props.exportProtocol}>Export</Button>
+          { this.props.hasUnsavedChanges &&
+            <Button size="small" onClick={this.props.saveProtocol}>Save</Button>
+          }
         </div>
 
         <NewStage
@@ -124,13 +131,15 @@ function mapStateToProps(state) {
 
   return {
     stages: protocol.stages,
+    hasChanges: state.protocol.past.length > 0,
     hasUnsavedChanges: (state.protocol.past.length > state.session.lastSaved),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveProtocol: bindActionCreators(protocolSaveActions.saveProtocol, dispatch),
+    saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
+    exportProtocol: bindActionCreators(protocolFileActions.exportProtocol, dispatch),
   };
 }
 

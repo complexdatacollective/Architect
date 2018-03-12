@@ -19,7 +19,7 @@
     @extend %content-item-control;
     @include button-background(palette('background'));
     margin-right: unit(1);
-    flex: 0 0 auto;
+    flex: 0 0 unit(4);
 
     &::before {
       content: '\2195';
@@ -31,14 +31,14 @@
   }
 
   &__content {
-    flex: 1 0 auto;
+    flex: 1 1 100%;
   }
 
   &__delete {
     @extend %content-item-control;
     @include button-background(palette('dark-background'));
     margin-left: unit(1);
-    flex: 0 0 auto;
+    flex: 0 0 unit(4);
     cursor: pointer;
 
     .icon {
