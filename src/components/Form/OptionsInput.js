@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 
 class OptionsInput extends Component {
   static propTypes = {
     component: PropTypes.func.isRequired,
     options: PropTypes.array,
+    className: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
   };
 
   static defaultProps = {
     options: [],
+    className: null,
     onChange: () => {},
     value: null,
   };
@@ -33,7 +36,7 @@ class OptionsInput extends Component {
     return (
       <div
         className="options-input__option"
-        onClick={() => { console.log(optionValue, 'option'); onChange(optionValue); }}
+        onClick={() => { onChange(optionValue); }}
         key={optionValue}
       >
         <OptionComponent
@@ -49,8 +52,10 @@ class OptionsInput extends Component {
   }
 
   render() {
+    const className = cx('options-input', this.props.className);
+
     return (
-      <div className="options-input">
+      <div className={className}>
         {this.renderOptions()}
       </div>
     );

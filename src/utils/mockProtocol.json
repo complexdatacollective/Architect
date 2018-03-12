@@ -3,6 +3,7 @@
     "title": "Mock protocol"
   },
   "stages": [
-    { "id": 1, "type": "Information" }
+    { "id": 1, "type": "NameGenerator" },
+    { "id": 2, "type": "Information" }
   ]
 }

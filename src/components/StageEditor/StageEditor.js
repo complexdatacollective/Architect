@@ -4,6 +4,10 @@ import { get } from 'lodash';
 import {
   Title,
   ContentItems,
+  NodeType,
+  Form,
+  Prompts,
+  Panels,
 } from './sections';
 import { Guided, Section, Edit } from '../Guided';
 
@@ -11,6 +15,13 @@ const interfaces = {
   Information: [
     Title,
     ContentItems,
+  ],
+  NameGenerator: [
+    Title,
+    NodeType,
+    Form,
+    Prompts,
+    Panels,
   ],
 };
 
