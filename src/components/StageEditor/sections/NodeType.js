@@ -1,14 +1,11 @@
 /* eslint-disable */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { keys } from 'lodash';
 import { Section, Edit, Guidance } from '../../Guided';
 import { OptionsInput } from '../../../components/Form';
-
-const options = [
-  'foo',
-  'bar',
-];
 
 const NodeTypeOption = ({ selected, value }) => (
   <div className="edit-stage-node-type__option">
@@ -16,13 +13,13 @@ const NodeTypeOption = ({ selected, value }) => (
   </div>
 );
 
-const NodeType = ({ stage: { nodeType }, onChange, ...props }) => (
+const NodeType = ({ stage: { nodeType }, nodeTypes, onChange, dispatch,...props }) => (
   <Section className="stage-editor-section" {...props}>
     <Edit className="stage-editor-section__edit">
       <h2>Node Type</h2>
       <p>Which type of node does this name generator create?</p>
       <OptionsInput
-        options={options}
+        options={nodeTypes}
         component={NodeTypeOption}
         value={nodeType}
         onChange={(value) => onChange({ nodeType: value })}
@@ -44,4 +41,12 @@ NodeType.defaultProps = {
   onChange: () => {},
 };
 
-export default NodeType;
+const mapStateToProps = (state) => ({
+  nodeTypes: keys(state.protocol.present.variableRegistry.node),
+});
+
+export { NodeType };
+
+export default connect(
+  mapStateToProps,
+)(NodeType);

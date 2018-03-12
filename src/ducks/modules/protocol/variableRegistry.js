@@ -1,4 +1,12 @@
 const initialState = {
+  node: {
+    person: {},
+    place: {},
+  },
+  edge: {
+    familyMember: {},
+    friend: {},
+  },
 };
 
 export default function reducer(state = initialState, action = {}) {
