@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import { has } from 'lodash';
 
 class OptionsInput extends Component {
   static propTypes = {
@@ -24,24 +25,29 @@ class OptionsInput extends Component {
     this.state = { selected: null };
   }
 
-  renderOption = (optionValue) => {
+  renderOption = (option) => {
     const {
       value,
       onChange,
       component: OptionComponent,
+      ...rest
     } = this.props;
 
-    const selected = value === optionValue ? { selected: true } : {};
+    // eslint-disable-next-line
+    if (!has(option, 'value')) { option = { value: option }; }
+
+    const selected = (value === option.value ? { selected: true } : {});
 
     return (
       <div
         className="options-input__option"
-        onClick={() => { onChange(optionValue); }}
-        key={optionValue}
+        onClick={() => { onChange(option.value); }}
+        key={option.value}
       >
         <OptionComponent
-          value={optionValue}
           {...selected}
+          {...rest}
+          {...option}
         />
       </div>
     );

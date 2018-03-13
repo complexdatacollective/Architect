@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import stages from './stages';
 import variableRegistry from './variableRegistry';
+import forms from './forms';
 import protocolOptions from './protocolOptions';
 
 const initialState = {};
@@ -44,6 +45,7 @@ export default flatCombineReducers(
   combineReducers({
     options: protocolOptions,
     stages,
+    forms,
     variableRegistry,
   }),
 );
