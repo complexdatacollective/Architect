@@ -2,8 +2,15 @@
   flex-direction: row;
   width: 100%;
   padding: 0 35% 0 0;
+  transition: opacity var(--animation-standard-duration) var(--animation-default-easing),
+    transform var(--animation-standard-duration) var(--animation-default-easing);
 
   &:first-child {
     padding-top: unit(4);
+  }
+
+  &--hide {
+    opacity: 0;
+    transform: translateX(-100%);
   }
 }

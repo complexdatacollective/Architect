@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { keys, get, pickBy, isNull } from 'lodash';
 import { Section, Edit, Guidance } from '../../Guided';
@@ -59,10 +60,10 @@ class Form extends Component {
   };
 
   render() {
-    const { stage: { form }, forms, onChange, dispatch, ...props } = this.props;
+    const { stage: { form }, nodeType, forms, onChange, dispatch, ...props } = this.props;
 
     return (
-      <Section className="stage-editor-section" {...props}>
+      <Section className="stage-editor-section" {...props} show={!!nodeType}>
         <Edit className="stage-editor-section__edit">
           <h2>Form</h2>
           <p>Which form should be used to create and edit nodes on this stage?</p>
@@ -114,10 +115,11 @@ const getForms = (state, props) => {
 
 const mapStateToProps = (state, props) => ({
   forms: getForms(state, props),
+  nodeType: get(props, 'stage.nodeType', null),
 });
 
 export { Form };
 
-export default connect(
-  mapStateToProps,
+export default compose(
+  connect(mapStateToProps),
 )(Form);
