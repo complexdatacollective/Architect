@@ -56,6 +56,13 @@ const StageEditor = (props) => {
 
   return (
     <div className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
+      <div className="stage-editor__code" onClick={toggleCodeView}>
+        <pre>
+          <code>
+            { JSON.stringify(props.stage, null, 2) }
+          </code>
+        </pre>
+      </div>
       <Guided className="stage-editor__sections">
         <Section className="stage-editor-section">
           <Edit className="stage-editor-section__edit">
@@ -65,13 +72,6 @@ const StageEditor = (props) => {
         </Section>
         { renderInterfaceSections(props) }
       </Guided>
-      <div className="stage-editor__code" onClick={toggleCodeView}>
-        <pre>
-          <code>
-            { JSON.stringify(props.stage, null, 2) }
-          </code>
-        </pre>
-      </div>
     </div>
   );
 };
