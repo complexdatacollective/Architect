@@ -1,0 +1,7 @@
+.guided-editor {
+  padding: 0 unit(4) unit(4);
+
+  &--disabled {
+    pointer-events: none;
+  }
+}

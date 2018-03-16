@@ -1,13 +1,13 @@
 /* eslint-disable */
 
 import React from 'react';
-import { Section, Edit, Guidance } from '../../Guided';
+import { Section, Editor, Guidance } from '../../Guided';
 
 const Panels = ({ stage, onChange, ...props }) => (
   <Section className="stage-editor-section" {...props}>
-    <Edit className="stage-editor-section__edit">
+    <Editor className="stage-editor-section__edit">
       <h2></h2>
-    </Edit>
+    </Editor>
     <Guidance className="stage-editor-section__guidance" />
   </Section>
 );

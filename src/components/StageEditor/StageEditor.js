@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
@@ -11,7 +13,7 @@ import {
   Prompts,
   Panels,
 } from './sections';
-import { Guided, Section, Edit } from '../Guided';
+import { Guided, Section, Editor } from '../Guided';
 
 const withCodeViewToggle = compose(
   withState('codeView', 'toggleCodeView', false),
@@ -32,7 +34,7 @@ const interfaces = {
     NodeType,
     Form,
     Prompts,
-    Panels,
+    // Panels,
   ],
 };
 
@@ -65,10 +67,10 @@ const StageEditor = (props) => {
       </div>
       <Guided className="stage-editor__sections">
         <Section className="stage-editor-section">
-          <Edit className="stage-editor-section__edit">
+          <Editor className="stage-editor-section__edit">
             <h1>Edit {type} Screen</h1>
             <button onClick={toggleCodeView}>Show Code View</button>
-          </Edit>
+          </Editor>
         </Section>
         { renderInterfaceSections(props) }
       </Guided>
