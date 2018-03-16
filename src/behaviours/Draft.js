@@ -32,14 +32,15 @@ const Draft = WrappedComponent =>
       this.loadDraftFromProps(props);
     }
 
-    updateDraft = (value) => {
+    updateDraft = (value, replace = false) => {
       this.setState(
-        state => ({
-          draft: {
-            ...state.draft,
-            ...value,
-          },
-        }),
+        (state) => {
+          const draft = replace ?
+            { ...value } :
+            { ...state.draft, ...value };
+
+          return { draft };
+        },
       );
     };
 
@@ -64,6 +65,7 @@ const Draft = WrappedComponent =>
           draft={this.state.draft}
           hasChanges={this.hasChanges()}
           updateDraft={this.updateDraft}
+          setDraft={this.setDraft}
         />
       );
     }
