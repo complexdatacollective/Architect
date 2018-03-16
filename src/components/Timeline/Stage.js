@@ -34,7 +34,7 @@ class TimelineStage extends PureComponent {
   };
 
   snapshotSrc() {
-    return `/images/timeline/stage--${this.props.type}.png`;
+    return `./images/timeline/stage--${this.props.type}.png`;
   }
 
   render() {
