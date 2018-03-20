@@ -68,20 +68,21 @@ class Form extends Component {
           <h2>Form</h2>
           <p>Which form should be used to create and edit nodes on this stage?</p>
           <label onClick={() => this.onSelectFormCategory(DEFAULT_FORM)}>
-            <input type="radio" checked={this.state.formType === DEFAULT_FORM} />
+            <input type="radio" checked={this.state.formType === DEFAULT_FORM} readOnly />
             Use the default node form
           </label>
           <div>
             <label onClick={() => this.onSelectFormCategory(CUSTOM_FORM)}>
-              <input type="radio" checked={this.state.formType === CUSTOM_FORM} />
+              <input type="radio" checked={this.state.formType === CUSTOM_FORM} readOnly  />
               Use a different form
             </label>
             <select
               onChange={this.onSelectCustomForm}
               ref={(select) => this.select = select}
               value={form}
+              defaultValue=""
             >
-              <option selected="true" disabled="disabled" value="">Select a form...</option>
+              <option disabled="disabled" value="">Select a form...</option>
               { forms.map((formName) =>
                 <option value={formName} key={formName}>
                   {formName}

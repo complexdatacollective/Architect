@@ -46,7 +46,7 @@ SortableItems.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   updateItem: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
-  component: PropTypes.element.isRequired,
+  component: PropTypes.func.isRequired,
 };
 
 SortableItems.defaultProps = {

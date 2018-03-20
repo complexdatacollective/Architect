@@ -30,7 +30,7 @@ const routes = ({ isProtocolLoaded }) => (
 );
 
 routes.propTypes = {
-  isProtocolLoaded: PropTypes.string.isRequired,
+  isProtocolLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

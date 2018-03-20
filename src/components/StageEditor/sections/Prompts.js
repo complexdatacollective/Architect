@@ -10,7 +10,7 @@ import Prompt from './Prompt';
 
 const dummyItems = [{ text: 'test a' }, { text: 'test b' }, { text: 'test c' }];
 
-const Prompts = ({ stage: { prompts }, show, onChange, ...props }) => {
+const Prompts = ({ stage: { prompts }, show, onChange, dispatch, ...props }) => {
   const items = prompts || dummyItems;
   return (
     <Section className="stage-editor-section" {...props}>

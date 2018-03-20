@@ -54,7 +54,7 @@ const renderInterfaceSections = (props) => {
 };
 
 const StageEditor = (props) => {
-  const { stage: { type }, toggleCodeView, codeView } = props;
+  const { stage: { type }, toggleCodeView, codeView, showCodeView, hideCodeView, ...rest } = props;
 
   return (
     <div className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
@@ -72,7 +72,7 @@ const StageEditor = (props) => {
             <button onClick={toggleCodeView}>Show Code View</button>
           </Editor>
         </Section>
-        { renderInterfaceSections(props) }
+        { renderInterfaceSections({ stage: { ...props.stage }, ...rest }) }
       </Guided>
     </div>
   );

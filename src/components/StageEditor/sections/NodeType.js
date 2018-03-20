@@ -16,6 +16,7 @@ class NodeType extends Component {
   resetStage() {
     const stage = this.props.stage;
 
+    // eslint-disable-next-line
     if (confirm('Really? this will reset everything so far!')) {
       this.props.onChange({
         ...pick(stage, ['id', 'type', 'label']),

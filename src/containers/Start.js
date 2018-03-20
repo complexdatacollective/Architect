@@ -24,8 +24,8 @@ class Start extends PureComponent {
         <button onClick={() => this.props.createProtocol()}>Create new Protocol</button>
         <button onClick={() => this.props.locateAndLoadProtocol()}>Open a protocol</button>
 
-        { this.props.protocols.map(protocol => (
-          <button onClick={() => this.props.loadProtocol(protocol.path)}>
+        { this.props.protocols.map((protocol, index) => (
+          <button key={index} onClick={() => this.props.loadProtocol(protocol.path)}>
             Load &quot;{protocol.path}&quot;
           </button>
         )) }
