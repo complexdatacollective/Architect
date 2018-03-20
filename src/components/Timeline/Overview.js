@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import { ToggleInput } from 'network-canvas-ui';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as protocolActions } from '../../ducks/modules/protocol/protocolOptions';
-import { TextInput } from '../Form';
-import SeamlessInput from '../SeamlessInput';
+import { TextInput, SeamlessTextInput } from '../Form';
 
 class TimelineOverview extends PureComponent {
   constructor(props) {
@@ -40,7 +39,7 @@ class TimelineOverview extends PureComponent {
       <div className="timeline-overview">
         <div className="panel">
           <div className="panel__title">
-            <SeamlessInput className="timeline-overview__title" value={title} onChange={this.onChangeTitle} />
+            <SeamlessTextInput className="timeline-overview__title" value={title} onChange={this.onChangeTitle} />
           </div>
 
           <div className="panel__groups">
