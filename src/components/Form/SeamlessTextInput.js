@@ -7,12 +7,14 @@ class SeamlessTextInput extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
     value: PropTypes.string,
+    placeholder: PropTypes.string,
     className: PropTypes.string,
   };
 
   static defaultProps = {
     className: '',
     value: '',
+    placeholder: '',
     onChange: () => {},
   };
 
@@ -44,6 +46,7 @@ class SeamlessTextInput extends PureComponent {
     const {
       value,
       className,
+      placeholder,
     } = this.props;
 
     return (
@@ -51,6 +54,7 @@ class SeamlessTextInput extends PureComponent {
         <input
           className={cx('seamless-text-input__input')}
           value={value}
+          placeholder={placeholder}
           type="text"
           ref={(input) => { this.input = input; }}
           onChange={() => { this.onChange(this.input.value); }}
