@@ -6,12 +6,12 @@ import { compose } from 'recompose';
 import { has } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
 import SortableItems from './SortableItems';
-import Prompt from './Prompt';
+import NameGeneratorPrompt from './NameGeneratorPrompt';
 
 const dummyItems = [{ text: 'test a' }, { text: 'test b' }, { text: 'test c' }];
 
-const Prompts = ({ stage: { prompts }, show, onChange, dispatch, ...props }) => {
-  const items = prompts || dummyItems;
+const NameGeneratorPrompts = ({ stage, show, onChange, dispatch, ...props }) => {
+  const items = stage.prompts || dummyItems;
   return (
     <Section className="stage-editor-section" {...props}>
       <Editor className="stage-editor-section__edit">
@@ -19,8 +19,9 @@ const Prompts = ({ stage: { prompts }, show, onChange, dispatch, ...props }) => 
         <p>Name gen prompt specific</p>
         <SortableItems
           onChange={(items) => { onChange({ prompts: items }) }}
-          component={Prompt}
+          component={NameGeneratorPrompt}
           items={items}
+          stage={stage}
         />
       </Editor>
       <Guidance className="stage-editor-section__guidance">
@@ -34,8 +35,8 @@ const mapStateToProps = (state, props) => ({
   show: has(props, 'stage.nodeType'),
 });
 
-export { Prompts };
+export { NameGeneratorPrompts };
 
 export default compose(
   connect(mapStateToProps),
-)(Prompts);
+)(NameGeneratorPrompts);

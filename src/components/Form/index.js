@@ -7,3 +7,4 @@ export { default as FileInput } from './FileInput';
 export { default as ImageInput } from './ImageInput';
 export { default as AudioInput } from './AudioInput';
 export { default as VideoInput } from './VideoInput';
+export { default as VariableChooser } from './VariableChooser';

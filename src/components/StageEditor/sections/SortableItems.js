@@ -13,7 +13,7 @@ const itemHandlers = withHandlers({
     const items = props.items
       .map((item, i) => {
         if (i !== index) { return item; }
-        return newItem;
+        return { ...item, ...newItem };
       });
 
     props.onChange(items);
@@ -26,12 +26,13 @@ const itemHandlers = withHandlers({
   },
 });
 
-const SortableItems = ({ items, updateItem, deleteItem, component: Component }) => (
+const SortableItems = ({ items, updateItem, deleteItem, component: Component, ...otherProps }) => (
   <div className="stage-editor-sortable-items">
     { items.map(
       (props, index) => (
         <Component
           {...props}
+          {...otherProps}
           index={index}
           key={index}
           onChange={item => updateItem(item, index)}

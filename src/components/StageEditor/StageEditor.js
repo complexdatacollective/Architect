@@ -5,15 +5,15 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
+import { Guided, Section, Editor } from '../Guided';
 import {
   Title,
   ContentItems,
   NodeType,
   Form,
-  Prompts,
+  NameGeneratorPrompts,
   Panels,
 } from './sections';
-import { Guided, Section, Editor } from '../Guided';
 
 const withCodeViewToggle = compose(
   withState('codeView', 'toggleCodeView', false),
@@ -33,13 +33,17 @@ const interfaces = {
     Title,
     NodeType,
     Form,
-    Prompts,
+    NameGeneratorPrompts,
     // Panels,
   ],
 };
 
 const renderSections = (interfaceSections, props) => {
-  if (interfaceSections.length === 0) { return (<div>Not yet editable.</div>); }
+  if (interfaceSections.length === 0) {
+    return (
+      <Section><Editor>Not yet editable.</Editor></Section>
+    );
+  }
 
   return interfaceSections.map(
     (InterfaceSection, index) =>
