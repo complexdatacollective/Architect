@@ -25,7 +25,17 @@ class NodeType extends Component {
   }
 
   render() {
-    const { stage: { nodeType }, nodeTypes, disabled, onChange, dispatch, ...props } = this.props;
+    const {
+      stage,
+      nodeTypes,
+      disabled,
+      onChange,
+      dispatch,
+      ...props
+    } = this.props;
+
+    const type = get(stage, 'subject.type');
+
     return (
       <Section className="stage-editor-section" {...props}>
         <Editor className="stage-editor-section__edit" disabled={disabled}>
@@ -35,8 +45,8 @@ class NodeType extends Component {
             <OptionsInput
               options={nodeTypes}
               component={NodeTypeOption}
-              value={nodeType}
-              onChange={value => onChange({ nodeType: value })}
+              value={type}
+              onChange={value => onChange({ subject: { entity: 'node', type: value } })}
             />
           </div>
           { disabled &&
