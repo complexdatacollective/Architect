@@ -70,32 +70,42 @@ class Protocol extends PureComponent {
     });
   }
 
+  editStage = stageId => this.showCard(cards.editStage, { stageId });
+
   isAnyCardVisible = () => this.state.activeCard.cardType !== null;
   isCardVisible = cardType => this.state.activeCard.cardType === cardType;
   isTimelineVisible = () => !this.isAnyCardVisible();
 
   render() {
+    const {
+      stages,
+      hasChanges,
+      hasUnsavedChanges,
+      saveProtocol,
+      exportProtocol,
+    } = this.props;
+
     const protocolClasses = cx(
       'protocol',
       {
-        'protocol--has-changes': this.props.hasChanges,
-        'protocol--has-unsaved-changes': this.props.hasUnsavedChanges,
+        'protocol--has-changes': hasChanges,
+        'protocol--has-unsaved-changes': hasUnsavedChanges,
       },
     );
     return (
       <div className={protocolClasses}>
         <Timeline
-          stages={this.props.stages}
+          stages={stages}
           onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
           onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
-          onEditStage={stageId => this.showCard(cards.editStage, { stageId })}
-          hasUnsavedChanges={this.props.hasUnsavedChanges}
+          onEditStage={this.editStage}
+          hasUnsavedChanges={hasUnsavedChanges}
         />
 
         <div className="protocol__control-bar">
-          <Button size="small" onClick={this.props.exportProtocol}>Export</Button>
-          { this.props.hasUnsavedChanges &&
-            <Button size="small" onClick={this.props.saveProtocol}>Save</Button>
+          <Button size="small" onClick={exportProtocol}>Export</Button>
+          { hasUnsavedChanges &&
+            <Button size="small" onClick={saveProtocol}>Save</Button>
           }
         </div>
 
@@ -103,7 +113,7 @@ class Protocol extends PureComponent {
           index={this.state.activeCard.insertAtIndex}
           show={this.isCardVisible(cards.newStage)}
           cancel={this.state.activeCard.cancel}
-          onComplete={this.onCardComplete}
+          onComplete={(index) => { this.editStage(stages[index].id); }}
           onCancel={this.onCardCancel}
         />
 

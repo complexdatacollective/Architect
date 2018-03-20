@@ -56,7 +56,7 @@ class NewStage extends PureComponent {
 
     this.props.addStage({ type }, index);
 
-    this.props.onComplete();
+    this.props.onComplete(index);
   }
 
   renderOption = ({ type, title, description }) => (
