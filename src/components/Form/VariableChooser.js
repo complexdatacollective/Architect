@@ -5,6 +5,7 @@ import { toPairs, get } from 'lodash';
 import propTypes from 'prop-types';
 import SeamlessTextInput from './SeamlessTextInput';
 import Button from './Button';
+import Modal from '../Modal';
 
 class VariableChooser extends Component {
   static propTypes = {
@@ -44,17 +45,14 @@ class VariableChooser extends Component {
             <div key={name} onClick={() => this.editVariable(name)}>{name}</div>
           )) }
         </div>
-        { this.state.editing &&
-          <div>
-            Modal
-            {this.state.editing}<br />
-            <SeamlessTextInput
-              onChange={(newValue) => this.onChangeVariable(this.state.editing, newValue)}
-              value={get(values, this.state.editing)}
-            />
-            <Button>Save</Button>
-          </div>
-        }
+        <Modal show={!!this.state.editing}>
+          {this.state.editing}<br />
+          <SeamlessTextInput
+            onChange={(newValue) => this.onChangeVariable(this.state.editing, newValue)}
+            value={get(values, this.state.editing)}
+          />
+          <Button onClick={() => this.setState({ editing: null })}>Done</Button>
+        </Modal>
       </div>
     );
   }
