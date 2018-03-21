@@ -32,9 +32,15 @@ const getEditComponent = (name, value, options, onChange) => {
     case 'options':
       return (
         <div className="variable-chooser__modal-value">
-          {options.options.map((value) => (
+          {options.options.map((option) => (
             <div>
-              <input type="radio" name={value} value={value} onChange={(event) => onChange(event.target.value)} /> {value}
+              <input
+                type="radio"
+                name={name}
+                value={option}
+                onChange={(event) => onChange(event.target.value)}
+                checked={value == option}
+              /> {option}
             </div>
           ))}
         </div>
