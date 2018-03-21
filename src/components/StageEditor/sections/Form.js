@@ -116,7 +116,7 @@ const getForms = (state, props) => {
 
 const mapStateToProps = (state, props) => ({
   forms: getForms(state, props),
-  show: !!get(props, 'stage.nodeType', false),
+  show: get(props, 'stage.subject.type', false),
 });
 
 export { Form };

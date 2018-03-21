@@ -4,47 +4,43 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { get, toPairs } from 'lodash';
-import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { Icon } from 'network-canvas-ui';
 import { SeamlessTextInput, Button, VariableChooser } from '../../Form';
+import SortableItem from './SortableItem';
 
-const Handle = SortableHandle(() => (
-  <div className="stage-editor-section-content-item__handle" />
-));
-
-const NameGeneratorPrompt = ({ variables, additionalAttributes, text, id, onChange, onDelete }) => {
+const NameGeneratorPrompt = ({ variables, additionalAttributes, text, id, onChange, onDelete, index }) => {
   return (
-    <div className="prompt">
-      <Handle />
-
-      <div>
-        <label>
-          <div>ID</div>
+    <SortableItem onDelete={onDelete} index={index}>
+      <div className="prompt">
+        <label className="prompt__setting">
+          <div className="prompt__setting-label">Export ID</div>
           <SeamlessTextInput
+            className="prompt__setting-value"
             value={id}
-            placeholder="Enter prompt text here"
+            placeholder="Enter an ID for data export"
             onChange={(newValue) => { onChange({ id: newValue }) }}
           />
         </label>
-        <label>
-          <div>Prompt text</div>
+        <label className="prompt__setting">
+          <div className="prompt__setting-label">Text for prompt</div>
           <SeamlessTextInput
+            className="prompt__setting-value"
             value={text}
-            placeholder="Enter prompt text here"
+            placeholder="Enter text for the prompt here"
             onChange={(newValue) => { onChange({ text: newValue }) }}
           />
         </label>
-        <VariableChooser
-          values={additionalAttributes}
-          variables={variables}
-          onChange={(newValue) => { onChange({ additionalAttributes: newValue }) }}
-        />
+        <div className="prompt__setting">
+          <div className="prompt__setting-label">Additional attributes</div>
+          <VariableChooser
+            className="prompt__setting-value"
+            values={additionalAttributes}
+            variables={variables}
+            onChange={(newValue) => { onChange({ additionalAttributes: newValue }) }}
+          />
+        </div>
       </div>
-
-      <Button
-        onClick={onDelete}
-      ><Icon name="close" /></Button>
-    </div>
+    </SortableItem>
   );
 }
 
@@ -61,6 +57,5 @@ const mapStateToProps = (state, props) => {
 export { NameGeneratorPrompt };
 
 export default compose(
-  SortableElement,
   connect(mapStateToProps),
 )(NameGeneratorPrompt);

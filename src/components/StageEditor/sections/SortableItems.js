@@ -27,7 +27,7 @@ const itemHandlers = withHandlers({
 });
 
 const SortableItems = ({ items, updateItem, deleteItem, component: Component, ...otherProps }) => (
-  <div className="stage-editor-sortable-items">
+  <div className="sortable-items">
     { items.map(
       (props, index) => (
         <Component

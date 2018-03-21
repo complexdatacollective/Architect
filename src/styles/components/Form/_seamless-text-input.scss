@@ -17,7 +17,6 @@ $module-name: seamless-text-input;
 
     &::placeholder {
       color: var(--divider-light);
-      font-style: italic;
     }
   }
 
@@ -26,14 +25,19 @@ $module-name: seamless-text-input;
     vertical-align: bottom;
     width: unit(2) !important;
     height: unit(2) !important;
+    opacity: 0;
     transition: opacity var(--animation-default-easing) var(--animation-fast-duration);
   }
 
-  &--hasFocus {
-    .#{$module-name} {
-      &__icon {
-        opacity: 0;
-      }
+  &--has-focus {
+    .#{$module-name}__icon {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    .#{$module-name}__icon {
+      opacity: 1;
     }
   }
 }
