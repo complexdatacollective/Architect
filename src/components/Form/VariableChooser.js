@@ -10,6 +10,47 @@ import SeamlessTextInput from './SeamlessTextInput';
 import Select from './Select';
 import Modal from '../Modal';
 
+const getEditComponent = (name, value, options, onChange) => {
+  switch(options.type) {
+    case 'boolean':
+      return (
+        <div className="variable-chooser__modal-value">
+          <input type="radio" name={name} value="true" onChange={(event) => onChange(event.target.value)} /> True
+          <input type="radio" name={name} value="false" onChange={(event) => onChange(event.target.value)} /> False
+        </div>
+      );
+    case 'number':
+      return (
+        <SeamlessTextInput
+          className="variable-chooser__modal-value"
+          onChange={onChange}
+          type={options.type}
+          value={value}
+        />
+      );
+    case 'enumerable':
+    case 'options':
+      return (
+        <div className="variable-chooser__modal-value">
+          {options.options.map((value) => (
+            <div>
+              <input type="radio" name={value} value={value} onChange={(event) => onChange(event.target.value)} /> {value}
+            </div>
+          ))}
+        </div>
+      );
+    case 'text':
+    default:
+      return (
+        <SeamlessTextInput
+          className="variable-chooser__modal-value"
+          onChange={onChange}
+          value={value}
+        />
+      );
+  }
+}
+
 class VariableChooser extends Component {
   static propTypes = {
     values: PropTypes.object,
@@ -82,7 +123,7 @@ class VariableChooser extends Component {
               <div className="variable-chooser__modal-setting">
                 <Select
                   className="variable-chooser__modal-value"
-                  onChange={event => this.editVariable(event.target.value)}
+                  onChange={this.editVariable}
                   defaultValue=""
                   value={this.state.editing || ''}
                 >
@@ -93,11 +134,12 @@ class VariableChooser extends Component {
                 </Select>
               </div> :
               <div className="variable-chooser__modal-setting">
-                <SeamlessTextInput
-                  className="variable-chooser__modal-value"
-                  onChange={(newValue) => this.onChangeVariable(this.state.editing, newValue)}
-                  value={get(values, this.state.editing)}
-                />
+                { getEditComponent(
+                  this.state.editing,
+                  get(values, this.state.editing),
+                  get(variables, this.state.editing),
+                  (newValue) => { console.log(this.state.editing, newValue); this.onChangeVariable(this.state.editing, newValue); }
+                ) }
               </div>
             }
             <div className="variable-chooser__modal-controls">

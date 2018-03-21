@@ -41,7 +41,7 @@ class Select extends PureComponent {
         </div>
         <select
           className="select__value"
-          onChange={onChange}
+          onChange={event => onChange(event.target.value)}
           value={value}
           id={this.id}
           ref={(input) => { this.input = input; }}
