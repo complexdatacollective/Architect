@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { Field, getFormValues, change as changeForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, pickBy, isNull } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
@@ -14,14 +15,12 @@ class Form extends Component {
   static propTypes = {
     stage: PropTypes.object,
     forms: PropTypes.arrayOf(PropTypes.string),
-    onChange: PropTypes.func,
     dispatch: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     stage: {},
     forms: [],
-    onChange: () => {},
   };
 
   constructor(props) {
@@ -38,21 +37,10 @@ class Form extends Component {
     });
   }
 
-  setForm = (formName) => {
-    console.log({ formName });
-    this.props.onChange({ form: formName })
-  };
-
   onSelectFormCategory = (formType) => {
-    if (formType === DEFAULT_FORM || this.select.value === '') {
-      this.setForm(null); return;
+    if (formType === DEFAULT_FORM || this.props.stage.form === '') {
+      this.props.dispatch(changeForm('edit-stage', 'form', null));
     }
-
-    this.setForm(this.select.value);
-  };
-
-  onSelectCustomForm = ({ target: { value } }) => {
-    this.setForm(value);
   };
 
   onClickCreateNewForm = () => {
@@ -60,7 +48,7 @@ class Form extends Component {
   };
 
   render() {
-    const { stage: { form }, show, forms, onChange, dispatch, ...props } = this.props;
+    const { stage: { form }, show, forms, dispatch, ...props } = this.props;
 
     return (
       <Section className="stage-editor-section" show={show} {...props}>
@@ -72,15 +60,13 @@ class Form extends Component {
             Use the default node form
           </label>
           <div>
-            <label onClick={() => this.onSelectFormCategory(CUSTOM_FORM)}>
+            <label>
               <input type="radio" checked={this.state.formType === CUSTOM_FORM} readOnly  />
               Use a different form
             </label>
-            <select
-              onChange={this.onSelectCustomForm}
-              ref={(select) => this.select = select}
-              value={form}
-              defaultValue=""
+            <Field
+              name="form"
+              component="select"
             >
               <option disabled="disabled" value="">Select a form...</option>
               { forms.map((formName) =>
@@ -88,7 +74,7 @@ class Form extends Component {
                   {formName}
                 </option>)
               }
-            </select>
+            </Field>
           </div>
           <div onClick={this.onClickCreateNewForm}>
             <input type="radio" checked={false} />
@@ -103,21 +89,26 @@ class Form extends Component {
   }
 }
 
-const getForms = (state, props) => {
+const getForms = (state, stage) => {
   const forms = get(state, 'protocol.present.forms', {});
-  const nodeType = get(props, 'stage.nodeType', null);
+  const nodeType = get(stage, 'subject.type', null);
 
   const validForms = pickBy(forms, form => {
     return form.type === nodeType && form.entity === 'node';
   });
 
   return keys(validForms);
-}
+};
 
-const mapStateToProps = (state, props) => ({
-  forms: getForms(state, props),
-  show: get(props, 'stage.subject.type', false),
-});
+const mapStateToProps = (state, props) => {
+  const stage = getFormValues('edit-stage')(state);
+
+  return {
+    forms: getForms(state, stage),
+    show: get(props, 'stage.subject.type', false),
+    stage,
+  };
+};
 
 export { Form };
 
