@@ -1,10 +1,14 @@
 /* eslint-disable */
-
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { reduxForm, Form as ReduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
+import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
+import { makeGetStage } from '../../selectors/protocol';
 import { Guided, Section, Editor } from '../Guided';
 import {
   Title,
@@ -15,14 +19,8 @@ import {
   Panels,
 } from './sections';
 
-const withCodeViewToggle = compose(
-  withState('codeView', 'toggleCodeView', false),
-  withHandlers({
-    showCodeView: ({ toggleCodeView }) => () => toggleCodeView(true),
-    hideCodeView: ({ toggleCodeView }) => () => toggleCodeView(false),
-    toggleCodeView: ({ toggleCodeView }) => () => toggleCodeView(current => !current),
-  }),
-);
+const defaultStage = {
+};
 
 const interfaces = {
   Information: [
@@ -58,27 +56,29 @@ const renderInterfaceSections = (props) => {
 };
 
 const StageEditor = (props) => {
-  const { stage: { type }, toggleCodeView, codeView, showCodeView, hideCodeView, ...rest } = props;
+  const { stage: { type }, handleSubmit, toggleCodeView, codeView, showCodeView, hideCodeView, ...rest } = props;
 
   return (
-    <div className={cx('stage-editor', { 'stage-editor--show-code': true || codeView })}>
-      <div className="stage-editor__code" onClick={toggleCodeView}>
-        <pre>
-          <code>
-            { JSON.stringify(props.stage, null, 2) }
-          </code>
-        </pre>
+    <ReduxForm onSubmit={handleSubmit}>
+      <div className={cx('stage-editor', { 'stage-editor--show-code': true || codeView })}>
+        <div className="stage-editor__code" onClick={toggleCodeView}>
+          <pre>
+            <code>
+              { JSON.stringify(props.stage, null, 2) }
+            </code>
+          </pre>
+        </div>
+        <Guided className="stage-editor__sections">
+          <Section className="stage-editor-section">
+            <Editor className="stage-editor-section__edit">
+              <h1>Edit {type} Screen</h1>
+              <button onClick={toggleCodeView}>Show Code View</button>
+            </Editor>
+          </Section>
+          { renderInterfaceSections({ stage: { ...props.stage }, ...rest }) }
+        </Guided>
       </div>
-      <Guided className="stage-editor__sections">
-        <Section className="stage-editor-section">
-          <Editor className="stage-editor-section__edit">
-            <h1>Edit {type} Screen</h1>
-            <button onClick={toggleCodeView}>Show Code View</button>
-          </Editor>
-        </Section>
-        { renderInterfaceSections({ stage: { ...props.stage }, ...rest }) }
-      </Guided>
-    </div>
+    </ReduxForm>
   );
 };
 
@@ -88,6 +88,37 @@ StageEditor.propTypes = {
   codeView: PropTypes.bool.isRequired,
 };
 
+function makeMapStateToProps() {
+  const getStage = makeGetStage();
+
+  return function mapStateToProps(state, props) {
+    const stage = getStage(state, props) || defaultStage;
+    return { stage, initialValues: stage };
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateStage: bindActionCreators(stageActions.updateStage, dispatch),
+  };
+}
+
 export default compose(
-  withCodeViewToggle,
+  connect(makeMapStateToProps, mapDispatchToProps),
+  withState('codeView', 'toggleCodeView', false),
+  withHandlers({
+    showCodeView: ({ toggleCodeView }) => () => toggleCodeView(true),
+    hideCodeView: ({ toggleCodeView }) => () => toggleCodeView(false),
+    toggleCodeView: ({ toggleCodeView }) => () => toggleCodeView(current => !current),
+  }),
+  reduxForm({
+    form: 'edit-stage',
+    touchOnBlur: false,
+    touchOnChange: true,
+    enableReinitialize: true,
+    onSubmit: (values, _, props) => {
+      props.updateStage(props.stageId, values);
+      props.onComplete();
+    },
+  }),
 )(StageEditor);
