@@ -49,7 +49,7 @@ class NodeType extends Component {
           </div>
           { disabled &&
             <div style={{ 'pointer-events': 'auto' }}>
-              <Button onClick={() => this.resetStage()}>Change Node Type</Button>
+              <Button type="button" onClick={() => this.resetStage()}>Change Node Type</Button>
             </div>
           }
         </Editor>
