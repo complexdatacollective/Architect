@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, getFormValues, initialize as initalizeForm } from 'redux-form';
+import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, get, pick } from 'lodash';
+import { keys, get, pick, difference } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
 import { OptionsInput, Button } from '../../../components/Form';
 
@@ -19,7 +19,11 @@ class NodeType extends Component {
   resetStage() {
     // eslint-disable-next-line
     if (confirm('Really? this will reset everything so far!')) {
-      this.props.dispatch(initalizeForm('edit-stage', pick(this.props.stage, ['id', 'type', 'label'])))
+      const fieldsToReset = difference(keys(this.props.stage), ['id', 'type', 'label']);
+
+      fieldsToReset.forEach((field) => {
+        this.props.resetField(field);
+      });
     }
   }
 
@@ -83,8 +87,13 @@ const mapStateToProps = (state, props) => {
   };
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  resetField: (field) => dispatch(changeField('edit-stage', field, null)),
+});
+
 export { NodeType };
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(NodeType);
