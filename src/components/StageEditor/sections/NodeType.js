@@ -1,5 +1,8 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Field, getFormValues, initialize as initalizeForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, pick } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
@@ -14,19 +17,14 @@ const NodeTypeOption = ({ selected, value }) => (
 
 class NodeType extends Component {
   resetStage() {
-    const stage = this.props.stage;
-
     // eslint-disable-next-line
     if (confirm('Really? this will reset everything so far!')) {
-      this.props.onChange({
-        ...pick(stage, ['id', 'type', 'label']),
-      }, true);
+      this.props.dispatch(initalizeForm('edit-stage', pick(this.props.stage, ['id', 'type', 'label'])))
     }
   }
 
   render() {
     const {
-      stage,
       nodeTypes,
       disabled,
       onChange,
@@ -34,19 +32,19 @@ class NodeType extends Component {
       ...props
     } = this.props;
 
-    const type = get(stage, 'subject.type');
-
     return (
       <Section className="stage-editor-section" {...props}>
         <Editor className="stage-editor-section__edit" disabled={disabled}>
           <div style={{ opacity: (disabled ? '0.67' : '1') }}>
             <h2>Node Type</h2>
             <p>Which type of node does this name generator create?</p>
-            <OptionsInput
+            <Field
+              name="subject"
+              parse={value => ({ type: value, entity: 'node' })}
+              format={value => get(value, 'type')}
               options={nodeTypes}
-              component={NodeTypeOption}
-              value={type}
-              onChange={value => onChange({ subject: { entity: 'node', type: value } })}
+              component={OptionsInput}
+              optionComponent={NodeTypeOption}
             />
           </div>
           { disabled &&
@@ -64,7 +62,6 @@ class NodeType extends Component {
 }
 
 NodeType.propTypes = {
-  stage: PropTypes.object,
   nodeTypes: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
@@ -72,16 +69,19 @@ NodeType.propTypes = {
 };
 
 NodeType.defaultProps = {
-  stage: {},
   nodeTypes: [],
   disabled: false,
   onChange: () => {},
 };
 
-const mapStateToProps = (state, props) => ({
-  nodeTypes: keys(state.protocol.present.variableRegistry.node),
-  disabled: !!get(props, 'stage.nodeType'),
-});
+const mapStateToProps = (state, props) => {
+  const stage = getFormValues('edit-stage')(state);
+  return {
+    nodeTypes: keys(state.protocol.present.variableRegistry.node),
+    disabled: !!get(stage, 'subject.type'),
+    stage,
+  };
+}
 
 export { NodeType };
 

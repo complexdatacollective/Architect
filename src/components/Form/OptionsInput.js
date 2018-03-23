@@ -5,18 +5,15 @@ import { has } from 'lodash';
 
 class OptionsInput extends Component {
   static propTypes = {
-    component: PropTypes.func.isRequired,
+    optionComponent: PropTypes.func.isRequired,
     options: PropTypes.array,
     className: PropTypes.string,
-    onChange: PropTypes.func,
-    value: PropTypes.string,
+    input: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
     options: [],
     className: null,
-    onChange: () => {},
-    value: null,
   };
 
   constructor(props) {
@@ -27,9 +24,11 @@ class OptionsInput extends Component {
 
   renderOption = (option) => {
     const {
-      value,
-      onChange,
-      component: OptionComponent,
+      input: {
+        value,
+        onChange,
+      },
+      optionComponent: OptionComponent,
       ...rest
     } = this.props;
 

@@ -61,7 +61,7 @@ const StageEditor = (props) => {
   const { stage: { type }, toggleCodeView, codeView, showCodeView, hideCodeView, ...rest } = props;
 
   return (
-    <div className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
+    <div className={cx('stage-editor', { 'stage-editor--show-code': true || codeView })}>
       <div className="stage-editor__code" onClick={toggleCodeView}>
         <pre>
           <code>

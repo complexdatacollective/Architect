@@ -32,7 +32,7 @@ const NameGeneratorPrompts = ({ stage, show, onChange, dispatch, ...props }) => 
 }
 
 const mapStateToProps = (state, props) => ({
-  show: has(props, 'stage.nodeType'),
+  show: has(props, 'stage.subject.type', false),
 });
 
 export { NameGeneratorPrompts };

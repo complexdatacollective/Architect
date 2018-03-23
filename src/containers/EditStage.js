@@ -1,74 +1,49 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
+import { reduxForm, Form } from 'redux-form';
 import PropTypes from 'prop-types';
+import { pick } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 import { ProtocolCard } from '../containers/ProtocolCard';
 import StageEditor from '../components/StageEditor';
-import { Draft } from '../behaviours';
 
 const defaultStage = {
 };
 
 class EditStage extends PureComponent {
   static propTypes = {
-    hasChanges: PropTypes.bool,
-    stageId: PropTypes.number,
-    onComplete: PropTypes.func,
-    draft: PropTypes.any.isRequired,
-    updateStage: PropTypes.func.isRequired,
-    updateDraft: PropTypes.func.isRequired,
+    stage: PropTypes.any.isRequired,
+    dirty: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    draft: null,
-    stageId: null,
-    hasChanges: false,
-    onComplete: () => {},
-  }
-
-  onSave = () => {
-    const stageId = this.props.stageId;
-
-    this.props.updateStage(
-      stageId,
-      {
-        ...this.props.draft,
-      },
-    );
-
-    this.props.onComplete();
+    stage: null,
   };
 
   renderButtons() {
     return [].concat(
-      this.props.hasChanges ? [<Button key="continue" size="small" onClick={this.onSave}>Continue</Button>] : [],
+      this.props.dirty ? [<Button key="continue" size="small" onClick={this.props.handleSubmit}>Continue</Button>] : [],
     );
   }
 
   render() {
-    const {
-      hasChanges,
-      stageId,
-      onComplete,
-      draft,
-      updateStage,
-      updateDraft,
-      ...rest
-    } = this.props;
+    const { stage, handleSubmit } = this.props;
 
     return (
-      <ProtocolCard
-        buttons={this.renderButtons()}
-        {...rest}
-      >
-        <StageEditor
-          stage={draft}
-          onChange={this.props.updateDraft}
-        />
-      </ProtocolCard>
+      <Form onSubmit={handleSubmit}>
+        <ProtocolCard
+          buttons={this.renderButtons()}
+          {...pick(this.props, ['show', 'className', 'onCancel'])}
+        >
+          <StageEditor
+            stage={stage}
+          />
+        </ProtocolCard>
+      </Form>
     );
   }
 }
@@ -78,7 +53,7 @@ function makeMapStateToProps() {
 
   return function mapStateToProps(state, props) {
     const stage = getStage(state, props) || defaultStage;
-    return { draft: stage };
+    return { stage, initialValues: stage };
   };
 }
 
@@ -92,5 +67,14 @@ export { EditStage };
 
 export default compose(
   connect(makeMapStateToProps, mapDispatchToProps),
-  Draft,
+  reduxForm({
+    form: 'edit-stage',
+    touchOnBlur: false,
+    touchOnChange: true,
+    enableReinitialize: true,
+    onSubmit: (values, _, props) => {
+      props.updateStage(props.stageId, values);
+      props.onComplete();
+    },
+  }),
 )(EditStage);

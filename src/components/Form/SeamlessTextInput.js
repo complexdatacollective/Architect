@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -5,66 +7,34 @@ import { Icon } from 'network-canvas-ui';
 
 class SeamlessTextInput extends PureComponent {
   static propTypes = {
-    onChange: PropTypes.func,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    type: PropTypes.string,
-    className: PropTypes.string,
+    input: PropTypes.object,
+    meta: PropTypes.object,
   };
 
   static defaultProps = {
-    className: '',
-    value: '',
-    placeholder: '',
-    type: 'text',
-    onChange: () => {},
+    input: {},
+    meta: {},
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = { hasFocus: false };
-  }
-
-  componentDidMount() {
-    this.updateFocus();
-  }
-
-  onChange = () => {
-    this.props.onChange(this.input.value);
-  }
-
-  onFocusChange = () => {
-    this.updateFocus();
-  }
-
-  updateFocus() {
-    this.setState({
-      hasFocus: (document.activeElement === this.input),
-    });
-  }
 
   render() {
     const {
-      value,
+      input,
+      meta: { dirty, error, warning },
       className,
       placeholder,
       type,
     } = this.props;
 
     return (
-      <div className={cx('seamless-text-input', className, { 'seamless-text-input--has-focus': this.state.hasFocus })}>
+      <div className={cx('seamless-text-input', className, { 'seamless-text-input--has-focus': input.active })}>
         <input
           className={cx('seamless-text-input__input')}
-          value={value}
           placeholder={placeholder}
           type={type}
-          ref={(input) => { this.input = input; }}
-          onChange={() => { this.onChange(this.input.value); }}
-          onFocus={this.onFocusChange}
-          onBlur={this.onFocusChange}
+          {...input}
         />
         <Icon name="edit" className="seamless-text-input__icon" />
+        {dirty && error}
       </div>
     );
   }

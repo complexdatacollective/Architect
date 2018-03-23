@@ -3,7 +3,7 @@
     "title": "Mock protocol"
   },
   "stages": [
-    { "id": 1, "type": "NameGenerator", "subject": { "entity": "node", "type": "person" } },
+    { "id": 1, "type": "NameGenerator", "label": "foo", "subject": { "entity": "node", "type": "person" } },
     { "id": 2, "type": "Information" }
   ]
 }

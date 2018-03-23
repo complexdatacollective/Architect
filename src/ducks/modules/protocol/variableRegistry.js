@@ -73,6 +73,23 @@ const initialState = {
         },
       },
     },
+    place: {
+      label: 'Place',
+      color: 'coral',
+      displayVariable: 'name',
+      variables: {
+        name: {
+          label: 'Name',
+          description: 'Human readable description',
+          type: 'text',
+          validation: {
+            required: true,
+            minLength: 1,
+            maxLength: 24,
+          },
+        },
+      },
+    },
   },
 };
 
