@@ -18,6 +18,7 @@ import {
   NameGeneratorPrompts,
   Panels,
 } from './sections';
+import CodeView from './CodeView';
 
 const defaultStage = {
 };
@@ -60,19 +61,13 @@ const StageEditor = (props) => {
 
   return (
     <ReduxForm onSubmit={handleSubmit}>
-      <div className={cx('stage-editor', { 'stage-editor--show-code': true || codeView })}>
-        <div className="stage-editor__code" onClick={toggleCodeView}>
-          <pre>
-            <code>
-              { JSON.stringify(props.stage, null, 2) }
-            </code>
-          </pre>
-        </div>
+      <div className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
+        <CodeView toggleCodeView={toggleCodeView} />
         <Guided className="stage-editor__sections">
           <Section className="stage-editor-section">
             <Editor className="stage-editor-section__edit">
               <h1>Edit {type} Screen</h1>
-              <button onClick={toggleCodeView}>Show Code View</button>
+              <button type="button" onClick={toggleCodeView}>Show Code View</button>
             </Editor>
           </Section>
           { renderInterfaceSections({ stage: { ...props.stage }, ...rest }) }

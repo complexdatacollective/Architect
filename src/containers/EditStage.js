@@ -10,6 +10,8 @@ import StageEditor from '../components/StageEditor';
 class EditStage extends PureComponent {
   static propTypes = {
     dirty: PropTypes.bool.isRequired,
+    continue: PropTypes.func.isRequired,
+    onComplete: PropTypes.func.isRequired,
     stageId: PropTypes.string,
   };
 
