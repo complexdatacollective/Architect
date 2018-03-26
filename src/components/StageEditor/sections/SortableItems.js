@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, defaultProps } from 'recompose';
 import { Icon } from 'network-canvas-ui';
 import SortableItem from './SortableItem';
 import { SortableContainer } from 'react-sortable-hoc';
@@ -21,6 +21,7 @@ const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
 export { SortableItems };
 
 export default compose(
+  defaultProps({ lockAxis: 'y', useDragHandle: true }),
   withHandlers({
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
