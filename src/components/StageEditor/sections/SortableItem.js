@@ -8,7 +8,7 @@ const Handle = SortableHandle(() => (
   <div className="sortable-item__handle" />
 ));
 
-const SortableItem = ({ onDelete, children }) => (
+const SortableItem = ({ remove, children }) => (
   <div className="sortable-item">
     <Handle />
 
@@ -17,14 +17,14 @@ const SortableItem = ({ onDelete, children }) => (
     </div>
 
     <Button
-      onClick={onDelete}
+      onClick={remove}
       className="sortable-item__delete"
     ><Icon name="close" /></Button>
   </div>
 );
 
 SortableItem.propTypes = {
-  onDelete: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
   children: PropTypes.any,
 };
 

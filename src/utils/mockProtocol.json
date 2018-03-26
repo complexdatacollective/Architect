@@ -3,7 +3,13 @@
     "title": "Mock protocol"
   },
   "stages": [
-    { "id": 1, "type": "NameGenerator", "label": "foo", "subject": { "entity": "node", "type": "person" } },
+    {
+      "id": 1,
+      "type": "NameGenerator",
+      "label": "foo",
+      "subject": { "entity": "node", "type": "person" },
+      "prompts": [ { "id": 1, "text": "foo" }, { "id": 2, "text": "bar" } ]
+    },
     { "id": 2, "type": "Information" }
   ]
 }
