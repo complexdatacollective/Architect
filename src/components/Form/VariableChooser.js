@@ -4,13 +4,17 @@ import React, { Component } from 'react';
 import { toPairs, get } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { formValueSelector, Field, FieldArray } from 'redux-form';
 import cx from 'classnames';
 import SeamlessTextInput from './SeamlessTextInput';
-// import Button from './Button';
 import Select from './Select';
 import Modal from '../Modal';
 
-const getEditComponent = (name, value, options, onChange) => {
+const getEditComponent = (options) => {
+  return (props) => <input {...props} />;
+
   switch(options.type) {
     case 'boolean':
       return (
@@ -57,6 +61,19 @@ const getEditComponent = (name, value, options, onChange) => {
   }
 }
 
+const TagList = ({ editVariable, input: { value } }) => {
+  return toPairs(value)
+    .map(([name, value]) => (
+      <div
+        key={name}
+        onClick={() => editVariable(name)}
+        className="variable-chooser__variable"
+      >
+        <strong>{name}</strong>: <em>{value}</em>
+      </div>
+    ));
+};
+
 class VariableChooser extends Component {
   static propTypes = {
     values: PropTypes.object,
@@ -91,28 +108,21 @@ class VariableChooser extends Component {
     this.setState({ isEditing: false, editing: null });
   };
 
-  onChangeVariable = (name, value) => {
-    this.props.onChange({ ...this.props.values, [name]: value })
-  }
-
   render() {
-    const { values, variables, className } = this.props;
+    const { name, values, variables, className } = this.props;
     const variableChooserClasses = cx('variable-chooser', className);
 
     return (
       <div className={variableChooserClasses}>
         <div className="variable-chooser__variables">
-          { toPairs(values).map(([name, value]) => (
-            <div
-              key={name}
-              onClick={() => this.editVariable(name)}
-              className="variable-chooser__variable"
-            >
-              <strong>{name}</strong>: <em>{value}</em>
-            </div>
-          )) }
+          <Field
+            name={name}
+            component={TagList}
+            editVariable={this.editVariable}
+          />
           <Button
             className="variable-chooser__add"
+            type="button"
             onClick={this.openEditVariable}
           />
         </div>
@@ -140,17 +150,17 @@ class VariableChooser extends Component {
                 </Select>
               </div> :
               <div className="variable-chooser__modal-setting">
-                { getEditComponent(
-                  this.state.editing,
-                  get(values, this.state.editing),
-                  get(variables, this.state.editing),
-                  (newValue) => { console.log(this.state.editing, newValue); this.onChangeVariable(this.state.editing, newValue); }
-                ) }
+                <Field
+                  component="input"
+                  type="text"
+                  name={`${name}[${this.state.editing}]`}
+                />
               </div>
             }
             <div className="variable-chooser__modal-controls">
               <Button
                 onClick={this.closeEditVariable}
+                type="button"
                 size="small"
               >
                 {
@@ -165,8 +175,14 @@ class VariableChooser extends Component {
       </div>
     );
   }
-}
+};
+
+const mapStateToProps = (state) => ({
+  values: formValueSelector('edit-stage'),
+});
 
 export { VariableChooser };
 
-export default VariableChooser;
+export default compose(
+  connect(mapStateToProps),
+)(VariableChooser);

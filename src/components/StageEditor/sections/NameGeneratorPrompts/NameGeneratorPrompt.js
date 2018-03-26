@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { SeamlessTextInput } from '../../../Form';
+import { SeamlessTextInput, VariableChooser } from '../../../Form';
 
 const NameGeneratorPrompt = ({ fieldId, variables }) => (
   <div className="prompt">
@@ -16,13 +16,11 @@ const NameGeneratorPrompt = ({ fieldId, variables }) => (
     </div>
     <div className="prompt__setting">
       <div className="prompt__setting-label">Additional attributes</div>
-      { JSON.stringify(variables) }
-      {/* <VariableChooser
+      <VariableChooser
         className="prompt__setting-value"
-        values={additionalAttributes}
+        name={`${fieldId}.additionalAttributes`}
         variables={variables}
-        onChange={(newValue) => { onChange({ additionalAttributes: newValue }) }}
-      /> */}
+      />
     </div>
   </div>
 );
