@@ -1,64 +1,73 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { toPairs, get, sortBy } from 'lodash';
+import { toPairs, get, sortBy, toPath, last } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { formValueSelector, Field, FieldArray } from 'redux-form';
+import { formValueSelector, FieldArray, Field, FormSection } from 'redux-form';
 import cx from 'classnames';
 import SeamlessTextInput from './SeamlessTextInput';
-import OptionsInput from './OptionsInput';
+import OptionsInput from './OptionsInput'
+import ValidatedField from './ValidatedField'
 import Select from './Select';
 import Modal from '../Modal';
 
-const getEditComponentConfig = (options) => {
-  switch(options.type) {
+const getGeneralComponentProps = ({ validation, ...rest }) => ({
+  className: 'variable-chooser__modal-value',
+  validation,
+});
+
+const getEditComponentProps = (variables, variableName) => {
+  const variable = get(variables, variableName, {});
+  const generalComponentProps = getGeneralComponentProps(variable);
+
+  switch(variable.type) {
     case 'boolean':
       return {
+        ...generalComponentProps,
         component: OptionsInput,
         options: [true, false],
         optionComponent: ({ label }) => (<div>{label}</div>),
       };
     case 'number':
       return {
+        ...generalComponentProps,
         component: SeamlessTextInput,
-        className: 'variable-chooser__modal-value',
-        type: options.type,
+        type: variable.type,
       };
     case 'enumerable':
     case 'options':
       return {
+        ...generalComponentProps,
         component: OptionsInput,
-        options: options.options,
+        options: variable.options,
         optionComponent: ({ label }) => (<div>{label}</div>),
       };
     case 'text':
     default:
       return {
+        ...generalComponentProps,
         component: SeamlessTextInput,
-        className: 'variable-chooser__modal-value',
-        type: options.type,
+        type: 'text',
       };
   }
 }
 
-const TagList = ({ editVariable, input: { value } }) => {
-  return sortBy(
-      toPairs(value),
-      ([variableName]) => variableName,
-    )
-    .map(([variableName, variableValue]) => (
-      <div
-        key={variableName}
-        onClick={() => editVariable(variableName)}
-        className="variable-chooser__variable"
-      >
-        <strong>{variableName}</strong>: <em>{JSON.stringify(variableValue)}</em>
-      </div>
-    ));
-};
+const Tag = ({ editVariable, meta, input: { name: fieldName, value: fieldValue } }) => {
+  const variableName = last(toPath(fieldName));
+  console.log(meta);
+  return (
+    <div
+      key={fieldName}
+      onClick={() => editVariable(variableName)}
+      className="variable-chooser__variable"
+    >
+      <strong>{variableName}</strong>: <em>{JSON.stringify(fieldValue)}</em>
+    </div>
+  );
+}
 
 class VariableChooser extends Component {
   static propTypes = {
@@ -100,70 +109,78 @@ class VariableChooser extends Component {
 
     return (
       <div className={variableChooserClasses}>
-        <div className="variable-chooser__variables">
-          <Field
-            name={name}
-            component={TagList}
-            editVariable={this.editVariable}
-          />
-          <Button
-            className="variable-chooser__add"
-            type="button"
-            onClick={this.openEditVariable}
-          />
-        </div>
-        <Modal show={!!this.state.isEditing}>
-          <div className="variable-chooser__modal">
-            <h2 className="variable-chooser__modal-title">
-              {
-                !!this.state.editing ?
-                this.state.editing :
-                'Please select a variable to add/edit'
-              }
-            </h2>
-            { !this.state.editing ?
-              <div className="variable-chooser__modal-setting">
-                <Select
-                  className="variable-chooser__modal-value"
-                  onChange={this.editVariable}
-                  defaultValue=""
-                  value={this.state.editing || ''}
-                >
-                  <option value="" disabled>Variable name...</option>
-                  { toPairs(variables).map(([name]) => (
-                    <option key={name} value={name}>{name}</option>
-                  )) }
-                </Select>
-              </div> :
-              <div className="variable-chooser__modal-setting">
-                <Field
-                  {...getEditComponentConfig(get(variables, this.state.editing, null))}
-                  name={`${name}[${this.state.editing}]`}
-                />
-              </div>
-            }
-            <div className="variable-chooser__modal-controls">
-              <Button
-                onClick={this.closeEditVariable}
-                type="button"
-                size="small"
-              >
+        <FormSection name={name}>
+          <div className="variable-chooser__variables">
+              { toPairs(values).map(([name, value]) => {
+                console.log('tags', name, get(variables, [name, 'validation'], {}));
+                return (
+                  <ValidatedField
+                    name={name}
+                    component={Tag}
+                    editVariable={this.editVariable}
+                    validation={get(variables, [name, 'validation'], {})}
+                  />
+                );
+              }) }
+            <Button
+              className="variable-chooser__add"
+              type="button"
+              onClick={this.openEditVariable}
+            />
+          </div>
+          <Modal show={!!this.state.isEditing}>
+            <div className="variable-chooser__modal">
+              <h2 className="variable-chooser__modal-title">
                 {
                   !!this.state.editing ?
-                  'Done' :
-                  'Cancel'
+                  this.state.editing :
+                  'Please select a variable to add/edit'
                 }
-              </Button>
+              </h2>
+              { !this.state.editing ?
+                <div className="variable-chooser__modal-setting">
+                  <Select
+                    className="variable-chooser__modal-value"
+                    onChange={this.editVariable}
+                    defaultValue=""
+                    value={this.state.editing || ''}
+                  >
+                    <option value="" disabled>Variable name...</option>
+                    { toPairs(variables).map(([name]) => (
+                      <option key={name} value={name}>{name}</option>
+                    )) }
+                  </Select>
+                </div> :
+                <div className="variable-chooser__modal-setting">
+                  <ValidatedField
+                    {...getEditComponentProps(variables, this.state.editing)}
+                    name={`${this.state.editing}`}
+                  />
+                </div>
+              }
+              <div className="variable-chooser__modal-controls">
+                <Button
+                  onClick={this.closeEditVariable}
+                  type="button"
+                  size="small"
+                >
+                  {
+                    !!this.state.editing ?
+                    'Done' :
+                    'Cancel'
+                  }
+                </Button>
+              </div>
             </div>
-          </div>
-        </Modal>
+          </Modal>
+        </FormSection>
       </div>
     );
   }
 };
 
-const mapStateToProps = (state) => ({
-  values: formValueSelector('edit-stage'),
+const mapStateToProps = (state, props) => ({
+  values: formValueSelector('edit-stage')(state, props.name),
 });
 
 export { VariableChooser };

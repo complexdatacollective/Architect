@@ -110,8 +110,15 @@ export default compose(
     touchOnChange: true,
     enableReinitialize: true,
     onSubmit: (values, _, props) => {
+      console.log(values)
       props.updateStage(props.stageId, values);
       props.onComplete();
+    },
+    onSubmitFail: () => {
+      alert('FAIL!!');
+    },
+    onSubmitSuccess: () => {
+      alert('SUCCESS!!');
     },
   }),
 )(StageEditor);
