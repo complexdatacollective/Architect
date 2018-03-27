@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { Icon, animation } from 'network-canvas-ui';
 import { Zoom } from '../../behaviours';
-import { getCSSVariableAsString } from '../../utils/CSSVariables';
+import { getCSSVariableAsString, getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const zoomColors = [getCSSVariableAsString('--mustard'), getCSSVariableAsString('--mustard')];
 
@@ -37,7 +37,7 @@ class TimelineEditSkipLogic extends PureComponent {
       targets: el,
       opacity: [0, 1],
       strokeDashoffset: [offset, 0],
-      duration: animation.duration.standard,
+      duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
       easing: animation.easing.default,
       autoplay: false,
     });
