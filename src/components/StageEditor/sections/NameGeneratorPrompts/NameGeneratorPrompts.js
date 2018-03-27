@@ -8,8 +8,8 @@ import { Section, Editor, Guidance } from '../../../Guided';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
 import SortableItems from '../SortableItems';
 
-const NameGeneratorPromptsSection = ({ variables, ...props }) => (
-  <Section className="stage-editor-section" {...props}>
+const NameGeneratorPromptsSection = ({ variableRegistry }) => (
+  <Section className="stage-editor-section">
     <Editor className="stage-editor-section__edit">
       <h2>Prompts</h2>
       <p>Name gen prompt specific</p>
@@ -17,7 +17,7 @@ const NameGeneratorPromptsSection = ({ variables, ...props }) => (
         name="prompts"
         component={SortableItems}
         itemComponent={NameGeneratorPrompt}
-        variables={variables}
+        variableRegistry={variableRegistry}
       />
     </Editor>
     <Guidance className="stage-editor-section__guidance">
@@ -27,11 +27,11 @@ const NameGeneratorPromptsSection = ({ variables, ...props }) => (
 );
 
 NameGeneratorPromptsSection.propTypes = {
-  variables: PropTypes.array,
+  variableRegistry: PropTypes.object,
 };
 
 NameGeneratorPromptsSection.defaultProps = {
-  variables: [],
+  variableRegistry: {},
 };
 
 const mapStateToProps = (state, props) => {
@@ -41,7 +41,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     show: has(props, 'stage.subject.type'),
-    variables: variablesForNodeType,
+    variableRegistry: variablesForNodeType,
   };
 };
 

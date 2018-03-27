@@ -9,8 +9,8 @@ const required = value => (value ? undefined : 'Required');
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 
-const Title = ({ stage: { label }, onChange, ...props }) => (
-  <Section className="stage-editor-section" {...props}>
+const Title = ({ stage: { label }, onChange }) => (
+  <Section className="stage-editor-section">
     <Editor className="stage-editor-section__edit">
       <h2>Title</h2>
       <Field

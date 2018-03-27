@@ -44,9 +44,6 @@ const validations = {
   maxSelected,
 };
 
-const ranMe = (method, ...rest) =>
-  (...args) => { console.log('ran me!', { args, rest, result: method(...args) }); return method(...args); };
-
 /**
 * Returns the named validation function, if no matching one is found it returns a validation
 * which will always fail.
@@ -57,7 +54,7 @@ export const getValidations = validationOptions =>
     toPairs(validationOptions),
     ([type, options]) => (
       Object.hasOwnProperty.call(validations, type) ?
-        ranMe(validations[type](options), type, options) :
+        validations[type](options) :
         () => (`Validation "${type}" not found`)
     ),
   );

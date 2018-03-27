@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +15,6 @@ import {
   NodeType,
   Form,
   NameGeneratorPrompts,
-  Panels,
 } from './sections';
 import CodeView from './CodeView';
 
@@ -33,7 +31,6 @@ const interfaces = {
     NodeType,
     Form,
     NameGeneratorPrompts,
-    // Panels,
   ],
 };
 
@@ -57,7 +54,13 @@ const renderInterfaceSections = (props) => {
 };
 
 const StageEditor = (props) => {
-  const { stage: { type }, handleSubmit, toggleCodeView, codeView, showCodeView, hideCodeView, ...rest } = props;
+  const {
+    stage: { type },
+    stageId,
+    handleSubmit,
+    toggleCodeView,
+    codeView,
+  } = props;
 
   return (
     <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
@@ -69,7 +72,7 @@ const StageEditor = (props) => {
             <button type="button" onClick={toggleCodeView}>Show Code View</button>
           </Editor>
         </Section>
-        { renderInterfaceSections({ stage: { ...props.stage }, ...rest }) }
+        { renderInterfaceSections({ stage: { ...props.stage }, stageId }) }
       </Guided>
     </ReduxForm>
   );
@@ -77,8 +80,10 @@ const StageEditor = (props) => {
 
 StageEditor.propTypes = {
   stage: PropTypes.object.isRequired,
+  stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   toggleCodeView: PropTypes.func.isRequired,
   codeView: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 function makeMapStateToProps() {
@@ -100,8 +105,6 @@ export default compose(
   connect(makeMapStateToProps, mapDispatchToProps),
   withState('codeView', 'toggleCodeView', false),
   withHandlers({
-    showCodeView: ({ toggleCodeView }) => () => toggleCodeView(true),
-    hideCodeView: ({ toggleCodeView }) => () => toggleCodeView(false),
     toggleCodeView: ({ toggleCodeView }) => () => toggleCodeView(current => !current),
   }),
   reduxForm({
@@ -110,15 +113,11 @@ export default compose(
     touchOnChange: true,
     enableReinitialize: true,
     onSubmit: (values, _, props) => {
-      console.log(values)
       props.updateStage(props.stageId, values);
       props.onComplete();
     },
     onSubmitFail: () => {
       alert('FAIL!!');
-    },
-    onSubmitSuccess: () => {
-      alert('SUCCESS!!');
     },
   }),
 )(StageEditor);

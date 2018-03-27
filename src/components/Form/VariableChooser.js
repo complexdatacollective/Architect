@@ -1,20 +1,18 @@
-/* eslint-disable */
-
 import React, { Component } from 'react';
-import { toPairs, get, sortBy, toPath, last } from 'lodash';
+import { toPairs, get, toPath, last } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { formValueSelector, FieldArray, Field, FormSection } from 'redux-form';
+import { formValueSelector, FormSection } from 'redux-form';
 import cx from 'classnames';
 import SeamlessTextInput from './SeamlessTextInput';
-import OptionsInput from './OptionsInput'
-import ValidatedField from './ValidatedField'
+import OptionsInput from './OptionsInput';
+import ValidatedField from './ValidatedField';
 import Select from './Select';
 import Modal from '../Modal';
 
-const getGeneralComponentProps = ({ validation, ...rest }) => ({
+const getGeneralComponentProps = ({ validation }) => ({
   className: 'variable-chooser__modal-value',
   validation,
 });
@@ -23,13 +21,13 @@ const getEditComponentProps = (variables, variableName) => {
   const variable = get(variables, variableName, {});
   const generalComponentProps = getGeneralComponentProps(variable);
 
-  switch(variable.type) {
+  switch (variable.type) {
     case 'boolean':
       return {
         ...generalComponentProps,
         component: OptionsInput,
         options: [true, false],
-        optionComponent: ({ label }) => (<div>{label}</div>),
+        optionComponent: ({ label }) => (<div>{label}</div>), // eslint-disable-line
       };
     case 'number':
       return {
@@ -43,7 +41,7 @@ const getEditComponentProps = (variables, variableName) => {
         ...generalComponentProps,
         component: OptionsInput,
         options: variable.options,
-        optionComponent: ({ label }) => (<div>{label}</div>),
+        optionComponent: ({ label }) => (<div>{label}</div>), // eslint-disable-line
       };
     case 'text':
     default:
@@ -53,31 +51,39 @@ const getEditComponentProps = (variables, variableName) => {
         type: 'text',
       };
   }
-}
+};
 
-const Tag = ({ editVariable, meta, input: { name: fieldName, value: fieldValue } }) => {
+// eslint-disable-next-line
+const Tag = ({ editVariable, meta: { invalid }, input: { name: fieldName, value: fieldValue } }) => {
   const variableName = last(toPath(fieldName));
+  const tagClasses = cx(
+    'variable-chooser__variable',
+    { 'variable-chooser__variable--has-error': invalid },
+  );
+  const displayValue = JSON.stringify(fieldValue);
+
   return (
     <div
       key={fieldName}
       onClick={() => editVariable(variableName)}
-      className="variable-chooser__variable"
+      className={tagClasses}
     >
-      <strong>{variableName}</strong>: {meta.error || "no error" } <em>{JSON.stringify(fieldValue)}</em>
+      <strong>{variableName}</strong>: <em>{displayValue}</em>
     </div>
   );
-}
+};
 
 class VariableChooser extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     values: PropTypes.object,
-    variables: PropTypes.object,
+    variableRegistry: PropTypes.object,
     className: PropTypes.string,
   };
 
   static defaultProps = {
     values: {},
-    variables: {},
+    variableRegistry: {},
     className: '',
   };
 
@@ -103,23 +109,25 @@ class VariableChooser extends Component {
   };
 
   render() {
-    const { name, values, variables, className } = this.props;
+    const { name, values, variableRegistry, className } = this.props;
     const variableChooserClasses = cx('variable-chooser', className);
 
     return (
       <div className={variableChooserClasses}>
         <FormSection name={name}>
           <div className="variable-chooser__variables">
-              { toPairs(values).map(([name, value]) => {
-                return (
+            {
+              toPairs(values)
+                .map(([variableName]) => (
                   <ValidatedField
-                    name={name}
+                    key={variableName}
+                    name={variableName}
                     component={Tag}
                     editVariable={this.editVariable}
-                    validation={get(variables, [name, 'validation'], {})}
+                    validation={get(variableRegistry, [variableName, 'validation'], {})}
                   />
-                );
-              }) }
+                ))
+            }
             <Button
               className="variable-chooser__add"
               type="button"
@@ -130,9 +138,9 @@ class VariableChooser extends Component {
             <div className="variable-chooser__modal">
               <h2 className="variable-chooser__modal-title">
                 {
-                  !!this.state.editing ?
-                  this.state.editing :
-                  'Please select a variable to add/edit'
+                  this.state.editing ?
+                    this.state.editing :
+                    'Please select a variable to add/edit'
                 }
               </h2>
               { !this.state.editing ?
@@ -144,14 +152,17 @@ class VariableChooser extends Component {
                     value={this.state.editing || ''}
                   >
                     <option value="" disabled>Variable name...</option>
-                    { toPairs(variables).map(([name]) => (
-                      <option key={name} value={name}>{name}</option>
-                    )) }
+                    {
+                      toPairs(variableRegistry)
+                        .map(([variableName]) => (
+                          <option key={variableName} value={variableName}>{variableName}</option>
+                        ))
+                    }
                   </Select>
                 </div> :
                 <div className="variable-chooser__modal-setting">
                   <ValidatedField
-                    {...getEditComponentProps(variables, this.state.editing)}
+                    {...getEditComponentProps(variableRegistry, this.state.editing)}
                     name={`${this.state.editing}`}
                   />
                 </div>
@@ -163,9 +174,9 @@ class VariableChooser extends Component {
                   size="small"
                 >
                   {
-                    !!this.state.editing ?
-                    'Done' :
-                    'Cancel'
+                    this.state.editing ?
+                      'Done' :
+                      'Cancel'
                   }
                 </Button>
               </div>
@@ -175,7 +186,7 @@ class VariableChooser extends Component {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = (state, props) => ({
   values: formValueSelector('edit-stage')(state, props.name),

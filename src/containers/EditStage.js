@@ -12,7 +12,7 @@ class EditStage extends PureComponent {
     dirty: PropTypes.bool.isRequired,
     continue: PropTypes.func.isRequired,
     onComplete: PropTypes.func.isRequired,
-    stageId: PropTypes.string,
+    stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { SeamlessTextInput, VariableChooser } from '../../../Form';
 
-const NameGeneratorPrompt = ({ fieldId, variables }) => (
+const NameGeneratorPrompt = ({ fieldId, variableRegistry }) => (
   <div className="prompt">
     <div className="prompt__setting">
       <div className="prompt__setting-label">Text for prompt</div>
@@ -19,7 +19,7 @@ const NameGeneratorPrompt = ({ fieldId, variables }) => (
       <VariableChooser
         className="prompt__setting-value"
         name={`${fieldId}.additionalAttributes`}
-        variables={variables}
+        variableRegistry={variableRegistry}
       />
     </div>
   </div>
@@ -27,13 +27,11 @@ const NameGeneratorPrompt = ({ fieldId, variables }) => (
 
 NameGeneratorPrompt.propTypes = {
   fieldId: PropTypes.string.isRequired,
-  // index: PropTypes.number.isRequired,
-  // fields: PropTypes.object.isRequired,
-  variables: PropTypes.array,
+  variableRegistry: PropTypes.object,
 };
 
 NameGeneratorPrompt.defaultProps = {
-  variables: [],
+  variableRegistry: {},
 };
 
 export { NameGeneratorPrompt };

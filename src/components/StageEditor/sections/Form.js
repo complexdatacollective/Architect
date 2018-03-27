@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field, getFormValues, change as changeForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, get, pickBy, isNull } from 'lodash';
+import { keys, has, get, pickBy, isNull } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
 import { OptionsInput } from '../../../components/Form';
 
@@ -39,7 +39,7 @@ class Form extends Component {
 
   onSelectFormCategory = (formType) => {
     if (formType === DEFAULT_FORM || this.props.stage.form === '') {
-      this.props.dispatch(changeForm('edit-stage', 'form', null));
+      this.props.reset();
     }
   };
 
@@ -48,10 +48,10 @@ class Form extends Component {
   };
 
   render() {
-    const { stage: { form }, show, forms, dispatch, ...props } = this.props;
+    const { stage: { form }, show, forms } = this.props;
 
     return (
-      <Section className="stage-editor-section" show={show} {...props}>
+      <Section className="stage-editor-section" show={show}>
         <Editor className="stage-editor-section__edit">
           <h2>Form</h2>
           <p>Which form should be used to create and edit nodes on this stage?</p>
@@ -105,13 +105,17 @@ const mapStateToProps = (state, props) => {
 
   return {
     forms: getForms(state, stage),
-    show: get(props, 'stage.subject.type', false),
+    show: has(props, 'stage.subject.type'),
     stage,
   };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  reset: () => dispatch(changeForm('edit-stage', 'form', null)),
+});
+
 export { Form };
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Form);

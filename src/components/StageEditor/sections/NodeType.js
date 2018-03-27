@@ -31,13 +31,11 @@ class NodeType extends Component {
     const {
       nodeTypes,
       disabled,
-      onChange,
-      dispatch,
-      ...props
+      onChange
     } = this.props;
 
     return (
-      <Section className="stage-editor-section" {...props}>
+      <Section className="stage-editor-section">
         <Editor className="stage-editor-section__edit" disabled={disabled}>
           <div style={{ opacity: (disabled ? '0.67' : '1') }}>
             <h2>Node Type</h2>
@@ -69,7 +67,6 @@ NodeType.propTypes = {
   nodeTypes: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  dispatch: PropTypes.func.isRequired,
 };
 
 NodeType.defaultProps = {
