@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { Icon, animation } from 'network-canvas-ui';
 import { Zoom } from '../../behaviours';
-import getCSSVariable from '../../utils/getCSSVariable';
+import { getCSSVariableAsString } from '../../utils/CSSVariables';
 
-const zoomColors = [getCSSVariable('--mustard'), getCSSVariable('--mustard')];
+const zoomColors = [getCSSVariableAsString('--mustard'), getCSSVariableAsString('--mustard')];
 
 const SkipLogicButton = Zoom(
   ({ onEditSkipLogic, onMouseEnterSkipLogic, onMouseLeaveSkipLogic }) => (

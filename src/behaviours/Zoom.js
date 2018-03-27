@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { getContext } from 'recompose';
-import { animation } from 'network-canvas-ui';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';

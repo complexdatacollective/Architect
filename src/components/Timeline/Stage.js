@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Zoom } from '../../behaviours';
 import EditSkipLogic from './EditSkipLogic';
-import getCSSVariable from '../../utils/getCSSVariable';
+import { getCSSVariableAsString } from '../../utils/CSSVariables';
 
-const zoomColors = [getCSSVariable('--light-background'), getCSSVariable('--white')];
+const zoomColors = [getCSSVariableAsString('--light-background'), getCSSVariableAsString('--white')];
 
 const EditStageButton = Zoom(
   ({

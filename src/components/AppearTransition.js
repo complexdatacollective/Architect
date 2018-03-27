@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
-import { animation } from 'network-canvas-ui';
 import anime from 'animejs';
+import { getCSSVariableAsNumber } from '../utils/CSSVariables';
 
 const appear = {
   opacity: [0, 1],
   scale: [0, 1],
-  duration: animation.duration.fast,
+  duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
 };
 
 const disappear = {
@@ -15,12 +15,12 @@ const disappear = {
   scale: [1, 0],
   height: 0,
   margin: 0,
-  duration: animation.duration.fast,
+  duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
 };
 
 const AppearTransition = ({ children, ...props }) => (
   <Transition
-    timeout={animation.duration.fast}
+    timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
     onEnter={
       (el) => {
         anime({
