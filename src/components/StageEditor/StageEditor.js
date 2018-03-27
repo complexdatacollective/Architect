@@ -60,19 +60,17 @@ const StageEditor = (props) => {
   const { stage: { type }, handleSubmit, toggleCodeView, codeView, showCodeView, hideCodeView, ...rest } = props;
 
   return (
-    <ReduxForm onSubmit={handleSubmit}>
-      <div className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
-        <CodeView toggleCodeView={toggleCodeView} />
-        <Guided className="stage-editor__sections">
-          <Section className="stage-editor-section">
-            <Editor className="stage-editor-section__edit">
-              <h1>Edit {type} Screen</h1>
-              <button type="button" onClick={toggleCodeView}>Show Code View</button>
-            </Editor>
-          </Section>
-          { renderInterfaceSections({ stage: { ...props.stage }, ...rest }) }
-        </Guided>
-      </div>
+    <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
+      <CodeView toggleCodeView={toggleCodeView} />
+      <Guided className="stage-editor__sections">
+        <Section className="stage-editor-section">
+          <Editor className="stage-editor-section__edit">
+            <h1>Edit {type} Screen</h1>
+            <button type="button" onClick={toggleCodeView}>Show Code View</button>
+          </Editor>
+        </Section>
+        { renderInterfaceSections({ stage: { ...props.stage }, ...rest }) }
+      </Guided>
     </ReduxForm>
   );
 };

@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { toPairs, get } from 'lodash';
+import { toPairs, get, sortBy } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
@@ -9,67 +9,53 @@ import { connect } from 'react-redux';
 import { formValueSelector, Field, FieldArray } from 'redux-form';
 import cx from 'classnames';
 import SeamlessTextInput from './SeamlessTextInput';
+import OptionsInput from './OptionsInput';
 import Select from './Select';
 import Modal from '../Modal';
 
-const getEditComponent = (options) => {
-  return (props) => <input {...props} />;
-
+const getEditComponentConfig = (options) => {
   switch(options.type) {
     case 'boolean':
-      return (
-        <div className="variable-chooser__modal-value">
-          <input type="radio" name={name} value="true" onChange={(event) => onChange(event.target.value)} /> True
-          <input type="radio" name={name} value="false" onChange={(event) => onChange(event.target.value)} /> False
-        </div>
-      );
+      return {
+        component: OptionsInput,
+        options: [true, false],
+        optionComponent: ({ label }) => (<div>{label}</div>),
+      };
     case 'number':
-      return (
-        <SeamlessTextInput
-          className="variable-chooser__modal-value"
-          onChange={onChange}
-          type={options.type}
-          value={value}
-        />
-      );
+      return {
+        component: SeamlessTextInput,
+        className: 'variable-chooser__modal-value',
+        type: options.type,
+      };
     case 'enumerable':
     case 'options':
-      return (
-        <div className="variable-chooser__modal-value">
-          {options.options.map((option) => (
-            <div>
-              <input
-                type="radio"
-                name={name}
-                value={option}
-                onChange={(event) => onChange(event.target.value)}
-                checked={value == option}
-              /> {option}
-            </div>
-          ))}
-        </div>
-      );
+      return {
+        component: OptionsInput,
+        options: options.options,
+        optionComponent: ({ label }) => (<div>{label}</div>),
+      };
     case 'text':
     default:
-      return (
-        <SeamlessTextInput
-          className="variable-chooser__modal-value"
-          onChange={onChange}
-          value={value}
-        />
-      );
+      return {
+        component: SeamlessTextInput,
+        className: 'variable-chooser__modal-value',
+        type: options.type,
+      };
   }
 }
 
 const TagList = ({ editVariable, input: { value } }) => {
-  return toPairs(value)
-    .map(([name, value]) => (
+  return sortBy(
+      toPairs(value),
+      ([variableName]) => variableName,
+    )
+    .map(([variableName, variableValue]) => (
       <div
-        key={name}
-        onClick={() => editVariable(name)}
+        key={variableName}
+        onClick={() => editVariable(variableName)}
         className="variable-chooser__variable"
       >
-        <strong>{name}</strong>: <em>{value}</em>
+        <strong>{variableName}</strong>: <em>{JSON.stringify(variableValue)}</em>
       </div>
     ));
 };
@@ -151,8 +137,7 @@ class VariableChooser extends Component {
               </div> :
               <div className="variable-chooser__modal-setting">
                 <Field
-                  component="input"
-                  type="text"
+                  {...getEditComponentConfig(get(variables, this.state.editing, null))}
                   name={`${name}[${this.state.editing}]`}
                 />
               </div>

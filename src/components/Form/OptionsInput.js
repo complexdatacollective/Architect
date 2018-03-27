@@ -32,8 +32,10 @@ class OptionsInput extends Component {
       ...rest
     } = this.props;
 
-    // eslint-disable-next-line
-    if (!has(option, 'value')) { option = { value: option }; }
+    if (!has(option, 'value')) {
+      // eslint-disable-next-line
+      option = { value: option, label: JSON.stringify(option) };
+    }
 
     const selected = (value === option.value ? { selected: true } : {});
 
