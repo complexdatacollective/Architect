@@ -17,7 +17,7 @@
             "validation": {
               "required": true,
               "minLength": 1,
-              "maxLength": 24
+              "maxLength": 5
             }
           },
           "age": {
@@ -103,7 +103,7 @@
       "label": "foo",
       "subject": { "entity": "node", "type": "person" },
       "prompts": [
-        { "id": 1, "text": "foo" },
+        { "id": 1, "text": "foo", "additionalAttributes": { "name": "not actually valid" } },
         { "id": 2, "text": "bar", "additionalAttributes": { "close_friend": true, "support_friend": true } }
       ]
     },

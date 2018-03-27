@@ -57,14 +57,13 @@ const getEditComponentProps = (variables, variableName) => {
 
 const Tag = ({ editVariable, meta, input: { name: fieldName, value: fieldValue } }) => {
   const variableName = last(toPath(fieldName));
-  console.log(meta);
   return (
     <div
       key={fieldName}
       onClick={() => editVariable(variableName)}
       className="variable-chooser__variable"
     >
-      <strong>{variableName}</strong>: <em>{JSON.stringify(fieldValue)}</em>
+      <strong>{variableName}</strong>: {meta.error || "no error" } <em>{JSON.stringify(fieldValue)}</em>
     </div>
   );
 }
@@ -112,7 +111,6 @@ class VariableChooser extends Component {
         <FormSection name={name}>
           <div className="variable-chooser__variables">
               { toPairs(values).map(([name, value]) => {
-                console.log('tags', name, get(variables, [name, 'validation'], {}));
                 return (
                   <ValidatedField
                     name={name}
