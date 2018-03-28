@@ -5,7 +5,7 @@ import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { formValueSelector, FormSection, change } from 'redux-form';
+import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
 import SeamlessTextInput from './SeamlessTextInput';
 import OptionsInput from './OptionsInput';
@@ -193,15 +193,13 @@ class VariableChooser extends Component {
   }
 }
 
-const formSelector = formValueSelector('edit-stage');
-
-const mapStateToProps = (state, props) => ({
-  values: formSelector(state, props.name),
+const mapStateToProps = (state, { name, form }) => ({
+  values: form.getValues(state, name),
 });
 
-const mapDispatchToProps = (dispatch, { name }) => ({
+const mapDispatchToProps = (dispatch, { name, form }) => ({
   change: bindActionCreators(
-    value => change('edit-stage', name, value),
+    value => change(form.name, name, value),
     dispatch,
   ),
 });

@@ -22,8 +22,8 @@ CodeView.defaultProps = {
   stage: {},
 };
 
-const mapStateToProps = state => ({
-  stage: getFormValues('edit-stage')(state),
+const mapStateToProps = (state, { form }) => ({
+  stage: getFormValues(form.name)(state),
 });
 
 export default connect(mapStateToProps)(CodeView);

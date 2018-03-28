@@ -1,25 +1,27 @@
-/* eslint-disable */
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Icon } from 'network-canvas-ui';
+import { fieldPropTypes } from 'redux-form';
 
 class SeamlessTextInput extends PureComponent {
   static propTypes = {
     input: PropTypes.object,
     meta: PropTypes.object,
+    className: PropTypes.string,
+    ...fieldPropTypes,
   };
 
   static defaultProps = {
     input: {},
     meta: {},
+    className: '',
   };
 
   render() {
     const {
       input,
-      meta: { dirty, error, warning },
+      meta: { dirty, error },
       className,
       placeholder,
       type,

@@ -1,10 +1,9 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, formValueSelector } from 'redux-form';
+import { Field } from 'redux-form';
 import { get } from 'lodash';
-import { Button, MarkdownInput, ImageInput, AudioInput, VideoInput, SeamlessTextInput } from '../../../components/Form';
+import { MarkdownInput, ImageInput, AudioInput, VideoInput } from '../../../components/Form';
 
 const contentInputs = {
   text: MarkdownInput,
@@ -13,8 +12,7 @@ const contentInputs = {
   video: VideoInput,
 };
 
-const getContentInput = (type) =>
-  get(contentInputs, type, MarkdownInput);
+const getContentInput = type => get(contentInputs, type, MarkdownInput);
 
 const ContentItem = ({ fieldId, type }) => {
   const ContentInput = getContentInput(type);
@@ -31,12 +29,11 @@ const ContentItem = ({ fieldId, type }) => {
 
 ContentItem.propTypes = {
   fieldId: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
-const formValue = formValueSelector('edit-stage');
-
-const mapStateToProps = (state, { fieldId }) => ({
-  type: formValue(state, `${fieldId}.type`),
-})
+const mapStateToProps = (state, { fieldId, form }) => ({
+  type: form.getValues(state, `${fieldId}.type`),
+});
 
 export default connect(mapStateToProps)(ContentItem);

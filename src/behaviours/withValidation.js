@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { withPropsOnChange } from 'recompose';
 import { getValidations } from '../utils/validations';
 

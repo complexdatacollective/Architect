@@ -1,12 +1,10 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field, getFormValues, change as changeForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, has, get, pickBy, isNull } from 'lodash';
+import { keys, has, get, pickBy, uniqueId } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
-import { OptionsInput } from '../../../components/Form';
 
 const DEFAULT_FORM = Symbol('DEFAULT_FORM');
 const CUSTOM_FORM = Symbol('CUSTOM_FORM');
@@ -15,10 +13,12 @@ class Form extends Component {
   static propTypes = {
     stage: PropTypes.object,
     forms: PropTypes.arrayOf(PropTypes.string),
-    dispatch: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    reset: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
+    show: false,
     stage: {},
     forms: [],
   };
@@ -29,6 +29,10 @@ class Form extends Component {
     this.state = {
       formType: props.stage.form ? CUSTOM_FORM : DEFAULT_FORM,
     };
+  }
+
+  componentWillMount() {
+    this.id = uniqueId('label');
   }
 
   componentWillReceiveProps({ stage: { form } }) {
@@ -48,20 +52,31 @@ class Form extends Component {
   };
 
   render() {
-    const { stage: { form }, show, forms } = this.props;
+    const { show, forms } = this.props;
 
     return (
       <Section className="stage-editor-section" show={show}>
         <Editor className="stage-editor-section__edit">
           <h2>Form</h2>
           <p>Which form should be used to create and edit nodes on this stage?</p>
-          <label onClick={() => this.onSelectFormCategory(DEFAULT_FORM)}>
-            <input type="radio" checked={this.state.formType === DEFAULT_FORM} readOnly />
+          <label htmlFor={`${this.id}_default`}>
+            <input
+              id={`${this.id}_default`}
+              type="radio"
+              onChange={() => this.onSelectFormCategory(DEFAULT_FORM)}
+              checked={this.state.formType === DEFAULT_FORM}
+              readOnly
+            />
             Use the default node form
           </label>
           <div>
-            <label>
-              <input type="radio" checked={this.state.formType === CUSTOM_FORM} readOnly  />
+            <label htmlFor={`${this.id}_custom`}>
+              <input
+                type="radio"
+                checked={this.state.formType === CUSTOM_FORM}
+                id={`${this.id}_custom`}
+                readOnly
+              />
               Use a different form
             </label>
             <Field
@@ -69,11 +84,11 @@ class Form extends Component {
               component="select"
             >
               <option disabled="disabled" value="">Select a form...</option>
-              { forms.map((formName) =>
+              { forms.map(formName => (
                 <option value={formName} key={formName}>
                   {formName}
-                </option>)
-              }
+                </option>
+              )) }
             </Field>
           </div>
           <div onClick={this.onClickCreateNewForm}>
@@ -89,29 +104,30 @@ class Form extends Component {
   }
 }
 
-const getForms = (state, stage) => {
+const getNodeForms = (state, stage) => {
   const forms = get(state, 'protocol.present.forms', {});
   const nodeType = get(stage, 'subject.type', null);
 
-  const validForms = pickBy(forms, form => {
-    return form.type === nodeType && form.entity === 'node';
-  });
+  const validForms = pickBy(
+    forms,
+    form => form.type === nodeType && form.entity === 'node',
+  );
 
   return keys(validForms);
 };
 
 const mapStateToProps = (state, props) => {
-  const stage = getFormValues('edit-stage')(state);
+  const stage = getFormValues(props.form.name)(state);
 
   return {
-    forms: getForms(state, stage),
-    show: has(props, 'stage.subject.type'),
+    forms: getNodeForms(state, stage),
+    show: has(stage, 'subject.type'),
     stage,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  reset: () => dispatch(changeForm('edit-stage', 'form', null)),
+const mapDispatchToProps = (dispatch, { form }) => ({
+  reset: () => dispatch(changeForm(form.name, 'form', null)),
 });
 
 export { Form };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reduxForm, Form as ReduxForm } from 'redux-form';
+import { reduxForm, Form as ReduxForm, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
@@ -17,6 +17,10 @@ import {
   NameGeneratorPrompts,
 } from './sections';
 import CodeView from './CodeView';
+
+const formName = 'edit-stage';
+const getFormValues = formValueSelector(formName);
+const form = { name: formName, getValues: getFormValues };
 
 const defaultStage = {
 };
@@ -64,7 +68,7 @@ const StageEditor = (props) => {
 
   return (
     <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
-      <CodeView toggleCodeView={toggleCodeView} />
+      <CodeView toggleCodeView={toggleCodeView} form={form} />
       <Guided className="stage-editor__sections">
         <Section className="stage-editor-section">
           <Editor className="stage-editor-section__edit">
@@ -72,7 +76,13 @@ const StageEditor = (props) => {
             <button type="button" onClick={toggleCodeView}>Show Code View</button>
           </Editor>
         </Section>
-        { renderInterfaceSections({ stage: { ...props.stage }, stageId }) }
+        {
+          renderInterfaceSections({
+            stage: { ...props.stage },
+            stageId,
+            form,
+          })
+        }
       </Guided>
     </ReduxForm>
   );
@@ -103,12 +113,12 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   connect(makeMapStateToProps, mapDispatchToProps),
-  withState('codeView', 'toggleCodeView', false),
+  withState('codeView', 'updateCodeView', false),
   withHandlers({
-    toggleCodeView: ({ toggleCodeView }) => () => toggleCodeView(current => !current),
+    toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
   }),
   reduxForm({
-    form: 'edit-stage',
+    form: formName,
     touchOnBlur: false,
     touchOnChange: true,
     enableReinitialize: true,

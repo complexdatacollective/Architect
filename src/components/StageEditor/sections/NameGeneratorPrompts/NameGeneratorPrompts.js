@@ -10,9 +10,7 @@ import NameGeneratorPrompt from './NameGeneratorPrompt';
 import SortableItems from '../SortableItems';
 
 
-const addNewPrompt = () => arrayPush('edit-stage', 'prompts', {});
-
-const NameGeneratorPromptsSection = ({ variableRegistry, ...props }) => (
+const NameGeneratorPromptsSection = ({ variableRegistry, form, ...props }) => (
   <Section className="stage-editor-section">
     <Editor className="stage-editor-section__edit">
       <h2>Prompts</h2>
@@ -22,6 +20,7 @@ const NameGeneratorPromptsSection = ({ variableRegistry, ...props }) => (
         component={SortableItems}
         itemComponent={NameGeneratorPrompt}
         variableRegistry={variableRegistry}
+        form={form}
       />
       <button type="button" onClick={props.addNewPrompt}>+</button>
     </Editor>
@@ -33,6 +32,10 @@ const NameGeneratorPromptsSection = ({ variableRegistry, ...props }) => (
 
 NameGeneratorPromptsSection.propTypes = {
   variableRegistry: PropTypes.object,
+  form: PropTypes.shape({
+    name: PropTypes.string,
+    getValues: PropTypes.func,
+  }).isRequired,
   addNewPrompt: PropTypes.func.isRequired,
 };
 
@@ -40,19 +43,22 @@ NameGeneratorPromptsSection.defaultProps = {
   variableRegistry: {},
 };
 
-const mapStateToProps = (state, props) => {
+const getVariablesFormNodeType = (state, props) => {
   const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
   const { type } = get(props, 'stage.subject', {});
-  const variablesForNodeType = get(variableRegistry, ['node', type, 'variables'], {});
-
-  return {
-    show: has(props, 'stage.subject.type'),
-    variableRegistry: variablesForNodeType,
-  };
+  return get(variableRegistry, ['node', type, 'variables'], {});
 };
 
-const mapDispatchToProps = dispatch => ({
-  addNewPrompt: bindActionCreators(addNewPrompt, dispatch),
+const mapStateToProps = (state, props) => ({
+  show: has(props, 'stage.subject.type'),
+  variableRegistry: getVariablesFormNodeType(state, props),
+});
+
+const mapDispatchToProps = (dispatch, { form: { name } }) => ({
+  addNewPrompt: bindActionCreators(
+    () => arrayPush(name, 'prompts', {}),
+    dispatch,
+  ),
 });
 
 export { NameGeneratorPromptsSection };

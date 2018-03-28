@@ -8,7 +8,6 @@ import { Button } from '../../../components/Form';
 import SortableItems from './SortableItems';
 import ContentItem from './ContentItem';
 
-// eslint-disable-next-line
 const AddButton = ({ onClick, type, children }) => (
   <Button
     type="button"
@@ -19,7 +18,11 @@ const AddButton = ({ onClick, type, children }) => (
   </Button>
 );
 
-const createNewItem = type => arrayPush('edit-stage', 'items', { type });
+AddButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+};
 
 const ContentItems = props => (
   <Section className="stage-editor-section">
@@ -31,6 +34,7 @@ const ContentItems = props => (
           name="items"
           component={SortableItems}
           itemComponent={ContentItem}
+          form={props.form}
         />
 
         <div className="stage-editor-section-content-items__controls">
@@ -49,10 +53,17 @@ const ContentItems = props => (
 
 ContentItems.propTypes = {
   createNewItem: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    name: PropTypes.string,
+    getValues: PropTypes.func,
+  }).isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  createNewItem: bindActionCreators(createNewItem, dispatch),
+const mapDispatchToProps = (dispatch, { form }) => ({
+  createNewItem: bindActionCreators(
+    type => arrayPush(form.name, 'items', { type }),
+    dispatch,
+  ),
 });
 
 export default connect(null, mapDispatchToProps)(ContentItems);

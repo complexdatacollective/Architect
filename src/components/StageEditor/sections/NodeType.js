@@ -1,29 +1,34 @@
-/* eslint-disable */
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, get, pick, difference } from 'lodash';
+import { keys, get, difference } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
 import { OptionsInput, Button } from '../../../components/Form';
 
-// eslint-disable-next-line
 const NodeTypeOption = ({ selected, value }) => (
   <div className="edit-stage-node-type__option">
     {value} {selected && ' (selected)'}
   </div>
 );
 
+NodeTypeOption.propTypes = {
+  selected: PropTypes.bool,
+  value: PropTypes.string.isRequired,
+};
+
+NodeTypeOption.defaultProps = {
+  selected: false,
+};
+
 class NodeType extends Component {
   resetStage() {
+    const { stage, resetField } = this.props;
     // eslint-disable-next-line
     if (confirm('Really? this will reset everything so far!')) {
-      const fieldsToReset = difference(keys(this.props.stage), ['id', 'type', 'label']);
+      const fieldsToReset = difference(keys(stage), ['id', 'type', 'label']);
 
-      fieldsToReset.forEach((field) => {
-        this.props.resetField(field);
-      });
+      fieldsToReset.forEach(resetField);
     }
   }
 
@@ -31,7 +36,6 @@ class NodeType extends Component {
     const {
       nodeTypes,
       disabled,
-      onChange
     } = this.props;
 
     return (
@@ -65,27 +69,28 @@ class NodeType extends Component {
 
 NodeType.propTypes = {
   nodeTypes: PropTypes.arrayOf(PropTypes.string),
-  onChange: PropTypes.func,
   disabled: PropTypes.bool,
+  stage: PropTypes.object.isRequired,
+  resetField: PropTypes.func.isRequired,
 };
 
 NodeType.defaultProps = {
   nodeTypes: [],
   disabled: false,
-  onChange: () => {},
 };
 
-const mapStateToProps = (state, props) => {
-  const stage = getFormValues('edit-stage')(state);
+const mapStateToProps = (state, { form }) => {
+  const stage = getFormValues(form.name)(state);
+
   return {
     nodeTypes: keys(state.protocol.present.variableRegistry.node),
     disabled: !!get(stage, 'subject.type'),
     stage,
   };
-}
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  resetField: (field) => dispatch(changeField('edit-stage', field, null)),
+const mapDispatchToProps = (dispatch, { form }) => ({
+  resetField: field => dispatch(changeField(form.name, field, null)),
 });
 
 export { NodeType };
