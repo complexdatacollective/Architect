@@ -5,17 +5,17 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { uniqueId } from 'lodash';
 import cx from 'classnames';
+import { fieldPropTypes } from 'redux-form';
 import { actionCreators as assetActions } from '../../ducks/modules/protocol/assets';
 
 class FileInput extends PureComponent {
   static propTypes = {
-    onChange: PropTypes.func.isRequired,
     importAsset: PropTypes.func.isRequired,
     className: PropTypes.string,
     completeClassName: PropTypes.string,
-    value: PropTypes.string,
     accept: PropTypes.string,
     children: PropTypes.func,
+    ...fieldPropTypes,
   };
 
   static defaultProps = {
@@ -34,14 +34,14 @@ class FileInput extends PureComponent {
     acceptedFiles.forEach((file) => {
       this.props.importAsset(file)
         .then(({ filename }) => {
-          this.props.onChange(filename);
+          this.props.input.onChange(filename);
         });
     });
   }
 
   render() {
     const {
-      value,
+      input: { value },
       accept,
       className,
       completeClassName,

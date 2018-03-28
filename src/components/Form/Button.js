@@ -13,6 +13,7 @@ Button.propTypes = {
 Button.defaultProps = {
   className: '',
   children: null,
+  type: 'button',
 };
 
 export default Button;

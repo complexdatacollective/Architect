@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { SortableContainer, arrayMove } from 'react-sortable-hoc';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { FieldArray, arrayPush } from 'redux-form';
 import { Section, Editor, Guidance } from '../../Guided';
 import { Button } from '../../../components/Form';
+import SortableItems from './SortableItems';
 import ContentItem from './ContentItem';
 
 // eslint-disable-next-line
 const AddButton = ({ onClick, type, children }) => (
   <Button
+    type="button"
     className={`stage-editor-section-content-items__control stage-editor-section-content-items__control--${type}`}
     onClick={onClick}
   >
@@ -15,115 +19,40 @@ const AddButton = ({ onClick, type, children }) => (
   </Button>
 );
 
-const SortableItems = SortableContainer(
-  ({ items, updateItem, deleteItem }) => (
-    <div className="stage-editor-section-content-items__items">
-      { items.map(
-        (props, index) => (
-          <ContentItem
-            {...props}
-            index={index}
-            key={index}
-            onChange={item => updateItem(item, index)}
-            onDelete={() => deleteItem(index)}
-          />
-        ),
-      ) }
-    </div>
-  ),
+const createNewItem = type => arrayPush('edit-stage', 'items', { type });
+
+const ContentItems = props => (
+  <Section className="stage-editor-section">
+    <Editor className="stage-editor-section__edit">
+      <div className="stage-editor-section-content-items">
+        <h2>Content</h2>
+        <p>Create any content you wish to display on the information screen.</p>
+        <FieldArray
+          name="items"
+          component={SortableItems}
+          itemComponent={ContentItem}
+        />
+
+        <div className="stage-editor-section-content-items__controls">
+          <AddButton onClick={() => props.createNewItem('text')} type="text">Text</AddButton>
+          <AddButton onClick={() => props.createNewItem('image')} type="image">Image</AddButton>
+          <AddButton onClick={() => props.createNewItem('audio')} type="audio">Audio</AddButton>
+          <AddButton onClick={() => props.createNewItem('video')} type="video">Video</AddButton>
+        </div>
+      </div>
+    </Editor>
+    <Guidance className="stage-editor-section__guidance">
+      This is where you can add text and media items to your information screen.
+    </Guidance>
+  </Section>
 );
 
-class ContentItems extends Component {
-  static propTypes = {
-    stage: PropTypes.shape({
-      items: PropTypes.array,
-    }),
-    onChange: PropTypes.func,
-  };
+ContentItems.propTypes = {
+  createNewItem: PropTypes.func.isRequired,
+};
 
-  static defaultProps = {
-    stage: {
-      items: [],
-    },
-    onChange: () => {},
-  };
+const mapDispatchToProps = dispatch => ({
+  createNewItem: bindActionCreators(createNewItem, dispatch),
+});
 
-  moveItem = ({ oldIndex, newIndex }) => {
-    const reorderedContentItems = arrayMove(this.props.stage.items, oldIndex, newIndex);
-
-    this.props.onChange({
-      items: reorderedContentItems,
-    });
-  };
-
-  createNewItem = (type) => {
-    const items = this.props.stage.items || [];
-    this.props.onChange({ items: [...items, { type, content: undefined }] });
-  }
-
-  updateItem = (newItem, index) => {
-    const items = this.props.stage.items
-      .map((item, i) => {
-        if (i !== index) { return item; }
-        return newItem;
-      });
-
-    this.props.onChange({ items });
-  }
-
-  deleteItem = (index) => {
-    const items = this.props.stage.items
-      .filter((_, i) => i !== index);
-
-    this.props.onChange({ items });
-  }
-
-  hasContentItems = () =>
-    this.props.stage.items && this.props.stage.items.length > 0;
-
-  render() {
-    const {
-      stage: { items },
-      onChange,
-      ...props
-    } = this.props;
-
-    return (
-      <Section className="stage-editor-section" {...props}>
-        <Editor className="stage-editor-section__edit">
-          <div className="stage-editor-section-content-items">
-            <h2>Content</h2>
-            {
-              !this.hasContentItems() &&
-              <p>Choose a content type from below.<br /><br /></p>
-            }
-
-            {
-              this.hasContentItems() &&
-              <SortableItems
-                items={items}
-                updateItem={this.updateItem}
-                deleteItem={this.deleteItem}
-                onSortEnd={this.moveItem}
-                lockAxis="y"
-                useDragHandle
-              />
-            }
-
-            <div className="stage-editor-section-content-items__controls">
-              <AddButton onClick={() => this.createNewItem('text')} type="text">Text</AddButton>
-              <AddButton onClick={() => this.createNewItem('image')} type="image">Image</AddButton>
-              <AddButton onClick={() => this.createNewItem('audio')} type="audio">Audio</AddButton>
-              <AddButton onClick={() => this.createNewItem('video')} type="video">Video</AddButton>
-            </div>
-          </div>
-        </Editor>
-        <Guidance className="stage-editor-section__guidance">
-          Add your content here
-        </Guidance>
-      </Section>
-    );
-  }
-}
-
-export default ContentItems;
+export default connect(null, mapDispatchToProps)(ContentItems);

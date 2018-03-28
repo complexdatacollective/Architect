@@ -19,6 +19,7 @@ const NameGeneratorPromptsSection = ({ variableRegistry }) => (
         itemComponent={NameGeneratorPrompt}
         variableRegistry={variableRegistry}
       />
+      {/* <button type="button" onClick={() => fields.push({})}>+</button> */}
     </Editor>
     <Guidance className="stage-editor-section__guidance">
       This is guidance for prompts.

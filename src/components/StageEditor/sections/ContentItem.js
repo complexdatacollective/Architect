@@ -1,8 +1,10 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SortableElement, SortableHandle } from 'react-sortable-hoc';
-import { Icon } from 'network-canvas-ui';
-import { Button, MarkdownInput, ImageInput, AudioInput, VideoInput } from '../../../components/Form';
+import { connect } from 'react-redux';
+import { Field, formValueSelector } from 'redux-form';
+import { get } from 'lodash';
+import { Button, MarkdownInput, ImageInput, AudioInput, VideoInput, SeamlessTextInput } from '../../../components/Form';
 
 const contentInputs = {
   text: MarkdownInput,
@@ -11,41 +13,30 @@ const contentInputs = {
   video: VideoInput,
 };
 
-const Handle = SortableHandle(() => (
-  <div className="stage-editor-section-content-item__handle" />
-));
+const getContentInput = (type) =>
+  get(contentInputs, type, MarkdownInput);
 
-const ContentItem = ({ type, content, onChange, onDelete }) => {
-  const ContentInput = contentInputs[type];
+const ContentItem = ({ fieldId, type }) => {
+  const ContentInput = getContentInput(type);
 
   return (
-    <div className="stage-editor-section-content-item">
-      <Handle />
-
-      <div className="stage-editor-section-content-item__content">
-        <ContentInput
-          value={content}
-          onChange={value => onChange({ type, content: value })}
-        />
-      </div>
-
-      <Button
-        className="stage-editor-section-content-item__delete"
-        onClick={onDelete}
-      ><Icon name="close" /></Button>
+    <div>
+      <Field
+        name={`${fieldId}.value`}
+        component={ContentInput}
+      />
     </div>
   );
 };
 
 ContentItem.propTypes = {
-  type: PropTypes.string.isRequired,
-  content: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  fieldId: PropTypes.string.isRequired,
 };
 
-ContentItem.defaultProps = {
-  content: '',
-};
+const formValue = formValueSelector('edit-stage');
 
-export default SortableElement(ContentItem);
+const mapStateToProps = (state, { fieldId }) => ({
+  type: formValue(state, `${fieldId}.type`),
+})
+
+export default connect(mapStateToProps)(ContentItem);

@@ -1,31 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { fieldPropTypes } from 'redux-form';
 import FileInput from './FileInput';
 import { Video } from '../Assets';
 
-const VideoInput = ({ value, onChange }) => (
+const VideoInput = props => (
   <FileInput
-    value={value}
-    onChange={onChange}
     accept="video/*"
     className="video-input"
+    {...props}
   >
     { url => (
       <div className="video-input__preview">
         <Video className="video-input__preview-still" url={url} />
-        <div className="video-input__preview-name">{ value }</div>
+        <div className="video-input__preview-name">{ props.input.value }</div>
       </div>
     ) }
   </FileInput>
 );
 
 VideoInput.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
-
-VideoInput.defaultProps = {
-  value: '',
+  ...fieldPropTypes,
 };
 
 export default VideoInput;

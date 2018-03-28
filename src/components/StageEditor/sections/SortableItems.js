@@ -11,7 +11,6 @@ const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
         <ItemComponent fieldId={fieldId} index={index} fields={fields} {...rest} />
       </SortableItem>
     )) }
-    <button type="button" onClick={() => fields.push({})}>+</button>
   </div>
 );
 
