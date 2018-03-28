@@ -18,6 +18,7 @@ const SortableItem = ({ remove, children }) => (
 
     <Button
       onClick={remove}
+      type="button"
       className="sortable-item__delete"
     ><Icon name="close" /></Button>
   </div>

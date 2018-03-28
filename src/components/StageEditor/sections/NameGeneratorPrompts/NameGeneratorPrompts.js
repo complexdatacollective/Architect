@@ -1,14 +1,18 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { FieldArray } from 'redux-form';
+import { FieldArray, arrayPush } from 'redux-form';
 import { has, get } from 'lodash';
 import PropTypes from 'prop-types';
 import { Section, Editor, Guidance } from '../../../Guided';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
 import SortableItems from '../SortableItems';
 
-const NameGeneratorPromptsSection = ({ variableRegistry }) => (
+
+const addNewPrompt = () => arrayPush('edit-stage', 'prompts', {});
+
+const NameGeneratorPromptsSection = ({ variableRegistry, ...props }) => (
   <Section className="stage-editor-section">
     <Editor className="stage-editor-section__edit">
       <h2>Prompts</h2>
@@ -19,7 +23,7 @@ const NameGeneratorPromptsSection = ({ variableRegistry }) => (
         itemComponent={NameGeneratorPrompt}
         variableRegistry={variableRegistry}
       />
-      {/* <button type="button" onClick={() => fields.push({})}>+</button> */}
+      <button type="button" onClick={props.addNewPrompt}>+</button>
     </Editor>
     <Guidance className="stage-editor-section__guidance">
       This is guidance for prompts.
@@ -29,6 +33,7 @@ const NameGeneratorPromptsSection = ({ variableRegistry }) => (
 
 NameGeneratorPromptsSection.propTypes = {
   variableRegistry: PropTypes.object,
+  addNewPrompt: PropTypes.func.isRequired,
 };
 
 NameGeneratorPromptsSection.defaultProps = {
@@ -46,8 +51,12 @@ const mapStateToProps = (state, props) => {
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  addNewPrompt: bindActionCreators(addNewPrompt, dispatch),
+});
+
 export { NameGeneratorPromptsSection };
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(NameGeneratorPromptsSection);
