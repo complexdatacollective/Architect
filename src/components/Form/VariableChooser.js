@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { toPairs, get, toPath, last } from 'lodash';
+import { bindActionCreators } from 'redux';
+import { toPairs, get, toPath, last, omit } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { formValueSelector, FormSection } from 'redux-form';
+import { formValueSelector, FormSection, change } from 'redux-form';
 import cx from 'classnames';
 import SeamlessTextInput from './SeamlessTextInput';
 import OptionsInput from './OptionsInput';
@@ -54,7 +55,7 @@ const getEditComponentProps = (variables, variableName) => {
 };
 
 // eslint-disable-next-line
-const Tag = ({ editVariable, meta: { invalid }, input: { name: fieldName, value: fieldValue } }) => {
+const Tag = ({ editVariable, deleteVariable, meta: { invalid }, input: { name: fieldName, value: fieldValue } }) => {
   const variableName = last(toPath(fieldName));
   const tagClasses = cx(
     'variable-chooser__variable',
@@ -65,10 +66,12 @@ const Tag = ({ editVariable, meta: { invalid }, input: { name: fieldName, value:
   return (
     <div
       key={fieldName}
-      onClick={() => editVariable(variableName)}
       className={tagClasses}
     >
-      <strong>{variableName}</strong>: <em>{displayValue}</em>
+      <span onClick={() => editVariable(variableName)}>
+        <strong>{variableName}</strong>: <em>{displayValue}</em>
+      </span>
+      <button type="button" onClick={() => deleteVariable(variableName)}>X</button>
     </div>
   );
 };
@@ -78,6 +81,7 @@ class VariableChooser extends Component {
     name: PropTypes.string.isRequired,
     values: PropTypes.object,
     variableRegistry: PropTypes.object,
+    deleteVariable: PropTypes.func.isRequired,
     className: PropTypes.string,
   };
 
@@ -109,7 +113,7 @@ class VariableChooser extends Component {
   };
 
   render() {
-    const { name, values, variableRegistry, className } = this.props;
+    const { name, values, variableRegistry, className, deleteVariable } = this.props;
     const variableChooserClasses = cx('variable-chooser', className);
 
     return (
@@ -124,6 +128,7 @@ class VariableChooser extends Component {
                     name={variableName}
                     component={Tag}
                     editVariable={this.editVariable}
+                    deleteVariable={deleteVariable}
                     validation={get(variableRegistry, [variableName, 'validation'], {})}
                   />
                 ))
@@ -188,12 +193,25 @@ class VariableChooser extends Component {
   }
 }
 
+const formSelector = formValueSelector('edit-stage');
+
 const mapStateToProps = (state, props) => ({
-  values: formValueSelector('edit-stage')(state, props.name),
+  values: formSelector(state, props.name),
+});
+
+const mapDispatchToProps = (dispatch, { name }) => ({
+  change: bindActionCreators(
+    value => change('edit-stage', name, value),
+    dispatch,
+  ),
 });
 
 export { VariableChooser };
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
+  withHandlers({
+    deleteVariable: props => variable =>
+      props.change(omit(props.values, variable)),
+  }),
 )(VariableChooser);
