@@ -5,7 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ScreenTransition
-    timeout={1000}
+    timeout={NaN}
 >
     [Function]
 </ScreenTransition>,
@@ -33,7 +33,7 @@ ShallowWrapper {
       "onExit": [Function],
       "onExited": [Function],
       "onExiting": [Function],
-      "timeout": 1000,
+      "timeout": NaN,
       "unmountOnExit": true,
     },
     "ref": null,
@@ -58,7 +58,7 @@ ShallowWrapper {
         "onExit": [Function],
         "onExited": [Function],
         "onExiting": [Function],
-        "timeout": 1000,
+        "timeout": NaN,
         "unmountOnExit": true,
       },
       "ref": null,

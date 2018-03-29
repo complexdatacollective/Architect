@@ -7,7 +7,7 @@ import Zoom from '../Zoom';
 const mockProps = {
 };
 
-describe('<ZoomElement />', () => {
+describe('<Zoom />', () => {
   it('can render', () => {
     const component = shallow(<Zoom {...mockProps} >Foo</Zoom>);
 

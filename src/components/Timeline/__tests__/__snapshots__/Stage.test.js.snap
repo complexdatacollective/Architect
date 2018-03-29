@@ -24,11 +24,11 @@ ShallowWrapper {
       "children": Array [
         <getContext(Draft(Component))
           onEditStage={[Function]}
-          snapshotSrc="/images/timeline/stage--Foo.png"
+          snapshotSrc="./images/timeline/stage--Foo.png"
           zoomColors={
                     Array [
-                              "#FFF000",
-                              "#FFF000",
+                              "",
+                              "",
                             ]
           }
 />,
@@ -46,10 +46,10 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "onEditStage": [Function],
-          "snapshotSrc": "/images/timeline/stage--Foo.png",
+          "snapshotSrc": "./images/timeline/stage--Foo.png",
           "zoomColors": Array [
-            "#FFF000",
-            "#FFF000",
+            "",
+            "",
           ],
         },
         "ref": null,
@@ -79,11 +79,11 @@ ShallowWrapper {
         "children": Array [
           <getContext(Draft(Component))
             onEditStage={[Function]}
-            snapshotSrc="/images/timeline/stage--Foo.png"
+            snapshotSrc="./images/timeline/stage--Foo.png"
             zoomColors={
                         Array [
-                                    "#FFF000",
-                                    "#FFF000",
+                                    "",
+                                    "",
                                   ]
             }
 />,
@@ -101,10 +101,10 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "onEditStage": [Function],
-            "snapshotSrc": "/images/timeline/stage--Foo.png",
+            "snapshotSrc": "./images/timeline/stage--Foo.png",
             "zoomColors": Array [
-              "#FFF000",
-              "#FFF000",
+              "",
+              "",
             ],
           },
           "ref": null,
