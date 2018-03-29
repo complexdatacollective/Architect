@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { getContext } from 'recompose';
-import { animation } from 'network-canvas-ui';
+import { getCSSVariableAsNumber } from '../utils/CSSVariables';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -77,7 +77,7 @@ const Zoom = WrappedComponent =>
           targets: pseudoElement,
           elasticity: 0,
           easing: 'easeInOutQuad',
-          duration: animation.duration.fast,
+          duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
           translateX: [translateX, 0],
           translateY: [translateY, 0],
           scaleY: [scaleY, 1],
@@ -87,7 +87,7 @@ const Zoom = WrappedComponent =>
           targets: pseudoElement,
           elasticity: 0,
           easing: 'easeInOutQuad',
-          duration: animation.duration.fast,
+          duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
           opacity: [1, 0],
         }).finished.then(() => {
           this.root.removeChild(pseudoElement);

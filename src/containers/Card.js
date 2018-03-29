@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Transition } from 'react-transition-group';
-import { animation } from 'network-canvas-ui';
 import anime from 'animejs';
+import { getCSSVariableAsNumber } from '../utils/CSSVariables';
 
 const fadeIn = {
   opacity: [0, 1],
@@ -42,7 +42,7 @@ class Card extends PureComponent {
 
     return (
       <Transition
-        timeout={animation.duration.fast * 2}
+        timeout={getCSSVariableAsNumber('--animation-duration-fast-ms') * 2}
         unmountOnExit
         appear
         onEnter={
@@ -52,7 +52,7 @@ class Card extends PureComponent {
               elasticity: 0,
               easing: 'easeInOutQuad',
               duration: 1,
-              delay: animation.duration.fast,
+              delay: getCSSVariableAsNumber('--animation-duration-fast-ms'),
               ...fadeIn,
             });
           }
@@ -63,7 +63,7 @@ class Card extends PureComponent {
               targets: el,
               elasticity: 0,
               easing: 'easeInOutQuad',
-              duration: animation.duration.fast,
+              duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
               ...(cancel ? wipeOut : fadeOut),
             });
           }

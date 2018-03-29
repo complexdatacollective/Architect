@@ -4,6 +4,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import AddNew from '../AddNew';
 
+jest.mock('../../../utils/CSSVariables');
+
 const mockProps = {
   onInsertStage: () => {},
 };

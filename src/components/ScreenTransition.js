@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Transition } from 'react-transition-group';
-import { animation } from 'network-canvas-ui';
 import anime from 'animejs';
+import { Transition } from 'react-transition-group';
+import { getCSSVariableAsNumber } from '../utils/CSSVariables';
+
 
 const expand = {
   scale: [0, 1],
@@ -40,7 +41,7 @@ ScreenTransition.propTypes = {
 
 ScreenTransition.defaultProps = {
   children: PropTypes.any.isRequired,
-  timeout: animation.duration.slow,
+  timeout: getCSSVariableAsNumber('--animation-duration-slow-ms'),
 };
 
 export default ScreenTransition;
