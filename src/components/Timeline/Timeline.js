@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { flatten, zip } from 'lodash';
-import Overview from './Overview';
+// import Overview from './Overview';
 import Stage from './Stage';
 import AddNew from './AddNew';
 import constrain from '../../behaviours/constrain';
@@ -47,9 +47,9 @@ class Timeline extends PureComponent {
     return (
       <div className="timeline">
         <div className="timeline__main">
-          <Overview
+          {/* <Overview
             title="My protocol"
-          />
+          /> */}
           <AddNew
             key={'add-new_0'}
             onInsertStage={() => this.props.onInsertStage(0)}

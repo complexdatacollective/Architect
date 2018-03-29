@@ -13,9 +13,15 @@
     border-radius: unit(1);
     margin: 0 unit(.5) unit(.5) 0;
     height: unit(4);
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 2px;
     line-height: unit(4);
     overflow: hidden;
     white-space: nowrap;
+    transition: background-color var(--animation-default-easing) var(--animation-fast-duration),
+      border-color var(--animation-default-easing) var(--animation-fast-duration);
 
     &:nth-child(4n + 2) {
       background-color: var(--variant--2);
@@ -27,6 +33,11 @@
 
     &:nth-child(4n + 4) {
       background-color: var(--variant--4);
+    }
+
+    &--has-error {
+      background-color: var(--color-platinum--dark);
+      border-color: var(--error);
     }
   }
 

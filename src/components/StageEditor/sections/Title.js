@@ -1,19 +1,18 @@
 import React from 'react';
-import { Field } from 'redux-form';
+// import { Field } from 'redux-form';
 import { Section, Editor, Guidance } from '../../Guided';
-import { SeamlessTextInput } from '../../../components/Form';
-import { required, maxLength } from '../../../utils/validations';
+import { SeamlessTextInput, ValidatedField } from '../../../components/Form';
 
 const Title = () => (
   <Section className="stage-editor-section">
     <Editor className="stage-editor-section__edit">
       <h2>Title</h2>
-      <Field
+      <ValidatedField
         name="label"
         component={SeamlessTextInput}
         placeholder="Enter your title here"
         className="stage-editor-section-title"
-        validate={[required, maxLength(5)]}
+        validation={{ maxLength: 5, required: true }}
       />
     </Editor>
     <Guidance className="stage-editor-section__guidance">

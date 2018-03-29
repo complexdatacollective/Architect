@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { Field, getFormValues, change as changeForm } from 'redux-form';
+import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, has, get, pickBy, uniqueId } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
@@ -127,7 +127,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch, { form }) => ({
-  reset: () => dispatch(changeForm(form.name, 'form', null)),
+  reset: () => dispatch(changeField(form.name, 'form', null)),
 });
 
 export { Form };

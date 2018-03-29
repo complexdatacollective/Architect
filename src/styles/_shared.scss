@@ -28,7 +28,6 @@
   --intent-border: var(--color-mustard--dark);
   --rail: var(--color-neon-coral);
 
-
   --card-background: var(--color-white);
   --card-text: var(--color-charcoal);
   --card-background--rules: var(--color-mustard);
@@ -56,10 +55,16 @@
   --rules--or: var(--color-neon-carrot--dark);
 
 // content item types
-  --variant--1: var(--color-neon-coral);
+  --variant--1: var(--color-slate-blue--dark);
   --variant--2: var(--color-mustard--dark);
   --variant--3: var(--color-sea-green);
   --variant--4: var(--color-sea-green--dark);
 
   --asset-background: var(--color-charcoal);
+}
+
+
+button:disabled,
+button[disabled] {
+  background-color: var(--color-charcoal);
 }

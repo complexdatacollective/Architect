@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reduxForm, Form as ReduxForm, formValueSelector } from 'redux-form';
+import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
@@ -9,6 +9,7 @@ import cx from 'classnames';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { makeGetStage } from '../../selectors/protocol';
 import { Guided, Section, Editor } from '../Guided';
+import flatten from '../../utils/flatten';
 import {
   Title,
   ContentItems,
@@ -57,43 +58,46 @@ const renderInterfaceSections = (props) => {
   return renderSections(interfaceSections, props);
 };
 
-const StageEditor = (props) => {
-  const {
-    stage: { type },
-    stageId,
-    handleSubmit,
-    toggleCodeView,
-    codeView,
-  } = props;
-
-  return (
-    <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
-      <CodeView toggleCodeView={toggleCodeView} form={form} />
-      <Guided className="stage-editor__sections">
-        <Section className="stage-editor-section">
-          <Editor className="stage-editor-section__edit">
-            <h1>Edit {type} Screen</h1>
-            <button type="button" onClick={toggleCodeView}>Show Code View</button>
-          </Editor>
-        </Section>
-        {
-          renderInterfaceSections({
-            stage: { ...props.stage },
-            stageId,
-            form,
-          })
-        }
-      </Guided>
-    </ReduxForm>
-  );
-};
+const StageEditor = ({
+  stage,
+  stageId,
+  handleSubmit,
+  toggleCodeView,
+  codeView,
+  dirty,
+  invalid,
+}) => (
+  <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
+    <CodeView toggleCodeView={toggleCodeView} form={form} />
+    <Guided className="stage-editor__sections">
+      <Section className="stage-editor-section">
+        <Editor className="stage-editor-section__edit">
+          <h1>Edit {stage.type} Screen</h1>
+          { dirty && invalid && (
+            <p style={{ color: 'var(--error)' }}>
+              There are some errors that need to be fixed before this can be saved!
+            </p>
+          ) }
+          <button type="button" onClick={toggleCodeView}>Show Code View</button>
+        </Editor>
+      </Section>
+      {
+        renderInterfaceSections({
+          stage,
+          stageId,
+          form,
+        })
+      }
+    </Guided>
+  </ReduxForm>
+);
 
 StageEditor.propTypes = {
   stage: PropTypes.object.isRequired,
   stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   toggleCodeView: PropTypes.func.isRequired,
   codeView: PropTypes.bool.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  ...formPropTypes,
 };
 
 function makeMapStateToProps() {
@@ -126,8 +130,8 @@ export default compose(
       props.updateStage(props.stageId, values);
       props.onComplete();
     },
-    onSubmitFail: () => {
-      alert('FAIL!!');
+    onSubmitFail: (errors) => {
+      console.error('FORM ERRORS', flatten(errors));
     },
   }),
 )(StageEditor);

@@ -29,6 +29,22 @@ $module-name: seamless-text-input;
     transition: opacity var(--animation-default-easing) var(--animation-fast-duration);
   }
 
+  &__error {
+    opacity: 0;
+    max-height: 0;
+    color: var(--error);
+    margin: unit(.5) 0 0;
+    transition: opacity var(--animation-default-easing) var(--animation-fast-duration),
+      max-height var(--animation-default-easing) var(--animation-fast-duration);
+  }
+
+  &--has-error {
+    .#{$module-name}__error {
+      opacity: 1;
+      max-height: 50px;
+    }
+  }
+
   &--has-focus {
     .#{$module-name}__icon {
       opacity: 1;
