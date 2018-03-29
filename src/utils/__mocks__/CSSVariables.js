@@ -1,8 +1,10 @@
 import { get } from 'lodash';
 
 const mockCSSVariables = {
-  '--ring': '#995522',
-  '--background': '#227733',
+  '--light-background': '#227733',
+  '--mustard': '#117733',
+  '--white': '#fff',
+  '--animation-duration-slow-ms': '300',
 };
 
 const getCSSVariable = (cssVariableName) => {

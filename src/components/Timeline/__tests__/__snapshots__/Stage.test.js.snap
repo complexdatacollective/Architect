@@ -27,8 +27,8 @@ ShallowWrapper {
           snapshotSrc="./images/timeline/stage--Foo.png"
           zoomColors={
                     Array [
-                              "",
-                              "",
+                              "#227733",
+                              "#fff",
                             ]
           }
 />,
@@ -48,8 +48,8 @@ ShallowWrapper {
           "onEditStage": [Function],
           "snapshotSrc": "./images/timeline/stage--Foo.png",
           "zoomColors": Array [
-            "",
-            "",
+            "#227733",
+            "#fff",
           ],
         },
         "ref": null,
@@ -82,8 +82,8 @@ ShallowWrapper {
             snapshotSrc="./images/timeline/stage--Foo.png"
             zoomColors={
                         Array [
-                                    "",
-                                    "",
+                                    "#227733",
+                                    "#fff",
                                   ]
             }
 />,
@@ -103,8 +103,8 @@ ShallowWrapper {
             "onEditStage": [Function],
             "snapshotSrc": "./images/timeline/stage--Foo.png",
             "zoomColors": Array [
-              "",
-              "",
+              "#227733",
+              "#fff",
             ],
           },
           "ref": null,

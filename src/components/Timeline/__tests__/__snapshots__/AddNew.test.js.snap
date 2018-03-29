@@ -23,8 +23,8 @@ ShallowWrapper {
         onInsertStage={[Function]}
         zoomColors={
                 Array [
-                        "",
-                        "",
+                        "#227733",
+                        "#227733",
                       ]
         }
 />,
@@ -38,8 +38,8 @@ ShallowWrapper {
       "props": Object {
         "onInsertStage": [Function],
         "zoomColors": Array [
-          "",
-          "",
+          "#227733",
+          "#227733",
         ],
       },
       "ref": null,
@@ -58,8 +58,8 @@ ShallowWrapper {
           onInsertStage={[Function]}
           zoomColors={
                     Array [
-                              "",
-                              "",
+                              "#227733",
+                              "#227733",
                             ]
           }
 />,
@@ -73,8 +73,8 @@ ShallowWrapper {
         "props": Object {
           "onInsertStage": [Function],
           "zoomColors": Array [
-            "",
-            "",
+            "#227733",
+            "#227733",
           ],
         },
         "ref": null,
