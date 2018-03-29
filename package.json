@@ -86,7 +86,7 @@
         "jszip": "^3.1.5",
         "lodash": "^4.17.4",
         "mkdirp": "^0.5.1",
-        "network-canvas-ui": "git+https://github.com/codaco/Network-Canvas-UI.git",
+        "network-canvas-ui": "git+https://github.com/codaco/Network-Canvas-UI.git#eafc737",
         "node-sass": "^4.5.3",
         "object-assign": "4.1.1",
         "postcss-flexbugs-fixes": "3.2.0",
@@ -171,7 +171,8 @@
         "setupFiles": [
             "<rootDir>/config/polyfills.js",
             "<rootDir>/config/jest/polyfills.js",
-            "<rootDir>/config/jest/enzyme.js"
+            "<rootDir>/config/jest/enzyme.js",
+            "<rootDir>/config/jest/automock.js"
         ],
         "testPathIgnorePatterns": [
             "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]"

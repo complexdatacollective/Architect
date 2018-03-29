@@ -4,7 +4,7 @@ import { Zoom } from '../../behaviours';
 import EditSkipLogic from './EditSkipLogic';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 
-const zoomColors = [getCSSVariableAsString('--light-background'), getCSSVariableAsString('--white')];
+const zoomColors = [getCSSVariableAsString('--light-background'), '#ffffff'];
 
 const EditStageButton = Zoom(
   ({

@@ -1,14 +1,18 @@
-export const getCSSVariableAsString = (variableName) => {
-  const style = getComputedStyle(document.body);
-  return style.getPropertyValue(variableName).trim();
+import { isEmpty } from 'lodash';
+
+const getCSSVariable = (variableName) => {
+  const variable = getComputedStyle(document.body)
+    .getPropertyValue(variableName)
+    .trim();
+  if (isEmpty(variable)) { throw new Error(`CSS variable "${variableName}" not found.`); }
+  return variable;
 };
 
-export const getCSSVariableAsNumber = (variableName) => {
-  const style = getComputedStyle(document.body);
-  return parseInt(style.getPropertyValue(variableName).trim(), 10);
-};
+export const getCSSVariableAsString = variableName =>
+  getCSSVariable(variableName);
 
-export const getCSSVariableAsObject = (variableName) => {
-  const style = getComputedStyle(document.body);
-  return JSON.parse(style.getPropertyValue(variableName).trim());
-};
+export const getCSSVariableAsNumber = variableName =>
+  parseInt(getCSSVariable(variableName), 10);
+
+export const getCSSVariableAsObject = variableName =>
+  JSON.parse(getCSSVariable(variableName));

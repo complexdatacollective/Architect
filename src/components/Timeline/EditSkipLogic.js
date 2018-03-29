@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
-import { Icon, animation } from 'network-canvas-ui';
+import { Icon } from 'network-canvas-ui';
 import { Zoom } from '../../behaviours';
-import { getCSSVariableAsString, getCSSVariableAsNumber } from '../../utils/CSSVariables';
+import { getCSSVariableAsString, getCSSVariableAsNumber, getCSSVariableAsObject } from '../../utils/CSSVariables';
 
-const zoomColors = [getCSSVariableAsString('--mustard'), getCSSVariableAsString('--mustard')];
+const zoomColors = [getCSSVariableAsString('--color-mustard'), getCSSVariableAsString('--color-mustard')];
 
 const SkipLogicButton = Zoom(
   ({ onEditSkipLogic, onMouseEnterSkipLogic, onMouseLeaveSkipLogic }) => (
@@ -38,7 +38,7 @@ class TimelineEditSkipLogic extends PureComponent {
       opacity: [0, 1],
       strokeDashoffset: [offset, 0],
       duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-      easing: animation.easing.default,
+      easing: getCSSVariableAsObject('--animation-easing-js'),
       autoplay: false,
     });
 
