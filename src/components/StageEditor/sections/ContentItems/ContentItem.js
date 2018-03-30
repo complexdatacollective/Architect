@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { get } from 'lodash';
-import { MarkdownInput, ImageInput, AudioInput, VideoInput } from '../../../components/Form';
+import { MarkdownInput, ImageInput, AudioInput, VideoInput } from '../../../../components/Form';
 
 const contentInputs = {
   text: MarkdownInput,

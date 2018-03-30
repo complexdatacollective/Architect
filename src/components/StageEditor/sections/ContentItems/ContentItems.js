@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
-import { Section, Editor, Guidance } from '../../Guided';
-import { Button } from '../../../components/Form';
-import SortableItems from './SortableItems';
+import { Section, Editor, Guidance } from '../../../Guided';
+import { Button } from '../../../../components/Form';
+import SortableItems from '../SortableItems';
 import ContentItem from './ContentItem';
 
 const AddButton = ({ onClick, type, children }) => (
