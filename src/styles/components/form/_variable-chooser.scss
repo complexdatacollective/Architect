@@ -21,17 +21,17 @@
     overflow: hidden;
     white-space: nowrap;
     transition: background-color var(--animation-default-easing) var(--animation-fast-duration),
-      border-color var(--animation-default-easing) var(--animation-fast-duration);
+    border-color var(--animation-default-easing) var(--animation-fast-duration);
 
-    &:nth-child(4n + 2) {
+    &--variant-1 {
       background-color: var(--variant--2);
     }
 
-    &:nth-child(4n + 3) {
+    &--variant-2 {
       background-color: var(--variant--3);
     }
 
-    &:nth-child(4n + 4) {
+    &--variant-3 {
       background-color: var(--variant--4);
     }
 

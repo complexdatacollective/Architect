@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { toPairs, get, toPath, last, omit } from 'lodash';
+import { toPairs, get, omit } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
-import SeamlessTextInput from './SeamlessTextInput';
-import OptionsInput from './OptionsInput';
-import ValidatedField from './ValidatedField';
-import Select from './Select';
-import Modal from '../Modal';
+import { TransitionGroup } from 'react-transition-group';
+import AppearTransition from '../../AppearTransition';
+import Modal from '../../Modal';
+import SeamlessTextInput from '../SeamlessTextInput';
+import OptionsInput from '../OptionsInput';
+import ValidatedField from '../ValidatedField';
+import Select from '../Select';
+import Tag from './Tag';
 
 const getGeneralComponentProps = ({ validation }) => ({
   className: 'variable-chooser__modal-value',
@@ -52,28 +55,6 @@ const getEditComponentProps = (variables, variableName) => {
         type: 'text',
       };
   }
-};
-
-// eslint-disable-next-line
-const Tag = ({ editVariable, deleteVariable, meta: { invalid }, input: { name: fieldName, value: fieldValue } }) => {
-  const variableName = last(toPath(fieldName));
-  const tagClasses = cx(
-    'variable-chooser__variable',
-    { 'variable-chooser__variable--has-error': invalid },
-  );
-  const displayValue = JSON.stringify(fieldValue);
-
-  return (
-    <div
-      key={fieldName}
-      className={tagClasses}
-    >
-      <span onClick={() => editVariable(variableName)}>
-        <strong>{variableName}</strong>: <em>{displayValue}</em>
-      </span>
-      <button type="button" onClick={() => deleteVariable(variableName)}>X</button>
-    </div>
-  );
 };
 
 class VariableChooser extends Component {
@@ -119,18 +100,19 @@ class VariableChooser extends Component {
     return (
       <div className={variableChooserClasses}>
         <FormSection name={name}>
-          <div className="variable-chooser__variables">
+          <TransitionGroup className="variable-chooser__variables">
             {
               toPairs(values)
                 .map(([variableName]) => (
-                  <ValidatedField
-                    key={variableName}
-                    name={variableName}
-                    component={Tag}
-                    editVariable={this.editVariable}
-                    deleteVariable={deleteVariable}
-                    validation={get(variableRegistry, [variableName, 'validation'], {})}
-                  />
+                  <AppearTransition key={variableName}>
+                    <ValidatedField
+                      name={variableName}
+                      component={Tag}
+                      editVariable={this.editVariable}
+                      deleteVariable={deleteVariable}
+                      validation={get(variableRegistry, [variableName, 'validation'], {})}
+                    />
+                  </AppearTransition>
                 ))
             }
             <Button
@@ -138,7 +120,7 @@ class VariableChooser extends Component {
               type="button"
               onClick={this.openEditVariable}
             />
-          </div>
+          </TransitionGroup>
           <Modal show={!!this.state.isEditing}>
             <div className="variable-chooser__modal">
               <h2 className="variable-chooser__modal-title">
