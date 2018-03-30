@@ -12,7 +12,7 @@ const Title = () => (
         component={SeamlessTextInput}
         placeholder="Enter your title here"
         className="stage-editor-section-title"
-        validation={{ maxLength: 5, required: true }}
+        validation={{ required: true }}
       />
     </Editor>
     <Guidance className="stage-editor-section__guidance">
