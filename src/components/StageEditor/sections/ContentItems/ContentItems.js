@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
+import uuid from 'uuid';
 import { Section, Editor, Guidance } from '../../../Guided';
 import { Button } from '../../../../components/Form';
 import SortableItems from '../SortableItems';
@@ -61,7 +62,7 @@ ContentItems.propTypes = {
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewItem: bindActionCreators(
-    type => arrayPush(form.name, 'items', { type }),
+    type => arrayPush(form.name, 'items', { id: uuid(), type }),
     dispatch,
   ),
 });

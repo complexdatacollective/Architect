@@ -6,6 +6,7 @@ import { compose } from 'recompose';
 import { FieldArray, arrayPush } from 'redux-form';
 import { has, get, toPath } from 'lodash';
 import PropTypes from 'prop-types';
+import uuid from 'uuid';
 import { Section, Editor, Guidance } from '../../../Guided';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
 import SortableItems from '../SortableItems';
@@ -67,7 +68,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, { form: { name } }) => ({
   addNewPrompt: bindActionCreators(
-    () => arrayPush(name, fieldName, {}),
+    () => arrayPush(name, fieldName, { id: uuid() }),
     dispatch,
   ),
 });
