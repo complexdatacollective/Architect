@@ -1,17 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers, defaultProps } from 'recompose';
+import { TransitionGroup } from 'react-transition-group';
 import { SortableContainer } from 'react-sortable-hoc';
+import FolderTransition from '../../FolderTransition';
 import SortableItem from './SortableItem';
 
 const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
-  <div className="sortable-items">
+  <TransitionGroup className="sortable-items">
     { fields.map((fieldId, index) => (
-      <SortableItem remove={() => fields.remove(index)} key={fieldId} index={index}>
-        <ItemComponent fieldId={fieldId} index={index} fields={fields} {...rest} />
-      </SortableItem>
+      <FolderTransition key={fieldId} exit={false}>
+        <SortableItem remove={() => fields.remove(index)} index={index}>
+          <ItemComponent fieldId={fieldId} index={index} fields={fields} {...rest} />
+        </SortableItem>
+      </FolderTransition>
     )) }
-  </div>
+  </TransitionGroup>
 );
 
 SortableItems.propTypes = {
@@ -22,7 +26,7 @@ SortableItems.propTypes = {
 export { SortableItems };
 
 export default compose(
-  defaultProps({ lockAxis: 'y', useDragHandle: true }),
+  defaultProps({ lockAxis: 'y', useDragHandle: true, transitionDuration: 10000 }),
   withHandlers({
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
