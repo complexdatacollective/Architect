@@ -1,25 +1,34 @@
+/* eslint-disable */
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { FieldArray, arrayPush } from 'redux-form';
-import { has, get } from 'lodash';
+import { has, get, toPath } from 'lodash';
 import PropTypes from 'prop-types';
 import { Section, Editor, Guidance } from '../../../Guided';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
 import SortableItems from '../SortableItems';
 
+const fieldName = 'prompts';
 
-const NameGeneratorPromptsSection = ({ variableRegistry, form, ...props }) => (
+const getId = (prompts, fieldName) => {
+  const path = toPath(fieldName).slice(1);
+  console.log('ID', get(prompts, [ ...path, 'id' ]))
+  return get(prompts, [ ...path, 'id' ]);
+};
+
+const NameGeneratorPromptsSection = ({ variableRegistry, form, prompts, ...props }) => (
   <Section className="stage-editor-section">
     <Editor className="stage-editor-section__edit">
       <h2>Prompts</h2>
       <p>Name gen prompt specific</p>
       <FieldArray
-        name="prompts"
+        name={fieldName}
         component={SortableItems}
         itemComponent={NameGeneratorPrompt}
         variableRegistry={variableRegistry}
+        getId={(fieldName) => getId(prompts, fieldName)}
         form={form}
       />
       <button type="button" onClick={props.addNewPrompt}>+</button>
@@ -36,6 +45,7 @@ NameGeneratorPromptsSection.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
+  prompts: PropTypes.array.isRequired,
   addNewPrompt: PropTypes.func.isRequired,
 };
 
@@ -52,11 +62,12 @@ const getVariablesFormNodeType = (state, props) => {
 const mapStateToProps = (state, props) => ({
   show: has(props, 'stage.subject.type'),
   variableRegistry: getVariablesFormNodeType(state, props),
-});
+  prompts: props.form.getValues(state, fieldName),
+})
 
 const mapDispatchToProps = (dispatch, { form: { name } }) => ({
   addNewPrompt: bindActionCreators(
-    () => arrayPush(name, 'prompts', {}),
+    () => arrayPush(name, fieldName, {}),
     dispatch,
   ),
 });

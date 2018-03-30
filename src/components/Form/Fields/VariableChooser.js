@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
 import { TransitionGroup } from 'react-transition-group';
-import AppearTransition from '../../AppearTransition';
+import { Fade } from '../../Transitions';
 import Modal from '../../Modal';
 import SeamlessTextInput from '../SeamlessTextInput';
 import OptionsInput from '../OptionsInput';
@@ -104,7 +104,7 @@ class VariableChooser extends Component {
             {
               toPairs(values)
                 .map(([variableName]) => (
-                  <AppearTransition key={variableName}>
+                  <Fade key={variableName}>
                     <ValidatedField
                       name={variableName}
                       component={Tag}
@@ -112,7 +112,7 @@ class VariableChooser extends Component {
                       deleteVariable={deleteVariable}
                       validation={get(variableRegistry, [variableName, 'validation'], {})}
                     />
-                  </AppearTransition>
+                  </Fade>
                 ))
             }
             <Button

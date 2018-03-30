@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers, defaultProps } from 'recompose';
 import { TransitionGroup } from 'react-transition-group';
 import { SortableContainer } from 'react-sortable-hoc';
+import { getCSSVariableAsNumber } from '../../../utils/CSSVariables';
 import FolderTransition from '../../FolderTransition';
 import SortableItem from './SortableItem';
 
-const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
+const SortableItems = ({ fields, itemComponent: ItemComponent, getId, ...rest }) => (
   <TransitionGroup className="sortable-items">
     { fields.map((fieldId, index) => (
-      <FolderTransition key={fieldId} exit={false}>
+      <FolderTransition key={getId(fieldId)}>
         <SortableItem remove={() => fields.remove(index)} index={index}>
+          {fieldId}
           <ItemComponent fieldId={fieldId} index={index} fields={fields} {...rest} />
         </SortableItem>
       </FolderTransition>
@@ -21,12 +23,21 @@ const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
 SortableItems.propTypes = {
   fields: PropTypes.object.isRequired,
   itemComponent: PropTypes.func.isRequired,
+  getId: PropTypes.func,
+};
+
+SortableItems.defaultProps = {
+  getId: fieldId => fieldId,
 };
 
 export { SortableItems };
 
 export default compose(
-  defaultProps({ lockAxis: 'y', useDragHandle: true, transitionDuration: 10000 }),
+  defaultProps({
+    lockAxis: 'y',
+    useDragHandle: true,
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+  }),
   withHandlers({
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
