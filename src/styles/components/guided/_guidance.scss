@@ -6,12 +6,12 @@
   width: 35%;
   max-width: unit(45);
   padding: unit(4) unit(4);
-  transition: opacity var(--animation-duration-standard-ms) var(--animation-easing);
+  transition: opacity var(--animation-duration-standard) var(--animation-easing);
   opacity: 0;
   z-index: -1;
 
   &--is-active {
-    transition: opacity var(--animation-duration-fast-ms) var(--animation-easing);
+    transition: opacity var(--animation-duration-fast) var(--animation-easing);
     opacity: 1;
   }
 }

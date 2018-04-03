@@ -107,8 +107,8 @@
     &--attribute {
       background: palette('rule-attribute');
       max-width: 500px;
-      transition: max-width var(--animation-easing) var(--animation-duration-standard-ms),
-        padding var(--animation-easing) var(--animation-duration-standard-ms);
+      transition: max-width var(--animation-easing) var(--animation-duration-standard),
+        padding var(--animation-easing) var(--animation-duration-standard);
 
       &:empty {
         max-width: 0;
