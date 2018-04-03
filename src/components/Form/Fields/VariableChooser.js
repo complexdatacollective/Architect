@@ -7,8 +7,6 @@ import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
-import { TransitionGroup } from 'react-transition-group';
-import { Fade } from '../../Transitions';
 import Modal from '../../Modal';
 import SeamlessTextInput from '../SeamlessTextInput';
 import OptionsInput from '../OptionsInput';
@@ -100,27 +98,23 @@ class VariableChooser extends Component {
     return (
       <div className={variableChooserClasses}>
         <FormSection name={name}>
-          <TransitionGroup className="variable-chooser__variables">
-            {
-              toPairs(values)
-                .map(([variableName]) => (
-                  <Fade key={variableName}>
-                    <ValidatedField
-                      name={variableName}
-                      component={Tag}
-                      editVariable={this.editVariable}
-                      deleteVariable={deleteVariable}
-                      validation={get(variableRegistry, [variableName, 'validation'], {})}
-                    />
-                  </Fade>
-                ))
-            }
-            <Button
-              className="variable-chooser__add"
-              type="button"
-              onClick={this.openEditVariable}
-            />
-          </TransitionGroup>
+          {
+            toPairs(values)
+              .map(([variableName]) => (
+                <ValidatedField
+                  name={variableName}
+                  component={Tag}
+                  editVariable={this.editVariable}
+                  deleteVariable={deleteVariable}
+                  validation={get(variableRegistry, [variableName, 'validation'], {})}
+                />
+              ))
+          }
+          <Button
+            className="variable-chooser__add"
+            type="button"
+            onClick={this.openEditVariable}
+          />
           <Modal show={!!this.state.isEditing}>
             <div className="variable-chooser__modal">
               <h2 className="variable-chooser__modal-title">

@@ -1,1 +1,2 @@
-export { default as Fade } from './Fade'; // eslint-disable-line
+export { default as Fade } from './Fade';
+export { default as Wipe } from './Wipe';
