@@ -4,22 +4,8 @@ import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, difference } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
-import { OptionsInput, Button } from '../../../components/Form';
-
-const NodeTypeOption = ({ selected, value }) => (
-  <div className="edit-stage-node-type__option">
-    {value} {selected && ' (selected)'}
-  </div>
-);
-
-NodeTypeOption.propTypes = {
-  selected: PropTypes.bool,
-  value: PropTypes.string.isRequired,
-};
-
-NodeTypeOption.defaultProps = {
-  selected: false,
-};
+import { Button } from '../../../components/Form';
+import Contexts from '../../../components/Form/Fields/Contexts';
 
 class NodeType extends Component {
   resetStage() {
@@ -49,8 +35,7 @@ class NodeType extends Component {
               parse={value => ({ type: value, entity: 'node' })}
               format={value => get(value, 'type')}
               options={nodeTypes}
-              component={OptionsInput}
-              optionComponent={NodeTypeOption}
+              component={Contexts}
             />
           </div>
           { disabled &&
