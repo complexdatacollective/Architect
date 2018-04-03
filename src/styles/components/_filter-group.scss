@@ -1,6 +1,6 @@
 .filter-group {
   background-color: palette('rules');
-  transition: background-color var(--animation-default-easing) var(--animation-standard-duration);
+  transition: background-color var(--animation-easing) var(--animation-duration-standard-ms);
   border-radius: 10px;
   padding: 10px;
   @include flex-inline;

@@ -9,7 +9,7 @@ $module-name: seamless-text-input;
     width: calc(100% - #{unit(3)});
     border: 0;
     border-bottom: unit(.2) solid palette('divider-light');
-    transition: border-bottom-color var(--animation-default-easing) var(--animation-standard-duration);
+    transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard-ms);
 
     &:focus {
       border-bottom-color: palette('input-focus');
@@ -26,7 +26,7 @@ $module-name: seamless-text-input;
     width: unit(2) !important;
     height: unit(2) !important;
     opacity: 0;
-    transition: opacity var(--animation-default-easing) var(--animation-fast-duration);
+    transition: opacity var(--animation-easing) var(--animation-duration-fast-ms);
   }
 
   &__error {
@@ -34,8 +34,8 @@ $module-name: seamless-text-input;
     max-height: 0;
     color: var(--error);
     margin: unit(.5) 0 0;
-    transition: opacity var(--animation-default-easing) var(--animation-fast-duration),
-      max-height var(--animation-default-easing) var(--animation-fast-duration);
+    transition: opacity var(--animation-easing) var(--animation-duration-fast-ms),
+      max-height var(--animation-easing) var(--animation-duration-fast-ms);
   }
 
   &--has-error {

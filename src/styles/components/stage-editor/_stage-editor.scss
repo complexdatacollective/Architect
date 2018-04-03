@@ -6,7 +6,7 @@
 .stage-editor {
   width: 100%;
   position: relative;
-  transition: all var(--animation-standard-duration) var(--animation-default-easing);
+  transition: all var(--animation-duration-standard-ms) var(--animation-easing);
 
   &-section {
     &__guidance {
@@ -30,7 +30,7 @@
     background: var(--settings);
     color: var(--text);
     padding: 20px;
-    transition: all var(--animation-standard-duration) var(--animation-default-easing);
+    transition: all var(--animation-duration-standard-ms) var(--animation-easing);
   }
 
   &.stage-editor--show-code {

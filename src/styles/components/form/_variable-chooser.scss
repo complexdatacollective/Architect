@@ -20,8 +20,8 @@
     line-height: unit(4);
     overflow: hidden;
     white-space: nowrap;
-    transition: background-color var(--animation-default-easing) var(--animation-fast-duration),
-    border-color var(--animation-default-easing) var(--animation-fast-duration);
+    transition: background-color var(--animation-easing) var(--animation-duration-fast-ms),
+    border-color var(--animation-easing) var(--animation-duration-fast-ms);
 
     &--variant-1 {
       background-color: var(--variant--2);

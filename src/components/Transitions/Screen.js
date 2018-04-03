@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { Transition } from 'react-transition-group';
-import { getCSSVariableAsNumber } from '../utils/CSSVariables';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 
 const expand = {

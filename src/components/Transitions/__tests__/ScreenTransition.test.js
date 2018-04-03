@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import ScreenTransition from '../ScreenTransition';
+import ScreenTransition from '../Screen';
 
 jest.mock('../../utils/CSSVariables');
 

@@ -22,7 +22,7 @@
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%) translateZ(0) scale(.75);
-    transition: background-color var(--animation-default-easing) var(--animation-fast-duration), transform var(--animation-default-easing) var(--animation-fast-duration);
+    transition: background-color var(--animation-easing) var(--animation-duration-fast-ms), transform var(--animation-easing) var(--animation-duration-fast-ms);
     background-color: palette('intent-inactive');
     border-radius: 80px;
     border: 0;

@@ -6,7 +6,7 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent;
-    transition: border-color var(--animation-default-easing) var(--animation-fast-duration);
+    transition: border-color var(--animation-easing) var(--animation-duration-fast-ms);
     cursor: pointer;
     width: 45vw;
     margin: 0 auto;
