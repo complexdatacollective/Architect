@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, get, difference } from 'lodash';
+import { keys, get, has, difference } from 'lodash';
+import cx from 'classnames';
+import { Button } from 'network-canvas-ui';
 import { Section, Editor, Guidance } from '../../Guided';
-import { Button } from '../../../components/Form';
 import Contexts from '../../../components/Form/Fields/Contexts';
 
 class NodeType extends Component {
@@ -24,25 +25,28 @@ class NodeType extends Component {
       disabled,
     } = this.props;
 
+    const nodeTypeClasses = cx('stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
+
     return (
       <Section className="stage-editor-section">
         <Editor className="stage-editor-section__edit" disabled={disabled}>
-          <div style={{ opacity: (disabled ? '0.67' : '1') }}>
+          <div className={nodeTypeClasses}>
             <h2>Node Type</h2>
             <p>Which type of node does this name generator create?</p>
-            <Field
-              name="subject"
-              parse={value => ({ type: value, entity: 'node' })}
-              format={value => get(value, 'type')}
-              options={nodeTypes}
-              component={Contexts}
-            />
-          </div>
-          { disabled &&
-            <div style={{ 'pointer-events': 'auto' }}>
-              <Button type="button" onClick={() => this.resetStage()}>Change Node Type</Button>
+
+            <div className="stage-editor-section-node-type__edit">
+              <Field
+                name="subject"
+                parse={value => ({ type: value, entity: 'node' })}
+                format={value => get(value, 'type')}
+                options={nodeTypes}
+                component={Contexts}
+              />
             </div>
-          }
+            <div className="stage-editor-section-node-type__reset">
+              <Button type="button" key="cancel" size="small" onClick={() => this.resetStage()}>Change Node Type</Button>
+            </div>
+          </div>
         </Editor>
         <Guidance className="stage-editor-section__guidance">
           What kind of nodes do you want to study?
@@ -69,7 +73,7 @@ const mapStateToProps = (state, { form }) => {
 
   return {
     nodeTypes: keys(state.protocol.present.variableRegistry.node),
-    disabled: !!get(stage, 'subject.type'),
+    disabled: has(stage, 'subject.type'),
     stage,
   };
 };

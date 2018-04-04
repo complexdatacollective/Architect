@@ -1,0 +1,30 @@
+$component-name: stage-editor-section-node-type;
+
+.#{$component-name} {
+  &__reset {
+    margin: unit(1) 0 0;
+    pointer-events: auto !important;
+    opacity: 0;
+    transition: max-height var(--animation-easing) var(--animation-duration-fast),
+      opacity var(--animation-easing) var(--animation-duration-fast);
+  }
+
+  &__edit {
+    opacity: 1;
+    transition: opacity var(--animation-easing) var(--animation-duration-fast);
+  }
+
+  &--disabled {
+    .#{$component-name} {
+      &__reset {
+        max-height: 200px;
+        opacity: 1;
+      }
+
+      &__edit {
+        pointer-events: none !important;
+        opacity: 0.5;
+      }
+    }
+  }
+}
