@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, has, get, pickBy, uniqueId } from 'lodash';
+import { keys, has, get, pickBy } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
+import Radio from '../../Form/Fields/Radio';
+import Select from '../../Form/Fields/Select';
 
 const DEFAULT_FORM = Symbol('DEFAULT_FORM');
 const CUSTOM_FORM = Symbol('CUSTOM_FORM');
@@ -31,10 +33,6 @@ class Form extends Component {
     };
   }
 
-  componentWillMount() {
-    this.id = uniqueId('label');
-  }
-
   componentWillReceiveProps({ stage: { form } }) {
     this.setState({
       formType: form ? CUSTOM_FORM : DEFAULT_FORM,
@@ -59,41 +57,53 @@ class Form extends Component {
         <Editor className="stage-editor-section__edit">
           <h2>Form</h2>
           <p>Which form should be used to create and edit nodes on this stage?</p>
-          <label htmlFor={`${this.id}_default`}>
-            <input
-              id={`${this.id}_default`}
-              type="radio"
-              onChange={() => this.onSelectFormCategory(DEFAULT_FORM)}
-              checked={this.state.formType === DEFAULT_FORM}
-              readOnly
-            />
-            Use the default node form
-          </label>
-          <div>
-            <label htmlFor={`${this.id}_custom`}>
-              <input
-                type="radio"
-                checked={this.state.formType === CUSTOM_FORM}
-                id={`${this.id}_custom`}
+          <div className="stage-editor-section-form">
+            <div className="stage-editor-section-form__category">
+              <Radio
+                label="Use the default node form"
+                className="stage-editor-section-form__radio"
+                input={
+                  {
+                    onChange: () => this.onSelectFormCategory(DEFAULT_FORM),
+                    checked: this.state.formType === DEFAULT_FORM,
+                  }
+                }
                 readOnly
               />
-              Use a different form
-            </label>
-            <Field
-              name="form"
-              component="select"
-            >
-              <option disabled="disabled" value="">Select a form...</option>
-              { forms.map(formName => (
-                <option value={formName} key={formName}>
-                  {formName}
-                </option>
-              )) }
-            </Field>
-          </div>
-          <div onClick={this.onClickCreateNewForm}>
-            <input type="radio" checked={false} />
-            Create new form...
+            </div>
+            <div className="stage-editor-section-form__category">
+              <Radio
+                label="Use a different form"
+                className="stage-editor-section-form__radio"
+                input={
+                  {
+                    checked: this.state.formType === CUSTOM_FORM,
+                  }
+                }
+                readOnly
+              />
+              <div className="stage-editor-section-form__custom">
+                <Field
+                  name="form"
+                  component={Select}
+                >
+                  <option disabled="disabled" value="">Select a form...</option>
+                  { forms.map(formName => (
+                    <option value={formName} key={formName}>
+                      {formName}
+                    </option>
+                  )) }
+                </Field>
+              </div>
+            </div>
+            <div onClick={this.onClickCreateNewForm} className="stage-editor-section-form__category">
+              <Radio
+                label="Create new form..."
+                className="stage-editor-section-form__radio"
+                checked={false}
+                readOnly
+              />
+            </div>
           </div>
         </Editor>
         <Guidance className="stage-editor-section__guidance">

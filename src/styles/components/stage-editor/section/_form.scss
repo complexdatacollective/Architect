@@ -1,0 +1,11 @@
+.stage-editor-section-form {
+  display: flex;
+
+  &__category {
+    margin: 0 unit(3) unit(1) 0;
+  }
+
+  &__custom {
+    margin: 0 0 0 unit(3.5);
+  }
+}
