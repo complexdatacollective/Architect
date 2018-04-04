@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { fieldPropTypes } from 'redux-form';
 import { last, toPath } from 'lodash';
 import cx from 'classnames';
+import RoundButton from '../../RoundButton';
 
 const Tag = ({
   editVariable,
@@ -13,10 +14,10 @@ const Tag = ({
   const variableName = last(toPath(fieldName));
   const variant = fieldName.length % 4;
   const tagClasses = cx(
-    'variable-chooser__variable',
+    'form-fields-variable-chooser__variable',
     {
-      'variable-chooser__variable--has-error': invalid,
-      [`variable-chooser__variable--variant-${variant}`]: true,
+      'form-fields-variable-chooser__variable--has-error': invalid,
+      [`form-fields-variable-chooser__variable--variant-${variant}`]: true,
     },
   );
   const displayValue = JSON.stringify(fieldValue);
@@ -29,7 +30,7 @@ const Tag = ({
       <span onClick={() => editVariable(variableName)}>
         <strong>{variableName}</strong>: <em>{displayValue}</em>
       </span>
-      <button type="button" onClick={() => deleteVariable(variableName)}>X</button>
+      <RoundButton size="small" onClick={() => deleteVariable(variableName)} icon="X" />
     </div>
   );
 };

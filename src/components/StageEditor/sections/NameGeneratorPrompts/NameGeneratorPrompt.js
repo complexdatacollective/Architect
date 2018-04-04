@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { SeamlessTextInput } from '../../../Form';
-import { VariableChooser } from '../../../Form/Fields';
+import VariableChooser from '../../../Form/Fields/VariableChooser';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry }) => (
   <div className="prompt">

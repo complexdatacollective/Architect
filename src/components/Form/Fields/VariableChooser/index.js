@@ -7,15 +7,15 @@ import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
-import Modal from '../../Modal';
-import SeamlessTextInput from '../SeamlessTextInput';
-import OptionsInput from '../OptionsInput';
-import ValidatedField from '../ValidatedField';
+import Modal from '../../../Modal';
+import SeamlessTextInput from '../../SeamlessTextInput';
+import OptionsInput from '../../OptionsInput';
+import ValidatedField from '../../ValidatedField';
 import Select from '../Select';
 import Tag from './Tag';
 
 const getGeneralComponentProps = ({ validation }) => ({
-  className: 'variable-chooser__modal-value',
+  className: 'form-fields-variable-chooser__modal-value',
   validation,
 });
 
@@ -93,31 +93,33 @@ class VariableChooser extends Component {
 
   render() {
     const { name, values, variableRegistry, className, deleteVariable } = this.props;
-    const variableChooserClasses = cx('variable-chooser', className);
+    const variableChooserClasses = cx('form-fields-variable-chooser', className);
 
     return (
       <div className={variableChooserClasses}>
         <FormSection name={name}>
-          {
-            toPairs(values)
-              .map(([variableName]) => (
-                <ValidatedField
-                  name={variableName}
-                  component={Tag}
-                  editVariable={this.editVariable}
-                  deleteVariable={deleteVariable}
-                  validation={get(variableRegistry, [variableName, 'validation'], {})}
-                />
-              ))
-          }
-          <Button
-            className="variable-chooser__add"
-            type="button"
-            onClick={this.openEditVariable}
-          />
+          <div className="form-fields-variable-chooser__variables">
+            {
+              toPairs(values)
+                .map(([variableName]) => (
+                  <ValidatedField
+                    name={variableName}
+                    component={Tag}
+                    editVariable={this.editVariable}
+                    deleteVariable={deleteVariable}
+                    validation={get(variableRegistry, [variableName, 'validation'], {})}
+                  />
+                ))
+            }
+            <Button
+              className="form-fields-variable-chooser__add"
+              type="button"
+              onClick={this.openEditVariable}
+            />
+          </div>
           <Modal show={!!this.state.isEditing}>
-            <div className="variable-chooser__modal">
-              <h2 className="variable-chooser__modal-title">
+            <div className="form-fields-variable-chooser__modal">
+              <h2 className="form-fields-variable-chooser__modal-title">
                 {
                   this.state.editing ?
                     this.state.editing :
@@ -125,12 +127,14 @@ class VariableChooser extends Component {
                 }
               </h2>
               { !this.state.editing ?
-                <div className="variable-chooser__modal-setting">
+                <div className="form-fields-variable-chooser__modal-setting">
                   <Select
-                    className="variable-chooser__modal-value"
-                    onChange={this.editVariable}
+                    className="form-fields-variable-chooser__modal-value"
+                    input={{
+                      onChange: this.editVariable,
+                      value: this.state.editing || '',
+                    }}
                     defaultValue=""
-                    value={this.state.editing || ''}
                   >
                     <option value="" disabled>Variable name...</option>
                     {
@@ -141,14 +145,14 @@ class VariableChooser extends Component {
                     }
                   </Select>
                 </div> :
-                <div className="variable-chooser__modal-setting">
+                <div className="form-fields-variable-chooser__modal-setting">
                   <ValidatedField
                     {...getEditComponentProps(variableRegistry, this.state.editing)}
                     name={`${this.state.editing}`}
                   />
                 </div>
               }
-              <div className="variable-chooser__modal-controls">
+              <div className="form-fields-variable-chooser__modal-controls">
                 <Button
                   onClick={this.closeEditVariable}
                   type="button"

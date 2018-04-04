@@ -15,7 +15,6 @@ const fieldName = 'prompts';
 
 const getId = (prompts, fieldName) => {
   const path = toPath(fieldName).slice(1);
-  console.log('ID', get(prompts, [ ...path, 'id' ]))
   return get(prompts, [ ...path, 'id' ]);
 };
 

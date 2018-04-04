@@ -1,23 +1,26 @@
-.variable-chooser {
+.form-fields-variable-chooser {
   &__variables {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   &__variable {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--variant--1);
     color: var(--text);
-    padding: 0 unit(2);
-    border-radius: unit(1);
+    padding: 0 unit(1) 0 unit(2);
+    border-radius: unit(2);
     margin: 0 unit(.5) unit(.5) 0;
     height: unit(4);
-    box-sizing: border-box;
     border-style: solid;
     border-color: transparent;
     border-width: 2px;
-    line-height: unit(4);
+    line-height: calc(#{unit(4)} - 4px);
     overflow: hidden;
     white-space: nowrap;
     transition: background-color var(--animation-easing) var(--animation-duration-fast),
@@ -38,6 +41,11 @@
     &--has-error {
       background-color: var(--color-platinum--dark);
       border-color: var(--error);
+      color: var(--error);
+    }
+
+    .form-round-button {
+      margin: 0 0 0 unit(2);
     }
   }
 
