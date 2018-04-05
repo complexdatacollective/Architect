@@ -7,6 +7,8 @@ import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 const appear = {
   opacity: [0, 1],
   scale: [0, 1],
+  elasticity: 0,
+  easing: 'easeInOutQuad',
   duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
 };
 
@@ -15,34 +17,18 @@ const disappear = {
   scale: [1, 0],
   height: 0,
   margin: 0,
+  elasticity: 0,
+  easing: 'easeInOutQuad',
   duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
 };
 
 const AppearTransition = ({ children, ...props }) => (
   <Transition
+    mountOnEnter
+    unmountOnExit
     timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
-    onEnter={el => el.setAttribute('style', 'display: block;')}
-    onExited={el => el.setAttribute('style', 'display: none;')}
-    onEntering={
-      (el) => {
-        anime({
-          targets: el,
-          elasticity: 0,
-          easing: 'easeInOutQuad',
-          ...appear,
-        });
-      }
-    }
-    onExiting={
-      (el) => {
-        anime({
-          targets: el,
-          elasticity: 0,
-          easing: 'easeInOutQuad',
-          ...disappear,
-        });
-      }
-    }
+    onEntering={el => anime({ targets: el, ...appear })}
+    onExiting={el => anime({ targets: el, ...disappear })}
     {...props}
   >
     { children }

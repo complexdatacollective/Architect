@@ -21,9 +21,9 @@ const disappear = {
 
 const FolderTransition = ({ children, ...props }) => (
   <Transition
+    mountOnEnter
+    unmountOnExit
     timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
-    onEnter={el => el.setAttribute('style', 'display: block;')}
-    onExited={el => el.setAttribute('style', 'display: none;')}
     onEntering={
       (el) => {
         anime({
