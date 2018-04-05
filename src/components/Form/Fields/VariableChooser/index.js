@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { toPairs, get, omit } from 'lodash';
+import { toPairs, get, omit, isEmpty } from 'lodash';
 import { Button } from 'network-canvas-ui';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
@@ -8,52 +8,10 @@ import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
 import Modal from '../../../Modal';
-import SeamlessTextInput from '../../SeamlessTextInput';
-import OptionsInput from '../../OptionsInput';
 import ValidatedField from '../../ValidatedField';
 import Select from '../Select';
 import Tag from './Tag';
-
-const getGeneralComponentProps = ({ validation }) => ({
-  className: 'form-fields-variable-chooser__modal-value',
-  validation,
-});
-
-const getEditComponentProps = (variables, variableName) => {
-  const variable = get(variables, variableName, {});
-  const generalComponentProps = getGeneralComponentProps(variable);
-
-  switch (variable.type) {
-    case 'boolean':
-      return {
-        ...generalComponentProps,
-        component: OptionsInput,
-        options: [true, false],
-        optionComponent: ({ label }) => (<div>{label}</div>), // eslint-disable-line
-      };
-    case 'number':
-      return {
-        ...generalComponentProps,
-        component: SeamlessTextInput,
-        type: variable.type,
-      };
-    case 'enumerable':
-    case 'options':
-      return {
-        ...generalComponentProps,
-        component: OptionsInput,
-        options: variable.options,
-        optionComponent: ({ label }) => (<div>{label}</div>), // eslint-disable-line
-      };
-    case 'text':
-    default:
-      return {
-        ...generalComponentProps,
-        component: SeamlessTextInput,
-        type: 'text',
-      };
-  }
-};
+import VariableField from './VariableField';
 
 class VariableChooser extends Component {
   static propTypes = {
@@ -79,7 +37,12 @@ class VariableChooser extends Component {
     };
   }
 
+  onSelectVariable = ({ target: { value } }) => {
+    this.editVariable(value);
+  };
+
   editVariable = (variable) => {
+    if (isEmpty(variable)) { return; }
     this.setState({ isEditing: true, editing: variable });
   };
 
@@ -131,7 +94,7 @@ class VariableChooser extends Component {
                   <Select
                     className="form-fields-variable-chooser__modal-value"
                     input={{
-                      onChange: this.editVariable,
+                      onChange: this.onSelectVariable,
                       value: this.state.editing || '',
                     }}
                     defaultValue=""
@@ -146,8 +109,8 @@ class VariableChooser extends Component {
                   </Select>
                 </div> :
                 <div className="form-fields-variable-chooser__modal-setting">
-                  <ValidatedField
-                    {...getEditComponentProps(variableRegistry, this.state.editing)}
+                  <VariableField
+                    variable={get(variableRegistry, this.state.editing, null)}
                     name={`${this.state.editing}`}
                   />
                 </div>

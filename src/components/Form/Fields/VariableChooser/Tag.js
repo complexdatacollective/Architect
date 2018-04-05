@@ -27,9 +27,13 @@ const Tag = ({
       key={fieldName}
       className={tagClasses}
     >
-      <span onClick={() => editVariable(variableName)}>
-        <strong>{variableName}</strong>: <em>{displayValue}</em>
-      </span>
+      <div
+        className="form-fields-variable-chooser__variable-detail"
+        onClick={() => editVariable(variableName)}
+      >
+        <div className="form-fields-variable-chooser__variable-name">{variableName}</div>:
+        <div className="form-fields-variable-chooser__variable-value">{displayValue}</div>
+      </div>
       <RoundButton size="small" onClick={() => deleteVariable(variableName)} icon="X" />
     </div>
   );

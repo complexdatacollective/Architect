@@ -18,6 +18,7 @@ $component-name: form-fields-contexts;
     border-style: solid;
     border-color: nth($colors, 1);
     color: nth($colors, 1);
+    background-color: var(--color-white);
     transition: background-color var(--animation-easing) var(--animation-duration-fast),
      color var(--animation-easing) var(--animation-duration-fast);
 

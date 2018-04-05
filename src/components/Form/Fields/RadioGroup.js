@@ -35,25 +35,25 @@ class Contexts extends Component {
     const optionLabel = getLabel(option);
     const selected = optionValue === value;
     const optionClasses = cx(
-      'form-fields-contexts__option',
-      { 'form-fields-contexts__option--selected': selected },
+      'form-fields-radio-group__option',
+      { 'form-fields-radio-group__option--selected': selected },
     );
 
     return (
-      <label
-        htmlFor={`${this.id}_${index}`}
-        className={optionClasses}
-      >
+      <label className={optionClasses} htmlFor={`${this.id}_${index}`}>
         <input
           id={`${this.id}_${index}`}
-          className="form-fields-contexts__option-input"
+          className="form-fields-radio-group__option-input"
           type="radio"
           name={name}
           value={index}
           checked={selected}
           onChange={this.onChange}
         />
-        { optionLabel }
+        <div className="form-fields-radio-group__option-radio" />
+        <div className="form-fields-radio-group__option-label">
+          {optionLabel}
+        </div>
       </label>
     );
   }
@@ -66,7 +66,7 @@ class Contexts extends Component {
     } = this.props;
 
     const classNames = cx(
-      'form-fields-contexts',
+      'form-fields-radio-group',
       className,
     );
 
