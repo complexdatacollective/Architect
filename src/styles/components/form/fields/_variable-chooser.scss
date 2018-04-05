@@ -64,16 +64,6 @@
   }
 
   &__add {
-    font-size: unit(3);
-    background: var(--background);
-    color: var(--text);
-    width: unit(4);
-    height: unit(4);
-    border-radius: unit(4);
-    display: inline-block;
-    border: 0;
-    cursor: pointer;
-
     &::before {
       content: '+';
       color: var(--text);

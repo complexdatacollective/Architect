@@ -9,6 +9,7 @@ import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
 import Modal from '../../../Modal';
 import ValidatedField from '../../ValidatedField';
+import RoundButton from '../../RoundButton';
 import Select from '../Select';
 import Tag from './Tag';
 import VariableField from './VariableField';
@@ -74,7 +75,7 @@ class VariableChooser extends Component {
                   />
                 ))
             }
-            <Button
+            <RoundButton
               className="form-fields-variable-chooser__add"
               type="button"
               onClick={this.openEditVariable}

@@ -34,7 +34,7 @@ const Tag = ({
         <div className="form-fields-variable-chooser__variable-name">{variableName}</div>:
         <div className="form-fields-variable-chooser__variable-value">{displayValue}</div>
       </div>
-      <RoundButton size="small" onClick={() => deleteVariable(variableName)} icon="X" />
+      <RoundButton size="small" onClick={() => deleteVariable(variableName)} icon="close" />
     </div>
   );
 };

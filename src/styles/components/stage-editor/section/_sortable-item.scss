@@ -35,15 +35,7 @@
   }
 
   &__delete {
-    @extend %content-item-control;
-    @include button-background(palette('dark-background'));
     margin-left: unit(1);
     flex: 0 0 unit(4);
-    cursor: pointer;
-
-    .icon {
-      width: 60%;
-      height: 60%;
-    }
   }
 }

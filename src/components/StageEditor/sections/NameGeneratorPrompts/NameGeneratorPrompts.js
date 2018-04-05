@@ -1,37 +1,37 @@
-/* eslint-disable */
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { FieldArray, arrayPush } from 'redux-form';
-import { has, get, toPath } from 'lodash';
+import { has, get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import { Section, Editor, Guidance } from '../../../Guided';
+import RoundButton from '../../../Form/RoundButton';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
 import SortableItems from '../SortableItems';
 
 const fieldName = 'prompts';
-
-const getId = (prompts, fieldName) => {
-  const path = toPath(fieldName).slice(1);
-  return get(prompts, [ ...path, 'id' ]);
-};
 
 const NameGeneratorPromptsSection = ({ variableRegistry, form, prompts, ...props }) => (
   <Section className="stage-editor-section">
     <Editor className="stage-editor-section__edit">
       <h2>Prompts</h2>
       <p>Name gen prompt specific</p>
-      <FieldArray
-        name={fieldName}
-        component={SortableItems}
-        itemComponent={NameGeneratorPrompt}
-        variableRegistry={variableRegistry}
-        getId={(fieldName) => getId(prompts, fieldName)}
-        form={form}
-      />
-      <button type="button" onClick={props.addNewPrompt}>+</button>
+      <div className="stage-editor-section-name-generator-prompts">
+        <div className="stage-editor-section-name-generator-prompts__prompts">
+          <FieldArray
+            name={fieldName}
+            component={SortableItems}
+            itemComponent={NameGeneratorPrompt}
+            variableRegistry={variableRegistry}
+            form={form}
+          />
+        </div>
+        <div className="stage-editor-section-name-generator-prompts__add">
+          <RoundButton type="button" onClick={props.addNewPrompt} content="+" />
+        </div>
+      </div>
     </Editor>
     <Guidance className="stage-editor-section__guidance">
       This is guidance for prompts.
@@ -63,7 +63,7 @@ const mapStateToProps = (state, props) => ({
   show: has(props, 'stage.subject.type'),
   variableRegistry: getVariablesFormNodeType(state, props),
   prompts: props.form.getValues(state, fieldName),
-})
+});
 
 const mapDispatchToProps = (dispatch, { form: { name } }) => ({
   addNewPrompt: bindActionCreators(
