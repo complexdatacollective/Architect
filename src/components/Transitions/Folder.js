@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
 import anime from 'animejs';
-import { getCSSVariableAsNumber } from '../utils/CSSVariables';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const appear = {
   opacity: [0, 1],
@@ -22,7 +22,9 @@ const disappear = {
 const FolderTransition = ({ children, ...props }) => (
   <Transition
     timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
-    onEnter={
+    onEnter={el => el.setAttribute('style', 'display: block;')}
+    onExited={el => el.setAttribute('style', 'display: none;')}
+    onEntering={
       (el) => {
         anime({
           targets: el,
@@ -32,7 +34,7 @@ const FolderTransition = ({ children, ...props }) => (
         });
       }
     }
-    onExit={
+    onExiting={
       (el) => {
         anime({
           targets: el,

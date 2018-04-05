@@ -21,7 +21,9 @@ const disappear = {
 const AppearTransition = ({ children, ...props }) => (
   <Transition
     timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
-    onEnter={
+    onEnter={el => el.setAttribute('style', 'display: block;')}
+    onExited={el => el.setAttribute('style', 'display: none;')}
+    onEntering={
       (el) => {
         anime({
           targets: el,
@@ -31,7 +33,7 @@ const AppearTransition = ({ children, ...props }) => (
         });
       }
     }
-    onExit={
+    onExiting={
       (el) => {
         anime({
           targets: el,

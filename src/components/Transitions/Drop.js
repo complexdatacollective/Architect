@@ -5,39 +5,31 @@ import anime from 'animejs';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const appear = {
-  opacity: [0, 1],
+  translateY: ['-100%', 0],
   elasticity: 0,
   easing: 'easeInOutQuad',
   duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
 };
 
-const disappear = {
-  opacity: [1, 0],
-  elasticity: 0,
-  easing: 'easeInOutQuad',
-  duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
-};
-
-const Fade = ({ children, ...props }) => (
+const Drop = ({ children, ...props }) => (
   <Transition
     mountOnEnter
     unmountOnExit
     appear
     timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
     onEntering={el => anime({ targets: el, ...appear })}
-    onExiting={el => anime({ targets: el, ...disappear })}
     {...props}
   >
     { children }
   </Transition>
 );
 
-Fade.propTypes = {
+Drop.propTypes = {
   children: PropTypes.any,
 };
 
-Fade.defaultProps = {
+Drop.defaultProps = {
   children: null,
 };
 
-export default Fade;
+export default Drop;

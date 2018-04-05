@@ -22,7 +22,9 @@ const disappear = {
 const FolderTransition = ({ children, ...props }) => (
   <Transition
     timeout={duration}
-    onEnter={
+    onEnter={el => el.setAttribute('style', 'display: block;')}
+    onExited={el => el.setAttribute('style', 'display: none;')}
+    onEntering={
       (el) => {
         anime({
           targets: el,
@@ -32,7 +34,7 @@ const FolderTransition = ({ children, ...props }) => (
         });
       }
     }
-    onExit={
+    onExiting={
       (el) => {
         anime({
           targets: el,
