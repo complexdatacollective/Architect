@@ -23,12 +23,13 @@ class NodeType extends Component {
     const {
       nodeTypes,
       disabled,
+      ...rest
     } = this.props;
 
     const nodeTypeClasses = cx('stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
 
     return (
-      <Section className="stage-editor-section">
+      <Section className="stage-editor-section" {...rest}>
         <Editor className="stage-editor-section__edit" disabled={disabled}>
           <div className={nodeTypeClasses}>
             <h2>Node Type</h2>

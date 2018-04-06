@@ -3,8 +3,8 @@ import React from 'react';
 import { Section, Editor, Guidance } from '../../Guided';
 import { SeamlessTextInput, ValidatedField } from '../../../components/Form';
 
-const Title = () => (
-  <Section className="stage-editor-section">
+const Title = props => (
+  <Section className="stage-editor-section" {...props}>
     <Editor className="stage-editor-section__edit">
       <h2>Title</h2>
       <ValidatedField

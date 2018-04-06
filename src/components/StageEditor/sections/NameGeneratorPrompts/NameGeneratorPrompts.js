@@ -13,8 +13,14 @@ import SortableItems from '../SortableItems';
 
 const fieldName = 'prompts';
 
-const NameGeneratorPromptsSection = ({ variableRegistry, form, prompts, ...props }) => (
-  <Section className="stage-editor-section">
+const NameGeneratorPromptsSection = ({
+  variableRegistry,
+  form,
+  prompts,
+  addNewPrompt,
+  ...rest
+}) => (
+  <Section className="stage-editor-section" {...rest}>
     <Editor className="stage-editor-section__edit">
       <h2>Prompts</h2>
       <p>Name gen prompt specific</p>
@@ -29,7 +35,7 @@ const NameGeneratorPromptsSection = ({ variableRegistry, form, prompts, ...props
           />
         </div>
         <div className="stage-editor-section-name-generator-prompts__add">
-          <RoundButton type="button" onClick={props.addNewPrompt} content="+" />
+          <RoundButton type="button" onClick={addNewPrompt} content="+" />
         </div>
       </div>
     </Editor>

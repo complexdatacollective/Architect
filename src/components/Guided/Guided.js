@@ -34,7 +34,7 @@ class Guided extends Component {
           {
             isActive,
             key: index,
-            onMouseOver: () => this.onMouseOver(index),
+            onMouseOver: () => { this.onMouseOver(index); },
           },
         );
       });

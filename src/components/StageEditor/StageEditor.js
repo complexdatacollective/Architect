@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
+import { Button } from 'network-canvas-ui';
 import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
@@ -78,7 +79,7 @@ const StageEditor = ({
               There are some errors that need to be fixed before this can be saved!
             </p>
           ) }
-          <button type="button" onClick={toggleCodeView}>Show Code View</button>
+          <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
         </Editor>
       </Section>
       {

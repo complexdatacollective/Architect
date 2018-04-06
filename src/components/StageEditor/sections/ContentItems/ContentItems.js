@@ -26,8 +26,8 @@ AddButton.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const ContentItems = props => (
-  <Section className="stage-editor-section">
+const ContentItems = ({ form, createNewItem, ...rest }) => (
+  <Section className="stage-editor-section" {...rest}>
     <Editor className="stage-editor-section__edit">
       <div className="stage-editor-section-content-items">
         <h2>Content</h2>
@@ -36,14 +36,14 @@ const ContentItems = props => (
           name="items"
           component={SortableItems}
           itemComponent={ContentItem}
-          form={props.form}
+          form={form}
         />
 
         <div className="stage-editor-section-content-items__controls">
-          <AddButton onClick={() => props.createNewItem('text')} type="text">Text</AddButton>
-          <AddButton onClick={() => props.createNewItem('image')} type="image">Image</AddButton>
-          <AddButton onClick={() => props.createNewItem('audio')} type="audio">Audio</AddButton>
-          <AddButton onClick={() => props.createNewItem('video')} type="video">Video</AddButton>
+          <AddButton onClick={() => createNewItem('text')} type="text">Text</AddButton>
+          <AddButton onClick={() => createNewItem('image')} type="image">Image</AddButton>
+          <AddButton onClick={() => createNewItem('audio')} type="audio">Audio</AddButton>
+          <AddButton onClick={() => createNewItem('video')} type="video">Video</AddButton>
         </div>
       </div>
     </Editor>

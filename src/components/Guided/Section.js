@@ -39,7 +39,7 @@ Section.defaultProps = {
   isActive: false,
   show: true,
   className: '',
-  onMouseOver: () => {},
+  onMouseOver: () => { console.log("where's my thing"); },
 };
 
 export default Section;

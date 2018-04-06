@@ -50,10 +50,10 @@ class Form extends Component {
   };
 
   render() {
-    const { show, forms } = this.props;
+    const { show, forms, ...rest } = this.props;
 
     return (
-      <Section className="stage-editor-section" show={show}>
+      <Section className="stage-editor-section" show={show} {...rest}>
         <Editor className="stage-editor-section__edit">
           <h2>Form</h2>
           <p>Which form should be used to create and edit nodes on this stage?</p>
