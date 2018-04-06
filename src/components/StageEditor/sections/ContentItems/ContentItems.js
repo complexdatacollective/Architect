@@ -4,15 +4,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
+import { Button } from 'network-canvas-ui';
 import { Section, Editor, Guidance } from '../../../Guided';
-import { Button } from '../../../../components/Form';
 import SortableItems from '../SortableItems';
 import ContentItem from './ContentItem';
 
 const AddButton = ({ onClick, type, children }) => (
   <Button
     type="button"
-    className={`stage-editor-section-content-items__control stage-editor-section-content-items__control--${type}`}
+    size="small"
+    className={`button button--small stage-editor-section-content-items__control stage-editor-section-content-items__control--${type}`}
     onClick={onClick}
   >
     {children}
