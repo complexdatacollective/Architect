@@ -4,7 +4,6 @@ import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, has, difference } from 'lodash';
 import cx from 'classnames';
-import { Button } from 'network-canvas-ui';
 import { Section, Editor, Guidance } from '../../Guided';
 import Contexts from '../../../components/Form/Fields/Contexts';
 
@@ -12,7 +11,7 @@ class NodeType extends Component {
   resetStage() {
     const { stage, resetField } = this.props;
     // eslint-disable-next-line
-    if (confirm('Really? this will reset everything so far!')) {
+    if (confirm('First you will need to reset the rest of the stage, are you sure?')) {
       const fieldsToReset = difference(keys(stage), ['id', 'type', 'label']);
 
       fieldsToReset.forEach(resetField);
@@ -30,22 +29,23 @@ class NodeType extends Component {
 
     return (
       <Section className="stage-editor-section" {...rest}>
-        <Editor className="stage-editor-section__edit" disabled={disabled}>
+        <Editor className="stage-editor-section__edit">
           <div className={nodeTypeClasses}>
             <h2>Node Type</h2>
             <p>Which type of node does this name generator create?</p>
-
-            <div className="stage-editor-section-node-type__edit">
-              <Field
-                name="subject"
-                parse={value => ({ type: value, entity: 'node' })}
-                format={value => get(value, 'type')}
-                options={nodeTypes}
-                component={Contexts}
-              />
-            </div>
-            <div className="stage-editor-section-node-type__reset">
-              <Button type="button" key="cancel" size="small" onClick={() => this.resetStage()}>Change Node Type</Button>
+            <div
+              className="stage-editor-section-node-type__edit"
+              onClick={disabled ? () => this.resetStage() : () => {}}
+            >
+              <div className="stage-editor-section-node-type__edit-capture">
+                <Field
+                  name="subject"
+                  parse={value => ({ type: value, entity: 'node' })}
+                  format={value => get(value, 'type')}
+                  options={nodeTypes}
+                  component={Contexts}
+                />
+              </div>
             </div>
           </div>
         </Editor>

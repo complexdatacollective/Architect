@@ -1,31 +1,17 @@
 $component-name: stage-editor-section-node-type;
 
 .#{$component-name} {
-  &__reset {
-    pointer-events: auto !important;
-    opacity: 0;
-    margin-top: 0;
-    transition: margin-top var(--animation-easing) var(--animation-duration-fast),
-      max-height var(--animation-easing) var(--animation-duration-fast),
-      opacity var(--animation-easing) var(--animation-duration-fast);
-  }
-
   &__edit {
-    opacity: 1;
-    transition: opacity var(--animation-easing) var(--animation-duration-fast);
+    display: inline-block;
   }
 
   &--disabled {
     .#{$component-name} {
-      &__reset {
-        max-height: 200px;
-        margin-top: unit(2);
-        opacity: 1;
-      }
-
       &__edit {
-        pointer-events: none !important;
-        opacity: 0.5;
+        cursor: pointer;
+        &-capture {
+          pointer-events: none !important;
+        }
       }
     }
   }
