@@ -21,7 +21,7 @@ class SeamlessTextInput extends PureComponent {
   render() {
     const {
       input,
-      meta: { error },
+      meta: { error, active },
       className,
       placeholder,
       type,
@@ -31,7 +31,7 @@ class SeamlessTextInput extends PureComponent {
       className,
       'seamless-text-input',
       {
-        'seamless-text-input--has-focus': input.active,
+        'seamless-text-input--has-focus': active,
         'seamless-text-input--has-error': error,
       },
     );
@@ -44,7 +44,8 @@ class SeamlessTextInput extends PureComponent {
           type={type}
           {...input}
         />
-        <Icon name="edit" className="seamless-text-input__icon" />
+        <Icon name="edit" className="seamless-text-input__icon seamless-text-input__icon--edit" />
+        <Icon name="close" className="seamless-text-input__icon seamless-text-input__icon--error" />
         <p className="seamless-text-input__error">{error}</p>
       </div>
     );

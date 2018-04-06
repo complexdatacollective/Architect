@@ -113,11 +113,6 @@
     .seamless-text-input__input {
       @include preset(copy-large);
       color: var(--text);
-      border-bottom-color: var(--intent-border);
-
-      &:focus {
-        border-bottom-color: var(--input-focus);
-      }
     }
   }
 }
