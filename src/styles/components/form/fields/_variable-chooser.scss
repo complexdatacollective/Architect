@@ -74,7 +74,7 @@
   }
 
   &__modal {
-    background-color: var(--intent);
+    background-color: var(--dialog-background);
     color: var(--text);
     padding: unit(4);
     border-radius: unit(2);
@@ -98,6 +98,12 @@
     &-label {
       @include preset(copy-small);
       margin: 0 0 unit(.5);
+    }
+
+    &-setting {
+      background-color: var(--dialog-background--dark);
+      padding: unit(4);
+      border-radius: unit(2);
     }
 
     &-controls {

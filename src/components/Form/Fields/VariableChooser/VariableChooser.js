@@ -84,32 +84,31 @@ class VariableChooser extends Component {
           <Modal show={!!this.state.isEditing}>
             <div className="form-fields-variable-chooser__modal">
               <h2 className="form-fields-variable-chooser__modal-title">
-                {
-                  this.state.editing ?
-                    this.state.editing :
-                    'Please select a variable to add/edit'
-                }
+                Edit variable
               </h2>
-              { !this.state.editing ?
+              <div className="form-fields-variable-chooser__modal-controls">
+                <p>Please select a variable to add/edit</p>
+                <Select
+                  className="form-fields-variable-chooser__modal-value"
+                  input={{
+                    onChange: this.onSelectVariable,
+                    value: this.state.editing || '',
+                  }}
+                  defaultValue=""
+                >
+                  <option value="" disabled>Variable name...</option>
+                  {
+                    toPairs(variableRegistry)
+                      .map(([variableName]) => (
+                        <option key={variableName} value={variableName}>{variableName}</option>
+                      ))
+                  }
+                </Select>
+              </div>
+
+              { this.state.editing &&
                 <div className="form-fields-variable-chooser__modal-setting">
-                  <Select
-                    className="form-fields-variable-chooser__modal-value"
-                    input={{
-                      onChange: this.onSelectVariable,
-                      value: this.state.editing || '',
-                    }}
-                    defaultValue=""
-                  >
-                    <option value="" disabled>Variable name...</option>
-                    {
-                      toPairs(variableRegistry)
-                        .map(([variableName]) => (
-                          <option key={variableName} value={variableName}>{variableName}</option>
-                        ))
-                    }
-                  </Select>
-                </div> :
-                <div className="form-fields-variable-chooser__modal-setting">
+                  <h3>{ this.state.editing }</h3>
                   <VariableField
                     variable={get(variableRegistry, this.state.editing, null)}
                     name={`${this.state.editing}`}
