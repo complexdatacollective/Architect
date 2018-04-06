@@ -28,11 +28,11 @@ class MarkdownInput extends PureComponent {
     return (
       <label
         htmlFor={this.id}
-        className={cx('markdown-input', { 'markdown-input--is-focussed': active })}
+        className={cx('form-fields-markdown', { 'form-fields-markdown--is-focussed': active })}
       >
-        <Markdown className="markdown-input__preview" source={value} />
+        <Markdown className="form-fields-markdown__preview" source={value} />
         <textarea
-          className={cx('markdown-input__input')}
+          className={cx('form-fields-markdown__input')}
           id={this.id}
           {...this.props.input}
         />

@@ -4,12 +4,12 @@ import { compose, withHandlers, defaultProps } from 'recompose';
 import { TransitionGroup } from 'react-transition-group';
 import { SortableContainer } from 'react-sortable-hoc';
 import { get } from 'lodash';
-import { getCSSVariableAsNumber } from '../../../utils/CSSVariables';
-import WipeTransition from '../../Transitions/Wipe';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
+import WipeTransition from '../Transitions/Wipe';
 import SortableItem from './SortableItem';
 
 const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
-  <TransitionGroup className="sortable-items">
+  <TransitionGroup className="stage-editor-sortable-items">
     { fields.map((fieldId, index) => (
       <WipeTransition key={get(fields.get(index), 'id', index)}>
         <SortableItem remove={() => fields.remove(index)} index={index}>

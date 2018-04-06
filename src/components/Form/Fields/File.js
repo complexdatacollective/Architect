@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone';
 import { uniqueId } from 'lodash';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
-import { actionCreators as assetActions } from '../../ducks/modules/protocol/assets';
+import { actionCreators as assetActions } from '../../../ducks/modules/protocol/assets';
 
 class FileInput extends PureComponent {
   static propTypes = {
@@ -20,8 +20,8 @@ class FileInput extends PureComponent {
 
   static defaultProps = {
     value: '',
-    className: 'file-input',
-    completeClassName: 'file-input--complete',
+    className: 'form-fields-file',
+    completeClassName: 'form-fields-file--complete',
     accept: '',
     children: value => value,
   };
@@ -54,11 +54,11 @@ class FileInput extends PureComponent {
           onDrop={this.onDrop}
           multiple={false}
           accept={accept}
-          className={cx('input-dropzone', { 'input-dropzone--replace': !!value })}
-          activeClassName="input-dropzone--active"
-          acceptClassName="input-dropzone--accept"
-          rejectClassName="input-dropzone--reject"
-          disabledClassName="input-dropzone--disabled"
+          className={cx('form-dropzone', { 'form-dropzone--replace': !!value })}
+          activeClassName="form-dropzone--active"
+          acceptClassName="form-dropzone--accept"
+          rejectClassName="form-dropzone--reject"
+          disabledClassName="form-dropzone--disabled"
         />
       </div>
     );

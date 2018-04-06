@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { get } from 'lodash';
-import { MarkdownInput, ImageInput, AudioInput, VideoInput } from '../../../../components/Form';
+import * as Fields from '../../../../components/Form/Fields';
 
 const contentInputs = {
-  text: MarkdownInput,
-  image: ImageInput,
-  audio: AudioInput,
-  video: VideoInput,
+  text: Fields.Markdown,
+  image: Fields.Image,
+  audio: Fields.Audio,
+  video: Fields.Video,
 };
 
-const getContentInput = type => get(contentInputs, type, MarkdownInput);
+const getContentInput = type => get(contentInputs, type, Fields.Markdown);
 
 const ContentItem = ({ fieldId, type }) => {
   const ContentInput = getContentInput(type);

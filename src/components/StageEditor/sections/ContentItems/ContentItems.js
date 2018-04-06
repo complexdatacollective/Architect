@@ -6,7 +6,7 @@ import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import { Button } from 'network-canvas-ui';
 import { Section, Editor, Guidance } from '../../../Guided';
-import SortableItems from '../SortableItems';
+import SortableItems from '../../SortableItems';
 import ContentItem from './ContentItem';
 
 const AddButton = ({ onClick, type, children }) => (

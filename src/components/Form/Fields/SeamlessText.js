@@ -29,24 +29,24 @@ class SeamlessTextInput extends PureComponent {
 
     const seamlessClasses = cx(
       className,
-      'seamless-text-input',
+      'form-fields-seamless-text',
       {
-        'seamless-text-input--has-focus': active,
-        'seamless-text-input--has-error': error,
+        'form-fields-seamless-text--has-focus': active,
+        'form-fields-seamless-text--has-error': error,
       },
     );
 
     return (
       <div className={seamlessClasses}>
         <input
-          className="seamless-text-input__input"
+          className="form-fields-seamless-text__input"
           placeholder={placeholder}
           type={type}
           {...input}
         />
-        <Icon name="edit" className="seamless-text-input__icon seamless-text-input__icon--edit" />
-        <Icon name="close" className="seamless-text-input__icon seamless-text-input__icon--error" />
-        <p className="seamless-text-input__error">{error}</p>
+        <Icon name="edit" className="form-fields-seamless-text__icon form-fields-seamless-text__icon--edit" />
+        <Icon name="close" className="form-fields-seamless-text__icon form-fields-seamless-text__icon--error" />
+        <p className="form-fields-seamless-text__error">{error}</p>
       </div>
     );
   }

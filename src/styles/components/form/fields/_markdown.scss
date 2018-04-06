@@ -1,4 +1,6 @@
-.markdown-input {
+$component-name: form-fields-markdown;
+
+.#{$component-name} {
   width: 100%;
   vertical-align: top;
   position: relative;
@@ -35,12 +37,12 @@
   }
 
   &--is-focussed {
-    .markdown-input__input {
+    .#{$component-name}__input {
       opacity: 1;
       transform: scale(1, 1);
     }
 
-    .markdown-input__preview {
+    .#{$component-name}__preview {
       width: 50%;
     }
   }

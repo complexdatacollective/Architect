@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import SeamlessTextInput from '../../SeamlessTextInput';
+import SeamlessText from '../SeamlessText';
 import Contexts from '../Contexts';
 import RadioGroup from '../RadioGroup';
 import Select from '../Select';
@@ -12,14 +12,14 @@ const getOptions = (variable) => {
     case 'boolean':
       return { component: RadioGroup, options: [true, false] };
     case 'number':
-      return { component: SeamlessTextInput };
+      return { component: SeamlessText };
     case 'enumerable':
       return { component: Contexts, options: variable.options };
     case 'options':
       return { component: Select, options: variable.options };
     case 'text':
     default:
-      return { component: SeamlessTextInput };
+      return { component: SeamlessText };
   }
 };
 

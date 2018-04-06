@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { SeamlessTextInput } from '../../../Form';
+import SeamlessText from '../../../Form/Fields/SeamlessText';
 import VariableChooser from '../../../Form/Fields/VariableChooser';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry }) => (
@@ -10,7 +10,7 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry }) => (
       <div className="prompt__setting-label">Text for prompt</div>
       <Field
         name={`${fieldId}.text`}
-        component={SeamlessTextInput}
+        component={SeamlessText}
         className="prompt__setting-value"
         placeholder="Enter text for the prompt here"
       />

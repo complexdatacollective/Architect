@@ -1,19 +1,19 @@
 import React from 'react';
-import FileInput from './FileInput';
+import File from './File';
 
 const AudioInput = props => (
-  <FileInput
+  <File
     accept="audio/*"
-    className="audio-input"
-    completeClassName="audio-input--complete"
+    className="form-fields-audio"
+    completeClassName="form-fields-audio--complete"
     {...props}
   >
     { value => (
-      <div className="audio-input__preview">
+      <div className="form-fields-audio__preview">
         { value }
       </div>
     ) }
-  </FileInput>
+  </File>
 );
 
 export default AudioInput;

@@ -1,19 +1,19 @@
 import React from 'react';
-import FileInput from './FileInput';
-import { Image } from '../Assets';
+import File from './File';
+import { Image } from '../../Assets';
 
 const ImageInput = props => (
-  <FileInput
+  <File
     accept="image/*"
-    className="image-input"
+    className="form-fields-image"
     {...props}
   >
     { url => (
-      <div className="image-input__preview">
+      <div className="form-fields-image__preview">
         <Image url={url} alt="" />
       </div>
     ) }
-  </FileInput>
+  </File>
 );
 
 export default ImageInput;

@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
-import RoundButton from '../../Form/RoundButton';
+import RoundButton from '../Form/RoundButton';
 
 const Handle = SortableHandle(() => (
-  <div className="sortable-item__handle" />
+  <div className="stage-editor-sortable-item__handle" />
 ));
 
 const SortableItem = ({ remove, children }) => (
-  <div className="sortable-item">
+  <div className="stage-editor-sortable-item">
     <Handle />
 
-    <div className="sortable-item__content">
+    <div className="stage-editor-sortable-item__content">
       { children }
     </div>
 
@@ -19,7 +19,7 @@ const SortableItem = ({ remove, children }) => (
       onClick={remove}
       type="button"
       icon="close"
-      className="sortable-item__delete"
+      className="stage-editor-sortable-item__delete"
     />
   </div>
 );

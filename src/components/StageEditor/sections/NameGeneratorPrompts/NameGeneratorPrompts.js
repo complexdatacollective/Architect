@@ -9,7 +9,7 @@ import uuid from 'uuid';
 import { Section, Editor, Guidance } from '../../../Guided';
 import RoundButton from '../../../Form/RoundButton';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
-import SortableItems from '../SortableItems';
+import SortableItems from '../../SortableItems';
 
 const fieldName = 'prompts';
 
