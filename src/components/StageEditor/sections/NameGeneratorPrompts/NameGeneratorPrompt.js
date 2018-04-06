@@ -5,20 +5,20 @@ import SeamlessText from '../../../Form/Fields/SeamlessText';
 import VariableChooser from '../../../Form/Fields/VariableChooser';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry }) => (
-  <div className="prompt">
-    <div className="prompt__setting">
-      <div className="prompt__setting-label">Text for prompt</div>
+  <div className="stage-editor-section-name-generator-prompt">
+    <div className="stage-editor-section-name-generator-prompt__setting">
+      <div className="stage-editor-section-name-generator-prompt__setting-label">Text for prompt</div>
       <Field
         name={`${fieldId}.text`}
         component={SeamlessText}
-        className="prompt__setting-value"
+        className="stage-editor-section-name-generator-prompt__setting-value"
         placeholder="Enter text for the prompt here"
       />
     </div>
-    <div className="prompt__setting">
-      <div className="prompt__setting-label">Additional attributes</div>
+    <div className="stage-editor-section-name-generator-prompt__setting">
+      <div className="stage-editor-section-name-generator-prompt__setting-label">Additional attributes</div>
       <VariableChooser
-        className="prompt__setting-value"
+        className="stage-editor-section-name-generator-prompt__setting-value"
         name={`${fieldId}.additionalAttributes`}
         variableRegistry={variableRegistry}
         form={form}
