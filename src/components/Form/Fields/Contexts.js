@@ -53,7 +53,9 @@ class Contexts extends Component {
           checked={selected}
           onChange={this.onChange}
         />
-        { optionLabel }
+        <div className="form-fields-contexts__option-label">
+          {optionLabel}
+        </div>
       </label>
     );
   }

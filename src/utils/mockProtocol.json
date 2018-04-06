@@ -44,7 +44,7 @@
             "label": "Special category",
             "description": "Human readable description",
             "type": "enumerable",
-            "options": [46]
+            "options": [46, 123, "foo"]
           },
           "some_options": {
             "label": "Some possible options",

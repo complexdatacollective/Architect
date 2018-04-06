@@ -1,4 +1,4 @@
-$colors: var(--variant--1), var(--variant--2), var(--variant--3), var(--variant--4);
+$colors: var(--variant--1), var(--variant--3), var(--variant--4);
 $component-name: form-fields-contexts;
 
 .#{$component-name} {
@@ -7,32 +7,40 @@ $component-name: form-fields-contexts;
   &__option {
     cursor: pointer;
     position: relative;
+    display: inline-block;
+    margin: 0 unit(1) unit(1) 0;
+    position: relative;
+    z-index: 1;
     width: unit(8);
     height: unit(8);
     border-radius: unit(8);
-    margin: unit(1) unit(1) 0 0;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
     border-width: 4px;
     border-style: solid;
     border-color: nth($colors, 1);
-    color: nth($colors, 1);
+    transition: color var(--animation-easing) var(--animation-duration-fast);
     background-color: var(--color-white);
-    transition: background-color var(--animation-easing) var(--animation-duration-fast),
-     color var(--animation-easing) var(--animation-duration-fast);
 
     &::before {
       content: '';
-      width: 100%;
-      height: 100%;
+      width: calc(100% - 8px);
+      height: calc(100% - 8px);
+      top: 4px;
+      left: 4px;
       border-radius: 100%;
+      position: absolute;
+      transition: background-color var(--animation-easing) var(--animation-duration-fast);
+    }
+
+    &-label {
       position: absolute;
       top: 0;
       left: 0;
-      border-width: 4px;
-      border-style: solid;
-      border-color: var(--color-white);
+      width: 100%;
+      height: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      color: nth($colors, 1);
     }
 
     &-input {
@@ -40,8 +48,13 @@ $component-name: form-fields-contexts;
     }
 
     &--selected {
-      background-color: nth($colors, 1);
-      color: var(--color-white);
+      &::before {
+        background-color: nth($colors, 1);
+      }
+
+      .#{$component-name}__option-label {
+        color: var(--color-white);
+      }
     }
 
   }
@@ -50,11 +63,19 @@ $component-name: form-fields-contexts;
     $color: nth($colors, $i);
     .#{$component-name}__option:nth-child(#{length($colors)}n + #{$i}) {
       border-color: $color;
-      color: $color;
+
+      .#{$component-name}__option-label {
+        color: $color;
+      }
 
       &.#{$component-name}__option--selected {
-        background-color: $color;
-        color: var(--color-white);
+        .#{$component-name}__option-label {
+          color: var(--color-white);
+        }
+
+        &::before {
+          background-color: nth($colors, $i);
+        }
       }
     }
   }
