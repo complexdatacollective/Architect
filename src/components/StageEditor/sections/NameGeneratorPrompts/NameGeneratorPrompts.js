@@ -17,10 +17,11 @@ const NameGeneratorPromptsSection = ({
   variableRegistry,
   form,
   prompts,
+  show,
   addNewPrompt,
   ...rest
 }) => (
-  <Section className="stage-editor-section" {...rest}>
+  <Section className="stage-editor-section" show={show} {...rest}>
     <Editor className="stage-editor-section__edit">
       <h2>Prompts</h2>
       <p>Name gen prompt specific</p>
@@ -51,12 +52,14 @@ NameGeneratorPromptsSection.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
+  show: PropTypes.bool,
   prompts: PropTypes.array.isRequired,
   addNewPrompt: PropTypes.func.isRequired,
 };
 
 NameGeneratorPromptsSection.defaultProps = {
   variableRegistry: {},
+  show: false,
 };
 
 const getVariablesFormNodeType = (state, props) => {
@@ -65,8 +68,9 @@ const getVariablesFormNodeType = (state, props) => {
   return get(variableRegistry, ['node', type, 'variables'], {});
 };
 
+
 const mapStateToProps = (state, props) => ({
-  show: has(props, 'stage.subject.type'),
+  show: has(props.form.getValues(state, 'subject'), 'type'),
   variableRegistry: getVariablesFormNodeType(state, props),
   prompts: props.form.getValues(state, fieldName),
 });

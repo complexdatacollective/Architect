@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { Field, getFormValues, change as changeField } from 'redux-form';
+import { Field, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, has, get, pickBy } from 'lodash';
+import { keys, get, pickBy } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
 import Radio from '../../Form/Fields/Radio';
 import Select from '../../Form/Fields/Select';
@@ -13,15 +13,15 @@ const CUSTOM_FORM = Symbol('CUSTOM_FORM');
 
 class Form extends Component {
   static propTypes = {
-    stage: PropTypes.object,
     forms: PropTypes.arrayOf(PropTypes.string),
+    form: PropTypes.string,
     show: PropTypes.bool,
     reset: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     show: false,
-    stage: {},
+    form: null,
     forms: [],
   };
 
@@ -29,18 +29,18 @@ class Form extends Component {
     super(props);
 
     this.state = {
-      formType: props.stage.form ? CUSTOM_FORM : DEFAULT_FORM,
+      formType: props.form ? CUSTOM_FORM : DEFAULT_FORM,
     };
   }
 
-  componentWillReceiveProps({ stage: { form } }) {
+  componentWillReceiveProps({ form }) {
     this.setState({
       formType: form ? CUSTOM_FORM : DEFAULT_FORM,
     });
   }
 
   onSelectFormCategory = (formType) => {
-    if (formType === DEFAULT_FORM || this.props.stage.form === '') {
+    if (formType === DEFAULT_FORM || this.props.form === '') {
       this.props.reset();
     }
   };
@@ -114,9 +114,8 @@ class Form extends Component {
   }
 }
 
-const getNodeForms = (state, stage) => {
+const getNodeForms = (state, nodeType) => {
   const forms = get(state, 'protocol.present.forms', {});
-  const nodeType = get(stage, 'subject.type', null);
 
   const validForms = pickBy(
     forms,
@@ -127,12 +126,14 @@ const getNodeForms = (state, stage) => {
 };
 
 const mapStateToProps = (state, props) => {
-  const stage = getFormValues(props.form.name)(state);
+  const formValues = props.form.getValues(state, 'subject', 'form');
+  const nodeType = get(formValues, 'subject.type', null);
+  const form = get(formValues, 'form', null);
 
   return {
-    forms: getNodeForms(state, stage),
-    show: has(stage, 'subject.type'),
-    stage,
+    forms: getNodeForms(state, nodeType),
+    show: !!nodeType,
+    form,
   };
 };
 
