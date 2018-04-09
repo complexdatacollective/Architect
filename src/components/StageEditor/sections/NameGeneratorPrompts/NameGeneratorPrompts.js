@@ -68,7 +68,6 @@ const getVariablesFormNodeType = (state, props) => {
   return get(variableRegistry, ['node', type, 'variables'], {});
 };
 
-
 const mapStateToProps = (state, props) => ({
   show: has(props.form.getValues(state, 'subject'), 'type'),
   variableRegistry: getVariablesFormNodeType(state, props),

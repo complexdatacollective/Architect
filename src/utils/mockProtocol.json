@@ -2,6 +2,16 @@
   "options": {
     "title": "Mock protocol"
   },
+  "externalData": {
+    "previousData": {
+      "nodes": [],
+      "edges": []
+    },
+    "locations": {
+      "nodes": [],
+      "edges": []
+    }
+  },
   "variableRegistry": {
     "node": {
       "person": {

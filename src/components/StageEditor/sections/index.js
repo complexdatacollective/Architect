@@ -3,4 +3,4 @@ export { default as Title } from './Title';
 export { default as NodeType } from './NodeType';
 export { default as Form } from './Form';
 export { default as NameGeneratorPrompts } from './NameGeneratorPrompts';
-export { default as Panels } from './Panels';
+export { default as NodePanels } from './NodePanels';

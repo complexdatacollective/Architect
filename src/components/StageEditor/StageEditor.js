@@ -4,20 +4,13 @@ import { bindActionCreators } from 'redux';
 import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
 import { Button } from 'network-canvas-ui';
-import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { makeGetStage } from '../../selectors/protocol';
 import { Guided, Section, Editor } from '../Guided';
 import flatten from '../../utils/flatten';
-import {
-  Title,
-  ContentItems,
-  NodeType,
-  Form,
-  NameGeneratorPrompts,
-} from './sections';
+import getSectionsForStageType from './getSectionsForStageType';
 import CodeView from './CodeView';
 
 const formName = 'edit-stage';
@@ -25,19 +18,6 @@ const getFormValues = formValueSelector(formName);
 const form = { name: formName, getValues: getFormValues };
 
 const defaultStage = {
-};
-
-const interfaces = {
-  Information: [
-    Title,
-    ContentItems,
-  ],
-  NameGenerator: [
-    Title,
-    NodeType,
-    Form,
-    NameGeneratorPrompts,
-  ],
 };
 
 const renderSections = (interfaceSections, props) => {
@@ -53,15 +33,13 @@ const renderSections = (interfaceSections, props) => {
   );
 };
 
-const renderInterfaceSections = (props) => {
-  const stageType = props.stage.type;
-  const interfaceSections = get(interfaces, stageType, []);
-  return renderSections(interfaceSections, props);
+const renderSectionsForStageType = ({ stageType, ...rest }) => {
+  const interfaceSections = getSectionsForStageType(stageType);
+  return renderSections(interfaceSections, { stageType, ...rest });
 };
 
 const StageEditor = ({
   stage,
-  stageId,
   handleSubmit,
   toggleCodeView,
   codeView,
@@ -83,9 +61,8 @@ const StageEditor = ({
         </Editor>
       </Section>
       {
-        renderInterfaceSections({
-          stage,
-          stageId,
+        renderSectionsForStageType({
+          stageType: stage.type,
           form,
         })
       }
