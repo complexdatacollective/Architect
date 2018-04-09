@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import SeamlessText from '../../../Form/Fields/SeamlessText';
 import Select from '../../../Form/Fields/Select';
+import Filter from '../../../Form/Fields/Filter';
 
 const NodePanel = ({ fieldId, dataSources }) => (
   <div className="stage-editor-section-name-generator-prompt">
@@ -33,6 +34,15 @@ const NodePanel = ({ fieldId, dataSources }) => (
         }
       </Field>
     </div>
+    <div className="stage-editor-section-name-generator-prompt__setting">
+      <div className="stage-editor-section-name-generator-prompt__setting-label">Filter</div>
+      <Field
+        name={`${fieldId}.filter`}
+        component={Filter}
+        className="stage-editor-section-name-generator-prompt__setting-value"
+      />
+    </div>
+
   </div>
 );
 

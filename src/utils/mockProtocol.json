@@ -115,6 +115,12 @@
       "prompts": [
         { "id": 1, "text": "foo", "additionalAttributes": { "name": "not actually valid" } },
         { "id": 2, "text": "bar", "additionalAttributes": { "close_friend": true, "support_friend": true } }
+      ],
+      "panels": [
+        {
+          "id": 1,
+          "title": "test"
+        }
       ]
     },
     { "id": 2, "type": "Information" }

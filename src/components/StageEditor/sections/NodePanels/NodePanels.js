@@ -56,7 +56,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewPanel: bindActionCreators(
-    () => arrayPush(form.name, 'panels', { id: uuid(), title: null, dataSource: null }),
+    () => arrayPush(form.name, 'panels', { id: uuid(), title: null, dataSource: null, filter: null }),
     dispatch,
   ),
 });
