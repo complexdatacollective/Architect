@@ -20,7 +20,7 @@ const ContentItem = ({ fieldId, type }) => {
   return (
     <div>
       <Field
-        name={`${fieldId}.value`}
+        name={`${fieldId}.content`}
         component={ContentInput}
       />
     </div>
