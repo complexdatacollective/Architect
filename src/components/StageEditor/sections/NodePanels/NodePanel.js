@@ -26,10 +26,11 @@ const NodePanel = ({ fieldId, dataSources }) => (
         defaultValue=""
       >
         <option value="" disabled>Select data source</option>
+        <option key="existing" value="existing">Current network</option>
         {
           dataSources
             .map(dataSource => (
-              <option key={dataSource} value={dataSource}>{dataSource}</option>
+              <option key={dataSource} value={dataSource}>Protocol: {dataSource}</option>
             ))
         }
       </Field>
