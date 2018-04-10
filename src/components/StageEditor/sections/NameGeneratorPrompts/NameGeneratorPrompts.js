@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { FieldArray, arrayPush } from 'redux-form';
-import { has, get } from 'lodash';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import { Section, Editor, Guidance } from '../../../Guided';
@@ -62,17 +62,19 @@ NameGeneratorPromptsSection.defaultProps = {
   show: false,
 };
 
-const getVariablesFormNodeType = (state, props) => {
+const getVariablesForNodeType = (state, nodeType) => {
   const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-  const { type } = get(props, 'stage.subject', {});
-  return get(variableRegistry, ['node', type, 'variables'], {});
+  return get(variableRegistry, ['node', nodeType, 'variables'], {});
 };
 
-const mapStateToProps = (state, props) => ({
-  show: has(props.form.getValues(state, 'subject'), 'type'),
-  variableRegistry: getVariablesFormNodeType(state, props),
-  prompts: props.form.getValues(state, fieldName),
-});
+const mapStateToProps = (state, props) => {
+  const nodeType = get(props.form.getValues(state, 'subject'), 'type');
+  return {
+    show: !!nodeType,
+    variableRegistry: getVariablesForNodeType(state, nodeType),
+    prompts: props.form.getValues(state, fieldName),
+  };
+};
 
 const mapDispatchToProps = (dispatch, { form: { name } }) => ({
   addNewPrompt: bindActionCreators(
