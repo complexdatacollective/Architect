@@ -142,7 +142,7 @@ function mapStateToProps(state) {
   return {
     stages: protocol.stages,
     hasChanges: state.protocol.past.length > 0,
-    hasUnsavedChanges: (state.protocol.past.length > state.session.lastSaved),
+    hasUnsavedChanges: (state.session.lastChanged > state.session.lastSaved),
   };
 }
 

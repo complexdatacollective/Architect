@@ -4,7 +4,7 @@ import { getProtocol } from '../../../selectors/protocol';
 const SAVE_COMPLETE = Symbol('PROTOCOL/SAVE_COMPLETE');
 const EXPORT_COMPLETE = Symbol('PROTOCOL/EXPORT_COMPLETE');
 
-const saveComplete = lastSaved => ({ type: SAVE_COMPLETE, lastSaved });
+const saveComplete = () => ({ type: SAVE_COMPLETE });
 const exportComplete = () => ({ type: EXPORT_COMPLETE });
 
 const saveProtocolAction = () =>
@@ -13,7 +13,7 @@ const saveProtocolAction = () =>
     const protocolPath = state.session.activeProtocol;
     const protocol = getProtocol(state);
     saveProtocol(protocolPath, protocol)
-      .then(() => dispatch(saveComplete(state.protocol.past.length)));
+      .then(() => dispatch(saveComplete()));
   };
 
 const exportProtocolAction = () =>
@@ -22,7 +22,7 @@ const exportProtocolAction = () =>
     const protocolPath = state.session.activeProtocol;
     const protocol = getProtocol(state);
     saveProtocol(protocolPath, protocol)
-      .then(() => dispatch(saveComplete(state.protocol.past.length)))
+      .then(() => dispatch(saveComplete()))
       .then(() => exportProtocol(protocolPath))
       .then(() => dispatch(exportComplete()));
   };
