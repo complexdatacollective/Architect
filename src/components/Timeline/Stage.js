@@ -9,7 +9,7 @@ const zoomColors = [getCSSVariableAsString('--light-background'), '#ffffff'];
 const EditStageButton = Zoom(
   ({
     onEditStage,
-    snapshotSrc,
+    type,
   }) => (
     <div
       className="timeline-stage__preview"
@@ -17,10 +17,13 @@ const EditStageButton = Zoom(
       onClick={onEditStage}
       tabIndex="0"
     >
+      <div className="timeline-stage__preview-caption">{`${type} Interface`}</div>
       <img
-        src={snapshotSrc}
-        alt=""
+        src={`./images/timeline/stage--${type}.png`}
+        alt={`${type} Interface`}
+        title={`${type} Interface`}
         className="timeline-stage__preview-image"
+        onError={(e) => { e.target.style.display = 'none'; }}
       />
     </div>
   ),
@@ -33,21 +36,18 @@ class TimelineStage extends PureComponent {
     onEditSkipLogic: PropTypes.func.isRequired,
   };
 
-  snapshotSrc() {
-    return `./images/timeline/stage--${this.props.type}.png`;
-  }
-
   render() {
     const {
       onEditStage,
       onEditSkipLogic,
+      type,
     } = this.props;
 
     return (
       <div className="timeline-stage">
         <EditStageButton
           onEditStage={onEditStage}
-          snapshotSrc={this.snapshotSrc()}
+          type={type}
           zoomColors={zoomColors}
         />
         <EditSkipLogic
