@@ -10,7 +10,7 @@ $component-name: app;
   &__title-bar {
     background: palette('background');
     flex-basis: 60px;
-    transition: flex-basis var(--animation-default-easing) var(--animation-fast-duration);
+    transition: flex-basis var(--animation-easing) var(--animation-duration-fast);
   }
 
   &--start {

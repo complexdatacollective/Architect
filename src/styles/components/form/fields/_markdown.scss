@@ -1,0 +1,49 @@
+$component-name: form-fields-markdown;
+
+.#{$component-name} {
+  width: 100%;
+  vertical-align: top;
+  position: relative;
+  min-height: 75px;
+  cursor: text;
+
+  &__input {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    opacity: 0;
+    transition: opacity 200ms, transform 200ms;
+    background-color: palette('panel-background');
+    border: 0;
+    padding: unit(1);
+    height: 100%;
+    width: 50%;
+    vertical-align: top;
+    resize: none;
+    transform-origin: 100% 50%;
+    transform: scale(0, 1);
+    @include preset('copy-large');
+  }
+
+  &__preview {
+    display: inline-block;
+    border: unit(.2) solid palette('panel-background');
+    background-color: palette('card-background');
+    padding: unit(1);
+    width: 100%;
+    min-height: unit(8);
+    transition: width 200ms;
+    vertical-align: top;
+  }
+
+  &--is-focussed {
+    .#{$component-name}__input {
+      opacity: 1;
+      transform: scale(1, 1);
+    }
+
+    .#{$component-name}__preview {
+      width: 50%;
+    }
+  }
+}

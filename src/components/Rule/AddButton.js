@@ -31,18 +31,21 @@ class AddButton extends PureComponent {
         <div className="rule-add-button__choices">
           <button
             className="rule-add-button__choice rule-add-button__choice--alter"
+            type="button"
             onClick={() => { this.onHideAddChoices(); this.props.onAddRule('alter'); }}
           >
           Alter
           </button>
           <button
             className="rule-add-button__choice rule-add-button__choice--ego"
+            type="button"
             onClick={() => { this.onHideAddChoices(); this.props.onAddRule('ego'); }}
           >
           Ego
           </button>
           <button
             className="rule-add-button__choice rule-add-button__choice--edge"
+            type="button"
             onClick={() => { this.onHideAddChoices(); this.props.onAddRule('edge'); }}
           >
           Edge

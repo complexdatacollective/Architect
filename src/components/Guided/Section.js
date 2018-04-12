@@ -2,31 +2,41 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-const Section = ({ children, isActive, onMouseOver, className, ...props }) => (
-  <div
-    onMouseEnter={onMouseOver}
-    className={cx(className, 'guided-section', { 'guided-section--is-active': isActive })}
-    {...props}
-  >
+const Section = ({ children, isActive, show, className, ...props }) => {
+  const sectionClasses = cx(
+    className,
+    'guided-section',
     {
-      React.Children.toArray(children)
-        .map((child, index) => React.cloneElement(child, { isActive, key: index }))
-    }
-  </div>
-);
+      'guided-section--is-active': isActive,
+      'guided-section--hide': !show,
+    },
+  );
+
+  return (
+    <div
+      className={sectionClasses}
+      {...props}
+    >
+      {
+        React.Children.toArray(children)
+          .map((child, index) => React.cloneElement(child, { isActive, key: index }))
+      }
+    </div>
+  );
+};
 
 Section.propTypes = {
   children: PropTypes.node,
   isActive: PropTypes.bool,
   className: PropTypes.string,
-  onMouseOver: PropTypes.func,
+  show: PropTypes.bool,
 };
 
 Section.defaultProps = {
   children: null,
   isActive: false,
+  show: true,
   className: '',
-  onMouseOver: () => {},
 };
 
 export default Section;

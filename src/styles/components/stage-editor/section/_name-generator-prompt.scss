@@ -1,0 +1,22 @@
+.stage-editor-section-name-generator-prompt {
+  background-color: var(--card-background);
+  padding: unit(2);
+  border: 2px solid var(--border-light);
+  width: 100%;
+
+  &__setting {
+    display: block;
+    margin: 0 0 unit(2);
+  }
+
+  &__setting-label {
+    @include preset(copy-small);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+
+  &__setting-value {
+    display: block;
+    @include preset(copy, font-size);
+  }
+}

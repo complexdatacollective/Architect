@@ -1,0 +1,118 @@
+.form-fields-variable-chooser {
+  &__variables {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  &__variable {
+    @include typography('copy-small', font-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--variant--1);
+    color: var(--text);
+    padding: 0 unit(1) 0 unit(2);
+    border-radius: unit(2);
+    margin: 0 unit(.5) unit(.5) 0;
+    height: unit(4);
+    border-style: solid;
+    border-color: transparent;
+    border-width: 2px;
+    line-height: calc(#{unit(4)} - 4px);
+    overflow: hidden;
+    white-space: nowrap;
+    transition: background-color var(--animation-easing) var(--animation-duration-fast),
+    border-color var(--animation-easing) var(--animation-duration-fast);
+
+    &-detail, &-name, &-value {
+      display: inline-block;
+    }
+
+    &-name {
+      text-transform: uppercase;
+    }
+
+    &-value {
+      font-style: italic;
+      margin-left: unit(0.5);
+    }
+
+    &--variant-1 {
+      background-color: var(--variant--2);
+    }
+
+    &--variant-2 {
+      background-color: var(--variant--3);
+    }
+
+    &--variant-3 {
+      background-color: var(--variant--4);
+    }
+
+    &--has-error {
+      background-color: var(--color-platinum--dark);
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    .form-round-button {
+      margin: 0 0 0 unit(2);
+    }
+  }
+
+  &__add {
+    &::before {
+      content: '+';
+      color: var(--text);
+      display: block;
+      position: relative;
+      top: unit(-.2);
+    }
+  }
+
+  &__modal {
+    background-color: var(--dialog-background);
+    color: var(--text);
+    padding: unit(4);
+    border-radius: unit(2);
+    min-width: 50vw;
+
+    &-title,
+    &-setting,
+    &-controls {
+      margin: unit(2) 0 0;
+
+      &:first-child {
+        margin: 0;
+      }
+    }
+
+    &-title {
+      @include preset(title-2);
+      text-align: center;
+    }
+
+    &-label {
+      @include preset(copy-small);
+      margin: 0 0 unit(.5);
+    }
+
+    &-setting {
+      background-color: var(--dialog-background--dark);
+      padding: unit(4);
+      border-radius: unit(2);
+    }
+
+    &-controls {
+      @include preset(title-4);
+    }
+
+    .seamless-text-input__input {
+      @include preset(copy-large);
+      color: var(--text);
+    }
+  }
+}

@@ -1,0 +1,18 @@
+$component-name: stage-editor-section-node-type;
+
+.#{$component-name} {
+  &__edit {
+    display: inline-block;
+  }
+
+  &--disabled {
+    .#{$component-name} {
+      &__edit {
+        cursor: pointer;
+        &-capture {
+          pointer-events: none !important;
+        }
+      }
+    }
+  }
+}

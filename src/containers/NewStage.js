@@ -56,7 +56,8 @@ class NewStage extends PureComponent {
 
     this.props.addStage({ type }, index);
 
-    this.props.onComplete();
+    // TODO: Find another way
+    setTimeout(() => this.props.onComplete(index), 50);
   }
 
   renderOption = ({ type, title, description }) => (

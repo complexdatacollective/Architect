@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { has, toPairs } from 'lodash';
 import { Button } from 'network-canvas-ui';
-import { Guided, Section as GuidedSection, Edit as GuidedEdit, Guidance } from '../components/Guided';
+import { Guided, Section as GuidedSection, Editor as GuidedEdit, Guidance } from '../components/Guided';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 import { ProtocolCard, FilterGroup } from '../containers';

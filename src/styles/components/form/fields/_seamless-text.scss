@@ -1,0 +1,74 @@
+$module-name: form-fields-seamless-text;
+
+.#{$module-name} {
+  display: block;
+  position: relative;
+
+  &__input {
+    @include preset('copy-large', font-size);
+    background-color: transparent;
+    width: calc(100% - #{unit(3)});
+    border: 0;
+    border-bottom-width: unit(.2);
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-platinum);
+    transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
+
+    &::placeholder {
+      color: var(--divider-light);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    vertical-align: bottom;
+    width: unit(2) !important;
+    height: unit(2) !important;
+    opacity: 0;
+    transition: opacity var(--animation-easing) var(--animation-duration-fast);
+
+    &--error .cls-1 {
+      fill: var(--error);
+    }
+  }
+
+  &__error {
+    opacity: 0;
+    max-height: 0;
+    color: var(--error);
+    margin: unit(.5) 0 0;
+    transition: opacity var(--animation-easing) var(--animation-duration-fast),
+      max-height var(--animation-easing) var(--animation-duration-fast);
+  }
+
+  &--has-focus, &:hover {
+    .#{$module-name}__input {
+      border-bottom-color: var(--input-focus);
+    }
+
+    .#{$module-name}__icon--edit {
+      opacity: 1;
+    }
+  }
+
+  &--has-error {
+    .#{$module-name}__input {
+      border-bottom-color: var(--error);
+    }
+
+    .#{$module-name}__error {
+      opacity: 1;
+      max-height: 50px;
+    }
+
+    .#{$module-name}__icon--error {
+      opacity: 1;
+    }
+
+    .#{$module-name}__icon--edit {
+      opacity: 0 !important;
+    }
+  }
+}

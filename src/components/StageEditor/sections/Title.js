@@ -1,33 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Section, Edit, Guidance } from '../../Guided';
-import { SeamlessTextInput } from '../../../components/Form';
+// import { Field } from 'redux-form';
+import { Section, Editor, Guidance } from '../../Guided';
+import { ValidatedField } from '../../../components/Form';
+import SeamlessText from '../../../components/Form/Fields/SeamlessText';
 
-const Title = ({ stage: { label }, onChange, ...props }) => (
+const Title = props => (
   <Section className="stage-editor-section" {...props}>
-    <Edit className="stage-editor-section__edit">
+    <Editor className="stage-editor-section__edit">
       <h2>Title</h2>
-      <SeamlessTextInput
-        value={label}
+      <ValidatedField
+        name="label"
+        component={SeamlessText}
         placeholder="Enter your title here"
         className="stage-editor-section-title"
-        onChange={newLabel => onChange({ label: newLabel })}
+        validation={{ required: true }}
       />
-    </Edit>
+    </Editor>
     <Guidance className="stage-editor-section__guidance">
       What is the title for this interface?
     </Guidance>
   </Section>
 );
-
-Title.propTypes = {
-  stage: PropTypes.object,
-  onChange: PropTypes.func,
-};
-
-Title.defaultProps = {
-  stage: {},
-  onChange: () => {},
-};
 
 export default Title;

@@ -1,96 +1,63 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {
+  submit as submitForm,
+  isDirty as isFormDirty,
+  isInvalid as isFormInvalid,
+} from 'redux-form';
+import { pick } from 'lodash';
 import { Button } from 'network-canvas-ui';
-import { makeGetStage } from '../selectors/protocol';
-import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 import { ProtocolCard } from '../containers/ProtocolCard';
 import StageEditor from '../components/StageEditor';
-import { Draft } from '../behaviours';
-
-const defaultStage = {
-};
 
 class EditStage extends PureComponent {
   static propTypes = {
-    hasChanges: PropTypes.bool,
-    stageId: PropTypes.number,
-    onComplete: PropTypes.func,
-    draft: PropTypes.any.isRequired,
-    updateStage: PropTypes.func.isRequired,
-    updateDraft: PropTypes.func.isRequired,
+    dirty: PropTypes.bool.isRequired,
+    invalid: PropTypes.bool.isRequired,
+    continue: PropTypes.func.isRequired,
+    onComplete: PropTypes.func.isRequired,
+    stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {
-    draft: null,
     stageId: null,
-    hasChanges: false,
-    onComplete: () => {},
-  }
-
-  onSave = () => {
-    const stageId = this.props.stageId;
-
-    this.props.updateStage(
-      stageId,
-      {
-        ...this.props.draft,
-      },
-    );
-
-    this.props.onComplete();
   };
 
   renderButtons() {
     return [].concat(
-      this.props.hasChanges ? [<Button key="continue" size="small" onClick={this.onSave}>Continue</Button>] : [],
+      this.props.dirty ? [<Button key="continue" size="small" disabled={this.props.invalid} onClick={this.props.continue}>Continue</Button>] : [],
     );
   }
 
   render() {
-    const {
-      hasChanges,
-      stageId,
-      onComplete,
-      draft,
-      updateStage,
-      updateDraft,
-      ...rest
-    } = this.props;
+    const { stageId, onComplete } = this.props;
 
     return (
       <ProtocolCard
         buttons={this.renderButtons()}
-        {...rest}
+        {...pick(this.props, ['show', 'className', 'onCancel'])}
       >
-        <StageEditor
-          stage={draft}
-          onChange={this.props.updateDraft}
-        />
+        { stageId &&
+          <StageEditor
+            stageId={stageId}
+            onComplete={onComplete}
+          />
+        }
       </ProtocolCard>
     );
   }
 }
 
-function makeMapStateToProps() {
-  const getStage = makeGetStage();
+const mapStateToProps = state => ({
+  dirty: isFormDirty('edit-stage')(state),
+  invalid: isFormInvalid('edit-stage')(state),
+});
 
-  return function mapStateToProps(state, props) {
-    const stage = getStage(state, props) || defaultStage;
-    return { draft: stage };
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    updateStage: bindActionCreators(stageActions.updateStage, dispatch),
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  continue: () => dispatch(submitForm('edit-stage')),
+});
 
 export { EditStage };
 
-export default compose(
-  connect(makeMapStateToProps, mapDispatchToProps),
-  Draft,
-)(EditStage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditStage);

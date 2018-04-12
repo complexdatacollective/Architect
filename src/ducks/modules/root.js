@@ -3,10 +3,17 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import undoable, { excludeAction } from 'redux-undo';
-import protocol from './protocol';
+import protocol, { actionTypes as protocolActions } from './protocol';
 import session from './session';
 import protocols from './protocols';
 import { actionTypes as protocolFileActionTypes } from './protocol/file';
+
+const combineFilters = (...filters) =>
+  (...args) =>
+    filters.reduce(
+      (memo, filter) => memo && filter(...args),
+      true,
+    );
 
 /*
  * state: {
@@ -21,10 +28,14 @@ export const rootReducer = combineReducers({
     protocol,
     {
       limit: 25,
-      filter: excludeAction([
-        'persist/REHYDRATE',
-        protocolFileActionTypes.SAVE_COMPLETE,
-      ]),
+      filter: combineFilters(
+        ({ type }) => !/^@@redux-form\//.test(type.toString()),
+        excludeAction([
+          'persist/REHYDRATE',
+          protocolFileActionTypes.SAVE_COMPLETE,
+          protocolActions.SET_PROTOCOL,
+        ]),
+      ),
     },
   ),
   protocols,
