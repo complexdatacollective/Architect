@@ -12,13 +12,9 @@ const importAssetComplete = filename =>
     filename,
   });
 
-  /**
- * @param {string} filename - Name of file
- */
-const importAssetFailed = filename =>
+const importAssetFailed = () =>
   ({
     type: IMPORT_ASSET_FAILED,
-    filename,
   });
 
 /**
