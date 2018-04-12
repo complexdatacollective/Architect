@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-const Section = ({ children, isActive, show, onMouseOver, className, ...props }) => {
+const Section = ({ children, isActive, show, className, ...props }) => {
   const sectionClasses = cx(
     className,
     'guided-section',
@@ -14,7 +14,6 @@ const Section = ({ children, isActive, show, onMouseOver, className, ...props })
 
   return (
     <div
-      onMouseEnter={onMouseOver}
       className={sectionClasses}
       {...props}
     >
@@ -31,7 +30,6 @@ Section.propTypes = {
   isActive: PropTypes.bool,
   className: PropTypes.string,
   show: PropTypes.bool,
-  onMouseOver: PropTypes.func,
 };
 
 Section.defaultProps = {
@@ -39,7 +37,6 @@ Section.defaultProps = {
   isActive: false,
   show: true,
   className: '',
-  onMouseOver: () => { console.log("where's my thing"); },
 };
 
 export default Section;

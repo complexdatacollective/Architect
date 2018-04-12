@@ -109,6 +109,7 @@ export default compose(
       props.onComplete();
     },
     onSubmitFail: (errors) => {
+      // eslint-disable-next-line no-console
       console.error('FORM ERRORS', flatten(errors));
     },
   }),
