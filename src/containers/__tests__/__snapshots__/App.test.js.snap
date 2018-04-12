@@ -10,6 +10,7 @@ ShallowWrapper {
             "pathname": "",
           }
     }
+    resetActiveProtocol={[Function]}
 />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -26,6 +27,7 @@ ShallowWrapper {
       "children": Array [
         <div
           className="app__title-bar"
+          onClick={[Function]}
 >
           Architect app
 </div>,
@@ -42,6 +44,7 @@ ShallowWrapper {
         "props": Object {
           "children": "Architect app",
           "className": "app__title-bar",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": "Architect app",
@@ -60,6 +63,7 @@ ShallowWrapper {
         "children": Array [
           <div
             className="app__title-bar"
+            onClick={[Function]}
 >
             Architect app
 </div>,
@@ -76,6 +80,7 @@ ShallowWrapper {
           "props": Object {
             "children": "Architect app",
             "className": "app__title-bar",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": "Architect app",
