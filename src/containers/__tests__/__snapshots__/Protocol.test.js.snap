@@ -73,7 +73,7 @@ ShallowWrapper {
           show={false}
           stageId={undefined}
 />,
-        <Connect(Draft(EditStage))
+        <Connect(EditStage)
           onCancel={[Function]}
           onComplete={[Function]}
           show={false}
@@ -243,7 +243,7 @@ ShallowWrapper {
             show={false}
             stageId={undefined}
 />,
-          <Connect(Draft(EditStage))
+          <Connect(EditStage)
             onCancel={[Function]}
             onComplete={[Function]}
             show={false}

@@ -24,7 +24,7 @@ ShallowWrapper {
       "children": Array [
         <getContext(Draft(Component))
           onEditStage={[Function]}
-          snapshotSrc="./images/timeline/stage--Foo.png"
+          type="Foo"
           zoomColors={
                     Array [
                               "#227733",
@@ -46,7 +46,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "onEditStage": [Function],
-          "snapshotSrc": "./images/timeline/stage--Foo.png",
+          "type": "Foo",
           "zoomColors": Array [
             "#227733",
             "#ffffff",
@@ -79,7 +79,7 @@ ShallowWrapper {
         "children": Array [
           <getContext(Draft(Component))
             onEditStage={[Function]}
-            snapshotSrc="./images/timeline/stage--Foo.png"
+            type="Foo"
             zoomColors={
                         Array [
                                     "#227733",
@@ -101,7 +101,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "onEditStage": [Function],
-            "snapshotSrc": "./images/timeline/stage--Foo.png",
+            "type": "Foo",
             "zoomColors": Array [
               "#227733",
               "#ffffff",

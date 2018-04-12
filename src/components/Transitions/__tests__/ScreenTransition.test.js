@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ScreenTransition from '../Screen';
 
-jest.mock('../../utils/CSSVariables');
+jest.mock('../../../utils/CSSVariables');
 
 const mockProps = {
 };
