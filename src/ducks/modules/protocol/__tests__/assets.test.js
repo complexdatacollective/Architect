@@ -3,9 +3,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { actionCreators, actionTypes } from '../assets';
-import importAssetToProtocol from '../../../../other/protocols/importAssetToProtocol';
+import { importAssetToProtocol } from '../../../../other/protocols';
 
-jest.mock('../../../../other/protocols/importAssetToProtocol');
+jest.mock('../../../../other/protocols');
 
 const mockState = {
   session: {
@@ -51,7 +51,7 @@ describe('protocol/assets', () => {
     it('when importAssetToProtocol throws an error it fires failed action', (done) => {
       importAssetToProtocol.mockImplementation(
         () =>
-          new Promise(() => { throw new Error() }),
+          new Promise(() => { throw new Error(); }),
       );
 
       const store = getStore();
