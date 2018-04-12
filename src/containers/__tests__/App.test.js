@@ -6,6 +6,7 @@ import { App } from '../App';
 
 const mockProps = {
   location: { pathname: '' },
+  resetActiveProtocol: () => {},
 };
 
 describe('<App />', () => {
@@ -16,10 +17,10 @@ describe('<App />', () => {
   });
 
   it('has `.app--start` class if path is root', () => {
-    const componentAtFoo = shallow(<App location={{ pathname: '/foo' }} />);
+    const componentAtFoo = shallow(<App {...mockProps} location={{ pathname: '/foo' }} />);
     expect(componentAtFoo.hasClass('app--start')).toBe(false);
 
-    const componentAtRoot = shallow(<App location={{ pathname: '/' }} />);
+    const componentAtRoot = shallow(<App {...mockProps} location={{ pathname: '/' }} />);
     expect(componentAtRoot.hasClass('app--start')).toBe(true);
   });
 });
