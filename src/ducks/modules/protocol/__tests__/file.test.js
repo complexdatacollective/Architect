@@ -1,8 +1,6 @@
-/* eslint-disable */
 /* eslint-env jest */
 
 import { createStore, applyMiddleware } from 'redux';
-import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { actionCreators, actionTypes } from '../file';
 import { saveProtocol, exportProtocol } from '../../../../other/protocols';
@@ -60,7 +58,6 @@ describe('protocol/file', () => {
 
       store.dispatch(actionCreators.saveProtocol());
     });
-
   });
 
   describe('exportProtocol()', () => {
@@ -87,6 +84,5 @@ describe('protocol/file', () => {
 
       store.dispatch(actionCreators.exportProtocol());
     });
-
   });
 });
