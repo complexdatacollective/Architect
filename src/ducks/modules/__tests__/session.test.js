@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import reducer, { actionCreators } from '../session';
+import reducer from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
 import { actionCreators as fileActions } from '../protocol/file';
@@ -48,14 +48,14 @@ describe('session reducer', () => {
         stageActions.addStage({}),
       );
 
-      expect(addStageState.lastChanged > 0).toBeTrue;
+      expect(addStageState.lastChanged > 0).toBe(true);
 
       const updateStageState = reducer(
         undefined,
         stageActions.updateStage({}),
       );
 
-      expect(updateStageState.lastChanged > 0).toBeTrue;
+      expect(updateStageState.lastChanged > 0).toBe(true);
     });
   });
 
@@ -63,10 +63,10 @@ describe('session reducer', () => {
     it('tracks last saved when protocol saved', () => {
       const newState = reducer(
         undefined,
-        fileActions.saveProtocol({}),
+        fileActions.saveComplete(),
       );
 
-      expect(newState.lastSaved > 0).toBeTrue;
+      expect(newState.lastSaved > 0).toBe(true);
     });
   });
 });

@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action = {}) {
     case protocolFileActionTypes.SAVE_COMPLETE:
       return {
         ...state,
-        lastSaved: state.lastChanged,
+        lastSaved: new Date().getTime(),
       };
     default:
       return state;
