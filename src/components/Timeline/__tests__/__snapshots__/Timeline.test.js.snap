@@ -25,7 +25,7 @@ ShallowWrapper {
       "children": <div
         className="timeline__main"
 >
-        <Connect(TimelineOverview)
+        <TimelineOverview
                 title="My protocol"
         />
         <TimelineAddNew
@@ -41,7 +41,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <Connect(TimelineOverview)
+          <TimelineOverview
             title="My protocol"
 />,
           <TimelineAddNew
@@ -56,7 +56,7 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": null,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
             "title": "My protocol",
           },
@@ -89,7 +89,7 @@ ShallowWrapper {
         "children": <div
           className="timeline__main"
 >
-          <Connect(TimelineOverview)
+          <TimelineOverview
                     title="My protocol"
           />
           <TimelineAddNew
@@ -105,7 +105,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <Connect(TimelineOverview)
+            <TimelineOverview
               title="My protocol"
 />,
             <TimelineAddNew
@@ -120,7 +120,7 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": null,
-            "nodeType": "class",
+            "nodeType": "function",
             "props": Object {
               "title": "My protocol",
             },
