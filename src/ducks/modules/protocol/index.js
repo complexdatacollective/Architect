@@ -14,6 +14,12 @@ const setProtocol = (protocol, path = '') => ({
   protocol,
 });
 
+const resetProtocol = () => ({
+  type: SET_PROTOCOL,
+  protocol: {},
+  path: '',
+});
+
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_PROTOCOL:
@@ -25,6 +31,7 @@ function protocolReducer(state = initialState, action = {}) {
 
 const actionCreators = {
   setProtocol,
+  resetProtocol,
 };
 
 const actionTypes = {

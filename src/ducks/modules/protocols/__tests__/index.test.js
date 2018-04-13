@@ -1,9 +1,8 @@
-/* eslint-disable */
 /* eslint-env jest */
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import reducer, { actionCreators, actionTypes } from '../index';
+import reducer, { actionCreators } from '../index';
 import { actionCreators as protocolActionCreators } from '../../protocol';
 import { createProtocol, loadProtocolData, locateProtocol } from '../../../../other/protocols';
 
@@ -61,7 +60,7 @@ describe('protocols  reducer', () => {
       expect(actions[0]).toEqual(
         protocolActionCreators.setProtocol(
           { foo: 'bar test protocol' },
-          '/bar/baz'
+          '/bar/baz',
         ),
       );
     });
@@ -78,11 +77,10 @@ describe('protocols  reducer', () => {
           expect(actions[0]).toEqual(
             protocolActionCreators.setProtocol(
               { foo: 'bar test protocol' },
-              '/foo/located-protocol'
+              '/foo/located-protocol',
             ),
           );
         });
-
     });
   });
 });
