@@ -27,7 +27,7 @@ describe('protocol root reducer', () => {
       };
 
       const newState = reducer(
-        null,
+        undefined,
         actionCreators.setProtocol(replacementProtocol),
       );
 
