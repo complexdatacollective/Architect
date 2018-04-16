@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import SeamlessText from '../SeamlessText';
@@ -23,34 +23,31 @@ const getOptions = (variable) => {
   }
 };
 
-class VariableField extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    variable: PropTypes.object,
-    className: PropTypes.string,
-  };
+const VariableField = ({ name, className, variable }) => {
+  const componentClasses = cx('form-fields-variable-chooser__variable-field', className);
 
-  static defaultProps = {
-    variable: null,
-    className: '',
-  };
+  if (!variable) { return null; }
 
-  render() {
-    const { name, className, variable } = this.props;
-    const componentClasses = cx('form-fields-variable-chooser__variable-field', className);
+  return (
+    <ValidatedField
+      className={componentClasses}
+      name={name}
+      validation={variable.validation}
+      {...getOptions(variable)}
+    />
+  );
+};
 
-    if (!variable) { return null; }
+VariableField.propTypes = {
+  name: PropTypes.string.isRequired,
+  variable: PropTypes.object,
+  className: PropTypes.string,
+};
 
-    return (
-      <ValidatedField
-        className={componentClasses}
-        name={name}
-        validation={variable.validation}
-        {...getOptions(variable)}
-      />
-    );
-  }
-}
+VariableField.defaultProps = {
+  variable: null,
+  className: '',
+};
 
 export { VariableField };
 
