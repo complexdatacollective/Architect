@@ -2,7 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; media-src * data: protocol:; img-src * data: protocol:; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'; font-src 'self' gap://ready file://* http://* https://* 'unsafe-inline' 'unsafe-eval' data:">
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' %REACT_APP_SCRIPT_SRC_CSP%;
+      style-src 'self' 'unsafe-inline';
+      media-src 'self' data: protocol:;
+      img-src 'self' data: protocol:;
+    ">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="%PUBLIC_URL%/icons/netCanvas-icon.ico">
     <title>Network Canvas</title>
