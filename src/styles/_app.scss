@@ -5,21 +5,20 @@ $component-name: app;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background-color: palette('panel-background');
+  // background-color: palette('panel-background');
 
-  &__title-bar {
-    background: palette('background');
-    flex-basis: 60px;
-    transition: flex-basis var(--animation-easing) var(--animation-duration-fast);
-  }
+  background: -moz-repeating-linear-gradient(-45deg, var(--panel-background) 0, rgba(0,150,255,1) 100%);
+  background: repeating-linear-gradient(-45deg, var(--panel-background) 0, rgba(0,150,255,1) 100%);
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
+
+  // &__title-bar {
+  //   background: palette('background');
+  //   flex-basis: 60px;
+  //   transition: flex-basis var(--animation-easing) var(--animation-duration-fast);
+  // }
 
   &--start {
-    .#{$component-name} {
-      &__title-bar {
-        flex-grow: 0;
-        flex-shrink: 1;
-        flex-basis: 50%;
-      }
-    }
+    background-position: 0% -200px;
   }
 }

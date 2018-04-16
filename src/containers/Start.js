@@ -20,15 +20,30 @@ class Start extends PureComponent {
   render() {
     return (
       <div className="start">
-        <button onClick={() => this.export()}>Export</button>
-        <button onClick={() => this.props.createProtocol()}>Create new Protocol</button>
-        <button onClick={() => this.props.locateAndLoadProtocol()}>Open a protocol</button>
 
-        { this.props.protocols.map((protocol, index) => (
-          <button key={index} onClick={() => this.props.loadProtocol(protocol.path)}>
-            Load &quot;{protocol.path}&quot;
-          </button>
-        )) }
+        <div className="start__hero">
+          <div className="start__welcome">
+            <h1 className="start__welcome-title">Architect</h1>
+            <p className="start__welcome-lead">A tool for creating Network Canvas interviews</p>
+          </div>
+
+          <div className="start__call-to-action">
+            <button onClick={() => this.props.createProtocol()}>Create new</button>
+            <button onClick={() => this.props.locateAndLoadProtocol()}>Open existing</button>
+          </div>
+        </div>
+
+        <div className="start__protocols">
+          { this.props.protocols.map((protocol, index) => (
+            <div
+              className="start__protocol"
+              key={index}
+              onClick={() => this.props.loadProtocol(protocol.path)}
+            >
+              Load &quot;{protocol.path}&quot;
+            </div>
+          )) }
+        </div>
       </div>
     );
   }

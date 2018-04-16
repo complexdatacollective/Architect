@@ -21,9 +21,7 @@ const App = ({ children, location: { pathname }, resetActiveProtocol }) => {
 
   return (
     <div className={appClasses}>
-      <div className="app__title-bar" onClick={resetActiveProtocol}>
-        Architect app
-      </div>
+      <div className="app__logo" onClick={resetActiveProtocol} />
       { children }
     </div>
 
