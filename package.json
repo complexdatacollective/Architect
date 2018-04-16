@@ -97,7 +97,6 @@
         "react-dev-utils": "^4.1.0",
         "react-dom": "^16.0.0",
         "react-draggable": "^2.2.3",
-        "react-error-overlay": "^4.0.0",
         "react-fastclick": "^3.0.2",
         "react-hammerjs": "^0.5.0",
         "react-icons": "^2.2.7",
