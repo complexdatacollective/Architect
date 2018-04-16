@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
+      connect-src 'self' http://localhost:* https://localhost:* ws://localhost:*;
       script-src 'self' %REACT_APP_SCRIPT_SRC_CSP%;
       style-src 'self' 'unsafe-inline';
       media-src 'self' data: protocol:;
