@@ -5,20 +5,24 @@ $component-name: app;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  // background-color: palette('panel-background');
 
-  background: -moz-repeating-linear-gradient(-45deg, var(--panel-background) 0, rgba(0,150,255,1) 100%);
-  background: repeating-linear-gradient(-45deg, var(--panel-background) 0, rgba(0,150,255,1) 100%);
+  background: -moz-repeating-linear-gradient(170deg, var(--panel-background) 0, var(--panel-background) 50%, var(--color-sea-green) 55%, var(--color-sea-green) 100%);
+  background: repeating-linear-gradient(170deg, var(--panel-background) 0, var(--panel-background) 50%, var(--color-sea-green) 55%, var(--color-sea-green) 100%);
   background-repeat: no-repeat;
-  background-position: 0% 0%;
+  background-position: 0% 100px;
 
-  // &__title-bar {
-  //   background: palette('background');
-  //   flex-basis: 60px;
-  //   transition: flex-basis var(--animation-easing) var(--animation-duration-fast);
-  // }
+  &__home {
+    background: red;
+    position: absolute;
+    width: unit(12);
+    height: unit(12);
+    top: 50%;
+    left: 50%;
+    transform: translate(-25vw, unit(-20));
+    cursor: pointer;
+  }
 
   &--start {
-    background-position: 0% -200px;
+    background-position: 0% 0%;
   }
 }

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
+import { Button, Icon } from 'network-canvas-ui';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
+import { ProtocolCard } from '../components/Start';
 
 class Start extends PureComponent {
   static propTypes = {
@@ -21,6 +23,8 @@ class Start extends PureComponent {
     return (
       <div className="start">
 
+        <div className="start__brand" />
+
         <div className="start__hero">
           <div className="start__welcome">
             <h1 className="start__welcome-title">Architect</h1>
@@ -28,19 +32,33 @@ class Start extends PureComponent {
           </div>
 
           <div className="start__call-to-action">
-            <button onClick={() => this.props.createProtocol()}>Create new</button>
-            <button onClick={() => this.props.locateAndLoadProtocol()}>Open existing</button>
+            <Button
+              type="button"
+              color="white"
+              size="small"
+              icon={<Icon name="arrow-right" />}
+              onClick={() => this.props.createProtocol()}
+            >Create new</Button>
+            <Button
+              type="button"
+              color="platinum"
+              size="small"
+              icon={<Icon name="arrow-right" />}
+              onClick={() => this.props.locateAndLoadProtocol()}
+            >Open existing</Button>
           </div>
         </div>
 
         <div className="start__protocols">
-          { this.props.protocols.map((protocol, index) => (
+          { this.props.protocols.map(protocol => (
             <div
-              className="start__protocol"
-              key={index}
-              onClick={() => this.props.loadProtocol(protocol.path)}
+              className="start__protocols-protocol"
+              key={protocol.path}
             >
-              Load &quot;{protocol.path}&quot;
+              <ProtocolCard
+                name={protocol.path}
+                onClick={() => this.props.loadProtocol(protocol.path)}
+              />
             </div>
           )) }
         </div>
@@ -50,7 +68,7 @@ class Start extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  protocols: get(state, 'protocols', []),
+  protocols: get(state, 'protocols', []).slice(-3),
 });
 
 const mapDispatchToProps = dispatch => ({

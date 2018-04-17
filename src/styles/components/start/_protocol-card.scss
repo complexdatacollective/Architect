@@ -1,0 +1,20 @@
+.start-protocol-card {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  &__preview {
+    background: var(--panel-background);
+    border-radius: unit(1);
+    height: 100%;
+    width: 100%;
+  }
+
+  &__name {
+    @include typography('body', font-size);
+    margin: unit(1) 0 0;
+    text-align: center;
+    color: var(--text);
+  }
+}

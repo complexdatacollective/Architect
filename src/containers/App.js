@@ -21,7 +21,7 @@ const App = ({ children, location: { pathname }, resetActiveProtocol }) => {
 
   return (
     <div className={appClasses}>
-      <div className="app__logo" onClick={resetActiveProtocol} />
+      <div className="app__home" onClick={resetActiveProtocol} />
       { children }
     </div>
 
