@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -12,7 +11,6 @@ class Start extends PureComponent {
   static propTypes = {
     protocols: PropTypes.array.isRequired,
     createProtocol: PropTypes.func.isRequired,
-    loadProtocol: PropTypes.func.isRequired,
     locateAndLoadProtocol: PropTypes.func.isRequired,
   };
 
@@ -57,7 +55,8 @@ class Start extends PureComponent {
               key={protocol.path}
             >
               <ProtocolCard
-                protocol={protocol}
+                path={protocol.path}
+                name={protocol.path}
               />
             </div>
           )) }

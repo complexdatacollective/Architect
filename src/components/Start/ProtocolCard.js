@@ -1,13 +1,12 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const ProtocolCard = ({ protocol }) => (
+const ProtocolCard = ({ path, name }) => (
   <Link
     component="div"
     className="start-protocol-card"
-    to={`/edit/${encodeURIComponent(protocol.path)}`}
+    to={`/edit/${encodeURIComponent(path)}`}
   >
     <div className="start-protocol-card__preview" />
     <div className="start-protocol-card__name">
@@ -17,8 +16,8 @@ const ProtocolCard = ({ protocol }) => (
 );
 
 ProtocolCard.propTypes = {
-  // name: PropTypes.string.isRequired,
-  // onClick: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default ProtocolCard;
