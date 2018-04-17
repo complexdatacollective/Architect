@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,8 +14,8 @@ import {
   Start,
 } from './containers';
 
-const routes = ({ isProtocolLoaded }) => (
-  <Switch>
+const routes = ({ isProtocolLoaded, locationFoo }) => (
+  <Switch location={locationFoo}>
     <Route
       exact
       path="/edit/"

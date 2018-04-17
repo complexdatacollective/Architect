@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -56,8 +57,7 @@ class Start extends PureComponent {
               key={protocol.path}
             >
               <ProtocolCard
-                name={protocol.path}
-                onClick={() => this.props.loadProtocol(protocol.path)}
+                protocol={protocol}
               />
             </div>
           )) }

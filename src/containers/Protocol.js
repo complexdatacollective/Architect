@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -10,6 +11,7 @@ import EditSkipLogic from '../containers/EditSkipLogic';
 import EditStage from '../containers/EditStage';
 import { Timeline } from '../components';
 import { actionCreators as protocolFileActions } from '../ducks/modules/protocol/file';
+import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -41,6 +43,11 @@ class Protocol extends PureComponent {
     this.state = {
       activeCard: { ...defaultActiveCardState },
     };
+  }
+
+  componentDidMount() {
+    const protocolPath = decodeURIComponent(this.props.match.params.protocol);
+    this.props.loadProtocol(protocolPath);
   }
 
   onCardComplete = () => {
@@ -83,7 +90,10 @@ class Protocol extends PureComponent {
       hasUnsavedChanges,
       saveProtocol,
       exportProtocol,
+      state,
     } = this.props;
+
+    console.log(state);
 
     const protocolClasses = cx(
       'protocol',
@@ -150,6 +160,7 @@ function mapDispatchToProps(dispatch) {
   return {
     saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
     exportProtocol: bindActionCreators(protocolFileActions.exportProtocol, dispatch),
+    loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   };
 }
 
