@@ -12,17 +12,35 @@ $component-name: app;
   background-position: 0% 100px;
 
   &__home {
+    z-index: 1000;
     background: red;
     position: absolute;
     width: unit(12);
     height: unit(12);
-    top: 50%;
-    left: 50%;
-    transform: translate(-25vw, unit(-20));
+    top: 0px;
+    left: 0px;
     cursor: pointer;
+    transition: top var(--animation-duration-fast) var(--animation-easing),
+      left var(--animation-duration-fast) var(--animation-easing),
+      transform var(--animation-duration-fast) var(--animation-easing);
+
+    &.active {
+      pointer-events: none;
+    }
   }
 
   &--start {
     background-position: 0% 0%;
+
+    .#{$component-name}__home {
+      background: red;
+      position: absolute;
+      width: unit(12);
+      height: unit(12);
+      top: 50%;
+      left: 50%;
+      transform: translate(-25vw, unit(-20));
+      cursor: pointer;
+    }
   }
 }
