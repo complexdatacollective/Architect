@@ -4,6 +4,23 @@
   display: flex;
   flex-direction: column;
   padding: unit(6);
+  transition: opacity var(--animation-duration-fast) var(--animation-easing);
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &__split {
+    flex: 1 0 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &:first-child {
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+  }
 
   &__brand {
     position: absolute;
@@ -17,11 +34,8 @@
     width: 50vw;
     margin: 0 auto;
     padding: unit(6) 0 unit(6) unit(14);
-    flex: 1 0 50%;
-    display: flex;
+
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
   }
 
   &__welcome {
@@ -56,12 +70,22 @@
     padding: unit(3);
     border-radius: unit(1);
     background-color: var(--light-background);
-    flex: 1 0 50%;
     display: flex;
+    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, .1);
 
     &-protocol {
       flex: 0 0 33%;
       padding: unit(3);
     }
+  }
+
+  &.route-enter-active,
+  &.route-enter-done {
+    opacity: 1;
+  }
+
+  &.route-exit-active,
+  &.route-exit-done {
+    opacity: 0;
   }
 }

@@ -1,6 +1,10 @@
 .protocol {
-  position: relative;
-  flex: 1 1 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity var(--animation-duration-fast) var(--animation-easing);
 
   &__control-bar {
     @include layout-container;
@@ -22,5 +26,15 @@
     .protocol__control-bar {
       transform: translateZ(0) translateY(0);
     }
+  }
+
+  &.route-enter-active,
+  &.route-enter-done {
+    opacity: 1;
+  }
+
+  &.route-exit-active,
+  &.route-exit-done {
+    opacity: 0;
   }
 }

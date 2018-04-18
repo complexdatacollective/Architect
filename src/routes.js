@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TransitionGroup, Transition } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Protocol, Start } from './containers';
+import { getCSSVariableAsNumber } from './utils/CSSVariables';
 
 const routes = ({ location }) => (
   <TransitionGroup component={null}>
-    <Transition appear timeout={5000} key={location.key}>
-      {state => (
-        <Switch location={location}>
-          <Route
-            exact
-            path="/edit/:protocol"
-            render={props => (<Protocol {...props} state={state} />)}
-          />
-          <Route
-            exact
-            path="/"
-            render={props => (<Start {...props} state={state} />)}
-          />
-          <Redirect to="/" />
-        </Switch>
-      )}
-    </Transition>
+    <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')} classNames="route" key={location.key}>
+      <Switch location={location}>
+        <Route
+          exact
+          path="/edit/:protocol"
+          component={Protocol}
+        />
+        <Route
+          exact
+          path="/"
+          component={Start}
+        />
+        <Redirect to="/" />
+      </Switch>
+    </CSSTransition>
   </TransitionGroup>
 );
 
