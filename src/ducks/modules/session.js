@@ -5,13 +5,8 @@ import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 const initialState = {
   activeProtocol: '', // local path
   lastSaved: 0,
+  lastChanged: 0,
 };
-
-const RESET_ACTIVE_PROTOCOL = Symbol('SESSION/RESET_ACTIVE_PROTOCOL');
-
-const resetActiveProtocol = () => ({
-  type: RESET_ACTIVE_PROTOCOL,
-});
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -19,12 +14,6 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         activeProtocol: action.path,
-      };
-    }
-    case RESET_ACTIVE_PROTOCOL: {
-      return {
-        ...state,
-        activeProtocol: '',
       };
     }
     case protocolStageActionTypes.ADD_STAGE:
@@ -36,7 +25,7 @@ export default function reducer(state = initialState, action = {}) {
     case protocolFileActionTypes.SAVE_COMPLETE:
       return {
         ...state,
-        lastSaved: state.lastChanged,
+        lastSaved: new Date().getTime(),
       };
     default:
       return state;
@@ -44,11 +33,9 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  resetActiveProtocol,
 };
 
 const actionTypes = {
-  RESET_ACTIVE_PROTOCOL,
 };
 
 export {

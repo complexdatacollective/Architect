@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import cx from 'classnames';
-import { actionCreators as sessionActions } from '../ducks/modules/session';
+import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 
 require('../styles/main.scss');
 
@@ -41,7 +41,7 @@ App.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  resetActiveProtocol: bindActionCreators(sessionActions.resetActiveProtocol, dispatch),
+  resetActiveProtocol: bindActionCreators(protocolActions.resetProtocol, dispatch),
 });
 
 export { App };
