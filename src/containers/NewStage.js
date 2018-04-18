@@ -68,7 +68,7 @@ class NewStage extends PureComponent {
       onClick={() => this.onClickStageType(type)}
     >
       <div className="new-stage__option-preview">
-        <StaticImage src={`/images/timeline/stage--${type}.png`} />
+        <StaticImage src={`images/timeline/stage--${type}.png`} />
       </div>
       <div className="new-stage__option-details">
         <h2 className="new-stage__option-title">{ title }</h2>

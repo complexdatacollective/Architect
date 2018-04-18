@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withRouter, NavLink } from 'react-router-dom';
+import architectLogoIcon from '../images/architect-logo-icon.svg';
 
 const isAtIndex = pathname => pathname === '/';
 
@@ -16,7 +17,9 @@ const App = ({ children, location: { pathname } }) => {
 
   return (
     <div className={appClasses}>
-      <NavLink className="app__home" to="/" exact />
+      <NavLink className="app__home" to="/" exact>
+        <img src={architectLogoIcon} alt="" />
+      </NavLink>
       { children }
     </div>
   );

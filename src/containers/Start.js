@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import { Button, Icon } from 'network-canvas-ui';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import { ProtocolCard } from '../components/Start';
+import networkCanvasBrand from '../images/network-canvas-brand.svg';
 
 class Start extends PureComponent {
   static propTypes = {
@@ -22,7 +23,7 @@ class Start extends PureComponent {
     return (
       <div className="start">
 
-        <div className="start__brand" />
+        <img className="start__brand" src={networkCanvasBrand} alt="" />
 
         <div className="start__hero">
           <div className="start__welcome">

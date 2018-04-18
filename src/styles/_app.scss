@@ -6,14 +6,12 @@ $component-name: app;
   height: 100%;
   width: 100%;
 
-  background: -moz-repeating-linear-gradient(170deg, var(--panel-background) 0, var(--panel-background) 50%, var(--color-sea-green) 55%, var(--color-sea-green) 100%);
-  background: repeating-linear-gradient(170deg, var(--panel-background) 0, var(--panel-background) 50%, var(--color-sea-green) 55%, var(--color-sea-green) 100%);
   background-repeat: no-repeat;
   background-position: 0% 100px;
+  background-image: url('../images/background-wave.svg');
 
   &__home {
     z-index: 1000;
-    background: red;
     position: absolute;
     width: unit(12);
     height: unit(12);
@@ -33,14 +31,9 @@ $component-name: app;
     background-position: 0% 0%;
 
     .#{$component-name}__home {
-      background: red;
-      position: absolute;
-      width: unit(12);
-      height: unit(12);
       top: 50%;
       left: 50%;
       transform: translate(-25vw, unit(-20));
-      cursor: pointer;
     }
   }
 }
