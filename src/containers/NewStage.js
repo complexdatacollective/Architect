@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { ProtocolCard } from '../containers';
+import { StaticImage } from '../components';
 import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
 
 const interfaceOptions = [
@@ -67,7 +68,7 @@ class NewStage extends PureComponent {
       onClick={() => this.onClickStageType(type)}
     >
       <div className="new-stage__option-preview">
-        <img alt="" src={`/images/timeline/stage--${type}.png`} />
+        <StaticImage src={`/images/timeline/stage--${type}.png`} />
       </div>
       <div className="new-stage__option-details">
         <h2 className="new-stage__option-title">{ title }</h2>
