@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action = {}) {
       return [
         ...state,
         action.protocol,
-      ];
+      ].slice(-3);
     default:
       return state;
   }

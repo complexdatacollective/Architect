@@ -31,6 +31,28 @@ describe('protocols  reducer', () => {
         { path: protocolPath },
       ]);
     });
+
+    it('It adds a max of 3 protocols to the protocols list', () => {
+      const newState = [
+        actionCreators.addProtocolToDashboard('foo'),
+        actionCreators.addProtocolToDashboard('bar'),
+        actionCreators.addProtocolToDashboard('bazz'),
+        actionCreators.addProtocolToDashboard('buzz'),
+        actionCreators.addProtocolToDashboard('fizz'),
+      ].reduce((memo, action) =>
+        reducer(
+          memo,
+          action,
+        ),
+        undefined,
+      );
+
+      expect(newState).toEqual([
+        { path: 'bazz' },
+        { path: 'buzz' },
+        { path: 'fizz' },
+      ]);
+    });
   });
 
   describe('createProtocol()', () => {
