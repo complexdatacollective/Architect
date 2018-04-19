@@ -8,7 +8,7 @@
   background: white;
 
   &::before {
-    @include preset('copy-medium');
+    @include preset('copy-standard');
     display: inline-block;
     padding: unit(1);
     content: 'Drop content here or click to upload';

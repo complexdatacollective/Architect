@@ -17,6 +17,6 @@
 
   &__setting-value {
     display: block;
-    @include preset(copy, font-size);
+    @include preset(copy-standard, font-size);
   }
 }
