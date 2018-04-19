@@ -36,6 +36,7 @@ class Start extends PureComponent {
   render() {
     return (
       <div className="start">
+        <div className="start__background" />
         <div className="start__split">
           <div className="start__hero">
             <div className="start__welcome">

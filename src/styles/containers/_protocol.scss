@@ -28,9 +28,19 @@
     }
   }
 
+  &.route-enter {
+    .timeline__background {
+      transform: scale3d(1,1,1) translateY(-100%) rotate(180deg);
+    }
+  }
+
   &.route-enter-active,
   &.route-enter-done {
     opacity: 1;
+
+    .timeline__background {
+      transform: scale3d(1,1,1) translateY(0) rotate(180deg);
+    }
   }
 
   &.route-exit-active,

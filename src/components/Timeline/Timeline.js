@@ -47,14 +47,17 @@ class Timeline extends PureComponent {
     return (
       <div className="timeline">
         <div className="timeline__main">
-          <Overview
-            title="My protocol"
-          />
-          <AddNew
-            key={'add-new_0'}
-            onInsertStage={() => this.props.onInsertStage(0)}
-          />
-          {items}
+          <div className="timeline__background" />
+          <div className="timeline__content">
+            <Overview
+              title="My protocol"
+            />
+            <AddNew
+              key={'add-new_0'}
+              onInsertStage={() => this.props.onInsertStage(0)}
+            />
+            {items}
+          </div>
         </div>
       </div>
     );
