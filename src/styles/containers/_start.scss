@@ -52,20 +52,13 @@
     }
   }
 
-  &__call-to-action {
-    margin: unit(1) 0 0;
-
-    & > * {
-      margin-left: unit(2);
-
-      &:first-child {
-        margin: 0;
-      }
-    }
+  &__call-to-action > * {
+    margin: unit(1) unit(2) 0 0;
   }
 
   &__protocols {
     width: 80vw;
+    height: 100%;
     margin: 0 auto;
     padding: unit(3);
     border-radius: unit(1);
@@ -75,7 +68,7 @@
 
     &-protocol {
       flex: 0 0 33%;
-      padding: unit(3);
+      padding: unit(2);
     }
   }
 
