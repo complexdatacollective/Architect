@@ -31,7 +31,8 @@
     z-index: 1;
     background-repeat: no-repeat;
     background-image: url('../images/background-wave.svg');
-    background-position: 0% 100%;
+    background-size: 104vw;
+    background-position: -2vw calc(100% + 20vh);
     transition: transform var(--animation-duration-slow) var(--animation-easing);
     transform: scale3d(1,1,1) rotate(180deg);
   }

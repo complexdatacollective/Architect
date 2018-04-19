@@ -30,7 +30,7 @@
 
   &.route-enter {
     .timeline__background {
-      transform: scale3d(1,1,1) translateY(-100%) rotate(180deg);
+      transform: translateY(-100%) rotate(180deg);
     }
   }
 
@@ -39,12 +39,25 @@
     opacity: 1;
 
     .timeline__background {
-      transform: scale3d(1,1,1) translateY(0) rotate(180deg);
+      transform: translateY(0) rotate(180deg);
+    }
+  }
+
+  &.route-exit {
+    opacity: 1;
+
+    .timeline__background {
+      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      transform: translateY(0) rotate(180deg);
     }
   }
 
   &.route-exit-active,
   &.route-exit-done {
     opacity: 0;
+
+    .timeline__background {
+      transform: translateY(-100%) rotate(180deg);
+    }
   }
 }
