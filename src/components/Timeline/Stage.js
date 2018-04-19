@@ -8,10 +8,8 @@ import timelineImages from '../../images/timeline';
 
 const zoomColors = [getCSSVariableAsString('--light-background'), '#ffffff'];
 
-const getTimelineImage = (type) => {
-  console.log('getTimelineImage', timelineImages, type, get(timelineImages, type));
-  return get(timelineImages, type);
-};
+const getTimelineImage = type =>
+  get(timelineImages, type);
 
 const EditStageButton = Zoom(
   ({

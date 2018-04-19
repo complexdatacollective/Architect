@@ -93,8 +93,6 @@ class Protocol extends PureComponent {
       state,
     } = this.props;
 
-    console.log(state);
-
     const protocolClasses = cx(
       'protocol',
       {
