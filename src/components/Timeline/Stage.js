@@ -1,10 +1,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { Zoom } from '../../behaviours';
 import EditSkipLogic from './EditSkipLogic';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
+import timelineImages from '../../images/timeline';
 
 const zoomColors = [getCSSVariableAsString('--light-background'), '#ffffff'];
+
+const getTimelineImage = (type) => {
+  console.log('getTimelineImage', timelineImages, type, get(timelineImages, type));
+  return get(timelineImages, type);
+};
 
 const EditStageButton = Zoom(
   ({
@@ -18,13 +25,15 @@ const EditStageButton = Zoom(
       tabIndex="0"
     >
       <div className="timeline-stage__preview-caption">{`${type} Interface`}</div>
-      <img
-        src={`./images/timeline/stage--${type}.png`}
-        alt={`${type} Interface`}
-        title={`${type} Interface`}
-        className="timeline-stage__preview-image"
-        onError={(e) => { e.target.style.display = 'none'; }}
-      />
+      {
+        getTimelineImage(type) &&
+        <img
+          src={getTimelineImage(type)}
+          alt={`${type} Interface`}
+          title={`${type} Interface`}
+          className="timeline-stage__preview-image"
+        />
+      }
     </div>
   ),
 );
