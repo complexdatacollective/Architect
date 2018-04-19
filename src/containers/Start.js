@@ -65,10 +65,10 @@ class Start extends PureComponent {
 
         <div className="start__split">
           <div className="start__protocols">
-            { this.props.protocols.map(protocol => (
+            { this.props.protocols.map((protocol, index) => (
               <div
                 className="start__protocols-protocol"
-                key={protocol.path}
+                key={index}
               >
                 <ProtocolCard
                   path={protocol.path}
