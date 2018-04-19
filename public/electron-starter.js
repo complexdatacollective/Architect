@@ -1,6 +1,7 @@
 const electron = require('electron');
 const path = require('path');
 const url = require('url');
+const os = require('os');
 const log = require('electron-log');
 require('./components/updater');
 const registerProtocolProtocol = require('./components/protocolProtocol').registerProtocolProtocol;
@@ -9,6 +10,20 @@ const registerProtocolProtocol = require('./components/protocolProtocol').regist
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+
+const isMacOS = () => os.platform() === 'darwin';
+
+const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false } : {};
+
+const windowParameters = Object.assign({
+  width: 1440,
+  height: 900,
+  minWidth: 1280,
+  minHeight: 800,
+  center: true,
+  title: 'Architect'
+
+}, titlebarParameters);
 
 log.info('App starting...');
 
@@ -20,7 +35,7 @@ function createWindow() {
   registerProtocolProtocol();
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600, center: true, title: 'Network Canvas' });
+  mainWindow = new BrowserWindow(windowParameters);
   mainWindow.maximize();
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
