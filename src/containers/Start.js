@@ -7,6 +7,7 @@ import { get } from 'lodash';
 import cx from 'classnames';
 import { compose, mapProps } from 'recompose';
 import { Button, Icon } from 'network-canvas-ui';
+import TweenFrom from '../behaviours/Tween/From';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import { ProtocolCard } from '../components/Start';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
@@ -21,6 +22,8 @@ const transitionStyles = (componentName) =>
       ),
     })
   );
+
+const TweenedProtocolCard = TweenFrom(ProtocolCard);
 
 class Start extends PureComponent {
   static propTypes = {
@@ -77,9 +80,9 @@ class Start extends PureComponent {
                 className="start__protocols-protocol"
                 key={index}
               >
-                <ProtocolCard
+                <TweenedProtocolCard
                   path={protocol.path}
-                  name="Protocol name here"
+                  name="foo"
                 />
               </div>
             )) }
