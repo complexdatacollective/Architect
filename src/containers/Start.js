@@ -44,7 +44,6 @@ class Start extends PureComponent {
   render() {
     return (
       <div className="start">
-        <div className="start__background" />
         <div className="start__split">
           <div className="start__hero">
             <div className="start__welcome">
@@ -87,7 +86,7 @@ class Start extends PureComponent {
           </div>
         </div>
 
-
+        <div className="start__background" />
         <img className="start__brand" src={networkCanvasBrand} alt="" />
       </div>
     );
