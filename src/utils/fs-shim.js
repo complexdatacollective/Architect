@@ -46,6 +46,8 @@ const writeFileSync = (filename, content) => {};
 
 const mkdirSync = () => {};
 
+const existsSync = () => true;
+
 const readFileSync = (filename) => {
   switch(true) {
     case /\.json$/.test(filename):
@@ -60,4 +62,5 @@ module.exports = {
   writeFileSync,
   mkdirSync,
   readFileSync,
+  existsSync,
 };

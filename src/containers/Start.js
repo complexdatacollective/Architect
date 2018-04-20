@@ -33,6 +33,10 @@ class Start extends PureComponent {
     protocols: [],
   };
 
+  componentDidMount() {
+    this.props.clearDeadLinks();
+  }
+
   render() {
     return (
       <div className="start">
@@ -94,6 +98,7 @@ const mapDispatchToProps = dispatch => ({
   createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
   loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   locateAndLoadProtocol: bindActionCreators(protocolsActions.locateAndLoadProtocol, dispatch),
+  clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });
 
 export { Start };

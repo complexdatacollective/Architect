@@ -66,6 +66,23 @@ describe('protocols  reducer', () => {
     });
   });
 
+  describe('removeProtocolFromDashboard()', () => {
+    it('It adds the protocol to the protocols list', () => {
+      const protocolList = ['foo', 'bar', 'bazz']
+        .map(item => ({ path: item }));
+
+      const newState = reducer(
+        protocolList,
+        actionCreators.removeProtocolFromDashboard('bar'),
+      );
+
+      expect(newState).toEqual(
+        ['foo', 'bazz']
+          .map(item => ({ path: item })),
+      );
+    });
+  });
+
   describe('createProtocol()', () => {
     it('calls createProtocol and then adds it to the dashboard', () => {
       const store = createMockStore({});
