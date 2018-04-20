@@ -36,21 +36,25 @@ const removeProtocolFromDashboard = path =>
     protocol: { path },
   });
 
-const createProtocolAction = () =>
-  dispatch =>
-    createProtocol()
-      .then(protocolPath =>
-        dispatch(protocolsActions.addProtocolToDashboard(protocolPath)));
-
 const loadProtocolAction = path =>
   dispatch =>
     dispatch(protocolActions.setProtocol(loadProtocolData(path), path));
 
-const locateAndLoadProtocolAction = () =>
+const createProtocolAction = (callback = () => {}) =>
+  dispatch =>
+    createProtocol()
+      .then((protocolPath) => {
+        dispatch(protocolsActions.addProtocolToDashboard(protocolPath));
+        callback(protocolPath);
+      });
+
+const chooseProtocolAction = (callback = () => {}) =>
   dispatch =>
     locateProtocol()
-      .then(protocolPath =>
-        dispatch(loadProtocolAction(protocolPath)));
+      .then((protocolPath) => {
+        dispatch(protocolsActions.addProtocolToDashboard(protocolPath));
+        callback(protocolPath);
+      });
 
 const clearDeadLinks = () =>
   (dispatch, getState) => {
@@ -72,7 +76,7 @@ const actionCreators = {
   clearDeadLinks,
   createProtocol: createProtocolAction,
   loadProtocol: loadProtocolAction,
-  locateAndLoadProtocol: locateAndLoadProtocolAction,
+  chooseProtocol: chooseProtocolAction,
 };
 
 const actionTypes = {

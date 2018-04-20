@@ -37,6 +37,10 @@ class Start extends PureComponent {
     this.props.clearDeadLinks();
   }
 
+  openProtocol = (path) => {
+    this.props.history.push(`/edit/${encodeURIComponent(path)}`);
+  }
+
   render() {
     return (
       <div className="start">
@@ -54,14 +58,14 @@ class Start extends PureComponent {
                 color="white"
                 size="small"
                 icon={<Icon name="arrow-right" />}
-                onClick={() => this.props.createProtocol()}
+                onClick={ () => this.props.createProtocol(this.openProtocol) }
               >Create new</Button>
               <Button
                 type="button"
                 color="platinum"
                 size="small"
                 icon={<Icon name="arrow-right" />}
-                onClick={() => this.props.locateAndLoadProtocol()}
+                onClick={ () => this.props.createProtocol(this.openProtocol) }
               >Open existing</Button>
             </div>
           </div>
@@ -97,7 +101,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
   loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
-  locateAndLoadProtocol: bindActionCreators(protocolsActions.locateAndLoadProtocol, dispatch),
+  chooseProtocol: bindActionCreators(protocolsActions.chooseProtocol, dispatch),
   clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });
 
