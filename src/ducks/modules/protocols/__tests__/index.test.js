@@ -2,6 +2,7 @@
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { times, sample } from 'lodash';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as protocolActionCreators } from '../../protocol';
 import { createProtocol, loadProtocolData, locateProtocol } from '../../../../other/protocols';
@@ -32,26 +33,36 @@ describe('protocols  reducer', () => {
       ]);
     });
 
-    it('It adds a max of 3 protocols to the protocols list', () => {
-      const newState = [
-        actionCreators.addProtocolToDashboard('foo'),
-        actionCreators.addProtocolToDashboard('bar'),
-        actionCreators.addProtocolToDashboard('bazz'),
-        actionCreators.addProtocolToDashboard('buzz'),
-        actionCreators.addProtocolToDashboard('fizz'),
-      ].reduce((memo, action) =>
-        reducer(
-          memo,
-          action,
-        ),
-        undefined,
-      );
+    it('It adds a max of 10 protocols to the protocols list', () => {
+      const mockPaths = [
+        'foo',
+        'bar',
+        'bazz',
+        'buzz',
+        'fizz',
+      ];
 
-      expect(newState).toEqual([
-        { path: 'bazz' },
-        { path: 'buzz' },
-        { path: 'fizz' },
-      ]);
+      const protocolList = ['unique first protocol']
+        .concat(times(15, () => sample(mockPaths)))
+        .concat('unique last protocol');
+
+      const newState = protocolList
+        .map(item => actionCreators.addProtocolToDashboard(item))
+        .reduce(
+          (memo, action) =>
+            reducer(
+              memo,
+              action,
+            ),
+          undefined,
+        );
+
+      expect(newState)
+        .toEqual(
+          protocolList
+            .slice(-10)
+            .map(item => ({ path: item })),
+        );
     });
   });
 
