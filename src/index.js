@@ -8,23 +8,27 @@ import './styles/main.scss';
 import { store } from './ducks/store';
 import App from './containers/App';
 import Routes from './routes';
+import ClipPaths from './components/ClipPaths';
 
 injectTapEventPlugin();
 initReactFastclick();
 
 const startApp = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <Router>
-        <Route
-          render={({ location }) => (
-            <App>
-              <Routes location={location} />
-            </App>
-          )}
-        />
-      </Router>
-    </Provider>,
+    [
+      <ClipPaths />,
+      <Provider store={store}>
+        <Router>
+          <Route
+            render={({ location }) => (
+              <App>
+                <Routes location={location} />
+              </App>
+            )}
+          />
+        </Router>
+      </Provider>,
+    ],
     document.getElementById('root'),
   );
 };
