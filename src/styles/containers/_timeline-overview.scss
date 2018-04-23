@@ -13,7 +13,7 @@
       font-weight: 400;
       letter-spacing: .05rem;
       line-height: 1.1;
-      color: palette('panel-text');
+      color: var(--architect-panel-text);
       text-align: center;
     }
   }
@@ -31,14 +31,14 @@
         border-radius: 40px;
         width: 40px;
         height: 40px;
-        background-color: palette('node-base');
+        background-color: var(--node-base);
         margin-right: 10px;
       }
     }
 
     &-edge {
       &::before {
-        background-color: palette('edge-base');
+        background-color: var(--edge-base);
         height: 4px;
         margin: 18px 10px 18px 0;
         border-radius: 0;

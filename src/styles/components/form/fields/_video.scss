@@ -28,7 +28,7 @@ $component-name: form-fields-video;
       word-break: break-all;
       position: absolute;
       z-index: 103;
-      background: palette('divider');
+      background: var(--architect-border);
     }
 
     &-still {

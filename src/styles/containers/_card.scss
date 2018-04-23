@@ -25,7 +25,7 @@
 
   &__control-bar {
     flex: 0 0 60px;
-    background-color: palette('background');
+    background-color: var(--background);
     @include flex-align(right, middle);
     transform: translateZ(0) translateY(100%);
     transition: transform var(--animation-duration-fast) var(--animation-easing) var(--animation-duration-fast);

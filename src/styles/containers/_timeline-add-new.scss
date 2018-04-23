@@ -18,7 +18,7 @@ $component-name: timeline-add-new;
     &-label {
       transition: opacity var(--animation-easing) var(--animation-duration-fast);
       opacity: 0;
-      color: palette('text');
+      color: var(--text);
     }
 
     &-icon {
@@ -28,7 +28,7 @@ $component-name: timeline-add-new;
     }
 
     &:hover {
-      background-color: palette('background');
+      background-color: var(--background);
       transform: translateZ(0) scale(1);
 
       .#{$component-name}__button-label {

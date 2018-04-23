@@ -6,8 +6,8 @@
 
     &__open {
       transition: all ease 200ms;
-      background-color: palette('primary');
-      color: palette('text');
+      background-color: var(--primary);
+      color: var(--text);
       border: 0;
       border-radius: 60px;
       width: 60px;
@@ -35,8 +35,8 @@
       cursor: pointer;
       padding: 0 40px;
       margin-left: 10px;
-      background-color: palette('edge-alt-2');
-      color: palette('text');
+      background-color: var(--edge-alt-2);
+      color: var(--text);
       border-radius: 10px;
       height: 60px;
       text-transform: uppercase;
