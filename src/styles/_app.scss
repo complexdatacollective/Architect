@@ -5,6 +5,7 @@ $component-name: app;
   flex-direction: column;
   height: 100%;
   width: 100%;
+  background-color: var(--architect-background);
 
   &__electron-titlebar {
     display: block;

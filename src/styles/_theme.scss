@@ -1,0 +1,63 @@
+
+:root {
+  --architect-background: var(--color-white);
+  --divider-light: var(--color-platinum);
+  --border-light: var(--color-platinum);
+  --panel-background: var(--color-platinum);
+  --panel: var(--color-platinum--dark);
+  --panel-text: var(--color-charcoal);
+  --panel-divider: var(--color-platinum--dark);
+  --input-border: var(--color-charcoal);
+  --input-text: var(--color-charcoal);
+  --input-focus: var(--color-sea-green);
+  --intent-inactive: var(--color-charcoal);
+  --intent: var(--color-mustard);
+  --intent-border: var(--color-mustard--dark);
+  --rail: var(--color-neon-coral);
+
+  --button-background--dark: var(--color-navy-taupe);
+  --button-background--dark--hover: var(--color-cyber-grape);
+
+  --card-background: var(--color-white);
+  --card-text: var(--color-charcoal);
+  --card-background--rules: var(--color-mustard);
+  --card-text--rules: var(--color-white);
+  --card-background--choice: var(--light-background);
+  --card-text--choice: var(--color-white);
+
+  --dialog-background: var(--color-mustard);
+  --dialog-background--dark: var(--color-mustard--dark);
+
+// rule
+  --rule-control: var(--color-cyber-grape);
+  --rule-type: var(--color-neon-coral);
+  --rule-attribute: var(--color-neon-coral--dark);
+  --rule-operator: var(--color-navy-taupe);
+  --rule-value: var(--color-barbie-pink);
+  --rule-delete: var(--color-rich-black);
+
+  --rule-type--alter: var(--color-neon-coral);
+  --rule-attribute--ego: var(--color-mustard--dark);
+  --rule-type--edge: var(--color-sea-green);
+  --rule-attribute--edge: var(--color-sea-green--dark);
+
+// logic
+  --rules: var(--color-charcoal);
+  --rules-background: var(--color-intent);
+  --rules--and: var(--color-slate-blue--dark);
+  --rules--or: var(--color-neon-carrot--dark);
+
+// content item types
+  --variant--1: var(--color-slate-blue--dark);
+  --variant--2: var(--color-mustard--dark);
+  --variant--3: var(--color-sea-green);
+  --variant--4: var(--color-sea-green--dark);
+
+  --asset-background: var(--color-charcoal);
+}
+
+
+button:disabled,
+button[disabled] {
+  background-color: var(--color-charcoal);
+}
