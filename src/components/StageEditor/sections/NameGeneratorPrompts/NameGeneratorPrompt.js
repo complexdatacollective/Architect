@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import SeamlessText from '../../../Form/Fields/SeamlessText';
+import Markdown from '../../../Form/Fields/Markdown';
 import VariableChooser from '../../../Form/Fields/VariableChooser';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry }) => (
@@ -10,7 +10,7 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry }) => (
       <div className="stage-editor-section-name-generator-prompt__setting-label">Text for prompt</div>
       <Field
         name={`${fieldId}.text`}
-        component={SeamlessText}
+        component={Markdown}
         className="stage-editor-section-name-generator-prompt__setting-value"
         placeholder="Enter text for the prompt here"
       />
