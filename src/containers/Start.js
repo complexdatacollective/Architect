@@ -64,7 +64,7 @@ class Start extends PureComponent {
                 color="platinum"
                 size="small"
                 icon={<Icon name="arrow-right" />}
-                onClick={ () => this.props.createProtocol(this.openProtocol) }
+                onClick={ () => this.props.chooseProtocol(this.openProtocol) }
               >Open existing</Button>
             </div>
           </div>
