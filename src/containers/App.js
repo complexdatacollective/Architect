@@ -17,6 +17,7 @@ const App = ({ children, location: { pathname } }) => {
 
   return (
     <div className={appClasses}>
+      <div className="app__electron-titlebar" />
       <NavLink className="app__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />
       </NavLink>
