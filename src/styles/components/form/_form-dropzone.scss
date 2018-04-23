@@ -4,7 +4,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  border: unit(.2) dashed palette('panel-background');
+  border: unit(.2) dashed var(--architect-panel-background);
   background: white;
 
   &::before {

@@ -11,7 +11,7 @@
     width: 0;
     transform: translateX(-50%);
     border-left-width: 6px;
-    border-left-color: palette('rail');
+    border-left-color: var(--architect-time-line);
     border-left-style: solid;
     height: 100%;
     z-index: -1;

@@ -5,8 +5,8 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: palette('card-background');
-  color: palette('card-text');
+  background: var(--architect-card-background);
+  color: var(--architect-card-text);
   transform: translateZ(0);
 
   &__container {
@@ -48,12 +48,12 @@
   }
 
   &--rules {
-    background: palette('card-background--rules');
-    color: palette('card-text--rules');
+    background: var(--architect-card-background--rules);
+    color: var(--architect-card-text--rules);
   }
 
   &--choice {
-    background: palette('card-background--choice');
-    color: palette('card-text--choice');
+    background: var(--architect-card-background--choice);
+    color: var(--architect-card-text--choice);
   }
 }

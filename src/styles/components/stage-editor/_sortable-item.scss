@@ -17,7 +17,7 @@
 
   &__handle {
     @extend %content-item-control;
-    @include button-background(palette('background'));
+    @include button-background(var(--background));
     margin-right: unit(1);
     flex: 0 0 unit(4);
 

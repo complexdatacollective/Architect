@@ -18,19 +18,19 @@
     }
 
     &--text {
-      @include button-background(palette('variant--1'));
+      @include button-background(var(--architect-variant--1));
     }
 
     &--image {
-      @include button-background(palette('variant--2'));
+      @include button-background(var(--architect-variant--2));
     }
 
     &--audio {
-      @include button-background(palette('variant--3'));
+      @include button-background(var(--architect-variant--3));
     }
 
     &--video {
-      @include button-background(palette('variant--4'));
+      @include button-background(var(--architect-variant--4));
     }
 
 

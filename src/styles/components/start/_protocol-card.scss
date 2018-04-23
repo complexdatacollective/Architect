@@ -15,7 +15,7 @@ $card-shadow: 0 0 10px rgba(0, 0, 0, .1);
 
     &-cover {
       position: absolute;
-      background: var(--panel-background);
+      background: var(--architect-panel-background);
       border-radius: unit(1);
       top: 0;
       left: 0;
@@ -39,7 +39,7 @@ $card-shadow: 0 0 10px rgba(0, 0, 0, .1);
       z-index: 3;
       content: '';
       display: block;
-      background: var(--panel-background);
+      background: var(--architect-panel-background);
       border-radius: unit(1);
       width: 100%;
       height: 100%;

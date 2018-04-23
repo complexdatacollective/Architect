@@ -13,7 +13,7 @@ $component-name: form-fields-markdown;
     top: 0;
     opacity: 0;
     transition: opacity 200ms, transform 200ms;
-    background-color: palette('panel-background');
+    background-color: var(--architect-panel-background);
     border: 0;
     padding: unit(1);
     height: 100%;
@@ -27,8 +27,8 @@ $component-name: form-fields-markdown;
 
   &__preview {
     display: inline-block;
-    border: unit(.2) solid palette('panel-background');
-    background-color: palette('card-background');
+    border: unit(.2) solid var(--architect-panel-background);
+    background-color: var(--architect-card-background);
     padding: unit(1);
     width: 100%;
     min-height: unit(8);
