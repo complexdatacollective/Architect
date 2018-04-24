@@ -77,7 +77,7 @@ $transition: all var(--animation-duration-standard);
     transition: $transition;
   }
 
-  &.tween {
+  &.tween-foo {
     .#{$component-name}__name, .#{$component-name}__path {
       opacity: 0;
     }

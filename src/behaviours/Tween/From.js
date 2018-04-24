@@ -65,7 +65,7 @@ const From = WrappedComponent =>
       this.root.appendChild(Clone);
 
       setTimeout(() => {
-        Clone.className = `${Clone.className} tween`;
+        Clone.className = `${Clone.className} tween-${this.props.name}`;
       }, 1);
 
       const animation = {
