@@ -1,7 +1,7 @@
 import React from 'react';
-import TweenTo from '../../behaviours/Tween/To';
+import Tweened from '../../behaviours/Tweened';
 
-const Panel = TweenTo(() => (
+const Panel = Tweened(() => (
   <div className="panel">
     Hello wosoeidnfpgfp.foog
     fpg<br />
