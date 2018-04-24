@@ -10,19 +10,15 @@
   left: 0;
 
   &__background {
+    @extend %wave;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: var(--architect-wave);
-    background-image: url('../images/background-texture.svg');
-    background-repeat: repeat;
-    background-size: unit(70);
-    clip-path: url('#wave');
     transition: transform var(--animation-duration-slow) var(--animation-easing);
-    transform: scale3d(1, 1, 1);
+    transform: translateZ(0);
   }
 
   &__split {

@@ -17,3 +17,13 @@
     z-index: -1;
   }
 }
+
+%wave {
+  will-change: transform;
+  background-position: 0px 0px;
+  background-color: var(--architect-wave);
+  background-image: url('../images/background-texture.svg');
+  background-repeat: repeat;
+  background-size: unit(90);
+  clip-path: url('#wave');
+}
