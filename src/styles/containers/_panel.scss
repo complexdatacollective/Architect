@@ -1,8 +1,9 @@
 .panel {
-  background-color: var(--architect-panel);
+  background-color: var(--architect-panel-background);
   color: var(--architect-panel-text);
   margin: 0 auto;
   width: 50vw;
+  min-height: 50vh;
   padding: 20px;
   border-radius: 10px;
 

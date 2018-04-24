@@ -26,8 +26,13 @@ const From = WrappedComponent =>
 
     static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
 
-    componentDidMount() {
+    constructor(props) {
+      super(props);
+      this.el = document.createElement('div');
       this.root = document.getElementsByTagName('body')[0];
+    }
+
+    componentDidMount() {
       this.node = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
       window.Tweens = {
         ...window.Tweens,
@@ -42,38 +47,43 @@ const From = WrappedComponent =>
 
     componentWillUnmount() {
       this.node.removeEventListener('click', this.onClick);
-      // window.Tweens = {
-      //   ...window.Tweens,
-      //   [this.props.name]: omit(window.Tweens[this.props.name], 'from'),
-      // };
     }
 
     onClick = () => {
-      const pseudoElement = document.createElement('div');
       const { from, to } = window.Tweens[this.props.name];
 
-      pseudoElement.style.position = 'absolute';
-      pseudoElement.style.transform = 'translateZ(0)';
-      pseudoElement.style.backgroundColor = getCSSVariableAsString('--architect-panel-background');
+      const Clone = this.node.cloneNode(true);
 
-      this.root.appendChild(pseudoElement);
+      Clone.style.position = 'absolute';
+      Clone.style.transform = 'translateZ(0)';
+      Clone.style.top = `${get(from, 'top', 0)}px`;
+      Clone.style.left = `${get(from, 'left', 0)}px`;
+      Clone.style.width = `${get(from, 'width', 0)}px`;
+      Clone.style.height = `${get(from, 'height', 0)}px`;
+      Clone.style.transformOrigin = '0px 0px';
+
+      this.root.appendChild(Clone);
+
+      setTimeout(() => {
+        Clone.className = `${Clone.className} tween`;
+      }, 1);
 
       const animation = {
-        targets: pseudoElement,
+        targets: Clone,
         elasticity: 0,
         easing: 'easeInOutQuad',
-        duration: 1000, // getCSSVariableAsNumber('--animation-duration-fast-ms'),
-        top: [get(from, 'top', 0), get(to, 'top', 0)],
-        left: [get(from, 'left', 0), get(to, 'left', 0)],
-        width: [get(from, 'width', 0), get(to, 'width', 0)],
-        height: [get(from, 'height', 0), get(to, 'height', 0)],
+        duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+        translateY: [0, get(to, 'top', 0) - get(from, 'top', 0)],
+        translateX: [0, get(to, 'left', 0) - get(from, 'left', 0)],
+        scaleX: [1, get(to, 'width', 0) / get(from, 'width', 0)],
+        scaleY: [1, get(to, 'height', 0) / get(from, 'height', 0)],
       };
 
       console.log(animation);
 
       anime.timeline()
         .add({
-          targets: pseudoElement,
+          targets: Clone,
           elasticity: 0,
           easing: 'easeInOutQuad',
           duration: 200,
@@ -81,7 +91,7 @@ const From = WrappedComponent =>
         })
         .add(animation)
         .add({
-          targets: pseudoElement,
+          targets: Clone,
           elasticity: 0,
           easing: 'easeInOutQuad',
           duration: 200,
@@ -89,7 +99,7 @@ const From = WrappedComponent =>
         })
         .finished
         .then(() => {
-          this.root.removeChild(pseudoElement);
+          this.root.removeChild(Clone);
         });
     }
 
