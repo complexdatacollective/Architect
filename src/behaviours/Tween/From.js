@@ -54,7 +54,7 @@ const From = WrappedComponent =>
 
       pseudoElement.style.position = 'absolute';
       pseudoElement.style.transform = 'translateZ(0)';
-      pseudoElement.style.backgroundColor = getCSSVariableAsString('--panel-background');
+      pseudoElement.style.backgroundColor = getCSSVariableAsString('--architect-panel-background');
 
       this.root.appendChild(pseudoElement);
 
