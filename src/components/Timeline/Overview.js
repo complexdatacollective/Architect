@@ -3,9 +3,13 @@ import TweenTo from '../../behaviours/Tween/To';
 
 const Panel = TweenTo(() => (
   <div className="panel">
-    <br />
-    <br />
-    <br />
+    Hello wosoeidnfpgfp.foog
+    fpg<br />
+    Hello wosoeidnfpgfp.foog
+    fpg<br />
+    Hello wosoeidnfpgfp.foog
+    fpg<br />Hello wosoeidnfpgfp.foog
+    fpg<br />
   </div>
 ));
 

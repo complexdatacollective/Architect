@@ -1,8 +1,6 @@
 $card-shadow: 0 0 10px rgba(0, 0, 0, .1);
 $component-name: start-protocol-card;
 
-$transition: all var(--animation-duration-standard);
-
 .#{$component-name} {
   display: block;
   width: 100%;
@@ -15,7 +13,6 @@ $transition: all var(--animation-duration-standard);
     margin: 0 auto unit(3) auto;
     position: relative;
     box-shadow: 0px 0px 25px 15px rgba(0, 0, 0, .15);
-    transition: $transition;
 
     &-cover {
       position: absolute;
@@ -28,12 +25,10 @@ $transition: all var(--animation-duration-standard);
       z-index: 5;
       transform: translate(unit(-1), unit(1));
       box-shadow: $card-shadow;
-      transition: $transition;
 
       img {
         max-width: 100%;
         border-radius: unit(1);
-        transition: $transition;
       }
     }
 
@@ -51,7 +46,6 @@ $transition: all var(--animation-duration-standard);
       height: 100%;
       opacity: 0.5;
       box-shadow: $card-shadow;
-      transition: $transition;
     }
 
     &::after {
@@ -66,7 +60,6 @@ $transition: all var(--animation-duration-standard);
     margin: unit(1) 0 0;
     text-align: center;
     color: var(--text);
-    transition: $transition;
   }
 
   &__path {
@@ -74,25 +67,73 @@ $transition: all var(--animation-duration-standard);
     margin: unit(.5) 0 0;
     text-align: center;
     color: var(--text);
-    transition: $transition;
   }
 
   &.tween-foo {
-    .#{$component-name}__name, .#{$component-name}__path {
+    $transition-before: 500ms;
+    $transition-after: 300ms;
+    $transition-duration: 500ms;
+    $transition-easing: cubic-bezier(.25, .1, .25, 1);
+
+    transition: opacity $transition-after $transition-easing;
+
+    .#{$component-name}__preview {
+      transition: width $transition-duration $transition-easing,
+        height $transition-duration $transition-easing;
+
+      &-cover {
+        transition: transform $transition-duration $transition-easing;
+      }
+
+      img {
+        transition: opacity $transition-before $transition-easing;
+      }
+
+      &::before, &::after {
+        transition: transform $transition-before $transition-easing;
+      }
+    }
+
+    &-before {
+      .#{$component-name}__name, .#{$component-name}__path {
+        visibility: hidden;
+      }
+
+      .#{$component-name}__preview {
+        box-shadow: unset;
+
+        &-cover {
+          box-shadow: unset;
+        }
+
+        img {
+          opacity: 0;
+        }
+
+        &::before, &::after {
+          transform: translate(unit(-1), unit(1));
+        }
+      }
+    }
+
+    &-active {
+      .#{$component-name}__preview {
+        width: 100%;
+        height: 100%;
+
+        &-cover {
+          transform: translate(0, 0);
+        }
+
+        &::before, &::after {
+          display: none;
+        }
+      }
+    }
+
+    &-after {
       opacity: 0;
     }
 
-    .#{$component-name}__preview {
-      width: 100%;
-      height: 100%;
-
-      &-cover {
-        transform: translate(0, 0);
-      }
-
-      &:before, &:after, img {
-        opacity: 0;
-      }
-    }
   }
 }

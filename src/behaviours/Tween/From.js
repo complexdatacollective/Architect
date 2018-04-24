@@ -19,9 +19,15 @@ const From = WrappedComponent =>
   class extends PureComponent {
     static propTypes = {
       name: PropTypes.string.isRequired,
+      before: PropTypes.number,
+      duration: PropTypes.number,
+      after: PropTypes.number,
     };
 
     static defaultProps = {
+      before: 500,
+      duration: 500,
+      after: 300,
     };
 
     static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
@@ -60,43 +66,55 @@ const From = WrappedComponent =>
       Clone.style.left = `${get(from, 'left', 0)}px`;
       Clone.style.width = `${get(from, 'width', 0)}px`;
       Clone.style.height = `${get(from, 'height', 0)}px`;
-      Clone.style.transformOrigin = '0px 0px';
+      Clone.style.transformOrigin = 'top left';
+      Clone.classList.add(`tween-${this.props.name}`);
 
       this.root.appendChild(Clone);
 
-      setTimeout(() => {
-        Clone.className = `${Clone.className} tween-${this.props.name}`;
-      }, 1);
+      // Force repaint
+      Clone.scrollTop;
 
-      const animation = {
+      Clone.classList.add(`tween-${this.props.name}-before`);
+
+      setTimeout(() => {
+        Clone.classList.add(`tween-${this.props.name}-active`);
+      }, this.props.before);
+
+      setTimeout(() => {
+        Clone.classList.add(`tween-${this.props.name}-after`);
+      }, (this.props.before + this.props.duration));
+
+      const before = {
         targets: Clone,
         elasticity: 0,
-        easing: 'easeInOutQuad',
-        duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+        easing: [.25, .1, .25, 1],
+        duration: this.props.before,
+      };
+
+      const activeAnimation = {
+        targets: Clone,
+        elasticity: 0,
+        easing: [.25, .1, .25, 1],
+        duration: this.props.duration,
         translateY: [0, get(to, 'top', 0) - get(from, 'top', 0)],
         translateX: [0, get(to, 'left', 0) - get(from, 'left', 0)],
         scaleX: [1, get(to, 'width', 0) / get(from, 'width', 0)],
         scaleY: [1, get(to, 'height', 0) / get(from, 'height', 0)],
       };
 
-      console.log(animation);
+      const after = {
+        targets: Clone,
+        elasticity: 0,
+        easing: [.25, .1, .25, 1],
+        duration: this.props.after,
+      };
+
+      console.log(activeAnimation);
 
       anime.timeline()
-        .add({
-          targets: Clone,
-          elasticity: 0,
-          easing: 'easeInOutQuad',
-          duration: 200,
-          opacity: [0, 1],
-        })
-        .add(animation)
-        .add({
-          targets: Clone,
-          elasticity: 0,
-          easing: 'easeInOutQuad',
-          duration: 200,
-          opacity: [1, 0],
-        })
+        .add(before)
+        .add(activeAnimation)
+        .add(after)
         .finished
         .then(() => {
           this.root.removeChild(Clone);
