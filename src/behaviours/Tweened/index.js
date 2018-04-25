@@ -19,19 +19,21 @@ const Tweened = WrappedComponent =>
       before: PropTypes.number,
       duration: PropTypes.number,
       after: PropTypes.number,
+      uuid: PropTypes.string,
     };
 
     static defaultProps = {
       before: 500,
       duration: 500,
       after: 300,
+      uuid: undefined,
     };
 
     static displayName = `Tweened(${getDisplayName(WrappedComponent)})`;
 
     constructor(props) {
       super(props);
-      this.uuid = uuid();
+      this.uuid = this.props.uuid || uuid();
     }
 
     componentDidMount() {
@@ -47,7 +49,6 @@ const Tweened = WrappedComponent =>
           },
         },
       };
-      this.node.addEventListener('click', () => setTimeout(() => this.onClick(), 1));
     }
 
     componentWillUnmount() {
@@ -61,10 +62,14 @@ const Tweened = WrappedComponent =>
 
     onClick = () => {
       const options = {
-        uuid: this.uuid,
-        ...pick(this.props, ['name', 'before', 'duration', 'after']),
+        from: this.uuid,
+        ...pick(this.props, ['name', 'to', 'before', 'duration', 'after']),
       };
-      tween(options);
+
+      setTimeout(
+        tween(options),
+        1,
+      );
     }
 
     render() {
