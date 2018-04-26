@@ -35,7 +35,7 @@ class Routes extends Component {
     const { location } = this.props;
     return (
       <TransitionGroup component={null}>
-        <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')} classNames="route" key={location.key}>
+        <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route" key={location.key}>
           <Switch location={location}>
             <Route
               exact

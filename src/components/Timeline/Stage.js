@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Zoom } from '../../behaviours';
-import EditSkipLogic from './EditSkipLogic';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import timelineImages from '../../images/timeline';
 
@@ -17,21 +16,25 @@ const EditStageButton = Zoom(
     type,
   }) => (
     <div
-      className="timeline-stage__preview"
+      className="timeline-stage__screen"
       role="button"
       onClick={onEditStage}
       tabIndex="0"
     >
-      <div className="timeline-stage__preview-caption">{`${type} Interface`}</div>
-      {
-        getTimelineImage(type) &&
-        <img
-          src={getTimelineImage(type)}
-          alt={`${type} Interface`}
-          title={`${type} Interface`}
-          className="timeline-stage__preview-image"
-        />
-      }
+      <div className="timeline-stage__screen-preview">
+        {
+          getTimelineImage(type) &&
+          <img
+            src={getTimelineImage(type)}
+            alt={`${type} Interface`}
+            title={`${type} Interface`}
+          />
+        }
+        {
+          !getTimelineImage(type) &&
+          `${type} Interface`
+        }
+      </div>
     </div>
   ),
 );
@@ -41,24 +44,22 @@ class TimelineStage extends PureComponent {
     type: PropTypes.string.isRequired,
     onEditStage: PropTypes.func.isRequired,
     onEditSkipLogic: PropTypes.func.isRequired,
+    onInsertStage: PropTypes.func.isRequired,
   };
 
   render() {
     const {
       onEditStage,
-      onEditSkipLogic,
       type,
     } = this.props;
 
     return (
       <div className="timeline-stage">
+        <div className="timeline-stage__notch" />
         <EditStageButton
           onEditStage={onEditStage}
           type={type}
           zoomColors={zoomColors}
-        />
-        <EditSkipLogic
-          onEditSkipLogic={onEditSkipLogic}
         />
       </div>
     );

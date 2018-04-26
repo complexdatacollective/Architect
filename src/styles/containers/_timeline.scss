@@ -19,6 +19,23 @@
   &__content {
     position: relative;
     z-index: 2;
+
+    &::before {
+      transition: transform var(--animation-duration-slow) var(--animation-easing);
+      will-change: transform;
+      z-index: -1;
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: calc(50% - #{unit(0.3)});
+      width: 0;
+      height: calc(100% - 40px - 80px);
+      margin: 40px 0 80px;
+      border-left-width: unit(0.6);
+      border-left-color: var(--architect-time-line);
+      border-left-style: solid;
+    }
   }
 
   &__background {

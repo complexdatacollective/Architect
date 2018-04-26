@@ -1,10 +1,5 @@
 .timeline-overview {
-  @include vertical-rail;
   padding: 20px 0;
-
-  &::after {
-    top: 50%;  // over-ride vertical-rail to start late.
-  }
 
   &__title {
     input {

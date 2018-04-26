@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { flatten, zip } from 'lodash';
 import Overview from './Overview';
 import Stage from './Stage';
-import AddNew from './AddNew';
 import constrain from '../../behaviours/constrain';
 
 class Timeline extends PureComponent {
@@ -27,22 +26,13 @@ class Timeline extends PureComponent {
       id={`stage_${index}`}
       {...stage}
       onEditStage={() => this.props.onEditStage(stage.id)}
+      onInsertStage={(position) => this.props.onInsertStage(index + position)}
       onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
-    />
-  );
-
-  renderAddNew = (item, index) => (
-    <AddNew
-      key={`add-new_${index}`}
-      onInsertStage={() => this.props.onInsertStage(index + 1)}
     />
   );
 
   render() {
     const stages = this.props.stages.map(this.renderStage);
-    const addNew = this.props.stages.map(this.renderAddNew);
-
-    const items = flatten(zip(stages, addNew));
 
     return (
       <div className="timeline">
@@ -53,11 +43,7 @@ class Timeline extends PureComponent {
               name="foo"
               title="My protocol"
             />
-            <AddNew
-              key={'add-new_0'}
-              onInsertStage={() => this.props.onInsertStage(0)}
-            />
-            {items}
+            {stages}
           </div>
         </div>
       </div>
