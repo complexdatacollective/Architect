@@ -82,8 +82,8 @@ class Start extends PureComponent {
               >
                 <TweenedProtocolCard
                   path={protocol.path}
-                  name="foo"
-                  uuid="protocol-stack"
+                  tweenName="foo"
+                  tweenElement="protocol-stack"
                 />
               </div>
             )) }

@@ -7,17 +7,17 @@ const intitalState = [];
 const UPDATE = Symbol('TWEEN/UPDATE');
 const REMOVE = Symbol('TWEEN/REMOVE');
 
-const updateAction = (name, uuid, properties) => ({
+const updateAction = (name, element, properties) => ({
   ...properties,
   type: UPDATE,
   name,
-  uuid,
+  element,
 });
 
-const removeAction = (name, uuid) => ({
+const removeAction = (name, element) => ({
   type: REMOVE,
   name,
-  uuid,
+  element,
 });
 
 const reducer = (state = intitalState, action) => {
@@ -27,7 +27,7 @@ const reducer = (state = intitalState, action) => {
         ...state,
         [action.name]: {
           ...state[action.name],
-          [action.uuid]: {
+          [action.element]: {
             node: action.node,
             ...getAbsoluteBoundingRect(action.node),
           },
@@ -36,7 +36,7 @@ const reducer = (state = intitalState, action) => {
     case REMOVE:
       return {
         ...state,
-        [action.name]: omit(state[action.name], action.uuid),
+        [action.name]: omit(state[action.name], action.element),
       };
     default:
       return state;
