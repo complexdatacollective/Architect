@@ -17,7 +17,7 @@
       display: 'block';
       width: 0;
       height: 20px;
-      border-left: 8px solid palette('rule-control');
+      border-left: 8px solid var(--architect-rule-control);
     }
 
     &:first-child {
@@ -28,22 +28,15 @@
   }
 
   &__bubble {
-    background: palette('intent-border');
+    background: var(--architect-intent-border);
     border-radius: 10px;
     padding: 20px;
   }
 
   &__action {
-    background: palette('rule-operator');
+    background: var(--architect-rule-operator);
     border-radius: 10px;
     padding: 20px;
     @include flex-inline;
-  }
-
-  &__rule {
-    // background: palette('intent-border');
-    // border-radius: 10px;
-    // padding: 20px;
-    // @include flex-stack;
   }
 }

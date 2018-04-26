@@ -15,7 +15,7 @@ $module-name: form-fields-seamless-text;
     transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
 
     &::placeholder {
-      color: var(--divider-light);
+      color: var(--architect-input-placeholder);
     }
   }
 
@@ -45,7 +45,7 @@ $module-name: form-fields-seamless-text;
 
   &--has-focus, &:hover {
     .#{$module-name}__input {
-      border-bottom-color: var(--input-focus);
+      border-bottom-color: var(--architect-input-focus);
     }
 
     .#{$module-name}__icon--edit {

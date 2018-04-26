@@ -30,7 +30,7 @@
     }
 
     &:hover {
-      border-color: palette('selected');
+      border-color: var(--selected);
     }
   }
 }

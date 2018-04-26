@@ -5,21 +5,42 @@ $component-name: app;
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background-color: palette('panel-background');
+  background-color: var(--architect-background);
 
-  &__title-bar {
-    background: palette('background');
-    flex-basis: 60px;
-    transition: flex-basis var(--animation-easing) var(--animation-duration-fast);
+  &__electron-titlebar {
+    display: block;
+    visibility: visible;
+    position: absolute;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    width: 100%;
+    -webkit-app-region: drag;
+  }
+
+  &__home {
+    z-index: 1000;
+    position: absolute;
+    width: unit(12);
+    height: unit(12);
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50vw + #{unit(2)}), calc(-50vh + #{unit(2)})) scale(.67, .67);
+    cursor: pointer;
+    transition: transform var(--animation-duration-fast) var(--animation-easing);
+
+    &.active {
+      pointer-events: none;
+    }
   }
 
   &--start {
-    .#{$component-name} {
-      &__title-bar {
-        flex-grow: 0;
-        flex-shrink: 1;
-        flex-basis: 50%;
-      }
+    .#{$component-name}__home {
+      top: 50%;
+      left: 50%;
+      transform: translate(-25vw, unit(-20));
     }
   }
 }

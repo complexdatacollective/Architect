@@ -1,7 +1,7 @@
 .rule {
   @include flex-inline;
   @include flex-align(left, middle);
-  color: palette('text-dark');
+  color: var(--text-dark);
   position: relative;
 
   $drag-button-size: 60px;
@@ -9,8 +9,8 @@
   .rule-drag-handle {
     @include flex-inline;
     @include flex-align(center, middle);
-    background-color: palette('rule-control');
-    color: palette('text');
+    background-color: var(--architect-rule-control);
+    color: var(--architect-rule-text);
     border: 0;
     border-radius: $drag-button-size;
     width: $drag-button-size;
@@ -26,8 +26,8 @@
   &__delete {
     @include flex-inline;
     @include flex-align(center, middle);
-    background-color: palette('rule-delete');
-    color: palette('text');
+    background-color: var(--architect-rule-delete);
+    color: var(--text);
     border: 0;
     position: absolute;
     top: 0;
@@ -72,11 +72,11 @@
     }
 
     &--action {
-      background: palette('rule-type');
+      background: var(--architect-rule-type);
     }
 
     &--type {
-      background: palette('rule-type');
+      background: var(--architect-rule-type);
     }
 
     &--type + &--attribute {
@@ -92,9 +92,9 @@
         top: 0;
         width: 0;
         height: 0;
-        border-top: 30px solid palette('rule-attribute');
-        border-bottom: 30px solid palette('rule-attribute');
-        border-left: 20px solid palette('rule-type');
+        border-top: 30px solid var(--architect-rule-attribute);
+        border-bottom: 30px solid var(--architect-rule-attribute);
+        border-left: 20px solid var(--architect-rule-type);
       }
 
       &:empty {
@@ -105,7 +105,7 @@
     }
 
     &--attribute {
-      background: palette('rule-attribute');
+      background: var(--architect-rule-attribute);
       max-width: 500px;
       transition: max-width var(--animation-easing) var(--animation-duration-standard),
         padding var(--animation-easing) var(--animation-duration-standard);
@@ -117,38 +117,38 @@
     }
 
     &--operator {
-      background: palette('rule-operator');
+      background: var(--architect-rule-operator);
     }
 
     &--value {
-      background: palette('rule-value');
+      background: var(--architect-rule-value);
     }
   }
 
   &--alter {
     .rule__option--type {
-      background: palette('rule-type--alter');
+      background: var(--architect-rule-type--alter);
     }
   }
 
   &--ego {
     .rule__option--attribute {
-      background: palette('rule-attribute--ego');
+      background: var(--architect-rule-attribute--ego);
     }
   }
 
   &--edge {
     .rule__option--type {
-      background: palette('rule-type--edge');
+      background: var(--architect-rule-type--edge);
     }
 
     .rule__option--attribute {
-      background: palette('rule-attribute--edge');
+      background: var(--architect-rule-attribute--edge);
 
       &::before {
-        border-top: 30px solid palette('rule-attribute--edge');
-        border-bottom: 30px solid palette('rule-attribute--edge');
-        border-left: 20px solid palette('rule-type--edge');
+        border-top: 30px solid var(--architect-rule-attribute--edge);
+        border-bottom: 30px solid var(--architect-rule-attribute--edge);
+        border-left: 20px solid var(--architect-rule-type--edge);
       }
     }
   }

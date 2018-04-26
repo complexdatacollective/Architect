@@ -3,24 +3,32 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import initReactFastclick from 'react-fastclick';
 import { Provider } from 'react-redux';
-import { HashRouter as Router } from 'react-router-dom';
-
+import { MemoryRouter as Router, Route } from 'react-router-dom';
+import './styles/main.scss';
 import { store } from './ducks/store';
 import App from './containers/App';
-import AppRoutes from './routes';
+import Routes from './routes';
+import ClipPaths from './components/ClipPaths';
 
 injectTapEventPlugin();
 initReactFastclick();
 
 const startApp = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <Router>
-        <App>
-          <AppRoutes />
-        </App>
-      </Router>
-    </Provider>,
+    [
+      <ClipPaths />,
+      <Provider store={store}>
+        <Router>
+          <Route
+            render={({ location }) => (
+              <App>
+                <Routes location={location} />
+              </App>
+            )}
+          />
+        </Router>
+      </Provider>,
+    ],
     document.getElementById('root'),
   );
 };

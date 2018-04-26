@@ -16,7 +16,7 @@
     width: 100%;
     transform: translateY(-50%);
     left: 0px;
-    color: palette('text');
+    color: var(--text);
     background-color: transparent;
     border: 0;
     -webkit-appearance: none;

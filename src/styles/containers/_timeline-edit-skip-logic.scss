@@ -11,7 +11,7 @@
 
     path {
       stroke-width: 12; // Only for HDPI screens? Rail is only 6
-      stroke: palette('intent');
+      stroke: var(--architect-intent);
       opacity: 0;
     }
   }
@@ -23,7 +23,7 @@
     left: 50%;
     transform: translate(-50%, -50%) translateZ(0) scale(.75);
     transition: background-color var(--animation-easing) var(--animation-duration-fast), transform var(--animation-easing) var(--animation-duration-fast);
-    background-color: palette('intent-inactive');
+    background-color: var(--architect-intent--inactive);
     border-radius: 80px;
     border: 0;
     width: 70px;
@@ -40,7 +40,7 @@
 
     &:hover {
       transform: translate(-50%, -50%) translateZ(0) scale(1);
-      background-color: palette('intent');
+      background-color: var(--architect-intent);
     }
 
     &:focus {

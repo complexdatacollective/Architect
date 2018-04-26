@@ -1,0 +1,70 @@
+$card-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+.start-protocol-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  &__preview {
+    height: 22vh;
+    width: 22vh;
+    margin: 0 auto unit(3) auto;
+    position: relative;
+    box-shadow: 0px 0px 25px 15px rgba(0, 0, 0, .15);
+
+    &-cover {
+      position: absolute;
+      background: var(--architect-panel-background);
+      border-radius: unit(1);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      transform: translate(unit(-1), unit(1));
+      box-shadow: $card-shadow;
+
+      img {
+        max-width: 100%;
+        border-radius: unit(1);
+      }
+    }
+
+    &::after,
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      content: '';
+      display: block;
+      background: var(--architect-panel-background);
+      border-radius: unit(1);
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      box-shadow: $card-shadow;
+    }
+
+    &::after {
+      transform: translate(unit(1), unit(-1));
+      box-shadow: none;
+    }
+  }
+
+  &__name {
+    @include typography('title-3');
+    font-weight: bold;
+    margin: unit(1) 0 0;
+    text-align: center;
+    color: var(--text);
+  }
+
+  &__path {
+    @include typography('copy-small');
+    margin: unit(.5) 0 0;
+    text-align: center;
+    color: var(--text);
+  }
+}

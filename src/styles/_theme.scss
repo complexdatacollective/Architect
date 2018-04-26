@@ -1,0 +1,63 @@
+
+:root {
+  --architect-background: var(--color-white);
+  --architect-panel-background: var(--color-platinum);
+  --architect-panel-text: var(--color-charcoal);
+  --architect-panel-divider: var(--color-platinum--dark);
+  --architect-border: var(--color-platinum);
+  --architect-input-placeholder: var(--color-platinum);
+  --architect-input-focus: var(--color-sea-green);
+  --architect-intent--inactive: var(--color-charcoal);
+  --architect-intent: var(--color-mustard);
+  --architect-intent-border: var(--color-mustard--dark);
+  --architect-time-line: var(--color-neon-coral);
+
+  --architect-wave: var(--color-sea-green);
+
+  --architect-button-background--dark: var(--color-navy-taupe);
+  --architect-button-background--dark--hover: var(--color-cyber-grape);
+
+  --architect-card-background: var(--color-white);
+  --architect-card-text: var(--color-charcoal);
+  --architect-card-background--rules: var(--color-mustard);
+  --architect-card-text--rules: var(--color-white);
+  --architect-card-background--choice: var(--light-background);
+  --architect-card-text--choice: var(--color-white);
+
+  --architect-dialog-background: var(--color-mustard);
+  --architect-dialog-background--dark: var(--color-mustard--dark);
+
+// rule
+  --architect-rule-text: var(--color-white);
+  --architect-rule-control: var(--color-cyber-grape);
+  --architect-rule-type: var(--color-neon-coral);
+  --architect-rule-attribute: var(--color-neon-coral--dark);
+  --architect-rule-operator: var(--color-navy-taupe);
+  --architect-rule-value: var(--color-barbie-pink);
+  --architect-rule-delete: var(--color-rich-black);
+
+  --architect-rule-type--alter: var(--color-neon-coral);
+  --architect-rule-attribute--ego: var(--color-mustard--dark);
+  --architect-rule-type--edge: var(--color-sea-green);
+  --architect-rule-attribute--edge: var(--color-sea-green--dark);
+
+// logic
+  --architect-rules: var(--color-charcoal);
+  --architect-rules-background: var(--color-intent);
+  --architect-rules--and: var(--color-slate-blue--dark);
+  --architect-rules--or: var(--color-neon-carrot--dark);
+
+// content item types
+  --architect-variant--1: var(--color-slate-blue--dark);
+  --architect-variant--2: var(--color-mustard--dark);
+  --architect-variant--3: var(--color-sea-green);
+  --architect-variant--4: var(--color-sea-green--dark);
+
+  --architect-asset-background: var(--color-charcoal);
+}
+
+
+button:disabled,
+button[disabled] {
+  background-color: var(--color-charcoal);
+}

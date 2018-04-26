@@ -12,7 +12,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--variant--1);
+    background-color: var(--architect-variant--1);
     color: var(--text);
     padding: 0 unit(1) 0 unit(2);
     border-radius: unit(2);
@@ -74,7 +74,7 @@
   }
 
   &__modal {
-    background-color: var(--dialog-background);
+    background-color: var(--architect-dialog-background);
     color: var(--text);
     padding: unit(4);
     border-radius: unit(2);
@@ -101,7 +101,7 @@
     }
 
     &-setting {
-      background-color: var(--dialog-background--dark);
+      background-color: var(--architect-dialog-background--dark);
       padding: unit(4);
       border-radius: unit(2);
     }

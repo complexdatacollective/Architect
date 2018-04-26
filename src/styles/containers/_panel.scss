@@ -1,6 +1,6 @@
 .panel {
-  background-color: palette('panel');
-  color: palette('panel-text');
+  background-color: var(--architect-panel);
+  color: var(--architect-panel-text);
   margin: 0 auto;
   width: 50vw;
   padding: 20px;
@@ -18,7 +18,7 @@
 
   &__group {
     margin: 20px;
-    border: 1px solid palette('panel-divider');;
+    border: 1px solid var(--architect-panel-divider);
     padding: 20px;
     border-radius: 10px;
   }

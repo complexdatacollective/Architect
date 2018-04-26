@@ -1,17 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import cx from 'classnames';
-import { actionCreators as protocolActions } from '../ducks/modules/protocol';
-
-require('../styles/main.scss');
+import { withRouter, NavLink } from 'react-router-dom';
+import architectLogoIcon from '../images/architect-logo-icon.svg';
 
 const isAtIndex = pathname => pathname === '/';
 
-const App = ({ children, location: { pathname }, resetActiveProtocol }) => {
+const App = ({ children, location: { pathname } }) => {
   const appClasses = cx(
     'app',
     {
@@ -21,32 +17,26 @@ const App = ({ children, location: { pathname }, resetActiveProtocol }) => {
 
   return (
     <div className={appClasses}>
-      <div className="app__title-bar" onClick={resetActiveProtocol}>
-        Architect app
-      </div>
+      <div className="app__electron-titlebar" />
+      <NavLink className="app__home" to="/" exact>
+        <img src={architectLogoIcon} alt="" />
+      </NavLink>
       { children }
     </div>
-
   );
 };
 
 App.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.element,
   location: PropTypes.object.isRequired,
-  resetActiveProtocol: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
   children: null,
 };
 
-const mapDispatchToProps = dispatch => ({
-  resetActiveProtocol: bindActionCreators(protocolActions.resetProtocol, dispatch),
-});
-
 export { App };
 
 export default compose(
   withRouter,
-  connect(null, mapDispatchToProps),
 )(App);

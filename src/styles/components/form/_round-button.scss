@@ -1,6 +1,6 @@
 .form-round-button {
   font-size: unit(3);
-  background-color: var(--button-background--dark);
+  background-color: var(--architect-button-background--dark);
   color: var(--text);
   width: unit(4);
   height: unit(4);
@@ -28,6 +28,6 @@
   }
 
   &:hover {
-    background-color: var(--button-background--dark--hover);
+    background-color: var(--architect-button-background--dark--hover);
   }
 }

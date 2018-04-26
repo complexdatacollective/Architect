@@ -1,43 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import {
-  withRouter,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
-import {
-  Protocol,
-  Start,
-} from './containers';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { Protocol, Start } from './containers';
+import { getCSSVariableAsNumber } from './utils/CSSVariables';
 
-const routes = ({ isProtocolLoaded }) => (
-  <Switch>
-    <Route
-      exact
-      path="/edit/"
-      render={() => (isProtocolLoaded ? <Protocol /> : <Redirect to="/" />)}
-    />
-    <Route
-      exact
-      path="/"
-      render={() => (!isProtocolLoaded ? <Start /> : <Redirect to="/edit/" />)}
-    />
-    <Redirect to="/" />
-  </Switch>
+const routes = ({ location }) => (
+  <TransitionGroup component={null}>
+    <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')} classNames="route" key={location.key}>
+      <Switch location={location}>
+        <Route
+          exact
+          path="/edit/:protocol"
+          component={Protocol}
+        />
+        <Route
+          exact
+          path="/"
+          component={Start}
+        />
+        <Redirect to="/" />
+      </Switch>
+    </CSSTransition>
+  </TransitionGroup>
 );
 
 routes.propTypes = {
-  isProtocolLoaded: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  isProtocolLoaded: !!state.session.activeProtocol,
-});
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps),
-)(routes);
+export default routes;

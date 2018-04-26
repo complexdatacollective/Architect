@@ -1,6 +1,10 @@
 .protocol {
-  position: relative;
-  flex: 1 1 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity var(--animation-duration-fast) var(--animation-easing);
 
   &__control-bar {
     @include layout-container;
@@ -13,7 +17,7 @@
     flex: 0 0 60px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: palette('background');
+    background-color: var(--architect-background);
     transform: translateZ(0) translateY(100%);
     transition: transform var(--animation-easing) var(--animation-duration-fast);
   }
@@ -21,6 +25,39 @@
   &--has-changes {
     .protocol__control-bar {
       transform: translateZ(0) translateY(0);
+    }
+  }
+
+  &.route-enter {
+    .timeline__background {
+      transform: translateY(-100%) rotate(180deg);
+    }
+  }
+
+  &.route-enter-active,
+  &.route-enter-done {
+    opacity: 1;
+
+    .timeline__background {
+      transform: translateY(0) rotate(180deg);
+    }
+  }
+
+  &.route-exit {
+    opacity: 1;
+
+    .timeline__background {
+      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      transform: translateY(0) rotate(180deg);
+    }
+  }
+
+  &.route-exit-active,
+  &.route-exit-done {
+    opacity: 0;
+
+    .timeline__background {
+      transform: translateY(-100%) rotate(180deg);
     }
   }
 }

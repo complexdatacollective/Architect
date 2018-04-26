@@ -6,7 +6,7 @@ const placeholder = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV4AAAD6BAMAA
 const StaticImage = ({ src, alt, ...rest }) => (
   <img
     alt={alt}
-    src={`${process.env.PUBLIC_URL}${src}`}
+    src={`${process.env.PUBLIC_URL}/${src}`}
     {...rest}
     onError={(e) => { e.target.src = placeholder; }}
   />

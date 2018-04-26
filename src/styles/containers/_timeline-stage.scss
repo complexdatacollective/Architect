@@ -35,7 +35,7 @@
     }
 
     &:hover {
-      border-color: palette('intent');
+      border-color: var(--architect-intent);
     }
   }
 }

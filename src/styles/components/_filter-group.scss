@@ -1,5 +1,5 @@
 .filter-group {
-  background-color: palette('rules');
+  background-color: var(--architect-rules);
   transition: background-color var(--animation-easing) var(--animation-duration-standard);
   border-radius: 10px;
   padding: 10px;
@@ -22,10 +22,10 @@
   }
 
   &--and {
-    background-color: palette('rules--and');
+    background-color: var(--architect-rules--and);
   }
 
   &--or {
-    background-color: palette('rules--or');
+    background-color: var(--architect-rules--or);
   }
 }
