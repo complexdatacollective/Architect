@@ -1,12 +1,21 @@
 import React from 'react';
+import Tweened from '../../behaviours/Tweened';
+
+const Panel = Tweened(() => (
+  <div className="panel">
+    Hello wosoeidnfpgfp.foog
+    fpg<br />
+    Hello wosoeidnfpgfp.foog
+    fpg<br />
+    Hello wosoeidnfpgfp.foog
+    fpg<br />Hello wosoeidnfpgfp.foog
+    fpg<br />
+  </div>
+));
 
 const TimelineOverview = () => (
   <div className="timeline-overview">
-    <div className="panel">
-      <br />
-      <br />
-      <br />
-    </div>
+    <Panel tweenName="foo" tweenElement="overview-panel" />
   </div>
 );
 

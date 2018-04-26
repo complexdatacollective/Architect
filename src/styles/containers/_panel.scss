@@ -1,10 +1,12 @@
 .panel {
-  background-color: var(--architect-panel);
+  background-color: var(--architect-panel-background);
   color: var(--architect-panel-text);
   margin: 0 auto;
   width: 50vw;
+  min-height: 50vh;
   padding: 20px;
   border-radius: 10px;
+  box-shadow: unit(1) unit(1) 0 0 rgba(0, 0, 0, .15);
 
   &__title {
     text-align: center;
