@@ -1,26 +1,34 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { nth } from 'lodash';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Protocol, Start } from './containers';
 import { getCSSVariableAsNumber } from './utils/CSSVariables';
 import tween from './behaviours/Tweened/tween';
 
-const dispatchRouteAnimations = ({ pathname }) => {
+const getProtocolName = pathname =>
+  decodeURIComponent(nth(/^\/edit\/([^/]+)$/.exec(pathname), 1));
+
+const dispatchRouteAnimations = ({ pathname }, history) => {
+  const { pathname: previousPathname } = nth(history.entries, -2);
+
   switch (true) {
-    case /^\/$/.test(pathname):
-      tween({ name: "foo", from: "overview-panel", to: "protocol-stack" });
+    case /^\/edit\/[^/]+$/.test(previousPathname) && /^\/$/.test(pathname): {
+      tween({ name: 'protocol', from: 'overview-panel', to: getProtocolName(previousPathname) });
       break;
-    case /^\/edit\/[^\/]+$/.test(pathname):
-      tween({ name: "foo", from: "protocol-stack", to: "overview-panel" });
+    }
+    case /^\/$/.test(previousPathname) && /^\/edit\/[^/]+$/.test(pathname): {
+      tween({ name: 'protocol', from: getProtocolName(pathname), to: 'overview-panel' });
       break;
+    }
+    default:
   }
-}
+};
 
 class Routes extends Component {
   componentDidMount() {
-    this.props.history.listen(dispatchRouteAnimations);
+    this.props.history.listen(event => dispatchRouteAnimations(event, this.props.history));
   }
 
   render() {
@@ -47,31 +55,9 @@ class Routes extends Component {
   }
 }
 
-// const routes = ({ location }) => (
-//   <TransitionGroup component={null}>
-//     <CSSTransition
-// appear
-// timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
-// classNames="route" key={location.key}>
-//       <Switch location={location}>
-//         <Route
-//           exact
-//           path="/edit/:protocol"
-//           component={Protocol}
-//         />
-//         <Route
-//           exact
-//           path="/"
-//           component={Start}
-//         />
-//         <Redirect to="/" />
-//       </Switch>
-//     </CSSTransition>
-//   </TransitionGroup>
-// );
-
 Routes.propTypes = {
   location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default Routes;

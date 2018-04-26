@@ -15,7 +15,7 @@ const Panel = Tweened(() => (
 
 const TimelineOverview = () => (
   <div className="timeline-overview">
-    <Panel tweenName="foo" tweenElement="overview-panel" />
+    <Panel tweenName="protocol" tweenElement="overview-panel" />
   </div>
 );
 

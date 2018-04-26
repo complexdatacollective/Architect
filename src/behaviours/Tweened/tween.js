@@ -21,7 +21,7 @@ const tween = (options) => {
   const root = document.getElementsByTagName('body')[0];
   const state = store.getState();
 
-  if (!has(state, name)) { return; }
+  if (!has(state, [name, from]) || !has(state, [name, to])) { return; }
 
   const fromTarget = get(state, [name, from]);
   const toTarget = get(state, [name, to]);
