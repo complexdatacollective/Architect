@@ -1,7 +1,6 @@
 import { has, get, defer } from 'lodash';
 import anime from 'animejs';
-
-window.Tweens = window.Tweens || [];
+import store from './store';
 
 const defaults = {
   before: 500,
@@ -12,11 +11,12 @@ const defaults = {
 const tween = (options) => {
   const { name, from, to, before, after, duration } = { ...defaults, ...options };
   const root = document.getElementsByTagName('body')[0];
+  const state = store.getState();
 
-  if (!has(window.Tweens, name)) { return; }
+  if (!has(state, name)) { return; }
 
-  const fromTarget = get(window.Tweens, [name, from]);
-  const toTarget = get(window.Tweens, [name, to]);
+  const fromTarget = get(state, [name, from]);
+  const toTarget = get(state, [name, to]);
 
   const Clone = fromTarget.node.cloneNode(true);
 

@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { omit, pick } from 'lodash';
+import { pick } from 'lodash';
 import uuid from 'uuid';
-import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 import tween from './tween';
-
-window.Tweens = window.Tweens || [];
+import store, { actionCreators as actions } from './store';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -39,25 +37,16 @@ const Tweened = WrappedComponent =>
     componentDidMount() {
       this.node = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
 
-      window.Tweens = {
-        ...window.Tweens,
-        [this.props.name]: {
-          ...window.Tweens[this.props.name],
-          [this.uuid]: {
-            node: this.node,
-            ...getAbsoluteBoundingRect(this.node),
-          },
-        },
-      };
+      store.dispatch(actions.update(
+        this.props.name,
+        this.props.uuid,
+        { node: this.node },
+      ));
     }
 
     componentWillUnmount() {
       this.node.removeEventListener('click', this.onClick);
-
-      window.Tweens = {
-        ...window.Tweens,
-        [this.props.name]: omit(window.Tweens[this.props.name], this.uuid),
-      };
+      store.dispatch(actions.remove(this.props.name, this.props.uuid));
     }
 
     onClick = () => {
