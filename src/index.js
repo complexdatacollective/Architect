@@ -20,9 +20,9 @@ const startApp = () => {
       <Provider store={store}>
         <Router>
           <Route
-            render={({ location }) => (
+            render={({ location, history }) => (
               <App>
-                <Routes location={location} />
+                <Routes location={location} history={history} />
               </App>
             )}
           />

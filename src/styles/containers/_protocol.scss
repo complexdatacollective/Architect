@@ -32,6 +32,11 @@
     .timeline__background {
       transform: translateY(-100%) rotate(180deg);
     }
+
+    .panel {
+      opacity: 0;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, .15);
+    }
   }
 
   &.route-enter-active,
@@ -40,6 +45,13 @@
 
     .timeline__background {
       transform: translateY(0) rotate(180deg);
+    }
+
+    .panel {
+      transition: opacity 0s 950ms,
+        box-shadow 300ms 950ms;
+      opacity: 1;
+      box-shadow: unit(1) unit(1) 0 0 rgba(0, 0, 0, .15);
     }
   }
 
