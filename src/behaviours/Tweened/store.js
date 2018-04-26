@@ -1,6 +1,5 @@
 import { createStore } from 'redux';
 import { omit } from 'lodash';
-import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 
 const intitalState = [];
 
@@ -29,7 +28,6 @@ const reducer = (state = intitalState, action) => {
           ...state[action.name],
           [action.element]: {
             node: action.node,
-            ...getAbsoluteBoundingRect(action.node),
           },
         },
       };

@@ -1,11 +1,19 @@
 import { has, get, defer } from 'lodash';
 import anime from 'animejs';
+import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 import store from './store';
 
 const defaults = {
   before: 500,
   duration: 500,
   after: 300,
+};
+
+const defaultRect = {
+  top: 0,
+  left: 0,
+  width: 0,
+  height: 0,
 };
 
 const tween = (options) => {
@@ -20,13 +28,23 @@ const tween = (options) => {
 
   const Clone = fromTarget.node.cloneNode(true);
 
+  const fromBounds = {
+    ...defaultRect,
+    ...getAbsoluteBoundingRect(fromTarget.node),
+  };
+
+  const toBounds = {
+    ...defaultRect,
+    ...getAbsoluteBoundingRect(toTarget.node),
+  };
+
   Clone.style.position = 'absolute';
   Clone.style.zIndex = 1000;
   Clone.style.transform = 'translateZ(0)';
-  Clone.style.top = `${get(fromTarget, 'top', 0)}px`;
-  Clone.style.left = `${get(fromTarget, 'left', 0)}px`;
-  Clone.style.width = `${get(fromTarget, 'width', 0)}px`;
-  Clone.style.height = `${get(fromTarget, 'height', 0)}px`;
+  Clone.style.top = `${fromBounds.top}px`;
+  Clone.style.left = `${fromBounds.left}px`;
+  Clone.style.width = `${fromBounds.width}px`;
+  Clone.style.height = `${fromBounds.height}px`;
   Clone.style.transformOrigin = 'top left';
   Clone.classList.add(`tween-${name}`);
 
@@ -57,10 +75,10 @@ const tween = (options) => {
     elasticity: 0,
     easing: [0.25, 0.1, 0.25, 1],
     duration,
-    translateY: [0, get(toTarget, 'top', 0) - get(fromTarget, 'top', 0)],
-    translateX: [0, get(toTarget, 'left', 0) - get(fromTarget, 'left', 0)],
-    scaleX: [1, get(toTarget, 'width', 0) / get(fromTarget, 'width', 0)],
-    scaleY: [1, get(toTarget, 'height', 0) / get(fromTarget, 'height', 0)],
+    translateY: [0, toBounds.top - fromBounds.top],
+    translateX: [0, toBounds.left - fromBounds.left],
+    scaleX: [1, toBounds.width / fromBounds.width],
+    scaleY: [1, toBounds.height / fromBounds.height],
   };
 
   const afterAnimation = {
