@@ -1,14 +1,15 @@
 $preview-offset: unit(4);
 $preview-width: 22vw;
 $preview-ratio: 9/16;
-$border-width: unit(0.4);
+$border-width: unit(0.3);
 $component-name: timeline-stage;
 
 .#{$component-name} {
-  padding: 40px 0;
+  padding: unit(5) 0;
   position: relative;
 
   &__notch {
+    cursor: pointer;
     left: 50%;
     width: unit(3);
     height: unit(3);
@@ -16,15 +17,53 @@ $component-name: timeline-stage;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--architect-time-line);
+    background-color: var(--architect-timeline-line);
+  }
+
+  &__edit-stage {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: $preview-width;
+    left: calc(50% - #{$preview-width} - #{$preview-offset});
+  }
+
+  &__controls {
+    cursor: pointer;
+    position: absolute;
+    display: inline-block;
+    width: $preview-width;
+    top: 0;
+    left: calc(50% + #{$preview-offset});
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    will-change: transform;
+    transition: opacity var(--animation-duration-fast) var(--animation-easing),
+      transform var(--animation-duration-fast) var(--animation-easing);
+    opacity: 0;
+    transform: translateZ(0) translateX(unit(-4));
+  }
+
+  &__control {
+    display: block;
+    padding: unit(1) 0;
+    color: var(--architect-text);
+
+    &-icon {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: unit(4);
+    }
   }
 
   &__screen {
-    cursor: pointer;
     width: $preview-width;
     padding-bottom: $preview-width * $preview-ratio;
-    position: relative;
-    left: calc(50% - #{$preview-width} - #{$preview-offset});
 
     &-preview {
       width: 100%;
@@ -60,7 +99,7 @@ $component-name: timeline-stage;
       content: '';
       display: block;
       position: absolute;
-      z-index: 2;
+      z-index: 4;
       width: calc(100% + #{$border-width * 2});
       height: calc(100% + #{$border-width * 2});
       top: -$border-width;
@@ -79,8 +118,22 @@ $component-name: timeline-stage;
   }
 
   &:nth-child(2n + 1) {
-    .#{$component-name}__screen {
+    .#{$component-name}__edit-stage {
       left: calc(50% + #{$preview-offset});
+    }
+
+    .#{$component-name}__controls {
+      left: calc(50% - #{$preview-width} - #{$preview-offset});
+      transform: translateX(unit(4));
+    }
+  }
+
+  &:hover {
+    .#{$component-name}__controls {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity var(--animation-duration-standard) var(--animation-duration-fast) var(--animation-easing),
+        transform var(--animation-duration-standard) var(--animation-duration-fast) var(--animation-easing);
     }
   }
 }
