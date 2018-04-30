@@ -15,8 +15,10 @@ const EditStageButton = Zoom(
   ({
     onEditStage,
     type,
+    label,
   }) => (
     <div className="timeline-stage__edit-stage">
+      <div className="timeline-stage__edit-stage-title">{label || '\u00A0'}</div>
       <div
         className="timeline-stage__screen"
         role="button"
@@ -63,6 +65,7 @@ class TimelineStage extends PureComponent {
       onEditSkipLogic,
       onInsertStage,
       type,
+      label,
       ...rest
     } = this.props;
 
@@ -80,6 +83,7 @@ class TimelineStage extends PureComponent {
         <EditStageButton
           onEditStage={onEditStage}
           type={type}
+          label={label}
           zoomColors={zoomColors}
         />
         <div className="timeline-stage__controls">

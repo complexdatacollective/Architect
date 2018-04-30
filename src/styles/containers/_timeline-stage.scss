@@ -20,14 +20,6 @@ $component-name: timeline-stage;
     background-color: var(--architect-timeline-line);
   }
 
-  &__edit-stage {
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    width: $preview-width;
-    left: calc(50% - #{$preview-width} - #{$preview-offset});
-  }
-
   &__controls {
     cursor: pointer;
     position: absolute;
@@ -61,9 +53,28 @@ $component-name: timeline-stage;
     }
   }
 
+  &__edit-stage {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: $preview-width;
+    left: calc(50% - #{$preview-width} - #{$preview-offset});
+
+    &-title {
+      @include typography('title-5', font-size);
+      text-align: center;
+      color: var(--architect-text);
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      margin: calc(#{-0.5 * $preview-width * $preview-ratio} - #{unit(2.5)}) 0 0;
+    }
+  }
+
   &__screen {
     width: $preview-width;
     padding-bottom: $preview-width * $preview-ratio;
+    position: relative;
 
     &-preview {
       width: 100%;

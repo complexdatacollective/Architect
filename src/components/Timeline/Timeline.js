@@ -38,6 +38,7 @@ class Timeline extends PureComponent {
       key={`stage_${stage.id}`}
       id={stage.id}
       type={stage.type}
+      label={stage.label}
       onMouseEnter={this.onHoverStage}
       onEditStage={() => this.props.onEditStage(stage.id)}
       onInsertStage={position => this.props.onInsertStage(index + position)}
@@ -58,7 +59,7 @@ class Timeline extends PureComponent {
               title="My protocol"
             />
             <div className="timeline__stages">
-              <div className="timeline__stages-highlight" key="hi" style={highlightStyles} />
+              <div className="timeline__stages-highlight" key="highlight" style={highlightStyles} />
               {stages}
             </div>
           </div>
