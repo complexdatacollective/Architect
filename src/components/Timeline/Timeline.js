@@ -55,7 +55,6 @@ class Timeline extends PureComponent {
           <div className="timeline__background" />
           <div className="timeline__content">
             <Overview
-              name="foo"
               title="My protocol"
             />
             <div className="timeline__stages">
