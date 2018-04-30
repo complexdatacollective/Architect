@@ -2,27 +2,27 @@
   background-color: var(--architect-panel-background);
   color: var(--architect-panel-text);
   margin: 0 auto;
-  width: 50vw;
-  min-height: 50vh;
+  width: 75vw;
+  min-height: 40vh;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: unit(1) unit(1) 0 0 rgba(0, 0, 0, .15);
+  box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
 
   &__title {
     text-align: center;
   }
 
   &__groups {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 50% 50%;
+    columns: 2;
+    column-gap: unit(2);
+    break-inside: avoid-column;
   }
 
   &__group {
-    margin: 20px;
+    margin: 0 0 unit(2);
     border: 1px solid var(--architect-panel-divider);
-    padding: 20px;
-    border-radius: 10px;
+    padding: unit(2);
+    border-radius:  unit(1);
   }
 
   &__group-title {

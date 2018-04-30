@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { flatten, zip } from 'lodash';
 import Overview from './Overview';
 import Stage from './Stage';
-import AddNew from './AddNew';
 import constrain from '../../behaviours/constrain';
 
 class Timeline extends PureComponent {
@@ -21,28 +19,36 @@ class Timeline extends PureComponent {
     onEditSkipLogic: () => {},
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      highlightY: 0,
+    };
+  }
+
+  onHoverStage = (e) => {
+    const offset = e.target.closest('.timeline-stage').offsetTop;
+    // debugger;
+    this.setState({ highlightY: offset });
+  };
+
   renderStage = (stage, index) => (
     <Stage
       key={`stage_${stage.id}`}
-      id={`stage_${index}`}
-      {...stage}
+      id={stage.id}
+      type={stage.type}
+      label={stage.label}
+      onMouseEnter={this.onHoverStage}
       onEditStage={() => this.props.onEditStage(stage.id)}
+      onInsertStage={position => this.props.onInsertStage(index + position)}
       onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
-    />
-  );
-
-  renderAddNew = (item, index) => (
-    <AddNew
-      key={`add-new_${index}`}
-      onInsertStage={() => this.props.onInsertStage(index + 1)}
     />
   );
 
   render() {
     const stages = this.props.stages.map(this.renderStage);
-    const addNew = this.props.stages.map(this.renderAddNew);
-
-    const items = flatten(zip(stages, addNew));
+    const highlightStyles = { transform: `translateY(${this.state.highlightY}px)` };
 
     return (
       <div className="timeline">
@@ -50,14 +56,12 @@ class Timeline extends PureComponent {
           <div className="timeline__background" />
           <div className="timeline__content">
             <Overview
-              name="foo"
               title="My protocol"
             />
-            <AddNew
-              key={'add-new_0'}
-              onInsertStage={() => this.props.onInsertStage(0)}
-            />
-            {items}
+            <div className="timeline__stages">
+              <div className="timeline__stages-highlight" key="highlight" style={highlightStyles} />
+              {stages}
+            </div>
           </div>
         </div>
       </div>

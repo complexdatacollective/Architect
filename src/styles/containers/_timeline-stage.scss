@@ -1,41 +1,150 @@
-.timeline-stage {
-  @include vertical-rail;
-  padding: 40px 0;
+$preview-offset: unit(4);
+$preview-width: 22vw;
+$preview-ratio: 9/16;
+$border-width: unit(0.3);
+$component-name: timeline-stage;
 
-  &__preview {
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent;
-    transition: border-color var(--animation-easing) var(--animation-duration-fast);
+.#{$component-name} {
+  padding: unit(5) 0;
+  position: relative;
+
+  &__notch {
     cursor: pointer;
-    width: 40vw;
-    padding-bottom: 30vw;
-    margin: 0 auto;
+    left: 50%;
+    width: unit(3);
+    height: unit(3);
+    border-radius: unit(3);
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--architect-timeline-line);
+  }
+
+  &__controls {
+    cursor: pointer;
+    position: absolute;
+    display: inline-block;
+    width: $preview-width;
+    top: 0;
+    left: calc(50% + #{$preview-offset});
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    will-change: transform;
+    transition: opacity var(--animation-duration-fast) var(--animation-easing),
+      transform var(--animation-duration-fast) var(--animation-easing);
+    opacity: 0;
+    transform: translateZ(0) translateX(unit(-4));
+  }
+
+  &__control {
+    display: block;
+    padding: unit(1) 0;
+    color: var(--architect-text);
+
+    &-icon {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: unit(4);
+    }
+  }
+
+  &__edit-stage {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: $preview-width;
+    left: calc(50% - #{$preview-width} - #{$preview-offset});
+
+    &-title {
+      @include typography('title-5', font-size);
+      text-align: center;
+      color: var(--architect-text);
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      margin: calc(#{-0.5 * $preview-width * $preview-ratio} - #{unit(2.5)}) 0 0;
+    }
+  }
+
+  &__screen {
+    width: $preview-width;
+    padding-bottom: $preview-width * $preview-ratio;
     position: relative;
 
-    &-image {
+    &-preview {
       width: 100%;
       height: 100%;
       position: absolute;
-      z-index: 2;
+      z-index: 3;
+      background-color: var(--background);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: capitalize;
+      overflow: hidden;
+
+      img {
+        max-width: 100%;
+      }
     }
 
-    &-caption {
+    &::before {
+      content: '';
+      display: block;
+      background: var(--architect-shadow);
+      position: absolute;
+      z-index: 2;
       width: 100%;
       height: 100%;
-      min-height: 50px;
+      top: unit(1);
+      left: unit(1);
+    }
+
+    &::after {
+      content: '';
+      display: block;
       position: absolute;
-      z-index: 1;
-      background-color: var(--background);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--text);
-      text-transform: capitalize;
+      z-index: 4;
+      width: calc(100% + #{$border-width * 2});
+      height: calc(100% + #{$border-width * 2});
+      top: -$border-width;
+      left: -$border-width;
+      border-width: $border-width;
+      border-style: solid;
+      border-color: transparent;
+      transition: border-color var(--animation-easing) var(--animation-duration-fast);
     }
 
     &:hover {
-      border-color: var(--architect-intent);
+      &::after {
+        border-color: var(--architect-intent);
+      }
+    }
+  }
+
+  &:nth-child(2n + 1) {
+    .#{$component-name}__edit-stage {
+      left: calc(50% + #{$preview-offset});
+    }
+
+    .#{$component-name}__controls {
+      left: calc(50% - #{$preview-width} - #{$preview-offset});
+      transform: translateX(unit(4));
+    }
+  }
+
+  &:hover {
+    .#{$component-name}__controls {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity var(--animation-duration-standard) var(--animation-duration-fast) var(--animation-easing),
+        transform var(--animation-duration-standard) var(--animation-duration-fast) var(--animation-easing);
     }
   }
 }

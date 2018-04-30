@@ -7,19 +7,19 @@
   transition: opacity var(--animation-duration-fast) var(--animation-easing);
 
   &__control-bar {
-    @include layout-container;
-    @include flex-inline;
-    @include flex-align(left, middle);
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    flex: 0 0 60px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: var(--architect-background);
+    height: calc(50px + #{unit(2)}); // height of button plus padding
+    padding: unit(1) unit(3);
+    background-color: var(--architect-control-bar-background);
     transform: translateZ(0) translateY(100%);
     transition: transform var(--animation-easing) var(--animation-duration-fast);
+
+    .button {
+      margin-right: unit(2);
+    }
   }
 
   &--has-changes {
@@ -31,9 +31,21 @@
   &.route-enter {
     .timeline__background {
       transform: translateY(-100%) rotate(180deg);
+      will-change: transform;
     }
 
-    .panel {
+    .timeline__content::before {
+      will-change: transform;
+      transform: translateY(100vh);
+    }
+
+    .timeline__stages {
+      will-change: opacity;
+      opacity: 0;
+    }
+
+    .timeline-overview {
+      will-change: opacity, box-shadow;
       opacity: 0;
       box-shadow: 0 0 0 0 rgba(0, 0, 0, .15);
     }
@@ -47,7 +59,16 @@
       transform: translateY(0) rotate(180deg);
     }
 
-    .panel {
+    .timeline__content::before {
+       transform: translateY(0);
+     }
+
+    .timeline__stages {
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
+      opacity: 1;
+    }
+
+    .timeline-overview {
       transition: opacity 0s 950ms,
         box-shadow 300ms 950ms;
       opacity: 1;

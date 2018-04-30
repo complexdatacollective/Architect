@@ -1,3 +1,6 @@
+$stage-height: 9/16 * 22vw;
+$stage-padding: unit(5);
+
 .timeline {
   position: absolute;
   top: 0;
@@ -19,6 +22,45 @@
   &__content {
     position: relative;
     z-index: 2;
+
+    &::before {
+      transition: transform var(--animation-duration-slow) var(--animation-easing);
+      will-change: transform;
+      z-index: -1;
+      content: '';
+      display: block;
+      position: absolute;
+      top: 40vh;
+      left: calc(50% - #{unit(0.3)});
+      width: 0;
+      height: calc(100% - 40vh - #{$stage-padding} - #{$stage-height / 2});
+      border-left-width: unit(0.6);
+      border-left-color: var(--architect-timeline-line);
+      border-left-style: solid;
+    }
+  }
+
+  &__stages {
+    position: relative;
+    margin: unit(6) 0 0;
+
+    &-highlight {
+      position: absolute;
+      z-index: -1;
+      height: calc(#{$stage-height} + #{2 * $stage-padding});
+      width: 100%;
+      background-color: transparent;
+      will-change: transform background-color;
+      transition: transform var(--animation-duration-standard) var(--animation-easing),
+        background-color var(--animation-duration-fast) var(--animation-easing);
+      transform: translateZ(0);
+    }
+
+    &:hover {
+      .timeline__stages-highlight {
+        background-color: var(--architect-timeline-highlight);
+      }
+    }
   }
 
   &__background {

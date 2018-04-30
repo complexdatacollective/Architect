@@ -1,7 +1,16 @@
 
 :root {
+  --color-shadow: rgba(0, 0, 0, .15);
+
   --architect-background: var(--color-white);
+  --architect-text: var(--color-charcoal);
+  --architect-shadow: var(--color-shadow);
+
+  --architect-control-bar-background: var(--color-cyber-grape);
+  --architect-control-bar-text: var(--color-white);
+
   --architect-panel-background: var(--color-platinum);
+  --architect-panel-shadow: var(--color-shadow);
   --architect-panel-text: var(--color-charcoal);
   --architect-panel-divider: var(--color-platinum--dark);
   --architect-border: var(--color-platinum);
@@ -10,7 +19,9 @@
   --architect-intent--inactive: var(--color-charcoal);
   --architect-intent: var(--color-mustard);
   --architect-intent-border: var(--color-mustard--dark);
-  --architect-time-line: var(--color-neon-coral);
+
+  --architect-timeline-highlight: rgba(216, 216, 216, .2);
+  --architect-timeline-line: var(--color-neon-coral);
 
   --architect-wave: var(--color-sea-green);
 
