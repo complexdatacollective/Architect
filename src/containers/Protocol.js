@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { Button } from 'network-canvas-ui';
+import { Button, Icon } from 'network-canvas-ui';
 import { getProtocol } from '../selectors/protocol';
 import NewStage from '../containers/NewStage';
 import EditSkipLogic from '../containers/EditSkipLogic';
@@ -22,6 +22,8 @@ const defaultActiveCardState = {
   cardType: null,
   cancel: false,
 };
+
+const RightArrow = <Icon name="arrow-right" />;
 
 class Protocol extends PureComponent {
   static propTypes = {
@@ -111,9 +113,14 @@ class Protocol extends PureComponent {
         />
 
         <div className="protocol__control-bar">
-          <Button size="small" onClick={exportProtocol}>Export</Button>
+          <Button
+            size="small" onClick={exportProtocol} color="white" icon={RightArrow} iconPosition="right">
+            Export
+          </Button>
           { hasUnsavedChanges &&
-            <Button size="small" onClick={saveProtocol}>Save</Button>
+            <Button size="small" onClick={saveProtocol} color="white" icon={RightArrow} iconPosition="right">
+              Save
+            </Button>
           }
         </div>
 

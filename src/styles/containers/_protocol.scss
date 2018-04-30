@@ -7,19 +7,19 @@
   transition: opacity var(--animation-duration-fast) var(--animation-easing);
 
   &__control-bar {
-    @include layout-container;
-    @include flex-inline;
-    @include flex-align(left, middle);
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    flex: 0 0 60px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: var(--architect-background);
+    height: calc(50px + #{unit(2)}); // height of button plus padding
+    padding: unit(1) unit(3);
+    background-color: var(--architect-control-bar-background);
     transform: translateZ(0) translateY(100%);
     transition: transform var(--animation-easing) var(--animation-duration-fast);
+
+    .button {
+      margin-right: unit(2);
+    }
   }
 
   &--has-changes {
