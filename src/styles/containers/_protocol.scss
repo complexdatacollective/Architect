@@ -35,10 +35,17 @@
     }
 
     .timeline__content::before {
+      will-change: transform;
       transform: translateY(100vh);
     }
 
+    .timeline__stages {
+      will-change: opacity;
+      opacity: 0;
+    }
+
     .timeline-overview {
+      will-change: opacity, box-shadow;
       opacity: 0;
       box-shadow: 0 0 0 0 rgba(0, 0, 0, .15);
     }
@@ -55,6 +62,11 @@
     .timeline__content::before {
        transform: translateY(0);
      }
+
+    .timeline__stages {
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
+      opacity: 1;
+    }
 
     .timeline-overview {
       transition: opacity 0s 950ms,
