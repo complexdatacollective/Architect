@@ -1,35 +1,21 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import cx from 'classnames';
-import { compose, mapProps } from 'recompose';
+import { compose } from 'recompose';
 import { Button, Icon } from 'network-canvas-ui';
-import Tweened from '../behaviours/Tweened';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import { ProtocolCard } from '../components/Start';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
-
-const transitionStyles = (componentName) =>
-  mapProps(props =>
-    ({
-      className: cx(
-        componentName,
-        `${componentName}--${props.transitionState}`,
-        props.className,
-      ),
-    })
-  );
-
-const TweenedProtocolCard = Tweened(ProtocolCard);
 
 class Start extends PureComponent {
   static propTypes = {
     protocols: PropTypes.array.isRequired,
     createProtocol: PropTypes.func.isRequired,
-    locateAndLoadProtocol: PropTypes.func.isRequired,
+    chooseProtocol: PropTypes.func.isRequired,
+    clearDeadLinks: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -48,28 +34,28 @@ class Start extends PureComponent {
     return (
       <div className="start">
         <div className="start__split">
-          <div className="start__hero">
-            <div className="start__welcome">
-              <h1 className="start__welcome-title">Architect</h1>
-              <p className="start__welcome-lead">A tool for creating Network Canvas interviews</p>
-            </div>
+          <div className="start__welcome">
+            <h1 className="start__welcome-title">Architect</h1>
+            <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>
+          </div>
 
-            <div className="start__call-to-action">
-              <Button
-                type="button"
-                color="white"
-                size="small"
-                icon={<Icon name="arrow-right" />}
-                onClick={ () => this.props.createProtocol(this.openProtocol) }
-              >Create new</Button>
-              <Button
-                type="button"
-                color="platinum"
-                size="small"
-                icon={<Icon name="arrow-right" />}
-                onClick={ () => this.props.chooseProtocol(this.openProtocol) }
-              >Open existing</Button>
-            </div>
+          <div className="start__call-to-action">
+            <Button
+              id="create-new-protocol-button"
+              type="button"
+              color="white"
+              size="small"
+              icon={<Icon name="arrow-right" />}
+              onClick={() => this.props.createProtocol(this.openProtocol)}
+            >Create new</Button>
+            <Button
+              id="open-existing-protocol-button"
+              type="button"
+              size="small"
+              color="cyber-grape"
+              icon={<Icon name="arrow-right" />}
+              onClick={() => this.props.chooseProtocol(this.openProtocol)}
+            >Open existing</Button>
           </div>
         </div>
 
@@ -80,10 +66,9 @@ class Start extends PureComponent {
                 className="start__protocols-protocol"
                 key={index}
               >
-                <TweenedProtocolCard
+                <ProtocolCard
                   path={protocol.path}
-                  tweenName="protocol"
-                  tweenElement={protocol.path}
+                  name={protocol.path}
                 />
               </div>
             )) }
@@ -111,6 +96,5 @@ const mapDispatchToProps = dispatch => ({
 export { Start };
 
 export default compose(
-  // transitionStyles('start'),
   connect(mapStateToProps, mapDispatchToProps),
 )(Start);
