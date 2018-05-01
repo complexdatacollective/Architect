@@ -1,27 +1,14 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import cx from 'classnames';
-import { compose, mapProps } from 'recompose';
+import { compose } from 'recompose';
 import { Button, Icon } from 'network-canvas-ui';
 import Tweened from '../behaviours/Tweened';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import { ProtocolCard } from '../components/Start';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
-
-const transitionStyles = (componentName) =>
-  mapProps(props =>
-    ({
-      className: cx(
-        componentName,
-        `${componentName}--${props.transitionState}`,
-        props.className,
-      ),
-    })
-  );
 
 const TweenedProtocolCard = Tweened(ProtocolCard);
 
@@ -29,7 +16,9 @@ class Start extends PureComponent {
   static propTypes = {
     protocols: PropTypes.array.isRequired,
     createProtocol: PropTypes.func.isRequired,
-    locateAndLoadProtocol: PropTypes.func.isRequired,
+    chooseProtocol: PropTypes.func.isRequired,
+    clearDeadLinks: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -60,7 +49,7 @@ class Start extends PureComponent {
               color="white"
               size="small"
               icon={<Icon name="arrow-right" />}
-              onClick={ () => this.props.createProtocol(this.openProtocol) }
+              onClick={() => this.props.createProtocol(this.openProtocol)}
             >Create new</Button>
             <Button
               id="open-existing-protocol-button"
@@ -68,7 +57,7 @@ class Start extends PureComponent {
               size="small"
               color="cyber-grape"
               icon={<Icon name="arrow-right" />}
-              onClick={ () => this.props.chooseProtocol(this.openProtocol) }
+              onClick={() => this.props.chooseProtocol(this.openProtocol)}
             >Open existing</Button>
           </div>
         </div>
@@ -112,6 +101,5 @@ const mapDispatchToProps = dispatch => ({
 export { Start };
 
 export default compose(
-  // transitionStyles('start'),
   connect(mapStateToProps, mapDispatchToProps),
 )(Start);
