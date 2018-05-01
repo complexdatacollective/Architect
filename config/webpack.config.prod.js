@@ -168,7 +168,7 @@ module.exports = {
                         minimize: false,
                         sourceMap: false,
                         alias: {
-                          '../../../assets/fonts': 'network-canvas-ui/lib/assets/fonts',
+                          '../../../assets/fonts': '../ui/src/assets/fonts',
                         },
                       },
                     },
@@ -189,11 +189,6 @@ module.exports = {
                     },
                     {
                       loader: require.resolve('sass-loader'),
-                      options: {
-                        includePaths: [
-                          path.resolve('./node_modules/network-canvas-ui/lib/styles/'),
-                        ],
-                      },
                     },
                   ],
                 },
