@@ -73,13 +73,13 @@
 
   &__protocols {
     width: 80vw;
-    height: 100%;
     margin: 0 auto;
     padding: unit(3);
     border-radius: unit(1);
     background-color: var(--light-background);
     display: flex;
     box-shadow: inset 5px 5px 15px rgba(0, 0, 0, .1);
+    overflow: hidden;
 
     &-protocol {
       flex: 0 0 33%;

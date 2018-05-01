@@ -4,12 +4,22 @@ $component-name: start-protocol-card;
 .#{$component-name} {
   display: block;
   width: 100%;
-  height: 100%;
+  height: 25vh;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 
   &__preview {
-    height: 22vh;
-    width: 22vh;
+    flex: 0 0 90%;
+  }
+
+  &__label {
+    flex: 0 0 10%;
+  }
+
+  &__stack {
+    height: 20vh;
+    width: 20vh;
     margin: 0 auto unit(3) auto;
     position: relative;
     box-shadow: 0px 0px 25px 15px rgba(0, 0, 0, .15);
@@ -57,7 +67,7 @@ $component-name: start-protocol-card;
   &__name {
     @include typography('title-3');
     font-weight: bold;
-    margin: unit(1) 0 0;
+    margin: 0;
     text-align: center;
     color: var(--text);
   }
@@ -79,7 +89,7 @@ $component-name: start-protocol-card;
 
     transition: opacity $transition-after $transition-easing;
 
-    .#{$component-name}__preview {
+    .#{$component-name}__stack {
       transition: width $transition-duration $transition-easing,
         height $transition-duration $transition-easing;
 
@@ -101,7 +111,7 @@ $component-name: start-protocol-card;
         visibility: hidden;
       }
 
-      .#{$component-name}__preview {
+      .#{$component-name}__stack {
         box-shadow: unset;
 
         &-cover {
@@ -119,7 +129,7 @@ $component-name: start-protocol-card;
     }
 
     &-active {
-      .#{$component-name}__preview {
+      .#{$component-name}__stack {
         width: 100%;
         height: 100%;
 
