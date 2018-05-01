@@ -48,28 +48,28 @@ class Start extends PureComponent {
     return (
       <div className="start">
         <div className="start__split">
-          <div className="start__hero">
-            <div className="start__welcome">
-              <h1 className="start__welcome-title">Architect</h1>
-              <p className="start__welcome-lead">A tool for creating Network Canvas interviews</p>
-            </div>
+          <div className="start__welcome">
+            <h1 className="start__welcome-title">Architect</h1>
+            <p className="start__welcome-lead">A tool for creating Network Canvas interviews</p>
+          </div>
 
-            <div className="start__call-to-action">
-              <Button
-                type="button"
-                color="white"
-                size="small"
-                icon={<Icon name="arrow-right" />}
-                onClick={ () => this.props.createProtocol(this.openProtocol) }
-              >Create new</Button>
-              <Button
-                type="button"
-                color="platinum"
-                size="small"
-                icon={<Icon name="arrow-right" />}
-                onClick={ () => this.props.chooseProtocol(this.openProtocol) }
-              >Open existing</Button>
-            </div>
+          <div className="start__call-to-action">
+            <Button
+              id="create-new-protocol-button"
+              type="button"
+              color="white"
+              size="small"
+              icon={<Icon name="arrow-right" />}
+              onClick={ () => this.props.createProtocol(this.openProtocol) }
+            >Create new</Button>
+            <Button
+              id="open-existing-protocol-button"
+              type="button"
+              size="small"
+              color="purple"
+              icon={<Icon name="arrow-right" />}
+              onClick={ () => this.props.chooseProtocol(this.openProtocol) }
+            >Open existing</Button>
           </div>
         </div>
 

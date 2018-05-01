@@ -3,7 +3,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: unit(6);
   transition: opacity var(--animation-duration-fast) var(--animation-easing);
   position: absolute;
   top: 0;
@@ -44,15 +43,11 @@
     height: unit(5);
   }
 
-  &__hero {
+  &__welcome {
     width: 50vw;
     margin: 0 auto;
-    padding: unit(6) 0 unit(6) unit(14);
+    padding: 0 0 unit(4) unit(14);
 
-    flex-direction: column;
-  }
-
-  &__welcome {
     &-title, &-lead {
       color: var(--architect-panel-text);
     }
@@ -66,8 +61,14 @@
     }
   }
 
-  &__call-to-action > * {
-    margin: unit(1) unit(2) 0 0;
+  &__call-to-action {
+    width: 100%;
+    text-align: center;
+    padding: 0 0 unit(8);
+
+    & > * {
+      margin: 0 unit(3) 0;
+    }
   }
 
   &__protocols {
@@ -108,7 +109,14 @@
 
     .start__background {
       transition: transform var(--animation-duration-fast) var(--animation-easing);
+      will-change: transform;
       transform: translateY(0);
+    }
+
+    #create-new-protocol-button,
+    #open-existing-protocol-button {
+      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      will-change: transform;
     }
   }
 
@@ -118,6 +126,14 @@
 
     .start__background {
       transform: translateY(100%);
+    }
+
+    #create-new-protocol-button {
+      transform: translateX(-100%);
+    }
+
+    #open-existing-protocol-button {
+      transform: translateX(100%);
     }
   }
 }
