@@ -50,7 +50,7 @@ class Start extends PureComponent {
         <div className="start__split">
           <div className="start__welcome">
             <h1 className="start__welcome-title">Architect</h1>
-            <p className="start__welcome-lead">A tool for creating Network Canvas interviews</p>
+            <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>
           </div>
 
           <div className="start__call-to-action">
@@ -82,6 +82,7 @@ class Start extends PureComponent {
               >
                 <TweenedProtocolCard
                   path={protocol.path}
+                  name={protocol.path}
                   tweenName="protocol"
                   tweenElement={protocol.path}
                 />

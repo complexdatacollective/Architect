@@ -16,7 +16,6 @@ const ProtocolCard = ({ path, name }) => (
       </div>
     </div>
     <h3 className="start-protocol-card__name">{name}</h3>
-    <div className="start-protocol-card__path">{path}</div>
   </Link>
 );
 
