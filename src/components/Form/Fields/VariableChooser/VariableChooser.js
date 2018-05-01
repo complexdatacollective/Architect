@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { toPairs, get, omit, isEmpty } from 'lodash';
-import { Button } from 'network-canvas-ui';
+import { Button } from '../../../../ui/src/components';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';

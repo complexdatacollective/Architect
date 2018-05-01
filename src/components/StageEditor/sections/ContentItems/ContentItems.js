@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
-import { Button } from 'network-canvas-ui';
+import { Button } from '../../../../ui/src/components';
 import { Section, Editor, Guidance } from '../../../Guided';
 import SortableItems from '../../SortableItems';
 import ContentItem from './ContentItem';

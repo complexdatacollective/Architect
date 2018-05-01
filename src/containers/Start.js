@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { get } from 'lodash';
 import cx from 'classnames';
 import { compose, mapProps } from 'recompose';
-import { Button, Icon } from 'network-canvas-ui';
+import { Button, Icon } from '../ui/src/components';
 import Tweened from '../behaviours/Tweened';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import { ProtocolCard } from '../components/Start';

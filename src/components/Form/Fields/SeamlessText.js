@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Icon } from 'network-canvas-ui';
+import { Icon } from '../../../ui/src/components';
 import { fieldPropTypes } from 'redux-form';
 
 class SeamlessTextInput extends PureComponent {
