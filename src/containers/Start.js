@@ -5,12 +5,9 @@ import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { compose } from 'recompose';
 import { Button, Icon } from 'network-canvas-ui';
-import Tweened from '../behaviours/Tweened';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import { ProtocolCard } from '../components/Start';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
-
-const TweenedProtocolCard = Tweened(ProtocolCard);
 
 class Start extends PureComponent {
   static propTypes = {
@@ -69,11 +66,9 @@ class Start extends PureComponent {
                 className="start__protocols-protocol"
                 key={index}
               >
-                <TweenedProtocolCard
+                <ProtocolCard
                   path={protocol.path}
                   name={protocol.path}
-                  tweenName="protocol"
-                  tweenElement={protocol.path}
                 />
               </div>
             )) }
