@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { Button, Icon } from 'network-canvas-ui';
+import { Button, Icon } from '../ui/components';
 import { getProtocol } from '../selectors/protocol';
 import NewStage from '../containers/NewStage';
 import EditSkipLogic from '../containers/EditSkipLogic';

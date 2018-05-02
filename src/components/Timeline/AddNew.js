@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'network-canvas-ui';
+import { Icon } from '../../ui/components';
 import { Zoom } from '../../behaviours';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 

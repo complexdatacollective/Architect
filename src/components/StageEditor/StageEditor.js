@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
-import { Button } from 'network-canvas-ui';
+import { Button } from '../../ui/components';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';

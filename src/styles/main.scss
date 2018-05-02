@@ -1,4 +1,6 @@
-@import '~network-canvas-ui/lib/styles/all';
+$font-path: '../ui/assets/fonts';
+
+@import '../ui/styles/all';
 @import './settings';
 @import './shared';
 @import './theme';
