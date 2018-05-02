@@ -44,7 +44,7 @@
       opacity: 0;
     }
 
-    .timeline-overview {
+    .timeline-overview__panel {
       will-change: opacity, box-shadow;
       opacity: 0;
       box-shadow: 0 0 0 0 rgba(0, 0, 0, .15);
@@ -68,7 +68,7 @@
       opacity: 1;
     }
 
-    .timeline-overview {
+    .timeline-overview__panel {
       transition: opacity 0s 950ms,
         box-shadow 300ms 950ms;
       opacity: 1;
