@@ -60,19 +60,21 @@ class Start extends PureComponent {
         </div>
 
         <div className="start__split">
-          <div className="start__protocols">
-            { this.props.protocols.map((protocol, index) => (
-              <div
-                className="start__protocols-protocol"
-                key={index}
-              >
-                <ProtocolCard
-                  path={protocol.path}
-                  name={protocol.path}
-                />
-              </div>
-            )) }
-          </div>
+          { this.props.protocols.length > 0 &&
+            <div className="start__protocols">
+              { this.props.protocols.map((protocol, index) => (
+                <div
+                  className="start__protocols-protocol"
+                  key={index}
+                >
+                  <ProtocolCard
+                    path={protocol.path}
+                    name={protocol.path}
+                  />
+                </div>
+              )) }
+            </div>
+          }
         </div>
 
         <div className="start__background" />
