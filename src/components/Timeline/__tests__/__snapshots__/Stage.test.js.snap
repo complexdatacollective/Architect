@@ -5,8 +5,11 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TimelineStage
+    className=""
+    label=""
     onEditSkipLogic={[Function]}
     onEditStage={[Function]}
+    onInsertStage={[Function]}
     type="Foo"
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -18,11 +21,16 @@ ShallowWrapper {
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
-    "key": null,
+    "key": undefined,
     "nodeType": "host",
     "props": Object {
       "children": Array [
+        <div
+          className="timeline-stage__notch"
+          onClick={[Function]}
+/>,
         <getContext(Draft(Component))
+          label=""
           onEditStage={[Function]}
           type="Foo"
           zoomColors={
@@ -32,9 +40,43 @@ ShallowWrapper {
                             ]
           }
 />,
-        <TimelineEditSkipLogic
-          onEditSkipLogic={[Function]}
-/>,
+        <div
+          className="timeline-stage__controls"
+>
+          <a
+                    className="timeline-stage__control"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="timeline-stage__control-icon"
+                    >
+                              ↑
+                    </div>
+                    Add screen before
+          </a>
+          <a
+                    className="timeline-stage__control"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="timeline-stage__control-icon"
+                    >
+                              ⚙
+                    </div>
+                    Configure skip logic
+          </a>
+          <a
+                    className="timeline-stage__control"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="timeline-stage__control-icon"
+                    >
+                              ↓
+                    </div>
+                    Add screen after
+          </a>
+</div>,
       ],
       "className": "timeline-stage",
     },
@@ -42,9 +84,22 @@ ShallowWrapper {
     "rendered": Array [
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "timeline-stage__notch",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
         "nodeType": "function",
         "props": Object {
+          "label": "",
           "onEditStage": [Function],
           "type": "Foo",
           "zoomColors": Array [
@@ -58,14 +113,152 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": null,
-        "nodeType": "class",
+        "key": undefined,
+        "nodeType": "host",
         "props": Object {
-          "onEditSkipLogic": [Function],
+          "children": Array [
+            <a
+              className="timeline-stage__control"
+              onClick={[Function]}
+>
+              <div
+                            className="timeline-stage__control-icon"
+              >
+                            ↑
+              </div>
+              Add screen before
+</a>,
+            <a
+              className="timeline-stage__control"
+              onClick={[Function]}
+>
+              <div
+                            className="timeline-stage__control-icon"
+              >
+                            ⚙
+              </div>
+              Configure skip logic
+</a>,
+            <a
+              className="timeline-stage__control"
+              onClick={[Function]}
+>
+              <div
+                            className="timeline-stage__control-icon"
+              >
+                            ↓
+              </div>
+              Add screen after
+</a>,
+          ],
+          "className": "timeline-stage__controls",
         },
         "ref": null,
-        "rendered": null,
-        "type": [Function],
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="timeline-stage__control-icon"
+>
+                  ↑
+</div>,
+                "Add screen before",
+              ],
+              "className": "timeline-stage__control",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "↑",
+                  "className": "timeline-stage__control-icon",
+                },
+                "ref": null,
+                "rendered": "↑",
+                "type": "div",
+              },
+              "Add screen before",
+            ],
+            "type": "a",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="timeline-stage__control-icon"
+>
+                  ⚙
+</div>,
+                "Configure skip logic",
+              ],
+              "className": "timeline-stage__control",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "⚙",
+                  "className": "timeline-stage__control-icon",
+                },
+                "ref": null,
+                "rendered": "⚙",
+                "type": "div",
+              },
+              "Configure skip logic",
+            ],
+            "type": "a",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="timeline-stage__control-icon"
+>
+                  ↓
+</div>,
+                "Add screen after",
+              ],
+              "className": "timeline-stage__control",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "↓",
+                  "className": "timeline-stage__control-icon",
+                },
+                "ref": null,
+                "rendered": "↓",
+                "type": "div",
+              },
+              "Add screen after",
+            ],
+            "type": "a",
+          },
+        ],
+        "type": "div",
       },
     ],
     "type": "div",
@@ -73,11 +266,16 @@ ShallowWrapper {
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
-      "key": null,
+      "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
+          <div
+            className="timeline-stage__notch"
+            onClick={[Function]}
+/>,
           <getContext(Draft(Component))
+            label=""
             onEditStage={[Function]}
             type="Foo"
             zoomColors={
@@ -87,9 +285,43 @@ ShallowWrapper {
                                   ]
             }
 />,
-          <TimelineEditSkipLogic
-            onEditSkipLogic={[Function]}
-/>,
+          <div
+            className="timeline-stage__controls"
+>
+            <a
+                        className="timeline-stage__control"
+                        onClick={[Function]}
+            >
+                        <div
+                                    className="timeline-stage__control-icon"
+                        >
+                                    ↑
+                        </div>
+                        Add screen before
+            </a>
+            <a
+                        className="timeline-stage__control"
+                        onClick={[Function]}
+            >
+                        <div
+                                    className="timeline-stage__control-icon"
+                        >
+                                    ⚙
+                        </div>
+                        Configure skip logic
+            </a>
+            <a
+                        className="timeline-stage__control"
+                        onClick={[Function]}
+            >
+                        <div
+                                    className="timeline-stage__control-icon"
+                        >
+                                    ↓
+                        </div>
+                        Add screen after
+            </a>
+</div>,
         ],
         "className": "timeline-stage",
       },
@@ -97,9 +329,22 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "timeline-stage__notch",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
           "nodeType": "function",
           "props": Object {
+            "label": "",
             "onEditStage": [Function],
             "type": "Foo",
             "zoomColors": Array [
@@ -113,14 +358,152 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": null,
-          "nodeType": "class",
+          "key": undefined,
+          "nodeType": "host",
           "props": Object {
-            "onEditSkipLogic": [Function],
+            "children": Array [
+              <a
+                className="timeline-stage__control"
+                onClick={[Function]}
+>
+                <div
+                                className="timeline-stage__control-icon"
+                >
+                                ↑
+                </div>
+                Add screen before
+</a>,
+              <a
+                className="timeline-stage__control"
+                onClick={[Function]}
+>
+                <div
+                                className="timeline-stage__control-icon"
+                >
+                                ⚙
+                </div>
+                Configure skip logic
+</a>,
+              <a
+                className="timeline-stage__control"
+                onClick={[Function]}
+>
+                <div
+                                className="timeline-stage__control-icon"
+                >
+                                ↓
+                </div>
+                Add screen after
+</a>,
+            ],
+            "className": "timeline-stage__controls",
           },
           "ref": null,
-          "rendered": null,
-          "type": [Function],
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="timeline-stage__control-icon"
+>
+                    ↑
+</div>,
+                  "Add screen before",
+                ],
+                "className": "timeline-stage__control",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "↑",
+                    "className": "timeline-stage__control-icon",
+                  },
+                  "ref": null,
+                  "rendered": "↑",
+                  "type": "div",
+                },
+                "Add screen before",
+              ],
+              "type": "a",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="timeline-stage__control-icon"
+>
+                    ⚙
+</div>,
+                  "Configure skip logic",
+                ],
+                "className": "timeline-stage__control",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "⚙",
+                    "className": "timeline-stage__control-icon",
+                  },
+                  "ref": null,
+                  "rendered": "⚙",
+                  "type": "div",
+                },
+                "Configure skip logic",
+              ],
+              "type": "a",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="timeline-stage__control-icon"
+>
+                    ↓
+</div>,
+                  "Add screen after",
+                ],
+                "className": "timeline-stage__control",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "↓",
+                    "className": "timeline-stage__control-icon",
+                  },
+                  "ref": null,
+                  "rendered": "↓",
+                  "type": "div",
+                },
+                "Add screen after",
+              ],
+              "type": "a",
+            },
+          ],
+          "type": "div",
         },
       ],
       "type": "div",

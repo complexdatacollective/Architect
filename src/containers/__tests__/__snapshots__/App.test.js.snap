@@ -21,16 +21,25 @@ ShallowWrapper {
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
-    "key": null,
+    "key": undefined,
     "nodeType": "host",
     "props": Object {
       "children": Array [
         <div
-          className="app__title-bar"
-          onClick={[Function]}
+          className="app__electron-titlebar"
+/>,
+        <NavLink
+          activeClassName="active"
+          ariaCurrent="true"
+          className="app__home"
+          exact={true}
+          to="/"
 >
-          Architect app
-</div>,
+          <img
+                    alt=""
+                    src="architect-logo-icon.svg"
+          />
+</NavLink>,
         null,
       ],
       "className": "app",
@@ -39,16 +48,44 @@ ShallowWrapper {
     "rendered": Array [
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Architect app",
-          "className": "app__title-bar",
-          "onClick": [Function],
+          "className": "app__electron-titlebar",
         },
         "ref": null,
-        "rendered": "Architect app",
+        "rendered": null,
         "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "activeClassName": "active",
+          "ariaCurrent": "true",
+          "children": <img
+            alt=""
+            src="architect-logo-icon.svg"
+/>,
+          "className": "app__home",
+          "exact": true,
+          "to": "/",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "",
+            "src": "architect-logo-icon.svg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        "type": [Function],
       },
       null,
     ],
@@ -57,16 +94,25 @@ ShallowWrapper {
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
-      "key": null,
+      "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
           <div
-            className="app__title-bar"
-            onClick={[Function]}
+            className="app__electron-titlebar"
+/>,
+          <NavLink
+            activeClassName="active"
+            ariaCurrent="true"
+            className="app__home"
+            exact={true}
+            to="/"
 >
-            Architect app
-</div>,
+            <img
+                        alt=""
+                        src="architect-logo-icon.svg"
+            />
+</NavLink>,
           null,
         ],
         "className": "app",
@@ -75,16 +121,44 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Architect app",
-            "className": "app__title-bar",
-            "onClick": [Function],
+            "className": "app__electron-titlebar",
           },
           "ref": null,
-          "rendered": "Architect app",
+          "rendered": null,
           "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "activeClassName": "active",
+            "ariaCurrent": "true",
+            "children": <img
+              alt=""
+              src="architect-logo-icon.svg"
+/>,
+            "className": "app__home",
+            "exact": true,
+            "to": "/",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "",
+              "src": "architect-logo-icon.svg",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          "type": [Function],
         },
         null,
       ],

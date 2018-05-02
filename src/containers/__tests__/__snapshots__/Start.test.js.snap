@@ -86,13 +86,7 @@ ShallowWrapper {
 </div>,
         <div
           className="start__split"
->
-          <div
-                    className="start__protocols"
-          >
-                    
-          </div>
-</div>,
+/>,
         <div
           className="start__background"
 />,
@@ -329,26 +323,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <div
-            className="start__protocols"
->
-            
-</div>,
+          "children": false,
           "className": "start__split",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [],
-            "className": "start__protocols",
-          },
-          "ref": null,
-          "rendered": Array [],
-          "type": "div",
-        },
+        "rendered": false,
         "type": "div",
       },
       Object {
@@ -447,13 +426,7 @@ ShallowWrapper {
 </div>,
           <div
             className="start__split"
->
-            <div
-                        className="start__protocols"
-            >
-                        
-            </div>
-</div>,
+/>,
           <div
             className="start__background"
 />,
@@ -690,26 +663,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <div
-              className="start__protocols"
->
-              
-</div>,
+            "children": false,
             "className": "start__split",
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [],
-              "className": "start__protocols",
-            },
-            "ref": null,
-            "rendered": Array [],
-            "type": "div",
-          },
+          "rendered": false,
           "type": "div",
         },
         Object {

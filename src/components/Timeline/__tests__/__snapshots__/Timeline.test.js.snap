@@ -19,35 +19,66 @@ ShallowWrapper {
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
-    "key": null,
+    "key": undefined,
     "nodeType": "host",
     "props": Object {
       "children": <div
         className="timeline__main"
 >
-        <TimelineOverview
-                title="My protocol"
+        <div
+                className="timeline__background"
         />
-        <TimelineAddNew
-                onInsertStage={[Function]}
-        />
+        <div
+                className="timeline__content"
+        >
+                <Unknown
+                        title="My protocol"
+                />
+                <div
+                        className="timeline__stages"
+                >
+                        <div
+                                className="timeline__stages-highlight"
+                                style={
+                                        Object {
+                                                "transform": "translateY(0px)",
+                                              }
+                                }
+                        />
+                </div>
+        </div>
 </div>,
       "className": "timeline",
     },
     "ref": null,
     "rendered": Object {
       "instance": null,
-      "key": null,
+      "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <TimelineOverview
-            title="My protocol"
+          <div
+            className="timeline__background"
 />,
-          <TimelineAddNew
-            onInsertStage={[Function]}
-/>,
-          Array [],
+          <div
+            className="timeline__content"
+>
+            <Unknown
+                        title="My protocol"
+            />
+            <div
+                        className="timeline__stages"
+            >
+                        <div
+                                    className="timeline__stages-highlight"
+                                    style={
+                                                Object {
+                                                            "transform": "translateY(0px)",
+                                                          }
+                                    }
+                        />
+            </div>
+</div>,
         ],
         "className": "timeline__main",
       },
@@ -55,25 +86,91 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": null,
-          "nodeType": "function",
+          "key": undefined,
+          "nodeType": "host",
           "props": Object {
-            "title": "My protocol",
+            "className": "timeline__background",
           },
           "ref": null,
           "rendered": null,
-          "type": [Function],
+          "type": "div",
         },
         Object {
           "instance": null,
-          "key": "add-new_0",
-          "nodeType": "function",
+          "key": undefined,
+          "nodeType": "host",
           "props": Object {
-            "onInsertStage": [Function],
+            "children": Array [
+              <Unknown
+                title="My protocol"
+/>,
+              <div
+                className="timeline__stages"
+>
+                <div
+                                className="timeline__stages-highlight"
+                                style={
+                                                Object {
+                                                                "transform": "translateY(0px)",
+                                                              }
+                                }
+                />
+</div>,
+            ],
+            "className": "timeline__content",
           },
           "ref": null,
-          "rendered": null,
-          "type": [Function],
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "title": "My protocol",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="timeline__stages-highlight"
+                    style={
+                                        Object {
+                                                            "transform": "translateY(0px)",
+                                                          }
+                    }
+/>,
+                  Array [],
+                ],
+                "className": "timeline__stages",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": "highlight",
+                  "nodeType": "host",
+                  "props": Object {
+                    "className": "timeline__stages-highlight",
+                    "style": Object {
+                      "transform": "translateY(0px)",
+                    },
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": "div",
         },
       ],
       "type": "div",
@@ -83,35 +180,66 @@ ShallowWrapper {
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
-      "key": null,
+      "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": <div
           className="timeline__main"
 >
-          <TimelineOverview
-                    title="My protocol"
+          <div
+                    className="timeline__background"
           />
-          <TimelineAddNew
-                    onInsertStage={[Function]}
-          />
+          <div
+                    className="timeline__content"
+          >
+                    <Unknown
+                              title="My protocol"
+                    />
+                    <div
+                              className="timeline__stages"
+                    >
+                              <div
+                                        className="timeline__stages-highlight"
+                                        style={
+                                                  Object {
+                                                            "transform": "translateY(0px)",
+                                                          }
+                                        }
+                              />
+                    </div>
+          </div>
 </div>,
         "className": "timeline",
       },
       "ref": null,
       "rendered": Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <TimelineOverview
-              title="My protocol"
+            <div
+              className="timeline__background"
 />,
-            <TimelineAddNew
-              onInsertStage={[Function]}
-/>,
-            Array [],
+            <div
+              className="timeline__content"
+>
+              <Unknown
+                            title="My protocol"
+              />
+              <div
+                            className="timeline__stages"
+              >
+                            <div
+                                          className="timeline__stages-highlight"
+                                          style={
+                                                        Object {
+                                                                      "transform": "translateY(0px)",
+                                                                    }
+                                          }
+                            />
+              </div>
+</div>,
           ],
           "className": "timeline__main",
         },
@@ -119,25 +247,91 @@ ShallowWrapper {
         "rendered": Array [
           Object {
             "instance": null,
-            "key": null,
-            "nodeType": "function",
+            "key": undefined,
+            "nodeType": "host",
             "props": Object {
-              "title": "My protocol",
+              "className": "timeline__background",
             },
             "ref": null,
             "rendered": null,
-            "type": [Function],
+            "type": "div",
           },
           Object {
             "instance": null,
-            "key": "add-new_0",
-            "nodeType": "function",
+            "key": undefined,
+            "nodeType": "host",
             "props": Object {
-              "onInsertStage": [Function],
+              "children": Array [
+                <Unknown
+                  title="My protocol"
+/>,
+                <div
+                  className="timeline__stages"
+>
+                  <div
+                                    className="timeline__stages-highlight"
+                                    style={
+                                                      Object {
+                                                                        "transform": "translateY(0px)",
+                                                                      }
+                                    }
+                  />
+</div>,
+              ],
+              "className": "timeline__content",
             },
             "ref": null,
-            "rendered": null,
-            "type": [Function],
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "title": "My protocol",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <div
+                      className="timeline__stages-highlight"
+                      style={
+                                            Object {
+                                                                  "transform": "translateY(0px)",
+                                                                }
+                      }
+/>,
+                    Array [],
+                  ],
+                  "className": "timeline__stages",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": "highlight",
+                    "nodeType": "host",
+                    "props": Object {
+                      "className": "timeline__stages-highlight",
+                      "style": Object {
+                        "transform": "translateY(0px)",
+                      },
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": "div",
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": "div",
           },
         ],
         "type": "div",

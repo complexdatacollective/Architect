@@ -10,6 +10,7 @@ const mockProps = {
   type: 'Foo',
   onEditStage: () => {},
   onEditSkipLogic: () => {},
+  onInsertStage: () => {},
 };
 
 describe('<Stage />', () => {
