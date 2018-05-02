@@ -4,17 +4,25 @@ $component-name: start-protocol-card;
 .#{$component-name} {
   display: block;
   width: 100%;
-  height: 25vh;
+  height: 27vh;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 
   &__preview {
-    flex: 0 0 90%;
+    flex: 0 0 calc(20vh + #{unit(1)});
+    max-height: calc(20vh + #{unit(1)});
   }
 
   &__label {
-    flex: 0 0 10%;
+    padding: unit(1) 0 0;
+    flex: 1 0 5vh;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   &__stack {
@@ -70,6 +78,11 @@ $component-name: start-protocol-card;
     margin: 0;
     text-align: center;
     color: var(--text);
+    max-height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__path {

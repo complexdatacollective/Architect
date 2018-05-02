@@ -48,6 +48,7 @@ const EditStageButton = Zoom(
 class TimelineStage extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
+    label: PropTypes.string,
     type: PropTypes.string.isRequired,
     onEditStage: PropTypes.func.isRequired,
     onEditSkipLogic: PropTypes.func.isRequired,
@@ -55,6 +56,7 @@ class TimelineStage extends PureComponent {
   };
 
   static defaultProps = {
+    label: '',
     className: '',
   };
 

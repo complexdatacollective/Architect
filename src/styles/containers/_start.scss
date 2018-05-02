@@ -82,8 +82,10 @@
     overflow: hidden;
 
     &-protocol {
+      overflow: hidden;
       flex: 0 0 33%;
-      padding: unit(2);
+      padding: unit(2) unit(2) 0;
+      min-width: calc(20vh + #{unit(4)});
     }
   }
 

@@ -25,7 +25,7 @@ const ProtocolCard = ({ path, name }) => (
       />
     </div>
     <div className="start-protocol-card__label">
-      <h3 className="start-protocol-card__name">{name}</h3>
+      <h3 className="start-protocol-card__name">{name} wfpwfp wfpwf reallyreallyreealylwfpnwopnwyoufpwofyupnwfoypunwfoypuwfnyopu</h3>
     </div>
   </Link>
 );
