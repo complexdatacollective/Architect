@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Icon } from '../../../ui/components';
 import { fieldPropTypes } from 'redux-form';
+import { Icon } from '../../../ui/components';
 
 class SeamlessTextInput extends PureComponent {
   static propTypes = {

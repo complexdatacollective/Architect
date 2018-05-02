@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { toPairs, get, omit, isEmpty } from 'lodash';
-import { Button } from '../../../../ui/components';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
+import { Button } from '../../../../ui/components';
 import Modal from '../../../Modal';
 import ValidatedField from '../../ValidatedField';
 import RoundButton from '../../RoundButton';
