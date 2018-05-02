@@ -1,5 +1,5 @@
 import { existsSync } from 'fs';
-// import { has } from 'lodash';
+import { uniqBy } from 'lodash';
 import { createProtocol, loadProtocolData, locateProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as protocolsActions } from '../protocols';
@@ -12,10 +12,10 @@ const initialState = [];
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case ADD_PROTOCOL_TO_DASHBOARD:
-      return [
+      return uniqBy([
         ...state,
         action.protocol,
-      ].slice(-10);
+      ], 'path').slice(-10);
     case REMOVE_PROTOCOL_FROM_DASHBOARD:
       return state
         .filter(protocol => protocol.path !== action.protocol.path);

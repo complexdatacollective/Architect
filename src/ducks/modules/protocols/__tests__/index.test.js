@@ -2,7 +2,7 @@
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { times, sample } from 'lodash';
+import { times, sampleSize } from 'lodash';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as protocolActionCreators } from '../../protocol';
 import { createProtocol, loadProtocolData, locateProtocol } from '../../../../other/protocols';
@@ -33,6 +33,24 @@ describe('protocols reducer', () => {
       ]);
     });
 
+    it("It doesn't add duplicate protocols to the list", () => {
+      const newState = times(
+        3,
+        () => actionCreators.addProtocolToDashboard(protocolPath),
+      )
+        .reduce(
+          (memo, action) =>
+            reducer(
+              memo,
+              action,
+            ),
+          undefined,
+        );
+      expect(newState).toEqual([
+        { path: protocolPath },
+      ]);
+    });
+
     it('It adds a max of 10 protocols to the protocols list', () => {
       const mockPaths = [
         'foo',
@@ -40,10 +58,20 @@ describe('protocols reducer', () => {
         'bazz',
         'buzz',
         'fizz',
+        'foobar',
+        'barbar',
+        'bazzbar',
+        'buzzbar',
+        'fizzbar',
+        'foofizz',
+        'barfizz',
+        'bazzfizz',
+        'buzzfizz',
+        'fizzfizz',
       ];
 
       const protocolList = ['unique first protocol']
-        .concat(times(15, () => sample(mockPaths)))
+        .concat(sampleSize(mockPaths, 10))
         .concat('unique last protocol');
 
       const newState = protocolList
