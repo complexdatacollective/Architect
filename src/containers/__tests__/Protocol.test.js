@@ -11,7 +11,9 @@ let subject = null;
 const mockProps = {
   saveProtocol: () => {},
   exportProtocol: () => {},
+  loadProtocol: () => {},
   stages: [{ id: 1, type: 'Foo' }],
+  match: { params: {} },
 };
 
 const mockStore = () =>
@@ -46,13 +48,7 @@ describe('<Protocol />', () => {
       subject = makeSubject();
     });
 
-    it('Shows/hides add stage screen', () => {
-      subject.find('TimelineAddNew').find('button').first().simulate('click');
-      expect(subject.find('NewStage').prop('show')).toBe(true);
-      // subject.find('NewStage').find('button').last().simulate('click');
-      // expect(subject.find('NewStage').prop('cancel')).toBe(true);
-      // expect(subject.find('NewStage').prop('show')).toBe(false);
-    });
+    it('Shows/hides add stage screen');
 
     it('Shows/hides edit skip logic screen');
 

@@ -5,9 +5,10 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Start
+    chooseProtocol={[Function]}
+    clearDeadLinks={[Function]}
     createProtocol={[Function]}
-    loadProtocol={[Function]}
-    locateAndLoadProtocol={[Function]}
+    history={Object {}}
     protocols={Array []}
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -19,26 +20,87 @@ ShallowWrapper {
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
-    "key": null,
+    "key": undefined,
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <button
-          onClick={[Function]}
+        <div
+          className="start__split"
 >
-          Export
-</button>,
-        <button
-          onClick={[Function]}
+          <div
+                    className="start__welcome"
+          >
+                    <h1
+                              className="start__welcome-title"
+                    >
+                              Architect
+                    </h1>
+                    <h2
+                              className="start__welcome-lead"
+                    >
+                              A tool for creating Network Canvas interviews
+                    </h2>
+          </div>
+          <div
+                    className="start__call-to-action"
+          >
+                    <Button
+                              color="white"
+                              content=""
+                              icon={
+                                        <Icon
+                                                  className=""
+                                                  color=""
+                                                  name="arrow-right"
+                                                  style={Object {}}
+                                        />
+                              }
+                              iconPosition="right"
+                              id="create-new-protocol-button"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                    >
+                              Create new
+                    </Button>
+                    <Button
+                              color="cyber-grape"
+                              content=""
+                              icon={
+                                        <Icon
+                                                  className=""
+                                                  color=""
+                                                  name="arrow-right"
+                                                  style={Object {}}
+                                        />
+                              }
+                              iconPosition="right"
+                              id="open-existing-protocol-button"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                    >
+                              Open existing
+                    </Button>
+          </div>
+</div>,
+        <div
+          className="start__split"
 >
-          Create new Protocol
-</button>,
-        <button
-          onClick={[Function]}
->
-          Open a protocol
-</button>,
-        Array [],
+          <div
+                    className="start__protocols"
+          >
+                    
+          </div>
+</div>,
+        <div
+          className="start__background"
+/>,
+        <img
+          alt=""
+          className="start__brand"
+          src="network-canvas-brand.svg"
+/>,
       ],
       "className": "start",
     },
@@ -46,39 +108,272 @@ ShallowWrapper {
     "rendered": Array [
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Export",
-          "onClick": [Function],
+          "children": Array [
+            <div
+              className="start__welcome"
+>
+              <h1
+                            className="start__welcome-title"
+              >
+                            Architect
+              </h1>
+              <h2
+                            className="start__welcome-lead"
+              >
+                            A tool for creating Network Canvas interviews
+              </h2>
+</div>,
+            <div
+              className="start__call-to-action"
+>
+              <Button
+                            color="white"
+                            content=""
+                            icon={
+                                          <Icon
+                                                        className=""
+                                                        color=""
+                                                        name="arrow-right"
+                                                        style={Object {}}
+                                          />
+                            }
+                            iconPosition="right"
+                            id="create-new-protocol-button"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+              >
+                            Create new
+              </Button>
+              <Button
+                            color="cyber-grape"
+                            content=""
+                            icon={
+                                          <Icon
+                                                        className=""
+                                                        color=""
+                                                        name="arrow-right"
+                                                        style={Object {}}
+                                          />
+                            }
+                            iconPosition="right"
+                            id="open-existing-protocol-button"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+              >
+                            Open existing
+              </Button>
+</div>,
+          ],
+          "className": "start__split",
         },
         "ref": null,
-        "rendered": "Export",
-        "type": "button",
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h1
+                  className="start__welcome-title"
+>
+                  Architect
+</h1>,
+                <h2
+                  className="start__welcome-lead"
+>
+                  A tool for creating Network Canvas interviews
+</h2>,
+              ],
+              "className": "start__welcome",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Architect",
+                  "className": "start__welcome-title",
+                },
+                "ref": null,
+                "rendered": "Architect",
+                "type": "h1",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "A tool for creating Network Canvas interviews",
+                  "className": "start__welcome-lead",
+                },
+                "ref": null,
+                "rendered": "A tool for creating Network Canvas interviews",
+                "type": "h2",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <Button
+                  color="white"
+                  content=""
+                  icon={
+                                    <Icon
+                                                      className=""
+                                                      color=""
+                                                      name="arrow-right"
+                                                      style={Object {}}
+                                    />
+                  }
+                  iconPosition="right"
+                  id="create-new-protocol-button"
+                  onClick={[Function]}
+                  size="small"
+                  type="button"
+>
+                  Create new
+</Button>,
+                <Button
+                  color="cyber-grape"
+                  content=""
+                  icon={
+                                    <Icon
+                                                      className=""
+                                                      color=""
+                                                      name="arrow-right"
+                                                      style={Object {}}
+                                    />
+                  }
+                  iconPosition="right"
+                  id="open-existing-protocol-button"
+                  onClick={[Function]}
+                  size="small"
+                  type="button"
+>
+                  Open existing
+</Button>,
+              ],
+              "className": "start__call-to-action",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Create new",
+                  "color": "white",
+                  "content": "",
+                  "icon": <Icon
+                    className=""
+                    color=""
+                    name="arrow-right"
+                    style={Object {}}
+/>,
+                  "iconPosition": "right",
+                  "id": "create-new-protocol-button",
+                  "onClick": [Function],
+                  "size": "small",
+                  "type": "button",
+                },
+                "ref": null,
+                "rendered": "Create new",
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "Open existing",
+                  "color": "cyber-grape",
+                  "content": "",
+                  "icon": <Icon
+                    className=""
+                    color=""
+                    name="arrow-right"
+                    style={Object {}}
+/>,
+                  "iconPosition": "right",
+                  "id": "open-existing-protocol-button",
+                  "onClick": [Function],
+                  "size": "small",
+                  "type": "button",
+                },
+                "ref": null,
+                "rendered": "Open existing",
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
       },
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Create new Protocol",
-          "onClick": [Function],
+          "children": <div
+            className="start__protocols"
+>
+            
+</div>,
+          "className": "start__split",
         },
         "ref": null,
-        "rendered": "Create new Protocol",
-        "type": "button",
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [],
+            "className": "start__protocols",
+          },
+          "ref": null,
+          "rendered": Array [],
+          "type": "div",
+        },
+        "type": "div",
       },
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "Open a protocol",
-          "onClick": [Function],
+          "className": "start__background",
         },
         "ref": null,
-        "rendered": "Open a protocol",
-        "type": "button",
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "alt": "",
+          "className": "start__brand",
+          "src": "network-canvas-brand.svg",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "img",
       },
     ],
     "type": "div",
@@ -86,26 +381,87 @@ ShallowWrapper {
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
-      "key": null,
+      "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <button
-            onClick={[Function]}
+          <div
+            className="start__split"
 >
-            Export
-</button>,
-          <button
-            onClick={[Function]}
+            <div
+                        className="start__welcome"
+            >
+                        <h1
+                                    className="start__welcome-title"
+                        >
+                                    Architect
+                        </h1>
+                        <h2
+                                    className="start__welcome-lead"
+                        >
+                                    A tool for creating Network Canvas interviews
+                        </h2>
+            </div>
+            <div
+                        className="start__call-to-action"
+            >
+                        <Button
+                                    color="white"
+                                    content=""
+                                    icon={
+                                                <Icon
+                                                            className=""
+                                                            color=""
+                                                            name="arrow-right"
+                                                            style={Object {}}
+                                                />
+                                    }
+                                    iconPosition="right"
+                                    id="create-new-protocol-button"
+                                    onClick={[Function]}
+                                    size="small"
+                                    type="button"
+                        >
+                                    Create new
+                        </Button>
+                        <Button
+                                    color="cyber-grape"
+                                    content=""
+                                    icon={
+                                                <Icon
+                                                            className=""
+                                                            color=""
+                                                            name="arrow-right"
+                                                            style={Object {}}
+                                                />
+                                    }
+                                    iconPosition="right"
+                                    id="open-existing-protocol-button"
+                                    onClick={[Function]}
+                                    size="small"
+                                    type="button"
+                        >
+                                    Open existing
+                        </Button>
+            </div>
+</div>,
+          <div
+            className="start__split"
 >
-            Create new Protocol
-</button>,
-          <button
-            onClick={[Function]}
->
-            Open a protocol
-</button>,
-          Array [],
+            <div
+                        className="start__protocols"
+            >
+                        
+            </div>
+</div>,
+          <div
+            className="start__background"
+/>,
+          <img
+            alt=""
+            className="start__brand"
+            src="network-canvas-brand.svg"
+/>,
         ],
         "className": "start",
       },
@@ -113,39 +469,272 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Export",
-            "onClick": [Function],
+            "children": Array [
+              <div
+                className="start__welcome"
+>
+                <h1
+                                className="start__welcome-title"
+                >
+                                Architect
+                </h1>
+                <h2
+                                className="start__welcome-lead"
+                >
+                                A tool for creating Network Canvas interviews
+                </h2>
+</div>,
+              <div
+                className="start__call-to-action"
+>
+                <Button
+                                color="white"
+                                content=""
+                                icon={
+                                                <Icon
+                                                                className=""
+                                                                color=""
+                                                                name="arrow-right"
+                                                                style={Object {}}
+                                                />
+                                }
+                                iconPosition="right"
+                                id="create-new-protocol-button"
+                                onClick={[Function]}
+                                size="small"
+                                type="button"
+                >
+                                Create new
+                </Button>
+                <Button
+                                color="cyber-grape"
+                                content=""
+                                icon={
+                                                <Icon
+                                                                className=""
+                                                                color=""
+                                                                name="arrow-right"
+                                                                style={Object {}}
+                                                />
+                                }
+                                iconPosition="right"
+                                id="open-existing-protocol-button"
+                                onClick={[Function]}
+                                size="small"
+                                type="button"
+                >
+                                Open existing
+                </Button>
+</div>,
+            ],
+            "className": "start__split",
           },
           "ref": null,
-          "rendered": "Export",
-          "type": "button",
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <h1
+                    className="start__welcome-title"
+>
+                    Architect
+</h1>,
+                  <h2
+                    className="start__welcome-lead"
+>
+                    A tool for creating Network Canvas interviews
+</h2>,
+                ],
+                "className": "start__welcome",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Architect",
+                    "className": "start__welcome-title",
+                  },
+                  "ref": null,
+                  "rendered": "Architect",
+                  "type": "h1",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "A tool for creating Network Canvas interviews",
+                    "className": "start__welcome-lead",
+                  },
+                  "ref": null,
+                  "rendered": "A tool for creating Network Canvas interviews",
+                  "type": "h2",
+                },
+              ],
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <Button
+                    color="white"
+                    content=""
+                    icon={
+                                        <Icon
+                                                            className=""
+                                                            color=""
+                                                            name="arrow-right"
+                                                            style={Object {}}
+                                        />
+                    }
+                    iconPosition="right"
+                    id="create-new-protocol-button"
+                    onClick={[Function]}
+                    size="small"
+                    type="button"
+>
+                    Create new
+</Button>,
+                  <Button
+                    color="cyber-grape"
+                    content=""
+                    icon={
+                                        <Icon
+                                                            className=""
+                                                            color=""
+                                                            name="arrow-right"
+                                                            style={Object {}}
+                                        />
+                    }
+                    iconPosition="right"
+                    id="open-existing-protocol-button"
+                    onClick={[Function]}
+                    size="small"
+                    type="button"
+>
+                    Open existing
+</Button>,
+                ],
+                "className": "start__call-to-action",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": "Create new",
+                    "color": "white",
+                    "content": "",
+                    "icon": <Icon
+                      className=""
+                      color=""
+                      name="arrow-right"
+                      style={Object {}}
+/>,
+                    "iconPosition": "right",
+                    "id": "create-new-protocol-button",
+                    "onClick": [Function],
+                    "size": "small",
+                    "type": "button",
+                  },
+                  "ref": null,
+                  "rendered": "Create new",
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": "Open existing",
+                    "color": "cyber-grape",
+                    "content": "",
+                    "icon": <Icon
+                      className=""
+                      color=""
+                      name="arrow-right"
+                      style={Object {}}
+/>,
+                    "iconPosition": "right",
+                    "id": "open-existing-protocol-button",
+                    "onClick": [Function],
+                    "size": "small",
+                    "type": "button",
+                  },
+                  "ref": null,
+                  "rendered": "Open existing",
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": "div",
         },
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Create new Protocol",
-            "onClick": [Function],
+            "children": <div
+              className="start__protocols"
+>
+              
+</div>,
+            "className": "start__split",
           },
           "ref": null,
-          "rendered": "Create new Protocol",
-          "type": "button",
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [],
+              "className": "start__protocols",
+            },
+            "ref": null,
+            "rendered": Array [],
+            "type": "div",
+          },
+          "type": "div",
         },
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "Open a protocol",
-            "onClick": [Function],
+            "className": "start__background",
           },
           "ref": null,
-          "rendered": "Open a protocol",
-          "type": "button",
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "",
+            "className": "start__brand",
+            "src": "network-canvas-brand.svg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
         },
       ],
       "type": "div",
