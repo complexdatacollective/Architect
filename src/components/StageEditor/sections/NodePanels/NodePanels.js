@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import { keys, has, get } from 'lodash';
-import { Button } from '../../../../ui/src/components';
+import { Button } from '../../../../ui/components';
 import { Section, Editor, Guidance } from '../../../Guided';
 import SortableItems from '../../SortableItems';
 import NodePanel from './NodePanel';

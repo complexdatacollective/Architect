@@ -1,8 +1,16 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Tweened from '../../behaviours/Tweened';
 import protocolCover from '../../images/protocol-cover.png';
+
+const Stack = Tweened(() => (
+  <div className="start-protocol-card__stack">
+    <div className="start-protocol-card__stack-cover">
+      <img src={protocolCover} alt="" />
+    </div>
+  </div>
+));
 
 const ProtocolCard = ({ path, name }) => (
   <Link
@@ -11,12 +19,14 @@ const ProtocolCard = ({ path, name }) => (
     to={`/edit/${encodeURIComponent(path)}`}
   >
     <div className="start-protocol-card__preview">
-      <div className="start-protocol-card__preview-cover">
-        <img src={protocolCover} alt="" />
-      </div>
+      <Stack
+        tweenName="protocol"
+        tweenElement={path}
+      />
     </div>
-    <h3 className="start-protocol-card__name">{name}</h3>
-    <div className="start-protocol-card__path">{path}</div>
+    <div className="start-protocol-card__label">
+      <h3 className="start-protocol-card__name">{name}</h3>
+    </div>
   </Link>
 );
 

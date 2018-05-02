@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Icon } from '../../ui/src/components';
+import { Icon } from '../../ui/components';
 
 const Round = ({ icon, content, size, className, ...props }) => (
   <button

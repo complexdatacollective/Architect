@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
-import { Icon } from '../../ui/src/components';
+import { Icon } from '../../ui/components';
 import { Zoom } from '../../behaviours';
 import { getCSSVariableAsString, getCSSVariableAsNumber, getCSSVariableAsObject } from '../../utils/CSSVariables';
 

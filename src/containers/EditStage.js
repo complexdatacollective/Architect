@@ -7,7 +7,7 @@ import {
   isInvalid as isFormInvalid,
 } from 'redux-form';
 import { pick } from 'lodash';
-import { Button } from '../ui/src/components';
+import { Button } from '../ui/components';
 import { ProtocolCard } from '../containers/ProtocolCard';
 import StageEditor from '../components/StageEditor';
 

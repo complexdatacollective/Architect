@@ -1,4 +1,7 @@
-@import '../ui/src/styles/all';
+$font-path: '../ui/assets/fonts';
+
+@import '../ui/styles/all';
+@import './settings';
 @import './shared';
 @import './theme';
 @import './helpers';

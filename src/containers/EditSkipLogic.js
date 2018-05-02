@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { has, toPairs } from 'lodash';
-import { Button } from '../ui/src/components';
+import { Button } from '../ui/components';
 import { Guided, Section as GuidedSection, Editor as GuidedEdit, Guidance } from '../components/Guided';
 import { makeGetStage } from '../selectors/protocol';
 import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
