@@ -8,6 +8,12 @@ ShallowWrapper {
     exportProtocol={[Function]}
     hasChanges={false}
     hasUnsavedChanges={false}
+    loadProtocol={[Function]}
+    match={
+        Object {
+            "params": Object {},
+          }
+    }
     saveProtocol={[Function]}
     stages={
         Array [
@@ -27,7 +33,7 @@ ShallowWrapper {
   },
   Symbol(enzyme.__node__): Object {
     "instance": null,
-    "key": null,
+    "key": undefined,
     "nodeType": "host",
     "props": Object {
       "children": Array [
@@ -49,9 +55,16 @@ ShallowWrapper {
           className="protocol__control-bar"
 >
           <Button
-                    color=""
+                    color="white"
                     content=""
-                    icon=""
+                    icon={
+                              <Icon
+                                        className=""
+                                        color=""
+                                        name="arrow-right"
+                                        style={Object {}}
+                              />
+                    }
                     iconPosition="right"
                     onClick={[Function]}
                     size="small"
@@ -86,7 +99,7 @@ ShallowWrapper {
     "rendered": Array [
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "hasUnsavedChanges": false,
@@ -106,14 +119,21 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "host",
         "props": Object {
           "children": Array [
             <Button
-              color=""
+              color="white"
               content=""
-              icon=""
+              icon={
+                            <Icon
+                                          className=""
+                                          color=""
+                                          name="arrow-right"
+                                          style={Object {}}
+                            />
+              }
               iconPosition="right"
               onClick={[Function]}
               size="small"
@@ -128,13 +148,18 @@ ShallowWrapper {
         "rendered": Array [
           Object {
             "instance": null,
-            "key": null,
+            "key": undefined,
             "nodeType": "class",
             "props": Object {
               "children": "Export",
-              "color": "",
+              "color": "white",
               "content": "",
-              "icon": "",
+              "icon": <Icon
+                className=""
+                color=""
+                name="arrow-right"
+                style={Object {}}
+/>,
               "iconPosition": "right",
               "onClick": [Function],
               "size": "small",
@@ -149,7 +174,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "cancel": false,
@@ -164,7 +189,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "cancel": false,
@@ -179,7 +204,7 @@ ShallowWrapper {
       },
       Object {
         "instance": null,
-        "key": null,
+        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "onCancel": [Function],
@@ -197,7 +222,7 @@ ShallowWrapper {
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
-      "key": null,
+      "key": undefined,
       "nodeType": "host",
       "props": Object {
         "children": Array [
@@ -219,9 +244,16 @@ ShallowWrapper {
             className="protocol__control-bar"
 >
             <Button
-                        color=""
+                        color="white"
                         content=""
-                        icon=""
+                        icon={
+                                    <Icon
+                                                className=""
+                                                color=""
+                                                name="arrow-right"
+                                                style={Object {}}
+                                    />
+                        }
                         iconPosition="right"
                         onClick={[Function]}
                         size="small"
@@ -256,7 +288,7 @@ ShallowWrapper {
       "rendered": Array [
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "hasUnsavedChanges": false,
@@ -276,14 +308,21 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "host",
           "props": Object {
             "children": Array [
               <Button
-                color=""
+                color="white"
                 content=""
-                icon=""
+                icon={
+                                <Icon
+                                                className=""
+                                                color=""
+                                                name="arrow-right"
+                                                style={Object {}}
+                                />
+                }
                 iconPosition="right"
                 onClick={[Function]}
                 size="small"
@@ -298,13 +337,18 @@ ShallowWrapper {
           "rendered": Array [
             Object {
               "instance": null,
-              "key": null,
+              "key": undefined,
               "nodeType": "class",
               "props": Object {
                 "children": "Export",
-                "color": "",
+                "color": "white",
                 "content": "",
-                "icon": "",
+                "icon": <Icon
+                  className=""
+                  color=""
+                  name="arrow-right"
+                  style={Object {}}
+/>,
                 "iconPosition": "right",
                 "onClick": [Function],
                 "size": "small",
@@ -319,7 +363,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "cancel": false,
@@ -334,7 +378,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "cancel": false,
@@ -349,7 +393,7 @@ ShallowWrapper {
         },
         Object {
           "instance": null,
-          "key": null,
+          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "onCancel": [Function],

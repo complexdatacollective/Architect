@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -30,6 +29,8 @@ class Protocol extends PureComponent {
     stages: PropTypes.array.isRequired,
     hasUnsavedChanges: PropTypes.bool,
     hasChanges: PropTypes.bool,
+    match: PropTypes.object.isRequired,
+    loadProtocol: PropTypes.func.isRequired,
     saveProtocol: PropTypes.func.isRequired,
     exportProtocol: PropTypes.func.isRequired,
   };
@@ -92,7 +93,6 @@ class Protocol extends PureComponent {
       hasUnsavedChanges,
       saveProtocol,
       exportProtocol,
-      state,
     } = this.props;
 
     const protocolClasses = cx(
@@ -114,11 +114,22 @@ class Protocol extends PureComponent {
 
         <div className="protocol__control-bar">
           <Button
-            size="small" onClick={exportProtocol} color="white" icon={RightArrow} iconPosition="right">
+            size="small"
+            onClick={exportProtocol}
+            color="white"
+            icon={RightArrow}
+            iconPosition="right"
+          >
             Export
           </Button>
           { hasUnsavedChanges &&
-            <Button size="small" onClick={saveProtocol} color="white" icon={RightArrow} iconPosition="right">
+            <Button
+              size="small"
+              onClick={saveProtocol}
+              color="white"
+              icon={RightArrow}
+              iconPosition="right"
+            >
               Save
             </Button>
           }
