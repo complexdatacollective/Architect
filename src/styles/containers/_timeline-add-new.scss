@@ -1,7 +1,7 @@
 $component-name: timeline-add-new;
 
 .#{$component-name} {
-  padding: 40px 0 80px;
+  padding: unit(5) 0;
   text-align: center;
 
   &__button {

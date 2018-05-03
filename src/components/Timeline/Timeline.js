@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Overview from './Overview';
 import Stage from './Stage';
+import AddNew from './AddNew';
 import constrain from '../../behaviours/constrain';
 
 class Timeline extends PureComponent {
@@ -33,6 +34,20 @@ class Timeline extends PureComponent {
     this.setState({ highlightY: offset });
   };
 
+  hasStages = () => this.props.stages.length > 0;
+
+  renderHighlight = () => {
+    const highlightStyles = { transform: `translateY(${this.state.highlightY}px)` };
+    return (<div className="timeline__stages-highlight" key="highlight" style={highlightStyles} />);
+  }
+
+  renderStages = () => (
+    <Fragment>
+      { this.renderHighlight() }
+      { this.props.stages.map(this.renderStage) }
+    </Fragment>
+  );
+
   renderStage = (stage, index) => (
     <Stage
       key={`stage_${stage.id}`}
@@ -47,9 +62,6 @@ class Timeline extends PureComponent {
   );
 
   render() {
-    const stages = this.props.stages.map(this.renderStage);
-    const highlightStyles = { transform: `translateY(${this.state.highlightY}px)` };
-
     return (
       <div className="timeline">
         <div className="timeline__main">
@@ -59,8 +71,8 @@ class Timeline extends PureComponent {
               title="My protocol"
             />
             <div className="timeline__stages">
-              <div className="timeline__stages-highlight" key="highlight" style={highlightStyles} />
-              {stages}
+              { this.hasStages() && this.renderStages() }
+              { !this.hasStages() && <AddNew onInsertStage={() => this.props.onInsertStage(0)} /> }
             </div>
           </div>
         </div>
