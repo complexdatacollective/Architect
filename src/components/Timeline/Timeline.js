@@ -1,8 +1,11 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { TransitionGroup } from 'react-transition-group';
+import { Drawer } from '../Transitions';
 import Overview from './Overview';
 import Stage from './Stage';
 import AddNew from './AddNew';
+import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
 
 class Timeline extends PureComponent {
@@ -25,28 +28,67 @@ class Timeline extends PureComponent {
 
     this.state = {
       highlightY: 0,
+      highlightHide: false,
+      insertStageAtIndex: null,
     };
   }
 
   onHoverStage = (e) => {
     const offset = e.target.closest('.timeline-stage').offsetTop;
-    // debugger;
-    this.setState({ highlightY: offset });
+    this.setState({ highlightY: offset, highlightHide: false });
+  };
+
+  onInsertStage = (index) => {
+    this.setState({ insertStageAtIndex: index, highlightHide: true, highlightY: 0 });
   };
 
   hasStages = () => this.props.stages.length > 0;
 
-  renderHighlight = () => {
-    const highlightStyles = { transform: `translateY(${this.state.highlightY}px)` };
-    return (<div className="timeline__stages-highlight" key="highlight" style={highlightStyles} />);
+  injectInsertStage = (items) => {
+    const { insertStageAtIndex } = this.state;
+
+    if (insertStageAtIndex !== null) {
+      return [
+        ...items.slice(0, insertStageAtIndex),
+        this.renderInsertStage(insertStageAtIndex),
+        ...items.slice(insertStageAtIndex),
+      ];
+    }
+
+    return items;
   }
 
-  renderStages = () => (
-    <Fragment>
-      { this.renderHighlight() }
-      { this.props.stages.map(this.renderStage) }
-    </Fragment>
+  renderInsertStage = insertStageAtIndex => (
+    <Drawer
+      key={`insert-${insertStageAtIndex}`}
+      timeout={1000}
+      unmountOnExit
+    >
+      <InsertStage
+        index={insertStageAtIndex}
+      />
+    </Drawer>
   );
+
+  renderHighlight = () => {
+    const highlightStyles = {
+      transform: `translateY(${this.state.highlightY}px)`,
+      opacity: (this.state.highlightHide ? 0 : 1),
+    };
+    return (
+      <div
+        className="timeline__stages-highlight"
+        key="highlight"
+        style={highlightStyles}
+      />
+    );
+  }
+
+  renderStages = () => {
+    const items = this.props.stages.map(this.renderStage);
+
+    return this.injectInsertStage(items);
+  }
 
   renderStage = (stage, index) => (
     <Stage
@@ -56,7 +98,7 @@ class Timeline extends PureComponent {
       label={stage.label}
       onMouseEnter={this.onHoverStage}
       onEditStage={() => this.props.onEditStage(stage.id)}
-      onInsertStage={position => this.props.onInsertStage(index + position)}
+      onInsertStage={position => this.onInsertStage(index + position)}
       onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
     />
   );
@@ -71,7 +113,10 @@ class Timeline extends PureComponent {
               title="My protocol"
             />
             <div className="timeline__stages">
-              { this.hasStages() && this.renderStages() }
+              { this.hasStages() && this.renderHighlight() }
+              <TransitionGroup component={null}>
+                { this.renderStages() }
+              </TransitionGroup>
               { !this.hasStages() && <AddNew onInsertStage={() => this.props.onInsertStage(0)} /> }
             </div>
           </div>
