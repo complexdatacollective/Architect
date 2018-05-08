@@ -1,4 +1,58 @@
+$stage-height: 11.25vw;
+$stage-columns: 3;
+$stage-gap: unit(2);
+$stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-gap / $stage-columns});
+
 .timeline-insert-stage {
-  background: red;
+  background-color: var(--architect-drawer-background);
+  color: var(--architect-drawer-text);
   transform-origin: top;
+  display: flex;
+  width: 100%;
+  padding: unit(2) unit(4);
+
+  &__guidance {
+    flex: 0 0 40%;
+    position: relative;
+
+    &-item {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding-left: unit(4);
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
+      opacity: 0;
+
+      &--is-active {
+        transition: opacity var(--animation-duration-fast) var(--animation-easing);
+        opacity: 1;
+      }
+    }
+  }
+
+  &__options {
+    flex: 0 0 60%;
+    display: grid;
+    padding-right: unit(4);
+    grid-template-columns: repeat($stage-columns, $stage-width);
+    grid-gap: unit(2);
+    grid-auto-rows: minmax(100px, auto);
+  }
+
+  &__option {
+    display: flex-inline;
+    height: $stage-height;
+    flex-direction: row;
+    border: 2px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color var(--animation-duration-standard) var(--animation-easing);
+
+    img { width: 100%; }
+
+    &:hover {
+      border-color: var(--selected);
+    }
+  }
 }

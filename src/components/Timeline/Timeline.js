@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
+import { get } from 'lodash';
 import { Drawer } from '../Transitions';
 import Overview from './Overview';
 import Stage from './Stage';
@@ -39,7 +40,14 @@ class Timeline extends PureComponent {
   };
 
   onInsertStage = (index) => {
-    this.setState({ insertStageAtIndex: index, highlightHide: true, highlightY: 0 });
+    this.setState({ insertStageAtIndex: index, highlightHide: true });
+  };
+
+  onStageInserted = (index) => {
+    const stageId = get(this.props.stages, [index, 'id']);
+    console.log('SET STATE', { insertStageAtIndex: null, highlightHide: true });
+    this.setState({ insertStageAtIndex: null, highlightHide: true });
+    this.props.onEditStage(stageId);
   };
 
   hasStages = () => this.props.stages.length > 0;
@@ -66,15 +74,20 @@ class Timeline extends PureComponent {
     >
       <InsertStage
         index={insertStageAtIndex}
+        onComplete={index => this.onStageInserted(index)}
       />
     </Drawer>
   );
 
   renderHighlight = () => {
+    const opacity = this.state.highlightHide ? 0 : 1;
+    const transform = this.state.highlightHide ? 'translateY(0px)' : `translateY(${this.state.highlightY}px)`;
+
     const highlightStyles = {
-      transform: `translateY(${this.state.highlightY}px)`,
-      opacity: (this.state.highlightHide ? 0 : 1),
+      transform,
+      opacity,
     };
+
     return (
       <div
         className="timeline__stages-highlight"

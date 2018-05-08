@@ -56,7 +56,6 @@ const FolderTransition = ({ children, ...props }) => (
           elasticity: 0,
           easing: 'easeInOutQuad',
           ...disappear,
-          maxHeight: 0,
         });
       }
     }
