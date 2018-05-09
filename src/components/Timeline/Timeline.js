@@ -12,14 +12,14 @@ import constrain from '../../behaviours/constrain';
 class Timeline extends PureComponent {
   static propTypes = {
     stages: PropTypes.array,
-    onInsertStage: PropTypes.func,
+    onCreateStage: PropTypes.func,
     onEditStage: PropTypes.func,
     onEditSkipLogic: PropTypes.func,
   };
 
   static defaultProps = {
     stages: [],
-    onInsertStage: () => {},
+    onCreateStage: () => {},
     onEditStage: () => {},
     onEditSkipLogic: () => {},
   };
@@ -43,11 +43,9 @@ class Timeline extends PureComponent {
     this.setState({ insertStageAtIndex: index, highlightHide: true });
   };
 
-  onStageInserted = (index) => {
-    const stageId = get(this.props.stages, [index, 'id']);
-    console.log('SET STATE', { insertStageAtIndex: null, highlightHide: true });
+  createStage = (type, index) => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
-    this.props.onEditStage(stageId);
+    this.props.onCreateStage(type, index);
   };
 
   hasStages = () => this.props.stages.length > 0;
@@ -73,8 +71,7 @@ class Timeline extends PureComponent {
       unmountOnExit
     >
       <InsertStage
-        index={insertStageAtIndex}
-        onComplete={index => this.onStageInserted(index)}
+        onSelectStageType={type => this.createStage(type, insertStageAtIndex)}
       />
     </Drawer>
   );

@@ -1,10 +1,7 @@
-import React, { PureComponent, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get } from 'lodash';
-import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import timelineImages from '../../images/timeline';
 
 const getTimelineImage = type =>
@@ -50,32 +47,17 @@ const interfaceOptions = [
 
 class InsertStage extends PureComponent {
   static propTypes = {
-    addStage: PropTypes.func,
-    index: PropTypes.number,
-    onComplete: PropTypes.func,
+    onSelectStageType: PropTypes.func,
   };
 
   static defaultProps = {
-    addStage: () => {},
-    onComplete: () => {},
-    id: null,
-    index: null,
-    show: false,
+    onSelectStageType: () => {},
   }
 
   constructor(props) {
     super(props);
 
     this.state = { activeInterface: null };
-  }
-
-  onClickStageType = (type) => {
-    const index = this.props.index;
-
-    this.props.addStage({ type }, index);
-
-    // TODO: Find another way, we wait for stage to be added before editing it here...
-    setTimeout(() => this.props.onComplete(index), 50);
   }
 
   onMouseEnterStageType = (index) => {
@@ -94,7 +76,7 @@ class InsertStage extends PureComponent {
     <div
       key={type}
       className="timeline-insert-stage__option"
-      onClick={() => this.onClickStageType(type)}
+      onClick={() => this.props.onSelectStageType(type)}
       onMouseEnter={() => this.onMouseEnterStageType(index)}
       onMouseLeave={() => this.onMouseLeaveStageType()}
     >
@@ -132,14 +114,6 @@ class InsertStage extends PureComponent {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addStage: bindActionCreators(stageActions.addStage, dispatch),
-  };
-}
-
 export { InsertStage };
 
-export default compose(
-  connect(null, mapDispatchToProps),
-)(InsertStage);
+export default InsertStage;

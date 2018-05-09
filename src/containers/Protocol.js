@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Button, Icon } from '../ui/components';
 import { getProtocol } from '../selectors/protocol';
-import NewStage from '../containers/NewStage';
 import EditSkipLogic from '../containers/EditSkipLogic';
 import EditStage from '../containers/EditStage';
 import { Timeline } from '../components';
@@ -81,6 +80,7 @@ class Protocol extends PureComponent {
   }
 
   editStage = stageId => this.showCard(cards.editStage, { stageId });
+  createStage = (type, insertAtIndex) => this.showCard(cards.editStage, { type, insertAtIndex });
 
   isAnyCardVisible = () => this.state.activeCard.cardType !== null;
   isCardVisible = cardType => this.state.activeCard.cardType === cardType;
@@ -106,9 +106,9 @@ class Protocol extends PureComponent {
       <div className={protocolClasses}>
         <Timeline
           stages={stages}
-          onInsertStage={insertAtIndex => this.showCard(cards.newStage, { insertAtIndex })}
           onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
           onEditStage={this.editStage}
+          onCreateStage={this.createStage}
           hasUnsavedChanges={hasUnsavedChanges}
         />
 
@@ -135,14 +135,6 @@ class Protocol extends PureComponent {
           }
         </div>
 
-        <NewStage
-          index={this.state.activeCard.insertAtIndex}
-          show={this.isCardVisible(cards.newStage)}
-          cancel={this.state.activeCard.cancel}
-          onComplete={(index) => { this.editStage(stages[index].id); }}
-          onCancel={this.onCardCancel}
-        />
-
         <EditSkipLogic
           show={this.isCardVisible(cards.editSkip)}
           cancel={this.state.activeCard.cancel}
@@ -152,8 +144,8 @@ class Protocol extends PureComponent {
         />
 
         <EditStage
+          {...this.state.activeCard} // either index & type, or id
           show={this.isCardVisible(cards.editStage)}
-          stageId={this.state.activeCard.stageId}
           onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
         />
