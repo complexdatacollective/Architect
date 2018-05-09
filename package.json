@@ -1,5 +1,5 @@
 {
-    "name": "architect",
+    "name": "network-canvas-architect",
     "version": " 0.0.1",
     "productName": "Network Canvas Architect",
     "description": "A tool for creating Network Canvas interviews.",
@@ -20,11 +20,9 @@
         "electron": "electron ./www",
         "generate-icons": "node scripts/generate-app-icons.js",
         "dist": "electron-builder",
-        "dist:ios": "npm run build && cordova build ios",
-        "dist:android": "npm run build && cordova build android",
-        "dist:cordova": "npm run build && cordova build ios && cordova build android",
         "dist:mac": "electron-builder -m --publish=always",
         "dist:win": "electron-builder -w --publish=always",
+        "dist:linux": "electron-builder -l --publish=always",
         "bump": "sh scripts/bump"
     },
     "repository": {
@@ -145,7 +143,7 @@
     "main": "www/electron-starter.js",
     "build": {
         "extends": null,
-        "appId": "Network-Canvas-Architect",
+        "appId": "NetworkCanvasArchitect",
         "directories": {
             "buildResources": "build-resources",
             "output": "release-builds"
@@ -191,20 +189,5 @@
         "moduleNameMapper": {
             "^react-native$": "react-native-web"
         }
-    },
-    "cordova": {
-        "platforms": [
-            "android",
-            "ios"
-        ],
-        "plugins": {
-            "cordova-plugin-app-version": {},
-            "cordova-plugin-file": {},
-            "cordova-plugin-x-socialsharing": {}
-        }
-    },
-    "browser": {
-        "canvas": false,
-        "jsdom": false
     }
 }
