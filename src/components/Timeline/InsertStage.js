@@ -47,17 +47,22 @@ const interfaceOptions = [
 ];
 
 const StageType = Zoom(
-  ({ type, onSelectStageType, onMouseEnterStageType, onMouseLeaveStageType }) => (
-    <div
-      key={type}
-      className="timeline-insert-stage__option"
-      onClick={onSelectStageType}
-      onMouseEnter={onMouseEnterStageType}
-      onMouseLeave={onMouseLeaveStageType}
-    >
-      <img src={getTimelineImage(type)} alt={type} />
-    </div>
-  ),
+  ({ type, onSelectStageType, onMouseEnterStageType, onMouseLeaveStageType }) => {
+    const image = getTimelineImage(type);
+
+    return (
+      <div
+        key={type}
+        className="timeline-insert-stage__option"
+        onClick={onSelectStageType}
+        onMouseEnter={onMouseEnterStageType}
+        onMouseLeave={onMouseLeaveStageType}
+      >
+        { image && <img className="timeline-insert-stage__option-preview" src={image} alt={type} /> }
+        { !image && <div className="timeline-insert-stage__option-description">{type} Interface</div> }
+      </div>
+    );
+  },
 );
 
 class InsertStage extends PureComponent {

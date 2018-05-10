@@ -1,4 +1,4 @@
-$stage-height: 11.25vw;
+$stage-height: (9/16) * 100%;
 $stage-columns: 3;
 $stage-gap: unit(2);
 $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-gap / $stage-columns});
@@ -13,7 +13,6 @@ $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-ga
   &__guidance {
     flex: 0 0 40%;
     position: relative;
-    // transition: background-color var(--animation-duration-fast) var(--animation-easing);
     background-color: var(--architect-drawer-background--guidance);
 
     &-item, &-introduction {
@@ -52,15 +51,29 @@ $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-ga
   }
 
   &__option {
-    display: flex-inline;
-    height: $stage-height;
-    flex-direction: row;
+    height: 0;
+    padding-bottom: $stage-height;
     border: 2px solid transparent;
     cursor: pointer;
     overflow: hidden;
     transition: border-color var(--animation-duration-standard) var(--animation-easing);
+    position: relative;
+    background-color: var(--architect-drawer-background--guidance);
 
-    img { width: 100%; }
+
+    &-preview, &-description {
+      display: inline-flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-description {
+      height: 100%;
+    }
 
     &:hover {
       border-color: var(--architect-intent);
