@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
-import { get } from 'lodash';
 import { Drawer } from '../Transitions';
 import Overview from './Overview';
 import Stage from './Stage';
-import AddNew from './AddNew';
 import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
 
@@ -132,7 +130,11 @@ class Timeline extends PureComponent {
               <TransitionGroup component={null}>
                 { this.renderStages() }
               </TransitionGroup>
-              { !this.hasStages() && <AddNew onInsertStage={() => this.props.onInsertStage(0)} /> }
+              { !this.hasStages() && (
+                <InsertStage
+                  onSelectStageType={type => this.createStage(type, 0)}
+                />
+              ) }
             </div>
           </div>
         </div>
