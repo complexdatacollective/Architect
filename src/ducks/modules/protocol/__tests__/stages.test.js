@@ -9,21 +9,21 @@ const mockStages = [
 ];
 
 describe('protocol.stages', () => {
-  describe('ADD_STAGE', () => {
-    it('Adds a stage', () => {
+  describe('CREATE_STAGE', () => {
+    it('Creates a stage', () => {
       const newStage = { type: 'Foo' };
 
-      const addStageToBlankState = reducer(
-        [],
-        actionCreators.addStage(newStage, 0),
-      );
-      expect(addStageToBlankState[0]).toMatchObject({ ...newStage });
-
-      const addStageToFilledState = reducer(
+      const appendStageToState = reducer(
         mockStages,
-        actionCreators.addStage(newStage, 2),
+        actionCreators.createStage(newStage),
       );
-      expect(addStageToFilledState[2]).toMatchObject({ ...newStage });
+      expect(appendStageToState[3]).toMatchObject({ ...newStage });
+
+      const addStageToExistingState = reducer(
+        mockStages,
+        actionCreators.createStage(newStage, 1),
+      );
+      expect(addStageToExistingState[1]).toMatchObject({ ...newStage });
     });
   });
 
