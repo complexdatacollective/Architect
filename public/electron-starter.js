@@ -21,7 +21,7 @@ const windowParameters = Object.assign({
   minWidth: 1280,
   minHeight: 800,
   center: true,
-  title: 'Architect'
+  title: 'Network Canvas Architect'
 
 }, titlebarParameters);
 

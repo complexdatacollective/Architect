@@ -1,13 +1,13 @@
 {
-  "name": "architect",
-  "version": "0.0.1",
-  "productName": "Architect",
-  "description": "Simplifying complex network data collection.",
+  "name": "network-canvas-architect",
+  "version": "4.0.0-alpha.1",
+  "productName": "Network Canvas Architect",
+  "description": "A tool for creating Network Canvas interviews.",
   "author": "Complex Data Collective",
   "private": true,
   "engines": {
-    "node": "6.9.1",
-    "npm": "3.10.7"
+    "node": "8.11.1",
+    "npm": "5.8.0"
   },
   "homepage": ".",
   "main": "electron-starter.js",

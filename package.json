@@ -1,8 +1,8 @@
 {
-    "name": "architect",
-    "version": " 0.0.1",
-    "productName": "Architect",
-    "description": "Simplifying complex network data collection.",
+    "name": "network-canvas-architect",
+    "version": "4.0.0-alpha.1",
+    "productName": "Network Canvas Architect",
+    "description": "A tool for creating Network Canvas interviews.",
     "author": "Complex Data Collective",
     "private": true,
     "engines": {
@@ -18,13 +18,11 @@
         "test-update-snapshots": "node scripts/test.js --env=jsdom --updateSnapshot",
         "build-docs": "jsdoc src -r -d docs-build -c ./jsdoc.conf.json --verbose",
         "electron": "electron ./www",
-        "generate-icons": "node generate-app-icons.js",
+        "generate-icons": "node scripts/generate-app-icons.js",
         "dist": "electron-builder",
-        "dist:ios": "npm run build && cordova build ios",
-        "dist:android": "npm run build && cordova build android",
-        "dist:cordova": "npm run build && cordova build ios && cordova build android",
         "dist:mac": "electron-builder -m --publish=always",
         "dist:win": "electron-builder -w --publish=always",
+        "dist:linux": "electron-builder -l --publish=always",
         "bump": "sh scripts/bump"
     },
     "repository": {
@@ -54,7 +52,7 @@
         "detect-port": "1.1.0",
         "dotenv": "4.0.0",
         "electron": "^1.8.1",
-        "electron-builder": "^19.36.0",
+        "electron-builder": "^20.13.3",
         "electron-installer-dmg": "^0.2.0",
         "electron-log": "^2.2.7",
         "electron-packager": "^8.5.2",
@@ -78,7 +76,7 @@
         "history": "^4.7.2",
         "html-webpack-plugin": "^2.30.1",
         "http-proxy-middleware": "0.17.3",
-        "icon-gen": "^1.0.7",
+        "icon-gen": "^1.2.1",
         "jest": "^20.0.4",
         "jsdoc": "^3.4.3",
         "jsdoc-babel": "^0.3.0",
@@ -126,6 +124,7 @@
         "scroller": "git://github.com/mjohnston/scroller.git",
         "sockjs-client": "^1.1.4",
         "style-loader": "0.18.2",
+        "svg2png": "^4.1.1",
         "transform-loader": "^0.2.4",
         "upgrade": "^1.1.0",
         "url-loader": "0.5.9",
@@ -144,7 +143,7 @@
     "main": "www/electron-starter.js",
     "build": {
         "extends": null,
-        "appId": "Network-Canvas",
+        "appId": "NetworkCanvasArchitect",
         "directories": {
             "buildResources": "build-resources",
             "output": "release-builds"
@@ -160,7 +159,7 @@
             {
                 "provider": "github",
                 "owner": "codaco",
-                "repo": "network-canvas"
+                "repo": "architect"
             }
         ]
     },
@@ -190,20 +189,5 @@
         "moduleNameMapper": {
             "^react-native$": "react-native-web"
         }
-    },
-    "cordova": {
-        "platforms": [
-            "android",
-            "ios"
-        ],
-        "plugins": {
-            "cordova-plugin-app-version": {},
-            "cordova-plugin-file": {},
-            "cordova-plugin-x-socialsharing": {}
-        }
-    },
-    "browser": {
-        "canvas": false,
-        "jsdom": false
     }
 }
