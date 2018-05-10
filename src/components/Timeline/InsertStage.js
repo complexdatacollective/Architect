@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { get } from 'lodash';
+import { get, isNull } from 'lodash';
 import { Zoom } from '../../behaviours';
 import timelineImages from '../../images/timeline';
 
@@ -114,12 +114,23 @@ class InsertStage extends PureComponent {
   };
 
   render() {
+    const guidanceClasses = cx(
+      'timeline-insert-stage__guidance',
+      {
+        'timeline-insert-stage__guidance--is-active': !isNull(this.state.activeInterface),
+      },
+    );
+
     return (
       <div className="timeline-insert-stage">
         <div className="timeline-insert-stage__options">
           {interfaceOptions.map(this.renderOption)}
         </div>
-        <div className="timeline-insert-stage__guidance">
+        <div className={guidanceClasses}>
+          <div className="timeline-insert-stage__guidance-introduction">
+            <h3>Insert a stage here</h3>
+            Please choose one of the stages on the left.
+          </div>
           {interfaceOptions.map(this.renderGuidance)}
         </div>
       </div>

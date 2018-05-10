@@ -9,18 +9,19 @@ $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-ga
   transform-origin: top;
   display: flex;
   width: 100%;
-  padding: unit(2) unit(4);
 
   &__guidance {
     flex: 0 0 40%;
     position: relative;
+    // transition: background-color var(--animation-duration-fast) var(--animation-easing);
+    background-color: var(--architect-drawer-background--guidance);
 
-    &-item {
+    &-item, &-introduction {
       width: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      padding-left: unit(4);
+      padding: unit(4);
       transition: opacity var(--animation-duration-standard) var(--animation-easing);
       opacity: 0;
 
@@ -29,12 +30,22 @@ $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-ga
         opacity: 1;
       }
     }
+
+    &-introduction {
+      opacity: 1;
+    }
+
+    &--is-active {
+      .timeline-insert-stage__guidance-introduction {
+        opacity: 0;
+      }
+    }
   }
 
   &__options {
     flex: 0 0 60%;
     display: grid;
-    padding-right: unit(4);
+    padding: unit(4);
     grid-template-columns: repeat($stage-columns, $stage-width);
     grid-gap: unit(2);
     grid-auto-rows: minmax(100px, auto);
@@ -52,7 +63,7 @@ $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-ga
     img { width: 100%; }
 
     &:hover {
-      border-color: var(--selected);
+      border-color: var(--architect-intent);
     }
   }
 }
