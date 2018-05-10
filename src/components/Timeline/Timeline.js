@@ -34,9 +34,13 @@ class Timeline extends PureComponent {
     };
   }
 
-  onHoverStage = (e) => {
+  onMouseEnterStage = (e) => {
     const offset = e.target.closest('.timeline-stage').offsetTop;
     this.setState({ highlightY: offset, highlightHide: false });
+  };
+
+  onMouseLeaveStage = () => {
+    this.setState({ highlightHide: true });
   };
 
   onInsertStage = (index) => {
@@ -106,7 +110,8 @@ class Timeline extends PureComponent {
       id={stage.id}
       type={stage.type}
       label={stage.label}
-      onMouseEnter={this.onHoverStage}
+      onMouseEnter={this.onMouseEnterStage}
+      onMouseLeave={this.onMouseLeaveStage}
       onEditStage={() => this.props.onEditStage(stage.id)}
       onInsertStage={position => this.onInsertStage(index + position)}
       onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
