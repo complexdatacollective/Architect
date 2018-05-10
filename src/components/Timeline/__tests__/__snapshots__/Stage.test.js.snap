@@ -54,17 +54,15 @@ ShallowWrapper {
                     </div>
                     Add screen before
           </a>
-          <a
-                    className="timeline-stage__control"
-                    onClick={[Function]}
-          >
-                    <div
-                              className="timeline-stage__control-icon"
-                    >
-                              ⚙
-                    </div>
-                    Configure skip logic
-          </a>
+          <getContext(Draft(Component))
+                    onEditSkipLogic={[Function]}
+                    zoomColors={
+                              Array [
+                                        "#ffffff",
+                                        "#f2b700",
+                                      ]
+                    }
+          />
           <a
                     className="timeline-stage__control"
                     onClick={[Function]}
@@ -128,17 +126,15 @@ ShallowWrapper {
               </div>
               Add screen before
 </a>,
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
->
-              <div
-                            className="timeline-stage__control-icon"
-              >
-                            ⚙
-              </div>
-              Configure skip logic
-</a>,
+            <getContext(Draft(Component))
+              onEditSkipLogic={[Function]}
+              zoomColors={
+                            Array [
+                                          "#ffffff",
+                                          "#f2b700",
+                                        ]
+              }
+/>,
             <a
               className="timeline-stage__control"
               onClick={[Function]}
@@ -192,36 +188,17 @@ ShallowWrapper {
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "function",
             "props": Object {
-              "children": Array [
-                <div
-                  className="timeline-stage__control-icon"
->
-                  ⚙
-</div>,
-                "Configure skip logic",
+              "onEditSkipLogic": [Function],
+              "zoomColors": Array [
+                "#ffffff",
+                "#f2b700",
               ],
-              "className": "timeline-stage__control",
-              "onClick": [Function],
             },
             "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "⚙",
-                  "className": "timeline-stage__control-icon",
-                },
-                "ref": null,
-                "rendered": "⚙",
-                "type": "div",
-              },
-              "Configure skip logic",
-            ],
-            "type": "a",
+            "rendered": null,
+            "type": [Function],
           },
           Object {
             "instance": null,
@@ -299,17 +276,15 @@ ShallowWrapper {
                         </div>
                         Add screen before
             </a>
-            <a
-                        className="timeline-stage__control"
-                        onClick={[Function]}
-            >
-                        <div
-                                    className="timeline-stage__control-icon"
-                        >
-                                    ⚙
-                        </div>
-                        Configure skip logic
-            </a>
+            <getContext(Draft(Component))
+                        onEditSkipLogic={[Function]}
+                        zoomColors={
+                                    Array [
+                                                "#ffffff",
+                                                "#f2b700",
+                                              ]
+                        }
+            />
             <a
                         className="timeline-stage__control"
                         onClick={[Function]}
@@ -373,17 +348,15 @@ ShallowWrapper {
                 </div>
                 Add screen before
 </a>,
-              <a
-                className="timeline-stage__control"
-                onClick={[Function]}
->
-                <div
-                                className="timeline-stage__control-icon"
-                >
-                                ⚙
-                </div>
-                Configure skip logic
-</a>,
+              <getContext(Draft(Component))
+                onEditSkipLogic={[Function]}
+                zoomColors={
+                                Array [
+                                                "#ffffff",
+                                                "#f2b700",
+                                              ]
+                }
+/>,
               <a
                 className="timeline-stage__control"
                 onClick={[Function]}
@@ -437,36 +410,17 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
+              "nodeType": "function",
               "props": Object {
-                "children": Array [
-                  <div
-                    className="timeline-stage__control-icon"
->
-                    ⚙
-</div>,
-                  "Configure skip logic",
+                "onEditSkipLogic": [Function],
+                "zoomColors": Array [
+                  "#ffffff",
+                  "#f2b700",
                 ],
-                "className": "timeline-stage__control",
-                "onClick": [Function],
               },
               "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "⚙",
-                    "className": "timeline-stage__control-icon",
-                  },
-                  "ref": null,
-                  "rendered": "⚙",
-                  "type": "div",
-                },
-                "Configure skip logic",
-              ],
-              "type": "a",
+              "rendered": null,
+              "type": [Function],
             },
             Object {
               "instance": null,

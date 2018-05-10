@@ -45,6 +45,20 @@ const EditStageButton = Zoom(
   ),
 );
 
+const ConfigureSkipLogicButton = Zoom(
+  ({
+    onEditSkipLogic,
+  }) => (
+    <a
+      className="timeline-stage__control"
+      onClick={onEditSkipLogic}
+    >
+      <div className="timeline-stage__control-icon">&#9881;</div>
+      Configure skip logic
+    </a>
+  ),
+);
+
 class TimelineStage extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
@@ -96,13 +110,10 @@ class TimelineStage extends PureComponent {
             <div className="timeline-stage__control-icon">↑</div>
             Add screen before
           </a>
-          <a
-            className="timeline-stage__control"
-            onClick={onEditSkipLogic}
-          >
-            <div className="timeline-stage__control-icon">&#9881;</div>
-            Configure skip logic
-          </a>
+          <ConfigureSkipLogicButton
+            onEditSkipLogic={onEditSkipLogic}
+            zoomColors={['#ffffff', '#f2b700']}
+          />
           <a
             className="timeline-stage__control"
             onClick={() => onInsertStage(1)}
