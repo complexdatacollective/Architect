@@ -1,5 +1,6 @@
 .card {
   position: absolute;
+  z-index: 1001; // above architect logo
   top: 0;
   left: 0;
   width: 100%;
