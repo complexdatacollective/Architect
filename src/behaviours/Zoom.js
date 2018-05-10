@@ -22,7 +22,7 @@ const Zoom = WrappedComponent =>
       };
 
       static defaultProps = {
-        zoomColors: ['#ffffff', '#2d2955'],
+        zoomColors: ['#ff6ec7', '#4cbb17'],
         constraints: [0, 0, 0, 0],
       };
 

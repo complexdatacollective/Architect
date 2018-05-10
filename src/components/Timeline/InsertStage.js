@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get } from 'lodash';
+import { Zoom } from '../../behaviours';
 import timelineImages from '../../images/timeline';
 
 const getTimelineImage = type =>
@@ -45,6 +46,20 @@ const interfaceOptions = [
   },
 ];
 
+const StageType = Zoom(
+  ({ type, onSelectStageType, onMouseEnterStageType, onMouseLeaveStageType }) => (
+    <div
+      key={type}
+      className="timeline-insert-stage__option"
+      onClick={onSelectStageType}
+      onMouseEnter={onMouseEnterStageType}
+      onMouseLeave={onMouseLeaveStageType}
+    >
+      <img src={getTimelineImage(type)} alt={type} />
+    </div>
+  ),
+);
+
 class InsertStage extends PureComponent {
   static propTypes = {
     onSelectStageType: PropTypes.func,
@@ -73,15 +88,13 @@ class InsertStage extends PureComponent {
   }
 
   renderOption = ({ type }, index) => (
-    <div
-      key={type}
-      className="timeline-insert-stage__option"
-      onClick={() => this.props.onSelectStageType(type)}
-      onMouseEnter={() => this.onMouseEnterStageType(index)}
-      onMouseLeave={() => this.onMouseLeaveStageType()}
-    >
-      <img src={getTimelineImage(type)} alt={type} />
-    </div>
+    <StageType
+      type={type}
+      zoomColors={['#2d2955', '#ffffff']}
+      onSelectStageType={() => this.props.onSelectStageType(type)}
+      onMouseEnterStageType={() => this.onMouseEnterStageType(index)}
+      onMouseLeaveStageType={() => this.onMouseLeaveStageType()}
+    />
   );
 
   renderGuidance = ({ guidance }, index) => {
