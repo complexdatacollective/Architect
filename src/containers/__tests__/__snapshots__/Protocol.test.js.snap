@@ -39,9 +39,9 @@ ShallowWrapper {
       "children": Array [
         <withContext(Timeline)
           hasUnsavedChanges={false}
+          onCreateStage={[Function]}
           onEditSkipLogic={[Function]}
           onEditStage={[Function]}
-          onInsertStage={[Function]}
           stages={
                     Array [
                               Object {
@@ -72,13 +72,6 @@ ShallowWrapper {
                     Export
           </Button>
 </div>,
-        <Connect(NewStage)
-          cancel={false}
-          index={undefined}
-          onCancel={[Function]}
-          onComplete={[Function]}
-          show={false}
-/>,
         <Connect(Draft(EditSkipLogic))
           cancel={false}
           onCancel={[Function]}
@@ -87,10 +80,11 @@ ShallowWrapper {
           stageId={undefined}
 />,
         <Connect(EditStage)
+          cancel={false}
+          cardType={null}
           onCancel={[Function]}
           onComplete={[Function]}
           show={false}
-          stageId={undefined}
 />,
       ],
       "className": "protocol",
@@ -103,9 +97,9 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "hasUnsavedChanges": false,
+          "onCreateStage": [Function],
           "onEditSkipLogic": [Function],
           "onEditStage": [Function],
-          "onInsertStage": [Function],
           "stages": Array [
             Object {
               "id": 1,
@@ -178,10 +172,10 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "cancel": false,
-          "index": undefined,
           "onCancel": [Function],
           "onComplete": [Function],
           "show": false,
+          "stageId": undefined,
         },
         "ref": null,
         "rendered": null,
@@ -193,24 +187,10 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "cancel": false,
+          "cardType": null,
           "onCancel": [Function],
           "onComplete": [Function],
           "show": false,
-          "stageId": undefined,
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "onCancel": [Function],
-          "onComplete": [Function],
-          "show": false,
-          "stageId": undefined,
         },
         "ref": null,
         "rendered": null,
@@ -228,9 +208,9 @@ ShallowWrapper {
         "children": Array [
           <withContext(Timeline)
             hasUnsavedChanges={false}
+            onCreateStage={[Function]}
             onEditSkipLogic={[Function]}
             onEditStage={[Function]}
-            onInsertStage={[Function]}
             stages={
                         Array [
                                     Object {
@@ -261,13 +241,6 @@ ShallowWrapper {
                         Export
             </Button>
 </div>,
-          <Connect(NewStage)
-            cancel={false}
-            index={undefined}
-            onCancel={[Function]}
-            onComplete={[Function]}
-            show={false}
-/>,
           <Connect(Draft(EditSkipLogic))
             cancel={false}
             onCancel={[Function]}
@@ -276,10 +249,11 @@ ShallowWrapper {
             stageId={undefined}
 />,
           <Connect(EditStage)
+            cancel={false}
+            cardType={null}
             onCancel={[Function]}
             onComplete={[Function]}
             show={false}
-            stageId={undefined}
 />,
         ],
         "className": "protocol",
@@ -292,9 +266,9 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "hasUnsavedChanges": false,
+            "onCreateStage": [Function],
             "onEditSkipLogic": [Function],
             "onEditStage": [Function],
-            "onInsertStage": [Function],
             "stages": Array [
               Object {
                 "id": 1,
@@ -367,10 +341,10 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "cancel": false,
-            "index": undefined,
             "onCancel": [Function],
             "onComplete": [Function],
             "show": false,
+            "stageId": undefined,
           },
           "ref": null,
           "rendered": null,
@@ -382,24 +356,10 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "cancel": false,
+            "cardType": null,
             "onCancel": [Function],
             "onComplete": [Function],
             "show": false,
-            "stageId": undefined,
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "onCancel": [Function],
-            "onComplete": [Function],
-            "show": false,
-            "stageId": undefined,
           },
           "ref": null,
           "rendered": null,

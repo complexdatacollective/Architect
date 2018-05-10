@@ -22,226 +22,78 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "class",
     "props": Object {
-      "children": Array [
-        <div
-          className="timeline-stage__notch"
-          onClick={[Function]}
-/>,
-        <getContext(Draft(Component))
-          label=""
-          onEditStage={[Function]}
-          type="Foo"
-          zoomColors={
-                    Array [
-                              "#227733",
-                              "#ffffff",
-                            ]
-          }
-/>,
-        <div
-          className="timeline-stage__controls"
+      "appear": false,
+      "children": <div
+        className="timeline-stage"
 >
-          <a
-                    className="timeline-stage__control"
-                    onClick={[Function]}
-          >
-                    <div
-                              className="timeline-stage__control-icon"
-                    >
-                              ↑
-                    </div>
-                    Add screen before
-          </a>
-          <getContext(Draft(Component))
-                    onEditSkipLogic={[Function]}
-                    zoomColors={
-                              Array [
+        <div
+                className="timeline-stage__notch"
+                onClick={[Function]}
+        />
+        <getContext(Draft(Component))
+                label=""
+                onEditStage={[Function]}
+                type="Foo"
+                zoomColors={
+                        Array [
+                                "#227733",
+                                "#ffffff",
+                              ]
+                }
+        />
+        <div
+                className="timeline-stage__controls"
+        >
+                <a
+                        className="timeline-stage__control"
+                        onClick={[Function]}
+                >
+                        <div
+                                className="timeline-stage__control-icon"
+                        >
+                                ↑
+                        </div>
+                        Add screen before
+                </a>
+                <getContext(Draft(Component))
+                        onEditSkipLogic={[Function]}
+                        zoomColors={
+                                Array [
                                         "#ffffff",
                                         "#f2b700",
                                       ]
-                    }
-          />
-          <a
-                    className="timeline-stage__control"
-                    onClick={[Function]}
-          >
-                    <div
-                              className="timeline-stage__control-icon"
-                    >
-                              ↓
-                    </div>
-                    Add screen after
-          </a>
+                        }
+                />
+                <a
+                        className="timeline-stage__control"
+                        onClick={[Function]}
+                >
+                        <div
+                                className="timeline-stage__control-icon"
+                        >
+                                ↓
+                        </div>
+                        Add screen after
+                </a>
+        </div>
 </div>,
-      ],
-      "className": "timeline-stage",
+      "enter": true,
+      "exit": true,
+      "in": false,
+      "mountOnEnter": false,
+      "onEnter": [Function],
+      "onEntered": [Function],
+      "onEntering": [Function],
+      "onExit": [Function],
+      "onExited": [Function],
+      "onExiting": [Function],
+      "timeout": 0,
+      "unmountOnExit": false,
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "className": "timeline-stage__notch",
-          "onClick": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "label": "",
-          "onEditStage": [Function],
-          "type": "Foo",
-          "zoomColors": Array [
-            "#227733",
-            "#ffffff",
-          ],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
->
-              <div
-                            className="timeline-stage__control-icon"
-              >
-                            ↑
-              </div>
-              Add screen before
-</a>,
-            <getContext(Draft(Component))
-              onEditSkipLogic={[Function]}
-              zoomColors={
-                            Array [
-                                          "#ffffff",
-                                          "#f2b700",
-                                        ]
-              }
-/>,
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
->
-              <div
-                            className="timeline-stage__control-icon"
-              >
-                            ↓
-              </div>
-              Add screen after
-</a>,
-          ],
-          "className": "timeline-stage__controls",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <div
-                  className="timeline-stage__control-icon"
->
-                  ↑
-</div>,
-                "Add screen before",
-              ],
-              "className": "timeline-stage__control",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "↑",
-                  "className": "timeline-stage__control-icon",
-                },
-                "ref": null,
-                "rendered": "↑",
-                "type": "div",
-              },
-              "Add screen before",
-            ],
-            "type": "a",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "onEditSkipLogic": [Function],
-              "zoomColors": Array [
-                "#ffffff",
-                "#f2b700",
-              ],
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <div
-                  className="timeline-stage__control-icon"
->
-                  ↓
-</div>,
-                "Add screen after",
-              ],
-              "className": "timeline-stage__control",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "↓",
-                  "className": "timeline-stage__control-icon",
-                },
-                "ref": null,
-                "rendered": "↓",
-                "type": "div",
-              },
-              "Add screen after",
-            ],
-            "type": "a",
-          },
-        ],
-        "type": "div",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "rendered": Object {
       "instance": null,
       "key": undefined,
       "nodeType": "host",
@@ -461,6 +313,306 @@ ShallowWrapper {
         },
       ],
       "type": "div",
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "appear": false,
+        "children": <div
+          className="timeline-stage"
+>
+          <div
+                    className="timeline-stage__notch"
+                    onClick={[Function]}
+          />
+          <getContext(Draft(Component))
+                    label=""
+                    onEditStage={[Function]}
+                    type="Foo"
+                    zoomColors={
+                              Array [
+                                        "#227733",
+                                        "#ffffff",
+                                      ]
+                    }
+          />
+          <div
+                    className="timeline-stage__controls"
+          >
+                    <a
+                              className="timeline-stage__control"
+                              onClick={[Function]}
+                    >
+                              <div
+                                        className="timeline-stage__control-icon"
+                              >
+                                        ↑
+                              </div>
+                              Add screen before
+                    </a>
+                    <getContext(Draft(Component))
+                              onEditSkipLogic={[Function]}
+                              zoomColors={
+                                        Array [
+                                                  "#ffffff",
+                                                  "#f2b700",
+                                                ]
+                              }
+                    />
+                    <a
+                              className="timeline-stage__control"
+                              onClick={[Function]}
+                    >
+                              <div
+                                        className="timeline-stage__control-icon"
+                              >
+                                        ↓
+                              </div>
+                              Add screen after
+                    </a>
+          </div>
+</div>,
+        "enter": true,
+        "exit": true,
+        "in": false,
+        "mountOnEnter": false,
+        "onEnter": [Function],
+        "onEntered": [Function],
+        "onEntering": [Function],
+        "onExit": [Function],
+        "onExited": [Function],
+        "onExiting": [Function],
+        "timeout": 0,
+        "unmountOnExit": false,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="timeline-stage__notch"
+              onClick={[Function]}
+/>,
+            <getContext(Draft(Component))
+              label=""
+              onEditStage={[Function]}
+              type="Foo"
+              zoomColors={
+                            Array [
+                                          "#227733",
+                                          "#ffffff",
+                                        ]
+              }
+/>,
+            <div
+              className="timeline-stage__controls"
+>
+              <a
+                            className="timeline-stage__control"
+                            onClick={[Function]}
+              >
+                            <div
+                                          className="timeline-stage__control-icon"
+                            >
+                                          ↑
+                            </div>
+                            Add screen before
+              </a>
+              <getContext(Draft(Component))
+                            onEditSkipLogic={[Function]}
+                            zoomColors={
+                                          Array [
+                                                        "#ffffff",
+                                                        "#f2b700",
+                                                      ]
+                            }
+              />
+              <a
+                            className="timeline-stage__control"
+                            onClick={[Function]}
+              >
+                            <div
+                                          className="timeline-stage__control-icon"
+                            >
+                                          ↓
+                            </div>
+                            Add screen after
+              </a>
+</div>,
+          ],
+          "className": "timeline-stage",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "className": "timeline-stage__notch",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "label": "",
+              "onEditStage": [Function],
+              "type": "Foo",
+              "zoomColors": Array [
+                "#227733",
+                "#ffffff",
+              ],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <a
+                  className="timeline-stage__control"
+                  onClick={[Function]}
+>
+                  <div
+                                    className="timeline-stage__control-icon"
+                  >
+                                    ↑
+                  </div>
+                  Add screen before
+</a>,
+                <getContext(Draft(Component))
+                  onEditSkipLogic={[Function]}
+                  zoomColors={
+                                    Array [
+                                                      "#ffffff",
+                                                      "#f2b700",
+                                                    ]
+                  }
+/>,
+                <a
+                  className="timeline-stage__control"
+                  onClick={[Function]}
+>
+                  <div
+                                    className="timeline-stage__control-icon"
+                  >
+                                    ↓
+                  </div>
+                  Add screen after
+</a>,
+              ],
+              "className": "timeline-stage__controls",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <div
+                      className="timeline-stage__control-icon"
+>
+                      ↑
+</div>,
+                    "Add screen before",
+                  ],
+                  "className": "timeline-stage__control",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "↑",
+                      "className": "timeline-stage__control-icon",
+                    },
+                    "ref": null,
+                    "rendered": "↑",
+                    "type": "div",
+                  },
+                  "Add screen before",
+                ],
+                "type": "a",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "onEditSkipLogic": [Function],
+                  "zoomColors": Array [
+                    "#ffffff",
+                    "#f2b700",
+                  ],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <div
+                      className="timeline-stage__control-icon"
+>
+                      ↓
+</div>,
+                    "Add screen after",
+                  ],
+                  "className": "timeline-stage__control",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "↓",
+                      "className": "timeline-stage__control-icon",
+                    },
+                    "ref": null,
+                    "rendered": "↓",
+                    "type": "div",
+                  },
+                  "Add screen after",
+                ],
+                "type": "a",
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
+      "type": [Function],
     },
   ],
   Symbol(enzyme.__options__): Object {
