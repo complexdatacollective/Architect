@@ -27,7 +27,9 @@
     transition: background-color var(--animation-easing) var(--animation-duration-fast),
     border-color var(--animation-easing) var(--animation-duration-fast);
 
-    &-detail, &-name, &-value {
+    &-detail,
+    &-name,
+    &-value {
       display: inline-block;
     }
 
@@ -37,7 +39,7 @@
 
     &-value {
       font-style: italic;
-      margin-left: unit(0.5);
+      margin-left: unit(.5);
     }
 
     &--variant-1 {

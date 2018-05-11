@@ -24,13 +24,15 @@ $module-name: form-fields-seamless-text;
     top: 0;
     right: 0;
     vertical-align: bottom;
-    width: unit(2) !important;
-    height: unit(2) !important;
+    width: unit(2) !important; // sass-lint:disable-line no-important
+    height: unit(2) !important; // sass-lint:disable-line no-important
     opacity: 0;
     transition: opacity var(--animation-easing) var(--animation-duration-fast);
 
-    &--error .cls-1 {
-      fill: var(--error);
+    &--error {
+      .cls-1 {
+        fill: var(--error);
+      }
     }
   }
 
@@ -40,10 +42,11 @@ $module-name: form-fields-seamless-text;
     color: var(--error);
     margin: unit(.5) 0 0;
     transition: opacity var(--animation-easing) var(--animation-duration-fast),
-      max-height var(--animation-easing) var(--animation-duration-fast);
+    max-height var(--animation-easing) var(--animation-duration-fast);
   }
 
-  &--has-focus, &:hover {
+  &--has-focus,
+  &:hover {
     .#{$module-name}__input {
       border-bottom-color: var(--architect-input-focus);
     }
@@ -68,7 +71,7 @@ $module-name: form-fields-seamless-text;
     }
 
     .#{$module-name}__icon--edit {
-      opacity: 0 !important;
+      opacity: 0 !important; // sass-lint:disable-line no-important
     }
   }
 }

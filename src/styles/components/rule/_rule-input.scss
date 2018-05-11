@@ -1,9 +1,8 @@
-.rule-input {
-  margin: 0;
+.rule-input {  margin: 0;
   position: relative;
   overflow: hidden;
-  padding: 0 0 4px 0;
-  border-bottom: 2px solid white;
+  padding: 0 0 4px;
+  border-bottom: 2px solid var(--color-white);
 
   &__spacer {
     visibility: hidden;
@@ -13,10 +12,15 @@
     padding: 0 5px;
   }
 
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  input {
+    &[type='number'] {
+      // sass-lint:disable-block no-vendor-prefixes
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
   }
 
   &__text {
@@ -24,7 +28,7 @@
     top: 50%;
     width: 100%;
     transform: translateY(-50%);
-    left: 0px;
+    left: 0;
     background-color: transparent;
     color: var(--text);
     font-size: 1rem;

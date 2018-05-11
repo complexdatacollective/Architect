@@ -6,7 +6,6 @@ $component-name: form-fields-contexts;
 
   &__option {
     cursor: pointer;
-    position: relative;
     display: inline-block;
     margin: 0 unit(1) unit(1) 0;
     position: relative;
@@ -61,7 +60,8 @@ $component-name: form-fields-contexts;
 
   @for $i from 2 through length($colors) {
     $color: nth($colors, $i);
-    .#{$component-name}__option:nth-child(#{length($colors)}n + #{$i}) {
+
+    .#{$component-name}__option:nth-child(#{length($colors)}n + #{$i}) { // sass-lint:disable-line force-pseudo-nesting
       border-color: $color;
 
       .#{$component-name}__option-label {

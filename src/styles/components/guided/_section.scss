@@ -3,8 +3,8 @@
   width: 100%;
   padding: 0 35% 0 0;
   transition: opacity var(--animation-duration-standard) var(--animation-easing),
-    transform var(--animation-duration-standard) var(--animation-easing),
-    max-height var(--animation-duration-standard) var(--animation-easing);
+  transform var(--animation-duration-standard) var(--animation-easing),
+  max-height var(--animation-duration-standard) var(--animation-easing);
 
   &:first-child {
     padding-top: unit(4);

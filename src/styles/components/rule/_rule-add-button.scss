@@ -1,75 +1,78 @@
+.rule-add-button {
+  width: 100%;
+  position: relative;
+  text-align: left;
 
-  .rule-add-button {
-    width: 100%;
-    position: relative;
-    text-align: left;
+  &__open {
+    transition: opacity var(--animation-duration-fast) var(--animation-easing),
+    transform var(--animation-duration-fast) var(--animation-easing);
+    background-color: var(--primary);
+    color: var(--text);
+    border: 0;
+    border-radius: 60px;
+    width: 60px;
+    height: 60px;
+    font-size: 2em;
+    font-weight: bold;
 
-    &__open {
-      transition: all ease 200ms;
-      background-color: var(--primary);
-      color: var(--text);
-      border: 0;
-      border-radius: 60px;
-      width: 60px;
-      height: 60px;
-      font-size: 2em;
-      font-weight: bold;
-      &:focus {
-        outline: none;
-      }
-    }
-
-    &__choices {
-      transition: all ease 200ms;
-      opacity: 0;
-      transform-origin: 0 50%;
-      transform: translateY(-50%) scale(0.5);
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-    }
-
-    &__choice {
-      border: 0;
-      cursor: pointer;
-      padding: 0 40px;
-      margin-left: 10px;
-      background-color: var(--edge-alt-2);
-      color: var(--text);
-      border-radius: 10px;
-      height: 60px;
-      text-transform: uppercase;
-
-      &:focus {
-        outline: none;
-      }
-
-      &:first-child {
-        margin-left: 0;
-      }
-
-      &--alter {
-        background-color:var(--architect-rule-type--alter);
-      }
-
-      &--ego {
-        background-color:var(--architect-rule-attribute--ego);
-      }
-
-      &--edge {
-        background-color:var(--architect-rule-type--edge);
-      }
-    }
-
-    &--is-open {
-      .rule-add-button__open {
-        opacity: 0;
-        transform: scale(0);
-      }
-      .rule-add-button__choices {
-        opacity: 1;
-        transform: translateY(-50%) scale(1);
-      }
+    &:focus {
+      outline: none;
     }
   }
+
+  &__choices {
+    transition: opacity var(--animation-duration-fast) var(--animation-easing),
+    transform var(--animation-duration-fast) var(--animation-easing);
+    opacity: 0;
+    transform-origin: 0 50%;
+    transform: translateY(-50%) scale(.5);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+  }
+
+  &__choice {
+    border: 0;
+    cursor: pointer;
+    padding: 0 40px;
+    margin-left: 10px;
+    background-color: var(--edge-alt-2);
+    color: var(--text);
+    border-radius: 10px;
+    height: 60px;
+    text-transform: uppercase;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &--alter {
+      background-color: var(--architect-rule-type--alter);
+    }
+
+    &--ego {
+      background-color: var(--architect-rule-attribute--ego);
+    }
+
+    &--edge {
+      background-color: var(--architect-rule-type--edge);
+    }
+  }
+
+  &--is-open {
+    .rule-add-button__open {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .rule-add-button__choices {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+}

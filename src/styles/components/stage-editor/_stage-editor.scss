@@ -1,7 +1,7 @@
 .stage-editor {
   width: 100%;
   position: relative;
-  transition: all var(--animation-duration-standard) var(--animation-easing);
+  transition: padding-top var(--animation-duration-standard) var(--animation-easing);
 
   &-section {
     &__guidance {
@@ -25,7 +25,9 @@
     background: var(--settings);
     color: var(--text);
     padding: 20px;
-    transition: all var(--animation-duration-standard) var(--animation-easing);
+    transition: opacity var(--animation-duration-standard) var(--animation-easing),
+    max-height var(--animation-duration-standard) var(--animation-easing),
+    transform var(--animation-duration-standard) var(--animation-easing);
   }
 
   &.stage-editor--show-code {

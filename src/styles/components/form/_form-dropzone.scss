@@ -5,7 +5,7 @@
   height: 100%;
   width: 100%;
   border: unit(.2) dashed var(--architect-panel-background);
-  background: white;
+  background: var(--color-white);
 
   &::before {
     @include preset('copy-standard');
@@ -18,21 +18,5 @@
     &::before {
       content: 'Drop content here or click to update';
     }
-  }
-
-  &--active {
-
-  }
-
-  &--accept {
-
-  }
-
-  &--reject {
-
-  }
-
-  &--disabled {
-
   }
 }

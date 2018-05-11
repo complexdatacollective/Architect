@@ -1,7 +1,10 @@
 // Remove touch and focus outlines
+// sass-lint:disable no-vendor-prefixes, no-ids
+
 * {
   outline-style: none;
   -webkit-touch-callout: none;
+
   &:focus {
     outline: none;
    }

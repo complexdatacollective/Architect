@@ -40,7 +40,7 @@
     margin-left: 20px;
     cursor: pointer;
 
-    &:after {
+    &::after {
       display: block;
       content: 'x';
     }
@@ -108,7 +108,7 @@
       background: var(--architect-rule-attribute);
       max-width: 500px;
       transition: max-width var(--animation-easing) var(--animation-duration-standard),
-        padding var(--animation-easing) var(--animation-duration-standard);
+      padding var(--animation-easing) var(--animation-duration-standard);
 
       &:empty {
         max-width: 0;

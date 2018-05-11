@@ -1,10 +1,13 @@
+// sass-lint:disable no-color-literals
 
 :root {
   --color-shadow: rgba(0, 0, 0, .15);
+  --color-modal-shadow: rgba(20, 0, 0, .2);
 
   --architect-background: var(--color-white);
   --architect-text: var(--color-charcoal);
   --architect-shadow: var(--color-shadow);
+  --architect-modal-shadow: var(--color-modal-shadow);
 
   --architect-control-bar-background: var(--color-cyber-grape);
   --architect-control-bar-text: var(--color-white);
@@ -38,7 +41,7 @@
   --architect-dialog-background: var(--color-mustard);
   --architect-dialog-background--dark: var(--color-mustard--dark);
 
-// rule
+  // rule
   --architect-rule-text: var(--color-white);
   --architect-rule-control: var(--color-cyber-grape);
   --architect-rule-type: var(--color-neon-coral);
@@ -52,13 +55,13 @@
   --architect-rule-type--edge: var(--color-sea-green);
   --architect-rule-attribute--edge: var(--color-sea-green--dark);
 
-// logic
+  // logic
   --architect-rules: var(--color-charcoal);
   --architect-rules-background: var(--color-intent);
   --architect-rules--and: var(--color-slate-blue--dark);
   --architect-rules--or: var(--color-neon-carrot--dark);
 
-// content item types
+  // content item types
   --architect-variant--1: var(--color-slate-blue--dark);
   --architect-variant--2: var(--color-mustard--dark);
   --architect-variant--3: var(--color-sea-green);
@@ -68,7 +71,9 @@
 }
 
 
-button:disabled,
-button[disabled] {
-  background-color: var(--color-charcoal);
+button {
+  &:disabled,
+  &[disabled] {
+    background-color: var(--color-charcoal);
+  }
 }

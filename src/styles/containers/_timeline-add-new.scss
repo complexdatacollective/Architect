@@ -10,7 +10,7 @@ $component-name: timeline-add-new;
     border-radius: 5px;
     transform: translateZ(0) scale(.75);
     transition: background-color var(--animation-easing) var(--animation-duration-fast),
-      transform var(--animation-easing) var(--animation-duration-fast);
+    transform var(--animation-easing) var(--animation-duration-fast);
     padding: 15px 60px;
     border: 0;
 
@@ -22,8 +22,8 @@ $component-name: timeline-add-new;
 
     &-icon {
       transform: translateX(6px);
-      width: 80px !important;  // why is the default difficult to override?
-      height: 80px !important;
+      width: 80px !important; // sass-lint:disable-line no-important
+      height: 80px !important; // sass-lint:disable-line no-important
     }
 
     &:hover {

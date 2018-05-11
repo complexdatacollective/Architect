@@ -34,9 +34,9 @@
   }
 
   &__action {
+    @include flex-inline;
     background: var(--architect-rule-operator);
     border-radius: 10px;
     padding: 20px;
-    @include flex-inline;
   }
 }

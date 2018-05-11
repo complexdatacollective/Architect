@@ -23,10 +23,10 @@
 
     &::before {
       content: '\2195';
-      color: white;
+      color: var(--color-white);
       display: block;
       position: relative;
-      top: unit(0.2);
+      top: unit(.2);
     }
   }
 

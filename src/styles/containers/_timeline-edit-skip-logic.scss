@@ -30,8 +30,8 @@
     height: 70px;
 
     &-icon {
-      width: 45px !important;
-      height: 45px !important;
+      width: 45px !important; // sass-lint:disable-line no-important
+      height: 45px !important; // sass-lint:disable-line no-important
       position: absolute;
       top: 50%;
       left: 50%;

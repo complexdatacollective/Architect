@@ -53,11 +53,11 @@ $component-name: form-fields-radio-group;
       line-height: $size;
     }
 
-    &:hover &-radio::before {
+    &:hover &-radio::before { // sass-lint:disable-line force-pseudo-nesting
       border-color: var(--color-sea-green);
     }
 
-    &-input:checked + &-radio {
+    &-input:checked + &-radio { // sass-lint:disable-line force-pseudo-nesting
       &::before {
         border-color: var(--color-sea-green);
       }

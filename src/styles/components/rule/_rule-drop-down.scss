@@ -11,11 +11,12 @@
   }
 
   &__options {
+    // sass-lint:disable-block no-vendor-prefixes
     position: absolute;
     top: 50%;
     width: 100%;
     transform: translateY(-50%);
-    left: 0px;
+    left: 0;
     color: var(--text);
     background-color: transparent;
     border: 0;

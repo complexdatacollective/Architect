@@ -1,15 +1,19 @@
+$background-gradient-start: rgba(255, 255, 255, .1);
+$background-gradient-end: rgba(255, 255, 255, .05);
+$background-gradient: linear-gradient($background-gradient-start, $background-gradient-end);
+
 .filter-group {
+  @include flex-inline;
+  @include flex-align(center, middle);
   background-color: var(--architect-rules);
   transition: background-color var(--animation-easing) var(--animation-duration-standard);
   border-radius: 10px;
   padding: 10px;
-  @include flex-inline;
-  @include flex-align(center, middle);
 
   &__join {
-    flex: 0 0 100px;
     @include flex-inline;
     @include flex-align(center, middle);
+    flex: 0 0 100px;
     padding-right: 10px;
   }
 
@@ -17,7 +21,7 @@
     flex: 1 1 auto;
     padding: 30px;
     border-radius: 10px;
-    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    background: $background-gradient;
     overflow: hidden;
   }
 

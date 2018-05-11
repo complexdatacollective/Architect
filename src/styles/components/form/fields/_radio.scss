@@ -51,11 +51,15 @@ $border-space: 3px;
     line-height: $size;
   }
 
-  &:hover &__radio::before {
-    border-color: var(--color-sea-green);
+  &:hover {
+    .form-fields-radio__radio {
+      &::before {
+        border-color: var(--color-sea-green);
+      }
+    }
   }
 
-  &__input:checked + &__radio {
+  &__input:checked + &__radio { // sass-lint:disable-line force-pseudo-nesting
     &::before {
       border-color: var(--color-sea-green);
     }

@@ -51,7 +51,7 @@
       will-change: transform;
       transform: translateZ(0);
       transition: border-radius $transition-duration $transition-easing,
-        transform $transition-duration $transition-easing;
+      transform $transition-duration $transition-easing;
     }
 
     &-before {
@@ -61,7 +61,7 @@
     }
 
     &-active {
-      opacity: 0.8;
+      opacity: .8;
 
       .timeline-overview__panel {
         border-radius: unit(3);

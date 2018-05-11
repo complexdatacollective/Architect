@@ -8,6 +8,7 @@ $component-name: form-fields-markdown;
   cursor: text;
 
   &__input {
+    @include preset('copy-large');
     position: absolute;
     left: 50%;
     top: 0;
@@ -22,7 +23,6 @@ $component-name: form-fields-markdown;
     resize: none;
     transform-origin: 100% 50%;
     transform: scale(0, 1);
-    @include preset('copy-large');
   }
 
   &__preview {

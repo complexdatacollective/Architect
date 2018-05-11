@@ -9,8 +9,9 @@ $component-name: stage-editor-section-node-type;
     .#{$component-name} {
       &__edit {
         cursor: pointer;
+
         &-capture {
-          pointer-events: none !important;
+          pointer-events: none !important; // sass-lint:disable-line no-important
         }
       }
     }
