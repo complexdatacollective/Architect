@@ -1,3 +1,5 @@
+// sass-lint:disable no-ids
+
 .start {
   width: 100%;
   height: 100%;
@@ -116,8 +118,8 @@
       transform: translateY(0);
     }
 
-    .start__create-new,
-    .start__open-existing {
+    #create-new-protocol-button,
+    #open-existing-protocol-button {
       transition: transform var(--animation-duration-fast) var(--animation-easing);
       will-change: transform;
     }
@@ -131,11 +133,11 @@
       transform: translateY(100%);
     }
 
-    .start__create-new {
+    #create-new-protocol-button {
       transform: translateX(-100%);
     }
 
-    .start__open-existing {
+    #open-existing-protocol-button {
       transform: translateX(100%);
     }
   }

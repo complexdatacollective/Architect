@@ -42,7 +42,6 @@ class Start extends PureComponent {
           <div className="start__call-to-action">
             <Button
               id="create-new-protocol-button"
-              className="start__create-new"
               type="button"
               color="white"
               size="small"
@@ -51,7 +50,6 @@ class Start extends PureComponent {
             >Create new</Button>
             <Button
               id="open-existing-protocol-button"
-              className="start__open-existing"
               type="button"
               size="small"
               color="cyber-grape"
