@@ -1,6 +1,8 @@
 import { remote } from 'electron';
 import fs from 'fs';
 import path from 'path';
+import getLocalDirectory from './getLocalDirectory';
+import { archive } from './archive';
 
 const saveDialogOptions = {
   buttonLabel: 'Create',
@@ -23,14 +25,23 @@ const saveDialog = () =>
 /**
  * Shows a save dialog and then creates an empty protocol there
  */
-const createProtocol = () =>
-  saveDialog().then((filename) => {
-    const assetsPath = path.join(filename, 'assets');
-    const protocolPath = path.join(filename, 'protocol.json');
-    fs.mkdirSync(filename);
-    fs.mkdirSync(assetsPath);
-    fs.writeFileSync(protocolPath, '{}');
-    return filename;
-  });
+const createProtocol = (protocolName) => {
+  const workingPath = getLocalDirectory(protocolName);
+
+  return saveDialog()
+    .then((archivePath) => {
+      const assetsPath = path.join(workingPath, 'assets');
+      const protocolPath = path.join(workingPath, 'protocol.json');
+      fs.mkdirSync(workingPath);
+      fs.mkdirSync(assetsPath);
+      fs.writeFileSync(protocolPath, '{}');
+
+      return archive(workingPath, archivePath)
+        .then(() => ({
+          workingPath,
+          archivePath,
+        }));
+    });
+};
 
 export default createProtocol;

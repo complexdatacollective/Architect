@@ -1,5 +1,5 @@
 import path from 'path';
-import { archive } from '../../other/archive';
+import { archive } from './archive';
 import { writeFile } from '../filesystem';
 
 /**
@@ -8,7 +8,7 @@ import { writeFile } from '../filesystem';
  * @param {object} protocol - The protocol itself.
  */
 const saveProtocol = ({ workingPath, archivePath, advanced }, protocol) => {
-  // save json
+  // save json to temp dir
   const destinationPath = path.join(workingPath, 'protocol.json');
 
   writeFile(destinationPath, JSON.stringify(protocol, null, 2))

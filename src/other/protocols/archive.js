@@ -1,15 +1,14 @@
-import { remote } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import decompress from 'decompress';
 import archiver from 'archiver';
+import getLocalDirectory from './getLocalDirectory';
 
 const archiveOptions = {
   zlib: { level: 9 },
 };
 
 const getProtocolName = fileName => path.basename(fileName, '.netcanvas');
-const getLocalDirectory = protocolName => path.join(remote.getPath('temp'), protocolName);
 
 // returns promise
 const extract = (fileName) => {

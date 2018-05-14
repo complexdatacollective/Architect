@@ -1,5 +1,5 @@
 import path from 'path';
-import { extract } from '../../other/archive';
+import { extract } from './archive';
 
 const openProtocol = fileName =>
   new Promise((resolve) => {
