@@ -8,22 +8,20 @@ const initialState = {};
 
 const SET_PROTOCOL = Symbol('PROTOCOL/SET_PROTOCOL');
 
-const setProtocol = (protocol, meta) => ({
+const setProtocol = protocol => ({
   type: SET_PROTOCOL,
-  meta,
   protocol,
 });
 
 const resetProtocol = () => ({
   type: SET_PROTOCOL,
   protocol: {},
-  meta: '',
 });
 
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_PROTOCOL:
-      return { ...action.protocol };
+      return action.protocol;
     default:
       return state;
   }

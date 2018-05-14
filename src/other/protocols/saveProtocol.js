@@ -11,7 +11,7 @@ const saveProtocol = ({ workingPath, archivePath, advanced }, protocol) => {
   // save json to temp dir
   const destinationPath = path.join(workingPath, 'protocol.json');
 
-  writeFile(destinationPath, JSON.stringify(protocol, null, 2))
+  return writeFile(destinationPath, JSON.stringify(protocol, null, 2))
     .then(() => {
       if (!advanced) {
         // also save zip

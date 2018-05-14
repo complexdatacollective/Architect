@@ -92,42 +92,38 @@ class TimelineStage extends PureComponent {
     );
 
     return (
-      <Transition
-        timeout={0}
-      >
-        <div className={componentClasses} {...rest}>
-          <div
-            className="timeline-stage__notch"
-            onClick={onEditStage}
+      <div className={componentClasses} {...rest}>
+        <div
+          className="timeline-stage__notch"
+          onClick={onEditStage}
+        />
+        <EditStageButton
+          onEditStage={onEditStage}
+          type={type}
+          label={label}
+          zoomColors={zoomColors}
+        />
+        <div className="timeline-stage__controls">
+          <a
+            className="timeline-stage__control"
+            onClick={() => onInsertStage(0)}
+          >
+            <div className="timeline-stage__control-icon">↑</div>
+            Add screen before
+          </a>
+          <ConfigureSkipLogicButton
+            onEditSkipLogic={onEditSkipLogic}
+            zoomColors={['#ffffff', '#f2b700']}
           />
-          <EditStageButton
-            onEditStage={onEditStage}
-            type={type}
-            label={label}
-            zoomColors={zoomColors}
-          />
-          <div className="timeline-stage__controls">
-            <a
-              className="timeline-stage__control"
-              onClick={() => onInsertStage(0)}
-            >
-              <div className="timeline-stage__control-icon">↑</div>
-              Add screen before
-            </a>
-            <ConfigureSkipLogicButton
-              onEditSkipLogic={onEditSkipLogic}
-              zoomColors={['#ffffff', '#f2b700']}
-            />
-            <a
-              className="timeline-stage__control"
-              onClick={() => onInsertStage(1)}
-            >
-              <div className="timeline-stage__control-icon">↓</div>
-              Add screen after
-            </a>
-          </div>
+          <a
+            className="timeline-stage__control"
+            onClick={() => onInsertStage(1)}
+          >
+            <div className="timeline-stage__control-icon">↓</div>
+            Add screen after
+          </a>
         </div>
-      </Transition>
+      </div>
     );
   }
 }

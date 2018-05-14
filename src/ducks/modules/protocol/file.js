@@ -8,9 +8,9 @@ const saveComplete = () => ({ type: SAVE_COMPLETE });
 const saveProtocolAction = () =>
   (dispatch, getState) => {
     const state = getState();
-    const protocolPath = state.session.activeProtocol;
+    const activeProtocol = state.session.activeProtocol;
     const protocol = getProtocol(state);
-    saveProtocol(protocolPath, protocol)
+    saveProtocol(activeProtocol, protocol)
       .then(() => dispatch(saveComplete()));
   };
 

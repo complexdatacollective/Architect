@@ -50,8 +50,8 @@ const loadProtocolAction = protocolId =>
   (dispatch, getState) => {
     const { protocols } = getState();
     const protocolMeta = protocols.find(protocol => protocol.id === protocolId);
-    debugger;
-    dispatch(protocolActions.setProtocol(loadProtocolData(protocolMeta.workingPath), protocolMeta));
+    const protocolData = loadProtocolData(protocolMeta.workingPath);
+    dispatch(protocolActions.setProtocol(protocolData, protocolMeta)); // TODO: Move this into reducers
   };
 
 const createProtocolAction = (callback = () => {}) =>

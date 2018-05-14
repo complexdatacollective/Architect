@@ -113,15 +113,6 @@ class Protocol extends PureComponent {
         />
 
         <div className="protocol__control-bar">
-          <Button
-            size="small"
-            onClick={exportProtocol}
-            color="white"
-            icon={RightArrow}
-            iconPosition="right"
-          >
-            Export
-          </Button>
           { hasUnsavedChanges &&
             <Button
               size="small"
@@ -166,7 +157,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    // saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
+    saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
     loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   };
 }

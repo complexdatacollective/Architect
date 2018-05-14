@@ -3,8 +3,7 @@ import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import {
-  getLocalDirectoryFromProtocolName,
-  getProtocolNameFromArchivePath,
+  getLocalDirectoryFromArchivePath,
   archive,
 } from './archive';
 
@@ -46,8 +45,7 @@ export const createEmptyArchive = ({ workingPath, archivePath }) =>
 const createProtocol = () =>
   saveDialog()
     .then((archivePath) => {
-      const protocolName = getProtocolNameFromArchivePath(archivePath);
-      const workingPath = getLocalDirectoryFromProtocolName(protocolName);
+      const workingPath = getLocalDirectoryFromArchivePath(archivePath);
 
       return createEmptyArchive({
         workingPath,

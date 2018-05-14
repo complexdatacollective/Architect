@@ -27,7 +27,6 @@ class Start extends PureComponent {
   }
 
   openProtocol = (protocol) => {
-    debugger;
     this.props.history.push(`/edit/${encodeURIComponent(protocol.id)}`);
   }
 

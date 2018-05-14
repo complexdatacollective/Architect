@@ -11,11 +11,11 @@ const archiveOptions = {
 };
 
 export const getProtocolNameFromArchivePath = fileName => path.basename(fileName, '.netcanvas');
-export const getLocalDirectoryFromProtocolName = protocolName => path.join(remote.app.getPath('temp'), uuid(), protocolName);
+export const getLocalDirectoryFromArchivePath = () =>
+  path.join(remote.app.getPath('temp'), uuid());
 
 const extract = (fileName) => {
-  const uid = uuid();
-  const workingPath = path.join(remote.app.getPath('temp'), uid);
+  const workingPath = getLocalDirectoryFromArchivePath(fileName);
 
   return decompress(
     fileName,
@@ -25,7 +25,7 @@ const extract = (fileName) => {
 
 const archive = (workingPath, archivePath) =>
   new Promise((resolve, reject) => {
-    const output = fs.createWriteStream(archivePath);
+    const output = fs.createWriteStream(`${archivePath}.zip`);
     const zip = archiver('zip', archiveOptions);
 
     output.on('close', () => {

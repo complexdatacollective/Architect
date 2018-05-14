@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { TransitionGroup } from 'react-transition-group';
 import { Drawer } from '../Transitions';
 import Overview from './Overview';
 import Stage from './Stage';
@@ -68,7 +67,7 @@ class Timeline extends PureComponent {
 
   renderInsertStage = insertStageAtIndex => (
     <Drawer
-      key={`insert-${insertStageAtIndex}`}
+      key={`insert_${insertStageAtIndex}`}
       timeout={1000}
       unmountOnExit
     >
@@ -98,8 +97,9 @@ class Timeline extends PureComponent {
 
   renderStages = () => {
     const items = this.props.stages.map(this.renderStage);
+    const itemsWithInsertStage = this.injectInsertStage(items);
 
-    return this.injectInsertStage(items);
+    return itemsWithInsertStage;
   }
 
   renderStage = (stage, index) => (
@@ -127,11 +127,10 @@ class Timeline extends PureComponent {
             />
             <div className="timeline__stages">
               { this.hasStages() && this.renderHighlight() }
-              <TransitionGroup component={null}>
-                { this.renderStages() }
-              </TransitionGroup>
+              { this.renderStages() }
               { !this.hasStages() && (
                 <InsertStage
+                  key="insertStage"
                   onSelectStageType={type => this.createStage(type, 0)}
                 />
               ) }
