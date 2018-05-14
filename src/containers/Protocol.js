@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -166,8 +167,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
-    exportProtocol: bindActionCreators(protocolFileActions.exportProtocol, dispatch),
+    // saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
+    // exportProtocol: bindActionCreators(protocolFileActions.exportProtocol, dispatch),
     loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   };
 }

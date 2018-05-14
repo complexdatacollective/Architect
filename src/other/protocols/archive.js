@@ -27,7 +27,7 @@ const extract = (fileName) => {
 
 const archive = (workingPath, archivePath) =>
   new Promise((resolve, reject) => {
-    const output = fs.createWriteStream(`${archivePath}.zip`); // TODO: remove .zip
+    const output = fs.createWriteStream(archivePath);
     const zip = archiver('zip', archiveOptions);
 
     output.on('close', () => {

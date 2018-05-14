@@ -2,7 +2,7 @@
 
 import { existsSync } from 'fs';
 import { uniqBy } from 'lodash';
-import { createProtocol, loadProtocolData, locateProtocol } from '../../../other/protocols';
+import { createProtocol, loadProtocolData, locateProtocol, openProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as protocolsActions } from '../protocols';
 
@@ -47,15 +47,16 @@ const createProtocolAction = (callback = () => {}) =>
     createProtocol()
       .then((protocolMeta) => {
         dispatch(protocolsActions.addProtocolToIndex(protocolMeta));
-        // callback(protocolPath);
+        callback(protocolMeta);
       });
 
 const chooseProtocolAction = (callback = () => {}) =>
   dispatch =>
     locateProtocol()
-      .then((protocolPath) => {
-        // dispatch(protocolsActions.addProtocolToIndex(protocolPath));
-        // callback(protocolPath);
+      .then(openProtocol)
+      .then((protocolMeta) => {
+        dispatch(protocolsActions.addProtocolToIndex(protocolMeta));
+        callback(protocolMeta);
       });
 
 const clearDeadLinks = () =>
@@ -65,8 +66,8 @@ const clearDeadLinks = () =>
     protocols
       .forEach(
         (protocol) => {
-          if (!existsSync(protocol.path)) {
-            dispatch(removeProtocolFromIndex(protocol.path));
+          if (!existsSync(protocol.archivePath) || !existsSync(protocol.workingPath)) {
+            dispatch(removeProtocolFromIndex(protocol));
           }
         },
       );

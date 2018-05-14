@@ -26,8 +26,8 @@ class Start extends PureComponent {
     this.props.clearDeadLinks();
   }
 
-  openProtocol = (path) => {
-    this.props.history.push(`/edit/${encodeURIComponent(path)}`);
+  openProtocol = (protocol) => {
+    this.props.history.push(`/edit/${encodeURIComponent(protocol.workingPath)}`);
   }
 
   render() {
@@ -68,8 +68,8 @@ class Start extends PureComponent {
                   key={index}
                 >
                   <ProtocolCard
-                    path={protocol.path}
-                    name={protocol.path}
+                    path={protocol.workingPath}
+                    name={protocol.archivePath}
                   />
                 </div>
               )) }
