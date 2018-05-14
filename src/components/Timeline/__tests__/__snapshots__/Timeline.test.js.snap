@@ -5,9 +5,9 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Timeline
+    onCreateStage={[Function]}
     onEditSkipLogic={[Function]}
     onEditStage={[Function]}
-    onInsertStage={[Function]}
     stages={Array []}
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -37,13 +37,14 @@ ShallowWrapper {
                 <div
                         className="timeline__stages"
                 >
-                        <div
-                                className="timeline__stages-highlight"
-                                style={
-                                        Object {
-                                                "transform": "translateY(0px)",
-                                              }
-                                }
+                        <TransitionGroup
+                                childFactory={[Function]}
+                                component={null}
+                        >
+                                
+                        </TransitionGroup>
+                        <InsertStage
+                                onSelectStageType={[Function]}
                         />
                 </div>
         </div>
@@ -69,13 +70,14 @@ ShallowWrapper {
             <div
                         className="timeline__stages"
             >
-                        <div
-                                    className="timeline__stages-highlight"
-                                    style={
-                                                Object {
-                                                            "transform": "translateY(0px)",
-                                                          }
-                                    }
+                        <TransitionGroup
+                                    childFactory={[Function]}
+                                    component={null}
+                        >
+                                    
+                        </TransitionGroup>
+                        <InsertStage
+                                    onSelectStageType={[Function]}
                         />
             </div>
 </div>,
@@ -107,13 +109,14 @@ ShallowWrapper {
               <div
                 className="timeline__stages"
 >
-                <div
-                                className="timeline__stages-highlight"
-                                style={
-                                                Object {
-                                                                "transform": "translateY(0px)",
-                                                              }
-                                }
+                <TransitionGroup
+                                childFactory={[Function]}
+                                component={null}
+                >
+                                
+                </TransitionGroup>
+                <InsertStage
+                                onSelectStageType={[Function]}
                 />
 </div>,
             ],
@@ -138,33 +141,45 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <div
-                    className="timeline__stages-highlight"
-                    style={
-                                        Object {
-                                                            "transform": "translateY(0px)",
-                                                          }
-                    }
+                  false,
+                  <TransitionGroup
+                    childFactory={[Function]}
+                    component={null}
+>
+                    
+</TransitionGroup>,
+                  <InsertStage
+                    onSelectStageType={[Function]}
 />,
-                  Array [],
                 ],
                 "className": "timeline__stages",
               },
               "ref": null,
               "rendered": Array [
+                false,
                 Object {
                   "instance": null,
-                  "key": "highlight",
-                  "nodeType": "host",
+                  "key": undefined,
+                  "nodeType": "class",
                   "props": Object {
-                    "className": "timeline__stages-highlight",
-                    "style": Object {
-                      "transform": "translateY(0px)",
-                    },
+                    "childFactory": [Function],
+                    "children": Array [],
+                    "component": null,
+                  },
+                  "ref": null,
+                  "rendered": Array [],
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "onSelectStageType": [Function],
                   },
                   "ref": null,
                   "rendered": null,
-                  "type": "div",
+                  "type": [Function],
                 },
               ],
               "type": "div",
@@ -198,13 +213,14 @@ ShallowWrapper {
                     <div
                               className="timeline__stages"
                     >
-                              <div
-                                        className="timeline__stages-highlight"
-                                        style={
-                                                  Object {
-                                                            "transform": "translateY(0px)",
-                                                          }
-                                        }
+                              <TransitionGroup
+                                        childFactory={[Function]}
+                                        component={null}
+                              >
+                                        
+                              </TransitionGroup>
+                              <InsertStage
+                                        onSelectStageType={[Function]}
                               />
                     </div>
           </div>
@@ -230,13 +246,14 @@ ShallowWrapper {
               <div
                             className="timeline__stages"
               >
-                            <div
-                                          className="timeline__stages-highlight"
-                                          style={
-                                                        Object {
-                                                                      "transform": "translateY(0px)",
-                                                                    }
-                                          }
+                            <TransitionGroup
+                                          childFactory={[Function]}
+                                          component={null}
+                            >
+                                          
+                            </TransitionGroup>
+                            <InsertStage
+                                          onSelectStageType={[Function]}
                             />
               </div>
 </div>,
@@ -268,13 +285,14 @@ ShallowWrapper {
                 <div
                   className="timeline__stages"
 >
-                  <div
-                                    className="timeline__stages-highlight"
-                                    style={
-                                                      Object {
-                                                                        "transform": "translateY(0px)",
-                                                                      }
-                                    }
+                  <TransitionGroup
+                                    childFactory={[Function]}
+                                    component={null}
+                  >
+                                    
+                  </TransitionGroup>
+                  <InsertStage
+                                    onSelectStageType={[Function]}
                   />
 </div>,
               ],
@@ -299,33 +317,45 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": Array [
-                    <div
-                      className="timeline__stages-highlight"
-                      style={
-                                            Object {
-                                                                  "transform": "translateY(0px)",
-                                                                }
-                      }
+                    false,
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component={null}
+>
+                      
+</TransitionGroup>,
+                    <InsertStage
+                      onSelectStageType={[Function]}
 />,
-                    Array [],
                   ],
                   "className": "timeline__stages",
                 },
                 "ref": null,
                 "rendered": Array [
+                  false,
                   Object {
                     "instance": null,
-                    "key": "highlight",
-                    "nodeType": "host",
+                    "key": undefined,
+                    "nodeType": "class",
                     "props": Object {
-                      "className": "timeline__stages-highlight",
-                      "style": Object {
-                        "transform": "translateY(0px)",
-                      },
+                      "childFactory": [Function],
+                      "children": Array [],
+                      "component": null,
+                    },
+                    "ref": null,
+                    "rendered": Array [],
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "onSelectStageType": [Function],
                     },
                     "ref": null,
                     "rendered": null,
-                    "type": "div",
+                    "type": [Function],
                   },
                 ],
                 "type": "div",

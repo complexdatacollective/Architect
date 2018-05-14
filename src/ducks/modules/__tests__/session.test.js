@@ -42,13 +42,13 @@ describe('session reducer', () => {
   });
 
   describe('change tracking', () => {
-    it('tracks changes on ADD_STAGE and UPDATE_STAGE', () => {
-      const addStageState = reducer(
+    it('tracks changes on CREATE_STAGE and UPDATE_STAGE', () => {
+      const createStageState = reducer(
         undefined,
-        stageActions.addStage({}),
+        stageActions.createStage({}),
       );
 
-      expect(addStageState.lastChanged > 0).toBe(true);
+      expect(createStageState.lastChanged > 0).toBe(true);
 
       const updateStageState = reducer(
         undefined,

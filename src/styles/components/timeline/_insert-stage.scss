@@ -1,0 +1,82 @@
+$stage-height: (9/16) * 100%;
+$stage-columns: 3;
+$stage-gap: unit(2);
+$stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-gap / $stage-columns});
+
+.timeline-insert-stage {
+  background-color: var(--architect-drawer-background);
+  color: var(--architect-drawer-text);
+  transform-origin: top;
+  display: flex;
+  width: 100%;
+
+  &__guidance {
+    flex: 0 0 40%;
+    position: relative;
+    background-color: var(--architect-drawer-background--guidance);
+
+    &-item, &-introduction {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: unit(4);
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
+      opacity: 0;
+
+      &--is-active {
+        transition: opacity var(--animation-duration-fast) var(--animation-easing);
+        opacity: 1;
+      }
+    }
+
+    &-introduction {
+      opacity: 1;
+    }
+
+    &--is-active {
+      .timeline-insert-stage__guidance-introduction {
+        opacity: 0;
+      }
+    }
+  }
+
+  &__options {
+    flex: 0 0 60%;
+    display: grid;
+    padding: unit(4);
+    grid-template-columns: repeat($stage-columns, $stage-width);
+    grid-gap: unit(2);
+    grid-auto-rows: minmax(100px, auto);
+  }
+
+  &__option {
+    height: 0;
+    padding-bottom: $stage-height;
+    border: 2px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color var(--animation-duration-standard) var(--animation-easing);
+    position: relative;
+    background-color: var(--architect-drawer-background--guidance);
+
+
+    &-preview, &-description {
+      display: inline-flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-description {
+      height: 100%;
+    }
+
+    &:hover {
+      border-color: var(--architect-intent);
+    }
+  }
+}

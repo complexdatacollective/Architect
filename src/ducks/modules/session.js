@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action = {}) {
         activeProtocol: action.path,
       };
     }
-    case protocolStageActionTypes.ADD_STAGE:
+    case protocolStageActionTypes.CREATE_STAGE:
     case protocolStageActionTypes.UPDATE_STAGE:
       return {
         ...state,

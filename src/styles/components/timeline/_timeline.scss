@@ -43,6 +43,7 @@ $stage-padding: unit(5);
   &__stages {
     position: relative;
     margin: unit(6) 0 0;
+    perspective: 1000px;
 
     &-highlight {
       position: absolute;

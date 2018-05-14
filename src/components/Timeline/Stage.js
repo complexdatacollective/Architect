@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import cx from 'classnames';
+import { Transition } from 'react-transition-group';
 import { Zoom } from '../../behaviours';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import timelineImages from '../../images/timeline';
@@ -91,38 +92,42 @@ class TimelineStage extends PureComponent {
     );
 
     return (
-      <div className={componentClasses} {...rest}>
-        <div
-          className="timeline-stage__notch"
-          onClick={onEditStage}
-        />
-        <EditStageButton
-          onEditStage={onEditStage}
-          type={type}
-          label={label}
-          zoomColors={zoomColors}
-        />
-        <div className="timeline-stage__controls">
-          <a
-            className="timeline-stage__control"
-            onClick={() => onInsertStage(-1)}
-          >
-            <div className="timeline-stage__control-icon">↑</div>
-            Add screen before
-          </a>
-          <ConfigureSkipLogicButton
-            onEditSkipLogic={onEditSkipLogic}
-            zoomColors={['#ffffff', '#f2b700']}
+      <Transition
+        timeout={0}
+      >
+        <div className={componentClasses} {...rest}>
+          <div
+            className="timeline-stage__notch"
+            onClick={onEditStage}
           />
-          <a
-            className="timeline-stage__control"
-            onClick={() => onInsertStage(1)}
-          >
-            <div className="timeline-stage__control-icon">↓</div>
-            Add screen after
-          </a>
+          <EditStageButton
+            onEditStage={onEditStage}
+            type={type}
+            label={label}
+            zoomColors={zoomColors}
+          />
+          <div className="timeline-stage__controls">
+            <a
+              className="timeline-stage__control"
+              onClick={() => onInsertStage(0)}
+            >
+              <div className="timeline-stage__control-icon">↑</div>
+              Add screen before
+            </a>
+            <ConfigureSkipLogicButton
+              onEditSkipLogic={onEditSkipLogic}
+              zoomColors={['#ffffff', '#f2b700']}
+            />
+            <a
+              className="timeline-stage__control"
+              onClick={() => onInsertStage(1)}
+            >
+              <div className="timeline-stage__control-icon">↓</div>
+              Add screen after
+            </a>
+          </div>
         </div>
-      </div>
+      </Transition>
     );
   }
 }
