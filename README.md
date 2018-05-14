@@ -32,6 +32,15 @@ This repository assumes that `npm` is installed. If you don't have it installed,
 |`package-cordova`|Builds Android and iOS cordova projects|
 |`create-installer-mac`|Creates a DMG based installer for OSX.|
 
+### Development workflow in Electron
+
+There are two additional tasks to enable development within an electron app natively:
+
+1. `npm run start:electron`: to start the webpack dev server
+  - Note: must be running on port 3000.
+2. `npm run electron:dev` (in another terminal session)
+  1. Copies the electron source to `./electron-dev`
+  2. Runs the electron app from there
 
 ## Application Structure
 

@@ -31,6 +31,20 @@ log.info('App starting...');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+function getAppUrl() {
+  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
+    return url.format({
+      host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
+      protocol: 'http'
+    });
+  }
+
+  return url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:'
+  });
+}
+
 function createWindow() {
   registerProtocolProtocol();
 
@@ -38,10 +52,7 @@ function createWindow() {
   mainWindow = new BrowserWindow(windowParameters);
   mainWindow.maximize();
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:'
-  }));
+  mainWindow.loadURL(getAppUrl());
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
