@@ -27,7 +27,8 @@ class Start extends PureComponent {
   }
 
   openProtocol = (protocol) => {
-    this.props.history.push(`/edit/${encodeURIComponent(protocol.workingPath)}`);
+    debugger;
+    this.props.history.push(`/edit/${encodeURIComponent(protocol.id)}`);
   }
 
   render() {
@@ -68,8 +69,7 @@ class Start extends PureComponent {
                   key={index}
                 >
                   <ProtocolCard
-                    path={protocol.workingPath}
-                    name={protocol.archivePath}
+                    protocol={protocol}
                   />
                 </div>
               )) }

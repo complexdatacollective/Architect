@@ -3,7 +3,7 @@ import { actionTypes as protocolFileActionTypes } from './protocol/file';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 
 const initialState = {
-  activeProtocol: '', // local path
+  activeProtocol: {}, // protocolMeta
   lastSaved: 0,
   lastChanged: 0,
 };
@@ -13,7 +13,9 @@ export default function reducer(state = initialState, action = {}) {
     case protocolActionTypes.SET_PROTOCOL: {
       return {
         ...state,
-        activeProtocol: action.path,
+        activeProtocol: action.meta,
+        lastSaved: 0,
+        lastChanged: 0,
       };
     }
     case protocolStageActionTypes.CREATE_STAGE:

@@ -32,7 +32,6 @@ class Protocol extends PureComponent {
     match: PropTypes.object.isRequired,
     loadProtocol: PropTypes.func.isRequired,
     saveProtocol: PropTypes.func.isRequired,
-    exportProtocol: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -49,8 +48,8 @@ class Protocol extends PureComponent {
   }
 
   componentDidMount() {
-    const protocolPath = decodeURIComponent(this.props.match.params.protocol);
-    this.props.loadProtocol(protocolPath);
+    const protocolId = decodeURIComponent(this.props.match.params.protocol);
+    this.props.loadProtocol(protocolId);
   }
 
   onCardComplete = () => {
@@ -168,7 +167,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
-    // exportProtocol: bindActionCreators(protocolFileActions.exportProtocol, dispatch),
     loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   };
 }

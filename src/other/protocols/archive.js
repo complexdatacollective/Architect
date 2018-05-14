@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { remote } from 'electron';
 import uuid from 'uuid';
 import path from 'path';
@@ -15,9 +13,9 @@ const archiveOptions = {
 export const getProtocolNameFromArchivePath = fileName => path.basename(fileName, '.netcanvas');
 export const getLocalDirectoryFromProtocolName = protocolName => path.join(remote.app.getPath('temp'), uuid(), protocolName);
 
-// returns promise
 const extract = (fileName) => {
-  const workingPath = getLocalDirectoryFromProtocolName(getProtocolNameFromArchivePath(fileName));
+  const uid = uuid();
+  const workingPath = path.join(remote.app.getPath('temp'), uid);
 
   return decompress(
     fileName,

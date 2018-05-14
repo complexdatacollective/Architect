@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+import uuid from 'uuid';
 import { existsSync } from 'fs';
 import { uniqBy } from 'lodash';
 import { createProtocol, loadProtocolData, locateProtocol, openProtocol } from '../../../other/protocols';
@@ -13,11 +14,15 @@ const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ADD_PROTOCOL_TO_INDEX:
-      return uniqBy([
+    case ADD_PROTOCOL_TO_INDEX: {
+      const newProtocols = [
         ...state,
         action.protocol,
-      ], 'archivePath').slice(-10);
+      ];
+
+      return uniqBy(newProtocols, 'archivePath')
+        .slice(-10);
+    }
     case REMOVE_PROTOCOL_FROM_INDEX:
       return state
         .filter(protocol => protocol.workingPath !== action.protocol.workingPath);
@@ -29,7 +34,10 @@ export default function reducer(state = initialState, action = {}) {
 const addProtocolToIndex = protocol =>
   ({
     type: ADD_PROTOCOL_TO_INDEX,
-    protocol,
+    protocol: {
+      ...protocol,
+      id: uuid(),
+    },
   });
 
 const removeProtocolFromIndex = protocol =>
@@ -38,25 +46,36 @@ const removeProtocolFromIndex = protocol =>
     protocol,
   });
 
-const loadProtocolAction = path =>
-  dispatch =>
-    dispatch(protocolActions.setProtocol(loadProtocolData(path), path));
+const loadProtocolAction = protocolId =>
+  (dispatch, getState) => {
+    const { protocols } = getState();
+    const protocolMeta = protocols.find(protocol => protocol.id === protocolId);
+    debugger;
+    dispatch(protocolActions.setProtocol(loadProtocolData(protocolMeta.workingPath), protocolMeta));
+  };
 
 const createProtocolAction = (callback = () => {}) =>
-  dispatch =>
+  (dispatch) =>
     createProtocol()
       .then((protocolMeta) => {
-        dispatch(protocolsActions.addProtocolToIndex(protocolMeta));
-        callback(protocolMeta);
+        const action = protocolsActions.addProtocolToIndex(protocolMeta);
+        dispatch(action);
+        callback(action.protocol);
       });
 
 const chooseProtocolAction = (callback = () => {}) =>
-  dispatch =>
+  (dispatch, getState) =>
     locateProtocol()
-      .then(openProtocol)
+      .then((archivePath) => {
+        const { protocols } = getState();
+        const existingEntry = protocols.find(protocol => protocol.archivePath === archivePath);
+        if (existingEntry) { return existingEntry; }
+        return openProtocol(archivePath);
+      })
       .then((protocolMeta) => {
-        dispatch(protocolsActions.addProtocolToIndex(protocolMeta));
-        callback(protocolMeta);
+        const action = protocolsActions.addProtocolToIndex(protocolMeta);
+        dispatch(action);
+        callback(action.protocol);
       });
 
 const clearDeadLinks = () =>
