@@ -1,18 +1,23 @@
+/* eslint-disable */
+
+import { remote } from 'electron';
+import uuid from 'uuid';
 import path from 'path';
 import fs from 'fs';
 import decompress from 'decompress';
 import archiver from 'archiver';
-import getLocalDirectory from './getLocalDirectory';
 
 const archiveOptions = {
-  zlib: { level: 9 },
+  // zlib: { level: 9 },
+  store: true,
 };
 
-const getProtocolName = fileName => path.basename(fileName, '.netcanvas');
+export const getProtocolNameFromArchivePath = fileName => path.basename(fileName, '.netcanvas');
+export const getLocalDirectoryFromProtocolName = protocolName => path.join(remote.app.getPath('temp'), uuid(), protocolName);
 
 // returns promise
 const extract = (fileName) => {
-  const workingPath = getLocalDirectory(getProtocolName(fileName));
+  const workingPath = getLocalDirectoryFromProtocolName(getProtocolNameFromArchivePath(fileName));
 
   return decompress(
     fileName,
@@ -20,12 +25,19 @@ const extract = (fileName) => {
   ).then(() => workingPath);
 };
 
-const archive = (workingPath, fileName) =>
+const archive = (workingPath, archivePath) =>
   new Promise((resolve, reject) => {
-    const output = fs.createWriteStream(fileName);
+    const output = fs.createWriteStream(`${archivePath}.zip`); // TODO: remove .zip
     const zip = archiver('zip', archiveOptions);
 
-    output.on('end', () => { resolve(fileName); });
+    output.on('close', () => {
+      resolve(workingPath, archivePath);
+    });
+
+    output.on('warning', reject);
+    output.on('error', reject);
+
+    zip.pipe(output);
 
     zip.on('warning', reject);
     zip.on('error', reject);

@@ -1,39 +1,41 @@
+/* eslint-disable */
+
 import { existsSync } from 'fs';
 import { uniqBy } from 'lodash';
 import { createProtocol, loadProtocolData, locateProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as protocolsActions } from '../protocols';
 
-const ADD_PROTOCOL_TO_DASHBOARD = Symbol('PROTOCOLS/ADD_PROTOCOL_TO_DASHBOARD');
-const REMOVE_PROTOCOL_FROM_DASHBOARD = Symbol('PROTOCOLS/REMOVE_PROTOCOL_FROM_DASHBOARD');
+const ADD_PROTOCOL_TO_INDEX = Symbol('PROTOCOLS/ADD_PROTOCOL_TO_INDEX');
+const REMOVE_PROTOCOL_FROM_INDEX = Symbol('PROTOCOLS/REMOVE_PROTOCOL_FROM_INDEX');
 
 const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ADD_PROTOCOL_TO_DASHBOARD:
+    case ADD_PROTOCOL_TO_INDEX:
       return uniqBy([
         ...state,
         action.protocol,
-      ], 'path').slice(-10);
-    case REMOVE_PROTOCOL_FROM_DASHBOARD:
+      ], 'archivePath').slice(-10);
+    case REMOVE_PROTOCOL_FROM_INDEX:
       return state
-        .filter(protocol => protocol.path !== action.protocol.path);
+        .filter(protocol => protocol.workingPath !== action.protocol.workingPath);
     default:
       return state;
   }
 }
 
-const addProtocolToDashboard = path =>
+const addProtocolToIndex = protocol =>
   ({
-    type: ADD_PROTOCOL_TO_DASHBOARD,
-    protocol: { path },
+    type: ADD_PROTOCOL_TO_INDEX,
+    protocol,
   });
 
-const removeProtocolFromDashboard = path =>
+const removeProtocolFromIndex = protocol =>
   ({
-    type: REMOVE_PROTOCOL_FROM_DASHBOARD,
-    protocol: { path },
+    type: REMOVE_PROTOCOL_FROM_INDEX,
+    protocol,
   });
 
 const loadProtocolAction = path =>
@@ -43,17 +45,17 @@ const loadProtocolAction = path =>
 const createProtocolAction = (callback = () => {}) =>
   dispatch =>
     createProtocol()
-      .then((protocolPath) => {
-        dispatch(protocolsActions.addProtocolToDashboard(protocolPath));
-        callback(protocolPath);
+      .then((protocolMeta) => {
+        dispatch(protocolsActions.addProtocolToIndex(protocolMeta));
+        // callback(protocolPath);
       });
 
 const chooseProtocolAction = (callback = () => {}) =>
   dispatch =>
     locateProtocol()
       .then((protocolPath) => {
-        dispatch(protocolsActions.addProtocolToDashboard(protocolPath));
-        callback(protocolPath);
+        // dispatch(protocolsActions.addProtocolToIndex(protocolPath));
+        // callback(protocolPath);
       });
 
 const clearDeadLinks = () =>
@@ -64,15 +66,15 @@ const clearDeadLinks = () =>
       .forEach(
         (protocol) => {
           if (!existsSync(protocol.path)) {
-            dispatch(removeProtocolFromDashboard(protocol.path));
+            dispatch(removeProtocolFromIndex(protocol.path));
           }
         },
       );
   };
 
 const actionCreators = {
-  addProtocolToDashboard,
-  removeProtocolFromDashboard,
+  addProtocolToIndex,
+  removeProtocolFromIndex,
   clearDeadLinks,
   createProtocol: createProtocolAction,
   loadProtocol: loadProtocolAction,
@@ -80,7 +82,7 @@ const actionCreators = {
 };
 
 const actionTypes = {
-  ADD_PROTOCOL_TO_DASHBOARD,
+  ADD_PROTOCOL_TO_INDEX,
 };
 
 export {

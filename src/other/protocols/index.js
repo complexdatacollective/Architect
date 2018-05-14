@@ -1,4 +1,3 @@
-export { default as exportProtocol } from './exportProtocol';
 export { default as saveProtocol } from './saveProtocol';
 export { default as createProtocol } from './createProtocol';
 export { default as loadProtocolData } from './loadProtocolData';

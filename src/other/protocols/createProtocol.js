@@ -1,8 +1,12 @@
 import { remote } from 'electron';
 import fs from 'fs';
+import mkdirp from 'mkdirp';
 import path from 'path';
-import getLocalDirectory from './getLocalDirectory';
-import { archive } from './archive';
+import {
+  getLocalDirectoryFromProtocolName,
+  getProtocolNameFromArchivePath,
+  archive,
+} from './archive';
 
 const saveDialogOptions = {
   buttonLabel: 'Create',
@@ -22,26 +26,37 @@ const saveDialog = () =>
     });
   });
 
+const createEmptyProtocol = workingPath =>
+  new Promise((resolve) => {
+    const assetsPath = path.join(workingPath, 'assets');
+    const protocolPath = path.join(workingPath, 'protocol.json');
+    mkdirp.sync(workingPath);
+    fs.mkdirSync(assetsPath);
+    fs.writeFileSync(protocolPath, '{}');
+    resolve();
+  });
+
+export const createEmptyArchive = ({ workingPath, archivePath }) =>
+  createEmptyProtocol(workingPath)
+    .then(archive(workingPath, archivePath));
+
 /**
  * Shows a save dialog and then creates an empty protocol there
  */
-const createProtocol = (protocolName) => {
-  const workingPath = getLocalDirectory(protocolName);
-
-  return saveDialog()
+const createProtocol = () =>
+  saveDialog()
     .then((archivePath) => {
-      const assetsPath = path.join(workingPath, 'assets');
-      const protocolPath = path.join(workingPath, 'protocol.json');
-      fs.mkdirSync(workingPath);
-      fs.mkdirSync(assetsPath);
-      fs.writeFileSync(protocolPath, '{}');
+      const protocolName = getProtocolNameFromArchivePath(archivePath);
+      const workingPath = getLocalDirectoryFromProtocolName(protocolName);
 
-      return archive(workingPath, archivePath)
+      return createEmptyArchive({
+        workingPath,
+        archivePath,
+      })
         .then(() => ({
           workingPath,
           archivePath,
         }));
     });
-};
 
 export default createProtocol;
