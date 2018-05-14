@@ -9,6 +9,9 @@
 /docs-build
 /plugins
 
+# local dev build output
+electron-dev/
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
