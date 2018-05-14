@@ -28,8 +28,10 @@ const resolverAlias = {};
 if (process.env.BUILD_TARGET === 'web') {
   // To open the dev app in a browser, some libs need to be polyfilled.
   // The trailing $ tells webpack to match the import name exactly.
-  resolverAlias.electron$ = path.join(paths.appSrc, 'utils', 'electron-shim.js');
-  resolverAlias.fs$ = path.join(paths.appSrc, 'utils', 'fs-shim.js');
+  resolverAlias.electron$ = path.join(paths.appSrc, 'utils', 'webShims', 'electron.js');
+  resolverAlias.fs$ = path.join(paths.appSrc, 'utils', 'webShims', 'fs.js');
+  resolverAlias.archiver$ = path.join(paths.appSrc, 'utils', 'webShims', 'archiver.js');
+  resolverAlias.decompress$ = path.join(paths.appSrc, 'utils', 'webShims', 'decompress.js');
 }
 
 // This is the development configuration.
