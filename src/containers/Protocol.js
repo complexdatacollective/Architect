@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -92,7 +91,6 @@ class Protocol extends PureComponent {
       hasChanges,
       hasUnsavedChanges,
       saveProtocol,
-      exportProtocol,
     } = this.props;
 
     const protocolClasses = cx(

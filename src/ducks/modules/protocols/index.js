@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import uuid from 'uuid';
 import { existsSync } from 'fs';
 import { uniqBy } from 'lodash';
@@ -46,16 +44,17 @@ const removeProtocolFromIndex = protocol =>
     protocol,
   });
 
+// TODO: Move getState dependent logic into reducers
 const loadProtocolAction = protocolId =>
   (dispatch, getState) => {
     const { protocols } = getState();
     const protocolMeta = protocols.find(protocol => protocol.id === protocolId);
     const protocolData = loadProtocolData(protocolMeta.workingPath);
-    dispatch(protocolActions.setProtocol(protocolData, protocolMeta)); // TODO: Move this into reducers
+    dispatch(protocolActions.setProtocol(protocolData, protocolMeta));
   };
 
 const createProtocolAction = (callback = () => {}) =>
-  (dispatch) =>
+  dispatch =>
     createProtocol()
       .then((protocolMeta) => {
         const action = protocolsActions.addProtocolToIndex(protocolMeta);

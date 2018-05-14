@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import cx from 'classnames';
-import { Transition } from 'react-transition-group';
 import { Zoom } from '../../behaviours';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import timelineImages from '../../images/timeline';
