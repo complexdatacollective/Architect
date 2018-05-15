@@ -1,14 +1,19 @@
 import uuid from 'uuid';
 import { existsSync } from 'fs';
-import { uniqBy } from 'lodash';
+import { uniqBy, get, omit } from 'lodash';
+import { REHYDRATE } from 'redux-persist/constants';
 import { createProtocol, loadProtocolData, locateProtocol, openProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as protocolsActions } from '../protocols';
 
 const ADD_PROTOCOL_TO_INDEX = Symbol('PROTOCOLS/ADD_PROTOCOL_TO_INDEX');
 const REMOVE_PROTOCOL_FROM_INDEX = Symbol('PROTOCOLS/REMOVE_PROTOCOL_FROM_INDEX');
+const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
 
 const initialState = [];
+
+const archiveExists = protocol => existsSync(protocol.archivePath);
+const pruneWorkingPath = protocol => omit(protocol, 'workingPath');
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -24,6 +29,15 @@ export default function reducer(state = initialState, action = {}) {
     case REMOVE_PROTOCOL_FROM_INDEX:
       return state
         .filter(protocol => protocol.workingPath !== action.protocol.workingPath);
+    case CLEAR_DEAD_LINKS:
+      return state.filter(archiveExists);
+    case REHYDRATE: {
+      const protocols = get(action, ['payload', 'protocols'], []);
+
+      return protocols
+        .filter(archiveExists)
+        .map(pruneWorkingPath);
+    }
     default:
       return state;
   }
@@ -42,6 +56,11 @@ const removeProtocolFromIndex = protocol =>
   ({
     type: REMOVE_PROTOCOL_FROM_INDEX,
     protocol,
+  });
+
+const clearDeadLinks = () =>
+  ({
+    type: CLEAR_DEAD_LINKS,
   });
 
 // TODO: Move getState dependent logic into reducers
@@ -76,20 +95,6 @@ const chooseProtocolAction = (callback = () => {}) =>
         dispatch(action);
         callback(action.protocol);
       });
-
-const clearDeadLinks = () =>
-  (dispatch, getState) => {
-    const { protocols } = getState();
-
-    protocols
-      .forEach(
-        (protocol) => {
-          if (!existsSync(protocol.archivePath) || !existsSync(protocol.workingPath)) {
-            dispatch(removeProtocolFromIndex(protocol));
-          }
-        },
-      );
-  };
 
 const actionCreators = {
   addProtocolToIndex,
