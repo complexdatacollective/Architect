@@ -3,16 +3,24 @@ import stages from './stages';
 import forms from './forms';
 import variableRegistry from './variableRegistry';
 import externalData from './externalData';
+import { loadProtocolData } from '../../../other/protocols';
 
 const initialState = {};
 
 const SET_PROTOCOL = Symbol('PROTOCOL/SET_PROTOCOL');
+
 
 const setProtocol = (protocol, meta) => ({
   type: SET_PROTOCOL,
   protocol,
   meta,
 });
+
+const loadProtocol = protocolMeta =>
+  (dispatch) => {
+    const protocolData = loadProtocolData(protocolMeta.workingPath);
+    dispatch(setProtocol(protocolData, protocolMeta));
+  };
 
 const resetProtocol = () => ({
   type: SET_PROTOCOL,
@@ -30,6 +38,7 @@ function protocolReducer(state = initialState, action = {}) {
 
 const actionCreators = {
   setProtocol,
+  loadProtocol,
   resetProtocol,
 };
 
