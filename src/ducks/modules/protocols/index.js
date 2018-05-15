@@ -1,14 +1,13 @@
 import uuid from 'uuid';
 import { existsSync } from 'fs';
-import { uniqBy, get, omit } from 'lodash';
+import { uniqBy, get, has, omit } from 'lodash';
 import { REHYDRATE } from 'redux-persist/constants';
-import { createProtocol, locateProtocol, openProtocol } from '../../../other/protocols';
+import { createProtocol, loadProtocolData, locateProtocol, openProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as protocolsActions } from '../protocols';
 
-const UPDATE_INDEX = Symbol('PROTOCOLS/UPDATE_INDEX');
-const ADD_PROTOCOL_TO_INDEX = Symbol('PROTOCOLS/ADD_PROTOCOL_TO_INDEX');
-const REMOVE_PROTOCOL_FROM_INDEX = Symbol('PROTOCOLS/REMOVE_PROTOCOL_FROM_INDEX');
+const UPDATE_PROTOCOL = Symbol('PROTOCOLS/UPDATE_PROTOCOL');
+const NEW_PROTOCOL = Symbol('PROTOCOLS/NEW_PROTOCOL');
 const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
 
 const initialState = [];
@@ -18,7 +17,7 @@ const pruneWorkingPath = protocol => omit(protocol, 'workingPath');
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ADD_PROTOCOL_TO_INDEX: {
+    case NEW_PROTOCOL: {
       const newProtocols = [
         ...state,
         action.protocol,
@@ -27,15 +26,12 @@ export default function reducer(state = initialState, action = {}) {
       return uniqBy(newProtocols, 'archivePath')
         .slice(-10);
     }
-    case UPDATE_INDEX: {
+    case UPDATE_PROTOCOL: {
       return state.map((protocol) => {
-        if (protocol.id != action.id) { return protocol; }
+        if (protocol.id !== action.id) { return protocol; }
         return { ...protocol, ...action.protocol };
       });
     }
-    case REMOVE_PROTOCOL_FROM_INDEX:
-      return state
-        .filter(protocol => protocol.id !== action.id);
     case CLEAR_DEAD_LINKS:
       return state.filter(archiveExists);
     case REHYDRATE: {
@@ -50,26 +46,20 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const addProtocolToIndex = protocol =>
+const newProtocol = protocol =>
   ({
-    type: ADD_PROTOCOL_TO_INDEX,
+    type: NEW_PROTOCOL,
     protocol: {
       ...protocol,
       id: uuid(),
     },
   });
 
-const updateIndex = (id, protocol) =>
+const updateProtocol = (id, protocol) =>
   ({
-    type: UPDATE_INDEX,
+    type: UPDATE_PROTOCOL,
     id,
     protocol,
-  });
-
-const removeProtocolFromIndex = id =>
-  ({
-    type: REMOVE_PROTOCOL_FROM_INDEX,
-    id,
   });
 
 const clearDeadLinks = () =>
@@ -77,22 +67,29 @@ const clearDeadLinks = () =>
     type: CLEAR_DEAD_LINKS,
   });
 
-// TODO: Move getState dependent logic into reducers?
+const prepareWorkingCopy = (protocolMeta) => {
+  if (has(protocolMeta, 'workingPath')) {
+    return Promise.resolve(protocolMeta);
+  }
+
+  return openProtocol(protocolMeta.archivePath)
+    .then(
+      ({ workingPath }) =>
+        ({ ...protocolMeta, workingPath }),
+    );
+};
+
 const loadProtocolAction = protocolId =>
   (dispatch, getState) => {
     const { protocols } = getState();
     const protocolMeta = protocols.find(protocol => protocol.id === protocolId);
 
-    if (protocolMeta.workingPath) {
-      dispatch(protocolActions.loadProtocol(protocolMeta));
-      return;
-    }
+    prepareWorkingCopy(protocolMeta)
+      .then((protocolMetaWithWorkingPath) => {
+        const protocolData = loadProtocolData(protocolMetaWithWorkingPath.workingPath);
 
-    openProtocol(protocolMeta.archivePath)
-      .then(({ workingPath }) => {
-        const newProtocolMeta = { ...protocolMeta, workingPath };
-        dispatch(updateIndex(protocolMeta.id, newProtocolMeta));
-        dispatch(protocolActions.loadProtocol(newProtocolMeta));
+        dispatch(updateProtocol(protocolMetaWithWorkingPath.id, protocolMetaWithWorkingPath));
+        dispatch(protocolActions.setProtocol(protocolData, protocolMetaWithWorkingPath));
       });
   };
 
@@ -100,7 +97,7 @@ const createProtocolAction = (callback = () => {}) =>
   dispatch =>
     createProtocol()
       .then((protocolMeta) => {
-        const action = protocolsActions.addProtocolToIndex(protocolMeta);
+        const action = protocolsActions.newProtocol(protocolMeta);
         dispatch(action);
         callback(action.protocol);
       });
@@ -111,18 +108,18 @@ const chooseProtocolAction = (callback = () => {}) =>
       .then((archivePath) => {
         const { protocols } = getState();
         const existingEntry = protocols.find(protocol => protocol.archivePath === archivePath);
-        if (existingEntry) { return existingEntry; }
-        return { archivePath };
-      })
-      .then((protocolMeta) => {
-        const action = protocolsActions.addProtocolToIndex(protocolMeta);
-        dispatch(action);
-        callback(action.protocol);
+
+        if (existingEntry) {
+          return callback(existingEntry);
+        }
+
+        const newProtocolAction = protocolsActions.newProtocol({ archivePath });
+        dispatch(newProtocolAction);
+        return callback(newProtocolAction.protocol);
       });
 
 const actionCreators = {
-  addProtocolToIndex,
-  removeProtocolFromIndex,
+  newProtocol,
   clearDeadLinks,
   createProtocol: createProtocolAction,
   loadProtocol: loadProtocolAction,
@@ -130,7 +127,7 @@ const actionCreators = {
 };
 
 const actionTypes = {
-  ADD_PROTOCOL_TO_INDEX,
+  NEW_PROTOCOL,
 };
 
 export {
