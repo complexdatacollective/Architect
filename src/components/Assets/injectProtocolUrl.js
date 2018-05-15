@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const mapStateToProps = state => ({
   getProtocolUrl: url => (
     url ?
-      `protocol:/${path.join(state.session.activeProtocol, 'assets', path.basename(url))}` :
+      `protocol:/${path.join(state.session.activeProtocol.workingPath, 'assets', path.basename(url))}` :
       ''
   ),
 });

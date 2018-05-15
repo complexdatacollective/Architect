@@ -8,9 +8,10 @@ const initialState = {};
 
 const SET_PROTOCOL = Symbol('PROTOCOL/SET_PROTOCOL');
 
-const setProtocol = protocol => ({
+const setProtocol = (protocol, meta) => ({
   type: SET_PROTOCOL,
   protocol,
+  meta,
 });
 
 const resetProtocol = () => ({
