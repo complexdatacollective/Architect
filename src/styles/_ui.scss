@@ -11,3 +11,63 @@
 @mixin preset($type-name, $type-property: null) {
   @include typography($type-name, $type-property);
 }
+
+/*
+  The following are private variables, not designed to be referenced
+  directly in component code, but instead designed to be "linked" to
+  our actual use cases.
+*/
+
+:root {
+  --z-index-1: 1;
+  --z-index-2: 2;
+  --z-index-3: 3;
+  --z-index-4: 4;
+  --z-index-5: 5;
+  --z-index-6: 6;
+  --z-index-7: 7;
+  --z-index-8: 8;
+  --z-index-9: 9;
+  --z-index-10: 10;
+}
+
+/*
+  Here we have our actual use cases, grouped by the levels above.
+
+  These are implemented within each app, so that apps can provide
+  shortcuts to the levels meaningful to them. Below is for NC.
+*/
+
+
+:root {
+  /* Level 1 */
+  --z-background: var(--z-index-1);
+
+  /* Level 2 */
+  --z-stage: var(--z-index-2);
+  --z-edge: var(--z-index-2);
+  --z-node: var(--z-index-2);
+  --z-default: var(--z-index-2);
+
+  /* Level 3 */
+  --z-panel:  var(--z-index-3);
+  --z-prompt:  var(--z-index-3);
+
+  /* Level 4 */
+  --z-global-ui:  var(--z-index-4);
+  --z-navigation:  var(--z-index-4);
+  --z-menu:  var(--z-index-4);
+
+  /* Level 5 */
+  --z-tooltip:  var(--z-index-5);
+  --z-toast-notification:  var(--z-index-5);
+
+  /* Level 6 */
+  --z-fullscreen-overlay:  var(--z-index-6);
+  --z-dialog:  var(--z-index-6);
+
+  /* Level 10 */
+  // Reserved for development stuff that must always be visible
+  --z-dev:  var(--z-index-10);
+
+}

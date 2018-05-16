@@ -1,6 +1,6 @@
 .card {
   position: absolute;
-  z-index: 1001; // above architect logo
+  z-index: var(--z-fullscreen-overlay);
   top: 0;
   left: 0;
   width: 100%;
@@ -26,6 +26,7 @@
 
   &__control-bar {
     @include flex-align(right, middle);
+    z-index: 2;
     flex: 0 0 60px;
     background-color: var(--background);
     transform: translateZ(0) translateY(100%);

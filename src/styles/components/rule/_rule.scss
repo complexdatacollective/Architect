@@ -3,6 +3,7 @@
   @include flex-align(left, middle);
   color: var(--text-dark);
   position: relative;
+  z-index: var(--z-default);
 
   $drag-button-size: 60px;
 
