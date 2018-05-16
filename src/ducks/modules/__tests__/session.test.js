@@ -19,7 +19,6 @@ describe('session reducer', () => {
 
   describe('protocol actions', () => {
     it('updates path when protocol is set', () => {
-
       const newState = reducer(
         undefined,
         protocolActions.setProtocol(undefined, protocolMeta),

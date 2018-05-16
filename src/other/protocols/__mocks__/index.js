@@ -2,7 +2,7 @@
 
 export const importAssetToProtocol = jest.fn((protocolPath, filePath) => Promise.resolve(`${protocolPath}/${filePath}`));
 export const saveProtocol = jest.fn(() => Promise.resolve());
-export const openProtocol = jest.fn((protocolMeta) => Promise.resolve({ ...protocolMeta, workingPath: '/tmp/foo/bar' }));
+export const openProtocol = jest.fn(protocolMeta => Promise.resolve({ ...protocolMeta, workingPath: '/tmp/foo/bar' }));
 export const createProtocol = jest.fn(() => Promise.resolve({
   workingPath: '/tmp/foo/new-protocol',
   archivePath: '/foo/new-protocol',
