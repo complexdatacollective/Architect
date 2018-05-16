@@ -17,6 +17,7 @@ const setProtocol = (protocol, meta) => ({
 const resetProtocol = () => ({
   type: SET_PROTOCOL,
   protocol: {},
+  meta: {},
 });
 
 function protocolReducer(state = initialState, action = {}) {
