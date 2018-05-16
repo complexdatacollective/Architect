@@ -4,10 +4,9 @@ import { uniqBy, get, has, omit } from 'lodash';
 import { REHYDRATE } from 'redux-persist/constants';
 import { createProtocol, loadProtocolData, locateProtocol, openProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
-import { actionCreators as protocolsActions } from '../protocols';
 
 const UPDATE_PROTOCOL = Symbol('PROTOCOLS/UPDATE_PROTOCOL');
-const NEW_PROTOCOL = Symbol('PROTOCOLS/NEW_PROTOCOL');
+const ADD_PROTOCOL = Symbol('PROTOCOLS/ADD_PROTOCOL');
 const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
 
 const initialState = [];
@@ -17,7 +16,7 @@ const pruneWorkingPath = protocol => omit(protocol, 'workingPath');
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case NEW_PROTOCOL: {
+    case ADD_PROTOCOL: {
       const newProtocols = [
         ...state,
         action.protocol,
@@ -46,9 +45,9 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const newProtocol = protocol =>
+const addProtocol = protocol =>
   ({
-    type: NEW_PROTOCOL,
+    type: ADD_PROTOCOL,
     protocol: {
       ...protocol,
       id: uuid(),
@@ -84,7 +83,7 @@ const loadProtocolAction = protocolId =>
     const { protocols } = getState();
     const protocolMeta = protocols.find(protocol => protocol.id === protocolId);
 
-    prepareWorkingCopy(protocolMeta)
+    return prepareWorkingCopy(protocolMeta)
       .then((protocolMetaWithWorkingPath) => {
         const protocolData = loadProtocolData(protocolMetaWithWorkingPath.workingPath);
 
@@ -97,7 +96,7 @@ const createProtocolAction = (callback = () => {}) =>
   dispatch =>
     createProtocol()
       .then((protocolMeta) => {
-        const action = protocolsActions.newProtocol(protocolMeta);
+        const action = addProtocol(protocolMeta);
         dispatch(action);
         callback(action.protocol);
       });
@@ -113,13 +112,14 @@ const chooseProtocolAction = (callback = () => {}) =>
           return callback(existingEntry);
         }
 
-        const newProtocolAction = protocolsActions.newProtocol({ archivePath });
+        const newProtocolAction = addProtocol({ archivePath });
         dispatch(newProtocolAction);
         return callback(newProtocolAction.protocol);
       });
 
 const actionCreators = {
-  newProtocol,
+  addProtocol,
+  updateProtocol,
   clearDeadLinks,
   createProtocol: createProtocolAction,
   loadProtocol: loadProtocolAction,
@@ -127,7 +127,7 @@ const actionCreators = {
 };
 
 const actionTypes = {
-  NEW_PROTOCOL,
+  ADD_PROTOCOL,
 };
 
 export {
