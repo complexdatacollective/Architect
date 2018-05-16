@@ -37,12 +37,6 @@ ShallowWrapper {
                 <div
                         className="timeline__stages"
                 >
-                        <TransitionGroup
-                                childFactory={[Function]}
-                                component={null}
-                        >
-                                
-                        </TransitionGroup>
                         <InsertStage
                                 onSelectStageType={[Function]}
                         />
@@ -70,12 +64,6 @@ ShallowWrapper {
             <div
                         className="timeline__stages"
             >
-                        <TransitionGroup
-                                    childFactory={[Function]}
-                                    component={null}
-                        >
-                                    
-                        </TransitionGroup>
                         <InsertStage
                                     onSelectStageType={[Function]}
                         />
@@ -109,12 +97,6 @@ ShallowWrapper {
               <div
                 className="timeline__stages"
 >
-                <TransitionGroup
-                                childFactory={[Function]}
-                                component={null}
-                >
-                                
-                </TransitionGroup>
                 <InsertStage
                                 onSelectStageType={[Function]}
                 />
@@ -142,12 +124,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   false,
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component={null}
->
-                    
-</TransitionGroup>,
+                  Array [],
                   <InsertStage
                     onSelectStageType={[Function]}
 />,
@@ -159,20 +136,7 @@ ShallowWrapper {
                 false,
                 Object {
                   "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "childFactory": [Function],
-                    "children": Array [],
-                    "component": null,
-                  },
-                  "ref": null,
-                  "rendered": Array [],
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
+                  "key": "insertStage",
                   "nodeType": "class",
                   "props": Object {
                     "onSelectStageType": [Function],
@@ -213,12 +177,6 @@ ShallowWrapper {
                     <div
                               className="timeline__stages"
                     >
-                              <TransitionGroup
-                                        childFactory={[Function]}
-                                        component={null}
-                              >
-                                        
-                              </TransitionGroup>
                               <InsertStage
                                         onSelectStageType={[Function]}
                               />
@@ -246,12 +204,6 @@ ShallowWrapper {
               <div
                             className="timeline__stages"
               >
-                            <TransitionGroup
-                                          childFactory={[Function]}
-                                          component={null}
-                            >
-                                          
-                            </TransitionGroup>
                             <InsertStage
                                           onSelectStageType={[Function]}
                             />
@@ -285,12 +237,6 @@ ShallowWrapper {
                 <div
                   className="timeline__stages"
 >
-                  <TransitionGroup
-                                    childFactory={[Function]}
-                                    component={null}
-                  >
-                                    
-                  </TransitionGroup>
                   <InsertStage
                                     onSelectStageType={[Function]}
                   />
@@ -318,12 +264,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": Array [
                     false,
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component={null}
->
-                      
-</TransitionGroup>,
+                    Array [],
                     <InsertStage
                       onSelectStageType={[Function]}
 />,
@@ -335,20 +276,7 @@ ShallowWrapper {
                   false,
                   Object {
                     "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "childFactory": [Function],
-                      "children": Array [],
-                      "component": null,
-                    },
-                    "ref": null,
-                    "rendered": Array [],
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
+                    "key": "insertStage",
                     "nodeType": "class",
                     "props": Object {
                       "onSelectStageType": [Function],
