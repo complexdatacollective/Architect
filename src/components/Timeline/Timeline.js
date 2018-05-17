@@ -1,13 +1,14 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
-import { Drawer } from '../Transitions';
+import None from '../Transitions/None';
+import Drawer from '../Transitions/Drawer';
 import Overview from './Overview';
 import Stage from './Stage';
 import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
 
-class Timeline extends PureComponent {
+class Timeline extends Component {
   static propTypes = {
     stages: PropTypes.array,
     onCreateStage: PropTypes.func,
@@ -68,7 +69,7 @@ class Timeline extends PureComponent {
 
   renderInsertStage = insertStageAtIndex => (
     <Drawer
-      key={`insert-${insertStageAtIndex}`}
+      key={`insert_${insertStageAtIndex}`}
       timeout={1000}
       unmountOnExit
     >
@@ -98,22 +99,25 @@ class Timeline extends PureComponent {
 
   renderStages = () => {
     const items = this.props.stages.map(this.renderStage);
+    const itemsWithInsertStage = this.injectInsertStage(items);
 
-    return this.injectInsertStage(items);
+    return itemsWithInsertStage;
   }
 
   renderStage = (stage, index) => (
-    <Stage
-      key={`stage_${stage.id}`}
-      id={stage.id}
-      type={stage.type}
-      label={stage.label}
-      onMouseEnter={this.onMouseEnterStage}
-      onMouseLeave={this.onMouseLeaveStage}
-      onEditStage={() => this.props.onEditStage(stage.id)}
-      onInsertStage={position => this.onInsertStage(index + position)}
-      onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
-    />
+    <None key={`stage_${stage.id}`}>
+      <Stage
+        key={`stage_${stage.id}`}
+        id={stage.id}
+        type={stage.type}
+        label={stage.label}
+        onMouseEnter={this.onMouseEnterStage}
+        onMouseLeave={this.onMouseLeaveStage}
+        onEditStage={() => this.props.onEditStage(stage.id)}
+        onInsertStage={position => this.onInsertStage(index + position)}
+        onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
+      />
+    </None>
   );
 
   render() {
@@ -127,11 +131,12 @@ class Timeline extends PureComponent {
             />
             <div className="timeline__stages">
               { this.hasStages() && this.renderHighlight() }
-              <TransitionGroup component={null}>
+              <TransitionGroup>
                 { this.renderStages() }
               </TransitionGroup>
               { !this.hasStages() && (
                 <InsertStage
+                  key="insertStage"
                   onSelectStageType={type => this.createStage(type, 0)}
                 />
               ) }

@@ -1,78 +1,125 @@
+import uuid from 'uuid';
 import { existsSync } from 'fs';
-import { uniqBy } from 'lodash';
-import { createProtocol, loadProtocolData, locateProtocol } from '../../../other/protocols';
+import { uniqBy, get, has, omit } from 'lodash';
+import { REHYDRATE } from 'redux-persist/constants';
+import { createProtocol, loadProtocolData, locateProtocol, openProtocol } from '../../../other/protocols';
 import { actionCreators as protocolActions } from '../protocol';
-import { actionCreators as protocolsActions } from '../protocols';
 
-const ADD_PROTOCOL_TO_DASHBOARD = Symbol('PROTOCOLS/ADD_PROTOCOL_TO_DASHBOARD');
-const REMOVE_PROTOCOL_FROM_DASHBOARD = Symbol('PROTOCOLS/REMOVE_PROTOCOL_FROM_DASHBOARD');
+const UPDATE_PROTOCOL = Symbol('PROTOCOLS/UPDATE_PROTOCOL');
+const ADD_PROTOCOL = Symbol('PROTOCOLS/ADD_PROTOCOL');
+const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
 
 const initialState = [];
 
+const archiveExists = protocol => existsSync(protocol.archivePath);
+const pruneWorkingPath = protocol => omit(protocol, 'workingPath');
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ADD_PROTOCOL_TO_DASHBOARD:
-      return uniqBy([
+    case ADD_PROTOCOL: {
+      const newProtocols = [
         ...state,
         action.protocol,
-      ], 'path').slice(-10);
-    case REMOVE_PROTOCOL_FROM_DASHBOARD:
-      return state
-        .filter(protocol => protocol.path !== action.protocol.path);
+      ];
+
+      return uniqBy(newProtocols, 'archivePath')
+        .slice(-10);
+    }
+    case UPDATE_PROTOCOL: {
+      return state.map((protocol) => {
+        if (protocol.id !== action.id) { return protocol; }
+        return { ...protocol, ...action.protocol };
+      });
+    }
+    case CLEAR_DEAD_LINKS:
+      return state.filter(archiveExists);
+    case REHYDRATE: {
+      const protocols = get(action, ['payload', 'protocols'], []);
+
+      return protocols
+        .filter(archiveExists)
+        .map(pruneWorkingPath);
+    }
     default:
       return state;
   }
 }
 
-const addProtocolToDashboard = path =>
+const addProtocol = protocol =>
   ({
-    type: ADD_PROTOCOL_TO_DASHBOARD,
-    protocol: { path },
+    type: ADD_PROTOCOL,
+    protocol: {
+      ...protocol,
+      id: uuid(),
+    },
   });
 
-const removeProtocolFromDashboard = path =>
+const updateProtocol = (id, protocol) =>
   ({
-    type: REMOVE_PROTOCOL_FROM_DASHBOARD,
-    protocol: { path },
+    type: UPDATE_PROTOCOL,
+    id,
+    protocol,
   });
 
-const loadProtocolAction = path =>
-  dispatch =>
-    dispatch(protocolActions.setProtocol(loadProtocolData(path), path));
+const clearDeadLinks = () =>
+  ({
+    type: CLEAR_DEAD_LINKS,
+  });
+
+const prepareWorkingCopy = (protocolMeta) => {
+  if (has(protocolMeta, 'workingPath')) {
+    return Promise.resolve(protocolMeta);
+  }
+
+  return openProtocol(protocolMeta.archivePath)
+    .then(
+      ({ workingPath }) =>
+        ({ ...protocolMeta, workingPath }),
+    );
+};
+
+const loadProtocolAction = protocolId =>
+  (dispatch, getState) => {
+    const { protocols } = getState();
+    const protocolMeta = protocols.find(protocol => protocol.id === protocolId);
+
+    return prepareWorkingCopy(protocolMeta)
+      .then((protocolMetaWithWorkingPath) => {
+        const protocolData = loadProtocolData(protocolMetaWithWorkingPath.workingPath);
+
+        dispatch(updateProtocol(protocolMetaWithWorkingPath.id, protocolMetaWithWorkingPath));
+        dispatch(protocolActions.setProtocol(protocolData, protocolMetaWithWorkingPath));
+      });
+  };
 
 const createProtocolAction = (callback = () => {}) =>
   dispatch =>
     createProtocol()
-      .then((protocolPath) => {
-        dispatch(protocolsActions.addProtocolToDashboard(protocolPath));
-        callback(protocolPath);
+      .then((protocolMeta) => {
+        const action = addProtocol(protocolMeta);
+        dispatch(action);
+        callback(action.protocol);
       });
 
 const chooseProtocolAction = (callback = () => {}) =>
-  dispatch =>
+  (dispatch, getState) =>
     locateProtocol()
-      .then((protocolPath) => {
-        dispatch(protocolsActions.addProtocolToDashboard(protocolPath));
-        callback(protocolPath);
+      .then((archivePath) => {
+        const { protocols } = getState();
+        const existingEntry = protocols.find(protocol => protocol.archivePath === archivePath);
+
+        if (existingEntry) {
+          return callback(existingEntry);
+        }
+
+        const newProtocolAction = addProtocol({ archivePath });
+        dispatch(newProtocolAction);
+        return callback(newProtocolAction.protocol);
       });
 
-const clearDeadLinks = () =>
-  (dispatch, getState) => {
-    const { protocols } = getState();
-
-    protocols
-      .forEach(
-        (protocol) => {
-          if (!existsSync(protocol.path)) {
-            dispatch(removeProtocolFromDashboard(protocol.path));
-          }
-        },
-      );
-  };
-
 const actionCreators = {
-  addProtocolToDashboard,
-  removeProtocolFromDashboard,
+  addProtocol,
+  updateProtocol,
   clearDeadLinks,
   createProtocol: createProtocolAction,
   loadProtocol: loadProtocolAction,
@@ -80,7 +127,7 @@ const actionCreators = {
 };
 
 const actionTypes = {
-  ADD_PROTOCOL_TO_DASHBOARD,
+  ADD_PROTOCOL,
 };
 
 export {

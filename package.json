@@ -34,6 +34,7 @@
     },
     "devDependencies": {
         "animejs": "^2.2.0",
+        "archiver": "^2.1.1",
         "autoprefixer": "7.1.2",
         "axios": "^0.16.1",
         "babel-core": "6.25.0",
@@ -54,6 +55,7 @@
         "cross-env": "^5.1.5",
         "cross-spawn": "4.0.2",
         "css-loader": "0.28.4",
+        "decompress": "^4.2.0",
         "detect-port": "1.1.0",
         "dotenv": "4.0.0",
         "electron": "^1.8.1",

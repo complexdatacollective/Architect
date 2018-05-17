@@ -3,8 +3,8 @@ import { remote } from 'electron';
 const openDialogOptions = {
   buttonLabel: 'Open',
   nameFieldLabel: 'Open:',
-  defaultPath: 'protocol.canvas',
-  filters: [{ name: 'Network Canvas', extensions: ['json'] }],
+  defaultPath: 'Protocol.netcanvas',
+  filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
   properties: ['openFile'],
 };
 
@@ -15,8 +15,8 @@ const openDialogOptions = {
 const openDialog = () =>
   new Promise((resolve, reject) => {
     remote.dialog.showOpenDialog(openDialogOptions, (filename) => {
-      if (filename === undefined) { reject(); }
-      resolve(filename[0].replace(/\/protocol.json$/, '/'));
+      if (filename === undefined) { reject(); return; }
+      resolve(filename[0]);
     });
   });
 

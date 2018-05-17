@@ -39,7 +39,7 @@ ShallowWrapper {
                 >
                         <TransitionGroup
                                 childFactory={[Function]}
-                                component={null}
+                                component="div"
                         >
                                 
                         </TransitionGroup>
@@ -72,7 +72,7 @@ ShallowWrapper {
             >
                         <TransitionGroup
                                     childFactory={[Function]}
-                                    component={null}
+                                    component="div"
                         >
                                     
                         </TransitionGroup>
@@ -111,7 +111,7 @@ ShallowWrapper {
 >
                 <TransitionGroup
                                 childFactory={[Function]}
-                                component={null}
+                                component="div"
                 >
                                 
                 </TransitionGroup>
@@ -144,7 +144,7 @@ ShallowWrapper {
                   false,
                   <TransitionGroup
                     childFactory={[Function]}
-                    component={null}
+                    component="div"
 >
                     
 </TransitionGroup>,
@@ -164,7 +164,7 @@ ShallowWrapper {
                   "props": Object {
                     "childFactory": [Function],
                     "children": Array [],
-                    "component": null,
+                    "component": "div",
                   },
                   "ref": null,
                   "rendered": Array [],
@@ -172,7 +172,7 @@ ShallowWrapper {
                 },
                 Object {
                   "instance": null,
-                  "key": undefined,
+                  "key": "insertStage",
                   "nodeType": "class",
                   "props": Object {
                     "onSelectStageType": [Function],
@@ -215,7 +215,7 @@ ShallowWrapper {
                     >
                               <TransitionGroup
                                         childFactory={[Function]}
-                                        component={null}
+                                        component="div"
                               >
                                         
                               </TransitionGroup>
@@ -248,7 +248,7 @@ ShallowWrapper {
               >
                             <TransitionGroup
                                           childFactory={[Function]}
-                                          component={null}
+                                          component="div"
                             >
                                           
                             </TransitionGroup>
@@ -287,7 +287,7 @@ ShallowWrapper {
 >
                   <TransitionGroup
                                     childFactory={[Function]}
-                                    component={null}
+                                    component="div"
                   >
                                     
                   </TransitionGroup>
@@ -320,7 +320,7 @@ ShallowWrapper {
                     false,
                     <TransitionGroup
                       childFactory={[Function]}
-                      component={null}
+                      component="div"
 >
                       
 </TransitionGroup>,
@@ -340,7 +340,7 @@ ShallowWrapper {
                     "props": Object {
                       "childFactory": [Function],
                       "children": Array [],
-                      "component": null,
+                      "component": "div",
                     },
                     "ref": null,
                     "rendered": Array [],
@@ -348,7 +348,7 @@ ShallowWrapper {
                   },
                   Object {
                     "instance": null,
-                    "key": undefined,
+                    "key": "insertStage",
                     "nodeType": "class",
                     "props": Object {
                       "onSelectStageType": [Function],

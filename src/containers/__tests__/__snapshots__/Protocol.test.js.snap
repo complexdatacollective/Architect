@@ -53,25 +53,7 @@ ShallowWrapper {
 />,
         <div
           className="protocol__control-bar"
->
-          <Button
-                    color="white"
-                    content=""
-                    icon={
-                              <Icon
-                                        className=""
-                                        color=""
-                                        name="arrow-right"
-                                        style={Object {}}
-                              />
-                    }
-                    iconPosition="right"
-                    onClick={[Function]}
-                    size="small"
-          >
-                    Export
-          </Button>
-</div>,
+/>,
         <Connect(Draft(EditSkipLogic))
           cancel={false}
           onCancel={[Function]}
@@ -116,54 +98,11 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": Array [
-            <Button
-              color="white"
-              content=""
-              icon={
-                            <Icon
-                                          className=""
-                                          color=""
-                                          name="arrow-right"
-                                          style={Object {}}
-                            />
-              }
-              iconPosition="right"
-              onClick={[Function]}
-              size="small"
->
-              Export
-</Button>,
-            false,
-          ],
+          "children": false,
           "className": "protocol__control-bar",
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Export",
-              "color": "white",
-              "content": "",
-              "icon": <Icon
-                className=""
-                color=""
-                name="arrow-right"
-                style={Object {}}
-/>,
-              "iconPosition": "right",
-              "onClick": [Function],
-              "size": "small",
-            },
-            "ref": null,
-            "rendered": "Export",
-            "type": [Function],
-          },
-          false,
-        ],
+        "rendered": false,
         "type": "div",
       },
       Object {
@@ -222,25 +161,7 @@ ShallowWrapper {
 />,
           <div
             className="protocol__control-bar"
->
-            <Button
-                        color="white"
-                        content=""
-                        icon={
-                                    <Icon
-                                                className=""
-                                                color=""
-                                                name="arrow-right"
-                                                style={Object {}}
-                                    />
-                        }
-                        iconPosition="right"
-                        onClick={[Function]}
-                        size="small"
-            >
-                        Export
-            </Button>
-</div>,
+/>,
           <Connect(Draft(EditSkipLogic))
             cancel={false}
             onCancel={[Function]}
@@ -285,54 +206,11 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": Array [
-              <Button
-                color="white"
-                content=""
-                icon={
-                                <Icon
-                                                className=""
-                                                color=""
-                                                name="arrow-right"
-                                                style={Object {}}
-                                />
-                }
-                iconPosition="right"
-                onClick={[Function]}
-                size="small"
->
-                Export
-</Button>,
-              false,
-            ],
+            "children": false,
             "className": "protocol__control-bar",
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Export",
-                "color": "white",
-                "content": "",
-                "icon": <Icon
-                  className=""
-                  color=""
-                  name="arrow-right"
-                  style={Object {}}
-/>,
-                "iconPosition": "right",
-                "onClick": [Function],
-                "size": "small",
-              },
-              "ref": null,
-              "rendered": "Export",
-              "type": [Function],
-            },
-            false,
-          ],
+          "rendered": false,
           "type": "div",
         },
         Object {

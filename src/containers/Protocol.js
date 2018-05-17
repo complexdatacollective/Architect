@@ -31,7 +31,6 @@ class Protocol extends PureComponent {
     match: PropTypes.object.isRequired,
     loadProtocol: PropTypes.func.isRequired,
     saveProtocol: PropTypes.func.isRequired,
-    exportProtocol: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -48,8 +47,8 @@ class Protocol extends PureComponent {
   }
 
   componentDidMount() {
-    const protocolPath = decodeURIComponent(this.props.match.params.protocol);
-    this.props.loadProtocol(protocolPath);
+    const protocolId = decodeURIComponent(this.props.match.params.protocol);
+    this.props.loadProtocol(protocolId);
   }
 
   onCardComplete = () => {
@@ -79,7 +78,14 @@ class Protocol extends PureComponent {
     });
   }
 
-  editStage = stageId => this.showCard(cards.editStage, { stageId });
+  editStage = (stageId) => {
+    if (!this.props.stages.find(({ id }) => id === stageId)) {
+      throw new Error(stageId);
+    }
+
+    this.showCard(cards.editStage, { stageId });
+  };
+
   createStage = (type, insertAtIndex) => this.showCard(cards.editStage, { type, insertAtIndex });
 
   isAnyCardVisible = () => this.state.activeCard.cardType !== null;
@@ -92,7 +98,6 @@ class Protocol extends PureComponent {
       hasChanges,
       hasUnsavedChanges,
       saveProtocol,
-      exportProtocol,
     } = this.props;
 
     const protocolClasses = cx(
@@ -113,15 +118,6 @@ class Protocol extends PureComponent {
         />
 
         <div className="protocol__control-bar">
-          <Button
-            size="small"
-            onClick={exportProtocol}
-            color="white"
-            icon={RightArrow}
-            iconPosition="right"
-          >
-            Export
-          </Button>
           { hasUnsavedChanges &&
             <Button
               size="small"
@@ -167,7 +163,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
-    exportProtocol: bindActionCreators(protocolFileActions.exportProtocol, dispatch),
     loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   };
 }

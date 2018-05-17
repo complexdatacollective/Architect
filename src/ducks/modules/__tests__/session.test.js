@@ -5,13 +5,15 @@ import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
 import { actionCreators as fileActions } from '../protocol/file';
 
+const protocolMeta = { id: 'foo', archivePath: '/bar/buzz' };
+
 describe('session reducer', () => {
   it('has an initial state', () => {
     expect(reducer(undefined))
       .toEqual({
         lastSaved: 0,
         lastChanged: 0,
-        activeProtocol: '',
+        activeProtocol: {},
       });
   });
 
@@ -19,24 +21,28 @@ describe('session reducer', () => {
     it('updates path when protocol is set', () => {
       const newState = reducer(
         undefined,
-        protocolActions.setProtocol(undefined, '/bar/buzz'),
+        protocolActions.setProtocol(undefined, protocolMeta),
       );
 
       expect(newState)
         .toMatchObject({
-          activeProtocol: '/bar/buzz',
+          activeProtocol: protocolMeta,
+          lastSaved: 0,
+          lastChanged: 0,
         });
     });
 
     it('resets path when protocol is reset', () => {
       const newState = reducer(
-        { lastSaved: 100, activeProtocol: '/bar/buzz' },
+        { lastSaved: 100, activeProtocol: protocolMeta },
         protocolActions.resetProtocol(),
       );
 
       expect(newState)
         .toMatchObject({
-          activeProtocol: '',
+          activeProtocol: {},
+          lastSaved: 0,
+          lastChanged: 0,
         });
     });
   });

@@ -2,7 +2,7 @@
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { times, sampleSize } from 'lodash';
+import { times, sampleSize, pick, omit } from 'lodash';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as protocolActionCreators } from '../../protocol';
 import { createProtocol, loadProtocolData, locateProtocol } from '../../../../other/protocols';
@@ -21,22 +21,22 @@ describe('protocols reducer', () => {
     });
   });
 
-  describe('addProtocolToDashboard()', () => {
+  describe('addProtocol()', () => {
     it('It adds the protocol to the protocols list', () => {
       const newState = reducer(
         undefined,
-        actionCreators.addProtocolToDashboard(protocolPath),
+        actionCreators.addProtocol({ archivePath: protocolPath }),
       );
 
-      expect(newState).toEqual([
-        { path: protocolPath },
-      ]);
+      expect(newState[0]).toMatchObject(
+        { archivePath: protocolPath },
+      );
     });
 
     it("It doesn't add duplicate protocols to the list", () => {
       const newState = times(
         3,
-        () => actionCreators.addProtocolToDashboard(protocolPath),
+        () => actionCreators.addProtocol({ archivePath: protocolPath }),
       )
         .reduce(
           (memo, action) =>
@@ -46,9 +46,11 @@ describe('protocols reducer', () => {
             ),
           undefined,
         );
-      expect(newState).toEqual([
-        { path: protocolPath },
-      ]);
+
+      expect(newState.length).toEqual(1);
+      expect(newState[0]).toMatchObject(
+        { archivePath: protocolPath },
+      );
     });
 
     it('It adds a max of 10 protocols to the protocols list', () => {
@@ -71,11 +73,12 @@ describe('protocols reducer', () => {
       ];
 
       const protocolList = ['unique first protocol']
-        .concat(sampleSize(mockPaths, 10))
-        .concat('unique last protocol');
+        .concat(sampleSize(mockPaths, 12))
+        .concat('unique last protocol')
+        .map(item => ({ archivePath: item }));
 
       const newState = protocolList
-        .map(item => actionCreators.addProtocolToDashboard(item))
+        .map(item => actionCreators.addProtocol(item))
         .reduce(
           (memo, action) =>
             reducer(
@@ -85,29 +88,12 @@ describe('protocols reducer', () => {
           undefined,
         );
 
-      expect(newState)
-        .toEqual(
-          protocolList
-            .slice(-10)
-            .map(item => ({ path: item })),
-        );
-    });
-  });
+      expect(newState.length).toEqual(10);
 
-  describe('removeProtocolFromDashboard()', () => {
-    it('It adds the protocol to the protocols list', () => {
-      const protocolList = ['foo', 'bar', 'bazz']
-        .map(item => ({ path: item }));
-
-      const newState = reducer(
-        protocolList,
-        actionCreators.removeProtocolFromDashboard('bar'),
-      );
-
-      expect(newState).toEqual(
-        ['foo', 'bazz']
-          .map(item => ({ path: item })),
-      );
+      newState.forEach((item, index) => {
+        expect(item)
+          .toMatchObject(protocolList.slice(-10)[index]);
+      });
     });
   });
 
@@ -121,44 +107,64 @@ describe('protocols reducer', () => {
           const actions = store.getActions();
           expect(createProtocol.mock.calls.length).toBe(1);
           expect(actions[0]).toMatchObject(
-            actionCreators.addProtocolToDashboard('/foo/new-protocol'),
+            pick(
+              actionCreators.addProtocol({ archivePath: '/foo/new-protocol' }),
+              ['archivePath', 'type'],
+            ),
           );
-          expect(dummyCallback.mock.calls[0]).toEqual(['/foo/new-protocol']);
+          expect(dummyCallback.mock.calls[0][0]).toMatchObject({
+            archivePath: '/foo/new-protocol',
+          });
         });
     });
   });
 
   describe('loadProtocol', () => {
     it('loads the protocol data and then dispatches setProtocol', () => {
-      const store = createMockStore({});
+      const store = createMockStore({ protocols: [{ id: 'foo', archivePath: '/bar/baz' }] });
 
-      store.dispatch(actionCreators.loadProtocol('/bar/baz'));
+      return store.dispatch(actionCreators.loadProtocol('foo'))
+        .then(() => {
+          expect(loadProtocolData.mock.calls[0])
+            .toEqual(['/tmp/foo/bar']);
 
-      const actions = store.getActions();
-      expect(loadProtocolData.mock.calls[0])
-        .toEqual(['/bar/baz']);
-      expect(actions[0]).toEqual(
-        protocolActionCreators.setProtocol(
-          { foo: 'bar test protocol' },
-          '/bar/baz',
-        ),
-      );
+          const actions = store.getActions();
+
+          expect(actions[0]).toEqual(
+            actionCreators.updateProtocol(
+              'foo',
+              { id: 'foo', archivePath: '/bar/baz', workingPath: '/tmp/foo/bar' },
+            ),
+          );
+
+          expect(actions[1]).toMatchObject(
+            protocolActionCreators.setProtocol(
+              { foo: 'bar test protocol' },
+              { id: 'foo', archivePath: '/bar/baz' },
+            ),
+          );
+        });
     });
   });
 
   describe('chooseProtocol', () => {
     it('locates protocol, adds it to the dashboard, then runs callback', () => {
-      const store = createMockStore({});
+      const store = createMockStore({
+        protocols: [],
+      });
       const dummyCallback = jest.fn();
 
       return store.dispatch(actionCreators.chooseProtocol(dummyCallback))
         .then(() => {
           const actions = store.getActions();
+
+          const expectedAction = omit(actionCreators.addProtocol({ archivePath: '/foo/located-protocol' }), ['protocol.id']);
+
           expect(locateProtocol.mock.calls.length).toBe(1);
-          expect(actions[0]).toEqual(
-            actionCreators.addProtocolToDashboard('/foo/located-protocol'),
-          );
-          expect(dummyCallback.mock.calls[0]).toEqual(['/foo/located-protocol']);
+          expect(actions[0]).toMatchObject(expectedAction);
+          expect(dummyCallback.mock.calls[0][0]).toMatchObject({
+            archivePath: '/foo/located-protocol',
+          });
         });
     });
   });

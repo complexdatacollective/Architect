@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import { importAssetToProtocol } from '../../../other/protocols';
 
 const IMPORT_ASSET_COMPLETE = Symbol('PROTOCOL/IMPORT_ASSET_COMPLETE');
@@ -22,8 +23,9 @@ const importAssetFailed = () =>
  */
 const importAssetAction = asset =>
   (dispatch, getState) => {
-    const protocolPath = getState().session.activeProtocol;
-    return importAssetToProtocol(protocolPath, asset)
+    const workingPath = get(getState(), ['session', 'activeProtocol', 'workingPath']);
+    if (!workingPath) { dispatch(importAssetFailed()); return Promise.reject(); }
+    return importAssetToProtocol(workingPath, asset)
       .then(filename => dispatch(importAssetComplete(filename)))
       .catch(() => dispatch(importAssetFailed()));
   };
