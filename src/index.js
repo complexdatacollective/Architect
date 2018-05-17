@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter as Router, Route } from 'react-router-dom';
 import './styles/main.scss';
 import { store } from './ducks/store';
-import App from './containers/App';
+import App from './components/App';
 import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
 

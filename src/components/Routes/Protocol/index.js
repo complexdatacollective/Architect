@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Button, Icon } from '../../../ui/components';
 import { getProtocol } from '../../../selectors/protocol';
-import Card from './Card';
-import EditSkipLogic from '../../Cards/EditSkipLogic';
-import EditStage from '../../Cards/EditStage';
+import Card from '../../Card';
+import EditSkipLogic from './Cards/EditSkipLogic';
+import EditStage from './Cards/EditStage';
 import { Timeline } from '../../../components';
 import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
 import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
@@ -132,7 +132,9 @@ class Protocol extends PureComponent {
           }
         </div>
 
-        <Card onCancel={this.onCardCancel}>
+        <Card
+          onCancel={this.onCardCancel}
+        >
           <EditSkipLogic
             show={this.isCardVisible(cards.editSkip)}
             cancel={this.state.activeCard.cancel}
@@ -142,7 +144,9 @@ class Protocol extends PureComponent {
           />
         </Card>
 
-        <Card onCancel={this.onCardCancel}>
+        <Card
+          onCancel={this.onCardCancel}
+        >
           <EditStage
             {...this.state.activeCard} // either index & type, or id
             show={this.isCardVisible(cards.editStage)}
