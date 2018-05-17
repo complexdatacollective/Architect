@@ -76,7 +76,7 @@ class Protocol extends PureComponent {
         cardType: card,
         ...options,
       },
-    });
+    }, () => { debugger; });
   }
 
   editStage = (stageId) => {
@@ -132,27 +132,20 @@ class Protocol extends PureComponent {
           }
         </div>
 
-        <Card
+        <EditSkipLogic
+          show={this.isCardVisible(cards.editSkip)}
+          cancel={this.state.activeCard.cancel}
+          stageId={this.state.activeCard.stageId}
+          onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
-        >
-          <EditSkipLogic
-            show={this.isCardVisible(cards.editSkip)}
-            cancel={this.state.activeCard.cancel}
-            stageId={this.state.activeCard.stageId}
-            onComplete={this.onCardComplete}
-            onCancel={this.onCardCancel}
-          />
-        </Card>
+        />
 
-        <Card
+        <EditStage
+          {...this.state.activeCard} // either index & type, or id
+          show={this.isCardVisible(cards.editStage)}
+          onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
-        >
-          <EditStage
-            {...this.state.activeCard} // either index & type, or id
-            show={this.isCardVisible(cards.editStage)}
-            onComplete={this.onCardComplete}
-          />
-        </Card>
+        />
       </div>
     );
   }
