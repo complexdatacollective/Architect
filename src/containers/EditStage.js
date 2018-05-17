@@ -7,15 +7,12 @@ import {
   isDirty as isFormDirty,
   isInvalid as isFormInvalid,
 } from 'redux-form';
-import { pick } from 'lodash';
+import { pick, has } from 'lodash';
 import { makeGetStage } from '../selectors/protocol';
 import { Button } from '../ui/components';
 import { ProtocolCard } from '../containers/ProtocolCard';
 import StageEditor from '../components/StageEditor';
 import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
-
-const defaultStage = {
-};
 
 class EditStage extends PureComponent {
   static propTypes = {
@@ -49,9 +46,13 @@ class EditStage extends PureComponent {
     this.props.onComplete();
   }
 
+  get isDirty() {
+    return this.props.dirty || !has(this.props.stage, 'id');
+  }
+
   renderButtons() {
     return [].concat(
-      this.props.dirty ? [<Button key="continue" size="small" disabled={this.props.invalid} onClick={this.props.continue}>Continue</Button>] : [],
+      this.isDirty ? [<Button key="continue" size="small" disabled={this.props.invalid} onClick={this.props.continue}>Continue</Button>] : [],
     );
   }
 
@@ -76,7 +77,7 @@ const makeMapStateToProps = () => {
   const getStage = makeGetStage();
 
   return (state, props) => {
-    const stage = getStage(state, props) || { ...defaultStage, type: props.type };
+    const stage = getStage(state, props) || { type: props.type };
 
     return ({
       stage,
