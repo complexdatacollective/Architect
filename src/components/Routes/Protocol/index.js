@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Button, Icon } from '../../../ui/components';
 import { getProtocol } from '../../../selectors/protocol';
-import Card from '../../Card';
 import EditSkipLogic from './Cards/EditSkipLogic';
 import EditStage from './Cards/EditStage';
 import { Timeline } from '../../../components';
@@ -76,7 +75,7 @@ class Protocol extends PureComponent {
         cardType: card,
         ...options,
       },
-    }, () => { debugger; });
+    });
   }
 
   editStage = (stageId) => {
