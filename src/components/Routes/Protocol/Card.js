@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../ui/components';
-import { Card } from '../containers';
+import { Button } from '../../../ui/components';
+import { Card } from '../../Card';
 
 class ProtocolCard extends PureComponent {
   static propTypes = {

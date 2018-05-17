@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { Button, Icon } from '../ui/components';
-import { getProtocol } from '../selectors/protocol';
-import EditSkipLogic from '../containers/EditSkipLogic';
-import EditStage from '../containers/EditStage';
-import { Timeline } from '../components';
-import { actionCreators as protocolFileActions } from '../ducks/modules/protocol/file';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
+import { Button, Icon } from '../../../ui/components';
+import { getProtocol } from '../../../selectors/protocol';
+import Card from './Card';
+import EditSkipLogic from '../../Cards/EditSkipLogic';
+import EditStage from '../../Cards/EditStage';
+import { Timeline } from '../../../components';
+import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
+import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -131,20 +132,23 @@ class Protocol extends PureComponent {
           }
         </div>
 
-        <EditSkipLogic
-          show={this.isCardVisible(cards.editSkip)}
-          cancel={this.state.activeCard.cancel}
-          stageId={this.state.activeCard.stageId}
-          onComplete={this.onCardComplete}
-          onCancel={this.onCardCancel}
-        />
+        <Card onCancel={this.onCardCancel}>
+          <EditSkipLogic
+            show={this.isCardVisible(cards.editSkip)}
+            cancel={this.state.activeCard.cancel}
+            stageId={this.state.activeCard.stageId}
+            onComplete={this.onCardComplete}
+            onCancel={this.onCardCancel}
+          />
+        </Card>
 
-        <EditStage
-          {...this.state.activeCard} // either index & type, or id
-          show={this.isCardVisible(cards.editStage)}
-          onComplete={this.onCardComplete}
-          onCancel={this.onCardCancel}
-        />
+        <Card onCancel={this.onCardCancel}>
+          <EditStage
+            {...this.state.activeCard} // either index & type, or id
+            show={this.isCardVisible(cards.editStage)}
+            onComplete={this.onCardComplete}
+          />
+        </Card>
       </div>
     );
   }

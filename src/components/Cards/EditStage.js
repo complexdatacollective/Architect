@@ -8,11 +8,11 @@ import {
   isInvalid as isFormInvalid,
 } from 'redux-form';
 import { pick, has } from 'lodash';
-import { makeGetStage } from '../selectors/protocol';
-import { Button } from '../ui/components';
-import { ProtocolCard } from '../containers/ProtocolCard';
-import StageEditor from '../components/StageEditor';
-import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
+import { makeGetStage } from '../../selectors/protocol';
+import { Button } from '../../ui/components';
+import { ProtocolCard } from '../../containers/ProtocolCard';
+import StageEditor from '../../components/StageEditor';
+import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 
 class EditStage extends PureComponent {
   static propTypes = {
