@@ -26,18 +26,18 @@ const saveDialog = () =>
     });
   });
 
-const createEmptyProtocol = workingPath =>
+const createProtocolWorkingPath = (workingPath, protocol) =>
   new Promise((resolve) => {
     const assetsPath = path.join(workingPath, 'assets');
     const protocolPath = path.join(workingPath, 'protocol.json');
     mkdirp.sync(workingPath);
     fs.mkdirSync(assetsPath);
-    fs.writeFileSync(protocolPath, JSON.stringify(template, null, 2));
+    fs.writeFileSync(protocolPath, JSON.stringify(protocol, null, 2));
     resolve();
   });
 
-export const createEmptyArchive = ({ workingPath, archivePath }) =>
-  createEmptyProtocol(workingPath)
+export const createProtocolArchive = ({ workingPath, archivePath }, protocol) =>
+  createProtocolWorkingPath(workingPath, protocol)
     .then(archive(workingPath, archivePath));
 
 /**
@@ -48,9 +48,12 @@ const createProtocol = () =>
     .then((archivePath) => {
       const workingPath = getLocalDirectoryFromArchivePath(archivePath);
 
-      return createEmptyArchive({
+      return createProtocolArchive({
         workingPath,
         archivePath,
+      }, {
+        ...template,
+        name: path.basename(archivePath, '.netcanvas'),
       })
         .then(() => ({
           workingPath,
