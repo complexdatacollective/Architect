@@ -6,6 +6,7 @@ import {
   getLocalDirectoryFromArchivePath,
   archive,
 } from './archive';
+import template from './template.json';
 
 const saveDialogOptions = {
   buttonLabel: 'Create',
@@ -31,7 +32,7 @@ const createEmptyProtocol = workingPath =>
     const protocolPath = path.join(workingPath, 'protocol.json');
     mkdirp.sync(workingPath);
     fs.mkdirSync(assetsPath);
-    fs.writeFileSync(protocolPath, '{}');
+    fs.writeFileSync(protocolPath, JSON.stringify(template, null, 2));
     resolve();
   });
 

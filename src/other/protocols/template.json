@@ -1,0 +1,49 @@
+{
+  "variableRegistry": {
+    "node": {
+      "person": {
+        "label": "Person",
+        "color": "coral",
+        "displayVariable": "nickname",
+        "iconVariant": "add-a-person",
+        "variables": {
+          "name": {
+            "label": "Name",
+            "description": "Human readable description",
+            "type": "text",
+            "validation": {
+              "required": true,
+              "minLength": 1,
+              "maxLength": 24
+            }
+          },
+          "age": {
+            "label": "Age",
+            "description": "Human readable description",
+            "type": "number",
+            "validation": {
+              "required": true,
+              "minValue": 16,
+              "maxValue": 100
+            }
+          },
+          "nickname": {
+            "label": "Nickname",
+            "description": "Human readable description",
+            "type": "text",
+            "validation": {
+              "required": true,
+              "minLength": 1,
+              "maxLength": 8
+            }
+          },
+          "close_friend": {
+            "label": "Close Friend",
+            "description": "Human readable description",
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
