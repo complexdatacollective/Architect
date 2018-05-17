@@ -160,6 +160,12 @@
             "target": "nsis",
             "certificateSubjectName": "Complex Data Collective"
         },
+        "fileAssociations": {
+            "ext": "netcanvas",
+            "description": "Network Canvas interview protocol",
+            "icon": "file",
+            "role": "Editor"
+        },
         "publish": [
             {
                 "provider": "github",

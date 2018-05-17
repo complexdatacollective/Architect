@@ -19,6 +19,20 @@ const jobList = [
       report: true,
     },
   },
+  {
+    name: 'File Icon',
+    runner: 'icongen',
+    inputFile: 'assets/icons/NC-File.svg',
+    outputPath: 'build-resources',
+    options: {
+      modes: ['ico', 'icns'], // all
+      names: {
+        ico: 'file',
+        icns: 'file',
+      },
+      report: true,
+    },
+  },
 ];
 
 const icongenTask = (specification) => {
