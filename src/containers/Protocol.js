@@ -78,7 +78,14 @@ class Protocol extends PureComponent {
     });
   }
 
-  editStage = stageId => this.showCard(cards.editStage, { stageId });
+  editStage = (stageId) => {
+    if (!this.props.stages.find(({ id }) => id === stageId)) {
+      throw new Error(stageId);
+    }
+
+    this.showCard(cards.editStage, { stageId });
+  };
+
   createStage = (type, insertAtIndex) => this.showCard(cards.editStage, { type, insertAtIndex });
 
   isAnyCardVisible = () => this.state.activeCard.cardType !== null;

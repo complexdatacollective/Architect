@@ -1,12 +1,14 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Drawer } from '../Transitions';
+import { TransitionGroup } from 'react-transition-group';
+import None from '../Transitions/None';
+import Drawer from '../Transitions/Drawer';
 import Overview from './Overview';
 import Stage from './Stage';
 import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
 
-class Timeline extends PureComponent {
+class Timeline extends Component {
   static propTypes = {
     stages: PropTypes.array,
     onCreateStage: PropTypes.func,
@@ -103,17 +105,19 @@ class Timeline extends PureComponent {
   }
 
   renderStage = (stage, index) => (
-    <Stage
-      key={`stage_${stage.id}`}
-      id={stage.id}
-      type={stage.type}
-      label={stage.label}
-      onMouseEnter={this.onMouseEnterStage}
-      onMouseLeave={this.onMouseLeaveStage}
-      onEditStage={() => this.props.onEditStage(stage.id)}
-      onInsertStage={position => this.onInsertStage(index + position)}
-      onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
-    />
+    <None key={`stage_${stage.id}`}>
+      <Stage
+        key={`stage_${stage.id}`}
+        id={stage.id}
+        type={stage.type}
+        label={stage.label}
+        onMouseEnter={this.onMouseEnterStage}
+        onMouseLeave={this.onMouseLeaveStage}
+        onEditStage={() => this.props.onEditStage(stage.id)}
+        onInsertStage={position => this.onInsertStage(index + position)}
+        onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
+      />
+    </None>
   );
 
   render() {
@@ -127,7 +131,9 @@ class Timeline extends PureComponent {
             />
             <div className="timeline__stages">
               { this.hasStages() && this.renderHighlight() }
-              { this.renderStages() }
+              <TransitionGroup>
+                { this.renderStages() }
+              </TransitionGroup>
               { !this.hasStages() && (
                 <InsertStage
                   key="insertStage"
