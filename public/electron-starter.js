@@ -51,6 +51,11 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow(windowParameters);
   mainWindow.maximize();
+
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.openDevTools();
+  }
+
   // and load the index.html of the app.
   mainWindow.loadURL(getAppUrl());
 

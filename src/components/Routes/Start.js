@@ -89,7 +89,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
-  loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
+  // loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   chooseProtocol: bindActionCreators(protocolsActions.chooseProtocol, dispatch),
   clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });
