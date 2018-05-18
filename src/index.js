@@ -4,6 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import initReactFastclick from 'react-fastclick';
 import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
+import { ipcRenderer } from 'electron';
 import './styles/main.scss';
 import memoryHistory from './history';
 import { store } from './ducks/store';
@@ -35,3 +36,7 @@ const startApp = () => {
 };
 
 startApp();
+
+ipcRenderer.on('OPEN_FILE', (event, filePath) => {
+  memoryHistory.push(`/edit/${encodeURIComponent(filePath)}`);
+});

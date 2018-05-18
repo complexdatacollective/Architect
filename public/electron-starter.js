@@ -1,15 +1,11 @@
-const electron = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 const url = require('url');
 const os = require('os');
 const log = require('electron-log');
 require('./components/updater');
+const mainMenu = require('./mainMenu');
 const registerProtocolProtocol = require('./components/protocolProtocol').registerProtocolProtocol;
-
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
 
 const isMacOS = () => os.platform() === 'darwin';
 
@@ -21,7 +17,7 @@ const windowParameters = Object.assign({
   minWidth: 1280,
   minHeight: 800,
   center: true,
-  title: 'Network Canvas Architect'
+  title: 'Network Canvas Architect',
 
 }, titlebarParameters);
 
@@ -35,13 +31,13 @@ function getAppUrl() {
   if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
     return url.format({
       host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
-      protocol: 'http'
+      protocol: 'http',
     });
   }
 
   return url.format({
     pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:'
+    protocol: 'file:',
   });
 }
 
@@ -55,6 +51,10 @@ function createWindow() {
   if (process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
   }
+
+
+  const appMenu = Menu.buildFromTemplate(mainMenu(mainWindow));
+  Menu.setApplicationMenu(appMenu);
 
   // and load the index.html of the app.
   mainWindow.loadURL(getAppUrl());
