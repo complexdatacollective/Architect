@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import stages from './stages';
 import forms from './forms';
 import variableRegistry from './variableRegistry';
@@ -23,7 +22,7 @@ const resetProtocol = () => ({
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_PROTOCOL:
-      return action.protocol;
+      return { ...action.protocol };
     default:
       return state;
   }
@@ -43,16 +42,17 @@ export {
   actionTypes,
 };
 
-const flatCombineReducers = (...reducers) =>
+const reduceReducers = (...reducers) =>
   (previousState, action) =>
     reducers.reduce((state, reducer) => reducer(state, action), previousState);
 
-export default flatCombineReducers(
+export default reduceReducers(
   protocolReducer,
-  combineReducers({
-    stages,
-    forms,
-    variableRegistry,
-    externalData,
+  (state, action) => ({
+    ...state,
+    stages: stages(state.stages, action),
+    forms: forms(state.forms, action),
+    variableRegistry: variableRegistry(state.variableRegistry, action),
+    externalData: externalData(state.externalData, action),
   }),
 );

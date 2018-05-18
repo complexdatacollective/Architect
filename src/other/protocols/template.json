@@ -1,4 +1,6 @@
 {
+  "name": "Protocol",
+  "version": "1.0.0",
   "variableRegistry": {
     "node": {
       "person": {
