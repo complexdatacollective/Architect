@@ -34,7 +34,7 @@ class Card extends PureComponent {
     show: false,
   }
 
-  anyButtons = () => this.props.buttons.length > 0;
+  get anyButtons() { return this.props.buttons.length > 0; }
 
   render() {
     const { buttons, cancel, show } = this.props;
@@ -78,7 +78,7 @@ class Card extends PureComponent {
                   { this.props.children }
                 </div>
               </div>
-              { this.anyButtons() &&
+              { this.anyButtons &&
                 <div className={cx('card__control-bar', `card__control-bar--${state}`)}>
                   { buttons }
                 </div>

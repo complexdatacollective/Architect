@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AlterRule, EgoRule, EdgeRule } from '../../containers/Rule';
-// import EgoRule from './EgoRule';
-// import EdgeRule from './EdgeRule';
+import AlterRule from './AlterRule';
+import EgoRule from './EgoRule';
+import EdgeRule from './EdgeRule';
 
 const Rule = ({ type, ...otherProps }) => {
   const props = { type, ...otherProps };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { nth } from 'lodash';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Protocol, Start } from './containers';
+import { Protocol, Start } from './components/Routes';
 import { getCSSVariableAsNumber } from './utils/CSSVariables';
 import tween from './behaviours/Tweened/tween';
 

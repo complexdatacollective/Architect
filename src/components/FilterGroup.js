@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { uniqueId as _uniqueId } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
-import AddButton from '../components/Rule/AddButton';
-import DropDown from '../components/Rule/DropDown';
+import { AddButton, DropDown } from '../components/Rule';
 import { Rules } from '../components';
 
 const uniqueId = () => _uniqueId(new Date().getTime());

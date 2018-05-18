@@ -1,6 +1,6 @@
 import React from 'react';
 import { fieldPropTypes } from 'redux-form';
-import FilterGroup from '../../../containers/FilterGroup';
+import FilterGroup from '../../FilterGroup';
 
 const defaultFilter = {
   join: '',

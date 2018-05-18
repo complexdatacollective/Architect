@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { Button, Icon } from '../ui/components';
-import { getProtocol } from '../selectors/protocol';
-import EditSkipLogic from '../containers/EditSkipLogic';
-import EditStage from '../containers/EditStage';
-import { Timeline } from '../components';
-import { actionCreators as protocolFileActions } from '../ducks/modules/protocol/file';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
+import { Button, Icon } from '../../../ui/components';
+import { getProtocol } from '../../../selectors/protocol';
+import EditSkipLogic from './Cards/EditSkipLogic';
+import EditStage from './Cards/EditStage';
+import { Timeline } from '../../../components';
+import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
+import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
 
 const cards = {
   newStage: Symbol('newStage'),

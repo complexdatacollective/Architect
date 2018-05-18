@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { has, toPairs } from 'lodash';
-import { Button } from '../ui/components';
-import { Guided, Section as GuidedSection, Editor as GuidedEdit, Guidance } from '../components/Guided';
-import { makeGetStage } from '../selectors/protocol';
-import { actionCreators as stageActions } from '../ducks/modules/protocol/stages';
-import { ProtocolCard, FilterGroup } from '../containers';
-import { NetworkRule } from '../containers/Rule';
-import { Draft } from '../behaviours';
-import DropDown from '../components/Rule/DropDown';
+import { Button } from '../../../../ui/components';
+import { Guided, Section as GuidedSection, Editor as GuidedEdit, Guidance } from '../../../Guided';
+import { makeGetStage } from '../../../../selectors/protocol';
+import { actionCreators as stageActions } from '../../../../ducks/modules/protocol/stages';
+import Card from '../Card';
+import FilterGroup from '../../../FilterGroup';
+import { NetworkRule, DropDown } from '../../../Rule';
+import { Draft } from '../../../../behaviours';
 
 const defaultLogic = {
   action: 'SKIP',
@@ -75,7 +75,7 @@ class EditSkipLogic extends PureComponent {
     } = this.props;
 
     return (
-      <ProtocolCard
+      <Card
         type="rules"
         buttons={this.renderButtons()}
         show={show}
@@ -118,7 +118,7 @@ class EditSkipLogic extends PureComponent {
             </Guidance>
           </GuidedSection>
         </Guided>
-      </ProtocolCard>
+      </Card>
     );
   }
 }

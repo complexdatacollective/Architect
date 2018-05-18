@@ -17,52 +17,60 @@ const operators = toPairs({
 
 class NetworkRule extends PureComponent {
   static propTypes = {
-    onUpdateRule: PropTypes.func,
-    options: PropTypes.shape({
+    onChange: PropTypes.func,
+    logic: PropTypes.shape({
       operator: PropTypes.string,
       value: PropTypes.string,
     }),
   };
 
   static defaultProps = {
-    options: {
+    logic: {
       operator: '',
       value: '',
     },
-    onUpdateRule: () => {},
+    onChange: () => {},
+  };
+
+  onUpdateRule = (value, option) => {
+    this.props.onChange({
+      ...this.props.logic,
+      [option]: value,
+    });
   };
 
   showValue() {
-    return !!this.props.options.operator &&
-      !includes(['ANY', 'NONE'], this.props.options.operator);
+    return !!this.props.logic.operator &&
+      !includes(['ANY', 'NONE'], this.props.logic.operator);
   }
 
   render() {
     const {
-      onUpdateRule,
-      options: { operator, value },
+      logic: { operator, value },
     } = this.props;
 
     return (
-      <div className="rule rule--outer">
-        <div className="rule__options">
-          <div className="rule__option rule__option--operator">
-            <DropDown
-              options={operators}
-              value={operator}
-              placeholder="{rule}"
-              onChange={newValue => onUpdateRule(newValue, 'operator')}
-            />
-          </div>
-          {this.showValue() && (
-            <div className="rule__option rule__option--value">
-              <Input
-                type="number"
-                value={value}
-                onChange={newValue => onUpdateRule(newValue, 'value')}
+      <div className="network-rule">
+        <div className="rule rule--outer">
+          <div className="rule__options">
+            <div className="rule__option rule__option--operator">
+              <DropDown
+                options={operators}
+                value={operator}
+                placeholder="{rule}"
+                onChange={newValue => this.onUpdateRule(newValue, 'operator')}
               />
             </div>
-          )}
+            {this.showValue() && (
+              <div className="rule__option rule__option--value">
+                <Input
+                  type="number"
+                  value={value}
+                  onChange={newValue => this.onUpdateRule(newValue, 'value')}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
