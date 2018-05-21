@@ -11,8 +11,21 @@ const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
 
 const initialState = [];
 
-const archiveExists = protocol => existsSync(protocol.archivePath);
-const pruneWorkingPath = protocol => omit(protocol, 'workingPath');
+const protocolExists = (protocol) => {
+  return (
+    existsSync(protocol.archivePath) ||
+    (protocol.advanced && existsSync(protocol.workingPath))
+  );
+};
+
+const pruneProtocols = (protocol) => {
+  if (protocol.advanced) {
+    return omit(protocol, 'archivePath');
+  }
+
+  return omit(protocol, 'workingPath');
+};
+
 const recentUniqueProtocols = compose(
   slice(0, 10),
   uniqBy('workingPath'),
@@ -26,13 +39,14 @@ export default function reducer(state = initialState, action = {}) {
         [action.meta].concat(state),
       );
     case CLEAR_DEAD_LINKS:
-      return state.filter(archiveExists);
+      return state.filter(protocolExists)
+        .map(pruneProtocols);
     case REHYDRATE: {
       const protocols = get(action, ['payload', 'protocols'], []);
 
       return protocols
-        .filter(archiveExists)
-        .map(pruneWorkingPath);
+        .filter(protocolExists)
+        .map(pruneProtocols);
     }
     default:
       return state;
