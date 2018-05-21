@@ -1,7 +1,7 @@
 import { existsSync } from 'fs';
 import { compose } from 'recompose';
 import { get, omit } from 'lodash';
-import { uniqBy, slice } from 'lodash/fp';
+import { uniqWith, slice } from 'lodash/fp';
 import { REHYDRATE } from 'redux-persist/constants';
 import { createProtocol, locateProtocol } from '../../../other/protocols';
 import { actionTypes as protocolFileActionTypes } from '../protocol/file';
@@ -26,10 +26,14 @@ const pruneProtocols = (protocol) => {
   return omit(protocol, 'workingPath');
 };
 
+const optionalUnique = property =>
+  (item, other) =>
+    get(item, property, Symbol('ITEM')) === get(other, property, Symbol('OTHER'));
+
 const recentUniqueProtocols = compose(
   slice(0, 10),
-  uniqBy('workingPath'),
-  uniqBy('archivePath'),
+  uniqWith(optionalUnique('workingPath')),
+  uniqWith(optionalUnique('archivePath')),
 );
 
 export default function reducer(state = initialState, action = {}) {

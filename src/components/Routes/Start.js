@@ -84,7 +84,7 @@ class Start extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  protocols: get(state, 'protocols', []).slice(-3),
+  protocols: get(state, 'protocols', []).slice(0, 3),
 });
 
 const mapDispatchToProps = dispatch => ({
