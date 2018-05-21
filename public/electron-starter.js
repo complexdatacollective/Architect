@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const log = require('electron-log');
 const os = require('os');
 const path = require('path');
@@ -12,7 +12,11 @@ log.info('App starting...');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-let openFile;
+let fileToOpen;
+
+const isMacOS = () => os.platform() === 'darwin';
+
+const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false } : {};
 
 function getAppUrl() {
   if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
@@ -28,23 +32,19 @@ function getAppUrl() {
   });
 }
 
-const isMacOS = () => os.platform() === 'darwin';
-
-const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false } : {};
-
-const windowParameters = Object.assign({
-  width: 1440,
-  height: 900,
-  minWidth: 1280,
-  minHeight: 800,
-  center: true,
-  title: 'Network Canvas Architect',
-
-}, titlebarParameters);
-
 function createWindow() {
   // Create the browser window.
   if (mainWindow) { return; }
+
+  const windowParameters = Object.assign({
+    width: 1440,
+    height: 900,
+    minWidth: 1280,
+    minHeight: 800,
+    center: true,
+    title: 'Network Canvas Architect',
+
+  }, titlebarParameters);
 
   mainWindow = new BrowserWindow(windowParameters);
   mainWindow.maximize();
@@ -65,14 +65,25 @@ function createWindow() {
   });
 
   mainWindow.webContents.once('did-finish-load', () => {
-    if (openFile) {
-      mainWindow.webContents.send('OPEN_FILE', openFile);
-      openFile = null;
+    if (fileToOpen) {
+      mainWindow.webContents.send('OPEN_FILE', fileToOpen);
+      fileToOpen = null;
     }
   });
 
   // and load the index.html of the app.
   mainWindow.loadURL(getAppUrl());
+}
+
+function openFile(filePath) {
+  if (mainWindow) {
+    mainWindow.webContents.send('OPEN_FILE', filePath);
+  } else {
+    fileToOpen = filePath;
+    if (app.isReady()) {
+      createWindow();
+    }
+  }
 }
 
 // This method will be called when Electron has finished
@@ -100,16 +111,25 @@ app.on('activate', () => {
   }
 });
 
-app.on('open-file', (env, filePath) => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow) {
-    mainWindow.webContents.send('OPEN_FILE', filePath);
-  } else {
-    openFile = filePath;
-    if (app.isReady()) {
-      createWindow();
+app.on('open-file', (event, filePath) => {
+  openFile(filePath);
+});
+
+ipcMain.on('GET_ARGF', (event) => {
+  let filePath;
+
+  if (os.platform() === 'win32' && process.argv.length >= 2) {
+    filePath = process.argv[1];
+  }
+
+  if (filePath) {
+    if (mainWindow) {
+      event.sender.send('OPEN_FILE', filePath);
+    } else {
+      fileToOpen = filePath;
+      if (app.isReady()) {
+        createWindow();
+      }
     }
-    // else: assume app.ready will trigger open window
   }
 });

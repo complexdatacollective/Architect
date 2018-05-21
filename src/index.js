@@ -41,3 +41,5 @@ ipcRenderer.on('OPEN_FILE', (event, filePath) => {
   console.log('OPEN_FILE', { event, filePath });
   memoryHistory.push(`/edit/${encodeURIComponent(filePath)}`);
 });
+
+ipcRenderer.send('GET_ARGF');
