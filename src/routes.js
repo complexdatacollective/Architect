@@ -38,7 +38,12 @@ const dispatchRouteAnimations = ({ pathname }, history, protocols) => {
 
 class Routes extends Component {
   componentDidMount() {
-    this.props.history.listen(event => dispatchRouteAnimations(event, this.props.history, this.props.protocols));
+    const { history, protocols } = this.props;
+
+    history.listen(
+      event =>
+        dispatchRouteAnimations(event, history, protocols),
+    );
   }
 
   render() {
@@ -68,6 +73,7 @@ class Routes extends Component {
 Routes.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  protocols: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -11,12 +11,10 @@ const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
 
 const initialState = [];
 
-const protocolExists = (protocol) => {
-  return (
-    existsSync(protocol.archivePath) ||
-    (protocol.advanced && existsSync(protocol.workingPath))
-  );
-};
+const protocolExists = protocol => (
+  existsSync(protocol.archivePath) ||
+  (protocol.advanced && existsSync(protocol.workingPath))
+);
 
 const pruneProtocols = (protocol) => {
   if (protocol.advanced) {
