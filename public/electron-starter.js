@@ -104,7 +104,7 @@ app.on('open-file', (env, filePath) => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow) {
-    mainWindow.webContents.send('OPEN_FILE', openFile);
+    mainWindow.webContents.send('OPEN_FILE', filePath);
   } else {
     openFile = filePath;
     if (app.isReady()) {
