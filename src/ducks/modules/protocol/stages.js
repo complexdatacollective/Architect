@@ -1,4 +1,5 @@
 import uuid from 'uuid/v1';
+import { get } from 'lodash';
 
 const CREATE_STAGE = Symbol('PROTOCOL/CREATE_STAGE');
 const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
@@ -12,7 +13,7 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_STAGE: {
       const stage = { ...initialStage, ...action.stage, id: uuid() };
-      const insertAtIndex = action.index || state.length;
+      const insertAtIndex = get(action, 'index', state.length);
 
       return [
         ...state.slice(0, insertAtIndex),
