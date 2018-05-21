@@ -12,11 +12,11 @@ const Stack = Tweened(() => (
   </div>
 ));
 
-const ProtocolCard = ({ protocol: { id, archivePath } }) => (
+const ProtocolStack = ({ protocol: { id, archivePath } }) => (
   <Link
     component="div"
     className="start-protocol-card"
-    to={`/edit/${encodeURIComponent(id)}`}
+    to={`/edit/${encodeURIComponent(archivePath)}`}
   >
     <div className="start-protocol-card__preview">
       <Stack
@@ -30,8 +30,8 @@ const ProtocolCard = ({ protocol: { id, archivePath } }) => (
   </Link>
 );
 
-ProtocolCard.propTypes = {
+ProtocolStack.propTypes = {
   protocol: PropTypes.object.isRequired,
 };
 
-export default ProtocolCard;
+export default ProtocolStack;

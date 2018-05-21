@@ -6,7 +6,7 @@ import { get } from 'lodash';
 import { compose } from 'recompose';
 import { Button, Icon } from '../../ui/components';
 import { actionCreators as protocolsActions } from '../../ducks/modules/protocols';
-import { ProtocolCard } from '../../components/Start';
+import { ProtocolStack } from '../../components/Start';
 import networkCanvasBrand from '../../images/network-canvas-brand.svg';
 
 class Start extends PureComponent {
@@ -67,7 +67,7 @@ class Start extends PureComponent {
                   className="start__protocols-protocol"
                   key={index}
                 >
-                  <ProtocolCard
+                  <ProtocolStack
                     protocol={protocol}
                   />
                 </div>

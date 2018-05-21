@@ -1,2 +1,2 @@
 /* eslint-disable import/prefer-default-export */
-export { default as ProtocolCard } from './ProtocolCard';
+export { default as ProtocolStack } from './ProtocolStack';
