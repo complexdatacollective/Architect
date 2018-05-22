@@ -60,5 +60,4 @@ describe('protocol root reducer', () => {
         .toEqual(replacementProtocol);
     });
   });
-
 });

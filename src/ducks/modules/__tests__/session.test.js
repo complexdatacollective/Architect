@@ -3,7 +3,7 @@
 import reducer from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
-import { actionCreators as fileActions, openProtocolAction, saveComplete } from '../protocol/file';
+import { openProtocolAction, saveComplete } from '../protocol/file';
 
 const protocolMeta = { id: 'foo', archivePath: '/bar/buzz' };
 
