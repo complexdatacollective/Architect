@@ -3,7 +3,7 @@
 import reducer from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
-import { actionCreators as fileActions } from '../protocol/file';
+import { actionCreators as fileActions, openProtocolAction, saveComplete } from '../protocol/file';
 
 const protocolMeta = { id: 'foo', archivePath: '/bar/buzz' };
 
@@ -18,10 +18,10 @@ describe('session reducer', () => {
   });
 
   describe('protocol actions', () => {
-    it('updates path when protocol is set', () => {
+    it('updates when protocol is opened', () => {
       const newState = reducer(
         undefined,
-        protocolActions.setProtocol(undefined, protocolMeta),
+        openProtocolAction(undefined, protocolMeta),
       );
 
       expect(newState)
@@ -69,7 +69,7 @@ describe('session reducer', () => {
     it('tracks last saved when protocol saved', () => {
       const newState = reducer(
         undefined,
-        fileActions.saveComplete(),
+        saveComplete(),
       );
 
       expect(newState.lastSaved > 0).toBe(true);

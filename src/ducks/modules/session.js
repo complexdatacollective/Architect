@@ -1,5 +1,6 @@
 import { actionTypes as protocolFileActionTypes } from './protocol/file';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
+import { actionTypes as protocolActionTypes } from './protocol/index';
 
 const initialState = {
   activeProtocol: {}, // protocolMeta
@@ -9,6 +10,14 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case protocolActionTypes.SET_PROTOCOL: {
+      return {
+        ...state,
+        activeProtocol: action.meta,
+        lastSaved: 0,
+        lastChanged: 0,
+      };
+    }
     case protocolFileActionTypes.OPEN_PROTOCOL: {
       return {
         ...state,

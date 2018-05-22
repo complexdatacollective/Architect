@@ -29,6 +29,7 @@ const actionCreators = {
 };
 
 const actionTypes = {
+  SET_PROTOCOL,
 };
 
 export {

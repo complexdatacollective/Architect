@@ -44,9 +44,20 @@ const metaFromWorkingPath = (protocols, workingPath) => {
   });
 };
 
-const saveComplete = () => ({ type: SAVE_COMPLETE });
+export const openProtocolAction = (protocol, meta) => ({
+  type: OPEN_PROTOCOL,
+  protocol,
+  meta,
+});
 
-const saveProtocolAction = () =>
+export const protocolLoadedAction = meta => ({
+  type: PROTOCOL_LOADED,
+  meta,
+});
+
+export const saveComplete = () => ({ type: SAVE_COMPLETE });
+
+const saveProtocolThunk = () =>
   (dispatch, getState) => {
     const state = getState();
     const activeProtocol = state.session.activeProtocol;
@@ -55,18 +66,14 @@ const saveProtocolAction = () =>
       .then(() => dispatch(saveComplete()));
   };
 
-const openProtocolAction = protocolMeta =>
+const openProtocolThunk = protocolMeta =>
   (dispatch) => {
     const protocolData = loadProtocolData(protocolMeta.workingPath);
 
-    dispatch({
-      type: OPEN_PROTOCOL,
-      protocol: protocolData,
-      meta: protocolMeta,
-    });
+    dispatch(openProtocolAction(protocolData, protocolMeta));
   };
 
-const loadProtocolAction = filePath =>
+const loadProtocolThunk = filePath =>
   (dispatch, getState) => {
     const { protocols } = getState();
 
@@ -76,19 +83,15 @@ const loadProtocolAction = filePath =>
 
     return prepareWorkingCopy(protocolMeta)
       .then((metaWithWorkingCopy) => {
-        dispatch({
-          type: PROTOCOL_LOADED,
-          meta: metaWithWorkingCopy,
-        });
-
-        dispatch(openProtocolAction(metaWithWorkingCopy));
+        dispatch(protocolLoadedAction(metaWithWorkingCopy));
+        dispatch(openProtocolThunk(metaWithWorkingCopy));
       });
   };
 
 const actionCreators = {
-  saveProtocol: saveProtocolAction,
-  openProtocol: openProtocolAction,
-  loadProtocol: loadProtocolAction,
+  saveProtocol: saveProtocolThunk,
+  openProtocol: openProtocolThunk,
+  loadProtocol: loadProtocolThunk,
 };
 
 const actionTypes = {

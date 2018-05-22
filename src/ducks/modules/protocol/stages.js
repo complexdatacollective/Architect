@@ -38,7 +38,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-function createStage(stage, index = null) {
+function createStage(stage, index) {
   return {
     type: CREATE_STAGE,
     stage,
