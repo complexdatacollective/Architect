@@ -1,4 +1,4 @@
-const { dialog } = require('electron');
+const { dialog, session } = require('electron');
 
 const openDialogOptions = {
   buttonLabel: 'Open',
@@ -45,15 +45,34 @@ const MenuTemplate = (window) => {
     {
       label: 'View',
       submenu: [
-        { role: 'reload' },
-        { role: 'forcereload' },
-        { role: 'toggledevtools' },
-        { type: 'separator' },
         { role: 'resetzoom' },
         { role: 'zoomin' },
         { role: 'zoomout' },
         { type: 'separator' },
         { role: 'togglefullscreen' },
+      ],
+    },
+    {
+      label: 'Develop',
+      submenu: [
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' },
+        { type: 'separator' },
+        {
+          label: 'Clear storage data',
+          click: () => {
+            dialog.showMessageBox({
+              message: 'This will reset all app data, are you sure?',
+              buttons: ['OK', 'Cancel'],
+            }, (response) => {
+              if (response === 0) {
+                window.webContents.session.clearStorageData();
+                window.webContents.reload();
+              }
+            });
+          },
+        },
       ],
     },
     {
