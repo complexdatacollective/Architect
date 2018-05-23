@@ -8,6 +8,7 @@ ShallowWrapper {
     onCreateStage={[Function]}
     onEditSkipLogic={[Function]}
     onEditStage={[Function]}
+    overview={Object {}}
     stages={Array []}
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -31,9 +32,7 @@ ShallowWrapper {
         <div
                 className="timeline__content"
         >
-                <Unknown
-                        title="My protocol"
-                />
+                <Connect(Component) />
                 <div
                         className="timeline__stages"
                 >
@@ -64,9 +63,7 @@ ShallowWrapper {
           <div
             className="timeline__content"
 >
-            <Unknown
-                        title="My protocol"
-            />
+            <Connect(Component) />
             <div
                         className="timeline__stages"
             >
@@ -103,9 +100,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <Unknown
-                title="My protocol"
-/>,
+              <Connect(Component) />,
               <div
                 className="timeline__stages"
 >
@@ -127,10 +122,8 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "title": "My protocol",
-              },
+              "nodeType": "class",
+              "props": Object {},
               "ref": null,
               "rendered": null,
               "type": [Function],
@@ -207,9 +200,7 @@ ShallowWrapper {
           <div
                     className="timeline__content"
           >
-                    <Unknown
-                              title="My protocol"
-                    />
+                    <Connect(Component) />
                     <div
                               className="timeline__stages"
                     >
@@ -240,9 +231,7 @@ ShallowWrapper {
             <div
               className="timeline__content"
 >
-              <Unknown
-                            title="My protocol"
-              />
+              <Connect(Component) />
               <div
                             className="timeline__stages"
               >
@@ -279,9 +268,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <Unknown
-                  title="My protocol"
-/>,
+                <Connect(Component) />,
                 <div
                   className="timeline__stages"
 >
@@ -303,10 +290,8 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
-                "nodeType": "function",
-                "props": Object {
-                  "title": "My protocol",
-                },
+                "nodeType": "class",
+                "props": Object {},
                 "ref": null,
                 "rendered": null,
                 "type": [Function],

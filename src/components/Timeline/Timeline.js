@@ -11,6 +11,7 @@ import constrain from '../../behaviours/constrain';
 class Timeline extends Component {
   static propTypes = {
     stages: PropTypes.array,
+    overview: PropTypes.object,
     onCreateStage: PropTypes.func,
     onEditStage: PropTypes.func,
     onEditSkipLogic: PropTypes.func,
@@ -18,6 +19,7 @@ class Timeline extends Component {
 
   static defaultProps = {
     stages: [],
+    overview: {},
     onCreateStage: () => {},
     onEditStage: () => {},
     onEditSkipLogic: () => {},
@@ -127,7 +129,7 @@ class Timeline extends Component {
           <div className="timeline__background" />
           <div className="timeline__content">
             <Overview
-              title="My protocol"
+              {...this.props.overview}
             />
             <div className="timeline__stages">
               { this.hasStages() && this.renderHighlight() }

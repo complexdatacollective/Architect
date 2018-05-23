@@ -94,6 +94,7 @@ class InsertStage extends PureComponent {
 
   renderOption = ({ type }, index) => (
     <StageType
+      key={type}
       type={type}
       zoomColors={['#2d2955', '#ffffff']}
       onSelectStageType={() => this.props.onSelectStageType(type)}
@@ -111,7 +112,7 @@ class InsertStage extends PureComponent {
     );
 
     return (
-      <div className={guidanceClasses}>
+      <div className={guidanceClasses} key={index}>
         <h3>{ guidance.title }</h3>
         { guidance.description }
       </div>
