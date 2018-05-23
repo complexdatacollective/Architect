@@ -38,11 +38,12 @@ const dispatchRouteAnimations = ({ pathname }, history, protocols) => {
 
 class Routes extends Component {
   componentDidMount() {
-    const { history, protocols } = this.props;
+    const { history } = this.props;
 
     history.listen(
-      event =>
-        dispatchRouteAnimations(event, history, protocols),
+      (event) => {
+        dispatchRouteAnimations(event, this.props.history, this.props.protocols);
+      }
     );
   }
 
