@@ -109,7 +109,7 @@ describe('protocols reducer', () => {
           expect(createProtocol.mock.calls.length).toBe(1);
           expect(actions).toEqual([]);
           expect(history.push.mock.calls).toEqual([
-            ['/edit/%2Ftmp%2Ffoo%2Fnew-protocol'],
+            ['/edit/%2Ffoo%2Fnew-protocol'],
           ]);
         });
     });

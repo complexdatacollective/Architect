@@ -66,7 +66,7 @@ const createProtocolAction = () =>
     createProtocol()
       .then(
         (protocolMeta) => {
-          history.push(`/edit/${encodeURIComponent(protocolMeta.workingPath)}`);
+          history.push(`/edit/${encodeURIComponent(protocolMeta.archivePath)}`);
         },
       );
 
