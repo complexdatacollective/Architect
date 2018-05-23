@@ -9,7 +9,7 @@ describe('protocol root reducer', () => {
       const initialState = reducer();
       expect(initialState).toEqual(
         {
-          externalData: [],
+          externalData: {},
           forms: {},
           stages: [],
           variableRegistry: {},
@@ -20,7 +20,7 @@ describe('protocol root reducer', () => {
 
   describe('resetProtocol()', () => {
     const currentProtocol = {
-      externalData: [{ nodes: [{ foo: 'bar' }] }],
+      externalData: { nodes: [{ foo: 'bar' }] },
       forms: { fooForm: { bar: 'baz' } },
       stages: [{ type: 'foobar' }],
       variableRegistry: { fooVar: { baz: 'buzz' } },
@@ -34,7 +34,7 @@ describe('protocol root reducer', () => {
 
       expect(newStateFromFileAction)
         .toEqual({
-          externalData: [],
+          externalData: {},
           forms: {},
           stages: [],
           variableRegistry: {},
@@ -45,7 +45,7 @@ describe('protocol root reducer', () => {
   describe('updateOptions()', () => {
     const currentProtocol = {
       name: 'foo',
-      externalData: [{ nodes: [{ foo: 'bar' }] }],
+      externalData: { nodes: [{ foo: 'bar' }] },
       forms: { fooForm: { bar: 'baz' } },
       stages: [{ type: 'foobar' }],
       variableRegistry: { fooVar: { baz: 'buzz' } },
@@ -62,7 +62,7 @@ describe('protocol root reducer', () => {
       expect(newStateFromFileAction)
         .toEqual({
           name: 'bar',
-          externalData: [{ nodes: [{ foo: 'bar' }] }],
+          externalData: { nodes: [{ foo: 'bar' }] },
           forms: { fooForm: { bar: 'baz' } },
           stages: [{ type: 'foobar' }],
           variableRegistry: { fooVar: { baz: 'buzz' } },
@@ -72,7 +72,7 @@ describe('protocol root reducer', () => {
 
   describe('file.openProtocol()', () => {
     const replacementProtocol = {
-      externalData: [{ nodes: [{ foo: 'bar' }] }],
+      externalData: { nodes: [{ foo: 'bar' }] },
       forms: { fooForm: { bar: 'baz' } },
       stages: [{ type: 'foobar' }],
       variableRegistry: { fooVar: { baz: 'buzz' } },

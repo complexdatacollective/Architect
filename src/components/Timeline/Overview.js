@@ -1,27 +1,21 @@
-/* eslint-disable */
-
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reduxForm, Form, Field, formValueSelector, formPropTypes } from 'redux-form';
-import { pick, get, keys } from 'lodash';
+import PropTypes from 'prop-types';
+import { get, keys } from 'lodash';
 import { compose } from 'recompose';
-import { Button } from '../../ui/components';
 import SeamlessText from '../Form/Fields/SeamlessText';
 import { Tweened } from '../../behaviours/Tweened';
 import { actionCreators as protocolActions } from '../../ducks/modules/protocol';
 
-const formName = 'protocol-overview';
-
 const Overview = ({
   name,
   version,
-  forms,
   variableRegistry,
-  externalData,
   updateOptions,
 }) => {
-  const variables = keys(get(variableRegistry, 'node', {}));
+  const nodeTypes = keys(get(variableRegistry, 'node', {}));
+  const edgeTypes = keys(get(variableRegistry, 'edge', {}));
 
   return (
     <div className="timeline-overview">
@@ -32,16 +26,20 @@ const Overview = ({
               className="timeline-overview__name"
               input={{
                 value: name,
-                onChange: ({ target: { value }}) => { updateOptions({ name: value }); },
+                onChange: ({ target: { value } }) => { updateOptions({ name: value }); },
               }}
             />
 
             <div className="panel__groups">
               <div className="panel__group">
                 <h3 className="panel__group-title">Variable registry</h3>
-                <p>Node types:</p>
+                <h4>Node types</h4>
                 <ul>
-                  { variables.map(nodeType => (<li key={nodeType}>{nodeType}</li>)) }
+                  { nodeTypes.map(nodeType => (<li key={nodeType}>{nodeType}</li>)) }
+                </ul>
+                <h4>Edge types</h4>
+                <ul>
+                  { edgeTypes.map(edgeType => (<li key={edgeType}>{edgeType}</li>)) }
                 </ul>
               </div>
               <div className="panel__group">
@@ -63,7 +61,25 @@ const Overview = ({
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
+Overview.propTypes = {
+  name: PropTypes.string,
+  version: PropTypes.string,
+  forms: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+  variableRegistry: PropTypes.object,
+  externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+  updateOptions: PropTypes.func,
+};
+
+Overview.defaultProps = {
+  name: '',
+  version: '',
+  forms: {},
+  variableRegistry: {},
+  externalData: {},
+  updateOptions: () => {},
+};
+
+const mapDispatchToProps = dispatch => ({
   updateOptions: bindActionCreators(protocolActions.updateOptions, dispatch),
 });
 

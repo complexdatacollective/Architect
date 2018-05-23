@@ -43,7 +43,7 @@ class Routes extends Component {
     history.listen(
       (event) => {
         dispatchRouteAnimations(event, this.props.history, this.props.protocols);
-      }
+      },
     );
   }
 
