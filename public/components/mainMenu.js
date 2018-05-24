@@ -67,8 +67,9 @@ const MenuTemplate = (window) => {
               buttons: ['OK', 'Cancel'],
             }, (response) => {
               if (response === 0) {
-                window.webContents.session.clearStorageData();
-                window.webContents.reload();
+                window.webContents.session.clearStorageData(() => {
+                  window.webContents.reload();
+                });
               }
             });
           },
