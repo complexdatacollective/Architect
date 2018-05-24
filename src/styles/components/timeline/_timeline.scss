@@ -9,6 +9,7 @@ $stage-padding: unit(5);
   height: 100%;
   display: flex;
   flex-direction: column;
+  z-index: var(--z-default);
 
   &__main {
     @include no-scrollbars;

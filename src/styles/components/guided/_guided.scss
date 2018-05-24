@@ -1,5 +1,6 @@
 .guided {
   position: relative;
+  z-index: var(--z-default);
 
   display: flex;
   flex-direction: column;

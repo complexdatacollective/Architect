@@ -5,10 +5,11 @@ $component-name: form-fields-video;
   overflow: hidden;
   position: relative;
   padding-bottom: 57%;
+  z-index: var(--z-default);
 
   &__preview {
     position: absolute;
-    z-index: 102;
+    z-index: 1;
     top: 0;
     left: 0;
     overflow: hidden;
@@ -27,13 +28,13 @@ $component-name: form-fields-video;
       border-radius: unit(2);
       word-break: break-all;
       position: absolute;
-      z-index: 103;
+      z-index: 2;
       background: var(--architect-border);
     }
 
     &-still {
       position: absolute;
-      z-index: 103;
+      z-index: 2;
       top: 0;
       left: 0;
       width: 100%;

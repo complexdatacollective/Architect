@@ -9,6 +9,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: var(--z-default);
 
   &__background {
     @extend %wave;
@@ -17,7 +18,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 2;
     transition: transform var(--animation-duration-slow) var(--animation-easing);
     transform: translateZ(0);
   }
@@ -29,7 +30,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 
     &:first-child {
       align-items: flex-start;

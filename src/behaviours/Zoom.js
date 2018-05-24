@@ -65,6 +65,7 @@ const Zoom = WrappedComponent =>
           'style',
           `position: absolute;
           transform: translateZ(0);
+          z-index: var(--z-fx);
           top: ${top}px;
           left: ${left}px;
           width: ${targetWidth}px;

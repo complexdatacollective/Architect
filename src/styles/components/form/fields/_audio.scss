@@ -5,6 +5,7 @@ $component-name: form-fields-audio;
   overflow: hidden;
   position: relative;
   min-height: 100px;
+  z-index: var(--z-default);
 
   &__preview {
     position: absolute;

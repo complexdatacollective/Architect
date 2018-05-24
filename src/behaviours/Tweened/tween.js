@@ -33,7 +33,7 @@ const tween = (options, { clone, fromBounds }) => {
   };
 
   clone.style.position = 'absolute';
-  clone.style.zIndex = 1000;
+  clone.style.zIndex = 'var(--z-fx)';
   clone.style.transform = 'translateZ(0)';
   clone.style.top = `${fromBounds.top}px`;
   clone.style.left = `${fromBounds.left}px`;

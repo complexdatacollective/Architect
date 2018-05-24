@@ -74,6 +74,7 @@ $component-name: timeline-stage;
     width: $preview-width;
     padding-bottom: $preview-width * $preview-ratio;
     position: relative;
+    z-index: var(--z-default);
 
     &-preview {
       width: 100%;
