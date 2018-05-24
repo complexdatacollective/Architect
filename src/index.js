@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import initReactFastclick from 'react-fastclick';
@@ -17,8 +17,8 @@ initReactFastclick();
 
 const startApp = () => {
   ReactDOM.render(
-    [
-      <ClipPaths />,
+    <Fragment>
+      <ClipPaths />
       <Provider store={store}>
         <Router history={memoryHistory}>
           <Route
@@ -29,8 +29,8 @@ const startApp = () => {
             )}
           />
         </Router>
-      </Provider>,
-    ],
+      </Provider>
+    </Fragment>,
     document.getElementById('root'),
   );
 };
