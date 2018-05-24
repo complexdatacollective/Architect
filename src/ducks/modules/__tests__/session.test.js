@@ -62,6 +62,13 @@ describe('session reducer', () => {
       );
 
       expect(updateStageState.lastChanged > 0).toBe(true);
+
+      const updateOptionsState = reducer(
+        undefined,
+        protocolActions.updateOptions({}),
+      );
+
+      expect(updateOptionsState.lastChanged > 0).toBe(true);
     });
   });
 

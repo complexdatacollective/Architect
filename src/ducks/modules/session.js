@@ -33,6 +33,7 @@ export default function reducer(state = initialState, action = {}) {
       };
     case protocolStageActionTypes.CREATE_STAGE:
     case protocolStageActionTypes.UPDATE_STAGE:
+    case protocolActionTypes.UPDATE_OPTIONS:
       return {
         ...state,
         lastChanged: new Date().getTime(),

@@ -43,6 +43,7 @@ const actionCreators = {
 
 const actionTypes = {
   SET_PROTOCOL,
+  UPDATE_OPTIONS,
 };
 
 export {
