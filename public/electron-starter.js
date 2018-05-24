@@ -119,7 +119,11 @@ ipcMain.on('GET_ARGF', (event) => {
   let filePath;
 
   if (os.platform() === 'win32' && process.argv.length >= 2) {
-    filePath = process.argv[1];
+    const argf = process.argv[1];
+    if (path.extname(argf) === '.netcanvas') {
+      console.log('.netcanvas found in argv', JSON.stringify({ argv: process.argv }, null, 2));
+      filePath = argf;
+    }
   }
 
   if (filePath) {
