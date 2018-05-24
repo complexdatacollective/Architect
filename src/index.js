@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import initReactFastclick from 'react-fastclick';
 import { Provider } from 'react-redux';
-import { MemoryRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import { ipcRenderer } from 'electron';
 import './styles/main.scss';
+import memoryHistory from './history';
 import { store } from './ducks/store';
 import App from './components/App';
 import Routes from './routes';
@@ -15,10 +17,10 @@ initReactFastclick();
 
 const startApp = () => {
   ReactDOM.render(
-    [
-      <ClipPaths />,
+    <Fragment>
+      <ClipPaths />
       <Provider store={store}>
-        <Router>
+        <Router history={memoryHistory}>
           <Route
             render={({ location, history }) => (
               <App>
@@ -27,10 +29,16 @@ const startApp = () => {
             )}
           />
         </Router>
-      </Provider>,
-    ],
+      </Provider>
+    </Fragment>,
     document.getElementById('root'),
   );
 };
 
 startApp();
+
+ipcRenderer.on('OPEN_FILE', (event, filePath) => {
+  memoryHistory.push(`/edit/${encodeURIComponent(filePath)}`);
+});
+
+ipcRenderer.send('GET_ARGF');

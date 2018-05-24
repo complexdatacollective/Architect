@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import { has, get, defer } from 'lodash';
 import anime from 'animejs';
 import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
@@ -16,62 +18,54 @@ const defaultRect = {
   height: 0,
 };
 
-const tween = (options) => {
+const tween = (options, { clone, fromBounds }) => {
   const { name, from, to, before, after, duration } = { ...defaults, ...options };
   const root = document.getElementsByTagName('body')[0];
   const state = store.getState();
 
   if (!has(state, [name, from]) || !has(state, [name, to])) { return; }
 
-  const fromTarget = get(state, [name, from]);
   const toTarget = get(state, [name, to]);
-
-  const Clone = fromTarget.node.cloneNode(true);
-
-  const fromBounds = {
-    ...defaultRect,
-    ...getAbsoluteBoundingRect(fromTarget.node),
-  };
 
   const toBounds = {
     ...defaultRect,
     ...getAbsoluteBoundingRect(toTarget.node),
   };
 
-  Clone.style.position = 'absolute';
-  Clone.style.zIndex = 'var(--z-fx)';
-  Clone.style.transform = 'translateZ(0)';
-  Clone.style.top = `${fromBounds.top}px`;
-  Clone.style.left = `${fromBounds.left}px`;
-  Clone.style.width = `${fromBounds.width}px`;
-  Clone.style.height = `${fromBounds.height}px`;
-  Clone.style.transformOrigin = 'top left';
-  Clone.classList.add(`tween-${name}`);
+  clone.style.position = 'absolute';
+  clone.style.zIndex = 'var(--z-fx)';
+  clone.style.transform = 'translateZ(0)';
+  clone.style.top = `${fromBounds.top}px`;
+  clone.style.left = `${fromBounds.left}px`;
+  clone.style.width = `${fromBounds.width}px`;
+  clone.style.height = `${fromBounds.height}px`;
+  clone.style.transformOrigin = 'top left';
+  clone.classList.add(`tween-${name}`);
 
-  root.appendChild(Clone);
+  root.appendChild(clone);
 
   // Force repaint
-  Clone.scrollTop; // eslint-disable-line
+  clone.scrollTop; // eslint-disable-line
 
-  Clone.classList.add(`tween-${name}-before`);
+  clone.classList.add(`tween-${name}-before`);
 
   setTimeout(() => {
-    Clone.classList.add(`tween-${name}-active`);
+    clone.classList.add(`tween-${name}-active`);
   }, before);
 
   setTimeout(() => {
-    Clone.classList.add(`tween-${name}-after`);
+    clone.classList.add(`tween-${name}-after`);
   }, (before + duration));
 
   const beforeAnimation = {
-    targets: Clone,
+    targets: clone,
     elasticity: 0,
     easing: [0.25, 0.1, 0.25, 1],
     duration: before,
   };
 
   const activeAnimation = {
-    targets: Clone,
+    targets: clone,
     elasticity: 0,
     easing: [0.25, 0.1, 0.25, 1],
     duration,
@@ -82,7 +76,7 @@ const tween = (options) => {
   };
 
   const afterAnimation = {
-    targets: Clone,
+    targets: clone,
     elasticity: 0,
     easing: [0.25, 0.1, 0.25, 1],
     duration: after,
@@ -94,10 +88,28 @@ const tween = (options) => {
     .add(afterAnimation)
     .finished
     .then(() => {
-      root.removeChild(Clone);
+      root.removeChild(clone);
     });
+};
+
+const captureStartAndDefer = (options) => {
+  const { name, from } = options;
+  const state = store.getState();
+
+  if (!has(state, [name, from])) { return; }
+
+  const fromTarget = get(state, [name, from]);
+
+  const fromBounds = {
+    ...defaultRect,
+    ...getAbsoluteBoundingRect(fromTarget.node),
+  };
+
+  const clone = fromTarget.node.cloneNode(true);
+
+  defer(() => tween(options, { clone, fromBounds }));
 };
 
 // defer waits until next callstack, this is to allow for time for react elements to exist for
 // tweening, with r16 async rendering, this may break.
-export default (...args) => defer(() => tween(...args));
+export default captureStartAndDefer;

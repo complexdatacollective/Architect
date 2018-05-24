@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Wave from './Wave';
 
-const ClipPaths = () => ([
-  <Wave />,
-]);
+const ClipPaths = () => (
+  <Fragment>
+    <Wave />
+  </Fragment>
+);
 
 export default ClipPaths;

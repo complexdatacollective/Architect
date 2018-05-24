@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { nth } from 'lodash';
+import { connect } from 'react-redux';
+import { nth, find, get } from 'lodash';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Protocol, Start } from './components/Routes';
 import { getCSSVariableAsNumber } from './utils/CSSVariables';
 import tween from './behaviours/Tweened/tween';
 
-const getProtocolName = pathname =>
+const getProtocolPath = pathname =>
   decodeURIComponent(nth(/^\/edit\/([^/]+)$/.exec(pathname), 1));
 
-const dispatchRouteAnimations = ({ pathname }, history) => {
+const getProtocolId = (protocols, path) => {
+  const idFromArchivePath = get(find(protocols, ['archivePath', path]), 'id');
+  const idFromWorkingPath = get(find(protocols, ['workingPath', path]), 'id');
+  return idFromArchivePath || idFromWorkingPath || null;
+};
+
+const getProtocolIdFromPathname = (protocols, pathname) =>
+  getProtocolId(protocols, getProtocolPath(pathname));
+
+const dispatchRouteAnimations = ({ pathname }, history, protocols) => {
   const { pathname: previousPathname } = nth(history.entries, -2);
 
   switch (true) {
     case /^\/edit\/[^/]+$/.test(previousPathname) && /^\/$/.test(pathname): {
-      tween({ name: 'protocol', from: 'overview-panel', to: getProtocolName(previousPathname) });
+      tween({ name: 'protocol', from: 'overview-panel', to: getProtocolIdFromPathname(protocols, previousPathname) });
       break;
     }
     case /^\/$/.test(previousPathname) && /^\/edit\/[^/]+$/.test(pathname): {
-      tween({ name: 'protocol', from: getProtocolName(pathname), to: 'overview-panel' });
+      tween({ name: 'protocol', from: getProtocolIdFromPathname(protocols, pathname), to: 'overview-panel' });
       break;
     }
     default:
@@ -28,7 +38,13 @@ const dispatchRouteAnimations = ({ pathname }, history) => {
 
 class Routes extends Component {
   componentDidMount() {
-    this.props.history.listen(event => dispatchRouteAnimations(event, this.props.history));
+    const { history } = this.props;
+
+    history.listen(
+      (event) => {
+        dispatchRouteAnimations(event, this.props.history, this.props.protocols);
+      },
+    );
   }
 
   render() {
@@ -58,6 +74,17 @@ class Routes extends Component {
 Routes.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  protocols: PropTypes.array.isRequired,
 };
 
-export default Routes;
+const mapStateToProps = state => ({
+  protocols: state.protocols,
+});
+
+export { Routes };
+
+export default connect(
+  mapStateToProps,
+)(
+  Routes,
+);

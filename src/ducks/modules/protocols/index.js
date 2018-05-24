@@ -1,133 +1,91 @@
-import uuid from 'uuid';
 import { existsSync } from 'fs';
-import { uniqBy, get, has, omit } from 'lodash';
+import { compose } from 'recompose';
+import { get, omit } from 'lodash';
+import { uniqWith, slice } from 'lodash/fp';
 import { REHYDRATE } from 'redux-persist/constants';
-import { createProtocol, loadProtocolData, locateProtocol, openProtocol } from '../../../other/protocols';
-import { actionCreators as protocolActions } from '../protocol';
+import { createProtocol, locateProtocol } from '../../../other/protocols';
+import { actionTypes as protocolFileActionTypes } from '../protocol/file';
+import history from '../../../history';
 
-const UPDATE_PROTOCOL = Symbol('PROTOCOLS/UPDATE_PROTOCOL');
-const ADD_PROTOCOL = Symbol('PROTOCOLS/ADD_PROTOCOL');
 const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
 
 const initialState = [];
 
-const archiveExists = protocol => existsSync(protocol.archivePath);
-const pruneWorkingPath = protocol => omit(protocol, 'workingPath');
+const protocolExists = protocol => (
+  existsSync(protocol.archivePath) ||
+  (protocol.advanced && existsSync(protocol.workingPath))
+);
+
+const pruneProtocols = (protocol) => {
+  if (protocol.advanced) {
+    return omit(protocol, 'archivePath');
+  }
+
+  return omit(protocol, 'workingPath');
+};
+
+const optionalUnique = property =>
+  (item, other) =>
+    get(item, property, Symbol('ITEM')) === get(other, property, Symbol('OTHER'));
+
+const recentUniqueProtocols = compose(
+  slice(0, 10),
+  uniqWith(optionalUnique('workingPath')),
+  uniqWith(optionalUnique('archivePath')),
+);
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case ADD_PROTOCOL: {
-      const newProtocols = [
-        ...state,
-        action.protocol,
-      ];
-
-      return uniqBy(newProtocols, 'archivePath')
-        .slice(-10);
-    }
-    case UPDATE_PROTOCOL: {
-      return state.map((protocol) => {
-        if (protocol.id !== action.id) { return protocol; }
-        return { ...protocol, ...action.protocol };
-      });
-    }
+    case protocolFileActionTypes.PROTOCOL_LOADED:
+      return recentUniqueProtocols(
+        [action.meta].concat(state),
+      );
     case CLEAR_DEAD_LINKS:
-      return state.filter(archiveExists);
+      return state.filter(protocolExists)
+        .map(pruneProtocols);
     case REHYDRATE: {
       const protocols = get(action, ['payload', 'protocols'], []);
 
       return protocols
-        .filter(archiveExists)
-        .map(pruneWorkingPath);
+        .filter(protocolExists)
+        .map(pruneProtocols);
     }
     default:
       return state;
   }
 }
 
-const addProtocol = protocol =>
-  ({
-    type: ADD_PROTOCOL,
-    protocol: {
-      ...protocol,
-      id: uuid(),
-    },
-  });
-
-const updateProtocol = (id, protocol) =>
-  ({
-    type: UPDATE_PROTOCOL,
-    id,
-    protocol,
-  });
-
 const clearDeadLinks = () =>
   ({
     type: CLEAR_DEAD_LINKS,
   });
 
-const prepareWorkingCopy = (protocolMeta) => {
-  if (has(protocolMeta, 'workingPath')) {
-    return Promise.resolve(protocolMeta);
-  }
 
-  return openProtocol(protocolMeta.archivePath)
-    .then(
-      ({ workingPath }) =>
-        ({ ...protocolMeta, workingPath }),
-    );
-};
-
-const loadProtocolAction = protocolId =>
-  (dispatch, getState) => {
-    const { protocols } = getState();
-    const protocolMeta = protocols.find(protocol => protocol.id === protocolId);
-
-    return prepareWorkingCopy(protocolMeta)
-      .then((protocolMetaWithWorkingPath) => {
-        const protocolData = loadProtocolData(protocolMetaWithWorkingPath.workingPath);
-
-        dispatch(updateProtocol(protocolMetaWithWorkingPath.id, protocolMetaWithWorkingPath));
-        dispatch(protocolActions.setProtocol(protocolData, protocolMetaWithWorkingPath));
-      });
-  };
-
-const createProtocolAction = (callback = () => {}) =>
-  dispatch =>
+const createProtocolAction = () =>
+  () =>
     createProtocol()
-      .then((protocolMeta) => {
-        const action = addProtocol(protocolMeta);
-        dispatch(action);
-        callback(action.protocol);
-      });
+      .then(
+        (protocolMeta) => {
+          history.push(`/edit/${encodeURIComponent(protocolMeta.archivePath)}`);
+        },
+      );
 
-const chooseProtocolAction = (callback = () => {}) =>
-  (dispatch, getState) =>
+const chooseProtocolAction = () =>
+  () =>
     locateProtocol()
-      .then((archivePath) => {
-        const { protocols } = getState();
-        const existingEntry = protocols.find(protocol => protocol.archivePath === archivePath);
-
-        if (existingEntry) {
-          return callback(existingEntry);
-        }
-
-        const newProtocolAction = addProtocol({ archivePath });
-        dispatch(newProtocolAction);
-        return callback(newProtocolAction.protocol);
-      });
+      .then(
+        (filePath) => {
+          history.push(`/edit/${encodeURIComponent(filePath)}`);
+        },
+      );
 
 const actionCreators = {
-  addProtocol,
-  updateProtocol,
   clearDeadLinks,
   createProtocol: createProtocolAction,
-  loadProtocol: loadProtocolAction,
   chooseProtocol: chooseProtocolAction,
 };
 
 const actionTypes = {
-  ADD_PROTOCOL,
 };
 
 export {

@@ -2,12 +2,14 @@
 
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { times, sampleSize, pick, omit } from 'lodash';
+import { times, sampleSize } from 'lodash';
 import reducer, { actionCreators } from '../index';
-import { actionCreators as protocolActionCreators } from '../../protocol';
-import { createProtocol, loadProtocolData, locateProtocol } from '../../../../other/protocols';
+import { createProtocol, locateProtocol } from '../../../../other/protocols';
+import { protocolLoadedAction } from '../../protocol/file';
+import history from '../../../../history';
 
 jest.mock('../../../../other/protocols');
+jest.mock('../../../../history');
 
 const protocolPath = '/foo/bar';
 
@@ -21,11 +23,11 @@ describe('protocols reducer', () => {
     });
   });
 
-  describe('addProtocol()', () => {
+  describe('file.PROTOCOL_LOADED', () => {
     it('It adds the protocol to the protocols list', () => {
       const newState = reducer(
         undefined,
-        actionCreators.addProtocol({ archivePath: protocolPath }),
+        protocolLoadedAction({ archivePath: protocolPath }),
       );
 
       expect(newState[0]).toMatchObject(
@@ -36,7 +38,7 @@ describe('protocols reducer', () => {
     it("It doesn't add duplicate protocols to the list", () => {
       const newState = times(
         3,
-        () => actionCreators.addProtocol({ archivePath: protocolPath }),
+        () => protocolLoadedAction({ archivePath: protocolPath }),
       )
         .reduce(
           (memo, action) =>
@@ -78,7 +80,7 @@ describe('protocols reducer', () => {
         .map(item => ({ archivePath: item }));
 
       const newState = protocolList
-        .map(item => actionCreators.addProtocol(item))
+        .map(item => protocolLoadedAction(item))
         .reduce(
           (memo, action) =>
             reducer(
@@ -89,60 +91,26 @@ describe('protocols reducer', () => {
         );
 
       expect(newState.length).toEqual(10);
-
-      newState.forEach((item, index) => {
-        expect(item)
-          .toMatchObject(protocolList.slice(-10)[index]);
-      });
+      expect(newState).toEqual(protocolList.slice(-10).reverse());
     });
+  });
+
+  beforeEach(() => {
+    history.push.mockClear();
   });
 
   describe('createProtocol()', () => {
     it('calls createProtocol, adds it to the dashboard, then runs callback', () => {
       const store = createMockStore({});
-      const dummyCallback = jest.fn();
 
-      return store.dispatch(actionCreators.createProtocol(dummyCallback))
+      return store.dispatch(actionCreators.createProtocol())
         .then(() => {
           const actions = store.getActions();
           expect(createProtocol.mock.calls.length).toBe(1);
-          expect(actions[0]).toMatchObject(
-            pick(
-              actionCreators.addProtocol({ archivePath: '/foo/new-protocol' }),
-              ['archivePath', 'type'],
-            ),
-          );
-          expect(dummyCallback.mock.calls[0][0]).toMatchObject({
-            archivePath: '/foo/new-protocol',
-          });
-        });
-    });
-  });
-
-  describe('loadProtocol', () => {
-    it('loads the protocol data and then dispatches setProtocol', () => {
-      const store = createMockStore({ protocols: [{ id: 'foo', archivePath: '/bar/baz' }] });
-
-      return store.dispatch(actionCreators.loadProtocol('foo'))
-        .then(() => {
-          expect(loadProtocolData.mock.calls[0])
-            .toEqual(['/tmp/foo/bar']);
-
-          const actions = store.getActions();
-
-          expect(actions[0]).toEqual(
-            actionCreators.updateProtocol(
-              'foo',
-              { id: 'foo', archivePath: '/bar/baz', workingPath: '/tmp/foo/bar' },
-            ),
-          );
-
-          expect(actions[1]).toMatchObject(
-            protocolActionCreators.setProtocol(
-              { foo: 'bar test protocol' },
-              { id: 'foo', archivePath: '/bar/baz' },
-            ),
-          );
+          expect(actions).toEqual([]);
+          expect(history.push.mock.calls).toEqual([
+            ['/edit/%2Ffoo%2Fnew-protocol'],
+          ]);
         });
     });
   });
@@ -152,19 +120,15 @@ describe('protocols reducer', () => {
       const store = createMockStore({
         protocols: [],
       });
-      const dummyCallback = jest.fn();
 
-      return store.dispatch(actionCreators.chooseProtocol(dummyCallback))
+      return store.dispatch(actionCreators.chooseProtocol())
         .then(() => {
           const actions = store.getActions();
-
-          const expectedAction = omit(actionCreators.addProtocol({ archivePath: '/foo/located-protocol' }), ['protocol.id']);
-
           expect(locateProtocol.mock.calls.length).toBe(1);
-          expect(actions[0]).toMatchObject(expectedAction);
-          expect(dummyCallback.mock.calls[0][0]).toMatchObject({
-            archivePath: '/foo/located-protocol',
-          });
+          expect(actions).toEqual([]);
+          expect(history.push.mock.calls).toEqual([
+            ['/edit/%2Ffoo%2Flocated-protocol'],
+          ]);
         });
     });
   });
