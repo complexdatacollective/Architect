@@ -2,16 +2,11 @@ import stages from './stages';
 import forms from './forms';
 import variableRegistry from './variableRegistry';
 import externalData from './externalData';
+import { actionTypes as fileActionTypes } from './file';
 
 const initialState = {};
 
 const SET_PROTOCOL = Symbol('PROTOCOL/SET_PROTOCOL');
-
-const setProtocol = (protocol, meta) => ({
-  type: SET_PROTOCOL,
-  protocol,
-  meta,
-});
 
 const resetProtocol = () => ({
   type: SET_PROTOCOL,
@@ -22,6 +17,7 @@ const resetProtocol = () => ({
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_PROTOCOL:
+    case fileActionTypes.OPEN_PROTOCOL:
       return { ...action.protocol };
     default:
       return state;
@@ -29,7 +25,6 @@ function protocolReducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  setProtocol,
   resetProtocol,
 };
 
