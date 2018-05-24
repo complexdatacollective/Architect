@@ -13,8 +13,12 @@
     box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
   }
 
-  &__title {
-    text-align: center;
+  &__name {
+    margin: 0 0 unit(2);
+
+    input {
+      text-align: center;
+    }
   }
 
   &__groups {
