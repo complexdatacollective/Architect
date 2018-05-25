@@ -37,6 +37,7 @@ $component-name: form-fields-contexts;
       width: 100%;
       height: 100%;
       display: inline-flex;
+      overflow: hidden;
       justify-content: center;
       align-items: center;
       color: nth($colors, 1);
