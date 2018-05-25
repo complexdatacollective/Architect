@@ -42,13 +42,12 @@
   &__asset {
     max-height: 100px;
     display: inline-block;
-    margin: 0 unit(.5) 0;
+    margin: 0 unit(.5);
   }
 
   &__badge {
     display: inline-block;
     margin: unit(1) 0;
-    @include typography('body-small');
     background: var(--color-mustard);
     padding: unit(1);
     border-radius: unit(1);

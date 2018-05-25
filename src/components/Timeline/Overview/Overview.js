@@ -7,32 +7,37 @@ import PropTypes from 'prop-types';
 import { get, keys } from 'lodash';
 import { map, groupBy, toPairs } from 'lodash/fp';
 import { compose } from 'recompose';
-import { Image } from '../Assets';
-import { Contexts, SeamlessText } from '../Form/Fields';
-import { Tweened } from '../../behaviours/Tweened';
-import { actionCreators as protocolActions } from '../../ducks/modules/protocol';
-
-const PanelGroup = ({ title, children }) => (
-  <div className="timeline-overview__group">
-    <h3 className="timeline-overview__group-title">{title}</h3>
-    { !children && <p>No {title} options.</p> }
-    { children }
-  </div>
-);
+import { Image } from '../../Assets';
+import { Contexts, SeamlessText } from '../../Form/Fields';
+import { Tweened } from '../../../behaviours/Tweened';
+import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
+import PanelGroup from './PanelGroup';
 
 const sortAssets = compose(
   toPairs,
   groupBy('extension'),
-  map(
-    assetPath => ({ assetPath, extension: path.extname(assetPath) })
-  ),
+  map(assetPath => ({ assetPath, extension: path.extname(assetPath) })),
 );
 
 class Overview extends Component {
+  get renderNodeTypes() {
+    const nodeTypes = keys(get(this.props.variableRegistry, 'node', {}));
+
+    return nodeTypes.length > 0 ?
+      <Contexts options={nodeTypes} input={{ value: null, onChange: () => {} }} /> :
+      'No node types defined.';
+  }
+
+  get renderEdgeTypes() {
+    const edgeTypes = keys(get(this.props.variableRegistry, 'edge', {}));
+
+    return edgeTypes.length > 0 ?
+      <Contexts options={edgeTypes} input={{ value: null, onChange: () => {} }} /> :
+      'No edge types defined.';
+  }
+
   get renderAssets() {
     const assets = this.props.assets;
-
-    console.log(sortAssets(assets));
 
     return sortAssets(assets)
       .map(([groupName, group]) => {
@@ -55,12 +60,8 @@ class Overview extends Component {
     const {
       name,
       version,
-      variableRegistry,
       updateOptions,
     } = this.props;
-
-    const nodeTypes = keys(get(variableRegistry, 'node', {}));
-    const edgeTypes = keys(get(variableRegistry, 'edge', {}));
 
     return (
       <div className="timeline-overview">
@@ -80,10 +81,10 @@ class Overview extends Component {
                 <PanelGroup title="Variable registry">
                   <br />
                   <h4>Node types</h4>
-                  <Contexts options={nodeTypes} input={{ value: null, onChange: () => {} }} />
+                  { this.renderNodeTypes }
                   <br />
                   <h4>Edge types</h4>
-                  <Contexts options={edgeTypes} input={{ value: null, onChange: () => {} }} />
+                  { this.renderEdgeTypes }
                 </PanelGroup>
                 <PanelGroup title="Forms" />
                 <PanelGroup title="Global Options">
@@ -99,7 +100,7 @@ class Overview extends Component {
       </div>
     );
   }
-};
+}
 
 Overview.propTypes = {
   name: PropTypes.string,
