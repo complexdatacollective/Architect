@@ -55,11 +55,15 @@ class Overview extends Component {
     return sortAssets(assets)
       .map(([groupName, group]) => {
         if (!['.png', '.jpg', '.gif'].includes(groupName)) {
-          return <div className="timeline-overview__badge"><em>{groupName}</em> x {group.length}</div>;
+          return (
+            <div className="timeline-overview__badge" key={groupName}>
+              <em>{groupName}</em> x {group.length}
+            </div>
+          );
         }
 
         return (
-          <div className="timeline-overview__asset-group">
+          <div className="timeline-overview__asset-group" key={groupName}>
             {group.map(
               ({ assetPath }) =>
                 <Image url={assetPath} className="timeline-overview__asset" key={assetPath} />,
