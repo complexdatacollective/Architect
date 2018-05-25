@@ -57,6 +57,8 @@ const readFileSync = (filename) => {
   }
 }
 
+const readdirSync = () => ([]);
+
 const createWriteStream = () => {
   return {
     on: (event, callback) => {
@@ -73,5 +75,6 @@ module.exports = {
   createWriteStream,
   mkdirSync,
   readFileSync,
+  readdirSync,
   existsSync,
 };
