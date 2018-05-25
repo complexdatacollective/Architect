@@ -19,12 +19,22 @@ const sortAssets = compose(
   map(assetPath => ({ assetPath, extension: path.extname(assetPath) })),
 );
 
+const mockFieldProps = {
+  input: {
+    onChange: () => {},
+  },
+  name: '',
+};
+
 class Overview extends Component {
   get renderNodeTypes() {
     const nodeTypes = keys(get(this.props.variableRegistry, 'node', {}));
 
     return nodeTypes.length > 0 ?
-      <Contexts options={nodeTypes} input={{ value: null, onChange: () => {} }} /> :
+      <Contexts
+        options={nodeTypes}
+        {...mockFieldProps}
+      /> :
       'No node types defined.';
   }
 
@@ -32,7 +42,10 @@ class Overview extends Component {
     const edgeTypes = keys(get(this.props.variableRegistry, 'edge', {}));
 
     return edgeTypes.length > 0 ?
-      <Contexts options={edgeTypes} input={{ value: null, onChange: () => {} }} /> :
+      <Contexts
+        options={edgeTypes}
+        {...mockFieldProps}
+      /> :
       'No edge types defined.';
   }
 
@@ -49,7 +62,7 @@ class Overview extends Component {
           <div className="timeline-overview__asset-group">
             {group.map(
               ({ assetPath }) =>
-                <Image url={assetPath} className="timeline-overview__asset" />,
+                <Image url={assetPath} className="timeline-overview__asset" key={assetPath} />,
             )}
           </div>
         );

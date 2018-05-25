@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { fieldPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
 import { get, isString } from 'lodash';
 import cx from 'classnames';
@@ -12,10 +11,15 @@ const getLabel = option => get(option, 'label', toString(getValue(option)));
 class Contexts extends Component {
   static propTypes = {
     options: PropTypes.array,
-    ...fieldPropTypes,
+    className: PropTypes.string,
+    input: PropTypes.shape({
+      onChange: PropTypes.func.isRequired,
+    }).isRequired,
+    name: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
+    className: '',
     options: [],
   };
 
@@ -43,6 +47,7 @@ class Contexts extends Component {
       <label
         htmlFor={`${this.id}_${index}`}
         className={optionClasses}
+        key={index}
       >
         <input
           id={`${this.id}_${index}`}
