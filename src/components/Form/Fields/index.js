@@ -6,3 +6,4 @@ export { default as File } from './File';
 export { default as Image } from './Image';
 export { default as Audio } from './Audio';
 export { default as Video } from './Video';
+export { default as Contexts } from './Contexts';

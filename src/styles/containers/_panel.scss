@@ -23,6 +23,7 @@
     border: 1px solid var(--architect-panel-divider);
     padding: unit(2);
     border-radius:  unit(1);
+    min-height: 200px;
   }
 
   &__group-title {

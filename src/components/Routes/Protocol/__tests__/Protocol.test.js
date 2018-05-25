@@ -13,6 +13,7 @@ const mockProps = {
   exportProtocol: () => {},
   loadProtocol: () => {},
   stages: [{ id: 1, type: 'Foo' }],
+  overview: {},
   match: { params: {} },
 };
 

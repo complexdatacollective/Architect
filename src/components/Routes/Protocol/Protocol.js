@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
+import { pick } from 'lodash';
 import { Button, Icon } from '../../../ui/components';
 import { getProtocol } from '../../../selectors/protocol';
 import EditSkipLogic from './Cards/EditSkipLogic';
@@ -24,6 +25,12 @@ const RightArrow = <Icon name="arrow-right" />;
 
 class Protocol extends PureComponent {
   static propTypes = {
+    overview: PropTypes.shape({
+      title: PropTypes.string,
+      version: PropTypes.string,
+      forms: PropTypes.object,
+      variableRegistry: PropTypes.object,
+    }).isRequired,
     stages: PropTypes.array.isRequired,
     hasUnsavedChanges: PropTypes.bool,
     hasChanges: PropTypes.bool,
@@ -93,6 +100,7 @@ class Protocol extends PureComponent {
 
   render() {
     const {
+      overview,
       stages,
       hasChanges,
       hasUnsavedChanges,
@@ -109,6 +117,7 @@ class Protocol extends PureComponent {
     return (
       <div className={protocolClasses}>
         <Timeline
+          overview={overview}
           stages={stages}
           onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
           onEditStage={this.editStage}
@@ -151,8 +160,10 @@ class Protocol extends PureComponent {
 
 function mapStateToProps(state) {
   const protocol = getProtocol(state);
+  const overview = pick(protocol, ['name', 'version', 'variableRegistry', 'externalData', 'forms']);
 
   return {
+    overview,
     stages: protocol.stages,
     hasChanges: state.protocol.past.length > 0,
     hasUnsavedChanges: (state.session.lastChanged > state.session.lastSaved),
