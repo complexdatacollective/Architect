@@ -107,7 +107,15 @@ class Form extends Component {
           </div>
         </Editor>
         <Guidance className="stage-editor-section__guidance">
-          Which form would you like to use for these nodes?
+          <p>
+            {'Now you have selected a node type, you must decide which form is shown to the participant when they create a new node.'}
+          </p>
+          <p>
+            {'By default, Network Canvas will generate a node form for you, which will contain all of the variables you have assigned to this node type in the variable registry. If this is appropriate to your needs, you can skip this section.'}
+          </p>
+          <p>
+            {'However, you should consider which variables must be collected here, and which are better collected later, using a specific interview stage. Be mindful that asking the participant to fill out a long form each time they create a new node will dramatically increase response burden.'}
+          </p>
         </Guidance>
       </Section>
     );

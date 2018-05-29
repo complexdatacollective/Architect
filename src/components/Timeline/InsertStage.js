@@ -13,35 +13,35 @@ const interfaceOptions = [
     type: 'NameGenerator',
     guidance: {
       title: 'Name Generator',
-      description: 'Unfortunately, that is wrong; on the contrary, a parenthesis sees a slip as a teenage spain. The literature would have us believe that a duckbill knowledge is not but an option.',
+      description: (<p>{'The Name Generator interface is designed to prompt your research participants to name alters. It includes the ability to include external network data in the form of a roster.'}</p>),
     },
   },
   {
     type: 'Sociogram',
     guidance: {
       title: 'Sociogram',
-      description: "Extending this logic, an unsealed river's card comes with it the thought that the reasoned stock is a forgery. A probing millimeter without hots is truly a brian of hydroid ugandas.",
+      description: (<div><p>{'The Sociogram interface allows your participants to position alters spatially, either using the concentric circles framework, or a background image of your choosing.'}</p><p>{'It also allows the creation of edges between alters based on any criteria, and the nomination of alters using an boolean variable.'}</p></div>),
     },
   },
   {
-    type: 'Ordinal',
+    type: 'Ordinal Bin',
     guidance: {
-      title: 'Ordinal',
-      description: "This could be, or perhaps an uphill hardhat's owner comes with it the thought that the cerise rail is a buffer. This is not to discredit the idea that a romania sees a meeting as an okay olive.",
+      title: 'Ordinal Bin',
+      description: (<p>{'The Ordinal Bin interface allows your participants to quickly assign the value of an ordinal variable to an alter or edge.'}</p>),
     },
   },
   {
     type: 'Categorize',
     guidance: {
-      title: 'Categorize',
-      description: 'A math is the granddaughter of a direction. Authors often misinterpret the iran as a pappy theory, when in actuality it feels more like a plebby liquid.',
+      title: 'Categorical Bin',
+      description: (<p>{'The Categorical Bin interface allows your participants to quickly assign the value of a categorical variable to an alter or edge.'}</p>),
     },
   },
   {
     type: 'Information',
     guidance: {
       title: 'Information',
-      description: "Those agreements are nothing more than dogsleds. A clonic camera's hen comes with it the thought that the mucoid can is an alligator.",
+      description: (<p>{'The Information Interface allows you to display text and rich media (including pictures, video and audio) to your participants. Use it to introduce your research, help explain interview tasks, or illustrate concepts or ideas.'}</p>),
     },
   },
 ];
@@ -134,8 +134,13 @@ class InsertStage extends PureComponent {
         </div>
         <div className={guidanceClasses}>
           <div className="timeline-insert-stage__guidance-introduction">
-            <h3>Insert a stage here</h3>
-            Please choose one of the stages on the left.
+            <h3>Add a new stage to your interview</h3>
+            <p>
+              {'Each card on the left represents an "interface" that you can add to your interview as a stage. An interface is a screen that has been designed to collect a specific type of data.'}
+            </p>
+            <p>
+              {'Hover over the cards to see more information about them, and learn which data they are designed to collect.'}
+            </p>
           </div>
           {interfaceOptions.map(this.renderGuidance)}
         </div>

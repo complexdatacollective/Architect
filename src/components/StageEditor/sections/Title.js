@@ -17,7 +17,15 @@ const Title = props => (
       />
     </Editor>
     <Guidance className="stage-editor-section__guidance">
-      What is the title for this interface?
+      <p>
+        {'A good stage title should be descriptive, but not too long. It should help you to remember the purpose of this stage later.'}
+      </p>
+      <p>
+        {'It might help to use a standard format for the names of your interview stages, such as '}<code>[TYPE]: [VARIABLE]</code>
+      </p>
+      <p>
+        {'This text is displayed in the menu within Network Canvas, and on the timeline in Architect.'}
+      </p>
     </Guidance>
   </Section>
 );
