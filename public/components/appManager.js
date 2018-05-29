@@ -3,14 +3,24 @@ const path = require('path');
 const windowManager = require('./windowManager');
 const registerProtocolProtocol = require('./protocolProtocol').registerProtocolProtocol;
 
+function getFileFromArgs(argv) {
+  if (argv.length >= 2) {
+    const filePath = argv[1];
+    if (path.extname(filePath) === '.netcanvas') {
+      console.log('.netcanvas found in argv', JSON.stringify({ argv }, null, 2));
+      return filePath;
+    }
+  }
+  return null;
+}
+
 const appManager = {
   openFileWhenReady: null,
   init: function init() {
     ipcMain.on('GET_ARGF', (event) => {
-      if (process.platform === 'win32' && process.argv.length >= 2) {
-        const filePath = process.argv[1];
-        if (path.extname(filePath) === '.netcanvas') {
-          console.log('.netcanvas found in argv', JSON.stringify({ argv: process.argv }, null, 2));
+      if (process.platform === 'win32') {
+        const filePath = getFileFromArgs(process.argv);
+        if (filePath) {
           event.sender.send('OPEN_FILE', filePath);
         }
       }
@@ -21,15 +31,31 @@ const appManager = {
       }
     });
   },
+  openFileFromArgs: function openFileFromArgs(argv) {
+    return this.restore()
+      .then((window) => {
+        if (process.platform === 'win32') {
+          const filePath = getFileFromArgs(argv);
+          if (filePath) {
+            window.webContents.send('OPEN_FILE', filePath);
+          }
+        }
+
+        return window;
+      });
+  },
   restore: function restore() {
-    if (!app.isReady()) { return; }
-    windowManager.getWindow()
+    if (!app.isReady()) { return Promise.reject(); }
+
+    return windowManager.getWindow()
       .then((window) => {
         if (window.isMinimized()) {
           window.restore();
         }
 
         window.focus();
+
+        return window;
       });
   },
   openFile: function openFile(fileToOpen) {

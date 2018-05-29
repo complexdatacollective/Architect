@@ -8,8 +8,8 @@ log.info('App starting...');
 
 appManager.init();
 
-const shouldQuit = app.makeSingleInstance(() => {
-  appManager.restore();
+const shouldQuit = app.makeSingleInstance((argv) => {
+  appManager.openFileFromArgs(argv);
 });
 
 if (shouldQuit) {
