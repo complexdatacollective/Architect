@@ -48,7 +48,15 @@ const ContentItems = ({ form, createNewItem, ...rest }) => (
       </div>
     </Editor>
     <Guidance className="stage-editor-section__guidance">
-      This is where you can add text and media items to your information screen.
+      <p>
+        {'Each information interface can display up to four "content boxes". Each content box can display either: text, an image, a video, or some audio.'}
+      </p>
+      <p>
+        {'You can use markdown style syntax to add formatting to your text. Supported formatting includes headings, bold, italic, and external links.'}
+      </p>
+      <p>
+        {'If you are adding media, you can either select from existing assets, or drag new media into the content box you prefer.'}
+      </p>
     </Guidance>
   </Section>
 );

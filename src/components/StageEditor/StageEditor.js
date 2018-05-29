@@ -16,7 +16,11 @@ const getFormValues = formValueSelector(formName);
 const form = { name: formName, getValues: getFormValues };
 
 const defaultGuidance = {
-  Information: (<p>Information screen guidance</p>),
+  Information: (
+    <p>
+      {'The Information Interface allows you to display text and rich media (including pictures, video and audio) to your participants. Use it to help explain interview tasks, or introduce concepts or ideas.'}
+    </p>
+  ),
   NameGenerator: (<div>
     <p>
       The Name Generator interface is designed to allow your research participants
