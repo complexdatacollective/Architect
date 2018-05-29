@@ -30,7 +30,19 @@ const NodePanels = ({ form, createNewPanel, dataSources, ...rest }) => (
       </div>
     </Editor>
     <Guidance className="stage-editor-section__guidance">
-      This is where you can add text and media items to your information screen.
+      <p>
+        {'The Name Generator interfaces allows you to configure up to two "panels". Panels let you display lists of nodes to the participant, that may speed up the task of creating alters. For example, a panel could be used to show alters that the user has mentioned on a previous name generator, or even a previous interview.'}
+      </p>
+      <p>
+        Data for panels can come from two sources:
+      </p>
+      <ul>
+        <li>{'The current network for the interview session. This means any nodes that have already been created within this interview session.'}</li>
+        <li>An external data source, embedded within your protocol file.</li>
+      </ul>
+      <p>
+        {'Once the data source has been selected, you can optionally further filter the nodes that are displayed in a panel, using the network query builder syntax.'}
+      </p>
     </Guidance>
   </Section>
 );

@@ -50,7 +50,15 @@ class NodeType extends Component {
           </div>
         </Editor>
         <Guidance className="stage-editor-section__guidance">
-          What kind of nodes do you want to study?
+          <p>
+            {'Here, you can determine the type of node that this name generator will work with. Either choose from your existing node types, or create a new one.'}
+          </p>
+          <p>
+            {'Think of the node\'s "type"; as its most fundamental attribute. What does the node represent? A person? A place?'}
+          </p>
+          <p>
+            {'Node types are fundamental to the way that Network Canvas works. A node\'s type determines its visual properties, as well as the variables available to assign on other interfaces.'}
+          </p>
         </Guidance>
       </Section>
     );
