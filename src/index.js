@@ -38,7 +38,9 @@ const startApp = () => {
 startApp();
 
 ipcRenderer.on('OPEN_FILE', (event, filePath) => {
-  memoryHistory.push(`/edit/${encodeURIComponent(filePath)}`);
+  const url = `/edit/${encodeURIComponent(filePath)}`;
+  if (memoryHistory.location === url) { return; }
+  memoryHistory.push(url);
 });
 
 ipcRenderer.send('GET_ARGF');
