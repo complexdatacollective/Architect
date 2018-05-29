@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { TransitionGroup } from 'react-transition-group';
 import None from '../Transitions/None';
 import Drawer from '../Transitions/Drawer';
@@ -7,6 +9,7 @@ import Overview from './Overview';
 import Stage from './Stage';
 import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
+import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 
 class Timeline extends Component {
   static propTypes = {
@@ -14,6 +17,7 @@ class Timeline extends Component {
     overview: PropTypes.object,
     onCreateStage: PropTypes.func,
     onEditStage: PropTypes.func,
+    deleteStage: PropTypes.func.isRequired,
     onEditSkipLogic: PropTypes.func,
   };
 
@@ -47,6 +51,13 @@ class Timeline extends Component {
   onInsertStage = (index) => {
     this.setState({ insertStageAtIndex: index, highlightHide: true });
   };
+
+  onDeleteStage = (stageId) => {
+    // eslint-disable-next-line
+    if (confirm('Are you sure you want to remove this stage?')) {
+      this.props.deleteStage(stageId);
+    }
+  }
 
   createStage = (type, index) => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
@@ -116,6 +127,7 @@ class Timeline extends Component {
         onMouseEnter={this.onMouseEnterStage}
         onMouseLeave={this.onMouseLeaveStage}
         onEditStage={() => this.props.onEditStage(stage.id)}
+        onDeleteStage={() => this.onDeleteStage(stage.id)}
         onInsertStage={position => this.onInsertStage(index + position)}
         onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
       />
@@ -150,6 +162,13 @@ class Timeline extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
+});
+
 export { Timeline };
 
-export default constrain([60, 0, 0, 0])(Timeline);
+export default compose(
+  connect(null, mapDispatchToProps),
+  constrain([60, 0, 0, 0]),
+)(Timeline);
