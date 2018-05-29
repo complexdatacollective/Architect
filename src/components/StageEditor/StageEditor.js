@@ -17,7 +17,21 @@ const form = { name: formName, getValues: getFormValues };
 
 const defaultGuidance = {
   Information: (<p>Information screen guidance</p>),
-  NameGenerator: (<p>Name generator screen guidance</p>),
+  NameGenerator: (<div>
+    <p>
+      The Name Generator interface is designed to allow your research participants
+      to name alters for later analysis.
+    </p>
+    <p>
+      After giving your stage a descriptive title, you should determine the type
+      of node that you wish to elicit. Either choose from your existing node types,
+      or create a new one.
+    </p>
+    <p>
+      For further help with configuring the Name Generator interface, please refer
+      to our <a href={null}>Online Documentation</a>.
+    </p>
+  </div>),
 };
 
 const renderSections = (interfaceSections, props) => {

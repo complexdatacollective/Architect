@@ -16,6 +16,7 @@ const Overview = ({ children, anyActive, toggleGuidance, className, showGuidance
       className={sectionClasses}
       {...props}
     >
+      <h3>Overview</h3>
       { children }
       <div
         className="guided-default-guidance__toggle"
