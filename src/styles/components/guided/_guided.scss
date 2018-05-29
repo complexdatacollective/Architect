@@ -4,4 +4,11 @@
 
   display: flex;
   flex-direction: column;
+
+  &.guided--is-hidden {
+    .guided-guidance,
+    .guided-default-guidance {
+      transform: translateX(100%);
+    }
+  }
 }

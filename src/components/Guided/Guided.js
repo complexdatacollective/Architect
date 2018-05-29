@@ -18,16 +18,19 @@ class Guided extends Component {
 
     this.state = {
       active: null,
+      guided: true,
     };
   }
 
   onShowGuidance = (index) => {
-    console.log('GUIDE SHOW', index);
     this.setState({ active: index });
   };
 
+  onToggleGuidance = () => {
+    this.setState({ guided: !this.state.guided });
+  }
+
   onResetGuidance = () => {
-    console.log('GUIDE RESET');
     this.setState({ active: null });
   };
 
@@ -43,16 +46,21 @@ class Guided extends Component {
             anyActive: !!this.state.active,
             key: index,
             showGuidance: () => { this.onShowGuidance(index); },
-            resetGuidance: () => { this.onResetGuidance(); },
+            resetGuidance: this.onResetGuidance,
+            toggleGuidance: this.onToggleGuidance,
           },
         );
       });
 
   render() {
-    const className = this.props.className;
+    const classNames = cx(
+      this.props.className,
+      'guided',
+      { 'guided--is-hidden': !this.state.guided },
+    );
 
     return (
-      <div className={cx('guided', className)}>
+      <div className={classNames}>
         { this.renderSections() }
       </div>
     );
