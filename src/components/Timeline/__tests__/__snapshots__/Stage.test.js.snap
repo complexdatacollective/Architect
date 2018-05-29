@@ -71,7 +71,7 @@ ShallowWrapper {
                     <div
                               className="timeline-stage__control-icon"
                     >
-                              ↑
+                              ✕
                     </div>
                     Delete stage
           </a>
@@ -154,7 +154,7 @@ ShallowWrapper {
               <div
                             className="timeline-stage__control-icon"
               >
-                            ↑
+                            ✕
               </div>
               Delete stage
 </a>,
@@ -232,7 +232,7 @@ ShallowWrapper {
                 <div
                   className="timeline-stage__control-icon"
 >
-                  ↑
+                  ✕
 </div>,
                 "Delete stage",
               ],
@@ -246,11 +246,11 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "↑",
+                  "children": "✕",
                   "className": "timeline-stage__control-icon",
                 },
                 "ref": null,
-                "rendered": "↑",
+                "rendered": "✕",
                 "type": "div",
               },
               "Delete stage",
@@ -349,7 +349,7 @@ ShallowWrapper {
                         <div
                                     className="timeline-stage__control-icon"
                         >
-                                    ↑
+                                    ✕
                         </div>
                         Delete stage
             </a>
@@ -432,7 +432,7 @@ ShallowWrapper {
                 <div
                                 className="timeline-stage__control-icon"
                 >
-                                ↑
+                                ✕
                 </div>
                 Delete stage
 </a>,
@@ -510,7 +510,7 @@ ShallowWrapper {
                   <div
                     className="timeline-stage__control-icon"
 >
-                    ↑
+                    ✕
 </div>,
                   "Delete stage",
                 ],
@@ -524,11 +524,11 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": "↑",
+                    "children": "✕",
                     "className": "timeline-stage__control-icon",
                   },
                   "ref": null,
-                  "rendered": "↑",
+                  "rendered": "✕",
                   "type": "div",
                 },
                 "Delete stage",

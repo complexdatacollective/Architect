@@ -120,7 +120,7 @@ class TimelineStage extends PureComponent {
             className="timeline-stage__control"
             onClick={onDeleteStage}
           >
-            <div className="timeline-stage__control-icon">↑</div>
+            <div className="timeline-stage__control-icon">✕</div>
             Delete stage
           </a>
           <a
