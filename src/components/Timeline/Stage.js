@@ -65,6 +65,7 @@ class TimelineStage extends PureComponent {
     label: PropTypes.string,
     type: PropTypes.string.isRequired,
     onEditStage: PropTypes.func.isRequired,
+    onDeleteStage: PropTypes.func.isRequired,
     onEditSkipLogic: PropTypes.func.isRequired,
     onInsertStage: PropTypes.func.isRequired,
   };
@@ -78,6 +79,7 @@ class TimelineStage extends PureComponent {
     const {
       className,
       onEditStage,
+      onDeleteStage,
       onEditSkipLogic,
       onInsertStage,
       type,
@@ -114,6 +116,13 @@ class TimelineStage extends PureComponent {
             onEditSkipLogic={onEditSkipLogic}
             zoomColors={['#ffffff', '#f2b700']}
           />
+          <a
+            className="timeline-stage__control"
+            onClick={onDeleteStage}
+          >
+            <div className="timeline-stage__control-icon">↑</div>
+            Delete stage
+          </a>
           <a
             className="timeline-stage__control"
             onClick={() => onInsertStage(1)}

@@ -7,6 +7,7 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <TimelineStage
     className=""
     label=""
+    onDeleteStage={[Function]}
     onEditSkipLogic={[Function]}
     onEditStage={[Function]}
     onInsertStage={[Function]}
@@ -63,6 +64,17 @@ ShallowWrapper {
                                       ]
                     }
           />
+          <a
+                    className="timeline-stage__control"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="timeline-stage__control-icon"
+                    >
+                              ↑
+                    </div>
+                    Delete stage
+          </a>
           <a
                     className="timeline-stage__control"
                     onClick={[Function]}
@@ -142,6 +154,17 @@ ShallowWrapper {
               <div
                             className="timeline-stage__control-icon"
               >
+                            ↑
+              </div>
+              Delete stage
+</a>,
+            <a
+              className="timeline-stage__control"
+              onClick={[Function]}
+>
+              <div
+                            className="timeline-stage__control-icon"
+              >
                             ↓
               </div>
               Add screen after
@@ -199,6 +222,40 @@ ShallowWrapper {
             "ref": null,
             "rendered": null,
             "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="timeline-stage__control-icon"
+>
+                  ↑
+</div>,
+                "Delete stage",
+              ],
+              "className": "timeline-stage__control",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "↑",
+                  "className": "timeline-stage__control-icon",
+                },
+                "ref": null,
+                "rendered": "↑",
+                "type": "div",
+              },
+              "Delete stage",
+            ],
+            "type": "a",
           },
           Object {
             "instance": null,
@@ -292,6 +349,17 @@ ShallowWrapper {
                         <div
                                     className="timeline-stage__control-icon"
                         >
+                                    ↑
+                        </div>
+                        Delete stage
+            </a>
+            <a
+                        className="timeline-stage__control"
+                        onClick={[Function]}
+            >
+                        <div
+                                    className="timeline-stage__control-icon"
+                        >
                                     ↓
                         </div>
                         Add screen after
@@ -364,6 +432,17 @@ ShallowWrapper {
                 <div
                                 className="timeline-stage__control-icon"
                 >
+                                ↑
+                </div>
+                Delete stage
+</a>,
+              <a
+                className="timeline-stage__control"
+                onClick={[Function]}
+>
+                <div
+                                className="timeline-stage__control-icon"
+                >
                                 ↓
                 </div>
                 Add screen after
@@ -421,6 +500,40 @@ ShallowWrapper {
               "ref": null,
               "rendered": null,
               "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <div
+                    className="timeline-stage__control-icon"
+>
+                    ↑
+</div>,
+                  "Delete stage",
+                ],
+                "className": "timeline-stage__control",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "↑",
+                    "className": "timeline-stage__control-icon",
+                  },
+                  "ref": null,
+                  "rendered": "↑",
+                  "type": "div",
+                },
+                "Delete stage",
+              ],
+              "type": "a",
             },
             Object {
               "instance": null,
