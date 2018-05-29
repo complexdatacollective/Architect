@@ -2,7 +2,15 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-const Editor = ({ isActive, showGuidance, children, className, disabled, ...props }) => {
+const Editor = ({
+  isActive,
+  showGuidance,
+  resetGuidance,
+  children,
+  className,
+  disabled,
+  ...props
+}) => {
   const editorClasses = cx(
     className,
     'guided-editor',
@@ -16,6 +24,7 @@ const Editor = ({ isActive, showGuidance, children, className, disabled, ...prop
     <div
       className={editorClasses}
       onMouseEnter={showGuidance}
+      onMouseLeave={resetGuidance}
       {...props}
     >
       {children}
@@ -29,6 +38,7 @@ Editor.propTypes = {
   children: PropTypes.node,
   disabled: PropTypes.bool,
   showGuidance: PropTypes.func,
+  resetGuidance: PropTypes.func,
 };
 
 Editor.defaultProps = {
@@ -37,6 +47,7 @@ Editor.defaultProps = {
   children: null,
   disabled: false,
   showGuidance: () => {},
+  resetGuidance: () => {},
 };
 
 export default Editor;

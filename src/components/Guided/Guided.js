@@ -22,7 +22,13 @@ class Guided extends Component {
   }
 
   onShowGuidance = (index) => {
+    console.log('GUIDE SHOW', index);
     this.setState({ active: index });
+  };
+
+  onResetGuidance = () => {
+    console.log('GUIDE RESET');
+    this.setState({ active: null });
   };
 
   renderSections = () =>
@@ -34,8 +40,10 @@ class Guided extends Component {
           child,
           {
             isActive,
+            anyActive: !!this.state.active,
             key: index,
             showGuidance: () => { this.onShowGuidance(index); },
+            resetGuidance: () => { this.onResetGuidance(); },
           },
         );
       });

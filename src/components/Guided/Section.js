@@ -2,7 +2,15 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
-const Section = ({ children, isActive, show, className, showGuidance, ...props }) => {
+const Section = ({
+  children,
+  isActive,
+  show,
+  className,
+  showGuidance,
+  resetGuidance,
+  ...props
+}) => {
   const sectionClasses = cx(
     className,
     'guided-section',
@@ -19,7 +27,9 @@ const Section = ({ children, isActive, show, className, showGuidance, ...props }
     >
       {
         React.Children.toArray(children)
-          .map((child, index) => React.cloneElement(child, { isActive, key: index, showGuidance }))
+          .map((child, index) => React.cloneElement(
+            child, { isActive, key: index, showGuidance, resetGuidance },
+          ))
       }
     </div>
   );
@@ -31,6 +41,7 @@ Section.propTypes = {
   className: PropTypes.string,
   show: PropTypes.bool,
   showGuidance: PropTypes.func,
+  resetGuidance: PropTypes.func,
 };
 
 Section.defaultProps = {
@@ -39,6 +50,7 @@ Section.defaultProps = {
   show: true,
   className: '',
   showGuidance: () => {},
+  resetGuidance: () => {},
 };
 
 export default Section;
