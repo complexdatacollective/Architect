@@ -54,4 +54,20 @@ describe('protocol.stages', () => {
       ).toEqual({ id: 9, something: 'different' });
     });
   });
+
+  describe('DELETE_STAGE', () => {
+    it('Deletes the stage with stageId', () => {
+      const updatedStages = reducer(
+        mockStages,
+        actionCreators.deleteStage(9),
+      );
+
+      expect(
+        updatedStages,
+      ).toEqual([
+        { id: 3, type: 'Information', label: 'Foo' },
+        { id: 5, type: 'OrdinalBin', label: 'Baz' },
+      ]);
+    });
+  });
 });
