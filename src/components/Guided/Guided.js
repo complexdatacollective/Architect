@@ -17,11 +17,11 @@ class Guided extends Component {
     super(props);
 
     this.state = {
-      active: 1,
+      active: null,
     };
   }
 
-  onMouseOver = (index) => {
+  onShowGuidance = (index) => {
     this.setState({ active: index });
   };
 
@@ -29,12 +29,13 @@ class Guided extends Component {
     React.Children.toArray(this.props.children)
       .map((child, index) => {
         const isActive = this.state.active === index;
+
         return React.cloneElement(
           child,
           {
             isActive,
             key: index,
-            onMouseOver: () => { this.onMouseOver(index); },
+            showGuidance: () => { this.onShowGuidance(index); },
           },
         );
       });
