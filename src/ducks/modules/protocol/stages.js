@@ -3,6 +3,7 @@ import { get } from 'lodash';
 
 const CREATE_STAGE = Symbol('PROTOCOL/CREATE_STAGE');
 const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
+const DELETE_STAGE = Symbol('PROTOCOL/DELETE_STAGE');
 
 const initialState = [];
 const initialStage = {
@@ -33,6 +34,8 @@ export default function reducer(state = initialState, action = {}) {
           id: stage.id,
         };
       });
+    case DELETE_STAGE:
+      return state.filter(stage => (stage.id !== action.id));
     default:
       return state;
   }
@@ -55,14 +58,23 @@ function updateStage(stageId, stage, overwrite = false) {
   };
 }
 
+function deleteStage(stageId) {
+  return {
+    type: DELETE_STAGE,
+    id: stageId,
+  };
+}
+
 const actionCreators = {
   createStage,
   updateStage,
+  deleteStage,
 };
 
 const actionTypes = {
   CREATE_STAGE,
   UPDATE_STAGE,
+  DELETE_STAGE,
 };
 
 export {

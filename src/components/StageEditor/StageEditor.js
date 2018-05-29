@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
 import { Button } from '../../ui/components';
-import { Guided, Section, Editor } from '../Guided';
+import { Guided, Section, Editor, DefaultGuidance } from '../Guided';
 import flatten from '../../utils/flatten';
 import getSectionsForStageType from './getSectionsForStageType';
 import CodeView from './CodeView';
@@ -13,6 +14,11 @@ import CodeView from './CodeView';
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
 const form = { name: formName, getValues: getFormValues };
+
+const defaultGuidance = {
+  Information: (<p>Information screen guidance</p>),
+  NameGenerator: (<p>Name generator screen guidance</p>),
+};
 
 const renderSections = (interfaceSections, props) => {
   if (interfaceSections.length === 0) {
@@ -54,6 +60,9 @@ const StageEditor = ({
           <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
         </Editor>
       </Section>
+      <DefaultGuidance className="stage-editor-section__guidance">
+        {get(defaultGuidance, stage.type)}
+      </DefaultGuidance>
       {
         renderSectionsForStageType({
           stageType: stage.type,

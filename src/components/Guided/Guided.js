@@ -17,33 +17,50 @@ class Guided extends Component {
     super(props);
 
     this.state = {
-      active: 1,
+      active: null,
+      guided: true,
     };
   }
 
-  onMouseOver = (index) => {
+  onShowGuidance = (index) => {
     this.setState({ active: index });
+  };
+
+  onToggleGuidance = () => {
+    this.setState({ guided: !this.state.guided });
+  }
+
+  onResetGuidance = () => {
+    this.setState({ active: null });
   };
 
   renderSections = () =>
     React.Children.toArray(this.props.children)
       .map((child, index) => {
         const isActive = this.state.active === index;
+
         return React.cloneElement(
           child,
           {
             isActive,
+            anyActive: !!this.state.active,
             key: index,
-            onMouseOver: () => { this.onMouseOver(index); },
+            showGuidance: () => { this.onShowGuidance(index); },
+            resetGuidance: this.onResetGuidance,
+            toggleGuidance: this.onToggleGuidance,
           },
         );
       });
 
   render() {
-    const className = this.props.className;
+    const classNames = cx(
+      this.props.className,
+      'guided',
+      { 'guided--is-hidden': !this.state.guided },
+    );
 
     return (
-      <div className={cx('guided', className)}>
+      <div className={classNames}>
         { this.renderSections() }
       </div>
     );

@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { Timeline } from '../Timeline';
 
 const mockProps = {
+  deleteStage: () => {},
 };
 
 describe('<Timeline />', () => {
@@ -17,7 +18,7 @@ describe('<Timeline />', () => {
   it('renders stages', () => {
     const mockStages = [{ id: 1, type: 'NameGenerator' }, { id: 2, type: 'Sociogram' }];
 
-    const component = shallow(<Timeline stages={mockStages} />);
+    const component = shallow(<Timeline {...mockProps} stages={mockStages} />);
 
     expect(component.find('TimelineStage').length).toEqual(2);
   });

@@ -48,21 +48,34 @@ describe('session reducer', () => {
   });
 
   describe('change tracking', () => {
-    it('tracks changes on CREATE_STAGE and UPDATE_STAGE', () => {
+    it('tracks create stage', () => {
       const createStageState = reducer(
         undefined,
         stageActions.createStage({}),
       );
 
       expect(createStageState.lastChanged > 0).toBe(true);
+    });
 
+    it('tracks stage updates', () => {
       const updateStageState = reducer(
         undefined,
         stageActions.updateStage({}),
       );
 
       expect(updateStageState.lastChanged > 0).toBe(true);
+    });
 
+    it('tracks delete stage', () => {
+      const deleteStageState = reducer(
+        undefined,
+        stageActions.deleteStage(0),
+      );
+
+      expect(deleteStageState.lastChanged > 0).toBe(true);
+    });
+
+    it('tracks update options', () => {
       const updateOptionsState = reducer(
         undefined,
         protocolActions.updateOptions({}),

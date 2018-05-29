@@ -9,6 +9,7 @@ jest.mock('../../../utils/CSSVariables');
 const mockProps = {
   type: 'Foo',
   onEditStage: () => {},
+  onDeleteStage: () => {},
   onEditSkipLogic: () => {},
   onInsertStage: () => {},
 };
