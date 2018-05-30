@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get, isNull } from 'lodash';
-import { Zoom } from '../../behaviours';
-import timelineImages from '../../images/timeline';
+import { Zoom } from '../../../behaviours';
+import timelineImages from '../../../images/timeline';
 
 const getTimelineImage = type =>
   get(timelineImages, type);
@@ -117,7 +117,10 @@ class InsertStage extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { activeInterface: null };
+    this.state = {
+      activeInterface: null,
+      query: '',
+    };
   }
 
   onMouseEnterStageType = (index) => {
@@ -134,7 +137,7 @@ class InsertStage extends PureComponent {
 
   renderOption = ({ type }, index) => (
     <StageType
-      key={type}
+      key={`${type}_${index}`}
       type={type}
       zoomColors={['#2d2955', '#ffffff']}
       onSelectStageType={() => this.props.onSelectStageType(type)}
@@ -160,6 +163,8 @@ class InsertStage extends PureComponent {
   };
 
   render() {
+    const { query } = this.state;
+
     const guidanceClasses = cx(
       'timeline-insert-stage__guidance',
       {
@@ -170,8 +175,15 @@ class InsertStage extends PureComponent {
     return (
       <div className="timeline-insert-stage">
         <div className="timeline-insert-stage__chooser">
+          <div className="timeline-insert-stage__filter">
+            <input type="text" value={query} onChange={event => this.setState({ query: event.target.value })} />
+          </div>
           <div className="timeline-insert-stage__options">
-            {interfaceOptions.map(this.renderOption)}
+            {
+              interfaceOptions
+                .filter(item => (query === '' || item.type.toLowerCase().indexOf(query.toLowerCase()) !== -1))
+                .map(this.renderOption)
+            }
           </div>
         </div>
         <div className={guidanceClasses}>
