@@ -1,6 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 export { default as VariableChooser } from './VariableChooser';
 export { default as SeamlessText } from './SeamlessText';
+export { default as Text } from './Text';
+export { default as Select } from './Select';
 export { default as Markdown } from './Markdown';
 export { default as File } from './File';
 export { default as Image } from './Image';

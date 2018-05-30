@@ -1,0 +1,55 @@
+$component-name: timeline-insert-stage;
+
+.#{$component-name} {
+  background-color: var(--architect-drawer-background);
+  color: var(--architect-drawer-text);
+  transform-origin: top;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &__close {
+    @include typography('copy-small');
+    background: var(--architect-ui-button);
+    padding: unit(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--architect-ui-button-text);
+    cursor: pointer;
+  }
+
+  &__container {
+    display: flex;
+  }
+
+  &__chooser {
+    flex: 0 0 70%;
+    height: 50vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: 80px;
+
+    &-controls {
+      flex: 0 0 7vh;
+      padding: unit(2) unit(12);
+      position: relative;
+      background-color: var(--color-navy-taupe);
+      color: var(--text);
+      z-index: 2;
+    }
+
+    &-options {
+      flex: 0 1 auto;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+    }
+  }
+}

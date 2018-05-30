@@ -1,0 +1,32 @@
+$component-name: timeline-insert-stage-filter;
+
+.#{$component-name} {
+  display: flex;
+  // color: var(--architect-drawer-text);
+
+  input {
+    color: var(--architect-drawer-text);
+  }
+
+  &__option {
+    h4 {
+      font-family: var(--body-font-family);
+      margin-bottom: unit(1);
+      font-size: .8rem;
+    }
+  }
+
+  &__option--last {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__reset {
+    text-decoration: underline;
+    font-family: var(--body-font-family);
+    margin-bottom: unit(1);
+    cursor: pointer;
+  }
+}

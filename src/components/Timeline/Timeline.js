@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { TransitionGroup } from 'react-transition-group';
+import cx from 'classnames';
 import None from '../Transitions/None';
 import Drawer from '../Transitions/Drawer';
 import Overview from './Overview';
@@ -59,6 +60,10 @@ class Timeline extends Component {
     }
   }
 
+  handleCancelInsertStage = () => {
+    this.setState({ insertStageAtIndex: null, highlightHide: true });
+  }
+
   createStage = (type, index) => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
     this.props.onCreateStage(type, index);
@@ -87,7 +92,8 @@ class Timeline extends Component {
       unmountOnExit
     >
       <InsertStage
-        onSelectStageType={type => this.createStage(type, insertStageAtIndex)}
+        handleSelectStage={type => this.createStage(type, insertStageAtIndex)}
+        handleCancel={this.handleCancelInsertStage}
       />
     </Drawer>
   );
@@ -117,22 +123,27 @@ class Timeline extends Component {
     return itemsWithInsertStage;
   }
 
-  renderStage = (stage, index) => (
-    <None key={`stage_${stage.id}`}>
-      <Stage
-        key={`stage_${stage.id}`}
-        id={stage.id}
-        type={stage.type}
-        label={stage.label}
-        onMouseEnter={this.onMouseEnterStage}
-        onMouseLeave={this.onMouseLeaveStage}
-        onEditStage={() => this.props.onEditStage(stage.id)}
-        onDeleteStage={() => this.onDeleteStage(stage.id)}
-        onInsertStage={position => this.onInsertStage(index + position)}
-        onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
-      />
-    </None>
-  );
+  renderStage = (stage, index) => {
+    const className = cx({ 'timeline-stage--flip': index % 2 === 0 });
+
+    return (
+      <None key={`stage_${stage.id}`}>
+        <Stage
+          key={`stage_${stage.id}`}
+          id={stage.id}
+          type={stage.type}
+          label={stage.label}
+          className={className}
+          onMouseEnter={this.onMouseEnterStage}
+          onMouseLeave={this.onMouseLeaveStage}
+          onEditStage={() => this.props.onEditStage(stage.id)}
+          onDeleteStage={() => this.onDeleteStage(stage.id)}
+          onInsertStage={position => this.onInsertStage(index + position)}
+          onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
+        />
+      </None>
+    );
+  }
 
   render() {
     return (
