@@ -128,7 +128,7 @@ $component-name: timeline-stage;
     }
   }
 
-  &:nth-child(2n + 1) {
+  &--flip {
     .#{$component-name}__edit-stage {
       left: calc(50% + #{$preview-offset});
     }
