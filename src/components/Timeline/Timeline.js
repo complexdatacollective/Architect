@@ -59,6 +59,10 @@ class Timeline extends Component {
     }
   }
 
+  handleCancelInsertStage = () => {
+    this.setState({ insertStageAtIndex: null, highlightHide: true });
+  }
+
   createStage = (type, index) => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
     this.props.onCreateStage(type, index);
@@ -87,7 +91,8 @@ class Timeline extends Component {
       unmountOnExit
     >
       <InsertStage
-        onSelectStageType={type => this.createStage(type, insertStageAtIndex)}
+        handleSelectStage={type => this.createStage(type, insertStageAtIndex)}
+        handleCancel={this.handleCancelInsertStage}
       />
     </Drawer>
   );

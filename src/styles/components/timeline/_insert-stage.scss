@@ -8,10 +8,25 @@ $component-name: timeline-insert-stage;
   background-color: var(--architect-drawer-background);
   color: var(--architect-drawer-text);
   transform-origin: top;
-  display: flex;
   width: 100%;
-  height: 60vh;
   position: relative;
+  overflow: hidden;
+
+  &__close {
+    @include typography('copy-small');
+    background: var(--architect-ui-button);
+    padding: unit(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--architect-ui-button-text);
+    cursor: pointer;
+  }
+
+  &__container {
+    height: 60vh;
+    display: flex;
+  }
 
   &__guidance {
     flex: 0 0 40%;
