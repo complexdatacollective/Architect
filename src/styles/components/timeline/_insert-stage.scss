@@ -104,6 +104,20 @@ $component-name: timeline-insert-stage;
         margin-bottom: unit(1);
       }
     }
+
+    &-option--last {
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &-reset {
+      text-decoration: underline;
+      font-family: var(--body-font-family);
+      margin-bottom: unit(1);
+      cursor: pointer;
+    }
   }
 
   &__options {

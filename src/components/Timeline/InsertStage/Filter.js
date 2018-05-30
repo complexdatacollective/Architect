@@ -29,6 +29,12 @@ const Filter = ({
         <option>Z-A</option>
       </Select>
     </div>
+    <div className="timeline-insert-stage__filter-option timeline-insert-stage__filter-option--last">
+      <div
+        className="timeline-insert-stage__filter-reset"
+        onClick={() => handleChange({ order: 'A-Z', query: '' })}
+      >Reset</div>
+    </div>
   </div>
 );
 
