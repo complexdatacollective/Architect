@@ -7,8 +7,8 @@ const Filter = ({
   order,
   handleChange,
 }) => (
-  <div className="timeline-insert-stage__filter">
-    <div className="timeline-insert-stage__filter-option">
+  <div className="timeline-insert-stage-filter">
+    <div className="timeline-insert-stage-filter__option">
       <h4>Search:</h4>
       <Text
         input={{
@@ -17,7 +17,7 @@ const Filter = ({
         }}
       />
     </div>
-    <div className="timeline-insert-stage__filter-option">
+    <div className="timeline-insert-stage-filter__option">
       <h4>Sort by:</h4>
       <Select
         input={{
@@ -29,9 +29,9 @@ const Filter = ({
         <option>Z-A</option>
       </Select>
     </div>
-    <div className="timeline-insert-stage__filter-option timeline-insert-stage__filter-option--last">
+    <div className="timeline-insert-stage-filter__option timeline-insert-stage-filter__option--last">
       <div
-        className="timeline-insert-stage__filter-reset"
+        className="timeline-insert-stage-filter__reset"
         onClick={() => handleChange({ order: 'A-Z', query: '' })}
       >Reset</div>
     </div>

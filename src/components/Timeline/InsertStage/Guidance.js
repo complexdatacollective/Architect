@@ -18,9 +18,9 @@ class Guidance extends PureComponent {
 
   renderGuidance = ({ guidance }, index) => {
     const guidanceClasses = cx(
-      'timeline-insert-stage__guidance-item',
+      'timeline-insert-stage-guidance__item',
       {
-        'timeline-insert-stage__guidance-item--is-active': this.props.activeOption === index,
+        'timeline-insert-stage-guidance__item--is-active': this.props.activeOption === index,
       },
     );
 
@@ -40,15 +40,15 @@ class Guidance extends PureComponent {
     } = this.props;
 
     const guidanceClasses = cx(
-      'timeline-insert-stage__guidance',
+      'timeline-insert-stage-guidance',
       {
-        'timeline-insert-stage__guidance--is-active': !isNull(activeOption),
+        'timeline-insert-stage-guidance--is-active': !isNull(activeOption),
       },
     );
 
     return (
       <div className={guidanceClasses}>
-        <div className="timeline-insert-stage__guidance-introduction">
+        <div className="timeline-insert-stage-guidance__introduction">
           { children }
         </div>
         {options.map(this.renderGuidance)}

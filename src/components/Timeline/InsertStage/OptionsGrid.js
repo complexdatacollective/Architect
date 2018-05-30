@@ -14,17 +14,17 @@ const StageType = Zoom(
     return (
       <div
         key={type}
-        className="timeline-insert-stage__option"
+        className="timeline-insert-stage-option-grid__option"
         onClick={onSelectStageType}
         onMouseEnter={onMouseEnterStageType}
         onMouseLeave={onMouseLeaveStageType}
       >
         <h3>{ type }</h3>
         <div
-          className="timeline-insert-stage__option-screen"
+          className="timeline-insert-stage-option-grid__preview"
         >
-          { image && <img className="timeline-insert-stage__option-preview" src={image} alt={type} /> }
-          { !image && <div className="timeline-insert-stage__option-description">{type} Interface</div> }
+          { image && <img className="timeline-insert-stage-option-grid__screen" src={image} alt={type} /> }
+          { !image && <div className="timeline-insert-stage-option-grid__description">{type} Interface</div> }
         </div>
       </div>
     );
@@ -58,7 +58,7 @@ class Options extends Component {
     const options = this.props.options;
 
     return (
-      <div className="timeline-insert-stage__options">
+      <div className="timeline-insert-stage-option-grid">
         { options.map(this.renderOption) }
       </div>
     );
