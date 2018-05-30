@@ -47,7 +47,7 @@
   }
 
   &__welcome {
-    width: 50vw;
+    width: 51vw;
     margin: 0 auto;
     padding: 0 0 unit(4) unit(14);
 
@@ -57,11 +57,14 @@
     }
 
     &-title {
-      @include typography('title-1', font-size);
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 15px;
     }
 
     &-lead {
-      @include typography('title-2', font-size);
+      font-size: 23px;
+      font-weight: 400;
     }
   }
 
@@ -71,12 +74,18 @@
     padding: 0 0 unit(8);
 
     & > * {
-      margin: 0 unit(3);
+      margin: 0 unit(1);
+    }
+
+    .button--small {
+      padding: 1.8em;
+      width: 260px;
     }
   }
 
   &__protocols {
-    width: 80vw;
+    width: 90vw;
+    max-width: 1300px;
     margin: 0 auto;
     padding: unit(3);
     border-radius: unit(1);

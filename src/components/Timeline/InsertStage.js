@@ -24,14 +24,14 @@ const interfaceOptions = [
     },
   },
   {
-    type: 'Ordinal Bin',
+    type: 'OrdinalBin',
     guidance: {
       title: 'Ordinal Bin',
       description: (<p>{'The Ordinal Bin interface allows your participants to quickly assign the value of an ordinal variable to an alter or edge.'}</p>),
     },
   },
   {
-    type: 'Categorize',
+    type: 'CategoricalBin',
     guidance: {
       title: 'Categorical Bin',
       description: (<p>{'The Categorical Bin interface allows your participants to quickly assign the value of a categorical variable to an alter or edge.'}</p>),

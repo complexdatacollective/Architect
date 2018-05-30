@@ -43,9 +43,9 @@ class Start extends PureComponent {
             <Button
               id="create-new-protocol-button"
               type="button"
-              color="white"
+              color="platinum"
               size="small"
-              icon={<Icon name="arrow-right" />}
+              icon={<Icon name="arrow-right" color="charcoal" />}
               onClick={() => this.props.createProtocol(this.openProtocol)}
             >Create new</Button>
             <Button
