@@ -1,9 +1,27 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { sortBy, compose } from 'lodash/fp';
 import OptionsGrid from './OptionsGrid';
 import Guidance from './Guidance';
 import Filter from './Filter';
 import interfaceOptions from './interfaceOptions';
+
+const sortByType = sortBy(['type']);
+
+const filterByType = query =>
+  items =>
+    items.filter(item => (query === '' || item.type.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+
+const sortDirection = order =>
+  items =>
+    (order === 'Z-A' ? items.reverse() : items);
+
+const filter = (query, order) =>
+  compose(
+    filterByType(query),
+    sortDirection(order),
+    sortByType,
+  );
 
 class InsertStage extends PureComponent {
   static propTypes = {
@@ -20,16 +38,14 @@ class InsertStage extends PureComponent {
     this.state = {
       activeOption: null,
       query: '',
-      sort: null,
+      order: null,
     };
   }
 
   get filteredOptions() {
-    const { query, sortBy } = this.state;
+    const { query, order } = this.state;
 
-    return interfaceOptions
-      .filter(item => (query === '' || item.type.toLowerCase().indexOf(query.toLowerCase()) !== -1))
-      .sort(sortBy);
+    return filter(query, order)(interfaceOptions);
   }
 
   handleOptionActive = (index) => {
@@ -43,7 +59,7 @@ class InsertStage extends PureComponent {
   render() {
     const {
       query,
-      sortBy,
+      order,
       activeOption,
     } = this.state;
 
@@ -52,7 +68,7 @@ class InsertStage extends PureComponent {
         <div className="timeline-insert-stage__chooser">
           <div className="timeline-insert-stage__chooser-controls">
             <Filter
-              sortBy={sortBy}
+              order={order}
               query={query}
               handleChange={state => this.setState(state)}
             />

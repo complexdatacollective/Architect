@@ -4,7 +4,7 @@ import { Text, Select } from '../../Form/Fields';
 
 const Filter = ({
   query,
-  sortBy,
+  order,
   handleChange,
 }) => (
   <div className="timeline-insert-stage__filter">
@@ -21,8 +21,8 @@ const Filter = ({
       <h4>Sort by:</h4>
       <Select
         input={{
-          value: sortBy,
-          onChange: event => handleChange({ sortBy: event.target.value }),
+          value: order,
+          onChange: event => handleChange({ order: event.target.value }),
         }}
       >
         <option>A-Z</option>
@@ -34,7 +34,7 @@ const Filter = ({
 
 Filter.propTypes = {
   query: PropTypes.string.isRequired,
-  sortBy: PropTypes.string.isRequired,
+  order: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 
