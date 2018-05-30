@@ -2,8 +2,9 @@ $stage-height: (9 / 16) * 100%;
 $stage-columns: 3;
 $stage-gap: unit(2);
 $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-gap / $stage-columns});
+$component-name: timeline-insert-stage;
 
-.timeline-insert-stage {
+.#{$component-name} {
   background-color: var(--architect-drawer-background);
   color: var(--architect-drawer-text);
   transform-origin: top;
@@ -42,24 +43,20 @@ $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-ga
     }
   }
 
-  &__options {
+  &__chooser {
     flex: 0 0 60%;
+  }
+
+  &__options {
     display: grid;
     padding: unit(4);
     grid-template-columns: repeat($stage-columns, $stage-width);
-    grid-gap: unit(2);
+    grid-gap: unit(4) unit(2);
     grid-auto-rows: minmax(100px, auto);
   }
 
   &__option {
-    height: 0;
-    padding-bottom: $stage-height;
-    border: 2px solid transparent;
     cursor: pointer;
-    overflow: hidden;
-    transition: border-color var(--animation-duration-standard) var(--animation-easing);
-    position: relative;
-    background-color: var(--architect-drawer-background--guidance);
 
     &-preview,
     &-description {
@@ -76,8 +73,20 @@ $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-ga
       height: 100%;
     }
 
+    &-screen {
+      height: 0;
+      padding-bottom: $stage-height;
+      border: 2px solid transparent;
+      overflow: hidden;
+      transition: border-color var(--animation-duration-standard) var(--animation-easing);
+      position: relative;
+      background-color: var(--architect-drawer-background--guidance);
+    }
+
     &:hover {
-      border-color: var(--architect-intent);
+      .#{$component-name}__option-screen {
+        border-color: var(--architect-intent);
+      }
     }
   }
 }
