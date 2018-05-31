@@ -16,7 +16,7 @@ $component-name: form-fields-contexts;
     border-width: 4px;
     border-style: solid;
     border-color: nth($colors, 1);
-    transition: color var(--animation-easing) var(--animation-duration-fast);
+    transition: color var(--animation-easing) var(--animation-duration-standard);
     background-color: var(--color-white);
 
     &::before {
@@ -27,7 +27,7 @@ $component-name: form-fields-contexts;
       left: 4px;
       border-radius: 100%;
       position: absolute;
-      transition: background-color var(--animation-easing) var(--animation-duration-fast);
+      transition: background-color var(--animation-easing) var(--animation-duration-standard);
     }
 
     &-label {

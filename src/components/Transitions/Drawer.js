@@ -8,7 +8,7 @@ import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 const appear = {
   opacity: {
     value: [0, 1],
-    duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+    duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
     easing: 'easeInOutQuad',
   },
   scaleY: {
@@ -24,7 +24,7 @@ const disappear = {
   scaleY: 0,
   margin: 0,
   maxHeight: 0,
-  duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+  duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
 };
 
 const FolderTransition = ({ children, ...props }) => (
@@ -43,7 +43,7 @@ const FolderTransition = ({ children, ...props }) => (
           maxHeight: {
             value: [0, `${height}px`],
             easing: 'easeInOutQuad',
-            duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+            duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
           },
           ...appear,
         });

@@ -27,7 +27,7 @@ $module-name: form-fields-text;
     width: unit(2) !important; // sass-lint:disable-line no-important
     height: unit(2) !important; // sass-lint:disable-line no-important
     opacity: 0;
-    transition: opacity var(--animation-easing) var(--animation-duration-fast);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard);
 
     &--error {
       .cls-1 {
@@ -41,8 +41,8 @@ $module-name: form-fields-text;
     max-height: 0;
     color: var(--error);
     margin: unit(.5) 0 0;
-    transition: opacity var(--animation-easing) var(--animation-duration-fast),
-    max-height var(--animation-easing) var(--animation-duration-fast);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
   }
 
   &--has-focus,

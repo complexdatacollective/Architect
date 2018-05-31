@@ -54,7 +54,7 @@ $stage-padding: unit(5);
       background-color: transparent;
       will-change: transform background-color;
       transition: transform var(--animation-duration-standard) var(--animation-easing),
-      background-color var(--animation-duration-fast) var(--animation-easing);
+      background-color var(--animation-duration-standard) var(--animation-easing);
       transform: translateZ(0);
     }
 

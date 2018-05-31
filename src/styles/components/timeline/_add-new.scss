@@ -9,13 +9,13 @@ $component-name: timeline-add-new;
     background-color: transparent;
     border-radius: 5px;
     transform: translateZ(0) scale(.75);
-    transition: background-color var(--animation-easing) var(--animation-duration-fast),
-    transform var(--animation-easing) var(--animation-duration-fast);
+    transition: background-color var(--animation-easing) var(--animation-duration-standard),
+    transform var(--animation-easing) var(--animation-duration-standard);
     padding: 15px 60px;
     border: 0;
 
     &-label {
-      transition: opacity var(--animation-easing) var(--animation-duration-fast);
+      transition: opacity var(--animation-easing) var(--animation-duration-standard);
       opacity: 0;
       color: var(--text);
     }

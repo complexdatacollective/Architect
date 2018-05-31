@@ -17,7 +17,7 @@ $component-name: timeline-insert-stage-guidance;
     opacity: 0;
 
     &--is-active {
-      transition: opacity var(--animation-duration-fast) var(--animation-easing);
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
       opacity: 1;
     }
   }

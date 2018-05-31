@@ -27,7 +27,7 @@ $border-space: 3px;
       border-color: var(--color-navy-taupe);
       border-width: $border;
       border-style: solid;
-      transition: border-color var(--animation-easing) var(--animation-duration-fast);
+      transition: border-color var(--animation-easing) var(--animation-duration-standard);
     }
 
     &::after {
@@ -40,7 +40,7 @@ $border-space: 3px;
       border-radius: 100%;
       background-color: var(--color-sea-green);
       opacity: 0;
-      transition: opacity var(--animation-easing) var(--animation-duration-fast);
+      transition: opacity var(--animation-easing) var(--animation-duration-standard);
     }
   }
 

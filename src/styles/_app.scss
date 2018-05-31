@@ -29,7 +29,7 @@ $component-name: app;
     left: 50%;
     transform: translate(calc(-50vw + #{unit(2)}), calc(-50vh + #{unit(2)})) scale(.67, .67);
     cursor: pointer;
-    transition: transform var(--animation-duration-fast) var(--animation-easing);
+    transition: transform var(--animation-duration-standard) var(--animation-easing);
 
     &.active {
       pointer-events: none;

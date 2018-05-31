@@ -36,7 +36,7 @@ export default compose(
   defaultProps({
     lockAxis: 'y',
     useDragHandle: true,
-    transitionDuration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
   }),
   withHandlers({
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),

@@ -78,7 +78,7 @@ const Zoom = WrappedComponent =>
           targets: pseudoElement,
           elasticity: 0,
           easing: 'easeInOutQuad',
-          duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+          duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
           translateX: [translateX, 0],
           translateY: [translateY, 0],
           scaleY: [scaleY, 1],
@@ -88,7 +88,7 @@ const Zoom = WrappedComponent =>
           targets: pseudoElement,
           elasticity: 0,
           easing: 'easeInOutQuad',
-          duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+          duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
           opacity: [1, 0],
         }).finished.then(() => {
           this.root.removeChild(pseudoElement);

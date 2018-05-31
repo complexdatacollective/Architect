@@ -4,7 +4,7 @@ import { Transition } from 'react-transition-group';
 import anime from 'animejs';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
-const duration = getCSSVariableAsNumber('--animation-duration-fast-ms');
+const duration = getCSSVariableAsNumber('--animation-duration-standard-ms');
 
 const appear = {
   opacity: [0, 1],
