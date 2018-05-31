@@ -3,15 +3,14 @@ $component-name: start-protocol-card;
 
 .#{$component-name} {
   width: 100%;
-  height: 27vh;
+  height: 38vh;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   text-decoration: none;
 
   &__preview {
-    flex: 0 0 calc(20vh + #{unit(1)});
-    max-height: calc(20vh + #{unit(1)});
+    flex: 0 0 calc(38vh + #{unit(1)});
   }
 
   &__label {
@@ -25,8 +24,8 @@ $component-name: start-protocol-card;
   }
 
   &__stack {
-    height: 20vh;
-    width: 20vh;
+    height: 30vh;
+    width: 30vh;
     margin: 0 auto unit(3);
     position: relative;
     z-index: var(--z-default);
@@ -43,6 +42,7 @@ $component-name: start-protocol-card;
       z-index: 3;
       transform: translate(unit(-1), unit(1));
       box-shadow: $card-shadow;
+      padding: 20px;
 
       img {
         max-width: 100%;

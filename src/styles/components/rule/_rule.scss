@@ -5,7 +5,7 @@
   position: relative;
   z-index: var(--z-default);
 
-  $drag-button-size: 60px;
+  $drag-button-size: 30px;
 
   .rule-drag-handle {
     @include flex-inline;
@@ -16,13 +16,13 @@
     border-radius: $drag-button-size;
     width: $drag-button-size;
     height: $drag-button-size;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: bold;
     cursor: pointer;
     margin-right: 10px;
   }
 
-  $delete-button-size: 30px;
+  $delete-button-size: 20px;
 
   &__delete {
     @include flex-inline;
@@ -52,7 +52,7 @@
     @include flex-align(left, middle);
     padding: 0;
     border-radius: 20px;
-    height: 60px;
+    height: 40px;
   }
 
   &__option {
@@ -93,9 +93,9 @@
         top: 0;
         width: 0;
         height: 0;
-        border-top: 30px solid var(--architect-rule-attribute);
-        border-bottom: 30px solid var(--architect-rule-attribute);
-        border-left: 20px solid var(--architect-rule-type);
+        border-top: 20px solid var(--architect-rule-attribute);
+        border-bottom: 20px solid var(--architect-rule-attribute);
+        border-left: 15px solid var(--architect-rule-type);
       }
 
       &:empty {
@@ -147,9 +147,9 @@
       background: var(--architect-rule-attribute--edge);
 
       &::before {
-        border-top: 30px solid var(--architect-rule-attribute--edge);
-        border-bottom: 30px solid var(--architect-rule-attribute--edge);
-        border-left: 20px solid var(--architect-rule-type--edge);
+        border-top: 20px solid var(--architect-rule-attribute--edge);
+        border-bottom: 20px solid var(--architect-rule-attribute--edge);
+        border-left: 15px solid var(--architect-rule-type--edge);
       }
     }
   }

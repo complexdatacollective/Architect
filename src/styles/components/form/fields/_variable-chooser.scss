@@ -24,8 +24,8 @@
     line-height: calc(#{unit(4)} - 4px);
     overflow: hidden;
     white-space: nowrap;
-    transition: background-color var(--animation-easing) var(--animation-duration-fast),
-    border-color var(--animation-easing) var(--animation-duration-fast);
+    transition: background-color var(--animation-easing) var(--animation-duration-standard),
+    border-color var(--animation-easing) var(--animation-duration-standard);
 
     &-detail,
     &-name,

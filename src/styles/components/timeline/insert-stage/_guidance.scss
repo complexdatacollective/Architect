@@ -1,0 +1,34 @@
+$component-name: timeline-insert-stage-guidance;
+
+.#{$component-name} {
+  flex: 0 0 30%;
+  position: relative;
+  z-index: 2;
+  background-color: var(--architect-drawer-background--guidance);
+
+  &__item,
+  &__introduction {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: unit(4);
+    transition: opacity var(--animation-duration-standard) var(--animation-easing);
+    opacity: 0;
+
+    &--is-active {
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
+      opacity: 1;
+    }
+  }
+
+  &__introduction {
+    opacity: 1;
+  }
+
+  &--is-active {
+    .#{$component-name}__introduction {
+      opacity: 0;
+    }
+  }
+}

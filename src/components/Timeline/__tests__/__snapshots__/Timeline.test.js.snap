@@ -44,7 +44,8 @@ ShallowWrapper {
                                 
                         </TransitionGroup>
                         <InsertStage
-                                onSelectStageType={[Function]}
+                                handleCancel={null}
+                                handleSelectStage={[Function]}
                         />
                 </div>
         </div>
@@ -75,7 +76,8 @@ ShallowWrapper {
                                     
                         </TransitionGroup>
                         <InsertStage
-                                    onSelectStageType={[Function]}
+                                    handleCancel={null}
+                                    handleSelectStage={[Function]}
                         />
             </div>
 </div>,
@@ -112,7 +114,8 @@ ShallowWrapper {
                                 
                 </TransitionGroup>
                 <InsertStage
-                                onSelectStageType={[Function]}
+                                handleCancel={null}
+                                handleSelectStage={[Function]}
                 />
 </div>,
             ],
@@ -143,7 +146,8 @@ ShallowWrapper {
                     
 </TransitionGroup>,
                   <InsertStage
-                    onSelectStageType={[Function]}
+                    handleCancel={null}
+                    handleSelectStage={[Function]}
 />,
                 ],
                 "className": "timeline__stages",
@@ -169,7 +173,8 @@ ShallowWrapper {
                   "key": "insertStage",
                   "nodeType": "class",
                   "props": Object {
-                    "onSelectStageType": [Function],
+                    "handleCancel": null,
+                    "handleSelectStage": [Function],
                   },
                   "ref": null,
                   "rendered": null,
@@ -212,7 +217,8 @@ ShallowWrapper {
                                         
                               </TransitionGroup>
                               <InsertStage
-                                        onSelectStageType={[Function]}
+                                        handleCancel={null}
+                                        handleSelectStage={[Function]}
                               />
                     </div>
           </div>
@@ -243,7 +249,8 @@ ShallowWrapper {
                                           
                             </TransitionGroup>
                             <InsertStage
-                                          onSelectStageType={[Function]}
+                                          handleCancel={null}
+                                          handleSelectStage={[Function]}
                             />
               </div>
 </div>,
@@ -280,7 +287,8 @@ ShallowWrapper {
                                     
                   </TransitionGroup>
                   <InsertStage
-                                    onSelectStageType={[Function]}
+                                    handleCancel={null}
+                                    handleSelectStage={[Function]}
                   />
 </div>,
               ],
@@ -311,7 +319,8 @@ ShallowWrapper {
                       
 </TransitionGroup>,
                     <InsertStage
-                      onSelectStageType={[Function]}
+                      handleCancel={null}
+                      handleSelectStage={[Function]}
 />,
                   ],
                   "className": "timeline__stages",
@@ -337,7 +346,8 @@ ShallowWrapper {
                     "key": "insertStage",
                     "nodeType": "class",
                     "props": Object {
-                      "onSelectStageType": [Function],
+                      "handleCancel": null,
+                      "handleSelectStage": [Function],
                     },
                     "ref": null,
                     "rendered": null,

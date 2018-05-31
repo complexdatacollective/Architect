@@ -21,7 +21,7 @@ const Overview = ({ children, anyActive, toggleGuidance, className, showGuidance
       <div
         className="guided-default-guidance__toggle"
         onClick={() => { toggleGuidance(); }}
-      >x</div>
+      >‹</div>
     </div>
   );
 };

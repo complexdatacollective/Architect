@@ -1,0 +1,48 @@
+$stage-height: (9 / 16) * 100%;
+$stage-columns: 3;
+$stage-gap: unit(2);
+$stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-gap / $stage-columns});
+$component-name: timeline-insert-stage-option-grid;
+
+.#{$component-name} {
+  display: grid;
+  padding: unit(2);
+  grid-template-columns: repeat($stage-columns, $stage-width);
+  grid-gap: $stage-gap;
+  grid-auto-rows: minmax(100px, auto);
+
+  &__option {
+    cursor: pointer;
+
+    &:hover {
+      .#{$component-name}__preview {
+        border-color: var(--architect-intent);
+      }
+    }
+  }
+
+  &__screen,
+  &__description {
+    display: inline-flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__description {
+    height: 100%;
+  }
+
+  &__preview {
+    height: 0;
+    padding-bottom: $stage-height;
+    border: 2px solid transparent;
+    overflow: hidden;
+    transition: border-color var(--animation-duration-standard) var(--animation-easing);
+    position: relative;
+    background-color: var(--architect-drawer-background--guidance);
+  }
+}

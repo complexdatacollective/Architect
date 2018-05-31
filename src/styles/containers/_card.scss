@@ -30,8 +30,8 @@
     flex: 0 0 60px;
     background-color: var(--background);
     transform: translateZ(0) translateY(100%);
-    transition: transform var(--animation-duration-fast) var(--animation-easing) var(--animation-duration-standard);
-    padding: 0 unit(1);
+    transition: transform var(--animation-duration-standard) var(--animation-easing) var(--animation-duration-standard);
+    padding: 0 60px;
 
     &--entering,
     &--entered {

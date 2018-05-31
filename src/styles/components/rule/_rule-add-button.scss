@@ -4,15 +4,15 @@
   text-align: left;
 
   &__open {
-    transition: opacity var(--animation-duration-fast) var(--animation-easing),
-    transform var(--animation-duration-fast) var(--animation-easing);
+    transition: opacity var(--animation-duration-standard) var(--animation-easing),
+    transform var(--animation-duration-standard) var(--animation-easing);
     background-color: var(--primary);
     color: var(--text);
     border: 0;
-    border-radius: 60px;
-    width: 60px;
-    height: 60px;
-    font-size: 2em;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    font-size: 1em;
     font-weight: bold;
 
     &:focus {
@@ -21,8 +21,8 @@
   }
 
   &__choices {
-    transition: opacity var(--animation-duration-fast) var(--animation-easing),
-    transform var(--animation-duration-fast) var(--animation-easing);
+    transition: opacity var(--animation-duration-standard) var(--animation-easing),
+    transform var(--animation-duration-standard) var(--animation-easing);
     opacity: 0;
     transform-origin: 0 50%;
     transform: translateY(-50%) scale(.5);
@@ -40,7 +40,7 @@
     background-color: var(--edge-alt-2);
     color: var(--text);
     border-radius: 10px;
-    height: 60px;
+    height: 30px;
     text-transform: uppercase;
 
     &:focus {

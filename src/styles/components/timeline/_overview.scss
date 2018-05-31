@@ -8,7 +8,7 @@
     margin: 0 auto;
     width: 75vw;
     min-height: 80vh;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 10px;
     box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
     display: flex;
@@ -20,7 +20,7 @@
   }
 
   &__name {
-    height: 6vh;
+    height: 9vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,6 +31,7 @@
       @include typography('title-1', font-family);
       @include typography('title-1', font-weight);
       text-align: center;
+      color: var(--text-dark);
     }
   }
 
@@ -56,22 +57,34 @@
   &__groups {
     display: grid;
     grid-gap: unit(2);
-    height: 73vh;
+    height: 65vh;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
 
   &__group {
-    margin: 0 0 unit(2);
+    --base-node-size: 90px;
     border: 1px solid var(--architect-panel-divider);
-    padding: unit(2);
+    padding: unit(2) unit(4);
     border-radius:  unit(1);
     text-align: left;
+
+    .node {
+      margin-bottom: 1rem;
+    }
+
+    .icon {
+      &[name='links'] {
+        margin: 1rem;
+      }
+    }
+
+
   }
 
   &__group-title {
     text-align: center;
-    margin-bottom: unit(3);
+    margin-bottom: unit(2);
   }
 
   &.tween-protocol {

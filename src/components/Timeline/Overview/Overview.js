@@ -8,8 +8,9 @@ import { get, keys } from 'lodash';
 import { map, groupBy, toPairs } from 'lodash/fp';
 import { compose } from 'recompose';
 import { Image } from '../../Assets';
-import { Contexts, SeamlessText } from '../../Form/Fields';
+import { SeamlessText } from '../../Form/Fields';
 import { Tweened } from '../../../behaviours/Tweened';
+import { Node, Icon } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import PanelGroup from './PanelGroup';
 
@@ -19,34 +20,48 @@ const sortAssets = compose(
   map(assetPath => ({ assetPath, extension: path.extname(assetPath) })),
 );
 
-const mockFieldProps = {
-  input: {
-    onChange: () => {},
-  },
-  name: '',
-};
-
 class Overview extends Component {
   get renderNodeTypes() {
     const nodeTypes = keys(get(this.props.variableRegistry, 'node', {}));
 
-    return nodeTypes.length > 0 ?
-      <Contexts
-        options={nodeTypes}
-        {...mockFieldProps}
-      /> :
-      'No node types defined.';
+    if (nodeTypes.length === 0) {
+      return 'No node types defined';
+    }
+
+    return nodeTypes.map(
+      (node, index) => {
+        const nodeColor = `node-color-seq-${index + 1}`;
+        return <Node label={node} key={index} color={nodeColor} />;
+      },
+    );
   }
 
   get renderEdgeTypes() {
     const edgeTypes = keys(get(this.props.variableRegistry, 'edge', {}));
 
-    return edgeTypes.length > 0 ?
-      <Contexts
-        options={edgeTypes}
-        {...mockFieldProps}
-      /> :
-      'No edge types defined.';
+    if (edgeTypes.length === 0) {
+      return 'No edge types defined';
+    }
+
+    const temporaryEdgeColors = [
+      'mustard',
+      'purple-pizazz',
+      'neon-coral',
+      'kiwi',
+      'paradise-pink',
+      'tomato',
+      'sea-serpent',
+      'barbie-pink',
+      'neon-coral',
+      'cerulean-blue',
+    ];
+
+    return edgeTypes.map(
+      (edge, index) => {
+        const edgeColor = temporaryEdgeColors[index];
+        return <Icon name="links" label={edge} key={index} color={edgeColor} />;
+      },
+    );
   }
 
   get renderAssets() {
@@ -103,12 +118,14 @@ class Overview extends Component {
                   <h4>Edge types</h4>
                   { this.renderEdgeTypes }
                 </PanelGroup>
-                <PanelGroup title="Forms" />
+                <PanelGroup title="Forms">
+                  <p>Forms not configurable yet.</p>
+                </PanelGroup>
                 <PanelGroup title="Global Options">
                   <p>Version: {version}</p>
                 </PanelGroup>
                 <PanelGroup title="Assets">
-                  {this.renderAssets}
+                  <p>Assets not displayed yet.</p>
                 </PanelGroup>
               </div>
             </div>

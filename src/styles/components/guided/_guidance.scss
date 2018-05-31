@@ -11,7 +11,7 @@
   opacity: 0;
 
   &--is-active {
-    transition: opacity var(--animation-duration-fast) var(--animation-easing),
+    transition: opacity var(--animation-duration-standard) var(--animation-easing),
     transform var(--animation-duration-slow) var(--animation-easing);
     opacity: 1;
   }

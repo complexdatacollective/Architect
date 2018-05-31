@@ -12,21 +12,23 @@
 
   &__toggle {
     position: absolute;
-    top: 50%;
+    top: calc(50% - 60px);
     left: -30px;
     border-top-left-radius: 60px;
     border-bottom-left-radius: 60px;
-    background: grey;
+    background: var(--color-charcoal);
     color: white;
     width: 30px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: .25rem;
+    font-size: 2rem;
   }
 
   &--is-active {
-    transition: opacity var(--animation-duration-fast) var(--animation-easing),
+    transition: opacity var(--animation-duration-standard) var(--animation-easing),
     transform var(--animation-duration-slow) var(--animation-easing);
     opacity: 1;
   }

@@ -1,11 +1,16 @@
-import Categorize from './stage--Categorize.png';
+import CategoricalBin from './stage--CategoricalBin.png';
 import NameGenerator from './stage--NameGenerator.png';
-import Ordinal from './stage--Ordinal.png';
+import OrdinalBin from './stage--OrdinalBin.png';
 import Sociogram from './stage--Sociogram.png';
+import Narrative from './stage--Narrative.png';
+import Information from './stage--Information.png';
+
 
 export default {
-  Categorize,
+  CategoricalBin,
   NameGenerator,
-  Ordinal,
+  Narrative,
+  Information,
+  OrdinalBin,
   Sociogram,
 };

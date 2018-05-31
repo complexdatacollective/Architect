@@ -42,7 +42,7 @@ class Card extends PureComponent {
 
     return (
       <Transition
-        timeout={getCSSVariableAsNumber('--animation-duration-fast-ms') * 2}
+        timeout={getCSSVariableAsNumber('--animation-duration-standard-ms') * 2}
         unmountOnExit
         appear
         onEnter={
@@ -52,7 +52,7 @@ class Card extends PureComponent {
               elasticity: 0,
               easing: 'easeInOutQuad',
               duration: 1,
-              delay: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+              delay: getCSSVariableAsNumber('--animation-duration-standard-ms'),
               ...fadeIn,
             });
           }
@@ -63,7 +63,7 @@ class Card extends PureComponent {
               targets: el,
               elasticity: 0,
               easing: 'easeInOutQuad',
-              duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+              duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
               ...(cancel ? wipeOut : fadeOut),
             });
           }

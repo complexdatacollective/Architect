@@ -10,11 +10,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--animation-easing) var(--animation-duration-fast);
+  transition: background-color var(--animation-easing) var(--animation-duration-standard);
 
   .icon {
-    width: 65%;
-    height: 65%;
+    width: 40%;
+    height: 40%;
   }
 
   &--small {

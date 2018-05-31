@@ -5,7 +5,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: opacity var(--animation-duration-fast) var(--animation-easing);
+  transition: opacity var(--animation-duration-standard) var(--animation-easing);
   position: absolute;
   top: 0;
   left: 0;
@@ -42,12 +42,11 @@
     position: absolute;
     top: unit(2);
     right: unit(3);
-    width: unit(15);
-    height: unit(5);
+    width: unit(20);
   }
 
   &__welcome {
-    width: 50vw;
+    width: 51vw;
     margin: 0 auto;
     padding: 0 0 unit(4) unit(14);
 
@@ -57,11 +56,14 @@
     }
 
     &-title {
-      @include typography('title-1', font-size);
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 15px;
     }
 
     &-lead {
-      @include typography('title-2', font-size);
+      font-size: 23px;
+      font-weight: 400;
     }
   }
 
@@ -71,12 +73,18 @@
     padding: 0 0 unit(8);
 
     & > * {
-      margin: 0 unit(3);
+      margin: 0 unit(1);
+    }
+
+    .button--small {
+      padding: 1.8em;
+      width: 260px;
     }
   }
 
   &__protocols {
-    width: 80vw;
+    width: 90vw;
+    max-width: 1300px;
     margin: 0 auto;
     padding: unit(3);
     border-radius: unit(1);
@@ -114,14 +122,14 @@
     opacity: 1;
 
     .start__background {
-      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      transition: transform var(--animation-duration-standard) var(--animation-easing);
       will-change: transform;
       transform: translateY(0);
     }
 
     #create-new-protocol-button,
     #open-existing-protocol-button {
-      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      transition: transform var(--animation-duration-standard) var(--animation-easing);
       will-change: transform;
     }
   }

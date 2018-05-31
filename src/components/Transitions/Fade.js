@@ -8,14 +8,14 @@ const appear = {
   opacity: [0, 1],
   elasticity: 0,
   easing: 'easeInOutQuad',
-  duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+  duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
 };
 
 const disappear = {
   opacity: [1, 0],
   elasticity: 0,
   easing: 'easeInOutQuad',
-  duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+  duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
 };
 
 const Fade = ({ children, ...props }) => (
@@ -23,7 +23,7 @@ const Fade = ({ children, ...props }) => (
     mountOnEnter
     unmountOnExit
     appear
-    timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
+    timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')}
     onEntering={el => anime({ targets: el, ...appear })}
     onExiting={el => anime({ targets: el, ...disappear })}
     {...props}

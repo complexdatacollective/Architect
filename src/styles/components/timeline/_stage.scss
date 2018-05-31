@@ -32,8 +32,8 @@ $component-name: timeline-stage;
     align-items: flex-start;
     justify-content: center;
     will-change: transform;
-    transition: opacity var(--animation-duration-fast) var(--animation-easing),
-    transform var(--animation-duration-fast) var(--animation-easing);
+    transition: opacity var(--animation-duration-standard) var(--animation-easing),
+    transform var(--animation-duration-standard) var(--animation-easing);
     opacity: 0;
     transform: translateZ(0) translateX(unit(-4));
   }
@@ -75,6 +75,7 @@ $component-name: timeline-stage;
     padding-bottom: $preview-width * $preview-ratio;
     position: relative;
     z-index: var(--z-default);
+    text-align: center;
 
     &-preview {
       width: 100%;
@@ -118,7 +119,7 @@ $component-name: timeline-stage;
       border-width: $border-width;
       border-style: solid;
       border-color: transparent;
-      transition: border-color var(--animation-easing) var(--animation-duration-fast);
+      transition: border-color var(--animation-easing) var(--animation-duration-standard);
     }
 
     &:hover {
@@ -128,7 +129,7 @@ $component-name: timeline-stage;
     }
   }
 
-  &:nth-child(2n + 1) {
+  &--flip {
     .#{$component-name}__edit-stage {
       left: calc(50% + #{$preview-offset});
     }
@@ -143,8 +144,8 @@ $component-name: timeline-stage;
     .#{$component-name}__controls {
       opacity: 1;
       transform: translateX(0);
-      transition: opacity var(--animation-duration-standard) var(--animation-duration-fast) var(--animation-easing),
-      transform var(--animation-duration-standard) var(--animation-duration-fast) var(--animation-easing);
+      transition: opacity var(--animation-duration-standard) var(--animation-duration-standard) var(--animation-easing),
+      transform var(--animation-duration-standard) var(--animation-duration-standard) var(--animation-easing);
     }
   }
 }

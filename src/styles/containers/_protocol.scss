@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: opacity var(--animation-duration-fast) var(--animation-easing);
+  transition: opacity var(--animation-duration-standard) var(--animation-easing);
 
   &__control-bar {
     position: absolute;
@@ -15,7 +15,7 @@
     padding: unit(1) unit(3);
     background-color: var(--architect-control-bar-background);
     transform: translateZ(0) translateY(100%);
-    transition: transform var(--animation-easing) var(--animation-duration-fast);
+    transition: transform var(--animation-easing) var(--animation-duration-standard);
     z-index: var(--z-global-ui);
 
     .button {
@@ -85,7 +85,7 @@
     opacity: 1;
 
     .timeline__background {
-      transition: transform var(--animation-duration-fast) var(--animation-easing);
+      transition: transform var(--animation-duration-standard) var(--animation-easing);
       transform: translateY(0) rotate(180deg);
     }
   }

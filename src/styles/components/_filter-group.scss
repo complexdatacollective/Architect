@@ -13,13 +13,13 @@ $background-gradient: linear-gradient($background-gradient-start, $background-gr
   &__join {
     @include flex-inline;
     @include flex-align(center, middle);
-    flex: 0 0 100px;
+    flex: 0 0 50px;
     padding-right: 10px;
   }
 
   &__rules {
     flex: 1 1 auto;
-    padding: 30px;
+    padding: 10px;
     border-radius: 10px;
     background: $background-gradient;
     overflow: hidden;

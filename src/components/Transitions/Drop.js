@@ -8,7 +8,7 @@ const appear = {
   translateY: ['-100%', 0],
   elasticity: 0,
   easing: 'easeInOutQuad',
-  duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+  duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
 };
 
 const Drop = ({ children, ...props }) => (
@@ -16,7 +16,7 @@ const Drop = ({ children, ...props }) => (
     mountOnEnter
     unmountOnExit
     appear
-    timeout={getCSSVariableAsNumber('--animation-duration-fast-ms')}
+    timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')}
     onEntering={el => anime({ targets: el, ...appear })}
     {...props}
   >

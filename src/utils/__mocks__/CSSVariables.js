@@ -5,7 +5,7 @@ const mockCSSVariables = {
   '--color-mustard': '#117733',
   '--white': '#fff',
   '--animation-duration-slow-ms': '300',
-  '--animation-duration-fast-ms': '100',
+  '--animation-duration-standard-ms': '100',
 };
 
 const getCSSVariable = (cssVariableName) => {
