@@ -31,6 +31,7 @@
       @include typography('title-1', font-family);
       @include typography('title-1', font-weight);
       text-align: center;
+      color: var(--text-dark);
     }
   }
 

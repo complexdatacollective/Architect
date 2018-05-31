@@ -9,10 +9,10 @@
     background-color: var(--primary);
     color: var(--text);
     border: 0;
-    border-radius: 60px;
-    width: 60px;
-    height: 60px;
-    font-size: 2em;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    font-size: 1em;
     font-weight: bold;
 
     &:focus {
@@ -40,7 +40,7 @@
     background-color: var(--edge-alt-2);
     color: var(--text);
     border-radius: 10px;
-    height: 60px;
+    height: 30px;
     text-transform: uppercase;
 
     &:focus {
