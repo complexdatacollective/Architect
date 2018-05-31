@@ -67,13 +67,11 @@ class InsertStage extends PureComponent {
 
     return (
       <div className="timeline-insert-stage">
-        <div className="timeline-insert-stage__chooser-controls">
-          <Filter
-            order={order}
-            query={query}
-            handleChange={state => this.setState(state)}
-          />
-        </div>
+        <Filter
+          order={order}
+          query={query}
+          handleChange={state => this.setState(state)}
+        />
         <div className="timeline-insert-stage__container">
           <div className="timeline-insert-stage__chooser">
             <div className="timeline-insert-stage__chooser-options">

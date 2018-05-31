@@ -23,6 +23,10 @@ $component-name: timeline-insert-stage;
     display: flex;
   }
 
+  &-filter {
+
+  }
+
   &__chooser {
     flex: 0 0 70%;
     height: 55vh;
@@ -30,15 +34,6 @@ $component-name: timeline-insert-stage;
     display: flex;
     flex-direction: column;
     padding-left: 80px;
-
-    &-controls {
-      flex: 0 0 7vh;
-      padding: unit(2) unit(12);
-      position: relative;
-      background-color: var(--color-navy-taupe);
-      color: var(--text);
-      z-index: 2;
-    }
 
     &-options {
       flex: 0 1 auto;

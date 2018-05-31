@@ -2,10 +2,12 @@ $component-name: timeline-insert-stage-filter;
 
 .#{$component-name} {
   display: flex;
-  // color: var(--architect-drawer-text);
+  padding: unit(2) unit(12);
+  background-color: var(--color-navy-taupe);
+  color: var(--text);
 
   input {
-    color: var(--architect-drawer-text);
+    color: var(--text);
   }
 
   &__option {
