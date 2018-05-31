@@ -45,12 +45,12 @@ ShallowWrapper {
                     className="start__call-to-action"
           >
                     <Button
-                              color="white"
+                              color="platinum"
                               content=""
                               icon={
                                         <Icon
                                                   className=""
-                                                  color=""
+                                                  color="charcoal"
                                                   name="arrow-right"
                                                   style={Object {}}
                                         />
@@ -124,12 +124,12 @@ ShallowWrapper {
               className="start__call-to-action"
 >
               <Button
-                            color="white"
+                            color="platinum"
                             content=""
                             icon={
                                           <Icon
                                                         className=""
-                                                        color=""
+                                                        color="charcoal"
                                                         name="arrow-right"
                                                         style={Object {}}
                                           />
@@ -222,12 +222,12 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <Button
-                  color="white"
+                  color="platinum"
                   content=""
                   icon={
                                     <Icon
                                                       className=""
-                                                      color=""
+                                                      color="charcoal"
                                                       name="arrow-right"
                                                       style={Object {}}
                                     />
@@ -270,11 +270,11 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": "Create new",
-                  "color": "white",
+                  "color": "platinum",
                   "content": "",
                   "icon": <Icon
                     className=""
-                    color=""
+                    color="charcoal"
                     name="arrow-right"
                     style={Object {}}
 />,
@@ -385,12 +385,12 @@ ShallowWrapper {
                         className="start__call-to-action"
             >
                         <Button
-                                    color="white"
+                                    color="platinum"
                                     content=""
                                     icon={
                                                 <Icon
                                                             className=""
-                                                            color=""
+                                                            color="charcoal"
                                                             name="arrow-right"
                                                             style={Object {}}
                                                 />
@@ -464,12 +464,12 @@ ShallowWrapper {
                 className="start__call-to-action"
 >
                 <Button
-                                color="white"
+                                color="platinum"
                                 content=""
                                 icon={
                                                 <Icon
                                                                 className=""
-                                                                color=""
+                                                                color="charcoal"
                                                                 name="arrow-right"
                                                                 style={Object {}}
                                                 />
@@ -562,12 +562,12 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <Button
-                    color="white"
+                    color="platinum"
                     content=""
                     icon={
                                         <Icon
                                                             className=""
-                                                            color=""
+                                                            color="charcoal"
                                                             name="arrow-right"
                                                             style={Object {}}
                                         />
@@ -610,11 +610,11 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": "Create new",
-                    "color": "white",
+                    "color": "platinum",
                     "content": "",
                     "icon": <Icon
                       className=""
-                      color=""
+                      color="charcoal"
                       name="arrow-right"
                       style={Object {}}
 />,
