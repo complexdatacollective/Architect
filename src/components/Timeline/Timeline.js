@@ -162,7 +162,7 @@ class Timeline extends Component {
               { !this.hasStages() && (
                 <InsertStage
                   key="insertStage"
-                  onSelectStageType={type => this.createStage(type, 0)}
+                  handleSelectStage={type => this.createStage(type, 0)}
                 />
               ) }
             </div>

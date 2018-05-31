@@ -31,7 +31,7 @@ class InsertStage extends PureComponent {
 
   static defaultProps = {
     handleSelectStage: () => {},
-    handleCancel: () => {},
+    handleCancel: null,
   }
 
   constructor(props) {
@@ -98,12 +98,14 @@ class InsertStage extends PureComponent {
             </p>
           </Guidance>
         </div>
-        <div
-          className="timeline-insert-stage__close"
-          onClick={this.props.handleCancel}
-        >
-          Cancel
-        </div>
+        { this.props.handleCancel &&
+          <div
+            className="timeline-insert-stage__close"
+            onClick={this.props.handleCancel}
+          >
+            Cancel
+          </div>
+        }
       </div>
     );
   }
