@@ -38,7 +38,7 @@ const createProtocolWorkingPath = (workingPath, protocol) =>
 
 export const createProtocolArchive = ({ workingPath, archivePath }, protocol) =>
   createProtocolWorkingPath(workingPath, protocol)
-    .then(archive(workingPath, archivePath));
+    .then(() => archive(workingPath, archivePath));
 
 /**
  * Shows a save dialog and then creates an empty protocol there
