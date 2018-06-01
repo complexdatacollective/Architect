@@ -90,6 +90,7 @@ class Timeline extends Component {
       key={`insert_${insertStageAtIndex}`}
       timeout={1000}
       unmountOnExit
+      mountOnEnter
     >
       <InsertStage
         handleSelectStage={type => this.createStage(type, insertStageAtIndex)}
