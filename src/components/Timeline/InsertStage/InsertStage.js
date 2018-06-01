@@ -50,8 +50,8 @@ class InsertStage extends PureComponent {
     return filter(query, order)(interfaceOptions);
   }
 
-  handleOptionActive = (index) => {
-    this.setState({ activeOption: index });
+  handleOptionActive = (type) => {
+    this.setState({ activeOption: type });
   };
 
   handleOptionInactive = () => {
@@ -78,7 +78,7 @@ class InsertStage extends PureComponent {
               <OptionsGrid
                 options={this.filteredOptions}
                 handleOptionSelected={type => this.props.handleSelectStage(type)}
-                handleOptionActive={index => this.handleOptionActive(index)}
+                handleOptionActive={type => this.handleOptionActive(type)}
                 handleOptionInactive={() => this.handleOptionInactive()}
               />
             </div>

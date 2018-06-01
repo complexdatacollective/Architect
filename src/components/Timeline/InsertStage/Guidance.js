@@ -6,7 +6,7 @@ import { isNull } from 'lodash';
 class Guidance extends PureComponent {
   static propTypes = {
     options: PropTypes.array,
-    activeOption: PropTypes.number,
+    activeOption: PropTypes.string,
     children: PropTypes.node,
   };
 
@@ -16,16 +16,16 @@ class Guidance extends PureComponent {
     children: null,
   }
 
-  renderGuidance = ({ guidance }, index) => {
+  renderGuidance = ({ guidance, type }) => {
     const guidanceClasses = cx(
       'timeline-insert-stage-guidance__item',
       {
-        'timeline-insert-stage-guidance__item--is-active': this.props.activeOption === index,
+        'timeline-insert-stage-guidance__item--is-active': this.props.activeOption === type,
       },
     );
 
     return (
-      <div className={guidanceClasses} key={index}>
+      <div className={guidanceClasses} key={type}>
         <h3>{ guidance.title }</h3>
         { guidance.description }
       </div>
