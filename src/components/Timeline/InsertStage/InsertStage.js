@@ -40,7 +40,7 @@ class InsertStage extends PureComponent {
     this.state = {
       activeOption: null,
       query: '',
-      order: null,
+      order: '',
     };
   }
 

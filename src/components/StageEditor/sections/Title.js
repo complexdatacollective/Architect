@@ -1,10 +1,10 @@
 import React from 'react';
-// import { Field } from 'redux-form';
+import propTypes from './propTypes';
 import { Section, Editor, Guidance } from '../../Guided';
 import { ValidatedField } from '../../../components/Form';
 import SeamlessText from '../../../components/Form/Fields/SeamlessText';
 
-const Title = props => (
+const Title = ({ form, ...props }) => (
   <Section className="stage-editor-section" {...props}>
     <Editor className="stage-editor-section__edit">
       <h2>Title</h2>
@@ -29,5 +29,9 @@ const Title = props => (
     </Guidance>
   </Section>
 );
+
+Title.propTypes = {
+  ...propTypes,
+};
 
 export default Title;

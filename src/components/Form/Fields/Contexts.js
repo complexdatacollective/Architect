@@ -14,8 +14,8 @@ class Contexts extends Component {
     className: PropTypes.string,
     input: PropTypes.shape({
       onChange: PropTypes.func.isRequired,
+      name: PropTypes.string.isRequired,
     }).isRequired,
-    name: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -32,8 +32,7 @@ class Contexts extends Component {
 
   renderOption = (option, index) => {
     const {
-      input: { value },
-      name,
+      input: { value, name },
     } = this.props;
     const optionValue = getValue(option);
     const optionLabel = getLabel(option);

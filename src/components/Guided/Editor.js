@@ -1,11 +1,14 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import { propTypes, defaultProps } from './guidedProps';
 
 const Editor = ({
   isActive,
   showGuidance,
   resetGuidance,
+  toggleGuidance,
+  anyActive,
   children,
   className,
   disabled,
@@ -33,21 +36,17 @@ const Editor = ({
 };
 
 Editor.propTypes = {
-  isActive: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node,
   disabled: PropTypes.bool,
-  showGuidance: PropTypes.func,
-  resetGuidance: PropTypes.func,
+  ...propTypes,
 };
 
 Editor.defaultProps = {
-  isActive: false,
   className: '',
   children: null,
   disabled: false,
-  showGuidance: () => {},
-  resetGuidance: () => {},
+  ...defaultProps,
 };
 
 export default Editor;
