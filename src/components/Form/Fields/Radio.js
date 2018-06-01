@@ -36,7 +36,7 @@ class Radio extends PureComponent {
       className,
       {
         'form-fields-radio--disabled': disabled,
-      }
+      },
     );
 
     return (
