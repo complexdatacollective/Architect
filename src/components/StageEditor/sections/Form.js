@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { keys, get, pickBy } from 'lodash';
 import { Section, Editor, Guidance } from '../../Guided';
 import Radio from '../../Form/Fields/Radio';
@@ -52,6 +53,12 @@ class Form extends Component {
   render() {
     const { show, forms, ...rest } = this.props;
 
+    const categoryClasses = (disabled = false) =>
+      cx(
+        'stage-editor-section-form__category',
+        { 'stage-editor-section-form__category--disabled': disabled },
+      );
+
     return (
       <Section className="stage-editor-section" show={show} {...rest}>
         <Editor className="stage-editor-section__edit">
@@ -71,10 +78,11 @@ class Form extends Component {
                 readOnly
               />
             </div>
-            <div className="stage-editor-section-form__category">
+            <div className={categoryClasses(forms.length === 0)}>
               <Radio
                 label="Use a different form"
                 className="stage-editor-section-form__radio"
+                disabled={forms.length === 0}
                 input={
                   {
                     checked: this.state.formType === CUSTOM_FORM,
@@ -96,11 +104,12 @@ class Form extends Component {
                 </Field>
               </div>
             </div>
-            <div onClick={this.onClickCreateNewForm} className="stage-editor-section-form__category">
+            <div onClick={this.onClickCreateNewForm} className={categoryClasses(true)}>
               <Radio
                 label="Create new form..."
                 className="stage-editor-section-form__radio"
                 checked={false}
+                disabled
                 readOnly
               />
             </div>

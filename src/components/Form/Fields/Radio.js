@@ -8,12 +8,14 @@ class Radio extends PureComponent {
   static propTypes = {
     label: PropTypes.string,
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     ...fieldPropTypes,
   };
 
   static defaultProps = {
     className: '',
     label: null,
+    disabled: false,
   };
 
   componentWillMount() {
@@ -25,12 +27,16 @@ class Radio extends PureComponent {
       label,
       className,
       input,
+      disabled,
       ...rest
     } = this.props;
 
     const componentClasses = cx(
       'form-fields-radio',
       className,
+      {
+        'form-fields-radio--disabled': disabled,
+      }
     );
 
     return (

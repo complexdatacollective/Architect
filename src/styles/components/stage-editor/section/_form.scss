@@ -3,6 +3,11 @@
 
   &__category {
     margin: 0 unit(3) unit(1) 0;
+
+    &--disabled {
+      pointer-events: none;
+      opacity: .5;
+    }
   }
 
   &__custom {
