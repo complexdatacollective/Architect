@@ -4,6 +4,7 @@ import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, has, difference } from 'lodash';
 import cx from 'classnames';
+import propTypes from './propTypes';
 import { Section, Editor, Guidance } from '../../Guided';
 import Contexts from '../../../components/Form/Fields/Contexts';
 
@@ -22,6 +23,8 @@ class NodeType extends Component {
     const {
       nodeTypes,
       disabled,
+      stage,
+      form,
       ...rest
     } = this.props;
 
@@ -70,6 +73,7 @@ NodeType.propTypes = {
   disabled: PropTypes.bool,
   stage: PropTypes.object.isRequired,
   resetField: PropTypes.func.isRequired,
+  ...propTypes,
 };
 
 NodeType.defaultProps = {
