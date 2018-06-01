@@ -67,6 +67,7 @@ class VariableChooser extends Component {
               toPairs(values)
                 .map(([variableName]) => (
                   <ValidatedField
+                    key={variableName}
                     name={variableName}
                     component={Tag}
                     editVariable={this.editVariable}
