@@ -13,6 +13,7 @@ const Filter = ({
       <Text
         input={{
           value: query,
+          name: 'search',
           onChange: event => handleChange({ query: event.target.value }),
         }}
       />
@@ -22,6 +23,7 @@ const Filter = ({
       <Select
         input={{
           value: order,
+          name: 'sort_by',
           onChange: event => handleChange({ order: event.target.value }),
         }}
       >

@@ -4,27 +4,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
-import { Button } from '../../../../ui/components';
 import { Section, Editor, Guidance } from '../../../Guided';
+import AddContentButton from './AddContentButton';
 import SortableItems from '../../SortableItems';
 import ContentItem from './ContentItem';
-
-const AddButton = ({ onClick, type, children }) => (
-  <Button
-    type="button"
-    size="small"
-    className={`button button--small stage-editor-section-content-items__control stage-editor-section-content-items__control--${type}`}
-    onClick={onClick}
-  >
-    {children}
-  </Button>
-);
-
-AddButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
-};
 
 const ContentItems = ({ form, createNewItem, ...rest }) => (
   <Section className="stage-editor-section" {...rest}>
@@ -40,10 +23,10 @@ const ContentItems = ({ form, createNewItem, ...rest }) => (
         />
 
         <div className="stage-editor-section-content-items__controls">
-          <AddButton onClick={() => createNewItem('text')} type="text">Text</AddButton>
-          <AddButton onClick={() => createNewItem('image')} type="image">Image</AddButton>
-          <AddButton onClick={() => createNewItem('audio')} type="audio">Audio</AddButton>
-          <AddButton onClick={() => createNewItem('video')} type="video">Video</AddButton>
+          <AddContentButton onClick={() => createNewItem('text')} type="text">Text</AddContentButton>
+          <AddContentButton onClick={() => createNewItem('image')} type="image">Image</AddContentButton>
+          <AddContentButton onClick={() => createNewItem('audio')} type="audio">Audio</AddContentButton>
+          <AddContentButton onClick={() => createNewItem('video')} type="video">Video</AddContentButton>
         </div>
       </div>
     </Editor>
