@@ -49,7 +49,7 @@ class Options extends Component {
       type={type}
       zoomColors={['#2d2955', '#ffffff']}
       onSelectStageType={() => this.props.handleOptionSelected(type)}
-      onMouseEnterStageType={() => this.props.handleOptionActive(index)}
+      onMouseEnterStageType={() => this.props.handleOptionActive(type)}
       onMouseLeaveStageType={() => this.props.handleOptionInactive()}
     />
   );
