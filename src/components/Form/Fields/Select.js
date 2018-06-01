@@ -1,18 +1,20 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { fieldPropTypes } from 'redux-form';
 
-class Radio extends PureComponent {
+class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     options: PropTypes.array,
-    ...fieldPropTypes,
+    input: PropTypes.object,
+    children: PropTypes.node,
   };
 
   static defaultProps = {
     className: '',
     options: [],
+    input: {},
+    children: null,
   };
 
   render() {
@@ -38,4 +40,4 @@ class Radio extends PureComponent {
   }
 }
 
-export default Radio;
+export default Select;

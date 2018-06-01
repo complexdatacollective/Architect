@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { fieldPropTypes } from 'redux-form';
 import uuid from 'uuid';
 
 class Radio extends PureComponent {
@@ -9,7 +8,7 @@ class Radio extends PureComponent {
     label: PropTypes.string,
     className: PropTypes.string,
     disabled: PropTypes.bool,
-    ...fieldPropTypes,
+    input: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
