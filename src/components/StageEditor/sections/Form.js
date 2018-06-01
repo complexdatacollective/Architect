@@ -53,7 +53,14 @@ class Form extends Component {
   };
 
   render() {
-    const { show, forms, form, selectedForm, ...rest } = this.props;
+    const {
+      show,
+      forms,
+      form,
+      selectedForm,
+      reset,
+      ...rest
+    } = this.props;
 
     const categoryClasses = (disabled = false) =>
       cx(
@@ -111,6 +118,7 @@ class Form extends Component {
                 label="Create new form..."
                 className="stage-editor-section-form__radio"
                 checked={false}
+                input={{}}
                 disabled
                 readOnly
               />

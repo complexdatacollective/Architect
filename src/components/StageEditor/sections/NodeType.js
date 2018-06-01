@@ -25,6 +25,7 @@ class NodeType extends Component {
       disabled,
       stage,
       form,
+      resetField,
       ...rest
     } = this.props;
 
