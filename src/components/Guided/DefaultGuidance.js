@@ -1,8 +1,16 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import { propTypes, defaultProps } from './guidedProps';
 
-const Overview = ({ children, anyActive, toggleGuidance, className, showGuidance, ...props }) => {
+const DefaultGuidance = ({
+  isActive,
+  showGuidance,
+  resetGuidance,
+  toggleGuidance,
+  anyActive,
+  children, className, ...props
+}) => {
   const sectionClasses = cx(
     className,
     'guided-default-guidance',
@@ -16,7 +24,7 @@ const Overview = ({ children, anyActive, toggleGuidance, className, showGuidance
       className={sectionClasses}
       {...props}
     >
-      <h3>Overview</h3>
+      <h3>DefaultGuidance</h3>
       { children }
       <div
         className="guided-default-guidance__toggle"
@@ -26,20 +34,16 @@ const Overview = ({ children, anyActive, toggleGuidance, className, showGuidance
   );
 };
 
-Overview.propTypes = {
+DefaultGuidance.propTypes = {
   children: PropTypes.node,
-  anyActive: PropTypes.bool,
   className: PropTypes.string,
-  showGuidance: PropTypes.func,
-  toggleGuidance: PropTypes.func,
+  ...propTypes,
 };
 
-Overview.defaultProps = {
+DefaultGuidance.defaultProps = {
   children: null,
-  anyActive: false,
   className: '',
-  showGuidance: () => {},
-  toggleGuidance: () => {},
+  ...defaultProps,
 };
 
-export default Overview;
+export default DefaultGuidance;

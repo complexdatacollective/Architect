@@ -53,7 +53,7 @@ const renderSections = (interfaceSections, props) => {
 
 const renderSectionsForStageType = ({ stageType, ...rest }) => {
   const interfaceSections = getSectionsForStageType(stageType);
-  return renderSections(interfaceSections, { stageType, ...rest });
+  return renderSections(interfaceSections, { ...rest });
 };
 
 const StageEditor = ({

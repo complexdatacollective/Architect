@@ -1,19 +1,20 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { fieldPropTypes } from 'redux-form';
 import uuid from 'uuid';
 
 class Radio extends PureComponent {
   static propTypes = {
     label: PropTypes.string,
     className: PropTypes.string,
-    ...fieldPropTypes,
+    disabled: PropTypes.bool,
+    input: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
     className: '',
     label: null,
+    disabled: false,
   };
 
   componentWillMount() {
@@ -25,12 +26,16 @@ class Radio extends PureComponent {
       label,
       className,
       input,
+      disabled,
       ...rest
     } = this.props;
 
     const componentClasses = cx(
       'form-fields-radio',
       className,
+      {
+        'form-fields-radio--disabled': disabled,
+      },
     );
 
     return (

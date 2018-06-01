@@ -26,7 +26,7 @@ class EditSkipLogic extends PureComponent {
   static propTypes = {
     show: PropTypes.bool,
     hasChanges: PropTypes.bool,
-    stageId: PropTypes.number,
+    stageId: PropTypes.string,
     onComplete: PropTypes.func,
     onCancel: PropTypes.func,
     draft: PropTypes.any.isRequired,

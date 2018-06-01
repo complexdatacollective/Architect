@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { keys, get, pickBy } from 'lodash';
+import propTypes from './propTypes';
 import { Section, Editor, Guidance } from '../../Guided';
 import Radio from '../../Form/Fields/Radio';
 import Select from '../../Form/Fields/Select';
@@ -14,14 +16,15 @@ const CUSTOM_FORM = Symbol('CUSTOM_FORM');
 class Form extends Component {
   static propTypes = {
     forms: PropTypes.arrayOf(PropTypes.string),
-    form: PropTypes.string,
+    selectedForm: PropTypes.string,
     show: PropTypes.bool,
     reset: PropTypes.func.isRequired,
+    ...propTypes,
   };
 
   static defaultProps = {
     show: false,
-    form: null,
+    selectedForm: null,
     forms: [],
   };
 
@@ -29,18 +32,18 @@ class Form extends Component {
     super(props);
 
     this.state = {
-      formType: props.form ? CUSTOM_FORM : DEFAULT_FORM,
+      formType: props.selectedForm ? CUSTOM_FORM : DEFAULT_FORM,
     };
   }
 
-  componentWillReceiveProps({ form }) {
+  componentWillReceiveProps({ selectedForm }) {
     this.setState({
-      formType: form ? CUSTOM_FORM : DEFAULT_FORM,
+      formType: selectedForm ? CUSTOM_FORM : DEFAULT_FORM,
     });
   }
 
   onSelectFormCategory = (formType) => {
-    if (formType === DEFAULT_FORM || this.props.form === '') {
+    if (formType === DEFAULT_FORM || this.props.selectedForm === '') {
       this.props.reset();
     }
   };
@@ -50,7 +53,20 @@ class Form extends Component {
   };
 
   render() {
-    const { show, forms, ...rest } = this.props;
+    const {
+      show,
+      forms,
+      form,
+      selectedForm,
+      reset,
+      ...rest
+    } = this.props;
+
+    const categoryClasses = (disabled = false) =>
+      cx(
+        'stage-editor-section-form__category',
+        { 'stage-editor-section-form__category--disabled': disabled },
+      );
 
     return (
       <Section className="stage-editor-section" show={show} {...rest}>
@@ -71,10 +87,11 @@ class Form extends Component {
                 readOnly
               />
             </div>
-            <div className="stage-editor-section-form__category">
+            <div className={categoryClasses(forms.length === 0)}>
               <Radio
                 label="Use a different form"
                 className="stage-editor-section-form__radio"
+                disabled={forms.length === 0}
                 input={
                   {
                     checked: this.state.formType === CUSTOM_FORM,
@@ -96,11 +113,13 @@ class Form extends Component {
                 </Field>
               </div>
             </div>
-            <div onClick={this.onClickCreateNewForm} className="stage-editor-section-form__category">
+            <div onClick={this.onClickCreateNewForm} className={categoryClasses(true)}>
               <Radio
                 label="Create new form..."
                 className="stage-editor-section-form__radio"
                 checked={false}
+                input={{}}
+                disabled
                 readOnly
               />
             </div>
@@ -136,12 +155,12 @@ const getNodeForms = (state, nodeType) => {
 const mapStateToProps = (state, props) => {
   const formValues = props.form.getValues(state, 'subject', 'form');
   const nodeType = get(formValues, 'subject.type', null);
-  const form = get(formValues, 'form', null);
+  const selectedForm = get(formValues, 'form', null);
 
   return {
     forms: getNodeForms(state, nodeType),
     show: !!nodeType,
-    form,
+    selectedForm,
   };
 };
 

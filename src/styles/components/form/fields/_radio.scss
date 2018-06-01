@@ -68,4 +68,31 @@ $border-space: 3px;
       opacity: 1;
     }
   }
+
+  &--disabled {
+    cursor: default;
+    pointer-events: none;
+
+    .form-fields-radio__radio {
+      &::before {
+        border-color: var(--color-charcoal);
+      }
+
+      &::after {
+        opacity: 0;
+      }
+    }
+
+    &:hover {
+      .form-fields-radio__radio {
+        &::before {
+          border-color: var(--color-charcoal);
+        }
+
+        &::after {
+          opacity: 0;
+        }
+      }
+    }
+  }
 }

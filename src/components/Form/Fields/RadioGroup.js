@@ -9,7 +9,7 @@ const toString = value => (isString(value) ? value : JSON.stringify(value));
 const getValue = option => get(option, 'value', option);
 const getLabel = option => get(option, 'label', toString(getValue(option)));
 
-class Contexts extends Component {
+class RadioGroup extends Component {
   static propTypes = {
     options: PropTypes.array,
     ...fieldPropTypes,
@@ -78,6 +78,6 @@ class Contexts extends Component {
   }
 }
 
-export { Contexts };
+export { RadioGroup };
 
-export default Contexts;
+export default RadioGroup;
