@@ -5,7 +5,6 @@
     "node": {
       "person": {
         "label": "Person",
-        "color": "coral",
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
         "variables": {
