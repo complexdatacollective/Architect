@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { Field, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { keys, get, pickBy } from 'lodash';
+import { toPairs, map, get, pickBy } from 'lodash';
 import propTypes from './propTypes';
 import { Section, Editor, Guidance } from '../../Guided';
 import Radio from '../../Form/Fields/Radio';
@@ -145,11 +145,12 @@ const getNodeForms = (state, nodeType) => {
   const forms = get(state, 'protocol.present.forms', {});
 
   const validForms = pickBy(
-    forms,
-    form => form.type === nodeType && form.entity === 'node',
+    toPairs(forms),
+    ([name, form]) =>
+      form.type === nodeType && form.entity === 'node' && name !== nodeType,
   );
 
-  return keys(validForms);
+  return map(validForms, 0);
 };
 
 const mapStateToProps = (state, props) => {
