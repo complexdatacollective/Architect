@@ -47,5 +47,27 @@
         }
       }
     }
+  },
+  "forms": {
+    "person": {
+      "title": "Add A Person",
+      "entity": "node",
+      "type": "person",
+      "optionToAddAnother": true,
+      "fields": [
+        {
+          "variable": "name",
+          "component": "TextInput"
+        },
+        {
+          "variable": "nickname",
+          "component": "TextInput"
+        },
+        {
+          "variable": "age",
+          "component": "TextInput"
+        }
+      ]
+    }
   }
 }
