@@ -52,7 +52,6 @@ function createWindow() {
     }, titlebarParameters);
 
     const mainWindow = new BrowserWindow(windowParameters);
-    mainWindow.maximize();
 
     if (process.env.NODE_ENV === 'development') {
       mainWindow.openDevTools();
