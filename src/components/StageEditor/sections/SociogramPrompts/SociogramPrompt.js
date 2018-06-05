@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
+import { keys, get } from 'lodash';
 import * as Fields from '../../../Form/Fields';
 
 const NameGeneratorPrompt = ({
   fieldId,
-  form,
+  nodeTypes,
 }) => (
   <div className="stage-editor-section-name-generator-prompt">
     <div className="stage-editor-section-name-generator-prompt__setting">
@@ -18,21 +19,30 @@ const NameGeneratorPrompt = ({
         placeholder="Enter text for the prompt here"
       />
     </div>
+    <div className="stage-editor-section-name-generator-prompt__setting">
+      <div className="stage-editor-section-name-generator-prompt__setting-label">Which nodes?</div>
+      <Field
+        name={`${fieldId}.subject`}
+        parse={value => ({ type: value, entity: 'node' })}
+        format={value => get(value, 'type')}
+        options={nodeTypes}
+        component={Fields.Contexts}
+      />
+    </div>
   </div>
 );
 
 NameGeneratorPrompt.propTypes = {
   fieldId: PropTypes.string.isRequired,
-  form: PropTypes.shape({
-    name: PropTypes.string,
-    getValues: PropTypes.func,
-  }).isRequired,
-  variableRegistry: PropTypes.object,
+  nodeTypes: PropTypes.array.isRequired,
 };
 
 NameGeneratorPrompt.defaultProps = {
-  variableRegistry: {},
 };
+
+const mapStateToProps = state => ({
+  nodeTypes: keys(state.protocol.present.variableRegistry.node),
+});
 
 export { NameGeneratorPrompt };
 
