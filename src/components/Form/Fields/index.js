@@ -9,3 +9,6 @@ export { default as Image } from './Image';
 export { default as Audio } from './Audio';
 export { default as Video } from './Video';
 export { default as Contexts } from './Contexts';
+export { default as Radio } from './Radio';
+export { default as RadioGroup } from './RadioGroup';
+export { default as Checkbox } from './Checkbox';

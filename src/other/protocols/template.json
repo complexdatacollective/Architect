@@ -45,6 +45,11 @@
           }
         }
       }
+    },
+    "edge": {
+      "knows": {
+        "label": "Knows"
+      }
     }
   },
   "forms": {
