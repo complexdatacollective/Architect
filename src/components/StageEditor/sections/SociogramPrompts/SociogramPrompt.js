@@ -8,12 +8,12 @@ import * as Fields from '../../../Form/Fields';
 // reference
 // {
 //   "id": "closeness1",
-//   "text": "Position the nodes amongst the concentric circles. Place people you are closer to towards the middle",
+//   "text": "Position the nodes amongst the concentric circles. Place people you are closer to
+// towards the middle",
 //   "subject": {
 //     "entity": "node",
 //     "type": "person"
 //   },
-//   "filter": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'GREATER_THAN', value: 29 })]);",
 //   "layout": {
 //     "layoutVariable": "closenessLayout",
 //     "allowPositioning": true
@@ -27,7 +27,6 @@ import * as Fields from '../../../Form/Fields';
 //     "value": true,
 //     "allowHighlighting": true
 //   },
-//   "disable": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'LESS_THAN', value: 29 })]);",
 //   "nodeBinSortOrder": {
 //     "nickname": "DESC"
 //   },
@@ -38,10 +37,10 @@ import * as Fields from '../../../Form/Fields';
 // }
 
 class SociogramPrompt extends Component {
-
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
     nodeTypes: PropTypes.array.isRequired,
+    variablesForNodeType: PropTypes.array.isRequired,
   };
 
   static defaultProps = {
@@ -64,6 +63,7 @@ class SociogramPrompt extends Component {
     const {
       fieldId,
       nodeTypes,
+      variablesForNodeType,
     } = this.props;
 
     return (
@@ -99,6 +99,24 @@ class SociogramPrompt extends Component {
             name={`${fieldId}.layout.allowPositioning`}
             component={Fields.Checkbox}
             label="Allow positioning?"
+          />
+        </div>
+        <div className="stage-editor-section-name-generator-prompt__setting">
+          <div className="stage-editor-section-name-generator-prompt__setting-label">Highlight</div>
+          <Fields.Select
+            className="stage-editor-section-name-generator-prompt__setting-value"
+            name={`${fieldId}.highlight.variable`}
+            options={variablesForNodeType}
+          />
+          <Field
+            name={`${fieldId}.highlight.value`}
+            component={Fields.Text}
+            placeholder="TRUE"
+          />
+          <Field
+            name={`${fieldId}.layout.allowHighlighting`}
+            component={Fields.Checkbox}
+            label="Allow highlighting?"
           />
         </div>
         <div className="stage-editor-section-name-generator-prompt__setting">
@@ -152,10 +170,19 @@ class SociogramPrompt extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  nodeTypes: keys(state.protocol.present.variableRegistry.node),
-  edgeTypes: keys(state.protocol.present.variableRegistry.edge),
-});
+const getVariablesForNodeType = (state, nodeType) => {
+  const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
+  return keys(get(variableRegistry, ['node', nodeType, 'variables'], {}));
+};
+
+const mapStateToProps = (state, props) => {
+  const nodeType = get(props.form.getValues(state, props.fieldId), 'subject.type');
+  return {
+    variablesForNodeType: getVariablesForNodeType(state, nodeType),
+    nodeTypes: keys(state.protocol.present.variableRegistry.node),
+    edgeTypes: keys(state.protocol.present.variableRegistry.edge),
+  };
+};
 
 export { SociogramPrompt };
 
