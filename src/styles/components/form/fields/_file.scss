@@ -2,4 +2,23 @@
   display: block;
   overflow: hidden;
   position: relative;
+
+  &__label {
+    @include preset(copy-small);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+
+  &__dropzone {
+    position: relative;
+    min-height: 150px;
+  }
+
+  .form-dropzone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }

@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import uuid from 'uuid';
 
 class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     options: PropTypes.array,
     input: PropTypes.object,
+    label: PropTypes.string,
     children: PropTypes.node,
   };
 
@@ -14,8 +16,13 @@ class Select extends PureComponent {
     className: '',
     options: [],
     input: {},
+    label: null,
     children: null,
   };
+
+  componentWillMount() {
+    this.id = uuid();
+  }
 
   render() {
     const {
@@ -23,6 +30,7 @@ class Select extends PureComponent {
       input,
       children,
       options,
+      label,
       ...rest
     } = this.props;
 
@@ -32,10 +40,18 @@ class Select extends PureComponent {
     );
 
     return (
-      <select className={componentClasses} {...input} {...rest}>
-        {children}
-        {options.map(option => <option value={option}>{option}</option>)}
-      </select>
+      <div className={componentClasses}>
+        { label &&
+          <label
+            htmlFor={this.id}
+            className="form-fields-select__label"
+          >{label}</label>
+        }
+        <select className="form-fields-select__input" {...input} {...rest}>
+          {children}
+          {options.map(option => <option value={option}>{option}</option>)}
+        </select>
+      </div>
     );
   }
 }

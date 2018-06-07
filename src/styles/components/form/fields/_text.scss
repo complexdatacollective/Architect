@@ -4,6 +4,12 @@ $module-name: form-fields-text;
   display: block;
   position: relative;
 
+  &__label {
+    @include preset(copy-small);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+
   &__input {
     @include preset('copy-large', font-size);
     background-color: transparent;

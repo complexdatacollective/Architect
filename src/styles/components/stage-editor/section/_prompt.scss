@@ -1,16 +1,31 @@
-.stage-editor-section-name-generator-prompt {
+.stage-editor-section-prompt {
   background-color: var(--card-background);
   padding: unit(2);
   border: 2px solid var(--architect-border);
   width: 100%;
 
+  &__group {
+    margin: 0 0 unit(2);
+    padding: unit(2) 0 0;
+    border-top: 2px solid var(--architect-border);;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &-title {
+      @include preset(title-4);
+      margin: 0;
+    }
+  }
+
   &__setting {
     display: block;
-    margin: 0 0 unit(2);
+    margin: unit(2) 0;
   }
 
   &__setting-label {
-    @include preset(copy-small);
+
     display: block;
     margin: 0 0 unit(1);
   }

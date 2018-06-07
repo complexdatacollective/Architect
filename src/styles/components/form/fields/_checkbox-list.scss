@@ -1,0 +1,16 @@
+$component-name: form-fields-checkbox-list;
+
+.#{$component-name} {
+  display: block;
+
+  &__option,
+  &__label {
+    margin: 0 unit(2) unit(2) 0;
+  }
+
+  &__label {
+    @include preset(copy-small);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+}

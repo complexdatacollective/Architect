@@ -10,7 +10,7 @@ const ImageInput = props => (
   >
     { url => (
       <div className="form-fields-image__preview">
-        <Image url={url} alt="" />
+        <Image url={url} alt={url} />
       </div>
     ) }
   </File>

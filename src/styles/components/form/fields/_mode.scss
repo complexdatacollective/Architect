@@ -1,0 +1,38 @@
+$module-name: form-fields-mode;
+
+.#{$module-name} {
+  display: block;
+  position: relative;
+
+  &__label {
+    @include preset(copy-small);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+
+  &__options {
+    display: inline-flex;
+    border-radius: unit(1);
+    overflow: hidden;
+    border: 2px solid var(--color-sea-green);
+  }
+
+  &__option {
+    @include preset(copy-small);
+    display: inline-flex;
+    min-width: unit(10);
+    padding: unit(1);
+    margin: unit(.2);
+    border-radius: unit(.5);
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--animation-easing) var(--animation-duration-standard),
+    color var(--animation-easing) var(--animation-duration-standard);
+    cursor: pointer;
+
+    &--selected {
+      background-color: var(--color-sea-green);
+      color: var(--color-white);
+    }
+  }
+}

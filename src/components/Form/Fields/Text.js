@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import uuid from 'uuid';
 import { Icon } from '../../../ui/components';
 
 class TextInput extends PureComponent {
   static propTypes = {
     input: PropTypes.object,
     meta: PropTypes.object,
+    label: PropTypes.string,
     className: PropTypes.string,
     type: PropTypes.string,
     placeholder: PropTypes.string,
@@ -16,14 +18,20 @@ class TextInput extends PureComponent {
     input: {},
     meta: {},
     type: 'text',
+    label: null,
     placeholder: '',
     className: '',
   };
+
+  componentWillMount() {
+    this.id = uuid();
+  }
 
   render() {
     const {
       input,
       meta: { error, active },
+      label,
       className,
       placeholder,
       type,
@@ -40,7 +48,11 @@ class TextInput extends PureComponent {
 
     return (
       <div className={seamlessClasses}>
+        { label &&
+          <label htmlFor={this.id} className="form-fields-text__label">{label}</label>
+        }
         <input
+          id={this.id}
           className="form-fields-text__input"
           placeholder={placeholder}
           type={type}

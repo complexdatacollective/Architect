@@ -1,15 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import Checkbox from './Checkbox';
 
 class CheckboxList extends PureComponent {
   static propTypes = {
     options: PropTypes.array,
+    label: PropTypes.string,
+    className: PropTypes.string,
     input: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
-    className: '',
+    className: null,
+    label: null,
     options: [],
     disabled: false,
   };
@@ -33,6 +37,8 @@ class CheckboxList extends PureComponent {
 
   renderOption = option => (
     <Checkbox
+      className="form-fields-checkbox-list__option"
+      key={option}
       input={{
         value: option,
         checked: this.isOptionChecked(option),
@@ -42,12 +48,24 @@ class CheckboxList extends PureComponent {
   );
 
   render() {
-    const { options } = this.props;
+    const {
+      options,
+      className,
+      label,
+    } = this.props;
+
+    const classNames = cx(
+      'form-fields-checkbox-list',
+      className,
+    );
 
     return (
-      <React.Fragment>
-        {options.map(this.renderOption)}
-      </React.Fragment>
+      <div className={classNames}>
+        { label &&
+          <div className="form-fields-checkbox-list__label">{label}</div>
+        }
+        { options.map(this.renderOption) }
+      </div>
     );
   }
 }
