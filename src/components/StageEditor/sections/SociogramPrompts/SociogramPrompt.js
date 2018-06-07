@@ -40,6 +40,7 @@ class SociogramPrompt extends Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
     nodeTypes: PropTypes.array.isRequired,
+    edgeTypes: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.array.isRequired,
   };
 
@@ -63,6 +64,7 @@ class SociogramPrompt extends Component {
     const {
       fieldId,
       nodeTypes,
+      edgeTypes,
       variablesForNodeType,
     } = this.props;
 
@@ -114,8 +116,23 @@ class SociogramPrompt extends Component {
             placeholder="TRUE"
           />
           <Field
-            name={`${fieldId}.layout.allowHighlighting`}
+            name={`${fieldId}.highlight.allowHighlighting`}
             component={Fields.Checkbox}
+            label="Allow highlighting?"
+          />
+        </div>
+        <div className="stage-editor-section-name-generator-prompt__setting">
+          <div className="stage-editor-section-name-generator-prompt__setting-label">Edges</div>
+          <Field
+            name={`${fieldId}.edges.display`}
+            component={Fields.CheckboxList}
+            options={edgeTypes}
+          />
+          Creates:
+          <Field
+            name={`${fieldId}.edges.create`}
+            component={Fields.Select}
+            options={edgeTypes}
             label="Allow highlighting?"
           />
         </div>
