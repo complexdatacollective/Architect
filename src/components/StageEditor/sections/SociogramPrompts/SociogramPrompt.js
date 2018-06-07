@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
@@ -55,7 +55,12 @@ class SociogramPrompt extends Component {
     };
   }
 
+  handleChooseBackgroundType = (event) => {
+    this.setState({ backgroundType: event.target.value });
+  }
+
   render() {
+    const { backgroundType } = this.state;
     const {
       fieldId,
       nodeTypes,
@@ -88,36 +93,59 @@ class SociogramPrompt extends Component {
             name={`${fieldId}.layout.layoutVariable`}
             component={Fields.Text}
             label="Layout variable"
-            className="stage-editor-section-name-generator-prompt__setting-value"
             placeholder="MY_VARIABLE"
           />
           <Field
             name={`${fieldId}.layout.allowPositioning`}
             component={Fields.Checkbox}
             label="Allow positioning?"
-            className="stage-editor-section-name-generator-prompt__setting-value"
           />
         </div>
         <div className="stage-editor-section-name-generator-prompt__setting">
           <div className="stage-editor-section-name-generator-prompt__setting-label">Background</div>
           <div>
             <p>Background type:</p>
-            <Fields.Radio label="Circles" input={{ value: 'circles', name: 'backgroundType' }} />
-            <Fields.Radio label="Circles" input={{ value: 'image', name: 'backgroundType' }} />
+            <Fields.Radio
+              label="Circles"
+              input={{
+                value: 'circles',
+                name: 'backgroundType',
+                checked: (backgroundType === 'circles'),
+                onChange: this.handleChooseBackgroundType,
+              }}
+            />
+            <Fields.Radio
+              label="Image"
+              input={{
+                value: 'image',
+                name: 'backgroundType',
+                checked: (backgroundType === 'image'),
+                onChange: this.handleChooseBackgroundType,
+              }}
+            />
           </div>
-          <Field
-            name={`${fieldId}.background.concentricCircles`}
-            component={Fields.Text}
-            label="How many circles?"
-            className="stage-editor-section-name-generator-prompt__setting-value"
-            placeholder="5"
-          />
-          <Field
-            name={`${fieldId}.background.skewedTowardCenter`}
-            component={Fields.Checkbox}
-            label="Skewed towards center?"
-            className="stage-editor-section-name-generator-prompt__setting-value"
-          />
+          { (backgroundType === 'circles') &&
+            <Fragment>
+              <Field
+                name={`${fieldId}.background.concentricCircles`}
+                component={Fields.Text}
+                label="How many circles?"
+                placeholder="5"
+              />
+              <Field
+                name={`${fieldId}.background.skewedTowardCenter`}
+                component={Fields.Checkbox}
+                label="Skewed towards center?"
+              />
+            </Fragment>
+          }
+          { (backgroundType === 'image') &&
+            <Field
+              name={`${fieldId}.background.image`}
+              component={Fields.Image}
+              label="Skewed towards center?"
+            />
+          }
         </div>
       </div>
     );
