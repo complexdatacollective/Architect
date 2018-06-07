@@ -31,10 +31,10 @@ class Checkbox extends PureComponent {
     } = this.props;
 
     const componentClasses = cx(
-      'form-fields-radio',
+      'form-fields-checkbox',
       className,
       {
-        'form-fields-radio--disabled': disabled,
+        'form-fields-checkbox--disabled': disabled,
       },
     );
 
@@ -42,14 +42,14 @@ class Checkbox extends PureComponent {
       <label className={componentClasses} htmlFor={this.id}>
         <input
           type="checkbox"
-          className="form-fields-radio__input"
+          className="form-fields-checkbox__input"
           id={this.id}
           checked={!!input.value}
           {...input}
           {...rest}
         />
-        <div className="form-fields-radio__radio" />
-        <div className="form-fields-radio__label">
+        <div className="form-fields-checkbox__checkbox" />
+        <div className="form-fields-checkbox__label">
           {label || this.props.input.value}
         </div>
       </label>
