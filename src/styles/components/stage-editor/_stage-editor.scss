@@ -29,6 +29,10 @@
     transition: opacity var(--animation-duration-standard) var(--animation-easing),
     max-height var(--animation-duration-standard) var(--animation-easing),
     transform var(--animation-duration-standard) var(--animation-easing);
+
+    pre {
+      white-space: pre-wrap;
+    }
   }
 
   &.stage-editor--show-code {
