@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import { keys, get } from 'lodash';
+import { Field, clearFields } from 'redux-form';
+import { keys, get, toPairs } from 'lodash';
 import * as Fields from '../../../Form/Fields';
 
 // reference
@@ -36,12 +36,22 @@ import * as Fields from '../../../Form/Fields';
 //   }
 // }
 
+// Background options
+const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
+const CONCENTRIC_CIRCLES = 'BACKGROUND/CONCENTRIC_CIRCLES';
+
+// On node click options
+const HIGHLIGHT = 'CLICK/HIGHLIGHT';
+const CREATE_EDGE = 'CLICK/CREATE_EDGE';
+
 class SociogramPrompt extends Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
     nodeTypes: PropTypes.array.isRequired,
     edgeTypes: PropTypes.array.isRequired,
+    layoutsForNodeType: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.array.isRequired,
+    clearField: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -51,12 +61,23 @@ class SociogramPrompt extends Component {
     super(props);
 
     this.state = {
-      backgroundType: 'circles',
+      backgroundType: CONCENTRIC_CIRCLES,
     };
   }
 
   handleChooseBackgroundType = (event) => {
     this.setState({ backgroundType: event.target.value });
+  }
+
+  handleHighlightOrCreateEdge = (type) => {
+    switch (type) {
+      case HIGHLIGHT:
+        return this.props.clearField('edges.create');
+      case CREATE_EDGE:
+        return this.props.clearField('highlight.allowHighlighting');
+      default:
+        return null;
+    }
   }
 
   render() {
@@ -65,6 +86,7 @@ class SociogramPrompt extends Component {
       fieldId,
       nodeTypes,
       edgeTypes,
+      layoutsForNodeType,
       variablesForNodeType,
     } = this.props;
 
@@ -88,15 +110,24 @@ class SociogramPrompt extends Component {
             options={nodeTypes}
             component={Fields.Contexts}
           />
+          {/*
+          //  "nodeBinSortOrder": {
+          //     "nickname": "DESC"
+          //   },
+          */}
         </div>
         <div className="stage-editor-section-name-generator-prompt__setting">
           <div className="stage-editor-section-name-generator-prompt__setting-label">Layout</div>
           <Field
-            name={`${fieldId}.layout.layoutVariable`}
-            component={Fields.Text}
-            label="Layout variable"
-            placeholder="MY_VARIABLE"
-          />
+            name={`${fieldId}.highlight.layoutVariable`}
+            component={Fields.Select}
+          >
+            <option disabled selected>Select one</option>
+            {layoutsForNodeType.map(([variableName, meta]) => (
+              <option value={variableName}>{meta.label}</option>
+            ))}
+          </Field>
+
           <Field
             name={`${fieldId}.layout.allowPositioning`}
             component={Fields.Checkbox}
@@ -104,36 +135,46 @@ class SociogramPrompt extends Component {
           />
         </div>
         <div className="stage-editor-section-name-generator-prompt__setting">
-          <div className="stage-editor-section-name-generator-prompt__setting-label">Highlight</div>
-          <Fields.Select
-            className="stage-editor-section-name-generator-prompt__setting-value"
+          <div className="stage-editor-section-name-generator-prompt__setting-label">Display</div>
+          <h4>Highlight</h4>
+          <Field
             name={`${fieldId}.highlight.variable`}
-            options={variablesForNodeType}
-          />
+            component={Fields.Select}
+          >
+            <option disabled selected>Select one</option>
+            {variablesForNodeType.map(([variableName, meta]) => (
+              <option value={variableName}>{meta.label}</option>
+            ))}
+          </Field>
           <Field
             name={`${fieldId}.highlight.value`}
-            component={Fields.Text}
-            placeholder="TRUE"
+            component="input"
+            hidden
+            value
           />
-          <Field
-            name={`${fieldId}.highlight.allowHighlighting`}
-            component={Fields.Checkbox}
-            label="Allow highlighting?"
-          />
-        </div>
-        <div className="stage-editor-section-name-generator-prompt__setting">
-          <div className="stage-editor-section-name-generator-prompt__setting-label">Edges</div>
+          <h4>Show edges:</h4>
           <Field
             name={`${fieldId}.edges.display`}
             component={Fields.CheckboxList}
             options={edgeTypes}
           />
-          Creates:
+        </div>
+        <div className="stage-editor-section-name-generator-prompt__setting">
+          <div className="stage-editor-section-name-generator-prompt__setting-label">Click interaction</div>
+          <h4>Toggle highlight attribute</h4>
+          <Field
+            name={`${fieldId}.highlight.allowHighlighting`}
+            component={Fields.Checkbox}
+            label="Allow highlighting?"
+            onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
+          />
+          <p>OR</p>
+          <h4>Create node</h4>
           <Field
             name={`${fieldId}.edges.create`}
-            component={Fields.Select}
+            component={Fields.RadioGroup}
             options={edgeTypes}
-            label="Allow highlighting?"
+            onChange={() => this.handleHighlightOrCreateEdge(CREATE_EDGE)}
           />
         </div>
         <div className="stage-editor-section-name-generator-prompt__setting">
@@ -143,28 +184,29 @@ class SociogramPrompt extends Component {
             <Fields.Radio
               label="Circles"
               input={{
-                value: 'circles',
+                value: CONCENTRIC_CIRCLES,
                 name: 'backgroundType',
-                checked: (backgroundType === 'circles'),
                 onChange: this.handleChooseBackgroundType,
               }}
+              checked={backgroundType === CONCENTRIC_CIRCLES}
             />
             <Fields.Radio
               label="Image"
               input={{
-                value: 'image',
+                value: BACKGROUND_IMAGE,
                 name: 'backgroundType',
-                checked: (backgroundType === 'image'),
                 onChange: this.handleChooseBackgroundType,
               }}
+              checked={backgroundType === BACKGROUND_IMAGE}
             />
           </div>
-          { (backgroundType === 'circles') &&
+          { (backgroundType === CONCENTRIC_CIRCLES) &&
             <Fragment>
               <Field
                 name={`${fieldId}.background.concentricCircles`}
                 component={Fields.Text}
                 label="How many circles?"
+                normalize={value => parseInt(value, 10)}
                 placeholder="5"
               />
               <Field
@@ -174,7 +216,7 @@ class SociogramPrompt extends Component {
               />
             </Fragment>
           }
-          { (backgroundType === 'image') &&
+          { (backgroundType === BACKGROUND_IMAGE) &&
             <Field
               name={`${fieldId}.background.image`}
               component={Fields.Image}
@@ -189,22 +231,32 @@ class SociogramPrompt extends Component {
 
 const getVariablesForNodeType = (state, nodeType) => {
   const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-  return keys(get(variableRegistry, ['node', nodeType, 'variables'], {}));
+  return get(variableRegistry, ['node', nodeType, 'variables'], {});
 };
 
 const mapStateToProps = (state, props) => {
   const nodeType = get(props.form.getValues(state, props.fieldId), 'subject.type');
+  const variables = toPairs(getVariablesForNodeType(state, nodeType));
+
   return {
-    variablesForNodeType: getVariablesForNodeType(state, nodeType),
+    layoutsForNodeType: variables.filter(([, meta]) => meta.type === 'layout'),
+    variablesForNodeType: variables.filter(([, meta]) => meta.type === 'boolean'),
     nodeTypes: keys(state.protocol.present.variableRegistry.node),
     edgeTypes: keys(state.protocol.present.variableRegistry.edge),
   };
 };
 
+const mapDispatchToProps = (dispatch, props) => ({
+  clearField: (field) => {
+    dispatch(clearFields(props.form.name, false, false, `${props.fieldId}.${field}`));
+  },
+});
+
 export { SociogramPrompt };
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(
   SociogramPrompt,
 );

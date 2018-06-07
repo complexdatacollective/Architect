@@ -44,6 +44,7 @@ class Checkbox extends PureComponent {
           type="checkbox"
           className="form-fields-radio__input"
           id={this.id}
+          checked={!!input.value}
           {...input}
           {...rest}
         />
