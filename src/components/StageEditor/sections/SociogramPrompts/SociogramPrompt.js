@@ -177,6 +177,7 @@ class SociogramPrompt extends Component {
           <h4 className="stage-editor-section-prompt__group-title">Background</h4>
           <Fields.Mode
             label="Choose a background type"
+            className="stage-editor-section-prompt__setting"
             options={[
               [CONCENTRIC_CIRCLES, 'Circles'],
               [BACKGROUND_IMAGE, 'Image'],
