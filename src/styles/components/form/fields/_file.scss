@@ -11,7 +11,20 @@
 
   &__dropzone {
     position: relative;
-    min-height: 150px;
+
+    &-preview {
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
+      position: relative;
+      z-index: 1;
+      min-height: 150px;
+      pointer-events: none;
+    }
+
+    &:hover {
+      .form-fields-file__dropzone-preview {
+        opacity: 0;
+      }
+    }
   }
 
   .form-dropzone {
