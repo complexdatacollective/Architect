@@ -5,33 +5,25 @@
   width: 100%;
 
   &__group {
-    margin: 0 0 unit(2);
-    padding: unit(2) 0 0;
+    margin: 0 0 unit(3);
+    padding: unit(3) 0 0;
     border-top: 2px solid var(--architect-border);
 
     &:first-child {
       border: 0;
+      padding: 0;
     }
 
     &-title {
       @include preset(title-4);
-      margin: 0;
+      margin: 0 0 unit(1);
     }
   }
 
-  &__setting {
-    display: block;
-    margin: unit(2) 0;
-  }
-
-  &__setting-label {
-
+  &__label {
+    @include preset(copy-small);
+    font-family: var(--body-font-family);
     display: block;
     margin: 0 0 unit(1);
-  }
-
-  &__setting-value {
-    @include preset(copy-standard, font-size);
-    display: block;
   }
 }
