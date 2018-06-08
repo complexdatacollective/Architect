@@ -1,8 +1,35 @@
-.stage-editor-section-prompt {
+$component-name: stage-editor-section-prompt;
+
+.#{$component-name} {
   background-color: var(--card-background);
-  padding: unit(2);
   border: 2px solid var(--architect-border);
   width: 100%;
+
+  &__preview,
+  &__editor {
+    padding: unit(2);
+  }
+
+  &__preview {
+    background-color: var(--architect-border);
+    cursor: pointer;
+  }
+
+  &__editor {
+    display: none;
+    opacity: 0;
+    transform-origin: 50% 0;
+  }
+
+  &--open {
+    .#{$component-name}__editor {
+      display: block;
+      animation-fill-mode: forwards;
+      animation-name: grow;
+      animation-duration: var(--animation-duration-standard);
+      animation-timing-function: var(--animation-easing);
+    }
+  }
 
   &__group {
     margin: 0 0 unit(2);
@@ -29,5 +56,21 @@
     font-family: var(--body-font-family);
     display: block;
     margin: 0 0 unit(1);
+  }
+}
+
+@keyframes grow {
+  0% {
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
   }
 }

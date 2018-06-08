@@ -3,38 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field, clearFields } from 'redux-form';
 import { keys, get, toPairs } from 'lodash';
+import cx from 'classnames';
 import * as Fields from '../../../Form/Fields';
-
-// reference
-// {
-//   "id": "closeness1",
-//   "text": "Position the nodes amongst the concentric circles. Place people you are closer to
-// towards the middle",
-//   "subject": {
-//     "entity": "node",
-//     "type": "person"
-//   },
-//   "layout": {
-//     "layoutVariable": "closenessLayout",
-//     "allowPositioning": true
-//   },
-//   "edges": {
-//     "display": ["friends", "professional"],
-//     "create": "friends"
-//   },
-//   "highlight": {
-//     "variable": "has_given_advice",
-//     "value": true,
-//     "allowHighlighting": true
-//   },
-//   "nodeBinSortOrder": {
-//     "nickname": "DESC"
-//   },
-//   "background": {
-//     "concentricCircles": 4,
-//     "skewedTowardCenter": true
-//   }
-// }
 
 // Background options
 const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
@@ -62,6 +32,7 @@ class SociogramPrompt extends Component {
 
     this.state = {
       backgroundType: CONCENTRIC_CIRCLES,
+      isOpen: false,
     };
   }
 
@@ -80,6 +51,10 @@ class SociogramPrompt extends Component {
     }
   }
 
+  handleToggleOpen = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   render() {
     const { backgroundType } = this.state;
     const {
@@ -90,131 +65,144 @@ class SociogramPrompt extends Component {
       variablesForNodeType,
     } = this.props;
 
+    const promptClasses = cx(
+      'stage-editor-section-prompt',
+      { 'stage-editor-section-prompt--open': this.state.isOpen },
+    );
+
     return (
-      <div className="stage-editor-section-prompt">
-        <div className="stage-editor-section-prompt__group">
+      <div className={promptClasses}>
+        <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
           <Field
             name={`${fieldId}.text`}
-            component={Fields.Markdown}
-            className="stage-editor-section-prompt__setting"
-            label="Text for prompt"
-            placeholder="Enter text for the prompt here"
+            component={field => (<div>{field.input.value}</div>)}
           />
         </div>
-        <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
-          <Field
-            name={`${fieldId}.subject`}
-            component={Fields.Contexts}
-            className="stage-editor-section-prompt__setting"
-            parse={value => ({ type: value, entity: 'node' })}
-            format={value => get(value, 'type')}
-            options={nodeTypes}
-            label="Which node would you like to layout?"
-          />
-        </div>
-        <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
-          <Field
-            name={`${fieldId}.highlight.layoutVariable`}
-            component={Fields.Select}
-            className="stage-editor-section-prompt__setting"
-            label="Layout variable"
-          >
-            <option disabled selected>Select one</option>
-            {layoutsForNodeType.map(([variableName, meta]) => (
-              <option value={variableName}>{meta.label}</option>
-            ))}
-          </Field>
-          <Field
-            name={`${fieldId}.layout.allowPositioning`}
-            component={Fields.Checkbox}
-            className="stage-editor-section-prompt__setting"
-            label="Allow positioning?"
-          />
-        </div>
-        <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Display</h4>
-          <Field
-            name={`${fieldId}.highlight.variable`}
-            component={Fields.Select}
-            className="stage-editor-section-prompt__setting"
-            label="Which attribute would you like to highlight?"
-          >
-            <option disabled selected>Select one</option>
-            {variablesForNodeType.map(([variableName, meta]) => (
-              <option value={variableName}>{meta.label}</option>
-            ))}
-          </Field>
-          <Field name={`${fieldId}.highlight.value`} component="input" hidden value />
-          <Field
-            name={`${fieldId}.edges.display`}
-            component={Fields.CheckboxList}
-            className="stage-editor-section-prompt__setting"
-            options={edgeTypes}
-            label="Which edges would you like to show?"
-          />
-        </div>
-        <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Click interactions</h4>
-          <Field
-            name={`${fieldId}.highlight.allowHighlighting`}
-            component={Fields.Checkbox}
-            className="stage-editor-section-prompt__setting"
-            label="Click to toggle highlighting?"
-            onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
-          />
-          <Field
-            name={`${fieldId}.edges.create`}
-            component={Fields.RadioGroup}
-            className="stage-editor-section-prompt__setting"
-            options={edgeTypes}
-            onChange={() => this.handleHighlightOrCreateEdge(CREATE_EDGE)}
-            label="Or, click to create edge?"
-          />
-        </div>
-        <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Background</h4>
-          <Fields.Mode
-            label="Choose a background type"
-            className="stage-editor-section-prompt__setting"
-            options={[
-              [CONCENTRIC_CIRCLES, 'Circles'],
-              [BACKGROUND_IMAGE, 'Image'],
-            ]}
-            input={{
-              value: backgroundType,
-              onChange: this.handleChooseBackgroundType,
-            }}
-          />
-          { (backgroundType === CONCENTRIC_CIRCLES) &&
-            <Fragment>
-              <Field
-                name={`${fieldId}.background.concentricCircles`}
-                component={Fields.Text}
-                className="stage-editor-section-prompt__setting"
-                label="How many circles?"
-                normalize={value => parseInt(value, 10)}
-                placeholder="5"
-              />
-              <Field
-                name={`${fieldId}.background.skewedTowardCenter`}
-                component={Fields.Checkbox}
-                className="stage-editor-section-prompt__setting"
-                label="Skewed towards center?"
-              />
-            </Fragment>
-          }
-          { (backgroundType === BACKGROUND_IMAGE) &&
-            <div style={{ position: 'relative', minHeight: '100px' }}>
-              <Field
-                name={`${fieldId}.background.image`}
-                component={Fields.Image}
-                className="stage-editor-section-prompt__setting"
-                label="Background image"
-              />
-            </div>
-          }
+        <div className="stage-editor-section-prompt__editor">
+          <div className="stage-editor-section-prompt__group">
+            <Field
+              name={`${fieldId}.text`}
+              component={Fields.Markdown}
+              className="stage-editor-section-prompt__setting"
+              label="Text for prompt"
+              placeholder="Enter text for the prompt here"
+            />
+          </div>
+          <div className="stage-editor-section-prompt__group">
+            <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
+            <Field
+              name={`${fieldId}.subject`}
+              component={Fields.Contexts}
+              className="stage-editor-section-prompt__setting"
+              parse={value => ({ type: value, entity: 'node' })}
+              format={value => get(value, 'type')}
+              options={nodeTypes}
+              label="Which node would you like to layout?"
+            />
+          </div>
+          <div className="stage-editor-section-prompt__group">
+            <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
+            <Field
+              name={`${fieldId}.highlight.layoutVariable`}
+              component={Fields.Select}
+              className="stage-editor-section-prompt__setting"
+              label="Layout variable"
+            >
+              <option disabled selected>Select one</option>
+              {layoutsForNodeType.map(([variableName, meta]) => (
+                <option value={variableName}>{meta.label}</option>
+              ))}
+            </Field>
+            <Field
+              name={`${fieldId}.layout.allowPositioning`}
+              component={Fields.Checkbox}
+              className="stage-editor-section-prompt__setting"
+              label="Allow positioning?"
+            />
+          </div>
+          <div className="stage-editor-section-prompt__group">
+            <h4 className="stage-editor-section-prompt__group-title">Display</h4>
+            <Field
+              name={`${fieldId}.highlight.variable`}
+              component={Fields.Select}
+              className="stage-editor-section-prompt__setting"
+              label="Which attribute would you like to highlight?"
+            >
+              <option disabled selected>Select one</option>
+              {variablesForNodeType.map(([variableName, meta]) => (
+                <option value={variableName}>{meta.label}</option>
+              ))}
+            </Field>
+            <Field name={`${fieldId}.highlight.value`} component="input" hidden value />
+            <Field
+              name={`${fieldId}.edges.display`}
+              component={Fields.CheckboxList}
+              className="stage-editor-section-prompt__setting"
+              options={edgeTypes}
+              label="Which edges would you like to show?"
+            />
+          </div>
+          <div className="stage-editor-section-prompt__group">
+            <h4 className="stage-editor-section-prompt__group-title">Click interactions</h4>
+            <Field
+              name={`${fieldId}.highlight.allowHighlighting`}
+              component={Fields.Checkbox}
+              className="stage-editor-section-prompt__setting"
+              label="Click to toggle highlighting?"
+              onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
+            />
+            <Field
+              name={`${fieldId}.edges.create`}
+              component={Fields.RadioGroup}
+              className="stage-editor-section-prompt__setting"
+              options={edgeTypes}
+              onChange={() => this.handleHighlightOrCreateEdge(CREATE_EDGE)}
+              label="Or, click to create edge?"
+            />
+          </div>
+          <div className="stage-editor-section-prompt__group">
+            <h4 className="stage-editor-section-prompt__group-title">Background</h4>
+            <Fields.Mode
+              label="Choose a background type"
+              className="stage-editor-section-prompt__setting"
+              options={[
+                [CONCENTRIC_CIRCLES, 'Circles'],
+                [BACKGROUND_IMAGE, 'Image'],
+              ]}
+              input={{
+                value: backgroundType,
+                onChange: this.handleChooseBackgroundType,
+              }}
+            />
+            { (backgroundType === CONCENTRIC_CIRCLES) &&
+              <Fragment>
+                <Field
+                  name={`${fieldId}.background.concentricCircles`}
+                  component={Fields.Text}
+                  className="stage-editor-section-prompt__setting"
+                  label="How many circles?"
+                  normalize={value => parseInt(value, 10)}
+                  placeholder="5"
+                />
+                <Field
+                  name={`${fieldId}.background.skewedTowardCenter`}
+                  component={Fields.Checkbox}
+                  className="stage-editor-section-prompt__setting"
+                  label="Skewed towards center?"
+                />
+              </Fragment>
+            }
+            { (backgroundType === BACKGROUND_IMAGE) &&
+              <div style={{ position: 'relative', minHeight: '100px' }}>
+                <Field
+                  name={`${fieldId}.background.image`}
+                  component={Fields.Image}
+                  className="stage-editor-section-prompt__setting"
+                  label="Background image"
+                />
+              </div>
+            }
+          </div>
         </div>
       </div>
     );
