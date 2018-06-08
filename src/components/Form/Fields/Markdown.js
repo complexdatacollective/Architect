@@ -23,6 +23,7 @@ class MarkdownInput extends PureComponent {
     const {
       input: { value },
       meta: { active },
+      label,
     } = this.props;
 
     return (
@@ -30,12 +31,17 @@ class MarkdownInput extends PureComponent {
         htmlFor={this.id}
         className={cx('form-fields-markdown', { 'form-fields-markdown--is-focussed': active })}
       >
-        <Markdown className="form-fields-markdown__preview" source={value} />
-        <textarea
-          className={cx('form-fields-markdown__input')}
-          id={this.id}
-          {...this.props.input}
-        />
+        { label &&
+          <div className="form-fields-markdown__label">{label}</div>
+        }
+        <div className="form-fields-markdown__edit">
+          <Markdown className="form-fields-markdown__preview" source={value} />
+          <textarea
+            className={cx('form-fields-markdown__input')}
+            id={this.id}
+            {...this.props.input}
+          />
+        </div>
       </label>
     );
   }

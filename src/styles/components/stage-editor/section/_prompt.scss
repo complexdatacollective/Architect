@@ -7,10 +7,10 @@
   &__group {
     margin: 0 0 unit(2);
     padding: unit(2) 0 0;
-    border-top: 2px solid var(--architect-border);;
+    border-top: 2px solid var(--architect-border);
 
     &:first-child {
-      margin: 0;
+      border: 0;
     }
 
     &-title {

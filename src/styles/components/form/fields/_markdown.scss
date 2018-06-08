@@ -2,10 +2,20 @@ $component-name: form-fields-markdown;
 
 .#{$component-name} {
   width: 100%;
-  vertical-align: top;
-  position: relative;
-  min-height: 75px;
-  cursor: text;
+
+  &__label {
+    @include preset(copy-small);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+
+  &__edit {
+    position: relative;
+    cursor: text;
+    vertical-align: top;
+    position: relative;
+    min-height: 75px;
+  }
 
   &__input {
     @include preset('copy-large');

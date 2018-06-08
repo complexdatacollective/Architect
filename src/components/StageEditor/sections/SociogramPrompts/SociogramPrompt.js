@@ -66,7 +66,6 @@ class SociogramPrompt extends Component {
   }
 
   handleChooseBackgroundType = (option) => {
-    console.log({ option });
     this.setState({ backgroundType: option });
   }
 
@@ -94,7 +93,6 @@ class SociogramPrompt extends Component {
     return (
       <div className="stage-editor-section-prompt">
         <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Prompt</h4>
           <Field
             name={`${fieldId}.text`}
             component={Fields.Markdown}
@@ -114,11 +112,6 @@ class SociogramPrompt extends Component {
             options={nodeTypes}
             label="Which node would you like to layout?"
           />
-          {/*
-          //  "nodeBinSortOrder": {
-          //     "nickname": "DESC"
-          //   },
-          */}
         </div>
         <div className="stage-editor-section-prompt__group">
           <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
