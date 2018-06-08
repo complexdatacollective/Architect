@@ -1,5 +1,5 @@
 $size: unit(2.5);
-$border: 1px;
+$border: 2px;
 $border-space: 3px;
 
 .form-fields-radio {
@@ -38,7 +38,7 @@ $border-space: 3px;
       width: calc(100% - #{($border + $border-space) * 2});
       height: calc(100% - #{($border + $border-space) * 2});
       border-radius: 100%;
-      background-color: var(--color-sea-green);
+      background-color: var(--architect-ui-radio-border);
       opacity: 0;
       transition: opacity var(--animation-easing) var(--animation-duration-standard);
     }
@@ -54,14 +54,14 @@ $border-space: 3px;
   &:hover {
     .form-fields-radio__radio {
       &::before {
-        border-color: var(--color-sea-green);
+        border-color: var(--architect-ui-radio-border);
       }
     }
   }
 
   &__input:checked + &__radio { // sass-lint:disable-line force-pseudo-nesting
     &::before {
-      border-color: var(--color-sea-green);
+      border-color: var(--architect-ui-radio-dot);
     }
 
     &::after {

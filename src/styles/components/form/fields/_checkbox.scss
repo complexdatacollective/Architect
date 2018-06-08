@@ -1,5 +1,5 @@
-$size: unit(2.5);
-$border: 1px;
+$size: unit(2.3);
+$border: 2px;
 $border-space: 3px;
 
 .form-fields-checkbox {
@@ -31,15 +31,12 @@ $border-space: 3px;
 
     &::after {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      color: var(--color-sea-green);
-      content: '✔︎';
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      content: '';
+      top: $border + $border-space;
+      left: $border + $border-space;
+      width: calc(100% - #{($border + $border-space) * 2});
+      height: calc(100% - #{($border + $border-space) * 2});
+      background-color: var(--architect-ui-radio-dot);
       opacity: 0;
       transition: opacity var(--animation-easing) var(--animation-duration-standard);
     }
@@ -55,14 +52,14 @@ $border-space: 3px;
   &:hover {
     .form-fields-checkbox__checkbox {
       &::before {
-        border-color: var(--color-sea-green);
+        border-color: var(--architect-ui-radio-dot);
       }
     }
   }
 
   &__input:checked + &__checkbox { // sass-lint:disable-line force-pseudo-nesting
     &::before {
-      border-color: var(--color-sea-green);
+      border-color: var(--architect-ui-radio-border);
     }
 
     &::after {
