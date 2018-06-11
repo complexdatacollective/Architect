@@ -17,9 +17,23 @@ $component-name: stage-editor-section-prompt;
     align-items: center;
     justify-content: flex-start;
 
-    & .node {
-      font-size: unit(10);
-      margin-right: unit(2);
+    &-icon {
+      flex: 0 0 unit(10);
+
+      & .node {
+        font-size: unit(10);
+        margin-right: unit(2);
+      }
+    }
+
+    &-text {
+      & > * {
+        margin: unit(2) 0 0;
+
+        &:first-child {
+          margin: 0;
+        }
+      }
     }
   }
 

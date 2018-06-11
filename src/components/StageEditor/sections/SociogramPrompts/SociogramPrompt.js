@@ -82,15 +82,18 @@ class SociogramPrompt extends Component {
     return (
       <div className={promptClasses}>
         <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
-          <Field
-            name={`${fieldId}.subject.type`}
-            component={field => (<Node label={field.input.value} />)}
-          />
+          <div className="stage-editor-section-prompt__preview-icon">
+            <Field
+              name={`${fieldId}.subject.type`}
+
+              component={field => (<Node label={field.input.value} />)}
+            />
+          </div>
           <Field
             name={`${fieldId}.text`}
             component={field => (
               <Markdown
-                className="stage-editor-section-prompt__preview-markdown"
+                className="stage-editor-section-prompt__preview-text"
                 source={field.input.value}
               />
             )}
