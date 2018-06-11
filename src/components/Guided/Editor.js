@@ -26,8 +26,6 @@ const Editor = ({
   return (
     <div
       className={editorClasses}
-      onMouseEnter={showGuidance}
-      onMouseLeave={resetGuidance}
       {...props}
     >
       {children}

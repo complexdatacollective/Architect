@@ -1,37 +1,35 @@
 import React from 'react';
-import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { propTypes, defaultProps } from './guidedProps';
 
 const Guidance = ({
-  isActive,
-  showGuidance,
-  resetGuidance,
-  toggleGuidance,
-  anyActive,
-  children,
+  handleClickToggle,
+  guidance,
   className,
   ...props
 }) => (
   <div
-    className={cx(className, 'guided-guidance', { 'guided-guidance--is-active': isActive })}
+    className="guided-guidance"
     {...props}
   >
     <h3>Help</h3>
-    {children}
+    { guidance }
+    <div
+      className="guided-guidance__toggle"
+      handleClickToggle={handleClickToggle}
+    />
   </div>
 );
 
 Guidance.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node,
-  ...propTypes,
+  guidance: PropTypes.node,
+  handleClickToggle: PropTypes.func,
 };
 
 Guidance.defaultProps = {
-  children: null,
   className: '',
-  ...defaultProps,
+  guidance: null,
+  handleClickToggle: () => {},
 };
 
 export default Guidance;

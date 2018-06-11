@@ -6,7 +6,7 @@ import { get } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
 import { Button } from '../../ui/components';
-import { Guided, Section, Editor, DefaultGuidance } from '../Guided';
+import { Guided } from '../Guided';
 import flatten from '../../utils/flatten';
 import getSectionsForStageType from './getSectionsForStageType';
 import CodeView from './CodeView';
@@ -38,23 +38,7 @@ const defaultGuidance = {
   </div>),
 };
 
-const renderSections = (interfaceSections, props) => {
-  if (interfaceSections.length === 0) {
-    return (
-      <Section><Editor>Not yet editable.</Editor></Section>
-    );
-  }
-
-  return interfaceSections.map(
-    (InterfaceSection, index) =>
-      <InterfaceSection {...props} key={index} />,
-  );
-};
-
-const renderSectionsForStageType = ({ stageType, ...rest }) => {
-  const interfaceSections = getSectionsForStageType(stageType);
-  return renderSections(interfaceSections, { ...rest });
-};
+const getDefaultGuidanceForStageType = stageType => get(defaultGuidance, stageType, '');
 
 const StageEditor = ({
   stage,
@@ -66,28 +50,19 @@ const StageEditor = ({
 }) => (
   <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
     <CodeView toggleCodeView={toggleCodeView} form={form} />
-    <Guided className="stage-editor__sections">
-      <Section className="stage-editor-section">
-        <Editor className="stage-editor-section__edit">
-          <h1>Edit {stage.type} Screen</h1>
-          { dirty && invalid && (
-            <p style={{ color: 'var(--error)' }}>
-              There are some errors that need to be fixed before this can be saved!
-            </p>
-          ) }
-          <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
-        </Editor>
-      </Section>
-      <DefaultGuidance className="stage-editor-section__guidance">
-        {get(defaultGuidance, stage.type)}
-      </DefaultGuidance>
-      {
-        renderSectionsForStageType({
-          stageType: stage.type,
-          form,
-        })
-      }
-    </Guided>
+    <h1>Edit {stage.type} Screen</h1>
+    { dirty && invalid && (
+      <p style={{ color: 'var(--error)' }}>
+        There are some errors that need to be fixed before this can be saved!
+      </p>
+    ) }
+    <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
+    <Guided
+      className="stage-editor__sections"
+      sections={getSectionsForStageType(stage.type)}
+      defaultGuidance={getDefaultGuidanceForStageType(stage.type)}
+      form={form}
+    />
   </ReduxForm>
 );
 

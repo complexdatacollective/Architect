@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
+import Section from './Section';
+import Guidance from './Guidance';
 
 class Guided extends Component {
   static propTypes = {
-    children: PropTypes.node,
     className: PropTypes.string,
+    sections: PropTypes.object,
+    defaultGuidance: PropTypes.node,
   };
 
   static defaultProps = {
-    children: null,
     className: '',
+    sections: {},
+    defaultGuidance: null,
   };
 
   constructor(props) {
@@ -22,46 +27,66 @@ class Guided extends Component {
     };
   }
 
-  onShowGuidance = (index) => {
+  getGuidance = () =>
+    get(
+      this.props.sections,
+      [this.state.active, 'Guidance'],
+      this.props.defaultGuidance,
+    );
+
+  showGuidance = (index) => {
     this.setState({ active: index });
   };
 
-  onToggleGuidance = () => {
+  toggleGuidance = () => {
     this.setState({ guided: !this.state.guided });
   }
 
-  onResetGuidance = () => {
+  resetGuidance = () => {
     this.setState({ active: null });
   };
 
-  renderSections = () =>
-    React.Children.toArray(this.props.children)
-      .map((child, index) => {
+  renderSections = () => {
+    const {
+      sections,
+      className,
+      defaultGuidance,
+      ...rest
+    } = this.props;
+
+    return sections
+      .map((SectionComponent, index) => {
         const isActive = this.state.active === index;
 
-        return React.cloneElement(
-          child,
-          {
-            isActive,
-            anyActive: !!this.state.active,
-            key: index,
-            showGuidance: () => { this.onShowGuidance(index); },
-            resetGuidance: this.onResetGuidance,
-            toggleGuidance: this.onToggleGuidance,
-          },
+        return (
+          <Section
+            key={index}
+            isActive={isActive}
+            handleMouseEnter={() => this.showGuidance(index)}
+            handleMouseLeave={this.resetGuidance}
+          >
+            <SectionComponent {...rest} />
+          </Section>
         );
       });
+  };
 
   render() {
     const classNames = cx(
       this.props.className,
       'guided',
-      { 'guided--is-hidden': !this.state.guided },
+      { 'guided--show-guidance': this.state.guided },
     );
 
     return (
       <div className={classNames}>
-        { this.renderSections() }
+        <div className="guided__sections">
+          { this.renderSections() }
+        </div>
+
+        <div className="guided__guidance">
+          <Guidance guidance={this.getGuidance()} />
+        </div>
       </div>
     );
   }
