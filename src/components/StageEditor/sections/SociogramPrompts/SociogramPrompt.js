@@ -5,6 +5,7 @@ import Markdown from 'react-markdown';
 import { Field, clearFields } from 'redux-form';
 import { keys, get, toPairs, toInteger } from 'lodash';
 import cx from 'classnames';
+import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
 
 // Background options
@@ -68,12 +69,17 @@ class SociogramPrompt extends Component {
 
     const promptClasses = cx(
       'stage-editor-section-prompt',
+      'stage-editor-section-sociogram-prompt',
       { 'stage-editor-section-prompt--open': this.state.isOpen },
     );
 
     return (
       <div className={promptClasses}>
         <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
+          <Field
+            name={`${fieldId}.subject.type`}
+            component={field => (<Node label={field.input.value} />)}
+          />
           <Field
             name={`${fieldId}.text`}
             component={field => (

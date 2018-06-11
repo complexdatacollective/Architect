@@ -13,6 +13,14 @@ $component-name: stage-editor-section-prompt;
   &__preview {
     background-color: var(--architect-border);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    & .node {
+      font-size: unit(10);
+      margin-right: unit(2);
+    }
   }
 
   &__editor {
