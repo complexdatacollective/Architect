@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields } from 'redux-form';
-import { keys, get, toPairs } from 'lodash';
+import { keys, get, toPairs, toInteger } from 'lodash';
 import cx from 'classnames';
 import * as Fields from '../../../Form/Fields';
 
@@ -188,7 +188,7 @@ class SociogramPrompt extends Component {
                   component={Fields.Text}
                   className="stage-editor-section-prompt__setting"
                   label="How many circles?"
-                  normalize={value => parseInt(value, 10)}
+                  type="number"
                   placeholder="5"
                 />
                 <Field
