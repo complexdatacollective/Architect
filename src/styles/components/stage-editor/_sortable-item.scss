@@ -14,6 +14,7 @@
 .stage-editor-sortable-item {
   margin-top: unit(1);
   display: flex;
+  z-index: var(--z-fx);
 
   &__handle {
     @extend %content-item-control;
