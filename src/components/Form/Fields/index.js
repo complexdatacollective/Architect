@@ -2,6 +2,7 @@
 export { default as VariableChooser } from './VariableChooser';
 export { default as SeamlessText } from './SeamlessText';
 export { default as Text } from './Text';
+export { default as TextArea } from './TextArea';
 export { default as Select } from './Select';
 export { default as Markdown } from './Markdown';
 export { default as File } from './File';

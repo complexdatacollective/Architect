@@ -1,0 +1,21 @@
+$component-name: form-fields-textarea;
+
+.#{$component-name} {
+  width: 100%;
+
+  &__label {
+    @include preset(copy-small);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+
+  &__input {
+    @include preset('copy-large');
+    border: unit(.2) solid var(--architect-panel-background);
+    padding: unit(1);
+    min-height: unit(8);
+    width: 100%;
+    vertical-align: top;
+    resize: vertical;
+  }
+}

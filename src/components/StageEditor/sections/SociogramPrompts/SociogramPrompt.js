@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Markdown from 'react-markdown';
 import { Field, clearFields } from 'redux-form';
 import { keys, get, toPairs } from 'lodash';
 import cx from 'classnames';
@@ -75,14 +76,20 @@ class SociogramPrompt extends Component {
         <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
           <Field
             name={`${fieldId}.text`}
-            component={field => (<div>{field.input.value}</div>)}
+            component={field => (
+              <Markdown
+                className="stage-editor-section-prompt__preview-markdown"
+                source={field.input.value}
+              />
+            )}
           />
+
         </div>
         <div className="stage-editor-section-prompt__editor">
           <div className="stage-editor-section-prompt__group">
             <Field
               name={`${fieldId}.text`}
-              component={Fields.Markdown}
+              component={Fields.TextArea}
               className="stage-editor-section-prompt__setting"
               label="Text for prompt"
               placeholder="Enter text for the prompt here"
