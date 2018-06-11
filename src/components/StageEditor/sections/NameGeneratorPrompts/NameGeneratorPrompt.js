@@ -5,22 +5,24 @@ import Markdown from '../../../Form/Fields/Markdown';
 import VariableChooser from '../../../Form/Fields/VariableChooser';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry }) => (
-  <div className="stage-editor-section-prompt">
-    <div className="stage-editor-section-prompt__group">
-      <Field
-        name={`${fieldId}.text`}
-        component={Markdown}
-        label="Text for prompt"
-        className="stage-editor-section-prompt__setting-value"
-        placeholder="Enter text for the prompt here"
-      />
-      <h5 className="stage-editor-section-prompt__label">Additional attributes</h5>
-      <VariableChooser
-        className="stage-editor-section-prompt__setting-value"
-        name={`${fieldId}.additionalAttributes`}
-        variableRegistry={variableRegistry}
-        form={form}
-      />
+  <div className="stage-editor-section-prompt stage-editor-section-prompt--open">
+    <div className="stage-editor-section-prompt__editor">
+      <div className="stage-editor-section-prompt__group">
+        <Field
+          name={`${fieldId}.text`}
+          component={Markdown}
+          label="Text for prompt"
+          className="stage-editor-section-prompt__setting-value"
+          placeholder="Enter text for the prompt here"
+        />
+        <h5 className="stage-editor-section-prompt__label">Additional attributes</h5>
+        <VariableChooser
+          className="stage-editor-section-prompt__setting-value"
+          name={`${fieldId}.additionalAttributes`}
+          variableRegistry={variableRegistry}
+          form={form}
+        />
+      </div>
     </div>
   </div>
 );
