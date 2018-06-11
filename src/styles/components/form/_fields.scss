@@ -1,3 +1,12 @@
+@mixin form-field {
+  &__label {
+    @include preset(copy-standard, font-size);
+    font-weight: 200;
+    display: block;
+    margin: 0 0 unit(1);
+  }
+}
+
 @import './fields/contexts';
 @import './fields/radio';
 @import './fields/radio-group';

@@ -1,13 +1,8 @@
 .form-fields-file {
+  @include form-field;
   display: block;
   overflow: hidden;
   position: relative;
-
-  &__label {
-    @include preset(copy-small);
-    display: block;
-    margin: 0 0 unit(1);
-  }
 
   &__dropzone {
     position: relative;

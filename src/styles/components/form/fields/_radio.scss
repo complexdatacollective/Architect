@@ -45,6 +45,8 @@ $border-space: 3px;
   }
 
   &__label {
+    @include preset(copy-standard, font-size);
+    font-weight: 200;
     display: inline-block;
     margin-left: unit(1);
     vertical-align: top;

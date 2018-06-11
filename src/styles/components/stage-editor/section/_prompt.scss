@@ -50,8 +50,9 @@ $component-name: stage-editor-section-prompt;
     }
 
     &-title {
-      @include preset(title-4);
-      margin: 0 0 unit(1);
+      @include preset(title-3, font-size);
+      font-weight: 600;
+      margin: 0 0 unit(2);
     }
   }
 
@@ -60,7 +61,8 @@ $component-name: stage-editor-section-prompt;
   }
 
   &__label {
-    @include preset(copy-small);
+    @include preset(copy-standard);
+    font-weight: 200;
     font-family: var(--body-font-family);
     display: block;
     margin: 0 0 unit(1);

@@ -1,15 +1,10 @@
 .form-fields-select {
+  @include form-field;
   width: 100%;
   font-size: var(--base-font-size);
 
   option {
     width: 100%;
     font-size: var(--base-font-size);
-  }
-
-  &__label {
-    @include preset(copy-small);
-    display: block;
-    margin: 0 0 unit(1);
   }
 }
