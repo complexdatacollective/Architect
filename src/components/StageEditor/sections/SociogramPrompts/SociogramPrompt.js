@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
-import { Field, clearFields } from 'redux-form';
-import { keys, get, toPairs, toInteger } from 'lodash';
+import { Field, clearFields, isDirty } from 'redux-form';
+import { keys, get, toPairs } from 'lodash';
 import cx from 'classnames';
 import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
@@ -24,9 +24,11 @@ class SociogramPrompt extends Component {
     layoutsForNodeType: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.array.isRequired,
     clearField: PropTypes.func.isRequired,
+    isDirty: PropTypes.bool,
   };
 
   static defaultProps = {
+    isDirty: false,
   };
 
   constructor(props) {
@@ -36,6 +38,10 @@ class SociogramPrompt extends Component {
       backgroundType: CONCENTRIC_CIRCLES,
       isOpen: false,
     };
+  }
+
+  componentWillMount() {
+    this.setState({ isOpen: this.props.isDirty });
   }
 
   handleChooseBackgroundType = (option) => {
@@ -230,10 +236,12 @@ const getVariablesForNodeType = (state, nodeType) => {
 const mapStateToProps = (state, props) => {
   const nodeType = get(props.form.getValues(state, props.fieldId), 'subject.type');
   const variables = toPairs(getVariablesForNodeType(state, nodeType));
+  const isFieldDirty = isDirty(props.form.name);
 
   return {
     layoutsForNodeType: variables.filter(([, meta]) => meta.type === 'layout'),
     variablesForNodeType: variables.filter(([, meta]) => meta.type === 'boolean'),
+    isDirty: isFieldDirty(state, props.fieldId),
     nodeTypes: keys(state.protocol.present.variableRegistry.node),
     edgeTypes: keys(state.protocol.present.variableRegistry.edge),
   };
