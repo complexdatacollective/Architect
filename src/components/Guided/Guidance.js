@@ -1,10 +1,12 @@
 import React from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const Guidance = ({
   handleClickToggle,
-  guidance,
+  guidance: { key, guidance },
   show,
   className,
   ...props
@@ -20,8 +22,22 @@ const Guidance = ({
       {...props}
     >
       <div className="guided-guidance__content">
-        <h3>Help</h3>
-        { guidance }
+        <div className="guided-guidance__guidance-container">
+          <TransitionGroup component={null}>
+            <CSSTransition
+              key={key}
+              timeout={{
+                enter: getCSSVariableAsNumber('--animation-duration-slow-ms') + getCSSVariableAsNumber('--animation-duration-fast-ms'),
+                exit: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+              }}
+              classNames="guided-guidance__tween"
+            >
+              <div className="guided-guidance__guidance">
+                {guidance}
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
+        </div>
       </div>
       <div
         className="guided-guidance__toggle"
@@ -33,14 +49,14 @@ const Guidance = ({
 
 Guidance.propTypes = {
   className: PropTypes.string,
-  guidance: PropTypes.node,
+  guidance: PropTypes.object,
   show: PropTypes.bool,
   handleClickToggle: PropTypes.func,
 };
 
 Guidance.defaultProps = {
   className: '',
-  guidance: null,
+  guidance: { key: null, guidance: null },
   show: false,
   handleClickToggle: () => {},
 };

@@ -13,6 +13,55 @@
     opacity: 0;
     transition: opacity var(--animation-duration-standard) var(--animation-easing);
     padding: unit(4);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &__guidance {
+    position: absolute;
+    width: 100%;
+
+    &-container {
+      flex-grow: 1;
+      height: 100%;
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  // CSSTransition styles
+  &__tween {
+    &-enter {
+      transform: translateX(-5%);
+      transform-origin: 0 0;
+      opacity: 0;
+      transition-property: opacity, transform;
+      transition-duration: var(--animation-duration-slow), var(--animation-duration-slow);
+      transition-delay: var(--animation-duration-fast), 0;
+      transition-timing-function: var(--animation-easing);
+
+      &-active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    &-exit {
+      transform-origin: 0 0;
+      transform: translateX(0);
+      opacity: 1;
+      transition-property: opacity, transform;
+      transition-duration: var(--animation-duration-fast), var(--animation-duration-fast);
+      transition-timing-function: var(--animation-easing);
+
+      &-active {
+        transform: translateX(5%);
+        opacity: 0;
+      }
+    }
   }
 
   &__toggle {

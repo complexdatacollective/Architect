@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+import { get, isNull } from 'lodash';
 import Section from './Section';
 import Guidance from './Guidance';
 
@@ -28,6 +28,9 @@ class Guided extends Component {
       guided: true,
     };
   }
+
+  getActiveGuidance = () =>
+    (isNull(this.state.active) ? 'default' : this.state.active);
 
   getGuidance = () =>
     get(
@@ -92,8 +95,8 @@ class Guided extends Component {
 
         <Guidance
           show={this.state.guided}
-          guidance={this.getGuidance()}
           handleClickToggle={this.toggleGuidance}
+          guidance={{ key: this.getActiveGuidance(), guidance: this.getGuidance() }}
         />
       </div>
     );
