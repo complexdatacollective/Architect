@@ -16,7 +16,7 @@ class Guided extends Component {
   static defaultProps = {
     children: null,
     className: '',
-    sections: {},
+    sections: [],
     defaultGuidance: null,
   };
 

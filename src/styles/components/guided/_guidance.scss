@@ -17,20 +17,26 @@
 
   &__toggle {
     position: absolute;
-    top: calc(50% - 60px);
-    left: -30px;
+    top: 50%;
+    left: 0;
     border-top-left-radius: 60px;
     border-bottom-left-radius: 60px;
-    background: var(--architect-tab);
+    background: var(--architect-panel-background);
     color: var(--architect-tab-text);
     width: 30px;
     height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: .25rem;
-    font-size: 2rem;
     cursor: pointer;
+    transform: translate(-100%, -30px);
+
+    &::after {
+      width: 30px;
+      height: 60px;
+      font-size: 2rem;
+      content: '<';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &--show {
@@ -38,6 +44,12 @@
 
     .guided-guidance__content {
       opacity: 1;
+    }
+
+    .guided-guidance__toggle {
+      &::after {
+        content: '>';
+      }
     }
   }
 }

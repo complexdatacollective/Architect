@@ -1,13 +1,8 @@
 .edit-skip-logic {
-  width: 100%;
-
-  &__section,
-  &__guidance {
-    padding-top: 20px;
-  }
 
   &__section {
     position: relative;
+    padding-top: 20px;
 
     &::before {
       content: '';
@@ -20,17 +15,11 @@
       border-left: 8px solid var(--architect-rule-control);
     }
 
-    &:first-child {
+    &--first {
       &::before {
         display: none;
       }
     }
-  }
-
-  &__bubble {
-    background: var(--architect-intent-border);
-    border-radius: 10px;
-    padding: 20px;
   }
 
   &__action {
@@ -38,5 +27,13 @@
     background: var(--architect-rule-operator);
     border-radius: 10px;
     padding: 20px;
+  }
+
+  .guided-guidance {
+    background: var(--architect-intent-border);
+  }
+
+  .guided-guidance__toggle {
+    background: var(--architect-intent-border);
   }
 }
