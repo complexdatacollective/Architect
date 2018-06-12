@@ -19,8 +19,10 @@ const Guidance = ({
       className={guidanceClasses}
       {...props}
     >
-      <h3>Help</h3>
-      { guidance }
+      <div className="guided-guidance__content">
+        <h3>Help</h3>
+        { guidance }
+      </div>
       <div
         className="guided-guidance__toggle"
         onClick={handleClickToggle}
@@ -32,12 +34,14 @@ const Guidance = ({
 Guidance.propTypes = {
   className: PropTypes.string,
   guidance: PropTypes.node,
+  show: PropTypes.bool,
   handleClickToggle: PropTypes.func,
 };
 
 Guidance.defaultProps = {
   className: '',
   guidance: null,
+  show: false,
   handleClickToggle: () => {},
 };
 

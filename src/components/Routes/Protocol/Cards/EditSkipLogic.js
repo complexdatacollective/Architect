@@ -4,7 +4,7 @@ import { bindActionCreators, compose } from 'redux';
 import PropTypes from 'prop-types';
 import { has, toPairs } from 'lodash';
 import { Button } from '../../../../ui/components';
-import { Guided, Section as GuidedSection, Editor as GuidedEdit, Guidance } from '../../../Guided';
+import { Section, Guidance } from '../../../Guided';
 import { makeGetStage } from '../../../../selectors/protocol';
 import { actionCreators as stageActions } from '../../../../ducks/modules/protocol/stages';
 import Card from '../Card';
@@ -81,7 +81,7 @@ class EditSkipLogic extends PureComponent {
         show={show}
         onCancel={onCancel}
       >
-        <Guided className="edit-skip-logic">
+        {/* <Guided className="edit-skip-logic">
           <GuidedSection>
             <GuidedEdit>
               <div className="edit-skip-logic__action">
@@ -117,7 +117,7 @@ class EditSkipLogic extends PureComponent {
               </div>
             </Guidance>
           </GuidedSection>
-        </Guided>
+        </Guided> */}
       </Card>
     );
   }

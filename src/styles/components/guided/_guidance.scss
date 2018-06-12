@@ -1,17 +1,18 @@
 .guided-guidance {
   transition: transform var(--animation-duration-slow) var(--animation-easing);
   transform: translateX(100%);
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 1000;
   width: 30vw;
   height: 100%;
-  background: green;
+  background-color: var(--architect-panel-background);
 
   &__content {
     opacity: 0;
     transition: opacity var(--animation-duration-standard) var(--animation-easing);
+    padding: unit(4);
   }
 
   &__toggle {

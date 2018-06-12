@@ -1,10 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { propTypes, defaultProps } from './guidedProps';
 
 const Section = ({
-  isActive,
   className,
   handleMouseEnter,
   handleMouseLeave,
@@ -13,9 +11,6 @@ const Section = ({
   const sectionClasses = cx(
     className,
     'guided-section',
-    {
-      'guided-section--is-active': isActive,
-    },
   );
 
   return (
@@ -31,12 +26,16 @@ const Section = ({
 
 Section.propTypes = {
   className: PropTypes.string,
-  ...propTypes,
+  handleMouseEnter: PropTypes.func,
+  handleMouseLeave: PropTypes.func,
+  children: PropTypes.node,
 };
 
 Section.defaultProps = {
   className: '',
-  ...defaultProps,
+  handleMouseEnter: () => {},
+  handleMouseLeave: () => {},
+  children: null,
 };
 
 export default Section;
