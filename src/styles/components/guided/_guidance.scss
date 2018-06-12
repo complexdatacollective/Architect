@@ -1,4 +1,18 @@
 .guided-guidance {
+  transition: transform var(--animation-duration-slow) var(--animation-easing);
+  transform: translateX(100%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  width: 30vw;
+  height: 100%;
+  background: green;
+
+  &__content {
+    opacity: 0;
+    transition: opacity var(--animation-duration-standard) var(--animation-easing);
+  }
 
   &__toggle {
     position: absolute;
@@ -15,5 +29,14 @@
     justify-content: center;
     padding-bottom: .25rem;
     font-size: 2rem;
+    cursor: pointer;
+  }
+
+  &--show {
+    transform: translateX(0);
+
+    .guided-guidance__content {
+      opacity: 1;
+    }
   }
 }

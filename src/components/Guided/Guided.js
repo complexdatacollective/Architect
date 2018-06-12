@@ -8,11 +8,13 @@ import Guidance from './Guidance';
 class Guided extends Component {
   static propTypes = {
     className: PropTypes.string,
+    children: PropTypes.node,
     sections: PropTypes.object,
     defaultGuidance: PropTypes.node,
   };
 
   static defaultProps = {
+    children: null,
     className: '',
     sections: {},
     defaultGuidance: null,
@@ -80,13 +82,19 @@ class Guided extends Component {
 
     return (
       <div className={classNames}>
-        <div className="guided__sections">
-          { this.renderSections() }
+        <div className="guided__content">
+          { this.props.children }
+
+          <div className="guided__sections">
+            { this.renderSections() }
+          </div>
         </div>
 
-        <div className="guided__guidance">
-          <Guidance guidance={this.getGuidance()} />
-        </div>
+        <Guidance
+          show={this.state.guided}
+          guidance={this.getGuidance()}
+          handleClickToggle={this.toggleGuidance}
+        />
       </div>
     );
   }

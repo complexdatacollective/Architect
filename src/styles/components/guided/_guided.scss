@@ -2,27 +2,15 @@
   position: relative;
   z-index: var(--z-default);
 
-  display: flex;
-  flex-direction: column;
-
-  &--show-guidance {
-    .guided__guidance {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
   }
 
-  &__guidance {
-    transform: translateX(100%);
-    transition: opacity var(--animation-duration-standard) var(--animation-easing),
-    transform var(--animation-duration-slow) var(--animation-easing);
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    opacity: 0;
-    width: 30vw;
-    height: 100%;
+  &--show-guidance {
+    .guided__content {
+      width: 60vw;
+    }
   }
 }

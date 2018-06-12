@@ -1,18 +1,9 @@
 .guided-section {
   flex-direction: row;
   width: 100%;
-  padding: 0 35% 0 0;
-  transition: opacity var(--animation-duration-standard) var(--animation-easing),
-  transform var(--animation-duration-standard) var(--animation-easing),
-  max-height var(--animation-duration-standard) var(--animation-easing);
+  margin: unit(4) 0;
 
   &:first-child {
     padding-top: unit(4);
-  }
-
-  &--hide {
-    opacity: 0;
-    max-height: 0;
-    transform: translateX(-100%);
   }
 }

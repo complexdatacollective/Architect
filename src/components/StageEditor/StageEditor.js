@@ -50,19 +50,20 @@ const StageEditor = ({
 }) => (
   <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
     <CodeView toggleCodeView={toggleCodeView} form={form} />
-    <h1>Edit {stage.type} Screen</h1>
-    { dirty && invalid && (
-      <p style={{ color: 'var(--error)' }}>
-        There are some errors that need to be fixed before this can be saved!
-      </p>
-    ) }
-    <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
     <Guided
       className="stage-editor__sections"
       sections={getSectionsForStageType(stage.type)}
       defaultGuidance={getDefaultGuidanceForStageType(stage.type)}
       form={form}
-    />
+    >
+      <h1>Edit {stage.type} Screen</h1>
+      { dirty && invalid && (
+        <p style={{ color: 'var(--error)' }}>
+          There are some errors that need to be fixed before this can be saved!
+        </p>
+      ) }
+      <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
+    </Guided>
   </ReduxForm>
 );
 
