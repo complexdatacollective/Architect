@@ -4,11 +4,6 @@
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
 
-  &-section {
-    &__guidance {
-      background-color: var(--architect-panel-background);
-    }
-  }
 
   &__code {
     position: fixed;
@@ -44,8 +39,8 @@
       transform: scaleY(1);
     }
 
-    .stage-editor-section__guidance {
-      padding-top: calc(30vh + 2.4rem);
+    .guided-guidance {
+      padding-top: calc(30vh);
     }
   }
 }

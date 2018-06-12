@@ -53,12 +53,7 @@ class Form extends Component {
 
   render() {
     const {
-      show,
       forms,
-      form,
-      selectedForm,
-      reset,
-      ...rest
     } = this.props;
 
     const categoryClasses = (disabled = false) =>
@@ -68,7 +63,7 @@ class Form extends Component {
       );
 
     return (
-      <Fragment>
+      <div>
         <h2>Form</h2>
         <p>Which form should be used to create and edit nodes on this stage?</p>
         <div className="stage-editor-section-form">
@@ -122,7 +117,7 @@ class Form extends Component {
             />
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }

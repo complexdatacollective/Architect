@@ -15,12 +15,9 @@ const fieldName = 'prompts';
 const NameGeneratorPromptsSection = ({
   variableRegistry,
   form,
-  prompts,
-  show,
   addNewPrompt,
-  ...rest
 }) => (
-  <Fragment>
+  <div>
     <h2>Prompts</h2>
     <p>Name gen prompt specific</p>
     <div className="stage-editor-section-name-generator-prompts">
@@ -37,7 +34,7 @@ const NameGeneratorPromptsSection = ({
         <RoundButton type="button" onClick={addNewPrompt} content="+" />
       </div>
     </div>
-  </Fragment>
+  </div>
 );
 
 NameGeneratorPromptsSection.propTypes = {
@@ -46,8 +43,6 @@ NameGeneratorPromptsSection.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
-  show: PropTypes.bool,
-  prompts: PropTypes.array.isRequired,
   addNewPrompt: PropTypes.func.isRequired,
 };
 

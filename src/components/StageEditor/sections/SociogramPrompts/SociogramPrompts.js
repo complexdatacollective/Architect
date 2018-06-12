@@ -13,7 +13,6 @@ const fieldName = 'prompts';
 
 const SociogramPrompts = ({
   form,
-  prompts,
   addNewPrompt,
 }) => (
   <div>
@@ -55,7 +54,6 @@ SociogramPrompts.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
-  prompts: PropTypes.array.isRequired,
   addNewPrompt: PropTypes.func.isRequired,
 };
 

@@ -5,13 +5,13 @@
   &__content {
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    padding: unit(4) unit(4);
+    width: calc(100vw - 30px);
+    padding: unit(4);
   }
 
   &--show-guidance {
     .guided__content {
-      width: 60vw;
+      width: calc(65vw - 30px);
     }
   }
 }

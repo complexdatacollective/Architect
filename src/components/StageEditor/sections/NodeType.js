@@ -35,9 +35,6 @@ class NodeType extends Component {
     const {
       nodeTypes,
       disabled,
-      stage,
-      form,
-      resetField,
     } = this.props;
 
     const nodeTypeClasses = cx('stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
