@@ -4,25 +4,28 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
+import cx from 'classnames';
 import { keys, has, get } from 'lodash';
 import { Button } from '../../../../ui/components';
 import SortableItems from '../../SortableItems';
 import NodePanel from './NodePanel';
 
-const NodePanels = ({ form, createNewPanel, dataSources }) => (
-  <div className="stage-editor-section-content-items">
-    <h2>Panels</h2>
-    <p>Create any content you wish to display on the information screen.</p>
-    <FieldArray
-      name="panels"
-      component={SortableItems}
-      itemComponent={NodePanel}
-      form={form}
-      dataSources={dataSources}
-    />
+const NodePanels = ({ form, createNewPanel, dataSources, disabled }) => (
+  <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
+    <div className="stage-editor-section-content-items">
+      <h2>Panels</h2>
+      <p>Create any content you wish to display on the information screen.</p>
+      <FieldArray
+        name="panels"
+        component={SortableItems}
+        itemComponent={NodePanel}
+        form={form}
+        dataSources={dataSources}
+      />
 
-    <div className="stage-editor-section-content-items__controls">
-      <Button onClick={() => createNewPanel()} size="small" type="button">Add new panel</Button>
+      <div className="stage-editor-section-content-items__controls">
+        <Button onClick={() => createNewPanel()} size="small" type="button">Add new panel</Button>
+      </div>
     </div>
   </div>
 );
@@ -54,10 +57,15 @@ NodePanels.Guidance = (
 NodePanels.propTypes = {
   createNewPanel: PropTypes.func.isRequired,
   dataSources: PropTypes.array.isRequired,
+  disabled: PropTypes.bool,
   form: PropTypes.shape({
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
+};
+
+NodePanels.defaultProps = {
+  disabled: false,
 };
 
 const getDataSources = (state) => {
@@ -66,7 +74,7 @@ const getDataSources = (state) => {
 };
 
 const mapStateToProps = (state, props) => ({
-  show: has(props.form.getValues(state, 'subject'), 'type'),
+  disabled: !has(props.form.getValues(state, 'subject'), 'type'),
   dataSources: getDataSources(state),
 });
 

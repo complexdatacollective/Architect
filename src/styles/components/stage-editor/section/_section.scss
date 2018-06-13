@@ -1,0 +1,15 @@
+.stage-editor-section {
+  transition-property: opacity, transform, max-height;
+  transition-duration: var(--animation-duration-standard);
+  transition-timing-function: var(--animation-easing);
+
+  opacity: 1;
+  max-height: auto;
+  transform: translateX(0);
+
+  &--disabled {
+    opacity: 0;
+    max-height: 0;
+    transform: translateX(-100%);
+  }
+}

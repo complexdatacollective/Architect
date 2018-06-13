@@ -6,6 +6,7 @@ import { FieldArray, arrayPush } from 'redux-form';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
+import cx from 'classnames';
 import RoundButton from '../../../Form/RoundButton';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
 import SortableItems from '../../SortableItems';
@@ -15,9 +16,10 @@ const fieldName = 'prompts';
 const NameGeneratorPromptsSection = ({
   variableRegistry,
   form,
+  disabled,
   addNewPrompt,
 }) => (
-  <div>
+  <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
     <h2>Prompts</h2>
     <p>Name gen prompt specific</p>
     <div className="stage-editor-section-name-generator-prompts">
@@ -43,12 +45,13 @@ NameGeneratorPromptsSection.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
+  disabled: PropTypes.bool,
   addNewPrompt: PropTypes.func.isRequired,
 };
 
 NameGeneratorPromptsSection.defaultProps = {
   variableRegistry: {},
-  show: false,
+  disabled: false,
 };
 
 NameGeneratorPromptsSection.Guidance = (
@@ -81,7 +84,7 @@ const getVariablesForNodeType = (state, nodeType) => {
 const mapStateToProps = (state, props) => {
   const nodeType = get(props.form.getValues(state, 'subject'), 'type');
   return {
-    show: !!nodeType,
+    disabled: !nodeType,
     variableRegistry: getVariablesForNodeType(state, nodeType),
     prompts: props.form.getValues(state, fieldName),
   };

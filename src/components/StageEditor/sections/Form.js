@@ -11,16 +11,21 @@ import Select from '../../Form/Fields/Select';
 const DEFAULT_FORM = Symbol('DEFAULT_FORM');
 const CUSTOM_FORM = Symbol('CUSTOM_FORM');
 
+const categoryClasses = (disabled = false) =>
+  cx(
+    'stage-editor-section-form__category',
+    { 'stage-editor-section-form__category--disabled': disabled },
+  );
 class Form extends Component {
   static propTypes = {
     forms: PropTypes.arrayOf(PropTypes.string),
     selectedForm: PropTypes.string,
-    // show: PropTypes.bool,
+    disabled: PropTypes.bool,
     reset: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    show: false,
+    disabled: false,
     selectedForm: null,
     forms: [],
   };
@@ -52,16 +57,16 @@ class Form extends Component {
   render() {
     const {
       forms,
+      disabled,
     } = this.props;
 
-    const categoryClasses = (disabled = false) =>
-      cx(
-        'stage-editor-section-form__category',
-        { 'stage-editor-section-form__category--disabled': disabled },
-      );
+    const formClasses = cx(
+      'stage-editor-section',
+      { 'stage-editor-section--disabled': disabled },
+    );
 
     return (
-      <div>
+      <div className={formClasses}>
         <h2>Form</h2>
         <p>Which form should be used to create and edit nodes on this stage?</p>
         <div className="stage-editor-section-form">
@@ -160,7 +165,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     forms: getNodeForms(state, nodeType),
-    show: !!nodeType,
+    disabled: !nodeType,
     selectedForm,
   };
 };
