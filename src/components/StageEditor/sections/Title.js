@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import propTypes from './propTypes';
 import { ValidatedField } from '../../../components/Form';
 import SeamlessText from '../../../components/Form/Fields/SeamlessText';
 
@@ -17,11 +16,11 @@ const Title = () => (
 );
 
 Title.propTypes = {
-  ...propTypes,
 };
 
 Title.Guidance = (
   <Fragment>
+    <h3>Title help</h3>
     <p>
       A good stage title should be descriptive, but not too long. It should help you to remember the
       purpose of this stage later.

@@ -38,6 +38,7 @@ ContentItems.propTypes = {
 
 ContentItems.Guidance = (
   <React.Fragment>
+    <h3>Content Items help</h3>
     <p>
       Each information interface can display up to four &quot;content boxes&quot;. Each content box
       can display either: text, an image, a video, or some audio.

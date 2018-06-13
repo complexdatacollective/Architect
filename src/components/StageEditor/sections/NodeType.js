@@ -4,7 +4,6 @@ import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, has, difference } from 'lodash';
 import cx from 'classnames';
-import propTypes from './propTypes';
 import Contexts from '../../../components/Form/Fields/Contexts';
 
 class NodeType extends Component {
@@ -13,7 +12,6 @@ class NodeType extends Component {
     disabled: PropTypes.bool,
     stage: PropTypes.object.isRequired,
     resetField: PropTypes.func.isRequired,
-    ...propTypes,
   };
 
   static defaultProps = {
@@ -64,6 +62,7 @@ class NodeType extends Component {
 
 NodeType.Guidance = (
   <Fragment>
+    <h3>Node Type</h3>
     <p>
       Here, you can determine the type of node that this name generator will work with. Either
       choose from your existing node types, or create a new one.

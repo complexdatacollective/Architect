@@ -36,6 +36,7 @@ const SociogramPrompts = ({
 
 SociogramPrompts.Guidance = (
   <Fragment>
+    <h3>Prompts help</h3>
     <p>
       Prompts allow you to specify one or more specific questions to post to the participant,
       in order to encourage the recall of nodes.

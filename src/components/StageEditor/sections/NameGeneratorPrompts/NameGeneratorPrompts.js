@@ -52,15 +52,23 @@ NameGeneratorPromptsSection.defaultProps = {
 };
 
 NameGeneratorPromptsSection.Guidance = (
-  <Fragment className="stage-editor-section__guidance">
+  <Fragment>
+    <h3>Prompts help</h3>
     <p>
-      {'Prompts allow you to specify one or more specific questions to post to the participant, in order to encourage the recall of nodes. '}
+      Prompts allow you to specify one or more specific questions to post to the participant, in
+      order to encourage the recall of nodes.
     </p>
     <p>
-      {'Prompts should be carefully considered, and grounded in existing literature wherever possible. Think carefully about if you want to use one name generator with muiltiple prompts, or many name generators with a single prompt. Your choice depends on your specific research goals, and the needs of your research population.'}
+      Prompts should be carefully considered, and grounded in existing literature wherever possible.
+      Think carefully about if you want to use one name generator with muiltiple prompts, or many
+      name generators with a single prompt. Your choice depends on your specific research goals,
+      and the needs of your research population.
     </p>
     <p>
-      {'Each prompt can optionally assign a value to one or more node variables. You can use this functionality to keep track of where a node was created, or to assign an attribute to a node based on the prompt (such as indicating a node is a potential family member, if elicited in a prompt about family).'}
+      Each prompt can optionally assign a value to one or more node variables. You can use this
+      functionality to keep track of where a node was created, or to assign an attribute to a node
+      based on the prompt (such as indicating a node is a potential family member, if elicited in a
+      prompt about family).
     </p>
   </Fragment>
 );

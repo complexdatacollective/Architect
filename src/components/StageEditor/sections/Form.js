@@ -5,7 +5,6 @@ import { Field, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { toPairs, map, get, pickBy } from 'lodash';
-import propTypes from './propTypes';
 import Radio from '../../Form/Fields/Radio';
 import Select from '../../Form/Fields/Select';
 
@@ -16,9 +15,8 @@ class Form extends Component {
   static propTypes = {
     forms: PropTypes.arrayOf(PropTypes.string),
     selectedForm: PropTypes.string,
-    show: PropTypes.bool,
+    // show: PropTypes.bool,
     reset: PropTypes.func.isRequired,
-    ...propTypes,
   };
 
   static defaultProps = {
@@ -124,6 +122,7 @@ class Form extends Component {
 
 Form.Guidance = (
   <Fragment>
+    <h3>Form help</h3>
     <p>
       Now you have selected a node type, you must decide which form is shown to the participant when
       they create a new node.
