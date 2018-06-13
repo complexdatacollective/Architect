@@ -2,6 +2,7 @@ import React from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Icon } from '../../ui/components';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const Guidance = ({
@@ -42,7 +43,18 @@ const Guidance = ({
       <div
         className="guided-guidance__toggle"
         onClick={handleClickToggle}
-      />
+      >
+        <Icon
+          name="chevron-right"
+          color="white"
+          className="guided-guidance__toggle-icon guided-guidance__toggle-icon--close"
+        />
+        <Icon
+          name="chevron-left"
+          color="white"
+          className="guided-guidance__toggle-icon guided-guidance__toggle-icon--open"
+        />
+      </div>
     </div>
   );
 };
