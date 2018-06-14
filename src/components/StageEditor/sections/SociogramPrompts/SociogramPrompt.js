@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
-import { keys, get, toPairs } from 'lodash';
+import { keys, get, toPairs, isEmpty } from 'lodash';
 import Prompt from '../../Prompt';
 import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
@@ -46,11 +46,18 @@ class SociogramPrompt extends Component {
   handleHighlightOrCreateEdge = (type) => {
     switch (type) {
       case HIGHLIGHT:
-        return this.props.clearField('edges.create');
+        return this.props.clearField(`${this.props.fieldId}.edges.create`);
       case CREATE_EDGE:
-        return this.props.clearField('highlight.allowHighlighting');
+        return this.props.clearField(`${this.props.fieldId}.highlight.allowHighlighting`);
       default:
         return null;
+    }
+  }
+
+  clearEmptyField = (event, value, previousValue, name) => {
+    if (isEmpty(value)) {
+      this.props.clearField(name);
+      event.preventDefault();
     }
   }
 
@@ -69,16 +76,16 @@ class SociogramPrompt extends Component {
         className="stage-editor-section-sociogram-prompt"
         open={this.props.isDirty}
         preview={(
-          <Fragment>
+          <FormSection name={fieldId}>
             <div className="stage-editor-section-sociogram-prompt__preview-icon">
               <Field
-                name={`${fieldId}.subject.type`}
+                name="subject.type"
 
                 component={field => (<Node label={field.input.value} />)}
               />
             </div>
             <Field
-              name={`${fieldId}.text`}
+              name="text"
               component={field => (
                 <Markdown
                   className="stage-editor-section-sociogram-prompt__preview-text"
@@ -86,7 +93,7 @@ class SociogramPrompt extends Component {
                 />
               )}
             />
-          </Fragment>
+          </FormSection>
         )}
       >
         <FormSection name={fieldId}>
@@ -138,6 +145,7 @@ class SociogramPrompt extends Component {
               component={Fields.Select}
               className="stage-editor-section-prompt__setting"
               label="Would you like to highlight nodes based on any attribute?"
+              onChange={this.clearEmptyField}
             >
               <option />
               {variablesForNodeType.map(([variableName, meta]) => (
@@ -163,10 +171,13 @@ class SociogramPrompt extends Component {
             />
             <Field
               name="edges.create"
-              component={Fields.RadioGroup}
+              component={Fields.Select}
               className="stage-editor-section-prompt__setting"
-              options={edgeTypes}
-              onChange={() => this.handleHighlightOrCreateEdge(CREATE_EDGE)}
+              options={['', ...edgeTypes]}
+              onChange={(...args) => {
+                this.clearEmptyField(...args);
+                this.handleHighlightOrCreateEdge(CREATE_EDGE);
+              }}
               label="Click nodes to create an edge? (disables attribute toggling)"
             />
           </div>
@@ -239,8 +250,8 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
-  clearField: (field) => {
-    dispatch(clearFields(props.form.name, false, false, `${props.fieldId}.${field}`));
+  clearField: (fieldName) => {
+    dispatch(clearFields(props.form.name, false, false, fieldName));
   },
 });
 
