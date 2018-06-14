@@ -66,7 +66,17 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = (dispatch, { form: { name } }) => ({
   addNewPrompt: bindActionCreators(
-    () => arrayPush(name, fieldName, { id: uuid() }),
+    () => arrayPush(
+      name,
+      fieldName,
+      {
+        id: uuid(),
+        text: '',
+        subject: {},
+        layout: {},
+        background: { concentricCircles: 4, skewedTowardCenter: false },
+      },
+    ),
     dispatch,
   ),
 });

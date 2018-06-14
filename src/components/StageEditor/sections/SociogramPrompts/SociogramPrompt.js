@@ -113,12 +113,12 @@ class SociogramPrompt extends Component {
         <div className="stage-editor-section-prompt__group">
           <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
           <Field
-            name={`${fieldId}.highlight.layoutVariable`}
+            name={`${fieldId}.layout.variable`}
             component={Fields.Select}
             className="stage-editor-section-prompt__setting"
             label="Layout variable"
           >
-            <option disabled selected>Select one</option>
+            <option disabled value="">Select one</option>
             {layoutsForNodeType.map(([variableName, meta]) => (
               <option value={variableName}>{meta.label}</option>
             ))}
@@ -131,19 +131,28 @@ class SociogramPrompt extends Component {
           />
         </div>
         <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Display</h4>
+          <h4 className="stage-editor-section-prompt__group-title">Attributes</h4>
           <Field
             name={`${fieldId}.highlight.variable`}
             component={Fields.Select}
             className="stage-editor-section-prompt__setting"
-            label="Which attribute would you like to highlight?"
+            label="Would you like to highlight nodes based on any attribute?"
           >
-            <option disabled selected>Select one</option>
+            <option />
             {variablesForNodeType.map(([variableName, meta]) => (
               <option value={variableName}>{meta.label}</option>
             ))}
           </Field>
-          <Field name={`${fieldId}.highlight.value`} component="input" hidden value />
+          <Field
+            name={`${fieldId}.highlight.allowHighlighting`}
+            component={Fields.Checkbox}
+            className="stage-editor-section-prompt__setting"
+            label="Click a node to toggle this attribute (disables edge creation)"
+            onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
+          />
+        </div>
+        <div className="stage-editor-section-prompt__group">
+          <h4 className="stage-editor-section-prompt__group-title">Edges</h4>
           <Field
             name={`${fieldId}.edges.display`}
             component={Fields.CheckboxList}
@@ -151,23 +160,13 @@ class SociogramPrompt extends Component {
             options={edgeTypes}
             label="Which edges would you like to show?"
           />
-        </div>
-        <div className="stage-editor-section-prompt__group">
-          <h4 className="stage-editor-section-prompt__group-title">Click interactions</h4>
-          <Field
-            name={`${fieldId}.highlight.allowHighlighting`}
-            component={Fields.Checkbox}
-            className="stage-editor-section-prompt__setting"
-            label="Click to toggle highlighting?"
-            onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
-          />
           <Field
             name={`${fieldId}.edges.create`}
             component={Fields.RadioGroup}
             className="stage-editor-section-prompt__setting"
             options={edgeTypes}
             onChange={() => this.handleHighlightOrCreateEdge(CREATE_EDGE)}
-            label="Or, click to create edge?"
+            label="Click nodes to create an edge? (disables attribute toggling)"
           />
         </div>
         <div className="stage-editor-section-prompt__group">
