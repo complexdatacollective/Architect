@@ -14,25 +14,30 @@ $component-name: stage-editor-section-prompt;
     background-color: var(--architect-border);
     cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
 
-    &-icon {
-      flex: 0 0 unit(10);
-
-      & .node {
-        font-size: unit(10);
-        margin-right: unit(2);
-      }
+    &-content {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     }
 
-    &-text {
-      & > * {
-        margin: unit(2) 0 0;
+    &-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-        &:first-child {
-          margin: 0;
-        }
+      &--open,
+      &--close {
+        height: unit(2.5);
+      }
+
+      &--open {
+        display: block;
+      }
+
+      &--close {
+        display: none;
       }
     }
   }
@@ -50,6 +55,16 @@ $component-name: stage-editor-section-prompt;
       animation-name: grow;
       animation-duration: var(--animation-duration-standard);
       animation-timing-function: var(--animation-easing);
+    }
+
+    .#{$component-name}__preview-indicator {
+      &--open {
+        display: none;
+      }
+
+      &--close {
+        display: block;
+      }
     }
   }
 

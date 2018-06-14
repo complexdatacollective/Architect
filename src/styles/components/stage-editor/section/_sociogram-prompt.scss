@@ -1,0 +1,25 @@
+$component-name: stage-editor-section-sociogram-prompt;
+
+.#{$component-name} {
+  &__preview {
+    &-icon {
+      flex: 0 0 unit(10);
+
+      & .node {
+        font-size: unit(10);
+        margin-right: unit(2);
+      }
+    }
+
+    &-text {
+      & > * {
+        margin: unit(2) 0 0;
+
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+}
