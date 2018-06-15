@@ -128,7 +128,7 @@ class SociogramPrompt extends Component {
             >
               <option disabled value="">Select one</option>
               {layoutsForNodeType.map(([variableName, meta]) => (
-                <option value={variableName}>{meta.label}</option>
+                <option value={variableName} key={variableName}>{meta.label}</option>
               ))}
             </Field>
             <Field
@@ -149,7 +149,7 @@ class SociogramPrompt extends Component {
             >
               <option />
               {variablesForNodeType.map(([variableName, meta]) => (
-                <option value={variableName}>{meta.label}</option>
+                <option value={variableName} key={variableName}>{meta.label}</option>
               ))}
             </Field>
             <Field
