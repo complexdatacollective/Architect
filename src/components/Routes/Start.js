@@ -9,6 +9,8 @@ import { actionCreators as protocolsActions } from '../../ducks/modules/protocol
 import { ProtocolStack } from '../../components/Start';
 import networkCanvasBrand from '../../images/network-canvas-brand.svg';
 
+import OrderBy from '../StageEditor/sections/SociogramPrompts/orderBy';
+
 class Start extends PureComponent {
   static propTypes = {
     protocols: PropTypes.array.isRequired,
@@ -37,6 +39,8 @@ class Start extends PureComponent {
           <div className="start__welcome">
             <h1 className="start__welcome-title">Architect</h1>
             <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>
+
+            <OrderBy />
           </div>
 
           <div className="start__call-to-action">

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
 import { keys, get, toPairs, isEmpty } from 'lodash';
-import Prompt from '../../Prompt';
 import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
+import Prompt from '../../Prompt';
 
 // Background options
 const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
@@ -16,7 +16,7 @@ const CONCENTRIC_CIRCLES = 'BACKGROUND/CONCENTRIC_CIRCLES';
 const HIGHLIGHT = 'CLICK/HIGHLIGHT';
 const CREATE_EDGE = 'CLICK/CREATE_EDGE';
 
-const disableBlur = (event) => event.preventDefault();
+const disableBlur = event => event.preventDefault();
 
 class SociogramPrompt extends Component {
   static propTypes = {
