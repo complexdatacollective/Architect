@@ -45,6 +45,7 @@ class RadioGroup extends Component {
           checked: selected,
           onChange: this.onChange,
         }}
+        key={index}
         label={optionLabel}
       />
     );
