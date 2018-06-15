@@ -1,11 +1,15 @@
 $component-name: form-fields-markdown;
 
 .#{$component-name} {
+  @include form-field;
   width: 100%;
-  vertical-align: top;
-  position: relative;
-  min-height: 75px;
-  cursor: text;
+
+  &__edit {
+    position: relative;
+    cursor: text;
+    vertical-align: top;
+    min-height: 75px;
+  }
 
   &__input {
     @include preset('copy-large');

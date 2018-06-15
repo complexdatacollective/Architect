@@ -1,37 +1,76 @@
 import React from 'react';
-import cx from 'classnames';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
-import { propTypes, defaultProps } from './guidedProps';
+import cx from 'classnames';
+import { Icon } from '../../ui/components';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const Guidance = ({
-  isActive,
-  showGuidance,
-  resetGuidance,
-  toggleGuidance,
-  anyActive,
-  children,
+  handleClickToggle,
+  guidance: { key, guidance },
+  show,
   className,
   ...props
-}) => (
-  <div
-    className={cx(className, 'guided-guidance', { 'guided-guidance--is-active': isActive })}
-    {...props}
-  >
-    <h3>Help</h3>
-    {children}
-  </div>
-);
+}) => {
+  const guidanceClasses = cx(
+    'guided-guidance',
+    { 'guided-guidance--show': show },
+  );
+
+  return (
+    <div
+      className={guidanceClasses}
+      {...props}
+    >
+      <div className="guided-guidance__content">
+        <div className="guided-guidance__guidance-container">
+          <TransitionGroup component={null}>
+            <CSSTransition
+              key={key}
+              timeout={{
+                enter: getCSSVariableAsNumber('--animation-duration-slow-ms') + getCSSVariableAsNumber('--animation-duration-fast-ms'),
+                exit: getCSSVariableAsNumber('--animation-duration-fast-ms'),
+              }}
+              classNames="guided-guidance__tween"
+            >
+              <div className="guided-guidance__guidance">
+                {guidance}
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
+        </div>
+      </div>
+      <div
+        className="guided-guidance__toggle"
+        onClick={handleClickToggle}
+      >
+        <Icon
+          name="chevron-right"
+          color="white"
+          className="guided-guidance__toggle-icon guided-guidance__toggle-icon--close"
+        />
+        <Icon
+          name="chevron-left"
+          color="white"
+          className="guided-guidance__toggle-icon guided-guidance__toggle-icon--open"
+        />
+      </div>
+    </div>
+  );
+};
 
 Guidance.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node,
-  ...propTypes,
+  guidance: PropTypes.object,
+  show: PropTypes.bool,
+  handleClickToggle: PropTypes.func,
 };
 
 Guidance.defaultProps = {
-  children: null,
   className: '',
-  ...defaultProps,
+  guidance: { key: null, guidance: null },
+  show: false,
+  handleClickToggle: () => {},
 };
 
 export default Guidance;

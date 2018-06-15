@@ -8,6 +8,16 @@
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
         "variables": {
+          "closenessLayout": {
+            "label": "Closeness layout",
+            "description": "Earthling readable description",
+            "type": "layout"
+          },
+          "geographicalLayout": {
+            "label": "Geographical closeness layout",
+            "description": "Earthling readable description",
+            "type": "layout"
+          },
           "name": {
             "label": "Name",
             "description": "Human readable description",
@@ -44,6 +54,17 @@
             "type": "boolean"
           }
         }
+      }
+    },
+    "edge": {
+      "knows": {
+        "label": "Knows"
+      },
+      "likes": {
+        "label": "Likes"
+      },
+      "dislikes": {
+        "label": "Dislikes"
       }
     }
   },

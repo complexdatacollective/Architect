@@ -1,0 +1,33 @@
+$module-name: form-fields-mode;
+
+.#{$module-name} {
+  @include form-field;
+  display: block;
+  position: relative;
+
+  &__options {
+    display: inline-flex;
+    border-radius: unit(1);
+    overflow: hidden;
+    border: 2px solid var(--architect-ui-radio-border);
+  }
+
+  &__option {
+    @include preset(copy-small);
+    display: inline-flex;
+    min-width: unit(10);
+    padding: unit(1);
+    margin: 3px;
+    border-radius: unit(.5);
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--animation-easing) var(--animation-duration-standard),
+    color var(--animation-easing) var(--animation-duration-standard);
+    cursor: pointer;
+
+    &--selected {
+      background-color: var(--architect-ui-radio-dot);
+      color: var(--color-white);
+    }
+  }
+}

@@ -1,11 +1,24 @@
+@mixin form-field {
+  &__label {
+    @include preset(copy-standard, font-size);
+    font-weight: 200;
+    display: block;
+    margin: 0 0 unit(1);
+  }
+}
+
 @import './fields/contexts';
 @import './fields/radio';
 @import './fields/radio-group';
+@import './fields/checkbox';
+@import './fields/checkbox-list';
 @import './fields/select';
 @import './fields/variable-chooser';
 @import './fields/seamless-text';
 @import './fields/text';
+@import './fields/textarea';
 @import './fields/markdown';
+@import './fields/mode';
 @import './fields/file';
 @import './fields/audio';
 @import './fields/image';

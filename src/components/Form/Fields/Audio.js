@@ -4,12 +4,11 @@ import File from './File';
 const AudioInput = props => (
   <File
     accept="audio/*"
-    className="form-fields-audio"
     completeClassName="form-fields-audio--complete"
     {...props}
   >
     { value => (
-      <div className="form-fields-audio__preview">
+      <div className="form-fields-audio">
         { value }
       </div>
     ) }

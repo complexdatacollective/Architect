@@ -15,6 +15,7 @@ class FileInput extends PureComponent {
     completeClassName: PropTypes.string,
     accept: PropTypes.string,
     children: PropTypes.func,
+    label: PropTypes.string,
     ...fieldPropTypes,
   };
 
@@ -23,6 +24,7 @@ class FileInput extends PureComponent {
     className: 'form-fields-file',
     completeClassName: 'form-fields-file--complete',
     accept: '',
+    label: '',
     children: value => value,
   };
 
@@ -43,23 +45,33 @@ class FileInput extends PureComponent {
     const {
       input: { value },
       accept,
+      label,
       className,
       completeClassName,
     } = this.props;
 
     return (
       <div className={cx(className, { [completeClassName]: !!value })}>
-        { value && this.props.children(value) }
-        <Dropzone
-          onDrop={this.onDrop}
-          multiple={false}
-          accept={accept}
-          className={cx('form-dropzone', { 'form-dropzone--replace': !!value })}
-          activeClassName="form-dropzone--active"
-          acceptClassName="form-dropzone--accept"
-          rejectClassName="form-dropzone--reject"
-          disabledClassName="form-dropzone--disabled"
-        />
+        { label &&
+          <div className="form-fields-file__label">{label}</div>
+        }
+        <div className="form-fields-file__dropzone">
+          { value &&
+            <div className="form-fields-file__dropzone-preview">
+              {this.props.children(value)}
+            </div>
+          }
+          <Dropzone
+            onDrop={this.onDrop}
+            multiple={false}
+            accept={accept}
+            className={cx('form-dropzone', { 'form-dropzone--replace': !!value })}
+            activeClassName="form-dropzone--active"
+            acceptClassName="form-dropzone--accept"
+            rejectClassName="form-dropzone--reject"
+            disabledClassName="form-dropzone--disabled"
+          />
+        </div>
       </div>
     );
   }

@@ -2,13 +2,16 @@
   position: relative;
   z-index: var(--z-default);
 
-  display: flex;
-  flex-direction: column;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 30px);
+    padding: unit(4);
+  }
 
-  &.guided--is-hidden {
-    .guided-guidance,
-    .guided-default-guidance {
-      transform: translateX(100%);
+  &--show-guidance {
+    .guided__content {
+      width: calc(65vw - 30px);
     }
   }
 }

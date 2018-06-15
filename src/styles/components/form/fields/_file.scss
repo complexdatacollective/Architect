@@ -1,5 +1,32 @@
 .form-fields-file {
+  @include form-field;
   display: block;
   overflow: hidden;
   position: relative;
+
+  &__dropzone {
+    position: relative;
+
+    &-preview {
+      transition: opacity var(--animation-duration-standard) var(--animation-easing);
+      position: relative;
+      z-index: 1;
+      min-height: 150px;
+      pointer-events: none;
+    }
+
+    &:hover {
+      .form-fields-file__dropzone-preview {
+        opacity: 0;
+      }
+    }
+  }
+
+  .form-dropzone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }

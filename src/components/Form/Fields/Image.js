@@ -5,12 +5,11 @@ import { Image } from '../../Assets';
 const ImageInput = props => (
   <File
     accept="image/*"
-    className="form-fields-image"
     {...props}
   >
     { url => (
-      <div className="form-fields-image__preview">
-        <Image url={url} alt="" />
+      <div className="form-fields-image">
+        <Image url={url} alt={url} className="form-fields-image__image" />
       </div>
     ) }
   </File>

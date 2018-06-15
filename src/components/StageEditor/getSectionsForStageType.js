@@ -5,6 +5,7 @@ import {
   NodeType,
   Form,
   NameGeneratorPrompts,
+  SociogramPrompts,
   NodePanels,
 } from './sections';
 
@@ -20,6 +21,10 @@ const interfaces = {
     Form,
     NameGeneratorPrompts,
     NodePanels,
+  ],
+  Sociogram: [
+    Title,
+    SociogramPrompts,
   ],
 };
 

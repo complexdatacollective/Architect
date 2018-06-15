@@ -98,7 +98,7 @@
     }
 
     &-label {
-      @include preset(copy-small);
+      @include preset(copy-standard, font-size);
       margin: 0 0 unit(.5);
     }
 

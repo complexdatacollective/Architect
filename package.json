@@ -14,7 +14,7 @@
         "start": "cross-env BUILD_TARGET=web node scripts/start.js",
         "start:electron": "node scripts/start.js",
         "preelectron:dev": "node scripts/build-electron-dev.js",
-        "electron:dev": "cross-env NODE_ENV=development WEBPACK_DEV_SERVER_PORT=3000 electron electron-dev/",
+        "electron:dev": "cross-env NODE_ENV=development WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
         "build": "node scripts/build.js",
         "lint": "eslint src",
         "lint:sass": "sass-lint -vc .sass-lint.yml",

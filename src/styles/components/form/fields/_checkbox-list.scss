@@ -1,0 +1,10 @@
+$component-name: form-fields-checkbox-list;
+
+.#{$component-name} {
+  @include form-field;
+  display: block;
+
+  &__option {
+    margin: 0 unit(2) unit(2) 0;
+  }
+}

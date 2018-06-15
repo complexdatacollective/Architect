@@ -1,6 +1,7 @@
 $module-name: form-fields-text;
 
 .#{$module-name} {
+  @include form-field;
   display: block;
   position: relative;
 

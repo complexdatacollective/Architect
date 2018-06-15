@@ -1,0 +1,100 @@
+$component-name: stage-editor-section-prompt;
+
+.#{$component-name} {
+  background-color: var(--card-background);
+  border: 2px solid var(--architect-border);
+  width: 100%;
+
+  &__preview,
+  &__editor {
+    padding: unit(2);
+  }
+
+  &__preview {
+    background-color: var(--architect-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &-icon {
+      flex: 0 0 unit(10);
+
+      & .node {
+        font-size: unit(10);
+        margin-right: unit(2);
+      }
+    }
+
+    &-text {
+      & > * {
+        margin: unit(2) 0 0;
+
+        &:first-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  &__editor {
+    display: none;
+    opacity: 0;
+    transform-origin: 50% 0;
+  }
+
+  &--open {
+    .#{$component-name}__editor {
+      display: block;
+      animation-fill-mode: forwards;
+      animation-name: grow;
+      animation-duration: var(--animation-duration-standard);
+      animation-timing-function: var(--animation-easing);
+    }
+  }
+
+  &__group {
+    margin: 0 0 unit(2);
+    padding: unit(2) 0 0;
+    border-top: 2px solid var(--architect-border);
+
+    &:first-child {
+      border: 0;
+      padding: 0;
+    }
+
+    &-title {
+      @include preset(title-3, font-size);
+      font-weight: 600;
+      margin: 0 0 unit(2);
+    }
+  }
+
+  &__setting {
+    margin: 0 0 unit(2);
+  }
+
+  &__label {
+    @include preset(copy-standard);
+    font-weight: 200;
+    font-family: var(--body-font-family);
+    display: block;
+    margin: 0 0 unit(1);
+  }
+}
+
+@keyframes grow {
+  0% {
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}

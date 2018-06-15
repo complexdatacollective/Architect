@@ -10,6 +10,16 @@
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
         "variables": {
+          "closenessLayout": {
+            "label": "Closeness layout",
+            "description": "Earthling readable description",
+            "type": "layout"
+          },
+          "geographicalLayout": {
+            "label": "Geographical closeness layout",
+            "description": "Earthling readable description",
+            "type": "layout"
+          },
           "name": {
             "label": "Name",
             "description": "Human readable description",
@@ -660,6 +670,7 @@
       "items": [
         { "type": "text", "content": "<p>Some arbitrary text content that can contain <strong>HTML</strong> tags.</p>" },
         { "type": "audio", "content": "click_the_thing.mp3", "description": "Click by clicking the thing" },
+        { "type": "video", "content": "video.mov", "description": "Click by clicking the thing" },
         { "type": "image", "content": "rubberduck.jpg" }
       ]
     },
@@ -829,6 +840,37 @@
         {
           "id": "closeness1",
           "text": "Position the nodes amongst the concentric circles. Place people you are closer to towards the middle",
+          "subject": {
+            "entity": "node",
+            "type": "person"
+          },
+          "filter": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'GREATER_THAN', value: 29 })]);",
+          "layout": {
+            "layoutVariable": "closenessLayout",
+            "allowPositioning": true
+          },
+          "edges": {
+            "display": ["friends", "professional"],
+            "create": "friends"
+          },
+          "highlight": {
+            "variable": "has_given_advice",
+            "value": true,
+            "allowHighlighting": true
+          },
+          "disable": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'LESS_THAN', value: 29 })]);",
+          "nodeBinSortOrder": {
+            "nickname": "DESC"
+          },
+          "background": {
+            "image": "rubberduck.jpg",
+            "concentricCircles": 4,
+            "skewedTowardCenter": true
+          }
+        },
+        {
+          "id": "closeness2",
+          "text": "Place people you are closer to towards the middle",
           "subject": {
             "entity": "node",
             "type": "person"

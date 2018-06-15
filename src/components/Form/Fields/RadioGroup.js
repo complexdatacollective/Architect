@@ -13,10 +13,12 @@ const getLabel = option => get(option, 'label', toString(getValue(option)));
 class RadioGroup extends Component {
   static propTypes = {
     options: PropTypes.array,
+    label: PropTypes.string,
     ...fieldPropTypes,
   };
 
   static defaultProps = {
+    label: null,
     options: [],
   };
 
@@ -43,6 +45,7 @@ class RadioGroup extends Component {
           checked: selected,
           onChange: this.onChange,
         }}
+        key={index}
         label={optionLabel}
       />
     );
@@ -52,7 +55,7 @@ class RadioGroup extends Component {
     const {
       options,
       className,
-      ...rest
+      label,
     } = this.props;
 
     const classNames = cx(
@@ -61,7 +64,10 @@ class RadioGroup extends Component {
     );
 
     return (
-      <div className={classNames} {...rest}>
+      <div className={classNames}>
+        { label &&
+          <div className="form-fields-radio-group__label">{label}</div>
+        }
         { options.map(this.renderOption) }
       </div>
     );
