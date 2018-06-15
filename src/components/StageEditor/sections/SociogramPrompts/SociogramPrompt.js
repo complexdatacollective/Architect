@@ -16,6 +16,8 @@ const CONCENTRIC_CIRCLES = 'BACKGROUND/CONCENTRIC_CIRCLES';
 const HIGHLIGHT = 'CLICK/HIGHLIGHT';
 const CREATE_EDGE = 'CLICK/CREATE_EDGE';
 
+const disableBlur = (event) => event.preventDefault();
+
 class SociogramPrompt extends Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
@@ -146,6 +148,7 @@ class SociogramPrompt extends Component {
               className="stage-editor-section-prompt__setting"
               label="Would you like to highlight nodes based on any attribute?"
               onChange={this.clearEmptyField}
+              onBlur={disableBlur}
             >
               <option />
               {variablesForNodeType.map(([variableName, meta]) => (
@@ -178,6 +181,7 @@ class SociogramPrompt extends Component {
                 this.clearEmptyField(...args);
                 this.handleHighlightOrCreateEdge(CREATE_EDGE);
               }}
+              onBlur={disableBlur}
               label="Click nodes to create an edge? (disables attribute toggling)"
             />
           </div>
