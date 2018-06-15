@@ -9,7 +9,7 @@ class Guided extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-    sections: PropTypes.object,
+    sections: PropTypes.array,
     defaultGuidance: PropTypes.node,
   };
 
