@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer,  arrayMove } from 'react-sortable-hoc';
-import { flatten, toPairs } from 'lodash';
+import { map, difference } from 'lodash';
 import * as Fields from '../../../Form/Fields';
 
 const ASC = 'asc';
@@ -20,6 +20,7 @@ const Rule = compose(
 )(
   ({
     variables,
+    disabledVariables,
     rule: { variable, direction },
     sortIndex: index,
     handleChange,
@@ -37,7 +38,10 @@ const Rule = compose(
         <option />
         {
           variables.map((value) => (
-            <option key={value}>{value}</option>
+            <option
+              key={value}
+              disabled={disabledVariables.includes(value)}
+            >{value}</option>
           ))
         }
       </Fields.Select>
@@ -73,7 +77,7 @@ const Rules = compose(
         rules.map((rule, index) => (
           <Rule
             variables={variables}
-            // usedVariables={variables.filter()}
+            disabledVariables={map(rules, 'variable')}
             handleChange={handleChange}
             handleDelete={handleDelete}
             index={index}
