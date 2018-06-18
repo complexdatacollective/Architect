@@ -18,41 +18,46 @@ const RuleHandle = compose(
 const Rule = compose(
   SortableElement
 )(
-  ({ variables, rule: [ index, rule ], handleChange}) => {
-    const [ variable, direction ] = flatten(toPairs(rule));
-
-    return (
-      <div>
-        <RuleHandle />
-        <Fields.Select
-          input={{
-            onChange: (event) =>
-              handleChange(index, { [event.target.value]: direction }),
-            value: variable,
-          }}
-        >
-          {
-            variables.map((value) => (
-              <option key={value}>{value}</option>
-            ))
-          }
-        </Fields.Select>
-        <Fields.Select
-          input={{
-            onChange: (event) =>
-              handleChange(index, { [variable]: event.target.value }),
-            value: direction,
-          }}
-        >
-          {
-            DIRECTIONS.map((value) => (
-              <option key={value}>{value}</option>
-            ))
-          }
-        </Fields.Select>
-      </div>
-    );
-  },
+  ({
+    variables,
+    rule: { variable, direction },
+    sortIndex: index,
+    handleChange,
+    handleDelete,
+  }) => (
+    <div>
+      <RuleHandle />
+      <Fields.Select
+        input={{
+          onChange: (event) =>
+            handleChange(index, { variable: event.target.value }),
+          value: variable,
+        }}
+      >
+        <option />
+        {
+          variables.map((value) => (
+            <option key={value}>{value}</option>
+          ))
+        }
+      </Fields.Select>
+      <Fields.Select
+        input={{
+          onChange: (event) =>
+            handleChange(index, { direction: event.target.value }),
+          value: direction,
+        }}
+      >
+        <option />
+        {
+          DIRECTIONS.map((value) => (
+            <option key={value}>{value}</option>
+          ))
+        }
+      </Fields.Select>
+      <button type="button" onClick={() => handleDelete(index)}>X</button>
+    </div>
+  ),
 );
 
 const Rules = compose(
@@ -62,16 +67,19 @@ const Rules = compose(
   }),
   SortableContainer,
 )(
-  ({ variables, rules, handleChange }) => (
+  ({ variables, rules, handleChange, handleDelete }) => (
     <div>
       {
         rules.map((rule, index) => (
           <Rule
             variables={variables}
+            // usedVariables={variables.filter()}
             handleChange={handleChange}
+            handleDelete={handleDelete}
             index={index}
             key={index}
-            rule={[index, rule]}
+            rule={rule}
+            sortIndex={index}
           />
         ))
       }
@@ -80,9 +88,9 @@ const Rules = compose(
 );
 
 const variables = [
-  'made',
-  'up',
-  'list',
+  'age',
+  'name',
+  'favourite_color',
 ];
 
 class OrderBy extends Component {
@@ -95,22 +103,20 @@ class OrderBy extends Component {
     this.state = {
       input: {
         value: [
-          { 'made': ASC },
-          { 'up': DESC }
+          { variable: 'age', direction: ASC },
+          { variable: 'name', direction: DESC }
         ],
       },
     };
   }
 
   handleChange = (index, newValue) => {
-    console.log(index, newValue);
-
     this.setState({
       input: {
         value: this.state.input.value.map(
           (rule, i) => {
             if (i !== index) { return rule; }
-            return newValue;
+            return { ...rule, ...newValue };
           }
         ),
       },
@@ -126,14 +132,39 @@ class OrderBy extends Component {
     });
   }
 
+  handleAddNewRule = () => {
+    this.setState({
+      input: {
+        value: [
+          ...this.state.input.value,
+          { variable: '', direction: '' },
+        ],
+      },
+    })
+  };
+
+  handleDelete = (index) => {
+    this.setState({
+      input: {
+        value: this.state.input.value.filter(
+          (rule, i) => i !== index
+        ),
+      },
+    });
+  };
+
   render() {
     return (
-      <Rules
-        rules={this.state.input.value}
-        variables={variables}
-        handleChange={this.handleChange}
-        onSortEnd={this.onSortEnd}
-      />
+      <div>
+        <Rules
+          rules={this.state.input.value}
+          variables={variables}
+          handleChange={this.handleChange}
+          handleDelete={this.handleDelete}
+          onSortEnd={this.onSortEnd}
+        />
+        <button type="button" onClick={this.handleAddNewRule}>Add</button>
+      </div>
     );
   };
 };
