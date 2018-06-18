@@ -4,12 +4,18 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { compose } from 'recompose';
+import { Field, reduxForm } from 'redux-form';
 import { Button, Icon } from '../../ui/components';
 import { actionCreators as protocolsActions } from '../../ducks/modules/protocols';
 import { ProtocolStack } from '../../components/Start';
 import networkCanvasBrand from '../../images/network-canvas-brand.svg';
-
 import OrderBy from '../StageEditor/sections/SociogramPrompts/orderBy';
+
+const Foo = reduxForm({ form: 'foo' })(({ children }) => (
+  <form>
+    {children}
+  </form>
+));
 
 class Start extends PureComponent {
   static propTypes = {
@@ -40,7 +46,17 @@ class Start extends PureComponent {
             <h1 className="start__welcome-title">Architect</h1>
             <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>
 
-            <OrderBy />
+            <Foo>
+              <Field
+                component={OrderBy}
+                name="foo"
+                variables={[
+                  'age',
+                  'name',
+                  'favourite_color',
+                ]}
+              />
+            </Foo>
           </div>
 
           <div className="start__call-to-action">

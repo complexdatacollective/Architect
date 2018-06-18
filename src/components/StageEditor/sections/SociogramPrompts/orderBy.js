@@ -1,8 +1,8 @@
-/* eslint-disable */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
-import { SortableElement, SortableHandle, SortableContainer,  arrayMove } from 'react-sortable-hoc';
-import { map, difference } from 'lodash';
+import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
+import { map } from 'lodash';
 import * as Fields from '../../../Form/Fields';
 
 const ASC = 'asc';
@@ -16,7 +16,7 @@ const RuleHandle = compose(
 );
 
 const Rule = compose(
-  SortableElement
+  SortableElement,
 )(
   ({
     variables,
@@ -30,14 +30,14 @@ const Rule = compose(
       <RuleHandle />
       <Fields.Select
         input={{
-          onChange: (event) =>
+          onChange: event =>
             handleChange(index, { variable: event.target.value }),
           value: variable,
         }}
       >
         <option />
         {
-          variables.map((value) => (
+          variables.map(value => (
             <option
               key={value}
               disabled={disabledVariables.includes(value)}
@@ -47,14 +47,14 @@ const Rule = compose(
       </Fields.Select>
       <Fields.Select
         input={{
-          onChange: (event) =>
+          onChange: event =>
             handleChange(index, { direction: event.target.value }),
           value: direction,
         }}
       >
         <option />
         {
-          DIRECTIONS.map((value) => (
+          DIRECTIONS.map(value => (
             <option key={value}>{value}</option>
           ))
         }
@@ -88,81 +88,68 @@ const Rules = compose(
         ))
       }
     </div>
-  )
+  ),
 );
-
-const variables = [
-  'age',
-  'name',
-  'favourite_color',
-];
 
 class OrderBy extends Component {
   static defaultProps = {
+    variables: [],
+    input: {
+      value: [],
+      onChange: () => {},
+    },
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      input: {
-        value: [
-          { variable: 'age', direction: ASC },
-          { variable: 'name', direction: DESC }
-        ],
-      },
-    };
-  }
-
-  handleChange = (index, newValue) => {
-    this.setState({
-      input: {
-        value: this.state.input.value.map(
-          (rule, i) => {
-            if (i !== index) { return rule; }
-            return { ...rule, ...newValue };
-          }
-        ),
-      },
-    });
-  }
+  static propTypes = {
+    variables: PropTypes.array,
+    input: PropTypes.shape({
+      value: PropTypes.array,
+      onChange: PropTypes.func,
+    }),
+  };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState({
-      input: {
-        ...this.state.input.value,
-        value: arrayMove(this.state.input.value, oldIndex, newIndex),
+    const updatedRules = arrayMove(this.value, oldIndex, newIndex);
+    this.props.input.onChange(updatedRules);
+  }
+
+  get value() {
+    return this.props.input.value || [];
+  }
+
+  handleChange = (index, updatedRule) => {
+    const updatedRules = this.value.map(
+      (rule, i) => {
+        if (i !== index) { return rule; }
+        return { ...rule, ...updatedRule };
       },
-    });
+    );
+    this.props.input.onChange(updatedRules);
   }
 
   handleAddNewRule = () => {
-    this.setState({
-      input: {
-        value: [
-          ...this.state.input.value,
-          { variable: '', direction: '' },
-        ],
-      },
-    })
+    const updatedRules = [
+      ...this.value,
+      { variable: '', direction: '' },
+    ];
+    this.props.input.onChange(updatedRules);
   };
 
   handleDelete = (index) => {
-    this.setState({
-      input: {
-        value: this.state.input.value.filter(
-          (rule, i) => i !== index
-        ),
-      },
-    });
+    const updatedRules = this.value.filter(
+      (rule, i) => i !== index,
+    );
+    this.props.input.onChange(updatedRules);
   };
 
   render() {
+    if (this.props.variables.length === 0) { return null; }
+
     return (
       <div>
         <Rules
-          rules={this.state.input.value}
-          variables={variables}
+          rules={this.value}
+          variables={this.props.variables}
           handleChange={this.handleChange}
           handleDelete={this.handleDelete}
           onSortEnd={this.onSortEnd}
