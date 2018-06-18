@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
-import { keys, get, toPairs, isEmpty } from 'lodash';
+import { keys, get, map, toPairs, isEmpty } from 'lodash';
 import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
 import Prompt from '../../Prompt';
@@ -25,6 +25,7 @@ class SociogramPrompt extends Component {
     edgeTypes: PropTypes.array.isRequired,
     layoutsForNodeType: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.array.isRequired,
+    highlightableForNodeType: PropTypes.array.isRequired,
     clearField: PropTypes.func.isRequired,
     isDirty: PropTypes.bool,
   };
@@ -69,8 +70,9 @@ class SociogramPrompt extends Component {
       fieldId,
       nodeTypes,
       edgeTypes,
-      layoutsForNodeType,
       variablesForNodeType,
+      layoutsForNodeType,
+      highlightableForNodeType,
     } = this.props;
 
     return (
@@ -119,6 +121,13 @@ class SociogramPrompt extends Component {
               options={nodeTypes}
               label="Which node would you like to layout?"
             />
+            <Field
+              name="sortOrderBy"
+              component={Fields.OrderBy}
+              className="stage-editor-section-prompt__setting"
+              variables={['*', ...variablesForNodeType]}
+              label="How would you like to sort the node bin?"
+            />
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
@@ -151,7 +160,7 @@ class SociogramPrompt extends Component {
               onBlur={disableBlur}
             >
               <option />
-              {variablesForNodeType.map(([variableName, meta]) => (
+              {highlightableForNodeType.map(([variableName, meta]) => (
                 <option value={variableName} key={variableName}>{meta.label}</option>
               ))}
             </Field>
@@ -244,9 +253,12 @@ const mapStateToProps = (state, props) => {
   const variables = toPairs(getVariablesForNodeType(state, nodeType));
   const isFieldDirty = isDirty(props.form.name);
 
+  console.log(variables);
+
   return {
     layoutsForNodeType: variables.filter(([, meta]) => meta.type === 'layout'),
-    variablesForNodeType: variables.filter(([, meta]) => meta.type === 'boolean'),
+    highlightableForNodeType: variables.filter(([, meta]) => meta.type === 'boolean'),
+    variablesForNodeType: map(variables, 0),
     isDirty: isFieldDirty(state, props.fieldId),
     nodeTypes: keys(state.protocol.present.variableRegistry.node),
     edgeTypes: keys(state.protocol.present.variableRegistry.edge),

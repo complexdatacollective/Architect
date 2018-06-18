@@ -15,3 +15,4 @@ export { default as RadioGroup } from './RadioGroup';
 export { default as Checkbox } from './Checkbox';
 export { default as CheckboxList } from './CheckboxList';
 export { default as Mode } from './Mode';
+export { default as OrderBy } from './OrderBy';

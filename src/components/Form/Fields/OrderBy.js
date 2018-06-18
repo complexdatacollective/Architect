@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { map } from 'lodash';
-import * as Fields from '../../../Form/Fields';
+import Select from './Select';
 
 const ASC = 'asc';
 const DESC = 'desc';
@@ -28,7 +28,7 @@ const Rule = compose(
   }) => (
     <div>
       <RuleHandle />
-      <Fields.Select
+      <Select
         input={{
           onChange: event =>
             handleChange(index, { variable: event.target.value }),
@@ -44,8 +44,8 @@ const Rule = compose(
             >{value}</option>
           ))
         }
-      </Fields.Select>
-      <Fields.Select
+      </Select>
+      <Select
         input={{
           onChange: event =>
             handleChange(index, { direction: event.target.value }),
@@ -58,7 +58,7 @@ const Rule = compose(
             <option key={value}>{value}</option>
           ))
         }
-      </Fields.Select>
+      </Select>
       <button type="button" onClick={() => handleDelete(index)}>X</button>
     </div>
   ),
