@@ -1,106 +1,74 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { get, isNull } from 'lodash';
-import Section from './Section';
+import { connect } from 'react-redux';
 import Guidance from './Guidance';
+import { getGuidance } from '../../selectors/guidance';
 
 class Guided extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-    sections: PropTypes.array,
-    defaultGuidance: PropTypes.node,
+    guidance: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.node,
+    ]).isRequired,
   };
 
   static defaultProps = {
     children: null,
     className: '',
-    sections: [],
-    defaultGuidance: null,
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      active: null,
-      guided: true,
+      active: true,
     };
   }
 
-  getActiveGuidance = () =>
-    (isNull(this.state.active) ? 'default' : this.state.active);
-
-  getGuidance = () =>
-    get(
-      this.props.sections,
-      [this.state.active, 'Guidance'],
-      this.props.defaultGuidance,
-    );
-
-  showGuidance = (index) => {
-    this.setState({ active: index });
-  };
-
-  toggleGuidance = () => {
-    this.setState({ guided: !this.state.guided });
+  get active() {
+    return this.state.active;
   }
 
-  resetGuidance = () => {
-    this.setState({ active: null });
-  };
+  get guidance() {
+    return this.props.guidance;
+  }
 
-  renderSections = () => {
-    const {
-      sections,
-      className,
-      defaultGuidance,
-      ...rest
-    } = this.props;
-
-    return sections
-      .map((SectionComponent, index) => {
-        const isActive = this.state.active === index;
-
-        return (
-          <Section
-            key={index}
-            isActive={isActive}
-            handleMouseEnter={() => this.showGuidance(index)}
-            handleMouseLeave={this.resetGuidance}
-          >
-            <SectionComponent {...rest} />
-          </Section>
-        );
-      });
-  };
+  toggleGuidance = () => {
+    this.setState({ active: !this.active });
+  }
 
   render() {
     const classNames = cx(
       this.props.className,
       'guided',
-      { 'guided--show-guidance': this.state.guided },
+      { 'guided--show-guidance': this.active },
     );
 
     return (
       <div className={classNames}>
         <div className="guided__content">
           { this.props.children }
-
-          <div className="guided__sections">
-            { this.renderSections() }
-          </div>
         </div>
 
         <Guidance
-          show={this.state.guided}
+          show={this.active}
           handleClickToggle={this.toggleGuidance}
-          guidance={{ key: this.getActiveGuidance(), guidance: this.getGuidance() }}
+          guidance={this.guidance}
         />
       </div>
     );
   }
 }
 
-export default Guided;
+const mapStateToProps = state => ({
+  guidance: getGuidance(state),
+});
+
+export { Guided };
+
+export default connect(
+  mapStateToProps,
+)(Guided);

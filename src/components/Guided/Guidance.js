@@ -7,7 +7,7 @@ import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const Guidance = ({
   handleClickToggle,
-  guidance: { key, guidance },
+  guidance: { key, content },
   show,
   className,
   ...props
@@ -34,7 +34,7 @@ const Guidance = ({
               classNames="guided-guidance__tween"
             >
               <div className="guided-guidance__guidance">
-                {guidance}
+                {content}
               </div>
             </CSSTransition>
           </TransitionGroup>
@@ -68,7 +68,7 @@ Guidance.propTypes = {
 
 Guidance.defaultProps = {
   className: '',
-  guidance: { key: null, guidance: null },
+  guidance: { key: null, content: null },
   show: false,
   handleClickToggle: () => {},
 };

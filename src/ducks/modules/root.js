@@ -6,6 +6,7 @@ import undoable, { excludeAction } from 'redux-undo';
 import protocol, { actionTypes as protocolActions } from './protocol';
 import session from './session';
 import protocols from './protocols';
+import guidance from './guidance';
 import { actionTypes as protocolFileActionTypes } from './protocol/file';
 
 const combineFilters = (...filters) =>
@@ -24,6 +25,7 @@ const combineFilters = (...filters) =>
 export const rootReducer = combineReducers({
   form: formReducer,
   session,
+  guidance,
   protocol: undoable(
     protocol,
     {

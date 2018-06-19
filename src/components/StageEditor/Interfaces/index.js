@@ -13,7 +13,6 @@ const interfaces = {
 
 const emptyInterface = {
   sections: [],
-  guidance: null,
 };
 
 export const getInterface = interfaceType =>
