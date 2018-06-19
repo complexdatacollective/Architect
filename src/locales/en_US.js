@@ -16,4 +16,14 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.interface.Information': (
+    <Fragment>
+      <h3>Information screen guidance</h3>
+      <p>
+        The Information Interface allows you to display text and rich media (including pictures,
+        video and audio) to your participants. Use it to help explain interview tasks, or introduce
+        concepts or ideas.
+      </p>
+    </Fragment>
+  ),
 };

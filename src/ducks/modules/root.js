@@ -25,6 +25,7 @@ const combineFilters = (...filters) =>
 export const rootReducer = combineReducers({
   form: formReducer,
   session,
+  locale: () => 'enUS',
   guidance,
   protocol: undoable(
     protocol,

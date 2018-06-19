@@ -4,6 +4,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Guidance from './Guidance';
 import { getGuidance } from '../../selectors/guidance';
+import { getContent } from '../../selectors/locales';
+
+const getDefaultGuidance = (state, defaultGuidanceContentId) => {
+  if (defaultGuidanceContentId === null) { return null; }
+
+  return {
+    content: getContent(state, defaultGuidanceContentId),
+    id: defaultGuidanceContentId,
+  };
+};
 
 class Guided extends Component {
   static propTypes = {
@@ -13,11 +23,15 @@ class Guided extends Component {
       PropTypes.string,
       PropTypes.node,
     ]).isRequired,
+    /* Next prop is used in mapStateToProps */
+    // eslint-disable-next-line react/no-unused-prop-types
+    defaultGuidance: PropTypes.string,
   };
 
   static defaultProps = {
     children: null,
     className: '',
+    defaultGuidance: null,
   };
 
   constructor(props) {
@@ -63,8 +77,8 @@ class Guided extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  guidance: getGuidance(state),
+const mapStateToProps = (state, props) => ({
+  guidance: getGuidance(state) || getDefaultGuidance(state, props.defaultGuidance),
 });
 
 export { Guided };

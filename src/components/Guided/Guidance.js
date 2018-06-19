@@ -7,7 +7,7 @@ import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const Guidance = ({
   handleClickToggle,
-  guidance: { key, content },
+  guidance: { id, content },
   show,
   className,
   ...props
@@ -26,7 +26,7 @@ const Guidance = ({
         <div className="guided-guidance__guidance-container">
           <TransitionGroup component={null}>
             <CSSTransition
-              key={key}
+              key={id}
               timeout={{
                 enter: getCSSVariableAsNumber('--animation-duration-slow-ms') + getCSSVariableAsNumber('--animation-duration-fast-ms'),
                 exit: getCSSVariableAsNumber('--animation-duration-fast-ms'),
@@ -68,7 +68,7 @@ Guidance.propTypes = {
 
 Guidance.defaultProps = {
   className: '',
-  guidance: { key: null, content: null },
+  guidance: { id: null, content: null },
   show: false,
   handleClickToggle: () => {},
 };
