@@ -70,6 +70,14 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.sociogram_prompt.attributes': (
+    <Fragment>
+      <h3>Attributes</h3>
+      <p>
+        Demo item specific guidance.
+      </p>
+    </Fragment>
+  ),
   'guidance.editor.sociogram_prompts': (
     <Fragment>
       <h3>Prompts help</h3>
