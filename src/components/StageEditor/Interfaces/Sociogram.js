@@ -5,14 +5,6 @@ import {
 } from '../sections';
 
 const Sociogram = {
-  guidance: (
-    <React.Fragment>
-      <h3>Sociogram guidance</h3>
-      <p>
-        TBD.
-      </p>
-    </React.Fragment>
-  ),
   sections: [
     Title,
     SociogramPrompts,

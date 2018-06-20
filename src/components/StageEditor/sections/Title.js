@@ -1,18 +1,21 @@
 import React, { Fragment } from 'react';
+import Guidance from '../../Guidance';
 import { ValidatedField } from '../../../components/Form';
 import SeamlessText from '../../../components/Form/Fields/SeamlessText';
 
 const Title = () => (
-  <Fragment>
-    <h2>Title</h2>
-    <ValidatedField
-      name="label"
-      component={SeamlessText}
-      placeholder="Enter your title here"
-      className="stage-editor-section-title"
-      validation={{ required: true }}
-    />
-  </Fragment>
+  <Guidance contentId="guidance.editor.title">
+    <div>
+      <h2>Title</h2>
+      <ValidatedField
+        name="label"
+        component={SeamlessText}
+        placeholder="Enter your title here"
+        className="stage-editor-section-title"
+        validation={{ required: true }}
+      />
+    </div>
+  </Guidance>
 );
 
 Title.propTypes = {

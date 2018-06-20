@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
 import { keys, get, map, toPairs, isEmpty } from 'lodash';
+import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
 import Prompt from '../../Prompt';
@@ -149,29 +150,32 @@ class SociogramPrompt extends Component {
               label="Allow positioning?"
             />
           </div>
-          <div className="stage-editor-section-prompt__group">
-            <h4 className="stage-editor-section-prompt__group-title">Attributes</h4>
-            <Field
-              name="highlight.variable"
-              component={Fields.Select}
-              className="stage-editor-section-prompt__setting"
-              label="Would you like to highlight nodes based on any attribute?"
-              onChange={this.clearEmptyField}
-              onBlur={disableBlur}
-            >
-              <option />
-              {highlightableForNodeType.map(([variableName, meta]) => (
-                <option value={variableName} key={variableName}>{meta.label}</option>
-              ))}
-            </Field>
-            <Field
-              name="highlight.allowHighlighting"
-              component={Fields.Checkbox}
-              className="stage-editor-section-prompt__setting"
-              label="Click a node to toggle this attribute (disables edge creation)"
-              onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
-            />
-          </div>
+
+          <Guidance contentId="guidance.editor.sociogram_prompt.attributes">
+            <div className="stage-editor-section-prompt__group">
+              <h4 className="stage-editor-section-prompt__group-title">Attributes</h4>
+              <Field
+                name="highlight.variable"
+                component={Fields.Select}
+                className="stage-editor-section-prompt__setting"
+                label="Would you like to highlight nodes based on any attribute?"
+                onChange={this.clearEmptyField}
+                onBlur={disableBlur}
+              >
+                <option />
+                {highlightableForNodeType.map(([variableName, meta]) => (
+                  <option value={variableName} key={variableName}>{meta.label}</option>
+                ))}
+              </Field>
+              <Field
+                name="highlight.allowHighlighting"
+                component={Fields.Checkbox}
+                className="stage-editor-section-prompt__setting"
+                label="Click a node to toggle this attribute (disables edge creation)"
+                onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
+              />
+            </div>
+          </Guidance>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Edges</h4>
             <Field

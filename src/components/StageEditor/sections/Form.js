@@ -5,6 +5,7 @@ import { Field, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { toPairs, map, get, pickBy } from 'lodash';
+import Guidance from '../../Guidance';
 import Radio from '../../Form/Fields/Radio';
 import Select from '../../Form/Fields/Select';
 
@@ -66,85 +67,66 @@ class Form extends Component {
     );
 
     return (
-      <div className={formClasses}>
-        <h2>Form</h2>
-        <p>Which form should be used to create and edit nodes on this stage?</p>
-        <div className="stage-editor-section-form">
-          <div className="stage-editor-section-form__category">
-            <Radio
-              label="Use the default node form"
-              className="stage-editor-section-form__radio"
-              input={
-                {
-                  onChange: () => this.onSelectFormCategory(DEFAULT_FORM),
-                  checked: this.state.formType === DEFAULT_FORM,
+      <Guidance contentId="guidance.editor.form">
+        <div className={formClasses}>
+          <h2>Form</h2>
+          <p>Which form should be used to create and edit nodes on this stage?</p>
+          <div className="stage-editor-section-form">
+            <div className="stage-editor-section-form__category">
+              <Radio
+                label="Use the default node form"
+                className="stage-editor-section-form__radio"
+                input={
+                  {
+                    onChange: () => this.onSelectFormCategory(DEFAULT_FORM),
+                    checked: this.state.formType === DEFAULT_FORM,
+                  }
                 }
-              }
-              readOnly
-            />
-          </div>
-          <div className={categoryClasses(forms.length === 0)}>
-            <Radio
-              label="Use a different form"
-              className="stage-editor-section-form__radio"
-              disabled={forms.length === 0}
-              input={
-                {
-                  checked: this.state.formType === CUSTOM_FORM,
+                readOnly
+              />
+            </div>
+            <div className={categoryClasses(forms.length === 0)}>
+              <Radio
+                label="Use a different form"
+                className="stage-editor-section-form__radio"
+                disabled={forms.length === 0}
+                input={
+                  {
+                    checked: this.state.formType === CUSTOM_FORM,
+                  }
                 }
-              }
-              readOnly
-            />
-            <div className="stage-editor-section-form__custom">
-              <Field
-                name="form"
-                component={Select}
-              >
-                <option disabled="disabled" value="">Select a form...</option>
-                { forms.map(formName => (
-                  <option value={formName} key={formName}>
-                    {formName}
-                  </option>
-                )) }
-              </Field>
+                readOnly
+              />
+              <div className="stage-editor-section-form__custom">
+                <Field
+                  name="form"
+                  component={Select}
+                >
+                  <option disabled="disabled" value="">Select a form...</option>
+                  { forms.map(formName => (
+                    <option value={formName} key={formName}>
+                      {formName}
+                    </option>
+                  )) }
+                </Field>
+              </div>
+            </div>
+            <div onClick={this.onClickCreateNewForm} className={categoryClasses(true)}>
+              <Radio
+                label="Create new form..."
+                className="stage-editor-section-form__radio"
+                checked={false}
+                input={{}}
+                disabled
+                readOnly
+              />
             </div>
           </div>
-          <div onClick={this.onClickCreateNewForm} className={categoryClasses(true)}>
-            <Radio
-              label="Create new form..."
-              className="stage-editor-section-form__radio"
-              checked={false}
-              input={{}}
-              disabled
-              readOnly
-            />
-          </div>
         </div>
-      </div>
+      </Guidance>
     );
   }
 }
-
-Form.Guidance = (
-  <Fragment>
-    <h3>Form help</h3>
-    <p>
-      Now you have selected a node type, you must decide which form is shown to the participant when
-      they create a new node.
-    </p>
-    <p>
-      By default, Network Canvas will generate a node form for you, which will contain all of the
-      variables you have assigned to this node type in the variable registry. If this is appropriate
-      to your needs, you can skip this section.
-    </p>
-    <p>
-      However, you should consider which variables must be collected here, and which are better
-      collected later, using a specific interview stage. Be mindful that asking the participant to
-      fill out a long form each time they create a new node will dramatically increase response
-      burden.
-    </p>
-  </Fragment>
-);
 
 const getNodeForms = (state, nodeType) => {
   const forms = get(state, 'protocol.present.forms', {});
