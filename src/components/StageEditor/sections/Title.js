@@ -4,7 +4,7 @@ import { ValidatedField } from '../../../components/Form';
 import SeamlessText from '../../../components/Form/Fields/SeamlessText';
 
 const Title = () => (
-  <Guidance guidance="guidance.title">
+  <Guidance contentId="guidance.editor.title">
     <div>
       <h2>Title</h2>
       <ValidatedField

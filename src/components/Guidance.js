@@ -6,14 +6,14 @@ import { actionCreators as guidedActionCreators } from '../ducks/modules/guidanc
 
 class Guided extends Component {
   static propTypes = {
-    guidance: PropTypes.string.isRequired,
+    contentId: PropTypes.string.isRequired,
     setGuidance: PropTypes.func.isRequired,
     clearGuidance: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
   };
 
   handleMouseEnter = () => {
-    this.props.setGuidance(this.props.guidance);
+    this.props.setGuidance(this.props.contentId);
   }
 
   handleMouseLeave = () => {
