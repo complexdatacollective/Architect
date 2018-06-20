@@ -23,7 +23,7 @@ class Guided extends Component {
       PropTypes.string,
       PropTypes.node,
     ]).isRequired,
-    /* Next prop is used in mapStateToProps */
+    /* defaultGuidance is used in mapStateToProps */
     // eslint-disable-next-line react/no-unused-prop-types
     defaultGuidance: PropTypes.string,
   };

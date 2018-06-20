@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';

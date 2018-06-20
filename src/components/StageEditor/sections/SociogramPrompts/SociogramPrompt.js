@@ -257,8 +257,6 @@ const mapStateToProps = (state, props) => {
   const variables = toPairs(getVariablesForNodeType(state, nodeType));
   const isFieldDirty = isDirty(props.form.name);
 
-  console.log(variables);
-
   return {
     layoutsForNodeType: variables.filter(([, meta]) => meta.type === 'layout'),
     highlightableForNodeType: variables.filter(([, meta]) => meta.type === 'boolean'),

@@ -20,8 +20,9 @@ export default {
     <Fragment>
       <h3>Content Items help</h3>
       <p>
-        Each information interface can display up to four &quot;content boxes&quot;. Each content box
-        can display either: text, an image, a video, or some audio.
+        Each information interface can display up to four
+        &quot;content boxes&quot;. Each content box can display
+        either: text, an image, a video, or some audio.
       </p>
       <p>
         You can use markdown style syntax to add formatting to your text. Supported formatting
@@ -54,13 +55,13 @@ export default {
     <Fragment>
       <h3>Form help</h3>
       <p>
-        Now you have selected a node type, you must decide which form is shown to the participant when
-        they create a new node.
+        Now you have selected a node type, you must decide which form is shown to the participant
+        when they create a new node.
       </p>
       <p>
         By default, Network Canvas will generate a node form for you, which will contain all of the
-        variables you have assigned to this node type in the variable registry. If this is appropriate
-        to your needs, you can skip this section.
+        variables you have assigned to this node type in the variable registry. If this is
+        appropriate to your needs, you can skip this section.
       </p>
       <p>
         However, you should consider which variables must be collected here, and which are better
@@ -101,16 +102,16 @@ export default {
         order to encourage the recall of nodes.
       </p>
       <p>
-        Prompts should be carefully considered, and grounded in existing literature wherever possible.
-        Think carefully about if you want to use one name generator with muiltiple prompts, or many
-        name generators with a single prompt. Your choice depends on your specific research goals,
-        and the needs of your research population.
+        Prompts should be carefully considered, and grounded in existing literature wherever
+        possible.  Think carefully about if you want to use one name generator with muiltiple
+        prompts, or many name generators with a single prompt. Your choice depends on your specific
+        research goals, and the needs of your research population.
       </p>
       <p>
         Each prompt can optionally assign a value to one or more node variables. You can use this
         functionality to keep track of where a node was created, or to assign an attribute to a node
-        based on the prompt (such as indicating a node is a potential family member, if elicited in a
-        prompt about family).
+        based on the prompt (such as indicating a node is a potential family member, if elicited in
+        a prompt about family).
       </p>
     </Fragment>
   ),

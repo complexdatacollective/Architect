@@ -12,7 +12,7 @@ const DIRECTIONS = [ASC, DESC];
 const RuleHandle = compose(
   SortableHandle,
 )(
-  () => (<div>[::]</div>)
+  () => (<div>[::]</div>),
 );
 
 const Rule = compose(
@@ -157,7 +157,7 @@ class OrderBy extends Component {
         <button type="button" onClick={this.handleAddNewRule}>Add</button>
       </div>
     );
-  };
-};
+  }
+}
 
 export default OrderBy;
