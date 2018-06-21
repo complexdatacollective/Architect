@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Icon } from '../../ui/components';
 import SortableHandle from './SortableHandle';
 
-class Prompt extends Component {
+class ExpandablePrompt extends Component {
   static propTypes = {
     className: PropTypes.string,
     open: PropTypes.bool,
     handleDelete: PropTypes.func.isRequired,
+    preview: PropTypes.node,
     children: PropTypes.node,
   };
 
@@ -35,7 +37,7 @@ class Prompt extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { preview, children, handleDelete } = this.props;
 
     const promptClasses = cx(
       'stage-editor-section-prompt',
@@ -45,18 +47,35 @@ class Prompt extends Component {
 
     return (
       <div className={promptClasses}>
+        <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
+          <div className="stage-editor-section-prompt__preview-content">
+            <SortableHandle />
+
+            {preview}
+
+            <div onClick={handleDelete}>delete</div>
+          </div>
+          <div className="stage-editor-section-prompt__preview-indicator">
+            <Icon
+              name="chevron-down"
+              color="white"
+              className="stage-editor-section-prompt__preview-indicator--open"
+            />
+            <Icon
+              name="chevron-up"
+              color="white"
+              className="stage-editor-section-prompt__preview-indicator--close"
+            />
+          </div>
+        </div>
         <div className="stage-editor-section-prompt__editor">
-          <SortableHandle />
-
           {children}
-
-          <div onClick={handleDelete}>delete</div>
         </div>
       </div>
     );
   }
 }
 
-export { Prompt };
+export { ExpandablePrompt };
 
-export default Prompt;
+export default ExpandablePrompt;

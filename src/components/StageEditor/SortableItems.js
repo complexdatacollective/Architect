@@ -12,8 +12,14 @@ const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
   <TransitionGroup className="stage-editor-sortable-items">
     { fields.map((fieldId, index) => (
       <WipeTransition key={get(fields.get(index), 'id', index)}>
-        <SortableItem remove={() => fields.remove(index)} index={index}>
-          <ItemComponent fieldId={fieldId} index={index} fields={fields} {...rest} />
+        <SortableItem index={index}>
+          <ItemComponent
+            fieldId={fieldId}
+            index={index}
+            fields={fields}
+            handleDelete={() => { fields.remove(index); }}
+            {...rest}
+          />
         </SortableItem>
       </WipeTransition>
     )) }
