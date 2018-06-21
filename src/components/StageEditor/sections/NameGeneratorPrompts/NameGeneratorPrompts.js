@@ -10,7 +10,7 @@ import cx from 'classnames';
 import Guidance from '../../../Guidance';
 import RoundButton from '../../../Form/RoundButton';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
-import SortableItems from '../../SortableItems';
+import Items from '../../Sortable/Items';
 
 const fieldName = 'prompts';
 
@@ -28,7 +28,7 @@ const NameGeneratorPromptsSection = ({
         <div className="stage-editor-section-name-generator-prompts__prompts">
           <FieldArray
             name={fieldName}
-            component={SortableItems}
+            component={Items}
             itemComponent={NameGeneratorPrompt}
             variableRegistry={variableRegistry}
             form={form}

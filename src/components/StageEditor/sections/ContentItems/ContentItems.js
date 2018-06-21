@@ -6,7 +6,7 @@ import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import Guidance from '../../../Guidance';
 import AddContentButton from './AddContentButton';
-import SortableItems from '../../SortableItems';
+import Items from '../../Sortable/Items';
 import ContentItem from './ContentItem';
 
 const ContentItems = ({ form, createNewItem }) => (
@@ -16,7 +16,7 @@ const ContentItems = ({ form, createNewItem }) => (
       <p>Create any content you wish to display on the information screen.</p>
       <FieldArray
         name="items"
-        component={SortableItems}
+        component={Items}
         itemComponent={ContentItem}
         form={form}
       />

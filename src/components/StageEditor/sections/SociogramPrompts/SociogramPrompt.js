@@ -7,7 +7,7 @@ import { keys, get, map, toPairs, isEmpty } from 'lodash';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
-import ExpandablePrompt from '../../ExpandablePrompt';
+import ExpandableItem from '../../Sortable/ExpandableItem';
 
 // Background options
 const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
@@ -78,7 +78,7 @@ class SociogramPrompt extends Component {
     } = this.props;
 
     return (
-      <ExpandablePrompt
+      <ExpandableItem
         className="stage-editor-section-sociogram-prompt"
         open={this.props.isDirty}
         preview={(
@@ -244,7 +244,7 @@ class SociogramPrompt extends Component {
             }
           </div>
         </FormSection>
-      </ExpandablePrompt>
+      </ExpandableItem>
     );
   }
 }

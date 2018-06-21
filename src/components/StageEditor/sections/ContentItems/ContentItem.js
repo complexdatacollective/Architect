@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { get } from 'lodash';
 import * as Fields from '../../../../components/Form/Fields';
-import SortableHandle from '../../SortableHandle';
+import Handle from '../../Sortable/Handle';
 
 const contentInputs = {
   text: Fields.Markdown,
@@ -20,7 +20,7 @@ const ContentItem = ({ fieldId, type, handleDelete }) => {
 
   return (
     <div>
-      <SortableHandle />
+      <Handle />
 
       <Field
         name={`${fieldId}.content`}

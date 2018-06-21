@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Icon } from '../../ui/components';
-import SortableHandle from './SortableHandle';
+import { Icon } from '../../../ui/components';
+import Handle from './Handle';
 
 class ExpandablePrompt extends Component {
   static propTypes = {
@@ -49,7 +49,7 @@ class ExpandablePrompt extends Component {
       <div className={promptClasses}>
         <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
           <div className="stage-editor-section-prompt__preview-content">
-            <SortableHandle />
+            <Handle />
 
             {preview}
 

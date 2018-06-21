@@ -7,7 +7,7 @@ import uuid from 'uuid';
 import cx from 'classnames';
 import { keys, has, get } from 'lodash';
 import { Button } from '../../../../ui/components';
-import SortableItems from '../../SortableItems';
+import Items from '../../Sortable/Items';
 import NodePanel from './NodePanel';
 
 const NodePanels = ({ form, createNewPanel, dataSources, disabled }) => (
@@ -17,7 +17,7 @@ const NodePanels = ({ form, createNewPanel, dataSources, disabled }) => (
       <p>Create any content you wish to display on the information screen.</p>
       <FieldArray
         name="panels"
-        component={SortableItems}
+        component={Items}
         itemComponent={NodePanel}
         form={form}
         dataSources={dataSources}

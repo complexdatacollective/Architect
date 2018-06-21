@@ -2,13 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers, defaultProps } from 'recompose';
 import { TransitionGroup } from 'react-transition-group';
-import { SortableContainer } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
-import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
-import WipeTransition from '../Transitions/Wipe';
-import SortableItem from './SortableItem';
+import { getCSSVariableAsNumber } from '../../../utils/CSSVariables';
+import WipeTransition from '../../Transitions/Wipe';
 
-const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
+const SortableItem = SortableElement(
+  ({ children }) => (
+    <div className="stage-editor-sortable-item">
+      { children }
+    </div>
+  ),
+);
+
+const Items = ({ fields, itemComponent: ItemComponent, ...rest }) => (
   <TransitionGroup className="stage-editor-sortable-items">
     { fields.map((fieldId, index) => (
       <WipeTransition key={get(fields.get(index), 'id', index)}>
@@ -26,17 +33,17 @@ const SortableItems = ({ fields, itemComponent: ItemComponent, ...rest }) => (
   </TransitionGroup>
 );
 
-SortableItems.propTypes = {
+Items.propTypes = {
   fields: PropTypes.object.isRequired,
   itemComponent: PropTypes.func.isRequired,
   getId: PropTypes.func,
 };
 
-SortableItems.defaultProps = {
+Items.defaultProps = {
   getId: fieldId => fieldId,
 };
 
-export { SortableItems };
+export { Items };
 
 export default compose(
   defaultProps({
@@ -48,4 +55,4 @@ export default compose(
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
   SortableContainer,
-)(SortableItems);
+)(Items);

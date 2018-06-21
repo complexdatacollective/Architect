@@ -8,7 +8,7 @@ import uuid from 'uuid';
 import Guidance from '../../../Guidance';
 import RoundButton from '../../../Form/RoundButton';
 import SociogramPrompt from './SociogramPrompt';
-import SortableItems from '../../SortableItems';
+import Items from '../../Sortable/Items';
 
 const fieldName = 'prompts';
 
@@ -24,7 +24,7 @@ const SociogramPrompts = ({
         <div className="stage-editor-section-name-generator-prompts__prompts">
           <FieldArray
             name={fieldName}
-            component={SortableItems}
+            component={Items}
             itemComponent={SociogramPrompt}
             form={form}
           />

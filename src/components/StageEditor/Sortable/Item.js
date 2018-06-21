@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import SortableHandle from './SortableHandle';
+import Handle from './Handle';
 
 class Prompt extends Component {
   static propTypes = {
@@ -35,7 +35,7 @@ class Prompt extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, handleDelete } = this.props;
 
     const promptClasses = cx(
       'stage-editor-section-prompt',
@@ -46,7 +46,7 @@ class Prompt extends Component {
     return (
       <div className={promptClasses}>
         <div className="stage-editor-section-prompt__editor">
-          <SortableHandle />
+          <Handle />
 
           {children}
 
