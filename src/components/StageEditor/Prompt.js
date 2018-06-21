@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { SortableHandle } from 'react-sortable-hoc';
 import { Icon } from '../../ui/components';
+
+const Handle = SortableHandle(() => (
+  <div className="stage-editor-sortable-item__handle" />
+));
 
 class Prompt extends Component {
   static propTypes = {
@@ -35,7 +40,7 @@ class Prompt extends Component {
   }
 
   render() {
-    const { preview, children } = this.props;
+    const { preview, children, handleDelete } = this.props;
 
     const promptClasses = cx(
       'stage-editor-section-prompt',
@@ -47,7 +52,11 @@ class Prompt extends Component {
       <div className={promptClasses}>
         <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
           <div className="stage-editor-section-prompt__preview-content">
+            <Handle />
+
             {preview}
+
+            <a onClick={handleDelete}>delete</a>
           </div>
           <div className="stage-editor-section-prompt__preview-indicator">
             <Icon
