@@ -83,22 +83,24 @@ class SociogramPrompt extends Component {
         open={this.props.isDirty}
         preview={(
           <FormSection name={fieldId}>
-            <div className="stage-editor-section-sociogram-prompt__preview-icon">
-              <Field
-                name="subject.type"
+            <div className="stage-editor-section-sociogram-prompt__preview">
+              <div className="stage-editor-section-sociogram-prompt__preview-icon">
+                <Field
+                  name="subject.type"
 
-                component={field => (<Node label={field.input.value} />)}
+                  component={field => (<Node label={field.input.value} />)}
+                />
+              </div>
+              <Field
+                name="text"
+                component={field => (
+                  <Markdown
+                    className="stage-editor-section-sociogram-prompt__preview-text"
+                    source={field.input.value}
+                  />
+                )}
               />
             </div>
-            <Field
-              name="text"
-              component={field => (
-                <Markdown
-                  className="stage-editor-section-sociogram-prompt__preview-text"
-                  source={field.input.value}
-                />
-              )}
-            />
           </FormSection>
         )}
         {...rest}

@@ -8,9 +8,8 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import cx from 'classnames';
 import Guidance from '../../../Guidance';
-import RoundButton from '../../../Form/RoundButton';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
-import Items from '../../Sortable/Items';
+import { Items, NewButton } from '../../Sortable';
 
 const fieldName = 'prompts';
 
@@ -24,8 +23,8 @@ const NameGeneratorPromptsSection = ({
     <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
       <h2>Prompts</h2>
       <p>Name gen prompt specific</p>
-      <div className="stage-editor-section-name-generator-prompts">
-        <div className="stage-editor-section-name-generator-prompts__prompts">
+      <div className="stage-editor-section-prompts">
+        <div className="stage-editor-section-prompts__prompts">
           <FieldArray
             name={fieldName}
             component={Items}
@@ -34,9 +33,7 @@ const NameGeneratorPromptsSection = ({
             form={form}
           />
         </div>
-        <div className="stage-editor-section-name-generator-prompts__add">
-          <RoundButton type="button" onClick={addNewPrompt} content="+" />
-        </div>
+        <NewButton onClick={addNewPrompt} />
       </div>
     </div>
   </Guidance>

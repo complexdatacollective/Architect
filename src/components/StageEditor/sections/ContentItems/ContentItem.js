@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { get } from 'lodash';
 import * as Fields from '../../../../components/Form/Fields';
-import Handle from '../../Sortable/Handle';
+import { Item } from '../../Sortable';
 
 const contentInputs = {
   text: Fields.Markdown,
@@ -15,20 +15,16 @@ const contentInputs = {
 
 const getContentInput = type => get(contentInputs, type, Fields.Markdown);
 
-const ContentItem = ({ fieldId, type, handleDelete }) => {
+const ContentItem = ({ fieldId, type, ...rest }) => {
   const ContentInput = getContentInput(type);
 
   return (
-    <div>
-      <Handle />
-
+    <Item {...rest}>
       <Field
         name={`${fieldId}.content`}
         component={ContentInput}
       />
-
-      <div onClick={handleDelete}>delete</div>
-    </div>
+    </Item>
   );
 };
 

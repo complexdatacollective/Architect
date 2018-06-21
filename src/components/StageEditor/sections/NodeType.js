@@ -36,7 +36,7 @@ class NodeType extends Component {
       disabled,
     } = this.props;
 
-    const nodeTypeClasses = cx('stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
+    const nodeTypeClasses = cx('stage-editor-section', 'stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
 
     return (
       <Guidance contentId="guidance.editor.node_type">

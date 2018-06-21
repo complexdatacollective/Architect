@@ -1,8 +1,11 @@
 import React from 'react';
 import { SortableHandle } from 'react-sortable-hoc';
+import { Icon } from '../../../ui/components';
 
-const Handle = () => (
-  <div className="stage-editor-sortable-item__handle" />
+const Handle = props => (
+  <div className="stage-editor-sortable-handle" {...props}>
+    <Icon name="move" />
+  </div>
 );
 
 export { Handle };

@@ -1,0 +1,14 @@
+.stage-editor-sortable-handle {
+  width: unit(4);
+  height: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    width: unit(2);
+    height: unit(2);
+  }
+}

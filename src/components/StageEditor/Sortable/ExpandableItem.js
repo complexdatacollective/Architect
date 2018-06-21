@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Icon } from '../../../ui/components';
 import Handle from './Handle';
+import DeleteButton from './DeleteButton';
 
 class ExpandablePrompt extends Component {
   static propTypes = {
@@ -39,36 +40,45 @@ class ExpandablePrompt extends Component {
   render() {
     const { preview, children, handleDelete } = this.props;
 
-    const promptClasses = cx(
-      'stage-editor-section-prompt',
-      { 'stage-editor-section-prompt--open': this.state.isOpen },
+    const componentClasses = cx(
+      'stage-editor-sortable-expandable-item',
+      { 'stage-editor-sortable-expandable-item--open': this.state.isOpen },
       this.props.className,
     );
 
     return (
-      <div className={promptClasses}>
-        <div className="stage-editor-section-prompt__preview" onClick={this.handleToggleOpen}>
-          <div className="stage-editor-section-prompt__preview-content">
+      <div className={componentClasses}>
+        <div className="stage-editor-sortable-expandable-item__preview">
+          <div
+            className="stage-editor-sortable-expandable-item__control stage-editor-sortable-expandable-item__control--left"
+          >
             <Handle />
-
-            {preview}
-
-            <div onClick={handleDelete}>delete</div>
           </div>
-          <div className="stage-editor-section-prompt__preview-indicator">
-            <Icon
-              name="chevron-down"
-              color="white"
-              className="stage-editor-section-prompt__preview-indicator--open"
-            />
-            <Icon
-              name="chevron-up"
-              color="white"
-              className="stage-editor-section-prompt__preview-indicator--close"
-            />
+          <div className="stage-editor-sortable-expandable-item__preview-content">
+            {preview}
+          </div>
+          <div
+            className="stage-editor-sortable-expandable-item__control stage-editor-sortable-expandable-item__control--right"
+          >
+            <DeleteButton onClick={handleDelete} />
           </div>
         </div>
-        <div className="stage-editor-section-prompt__editor">
+        <div
+          className="stage-editor-sortable-expandable-item__expand"
+          onClick={this.handleToggleOpen}
+        >
+          <Icon
+            name="chevron-down"
+            color="white"
+            className="stage-editor-sortable-expandable-item__expand--open"
+          />
+          <Icon
+            name="chevron-up"
+            color="white"
+            className="stage-editor-sortable-expandable-item__expand--close"
+          />
+        </div>
+        <div className="stage-editor-sortable-expandable-item__content">
           {children}
         </div>
       </div>

@@ -1,62 +1,34 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 import Handle from './Handle';
+import DeleteButton from './DeleteButton';
 
-class Prompt extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    open: PropTypes.bool,
-    handleDelete: PropTypes.func.isRequired,
-    children: PropTypes.node,
-  };
+const Item = ({ children, handleDelete, className }) => (
+  <div className={cx('stage-editor-sortable-item', className)}>
+    <div className="stage-editor-sortable-item__control stage-editor-sortable-item__control--left">
+      <Handle />
+    </div>
+    <div className="stage-editor-sortable-item__content">
+      {children}
+    </div>
+    <div className="stage-editor-sortable-item__control stage-editor-sortable-item__control--right">
+      <DeleteButton onClick={handleDelete} />
+    </div>
+  </div>
+);
 
-  static defaultProps = {
-    className: null,
-    open: false,
-    preview: null,
-    children: null,
-  };
+Item.propTypes = {
+  className: PropTypes.string,
+  handleDelete: PropTypes.func.isRequired,
+  children: PropTypes.node,
+};
 
-  constructor(props) {
-    super(props);
+Item.defaultProps = {
+  className: null,
+  children: null,
+};
 
-    this.state = {
-      isOpen: false,
-    };
-  }
+export { Item };
 
-  componentWillMount() {
-    this.setState({ isOpen: this.props.open });
-  }
-
-  handleToggleOpen = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
-
-  render() {
-    const { children, handleDelete } = this.props;
-
-    const promptClasses = cx(
-      'stage-editor-section-prompt',
-      { 'stage-editor-section-prompt--open': this.state.isOpen },
-      this.props.className,
-    );
-
-    return (
-      <div className={promptClasses}>
-        <div className="stage-editor-section-prompt__editor">
-          <Handle />
-
-          {children}
-
-          <div onClick={handleDelete}>delete</div>
-        </div>
-      </div>
-    );
-  }
-}
-
-export { Prompt };
-
-export default Prompt;
+export default Item;

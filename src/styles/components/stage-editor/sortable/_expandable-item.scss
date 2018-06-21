@@ -1,0 +1,100 @@
+$component-name: stage-editor-sortable-expandable-item;
+
+.#{$component-name} {
+  width: 100%;
+
+  &__preview {
+    background-color: var(--architect-sortable-preview-background);
+    color: var(--architect-sortable-preview-text);
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    &-content {
+      flex-grow: 1;
+      padding: unit(2) 0;
+    }
+  }
+
+  &__control {
+    padding: unit(2);
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+
+    &--right {
+      align-items: flex-start;
+    }
+  }
+
+  &__expand {
+    background-color: var(--architect-sortable-preview-background--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: unit(1);
+    cursor: pointer;
+
+    &--open,
+    &--close {
+      height: unit(2.5);
+    }
+
+    &--open {
+      display: block;
+    }
+
+    &--close {
+      display: none;
+    }
+  }
+
+  &__content {
+    display: none;
+    opacity: 0;
+    transform-origin: 50% 0;
+    background-color: var(--architect-sortable-background);
+    color: var(--architect-sortable-text);
+    border-width: 0 2px 2px;
+    border-color: var(--architect-sortable-header-background);
+    border-style:  solid;
+    padding: unit(2);
+  }
+
+  &--open {
+    .#{$component-name}__content {
+      display: block;
+      animation-fill-mode: forwards;
+      animation-name: grow;
+      animation-duration: var(--animation-duration-standard);
+      animation-timing-function: var(--animation-easing);
+    }
+
+    .#{$component-name}__expand {
+      &--open {
+        display: none;
+      }
+
+      &--close {
+        display: block;
+      }
+    }
+  }
+}
+
+@keyframes grow {
+  0% {
+    opacity: 0;
+  }
+
+  1% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}

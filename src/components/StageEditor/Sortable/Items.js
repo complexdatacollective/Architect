@@ -9,7 +9,7 @@ import WipeTransition from '../../Transitions/Wipe';
 
 const SortableItem = SortableElement(
   ({ children }) => (
-    <div className="stage-editor-sortable-item">
+    <div className="stage-editor-sortable-items__item">
       { children }
     </div>
   ),

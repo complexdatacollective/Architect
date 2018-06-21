@@ -1,0 +1,27 @@
+$component-name: stage-editor-sortable-item;
+
+.#{$component-name} {
+  width: 100%;
+  border: 2px solid var(--architect-sortable-preview-background);
+  background-color: var(--architect-sortable-background);
+  color: var(--architect-sortable-text);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  &__control {
+    padding: unit(2);
+    flex-grow: 0;
+
+    .icon {
+      .cls-1, .cls-2 {
+        fill: var(--architect-sortable-preview-background);
+      }
+    }
+  }
+
+  &__content {
+    padding: unit(2);
+    flex-grow: 1;
+  }
+}

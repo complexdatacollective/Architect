@@ -1,0 +1,14 @@
+.stage-editor-sortable-delete-button {
+  width: unit(4);
+  height: unit(4);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    width: unit(2);
+    height: unit(2);
+  }
+}
