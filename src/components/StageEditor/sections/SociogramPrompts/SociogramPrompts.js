@@ -16,7 +16,7 @@ const SociogramPrompts = ({
   addNewPrompt,
 }) => (
   <Guidance contentId="guidance.editor.sociogram_prompts">
-    <div>
+    <div className="stage-editor-section">
       <h2>Prompts</h2>
       <p>Add prompts to your Sociogram:</p>
       <div className="stage-editor-section-prompts">
