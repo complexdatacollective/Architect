@@ -7,6 +7,9 @@
     flex-direction: column;
     width: calc(100vw - 30px);
     padding: unit(4);
+    transition-property: width;
+    transition-duration: var(--animation-duration-slow);
+    transition-timing-function: var(--animation-easing);
   }
 
   &--show-guidance {
