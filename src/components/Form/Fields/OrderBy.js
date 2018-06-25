@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { map } from 'lodash';
+import { Icon } from '../../../ui/components';
 import Select from './Select';
 
 const ASC = 'asc';
@@ -12,7 +13,23 @@ const DIRECTIONS = [ASC, DESC];
 const RuleHandle = compose(
   SortableHandle,
 )(
-  () => (<div>[::]</div>),
+  () => (
+    <div className="form-fields-order-by__handle">
+      <Icon name="move" />
+    </div>
+  ),
+);
+
+const RuleDelete = props => (
+  <div className="form-fields-order-by__delete" {...props}>
+    <Icon name="delete" />
+  </div>
+);
+
+const AddRule = props => (
+  <div className="form-fields-order-by__add" {...props}>
+    <Icon name="add" />
+  </div>
 );
 
 const Rule = compose(
@@ -26,40 +43,50 @@ const Rule = compose(
     handleChange,
     handleDelete,
   }) => (
-    <div>
-      <RuleHandle />
-      <Select
-        input={{
-          onChange: event =>
-            handleChange(index, { variable: event.target.value }),
-          value: variable,
-        }}
-      >
-        <option />
-        {
-          variables.map(value => (
-            <option
-              key={value}
-              disabled={disabledVariables.includes(value)}
-            >{value}</option>
-          ))
-        }
-      </Select>
-      <Select
-        input={{
-          onChange: event =>
-            handleChange(index, { direction: event.target.value }),
-          value: direction,
-        }}
-      >
-        <option />
-        {
-          DIRECTIONS.map(value => (
-            <option key={value}>{value}</option>
-          ))
-        }
-      </Select>
-      <button type="button" onClick={() => handleDelete(index)}>X</button>
+    <div className="form-fields-order-by__rule">
+      <div className="form-fields-order-by__rule-control">
+        <RuleHandle />
+      </div>
+      <div className="form-fields-order-by__rule-options">
+        <div className="form-fields-order-by__rule-option">
+          <Select
+            input={{
+              onChange: event =>
+                handleChange(index, { variable: event.target.value }),
+              value: variable,
+            }}
+          >
+            <option />
+            {
+              variables.map(value => (
+                <option
+                  key={value}
+                  disabled={disabledVariables.includes(value)}
+                >{value}</option>
+              ))
+            }
+          </Select>
+        </div>
+        <div className="form-fields-order-by__rule-option">
+          <Select
+            input={{
+              onChange: event =>
+                handleChange(index, { direction: event.target.value }),
+              value: direction,
+            }}
+          >
+            <option />
+            {
+              DIRECTIONS.map(value => (
+                <option key={value}>{value}</option>
+              ))
+            }
+          </Select>
+        </div>
+      </div>
+      <div className="form-fields-order-by__rule-control">
+        <RuleDelete onClick={() => handleDelete(index)} />
+      </div>
     </div>
   ),
 );
@@ -72,21 +99,23 @@ const Rules = compose(
   SortableContainer,
 )(
   ({ variables, rules, handleChange, handleDelete }) => (
-    <div>
-      {
-        rules.map((rule, index) => (
-          <Rule
-            variables={variables}
-            disabledVariables={map(rules, 'variable')}
-            handleChange={handleChange}
-            handleDelete={handleDelete}
-            index={index}
-            key={index}
-            rule={rule}
-            sortIndex={index}
-          />
-        ))
-      }
+    <div className="form-fields-order-by">
+      <div className="form-fields-order-by__rules">
+        {
+          rules.map((rule, index) => (
+            <Rule
+              variables={variables}
+              disabledVariables={map(rules, 'variable')}
+              handleChange={handleChange}
+              handleDelete={handleDelete}
+              index={index}
+              key={index}
+              rule={rule}
+              sortIndex={index}
+            />
+          ))
+        }
+      </div>
     </div>
   ),
 );
@@ -98,6 +127,7 @@ class OrderBy extends Component {
       value: [],
       onChange: () => {},
     },
+    label: '',
   };
 
   static propTypes = {
@@ -106,6 +136,7 @@ class OrderBy extends Component {
       value: PropTypes.array,
       onChange: PropTypes.func,
     }),
+    label: PropTypes.string,
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -146,7 +177,10 @@ class OrderBy extends Component {
     if (this.props.variables.length === 0) { return null; }
 
     return (
-      <div>
+      <div className="form-fields-order-by">
+        { this.props.label &&
+          <div className="form-fields-order-by__label">{this.props.label}</div>
+        }
         <Rules
           rules={this.value}
           variables={this.props.variables}
@@ -154,7 +188,7 @@ class OrderBy extends Component {
           handleDelete={this.handleDelete}
           onSortEnd={this.onSortEnd}
         />
-        <button type="button" onClick={this.handleAddNewRule}>Add</button>
+        <AddRule onClick={this.handleAddNewRule} />
       </div>
     );
   }
