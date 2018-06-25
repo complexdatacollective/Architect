@@ -14,7 +14,8 @@ $component-name: stage-editor-sortable-item;
     flex-grow: 0;
 
     .icon {
-      .cls-1, .cls-2 {
+      .cls-1,
+      .cls-2 {
         fill: var(--architect-sortable-preview-background);
       }
     }
