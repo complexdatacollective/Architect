@@ -42,12 +42,13 @@ export default {
         choose from your existing node types, or create a new one.
       </p>
       <p>
-        Think of the node&apos;s &quot;type&quot; as its most fundamental attribute. To ascertain what
-        it may be, ask yourself what the node represents. For example, is it a person? A place?
+        Think of the node&apos;s &quot;type&quot; as its most fundamental attribute. To ascertain
+        what it may be, ask yourself what the node represents. For example, is it a person? A place?
       </p>
       <p>
-        Node types are fundamental to the way that Network Canvas works. A node&apos;s type determines
-        it&apos;s visual properties, as well as the variables available to assign on other interfaces.
+        Node types are fundamental to the way that Network Canvas works. A node&apos;s type
+        determines it&apos;s visual properties, as well as the variables available to assign on
+        other interfaces.
       </p>
     </Fragment>
   ),
