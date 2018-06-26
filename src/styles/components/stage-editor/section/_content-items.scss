@@ -34,24 +34,4 @@
 
 
   }
-
-  &__add {
-    width: unit(4);
-    height: unit(4);
-    cursor: pointer;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--architect-sortable-preview-background--light);
-
-    .icon {
-      width: unit(2);
-      height: unit(2);
-
-      .cls-1 {
-        fill: var(--architect-sortable-preview-text);
-      }
-    }
-  }
 }
