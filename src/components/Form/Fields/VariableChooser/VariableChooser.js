@@ -95,9 +95,8 @@ class VariableChooser extends Component {
                     onChange: this.onSelectVariable,
                     value: this.state.editing || '',
                   }}
-                  defaultValue=""
                 >
-                  <option value="" disabled>Variable name...</option>
+                  <option value="" disabled>&mdash; variable name &mdash;</option>
                   {
                     toPairs(variableRegistry)
                       .map(([variableName]) => (

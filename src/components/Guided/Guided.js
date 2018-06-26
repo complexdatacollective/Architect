@@ -19,8 +19,10 @@ class Guided extends Component {
   static propTypes = {
     className: PropTypes.string,
     children: PropTypes.node,
-    guidance: PropTypes.node.isRequired,
-    // guidance: PropTypes.any,
+    guidance: PropTypes.shape({
+      content: PropTypes.node,
+      id: PropTypes.string,
+    }).isRequired,
     /* defaultGuidance is used in mapStateToProps */
     // eslint-disable-next-line react/no-unused-prop-types
     defaultGuidance: PropTypes.string,

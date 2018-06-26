@@ -22,10 +22,9 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
         name={`${fieldId}.dataSource`}
         component={Select}
         placeholder="Panel title"
-        defaultValue=""
       >
-        <option value="" disabled>Select data source</option>
-        <option key="existing" value="existing">Current network</option>
+        <option value="" disabled>&mdash; Select data source &mdash;</option>
+        <option value="existing">Current network</option>
         {
           dataSources
             .map(dataSource => (
