@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
-import { keys, get, map, toPairs, isEmpty } from 'lodash';
+import { keys, get, toPairs, isEmpty } from 'lodash';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
 import * as Fields from '../../../Form/Fields';
@@ -25,7 +25,7 @@ class SociogramPrompt extends Component {
     nodeTypes: PropTypes.array.isRequired,
     edgeTypes: PropTypes.array.isRequired,
     layoutsForNodeType: PropTypes.array.isRequired,
-    variablesForNodeType: PropTypes.array.isRequired,
+    variablesForNodeType: PropTypes.object.isRequired,
     highlightableForNodeType: PropTypes.array.isRequired,
     clearField: PropTypes.func.isRequired,
     isDirty: PropTypes.bool,
@@ -130,7 +130,7 @@ class SociogramPrompt extends Component {
               name="sortOrderBy"
               component={Fields.OrderBy}
               className="stage-editor-section-prompt__setting"
-              variables={['*', ...variablesForNodeType]}
+              variables={variablesForNodeType}
               label="How would you like to sort the node bin?"
             />
           </div>
@@ -258,13 +258,15 @@ const getVariablesForNodeType = (state, nodeType) => {
 
 const mapStateToProps = (state, props) => {
   const nodeType = get(props.form.getValues(state, props.fieldId), 'subject.type');
-  const variables = toPairs(getVariablesForNodeType(state, nodeType));
+  const variables = getVariablesForNodeType(state, nodeType);
+  const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
+  const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
   const isFieldDirty = isDirty(props.form.name);
 
   return {
-    layoutsForNodeType: variables.filter(([, meta]) => meta.type === 'layout'),
-    highlightableForNodeType: variables.filter(([, meta]) => meta.type === 'boolean'),
-    variablesForNodeType: map(variables, 0),
+    layoutsForNodeType,
+    highlightableForNodeType,
+    variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
     nodeTypes: keys(state.protocol.present.variableRegistry.node),
     edgeTypes: keys(state.protocol.present.variableRegistry.edge),

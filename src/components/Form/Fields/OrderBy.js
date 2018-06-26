@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
-import { map, isArray } from 'lodash';
+import { map, isArray, toPairs } from 'lodash';
 import { Icon } from '../../../ui/components';
 import Select from './Select';
 
+const NON_SORTABLE_TYPES = ['layout'];
 const ASC = 'asc';
 const DESC = 'desc';
 const DIRECTIONS = [ASC, DESC];
@@ -122,7 +123,7 @@ const Rules = compose(
 
 class OrderBy extends Component {
   static defaultProps = {
-    variables: [],
+    variables: {},
     input: {
       value: [],
       onChange: () => {},
@@ -131,7 +132,7 @@ class OrderBy extends Component {
   };
 
   static propTypes = {
-    variables: PropTypes.array,
+    variables: PropTypes.object,
     input: PropTypes.shape({
       value: PropTypes.oneOfType([
         PropTypes.array,
@@ -149,6 +150,22 @@ class OrderBy extends Component {
 
   get value() {
     return isArray(this.props.input.value) ? this.props.input.value : [];
+  }
+
+  get sortableVariableNames() {
+    return toPairs(this.props.variables).filter(
+      ([, { type }]) => !NON_SORTABLE_TYPES.includes(type),
+    ).map(
+      ([name]) => name,
+    );
+  }
+
+  get variables() {
+    return ['*', ...this.sortableVariableNames];
+  }
+
+  get areRulesFull() {
+    return this.value.length >= this.variables.length;
   }
 
   handleChange = (index, updatedRule) => {
@@ -177,7 +194,7 @@ class OrderBy extends Component {
   };
 
   render() {
-    if (this.props.variables.length === 0) { return null; }
+    if (this.variables.length === 0) { return null; }
 
     return (
       <div className="form-fields-order-by">
@@ -186,12 +203,14 @@ class OrderBy extends Component {
         }
         <Rules
           rules={this.value}
-          variables={this.props.variables}
+          variables={this.variables}
           handleChange={this.handleChange}
           handleDelete={this.handleDelete}
           onSortEnd={this.onSortEnd}
         />
-        <AddRule onClick={this.handleAddNewRule} />
+        { !this.areRulesFull &&
+          <AddRule onClick={this.handleAddNewRule} />
+        }
       </div>
     );
   }
