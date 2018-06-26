@@ -11,7 +11,7 @@ const ASC = 'asc';
 const DESC = 'desc';
 const DIRECTIONS = [
   [ASC, 'ascending'],
-  [DESC, 'descending']
+  [DESC, 'descending'],
 ];
 
 const RuleHandle = compose(
