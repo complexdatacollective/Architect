@@ -20,7 +20,9 @@ class StageEditor extends Component {
   }
 
   renderSections() {
-    return this.sections.map((SectionComponent, index) => <SectionComponent key={index} form={form} />);
+    return this.sections.map((SectionComponent, index) =>
+      <SectionComponent key={index} form={form} />,
+    );
   }
 
   render() {
