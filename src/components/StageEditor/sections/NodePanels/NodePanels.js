@@ -6,10 +6,16 @@ import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import cx from 'classnames';
 import { keys, has, get } from 'lodash';
-import { Button } from '../../../../ui/components';
+import { Icon } from '../../../../ui/components';
 import Guidance from '../../../Guidance';
 import Items from '../../Sortable/Items';
 import NodePanel from './NodePanel';
+
+const AddPanel = props => (
+  <div className="stage-editor-section-content-items__add" {...props}>
+    <Icon name="add" />
+  </div>
+);
 
 const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => {
   const isFull = panels.length === 2;
@@ -30,7 +36,7 @@ const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => 
 
           { !isFull &&
             <div className="stage-editor-section-content-items__controls">
-              <Button onClick={() => createNewPanel()} size="small" type="button">Add new panel</Button>
+              <AddPanel onClick={() => createNewPanel()} />
             </div>
           }
         </div>
