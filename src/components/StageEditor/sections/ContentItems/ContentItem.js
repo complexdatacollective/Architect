@@ -30,7 +30,11 @@ const ContentItem = ({ fieldId, type, ...rest }) => {
 
 ContentItem.propTypes = {
   fieldId: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
+};
+
+ContentItem.defaultProps = {
+  type: null,
 };
 
 const mapStateToProps = (state, { fieldId, form }) => ({
