@@ -49,7 +49,7 @@ class Select extends PureComponent {
         }
         <select className="form-fields-select__input" {...input} {...rest}>
           {children}
-          {options.map(option => <option value={option}>{option}</option>)}
+          {options.map(option => <option value={option} key={option}>{option}</option>)}
         </select>
       </div>
     );
