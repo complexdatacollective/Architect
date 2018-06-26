@@ -9,7 +9,10 @@ import Select from './Select';
 const NON_SORTABLE_TYPES = ['layout'];
 const ASC = 'asc';
 const DESC = 'desc';
-const DIRECTIONS = [ASC, DESC];
+const DIRECTIONS = [
+  [ASC, 'ascending'],
+  [DESC, 'descending']
+];
 
 const RuleHandle = compose(
   SortableHandle,
@@ -57,7 +60,7 @@ const Rule = compose(
               value: variable,
             }}
           >
-            <option />
+            <option value="" disabled>&mdash; select property &mdash;</option>
             {
               variables.map(value => (
                 <option
@@ -76,10 +79,10 @@ const Rule = compose(
               value: direction,
             }}
           >
-            <option />
+            <option value="" disabled>&mdash; select direction &mdash;</option>
             {
-              DIRECTIONS.map(value => (
-                <option key={value}>{value}</option>
+              DIRECTIONS.map(([value, label]) => (
+                <option key={value}>{label}</option>
               ))
             }
           </Select>

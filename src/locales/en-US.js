@@ -72,6 +72,19 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.sociogram_prompt.sortOrderBy': (
+    <Fragment>
+      <h3>Sort order</h3>
+      <p>
+        By default (with no ordering rules), Nodes will be unsorted. This means that they will be
+        displayed in the order that they were created.
+      </p>
+      <p>
+        The special <em>*</em> sort property also sorts by the order the nodes were created, but
+        additionally allows you to display nodes in reverse using the <em>descending</em> option.
+      </p>
+    </Fragment>
+  ),
   'guidance.editor.sociogram_prompt.attributes': (
     <Fragment>
       <h3>Attributes</h3>

@@ -126,13 +126,17 @@ class SociogramPrompt extends Component {
               options={nodeTypes}
               label="Which node would you like to layout?"
             />
-            <Field
-              name="sortOrderBy"
-              component={Fields.OrderBy}
-              className="stage-editor-section-prompt__setting"
-              variables={variablesForNodeType}
-              label="How would you like to sort the node bin?"
-            />
+            <Guidance contentId="guidance.editor.sociogram_prompt.sortOrderBy">
+              <div>
+                <Field
+                  name="sortOrderBy"
+                  component={Fields.OrderBy}
+                  className="stage-editor-section-prompt__setting"
+                  variables={variablesForNodeType}
+                  label="How would you like to sort the node bin?"
+                />
+              </div>
+            </Guidance>
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
