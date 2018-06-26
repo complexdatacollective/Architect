@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
-import { map } from 'lodash';
+import { map, isArray } from 'lodash';
 import { Icon } from '../../../ui/components';
 import Select from './Select';
 
@@ -133,7 +133,10 @@ class OrderBy extends Component {
   static propTypes = {
     variables: PropTypes.array,
     input: PropTypes.shape({
-      value: PropTypes.array,
+      value: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.string,
+      ]),
       onChange: PropTypes.func,
     }),
     label: PropTypes.string,
@@ -145,7 +148,7 @@ class OrderBy extends Component {
   }
 
   get value() {
-    return this.props.input.value || [];
+    return isArray(this.props.input.value) ? this.props.input.value : [];
   }
 
   handleChange = (index, updatedRule) => {
