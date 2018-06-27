@@ -5,12 +5,6 @@
   }
 }
 
-@mixin layout-container {
-  @include grid-container;
-  @include flex-align(left, top);
-  box-sizing: border-box;
-}
-
 @mixin button-background($color: red) { // sass-lint:disable-line no-color-keywords
   background-color: $color;
 

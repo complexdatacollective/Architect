@@ -1,0 +1,32 @@
+.control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: unit(1) unit(2);
+  background-color: var(--architect-control-bar-background);
+  transform: translateZ(0) translateY(100%);
+  transition-property: transform;
+  transition-timing-function:  var(--animation-easing);
+  transition-duration:  var(--animation-duration-standard);
+  z-index: var(--z-global-ui);
+
+  .button {
+    margin: 0 unit(1);
+  }
+
+  &--align-right {
+    justify-content: flex-end;
+  }
+
+  &--delayed {
+    transition-delay:  var(--animation-duration-standard);
+  }
+
+  &--show {
+    transform: translateZ(0) translateY(0);
+  }
+}
