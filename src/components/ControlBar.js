@@ -17,7 +17,7 @@ const ControlBar = ({ children, show, className }) => (
 ControlBar.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  show: PropTypes.boolean,
+  show: PropTypes.bool,
 };
 
 ControlBar.defaultProps = {

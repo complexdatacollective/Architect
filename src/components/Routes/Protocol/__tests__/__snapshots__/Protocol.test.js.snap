@@ -53,9 +53,28 @@ ShallowWrapper {
                             ]
           }
 />,
-        <div
-          className="protocol__control-bar"
-/>,
+        <ControlBar
+          className=""
+          show={false}
+>
+          <Button
+                    color="white"
+                    content=""
+                    icon={
+                              <Icon
+                                        className=""
+                                        color=""
+                                        name="arrow-right"
+                                        style={Object {}}
+                              />
+                    }
+                    iconPosition="right"
+                    onClick={[Function]}
+                    size="small"
+          >
+                    Save
+          </Button>
+</ControlBar>,
         <Connect(Draft(EditSkipLogic))
           cancel={false}
           onCancel={[Function]}
@@ -99,14 +118,52 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": false,
-          "className": "protocol__control-bar",
+          "children": <Button
+            color="white"
+            content=""
+            icon={
+                        <Icon
+                                    className=""
+                                    color=""
+                                    name="arrow-right"
+                                    style={Object {}}
+                        />
+            }
+            iconPosition="right"
+            onClick={[Function]}
+            size="small"
+>
+            Save
+</Button>,
+          "className": "",
+          "show": false,
         },
         "ref": null,
-        "rendered": false,
-        "type": "div",
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Save",
+            "color": "white",
+            "content": "",
+            "icon": <Icon
+              className=""
+              color=""
+              name="arrow-right"
+              style={Object {}}
+/>,
+            "iconPosition": "right",
+            "onClick": [Function],
+            "size": "small",
+          },
+          "ref": null,
+          "rendered": "Save",
+          "type": [Function],
+        },
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -163,9 +220,28 @@ ShallowWrapper {
                                   ]
             }
 />,
-          <div
-            className="protocol__control-bar"
-/>,
+          <ControlBar
+            className=""
+            show={false}
+>
+            <Button
+                        color="white"
+                        content=""
+                        icon={
+                                    <Icon
+                                                className=""
+                                                color=""
+                                                name="arrow-right"
+                                                style={Object {}}
+                                    />
+                        }
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+            >
+                        Save
+            </Button>
+</ControlBar>,
           <Connect(Draft(EditSkipLogic))
             cancel={false}
             onCancel={[Function]}
@@ -209,14 +285,52 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": false,
-            "className": "protocol__control-bar",
+            "children": <Button
+              color="white"
+              content=""
+              icon={
+                            <Icon
+                                          className=""
+                                          color=""
+                                          name="arrow-right"
+                                          style={Object {}}
+                            />
+              }
+              iconPosition="right"
+              onClick={[Function]}
+              size="small"
+>
+              Save
+</Button>,
+            "className": "",
+            "show": false,
           },
           "ref": null,
-          "rendered": false,
-          "type": "div",
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "Save",
+              "color": "white",
+              "content": "",
+              "icon": <Icon
+                className=""
+                color=""
+                name="arrow-right"
+                style={Object {}}
+/>,
+              "iconPosition": "right",
+              "onClick": [Function],
+              "size": "small",
+            },
+            "ref": null,
+            "rendered": "Save",
+            "type": [Function],
+          },
+          "type": [Function],
         },
         Object {
           "instance": null,
