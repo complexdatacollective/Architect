@@ -10,11 +10,10 @@ $component-name: start-protocol-stack;
   text-decoration: none;
 
   &__preview {
-    flex: 0 0 calc(38vh + #{unit(1)});
+    flex: 0 0 calc(28vh + #{unit(1)});
   }
 
   &__label {
-    padding: unit(1) 0 0;
     flex: 1 0 5vh;
     overflow-wrap: break-word;
     display: flex;

@@ -15,6 +15,8 @@ const Stack = Tweened(() => (
 const getPath = ({ advanced, workingPath, archivePath }) =>
   encodeURIComponent((advanced && workingPath) || archivePath);
 
+const getFilename = path => path.split('\\').pop().split('/').pop();
+
 const ProtocolStack = ({ protocol: { id, archivePath, workingPath, advanced } }) => (
   <Link
     component="div"
@@ -28,7 +30,7 @@ const ProtocolStack = ({ protocol: { id, archivePath, workingPath, advanced } })
       />
     </div>
     <div className="start-protocol-stack__label">
-      <h3 className="start-protocol-stack__name">{ archivePath || workingPath }</h3>
+      <h3 className="start-protocol-stack__name">{ getFilename(archivePath) || workingPath }</h3>
     </div>
   </Link>
 );
