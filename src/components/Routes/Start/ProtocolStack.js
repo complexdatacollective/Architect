@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Tweened from '../../behaviours/Tweened';
-import protocolCover from '../../images/protocol-cover.png';
+import Tweened from '../../../behaviours/Tweened';
+import protocolCover from '../../../images/protocol-cover.png';
 
 const Stack = Tweened(() => (
-  <div className="start-protocol-card__stack">
-    <div className="start-protocol-card__stack-cover">
+  <div className="start-protocol-stack__stack">
+    <div className="start-protocol-stack__stack-cover">
       <img src={protocolCover} alt="" />
     </div>
   </div>
@@ -18,17 +18,17 @@ const getPath = ({ advanced, workingPath, archivePath }) =>
 const ProtocolStack = ({ protocol: { id, archivePath, workingPath, advanced } }) => (
   <Link
     component="div"
-    className="start-protocol-card"
+    className="start-protocol-stack"
     to={`/edit/${getPath({ advanced, workingPath, archivePath })}`}
   >
-    <div className="start-protocol-card__preview">
+    <div className="start-protocol-stack__preview">
       <Stack
         tweenName="protocol"
         tweenElement={id}
       />
     </div>
-    <div className="start-protocol-card__label">
-      <h3 className="start-protocol-card__name">{ archivePath || workingPath }</h3>
+    <div className="start-protocol-stack__label">
+      <h3 className="start-protocol-stack__name">{ archivePath || workingPath }</h3>
     </div>
   </Link>
 );

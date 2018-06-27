@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { compose } from 'recompose';
-import { Button, Icon } from '../../ui/components';
-import { actionCreators as protocolsActions } from '../../ducks/modules/protocols';
-import { ProtocolStack } from '../../components/Start';
-import networkCanvasBrand from '../../images/network-canvas-brand.svg';
+import { Button, Icon } from '../../../ui/components';
+import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
+import ProtocolStack from './ProtocolStack';
+import networkCanvasBrand from '../../../images/network-canvas-brand.svg';
 
 class Start extends PureComponent {
   static propTypes = {
