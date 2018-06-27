@@ -129,6 +129,29 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.node_panels': (
+    <Fragment>
+      <h3>Panels help</h3>
+      <p>
+        The Name Generator interfaces allows you to configure up to two &quot;panels&quot;. Panels
+        let you display lists of nodes to the participant, that may speed up the task of creating
+        alters. For example, a panel could be used to show alters that the user has mentioned on a
+        previous name generator, or even a previous interview.
+      </p>
+      <p>
+        Data for panels can come from two sources:
+      </p>
+      <ul>
+        <li>The current network for the interview session. This means any nodes that have already
+          been created within this interview session.</li>
+        <li>An external data source, embedded within your protocol file.</li>
+      </ul>
+      <p>
+        Once the data source has been selected, you can optionally further filter the nodes that are
+        displayed in a panel, using the network query builder syntax.
+      </p>
+    </Fragment>
+  ),
   'guidance.interface.Information': (
     <Fragment>
       <h3>Information screen guidance</h3>
