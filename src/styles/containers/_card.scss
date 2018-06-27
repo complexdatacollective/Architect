@@ -11,43 +11,18 @@
   transform: translateZ(0);
 
   &__container {
-    @include flex-stack;
+    @include no-scrollbars;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-  }
-
-  &__control-bar,
-  &__main {
-    @include layout-container;
-  }
-
-  &__control-bar {
-    @include flex-align(right, middle);
-    z-index: 2;
-    flex: 0 0 60px;
-    background-color: var(--background);
-    transform: translateZ(0) translateY(100%);
-    transition: transform var(--animation-duration-standard) var(--animation-easing) var(--animation-duration-standard);
-    padding: 0 60px;
-
-    &--entering,
-    &--entered {
-      transform: translateZ(0) translateY(0);
-    }
-
-    button {
-      margin-right: unit(1);
-    }
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   &__content {
-    @include no-scrollbars;
-    flex: 1 1 auto;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    padding: 0 0 unit(6);
   }
 
   &--rules {

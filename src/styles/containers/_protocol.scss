@@ -6,29 +6,6 @@
   height: 100%;
   transition: opacity var(--animation-duration-standard) var(--animation-easing);
 
-  &__control-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: calc(50px + #{unit(2)}); // height of button plus padding
-    padding: unit(1) unit(3);
-    background-color: var(--architect-control-bar-background);
-    transform: translateZ(0) translateY(100%);
-    transition: transform var(--animation-easing) var(--animation-duration-standard);
-    z-index: var(--z-global-ui);
-
-    .button {
-      margin-right: unit(2);
-    }
-  }
-
-  &--has-changes {
-    .protocol__control-bar {
-      transform: translateZ(0) translateY(0);
-    }
-  }
-
   &.route-enter {
     .timeline__background {
       transform: translateY(-100%) rotate(180deg);

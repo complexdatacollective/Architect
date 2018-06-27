@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Transition } from 'react-transition-group';
 import anime from 'animejs';
+import ControlBar from './ControlBar';
 import { getCSSVariableAsNumber } from '../utils/CSSVariables';
 
 const fadeIn = {
@@ -74,16 +75,15 @@ class Card extends PureComponent {
           <div className={classes}>
             <div className="card__container">
               <div className="card__content">
-                <div className="card__main">
-                  { this.props.children }
-                </div>
+                { this.props.children }
               </div>
-              { this.anyButtons &&
-                <div className={cx('card__control-bar', `card__control-bar--${state}`)}>
-                  { buttons }
-                </div>
-              }
             </div>
+            <ControlBar
+              show={(state === 'entering' || state === 'entered')}
+              className="control-bar--delayed control-bar--align-right"
+            >
+              { buttons }
+            </ControlBar>
           </div>
         )}
       </Transition>

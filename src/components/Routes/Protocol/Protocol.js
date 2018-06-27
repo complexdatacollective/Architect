@@ -8,7 +8,8 @@ import { Button, Icon } from '../../../ui/components';
 import { getProtocol } from '../../../selectors/protocol';
 import EditSkipLogic from './Cards/EditSkipLogic';
 import EditStage from './Cards/EditStage';
-import { Timeline } from '../../../components';
+import Timeline from '../../../components/Timeline';
+import ControlBar from '../../ControlBar';
 import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
 
 const cards = {
@@ -125,19 +126,17 @@ class Protocol extends PureComponent {
           hasUnsavedChanges={hasUnsavedChanges}
         />
 
-        <div className="protocol__control-bar">
-          { hasUnsavedChanges &&
-            <Button
-              size="small"
-              onClick={saveProtocol}
-              color="white"
-              icon={RightArrow}
-              iconPosition="right"
-            >
-              Save
-            </Button>
-          }
-        </div>
+        <ControlBar show={hasUnsavedChanges}>
+          <Button
+            size="small"
+            onClick={saveProtocol}
+            color="white"
+            icon={RightArrow}
+            iconPosition="right"
+          >
+            Save
+          </Button>
+        </ControlBar>
 
         <EditSkipLogic
           show={this.isCardVisible(cards.editSkip)}
