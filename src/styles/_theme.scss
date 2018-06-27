@@ -4,6 +4,8 @@
   --color-shadow: rgba(0, 0, 0, .15);
   --color-modal-shadow: rgba(20, 0, 0, .2);
   --architect-control-bar-shadow: rgba(20, 0, 0, .3);
+  --architect-titlebar: var(--color-sea-green--dark);
+
 
   --architect-background: var(--color-white);
   --architect-text: var(--color-charcoal);
@@ -11,9 +13,9 @@
   --architect-modal-shadow: var(--color-modal-shadow);
 
   --architect-sortable-text: var(--color-charcoal);
-  --architect-sortable-background: var(--color-white);
-  --architect-sortable-preview-background: var(--color-navy-taupe);
-  --architect-sortable-preview-background--light: var(--color-cyber-grape);
+  --architect-sortable-background: var(--color-platinum);
+  --architect-sortable-preview-background: var(--color-platinum--dark);
+  --architect-sortable-preview-background--light: var(--color-platinum);
   --architect-sortable-preview-text: var(--color-white);
 
   --architect-ui-button: var(--color-sea-green);

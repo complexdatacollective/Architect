@@ -72,8 +72,8 @@
     border-bottom-left-radius: unit(6);
     background-color: var(--architect-panel-tab);
     color: var(--architect-panel-tab-label);
-    width: unit(5);
-    height: unit(6);
+    width: unit(3);
+    height: unit(5);
     cursor: pointer;
     transform: translate(-100%, unit(-5));
     transition: background-color var(--animation-duration-standard) var(--animation-easing);
@@ -82,8 +82,8 @@
     justify-content: center;
 
     &-icon {
-      height: unit(2.5);
-      left: unit(.5);
+      height: unit(1.5);
+      left: unit(.3);
       position: relative;
 
       &--open {

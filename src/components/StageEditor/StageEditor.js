@@ -49,7 +49,7 @@ class StageEditor extends Component {
               There are some errors that need to be fixed before this can be saved!
             </p>
           ) }
-          <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
+          <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
           {this.renderSections()}
         </Guided>
