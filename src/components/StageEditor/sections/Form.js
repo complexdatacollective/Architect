@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { toPairs, map, get, pickBy } from 'lodash';
 import Guidance from '../../Guidance';
-import Radio from '../../Form/Fields/Radio';
+import { Radio } from '../../../ui/components/Fields';
 import Select from '../../Form/Fields/Select';
 
 const DEFAULT_FORM = Symbol('DEFAULT_FORM');

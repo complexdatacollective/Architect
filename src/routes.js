@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { nth, find, get } from 'lodash';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Protocol, Start } from './components/Routes';
+import { Protocol, Start, Form, ProtocolLoader } from './components/Routes';
 import { getCSSVariableAsNumber } from './utils/CSSVariables';
 import tween from './behaviours/Tweened/tween';
 
@@ -50,23 +50,38 @@ class Routes extends Component {
   render() {
     const { location } = this.props;
     return (
-      <TransitionGroup component={null}>
-        <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route" key={location.key}>
-          <Switch location={location}>
-            <Route
-              exact
-              path="/edit/:protocol"
-              component={Protocol}
-            />
-            <Route
-              exact
-              path="/"
-              component={Start}
-            />
-            <Redirect to="/" />
-          </Switch>
-        </CSSTransition>
-      </TransitionGroup>
+      <div>
+        <Route
+          path="/edit/:protocol"
+          render={props => <ProtocolLoader {...props} />}
+        />
+        <TransitionGroup component={null}>
+          <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route" key={location.key}>
+            <Switch location={location}>
+              <Route
+                path="/edit/:protocol/form/:form"
+                component={Form}
+              />
+              <Route
+                path="/edit/:protocol/form"
+                component={Form}
+                new
+              />
+              <Route
+                exact
+                path="/edit/:protocol"
+                component={Protocol}
+              />
+              <Route
+                exact
+                path="/"
+                component={Start}
+              />
+              <Redirect to="/" />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
     );
   }
 }

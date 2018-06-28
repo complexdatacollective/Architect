@@ -33,7 +33,7 @@ ShallowWrapper {
         <div
                 className="timeline__content"
         >
-                <Connect(Component) />
+                <Connect(withRouter()) />
                 <div
                         className="timeline__stages"
                 >
@@ -65,7 +65,7 @@ ShallowWrapper {
           <div
             className="timeline__content"
 >
-            <Connect(Component) />
+            <Connect(withRouter()) />
             <div
                         className="timeline__stages"
             >
@@ -103,7 +103,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <Connect(Component) />,
+              <Connect(withRouter()) />,
               <div
                 className="timeline__stages"
 >
@@ -206,7 +206,7 @@ ShallowWrapper {
           <div
                     className="timeline__content"
           >
-                    <Connect(Component) />
+                    <Connect(withRouter()) />
                     <div
                               className="timeline__stages"
                     >
@@ -238,7 +238,7 @@ ShallowWrapper {
             <div
               className="timeline__content"
 >
-              <Connect(Component) />
+              <Connect(withRouter()) />
               <div
                             className="timeline__stages"
               >
@@ -276,7 +276,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <Connect(Component) />,
+                <Connect(withRouter()) />,
                 <div
                   className="timeline__stages"
 >

@@ -54,8 +54,7 @@ class Protocol extends PureComponent {
   }
 
   componentDidMount() {
-    const protocolPath = decodeURIComponent(this.props.match.params.protocol);
-    this.props.loadProtocol(protocolPath);
+    // this.props.loadProtocol(decodeURIComponent(this.props.match.params.protocol));
   }
 
   onCardComplete = () => {
