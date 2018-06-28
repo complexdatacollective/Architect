@@ -6,6 +6,7 @@
 
   &__dropzone {
     position: relative;
+    min-height: unit(10);
 
     &-preview {
       transition: opacity var(--animation-duration-standard) var(--animation-easing);
