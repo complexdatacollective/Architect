@@ -9,14 +9,23 @@
 
   &::before {
     @include preset('copy-standard');
-    display: inline-block;
     padding: unit(1);
     content: 'Drop content here or click to upload';
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &--replace {
     &::before {
       content: 'Drop content here or click to update';
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

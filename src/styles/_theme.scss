@@ -10,13 +10,16 @@
   --architect-background: var(--color-white);
   --architect-text: var(--color-charcoal);
   --architect-shadow: var(--color-shadow);
-  --architect-modal-shadow: var(--color-modal-shadow);
+  --architect-modal-shadow: var(--modal-overlay);
 
   --architect-sortable-text: var(--color-charcoal);
   --architect-sortable-background: var(--color-platinum);
   --architect-sortable-preview-background: var(--color-platinum--dark);
   --architect-sortable-preview-background--light: var(--color-platinum);
   --architect-sortable-preview-text: var(--color-white);
+
+  --architect-edit-button-background: var(--primary);
+  --architect-edit-button-fill: var(--color-white);
 
   --architect-ui-button: var(--color-sea-green);
   --architect-ui-button-text: var(--color-white);
@@ -58,7 +61,7 @@
   --architect-card-background--choice: var(--light-background);
   --architect-card-text--choice: var(--color-white);
 
-  --architect-dialog-background: var(--color-mustard);
+  --architect-dialog-background: var(--architect-panel-background);
   --architect-dialog-background--dark: var(--color-mustard--dark);
 
   // rule

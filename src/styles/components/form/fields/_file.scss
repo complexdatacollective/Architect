@@ -3,10 +3,11 @@
   display: block;
   overflow: hidden;
   position: relative;
+  height: 100%;
 
   &__dropzone {
     position: relative;
-    min-height: unit(10);
+    height: 100%;
 
     &-preview {
       transition: opacity var(--animation-duration-standard) var(--animation-easing);
