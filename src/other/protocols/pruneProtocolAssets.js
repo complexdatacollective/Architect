@@ -3,19 +3,19 @@ import path from 'path';
 import fs from 'fs';
 import { readFile } from '../filesystem';
 
-const tempPath = remote.app.getPath('temp');
-
 const contains = (protocol, string) =>
   protocol.indexOf(string) !== -1;
 
-const isInTempPath = filePath =>
-  new RegExp(`^${tempPath}`)
+const isInTempPath = (filePath) => {
+  const tempPath = remote.app.getPath('temp');
+
+  return new RegExp(`^${tempPath}`)
     .test(path.normalize(filePath));
+};
 
 const removeFile = (filePath) => {
-  console.log('Removing', filePath);
   // Check we haven't somehow ended up outside of temppath since we are deleting things
-  if (!isInTempPath(filePath)) { console.log('Aborted remove because outside of temp'); return; }
+  if (!isInTempPath(filePath)) { throw new Error('Aborted remove because outside of temp'); }
 
   fs.unlinkSync(filePath);
 };
@@ -31,7 +31,6 @@ const pruneProtocolAssets = (workingPath) => {
   // Read protocol file
   return readFile(protocolPath)
     .then((protocolFile) => {
-
       // List assets directory
       const files = fs.readdirSync(protocolAssetsPath);
 

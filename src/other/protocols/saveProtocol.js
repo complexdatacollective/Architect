@@ -14,12 +14,12 @@ const saveProtocol = ({ workingPath, archivePath, advanced }, protocol) => {
 
   return writeFile(destinationPath, JSON.stringify(protocol, null, 2))
     .then(() => {
+      // Now that the protocol is commited to disk we can safely prune unused assets.
       pruneProtocolAssets(workingPath);
     })
     .then(() => {
       if (!advanced) {
         // also save zip
-        console.log('zip it', workingPath, archivePath);
         archive(workingPath, archivePath);
       }
     });
