@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import SeamlessText from '../SeamlessText';
 import Contexts from '../Contexts';
-import RadioGroup from '../RadioGroup';
+import { RadioGroup } from '../../../../ui/components/Fields';
 import Select from '../Select';
 import ValidatedField from '../../ValidatedField';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Select } from '../../Form/Fields';
+import { Select } from '../../Form/Fields';
+import { Text } from '../../../ui/components/Fields';
 
 const Filter = ({
   query,
