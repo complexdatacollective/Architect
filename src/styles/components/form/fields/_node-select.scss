@@ -1,0 +1,11 @@
+.form-fields-node-select {
+  display: block;
+  background: none;
+  padding: 0;
+
+  .node {
+    display: inline-block;
+    font-size: 5rem;
+    margin-right: unit(2);
+  }
+}

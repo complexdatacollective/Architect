@@ -4,6 +4,9 @@
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
 
+  &__reset {
+    cursor: pointer;
+  }
 
   &__code {
     position: fixed;

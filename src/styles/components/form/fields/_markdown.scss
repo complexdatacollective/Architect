@@ -4,50 +4,42 @@ $component-name: form-fields-markdown;
   @include form-field;
   width: 100%;
 
+  &__label {
+    @include preset('title-4');
+    font-weight: 600;
+  }
+
   &__edit {
-    position: relative;
+    display: flex;
     cursor: text;
-    vertical-align: top;
-    min-height: 75px;
+    background: var(--background);
+    color: var(--text);
+    border-radius: unit(1);
   }
 
   &__input {
-    @include preset('copy-large');
-    position: absolute;
-    left: 50%;
-    top: 0;
-    opacity: 0;
-    transition: opacity 200ms, transform 200ms;
-    background-color: var(--architect-panel-background);
+    @include preset('copy-standard');
+    background-color: var(--input-background);
     border: 0;
-    padding: unit(1);
-    height: 100%;
-    width: 50%;
+    width: 100%;
+    min-height: unit(8);
     vertical-align: top;
     resize: none;
-    transform-origin: 100% 50%;
-    transform: scale(0, 1);
+    overflow: hidden;
+
+    &-container {
+      background-color: var(--input-background);
+      padding: unit(1);
+      flex: 1 0 50%;
+      border-radius: 0 unit(1) unit(1) 0;
+    }
   }
 
   &__preview {
-    display: inline-block;
-    border: unit(.2) solid var(--architect-panel-background);
-    background-color: var(--architect-card-background);
+    @include preset('copy-standard');
+    flex: 1 0 50%;
     padding: unit(1);
-    width: 100%;
-    min-height: unit(8);
     transition: width 200ms;
     vertical-align: top;
-  }
-
-  &--is-focussed {
-    .#{$component-name}__input {
-      opacity: 1;
-      transform: scale(1, 1);
-    }
-
-    .#{$component-name}__preview {
-      width: 50%;
-    }
   }
 }

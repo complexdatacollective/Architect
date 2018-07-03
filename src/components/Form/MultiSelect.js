@@ -11,21 +11,21 @@ const ItemHandle = compose(
   SortableHandle,
 )(
   () => (
-    <div className="form-fields-order-by__handle">
+    <div className="form-fields-multi-select__handle">
       <Icon name="move" />
     </div>
   ),
 );
 
 const ItemDelete = props => (
-  <div className="form-fields-order-by__delete" {...props}>
+  <div className="form-fields-multi-select__delete" {...props}>
     <Icon name="delete" />
   </div>
 );
 
 const AddItem = props => (
-  <div className="form-fields-order-by__add" {...props}>
-    <Icon name="add" />
+  <div className="form-fields-multi-select__add" {...props}>
+    <Icon name="add" /> Add new
   </div>
 );
 
@@ -39,24 +39,25 @@ const Item = compose(
   SortableElement,
 )(
   ({ fields, field, properties, options, rowValues, allValues, sortIndex: index }) => (
-    <div className="form-fields-order-by__rule">
-      <div className="form-fields-order-by__rule-control">
+    <div className="form-fields-multi-select__rule">
+      <div className="form-fields-multi-select__rule-control">
         <ItemHandle />
       </div>
-      {properties.map(
-        property => (
-          <div className="form-fields-order-by__rule-options">
-            <div className="form-fields-order-by__rule-option">
+
+      <div className="form-fields-multi-select__rule-options">
+        {properties.map(
+          property => (
+            <div className="form-fields-multi-select__rule-option">
               <Field
                 component={Select}
                 name={`${field}.${property}`}
                 options={options(property, rowValues, allValues)}
               />
             </div>
-          </div>
-        ),
-      )}
-      <div className="form-fields-order-by__rule-control">
+          ),
+        )}
+      </div>
+      <div className="form-fields-multi-select__rule-control">
         <ItemDelete onClick={() => fields.remove(index)} />
       </div>
     </div>
@@ -77,8 +78,8 @@ const Items = compose(
 )(
   ({ fields, ...rest }) => (
     <React.Fragment>
-      <div className="form-fields-order-by">
-        <div className="form-fields-order-by__rules">
+      <div className="form-fields-multi-select">
+        <div className="form-fields-multi-select__rules">
           {
             fields.map((field, index) => (
               <Item
@@ -108,9 +109,9 @@ const MultiSelect = ({
   label,
   ...rest
 }) => (
-  <div className="form-fields-order-by">
+  <div className="form-fields-multi-select">
     { label &&
-      <div className="form-fields-order-by__label">{label}</div>
+      <div className="form-fields-multi-select__label">{label}</div>
     }
     <FieldArray
       name={name}

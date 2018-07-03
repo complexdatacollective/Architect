@@ -14,11 +14,11 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
       className="stage-editor-section-prompt__setting-value"
       placeholder="Enter text for the prompt here"
     />
-    <h5 className="stage-editor-section-prompt__label">Additional attributes</h5>
     <VariableChooser
       className="stage-editor-section-prompt__setting-value"
       name={`${fieldId}.additionalAttributes`}
       variableRegistry={variableRegistry}
+      label="Additional attributes"
       form={form}
     />
   </Item>

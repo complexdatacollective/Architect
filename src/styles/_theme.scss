@@ -3,6 +3,16 @@
 :root {
   --color-shadow: rgba(0, 0, 0, .15);
   --color-modal-shadow: rgba(20, 0, 0, .2);
+
+  // UI overwrites
+  --background: var(--color-white);
+  --text: var(--color-charcoal);
+  --input-background: var(--color-platinum--dark);
+  --input-label: var(--color-charcoal);
+  --text--light: var(--color-white); // actually this one is new
+
+  // App Chrome
+  --architect-wave: var(--color-sea-green);
   --architect-control-bar-shadow: rgba(20, 0, 0, .3);
   --architect-titlebar: var(--color-sea-green--dark);
 
@@ -11,14 +21,23 @@
   --architect-background: var(--color-white);
   --architect-text: var(--color-charcoal);
   --architect-shadow: var(--color-shadow);
-  --architect-modal-shadow: var(--modal-overlay);
 
+  --architect-control-bar-background: var(--color-cyber-grape);
+  --architect-control-bar-text: var(--color-white);
+
+  // forms
+  --form-control: var(--color-sea-green);
+
+  // sortable, rename?
   --architect-sortable-text: var(--color-charcoal);
   --architect-sortable-background: var(--color-platinum);
   --architect-sortable-preview-background: var(--color-platinum);
   --architect-sortable-preview-background--alt: var(--color-platinum--dark);
-  // --architect-sortable-preview-text: var(--color-white);
 
+  // Modal
+  --architect-modal-shadow: var(--modal-overlay);
+
+  // TODO: review below
   --architect-edit-button-background: var(--primary);
   --architect-edit-button-fill: var(--color-white);
 
@@ -28,9 +47,6 @@
   --architect-ui-radio-dot: var(--color-sea-green);
   --architect-button-background--dark: var(--color-navy-taupe);
   --architect-button-background--dark--hover: var(--color-cyber-grape);
-
-  --architect-control-bar-background: var(--color-cyber-grape);
-  --architect-control-bar-text: var(--color-white);
 
   --architect-drawer-background: var(--color-platinum);
   --architect-drawer-background--guidance: var(--color-platinum--dark);
@@ -53,17 +69,6 @@
   --architect-timeline-highlight: rgba(216, 216, 216, .2);
   --architect-timeline-line: var(--color-neon-coral);
 
-  --architect-wave: var(--color-sea-green);
-
-  --architect-card-background: var(--color-white);
-  --architect-card-text: var(--color-charcoal);
-  --architect-card-background--rules: var(--color-mustard);
-  --architect-card-text--rules: var(--color-white);
-  --architect-card-background--choice: var(--light-background);
-  --architect-card-text--choice: var(--color-white);
-
-  --architect-dialog-background: var(--architect-panel-background);
-  --architect-dialog-background--dark: var(--color-mustard--dark);
 
   // rule
   --architect-rule-text: var(--color-white);
@@ -94,8 +99,13 @@
   --architect-asset-background: var(--color-charcoal);
 }
 
+.button {
+  color: var(--text--light);
 
-button {
+  &--white, &--platinum, &--platinum--dark {
+    color: var(--text-dark);
+  }
+
   &:disabled,
   &[disabled] {
     background-color: var(--color-charcoal);

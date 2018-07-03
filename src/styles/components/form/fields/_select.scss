@@ -12,4 +12,9 @@
     margin: unit(1) 0 0;
     color: var(--error);
   }
+
+  &__label {
+    @include preset('title-4');
+    font-weight: 600;
+  }
 }

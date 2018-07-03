@@ -44,6 +44,8 @@ $component-name: stage-editor-sortable-expandable-item;
     padding: unit(1);
     border-radius: 0 0 unit(1.5) unit(1.5);
     cursor: pointer;
+    border-radius: 0 0 unit(1.5) unit(1.5);
+    height: unit(2.5);
 
     .icon {
       .cls-1,

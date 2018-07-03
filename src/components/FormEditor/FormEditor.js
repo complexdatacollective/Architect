@@ -15,7 +15,7 @@ import { get, keys, map, toPairs, fromPairs } from 'lodash';
 import { ValidatedField, MultiSelect } from '../Form';
 import * as Fields from '../../ui/components/Fields';
 import { Node, Button } from '../../ui/components';
-import { SeamlessText } from '../Form/Fields';
+import * as ArchitectFields from '../Form/Fields';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Disable from '../Disable';
@@ -42,13 +42,14 @@ const optionGetter = (variables) => {
   return (property, rowValues, allValues) => {
     const variable = get(rowValues, 'variable');
     switch (property) {
-      case 'variable':
+      case 'variable': {
         const used = map(allValues, 'variable');
         return variableNames
           .map(
             value =>
               ({ value, label: value, disabled: value !== variable && used.includes(value)})
           );
+      }
       case 'component':
         return getInputsForType(get(variables, [variable, 'type']))
       default:
@@ -63,6 +64,7 @@ const NodeType = ({ input: { value, checked, onChange }, label }) => (
 
 class FormEditor extends Component {
   handleAttemptTypeChange = () => {
+    // eslint-disable-next-line no-alert
     if (confirm('First you will need to reset the rest of the form, are you sure?')) {
       this.props.resetFields();
     }
@@ -83,78 +85,78 @@ class FormEditor extends Component {
     return (
       <Form onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
         <FormCodeView toggleCodeView={toggleCodeView} form={form} />
-          <Guided
-            className="stage-editor__sections"
-            form={form}
-          >
-          <div
-            style={{ height: '80vh', 'overflowY': 'scroll' }}
-          >
-            <h1>Edit Form</h1>
-            { dirty && !valid && (
-              <p style={{ color: 'var(--error)' }}>
-                There are some errors that need to be fixed before this can be saved!
-              </p>
-            ) }
-            <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
+        <Guided
+          className="stage-editor__sections"
+          form={form}
+        >
+          <h1>Edit Form</h1>
+          { dirty && !valid && (
+            <p style={{ color: 'var(--error)' }}>
+              There are some errors that need to be fixed before this can be saved!
+            </p>
+          ) }
+          <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
-            <Guidance contentId="guidance.editor.title">
-              <div className="stage-editor-section">
-                <h2>Title</h2>
+          <Guidance contentId="guidance.form.title">
+            <div className="stage-editor-section">
+              <h2>Title</h2>
+              <ValidatedField
+                name="title"
+                component={ArchitectFields.SeamlessText}
+                placeholder="Enter your title here"
+                validation={{ required: true }}
+              />
+            </div>
+          </Guidance>
+
+          <Guidance contentId="guidance.form.type">
+            <div className="stage-editor-section">
+              <h2>Type</h2>
+              <Disable
+                disabled={!!this.props.nodeType}
+                className="stage-editor__reset"
+                onClick={!!this.props.nodeType ? this.handleAttemptTypeChange : () => {}}
+              >
                 <ValidatedField
-                  name="title"
-                  component={SeamlessText}
+                  name="type"
+                  component={Fields.RadioGroup}
                   placeholder="Enter your title here"
-                  className="stage-editor-section-title"
+                  className="form-fields-node-select"
+                  options={nodeTypes}
                   validation={{ required: true }}
-                />
-              </div>
-            </Guidance>
-
-            <Guidance contentId="guidance.editor.title">
-              <div className="stage-editor-section">
-                <h2>Type</h2>
-                <Disable
-                  disabled={!!this.props.nodeType}
-                  onClick={!!this.props.nodeType ? this.handleAttemptTypeChange : () => {}}
+                  optionComponent={NodeType}
                 >
-                  <ValidatedField
-                    name="type"
-                    component={Fields.RadioGroup}
-                    placeholder="Enter your title here"
-                    className="stage-editor-section-title"
-                    options={nodeTypes}
-                    validation={{ required: true }}
-                    optionComponent={NodeType}
-                  >
-                    <option value="" disabled>&mdash; Select type &mdash;</option>
-                  </ValidatedField>
-                </Disable>
-              </div>
-            </Guidance>
+                  <option value="" disabled>&mdash; Select type &mdash;</option>
+                </ValidatedField>
+              </Disable>
+            </div>
+          </Guidance>
 
-            <Guidance contentId="guidance.editor.title">
-              <div className="stage-editor-section">
-                <h2>Add another?</h2>
-                <ValidatedField
-                  name="optionToAddAnother"
-                  component={Fields.Checkbox}
-                  label="Continuous node creation mode"
-                  className="stage-editor-section-title"
-                  validation={{ required: true }}
-                />
-              </div>
-            </Guidance>
+          <Guidance contentId="guidance.form.variables">
+            <div className="stage-editor-section">
+              <h2>Form variables</h2>
+              <MultiSelect
+                name="fields"
+                properties={[
+                  'variable',
+                  'component',
+                ]}
+                options={optionGetter(variables)}
+              />
+            </div>
+          </Guidance>
 
-            <MultiSelect
-              name="fields"
-              properties={[
-                'variable',
-                'component',
-              ]}
-              options={optionGetter(variables)}
-            />
-          </div>
+          <Guidance contentId="guidance.form.continue">
+            <div className="stage-editor-section">
+              <ValidatedField
+                name="optionToAddAnother"
+                component={ArchitectFields.Mode}
+                label="Enable 'Add another' option"
+                options={[[true, 'enabled'], [false, 'disabled']]}
+                validation={{ required: true }}
+              />
+            </div>
+          </Guidance>
         </Guided>
       </Form>
     );
