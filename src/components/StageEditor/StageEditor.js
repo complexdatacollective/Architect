@@ -4,7 +4,6 @@ import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from '
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
-import { Button } from '../../ui/components';
 import { Guided } from '../Guided';
 import flatten from '../../utils/flatten';
 import { getInterface } from './Interfaces';
@@ -49,7 +48,7 @@ class StageEditor extends Component {
               There are some errors that need to be fixed before this can be saved!
             </p>
           ) }
-          <Button size="small" type="button" onClick={toggleCodeView}>Show Code View</Button>
+          <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
           {this.renderSections()}
         </Guided>
