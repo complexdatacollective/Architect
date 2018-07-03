@@ -4,7 +4,6 @@ import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from '
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
-import { Button } from '../../ui/components';
 import { Guided } from '../Guided';
 import flatten from '../../utils/flatten';
 import { getInterface } from './Interfaces';
