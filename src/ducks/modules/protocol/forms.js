@@ -10,7 +10,7 @@ const formTemplate = {
   varirables: [],
 };
 
-const formNameFromTitle = (title) => title.replace(/\W/g, '');
+const formNameFromTitle = title => title.replace(/\W/g, '');
 
 function createForm(form) {
   return {

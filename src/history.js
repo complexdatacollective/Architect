@@ -1,4 +1,5 @@
-import createHistory from 'history/createMemoryHistory';
+
+import createHistory from 'history/createBrowserHistory';
 
 const history = createHistory();
 

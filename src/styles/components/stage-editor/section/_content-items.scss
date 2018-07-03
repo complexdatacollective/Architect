@@ -6,6 +6,7 @@
 
   &__control {
     margin-right: unit(1);
+    color: var(--text--light);
 
     &::before {
       content: '+';
@@ -14,6 +15,7 @@
       position: relative;
       top: unit(-.25);
       margin-right: unit(1);
+
     }
 
     &--text {

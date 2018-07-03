@@ -20,8 +20,10 @@ const getProtocolId = (protocols, path) => {
 const getProtocolIdFromPathname = (protocols, pathname) =>
   getProtocolId(protocols, getProtocolPath(pathname));
 
-const dispatchRouteAnimations = ({ pathname }, history, protocols) => {
-  const { pathname: previousPathname } = nth(history.entries, -2);
+const dispatchRouteAnimations = ({ pathname }, entries, protocols) => {
+  if (entries.length < 2) { return; }
+
+  const { pathname: previousPathname } = nth(entries, -2);
 
   switch (true) {
     case /^\/edit\/[^/]+$/.test(previousPathname) && /^\/$/.test(pathname): {
@@ -37,12 +39,25 @@ const dispatchRouteAnimations = ({ pathname }, history, protocols) => {
 };
 
 class Routes extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      entries: [props.history.location],
+    };
+  }
+
   componentDidMount() {
-    const { history } = this.props;
+    const { history, protocols } = this.props;
 
     history.listen(
       (event) => {
-        dispatchRouteAnimations(event, this.props.history, this.props.protocols);
+        const entries = [
+          ...this.state.entries,
+          event,
+        ];
+
+        this.setState({ entries }, () => dispatchRouteAnimations(event, entries, protocols));
       },
     );
   }

@@ -7,4 +7,9 @@
     width: 100%;
     font-size: var(--base-font-size);
   }
+
+  &__label {
+    @include preset('title-4');
+    font-weight: 600;
+  }
 }

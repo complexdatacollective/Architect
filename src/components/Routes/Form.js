@@ -7,7 +7,7 @@ import { get } from 'lodash';
 import memoryHistory from '../../history';
 import { Button } from '../../ui/components';
 import FormEditor from '../FormEditor';
-import ControlBar from '../ControlBar';
+import Card from '../Card';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
@@ -17,11 +17,14 @@ class Form extends PureComponent {
     form: PropTypes.object,
     updateForm: PropTypes.func.isRequired,
     createForm: PropTypes.func.isRequired,
+    submitForm: PropTypes.func.isRequired,
+    hasUnsavedChanges: PropTypes.bool,
   };
 
   static defaultProps = {
     formName: null,
     form: {},
+    hasUnsavedChanges: false,
   };
 
   handleSubmit = (form) => {
@@ -37,29 +40,53 @@ class Form extends PureComponent {
     memoryHistory.go(-1); // TODO: make this more explicit
   }
 
+  handleCancel = () => {
+    memoryHistory.go(-1); // TODO: make this more explicit
+  }
+
+  renderButtons() {
+    const saveButton = (
+      <Button
+        size="small"
+        onClick={this.submitForm}
+        color="white"
+        iconPosition="right"
+      >
+        Save
+      </Button>
+    );
+    const cancelButton = (
+      <Button
+        size="small"
+        onClick={this.handleCancel}
+        color="white"
+        iconPosition="right"
+      >
+        Cancel
+      </Button>
+    );
+
+    return this.props.hasUnsavedChanges ?
+      [saveButton, cancelButton] :
+      [cancelButton];
+  }
+
   render() {
     const {
       form,
-      hasUnsavedChanges,
     } = this.props;
 
     return (
       <div>
-        <FormEditor
-          initialValues={form}
-          onSubmit={this.handleSubmit}
-        />
-
-        <ControlBar show={hasUnsavedChanges}>
-          <Button
-            size="small"
-            onClick={this.submitForm}
-            color="white"
-            iconPosition="right"
-          >
-            Save
-          </Button>
-        </ControlBar>
+        <Card
+          buttons={this.renderButtons()}
+          show
+        >
+          <FormEditor
+            initialValues={form}
+            onSubmit={this.handleSubmit}
+          />
+        </Card>
       </div>
     );
   }

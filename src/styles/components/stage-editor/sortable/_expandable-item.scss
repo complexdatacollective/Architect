@@ -9,6 +9,7 @@ $component-name: stage-editor-sortable-expandable-item;
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    border-radius: unit(1.5) unit(1.5) 0 0;
 
     &-content {
       flex-grow: 1;
@@ -35,6 +36,8 @@ $component-name: stage-editor-sortable-expandable-item;
     justify-content: center;
     padding: unit(1);
     cursor: pointer;
+    border-radius: 0 0 unit(1.5) unit(1.5);
+    height: unit(2.5);
 
     &--open,
     &--close {
@@ -56,9 +59,7 @@ $component-name: stage-editor-sortable-expandable-item;
     transform-origin: 50% 0;
     background-color: var(--architect-sortable-background);
     color: var(--architect-sortable-text);
-    border-width: 0 2px 2px;
-    border-color: var(--architect-sortable-header-background);
-    border-style:  solid;
+    border-radius: 0 0 unit(1.5) unit(1.5);
     padding: unit(2);
   }
 
@@ -72,6 +73,8 @@ $component-name: stage-editor-sortable-expandable-item;
     }
 
     .#{$component-name}__expand {
+      border-radius: 0;
+
       &--open {
         display: none;
       }

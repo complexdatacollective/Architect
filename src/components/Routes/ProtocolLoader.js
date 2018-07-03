@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
 
-class Protocol extends Component {
-
+class ProtocolLoader extends Component {
   constructor(props) {
     super(props);
 
@@ -23,12 +23,13 @@ class Protocol extends Component {
   }
 
   loadProtocol(protocol) {
-    if (protocol !== this.state.protocol) {
-      this.setState(
-        { protocol },
-        () => this.props.loadProtocol(protocol),
-      );
-    }
+    // If we've already loaded this route, don't load it again because we'll lose any changes
+    if (protocol === this.state.protocol) { return; }
+
+    this.setState(
+      { protocol },
+      () => this.props.loadProtocol(protocol),
+    );
   }
 
   render() {
@@ -36,15 +37,18 @@ class Protocol extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadProtocol: bindActionCreators(protocolFileActions.loadProtocol, dispatch),
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  loadProtocol: bindActionCreators(protocolFileActions.loadProtocol, dispatch),
+});
 
-export { Protocol };
+ProtocolLoader.propTypes = {
+  loadProtocol: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+};
+
+export { ProtocolLoader };
 
 export default connect(
   null,
   mapDispatchToProps,
-)(Protocol);
+)(ProtocolLoader);

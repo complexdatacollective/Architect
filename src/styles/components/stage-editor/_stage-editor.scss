@@ -4,6 +4,9 @@
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
 
+  &__reset {
+    cursor: pointer;
+  }
 
   &__code {
     position: fixed;
@@ -19,7 +22,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     background: var(--settings);
-    color: var(--text);
+    color: var(--text--light);
     padding: 20px;
     transition: opacity var(--animation-duration-standard) var(--animation-easing),
     max-height var(--animation-duration-standard) var(--animation-easing),

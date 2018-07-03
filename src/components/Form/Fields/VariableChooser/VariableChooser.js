@@ -21,12 +21,14 @@ class VariableChooser extends Component {
     variableRegistry: PropTypes.object,
     deleteVariable: PropTypes.func.isRequired,
     className: PropTypes.string,
+    label: PropTypes.string,
   };
 
   static defaultProps = {
     values: {},
     variableRegistry: {},
     className: '',
+    label: '',
   };
 
   constructor(props) {
@@ -56,11 +58,14 @@ class VariableChooser extends Component {
   };
 
   render() {
-    const { name, values, variableRegistry, className, deleteVariable } = this.props;
+    const { name, label, values, variableRegistry, className, deleteVariable } = this.props;
     const variableChooserClasses = cx('form-fields-variable-chooser', className);
 
     return (
       <div className={variableChooserClasses}>
+        <h4 className="form-fields-variable-chooser__label">
+          { label }
+        </h4>
         <FormSection name={name}>
           <div className="form-fields-variable-chooser__variables">
             {
