@@ -48,16 +48,17 @@ class Routes extends Component {
   }
 
   componentDidMount() {
-    const { history, protocols } = this.props;
-
-    history.listen(
+    this.props.history.listen(
       (event) => {
         const entries = [
           ...this.state.entries,
           event,
         ];
 
-        this.setState({ entries }, () => dispatchRouteAnimations(event, entries, protocols));
+        this.setState(
+          { entries },
+          () => dispatchRouteAnimations(event, entries, this.props.protocols),
+        );
       },
     );
   }
