@@ -87,6 +87,47 @@
     margin-bottom: unit(2);
   }
 
+  &__forms {
+    display: table;
+    width: 100%;
+  }
+
+  &__form {
+    display: table-row;
+
+    &-name,
+    &-edit {
+      display: table-cell;
+      text-align: left;
+      padding: unit(.5) 0;
+
+      a {
+        text-decoration: none;
+        margin: 0;
+      }
+    }
+
+    &-name {
+      a {
+        display: block;
+        color: var(--text);
+      }
+    }
+
+    &-edit {
+      text-align: right;
+    }
+  }
+
+  &__new-form {
+    margin: unit(2) 0 0;
+
+    a {
+      text-decoration: none;
+      margin: 0;
+    }
+  }
+
   &.tween-protocol {
     $transition-before: 500ms;
     $transition-after: 300ms;

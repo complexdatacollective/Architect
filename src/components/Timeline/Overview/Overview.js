@@ -13,6 +13,21 @@ import { Node, Icon } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import PanelGroup from './PanelGroup';
 
+const renderForm = (formName, protocol) => {
+  const formPath = `/edit/${encodeURIComponent(protocol)}/form/${formName}`;
+
+  return (
+    <div className="timeline-overview__form" key={formName}>
+      <div className="timeline-overview__form-name">
+        <Link to={formPath}>{formName}</Link>
+      </div>
+      <div className="timeline-overview__form-edit">
+        <Link to={formPath} className="button button--small">edit</Link>
+      </div>
+    </div>
+  );
+};
+
 class Overview extends Component {
   get renderNodeTypes() {
     const nodeTypes = keys(get(this.props.variableRegistry, 'node', {}));
@@ -59,26 +74,23 @@ class Overview extends Component {
 
   get renderForms() {
     const forms = toPairs(this.props.forms);
-    return [
-      ...forms.map(
-        ([formName]) => (
-          <div>
-            <Link
-              to={`/edit/${encodeURIComponent(this.props.match.params.protocol)}/form/${formName}`}
-            >
-              {formName}
-            </Link>
-          </div>
-        ),
-      ),
+    return (
       <div>
-        <Link
-          to={`/edit/${encodeURIComponent(this.props.match.params.protocol)}/form/`}
-        >
-          neu fourm
-        </Link>
-      </div>,
-    ];
+        <div className="timeline-overview__forms">
+          {forms.map(
+            ([formName]) => renderForm(formName, this.props.match.params.protocol),
+          )}
+        </div>
+        <div className="timeline-overview__new-form">
+          <Link
+            to={`/edit/${encodeURIComponent(this.props.match.params.protocol)}/form/`}
+            className="button button--small"
+          >
+            Create new form
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   render() {
