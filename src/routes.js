@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { nth, find, get } from 'lodash';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Protocol, Start } from './components/Routes';
+import { Protocol, Start, Form, ProtocolLoader } from './components/Routes';
 import { getCSSVariableAsNumber } from './utils/CSSVariables';
 import tween from './behaviours/Tweened/tween';
 
@@ -20,8 +20,10 @@ const getProtocolId = (protocols, path) => {
 const getProtocolIdFromPathname = (protocols, pathname) =>
   getProtocolId(protocols, getProtocolPath(pathname));
 
-const dispatchRouteAnimations = ({ pathname }, history, protocols) => {
-  const { pathname: previousPathname } = nth(history.entries, -2);
+const dispatchRouteAnimations = ({ pathname }, entries, protocols) => {
+  if (entries.length < 2) { return; }
+
+  const { pathname: previousPathname } = nth(entries, -2);
 
   switch (true) {
     case /^\/edit\/[^/]+$/.test(previousPathname) && /^\/$/.test(pathname): {
@@ -37,12 +39,26 @@ const dispatchRouteAnimations = ({ pathname }, history, protocols) => {
 };
 
 class Routes extends Component {
-  componentDidMount() {
-    const { history } = this.props;
+  constructor(props) {
+    super(props);
 
-    history.listen(
+    this.state = {
+      entries: [props.history.location],
+    };
+  }
+
+  componentDidMount() {
+    this.props.history.listen(
       (event) => {
-        dispatchRouteAnimations(event, this.props.history, this.props.protocols);
+        const entries = [
+          ...this.state.entries,
+          event,
+        ];
+
+        this.setState(
+          { entries },
+          () => dispatchRouteAnimations(event, entries, this.props.protocols),
+        );
       },
     );
   }
@@ -50,23 +66,38 @@ class Routes extends Component {
   render() {
     const { location } = this.props;
     return (
-      <TransitionGroup component={null}>
-        <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route" key={location.key}>
-          <Switch location={location}>
-            <Route
-              exact
-              path="/edit/:protocol"
-              component={Protocol}
-            />
-            <Route
-              exact
-              path="/"
-              component={Start}
-            />
-            <Redirect to="/" />
-          </Switch>
-        </CSSTransition>
-      </TransitionGroup>
+      <div>
+        <Route
+          path="/edit/:protocol"
+          render={props => <ProtocolLoader {...props} />}
+        />
+        <TransitionGroup component={null}>
+          <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route" key={location.key}>
+            <Switch location={location}>
+              <Route
+                path="/edit/:protocol/form/:form"
+                component={Form}
+              />
+              <Route
+                path="/edit/:protocol/form"
+                component={Form}
+                new
+              />
+              <Route
+                exact
+                path="/edit/:protocol"
+                component={Protocol}
+              />
+              <Route
+                exact
+                path="/"
+                component={Start}
+              />
+              <Redirect to="/" />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
     );
   }
 }

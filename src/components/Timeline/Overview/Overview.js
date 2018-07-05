@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
-import fs from 'fs';
-import path from 'path';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { get, keys } from 'lodash';
-import { map, groupBy, toPairs } from 'lodash/fp';
+import { toPairs } from 'lodash/fp';
 import { compose } from 'recompose';
-import { Image } from '../../Assets';
 import { SeamlessText } from '../../Form/Fields';
 import { Tweened } from '../../../behaviours/Tweened';
 import { Node, Icon } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import PanelGroup from './PanelGroup';
 
-const sortAssets = compose(
-  toPairs,
-  groupBy('extension'),
-  map(assetPath => ({ assetPath, extension: path.extname(assetPath) })),
-);
+const renderForm = (formName, protocol) => {
+  const formPath = `/edit/${encodeURIComponent(protocol)}/form/${formName}`;
+
+  return (
+    <div className="timeline-overview__form" key={formName}>
+      <div className="timeline-overview__form-name">
+        <Link to={formPath}>{formName}</Link>
+      </div>
+      <div className="timeline-overview__form-edit">
+        <Link to={formPath} className="button button--small">edit</Link>
+      </div>
+    </div>
+  );
+};
 
 class Overview extends Component {
   get renderNodeTypes() {
@@ -64,28 +72,25 @@ class Overview extends Component {
     );
   }
 
-  get renderAssets() {
-    const assets = this.props.assets;
-
-    return sortAssets(assets)
-      .map(([groupName, group]) => {
-        if (!['.png', '.jpg', '.gif'].includes(groupName)) {
-          return (
-            <div className="timeline-overview__badge" key={groupName}>
-              <em>{groupName}</em> x {group.length}
-            </div>
-          );
-        }
-
-        return (
-          <div className="timeline-overview__asset-group" key={groupName}>
-            {group.map(
-              ({ assetPath }) =>
-                <Image url={assetPath} className="timeline-overview__asset" key={assetPath} />,
-            )}
-          </div>
-        );
-      });
+  get renderForms() {
+    const forms = toPairs(this.props.forms);
+    return (
+      <div>
+        <div className="timeline-overview__forms">
+          {forms.map(
+            ([formName]) => renderForm(formName, this.props.match.params.protocol),
+          )}
+        </div>
+        <div className="timeline-overview__new-form">
+          <Link
+            to={`/edit/${encodeURIComponent(this.props.match.params.protocol)}/form/`}
+            className="button button--small"
+          >
+            Create new form
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -107,9 +112,7 @@ class Overview extends Component {
                   onChange: ({ target: { value } }) => { updateOptions({ name: value }); },
                 }}
               />
-
               <div className="timeline-overview__groups">
-
                 <PanelGroup title="Variable registry">
                   <br />
                   <h4>Node types</h4>
@@ -119,7 +122,7 @@ class Overview extends Component {
                   { this.renderEdgeTypes }
                 </PanelGroup>
                 <PanelGroup title="Forms">
-                  <p>Forms not configurable yet.</p>
+                  { this.renderForms }
                 </PanelGroup>
                 <PanelGroup title="Global Options">
                   <p>Version: {version}</p>
@@ -143,7 +146,7 @@ Overview.propTypes = {
   variableRegistry: PropTypes.object,
   externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   updateOptions: PropTypes.func,
-  assets: PropTypes.array,
+  match: PropTypes.object.isRequired,
 };
 
 Overview.defaultProps = {
@@ -153,15 +156,6 @@ Overview.defaultProps = {
   variableRegistry: {},
   externalData: {},
   updateOptions: () => {},
-  assets: [],
-};
-
-const mapStateToProps = (state) => {
-  const workingPath = get(state, 'session.activeProtocol.workingPath');
-
-  return {
-    assets: workingPath ? fs.readdirSync(path.join(workingPath, 'assets')) : [],
-  };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -169,7 +163,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
+  withRouter,
   Tweened({
     tweenName: 'protocol',
     tweenElement: 'overview-panel',

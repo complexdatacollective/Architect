@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import propTypes from 'prop-types';
 import cx from 'classnames';
 import Fade from './Transitions/Fade';
@@ -19,6 +20,10 @@ class Modal extends Component {
   constructor(props) {
     super(props);
 
+    this.portal = document.createElement('div');
+    const body = document.getElementsByTagName('body')[0];
+    body.appendChild(this.portal);
+
     this.state = { show: false };
   }
 
@@ -33,17 +38,20 @@ class Modal extends Component {
       'modal',
     );
 
-    return (
-      <Fade className={modalClasses} in={show}>
-        <div>
-          <div className="modal__background" />
-          <div className="modal__content">
-            <Drop in>
-              { children }
-            </Drop>
+    return ReactDOM.createPortal(
+      (
+        <Fade className={modalClasses} in={show}>
+          <div>
+            <div className="modal__background" />
+            <div className="modal__content">
+              <Drop in>
+                { children }
+              </Drop>
+            </div>
           </div>
-        </div>
-      </Fade>
+        </Fade>
+      ),
+      this.portal,
     );
   }
 }

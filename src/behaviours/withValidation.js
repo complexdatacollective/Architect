@@ -3,9 +3,8 @@ import { getValidations } from '../utils/validations';
 
 const withValidation = withPropsOnChange(
   ['validation'],
-  ({ validation, ...rest }) => ({
+  ({ validation }) => ({
     validate: getValidations(validation || []),
-    ...rest,
   }),
 );
 

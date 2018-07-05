@@ -3,27 +3,27 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-const CodeView = ({ toggleCodeView, stage }) => (
+const CodeView = ({ toggleCodeView, code }) => (
   <div className="stage-editor__code" onClick={toggleCodeView}>
     <pre>
       <code>
-        { JSON.stringify(stage, null, 2) }
+        { JSON.stringify(code, null, 2) }
       </code>
     </pre>
   </div>
 );
 
 CodeView.propTypes = {
-  stage: PropTypes.object,
+  code: PropTypes.object,
   toggleCodeView: PropTypes.func.isRequired,
 };
 
 CodeView.defaultProps = {
-  stage: {},
+  code: {},
 };
 
 const mapStateToProps = (state, { form }) => ({
-  stage: getFormValues(form.name)(state),
+  code: getFormValues(form)(state),
 });
 
 export default connect(mapStateToProps)(CodeView);
