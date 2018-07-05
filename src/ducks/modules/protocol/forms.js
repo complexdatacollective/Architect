@@ -7,7 +7,8 @@ const initialState = {
 
 const formTemplate = {
   name: '',
-  varirables: [],
+  fields: [],
+  optionToAddAnother: false,
 };
 
 const formNameFromTitle = title => title.replace(/\W/g, '');

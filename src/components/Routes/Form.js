@@ -95,7 +95,7 @@ class Form extends PureComponent {
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
   const formName = get(props.match.params, 'form', null);
-  const form = get(protocol, ['forms', formName], {});
+  const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
 
   return {
     form,
