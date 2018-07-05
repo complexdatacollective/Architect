@@ -1,25 +1,16 @@
-/* eslint-disable */
-
 import React, { Component } from 'react';
-import {
-  Form,
-  change,
-  isDirty,
-  isValid,
-  formValueSelector,
-} from 'redux-form';
-import { connect } from 'react-redux';
+import { Form } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get, keys, map, toPairs, fromPairs } from 'lodash';
 import { ValidatedField, MultiSelect } from '../Form';
 import * as Fields from '../../ui/components/Fields';
-import { Node, Button } from '../../ui/components';
 import * as ArchitectFields from '../Form/Fields';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Disable from '../Disable';
 import FormCodeView from '../FormCodeView';
+import NodeType from './NodeType';
 
 const allowedTypes = ['text', 'number', 'boolean'];
 
@@ -35,7 +26,7 @@ const getInputsForType = (type) => {
 const optionGetter = (variables) => {
   const allowedVariables = fromPairs(
     toPairs(variables)
-      .filter(([name, options]) => allowedTypes.includes(options.type)),
+      .filter(([, options]) => allowedTypes.includes(options.type)),
   );
   const variableNames = keys(allowedVariables);
 
@@ -47,20 +38,16 @@ const optionGetter = (variables) => {
         return variableNames
           .map(
             value =>
-              ({ value, label: value, disabled: value !== variable && used.includes(value)})
+              ({ value, label: value, disabled: value !== variable && used.includes(value) }),
           );
       }
       case 'component':
-        return getInputsForType(get(variables, [variable, 'type']))
+        return getInputsForType(get(variables, [variable, 'type']));
       default:
         return [];
     }
-  }
+  };
 };
-
-const NodeType = ({ input: { value, checked, onChange }, label }) => (
-  <Node onClick={() => onChange(value)} label={label} selected={checked} />
-);
 
 class FormEditor extends Component {
   handleAttemptTypeChange = () => {
@@ -115,7 +102,7 @@ class FormEditor extends Component {
               <Disable
                 disabled={!!this.props.nodeType}
                 className="stage-editor__reset"
-                onClick={!!this.props.nodeType ? this.handleAttemptTypeChange : () => {}}
+                onClick={this.props.nodeType ? this.handleAttemptTypeChange : () => {}}
               >
                 <ValidatedField
                   name="type"
@@ -166,27 +153,16 @@ class FormEditor extends Component {
 FormEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
   codeView: PropTypes.bool.isRequired,
+  dirty: PropTypes.bool.isRequired,
+  valid: PropTypes.bool.isRequired,
+  resetFields: PropTypes.func.isRequired,
+  nodeType: PropTypes.string.isRequired,
+  variables: PropTypes.object.isRequired,
+  nodeTypes: PropTypes.array.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  form: PropTypes.string.isRequired,
 };
-
-const makeMapStateToProps = () => {
-  const getFormValue = formValueSelector('edit-form');
-  const getIsDirty = isDirty('edit-form');
-  const getIsValid = isValid('edit-form');
-
-  return state => ({
-    nodeType: getFormValue(state, 'type'),
-    dirty: getIsDirty(state),
-    valid: getIsValid(state),
-  });
-};
-
-const mapDispatchToProps = dispatch => ({
-  resetFields: () => {
-    dispatch(change('edit-form', 'type', null));
-    dispatch(change('edit-form', 'fields', null));
-  },
-});
 
 export { FormEditor };
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(FormEditor);
+export default FormEditor;
