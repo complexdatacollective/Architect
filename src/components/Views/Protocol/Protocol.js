@@ -38,7 +38,7 @@ class Protocol extends PureComponent {
     stages: PropTypes.array.isRequired,
     hasUnsavedChanges: PropTypes.bool,
     hasChanges: PropTypes.bool,
-    match: PropTypes.object.isRequired,
+    match: PropTypes.object,
     location: PropTypes.object.isRequired,
     loadProtocol: PropTypes.func.isRequired,
     saveProtocol: PropTypes.func.isRequired,
@@ -47,6 +47,7 @@ class Protocol extends PureComponent {
   static defaultProps = {
     hasUnsavedChanges: false,
     hasChanges: false,
+    match: null,
   };
 
   constructor(props) {

@@ -46,6 +46,7 @@ class Form extends PureComponent {
   renderButtons() {
     const saveButton = (
       <Button
+        key="save"
         size="small"
         onClick={this.submitForm}
         color="white"

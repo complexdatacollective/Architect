@@ -23,7 +23,7 @@ const CSSTransitionRoute = ({ component: Component, ...rest }) => (
 );
 
 CSSTransitionRoute.propTypes = {
-  component: PropTypes.node.isRequired,
+  component: PropTypes.func.isRequired,
 };
 
 export default CSSTransitionRoute;

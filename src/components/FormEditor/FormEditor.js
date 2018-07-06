@@ -156,11 +156,15 @@ FormEditor.propTypes = {
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
   resetFields: PropTypes.func.isRequired,
-  nodeType: PropTypes.string.isRequired,
+  nodeType: PropTypes.string,
   variables: PropTypes.object.isRequired,
   nodeTypes: PropTypes.array.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
+};
+
+FormEditor.defaultProps = {
+  nodeType: null,
 };
 
 export { FormEditor };

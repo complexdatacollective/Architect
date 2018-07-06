@@ -11,7 +11,7 @@ const ShowRoute = ({ component: Component, path, location, ...rest }) => (
 );
 
 ShowRoute.propTypes = {
-  component: PropTypes.node.isRequired,
+  component: PropTypes.func.isRequired,
 };
 
 export default ShowRoute;

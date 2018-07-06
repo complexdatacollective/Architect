@@ -47,7 +47,7 @@ const Item = compose(
       <div className="form-fields-multi-select__rule-options">
         {properties.map(
           property => (
-            <div className="form-fields-multi-select__rule-option">
+            <div className="form-fields-multi-select__rule-option" key={property}>
               <Field
                 component={Select}
                 name={`${field}.${property}`}
@@ -126,7 +126,7 @@ const MultiSelect = ({
 MultiSelect.propTypes = {
   name: PropTypes.string.isRequired,
   properties: PropTypes.array.isRequired,
-  options: PropTypes.object.isRequired,
+  options: PropTypes.func.isRequired,
   label: PropTypes.string,
 };
 
