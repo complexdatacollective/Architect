@@ -4,9 +4,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-const ShowRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest}>
-    {props => <Component {...props} show={!!props.match} />}
+const ShowRoute = ({ component: Component, path, location, ...rest }) => (
+  <Route path={path} location={location}>
+    {props => <Component {...props} {...rest} show={!!props.match} />}
   </Route>
 );
 

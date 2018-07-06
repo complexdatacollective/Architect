@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isDirty } from 'redux-form';
 import { get } from 'lodash';
-import memoryHistory from '../../history';
 import { Button } from '../../ui/components';
 import FormEditor from '../FormEditor';
 import Card from './ProtocolCard';
@@ -19,6 +18,7 @@ class Form extends PureComponent {
     createForm: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
     hasUnsavedChanges: PropTypes.bool,
+    onComplete: PropTypes.func.isRequired,
     show: PropTypes.bool,
   };
 
@@ -29,7 +29,7 @@ class Form extends PureComponent {
     hasUnsavedChanges: false,
   };
 
-  handleSubmit = (form) => {
+  onSubmit = (form) => {
     if (this.props.formName) {
       this.props.updateForm(this.props.formName, form);
     } else {
@@ -39,11 +39,7 @@ class Form extends PureComponent {
 
   submitForm = () => {
     this.props.submitForm('edit-form');
-    memoryHistory.go(-1); // TODO: make this more explicit
-  }
-
-  handleCancel = () => {
-    memoryHistory.go(-1); // TODO: make this more explicit
+    this.props.onComplete();
   }
 
   renderButtons() {
@@ -71,11 +67,11 @@ class Form extends PureComponent {
       <Card
         buttons={this.renderButtons()}
         show={show}
-        onCancel={this.handleCancel}
+        onCancel={this.props.onComplete}
       >
         <FormEditor
           initialValues={form}
-          onSubmit={this.handleSubmit}
+          onSubmit={this.onSubmit}
         />
       </Card>
     );

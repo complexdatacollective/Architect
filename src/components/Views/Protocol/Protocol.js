@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { pick } from 'lodash';
+import { pick, get } from 'lodash';
+import history from '../../../history';
 import { Button, Icon } from '../../../ui/components';
 import { getProtocol } from '../../../selectors/protocol';
 import ShowRoute from '../../../components/ShowRoute';
@@ -71,6 +72,13 @@ class Protocol extends PureComponent {
         cancel: true,
       },
     });
+  }
+
+  onRouteComplete = () => {
+    const protocol = get(this.props.match, 'params.protocol');
+    if (protocol) {
+      history.push(`/edit/${protocol}`);
+    }
   }
 
   showCard = (card, { ...options }) => {
@@ -155,8 +163,8 @@ class Protocol extends PureComponent {
         <ShowRoute
           path="/edit/:protocol/form/:form?"
           location={location}
-          history={history}
           component={EditForm}
+          onComplete={this.onRouteComplete}
         />
       </div>
     );

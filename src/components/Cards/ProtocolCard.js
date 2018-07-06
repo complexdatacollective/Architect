@@ -22,6 +22,12 @@ class ProtocolCard extends PureComponent {
     this.state = { cancel: false };
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.show) {
+      this.setState({ cancel: false });
+    }
+  }
+
   onCancel = () => {
     this.setState(
       { cancel: true },
