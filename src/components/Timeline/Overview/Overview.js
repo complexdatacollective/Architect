@@ -27,7 +27,7 @@ const NewFormButton = Zoom(
       to={`/edit/${encodeURIComponent(protocol)}/form/`}
       className="button button--small"
     >
-      Create new form
+      New form
     </Link>
   ),
 );
