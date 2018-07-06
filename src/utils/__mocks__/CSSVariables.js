@@ -3,6 +3,7 @@ import { get } from 'lodash';
 const mockCSSVariables = {
   '--light-background': '#227733',
   '--color-mustard': '#117733',
+  '--color-sea-green': '#223344',
   '--white': '#fff',
   '--animation-duration-slow-ms': '300',
   '--animation-duration-standard-ms': '100',

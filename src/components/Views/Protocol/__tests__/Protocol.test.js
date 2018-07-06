@@ -14,6 +14,7 @@ const mockProps = {
   loadProtocol: () => {},
   stages: [{ id: 1, type: 'Foo' }],
   overview: {},
+  location: {},
   match: { params: {} },
 };
 
