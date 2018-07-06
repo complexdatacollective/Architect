@@ -8,6 +8,14 @@ import { Protocol, Start, Form, ProtocolLoader } from './components/Routes';
 import { getCSSVariableAsNumber } from './utils/CSSVariables';
 import tween from './behaviours/Tweened/tween';
 
+const CSSTransitionRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} children={props => (
+    <CSSTransition in={!!props.match} unmountOnExit mountOnEnter timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route">
+      <Component {...props} />
+    </CSSTransition>
+  )}/>
+)
+
 const getProtocolPath = pathname =>
   decodeURIComponent(nth(/^\/edit\/([^/]+)$/.exec(pathname), 1));
 
@@ -71,7 +79,16 @@ class Routes extends Component {
           path="/edit/:protocol"
           render={props => <ProtocolLoader {...props} />}
         />
-        <TransitionGroup component={null}>
+        <CSSTransitionRoute
+          path="/edit/:protocol"
+          component={Protocol}
+        />
+        <CSSTransitionRoute
+          exact
+          path="/"
+          component={Start}
+        />
+        {/* <TransitionGroup component={null}>
           <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route" key={location.key}>
             <Switch location={location}>
               <Route
@@ -96,7 +113,7 @@ class Routes extends Component {
               <Redirect to="/" />
             </Switch>
           </CSSTransition>
-        </TransitionGroup>
+        </TransitionGroup> */}
       </div>
     );
   }

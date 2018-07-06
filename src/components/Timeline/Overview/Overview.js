@@ -12,6 +12,22 @@ import { Tweened } from '../../../behaviours/Tweened';
 import { Node, Icon } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import PanelGroup from './PanelGroup';
+import Zoom from '../../../behaviours/Zoom';
+
+const EditFormButton = Zoom(
+  ({ formPath }) => <Link to={formPath} className="button button--small">edit</Link>,
+);
+
+const NewFormButton = Zoom(
+  ({ protocol }) => (
+    <Link
+      to={`/edit/${encodeURIComponent(protocol)}/form/`}
+      className="button button--small"
+    >
+      Create new form
+    </Link>
+  ),
+);
 
 const renderForm = (formName, protocol) => {
   const formPath = `/edit/${encodeURIComponent(protocol)}/form/${formName}`;
@@ -19,10 +35,10 @@ const renderForm = (formName, protocol) => {
   return (
     <div className="timeline-overview__form" key={formName}>
       <div className="timeline-overview__form-name">
-        <Link to={formPath}>{formName}</Link>
+        {formName}
       </div>
       <div className="timeline-overview__form-edit">
-        <Link to={formPath} className="button button--small">edit</Link>
+        <EditFormButton formPath={formPath} />
       </div>
     </div>
   );
@@ -82,12 +98,7 @@ class Overview extends Component {
           )}
         </div>
         <div className="timeline-overview__new-form">
-          <Link
-            to={`/edit/${encodeURIComponent(this.props.match.params.protocol)}/form/`}
-            className="button button--small"
-          >
-            Create new form
-          </Link>
+          <NewFormButton protocol={this.props.match.params.protocol} />
         </div>
       </div>
     );

@@ -77,24 +77,23 @@ class Form extends PureComponent {
     } = this.props;
 
     return (
-      <div>
-        <Card
-          buttons={this.renderButtons()}
-          show
-        >
-          <FormEditor
-            initialValues={form}
-            onSubmit={this.handleSubmit}
-          />
-        </Card>
-      </div>
+      <Card
+        buttons={this.renderButtons()}
+        show={this.props.show}
+        cancel
+      >
+        <FormEditor
+          initialValues={form}
+          onSubmit={this.handleSubmit}
+        />
+      </Card>
     );
   }
 }
 
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
-  const formName = get(props.match.params, 'form', null);
+  const formName = get(props.match, 'params.form', null);
   const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
 
   return {

@@ -11,6 +11,9 @@ import EditStage from '../../Cards/EditStage';
 import Timeline from '../../../components/Timeline';
 import ControlBar from '../../ControlBar';
 import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
+import { Route } from 'react-router-dom';
+import Wipe from '../../Transitions/Wipe';
+import Form from '../Form';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -47,6 +50,7 @@ class Protocol extends PureComponent {
 
   constructor(props) {
     super(props);
+    console.log('instance of protocol');
 
     this.state = {
       activeCard: { ...defaultActiveCardState },
@@ -54,6 +58,7 @@ class Protocol extends PureComponent {
   }
 
   componentDidMount() {
+    console.log('protocol mounted');
     // this.props.loadProtocol(decodeURIComponent(this.props.match.params.protocol));
   }
 
@@ -150,6 +155,16 @@ class Protocol extends PureComponent {
           show={this.isCardVisible(cards.editStage)}
           onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
+        />
+
+        <Route
+          path="/edit/:protocol/form/:form?"
+          location={this.props.location}
+          children={
+            (props) => (
+              <Form {...props} show={!!props.match} />
+            )
+          }
         />
       </div>
     );
