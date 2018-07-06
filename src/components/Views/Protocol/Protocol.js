@@ -6,14 +6,13 @@ import cx from 'classnames';
 import { pick } from 'lodash';
 import { Button, Icon } from '../../../ui/components';
 import { getProtocol } from '../../../selectors/protocol';
+import ShowRoute from '../../../components/ShowRoute';
 import EditSkipLogic from '../../Cards/EditSkipLogic';
 import EditStage from '../../Cards/EditStage';
+import EditForm from '../../Cards/Form';
 import Timeline from '../../../components/Timeline';
 import ControlBar from '../../ControlBar';
 import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
-import { Route } from 'react-router-dom';
-import Wipe from '../../Transitions/Wipe';
-import Form from '../Form';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -39,6 +38,7 @@ class Protocol extends PureComponent {
     hasUnsavedChanges: PropTypes.bool,
     hasChanges: PropTypes.bool,
     match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     loadProtocol: PropTypes.func.isRequired,
     saveProtocol: PropTypes.func.isRequired,
   };
@@ -50,16 +50,10 @@ class Protocol extends PureComponent {
 
   constructor(props) {
     super(props);
-    console.log('instance of protocol');
 
     this.state = {
       activeCard: { ...defaultActiveCardState },
     };
-  }
-
-  componentDidMount() {
-    console.log('protocol mounted');
-    // this.props.loadProtocol(decodeURIComponent(this.props.match.params.protocol));
   }
 
   onCardComplete = () => {
@@ -107,6 +101,7 @@ class Protocol extends PureComponent {
     const {
       overview,
       stages,
+      location,
       hasChanges,
       hasUnsavedChanges,
       saveProtocol,
@@ -157,14 +152,11 @@ class Protocol extends PureComponent {
           onCancel={this.onCardCancel}
         />
 
-        <Route
+        <ShowRoute
           path="/edit/:protocol/form/:form?"
-          location={this.props.location}
-          children={
-            (props) => (
-              <Form {...props} show={!!props.match} />
-            )
-          }
+          location={location}
+          history={history}
+          component={EditForm}
         />
       </div>
     );

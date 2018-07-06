@@ -2,19 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { nth, find, get } from 'lodash';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { Route, Redirect, Switch } from 'react-router-dom';
-import { Protocol, Start, Form, ProtocolLoader } from './components/Routes';
-import { getCSSVariableAsNumber } from './utils/CSSVariables';
+import { Route } from 'react-router-dom';
+import { Protocol, Start, ViewTransitionRoute } from './components/Views';
+import ProtocolLoader from './components/ProtocolLoader';
 import tween from './behaviours/Tweened/tween';
-
-const CSSTransitionRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} children={props => (
-    <CSSTransition in={!!props.match} unmountOnExit mountOnEnter timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route">
-      <Component {...props} />
-    </CSSTransition>
-  )}/>
-)
 
 const getProtocolPath = pathname =>
   decodeURIComponent(nth(/^\/edit\/([^/]+)$/.exec(pathname), 1));
@@ -74,47 +65,23 @@ class Routes extends Component {
   render() {
     const { location } = this.props;
     return (
-      <div>
+      <React.Fragment>
         <Route
           path="/edit/:protocol"
           render={props => <ProtocolLoader {...props} />}
         />
-        <CSSTransitionRoute
+        <ViewTransitionRoute
+          location={location}
           path="/edit/:protocol"
           component={Protocol}
         />
-        <CSSTransitionRoute
+        <ViewTransitionRoute
+          location={location}
           exact
           path="/"
           component={Start}
         />
-        {/* <TransitionGroup component={null}>
-          <CSSTransition appear timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')} classNames="route" key={location.key}>
-            <Switch location={location}>
-              <Route
-                path="/edit/:protocol/form/:form"
-                component={Form}
-              />
-              <Route
-                path="/edit/:protocol/form"
-                component={Form}
-                new
-              />
-              <Route
-                exact
-                path="/edit/:protocol"
-                component={Protocol}
-              />
-              <Route
-                exact
-                path="/"
-                component={Start}
-              />
-              <Redirect to="/" />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup> */}
-      </div>
+      </React.Fragment>
     );
   }
 }

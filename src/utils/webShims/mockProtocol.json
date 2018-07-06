@@ -637,7 +637,7 @@
       ]
     },
     "myCustomForm": {
-      "title": "Add A Person",
+      "title": "My custom form",
       "entity": "node",
       "type": "person",
       "fields": [
@@ -648,15 +648,6 @@
         {
           "variable": "nickname",
           "component": "TextInput"
-        },
-        {
-          "variable": "age",
-          "component": "TextInput"
-        },
-        {
-          "variable": "timeCreated",
-          "component": "hidden",
-          "value": "return Date.now().toString();"
         }
       ]
     }

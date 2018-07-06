@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
+import { actionCreators as protocolFileActions } from '../ducks/modules/protocol/file';
 
 class ProtocolLoader extends Component {
   constructor(props) {

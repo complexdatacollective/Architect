@@ -7,7 +7,7 @@ import { get } from 'lodash';
 import memoryHistory from '../../history';
 import { Button } from '../../ui/components';
 import FormEditor from '../FormEditor';
-import Card from '../Card';
+import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
@@ -19,11 +19,13 @@ class Form extends PureComponent {
     createForm: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
     hasUnsavedChanges: PropTypes.bool,
+    show: PropTypes.bool,
   };
 
   static defaultProps = {
     formName: null,
     form: {},
+    show: true,
     hasUnsavedChanges: false,
   };
 
@@ -55,32 +57,21 @@ class Form extends PureComponent {
         Save
       </Button>
     );
-    const cancelButton = (
-      <Button
-        size="small"
-        onClick={this.handleCancel}
-        color="white"
-        iconPosition="right"
-      >
-        Cancel
-      </Button>
-    );
 
-    return this.props.hasUnsavedChanges ?
-      [saveButton, cancelButton] :
-      [cancelButton];
+    return this.props.hasUnsavedChanges ? [saveButton] : [];
   }
 
   render() {
     const {
       form,
+      show,
     } = this.props;
 
     return (
       <Card
         buttons={this.renderButtons()}
-        show={this.props.show}
-        cancel
+        show={show}
+        onCancel={this.handleCancel}
       >
         <FormEditor
           initialValues={form}

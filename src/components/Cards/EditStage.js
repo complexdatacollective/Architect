@@ -10,7 +10,7 @@ import {
 import { pick, has } from 'lodash';
 import { makeGetStage } from '../../selectors/protocol';
 import { Button } from '../../ui/components';
-import Card from '../Routes/Protocol/Card';
+import Card from './ProtocolCard';
 import StageEditor from '../../components/StageEditor';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 
