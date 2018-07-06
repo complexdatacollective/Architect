@@ -13,6 +13,9 @@ import { Node, Icon } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import PanelGroup from './PanelGroup';
 import Zoom from '../../../behaviours/Zoom';
+import { getCSSVariableAsString } from '../../../utils/CSSVariables';
+
+const zoomColors = [getCSSVariableAsString('--color-sea-green'), '#ffffff'];
 
 const EditFormButton = Zoom(
   ({ formPath }) => <Link to={formPath} className="button button--small">edit</Link>,
@@ -38,7 +41,7 @@ const renderForm = (formName, protocol) => {
         {formName}
       </div>
       <div className="timeline-overview__form-edit">
-        <EditFormButton formPath={formPath} />
+        <EditFormButton formPath={formPath} zoomColors={zoomColors} />
       </div>
     </div>
   );
@@ -98,7 +101,7 @@ class Overview extends Component {
           )}
         </div>
         <div className="timeline-overview__new-form">
-          <NewFormButton protocol={this.props.match.params.protocol} />
+          <NewFormButton protocol={this.props.match.params.protocol} zoomColors={zoomColors} />
         </div>
       </div>
     );
