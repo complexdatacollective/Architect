@@ -113,7 +113,7 @@ class SociogramPrompt extends Component {
           <div className="stage-editor-section-prompt__group">
             <ValidatedField
               name="text"
-              component={ArchitectFields.TextArea}
+              component={Fields.TextArea}
               className="stage-editor-section-prompt__setting"
               label="Text for prompt"
               placeholder="Enter text for the prompt here"
@@ -153,7 +153,7 @@ class SociogramPrompt extends Component {
               label="Layout variable"
               validation={{ required: true }}
             >
-              <option disabled value="">Select one</option>
+              <option disabled value="">&mdash; Select a layout variable &mdash;</option>
               {layoutsForNodeType.map(([variableName, meta]) => (
                 <option value={variableName} key={variableName}>{meta.label}</option>
               ))}
@@ -177,7 +177,7 @@ class SociogramPrompt extends Component {
                 onChange={this.clearEmptyField}
                 onBlur={disableBlur}
               >
-                <option disabled value="">Select one</option>
+                <option disabled value="">&mdash; Select a variable to highlight &mdash;</option>
                 {highlightableForNodeType.map(([variableName, meta]) => (
                   <option value={variableName} key={variableName}>{meta.label}</option>
                 ))}
@@ -204,14 +204,16 @@ class SociogramPrompt extends Component {
               name="edges.create"
               component={ArchitectFields.Select}
               className="stage-editor-section-prompt__setting"
-              options={['', ...edgeTypes]}
+              options={edgeTypes}
               onChange={(...args) => {
                 this.clearEmptyField(...args);
                 this.handleHighlightOrCreateEdge(CREATE_EDGE);
               }}
               onBlur={disableBlur}
               label="Click nodes to create an edge? (disables attribute toggling)"
-            />
+            >
+              <option disabled value="">&mdash; Select an edge type &mdash;</option>
+            </Field>
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Background</h4>

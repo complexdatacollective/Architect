@@ -21,3 +21,12 @@
 .form-field {
   border-radius: unit(1.5);
 }
+
+
+.form-fields-textarea__error,
+.form-field-radio-group__error {
+  max-height: initial;
+  opacity: 1;
+  margin: unit(1) 0 0;
+  color: var(--error);
+}

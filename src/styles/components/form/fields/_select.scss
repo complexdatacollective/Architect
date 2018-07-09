@@ -7,4 +7,9 @@
     width: 100%;
     font-size: var(--base-font-size);
   }
+
+  &__error {
+    margin: unit(1) 0 0;
+    color: var(--error);
+  }
 }

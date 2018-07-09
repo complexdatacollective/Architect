@@ -4,6 +4,11 @@ $component-name: form-fields-contexts;
 .#{$component-name} {
   display: block;
 
+  &__error {
+    margin: unit(1) 0 0;
+    color: var(--error);
+  }
+
   &__option {
     cursor: pointer;
     display: inline-block;
