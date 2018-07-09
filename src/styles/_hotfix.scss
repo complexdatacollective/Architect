@@ -1,0 +1,18 @@
+:root {
+  --text: var(--color-charcoal);
+  --input-label: var(--color-charcoal);
+}
+
+.node__label-text {
+  color: var(--node--label);
+}
+
+.button {
+  color: var(--color-white);
+
+  &.button--white,
+  &.button--platinum,
+  &.button--platinum--dark {
+    color: var(--text-dark);
+  }
+}

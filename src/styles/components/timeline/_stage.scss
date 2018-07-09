@@ -62,7 +62,7 @@ $component-name: timeline-stage;
     &-title {
       @include typography('title-5', font-size);
       text-align: center;
-      color: var(--architect-text);
+      color: var(--text);
       position: absolute;
       top: 50%;
       width: 100%;
@@ -83,7 +83,7 @@ $component-name: timeline-stage;
       position: absolute;
       z-index: 3;
       background-color: var(--background);
-      color: var(--text);
+      color: var(--text--light);
       display: flex;
       align-items: center;
       justify-content: center;
