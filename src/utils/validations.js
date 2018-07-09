@@ -1,4 +1,4 @@
-import { keys, get, pickBy, map, toPairs } from 'lodash';
+import { keys, pickBy, map, toPairs } from 'lodash';
 
 const coerceArray = (value) => {
   if (value instanceof Object) {
@@ -56,7 +56,7 @@ export const getValidations = validationOptions =>
       if (typeof options === 'function') { return options; }
       return Object.hasOwnProperty.call(validations, type) ?
         validations[type](options) :
-        () => (`Validation "${type}" not found`)
+        () => (`Validation "${type}" not found`);
     },
   );
 

@@ -70,7 +70,7 @@ class Contexts extends Component {
     const {
       options,
       className,
-      meta: { invalid, error, touched },
+      meta: { invalid, error },
       ...rest
     } = this.props;
 

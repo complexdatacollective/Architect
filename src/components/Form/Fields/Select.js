@@ -34,7 +34,7 @@ class Select extends PureComponent {
       children,
       options,
       label,
-      meta: { invalid, error, touched },
+      meta: { invalid, error },
       ...rest
     } = this.props;
 
