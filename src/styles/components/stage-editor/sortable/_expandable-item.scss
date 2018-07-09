@@ -5,10 +5,11 @@ $component-name: stage-editor-sortable-expandable-item;
 
   &__preview {
     background-color: var(--architect-sortable-preview-background);
-    color: var(--architect-sortable-preview-text);
+    color: var(--architect-sortable-text);
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    border-radius: unit(1.5) unit(1.5) 0 0;
 
     &-content {
       flex-grow: 1;
@@ -26,15 +27,30 @@ $component-name: stage-editor-sortable-expandable-item;
     &--right {
       align-items: flex-start;
     }
+
+    .icon {
+      .cls-1,
+      .cls-2 {
+        fill: var(--architect-sortable-text);
+      }
+    }
   }
 
   &__expand {
-    background-color: var(--architect-sortable-preview-background--light);
+    background-color: var(--architect-sortable-preview-background--alt);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: unit(1);
+    border-radius: 0 0 unit(1.5) unit(1.5);
     cursor: pointer;
+
+    .icon {
+      .cls-1,
+      .cls-2 {
+        fill: var(--architect-sortable-text);
+      }
+    }
 
     &--open,
     &--close {
@@ -56,10 +72,8 @@ $component-name: stage-editor-sortable-expandable-item;
     transform-origin: 50% 0;
     background-color: var(--architect-sortable-background);
     color: var(--architect-sortable-text);
-    border-width: 0 2px 2px;
-    border-color: var(--architect-sortable-header-background);
-    border-style:  solid;
-    padding: unit(2);
+    padding: unit(4);
+    border-radius: 0 0 unit(1.5) unit(1.5);
   }
 
   &--open {
@@ -72,6 +86,8 @@ $component-name: stage-editor-sortable-expandable-item;
     }
 
     .#{$component-name}__expand {
+      border-radius: 0;
+
       &--open {
         display: none;
       }
