@@ -7,7 +7,8 @@ import { keys, get, toPairs, isEmpty } from 'lodash';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
 import { ValidatedField } from '../../../Form';
-import * as Fields from '../../../Form/Fields';
+import * as ArchitectFields from '../../../Form/Fields';
+import * as Fields from '../../../../ui/components/Fields';
 import ExpandableItem from '../../Sortable/ExpandableItem';
 
 // Background options
@@ -112,7 +113,7 @@ class SociogramPrompt extends Component {
           <div className="stage-editor-section-prompt__group">
             <ValidatedField
               name="text"
-              component={Fields.TextArea}
+              component={ArchitectFields.TextArea}
               className="stage-editor-section-prompt__setting"
               label="Text for prompt"
               placeholder="Enter text for the prompt here"
@@ -123,7 +124,7 @@ class SociogramPrompt extends Component {
             <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
             <ValidatedField
               name="subject"
-              component={Fields.Contexts}
+              component={ArchitectFields.Contexts}
               className="stage-editor-section-prompt__setting"
               parse={value => ({ type: value, entity: 'node' })}
               format={value => get(value, 'type')}
@@ -135,7 +136,7 @@ class SociogramPrompt extends Component {
               <div>
                 <Field
                   name="sortOrderBy"
-                  component={Fields.OrderBy}
+                  component={ArchitectFields.OrderBy}
                   className="stage-editor-section-prompt__setting"
                   variables={variablesForNodeType}
                   label="How would you like to sort the node bin?"
@@ -147,7 +148,7 @@ class SociogramPrompt extends Component {
             <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
             <ValidatedField
               name="layout.variable"
-              component={Fields.Select}
+              component={ArchitectFields.Select}
               className="stage-editor-section-prompt__setting"
               label="Layout variable"
               validation={{ required: true }}
@@ -170,7 +171,7 @@ class SociogramPrompt extends Component {
               <h4 className="stage-editor-section-prompt__group-title">Attributes</h4>
               <Field
                 name="highlight.variable"
-                component={Fields.Select}
+                component={ArchitectFields.Select}
                 className="stage-editor-section-prompt__setting"
                 label="Would you like to highlight nodes based on any attribute?"
                 onChange={this.clearEmptyField}
@@ -194,14 +195,14 @@ class SociogramPrompt extends Component {
             <h4 className="stage-editor-section-prompt__group-title">Edges</h4>
             <Field
               name="edges.display"
-              component={Fields.CheckboxList}
+              component={Fields.CheckboxGroup}
               className="stage-editor-section-prompt__setting"
               options={edgeTypes}
               label="Which edges would you like to show?"
             />
             <Field
               name="edges.create"
-              component={Fields.Select}
+              component={ArchitectFields.Select}
               className="stage-editor-section-prompt__setting"
               options={['', ...edgeTypes]}
               onChange={(...args) => {
@@ -214,7 +215,7 @@ class SociogramPrompt extends Component {
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Background</h4>
-            <Fields.Mode
+            <ArchitectFields.Mode
               label="Choose a background type"
               className="stage-editor-section-prompt__setting"
               options={[
@@ -248,7 +249,7 @@ class SociogramPrompt extends Component {
               <div style={{ position: 'relative', minHeight: '100px' }}>
                 <Field
                   name="background.image"
-                  component={Fields.Image}
+                  component={ArchitectFields.Image}
                   className="stage-editor-section-prompt__setting"
                   label="Background image"
                 />

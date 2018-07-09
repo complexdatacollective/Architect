@@ -1,6 +1,7 @@
 :root {
   --text: var(--color-charcoal);
   --input-label: var(--color-charcoal);
+  --input-background: var(--color-platinum--dark);
 }
 
 .node__label-text {
@@ -15,4 +16,8 @@
   &.button--platinum--dark {
     color: var(--text-dark);
   }
+}
+
+.form-field {
+  border-radius: unit(1.5);
 }
