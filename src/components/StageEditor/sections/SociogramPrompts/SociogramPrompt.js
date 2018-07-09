@@ -6,6 +6,7 @@ import { Field, clearFields, isDirty, FormSection } from 'redux-form';
 import { keys, get, toPairs, isEmpty } from 'lodash';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
+import { ValidatedField } from '../../../Form';
 import * as Fields from '../../../Form/Fields';
 import ExpandableItem from '../../Sortable/ExpandableItem';
 
@@ -18,6 +19,9 @@ const HIGHLIGHT = 'CLICK/HIGHLIGHT';
 const CREATE_EDGE = 'CLICK/CREATE_EDGE';
 
 const disableBlur = event => event.preventDefault();
+
+const hasSubject = value =>
+  (get(value, 'type') && get(value, 'entity') ? undefined : 'Required');
 
 class SociogramPrompt extends Component {
   static propTypes = {
@@ -87,7 +91,6 @@ class SociogramPrompt extends Component {
               <div className="stage-editor-section-sociogram-prompt__preview-icon">
                 <Field
                   name="subject.type"
-
                   component={field => (<Node label={field.input.value} />)}
                 />
               </div>
@@ -107,17 +110,18 @@ class SociogramPrompt extends Component {
       >
         <FormSection name={fieldId}>
           <div className="stage-editor-section-prompt__group">
-            <Field
+            <ValidatedField
               name="text"
               component={Fields.TextArea}
               className="stage-editor-section-prompt__setting"
               label="Text for prompt"
               placeholder="Enter text for the prompt here"
+              validation={{ required: true }}
             />
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
-            <Field
+            <ValidatedField
               name="subject"
               component={Fields.Contexts}
               className="stage-editor-section-prompt__setting"
@@ -125,6 +129,7 @@ class SociogramPrompt extends Component {
               format={value => get(value, 'type')}
               options={nodeTypes}
               label="Which node would you like to layout?"
+              validation={{ hasSubject }}
             />
             <Guidance contentId="guidance.editor.sociogram_prompt.sortOrderBy">
               <div>
@@ -140,17 +145,18 @@ class SociogramPrompt extends Component {
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
-            <Field
+            <ValidatedField
               name="layout.variable"
               component={Fields.Select}
               className="stage-editor-section-prompt__setting"
               label="Layout variable"
+              validation={{ required: true }}
             >
               <option disabled value="">Select one</option>
               {layoutsForNodeType.map(([variableName, meta]) => (
                 <option value={variableName} key={variableName}>{meta.label}</option>
               ))}
-            </Field>
+            </ValidatedField>
             <Field
               name="layout.allowPositioning"
               component={Fields.Checkbox}
@@ -170,7 +176,7 @@ class SociogramPrompt extends Component {
                 onChange={this.clearEmptyField}
                 onBlur={disableBlur}
               >
-                <option />
+                <option disabled value="">Select one</option>
                 {highlightableForNodeType.map(([variableName, meta]) => (
                   <option value={variableName} key={variableName}>{meta.label}</option>
                 ))}
