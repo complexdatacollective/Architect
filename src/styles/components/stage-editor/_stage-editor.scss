@@ -19,8 +19,8 @@
     overflow-y: scroll;
     overflow-x: hidden;
     background: var(--settings);
-    color: var(--text);
-    padding: 20px;
+    color: var(--text--light);
+    padding: unit(4) unit(2);
     transition: opacity var(--animation-duration-standard) var(--animation-easing),
     max-height var(--animation-duration-standard) var(--animation-easing),
     transform var(--animation-duration-standard) var(--animation-easing);
