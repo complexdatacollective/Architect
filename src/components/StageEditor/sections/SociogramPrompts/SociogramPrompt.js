@@ -147,7 +147,7 @@ class SociogramPrompt extends Component {
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
             <ValidatedField
-              name="layout.variable"
+              name="layout.layoutVariable"
               component={ArchitectFields.Select}
               className="stage-editor-section-prompt__setting"
               label="Layout variable"
