@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { fieldPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import uuid from 'uuid';
