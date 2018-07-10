@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch, { form: { name } }) => ({
         id: uuid(),
         text: '',
         subject: {},
-        layout: {},
+        layout: { allowPositioning: true },
         sortOrderBy: [],
         background: { concentricCircles: 4, skewedTowardCenter: false },
       },
