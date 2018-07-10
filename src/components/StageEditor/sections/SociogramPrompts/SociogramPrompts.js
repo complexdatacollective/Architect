@@ -58,6 +58,7 @@ const mapDispatchToProps = (dispatch, { form: { name } }) => ({
         text: '',
         subject: {},
         layout: {},
+        sortOrderBy: [],
         background: { concentricCircles: 4, skewedTowardCenter: false },
       },
     ),
