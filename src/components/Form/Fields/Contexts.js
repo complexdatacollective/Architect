@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { fieldPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
 import { get, isString } from 'lodash';
 import cx from 'classnames';
@@ -16,6 +17,7 @@ class Contexts extends Component {
       onChange: PropTypes.func.isRequired,
       name: PropTypes.string.isRequired,
     }).isRequired,
+    ...fieldPropTypes,
   };
 
   static defaultProps = {
@@ -68,6 +70,7 @@ class Contexts extends Component {
     const {
       options,
       className,
+      meta: { invalid, error },
       ...rest
     } = this.props;
 
@@ -78,7 +81,10 @@ class Contexts extends Component {
 
     return (
       <div className={classNames} {...rest}>
-        { options.map(this.renderOption) }
+        <div className="form-fields-contexts__options">
+          { options.map(this.renderOption) }
+        </div>
+        {invalid && <p className="form-fields-contexts__error">{error}</p>}
       </div>
     );
   }

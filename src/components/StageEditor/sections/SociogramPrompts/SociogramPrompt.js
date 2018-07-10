@@ -6,7 +6,9 @@ import { Field, clearFields, isDirty, FormSection } from 'redux-form';
 import { keys, get, toPairs, isEmpty } from 'lodash';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
-import * as Fields from '../../../Form/Fields';
+import { ValidatedField } from '../../../Form';
+import * as ArchitectFields from '../../../Form/Fields';
+import * as Fields from '../../../../ui/components/Fields';
 import ExpandableItem from '../../Sortable/ExpandableItem';
 
 // Background options
@@ -18,6 +20,9 @@ const HIGHLIGHT = 'CLICK/HIGHLIGHT';
 const CREATE_EDGE = 'CLICK/CREATE_EDGE';
 
 const disableBlur = event => event.preventDefault();
+
+const hasSubject = value =>
+  (get(value, 'type') && get(value, 'entity') ? undefined : 'Required');
 
 class SociogramPrompt extends Component {
   static propTypes = {
@@ -87,7 +92,6 @@ class SociogramPrompt extends Component {
               <div className="stage-editor-section-sociogram-prompt__preview-icon">
                 <Field
                   name="subject.type"
-
                   component={field => (<Node label={field.input.value} />)}
                 />
               </div>
@@ -107,30 +111,32 @@ class SociogramPrompt extends Component {
       >
         <FormSection name={fieldId}>
           <div className="stage-editor-section-prompt__group">
-            <Field
+            <ValidatedField
               name="text"
               component={Fields.TextArea}
               className="stage-editor-section-prompt__setting"
               label="Text for prompt"
               placeholder="Enter text for the prompt here"
+              validation={{ required: true }}
             />
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
-            <Field
+            <ValidatedField
               name="subject"
-              component={Fields.Contexts}
+              component={ArchitectFields.Contexts}
               className="stage-editor-section-prompt__setting"
               parse={value => ({ type: value, entity: 'node' })}
               format={value => get(value, 'type')}
               options={nodeTypes}
               label="Which node would you like to layout?"
+              validation={{ hasSubject }}
             />
             <Guidance contentId="guidance.editor.sociogram_prompt.sortOrderBy">
               <div>
                 <Field
                   name="sortOrderBy"
-                  component={Fields.OrderBy}
+                  component={ArchitectFields.OrderBy}
                   className="stage-editor-section-prompt__setting"
                   variables={variablesForNodeType}
                   label="How would you like to sort the node bin?"
@@ -140,20 +146,21 @@ class SociogramPrompt extends Component {
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
-            <Field
-              name="layout.variable"
-              component={Fields.Select}
+            <ValidatedField
+              name="layout.layoutVariable"
+              component={ArchitectFields.Select}
               className="stage-editor-section-prompt__setting"
               label="Layout variable"
+              validation={{ required: true }}
             >
-              <option disabled value="">Select one</option>
+              <option disabled value="">&mdash; Select a layout variable &mdash;</option>
               {layoutsForNodeType.map(([variableName, meta]) => (
                 <option value={variableName} key={variableName}>{meta.label}</option>
               ))}
-            </Field>
+            </ValidatedField>
             <Field
               name="layout.allowPositioning"
-              component={Fields.Checkbox}
+              component={ArchitectFields.Checkbox}
               className="stage-editor-section-prompt__setting"
               label="Allow positioning?"
             />
@@ -164,20 +171,20 @@ class SociogramPrompt extends Component {
               <h4 className="stage-editor-section-prompt__group-title">Attributes</h4>
               <Field
                 name="highlight.variable"
-                component={Fields.Select}
+                component={ArchitectFields.Select}
                 className="stage-editor-section-prompt__setting"
                 label="Would you like to highlight nodes based on any attribute?"
                 onChange={this.clearEmptyField}
                 onBlur={disableBlur}
               >
-                <option />
+                <option disabled value="">&mdash; Select a variable to highlight &mdash;</option>
                 {highlightableForNodeType.map(([variableName, meta]) => (
                   <option value={variableName} key={variableName}>{meta.label}</option>
                 ))}
               </Field>
               <Field
                 name="highlight.allowHighlighting"
-                component={Fields.Checkbox}
+                component={ArchitectFields.Checkbox}
                 className="stage-editor-section-prompt__setting"
                 label="Click a node to toggle this attribute (disables edge creation)"
                 onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
@@ -188,27 +195,29 @@ class SociogramPrompt extends Component {
             <h4 className="stage-editor-section-prompt__group-title">Edges</h4>
             <Field
               name="edges.display"
-              component={Fields.CheckboxList}
+              component={Fields.CheckboxGroup}
               className="stage-editor-section-prompt__setting"
               options={edgeTypes}
               label="Which edges would you like to show?"
             />
             <Field
               name="edges.create"
-              component={Fields.Select}
+              component={ArchitectFields.Select}
               className="stage-editor-section-prompt__setting"
-              options={['', ...edgeTypes]}
+              options={edgeTypes}
               onChange={(...args) => {
                 this.clearEmptyField(...args);
                 this.handleHighlightOrCreateEdge(CREATE_EDGE);
               }}
               onBlur={disableBlur}
               label="Click nodes to create an edge? (disables attribute toggling)"
-            />
+            >
+              <option disabled value="">&mdash; Select an edge type &mdash;</option>
+            </Field>
           </div>
           <div className="stage-editor-section-prompt__group">
             <h4 className="stage-editor-section-prompt__group-title">Background</h4>
-            <Fields.Mode
+            <ArchitectFields.Mode
               label="Choose a background type"
               className="stage-editor-section-prompt__setting"
               options={[
@@ -232,7 +241,7 @@ class SociogramPrompt extends Component {
                 />
                 <Field
                   name="background.skewedTowardCenter"
-                  component={Fields.Checkbox}
+                  component={ArchitectFields.Checkbox}
                   className="stage-editor-section-prompt__setting"
                   label="Skewed towards center?"
                 />
@@ -242,7 +251,7 @@ class SociogramPrompt extends Component {
               <div style={{ position: 'relative', minHeight: '100px' }}>
                 <Field
                   name="background.image"
-                  component={Fields.Image}
+                  component={ArchitectFields.Image}
                   className="stage-editor-section-prompt__setting"
                   label="Background image"
                 />

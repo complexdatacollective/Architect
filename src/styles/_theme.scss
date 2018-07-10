@@ -6,6 +6,7 @@
   --architect-control-bar-shadow: rgba(20, 0, 0, .3);
   --architect-titlebar: var(--color-sea-green--dark);
 
+  --text--light: var(--color-white);
 
   --architect-background: var(--color-white);
   --architect-text: var(--color-charcoal);
@@ -14,9 +15,9 @@
 
   --architect-sortable-text: var(--color-charcoal);
   --architect-sortable-background: var(--color-platinum);
-  --architect-sortable-preview-background: var(--color-platinum--dark);
-  --architect-sortable-preview-background--light: var(--color-platinum);
-  --architect-sortable-preview-text: var(--color-white);
+  --architect-sortable-preview-background: var(--color-platinum);
+  --architect-sortable-preview-background--alt: var(--color-platinum--dark);
+  // --architect-sortable-preview-text: var(--color-white);
 
   --architect-edit-button-background: var(--primary);
   --architect-edit-button-fill: var(--color-white);
@@ -42,7 +43,7 @@
   --architect-panel-tab: var(--color-sea-green);
   --architect-panel-tab--hover: var(--color-sea-green--dark);
   --architect-panel-tab-label: var(--color-white);
-  --architect-border: var(--color-platinum);
+  --architect-border: var(--color-platinum--dark);
   --architect-input-placeholder: var(--color-platinum);
   --architect-input-focus: var(--color-sea-green);
   --architect-intent--inactive: var(--color-charcoal);

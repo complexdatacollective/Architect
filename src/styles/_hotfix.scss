@@ -1,0 +1,32 @@
+:root {
+  --text: var(--color-charcoal);
+  --input-label: var(--color-charcoal);
+  --input-background: var(--color-platinum--dark);
+}
+
+.node__label-text {
+  color: var(--node--label);
+}
+
+.button {
+  color: var(--color-white);
+
+  &.button--white,
+  &.button--platinum,
+  &.button--platinum--dark {
+    color: var(--text-dark);
+  }
+}
+
+.form-field {
+  border-radius: unit(1.5);
+}
+
+
+.form-fields-textarea__error,
+.form-field-radio-group__error {
+  max-height: initial;
+  opacity: 1;
+  margin: unit(1) 0 0;
+  color: var(--error);
+}

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { fieldPropTypes } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import uuid from 'uuid';
@@ -10,6 +11,7 @@ class Select extends PureComponent {
     input: PropTypes.object,
     label: PropTypes.string,
     children: PropTypes.node,
+    meta: PropTypes.object,
   };
 
   static defaultProps = {
@@ -18,6 +20,7 @@ class Select extends PureComponent {
     input: {},
     label: null,
     children: null,
+    meta: { invalid: false, error: null, touched: false },
   };
 
   componentWillMount() {
@@ -31,6 +34,7 @@ class Select extends PureComponent {
       children,
       options,
       label,
+      meta: { invalid, error },
       ...rest
     } = this.props;
 
@@ -51,6 +55,7 @@ class Select extends PureComponent {
           {children}
           {options.map(option => <option value={option} key={option}>{option}</option>)}
         </select>
+        {invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );
   }

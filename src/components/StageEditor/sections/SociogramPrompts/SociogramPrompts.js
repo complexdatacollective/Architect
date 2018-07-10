@@ -2,14 +2,19 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { FieldArray, arrayPush } from 'redux-form';
+import { arrayPush } from 'redux-form';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import Guidance from '../../../Guidance';
 import SociogramPrompt from './SociogramPrompt';
 import { Items, NewButton } from '../../Sortable';
+import ValidatedFieldArray from '../../../Form/ValidatedFieldArray';
 
 const fieldName = 'prompts';
+
+const notEmpty = value => (
+  value && value.length > 0 ? undefined : 'You must create at least one prompt'
+);
 
 const SociogramPrompts = ({
   form,
@@ -21,11 +26,12 @@ const SociogramPrompts = ({
       <p>Add prompts to your Sociogram:</p>
       <div className="stage-editor-section-prompts">
         <div className="stage-editor-section-prompts__prompts">
-          <FieldArray
+          <ValidatedFieldArray
             name={fieldName}
             component={Items}
             itemComponent={SociogramPrompt}
             form={form}
+            validation={{ notEmpty }}
           />
         </div>
         <NewButton onClick={addNewPrompt} />
@@ -57,7 +63,8 @@ const mapDispatchToProps = (dispatch, { form: { name } }) => ({
         id: uuid(),
         text: '',
         subject: {},
-        layout: {},
+        layout: { allowPositioning: true },
+        sortOrderBy: [],
         background: { concentricCircles: 4, skewedTowardCenter: false },
       },
     ),
