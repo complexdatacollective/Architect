@@ -160,7 +160,7 @@ class SociogramPrompt extends Component {
             </ValidatedField>
             <Field
               name="layout.allowPositioning"
-              component={ArchitectFields.Checkbox}
+              component={Fields.Checkbox}
               className="stage-editor-section-prompt__setting"
               label="Allow positioning?"
             />
@@ -184,7 +184,7 @@ class SociogramPrompt extends Component {
               </Field>
               <Field
                 name="highlight.allowHighlighting"
-                component={ArchitectFields.Checkbox}
+                component={Fields.Checkbox}
                 className="stage-editor-section-prompt__setting"
                 label="Click a node to toggle this attribute (disables edge creation)"
                 onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
@@ -241,7 +241,7 @@ class SociogramPrompt extends Component {
                 />
                 <Field
                   name="background.skewedTowardCenter"
-                  component={ArchitectFields.Checkbox}
+                  component={Fields.Checkbox}
                   className="stage-editor-section-prompt__setting"
                   label="Skewed towards center?"
                 />
