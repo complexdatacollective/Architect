@@ -41,7 +41,7 @@ class Select extends PureComponent {
       children,
       options,
       label,
-      meta: { invalid, error },
+      meta: { visited, invalid, error },
       ...rest
     } = this.props;
 
@@ -67,7 +67,7 @@ class Select extends PureComponent {
             },
           )}
         </select>
-        {invalid && <p className="form-fields-select__error">{error}</p>}
+        {visited && invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );
   }

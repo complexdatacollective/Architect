@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose, defaultProps, withProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
-import { FieldArray, Field, formValueSelector } from 'redux-form';
+import { FieldArray, formValueSelector } from 'redux-form';
 import { Icon } from '../../ui/components';
 import Select from './Fields/Select';
+import ValidatedField from '../Form/ValidatedField';
 
 const ItemHandle = compose(
   SortableHandle,
@@ -48,11 +49,14 @@ const Item = compose(
         {properties.map(
           property => (
             <div className="form-fields-multi-select__rule-option" key={property}>
-              <Field
+              <ValidatedField
                 component={Select}
                 name={`${field}.${property}`}
                 options={options(property, rowValues, allValues)}
-              />
+                validation={{ required: true }}
+              >
+                <option value="" disabled>&mdash; Select {property} &mdash;</option>
+              </ValidatedField>
             </div>
           ),
         )}
