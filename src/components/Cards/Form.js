@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { submit, isDirty } from 'redux-form';
+import { submit, isDirty, isInvalid } from 'redux-form';
 import { get } from 'lodash';
 import { Button } from '../../ui/components';
 import FormEditor from '../FormEditor';
@@ -18,6 +18,7 @@ class Form extends PureComponent {
     createForm: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
     hasUnsavedChanges: PropTypes.bool,
+    hasErrors: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
     show: PropTypes.bool,
   };
@@ -26,6 +27,7 @@ class Form extends PureComponent {
     formName: null,
     form: {},
     show: true,
+    hasErrors: false,
     hasUnsavedChanges: false,
   };
 
@@ -51,6 +53,7 @@ class Form extends PureComponent {
         onClick={this.submitForm}
         color="white"
         iconPosition="right"
+        disabled={this.props.hasErrors}
       >
         Save
       </Button>
@@ -80,6 +83,9 @@ class Form extends PureComponent {
   }
 }
 
+const editFormIsDirty = isDirty('edit-form');
+const editFormIsInvalid = isInvalid('edit-form');
+
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
   const formName = get(props.match, 'params.form', null);
@@ -88,7 +94,8 @@ function mapStateToProps(state, props) {
   return {
     form,
     formName,
-    hasUnsavedChanges: !formName || isDirty('edit-form')(state),
+    hasUnsavedChanges: !formName || editFormIsDirty(state),
+    hasErrors: editFormIsInvalid(state),
   };
 }
 

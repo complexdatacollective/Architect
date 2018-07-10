@@ -9,7 +9,8 @@
   --text: var(--color-charcoal);
   --input-background: var(--color-platinum--dark);
   --input-label: var(--color-charcoal);
-  --text--light: var(--color-white); // actually this one is new
+  --text-light: var(--color-white); // actually this one is new
+  --text-dark: var(--color-charcoal);
 
   // App Chrome
   --architect-wave: var(--color-sea-green);
@@ -101,7 +102,7 @@
 }
 
 .button {
-  color: var(--text--light);
+  color: var(--text-light);
 
   &--white, &--platinum, &--platinum--dark {
     color: var(--text-dark);

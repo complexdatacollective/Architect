@@ -55,7 +55,7 @@ $component-name: form-fields-multi-select;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text--light);
+    color: var(--text-light);
 
     .icon {
       width: unit(1.5);
@@ -63,7 +63,7 @@ $component-name: form-fields-multi-select;
 
       .cls-1,
       .cls-2 {
-        fill: var(--text--light);
+        fill: var(--text-light);
       }
     }
   }

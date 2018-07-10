@@ -6,7 +6,7 @@ $background-gradient: linear-gradient($background-gradient-start, $background-gr
   @include flex-inline;
   @include flex-align(center, middle);
   background-color: var(--architect-rules);
-  color: var(--text--light);
+  color: var(--text-light);
   transition: background-color var(--animation-easing) var(--animation-duration-standard);
   border-radius: 10px;
   padding: 10px;

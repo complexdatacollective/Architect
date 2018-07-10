@@ -18,6 +18,15 @@
   }
 }
 
+.button:disabled,
+.button[disabled] {
+  &.button--white,
+  &.button--platinum,
+  &.button--platinum--dark {
+    color: var(--text-light);
+  }
+}
+
 .form-field {
   border-radius: unit(1.5);
 }
