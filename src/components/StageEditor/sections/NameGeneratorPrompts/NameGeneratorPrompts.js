@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { FieldArray, arrayPush } from 'redux-form';
+import { arrayPush } from 'redux-form';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
@@ -10,8 +10,13 @@ import cx from 'classnames';
 import Guidance from '../../../Guidance';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
 import { Items, NewButton } from '../../Sortable';
+import ValidatedFieldArray from '../../../Form/ValidatedFieldArray';
 
 const fieldName = 'prompts';
+
+const notEmpty = value => (
+  value && value.length > 0 ? undefined : 'You must create at least one prompt'
+);
 
 const NameGeneratorPromptsSection = ({
   variableRegistry,
@@ -25,12 +30,13 @@ const NameGeneratorPromptsSection = ({
       <p>Name gen prompt specific</p>
       <div className="stage-editor-section-prompts">
         <div className="stage-editor-section-prompts__prompts">
-          <FieldArray
+          <ValidatedFieldArray
             name={fieldName}
             component={Items}
             itemComponent={NameGeneratorPrompt}
             variableRegistry={variableRegistry}
             form={form}
+            validation={{ notEmpty }}
           />
         </div>
         <NewButton onClick={addNewPrompt} />
