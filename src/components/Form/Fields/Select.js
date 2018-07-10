@@ -11,7 +11,7 @@ class Select extends PureComponent {
     input: PropTypes.object,
     label: PropTypes.string,
     children: PropTypes.node,
-    ...fieldPropTypes,
+    meta: PropTypes.object,
   };
 
   static defaultProps = {
