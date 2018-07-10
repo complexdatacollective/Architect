@@ -15,26 +15,30 @@ const SortableItem = SortableElement(
   ),
 );
 
-const Items = ({ fields, itemComponent: ItemComponent, ...rest }) => (
-  <TransitionGroup className="stage-editor-sortable-items">
-    { fields.map((fieldId, index) => (
-      <WipeTransition key={get(fields.get(index), 'id', index)}>
-        <SortableItem index={index}>
-          <ItemComponent
-            fieldId={fieldId}
-            index={index}
-            fields={fields}
-            handleDelete={() => { fields.remove(index); }}
-            {...rest}
-          />
-        </SortableItem>
-      </WipeTransition>
-    )) }
-  </TransitionGroup>
+const Items = ({ fields, meta: { error }, itemComponent: ItemComponent, ...rest }) => (
+  <div className="stage-editor-sortable-items">
+    { error && <p className="stage-editor-sortable-items__error">{error}</p> }
+    <TransitionGroup className="stage-editor-sortable-items__items">
+      { fields.map((fieldId, index) => (
+        <WipeTransition key={get(fields.get(index), 'id', index)}>
+          <SortableItem index={index}>
+            <ItemComponent
+              fieldId={fieldId}
+              index={index}
+              fields={fields}
+              handleDelete={() => { fields.remove(index); }}
+              {...rest}
+            />
+          </SortableItem>
+        </WipeTransition>
+      )) }
+    </TransitionGroup>
+  </div>
 );
 
 Items.propTypes = {
   fields: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
   itemComponent: PropTypes.func.isRequired,
   getId: PropTypes.func,
 };
