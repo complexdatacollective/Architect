@@ -1,4 +1,11 @@
 .form-fields-variable-chooser {
+  margin: unit(2) 0 0;
+  &__label {
+    @include preset('title-4');
+    font-weight: 600;
+    margin: 0 0 unit(1);
+  }
+
   &__variables {
     display: flex;
     flex-direction: row;
@@ -9,11 +16,11 @@
 
   &__variable {
     @include typography('copy-small', font-size);
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--architect-variant--1);
-    color: var(--text);
+    color: var(--text-light);
     padding: 0 unit(1) 0 unit(2);
     border-radius: unit(2);
     margin: 0 unit(.5) unit(.5) 0;
@@ -68,7 +75,7 @@
   &__add {
     &::before {
       content: '+';
-      color: var(--text);
+      color: var(--text-light);
       display: block;
       position: relative;
       top: unit(-.2);
@@ -104,6 +111,7 @@
 
     &-setting {
       background-color: var(--architect-dialog-background--dark);
+      color: var(--text-light);
       padding: unit(4);
       border-radius: unit(2);
     }
@@ -114,7 +122,7 @@
 
     .seamless-text-input__input {
       @include preset(copy-large);
-      color: var(--text);
+      color: var(--text-light);
     }
   }
 }

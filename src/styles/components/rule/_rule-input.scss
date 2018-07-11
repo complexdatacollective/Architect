@@ -30,13 +30,8 @@
     transform: translateY(-50%);
     left: 0;
     background-color: transparent;
-    color: var(--text);
+    color: var(--text-light);
     padding: 0 5px;
     border: 0;
-
-    &:focus {
-      color: var(--text-dark);
-      background-color: var(--text);
-    }
   }
 }
