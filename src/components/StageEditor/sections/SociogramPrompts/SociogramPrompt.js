@@ -124,7 +124,7 @@ class SociogramPrompt extends Component {
             <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
             <ValidatedField
               name="subject"
-              component={ArchitectFields.Contexts}
+              component={ArchitectFields.NodeSelect}
               className="stage-editor-section-prompt__setting"
               parse={value => ({ type: value, entity: 'node' })}
               format={value => get(value, 'type')}

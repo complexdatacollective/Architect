@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { keys, get, has, difference } from 'lodash';
 import cx from 'classnames';
 import Guidance from '../../Guidance';
-import Contexts from '../../../components/Form/Fields/Contexts';
+import NodeSelect from '../../../components/Form/Fields/NodeSelect';
 
 class NodeType extends Component {
   static propTypes = {
@@ -53,7 +53,7 @@ class NodeType extends Component {
                 parse={value => ({ type: value, entity: 'node' })}
                 format={value => get(value, 'type')}
                 options={nodeTypes}
-                component={Contexts}
+                component={NodeSelect}
               />
             </div>
           </div>

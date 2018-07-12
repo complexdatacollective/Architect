@@ -16,3 +16,4 @@ export { default as Checkbox } from './Checkbox';
 export { default as CheckboxList } from './CheckboxList';
 export { default as Mode } from './Mode';
 export { default as OrderBy } from './OrderBy';
+export { default as NodeSelect } from './NodeSelect';
