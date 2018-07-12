@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
 export default {
-  'guidance.editor.title': (
+  'guidance.editor.name': (
     <Fragment>
       <p>
-        A good stage title should be descriptive, but not too long. It should help you to remember
+        A good stage name should be descriptive, but not too long. It should help you to remember
         the purpose of this stage later.
       </p>
       <p>
@@ -13,6 +13,13 @@ export default {
       </p>
       <p>
         This text is displayed in the menu within Network Canvas, and on the timeline in Architect.
+      </p>
+    </Fragment>
+  ),
+  'guidance.editor.title': (
+    <Fragment>
+      <p>
+        This text is displayed on the information screen as large centered text.
       </p>
     </Fragment>
   ),

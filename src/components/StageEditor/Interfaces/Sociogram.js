@@ -1,11 +1,11 @@
 import {
-  Title,
+  Name,
   SociogramPrompts,
 } from '../sections';
 
 const Sociogram = {
   sections: [
-    Title,
+    Name,
     SociogramPrompts,
   ],
 };

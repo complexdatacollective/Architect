@@ -3,14 +3,14 @@ import Guidance from '../../Guidance';
 import { ValidatedField } from '../../../components/Form';
 import SeamlessText from '../../../components/Form/Fields/SeamlessText';
 
-const Title = () => (
-  <Guidance contentId="guidance.editor.title">
+const Name = () => (
+  <Guidance contentId="guidance.editor.name">
     <div className="stage-editor-section">
-      <h2>Title</h2>
+      <h2>Name</h2>
       <ValidatedField
-        name="title"
+        name="label"
         component={SeamlessText}
-        placeholder="Enter your title here"
+        placeholder="Enter your stage name here"
         className="stage-editor-section-title"
         validation={{ required: true }}
       />
@@ -18,4 +18,4 @@ const Title = () => (
   </Guidance>
 );
 
-export default Title;
+export default Name;

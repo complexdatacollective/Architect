@@ -1,5 +1,6 @@
 export { default as ContentItems } from './ContentItems';
 export { default as Title } from './Title';
+export { default as Name } from './Name';
 export { default as NodeType } from './NodeType';
 export { default as Form } from './Form';
 export { default as NameGeneratorPrompts } from './NameGeneratorPrompts';

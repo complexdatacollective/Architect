@@ -1,5 +1,5 @@
 import {
-  Title,
+  Name,
   NodeType,
   Form,
   NameGeneratorPrompts,
@@ -8,7 +8,7 @@ import {
 
 const NameGenerator = {
   sections: [
-    Title,
+    Name,
     NodeType,
     Form,
     NameGeneratorPrompts,
