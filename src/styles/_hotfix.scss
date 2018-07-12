@@ -9,28 +9,23 @@
 }
 
 .button {
-  color: var(--color-white);
+  color: var(--text-light);
 
-  &.button--white,
-  &.button--platinum,
-  &.button--platinum--dark {
+  &--white,
+  &--platinum,
+  &--platinum--dark {
     color: var(--text-dark);
-  }
-}
 
-.button:disabled,
-.button[disabled] {
-  &.button--white,
-  &.button--platinum,
-  &.button--platinum--dark {
-    color: var(--text-light);
+    &:disabled,
+    &[disabled] {
+      color: var(--text-light);
+    }
   }
 }
 
 .form-field {
   border-radius: unit(1.5);
 }
-
 
 .form-fields-textarea__error,
 .form-field-radio-group__error {

@@ -100,16 +100,3 @@
 
   --architect-asset-background: var(--color-charcoal);
 }
-
-.button {
-  color: var(--text-light);
-
-  &--white, &--platinum, &--platinum--dark {
-    color: var(--text-dark);
-  }
-
-  &:disabled,
-  &[disabled] {
-    background-color: var(--color-charcoal);
-  }
-}
