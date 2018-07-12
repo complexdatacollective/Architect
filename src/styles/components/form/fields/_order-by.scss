@@ -49,6 +49,7 @@ $component-name: form-fields-order-by;
   &__handle {
     cursor: pointer;
     background-color: var(--color-sea-green);
+    color: var(--color-white);
     width: unit(3);
     height: unit(3);
     display: flex;
@@ -76,6 +77,7 @@ $component-name: form-fields-order-by;
     .icon {
       width: unit(2);
       height: unit(2);
+      margin: 0 unit(1) 0 0;
     }
   }
 
