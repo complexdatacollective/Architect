@@ -40,7 +40,9 @@ ShallowWrapper {
                     src="architect-logo-icon.svg"
           />
 </NavLink>,
-        null,
+        <div
+          className="app__window"
+/>,
       ],
       "className": "app",
     },
@@ -87,7 +89,18 @@ ShallowWrapper {
         },
         "type": [Function],
       },
-      null,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": null,
+          "className": "app__window",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
     ],
     "type": "div",
   },
@@ -113,7 +126,9 @@ ShallowWrapper {
                         src="architect-logo-icon.svg"
             />
 </NavLink>,
-          null,
+          <div
+            className="app__window"
+/>,
         ],
         "className": "app",
       },
@@ -160,7 +175,18 @@ ShallowWrapper {
           },
           "type": [Function],
         },
-        null,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": null,
+            "className": "app__window",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
       ],
       "type": "div",
     },
