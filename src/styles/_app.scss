@@ -1,12 +1,6 @@
 $component-name: app;
 
 .#{$component-name} {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  background-color: var(--background);
-
   &__electron-titlebar {
     display: block;
     visibility: visible;
@@ -16,7 +10,7 @@ $component-name: app;
     top: 0;
     left: 0;
     right: 0;
-    height: 25px;
+    height: unit(2.5);
     width: 100%;
     -webkit-app-region: drag;
   }
@@ -43,5 +37,16 @@ $component-name: app;
       left: 50%;
       transform: translate(-27.5vw, unit(-33.5));
     }
+  }
+
+  &__window {
+    position: absolute;
+    top: unit(2.5);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - #{unit(2.5)});
+    width: 100%;
+    background-color: var(--architect-background);
   }
 }

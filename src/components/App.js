@@ -21,7 +21,9 @@ const App = ({ children, location: { pathname } }) => {
       <NavLink className="app__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />
       </NavLink>
-      { children }
+      <div className="app__window">
+        { children }
+      </div>
     </div>
   );
 };
