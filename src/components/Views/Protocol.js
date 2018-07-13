@@ -4,16 +4,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import { pick, get } from 'lodash';
-import history from '../../../history';
-import { Button, Icon } from '../../../ui/components';
-import { getProtocol } from '../../../selectors/protocol';
-import ShowRoute from '../../../components/ShowRoute';
-import EditSkipLogic from '../../Cards/EditSkipLogic';
-import EditStage from '../../Cards/EditStage';
-import EditForm from '../../Cards/Form';
-import Timeline from '../../../components/Timeline';
-import ControlBar from '../../ControlBar';
-import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
+import history from '../../history';
+import { Button, Icon } from '../../ui/components';
+import { getProtocol } from '../../selectors/protocol';
+import ShowRoute from '../../components/ShowRoute';
+import EditSkipLogic from '../Cards/EditSkipLogic';
+import EditStage from '../Cards/EditStage';
+import EditForm from '../Cards/Form';
+import Timeline from '../../components/Timeline';
+import ControlBar from '../ControlBar';
+import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
 
 const cards = {
   newStage: Symbol('newStage'),
