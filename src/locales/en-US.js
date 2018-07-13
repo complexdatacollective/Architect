@@ -195,4 +195,42 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.form.title': (
+    <Fragment>
+      <p>
+        A good form title should be descriptive, but not too long. It should help you to remember
+        the purpose of this form later.
+      </p>
+      <p>
+        It might help to use a standard format for the names of your forms, such as
+        <code>[TYPE]: [VARIABLE]</code>
+      </p>
+    </Fragment>
+  ),
+  'guidance.form.type': (
+    <Fragment>
+      <h3>Type</h3>
+      <p>
+        Here, you can determine the type of node that this form will work with.
+      </p>
+    </Fragment>
+  ),
+  'guidance.form.continue': (
+    <Fragment>
+      <h3>Add Another</h3>
+      <p>
+        When this option is enabled, your form will allow the user to create muiltiple nodes in
+        quick succession.
+      </p>
+    </Fragment>
+  ),
+  'guidance.form.variables': (
+    <Fragment>
+      <h3>Form variables</h3>
+      <p>
+        Choose the variables you would like to edit in this form, and which type of control for
+        each.
+      </p>
+    </Fragment>
+  ),
 };

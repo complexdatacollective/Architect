@@ -9,6 +9,7 @@ ShallowWrapper {
     hasChanges={false}
     hasUnsavedChanges={false}
     loadProtocol={[Function]}
+    location={Object {}}
     match={
         Object {
             "params": Object {},
@@ -88,6 +89,12 @@ ShallowWrapper {
           onCancel={[Function]}
           onComplete={[Function]}
           show={false}
+/>,
+        <ShowRoute
+          component={[Function]}
+          location={Object {}}
+          onComplete={[Function]}
+          path="/edit/:protocol/form/:form?"
 />,
       ],
       "className": "protocol",
@@ -195,6 +202,20 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "component": [Function],
+          "location": Object {},
+          "onComplete": [Function],
+          "path": "/edit/:protocol/form/:form?",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
     ],
     "type": "div",
   },
@@ -255,6 +276,12 @@ ShallowWrapper {
             onCancel={[Function]}
             onComplete={[Function]}
             show={false}
+/>,
+          <ShowRoute
+            component={[Function]}
+            location={Object {}}
+            onComplete={[Function]}
+            path="/edit/:protocol/form/:form?"
 />,
         ],
         "className": "protocol",
@@ -357,6 +384,20 @@ ShallowWrapper {
             "onCancel": [Function],
             "onComplete": [Function],
             "show": false,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "component": [Function],
+            "location": Object {},
+            "onComplete": [Function],
+            "path": "/edit/:protocol/form/:form?",
           },
           "ref": null,
           "rendered": null,

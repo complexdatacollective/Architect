@@ -45,6 +45,7 @@ class Card extends PureComponent {
       <Transition
         timeout={getCSSVariableAsNumber('--animation-duration-standard-ms') * 2}
         unmountOnExit
+        mountOnEnter
         appear
         onEnter={
           (el) => {

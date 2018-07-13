@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import uuid from 'uuid';
 
+const asOptionObject = (option) => {
+  if (typeof option !== 'string') { return option; }
+  return {
+    value: option,
+    label: option,
+  };
+};
+
 class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
@@ -33,7 +41,7 @@ class Select extends PureComponent {
       children,
       options,
       label,
-      meta: { invalid, error },
+      meta: { visited, invalid, error },
       ...rest
     } = this.props;
 
@@ -52,9 +60,14 @@ class Select extends PureComponent {
         }
         <select className="form-fields-select__input" {...input} {...rest}>
           {children}
-          {options.map(option => <option value={option} key={option}>{option}</option>)}
+          {options.map(
+            (option) => {
+              const { value, label: optionLabel, ...optionRest } = asOptionObject(option);
+              return (<option value={value} key={value} {...optionRest}>{optionLabel}</option>);
+            },
+          )}
         </select>
-        {invalid && <p className="form-fields-select__error">{error}</p>}
+        {visited && invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );
   }

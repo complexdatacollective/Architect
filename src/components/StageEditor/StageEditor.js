@@ -7,7 +7,7 @@ import cx from 'classnames';
 import { Guided } from '../Guided';
 import flatten from '../../utils/flatten';
 import { getInterface } from './Interfaces';
-import CodeView from './CodeView';
+import FormCodeView from '../FormCodeView';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
@@ -36,7 +36,7 @@ class StageEditor extends Component {
 
     return (
       <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
-        <CodeView toggleCodeView={toggleCodeView} form={form} />
+        <FormCodeView toggleCodeView={toggleCodeView} form={form.name} />
         <Guided
           className="stage-editor__sections"
           defaultGuidance={`guidance.interface.${stage.type}`}

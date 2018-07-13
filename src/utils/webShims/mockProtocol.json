@@ -628,35 +628,18 @@
         {
           "variable": "age",
           "component": "TextInput"
-        },
-        {
-          "variable": "timeCreated",
-          "component": "hidden",
-          "value": "return Date.now().toString();"
         }
       ]
     },
     "myCustomForm": {
-      "title": "Add A Person",
+      "title": "My custom form",
       "entity": "node",
       "type": "person",
+      "optionToAddAnother": false,
       "fields": [
         {
           "variable": "name",
           "component": "TextInput"
-        },
-        {
-          "variable": "nickname",
-          "component": "TextInput"
-        },
-        {
-          "variable": "age",
-          "component": "TextInput"
-        },
-        {
-          "variable": "timeCreated",
-          "component": "hidden",
-          "value": "return Date.now().toString();"
         }
       ]
     }

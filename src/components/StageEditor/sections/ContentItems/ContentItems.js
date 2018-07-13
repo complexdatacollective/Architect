@@ -11,7 +11,7 @@ import ContentItem from './ContentItem';
 
 const ContentItems = ({ form, createNewItem }) => (
   <Guidance contentId="guidance.editor.content_items">
-    <div className="stage-editor-section-content-items">
+    <div className="stage-editor-section stage-editor-section-content-items">
       <h2>Content</h2>
       <p>Create any content you wish to display on the information screen.</p>
       <FieldArray

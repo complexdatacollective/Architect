@@ -1,5 +1,6 @@
 .form-fields-variable-chooser {
   margin: unit(2) 0 0;
+
   &__label {
     @include preset('title-4');
     font-weight: 600;

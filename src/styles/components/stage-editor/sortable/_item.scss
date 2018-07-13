@@ -7,7 +7,7 @@ $component-name: stage-editor-sortable-item;
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  border-radius: 15px;
+  border-radius: unit(1.5);
 
   &__control {
     padding: unit(2);

@@ -32,7 +32,7 @@ const RuleDelete = props => (
 
 const AddRule = props => (
   <div className="form-fields-order-by__add" {...props}>
-    <Icon name="add" />
+    <Icon name="add" /> Add sorting rule
   </div>
 );
 

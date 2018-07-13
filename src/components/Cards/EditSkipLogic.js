@@ -7,7 +7,7 @@ import { Button } from '../../ui/components';
 import { Guided } from '../Guided';
 import { makeGetStage } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
-import Card from '../Routes/Protocol/Card';
+import Card from './ProtocolCard';
 import FilterGroup from '../FilterGroup';
 import { NetworkRule, DropDown } from '../Rule';
 import { Draft } from '../../behaviours';

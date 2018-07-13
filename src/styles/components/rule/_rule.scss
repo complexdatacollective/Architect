@@ -11,7 +11,7 @@
     @include flex-inline;
     @include flex-align(center, middle);
     background-color: var(--architect-rule-control);
-    color: var(--architect-rule-text);
+    color: var(--text-light);
     border: 0;
     border-radius: $drag-button-size;
     width: $drag-button-size;

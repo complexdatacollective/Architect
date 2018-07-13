@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../../../ui/components';
-import Card from '../../Card';
+import { Button } from '../../ui/components';
+import Card from '../Card';
 
 class ProtocolCard extends PureComponent {
   static propTypes = {
@@ -20,6 +20,12 @@ class ProtocolCard extends PureComponent {
     super(props);
 
     this.state = { cancel: false };
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.show) {
+      this.setState({ cancel: false });
+    }
   }
 
   onCancel = () => {

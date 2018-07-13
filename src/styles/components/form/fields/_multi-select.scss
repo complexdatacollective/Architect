@@ -1,4 +1,4 @@
-$component-name: form-fields-order-by;
+$component-name: form-fields-multi-select;
 
 .#{$component-name} {
   @include form-field;
@@ -16,8 +16,9 @@ $component-name: form-fields-order-by;
   &__rule {
     margin: unit(1) 0 0;
     display: flex;
-    background-color: var(--color-sea-green);
+    background-color: var(--form-control);
     border-radius: unit(1);
+    z-index: var(--z-fx);
 
     &-control {
       flex-grow: 0;
@@ -48,13 +49,13 @@ $component-name: form-fields-order-by;
   &__add,
   &__handle {
     cursor: pointer;
-    background-color: var(--color-sea-green);
-    color: var(--color-white);
+    background-color: var(--form-control);
     width: unit(3);
     height: unit(3);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-light);
 
     .icon {
       width: unit(1.5);
@@ -62,7 +63,7 @@ $component-name: form-fields-order-by;
 
       .cls-1,
       .cls-2 {
-        fill: var(--color-white);
+        fill: var(--text-light);
       }
     }
   }
@@ -77,7 +78,7 @@ $component-name: form-fields-order-by;
     .icon {
       width: unit(2);
       height: unit(2);
-      margin: 0 unit(1) 0 0;
+      margin-right: unit(1);
     }
   }
 

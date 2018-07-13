@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { pick } from 'lodash';
+import { pick, get } from 'lodash';
+import history from '../../../history';
 import { Button, Icon } from '../../../ui/components';
 import { getProtocol } from '../../../selectors/protocol';
+import ShowRoute from '../../../components/ShowRoute';
 import EditSkipLogic from '../../Cards/EditSkipLogic';
 import EditStage from '../../Cards/EditStage';
+import EditForm from '../../Cards/Form';
 import Timeline from '../../../components/Timeline';
 import ControlBar from '../../ControlBar';
 import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
@@ -35,7 +38,8 @@ class Protocol extends PureComponent {
     stages: PropTypes.array.isRequired,
     hasUnsavedChanges: PropTypes.bool,
     hasChanges: PropTypes.bool,
-    match: PropTypes.object.isRequired,
+    match: PropTypes.object,
+    location: PropTypes.object.isRequired,
     loadProtocol: PropTypes.func.isRequired,
     saveProtocol: PropTypes.func.isRequired,
   };
@@ -43,6 +47,7 @@ class Protocol extends PureComponent {
   static defaultProps = {
     hasUnsavedChanges: false,
     hasChanges: false,
+    match: null,
   };
 
   constructor(props) {
@@ -51,11 +56,6 @@ class Protocol extends PureComponent {
     this.state = {
       activeCard: { ...defaultActiveCardState },
     };
-  }
-
-  componentDidMount() {
-    const protocolPath = decodeURIComponent(this.props.match.params.protocol);
-    this.props.loadProtocol(protocolPath);
   }
 
   onCardComplete = () => {
@@ -73,6 +73,13 @@ class Protocol extends PureComponent {
         cancel: true,
       },
     });
+  }
+
+  onRouteComplete = () => {
+    const protocol = get(this.props.match, 'params.protocol');
+    if (protocol) {
+      history.push(`/edit/${protocol}`);
+    }
   }
 
   showCard = (card, { ...options }) => {
@@ -103,6 +110,7 @@ class Protocol extends PureComponent {
     const {
       overview,
       stages,
+      location,
       hasChanges,
       hasUnsavedChanges,
       saveProtocol,
@@ -151,6 +159,13 @@ class Protocol extends PureComponent {
           show={this.isCardVisible(cards.editStage)}
           onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
+        />
+
+        <ShowRoute
+          path="/edit/:protocol/form/:form?"
+          location={location}
+          component={EditForm}
+          onComplete={this.onRouteComplete}
         />
       </div>
     );

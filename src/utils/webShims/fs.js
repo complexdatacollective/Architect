@@ -48,6 +48,10 @@ const mkdirSync = () => {};
 
 const existsSync = () => true;
 
+const unlinkSync = () => true;
+
+const readFile = () => Promise.resolve('{}');
+
 const readFileSync = (filename) => {
   switch(true) {
     case /\.json$/.test(filename):
@@ -77,4 +81,6 @@ module.exports = {
   readFileSync,
   readdirSync,
   existsSync,
+  readFile,
+  unlinkSync,
 };
