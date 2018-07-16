@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -22,7 +23,11 @@ class Overview extends Component {
     return nodeTypes.map(
       (node, index) => {
         const nodeColor = `node-color-seq-${index + 1}`;
-        return <Node label={node} key={index} color={nodeColor} />;
+        return (
+          <Link to="/edit/demo.netcanvas/registry/node/person">
+            <Node label={node} key={index} color={nodeColor} />
+          </Link>
+        );
       },
     );
   }

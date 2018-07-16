@@ -11,6 +11,8 @@ import ShowRoute from '../../components/ShowRoute';
 import EditSkipLogic from '../Cards/EditSkipLogic';
 import EditStage from '../Cards/EditStage';
 import EditForm from '../Cards/Form';
+import ViewRegistry from '../Cards/ViewRegistry';
+import EditVariable from '../Cards/EditVariable';
 import Timeline from '../../components/Timeline';
 import ControlBar from '../ControlBar';
 import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
@@ -165,6 +167,20 @@ class Protocol extends PureComponent {
           path="/edit/:protocol/form/:form?"
           location={location}
           component={EditForm}
+          onComplete={this.onRouteComplete}
+        />
+
+        <ShowRoute
+          path="/edit/:protocol/registry"
+          location={location}
+          component={ViewRegistry}
+          onComplete={this.onRouteComplete}
+        />
+
+        <ShowRoute
+          path="/edit/:protocol/registry/:type/:variable"
+          location={location}
+          component={EditVariable}
           onComplete={this.onRouteComplete}
         />
       </div>
