@@ -2,10 +2,31 @@ import React from 'react';
 import { Form, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import Color from 'color';
+import { range } from 'lodash';
+import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import FormCodeView from '../FormCodeView';
+import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
+
+const getColorByVariable = (variable) => {
+  try {
+    return Color(getCSSVariableAsString(variable)).hex().toLowerCase();
+  } catch (e) {
+    return '';
+  }
+};
+
+const COLOR_OPTIONS = range(1, 8)
+  .map(
+    i =>
+      ({
+        name: `--node-color-seq-${i}`,
+        color: getColorByVariable(`--node-color-seq-${i}`),
+      }),
+  );
 
 const VariableEditor = ({
   handleSubmit,
@@ -29,13 +50,16 @@ const VariableEditor = ({
       ) }
       <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
-      <Guidance contentId="guidance.form.variables">
+      <Guidance contentId="guidance.variables.color">
         <div className="stage-editor-section">
           <h2>Color</h2>
 
           <Field
             component={ArchitectFields.ColorPicker}
             name="color"
+            colors={COLOR_OPTIONS}
+          />
+        </div>
           />
         </div>
       </Guidance>

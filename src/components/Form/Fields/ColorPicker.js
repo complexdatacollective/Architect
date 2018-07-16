@@ -1,32 +1,8 @@
 import React, { PureComponent } from 'react';
 import cx from 'classnames';
-import Color from 'color';
-import { get, find, map, range } from 'lodash';
+import { get, find, map } from 'lodash';
 import { CirclePicker } from 'react-color';
 import { fieldPropTypes } from 'redux-form';
-import { getCSSVariableAsString } from '../../../utils/CSSVariables';
-
-const getColorByVariable = (variable) => {
-  try {
-    return Color(getCSSVariableAsString(variable)).hex().toLowerCase();
-  } catch (e) {
-    return '';
-  }
-};
-
-const COLOR_OPTIONS = range(1, 8)
-  .map(
-    i =>
-      ({
-        name: `--node-color-seq-${i}`,
-        color: getColorByVariable(`--node-color-seq-${i}`),
-      }),
-  );
-
-const COLORS = map(COLOR_OPTIONS, 'color');
-
-const findColorOption = ({ hex }) =>
-  find(COLOR_OPTIONS, { color: hex });
 
 class ColorPicker extends PureComponent {
   static propTypes = {
@@ -34,11 +10,22 @@ class ColorPicker extends PureComponent {
   };
 
   get color() {
-    return getColorByVariable(this.props.input.value);
+    return get(
+      this.findColorOption({ name: this.props.input.value }),
+      'color',
+      '',
+    );
   }
 
-  handleChange = (colorValues) => {
-    const color = get(findColorOption(colorValues), 'name', '');
+  get colors() {
+    return map(this.props.colors, 'color');
+  }
+
+  findColorOption = properties =>
+    find(this.props.colors, properties)
+
+  handleChange = ({ hex }) => {
+    const color = get(this.findColorOption({ color: hex }), 'name', '');
     this.props.input.onChange(color);
   };
 
@@ -59,7 +46,7 @@ class ColorPicker extends PureComponent {
             className={cx('form-fields-color-picker__input')}
             color={this.color}
             triangle="hide"
-            colors={COLORS}
+            colors={this.colors}
             onChangeComplete={this.handleChange}
           />
         </div>
