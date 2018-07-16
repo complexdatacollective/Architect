@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
 import { get } from 'lodash';
 import { Button } from '../../ui/components';
-import VariableRegistryEditor from '../VariableRegistryEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
@@ -13,7 +12,6 @@ import { actionCreators as formActions } from '../../ducks/modules/protocol/form
 class Form extends PureComponent {
   static propTypes = {
     formName: PropTypes.string,
-    form: PropTypes.object,
     updateForm: PropTypes.func.isRequired,
     createForm: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
@@ -64,7 +62,6 @@ class Form extends PureComponent {
 
   render() {
     const {
-      form,
       show,
     } = this.props;
 
@@ -74,10 +71,7 @@ class Form extends PureComponent {
         show={show}
         onCancel={this.props.onComplete}
       >
-        <VariableRegistryEditor
-          initialValues={form}
-          onSubmit={this.onSubmit}
-        />
+        View Registry
       </Card>
     );
   }

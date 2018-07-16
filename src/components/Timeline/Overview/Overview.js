@@ -13,6 +13,11 @@ import { actionCreators as protocolActions } from '../../../ducks/modules/protoc
 import PanelGroup from './PanelGroup';
 
 class Overview extends Component {
+  get protocolPath() {
+    const protocol = get(this.props.match, 'params.protocol', '');
+    return `/edit/${protocol}`;
+  }
+
   get renderNodeTypes() {
     const nodeTypes = keys(get(this.props.variableRegistry, 'node', {}));
 
@@ -24,7 +29,7 @@ class Overview extends Component {
       (node, index) => {
         const nodeColor = `node-color-seq-${index + 1}`;
         return (
-          <Link to="/edit/demo.netcanvas/registry/node/person">
+          <Link to={`${this.protocolPath}/registry/node/${node}`}>
             <Node label={node} key={index} color={nodeColor} />
           </Link>
         );
@@ -55,7 +60,11 @@ class Overview extends Component {
     return edgeTypes.map(
       (edge, index) => {
         const edgeColor = temporaryEdgeColors[index];
-        return <Icon name="links" label={edge} key={index} color={edgeColor} />;
+        return (
+          <Link to={`${this.protocolPath}/registry/edge/${edge}`}>
+            <Icon name="links" label={edge} key={index} color={edgeColor} />
+          </Link>
+        );
       },
     );
   }
@@ -113,6 +122,7 @@ Overview.propTypes = {
   variableRegistry: PropTypes.object,
   externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   updateOptions: PropTypes.func,
+  match: PropTypes.object.isRequired,
 };
 
 Overview.defaultProps = {
