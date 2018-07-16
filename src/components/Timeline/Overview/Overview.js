@@ -29,8 +29,8 @@ class Overview extends Component {
       (node, index) => {
         const nodeColor = `node-color-seq-${index + 1}`;
         return (
-          <Link to={`${this.protocolPath}/registry/node/${node}`}>
-            <Node label={node} key={index} color={nodeColor} />
+          <Link to={`${this.protocolPath}/registry/node/${node}`} key={index}>
+            <Node label={node} color={nodeColor} />
           </Link>
         );
       },
@@ -61,8 +61,8 @@ class Overview extends Component {
       (edge, index) => {
         const edgeColor = temporaryEdgeColors[index];
         return (
-          <Link to={`${this.protocolPath}/registry/edge/${edge}`}>
-            <Icon name="links" label={edge} key={index} color={edgeColor} />
+          <Link to={`${this.protocolPath}/registry/edge/${edge}`} key={index}>
+            <Icon name="links" label={edge} color={edgeColor} />
           </Link>
         );
       },
