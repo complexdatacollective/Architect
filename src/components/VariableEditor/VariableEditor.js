@@ -28,6 +28,12 @@ const COLOR_OPTIONS = range(1, 8)
       }),
   );
 
+const ICON_OPTIONS = [
+  'foo',
+  'bar',
+  'baz',
+];
+
 const VariableEditor = ({
   handleSubmit,
   toggleCodeView,
@@ -60,6 +66,16 @@ const VariableEditor = ({
             colors={COLOR_OPTIONS}
           />
         </div>
+      </Guidance>
+
+      <Guidance contentId="guidance.variables.icon">
+        <div className="stage-editor-section">
+          <h2>Icon</h2>
+
+          <Field
+            component={Fields.RadioGroup}
+            name="iconVariant"
+            options={ICON_OPTIONS}
           />
         </div>
       </Guidance>
