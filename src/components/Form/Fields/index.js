@@ -12,3 +12,4 @@ export { default as Contexts } from './Contexts';
 export { default as Mode } from './Mode';
 export { default as OrderBy } from './OrderBy';
 export { default as NodeSelect } from './NodeSelect';
+export { default as ColorPicker } from './ColorPicker';

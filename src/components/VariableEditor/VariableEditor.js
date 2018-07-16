@@ -1,10 +1,11 @@
 import React from 'react';
-import { Form } from 'redux-form';
+import { Form, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import FormCodeView from '../FormCodeView';
+import * as ArchitectFields from '../Form/Fields';
 
 const VariableEditor = ({
   handleSubmit,
@@ -30,7 +31,12 @@ const VariableEditor = ({
 
       <Guidance contentId="guidance.form.variables">
         <div className="stage-editor-section">
-          <h2>Section</h2>
+          <h2>Color</h2>
+
+          <Field
+            component={ArchitectFields.ColorPicker}
+            name="color"
+          />
         </div>
       </Guidance>
     </Guided>
