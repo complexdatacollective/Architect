@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field, clearFields, isDirty, FormSection, formValueSelector } from 'redux-form';
-import { keys, get, toPairs, isEmpty } from 'lodash';
+import { Field, clearFields, isDirty as isFieldDirty, FormSection } from 'redux-form';
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
-import * as ArchitectFields from '../Form/Fields';
 import * as Fields from '../../ui/components/Fields';
 import ExpandableItem from '../StageEditor/Sortable/ExpandableItem';
 
@@ -19,24 +17,33 @@ const Variable = ({
     open={isDirty}
     preview={(
       <FormSection name={fieldId}>
-        <div>
-          Preview
-        </div>
+        <h3>
+          <Field
+            name="name"
+            component={({ input: { value } }) => value}
+          />
+          :
+          <Field
+            name="type"
+            component={({ input: { value } }) => value}
+          />
+        </h3>
       </FormSection>
     )}
     {...rest}
   >
     <FormSection name={fieldId}>
-      <div className="stage-editor-section-prompt__group">
-        <ValidatedField
-          name="text"
-          component={Fields.TextArea}
-          className="stage-editor-section-prompt__setting"
-          label="Text for prompt"
-          placeholder="Enter text for the prompt here"
-          validation={{ required: true }}
-        />
-      </div>
+      <Guidance contentId="guidance.registry.variable.name">
+        <div className="stage-editor-section-prompt__group">
+          <ValidatedField
+            name="name"
+            component={Fields.Text}
+            className="stage-editor-section-prompt__setting"
+            label="Variable name"
+            validation={{ required: true }}
+          />
+        </div>
+      </Guidance>
     </FormSection>
   </ExpandableItem>
 );
@@ -50,14 +57,9 @@ Variable.defaultProps = {
   isDirty: false,
 };
 
-const mapStateToProps = (state, props) => {
-  const getValue = formValueSelector(props.form);
-  const isFieldDirty = isDirty(props.form);
-
-  return {
-    isDirty: isFieldDirty(state, props.fieldId),
-  };
-};
+const mapStateToProps = (state, props) => ({
+  isDirty: isFieldDirty(props.form)(state, props.fieldId),
+});
 
 const mapDispatchToProps = (dispatch, props) => ({
   clearField: (fieldName) => {

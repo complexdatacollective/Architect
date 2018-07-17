@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Color from 'color';
-import { range, keys } from 'lodash';
+import { range, map } from 'lodash';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
@@ -98,6 +98,7 @@ const TypeEditor = ({
 
       <Variables
         form={form}
+        name="variables"
         itemTemplate={{}}
         itemComponent={Variable}
       />
@@ -120,7 +121,7 @@ const mapStateToProps = (state, { form }) => {
   const variables = getValue(state, 'variables');
 
   return ({
-    displayVariables: keys(variables),
+    displayVariables: map(variables, 'name'),
   });
 };
 
