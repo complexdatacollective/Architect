@@ -3,20 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
-import { get } from 'lodash';
 import { Button } from '../../ui/components';
-import VariableEditor from '../VariableEditor';
+import TypeEditor, { formName } from '../TypeEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
-import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
-class Form extends PureComponent {
+class EditType extends PureComponent {
   static propTypes = {
-    formName: PropTypes.string,
-    form: PropTypes.object,
-    updateForm: PropTypes.func.isRequired,
-    createForm: PropTypes.func.isRequired,
-    submitForm: PropTypes.func.isRequired,
+    submit: PropTypes.func.isRequired,
     hasUnsavedChanges: PropTypes.bool,
     hasErrors: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
@@ -24,25 +18,25 @@ class Form extends PureComponent {
   };
 
   static defaultProps = {
-    formName: null,
-    form: {},
     show: true,
     hasErrors: false,
     hasUnsavedChanges: false,
   };
 
   onSubmit = (form) => {
-    if (this.props.formName) {
-      this.props.updateForm(this.props.formName, form);
-    } else {
-      this.props.createForm(form);
-    }
+    console.log('OnSubmit', form);
+
+    // if (this.props.formName) {
+    //   this.props.updateForm(this.props.formName, form);
+    // } else {
+    //   this.props.createForm(form);
+    // }
 
     this.props.onComplete();
   }
 
-  submitForm = () => {
-    this.props.submitForm('edit-form');
+  submit = () => {
+    this.props.submit(formName);
   }
 
   renderButtons() {
@@ -50,7 +44,7 @@ class Form extends PureComponent {
       <Button
         key="save"
         size="small"
-        onClick={this.submitForm}
+        onClick={this.submit}
         color="white"
         iconPosition="right"
         disabled={this.props.hasErrors}
@@ -64,7 +58,7 @@ class Form extends PureComponent {
 
   render() {
     const {
-      form,
+      variable,
       show,
     } = this.props;
 
@@ -74,8 +68,9 @@ class Form extends PureComponent {
         show={show}
         onCancel={this.props.onComplete}
       >
-        <VariableEditor
-          initialValues={form}
+        <TypeEditor
+          initialValues={variable}
+          form={formName}
           onSubmit={this.onSubmit}
         />
       </Card>
@@ -83,28 +78,24 @@ class Form extends PureComponent {
   }
 }
 
-const editFormIsDirty = isDirty('edit-form');
-const editFormIsInvalid = isInvalid('edit-form');
+const editFormIsDirty = isDirty(formName);
+const editFormIsInvalid = isInvalid(formName);
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   const protocol = getProtocol(state);
-  const formName = get(props.match, 'params.form', null);
-  const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
+  const variable = {}; // get(protocol, 'variableRegistry.node.person');
 
   return {
-    form,
-    formName,
-    hasUnsavedChanges: !formName || editFormIsDirty(state),
+    variable,
+    hasUnsavedChanges: editFormIsDirty(state),
     hasErrors: editFormIsInvalid(state),
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  submitForm: bindActionCreators(submit, dispatch),
-  updateForm: bindActionCreators(formActions.updateForm, dispatch),
-  createForm: bindActionCreators(formActions.createForm, dispatch),
+  submit: bindActionCreators(submit, dispatch),
 });
 
-export { Form };
+export { EditType };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(EditType);

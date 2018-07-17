@@ -4,69 +4,51 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { arrayPush } from 'redux-form';
 import PropTypes from 'prop-types';
-import uuid from 'uuid';
 import Guidance from '../Guidance';
-import Variable from './Variable';
 import { Items, NewButton } from '../StageEditor/Sortable';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 
-const fieldName = 'variables';
-
-const notEmpty = value => (
-  value && value.length > 0 ? undefined : 'You must create at least one prompt'
-);
-
 const Variables = ({
   form,
-  addNewPrompt,
+  name,
+  addNew,
+  itemComponent: ItemComponent,
 }) => (
   <Guidance contentId="guidance.editor.sociogram_prompts">
     <div className="stage-editor-section">
-      <h2>Prompts</h2>
-      <p>Add prompts to your Sociogram:</p>
+      <h2>Variables</h2>
+      <p>Add variables:</p>
       <div className="stage-editor-section-prompts">
         <div className="stage-editor-section-prompts__prompts">
           <ValidatedFieldArray
-            name={fieldName}
+            name={name}
             component={Items}
-            itemComponent={Variable}
+            itemComponent={ItemComponent}
             form={form}
-            validation={{ notEmpty }}
           />
         </div>
-        <NewButton onClick={addNewPrompt} />
+        <NewButton onClick={addNew} />
       </div>
     </div>
   </Guidance>
 );
 
 Variables.propTypes = {
-  form: PropTypes.shape({
-    name: PropTypes.string,
-    getValues: PropTypes.func,
-  }).isRequired,
-  addNewPrompt: PropTypes.func.isRequired,
-};
-
-Variables.defaultProps = {
+  form: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  itemComponent: PropTypes.node.isRequired,
+  addNew: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({
 });
 
-const mapDispatchToProps = (dispatch, { form: { name } }) => ({
-  addNewPrompt: bindActionCreators(
+const mapDispatchToProps = (dispatch, { form, name, itemTemplate }) => ({
+  addNew: bindActionCreators(
     () => arrayPush(
+      form,
       name,
-      fieldName,
-      {
-        id: uuid(),
-        text: '',
-        subject: {},
-        layout: { allowPositioning: true },
-        sortOrderBy: [],
-        background: { concentricCircles: 4, skewedTowardCenter: false },
-      },
+      itemTemplate,
     ),
     dispatch,
   ),

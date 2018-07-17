@@ -12,6 +12,7 @@ import FormCodeView from '../FormCodeView';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';
+import Variable from './Variable';
 
 const getColorByVariable = (variable) => {
   try {
@@ -36,7 +37,7 @@ const ICON_OPTIONS = [
   'baz',
 ];
 
-const VariableEditor = ({
+const TypeEditor = ({
   handleSubmit,
   toggleCodeView,
   codeView,
@@ -95,24 +96,16 @@ const VariableEditor = ({
         </div>
       </Guidance>
 
-      <Guidance contentId="guidance.registry.variables">
-        <div className="stage-editor-section">
-          <h2>Variables</h2>
-
-          <Field
-            component={ArchitectFields.Select}
-            name="displayVariable"
-            options={displayVariables}
-          />
-        </div>
-      </Guidance>
-
-      <Variables />
+      <Variables
+        form={form}
+        itemTemplate={{}}
+        itemComponent={Variable}
+      />
     </Guided>
   </Form>
 );
 
-VariableEditor.propTypes = {
+TypeEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
   codeView: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
@@ -131,8 +124,8 @@ const mapStateToProps = (state, { form }) => {
   });
 };
 
-export { VariableEditor };
+export { TypeEditor };
 
 export default connect(
   mapStateToProps,
-)(VariableEditor);
+)(TypeEditor);

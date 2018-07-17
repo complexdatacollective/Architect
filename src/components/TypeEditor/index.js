@@ -9,9 +9,9 @@ import {
 import { compose, withState, withHandlers } from 'recompose';
 import { keys } from 'lodash';
 import { getVariablesForNodeType, getNodeTypes } from '../../selectors/variableRegistry';
-import VariableEditor from './VariableEditor';
+import TypeEditor from './TypeEditor';
 
-const formName = 'VARIABLE_REGISTRY';
+export const formName = 'VARIABLE_REGISTRY';
 const getFormValue = formValueSelector(formName);
 const getIsDirty = isDirty(formName);
 const getIsValid = isValid(formName);
@@ -47,4 +47,4 @@ export default compose(
     touchOnChange: true,
     enableReinitialize: true,
   }),
-)(VariableEditor);
+)(TypeEditor);
