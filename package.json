@@ -27,7 +27,8 @@
         "dist:mac": "electron-builder -m --publish=always",
         "dist:win": "electron-builder -w --publish=always",
         "dist:linux": "electron-builder -l --publish=always",
-        "bump": "sh scripts/bump"
+        "bump": "sh scripts/bump",
+        "preflight": "npm run lint && npm run lint:sass -- --max-warnings 0 && npm test -- --coverage"
     },
     "repository": {
         "type": "git"
@@ -159,7 +160,8 @@
     },
     "jest": {
         "collectCoverageFrom": [
-            "src/**/*.{js,jsx}"
+            "src/**/*.{js,jsx}",
+            "!src/ui/**"
         ],
         "setupFiles": [
             "<rootDir>/config/polyfills.js",
