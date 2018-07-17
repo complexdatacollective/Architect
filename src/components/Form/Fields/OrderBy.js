@@ -125,15 +125,6 @@ const Rules = compose(
 );
 
 class OrderBy extends Component {
-  static defaultProps = {
-    variables: {},
-    input: {
-      value: [],
-      onChange: () => {},
-    },
-    label: '',
-  };
-
   static propTypes = {
     variables: PropTypes.object,
     input: PropTypes.shape({
@@ -144,6 +135,15 @@ class OrderBy extends Component {
       onChange: PropTypes.func,
     }),
     label: PropTypes.string,
+  };
+
+  static defaultProps = {
+    variables: {},
+    input: {
+      value: [],
+      onChange: () => {},
+    },
+    label: '',
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {

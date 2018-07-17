@@ -10,6 +10,8 @@ function getDisplayName(WrappedComponent) {
 
 const Tweenable = WrappedComponent =>
   class extends PureComponent {
+    static displayName = `Tweened(${getDisplayName(WrappedComponent)})`;
+
     static propTypes = {
       tweenName: PropTypes.string.isRequired,
       before: PropTypes.number,
@@ -24,8 +26,6 @@ const Tweenable = WrappedComponent =>
       after: 300,
       tweenElement: undefined,
     };
-
-    static displayName = `Tweened(${getDisplayName(WrappedComponent)})`;
 
     constructor(props) {
       super(props);
