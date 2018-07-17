@@ -4,7 +4,7 @@ import createMemoryHistory from 'history/createMemoryHistory';
 import process from 'process';
 
 const getHistory = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     return createHistory();
   }
 
