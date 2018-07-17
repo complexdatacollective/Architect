@@ -131,6 +131,9 @@
     },
     "homepage": ".",
     "main": "www/electron-starter.js",
+    "browserslist": [
+        "Chrome 61"
+    ],
     "build": {
         "extends": null,
         "appId": "NetworkCanvasArchitect",
