@@ -11,7 +11,8 @@ import { keys } from 'lodash';
 import { getVariablesForNodeType, getNodeTypes } from '../../selectors/variableRegistry';
 import TypeEditor from './TypeEditor';
 
-export const formName = 'VARIABLE_REGISTRY';
+const formName = 'VARIABLE_REGISTRY';
+
 const getFormValue = formValueSelector(formName);
 const getIsDirty = isDirty(formName);
 const getIsValid = isValid(formName);
@@ -28,15 +29,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  resetFields: () => {
-    dispatch(change(formName, 'type', null));
-    dispatch(change(formName, 'fields', null));
-  },
-});
+export { formName };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps),
   withState('codeView', 'updateCodeView', false),
   withHandlers({
     toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),

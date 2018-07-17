@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
+import { get } from 'lodash';
 import { Button } from '../../ui/components';
 import TypeEditor, { formName } from '../TypeEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
+import { actionCreators as variableRegistryActions} from '../../ducks/modules/protocol/variableRegistry';
 
+/**
+ * This manages the display of the TypeEditor, provides it with
+ * initial data, and handles redux actions for updating the protocol.
+ */
 class EditType extends PureComponent {
   static propTypes = {
     submit: PropTypes.func.isRequired,
@@ -24,13 +30,13 @@ class EditType extends PureComponent {
   };
 
   onSubmit = (form) => {
+    const {
+      category,
+      type,
+    } = this.props;
     console.log('OnSubmit', form);
 
-    // if (this.props.formName) {
-    //   this.props.updateForm(this.props.formName, form);
-    // } else {
-    //   this.props.createForm(form);
-    // }
+    this.props.updateType(category, type, form);
 
     this.props.onComplete();
   }
@@ -58,7 +64,7 @@ class EditType extends PureComponent {
 
   render() {
     const {
-      variable,
+      initialValues,
       show,
     } = this.props;
 
@@ -69,7 +75,7 @@ class EditType extends PureComponent {
         onCancel={this.props.onComplete}
       >
         <TypeEditor
-          initialValues={variable}
+          initialValues={initialValues}
           form={formName}
           onSubmit={this.onSubmit}
         />
@@ -81,12 +87,19 @@ class EditType extends PureComponent {
 const editFormIsDirty = isDirty(formName);
 const editFormIsInvalid = isInvalid(formName);
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
-  const variable = {}; // get(protocol, 'variableRegistry.node.person');
+  const initialValues = get(protocol, 'variableRegistry.node.person');
+
+  console.log(props);
+
+  const category = get(props, 'match.params.category');
+  const type = get(props, 'match.params.type');
 
   return {
-    variable,
+    initialValues,
+    category,
+    type,
     hasUnsavedChanges: editFormIsDirty(state),
     hasErrors: editFormIsInvalid(state),
   };
@@ -94,6 +107,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
   submit: bindActionCreators(submit, dispatch),
+  updateType: bindActionCreators(variableRegistryActions.updateType, dispatch),
 });
 
 export { EditType };
