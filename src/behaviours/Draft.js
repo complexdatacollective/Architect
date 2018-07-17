@@ -8,6 +8,8 @@ function getDisplayName(WrappedComponent) {
 
 const Draft = WrappedComponent =>
   class extends Component {
+    static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
+
     static propTypes = {
       draft: PropTypes.any,
     };
@@ -15,8 +17,6 @@ const Draft = WrappedComponent =>
     static defaultProps = {
       draft: null,
     };
-
-    static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
 
     constructor(props) {
       super(props);
