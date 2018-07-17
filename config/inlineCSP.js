@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 const vm = require('vm');
 const crypto = require('crypto');
+const chalk = require('chalk');
 
 /**
  * Hash the final export (assumed to be an inline script) of the given module.
@@ -21,8 +23,16 @@ const crypto = require('crypto');
  * @throws {error} If module is not found
  */
 function hash256(libName) {
-  const index = require.resolve(libName);
-  if (!index) { throw new Error(`"${libName}" could not be resolved`); }
+  let index;
+
+  try {
+    index = require.resolve(libName);
+  } catch (err) {
+    console.error(chalk.red(`Could not resolve module ${libName}, which was expected to provide inline content to the bundle.`));
+    console.error(chalk.red('If the module is still included, check that `npm install` is up to date.'));
+    console.error(chalk.red('Otherwise, remove the call to `inlineCSP.hash256()`.'));
+    throw err;
+  }
 
   const source = fs.readFileSync(index, 'utf-8');
   const newline = /\n|\r\n|\r/g;
@@ -38,7 +48,12 @@ function hash256(libName) {
   vm.createContext(sandbox);
   vm.runInContext(exportedSrc, sandbox);
 
-  const cspHash = crypto.createHash('sha256').update(sandbox.module.exports).digest('base64');
+  // Newer versions of plugin contain source directly; older versions export a string
+  // TODO: remove legacy parsing above once we're sure it's unneeded
+  const clientSource = sandbox.module.exports || source;
+
+  // const cspHash = crypto.createHash('sha256').update(sandbox.module.exports).digest('base64');
+  const cspHash = crypto.createHash('sha256').update(clientSource).digest('base64');
   return cspHash;
 }
 
