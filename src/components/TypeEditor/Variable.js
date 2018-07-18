@@ -31,12 +31,12 @@ const Variable = ({
         <h3>
           <Field
             name="name"
-            component={({ input: { value } }) => value}
+            component={({ input: { value } }) => value || 'undefined'}
           />
           :
           <Field
             name="type"
-            component={({ input: { value } }) => value}
+            component={({ input: { value } }) => value || 'undefined'}
           />
         </h3>
       </FormSection>

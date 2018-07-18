@@ -42,12 +42,12 @@ Variables.propTypes = {
 const mapStateToProps = () => ({
 });
 
-const mapDispatchToProps = (dispatch, { form, name, itemTemplate }) => ({
+const mapDispatchToProps = (dispatch, { form, name }) => ({
   addNew: bindActionCreators(
     () => arrayPush(
       form,
       name,
-      itemTemplate,
+      {},
     ),
     dispatch,
   ),
