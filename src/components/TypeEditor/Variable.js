@@ -1,11 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field, clearFields, isDirty as isFieldDirty, FormSection } from 'redux-form';
+import {
+  Field,
+  clearFields,
+  isDirty as isFieldDirty,
+  FormSection,
+  formValueSelector,
+} from 'redux-form';
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
+import Validations from '../Form/Validations';
 import ExpandableItem from '../Items/ExpandableItem';
 
 const VARIABLE_TYPES = [
@@ -22,6 +29,8 @@ const VARIABLE_TYPES = [
 const Variable = ({
   fieldId,
   isDirty,
+  form,
+  variableType,
   ...rest
 }) => (
   <ExpandableItem
@@ -66,6 +75,13 @@ const Variable = ({
           >
             <option value="">&mdash; Select variable type &mdash;</option>
           </ValidatedField>
+
+          <Validations
+            name="validations"
+            label="Validations"
+            variableType={variableType}
+            meta={{ form }}
+          />
         </div>
       </Guidance>
     </FormSection>
@@ -75,14 +91,17 @@ const Variable = ({
 Variable.propTypes = {
   fieldId: PropTypes.string.isRequired,
   isDirty: PropTypes.bool,
+  variableType: PropTypes.string,
 };
 
 Variable.defaultProps = {
   isDirty: false,
+  variableType: null,
 };
 
 const mapStateToProps = (state, props) => ({
   isDirty: isFieldDirty(props.form)(state, props.fieldId),
+  variableType: formValueSelector(props.form)(state, `${props.fieldId}.type`),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
