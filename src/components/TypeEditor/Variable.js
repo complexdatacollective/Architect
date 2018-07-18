@@ -5,7 +5,19 @@ import { Field, clearFields, isDirty as isFieldDirty, FormSection } from 'redux-
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
+import * as ArchitectFields from '../Form/Fields';
 import ExpandableItem from '../Items/ExpandableItem';
+
+const VARIABLE_TYPES = [
+  'text',
+  'number',
+  'datetime',
+  'boolean',
+  'ordinal',
+  'catagorical',
+  'layout',
+  'location',
+];
 
 const Variable = ({
   fieldId,
@@ -13,7 +25,6 @@ const Variable = ({
   ...rest
 }) => (
   <ExpandableItem
-    className="stage-editor-section-sociogram-prompt"
     open={isDirty}
     preview={(
       <FormSection name={fieldId}>
@@ -34,14 +45,27 @@ const Variable = ({
   >
     <FormSection name={fieldId}>
       <Guidance contentId="guidance.registry.variable.name">
-        <div className="stage-editor-section-prompt__group">
+        <div>
           <ValidatedField
             name="name"
             component={Fields.Text}
-            className="stage-editor-section-prompt__setting"
             label="Variable name"
             validation={{ required: true }}
           />
+          <Field
+            name="description"
+            component={Fields.Text}
+            label="Description"
+          />
+          <ValidatedField
+            name="type"
+            component={ArchitectFields.Select}
+            label="Variable type"
+            options={VARIABLE_TYPES}
+            validation={{ required: true }}
+          >
+            <option value="">&mdash; Select variable type &mdash;</option>
+          </ValidatedField>
         </div>
       </Guidance>
     </FormSection>
