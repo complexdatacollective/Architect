@@ -2,11 +2,11 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { arrayPush } from 'redux-form';
+import { arrayPush, FieldArray } from 'redux-form';
 import PropTypes from 'prop-types';
 import Guidance from '../Guidance';
-import { Items, NewButton } from '../StageEditor/Sortable';
-import ValidatedFieldArray from '../Form/ValidatedFieldArray';
+import { NewButton } from '../StageEditor/Sortable';
+import Items from '../Items';
 
 const Variables = ({
   form,
@@ -20,7 +20,7 @@ const Variables = ({
       <p>Add variables:</p>
       <div className="stage-editor-section-prompts">
         <div className="stage-editor-section-prompts__prompts">
-          <ValidatedFieldArray
+          <FieldArray
             name={name}
             component={Items}
             itemComponent={ItemComponent}

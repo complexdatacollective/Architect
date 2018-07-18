@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
-import { get, mapValues, values, reduce } from 'lodash';
+import { get, mapValues, values, reduce, omit } from 'lodash';
 import { Button } from '../../ui/components';
 import TypeEditor, { formName } from '../TypeEditor';
 import Card from './ProtocolCard';
@@ -93,6 +93,7 @@ const parse = configuration => ({
     get(configuration, 'variables', {}),
     (variable, key) => ({
       name: key,
+      id: key,
       ...variable,
     }),
   )),
@@ -103,7 +104,7 @@ const format = configuration => ({
   variables: reduce(
     configuration.variables,
     (memo, { name, ...variable }) => ({
-      ...memo,
+      ...omit(memo, ['id']),
       [name]: variable,
     }),
     {},

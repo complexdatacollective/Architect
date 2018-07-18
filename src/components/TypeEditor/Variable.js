@@ -5,7 +5,7 @@ import { Field, clearFields, isDirty as isFieldDirty, FormSection } from 'redux-
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
-import ExpandableItem from '../StageEditor/Sortable/ExpandableItem';
+import ExpandableItem from '../Items/ExpandableItem';
 
 const Variable = ({
   fieldId,
