@@ -30,7 +30,7 @@ ShallowWrapper {
 />,
         <NavLink
           activeClassName="active"
-          ariaCurrent="true"
+          aria-current="page"
           className="app__home"
           exact={true}
           to="/"
@@ -65,7 +65,7 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "activeClassName": "active",
-          "ariaCurrent": "true",
+          "aria-current": "page",
           "children": <img
             alt=""
             src="architect-logo-icon.svg"
@@ -116,7 +116,7 @@ ShallowWrapper {
 />,
           <NavLink
             activeClassName="active"
-            ariaCurrent="true"
+            aria-current="page"
             className="app__home"
             exact={true}
             to="/"
@@ -151,7 +151,7 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "activeClassName": "active",
-            "ariaCurrent": "true",
+            "aria-current": "page",
             "children": <img
               alt=""
               src="architect-logo-icon.svg"
