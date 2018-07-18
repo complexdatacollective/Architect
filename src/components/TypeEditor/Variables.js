@@ -5,8 +5,7 @@ import { compose } from 'recompose';
 import { arrayPush, FieldArray } from 'redux-form';
 import PropTypes from 'prop-types';
 import Guidance from '../Guidance';
-import { NewButton } from '../StageEditor/Sortable';
-import Items from '../Items';
+import Items, { NewButton } from '../Items';
 
 const Variables = ({
   form,
