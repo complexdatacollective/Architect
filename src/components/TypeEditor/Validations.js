@@ -141,6 +141,13 @@ const Items = ({ fields, variableType, ...rest }) => (
   </React.Fragment>
 );
 
+Items.propTypes = {
+  fields: PropTypes.shape({
+    map: PropTypes.func.isRequired,
+  }).isRequired,
+  variableType: PropTypes.string.isRequired,
+};
+
 const Validations = ({
   name,
   label,
@@ -166,6 +173,7 @@ const Validations = ({
 
 Validations.propTypes = {
   name: PropTypes.string.isRequired,
+  variableType: PropTypes.string.isRequired,
   label: PropTypes.string,
 };
 
