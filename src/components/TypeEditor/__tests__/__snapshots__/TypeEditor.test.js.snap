@@ -5,12 +5,14 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TypeEditor
+    category="foo"
     dirty={false}
     displayVariables={Array []}
     form="TYPE_EDITOR"
     handleSubmit={[Function]}
     showCodeView={true}
     toggleCodeView={[Function]}
+    type="bar"
     valid={true}
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -35,7 +37,10 @@ ShallowWrapper {
           form="TYPE_EDITOR"
 >
           <h1>
-                    Edit Node/Edge
+                    Edit "
+                    bar
+                    " 
+                    foo
           </h1>
           <small>
                     (
@@ -174,7 +179,10 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <h1>
-              Edit Node/Edge
+              Edit "
+              bar
+              " 
+              foo
 </h1>,
             false,
             <small>
@@ -299,10 +307,20 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Edit Node/Edge",
+              "children": Array [
+                "Edit \\"",
+                "bar",
+                "\\" ",
+                "foo",
+              ],
             },
             "ref": null,
-            "rendered": "Edit Node/Edge",
+            "rendered": Array [
+              "Edit \\"",
+              "bar",
+              "\\" ",
+              "foo",
+            ],
             "type": "h1",
           },
           false,
@@ -744,7 +762,10 @@ ShallowWrapper {
             form="TYPE_EDITOR"
 >
             <h1>
-                        Edit Node/Edge
+                        Edit "
+                        bar
+                        " 
+                        foo
             </h1>
             <small>
                         (
@@ -883,7 +904,10 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <h1>
-                Edit Node/Edge
+                Edit "
+                bar
+                " 
+                foo
 </h1>,
               false,
               <small>
@@ -1008,10 +1032,20 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Edit Node/Edge",
+                "children": Array [
+                  "Edit \\"",
+                  "bar",
+                  "\\" ",
+                  "foo",
+                ],
               },
               "ref": null,
-              "rendered": "Edit Node/Edge",
+              "rendered": Array [
+                "Edit \\"",
+                "bar",
+                "\\" ",
+                "foo",
+              ],
               "type": "h1",
             },
             false,

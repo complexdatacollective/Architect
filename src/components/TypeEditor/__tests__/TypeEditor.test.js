@@ -10,6 +10,8 @@ const mockProps = {
   handleSubmit: () => {},
   displayVariables: [],
   form: 'TYPE_EDITOR',
+  category: 'foo',
+  type: 'bar',
   toggleCodeView: () => {},
   showCodeView: true,
 };

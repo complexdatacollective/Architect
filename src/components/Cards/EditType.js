@@ -69,6 +69,8 @@ class EditType extends PureComponent {
     const {
       initialValues,
       show,
+      category,
+      type,
     } = this.props;
 
     return (
@@ -80,6 +82,8 @@ class EditType extends PureComponent {
         <TypeEditor
           initialValues={initialValues}
           form={formName}
+          category={category}
+          type={type}
           onSubmit={this.onSubmit}
         />
       </Card>

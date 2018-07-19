@@ -42,6 +42,8 @@ const TypeEditor = ({
   toggleCodeView,
   showCodeView,
   form,
+  category,
+  type,
   dirty,
   valid,
   displayVariables,
@@ -55,7 +57,7 @@ const TypeEditor = ({
       className="type-editor__sections"
       form={form}
     >
-      <h1>Edit Node/Edge</h1>
+      <h1>Edit &quot;{type}&quot; {category}</h1>
       { dirty && !valid && (
         <p style={{ color: 'var(--error)' }}>
           There are some errors that need to be fixed before this can be saved!
@@ -118,6 +120,8 @@ TypeEditor.propTypes = {
   showCodeView: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
