@@ -52,6 +52,7 @@ const renderValidationOptions = ({ field, validationType }) => {
           name={`${field}.value`}
           component="input"
           type="number"
+          parse={value => parseInt(value, 10)}
         />
       );
     default:
