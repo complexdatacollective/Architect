@@ -12,6 +12,7 @@ import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';
 import Variable from './Variable';
+import IconOption from './IconOption';
 
 const getColorByVariable = (variable) => {
   try {
@@ -30,11 +31,11 @@ const COLOR_OPTIONS = range(1, 8)
       }),
   );
 
-// TODO: Populate these somehow
 const ICON_OPTIONS = [
-  'foo',
-  'bar',
-  'baz',
+  'add-a-context',
+  'add-a-person',
+  'add-a-place',
+  'add-a-relationship',
 ];
 
 const TypeEditor = ({
@@ -80,6 +81,7 @@ const TypeEditor = ({
             component={Fields.RadioGroup}
             name="iconVariant"
             options={ICON_OPTIONS}
+            optionComponent={IconOption}
           />
         </div>
       </Guidance>
