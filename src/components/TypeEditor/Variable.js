@@ -36,17 +36,25 @@ const Variable = ({
     open={isDirty}
     preview={(
       <FormSection name={fieldId}>
-        <h3>
+        <h3 className="variable__preview-title">
           <Field
             name="name"
             component={({ input: { value } }) => value || 'undefined'}
           />
-          :
-          <Field
-            name="type"
-            component={({ input: { value } }) => value || 'undefined'}
-          />
+          &nbsp;:&nbsp;
+          <em>
+            <Field
+              name="type"
+              component={({ input: { value } }) => value || 'undefined'}
+            />
+          </em>
         </h3>
+        <p className="variable__preview-description">
+          <Field
+            name="description"
+            component={({ input: { value } }) => value}
+          />
+        </p>
       </FormSection>
     )}
     {...rest}

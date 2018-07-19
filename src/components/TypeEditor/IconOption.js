@@ -6,6 +6,7 @@ import Radio from '../../ui/components/Fields/Radio';
 const IconOption = props => (
   <Radio
     {...props}
+    className="type-editor-icon-option"
     label={<Icon name={props.label} />}
   />
 );

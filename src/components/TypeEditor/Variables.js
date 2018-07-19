@@ -14,18 +14,16 @@ const Variables = ({
   itemComponent: ItemComponent,
 }) => (
   <Guidance contentId="guidance.editor.sociogram_prompts">
-    <div className="stage-editor-section">
+    <div className="type-editor__section">
       <h2>Variables</h2>
-      <p>Add variables:</p>
-      <div className="stage-editor-section-prompts">
-        <div className="stage-editor-section-prompts__prompts">
-          <FieldArray
-            name={name}
-            component={Items}
-            itemComponent={ItemComponent}
-            form={form}
-          />
-        </div>
+      <FieldArray
+        name={name}
+        component={Items}
+        itemComponent={ItemComponent}
+        form={form}
+      />
+
+      <div className="type-editor__subsection">
         <NewButton onClick={addNew} />
       </div>
     </div>

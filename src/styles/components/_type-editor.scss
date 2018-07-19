@@ -1,0 +1,5 @@
+.type-editor {
+  @include editor;
+  @import './type-editor/icon-option';
+  @import './type-editor/variable';
+}

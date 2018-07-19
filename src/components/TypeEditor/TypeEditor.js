@@ -47,10 +47,10 @@ const TypeEditor = ({
   valid,
   displayVariables,
 }) => (
-  <Form onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
+  <Form onSubmit={handleSubmit} className={cx('type-editor', { 'type-editor--show-code': codeView })}>
     <FormCodeView toggleCodeView={toggleCodeView} form={form} />
     <Guided
-      className="stage-editor__sections"
+      className="type-editor__sections"
       form={form}
     >
       <h1>Edit Node/Edge</h1>
@@ -62,7 +62,7 @@ const TypeEditor = ({
       <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
       <Guidance contentId="guidance.registry.color">
-        <div className="stage-editor-section">
+        <div className="type-editor__section">
           <h2>Color</h2>
 
           <Field
@@ -74,7 +74,7 @@ const TypeEditor = ({
       </Guidance>
 
       <Guidance contentId="guidance.registry.icon">
-        <div className="stage-editor-section">
+        <div className="type-editor__section">
           <h2>Icon</h2>
 
           <Field
@@ -87,7 +87,7 @@ const TypeEditor = ({
       </Guidance>
 
       <Guidance contentId="guidance.registry.displayVariable">
-        <div className="stage-editor-section">
+        <div className="type-editor__section">
           <h2>Display Variable</h2>
 
           <Field

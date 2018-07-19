@@ -1,0 +1,13 @@
+.type-editor-icon-option {
+  margin: 0;
+  padding: unit(3) 0;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    width: unit(8);
+    height: unit(8);
+    top: unit(0);
+    margin-left: unit(1);
+  }
+}
