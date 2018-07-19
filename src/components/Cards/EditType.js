@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
-import { get, mapValues, values, reduce, omit } from 'lodash';
+import { get, mapValues, values, reduce, omit, map } from 'lodash';
 import { Button } from '../../ui/components';
 import TypeEditor, { formName } from '../TypeEditor';
 import Card from './ProtocolCard';
@@ -87,25 +87,46 @@ class EditType extends PureComponent {
   }
 }
 
-const parse = configuration => ({
+const protocolAsFormValidations = validation =>
+  _.reduce(
+    validation,
+    (memo, value, key) => [...memo, { type: key, value }],
+    [],
+  );
+
+// convert protocol format into redux-form compatible format
+const protocolAsForm = configuration => ({
   ...configuration,
   variables: values(mapValues(
     get(configuration, 'variables', {}),
     (variable, key) => ({
+      ...variable,
       name: key,
       id: key,
-      ...variable,
+      validation: protocolAsFormValidations(variable.validation),
     }),
   )),
 });
 
-const format = configuration => ({
+const formAsProtocolValidations = validation =>
+  reduce(
+    validation,
+    (memo, { type, value }) =>
+      ({ ...memo, [type]: value }),
+    {},
+  );
+
+// convert redux-form format into protocol format
+const formAsProtocol = configuration => ({
   ...configuration,
   variables: reduce(
     configuration.variables,
     (memo, { name, ...variable }) => ({
-      ...omit(memo, ['id']),
-      [name]: variable,
+      ...memo,
+      [name]: {
+        ...omit(variable, ['id']),
+        validation: formAsProtocolValidations(variable.validation),
+      },
     }),
     {},
   ),
@@ -119,7 +140,10 @@ function mapStateToProps(state, props) {
   const type = get(props, 'match.params.type');
 
   const protocol = getProtocol(state);
-  const initialValues = parse(get(protocol, ['variableRegistry', category, type]));
+  const typeConfiguration = get(protocol, ['variableRegistry', category, type]);
+  const initialValues = protocolAsForm(typeConfiguration);
+
+  console.log({ typeConfiguration, initialValues });
 
   return {
     initialValues,
@@ -132,8 +156,10 @@ function mapStateToProps(state, props) {
 
 const mapDispatchToProps = dispatch => ({
   submit: bindActionCreators(submit, dispatch),
-  updateType: (category, type, form) =>
-    dispatch(variableRegistryActions.updateType(category, type, format(form))),
+  updateType: (category, type, form) => {
+    console.log({ form, formAsProtocol: formAsProtocol(form) });
+    dispatch(variableRegistryActions.updateType(category, type, formAsProtocol(form)));
+  },
 });
 
 export { EditType };

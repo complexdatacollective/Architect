@@ -77,7 +77,7 @@ const Variable = ({
           </ValidatedField>
 
           <Validations
-            name="validations"
+            name="validation"
             label="Validations"
             variableType={variableType}
             meta={{ form }}
