@@ -1,10 +1,9 @@
 import React from 'react';
-import { Form, Field, formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
+import { Form, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Color from 'color';
-import { range, map, compact } from 'lodash';
+import { range } from 'lodash';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
@@ -116,17 +115,6 @@ TypeEditor.propTypes = {
   displayVariables: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state, { form }) => {
-  const getValue = formValueSelector(form);
-  const variables = getValue(state, 'variables');
-
-  return ({
-    displayVariables: compact(map(variables, 'name')),
-  });
-};
-
 export { TypeEditor };
 
-export default connect(
-  mapStateToProps,
-)(TypeEditor);
+export default TypeEditor;

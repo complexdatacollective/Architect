@@ -1,13 +1,7 @@
 import { connect } from 'react-redux';
-import {
-  reduxForm,
-  formValueSelector,
-  isDirty,
-  isValid,
-} from 'redux-form';
+import { reduxForm, isDirty, isValid, formValueSelector } from 'redux-form';
 import { compose, withState, withHandlers } from 'recompose';
-import { keys } from 'lodash';
-import { getVariablesForNodeType, getNodeTypes } from '../../selectors/variableRegistry';
+import { compact, map } from 'lodash';
 import TypeEditor from './TypeEditor';
 
 const formName = 'VARIABLE_REGISTRY';
@@ -17,14 +11,13 @@ const getIsDirty = isDirty(formName);
 const getIsValid = isValid(formName);
 
 const mapStateToProps = (state) => {
-  const formNodeType = getFormValue(state, 'type') || null;
+  const variables = getFormValue(state, 'variables') || {};
+  const displayVariables = compact(map(variables, 'name'));
 
   return {
-    nodeType: formNodeType,
-    nodeTypes: keys(getNodeTypes(state)),
-    variables: getVariablesForNodeType(state, formNodeType),
     dirty: getIsDirty(state),
     valid: getIsValid(state),
+    displayVariables,
   };
 };
 
