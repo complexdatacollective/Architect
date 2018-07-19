@@ -157,9 +157,9 @@ const Validations = ({
   if (getValidationTypesForVariable(variableType).length === 0) { return null; }
 
   return (
-    <div className="form-fields-multi-select">
+    <div className="form-fields-multi-select type-editor__subsection">
       { label &&
-        <div className="form-fields-multi-select__label">{label}</div>
+        <h4>{label}</h4>
       }
       <FieldArray
         name={name}

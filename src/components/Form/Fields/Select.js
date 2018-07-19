@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import uuid from 'uuid';
 
 const asOptionObject = (option) => {
   if (typeof option !== 'string') { return option; }
@@ -30,10 +29,6 @@ class Select extends PureComponent {
     meta: { invalid: false, error: null, touched: false },
   };
 
-  componentWillMount() {
-    this.id = uuid();
-  }
-
   render() {
     const {
       className,
@@ -53,10 +48,7 @@ class Select extends PureComponent {
     return (
       <div className={componentClasses}>
         { label &&
-          <label
-            htmlFor={this.id}
-            className="form-fields-select__label"
-          >{label}</label>
+          <h4>{label}</h4>
         }
         <select className="form-fields-select__input" {...input} {...rest}>
           {children}

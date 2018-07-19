@@ -100,10 +100,15 @@ const TypeEditor = ({
         </div>
       </Guidance>
 
-      <Variables
-        form={form}
-        name="variables"
-      />
+      <Guidance contentId="guidance.registry.variables">
+        <div className="type-editor__section">
+          <h2>Variables</h2>
+          <Variables
+            form={form}
+            name="variables"
+          />
+        </div>
+      </Guidance>
     </Guided>
   </Form>
 );

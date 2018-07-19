@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { arrayPush, FieldArray } from 'redux-form';
 import PropTypes from 'prop-types';
-import Guidance from '../Guidance';
 import Items, { NewButton } from '../Items';
 import Variable from './Variable';
 
@@ -13,21 +12,18 @@ const Variables = ({
   name,
   addNew,
 }) => (
-  <Guidance contentId="guidance.editor.sociogram_prompts">
-    <div className="type-editor__section">
-      <h2>Variables</h2>
-      <FieldArray
-        name={name}
-        component={Items}
-        itemComponent={Variable}
-        form={form}
-      />
+  <React.Fragment>
+    <FieldArray
+      name={name}
+      component={Items}
+      itemComponent={Variable}
+      form={form}
+    />
 
-      <div className="type-editor__subsection">
-        <NewButton onClick={addNew} />
-      </div>
+    <div className="type-editor__subsection">
+      <NewButton onClick={addNew} />
     </div>
-  </Guidance>
+  </React.Fragment>
 );
 
 Variables.propTypes = {
@@ -35,9 +31,6 @@ Variables.propTypes = {
   name: PropTypes.string.isRequired,
   addNew: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = () => ({
-});
 
 const mapDispatchToProps = (dispatch, { form, name }) => ({
   addNew: bindActionCreators(
@@ -53,5 +46,5 @@ const mapDispatchToProps = (dispatch, { form, name }) => ({
 export { Variables };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
 )(Variables);
