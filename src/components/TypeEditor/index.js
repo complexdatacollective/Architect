@@ -29,6 +29,7 @@ const mapStateToProps = (state) => {
 };
 
 export { formName };
+export { parse, format } from './convert';
 
 export default compose(
   connect(mapStateToProps),

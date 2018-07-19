@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
-import { get, mapValues, values, reduce, omit, map } from 'lodash';
+import { get } from 'lodash';
 import { Button } from '../../ui/components';
-import TypeEditor, { formName } from '../TypeEditor';
+import TypeEditor, { formName, parse, format } from '../TypeEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
@@ -87,51 +87,6 @@ class EditType extends PureComponent {
   }
 }
 
-const protocolAsFormValidations = validation =>
-  _.reduce(
-    validation,
-    (memo, value, key) => [...memo, { type: key, value }],
-    [],
-  );
-
-// convert protocol format into redux-form compatible format
-const protocolAsForm = configuration => ({
-  ...configuration,
-  variables: values(mapValues(
-    get(configuration, 'variables', {}),
-    (variable, key) => ({
-      ...variable,
-      name: key,
-      id: key,
-      validation: protocolAsFormValidations(variable.validation),
-    }),
-  )),
-});
-
-const formAsProtocolValidations = validation =>
-  reduce(
-    validation,
-    (memo, { type, value }) =>
-      ({ ...memo, [type]: value }),
-    {},
-  );
-
-// convert redux-form format into protocol format
-const formAsProtocol = configuration => ({
-  ...configuration,
-  variables: reduce(
-    configuration.variables,
-    (memo, { name, ...variable }) => ({
-      ...memo,
-      [name]: {
-        ...omit(variable, ['id']),
-        validation: formAsProtocolValidations(variable.validation),
-      },
-    }),
-    {},
-  ),
-});
-
 const editFormIsDirty = isDirty(formName);
 const editFormIsInvalid = isInvalid(formName);
 
@@ -141,12 +96,9 @@ function mapStateToProps(state, props) {
 
   const protocol = getProtocol(state);
   const typeConfiguration = get(protocol, ['variableRegistry', category, type]);
-  const initialValues = protocolAsForm(typeConfiguration);
-
-  console.log({ typeConfiguration, initialValues });
 
   return {
-    initialValues,
+    initialValues: format(typeConfiguration),
     category,
     type,
     hasUnsavedChanges: editFormIsDirty(state),
@@ -157,8 +109,7 @@ function mapStateToProps(state, props) {
 const mapDispatchToProps = dispatch => ({
   submit: bindActionCreators(submit, dispatch),
   updateType: (category, type, form) => {
-    console.log({ form, formAsProtocol: formAsProtocol(form) });
-    dispatch(variableRegistryActions.updateType(category, type, formAsProtocol(form)));
+    dispatch(variableRegistryActions.updateType(category, type, parse(form)));
   },
 });
 
