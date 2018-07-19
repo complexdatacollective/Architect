@@ -7,7 +7,7 @@ import { range } from 'lodash';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
-import FormCodeView from '../FormCodeView';
+import { FormCodeView } from '../CodeView';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';

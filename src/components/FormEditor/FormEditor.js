@@ -9,7 +9,7 @@ import * as ArchitectFields from '../Form/Fields';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Disable from '../Disable';
-import FormCodeView from '../FormCodeView';
+import { FormCodeView } from '../CodeView';
 import NodeType from './NodeType';
 
 const allowedTypes = ['text', 'number', 'boolean'];
