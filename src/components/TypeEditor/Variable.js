@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   Field,
-  clearFields,
   isDirty as isFieldDirty,
   FormSection,
   formValueSelector,
@@ -90,6 +89,7 @@ const Variable = ({
 
 Variable.propTypes = {
   fieldId: PropTypes.string.isRequired,
+  form: PropTypes.string.isRequired,
   isDirty: PropTypes.bool,
   variableType: PropTypes.string,
 };
@@ -99,22 +99,11 @@ Variable.defaultProps = {
   variableType: null,
 };
 
-const mapStateToProps = (state, props) => ({
-  isDirty: isFieldDirty(props.form)(state, props.fieldId),
-  variableType: formValueSelector(props.form)(state, `${props.fieldId}.type`),
-});
-
-const mapDispatchToProps = (dispatch, props) => ({
-  clearField: (fieldName) => {
-    dispatch(clearFields(props.form.name, false, false, fieldName));
-  },
+const mapStateToProps = (state, { form, fieldId }) => ({
+  isDirty: isFieldDirty(form)(state, fieldId),
+  variableType: formValueSelector(form)(state, `${fieldId}.type`),
 });
 
 export { Variable };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(
-  Variable,
-);
+export default connect(mapStateToProps)(Variable);
