@@ -65,7 +65,7 @@ const TypeEditor = ({
       ) }
       <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
-      <Guidance contentId="guidance.registry.color">
+      <Guidance contentId="guidance.registry.type.color">
         <div className="type-editor__section">
           <h2>Color</h2>
 
@@ -77,7 +77,7 @@ const TypeEditor = ({
         </div>
       </Guidance>
 
-      <Guidance contentId="guidance.registry.icon">
+      <Guidance contentId="guidance.registry.type.icon">
         <div className="type-editor__section">
           <h2>Icon</h2>
 
@@ -90,7 +90,7 @@ const TypeEditor = ({
         </div>
       </Guidance>
 
-      <Guidance contentId="guidance.registry.displayVariable">
+      <Guidance contentId="guidance.registry.type.displayVariable">
         <div className="type-editor__section">
           <h2>Display Variable</h2>
 
@@ -102,7 +102,7 @@ const TypeEditor = ({
         </div>
       </Guidance>
 
-      <Guidance contentId="guidance.registry.variables">
+      <Guidance contentId="guidance.registry.type.variables">
         <div className="type-editor__section">
           <h2>Variables</h2>
           <Variables

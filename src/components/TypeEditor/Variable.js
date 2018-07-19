@@ -60,7 +60,7 @@ const Variable = ({
     {...rest}
   >
     <FormSection name={fieldId}>
-      <Guidance contentId="guidance.registry.variable.name">
+      <Guidance contentId="guidance.registry.variable">
         <div>
           <ValidatedField
             name="name"
