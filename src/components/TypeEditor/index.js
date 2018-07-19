@@ -26,7 +26,7 @@ export { parse, format } from './convert';
 
 export default compose(
   connect(mapStateToProps),
-  withState('codeView', 'updateCodeView', false),
+  withState('showCodeView', 'updateCodeView', false),
   withHandlers({
     toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
   }),

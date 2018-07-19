@@ -11,7 +11,6 @@ import { FormCodeView } from '../CodeView';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';
-import Variable from './Variable';
 import IconOption from './IconOption';
 
 const getColorByVariable = (variable) => {
@@ -41,13 +40,16 @@ const ICON_OPTIONS = [
 const TypeEditor = ({
   handleSubmit,
   toggleCodeView,
-  codeView,
+  showCodeView,
   form,
   dirty,
   valid,
   displayVariables,
 }) => (
-  <Form onSubmit={handleSubmit} className={cx('type-editor', { 'type-editor--show-code': codeView })}>
+  <Form
+    onSubmit={handleSubmit}
+    className={cx('type-editor', { 'type-editor--show-code': showCodeView })}
+  >
     <FormCodeView toggleCodeView={toggleCodeView} form={form} />
     <Guided
       className="type-editor__sections"
@@ -101,7 +103,6 @@ const TypeEditor = ({
       <Variables
         form={form}
         name="variables"
-        itemComponent={Variable}
       />
     </Guided>
   </Form>
@@ -109,7 +110,7 @@ const TypeEditor = ({
 
 TypeEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
-  codeView: PropTypes.bool.isRequired,
+  showCodeView: PropTypes.bool.isRequired,
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,

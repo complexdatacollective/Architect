@@ -6,12 +6,12 @@ import { arrayPush, FieldArray } from 'redux-form';
 import PropTypes from 'prop-types';
 import Guidance from '../Guidance';
 import Items, { NewButton } from '../Items';
+import Variable from './Variable';
 
 const Variables = ({
   form,
   name,
   addNew,
-  itemComponent: ItemComponent,
 }) => (
   <Guidance contentId="guidance.editor.sociogram_prompts">
     <div className="type-editor__section">
@@ -19,7 +19,7 @@ const Variables = ({
       <FieldArray
         name={name}
         component={Items}
-        itemComponent={ItemComponent}
+        itemComponent={Variable}
         form={form}
       />
 
@@ -33,7 +33,6 @@ const Variables = ({
 Variables.propTypes = {
   form: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  itemComponent: PropTypes.node.isRequired,
   addNew: PropTypes.func.isRequired,
 };
 
