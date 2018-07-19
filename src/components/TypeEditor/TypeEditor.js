@@ -30,6 +30,7 @@ const COLOR_OPTIONS = range(1, 8)
       }),
   );
 
+// TODO: Populate these somehow
 const ICON_OPTIONS = [
   'foo',
   'bar',
@@ -98,7 +99,6 @@ const TypeEditor = ({
       <Variables
         form={form}
         name="variables"
-        itemTemplate={{}}
         itemComponent={Variable}
       />
     </Guided>

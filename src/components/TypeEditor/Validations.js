@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { get, map } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { Icon } from '../../ui/components';
-import Select from './Fields/Select';
+import { Select } from '../Form/Fields';
 import ValidatedField from '../Form/ValidatedField';
 
 const VALIDATION_TYPES = {

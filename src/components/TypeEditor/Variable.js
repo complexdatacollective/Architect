@@ -12,7 +12,7 @@ import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
-import Validations from '../Form/Validations';
+import Validations from './Validations';
 import ExpandableItem from '../Items/ExpandableItem';
 
 const VARIABLE_TYPES = [
