@@ -52,7 +52,7 @@ ShallowWrapper {
                     )
           </small>
           <Connect(Guided)
-                    contentId="guidance.registry.color"
+                    contentId="guidance.registry.type.color"
           >
                     <div
                               className="type-editor__section"
@@ -99,7 +99,7 @@ ShallowWrapper {
                     </div>
           </Connect(Guided)>
           <Connect(Guided)
-                    contentId="guidance.registry.icon"
+                    contentId="guidance.registry.type.icon"
           >
                     <div
                               className="type-editor__section"
@@ -123,7 +123,7 @@ ShallowWrapper {
                     </div>
           </Connect(Guided)>
           <Connect(Guided)
-                    contentId="guidance.registry.displayVariable"
+                    contentId="guidance.registry.type.displayVariable"
           >
                     <div
                               className="type-editor__section"
@@ -139,7 +139,7 @@ ShallowWrapper {
                     </div>
           </Connect(Guided)>
           <Connect(Guided)
-                    contentId="guidance.registry.variables"
+                    contentId="guidance.registry.type.variables"
           >
                     <div
                               className="type-editor__section"
@@ -194,8 +194,9 @@ ShallowWrapper {
               </a>
               )
 </small>,
+            false,
             <Connect(Guided)
-              contentId="guidance.registry.color"
+              contentId="guidance.registry.type.color"
 >
               <div
                             className="type-editor__section"
@@ -242,7 +243,7 @@ ShallowWrapper {
               </div>
 </Connect(Guided)>,
             <Connect(Guided)
-              contentId="guidance.registry.icon"
+              contentId="guidance.registry.type.icon"
 >
               <div
                             className="type-editor__section"
@@ -266,7 +267,7 @@ ShallowWrapper {
               </div>
 </Connect(Guided)>,
             <Connect(Guided)
-              contentId="guidance.registry.displayVariable"
+              contentId="guidance.registry.type.displayVariable"
 >
               <div
                             className="type-editor__section"
@@ -282,7 +283,7 @@ ShallowWrapper {
               </div>
 </Connect(Guided)>,
             <Connect(Guided)
-              contentId="guidance.registry.variables"
+              contentId="guidance.registry.type.variables"
 >
               <div
                             className="type-editor__section"
@@ -358,6 +359,7 @@ ShallowWrapper {
             ],
             "type": "small",
           },
+          false,
           Object {
             "instance": null,
             "key": undefined,
@@ -406,7 +408,7 @@ ShallowWrapper {
                                 name="color"
                 />
 </div>,
-              "contentId": "guidance.registry.color",
+              "contentId": "guidance.registry.type.color",
             },
             "ref": null,
             "rendered": Object {
@@ -542,7 +544,7 @@ ShallowWrapper {
                                 }
                 />
 </div>,
-              "contentId": "guidance.registry.icon",
+              "contentId": "guidance.registry.type.icon",
             },
             "ref": null,
             "rendered": Object {
@@ -624,7 +626,7 @@ ShallowWrapper {
                                 options={Array []}
                 />
 </div>,
-              "contentId": "guidance.registry.displayVariable",
+              "contentId": "guidance.registry.type.displayVariable",
             },
             "ref": null,
             "rendered": Object {
@@ -691,7 +693,7 @@ ShallowWrapper {
                                 name="variables"
                 />
 </div>,
-              "contentId": "guidance.registry.variables",
+              "contentId": "guidance.registry.type.variables",
             },
             "ref": null,
             "rendered": Object {
@@ -777,7 +779,7 @@ ShallowWrapper {
                         )
             </small>
             <Connect(Guided)
-                        contentId="guidance.registry.color"
+                        contentId="guidance.registry.type.color"
             >
                         <div
                                     className="type-editor__section"
@@ -824,7 +826,7 @@ ShallowWrapper {
                         </div>
             </Connect(Guided)>
             <Connect(Guided)
-                        contentId="guidance.registry.icon"
+                        contentId="guidance.registry.type.icon"
             >
                         <div
                                     className="type-editor__section"
@@ -848,7 +850,7 @@ ShallowWrapper {
                         </div>
             </Connect(Guided)>
             <Connect(Guided)
-                        contentId="guidance.registry.displayVariable"
+                        contentId="guidance.registry.type.displayVariable"
             >
                         <div
                                     className="type-editor__section"
@@ -864,7 +866,7 @@ ShallowWrapper {
                         </div>
             </Connect(Guided)>
             <Connect(Guided)
-                        contentId="guidance.registry.variables"
+                        contentId="guidance.registry.type.variables"
             >
                         <div
                                     className="type-editor__section"
@@ -919,8 +921,9 @@ ShallowWrapper {
                 </a>
                 )
 </small>,
+              false,
               <Connect(Guided)
-                contentId="guidance.registry.color"
+                contentId="guidance.registry.type.color"
 >
                 <div
                                 className="type-editor__section"
@@ -967,7 +970,7 @@ ShallowWrapper {
                 </div>
 </Connect(Guided)>,
               <Connect(Guided)
-                contentId="guidance.registry.icon"
+                contentId="guidance.registry.type.icon"
 >
                 <div
                                 className="type-editor__section"
@@ -991,7 +994,7 @@ ShallowWrapper {
                 </div>
 </Connect(Guided)>,
               <Connect(Guided)
-                contentId="guidance.registry.displayVariable"
+                contentId="guidance.registry.type.displayVariable"
 >
                 <div
                                 className="type-editor__section"
@@ -1007,7 +1010,7 @@ ShallowWrapper {
                 </div>
 </Connect(Guided)>,
               <Connect(Guided)
-                contentId="guidance.registry.variables"
+                contentId="guidance.registry.type.variables"
 >
                 <div
                                 className="type-editor__section"
@@ -1083,6 +1086,7 @@ ShallowWrapper {
               ],
               "type": "small",
             },
+            false,
             Object {
               "instance": null,
               "key": undefined,
@@ -1131,7 +1135,7 @@ ShallowWrapper {
                                     name="color"
                   />
 </div>,
-                "contentId": "guidance.registry.color",
+                "contentId": "guidance.registry.type.color",
               },
               "ref": null,
               "rendered": Object {
@@ -1267,7 +1271,7 @@ ShallowWrapper {
                                     }
                   />
 </div>,
-                "contentId": "guidance.registry.icon",
+                "contentId": "guidance.registry.type.icon",
               },
               "ref": null,
               "rendered": Object {
@@ -1349,7 +1353,7 @@ ShallowWrapper {
                                     options={Array []}
                   />
 </div>,
-                "contentId": "guidance.registry.displayVariable",
+                "contentId": "guidance.registry.type.displayVariable",
               },
               "ref": null,
               "rendered": Object {
@@ -1416,7 +1420,7 @@ ShallowWrapper {
                                     name="variables"
                   />
 </div>,
-                "contentId": "guidance.registry.variables",
+                "contentId": "guidance.registry.type.variables",
               },
               "ref": null,
               "rendered": Object {

@@ -106,7 +106,7 @@ ShallowWrapper {
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
-          path="/edit/:protocol/registry/:category/:type"
+          path="/edit/:protocol/registry/:category/:type?"
 />,
       ],
       "className": "protocol",
@@ -250,7 +250,7 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
-          "path": "/edit/:protocol/registry/:category/:type",
+          "path": "/edit/:protocol/registry/:category/:type?",
         },
         "ref": null,
         "rendered": null,
@@ -333,7 +333,7 @@ ShallowWrapper {
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
-            path="/edit/:protocol/registry/:category/:type"
+            path="/edit/:protocol/registry/:category/:type?"
 />,
         ],
         "className": "protocol",
@@ -477,7 +477,7 @@ ShallowWrapper {
             "component": [Function],
             "location": Object {},
             "onComplete": [Function],
-            "path": "/edit/:protocol/registry/:category/:type",
+            "path": "/edit/:protocol/registry/:category/:type?",
           },
           "ref": null,
           "rendered": null,

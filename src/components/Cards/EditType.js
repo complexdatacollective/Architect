@@ -11,13 +11,14 @@ import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
 /**
- * This manages the display of the TypeEditor, provides it with
+ * This component manages the display of TypeEditor, provides it with
  * initial data, and handles redux actions for updating the protocol.
  */
 class EditType extends PureComponent {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
     submit: PropTypes.func.isRequired,
+    createType: PropTypes.func.isRequired,
     updateType: PropTypes.func.isRequired,
     category: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -39,7 +40,11 @@ class EditType extends PureComponent {
       type,
     } = this.props;
 
-    this.props.updateType(category, type, form);
+    if (!type) {
+      this.props.createType(category, form);
+    } else {
+      this.props.updateType(category, type, form);
+    }
 
     this.props.onComplete();
   }
@@ -114,6 +119,9 @@ const mapDispatchToProps = dispatch => ({
   submit: bindActionCreators(submit, dispatch),
   updateType: (category, type, form) => {
     dispatch(variableRegistryActions.updateType(category, type, parse(form)));
+  },
+  createType: (category, { type, ...form }) => {
+    dispatch(variableRegistryActions.createType(category, type, parse(form)));
   },
 });
 

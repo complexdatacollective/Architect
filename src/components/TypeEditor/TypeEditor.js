@@ -65,6 +65,21 @@ const TypeEditor = ({
       ) }
       <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
+      { !type &&
+        <Guidance contentId="guidance.registry.type.color">
+          <div className="type-editor__section">
+            <h2>Type</h2>
+
+            <Field
+              component={Fields.Text}
+              name="type"
+              label="Enter a name for this type"
+              pattern="[a-zA-Z0-9]+"
+            />
+          </div>
+        </Guidance>
+      }
+
       <Guidance contentId="guidance.registry.type.color">
         <div className="type-editor__section">
           <h2>Color</h2>

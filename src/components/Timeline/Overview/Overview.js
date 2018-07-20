@@ -93,8 +93,10 @@ class Overview extends Component {
                   <br />
                   <h4>Node types</h4>
                   { this.renderNodeTypes }
+                  <Link to={`${this.protocolPath}/registry/#node`}>More</Link>
                   <br />
                   <h4>Edge types</h4>
+                  <Link to={`${this.protocolPath}/registry/#edge`}>More</Link>
                   { this.renderEdgeTypes }
                 </PanelGroup>
                 <PanelGroup title="Forms">

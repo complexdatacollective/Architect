@@ -1,104 +1,121 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { submit, isDirty, isInvalid } from 'redux-form';
-import { get } from 'lodash';
-import { Button } from '../../ui/components';
+import { Link } from 'react-router-dom';
+import { has, get, keys } from 'lodash';
+import { Node, Icon } from '../../ui/components';
+import { Guided } from '../Guided';
+import Guidance from '../Guidance';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
-import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
-class Form extends PureComponent {
-  static propTypes = {
-    formName: PropTypes.string,
-    updateForm: PropTypes.func.isRequired,
-    createForm: PropTypes.func.isRequired,
-    submitForm: PropTypes.func.isRequired,
-    hasUnsavedChanges: PropTypes.bool,
-    hasErrors: PropTypes.bool,
-    onComplete: PropTypes.func.isRequired,
-    show: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    formName: null,
-    form: {},
-    show: true,
-    hasErrors: false,
-    hasUnsavedChanges: false,
-  };
-
-  onSubmit = (form) => {
-    if (this.props.formName) {
-      this.props.updateForm(this.props.formName, form);
-    } else {
-      this.props.createForm(form);
-    }
-
-    this.props.onComplete();
+const renderNodes = (nodes, protocolPath = '') => {
+  if (nodes.length === 0) {
+    return 'No edge types defined';
   }
 
-  submitForm = () => {
-    this.props.submitForm('edit-form');
+  return keys(nodes).map(
+    (node, index) =>
+      (
+        <Link to={`${protocolPath}/registry/node/${node}`} key={index}>
+          <Node label={node} />
+        </Link>
+      ),
+  );
+};
+
+const renderEdges = (edges, protocolPath = '') => {
+  if (edges.length === 0) {
+    return 'No edge types defined';
   }
 
-  renderButtons() {
-    const saveButton = (
-      <Button
-        key="save"
-        size="small"
-        onClick={this.submitForm}
-        color="white"
-        iconPosition="right"
-        disabled={this.props.hasErrors}
-      >
-        Save
-      </Button>
-    );
+  return keys(edges).map(
+    (edge, index) =>
+      (
+        <Link to={`${protocolPath}/registry/edge/${edge}`} key={index}>
+          <Icon name="links" />
+          {edge}
+        </Link>
+      ),
+  );
+};
 
-    return this.props.hasUnsavedChanges ? [saveButton] : [];
-  }
+const ViewRegistry = ({ show, variableRegistry, protocolPath, onComplete }) => {
+  if (!protocolPath) { return null; }
 
-  render() {
-    const {
-      show,
-    } = this.props;
+  return (
+    <Card
+      show={show}
+      onCancel={onComplete}
+    >
+      <div className="type-editor">
+        <Guided className="type-editor__sections">
+          <h2>View Registry</h2>
 
-    return (
-      <Card
-        buttons={this.renderButtons()}
-        show={show}
-        onCancel={this.props.onComplete}
-      >
-        View Registry
-      </Card>
-    );
-  }
-}
+          <Guidance contentId="guidance.registry.nodes">
+            <div className="type-editor__section">
+              <h3>Nodes</h3>
+              <div className="type-editor__subsection">
+                {renderNodes(get(variableRegistry, 'node', {}), protocolPath)}
+              </div>
+              <div className="type-editor__subsection">
+                <Link
+                  to={`${protocolPath}/registry/node/`}
+                  className="button button--small"
+                >
+                  Create new Node type
+                </Link>
+              </div>
+            </div>
+          </Guidance>
 
-const editFormIsDirty = isDirty('edit-form');
-const editFormIsInvalid = isInvalid('edit-form');
+          <Guidance contentId="guidance.registry.edges">
+            <div className="type-editor__section">
+              <h3>Edges</h3>
+              <div className="type-editor__subsection">
+                {renderEdges(get(variableRegistry, 'edge', {}), protocolPath)}
+              </div>
+              <div className="type-editor__subsection">
+                <Link
+                  to={`${protocolPath}/registry/edge/`}
+                  className="button button--small"
+                >
+                  Create new Edge type
+                </Link>
+              </div>
+            </div>
+          </Guidance>
+        </Guided>
+      </div>
+    </Card>
+  );
+};
 
-function mapStateToProps(state, props) {
+ViewRegistry.propTypes = {
+  show: PropTypes.bool,
+  variableRegistry: PropTypes.shape({
+    node: PropTypes.object.isRequired,
+    edge: PropTypes.object.isRequired,
+  }).isRequired,
+  protocolPath: PropTypes.string.isRequired,
+  onComplete: PropTypes.func,
+};
+
+ViewRegistry.defaultProps = {
+  show: true,
+  onComplete: () => {},
+};
+
+const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
-  const formName = get(props.match, 'params.form', null);
-  const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
 
   return {
-    form,
-    formName,
-    hasUnsavedChanges: !formName || editFormIsDirty(state),
-    hasErrors: editFormIsInvalid(state),
+    variableRegistry: protocol.variableRegistry,
+    protocolPath: has(props, 'match.params.protocol') ?
+      `/edit/${get(props, 'match.params.protocol')}` : null,
   };
-}
+};
 
-const mapDispatchToProps = dispatch => ({
-  submitForm: bindActionCreators(submit, dispatch),
-  updateForm: bindActionCreators(formActions.updateForm, dispatch),
-  createForm: bindActionCreators(formActions.createForm, dispatch),
-});
+export { ViewRegistry };
 
-export { Form };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps)(ViewRegistry);

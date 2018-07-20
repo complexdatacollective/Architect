@@ -178,7 +178,7 @@ class Protocol extends PureComponent {
         />
 
         <ShowRoute
-          path="/edit/:protocol/registry/:category/:type"
+          path="/edit/:protocol/registry/:category/:type?"
           location={location}
           component={EditType}
           onComplete={this.onRouteComplete}
