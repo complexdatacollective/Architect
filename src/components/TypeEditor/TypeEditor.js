@@ -64,7 +64,8 @@ const TypeEditor = ({
       className="type-editor__sections"
       form={form}
     >
-      <h1>Edit &quot;{type}&quot; {category}</h1>
+      { type && <h1>Edit &quot;{type}&quot; {category}</h1> }
+      { !type && <h1>Create {category}</h1> }
       { dirty && !valid && (
         <p style={{ color: 'var(--error)' }}>
           There are some errors that need to be fixed before this can be saved!
@@ -75,7 +76,7 @@ const TypeEditor = ({
       { !type &&
         <Guidance contentId="guidance.registry.type.color">
           <div className="type-editor__section">
-            <h2>Type</h2>
+            <h2>Name</h2>
 
             <Field
               component={Fields.Text}
