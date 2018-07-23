@@ -81,7 +81,7 @@ const TypeEditor = ({
               component={Fields.Text}
               name="type"
               label="Enter a name for this type"
-              pattern="[a-zA-Z0-9]+"
+              normalize={value => value.replace(/[^a-zA-Z0-9_]+/, '')}
             />
           </div>
         </Guidance>
