@@ -11,7 +11,7 @@
       }
 
       &--icon {
-        width: unit(6);
+        flex-grow: 0;
 
         .icon {
           width: unit(5);
@@ -24,7 +24,7 @@
       }
 
       &--options {
-        width: unit(10);
+        flex-grow: 0;
       }
     }
   }

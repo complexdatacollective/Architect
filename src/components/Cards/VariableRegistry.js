@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { map, has, get } from 'lodash';
+import { TransitionGroup } from 'react-transition-group';
+import { Wipe } from '../Transitions';
 import { Node, Icon, Button } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
@@ -17,45 +19,49 @@ class VariableRegistry extends Component {
   };
 
   renderNode = (node, key) => (
-    <div className="list__item" key={key}>
-      <div className="list__attribute list__attribute--icon">
-        <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
-          <Node label="" color={node.color} />
-        </Link>
-      </div>
-      <div className="list__attribute">
-        <h3>
+    <Wipe key={key}>
+      <div className="list__item" key={key}>
+        <div className="list__attribute list__attribute--icon">
           <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
-            {key}
+            <Node label="" color={node.color} />
           </Link>
-        </h3>
+        </div>
+        <div className="list__attribute">
+          <h3>
+            <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
+              {key}
+            </Link>
+          </h3>
+        </div>
+        <div className="list__attribute list__attribute--options">
+          <Button size="small" color="neon-coral" onClick={() => this.handleDelete('node', key)}>
+            Delete
+          </Button>
+        </div>
       </div>
-      <div className="list__attribute list__attribute--options">
-        <Button size="small" color="neon-coral" onClick={() => this.handleDelete('node', key)}>
-          Delete
-        </Button>
-      </div>
-    </div>
+    </Wipe>
   );
 
   renderEdge = (edge, key) => (
-    <div className="list__item" key={key}>
-      <div className="list__attribute list__attribute--icon">
-        <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
-          <Icon name="links" color={edge.color.replace('color-', '')} />
-        </Link>
-      </div>
-      <div className="list__attribute">
-        <h3>
+    <Wipe key={key}>
+      <div className="list__item" key={key}>
+        <div className="list__attribute list__attribute--icon">
           <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
-            {key}
+            <Icon name="links" color={edge.color.replace('color-', '')} />
           </Link>
-        </h3>
+        </div>
+        <div className="list__attribute">
+          <h3>
+            <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
+              {key}
+            </Link>
+          </h3>
+        </div>
+        <div className="list__attribute list__attribute--options">
+          <Button size="small" color="neon-coral" onClick={() => this.handleDelete('edge', key)}>Delete</Button>
+        </div>
       </div>
-      <div className="list__attribute list__attribute--options">
-        <Button size="small" color="neon-coral" onClick={() => this.handleDelete('edge', key)}>Delete</Button>
-      </div>
-    </div>
+    </Wipe>
   );
 
   renderEdges() {
@@ -67,7 +73,9 @@ class VariableRegistry extends Component {
 
     return (
       <div className="list">
-        {map(edges, this.renderEdge)}
+        <TransitionGroup>
+          {map(edges, this.renderEdge)}
+        </TransitionGroup>
       </div>
     );
   }
@@ -81,7 +89,9 @@ class VariableRegistry extends Component {
 
     return (
       <div className="list">
-        {map(nodes, this.renderNode)}
+        <TransitionGroup>
+          {map(nodes, this.renderNode)}
+        </TransitionGroup>
       </div>
     );
   }
