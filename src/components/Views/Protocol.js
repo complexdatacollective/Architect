@@ -11,7 +11,7 @@ import ShowRoute from '../../components/ShowRoute';
 import EditSkipLogic from '../Cards/EditSkipLogic';
 import EditStage from '../Cards/EditStage';
 import EditForm from '../Cards/Form';
-import ViewRegistry from '../Cards/ViewRegistry';
+import VariableRegistry from '../Cards/VariableRegistry';
 import EditType from '../Cards/EditType';
 import Timeline from '../../components/Timeline';
 import ControlBar from '../ControlBar';
@@ -77,10 +77,19 @@ class Protocol extends PureComponent {
     });
   }
 
-  onRouteComplete = () => {
+  onRouteComplete = (goto) => {
     const protocol = get(this.props.match, 'params.protocol');
+
     if (protocol) {
-      history.push(`/edit/${protocol}`);
+      switch (goto) {
+        case 'registry':
+          history.push(`/edit/${protocol}/registry`);
+          break;
+        case 'protocol':
+        default:
+          history.push(`/edit/${protocol}`);
+          break;
+      }
     }
   }
 
@@ -173,7 +182,7 @@ class Protocol extends PureComponent {
         <ShowRoute
           path="/edit/:protocol/registry"
           location={location}
-          component={ViewRegistry}
+          component={VariableRegistry}
           onComplete={this.onRouteComplete}
         />
 
@@ -181,7 +190,7 @@ class Protocol extends PureComponent {
           path="/edit/:protocol/registry/:category/:type?"
           location={location}
           component={EditType}
-          onComplete={this.onRouteComplete}
+          onComplete={() => this.onRouteComplete('registry')}
         />
       </div>
     );
