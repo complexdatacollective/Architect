@@ -42,4 +42,33 @@
       padding-top: calc(30vh);
     }
   }
+
+  .list {
+    display: table;
+    width: 100%;
+
+    &__item {
+      display: table-row;
+
+      &:first-child {
+        .list__attribute {
+          border-top: unit(0.25) solid var(--architect-divider);
+        }
+      }
+    }
+
+    &__attribute {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: left;
+      padding: unit(2) unit(1);
+      border-bottom: unit(0.25) solid var(--architect-divider);
+
+      a {
+        text-decoration: none;
+        color: var(--text);
+        cursor: pointer;
+      }
+    }
+  }
 }

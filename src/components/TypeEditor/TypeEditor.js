@@ -3,7 +3,6 @@ import { Form, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Color from 'color';
-import { range } from 'lodash';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
@@ -21,14 +20,22 @@ const getColorByVariable = (variable) => {
   }
 };
 
-const COLOR_OPTIONS = range(1, 8)
-  .map(
-    i =>
-      ({
-        name: `--node-color-seq-${i}`,
-        color: getColorByVariable(`--node-color-seq-${i}`),
-      }),
-  );
+const COLOR_OPTIONS = [
+  'color-neon-coral',
+  'color-sea-serpent',
+  'color-purple-pizazz',
+  'color-neon-carrot',
+  'color-kiwi',
+  'color-cerulean-blue',
+  'color-paradise-pink',
+  'color-mustard',
+].map(
+  name =>
+    ({
+      name,
+      color: getColorByVariable(`--${name}`),
+    }),
+);
 
 const ICON_OPTIONS = [
   'add-a-context',

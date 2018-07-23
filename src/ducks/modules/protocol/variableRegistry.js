@@ -1,7 +1,8 @@
-import { has } from 'lodash';
+import { has, omit } from 'lodash';
 
 const UPDATE_TYPE = 'UPDATE_TYPE';
 const CREATE_TYPE = 'CREATE_TYPE';
+const DELETE_TYPE = 'DELETE_TYPE';
 
 const initialState = {
 };
@@ -36,6 +37,16 @@ const setType = (state, category, type, configuration) => ({
   },
 });
 
+function deleteType(category, type) {
+  return {
+    type: DELETE_TYPE,
+    meta: {
+      category,
+      type,
+    }
+  };
+}
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_TYPE:
@@ -43,6 +54,13 @@ export default function reducer(state = initialState, action = {}) {
       return setType(state, action.meta.category, action.meta.type, action.configuration);
     case UPDATE_TYPE:
       return setType(state, action.meta.category, action.meta.type, action.configuration);
+    case DELETE_TYPE:
+      return {
+        ...state,
+        [action.meta.category]: {
+          ...omit(state[action.meta.category], [action.meta.type]),
+        },
+      };
     default:
       return state;
   }
@@ -51,11 +69,13 @@ export default function reducer(state = initialState, action = {}) {
 const actionCreators = {
   updateType,
   createType,
+  deleteType,
 };
 
 const actionTypes = {
   UPDATE_TYPE,
   CREATE_TYPE,
+  DELETE_TYPE,
 };
 
 export {
