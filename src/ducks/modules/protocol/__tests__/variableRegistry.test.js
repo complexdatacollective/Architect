@@ -66,4 +66,21 @@ describe('protocol.variableRegistry', () => {
       edge: { },
     });
   });
+
+  it('deleteType()', () => {
+    const nextState = reducer(
+      mockState,
+      actionCreators.deleteType(
+        'node',
+        'person',
+      ),
+    );
+
+    expect(nextState).toEqual({
+      node: {
+        place: { foo: 'bar' },
+      },
+      edge: { },
+    });
+  });
 });

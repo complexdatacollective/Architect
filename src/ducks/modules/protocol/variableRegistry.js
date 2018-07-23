@@ -43,7 +43,7 @@ function deleteType(category, type) {
     meta: {
       category,
       type,
-    }
+    },
   };
 }
 

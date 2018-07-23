@@ -11,8 +11,7 @@ import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
-class ViewVariableRegistry extends Component {
-
+class VariableRegistry extends Component {
   handleDelete = (category, type) => {
     this.props.deleteType(category, type);
   };
@@ -145,18 +144,19 @@ class ViewVariableRegistry extends Component {
   }
 }
 
-ViewVariableRegistry.propTypes = {
+VariableRegistry.propTypes = {
   show: PropTypes.bool,
   variableRegistry: PropTypes.shape({
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
   }).isRequired,
-  protocolPath: PropTypes.string.isRequired,
+  protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteType: PropTypes.func.isRequired,
 };
 
-ViewVariableRegistry.defaultProps = {
+VariableRegistry.defaultProps = {
+  protocolPath: null,
   show: true,
   onComplete: () => {},
 };
@@ -175,8 +175,9 @@ const mapDispatchToProps = dispatch => ({
   deleteType: bindActionCreators(variableRegistryActions.deleteType, dispatch),
 });
 
-export { ViewVariableRegistry };
+export { VariableRegistry };
 
 export default connect(
-  mapStateToProps, mapDispatchToProps
-)(ViewVariableRegistry);
+  mapStateToProps,
+  mapDispatchToProps,
+)(VariableRegistry);
