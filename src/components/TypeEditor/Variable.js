@@ -12,6 +12,7 @@ import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Validations from './Validations';
+import Options from './Options';
 import ExpandableItem from '../Items/ExpandableItem';
 
 const VARIABLE_TYPES = [
@@ -20,9 +21,14 @@ const VARIABLE_TYPES = [
   'datetime',
   'boolean',
   'ordinal',
-  'catagorical',
+  'categorical',
   'layout',
   'location',
+];
+
+const VARIABLE_TYPES_WITH_OPTIONS = [
+  'ordinal',
+  'categorical',
 ];
 
 const Variable = ({
@@ -75,6 +81,7 @@ const Variable = ({
           />
           <ValidatedField
             name="type"
+            className="form-field-container"
             component={ArchitectFields.Select}
             label="Variable type"
             options={VARIABLE_TYPES}
@@ -83,6 +90,13 @@ const Variable = ({
             <option value="">&mdash; Select variable type &mdash;</option>
           </ValidatedField>
 
+          { VARIABLE_TYPES_WITH_OPTIONS.includes(variableType) &&
+            <Options
+              name="options"
+              label="Options"
+              meta={{ form }}
+            />
+          }
           <Validations
             name="validation"
             label="Validations"

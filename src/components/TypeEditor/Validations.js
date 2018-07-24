@@ -118,7 +118,7 @@ const Item = compose(
 );
 
 const Items = ({ fields, variableType, ...rest }) => (
-  <React.Fragment>
+  <div className="form-field-container">
     <div className="form-fields-multi-select">
       <div className="form-fields-multi-select__rules">
         {
@@ -139,7 +139,7 @@ const Items = ({ fields, variableType, ...rest }) => (
     { (fields.length < getValidationTypesForVariable(variableType).length) &&
       <AddItem onClick={() => fields.push({})} />
     }
-  </React.Fragment>
+  </div>
 );
 
 Items.propTypes = {
