@@ -9,7 +9,7 @@ import { Wipe } from '../Transitions';
 import { Node, Icon, Button } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
-import Card from './ProtocolCard';
+import Card from '../Card';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
@@ -96,11 +96,16 @@ class VariableRegistry extends Component {
     );
   }
 
+  renderButtons() {
+    return ([
+      <Button key="cancel" size="small" color="platinum" onClick={this.props.onComplete}>Back</Button>,
+    ]);
+  }
+
   render() {
     const {
       show,
       protocolPath,
-      onComplete,
     } = this.props;
 
     if (!protocolPath) { return null; }
@@ -108,7 +113,7 @@ class VariableRegistry extends Component {
     return (
       <Card
         show={show}
-        onCancel={onComplete}
+        buttons={this.renderButtons()}
       >
         <div className="type-editor">
           <Guided className="type-editor__sections">
