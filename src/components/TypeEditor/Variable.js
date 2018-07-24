@@ -5,6 +5,7 @@ import {
   Field,
   isDirty as isFieldDirty,
   FormSection,
+  change,
   formValueSelector,
 } from 'redux-form';
 import Guidance from '../Guidance';
@@ -36,6 +37,7 @@ const Variable = ({
   isDirty,
   form,
   variableType,
+  resetOptions,
   ...rest
 }) => (
   <ExpandableItem
@@ -86,6 +88,7 @@ const Variable = ({
             label="Variable type"
             options={VARIABLE_TYPES}
             validation={{ required: true }}
+            onChange={resetOptions}
           >
             <option value="">&mdash; Select variable type &mdash;</option>
           </ValidatedField>
@@ -97,6 +100,7 @@ const Variable = ({
               meta={{ form }}
             />
           }
+
           <Validations
             name="validation"
             label="Validations"
@@ -126,6 +130,16 @@ const mapStateToProps = (state, { form, fieldId }) => ({
   variableType: formValueSelector(form)(state, `${fieldId}.type`),
 });
 
+const mapDispatchToProps = (dispatch, { form, fieldId }) => ({
+  resetOptions: () => {
+    dispatch(change(form, `${fieldId}.options`, []));
+    dispatch(change(form, `${fieldId}.validation`, []));
+  },
+});
+
 export { Variable };
 
-export default connect(mapStateToProps)(Variable);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Variable);
