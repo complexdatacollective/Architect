@@ -47,6 +47,7 @@ class ColorPicker extends PureComponent {
             color={this.color}
             triangle="hide"
             colors={this.colors}
+            circleSize={50}
             onChangeComplete={this.handleChange}
           />
         </div>

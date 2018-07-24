@@ -20,7 +20,7 @@ const Variables = ({
       form={form}
     />
 
-    <div className="type-editor__subsection">
+    <div className="editor__subsection">
       <NewButton onClick={addNew} />
     </div>
   </React.Fragment>
