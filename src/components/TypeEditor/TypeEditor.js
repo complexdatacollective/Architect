@@ -62,7 +62,7 @@ const TypeEditor = ({
 
     { !type &&
       <Guidance contentId="guidance.registry.type.color">
-        <div className="type-editor__section">
+        <div className="editor__section">
           <h2>Name</h2>
 
           <Field
@@ -76,7 +76,7 @@ const TypeEditor = ({
     }
 
     <Guidance contentId="guidance.registry.type.color">
-      <div className="type-editor__section">
+      <div className="editor__section">
         <h2>Color</h2>
 
         <Field
@@ -88,7 +88,7 @@ const TypeEditor = ({
     </Guidance>
 
     <Guidance contentId="guidance.registry.type.icon">
-      <div className="type-editor__section">
+      <div className="editor__section">
         <h2>Icon</h2>
 
         <Field
@@ -101,7 +101,7 @@ const TypeEditor = ({
     </Guidance>
 
     <Guidance contentId="guidance.registry.type.displayVariable">
-      <div className="type-editor__section">
+      <div className="editor__section">
         <h2>Display Variable</h2>
 
         <Field
@@ -113,7 +113,7 @@ const TypeEditor = ({
     </Guidance>
 
     <Guidance contentId="guidance.registry.type.variables">
-      <div className="type-editor__section">
+      <div className="editor__section">
         <h2>Variables</h2>
         <Variables
           form={form}

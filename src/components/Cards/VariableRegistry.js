@@ -115,17 +115,17 @@ class VariableRegistry extends Component {
         show={show}
         buttons={this.renderButtons()}
       >
-        <div className="type-editor">
-          <Guided className="type-editor__sections">
+        <div className="editor variable-registry">
+          <Guided className="editor__sections">
             <h1>Variable Registry</h1>
 
             <Guidance contentId="guidance.registry.nodes">
-              <div className="type-editor__section">
+              <div className="editor__section">
                 <h2>Nodes</h2>
-                <div className="type-editor__subsection">
+                <div className="editor__subsection">
                   {this.renderNodes()}
                 </div>
-                <div className="type-editor__subsection">
+                <div className="editor__subsection">
                   <Link
                     to={`${protocolPath}/registry/node/`}
                     className="button button--small"
@@ -137,12 +137,12 @@ class VariableRegistry extends Component {
             </Guidance>
 
             <Guidance contentId="guidance.registry.edges">
-              <div className="type-editor__section">
+              <div className="editor__section">
                 <h2>Edges</h2>
-                <div className="type-editor__subsection">
+                <div className="editor__subsection">
                   {this.renderEdges()}
                 </div>
-                <div className="type-editor__subsection">
+                <div className="editor__subsection">
                   <Link
                     to={`${protocolPath}/registry/edge/`}
                     className="button button--small"

@@ -1,0 +1,22 @@
+.variable-registry {
+  .list {
+    &__attribute {
+      &--icon {
+        flex-grow: 0;
+
+        .icon {
+          width: unit(5);
+          height: unit(5);
+        }
+
+        .node {
+          font-size: 60px;
+        }
+      }
+
+      &--options {
+        flex-grow: 0;
+      }
+    }
+  }
+}

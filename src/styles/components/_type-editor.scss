@@ -1,31 +1,4 @@
 .type-editor {
-  @include editor;
   @import './type-editor/icon-option';
   @import './type-editor/variable';
-
-  .list {
-    &__attribute {
-
-      h3 {
-        margin: 0;
-      }
-
-      &--icon {
-        flex-grow: 0;
-
-        .icon {
-          width: unit(5);
-          height: unit(5);
-        }
-
-        .node {
-          font-size: 60px;
-        }
-      }
-
-      &--options {
-        flex-grow: 0;
-      }
-    }
-  }
 }
