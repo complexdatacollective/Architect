@@ -12,7 +12,10 @@ describe('protocol root reducer', () => {
           externalData: {},
           forms: {},
           stages: [],
-          variableRegistry: {},
+          variableRegistry: {
+            node: {},
+            edge: {},
+          },
         },
       );
     });
@@ -37,7 +40,10 @@ describe('protocol root reducer', () => {
           externalData: {},
           forms: {},
           stages: [],
-          variableRegistry: {},
+          variableRegistry: {
+            node: {},
+            edge: {},
+          },
         });
     });
   });

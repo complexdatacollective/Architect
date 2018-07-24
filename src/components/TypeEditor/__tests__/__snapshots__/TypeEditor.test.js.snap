@@ -25,1039 +25,302 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "host",
     "props": Object {
       "children": Array [
-        <Connect(CodeView)
-          form="TYPE_EDITOR"
-          toggleCodeView={[Function]}
-/>,
+        <h1>
+          Edit "
+          bar
+          " 
+          foo
+</h1>,
+        false,
+        false,
+        <small>
+          (
+          <a
+                    onClick={[Function]}
+          >
+                    Show Code View
+          </a>
+          )
+</small>,
+        false,
         <Connect(Guided)
-          className="type-editor__sections"
-          form="TYPE_EDITOR"
+          contentId="guidance.registry.type.color"
 >
-          <h1>
-                    Edit "
-                    bar
-                    " 
-                    foo
-          </h1>
-          <small>
-                    (
-                    <a
-                              onClick={[Function]}
-                    >
-                              Show Code View
-                    </a>
-                    )
-          </small>
-          <Connect(Guided)
-                    contentId="guidance.registry.type.color"
+          <div
+                    className="editor__section"
           >
-                    <div
-                              className="type-editor__section"
-                    >
-                              <h2>
-                                        Color
-                              </h2>
-                              <Field
-                                        colors={
-                                                  Array [
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-neon-coral",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-sea-serpent",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-purple-pizazz",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-neon-carrot",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-kiwi",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-cerulean-blue",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-paradise-pink",
-                                                            },
-                                                            Object {
-                                                              "color": "#117733",
-                                                              "name": "color-mustard",
-                                                            },
-                                                          ]
-                                        }
-                                        component={[Function]}
-                                        name="color"
-                              />
-                    </div>
-          </Connect(Guided)>
-          <Connect(Guided)
-                    contentId="guidance.registry.type.icon"
+                    <h2>
+                              Color
+                    </h2>
+                    <Field
+                              colors={
+                                        Array [
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "color-neon-coral",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "color-sea-serpent",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "color-purple-pizazz",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "color-neon-carrot",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "color-kiwi",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "color-cerulean-blue",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "color-paradise-pink",
+                                                  },
+                                                  Object {
+                                                    "color": "#117733",
+                                                    "name": "color-mustard",
+                                                  },
+                                                ]
+                              }
+                              component={[Function]}
+                              name="color"
+                    />
+          </div>
+</Connect(Guided)>,
+        <Connect(Guided)
+          contentId="guidance.registry.type.icon"
+>
+          <div
+                    className="editor__section"
           >
-                    <div
-                              className="type-editor__section"
-                    >
-                              <h2>
-                                        Icon
-                              </h2>
-                              <Field
-                                        component={[Function]}
-                                        name="iconVariant"
-                                        optionComponent={[Function]}
-                                        options={
-                                                  Array [
-                                                            "add-a-context",
-                                                            "add-a-person",
-                                                            "add-a-place",
-                                                            "add-a-relationship",
-                                                          ]
-                                        }
-                              />
-                    </div>
-          </Connect(Guided)>
-          <Connect(Guided)
-                    contentId="guidance.registry.type.displayVariable"
+                    <h2>
+                              Icon
+                    </h2>
+                    <Field
+                              component={[Function]}
+                              name="iconVariant"
+                              optionComponent={[Function]}
+                              options={
+                                        Array [
+                                                  "add-a-context",
+                                                  "add-a-person",
+                                                  "add-a-place",
+                                                  "add-a-relationship",
+                                                ]
+                              }
+                    />
+          </div>
+</Connect(Guided)>,
+        <Connect(Guided)
+          contentId="guidance.registry.type.displayVariable"
+>
+          <div
+                    className="editor__section"
           >
-                    <div
-                              className="type-editor__section"
-                    >
-                              <h2>
-                                        Display Variable
-                              </h2>
-                              <Field
-                                        component={[Function]}
-                                        name="displayVariable"
-                                        options={Array []}
-                              />
-                    </div>
-          </Connect(Guided)>
-          <Connect(Guided)
-                    contentId="guidance.registry.type.variables"
+                    <h2>
+                              Display Variable
+                    </h2>
+                    <Field
+                              component={[Function]}
+                              name="displayVariable"
+                              options={Array []}
+                    />
+          </div>
+</Connect(Guided)>,
+        <Connect(Guided)
+          contentId="guidance.registry.type.variables"
+>
+          <div
+                    className="editor__section"
           >
-                    <div
-                              className="type-editor__section"
-                    >
-                              <h2>
-                                        Variables
-                              </h2>
-                              <Connect(Variables)
-                                        form="TYPE_EDITOR"
-                                        name="variables"
-                              />
-                    </div>
-          </Connect(Guided)>
+                    <h2>
+                              Variables
+                    </h2>
+                    <Connect(Variables)
+                              form="TYPE_EDITOR"
+                              name="variables"
+                    />
+          </div>
 </Connect(Guided)>,
       ],
-      "className": "type-editor type-editor--show-code",
-      "onSubmit": [Function],
+      "className": "type-editor editor__sections",
     },
     "ref": null,
     "rendered": Array [
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "host",
         "props": Object {
-          "form": "TYPE_EDITOR",
-          "toggleCodeView": [Function],
+          "children": Array [
+            "Edit \\"",
+            "bar",
+            "\\" ",
+            "foo",
+          ],
         },
         "ref": null,
-        "rendered": null,
-        "type": [Function],
+        "rendered": Array [
+          "Edit \\"",
+          "bar",
+          "\\" ",
+          "foo",
+        ],
+        "type": "h1",
       },
+      false,
+      false,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "(",
+            <a
+              onClick={[Function]}
+>
+              Show Code View
+</a>,
+            ")",
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          "(",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Show Code View",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": "Show Code View",
+            "type": "a",
+          },
+          ")",
+        ],
+        "type": "small",
+      },
+      false,
       Object {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": Array [
-            <h1>
-              Edit "
-              bar
-              " 
-              foo
-</h1>,
-            false,
-            false,
-            <small>
-              (
-              <a
-                            onClick={[Function]}
-              >
-                            Show Code View
-              </a>
-              )
-</small>,
-            false,
-            <Connect(Guided)
-              contentId="guidance.registry.type.color"
+          "children": <div
+            className="editor__section"
 >
-              <div
-                            className="type-editor__section"
-              >
-                            <h2>
-                                          Color
-                            </h2>
-                            <Field
-                                          colors={
-                                                        Array [
-                                                                      Object {
-                                                                        "color": "",
-                                                                        "name": "color-neon-coral",
-                                                                      },
-                                                                      Object {
-                                                                        "color": "",
-                                                                        "name": "color-sea-serpent",
-                                                                      },
-                                                                      Object {
-                                                                        "color": "",
-                                                                        "name": "color-purple-pizazz",
-                                                                      },
-                                                                      Object {
-                                                                        "color": "",
-                                                                        "name": "color-neon-carrot",
-                                                                      },
-                                                                      Object {
-                                                                        "color": "",
-                                                                        "name": "color-kiwi",
-                                                                      },
-                                                                      Object {
-                                                                        "color": "",
-                                                                        "name": "color-cerulean-blue",
-                                                                      },
-                                                                      Object {
-                                                                        "color": "",
-                                                                        "name": "color-paradise-pink",
-                                                                      },
-                                                                      Object {
-                                                                        "color": "#117733",
-                                                                        "name": "color-mustard",
-                                                                      },
-                                                                    ]
-                                          }
-                                          component={[Function]}
-                                          name="color"
-                            />
-              </div>
-</Connect(Guided)>,
-            <Connect(Guided)
-              contentId="guidance.registry.type.icon"
->
-              <div
-                            className="type-editor__section"
-              >
-                            <h2>
-                                          Icon
-                            </h2>
-                            <Field
-                                          component={[Function]}
-                                          name="iconVariant"
-                                          optionComponent={[Function]}
-                                          options={
-                                                        Array [
-                                                                      "add-a-context",
-                                                                      "add-a-person",
-                                                                      "add-a-place",
-                                                                      "add-a-relationship",
-                                                                    ]
-                                          }
-                            />
-              </div>
-</Connect(Guided)>,
-            <Connect(Guided)
-              contentId="guidance.registry.type.displayVariable"
->
-              <div
-                            className="type-editor__section"
-              >
-                            <h2>
-                                          Display Variable
-                            </h2>
-                            <Field
-                                          component={[Function]}
-                                          name="displayVariable"
-                                          options={Array []}
-                            />
-              </div>
-</Connect(Guided)>,
-            <Connect(Guided)
-              contentId="guidance.registry.type.variables"
->
-              <div
-                            className="type-editor__section"
-              >
-                            <h2>
-                                          Variables
-                            </h2>
-                            <Connect(Variables)
-                                          form="TYPE_EDITOR"
-                                          name="variables"
-                            />
-              </div>
-</Connect(Guided)>,
-          ],
-          "className": "type-editor__sections",
-          "form": "TYPE_EDITOR",
+            <h2>
+                        Color
+            </h2>
+            <Field
+                        colors={
+                                    Array [
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-neon-coral",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-sea-serpent",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-purple-pizazz",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-neon-carrot",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-kiwi",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-cerulean-blue",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-paradise-pink",
+                                                },
+                                                Object {
+                                                  "color": "#117733",
+                                                  "name": "color-mustard",
+                                                },
+                                              ]
+                        }
+                        component={[Function]}
+                        name="color"
+            />
+</div>,
+          "contentId": "guidance.registry.type.color",
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                "Edit \\"",
-                "bar",
-                "\\" ",
-                "foo",
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              "Edit \\"",
-              "bar",
-              "\\" ",
-              "foo",
-            ],
-            "type": "h1",
-          },
-          false,
-          false,
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                "(",
-                <a
-                  onClick={[Function]}
->
-                  Show Code View
-</a>,
-                ")",
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              "(",
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Show Code View",
-                  "onClick": [Function],
-                },
-                "ref": null,
-                "rendered": "Show Code View",
-                "type": "a",
-              },
-              ")",
-            ],
-            "type": "small",
-          },
-          false,
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <div
-                className="type-editor__section"
->
-                <h2>
-                                Color
-                </h2>
-                <Field
-                                colors={
-                                                Array [
-                                                                Object {
-                                                                  "color": "",
-                                                                  "name": "color-neon-coral",
-                                                                },
-                                                                Object {
-                                                                  "color": "",
-                                                                  "name": "color-sea-serpent",
-                                                                },
-                                                                Object {
-                                                                  "color": "",
-                                                                  "name": "color-purple-pizazz",
-                                                                },
-                                                                Object {
-                                                                  "color": "",
-                                                                  "name": "color-neon-carrot",
-                                                                },
-                                                                Object {
-                                                                  "color": "",
-                                                                  "name": "color-kiwi",
-                                                                },
-                                                                Object {
-                                                                  "color": "",
-                                                                  "name": "color-cerulean-blue",
-                                                                },
-                                                                Object {
-                                                                  "color": "",
-                                                                  "name": "color-paradise-pink",
-                                                                },
-                                                                Object {
-                                                                  "color": "#117733",
-                                                                  "name": "color-mustard",
-                                                                },
-                                                              ]
-                                }
-                                component={[Function]}
-                                name="color"
-                />
-</div>,
-              "contentId": "guidance.registry.type.color",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h2>
-                    Color
-</h2>,
-                  <Field
-                    colors={
-                                        Array [
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-neon-coral",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-sea-serpent",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-purple-pizazz",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-neon-carrot",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-kiwi",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-cerulean-blue",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "color-paradise-pink",
-                                                            },
-                                                            Object {
-                                                              "color": "#117733",
-                                                              "name": "color-mustard",
-                                                            },
-                                                          ]
-                    }
-                    component={[Function]}
-                    name="color"
-/>,
-                ],
-                "className": "type-editor__section",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Color",
-                  },
-                  "ref": null,
-                  "rendered": "Color",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "colors": Array [
-                      Object {
-                        "color": "",
-                        "name": "color-neon-coral",
-                      },
-                      Object {
-                        "color": "",
-                        "name": "color-sea-serpent",
-                      },
-                      Object {
-                        "color": "",
-                        "name": "color-purple-pizazz",
-                      },
-                      Object {
-                        "color": "",
-                        "name": "color-neon-carrot",
-                      },
-                      Object {
-                        "color": "",
-                        "name": "color-kiwi",
-                      },
-                      Object {
-                        "color": "",
-                        "name": "color-cerulean-blue",
-                      },
-                      Object {
-                        "color": "",
-                        "name": "color-paradise-pink",
-                      },
-                      Object {
-                        "color": "#117733",
-                        "name": "color-mustard",
-                      },
-                    ],
-                    "component": [Function],
-                    "name": "color",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <div
-                className="type-editor__section"
->
-                <h2>
-                                Icon
-                </h2>
-                <Field
-                                component={[Function]}
-                                name="iconVariant"
-                                optionComponent={[Function]}
-                                options={
-                                                Array [
-                                                                "add-a-context",
-                                                                "add-a-person",
-                                                                "add-a-place",
-                                                                "add-a-relationship",
-                                                              ]
-                                }
-                />
-</div>,
-              "contentId": "guidance.registry.type.icon",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h2>
-                    Icon
-</h2>,
-                  <Field
-                    component={[Function]}
-                    name="iconVariant"
-                    optionComponent={[Function]}
-                    options={
-                                        Array [
-                                                            "add-a-context",
-                                                            "add-a-person",
-                                                            "add-a-place",
-                                                            "add-a-relationship",
-                                                          ]
-                    }
-/>,
-                ],
-                "className": "type-editor__section",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Icon",
-                  },
-                  "ref": null,
-                  "rendered": "Icon",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "component": [Function],
-                    "name": "iconVariant",
-                    "optionComponent": [Function],
-                    "options": Array [
-                      "add-a-context",
-                      "add-a-person",
-                      "add-a-place",
-                      "add-a-relationship",
-                    ],
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <div
-                className="type-editor__section"
->
-                <h2>
-                                Display Variable
-                </h2>
-                <Field
-                                component={[Function]}
-                                name="displayVariable"
-                                options={Array []}
-                />
-</div>,
-              "contentId": "guidance.registry.type.displayVariable",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h2>
-                    Display Variable
-</h2>,
-                  <Field
-                    component={[Function]}
-                    name="displayVariable"
-                    options={Array []}
-/>,
-                ],
-                "className": "type-editor__section",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Display Variable",
-                  },
-                  "ref": null,
-                  "rendered": "Display Variable",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "component": [Function],
-                    "name": "displayVariable",
-                    "options": Array [],
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <div
-                className="type-editor__section"
->
-                <h2>
-                                Variables
-                </h2>
-                <Connect(Variables)
-                                form="TYPE_EDITOR"
-                                name="variables"
-                />
-</div>,
-              "contentId": "guidance.registry.type.variables",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h2>
-                    Variables
-</h2>,
-                  <Connect(Variables)
-                    form="TYPE_EDITOR"
-                    name="variables"
-/>,
-                ],
-                "className": "type-editor__section",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Variables",
-                  },
-                  "ref": null,
-                  "rendered": "Variables",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "form": "TYPE_EDITOR",
-                    "name": "variables",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
-            },
-            "type": [Function],
-          },
-        ],
-        "type": [Function],
-      },
-    ],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "children": Array [
-          <Connect(CodeView)
-            form="TYPE_EDITOR"
-            toggleCodeView={[Function]}
-/>,
-          <Connect(Guided)
-            className="type-editor__sections"
-            form="TYPE_EDITOR"
->
-            <h1>
-                        Edit "
-                        bar
-                        " 
-                        foo
-            </h1>
-            <small>
-                        (
-                        <a
-                                    onClick={[Function]}
-                        >
-                                    Show Code View
-                        </a>
-                        )
-            </small>
-            <Connect(Guided)
-                        contentId="guidance.registry.type.color"
-            >
-                        <div
-                                    className="type-editor__section"
-                        >
-                                    <h2>
-                                                Color
-                                    </h2>
-                                    <Field
-                                                colors={
-                                                            Array [
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-neon-coral",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-sea-serpent",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-purple-pizazz",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-neon-carrot",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-kiwi",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-cerulean-blue",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-paradise-pink",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "#117733",
-                                                                          "name": "color-mustard",
-                                                                        },
-                                                                      ]
-                                                }
-                                                component={[Function]}
-                                                name="color"
-                                    />
-                        </div>
-            </Connect(Guided)>
-            <Connect(Guided)
-                        contentId="guidance.registry.type.icon"
-            >
-                        <div
-                                    className="type-editor__section"
-                        >
-                                    <h2>
-                                                Icon
-                                    </h2>
-                                    <Field
-                                                component={[Function]}
-                                                name="iconVariant"
-                                                optionComponent={[Function]}
-                                                options={
-                                                            Array [
-                                                                        "add-a-context",
-                                                                        "add-a-person",
-                                                                        "add-a-place",
-                                                                        "add-a-relationship",
-                                                                      ]
-                                                }
-                                    />
-                        </div>
-            </Connect(Guided)>
-            <Connect(Guided)
-                        contentId="guidance.registry.type.displayVariable"
-            >
-                        <div
-                                    className="type-editor__section"
-                        >
-                                    <h2>
-                                                Display Variable
-                                    </h2>
-                                    <Field
-                                                component={[Function]}
-                                                name="displayVariable"
-                                                options={Array []}
-                                    />
-                        </div>
-            </Connect(Guided)>
-            <Connect(Guided)
-                        contentId="guidance.registry.type.variables"
-            >
-                        <div
-                                    className="type-editor__section"
-                        >
-                                    <h2>
-                                                Variables
-                                    </h2>
-                                    <Connect(Variables)
-                                                form="TYPE_EDITOR"
-                                                name="variables"
-                                    />
-                        </div>
-            </Connect(Guided)>
-</Connect(Guided)>,
-        ],
-        "className": "type-editor type-editor--show-code",
-        "onSubmit": [Function],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
+        "rendered": Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "form": "TYPE_EDITOR",
-            "toggleCodeView": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
+          "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h1>
-                Edit "
-                bar
-                " 
-                foo
-</h1>,
-              false,
-              false,
-              <small>
-                (
-                <a
-                                onClick={[Function]}
-                >
-                                Show Code View
-                </a>
-                )
-</small>,
-              false,
-              <Connect(Guided)
-                contentId="guidance.registry.type.color"
->
-                <div
-                                className="type-editor__section"
-                >
-                                <h2>
-                                                Color
-                                </h2>
-                                <Field
-                                                colors={
-                                                                Array [
-                                                                                Object {
-                                                                                  "color": "",
-                                                                                  "name": "color-neon-coral",
-                                                                                },
-                                                                                Object {
-                                                                                  "color": "",
-                                                                                  "name": "color-sea-serpent",
-                                                                                },
-                                                                                Object {
-                                                                                  "color": "",
-                                                                                  "name": "color-purple-pizazz",
-                                                                                },
-                                                                                Object {
-                                                                                  "color": "",
-                                                                                  "name": "color-neon-carrot",
-                                                                                },
-                                                                                Object {
-                                                                                  "color": "",
-                                                                                  "name": "color-kiwi",
-                                                                                },
-                                                                                Object {
-                                                                                  "color": "",
-                                                                                  "name": "color-cerulean-blue",
-                                                                                },
-                                                                                Object {
-                                                                                  "color": "",
-                                                                                  "name": "color-paradise-pink",
-                                                                                },
-                                                                                Object {
-                                                                                  "color": "#117733",
-                                                                                  "name": "color-mustard",
-                                                                                },
-                                                                              ]
-                                                }
-                                                component={[Function]}
-                                                name="color"
-                                />
-                </div>
-</Connect(Guided)>,
-              <Connect(Guided)
-                contentId="guidance.registry.type.icon"
->
-                <div
-                                className="type-editor__section"
-                >
-                                <h2>
-                                                Icon
-                                </h2>
-                                <Field
-                                                component={[Function]}
-                                                name="iconVariant"
-                                                optionComponent={[Function]}
-                                                options={
-                                                                Array [
-                                                                                "add-a-context",
-                                                                                "add-a-person",
-                                                                                "add-a-place",
-                                                                                "add-a-relationship",
-                                                                              ]
-                                                }
-                                />
-                </div>
-</Connect(Guided)>,
-              <Connect(Guided)
-                contentId="guidance.registry.type.displayVariable"
->
-                <div
-                                className="type-editor__section"
-                >
-                                <h2>
-                                                Display Variable
-                                </h2>
-                                <Field
-                                                component={[Function]}
-                                                name="displayVariable"
-                                                options={Array []}
-                                />
-                </div>
-</Connect(Guided)>,
-              <Connect(Guided)
-                contentId="guidance.registry.type.variables"
->
-                <div
-                                className="type-editor__section"
-                >
-                                <h2>
-                                                Variables
-                                </h2>
-                                <Connect(Variables)
-                                                form="TYPE_EDITOR"
-                                                name="variables"
-                                />
-                </div>
-</Connect(Guided)>,
+              <h2>
+                Color
+</h2>,
+              <Field
+                colors={
+                                Array [
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-neon-coral",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-sea-serpent",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-purple-pizazz",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-neon-carrot",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-kiwi",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-cerulean-blue",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "color-paradise-pink",
+                                                },
+                                                Object {
+                                                  "color": "#117733",
+                                                  "name": "color-mustard",
+                                                },
+                                              ]
+                }
+                component={[Function]}
+                name="color"
+/>,
             ],
-            "className": "type-editor__sections",
-            "form": "TYPE_EDITOR",
+            "className": "editor__section",
           },
           "ref": null,
           "rendered": Array [
@@ -1066,458 +329,879 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": Array [
-                  "Edit \\"",
-                  "bar",
-                  "\\" ",
-                  "foo",
-                ],
+                "children": "Color",
               },
               "ref": null,
-              "rendered": Array [
-                "Edit \\"",
-                "bar",
-                "\\" ",
-                "foo",
-              ],
-              "type": "h1",
+              "rendered": "Color",
+              "type": "h2",
             },
-            false,
-            false,
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "colors": Array [
+                  Object {
+                    "color": "",
+                    "name": "color-neon-coral",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "color-sea-serpent",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "color-purple-pizazz",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "color-neon-carrot",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "color-kiwi",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "color-cerulean-blue",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "color-paradise-pink",
+                  },
+                  Object {
+                    "color": "#117733",
+                    "name": "color-mustard",
+                  },
+                ],
+                "component": [Function],
+                "name": "color",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="editor__section"
+>
+            <h2>
+                        Icon
+            </h2>
+            <Field
+                        component={[Function]}
+                        name="iconVariant"
+                        optionComponent={[Function]}
+                        options={
+                                    Array [
+                                                "add-a-context",
+                                                "add-a-person",
+                                                "add-a-place",
+                                                "add-a-relationship",
+                                              ]
+                        }
+            />
+</div>,
+          "contentId": "guidance.registry.type.icon",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h2>
+                Icon
+</h2>,
+              <Field
+                component={[Function]}
+                name="iconVariant"
+                optionComponent={[Function]}
+                options={
+                                Array [
+                                                "add-a-context",
+                                                "add-a-person",
+                                                "add-a-place",
+                                                "add-a-relationship",
+                                              ]
+                }
+/>,
+            ],
+            "className": "editor__section",
+          },
+          "ref": null,
+          "rendered": Array [
             Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": Array [
-                  "(",
-                  <a
-                    onClick={[Function]}
->
-                    Show Code View
-</a>,
-                  ")",
-                ],
+                "children": "Icon",
               },
               "ref": null,
-              "rendered": Array [
-                "(",
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Show Code View",
-                    "onClick": [Function],
-                  },
-                  "ref": null,
-                  "rendered": "Show Code View",
-                  "type": "a",
-                },
-                ")",
-              ],
-              "type": "small",
+              "rendered": "Icon",
+              "type": "h2",
             },
-            false,
             Object {
               "instance": null,
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": <div
-                  className="type-editor__section"
+                "component": [Function],
+                "name": "iconVariant",
+                "optionComponent": [Function],
+                "options": Array [
+                  "add-a-context",
+                  "add-a-person",
+                  "add-a-place",
+                  "add-a-relationship",
+                ],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="editor__section"
 >
-                  <h2>
+            <h2>
+                        Display Variable
+            </h2>
+            <Field
+                        component={[Function]}
+                        name="displayVariable"
+                        options={Array []}
+            />
+</div>,
+          "contentId": "guidance.registry.type.displayVariable",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h2>
+                Display Variable
+</h2>,
+              <Field
+                component={[Function]}
+                name="displayVariable"
+                options={Array []}
+/>,
+            ],
+            "className": "editor__section",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Display Variable",
+              },
+              "ref": null,
+              "rendered": "Display Variable",
+              "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "name": "displayVariable",
+                "options": Array [],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="editor__section"
+>
+            <h2>
+                        Variables
+            </h2>
+            <Connect(Variables)
+                        form="TYPE_EDITOR"
+                        name="variables"
+            />
+</div>,
+          "contentId": "guidance.registry.type.variables",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h2>
+                Variables
+</h2>,
+              <Connect(Variables)
+                form="TYPE_EDITOR"
+                name="variables"
+/>,
+            ],
+            "className": "editor__section",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Variables",
+              },
+              "ref": null,
+              "rendered": "Variables",
+              "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "form": "TYPE_EDITOR",
+                "name": "variables",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <h1>
+            Edit "
+            bar
+            " 
+            foo
+</h1>,
+          false,
+          false,
+          <small>
+            (
+            <a
+                        onClick={[Function]}
+            >
+                        Show Code View
+            </a>
+            )
+</small>,
+          false,
+          <Connect(Guided)
+            contentId="guidance.registry.type.color"
+>
+            <div
+                        className="editor__section"
+            >
+                        <h2>
                                     Color
-                  </h2>
-                  <Field
+                        </h2>
+                        <Field
                                     colors={
-                                                      Array [
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-neon-coral",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-sea-serpent",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-purple-pizazz",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-neon-carrot",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-kiwi",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-cerulean-blue",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "",
-                                                                          "name": "color-paradise-pink",
-                                                                        },
-                                                                        Object {
-                                                                          "color": "#117733",
-                                                                          "name": "color-mustard",
-                                                                        },
-                                                                      ]
+                                                Array [
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "color-neon-coral",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "color-sea-serpent",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "color-purple-pizazz",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "color-neon-carrot",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "color-kiwi",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "color-cerulean-blue",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "color-paradise-pink",
+                                                            },
+                                                            Object {
+                                                              "color": "#117733",
+                                                              "name": "color-mustard",
+                                                            },
+                                                          ]
                                     }
                                     component={[Function]}
                                     name="color"
-                  />
-</div>,
-                "contentId": "guidance.registry.type.color",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      Color
-</h2>,
-                    <Field
-                      colors={
-                                            Array [
-                                                                  Object {
-                                                                    "color": "",
-                                                                    "name": "color-neon-coral",
-                                                                  },
-                                                                  Object {
-                                                                    "color": "",
-                                                                    "name": "color-sea-serpent",
-                                                                  },
-                                                                  Object {
-                                                                    "color": "",
-                                                                    "name": "color-purple-pizazz",
-                                                                  },
-                                                                  Object {
-                                                                    "color": "",
-                                                                    "name": "color-neon-carrot",
-                                                                  },
-                                                                  Object {
-                                                                    "color": "",
-                                                                    "name": "color-kiwi",
-                                                                  },
-                                                                  Object {
-                                                                    "color": "",
-                                                                    "name": "color-cerulean-blue",
-                                                                  },
-                                                                  Object {
-                                                                    "color": "",
-                                                                    "name": "color-paradise-pink",
-                                                                  },
-                                                                  Object {
-                                                                    "color": "#117733",
-                                                                    "name": "color-mustard",
-                                                                  },
-                                                                ]
-                      }
-                      component={[Function]}
-                      name="color"
-/>,
-                  ],
-                  "className": "type-editor__section",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Color",
-                    },
-                    "ref": null,
-                    "rendered": "Color",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "colors": Array [
-                        Object {
-                          "color": "",
-                          "name": "color-neon-coral",
-                        },
-                        Object {
-                          "color": "",
-                          "name": "color-sea-serpent",
-                        },
-                        Object {
-                          "color": "",
-                          "name": "color-purple-pizazz",
-                        },
-                        Object {
-                          "color": "",
-                          "name": "color-neon-carrot",
-                        },
-                        Object {
-                          "color": "",
-                          "name": "color-kiwi",
-                        },
-                        Object {
-                          "color": "",
-                          "name": "color-cerulean-blue",
-                        },
-                        Object {
-                          "color": "",
-                          "name": "color-paradise-pink",
-                        },
-                        Object {
-                          "color": "#117733",
-                          "name": "color-mustard",
-                        },
-                      ],
-                      "component": [Function],
-                      "name": "color",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <div
-                  className="type-editor__section"
+                        />
+            </div>
+</Connect(Guided)>,
+          <Connect(Guided)
+            contentId="guidance.registry.type.icon"
 >
-                  <h2>
+            <div
+                        className="editor__section"
+            >
+                        <h2>
                                     Icon
-                  </h2>
-                  <Field
+                        </h2>
+                        <Field
                                     component={[Function]}
                                     name="iconVariant"
                                     optionComponent={[Function]}
                                     options={
-                                                      Array [
-                                                                        "add-a-context",
-                                                                        "add-a-person",
-                                                                        "add-a-place",
-                                                                        "add-a-relationship",
-                                                                      ]
+                                                Array [
+                                                            "add-a-context",
+                                                            "add-a-person",
+                                                            "add-a-place",
+                                                            "add-a-relationship",
+                                                          ]
                                     }
-                  />
-</div>,
-                "contentId": "guidance.registry.type.icon",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      Icon
-</h2>,
-                    <Field
-                      component={[Function]}
-                      name="iconVariant"
-                      optionComponent={[Function]}
-                      options={
-                                            Array [
-                                                                  "add-a-context",
-                                                                  "add-a-person",
-                                                                  "add-a-place",
-                                                                  "add-a-relationship",
-                                                                ]
-                      }
-/>,
-                  ],
-                  "className": "type-editor__section",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Icon",
-                    },
-                    "ref": null,
-                    "rendered": "Icon",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "component": [Function],
-                      "name": "iconVariant",
-                      "optionComponent": [Function],
-                      "options": Array [
-                        "add-a-context",
-                        "add-a-person",
-                        "add-a-place",
-                        "add-a-relationship",
-                      ],
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <div
-                  className="type-editor__section"
+                        />
+            </div>
+</Connect(Guided)>,
+          <Connect(Guided)
+            contentId="guidance.registry.type.displayVariable"
 >
-                  <h2>
+            <div
+                        className="editor__section"
+            >
+                        <h2>
                                     Display Variable
-                  </h2>
-                  <Field
+                        </h2>
+                        <Field
                                     component={[Function]}
                                     name="displayVariable"
                                     options={Array []}
-                  />
-</div>,
-                "contentId": "guidance.registry.type.displayVariable",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      Display Variable
-</h2>,
-                    <Field
-                      component={[Function]}
-                      name="displayVariable"
-                      options={Array []}
-/>,
-                  ],
-                  "className": "type-editor__section",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Display Variable",
-                    },
-                    "ref": null,
-                    "rendered": "Display Variable",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "component": [Function],
-                      "name": "displayVariable",
-                      "options": Array [],
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
-              },
-              "type": [Function],
-            },
+                        />
+            </div>
+</Connect(Guided)>,
+          <Connect(Guided)
+            contentId="guidance.registry.type.variables"
+>
+            <div
+                        className="editor__section"
+            >
+                        <h2>
+                                    Variables
+                        </h2>
+                        <Connect(Variables)
+                                    form="TYPE_EDITOR"
+                                    name="variables"
+                        />
+            </div>
+</Connect(Guided)>,
+        ],
+        "className": "type-editor editor__sections",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "Edit \\"",
+              "bar",
+              "\\" ",
+              "foo",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "Edit \\"",
+            "bar",
+            "\\" ",
+            "foo",
+          ],
+          "type": "h1",
+        },
+        false,
+        false,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "(",
+              <a
+                onClick={[Function]}
+>
+                Show Code View
+</a>,
+              ")",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "(",
             Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "class",
+              "nodeType": "host",
               "props": Object {
-                "children": <div
-                  className="type-editor__section"
->
-                  <h2>
-                                    Variables
-                  </h2>
-                  <Connect(Variables)
-                                    form="TYPE_EDITOR"
-                                    name="variables"
-                  />
-</div>,
-                "contentId": "guidance.registry.type.variables",
+                "children": "Show Code View",
+                "onClick": [Function],
               },
               "ref": null,
-              "rendered": Object {
+              "rendered": "Show Code View",
+              "type": "a",
+            },
+            ")",
+          ],
+          "type": "small",
+        },
+        false,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <div
+              className="editor__section"
+>
+              <h2>
+                            Color
+              </h2>
+              <Field
+                            colors={
+                                          Array [
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "color-neon-coral",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "color-sea-serpent",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "color-purple-pizazz",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "color-neon-carrot",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "color-kiwi",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "color-cerulean-blue",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "color-paradise-pink",
+                                                        },
+                                                        Object {
+                                                          "color": "#117733",
+                                                          "name": "color-mustard",
+                                                        },
+                                                      ]
+                            }
+                            component={[Function]}
+                            name="color"
+              />
+</div>,
+            "contentId": "guidance.registry.type.color",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h2>
+                  Color
+</h2>,
+                <Field
+                  colors={
+                                    Array [
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "color-neon-coral",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "color-sea-serpent",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "color-purple-pizazz",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "color-neon-carrot",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "color-kiwi",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "color-cerulean-blue",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "color-paradise-pink",
+                                                      },
+                                                      Object {
+                                                        "color": "#117733",
+                                                        "name": "color-mustard",
+                                                      },
+                                                    ]
+                  }
+                  component={[Function]}
+                  name="color"
+/>,
+              ],
+              "className": "editor__section",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": Array [
-                    <h2>
-                      Variables
-</h2>,
-                    <Connect(Variables)
-                      form="TYPE_EDITOR"
-                      name="variables"
-/>,
-                  ],
-                  "className": "type-editor__section",
+                  "children": "Color",
                 },
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Variables",
-                    },
-                    "ref": null,
-                    "rendered": "Variables",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "form": "TYPE_EDITOR",
-                      "name": "variables",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
+                "rendered": "Color",
+                "type": "h2",
               },
-              "type": [Function],
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "colors": Array [
+                    Object {
+                      "color": "",
+                      "name": "color-neon-coral",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "color-sea-serpent",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "color-purple-pizazz",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "color-neon-carrot",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "color-kiwi",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "color-cerulean-blue",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "color-paradise-pink",
+                    },
+                    Object {
+                      "color": "#117733",
+                      "name": "color-mustard",
+                    },
+                  ],
+                  "component": [Function],
+                  "name": "color",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <div
+              className="editor__section"
+>
+              <h2>
+                            Icon
+              </h2>
+              <Field
+                            component={[Function]}
+                            name="iconVariant"
+                            optionComponent={[Function]}
+                            options={
+                                          Array [
+                                                        "add-a-context",
+                                                        "add-a-person",
+                                                        "add-a-place",
+                                                        "add-a-relationship",
+                                                      ]
+                            }
+              />
+</div>,
+            "contentId": "guidance.registry.type.icon",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h2>
+                  Icon
+</h2>,
+                <Field
+                  component={[Function]}
+                  name="iconVariant"
+                  optionComponent={[Function]}
+                  options={
+                                    Array [
+                                                      "add-a-context",
+                                                      "add-a-person",
+                                                      "add-a-place",
+                                                      "add-a-relationship",
+                                                    ]
+                  }
+/>,
+              ],
+              "className": "editor__section",
             },
-          ],
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Icon",
+                },
+                "ref": null,
+                "rendered": "Icon",
+                "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "name": "iconVariant",
+                  "optionComponent": [Function],
+                  "options": Array [
+                    "add-a-context",
+                    "add-a-person",
+                    "add-a-place",
+                    "add-a-relationship",
+                  ],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <div
+              className="editor__section"
+>
+              <h2>
+                            Display Variable
+              </h2>
+              <Field
+                            component={[Function]}
+                            name="displayVariable"
+                            options={Array []}
+              />
+</div>,
+            "contentId": "guidance.registry.type.displayVariable",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h2>
+                  Display Variable
+</h2>,
+                <Field
+                  component={[Function]}
+                  name="displayVariable"
+                  options={Array []}
+/>,
+              ],
+              "className": "editor__section",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Display Variable",
+                },
+                "ref": null,
+                "rendered": "Display Variable",
+                "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "name": "displayVariable",
+                  "options": Array [],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <div
+              className="editor__section"
+>
+              <h2>
+                            Variables
+              </h2>
+              <Connect(Variables)
+                            form="TYPE_EDITOR"
+                            name="variables"
+              />
+</div>,
+            "contentId": "guidance.registry.type.variables",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h2>
+                  Variables
+</h2>,
+                <Connect(Variables)
+                  form="TYPE_EDITOR"
+                  name="variables"
+/>,
+              ],
+              "className": "editor__section",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Variables",
+                },
+                "ref": null,
+                "rendered": "Variables",
+                "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "form": "TYPE_EDITOR",
+                  "name": "variables",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
           "type": [Function],
         },
       ],
-      "type": [Function],
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {

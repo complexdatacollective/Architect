@@ -29,10 +29,10 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "dispatch": [Function],
       "fieldId": "bar",
       "form": "foo",
       "isDirty": false,
+      "resetOptions": [Function],
       "store": Object {
         "dispatch": [Function],
         "getState": [Function],
@@ -52,10 +52,10 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "dispatch": [Function],
         "fieldId": "bar",
         "form": "foo",
         "isDirty": false,
+        "resetOptions": [Function],
         "store": Object {
           "dispatch": [Function],
           "getState": [Function],

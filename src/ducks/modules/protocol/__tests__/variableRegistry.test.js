@@ -13,7 +13,10 @@ const mockState = {
 describe('protocol.variableRegistry', () => {
   it('does nothing', () => {
     const noop = reducer();
-    expect(noop).toEqual({});
+    expect(noop).toEqual({
+      node: {},
+      edge: {},
+    });
   });
 
   it('createType()', () => {

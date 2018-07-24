@@ -117,6 +117,7 @@ Variable.propTypes = {
   fieldId: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   isDirty: PropTypes.bool,
+  resetOptions: PropTypes.func.isRequired,
   variableType: PropTypes.string,
 };
 
