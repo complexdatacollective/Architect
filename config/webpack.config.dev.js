@@ -97,7 +97,8 @@ const config = {
     new InterpolateHtmlPlugin({
       ...env.raw,
       // Whitelist inlined content for the Content-Security-Policy header
-      REACT_APP_SCRIPT_SRC_CSP: `'sha256-${inlineCSP.hash256('react-error-overlay')}'`,
+      // REACT_APP_SCRIPT_SRC_CSP: `'sha256-${inlineCSP.hash256('react-error-overlay')}'`,
+      REACT_APP_SCRIPT_SRC_CSP: "'unsafe-inline'",
       // Whitelist inlined content for the Content-Security-Policy header
       REACT_APP_CONNECT_SRC_CSP: 'ws://localhost:* wss://localhost:*',
     }),
