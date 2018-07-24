@@ -272,7 +272,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.variable': (
+  'guidance.registry.type.variable': (
     <Fragment>
       <h3>Variable</h3>
       <h4>Name</h4>
@@ -288,6 +288,22 @@ export default {
         Lorem ipsum.
       </p>
       <h4>Validations</h4>
+      <p>
+        Lorem ipsum.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.nodes': (
+    <Fragment>
+      <h3>Nodes</h3>
+      <p>
+        Lorem ipsum.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.edges': (
+    <Fragment>
+      <h3>Edges</h3>
       <p>
         Lorem ipsum.
       </p>
