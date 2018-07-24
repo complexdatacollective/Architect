@@ -91,8 +91,9 @@ const Item = compose(
           >
             <option value="" disabled>&mdash; Select type &mdash;</option>
             { getValidationTypesForVariable(variableType).map(
-              validation => (
+              (validation, key) => (
                 <option
+                  key={key}
                   value={validation}
                   disabled={map(allValues, 'type').includes(validation)}
                 >{validation}</option>

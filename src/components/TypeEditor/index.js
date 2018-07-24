@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import { reduxForm, isDirty, isValid, formValueSelector } from 'redux-form';
-import { compose, withState, withHandlers } from 'recompose';
+import { isDirty, isValid, formValueSelector } from 'redux-form';
 import { compact, map } from 'lodash';
+import { compose, withProps } from 'recompose';
+import Editor from '../Editor';
 import TypeEditor from './TypeEditor';
 
 const formName = 'VARIABLE_REGISTRY';
@@ -26,14 +27,5 @@ export { parse, format } from './convert';
 
 export default compose(
   connect(mapStateToProps),
-  withState('showCodeView', 'updateCodeView', false),
-  withHandlers({
-    toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-  }),
-  reduxForm({
-    form: formName,
-    touchOnBlur: false,
-    touchOnChange: true,
-    enableReinitialize: true,
-  }),
-)(TypeEditor);
+  withProps(() => ({ form: formName, component: TypeEditor })),
+)(Editor);

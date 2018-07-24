@@ -5,6 +5,8 @@ const CREATE_TYPE = 'CREATE_TYPE';
 const DELETE_TYPE = 'DELETE_TYPE';
 
 const initialState = {
+  edge: {},
+  node: {},
 };
 
 function createType(category, type, configuration) {

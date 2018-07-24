@@ -167,6 +167,10 @@ VariableRegistry.propTypes = {
 
 VariableRegistry.defaultProps = {
   protocolPath: null,
+  variableRegistry: {
+    node: {},
+    edge: {},
+  },
   show: true,
   onComplete: () => {},
 };

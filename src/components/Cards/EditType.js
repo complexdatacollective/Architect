@@ -20,8 +20,8 @@ class EditType extends PureComponent {
     submit: PropTypes.func.isRequired,
     createType: PropTypes.func.isRequired,
     updateType: PropTypes.func.isRequired,
-    category: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    category: PropTypes.string,
+    type: PropTypes.string,
     hasUnsavedChanges: PropTypes.bool,
     hasErrors: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
@@ -32,6 +32,8 @@ class EditType extends PureComponent {
     show: true,
     hasErrors: false,
     hasUnsavedChanges: false,
+    category: null,
+    type: null,
   };
 
   onSubmit = (form) => {
@@ -84,13 +86,15 @@ class EditType extends PureComponent {
         show={show}
         onCancel={this.props.onComplete}
       >
-        <TypeEditor
-          initialValues={initialValues}
-          form={formName}
-          category={category}
-          type={type}
-          onSubmit={this.onSubmit}
-        />
+        { category && type &&
+          <TypeEditor
+            initialValues={initialValues}
+            form={formName}
+            category={category}
+            type={type}
+            onSubmit={this.onSubmit}
+          />
+        }
       </Card>
     );
   }
