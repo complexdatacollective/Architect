@@ -98,6 +98,10 @@ const config = {
       ...env.raw,
       // Whitelist inlined content for the Content-Security-Policy header
       // REACT_APP_SCRIPT_SRC_CSP: `'sha256-${inlineCSP.hash256('react-error-overlay')}'`,
+      // Previously we whitelisted the react-error-overlay using the above code to
+      // generate an explicit hash. In the latest version of these tools multiple levels
+      // of indirection make getting at the code to hash very brittle, and as a result
+      // we're now using unsafe-inline at the expense of lack of parity with production.
       REACT_APP_SCRIPT_SRC_CSP: "'unsafe-inline'",
       // Whitelist inlined content for the Content-Security-Policy header
       REACT_APP_CONNECT_SRC_CSP: 'ws://localhost:* wss://localhost:*',
