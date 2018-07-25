@@ -15,7 +15,7 @@ const itTracksActionAsChange = (action) => {
   );
 
   expect(createStageState.lastChanged > 0).toBe(true);
-}
+};
 
 describe('session reducer', () => {
   it('has an initial state', () => {
