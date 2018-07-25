@@ -42,7 +42,9 @@ const parse = configuration => ({
     (memo, { name, ...variable }) => ({
       ...memo,
       [name]: {
-        ...omit(variable, ['id']),
+        ...omit(variable, ['id', 'options']),
+        // Ideally we'd remove this at source, but reduxForm doesn't seem to let us?
+        ...(get(variable, 'options') ? { options: get(variable, 'options') } : {}),
         validation: parseValidations(get(variable, 'validation', [])),
       },
     }),

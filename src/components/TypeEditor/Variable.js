@@ -141,7 +141,7 @@ const mapStateToProps = (state, { form, fieldId }) => ({
 
 const mapDispatchToProps = (dispatch, { form, fieldId }) => ({
   resetOptions: () => {
-    dispatch(change(form, `${fieldId}.options`, []));
+    dispatch(change(form, `${fieldId}.options`, null));
     dispatch(change(form, `${fieldId}.validation`, []));
   },
 });
