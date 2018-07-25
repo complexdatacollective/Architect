@@ -13,6 +13,7 @@ import Card from '../Card';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
+
 class VariableRegistry extends Component {
   handleDelete = (category, type) => {
     this.props.deleteType(category, type);
@@ -23,7 +24,7 @@ class VariableRegistry extends Component {
       <div className="list__item" key={key}>
         <div className="list__attribute list__attribute--icon">
           <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
-            <Node label="" color={node.color} />
+            <Node label="" color={get(node, 'color', '')} />
           </Link>
         </div>
         <div className="list__attribute">
@@ -47,7 +48,7 @@ class VariableRegistry extends Component {
       <div className="list__item" key={key}>
         <div className="list__attribute list__attribute--icon">
           <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
-            <Icon name="links" color={edge.color.replace('color-', '')} />
+            <Icon name="links" color={get(edge, 'color', '').replace('color-', '')} />
           </Link>
         </div>
         <div className="list__attribute">
