@@ -61,7 +61,6 @@ class EditType extends PureComponent {
         key="save"
         size="small"
         onClick={this.submit}
-        color="white"
         iconPosition="right"
         disabled={this.props.hasErrors}
       >

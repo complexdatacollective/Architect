@@ -11,15 +11,16 @@
 .button {
   color: var(--text-light);
 
+  &:disabled,
+  &[disabled] {
+    opacity: .5;
+    cursor: default;
+  }
+
   &--white,
   &--platinum,
   &--platinum--dark {
     color: var(--text-dark);
-
-    &:disabled,
-    &[disabled] {
-      color: var(--text-light);
-    }
   }
 }
 
