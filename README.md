@@ -1,4 +1,4 @@
-# Network Canvas [![Build Status](https://travis-ci.org/codaco/Network-Canvas.svg?branch=master)](https://travis-ci.org/codaco/Network-Canvas)
+# Architect [![Build Status](https://travis-ci.org/codaco/Architect.svg?branch=master)](https://travis-ci.org/codaco/Architect)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodaco%2FArchitect.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodaco%2FArchitect?ref=badge_shield)
 
 Technologies used:
