@@ -38,7 +38,7 @@ function hash256(libName) {
   const newline = /\n|\r\n|\r/g;
   const matches = source.split(newline).filter(line => line.match(/^module\.exports.*/));
 
-  if (!matches) {
+  if (!matches || !matches.length) {
     console.warn('No exports matched');
     return null;
   }
@@ -48,12 +48,7 @@ function hash256(libName) {
   vm.createContext(sandbox);
   vm.runInContext(exportedSrc, sandbox);
 
-  // Newer versions of plugin contain source directly; older versions export a string
-  // TODO: remove legacy parsing above once we're sure it's unneeded
-  const clientSource = sandbox.module.exports || source;
-
-  // const cspHash = crypto.createHash('sha256').update(sandbox.module.exports).digest('base64');
-  const cspHash = crypto.createHash('sha256').update(clientSource).digest('base64');
+  const cspHash = crypto.createHash('sha256').update(sandbox.module.exports).digest('base64');
   return cspHash;
 }
 
