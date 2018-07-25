@@ -101,12 +101,14 @@ const Variable = ({
             />
           }
 
-          <Validations
-            name="validation"
-            label="Validations"
-            variableType={variableType}
-            meta={{ form }}
-          />
+          { variableType &&
+            <Validations
+              name="validation"
+              label="Validations"
+              variableType={variableType}
+              meta={{ form }}
+            />
+          }
         </div>
       </Guidance>
     </FormSection>
