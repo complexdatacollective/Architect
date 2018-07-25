@@ -69,7 +69,6 @@ Items.propTypes = {
   fields: PropTypes.shape({
     map: PropTypes.func.isRequired,
   }).isRequired,
-  variableType: PropTypes.string.isRequired,
 };
 
 const Options = ({
