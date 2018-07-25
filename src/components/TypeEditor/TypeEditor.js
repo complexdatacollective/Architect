@@ -1,8 +1,9 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import Color from 'color';
+import { Field } from 'redux-form';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
+import { ValidatedField } from '../Form';
 import Guidance from '../Guidance';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
@@ -65,11 +66,12 @@ const TypeEditor = ({
         <div className="editor__section">
           <h2>Name</h2>
 
-          <Field
+          <ValidatedField
             component={Fields.Text}
             name="type"
             label="Enter a name for this type"
             normalize={value => value.replace(/[^a-zA-Z0-9_]+/, '')}
+            validation={{ required: true }}
           />
         </div>
       </Guidance>
@@ -79,38 +81,46 @@ const TypeEditor = ({
       <div className="editor__section">
         <h2>Color</h2>
 
-        <Field
+        <ValidatedField
           component={ArchitectFields.ColorPicker}
           name="color"
           colors={COLOR_OPTIONS}
+          validation={{ required: true }}
         />
       </div>
     </Guidance>
 
-    <Guidance contentId="guidance.registry.type.icon">
-      <div className="editor__section">
-        <h2>Icon</h2>
+    { category === 'node' &&
+      <React.Fragment>
+        <Guidance contentId="guidance.registry.type.icon">
+          <div className="editor__section">
+            <h2>Icon</h2>
 
-        <Field
-          component={Fields.RadioGroup}
-          name="iconVariant"
-          options={ICON_OPTIONS}
-          optionComponent={IconOption}
-        />
-      </div>
-    </Guidance>
+            <ValidatedField
+              component={Fields.RadioGroup}
+              name="iconVariant"
+              options={ICON_OPTIONS}
+              optionComponent={IconOption}
+              validation={{ required: true }}
+            />
+          </div>
+        </Guidance>
 
-    <Guidance contentId="guidance.registry.type.displayVariable">
-      <div className="editor__section">
-        <h2>Display Variable</h2>
+        <Guidance contentId="guidance.registry.type.displayVariable">
+          <div className="editor__section">
+            <h2>Display Variable</h2>
 
-        <Field
-          component={ArchitectFields.Select}
-          name="displayVariable"
-          options={displayVariables}
-        />
-      </div>
-    </Guidance>
+            <Field
+              component={ArchitectFields.Select}
+              name="displayVariable"
+              options={displayVariables}
+            >
+              <option value="">&mdash; Select display variable &mdash;</option>
+            </Field>
+          </div>
+        </Guidance>
+      </React.Fragment>
+    }
 
     <Guidance contentId="guidance.registry.type.variables">
       <div className="editor__section">

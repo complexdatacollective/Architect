@@ -10,15 +10,43 @@ const mockProps = {
   handleSubmit: () => {},
   displayVariables: [],
   form: 'TYPE_EDITOR',
-  category: 'foo',
-  type: 'bar',
   toggleCodeView: () => {},
   showCodeView: true,
 };
 
 describe('<TypeEditor />', () => {
-  it('can render', () => {
-    const subject = shallow(<TypeEditor {...mockProps} />);
+  it('can render for node', () => {
+    const subject = shallow(<TypeEditor {...mockProps} category="node" />);
     expect(subject).toMatchSnapshot();
+  });
+
+  it('can render for edge', () => {
+    const subject = shallow(<TypeEditor {...mockProps} category="edge" />);
+    expect(subject).toMatchSnapshot();
+  });
+
+  it('it renders the correct sections for a node', () => {
+    const subject = shallow(<TypeEditor {...mockProps} category="node" />);
+
+    expect(subject.containsAllMatchingElements([
+      <h2>Color</h2>,
+      <h2>Icon</h2>,
+      <h2>Display Variable</h2>,
+      <h2>Variables</h2>,
+    ])).toBe(true);
+  });
+
+  it('it renders the correct sections for an edge', () => {
+    const subject = shallow(<TypeEditor {...mockProps} category="edge" />);
+
+    expect(subject.containsAllMatchingElements([
+      <h2>Color</h2>,
+      <h2>Variables</h2>,
+    ])).toBe(true);
+
+    expect(subject.containsAllMatchingElements([
+      <h2>Icon</h2>,
+      <h2>Display Variable</h2>,
+    ])).toBe(false);
   });
 });
