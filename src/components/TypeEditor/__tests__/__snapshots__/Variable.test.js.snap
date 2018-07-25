@@ -34,8 +34,18 @@ ShallowWrapper {
                 <div>
                         <Validated
                                 component={[Function]}
-                                label="Variable name"
+                                label="Name"
                                 name="name"
+                                validation={
+                                        Object {
+                                                "required": true,
+                                              }
+                                }
+                        />
+                        <Validated
+                                component={[Function]}
+                                label="Label"
+                                name="label"
                                 validation={
                                         Object {
                                                 "required": true,
@@ -124,8 +134,18 @@ ShallowWrapper {
           <div>
                     <Validated
                               component={[Function]}
-                              label="Variable name"
+                              label="Name"
                               name="name"
+                              validation={
+                                        Object {
+                                                  "required": true,
+                                                }
+                              }
+                    />
+                    <Validated
+                              component={[Function]}
+                              label="Label"
+                              name="label"
                               validation={
                                         Object {
                                                   "required": true,
@@ -181,8 +201,18 @@ ShallowWrapper {
           "children": <div>
             <Validated
                         component={[Function]}
-                        label="Variable name"
+                        label="Name"
                         name="name"
+                        validation={
+                                    Object {
+                                                "required": true,
+                                              }
+                        }
+            />
+            <Validated
+                        component={[Function]}
+                        label="Label"
+                        name="label"
                         validation={
                                     Object {
                                                 "required": true,
@@ -236,8 +266,18 @@ ShallowWrapper {
             "children": Array [
               <Validated
                 component={[Function]}
-                label="Variable name"
+                label="Name"
                 name="name"
+                validation={
+                                Object {
+                                                "required": true,
+                                              }
+                }
+/>,
+              <Validated
+                component={[Function]}
+                label="Label"
+                name="label"
                 validation={
                                 Object {
                                                 "required": true,
@@ -291,8 +331,24 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "label": "Variable name",
+                "label": "Name",
                 "name": "name",
+                "validation": Object {
+                  "required": true,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "label": "Label",
+                "name": "label",
                 "validation": Object {
                   "required": true,
                 },
@@ -385,8 +441,18 @@ ShallowWrapper {
                     <div>
                               <Validated
                                         component={[Function]}
-                                        label="Variable name"
+                                        label="Name"
                                         name="name"
+                                        validation={
+                                                  Object {
+                                                            "required": true,
+                                                          }
+                                        }
+                              />
+                              <Validated
+                                        component={[Function]}
+                                        label="Label"
+                                        name="label"
                                         validation={
                                                   Object {
                                                             "required": true,
@@ -475,8 +541,18 @@ ShallowWrapper {
             <div>
                         <Validated
                                     component={[Function]}
-                                    label="Variable name"
+                                    label="Name"
                                     name="name"
+                                    validation={
+                                                Object {
+                                                            "required": true,
+                                                          }
+                                    }
+                        />
+                        <Validated
+                                    component={[Function]}
+                                    label="Label"
+                                    name="label"
                                     validation={
                                                 Object {
                                                             "required": true,
@@ -532,8 +608,18 @@ ShallowWrapper {
             "children": <div>
               <Validated
                             component={[Function]}
-                            label="Variable name"
+                            label="Name"
                             name="name"
+                            validation={
+                                          Object {
+                                                        "required": true,
+                                                      }
+                            }
+              />
+              <Validated
+                            component={[Function]}
+                            label="Label"
+                            name="label"
                             validation={
                                           Object {
                                                         "required": true,
@@ -587,8 +673,18 @@ ShallowWrapper {
               "children": Array [
                 <Validated
                   component={[Function]}
-                  label="Variable name"
+                  label="Name"
                   name="name"
+                  validation={
+                                    Object {
+                                                      "required": true,
+                                                    }
+                  }
+/>,
+                <Validated
+                  component={[Function]}
+                  label="Label"
+                  name="label"
                   validation={
                                     Object {
                                                       "required": true,
@@ -642,8 +738,24 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "label": "Variable name",
+                  "label": "Name",
                   "name": "name",
+                  "validation": Object {
+                    "required": true,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "label": "Label",
+                  "name": "label",
                   "validation": Object {
                     "required": true,
                   },

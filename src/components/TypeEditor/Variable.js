@@ -73,7 +73,13 @@ const Variable = ({
           <ValidatedField
             name="name"
             component={Fields.Text}
-            label="Variable name"
+            label="Name"
+            validation={{ required: true }}
+          />
+          <ValidatedField
+            name="label"
+            component={Fields.Text}
+            label="Label"
             validation={{ required: true }}
           />
           <Field
