@@ -86,7 +86,7 @@ class EditType extends PureComponent {
         show={show}
         onCancel={this.props.onComplete}
       >
-        { category && type &&
+        { category &&
           <TypeEditor
             initialValues={initialValues}
             form={formName}

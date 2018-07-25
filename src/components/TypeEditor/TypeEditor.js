@@ -128,10 +128,14 @@ TypeEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   category: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
+};
+
+TypeEditor.defaultProps = {
+  type: null,
 };
 
 export { TypeEditor };
