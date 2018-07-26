@@ -10,7 +10,7 @@ import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
-class Form extends PureComponent {
+class EditForm extends PureComponent {
   static propTypes = {
     formName: PropTypes.string,
     form: PropTypes.object,
@@ -89,7 +89,7 @@ const editFormIsInvalid = isInvalid('edit-form');
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
   const formName = get(props.match, 'params.form', null);
-  const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
+  const form = get(protocol, ['forms', formName], {});
 
   return {
     form,
@@ -105,6 +105,6 @@ const mapDispatchToProps = dispatch => ({
   createForm: bindActionCreators(formActions.createForm, dispatch),
 });
 
-export { Form };
+export { EditForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

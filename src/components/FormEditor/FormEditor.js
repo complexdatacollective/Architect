@@ -140,7 +140,6 @@ class FormEditor extends Component {
                 component={ArchitectFields.Mode}
                 label="Enable 'Add another' option"
                 options={[[true, 'enabled'], [false, 'disabled']]}
-                validation={{ required: true }}
               />
             </div>
           </Guidance>

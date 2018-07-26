@@ -10,7 +10,7 @@ import { getProtocol } from '../../selectors/protocol';
 import ShowRoute from '../../components/ShowRoute';
 import EditSkipLogic from '../Cards/EditSkipLogic';
 import EditStage from '../Cards/EditStage';
-import EditForm from '../Cards/Form';
+import EditForm from '../Cards/EditForm';
 import VariableRegistry from '../Cards/VariableRegistry';
 import ViewForms from '../Cards/ViewForms';
 import EditType from '../Cards/EditType';
