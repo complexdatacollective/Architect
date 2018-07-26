@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { get, keys } from 'lodash';
+import { map, get } from 'lodash';
 import { compose } from 'recompose';
 import { SeamlessText } from '../../Form/Fields';
 import { Tweened } from '../../../behaviours/Tweened';
@@ -12,46 +13,42 @@ import { actionCreators as protocolActions } from '../../../ducks/modules/protoc
 import PanelGroup from './PanelGroup';
 
 class Overview extends Component {
+  get protocolPath() {
+    const protocol = get(this.props.match, 'params.protocol', '');
+    return `/edit/${protocol}`;
+  }
+
   get renderNodeTypes() {
-    const nodeTypes = keys(get(this.props.variableRegistry, 'node', {}));
+    const nodeTypes = get(this.props.variableRegistry, 'node', {});
 
     if (nodeTypes.length === 0) {
       return 'No node types defined';
     }
 
-    return nodeTypes.map(
-      (node, index) => {
-        const nodeColor = `node-color-seq-${index + 1}`;
-        return <Node label={node} key={index} color={nodeColor} />;
-      },
+    return map(
+      nodeTypes,
+      (node, key) => (
+        <Link to={`${this.protocolPath}/registry/`} key={key}>
+          <Node label={key} color={get(node, 'color', '')} />
+        </Link>
+      ),
     );
   }
 
   get renderEdgeTypes() {
-    const edgeTypes = keys(get(this.props.variableRegistry, 'edge', {}));
+    const edgeTypes = get(this.props.variableRegistry, 'edge', {});
 
     if (edgeTypes.length === 0) {
       return 'No edge types defined';
     }
 
-    const temporaryEdgeColors = [
-      'mustard',
-      'purple-pizazz',
-      'neon-coral',
-      'kiwi',
-      'paradise-pink',
-      'tomato',
-      'sea-serpent',
-      'barbie-pink',
-      'neon-coral',
-      'cerulean-blue',
-    ];
-
-    return edgeTypes.map(
-      (edge, index) => {
-        const edgeColor = temporaryEdgeColors[index];
-        return <Icon name="links" label={edge} key={index} color={edgeColor} />;
-      },
+    return map(
+      edgeTypes,
+      (edge, index) => (
+        <Link to={`${this.protocolPath}/registry/`} key={index}>
+          <Icon name="links" label={edge} color={get(edge, 'color', '')} />
+        </Link>
+      ),
     );
   }
 
@@ -108,6 +105,7 @@ Overview.propTypes = {
   variableRegistry: PropTypes.object,
   externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   updateOptions: PropTypes.func,
+  match: PropTypes.object.isRequired,
 };
 
 Overview.defaultProps = {

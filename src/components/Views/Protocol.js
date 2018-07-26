@@ -4,16 +4,18 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import { pick, get } from 'lodash';
-import history from '../../../history';
-import { Button, Icon } from '../../../ui/components';
-import { getProtocol } from '../../../selectors/protocol';
-import ShowRoute from '../../../components/ShowRoute';
-import EditSkipLogic from '../../Cards/EditSkipLogic';
-import EditStage from '../../Cards/EditStage';
-import EditForm from '../../Cards/Form';
-import Timeline from '../../../components/Timeline';
-import ControlBar from '../../ControlBar';
-import { actionCreators as protocolFileActions } from '../../../ducks/modules/protocol/file';
+import history from '../../history';
+import { Button, Icon } from '../../ui/components';
+import { getProtocol } from '../../selectors/protocol';
+import ShowRoute from '../../components/ShowRoute';
+import EditSkipLogic from '../Cards/EditSkipLogic';
+import EditStage from '../Cards/EditStage';
+import EditForm from '../Cards/Form';
+import VariableRegistry from '../Cards/VariableRegistry';
+import EditType from '../Cards/EditType';
+import Timeline from '../../components/Timeline';
+import ControlBar from '../ControlBar';
+import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
 
 const cards = {
   newStage: Symbol('newStage'),
@@ -75,10 +77,19 @@ class Protocol extends PureComponent {
     });
   }
 
-  onRouteComplete = () => {
+  onRouteComplete = (goto) => {
     const protocol = get(this.props.match, 'params.protocol');
+
     if (protocol) {
-      history.push(`/edit/${protocol}`);
+      switch (goto) {
+        case 'registry':
+          history.push(`/edit/${protocol}/registry`);
+          break;
+        case 'protocol':
+        default:
+          history.push(`/edit/${protocol}`);
+          break;
+      }
     }
   }
 
@@ -166,6 +177,20 @@ class Protocol extends PureComponent {
           location={location}
           component={EditForm}
           onComplete={this.onRouteComplete}
+        />
+
+        <ShowRoute
+          path="/edit/:protocol/registry"
+          location={location}
+          component={VariableRegistry}
+          onComplete={this.onRouteComplete}
+        />
+
+        <ShowRoute
+          path="/edit/:protocol/registry/:category/:type?"
+          location={location}
+          component={EditType}
+          onComplete={() => this.onRouteComplete('registry')}
         />
       </div>
     );

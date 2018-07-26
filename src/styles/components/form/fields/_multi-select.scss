@@ -42,6 +42,11 @@ $component-name: form-fields-multi-select;
       &:first-child {
         margin-left: 0;
       }
+
+      &-label {
+        color:  var(--text-light);
+        margin-right: unit(1);
+      }
     }
   }
 

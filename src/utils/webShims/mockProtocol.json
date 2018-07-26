@@ -6,7 +6,7 @@
     "node": {
       "person": {
         "label": "Person",
-        "color": "coral",
+        "color": "color-neon-carrot",
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
         "variables": {
@@ -53,14 +53,20 @@
           "special_category": {
             "label": "Special category",
             "description": "Human readable description",
-            "type": "enumerable",
-            "options": [46]
+            "type": "categorical",
+            "options": [{
+              "label": "foo",
+              "value": "bar"
+            }]
           },
           "some_options": {
             "label": "Some possible options",
             "description": "Human readable description",
-            "type": "options",
-            "options": [46],
+            "type": "ordinal",
+            "options": [{
+              "label": "bazz",
+              "value": "fizz"
+            }],
             "validation": {
               "max": 1
             }
@@ -89,7 +95,7 @@
       },
       "venue": {
         "label": "Venue",
-        "color": "kiwi",
+        "color": "color-cerulean-blue",
         "iconVariant": "add-a-place",
         "variables": {
           "name": {
@@ -119,13 +125,13 @@
             "label": "contact_freq",
             "description": "Contact frequency.",
             "type": "ordinal",
-            "values": {
-              "Very Often": 4,
-              "Often": 3,
-              "Sometimes": 2,
-              "Rarely": 1,
-              "Never": -1
-            }
+            "options": [
+              { "label": "Very Often", "value": 4 },
+              { "label": "Often", "value": 3 },
+              { "label": "Sometimes", "value": 2 },
+              { "label": "Rarely", "value": 1 },
+              { "label": "Never", "value": -1 }
+             ]
           }
         }
       },

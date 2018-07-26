@@ -1,0 +1,24 @@
+.code-view {
+  position: fixed;
+  opacity: 0;
+  transform-origin: top;
+  transform: scaleY(0);
+  z-index: var(--z-panel);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30vh;
+  max-height: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: var(--settings);
+  color: var(--text-light);
+  padding: unit(4) unit(2);
+  transition: opacity var(--animation-duration-standard) var(--animation-easing),
+  max-height var(--animation-duration-standard) var(--animation-easing),
+  transform var(--animation-duration-standard) var(--animation-easing);
+
+  pre {
+    white-space: pre-wrap;
+  }
+}

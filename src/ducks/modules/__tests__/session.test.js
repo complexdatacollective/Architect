@@ -3,9 +3,19 @@
 import reducer from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
+import { actionCreators as registryActions } from '../protocol/variableRegistry';
 import { openProtocolAction, saveComplete } from '../protocol/file';
 
 const protocolMeta = { id: 'foo', archivePath: '/bar/buzz' };
+
+const itTracksActionAsChange = (action) => {
+  const createStageState = reducer(
+    undefined,
+    action,
+  );
+
+  expect(createStageState.lastChanged > 0).toBe(true);
+};
 
 describe('session reducer', () => {
   it('has an initial state', () => {
@@ -49,39 +59,31 @@ describe('session reducer', () => {
 
   describe('change tracking', () => {
     it('tracks create stage', () => {
-      const createStageState = reducer(
-        undefined,
-        stageActions.createStage({}),
-      );
-
-      expect(createStageState.lastChanged > 0).toBe(true);
+      itTracksActionAsChange(stageActions.createStage({}));
     });
 
     it('tracks stage updates', () => {
-      const updateStageState = reducer(
-        undefined,
-        stageActions.updateStage({}),
-      );
-
-      expect(updateStageState.lastChanged > 0).toBe(true);
+      itTracksActionAsChange(stageActions.updateStage({}));
     });
 
     it('tracks delete stage', () => {
-      const deleteStageState = reducer(
-        undefined,
-        stageActions.deleteStage(0),
-      );
-
-      expect(deleteStageState.lastChanged > 0).toBe(true);
+      itTracksActionAsChange(stageActions.deleteStage(0));
     });
 
     it('tracks update options', () => {
-      const updateOptionsState = reducer(
-        undefined,
-        protocolActions.updateOptions({}),
-      );
+      itTracksActionAsChange(protocolActions.updateOptions({}));
+    });
 
-      expect(updateOptionsState.lastChanged > 0).toBe(true);
+    it('tracks create type', () => {
+      itTracksActionAsChange(registryActions.createType());
+    });
+
+    it('tracks update type', () => {
+      itTracksActionAsChange(registryActions.updateType());
+    });
+
+    it('tracks delete type', () => {
+      itTracksActionAsChange(registryActions.deleteType());
     });
   });
 

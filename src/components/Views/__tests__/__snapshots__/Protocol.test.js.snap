@@ -96,6 +96,18 @@ ShallowWrapper {
           onComplete={[Function]}
           path="/edit/:protocol/form/:form?"
 />,
+        <ShowRoute
+          component={[Function]}
+          location={Object {}}
+          onComplete={[Function]}
+          path="/edit/:protocol/registry"
+/>,
+        <ShowRoute
+          component={[Function]}
+          location={Object {}}
+          onComplete={[Function]}
+          path="/edit/:protocol/registry/:category/:type?"
+/>,
       ],
       "className": "protocol",
     },
@@ -216,6 +228,34 @@ ShallowWrapper {
         "rendered": null,
         "type": [Function],
       },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "component": [Function],
+          "location": Object {},
+          "onComplete": [Function],
+          "path": "/edit/:protocol/registry",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "component": [Function],
+          "location": Object {},
+          "onComplete": [Function],
+          "path": "/edit/:protocol/registry/:category/:type?",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
     ],
     "type": "div",
   },
@@ -282,6 +322,18 @@ ShallowWrapper {
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/form/:form?"
+/>,
+          <ShowRoute
+            component={[Function]}
+            location={Object {}}
+            onComplete={[Function]}
+            path="/edit/:protocol/registry"
+/>,
+          <ShowRoute
+            component={[Function]}
+            location={Object {}}
+            onComplete={[Function]}
+            path="/edit/:protocol/registry/:category/:type?"
 />,
         ],
         "className": "protocol",
@@ -398,6 +450,34 @@ ShallowWrapper {
             "location": Object {},
             "onComplete": [Function],
             "path": "/edit/:protocol/form/:form?",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "component": [Function],
+            "location": Object {},
+            "onComplete": [Function],
+            "path": "/edit/:protocol/registry",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "component": [Function],
+            "location": Object {},
+            "onComplete": [Function],
+            "path": "/edit/:protocol/registry/:category/:type?",
           },
           "ref": null,
           "rendered": null,

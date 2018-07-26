@@ -96,8 +96,13 @@ const config = {
     // "REACT_APP_" is a recognized prefix (see config/env.js)
     new InterpolateHtmlPlugin({
       ...env.raw,
-      // Whitelist inlined content for the Content-Security-Policy header
-      REACT_APP_SCRIPT_SRC_CSP: `'sha256-${inlineCSP.hash256('react-error-overlay')}'`,
+      // Whitelist inlined content in Content Security Policy
+      // REACT_APP_SCRIPT_SRC_CSP: `'sha256-${inlineCSP.hash256('react-error-overlay')}'`,
+      // Previously we whitelisted the react-error-overlay using the above code to
+      // generate an explicit hash. In the latest version of these tools multiple levels
+      // of indirection make getting at the code to hash very brittle.
+      // For now, hardcode to current version (react-error-overlay@5.0.0-next.3e165448)
+      REACT_APP_SCRIPT_SRC_CSP: "'sha256-gDC0EVcPe9MimCS3ZP14teSHr0GtEx+ggc0VQBfyvRI='",
       // Whitelist inlined content for the Content-Security-Policy header
       REACT_APP_CONNECT_SRC_CSP: 'ws://localhost:* wss://localhost:*',
     }),

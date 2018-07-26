@@ -1,5 +1,6 @@
 import { actionTypes as protocolFileActionTypes } from './protocol/file';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
+import { actionTypes as protocolRegistryActionTypes } from './protocol/variableRegistry';
 import { actionTypes as protocolActionTypes } from './protocol/index';
 
 const initialState = {
@@ -31,9 +32,13 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         lastSaved: new Date().getTime(),
       };
+    // All these actions are considered saveable changes:
     case protocolStageActionTypes.CREATE_STAGE:
     case protocolStageActionTypes.UPDATE_STAGE:
     case protocolStageActionTypes.DELETE_STAGE:
+    case protocolRegistryActionTypes.UPDATE_TYPE:
+    case protocolRegistryActionTypes.CREATE_TYPE:
+    case protocolRegistryActionTypes.DELETE_TYPE:
     case protocolActionTypes.UPDATE_OPTIONS:
       return {
         ...state,

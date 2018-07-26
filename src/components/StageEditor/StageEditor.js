@@ -7,7 +7,7 @@ import cx from 'classnames';
 import { Guided } from '../Guided';
 import flatten from '../../utils/flatten';
 import { getInterface } from './Interfaces';
-import FormCodeView from '../FormCodeView';
+import { FormCodeView } from '../CodeView';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);

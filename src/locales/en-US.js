@@ -233,4 +233,80 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.registry.type.color': (
+    <Fragment>
+      <h3>Color</h3>
+      <p>
+        For <strong>nodes</strong> this will change the color that nodes appear for all
+        interfaces.
+      </p>
+      <p>
+        For <strong>edges</strong> this will change the color of the edge (line)
+        representations, for interfaces such as the Sociogram.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.type.icon': (
+    <Fragment>
+      <h3>Icon</h3>
+      <p>
+        When an item can be added through a form, this will change the icon for the
+        &quot;new item&quot; button.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.type.displayVariable': (
+    <Fragment>
+      <h3>Display Variable</h3>
+      <p>
+        This is the default &quot;label&quot; to be used to represent this node/edge, when
+        one isn&apos;t specified elsewhere.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.type.variables': (
+    <Fragment>
+      <h3>Variables</h3>
+      <p>
+        These properties can be added to nodes using the various interfaces.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.type.variable': (
+    <Fragment>
+      <h3>Variable</h3>
+      <h4>Name</h4>
+      <p>
+        Lorem ipsum.
+      </p>
+      <h4>Description</h4>
+      <p>
+        Lorem ipsum.
+      </p>
+      <h4>Type</h4>
+      <p>
+        Lorem ipsum.
+      </p>
+      <h4>Validations</h4>
+      <p>
+        Lorem ipsum.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.nodes': (
+    <Fragment>
+      <h3>Nodes</h3>
+      <p>
+        Lorem ipsum.
+      </p>
+    </Fragment>
+  ),
+  'guidance.registry.edges': (
+    <Fragment>
+      <h3>Edges</h3>
+      <p>
+        Lorem ipsum.
+      </p>
+    </Fragment>
+  ),
 };
