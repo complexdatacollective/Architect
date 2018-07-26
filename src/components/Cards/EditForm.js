@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
 import { get } from 'lodash';
 import { Button } from '../../ui/components';
-import FormEditor, { formName } from '../FormEditor';
+import FormEditor, { formName as reduxFormName } from '../FormEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
@@ -42,7 +42,7 @@ class EditForm extends PureComponent {
   }
 
   submitForm = () => {
-    this.props.submitForm(formName);
+    this.props.submitForm(reduxFormName);
   }
 
   renderButtons() {
@@ -83,16 +83,17 @@ class EditForm extends PureComponent {
   }
 }
 
-const editFormIsDirty = isDirty(formName);
-const editFormIsInvalid = isInvalid(formName);
+const editFormIsDirty = isDirty(reduxFormName);
+const editFormIsInvalid = isInvalid(reduxFormName);
 
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
-  const form = get(protocol, ['forms', formName], {});
+  const formName = get(props.match, 'params.form', null);
+  const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
 
   return {
     form,
-    formName: get(props.match, 'params.form', null),
+    formName,
     hasUnsavedChanges: !formName || editFormIsDirty(state),
     hasErrors: editFormIsInvalid(state),
   };
