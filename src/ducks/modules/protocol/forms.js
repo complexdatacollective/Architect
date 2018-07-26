@@ -1,3 +1,5 @@
+import { omit } from 'lodash';
+
 const CREATE_FORM = 'CREATE_FORM';
 const UPDATE_FORM = 'UPDATE_FORM';
 const DELETE_FORM = 'DELETE_FORM';
@@ -28,9 +30,10 @@ function updateForm(formName, form) {
   };
 }
 
-function deleteForm() {
+function deleteForm(formName) {
   return {
     type: DELETE_FORM,
+    formName,
   };
 }
 
@@ -52,6 +55,8 @@ export default function reducer(state = initialState, action = {}) {
           ...action.form,
         },
       };
+    case DELETE_FORM:
+      return omit(state, [action.formName]);
     default:
       return state;
   }
@@ -64,6 +69,9 @@ const actionCreators = {
 };
 
 const actionTypes = {
+  CREATE_FORM,
+  UPDATE_FORM,
+  DELETE_FORM,
 };
 
 export {

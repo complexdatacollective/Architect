@@ -13,7 +13,6 @@ import Card from '../Card';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
-
 class VariableRegistry extends Component {
   handleDelete = (category, type) => {
     this.props.deleteType(category, type);

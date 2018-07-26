@@ -12,6 +12,7 @@ import EditSkipLogic from '../Cards/EditSkipLogic';
 import EditStage from '../Cards/EditStage';
 import EditForm from '../Cards/Form';
 import VariableRegistry from '../Cards/VariableRegistry';
+import ViewForms from '../Cards/ViewForms';
 import EditType from '../Cards/EditType';
 import Timeline from '../../components/Timeline';
 import ControlBar from '../ControlBar';
@@ -170,6 +171,13 @@ class Protocol extends PureComponent {
           show={this.isCardVisible(cards.editStage)}
           onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
+        />
+
+        <ShowRoute
+          path="/edit/:protocol/forms"
+          location={location}
+          component={ViewForms}
+          onComplete={this.onRouteComplete}
         />
 
         <ShowRoute
