@@ -128,6 +128,7 @@
         "whatwg-fetch": "2.0.3"
     },
     "dependencies": {
+        "react-error-overlay": "^5.0.0-next.3e165448",
         "thread-loader": "^1.1.5"
     },
     "homepage": ".",
