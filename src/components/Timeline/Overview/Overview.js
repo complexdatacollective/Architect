@@ -4,13 +4,22 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { map, get } from 'lodash';
+import { map, get, keys } from 'lodash';
 import { compose } from 'recompose';
 import { SeamlessText } from '../../Form/Fields';
 import { Tweened } from '../../../behaviours/Tweened';
 import { Node, Icon } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import PanelGroup from './PanelGroup';
+
+// eslint-disable-next-line
+const renderForm = ({ protocolPath, form }) => (
+  <li key={form}>
+    <Link to={`${protocolPath}/forms`}>
+      {form}
+    </Link>
+  </li>
+);
 
 class Overview extends Component {
   get protocolPath() {
@@ -52,6 +61,20 @@ class Overview extends Component {
     );
   }
 
+  get renderForms() {
+    const forms = keys(this.props.forms);
+
+    if (forms.length === 0) {
+      return 'No forms defined';
+    }
+
+    return (
+      <ul>
+        {map(forms, form => renderForm({ form, protocolPath: this.protocolPath }))}
+      </ul>
+    );
+  }
+
   render() {
     const {
       name,
@@ -81,7 +104,7 @@ class Overview extends Component {
                   { this.renderEdgeTypes }
                 </PanelGroup>
                 <PanelGroup title="Forms">
-                  <p>Forms not displayed yet.</p>
+                  { this.renderForms }
                 </PanelGroup>
                 <PanelGroup title="Global Options">
                   <p>Version: {version}</p>

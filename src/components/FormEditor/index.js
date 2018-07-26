@@ -6,7 +6,7 @@ import {
   isValid,
 } from 'redux-form';
 import { compose, withProps } from 'recompose';
-import { keys } from 'lodash';
+import { map, get } from 'lodash';
 import { getVariablesForNodeType, getNodeTypes } from '../../selectors/variableRegistry';
 import Editor from '../Editor';
 import FormEditor from './FormEditor';
@@ -21,7 +21,14 @@ const mapStateToProps = (state) => {
 
   return {
     nodeType: formNodeType,
-    nodeTypes: keys(getNodeTypes(state)),
+    nodeTypes: map(
+      getNodeTypes(state),
+      (nodeOptions, nodeType) => ({
+        label: nodeType,
+        value: nodeType,
+        color: get(nodeOptions, 'color', ''),
+      }),
+    ),
     variables: getVariablesForNodeType(state, formNodeType),
     dirty: getIsDirty(state),
     valid: getIsValid(state),
