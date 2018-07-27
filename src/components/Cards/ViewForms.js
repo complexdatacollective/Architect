@@ -122,6 +122,8 @@ ViewForms.defaultProps = {
 const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
 
+  console.log({ match: props.match });
+
   return {
     forms: get(protocol, 'forms', {}),
     nodes: get(protocol, 'variableRegistry.node', {}),
