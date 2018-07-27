@@ -94,7 +94,21 @@ ShallowWrapper {
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
-          path="/edit/:protocol/form/:form?"
+          path={
+                    Array [
+                              "/edit/:protocol/form(s?)",
+                            ]
+          }
+/>,
+        <ShowRoute
+          component={[Function]}
+          location={Object {}}
+          onComplete={[Function]}
+          path={
+                    Array [
+                              "/edit/:protocol/form/:form",
+                            ]
+          }
 />,
         <ShowRoute
           component={[Function]}
@@ -222,7 +236,25 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
-          "path": "/edit/:protocol/form/:form?",
+          "path": Array [
+            "/edit/:protocol/form(s?)",
+          ],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "component": [Function],
+          "location": Object {},
+          "onComplete": [Function],
+          "path": Array [
+            "/edit/:protocol/form/:form",
+          ],
         },
         "ref": null,
         "rendered": null,
@@ -321,7 +353,21 @@ ShallowWrapper {
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
-            path="/edit/:protocol/form/:form?"
+            path={
+                        Array [
+                                    "/edit/:protocol/form(s?)",
+                                  ]
+            }
+/>,
+          <ShowRoute
+            component={[Function]}
+            location={Object {}}
+            onComplete={[Function]}
+            path={
+                        Array [
+                                    "/edit/:protocol/form/:form",
+                                  ]
+            }
 />,
           <ShowRoute
             component={[Function]}
@@ -449,7 +495,25 @@ ShallowWrapper {
             "component": [Function],
             "location": Object {},
             "onComplete": [Function],
-            "path": "/edit/:protocol/form/:form?",
+            "path": Array [
+              "/edit/:protocol/form(s?)",
+            ],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "component": [Function],
+            "location": Object {},
+            "onComplete": [Function],
+            "path": Array [
+              "/edit/:protocol/form/:form",
+            ],
           },
           "ref": null,
           "rendered": null,

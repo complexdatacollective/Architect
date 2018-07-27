@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { map, has, get } from 'lodash';
 import { TransitionGroup } from 'react-transition-group';
-import { Wipe } from '../Transitions';
 import { Node, Button } from '../../ui/components';
+import { Wipe } from '../Transitions';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Card from '../Card';
@@ -121,8 +121,6 @@ ViewForms.defaultProps = {
 
 const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
-
-  console.log({ match: props.match });
 
   return {
     forms: get(protocol, 'forms', {}),

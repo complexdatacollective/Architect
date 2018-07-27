@@ -103,4 +103,10 @@ const Zoom = WrappedComponent =>
     }
   )
 
+
+export const Zoomer = ({ children, ...rest }) => {
+  const Zoomable = Zoom((props) => children(props));
+  return <Zoomable {...rest} />;
+};
+
 export default Zoom;

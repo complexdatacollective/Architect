@@ -4,65 +4,95 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { map, has, get } from 'lodash';
+import Color from 'color';
 import { TransitionGroup } from 'react-transition-group';
 import { Wipe } from '../Transitions';
+import { Zoomer } from '../../behaviours/Zoom';
 import { Node, Icon, Button } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Card from '../Card';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
+import { getCSSVariableAsString } from '../../utils/CSSVariables';
 
 class VariableRegistry extends Component {
   handleDelete = (category, type) => {
     this.props.deleteType(category, type);
   };
 
-  renderNode = (node, key) => (
-    <Wipe key={key}>
-      <div className="list__item" key={key}>
-        <div className="list__attribute list__attribute--icon">
-          <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
-            <Node label="" color={get(node, 'color', '')} />
-          </Link>
+  renderNode = (node, key) => {
+    const nodeColor = get(node, 'color', '');
+    const nodeColorHex = Color(getCSSVariableAsString(`--${nodeColor}`)).hex();
+    const nodeZoomColors = [nodeColorHex, '#fff'];
+    return (
+      <Wipe key={key}>
+        <div className="list__item" key={key}>
+          <div className="list__attribute list__attribute--icon">
+            <Zoomer zoomColors={nodeZoomColors}>
+              {() => (
+                <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
+                  <Node label="" color={get(node, 'color', '')} />
+                </Link>
+              )}
+            </Zoomer>
+          </div>
+          <div className="list__attribute">
+            <Zoomer zoomColors={nodeZoomColors}>
+              {() => (
+                <h3>
+                  <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
+                    {key}
+                  </Link>
+                </h3>
+              )}
+            </Zoomer>
+          </div>
+          <div className="list__attribute list__attribute--options">
+            <Button size="small" color="neon-coral" onClick={() => this.handleDelete('node', key)}>
+              Delete
+            </Button>
+          </div>
         </div>
-        <div className="list__attribute">
-          <h3>
-            <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
-              {key}
-            </Link>
-          </h3>
-        </div>
-        <div className="list__attribute list__attribute--options">
-          <Button size="small" color="neon-coral" onClick={() => this.handleDelete('node', key)}>
-            Delete
-          </Button>
-        </div>
-      </div>
-    </Wipe>
-  );
+      </Wipe>
+    );
+  }
 
-  renderEdge = (edge, key) => (
-    <Wipe key={key}>
-      <div className="list__item" key={key}>
-        <div className="list__attribute list__attribute--icon">
-          <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
-            <Icon name="links" color={get(edge, 'color', '').replace('color-', '')} />
-          </Link>
+  renderEdge = (edge, key) => {
+    const edgeColor = get(edge, 'color', '');
+    const edgeColorHex = Color(getCSSVariableAsString(`--color-${edgeColor}`)).hex();
+    const edgeZoomColors = [edgeColorHex, '#fff'];
+
+    return (
+      <Wipe key={key}>
+        <div className="list__item" key={key}>
+          <div className="list__attribute list__attribute--icon">
+            <Zoomer zoomColors={edgeZoomColors}>
+              {() => (
+                <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
+                  <Icon name="links" color={get(edge, 'color', '')} />
+                </Link>
+              )}
+            </Zoomer>
+          </div>
+          <div className="list__attribute">
+            <Zoomer zoomColors={edgeZoomColors}>
+              {() => (
+                <h3>
+                  <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
+                    {key}
+                  </Link>
+                </h3>
+              )}
+            </Zoomer>
+          </div>
+          <div className="list__attribute list__attribute--options">
+            <Button size="small" color="neon-coral" onClick={() => this.handleDelete('edge', key)}>Delete</Button>
+          </div>
         </div>
-        <div className="list__attribute">
-          <h3>
-            <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
-              {key}
-            </Link>
-          </h3>
-        </div>
-        <div className="list__attribute list__attribute--options">
-          <Button size="small" color="neon-coral" onClick={() => this.handleDelete('edge', key)}>Delete</Button>
-        </div>
-      </div>
-    </Wipe>
-  );
+      </Wipe>
+    );
+  }
 
   renderEdges() {
     const edges = get(this.props.variableRegistry, 'edge', {});

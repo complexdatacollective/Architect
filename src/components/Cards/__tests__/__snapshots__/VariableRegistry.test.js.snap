@@ -23,9 +23,1029 @@ ShallowWrapper {
     "simulateEvent": [Function],
     "unmount": [Function],
   },
-  Symbol(enzyme.__node__): null,
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "buttons": Array [
+        <Button
+          color="platinum"
+          content=""
+          icon=""
+          iconPosition="right"
+          onClick={[Function]}
+          size="small"
+>
+          Back
+</Button>,
+      ],
+      "children": <div
+        className="editor variable-registry"
+>
+        <Connect(Guided)
+                className="editor__sections"
+        >
+                <h1>
+                        Variable Registry
+                </h1>
+                <Connect(Guided)
+                        contentId="guidance.registry.nodes"
+                >
+                        <div
+                                className="editor__section"
+                        >
+                                <h2>
+                                        Nodes
+                                </h2>
+                                <div
+                                        className="editor__subsection"
+                                >
+                                        <div
+                                                className="list"
+                                        >
+                                                <TransitionGroup
+                                                        childFactory={[Function]}
+                                                        component="div"
+                                                >
+                                                        
+                                                </TransitionGroup>
+                                        </div>
+                                </div>
+                                
+                        </div>
+                </Connect(Guided)>
+                <Connect(Guided)
+                        contentId="guidance.registry.edges"
+                >
+                        <div
+                                className="editor__section"
+                        >
+                                <h2>
+                                        Edges
+                                </h2>
+                                <div
+                                        className="editor__subsection"
+                                >
+                                        <div
+                                                className="list"
+                                        >
+                                                <TransitionGroup
+                                                        childFactory={[Function]}
+                                                        component="div"
+                                                >
+                                                        
+                                                </TransitionGroup>
+                                        </div>
+                                </div>
+                                <div
+                                        className="editor__subsection"
+                                />
+                        </div>
+                </Connect(Guided)>
+        </Connect(Guided)>
+</div>,
+      "enterDelay": 100,
+      "enterDuration": 200,
+      "exitDelay": 0,
+      "exitDuration": 100,
+      "show": true,
+      "style": "wipe",
+      "type": "default",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <Connect(Guided)
+          className="editor__sections"
+>
+          <h1>
+                    Variable Registry
+          </h1>
+          <Connect(Guided)
+                    contentId="guidance.registry.nodes"
+          >
+                    <div
+                              className="editor__section"
+                    >
+                              <h2>
+                                        Nodes
+                              </h2>
+                              <div
+                                        className="editor__subsection"
+                              >
+                                        <div
+                                                  className="list"
+                                        >
+                                                  <TransitionGroup
+                                                            childFactory={[Function]}
+                                                            component="div"
+                                                  >
+                                                            
+                                                  </TransitionGroup>
+                                        </div>
+                              </div>
+                              
+                    </div>
+          </Connect(Guided)>
+          <Connect(Guided)
+                    contentId="guidance.registry.edges"
+          >
+                    <div
+                              className="editor__section"
+                    >
+                              <h2>
+                                        Edges
+                              </h2>
+                              <div
+                                        className="editor__subsection"
+                              >
+                                        <div
+                                                  className="list"
+                                        >
+                                                  <TransitionGroup
+                                                            childFactory={[Function]}
+                                                            component="div"
+                                                  >
+                                                            
+                                                  </TransitionGroup>
+                                        </div>
+                              </div>
+                              <div
+                                        className="editor__subsection"
+                              />
+                    </div>
+          </Connect(Guided)>
+</Connect(Guided)>,
+        "className": "editor variable-registry",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <h1>
+              Variable Registry
+</h1>,
+            <Connect(Guided)
+              contentId="guidance.registry.nodes"
+>
+              <div
+                            className="editor__section"
+              >
+                            <h2>
+                                          Nodes
+                            </h2>
+                            <div
+                                          className="editor__subsection"
+                            >
+                                          <div
+                                                        className="list"
+                                          >
+                                                        <TransitionGroup
+                                                                      childFactory={[Function]}
+                                                                      component="div"
+                                                        >
+                                                                      
+                                                        </TransitionGroup>
+                                          </div>
+                            </div>
+                            
+              </div>
+</Connect(Guided)>,
+            <Connect(Guided)
+              contentId="guidance.registry.edges"
+>
+              <div
+                            className="editor__section"
+              >
+                            <h2>
+                                          Edges
+                            </h2>
+                            <div
+                                          className="editor__subsection"
+                            >
+                                          <div
+                                                        className="list"
+                                          >
+                                                        <TransitionGroup
+                                                                      childFactory={[Function]}
+                                                                      component="div"
+                                                        >
+                                                                      
+                                                        </TransitionGroup>
+                                          </div>
+                            </div>
+                            <div
+                                          className="editor__subsection"
+                            />
+              </div>
+</Connect(Guided)>,
+          ],
+          "className": "editor__sections",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Variable Registry",
+            },
+            "ref": null,
+            "rendered": "Variable Registry",
+            "type": "h1",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <div
+                className="editor__section"
+>
+                <h2>
+                                Nodes
+                </h2>
+                <div
+                                className="editor__subsection"
+                >
+                                <div
+                                                className="list"
+                                >
+                                                <TransitionGroup
+                                                                childFactory={[Function]}
+                                                                component="div"
+                                                >
+                                                                
+                                                </TransitionGroup>
+                                </div>
+                </div>
+                
+</div>,
+              "contentId": "guidance.registry.nodes",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <h2>
+                    Nodes
+</h2>,
+                  <div
+                    className="editor__subsection"
+>
+                    <div
+                                        className="list"
+                    >
+                                        <TransitionGroup
+                                                            childFactory={[Function]}
+                                                            component="div"
+                                        >
+                                                            
+                                        </TransitionGroup>
+                    </div>
+</div>,
+                  "",
+                ],
+                "className": "editor__section",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Nodes",
+                  },
+                  "ref": null,
+                  "rendered": "Nodes",
+                  "type": "h2",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <div
+                      className="list"
+>
+                      <TransitionGroup
+                                            childFactory={[Function]}
+                                            component="div"
+                      >
+                                            
+                      </TransitionGroup>
+</div>,
+                    "className": "editor__subsection",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+>
+                        
+</TransitionGroup>,
+                      "className": "list",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "childFactory": [Function],
+                        "children": Array [],
+                        "component": "div",
+                      },
+                      "ref": null,
+                      "rendered": Array [],
+                      "type": [Function],
+                    },
+                    "type": "div",
+                  },
+                  "type": "div",
+                },
+                "",
+              ],
+              "type": "div",
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <div
+                className="editor__section"
+>
+                <h2>
+                                Edges
+                </h2>
+                <div
+                                className="editor__subsection"
+                >
+                                <div
+                                                className="list"
+                                >
+                                                <TransitionGroup
+                                                                childFactory={[Function]}
+                                                                component="div"
+                                                >
+                                                                
+                                                </TransitionGroup>
+                                </div>
+                </div>
+                <div
+                                className="editor__subsection"
+                />
+</div>,
+              "contentId": "guidance.registry.edges",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <h2>
+                    Edges
+</h2>,
+                  <div
+                    className="editor__subsection"
+>
+                    <div
+                                        className="list"
+                    >
+                                        <TransitionGroup
+                                                            childFactory={[Function]}
+                                                            component="div"
+                                        >
+                                                            
+                                        </TransitionGroup>
+                    </div>
+</div>,
+                  <div
+                    className="editor__subsection"
+/>,
+                ],
+                "className": "editor__section",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Edges",
+                  },
+                  "ref": null,
+                  "rendered": "Edges",
+                  "type": "h2",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <div
+                      className="list"
+>
+                      <TransitionGroup
+                                            childFactory={[Function]}
+                                            component="div"
+                      >
+                                            
+                      </TransitionGroup>
+</div>,
+                    "className": "editor__subsection",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+>
+                        
+</TransitionGroup>,
+                      "className": "list",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "childFactory": [Function],
+                        "children": Array [],
+                        "component": "div",
+                      },
+                      "ref": null,
+                      "rendered": Array [],
+                      "type": [Function],
+                    },
+                    "type": "div",
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "",
+                    "className": "editor__subsection",
+                  },
+                  "ref": null,
+                  "rendered": "",
+                  "type": "div",
+                },
+              ],
+              "type": "div",
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      "type": "div",
+    },
+    "type": [Function],
+  },
   Symbol(enzyme.__nodes__): Array [
-    null,
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "buttons": Array [
+          <Button
+            color="platinum"
+            content=""
+            icon=""
+            iconPosition="right"
+            onClick={[Function]}
+            size="small"
+>
+            Back
+</Button>,
+        ],
+        "children": <div
+          className="editor variable-registry"
+>
+          <Connect(Guided)
+                    className="editor__sections"
+          >
+                    <h1>
+                              Variable Registry
+                    </h1>
+                    <Connect(Guided)
+                              contentId="guidance.registry.nodes"
+                    >
+                              <div
+                                        className="editor__section"
+                              >
+                                        <h2>
+                                                  Nodes
+                                        </h2>
+                                        <div
+                                                  className="editor__subsection"
+                                        >
+                                                  <div
+                                                            className="list"
+                                                  >
+                                                            <TransitionGroup
+                                                                      childFactory={[Function]}
+                                                                      component="div"
+                                                            >
+                                                                      
+                                                            </TransitionGroup>
+                                                  </div>
+                                        </div>
+                                        
+                              </div>
+                    </Connect(Guided)>
+                    <Connect(Guided)
+                              contentId="guidance.registry.edges"
+                    >
+                              <div
+                                        className="editor__section"
+                              >
+                                        <h2>
+                                                  Edges
+                                        </h2>
+                                        <div
+                                                  className="editor__subsection"
+                                        >
+                                                  <div
+                                                            className="list"
+                                                  >
+                                                            <TransitionGroup
+                                                                      childFactory={[Function]}
+                                                                      component="div"
+                                                            >
+                                                                      
+                                                            </TransitionGroup>
+                                                  </div>
+                                        </div>
+                                        <div
+                                                  className="editor__subsection"
+                                        />
+                              </div>
+                    </Connect(Guided)>
+          </Connect(Guided)>
+</div>,
+        "enterDelay": 100,
+        "enterDuration": 200,
+        "exitDelay": 0,
+        "exitDuration": 100,
+        "show": true,
+        "style": "wipe",
+        "type": "default",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <Connect(Guided)
+            className="editor__sections"
+>
+            <h1>
+                        Variable Registry
+            </h1>
+            <Connect(Guided)
+                        contentId="guidance.registry.nodes"
+            >
+                        <div
+                                    className="editor__section"
+                        >
+                                    <h2>
+                                                Nodes
+                                    </h2>
+                                    <div
+                                                className="editor__subsection"
+                                    >
+                                                <div
+                                                            className="list"
+                                                >
+                                                            <TransitionGroup
+                                                                        childFactory={[Function]}
+                                                                        component="div"
+                                                            >
+                                                                        
+                                                            </TransitionGroup>
+                                                </div>
+                                    </div>
+                                    
+                        </div>
+            </Connect(Guided)>
+            <Connect(Guided)
+                        contentId="guidance.registry.edges"
+            >
+                        <div
+                                    className="editor__section"
+                        >
+                                    <h2>
+                                                Edges
+                                    </h2>
+                                    <div
+                                                className="editor__subsection"
+                                    >
+                                                <div
+                                                            className="list"
+                                                >
+                                                            <TransitionGroup
+                                                                        childFactory={[Function]}
+                                                                        component="div"
+                                                            >
+                                                                        
+                                                            </TransitionGroup>
+                                                </div>
+                                    </div>
+                                    <div
+                                                className="editor__subsection"
+                                    />
+                        </div>
+            </Connect(Guided)>
+</Connect(Guided)>,
+          "className": "editor variable-registry",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <h1>
+                Variable Registry
+</h1>,
+              <Connect(Guided)
+                contentId="guidance.registry.nodes"
+>
+                <div
+                                className="editor__section"
+                >
+                                <h2>
+                                                Nodes
+                                </h2>
+                                <div
+                                                className="editor__subsection"
+                                >
+                                                <div
+                                                                className="list"
+                                                >
+                                                                <TransitionGroup
+                                                                                childFactory={[Function]}
+                                                                                component="div"
+                                                                >
+                                                                                
+                                                                </TransitionGroup>
+                                                </div>
+                                </div>
+                                
+                </div>
+</Connect(Guided)>,
+              <Connect(Guided)
+                contentId="guidance.registry.edges"
+>
+                <div
+                                className="editor__section"
+                >
+                                <h2>
+                                                Edges
+                                </h2>
+                                <div
+                                                className="editor__subsection"
+                                >
+                                                <div
+                                                                className="list"
+                                                >
+                                                                <TransitionGroup
+                                                                                childFactory={[Function]}
+                                                                                component="div"
+                                                                >
+                                                                                
+                                                                </TransitionGroup>
+                                                </div>
+                                </div>
+                                <div
+                                                className="editor__subsection"
+                                />
+                </div>
+</Connect(Guided)>,
+            ],
+            "className": "editor__sections",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Variable Registry",
+              },
+              "ref": null,
+              "rendered": "Variable Registry",
+              "type": "h1",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <div
+                  className="editor__section"
+>
+                  <h2>
+                                    Nodes
+                  </h2>
+                  <div
+                                    className="editor__subsection"
+                  >
+                                    <div
+                                                      className="list"
+                                    >
+                                                      <TransitionGroup
+                                                                        childFactory={[Function]}
+                                                                        component="div"
+                                                      >
+                                                                        
+                                                      </TransitionGroup>
+                                    </div>
+                  </div>
+                  
+</div>,
+                "contentId": "guidance.registry.nodes",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <h2>
+                      Nodes
+</h2>,
+                    <div
+                      className="editor__subsection"
+>
+                      <div
+                                            className="list"
+                      >
+                                            <TransitionGroup
+                                                                  childFactory={[Function]}
+                                                                  component="div"
+                                            >
+                                                                  
+                                            </TransitionGroup>
+                      </div>
+</div>,
+                    "",
+                  ],
+                  "className": "editor__section",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Nodes",
+                    },
+                    "ref": null,
+                    "rendered": "Nodes",
+                    "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <div
+                        className="list"
+>
+                        <TransitionGroup
+                                                childFactory={[Function]}
+                                                component="div"
+                        >
+                                                
+                        </TransitionGroup>
+</div>,
+                      "className": "editor__subsection",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+>
+                          
+</TransitionGroup>,
+                        "className": "list",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "childFactory": [Function],
+                          "children": Array [],
+                          "component": "div",
+                        },
+                        "ref": null,
+                        "rendered": Array [],
+                        "type": [Function],
+                      },
+                      "type": "div",
+                    },
+                    "type": "div",
+                  },
+                  "",
+                ],
+                "type": "div",
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <div
+                  className="editor__section"
+>
+                  <h2>
+                                    Edges
+                  </h2>
+                  <div
+                                    className="editor__subsection"
+                  >
+                                    <div
+                                                      className="list"
+                                    >
+                                                      <TransitionGroup
+                                                                        childFactory={[Function]}
+                                                                        component="div"
+                                                      >
+                                                                        
+                                                      </TransitionGroup>
+                                    </div>
+                  </div>
+                  <div
+                                    className="editor__subsection"
+                  />
+</div>,
+                "contentId": "guidance.registry.edges",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <h2>
+                      Edges
+</h2>,
+                    <div
+                      className="editor__subsection"
+>
+                      <div
+                                            className="list"
+                      >
+                                            <TransitionGroup
+                                                                  childFactory={[Function]}
+                                                                  component="div"
+                                            >
+                                                                  
+                                            </TransitionGroup>
+                      </div>
+</div>,
+                    <div
+                      className="editor__subsection"
+/>,
+                  ],
+                  "className": "editor__section",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Edges",
+                    },
+                    "ref": null,
+                    "rendered": "Edges",
+                    "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": <div
+                        className="list"
+>
+                        <TransitionGroup
+                                                childFactory={[Function]}
+                                                component="div"
+                        >
+                                                
+                        </TransitionGroup>
+</div>,
+                      "className": "editor__subsection",
+                    },
+                    "ref": null,
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+>
+                          
+</TransitionGroup>,
+                        "className": "list",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "childFactory": [Function],
+                          "children": Array [],
+                          "component": "div",
+                        },
+                        "ref": null,
+                        "rendered": Array [],
+                        "type": [Function],
+                      },
+                      "type": "div",
+                    },
+                    "type": "div",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                      "className": "editor__subsection",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "div",
+                  },
+                ],
+                "type": "div",
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        "type": "div",
+      },
+      "type": [Function],
+    },
   ],
   Symbol(enzyme.__options__): Object {
     "adapter": ReactSixteenAdapter {
