@@ -70,8 +70,6 @@ class ViewForms extends Component {
       protocolPath,
     } = this.props;
 
-    if (!protocolPath) { return null; }
-
     return (
       <Card
         show={show}
@@ -87,14 +85,16 @@ class ViewForms extends Component {
                 <div className="editor__subsection">
                   {this.renderForms()}
                 </div>
-                <div className="editor__subsection">
-                  <Link
-                    to={`${protocolPath}/form/`}
-                    className="button button--small"
-                  >
-                    Create new Form
-                  </Link>
-                </div>
+                { protocolPath &&
+                  <div className="editor__subsection">
+                    <Link
+                      to={`${protocolPath}/form/`}
+                      className="button button--small"
+                    >
+                      Create new Form
+                    </Link>
+                  </div>
+                }
               </div>
             </Guidance>
           </Guided>

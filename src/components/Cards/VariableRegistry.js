@@ -108,8 +108,6 @@ class VariableRegistry extends Component {
       protocolPath,
     } = this.props;
 
-    if (!protocolPath) { return null; }
-
     return (
       <Card
         show={show}
@@ -125,14 +123,16 @@ class VariableRegistry extends Component {
                 <div className="editor__subsection">
                   {this.renderNodes()}
                 </div>
-                <div className="editor__subsection">
-                  <Link
-                    to={`${protocolPath}/registry/node/`}
-                    className="button button--small"
-                  >
-                    Create new Node type
-                  </Link>
-                </div>
+                { protocolPath &&
+                  <div className="editor__subsection">
+                    <Link
+                      to={`${protocolPath}/registry/node/`}
+                      className="button button--small"
+                    >
+                      Create new Node type
+                    </Link>
+                  </div>
+                }
               </div>
             </Guidance>
 
@@ -143,12 +143,14 @@ class VariableRegistry extends Component {
                   {this.renderEdges()}
                 </div>
                 <div className="editor__subsection">
-                  <Link
-                    to={`${protocolPath}/registry/edge/`}
-                    className="button button--small"
-                  >
-                    Create new Edge type
-                  </Link>
+                  { protocolPath &&
+                    <Link
+                      to={`${protocolPath}/registry/edge/`}
+                      className="button button--small"
+                    >
+                      Create new Edge type
+                    </Link>
+                  }
                 </div>
               </div>
             </Guidance>
