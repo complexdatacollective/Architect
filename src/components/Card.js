@@ -24,26 +24,43 @@ class Card extends PureComponent {
     buttons: PropTypes.arrayOf(PropTypes.node),
     type: PropTypes.string,
     show: PropTypes.bool,
-    cancel: PropTypes.bool,
+    style: PropTypes.oneOf(['fade', 'wipe']),
+    enterDuration: PropTypes.number,
+    enterDelay: PropTypes.number,
+    exitDuration: PropTypes.number,
+    exitDelay: PropTypes.number,
   };
 
   static defaultProps = {
     type: 'default',
     children: null,
     buttons: [],
-    cancel: false,
     show: false,
+    style: 'wipe',
+    enterDuration: 200,
+    enterDelay: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+    exitDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+    exitDelay: 0,
   }
 
   get anyButtons() { return this.props.buttons.length > 0; }
 
   render() {
-    const { buttons, cancel, show } = this.props;
+    const {
+      buttons,
+      show,
+      style,
+      enterDuration,
+      enterDelay,
+      exitDuration,
+      exitDelay,
+    } = this.props;
     const classes = cx('card', `card--${this.props.type}`);
+    const timeout = enterDuration + enterDelay + exitDuration + exitDelay;
 
     return (
       <Transition
-        timeout={getCSSVariableAsNumber('--animation-duration-standard-ms') * 2}
+        timeout={timeout}
         unmountOnExit
         mountOnEnter
         appear
@@ -53,8 +70,8 @@ class Card extends PureComponent {
               targets: el,
               elasticity: 0,
               easing: 'easeInOutQuad',
-              duration: 1,
-              delay: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+              duration: enterDuration,
+              delay: enterDelay,
               ...fadeIn,
             });
           }
@@ -65,8 +82,9 @@ class Card extends PureComponent {
               targets: el,
               elasticity: 0,
               easing: 'easeInOutQuad',
-              duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-              ...(cancel ? wipeOut : fadeOut),
+              duration: exitDuration,
+              delay: exitDelay,
+              ...(style === 'wipe' ? wipeOut : fadeOut),
             });
           }
         }
