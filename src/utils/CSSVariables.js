@@ -4,7 +4,7 @@ const getCSSVariable = (variableName) => {
   const variable = getComputedStyle(document.body)
     .getPropertyValue(variableName)
     .trim();
-  if (isEmpty(variable)) { throw new Error(`CSS variable "${variableName}" not found.`); }
+  if (isEmpty(variable)) { console.log(`CSS variable "${variableName}" not found.`); }
   return variable;
 };
 
