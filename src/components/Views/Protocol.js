@@ -83,12 +83,11 @@ class Protocol extends PureComponent {
 
     if (protocol) {
       switch (goto) {
-        case 'registry':
-          history.push(`/edit/${protocol}/registry`);
-          break;
         case 'protocol':
+          history.push(`/edit/${protocol}/`);
+          break;
         default:
-          history.push(`/edit/${protocol}`);
+          history.goBack();
           break;
       }
     }
@@ -177,7 +176,7 @@ class Protocol extends PureComponent {
           path={['/edit/:protocol/form(s?)']}
           location={location}
           component={ViewForms}
-          onComplete={this.onRouteComplete}
+          onComplete={() => this.onRouteComplete('protocol')}
         />
 
         <ShowRoute
@@ -191,14 +190,14 @@ class Protocol extends PureComponent {
           path="/edit/:protocol/registry"
           location={location}
           component={VariableRegistry}
-          onComplete={this.onRouteComplete}
+          onComplete={() => this.onRouteComplete('protocol')}
         />
 
         <ShowRoute
           path="/edit/:protocol/registry/:category/:type?"
           location={location}
           component={EditType}
-          onComplete={() => this.onRouteComplete('registry')}
+          onComplete={this.onRouteComplete}
         />
       </div>
     );
