@@ -125,9 +125,9 @@ class FormEditor extends Component {
           <div className="stage-editor-section">
             <ValidatedField
               name="optionToAddAnother"
-              component={ArchitectFields.Mode}
-              label="Enable 'Add another' option"
-              options={[[true, 'enabled'], [false, 'disabled']]}
+              component={Fields.Toggle}
+              fieldLabel="Continuous entry"
+              label="Enable 'Add another' option in form"
             />
           </div>
         </Guidance>
