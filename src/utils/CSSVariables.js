@@ -4,6 +4,7 @@ const getCSSVariable = (variableName) => {
   const variable = getComputedStyle(document.body)
     .getPropertyValue(variableName)
     .trim();
+  // eslint-disable-next-line no-console
   if (isEmpty(variable)) { console.log(`CSS variable "${variableName}" not found.`); }
   return variable;
 };
