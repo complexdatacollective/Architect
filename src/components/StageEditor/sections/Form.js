@@ -8,6 +8,7 @@ import { toPairs, map, get, pickBy } from 'lodash';
 import Guidance from '../../Guidance';
 import { Radio } from '../../../ui/components/Fields';
 import Select from '../../Form/Fields/Select';
+import history from '../../../history';
 
 const DEFAULT_FORM = Symbol('DEFAULT_FORM');
 const CUSTOM_FORM = Symbol('CUSTOM_FORM');
@@ -52,7 +53,7 @@ class Form extends Component {
   };
 
   onClickCreateNewForm = () => {
-    // TODO: Create form popin
+    history.push('/protocols/form');
   };
 
   render() {
@@ -111,7 +112,7 @@ class Form extends Component {
                 </Field>
               </div>
             </div>
-            <div onClick={this.onClickCreateNewForm} className={categoryClasses(true)}>
+            <div onClick={this.onClickCreateNewForm} className={categoryClasses()}>
               <Radio
                 label="Create new form..."
                 className="stage-editor-section-form__radio"

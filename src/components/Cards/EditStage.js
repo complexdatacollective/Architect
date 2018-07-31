@@ -7,7 +7,7 @@ import {
   isDirty as isFormDirty,
   isInvalid as isFormInvalid,
 } from 'redux-form';
-import { pick, has } from 'lodash';
+import { has } from 'lodash';
 import { makeGetStage } from '../../selectors/protocol';
 import { Button } from '../../ui/components';
 import Card from './ProtocolCard';
@@ -18,11 +18,11 @@ class EditStage extends PureComponent {
   static propTypes = {
     dirty: PropTypes.bool.isRequired,
     invalid: PropTypes.bool.isRequired,
+    show: PropTypes.bool.isRequired,
     continue: PropTypes.func.isRequired,
     onComplete: PropTypes.func.isRequired,
     stage: PropTypes.object.isRequired,
     stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    type: PropTypes.string,
     insertAtIndex: PropTypes.number,
     updateStage: PropTypes.func.isRequired,
     createStage: PropTypes.func.isRequired,
@@ -31,7 +31,6 @@ class EditStage extends PureComponent {
   static defaultProps = {
     stageId: null,
     insertAtIndex: null,
-    type: null,
   };
 
   onUpdate = (stage) => {
@@ -57,12 +56,13 @@ class EditStage extends PureComponent {
   }
 
   render() {
-    const { stage } = this.props;
+    const { stage, show } = this.props;
 
     return (
       <Card
         buttons={this.renderButtons()}
-        {...pick(this.props, ['show', 'className', 'onCancel'])}
+        show={show}
+        onCancel={this.props.onComplete}
       >
         <StageEditor
           stage={stage}

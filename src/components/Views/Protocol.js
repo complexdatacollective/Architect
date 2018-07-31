@@ -8,7 +8,7 @@ import history from '../../history';
 import { Button, Icon } from '../../ui/components';
 import { getProtocol } from '../../selectors/protocol';
 import ShowRoute from '../../components/ShowRoute';
-import EditSkipLogic from '../Cards/EditSkipLogic';
+// import EditSkipLogic from '../Cards/EditSkipLogic';
 import EditStage from '../Cards/EditStage';
 import EditForm from '../Cards/EditForm';
 import VariableRegistry from '../Cards/VariableRegistry';
@@ -17,16 +17,6 @@ import EditType from '../Cards/EditType';
 import Timeline from '../../components/Timeline';
 import ControlBar from '../ControlBar';
 import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
-
-const cards = {
-  newStage: Symbol('newStage'),
-  editSkip: Symbol('editSkip'),
-};
-
-const defaultActiveCardState = {
-  cardType: null,
-  cancel: false,
-};
 
 const RightArrow = <Icon name="arrow-right" />;
 
@@ -43,7 +33,7 @@ class Protocol extends PureComponent {
     hasChanges: PropTypes.bool,
     match: PropTypes.object,
     location: PropTypes.object.isRequired,
-    loadProtocol: PropTypes.func.isRequired,
+    protocol: PropTypes.string.isRequired,
     saveProtocol: PropTypes.func.isRequired,
   };
 
@@ -57,25 +47,11 @@ class Protocol extends PureComponent {
     super(props);
 
     this.state = {
-      activeCard: { ...defaultActiveCardState },
+      new: {
+        insertAtIndex: null,
+        type: null,
+      },
     };
-  }
-
-  onCardComplete = () => {
-    this.setState({
-      activeCard: {
-        ...defaultActiveCardState,
-      },
-    });
-  }
-
-  onCardCancel = () => {
-    this.setState({
-      activeCard: {
-        ...defaultActiveCardState,
-        cancel: true,
-      },
-    });
   }
 
   onRouteComplete = (goto) => {
@@ -93,29 +69,19 @@ class Protocol extends PureComponent {
     }
   }
 
-  showCard = (card, { ...options }) => {
-    this.setState({
-      activeCard: {
-        ...defaultActiveCardState,
-        cardType: card,
-        ...options,
-      },
-    });
+  goto = (location = '') => {
+    const protocol = get(this.props.match, 'params.protocol');
+    history.push(`/edit/${protocol}/${location}`);
   }
 
-  editStage = (stageId) => {
-    if (!this.props.stages.find(({ id }) => id === stageId)) {
-      throw new Error(stageId);
-    }
+  createStage = (type, insertAtIndex) =>
+    this.setState(
+      { new: { type, insertAtIndex } },
+      () => this.goto('stage'),
+    );
 
-    this.showCard(cards.editStage, { stageId });
-  };
-
-  createStage = (type, insertAtIndex) => this.showCard(cards.editStage, { type, insertAtIndex });
-
-  isAnyCardVisible = () => this.state.activeCard.cardType !== null;
-  isCardVisible = cardType => this.state.activeCard.cardType === cardType;
-  isTimelineVisible = () => !this.isAnyCardVisible();
+  editStage = stageId =>
+    this.goto(`stage/${stageId}`)
 
   render() {
     const {
@@ -139,7 +105,7 @@ class Protocol extends PureComponent {
         <Timeline
           overview={overview}
           stages={stages}
-          onEditSkipLogic={stageId => this.showCard(cards.editSkip, { stageId })}
+          location={location}
           onEditStage={this.editStage}
           onCreateStage={this.createStage}
           hasUnsavedChanges={hasUnsavedChanges}
@@ -157,30 +123,31 @@ class Protocol extends PureComponent {
           </Button>
         </ControlBar>
 
-        <EditSkipLogic
+        {/* <EditSkipLogic
           show={this.isCardVisible(cards.editSkip)}
           cancel={this.state.activeCard.cancel}
           stageId={this.state.activeCard.stageId}
           onComplete={this.onCardComplete}
           onCancel={this.onCardCancel}
-        />
+        /> */}
 
-        <EditStage
-          {...this.state.activeCard} // either index & type, or id
-          show={this.isCardVisible(cards.editStage)}
-          onComplete={this.onCardComplete}
-          onCancel={this.onCardCancel}
+        <ShowRoute
+          path={'/edit/:protocol/stage/:id?'}
+          location={location}
+          component={EditStage}
+          onComplete={this.onRouteComplete}
+          {...this.state.new}
         />
 
         <ShowRoute
-          path={['/edit/:protocol/form(s?)']}
+          path={'/edit/:protocol/form(s?)'}
           location={location}
           component={ViewForms}
           onComplete={() => this.onRouteComplete('protocol')}
         />
 
         <ShowRoute
-          path={['/edit/:protocol/form/:form']}
+          path={'/edit/:protocol/form/:form'}
           location={location}
           component={EditForm}
           onComplete={this.onRouteComplete}
@@ -219,7 +186,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
-    loadProtocol: bindActionCreators(protocolFileActions.loadProtocol, dispatch),
   };
 }
 
