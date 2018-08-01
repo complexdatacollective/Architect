@@ -41,8 +41,8 @@ ShallowWrapper {
       "children": Array [
         <Connect(withContext(Timeline))
           hasUnsavedChanges={false}
+          location={Object {}}
           onCreateStage={[Function]}
-          onEditSkipLogic={[Function]}
           onEditStage={[Function]}
           overview={Object {}}
           stages={
@@ -76,39 +76,25 @@ ShallowWrapper {
                     Save
           </Button>
 </ControlBar>,
-        <Connect(Draft(EditSkipLogic))
-          cancel={false}
-          onCancel={[Function]}
+        <ShowRoute
+          component={[Function]}
+          insertAtIndex={null}
+          location={Object {}}
           onComplete={[Function]}
-          show={false}
-          stageId={undefined}
-/>,
-        <Connect(EditStage)
-          cancel={false}
-          cardType={null}
-          onCancel={[Function]}
-          onComplete={[Function]}
-          show={false}
+          path="/edit/:protocol/stage/:id?"
+          type={null}
 />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
-          path={
-                    Array [
-                              "/edit/:protocol/form(s?)",
-                            ]
-          }
+          path="/edit/:protocol/form(s?)"
 />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
-          path={
-                    Array [
-                              "/edit/:protocol/form/:form",
-                            ]
-          }
+          path="/edit/:protocol/form/:form"
 />,
         <ShowRoute
           component={[Function]}
@@ -133,8 +119,8 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "hasUnsavedChanges": false,
+          "location": Object {},
           "onCreateStage": [Function],
-          "onEditSkipLogic": [Function],
           "onEditStage": [Function],
           "overview": Object {},
           "stages": Array [
@@ -201,28 +187,14 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
-          "cancel": false,
-          "onCancel": [Function],
+          "component": [Function],
+          "insertAtIndex": null,
+          "location": Object {},
           "onComplete": [Function],
-          "show": false,
-          "stageId": undefined,
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "cancel": false,
-          "cardType": null,
-          "onCancel": [Function],
-          "onComplete": [Function],
-          "show": false,
+          "path": "/edit/:protocol/stage/:id?",
+          "type": null,
         },
         "ref": null,
         "rendered": null,
@@ -236,9 +208,7 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
-          "path": Array [
-            "/edit/:protocol/form(s?)",
-          ],
+          "path": "/edit/:protocol/form(s?)",
         },
         "ref": null,
         "rendered": null,
@@ -252,9 +222,7 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
-          "path": Array [
-            "/edit/:protocol/form/:form",
-          ],
+          "path": "/edit/:protocol/form/:form",
         },
         "ref": null,
         "rendered": null,
@@ -300,8 +268,8 @@ ShallowWrapper {
         "children": Array [
           <Connect(withContext(Timeline))
             hasUnsavedChanges={false}
+            location={Object {}}
             onCreateStage={[Function]}
-            onEditSkipLogic={[Function]}
             onEditStage={[Function]}
             overview={Object {}}
             stages={
@@ -335,39 +303,25 @@ ShallowWrapper {
                         Save
             </Button>
 </ControlBar>,
-          <Connect(Draft(EditSkipLogic))
-            cancel={false}
-            onCancel={[Function]}
+          <ShowRoute
+            component={[Function]}
+            insertAtIndex={null}
+            location={Object {}}
             onComplete={[Function]}
-            show={false}
-            stageId={undefined}
-/>,
-          <Connect(EditStage)
-            cancel={false}
-            cardType={null}
-            onCancel={[Function]}
-            onComplete={[Function]}
-            show={false}
+            path="/edit/:protocol/stage/:id?"
+            type={null}
 />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
-            path={
-                        Array [
-                                    "/edit/:protocol/form(s?)",
-                                  ]
-            }
+            path="/edit/:protocol/form(s?)"
 />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
-            path={
-                        Array [
-                                    "/edit/:protocol/form/:form",
-                                  ]
-            }
+            path="/edit/:protocol/form/:form"
 />,
           <ShowRoute
             component={[Function]}
@@ -392,8 +346,8 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "hasUnsavedChanges": false,
+            "location": Object {},
             "onCreateStage": [Function],
-            "onEditSkipLogic": [Function],
             "onEditStage": [Function],
             "overview": Object {},
             "stages": Array [
@@ -460,28 +414,14 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "class",
+          "nodeType": "function",
           "props": Object {
-            "cancel": false,
-            "onCancel": [Function],
+            "component": [Function],
+            "insertAtIndex": null,
+            "location": Object {},
             "onComplete": [Function],
-            "show": false,
-            "stageId": undefined,
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "cancel": false,
-            "cardType": null,
-            "onCancel": [Function],
-            "onComplete": [Function],
-            "show": false,
+            "path": "/edit/:protocol/stage/:id?",
+            "type": null,
           },
           "ref": null,
           "rendered": null,
@@ -495,9 +435,7 @@ ShallowWrapper {
             "component": [Function],
             "location": Object {},
             "onComplete": [Function],
-            "path": Array [
-              "/edit/:protocol/form(s?)",
-            ],
+            "path": "/edit/:protocol/form(s?)",
           },
           "ref": null,
           "rendered": null,
@@ -511,9 +449,7 @@ ShallowWrapper {
             "component": [Function],
             "location": Object {},
             "onComplete": [Function],
-            "path": Array [
-              "/edit/:protocol/form/:form",
-            ],
+            "path": "/edit/:protocol/form/:form",
           },
           "ref": null,
           "rendered": null,

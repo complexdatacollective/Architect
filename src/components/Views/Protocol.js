@@ -147,7 +147,7 @@ class Protocol extends PureComponent {
         />
 
         <ShowRoute
-          path={'/edit/:protocol/form/:form'}
+          path={'/edit/:protocol/form/:form?'}
           location={location}
           component={EditForm}
           onComplete={this.onRouteComplete}
