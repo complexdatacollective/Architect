@@ -15,18 +15,13 @@ import PanelGroup from './PanelGroup';
 // eslint-disable-next-line
 const renderForm = ({ protocolPath, form }) => (
   <li key={form}>
-    <Link to={`${protocolPath}/forms`}>
+    <Link to={`${protocolPath}/form/${form}`}>
       {form}
     </Link>
   </li>
 );
 
 class Overview extends Component {
-  get protocolPath() {
-    const protocol = get(this.props.match, 'params.protocol', '');
-    return `/edit/${protocol}`;
-  }
-
   get renderNodeTypes() {
     const nodeTypes = get(this.props.variableRegistry, 'node', {});
 
@@ -37,7 +32,7 @@ class Overview extends Component {
     return map(
       nodeTypes,
       (node, key) => (
-        <Link to={`${this.protocolPath}/registry/`} key={key}>
+        <Link to={this.pathTo(`registry/node/${key}`)} key={key}>
           <Node label={key} color={get(node, 'color', '')} />
         </Link>
       ),
@@ -53,8 +48,8 @@ class Overview extends Component {
 
     return map(
       edgeTypes,
-      (edge, index) => (
-        <Link to={`${this.protocolPath}/registry/`} key={index}>
+      (edge, key) => (
+        <Link to={this.pathTo(`registry/edge/${key}`)} key={key}>
           <Icon name="links" label={edge} color={get(edge, 'color', '')} />
         </Link>
       ),
@@ -73,6 +68,12 @@ class Overview extends Component {
         {map(forms, form => renderForm({ form, protocolPath: this.protocolPath }))}
       </ul>
     );
+  }
+
+  pathTo(location) {
+    const protocol = get(this.props.match, 'params.protocol');
+    if (!protocol) { return ''; }
+    return `/edit/${protocol}/${location}`;
   }
 
   render() {
@@ -102,9 +103,19 @@ class Overview extends Component {
                   <br />
                   <h4>Edge types</h4>
                   { this.renderEdgeTypes }
+                  <div>
+                    <Link className="button button--small" to={this.pathTo('registry')}>
+                      Manage registry
+                    </Link>
+                  </div>
                 </PanelGroup>
                 <PanelGroup title="Forms">
                   { this.renderForms }
+                  <div>
+                    <Link className="button button--small" to={this.pathTo('forms')}>
+                      Manage forms
+                    </Link>
+                  </div>
                 </PanelGroup>
                 <PanelGroup title="Global Options">
                   <p>Version: {version}</p>

@@ -128,6 +128,11 @@
     }
   }
 
+  .button {
+    margin: unit(2) 0 0;
+    display: inline-block;
+  }
+
   &.tween-protocol {
     $transition-before: 500ms;
     $transition-after: 300ms;
