@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 
-import { has, get, defer } from 'lodash';
+import { has, get } from 'lodash';
 import anime from 'animejs';
 import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 import store from './store';
@@ -102,14 +102,13 @@ const captureStartAndDefer = (options) => {
 
   const fromBounds = {
     ...defaultRect,
-    ...getAbsoluteBoundingRect(fromTarget.node),
+    ...fromTarget.bounds,
   };
 
   const clone = fromTarget.node.cloneNode(true);
 
-  defer(() => tween(options, { clone, fromBounds }));
+  tween(options, { clone, fromBounds });
 };
 
-// defer waits until next callstack, this is to allow for time for react elements to exist for
-// tweening, with r16 async rendering, this may break.
+
 export default captureStartAndDefer;
