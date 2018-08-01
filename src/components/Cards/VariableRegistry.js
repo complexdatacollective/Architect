@@ -48,7 +48,9 @@ Type.propTypes = {
  */
 class VariableRegistry extends Component {
   handleDelete = (category, type) => {
-    this.props.deleteType(category, type);
+    if (confirm(`Are you sure you want to delete "${type}:${category}"?`)) {
+      this.props.deleteType(category, type);
+    }
   };
 
   renderNode = (node, key) => {

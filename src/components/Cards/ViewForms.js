@@ -15,7 +15,9 @@ import { actionCreators as formActions } from '../../ducks/modules/protocol/form
 
 class ViewForms extends Component {
   handleDelete = (form) => {
-    this.props.deleteForm(form);
+    if (confirm(`Are you sure you want to delete "${form}"?`)) {
+      this.props.deleteForm(form);
+    }
   };
 
   renderForm = (form, key) => (
