@@ -6,7 +6,7 @@
     "node": {
       "person": {
         "label": "Person",
-        "color": "color-neon-carrot",
+        "color": "node-color-seq-1",
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
         "variables": {
@@ -95,7 +95,7 @@
       },
       "venue": {
         "label": "Venue",
-        "color": "color-cerulean-blue",
+        "color": "node-color-seq-2",
         "iconVariant": "add-a-place",
         "variables": {
           "name": {
@@ -119,7 +119,7 @@
     "edge": {
       "friend": {
         "label": "Friend",
-        "color": "mustard",
+        "color": "edge-color-seq-1",
         "variables": {
           "contact_freq": {
             "label": "contact_freq",
@@ -137,7 +137,7 @@
       },
       "professional": {
         "label": "Professional",
-        "color": "kiwi",
+        "color": "edge-color-seq-2",
         "variables": {
         }
       }

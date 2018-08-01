@@ -49,8 +49,15 @@ class Overview extends Component {
     return map(
       edgeTypes,
       (edge, key) => (
-        <Link to={this.pathTo(`registry/edge/${key}`)} key={key}>
-          <Icon name="links" label={edge} color={get(edge, 'color', '')} />
+        <Link
+          to={this.pathTo(`registry/edge/${key}`)}
+          key={key}
+          className="timeline-overview__edge"
+          style={{
+            backgroundColor: `var(--${get(edge, 'color', '')})`,
+          }}
+        >
+          <Icon name="links" />
         </Link>
       ),
     );
@@ -99,10 +106,14 @@ class Overview extends Component {
                 <PanelGroup title="Variable registry">
                   <br />
                   <h4>Node types</h4>
-                  { this.renderNodeTypes }
+                  <div>
+                    { this.renderNodeTypes }
+                  </div>
                   <br />
                   <h4>Edge types</h4>
-                  { this.renderEdgeTypes }
+                  <div>
+                    { this.renderEdgeTypes }
+                  </div>
                   <div>
                     <Link className="button button--small" to={this.pathTo('registry')}>
                       Manage registry

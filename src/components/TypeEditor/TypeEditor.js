@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Color from 'color';
+import { get, times } from 'lodash';
 import { Field } from 'redux-form';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { ValidatedField } from '../Form';
@@ -18,22 +19,17 @@ const getColorByVariable = (variable) => {
   }
 };
 
-const COLOR_OPTIONS = [
-  'color-neon-coral',
-  'color-sea-serpent',
-  'color-purple-pizazz',
-  'color-neon-carrot',
-  'color-kiwi',
-  'color-cerulean-blue',
-  'color-paradise-pink',
-  'color-mustard',
-].map(
-  name =>
-    ({
-      name,
-      color: getColorByVariable(`--${name}`),
-    }),
-);
+const asColorOption = name => ({
+  name,
+  color: getColorByVariable(`--${name}`),
+});
+
+const COLOR_OPTIONS = {
+  node: times(8, index => `node-color-seq-${(index + 1)}`)
+    .map(asColorOption),
+  edge: times(10, index => `edge-color-seq-${(index + 1)}`)
+    .map(asColorOption),
+};
 
 const ICON_OPTIONS = [
   'add-a-context',
@@ -84,7 +80,7 @@ const TypeEditor = ({
         <ValidatedField
           component={ArchitectFields.ColorPicker}
           name="color"
-          colors={COLOR_OPTIONS}
+          colors={get(COLOR_OPTIONS, category, [])}
           validation={{ required: true }}
         />
       </div>
