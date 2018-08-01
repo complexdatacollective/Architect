@@ -75,10 +75,7 @@ class Protocol extends PureComponent {
   }
 
   createStage = (type, insertAtIndex) =>
-    this.setState(
-      { new: { type, insertAtIndex } },
-      () => this.goto('stage'),
-    );
+    this.goto(`stage?type=${type}&insertAtIndex=${insertAtIndex}`);
 
   editStage = stageId =>
     this.goto(`stage/${stageId}`)
@@ -136,7 +133,6 @@ class Protocol extends PureComponent {
           location={location}
           component={EditStage}
           onComplete={this.onRouteComplete}
-          {...this.state.new}
         />
 
         <ShowRoute

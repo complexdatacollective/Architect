@@ -78,11 +78,9 @@ ShallowWrapper {
 </ControlBar>,
         <ShowRoute
           component={[Function]}
-          insertAtIndex={null}
           location={Object {}}
           onComplete={[Function]}
           path="/edit/:protocol/stage/:id?"
-          type={null}
 />,
         <ShowRoute
           component={[Function]}
@@ -94,7 +92,7 @@ ShallowWrapper {
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
-          path="/edit/:protocol/form/:form"
+          path="/edit/:protocol/form/:form?"
 />,
         <ShowRoute
           component={[Function]}
@@ -190,11 +188,9 @@ ShallowWrapper {
         "nodeType": "function",
         "props": Object {
           "component": [Function],
-          "insertAtIndex": null,
           "location": Object {},
           "onComplete": [Function],
           "path": "/edit/:protocol/stage/:id?",
-          "type": null,
         },
         "ref": null,
         "rendered": null,
@@ -222,7 +218,7 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
-          "path": "/edit/:protocol/form/:form",
+          "path": "/edit/:protocol/form/:form?",
         },
         "ref": null,
         "rendered": null,
@@ -305,11 +301,9 @@ ShallowWrapper {
 </ControlBar>,
           <ShowRoute
             component={[Function]}
-            insertAtIndex={null}
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/stage/:id?"
-            type={null}
 />,
           <ShowRoute
             component={[Function]}
@@ -321,7 +315,7 @@ ShallowWrapper {
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
-            path="/edit/:protocol/form/:form"
+            path="/edit/:protocol/form/:form?"
 />,
           <ShowRoute
             component={[Function]}
@@ -417,11 +411,9 @@ ShallowWrapper {
           "nodeType": "function",
           "props": Object {
             "component": [Function],
-            "insertAtIndex": null,
             "location": Object {},
             "onComplete": [Function],
             "path": "/edit/:protocol/stage/:id?",
-            "type": null,
           },
           "ref": null,
           "rendered": null,
@@ -449,7 +441,7 @@ ShallowWrapper {
             "component": [Function],
             "location": Object {},
             "onComplete": [Function],
-            "path": "/edit/:protocol/form/:form",
+            "path": "/edit/:protocol/form/:form?",
           },
           "ref": null,
           "rendered": null,

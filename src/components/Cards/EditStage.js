@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { parse as parseQueryString } from 'query-string';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -7,11 +8,11 @@ import {
   isDirty as isFormDirty,
   isInvalid as isFormInvalid,
 } from 'redux-form';
-import { has } from 'lodash';
-import { makeGetStage } from '../../selectors/protocol';
+import { has, get, find } from 'lodash';
 import { Button } from '../../ui/components';
 import Card from './ProtocolCard';
 import StageEditor from '../../components/StageEditor';
+import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 
 class EditStage extends PureComponent {
@@ -73,20 +74,19 @@ class EditStage extends PureComponent {
   }
 }
 
-const makeMapStateToProps = () => {
-  const getStage = makeGetStage();
+const mapStateToProps = (state, props) => {
+  const stageId = get(props, 'match.params.id');
+  const protocol = getProtocol(state);
+  const query = parseQueryString(props.location.search);
+  const stage = find(protocol.stages, ['id', stageId]) || { type: query.type };
 
-  return (state, props) => {
-    const stage = getStage(state, props) || { type: props.type };
-
-    return ({
-      stage,
-      dirty: isFormDirty('edit-stage')(state),
-      invalid: isFormInvalid('edit-stage')(state),
-    });
-  };
+  return ({
+    stage,
+    insertAtIndex: get(query, 'insertAtIndex'),
+    dirty: isFormDirty('edit-stage')(state),
+    invalid: isFormInvalid('edit-stage')(state),
+  });
 };
-
 const mapDispatchToProps = dispatch => ({
   continue: () => dispatch(submitForm('edit-stage')),
   updateStage: bindActionCreators(stageActions.updateStage, dispatch),
@@ -95,4 +95,4 @@ const mapDispatchToProps = dispatch => ({
 
 export { EditStage };
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(EditStage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditStage);
