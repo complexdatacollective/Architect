@@ -27,11 +27,8 @@ const VALIDATION_TYPES = {
   ],
   ordinal: [
     'required',
-    'minSelected',
-    'maxSelected',
-
   ],
-  catagorical: [
+  categorical: [
     'required',
     'minSelected',
     'maxSelected',
