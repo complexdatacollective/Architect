@@ -48,6 +48,7 @@ Type.propTypes = {
  */
 class VariableRegistry extends Component {
   handleDelete = (category, type) => {
+    // eslint-disable-next-line no-alert
     if (confirm(`Are you sure you want to delete "${type}:${category}"?`)) {
       this.props.deleteType(category, type);
     }

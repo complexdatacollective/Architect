@@ -81,6 +81,7 @@ const Item = compose(
   ),
   withHandlers(({ fields, index }) => ({
     handleDelete: () => {
+      // eslint-disable-next-line no-alert
       if (confirm('Are you sure you want to remove this item?')) {
         fields.remove(index);
       }

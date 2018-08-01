@@ -33,7 +33,6 @@ class Protocol extends PureComponent {
     hasChanges: PropTypes.bool,
     match: PropTypes.object,
     location: PropTypes.object.isRequired,
-    protocol: PropTypes.string.isRequired,
     saveProtocol: PropTypes.func.isRequired,
   };
 
@@ -54,24 +53,24 @@ class Protocol extends PureComponent {
     };
   }
 
-  onRouteComplete = (goto) => {
-    const protocol = get(this.props.match, 'params.protocol');
+  get protocolPath() {
+    return get(this.props.match, 'params.protocol');
+  }
 
-    if (protocol) {
+  handleRouteComplete = (goto) => {
+    if (this.protocolPath) {
       switch (goto) {
         case 'protocol':
-          history.push(`/edit/${protocol}/`);
+          history.push(`/edit/${this.protocolPath}/`);
           break;
         default:
           history.goBack();
-          break;
       }
     }
   }
 
   goto = (location = '') => {
-    const protocol = get(this.props.match, 'params.protocol');
-    history.push(`/edit/${protocol}/${location}`);
+    history.push(`/edit/${this.protocolPath}/${location}`);
   }
 
   createStage = (type, insertAtIndex) =>
@@ -132,35 +131,35 @@ class Protocol extends PureComponent {
           path={'/edit/:protocol/stage/:id?'}
           location={location}
           component={EditStage}
-          onComplete={this.onRouteComplete}
+          onComplete={this.handleRouteComplete}
         />
 
         <ShowRoute
           path={'/edit/:protocol/form(s?)'}
           location={location}
           component={ViewForms}
-          onComplete={() => this.onRouteComplete('protocol')}
+          onComplete={() => this.handleRouteComplete('protocol')}
         />
 
         <ShowRoute
           path={'/edit/:protocol/form/:form?'}
           location={location}
           component={EditForm}
-          onComplete={this.onRouteComplete}
+          onComplete={this.handleRouteComplete}
         />
 
         <ShowRoute
           path="/edit/:protocol/registry"
           location={location}
           component={VariableRegistry}
-          onComplete={() => this.onRouteComplete('protocol')}
+          onComplete={() => this.handleRouteComplete('protocol')}
         />
 
         <ShowRoute
           path="/edit/:protocol/registry/:category/:type?"
           location={location}
           component={EditType}
-          onComplete={this.onRouteComplete}
+          onComplete={this.handleRouteComplete}
         />
       </div>
     );

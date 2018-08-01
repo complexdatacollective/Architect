@@ -31,7 +31,6 @@ class Start extends PureComponent {
   }
 
   render() {
-    console.log('protocols', this.props.protocols);
     return (
       <div className="start">
         <div className="start__split">

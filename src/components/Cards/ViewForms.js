@@ -15,6 +15,7 @@ import { actionCreators as formActions } from '../../ducks/modules/protocol/form
 
 class ViewForms extends Component {
   handleDelete = (form) => {
+    // eslint-disable-next-line no-alert
     if (confirm(`Are you sure you want to delete "${form}"?`)) {
       this.props.deleteForm(form);
     }
