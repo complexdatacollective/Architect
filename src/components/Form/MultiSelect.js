@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { compose, defaultProps, withProps } from 'recompose';
+import { compose, defaultProps, withProps, withHandlers } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { FieldArray, formValueSelector } from 'redux-form';
 import { Icon } from '../../ui/components';
@@ -37,9 +37,23 @@ const Item = compose(
       allValues: formValueSelector(form)(state, fieldsName),
     }),
   ),
+  withHandlers(({ fields, sortIndex: index }) => ({
+    handleDelete: () => {
+      if (confirm('Are you sure you want to remove this item?')) {
+        fields.remove(index);
+      }
+    },
+  })),
   SortableElement,
 )(
-  ({ fields, field, properties, options, rowValues, allValues, sortIndex: index }) => (
+  ({
+    field,
+    properties,
+    options,
+    rowValues,
+    allValues,
+    handleDelete,
+  }) => (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-control">
         <ItemHandle />
@@ -62,7 +76,7 @@ const Item = compose(
         )}
       </div>
       <div className="form-fields-multi-select__rule-control">
-        <ItemDelete onClick={() => fields.remove(index)} />
+        <ItemDelete onClick={handleDelete} />
       </div>
     </div>
   ),

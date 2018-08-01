@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { get, map } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { Icon } from '../../ui/components';
@@ -79,8 +79,15 @@ const Item = compose(
       allValues: fields.getAll(),
     }),
   ),
+  withHandlers(({ fields, index }) => ({
+    handleDelete: () => {
+      if (confirm('Are you sure you want to remove this item?')) {
+        fields.remove(index);
+      }
+    },
+  })),
 )(
-  ({ fields, field, variableType, rowValues, allValues, index }) => (
+  ({ field, variableType, rowValues, allValues, handleDelete }) => (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
@@ -111,7 +118,7 @@ const Item = compose(
         </div>
       </div>
       <div className="form-fields-multi-select__rule-control">
-        <ItemDelete onClick={() => fields.remove(index)} />
+        <ItemDelete onClick={handleDelete} />
       </div>
     </div>
   ),
