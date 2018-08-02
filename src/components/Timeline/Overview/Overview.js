@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { map, get, keys } from 'lodash';
+import { map, get } from 'lodash';
 import { compose } from 'recompose';
 import { SeamlessText } from '../../Form/Fields';
 import { Tweened } from '../../../behaviours/Tweened';
