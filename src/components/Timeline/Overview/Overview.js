@@ -12,15 +12,6 @@ import { Node, Icon } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import PanelGroup from './PanelGroup';
 
-// eslint-disable-next-line
-const renderForm = ({ protocolPath, form }) => (
-  <li key={form}>
-    <Link to={`${protocolPath}/form/${form}`}>
-      {form}
-    </Link>
-  </li>
-);
-
 class Overview extends Component {
   get renderNodeTypes() {
     const nodeTypes = get(this.props.variableRegistry, 'node', {});
@@ -72,7 +63,16 @@ class Overview extends Component {
 
     return (
       <ul>
-        {map(forms, form => renderForm({ form, protocolPath: this.protocolPath }))}
+        {map(
+          forms,
+          form => (
+            <li key={form}>
+              <Link to={this.pathTo(`form/${form}`)}>
+                {form}
+              </Link>
+            </li>
+          ),
+        )}
       </ul>
     );
   }

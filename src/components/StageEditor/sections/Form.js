@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { toPairs, map, get, pickBy } from 'lodash';
 import Guidance from '../../Guidance';
+import EditForm from '../../Cards/EditForm';
 import { Radio } from '../../../ui/components/Fields';
 import Select from '../../Form/Fields/Select';
-import history from '../../../history';
 
 const DEFAULT_FORM = Symbol('DEFAULT_FORM');
 const CUSTOM_FORM = Symbol('CUSTOM_FORM');
@@ -23,6 +23,8 @@ class Form extends Component {
     forms: PropTypes.arrayOf(PropTypes.string),
     selectedForm: PropTypes.string,
     disabled: PropTypes.bool,
+    nodeType: PropTypes.string.isRequired,
+    change: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
   };
 
@@ -37,6 +39,7 @@ class Form extends Component {
 
     this.state = {
       formType: props.selectedForm ? CUSTOM_FORM : DEFAULT_FORM,
+      editForm: false,
     };
   }
 
@@ -46,14 +49,29 @@ class Form extends Component {
     });
   }
 
-  onSelectFormCategory = (formType) => {
+  handleSelectFormCategory = (formType) => {
     if (formType === DEFAULT_FORM || this.props.selectedForm === '') {
       this.props.reset();
     }
   };
 
-  onClickCreateNewForm = () => {
-    history.push('/protocols/form');
+  handleClickCreateNewForm = () => {
+    this.showFormEditor();
+  };
+
+  handleEditFormComplete = (form) => {
+    if (form.type === this.props.nodeType) {
+      this.props.change(form.title);
+    }
+    this.closeFormEditor();
+  };
+
+  showFormEditor = () => {
+    this.setState({ editForm: true });
+  };
+
+  closeFormEditor = () => {
+    this.setState({ editForm: false });
   };
 
   render() {
@@ -79,7 +97,7 @@ class Form extends Component {
                 className="stage-editor-section-form__radio"
                 input={
                   {
-                    onChange: () => this.onSelectFormCategory(DEFAULT_FORM),
+                    onChange: () => this.handleSelectFormCategory(DEFAULT_FORM),
                     checked: this.state.formType === DEFAULT_FORM,
                   }
                 }
@@ -112,7 +130,7 @@ class Form extends Component {
                 </Field>
               </div>
             </div>
-            <div onClick={this.onClickCreateNewForm} className={categoryClasses()}>
+            <div onClick={this.handleClickCreateNewForm} className={categoryClasses()}>
               <Radio
                 label="Create new form..."
                 className="stage-editor-section-form__radio"
@@ -123,6 +141,12 @@ class Form extends Component {
               />
             </div>
           </div>
+
+          <EditForm
+            show={this.state.editForm}
+            onComplete={this.handleEditFormComplete}
+            onCancel={this.closeFormEditor}
+          />
         </div>
       </Guidance>
     );
@@ -147,6 +171,7 @@ const mapStateToProps = (state, props) => {
   const selectedForm = get(formValues, 'form', null);
 
   return {
+    nodeType,
     forms: getNodeForms(state, nodeType),
     disabled: !nodeType,
     selectedForm,
@@ -155,6 +180,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   reset: () => dispatch(changeField(form.name, 'form', null)),
+  change: value => dispatch(changeField(form.name, 'form', value)),
 });
 
 export { Form };

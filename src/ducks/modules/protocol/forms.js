@@ -18,7 +18,7 @@ const formNameFromTitle = title => title.replace(/\W/g, '');
 function createForm(form) {
   return {
     type: CREATE_FORM,
-    form,
+    form: { ...form, entity: 'node' },
   };
 }
 
@@ -26,7 +26,7 @@ function updateForm(formName, form) {
   return {
     type: UPDATE_FORM,
     formName,
-    form,
+    form: { ...form, entity: 'node' },
   };
 }
 

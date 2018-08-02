@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Transition } from 'react-transition-group';
@@ -43,6 +44,14 @@ class Card extends PureComponent {
     exitDelay: 0,
   }
 
+  constructor(props) {
+    super(props);
+
+    this.portal = document.createElement('div');
+    const body = document.getElementsByTagName('body')[0];
+    body.appendChild(this.portal);
+  }
+
   get anyButtons() { return this.props.buttons.length > 0; }
 
   render() {
@@ -55,10 +64,11 @@ class Card extends PureComponent {
       exitDuration,
       exitDelay,
     } = this.props;
+
     const classes = cx('card', `card--${this.props.type}`);
     const timeout = enterDuration + enterDelay + exitDuration + exitDelay;
 
-    return (
+    return ReactDOM.createPortal(
       <Transition
         timeout={timeout}
         unmountOnExit
@@ -105,7 +115,8 @@ class Card extends PureComponent {
             </ControlBar>
           </div>
         )}
-      </Transition>
+      </Transition>,
+      this.portal,
     );
   }
 }
