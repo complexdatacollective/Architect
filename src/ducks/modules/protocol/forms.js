@@ -13,11 +13,10 @@ const formTemplate = {
   optionToAddAnother: false,
 };
 
-const formNameFromTitle = title => title.replace(/\W/g, '');
-
-function createForm(form) {
+function createForm(formName, form) {
   return {
     type: CREATE_FORM,
+    formName,
     form: { ...form, entity: 'node' },
   };
 }
@@ -44,7 +43,7 @@ export default function reducer(state = initialState, action = {}) {
 
       return {
         ...state,
-        [formNameFromTitle(form.title)]: form,
+        [action.formName]: form,
       };
     }
     case UPDATE_FORM:

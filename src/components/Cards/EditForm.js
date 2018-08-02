@@ -10,6 +10,8 @@ import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
+const formNameFromTitle = title => title.replace(/\W/g, '');
+
 class EditForm extends PureComponent {
   static propTypes = {
     formName: PropTypes.string,
@@ -35,10 +37,10 @@ class EditForm extends PureComponent {
     if (this.props.formName) {
       this.props.updateForm(this.props.formName, form);
     } else {
-      this.props.createForm(form);
+      this.props.createForm(formNameFromTitle(form.title), form);
     }
 
-    this.props.onComplete(form);
+    this.props.onComplete(this.props.formName || formNameFromTitle(form.title), form);
   }
 
   submitForm = () => {

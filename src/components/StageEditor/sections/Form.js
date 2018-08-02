@@ -59,9 +59,9 @@ class Form extends Component {
     this.showFormEditor();
   };
 
-  handleEditFormComplete = (form) => {
+  handleEditFormComplete = (formName, form) => {
     if (form.type === this.props.nodeType) {
-      this.props.change(form.title);
+      this.props.change(formName);
     }
     this.closeFormEditor();
   };
