@@ -55,7 +55,7 @@ class Overview extends Component {
   }
 
   get renderForms() {
-    const forms = keys(this.props.forms);
+    const forms = this.props.forms;
 
     if (forms.length === 0) {
       return 'No forms defined';
@@ -65,10 +65,10 @@ class Overview extends Component {
       <ul>
         {map(
           forms,
-          form => (
-            <li key={form}>
-              <Link to={this.pathTo(`form/${form}`)}>
-                {form}
+          (form, key) => (
+            <li key={key}>
+              <Link to={this.pathTo(`form/${key}`)}>
+                {form.title}
               </Link>
             </li>
           ),
