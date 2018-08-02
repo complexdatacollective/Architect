@@ -1,3 +1,5 @@
+import { omit } from 'lodash';
+
 const CREATE_FORM = 'CREATE_FORM';
 const UPDATE_FORM = 'UPDATE_FORM';
 const DELETE_FORM = 'DELETE_FORM';
@@ -11,12 +13,11 @@ const formTemplate = {
   optionToAddAnother: false,
 };
 
-const formNameFromTitle = title => title.replace(/\W/g, '');
-
-function createForm(form) {
+function createForm(formName, form) {
   return {
     type: CREATE_FORM,
-    form,
+    formName,
+    form: { ...form, entity: 'node' },
   };
 }
 
@@ -24,13 +25,14 @@ function updateForm(formName, form) {
   return {
     type: UPDATE_FORM,
     formName,
-    form,
+    form: { ...form, entity: 'node' },
   };
 }
 
-function deleteForm() {
+function deleteForm(formName) {
   return {
     type: DELETE_FORM,
+    formName,
   };
 }
 
@@ -41,7 +43,7 @@ export default function reducer(state = initialState, action = {}) {
 
       return {
         ...state,
-        [formNameFromTitle(form.title)]: form,
+        [action.formName]: form,
       };
     }
     case UPDATE_FORM:
@@ -52,6 +54,8 @@ export default function reducer(state = initialState, action = {}) {
           ...action.form,
         },
       };
+    case DELETE_FORM:
+      return omit(state, [action.formName]);
     default:
       return state;
   }
@@ -64,6 +68,9 @@ const actionCreators = {
 };
 
 const actionTypes = {
+  CREATE_FORM,
+  UPDATE_FORM,
+  DELETE_FORM,
 };
 
 export {

@@ -1,18 +1,17 @@
 import { connect } from 'react-redux';
 import {
-  reduxForm,
   formValueSelector,
   change,
   isDirty,
   isValid,
 } from 'redux-form';
-import { compose, withState, withHandlers } from 'recompose';
-import { keys } from 'lodash';
-import flatten from '../../utils/flatten';
+import { compose, withProps } from 'recompose';
+import { map, get } from 'lodash';
 import { getVariablesForNodeType, getNodeTypes } from '../../selectors/variableRegistry';
+import Editor from '../Editor';
 import FormEditor from './FormEditor';
 
-const formName = 'edit-form';
+const formName = 'EDIT_FORM';
 const getFormValue = formValueSelector(formName);
 const getIsDirty = isDirty(formName);
 const getIsValid = isValid(formName);
@@ -22,7 +21,14 @@ const mapStateToProps = (state) => {
 
   return {
     nodeType: formNodeType,
-    nodeTypes: keys(getNodeTypes(state)),
+    nodeTypes: map(
+      getNodeTypes(state),
+      (nodeOptions, nodeType) => ({
+        label: nodeType,
+        value: nodeType,
+        color: get(nodeOptions, 'color', ''),
+      }),
+    ),
     variables: getVariablesForNodeType(state, formNodeType),
     dirty: getIsDirty(state),
     valid: getIsValid(state),
@@ -36,20 +42,9 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+export { formName };
+
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withState('codeView', 'updateCodeView', false),
-  withHandlers({
-    toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-  }),
-  reduxForm({
-    form: formName,
-    touchOnBlur: false,
-    touchOnChange: true,
-    enableReinitialize: true,
-    onSubmitFail: (errors) => {
-      // eslint-disable-next-line no-console
-      console.error('FORM ERRORS', flatten(errors));
-    },
-  }),
-)(FormEditor);
+  withProps(() => ({ form: formName, component: FormEditor })),
+)(Editor);

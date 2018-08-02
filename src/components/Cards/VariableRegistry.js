@@ -13,57 +13,78 @@ import Card from '../Card';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
+const Type = ({ label, link, children, handleDelete }) => (
+  <div className="list__item">
+    <div className="list__attribute list__attribute--icon">
+      <Link to={link}>
+        {children}
+      </Link>
+    </div>
+    <div className="list__attribute">
+      <h3>
+        <Link to={link}>
+          {label}
+        </Link>
+      </h3>
+    </div>
+    <div className="list__attribute list__attribute--options">
+      <Button size="small" color="neon-coral" onClick={handleDelete}>
+        Delete
+      </Button>
+    </div>
+  </div>
+);
 
+Type.propTypes = {
+  label: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+/**
+ * This component acts as an index for types. i.e. Nodes and Edges,
+ * and links to the EditType.
+ */
 class VariableRegistry extends Component {
   handleDelete = (category, type) => {
-    this.props.deleteType(category, type);
+    // eslint-disable-next-line no-alert
+    if (confirm(`Are you sure you want to delete "${type}:${category}"?`)) {
+      this.props.deleteType(category, type);
+    }
   };
 
-  renderNode = (node, key) => (
-    <Wipe key={key}>
-      <div className="list__item" key={key}>
-        <div className="list__attribute list__attribute--icon">
-          <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
-            <Node label="" color={get(node, 'color', '')} />
-          </Link>
-        </div>
-        <div className="list__attribute">
-          <h3>
-            <Link to={`${this.props.protocolPath}/registry/node/${key}`}>
-              {key}
-            </Link>
-          </h3>
-        </div>
-        <div className="list__attribute list__attribute--options">
-          <Button size="small" color="neon-coral" onClick={() => this.handleDelete('node', key)}>
-            Delete
-          </Button>
-        </div>
-      </div>
-    </Wipe>
-  );
+  renderNode = (node, key) => {
+    const nodeColor = get(node, 'color', '');
 
-  renderEdge = (edge, key) => (
-    <Wipe key={key}>
-      <div className="list__item" key={key}>
-        <div className="list__attribute list__attribute--icon">
-          <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
-            <Icon name="links" color={get(edge, 'color', '').replace('color-', '')} />
-          </Link>
-        </div>
-        <div className="list__attribute">
-          <h3>
-            <Link to={`${this.props.protocolPath}/registry/edge/${key}`}>
-              {key}
-            </Link>
-          </h3>
-        </div>
-        <div className="list__attribute list__attribute--options">
-          <Button size="small" color="neon-coral" onClick={() => this.handleDelete('edge', key)}>Delete</Button>
-        </div>
-      </div>
-    </Wipe>
-  );
+    return (
+      <Wipe key={key}>
+        <Type
+          link={`${this.props.protocolPath}/registry/node/${key}`}
+          label={key}
+          handleDelete={() => this.handleDelete('node', key)}
+        >
+          <Node label="" color={nodeColor} />
+        </Type>
+      </Wipe>
+    );
+  }
+
+  renderEdge = (edge, key) => {
+    const edgeColor = get(edge, 'color', '');
+
+    return (
+      <Wipe key={key}>
+        <Type
+          link={`${this.props.protocolPath}/registry/edge/${key}`}
+          label={key}
+          handleDelete={() => this.handleDelete('edge', key)}
+        >
+          <Icon name="links" color={edgeColor} />
+        </Type>
+      </Wipe>
+    );
+  }
 
   renderEdges() {
     const edges = get(this.props.variableRegistry, 'edge', {});
@@ -109,8 +130,6 @@ class VariableRegistry extends Component {
       protocolPath,
     } = this.props;
 
-    if (!protocolPath) { return null; }
-
     return (
       <Card
         show={show}
@@ -126,14 +145,16 @@ class VariableRegistry extends Component {
                 <div className="editor__subsection">
                   {this.renderNodes()}
                 </div>
-                <div className="editor__subsection">
-                  <Link
-                    to={`${protocolPath}/registry/node/`}
-                    className="button button--small"
-                  >
-                    Create new Node type
-                  </Link>
-                </div>
+                { protocolPath &&
+                  <div className="editor__subsection">
+                    <Link
+                      to={`${protocolPath}/registry/node/`}
+                      className="button button--small"
+                    >
+                      Create new Node type
+                    </Link>
+                  </div>
+                }
               </div>
             </Guidance>
 
@@ -144,12 +165,14 @@ class VariableRegistry extends Component {
                   {this.renderEdges()}
                 </div>
                 <div className="editor__subsection">
-                  <Link
-                    to={`${protocolPath}/registry/edge/`}
-                    className="button button--small"
-                  >
-                    Create new Edge type
-                  </Link>
+                  { protocolPath &&
+                    <Link
+                      to={`${protocolPath}/registry/edge/`}
+                      className="button button--small"
+                    >
+                      Create new Edge type
+                    </Link>
+                  }
                 </div>
               </div>
             </Guidance>

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose, withHandlers } from 'recompose';
 import { toNumber } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { Icon } from '../../ui/components';
@@ -19,22 +20,33 @@ const AddItem = props => (
   </div>
 );
 
-const Item = ({ fields, field, index }) => (
-  <div className="form-fields-multi-select__rule">
-    <div className="form-fields-multi-select__rule-options">
-      <div className="form-fields-multi-select__rule-option">
-        <div className="form-fields-multi-select__rule-option-label">Label</div>
-        <Field component="input" type="text" name={`${field}.label`} placeholder="label" />
+const Item = compose(
+  withHandlers(({ fields, index }) => ({
+    handleDelete: () => {
+      // eslint-disable-next-line no-alert
+      if (confirm('Are you sure you want to remove this item?')) {
+        fields.remove(index);
+      }
+    },
+  })),
+)(
+  ({ field, handleDelete }) => (
+    <div className="form-fields-multi-select__rule">
+      <div className="form-fields-multi-select__rule-options">
+        <div className="form-fields-multi-select__rule-option">
+          <div className="form-fields-multi-select__rule-option-label">Label</div>
+          <Field component="input" type="text" name={`${field}.label`} placeholder="label" />
+        </div>
+        <div className="form-fields-multi-select__rule-option">
+          <div className="form-fields-multi-select__rule-option-label">Value</div>
+          <Field component="input" type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
+        </div>
       </div>
-      <div className="form-fields-multi-select__rule-option">
-        <div className="form-fields-multi-select__rule-option-label">Value</div>
-        <Field component="input" type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
+      <div className="form-fields-multi-select__rule-control">
+        <ItemDelete onClick={handleDelete} />
       </div>
     </div>
-    <div className="form-fields-multi-select__rule-control">
-      <ItemDelete onClick={() => fields.remove(index)} />
-    </div>
-  </div>
+  ),
 );
 
 Item.propTypes = {

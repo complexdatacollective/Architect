@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { get } from 'lodash';
 import Tweened from '../../../behaviours/Tweened';
 import protocolCover from '../../../images/protocol-cover.png';
 
@@ -15,7 +16,7 @@ const Stack = Tweened(() => (
 const getPath = ({ advanced, workingPath, archivePath }) =>
   encodeURIComponent((advanced && workingPath) || archivePath);
 
-const getFilename = path => path.split('\\').pop().split('/').pop();
+const getFilename = (path = '') => get(path.match(/([^/\\]+)$/), 1, '');
 
 const ProtocolStack = ({ protocol: { id, archivePath, workingPath, advanced } }) => (
   <Link

@@ -5,12 +5,14 @@ import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
 import { get } from 'lodash';
 import { Button } from '../../ui/components';
-import FormEditor from '../FormEditor';
+import FormEditor, { formName as reduxFormName } from '../FormEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
-class Form extends PureComponent {
+const formNameFromTitle = title => title.replace(/\W/g, '');
+
+class EditForm extends PureComponent {
   static propTypes = {
     formName: PropTypes.string,
     form: PropTypes.object,
@@ -35,14 +37,14 @@ class Form extends PureComponent {
     if (this.props.formName) {
       this.props.updateForm(this.props.formName, form);
     } else {
-      this.props.createForm(form);
+      this.props.createForm(formNameFromTitle(form.title), form);
     }
 
-    this.props.onComplete();
+    this.props.onComplete(this.props.formName || formNameFromTitle(form.title), form);
   }
 
   submitForm = () => {
-    this.props.submitForm('edit-form');
+    this.props.submitForm(reduxFormName);
   }
 
   renderButtons() {
@@ -83,8 +85,8 @@ class Form extends PureComponent {
   }
 }
 
-const editFormIsDirty = isDirty('edit-form');
-const editFormIsInvalid = isInvalid('edit-form');
+const editFormIsDirty = isDirty(reduxFormName);
+const editFormIsInvalid = isInvalid(reduxFormName);
 
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
@@ -105,6 +107,6 @@ const mapDispatchToProps = dispatch => ({
   createForm: bindActionCreators(formActions.createForm, dispatch),
 });
 
-export { Form };
+export { EditForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

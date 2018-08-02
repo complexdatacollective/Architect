@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { parse as parseQueryString } from 'query-string';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -7,22 +8,22 @@ import {
   isDirty as isFormDirty,
   isInvalid as isFormInvalid,
 } from 'redux-form';
-import { pick, has } from 'lodash';
-import { makeGetStage } from '../../selectors/protocol';
+import { has, get, find } from 'lodash';
 import { Button } from '../../ui/components';
 import Card from './ProtocolCard';
 import StageEditor from '../../components/StageEditor';
+import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 
 class EditStage extends PureComponent {
   static propTypes = {
     dirty: PropTypes.bool.isRequired,
     invalid: PropTypes.bool.isRequired,
+    show: PropTypes.bool.isRequired,
     continue: PropTypes.func.isRequired,
     onComplete: PropTypes.func.isRequired,
     stage: PropTypes.object.isRequired,
     stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    type: PropTypes.string,
     insertAtIndex: PropTypes.number,
     updateStage: PropTypes.func.isRequired,
     createStage: PropTypes.func.isRequired,
@@ -31,7 +32,6 @@ class EditStage extends PureComponent {
   static defaultProps = {
     stageId: null,
     insertAtIndex: null,
-    type: null,
   };
 
   onUpdate = (stage) => {
@@ -57,12 +57,13 @@ class EditStage extends PureComponent {
   }
 
   render() {
-    const { stage } = this.props;
+    const { stage, show } = this.props;
 
     return (
       <Card
         buttons={this.renderButtons()}
-        {...pick(this.props, ['show', 'className', 'onCancel'])}
+        show={show}
+        onCancel={this.props.onComplete}
       >
         <StageEditor
           stage={stage}
@@ -73,20 +74,20 @@ class EditStage extends PureComponent {
   }
 }
 
-const makeMapStateToProps = () => {
-  const getStage = makeGetStage();
+const mapStateToProps = (state, props) => {
+  const stageId = get(props, 'match.params.id');
+  const protocol = getProtocol(state);
+  const query = parseQueryString(props.location.search);
+  const stage = find(protocol.stages, ['id', stageId]) || { type: query.type };
 
-  return (state, props) => {
-    const stage = getStage(state, props) || { type: props.type };
-
-    return ({
-      stage,
-      dirty: isFormDirty('edit-stage')(state),
-      invalid: isFormInvalid('edit-stage')(state),
-    });
-  };
+  return ({
+    stage,
+    stageId,
+    insertAtIndex: get(query, 'insertAtIndex'),
+    dirty: isFormDirty('edit-stage')(state),
+    invalid: isFormInvalid('edit-stage')(state),
+  });
 };
-
 const mapDispatchToProps = dispatch => ({
   continue: () => dispatch(submitForm('edit-stage')),
   updateStage: bindActionCreators(stageActions.updateStage, dispatch),
@@ -95,4 +96,4 @@ const mapDispatchToProps = dispatch => ({
 
 export { EditStage };
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(EditStage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditStage);

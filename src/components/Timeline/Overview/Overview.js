@@ -13,11 +13,6 @@ import { actionCreators as protocolActions } from '../../../ducks/modules/protoc
 import PanelGroup from './PanelGroup';
 
 class Overview extends Component {
-  get protocolPath() {
-    const protocol = get(this.props.match, 'params.protocol', '');
-    return `/edit/${protocol}`;
-  }
-
   get renderNodeTypes() {
     const nodeTypes = get(this.props.variableRegistry, 'node', {});
 
@@ -28,7 +23,7 @@ class Overview extends Component {
     return map(
       nodeTypes,
       (node, key) => (
-        <Link to={`${this.protocolPath}/registry/`} key={key}>
+        <Link to={this.pathTo(`registry/node/${key}`)} key={key}>
           <Node label={key} color={get(node, 'color', '')} />
         </Link>
       ),
@@ -44,12 +39,48 @@ class Overview extends Component {
 
     return map(
       edgeTypes,
-      (edge, index) => (
-        <Link to={`${this.protocolPath}/registry/`} key={index}>
-          <Icon name="links" label={edge} color={get(edge, 'color', '')} />
+      (edge, key) => (
+        <Link
+          to={this.pathTo(`registry/edge/${key}`)}
+          key={key}
+          className="timeline-overview__edge"
+          style={{
+            backgroundColor: `var(--${get(edge, 'color', '')})`,
+          }}
+        >
+          <Icon name="links" />
         </Link>
       ),
     );
+  }
+
+  get renderForms() {
+    const forms = this.props.forms;
+
+    if (forms.length === 0) {
+      return 'No forms defined';
+    }
+
+    return (
+      <ul>
+        {map(
+          forms,
+          (form, key) => (
+            <li key={key}>
+              <Link to={this.pathTo(`form/${key}`)}>
+                {form.title}
+              </Link>
+            </li>
+          ),
+        )}
+      </ul>
+    );
+  }
+
+  pathTo(location) {
+    const protocol = get(this.props.match, 'params.protocol');
+    if (!protocol) { return ''; }
+    return `/edit/${protocol}/${location}`;
   }
 
   render() {
@@ -75,13 +106,27 @@ class Overview extends Component {
                 <PanelGroup title="Variable registry">
                   <br />
                   <h4>Node types</h4>
-                  { this.renderNodeTypes }
+                  <div>
+                    { this.renderNodeTypes }
+                  </div>
                   <br />
                   <h4>Edge types</h4>
-                  { this.renderEdgeTypes }
+                  <div>
+                    { this.renderEdgeTypes }
+                  </div>
+                  <div>
+                    <Link className="button button--small" to={this.pathTo('registry')}>
+                      Manage registry
+                    </Link>
+                  </div>
                 </PanelGroup>
                 <PanelGroup title="Forms">
-                  <p>Forms not displayed yet.</p>
+                  { this.renderForms }
+                  <div>
+                    <Link className="button button--small" to={this.pathTo('forms')}>
+                      Manage forms
+                    </Link>
+                  </div>
                 </PanelGroup>
                 <PanelGroup title="Global Options">
                   <p>Version: {version}</p>

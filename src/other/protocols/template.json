@@ -5,6 +5,7 @@
     "node": {
       "person": {
         "label": "Person",
+        "color": "node-color-seq-1",
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
         "variables": {
@@ -58,12 +59,15 @@
     },
     "edge": {
       "knows": {
+        "color": "edge-color-seq-1",
         "label": "Knows"
       },
       "likes": {
+        "color": "edge-color-seq-2",
         "label": "Likes"
       },
       "dislikes": {
+        "color": "edge-color-seq-3",
         "label": "Dislikes"
       }
     }

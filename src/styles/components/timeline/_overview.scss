@@ -19,6 +19,21 @@
     flex: 1 1 100%;
   }
 
+  &__edge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: unit(7);
+    width: unit(7);
+    height: unit(7);
+    margin: 0 0 unit(2) unit(2);
+    background-color: var(--architect-panel-shadow);
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
   &__name {
     height: 9vh;
     display: flex;
@@ -126,6 +141,11 @@
       text-decoration: none;
       margin: 0;
     }
+  }
+
+  .button {
+    margin: unit(2) 0 0;
+    display: inline-block;
   }
 
   &.tween-protocol {

@@ -28,6 +28,7 @@ const reducer = (state = intitalState, action) => {
           ...state[action.name],
           [action.element]: {
             node: action.node,
+            bounds: action.bounds,
           },
         },
       };

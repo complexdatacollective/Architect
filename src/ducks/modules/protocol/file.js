@@ -6,6 +6,8 @@ import { getProtocol } from '../../../selectors/protocol';
 
 const OPEN_PROTOCOL = Symbol('PROTOCOL/OPEN');
 const PROTOCOL_LOADED = Symbol('PROTOCOL/LOADED');
+const LOAD_PROTOCOL_ERROR = Symbol('PROTOCOL/LOAD_ERROR');
+const OPEN_PROTOCOL_ERROR = Symbol('PROTOCOL/OPEN_ERROR');
 const SAVE_COMPLETE = Symbol('PROTOCOL/SAVE_COMPLETE');
 
 const isNetcanvasFile = fileName =>
@@ -99,6 +101,8 @@ const actionTypes = {
   SAVE_COMPLETE,
   OPEN_PROTOCOL,
   PROTOCOL_LOADED,
+  LOAD_PROTOCOL_ERROR,
+  OPEN_PROTOCOL_ERROR,
 };
 
 export {

@@ -71,6 +71,7 @@ $component-name: timeline-stage;
   }
 
   &__screen {
+    display: block;
     width: $preview-width;
     padding-bottom: $preview-width * $preview-ratio;
     position: relative;

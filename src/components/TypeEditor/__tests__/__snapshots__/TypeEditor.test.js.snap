@@ -79,35 +79,43 @@ ShallowWrapper {
                                         Array [
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-neon-coral",
+                                                    "name": "edge-color-seq-1",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-sea-serpent",
+                                                    "name": "edge-color-seq-2",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-purple-pizazz",
+                                                    "name": "edge-color-seq-3",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-neon-carrot",
+                                                    "name": "edge-color-seq-4",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-kiwi",
+                                                    "name": "edge-color-seq-5",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-cerulean-blue",
+                                                    "name": "edge-color-seq-6",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-paradise-pink",
+                                                    "name": "edge-color-seq-7",
                                                   },
                                                   Object {
-                                                    "color": "#117733",
-                                                    "name": "color-mustard",
+                                                    "color": "",
+                                                    "name": "edge-color-seq-8",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "edge-color-seq-9",
+                                                  },
+                                                  Object {
+                                                    "color": "",
+                                                    "name": "edge-color-seq-10",
                                                   },
                                                 ]
                               }
@@ -295,35 +303,43 @@ ShallowWrapper {
                                     Array [
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-coral",
+                                                  "name": "edge-color-seq-1",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-sea-serpent",
+                                                  "name": "edge-color-seq-2",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-purple-pizazz",
+                                                  "name": "edge-color-seq-3",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-carrot",
+                                                  "name": "edge-color-seq-4",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-kiwi",
+                                                  "name": "edge-color-seq-5",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-cerulean-blue",
+                                                  "name": "edge-color-seq-6",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-paradise-pink",
+                                                  "name": "edge-color-seq-7",
                                                 },
                                                 Object {
-                                                  "color": "#117733",
-                                                  "name": "color-mustard",
+                                                  "color": "",
+                                                  "name": "edge-color-seq-8",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "edge-color-seq-9",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "edge-color-seq-10",
                                                 },
                                               ]
                         }
@@ -353,35 +369,43 @@ ShallowWrapper {
                                 Array [
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-coral",
+                                                  "name": "edge-color-seq-1",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-sea-serpent",
+                                                  "name": "edge-color-seq-2",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-purple-pizazz",
+                                                  "name": "edge-color-seq-3",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-carrot",
+                                                  "name": "edge-color-seq-4",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-kiwi",
+                                                  "name": "edge-color-seq-5",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-cerulean-blue",
+                                                  "name": "edge-color-seq-6",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-paradise-pink",
+                                                  "name": "edge-color-seq-7",
                                                 },
                                                 Object {
-                                                  "color": "#117733",
-                                                  "name": "color-mustard",
+                                                  "color": "",
+                                                  "name": "edge-color-seq-8",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "edge-color-seq-9",
+                                                },
+                                                Object {
+                                                  "color": "",
+                                                  "name": "edge-color-seq-10",
                                                 },
                                               ]
                 }
@@ -417,35 +441,43 @@ ShallowWrapper {
                 "colors": Array [
                   Object {
                     "color": "",
-                    "name": "color-neon-coral",
+                    "name": "edge-color-seq-1",
                   },
                   Object {
                     "color": "",
-                    "name": "color-sea-serpent",
+                    "name": "edge-color-seq-2",
                   },
                   Object {
                     "color": "",
-                    "name": "color-purple-pizazz",
+                    "name": "edge-color-seq-3",
                   },
                   Object {
                     "color": "",
-                    "name": "color-neon-carrot",
+                    "name": "edge-color-seq-4",
                   },
                   Object {
                     "color": "",
-                    "name": "color-kiwi",
+                    "name": "edge-color-seq-5",
                   },
                   Object {
                     "color": "",
-                    "name": "color-cerulean-blue",
+                    "name": "edge-color-seq-6",
                   },
                   Object {
                     "color": "",
-                    "name": "color-paradise-pink",
+                    "name": "edge-color-seq-7",
                   },
                   Object {
-                    "color": "#117733",
-                    "name": "color-mustard",
+                    "color": "",
+                    "name": "edge-color-seq-8",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "edge-color-seq-9",
+                  },
+                  Object {
+                    "color": "",
+                    "name": "edge-color-seq-10",
                   },
                 ],
                 "component": [Function],
@@ -590,35 +622,43 @@ ShallowWrapper {
                                                 Array [
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-neon-coral",
+                                                              "name": "edge-color-seq-1",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-sea-serpent",
+                                                              "name": "edge-color-seq-2",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-purple-pizazz",
+                                                              "name": "edge-color-seq-3",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-neon-carrot",
+                                                              "name": "edge-color-seq-4",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-kiwi",
+                                                              "name": "edge-color-seq-5",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-cerulean-blue",
+                                                              "name": "edge-color-seq-6",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-paradise-pink",
+                                                              "name": "edge-color-seq-7",
                                                             },
                                                             Object {
-                                                              "color": "#117733",
-                                                              "name": "color-mustard",
+                                                              "color": "",
+                                                              "name": "edge-color-seq-8",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "edge-color-seq-9",
+                                                            },
+                                                            Object {
+                                                              "color": "",
+                                                              "name": "edge-color-seq-10",
                                                             },
                                                           ]
                                     }
@@ -806,35 +846,43 @@ ShallowWrapper {
                                           Array [
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-neon-coral",
+                                                          "name": "edge-color-seq-1",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-sea-serpent",
+                                                          "name": "edge-color-seq-2",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-purple-pizazz",
+                                                          "name": "edge-color-seq-3",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-neon-carrot",
+                                                          "name": "edge-color-seq-4",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-kiwi",
+                                                          "name": "edge-color-seq-5",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-cerulean-blue",
+                                                          "name": "edge-color-seq-6",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-paradise-pink",
+                                                          "name": "edge-color-seq-7",
                                                         },
                                                         Object {
-                                                          "color": "#117733",
-                                                          "name": "color-mustard",
+                                                          "color": "",
+                                                          "name": "edge-color-seq-8",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "edge-color-seq-9",
+                                                        },
+                                                        Object {
+                                                          "color": "",
+                                                          "name": "edge-color-seq-10",
                                                         },
                                                       ]
                             }
@@ -864,35 +912,43 @@ ShallowWrapper {
                                     Array [
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-neon-coral",
+                                                        "name": "edge-color-seq-1",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-sea-serpent",
+                                                        "name": "edge-color-seq-2",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-purple-pizazz",
+                                                        "name": "edge-color-seq-3",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-neon-carrot",
+                                                        "name": "edge-color-seq-4",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-kiwi",
+                                                        "name": "edge-color-seq-5",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-cerulean-blue",
+                                                        "name": "edge-color-seq-6",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-paradise-pink",
+                                                        "name": "edge-color-seq-7",
                                                       },
                                                       Object {
-                                                        "color": "#117733",
-                                                        "name": "color-mustard",
+                                                        "color": "",
+                                                        "name": "edge-color-seq-8",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "edge-color-seq-9",
+                                                      },
+                                                      Object {
+                                                        "color": "",
+                                                        "name": "edge-color-seq-10",
                                                       },
                                                     ]
                   }
@@ -928,35 +984,43 @@ ShallowWrapper {
                   "colors": Array [
                     Object {
                       "color": "",
-                      "name": "color-neon-coral",
+                      "name": "edge-color-seq-1",
                     },
                     Object {
                       "color": "",
-                      "name": "color-sea-serpent",
+                      "name": "edge-color-seq-2",
                     },
                     Object {
                       "color": "",
-                      "name": "color-purple-pizazz",
+                      "name": "edge-color-seq-3",
                     },
                     Object {
                       "color": "",
-                      "name": "color-neon-carrot",
+                      "name": "edge-color-seq-4",
                     },
                     Object {
                       "color": "",
-                      "name": "color-kiwi",
+                      "name": "edge-color-seq-5",
                     },
                     Object {
                       "color": "",
-                      "name": "color-cerulean-blue",
+                      "name": "edge-color-seq-6",
                     },
                     Object {
                       "color": "",
-                      "name": "color-paradise-pink",
+                      "name": "edge-color-seq-7",
                     },
                     Object {
-                      "color": "#117733",
-                      "name": "color-mustard",
+                      "color": "",
+                      "name": "edge-color-seq-8",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "edge-color-seq-9",
+                    },
+                    Object {
+                      "color": "",
+                      "name": "edge-color-seq-10",
                     },
                   ],
                   "component": [Function],
@@ -1133,35 +1197,35 @@ ShallowWrapper {
                                         Array [
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-neon-coral",
+                                                    "name": "node-color-seq-1",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-sea-serpent",
+                                                    "name": "node-color-seq-2",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-purple-pizazz",
+                                                    "name": "node-color-seq-3",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-neon-carrot",
+                                                    "name": "node-color-seq-4",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-kiwi",
+                                                    "name": "node-color-seq-5",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-cerulean-blue",
+                                                    "name": "node-color-seq-6",
                                                   },
                                                   Object {
                                                     "color": "",
-                                                    "name": "color-paradise-pink",
+                                                    "name": "node-color-seq-7",
                                                   },
                                                   Object {
-                                                    "color": "#117733",
-                                                    "name": "color-mustard",
+                                                    "color": "",
+                                                    "name": "node-color-seq-8",
                                                   },
                                                 ]
                               }
@@ -1401,35 +1465,35 @@ ShallowWrapper {
                                     Array [
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-coral",
+                                                  "name": "node-color-seq-1",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-sea-serpent",
+                                                  "name": "node-color-seq-2",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-purple-pizazz",
+                                                  "name": "node-color-seq-3",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-carrot",
+                                                  "name": "node-color-seq-4",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-kiwi",
+                                                  "name": "node-color-seq-5",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-cerulean-blue",
+                                                  "name": "node-color-seq-6",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-paradise-pink",
+                                                  "name": "node-color-seq-7",
                                                 },
                                                 Object {
-                                                  "color": "#117733",
-                                                  "name": "color-mustard",
+                                                  "color": "",
+                                                  "name": "node-color-seq-8",
                                                 },
                                               ]
                         }
@@ -1459,35 +1523,35 @@ ShallowWrapper {
                                 Array [
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-coral",
+                                                  "name": "node-color-seq-1",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-sea-serpent",
+                                                  "name": "node-color-seq-2",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-purple-pizazz",
+                                                  "name": "node-color-seq-3",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-neon-carrot",
+                                                  "name": "node-color-seq-4",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-kiwi",
+                                                  "name": "node-color-seq-5",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-cerulean-blue",
+                                                  "name": "node-color-seq-6",
                                                 },
                                                 Object {
                                                   "color": "",
-                                                  "name": "color-paradise-pink",
+                                                  "name": "node-color-seq-7",
                                                 },
                                                 Object {
-                                                  "color": "#117733",
-                                                  "name": "color-mustard",
+                                                  "color": "",
+                                                  "name": "node-color-seq-8",
                                                 },
                                               ]
                 }
@@ -1523,35 +1587,35 @@ ShallowWrapper {
                 "colors": Array [
                   Object {
                     "color": "",
-                    "name": "color-neon-coral",
+                    "name": "node-color-seq-1",
                   },
                   Object {
                     "color": "",
-                    "name": "color-sea-serpent",
+                    "name": "node-color-seq-2",
                   },
                   Object {
                     "color": "",
-                    "name": "color-purple-pizazz",
+                    "name": "node-color-seq-3",
                   },
                   Object {
                     "color": "",
-                    "name": "color-neon-carrot",
+                    "name": "node-color-seq-4",
                   },
                   Object {
                     "color": "",
-                    "name": "color-kiwi",
+                    "name": "node-color-seq-5",
                   },
                   Object {
                     "color": "",
-                    "name": "color-cerulean-blue",
+                    "name": "node-color-seq-6",
                   },
                   Object {
                     "color": "",
-                    "name": "color-paradise-pink",
+                    "name": "node-color-seq-7",
                   },
                   Object {
-                    "color": "#117733",
-                    "name": "color-mustard",
+                    "color": "",
+                    "name": "node-color-seq-8",
                   },
                 ],
                 "component": [Function],
@@ -1958,35 +2022,35 @@ ShallowWrapper {
                                                 Array [
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-neon-coral",
+                                                              "name": "node-color-seq-1",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-sea-serpent",
+                                                              "name": "node-color-seq-2",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-purple-pizazz",
+                                                              "name": "node-color-seq-3",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-neon-carrot",
+                                                              "name": "node-color-seq-4",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-kiwi",
+                                                              "name": "node-color-seq-5",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-cerulean-blue",
+                                                              "name": "node-color-seq-6",
                                                             },
                                                             Object {
                                                               "color": "",
-                                                              "name": "color-paradise-pink",
+                                                              "name": "node-color-seq-7",
                                                             },
                                                             Object {
-                                                              "color": "#117733",
-                                                              "name": "color-mustard",
+                                                              "color": "",
+                                                              "name": "node-color-seq-8",
                                                             },
                                                           ]
                                     }
@@ -2226,35 +2290,35 @@ ShallowWrapper {
                                           Array [
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-neon-coral",
+                                                          "name": "node-color-seq-1",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-sea-serpent",
+                                                          "name": "node-color-seq-2",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-purple-pizazz",
+                                                          "name": "node-color-seq-3",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-neon-carrot",
+                                                          "name": "node-color-seq-4",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-kiwi",
+                                                          "name": "node-color-seq-5",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-cerulean-blue",
+                                                          "name": "node-color-seq-6",
                                                         },
                                                         Object {
                                                           "color": "",
-                                                          "name": "color-paradise-pink",
+                                                          "name": "node-color-seq-7",
                                                         },
                                                         Object {
-                                                          "color": "#117733",
-                                                          "name": "color-mustard",
+                                                          "color": "",
+                                                          "name": "node-color-seq-8",
                                                         },
                                                       ]
                             }
@@ -2284,35 +2348,35 @@ ShallowWrapper {
                                     Array [
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-neon-coral",
+                                                        "name": "node-color-seq-1",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-sea-serpent",
+                                                        "name": "node-color-seq-2",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-purple-pizazz",
+                                                        "name": "node-color-seq-3",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-neon-carrot",
+                                                        "name": "node-color-seq-4",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-kiwi",
+                                                        "name": "node-color-seq-5",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-cerulean-blue",
+                                                        "name": "node-color-seq-6",
                                                       },
                                                       Object {
                                                         "color": "",
-                                                        "name": "color-paradise-pink",
+                                                        "name": "node-color-seq-7",
                                                       },
                                                       Object {
-                                                        "color": "#117733",
-                                                        "name": "color-mustard",
+                                                        "color": "",
+                                                        "name": "node-color-seq-8",
                                                       },
                                                     ]
                   }
@@ -2348,35 +2412,35 @@ ShallowWrapper {
                   "colors": Array [
                     Object {
                       "color": "",
-                      "name": "color-neon-coral",
+                      "name": "node-color-seq-1",
                     },
                     Object {
                       "color": "",
-                      "name": "color-sea-serpent",
+                      "name": "node-color-seq-2",
                     },
                     Object {
                       "color": "",
-                      "name": "color-purple-pizazz",
+                      "name": "node-color-seq-3",
                     },
                     Object {
                       "color": "",
-                      "name": "color-neon-carrot",
+                      "name": "node-color-seq-4",
                     },
                     Object {
                       "color": "",
-                      "name": "color-kiwi",
+                      "name": "node-color-seq-5",
                     },
                     Object {
                       "color": "",
-                      "name": "color-cerulean-blue",
+                      "name": "node-color-seq-6",
                     },
                     Object {
                       "color": "",
-                      "name": "color-paradise-pink",
+                      "name": "node-color-seq-7",
                     },
                     Object {
-                      "color": "#117733",
-                      "name": "color-mustard",
+                      "color": "",
+                      "name": "node-color-seq-8",
                     },
                   ],
                   "component": [Function],

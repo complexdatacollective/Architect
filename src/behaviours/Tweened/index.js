@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
+import { defer } from 'lodash';
 import store, { actionCreators as actions } from './store';
+import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -39,18 +41,22 @@ const Tweenable = WrappedComponent =>
         actions.update(
           this.props.tweenName,
           this.props.tweenElement,
-          { node },
+          { node, bounds: getAbsoluteBoundingRect(node) },
         ),
       );
     }
 
     componentWillUnmount() {
-      store.dispatch(
-        actions.remove(
-          this.props.tweenName,
-          this.props.tweenElement,
-        ),
-      );
+      // defer waits until next callstack, this is to allow for time for react elements to exist for
+      // tweening, with r16 async rendering, this may break.
+      defer(() => {
+        store.dispatch(
+          actions.remove(
+            this.props.tweenName,
+            this.props.tweenElement,
+          ),
+        );
+      });
     }
 
     render() {
