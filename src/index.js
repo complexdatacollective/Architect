@@ -59,10 +59,12 @@ ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
     buttons: ['Save and continue', 'Cancel'],
   }, (response) => {
     if (response !== 0) {
+      // eslint-disable-next-line
       console.log(`Cancelled open of "${protocolPath}"`);
       return;
     }
 
+    // eslint-disable-next-line
     console.log(`Save, then open "${protocolPath}"`);
     store.dispatch(fileActionCreators.saveProtocol())
       .then(() => memoryHistory.push(protocolLocation));
