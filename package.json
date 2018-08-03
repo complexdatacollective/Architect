@@ -87,6 +87,7 @@
         "network-canvas-ui": "git+https://github.com/codaco/Network-Canvas-UI.git#1.13.3",
         "node-sass": "^4.9.2",
         "object-assign": "4.1.1",
+        "path-to-regexp": "^2.2.1",
         "postcss-flexbugs-fixes": "3.2.0",
         "postcss-loader": "^2.1.6",
         "promise": "7.1.1",
