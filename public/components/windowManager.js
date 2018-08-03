@@ -53,6 +53,11 @@ function createWindow() {
 
     const mainWindow = new BrowserWindow(windowParameters);
 
+    mainWindow.webContents.on('new-window', (evt) => {
+      // A user may have tried to open a new window (shift|cmd-click); ignore action
+      evt.preventDefault();
+    });
+
     if (process.env.NODE_ENV === 'development') {
       mainWindow.openDevTools();
     }

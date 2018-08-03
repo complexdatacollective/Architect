@@ -65,7 +65,7 @@ const saveProtocolThunk = () =>
     const activeProtocol = state.session.activeProtocol;
     const protocol = getProtocol(state);
 
-    saveProtocol(activeProtocol, protocol)
+    return saveProtocol(activeProtocol, protocol)
       .then(() => dispatch(saveComplete()));
   };
 
