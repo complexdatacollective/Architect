@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { nth, find, get } from 'lodash';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Protocol, Start, ViewTransitionRoute } from './components/Views';
 import ProtocolLoader from './components/ProtocolLoader';
 import tween from './behaviours/Tweened/tween';
@@ -66,10 +66,13 @@ class Routes extends Component {
     const { location } = this.props;
     return (
       <React.Fragment>
-        <Route
-          path="/edit/:protocol"
-          render={props => <ProtocolLoader {...props} />}
-        />
+        <Switch location={location}>
+          <Route
+            path="/edit/:protocol"
+            render={props => <ProtocolLoader {...props} />}
+          />
+          <Redirect to="/" />
+        </Switch>
         <ViewTransitionRoute
           location={location}
           path="/edit/:protocol"
