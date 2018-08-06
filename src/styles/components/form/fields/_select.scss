@@ -17,4 +17,12 @@
     @include preset('title-4');
     font-weight: 600;
   }
+
+  &__reset {
+    margin-left: unit(1);
+    text-decoration: underline;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
 }

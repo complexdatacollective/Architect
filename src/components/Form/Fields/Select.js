@@ -29,6 +29,9 @@ class Select extends PureComponent {
     meta: { invalid: false, error: null, touched: false },
   };
 
+  reset = () =>
+    this.props.input.onChange(null);
+
   render() {
     const {
       className,
@@ -50,15 +53,23 @@ class Select extends PureComponent {
         { label &&
           <h4>{label}</h4>
         }
-        <select className="form-fields-select__input" {...input} {...rest}>
-          {children}
-          {options.map(
-            (option) => {
-              const { value, label: optionLabel, ...optionRest } = asOptionObject(option);
-              return (<option value={value} key={value} {...optionRest}>{optionLabel}</option>);
-            },
-          )}
-        </select>
+        <div>
+          <select className="form-fields-select__input" {...input} {...rest}>
+            {children}
+            {options.map(
+              (option) => {
+                const { value, label: optionLabel, ...optionRest } = asOptionObject(option);
+                return <option value={value} key={value} {...optionRest}>{optionLabel}</option>;
+              },
+            )}
+          </select>
+
+          <button
+            className="form-fields-select__reset"
+            onClick={this.reset}
+            type="button"
+          >reset</button>
+        </div>
         {visited && invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );
