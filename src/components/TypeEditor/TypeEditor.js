@@ -32,10 +32,8 @@ const COLOR_OPTIONS = {
 };
 
 const ICON_OPTIONS = [
-  'add-a-context',
   'add-a-person',
   'add-a-place',
-  'add-a-relationship',
 ];
 
 const TypeEditor = ({
