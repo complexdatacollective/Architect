@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Color from 'color';
-import { get, times } from 'lodash';
+import { get } from 'lodash';
 import { Field } from 'redux-form';
-import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { ValidatedField } from '../Form';
 import Guidance from '../Guidance';
 import * as Fields from '../../ui/components/Fields';
@@ -11,30 +9,6 @@ import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';
 import IconOption from './IconOption';
 
-const getColorByVariable = (variable) => {
-  try {
-    return Color(getCSSVariableAsString(variable)).hex().toLowerCase();
-  } catch (e) {
-    return '';
-  }
-};
-
-const asColorOption = name => ({
-  name,
-  color: getColorByVariable(`--${name}`),
-});
-
-const COLOR_OPTIONS = {
-  node: times(8, index => `node-color-seq-${(index + 1)}`)
-    .map(asColorOption),
-  edge: times(10, index => `edge-color-seq-${(index + 1)}`)
-    .map(asColorOption),
-};
-
-const ICON_OPTIONS = [
-  'add-a-person',
-  'add-a-place',
-];
 
 const TypeEditor = ({
   toggleCodeView,
@@ -43,6 +17,8 @@ const TypeEditor = ({
   type,
   dirty,
   valid,
+  colorOptions,
+  iconOptions,
   displayVariables,
 }) => (
   <div className="type-editor editor__sections">
@@ -78,7 +54,7 @@ const TypeEditor = ({
         <ValidatedField
           component={ArchitectFields.ColorPicker}
           name="color"
-          colors={get(COLOR_OPTIONS, category, [])}
+          colors={get(colorOptions, category, [])}
           validation={{ required: true }}
         />
       </div>
@@ -93,7 +69,7 @@ const TypeEditor = ({
             <ValidatedField
               component={Fields.RadioGroup}
               name="iconVariant"
-              options={ICON_OPTIONS}
+              options={iconOptions}
               optionComponent={IconOption}
               validation={{ required: true }}
             />
@@ -133,6 +109,8 @@ TypeEditor.propTypes = {
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
   type: PropTypes.string,
+  colorOptions: PropTypes.array,
+  iconOptions: PropTypes.array,
   category: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
@@ -140,6 +118,8 @@ TypeEditor.propTypes = {
 
 TypeEditor.defaultProps = {
   type: null,
+  colorOptions: [],
+  iconOptions: [],
 };
 
 export { TypeEditor };

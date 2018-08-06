@@ -3,12 +3,52 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
-import { get } from 'lodash';
+import Color from 'color';
+import { get, times, size } from 'lodash';
+import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import { Button } from '../../ui/components';
 import TypeEditor, { formName, parse, format } from '../TypeEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
+
+const getColorByVariable = (variable) => {
+  try {
+    return Color(getCSSVariableAsString(variable)).hex().toLowerCase();
+  } catch (e) {
+    return '';
+  }
+};
+
+const asColorOption = name => ({
+  name,
+  color: getColorByVariable(`--${name}`),
+});
+
+const COLOR_OPTIONS = {
+  node: times(8, index => `node-color-seq-${(index + 1)}`)
+    .map(asColorOption),
+  edge: times(10, index => `edge-color-seq-${(index + 1)}`)
+    .map(asColorOption),
+};
+
+const ICON_OPTIONS = [
+  'add-a-person',
+  'add-a-place',
+];
+
+const getNextCategoryColor = ({ protocol, category }) => {
+  if (!protocol || !category) { return null; }
+  const categoryOptions = COLOR_OPTIONS[category];
+  const typeCount = size(get(protocol, ['variableRegistry', category], {}));
+
+  return get(categoryOptions, [typeCount % size(categoryOptions), 'name']);
+};
+
+const getNewTypeTemplate = ({ protocol, category }) => ({
+  iconVariant: 'add-a-person',
+  color: getNextCategoryColor({ protocol, category }),
+});
 
 /**
  * This component manages the display of TypeEditor, provides it with
@@ -91,6 +131,8 @@ class EditType extends PureComponent {
             form={formName}
             category={category}
             type={type}
+            colorOptions={COLOR_OPTIONS}
+            iconOptions={ICON_OPTIONS}
             onSubmit={this.onSubmit}
           />
         }
@@ -107,7 +149,11 @@ function mapStateToProps(state, props) {
   const type = get(props, 'match.params.type');
 
   const protocol = getProtocol(state);
-  const typeConfiguration = get(protocol, ['variableRegistry', category, type]);
+  const typeConfiguration = get(
+    protocol,
+    ['variableRegistry', category, type],
+    getNewTypeTemplate({ protocol, category }),
+  );
 
   return {
     initialValues: format(typeConfiguration),
