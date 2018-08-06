@@ -1,6 +1,5 @@
 const { app } = require('electron');
 const log = require('electron-log');
-require('./components/updater');
 
 const appManager = require('./components/appManager');
 

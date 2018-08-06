@@ -1,4 +1,5 @@
-const { dialog, session } = require('electron');
+const { dialog } = require('electron');
+const updater = require('./updater');
 
 const openDialogOptions = {
   buttonLabel: 'Open',
@@ -85,14 +86,21 @@ const MenuTemplate = (window) => {
     },
   ];
 
+  const appMenu = [
+    {
+      label: 'Check for updates...',
+      click: () => updater.checkForUpdates(),
+    },
+    { role: 'quit' },
+  ];
+
   if (process.platform !== 'darwin') {
-    // Get rid of the macOS primary menu
-    menu[0].submenu.push({ role: 'quit' });
+    // Use File> menu for Windows
+    menu[0].submenu.concat(appMenu);
   } else {
+    // Use "App" menu for OS X
     menu.unshift({
-      submenu: [
-        { role: 'quit' },
-      ],
+      submenu: appMenu,
     });
   }
 

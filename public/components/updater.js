@@ -11,43 +11,41 @@
  */
 
 const { autoUpdater } = require('electron-updater');
-const { ipcMain, BrowserWindow } = require('electron');
-
-function sendToRenderer(channel, message) {
-  const arr = BrowserWindow.getAllWindows();
-  for (let i = 0; i < arr.length; i += 1) {
-    const toWindow = arr[i];
-    toWindow.webContents.send(channel, message);
-  }
-}
-
-ipcMain.on('CHECK_FOR_UPDATE', () => {
-  autoUpdater.checkForUpdates();
-});
-
-ipcMain.on('DOWNLOAD_UPDATE', () => {
-  autoUpdater.downloadUpdate();
-});
-
-ipcMain.on('INSTALL_UPDATE', () => {
-  setImmediate(() => autoUpdater.quitAndInstall());
-});
+const { dialog } = require('electron');
 
 autoUpdater.autoDownload = false;
 
 autoUpdater.on('error', (error) => {
-  sendToRenderer('ERROR', error.message);
+  dialog.showErrorBox('Error: ', error == null ? 'unknown' : (error.stack || error).toString());
 });
 
-autoUpdater.on('update-available', (info) => {
-  sendToRenderer('UPDATE_AVAILABLE', info);
+autoUpdater.on('update-available', () => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Found Updates',
+    message: 'Found updates, do you want update now?',
+    buttons: ['Yes', 'No'],
+  }, (buttonIndex) => {
+    if (buttonIndex === 0) {
+      autoUpdater.downloadUpdate();
+    }
+  });
 });
 
-
-autoUpdater.on('update-not-available', (info) => {
-  sendToRenderer('UPDATE_NOT_AVAILABLE', info);
+autoUpdater.on('update-not-available', () => {
+  dialog.showMessageBox({
+    title: 'No Updates',
+    message: 'Current version is up-to-date.',
+  });
 });
 
-autoUpdater.on('update-downloaded', (info) => {
-  sendToRenderer('UPDATE_DOWNLOADED', info);
+autoUpdater.on('update-downloaded', () => {
+  dialog.showMessageBox({
+    title: 'Install Updates',
+    message: 'Updates downloaded, application will be quit for update...',
+  }, () => {
+    setImmediate(() => autoUpdater.quitAndInstall());
+  });
 });
+
+module.exports = autoUpdater;
