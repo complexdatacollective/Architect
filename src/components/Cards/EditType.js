@@ -104,7 +104,7 @@ class EditType extends PureComponent {
         iconPosition="right"
         disabled={this.props.hasErrors}
       >
-        Save
+        Continue
       </Button>
     );
 
