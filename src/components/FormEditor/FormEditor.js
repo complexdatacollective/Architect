@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
 import { get, keys, map, toPairs, fromPairs } from 'lodash';
 import { ValidatedField, MultiSelect } from '../Form';
 import * as Fields from '../../ui/components/Fields';
@@ -123,7 +124,7 @@ class FormEditor extends Component {
 
         <Guidance contentId="guidance.form.continue">
           <div className="stage-editor-section">
-            <ValidatedField
+            <Field
               name="optionToAddAnother"
               component={Fields.Toggle}
               fieldLabel="Continuous entry"

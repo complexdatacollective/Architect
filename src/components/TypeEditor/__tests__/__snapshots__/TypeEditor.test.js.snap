@@ -6,10 +6,17 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TypeEditor
     category="edge"
+    colorOptions={
+        Object {
+            "edge": Array [],
+            "node": Array [],
+          }
+    }
     dirty={false}
     displayVariables={Array []}
     form="TYPE_EDITOR"
     handleSubmit={[Function]}
+    iconOptions={Array []}
     showCodeView={true}
     toggleCodeView={[Function]}
     type={null}
@@ -75,50 +82,7 @@ ShallowWrapper {
                               Color
                     </h2>
                     <Validated
-                              colors={
-                                        Array [
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-1",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-2",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-3",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-4",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-5",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-6",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-7",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-8",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-9",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "edge-color-seq-10",
-                                                  },
-                                                ]
-                              }
+                              colors={Array []}
                               component={[Function]}
                               name="color"
                               validation={
@@ -299,50 +263,7 @@ ShallowWrapper {
                         Color
             </h2>
             <Validated
-                        colors={
-                                    Array [
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-1",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-2",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-3",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-4",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-5",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-6",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-7",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-8",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-9",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-10",
-                                                },
-                                              ]
-                        }
+                        colors={Array []}
                         component={[Function]}
                         name="color"
                         validation={
@@ -365,50 +286,7 @@ ShallowWrapper {
                 Color
 </h2>,
               <Validated
-                colors={
-                                Array [
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-1",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-2",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-3",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-4",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-5",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-6",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-7",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-8",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-9",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "edge-color-seq-10",
-                                                },
-                                              ]
-                }
+                colors={Array []}
                 component={[Function]}
                 name="color"
                 validation={
@@ -438,48 +316,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "colors": Array [
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-1",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-2",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-3",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-4",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-5",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-6",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-7",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-8",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-9",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "edge-color-seq-10",
-                  },
-                ],
+                "colors": Array [],
                 "component": [Function],
                 "name": "color",
                 "validation": Object {
@@ -618,50 +455,7 @@ ShallowWrapper {
                                     Color
                         </h2>
                         <Validated
-                                    colors={
-                                                Array [
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-1",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-2",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-3",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-4",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-5",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-6",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-7",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-8",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-9",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "edge-color-seq-10",
-                                                            },
-                                                          ]
-                                    }
+                                    colors={Array []}
                                     component={[Function]}
                                     name="color"
                                     validation={
@@ -842,50 +636,7 @@ ShallowWrapper {
                             Color
               </h2>
               <Validated
-                            colors={
-                                          Array [
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-1",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-2",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-3",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-4",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-5",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-6",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-7",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-8",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-9",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "edge-color-seq-10",
-                                                        },
-                                                      ]
-                            }
+                            colors={Array []}
                             component={[Function]}
                             name="color"
                             validation={
@@ -908,50 +659,7 @@ ShallowWrapper {
                   Color
 </h2>,
                 <Validated
-                  colors={
-                                    Array [
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-1",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-2",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-3",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-4",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-5",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-6",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-7",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-8",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-9",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "edge-color-seq-10",
-                                                      },
-                                                    ]
-                  }
+                  colors={Array []}
                   component={[Function]}
                   name="color"
                   validation={
@@ -981,48 +689,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "colors": Array [
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-1",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-2",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-3",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-4",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-5",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-6",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-7",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-8",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-9",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "edge-color-seq-10",
-                    },
-                  ],
+                  "colors": Array [],
                   "component": [Function],
                   "name": "color",
                   "validation": Object {
@@ -1124,10 +791,17 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TypeEditor
     category="node"
+    colorOptions={
+        Object {
+            "edge": Array [],
+            "node": Array [],
+          }
+    }
     dirty={false}
     displayVariables={Array []}
     form="TYPE_EDITOR"
     handleSubmit={[Function]}
+    iconOptions={Array []}
     showCodeView={true}
     toggleCodeView={[Function]}
     type={null}
@@ -1193,42 +867,7 @@ ShallowWrapper {
                               Color
                     </h2>
                     <Validated
-                              colors={
-                                        Array [
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-1",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-2",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-3",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-4",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-5",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-6",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-7",
-                                                  },
-                                                  Object {
-                                                    "color": "",
-                                                    "name": "node-color-seq-8",
-                                                  },
-                                                ]
-                              }
+                              colors={Array []}
                               component={[Function]}
                               name="color"
                               validation={
@@ -1253,14 +892,7 @@ ShallowWrapper {
                                         component={[Function]}
                                         name="iconVariant"
                                         optionComponent={[Function]}
-                                        options={
-                                                  Array [
-                                                            "add-a-context",
-                                                            "add-a-person",
-                                                            "add-a-place",
-                                                            "add-a-relationship",
-                                                          ]
-                                        }
+                                        options={Array []}
                                         validation={
                                                   Object {
                                                             "required": true,
@@ -1461,42 +1093,7 @@ ShallowWrapper {
                         Color
             </h2>
             <Validated
-                        colors={
-                                    Array [
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-1",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-2",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-3",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-4",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-5",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-6",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-7",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-8",
-                                                },
-                                              ]
-                        }
+                        colors={Array []}
                         component={[Function]}
                         name="color"
                         validation={
@@ -1519,42 +1116,7 @@ ShallowWrapper {
                 Color
 </h2>,
               <Validated
-                colors={
-                                Array [
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-1",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-2",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-3",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-4",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-5",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-6",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-7",
-                                                },
-                                                Object {
-                                                  "color": "",
-                                                  "name": "node-color-seq-8",
-                                                },
-                                              ]
-                }
+                colors={Array []}
                 component={[Function]}
                 name="color"
                 validation={
@@ -1584,40 +1146,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "colors": Array [
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-1",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-2",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-3",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-4",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-5",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-6",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-7",
-                  },
-                  Object {
-                    "color": "",
-                    "name": "node-color-seq-8",
-                  },
-                ],
+                "colors": Array [],
                 "component": [Function],
                 "name": "color",
                 "validation": Object {
@@ -1652,14 +1181,7 @@ ShallowWrapper {
                                           component={[Function]}
                                           name="iconVariant"
                                           optionComponent={[Function]}
-                                          options={
-                                                        Array [
-                                                                      "add-a-context",
-                                                                      "add-a-person",
-                                                                      "add-a-place",
-                                                                      "add-a-relationship",
-                                                                    ]
-                                          }
+                                          options={Array []}
                                           validation={
                                                         Object {
                                                                       "required": true,
@@ -1709,14 +1231,7 @@ ShallowWrapper {
                                 component={[Function]}
                                 name="iconVariant"
                                 optionComponent={[Function]}
-                                options={
-                                                Array [
-                                                                "add-a-context",
-                                                                "add-a-person",
-                                                                "add-a-place",
-                                                                "add-a-relationship",
-                                                              ]
-                                }
+                                options={Array []}
                                 validation={
                                                 Object {
                                                                 "required": true,
@@ -1740,14 +1255,7 @@ ShallowWrapper {
                     component={[Function]}
                     name="iconVariant"
                     optionComponent={[Function]}
-                    options={
-                                        Array [
-                                                            "add-a-context",
-                                                            "add-a-person",
-                                                            "add-a-place",
-                                                            "add-a-relationship",
-                                                          ]
-                    }
+                    options={Array []}
                     validation={
                                         Object {
                                                             "required": true,
@@ -1778,12 +1286,7 @@ ShallowWrapper {
                     "component": [Function],
                     "name": "iconVariant",
                     "optionComponent": [Function],
-                    "options": Array [
-                      "add-a-context",
-                      "add-a-person",
-                      "add-a-place",
-                      "add-a-relationship",
-                    ],
+                    "options": Array [],
                     "validation": Object {
                       "required": true,
                     },
@@ -2018,42 +1521,7 @@ ShallowWrapper {
                                     Color
                         </h2>
                         <Validated
-                                    colors={
-                                                Array [
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-1",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-2",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-3",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-4",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-5",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-6",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-7",
-                                                            },
-                                                            Object {
-                                                              "color": "",
-                                                              "name": "node-color-seq-8",
-                                                            },
-                                                          ]
-                                    }
+                                    colors={Array []}
                                     component={[Function]}
                                     name="color"
                                     validation={
@@ -2078,14 +1546,7 @@ ShallowWrapper {
                                                 component={[Function]}
                                                 name="iconVariant"
                                                 optionComponent={[Function]}
-                                                options={
-                                                            Array [
-                                                                        "add-a-context",
-                                                                        "add-a-person",
-                                                                        "add-a-place",
-                                                                        "add-a-relationship",
-                                                                      ]
-                                                }
+                                                options={Array []}
                                                 validation={
                                                             Object {
                                                                         "required": true,
@@ -2286,42 +1747,7 @@ ShallowWrapper {
                             Color
               </h2>
               <Validated
-                            colors={
-                                          Array [
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-1",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-2",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-3",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-4",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-5",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-6",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-7",
-                                                        },
-                                                        Object {
-                                                          "color": "",
-                                                          "name": "node-color-seq-8",
-                                                        },
-                                                      ]
-                            }
+                            colors={Array []}
                             component={[Function]}
                             name="color"
                             validation={
@@ -2344,42 +1770,7 @@ ShallowWrapper {
                   Color
 </h2>,
                 <Validated
-                  colors={
-                                    Array [
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-1",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-2",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-3",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-4",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-5",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-6",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-7",
-                                                      },
-                                                      Object {
-                                                        "color": "",
-                                                        "name": "node-color-seq-8",
-                                                      },
-                                                    ]
-                  }
+                  colors={Array []}
                   component={[Function]}
                   name="color"
                   validation={
@@ -2409,40 +1800,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "colors": Array [
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-1",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-2",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-3",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-4",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-5",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-6",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-7",
-                    },
-                    Object {
-                      "color": "",
-                      "name": "node-color-seq-8",
-                    },
-                  ],
+                  "colors": Array [],
                   "component": [Function],
                   "name": "color",
                   "validation": Object {
@@ -2477,14 +1835,7 @@ ShallowWrapper {
                                                 component={[Function]}
                                                 name="iconVariant"
                                                 optionComponent={[Function]}
-                                                options={
-                                                                Array [
-                                                                                "add-a-context",
-                                                                                "add-a-person",
-                                                                                "add-a-place",
-                                                                                "add-a-relationship",
-                                                                              ]
-                                                }
+                                                options={Array []}
                                                 validation={
                                                                 Object {
                                                                                 "required": true,
@@ -2534,14 +1885,7 @@ ShallowWrapper {
                                     component={[Function]}
                                     name="iconVariant"
                                     optionComponent={[Function]}
-                                    options={
-                                                      Array [
-                                                                        "add-a-context",
-                                                                        "add-a-person",
-                                                                        "add-a-place",
-                                                                        "add-a-relationship",
-                                                                      ]
-                                    }
+                                    options={Array []}
                                     validation={
                                                       Object {
                                                                         "required": true,
@@ -2565,14 +1909,7 @@ ShallowWrapper {
                       component={[Function]}
                       name="iconVariant"
                       optionComponent={[Function]}
-                      options={
-                                            Array [
-                                                                  "add-a-context",
-                                                                  "add-a-person",
-                                                                  "add-a-place",
-                                                                  "add-a-relationship",
-                                                                ]
-                      }
+                      options={Array []}
                       validation={
                                             Object {
                                                                   "required": true,
@@ -2603,12 +1940,7 @@ ShallowWrapper {
                       "component": [Function],
                       "name": "iconVariant",
                       "optionComponent": [Function],
-                      "options": Array [
-                        "add-a-context",
-                        "add-a-person",
-                        "add-a-place",
-                        "add-a-relationship",
-                      ],
+                      "options": Array [],
                       "validation": Object {
                         "required": true,
                       },

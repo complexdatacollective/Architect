@@ -109,7 +109,10 @@ TypeEditor.propTypes = {
   dirty: PropTypes.bool.isRequired,
   valid: PropTypes.bool.isRequired,
   type: PropTypes.string,
-  colorOptions: PropTypes.array,
+  colorOptions: PropTypes.shape({
+    node: PropTypes.array.isRequired,
+    edge: PropTypes.array.isRequired,
+  }),
   iconOptions: PropTypes.array,
   category: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
@@ -118,7 +121,7 @@ TypeEditor.propTypes = {
 
 TypeEditor.defaultProps = {
   type: null,
-  colorOptions: [],
+  colorOptions: { node: [], edge: [] },
   iconOptions: [],
 };
 
