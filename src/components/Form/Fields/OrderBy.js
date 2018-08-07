@@ -82,7 +82,7 @@ const Rule = compose(
             <option value="" disabled>&mdash; select direction &mdash;</option>
             {
               DIRECTIONS.map(([value, label]) => (
-                <option key={value}>{label}</option>
+                <option key={value} value={value}>{label}</option>
               ))
             }
           </Select>
