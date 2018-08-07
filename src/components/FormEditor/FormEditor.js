@@ -9,14 +9,20 @@ import Guidance from '../Guidance';
 import Disable from '../Disable';
 import NodeType from './NodeType';
 
-const allowedTypes = ['text', 'number', 'boolean'];
+const allowedTypes = ['text', 'number', 'boolean', 'ordinal', 'categorical'];
 
 const getInputsForType = (type) => {
   switch (type) {
+    case 'number':
+      return ['NumberInput'];
     case 'boolean':
-      return ['Checkbox'];
+      return ['Checkbox', 'Toggle', 'ToggleButton'];
+    case 'ordinal':
+      return ['RadioGroup'];
+    case 'categorical':
+      return ['CheckboxGroup', 'ToggleButtonGroup'];
     default:
-      return ['TextInput', 'SeamlessText'];
+      return ['TextInput'];
   }
 };
 
