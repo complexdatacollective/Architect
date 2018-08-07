@@ -86,7 +86,6 @@ class Overview extends Component {
   render() {
     const {
       name,
-      version,
       updateOptions,
     } = this.props;
 
@@ -129,10 +128,10 @@ class Overview extends Component {
                   </div>
                 </PanelGroup>
                 <PanelGroup title="Global Options">
-                  <p>Version: {version}</p>
+                  <p>This panel will display global protocol options.</p>
                 </PanelGroup>
                 <PanelGroup title="Assets">
-                  <p>Assets not displayed yet.</p>
+                  <p>This panel will display assets, such as images, video, and data.</p>
                 </PanelGroup>
               </div>
             </div>
@@ -145,7 +144,6 @@ class Overview extends Component {
 
 Overview.propTypes = {
   name: PropTypes.string,
-  version: PropTypes.string,
   forms: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   variableRegistry: PropTypes.object,
   externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
@@ -155,7 +153,6 @@ Overview.propTypes = {
 
 Overview.defaultProps = {
   name: '',
-  version: '',
   forms: {},
   variableRegistry: {},
   externalData: {},
