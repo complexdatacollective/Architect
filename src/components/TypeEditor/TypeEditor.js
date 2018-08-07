@@ -22,7 +22,7 @@ const TypeEditor = ({
   displayVariables,
 }) => (
   <div className="type-editor editor__sections">
-    { type && <h1>Edit &quot;{type}&quot; {category}</h1> }
+    { type && <h1>Edit {category}</h1> }
     { !type && <h1>Create {category}</h1> }
     { dirty && !valid && (
       <p style={{ color: 'var(--error)' }}>
@@ -31,7 +31,17 @@ const TypeEditor = ({
     ) }
     <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
+    <Guidance contentId="guidance.registry.type.label">
+      <div className="editor__section">
+        <h2>Label</h2>
 
+        <ValidatedField
+          component={Fields.Text}
+          name="label"
+          validation={{ required: true }}
+        />
+      </div>
+    </Guidance>
 
     <Guidance contentId="guidance.registry.type.color">
       <div className="editor__section">
