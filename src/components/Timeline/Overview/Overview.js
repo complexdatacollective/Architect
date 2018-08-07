@@ -8,8 +8,9 @@ import { map, get } from 'lodash';
 import { compose } from 'recompose';
 import { SeamlessText } from '../../Form/Fields';
 import { Tweened } from '../../../behaviours/Tweened';
-import { Node, Icon } from '../../../ui';
+import { Node } from '../../../ui';
 import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
+import EdgeIcon from '../../EdgeIcon';
 import PanelGroup from './PanelGroup';
 
 class Overview extends Component {
@@ -43,12 +44,8 @@ class Overview extends Component {
         <Link
           to={this.pathTo(`registry/edge/${key}`)}
           key={key}
-          className="timeline-overview__edge"
-          style={{
-            backgroundColor: `var(--${get(edge, 'color', '')})`,
-          }}
         >
-          <Icon name="links" />
+          <EdgeIcon color={`var(--${get(edge, 'color', '')})`} />
         </Link>
       ),
     );
