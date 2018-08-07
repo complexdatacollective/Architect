@@ -44,6 +44,8 @@ const renderValidationOptions = ({ field, validationType }) => {
     case 'maxLength':
     case 'minValue':
     case 'maxValue':
+    case 'minSelected':
+    case 'maxSelected':
       return (
         <Field
           name={`${field}.value`}
