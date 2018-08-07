@@ -31,21 +31,7 @@ const TypeEditor = ({
     ) }
     <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
-    { !type &&
-      <Guidance contentId="guidance.registry.type.color">
-        <div className="editor__section">
-          <h2>Name</h2>
 
-          <ValidatedField
-            component={Fields.Text}
-            name="type"
-            label="Enter a name for this type"
-            normalize={value => value.replace(/[^a-zA-Z0-9_]+/, '')}
-            validation={{ required: true }}
-          />
-        </div>
-      </Guidance>
-    }
 
     <Guidance contentId="guidance.registry.type.color">
       <div className="editor__section">

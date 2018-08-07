@@ -169,8 +169,8 @@ const mapDispatchToProps = dispatch => ({
   updateType: (category, type, form) => {
     dispatch(variableRegistryActions.updateType(category, type, parse(form)));
   },
-  createType: (category, { type, ...form }) => {
-    dispatch(variableRegistryActions.createType(category, type, parse(form)));
+  createType: (category, form) => {
+    dispatch(variableRegistryActions.createType(category, parse(form)));
   },
 });
 
