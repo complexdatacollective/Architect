@@ -79,6 +79,31 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.sociogram_prompt.nodes': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.nodes</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.text': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.text</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.layout': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.layout</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.background': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.background</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.edges': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.edges</p>
+    </Fragment>
+  ),
   'guidance.editor.sociogram_prompt.sortOrderBy': (
     <Fragment>
       <h3>Sort order</h3>
@@ -102,22 +127,20 @@ export default {
   ),
   'guidance.editor.sociogram_prompts': (
     <Fragment>
-      <h3>Prompts help</h3>
+      <h3>Sociogram Prompts</h3>
       <p>
         Prompts allow you to specify one or more specific questions to post to the participant,
-        in order to encourage the recall of nodes.
+        in order to describe the task you want them to complete.
       </p>
       <p>
         Prompts should be carefully considered, and grounded in existing literature wherever
-        possible. Think carefully about if you want to use one name generator with muiltiple
-        prompts, or many name generators with a single prompt. Your choice depends on your specific
-        research goals, and the needs of your research population.
+        possible.
       </p>
     </Fragment>
   ),
   'guidance.editor.name_generator_prompts': (
     <Fragment>
-      <h3>Prompts help</h3>
+      <h3>Name Generator Prompts</h3>
       <p>
         Prompts allow you to specify one or more specific questions to post to the participant, in
         order to encourage the recall of nodes.

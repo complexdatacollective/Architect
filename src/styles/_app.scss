@@ -41,12 +41,16 @@ $component-name: app;
 
   &__window {
     position: absolute;
-    top: unit(2.5);
     left: 0;
     display: flex;
     flex-direction: column;
-    height: calc(100% - #{unit(2.5)});
+    height: 100%;
     width: 100%;
     background-color: var(--architect-background);
+  }
+
+  &__macos {
+    top: unit(2.5);
+    height: calc(100% - #{unit(2.5)});
   }
 }
