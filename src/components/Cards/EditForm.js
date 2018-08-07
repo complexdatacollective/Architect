@@ -53,11 +53,10 @@ class EditForm extends PureComponent {
         key="save"
         size="small"
         onClick={this.submitForm}
-        color="white"
         iconPosition="right"
         disabled={this.props.hasErrors}
       >
-        Save
+        Continue
       </Button>
     );
 

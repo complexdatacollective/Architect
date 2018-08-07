@@ -1,6 +1,7 @@
 import { actionTypes as protocolFileActionTypes } from './protocol/file';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as protocolRegistryActionTypes } from './protocol/variableRegistry';
+import { actionTypes as formActionTypes } from './protocol/forms';
 import { actionTypes as protocolActionTypes } from './protocol/index';
 
 const initialState = {
@@ -39,6 +40,9 @@ export default function reducer(state = initialState, action = {}) {
     case protocolRegistryActionTypes.UPDATE_TYPE:
     case protocolRegistryActionTypes.CREATE_TYPE:
     case protocolRegistryActionTypes.DELETE_TYPE:
+    case formActionTypes.CREATE_FORM:
+    case formActionTypes.UPDATE_FORM:
+    case formActionTypes.DELETE_FORM:
     case protocolActionTypes.UPDATE_OPTIONS:
       return {
         ...state,
