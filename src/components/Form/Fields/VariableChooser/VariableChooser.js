@@ -35,7 +35,7 @@ class VariableChooser extends Component {
     super(props);
 
     this.state = {
-      editing: null,
+      editing: false,
       isEditing: false,
     };
   }
@@ -50,11 +50,11 @@ class VariableChooser extends Component {
   };
 
   openEditVariable = () => {
-    this.setState({ isEditing: true, editing: null });
+    this.setState({ isEditing: true, editing: false });
   };
 
   closeEditVariable = () => {
-    this.setState({ isEditing: false, editing: null });
+    this.setState({ isEditing: false, editing: false });
   };
 
   render() {
@@ -93,7 +93,7 @@ class VariableChooser extends Component {
                 Edit variable
               </h2>
               <div className="form-fields-variable-chooser__modal-controls">
-                <p>Please select a variable to add/edit</p>
+                <p>Please select a variable to add/edit.</p>
                 <Select
                   className="form-fields-variable-chooser__modal-value"
                   input={{

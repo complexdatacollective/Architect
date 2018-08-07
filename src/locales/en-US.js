@@ -191,7 +191,22 @@ export default {
     <Fragment>
       <h3>Sociogram guidance</h3>
       <p>
-        
+        The Sociogram interface is designed to do three things:
+      </p>
+      <ul>
+        <li>
+          Allow your research participants arrange the nodes they have created spatially.
+        </li>
+        <li>
+          Provide a visual method for creating edges between nodes.
+        </li>
+        <li>
+          Allow the toggling of binary attribute variables on nodes.
+        </li>
+      </ul>
+      <p>
+        For further help with configuring the Sociogram interface, please refer
+        to our <a href={null}>Online Documentation</a>.
       </p>
     </Fragment>
   ),
