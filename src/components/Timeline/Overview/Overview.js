@@ -113,7 +113,7 @@ class Overview extends Component {
                   <div>
                     { this.renderEdgeTypes }
                   </div>
-                  <div>
+                  <div className="timeline-overview__manage-button">
                     <Link className="button button--small" to={this.pathTo('registry')}>
                       Manage registry
                     </Link>
@@ -121,7 +121,7 @@ class Overview extends Component {
                 </PanelGroup>
                 <PanelGroup title="Forms">
                   { this.renderForms }
-                  <div>
+                  <div className="timeline-overview__manage-button">
                     <Link className="button button--small" to={this.pathTo('forms')}>
                       Manage forms
                     </Link>
@@ -132,6 +132,11 @@ class Overview extends Component {
                 </PanelGroup>
                 <PanelGroup title="Assets">
                   <p>This panel will display assets, such as images, video, and data.</p>
+                  <div className="timeline-overview__manage-button">
+                    <div className="button button--small button--platinum--dark">
+                      Manage assets
+                    </div>
+                  </div>
                 </PanelGroup>
               </div>
             </div>
