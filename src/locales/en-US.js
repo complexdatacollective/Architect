@@ -295,15 +295,19 @@ export default {
   ),
   'guidance.registry.nodes': (
     <Fragment>
-      <h3>Nodes</h3>
+      <h3>Node Types</h3>
       <p>
-        Lorem ipsum.
+        Use this screen to describe the types of node that you will collect in your interview.
+      </p>
+      <p>
+        For example, if you are interested in capturing a network of people, you might want to
+        start by creating a node type called &quot;Person&quot;.
       </p>
     </Fragment>
   ),
   'guidance.registry.edges': (
     <Fragment>
-      <h3>Edges</h3>
+      <h3>Edge Types</h3>
       <p>
         Lorem ipsum.
       </p>
