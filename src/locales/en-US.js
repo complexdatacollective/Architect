@@ -191,7 +191,7 @@ export default {
     <Fragment>
       <h3>Sociogram guidance</h3>
       <p>
-        TBD.
+        
       </p>
     </Fragment>
   ),
@@ -233,6 +233,14 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.registry.type.label': (
+    <Fragment>
+      <h3>Label</h3>
+      <p>
+        Use the label field to give your node or edge type a name.
+      </p>
+    </Fragment>
+  ),
   'guidance.registry.type.color': (
     <Fragment>
       <h3>Color</h3>
@@ -268,28 +276,55 @@ export default {
     <Fragment>
       <h3>Variables</h3>
       <p>
-        These properties can be added to nodes using the various interfaces.
+        Use this section to add variables to this node or edge. Once you have defined a
+        variable here, you can use it when configuring forms, prompts, or other
+        interfaces.
       </p>
     </Fragment>
   ),
   'guidance.registry.type.variable': (
     <Fragment>
       <h3>Variable</h3>
+      <p>
+        For each variable you create, you must supply some basic information.
+      </p>
       <h4>Name</h4>
       <p>
-        Lorem ipsum.
+        Name your variable meaningfully, and in a way you will remember and recognise.
+        Variable names are used when exporting interview data, so it is a good idea to
+        create a consistent pattern or system for your naming.
       </p>
       <h4>Description</h4>
       <p>
-        Lorem ipsum.
+        Use the description field to add any additional information you may need to help you
+        recognise this variable later. You may wish to use this field to include notes about
+        the purpose of the variable, its origin in theoretical literature, or other information
+        or relevance.
       </p>
       <h4>Type</h4>
       <p>
-        Lorem ipsum.
+        The variable type determines how and where you can use it within your interview, as
+        well as the characteristics of the data it will collect. Because of this, you should
+        be certain that the variable type you choose here is correct. It is not easily possible
+        to change the type of a variable after it has been created.
       </p>
-      <h4>Validations</h4>
+      <ul>
+        <li><strong>Text</strong> - Used for storing text in a variable.</li>
+        <li><strong>Number</strong> - Used for storing numerical values.</li>
+        <li><strong>DateTime</strong> - Used for storing date or time data.</li>
+        <li><strong>Boolean</strong> - Used for true or false (dichotomous) values.</li>
+        <li><strong>Ordinal</strong> - An ordered categorical list of options.</li>
+        <li><strong>Categorical</strong> - An unordered list of options</li>
+        <li><strong>Layout</strong> - A special variable used to store sociogram layout data.</li>
+        <li><strong>Location</strong> - Used for storing geospatial (Lat/Long) data.</li>
+      </ul>
+      <h4>Validation</h4>
       <p>
-        Lorem ipsum.
+        The validation section allows you to define constraints on your variable that must be
+        fulfilled. These constraints will depend on the type of variable you are editing. For
+        example, a categorical variable will let you limit the minimum and maximim number of
+        options that must be selected, whereas a text variable will let you set the minimum and
+        maximum length.
       </p>
     </Fragment>
   ),
@@ -297,7 +332,7 @@ export default {
     <Fragment>
       <h3>Node Types</h3>
       <p>
-        Use this screen to describe the types of node that you will collect in your interview.
+        Use this section to describe the types of node that you will collect in your interview.
       </p>
       <p>
         For example, if you are interested in capturing a network of people, you might want to
@@ -309,7 +344,11 @@ export default {
     <Fragment>
       <h3>Edge Types</h3>
       <p>
-        Lorem ipsum.
+        Use this section to describe the types of edge that you will collect in your interview.
+      </p>
+      <p>
+        For example, if you are interested in the social relationships between people, you might
+        want to start by creating an edge type called &quot;Friend&quot;.
       </p>
     </Fragment>
   ),
