@@ -42,7 +42,7 @@ const Rule = compose(
   ({
     variables,
     disabledVariables,
-    rule: { variable, direction },
+    rule: { property, direction },
     sortIndex: index,
     handleChange,
     handleDelete,
@@ -56,8 +56,8 @@ const Rule = compose(
           <Select
             input={{
               onChange: event =>
-                handleChange(index, { variable: event.target.value }),
-              value: variable,
+                handleChange(index, { property: event.target.value }),
+              value: property,
             }}
           >
             <option value="" disabled>&mdash; select property &mdash;</option>
@@ -109,7 +109,7 @@ const Rules = compose(
           rules.map((rule, index) => (
             <Rule
               variables={variables}
-              disabledVariables={map(rules, 'variable')}
+              disabledVariables={map(rules, 'property')}
               handleChange={handleChange}
               handleDelete={handleDelete}
               index={index}
@@ -184,7 +184,7 @@ class OrderBy extends Component {
   handleAddNewRule = () => {
     const updatedRules = [
       ...this.value,
-      { variable: '', direction: '' },
+      { property: '', direction: '' },
     ];
     this.props.input.onChange(updatedRules);
   };
