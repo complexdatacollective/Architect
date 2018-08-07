@@ -77,7 +77,7 @@ class VariableRegistry extends Component {
       <Wipe key={key}>
         <Type
           link={`${this.props.protocolPath}/registry/edge/${key}`}
-          label={key}
+          label={edge.label}
           handleDelete={() => this.handleDelete('edge', key)}
         >
           <Icon name="links" color={edgeColor} />

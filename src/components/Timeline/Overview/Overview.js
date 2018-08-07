@@ -24,7 +24,7 @@ class Overview extends Component {
       nodeTypes,
       (node, key) => (
         <Link to={this.pathTo(`registry/node/${key}`)} key={key}>
-          <Node label={key} color={get(node, 'color', '')} />
+          <Node label={node.label} color={get(node, 'color', '')} />
         </Link>
       ),
     );
@@ -44,6 +44,7 @@ class Overview extends Component {
           to={this.pathTo(`registry/edge/${key}`)}
           key={key}
           className="timeline-overview__edge"
+          title={edge.label}
           style={{
             backgroundColor: `var(--${get(edge, 'color', '')})`,
           }}
