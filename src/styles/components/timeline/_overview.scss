@@ -2,6 +2,10 @@
   margin: 0 auto;
   width: 75vw;
 
+  .edge-icon {
+    margin: 0 unit(2) unit(2) 0;
+  }
+
   &__panel {
     background-color: var(--architect-panel-background);
     color: var(--architect-panel-text);
@@ -17,21 +21,6 @@
 
   &__content {
     flex: 1 1 100%;
-  }
-
-  &__edge {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: unit(7);
-    width: unit(7);
-    height: unit(7);
-    margin: 0 0 unit(2) unit(2);
-    background-color: var(--architect-panel-shadow);
-
-    &:first-child {
-      margin-left: 0;
-    }
   }
 
   &__name {
@@ -87,14 +76,6 @@
     .node {
       margin-bottom: 1rem;
     }
-
-    .icon {
-      &[name='links'] {
-        margin: 1rem;
-      }
-    }
-
-
   }
 
   &__group-title {
