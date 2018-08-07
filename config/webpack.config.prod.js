@@ -51,7 +51,11 @@ const config = {
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In production, it will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
-    new InterpolateHtmlPlugin(env.raw),
+    new InterpolateHtmlPlugin({
+      ...env.raw,
+      REACT_APP_SCRIPT_SRC_CSP: '',
+      REACT_APP_CONNECT_SRC_CSP: '',
+    }),
   ],
 };
 
