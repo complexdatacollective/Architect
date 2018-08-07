@@ -40,7 +40,10 @@ class EditForm extends PureComponent {
       this.props.createForm(formNameFromTitle(form.title), form);
     }
 
-    this.props.onComplete(this.props.formName || formNameFromTitle(form.title), form);
+    this.props.onComplete({
+      formName: this.props.formName || formNameFromTitle(form.title),
+      form,
+    });
   }
 
   submitForm = () => {
@@ -53,11 +56,10 @@ class EditForm extends PureComponent {
         key="save"
         size="small"
         onClick={this.submitForm}
-        color="white"
         iconPosition="right"
         disabled={this.props.hasErrors}
       >
-        Save
+        Continue
       </Button>
     );
 
