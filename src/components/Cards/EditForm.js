@@ -40,7 +40,10 @@ class EditForm extends PureComponent {
       this.props.createForm(formNameFromTitle(form.title), form);
     }
 
-    this.props.onComplete(this.props.formName || formNameFromTitle(form.title), form);
+    this.props.onComplete({
+      formName: this.props.formName || formNameFromTitle(form.title),
+      form,
+    });
   }
 
   submitForm = () => {
