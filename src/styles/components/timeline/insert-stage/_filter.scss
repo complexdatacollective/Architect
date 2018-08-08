@@ -4,13 +4,15 @@ $component-name: timeline-insert-stage-filter;
   display: flex;
   padding: unit(2) unit(12);
   background-color: var(--color-navy-taupe);
-  color: var(--text);
+  color: var(--text-light);
 
   input {
     color: var(--text);
   }
 
   &__option {
+    margin-right: unit(2);
+
     h4 {
       font-family: var(--body-font-family);
       margin-bottom: unit(1);
