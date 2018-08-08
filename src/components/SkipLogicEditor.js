@@ -26,7 +26,7 @@ class SkipLogicEditor extends PureComponent {
     return (
       <Guided
         className="edit-skip-logic"
-        defaultGuidance="foo"
+        defaultGuidance="guidance.skipLogicEditor"
       >
         <h1>Edit Skip Logic</h1>
         <div className="edit-skip-logic__section edit-skip-logic__section--first">
