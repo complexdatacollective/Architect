@@ -25,9 +25,9 @@
     padding: 0 0 unit(6);
   }
 
-  &--rules {
-    background: var(--architect-card-background--rules);
-    color: var(--architect-card-text--rules);
+  &--logic {
+    background: var(--architect-logic-background);
+    color: var(--architect-logic-text);
   }
 
   &--choice {

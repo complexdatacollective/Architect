@@ -390,4 +390,13 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.skipLogicEditor': (
+    <Fragment>
+      <h3>Skip Logic</h3>
+      <p>
+        Skip logic tells Network Canvas when to skip past a stage. Using it, you can create
+        different pathways through your interview.
+      </p>
+    </Fragment>
+  ),
 };
