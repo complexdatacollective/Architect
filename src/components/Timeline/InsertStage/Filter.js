@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from '../../Form/Fields';
-import { Text } from '../../../ui/components/Fields';
+// import { Text } from '../../../ui/components/Fields';
 
 const Filter = ({
   query,
@@ -11,12 +11,10 @@ const Filter = ({
   <div className="timeline-insert-stage-filter">
     <div className="timeline-insert-stage-filter__option">
       <h4>Search:</h4>
-      <Text
-        input={{
-          value: query,
-          name: 'search',
-          onChange: event => handleChange({ query: event.target.value }),
-        }}
+      <input
+        type="text"
+        value={query}
+        onChange={event => handleChange({ query: event.target.value })}
       />
     </div>
     <div className="timeline-insert-stage-filter__option">
