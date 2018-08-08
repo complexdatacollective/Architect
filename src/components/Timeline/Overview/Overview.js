@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { map, get } from 'lodash';
 import { compose } from 'recompose';
-import { SeamlessText } from '../../Form/Fields';
 import { Tweened } from '../../../behaviours/Tweened';
 import { Node } from '../../../ui';
-import { actionCreators as protocolActions } from '../../../ducks/modules/protocol';
 import EdgeIcon from '../../EdgeIcon';
 import PanelGroup from './PanelGroup';
 
@@ -84,7 +80,6 @@ class Overview extends Component {
     const {
       name,
       version,
-      updateOptions,
     } = this.props;
 
     return (
@@ -92,13 +87,7 @@ class Overview extends Component {
         <form>
           <div className="timeline-overview__panel">
             <div className="timeline-overview__content">
-              <SeamlessText
-                className="timeline-overview__name"
-                input={{
-                  value: name,
-                  onChange: ({ target: { value } }) => { updateOptions({ name: value }); },
-                }}
-              />
+              <h1 className="timeline-overview__name">{name}</h1>
               <div className="timeline-overview__groups">
                 <PanelGroup title="Variable registry">
                   <br />
@@ -146,7 +135,6 @@ Overview.propTypes = {
   forms: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   variableRegistry: PropTypes.object,
   externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
-  updateOptions: PropTypes.func,
   match: PropTypes.object.isRequired,
 };
 
@@ -156,15 +144,9 @@ Overview.defaultProps = {
   forms: {},
   variableRegistry: {},
   externalData: {},
-  updateOptions: () => {},
 };
 
-const mapDispatchToProps = dispatch => ({
-  updateOptions: bindActionCreators(protocolActions.updateOptions, dispatch),
-});
-
 export default compose(
-  connect(null, mapDispatchToProps),
   withRouter,
   Tweened({
     tweenName: 'protocol',

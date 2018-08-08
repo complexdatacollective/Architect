@@ -113,7 +113,7 @@ class SociogramPrompt extends Component {
           <div className="stage-editor-section-prompt__group">
             <ValidatedField
               name="text"
-              component={Fields.TextArea}
+              component={ArchitectFields.Markdown}
               className="stage-editor-section-prompt__setting"
               label="Text for prompt"
               placeholder="Enter text for the prompt here"
