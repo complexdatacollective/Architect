@@ -31,6 +31,16 @@ $component-name: app;
     }
   }
 
+  &__window {
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--architect-background);
+  }
+
   &--start {
     .#{$component-name}__home {
       top: 50%;
@@ -39,14 +49,10 @@ $component-name: app;
     }
   }
 
-  &__window {
-    position: absolute;
-    top: unit(2.5);
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    height: calc(100% - #{unit(2.5)});
-    width: 100%;
-    background-color: var(--architect-background);
+  &--macos {
+    .#{$component-name}__window {
+      top: unit(2.5);
+      height: calc(100% - #{unit(2.5)});
+    }
   }
 }

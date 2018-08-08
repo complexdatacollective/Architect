@@ -9,11 +9,29 @@ const mockProps = {
   resetActiveProtocol: () => {},
 };
 
+const platform = global.process.platform;
+
 describe('<App />', () => {
-  it('can render', () => {
+  afterAll(() => {
+    global.process.platform = platform;
+  });
+
+  it('renders with titlebar on darwin', () => {
+    global.process.platform = 'darwin';
+
     const component = shallow(<App {...mockProps} />);
 
-    expect(component).toMatchSnapshot();
+    expect(component.hasClass('app--macos')).toBe(true);
+    expect(component.contains(<div className="app__electron-titlebar" />)).toBe(true);
+  });
+
+  it('renders without titlebar on not darwin', () => {
+    global.process.platform = 'windows';
+
+    const component = shallow(<App {...mockProps} />);
+
+    expect(component.hasClass('app--macos')).toBe(false);
+    expect(component.contains(<div className="app__electron-titlebar" />)).toBe(false);
   });
 
   it('has `.app--start` class if path is root', () => {

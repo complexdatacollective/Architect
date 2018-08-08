@@ -62,7 +62,7 @@ class VariableRegistry extends Component {
       <Wipe key={key}>
         <Type
           link={`${this.props.protocolPath}/registry/node/${key}`}
-          label={key}
+          label={node.label}
           handleDelete={() => this.handleDelete('node', key)}
         >
           <Node label="" color={nodeColor} />
@@ -78,7 +78,7 @@ class VariableRegistry extends Component {
       <Wipe key={key}>
         <Type
           link={`${this.props.protocolPath}/registry/edge/${key}`}
-          label={key}
+          label={edge.label}
           handleDelete={() => this.handleDelete('edge', key)}
         >
           <EdgeIcon color={edgeColor} />
@@ -142,7 +142,7 @@ class VariableRegistry extends Component {
 
             <Guidance contentId="guidance.registry.nodes">
               <div className="editor__section">
-                <h2>Nodes</h2>
+                <h2>Node Types</h2>
                 <div className="editor__subsection">
                   {this.renderNodes()}
                 </div>
@@ -161,7 +161,7 @@ class VariableRegistry extends Component {
 
             <Guidance contentId="guidance.registry.edges">
               <div className="editor__section">
-                <h2>Edges</h2>
+                <h2>Edge Types</h2>
                 <div className="editor__subsection">
                   {this.renderEdges()}
                 </div>
