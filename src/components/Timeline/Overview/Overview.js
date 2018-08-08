@@ -79,7 +79,7 @@ class Overview extends Component {
 
   render() {
     const {
-      name
+      name,
     } = this.props;
 
     return (
