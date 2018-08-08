@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const code = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+const defaultCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
 
 const arrayEqualLeft = (a, b) =>
   a.every((value, index) => (value === b[index]));
@@ -25,6 +25,7 @@ class Egg extends Component {
 
   onKeyUp = (e) => {
     const { progress } = this.state;
+    const { code } = this.props;
 
     const next = [...progress, e.keyCode];
 
@@ -49,6 +50,11 @@ class Egg extends Component {
 
 Egg.propTypes = {
   children: PropTypes.node.isRequired,
+  code: PropTypes.array,
+};
+
+Egg.defaultProps = {
+  code: defaultCode,
 };
 
 export { Egg };
