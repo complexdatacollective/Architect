@@ -80,11 +80,11 @@ class ViewForms extends Component {
       >
         <div className="editor variable-registry">
           <Guided className="editor__sections">
-            <h1>Forms</h1>
+            <h1>Form Manager</h1>
 
             <Guidance contentId="guidance.forms.index">
               <div className="editor__section">
-                <h2>Forms</h2>
+                <h2>Existing Forms</h2>
                 <div className="editor__subsection">
                   {this.renderForms()}
                 </div>
