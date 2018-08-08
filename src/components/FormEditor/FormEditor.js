@@ -69,8 +69,6 @@ class FormEditor extends Component {
       valid,
     } = this.props;
 
-    console.log('NODE TYPES', nodeTypes);
-
     return (
       <div>
         <h1>Edit Form</h1>

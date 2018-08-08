@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
-import { keys, get, toPairs, isEmpty } from 'lodash';
+import { keys, get, findIndex, toPairs, isEmpty, map } from 'lodash';
+import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
 import { ValidatedField } from '../../../Form';
@@ -82,6 +83,8 @@ class SociogramPrompt extends Component {
       ...rest
     } = this.props;
 
+    console.log(nodeTypes);
+
     return (
       <ExpandableItem
         className="stage-editor-section-sociogram-prompt"
@@ -92,7 +95,13 @@ class SociogramPrompt extends Component {
               <div className="stage-editor-section-sociogram-prompt__preview-icon">
                 <Field
                   name="subject.type"
-                  component={field => (<Node label={field.input.value} />)}
+                  component={(field) => {
+                    console.log(field);
+                    const index = findIndex(nodeTypes, { value: field.input.value });
+                    console.log(index);
+                    return <Node label={get(nodeTypes[index], 'label', '')} color={get(nodeTypes[index], 'color', 'node-color-seq-1')} />;
+                  }
+                  }
                 />
               </div>
               <Field
@@ -293,7 +302,15 @@ const mapStateToProps = (state, props) => {
     highlightableForNodeType,
     variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
-    nodeTypes: keys(state.protocol.present.variableRegistry.node),
+    promptNodeType: nodeType,
+    nodeTypes: map(
+      getNodeTypes(state),
+      (nodeOptions, promptNodeType) => ({
+        label: get(nodeOptions, 'label', ''),
+        value: promptNodeType,
+        color: get(nodeOptions, 'color', ''),
+      }),
+    ),
     edgeTypes: keys(state.protocol.present.variableRegistry.edge),
   };
 };
