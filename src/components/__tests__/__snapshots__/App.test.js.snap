@@ -41,7 +41,7 @@ ShallowWrapper {
           />
 </NavLink>,
         <div
-          className="app__window"
+          className="app__window app__macos"
 />,
       ],
       "className": "app",
@@ -95,7 +95,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": null,
-          "className": "app__window",
+          "className": "app__window app__macos",
         },
         "ref": null,
         "rendered": null,
@@ -127,7 +127,7 @@ ShallowWrapper {
             />
 </NavLink>,
           <div
-            className="app__window"
+            className="app__window app__macos"
 />,
         ],
         "className": "app",
@@ -181,7 +181,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": null,
-            "className": "app__window",
+            "className": "app__window app__macos",
           },
           "ref": null,
           "rendered": null,
