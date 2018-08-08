@@ -133,7 +133,7 @@ class SociogramPrompt extends Component {
                   parse={value => ({ type: value, entity: 'node' })}
                   format={value => get(value, 'type')}
                   options={nodeTypes}
-                  label="Which node would you like to layout?"
+                  label="Which type of node would you like to use?"
                   validation={{ hasSubject }}
                 />
               </div>

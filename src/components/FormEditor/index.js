@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
     nodeTypes: map(
       getNodeTypes(state),
       (nodeOptions, nodeType) => ({
-        label: nodeType,
+        label: get(nodeOptions, 'label', ''),
         value: nodeType,
         color: get(nodeOptions, 'color', ''),
       }),
