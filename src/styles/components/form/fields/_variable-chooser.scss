@@ -84,7 +84,7 @@
   }
 
   &__modal {
-    background-color: var(--architect-panel-background);
+    background-color: var(--architect-dialog-background);
     color: var(--text);
     padding: unit(4);
     border-radius: unit(2);
@@ -112,7 +112,7 @@
 
     &-setting {
       background-color: var(--architect-dialog-background--dark);
-      color: var(--text-light);
+      color: var(--text);
       padding: unit(4);
       border-radius: unit(2);
     }
@@ -121,9 +121,9 @@
       @include preset(title-4);
     }
 
-    .seamless-text-input__input {
+    .form-fields-seamless-text__input {
       @include preset(copy-large);
-      color: var(--text-light);
+      color: var(--text);
     }
   }
 }
