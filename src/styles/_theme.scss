@@ -17,13 +17,13 @@
   --architect-control-bar-shadow: rgba(20, 0, 0, .3);
   --architect-titlebar: var(--color-sea-green--dark);
 
-  --text-light: var(--color-white);
-
+  // App-wide
   --architect-background: var(--color-white);
   --architect-text: var(--color-charcoal);
   --architect-shadow: var(--color-shadow);
   --architect-divider: var(--color-platinum);
 
+  // Control bar
   --architect-control-bar-background: var(--color-cyber-grape);
   --architect-control-bar-text: var(--color-white);
 
@@ -38,6 +38,11 @@
 
   // Modal
   --architect-modal-shadow: var(--modal-overlay);
+
+  // Logic screen
+  --architect-logic-background: var(--color-mustard);
+  --architect-logic-guidance: var(--color-mustard--dark);
+  --architect-logic-text: var(--color-white);
 
   // TODO: review below
   --architect-edit-button-background: var(--primary);

@@ -8,7 +8,7 @@ import history from '../../history';
 import { Button, Icon } from '../../ui/components';
 import { getProtocol } from '../../selectors/protocol';
 import ShowRoute from '../../components/ShowRoute';
-// import EditSkipLogic from '../Cards/EditSkipLogic';
+import EditSkipLogic from '../Cards/EditSkipLogic';
 import EditStage from '../Cards/EditStage';
 import EditForm from '../Cards/EditForm';
 import VariableRegistry from '../Cards/VariableRegistry';
@@ -77,7 +77,10 @@ class Protocol extends PureComponent {
     this.goto(`stage?type=${type}&insertAtIndex=${insertAtIndex}`);
 
   editStage = stageId =>
-    this.goto(`stage/${stageId}`)
+    this.goto(`stage/${stageId}`);
+
+  editSkipLogic = stageId =>
+    this.goto(`skip/${stageId}`);
 
   render() {
     const {
@@ -103,6 +106,7 @@ class Protocol extends PureComponent {
           stages={stages}
           location={location}
           onEditStage={this.editStage}
+          onEditSkipLogic={this.editSkipLogic}
           onCreateStage={this.createStage}
           hasUnsavedChanges={hasUnsavedChanges}
         />
@@ -119,18 +123,17 @@ class Protocol extends PureComponent {
           </Button>
         </ControlBar>
 
-        {/* <EditSkipLogic
-          show={this.isCardVisible(cards.editSkip)}
-          cancel={this.state.activeCard.cancel}
-          stageId={this.state.activeCard.stageId}
-          onComplete={this.onCardComplete}
-          onCancel={this.onCardCancel}
-        /> */}
-
         <ShowRoute
           path={'/edit/:protocol/stage/:id?'}
           location={location}
           component={EditStage}
+          onComplete={this.handleRouteComplete}
+        />
+
+        <ShowRoute
+          path={'/edit/:protocol/skip/:id'}
+          location={location}
+          component={EditSkipLogic}
           onComplete={this.handleRouteComplete}
         />
 

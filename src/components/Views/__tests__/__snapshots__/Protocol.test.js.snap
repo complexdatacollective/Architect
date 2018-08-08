@@ -43,6 +43,7 @@ ShallowWrapper {
           hasUnsavedChanges={false}
           location={Object {}}
           onCreateStage={[Function]}
+          onEditSkipLogic={[Function]}
           onEditStage={[Function]}
           overview={Object {}}
           stages={
@@ -86,6 +87,12 @@ ShallowWrapper {
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
+          path="/edit/:protocol/skip/:id"
+/>,
+        <ShowRoute
+          component={[Function]}
+          location={Object {}}
+          onComplete={[Function]}
           path="/edit/:protocol/form(s?)"
 />,
         <ShowRoute
@@ -119,6 +126,7 @@ ShallowWrapper {
           "hasUnsavedChanges": false,
           "location": Object {},
           "onCreateStage": [Function],
+          "onEditSkipLogic": [Function],
           "onEditStage": [Function],
           "overview": Object {},
           "stages": Array [
@@ -204,6 +212,20 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
+          "path": "/edit/:protocol/skip/:id",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "component": [Function],
+          "location": Object {},
+          "onComplete": [Function],
           "path": "/edit/:protocol/form(s?)",
         },
         "ref": null,
@@ -266,6 +288,7 @@ ShallowWrapper {
             hasUnsavedChanges={false}
             location={Object {}}
             onCreateStage={[Function]}
+            onEditSkipLogic={[Function]}
             onEditStage={[Function]}
             overview={Object {}}
             stages={
@@ -309,6 +332,12 @@ ShallowWrapper {
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
+            path="/edit/:protocol/skip/:id"
+/>,
+          <ShowRoute
+            component={[Function]}
+            location={Object {}}
+            onComplete={[Function]}
             path="/edit/:protocol/form(s?)"
 />,
           <ShowRoute
@@ -342,6 +371,7 @@ ShallowWrapper {
             "hasUnsavedChanges": false,
             "location": Object {},
             "onCreateStage": [Function],
+            "onEditSkipLogic": [Function],
             "onEditStage": [Function],
             "overview": Object {},
             "stages": Array [
@@ -414,6 +444,20 @@ ShallowWrapper {
             "location": Object {},
             "onComplete": [Function],
             "path": "/edit/:protocol/stage/:id?",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "component": [Function],
+            "location": Object {},
+            "onComplete": [Function],
+            "path": "/edit/:protocol/skip/:id",
           },
           "ref": null,
           "rendered": null,

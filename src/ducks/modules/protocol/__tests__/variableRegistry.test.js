@@ -1,6 +1,9 @@
 /* eslint-env jest */
 
+import uuid from 'uuid';
 import reducer, { actionCreators } from '../variableRegistry';
+
+jest.mock('uuid');
 
 const mockState = {
   node: {
@@ -27,28 +30,16 @@ describe('protocol.variableRegistry', () => {
       },
       actionCreators.createType(
         'node',
-        'person',
         { bazz: 'buzz' },
       ),
     );
 
     expect(nextState).toEqual({
       node: {
-        person: { bazz: 'buzz' },
+        [uuid()]: { bazz: 'buzz' },
       },
       edge: { },
     });
-
-    const unchangedState = reducer(
-      mockState,
-      actionCreators.createType(
-        'node',
-        'person',
-        { bazz: 'buzz' },
-      ),
-    );
-
-    expect(unchangedState).toEqual(mockState);
   });
 
   it('updateType()', () => {

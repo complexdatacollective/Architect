@@ -72,10 +72,17 @@
     padding: unit(2) unit(4);
     border-radius:  unit(1);
     text-align: left;
+    position: relative;
 
     .node {
       margin-bottom: 1rem;
     }
+  }
+
+  &__manage-button {
+    position: absolute;
+    bottom: unit(2);
+    right: unit(2);
   }
 
   &__group-title {

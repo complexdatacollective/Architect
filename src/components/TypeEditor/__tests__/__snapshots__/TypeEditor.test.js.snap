@@ -51,19 +51,17 @@ ShallowWrapper {
           )
 </small>,
         <Connect(Guided)
-          contentId="guidance.registry.type.color"
+          contentId="guidance.registry.type.label"
 >
           <div
                     className="editor__section"
           >
                     <h2>
-                              Name
+                              Label
                     </h2>
                     <Validated
                               component={[Function]}
-                              label="Enter a name for this type"
-                              name="type"
-                              normalize={[Function]}
+                              name="label"
                               validation={
                                         Object {
                                                   "required": true,
@@ -176,13 +174,11 @@ ShallowWrapper {
             className="editor__section"
 >
             <h2>
-                        Name
+                        Label
             </h2>
             <Validated
                         component={[Function]}
-                        label="Enter a name for this type"
-                        name="type"
-                        normalize={[Function]}
+                        name="label"
                         validation={
                                     Object {
                                                 "required": true,
@@ -190,7 +186,7 @@ ShallowWrapper {
                         }
             />
 </div>,
-          "contentId": "guidance.registry.type.color",
+          "contentId": "guidance.registry.type.label",
         },
         "ref": null,
         "rendered": Object {
@@ -200,13 +196,11 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <h2>
-                Name
+                Label
 </h2>,
               <Validated
                 component={[Function]}
-                label="Enter a name for this type"
-                name="type"
-                normalize={[Function]}
+                name="label"
                 validation={
                                 Object {
                                                 "required": true,
@@ -223,10 +217,10 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Name",
+                "children": "Label",
               },
               "ref": null,
-              "rendered": "Name",
+              "rendered": "Label",
               "type": "h2",
             },
             Object {
@@ -235,9 +229,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "label": "Enter a name for this type",
-                "name": "type",
-                "normalize": [Function],
+                "name": "label",
                 "validation": Object {
                   "required": true,
                 },
@@ -424,19 +416,17 @@ ShallowWrapper {
             )
 </small>,
           <Connect(Guided)
-            contentId="guidance.registry.type.color"
+            contentId="guidance.registry.type.label"
 >
             <div
                         className="editor__section"
             >
                         <h2>
-                                    Name
+                                    Label
                         </h2>
                         <Validated
                                     component={[Function]}
-                                    label="Enter a name for this type"
-                                    name="type"
-                                    normalize={[Function]}
+                                    name="label"
                                     validation={
                                                 Object {
                                                             "required": true,
@@ -549,13 +539,11 @@ ShallowWrapper {
               className="editor__section"
 >
               <h2>
-                            Name
+                            Label
               </h2>
               <Validated
                             component={[Function]}
-                            label="Enter a name for this type"
-                            name="type"
-                            normalize={[Function]}
+                            name="label"
                             validation={
                                           Object {
                                                         "required": true,
@@ -563,7 +551,7 @@ ShallowWrapper {
                             }
               />
 </div>,
-            "contentId": "guidance.registry.type.color",
+            "contentId": "guidance.registry.type.label",
           },
           "ref": null,
           "rendered": Object {
@@ -573,13 +561,11 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <h2>
-                  Name
+                  Label
 </h2>,
                 <Validated
                   component={[Function]}
-                  label="Enter a name for this type"
-                  name="type"
-                  normalize={[Function]}
+                  name="label"
                   validation={
                                     Object {
                                                       "required": true,
@@ -596,10 +582,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Name",
+                  "children": "Label",
                 },
                 "ref": null,
-                "rendered": "Name",
+                "rendered": "Label",
                 "type": "h2",
               },
               Object {
@@ -608,9 +594,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "label": "Enter a name for this type",
-                  "name": "type",
-                  "normalize": [Function],
+                  "name": "label",
                   "validation": Object {
                     "required": true,
                   },
@@ -836,19 +820,17 @@ ShallowWrapper {
           )
 </small>,
         <Connect(Guided)
-          contentId="guidance.registry.type.color"
+          contentId="guidance.registry.type.label"
 >
           <div
                     className="editor__section"
           >
                     <h2>
-                              Name
+                              Label
                     </h2>
                     <Validated
                               component={[Function]}
-                              label="Enter a name for this type"
-                              name="type"
-                              normalize={[Function]}
+                              name="label"
                               validation={
                                         Object {
                                                   "required": true,
@@ -1006,13 +988,11 @@ ShallowWrapper {
             className="editor__section"
 >
             <h2>
-                        Name
+                        Label
             </h2>
             <Validated
                         component={[Function]}
-                        label="Enter a name for this type"
-                        name="type"
-                        normalize={[Function]}
+                        name="label"
                         validation={
                                     Object {
                                                 "required": true,
@@ -1020,7 +1000,7 @@ ShallowWrapper {
                         }
             />
 </div>,
-          "contentId": "guidance.registry.type.color",
+          "contentId": "guidance.registry.type.label",
         },
         "ref": null,
         "rendered": Object {
@@ -1030,13 +1010,11 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <h2>
-                Name
+                Label
 </h2>,
               <Validated
                 component={[Function]}
-                label="Enter a name for this type"
-                name="type"
-                normalize={[Function]}
+                name="label"
                 validation={
                                 Object {
                                                 "required": true,
@@ -1053,10 +1031,10 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Name",
+                "children": "Label",
               },
               "ref": null,
-              "rendered": "Name",
+              "rendered": "Label",
               "type": "h2",
             },
             Object {
@@ -1065,9 +1043,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
-                "label": "Enter a name for this type",
-                "name": "type",
-                "normalize": [Function],
+                "name": "label",
                 "validation": Object {
                   "required": true,
                 },
@@ -1490,19 +1466,17 @@ ShallowWrapper {
             )
 </small>,
           <Connect(Guided)
-            contentId="guidance.registry.type.color"
+            contentId="guidance.registry.type.label"
 >
             <div
                         className="editor__section"
             >
                         <h2>
-                                    Name
+                                    Label
                         </h2>
                         <Validated
                                     component={[Function]}
-                                    label="Enter a name for this type"
-                                    name="type"
-                                    normalize={[Function]}
+                                    name="label"
                                     validation={
                                                 Object {
                                                             "required": true,
@@ -1660,13 +1634,11 @@ ShallowWrapper {
               className="editor__section"
 >
               <h2>
-                            Name
+                            Label
               </h2>
               <Validated
                             component={[Function]}
-                            label="Enter a name for this type"
-                            name="type"
-                            normalize={[Function]}
+                            name="label"
                             validation={
                                           Object {
                                                         "required": true,
@@ -1674,7 +1646,7 @@ ShallowWrapper {
                             }
               />
 </div>,
-            "contentId": "guidance.registry.type.color",
+            "contentId": "guidance.registry.type.label",
           },
           "ref": null,
           "rendered": Object {
@@ -1684,13 +1656,11 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <h2>
-                  Name
+                  Label
 </h2>,
                 <Validated
                   component={[Function]}
-                  label="Enter a name for this type"
-                  name="type"
-                  normalize={[Function]}
+                  name="label"
                   validation={
                                     Object {
                                                       "required": true,
@@ -1707,10 +1677,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Name",
+                  "children": "Label",
                 },
                 "ref": null,
-                "rendered": "Name",
+                "rendered": "Label",
                 "type": "h2",
               },
               Object {
@@ -1719,9 +1689,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
-                  "label": "Enter a name for this type",
-                  "name": "type",
-                  "normalize": [Function],
+                  "name": "label",
                   "validation": Object {
                     "required": true,
                   },

@@ -1,4 +1,5 @@
-import { has, omit } from 'lodash';
+import uuid from 'uuid';
+import { omit } from 'lodash';
 
 const UPDATE_TYPE = 'UPDATE_TYPE';
 const CREATE_TYPE = 'CREATE_TYPE';
@@ -9,12 +10,12 @@ const initialState = {
   node: {},
 };
 
-function createType(category, type, configuration) {
+function createType(category, configuration) {
   return {
     type: CREATE_TYPE,
     meta: {
+      type: uuid(),
       category,
-      type,
     },
     configuration,
   };
@@ -52,8 +53,6 @@ function deleteType(category, type) {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_TYPE:
-      if (has(state, [action.meta.category, action.meta.type])) return state;
-      return setType(state, action.meta.category, action.meta.type, action.configuration);
     case UPDATE_TYPE:
       return setType(state, action.meta.category, action.meta.type, action.configuration);
     case DELETE_TYPE:

@@ -56,7 +56,7 @@ ShallowWrapper {
                                 className="editor__section"
                         >
                                 <h2>
-                                        Nodes
+                                        Node Types
                                 </h2>
                                 <div
                                         className="editor__subsection"
@@ -82,7 +82,7 @@ ShallowWrapper {
                                 className="editor__section"
                         >
                                 <h2>
-                                        Edges
+                                        Edge Types
                                 </h2>
                                 <div
                                         className="editor__subsection"
@@ -132,7 +132,7 @@ ShallowWrapper {
                               className="editor__section"
                     >
                               <h2>
-                                        Nodes
+                                        Node Types
                               </h2>
                               <div
                                         className="editor__subsection"
@@ -158,7 +158,7 @@ ShallowWrapper {
                               className="editor__section"
                     >
                               <h2>
-                                        Edges
+                                        Edge Types
                               </h2>
                               <div
                                         className="editor__subsection"
@@ -199,7 +199,7 @@ ShallowWrapper {
                             className="editor__section"
               >
                             <h2>
-                                          Nodes
+                                          Node Types
                             </h2>
                             <div
                                           className="editor__subsection"
@@ -225,7 +225,7 @@ ShallowWrapper {
                             className="editor__section"
               >
                             <h2>
-                                          Edges
+                                          Edge Types
                             </h2>
                             <div
                                           className="editor__subsection"
@@ -271,7 +271,7 @@ ShallowWrapper {
                 className="editor__section"
 >
                 <h2>
-                                Nodes
+                                Node Types
                 </h2>
                 <div
                                 className="editor__subsection"
@@ -299,7 +299,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <h2>
-                    Nodes
+                    Node Types
 </h2>,
                   <div
                     className="editor__subsection"
@@ -326,10 +326,10 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": "Nodes",
+                    "children": "Node Types",
                   },
                   "ref": null,
-                  "rendered": "Nodes",
+                  "rendered": "Node Types",
                   "type": "h2",
                 },
                 Object {
@@ -396,7 +396,7 @@ ShallowWrapper {
                 className="editor__section"
 >
                 <h2>
-                                Edges
+                                Edge Types
                 </h2>
                 <div
                                 className="editor__subsection"
@@ -426,7 +426,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <h2>
-                    Edges
+                    Edge Types
 </h2>,
                   <div
                     className="editor__subsection"
@@ -455,10 +455,10 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": "Edges",
+                    "children": "Edge Types",
                   },
                   "ref": null,
-                  "rendered": "Edges",
+                  "rendered": "Edge Types",
                   "type": "h2",
                 },
                 Object {
@@ -568,7 +568,7 @@ ShallowWrapper {
                                         className="editor__section"
                               >
                                         <h2>
-                                                  Nodes
+                                                  Node Types
                                         </h2>
                                         <div
                                                   className="editor__subsection"
@@ -594,7 +594,7 @@ ShallowWrapper {
                                         className="editor__section"
                               >
                                         <h2>
-                                                  Edges
+                                                  Edge Types
                                         </h2>
                                         <div
                                                   className="editor__subsection"
@@ -644,7 +644,7 @@ ShallowWrapper {
                                     className="editor__section"
                         >
                                     <h2>
-                                                Nodes
+                                                Node Types
                                     </h2>
                                     <div
                                                 className="editor__subsection"
@@ -670,7 +670,7 @@ ShallowWrapper {
                                     className="editor__section"
                         >
                                     <h2>
-                                                Edges
+                                                Edge Types
                                     </h2>
                                     <div
                                                 className="editor__subsection"
@@ -711,7 +711,7 @@ ShallowWrapper {
                                 className="editor__section"
                 >
                                 <h2>
-                                                Nodes
+                                                Node Types
                                 </h2>
                                 <div
                                                 className="editor__subsection"
@@ -737,7 +737,7 @@ ShallowWrapper {
                                 className="editor__section"
                 >
                                 <h2>
-                                                Edges
+                                                Edge Types
                                 </h2>
                                 <div
                                                 className="editor__subsection"
@@ -783,7 +783,7 @@ ShallowWrapper {
                   className="editor__section"
 >
                   <h2>
-                                    Nodes
+                                    Node Types
                   </h2>
                   <div
                                     className="editor__subsection"
@@ -811,7 +811,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": Array [
                     <h2>
-                      Nodes
+                      Node Types
 </h2>,
                     <div
                       className="editor__subsection"
@@ -838,10 +838,10 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "host",
                     "props": Object {
-                      "children": "Nodes",
+                      "children": "Node Types",
                     },
                     "ref": null,
-                    "rendered": "Nodes",
+                    "rendered": "Node Types",
                     "type": "h2",
                   },
                   Object {
@@ -908,7 +908,7 @@ ShallowWrapper {
                   className="editor__section"
 >
                   <h2>
-                                    Edges
+                                    Edge Types
                   </h2>
                   <div
                                     className="editor__subsection"
@@ -938,7 +938,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": Array [
                     <h2>
-                      Edges
+                      Edge Types
 </h2>,
                     <div
                       className="editor__subsection"
@@ -967,10 +967,10 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "host",
                     "props": Object {
-                      "children": "Edges",
+                      "children": "Edge Types",
                     },
                     "ref": null,
-                    "rendered": "Edges",
+                    "rendered": "Edge Types",
                     "type": "h2",
                   },
                   Object {

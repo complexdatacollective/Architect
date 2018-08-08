@@ -79,6 +79,31 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.sociogram_prompt.nodes': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.nodes</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.text': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.text</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.layout': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.layout</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.background': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.background</p>
+    </Fragment>
+  ),
+  'guidance.editor.sociogram_prompt.edges': (
+    <Fragment>
+      <p>guidance.editor.sociogram_prompt.edges</p>
+    </Fragment>
+  ),
   'guidance.editor.sociogram_prompt.sortOrderBy': (
     <Fragment>
       <h3>Sort order</h3>
@@ -102,22 +127,20 @@ export default {
   ),
   'guidance.editor.sociogram_prompts': (
     <Fragment>
-      <h3>Prompts help</h3>
+      <h3>Sociogram Prompts</h3>
       <p>
         Prompts allow you to specify one or more specific questions to post to the participant,
-        in order to encourage the recall of nodes.
+        in order to describe the task you want them to complete.
       </p>
       <p>
         Prompts should be carefully considered, and grounded in existing literature wherever
-        possible. Think carefully about if you want to use one name generator with muiltiple
-        prompts, or many name generators with a single prompt. Your choice depends on your specific
-        research goals, and the needs of your research population.
+        possible.
       </p>
     </Fragment>
   ),
   'guidance.editor.name_generator_prompts': (
     <Fragment>
-      <h3>Prompts help</h3>
+      <h3>Name Generator Prompts</h3>
       <p>
         Prompts allow you to specify one or more specific questions to post to the participant, in
         order to encourage the recall of nodes.
@@ -191,7 +214,22 @@ export default {
     <Fragment>
       <h3>Sociogram guidance</h3>
       <p>
-        TBD.
+        The Sociogram interface is designed to do three things:
+      </p>
+      <ul>
+        <li>
+          Allow your research participants arrange the nodes they have created spatially.
+        </li>
+        <li>
+          Provide a visual method for creating edges between nodes.
+        </li>
+        <li>
+          Allow the toggling of binary attribute variables on nodes.
+        </li>
+      </ul>
+      <p>
+        For further help with configuring the Sociogram interface, please refer
+        to our <a href={null}>Online Documentation</a>.
       </p>
     </Fragment>
   ),
@@ -233,6 +271,14 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.registry.type.label': (
+    <Fragment>
+      <h3>Label</h3>
+      <p>
+        Use the label field to give your node or edge type a name.
+      </p>
+    </Fragment>
+  ),
   'guidance.registry.type.color': (
     <Fragment>
       <h3>Color</h3>
@@ -268,44 +314,88 @@ export default {
     <Fragment>
       <h3>Variables</h3>
       <p>
-        These properties can be added to nodes using the various interfaces.
+        Use this section to add variables to this node or edge. Once you have defined a
+        variable here, you can use it when configuring forms, prompts, or other
+        interfaces.
       </p>
     </Fragment>
   ),
   'guidance.registry.type.variable': (
     <Fragment>
       <h3>Variable</h3>
+      <p>
+        For each variable you create, you must supply some basic information.
+      </p>
       <h4>Name</h4>
       <p>
-        Lorem ipsum.
+        Name your variable meaningfully, and in a way you will remember and recognise.
+        Variable names are used when exporting interview data, so it is a good idea to
+        create a consistent pattern or system for your naming.
       </p>
       <h4>Description</h4>
       <p>
-        Lorem ipsum.
+        Use the description field to add any additional information you may need to help you
+        recognise this variable later. You may wish to use this field to include notes about
+        the purpose of the variable, its origin in theoretical literature, or other information
+        or relevance.
       </p>
       <h4>Type</h4>
       <p>
-        Lorem ipsum.
+        The variable type determines how and where you can use it within your interview, as
+        well as the characteristics of the data it will collect. Because of this, you should
+        be certain that the variable type you choose here is correct. It is not easily possible
+        to change the type of a variable after it has been created.
       </p>
-      <h4>Validations</h4>
+      <ul>
+        <li><strong>Text</strong> - Used for storing text in a variable.</li>
+        <li><strong>Number</strong> - Used for storing numerical values.</li>
+        <li><strong>DateTime</strong> - Used for storing date or time data.</li>
+        <li><strong>Boolean</strong> - Used for true or false (dichotomous) values.</li>
+        <li><strong>Ordinal</strong> - An ordered categorical list of options.</li>
+        <li><strong>Categorical</strong> - An unordered list of options</li>
+        <li><strong>Layout</strong> - A special variable used to store sociogram layout data.</li>
+        <li><strong>Location</strong> - Used for storing geospatial (Lat/Long) data.</li>
+      </ul>
+      <h4>Validation</h4>
       <p>
-        Lorem ipsum.
+        The validation section allows you to define constraints on your variable that must be
+        fulfilled. These constraints will depend on the type of variable you are editing. For
+        example, a categorical variable will let you limit the minimum and maximim number of
+        options that must be selected, whereas a text variable will let you set the minimum and
+        maximum length.
       </p>
     </Fragment>
   ),
   'guidance.registry.nodes': (
     <Fragment>
-      <h3>Nodes</h3>
+      <h3>Node Types</h3>
       <p>
-        Lorem ipsum.
+        Use this section to describe the types of node that you will collect in your interview.
+      </p>
+      <p>
+        For example, if you are interested in capturing a network of people, you might want to
+        start by creating a node type called &quot;Person&quot;.
       </p>
     </Fragment>
   ),
   'guidance.registry.edges': (
     <Fragment>
-      <h3>Edges</h3>
+      <h3>Edge Types</h3>
       <p>
-        Lorem ipsum.
+        Use this section to describe the types of edge that you will collect in your interview.
+      </p>
+      <p>
+        For example, if you are interested in the social relationships between people, you might
+        want to start by creating an edge type called &quot;Friend&quot;.
+      </p>
+    </Fragment>
+  ),
+  'guidance.skipLogicEditor': (
+    <Fragment>
+      <h3>Skip Logic</h3>
+      <p>
+        Skip logic tells Network Canvas when to skip past a stage. Using it, you can create
+        different pathways through your interview.
       </p>
     </Fragment>
   ),

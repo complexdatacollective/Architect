@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withRouter, NavLink } from 'react-router-dom';
 import architectLogoIcon from '../images/architect-logo-icon.svg';
+import { isMacOS } from '../utils/platform';
 
 const isAtIndex = pathname => pathname === '/';
 
@@ -12,12 +13,15 @@ const App = ({ children, location: { pathname } }) => {
     'app',
     {
       'app--start': isAtIndex(pathname),
+      'app--macos': isMacOS(),
     },
   );
 
   return (
     <div className={appClasses}>
-      <div className="app__electron-titlebar" />
+      {isMacOS() &&
+        <div className="app__electron-titlebar" />
+      }
       <NavLink className="app__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />
       </NavLink>

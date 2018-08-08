@@ -21,7 +21,7 @@ class Overview extends Component {
       nodeTypes,
       (node, key) => (
         <Link to={this.pathTo(`registry/node/${key}`)} key={key}>
-          <Node label={key} color={get(node, 'color', '')} />
+          <Node label={node.label} color={get(node, 'color', '')} />
         </Link>
       ),
     );
@@ -40,6 +40,7 @@ class Overview extends Component {
         <Link
           to={this.pathTo(`registry/edge/${key}`)}
           key={key}
+          title={edge.label}
         >
           <EdgeIcon color={`var(--${get(edge, 'color', '')})`} />
         </Link>
@@ -78,8 +79,7 @@ class Overview extends Component {
 
   render() {
     const {
-      name,
-      version,
+      name
     } = this.props;
 
     return (
@@ -100,7 +100,7 @@ class Overview extends Component {
                   <div>
                     { this.renderEdgeTypes }
                   </div>
-                  <div>
+                  <div className="timeline-overview__manage-button">
                     <Link className="button button--small" to={this.pathTo('registry')}>
                       Manage registry
                     </Link>
@@ -108,17 +108,22 @@ class Overview extends Component {
                 </PanelGroup>
                 <PanelGroup title="Forms">
                   { this.renderForms }
-                  <div>
+                  <div className="timeline-overview__manage-button">
                     <Link className="button button--small" to={this.pathTo('forms')}>
                       Manage forms
                     </Link>
                   </div>
                 </PanelGroup>
                 <PanelGroup title="Global Options">
-                  <p>Version: {version}</p>
+                  <p>This panel will display global protocol options.</p>
                 </PanelGroup>
                 <PanelGroup title="Assets">
-                  <p>Assets not displayed yet.</p>
+                  <p>This panel will display assets, such as images, video, and data.</p>
+                  <div className="timeline-overview__manage-button">
+                    <div className="button button--small button--platinum--dark">
+                      Manage assets
+                    </div>
+                  </div>
                 </PanelGroup>
               </div>
             </div>
@@ -131,7 +136,6 @@ class Overview extends Component {
 
 Overview.propTypes = {
   name: PropTypes.string,
-  version: PropTypes.string,
   forms: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   variableRegistry: PropTypes.object,
   externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
@@ -140,7 +144,6 @@ Overview.propTypes = {
 
 Overview.defaultProps = {
   name: '',
-  version: '',
   forms: {},
   variableRegistry: {},
   externalData: {},
