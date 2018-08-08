@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
-import { keys, get, findIndex, toPairs, isEmpty, map } from 'lodash';
+import { keys, get, toPairs, isEmpty, map, find } from 'lodash';
 import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
@@ -83,8 +83,6 @@ class SociogramPrompt extends Component {
       ...rest
     } = this.props;
 
-    console.log(nodeTypes);
-
     return (
       <ExpandableItem
         className="stage-editor-section-sociogram-prompt"
@@ -95,12 +93,11 @@ class SociogramPrompt extends Component {
               <div className="stage-editor-section-sociogram-prompt__preview-icon">
                 <Field
                   name="subject.type"
-                  component={(field) => {
-                    console.log(field);
-                    const index = findIndex(nodeTypes, { value: field.input.value });
-                    console.log(index);
-                    return <Node label={get(nodeTypes[index], 'label', '')} color={get(nodeTypes[index], 'color', 'node-color-seq-1')} />;
-                  }
+                  component={
+                    (field) => {
+                      const nodeProperties = find(nodeTypes, ['value', field.input.value]);
+                      return <Node label={nodeProperties.label} color={nodeProperties.color} />;
+                    }
                   }
                 />
               </div>
@@ -142,7 +139,7 @@ class SociogramPrompt extends Component {
                   parse={value => ({ type: value, entity: 'node' })}
                   format={value => get(value, 'type')}
                   options={nodeTypes}
-                  label="Which type of node would you like to use?"
+                  label="Which node type would you like to use?"
                   validation={{ hasSubject }}
                 />
               </div>
@@ -302,7 +299,6 @@ const mapStateToProps = (state, props) => {
     highlightableForNodeType,
     variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
-    promptNodeType: nodeType,
     nodeTypes: map(
       getNodeTypes(state),
       (nodeOptions, promptNodeType) => ({

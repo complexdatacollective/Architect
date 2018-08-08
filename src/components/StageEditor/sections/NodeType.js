@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, get, has, difference } from 'lodash';
+import { keys, get, map, has, difference } from 'lodash';
 import cx from 'classnames';
 import Guidance from '../../Guidance';
 import NodeSelect from '../../../components/Form/Fields/NodeSelect';
+import { getNodeTypes } from '../../../selectors/variableRegistry';
 
 class NodeType extends Component {
   static propTypes = {
-    nodeTypes: PropTypes.arrayOf(PropTypes.string),
+    nodeTypes: PropTypes.arrayOf(PropTypes.object),
     disabled: PropTypes.bool,
     stage: PropTypes.object.isRequired,
     resetField: PropTypes.func.isRequired,
@@ -42,7 +43,7 @@ class NodeType extends Component {
       <Guidance contentId="guidance.editor.node_type">
         <div className={nodeTypeClasses}>
           <h2>Node Type</h2>
-          <p>Which type of node does this name generator create?</p>
+          <p>Which node type does this name generator create?</p>
           <div
             className="stage-editor-section-node-type__edit"
             onClick={disabled ? () => this.resetStage() : () => {}}
@@ -67,7 +68,14 @@ const mapStateToProps = (state, { form }) => {
   const stage = getFormValues(form.name)(state);
 
   return {
-    nodeTypes: keys(state.protocol.present.variableRegistry.node),
+    nodeTypes: map(
+      getNodeTypes(state),
+      (nodeOptions, promptNodeType) => ({
+        label: get(nodeOptions, 'label', ''),
+        value: promptNodeType,
+        color: get(nodeOptions, 'color', ''),
+      }),
+    ),
     disabled: has(stage, 'subject.type'),
     stage,
   };
