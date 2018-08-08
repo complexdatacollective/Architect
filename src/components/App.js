@@ -4,23 +4,16 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withRouter, NavLink } from 'react-router-dom';
 import architectLogoIcon from '../images/architect-logo-icon.svg';
+import { isMacOS } from '../utils/platform';
 
 const isAtIndex = pathname => pathname === '/';
-
-const isMacOS = () => process.platform === 'darwin';
 
 const App = ({ children, location: { pathname } }) => {
   const appClasses = cx(
     'app',
     {
       'app--start': isAtIndex(pathname),
-    },
-  );
-
-  const appWindowClasses = cx(
-    'app__window',
-    {
-      app__macos: isMacOS(),
+      'app--macos': isMacOS(),
     },
   );
 
@@ -32,7 +25,7 @@ const App = ({ children, location: { pathname } }) => {
       <NavLink className="app__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />
       </NavLink>
-      <div className={appWindowClasses}>
+      <div className="app__window">
         { children }
       </div>
     </div>
