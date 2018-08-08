@@ -1,0 +1,10 @@
+.version {
+  z-index: var(--z-chrome);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: unit(4);
+  background: var(--architect-intent);
+  color: var(--text-light);
+}
