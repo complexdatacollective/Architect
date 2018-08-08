@@ -112,7 +112,7 @@ class EditSkipLogic extends PureComponent {
 
     return (
       <Card
-        type="rules"
+        type="logic"
         buttons={this.renderButtons()}
         show={show}
         onCancel={onComplete}
