@@ -32,7 +32,7 @@ class ViewForms extends Component {
         <div className="list__attribute">
           <h3>
             <Link to={`${this.props.protocolPath}/form/${key}`}>
-              {key}
+              {form.title}
             </Link>
           </h3>
         </div>
