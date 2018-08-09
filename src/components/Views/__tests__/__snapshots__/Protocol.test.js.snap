@@ -8,6 +8,7 @@ ShallowWrapper {
     exportProtocol={[Function]}
     hasChanges={false}
     hasUnsavedChanges={false}
+    isProtocol={true}
     loadProtocol={[Function]}
     location={Object {}}
     match={

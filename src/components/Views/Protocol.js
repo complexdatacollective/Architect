@@ -34,6 +34,7 @@ class Protocol extends PureComponent {
     match: PropTypes.object,
     location: PropTypes.object.isRequired,
     saveProtocol: PropTypes.func.isRequired,
+    isProtocol: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -90,7 +91,10 @@ class Protocol extends PureComponent {
       hasChanges,
       hasUnsavedChanges,
       saveProtocol,
+      isProtocol,
     } = this.props;
+
+    if (!isProtocol) { return null; }
 
     const protocolClasses = cx(
       'protocol',
@@ -169,11 +173,12 @@ class Protocol extends PureComponent {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
   const overview = pick(protocol, ['name', 'version', 'variableRegistry', 'externalData', 'forms']);
 
   return {
+    isProtocol: !!props.match,
     overview,
     stages: protocol.stages,
     hasChanges: state.protocol.past.length > 0,

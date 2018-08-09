@@ -15,6 +15,7 @@ const mockProps = {
   stages: [{ id: 1, type: 'Foo' }],
   overview: {},
   location: {},
+  isProtocol: true,
   match: { params: {} },
 };
 
