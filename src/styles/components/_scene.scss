@@ -1,0 +1,49 @@
+.scene {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: grey;
+
+  &__stacks {
+    position: absolute;
+    top: 50vh;
+    left: 0;
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transition: 5s;
+  }
+
+  &__stack {
+    flex: 0 1 auto;
+  }
+
+  &__overview {
+    position: absolute;
+    top: 5vh;
+    left: 10vw;
+    width: 80vw;
+    height: 40vh;
+    background-color: yellow;
+  }
+
+  &__timeline {
+    display: none;
+    position: absolute;
+    top: 50vh;
+    left: 0;
+    width: 100%;
+    background-color: red;
+  }
+
+  &--protocol {
+    .scene__stacks {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
