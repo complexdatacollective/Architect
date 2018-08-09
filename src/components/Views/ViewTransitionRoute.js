@@ -11,9 +11,10 @@ const CSSTransitionRoute = ({ component: Component, ...rest }) => (
     {props => (
       <CSSTransition
         in={!!props.match}
-        unmountOnExit
+        appear
         mountOnEnter
-        timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')}
+        unmountOnExit
+        timeout={getCSSVariableAsNumber('--animation-duration-slow-ms')}
         classNames="route"
       >
         <Component {...props} />
