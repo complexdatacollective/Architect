@@ -3,19 +3,13 @@ import PropTypes from 'prop-types';
 
 const defaultCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
 
-const arrayEqualLeft = (a, b) =>
-  a.every((value, index) => (value === b[index]));
-
-const arrayEqual = (a, b) =>
-  a.length === b.length && arrayEqualLeft(a, b);
-
 class Egg extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       success: false,
-      progress: [],
+      progress: 0,
     };
   }
 
@@ -27,16 +21,16 @@ class Egg extends Component {
     const { progress } = this.state;
     const { code } = this.props;
 
-    const next = [...progress, e.keyCode];
+    const keyCode = e.keyCode;
 
-    if (!arrayEqualLeft(next, code)) {
-      this.setState({ progress: [], success: false });
+    if (keyCode !== code[progress]) {
+      this.setState({ progress: 0, success: false });
       return;
     }
 
-    this.setState({ progress: next });
+    this.setState({ progress: progress + 1 });
 
-    if (arrayEqual(code, next)) {
+    if (progress + 1 === code.length) {
       this.setState({ success: true });
     }
   }
