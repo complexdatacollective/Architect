@@ -93,7 +93,7 @@ class FormEditor extends Component {
 
         <Guidance contentId="guidance.form.type">
           <div className="stage-editor-section">
-            <h2>Type</h2>
+            <h2>Node Type</h2>
             <Disable
               disabled={!!this.props.nodeType}
               className="stage-editor__reset"

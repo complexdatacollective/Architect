@@ -11,7 +11,7 @@ import { Items, NewButton } from '../../Sortable';
 import NodePanel from './NodePanel';
 
 const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => {
-  const isFull = panels.length === 2;
+  const isFull = panels && panels.length === 2;
 
   return (
     <Guidance contentId="guidance.editor.node_panels">

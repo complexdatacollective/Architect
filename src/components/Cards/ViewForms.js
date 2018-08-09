@@ -26,13 +26,13 @@ class ViewForms extends Component {
       <div className="list__item" key={key}>
         <div className="list__attribute list__attribute--icon">
           <Link to={`${this.props.protocolPath}/form/${key}`}>
-            <Node label={form.type} color={get(this.props.nodes, [form.type, 'color'], '')} />
+            <Node label={get(this.props.nodes, [form.type, 'label'], '')} color={get(this.props.nodes, [form.type, 'color'], '')} />
           </Link>
         </div>
         <div className="list__attribute">
           <h3>
             <Link to={`${this.props.protocolPath}/form/${key}`}>
-              {key}
+              {form.title}
             </Link>
           </h3>
         </div>
@@ -80,11 +80,11 @@ class ViewForms extends Component {
       >
         <div className="editor variable-registry">
           <Guided className="editor__sections">
-            <h1>Forms</h1>
+            <h1>Form Manager</h1>
 
             <Guidance contentId="guidance.forms.index">
               <div className="editor__section">
-                <h2>Forms</h2>
+                <h2>Existing Forms</h2>
                 <div className="editor__subsection">
                   {this.renderForms()}
                 </div>

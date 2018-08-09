@@ -111,7 +111,17 @@
           "location": {
             "label": "Location",
             "description": "Human readable description",
-            "type": "coordinates"
+            "type": "location"
+          },
+          "layout": {
+            "label": "Layout",
+            "description": "Human readable description",
+            "type": "layout"
+          },
+          "bool": {
+            "label": "Boolean variable",
+            "description": "Human readable description",
+            "type": "boolean"
           }
         }
       }

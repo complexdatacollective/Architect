@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
-import { keys, get, toPairs, isEmpty } from 'lodash';
+import { keys, get, toPairs, isEmpty, map, find } from 'lodash';
+import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
 import { ValidatedField } from '../../../Form';
@@ -92,7 +93,12 @@ class SociogramPrompt extends Component {
               <div className="stage-editor-section-sociogram-prompt__preview-icon">
                 <Field
                   name="subject.type"
-                  component={field => (<Node label={field.input.value} />)}
+                  component={
+                    (field) => {
+                      const nodeProperties = find(nodeTypes, ['value', field.input.value]);
+                      return <Node label={nodeProperties.label} color={nodeProperties.color} />;
+                    }
+                  }
                 />
               </div>
               <Field
@@ -133,7 +139,7 @@ class SociogramPrompt extends Component {
                   parse={value => ({ type: value, entity: 'node' })}
                   format={value => get(value, 'type')}
                   options={nodeTypes}
-                  label="Which node would you like to layout?"
+                  label="Which node type would you like to use?"
                   validation={{ hasSubject }}
                 />
               </div>
@@ -293,7 +299,14 @@ const mapStateToProps = (state, props) => {
     highlightableForNodeType,
     variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
-    nodeTypes: keys(state.protocol.present.variableRegistry.node),
+    nodeTypes: map(
+      getNodeTypes(state),
+      (nodeOptions, promptNodeType) => ({
+        label: get(nodeOptions, 'label', ''),
+        value: promptNodeType,
+        color: get(nodeOptions, 'color', ''),
+      }),
+    ),
     edgeTypes: keys(state.protocol.present.variableRegistry.edge),
   };
 };

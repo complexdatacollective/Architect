@@ -23,7 +23,7 @@ class Form extends Component {
     forms: PropTypes.arrayOf(PropTypes.string),
     selectedForm: PropTypes.string,
     disabled: PropTypes.bool,
-    nodeType: PropTypes.string.isRequired,
+    nodeType: PropTypes.string,
     change: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
   };
@@ -31,6 +31,7 @@ class Form extends Component {
   static defaultProps = {
     disabled: false,
     selectedForm: null,
+    nodeType: null,
     forms: [],
   };
 
