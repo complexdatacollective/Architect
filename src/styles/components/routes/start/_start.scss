@@ -51,14 +51,13 @@
     position: absolute;
     bottom: unit(4);
     right: unit(3);
-    width: unit(25);
+    width: unit(23);
     z-index: var(--z-global-ui);
   }
 
   &__welcome {
-    width: 51vw;
     margin: 0 auto;
-    padding: 0 0 2.4rem 17rem;
+    padding: 0 0 2.4rem;
 
     &-title,
     &-lead {

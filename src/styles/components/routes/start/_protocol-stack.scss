@@ -3,18 +3,18 @@ $component-name: start-protocol-stack;
 
 .#{$component-name} {
   width: 100%;
-  height: 34vh;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   text-decoration: none;
 
   &__preview {
-    flex: 0 0 calc(28vh + #{unit(1)});
+    flex: 0 0 80%;
   }
 
   &__label {
-    flex: 1 0 5vh;
+    flex: 1 0 20%;
+    max-height: 100px;
     overflow-wrap: break-word;
     display: flex;
     flex-direction: column;
@@ -25,6 +25,8 @@ $component-name: start-protocol-stack;
   &__stack {
     height: 25vh;
     width: 25vh;
+    max-width: 300px;
+    max-height: 300px;
     margin: 0 auto unit(3);
     position: relative;
     z-index: var(--z-default);
