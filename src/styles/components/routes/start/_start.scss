@@ -43,20 +43,22 @@
     &:first-child {
       align-items: flex-start;
       justify-content: flex-end;
+      flex: 1 0 40%;
     }
   }
 
   &__brand {
     position: absolute;
-    top: unit(4);
+    bottom: unit(4);
     right: unit(3);
-    width: unit(20);
+    width: unit(25);
+    z-index: var(--z-global-ui);
   }
 
   &__welcome {
     width: 51vw;
     margin: 0 auto;
-    padding: 0 0 unit(4) unit(14);
+    padding: 0 0 2.4rem 17rem;
 
     &-title,
     &-lead {

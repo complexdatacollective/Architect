@@ -16,6 +16,7 @@ module.exports = {
     },
     app: {
       getPath: () => '/tmp/foo/bar',
+      getVersion: () => 'x.x.x',
     },
   },
   ipcRenderer,

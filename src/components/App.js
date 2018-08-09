@@ -3,8 +3,9 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withRouter, NavLink } from 'react-router-dom';
-import architectLogoIcon from '../images/architect-logo-icon.svg';
 import { isMacOS } from '../utils/platform';
+import architectLogoIcon from '../images/architect-logo-icon.svg';
+import Version from './Version';
 
 const isAtIndex = pathname => pathname === '/';
 
@@ -28,6 +29,7 @@ const App = ({ children, location: { pathname } }) => {
       <div className="app__window">
         { children }
       </div>
+      <Version />
     </div>
   );
 };
