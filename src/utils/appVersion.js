@@ -7,7 +7,7 @@ const codenames = {
 };
 
 const appVersion = remote.app.getVersion();
-const codename = get(codenames, appVersion, 'UNKNOWN');
+const codename = get(codenames, appVersion, 'Codename');
 
 export default appVersion;
 

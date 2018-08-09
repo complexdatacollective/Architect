@@ -1,14 +1,10 @@
 import React from 'react';
-import Egg from './Egg';
 import { appVersion, codename } from '../utils/appVersion';
 
 const Version = () => (
-  <Egg>
-    <div className="version">
-      <h1>{appVersion}</h1>
-      <h2>{codename}</h2>
-    </div>
-  </Egg>
+  <div className="version">
+    <h4>{appVersion} - &quot;{codename}&quot;</h4>
+  </div>
 );
 
 export default Version;

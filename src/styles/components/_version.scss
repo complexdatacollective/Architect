@@ -1,10 +1,7 @@
 .version {
-  z-index: var(--z-chrome);
+  z-index: var(--z-dev);
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: unit(4);
-  background: var(--architect-intent);
-  color: var(--text-light);
+  top: 10px;
+  right: 20px;
+  color: var(--text);
 }
