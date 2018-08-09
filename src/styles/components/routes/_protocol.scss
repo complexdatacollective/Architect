@@ -17,7 +17,7 @@
   }
 
   .timeline-overview__panel {
-    will-change: opacity, box-shadow;
+    // will-change: opacity, box-shadow;
     opacity: 0;
     box-shadow: 0 0 0 0 var(--color-shadow);
   }
@@ -57,7 +57,7 @@
     }
 
     .timeline-overview__panel {
-      transition: opacity 0s 950ms,
+      transition: opacity 50ms 900ms,
       box-shadow 300ms 950ms;
       opacity: 1;
       box-shadow: unit(1) unit(1) 0 0 var(--color-shadow);
