@@ -15,11 +15,6 @@
             "description": "Human readable description",
             "type": "layout"
           },
-          "geographicalLayout": {
-            "label": "Geographical closeness layout",
-            "description": "Human readable description",
-            "type": "layout"
-          },
           "name": {
             "label": "Name",
             "description": "Human readable description",
