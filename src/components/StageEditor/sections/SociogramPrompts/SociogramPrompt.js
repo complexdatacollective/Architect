@@ -95,7 +95,7 @@ class SociogramPrompt extends Component {
                   name="subject.type"
                   component={
                     (field) => {
-                      const nodeProperties = find(nodeTypes, ['value', field.input.value]);
+                      const nodeProperties = field.input.value ? find(nodeTypes, ['value', field.input.value]) : { label: '', color: 'node-color-seq-1' };
                       return <Node label={nodeProperties.label} color={nodeProperties.color} />;
                     }
                   }
