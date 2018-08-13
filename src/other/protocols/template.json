@@ -11,12 +11,12 @@
         "variables": {
           "closenessLayout": {
             "label": "Closeness layout",
-            "description": "Earthling readable description",
+            "description": "Human readable description",
             "type": "layout"
           },
           "geographicalLayout": {
             "label": "Geographical closeness layout",
-            "description": "Earthling readable description",
+            "description": "Human readable description",
             "type": "layout"
           },
           "name": {

@@ -12,12 +12,7 @@
         "variables": {
           "closenessLayout": {
             "label": "Closeness layout",
-            "description": "Earthling readable description",
-            "type": "layout"
-          },
-          "geographicalLayout": {
-            "label": "Geographical closeness layout",
-            "description": "Earthling readable description",
+            "description": "Human readable description",
             "type": "layout"
           },
           "name": {
@@ -874,7 +869,7 @@
           },
           "filter": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'GREATER_THAN', value: 29 })]);",
           "layout": {
-            "variable": "closenessLayout",
+            "layoutVariable": "closenessLayout",
             "allowPositioning": true
           },
           "edges": {
@@ -905,7 +900,7 @@
           },
           "filter": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'GREATER_THAN', value: 29 })]);",
           "layout": {
-            "variable": "closenessLayout",
+            "layoutVariable": "closenessLayout",
             "allowPositioning": true
           },
           "edges": {
