@@ -81,27 +81,19 @@ class Scene extends Component {
       <div className={sceneClasses}>
         <Flipper flipKey={`${this.state.openStack}-${this.isProtocol()}`}>
           <div className="scene__stacks">
-            { this.props.protocols.map((protocol, index) => {
-              const stackClasses = cx(
-                'scene__stack',
-                {
-                  'scene__stack--hide': this.isProtocol() && protocol.id !== this.state.openStack
-                },
-              );
-              return (
-                <Flipped flipId={protocol.id}>
-                  <div
-                    className={stackClasses}
-                    key={protocol.id}
-                    onClick={() => this.openStack(protocol.id)}
-                  >
-                    <ProtocolStack
-                      protocol={protocol}
-                    />
-                  </div>
-                </Flipped>
-              );
-            }) }
+            { !this.isProtocol() && this.props.protocols.map((protocol, index) => (
+              <Flipped flipId={protocol.id}>
+                <div
+                  className="scene__stack"
+                  key={protocol.id}
+                  onClick={() => this.openStack(protocol.id)}
+                >
+                  <ProtocolStack
+                    protocol={protocol}
+                  />
+                </div>
+              </Flipped>
+            )) }
           </div>
           <div className="scene__loader">
             <div onClick={this.props.createProtocol}>Create new</div>

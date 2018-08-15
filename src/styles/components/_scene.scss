@@ -5,6 +5,7 @@
   top: 0;
   left: 0;
   background: grey;
+  overflow-y: scroll;
 
   &__stacks {
     position: absolute;
@@ -32,18 +33,36 @@
   }
 
   &__timeline {
-    display: none;
     position: absolute;
     top: 50vh;
     left: 0;
     width: 100%;
-    background-color: red;
+    background-color: green;
+    opacity: 0;
+    visibility: hidden;
+    transition: 500ms;
+    transform: translateY(50vh);
+  }
+
+  .stage {
+    display: block;
+    margin: 50px auto;
+    width: 400px;
+    display: block;
+    height: 300px;
+    background: red;
   }
 
   &--protocol {
     .scene__stacks {
       opacity: 0;
       visibility: hidden;
+    }
+
+    .scene__timeline {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
   }
 }
