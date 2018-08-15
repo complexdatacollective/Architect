@@ -31,31 +31,18 @@ class Scene extends Component {
 
     this.state = {
       openStack: null,
-      mode: 'wfpol',
+      mode: 'start',
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log({ prevProps, props: this.props });
-    // if (prevProps.match === this.props.match) {
-    //   return;
-    // }
     if (!prevProps.match && this.props.match) {
-      // animate in
       console.log('in', this.state);
-
-    //   const from = this.state.openStack.current;
-    //   const to = this.overviewRef.current
-
-    //   tween(from, to);
-
-    //   console.log(from, to);
       this.setState({ mode: 'protocol' });
     }
     if (prevProps.match && !this.props.match) {
-      // animate out
       console.log('out');
-      this.setState({ mode: 'wfpwfp' });
+      this.setState({ mode: 'start' });
     }
   }
 
