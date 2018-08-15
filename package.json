@@ -100,6 +100,7 @@
         "react-dom": "^16.4.1",
         "react-dropzone": "^4.2.13",
         "react-fastclick": "^3.0.2",
+        "react-flip-toolkit": "^4.0.0",
         "react-markdown": "^3.3.4",
         "react-redux": "^4.4.5",
         "react-router-dom": "^4.3.1",

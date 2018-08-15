@@ -5,41 +5,11 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { get } from 'lodash';
+import { Flipper, Flipped } from 'react-flip-toolkit';
 import cx from 'classnames';
-import animate from 'animejs';
-import getAbsoluteBoundingRect from '../utils/getAbsoluteBoundingRect';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import ProtocolStack from './Views/Start/ProtocolStack';
 
-const tween = (fromEl, toEl) => {
-  const from = getAbsoluteBoundingRect(fromEl);
-  const to = getAbsoluteBoundingRect(toEl);
-
-  const clone = fromEl.cloneNode(true);
-
-  document.body.appendChild(clone);
-
-  clone.style.position = 'absolute';
-  clone.style.opacity = 1;
-  clone.style.left =  `${from.left}px`;
-  clone.style.top = `${from.top}px`;
-  clone.style.width = `${from.width}px`;
-  clone.style.height = `${from.height}px`;
-
-  console.log(from, to);
-
-  animate({
-    targets: clone,
-    opacity: 0,
-    left: to.left,
-    top: to.top,
-    width: to.width,
-    height: to.height,
-    elasticity: 0,
-    duration: 5000,
-  });
-};
 
 class Scene extends Component {
   static propTypes = {
@@ -49,19 +19,15 @@ class Scene extends Component {
 
   static defaultProps = {
     protocol: null,
-    protocols: [],
+    protocols: [
+      { id: 1, workingPath: 1 },
+      { id: 2, workingPath: 2 },
+      { id: 3, workingPath: 3 },
+    ],
   };
 
   constructor(props) {
     super(props);
-
-    this.protocolRefs = [
-      React.createRef(),
-      React.createRef(),
-      React.createRef(),
-    ];
-
-    this.overviewRef = React.createRef();
 
     this.state = {
       openStack: null,
@@ -71,76 +37,98 @@ class Scene extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log({ prevProps, props: this.props });
-    if (prevProps.match === this.props.match) {
-      return;
-    }
+    // if (prevProps.match === this.props.match) {
+    //   return;
+    // }
     if (!prevProps.match && this.props.match) {
       // animate in
       console.log('in', this.state);
 
-      const from = this.state.openStack.current;
-      const to = this.overviewRef.current
+    //   const from = this.state.openStack.current;
+    //   const to = this.overviewRef.current
 
-      tween(from, to);
+    //   tween(from, to);
 
-      console.log(from, to);
+    //   console.log(from, to);
       this.setState({ mode: 'protocol' });
     }
     if (prevProps.match && !this.props.match) {
       // animate out
       console.log('out');
+      this.setState({ mode: 'wfpwfp' });
     }
   }
 
-  openStack(ref) {
+  openStack(index) {
     this.setState({
-      openStack: ref,
+      openStack: index,
     });
+  }
+
+  isProtocol() {
+    return this.state.mode === 'protocol';
   }
 
   render() {
     const sceneClasses = cx(
       'scene',
-      { 'scene--protocol': this.state.mode === 'protocol' },
+      { 'scene--protocol': this.isProtocol() },
     );
+
+    console.log({ state: this.state });
 
     return (
       <div className={sceneClasses}>
-        <div className="scene__stacks">
-          { this.props.protocols.map((protocol, index) => (
-            <div
-              className="scene__stack"
-              key={index}
-              ref={this.protocolRefs[index]}
-              onClick={() => this.openStack(this.protocolRefs[index])}
-            >
-              <ProtocolStack
-                protocol={protocol}
-              />
-            </div>
-          )) }
-        </div>
-        <div className="scene__loader">
-          <div onClick={this.props.createProtocol}>Create new</div>
-        </div>
-        <div className="scene__overview" ref={this.overviewRef}>
-        </div>
-        <div className="scene__timeline">
-          <div className="stage"></div>
-          <div className="stage"></div>
-          <div className="stage"></div>
-          <div className="stage"></div>
-          <div className="stage"></div>
-          <div className="stage"></div>
-          <div className="stage"></div>
-        </div>
+        <Flipper flipKey={`${this.state.openStack}-${this.isProtocol()}`}>
+          <div className="scene__stacks">
+            { this.props.protocols.map((protocol, index) => {
+              const stackClasses = cx(
+                'scene__stack',
+                {
+                  'scene__stack--hide': this.isProtocol() && protocol.id !== this.state.openStack
+                },
+              );
+              return (
+                <Flipped flipId={protocol.id}>
+                  <div
+                    className={stackClasses}
+                    key={protocol.id}
+                    onClick={() => this.openStack(protocol.id)}
+                  >
+                    <ProtocolStack
+                      protocol={protocol}
+                    />
+                  </div>
+                </Flipped>
+              );
+            }) }
+          </div>
+          <div className="scene__loader">
+            <div onClick={this.props.createProtocol}>Create new</div>
+          </div>
+          { this.isProtocol() &&
+            <Flipped flipId={this.state.openStack}>
+              <div className="scene__overview" ref={this.overviewRef}>
+              </div>
+            </Flipped>
+          }
+          <div className="scene__timeline">
+            <div className="stage"></div>
+            <div className="stage"></div>
+            <div className="stage"></div>
+            <div className="stage"></div>
+            <div className="stage"></div>
+            <div className="stage"></div>
+            <div className="stage"></div>
+          </div>
+        </Flipper>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  protocols: get(state, 'protocols', []).slice(0, 3),
+  // protocols: get(state, 'protocols', []).slice(0, 3),
 });
 
 const mapDispatchToProps = dispatch => ({
