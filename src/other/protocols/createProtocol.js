@@ -45,19 +45,19 @@ export const createProtocolArchive = ({ workingPath, archivePath }, protocol) =>
  */
 const createProtocol = () =>
   saveDialog()
-    .then((archivePath) => {
-      const workingPath = getLocalDirectoryFromArchivePath(archivePath);
+    .then((filePath) => {
+      const workingPath = getLocalDirectoryFromArchivePath(filePath);
 
       return createProtocolArchive({
         workingPath,
-        archivePath,
+        filePath,
       }, {
         ...template,
-        name: path.basename(archivePath, '.netcanvas'),
+        name: path.basename(filePath, '.netcanvas'),
       })
         .then(() => ({
           workingPath,
-          archivePath,
+          filePath,
         }));
     });
 

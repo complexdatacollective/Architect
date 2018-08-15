@@ -1,4 +1,5 @@
 import { importProtocol } from './import';
+import { createProtocol } from './create';
 
 const initialState = [];
 
@@ -11,6 +12,7 @@ export default function reducer(state = initialState, action = {}) {
 
 const actionCreators = {
   importProtocol,
+  createProtocol,
 };
 
 const actionTypes = {

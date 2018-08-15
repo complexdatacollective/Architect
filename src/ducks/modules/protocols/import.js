@@ -2,7 +2,7 @@ import uuid from 'uuid';
 import path from 'path';
 import { importProtocol as importFiles } from '../../../other/protocols';
 
-const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT_PROTOCOL';
+// const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT_PROTOCOL';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_PROTOCOL_SUCCESS';
 const IMPORT_PROTOCOL_ERROR = 'PROTOCOLS/IMPORT_PROTOCOL_ERROR';
 
@@ -16,13 +16,15 @@ const getMeta = (filePath, isAdvanced = false) => ({
 });
 
 const importProtocolSuccess = ({ filePath, id, advanced, workingPath }) => ({
+  type: IMPORT_PROTOCOL_SUCCESS,
   filePath,
   id,
   advanced,
   workingPath,
 });
 
-const importProtocolError = ({ filePath, error }) => ({
+const importProtocolError = (error, filePath) => ({
+  type: IMPORT_PROTOCOL_ERROR,
   filePath,
   error,
 });
@@ -37,13 +39,7 @@ const importProtocol = filePath =>
     return importFiles(filePath)
       .then(workingPath => ({ ...protocolMeta, workingPath }))
       .then(metaWithWorkingPath => dispatch(importProtocolSuccess(metaWithWorkingPath)))
-      .catch(
-        e =>
-          dispatch(importProtocolError({
-            filePath,
-            error: e,
-          })),
-      );
+      .catch(e => dispatch(importProtocolError(e, filePath)));
   };
 
 const actionCreators = {
@@ -51,7 +47,6 @@ const actionCreators = {
 };
 
 const actionTypes = {
-  IMPORT_PROTOCOL,
   IMPORT_PROTOCOL_SUCCESS,
   IMPORT_PROTOCOL_ERROR,
 };

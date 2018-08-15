@@ -1,20 +1,32 @@
-import { createProtocol } from '../../../other/protocols';
-import history from '../../../history';
+import { createProtocol as createProtocolFile } from '../../../other/protocols';
 
-const createProtocolAction = () =>
-  () =>
-    createProtocol()
-      .then(
-        ({ id }) => {
-          history.push(`/edit/${encodeURIComponent(id)}`);
-        },
-      );
+// const CREATE_PROTOCOL = 'PROTOCOLS/CREATE_PROTOCOL';
+const CREATE_PROTOCOL_SUCCESS = 'PROTOCOLS/CREATE_PROTOCOL_SUCCESS';
+const CREATE_PROTOCOL_ERROR = 'PROTOCOLS/CREATE_PROTOCOL_ERROR';
+
+const createProtocolSuccess = filePath => ({
+  type: CREATE_PROTOCOL_SUCCESS,
+  filePath,
+});
+
+const createProtocolError = error => ({
+  type: CREATE_PROTOCOL_ERROR,
+  error,
+});
+
+const createProtocol = () =>
+  dispatch =>
+    createProtocolFile()
+      .then(({ filePath }) => dispatch(createProtocolSuccess(filePath)))
+      .catch(e => dispatch(createProtocolError(e)));
 
 const actionCreators = {
-  createProtocol: createProtocolAction,
+  createProtocol,
 };
 
 const actionTypes = {
+  CREATE_PROTOCOL_SUCCESS,
+  CREATE_PROTOCOL_ERROR,
 };
 
 export {
