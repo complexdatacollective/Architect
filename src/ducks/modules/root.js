@@ -4,8 +4,9 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import undoable, { excludeAction } from 'redux-undo';
 import protocol, { actionTypes as protocolActions } from './protocol';
-import session from './session';
 import protocols from './protocols';
+import recentProtocols from './recentProtocols';
+import session from './session';
 import guidance from './guidance';
 import { actionTypes as protocolFileActionTypes } from './protocol/file';
 
@@ -42,4 +43,5 @@ export const rootReducer = combineReducers({
     },
   ),
   protocols,
+  recentProtocols,
 });

@@ -3,7 +3,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { times, sampleSize } from 'lodash';
-import reducer, { actionCreators } from '../index';
+import reducer, { actionCreators } from '../../protocols';
 import { createProtocol, locateProtocol } from '../../../../other/protocols';
 import { protocolLoadedAction } from '../../protocol/file';
 import history from '../../../../history';
