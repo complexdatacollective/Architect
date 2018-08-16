@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { compose } from 'recompose';
 import { Button, Icon } from '../../../ui/components';
-import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
+// import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
 import ProtocolStack from './ProtocolStack';
 import networkCanvasBrand from '../../../images/network-canvas-brand.svg';
 
@@ -87,11 +87,15 @@ const mapStateToProps = state => ({
   protocols: get(state, 'protocols', []).slice(0, 3),
 });
 
-const mapDispatchToProps = dispatch => ({
-  createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
+const mapDispatchToProps = () => ({
+  createProtocol: () => {},
+  chooseProtocol: () => {},
+  loadProtocol: () => {},
+  clearDeadLinks: () => {},
+  // createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
   // loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
-  chooseProtocol: bindActionCreators(protocolsActions.chooseProtocol, dispatch),
-  clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
+  // chooseProtocol: bindActionCreators(protocolsActions.chooseProtocol, dispatch),
+  // clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });
 
 export { Start };

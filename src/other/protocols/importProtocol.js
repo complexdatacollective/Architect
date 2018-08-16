@@ -1,17 +1,7 @@
-import { remote } from 'electron';
-import uuid from 'uuid';
 import path from 'path';
 import fs from 'fs-extra';
 import { extract } from './archive';
-
-/**
- * Generates a path in the application /tmp/ to be used
- * as a working copy for editing protocols.
- *
- * @returns The destination path in /tmp/.
- */
-export const getLocalDirectoryFromArchivePath = () =>
-  path.join(remote.app.getPath('temp'), 'protocols', uuid());
+import { getLocalDirectoryFromArchivePath } from './utils';
 
 /**
  * Create a working copy of a protocol in the application

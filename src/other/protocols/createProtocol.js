@@ -2,10 +2,8 @@ import { remote } from 'electron';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
-import {
-  getLocalDirectoryFromArchivePath,
-  archive,
-} from './archive';
+import { archive } from './archive';
+import { getLocalDirectoryFromArchivePath } from './utils';
 import template from './template.json';
 
 const saveDialogOptions = {

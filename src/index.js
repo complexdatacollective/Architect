@@ -12,7 +12,7 @@ import { store } from './ducks/store';
 import App from './components/App';
 import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
-import { actionCreators as fileActionCreators } from './ducks/modules/protocol/file';
+// import { actionCreators as fileActionCreators } from './ducks/modules/protocol/file';
 
 initReactFastclick();
 
@@ -66,8 +66,8 @@ ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
 
     // eslint-disable-next-line
     console.log(`Save, then open "${protocolPath}"`);
-    store.dispatch(fileActionCreators.saveProtocol())
-      .then(() => memoryHistory.push(protocolLocation));
+    // store.dispatch(fileActionCreators.saveProtocol())
+    //   .then(() => memoryHistory.push(protocolLocation));
   });
 });
 

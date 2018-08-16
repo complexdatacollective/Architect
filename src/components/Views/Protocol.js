@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import { pick, get } from 'lodash';
@@ -16,7 +16,7 @@ import ViewForms from '../Cards/ViewForms';
 import EditType from '../Cards/EditType';
 import Timeline from '../../components/Timeline';
 import ControlBar from '../ControlBar';
-import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
+// import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
 
 const RightArrow = <Icon name="arrow-right" />;
 
@@ -186,9 +186,10 @@ function mapStateToProps(state, props) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps() {
   return {
-    saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
+    saveProtocol: () => {},
+    // saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
   };
 }
 

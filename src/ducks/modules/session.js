@@ -1,4 +1,4 @@
-import { actionTypes as protocolFileActionTypes } from './protocol/file';
+// import { actionTypes as protocolFileActionTypes } from './protocol/file';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as protocolRegistryActionTypes } from './protocol/variableRegistry';
 import { actionTypes as formActionTypes } from './protocol/forms';
@@ -20,19 +20,19 @@ export default function reducer(state = initialState, action = {}) {
         lastChanged: 0,
       };
     }
-    case protocolFileActionTypes.OPEN_PROTOCOL: {
-      return {
-        ...state,
-        activeProtocol: action.meta,
-        lastSaved: 0,
-        lastChanged: 0,
-      };
-    }
-    case protocolFileActionTypes.SAVE_COMPLETE:
-      return {
-        ...state,
-        lastSaved: new Date().getTime(),
-      };
+    // case protocolFileActionTypes.OPEN_PROTOCOL: {
+    //   return {
+    //     ...state,
+    //     activeProtocol: action.meta,
+    //     lastSaved: 0,
+    //     lastChanged: 0,
+    //   };
+    // }
+    // case protocolFileActionTypes.SAVE_COMPLETE:
+    //   return {
+    //     ...state,
+    //     lastSaved: new Date().getTime(),
+    //   };
     // All these actions are considered saveable changes:
     case protocolStageActionTypes.CREATE_STAGE:
     case protocolStageActionTypes.UPDATE_STAGE:

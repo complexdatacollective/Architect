@@ -5,10 +5,10 @@ import { reducer as formReducer } from 'redux-form';
 import undoable, { excludeAction } from 'redux-undo';
 import protocol, { actionTypes as protocolActions } from './protocol';
 import protocols from './protocols';
-import recentProtocols from './recentProtocols';
+// import recentProtocols from './recentProtocols';
 import session from './session';
 import guidance from './guidance';
-import { actionTypes as protocolFileActionTypes } from './protocol/file';
+// import { actionTypes as protocolFileActionTypes } from './protocol/file';
 
 const combineFilters = (...filters) =>
   (...args) =>
@@ -36,12 +36,12 @@ export const rootReducer = combineReducers({
         ({ type }) => !/^@@redux-form\//.test(type.toString()),
         excludeAction([
           'persist/REHYDRATE',
-          protocolFileActionTypes.SAVE_COMPLETE,
+          // protocolFileActionTypes.SAVE_COMPLETE,
           protocolActions.SET_PROTOCOL,
         ]),
       ),
     },
   ),
   protocols,
-  recentProtocols,
+  // recentProtocols,
 });

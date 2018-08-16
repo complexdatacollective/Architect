@@ -1,8 +1,8 @@
-import { createProtocol } from './create';
-import { importProtocol } from './import';
-import { loadProtocol } from './load';
-import { saveProtocol } from './save';
-import { exportProtocol } from './export';
+import { actionCreators as createActionCreators } from './create';
+import { actionCreators as importActionCreators } from './import';
+import { actionCreators as loadActionCreators } from './load';
+import { actionCreators as saveActionCreators } from './save';
+import { actionCreators as exportActionCreators } from './export';
 
 const SAVE_AND_EXPORT = 'PROTOCOLS/SAVE_AND_EXPORT';
 const SAVE_AND_EXPORT_SUCCESS = 'PROTOCOLS/SAVE_AND_EXPORT_SUCCESS';
@@ -43,17 +43,17 @@ const importAndLoadError = error => ({
 const saveAndExportThunk = () =>
   dispatch =>
     dispatch(saveAndExport())
-      .then(() => dispatch(saveProtocol()))
-      .then(() => dispatch(exportProtocol()))
+      .then(() => dispatch(saveActionCreators.saveProtocol()))
+      .then(() => dispatch(exportActionCreators.exportProtocol()))
       .then(() => dispatch(saveAndExportSuccess()))
       .catch(e => dispatch(saveAndExportError(e)));
 
 const importAndLoadThunk = filePath =>
   dispatch =>
     dispatch(importAndLoad(filePath))
-      .then(() => dispatch(importProtocol(filePath)))
+      .then(() => dispatch(importActionCreators.importProtocol(filePath)))
       .then(meta =>
-        dispatch(loadProtocol(meta.id))
+        dispatch(loadActionCreators.loadProtocol(meta.id))
           .then(() => dispatch(importAndLoadSuccess(meta))),
       )
       .catch(e => dispatch(importAndLoadError(e)));
@@ -68,8 +68,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  importProtocol,
-  createProtocol,
+  createProtocol: createActionCreators.createProtocol,
   saveAndExportProtocol: saveAndExportThunk,
   importAndLoadProtocol: importAndLoadThunk,
 };

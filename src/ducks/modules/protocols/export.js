@@ -1,4 +1,4 @@
-import { exportProtocol as exportProtocolFile } from '../../../other/protocols';
+import exportProtocolFile from '../../../other/protocols/exportProtocol';
 
 const EXPORT_PROTOCOL = 'PROTOCOLS/EXPORT';
 const EXPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/EXPORT_SUCCESS';

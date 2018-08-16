@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import path from 'path';
-import { importProtocol as importFiles } from '../../../other/protocols';
+import importProtocolFiles from '../../../other/protocols/importProtocol';
 
 // const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT_PROTOCOL';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_PROTOCOL_SUCCESS';
@@ -36,7 +36,7 @@ const importProtocol = filePath =>
       isNetcanvasFile(filePath),
     );
 
-    return importFiles(filePath)
+    return importProtocolFiles(filePath)
       .then(workingPath => ({ ...protocolMeta, workingPath }))
       .then(metaWithWorkingPath => dispatch(importProtocolSuccess(metaWithWorkingPath)))
       .catch(e => dispatch(importProtocolError(e, filePath)));
