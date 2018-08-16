@@ -34,9 +34,9 @@ const createProtocolWorkingPath = (workingPath, protocol) =>
     resolve();
   });
 
-export const createProtocolArchive = ({ workingPath, archivePath }, protocol) =>
+export const createProtocolArchive = ({ workingPath, filePath }, protocol) =>
   createProtocolWorkingPath(workingPath, protocol)
-    .then(() => archive(workingPath, archivePath));
+    .then(() => archive(workingPath, filePath));
 
 /**
  * Shows a save dialog and then creates an empty protocol there
@@ -45,6 +45,7 @@ const createProtocol = () =>
   saveDialog()
     .then((filePath) => {
       const workingPath = getLocalDirectoryFromArchivePath(filePath);
+      console.log({ filePath, workingPath });
 
       return createProtocolArchive({
         workingPath,

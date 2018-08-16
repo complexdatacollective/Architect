@@ -12,7 +12,7 @@ import networkCanvasBrand from '../../../images/network-canvas-brand.svg';
 class Start extends PureComponent {
   static propTypes = {
     recentProtocols: PropTypes.array.isRequired,
-    createProtocol: PropTypes.func.isRequired,
+    createAndLoadProtocol: PropTypes.func.isRequired,
     openProtocol: PropTypes.func.isRequired,
     clearDeadLinks: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
@@ -46,7 +46,7 @@ class Start extends PureComponent {
               color="platinum"
               size="small"
               icon={<Icon name="arrow-right" color="charcoal" />}
-              onClick={() => this.props.createProtocol(this.openProtocol)}
+              onClick={this.props.createAndLoadProtocol}
             >Create new</Button>
             <Button
               id="open-existing-protocol-button"
@@ -88,10 +88,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createProtocol: () => {},
-  clearDeadLinks: () => {},
-  // createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
+  createAndLoadProtocol: bindActionCreators(protocolsActions.createAndLoadProtocol, dispatch),
   openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
+  clearDeadLinks: () => {},
   // clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });
 

@@ -36,12 +36,9 @@ const importAndLoad = filePath => ({
   filePath,
 });
 
-const importAndLoadSuccess = ({ id, filePath, workingPath, advanced }) => ({
+const importAndLoadSuccess = id => ({
   type: IMPORT_AND_LOAD_SUCCESS,
   id,
-  filePath,
-  workingPath,
-  advanced,
 });
 
 const importAndLoadError = error => ({
@@ -67,12 +64,18 @@ const importAndLoadThunk = filePath =>
   (dispatch) => {
     dispatch(importAndLoad(filePath));
     dispatch(importActionCreators.importProtocol(filePath))
-      .then((meta) => {
-        history.push(`/edit/${meta.id}/`);
-        return dispatch(importAndLoadSuccess(meta));
+      .then(({ id }) => {
+        history.push(`/edit/${id}/`);
+        return dispatch(importAndLoadSuccess(id));
       })
       .catch(e => dispatch(importAndLoadError(e)));
   };
+
+const createAndLoadProtocolThunk = () =>
+  dispatch =>
+    dispatch(createActionCreators.createProtocol())
+      .then(({ filePath }) => dispatch(importAndLoadThunk(filePath)))
+      .catch(e => dispatch(openError(e)));
 
 const openProtocol = () =>
   dispatch =>
@@ -100,13 +103,20 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  createProtocol: createActionCreators.createProtocol,
+  createAndLoadProtocol: createAndLoadProtocolThunk,
   saveAndExportProtocol: saveAndExportThunk,
   importAndLoadProtocol: importAndLoadThunk,
   openProtocol,
 };
 
 const actionTypes = {
+  SAVE_AND_EXPORT,
+  SAVE_AND_EXPORT_SUCCESS,
+  SAVE_AND_EXPORT_ERROR,
+  IMPORT_AND_LOAD,
+  IMPORT_AND_LOAD_SUCCESS,
+  IMPORT_AND_LOAD_ERROR,
+  OPEN_ERROR,
 };
 
 export {
