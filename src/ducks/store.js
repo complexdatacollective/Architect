@@ -1,14 +1,22 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistStore, autoRehydrate } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import logger from './middleware/logger';
 import { rootReducer } from './modules/root';
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['form', 'protocol', 'session'],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = createStore(
-  rootReducer,
+  persistedReducer,
   undefined,
   compose(
-    autoRehydrate(),
     applyMiddleware(thunk, logger),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
       ? window.devToolsExtension()
@@ -16,4 +24,4 @@ export const store = createStore(
   ),
 );
 
-export const persistor = persistStore(store, { blacklist: ['form', 'protocol', 'session'] });
+export const persistor = persistStore(store);

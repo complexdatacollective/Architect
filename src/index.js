@@ -6,9 +6,10 @@ import { Router, Route } from 'react-router-dom';
 import { ipcRenderer, remote } from 'electron';
 import pathToRegexp from 'path-to-regexp';
 import { get } from 'lodash';
+import { PersistGate } from 'redux-persist/integration/react';
 import './styles/main.scss';
 import memoryHistory from './history';
-import { store } from './ducks/store';
+import { store, persistor } from './ducks/store';
 import App from './components/App';
 import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
@@ -21,15 +22,17 @@ const startApp = () => {
     <Fragment>
       <ClipPaths />
       <Provider store={store}>
-        <Router history={memoryHistory}>
-          <Route
-            render={({ location, history }) => (
-              <App>
-                <Routes location={location} history={history} />
-              </App>
-            )}
-          />
-        </Router>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router history={memoryHistory}>
+            <Route
+              render={({ location, history }) => (
+                <App>
+                  <Routes location={location} history={history} />
+                </App>
+              )}
+            />
+          </Router>
+        </PersistGate>
       </Provider>
     </Fragment>,
     document.getElementById('root'),
@@ -66,6 +69,7 @@ ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
 
     // eslint-disable-next-line
     console.log(`Save, then open "${protocolPath}"`);
+    // TODO: reimplement
     // store.dispatch(fileActionCreators.saveProtocol())
     //   .then(() => memoryHistory.push(protocolLocation));
   });
