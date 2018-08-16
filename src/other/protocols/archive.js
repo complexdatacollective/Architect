@@ -1,6 +1,3 @@
-import { remote } from 'electron';
-import uuid from 'uuid';
-import path from 'path';
 import fs from 'fs';
 import decompress from 'decompress';
 import archiver from 'archiver';
@@ -10,26 +7,19 @@ const archiveOptions = {
   store: true,
 };
 
-export const getProtocolNameFromArchivePath = fileName => path.basename(fileName, '.netcanvas');
-export const getLocalDirectoryFromArchivePath = () =>
-  path.join(remote.app.getPath('temp'), uuid());
+const extract = (sourcePath, destinationPath) =>
+  decompress(
+    sourcePath,
+    destinationPath,
+  ).then(() => destinationPath);
 
-const extract = (fileName) => {
-  const workingPath = getLocalDirectoryFromArchivePath(fileName);
-
-  return decompress(
-    fileName,
-    workingPath,
-  ).then(() => workingPath);
-};
-
-const archive = (workingPath, archivePath) =>
+const archive = (sourcePath, destinationPath) =>
   new Promise((resolve, reject) => {
-    const output = fs.createWriteStream(archivePath);
+    const output = fs.createWriteStream(destinationPath);
     const zip = archiver('zip', archiveOptions);
 
     output.on('close', () => {
-      resolve(workingPath, archivePath);
+      resolve(sourcePath, destinationPath);
     });
 
     output.on('warning', reject);
@@ -40,7 +30,7 @@ const archive = (workingPath, archivePath) =>
     zip.on('warning', reject);
     zip.on('error', reject);
 
-    zip.directory(workingPath, false);
+    zip.directory(sourcePath, false);
 
     zip.finalize();
   });

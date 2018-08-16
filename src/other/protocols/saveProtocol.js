@@ -1,14 +1,14 @@
 import path from 'path';
-import { archive } from './archive';
 import { writeFile } from '../filesystem';
 import pruneProtocolAssets from './pruneProtocolAssets';
 
 /**
- * Given a protocol object save that over the protocol at protocolPath
- * @param {object} protocolMeta - meta data about for protocol RE file system
- * @param {object} protocol - The protocol itself.
+ * Save a protocol object to disk, and prune any unused assets from
+ * /assets/ sub directory.
+ * @param {string} workingPath - working path in application /tmp/ dir
+ * @param {object} protocol - The protocol object.
  */
-const saveProtocol = ({ workingPath, archivePath, advanced }, protocol) => {
+const saveProtocol = (workingPath, protocol) => {
   // save json to temp dir
   const destinationPath = path.join(workingPath, 'protocol.json');
 
@@ -16,12 +16,6 @@ const saveProtocol = ({ workingPath, archivePath, advanced }, protocol) => {
     .then(() => {
       // Now that the protocol is commited to disk we can safely prune unused assets.
       pruneProtocolAssets(workingPath);
-    })
-    .then(() => {
-      if (!advanced) {
-        // also save zip
-        archive(workingPath, archivePath);
-      }
     });
 };
 
