@@ -11,7 +11,7 @@ import networkCanvasBrand from '../../../images/network-canvas-brand.svg';
 
 class Start extends PureComponent {
   static propTypes = {
-    protocols: PropTypes.array.isRequired,
+    recentProtocols: PropTypes.array.isRequired,
     createProtocol: PropTypes.func.isRequired,
     openProtocol: PropTypes.func.isRequired,
     clearDeadLinks: PropTypes.func.isRequired,
@@ -60,9 +60,9 @@ class Start extends PureComponent {
         </div>
 
         <div className="start__split">
-          { this.props.protocols.length > 0 &&
+          { this.props.recentProtocols.length > 0 &&
             <div className="start__protocols">
-              { this.props.protocols.map((protocol, index) => (
+              { this.props.recentProtocols.map((protocol, index) => (
                 <div
                   className="start__protocols-protocol"
                   key={index}
@@ -84,15 +84,13 @@ class Start extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  protocols: get(state, 'protocols', []).slice(0, 3),
+  recentProtocols: get(state, 'recentProtocols', []).slice(0, 3),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   createProtocol: () => {},
-  loadProtocol: () => {},
   clearDeadLinks: () => {},
   // createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
-  // loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
   openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
   // clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });

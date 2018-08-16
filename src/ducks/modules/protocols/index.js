@@ -36,9 +36,12 @@ const importAndLoad = filePath => ({
   filePath,
 });
 
-const importAndLoadSuccess = meta => ({
+const importAndLoadSuccess = ({ id, filePath, workingPath, advanced }) => ({
   type: IMPORT_AND_LOAD_SUCCESS,
-  meta,
+  id,
+  filePath,
+  workingPath,
+  advanced,
 });
 
 const importAndLoadError = error => ({
