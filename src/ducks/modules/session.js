@@ -5,6 +5,12 @@ import { actionTypes as protocolActionTypes } from './protocol';
 import { actionTypes as exportProtocolActionTypes } from './protocols/export';
 import { actionTypes as loadProtocolActionTypes } from './protocols/load';
 
+const RESET_SESSION = 'SESSION/RESET';
+
+const resetSession = () => ({
+  type: RESET_SESSION,
+});
+
 const initialState = {
   activeProtocol: null,
   lastSaved: 0,
@@ -41,15 +47,21 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         lastChanged: new Date().getTime(),
       };
+    case RESET_SESSION:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }
 }
 
 const actionCreators = {
+  resetSession,
 };
 
 const actionTypes = {
+  RESET_SESSION,
 };
 
 export {

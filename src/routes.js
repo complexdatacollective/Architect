@@ -68,8 +68,9 @@ class Routes extends Component {
       <React.Fragment>
         <Route
           path="/edit/:protocol"
-          render={props => <ProtocolLoader {...props} />}
-        />
+        >
+          { props => <ProtocolLoader {...props} /> }
+        </Route>
         <ViewTransitionRoute
           location={location}
           path="/edit/:protocol"

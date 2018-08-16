@@ -41,6 +41,7 @@ const startApp = () => {
 startApp();
 
 ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
+  // eslint-disable-next-line no-console
   console.log(`Open file "${protocolPath}"`);
   const state = store.getState();
   const activeProtocolId = state.session.activeProtocol;
@@ -48,12 +49,14 @@ ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
 
   // If the protocol is already open, no op
   if (meta && meta.filePath === protocolPath) {
+    // eslint-disable-next-line no-console
     console.log(`Cancelled open of "${protocolPath}" (already open)`);
     return;
   }
 
   // If no protocol is already open, just open it.
   if (!activeProtocolId) {
+    // eslint-disable-next-line no-console
     console.log(`Nothing open, open without asking"${protocolPath}"`);
     store.dispatch(protocolsActions.importAndLoadProtocol(protocolPath));
     return;

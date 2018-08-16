@@ -45,7 +45,6 @@ const createProtocol = () =>
   saveDialog()
     .then((filePath) => {
       const workingPath = getLocalDirectoryFromArchivePath(filePath);
-      console.log({ filePath, workingPath });
 
       return createProtocolArchive({
         workingPath,
