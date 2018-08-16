@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { compose } from 'recompose';
 import { Button, Icon } from '../../../ui/components';
-// import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
+import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
 import ProtocolStack from './ProtocolStack';
 import networkCanvasBrand from '../../../images/network-canvas-brand.svg';
 
@@ -13,7 +13,7 @@ class Start extends PureComponent {
   static propTypes = {
     protocols: PropTypes.array.isRequired,
     createProtocol: PropTypes.func.isRequired,
-    chooseProtocol: PropTypes.func.isRequired,
+    openProtocol: PropTypes.func.isRequired,
     clearDeadLinks: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   };
@@ -54,7 +54,7 @@ class Start extends PureComponent {
               size="small"
               color="cyber-grape"
               icon={<Icon name="arrow-right" />}
-              onClick={() => this.props.chooseProtocol(this.openProtocol)}
+              onClick={this.props.openProtocol}
             >Open existing</Button>
           </div>
         </div>
@@ -87,14 +87,13 @@ const mapStateToProps = state => ({
   protocols: get(state, 'protocols', []).slice(0, 3),
 });
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = (dispatch) => ({
   createProtocol: () => {},
-  chooseProtocol: () => {},
   loadProtocol: () => {},
   clearDeadLinks: () => {},
   // createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
   // loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
-  // chooseProtocol: bindActionCreators(protocolsActions.chooseProtocol, dispatch),
+  openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
   // clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });
 

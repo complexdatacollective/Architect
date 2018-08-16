@@ -1,5 +1,6 @@
 import { find } from 'lodash';
 import { loadProtocolData } from '../../../other/protocols';
+import history from '../../../history';
 
 const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';
 const LOAD_PROTOCOL_SUCCESS = 'PROTOCOLS/LOAD_SUCCESS';
@@ -16,19 +17,28 @@ export const loadProtocolSuccess = (meta, protocol) => ({
   protocol,
 });
 
-export const loadProtocolError = error => ({
-  type: LOAD_PROTOCOL_ERROR,
-  error,
-});
+export const loadProtocolError = error =>
+  (dispatch) => {
+    dispatch({
+      type: LOAD_PROTOCOL_ERROR,
+      error,
+    });
+
+    history.push('/');
+  };
 
 const loadProtocolThunk = id =>
   (dispatch, getState) => {
-    dispatch(loadProtocol(id)); // is this necessary?
-    const state = getState();
+    dispatch(loadProtocol(id));
 
+    const state = getState();
     const meta = find(state.protocols, ['id', id]);
 
-    loadProtocolData(meta.filePath)
+    if (!meta) {
+      return dispatch(loadProtocolError(`Protocol "${id}" not found in 'protocols'`));
+    }
+
+    return loadProtocolData(meta.workingPath)
       .then(protocolData => dispatch(loadProtocolSuccess(meta, protocolData)))
       .catch(error => dispatch(loadProtocolError(error)));
   };

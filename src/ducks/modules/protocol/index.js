@@ -3,6 +3,7 @@ import stages from './stages';
 import forms from './forms';
 import variableRegistry from './variableRegistry';
 import externalData from './externalData';
+import { actionTypes as loadProtocolActionTypes } from '../protocols/load';
 
 const initialState = {};
 
@@ -23,7 +24,7 @@ const updateOptions = options => ({
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
     case SET_PROTOCOL:
-    // case fileActionTypes.OPEN_PROTOCOL:
+    case loadProtocolActionTypes.LOAD_PROTOCOL_SUCCESS:
       return { ...action.protocol };
     case UPDATE_OPTIONS:
       return {

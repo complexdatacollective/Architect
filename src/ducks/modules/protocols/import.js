@@ -33,7 +33,7 @@ const importProtocol = filePath =>
   (dispatch) => {
     const protocolMeta = getMeta(
       filePath,
-      isNetcanvasFile(filePath),
+      !isNetcanvasFile(filePath),
     );
 
     return importProtocolFiles(filePath)
