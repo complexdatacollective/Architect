@@ -24,6 +24,7 @@ class ProtocolLoader extends Component {
 
   loadProtocol(protocol) {
     // If we've already loaded this route, don't load it again because we'll lose any changes
+    console.log({ protocol });
     if (protocol === this.state.protocol) { return; }
 
     this.setState(

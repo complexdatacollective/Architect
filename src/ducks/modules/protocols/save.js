@@ -27,6 +27,10 @@ const saveProtocolThunk = () =>
     const meta = find(state.protocols, ['id', activeProtocolId]);
     const protocol = getProtocol(state);
 
+    if (!meta) {
+      return dispatch(saveProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`));
+    }
+
     return saveProtocolFile(meta.workingPath, protocol)
       .then(destinationPath => dispatch(saveProtocolSuccess(destinationPath, protocol)))
       .catch(e => dispatch(saveProtocolError(e)));

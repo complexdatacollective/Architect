@@ -6,7 +6,7 @@ import { actionTypes as exportProtocolActionTypes } from './protocols/export';
 import { actionTypes as loadProtocolActionTypes } from './protocols/load';
 
 const initialState = {
-  activeProtocol: {}, // protocolMeta
+  activeProtocol: null,
   lastSaved: 0,
   lastChanged: 0,
 };
