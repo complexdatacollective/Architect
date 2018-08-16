@@ -1,3 +1,4 @@
+import { find } from 'lodash';
 import { saveProtocol as saveProtocolFile } from '../../../other/protocols';
 import { getProtocol } from '../../../selectors/protocol';
 
@@ -7,7 +8,11 @@ const SAVE_PROTOCOL_ERROR = 'PROTOCOLS/SAVE_ERROR';
 
 export const saveProtocol = () => ({ type: SAVE_PROTOCOL });
 
-export const saveProtocolSuccess = () => ({ type: SAVE_PROTOCOL_SUCCESS });
+export const saveProtocolSuccess = (destinationPath, protocol) => ({
+  type: SAVE_PROTOCOL_SUCCESS,
+  destinationPath,
+  protocol,
+});
 
 export const saveProtocolError = error => ({
   type: SAVE_PROTOCOL_ERROR,
@@ -18,11 +23,12 @@ const saveProtocolThunk = () =>
   (dispatch, getState) => {
     dispatch(saveProtocol());
     const state = getState();
-    const activeProtocol = state.session.activeProtocol;
+    const activeProtocolId = state.session.activeProtocol;
+    const meta = find(state.protocols, ['id', activeProtocolId]);
     const protocol = getProtocol(state);
 
-    return saveProtocolFile(activeProtocol.filePath, protocol)
-      .then(() => dispatch(saveProtocolSuccess()))
+    return saveProtocolFile(meta.workingPath, protocol)
+      .then(destinationPath => dispatch(saveProtocolSuccess(destinationPath, protocol)))
       .catch(e => dispatch(saveProtocolError(e)));
   };
 

@@ -1,8 +1,9 @@
-// import { actionTypes as protocolFileActionTypes } from './protocol/file';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as protocolRegistryActionTypes } from './protocol/variableRegistry';
 import { actionTypes as formActionTypes } from './protocol/forms';
-import { actionTypes as protocolActionTypes } from './protocol/index';
+import { actionTypes as protocolActionTypes } from './protocol';
+import { actionTypes as exportProtocolActionTypes } from './protocols/export';
+import { actionTypes as loadProtocolActionTypes } from './protocols/load';
 
 const initialState = {
   activeProtocol: {}, // protocolMeta
@@ -12,27 +13,19 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case protocolActionTypes.SET_PROTOCOL: {
+    case loadProtocolActionTypes.LOAD_PROTOCOL_SUCCESS: {
       return {
         ...state,
-        activeProtocol: action.meta,
+        activeProtocol: action.meta.id,
         lastSaved: 0,
         lastChanged: 0,
       };
     }
-    // case protocolFileActionTypes.OPEN_PROTOCOL: {
-    //   return {
-    //     ...state,
-    //     activeProtocol: action.meta,
-    //     lastSaved: 0,
-    //     lastChanged: 0,
-    //   };
-    // }
-    // case protocolFileActionTypes.SAVE_COMPLETE:
-    //   return {
-    //     ...state,
-    //     lastSaved: new Date().getTime(),
-    //   };
+    case exportProtocolActionTypes.EXPORT_PROTOCOL_SUCCESS:
+      return {
+        ...state,
+        lastSaved: new Date().getTime(),
+      };
     // All these actions are considered saveable changes:
     case protocolStageActionTypes.CREATE_STAGE:
     case protocolStageActionTypes.UPDATE_STAGE:

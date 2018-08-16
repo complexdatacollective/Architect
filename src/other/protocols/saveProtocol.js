@@ -13,10 +13,11 @@ const saveProtocol = (workingPath, protocol) => {
   const destinationPath = path.join(workingPath, 'protocol.json');
 
   return writeFile(destinationPath, JSON.stringify(protocol, null, 2))
-    .then(() => {
+    .then(() =>
       // Now that the protocol is commited to disk we can safely prune unused assets.
-      pruneProtocolAssets(workingPath);
-    });
+      pruneProtocolAssets(workingPath),
+    )
+    .then(() => destinationPath);
 };
 
 export default saveProtocol;
