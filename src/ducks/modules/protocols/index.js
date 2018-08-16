@@ -8,41 +8,23 @@ import { actionCreators as exportActionCreators } from './export';
 import locateProtocol from '../../../other/protocols/locateProtocol';
 import history from '../../../history';
 
-const SAVE_AND_EXPORT = 'PROTOCOLS/SAVE_AND_EXPORT';
-const SAVE_AND_EXPORT_SUCCESS = 'PROTOCOLS/SAVE_AND_EXPORT_SUCCESS';
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
-
-const IMPORT_AND_LOAD = 'PROTOCOLS/IMPORT_AND_LOAD';
-const IMPORT_AND_LOAD_SUCCESS = 'PROTOCOLS/IMPORT_AND_LOAD_SUCCESS';
 const IMPORT_AND_LOAD_ERROR = 'PROTOCOLS/IMPORT_AND_LOAD_ERROR';
-
+const CREATE_AND_LOAD_ERROR = 'PROTOCOLS/CREATE_AND_LOAD_ERROR';
 const OPEN_ERROR = 'PROTOCOLS/OPEN_ERROR';
-
-const saveAndExport = () => ({
-  type: SAVE_AND_EXPORT,
-});
-
-const saveAndExportSuccess = () => ({
-  type: SAVE_AND_EXPORT_SUCCESS,
-});
 
 const saveAndExportError = error => ({
   type: SAVE_AND_EXPORT_ERROR,
   error,
 });
 
-const importAndLoad = filePath => ({
-  type: IMPORT_AND_LOAD,
-  filePath,
-});
-
-const importAndLoadSuccess = id => ({
-  type: IMPORT_AND_LOAD_SUCCESS,
-  id,
-});
-
 const importAndLoadError = error => ({
   type: IMPORT_AND_LOAD_ERROR,
+  error,
+});
+
+const createAndLoadError = error => ({
+  type: CREATE_AND_LOAD_ERROR,
   error,
 });
 
@@ -52,30 +34,25 @@ const openError = error => ({
 });
 
 const saveAndExportThunk = () =>
-  (dispatch) => {
-    dispatch(saveAndExport());
+  dispatch =>
     dispatch(saveActionCreators.saveProtocol())
       .then(() => dispatch(exportActionCreators.exportProtocol()))
-      .then(() => dispatch(saveAndExportSuccess()))
       .catch(e => dispatch(saveAndExportError(e)));
-  };
 
 const importAndLoadThunk = filePath =>
-  (dispatch) => {
-    dispatch(importAndLoad(filePath));
+  dispatch =>
     dispatch(importActionCreators.importProtocol(filePath))
       .then(({ id }) => {
         history.push(`/edit/${id}/`);
-        return dispatch(importAndLoadSuccess(id));
+        return id;
       })
       .catch(e => dispatch(importAndLoadError(e)));
-  };
 
 const createAndLoadProtocolThunk = () =>
   dispatch =>
     dispatch(createActionCreators.createProtocol())
       .then(({ filePath }) => dispatch(importAndLoadThunk(filePath)))
-      .catch(e => dispatch(openError(e)));
+      .catch(e => dispatch(createAndLoadError(e)));
 
 const openProtocol = () =>
   dispatch =>
@@ -110,12 +87,9 @@ const actionCreators = {
 };
 
 const actionTypes = {
-  SAVE_AND_EXPORT,
-  SAVE_AND_EXPORT_SUCCESS,
   SAVE_AND_EXPORT_ERROR,
-  IMPORT_AND_LOAD,
-  IMPORT_AND_LOAD_SUCCESS,
   IMPORT_AND_LOAD_ERROR,
+  CREATE_AND_LOAD_ERROR,
   OPEN_ERROR,
 };
 
