@@ -71,12 +71,7 @@ class Routes extends Component {
         >
           { props => <ProtocolLoader {...props} /> }
         </Route>
-        <Route
-          location={location}
-          path="/edit/:protocol"
-        >
-          {props => <Scene {...props} />}
-        </Route>
+        <Scene />
       </React.Fragment>
     );
   }

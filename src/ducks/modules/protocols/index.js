@@ -89,7 +89,7 @@ export default function reducer(state = initialState, action = {}) {
           advanced: action.advanced,
           workingPath: action.workingPath,
         },
-      ];
+      ].slice(-10);
     default:
       return state;
   }

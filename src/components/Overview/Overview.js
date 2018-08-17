@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
-import { compose } from 'recompose';
-import { Tweened } from '../../../behaviours/Tweened';
-import { Node } from '../../../ui';
-import EdgeIcon from '../../EdgeIcon';
+import { Node } from '../../ui';
+import EdgeIcon from '../EdgeIcon';
 import PanelGroup from './PanelGroup';
 
 class Overview extends Component {
@@ -80,11 +78,15 @@ class Overview extends Component {
   render() {
     const {
       name,
+      show,
+      protocolFilePath,
     } = this.props;
 
+    if (!show) { return null; }
+
     return (
-      <div className="timeline-overview">
-        <form>
+      <Flipped flipId={protocolFilePath}>
+        <div className="timeline-overview">
           <div className="timeline-overview__panel">
             <div className="timeline-overview__content">
               <h1 className="timeline-overview__name">{name}</h1>
@@ -114,22 +116,11 @@ class Overview extends Component {
                     </Link>
                   </div>
                 </PanelGroup>
-                <PanelGroup title="Global Options">
-                  <p>This panel will display global protocol options.</p>
-                </PanelGroup>
-                <PanelGroup title="Assets">
-                  <p>This panel will display assets, such as images, video, and data.</p>
-                  <div className="timeline-overview__manage-button">
-                    <div className="button button--small button--platinum--dark">
-                      Manage assets
-                    </div>
-                  </div>
-                </PanelGroup>
               </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </Flipped>
     );
   }
 }
@@ -149,10 +140,6 @@ Overview.defaultProps = {
   externalData: {},
 };
 
-export default compose(
-  withRouter,
-  Tweened({
-    tweenName: 'protocol',
-    tweenElement: 'overview-panel',
-  }),
-)(Overview);
+export { Overview };
+
+export default Overview;

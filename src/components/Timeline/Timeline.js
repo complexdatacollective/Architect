@@ -6,7 +6,6 @@ import { TransitionGroup } from 'react-transition-group';
 import cx from 'classnames';
 import None from '../Transitions/None';
 import Drawer from '../Transitions/Drawer';
-import Overview from './Overview';
 import Stage from './Stage';
 import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
@@ -152,9 +151,6 @@ class Timeline extends Component {
         <div className="timeline__main">
           <div className="timeline__background" />
           <div className="timeline__content">
-            <Overview
-              {...this.props.overview}
-            />
             <div className="timeline__stages">
               { this.hasStages() && this.renderHighlight() }
               <TransitionGroup>

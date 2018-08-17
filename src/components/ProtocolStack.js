@@ -3,35 +3,27 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import Tweened from '../../../behaviours/Tweened';
-import protocolCover from '../../../images/protocol-cover.png';
-import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
-
-const Stack = Tweened(() => (
-  <div className="start-protocol-stack__stack">
-    <div className="start-protocol-stack__stack-cover">
-      <img src={protocolCover} alt="" />
-    </div>
-  </div>
-));
+import { Flipped } from 'react-flip-toolkit';
+import protocolCover from '../images/protocol-cover.png';
+import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 const getFilename = (path = '') => get(path.match(/([^/\\]+)$/), 1, path);
 
 const ProtocolStack = ({ importAndLoadProtocol, protocol: { filePath } }) => (
   <div
-    component="div"
-    className="start-protocol-stack"
+    className="protocol-stack"
     onClick={() => importAndLoadProtocol(filePath)}
   >
-    <div className="start-protocol-stack__preview">
-      <Stack
-        tweenName="protocol"
-        tweenElement={filePath}
-      />
+    <div className="protocol-stack__preview">
+      <Flipped flipId={filePath}>
+        <div className="protocol-stack__stack">
+          <div className="protocol-stack__stack-cover">
+            <img src={protocolCover} alt="" />
+          </div>
+        </div>
+      </Flipped>
     </div>
-    <div className="start-protocol-stack__label">
-      <h3 className="start-protocol-stack__name">{ getFilename(filePath) }</h3>
-    </div>
+    <h3 className="protocol-stack__label">{ getFilename(filePath) }</h3>
   </div>
 );
 

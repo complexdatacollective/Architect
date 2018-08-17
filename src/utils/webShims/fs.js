@@ -50,7 +50,10 @@ const existsSync = () => true;
 
 const unlinkSync = () => true;
 
-const readFile = () => Promise.resolve('{}');
+const readFile = (...args) => {
+  const cb = args.pop();
+  cb(null, '{}');
+}
 
 const readFileSync = (filename) => {
   switch(true) {

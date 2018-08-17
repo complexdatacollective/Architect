@@ -1,2 +1,35 @@
-@import 'start/protocol-card';
-@import 'start/start';
+.start {
+  margin: 0 auto;
+  width: unit(70);
+
+  &__welcome {
+    padding: 0 0 2.4rem;
+
+    &-title,
+    &-lead {
+      color: var(--architect-panel-text);
+    }
+
+    &-title {
+      font-size: 3.6rem;
+      font-weight: bold;
+      margin-bottom: unit(2);
+    }
+
+    &-lead {
+      font-size: 1.65rem;
+      font-weight: 400;
+    }
+
+  }
+
+  &__call-to-action {
+    padding: 0 0 unit(8);
+
+    .button {
+      margin: 0 unit(2) 0 0;
+      padding: 1.8em;
+      width: unit(30);
+    }
+  }
+}

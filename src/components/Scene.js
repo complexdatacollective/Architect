@@ -1,104 +1,51 @@
-/* eslint-disable */
-
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { Flipper, Flipped } from 'react-flip-toolkit';
+import { Flipper } from 'react-flip-toolkit';
+// import { get } from 'lodash';
 import cx from 'classnames';
-import ProtocolStack from './Views/Start/ProtocolStack';
+import { getActiveProtocolMeta } from '../selectors/protocol';
+import Start from './Start';
+import RecentProtocols from './RecentProtocols';
+import Overview from './Overview';
+import Timeline from './Timeline';
+import networkCanvasBrand from '../images/network-canvas-brand.svg';
 
-class Scene extends Component {
-  static propTypes = {
-    protocol: PropTypes.object,
-    protocols: PropTypes.array,
-  };
-
-  static defaultProps = {
-    protocol: null,
-    protocols: [
-      { id: 1, workingPath: 1 },
-      { id: 2, workingPath: 2 },
-      { id: 3, workingPath: 3 },
-    ],
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      openStack: null,
-      mode: 'start',
-    };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevProps.match && this.props.match) {
-      console.log('in', this.state);
-      this.setState({ mode: 'protocol' });
-    }
-    if (prevProps.match && !this.props.match) {
-      console.log('out');
-      this.setState({ mode: 'start' });
-    }
-  }
-
-  openStack(index) {
-    this.setState({
-      openStack: index,
-    });
-  }
-
-  isProtocol() {
-    return this.state.mode === 'protocol';
-  }
-
-  renderRecentProtocol = (protocol) => {
-    return (
-      <Flipped flipId={protocol.filePath} key={protocol.filePath}>
-        <div
-          className="scene__stack"
-          onClick={() => this.openStack(protocol.filePath)}
-        >
-          <ProtocolStack
-            protocol={protocol}
-          />
-        </div>
-      </Flipped>
-    );
-  }
-
+class Scene extends PureComponent {
   render() {
+    const { protocolMeta } = this.props;
+    const protocolId = protocolMeta && protocolMeta.id;
+
     const sceneClasses = cx(
       'scene',
-      { 'scene--protocol': this.isProtocol() },
+      { 'scene--protocol': protocolId },
     );
-
-    console.log({ state: this.state });
 
     return (
       <div className={sceneClasses}>
-        <Flipper flipKey={`${this.state.openStack}-${this.isProtocol()}`}>
-          <div className="scene__stacks">
-            { !this.isProtocol() && this.props.recentProtocols.map(this.renderRecentProtocol) }
+        <div className="scene__background scene__background--top" />
+        <div className="scene__background scene__background--bottom" />
+        <img className="scene__brand" src={networkCanvasBrand} alt="" />
+        <div className="scene__home" />
+
+        <Flipper flipKey={protocolId}>
+
+          <div className="scene__start">
+            <Start show={!protocolId} />
           </div>
-          <div className="scene__loader">
-            <div onClick={this.props.createProtocol}>Create new</div>
+
+          <div className="scene__recent-protocols">
+            <RecentProtocols show={!protocolId} />
           </div>
-          { this.isProtocol() &&
-            <Flipped flipId={this.state.openStack}>
-              <div className="scene__overview" ref={this.overviewRef}>
-              </div>
-            </Flipped>
-          }
-          <div className="scene__timeline">
-            <div className="stage"></div>
-            <div className="stage"></div>
-            <div className="stage"></div>
-            <div className="stage"></div>
-            <div className="stage"></div>
-            <div className="stage"></div>
-            <div className="stage"></div>
+
+          <div className="scene__protocol">
+            <Overview
+              show={protocolId}
+              protocolFilePath={protocolMeta && protocolMeta.filePath}
+            />
+
+            <div className="scene__timeline">
+              <Timeline show={protocolId} />
+            </div>
           </div>
         </Flipper>
       </div>
@@ -107,16 +54,9 @@ class Scene extends Component {
 }
 
 const mapStateToProps = state => ({
-  recentProtocols: [{ filePath: 'rstst' }, { filePath: 'bar' }], //get(state, 'recentProtocols', []).slice(0, 3),
-});
-
-const mapDispatchToProps = dispatch => ({
-  // createProtocol: bindActionCreators(protocolsActions.createAndLoadProtocol, dispatch),
-  // chooseProtocol: bindActionCreators(protocolsActions.chooseProtocol, dispatch),
+  protocolMeta: getActiveProtocolMeta(state),
 });
 
 export { Scene };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(Scene);
+export default connect(mapStateToProps)(Scene);

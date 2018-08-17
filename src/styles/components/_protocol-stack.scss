@@ -1,0 +1,77 @@
+$card-shadow: 0 0 10px var(--color-shadow);
+$component-name: protocol-stack;
+
+.protocol-stack {
+  width: 100%;
+  cursor: pointer;
+
+  &__preview {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+  }
+
+  &__stack {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &::after,
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      content: '';
+      display: block;
+      background: var(--architect-panel-background);
+      border-radius: unit(1);
+      width: 100%;
+      height: 100%;
+      opacity: .5;
+      box-shadow: $card-shadow;
+    }
+
+    &::after {
+      transform: translate(unit(1), unit(-1));
+      box-shadow: none;
+    }
+
+    &-cover {
+      position: relative;
+      background: var(--architect-panel-background);
+      border-radius: unit(1);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      transform: translate(unit(-1), unit(1));
+      box-shadow: $card-shadow;
+      padding: 20px;
+
+      img {
+        max-width: 100%;
+        border-radius: unit(1);
+      }
+    }
+  }
+
+  &__label {
+    padding-top: unit(5);
+    @include typography('title-3');
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    color: var(--text-light);
+    max-height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+}
