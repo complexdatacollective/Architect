@@ -90,8 +90,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   createAndLoadProtocol: bindActionCreators(protocolsActions.createAndLoadProtocol, dispatch),
   openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
-  clearDeadLinks: () => {},
-  // clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
+  clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
 });
 
 export { Start };

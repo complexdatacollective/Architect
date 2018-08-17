@@ -4,9 +4,6 @@ import reducer from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
 import { actionCreators as registryActions } from '../protocol/variableRegistry';
-import { openProtocolAction, saveComplete } from '../protocol/file';
-
-const protocolMeta = { id: 'foo', archivePath: '/bar/buzz' };
 
 const itTracksActionAsChange = (action) => {
   const createStageState = reducer(
@@ -23,38 +20,8 @@ describe('session reducer', () => {
       .toEqual({
         lastSaved: 0,
         lastChanged: 0,
-        activeProtocol: {},
+        activeProtocol: null,
       });
-  });
-
-  describe('protocol actions', () => {
-    it('updates when protocol is opened', () => {
-      const newState = reducer(
-        undefined,
-        openProtocolAction(undefined, protocolMeta),
-      );
-
-      expect(newState)
-        .toMatchObject({
-          activeProtocol: protocolMeta,
-          lastSaved: 0,
-          lastChanged: 0,
-        });
-    });
-
-    it('resets path when protocol is reset', () => {
-      const newState = reducer(
-        { lastSaved: 100, activeProtocol: protocolMeta },
-        protocolActions.resetProtocol(),
-      );
-
-      expect(newState)
-        .toMatchObject({
-          activeProtocol: {},
-          lastSaved: 0,
-          lastChanged: 0,
-        });
-    });
   });
 
   describe('change tracking', () => {
@@ -84,17 +51,6 @@ describe('session reducer', () => {
 
     it('tracks delete type', () => {
       itTracksActionAsChange(registryActions.deleteType());
-    });
-  });
-
-  describe('file actions', () => {
-    it('tracks last saved when protocol saved', () => {
-      const newState = reducer(
-        undefined,
-        saveComplete(),
-      );
-
-      expect(newState.lastSaved > 0).toBe(true);
     });
   });
 });

@@ -40,7 +40,6 @@ const getStore = () =>
   );
 
 describe('protocols', () => {
-
   let store;
 
   beforeEach(() => {
@@ -52,10 +51,10 @@ describe('protocols', () => {
     it('triggers create and import actions', () =>
       store.dispatch(actionCreators.createAndLoadProtocol())
         .then(() => {
-          expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/CREATE_PROTOCOL'}]);
-          expect(log.mock.calls[1]).toEqual([{ filePath: '/dev/null/fake/user/entered/path', type: 'PROTOCOLS/CREATE_PROTOCOL_SUCCESS'}]);
-          expect(log.mock.calls[2]).toEqual([{ filePath: '/dev/null/fake/user/entered/path', type: 'PROTOCOLS/IMPORT'}]);
-          expect(log.mock.calls[3]).toEqual([{ advanced: true, filePath: '/dev/null/fake/user/entered/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path'}]);
+          expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/CREATE_PROTOCOL' }]);
+          expect(log.mock.calls[1]).toEqual([{ filePath: '/dev/null/fake/user/entered/path', type: 'PROTOCOLS/CREATE_PROTOCOL_SUCCESS' }]);
+          expect(log.mock.calls[2]).toEqual([{ filePath: '/dev/null/fake/user/entered/path', type: 'PROTOCOLS/IMPORT' }]);
+          expect(log.mock.calls[3]).toEqual([{ advanced: true, filePath: '/dev/null/fake/user/entered/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path' }]);
           expect(history.entries.pop()).toMatchObject({ pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/' });
         }),
     );
@@ -77,8 +76,8 @@ describe('protocols', () => {
     it('triggers import action and load redirect', () =>
       store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path'))
         .then(() => {
-          expect(log.mock.calls[0]).toEqual([{ filePath: '/dev/null/mock/path', type: 'PROTOCOLS/IMPORT'}]);
-          expect(log.mock.calls[1]).toEqual([{ advanced: true, filePath: '/dev/null/mock/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path'}]);
+          expect(log.mock.calls[0]).toEqual([{ filePath: '/dev/null/mock/path', type: 'PROTOCOLS/IMPORT' }]);
+          expect(log.mock.calls[1]).toEqual([{ advanced: true, filePath: '/dev/null/mock/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path' }]);
           expect(history.entries.pop()).toMatchObject({ pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/' });
         }),
     );
@@ -89,7 +88,7 @@ describe('protocols', () => {
       store.dispatch(actionCreators.openProtocol())
         .then(() => {
           expect(log.mock.calls[0]).toEqual([{ filePath: '/dev/null/fake/explore/path', type: 'PROTOCOLS/IMPORT' }]);
-          expect(log.mock.calls[1]).toEqual([{ advanced: true, filePath: '/dev/null/fake/explore/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path'}]);
+          expect(log.mock.calls[1]).toEqual([{ advanced: true, filePath: '/dev/null/fake/explore/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path' }]);
           expect(history.entries.pop()).toMatchObject({ pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/' });
         }),
     );
@@ -112,7 +111,7 @@ describe('protocols', () => {
             id: '5df-bbd7',
             advanced: false,
             workingPath: '/dev/null/mock/working/path',
-          }
+          },
         ]);
 
         done();
