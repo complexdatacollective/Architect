@@ -24,39 +24,48 @@ const saveDialog = () =>
     });
   });
 
-const createProtocolWorkingPath = (workingPath, protocol) =>
+/**
+ * Creates an blank protocol directory at destinationPath, with correct directory structure.
+ * Expects a valid protocol object as input.
+ * @param {string} destinationPath - destination for skeleton protocol.
+ * @param {object} protocol - protocol object, probably a template.
+ */
+const createProtocolWorkingPath = (destinationPath, protocol) =>
   new Promise((resolve) => {
-    const assetsPath = path.join(workingPath, 'assets');
-    const protocolPath = path.join(workingPath, 'protocol.json');
-    mkdirp.sync(workingPath);
+    const assetsPath = path.join(destinationPath, 'assets');
+    const protocolPath = path.join(destinationPath, 'protocol.json');
+    mkdirp.sync(destinationPath);
     fs.mkdirSync(assetsPath);
     fs.writeFileSync(protocolPath, JSON.stringify(protocol, null, 2));
     resolve();
   });
 
-export const createProtocolArchive = ({ workingPath, filePath }, protocol) =>
-  createProtocolWorkingPath(workingPath, protocol)
-    .then(() => archive(workingPath, filePath));
+/**
+ * Creates a blank bundled protocol at filePath
+ * Expects a valid protocol object as input.
+ * @param {string} destinationPath - destination for protocol bundle.
+ * @param {object} protocol - protocol object, probably a template.
+ */
+export const createProtocolArchive = (destinationPath, protocol) => {
+  const tempPath = getLocalDirectoryFromArchivePath(destinationPath);
+
+  return createProtocolWorkingPath(tempPath, protocol)
+    .then(() => archive(tempPath, destinationPath));
+};
 
 /**
- * Shows a save dialog and then creates an empty protocol there
+ * Shows a save dialog and then creates a blank protocol there
  */
 const createProtocol = () =>
   saveDialog()
     .then((filePath) => {
-      const workingPath = getLocalDirectoryFromArchivePath(filePath);
-
-      return createProtocolArchive({
-        workingPath,
-        filePath,
-      }, {
+      const protocol = {
         ...template,
         name: path.basename(filePath, '.netcanvas'),
-      })
-        .then(() => ({
-          workingPath,
-          filePath,
-        }));
+      };
+
+      return createProtocolArchive(filePath, protocol)
+        .then(() => filePath);
     });
 
 export default createProtocol;

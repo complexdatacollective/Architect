@@ -6,15 +6,15 @@ const SAVE_PROTOCOL = 'PROTOCOLS/SAVE';
 const SAVE_PROTOCOL_SUCCESS = 'PROTOCOLS/SAVE_SUCCESS';
 const SAVE_PROTOCOL_ERROR = 'PROTOCOLS/SAVE_ERROR';
 
-export const saveProtocol = () => ({ type: SAVE_PROTOCOL });
+const saveProtocol = () => ({ type: SAVE_PROTOCOL });
 
-export const saveProtocolSuccess = (destinationPath, protocol) => ({
+const saveProtocolSuccess = (destinationPath, protocol) => ({
   type: SAVE_PROTOCOL_SUCCESS,
   destinationPath,
   protocol,
 });
 
-export const saveProtocolError = error => ({
+const saveProtocolError = error => ({
   type: SAVE_PROTOCOL_ERROR,
   error,
 });

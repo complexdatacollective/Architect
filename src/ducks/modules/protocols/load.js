@@ -6,18 +6,18 @@ const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';
 const LOAD_PROTOCOL_SUCCESS = 'PROTOCOLS/LOAD_SUCCESS';
 const LOAD_PROTOCOL_ERROR = 'PROTOCOLS/LOAD_ERROR';
 
-export const loadProtocol = id => ({
+const loadProtocol = id => ({
   type: LOAD_PROTOCOL,
   id,
 });
 
-export const loadProtocolSuccess = (meta, protocol) => ({
+const loadProtocolSuccess = (meta, protocol) => ({
   type: LOAD_PROTOCOL_SUCCESS,
   meta,
   protocol,
 });
 
-export const loadProtocolError = error =>
+const loadProtocolError = error =>
   (dispatch) => {
     dispatch({
       type: LOAD_PROTOCOL_ERROR,

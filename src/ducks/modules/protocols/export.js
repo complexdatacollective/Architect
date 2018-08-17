@@ -5,14 +5,14 @@ const EXPORT_PROTOCOL = 'PROTOCOLS/EXPORT';
 const EXPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/EXPORT_SUCCESS';
 const EXPORT_PROTOCOL_ERROR = 'PROTOCOLS/EXPORT_ERROR';
 
-export const exportProtocol = () => ({ type: EXPORT_PROTOCOL });
+const exportProtocol = () => ({ type: EXPORT_PROTOCOL });
 
-export const exportProtocolSuccess = filePath => ({
+const exportProtocolSuccess = filePath => ({
   type: EXPORT_PROTOCOL_SUCCESS,
   filePath,
 });
 
-export const exportProtocolError = error => ({
+const exportProtocolError = error => ({
   type: EXPORT_PROTOCOL_ERROR,
   error,
 });

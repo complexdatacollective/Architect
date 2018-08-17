@@ -33,12 +33,20 @@ const openError = error => ({
   error,
 });
 
+/**
+ * 1. Save - write protocol to protocol.json
+ * 2. Export - write /tmp/{working-path} to user space.
+ */
 const saveAndExportThunk = () =>
   dispatch =>
     dispatch(saveActionCreators.saveProtocol())
       .then(() => dispatch(exportActionCreators.exportProtocol()))
       .catch(e => dispatch(saveAndExportError(e)));
 
+/**
+ * 1. Import - extract/copy protocol to /tmp/{working-path}
+ * 2. Load - Read protocol.json into state.
+ */
 const importAndLoadThunk = filePath =>
   dispatch =>
     dispatch(importActionCreators.importProtocol(filePath))
@@ -48,12 +56,20 @@ const importAndLoadThunk = filePath =>
       })
       .catch(e => dispatch(importAndLoadError(e)));
 
+/**
+ * 1. Create - Create a new protocol from template in user space
+ * 2. Run importAndLoadThunk on new protocol
+ */
 const createAndLoadProtocolThunk = () =>
   dispatch =>
     dispatch(createActionCreators.createProtocol())
       .then(({ filePath }) => dispatch(importAndLoadThunk(filePath)))
       .catch(e => dispatch(createAndLoadError(e)));
 
+/**
+ * 1. Locate protocol in user space with Electron dialog
+ * 2. Run importAndLoadThunk on specified path
+ */
 const openProtocol = () =>
   dispatch =>
     locateProtocol()
