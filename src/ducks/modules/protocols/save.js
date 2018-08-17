@@ -28,7 +28,8 @@ const saveProtocolThunk = () =>
     const protocol = getProtocol(state);
 
     if (!meta) {
-      return dispatch(saveProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`));
+      // Always return a promise
+      return Promise.resolve(dispatch(saveProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`)));
     }
 
     return saveProtocolFile(meta.workingPath, protocol)

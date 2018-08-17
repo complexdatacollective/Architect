@@ -1,4 +1,4 @@
-import createProtocolFile from '../../../other/protocols/createProtocol';
+import { createProtocol as createProtocolFile } from '../../../other/protocols';
 
 const CREATE_PROTOCOL = 'PROTOCOLS/CREATE_PROTOCOL';
 const CREATE_PROTOCOL_SUCCESS = 'PROTOCOLS/CREATE_PROTOCOL_SUCCESS';

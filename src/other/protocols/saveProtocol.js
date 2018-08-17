@@ -9,6 +9,7 @@ import pruneProtocolAssets from './pruneProtocolAssets';
  * @param {object} protocol - The protocol object.
  */
 const saveProtocol = (workingPath, protocol) => {
+  console.log('writeFile');
   // save json to temp dir
   const destinationPath = path.join(workingPath, 'protocol.json');
 

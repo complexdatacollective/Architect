@@ -45,7 +45,7 @@ const saveAndExportThunk = () =>
 
 /**
  * 1. Import - extract/copy protocol to /tmp/{working-path}
- * 2. Load - Read protocol.json into state.
+ * 2. Load - redirect to /edit/ which should trigger load.
  */
 const importAndLoadThunk = filePath =>
   dispatch =>

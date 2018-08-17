@@ -1,5 +1,5 @@
 import { find } from 'lodash';
-import exportProtocolFile from '../../../other/protocols/exportProtocol';
+import { exportProtocol as exportProtocolFile } from '../../../other/protocols';
 
 const EXPORT_PROTOCOL = 'PROTOCOLS/EXPORT';
 const EXPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/EXPORT_SUCCESS';
@@ -25,7 +25,8 @@ const exportProtocolThunk = () =>
     const meta = find(state.protocols, ['id', activeProtocolId]);
 
     if (!meta) {
-      return dispatch(exportProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`));
+      // Always return a promise
+      return Promise.resolve(dispatch(exportProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`)));
     }
 
     return exportProtocolFile(meta.workingPath, meta.filePath)

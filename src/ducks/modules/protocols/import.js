@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import path from 'path';
-import importProtocolFiles from '../../../other/protocols/importProtocol';
+import { importProtocol as importProtocolFiles } from '../../../other/protocols';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
@@ -51,6 +51,7 @@ const importProtocolThunk = filePath =>
 
 const actionCreators = {
   importProtocol: importProtocolThunk,
+  importProtocolSuccess,
 };
 
 const actionTypes = {
