@@ -2,7 +2,6 @@ import fs from 'fs';
 
 export const writeFile = (filePath, data) =>
   new Promise((resolve, reject) => {
-    console.log('writeFile');
     fs.writeFile(filePath, data, (error) => {
       if (error) { reject(error); }
       resolve(filePath);
