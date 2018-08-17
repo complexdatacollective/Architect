@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import { compose } from 'recompose';
 import { Button, Icon } from '../../../ui/components';
 import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
+import { actionCreators as recentProtocolsActions } from '../../../ducks/modules/recentProtocols';
 import ProtocolStack from './ProtocolStack';
 import networkCanvasBrand from '../../../images/network-canvas-brand.svg';
 
@@ -90,7 +91,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   createAndLoadProtocol: bindActionCreators(protocolsActions.createAndLoadProtocol, dispatch),
   openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
-  clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
+  clearDeadLinks: bindActionCreators(recentProtocolsActions.clearDeadLinks, dispatch),
 });
 
 export { Start };

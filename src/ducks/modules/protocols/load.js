@@ -46,6 +46,7 @@ const loadProtocolThunk = id =>
 
 const actionCreators = {
   loadProtocol: loadProtocolThunk,
+  loadProtocolSuccess,
 };
 
 const actionTypes = {
