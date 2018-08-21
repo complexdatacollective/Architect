@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
 import cx from 'classnames';
 import None from '../Transitions/None';
@@ -60,6 +61,20 @@ class Timeline extends Component {
     }
   }
 
+  onEditStage = stageId =>
+    this.goto(`stage/${stageId}`);
+
+  onEditSkipLogic = stageId =>
+    this.goto(`skip/${stageId}`);
+
+  goto = (location = '') => {
+    const url = `/edit/${this.props.activeProtocol}/${location}`;
+
+    console.log(url);
+
+    this.props.history.push(url);
+  }
+
   handleCancelInsertStage = () => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
   }
@@ -67,6 +82,7 @@ class Timeline extends Component {
   createStage = (type, index) => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
     this.props.onCreateStage(type, index);
+    this.goto(`stage?type=${type}&insertAtIndex=${insertAtIndex}`);
   };
 
   hasStages = () => this.props.stages.length > 0;
@@ -137,18 +153,20 @@ class Timeline extends Component {
           className={className}
           onMouseEnter={this.onMouseEnterStage}
           onMouseLeave={this.onMouseLeaveStage}
-          onEditStage={() => this.props.onEditStage(stage.id)}
+          onEditStage={() => this.onEditStage(stage.id)}
           onDeleteStage={() => this.onDeleteStage(stage.id)}
           onInsertStage={position => this.onInsertStage(index + position)}
-          onEditSkipLogic={() => this.props.onEditSkipLogic(stage.id)}
+          onEditSkipLogic={() => this.onEditSkipLogic(stage.id)}
         />
       </None>
     );
   }
 
   render() {
+    const { show } = this.props;
+
     return (
-      <div className="timeline">
+      <div className={cx('timeline', { 'timeline--show': show })}>
         <div className="timeline__stages">
           { this.hasStages() && this.renderHighlight() }
           <TransitionGroup>
@@ -166,10 +184,11 @@ class Timeline extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
 
   return {
+    activeProtocol: state.session.activeProtocol,
     stages: protocol ? protocol.stages : [],
   };
 };
@@ -181,6 +200,7 @@ const mapDispatchToProps = dispatch => ({
 export { Timeline };
 
 export default compose(
+  withRouter,
   connect(mapStateToProps, mapDispatchToProps),
   constrain([60, 0, 0, 0]),
 )(Timeline);

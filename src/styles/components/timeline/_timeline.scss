@@ -3,6 +3,9 @@ $stage-padding: unit(5);
 
 .timeline {
   z-index: var(--z-default);
+  transition-property: opacity;
+  transition-duration: 500ms;
+  will-change: opacity;
 
   &::before {
     transition: transform var(--animation-duration-slow) var(--animation-easing);
@@ -23,7 +26,6 @@ $stage-padding: unit(5);
   &__stages {
     position: relative;
     margin: unit(6) 0 0;
-    perspective: 1000px;
 
     &-highlight {
       position: absolute;
@@ -41,6 +43,10 @@ $stage-padding: unit(5);
       .timeline__stages-highlight {
         background-color: var(--architect-timeline-highlight);
       }
+    }
+
+    &--show {
+      opacity: 1;
     }
   }
 

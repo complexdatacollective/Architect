@@ -1,8 +1,9 @@
 import React from 'react';
+import cx from 'classnames';
 import { Button, Icon } from '../ui/components';
 
-const Welcome = ({ mode, createAndLoadProtocol, openProtocol }) => (
-  <div className="start">
+const Welcome = ({ show, createAndLoadProtocol, openProtocol }) => (
+  <div className={cx('start', { 'start--hide': !show })}>
     <div className="start__welcome">
       <h1 className="start__welcome-title">Architect</h1>
       <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>

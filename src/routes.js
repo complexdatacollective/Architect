@@ -63,7 +63,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, history } = this.props;
     return (
       <React.Fragment>
         <Route
@@ -71,7 +71,7 @@ class Routes extends Component {
         >
           { props => <ProtocolLoader {...props} /> }
         </Route>
-        <Scene />
+        <Scene history={history} location={location} />
       </React.Fragment>
     );
   }

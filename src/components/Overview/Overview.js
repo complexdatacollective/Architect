@@ -126,18 +126,15 @@ class Overview extends Component {
 }
 
 Overview.propTypes = {
-  name: PropTypes.string,
-  forms: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
-  variableRegistry: PropTypes.object,
-  externalData: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
-  match: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  forms: PropTypes.object.isRequired,
+  variableRegistry: PropTypes.object.isRequired,
+  protocolFilePath: PropTypes.string.isRequired,
+  show: PropTypes.bool,
 };
 
 Overview.defaultProps = {
-  name: '',
-  forms: {},
-  variableRegistry: {},
-  externalData: {},
+  show: true,
 };
 
 const mapStateToProps = (state) => {

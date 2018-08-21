@@ -1,6 +1,18 @@
+// sass-lint:disable no-ids
+
 .start {
   margin: 0 auto;
   width: unit(70);
+  transition-duration: var(--animation-duration-standard);
+  transition-timing-function: var(--animation-easing);
+  transition-property: opacity;
+  will-change: opacity;
+
+  #create-new-protocol-button,
+  #open-existing-protocol-button {
+    transition: transform var(--animation-duration-standard) var(--animation-easing);
+    will-change: transform;
+  }
 
   &__welcome {
     padding: 0 0 2.4rem;
@@ -30,6 +42,18 @@
       margin: 0 unit(2) 0 0;
       padding: 1.8em;
       width: unit(30);
+    }
+  }
+
+  &--hide {
+    opacity: 0;
+
+    #create-new-protocol-button {
+      transform: translateX(-100%);
+    }
+
+    #open-existing-protocol-button {
+      transform: translateX(100%);
     }
   }
 }
