@@ -6,14 +6,15 @@ import { get } from 'lodash';
 import { compose } from 'recompose';
 import { Button, Icon } from '../../../ui/components';
 import { actionCreators as protocolsActions } from '../../../ducks/modules/protocols';
+import { actionCreators as recentProtocolsActions } from '../../../ducks/modules/recentProtocols';
 import ProtocolStack from './ProtocolStack';
 import networkCanvasBrand from '../../../images/network-canvas-brand.svg';
 
 class Start extends PureComponent {
   static propTypes = {
-    protocols: PropTypes.array.isRequired,
-    createProtocol: PropTypes.func.isRequired,
-    chooseProtocol: PropTypes.func.isRequired,
+    recentProtocols: PropTypes.array.isRequired,
+    createAndLoadProtocol: PropTypes.func.isRequired,
+    openProtocol: PropTypes.func.isRequired,
     clearDeadLinks: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   };
@@ -46,7 +47,7 @@ class Start extends PureComponent {
               color="platinum"
               size="small"
               icon={<Icon name="arrow-right" color="charcoal" />}
-              onClick={() => this.props.createProtocol(this.openProtocol)}
+              onClick={this.props.createAndLoadProtocol}
             >Create new</Button>
             <Button
               id="open-existing-protocol-button"
@@ -54,15 +55,15 @@ class Start extends PureComponent {
               size="small"
               color="cyber-grape"
               icon={<Icon name="arrow-right" />}
-              onClick={() => this.props.chooseProtocol(this.openProtocol)}
+              onClick={this.props.openProtocol}
             >Open existing</Button>
           </div>
         </div>
 
         <div className="start__split">
-          { this.props.protocols.length > 0 &&
+          { this.props.recentProtocols.length > 0 &&
             <div className="start__protocols">
-              { this.props.protocols.map((protocol, index) => (
+              { this.props.recentProtocols.map((protocol, index) => (
                 <div
                   className="start__protocols-protocol"
                   key={index}
@@ -84,14 +85,13 @@ class Start extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  protocols: get(state, 'protocols', []).slice(0, 3),
+  recentProtocols: get(state, 'recentProtocols', []).slice(0, 3),
 });
 
 const mapDispatchToProps = dispatch => ({
-  createProtocol: bindActionCreators(protocolsActions.createProtocol, dispatch),
-  // loadProtocol: bindActionCreators(protocolsActions.loadProtocol, dispatch),
-  chooseProtocol: bindActionCreators(protocolsActions.chooseProtocol, dispatch),
-  clearDeadLinks: bindActionCreators(protocolsActions.clearDeadLinks, dispatch),
+  createAndLoadProtocol: bindActionCreators(protocolsActions.createAndLoadProtocol, dispatch),
+  openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
+  clearDeadLinks: bindActionCreators(recentProtocolsActions.clearDeadLinks, dispatch),
 });
 
 export { Start };

@@ -1,135 +1,128 @@
 /* eslint-env jest */
 
-import configureStore from 'redux-mock-store';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { times, sampleSize } from 'lodash';
 import reducer, { actionCreators } from '../index';
-import { createProtocol, locateProtocol } from '../../../../other/protocols';
-import { protocolLoadedAction } from '../../protocol/file';
+import { actionCreators as importActionCreators } from '../import';
 import history from '../../../../history';
 
 jest.mock('../../../../other/protocols');
-jest.mock('../../../../history');
 
-const protocolPath = '/foo/bar';
+const initalState = {
+  protocols: [
+    {
+      id: '32beec15',
+      filePath: '',
+      workingPath: '',
+    },
+  ],
+  protocol: {
+    present: {
+      name: 'mock protocol',
+    },
+  },
+  session: { activeProtocol: '32beec15' },
+};
 
-const createMockStore = configureStore([thunk]);
+const log = jest.fn();
 
-describe('protocols reducer', () => {
-  describe('initial state', () => {
-    it('has an initial state', () => {
-      const initialState = reducer();
-      expect(initialState).toEqual([]);
-    });
-  });
+const logger = () =>
+  next =>
+    (action) => {
+      log(action);
+      return next(action);
+    };
 
-  describe('file.PROTOCOL_LOADED', () => {
-    it('It adds the protocol to the protocols list', () => {
-      const newState = reducer(
-        undefined,
-        protocolLoadedAction({ archivePath: protocolPath }),
-      );
+const getStore = () =>
+  createStore(
+    (state = initalState) => state,
+    applyMiddleware(thunk, logger),
+  );
 
-      expect(newState[0]).toMatchObject(
-        { archivePath: protocolPath },
-      );
-    });
-
-    it("It doesn't add duplicate protocols to the list", () => {
-      const newState = times(
-        3,
-        () => protocolLoadedAction({ archivePath: protocolPath }),
-      )
-        .reduce(
-          (memo, action) =>
-            reducer(
-              memo,
-              action,
-            ),
-          undefined,
-        );
-
-      expect(newState.length).toEqual(1);
-      expect(newState[0]).toMatchObject(
-        { archivePath: protocolPath },
-      );
-    });
-
-    it('It adds a max of 10 protocols to the protocols list', () => {
-      const mockPaths = [
-        'foo',
-        'bar',
-        'bazz',
-        'buzz',
-        'fizz',
-        'foobar',
-        'barbar',
-        'bazzbar',
-        'buzzbar',
-        'fizzbar',
-        'foofizz',
-        'barfizz',
-        'bazzfizz',
-        'buzzfizz',
-        'fizzfizz',
-      ];
-
-      const protocolList = ['unique first protocol']
-        .concat(sampleSize(mockPaths, 12))
-        .concat('unique last protocol')
-        .map(item => ({ archivePath: item }));
-
-      const newState = protocolList
-        .map(item => protocolLoadedAction(item))
-        .reduce(
-          (memo, action) =>
-            reducer(
-              memo,
-              action,
-            ),
-          undefined,
-        );
-
-      expect(newState.length).toEqual(10);
-      expect(newState).toEqual(protocolList.slice(-10).reverse());
-    });
-  });
+describe('protocols', () => {
+  let store;
 
   beforeEach(() => {
-    history.push.mockClear();
+    log.mockClear();
+    store = getStore();
   });
 
-  describe('createProtocol()', () => {
-    it('calls createProtocol, adds it to the dashboard, then runs callback', () => {
-      const store = createMockStore({});
-
-      return store.dispatch(actionCreators.createProtocol())
+  describe('createAndLoadProtocol()', () => {
+    it('triggers create and import actions', () =>
+      store.dispatch(actionCreators.createAndLoadProtocol())
         .then(() => {
-          const actions = store.getActions();
-          expect(createProtocol.mock.calls.length).toBe(1);
-          expect(actions).toEqual([]);
-          expect(history.push.mock.calls).toEqual([
-            ['/edit/%2Ffoo%2Fnew-protocol'],
-          ]);
-        });
-    });
+          expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/CREATE_PROTOCOL' }]);
+          expect(log.mock.calls[1]).toEqual([{ filePath: '/dev/null/fake/user/entered/path', type: 'PROTOCOLS/CREATE_PROTOCOL_SUCCESS' }]);
+          expect(log.mock.calls[2]).toEqual([{ filePath: '/dev/null/fake/user/entered/path', type: 'PROTOCOLS/IMPORT' }]);
+          expect(log.mock.calls[3]).toEqual([{ advanced: true, filePath: '/dev/null/fake/user/entered/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path' }]);
+          expect(history.entries.pop()).toMatchObject({ pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/' });
+        }),
+    );
   });
 
-  describe('chooseProtocol', () => {
-    it('locates protocol, adds it to the dashboard, then runs callback', () => {
-      const store = createMockStore({
-        protocols: [],
+  describe('saveAndExportProtocol()', () => {
+    it('triggers save and export actions', () =>
+      store.dispatch(actionCreators.saveAndExportProtocol())
+        .then(() => {
+          expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/SAVE' }]);
+          expect(log.mock.calls[1]).toEqual([{ destinationPath: '/dev/null/fake/user/protocol/path', protocol: { name: 'mock protocol' }, type: 'PROTOCOLS/SAVE_SUCCESS' }]);
+          expect(log.mock.calls[2]).toEqual([{ type: 'PROTOCOLS/EXPORT' }]);
+          expect(log.mock.calls[3]).toEqual([{ filePath: '', type: 'PROTOCOLS/EXPORT_SUCCESS' }]);
+        }),
+    );
+  });
+
+  describe('importAndLoadProtocol()', () => {
+    it('triggers import action and load redirect', () =>
+      store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path'))
+        .then(() => {
+          expect(log.mock.calls[0]).toEqual([{ filePath: '/dev/null/mock/path', type: 'PROTOCOLS/IMPORT' }]);
+          expect(log.mock.calls[1]).toEqual([{ advanced: true, filePath: '/dev/null/mock/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path' }]);
+          expect(history.entries.pop()).toMatchObject({ pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/' });
+        }),
+    );
+  });
+
+  describe('openProtocol()', () => {
+    it('triggers import action and load redirect', () =>
+      store.dispatch(actionCreators.openProtocol())
+        .then(() => {
+          expect(log.mock.calls[0]).toEqual([{ filePath: '/dev/null/fake/explore/path', type: 'PROTOCOLS/IMPORT' }]);
+          expect(log.mock.calls[1]).toEqual([{ advanced: true, filePath: '/dev/null/fake/explore/path', id: '809895df-bbd7-4c76-ac58-e6ada2625f9b', type: 'PROTOCOLS/IMPORT_SUCCESS', workingPath: '/dev/null/fake/working/path' }]);
+          expect(history.entries.pop()).toMatchObject({ pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/' });
+        }),
+    );
+  });
+
+  describe('reducer', () => {
+    let protocolStore;
+
+    beforeEach(() => {
+      protocolStore = createStore(reducer);
+    });
+
+    it('IMPORT_PROTOCOL_SUCCESS', (done) => {
+      protocolStore.subscribe(() => {
+        const state = protocolStore.getState();
+
+        expect(state).toEqual([
+          {
+            filePath: '/dev/null/mock/file/path',
+            id: '5df-bbd7',
+            advanced: false,
+            workingPath: '/dev/null/mock/working/path',
+          },
+        ]);
+
+        done();
       });
 
-      return store.dispatch(actionCreators.chooseProtocol())
-        .then(() => {
-          const actions = store.getActions();
-          expect(locateProtocol.mock.calls.length).toBe(1);
-          expect(actions).toEqual([]);
-          expect(history.push.mock.calls).toEqual([
-            ['/edit/%2Ffoo%2Flocated-protocol'],
-          ]);
-        });
+      protocolStore.dispatch(importActionCreators.importProtocolSuccess({
+        filePath: '/dev/null/mock/file/path',
+        id: '5df-bbd7',
+        advanced: false,
+        workingPath: '/dev/null/mock/working/path',
+      }));
     });
   });
 });

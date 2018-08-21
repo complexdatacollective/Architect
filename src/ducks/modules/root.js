@@ -2,12 +2,12 @@
 
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import undoable, { excludeAction } from 'redux-undo';
-import protocol, { actionTypes as protocolActions } from './protocol';
-import session from './session';
+import undoable from 'redux-undo';
+import protocol from './protocol';
 import protocols from './protocols';
+import recentProtocols from './recentProtocols';
+import session from './session';
 import guidance from './guidance';
-import { actionTypes as protocolFileActionTypes } from './protocol/file';
 
 const combineFilters = (...filters) =>
   (...args) =>
@@ -19,7 +19,8 @@ const combineFilters = (...filters) =>
 /*
  * state: {
  *   protocol: {} // current loaded protocol
- *   protocols: {} // list of knowe protocols (persistent)
+ *   protocols: {} // list of imported protocols (not persistent)
+ *   recentProtocols: {} // list of known protocols (persistent)
  * }
  */
 export const rootReducer = combineReducers({
@@ -33,13 +34,11 @@ export const rootReducer = combineReducers({
       limit: 25,
       filter: combineFilters(
         ({ type }) => !/^@@redux-form\//.test(type.toString()),
-        excludeAction([
-          'persist/REHYDRATE',
-          protocolFileActionTypes.SAVE_COMPLETE,
-          protocolActions.SET_PROTOCOL,
-        ]),
+        ({ type }) => !/^persist\//.test(type.toString()),
+        ({ type }) => !/^PROTOCOLS\//.test(type.toString()),
       ),
     },
   ),
   protocols,
+  recentProtocols,
 });

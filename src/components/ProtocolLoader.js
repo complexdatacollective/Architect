@@ -2,7 +2,8 @@ import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionCreators as protocolFileActions } from '../ducks/modules/protocol/file';
+import { actionCreators as loadProtocolActions } from '../ducks/modules/protocols/load';
+import { actionCreators as sessionActions } from '../ducks/modules/session';
 
 class ProtocolLoader extends Component {
   constructor(props) {
@@ -15,11 +16,25 @@ class ProtocolLoader extends Component {
   }
 
   componentDidMount() {
-    this.loadProtocol(decodeURIComponent(this.props.match.params.protocol));
+    this.checkForProtocolAndLoad(this.props.match);
   }
 
   componentWillReceiveProps(newProps) {
-    this.loadProtocol(decodeURIComponent(newProps.match.params.protocol));
+    this.checkForProtocolAndLoad(newProps.match);
+  }
+
+  checkForProtocolAndLoad = (match) => {
+    if (!match) { this.resetSession(); return; }
+    this.loadProtocol(decodeURIComponent(match.params.protocol));
+  };
+
+  resetSession = () => {
+    if (!this.state.protocol) { return; }
+
+    this.setState(
+      { protocol: null },
+      () => this.props.resetSession(),
+    );
   }
 
   loadProtocol(protocol) {
@@ -38,12 +53,18 @@ class ProtocolLoader extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loadProtocol: bindActionCreators(protocolFileActions.loadProtocol, dispatch),
+  loadProtocol: bindActionCreators(loadProtocolActions.loadProtocol, dispatch),
+  resetSession: bindActionCreators(sessionActions.resetSession, dispatch),
 });
 
 ProtocolLoader.propTypes = {
   loadProtocol: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
+  resetSession: PropTypes.func.isRequired,
+  match: PropTypes.object,
+};
+
+ProtocolLoader.defaultProps = {
+  match: null,
 };
 
 export { ProtocolLoader };

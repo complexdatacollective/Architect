@@ -2,10 +2,8 @@ import { remote } from 'electron';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
-import {
-  getLocalDirectoryFromArchivePath,
-  archive,
-} from './archive';
+import { archive } from './archive';
+import { getLocalDirectoryFromArchivePath } from './utils';
 import template from './template.json';
 
 const saveDialogOptions = {
@@ -26,39 +24,48 @@ const saveDialog = () =>
     });
   });
 
-const createProtocolWorkingPath = (workingPath, protocol) =>
+/**
+ * Creates an blank protocol directory at destinationPath, with correct directory structure.
+ * Expects a valid protocol object as input.
+ * @param {string} destinationPath - destination for skeleton protocol.
+ * @param {object} protocol - protocol object, probably a template.
+ */
+const createProtocolWorkingPath = (destinationPath, protocol) =>
   new Promise((resolve) => {
-    const assetsPath = path.join(workingPath, 'assets');
-    const protocolPath = path.join(workingPath, 'protocol.json');
-    mkdirp.sync(workingPath);
+    const assetsPath = path.join(destinationPath, 'assets');
+    const protocolPath = path.join(destinationPath, 'protocol.json');
+    mkdirp.sync(destinationPath);
     fs.mkdirSync(assetsPath);
     fs.writeFileSync(protocolPath, JSON.stringify(protocol, null, 2));
     resolve();
   });
 
-export const createProtocolArchive = ({ workingPath, archivePath }, protocol) =>
-  createProtocolWorkingPath(workingPath, protocol)
-    .then(() => archive(workingPath, archivePath));
+/**
+ * Creates a blank bundled protocol at filePath
+ * Expects a valid protocol object as input.
+ * @param {string} destinationPath - destination for protocol bundle.
+ * @param {object} protocol - protocol object, probably a template.
+ */
+export const createProtocolArchive = (destinationPath, protocol) => {
+  const tempPath = getLocalDirectoryFromArchivePath(destinationPath);
+
+  return createProtocolWorkingPath(tempPath, protocol)
+    .then(() => archive(tempPath, destinationPath));
+};
 
 /**
- * Shows a save dialog and then creates an empty protocol there
+ * Shows a save dialog and then creates a blank protocol there
  */
 const createProtocol = () =>
   saveDialog()
-    .then((archivePath) => {
-      const workingPath = getLocalDirectoryFromArchivePath(archivePath);
-
-      return createProtocolArchive({
-        workingPath,
-        archivePath,
-      }, {
+    .then((filePath) => {
+      const protocol = {
         ...template,
-        name: path.basename(archivePath, '.netcanvas'),
-      })
-        .then(() => ({
-          workingPath,
-          archivePath,
-        }));
+        name: path.basename(filePath, '.netcanvas'),
+      };
+
+      return createProtocolArchive(filePath, protocol)
+        .then(() => filePath);
     });
 
 export default createProtocol;

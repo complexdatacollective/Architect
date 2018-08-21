@@ -1,91 +1,112 @@
-import { existsSync } from 'fs';
-import { compose } from 'recompose';
-import { get, omit } from 'lodash';
-import { uniqWith, slice } from 'lodash/fp';
-import { REHYDRATE } from 'redux-persist/constants';
-import { createProtocol, locateProtocol } from '../../../other/protocols';
-import { actionTypes as protocolFileActionTypes } from '../protocol/file';
+import { actionCreators as createActionCreators } from './create';
+import {
+  actionCreators as importActionCreators,
+  actionTypes as importActionTypes,
+} from './import';
+import { actionCreators as saveActionCreators } from './save';
+import { actionCreators as exportActionCreators } from './export';
+import locateProtocol from '../../../other/protocols/locateProtocol';
 import history from '../../../history';
 
-const CLEAR_DEAD_LINKS = Symbol('PROTOCOLS/CLEAR_DEAD_LINKS');
+const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
+const IMPORT_AND_LOAD_ERROR = 'PROTOCOLS/IMPORT_AND_LOAD_ERROR';
+const CREATE_AND_LOAD_ERROR = 'PROTOCOLS/CREATE_AND_LOAD_ERROR';
+const OPEN_ERROR = 'PROTOCOLS/OPEN_ERROR';
+
+const saveAndExportError = error => ({
+  type: SAVE_AND_EXPORT_ERROR,
+  error,
+});
+
+const importAndLoadError = error => ({
+  type: IMPORT_AND_LOAD_ERROR,
+  error,
+});
+
+const createAndLoadError = error => ({
+  type: CREATE_AND_LOAD_ERROR,
+  error,
+});
+
+const openError = error => ({
+  type: OPEN_ERROR,
+  error,
+});
+
+/**
+ * 1. Save - write protocol to protocol.json
+ * 2. Export - write /tmp/{working-path} to user space.
+ */
+const saveAndExportThunk = () =>
+  dispatch =>
+    dispatch(saveActionCreators.saveProtocol())
+      .then(() => dispatch(exportActionCreators.exportProtocol()))
+      .catch(e => dispatch(saveAndExportError(e)));
+
+/**
+ * 1. Import - extract/copy protocol to /tmp/{working-path}
+ * 2. Load - redirect to /edit/ which should trigger load.
+ */
+const importAndLoadThunk = filePath =>
+  dispatch =>
+    dispatch(importActionCreators.importProtocol(filePath))
+      .then(({ id }) => {
+        history.push(`/edit/${id}/`);
+        return id;
+      })
+      .catch(e => dispatch(importAndLoadError(e)));
+
+/**
+ * 1. Create - Create a new protocol from template in user space
+ * 2. Run importAndLoadThunk on new protocol
+ */
+const createAndLoadProtocolThunk = () =>
+  dispatch =>
+    dispatch(createActionCreators.createProtocol())
+      .then(({ filePath }) => dispatch(importAndLoadThunk(filePath)))
+      .catch(e => dispatch(createAndLoadError(e)));
+
+/**
+ * 1. Locate protocol in user space with Electron dialog
+ * 2. Run importAndLoadThunk on specified path
+ */
+const openProtocol = () =>
+  dispatch =>
+    locateProtocol()
+      .then(filePath => dispatch(importAndLoadThunk(filePath)))
+      .catch(e => dispatch(openError(e)));
 
 const initialState = [];
 
-const protocolExists = protocol => (
-  existsSync(protocol.archivePath) ||
-  (protocol.advanced && existsSync(protocol.workingPath))
-);
-
-const pruneProtocols = (protocol) => {
-  if (protocol.advanced) {
-    return omit(protocol, 'archivePath');
-  }
-
-  return omit(protocol, 'workingPath');
-};
-
-const optionalUnique = property =>
-  (item, other) =>
-    get(item, property, Symbol('ITEM')) === get(other, property, Symbol('OTHER'));
-
-const recentUniqueProtocols = compose(
-  slice(0, 10),
-  uniqWith(optionalUnique('workingPath')),
-  uniqWith(optionalUnique('archivePath')),
-);
-
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case protocolFileActionTypes.PROTOCOL_LOADED:
-      return recentUniqueProtocols(
-        [action.meta].concat(state),
-      );
-    case CLEAR_DEAD_LINKS:
-      return state.filter(protocolExists)
-        .map(pruneProtocols);
-    case REHYDRATE: {
-      const protocols = get(action, ['payload', 'protocols'], []);
-
-      return protocols
-        .filter(protocolExists)
-        .map(pruneProtocols);
-    }
+    case importActionTypes.IMPORT_PROTOCOL_SUCCESS:
+      return [
+        ...state,
+        {
+          filePath: action.filePath,
+          id: action.id,
+          advanced: action.advanced,
+          workingPath: action.workingPath,
+        },
+      ];
     default:
       return state;
   }
 }
 
-const clearDeadLinks = () =>
-  ({
-    type: CLEAR_DEAD_LINKS,
-  });
-
-
-const createProtocolAction = () =>
-  () =>
-    createProtocol()
-      .then(
-        (protocolMeta) => {
-          history.push(`/edit/${encodeURIComponent(protocolMeta.archivePath)}`);
-        },
-      );
-
-const chooseProtocolAction = () =>
-  () =>
-    locateProtocol()
-      .then(
-        (filePath) => {
-          history.push(`/edit/${encodeURIComponent(filePath)}`);
-        },
-      );
-
 const actionCreators = {
-  clearDeadLinks,
-  createProtocol: createProtocolAction,
-  chooseProtocol: chooseProtocolAction,
+  createAndLoadProtocol: createAndLoadProtocolThunk,
+  saveAndExportProtocol: saveAndExportThunk,
+  importAndLoadProtocol: importAndLoadThunk,
+  openProtocol,
 };
 
 const actionTypes = {
+  SAVE_AND_EXPORT_ERROR,
+  IMPORT_AND_LOAD_ERROR,
+  CREATE_AND_LOAD_ERROR,
+  OPEN_ERROR,
 };
 
 export {

@@ -3,18 +3,11 @@ import stages from './stages';
 import forms from './forms';
 import variableRegistry from './variableRegistry';
 import externalData from './externalData';
-import { actionTypes as fileActionTypes } from './file';
+import { actionTypes as loadProtocolActionTypes } from '../protocols/load';
 
 const initialState = {};
 
-const SET_PROTOCOL = Symbol('PROTOCOL/SET_PROTOCOL');
-const UPDATE_OPTIONS = Symbol('PROTOCOL/UPDATE_OPTIONS');
-
-const resetProtocol = () => ({
-  type: SET_PROTOCOL,
-  protocol: {},
-  meta: {},
-});
+const UPDATE_OPTIONS = 'PROTOCOL/UPDATE_OPTIONS';
 
 const updateOptions = options => ({
   type: UPDATE_OPTIONS,
@@ -23,8 +16,7 @@ const updateOptions = options => ({
 
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case SET_PROTOCOL:
-    case fileActionTypes.OPEN_PROTOCOL:
+    case loadProtocolActionTypes.LOAD_PROTOCOL_SUCCESS:
       return { ...action.protocol };
     case UPDATE_OPTIONS:
       return {
@@ -37,12 +29,10 @@ function protocolReducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  resetProtocol,
   updateOptions,
 };
 
 const actionTypes = {
-  SET_PROTOCOL,
   UPDATE_OPTIONS,
 };
 

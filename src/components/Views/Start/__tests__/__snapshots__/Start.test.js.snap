@@ -5,11 +5,12 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Start
-    chooseProtocol={[Function]}
     clearDeadLinks={[Function]}
-    createProtocol={[Function]}
+    createAndLoadProtocol={[Function]}
     history={Object {}}
+    openProtocol={[Function]}
     protocols={Array []}
+    recentProtocols={Array []}
 />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

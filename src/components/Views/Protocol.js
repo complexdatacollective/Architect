@@ -16,7 +16,7 @@ import ViewForms from '../Cards/ViewForms';
 import EditType from '../Cards/EditType';
 import Timeline from '../../components/Timeline';
 import ControlBar from '../ControlBar';
-import { actionCreators as protocolFileActions } from '../../ducks/modules/protocol/file';
+import { actionCreators as protocolsActions } from '../../ducks/modules/protocols';
 
 const RightArrow = <Icon name="arrow-right" />;
 
@@ -173,7 +173,7 @@ class Protocol extends PureComponent {
   }
 }
 
-function mapStateToProps(state, props) {
+const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
   const overview = pick(protocol, ['name', 'version', 'variableRegistry', 'externalData', 'forms']);
 
@@ -184,13 +184,11 @@ function mapStateToProps(state, props) {
     hasChanges: state.protocol.past.length > 0,
     hasUnsavedChanges: (state.session.lastChanged > state.session.lastSaved),
   };
-}
+};
 
-function mapDispatchToProps(dispatch) {
-  return {
-    saveProtocol: bindActionCreators(protocolFileActions.saveProtocol, dispatch),
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  saveProtocol: bindActionCreators(protocolsActions.saveAndExportProtocol, dispatch),
+});
 
 export { Protocol };
 

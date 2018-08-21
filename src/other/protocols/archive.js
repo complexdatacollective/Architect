@@ -1,35 +1,38 @@
-import { remote } from 'electron';
-import uuid from 'uuid';
-import path from 'path';
 import fs from 'fs';
 import decompress from 'decompress';
 import archiver from 'archiver';
 
+// Since this will be compressed over the wire, we choose uncompressed for speed
 const archiveOptions = {
   // zlib: { level: 9 },
   store: true,
 };
 
-export const getProtocolNameFromArchivePath = fileName => path.basename(fileName, '.netcanvas');
-export const getLocalDirectoryFromArchivePath = () =>
-  path.join(remote.app.getPath('temp'), uuid());
+/**
+ * Extract bundled (zip) protocol from sourcePath to destinationPath
+ * @param {string} sourcePath
+ * @param {string} destinationPath
+ * @return Returns a promise that resolves to the destination path
+ */
+const extract = (sourcePath, destinationPath) =>
+  decompress(
+    sourcePath,
+    destinationPath,
+  ).then(() => destinationPath);
 
-const extract = (fileName) => {
-  const workingPath = getLocalDirectoryFromArchivePath(fileName);
-
-  return decompress(
-    fileName,
-    workingPath,
-  ).then(() => workingPath);
-};
-
-const archive = (workingPath, archivePath) =>
+/**
+ * Write a bundled (zip) protocol from sourcePath (working directory) to destinationPath
+ * @param {string} sourcePath
+ * @param {string} destinationPath
+ * @return Returns a promise that resolves to (sourcePath, destinationPath)
+ */
+const archive = (sourcePath, destinationPath) =>
   new Promise((resolve, reject) => {
-    const output = fs.createWriteStream(archivePath);
+    const output = fs.createWriteStream(destinationPath);
     const zip = archiver('zip', archiveOptions);
 
     output.on('close', () => {
-      resolve(workingPath, archivePath);
+      resolve(sourcePath, destinationPath);
     });
 
     output.on('warning', reject);
@@ -40,7 +43,7 @@ const archive = (workingPath, archivePath) =>
     zip.on('warning', reject);
     zip.on('error', reject);
 
-    zip.directory(workingPath, false);
+    zip.directory(sourcePath, false);
 
     zip.finalize();
   });
