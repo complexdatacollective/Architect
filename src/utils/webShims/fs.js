@@ -51,8 +51,15 @@ const existsSync = () => true;
 const unlinkSync = () => true;
 
 const readFile = (...args) => {
+  const filename = args.shift();
   const cb = args.pop();
-  cb(null, '{}');
+
+  switch(true) {
+    case /\.json$/.test(filename):
+      return cb(null, JSON.stringify(mockProtocol));
+    default:
+      return cb(null, '');
+  }
 }
 
 const readFileSync = (filename) => {

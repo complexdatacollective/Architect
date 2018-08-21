@@ -1,5 +1,5 @@
-.timeline-overview {
-  margin: 0 auto;
+.overview {
+  margin: unit(8) auto 0;
   width: 75vw;
 
   .edge-icon {
@@ -11,16 +11,9 @@
     color: var(--architect-panel-text);
     margin: 0 auto;
     width: 75vw;
-    min-height: 80vh;
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__content {
-    flex: 1 1 100%;
   }
 
   &__name {
@@ -59,20 +52,20 @@
   }
 
   &__groups {
-    display: grid;
-    grid-gap: unit(2);
-    height: 65vh;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   &__group {
     --base-node-size: 90px;
     border: 1px solid var(--architect-panel-divider);
     padding: unit(2) unit(4);
+    margin: unit(1);
     border-radius:  unit(1);
     text-align: left;
     position: relative;
+    flex: 0 0 calc(50% - #{unit(2)});
 
     .node {
       margin-bottom: 1rem;

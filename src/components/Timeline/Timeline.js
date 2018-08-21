@@ -9,6 +9,7 @@ import Drawer from '../Transitions/Drawer';
 import Stage from './Stage';
 import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
+import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 
 class Timeline extends Component {
@@ -148,27 +149,30 @@ class Timeline extends Component {
   render() {
     return (
       <div className="timeline">
-        <div className="timeline__main">
-          <div className="timeline__background" />
-          <div className="timeline__content">
-            <div className="timeline__stages">
-              { this.hasStages() && this.renderHighlight() }
-              <TransitionGroup>
-                { this.renderStages() }
-              </TransitionGroup>
-              { !this.hasStages() && (
-                <InsertStage
-                  key="insertStage"
-                  handleSelectStage={type => this.createStage(type, 0)}
-                />
-              ) }
-            </div>
-          </div>
+        <div className="timeline__stages">
+          { this.hasStages() && this.renderHighlight() }
+          <TransitionGroup>
+            { this.renderStages() }
+          </TransitionGroup>
+          { !this.hasStages() && (
+            <InsertStage
+              key="insertStage"
+              handleSelectStage={type => this.createStage(type, 0)}
+            />
+          ) }
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  const protocol = getProtocol(state);
+
+  return {
+    stages: protocol ? protocol.stages : [],
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
@@ -177,6 +181,6 @@ const mapDispatchToProps = dispatch => ({
 export { Timeline };
 
 export default compose(
-  connect(null, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   constrain([60, 0, 0, 0]),
 )(Timeline);

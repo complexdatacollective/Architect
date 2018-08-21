@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
@@ -6,6 +7,7 @@ import { map, get } from 'lodash';
 import { Node } from '../../ui';
 import EdgeIcon from '../EdgeIcon';
 import PanelGroup from './PanelGroup';
+import { getProtocol } from '../../selectors/protocol';
 
 class Overview extends Component {
   get renderNodeTypes() {
@@ -86,37 +88,35 @@ class Overview extends Component {
 
     return (
       <Flipped flipId={protocolFilePath}>
-        <div className="timeline-overview">
-          <div className="timeline-overview__panel">
-            <div className="timeline-overview__content">
-              <h1 className="timeline-overview__name">{name}</h1>
-              <div className="timeline-overview__groups">
-                <PanelGroup title="Variable registry">
-                  <br />
-                  <h4>Node types</h4>
-                  <div>
-                    { this.renderNodeTypes }
-                  </div>
-                  <br />
-                  <h4>Edge types</h4>
-                  <div>
-                    { this.renderEdgeTypes }
-                  </div>
-                  <div className="timeline-overview__manage-button">
-                    <Link className="button button--small" to={this.pathTo('registry')}>
-                      Manage registry
-                    </Link>
-                  </div>
-                </PanelGroup>
-                <PanelGroup title="Forms">
-                  { this.renderForms }
-                  <div className="timeline-overview__manage-button">
-                    <Link className="button button--small" to={this.pathTo('forms')}>
-                      Manage forms
-                    </Link>
-                  </div>
-                </PanelGroup>
-              </div>
+        <div className="overview">
+          <div className="overview__panel">
+            <h1 className="overview__name">{name}</h1>
+            <div className="overview__groups">
+              <PanelGroup title="Variable registry">
+                <br />
+                <h4>Node types</h4>
+                <div>
+                  { this.renderNodeTypes }
+                </div>
+                <br />
+                <h4>Edge types</h4>
+                <div>
+                  { this.renderEdgeTypes }
+                </div>
+                <div className="overview__manage-button">
+                  <Link className="button button--small" to={this.pathTo('registry')}>
+                    Manage registry
+                  </Link>
+                </div>
+              </PanelGroup>
+              <PanelGroup title="Forms">
+                { this.renderForms }
+                <div className="overview__manage-button">
+                  <Link className="button button--small" to={this.pathTo('forms')}>
+                    Manage forms
+                  </Link>
+                </div>
+              </PanelGroup>
             </div>
           </div>
         </div>
@@ -140,6 +140,18 @@ Overview.defaultProps = {
   externalData: {},
 };
 
+const mapStateToProps = (state) => {
+  const protocol = getProtocol(state);
+
+  return {
+    name: protocol && protocol.name,
+    forms: protocol && protocol.forms,
+    variableRegistry: protocol && protocol.variableRegistry,
+  };
+};
+
 export { Overview };
 
-export default Overview;
+export default connect(
+  mapStateToProps,
+)(Overview);
