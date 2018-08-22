@@ -77,7 +77,7 @@ class Overview extends Component {
       flipId,
     } = this.props;
 
-    if (!show) { return null; }
+    if (!show || !flipId) { return null; }
 
     return (
       <Flipped flipId={flipId}>
@@ -121,15 +121,17 @@ class Overview extends Component {
 }
 
 Overview.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   forms: PropTypes.object.isRequired,
   variableRegistry: PropTypes.object.isRequired,
-  flipId: PropTypes.string.isRequired,
+  flipId: PropTypes.string,
   show: PropTypes.bool,
 };
 
 Overview.defaultProps = {
   show: true,
+  name: null,
+  flipId: null,
 };
 
 const mapStateToProps = (state) => {

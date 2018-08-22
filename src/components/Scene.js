@@ -68,8 +68,12 @@ const Scene = ({
 };
 
 Scene.propTypes = {
-  protocolMeta: PropTypes.object.isRequired,
+  protocolMeta: PropTypes.object,
   location: PropTypes.object.isRequired,
+};
+
+Scene.defaultProps = {
+  protocolMeta: null,
 };
 
 const mapStateToProps = state => ({
