@@ -1,8 +1,16 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Icon } from '../ui/components';
+import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
-const Welcome = ({ show, createAndLoadProtocol, openProtocol }) => (
+const Welcome = ({
+  show,
+  createAndLoadProtocol,
+  openProtocol,
+}) => (
   <div className={cx('start', { 'start--hide': !show })}>
     <div className="start__welcome">
       <h1 className="start__welcome-title">Architect</h1>
@@ -30,9 +38,21 @@ const Welcome = ({ show, createAndLoadProtocol, openProtocol }) => (
   </div>
 );
 
-Welcome.defaultProps = {
-  createAndLoadProtocol: () => {},
-  openProtocol: () => {},
+Welcome.propTypes = {
+  show: PropTypes.bool,
+  createAndLoadProtocol: PropTypes.func.isRequired,
+  openProtocol: PropTypes.func.isRequired,
 };
 
-export default Welcome;
+Welcome.defaultProps = {
+  show: true,
+};
+
+const mapDispatchToProps = dispatch => ({
+  createAndLoadProtocol: bindActionCreators(protocolsActions.createAndLoadProtocol, dispatch),
+  openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
+});
+
+export { Welcome };
+
+export default connect(null, mapDispatchToProps)(Welcome);

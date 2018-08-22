@@ -1,41 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { get } from 'lodash';
 import { Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import ProtocolStack from './ProtocolStack';
 
 class RecentProtocols extends Component {
   static propTypes = {
-    recentProtocols: PropTypes.array,
+    recentProtocols: PropTypes.array.isRequired,
+    show: PropTypes.bool,
   };
 
   static defaultProps = {
-    recentProtocols: [
-      { filePath: 'rstst' },
-      { filePath: 'bar' },
-    ],
+    show: true,
   };
 
-  renderRecentProtocol = (protocol) => {
-    return (
-      <div
-        key={protocol.filePath}
-        className="recent-protocols__protocol"
-      >
-        <Flipped flipId={protocol.filePath}>
-          <ProtocolStack
-            protocol={protocol}
-          />
-        </Flipped>
-      </div>
-    );
-  }
+  renderRecentProtocol = protocol => (
+    <div
+      key={protocol.filePath}
+      className="recent-protocols__protocol"
+    >
+      <Flipped flipId={protocol.filePath}>
+        <ProtocolStack
+          protocol={protocol}
+        />
+      </Flipped>
+    </div>
+  );
 
   render() {
     const { show, recentProtocols } = this.props;
 
-    if (!show) { return null; }
+    if (!show || recentProtocols.length === 0) { return null; }
 
     return (
       <div className="recent-protocols">
@@ -46,13 +42,10 @@ class RecentProtocols extends Component {
 }
 
 const mapStateToProps = state => ({
-  recentProtocols: [{ filePath: '/dev/null/fake' }],
-  // recentProtocols: get(state, 'recentProtocols', []).slice(0, 3),
+  recentProtocols: get(state, 'recentProtocols', []).slice(0, 3),
 });
 
 export { RecentProtocols };
 
-export default compose(
-  connect(mapStateToProps),
-)(RecentProtocols);
+export default connect(mapStateToProps)(RecentProtocols);
 

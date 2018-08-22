@@ -25,13 +25,13 @@ const filter = (query, order) =>
 
 class InsertStage extends PureComponent {
   static propTypes = {
-    handleSelectStage: PropTypes.func,
-    handleCancel: PropTypes.func,
+    onSelectStage: PropTypes.func,
+    onCancel: PropTypes.func,
   };
 
   static defaultProps = {
-    handleSelectStage: () => {},
-    handleCancel: null,
+    onSelectStage: () => {},
+    onCancel: null,
   }
 
   constructor(props) {
@@ -77,7 +77,7 @@ class InsertStage extends PureComponent {
             <div className="timeline-insert-stage__chooser-options">
               <OptionsGrid
                 options={this.filteredOptions}
-                handleOptionSelected={type => this.props.handleSelectStage(type)}
+                handleOptionSelected={type => this.props.onSelectStage(type)}
                 handleOptionActive={type => this.handleOptionActive(type)}
                 handleOptionInactive={() => this.handleOptionInactive()}
               />
@@ -96,10 +96,10 @@ class InsertStage extends PureComponent {
             </p>
           </Guidance>
         </div>
-        { this.props.handleCancel &&
+        { this.props.onCancel &&
           <div
             className="timeline-insert-stage__close"
-            onClick={this.props.handleCancel}
+            onClick={this.props.onCancel}
           >
             Cancel
           </div>

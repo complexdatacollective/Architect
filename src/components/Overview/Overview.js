@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
 import { Node } from '../../ui';
 import EdgeIcon from '../EdgeIcon';
 import PanelGroup from './PanelGroup';
+import ProtocolLink from '../ProtocolLink';
 import { getProtocol } from '../../selectors/protocol';
 
 class Overview extends Component {
@@ -20,9 +20,9 @@ class Overview extends Component {
     return map(
       nodeTypes,
       (node, key) => (
-        <Link to={this.pathTo(`registry/node/${key}`)} key={key}>
+        <ProtocolLink to={`registry/node/${key}`} key={key}>
           <Node label={node.label} color={get(node, 'color', '')} />
-        </Link>
+        </ProtocolLink>
       ),
     );
   }
@@ -37,13 +37,13 @@ class Overview extends Component {
     return map(
       edgeTypes,
       (edge, key) => (
-        <Link
-          to={this.pathTo(`registry/edge/${key}`)}
+        <ProtocolLink
+          to={`registry/edge/${key}`}
           key={key}
           title={edge.label}
         >
           <EdgeIcon color={`var(--${get(edge, 'color', '')})`} />
-        </Link>
+        </ProtocolLink>
       ),
     );
   }
@@ -61,9 +61,9 @@ class Overview extends Component {
           forms,
           (form, key) => (
             <li key={key}>
-              <Link to={this.pathTo(`form/${key}`)}>
+              <ProtocolLink to={`form/${key}`}>
                 {form.title}
-              </Link>
+              </ProtocolLink>
             </li>
           ),
         )}
@@ -71,23 +71,17 @@ class Overview extends Component {
     );
   }
 
-  pathTo(location) {
-    const protocol = get(this.props.match, 'params.protocol');
-    if (!protocol) { return ''; }
-    return `/edit/${protocol}/${location}`;
-  }
-
   render() {
     const {
       name,
       show,
-      protocolFilePath,
+      flipId,
     } = this.props;
 
     if (!show) { return null; }
 
     return (
-      <Flipped flipId={protocolFilePath}>
+      <Flipped flipId={flipId}>
         <div className="overview">
           <div className="overview__panel">
             <h1 className="overview__name">{name}</h1>
@@ -104,17 +98,17 @@ class Overview extends Component {
                   { this.renderEdgeTypes }
                 </div>
                 <div className="overview__manage-button">
-                  <Link className="button button--small" to={this.pathTo('registry')}>
+                  <ProtocolLink className="button button--small" to={'registry'}>
                     Manage registry
-                  </Link>
+                  </ProtocolLink>
                 </div>
               </PanelGroup>
               <PanelGroup title="Forms">
                 { this.renderForms }
                 <div className="overview__manage-button">
-                  <Link className="button button--small" to={this.pathTo('forms')}>
+                  <ProtocolLink className="button button--small" to={'forms'}>
                     Manage forms
-                  </Link>
+                  </ProtocolLink>
                 </div>
               </PanelGroup>
             </div>
@@ -129,7 +123,7 @@ Overview.propTypes = {
   name: PropTypes.string.isRequired,
   forms: PropTypes.object.isRequired,
   variableRegistry: PropTypes.object.isRequired,
-  protocolFilePath: PropTypes.string.isRequired,
+  flipId: PropTypes.string.isRequired,
   show: PropTypes.bool,
 };
 
@@ -149,6 +143,4 @@ const mapStateToProps = (state) => {
 
 export { Overview };
 
-export default connect(
-  mapStateToProps,
-)(Overview);
+export default connect(mapStateToProps)(Overview);

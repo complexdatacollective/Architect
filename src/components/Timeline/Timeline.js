@@ -12,23 +12,20 @@ import InsertStage from './InsertStage';
 import constrain from '../../behaviours/constrain';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
+import { actionCreators as navigationActions } from '../../ducks/modules/navigation';
 
 class Timeline extends Component {
   static propTypes = {
     stages: PropTypes.array,
-    overview: PropTypes.object,
-    onCreateStage: PropTypes.func,
-    onEditStage: PropTypes.func,
     deleteStage: PropTypes.func.isRequired,
-    onEditSkipLogic: PropTypes.func,
+    goTo: PropTypes.func.isRequired,
+    show: PropTypes.bool,
   };
 
   static defaultProps = {
+    show: true,
     stages: [],
     overview: {},
-    onCreateStage: () => {},
-    onEditStage: () => {},
-    onEditSkipLogic: () => {},
   };
 
   constructor(props) {
@@ -41,39 +38,31 @@ class Timeline extends Component {
     };
   }
 
-  onMouseEnterStage = (e) => {
+  handleMouseEnterStage = (e) => {
     const offset = e.target.closest('.timeline-stage').offsetTop;
     this.setState({ highlightY: offset, highlightHide: false });
   };
 
-  onMouseLeaveStage = () => {
+  handleMouseLeaveStage = () => {
     this.setState({ highlightHide: true });
   };
 
-  onInsertStage = (index) => {
+  handleInsertStage = (index) => {
     this.setState({ insertStageAtIndex: index, highlightHide: true });
   };
 
-  onDeleteStage = (stageId) => {
+  handleDeleteStage = (stageId) => {
     // eslint-disable-next-line
     if (confirm('Are you sure you want to remove this stage?')) {
       this.props.deleteStage(stageId);
     }
   }
 
-  onEditStage = stageId =>
-    this.goto(`stage/${stageId}`);
+  handleEditStage = stageId =>
+    this.props.goTo(`stage/${stageId}`);
 
-  onEditSkipLogic = stageId =>
-    this.goto(`skip/${stageId}`);
-
-  goto = (location = '') => {
-    const url = `/edit/${this.props.activeProtocol}/${location}`;
-
-    console.log(url);
-
-    this.props.history.push(url);
-  }
+  handleEditSkipLogic = stageId =>
+    this.props.goTo(`skip/${stageId}`);
 
   handleCancelInsertStage = () => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
@@ -81,8 +70,7 @@ class Timeline extends Component {
 
   createStage = (type, index) => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
-    this.props.onCreateStage(type, index);
-    this.goto(`stage?type=${type}&insertAtIndex=${insertAtIndex}`);
+    this.props.goTo(`stage?type=${type}&insertAtIndex=${index}`);
   };
 
   hasStages = () => this.props.stages.length > 0;
@@ -109,8 +97,8 @@ class Timeline extends Component {
       mountOnEnter
     >
       <InsertStage
-        handleSelectStage={type => this.createStage(type, insertStageAtIndex)}
-        handleCancel={this.handleCancelInsertStage}
+        onSelectStage={type => this.createStage(type, insertStageAtIndex)}
+        onCancel={this.handleCancelInsertStage}
       />
     </Drawer>
   );
@@ -151,12 +139,12 @@ class Timeline extends Component {
           type={stage.type}
           label={stage.label}
           className={className}
-          onMouseEnter={this.onMouseEnterStage}
-          onMouseLeave={this.onMouseLeaveStage}
-          onEditStage={() => this.onEditStage(stage.id)}
-          onDeleteStage={() => this.onDeleteStage(stage.id)}
-          onInsertStage={position => this.onInsertStage(index + position)}
-          onEditSkipLogic={() => this.onEditSkipLogic(stage.id)}
+          onMouseEnter={this.handleMouseEnterStage}
+          onMouseLeave={this.handleMouseLeaveStage}
+          onEditStage={() => this.handleEditStage(stage.id)}
+          onDeleteStage={() => this.handleDeleteStage(stage.id)}
+          onInsertStage={position => this.handleInsertStage(index + position)}
+          onEditSkipLogic={() => this.handleEditSkipLogic(stage.id)}
         />
       </None>
     );
@@ -175,7 +163,7 @@ class Timeline extends Component {
           { !this.hasStages() && (
             <InsertStage
               key="insertStage"
-              handleSelectStage={type => this.createStage(type, 0)}
+              onSelectStage={type => this.createStage(type, 0)}
             />
           ) }
         </div>
@@ -195,6 +183,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
+  goTo: bindActionCreators(navigationActions.goTo, dispatch),
 });
 
 export { Timeline };
