@@ -19,6 +19,7 @@ const Scene = ({
   location,
 }) => {
   const protocolId = protocolMeta && protocolMeta.id;
+  const flipKey = protocolId || 'start';
   const showProtocol = !!protocolId;
   const showStart = !protocolId;
 
@@ -37,7 +38,7 @@ const Scene = ({
         <img src={architectLogoIcon} alt="" />
       </NavLink>
 
-      <Flipper flipKey={protocolId}>
+      <Flipper flipKey={flipKey}>
 
         <div className="scene__start">
           <Start show={showStart} />

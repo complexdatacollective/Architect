@@ -1,0 +1,1359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Scene /> can render 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Scene
+    location={Object {}}
+    protocolMeta={Object {}}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="scene__background scene__background--top"
+/>,
+        <div
+          className="scene__background scene__background--bottom"
+/>,
+        <img
+          alt=""
+          className="scene__brand"
+          src="network-canvas-brand.svg"
+/>,
+        <NavLink
+          activeClassName="active"
+          aria-current="page"
+          className="scene__home"
+          exact={true}
+          to="/"
+>
+          <img
+                    alt=""
+                    src="architect-logo-icon.svg"
+          />
+</NavLink>,
+        <Flipper
+          applyTransformOrigin={true}
+          element="div"
+          flipKey="start"
+>
+          <div
+                    className="scene__start"
+          >
+                    <Connect(Start)
+                              show={true}
+                    />
+          </div>
+          <div
+                    className="scene__recent-protocols"
+          >
+                    <Connect(RecentProtocols)
+                              show={true}
+                    />
+          </div>
+          <div
+                    className="scene__protocol"
+          >
+                    <Connect(Overview)
+                              flipId={undefined}
+                              show={false}
+                    />
+                    <div
+                              className="scene__timeline"
+                    >
+                              <withRouter(Connect(withContext(Timeline)))
+                                        show={false}
+                              />
+                    </div>
+                    <Connect(ProtocolControlBar)
+                              show={false}
+                    />
+          </div>
+</Flipper>,
+        <Connect(Cards)
+          location={Object {}}
+/>,
+      ],
+      "className": "scene",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "scene__background scene__background--top",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "scene__background scene__background--bottom",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "alt": "",
+          "className": "scene__brand",
+          "src": "network-canvas-brand.svg",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "img",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "activeClassName": "active",
+          "aria-current": "page",
+          "children": <img
+            alt=""
+            src="architect-logo-icon.svg"
+/>,
+          "className": "scene__home",
+          "exact": true,
+          "to": "/",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "",
+            "src": "architect-logo-icon.svg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "applyTransformOrigin": true,
+          "children": Array [
+            <div
+              className="scene__start"
+>
+              <Connect(Start)
+                            show={true}
+              />
+</div>,
+            <div
+              className="scene__recent-protocols"
+>
+              <Connect(RecentProtocols)
+                            show={true}
+              />
+</div>,
+            <div
+              className="scene__protocol"
+>
+              <Connect(Overview)
+                            flipId={undefined}
+                            show={false}
+              />
+              <div
+                            className="scene__timeline"
+              >
+                            <withRouter(Connect(withContext(Timeline)))
+                                          show={false}
+                            />
+              </div>
+              <Connect(ProtocolControlBar)
+                            show={false}
+              />
+</div>,
+          ],
+          "element": "div",
+          "flipKey": "start",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Connect(Start)
+                show={true}
+/>,
+              "className": "scene__start",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "show": true,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Connect(RecentProtocols)
+                show={true}
+/>,
+              "className": "scene__recent-protocols",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "show": true,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <Connect(Overview)
+                  flipId={undefined}
+                  show={false}
+/>,
+                <div
+                  className="scene__timeline"
+>
+                  <withRouter(Connect(withContext(Timeline)))
+                                    show={false}
+                  />
+</div>,
+                <Connect(ProtocolControlBar)
+                  show={false}
+/>,
+              ],
+              "className": "scene__protocol",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "flipId": undefined,
+                  "show": false,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <withRouter(Connect(withContext(Timeline)))
+                    show={false}
+/>,
+                  "className": "scene__timeline",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "show": false,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "show": false,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "location": Object {},
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="scene__background scene__background--top"
+/>,
+          <div
+            className="scene__background scene__background--bottom"
+/>,
+          <img
+            alt=""
+            className="scene__brand"
+            src="network-canvas-brand.svg"
+/>,
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
+            className="scene__home"
+            exact={true}
+            to="/"
+>
+            <img
+                        alt=""
+                        src="architect-logo-icon.svg"
+            />
+</NavLink>,
+          <Flipper
+            applyTransformOrigin={true}
+            element="div"
+            flipKey="start"
+>
+            <div
+                        className="scene__start"
+            >
+                        <Connect(Start)
+                                    show={true}
+                        />
+            </div>
+            <div
+                        className="scene__recent-protocols"
+            >
+                        <Connect(RecentProtocols)
+                                    show={true}
+                        />
+            </div>
+            <div
+                        className="scene__protocol"
+            >
+                        <Connect(Overview)
+                                    flipId={undefined}
+                                    show={false}
+                        />
+                        <div
+                                    className="scene__timeline"
+                        >
+                                    <withRouter(Connect(withContext(Timeline)))
+                                                show={false}
+                                    />
+                        </div>
+                        <Connect(ProtocolControlBar)
+                                    show={false}
+                        />
+            </div>
+</Flipper>,
+          <Connect(Cards)
+            location={Object {}}
+/>,
+        ],
+        "className": "scene",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "scene__background scene__background--top",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "scene__background scene__background--bottom",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "",
+            "className": "scene__brand",
+            "src": "network-canvas-brand.svg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "activeClassName": "active",
+            "aria-current": "page",
+            "children": <img
+              alt=""
+              src="architect-logo-icon.svg"
+/>,
+            "className": "scene__home",
+            "exact": true,
+            "to": "/",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "",
+              "src": "architect-logo-icon.svg",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "applyTransformOrigin": true,
+            "children": Array [
+              <div
+                className="scene__start"
+>
+                <Connect(Start)
+                                show={true}
+                />
+</div>,
+              <div
+                className="scene__recent-protocols"
+>
+                <Connect(RecentProtocols)
+                                show={true}
+                />
+</div>,
+              <div
+                className="scene__protocol"
+>
+                <Connect(Overview)
+                                flipId={undefined}
+                                show={false}
+                />
+                <div
+                                className="scene__timeline"
+                >
+                                <withRouter(Connect(withContext(Timeline)))
+                                                show={false}
+                                />
+                </div>
+                <Connect(ProtocolControlBar)
+                                show={false}
+                />
+</div>,
+            ],
+            "element": "div",
+            "flipKey": "start",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <Connect(Start)
+                  show={true}
+/>,
+                "className": "scene__start",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "show": true,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <Connect(RecentProtocols)
+                  show={true}
+/>,
+                "className": "scene__recent-protocols",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "show": true,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <Connect(Overview)
+                    flipId={undefined}
+                    show={false}
+/>,
+                  <div
+                    className="scene__timeline"
+>
+                    <withRouter(Connect(withContext(Timeline)))
+                                        show={false}
+                    />
+</div>,
+                  <Connect(ProtocolControlBar)
+                    show={false}
+/>,
+                ],
+                "className": "scene__protocol",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "flipId": undefined,
+                    "show": false,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <withRouter(Connect(withContext(Timeline)))
+                      show={false}
+/>,
+                    "className": "scene__timeline",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "show": false,
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "show": false,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "location": Object {},
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`<Scene /> shows protocol when there is one 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Scene
+    location={Object {}}
+    protocolMeta={
+        Object {
+            "id": "foo",
+          }
+    }
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <div
+          className="scene__background scene__background--top"
+/>,
+        <div
+          className="scene__background scene__background--bottom"
+/>,
+        <img
+          alt=""
+          className="scene__brand"
+          src="network-canvas-brand.svg"
+/>,
+        <NavLink
+          activeClassName="active"
+          aria-current="page"
+          className="scene__home"
+          exact={true}
+          to="/"
+>
+          <img
+                    alt=""
+                    src="architect-logo-icon.svg"
+          />
+</NavLink>,
+        <Flipper
+          applyTransformOrigin={true}
+          element="div"
+          flipKey="foo"
+>
+          <div
+                    className="scene__start"
+          >
+                    <Connect(Start)
+                              show={false}
+                    />
+          </div>
+          <div
+                    className="scene__recent-protocols"
+          >
+                    <Connect(RecentProtocols)
+                              show={false}
+                    />
+          </div>
+          <div
+                    className="scene__protocol"
+          >
+                    <Connect(Overview)
+                              flipId={undefined}
+                              show={true}
+                    />
+                    <div
+                              className="scene__timeline"
+                    >
+                              <withRouter(Connect(withContext(Timeline)))
+                                        show={true}
+                              />
+                    </div>
+                    <Connect(ProtocolControlBar)
+                              show={true}
+                    />
+          </div>
+</Flipper>,
+        <Connect(Cards)
+          location={Object {}}
+/>,
+      ],
+      "className": "scene scene--protocol",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "scene__background scene__background--top",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "className": "scene__background scene__background--bottom",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "alt": "",
+          "className": "scene__brand",
+          "src": "network-canvas-brand.svg",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "img",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "activeClassName": "active",
+          "aria-current": "page",
+          "children": <img
+            alt=""
+            src="architect-logo-icon.svg"
+/>,
+          "className": "scene__home",
+          "exact": true,
+          "to": "/",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "",
+            "src": "architect-logo-icon.svg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "applyTransformOrigin": true,
+          "children": Array [
+            <div
+              className="scene__start"
+>
+              <Connect(Start)
+                            show={false}
+              />
+</div>,
+            <div
+              className="scene__recent-protocols"
+>
+              <Connect(RecentProtocols)
+                            show={false}
+              />
+</div>,
+            <div
+              className="scene__protocol"
+>
+              <Connect(Overview)
+                            flipId={undefined}
+                            show={true}
+              />
+              <div
+                            className="scene__timeline"
+              >
+                            <withRouter(Connect(withContext(Timeline)))
+                                          show={true}
+                            />
+              </div>
+              <Connect(ProtocolControlBar)
+                            show={true}
+              />
+</div>,
+          ],
+          "element": "div",
+          "flipKey": "foo",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Connect(Start)
+                show={false}
+/>,
+              "className": "scene__start",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "show": false,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Connect(RecentProtocols)
+                show={false}
+/>,
+              "className": "scene__recent-protocols",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "show": false,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <Connect(Overview)
+                  flipId={undefined}
+                  show={true}
+/>,
+                <div
+                  className="scene__timeline"
+>
+                  <withRouter(Connect(withContext(Timeline)))
+                                    show={true}
+                  />
+</div>,
+                <Connect(ProtocolControlBar)
+                  show={true}
+/>,
+              ],
+              "className": "scene__protocol",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "flipId": undefined,
+                  "show": true,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <withRouter(Connect(withContext(Timeline)))
+                    show={true}
+/>,
+                  "className": "scene__timeline",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "show": true,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "show": true,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "location": Object {},
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="scene__background scene__background--top"
+/>,
+          <div
+            className="scene__background scene__background--bottom"
+/>,
+          <img
+            alt=""
+            className="scene__brand"
+            src="network-canvas-brand.svg"
+/>,
+          <NavLink
+            activeClassName="active"
+            aria-current="page"
+            className="scene__home"
+            exact={true}
+            to="/"
+>
+            <img
+                        alt=""
+                        src="architect-logo-icon.svg"
+            />
+</NavLink>,
+          <Flipper
+            applyTransformOrigin={true}
+            element="div"
+            flipKey="foo"
+>
+            <div
+                        className="scene__start"
+            >
+                        <Connect(Start)
+                                    show={false}
+                        />
+            </div>
+            <div
+                        className="scene__recent-protocols"
+            >
+                        <Connect(RecentProtocols)
+                                    show={false}
+                        />
+            </div>
+            <div
+                        className="scene__protocol"
+            >
+                        <Connect(Overview)
+                                    flipId={undefined}
+                                    show={true}
+                        />
+                        <div
+                                    className="scene__timeline"
+                        >
+                                    <withRouter(Connect(withContext(Timeline)))
+                                                show={true}
+                                    />
+                        </div>
+                        <Connect(ProtocolControlBar)
+                                    show={true}
+                        />
+            </div>
+</Flipper>,
+          <Connect(Cards)
+            location={Object {}}
+/>,
+        ],
+        "className": "scene scene--protocol",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "scene__background scene__background--top",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "className": "scene__background scene__background--bottom",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "alt": "",
+            "className": "scene__brand",
+            "src": "network-canvas-brand.svg",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "activeClassName": "active",
+            "aria-current": "page",
+            "children": <img
+              alt=""
+              src="architect-logo-icon.svg"
+/>,
+            "className": "scene__home",
+            "exact": true,
+            "to": "/",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "alt": "",
+              "src": "architect-logo-icon.svg",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "img",
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "applyTransformOrigin": true,
+            "children": Array [
+              <div
+                className="scene__start"
+>
+                <Connect(Start)
+                                show={false}
+                />
+</div>,
+              <div
+                className="scene__recent-protocols"
+>
+                <Connect(RecentProtocols)
+                                show={false}
+                />
+</div>,
+              <div
+                className="scene__protocol"
+>
+                <Connect(Overview)
+                                flipId={undefined}
+                                show={true}
+                />
+                <div
+                                className="scene__timeline"
+                >
+                                <withRouter(Connect(withContext(Timeline)))
+                                                show={true}
+                                />
+                </div>
+                <Connect(ProtocolControlBar)
+                                show={true}
+                />
+</div>,
+            ],
+            "element": "div",
+            "flipKey": "foo",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <Connect(Start)
+                  show={false}
+/>,
+                "className": "scene__start",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "show": false,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <Connect(RecentProtocols)
+                  show={false}
+/>,
+                "className": "scene__recent-protocols",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "show": false,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <Connect(Overview)
+                    flipId={undefined}
+                    show={true}
+/>,
+                  <div
+                    className="scene__timeline"
+>
+                    <withRouter(Connect(withContext(Timeline)))
+                                        show={true}
+                    />
+</div>,
+                  <Connect(ProtocolControlBar)
+                    show={true}
+/>,
+                ],
+                "className": "scene__protocol",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "flipId": undefined,
+                    "show": true,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": <withRouter(Connect(withContext(Timeline)))
+                      show={true}
+/>,
+                    "className": "scene__timeline",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "function",
+                    "props": Object {
+                      "show": true,
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "show": true,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "location": Object {},
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

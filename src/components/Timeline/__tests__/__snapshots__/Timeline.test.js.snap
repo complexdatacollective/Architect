@@ -6,10 +6,9 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Timeline
     deleteStage={[Function]}
-    onCreateStage={[Function]}
-    onEditSkipLogic={[Function]}
-    onEditStage={[Function]}
+    goTo={[Function]}
     overview={Object {}}
+    show={true}
     stages={Array []}
 />,
   Symbol(enzyme.__renderer__): Object {
@@ -25,32 +24,20 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="timeline__main"
+        className="timeline__stages"
 >
-        <div
-                className="timeline__background"
-        />
-        <div
-                className="timeline__content"
+        <TransitionGroup
+                childFactory={[Function]}
+                component="div"
         >
-                <withRouter() />
-                <div
-                        className="timeline__stages"
-                >
-                        <TransitionGroup
-                                childFactory={[Function]}
-                                component="div"
-                        >
-                                
-                        </TransitionGroup>
-                        <InsertStage
-                                handleCancel={null}
-                                handleSelectStage={[Function]}
-                        />
-                </div>
-        </div>
+                
+        </TransitionGroup>
+        <InsertStage
+                onCancel={null}
+                onSelectStage={[Function]}
+        />
 </div>,
-      "className": "timeline",
+      "className": "timeline timeline--show",
     },
     "ref": null,
     "rendered": Object {
@@ -59,132 +46,47 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <div
-            className="timeline__background"
-/>,
-          <div
-            className="timeline__content"
+          false,
+          <TransitionGroup
+            childFactory={[Function]}
+            component="div"
 >
-            <withRouter() />
-            <div
-                        className="timeline__stages"
-            >
-                        <TransitionGroup
-                                    childFactory={[Function]}
-                                    component="div"
-                        >
-                                    
-                        </TransitionGroup>
-                        <InsertStage
-                                    handleCancel={null}
-                                    handleSelectStage={[Function]}
-                        />
-            </div>
-</div>,
+            
+</TransitionGroup>,
+          <InsertStage
+            onCancel={null}
+            onSelectStage={[Function]}
+/>,
         ],
-        "className": "timeline__main",
+        "className": "timeline__stages",
       },
       "ref": null,
       "rendered": Array [
+        false,
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "class",
           "props": Object {
-            "className": "timeline__background",
+            "childFactory": [Function],
+            "children": Array [],
+            "component": "div",
           },
           "ref": null,
-          "rendered": null,
-          "type": "div",
+          "rendered": Array [],
+          "type": [Function],
         },
         Object {
           "instance": null,
-          "key": undefined,
-          "nodeType": "host",
+          "key": "insertStage",
+          "nodeType": "class",
           "props": Object {
-            "children": Array [
-              <withRouter() />,
-              <div
-                className="timeline__stages"
->
-                <TransitionGroup
-                                childFactory={[Function]}
-                                component="div"
-                >
-                                
-                </TransitionGroup>
-                <InsertStage
-                                handleCancel={null}
-                                handleSelectStage={[Function]}
-                />
-</div>,
-            ],
-            "className": "timeline__content",
+            "onCancel": null,
+            "onSelectStage": [Function],
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {},
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  false,
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
->
-                    
-</TransitionGroup>,
-                  <InsertStage
-                    handleCancel={null}
-                    handleSelectStage={[Function]}
-/>,
-                ],
-                "className": "timeline__stages",
-              },
-              "ref": null,
-              "rendered": Array [
-                false,
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "childFactory": [Function],
-                    "children": Array [],
-                    "component": "div",
-                  },
-                  "ref": null,
-                  "rendered": Array [],
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": "insertStage",
-                  "nodeType": "class",
-                  "props": Object {
-                    "handleCancel": null,
-                    "handleSelectStage": [Function],
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
-            },
-          ],
-          "type": "div",
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",
@@ -198,32 +100,20 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="timeline__main"
+          className="timeline__stages"
 >
-          <div
-                    className="timeline__background"
-          />
-          <div
-                    className="timeline__content"
+          <TransitionGroup
+                    childFactory={[Function]}
+                    component="div"
           >
-                    <withRouter() />
-                    <div
-                              className="timeline__stages"
-                    >
-                              <TransitionGroup
-                                        childFactory={[Function]}
-                                        component="div"
-                              >
-                                        
-                              </TransitionGroup>
-                              <InsertStage
-                                        handleCancel={null}
-                                        handleSelectStage={[Function]}
-                              />
-                    </div>
-          </div>
+                    
+          </TransitionGroup>
+          <InsertStage
+                    onCancel={null}
+                    onSelectStage={[Function]}
+          />
 </div>,
-        "className": "timeline",
+        "className": "timeline timeline--show",
       },
       "ref": null,
       "rendered": Object {
@@ -232,132 +122,47 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <div
-              className="timeline__background"
-/>,
-            <div
-              className="timeline__content"
+            false,
+            <TransitionGroup
+              childFactory={[Function]}
+              component="div"
 >
-              <withRouter() />
-              <div
-                            className="timeline__stages"
-              >
-                            <TransitionGroup
-                                          childFactory={[Function]}
-                                          component="div"
-                            >
-                                          
-                            </TransitionGroup>
-                            <InsertStage
-                                          handleCancel={null}
-                                          handleSelectStage={[Function]}
-                            />
-              </div>
-</div>,
+              
+</TransitionGroup>,
+            <InsertStage
+              onCancel={null}
+              onSelectStage={[Function]}
+/>,
           ],
-          "className": "timeline__main",
+          "className": "timeline__stages",
         },
         "ref": null,
         "rendered": Array [
+          false,
           Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "class",
             "props": Object {
-              "className": "timeline__background",
+              "childFactory": [Function],
+              "children": Array [],
+              "component": "div",
             },
             "ref": null,
-            "rendered": null,
-            "type": "div",
+            "rendered": Array [],
+            "type": [Function],
           },
           Object {
             "instance": null,
-            "key": undefined,
-            "nodeType": "host",
+            "key": "insertStage",
+            "nodeType": "class",
             "props": Object {
-              "children": Array [
-                <withRouter() />,
-                <div
-                  className="timeline__stages"
->
-                  <TransitionGroup
-                                    childFactory={[Function]}
-                                    component="div"
-                  >
-                                    
-                  </TransitionGroup>
-                  <InsertStage
-                                    handleCancel={null}
-                                    handleSelectStage={[Function]}
-                  />
-</div>,
-              ],
-              "className": "timeline__content",
+              "onCancel": null,
+              "onSelectStage": [Function],
             },
             "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    false,
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
->
-                      
-</TransitionGroup>,
-                    <InsertStage
-                      handleCancel={null}
-                      handleSelectStage={[Function]}
-/>,
-                  ],
-                  "className": "timeline__stages",
-                },
-                "ref": null,
-                "rendered": Array [
-                  false,
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "childFactory": [Function],
-                      "children": Array [],
-                      "component": "div",
-                    },
-                    "ref": null,
-                    "rendered": Array [],
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": "insertStage",
-                    "nodeType": "class",
-                    "props": Object {
-                      "handleCancel": null,
-                      "handleSelectStage": [Function],
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                ],
-                "type": "div",
-              },
-            ],
-            "type": "div",
+            "rendered": null,
+            "type": [Function],
           },
         ],
         "type": "div",

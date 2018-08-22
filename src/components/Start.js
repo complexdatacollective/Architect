@@ -6,7 +6,7 @@ import cx from 'classnames';
 import { Button, Icon } from '../ui/components';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
-const Welcome = ({
+const Start = ({
   show,
   createAndLoadProtocol,
   openProtocol,
@@ -38,13 +38,13 @@ const Welcome = ({
   </div>
 );
 
-Welcome.propTypes = {
+Start.propTypes = {
   show: PropTypes.bool,
   createAndLoadProtocol: PropTypes.func.isRequired,
   openProtocol: PropTypes.func.isRequired,
 };
 
-Welcome.defaultProps = {
+Start.defaultProps = {
   show: true,
 };
 
@@ -53,6 +53,6 @@ const mapDispatchToProps = dispatch => ({
   openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
 });
 
-export { Welcome };
+export { Start };
 
-export default connect(null, mapDispatchToProps)(Welcome);
+export default connect(null, mapDispatchToProps)(Start);

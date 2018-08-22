@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
-import { Node } from '../../ui';
-import EdgeIcon from '../EdgeIcon';
-import PanelGroup from './PanelGroup';
-import ProtocolLink from '../ProtocolLink';
-import { getProtocol } from '../../selectors/protocol';
+import { Node } from '../ui/components';
+import EdgeIcon from './EdgeIcon';
+import ProtocolLink from './ProtocolLink';
+import { getProtocol } from '../selectors/protocol';
 
 class Overview extends Component {
   get renderNodeTypes() {
@@ -86,7 +85,8 @@ class Overview extends Component {
           <div className="overview__panel">
             <h1 className="overview__name">{name}</h1>
             <div className="overview__groups">
-              <PanelGroup title="Variable registry">
+              <div className="overview__group">
+                <h3 className="overview__group-title">Variable registry</h3>
                 <br />
                 <h4>Node types</h4>
                 <div>
@@ -102,15 +102,16 @@ class Overview extends Component {
                     Manage registry
                   </ProtocolLink>
                 </div>
-              </PanelGroup>
-              <PanelGroup title="Forms">
+              </div>
+              <div className="overview__group">
+                <h3 className="overview__group-title">Forms</h3>
                 { this.renderForms }
                 <div className="overview__manage-button">
                   <ProtocolLink className="button button--small" to={'forms'}>
                     Manage forms
                   </ProtocolLink>
                 </div>
-              </PanelGroup>
+              </div>
             </div>
           </div>
         </div>
