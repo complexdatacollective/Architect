@@ -6,13 +6,10 @@ import { withRouter } from 'react-router-dom';
 import { isMacOS } from '../utils/platform';
 import Version from './Version';
 
-const isAtIndex = pathname => pathname === '/';
-
-const App = ({ children, location: { pathname } }) => {
+const App = ({ children }) => {
   const appClasses = cx(
     'app',
     {
-      'app--start': isAtIndex(pathname),
       'app--macos': isMacOS(),
     },
   );
@@ -32,7 +29,6 @@ const App = ({ children, location: { pathname } }) => {
 
 App.propTypes = {
   children: PropTypes.element,
-  location: PropTypes.object.isRequired,
 };
 
 App.defaultProps = {
