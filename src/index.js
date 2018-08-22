@@ -7,7 +7,7 @@ import { ipcRenderer, remote } from 'electron';
 import { find } from 'lodash';
 import { PersistGate } from 'redux-persist/integration/react';
 import './styles/main.scss';
-import memoryHistory from './history';
+import appHistory from './history';
 import { store, persistor } from './ducks/store';
 import App from './components/App';
 import Routes from './routes';
@@ -22,7 +22,7 @@ const startApp = () => {
       <ClipPaths />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Router history={memoryHistory}>
+          <Router history={appHistory}>
             <Route
               render={({ location, history }) => (
                 <App>

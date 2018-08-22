@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { isMacOS } from '../utils/platform';
+import { AppErrorBoundary } from './Errors';
 import Version from './Version';
 
 const App = ({ children }) => {
@@ -20,7 +21,9 @@ const App = ({ children }) => {
         <div className="app__electron-titlebar" />
       }
       <div className="app__window">
-        { children }
+        <AppErrorBoundary>
+          { children }
+        </AppErrorBoundary>
       </div>
       <Version />
     </div>
