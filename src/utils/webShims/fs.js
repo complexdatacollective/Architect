@@ -50,7 +50,17 @@ const existsSync = () => true;
 
 const unlinkSync = () => true;
 
-const readFile = () => Promise.resolve('{}');
+const readFile = (...args) => {
+  const filename = args.shift();
+  const cb = args.pop();
+
+  switch(true) {
+    case /\.json$/.test(filename):
+      return cb(null, JSON.stringify(mockProtocol));
+    default:
+      return cb(null, '');
+  }
+}
 
 const readFileSync = (filename) => {
   switch(true) {

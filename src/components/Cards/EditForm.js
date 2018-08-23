@@ -33,7 +33,23 @@ class EditForm extends PureComponent {
     hasUnsavedChanges: false,
   };
 
-  onSubmit = (form) => {
+  get buttons() {
+    const saveButton = (
+      <Button
+        key="save"
+        size="small"
+        onClick={this.props.submitForm}
+        iconPosition="right"
+        disabled={this.props.hasErrors}
+      >
+        Continue
+      </Button>
+    );
+
+    return this.props.hasUnsavedChanges ? [saveButton] : [];
+  }
+
+  handleSubmit = (form) => {
     if (this.props.formName) {
       this.props.updateForm(this.props.formName, form);
     } else {
@@ -46,24 +62,8 @@ class EditForm extends PureComponent {
     });
   }
 
-  submitForm = () => {
-    this.props.submitForm(reduxFormName);
-  }
-
-  renderButtons() {
-    const saveButton = (
-      <Button
-        key="save"
-        size="small"
-        onClick={this.submitForm}
-        iconPosition="right"
-        disabled={this.props.hasErrors}
-      >
-        Continue
-      </Button>
-    );
-
-    return this.props.hasUnsavedChanges ? [saveButton] : [];
+  handleCancel = () => {
+    this.props.onComplete();
   }
 
   render() {
@@ -74,13 +74,13 @@ class EditForm extends PureComponent {
 
     return (
       <Card
-        buttons={this.renderButtons()}
+        buttons={this.buttons}
         show={show}
-        onCancel={this.props.onComplete}
+        onCancel={this.handleCancel}
       >
         <FormEditor
           initialValues={form}
-          onSubmit={this.onSubmit}
+          onSubmit={this.handleSubmit}
         />
       </Card>
     );
@@ -104,7 +104,7 @@ function mapStateToProps(state, props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  submitForm: bindActionCreators(submit, dispatch),
+  submitForm: () => dispatch(submit(reduxFormName)),
   updateForm: bindActionCreators(formActions.updateForm, dispatch),
   createForm: bindActionCreators(formActions.createForm, dispatch),
 });

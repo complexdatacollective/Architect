@@ -1,0 +1,15 @@
+.recent-protocols {
+  width: 90vw;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: unit(3);
+  border-radius: unit(1);
+  background-color: var(--light-background);
+  display: flex;
+  box-shadow: inset 5px 5px 15px var(--color-shadow);
+
+  &__protocol {
+    flex: 0 0 33%;
+    padding: unit(2) unit(2) 0;
+  }
+}

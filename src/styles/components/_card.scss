@@ -23,6 +23,8 @@
 
   &__content {
     padding: 0 0 unit(6);
+    min-height: 100%;
+    position: relative;
   }
 
   &--logic {

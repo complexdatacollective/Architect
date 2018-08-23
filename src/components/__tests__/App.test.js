@@ -33,12 +33,4 @@ describe('<App />', () => {
     expect(component.hasClass('app--macos')).toBe(false);
     expect(component.contains(<div className="app__electron-titlebar" />)).toBe(false);
   });
-
-  it('has `.app--start` class if path is root', () => {
-    const componentAtFoo = shallow(<App {...mockProps} location={{ pathname: '/foo' }} />);
-    expect(componentAtFoo.hasClass('app--start')).toBe(false);
-
-    const componentAtRoot = shallow(<App {...mockProps} location={{ pathname: '/' }} />);
-    expect(componentAtRoot.hasClass('app--start')).toBe(true);
-  });
 });

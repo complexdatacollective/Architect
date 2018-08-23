@@ -84,13 +84,16 @@ const Zoom = WrappedComponent =>
           scaleY: [scaleY, 1],
           scaleX: [scaleX, 1],
           backgroundColor: this.props.zoomColors,
-        }).add({
+        })
+        .add({
           targets: pseudoElement,
           elasticity: 0,
           easing: 'easeInOutQuad',
+          delay: 50,
           duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
           opacity: [1, 0],
-        }).finished.then(() => {
+        })
+        .finished.then(() => {
           this.root.removeChild(pseudoElement);
         });
       }

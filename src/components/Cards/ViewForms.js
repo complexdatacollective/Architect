@@ -14,12 +14,20 @@ import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 
 class ViewForms extends Component {
+  get buttons() {
+    return ([
+      <Button key="cancel" size="small" color="platinum" onClick={this.handleCancel}>Back</Button>,
+    ]);
+  }
+
   handleDelete = (form) => {
     // eslint-disable-next-line no-alert
     if (confirm(`Are you sure you want to delete "${form}"?`)) {
       this.props.deleteForm(form);
     }
   };
+
+  handleCancel = this.props.onComplete;
 
   renderForm = (form, key) => (
     <Wipe key={key}>
@@ -61,12 +69,6 @@ class ViewForms extends Component {
     );
   }
 
-  renderButtons() {
-    return ([
-      <Button key="cancel" size="small" color="platinum" onClick={this.props.onComplete}>Back</Button>,
-    ]);
-  }
-
   render() {
     const {
       show,
@@ -76,7 +78,7 @@ class ViewForms extends Component {
     return (
       <Card
         show={show}
-        buttons={this.renderButtons()}
+        buttons={this.buttons}
       >
         <div className="editor variable-registry">
           <Guided className="editor__sections">

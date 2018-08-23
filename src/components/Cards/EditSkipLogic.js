@@ -38,7 +38,17 @@ class EditSkipLogic extends PureComponent {
     onComplete: () => {},
   }
 
-  onSave = () => {
+  get buttons() {
+    return this.props.hasChanges ?
+      [<Button key="save" size="small" onClick={this.handleSave}>Continue</Button>] :
+      [];
+  }
+
+  handleCancel = () => {
+    this.props.onComplete();
+  }
+
+  handleSave = () => {
     const stageId = this.props.stageId;
 
     this.props.updateStage(
@@ -51,28 +61,22 @@ class EditSkipLogic extends PureComponent {
     this.props.onComplete();
   };
 
-  renderButtons() {
-    return [].concat(
-      this.props.hasChanges ? [<Button key="save" size="small" onClick={this.onSave}>Continue</Button>] : [],
-    );
-  }
+  handleChange = this.props.updateDraft;
 
   render() {
     const {
       show,
-      onComplete,
       draft,
-      updateDraft,
     } = this.props;
 
     return (
       <Card
         type="logic"
-        buttons={this.renderButtons()}
+        buttons={this.buttons}
         show={show}
-        onCancel={onComplete}
+        onCancel={this.handleCancel}
       >
-        <SkipLogicEditor onChange={updateDraft} rules={draft} />
+        <SkipLogicEditor onChange={this.handleChange} rules={draft} />
       </Card>
     );
   }

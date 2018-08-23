@@ -41,15 +41,6 @@ $component-name: app;
     background-color: var(--architect-background);
   }
 
-  &--start {
-    .#{$component-name}__home {
-      display: none;
-      top: 50%;
-      left: 50%;
-      transform: translate(-19.5vw, -25.1rem);
-    }
-  }
-
   &--macos {
     .#{$component-name}__window {
       top: unit(2.5);

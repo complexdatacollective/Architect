@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { nth, find, get } from 'lodash';
 import { Route } from 'react-router-dom';
-import { Protocol, Start, ViewTransitionRoute } from './components/Views';
+import Scene from './components/Scene';
 import ProtocolLoader from './components/ProtocolLoader';
 import tween from './behaviours/Tweened/tween';
 
@@ -63,7 +63,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, history } = this.props;
     return (
       <React.Fragment>
         <Route
@@ -71,17 +71,7 @@ class Routes extends Component {
         >
           { props => <ProtocolLoader {...props} /> }
         </Route>
-        <ViewTransitionRoute
-          location={location}
-          path="/edit/:protocol"
-          component={Protocol}
-        />
-        <ViewTransitionRoute
-          location={location}
-          exact
-          path="/"
-          component={Start}
-        />
+        <Scene history={history} location={location} />
       </React.Fragment>
     );
   }
