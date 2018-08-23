@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field, clearFields, isDirty, FormSection } from 'redux-form';
-import { keys, get, toPairs, isEmpty, map, find } from 'lodash';
+import { get, toPairs, isEmpty, map, find } from 'lodash';
 import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import Guidance from '../../../Guidance';
 import Node from '../../../../ui/components/Node';
@@ -287,6 +287,16 @@ const getVariablesForNodeType = (state, nodeType) => {
   return get(variableRegistry, ['node', nodeType, 'variables'], {});
 };
 
+const mapAsOptions = keyValueObject =>
+  map(
+    keyValueObject,
+    (value, key) => ({
+      label: get(value, 'label', ''),
+      value: key,
+      color: get(value, 'color', ''),
+    }),
+  );
+
 const mapStateToProps = (state, props) => {
   const nodeType = get(props.form.getValues(state, props.fieldId), 'subject.type');
   const variables = getVariablesForNodeType(state, nodeType);
@@ -299,15 +309,8 @@ const mapStateToProps = (state, props) => {
     highlightableForNodeType,
     variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
-    nodeTypes: map(
-      getNodeTypes(state),
-      (nodeOptions, promptNodeType) => ({
-        label: get(nodeOptions, 'label', ''),
-        value: promptNodeType,
-        color: get(nodeOptions, 'color', ''),
-      }),
-    ),
-    edgeTypes: keys(state.protocol.present.variableRegistry.edge),
+    nodeTypes: mapAsOptions(getNodeTypes(state)),
+    edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),
   };
 };
 
