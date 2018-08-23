@@ -72,8 +72,8 @@ ShallowWrapper {
                 </Connect(Guided)>
         </Connect(Guided)>
 </div>,
-      "enterDelay": 100,
-      "enterDuration": 200,
+      "enterDelay": 0,
+      "enterDuration": 100,
       "exitDelay": 0,
       "exitDuration": 100,
       "onAcknowledgeError": null,
@@ -357,8 +357,8 @@ ShallowWrapper {
                     </Connect(Guided)>
           </Connect(Guided)>
 </div>,
-        "enterDelay": 100,
-        "enterDuration": 200,
+        "enterDelay": 0,
+        "enterDuration": 100,
         "exitDelay": 0,
         "exitDuration": 100,
         "onAcknowledgeError": null,
