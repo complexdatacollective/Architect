@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from '../../ui/components';
 
-class AppErrorBoundary extends Component {
+class CardErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = { error: null };
@@ -12,6 +13,10 @@ class AppErrorBoundary extends Component {
     console.log(error); // eslint-disable-line no-console
   }
 
+  canAcknowledge = () => !!this.props.onAcknowledge;
+
+  handleAcknowledge = this.props.onAcknowledge;
+
   render() {
     const { error } = this.state;
 
@@ -21,9 +26,15 @@ class AppErrorBoundary extends Component {
           <div className="error__layout">
             <h1 className="error__title">Something went wrong.</h1>
             <div className="error__message">
-              <p>The following &quot;{error.message}&quot; error occurred:</p>
+              { error.message && <p>{error.message}</p> }
+              { this.canAcknowledge() &&
+                <Button
+                  size="small"
+                  color="platinum"
+                  onClick={this.handleAcknowledge}
+                >OK</Button>
+              }
             </div>
-            <pre className="error__stack"><code>{error.stack}</code></pre>
           </div>
         </div>
       );
@@ -33,12 +44,14 @@ class AppErrorBoundary extends Component {
   }
 }
 
-AppErrorBoundary.propTypes = {
+CardErrorBoundary.propTypes = {
   children: PropTypes.node,
+  onAcknowledge: PropTypes.func,
 };
 
-AppErrorBoundary.defaultProps = {
+CardErrorBoundary.defaultProps = {
   children: null,
+  onAcknowledge: null,
 };
 
-export default AppErrorBoundary;
+export default CardErrorBoundary;

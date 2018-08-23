@@ -5,10 +5,12 @@ import cx from 'classnames';
 import { Transition } from 'react-transition-group';
 import anime from 'animejs';
 import ControlBar from './ControlBar';
+import { CardErrorBoundary } from './Errors/';
 import { getCSSVariableAsNumber } from '../utils/CSSVariables';
 
 const fadeIn = {
   opacity: [0, 1],
+  translateX: [0, 0],
 };
 
 const fadeOut = {
@@ -30,6 +32,7 @@ class Card extends PureComponent {
     enterDelay: PropTypes.number,
     exitDuration: PropTypes.number,
     exitDelay: PropTypes.number,
+    onAcknowledgeError: PropTypes.func,
   };
 
   static defaultProps = {
@@ -42,6 +45,7 @@ class Card extends PureComponent {
     enterDelay: getCSSVariableAsNumber('--animation-duration-standard-ms'),
     exitDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
     exitDelay: 0,
+    onAcknowledgeError: null,
   }
 
   constructor(props) {
@@ -53,6 +57,8 @@ class Card extends PureComponent {
   }
 
   get anyButtons() { return this.props.buttons.length > 0; }
+
+  handleAcknowledgeError = () => this.props.onAcknowledgeError();
 
   render() {
     const {
@@ -104,7 +110,9 @@ class Card extends PureComponent {
           <div className={classes}>
             <div className="card__container">
               <div className="card__content">
-                { this.props.children }
+                <CardErrorBoundary onAcknowledge={this.handleAcknowledgeError}>
+                  { show && this.props.children }
+                </CardErrorBoundary>
               </div>
             </div>
             <ControlBar

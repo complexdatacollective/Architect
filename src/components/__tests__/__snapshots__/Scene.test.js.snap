@@ -73,7 +73,7 @@ ShallowWrapper {
                     <div
                               className="scene__timeline"
                     >
-                              <withRouter(Connect(withContext(Timeline)))
+                              <withRouter(Connect(Timeline))
                                         show={false}
                               />
                     </div>
@@ -186,7 +186,7 @@ ShallowWrapper {
               <div
                             className="scene__timeline"
               >
-                            <withRouter(Connect(withContext(Timeline)))
+                            <withRouter(Connect(Timeline))
                                           show={false}
                             />
               </div>
@@ -261,7 +261,7 @@ ShallowWrapper {
                 <div
                   className="scene__timeline"
 >
-                  <withRouter(Connect(withContext(Timeline)))
+                  <withRouter(Connect(Timeline))
                                     show={false}
                   />
 </div>,
@@ -290,7 +290,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <withRouter(Connect(withContext(Timeline)))
+                  "children": <withRouter(Connect(Timeline))
                     show={false}
 />,
                   "className": "scene__timeline",
@@ -399,7 +399,7 @@ ShallowWrapper {
                         <div
                                     className="scene__timeline"
                         >
-                                    <withRouter(Connect(withContext(Timeline)))
+                                    <withRouter(Connect(Timeline))
                                                 show={false}
                                     />
                         </div>
@@ -512,7 +512,7 @@ ShallowWrapper {
                 <div
                                 className="scene__timeline"
                 >
-                                <withRouter(Connect(withContext(Timeline)))
+                                <withRouter(Connect(Timeline))
                                                 show={false}
                                 />
                 </div>
@@ -587,7 +587,7 @@ ShallowWrapper {
                   <div
                     className="scene__timeline"
 >
-                    <withRouter(Connect(withContext(Timeline)))
+                    <withRouter(Connect(Timeline))
                                         show={false}
                     />
 </div>,
@@ -616,7 +616,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": <withRouter(Connect(withContext(Timeline)))
+                    "children": <withRouter(Connect(Timeline))
                       show={false}
 />,
                     "className": "scene__timeline",
@@ -754,7 +754,7 @@ ShallowWrapper {
                     <div
                               className="scene__timeline"
                     >
-                              <withRouter(Connect(withContext(Timeline)))
+                              <withRouter(Connect(Timeline))
                                         show={true}
                               />
                     </div>
@@ -867,7 +867,7 @@ ShallowWrapper {
               <div
                             className="scene__timeline"
               >
-                            <withRouter(Connect(withContext(Timeline)))
+                            <withRouter(Connect(Timeline))
                                           show={true}
                             />
               </div>
@@ -942,7 +942,7 @@ ShallowWrapper {
                 <div
                   className="scene__timeline"
 >
-                  <withRouter(Connect(withContext(Timeline)))
+                  <withRouter(Connect(Timeline))
                                     show={true}
                   />
 </div>,
@@ -971,7 +971,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": <withRouter(Connect(withContext(Timeline)))
+                  "children": <withRouter(Connect(Timeline))
                     show={true}
 />,
                   "className": "scene__timeline",
@@ -1080,7 +1080,7 @@ ShallowWrapper {
                         <div
                                     className="scene__timeline"
                         >
-                                    <withRouter(Connect(withContext(Timeline)))
+                                    <withRouter(Connect(Timeline))
                                                 show={true}
                                     />
                         </div>
@@ -1193,7 +1193,7 @@ ShallowWrapper {
                 <div
                                 className="scene__timeline"
                 >
-                                <withRouter(Connect(withContext(Timeline)))
+                                <withRouter(Connect(Timeline))
                                                 show={true}
                                 />
                 </div>
@@ -1268,7 +1268,7 @@ ShallowWrapper {
                   <div
                     className="scene__timeline"
 >
-                    <withRouter(Connect(withContext(Timeline)))
+                    <withRouter(Connect(Timeline))
                                         show={true}
                     />
 </div>,
@@ -1297,7 +1297,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "host",
                   "props": Object {
-                    "children": <withRouter(Connect(withContext(Timeline)))
+                    "children": <withRouter(Connect(Timeline))
                       show={true}
 />,
                     "className": "scene__timeline",

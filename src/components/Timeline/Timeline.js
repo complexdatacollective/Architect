@@ -9,7 +9,6 @@ import None from '../Transitions/None';
 import Drawer from '../Transitions/Drawer';
 import Stage from './Stage';
 import InsertStage from './InsertStage';
-import constrain from '../../behaviours/constrain';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as navigationActions } from '../../ducks/modules/navigation';
@@ -191,5 +190,4 @@ export { Timeline };
 export default compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
-  constrain([60, 0, 0, 0]),
 )(Timeline);

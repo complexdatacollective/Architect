@@ -137,6 +137,7 @@ class VariableRegistry extends Component {
       <Card
         show={show}
         buttons={this.buttons}
+        onAcknowledgeError={this.handleCancel}
       >
         <div className="editor variable-registry">
           <Guided className="editor__sections">

@@ -51,6 +51,7 @@ class ProtocolCard extends PureComponent {
     return (
       <Card
         {...rest}
+        onAcknowledgeError={this.handleCancel}
         buttons={this.buttons}
         style={cancel ? 'wipe' : 'fade'}
       >
