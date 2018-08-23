@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers } from 'recompose';
+import { compose, defaultProps, withProps } from 'recompose';
 import { toNumber } from 'lodash';
+import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
 import { Icon } from '../../ui/components';
 
 const isNumberLike = value =>
   parseInt(value, 10) == value; // eslint-disable-line
+
+const ItemHandle = compose(
+  SortableHandle,
+)(
+  () => (
+    <div className="form-fields-multi-select__handle">
+      <Icon name="move" />
+    </div>
+  ),
+);
 
 const ItemDelete = props => (
   <div className="form-fields-multi-select__delete" {...props}>
@@ -21,7 +32,7 @@ const AddItem = props => (
 );
 
 const Item = compose(
-  withHandlers(({ fields, index }) => ({
+  withProps(({ fields, index }) => ({
     handleDelete: () => {
       // eslint-disable-next-line no-alert
       if (confirm('Are you sure you want to remove this item?')) {
@@ -29,9 +40,13 @@ const Item = compose(
       }
     },
   })),
+  SortableElement,
 )(
   ({ field, handleDelete }) => (
     <div className="form-fields-multi-select__rule">
+      <div className="form-fields-multi-select__rule-control">
+        <ItemHandle />
+      </div>
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Label</div>
@@ -55,26 +70,39 @@ Item.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-const Items = ({ fields, ...rest }) => (
-  <div className="form-field-container">
-    <div className="form-fields-multi-select">
-      <div className="form-fields-multi-select__rules">
-        {
-          fields.map((field, index) => (
-            <Item
-              {...rest}
-              key={index}
-              index={index}
-              field={field}
-              fields={fields}
-            />
-          ))
-        }
+const Items = compose(
+  defaultProps({
+    lockAxis: 'y',
+    useDragHandle: true,
+  }),
+  withProps(
+    ({ fields }) => ({
+      onSortEnd: ({ oldIndex, newIndex }) => fields.move(oldIndex, newIndex),
+    }),
+  ),
+  SortableContainer,
+)(
+  ({ fields, ...rest }) => (
+    <div className="form-field-container">
+      <div className="form-fields-multi-select">
+        <div className="form-fields-multi-select__rules">
+          {
+            fields.map((field, index) => (
+              <Item
+                {...rest}
+                key={index}
+                index={index}
+                field={field}
+                fields={fields}
+              />
+            ))
+          }
+        </div>
       </div>
-    </div>
 
-    <AddItem onClick={() => fields.push({})} />
-  </div>
+      <AddItem onClick={() => fields.push({})} />
+    </div>
+  ),
 );
 
 Items.propTypes = {
