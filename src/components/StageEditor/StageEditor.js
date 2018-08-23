@@ -34,6 +34,8 @@ class StageEditor extends Component {
       invalid,
     } = this.props;
 
+    console.log({ dirty, values: this.props.values, initialValues: this.props.stage });
+
     return (
       <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
         <FormCodeView toggleCodeView={toggleCodeView} form={form.name} />

@@ -259,6 +259,7 @@ class SociogramPrompt extends Component {
                     label="How many circles?"
                     type="number"
                     placeholder="5"
+                    normalize={value => parseInt(value, 10)}
                   />
                   <Field
                     name="background.skewedTowardCenter"
