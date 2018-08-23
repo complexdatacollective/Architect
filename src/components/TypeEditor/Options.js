@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, defaultProps, withProps, withHandlers } from 'recompose';
+import { compose, defaultProps, withProps } from 'recompose';
 import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
@@ -32,7 +32,7 @@ const AddItem = props => (
 );
 
 const Item = compose(
-  withHandlers(({ fields, index }) => ({
+  withProps(({ fields, index }) => ({
     handleDelete: () => {
       // eslint-disable-next-line no-alert
       if (confirm('Are you sure you want to remove this item?')) {
