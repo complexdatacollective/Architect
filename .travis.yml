@@ -15,5 +15,4 @@ jobs:
       script: npm run lint
     - script: npm run lint:sass
     - script: npm run test
-    - stage: build
-      script: npm run build
+    - script: npm run build
