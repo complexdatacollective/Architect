@@ -28,17 +28,17 @@ class ProtocolCard extends PureComponent {
     }
   }
 
-  onCancel = () => {
+  get buttons() {
+    return this.props.buttons.concat([
+      <Button key="cancel" size="small" color="platinum" onClick={this.handleCancel}>Cancel</Button>,
+    ]);
+  }
+
+  handleCancel = () => {
     this.setState(
       { cancel: true },
       () => this.props.onCancel(),
     );
-  }
-
-  renderButtons() {
-    return this.props.buttons.concat([
-      <Button key="cancel" size="small" color="platinum" onClick={this.onCancel}>Cancel</Button>,
-    ]);
   }
 
   render() {
@@ -51,7 +51,7 @@ class ProtocolCard extends PureComponent {
     return (
       <Card
         {...rest}
-        buttons={this.renderButtons()}
+        buttons={this.buttons}
         style={cancel ? 'wipe' : 'fade'}
       >
         { this.props.children }

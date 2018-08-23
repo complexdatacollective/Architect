@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
 import Color from 'color';
 import { get, times, size } from 'lodash';
@@ -57,7 +56,7 @@ const getNewTypeTemplate = ({ protocol, category }) => ({
 class EditType extends PureComponent {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
-    submit: PropTypes.func.isRequired,
+    submitForm: PropTypes.func.isRequired,
     createType: PropTypes.func.isRequired,
     updateType: PropTypes.func.isRequired,
     category: PropTypes.string,
@@ -76,7 +75,23 @@ class EditType extends PureComponent {
     type: null,
   };
 
-  onSubmit = (form) => {
+  get buttons() {
+    const saveButton = (
+      <Button
+        key="save"
+        size="small"
+        onClick={this.props.submitForm}
+        iconPosition="right"
+        disabled={this.props.hasErrors}
+      >
+        Continue
+      </Button>
+    );
+
+    return this.props.hasUnsavedChanges ? [saveButton] : [];
+  }
+
+  handleSubmit = (form) => {
     const {
       category,
       type,
@@ -91,25 +106,7 @@ class EditType extends PureComponent {
     this.props.onComplete();
   }
 
-  submit = () => {
-    this.props.submit(formName);
-  }
-
-  renderButtons() {
-    const saveButton = (
-      <Button
-        key="save"
-        size="small"
-        onClick={this.submit}
-        iconPosition="right"
-        disabled={this.props.hasErrors}
-      >
-        Continue
-      </Button>
-    );
-
-    return this.props.hasUnsavedChanges ? [saveButton] : [];
-  }
+  handleCancel = this.props.onComplete;
 
   render() {
     const {
@@ -121,9 +118,9 @@ class EditType extends PureComponent {
 
     return (
       <Card
-        buttons={this.renderButtons()}
+        buttons={this.buttons}
         show={show}
-        onCancel={this.props.onComplete}
+        onCancel={this.handleCancel}
       >
         { category &&
           <TypeEditor
@@ -133,7 +130,7 @@ class EditType extends PureComponent {
             type={type}
             colorOptions={COLOR_OPTIONS}
             iconOptions={ICON_OPTIONS}
-            onSubmit={this.onSubmit}
+            onSubmit={this.handleSubmit}
           />
         }
       </Card>
@@ -165,7 +162,7 @@ function mapStateToProps(state, props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  submit: bindActionCreators(submit, dispatch),
+  submitForm: () => dispatch(submit(formName)),
   updateType: (category, type, form) => {
     dispatch(variableRegistryActions.updateType(category, type, parse(form)));
   },

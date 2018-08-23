@@ -48,12 +48,20 @@ Type.propTypes = {
  * and links to the EditType.
  */
 class VariableRegistry extends Component {
+  get buttons() {
+    return [
+      <Button key="cancel" size="small" color="platinum" onClick={this.handleCancel}>Back</Button>,
+    ];
+  }
+
   handleDelete = (category, type) => {
     // eslint-disable-next-line no-alert
     if (confirm(`Are you sure you want to delete "${type}:${category}"?`)) {
       this.props.deleteType(category, type);
     }
   };
+
+  handleCancel = this.props.onComplete;
 
   renderNode = (node, key) => {
     const nodeColor = get(node, 'color', '');
@@ -119,12 +127,6 @@ class VariableRegistry extends Component {
     );
   }
 
-  renderButtons() {
-    return ([
-      <Button key="cancel" size="small" color="platinum" onClick={this.props.onComplete}>Back</Button>,
-    ]);
-  }
-
   render() {
     const {
       show,
@@ -134,7 +136,7 @@ class VariableRegistry extends Component {
     return (
       <Card
         show={show}
-        buttons={this.renderButtons()}
+        buttons={this.buttons}
       >
         <div className="editor variable-registry">
           <Guided className="editor__sections">

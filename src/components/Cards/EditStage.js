@@ -20,7 +20,7 @@ class EditStage extends PureComponent {
     dirty: PropTypes.bool.isRequired,
     invalid: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
-    continue: PropTypes.func.isRequired,
+    submitForm: PropTypes.func.isRequired,
     onComplete: PropTypes.func.isRequired,
     stage: PropTypes.object.isRequired,
     stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -34,7 +34,22 @@ class EditStage extends PureComponent {
     insertAtIndex: null,
   };
 
-  onUpdate = (stage) => {
+  get isDirty() {
+    return this.props.dirty || !has(this.props.stage, 'id');
+  }
+
+  get buttons() {
+    return this.isDirty ? [
+      <Button
+        key="continue"
+        size="small"
+        disabled={this.props.invalid}
+        onClick={this.props.submitForm}
+      >Continue</Button>,
+    ] : [];
+  }
+
+  handleSubmit = (stage) => {
     const { stageId, insertAtIndex } = this.props;
 
     if (stageId) {
@@ -46,28 +61,20 @@ class EditStage extends PureComponent {
     this.props.onComplete();
   }
 
-  get isDirty() {
-    return this.props.dirty || !has(this.props.stage, 'id');
-  }
-
-  renderButtons() {
-    return [].concat(
-      this.isDirty ? [<Button key="continue" size="small" disabled={this.props.invalid} onClick={this.props.continue}>Continue</Button>] : [],
-    );
-  }
+  handleCancel = this.props.onComplete;
 
   render() {
     const { stage, show } = this.props;
 
     return (
       <Card
-        buttons={this.renderButtons()}
+        buttons={this.buttons}
         show={show}
-        onCancel={this.props.onComplete}
+        onCancel={this.handleCancel}
       >
         <StageEditor
           stage={stage}
-          onSubmit={this.onUpdate}
+          onSubmit={this.handleSubmit}
         />
       </Card>
     );
@@ -89,7 +96,7 @@ const mapStateToProps = (state, props) => {
   });
 };
 const mapDispatchToProps = dispatch => ({
-  continue: () => dispatch(submitForm('edit-stage')),
+  submitForm: () => dispatch(submitForm('edit-stage')),
   updateStage: bindActionCreators(stageActions.updateStage, dispatch),
   createStage: bindActionCreators(stageActions.createStage, dispatch),
 });
