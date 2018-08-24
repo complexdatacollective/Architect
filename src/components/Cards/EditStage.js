@@ -43,7 +43,6 @@ class EditStage extends PureComponent {
       <Button
         key="continue"
         size="small"
-        disabled={this.props.invalid}
         onClick={this.props.submitForm}
       >Continue</Button>,
     ] : [];

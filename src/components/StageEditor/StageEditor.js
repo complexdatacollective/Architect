@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from 'redux-form';
+import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
@@ -8,6 +8,7 @@ import { Guided } from '../Guided';
 import flatten from '../../utils/flatten';
 import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
+import Issues from '../Issues';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
@@ -30,11 +31,9 @@ class StageEditor extends Component {
       handleSubmit,
       toggleCodeView,
       codeView,
-      dirty,
-      invalid,
+      issues,
+      submitFailed,
     } = this.props;
-
-    console.log({ dirty, values: this.props.values, initialValues: this.props.stage });
 
     return (
       <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
@@ -45,15 +44,12 @@ class StageEditor extends Component {
           form={form}
         >
           <h1>Edit {stage.type} Screen</h1>
-          { dirty && invalid && (
-            <p style={{ color: 'var(--error)' }}>
-              There are some errors that need to be fixed before this can be saved!
-            </p>
-          ) }
           <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
           {this.renderSections()}
         </Guided>
+
+        <Issues issues={issues} show={submitFailed} />
       </ReduxForm>
     );
   }
@@ -68,6 +64,7 @@ StageEditor.propTypes = {
 
 const mapStateToProps = (state, props) => ({
   initialValues: props.stage,
+  issues: getFormSyncErrors(formName)(state),
 });
 
 export default compose(

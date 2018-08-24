@@ -1,0 +1,40 @@
+.issues {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-fx);
+  background-color: var(--color-mustard);
+  transform-origin: 0 100%;
+  transform: scaleY(0);
+  transition-duration: var(--animation-duration-fast);
+  transition-timing-function: var(--animation-easing);
+  transition-property: transform;
+  overflow: hidden;
+  color: var(--text-light);
+
+  &__title-bar {
+    @include typography(title-2);
+    background-color: var(--color-mustard--dark);
+    padding: unit(2) unit(4);
+  }
+
+  &__issues {
+    margin: 0;
+    padding: 0;
+    list-style: decimal inside;
+  }
+
+  &__issue {
+    margin: 0;
+    padding: unit(2) unit(4);
+
+    &:hover {
+      background-color: var(--color-sea-green);
+    }
+  }
+
+  &--open {
+    transform: scaleY(1);
+  }
+}

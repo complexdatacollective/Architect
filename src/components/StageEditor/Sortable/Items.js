@@ -15,9 +15,9 @@ const SortableItem = SortableElement(
   ),
 );
 
-const Items = ({ fields, meta: { error }, itemComponent: ItemComponent, ...rest }) => (
+const Items = ({ fields, meta: { error, dirty }, itemComponent: ItemComponent, ...rest }) => (
   <div className="stage-editor-sortable-items">
-    { error && <p className="stage-editor-sortable-items__error">{error}</p> }
+    { dirty && error && <p className="stage-editor-sortable-items__error">{error}</p> }
     <TransitionGroup className="stage-editor-sortable-items__items">
       { fields.map((fieldId, index) => (
         <WipeTransition key={get(fields.get(index), 'id', index)}>
