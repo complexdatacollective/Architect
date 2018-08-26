@@ -11,6 +11,7 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
       name={`${fieldId}.text`}
       component={Markdown}
       label="Text for prompt"
+      id="text"
       className="stage-editor-section-prompt__setting-value"
       placeholder="Enter text for the prompt here"
       validation={{ required: true }}
@@ -18,6 +19,7 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
     <VariableChooser
       className="stage-editor-section-prompt__setting-value"
       name={`${fieldId}.additionalAttributes`}
+      id="additionalAttributes"
       variableRegistry={variableRegistry}
       label="Additional attributes"
       form={form}

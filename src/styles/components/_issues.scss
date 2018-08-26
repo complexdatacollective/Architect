@@ -22,19 +22,41 @@
   &__issues {
     margin: 0;
     padding: 0;
-    list-style: decimal inside;
+    list-style: none;
+    counter-reset: issue;
+    height: 0;
   }
 
   &__issue {
     margin: 0;
-    padding: unit(2) unit(4);
+    padding: 0;
+
+    a {
+      display: block;
+      width: 100%;
+      padding: unit(2) unit(4);
+      text-decoration: none;
+      color: var(--text-light);
+
+      &::before {
+        counter-increment: issue;
+        content: counter(issue) '.';
+        margin-right: unit(2);
+      }
+    }
 
     &:hover {
       background-color: var(--color-sea-green);
     }
   }
 
-  &--open {
+  &--show {
     transform: scaleY(1);
+  }
+
+  &--open {
+    .issues__issues {
+      height: auto;
+    }
   }
 }

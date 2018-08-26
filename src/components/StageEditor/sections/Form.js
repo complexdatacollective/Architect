@@ -94,7 +94,7 @@ class Form extends Component {
     return (
       <Guidance contentId="guidance.editor.form">
         <div className={formClasses}>
-          <h2>Form</h2>
+          <h2 id="issue-form">Form</h2>
           <p>Which form should be used to create and edit nodes on this stage?</p>
           <div className="stage-editor-section-form">
             <div className="stage-editor-section-form__category">

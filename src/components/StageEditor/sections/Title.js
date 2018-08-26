@@ -6,7 +6,7 @@ import SeamlessText from '../../../components/Form/Fields/SeamlessText';
 const Title = () => (
   <Guidance contentId="guidance.editor.title">
     <div className="stage-editor-section">
-      <h2>Title</h2>
+      <h2 id="title">Title</h2>
       <ValidatedField
         name="title"
         component={SeamlessText}

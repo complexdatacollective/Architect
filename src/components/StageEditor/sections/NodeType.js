@@ -42,7 +42,7 @@ class NodeType extends Component {
     return (
       <Guidance contentId="guidance.editor.node_type">
         <div className={nodeTypeClasses}>
-          <h2>Node Type</h2>
+          <h2 id="issue-subject">Node Type</h2>
           <p>Which node type does this name generator create?</p>
           <div
             className="stage-editor-section-node-type__edit"
