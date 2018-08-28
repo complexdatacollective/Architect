@@ -1,84 +1,54 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import cx from 'classnames';
+import ExpandableItem from '../../Items/ExpandableItem';
 import { Icon } from '../../../ui/components';
 import Handle from './Handle';
 import DeleteButton from './DeleteButton';
 
-class ExpandablePrompt extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    open: PropTypes.bool,
-    handleDelete: PropTypes.func.isRequired,
-    preview: PropTypes.node,
-    children: PropTypes.node,
-  };
-
-  static defaultProps = {
-    className: null,
-    open: false,
-    preview: null,
-    children: null,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false,
-    };
-  }
-
-  componentWillMount() {
-    this.setState({ isOpen: this.props.open });
-  }
-
-  handleToggleOpen = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
-
+class SortableExpandableItem extends ExpandableItem {
   render() {
     const { preview, children, handleDelete } = this.props;
 
     const componentClasses = cx(
-      'stage-editor-sortable-expandable-item',
-      { 'stage-editor-sortable-expandable-item--open': this.state.isOpen },
+      'items-expandable-item',
+      { 'items-expandable-item--open': this.state.isOpen },
+      { 'items-expandable-item--lock': this.props.lockOpen },
       this.props.className,
     );
 
     return (
       <div className={componentClasses}>
-        <div className="stage-editor-sortable-expandable-item__preview">
+        <div className="items-expandable-item__preview">
           <div
-            className="stage-editor-sortable-expandable-item__control stage-editor-sortable-expandable-item__control--left"
+            className="items-expandable-item__control items-expandable-item__control--left"
           >
             <Handle />
           </div>
-          <div className="stage-editor-sortable-expandable-item__preview-content">
+          <div className="items-expandable-item__preview-content">
             {preview}
           </div>
           <div
-            className="stage-editor-sortable-expandable-item__control stage-editor-sortable-expandable-item__control--right"
+            className="items-expandable-item__control items-expandable-item__control--right"
           >
             <DeleteButton onClick={handleDelete} />
           </div>
         </div>
         <div
-          className="stage-editor-sortable-expandable-item__expand"
+          className="items-expandable-item__expand"
           onClick={this.handleToggleOpen}
         >
           <Icon
             name="chevron-down"
             color="white"
-            className="stage-editor-sortable-expandable-item__expand--open"
+            className="items-expandable-item__expand--open"
           />
           <Icon
             name="chevron-up"
             color="white"
-            className="stage-editor-sortable-expandable-item__expand--close"
+            className="items-expandable-item__expand--close"
           />
         </div>
-        <div className="stage-editor-sortable-expandable-item__content">
+        <div className="items-expandable-item__content">
           {children}
         </div>
       </div>
@@ -86,6 +56,6 @@ class ExpandablePrompt extends Component {
   }
 }
 
-export { ExpandablePrompt };
+export { SortableExpandableItem };
 
-export default ExpandablePrompt;
+export default SortableExpandableItem;

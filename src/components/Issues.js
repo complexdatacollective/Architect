@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { map, size } from 'lodash';
+import { map, isEmpty } from 'lodash';
 import scrollparent from 'scrollparent';
 import anime from 'animejs';
 import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../utils/CSSVariables';
@@ -42,15 +42,19 @@ class Issues extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const noIssues = size(newProps.issues) > 0;
+    const noIssues = isEmpty(newProps.issues);
     const show = newProps.show;
 
     // when panel hidden by parent reset collapsed state
     if (noIssues || !show) { this.setState({ open: true }); }
   }
 
+  get flatIssues() {
+    return flattenIssues(this.props.issues);
+  }
+
   isVisible = () =>
-    this.props.show && size(this.props.issues) > 0;
+    this.props.show && this.flatIssues.length > 0;
 
   isOpen = () =>
     this.state.open;
@@ -67,10 +71,8 @@ class Issues extends Component {
   }
 
   render() {
-    const flatIssues = flattenIssues(this.props.issues);
-
     const issues = map(
-      flatIssues,
+      this.flatIssues,
       ({ field, issue }) => (
         <li key={getFieldId(field)} className="issues__issue">
           <a
@@ -94,7 +96,7 @@ class Issues extends Component {
       <div className={issuesClasses}>
         <div className="issues__panel">
           <div className="issues__title-bar" onClick={this.handleClickTitleBar}>
-            Issues ({size(this.props.issues)}) {this.isOpen()} { this.isVisible() }
+            Issues ({this.flatIssues.length}) {this.isOpen()} { this.isVisible() }
           </div>
           <ol className="issues__issues">
             {issues}

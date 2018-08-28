@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes, getFormSyncErrors } from 'redux-form';
+import {
+  reduxForm,
+  Form as ReduxForm,
+  formValueSelector,
+  formPropTypes,
+  getFormSyncErrors,
+  hasSubmitFailed,
+} from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
@@ -8,7 +15,6 @@ import { Guided } from '../Guided';
 import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
 import Issues from '../Issues';
-import { flattenIssues } from '../../utils/issues';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
@@ -21,7 +27,7 @@ class StageEditor extends Component {
 
   renderSections() {
     return this.sections.map((SectionComponent, index) =>
-      <SectionComponent key={index} form={form} />,
+      <SectionComponent key={index} form={form} hasSubmitFailed={this.props.hasSubmitFailed} />,
     );
   }
 
@@ -62,10 +68,14 @@ StageEditor.propTypes = {
   ...formPropTypes,
 };
 
-const mapStateToProps = (state, props) => ({
-  initialValues: props.stage,
-  issues: getFormSyncErrors(formName)(state),
-});
+const mapStateToProps = (state, props) => {
+  const issues = getFormSyncErrors(formName)(state);
+  return {
+    initialValues: props.stage,
+    issues,
+    hasSubmitFailed: hasSubmitFailed(formName)(state),
+  };
+};
 
 export default compose(
   connect(mapStateToProps),
@@ -78,9 +88,5 @@ export default compose(
     touchOnBlur: false,
     touchOnChange: true,
     enableReinitialize: true,
-    onSubmitFail: (errors) => {
-      // eslint-disable-next-line no-console
-      console.error('FORM ERRORS', flattenIssues(errors));
-    },
   }),
 )(StageEditor);

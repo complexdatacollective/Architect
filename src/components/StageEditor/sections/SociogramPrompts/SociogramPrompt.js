@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
-import { Field, clearFields, isDirty, FormSection } from 'redux-form';
+import { Field, clearFields, isDirty, isInvalid, FormSection, hasSubmitFailed } from 'redux-form';
 import { get, toPairs, isEmpty, map, find } from 'lodash';
 import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import Guidance from '../../../Guidance';
@@ -50,6 +50,14 @@ class SociogramPrompt extends Component {
     };
   }
 
+  get isOpen() {
+    return this.props.isDirty;
+  }
+
+  get isLockedOpen() {
+    return this.props.isInvalid && this.props.hasSubmitFailed;
+  }
+
   handleChooseBackgroundType = (option) => {
     this.setState({ backgroundType: option });
   }
@@ -87,7 +95,8 @@ class SociogramPrompt extends Component {
     return (
       <ExpandableItem
         className="stage-editor-section-sociogram-prompt"
-        open={this.props.isDirty}
+        open={this.isOpen}
+        lockOpen={this.isLockedOpen}
         preview={(
           <FormSection name={fieldId}>
             <div className="stage-editor-section-sociogram-prompt__preview">
@@ -312,12 +321,15 @@ const mapStateToProps = (state, props) => {
   const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
   const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
   const isFieldDirty = isDirty(props.form.name);
+  const isFieldInvalid = isInvalid(props.form.name);
 
   return {
     layoutsForNodeType,
     highlightableForNodeType,
     variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
+    isInvalid:  isFieldInvalid(state, props.fieldId),
+    hasSubmitFailed: hasSubmitFailed(props.form.name)(state),
     nodeTypes: mapAsOptions(getNodeTypes(state)),
     edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),
   };

@@ -30,6 +30,10 @@
   &__issue {
     margin: 0;
     padding: 0;
+    background-color: transparent;
+    transition-property: background-color;
+    transition-timing-function: var(--animation-easing);
+    transition-duration: var(--animation-duration-standard);
 
     a {
       display: block;
