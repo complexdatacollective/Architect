@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 
-const getCSSVariable = (variableName) => {
+const CSSVariable = (variableName) => {
   const variable = getComputedStyle(document.body)
     .getPropertyValue(variableName)
     .trim();
@@ -10,10 +10,24 @@ const getCSSVariable = (variableName) => {
 };
 
 export const getCSSVariableAsString = variableName =>
-  getCSSVariable(variableName);
+  CSSVariable(variableName);
 
 export const getCSSVariableAsNumber = variableName =>
-  parseInt(getCSSVariable(variableName), 10);
+  parseInt(CSSVariable(variableName), 10);
 
 export const getCSSVariableAsObject = variableName =>
-  JSON.parse(getCSSVariable(variableName));
+  JSON.parse(CSSVariable(variableName));
+
+export const getCSSVariable = (variableName) => {
+  const variable = CSSVariable(variableName);
+
+  try {
+    return JSON.parse(variable);
+  } catch (e) {
+    if (parseInt(variable, 10).toString() === variable) {
+      return parseInt(variable, 10);
+    }
+
+    return variable;
+  }
+};

@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
 import { Guided } from '../Guided';
-import flatten from '../../utils/flatten';
 import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
 import Issues from '../Issues';
+import { flattenIssues } from '../../utils/issues';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
@@ -80,7 +80,7 @@ export default compose(
     enableReinitialize: true,
     onSubmitFail: (errors) => {
       // eslint-disable-next-line no-console
-      console.error('FORM ERRORS', flatten(errors));
+      console.error('FORM ERRORS', flattenIssues(errors));
     },
   }),
 )(StageEditor);

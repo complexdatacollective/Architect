@@ -4,8 +4,11 @@ import cx from 'classnames';
 import { map, size } from 'lodash';
 import scrollparent from 'scrollparent';
 import anime from 'animejs';
+import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../utils/CSSVariables';
+import { flattenIssues, getFieldId } from '../utils/issues';
 
 const scrollTo = (destination) => {
+  if (!destination) { return; }
   const scroller = scrollparent(destination);
   const scrollStart = scroller.scrollTop;
   const destinationOffset = parseInt(destination.getBoundingClientRect().top, 10);
@@ -14,8 +17,8 @@ const scrollTo = (destination) => {
   anime({
     targets: scroller,
     scrollTop: scrollEnd,
-    easing: 'easeOutExpo',
-    duration: 300,
+    easing: getCSSVariableAsObject('--animation-easing-js'),
+    duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
   });
 };
 
@@ -42,7 +45,7 @@ class Issues extends Component {
     const noIssues = size(newProps.issues) > 0;
     const show = newProps.show;
 
-    // reset collapsed state, when panel hidden
+    // when panel hidden by parent reset collapsed state
     if (noIssues || !show) { this.setState({ open: true }); }
   }
 
@@ -64,15 +67,17 @@ class Issues extends Component {
   }
 
   render() {
+    const flatIssues = flattenIssues(this.props.issues);
+
     const issues = map(
-      this.props.issues,
-      (issue, name) => (
-        <li key={name} className="issues__issue">
+      flatIssues,
+      ({ field, issue }) => (
+        <li key={field} className="issues__issue">
           <a
-            href={`#issue-${name}`}
+            href={`#${getFieldId(field)}`}
             onClick={this.handleClickIssue}
           >
-            {name} is {issue}
+            {field} is {issue}
           </a>
         </li>
       ));
@@ -89,10 +94,10 @@ class Issues extends Component {
       <div className={issuesClasses}>
         <div className="issues__panel">
           <div className="issues__title-bar" onClick={this.handleClickTitleBar}>
-            Issues ({size(issues)}) {this.isOpen()} { this.isVisible() }
+            Issues ({size(this.props.issues)}) {this.isOpen()} { this.isVisible() }
           </div>
           <ol className="issues__issues">
-            { issues }
+            {issues}
           </ol>
         </div>
       </div>

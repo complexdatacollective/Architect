@@ -4,9 +4,11 @@ import { ValidatedField } from '../../../Form';
 import Markdown from '../../../Form/Fields/Markdown';
 import VariableChooser from '../../../Form/Fields/VariableChooser';
 import { Item } from '../../Sortable';
+import { getFieldId } from '../../../../utils/issues';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
   <Item {...rest}>
+    <div id={getFieldId(`${fieldId}.text`)} />
     <ValidatedField
       name={`${fieldId}.text`}
       component={Markdown}
