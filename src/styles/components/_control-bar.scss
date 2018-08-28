@@ -6,7 +6,8 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: unit(1) unit(2);
+  height: unit(8);
+  padding: 0 unit(2);
   background-color: var(--architect-control-bar-background);
   transform: translateZ(0) translateY(100%);
   transition-property: transform;

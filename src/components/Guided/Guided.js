@@ -32,6 +32,7 @@ class Guided extends Component {
     children: null,
     className: '',
     defaultGuidance: null,
+    issues: null,
   };
 
   constructor(props) {
@@ -66,6 +67,8 @@ class Guided extends Component {
         <div className="guided__content">
           { this.props.children }
         </div>
+
+        { this.props.issues }
 
         <Guidance
           show={this.active}

@@ -1,6 +1,6 @@
 .issues {
   position: fixed;
-  bottom: 60px;
+  bottom: 0;
   left: 0;
   width: 100%;
   z-index: var(--z-fx);
@@ -17,6 +17,7 @@
     @include typography(title-2);
     background-color: var(--color-mustard--dark);
     padding: unit(2) unit(4);
+    cursor: pointer;
   }
 
   &__issues {
@@ -24,7 +25,10 @@
     padding: 0;
     list-style: none;
     counter-reset: issue;
-    height: 0;
+    max-height: 0;
+    transition-property: max-height;
+    transition-timing-function: var(--animation-easing);
+    transition-duration: var(--animation-duration-standard);
   }
 
   &__issue {
@@ -60,7 +64,7 @@
 
   &--open {
     .issues__issues {
-      height: auto;
+      max-height: 100vh;
     }
   }
 }

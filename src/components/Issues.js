@@ -71,6 +71,8 @@ class Issues extends Component {
   }
 
   render() {
+    console.log(this.props.issues);
+
     const issues = map(
       this.flatIssues,
       ({ field, issue }) => (

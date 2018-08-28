@@ -48,14 +48,13 @@ class StageEditor extends Component {
           className="stage-editor__sections"
           defaultGuidance={`guidance.interface.${stage.type}`}
           form={form}
+          issues={<Issues issues={issues} show={submitFailed} />}
         >
           <h1>Edit {stage.type} Screen</h1>
           <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
           {this.renderSections()}
         </Guided>
-
-        <Issues issues={issues} show={submitFailed} />
       </ReduxForm>
     );
   }
