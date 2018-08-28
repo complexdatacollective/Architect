@@ -18,6 +18,7 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
       placeholder="Enter text for the prompt here"
       validation={{ required: true }}
     />
+    <div id={getFieldId(`${fieldId}.additionalAttributes`)} />
     <VariableChooser
       className="stage-editor-section-prompt__setting-value"
       name={`${fieldId}.additionalAttributes`}

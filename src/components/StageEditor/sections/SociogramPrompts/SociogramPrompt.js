@@ -11,6 +11,7 @@ import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
 import * as Fields from '../../../../ui/components/Fields';
 import ExpandableItem from '../../Sortable/ExpandableItem';
+import { getFieldId } from '../../../../utils/issues';
 
 // Background options
 const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
@@ -122,6 +123,7 @@ class SociogramPrompt extends Component {
         <FormSection name={fieldId}>
           <Guidance contentId="guidance.editor.sociogram_prompt.text">
             <div className="stage-editor-section-prompt__group">
+              <div id={getFieldId(`${fieldId}.text`)} />
               <ValidatedField
                 name="text"
                 component={Fields.TextArea}
@@ -135,6 +137,7 @@ class SociogramPrompt extends Component {
           <div className="stage-editor-section-prompt__group">
             <Guidance contentId="guidance.editor.sociogram_prompt.nodes">
               <div>
+                <div id={getFieldId(`${fieldId}.subject`)} />
                 <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
                 <ValidatedField
                   name="subject"
@@ -162,6 +165,7 @@ class SociogramPrompt extends Component {
           </div>
           <Guidance contentId="guidance.editor.sociogram_prompt.layout">
             <div className="stage-editor-section-prompt__group">
+              <div id={getFieldId(`${fieldId}.layout.layoutVariable`)} />
               <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
               <ValidatedField
                 name="layout.layoutVariable"

@@ -72,7 +72,7 @@ class Issues extends Component {
     const issues = map(
       flatIssues,
       ({ field, issue }) => (
-        <li key={field} className="issues__issue">
+        <li key={getFieldId(field)} className="issues__issue">
           <a
             href={`#${getFieldId(field)}`}
             onClick={this.handleClickIssue}
