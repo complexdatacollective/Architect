@@ -15,9 +15,8 @@
   .issues {
     bottom: unit(8);
     width: calc(100vw);
-    transition-property: width;
-    transition-duration: var(--animation-duration-slow);
-    transition-timing-function: var(--animation-easing);
+    transition-property: transform, width;
+    transition-duration: var(--animation-duration-fast), var(--animation-duration-slow);
   }
 
   &--show-guidance {
