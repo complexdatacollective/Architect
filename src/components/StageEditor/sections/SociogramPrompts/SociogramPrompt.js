@@ -36,10 +36,14 @@ class SociogramPrompt extends Component {
     highlightableForNodeType: PropTypes.array.isRequired,
     clearField: PropTypes.func.isRequired,
     isDirty: PropTypes.bool,
+    isInvalid: PropTypes.bool,
+    hasSubmitFailed: PropTypes.bool,
   };
 
   static defaultProps = {
     isDirty: false,
+    isInvalid: false,
+    hasSubmitFailed: false,
   };
 
   constructor(props) {
@@ -328,7 +332,7 @@ const mapStateToProps = (state, props) => {
     highlightableForNodeType,
     variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
-    isInvalid:  isFieldInvalid(state, props.fieldId),
+    isInvalid: isFieldInvalid(state, props.fieldId),
     hasSubmitFailed: hasSubmitFailed(props.form.name)(state),
     nodeTypes: mapAsOptions(getNodeTypes(state)),
     edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),

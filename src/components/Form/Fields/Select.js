@@ -37,7 +37,10 @@ class Select extends PureComponent {
   // Redux Form's visited tracking seems wonky for Select elements. So we are tracking it manually.
   handleBlur = (e) => {
     this.setState({ visited: true });
-    this.props.input.onBlur(e);
+
+    if (this.props.input.onBlur) {
+      this.props.input.onBlur(e);
+    }
   }
 
   render() {

@@ -92,6 +92,7 @@ ShallowWrapper {
 </FormSection>,
       "className": null,
       "handleDelete": [Function],
+      "lockOpen": false,
       "open": false,
       "preview": <FormSection
         component="div"
@@ -499,6 +500,7 @@ ShallowWrapper {
 </FormSection>,
         "className": null,
         "handleDelete": [Function],
+        "lockOpen": false,
         "open": false,
         "preview": <FormSection
           component="div"

@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     width: calc(100vw);
-    padding: unit(6) unit(6) unit(16) unit(6);
+    padding: unit(6) unit(6) unit(16);
     transition-property: width;
     transition-duration: var(--animation-duration-slow);
     transition-timing-function: var(--animation-easing);
