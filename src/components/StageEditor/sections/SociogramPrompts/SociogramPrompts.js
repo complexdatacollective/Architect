@@ -23,7 +23,7 @@ const SociogramPrompts = ({
 }) => (
   <Guidance contentId="guidance.editor.sociogram_prompts">
     <div className="stage-editor-section">
-      <div id={getFieldId(`${fieldName}._error`)} />
+      <div id={getFieldId(`${fieldName}._error`)} data-name="Prompts" />
       <h2>Prompts</h2>
       <p>Add prompts to your Sociogram:</p>
       <div className="stage-editor-section-prompts">

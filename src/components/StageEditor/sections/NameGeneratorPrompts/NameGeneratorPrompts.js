@@ -27,7 +27,7 @@ const NameGeneratorPromptsSection = ({
 }) => (
   <Guidance contentId="guidance.editor.name_generator_prompts">
     <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
-      <div id={getFieldId(`${fieldName}._error`)} />
+      <div id={getFieldId(`${fieldName}._error`)} data-name="Prompts" />
       <h2>Prompts</h2>
       <p>Name gen prompt specific</p>
       <div className="stage-editor-section-prompts">

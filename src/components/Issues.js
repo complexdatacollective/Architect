@@ -26,12 +26,12 @@ const scrollTo = (destination) => {
 class Issues extends Component {
   static propTypes = {
     show: PropTypes.bool,
-    issues: PropTypes.array,
+    issues: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   };
 
   static defaultProps = {
     show: true,
-    issues: [],
+    issues: {},
   };
 
   constructor(props) {
@@ -40,18 +40,40 @@ class Issues extends Component {
     this.state = {
       open: true,
     };
+
+    this.flatIssues = flattenIssues(props.issues);
+    this.issueRefs = {};
   }
 
   componentWillReceiveProps(newProps) {
     const noIssues = isEmpty(newProps.issues);
     const show = newProps.show;
 
+    this.flatIssues = flattenIssues(newProps.issues);
+
     // when panel hidden by parent reset collapsed state
     if (noIssues || !show) { this.setState({ open: true }); }
   }
 
-  get flatIssues() {
-    return flattenIssues(this.props.issues);
+  /**
+   * Because display information for fields is essentially stored in the dom
+   * we use that as our data source for the field labels in the issue list.
+   */
+  componentDidUpdate() {
+    // for each issue get friendly title from dom
+    this.flatIssues.forEach(({ field }) => {
+      const fieldId = getFieldId(field);
+      const targetField = document.querySelector(`#${fieldId}`);
+      const fieldName = targetField.getAttribute('data-name') || targetField.textContent;
+
+      if (!fieldName) { return; }
+
+      this.issueRefs[fieldId].textContent = fieldName;
+    });
+  }
+
+  setIssueRef = (el, fieldId) => {
+    this.issueRefs[fieldId] = el;
   }
 
   isVisible = () =>
@@ -74,16 +96,25 @@ class Issues extends Component {
   render() {
     const issues = map(
       this.flatIssues,
-      ({ field, issue }) => (
-        <li key={getFieldId(field)} className="issues__issue">
-          <a
-            href={`#${getFieldId(field)}`}
-            onClick={this.handleClickIssue}
+      ({ field, issue }) => {
+        const fieldId = getFieldId(field);
+
+        return (
+          <li
+            key={fieldId}
+            className="issues__issue"
           >
-            {field} is {issue}
-          </a>
-        </li>
-      ));
+            <a
+              href={`#${fieldId}`}
+              onClick={this.handleClickIssue}
+            >
+              <span ref={el => this.setIssueRef(el, fieldId)}>
+                {field}
+              </span> - {issue}
+            </a>
+          </li>
+        );
+      });
 
     const issuesClasses = cx(
       'issues',

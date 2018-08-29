@@ -7,7 +7,7 @@ import { getFieldId } from '../../../utils/issues';
 const Name = () => (
   <Guidance contentId="guidance.editor.name">
     <div className="stage-editor-section">
-      <div id={getFieldId('label')} />
+      <div id={getFieldId('label')} data-name="Stage name" />
       <h2>Name</h2>
       <ValidatedField
         name="label"

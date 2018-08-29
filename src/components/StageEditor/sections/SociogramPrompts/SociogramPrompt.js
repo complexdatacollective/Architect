@@ -136,7 +136,7 @@ class SociogramPrompt extends Component {
         <FormSection name={fieldId}>
           <Guidance contentId="guidance.editor.sociogram_prompt.text">
             <div className="stage-editor-section-prompt__group">
-              <div id={getFieldId(`${fieldId}.text`)} />
+              <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
               <ValidatedField
                 name="text"
                 component={Fields.TextArea}
@@ -150,7 +150,7 @@ class SociogramPrompt extends Component {
           <div className="stage-editor-section-prompt__group">
             <Guidance contentId="guidance.editor.sociogram_prompt.nodes">
               <div>
-                <div id={getFieldId(`${fieldId}.subject`)} />
+                <div id={getFieldId(`${fieldId}.subject`)} data-name="Prompt node type" />
                 <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
                 <ValidatedField
                   name="subject"
@@ -178,7 +178,7 @@ class SociogramPrompt extends Component {
           </div>
           <Guidance contentId="guidance.editor.sociogram_prompt.layout">
             <div className="stage-editor-section-prompt__group">
-              <div id={getFieldId(`${fieldId}.layout.layoutVariable`)} />
+              <div id={getFieldId(`${fieldId}.layout.layoutVariable`)} data-name="Prompt layout variable" />
               <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
               <ValidatedField
                 name="layout.layoutVariable"

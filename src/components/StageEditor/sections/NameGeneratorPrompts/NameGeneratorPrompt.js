@@ -8,7 +8,7 @@ import { getFieldId } from '../../../../utils/issues';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
   <Item {...rest}>
-    <div id={getFieldId(`${fieldId}.text`)} />
+    <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
     <ValidatedField
       name={`${fieldId}.text`}
       component={Markdown}
@@ -18,7 +18,7 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
       placeholder="Enter text for the prompt here"
       validation={{ required: true }}
     />
-    <div id={getFieldId(`${fieldId}.additionalAttributes`)} />
+    <div id={getFieldId(`${fieldId}.additionalAttributes`)} data-name="Prompt additional attributes" />
     <VariableChooser
       className="stage-editor-section-prompt__setting-value"
       name={`${fieldId}.additionalAttributes`}

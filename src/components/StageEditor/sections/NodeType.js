@@ -7,6 +7,7 @@ import cx from 'classnames';
 import Guidance from '../../Guidance';
 import NodeSelect from '../../../components/Form/Fields/NodeSelect';
 import { getNodeTypes } from '../../../selectors/variableRegistry';
+import { getFieldId } from '../../../utils/issues';
 
 class NodeType extends Component {
   static propTypes = {
@@ -42,7 +43,8 @@ class NodeType extends Component {
     return (
       <Guidance contentId="guidance.editor.node_type">
         <div className={nodeTypeClasses}>
-          <h2 id="issue-subject">Node Type</h2>
+          <div id={getFieldId('subject')} data-name="Node type" />
+          <h2>Node Type</h2>
           <p>Which node type does this name generator create?</p>
           <div
             className="stage-editor-section-node-type__edit"
