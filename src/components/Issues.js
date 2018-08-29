@@ -88,7 +88,7 @@ class Issues extends Component {
   handleClickIssue = (e) => {
     e.preventDefault();
 
-    const link = e.target.getAttribute('href');
+    const link = e.target.closest('a').getAttribute('href');
     const destination = document.querySelector(link);
     scrollTo(destination);
   }
