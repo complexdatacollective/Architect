@@ -18,7 +18,6 @@ import { actionCreators as stageActions } from '../../ducks/modules/protocol/sta
 class EditStage extends PureComponent {
   static propTypes = {
     dirty: PropTypes.bool.isRequired,
-    invalid: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
     submitForm: PropTypes.func.isRequired,
     onComplete: PropTypes.func.isRequired,
@@ -43,7 +42,6 @@ class EditStage extends PureComponent {
       <Button
         key="continue"
         size="small"
-        disabled={this.props.invalid}
         onClick={this.props.submitForm}
       >Continue</Button>,
     ] : [];

@@ -4,10 +4,11 @@ import cx from 'classnames';
 import { Icon } from '../../ui/components';
 import DeleteButton from './DeleteButton';
 
-class ExpandablePrompt extends Component {
+class ExpandableItem extends Component {
   static propTypes = {
     className: PropTypes.string,
     open: PropTypes.bool,
+    lockOpen: PropTypes.bool,
     handleDelete: PropTypes.func.isRequired,
     preview: PropTypes.node,
     children: PropTypes.node,
@@ -16,6 +17,7 @@ class ExpandablePrompt extends Component {
   static defaultProps = {
     className: null,
     open: false,
+    lockOpen: false,
     preview: null,
     children: null,
   };
@@ -29,10 +31,16 @@ class ExpandablePrompt extends Component {
   }
 
   componentWillMount() {
-    this.setState({ isOpen: this.props.open });
+    this.setState({ isOpen: this.props.open || this.props.lockOpen });
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.lockOpen) { this.setState({ isOpen: true }); return; }
+    if (newProps.open !== this.props.open) { this.setState({ isOpen: newProps.open }); }
   }
 
   handleToggleOpen = () => {
+    if (this.props.lockOpen) { return; }
     this.setState({ isOpen: !this.state.isOpen });
   }
 
@@ -40,8 +48,9 @@ class ExpandablePrompt extends Component {
     const { preview, children, handleDelete } = this.props;
 
     const componentClasses = cx(
-      'items-expandable-item',
-      { 'items-expandable-item--open': this.state.isOpen },
+      'stage-editor-sortable-expandable-item',
+      { 'stage-editor-sortable-expandable-item--open': this.state.isOpen },
+      { 'stage-editor-sortable-expandable-item--lock': this.props.lockOpen },
       this.props.className,
     );
 
@@ -80,6 +89,6 @@ class ExpandablePrompt extends Component {
   }
 }
 
-export { ExpandablePrompt };
+export { ExpandableItem };
 
-export default ExpandablePrompt;
+export default ExpandableItem;

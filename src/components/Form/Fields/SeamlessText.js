@@ -14,7 +14,7 @@ class SeamlessTextInput extends PureComponent {
 
   static defaultProps = {
     input: {},
-    meta: {},
+    meta: { invalid: false, error: null, touched: false },
     type: 'text',
     placeholder: '',
     className: '',
@@ -23,7 +23,7 @@ class SeamlessTextInput extends PureComponent {
   render() {
     const {
       input,
-      meta: { error, active },
+      meta: { touched, invalid, error, active },
       className,
       placeholder,
       type,
@@ -34,7 +34,7 @@ class SeamlessTextInput extends PureComponent {
       'form-fields-seamless-text',
       {
         'form-fields-seamless-text--has-focus': active,
-        'form-fields-seamless-text--has-error': error,
+        'form-fields-seamless-text--has-error': touched && invalid,
       },
     );
 

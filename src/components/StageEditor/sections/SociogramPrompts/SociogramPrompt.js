@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
-import { Field, clearFields, isDirty, FormSection } from 'redux-form';
+import { Field, clearFields, isDirty, isInvalid, FormSection, hasSubmitFailed } from 'redux-form';
 import { get, toPairs, isEmpty, map, find } from 'lodash';
 import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import Guidance from '../../../Guidance';
@@ -11,6 +11,7 @@ import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
 import * as Fields from '../../../../ui/components/Fields';
 import ExpandableItem from '../../Sortable/ExpandableItem';
+import { getFieldId } from '../../../../utils/issues';
 
 // Background options
 const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
@@ -35,10 +36,14 @@ class SociogramPrompt extends Component {
     highlightableForNodeType: PropTypes.array.isRequired,
     clearField: PropTypes.func.isRequired,
     isDirty: PropTypes.bool,
+    isInvalid: PropTypes.bool,
+    hasSubmitFailed: PropTypes.bool,
   };
 
   static defaultProps = {
     isDirty: false,
+    isInvalid: false,
+    hasSubmitFailed: false,
   };
 
   constructor(props) {
@@ -47,6 +52,14 @@ class SociogramPrompt extends Component {
     this.state = {
       backgroundType: CONCENTRIC_CIRCLES,
     };
+  }
+
+  get isOpen() {
+    return this.props.isDirty;
+  }
+
+  get isLockedOpen() {
+    return this.props.isInvalid && this.props.hasSubmitFailed;
   }
 
   handleChooseBackgroundType = (option) => {
@@ -86,7 +99,8 @@ class SociogramPrompt extends Component {
     return (
       <ExpandableItem
         className="stage-editor-section-sociogram-prompt"
-        open={this.props.isDirty}
+        open={this.isOpen}
+        lockOpen={this.isLockedOpen}
         preview={(
           <FormSection name={fieldId}>
             <div className="stage-editor-section-sociogram-prompt__preview">
@@ -122,6 +136,7 @@ class SociogramPrompt extends Component {
         <FormSection name={fieldId}>
           <Guidance contentId="guidance.editor.sociogram_prompt.text">
             <div className="stage-editor-section-prompt__group">
+              <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
               <ValidatedField
                 name="text"
                 component={Fields.TextArea}
@@ -135,6 +150,7 @@ class SociogramPrompt extends Component {
           <div className="stage-editor-section-prompt__group">
             <Guidance contentId="guidance.editor.sociogram_prompt.nodes">
               <div>
+                <div id={getFieldId(`${fieldId}.subject`)} data-name="Prompt node type" />
                 <h4 className="stage-editor-section-prompt__group-title">Nodes</h4>
                 <ValidatedField
                   name="subject"
@@ -162,6 +178,7 @@ class SociogramPrompt extends Component {
           </div>
           <Guidance contentId="guidance.editor.sociogram_prompt.layout">
             <div className="stage-editor-section-prompt__group">
+              <div id={getFieldId(`${fieldId}.layout.layoutVariable`)} data-name="Prompt layout variable" />
               <h4 className="stage-editor-section-prompt__group-title">Layout</h4>
               <ValidatedField
                 name="layout.layoutVariable"
@@ -259,6 +276,7 @@ class SociogramPrompt extends Component {
                     label="How many circles?"
                     type="number"
                     placeholder="5"
+                    normalize={value => parseInt(value, 10)}
                   />
                   <Field
                     name="background.skewedTowardCenter"
@@ -307,12 +325,15 @@ const mapStateToProps = (state, props) => {
   const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
   const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
   const isFieldDirty = isDirty(props.form.name);
+  const isFieldInvalid = isInvalid(props.form.name);
 
   return {
     layoutsForNodeType,
     highlightableForNodeType,
     variablesForNodeType: variables,
     isDirty: isFieldDirty(state, props.fieldId),
+    isInvalid: isFieldInvalid(state, props.fieldId),
+    hasSubmitFailed: hasSubmitFailed(props.form.name)(state),
     nodeTypes: mapAsOptions(getNodeTypes(state)),
     edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),
   };

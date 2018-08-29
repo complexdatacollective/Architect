@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Form as ReduxForm, formValueSelector, formPropTypes } from 'redux-form';
+import {
+  reduxForm,
+  Form as ReduxForm,
+  formValueSelector,
+  formPropTypes,
+  getFormSyncErrors,
+  hasSubmitFailed,
+} from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
 import { Guided } from '../Guided';
-import flatten from '../../utils/flatten';
 import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
+import Issues from '../Issues';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
@@ -20,7 +27,7 @@ class StageEditor extends Component {
 
   renderSections() {
     return this.sections.map((SectionComponent, index) =>
-      <SectionComponent key={index} form={form} />,
+      <SectionComponent key={index} form={form} hasSubmitFailed={this.props.hasSubmitFailed} />,
     );
   }
 
@@ -30,8 +37,8 @@ class StageEditor extends Component {
       handleSubmit,
       toggleCodeView,
       codeView,
-      dirty,
-      invalid,
+      issues,
+      submitFailed,
     } = this.props;
 
     return (
@@ -43,14 +50,11 @@ class StageEditor extends Component {
           form={form}
         >
           <h1>Edit {stage.type} Screen</h1>
-          { dirty && invalid && (
-            <p style={{ color: 'var(--error)' }}>
-              There are some errors that need to be fixed before this can be saved!
-            </p>
-          ) }
           <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
           {this.renderSections()}
+
+          <Issues issues={issues} show={submitFailed} />
         </Guided>
       </ReduxForm>
     );
@@ -64,9 +68,14 @@ StageEditor.propTypes = {
   ...formPropTypes,
 };
 
-const mapStateToProps = (state, props) => ({
-  initialValues: props.stage,
-});
+const mapStateToProps = (state, props) => {
+  const issues = getFormSyncErrors(formName)(state);
+  return {
+    initialValues: props.stage,
+    issues,
+    hasSubmitFailed: hasSubmitFailed(formName)(state),
+  };
+};
 
 export default compose(
   connect(mapStateToProps),
@@ -79,9 +88,5 @@ export default compose(
     touchOnBlur: false,
     touchOnChange: true,
     enableReinitialize: true,
-    onSubmitFail: (errors) => {
-      // eslint-disable-next-line no-console
-      console.error('FORM ERRORS', flatten(errors));
-    },
   }),
 )(StageEditor);

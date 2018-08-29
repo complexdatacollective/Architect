@@ -29,6 +29,20 @@ class Select extends PureComponent {
     meta: { invalid: false, error: null, touched: false },
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { visited: false };
+  }
+
+  // Redux Form's visited tracking seems wonky for Select elements. So we are tracking it manually.
+  handleBlur = (e) => {
+    this.setState({ visited: true });
+
+    if (this.props.input.onBlur) {
+      this.props.input.onBlur(e);
+    }
+  }
+
   render() {
     const {
       className,
@@ -36,7 +50,7 @@ class Select extends PureComponent {
       children,
       options,
       label,
-      meta: { visited, invalid, error },
+      meta: { invalid, error },
       ...rest
     } = this.props;
 
@@ -50,7 +64,7 @@ class Select extends PureComponent {
         { label &&
           <h4>{label}</h4>
         }
-        <select className="form-fields-select__input" {...input} {...rest}>
+        <select className="form-fields-select__input" {...input} onBlur={this.handleBlur} {...rest}>
           {children}
           {options.map(
             (option) => {
@@ -59,7 +73,7 @@ class Select extends PureComponent {
             },
           )}
         </select>
-        {visited && invalid && <p className="form-fields-select__error">{error}</p>}
+        {this.state.visited && invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );
   }

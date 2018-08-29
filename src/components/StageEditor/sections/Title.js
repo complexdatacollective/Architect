@@ -2,11 +2,13 @@ import React from 'react';
 import Guidance from '../../Guidance';
 import { ValidatedField } from '../../../components/Form';
 import SeamlessText from '../../../components/Form/Fields/SeamlessText';
+import { getFieldId } from '../../../utils/issues';
 
 const Title = () => (
   <Guidance contentId="guidance.editor.title">
     <div className="stage-editor-section">
-      <h2>Title</h2>
+      <div id={getFieldId('title')} data-name="Title text" />
+      <h2 id="title">Title</h2>
       <ValidatedField
         name="title"
         component={SeamlessText}

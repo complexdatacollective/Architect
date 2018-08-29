@@ -44,14 +44,22 @@ class MarkdownInput extends PureComponent {
   render() {
     const {
       input: { value },
-      meta: { active },
+      meta: { touched, invalid, error, active },
       label,
     } = this.props;
+
+    const markdownClasses = cx(
+      'form-fields-markdown',
+      {
+        'form-fields-markdown--is-focussed': active,
+        'form-fields-markdown--has-error': touched && invalid,
+      },
+    );
 
     return (
       <label
         htmlFor={this.id}
-        className={cx('form-fields-markdown', { 'form-fields-markdown--is-focussed': active })}
+        className={markdownClasses}
       >
         { label &&
           <div className="form-fields-markdown__label">{label}</div>
@@ -67,6 +75,7 @@ class MarkdownInput extends PureComponent {
             />
           </div>
         </div>
+        <p className="form-fields-markdown__error">{error}</p>
       </label>
     );
   }

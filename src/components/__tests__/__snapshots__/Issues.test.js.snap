@@ -1,0 +1,584 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Issues /> will render 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Issues
+    issues={Object {}}
+    show={true}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div
+        className="issues__panel"
+>
+        <div
+                className="issues__title-bar"
+                onClick={[Function]}
+        >
+                <div
+                        className="issues__title-bar-icon"
+                >
+                        <Icon
+                                className=""
+                                color="white"
+                                name="info"
+                                style={Object {}}
+                        />
+                </div>
+                <div
+                        className="issues__title-bar-text"
+                >
+                        Issues (
+                        0
+                        )
+                </div>
+                <div
+                        className="issues__title-bar-toggle"
+                >
+                        <Icon
+                                className="issues__toggle--open"
+                                color="white"
+                                name="chevron-down"
+                                style={Object {}}
+                        />
+                        <Icon
+                                className="issues__toggle--close"
+                                color="white"
+                                name="chevron-up"
+                                style={Object {}}
+                        />
+                </div>
+        </div>
+        <ol
+                className="issues__issues"
+        >
+                
+        </ol>
+</div>,
+      "className": "issues issues--open",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div
+            className="issues__title-bar"
+            onClick={[Function]}
+>
+            <div
+                        className="issues__title-bar-icon"
+            >
+                        <Icon
+                                    className=""
+                                    color="white"
+                                    name="info"
+                                    style={Object {}}
+                        />
+            </div>
+            <div
+                        className="issues__title-bar-text"
+            >
+                        Issues (
+                        0
+                        )
+            </div>
+            <div
+                        className="issues__title-bar-toggle"
+            >
+                        <Icon
+                                    className="issues__toggle--open"
+                                    color="white"
+                                    name="chevron-down"
+                                    style={Object {}}
+                        />
+                        <Icon
+                                    className="issues__toggle--close"
+                                    color="white"
+                                    name="chevron-up"
+                                    style={Object {}}
+                        />
+            </div>
+</div>,
+          <ol
+            className="issues__issues"
+>
+            
+</ol>,
+        ],
+        "className": "issues__panel",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="issues__title-bar-icon"
+>
+                <Icon
+                                className=""
+                                color="white"
+                                name="info"
+                                style={Object {}}
+                />
+</div>,
+              <div
+                className="issues__title-bar-text"
+>
+                Issues (
+                0
+                )
+</div>,
+              <div
+                className="issues__title-bar-toggle"
+>
+                <Icon
+                                className="issues__toggle--open"
+                                color="white"
+                                name="chevron-down"
+                                style={Object {}}
+                />
+                <Icon
+                                className="issues__toggle--close"
+                                color="white"
+                                name="chevron-up"
+                                style={Object {}}
+                />
+</div>,
+            ],
+            "className": "issues__title-bar",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <Icon
+                  className=""
+                  color="white"
+                  name="info"
+                  style={Object {}}
+/>,
+                "className": "issues__title-bar-icon",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "className": "",
+                  "color": "white",
+                  "name": "info",
+                  "style": Object {},
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "Issues (",
+                  0,
+                  ")",
+                ],
+                "className": "issues__title-bar-text",
+              },
+              "ref": null,
+              "rendered": Array [
+                "Issues (",
+                0,
+                ")",
+              ],
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <Icon
+                    className="issues__toggle--open"
+                    color="white"
+                    name="chevron-down"
+                    style={Object {}}
+/>,
+                  <Icon
+                    className="issues__toggle--close"
+                    color="white"
+                    name="chevron-up"
+                    style={Object {}}
+/>,
+                ],
+                "className": "issues__title-bar-toggle",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "className": "issues__toggle--open",
+                    "color": "white",
+                    "name": "chevron-down",
+                    "style": Object {},
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "className": "issues__toggle--close",
+                    "color": "white",
+                    "name": "chevron-up",
+                    "style": Object {},
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [],
+            "className": "issues__issues",
+          },
+          "ref": null,
+          "rendered": Array [],
+          "type": "ol",
+        },
+      ],
+      "type": "div",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="issues__panel"
+>
+          <div
+                    className="issues__title-bar"
+                    onClick={[Function]}
+          >
+                    <div
+                              className="issues__title-bar-icon"
+                    >
+                              <Icon
+                                        className=""
+                                        color="white"
+                                        name="info"
+                                        style={Object {}}
+                              />
+                    </div>
+                    <div
+                              className="issues__title-bar-text"
+                    >
+                              Issues (
+                              0
+                              )
+                    </div>
+                    <div
+                              className="issues__title-bar-toggle"
+                    >
+                              <Icon
+                                        className="issues__toggle--open"
+                                        color="white"
+                                        name="chevron-down"
+                                        style={Object {}}
+                              />
+                              <Icon
+                                        className="issues__toggle--close"
+                                        color="white"
+                                        name="chevron-up"
+                                        style={Object {}}
+                              />
+                    </div>
+          </div>
+          <ol
+                    className="issues__issues"
+          >
+                    
+          </ol>
+</div>,
+        "className": "issues issues--open",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="issues__title-bar"
+              onClick={[Function]}
+>
+              <div
+                            className="issues__title-bar-icon"
+              >
+                            <Icon
+                                          className=""
+                                          color="white"
+                                          name="info"
+                                          style={Object {}}
+                            />
+              </div>
+              <div
+                            className="issues__title-bar-text"
+              >
+                            Issues (
+                            0
+                            )
+              </div>
+              <div
+                            className="issues__title-bar-toggle"
+              >
+                            <Icon
+                                          className="issues__toggle--open"
+                                          color="white"
+                                          name="chevron-down"
+                                          style={Object {}}
+                            />
+                            <Icon
+                                          className="issues__toggle--close"
+                                          color="white"
+                                          name="chevron-up"
+                                          style={Object {}}
+                            />
+              </div>
+</div>,
+            <ol
+              className="issues__issues"
+>
+              
+</ol>,
+          ],
+          "className": "issues__panel",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <div
+                  className="issues__title-bar-icon"
+>
+                  <Icon
+                                    className=""
+                                    color="white"
+                                    name="info"
+                                    style={Object {}}
+                  />
+</div>,
+                <div
+                  className="issues__title-bar-text"
+>
+                  Issues (
+                  0
+                  )
+</div>,
+                <div
+                  className="issues__title-bar-toggle"
+>
+                  <Icon
+                                    className="issues__toggle--open"
+                                    color="white"
+                                    name="chevron-down"
+                                    style={Object {}}
+                  />
+                  <Icon
+                                    className="issues__toggle--close"
+                                    color="white"
+                                    name="chevron-up"
+                                    style={Object {}}
+                  />
+</div>,
+              ],
+              "className": "issues__title-bar",
+              "onClick": [Function],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": <Icon
+                    className=""
+                    color="white"
+                    name="info"
+                    style={Object {}}
+/>,
+                  "className": "issues__title-bar-icon",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "className": "",
+                    "color": "white",
+                    "name": "info",
+                    "style": Object {},
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    "Issues (",
+                    0,
+                    ")",
+                  ],
+                  "className": "issues__title-bar-text",
+                },
+                "ref": null,
+                "rendered": Array [
+                  "Issues (",
+                  0,
+                  ")",
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <Icon
+                      className="issues__toggle--open"
+                      color="white"
+                      name="chevron-down"
+                      style={Object {}}
+/>,
+                    <Icon
+                      className="issues__toggle--close"
+                      color="white"
+                      name="chevron-up"
+                      style={Object {}}
+/>,
+                  ],
+                  "className": "issues__title-bar-toggle",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "className": "issues__toggle--open",
+                      "color": "white",
+                      "name": "chevron-down",
+                      "style": Object {},
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "className": "issues__toggle--close",
+                      "color": "white",
+                      "name": "chevron-up",
+                      "style": Object {},
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": "div",
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [],
+              "className": "issues__issues",
+            },
+            "ref": null,
+            "rendered": Array [],
+            "type": "ol",
+          },
+        ],
+        "type": "div",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

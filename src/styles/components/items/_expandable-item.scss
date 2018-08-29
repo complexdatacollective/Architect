@@ -100,6 +100,12 @@ $component-name: items-expandable-item;
       }
     }
   }
+
+  &--lock {
+    .#{$component-name}__expand {
+      cursor: not-allowed;
+    }
+  }
 }
 
 @keyframes grow {
