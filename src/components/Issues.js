@@ -45,6 +45,10 @@ class Issues extends Component {
     this.issueRefs = {};
   }
 
+  componentDidMount() {
+    this.updateFieldNames();
+  }
+
   componentWillReceiveProps(newProps) {
     const noIssues = isEmpty(newProps.issues);
     const show = newProps.show;
@@ -55,25 +59,32 @@ class Issues extends Component {
     if (noIssues || !show) { this.setState({ open: true }); }
   }
 
-  /**
-   * Because display information for fields is essentially stored in the dom
-   * we use that as our data source for the field labels in the issue list.
-   */
   componentDidUpdate() {
-    // for each issue get friendly title from dom
-    this.flatIssues.forEach(({ field }) => {
-      const fieldId = getFieldId(field);
-      const targetField = document.querySelector(`#${fieldId}`);
-      const fieldName = targetField.getAttribute('data-name') || targetField.textContent;
-
-      if (!fieldName) { return; }
-
-      this.issueRefs[fieldId].textContent = fieldName;
-    });
+    this.updateFieldNames();
   }
 
   setIssueRef = (el, fieldId) => {
     this.issueRefs[fieldId] = el;
+  }
+
+  /**
+   * Because display information for fields is essentially stored in the dom
+   * we use that as our data source for the field labels in the issue list.
+   */
+  updateFieldNames() {
+    // for each issue get friendly title from dom
+    this.flatIssues.forEach(({ field }) => {
+      const fieldId = getFieldId(field);
+      const targetField = document.querySelector(`#${fieldId}`);
+
+      if (!targetField) { return; }
+
+      const fieldName = targetField.getAttribute('data-name') || targetField.textContent;
+
+      if (fieldName) {
+        this.issueRefs[fieldId].textContent = fieldName;
+      }
+    });
   }
 
   isVisible = () =>

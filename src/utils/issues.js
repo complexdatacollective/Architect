@@ -49,5 +49,5 @@ export const flattenIssues = (issues, path = '') =>
 export const getFieldId = (field) => {
   // Needs to be safe for urls and ids
   const safeFieldName = encodeURIComponent(field.replace(/\[|\]|\./g, '_'));
-  return `field-${safeFieldName}`;
+  return `field_${safeFieldName}`;
 };
