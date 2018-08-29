@@ -1,6 +1,4 @@
-$component-name: form-fields-markdown;
-
-.#{$component-name} {
+.form-fields-markdown {
   @include form-field;
   width: 100%;
 
@@ -41,5 +39,21 @@ $component-name: form-fields-markdown;
     padding: unit(1);
     transition: width 200ms;
     vertical-align: top;
+  }
+
+  &__error {
+    opacity: 0;
+    max-height: 0;
+    color: var(--error);
+    margin: unit(1) 0 0;
+    transition: opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
+  }
+
+  &--has-error {
+    .form-fields-markdown__error {
+      opacity: 1;
+      max-height: 50px;
+    }
   }
 }

@@ -48,7 +48,7 @@ class SeamlessTextInput extends PureComponent {
         />
         <Icon name="edit" className="form-fields-seamless-text__icon form-fields-seamless-text__icon--edit" />
         <Icon name="close" className="form-fields-seamless-text__icon form-fields-seamless-text__icon--error" />
-        { touched && invalid && <p className="form-fields-seamless-text__error">{error}</p> }
+        <p className="form-fields-seamless-text__error">{error}</p>
       </div>
     );
   }

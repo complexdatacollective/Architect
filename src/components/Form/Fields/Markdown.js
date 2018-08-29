@@ -75,7 +75,7 @@ class MarkdownInput extends PureComponent {
             />
           </div>
         </div>
-        { touched && invalid && <p className="form-fields-markdown__error">{error}</p> }
+        <p className="form-fields-markdown__error">{error}</p>
       </label>
     );
   }
