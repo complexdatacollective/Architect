@@ -4,6 +4,7 @@ import cx from 'classnames';
 import { map, isEmpty } from 'lodash';
 import scrollparent from 'scrollparent';
 import anime from 'animejs';
+import { Icon } from '../ui/components';
 import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../utils/CSSVariables';
 import { flattenIssues, getFieldId } from '../utils/issues';
 
@@ -96,7 +97,24 @@ class Issues extends Component {
       <div className={issuesClasses}>
         <div className="issues__panel">
           <div className="issues__title-bar" onClick={this.handleClickTitleBar}>
-            Issues ({this.flatIssues.length}) {this.isOpen()} { this.isVisible() }
+            <div className="issues__title-bar-icon">
+              <Icon name="info" color="white" />
+            </div>
+            <div className="issues__title-bar-text">
+              Issues ({this.flatIssues.length})
+            </div>
+            <div className="issues__title-bar-toggle">
+              <Icon
+                name="chevron-down"
+                color="white"
+                className="issues__toggle--open"
+              />
+              <Icon
+                name="chevron-up"
+                color="white"
+                className="issues__toggle--close"
+              />
+            </div>
           </div>
           <ol className="issues__issues">
             {issues}
