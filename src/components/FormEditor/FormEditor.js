@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { get, keys, map, toPairs, fromPairs } from 'lodash';
+import { get, map, toPairs, fromPairs } from 'lodash';
 import { ValidatedField, MultiSelect } from '../Form';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
@@ -32,18 +32,20 @@ const optionGetter = (variables) => {
     toPairs(variables)
       .filter(([, options]) => allowedTypes.includes(options.type)),
   );
-  const variableNames = keys(allowedVariables);
 
   return (property, rowValues, allValues) => {
     const variable = get(rowValues, 'variable');
     switch (property) {
       case 'variable': {
         const used = map(allValues, 'variable');
-        return variableNames
-          .map(
-            value =>
-              ({ value, label: value, disabled: value !== variable && used.includes(value) }),
-          );
+        return map(
+          allowedVariables,
+          (value, id) => ({
+            value: id,
+            label: value.name,
+            disabled: value !== variable && used.includes(value),
+          }),
+        );
       }
       case 'component':
         return getInputsForType(get(variables, [variable, 'type']));
