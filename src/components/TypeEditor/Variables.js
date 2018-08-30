@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { arrayPush, FieldArray } from 'redux-form';
 import PropTypes from 'prop-types';
+import uuid from 'uuid';
 import Items, { NewButton } from '../Items';
 import Variable from './Variable';
 
@@ -38,7 +39,7 @@ const mapDispatchToProps = (dispatch, { form, name }) => ({
     () => arrayPush(
       form,
       name,
-      {},
+      { id: uuid() },
     ),
     dispatch,
   ),

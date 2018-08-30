@@ -11,16 +11,19 @@
         "iconVariant": "add-a-person",
         "variables": {
           "closenessLayout": {
+            "name": "closenessLayout",
             "label": "Closeness layout",
             "description": "Earthling readable description",
             "type": "layout"
           },
           "geographicalLayout": {
+            "name": "geographicalLayout",
             "label": "Geographical closeness layout",
             "description": "Earthling readable description",
             "type": "layout"
           },
           "name": {
+            "name": "name",
             "label": "Name",
             "description": "Human readable description",
             "type": "text",
@@ -31,6 +34,7 @@
             }
           },
           "age": {
+            "name": "age",
             "label": "Age",
             "description": "Human readable description",
             "type": "number",
@@ -41,6 +45,7 @@
             }
           },
           "nickname": {
+            "name": "nickname",
             "label": "Nickname",
             "description": "Human readable description",
             "type": "text",
@@ -51,6 +56,7 @@
             }
           },
           "special_category": {
+            "name": "special_category",
             "label": "Special category",
             "description": "Human readable description",
             "type": "categorical",
@@ -60,6 +66,7 @@
             }]
           },
           "some_options": {
+            "name": "some_options",
             "label": "Some possible options",
             "description": "Human readable description",
             "type": "ordinal",
@@ -72,21 +79,25 @@
             }
           },
           "close_friend": {
+            "name": "close_frield",
             "label": "Close Friend",
             "description": "Human readable description",
             "type": "boolean"
           },
           "support_friend": {
+            "name": "support_friend",
             "label": "Support Friend",
             "description": "Human readable description",
             "type": "boolean"
           },
           "advice_friend": {
+            "name": "advice_friend",
             "label": "Advice Friend",
             "description": "Human readable description",
             "type": "boolean"
           },
           "has_given_advice": {
+            "name": "has_given_advice",
             "label": "Has given advice?",
             "description": "Human readable description",
             "type": "boolean"
