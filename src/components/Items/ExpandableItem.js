@@ -48,9 +48,9 @@ class ExpandableItem extends Component {
     const { preview, children, handleDelete } = this.props;
 
     const componentClasses = cx(
-      'stage-editor-sortable-expandable-item',
-      { 'stage-editor-sortable-expandable-item--open': this.state.isOpen },
-      { 'stage-editor-sortable-expandable-item--lock': this.props.lockOpen },
+      'items-expandable-item',
+      { 'items-expandable-item--open': this.state.isOpen },
+      { 'items-expandable-item--lock': this.props.lockOpen },
       this.props.className,
     );
 
