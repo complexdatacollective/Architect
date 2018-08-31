@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import SeamlessText from '../SeamlessText';
-import Contexts from '../Contexts';
-import { RadioGroup } from '../../../../ui/components/Fields';
-import Select from '../Select';
-import ValidatedField from '../../ValidatedField';
+import SeamlessText from '../../../../Form/Fields/SeamlessText';
+import Contexts from '../../../../Form/Fields/Contexts';
+import { RadioGroup } from '../../../../../ui/components/Fields';
+import Select from '../../../../Form/Fields/Select';
+import ValidatedField from '../../../../Form/ValidatedField';
 
 const getOptions = (variable) => {
   switch (variable.type) {

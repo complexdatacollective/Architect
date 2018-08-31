@@ -1,0 +1,78 @@
+.attributes-table {
+  display: flex;
+  width: 100%;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-direction: column;
+
+  &__variable {
+    &:nth-child(even) {
+      background: gold;
+    }
+  }
+
+  &__add {
+    &::before {
+      content: '+';
+      color: var(--text-light);
+      display: block;
+      position: relative;
+      top: unit(-.2);
+    }
+  }
+}
+
+$duration:  var(--animation-duration-slow);
+
+.variable {
+  min-height: 50px;
+  background: transparent;
+  transition: background $duration;
+  padding: unit(2) 0;
+
+  .form-field-container,
+  .form-field {
+    margin: 0;
+  };
+
+
+  &__preview {
+    display: flex;
+    flex-direction: row;
+    max-height: 50px;
+    overflow: hidden;
+    transition: opacity $duration $duration, max-height $duration $duration;
+
+    &-name,
+    &-value,
+    &-control {
+      padding: 0 unit(2);
+    }
+  }
+
+  &__editor {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity $duration, max-height $duration;
+    color: white;
+    padding: 0 unit(2);
+  }
+
+  &--edit {
+    background: purple;
+
+    .variable__editor {
+      max-height: 500px;
+      opacity: 1;
+      transition: opacity $duration $duration, max-height $duration $duration;
+    }
+
+    .variable__preview {
+      max-height: 0;
+      opacity: 0;
+      transition: opacity $duration, max-height $duration;
+    }
+  }
+}
