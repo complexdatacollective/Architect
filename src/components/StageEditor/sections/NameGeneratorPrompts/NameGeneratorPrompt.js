@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ValidatedField } from '../../../Form';
 import Markdown from '../../../Form/Fields/Markdown';
-import VariableChooser from '../../../Form/Fields/VariableChooser';
+import AttributesTable from './AttributesTable';
 import { Item } from '../../../Items';
 import { getFieldId } from '../../../../utils/issues';
 
@@ -19,12 +19,11 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
       validation={{ required: true }}
     />
     <div id={getFieldId(`${fieldId}.additionalAttributes`)} data-name="Prompt additional attributes" />
-    <VariableChooser
-      className="stage-editor-section-prompt__setting-value"
+    <h3>Additional attributes</h3>
+    <AttributesTable
       name={`${fieldId}.additionalAttributes`}
       id="additionalAttributes"
       variableRegistry={variableRegistry}
-      label="Additional attributes"
       form={form}
     />
   </Item>

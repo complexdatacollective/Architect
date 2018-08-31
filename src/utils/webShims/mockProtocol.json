@@ -61,7 +61,11 @@
             "description": "Human readable description",
             "type": "categorical",
             "options": [{
-              "label": "foo",
+              "label": "Foo",
+              "value": "foo"
+            },
+            {
+              "label": "Bar",
               "value": "bar"
             }]
           },
@@ -761,7 +765,7 @@
           "id": "6cl",
           "text": "This is the factory preset protocol",
           "additionalAttributes": {
-            "special_category": 46,
+            "special_category": ["foo"],
             "close_friend": true
           }
         },
@@ -831,7 +835,7 @@
           "id": "7cl",
           "text": "Which classmates would you also think of as friends?",
           "additionalAttributes": {
-            "special_category": 56,
+            "special_category": ["bar"],
             "close_friend": true
           },
           "dataSource": "schoolPupils",
@@ -948,7 +952,7 @@
           "id": "7cl1",
           "text": "Which classmates would you also think of as friends?",
           "additionalAttributes": {
-            "special_category": 46,
+            "special_category": ["bar"],
             "close_friend": true
           },
           "dataSource": "schoolPupils",
