@@ -20,27 +20,35 @@ class AttributesTable extends Component {
     super(props);
 
     this.state = {
-      new: true,
+      new: false,
       editing: null,
     };
   }
 
   get variables() {
-    return map(
+    const variableMap = map(
       this.props.values,
       (value, variable) => ({ value, variable }),
-    ).concat(this.state.new ? { value: undefined, variable: undefined } : null);
+    )
+
+    return this.state.new ?
+      variableMap.concat({ value: undefined, variable: undefined }) :
+      variableMap;
   }
 
   handleEditVariable = (variable) => {
-    console.log('edit', variable);
     if (this.state.editing === variable) { this.setState({ editing: null }); }
 
-    this.setState({ editing: variable });
+    this.setState({ editing: variable, new: false });
   };
 
   handleCreateVariable = () => {
-    this.setState({ new: true });
+    this.setState({ new: true, editing: undefined });
+  };
+
+  handleChooseVariable = (variable) => {
+    this.props.change({ ...this.props.values, [variable]: undefined })
+    this.setState({ new: false, editing: variable });
   };
 
   render() {
@@ -62,6 +70,7 @@ class AttributesTable extends Component {
             variable={variable}
             variableRegistry={variableRegistry}
             isEditing={isEditing}
+            onChooseVariable={this.handleChooseVariable}
             onToggleEdit={() => this.handleEditVariable(variable)}
             onDelete={() => deleteVariable(variable)}
           />

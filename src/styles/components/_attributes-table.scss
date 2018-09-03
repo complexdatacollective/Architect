@@ -51,7 +51,7 @@ $duration:  var(--animation-duration-slow);
     }
   }
 
-  &__editor {
+  &__edit {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
@@ -60,10 +60,25 @@ $duration:  var(--animation-duration-slow);
     padding: 0 unit(2);
   }
 
+  &__chooser,
+  &__editor {
+    max-height: 0;
+    overflow: hidden;
+    transition: transform $duration, opacity $duration, max-height $duration;
+    transform: translateX(-100%);
+
+    &--show {
+      max-height: 500px;
+      opacity: 1;
+      transform: translateX(0);
+      transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;
+    }
+  }
+
   &--edit {
     background: purple;
 
-    .variable__editor {
+    .variable__edit {
       max-height: 500px;
       opacity: 1;
       transition: opacity $duration $duration, max-height $duration $duration;
