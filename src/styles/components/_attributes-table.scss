@@ -64,6 +64,7 @@ $duration:  var(--animation-duration-slow);
   &__editor {
     max-height: 0;
     overflow: hidden;
+    opacity: 0;
     transition: transform $duration, opacity $duration, max-height $duration;
     transform: translateX(-100%);
 
@@ -72,6 +73,29 @@ $duration:  var(--animation-duration-slow);
       opacity: 1;
       transform: translateX(0);
       transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;
+    }
+  }
+
+  &__chooser {
+    display: flex;
+    flex-wrap: wrap;
+
+    &-variable {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex: 0 0 calc(25% - #{unit(2)});
+      height: unit(12);
+      padding: unit(2);
+      margin: unit(1);
+      border-radius: unit(2);
+      border: 3px solid var(--color-sea-green);
+      cursor: pointer;
+
+      &:hover {
+        background: red;
+      }
     }
   }
 
