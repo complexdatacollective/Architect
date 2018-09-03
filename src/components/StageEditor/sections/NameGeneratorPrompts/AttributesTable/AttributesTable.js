@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { omit, map } from 'lodash';
-import { withState, withHandlers, compose } from 'recompose';
+import PropTypes from 'prop-types';
+import { omit, map, pickBy } from 'lodash';
+import { withHandlers, compose } from 'recompose';
 import { connect } from 'react-redux';
 import { change, FormSection } from 'redux-form';
-import cx from 'classnames';
 import RoundButton from '../../../../Form/RoundButton';
 import Variable from './Variable';
 
 const withVaribleActions = withHandlers({
-  createVariable: props => () =>
-    props.change({...props.values, _new: null }),
+  createVariable: props => (variable) => {
+    // don't add existing property
+    if (Object.prototype.hasOwnProperty.call(props.values, variable)) { return; }
+    props.change({ ...props.values, [variable]: undefined });
+  },
   deleteVariable: props => variable =>
     props.change(omit(props.values, variable)),
 });
 
 class AttributesTable extends Component {
+  static propTypes = {
+    variableRegistry: PropTypes.object.isRequired,
+    name: PropTypes.string.isRequired,
+    values: PropTypes.object,
+    createVariable: PropTypes.func.isRequired,
+    deleteVariable: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    values: {},
+  };
+
   constructor(props) {
     super(props);
 
@@ -29,11 +44,19 @@ class AttributesTable extends Component {
     const variableMap = map(
       this.props.values,
       (value, variable) => ({ value, variable }),
-    )
+    );
 
     return this.state.new ?
       variableMap.concat({ value: undefined, variable: undefined }) :
       variableMap;
+  }
+
+  get variableRegistry() {
+    return pickBy(this.props.variableRegistry, ({ type }) => type !== 'layout');
+  }
+
+  get unusedVariables() {
+    return omit(this.variableRegistry, map(this.variables, 'variable'));
   }
 
   handleEditVariable = (variable) => {
@@ -47,16 +70,16 @@ class AttributesTable extends Component {
   };
 
   handleChooseVariable = (variable) => {
-    this.props.change({ ...this.props.values, [variable]: undefined })
+    this.props.createVariable(variable);
     this.setState({ new: false, editing: variable });
+  };
+
+  handleDeleteVariable = (variable) => {
+    this.props.deleteVariable(variable);
   };
 
   render() {
     const {
-      setEditingVariable,
-      addVariable,
-      deleteVariable,
-      variableRegistry,
       name,
     } = this.props;
 
@@ -68,11 +91,12 @@ class AttributesTable extends Component {
           <Variable
             value={value}
             variable={variable}
-            variableRegistry={variableRegistry}
+            variableRegistry={this.variableRegistry}
+            unusedVariables={this.unusedVariables}
             isEditing={isEditing}
             onChooseVariable={this.handleChooseVariable}
             onToggleEdit={() => this.handleEditVariable(variable)}
-            onDelete={() => deleteVariable(variable)}
+            onDelete={() => this.handleDeleteVariable(variable)}
           />
         </div>
       );
@@ -90,7 +114,7 @@ class AttributesTable extends Component {
       </FormSection>
     );
   }
-};
+}
 
 const mapStateToProps = (state, { name, form }) => ({
   values: form.getValues(state, name),
