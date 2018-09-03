@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import * as fields from '../../../../../ui/components/Fields';
+import { map } from 'lodash';
 import { Field } from 'redux-form';
-import { getProtocol } from '../../../../../selectors/protocol';
+import * as fields from '../../../../../ui/components/Fields';
 
 const VARIABLE_INPUT_TYPES = {
-  text: 'TextInput',
-  number: 'TextInput',
-  datetime: 'TextInput',
+  text: 'Text',
+  number: 'Text', // TODO: numeric only!
+  datetime: 'Text',
   boolean: 'Toggle',
   ordinal: 'RadioGroup',
   categorical: 'CheckboxGroup',
@@ -31,9 +31,13 @@ const getInput = (name, variableMeta) => {
   );
 };
 
-const VariableChooser = ({ variableRegistry }) => (
-  <div>
-
+const VariableChooser = ({ variableRegistry, onChooseVariable, show }) => (
+  <div className={cx('variable__chooser', { 'variable__chooser--show': show })}>
+    { map(variableRegistry, (variable, variableId) => (
+      <div onClick={(e) => { e.stopPropagation(); onChooseVariable(variableId); }} >
+        {variable.name}
+      </div>
+    )) }
   </div>
 );
 
@@ -45,8 +49,11 @@ const VariablePreview = ({ variable, value, onDelete }) => (
   </div>
 );
 
-const VariableEditor = ({ variable, variableMeta }) =>
-  getInput(variable, variableMeta);
+const VariableEditor = ({ variable, variableMeta, show }) => (
+  <div className={cx('variable__editor', { 'variable__editor--show': show })}>
+    {getInput(variable, variableMeta)}
+  </div>
+);
 
 const Variable = ({
   variable,
@@ -55,9 +62,10 @@ const Variable = ({
   isEditing,
   onToggleEdit,
   onDelete,
+  onChooseVariable,
   variableRegistry,
 }) => {
-  const isNew = variable === '_new';
+  const isNew = !variable;
 
   const variableClasses = cx(
     'variable',
@@ -68,9 +76,9 @@ const Variable = ({
   return (
     <div className={variableClasses} onClick={onToggleEdit}>
       { !isNew && <VariablePreview variable={variable} value={value} onDelete={onDelete} /> }
-      <div className="variable__editor">
-        { isNew && <VariableChooser variableRegistry={variableRegistry} /> }
-        { !isNew && <VariableEditor variable={variable} variableMeta={variableMeta} /> }
+      <div className="variable__edit">
+        <VariableChooser show={isNew} onChooseVariable={onChooseVariable} variableRegistry={variableRegistry} />
+        <VariableEditor show={!isNew} variable={variable} variableMeta={variableMeta} />
       </div>
     </div>
   );
