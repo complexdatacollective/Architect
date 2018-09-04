@@ -9,8 +9,11 @@ jest.mock('../../../../other/protocols');
 
 const mockState = {
   session: {
-    activeProtocol: { workingPath: '/tmp/foo/bar', archivePath: '/foo/bar' },
+    activeProtocol: '3c70bbaf-7ef8-4fd9-afaf-6ecd318ecb09',
   },
+  protocols: [
+    { id: '3c70bbaf-7ef8-4fd9-afaf-6ecd318ecb09', workingPath: '/tmp/foo/bar', filePath: '/foo/bar' },
+  ],
 };
 
 const log = jest.fn();
@@ -39,12 +42,12 @@ describe('protocol/assets', () => {
     it('calls importAssetToProtocol and fires complete action', () => {
       const store = getStore();
 
-      store.subscribe(() => {
-        expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', 'baz.jpg']]);
-        expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET_COMPLETE);
-      });
-
-      return store.dispatch(actionCreators.importAsset('baz.jpg'));
+      return store.dispatch(actionCreators.importAsset('baz.jpg'))
+        .then(() => {
+          expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
+          expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_COMPLETE);
+          expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', 'baz.jpg']]);
+        });
     });
 
     it('when importAssetToProtocol throws an error it fires failed action', () => {
@@ -55,12 +58,11 @@ describe('protocol/assets', () => {
 
       const store = getStore();
 
-      store.subscribe(() => {
+      return store.dispatch(actionCreators.importAsset('baz.jpg')).then(() => {
+        expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
+        expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
         expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', 'baz.jpg']]);
-        expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
       });
-
-      return store.dispatch(actionCreators.importAsset('baz.jpg'));
     });
   });
 });
