@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {
   Field,
   isDirty as isFieldDirty,
+  isInvalid as isFieldInvalid,
+  hasSubmitFailed as reduxHasSubmitFailed,
   FormSection,
   change,
   formValueSelector,
@@ -36,6 +38,8 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
 const Variable = ({
   fieldId,
   isDirty,
+  isInvalid,
+  hasSubmitFailed,
   form,
   variableType,
   resetOptions,
@@ -43,6 +47,7 @@ const Variable = ({
 }) => (
   <ExpandableItem
     open={isDirty}
+    lockOpen={isInvalid && hasSubmitFailed}
     preview={(
       <FormSection name={fieldId}>
         <h3 className="variable__preview-title">
@@ -131,6 +136,8 @@ Variable.propTypes = {
   isDirty: PropTypes.bool,
   resetOptions: PropTypes.func.isRequired,
   variableType: PropTypes.string,
+  isInvalid: PropTypes.bool.isRequired,
+  hasSubmitFailed: PropTypes.bool.isRequired,
 };
 
 Variable.defaultProps = {
@@ -140,6 +147,8 @@ Variable.defaultProps = {
 
 const mapStateToProps = (state, { form, fieldId }) => ({
   isDirty: isFieldDirty(form)(state, fieldId),
+  isInvalid: isFieldInvalid(form)(state, fieldId),
+  hasSubmitFailed: reduxHasSubmitFailed(form)(state),
   variableType: formValueSelector(form)(state, `${fieldId}.type`),
 });
 
