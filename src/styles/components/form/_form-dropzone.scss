@@ -1,31 +1,21 @@
 .form-dropzone {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border: unit(.2) dashed var(--architect-panel-background);
-  background: var(--color-white);
+  cursor: pointer;
+  padding: unit(1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+  background: var(--color-cyber-grape);
 
-  &::before {
+  &::after {
     @include preset('copy-standard');
-    padding: unit(1);
     content: 'Drop content here or click to upload';
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
   }
 
   &--replace {
-    &::before {
+    &::after {
       content: 'Drop content here or click to update';
-      height: 100%;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
   }
 }

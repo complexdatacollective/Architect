@@ -1,13 +1,21 @@
 $component-name: form-fields-audio;
 
 .#{$component-name} {
-  overflow: hidden;
-  pointer-events: none;
   background: var(--architect-panel-background);
+  min-height: 110px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  align-items: flex-end;
+
+  audio {
+    width: 100%;
+  }
+
+  &--complete {
+    .form-dropzone {
+      transform: translateY(0);
+      opacity: 1;
+      border-bottom: 0;
+    }
+  }
 }

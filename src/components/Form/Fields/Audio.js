@@ -1,5 +1,6 @@
 import React from 'react';
 import File from './File';
+import { Audio } from '../../Assets';
 
 const AudioInput = props => (
   <File
@@ -7,9 +8,9 @@ const AudioInput = props => (
     completeClassName="form-fields-audio--complete"
     {...props}
   >
-    { value => (
+    { url => (
       <div className="form-fields-audio">
-        { value }
+        <Audio url={url} controls />
       </div>
     ) }
   </File>
