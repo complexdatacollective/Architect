@@ -9,6 +9,8 @@ const mockProps = {
   fieldId: 'bar',
   handleDelete: jest.fn(),
   resetOptions: jest.fn(),
+  isInvalid: false,
+  hasSubmitFailed: false,
 };
 
 describe('<Variable />', () => {
