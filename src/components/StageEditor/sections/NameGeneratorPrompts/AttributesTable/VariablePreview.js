@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isBoolean, isArray } from 'lodash';
+import { Icon } from '../../../../../ui/components';
+
+const formatValue = (value) => {
+  if (isBoolean(value)) { return value ? <em>TRUE</em> : <em>FALSE</em>; }
+  if (isArray(value)) { return value.join(', '); }
+  return value;
+};
 
 const VariablePreview = ({ variable, value, onDelete }) => (
-  <div className="variable__preview">
-    <div className="variable__preview-name">{variable}</div>
-    <div className="variable__preview-value">{value}</div>
-    <div className="variable__preview-control" onClick={onDelete}>x</div>
+  <div className="attributes-table-preview">
+    <div className="attributes-table-preview__name">{variable}</div>
+    <div className="attributes-table-preview__value">{formatValue(value)}</div>
+    <div className="attributes-table-preview__delete" onClick={onDelete}>
+      <Icon name="delete" />
+    </div>
   </div>
 );
 

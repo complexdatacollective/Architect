@@ -1,0 +1,16 @@
+$duration: var(--animation-duration-standard);
+
+.attributes-table-editor {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: transform $duration, opacity $duration, max-height $duration;
+  transform: translateX(-100%);
+
+  &--show {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateX(0);
+    transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;
+  }
+}
