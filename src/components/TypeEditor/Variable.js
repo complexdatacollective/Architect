@@ -15,6 +15,7 @@ import * as ArchitectFields from '../Form/Fields';
 import Validations from './Validations';
 import Options from './Options';
 import ExpandableItem from '../Items/ExpandableItem';
+import { getFieldId } from '../../utils/issues';
 
 const VARIABLE_TYPES = [
   'text',
@@ -70,12 +71,14 @@ const Variable = ({
     <FormSection name={fieldId}>
       <Guidance contentId="guidance.registry.type.variable">
         <div>
+          <div id={getFieldId(`${fieldId}.name`)} data-name="Variable name" />
           <ValidatedField
             name="name"
             component={Fields.Text}
             label="Name"
             validation={{ required: true }}
           />
+          <div id={getFieldId(`${fieldId}.label`)} data-name="Variable label" />
           <ValidatedField
             name="label"
             component={Fields.Text}
@@ -87,6 +90,7 @@ const Variable = ({
             component={Fields.Text}
             label="Description"
           />
+          <div id={getFieldId(`${fieldId}.type`)} data-name="Variable type" />
           <ValidatedField
             name="type"
             className="form-field-container"

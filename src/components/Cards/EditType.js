@@ -62,14 +62,12 @@ class EditType extends PureComponent {
     category: PropTypes.string,
     type: PropTypes.string,
     hasUnsavedChanges: PropTypes.bool,
-    hasErrors: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
     show: PropTypes.bool,
   };
 
   static defaultProps = {
     show: true,
-    hasErrors: false,
     hasUnsavedChanges: false,
     category: null,
     type: null,
@@ -82,7 +80,6 @@ class EditType extends PureComponent {
         size="small"
         onClick={this.props.submitForm}
         iconPosition="right"
-        disabled={this.props.hasErrors}
       >
         Continue
       </Button>
