@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import { get } from 'lodash';
 import * as Fields from '../../../../components/Form/Fields';
-import { Item } from '../../Sortable';
+import { Item } from '../../../Items';
 
 const contentInputs = {
   text: Fields.Markdown,

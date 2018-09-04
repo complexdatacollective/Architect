@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ValidatedField } from '../../../Form';
 import Markdown from '../../../Form/Fields/Markdown';
 import VariableChooser from '../../../Form/Fields/VariableChooser';
-import { Item } from '../../Sortable';
+import { Item } from '../../../Items';
 import { getFieldId } from '../../../../utils/issues';
 
 const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (

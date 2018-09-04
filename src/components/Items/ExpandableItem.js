@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Icon } from '../../ui/components';
+import Handle from './Handle';
 import DeleteButton from './DeleteButton';
 
 class ExpandableItem extends Component {
   static propTypes = {
     className: PropTypes.string,
     open: PropTypes.bool,
+    sortable: PropTypes.bool,
     lockOpen: PropTypes.bool,
     handleDelete: PropTypes.func.isRequired,
     preview: PropTypes.node,
@@ -16,6 +18,7 @@ class ExpandableItem extends Component {
 
   static defaultProps = {
     className: null,
+    sortable: true,
     open: false,
     lockOpen: false,
     preview: null,
@@ -45,7 +48,12 @@ class ExpandableItem extends Component {
   }
 
   render() {
-    const { preview, children, handleDelete } = this.props;
+    const {
+      sortable,
+      preview,
+      children,
+      handleDelete,
+    } = this.props;
 
     const componentClasses = cx(
       'items-expandable-item',
@@ -57,6 +65,13 @@ class ExpandableItem extends Component {
     return (
       <div className={componentClasses}>
         <div className="items-expandable-item__preview">
+          { sortable &&
+            <div
+              className="items-expandable-item__control items-expandable-item__control--left"
+            >
+              <Handle />
+            </div>
+          }
           <div className="items-expandable-item__preview-content">
             {preview}
           </div>

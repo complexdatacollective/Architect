@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import SeamlessText from '../../../Form/Fields/SeamlessText';
 import Select from '../../../Form/Fields/Select';
 import Filter from '../../../Form/Fields/Filter';
-import { Item } from '../../Sortable';
+import { Item } from '../../../Items';
 
 const NodePanel = ({ fieldId, dataSources, ...rest }) => (
   <Item {...rest}>
