@@ -103,15 +103,16 @@ class AttributesTable extends Component {
     });
 
     return (
-      <FormSection name={name}>
-        <div className="attributes-table">
+      <div className="attributes-table">
+        <FormSection name={name} className="attributes-table__variables">
           {rows}
-        </div>
+        </FormSection>
+
         <RoundButton
           onClick={this.handleCreateVariable}
           className="attributes-table__add"
         />
-      </FormSection>
+      </div>
     );
   }
 }

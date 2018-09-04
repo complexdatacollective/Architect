@@ -4,10 +4,10 @@ import { map } from 'lodash';
 import cx from 'classnames';
 
 const VariableChooser = ({ unusedVariables, onChooseVariable, show }) => (
-  <div className={cx('variable__chooser', { 'variable__chooser--show': show })}>
+  <div className={cx('attributes-table-chooser', { 'attributes-table-chooser--show': show })}>
     { map(unusedVariables, (variable, variableId) => (
       <div
-        className="variable__chooser-variable"
+        className="attributes-table-chooser-variable"
         onClick={(e) => { e.stopPropagation(); onChooseVariable(variableId); }}
       >
         {variable.label}

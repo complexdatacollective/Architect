@@ -44,9 +44,9 @@ class Variable extends Component {
     } = this.props;
 
     const variableClasses = cx(
-      'variable',
-      { 'variable--edit': isEditing },
-      { 'variable--new': this.isNew },
+      'attributes-table-variable',
+      { 'attributes-table-variable--edit': isEditing },
+      { 'attributes-table-variable--new': this.isNew },
     );
 
     return (
@@ -55,9 +55,12 @@ class Variable extends Component {
         onClick={onToggleEdit}
       >
         { !this.isNew &&
-          <VariablePreview variable={variable} value={value} onDelete={onDelete} /> }
+          <div className="attributes-table-variable__preview">
+            <VariablePreview variable={variable} value={value} onDelete={onDelete} />
+          </div>
+        }
 
-        <div className="variable__edit">
+        <div className="attributes-table-variable__edit">
           <VariableChooser
             show={this.isNew}
             onChooseVariable={onChooseVariable}

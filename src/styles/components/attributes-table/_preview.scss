@@ -1,0 +1,37 @@
+.attributes-table-preview {
+  display: flex;
+  flex-direction: row;
+
+  &__name,
+  &__value,
+  &__delete {
+    padding: 0 unit(2);
+  }
+
+  &__name {
+    flex: 0 0 unit(25);
+    font-weight: 600;
+  }
+
+  &__value {
+    flex-grow: 1;
+  }
+
+  &__delete {
+    flex: 0 0 unit(4);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      width: unit(1);
+      height: unit(1);
+
+      .cls-1,
+      .cls-2 {
+        fill: var(--text-dark);
+      }
+    }
+  }
+}

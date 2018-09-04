@@ -31,7 +31,7 @@ const getInput = (name, variableMeta) => {
 };
 
 const VariableEditor = ({ name, variableMeta, show }) => (
-  <div className={cx('variable__editor', { 'variable__editor--show': show })}>
+  <div className={cx('attributes-table-editor', { 'attributes-table-editor--show': show })}>
     {getInput(name, variableMeta)}
   </div>
 );
