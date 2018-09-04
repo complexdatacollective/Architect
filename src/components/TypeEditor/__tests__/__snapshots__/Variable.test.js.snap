@@ -8,7 +8,9 @@ ShallowWrapper {
     fieldId="bar"
     form="foo"
     handleDelete={[Function]}
+    hasSubmitFailed={false}
     isDirty={false}
+    isInvalid={false}
     resetOptions={[Function]}
     variableType={null}
 />,
@@ -32,6 +34,10 @@ ShallowWrapper {
                 contentId="guidance.registry.type.variable"
         >
                 <div>
+                        <div
+                                data-name="Variable name"
+                                id="field_bar_name"
+                        />
                         <Validated
                                 component={[Function]}
                                 label="Name"
@@ -41,6 +47,10 @@ ShallowWrapper {
                                                 "required": true,
                                               }
                                 }
+                        />
+                        <div
+                                data-name="Variable label"
+                                id="field_bar_label"
                         />
                         <Validated
                                 component={[Function]}
@@ -56,6 +66,10 @@ ShallowWrapper {
                                 component={[Function]}
                                 label="Description"
                                 name="description"
+                        />
+                        <div
+                                data-name="Variable type"
+                                id="field_bar_type"
                         />
                         <Validated
                                 className="form-field-container"
@@ -133,6 +147,10 @@ ShallowWrapper {
           contentId="guidance.registry.type.variable"
 >
           <div>
+                    <div
+                              data-name="Variable name"
+                              id="field_bar_name"
+                    />
                     <Validated
                               component={[Function]}
                               label="Name"
@@ -142,6 +160,10 @@ ShallowWrapper {
                                                   "required": true,
                                                 }
                               }
+                    />
+                    <div
+                              data-name="Variable label"
+                              id="field_bar_label"
                     />
                     <Validated
                               component={[Function]}
@@ -157,6 +179,10 @@ ShallowWrapper {
                               component={[Function]}
                               label="Description"
                               name="description"
+                    />
+                    <div
+                              data-name="Variable type"
+                              id="field_bar_type"
                     />
                     <Validated
                               className="form-field-container"
@@ -200,6 +226,10 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <div>
+            <div
+                        data-name="Variable name"
+                        id="field_bar_name"
+            />
             <Validated
                         component={[Function]}
                         label="Name"
@@ -209,6 +239,10 @@ ShallowWrapper {
                                                 "required": true,
                                               }
                         }
+            />
+            <div
+                        data-name="Variable label"
+                        id="field_bar_label"
             />
             <Validated
                         component={[Function]}
@@ -224,6 +258,10 @@ ShallowWrapper {
                         component={[Function]}
                         label="Description"
                         name="description"
+            />
+            <div
+                        data-name="Variable type"
+                        id="field_bar_type"
             />
             <Validated
                         className="form-field-container"
@@ -265,6 +303,10 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
+              <div
+                data-name="Variable name"
+                id="field_bar_name"
+/>,
               <Validated
                 component={[Function]}
                 label="Name"
@@ -274,6 +316,10 @@ ShallowWrapper {
                                                 "required": true,
                                               }
                 }
+/>,
+              <div
+                data-name="Variable label"
+                id="field_bar_label"
 />,
               <Validated
                 component={[Function]}
@@ -289,6 +335,10 @@ ShallowWrapper {
                 component={[Function]}
                 label="Description"
                 name="description"
+/>,
+              <div
+                data-name="Variable type"
+                id="field_bar_type"
 />,
               <Validated
                 className="form-field-container"
@@ -329,6 +379,18 @@ ShallowWrapper {
             Object {
               "instance": null,
               "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "data-name": "Variable name",
+                "id": "field_bar_name",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
               "nodeType": "class",
               "props": Object {
                 "component": [Function],
@@ -341,6 +403,18 @@ ShallowWrapper {
               "ref": null,
               "rendered": null,
               "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "data-name": "Variable label",
+                "id": "field_bar_label",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "div",
             },
             Object {
               "instance": null,
@@ -370,6 +444,18 @@ ShallowWrapper {
               "ref": null,
               "rendered": null,
               "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "data-name": "Variable type",
+                "id": "field_bar_type",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "div",
             },
             Object {
               "instance": null,
@@ -440,6 +526,10 @@ ShallowWrapper {
                     contentId="guidance.registry.type.variable"
           >
                     <div>
+                              <div
+                                        data-name="Variable name"
+                                        id="field_bar_name"
+                              />
                               <Validated
                                         component={[Function]}
                                         label="Name"
@@ -449,6 +539,10 @@ ShallowWrapper {
                                                             "required": true,
                                                           }
                                         }
+                              />
+                              <div
+                                        data-name="Variable label"
+                                        id="field_bar_label"
                               />
                               <Validated
                                         component={[Function]}
@@ -464,6 +558,10 @@ ShallowWrapper {
                                         component={[Function]}
                                         label="Description"
                                         name="description"
+                              />
+                              <div
+                                        data-name="Variable type"
+                                        id="field_bar_type"
                               />
                               <Validated
                                         className="form-field-container"
@@ -541,6 +639,10 @@ ShallowWrapper {
             contentId="guidance.registry.type.variable"
 >
             <div>
+                        <div
+                                    data-name="Variable name"
+                                    id="field_bar_name"
+                        />
                         <Validated
                                     component={[Function]}
                                     label="Name"
@@ -550,6 +652,10 @@ ShallowWrapper {
                                                             "required": true,
                                                           }
                                     }
+                        />
+                        <div
+                                    data-name="Variable label"
+                                    id="field_bar_label"
                         />
                         <Validated
                                     component={[Function]}
@@ -565,6 +671,10 @@ ShallowWrapper {
                                     component={[Function]}
                                     label="Description"
                                     name="description"
+                        />
+                        <div
+                                    data-name="Variable type"
+                                    id="field_bar_type"
                         />
                         <Validated
                                     className="form-field-container"
@@ -608,6 +718,10 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <div>
+              <div
+                            data-name="Variable name"
+                            id="field_bar_name"
+              />
               <Validated
                             component={[Function]}
                             label="Name"
@@ -617,6 +731,10 @@ ShallowWrapper {
                                                         "required": true,
                                                       }
                             }
+              />
+              <div
+                            data-name="Variable label"
+                            id="field_bar_label"
               />
               <Validated
                             component={[Function]}
@@ -632,6 +750,10 @@ ShallowWrapper {
                             component={[Function]}
                             label="Description"
                             name="description"
+              />
+              <div
+                            data-name="Variable type"
+                            id="field_bar_type"
               />
               <Validated
                             className="form-field-container"
@@ -673,6 +795,10 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
+                <div
+                  data-name="Variable name"
+                  id="field_bar_name"
+/>,
                 <Validated
                   component={[Function]}
                   label="Name"
@@ -682,6 +808,10 @@ ShallowWrapper {
                                                       "required": true,
                                                     }
                   }
+/>,
+                <div
+                  data-name="Variable label"
+                  id="field_bar_label"
 />,
                 <Validated
                   component={[Function]}
@@ -697,6 +827,10 @@ ShallowWrapper {
                   component={[Function]}
                   label="Description"
                   name="description"
+/>,
+                <div
+                  data-name="Variable type"
+                  id="field_bar_type"
 />,
                 <Validated
                   className="form-field-container"
@@ -737,6 +871,18 @@ ShallowWrapper {
               Object {
                 "instance": null,
                 "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "data-name": "Variable name",
+                  "id": "field_bar_name",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
                 "nodeType": "class",
                 "props": Object {
                   "component": [Function],
@@ -749,6 +895,18 @@ ShallowWrapper {
                 "ref": null,
                 "rendered": null,
                 "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "data-name": "Variable label",
+                  "id": "field_bar_label",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "div",
               },
               Object {
                 "instance": null,
@@ -778,6 +936,18 @@ ShallowWrapper {
                 "ref": null,
                 "rendered": null,
                 "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "data-name": "Variable type",
+                  "id": "field_bar_type",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "div",
               },
               Object {
                 "instance": null,

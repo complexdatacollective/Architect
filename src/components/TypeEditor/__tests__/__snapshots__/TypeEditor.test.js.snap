@@ -56,7 +56,9 @@ ShallowWrapper {
           <div
                     className="editor__section"
           >
-                    <h2>
+                    <h2
+                              id="field_label"
+                    >
                               Label
                     </h2>
                     <Validated
@@ -76,7 +78,9 @@ ShallowWrapper {
           <div
                     className="editor__section"
           >
-                    <h2>
+                    <h2
+                              id="field_color"
+                    >
                               Color
                     </h2>
                     <Validated
@@ -173,7 +177,9 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
 >
-            <h2>
+            <h2
+                        id="field_label"
+            >
                         Label
             </h2>
             <Validated
@@ -195,7 +201,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2>
+              <h2
+                id="field_label"
+>
                 Label
 </h2>,
               <Validated
@@ -218,6 +226,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Label",
+                "id": "field_label",
               },
               "ref": null,
               "rendered": "Label",
@@ -251,7 +260,9 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
 >
-            <h2>
+            <h2
+                        id="field_color"
+            >
                         Color
             </h2>
             <Validated
@@ -274,7 +285,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2>
+              <h2
+                id="field_color"
+>
                 Color
 </h2>,
               <Validated
@@ -298,6 +311,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Color",
+                "id": "field_color",
               },
               "ref": null,
               "rendered": "Color",
@@ -421,7 +435,9 @@ ShallowWrapper {
             <div
                         className="editor__section"
             >
-                        <h2>
+                        <h2
+                                    id="field_label"
+                        >
                                     Label
                         </h2>
                         <Validated
@@ -441,7 +457,9 @@ ShallowWrapper {
             <div
                         className="editor__section"
             >
-                        <h2>
+                        <h2
+                                    id="field_color"
+                        >
                                     Color
                         </h2>
                         <Validated
@@ -538,7 +556,9 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
 >
-              <h2>
+              <h2
+                            id="field_label"
+              >
                             Label
               </h2>
               <Validated
@@ -560,7 +580,9 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2>
+                <h2
+                  id="field_label"
+>
                   Label
 </h2>,
                 <Validated
@@ -583,6 +605,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": "Label",
+                  "id": "field_label",
                 },
                 "ref": null,
                 "rendered": "Label",
@@ -616,7 +639,9 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
 >
-              <h2>
+              <h2
+                            id="field_color"
+              >
                             Color
               </h2>
               <Validated
@@ -639,7 +664,9 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2>
+                <h2
+                  id="field_color"
+>
                   Color
 </h2>,
                 <Validated
@@ -663,6 +690,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": "Color",
+                  "id": "field_color",
                 },
                 "ref": null,
                 "rendered": "Color",
@@ -825,7 +853,9 @@ ShallowWrapper {
           <div
                     className="editor__section"
           >
-                    <h2>
+                    <h2
+                              id="field_label"
+                    >
                               Label
                     </h2>
                     <Validated
@@ -845,7 +875,9 @@ ShallowWrapper {
           <div
                     className="editor__section"
           >
-                    <h2>
+                    <h2
+                              id="field_color"
+                    >
                               Color
                     </h2>
                     <Validated
@@ -867,7 +899,9 @@ ShallowWrapper {
                     <div
                               className="editor__section"
                     >
-                              <h2>
+                              <h2
+                                        id="field_iconVariant"
+                              >
                                         Icon
                               </h2>
                               <Validated
@@ -987,7 +1021,9 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
 >
-            <h2>
+            <h2
+                        id="field_label"
+            >
                         Label
             </h2>
             <Validated
@@ -1009,7 +1045,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2>
+              <h2
+                id="field_label"
+>
                 Label
 </h2>,
               <Validated
@@ -1032,6 +1070,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Label",
+                "id": "field_label",
               },
               "ref": null,
               "rendered": "Label",
@@ -1065,7 +1104,9 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
 >
-            <h2>
+            <h2
+                        id="field_color"
+            >
                         Color
             </h2>
             <Validated
@@ -1088,7 +1129,9 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2>
+              <h2
+                id="field_color"
+>
                 Color
 </h2>,
               <Validated
@@ -1112,6 +1155,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Color",
+                "id": "field_color",
               },
               "ref": null,
               "rendered": "Color",
@@ -1150,7 +1194,9 @@ ShallowWrapper {
               <div
                             className="editor__section"
               >
-                            <h2>
+                            <h2
+                                          id="field_iconVariant"
+                            >
                                           Icon
                             </h2>
                             <Validated
@@ -1200,7 +1246,9 @@ ShallowWrapper {
               "children": <div
                 className="editor__section"
 >
-                <h2>
+                <h2
+                                id="field_iconVariant"
+                >
                                 Icon
                 </h2>
                 <Validated
@@ -1224,7 +1272,9 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": Array [
-                  <h2>
+                  <h2
+                    id="field_iconVariant"
+>
                     Icon
 </h2>,
                   <Validated
@@ -1249,6 +1299,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": "Icon",
+                    "id": "field_iconVariant",
                   },
                   "ref": null,
                   "rendered": "Icon",
@@ -1471,7 +1522,9 @@ ShallowWrapper {
             <div
                         className="editor__section"
             >
-                        <h2>
+                        <h2
+                                    id="field_label"
+                        >
                                     Label
                         </h2>
                         <Validated
@@ -1491,7 +1544,9 @@ ShallowWrapper {
             <div
                         className="editor__section"
             >
-                        <h2>
+                        <h2
+                                    id="field_color"
+                        >
                                     Color
                         </h2>
                         <Validated
@@ -1513,7 +1568,9 @@ ShallowWrapper {
                         <div
                                     className="editor__section"
                         >
-                                    <h2>
+                                    <h2
+                                                id="field_iconVariant"
+                                    >
                                                 Icon
                                     </h2>
                                     <Validated
@@ -1633,7 +1690,9 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
 >
-              <h2>
+              <h2
+                            id="field_label"
+              >
                             Label
               </h2>
               <Validated
@@ -1655,7 +1714,9 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2>
+                <h2
+                  id="field_label"
+>
                   Label
 </h2>,
                 <Validated
@@ -1678,6 +1739,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": "Label",
+                  "id": "field_label",
                 },
                 "ref": null,
                 "rendered": "Label",
@@ -1711,7 +1773,9 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
 >
-              <h2>
+              <h2
+                            id="field_color"
+              >
                             Color
               </h2>
               <Validated
@@ -1734,7 +1798,9 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2>
+                <h2
+                  id="field_color"
+>
                   Color
 </h2>,
                 <Validated
@@ -1758,6 +1824,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": "Color",
+                  "id": "field_color",
                 },
                 "ref": null,
                 "rendered": "Color",
@@ -1796,7 +1863,9 @@ ShallowWrapper {
                 <div
                                 className="editor__section"
                 >
-                                <h2>
+                                <h2
+                                                id="field_iconVariant"
+                                >
                                                 Icon
                                 </h2>
                                 <Validated
@@ -1846,7 +1915,9 @@ ShallowWrapper {
                 "children": <div
                   className="editor__section"
 >
-                  <h2>
+                  <h2
+                                    id="field_iconVariant"
+                  >
                                     Icon
                   </h2>
                   <Validated
@@ -1870,7 +1941,9 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": Array [
-                    <h2>
+                    <h2
+                      id="field_iconVariant"
+>
                       Icon
 </h2>,
                     <Validated
@@ -1895,6 +1968,7 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": "Icon",
+                      "id": "field_iconVariant",
                     },
                     "ref": null,
                     "rendered": "Icon",

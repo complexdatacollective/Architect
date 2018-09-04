@@ -8,7 +8,7 @@ import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';
 import IconOption from './IconOption';
-
+import { getFieldId } from '../../utils/issues';
 
 const TypeEditor = ({
   toggleCodeView,
@@ -33,7 +33,7 @@ const TypeEditor = ({
 
     <Guidance contentId="guidance.registry.type.label">
       <div className="editor__section">
-        <h2>Label</h2>
+        <h2 id={getFieldId('label')}>Label</h2>
 
         <ValidatedField
           component={Fields.Text}
@@ -45,7 +45,7 @@ const TypeEditor = ({
 
     <Guidance contentId="guidance.registry.type.color">
       <div className="editor__section">
-        <h2>Color</h2>
+        <h2 id={getFieldId('color')}>Color</h2>
 
         <ValidatedField
           component={ArchitectFields.ColorPicker}
@@ -60,7 +60,7 @@ const TypeEditor = ({
       <React.Fragment>
         <Guidance contentId="guidance.registry.type.icon">
           <div className="editor__section">
-            <h2>Icon</h2>
+            <h2 id={getFieldId('iconVariant')}>Icon</h2>
 
             <ValidatedField
               component={Fields.RadioGroup}

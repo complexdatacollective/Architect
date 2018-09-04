@@ -7,7 +7,6 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <EditType
     category={null}
     createType={[Function]}
-    hasErrors={false}
     hasUnsavedChanges={false}
     initialValues={Object {}}
     onComplete={[Function]}

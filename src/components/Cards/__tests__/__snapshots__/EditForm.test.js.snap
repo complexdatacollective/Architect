@@ -8,7 +8,6 @@ ShallowWrapper {
     createForm={[Function]}
     form={Object {}}
     formName={null}
-    hasErrors={false}
     hasUnsavedChanges={false}
     onComplete={[Function]}
     show={true}

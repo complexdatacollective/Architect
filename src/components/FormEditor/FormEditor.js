@@ -8,6 +8,7 @@ import * as ArchitectFields from '../Form/Fields';
 import Guidance from '../Guidance';
 import Disable from '../Disable';
 import NodeType from './NodeType';
+import { getFieldId } from '../../utils/issues';
 
 const allowedTypes = ['text', 'number', 'boolean', 'ordinal', 'categorical'];
 
@@ -81,7 +82,7 @@ class FormEditor extends Component {
 
         <Guidance contentId="guidance.form.title">
           <div className="stage-editor-section">
-            <h2>Title</h2>
+            <h2 id={getFieldId('title')}>Title</h2>
             <ValidatedField
               name="title"
               component={ArchitectFields.SeamlessText}
@@ -93,7 +94,7 @@ class FormEditor extends Component {
 
         <Guidance contentId="guidance.form.type">
           <div className="stage-editor-section">
-            <h2>Node Type</h2>
+            <h2 id={getFieldId('type')}>Node Type</h2>
             <Disable
               disabled={!!this.props.nodeType}
               className="stage-editor__reset"

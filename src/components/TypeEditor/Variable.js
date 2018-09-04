@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {
   Field,
   isDirty as isFieldDirty,
+  isInvalid as isFieldInvalid,
+  hasSubmitFailed as reduxHasSubmitFailed,
   FormSection,
   change,
   formValueSelector,
@@ -15,6 +17,7 @@ import * as ArchitectFields from '../Form/Fields';
 import Validations from './Validations';
 import Options from './Options';
 import ExpandableItem from '../Items/ExpandableItem';
+import { getFieldId } from '../../utils/issues';
 
 const VARIABLE_TYPES = [
   'text',
@@ -35,6 +38,8 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
 const Variable = ({
   fieldId,
   isDirty,
+  isInvalid,
+  hasSubmitFailed,
   form,
   variableType,
   resetOptions,
@@ -42,6 +47,7 @@ const Variable = ({
 }) => (
   <ExpandableItem
     open={isDirty}
+    lockOpen={isInvalid && hasSubmitFailed}
     preview={(
       <FormSection name={fieldId}>
         <h3 className="variable__preview-title">
@@ -70,12 +76,14 @@ const Variable = ({
     <FormSection name={fieldId}>
       <Guidance contentId="guidance.registry.type.variable">
         <div>
+          <div id={getFieldId(`${fieldId}.name`)} data-name="Variable name" />
           <ValidatedField
             name="name"
             component={Fields.Text}
             label="Name"
             validation={{ required: true }}
           />
+          <div id={getFieldId(`${fieldId}.label`)} data-name="Variable label" />
           <ValidatedField
             name="label"
             component={Fields.Text}
@@ -87,6 +95,7 @@ const Variable = ({
             component={Fields.Text}
             label="Description"
           />
+          <div id={getFieldId(`${fieldId}.type`)} data-name="Variable type" />
           <ValidatedField
             name="type"
             className="form-field-container"
@@ -127,6 +136,8 @@ Variable.propTypes = {
   isDirty: PropTypes.bool,
   resetOptions: PropTypes.func.isRequired,
   variableType: PropTypes.string,
+  isInvalid: PropTypes.bool.isRequired,
+  hasSubmitFailed: PropTypes.bool.isRequired,
 };
 
 Variable.defaultProps = {
@@ -136,6 +147,8 @@ Variable.defaultProps = {
 
 const mapStateToProps = (state, { form, fieldId }) => ({
   isDirty: isFieldDirty(form)(state, fieldId),
+  isInvalid: isFieldInvalid(form)(state, fieldId),
+  hasSubmitFailed: reduxHasSubmitFailed(form)(state),
   variableType: formValueSelector(form)(state, `${fieldId}.type`),
 });
 

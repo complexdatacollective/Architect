@@ -20,7 +20,6 @@ class EditForm extends PureComponent {
     createForm: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
     hasUnsavedChanges: PropTypes.bool,
-    hasErrors: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
     show: PropTypes.bool,
   };
@@ -29,7 +28,6 @@ class EditForm extends PureComponent {
     formName: null,
     form: {},
     show: true,
-    hasErrors: false,
     hasUnsavedChanges: false,
   };
 
@@ -40,7 +38,6 @@ class EditForm extends PureComponent {
         size="small"
         onClick={this.props.submitForm}
         iconPosition="right"
-        disabled={this.props.hasErrors}
       >
         Continue
       </Button>

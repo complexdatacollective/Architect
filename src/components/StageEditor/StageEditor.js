@@ -6,7 +6,6 @@ import {
   formValueSelector,
   formPropTypes,
   getFormSyncErrors,
-  hasSubmitFailed,
 } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
@@ -27,7 +26,7 @@ class StageEditor extends Component {
 
   renderSections() {
     return this.sections.map((SectionComponent, index) =>
-      <SectionComponent key={index} form={form} hasSubmitFailed={this.props.hasSubmitFailed} />,
+      <SectionComponent key={index} form={form} hasSubmitFailed={this.props.submitFailed} />,
     );
   }
 
@@ -73,7 +72,6 @@ const mapStateToProps = (state, props) => {
   return {
     initialValues: props.stage,
     issues,
-    hasSubmitFailed: hasSubmitFailed(formName)(state),
   };
 };
 
