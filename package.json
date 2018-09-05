@@ -7,7 +7,7 @@
     "private": true,
     "engines": {
         "node": "8.11.1",
-        "npm": "5.8.0"
+        "npm": "6.4.1"
     },
     "scripts": {
         "pack": "electron-builder --dir",
@@ -104,7 +104,7 @@
         "react-markdown": "^3.3.4",
         "react-redux": "^4.4.5",
         "react-router-dom": "^4.3.1",
-        "react-scripts": "^1.1.4",
+        "react-scripts": "^1.1.5",
         "react-sortable-hoc": "^0.6.8",
         "react-transition-group": "^2.4.0",
         "recompose": "^0.26.0",
@@ -130,12 +130,12 @@
         "webpack": "^4.16.1",
         "webpack-dev-server": "^3.1.4",
         "webpack-manifest-plugin": "^2.0.3",
-        "whatwg-fetch": "2.0.3"
-    },
-    "dependencies": {
+        "whatwg-fetch": "2.0.3",
+        "npm": "^6.4.1",
         "react-error-overlay": "^5.0.0-next.3e165448",
         "thread-loader": "^1.1.5"
     },
+    "dependencies": {},
     "homepage": ".",
     "main": "www/electron-starter.js",
     "browserslist": [
