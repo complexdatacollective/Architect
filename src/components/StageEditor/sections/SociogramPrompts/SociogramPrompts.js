@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import Guidance from '../../../Guidance';
 import SociogramPrompt from './SociogramPrompt';
-import { Items, NewButton } from '../../Sortable';
+import { Items, NewButton } from '../../../Items';
 import ValidatedFieldArray from '../../../Form/ValidatedFieldArray';
 import { getFieldId } from '../../../../utils/issues';
 

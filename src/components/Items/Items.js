@@ -1,24 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose, withHandlers, defaultProps, renameProp } from 'recompose';
 import { TransitionGroup } from 'react-transition-group';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 import WipeTransition from '../Transitions/Wipe';
 
-const Items = ({ fields, meta: { error }, itemComponent: ItemComponent, ...rest }) => (
+const SortableItem = SortableElement(
+  ({ children }) => (
+    <div className="items__item">
+      { children }
+    </div>
+  ),
+);
+
+const Items = ({
+  fields,
+  meta: { error, dirty },
+  itemComponent: ItemComponent,
+  disabled: sortable,
+  ...rest
+}) => (
   <div className="items">
-    { error && <p className="items__error">{error}</p> }
+    { dirty && error && <p className="items__error">{error}</p> }
     <TransitionGroup className="items__items">
       { fields.map((fieldId, index) => (
         <WipeTransition key={get(fields.get(index), 'id', index)}>
-          <div className="items__item">
+          <SortableItem index={index}>
             <ItemComponent
               fieldId={fieldId}
               index={index}
               fields={fields}
               handleDelete={() => { fields.remove(index); }}
+              sortable={sortable}
               {...rest}
             />
-          </div>
+          </SortableItem>
         </WipeTransition>
       )) }
     </TransitionGroup>
@@ -30,6 +48,7 @@ Items.propTypes = {
   meta: PropTypes.object.isRequired,
   itemComponent: PropTypes.func.isRequired,
   getId: PropTypes.func,
+  disabled: PropTypes.bool.isRequired,
 };
 
 Items.defaultProps = {
@@ -38,4 +57,16 @@ Items.defaultProps = {
 
 export { Items };
 
-export default Items;
+export default compose(
+  defaultProps({
+    lockAxis: 'y',
+    useDragHandle: true,
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+    sortable: true,
+  }),
+  renameProp('sortable', 'disabled'),
+  withHandlers({
+    onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
+  }),
+  SortableContainer,
+)(Items);

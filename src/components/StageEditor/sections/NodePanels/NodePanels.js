@@ -7,7 +7,7 @@ import uuid from 'uuid';
 import cx from 'classnames';
 import { keys, has, get } from 'lodash';
 import Guidance from '../../../Guidance';
-import { Items, NewButton } from '../../Sortable';
+import { Items, NewButton } from '../../../Items';
 import NodePanel from './NodePanel';
 
 const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => {

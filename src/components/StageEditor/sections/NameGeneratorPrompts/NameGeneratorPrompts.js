@@ -9,7 +9,7 @@ import uuid from 'uuid';
 import cx from 'classnames';
 import Guidance from '../../../Guidance';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
-import { Items, NewButton } from '../../Sortable';
+import { Items, NewButton } from '../../../Items';
 import ValidatedFieldArray from '../../../Form/ValidatedFieldArray';
 import { getFieldId } from '../../../../utils/issues';
 

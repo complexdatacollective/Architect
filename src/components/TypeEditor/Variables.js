@@ -15,6 +15,7 @@ const Variables = ({
   <React.Fragment>
     <FieldArray
       name={name}
+      sortable={false}
       component={Items}
       itemComponent={Variable}
       form={form}
