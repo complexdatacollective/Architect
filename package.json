@@ -130,13 +130,12 @@
         "webpack": "^4.16.1",
         "webpack-dev-server": "^3.1.4",
         "webpack-manifest-plugin": "^2.0.3",
-        "whatwg-fetch": "2.0.3"
-    },
-    "dependencies": {
+        "whatwg-fetch": "2.0.3",
         "npm": "^6.4.1",
         "react-error-overlay": "^5.0.0-next.3e165448",
         "thread-loader": "^1.1.5"
     },
+    "dependencies": {},
     "homepage": ".",
     "main": "www/electron-starter.js",
     "browserslist": [
