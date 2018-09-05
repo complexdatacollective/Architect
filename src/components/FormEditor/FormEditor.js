@@ -66,18 +66,11 @@ class FormEditor extends Component {
       nodeTypes,
       variables,
       toggleCodeView,
-      dirty,
-      valid,
     } = this.props;
 
     return (
       <div>
         <h1>Edit Form</h1>
-        { dirty && !valid && (
-          <p style={{ color: 'var(--error)' }}>
-            There are some errors that need to be fixed before this can be saved!
-          </p>
-        ) }
         <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
         <Guidance contentId="guidance.form.title">
@@ -146,8 +139,6 @@ class FormEditor extends Component {
 
 FormEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
-  dirty: PropTypes.bool.isRequired,
-  valid: PropTypes.bool.isRequired,
   resetFields: PropTypes.func.isRequired,
   nodeType: PropTypes.string,
   variables: PropTypes.object.isRequired,

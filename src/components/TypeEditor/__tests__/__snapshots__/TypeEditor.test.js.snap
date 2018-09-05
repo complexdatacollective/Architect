@@ -40,7 +40,6 @@ ShallowWrapper {
           Create 
           edge
 </h1>,
-        false,
         <small>
           (
           <a
@@ -134,7 +133,6 @@ ShallowWrapper {
         ],
         "type": "h1",
       },
-      false,
       Object {
         "instance": null,
         "key": undefined,
@@ -419,7 +417,6 @@ ShallowWrapper {
             Create 
             edge
 </h1>,
-          false,
           <small>
             (
             <a
@@ -513,7 +510,6 @@ ShallowWrapper {
           ],
           "type": "h1",
         },
-        false,
         Object {
           "instance": null,
           "key": undefined,
@@ -837,7 +833,6 @@ ShallowWrapper {
           Create 
           node
 </h1>,
-        false,
         <small>
           (
           <a
@@ -978,7 +973,6 @@ ShallowWrapper {
         ],
         "type": "h1",
       },
-      false,
       Object {
         "instance": null,
         "key": undefined,
@@ -1506,7 +1500,6 @@ ShallowWrapper {
             Create 
             node
 </h1>,
-          false,
           <small>
             (
             <a
@@ -1647,7 +1640,6 @@ ShallowWrapper {
           ],
           "type": "h1",
         },
-        false,
         Object {
           "instance": null,
           "key": undefined,

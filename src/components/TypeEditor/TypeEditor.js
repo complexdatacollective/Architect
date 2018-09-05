@@ -15,8 +15,6 @@ const TypeEditor = ({
   form,
   category,
   type,
-  dirty,
-  valid,
   colorOptions,
   iconOptions,
   displayVariables,
@@ -24,11 +22,6 @@ const TypeEditor = ({
   <div className="type-editor editor__sections">
     { type && <h1>Edit {category}</h1> }
     { !type && <h1>Create {category}</h1> }
-    { dirty && !valid && (
-      <p style={{ color: 'var(--error)' }}>
-        There are some errors that need to be fixed before this can be saved!
-      </p>
-    ) }
     <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
     <Guidance contentId="guidance.registry.type.label">
@@ -102,8 +95,6 @@ const TypeEditor = ({
 
 TypeEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
-  dirty: PropTypes.bool.isRequired,
-  valid: PropTypes.bool.isRequired,
   type: PropTypes.string,
   colorOptions: PropTypes.shape({
     node: PropTypes.array.isRequired,
