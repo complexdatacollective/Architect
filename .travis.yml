@@ -7,6 +7,8 @@ node_js:
 cache:
   directories:
     - node_modules # NPM packages
+before_install:
+  - npm install -g npm@6.4.1
 install:
   - npm install
 jobs:
