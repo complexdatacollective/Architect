@@ -8,7 +8,7 @@
     },
     "parser": "babel-eslint",
     "parserOptions": {
-        ecmaVersion: 7,
+        "ecmaVersion": 7,
         "ecmaFeatures": {
             "jsx": true,
             "spread": true,
@@ -20,11 +20,11 @@
     "plugins": ["react"],
     "rules": {
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-      "react/forbid-prop-types": "off",  // We use configuration objects a lot
-      "react/no-array-index-key": "off",  // Many things don't need ids
+      "react/forbid-prop-types": "off",
+      "react/no-array-index-key": "off",
       "jsx-a11y/no-static-element-interactions": "off",
       "import/no-extraneous-dependencies": "off",
-      "import/no-named-as-default": "off",  // So that we can use `export { Component };` for tests
-      "no-mixed-operators": [1, {"allowSamePrecedence": true}]  // Use mathematical precidence, rather than enforcing brackets
+      "import/no-named-as-default": "off",
+      "no-mixed-operators": [1, {"allowSamePrecedence": true}]
     }
 }
