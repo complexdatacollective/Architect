@@ -2,7 +2,6 @@ $component-name: form-fields-audio;
 
 .#{$component-name} {
   background: var(--architect-panel-background);
-  min-height: 130px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -13,6 +12,7 @@ $component-name: form-fields-audio;
 
   &--complete {
     .form-dropzone {
+      position: static !important; // sass-lint:disable-line no-important
       transform: translateY(0);
       opacity: 1;
       border-bottom: 0;
