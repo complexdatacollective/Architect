@@ -1,0 +1,21 @@
+.form-dropzone {
+  cursor: pointer;
+  padding: unit(1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+  background: var(--color-cyber-grape);
+
+  &::after {
+    @include preset('copy-standard');
+    content: 'Drop content here or click to upload';
+
+  }
+
+  &--replace {
+    &::after {
+      content: 'Drop content here or click to update';
+    }
+  }
+}

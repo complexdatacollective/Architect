@@ -55,12 +55,7 @@ class FileInput extends PureComponent {
         { label &&
           <div className="form-fields-file__label">{label}</div>
         }
-        <div className="form-fields-file__dropzone">
-          { value &&
-            <div className="form-fields-file__dropzone-preview">
-              {this.props.children(value)}
-            </div>
-          }
+        <div className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}>
           <Dropzone
             onDrop={this.onDrop}
             multiple={false}
@@ -71,6 +66,11 @@ class FileInput extends PureComponent {
             rejectClassName="form-dropzone--reject"
             disabledClassName="form-dropzone--disabled"
           />
+          { value &&
+            <div className="form-fields-file__preview">
+              {this.props.children(value)}
+            </div>
+          }
         </div>
       </div>
     );

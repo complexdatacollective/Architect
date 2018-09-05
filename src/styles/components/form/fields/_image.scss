@@ -1,12 +1,10 @@
 $component-name: form-fields-image;
 
 .#{$component-name} {
-  min-height: unit(30);
   max-width: 100%;
   background: var(--architect-panel-background);
 
   &__image {
     max-width: 100%;
-    min-height: unit(30);
   }
 }
