@@ -7,6 +7,8 @@ const isMacOS = () => process.platform === 'darwin';
 
 const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false } : {};
 
+let window;
+
 function getAppUrl() {
   if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
     return url.format({
@@ -21,26 +23,24 @@ function getAppUrl() {
   });
 }
 
-function setApplicationMenu(window) {
-  return new Promise((resolve) => {
-    const appMenu = Menu.buildFromTemplate(mainMenu(window));
-    Menu.setApplicationMenu(appMenu);
-
-    resolve(window);
-  });
+function setApplicationMenu(appWindow) {
+  const appMenu = Menu.buildFromTemplate(mainMenu(appWindow));
+  Menu.setApplicationMenu(appMenu);
 }
 
-function loadApp(window) {
-  return new Promise((resolve) => {
-    window.webContents.on('did-finish-load', () => resolve(window));
+function loadApp(appWindow, cb) {
+  appWindow.webContents.on('did-finish-load', cb);
 
-    window.loadURL(getAppUrl());
-  });
+  appWindow.loadURL(getAppUrl());
 }
 
 function createWindow() {
+  if (window) { return Promise.resolve(window); }
+
   return new Promise((resolve) => {
     // Create the browser window.
+    console.log('make window');
+
     const windowParameters = Object.assign({
       width: 1440,
       height: 900,
@@ -62,33 +62,25 @@ function createWindow() {
       mainWindow.openDevTools();
     }
 
-    resolve(mainWindow);
+    window = mainWindow;
+
+    window.on('closed', () => {
+      // Dereference the window object, usually you would store windows
+      // in an array if your app supports multi windows, this is the time
+      // when you should delete the corresponding element.
+      window = null;
+    });
+
+    setApplicationMenu(window);
+
+    loadApp(window, () => resolve(window));
   });
 }
 
 const windowManager = {
-  window: null,
-  get hasWindow() { return !!this.window; },
+  get hasWindow() { return !!window; },
   getWindow: function getWindow() {
-    if (this.window) { return Promise.resolve(this.window); }
-
-    console.log('make window');
-
-    return createWindow()
-      .then((window) => {
-        this.window = window;
-
-        this.window.on('closed', () => {
-          // Dereference the window object, usually you would store windows
-          // in an array if your app supports multi windows, this is the time
-          // when you should delete the corresponding element.
-          this.window = null;
-        });
-
-        return window;
-      })
-      .then(setApplicationMenu)
-      .then(loadApp);
+    return createWindow();
   },
 };
 
