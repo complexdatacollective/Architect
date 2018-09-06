@@ -1,16 +1,84 @@
+:root {
+  $platinum--dark: rgb(218, 227, 229);
+  --architect-form-selector-card: var(--color-platinum);
+  --architect-form-selector-no-form: #{darken($platinum--dark, 20%)};
+  --architect-form-selector-selected: var(--architect-selected);
+}
+
 .stage-editor-section-form {
-  display: flex;
+  .form-field-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-  &__category {
-    margin: 0 unit(3) unit(1) 0;
+  .form-field {
+    background-color: var(--background);
+    margin: 0;
+    padding: 0;
+  }
 
-    &--disabled {
-      pointer-events: none;
-      opacity: .5;
+  &__cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &__card {
+    flex: 0 0 200px;
+    height: 140px;
+    cursor: pointer;
+    background: var(--architect-form-selector-card);
+    margin: 0 unit(1) unit(1) 0;
+    font-weight: 600;
+    background-image: url('../images/form-card.svg');
+    background-position: 50% 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border-width: unit(.2);
+    border-style: solid;
+    border-color: var(--background);
+    padding: unit(2);
+    transition: border-color var(--animation-duration-standard) var(--animation-easing);
+
+    &--selected {
+      border-color: var(--architect-form-selector-selected);
+    }
+
+    &--empty {
+      background-image: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-style: italic;
+      color: var(--architect-form-selector-no-form);
     }
   }
 
-  &__custom {
-    margin: 0 0 0 unit(3.5);
+  &__new-form {
+
+    &-button {
+      width: unit(6);
+      height: unit(6);
+      cursor: pointer;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--architect-edit-button-background);
+      border-radius: 50%;
+
+      .icon {
+        width: unit(2);
+        height: unit(2);
+
+        .cls-1 {
+          fill: var(--architect-edit-button-fill);
+        }
+      }
+    }
   }
 }
