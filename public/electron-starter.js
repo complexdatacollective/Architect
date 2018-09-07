@@ -22,6 +22,7 @@ if (shouldQuit) {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   appManager.start();
+  appManager.loadDevTools();
 });
 
 // Quit when all windows are closed.
