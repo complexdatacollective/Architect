@@ -1,0 +1,18 @@
+
+<svg width="170px" height="102px" viewBox="0 0 170 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="170" height="102"></rect>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FormCard">
+            <g id="Group-Copy-3">
+                <rect id="Rectangle" fill="#D8D8D8" fill-rule="nonzero" mask="url(#mask-2)" x="12" y="54" width="127" height="19" rx="5"></rect>
+                <rect id="Rectangle-Copy-2" fill="#D8D8D8" fill-rule="nonzero" mask="url(#mask-2)" x="12" y="92" width="127" height="19" rx="5"></rect>
+                <path d="M16.5,43.25 L89.5,43.25" id="Line" stroke="#979797" stroke-width="4" stroke-linecap="square" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                <path d="M16.5,82.25 L89.5,82.25" id="Line" stroke="#979797" stroke-width="4" stroke-linecap="square" fill-rule="nonzero" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

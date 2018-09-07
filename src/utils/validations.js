@@ -1,4 +1,4 @@
-import { keys, pickBy, map, toPairs } from 'lodash';
+import { keys, pickBy, map, toPairs, isUndefined } from 'lodash';
 
 const coerceArray = (value) => {
   if (value instanceof Object) {
@@ -13,6 +13,9 @@ const coerceArray = (value) => {
 export const required = () =>
   value =>
     (value ? undefined : 'Required');
+export const requiredAcceptsNull = () =>
+  value =>
+    (!isUndefined(value) ? undefined : 'Required');
 export const maxLength = max =>
   value =>
     (value && value.length > max ? `Must be ${max} characters or less` : undefined);
@@ -36,6 +39,7 @@ export const maxSelected = max =>
 
 const validations = {
   required,
+  requiredAcceptsNull,
   minLength,
   maxLength,
   minValue,
