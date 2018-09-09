@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "4.0.0-alpha.3",
+    "version": "4.0.0-alpha.4",
     "productName": "Network Canvas Architect",
     "description": "A tool for creating Network Canvas interviews.",
     "author": "Complex Data Collective",
@@ -78,7 +78,7 @@
         "history": "^4.7.2",
         "html-webpack-plugin": "^3.2.0",
         "icon-gen": "^1.2.1",
-        "jest": "^20.0.4",
+        "jest": "^23.4.0",
         "jsdoc": "^3.4.3",
         "jsdoc-babel": "^0.3.0",
         "json-loader": "^0.5.7",
@@ -87,6 +87,7 @@
         "mkdirp": "^0.5.1",
         "network-canvas-ui": "git+https://github.com/codaco/Network-Canvas-UI.git#1.13.3",
         "node-sass": "^4.9.2",
+        "npm": "^6.4.1",
         "object-assign": "4.1.1",
         "path-to-regexp": "^2.2.1",
         "postcss-flexbugs-fixes": "3.2.0",
@@ -99,6 +100,7 @@
         "react-dev-utils": "^6.0.0-next.3e165448",
         "react-dom": "^16.4.1",
         "react-dropzone": "^4.2.13",
+        "react-error-overlay": "^5.0.0-next.3e165448",
         "react-fastclick": "^3.0.2",
         "react-flip-toolkit": "^4.0.2",
         "react-markdown": "^3.3.4",
@@ -125,15 +127,13 @@
         "scrollparent": "^2.0.1",
         "style-loader": "^0.21.0",
         "svg2png": "^4.1.1",
+        "thread-loader": "^1.1.5",
         "url-loader": "^1.0.1",
         "uuid": "^3.3.2",
         "webpack": "^4.16.1",
         "webpack-dev-server": "^3.1.4",
         "webpack-manifest-plugin": "^2.0.3",
-        "whatwg-fetch": "2.0.3",
-        "npm": "^6.4.1",
-        "react-error-overlay": "^5.0.0-next.3e165448",
-        "thread-loader": "^1.1.5"
+        "whatwg-fetch": "2.0.3"
     },
     "dependencies": {},
     "homepage": ".",
@@ -178,7 +178,7 @@
             "<rootDir>/config/polyfills.js",
             "<rootDir>/config/jest/polyfills.js",
             "<rootDir>/config/jest/enzyme.js",
-            "<rootDir>/config/jest/automock.js"
+            "<rootDir>/config(/jest/automock.js"
         ],
         "testPathIgnorePatterns": [
             "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]"
