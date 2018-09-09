@@ -11,7 +11,7 @@ class Guided extends Component {
   static propTypes = {
     contentId: PropTypes.string.isRequired,
     setGuidance: PropTypes.func.isRequired,
-    clearGuidance: PropTypes.func.isRequired,
+    unsetGuidance: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     interaction: PropTypes.oneOf([
       MOUSE,
@@ -45,7 +45,7 @@ class Guided extends Component {
   }
 
   handleMouseLeave = () => {
-    this.props.clearGuidance();
+    this.props.unsetGuidance();
   }
 
   handleFocus = () => {
@@ -53,7 +53,7 @@ class Guided extends Component {
   }
 
   handleBlur = () => {
-    this.props.clearGuidance();
+    this.props.unsetGuidance();
   }
 
   render() {
@@ -66,7 +66,7 @@ class Guided extends Component {
 
 const mapDispatchToProps = dispatch => ({
   setGuidance: bindActionCreators(guidedActionCreators.setGuidance, dispatch),
-  clearGuidance: bindActionCreators(guidedActionCreators.resetGuidance, dispatch),
+  unsetGuidance: bindActionCreators(guidedActionCreators.unsetGuidance, dispatch),
 });
 
 export { Guided };
