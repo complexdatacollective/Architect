@@ -4,62 +4,45 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators as guidedActionCreators } from '../ducks/modules/guidance';
 
-const MOUSE = 'MOUSE';
-const FOCUS = 'FOCUS';
-
 class Guided extends Component {
   static propTypes = {
     contentId: PropTypes.string.isRequired,
     setGuidance: PropTypes.func.isRequired,
     unsetGuidance: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
-    interaction: PropTypes.oneOf([
-      MOUSE,
-      FOCUS,
-    ]),
+    focus: PropTypes.bool,
   };
 
   static defaultProps = {
-    interaction: MOUSE,
+    focus: false,
   };
 
-  get interactionHandlers() {
-    switch (this.props.interaction) {
-      case MOUSE:
-        return {
-          onMouseEnter: this.handleMouseEnter,
-          onMouseLeave: this.handleMouseLeave,
-        };
-      case FOCUS:
-        return {
-          onFocus: this.handleFocus,
-          onBlur: this.handleBlur,
-        };
-      default:
-        return {};
+  interactionHandlers() {
+    if (this.props.focus) {
+      return {
+        onFocus: this.handleSet,
+        onBlur: this.handleUnset,
+      };
     }
+
+    return {
+      onMouseEnter: this.handleSet,
+      onMouseLeave: this.handleUnset,
+    };
   }
 
-  handleMouseEnter = () => {
-    this.props.setGuidance(this.props.contentId);
+  handleSet = () => {
+    this.props.setGuidance(this.props.contentId, this.props.focus ? 'focus' : 'mouse');
   }
 
-  handleMouseLeave = () => {
-    this.props.unsetGuidance();
-  }
-
-  handleFocus = () => {
-    this.props.setGuidance(this.props.contentId);
-  }
-
-  handleBlur = () => {
-    this.props.unsetGuidance();
+  handleUnset = () => {
+    this.props.unsetGuidance(this.props.focus ? 'focus' : 'mouse');
   }
 
   render() {
     return React.cloneElement(
       this.props.children,
-      this.interactionHandlers,
+      this.interactionHandlers(),
     );
   }
 }

@@ -23,13 +23,6 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.editor.title.field': (
-    <Fragment>
-      <p>
-        This explanation is specific to the field!
-      </p>
-    </Fragment>
-  ),
   'guidance.editor.content_items': (
     <Fragment>
       <h3>Content Items help</h3>

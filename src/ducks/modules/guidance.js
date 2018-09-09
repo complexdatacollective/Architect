@@ -23,15 +23,17 @@ const unsetGuidance = (name = 'default') =>
 
 function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case SET_GUIDANCE:
+    case SET_GUIDANCE: {
+      const history = state.history.filter(({ name }) => name !== action.name);
       return {
         ...state,
         history: [
-          ...state.history,
+          ...history,
           { name: action.name, id: action.id },
         ],
         id: action.id,
       };
+    }
     case UNSET_GUIDANCE: {
       const history = state.history.filter(({ name }) => name !== action.name);
 

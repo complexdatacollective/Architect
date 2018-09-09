@@ -39,6 +39,21 @@ describe('guidance reducer', () => {
           id: 'bazz',
         });
     });
+
+    it('duplicate names are replaced', () => {
+      const result = flow(
+        state => reducer(state, actionCreators.setGuidance('foo', 'bar')),
+        state => reducer(state, actionCreators.setGuidance('bazz', 'bar')),
+      )(undefined);
+
+      expect(result)
+        .toEqual({
+          history: [
+            { id: 'bazz', name: 'bar' },
+          ],
+          id: 'bazz',
+        });
+    });
   });
 
   describe('unsetGuidance', () => {
