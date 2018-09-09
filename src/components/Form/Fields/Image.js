@@ -1,6 +1,6 @@
 import React from 'react';
 import File from './File';
-import { Image } from '../../Assets';
+import { BackgroundImage } from '../../Assets';
 
 const ImageInput = props => (
   <File
@@ -9,7 +9,7 @@ const ImageInput = props => (
   >
     { url => (
       <div className="form-fields-image">
-        <Image url={url} alt={url} className="form-fields-image__image" />
+        <BackgroundImage url={url} className="form-fields-image__image" />
       </div>
     ) }
   </File>

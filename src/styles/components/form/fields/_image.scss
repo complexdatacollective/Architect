@@ -5,6 +5,10 @@ $component-name: form-fields-image;
   background: var(--architect-panel-background);
 
   &__image {
-    max-width: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 30vh;
   }
 }
