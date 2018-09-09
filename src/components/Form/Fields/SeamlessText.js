@@ -27,6 +27,7 @@ class SeamlessTextInput extends PureComponent {
       className,
       placeholder,
       type,
+      ...rest
     } = this.props;
 
     const seamlessClasses = cx(
@@ -45,6 +46,7 @@ class SeamlessTextInput extends PureComponent {
           placeholder={placeholder}
           type={type}
           {...input}
+          {...rest}
         />
         <Icon name="edit" className="form-fields-seamless-text__icon form-fields-seamless-text__icon--edit" />
         <Icon name="close" className="form-fields-seamless-text__icon form-fields-seamless-text__icon--error" />

@@ -14,6 +14,7 @@ const Name = () => (
         component={SeamlessText}
         placeholder="Enter your stage name here"
         className="stage-editor-section-title"
+        maxlength="12"
         validation={{ required: true }}
       />
     </div>
