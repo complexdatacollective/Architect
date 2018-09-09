@@ -9,15 +9,15 @@ const mockProps = {
   resetActiveProtocol: () => {},
 };
 
-const platform = global.process.platform;
+const process = global.process;
 
 describe('<App />', () => {
   afterAll(() => {
-    global.process.platform = platform;
+    global.process = process;
   });
 
   it('renders with titlebar on darwin', () => {
-    global.process.platform = 'darwin';
+    global.process = { ...global.process, platform: 'darwin' };
 
     const component = shallow(<App {...mockProps} />);
 
@@ -26,7 +26,7 @@ describe('<App />', () => {
   });
 
   it('renders without titlebar on not darwin', () => {
-    global.process.platform = 'windows';
+    global.process = { ...global.process, platform: 'windows' };
 
     const component = shallow(<App {...mockProps} />);
 
