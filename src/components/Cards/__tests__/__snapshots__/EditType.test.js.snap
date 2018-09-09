@@ -14,7 +14,7 @@ ShallowWrapper {
     submitForm={[Function]}
     type={null}
     updateType={[Function]}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],

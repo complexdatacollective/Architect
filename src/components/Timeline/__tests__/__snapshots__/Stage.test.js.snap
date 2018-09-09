@@ -12,7 +12,7 @@ ShallowWrapper {
     onEditStage={[Function]}
     onInsertStage={[Function]}
     type="Foo"
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -29,64 +29,64 @@ ShallowWrapper {
         <div
           className="timeline-stage__notch"
           onClick={[Function]}
-/>,
+        />,
         <getContext(Draft(Component))
           label=""
           onEditStage={[Function]}
           type="Foo"
           zoomColors={
-                    Array [
-                              "#227733",
-                              "#ffffff",
-                            ]
+            Array [
+              "#227733",
+              "#ffffff",
+            ]
           }
-/>,
+        />,
         <div
           className="timeline-stage__controls"
->
+        >
           <a
-                    className="timeline-stage__control"
-                    onClick={[Function]}
+            className="timeline-stage__control"
+            onClick={[Function]}
           >
-                    <div
-                              className="timeline-stage__control-icon"
-                    >
-                              ↑
-                    </div>
-                    Add screen before
+            <div
+              className="timeline-stage__control-icon"
+            >
+              ↑
+            </div>
+            Add screen before
           </a>
           <getContext(Draft(Component))
-                    onEditSkipLogic={[Function]}
-                    zoomColors={
-                              Array [
-                                        "#ffffff",
-                                        "#f2b700",
-                                      ]
-                    }
+            onEditSkipLogic={[Function]}
+            zoomColors={
+              Array [
+                "#ffffff",
+                "#f2b700",
+              ]
+            }
           />
           <a
-                    className="timeline-stage__control"
-                    onClick={[Function]}
+            className="timeline-stage__control"
+            onClick={[Function]}
           >
-                    <div
-                              className="timeline-stage__control-icon"
-                    >
-                              ✕
-                    </div>
-                    Delete stage
+            <div
+              className="timeline-stage__control-icon"
+            >
+              ✕
+            </div>
+            Delete stage
           </a>
           <a
-                    className="timeline-stage__control"
-                    onClick={[Function]}
+            className="timeline-stage__control"
+            onClick={[Function]}
           >
-                    <div
-                              className="timeline-stage__control-icon"
-                    >
-                              ↓
-                    </div>
-                    Add screen after
+            <div
+              className="timeline-stage__control-icon"
+            >
+              ↓
+            </div>
+            Add screen after
           </a>
-</div>,
+        </div>,
       ],
       "className": "timeline-stage",
     },
@@ -130,45 +130,45 @@ ShallowWrapper {
             <a
               className="timeline-stage__control"
               onClick={[Function]}
->
+            >
               <div
-                            className="timeline-stage__control-icon"
+                className="timeline-stage__control-icon"
               >
-                            ↑
+                ↑
               </div>
               Add screen before
-</a>,
+            </a>,
             <getContext(Draft(Component))
               onEditSkipLogic={[Function]}
               zoomColors={
-                            Array [
-                                          "#ffffff",
-                                          "#f2b700",
-                                        ]
+                Array [
+                  "#ffffff",
+                  "#f2b700",
+                ]
               }
-/>,
+            />,
             <a
               className="timeline-stage__control"
               onClick={[Function]}
->
+            >
               <div
-                            className="timeline-stage__control-icon"
+                className="timeline-stage__control-icon"
               >
-                            ✕
+                ✕
               </div>
               Delete stage
-</a>,
+            </a>,
             <a
               className="timeline-stage__control"
               onClick={[Function]}
->
+            >
               <div
-                            className="timeline-stage__control-icon"
+                className="timeline-stage__control-icon"
               >
-                            ↓
+                ↓
               </div>
               Add screen after
-</a>,
+            </a>,
           ],
           "className": "timeline-stage__controls",
         },
@@ -182,9 +182,9 @@ ShallowWrapper {
               "children": Array [
                 <div
                   className="timeline-stage__control-icon"
->
+                >
                   ↑
-</div>,
+                </div>,
                 "Add screen before",
               ],
               "className": "timeline-stage__control",
@@ -231,9 +231,9 @@ ShallowWrapper {
               "children": Array [
                 <div
                   className="timeline-stage__control-icon"
->
+                >
                   ✕
-</div>,
+                </div>,
                 "Delete stage",
               ],
               "className": "timeline-stage__control",
@@ -265,9 +265,9 @@ ShallowWrapper {
               "children": Array [
                 <div
                   className="timeline-stage__control-icon"
->
+                >
                   ↓
-</div>,
+                </div>,
                 "Add screen after",
               ],
               "className": "timeline-stage__control",
@@ -307,64 +307,64 @@ ShallowWrapper {
           <div
             className="timeline-stage__notch"
             onClick={[Function]}
-/>,
+          />,
           <getContext(Draft(Component))
             label=""
             onEditStage={[Function]}
             type="Foo"
             zoomColors={
-                        Array [
-                                    "#227733",
-                                    "#ffffff",
-                                  ]
+              Array [
+                "#227733",
+                "#ffffff",
+              ]
             }
-/>,
+          />,
           <div
             className="timeline-stage__controls"
->
+          >
             <a
-                        className="timeline-stage__control"
-                        onClick={[Function]}
+              className="timeline-stage__control"
+              onClick={[Function]}
             >
-                        <div
-                                    className="timeline-stage__control-icon"
-                        >
-                                    ↑
-                        </div>
-                        Add screen before
+              <div
+                className="timeline-stage__control-icon"
+              >
+                ↑
+              </div>
+              Add screen before
             </a>
             <getContext(Draft(Component))
-                        onEditSkipLogic={[Function]}
-                        zoomColors={
-                                    Array [
-                                                "#ffffff",
-                                                "#f2b700",
-                                              ]
-                        }
+              onEditSkipLogic={[Function]}
+              zoomColors={
+                Array [
+                  "#ffffff",
+                  "#f2b700",
+                ]
+              }
             />
             <a
-                        className="timeline-stage__control"
-                        onClick={[Function]}
+              className="timeline-stage__control"
+              onClick={[Function]}
             >
-                        <div
-                                    className="timeline-stage__control-icon"
-                        >
-                                    ✕
-                        </div>
-                        Delete stage
+              <div
+                className="timeline-stage__control-icon"
+              >
+                ✕
+              </div>
+              Delete stage
             </a>
             <a
-                        className="timeline-stage__control"
-                        onClick={[Function]}
+              className="timeline-stage__control"
+              onClick={[Function]}
             >
-                        <div
-                                    className="timeline-stage__control-icon"
-                        >
-                                    ↓
-                        </div>
-                        Add screen after
+              <div
+                className="timeline-stage__control-icon"
+              >
+                ↓
+              </div>
+              Add screen after
             </a>
-</div>,
+          </div>,
         ],
         "className": "timeline-stage",
       },
@@ -408,45 +408,45 @@ ShallowWrapper {
               <a
                 className="timeline-stage__control"
                 onClick={[Function]}
->
+              >
                 <div
-                                className="timeline-stage__control-icon"
+                  className="timeline-stage__control-icon"
                 >
-                                ↑
+                  ↑
                 </div>
                 Add screen before
-</a>,
+              </a>,
               <getContext(Draft(Component))
                 onEditSkipLogic={[Function]}
                 zoomColors={
-                                Array [
-                                                "#ffffff",
-                                                "#f2b700",
-                                              ]
+                  Array [
+                    "#ffffff",
+                    "#f2b700",
+                  ]
                 }
-/>,
+              />,
               <a
                 className="timeline-stage__control"
                 onClick={[Function]}
->
+              >
                 <div
-                                className="timeline-stage__control-icon"
+                  className="timeline-stage__control-icon"
                 >
-                                ✕
+                  ✕
                 </div>
                 Delete stage
-</a>,
+              </a>,
               <a
                 className="timeline-stage__control"
                 onClick={[Function]}
->
+              >
                 <div
-                                className="timeline-stage__control-icon"
+                  className="timeline-stage__control-icon"
                 >
-                                ↓
+                  ↓
                 </div>
                 Add screen after
-</a>,
+              </a>,
             ],
             "className": "timeline-stage__controls",
           },
@@ -460,9 +460,9 @@ ShallowWrapper {
                 "children": Array [
                   <div
                     className="timeline-stage__control-icon"
->
+                  >
                     ↑
-</div>,
+                  </div>,
                   "Add screen before",
                 ],
                 "className": "timeline-stage__control",
@@ -509,9 +509,9 @@ ShallowWrapper {
                 "children": Array [
                   <div
                     className="timeline-stage__control-icon"
->
+                  >
                     ✕
-</div>,
+                  </div>,
                   "Delete stage",
                 ],
                 "className": "timeline-stage__control",
@@ -543,9 +543,9 @@ ShallowWrapper {
                 "children": Array [
                   <div
                     className="timeline-stage__control-icon"
->
+                  >
                     ↓
-</div>,
+                  </div>,
                   "Add screen after",
                 ],
                 "className": "timeline-stage__control",

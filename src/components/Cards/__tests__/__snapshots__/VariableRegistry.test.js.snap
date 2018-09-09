@@ -10,12 +10,12 @@ ShallowWrapper {
     protocolPath=""
     show={true}
     variableRegistry={
-        Object {
-            "edge": Object {},
-            "node": Object {},
-          }
+      Object {
+        "edge": Object {},
+        "node": Object {},
+      }
     }
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -36,75 +36,73 @@ ShallowWrapper {
           iconPosition="right"
           onClick={[Function]}
           size="small"
->
+        >
           Back
-</Button>,
+        </Button>,
       ],
       "children": <div
         className="editor variable-registry"
->
+      >
         <Connect(Guided)
-                className="editor__sections"
+          className="editor__sections"
         >
-                <h1>
-                        Variable Registry
-                </h1>
-                <Connect(Guided)
-                        contentId="guidance.registry.nodes"
+          <h1>
+            Variable Registry
+          </h1>
+          <Connect(Guided)
+            contentId="guidance.registry.nodes"
+          >
+            <div
+              className="editor__section"
+            >
+              <h2>
+                Node Types
+              </h2>
+              <div
+                className="editor__subsection"
+              >
+                <div
+                  className="list"
                 >
-                        <div
-                                className="editor__section"
-                        >
-                                <h2>
-                                        Node Types
-                                </h2>
-                                <div
-                                        className="editor__subsection"
-                                >
-                                        <div
-                                                className="list"
-                                        >
-                                                <TransitionGroup
-                                                        childFactory={[Function]}
-                                                        component="div"
-                                                >
-                                                        
-                                                </TransitionGroup>
-                                        </div>
-                                </div>
-                                
-                        </div>
-                </Connect(Guided)>
-                <Connect(Guided)
-                        contentId="guidance.registry.edges"
+                  <TransitionGroup
+                    childFactory={[Function]}
+                    component="div"
+                  />
+                </div>
+              </div>
+              
+            </div>
+          </Connect(Guided)>
+          <Connect(Guided)
+            contentId="guidance.registry.edges"
+          >
+            <div
+              className="editor__section"
+            >
+              <h2>
+                Edge Types
+              </h2>
+              <div
+                className="editor__subsection"
+              >
+                <div
+                  className="list"
                 >
-                        <div
-                                className="editor__section"
-                        >
-                                <h2>
-                                        Edge Types
-                                </h2>
-                                <div
-                                        className="editor__subsection"
-                                >
-                                        <div
-                                                className="list"
-                                        >
-                                                <TransitionGroup
-                                                        childFactory={[Function]}
-                                                        component="div"
-                                                >
-                                                        
-                                                </TransitionGroup>
-                                        </div>
-                                </div>
-                                <div
-                                        className="editor__subsection"
-                                />
-                        </div>
-                </Connect(Guided)>
+                  <TransitionGroup
+                    childFactory={[Function]}
+                    component="div"
+                  />
+                </div>
+              </div>
+              <div
+                className="editor__subsection"
+              >
+                
+              </div>
+            </div>
+          </Connect(Guided)>
         </Connect(Guided)>
-</div>,
+      </div>,
       "enterDelay": 0,
       "enterDuration": 100,
       "exitDelay": 0,
@@ -122,65 +120,63 @@ ShallowWrapper {
       "props": Object {
         "children": <Connect(Guided)
           className="editor__sections"
->
+        >
           <h1>
-                    Variable Registry
+            Variable Registry
           </h1>
           <Connect(Guided)
-                    contentId="guidance.registry.nodes"
+            contentId="guidance.registry.nodes"
           >
-                    <div
-                              className="editor__section"
-                    >
-                              <h2>
-                                        Node Types
-                              </h2>
-                              <div
-                                        className="editor__subsection"
-                              >
-                                        <div
-                                                  className="list"
-                                        >
-                                                  <TransitionGroup
-                                                            childFactory={[Function]}
-                                                            component="div"
-                                                  >
-                                                            
-                                                  </TransitionGroup>
-                                        </div>
-                              </div>
-                              
-                    </div>
+            <div
+              className="editor__section"
+            >
+              <h2>
+                Node Types
+              </h2>
+              <div
+                className="editor__subsection"
+              >
+                <div
+                  className="list"
+                >
+                  <TransitionGroup
+                    childFactory={[Function]}
+                    component="div"
+                  />
+                </div>
+              </div>
+              
+            </div>
           </Connect(Guided)>
           <Connect(Guided)
-                    contentId="guidance.registry.edges"
+            contentId="guidance.registry.edges"
           >
-                    <div
-                              className="editor__section"
-                    >
-                              <h2>
-                                        Edge Types
-                              </h2>
-                              <div
-                                        className="editor__subsection"
-                              >
-                                        <div
-                                                  className="list"
-                                        >
-                                                  <TransitionGroup
-                                                            childFactory={[Function]}
-                                                            component="div"
-                                                  >
-                                                            
-                                                  </TransitionGroup>
-                                        </div>
-                              </div>
-                              <div
-                                        className="editor__subsection"
-                              />
-                    </div>
+            <div
+              className="editor__section"
+            >
+              <h2>
+                Edge Types
+              </h2>
+              <div
+                className="editor__subsection"
+              >
+                <div
+                  className="list"
+                >
+                  <TransitionGroup
+                    childFactory={[Function]}
+                    component="div"
+                  />
+                </div>
+              </div>
+              <div
+                className="editor__subsection"
+              >
+                
+              </div>
+            </div>
           </Connect(Guided)>
-</Connect(Guided)>,
+        </Connect(Guided)>,
         "className": "editor variable-registry",
       },
       "ref": null,
@@ -192,61 +188,59 @@ ShallowWrapper {
           "children": Array [
             <h1>
               Variable Registry
-</h1>,
+            </h1>,
             <Connect(Guided)
               contentId="guidance.registry.nodes"
->
+            >
               <div
-                            className="editor__section"
+                className="editor__section"
               >
-                            <h2>
-                                          Node Types
-                            </h2>
-                            <div
-                                          className="editor__subsection"
-                            >
-                                          <div
-                                                        className="list"
-                                          >
-                                                        <TransitionGroup
-                                                                      childFactory={[Function]}
-                                                                      component="div"
-                                                        >
-                                                                      
-                                                        </TransitionGroup>
-                                          </div>
-                            </div>
-                            
+                <h2>
+                  Node Types
+                </h2>
+                <div
+                  className="editor__subsection"
+                >
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
+                </div>
+                
               </div>
-</Connect(Guided)>,
+            </Connect(Guided)>,
             <Connect(Guided)
               contentId="guidance.registry.edges"
->
+            >
               <div
-                            className="editor__section"
+                className="editor__section"
               >
-                            <h2>
-                                          Edge Types
-                            </h2>
-                            <div
-                                          className="editor__subsection"
-                            >
-                                          <div
-                                                        className="list"
-                                          >
-                                                        <TransitionGroup
-                                                                      childFactory={[Function]}
-                                                                      component="div"
-                                                        >
-                                                                      
-                                                        </TransitionGroup>
-                                          </div>
-                            </div>
-                            <div
-                                          className="editor__subsection"
-                            />
+                <h2>
+                  Edge Types
+                </h2>
+                <div
+                  className="editor__subsection"
+                >
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="editor__subsection"
+                >
+                  
+                </div>
               </div>
-</Connect(Guided)>,
+            </Connect(Guided)>,
           ],
           "className": "editor__sections",
         },
@@ -270,26 +264,24 @@ ShallowWrapper {
             "props": Object {
               "children": <div
                 className="editor__section"
->
+              >
                 <h2>
-                                Node Types
+                  Node Types
                 </h2>
                 <div
-                                className="editor__subsection"
+                  className="editor__subsection"
                 >
-                                <div
-                                                className="list"
-                                >
-                                                <TransitionGroup
-                                                                childFactory={[Function]}
-                                                                component="div"
-                                                >
-                                                                
-                                                </TransitionGroup>
-                                </div>
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
                 </div>
                 
-</div>,
+              </div>,
               "contentId": "guidance.registry.nodes",
             },
             "ref": null,
@@ -301,21 +293,19 @@ ShallowWrapper {
                 "children": Array [
                   <h2>
                     Node Types
-</h2>,
+                  </h2>,
                   <div
                     className="editor__subsection"
->
+                  >
                     <div
-                                        className="list"
+                      className="list"
                     >
-                                        <TransitionGroup
-                                                            childFactory={[Function]}
-                                                            component="div"
-                                        >
-                                                            
-                                        </TransitionGroup>
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
                     </div>
-</div>,
+                  </div>,
                   "",
                 ],
                 "className": "editor__section",
@@ -340,14 +330,12 @@ ShallowWrapper {
                   "props": Object {
                     "children": <div
                       className="list"
->
+                    >
                       <TransitionGroup
-                                            childFactory={[Function]}
-                                            component="div"
-                      >
-                                            
-                      </TransitionGroup>
-</div>,
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>,
                     "className": "editor__subsection",
                   },
                   "ref": null,
@@ -359,9 +347,7 @@ ShallowWrapper {
                       "children": <TransitionGroup
                         childFactory={[Function]}
                         component="div"
->
-                        
-</TransitionGroup>,
+                      />,
                       "className": "list",
                     },
                     "ref": null,
@@ -395,28 +381,28 @@ ShallowWrapper {
             "props": Object {
               "children": <div
                 className="editor__section"
->
+              >
                 <h2>
-                                Edge Types
+                  Edge Types
                 </h2>
                 <div
-                                className="editor__subsection"
+                  className="editor__subsection"
                 >
-                                <div
-                                                className="list"
-                                >
-                                                <TransitionGroup
-                                                                childFactory={[Function]}
-                                                                component="div"
-                                                >
-                                                                
-                                                </TransitionGroup>
-                                </div>
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
                 </div>
                 <div
-                                className="editor__subsection"
-                />
-</div>,
+                  className="editor__subsection"
+                >
+                  
+                </div>
+              </div>,
               "contentId": "guidance.registry.edges",
             },
             "ref": null,
@@ -428,24 +414,24 @@ ShallowWrapper {
                 "children": Array [
                   <h2>
                     Edge Types
-</h2>,
+                  </h2>,
                   <div
                     className="editor__subsection"
->
+                  >
                     <div
-                                        className="list"
+                      className="list"
                     >
-                                        <TransitionGroup
-                                                            childFactory={[Function]}
-                                                            component="div"
-                                        >
-                                                            
-                                        </TransitionGroup>
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
                     </div>
-</div>,
+                  </div>,
                   <div
                     className="editor__subsection"
-/>,
+                  >
+                    
+                  </div>,
                 ],
                 "className": "editor__section",
               },
@@ -469,14 +455,12 @@ ShallowWrapper {
                   "props": Object {
                     "children": <div
                       className="list"
->
+                    >
                       <TransitionGroup
-                                            childFactory={[Function]}
-                                            component="div"
-                      >
-                                            
-                      </TransitionGroup>
-</div>,
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>,
                     "className": "editor__subsection",
                   },
                   "ref": null,
@@ -488,9 +472,7 @@ ShallowWrapper {
                       "children": <TransitionGroup
                         childFactory={[Function]}
                         component="div"
->
-                        
-</TransitionGroup>,
+                      />,
                       "className": "list",
                     },
                     "ref": null,
@@ -549,75 +531,73 @@ ShallowWrapper {
             iconPosition="right"
             onClick={[Function]}
             size="small"
->
+          >
             Back
-</Button>,
+          </Button>,
         ],
         "children": <div
           className="editor variable-registry"
->
+        >
           <Connect(Guided)
-                    className="editor__sections"
+            className="editor__sections"
           >
-                    <h1>
-                              Variable Registry
-                    </h1>
-                    <Connect(Guided)
-                              contentId="guidance.registry.nodes"
-                    >
-                              <div
-                                        className="editor__section"
-                              >
-                                        <h2>
-                                                  Node Types
-                                        </h2>
-                                        <div
-                                                  className="editor__subsection"
-                                        >
-                                                  <div
-                                                            className="list"
-                                                  >
-                                                            <TransitionGroup
-                                                                      childFactory={[Function]}
-                                                                      component="div"
-                                                            >
-                                                                      
-                                                            </TransitionGroup>
-                                                  </div>
-                                        </div>
-                                        
-                              </div>
-                    </Connect(Guided)>
-                    <Connect(Guided)
-                              contentId="guidance.registry.edges"
-                    >
-                              <div
-                                        className="editor__section"
-                              >
-                                        <h2>
-                                                  Edge Types
-                                        </h2>
-                                        <div
-                                                  className="editor__subsection"
-                                        >
-                                                  <div
-                                                            className="list"
-                                                  >
-                                                            <TransitionGroup
-                                                                      childFactory={[Function]}
-                                                                      component="div"
-                                                            >
-                                                                      
-                                                            </TransitionGroup>
-                                                  </div>
-                                        </div>
-                                        <div
-                                                  className="editor__subsection"
-                                        />
-                              </div>
-                    </Connect(Guided)>
+            <h1>
+              Variable Registry
+            </h1>
+            <Connect(Guided)
+              contentId="guidance.registry.nodes"
+            >
+              <div
+                className="editor__section"
+              >
+                <h2>
+                  Node Types
+                </h2>
+                <div
+                  className="editor__subsection"
+                >
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
+                </div>
+                
+              </div>
+            </Connect(Guided)>
+            <Connect(Guided)
+              contentId="guidance.registry.edges"
+            >
+              <div
+                className="editor__section"
+              >
+                <h2>
+                  Edge Types
+                </h2>
+                <div
+                  className="editor__subsection"
+                >
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="editor__subsection"
+                >
+                  
+                </div>
+              </div>
+            </Connect(Guided)>
           </Connect(Guided)>
-</div>,
+        </div>,
         "enterDelay": 0,
         "enterDuration": 100,
         "exitDelay": 0,
@@ -635,65 +615,63 @@ ShallowWrapper {
         "props": Object {
           "children": <Connect(Guided)
             className="editor__sections"
->
+          >
             <h1>
-                        Variable Registry
+              Variable Registry
             </h1>
             <Connect(Guided)
-                        contentId="guidance.registry.nodes"
+              contentId="guidance.registry.nodes"
             >
-                        <div
-                                    className="editor__section"
-                        >
-                                    <h2>
-                                                Node Types
-                                    </h2>
-                                    <div
-                                                className="editor__subsection"
-                                    >
-                                                <div
-                                                            className="list"
-                                                >
-                                                            <TransitionGroup
-                                                                        childFactory={[Function]}
-                                                                        component="div"
-                                                            >
-                                                                        
-                                                            </TransitionGroup>
-                                                </div>
-                                    </div>
-                                    
-                        </div>
+              <div
+                className="editor__section"
+              >
+                <h2>
+                  Node Types
+                </h2>
+                <div
+                  className="editor__subsection"
+                >
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
+                </div>
+                
+              </div>
             </Connect(Guided)>
             <Connect(Guided)
-                        contentId="guidance.registry.edges"
+              contentId="guidance.registry.edges"
             >
-                        <div
-                                    className="editor__section"
-                        >
-                                    <h2>
-                                                Edge Types
-                                    </h2>
-                                    <div
-                                                className="editor__subsection"
-                                    >
-                                                <div
-                                                            className="list"
-                                                >
-                                                            <TransitionGroup
-                                                                        childFactory={[Function]}
-                                                                        component="div"
-                                                            >
-                                                                        
-                                                            </TransitionGroup>
-                                                </div>
-                                    </div>
-                                    <div
-                                                className="editor__subsection"
-                                    />
-                        </div>
+              <div
+                className="editor__section"
+              >
+                <h2>
+                  Edge Types
+                </h2>
+                <div
+                  className="editor__subsection"
+                >
+                  <div
+                    className="list"
+                  >
+                    <TransitionGroup
+                      childFactory={[Function]}
+                      component="div"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="editor__subsection"
+                >
+                  
+                </div>
+              </div>
             </Connect(Guided)>
-</Connect(Guided)>,
+          </Connect(Guided)>,
           "className": "editor variable-registry",
         },
         "ref": null,
@@ -705,61 +683,59 @@ ShallowWrapper {
             "children": Array [
               <h1>
                 Variable Registry
-</h1>,
+              </h1>,
               <Connect(Guided)
                 contentId="guidance.registry.nodes"
->
+              >
                 <div
-                                className="editor__section"
+                  className="editor__section"
                 >
-                                <h2>
-                                                Node Types
-                                </h2>
-                                <div
-                                                className="editor__subsection"
-                                >
-                                                <div
-                                                                className="list"
-                                                >
-                                                                <TransitionGroup
-                                                                                childFactory={[Function]}
-                                                                                component="div"
-                                                                >
-                                                                                
-                                                                </TransitionGroup>
-                                                </div>
-                                </div>
-                                
+                  <h2>
+                    Node Types
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                  
                 </div>
-</Connect(Guided)>,
+              </Connect(Guided)>,
               <Connect(Guided)
                 contentId="guidance.registry.edges"
->
+              >
                 <div
-                                className="editor__section"
+                  className="editor__section"
                 >
-                                <h2>
-                                                Edge Types
-                                </h2>
-                                <div
-                                                className="editor__subsection"
-                                >
-                                                <div
-                                                                className="list"
-                                                >
-                                                                <TransitionGroup
-                                                                                childFactory={[Function]}
-                                                                                component="div"
-                                                                >
-                                                                                
-                                                                </TransitionGroup>
-                                                </div>
-                                </div>
-                                <div
-                                                className="editor__subsection"
-                                />
+                  <h2>
+                    Edge Types
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="editor__subsection"
+                  >
+                    
+                  </div>
                 </div>
-</Connect(Guided)>,
+              </Connect(Guided)>,
             ],
             "className": "editor__sections",
           },
@@ -783,26 +759,24 @@ ShallowWrapper {
               "props": Object {
                 "children": <div
                   className="editor__section"
->
+                >
                   <h2>
-                                    Node Types
+                    Node Types
                   </h2>
                   <div
-                                    className="editor__subsection"
+                    className="editor__subsection"
                   >
-                                    <div
-                                                      className="list"
-                                    >
-                                                      <TransitionGroup
-                                                                        childFactory={[Function]}
-                                                                        component="div"
-                                                      >
-                                                                        
-                                                      </TransitionGroup>
-                                    </div>
+                    <div
+                      className="list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
                   </div>
                   
-</div>,
+                </div>,
                 "contentId": "guidance.registry.nodes",
               },
               "ref": null,
@@ -814,21 +788,19 @@ ShallowWrapper {
                   "children": Array [
                     <h2>
                       Node Types
-</h2>,
+                    </h2>,
                     <div
                       className="editor__subsection"
->
+                    >
                       <div
-                                            className="list"
+                        className="list"
                       >
-                                            <TransitionGroup
-                                                                  childFactory={[Function]}
-                                                                  component="div"
-                                            >
-                                                                  
-                                            </TransitionGroup>
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
                       </div>
-</div>,
+                    </div>,
                     "",
                   ],
                   "className": "editor__section",
@@ -853,14 +825,12 @@ ShallowWrapper {
                     "props": Object {
                       "children": <div
                         className="list"
->
+                      >
                         <TransitionGroup
-                                                childFactory={[Function]}
-                                                component="div"
-                        >
-                                                
-                        </TransitionGroup>
-</div>,
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>,
                       "className": "editor__subsection",
                     },
                     "ref": null,
@@ -872,9 +842,7 @@ ShallowWrapper {
                         "children": <TransitionGroup
                           childFactory={[Function]}
                           component="div"
->
-                          
-</TransitionGroup>,
+                        />,
                         "className": "list",
                       },
                       "ref": null,
@@ -908,28 +876,28 @@ ShallowWrapper {
               "props": Object {
                 "children": <div
                   className="editor__section"
->
+                >
                   <h2>
-                                    Edge Types
+                    Edge Types
                   </h2>
                   <div
-                                    className="editor__subsection"
+                    className="editor__subsection"
                   >
-                                    <div
-                                                      className="list"
-                                    >
-                                                      <TransitionGroup
-                                                                        childFactory={[Function]}
-                                                                        component="div"
-                                                      >
-                                                                        
-                                                      </TransitionGroup>
-                                    </div>
+                    <div
+                      className="list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
                   </div>
                   <div
-                                    className="editor__subsection"
-                  />
-</div>,
+                    className="editor__subsection"
+                  >
+                    
+                  </div>
+                </div>,
                 "contentId": "guidance.registry.edges",
               },
               "ref": null,
@@ -941,24 +909,24 @@ ShallowWrapper {
                   "children": Array [
                     <h2>
                       Edge Types
-</h2>,
+                    </h2>,
                     <div
                       className="editor__subsection"
->
+                    >
                       <div
-                                            className="list"
+                        className="list"
                       >
-                                            <TransitionGroup
-                                                                  childFactory={[Function]}
-                                                                  component="div"
-                                            >
-                                                                  
-                                            </TransitionGroup>
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
                       </div>
-</div>,
+                    </div>,
                     <div
                       className="editor__subsection"
-/>,
+                    >
+                      
+                    </div>,
                   ],
                   "className": "editor__section",
                 },
@@ -982,14 +950,12 @@ ShallowWrapper {
                     "props": Object {
                       "children": <div
                         className="list"
->
+                      >
                         <TransitionGroup
-                                                childFactory={[Function]}
-                                                component="div"
-                        >
-                                                
-                        </TransitionGroup>
-</div>,
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>,
                       "className": "editor__subsection",
                     },
                     "ref": null,
@@ -1001,9 +967,7 @@ ShallowWrapper {
                         "children": <TransitionGroup
                           childFactory={[Function]}
                           component="div"
->
-                          
-</TransitionGroup>,
+                        />,
                         "className": "list",
                       },
                       "ref": null,

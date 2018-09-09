@@ -10,7 +10,7 @@ ShallowWrapper {
     name=""
     show={true}
     variableRegistry={Object {}}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -25,74 +25,70 @@ ShallowWrapper {
     "props": Object {
       "children": <div
         className="overview"
->
+      >
         <div
-                className="overview__panel"
+          className="overview__panel"
         >
-                <h1
-                        className="overview__name"
-                />
-                <div
-                        className="overview__groups"
+          <h1
+            className="overview__name"
+          >
+            
+          </h1>
+          <div
+            className="overview__groups"
+          >
+            <div
+              className="overview__group"
+            >
+              <h3
+                className="overview__group-title"
+              >
+                Variable registry
+              </h3>
+              <br />
+              <h4>
+                Node types
+              </h4>
+              <div />
+              <br />
+              <h4>
+                Edge types
+              </h4>
+              <div />
+              <div
+                className="overview__manage-button"
+              >
+                <Connect(ProtocolLink)
+                  className="button button--small"
+                  to="registry"
                 >
-                        <div
-                                className="overview__group"
-                        >
-                                <h3
-                                        className="overview__group-title"
-                                >
-                                        Variable registry
-                                </h3>
-                                <br />
-                                <h4>
-                                        Node types
-                                </h4>
-                                <div>
-                                        
-                                </div>
-                                <br />
-                                <h4>
-                                        Edge types
-                                </h4>
-                                <div>
-                                        
-                                </div>
-                                <div
-                                        className="overview__manage-button"
-                                >
-                                        <Connect(ProtocolLink)
-                                                className="button button--small"
-                                                to="registry"
-                                        >
-                                                Manage registry
-                                        </Connect(ProtocolLink)>
-                                </div>
-                        </div>
-                        <div
-                                className="overview__group"
-                        >
-                                <h3
-                                        className="overview__group-title"
-                                >
-                                        Forms
-                                </h3>
-                                <ul>
-                                        
-                                </ul>
-                                <div
-                                        className="overview__manage-button"
-                                >
-                                        <Connect(ProtocolLink)
-                                                className="button button--small"
-                                                to="forms"
-                                        >
-                                                Manage forms
-                                        </Connect(ProtocolLink)>
-                                </div>
-                        </div>
-                </div>
+                  Manage registry
+                </Connect(ProtocolLink)>
+              </div>
+            </div>
+            <div
+              className="overview__group"
+            >
+              <h3
+                className="overview__group-title"
+              >
+                Forms
+              </h3>
+              <ul />
+              <div
+                className="overview__manage-button"
+              >
+                <Connect(ProtocolLink)
+                  className="button button--small"
+                  to="forms"
+                >
+                  Manage forms
+                </Connect(ProtocolLink)>
+              </div>
+            </div>
+          </div>
         </div>
-</div>,
+      </div>,
       "flipId": "foo",
     },
     "ref": null,
@@ -103,70 +99,66 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="overview__panel"
->
+        >
           <h1
-                    className="overview__name"
-          />
-          <div
-                    className="overview__groups"
+            className="overview__name"
           >
-                    <div
-                              className="overview__group"
-                    >
-                              <h3
-                                        className="overview__group-title"
-                              >
-                                        Variable registry
-                              </h3>
-                              <br />
-                              <h4>
-                                        Node types
-                              </h4>
-                              <div>
-                                        
-                              </div>
-                              <br />
-                              <h4>
-                                        Edge types
-                              </h4>
-                              <div>
-                                        
-                              </div>
-                              <div
-                                        className="overview__manage-button"
-                              >
-                                        <Connect(ProtocolLink)
-                                                  className="button button--small"
-                                                  to="registry"
-                                        >
-                                                  Manage registry
-                                        </Connect(ProtocolLink)>
-                              </div>
-                    </div>
-                    <div
-                              className="overview__group"
-                    >
-                              <h3
-                                        className="overview__group-title"
-                              >
-                                        Forms
-                              </h3>
-                              <ul>
-                                        
-                              </ul>
-                              <div
-                                        className="overview__manage-button"
-                              >
-                                        <Connect(ProtocolLink)
-                                                  className="button button--small"
-                                                  to="forms"
-                                        >
-                                                  Manage forms
-                                        </Connect(ProtocolLink)>
-                              </div>
-                    </div>
+            
+          </h1>
+          <div
+            className="overview__groups"
+          >
+            <div
+              className="overview__group"
+            >
+              <h3
+                className="overview__group-title"
+              >
+                Variable registry
+              </h3>
+              <br />
+              <h4>
+                Node types
+              </h4>
+              <div />
+              <br />
+              <h4>
+                Edge types
+              </h4>
+              <div />
+              <div
+                className="overview__manage-button"
+              >
+                <Connect(ProtocolLink)
+                  className="button button--small"
+                  to="registry"
+                >
+                  Manage registry
+                </Connect(ProtocolLink)>
+              </div>
+            </div>
+            <div
+              className="overview__group"
+            >
+              <h3
+                className="overview__group-title"
+              >
+                Forms
+              </h3>
+              <ul />
+              <div
+                className="overview__manage-button"
+              >
+                <Connect(ProtocolLink)
+                  className="button button--small"
+                  to="forms"
+                >
+                  Manage forms
+                </Connect(ProtocolLink)>
+              </div>
+            </div>
           </div>
-</div>,
+        </div>,
         "className": "overview",
       },
       "ref": null,
@@ -178,66 +170,62 @@ ShallowWrapper {
           "children": Array [
             <h1
               className="overview__name"
-/>,
+            >
+              
+            </h1>,
             <div
               className="overview__groups"
->
+            >
               <div
-                            className="overview__group"
+                className="overview__group"
               >
-                            <h3
-                                          className="overview__group-title"
-                            >
-                                          Variable registry
-                            </h3>
-                            <br />
-                            <h4>
-                                          Node types
-                            </h4>
-                            <div>
-                                          
-                            </div>
-                            <br />
-                            <h4>
-                                          Edge types
-                            </h4>
-                            <div>
-                                          
-                            </div>
-                            <div
-                                          className="overview__manage-button"
-                            >
-                                          <Connect(ProtocolLink)
-                                                        className="button button--small"
-                                                        to="registry"
-                                          >
-                                                        Manage registry
-                                          </Connect(ProtocolLink)>
-                            </div>
+                <h3
+                  className="overview__group-title"
+                >
+                  Variable registry
+                </h3>
+                <br />
+                <h4>
+                  Node types
+                </h4>
+                <div />
+                <br />
+                <h4>
+                  Edge types
+                </h4>
+                <div />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    className="button button--small"
+                    to="registry"
+                  >
+                    Manage registry
+                  </Connect(ProtocolLink)>
+                </div>
               </div>
               <div
-                            className="overview__group"
+                className="overview__group"
               >
-                            <h3
-                                          className="overview__group-title"
-                            >
-                                          Forms
-                            </h3>
-                            <ul>
-                                          
-                            </ul>
-                            <div
-                                          className="overview__manage-button"
-                            >
-                                          <Connect(ProtocolLink)
-                                                        className="button button--small"
-                                                        to="forms"
-                                          >
-                                                        Manage forms
-                                          </Connect(ProtocolLink)>
-                            </div>
+                <h3
+                  className="overview__group-title"
+                >
+                  Forms
+                </h3>
+                <ul />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    className="button button--small"
+                    to="forms"
+                  >
+                    Manage forms
+                  </Connect(ProtocolLink)>
+                </div>
               </div>
-</div>,
+            </div>,
           ],
           "className": "overview__panel",
         },
@@ -263,59 +251,53 @@ ShallowWrapper {
               "children": Array [
                 <div
                   className="overview__group"
->
+                >
                   <h3
-                                    className="overview__group-title"
+                    className="overview__group-title"
                   >
-                                    Variable registry
+                    Variable registry
                   </h3>
                   <br />
                   <h4>
-                                    Node types
+                    Node types
                   </h4>
-                  <div>
-                                    
-                  </div>
+                  <div />
                   <br />
                   <h4>
-                                    Edge types
+                    Edge types
                   </h4>
-                  <div>
-                                    
-                  </div>
+                  <div />
                   <div
-                                    className="overview__manage-button"
+                    className="overview__manage-button"
                   >
-                                    <Connect(ProtocolLink)
-                                                      className="button button--small"
-                                                      to="registry"
-                                    >
-                                                      Manage registry
-                                    </Connect(ProtocolLink)>
+                    <Connect(ProtocolLink)
+                      className="button button--small"
+                      to="registry"
+                    >
+                      Manage registry
+                    </Connect(ProtocolLink)>
                   </div>
-</div>,
+                </div>,
                 <div
                   className="overview__group"
->
+                >
                   <h3
-                                    className="overview__group-title"
+                    className="overview__group-title"
                   >
-                                    Forms
+                    Forms
                   </h3>
-                  <ul>
-                                    
-                  </ul>
+                  <ul />
                   <div
-                                    className="overview__manage-button"
+                    className="overview__manage-button"
                   >
-                                    <Connect(ProtocolLink)
-                                                      className="button button--small"
-                                                      to="forms"
-                                    >
-                                                      Manage forms
-                                    </Connect(ProtocolLink)>
+                    <Connect(ProtocolLink)
+                      className="button button--small"
+                      to="forms"
+                    >
+                      Manage forms
+                    </Connect(ProtocolLink)>
                   </div>
-</div>,
+                </div>,
               ],
               "className": "overview__groups",
             },
@@ -329,33 +311,29 @@ ShallowWrapper {
                   "children": Array [
                     <h3
                       className="overview__group-title"
->
+                    >
                       Variable registry
-</h3>,
+                    </h3>,
                     <br />,
                     <h4>
                       Node types
-</h4>,
-                    <div>
-                      
-</div>,
+                    </h4>,
+                    <div />,
                     <br />,
                     <h4>
                       Edge types
-</h4>,
-                    <div>
-                      
-</div>,
+                    </h4>,
+                    <div />,
                     <div
                       className="overview__manage-button"
->
+                    >
                       <Connect(ProtocolLink)
-                                            className="button button--small"
-                                            to="registry"
+                        className="button button--small"
+                        to="registry"
                       >
-                                            Manage registry
+                        Manage registry
                       </Connect(ProtocolLink)>
-</div>,
+                    </div>,
                   ],
                   "className": "overview__group",
                 },
@@ -443,9 +421,9 @@ ShallowWrapper {
                       "children": <Connect(ProtocolLink)
                         className="button button--small"
                         to="registry"
->
+                      >
                         Manage registry
-</Connect(ProtocolLink)>,
+                      </Connect(ProtocolLink)>,
                       "className": "overview__manage-button",
                     },
                     "ref": null,
@@ -475,22 +453,20 @@ ShallowWrapper {
                   "children": Array [
                     <h3
                       className="overview__group-title"
->
+                    >
                       Forms
-</h3>,
-                    <ul>
-                      
-</ul>,
+                    </h3>,
+                    <ul />,
                     <div
                       className="overview__manage-button"
->
+                    >
                       <Connect(ProtocolLink)
-                                            className="button button--small"
-                                            to="forms"
+                        className="button button--small"
+                        to="forms"
                       >
-                                            Manage forms
+                        Manage forms
                       </Connect(ProtocolLink)>
-</div>,
+                    </div>,
                   ],
                   "className": "overview__group",
                 },
@@ -527,9 +503,9 @@ ShallowWrapper {
                       "children": <Connect(ProtocolLink)
                         className="button button--small"
                         to="forms"
->
+                      >
                         Manage forms
-</Connect(ProtocolLink)>,
+                      </Connect(ProtocolLink)>,
                       "className": "overview__manage-button",
                     },
                     "ref": null,
@@ -569,74 +545,70 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="overview"
->
+        >
           <div
-                    className="overview__panel"
+            className="overview__panel"
           >
-                    <h1
-                              className="overview__name"
-                    />
-                    <div
-                              className="overview__groups"
-                    >
-                              <div
-                                        className="overview__group"
-                              >
-                                        <h3
-                                                  className="overview__group-title"
-                                        >
-                                                  Variable registry
-                                        </h3>
-                                        <br />
-                                        <h4>
-                                                  Node types
-                                        </h4>
-                                        <div>
-                                                  
-                                        </div>
-                                        <br />
-                                        <h4>
-                                                  Edge types
-                                        </h4>
-                                        <div>
-                                                  
-                                        </div>
-                                        <div
-                                                  className="overview__manage-button"
-                                        >
-                                                  <Connect(ProtocolLink)
-                                                            className="button button--small"
-                                                            to="registry"
-                                                  >
-                                                            Manage registry
-                                                  </Connect(ProtocolLink)>
-                                        </div>
-                              </div>
-                              <div
-                                        className="overview__group"
-                              >
-                                        <h3
-                                                  className="overview__group-title"
-                                        >
-                                                  Forms
-                                        </h3>
-                                        <ul>
-                                                  
-                                        </ul>
-                                        <div
-                                                  className="overview__manage-button"
-                                        >
-                                                  <Connect(ProtocolLink)
-                                                            className="button button--small"
-                                                            to="forms"
-                                                  >
-                                                            Manage forms
-                                                  </Connect(ProtocolLink)>
-                                        </div>
-                              </div>
-                    </div>
+            <h1
+              className="overview__name"
+            >
+              
+            </h1>
+            <div
+              className="overview__groups"
+            >
+              <div
+                className="overview__group"
+              >
+                <h3
+                  className="overview__group-title"
+                >
+                  Variable registry
+                </h3>
+                <br />
+                <h4>
+                  Node types
+                </h4>
+                <div />
+                <br />
+                <h4>
+                  Edge types
+                </h4>
+                <div />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    className="button button--small"
+                    to="registry"
+                  >
+                    Manage registry
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+              <div
+                className="overview__group"
+              >
+                <h3
+                  className="overview__group-title"
+                >
+                  Forms
+                </h3>
+                <ul />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    className="button button--small"
+                    to="forms"
+                  >
+                    Manage forms
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+            </div>
           </div>
-</div>,
+        </div>,
         "flipId": "foo",
       },
       "ref": null,
@@ -647,70 +619,66 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="overview__panel"
->
+          >
             <h1
-                        className="overview__name"
-            />
-            <div
-                        className="overview__groups"
+              className="overview__name"
             >
-                        <div
-                                    className="overview__group"
-                        >
-                                    <h3
-                                                className="overview__group-title"
-                                    >
-                                                Variable registry
-                                    </h3>
-                                    <br />
-                                    <h4>
-                                                Node types
-                                    </h4>
-                                    <div>
-                                                
-                                    </div>
-                                    <br />
-                                    <h4>
-                                                Edge types
-                                    </h4>
-                                    <div>
-                                                
-                                    </div>
-                                    <div
-                                                className="overview__manage-button"
-                                    >
-                                                <Connect(ProtocolLink)
-                                                            className="button button--small"
-                                                            to="registry"
-                                                >
-                                                            Manage registry
-                                                </Connect(ProtocolLink)>
-                                    </div>
-                        </div>
-                        <div
-                                    className="overview__group"
-                        >
-                                    <h3
-                                                className="overview__group-title"
-                                    >
-                                                Forms
-                                    </h3>
-                                    <ul>
-                                                
-                                    </ul>
-                                    <div
-                                                className="overview__manage-button"
-                                    >
-                                                <Connect(ProtocolLink)
-                                                            className="button button--small"
-                                                            to="forms"
-                                                >
-                                                            Manage forms
-                                                </Connect(ProtocolLink)>
-                                    </div>
-                        </div>
+              
+            </h1>
+            <div
+              className="overview__groups"
+            >
+              <div
+                className="overview__group"
+              >
+                <h3
+                  className="overview__group-title"
+                >
+                  Variable registry
+                </h3>
+                <br />
+                <h4>
+                  Node types
+                </h4>
+                <div />
+                <br />
+                <h4>
+                  Edge types
+                </h4>
+                <div />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    className="button button--small"
+                    to="registry"
+                  >
+                    Manage registry
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+              <div
+                className="overview__group"
+              >
+                <h3
+                  className="overview__group-title"
+                >
+                  Forms
+                </h3>
+                <ul />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    className="button button--small"
+                    to="forms"
+                  >
+                    Manage forms
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
             </div>
-</div>,
+          </div>,
           "className": "overview",
         },
         "ref": null,
@@ -722,66 +690,62 @@ ShallowWrapper {
             "children": Array [
               <h1
                 className="overview__name"
-/>,
+              >
+                
+              </h1>,
               <div
                 className="overview__groups"
->
+              >
                 <div
-                                className="overview__group"
+                  className="overview__group"
                 >
-                                <h3
-                                                className="overview__group-title"
-                                >
-                                                Variable registry
-                                </h3>
-                                <br />
-                                <h4>
-                                                Node types
-                                </h4>
-                                <div>
-                                                
-                                </div>
-                                <br />
-                                <h4>
-                                                Edge types
-                                </h4>
-                                <div>
-                                                
-                                </div>
-                                <div
-                                                className="overview__manage-button"
-                                >
-                                                <Connect(ProtocolLink)
-                                                                className="button button--small"
-                                                                to="registry"
-                                                >
-                                                                Manage registry
-                                                </Connect(ProtocolLink)>
-                                </div>
+                  <h3
+                    className="overview__group-title"
+                  >
+                    Variable registry
+                  </h3>
+                  <br />
+                  <h4>
+                    Node types
+                  </h4>
+                  <div />
+                  <br />
+                  <h4>
+                    Edge types
+                  </h4>
+                  <div />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      className="button button--small"
+                      to="registry"
+                    >
+                      Manage registry
+                    </Connect(ProtocolLink)>
+                  </div>
                 </div>
                 <div
-                                className="overview__group"
+                  className="overview__group"
                 >
-                                <h3
-                                                className="overview__group-title"
-                                >
-                                                Forms
-                                </h3>
-                                <ul>
-                                                
-                                </ul>
-                                <div
-                                                className="overview__manage-button"
-                                >
-                                                <Connect(ProtocolLink)
-                                                                className="button button--small"
-                                                                to="forms"
-                                                >
-                                                                Manage forms
-                                                </Connect(ProtocolLink)>
-                                </div>
+                  <h3
+                    className="overview__group-title"
+                  >
+                    Forms
+                  </h3>
+                  <ul />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      className="button button--small"
+                      to="forms"
+                    >
+                      Manage forms
+                    </Connect(ProtocolLink)>
+                  </div>
                 </div>
-</div>,
+              </div>,
             ],
             "className": "overview__panel",
           },
@@ -807,59 +771,53 @@ ShallowWrapper {
                 "children": Array [
                   <div
                     className="overview__group"
->
+                  >
                     <h3
-                                        className="overview__group-title"
+                      className="overview__group-title"
                     >
-                                        Variable registry
+                      Variable registry
                     </h3>
                     <br />
                     <h4>
-                                        Node types
+                      Node types
                     </h4>
-                    <div>
-                                        
-                    </div>
+                    <div />
                     <br />
                     <h4>
-                                        Edge types
+                      Edge types
                     </h4>
-                    <div>
-                                        
-                    </div>
+                    <div />
                     <div
-                                        className="overview__manage-button"
+                      className="overview__manage-button"
                     >
-                                        <Connect(ProtocolLink)
-                                                            className="button button--small"
-                                                            to="registry"
-                                        >
-                                                            Manage registry
-                                        </Connect(ProtocolLink)>
+                      <Connect(ProtocolLink)
+                        className="button button--small"
+                        to="registry"
+                      >
+                        Manage registry
+                      </Connect(ProtocolLink)>
                     </div>
-</div>,
+                  </div>,
                   <div
                     className="overview__group"
->
+                  >
                     <h3
-                                        className="overview__group-title"
+                      className="overview__group-title"
                     >
-                                        Forms
+                      Forms
                     </h3>
-                    <ul>
-                                        
-                    </ul>
+                    <ul />
                     <div
-                                        className="overview__manage-button"
+                      className="overview__manage-button"
                     >
-                                        <Connect(ProtocolLink)
-                                                            className="button button--small"
-                                                            to="forms"
-                                        >
-                                                            Manage forms
-                                        </Connect(ProtocolLink)>
+                      <Connect(ProtocolLink)
+                        className="button button--small"
+                        to="forms"
+                      >
+                        Manage forms
+                      </Connect(ProtocolLink)>
                     </div>
-</div>,
+                  </div>,
                 ],
                 "className": "overview__groups",
               },
@@ -873,33 +831,29 @@ ShallowWrapper {
                     "children": Array [
                       <h3
                         className="overview__group-title"
->
+                      >
                         Variable registry
-</h3>,
+                      </h3>,
                       <br />,
                       <h4>
                         Node types
-</h4>,
-                      <div>
-                        
-</div>,
+                      </h4>,
+                      <div />,
                       <br />,
                       <h4>
                         Edge types
-</h4>,
-                      <div>
-                        
-</div>,
+                      </h4>,
+                      <div />,
                       <div
                         className="overview__manage-button"
->
+                      >
                         <Connect(ProtocolLink)
-                                                className="button button--small"
-                                                to="registry"
+                          className="button button--small"
+                          to="registry"
                         >
-                                                Manage registry
+                          Manage registry
                         </Connect(ProtocolLink)>
-</div>,
+                      </div>,
                     ],
                     "className": "overview__group",
                   },
@@ -987,9 +941,9 @@ ShallowWrapper {
                         "children": <Connect(ProtocolLink)
                           className="button button--small"
                           to="registry"
->
+                        >
                           Manage registry
-</Connect(ProtocolLink)>,
+                        </Connect(ProtocolLink)>,
                         "className": "overview__manage-button",
                       },
                       "ref": null,
@@ -1019,22 +973,20 @@ ShallowWrapper {
                     "children": Array [
                       <h3
                         className="overview__group-title"
->
+                      >
                         Forms
-</h3>,
-                      <ul>
-                        
-</ul>,
+                      </h3>,
+                      <ul />,
                       <div
                         className="overview__manage-button"
->
+                      >
                         <Connect(ProtocolLink)
-                                                className="button button--small"
-                                                to="forms"
+                          className="button button--small"
+                          to="forms"
                         >
-                                                Manage forms
+                          Manage forms
                         </Connect(ProtocolLink)>
-</div>,
+                      </div>,
                     ],
                     "className": "overview__group",
                   },
@@ -1071,9 +1023,9 @@ ShallowWrapper {
                         "children": <Connect(ProtocolLink)
                           className="button button--small"
                           to="forms"
->
+                        >
                           Manage forms
-</Connect(ProtocolLink)>,
+                        </Connect(ProtocolLink)>,
                         "className": "overview__manage-button",
                       },
                       "ref": null,

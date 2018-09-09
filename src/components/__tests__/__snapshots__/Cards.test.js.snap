@@ -8,7 +8,7 @@ ShallowWrapper {
     goBack={[Function]}
     goTo={[Function]}
     location={Object {}}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -27,37 +27,37 @@ ShallowWrapper {
           location={Object {}}
           onComplete={[Function]}
           path="/edit/:protocol/stage/:id?"
-/>,
+        />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
           path="/edit/:protocol/skip/:id"
-/>,
+        />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
           path="/edit/:protocol/form(s?)"
-/>,
+        />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
           path="/edit/:protocol/form/:form?"
-/>,
+        />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
           path="/edit/:protocol/registry"
-/>,
+        />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
           path="/edit/:protocol/registry/:category/:type?"
-/>,
+        />,
       ],
     },
     "ref": null,
@@ -161,37 +161,37 @@ ShallowWrapper {
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/stage/:id?"
-/>,
+          />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/skip/:id"
-/>,
+          />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/form(s?)"
-/>,
+          />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/form/:form?"
-/>,
+          />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/registry"
-/>,
+          />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
             path="/edit/:protocol/registry/:category/:type?"
-/>,
+          />,
         ],
       },
       "ref": null,

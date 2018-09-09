@@ -7,10 +7,10 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <TypeEditor
     category="edge"
     colorOptions={
-        Object {
-            "edge": Array [],
-            "node": Array [],
-          }
+      Object {
+        "edge": Array [],
+        "node": Array [],
+      }
     }
     dirty={false}
     displayVariables={Array []}
@@ -21,7 +21,7 @@ ShallowWrapper {
     toggleCodeView={[Function]}
     type={null}
     valid={true}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -39,77 +39,77 @@ ShallowWrapper {
         <h1>
           Create 
           edge
-</h1>,
+        </h1>,
         <small>
           (
           <a
-                    onClick={[Function]}
+            onClick={[Function]}
           >
-                    Show Code View
+            Show Code View
           </a>
           )
-</small>,
+        </small>,
         <Connect(Guided)
           contentId="guidance.registry.type.label"
->
+        >
           <div
-                    className="editor__section"
+            className="editor__section"
           >
-                    <h2
-                              id="field_label"
-                    >
-                              Label
-                    </h2>
-                    <Validated
-                              component={[Function]}
-                              name="label"
-                              validation={
-                                        Object {
-                                                  "required": true,
-                                                }
-                              }
-                    />
+            <h2
+              id="field_label"
+            >
+              Label
+            </h2>
+            <Validated
+              component={[Function]}
+              name="label"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
           </div>
-</Connect(Guided)>,
+        </Connect(Guided)>,
         <Connect(Guided)
           contentId="guidance.registry.type.color"
->
+        >
           <div
-                    className="editor__section"
+            className="editor__section"
           >
-                    <h2
-                              id="field_color"
-                    >
-                              Color
-                    </h2>
-                    <Validated
-                              colors={Array []}
-                              component={[Function]}
-                              name="color"
-                              validation={
-                                        Object {
-                                                  "required": true,
-                                                }
-                              }
-                    />
+            <h2
+              id="field_color"
+            >
+              Color
+            </h2>
+            <Validated
+              colors={Array []}
+              component={[Function]}
+              name="color"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
           </div>
-</Connect(Guided)>,
+        </Connect(Guided)>,
         false,
         <Connect(Guided)
           contentId="guidance.registry.type.variables"
->
+        >
           <div
-                    className="editor__section"
+            className="editor__section"
           >
-                    <h2>
-                              Variables
-                    </h2>
-                    <Connect(Variables)
-                              form="TYPE_EDITOR"
-                              name="variables"
-                    />
+            <h2>
+              Variables
+            </h2>
+            <Connect(Variables)
+              form="TYPE_EDITOR"
+              name="variables"
+            />
           </div>
-</Connect(Guided)>,
+        </Connect(Guided)>,
       ],
       "className": "type-editor editor__sections",
     },
@@ -142,9 +142,9 @@ ShallowWrapper {
             "(",
             <a
               onClick={[Function]}
->
+            >
               Show Code View
-</a>,
+            </a>,
             ")",
           ],
         },
@@ -174,22 +174,22 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="editor__section"
->
+          >
             <h2
-                        id="field_label"
+              id="field_label"
             >
-                        Label
+              Label
             </h2>
             <Validated
-                        component={[Function]}
-                        name="label"
-                        validation={
-                                    Object {
-                                                "required": true,
-                                              }
-                        }
+              component={[Function]}
+              name="label"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
             />
-</div>,
+          </div>,
           "contentId": "guidance.registry.type.label",
         },
         "ref": null,
@@ -201,18 +201,18 @@ ShallowWrapper {
             "children": Array [
               <h2
                 id="field_label"
->
+              >
                 Label
-</h2>,
+              </h2>,
               <Validated
                 component={[Function]}
                 name="label"
                 validation={
-                                Object {
-                                                "required": true,
-                                              }
+                  Object {
+                    "required": true,
+                  }
                 }
-/>,
+              />,
             ],
             "className": "editor__section",
           },
@@ -257,23 +257,23 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="editor__section"
->
+          >
             <h2
-                        id="field_color"
+              id="field_color"
             >
-                        Color
+              Color
             </h2>
             <Validated
-                        colors={Array []}
-                        component={[Function]}
-                        name="color"
-                        validation={
-                                    Object {
-                                                "required": true,
-                                              }
-                        }
+              colors={Array []}
+              component={[Function]}
+              name="color"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
             />
-</div>,
+          </div>,
           "contentId": "guidance.registry.type.color",
         },
         "ref": null,
@@ -285,19 +285,19 @@ ShallowWrapper {
             "children": Array [
               <h2
                 id="field_color"
->
+              >
                 Color
-</h2>,
+              </h2>,
               <Validated
                 colors={Array []}
                 component={[Function]}
                 name="color"
                 validation={
-                                Object {
-                                                "required": true,
-                                              }
+                  Object {
+                    "required": true,
+                  }
                 }
-/>,
+              />,
             ],
             "className": "editor__section",
           },
@@ -344,15 +344,15 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="editor__section"
->
+          >
             <h2>
-                        Variables
+              Variables
             </h2>
             <Connect(Variables)
-                        form="TYPE_EDITOR"
-                        name="variables"
+              form="TYPE_EDITOR"
+              name="variables"
             />
-</div>,
+          </div>,
           "contentId": "guidance.registry.type.variables",
         },
         "ref": null,
@@ -364,11 +364,11 @@ ShallowWrapper {
             "children": Array [
               <h2>
                 Variables
-</h2>,
+              </h2>,
               <Connect(Variables)
                 form="TYPE_EDITOR"
                 name="variables"
-/>,
+              />,
             ],
             "className": "editor__section",
           },
@@ -416,77 +416,77 @@ ShallowWrapper {
           <h1>
             Create 
             edge
-</h1>,
+          </h1>,
           <small>
             (
             <a
-                        onClick={[Function]}
+              onClick={[Function]}
             >
-                        Show Code View
+              Show Code View
             </a>
             )
-</small>,
+          </small>,
           <Connect(Guided)
             contentId="guidance.registry.type.label"
->
+          >
             <div
-                        className="editor__section"
+              className="editor__section"
             >
-                        <h2
-                                    id="field_label"
-                        >
-                                    Label
-                        </h2>
-                        <Validated
-                                    component={[Function]}
-                                    name="label"
-                                    validation={
-                                                Object {
-                                                            "required": true,
-                                                          }
-                                    }
-                        />
+              <h2
+                id="field_label"
+              >
+                Label
+              </h2>
+              <Validated
+                component={[Function]}
+                name="label"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
             </div>
-</Connect(Guided)>,
+          </Connect(Guided)>,
           <Connect(Guided)
             contentId="guidance.registry.type.color"
->
+          >
             <div
-                        className="editor__section"
+              className="editor__section"
             >
-                        <h2
-                                    id="field_color"
-                        >
-                                    Color
-                        </h2>
-                        <Validated
-                                    colors={Array []}
-                                    component={[Function]}
-                                    name="color"
-                                    validation={
-                                                Object {
-                                                            "required": true,
-                                                          }
-                                    }
-                        />
+              <h2
+                id="field_color"
+              >
+                Color
+              </h2>
+              <Validated
+                colors={Array []}
+                component={[Function]}
+                name="color"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
             </div>
-</Connect(Guided)>,
+          </Connect(Guided)>,
           false,
           <Connect(Guided)
             contentId="guidance.registry.type.variables"
->
+          >
             <div
-                        className="editor__section"
+              className="editor__section"
             >
-                        <h2>
-                                    Variables
-                        </h2>
-                        <Connect(Variables)
-                                    form="TYPE_EDITOR"
-                                    name="variables"
-                        />
+              <h2>
+                Variables
+              </h2>
+              <Connect(Variables)
+                form="TYPE_EDITOR"
+                name="variables"
+              />
             </div>
-</Connect(Guided)>,
+          </Connect(Guided)>,
         ],
         "className": "type-editor editor__sections",
       },
@@ -519,9 +519,9 @@ ShallowWrapper {
               "(",
               <a
                 onClick={[Function]}
->
+              >
                 Show Code View
-</a>,
+              </a>,
               ")",
             ],
           },
@@ -551,22 +551,22 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="editor__section"
->
+            >
               <h2
-                            id="field_label"
+                id="field_label"
               >
-                            Label
+                Label
               </h2>
               <Validated
-                            component={[Function]}
-                            name="label"
-                            validation={
-                                          Object {
-                                                        "required": true,
-                                                      }
-                            }
+                component={[Function]}
+                name="label"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
               />
-</div>,
+            </div>,
             "contentId": "guidance.registry.type.label",
           },
           "ref": null,
@@ -578,18 +578,18 @@ ShallowWrapper {
               "children": Array [
                 <h2
                   id="field_label"
->
+                >
                   Label
-</h2>,
+                </h2>,
                 <Validated
                   component={[Function]}
                   name="label"
                   validation={
-                                    Object {
-                                                      "required": true,
-                                                    }
+                    Object {
+                      "required": true,
+                    }
                   }
-/>,
+                />,
               ],
               "className": "editor__section",
             },
@@ -634,23 +634,23 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="editor__section"
->
+            >
               <h2
-                            id="field_color"
+                id="field_color"
               >
-                            Color
+                Color
               </h2>
               <Validated
-                            colors={Array []}
-                            component={[Function]}
-                            name="color"
-                            validation={
-                                          Object {
-                                                        "required": true,
-                                                      }
-                            }
+                colors={Array []}
+                component={[Function]}
+                name="color"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
               />
-</div>,
+            </div>,
             "contentId": "guidance.registry.type.color",
           },
           "ref": null,
@@ -662,19 +662,19 @@ ShallowWrapper {
               "children": Array [
                 <h2
                   id="field_color"
->
+                >
                   Color
-</h2>,
+                </h2>,
                 <Validated
                   colors={Array []}
                   component={[Function]}
                   name="color"
                   validation={
-                                    Object {
-                                                      "required": true,
-                                                    }
+                    Object {
+                      "required": true,
+                    }
                   }
-/>,
+                />,
               ],
               "className": "editor__section",
             },
@@ -721,15 +721,15 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="editor__section"
->
+            >
               <h2>
-                            Variables
+                Variables
               </h2>
               <Connect(Variables)
-                            form="TYPE_EDITOR"
-                            name="variables"
+                form="TYPE_EDITOR"
+                name="variables"
               />
-</div>,
+            </div>,
             "contentId": "guidance.registry.type.variables",
           },
           "ref": null,
@@ -741,11 +741,11 @@ ShallowWrapper {
               "children": Array [
                 <h2>
                   Variables
-</h2>,
+                </h2>,
                 <Connect(Variables)
                   form="TYPE_EDITOR"
                   name="variables"
-/>,
+                />,
               ],
               "className": "editor__section",
             },
@@ -800,10 +800,10 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <TypeEditor
     category="node"
     colorOptions={
-        Object {
-            "edge": Array [],
-            "node": Array [],
-          }
+      Object {
+        "edge": Array [],
+        "node": Array [],
+      }
     }
     dirty={false}
     displayVariables={Array []}
@@ -814,7 +814,7 @@ ShallowWrapper {
     toggleCodeView={[Function]}
     type={null}
     valid={true}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -832,124 +832,124 @@ ShallowWrapper {
         <h1>
           Create 
           node
-</h1>,
+        </h1>,
         <small>
           (
           <a
-                    onClick={[Function]}
+            onClick={[Function]}
           >
-                    Show Code View
+            Show Code View
           </a>
           )
-</small>,
+        </small>,
         <Connect(Guided)
           contentId="guidance.registry.type.label"
->
+        >
           <div
-                    className="editor__section"
+            className="editor__section"
           >
-                    <h2
-                              id="field_label"
-                    >
-                              Label
-                    </h2>
-                    <Validated
-                              component={[Function]}
-                              name="label"
-                              validation={
-                                        Object {
-                                                  "required": true,
-                                                }
-                              }
-                    />
+            <h2
+              id="field_label"
+            >
+              Label
+            </h2>
+            <Validated
+              component={[Function]}
+              name="label"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
           </div>
-</Connect(Guided)>,
+        </Connect(Guided)>,
         <Connect(Guided)
           contentId="guidance.registry.type.color"
->
+        >
           <div
-                    className="editor__section"
+            className="editor__section"
           >
-                    <h2
-                              id="field_color"
-                    >
-                              Color
-                    </h2>
-                    <Validated
-                              colors={Array []}
-                              component={[Function]}
-                              name="color"
-                              validation={
-                                        Object {
-                                                  "required": true,
-                                                }
-                              }
-                    />
+            <h2
+              id="field_color"
+            >
+              Color
+            </h2>
+            <Validated
+              colors={Array []}
+              component={[Function]}
+              name="color"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
           </div>
-</Connect(Guided)>,
-        <Unknown>
+        </Connect(Guided)>,
+        <React.Fragment>
           <Connect(Guided)
-                    contentId="guidance.registry.type.icon"
+            contentId="guidance.registry.type.icon"
           >
-                    <div
-                              className="editor__section"
-                    >
-                              <h2
-                                        id="field_iconVariant"
-                              >
-                                        Icon
-                              </h2>
-                              <Validated
-                                        component={[Function]}
-                                        name="iconVariant"
-                                        optionComponent={[Function]}
-                                        options={Array []}
-                                        validation={
-                                                  Object {
-                                                            "required": true,
-                                                          }
-                                        }
-                              />
-                    </div>
+            <div
+              className="editor__section"
+            >
+              <h2
+                id="field_iconVariant"
+              >
+                Icon
+              </h2>
+              <Validated
+                component={[Function]}
+                name="iconVariant"
+                optionComponent={[Function]}
+                options={Array []}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+            </div>
           </Connect(Guided)>
           <Connect(Guided)
-                    contentId="guidance.registry.type.displayVariable"
+            contentId="guidance.registry.type.displayVariable"
           >
-                    <div
-                              className="editor__section"
-                    >
-                              <h2>
-                                        Display Variable
-                              </h2>
-                              <Field
-                                        component={[Function]}
-                                        name="displayVariable"
-                                        options={Array []}
-                              >
-                                        <option
-                                                  value=""
-                                        >
-                                                  — Select display variable —
-                                        </option>
-                              </Field>
-                    </div>
+            <div
+              className="editor__section"
+            >
+              <h2>
+                Display Variable
+              </h2>
+              <Field
+                component={[Function]}
+                name="displayVariable"
+                options={Array []}
+              >
+                <option
+                  value=""
+                >
+                  — Select display variable —
+                </option>
+              </Field>
+            </div>
           </Connect(Guided)>
-</Unknown>,
+        </React.Fragment>,
         <Connect(Guided)
           contentId="guidance.registry.type.variables"
->
+        >
           <div
-                    className="editor__section"
+            className="editor__section"
           >
-                    <h2>
-                              Variables
-                    </h2>
-                    <Connect(Variables)
-                              form="TYPE_EDITOR"
-                              name="variables"
-                    />
+            <h2>
+              Variables
+            </h2>
+            <Connect(Variables)
+              form="TYPE_EDITOR"
+              name="variables"
+            />
           </div>
-</Connect(Guided)>,
+        </Connect(Guided)>,
       ],
       "className": "type-editor editor__sections",
     },
@@ -982,9 +982,9 @@ ShallowWrapper {
             "(",
             <a
               onClick={[Function]}
->
+            >
               Show Code View
-</a>,
+            </a>,
             ")",
           ],
         },
@@ -1014,22 +1014,22 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="editor__section"
->
+          >
             <h2
-                        id="field_label"
+              id="field_label"
             >
-                        Label
+              Label
             </h2>
             <Validated
-                        component={[Function]}
-                        name="label"
-                        validation={
-                                    Object {
-                                                "required": true,
-                                              }
-                        }
+              component={[Function]}
+              name="label"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
             />
-</div>,
+          </div>,
           "contentId": "guidance.registry.type.label",
         },
         "ref": null,
@@ -1041,18 +1041,18 @@ ShallowWrapper {
             "children": Array [
               <h2
                 id="field_label"
->
+              >
                 Label
-</h2>,
+              </h2>,
               <Validated
                 component={[Function]}
                 name="label"
                 validation={
-                                Object {
-                                                "required": true,
-                                              }
+                  Object {
+                    "required": true,
+                  }
                 }
-/>,
+              />,
             ],
             "className": "editor__section",
           },
@@ -1097,23 +1097,23 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="editor__section"
->
+          >
             <h2
-                        id="field_color"
+              id="field_color"
             >
-                        Color
+              Color
             </h2>
             <Validated
-                        colors={Array []}
-                        component={[Function]}
-                        name="color"
-                        validation={
-                                    Object {
-                                                "required": true,
-                                              }
-                        }
+              colors={Array []}
+              component={[Function]}
+              name="color"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
             />
-</div>,
+          </div>,
           "contentId": "guidance.registry.type.color",
         },
         "ref": null,
@@ -1125,19 +1125,19 @@ ShallowWrapper {
             "children": Array [
               <h2
                 id="field_color"
->
+              >
                 Color
-</h2>,
+              </h2>,
               <Validated
                 colors={Array []}
                 component={[Function]}
                 name="color"
                 validation={
-                                Object {
-                                                "required": true,
-                                              }
+                  Object {
+                    "required": true,
+                  }
                 }
-/>,
+              />,
             ],
             "className": "editor__section",
           },
@@ -1184,50 +1184,50 @@ ShallowWrapper {
           "children": Array [
             <Connect(Guided)
               contentId="guidance.registry.type.icon"
->
+            >
               <div
-                            className="editor__section"
+                className="editor__section"
               >
-                            <h2
-                                          id="field_iconVariant"
-                            >
-                                          Icon
-                            </h2>
-                            <Validated
-                                          component={[Function]}
-                                          name="iconVariant"
-                                          optionComponent={[Function]}
-                                          options={Array []}
-                                          validation={
-                                                        Object {
-                                                                      "required": true,
-                                                                    }
-                                          }
-                            />
+                <h2
+                  id="field_iconVariant"
+                >
+                  Icon
+                </h2>
+                <Validated
+                  component={[Function]}
+                  name="iconVariant"
+                  optionComponent={[Function]}
+                  options={Array []}
+                  validation={
+                    Object {
+                      "required": true,
+                    }
+                  }
+                />
               </div>
-</Connect(Guided)>,
+            </Connect(Guided)>,
             <Connect(Guided)
               contentId="guidance.registry.type.displayVariable"
->
+            >
               <div
-                            className="editor__section"
+                className="editor__section"
               >
-                            <h2>
-                                          Display Variable
-                            </h2>
-                            <Field
-                                          component={[Function]}
-                                          name="displayVariable"
-                                          options={Array []}
-                            >
-                                          <option
-                                                        value=""
-                                          >
-                                                        — Select display variable —
-                                          </option>
-                            </Field>
+                <h2>
+                  Display Variable
+                </h2>
+                <Field
+                  component={[Function]}
+                  name="displayVariable"
+                  options={Array []}
+                >
+                  <option
+                    value=""
+                  >
+                    — Select display variable —
+                  </option>
+                </Field>
               </div>
-</Connect(Guided)>,
+            </Connect(Guided)>,
           ],
         },
         "ref": null,
@@ -1239,24 +1239,24 @@ ShallowWrapper {
             "props": Object {
               "children": <div
                 className="editor__section"
->
+              >
                 <h2
-                                id="field_iconVariant"
+                  id="field_iconVariant"
                 >
-                                Icon
+                  Icon
                 </h2>
                 <Validated
-                                component={[Function]}
-                                name="iconVariant"
-                                optionComponent={[Function]}
-                                options={Array []}
-                                validation={
-                                                Object {
-                                                                "required": true,
-                                                              }
-                                }
+                  component={[Function]}
+                  name="iconVariant"
+                  optionComponent={[Function]}
+                  options={Array []}
+                  validation={
+                    Object {
+                      "required": true,
+                    }
+                  }
                 />
-</div>,
+              </div>,
               "contentId": "guidance.registry.type.icon",
             },
             "ref": null,
@@ -1268,20 +1268,20 @@ ShallowWrapper {
                 "children": Array [
                   <h2
                     id="field_iconVariant"
->
+                  >
                     Icon
-</h2>,
+                  </h2>,
                   <Validated
                     component={[Function]}
                     name="iconVariant"
                     optionComponent={[Function]}
                     options={Array []}
                     validation={
-                                        Object {
-                                                            "required": true,
-                                                          }
+                      Object {
+                        "required": true,
+                      }
                     }
-/>,
+                  />,
                 ],
                 "className": "editor__section",
               },
@@ -1328,22 +1328,22 @@ ShallowWrapper {
             "props": Object {
               "children": <div
                 className="editor__section"
->
+              >
                 <h2>
-                                Display Variable
+                  Display Variable
                 </h2>
                 <Field
-                                component={[Function]}
-                                name="displayVariable"
-                                options={Array []}
+                  component={[Function]}
+                  name="displayVariable"
+                  options={Array []}
                 >
-                                <option
-                                                value=""
-                                >
-                                                — Select display variable —
-                                </option>
+                  <option
+                    value=""
+                  >
+                    — Select display variable —
+                  </option>
                 </Field>
-</div>,
+              </div>,
               "contentId": "guidance.registry.type.displayVariable",
             },
             "ref": null,
@@ -1355,18 +1355,18 @@ ShallowWrapper {
                 "children": Array [
                   <h2>
                     Display Variable
-</h2>,
+                  </h2>,
                   <Field
                     component={[Function]}
                     name="displayVariable"
                     options={Array []}
->
+                  >
                     <option
-                                        value=""
+                      value=""
                     >
-                                        — Select display variable —
+                      — Select display variable —
                     </option>
-</Field>,
+                  </Field>,
                 ],
                 "className": "editor__section",
               },
@@ -1390,9 +1390,9 @@ ShallowWrapper {
                   "props": Object {
                     "children": <option
                       value=""
->
+                    >
                       — Select display variable —
-</option>,
+                    </option>,
                     "component": [Function],
                     "name": "displayVariable",
                     "options": Array [],
@@ -1427,15 +1427,15 @@ ShallowWrapper {
         "props": Object {
           "children": <div
             className="editor__section"
->
+          >
             <h2>
-                        Variables
+              Variables
             </h2>
             <Connect(Variables)
-                        form="TYPE_EDITOR"
-                        name="variables"
+              form="TYPE_EDITOR"
+              name="variables"
             />
-</div>,
+          </div>,
           "contentId": "guidance.registry.type.variables",
         },
         "ref": null,
@@ -1447,11 +1447,11 @@ ShallowWrapper {
             "children": Array [
               <h2>
                 Variables
-</h2>,
+              </h2>,
               <Connect(Variables)
                 form="TYPE_EDITOR"
                 name="variables"
-/>,
+              />,
             ],
             "className": "editor__section",
           },
@@ -1499,124 +1499,124 @@ ShallowWrapper {
           <h1>
             Create 
             node
-</h1>,
+          </h1>,
           <small>
             (
             <a
-                        onClick={[Function]}
+              onClick={[Function]}
             >
-                        Show Code View
+              Show Code View
             </a>
             )
-</small>,
+          </small>,
           <Connect(Guided)
             contentId="guidance.registry.type.label"
->
+          >
             <div
-                        className="editor__section"
+              className="editor__section"
             >
-                        <h2
-                                    id="field_label"
-                        >
-                                    Label
-                        </h2>
-                        <Validated
-                                    component={[Function]}
-                                    name="label"
-                                    validation={
-                                                Object {
-                                                            "required": true,
-                                                          }
-                                    }
-                        />
+              <h2
+                id="field_label"
+              >
+                Label
+              </h2>
+              <Validated
+                component={[Function]}
+                name="label"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
             </div>
-</Connect(Guided)>,
+          </Connect(Guided)>,
           <Connect(Guided)
             contentId="guidance.registry.type.color"
->
+          >
             <div
-                        className="editor__section"
+              className="editor__section"
             >
-                        <h2
-                                    id="field_color"
-                        >
-                                    Color
-                        </h2>
-                        <Validated
-                                    colors={Array []}
-                                    component={[Function]}
-                                    name="color"
-                                    validation={
-                                                Object {
-                                                            "required": true,
-                                                          }
-                                    }
-                        />
+              <h2
+                id="field_color"
+              >
+                Color
+              </h2>
+              <Validated
+                colors={Array []}
+                component={[Function]}
+                name="color"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
             </div>
-</Connect(Guided)>,
-          <Unknown>
+          </Connect(Guided)>,
+          <React.Fragment>
             <Connect(Guided)
-                        contentId="guidance.registry.type.icon"
+              contentId="guidance.registry.type.icon"
             >
-                        <div
-                                    className="editor__section"
-                        >
-                                    <h2
-                                                id="field_iconVariant"
-                                    >
-                                                Icon
-                                    </h2>
-                                    <Validated
-                                                component={[Function]}
-                                                name="iconVariant"
-                                                optionComponent={[Function]}
-                                                options={Array []}
-                                                validation={
-                                                            Object {
-                                                                        "required": true,
-                                                                      }
-                                                }
-                                    />
-                        </div>
+              <div
+                className="editor__section"
+              >
+                <h2
+                  id="field_iconVariant"
+                >
+                  Icon
+                </h2>
+                <Validated
+                  component={[Function]}
+                  name="iconVariant"
+                  optionComponent={[Function]}
+                  options={Array []}
+                  validation={
+                    Object {
+                      "required": true,
+                    }
+                  }
+                />
+              </div>
             </Connect(Guided)>
             <Connect(Guided)
-                        contentId="guidance.registry.type.displayVariable"
+              contentId="guidance.registry.type.displayVariable"
             >
-                        <div
-                                    className="editor__section"
-                        >
-                                    <h2>
-                                                Display Variable
-                                    </h2>
-                                    <Field
-                                                component={[Function]}
-                                                name="displayVariable"
-                                                options={Array []}
-                                    >
-                                                <option
-                                                            value=""
-                                                >
-                                                            — Select display variable —
-                                                </option>
-                                    </Field>
-                        </div>
+              <div
+                className="editor__section"
+              >
+                <h2>
+                  Display Variable
+                </h2>
+                <Field
+                  component={[Function]}
+                  name="displayVariable"
+                  options={Array []}
+                >
+                  <option
+                    value=""
+                  >
+                    — Select display variable —
+                  </option>
+                </Field>
+              </div>
             </Connect(Guided)>
-</Unknown>,
+          </React.Fragment>,
           <Connect(Guided)
             contentId="guidance.registry.type.variables"
->
+          >
             <div
-                        className="editor__section"
+              className="editor__section"
             >
-                        <h2>
-                                    Variables
-                        </h2>
-                        <Connect(Variables)
-                                    form="TYPE_EDITOR"
-                                    name="variables"
-                        />
+              <h2>
+                Variables
+              </h2>
+              <Connect(Variables)
+                form="TYPE_EDITOR"
+                name="variables"
+              />
             </div>
-</Connect(Guided)>,
+          </Connect(Guided)>,
         ],
         "className": "type-editor editor__sections",
       },
@@ -1649,9 +1649,9 @@ ShallowWrapper {
               "(",
               <a
                 onClick={[Function]}
->
+              >
                 Show Code View
-</a>,
+              </a>,
               ")",
             ],
           },
@@ -1681,22 +1681,22 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="editor__section"
->
+            >
               <h2
-                            id="field_label"
+                id="field_label"
               >
-                            Label
+                Label
               </h2>
               <Validated
-                            component={[Function]}
-                            name="label"
-                            validation={
-                                          Object {
-                                                        "required": true,
-                                                      }
-                            }
+                component={[Function]}
+                name="label"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
               />
-</div>,
+            </div>,
             "contentId": "guidance.registry.type.label",
           },
           "ref": null,
@@ -1708,18 +1708,18 @@ ShallowWrapper {
               "children": Array [
                 <h2
                   id="field_label"
->
+                >
                   Label
-</h2>,
+                </h2>,
                 <Validated
                   component={[Function]}
                   name="label"
                   validation={
-                                    Object {
-                                                      "required": true,
-                                                    }
+                    Object {
+                      "required": true,
+                    }
                   }
-/>,
+                />,
               ],
               "className": "editor__section",
             },
@@ -1764,23 +1764,23 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="editor__section"
->
+            >
               <h2
-                            id="field_color"
+                id="field_color"
               >
-                            Color
+                Color
               </h2>
               <Validated
-                            colors={Array []}
-                            component={[Function]}
-                            name="color"
-                            validation={
-                                          Object {
-                                                        "required": true,
-                                                      }
-                            }
+                colors={Array []}
+                component={[Function]}
+                name="color"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
               />
-</div>,
+            </div>,
             "contentId": "guidance.registry.type.color",
           },
           "ref": null,
@@ -1792,19 +1792,19 @@ ShallowWrapper {
               "children": Array [
                 <h2
                   id="field_color"
->
+                >
                   Color
-</h2>,
+                </h2>,
                 <Validated
                   colors={Array []}
                   component={[Function]}
                   name="color"
                   validation={
-                                    Object {
-                                                      "required": true,
-                                                    }
+                    Object {
+                      "required": true,
+                    }
                   }
-/>,
+                />,
               ],
               "className": "editor__section",
             },
@@ -1851,50 +1851,50 @@ ShallowWrapper {
             "children": Array [
               <Connect(Guided)
                 contentId="guidance.registry.type.icon"
->
+              >
                 <div
-                                className="editor__section"
+                  className="editor__section"
                 >
-                                <h2
-                                                id="field_iconVariant"
-                                >
-                                                Icon
-                                </h2>
-                                <Validated
-                                                component={[Function]}
-                                                name="iconVariant"
-                                                optionComponent={[Function]}
-                                                options={Array []}
-                                                validation={
-                                                                Object {
-                                                                                "required": true,
-                                                                              }
-                                                }
-                                />
+                  <h2
+                    id="field_iconVariant"
+                  >
+                    Icon
+                  </h2>
+                  <Validated
+                    component={[Function]}
+                    name="iconVariant"
+                    optionComponent={[Function]}
+                    options={Array []}
+                    validation={
+                      Object {
+                        "required": true,
+                      }
+                    }
+                  />
                 </div>
-</Connect(Guided)>,
+              </Connect(Guided)>,
               <Connect(Guided)
                 contentId="guidance.registry.type.displayVariable"
->
+              >
                 <div
-                                className="editor__section"
+                  className="editor__section"
                 >
-                                <h2>
-                                                Display Variable
-                                </h2>
-                                <Field
-                                                component={[Function]}
-                                                name="displayVariable"
-                                                options={Array []}
-                                >
-                                                <option
-                                                                value=""
-                                                >
-                                                                — Select display variable —
-                                                </option>
-                                </Field>
+                  <h2>
+                    Display Variable
+                  </h2>
+                  <Field
+                    component={[Function]}
+                    name="displayVariable"
+                    options={Array []}
+                  >
+                    <option
+                      value=""
+                    >
+                      — Select display variable —
+                    </option>
+                  </Field>
                 </div>
-</Connect(Guided)>,
+              </Connect(Guided)>,
             ],
           },
           "ref": null,
@@ -1906,24 +1906,24 @@ ShallowWrapper {
               "props": Object {
                 "children": <div
                   className="editor__section"
->
+                >
                   <h2
-                                    id="field_iconVariant"
+                    id="field_iconVariant"
                   >
-                                    Icon
+                    Icon
                   </h2>
                   <Validated
-                                    component={[Function]}
-                                    name="iconVariant"
-                                    optionComponent={[Function]}
-                                    options={Array []}
-                                    validation={
-                                                      Object {
-                                                                        "required": true,
-                                                                      }
-                                    }
+                    component={[Function]}
+                    name="iconVariant"
+                    optionComponent={[Function]}
+                    options={Array []}
+                    validation={
+                      Object {
+                        "required": true,
+                      }
+                    }
                   />
-</div>,
+                </div>,
                 "contentId": "guidance.registry.type.icon",
               },
               "ref": null,
@@ -1935,20 +1935,20 @@ ShallowWrapper {
                   "children": Array [
                     <h2
                       id="field_iconVariant"
->
+                    >
                       Icon
-</h2>,
+                    </h2>,
                     <Validated
                       component={[Function]}
                       name="iconVariant"
                       optionComponent={[Function]}
                       options={Array []}
                       validation={
-                                            Object {
-                                                                  "required": true,
-                                                                }
+                        Object {
+                          "required": true,
+                        }
                       }
-/>,
+                    />,
                   ],
                   "className": "editor__section",
                 },
@@ -1995,22 +1995,22 @@ ShallowWrapper {
               "props": Object {
                 "children": <div
                   className="editor__section"
->
+                >
                   <h2>
-                                    Display Variable
+                    Display Variable
                   </h2>
                   <Field
-                                    component={[Function]}
-                                    name="displayVariable"
-                                    options={Array []}
+                    component={[Function]}
+                    name="displayVariable"
+                    options={Array []}
                   >
-                                    <option
-                                                      value=""
-                                    >
-                                                      — Select display variable —
-                                    </option>
+                    <option
+                      value=""
+                    >
+                      — Select display variable —
+                    </option>
                   </Field>
-</div>,
+                </div>,
                 "contentId": "guidance.registry.type.displayVariable",
               },
               "ref": null,
@@ -2022,18 +2022,18 @@ ShallowWrapper {
                   "children": Array [
                     <h2>
                       Display Variable
-</h2>,
+                    </h2>,
                     <Field
                       component={[Function]}
                       name="displayVariable"
                       options={Array []}
->
+                    >
                       <option
-                                            value=""
+                        value=""
                       >
-                                            — Select display variable —
+                        — Select display variable —
                       </option>
-</Field>,
+                    </Field>,
                   ],
                   "className": "editor__section",
                 },
@@ -2057,9 +2057,9 @@ ShallowWrapper {
                     "props": Object {
                       "children": <option
                         value=""
->
+                      >
                         — Select display variable —
-</option>,
+                      </option>,
                       "component": [Function],
                       "name": "displayVariable",
                       "options": Array [],
@@ -2094,15 +2094,15 @@ ShallowWrapper {
           "props": Object {
             "children": <div
               className="editor__section"
->
+            >
               <h2>
-                            Variables
+                Variables
               </h2>
               <Connect(Variables)
-                            form="TYPE_EDITOR"
-                            name="variables"
+                form="TYPE_EDITOR"
+                name="variables"
               />
-</div>,
+            </div>,
             "contentId": "guidance.registry.type.variables",
           },
           "ref": null,
@@ -2114,11 +2114,11 @@ ShallowWrapper {
               "children": Array [
                 <h2>
                   Variables
-</h2>,
+                </h2>,
                 <Connect(Variables)
                   form="TYPE_EDITOR"
                   name="variables"
-/>,
+                />,
               ],
               "className": "editor__section",
             },

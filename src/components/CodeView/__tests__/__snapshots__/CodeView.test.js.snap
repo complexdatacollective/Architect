@@ -7,7 +7,7 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <CodeView
     code={Object {}}
     toggleCodeView={[Function]}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -22,9 +22,9 @@ ShallowWrapper {
     "props": Object {
       "children": <pre>
         <code>
-                {}
+          {}
         </code>
-</pre>,
+      </pre>,
       "className": "code-view",
       "onClick": [Function],
     },
@@ -36,7 +36,7 @@ ShallowWrapper {
       "props": Object {
         "children": <code>
           {}
-</code>,
+        </code>,
       },
       "ref": null,
       "rendered": Object {
@@ -62,9 +62,9 @@ ShallowWrapper {
       "props": Object {
         "children": <pre>
           <code>
-                    {}
+            {}
           </code>
-</pre>,
+        </pre>,
         "className": "code-view",
         "onClick": [Function],
       },
@@ -76,7 +76,7 @@ ShallowWrapper {
         "props": Object {
           "children": <code>
             {}
-</code>,
+          </code>,
         },
         "ref": null,
         "rendered": Object {

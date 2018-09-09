@@ -10,7 +10,7 @@ ShallowWrapper {
     overview={Object {}}
     show={true}
     stages={Array []}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -25,18 +25,16 @@ ShallowWrapper {
     "props": Object {
       "children": <div
         className="timeline__stages"
->
+      >
         <TransitionGroup
-                childFactory={[Function]}
-                component="div"
-        >
-                
-        </TransitionGroup>
-        <InsertStage
-                onCancel={null}
-                onSelectStage={[Function]}
+          childFactory={[Function]}
+          component="div"
         />
-</div>,
+        <InsertStage
+          onCancel={null}
+          onSelectStage={[Function]}
+        />
+      </div>,
       "className": "timeline timeline--show",
     },
     "ref": null,
@@ -50,13 +48,11 @@ ShallowWrapper {
           <TransitionGroup
             childFactory={[Function]}
             component="div"
->
-            
-</TransitionGroup>,
+          />,
           <InsertStage
             onCancel={null}
             onSelectStage={[Function]}
-/>,
+          />,
         ],
         "className": "timeline__stages",
       },
@@ -101,18 +97,16 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="timeline__stages"
->
+        >
           <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
-          >
-                    
-          </TransitionGroup>
-          <InsertStage
-                    onCancel={null}
-                    onSelectStage={[Function]}
+            childFactory={[Function]}
+            component="div"
           />
-</div>,
+          <InsertStage
+            onCancel={null}
+            onSelectStage={[Function]}
+          />
+        </div>,
         "className": "timeline timeline--show",
       },
       "ref": null,
@@ -126,13 +120,11 @@ ShallowWrapper {
             <TransitionGroup
               childFactory={[Function]}
               component="div"
->
-              
-</TransitionGroup>,
+            />,
             <InsertStage
               onCancel={null}
               onSelectStage={[Function]}
-/>,
+            />,
           ],
           "className": "timeline__stages",
         },

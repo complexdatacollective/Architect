@@ -7,7 +7,7 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <Issues
     issues={Object {}}
     show={true}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -22,51 +22,49 @@ ShallowWrapper {
     "props": Object {
       "children": <div
         className="issues__panel"
->
+      >
         <div
-                className="issues__title-bar"
-                onClick={[Function]}
+          className="issues__title-bar"
+          onClick={[Function]}
         >
-                <div
-                        className="issues__title-bar-icon"
-                >
-                        <Icon
-                                className=""
-                                color="white"
-                                name="info"
-                                style={Object {}}
-                        />
-                </div>
-                <div
-                        className="issues__title-bar-text"
-                >
-                        Issues (
-                        0
-                        )
-                </div>
-                <div
-                        className="issues__title-bar-toggle"
-                >
-                        <Icon
-                                className="issues__toggle--open"
-                                color="white"
-                                name="chevron-down"
-                                style={Object {}}
-                        />
-                        <Icon
-                                className="issues__toggle--close"
-                                color="white"
-                                name="chevron-up"
-                                style={Object {}}
-                        />
-                </div>
+          <div
+            className="issues__title-bar-icon"
+          >
+            <Icon
+              className=""
+              color="white"
+              name="info"
+              style={Object {}}
+            />
+          </div>
+          <div
+            className="issues__title-bar-text"
+          >
+            Issues (
+            0
+            )
+          </div>
+          <div
+            className="issues__title-bar-toggle"
+          >
+            <Icon
+              className="issues__toggle--open"
+              color="white"
+              name="chevron-down"
+              style={Object {}}
+            />
+            <Icon
+              className="issues__toggle--close"
+              color="white"
+              name="chevron-up"
+              style={Object {}}
+            />
+          </div>
         </div>
         <ol
-                className="issues__issues"
-        >
-                
-        </ol>
-</div>,
+          className="issues__issues"
+        />
+      </div>,
       "className": "issues issues--open",
     },
     "ref": null,
@@ -79,46 +77,44 @@ ShallowWrapper {
           <div
             className="issues__title-bar"
             onClick={[Function]}
->
+          >
             <div
-                        className="issues__title-bar-icon"
+              className="issues__title-bar-icon"
             >
-                        <Icon
-                                    className=""
-                                    color="white"
-                                    name="info"
-                                    style={Object {}}
-                        />
+              <Icon
+                className=""
+                color="white"
+                name="info"
+                style={Object {}}
+              />
             </div>
             <div
-                        className="issues__title-bar-text"
+              className="issues__title-bar-text"
             >
-                        Issues (
-                        0
-                        )
+              Issues (
+              0
+              )
             </div>
             <div
-                        className="issues__title-bar-toggle"
+              className="issues__title-bar-toggle"
             >
-                        <Icon
-                                    className="issues__toggle--open"
-                                    color="white"
-                                    name="chevron-down"
-                                    style={Object {}}
-                        />
-                        <Icon
-                                    className="issues__toggle--close"
-                                    color="white"
-                                    name="chevron-up"
-                                    style={Object {}}
-                        />
+              <Icon
+                className="issues__toggle--open"
+                color="white"
+                name="chevron-down"
+                style={Object {}}
+              />
+              <Icon
+                className="issues__toggle--close"
+                color="white"
+                name="chevron-up"
+                style={Object {}}
+              />
             </div>
-</div>,
+          </div>,
           <ol
             className="issues__issues"
->
-            
-</ol>,
+          />,
         ],
         "className": "issues__panel",
       },
@@ -132,37 +128,37 @@ ShallowWrapper {
             "children": Array [
               <div
                 className="issues__title-bar-icon"
->
+              >
                 <Icon
-                                className=""
-                                color="white"
-                                name="info"
-                                style={Object {}}
+                  className=""
+                  color="white"
+                  name="info"
+                  style={Object {}}
                 />
-</div>,
+              </div>,
               <div
                 className="issues__title-bar-text"
->
+              >
                 Issues (
                 0
                 )
-</div>,
+              </div>,
               <div
                 className="issues__title-bar-toggle"
->
+              >
                 <Icon
-                                className="issues__toggle--open"
-                                color="white"
-                                name="chevron-down"
-                                style={Object {}}
+                  className="issues__toggle--open"
+                  color="white"
+                  name="chevron-down"
+                  style={Object {}}
                 />
                 <Icon
-                                className="issues__toggle--close"
-                                color="white"
-                                name="chevron-up"
-                                style={Object {}}
+                  className="issues__toggle--close"
+                  color="white"
+                  name="chevron-up"
+                  style={Object {}}
                 />
-</div>,
+              </div>,
             ],
             "className": "issues__title-bar",
             "onClick": [Function],
@@ -179,7 +175,7 @@ ShallowWrapper {
                   color="white"
                   name="info"
                   style={Object {}}
-/>,
+                />,
                 "className": "issues__title-bar-icon",
               },
               "ref": null,
@@ -230,13 +226,13 @@ ShallowWrapper {
                     color="white"
                     name="chevron-down"
                     style={Object {}}
-/>,
+                  />,
                   <Icon
                     className="issues__toggle--close"
                     color="white"
                     name="chevron-up"
                     style={Object {}}
-/>,
+                  />,
                 ],
                 "className": "issues__title-bar-toggle",
               },
@@ -301,51 +297,49 @@ ShallowWrapper {
       "props": Object {
         "children": <div
           className="issues__panel"
->
+        >
           <div
-                    className="issues__title-bar"
-                    onClick={[Function]}
+            className="issues__title-bar"
+            onClick={[Function]}
           >
-                    <div
-                              className="issues__title-bar-icon"
-                    >
-                              <Icon
-                                        className=""
-                                        color="white"
-                                        name="info"
-                                        style={Object {}}
-                              />
-                    </div>
-                    <div
-                              className="issues__title-bar-text"
-                    >
-                              Issues (
-                              0
-                              )
-                    </div>
-                    <div
-                              className="issues__title-bar-toggle"
-                    >
-                              <Icon
-                                        className="issues__toggle--open"
-                                        color="white"
-                                        name="chevron-down"
-                                        style={Object {}}
-                              />
-                              <Icon
-                                        className="issues__toggle--close"
-                                        color="white"
-                                        name="chevron-up"
-                                        style={Object {}}
-                              />
-                    </div>
+            <div
+              className="issues__title-bar-icon"
+            >
+              <Icon
+                className=""
+                color="white"
+                name="info"
+                style={Object {}}
+              />
+            </div>
+            <div
+              className="issues__title-bar-text"
+            >
+              Issues (
+              0
+              )
+            </div>
+            <div
+              className="issues__title-bar-toggle"
+            >
+              <Icon
+                className="issues__toggle--open"
+                color="white"
+                name="chevron-down"
+                style={Object {}}
+              />
+              <Icon
+                className="issues__toggle--close"
+                color="white"
+                name="chevron-up"
+                style={Object {}}
+              />
+            </div>
           </div>
           <ol
-                    className="issues__issues"
-          >
-                    
-          </ol>
-</div>,
+            className="issues__issues"
+          />
+        </div>,
         "className": "issues issues--open",
       },
       "ref": null,
@@ -358,46 +352,44 @@ ShallowWrapper {
             <div
               className="issues__title-bar"
               onClick={[Function]}
->
+            >
               <div
-                            className="issues__title-bar-icon"
+                className="issues__title-bar-icon"
               >
-                            <Icon
-                                          className=""
-                                          color="white"
-                                          name="info"
-                                          style={Object {}}
-                            />
+                <Icon
+                  className=""
+                  color="white"
+                  name="info"
+                  style={Object {}}
+                />
               </div>
               <div
-                            className="issues__title-bar-text"
+                className="issues__title-bar-text"
               >
-                            Issues (
-                            0
-                            )
+                Issues (
+                0
+                )
               </div>
               <div
-                            className="issues__title-bar-toggle"
+                className="issues__title-bar-toggle"
               >
-                            <Icon
-                                          className="issues__toggle--open"
-                                          color="white"
-                                          name="chevron-down"
-                                          style={Object {}}
-                            />
-                            <Icon
-                                          className="issues__toggle--close"
-                                          color="white"
-                                          name="chevron-up"
-                                          style={Object {}}
-                            />
+                <Icon
+                  className="issues__toggle--open"
+                  color="white"
+                  name="chevron-down"
+                  style={Object {}}
+                />
+                <Icon
+                  className="issues__toggle--close"
+                  color="white"
+                  name="chevron-up"
+                  style={Object {}}
+                />
               </div>
-</div>,
+            </div>,
             <ol
               className="issues__issues"
->
-              
-</ol>,
+            />,
           ],
           "className": "issues__panel",
         },
@@ -411,37 +403,37 @@ ShallowWrapper {
               "children": Array [
                 <div
                   className="issues__title-bar-icon"
->
+                >
                   <Icon
-                                    className=""
-                                    color="white"
-                                    name="info"
-                                    style={Object {}}
+                    className=""
+                    color="white"
+                    name="info"
+                    style={Object {}}
                   />
-</div>,
+                </div>,
                 <div
                   className="issues__title-bar-text"
->
+                >
                   Issues (
                   0
                   )
-</div>,
+                </div>,
                 <div
                   className="issues__title-bar-toggle"
->
+                >
                   <Icon
-                                    className="issues__toggle--open"
-                                    color="white"
-                                    name="chevron-down"
-                                    style={Object {}}
+                    className="issues__toggle--open"
+                    color="white"
+                    name="chevron-down"
+                    style={Object {}}
                   />
                   <Icon
-                                    className="issues__toggle--close"
-                                    color="white"
-                                    name="chevron-up"
-                                    style={Object {}}
+                    className="issues__toggle--close"
+                    color="white"
+                    name="chevron-up"
+                    style={Object {}}
                   />
-</div>,
+                </div>,
               ],
               "className": "issues__title-bar",
               "onClick": [Function],
@@ -458,7 +450,7 @@ ShallowWrapper {
                     color="white"
                     name="info"
                     style={Object {}}
-/>,
+                  />,
                   "className": "issues__title-bar-icon",
                 },
                 "ref": null,
@@ -509,13 +501,13 @@ ShallowWrapper {
                       color="white"
                       name="chevron-down"
                       style={Object {}}
-/>,
+                    />,
                     <Icon
                       className="issues__toggle--close"
                       color="white"
                       name="chevron-up"
                       style={Object {}}
-/>,
+                    />,
                   ],
                   "className": "issues__title-bar-toggle",
                 },

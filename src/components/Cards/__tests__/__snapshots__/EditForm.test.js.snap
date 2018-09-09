@@ -13,7 +13,7 @@ ShallowWrapper {
     show={true}
     submitForm={[Function]}
     updateForm={[Function]}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -30,7 +30,7 @@ ShallowWrapper {
       "children": <Connect(withProps(withState(withHandlers(ReduxForm))))
         initialValues={Object {}}
         onSubmit={[Function]}
-/>,
+      />,
       "onCancel": [Function],
       "show": true,
     },
@@ -59,7 +59,7 @@ ShallowWrapper {
         "children": <Connect(withProps(withState(withHandlers(ReduxForm))))
           initialValues={Object {}}
           onSubmit={[Function]}
-/>,
+        />,
         "onCancel": [Function],
         "show": true,
       },

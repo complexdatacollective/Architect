@@ -14,7 +14,7 @@ ShallowWrapper {
     stageId={null}
     updateDraft={[Function]}
     updateStage={[Function]}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -31,7 +31,7 @@ ShallowWrapper {
       "children": <SkipLogicEditor
         onChange={[Function]}
         rules={Object {}}
-/>,
+      />,
       "onCancel": [Function],
       "show": false,
       "type": "logic",
@@ -61,7 +61,7 @@ ShallowWrapper {
         "children": <SkipLogicEditor
           onChange={[Function]}
           rules={Object {}}
-/>,
+        />,
         "onCancel": [Function],
         "show": false,
         "type": "logic",

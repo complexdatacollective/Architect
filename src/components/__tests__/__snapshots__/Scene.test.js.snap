@@ -7,7 +7,7 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <Scene
     location={Object {}}
     protocolMeta={Object {}}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -23,68 +23,67 @@ ShallowWrapper {
       "children": Array [
         <div
           className="scene__background scene__background--top"
-/>,
+        />,
         <div
           className="scene__background scene__background--bottom"
-/>,
+        />,
         <img
           alt=""
           className="scene__brand"
           src="network-canvas-brand.svg"
-/>,
+        />,
         <NavLink
           activeClassName="active"
           aria-current="page"
           className="scene__home"
           exact={true}
           to="/"
->
+        >
           <img
-                    alt=""
-                    src="architect-logo-icon.svg"
+            alt=""
+            src="architect-logo-icon.svg"
           />
-</NavLink>,
+        </NavLink>,
         <Flipper
           applyTransformOrigin={true}
           element="div"
           flipKey="start"
->
+        >
           <div
-                    className="scene__start"
+            className="scene__start"
           >
-                    <Connect(Start)
-                              show={true}
-                    />
+            <Connect(Start)
+              show={true}
+            />
           </div>
           <div
-                    className="scene__recent-protocols"
+            className="scene__recent-protocols"
           >
-                    <Connect(RecentProtocols)
-                              show={true}
-                    />
+            <Connect(RecentProtocols)
+              show={true}
+            />
           </div>
           <div
-                    className="scene__protocol"
+            className="scene__protocol"
           >
-                    <Connect(Overview)
-                              flipId={undefined}
-                              show={false}
-                    />
-                    <div
-                              className="scene__timeline"
-                    >
-                              <withRouter(Connect(Timeline))
-                                        show={false}
-                              />
-                    </div>
-                    <Connect(ProtocolControlBar)
-                              show={false}
-                    />
+            <Connect(Overview)
+              show={false}
+            />
+            <div
+              className="scene__timeline"
+            >
+              <withRouter(Connect(Timeline))
+                show={false}
+              />
+            </div>
+            <Connect(ProtocolControlBar)
+              show={false}
+            />
           </div>
-</Flipper>,
+        </Flipper>,
         <Connect(Cards)
           location={Object {}}
-/>,
+        />,
       ],
       "className": "scene",
     },
@@ -135,7 +134,7 @@ ShallowWrapper {
           "children": <img
             alt=""
             src="architect-logo-icon.svg"
-/>,
+          />,
           "className": "scene__home",
           "exact": true,
           "to": "/",
@@ -164,36 +163,35 @@ ShallowWrapper {
           "children": Array [
             <div
               className="scene__start"
->
+            >
               <Connect(Start)
-                            show={true}
+                show={true}
               />
-</div>,
+            </div>,
             <div
               className="scene__recent-protocols"
->
+            >
               <Connect(RecentProtocols)
-                            show={true}
+                show={true}
               />
-</div>,
+            </div>,
             <div
               className="scene__protocol"
->
+            >
               <Connect(Overview)
-                            flipId={undefined}
-                            show={false}
+                show={false}
               />
               <div
-                            className="scene__timeline"
+                className="scene__timeline"
               >
-                            <withRouter(Connect(Timeline))
-                                          show={false}
-                            />
+                <withRouter(Connect(Timeline))
+                  show={false}
+                />
               </div>
               <Connect(ProtocolControlBar)
-                            show={false}
+                show={false}
               />
-</div>,
+            </div>,
           ],
           "element": "div",
           "flipKey": "start",
@@ -207,7 +205,7 @@ ShallowWrapper {
             "props": Object {
               "children": <Connect(Start)
                 show={true}
-/>,
+              />,
               "className": "scene__start",
             },
             "ref": null,
@@ -231,7 +229,7 @@ ShallowWrapper {
             "props": Object {
               "children": <Connect(RecentProtocols)
                 show={true}
-/>,
+              />,
               "className": "scene__recent-protocols",
             },
             "ref": null,
@@ -255,19 +253,18 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <Connect(Overview)
-                  flipId={undefined}
                   show={false}
-/>,
+                />,
                 <div
                   className="scene__timeline"
->
+                >
                   <withRouter(Connect(Timeline))
-                                    show={false}
+                    show={false}
                   />
-</div>,
+                </div>,
                 <Connect(ProtocolControlBar)
                   show={false}
-/>,
+                />,
               ],
               "className": "scene__protocol",
             },
@@ -292,7 +289,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": <withRouter(Connect(Timeline))
                     show={false}
-/>,
+                  />,
                   "className": "scene__timeline",
                 },
                 "ref": null,
@@ -349,68 +346,67 @@ ShallowWrapper {
         "children": Array [
           <div
             className="scene__background scene__background--top"
-/>,
+          />,
           <div
             className="scene__background scene__background--bottom"
-/>,
+          />,
           <img
             alt=""
             className="scene__brand"
             src="network-canvas-brand.svg"
-/>,
+          />,
           <NavLink
             activeClassName="active"
             aria-current="page"
             className="scene__home"
             exact={true}
             to="/"
->
+          >
             <img
-                        alt=""
-                        src="architect-logo-icon.svg"
+              alt=""
+              src="architect-logo-icon.svg"
             />
-</NavLink>,
+          </NavLink>,
           <Flipper
             applyTransformOrigin={true}
             element="div"
             flipKey="start"
->
+          >
             <div
-                        className="scene__start"
+              className="scene__start"
             >
-                        <Connect(Start)
-                                    show={true}
-                        />
+              <Connect(Start)
+                show={true}
+              />
             </div>
             <div
-                        className="scene__recent-protocols"
+              className="scene__recent-protocols"
             >
-                        <Connect(RecentProtocols)
-                                    show={true}
-                        />
+              <Connect(RecentProtocols)
+                show={true}
+              />
             </div>
             <div
-                        className="scene__protocol"
+              className="scene__protocol"
             >
-                        <Connect(Overview)
-                                    flipId={undefined}
-                                    show={false}
-                        />
-                        <div
-                                    className="scene__timeline"
-                        >
-                                    <withRouter(Connect(Timeline))
-                                                show={false}
-                                    />
-                        </div>
-                        <Connect(ProtocolControlBar)
-                                    show={false}
-                        />
+              <Connect(Overview)
+                show={false}
+              />
+              <div
+                className="scene__timeline"
+              >
+                <withRouter(Connect(Timeline))
+                  show={false}
+                />
+              </div>
+              <Connect(ProtocolControlBar)
+                show={false}
+              />
             </div>
-</Flipper>,
+          </Flipper>,
           <Connect(Cards)
             location={Object {}}
-/>,
+          />,
         ],
         "className": "scene",
       },
@@ -461,7 +457,7 @@ ShallowWrapper {
             "children": <img
               alt=""
               src="architect-logo-icon.svg"
-/>,
+            />,
             "className": "scene__home",
             "exact": true,
             "to": "/",
@@ -490,36 +486,35 @@ ShallowWrapper {
             "children": Array [
               <div
                 className="scene__start"
->
+              >
                 <Connect(Start)
-                                show={true}
+                  show={true}
                 />
-</div>,
+              </div>,
               <div
                 className="scene__recent-protocols"
->
+              >
                 <Connect(RecentProtocols)
-                                show={true}
+                  show={true}
                 />
-</div>,
+              </div>,
               <div
                 className="scene__protocol"
->
+              >
                 <Connect(Overview)
-                                flipId={undefined}
-                                show={false}
+                  show={false}
                 />
                 <div
-                                className="scene__timeline"
+                  className="scene__timeline"
                 >
-                                <withRouter(Connect(Timeline))
-                                                show={false}
-                                />
+                  <withRouter(Connect(Timeline))
+                    show={false}
+                  />
                 </div>
                 <Connect(ProtocolControlBar)
-                                show={false}
+                  show={false}
                 />
-</div>,
+              </div>,
             ],
             "element": "div",
             "flipKey": "start",
@@ -533,7 +528,7 @@ ShallowWrapper {
               "props": Object {
                 "children": <Connect(Start)
                   show={true}
-/>,
+                />,
                 "className": "scene__start",
               },
               "ref": null,
@@ -557,7 +552,7 @@ ShallowWrapper {
               "props": Object {
                 "children": <Connect(RecentProtocols)
                   show={true}
-/>,
+                />,
                 "className": "scene__recent-protocols",
               },
               "ref": null,
@@ -581,19 +576,18 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <Connect(Overview)
-                    flipId={undefined}
                     show={false}
-/>,
+                  />,
                   <div
                     className="scene__timeline"
->
+                  >
                     <withRouter(Connect(Timeline))
-                                        show={false}
+                      show={false}
                     />
-</div>,
+                  </div>,
                   <Connect(ProtocolControlBar)
                     show={false}
-/>,
+                  />,
                 ],
                 "className": "scene__protocol",
               },
@@ -618,7 +612,7 @@ ShallowWrapper {
                   "props": Object {
                     "children": <withRouter(Connect(Timeline))
                       show={false}
-/>,
+                    />,
                     "className": "scene__timeline",
                   },
                   "ref": null,
@@ -684,11 +678,11 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <Scene
     location={Object {}}
     protocolMeta={
-        Object {
-            "id": "foo",
-          }
+      Object {
+        "id": "foo",
+      }
     }
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -704,68 +698,67 @@ ShallowWrapper {
       "children": Array [
         <div
           className="scene__background scene__background--top"
-/>,
+        />,
         <div
           className="scene__background scene__background--bottom"
-/>,
+        />,
         <img
           alt=""
           className="scene__brand"
           src="network-canvas-brand.svg"
-/>,
+        />,
         <NavLink
           activeClassName="active"
           aria-current="page"
           className="scene__home"
           exact={true}
           to="/"
->
+        >
           <img
-                    alt=""
-                    src="architect-logo-icon.svg"
+            alt=""
+            src="architect-logo-icon.svg"
           />
-</NavLink>,
+        </NavLink>,
         <Flipper
           applyTransformOrigin={true}
           element="div"
           flipKey="foo"
->
+        >
           <div
-                    className="scene__start"
+            className="scene__start"
           >
-                    <Connect(Start)
-                              show={false}
-                    />
+            <Connect(Start)
+              show={false}
+            />
           </div>
           <div
-                    className="scene__recent-protocols"
+            className="scene__recent-protocols"
           >
-                    <Connect(RecentProtocols)
-                              show={false}
-                    />
+            <Connect(RecentProtocols)
+              show={false}
+            />
           </div>
           <div
-                    className="scene__protocol"
+            className="scene__protocol"
           >
-                    <Connect(Overview)
-                              flipId={undefined}
-                              show={true}
-                    />
-                    <div
-                              className="scene__timeline"
-                    >
-                              <withRouter(Connect(Timeline))
-                                        show={true}
-                              />
-                    </div>
-                    <Connect(ProtocolControlBar)
-                              show={true}
-                    />
+            <Connect(Overview)
+              show={true}
+            />
+            <div
+              className="scene__timeline"
+            >
+              <withRouter(Connect(Timeline))
+                show={true}
+              />
+            </div>
+            <Connect(ProtocolControlBar)
+              show={true}
+            />
           </div>
-</Flipper>,
+        </Flipper>,
         <Connect(Cards)
           location={Object {}}
-/>,
+        />,
       ],
       "className": "scene scene--protocol",
     },
@@ -816,7 +809,7 @@ ShallowWrapper {
           "children": <img
             alt=""
             src="architect-logo-icon.svg"
-/>,
+          />,
           "className": "scene__home",
           "exact": true,
           "to": "/",
@@ -845,36 +838,35 @@ ShallowWrapper {
           "children": Array [
             <div
               className="scene__start"
->
+            >
               <Connect(Start)
-                            show={false}
+                show={false}
               />
-</div>,
+            </div>,
             <div
               className="scene__recent-protocols"
->
+            >
               <Connect(RecentProtocols)
-                            show={false}
+                show={false}
               />
-</div>,
+            </div>,
             <div
               className="scene__protocol"
->
+            >
               <Connect(Overview)
-                            flipId={undefined}
-                            show={true}
+                show={true}
               />
               <div
-                            className="scene__timeline"
+                className="scene__timeline"
               >
-                            <withRouter(Connect(Timeline))
-                                          show={true}
-                            />
+                <withRouter(Connect(Timeline))
+                  show={true}
+                />
               </div>
               <Connect(ProtocolControlBar)
-                            show={true}
+                show={true}
               />
-</div>,
+            </div>,
           ],
           "element": "div",
           "flipKey": "foo",
@@ -888,7 +880,7 @@ ShallowWrapper {
             "props": Object {
               "children": <Connect(Start)
                 show={false}
-/>,
+              />,
               "className": "scene__start",
             },
             "ref": null,
@@ -912,7 +904,7 @@ ShallowWrapper {
             "props": Object {
               "children": <Connect(RecentProtocols)
                 show={false}
-/>,
+              />,
               "className": "scene__recent-protocols",
             },
             "ref": null,
@@ -936,19 +928,18 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <Connect(Overview)
-                  flipId={undefined}
                   show={true}
-/>,
+                />,
                 <div
                   className="scene__timeline"
->
+                >
                   <withRouter(Connect(Timeline))
-                                    show={true}
+                    show={true}
                   />
-</div>,
+                </div>,
                 <Connect(ProtocolControlBar)
                   show={true}
-/>,
+                />,
               ],
               "className": "scene__protocol",
             },
@@ -973,7 +964,7 @@ ShallowWrapper {
                 "props": Object {
                   "children": <withRouter(Connect(Timeline))
                     show={true}
-/>,
+                  />,
                   "className": "scene__timeline",
                 },
                 "ref": null,
@@ -1030,68 +1021,67 @@ ShallowWrapper {
         "children": Array [
           <div
             className="scene__background scene__background--top"
-/>,
+          />,
           <div
             className="scene__background scene__background--bottom"
-/>,
+          />,
           <img
             alt=""
             className="scene__brand"
             src="network-canvas-brand.svg"
-/>,
+          />,
           <NavLink
             activeClassName="active"
             aria-current="page"
             className="scene__home"
             exact={true}
             to="/"
->
+          >
             <img
-                        alt=""
-                        src="architect-logo-icon.svg"
+              alt=""
+              src="architect-logo-icon.svg"
             />
-</NavLink>,
+          </NavLink>,
           <Flipper
             applyTransformOrigin={true}
             element="div"
             flipKey="foo"
->
+          >
             <div
-                        className="scene__start"
+              className="scene__start"
             >
-                        <Connect(Start)
-                                    show={false}
-                        />
+              <Connect(Start)
+                show={false}
+              />
             </div>
             <div
-                        className="scene__recent-protocols"
+              className="scene__recent-protocols"
             >
-                        <Connect(RecentProtocols)
-                                    show={false}
-                        />
+              <Connect(RecentProtocols)
+                show={false}
+              />
             </div>
             <div
-                        className="scene__protocol"
+              className="scene__protocol"
             >
-                        <Connect(Overview)
-                                    flipId={undefined}
-                                    show={true}
-                        />
-                        <div
-                                    className="scene__timeline"
-                        >
-                                    <withRouter(Connect(Timeline))
-                                                show={true}
-                                    />
-                        </div>
-                        <Connect(ProtocolControlBar)
-                                    show={true}
-                        />
+              <Connect(Overview)
+                show={true}
+              />
+              <div
+                className="scene__timeline"
+              >
+                <withRouter(Connect(Timeline))
+                  show={true}
+                />
+              </div>
+              <Connect(ProtocolControlBar)
+                show={true}
+              />
             </div>
-</Flipper>,
+          </Flipper>,
           <Connect(Cards)
             location={Object {}}
-/>,
+          />,
         ],
         "className": "scene scene--protocol",
       },
@@ -1142,7 +1132,7 @@ ShallowWrapper {
             "children": <img
               alt=""
               src="architect-logo-icon.svg"
-/>,
+            />,
             "className": "scene__home",
             "exact": true,
             "to": "/",
@@ -1171,36 +1161,35 @@ ShallowWrapper {
             "children": Array [
               <div
                 className="scene__start"
->
+              >
                 <Connect(Start)
-                                show={false}
+                  show={false}
                 />
-</div>,
+              </div>,
               <div
                 className="scene__recent-protocols"
->
+              >
                 <Connect(RecentProtocols)
-                                show={false}
+                  show={false}
                 />
-</div>,
+              </div>,
               <div
                 className="scene__protocol"
->
+              >
                 <Connect(Overview)
-                                flipId={undefined}
-                                show={true}
+                  show={true}
                 />
                 <div
-                                className="scene__timeline"
+                  className="scene__timeline"
                 >
-                                <withRouter(Connect(Timeline))
-                                                show={true}
-                                />
+                  <withRouter(Connect(Timeline))
+                    show={true}
+                  />
                 </div>
                 <Connect(ProtocolControlBar)
-                                show={true}
+                  show={true}
                 />
-</div>,
+              </div>,
             ],
             "element": "div",
             "flipKey": "foo",
@@ -1214,7 +1203,7 @@ ShallowWrapper {
               "props": Object {
                 "children": <Connect(Start)
                   show={false}
-/>,
+                />,
                 "className": "scene__start",
               },
               "ref": null,
@@ -1238,7 +1227,7 @@ ShallowWrapper {
               "props": Object {
                 "children": <Connect(RecentProtocols)
                   show={false}
-/>,
+                />,
                 "className": "scene__recent-protocols",
               },
               "ref": null,
@@ -1262,19 +1251,18 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <Connect(Overview)
-                    flipId={undefined}
                     show={true}
-/>,
+                  />,
                   <div
                     className="scene__timeline"
->
+                  >
                     <withRouter(Connect(Timeline))
-                                        show={true}
+                      show={true}
                     />
-</div>,
+                  </div>,
                   <Connect(ProtocolControlBar)
                     show={true}
-/>,
+                  />,
                 ],
                 "className": "scene__protocol",
               },
@@ -1299,7 +1287,7 @@ ShallowWrapper {
                   "props": Object {
                     "children": <withRouter(Connect(Timeline))
                       show={true}
-/>,
+                    />,
                     "className": "scene__timeline",
                   },
                   "ref": null,

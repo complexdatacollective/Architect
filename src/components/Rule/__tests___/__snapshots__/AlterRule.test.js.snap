@@ -8,30 +8,30 @@ ShallowWrapper {
     className=""
     id="123"
     nodeAttributes={
-        Object {
-            "foo": Array [
-              "baz",
-              "buzz",
-            ],
-          }
+      Object {
+        "foo": Array [
+          "baz",
+          "buzz",
+        ],
+      }
     }
     nodeTypes={
-        Array [
-            "foo",
-            "bar",
-          ]
+      Array [
+        "foo",
+        "bar",
+      ]
     }
     onDeleteRule={[Function]}
     onUpdateRule={[Function]}
     options={
-        Object {
-            "attribute": "",
-            "operator": "",
-            "type": "",
-            "value": "",
-          }
+      Object {
+        "attribute": "",
+        "operator": "",
+        "type": "",
+        "value": "",
+      }
     }
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -48,28 +48,28 @@ ShallowWrapper {
         <sortableHandle(DragHandle) />,
         <div
           className="rule__options"
->
+        >
           <div
-                    className="rule__option rule__option--type"
+            className="rule__option rule__option--type"
           >
-                    <DropDown
-                              className={null}
-                              onChange={[Function]}
-                              options={
-                                        Array [
-                                                  "foo",
-                                                  "bar",
-                                                ]
-                              }
-                              placeholder="{type}"
-                              value=""
-                    />
+            <DropDown
+              className={null}
+              onChange={[Function]}
+              options={
+                Array [
+                  "foo",
+                  "bar",
+                ]
+              }
+              placeholder="{type}"
+              value=""
+            />
           </div>
-</div>,
+        </div>,
         <div
           className="rule__delete"
           onClick={[Function]}
-/>,
+        />,
       ],
       "className": "rule rule--alter",
     },
@@ -92,20 +92,20 @@ ShallowWrapper {
           "children": Array [
             <div
               className="rule__option rule__option--type"
->
+            >
               <DropDown
-                            className={null}
-                            onChange={[Function]}
-                            options={
-                                          Array [
-                                                        "foo",
-                                                        "bar",
-                                                      ]
-                            }
-                            placeholder="{type}"
-                            value=""
+                className={null}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "foo",
+                    "bar",
+                  ]
+                }
+                placeholder="{type}"
+                value=""
               />
-</div>,
+            </div>,
             false,
             false,
             false,
@@ -123,14 +123,14 @@ ShallowWrapper {
                 className={null}
                 onChange={[Function]}
                 options={
-                                Array [
-                                                "foo",
-                                                "bar",
-                                              ]
+                  Array [
+                    "foo",
+                    "bar",
+                  ]
                 }
                 placeholder="{type}"
                 value=""
-/>,
+              />,
               "className": "rule__option rule__option--type",
             },
             "ref": null,
@@ -185,28 +185,28 @@ ShallowWrapper {
           <sortableHandle(DragHandle) />,
           <div
             className="rule__options"
->
+          >
             <div
-                        className="rule__option rule__option--type"
+              className="rule__option rule__option--type"
             >
-                        <DropDown
-                                    className={null}
-                                    onChange={[Function]}
-                                    options={
-                                                Array [
-                                                            "foo",
-                                                            "bar",
-                                                          ]
-                                    }
-                                    placeholder="{type}"
-                                    value=""
-                        />
+              <DropDown
+                className={null}
+                onChange={[Function]}
+                options={
+                  Array [
+                    "foo",
+                    "bar",
+                  ]
+                }
+                placeholder="{type}"
+                value=""
+              />
             </div>
-</div>,
+          </div>,
           <div
             className="rule__delete"
             onClick={[Function]}
-/>,
+          />,
         ],
         "className": "rule rule--alter",
       },
@@ -229,20 +229,20 @@ ShallowWrapper {
             "children": Array [
               <div
                 className="rule__option rule__option--type"
->
+              >
                 <DropDown
-                                className={null}
-                                onChange={[Function]}
-                                options={
-                                                Array [
-                                                                "foo",
-                                                                "bar",
-                                                              ]
-                                }
-                                placeholder="{type}"
-                                value=""
+                  className={null}
+                  onChange={[Function]}
+                  options={
+                    Array [
+                      "foo",
+                      "bar",
+                    ]
+                  }
+                  placeholder="{type}"
+                  value=""
                 />
-</div>,
+              </div>,
               false,
               false,
               false,
@@ -260,14 +260,14 @@ ShallowWrapper {
                   className={null}
                   onChange={[Function]}
                   options={
-                                    Array [
-                                                      "foo",
-                                                      "bar",
-                                                    ]
+                    Array [
+                      "foo",
+                      "bar",
+                    ]
                   }
                   placeholder="{type}"
                   value=""
-/>,
+                />,
                 "className": "rule__option rule__option--type",
               },
               "ref": null,

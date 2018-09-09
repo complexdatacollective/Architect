@@ -7,13 +7,13 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <Variable
     fieldId="bar"
     form="foo"
-    handleDelete={[Function]}
+    handleDelete={[MockFunction]}
     hasSubmitFailed={false}
     isDirty={false}
     isInvalid={false}
-    resetOptions={[Function]}
+    resetOptions={[MockFunction]}
     variableType={null}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -29,113 +29,113 @@ ShallowWrapper {
       "children": <FormSection
         component="div"
         name="bar"
->
+      >
         <Connect(Guided)
-                contentId="guidance.registry.type.variable"
+          contentId="guidance.registry.type.variable"
         >
-                <div>
-                        <div
-                                data-name="Variable name"
-                                id="field_bar_name"
-                        />
-                        <Validated
-                                component={[Function]}
-                                label="Name"
-                                name="name"
-                                validation={
-                                        Object {
-                                                "required": true,
-                                              }
-                                }
-                        />
-                        <div
-                                data-name="Variable label"
-                                id="field_bar_label"
-                        />
-                        <Validated
-                                component={[Function]}
-                                label="Label"
-                                name="label"
-                                validation={
-                                        Object {
-                                                "required": true,
-                                              }
-                                }
-                        />
-                        <Field
-                                component={[Function]}
-                                label="Description"
-                                name="description"
-                        />
-                        <div
-                                data-name="Variable type"
-                                id="field_bar_type"
-                        />
-                        <Validated
-                                className="form-field-container"
-                                component={[Function]}
-                                label="Variable type"
-                                name="type"
-                                onChange={[Function]}
-                                options={
-                                        Array [
-                                                "text",
-                                                "number",
-                                                "datetime",
-                                                "boolean",
-                                                "ordinal",
-                                                "categorical",
-                                                "layout",
-                                                "location",
-                                              ]
-                                }
-                                validation={
-                                        Object {
-                                                "required": true,
-                                              }
-                                }
-                        >
-                                <option
-                                        value=""
-                                >
-                                        — Select variable type —
-                                </option>
-                        </Validated>
-                </div>
+          <div>
+            <div
+              data-name="Variable name"
+              id="field_bar_name"
+            />
+            <Validated
+              component={[Function]}
+              label="Name"
+              name="name"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+            <div
+              data-name="Variable label"
+              id="field_bar_label"
+            />
+            <Validated
+              component={[Function]}
+              label="Label"
+              name="label"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+            <Field
+              component={[Function]}
+              label="Description"
+              name="description"
+            />
+            <div
+              data-name="Variable type"
+              id="field_bar_type"
+            />
+            <Validated
+              className="form-field-container"
+              component={[Function]}
+              label="Variable type"
+              name="type"
+              onChange={[MockFunction]}
+              options={
+                Array [
+                  "text",
+                  "number",
+                  "datetime",
+                  "boolean",
+                  "ordinal",
+                  "categorical",
+                  "layout",
+                  "location",
+                ]
+              }
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            >
+              <option
+                value=""
+              >
+                — Select variable type —
+              </option>
+            </Validated>
+          </div>
         </Connect(Guided)>
-</FormSection>,
+      </FormSection>,
       "className": null,
-      "handleDelete": [Function],
+      "handleDelete": [MockFunction],
       "lockOpen": false,
       "open": false,
       "preview": <FormSection
         component="div"
         name="bar"
->
+      >
         <h3
-                className="variable__preview-title"
+          className="variable__preview-title"
         >
-                <Field
-                        component={[Function]}
-                        name="name"
-                />
-                 : 
-                <em>
-                        <Field
-                                component={[Function]}
-                                name="type"
-                        />
-                </em>
+          <Field
+            component={[Function]}
+            name="name"
+          />
+           : 
+          <em>
+            <Field
+              component={[Function]}
+              name="type"
+            />
+          </em>
         </h3>
         <p
-                className="variable__preview-description"
+          className="variable__preview-description"
         >
-                <Field
-                        component={[Function]}
-                        name="description"
-                />
+          <Field
+            component={[Function]}
+            name="description"
+          />
         </p>
-</FormSection>,
+      </FormSection>,
       "sortable": true,
     },
     "ref": null,
@@ -146,77 +146,77 @@ ShallowWrapper {
       "props": Object {
         "children": <Connect(Guided)
           contentId="guidance.registry.type.variable"
->
+        >
           <div>
-                    <div
-                              data-name="Variable name"
-                              id="field_bar_name"
-                    />
-                    <Validated
-                              component={[Function]}
-                              label="Name"
-                              name="name"
-                              validation={
-                                        Object {
-                                                  "required": true,
-                                                }
-                              }
-                    />
-                    <div
-                              data-name="Variable label"
-                              id="field_bar_label"
-                    />
-                    <Validated
-                              component={[Function]}
-                              label="Label"
-                              name="label"
-                              validation={
-                                        Object {
-                                                  "required": true,
-                                                }
-                              }
-                    />
-                    <Field
-                              component={[Function]}
-                              label="Description"
-                              name="description"
-                    />
-                    <div
-                              data-name="Variable type"
-                              id="field_bar_type"
-                    />
-                    <Validated
-                              className="form-field-container"
-                              component={[Function]}
-                              label="Variable type"
-                              name="type"
-                              onChange={[Function]}
-                              options={
-                                        Array [
-                                                  "text",
-                                                  "number",
-                                                  "datetime",
-                                                  "boolean",
-                                                  "ordinal",
-                                                  "categorical",
-                                                  "layout",
-                                                  "location",
-                                                ]
-                              }
-                              validation={
-                                        Object {
-                                                  "required": true,
-                                                }
-                              }
-                    >
-                              <option
-                                        value=""
-                              >
-                                        — Select variable type —
-                              </option>
-                    </Validated>
+            <div
+              data-name="Variable name"
+              id="field_bar_name"
+            />
+            <Validated
+              component={[Function]}
+              label="Name"
+              name="name"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+            <div
+              data-name="Variable label"
+              id="field_bar_label"
+            />
+            <Validated
+              component={[Function]}
+              label="Label"
+              name="label"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+            <Field
+              component={[Function]}
+              label="Description"
+              name="description"
+            />
+            <div
+              data-name="Variable type"
+              id="field_bar_type"
+            />
+            <Validated
+              className="form-field-container"
+              component={[Function]}
+              label="Variable type"
+              name="type"
+              onChange={[MockFunction]}
+              options={
+                Array [
+                  "text",
+                  "number",
+                  "datetime",
+                  "boolean",
+                  "ordinal",
+                  "categorical",
+                  "layout",
+                  "location",
+                ]
+              }
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            >
+              <option
+                value=""
+              >
+                — Select variable type —
+              </option>
+            </Validated>
           </div>
-</Connect(Guided)>,
+        </Connect(Guided)>,
         "component": "div",
         "name": "bar",
       },
@@ -228,73 +228,73 @@ ShallowWrapper {
         "props": Object {
           "children": <div>
             <div
-                        data-name="Variable name"
-                        id="field_bar_name"
+              data-name="Variable name"
+              id="field_bar_name"
             />
             <Validated
-                        component={[Function]}
-                        label="Name"
-                        name="name"
-                        validation={
-                                    Object {
-                                                "required": true,
-                                              }
-                        }
+              component={[Function]}
+              label="Name"
+              name="name"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
             />
             <div
-                        data-name="Variable label"
-                        id="field_bar_label"
+              data-name="Variable label"
+              id="field_bar_label"
             />
             <Validated
-                        component={[Function]}
-                        label="Label"
-                        name="label"
-                        validation={
-                                    Object {
-                                                "required": true,
-                                              }
-                        }
+              component={[Function]}
+              label="Label"
+              name="label"
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
             />
             <Field
-                        component={[Function]}
-                        label="Description"
-                        name="description"
+              component={[Function]}
+              label="Description"
+              name="description"
             />
             <div
-                        data-name="Variable type"
-                        id="field_bar_type"
+              data-name="Variable type"
+              id="field_bar_type"
             />
             <Validated
-                        className="form-field-container"
-                        component={[Function]}
-                        label="Variable type"
-                        name="type"
-                        onChange={[Function]}
-                        options={
-                                    Array [
-                                                "text",
-                                                "number",
-                                                "datetime",
-                                                "boolean",
-                                                "ordinal",
-                                                "categorical",
-                                                "layout",
-                                                "location",
-                                              ]
-                        }
-                        validation={
-                                    Object {
-                                                "required": true,
-                                              }
-                        }
+              className="form-field-container"
+              component={[Function]}
+              label="Variable type"
+              name="type"
+              onChange={[MockFunction]}
+              options={
+                Array [
+                  "text",
+                  "number",
+                  "datetime",
+                  "boolean",
+                  "ordinal",
+                  "categorical",
+                  "layout",
+                  "location",
+                ]
+              }
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
             >
-                        <option
-                                    value=""
-                        >
-                                    — Select variable type —
-                        </option>
+              <option
+                value=""
+              >
+                — Select variable type —
+              </option>
             </Validated>
-</div>,
+          </div>,
           "contentId": "guidance.registry.type.variable",
         },
         "ref": null,
@@ -307,70 +307,70 @@ ShallowWrapper {
               <div
                 data-name="Variable name"
                 id="field_bar_name"
-/>,
+              />,
               <Validated
                 component={[Function]}
                 label="Name"
                 name="name"
                 validation={
-                                Object {
-                                                "required": true,
-                                              }
+                  Object {
+                    "required": true,
+                  }
                 }
-/>,
+              />,
               <div
                 data-name="Variable label"
                 id="field_bar_label"
-/>,
+              />,
               <Validated
                 component={[Function]}
                 label="Label"
                 name="label"
                 validation={
-                                Object {
-                                                "required": true,
-                                              }
+                  Object {
+                    "required": true,
+                  }
                 }
-/>,
+              />,
               <Field
                 component={[Function]}
                 label="Description"
                 name="description"
-/>,
+              />,
               <div
                 data-name="Variable type"
                 id="field_bar_type"
-/>,
+              />,
               <Validated
                 className="form-field-container"
                 component={[Function]}
                 label="Variable type"
                 name="type"
-                onChange={[Function]}
+                onChange={[MockFunction]}
                 options={
-                                Array [
-                                                "text",
-                                                "number",
-                                                "datetime",
-                                                "boolean",
-                                                "ordinal",
-                                                "categorical",
-                                                "layout",
-                                                "location",
-                                              ]
+                  Array [
+                    "text",
+                    "number",
+                    "datetime",
+                    "boolean",
+                    "ordinal",
+                    "categorical",
+                    "layout",
+                    "location",
+                  ]
                 }
                 validation={
-                                Object {
-                                                "required": true,
-                                              }
+                  Object {
+                    "required": true,
+                  }
                 }
->
+              >
                 <option
-                                value=""
+                  value=""
                 >
-                                — Select variable type —
+                  — Select variable type —
                 </option>
-</Validated>,
+              </Validated>,
               false,
               null,
             ],
@@ -465,14 +465,14 @@ ShallowWrapper {
               "props": Object {
                 "children": <option
                   value=""
->
+                >
                   — Select variable type —
-</option>,
+                </option>,
                 "className": "form-field-container",
                 "component": [Function],
                 "label": "Variable type",
                 "name": "type",
-                "onChange": [Function],
+                "onChange": [MockFunction],
                 "options": Array [
                   "text",
                   "number",
@@ -522,113 +522,113 @@ ShallowWrapper {
         "children": <FormSection
           component="div"
           name="bar"
->
+        >
           <Connect(Guided)
-                    contentId="guidance.registry.type.variable"
+            contentId="guidance.registry.type.variable"
           >
-                    <div>
-                              <div
-                                        data-name="Variable name"
-                                        id="field_bar_name"
-                              />
-                              <Validated
-                                        component={[Function]}
-                                        label="Name"
-                                        name="name"
-                                        validation={
-                                                  Object {
-                                                            "required": true,
-                                                          }
-                                        }
-                              />
-                              <div
-                                        data-name="Variable label"
-                                        id="field_bar_label"
-                              />
-                              <Validated
-                                        component={[Function]}
-                                        label="Label"
-                                        name="label"
-                                        validation={
-                                                  Object {
-                                                            "required": true,
-                                                          }
-                                        }
-                              />
-                              <Field
-                                        component={[Function]}
-                                        label="Description"
-                                        name="description"
-                              />
-                              <div
-                                        data-name="Variable type"
-                                        id="field_bar_type"
-                              />
-                              <Validated
-                                        className="form-field-container"
-                                        component={[Function]}
-                                        label="Variable type"
-                                        name="type"
-                                        onChange={[Function]}
-                                        options={
-                                                  Array [
-                                                            "text",
-                                                            "number",
-                                                            "datetime",
-                                                            "boolean",
-                                                            "ordinal",
-                                                            "categorical",
-                                                            "layout",
-                                                            "location",
-                                                          ]
-                                        }
-                                        validation={
-                                                  Object {
-                                                            "required": true,
-                                                          }
-                                        }
-                              >
-                                        <option
-                                                  value=""
-                                        >
-                                                  — Select variable type —
-                                        </option>
-                              </Validated>
-                    </div>
+            <div>
+              <div
+                data-name="Variable name"
+                id="field_bar_name"
+              />
+              <Validated
+                component={[Function]}
+                label="Name"
+                name="name"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+              <div
+                data-name="Variable label"
+                id="field_bar_label"
+              />
+              <Validated
+                component={[Function]}
+                label="Label"
+                name="label"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+              <Field
+                component={[Function]}
+                label="Description"
+                name="description"
+              />
+              <div
+                data-name="Variable type"
+                id="field_bar_type"
+              />
+              <Validated
+                className="form-field-container"
+                component={[Function]}
+                label="Variable type"
+                name="type"
+                onChange={[MockFunction]}
+                options={
+                  Array [
+                    "text",
+                    "number",
+                    "datetime",
+                    "boolean",
+                    "ordinal",
+                    "categorical",
+                    "layout",
+                    "location",
+                  ]
+                }
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              >
+                <option
+                  value=""
+                >
+                  — Select variable type —
+                </option>
+              </Validated>
+            </div>
           </Connect(Guided)>
-</FormSection>,
+        </FormSection>,
         "className": null,
-        "handleDelete": [Function],
+        "handleDelete": [MockFunction],
         "lockOpen": false,
         "open": false,
         "preview": <FormSection
           component="div"
           name="bar"
->
+        >
           <h3
-                    className="variable__preview-title"
+            className="variable__preview-title"
           >
-                    <Field
-                              component={[Function]}
-                              name="name"
-                    />
-                     : 
-                    <em>
-                              <Field
-                                        component={[Function]}
-                                        name="type"
-                              />
-                    </em>
+            <Field
+              component={[Function]}
+              name="name"
+            />
+             : 
+            <em>
+              <Field
+                component={[Function]}
+                name="type"
+              />
+            </em>
           </h3>
           <p
-                    className="variable__preview-description"
+            className="variable__preview-description"
           >
-                    <Field
-                              component={[Function]}
-                              name="description"
-                    />
+            <Field
+              component={[Function]}
+              name="description"
+            />
           </p>
-</FormSection>,
+        </FormSection>,
         "sortable": true,
       },
       "ref": null,
@@ -639,77 +639,77 @@ ShallowWrapper {
         "props": Object {
           "children": <Connect(Guided)
             contentId="guidance.registry.type.variable"
->
+          >
             <div>
-                        <div
-                                    data-name="Variable name"
-                                    id="field_bar_name"
-                        />
-                        <Validated
-                                    component={[Function]}
-                                    label="Name"
-                                    name="name"
-                                    validation={
-                                                Object {
-                                                            "required": true,
-                                                          }
-                                    }
-                        />
-                        <div
-                                    data-name="Variable label"
-                                    id="field_bar_label"
-                        />
-                        <Validated
-                                    component={[Function]}
-                                    label="Label"
-                                    name="label"
-                                    validation={
-                                                Object {
-                                                            "required": true,
-                                                          }
-                                    }
-                        />
-                        <Field
-                                    component={[Function]}
-                                    label="Description"
-                                    name="description"
-                        />
-                        <div
-                                    data-name="Variable type"
-                                    id="field_bar_type"
-                        />
-                        <Validated
-                                    className="form-field-container"
-                                    component={[Function]}
-                                    label="Variable type"
-                                    name="type"
-                                    onChange={[Function]}
-                                    options={
-                                                Array [
-                                                            "text",
-                                                            "number",
-                                                            "datetime",
-                                                            "boolean",
-                                                            "ordinal",
-                                                            "categorical",
-                                                            "layout",
-                                                            "location",
-                                                          ]
-                                    }
-                                    validation={
-                                                Object {
-                                                            "required": true,
-                                                          }
-                                    }
-                        >
-                                    <option
-                                                value=""
-                                    >
-                                                — Select variable type —
-                                    </option>
-                        </Validated>
+              <div
+                data-name="Variable name"
+                id="field_bar_name"
+              />
+              <Validated
+                component={[Function]}
+                label="Name"
+                name="name"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+              <div
+                data-name="Variable label"
+                id="field_bar_label"
+              />
+              <Validated
+                component={[Function]}
+                label="Label"
+                name="label"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+              <Field
+                component={[Function]}
+                label="Description"
+                name="description"
+              />
+              <div
+                data-name="Variable type"
+                id="field_bar_type"
+              />
+              <Validated
+                className="form-field-container"
+                component={[Function]}
+                label="Variable type"
+                name="type"
+                onChange={[MockFunction]}
+                options={
+                  Array [
+                    "text",
+                    "number",
+                    "datetime",
+                    "boolean",
+                    "ordinal",
+                    "categorical",
+                    "layout",
+                    "location",
+                  ]
+                }
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              >
+                <option
+                  value=""
+                >
+                  — Select variable type —
+                </option>
+              </Validated>
             </div>
-</Connect(Guided)>,
+          </Connect(Guided)>,
           "component": "div",
           "name": "bar",
         },
@@ -721,73 +721,73 @@ ShallowWrapper {
           "props": Object {
             "children": <div>
               <div
-                            data-name="Variable name"
-                            id="field_bar_name"
+                data-name="Variable name"
+                id="field_bar_name"
               />
               <Validated
-                            component={[Function]}
-                            label="Name"
-                            name="name"
-                            validation={
-                                          Object {
-                                                        "required": true,
-                                                      }
-                            }
+                component={[Function]}
+                label="Name"
+                name="name"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
               />
               <div
-                            data-name="Variable label"
-                            id="field_bar_label"
+                data-name="Variable label"
+                id="field_bar_label"
               />
               <Validated
-                            component={[Function]}
-                            label="Label"
-                            name="label"
-                            validation={
-                                          Object {
-                                                        "required": true,
-                                                      }
-                            }
+                component={[Function]}
+                label="Label"
+                name="label"
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
               />
               <Field
-                            component={[Function]}
-                            label="Description"
-                            name="description"
+                component={[Function]}
+                label="Description"
+                name="description"
               />
               <div
-                            data-name="Variable type"
-                            id="field_bar_type"
+                data-name="Variable type"
+                id="field_bar_type"
               />
               <Validated
-                            className="form-field-container"
-                            component={[Function]}
-                            label="Variable type"
-                            name="type"
-                            onChange={[Function]}
-                            options={
-                                          Array [
-                                                        "text",
-                                                        "number",
-                                                        "datetime",
-                                                        "boolean",
-                                                        "ordinal",
-                                                        "categorical",
-                                                        "layout",
-                                                        "location",
-                                                      ]
-                            }
-                            validation={
-                                          Object {
-                                                        "required": true,
-                                                      }
-                            }
+                className="form-field-container"
+                component={[Function]}
+                label="Variable type"
+                name="type"
+                onChange={[MockFunction]}
+                options={
+                  Array [
+                    "text",
+                    "number",
+                    "datetime",
+                    "boolean",
+                    "ordinal",
+                    "categorical",
+                    "layout",
+                    "location",
+                  ]
+                }
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
               >
-                            <option
-                                          value=""
-                            >
-                                          — Select variable type —
-                            </option>
+                <option
+                  value=""
+                >
+                  — Select variable type —
+                </option>
               </Validated>
-</div>,
+            </div>,
             "contentId": "guidance.registry.type.variable",
           },
           "ref": null,
@@ -800,70 +800,70 @@ ShallowWrapper {
                 <div
                   data-name="Variable name"
                   id="field_bar_name"
-/>,
+                />,
                 <Validated
                   component={[Function]}
                   label="Name"
                   name="name"
                   validation={
-                                    Object {
-                                                      "required": true,
-                                                    }
+                    Object {
+                      "required": true,
+                    }
                   }
-/>,
+                />,
                 <div
                   data-name="Variable label"
                   id="field_bar_label"
-/>,
+                />,
                 <Validated
                   component={[Function]}
                   label="Label"
                   name="label"
                   validation={
-                                    Object {
-                                                      "required": true,
-                                                    }
+                    Object {
+                      "required": true,
+                    }
                   }
-/>,
+                />,
                 <Field
                   component={[Function]}
                   label="Description"
                   name="description"
-/>,
+                />,
                 <div
                   data-name="Variable type"
                   id="field_bar_type"
-/>,
+                />,
                 <Validated
                   className="form-field-container"
                   component={[Function]}
                   label="Variable type"
                   name="type"
-                  onChange={[Function]}
+                  onChange={[MockFunction]}
                   options={
-                                    Array [
-                                                      "text",
-                                                      "number",
-                                                      "datetime",
-                                                      "boolean",
-                                                      "ordinal",
-                                                      "categorical",
-                                                      "layout",
-                                                      "location",
-                                                    ]
+                    Array [
+                      "text",
+                      "number",
+                      "datetime",
+                      "boolean",
+                      "ordinal",
+                      "categorical",
+                      "layout",
+                      "location",
+                    ]
                   }
                   validation={
-                                    Object {
-                                                      "required": true,
-                                                    }
+                    Object {
+                      "required": true,
+                    }
                   }
->
+                >
                   <option
-                                    value=""
+                    value=""
                   >
-                                    — Select variable type —
+                    — Select variable type —
                   </option>
-</Validated>,
+                </Validated>,
                 false,
                 null,
               ],
@@ -958,14 +958,14 @@ ShallowWrapper {
                 "props": Object {
                   "children": <option
                     value=""
->
+                  >
                     — Select variable type —
-</option>,
+                  </option>,
                   "className": "form-field-container",
                   "component": [Function],
                   "label": "Variable type",
                   "name": "type",
-                  "onChange": [Function],
+                  "onChange": [MockFunction],
                   "options": Array [
                     "text",
                     "number",

@@ -8,7 +8,7 @@ ShallowWrapper {
     createAndLoadProtocol={[Function]}
     openProtocol={[Function]}
     show={true}
-/>,
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -24,60 +24,60 @@ ShallowWrapper {
       "children": Array [
         <div
           className="start__welcome"
->
+        >
           <h1
-                    className="start__welcome-title"
+            className="start__welcome-title"
           >
-                    Architect
+            Architect
           </h1>
           <h2
-                    className="start__welcome-lead"
+            className="start__welcome-lead"
           >
-                    A tool for creating Network Canvas interviews
+            A tool for creating Network Canvas interviews
           </h2>
-</div>,
+        </div>,
         <div
           className="start__call-to-action"
->
+        >
           <Button
-                    color="platinum"
-                    content=""
-                    icon={
-                              <Icon
-                                        className=""
-                                        color="charcoal"
-                                        name="arrow-right"
-                                        style={Object {}}
-                              />
-                    }
-                    iconPosition="right"
-                    id="create-new-protocol-button"
-                    onClick={[Function]}
-                    size="small"
-                    type="button"
+            color="platinum"
+            content=""
+            icon={
+              <Icon
+                className=""
+                color="charcoal"
+                name="arrow-right"
+                style={Object {}}
+              />
+            }
+            iconPosition="right"
+            id="create-new-protocol-button"
+            onClick={[Function]}
+            size="small"
+            type="button"
           >
-                    Create new
+            Create new
           </Button>
           <Button
-                    color="cyber-grape"
-                    content=""
-                    icon={
-                              <Icon
-                                        className=""
-                                        color=""
-                                        name="arrow-right"
-                                        style={Object {}}
-                              />
-                    }
-                    iconPosition="right"
-                    id="open-existing-protocol-button"
-                    onClick={[Function]}
-                    size="small"
-                    type="button"
+            color="cyber-grape"
+            content=""
+            icon={
+              <Icon
+                className=""
+                color=""
+                name="arrow-right"
+                style={Object {}}
+              />
+            }
+            iconPosition="right"
+            id="open-existing-protocol-button"
+            onClick={[Function]}
+            size="small"
+            type="button"
           >
-                    Open existing
+            Open existing
           </Button>
-</div>,
+        </div>,
       ],
       "className": "start",
     },
@@ -91,14 +91,14 @@ ShallowWrapper {
           "children": Array [
             <h1
               className="start__welcome-title"
->
+            >
               Architect
-</h1>,
+            </h1>,
             <h2
               className="start__welcome-lead"
->
+            >
               A tool for creating Network Canvas interviews
-</h2>,
+            </h2>,
           ],
           "className": "start__welcome",
         },
@@ -141,40 +141,40 @@ ShallowWrapper {
               color="platinum"
               content=""
               icon={
-                            <Icon
-                                          className=""
-                                          color="charcoal"
-                                          name="arrow-right"
-                                          style={Object {}}
-                            />
+                <Icon
+                  className=""
+                  color="charcoal"
+                  name="arrow-right"
+                  style={Object {}}
+                />
               }
               iconPosition="right"
               id="create-new-protocol-button"
               onClick={[Function]}
               size="small"
               type="button"
->
+            >
               Create new
-</Button>,
+            </Button>,
             <Button
               color="cyber-grape"
               content=""
               icon={
-                            <Icon
-                                          className=""
-                                          color=""
-                                          name="arrow-right"
-                                          style={Object {}}
-                            />
+                <Icon
+                  className=""
+                  color=""
+                  name="arrow-right"
+                  style={Object {}}
+                />
               }
               iconPosition="right"
               id="open-existing-protocol-button"
               onClick={[Function]}
               size="small"
               type="button"
->
+            >
               Open existing
-</Button>,
+            </Button>,
           ],
           "className": "start__call-to-action",
         },
@@ -193,7 +193,7 @@ ShallowWrapper {
                 color="charcoal"
                 name="arrow-right"
                 style={Object {}}
-/>,
+              />,
               "iconPosition": "right",
               "id": "create-new-protocol-button",
               "onClick": [Function],
@@ -217,7 +217,7 @@ ShallowWrapper {
                 color=""
                 name="arrow-right"
                 style={Object {}}
-/>,
+              />,
               "iconPosition": "right",
               "id": "open-existing-protocol-button",
               "onClick": [Function],
@@ -243,60 +243,60 @@ ShallowWrapper {
         "children": Array [
           <div
             className="start__welcome"
->
+          >
             <h1
-                        className="start__welcome-title"
+              className="start__welcome-title"
             >
-                        Architect
+              Architect
             </h1>
             <h2
-                        className="start__welcome-lead"
+              className="start__welcome-lead"
             >
-                        A tool for creating Network Canvas interviews
+              A tool for creating Network Canvas interviews
             </h2>
-</div>,
+          </div>,
           <div
             className="start__call-to-action"
->
+          >
             <Button
-                        color="platinum"
-                        content=""
-                        icon={
-                                    <Icon
-                                                className=""
-                                                color="charcoal"
-                                                name="arrow-right"
-                                                style={Object {}}
-                                    />
-                        }
-                        iconPosition="right"
-                        id="create-new-protocol-button"
-                        onClick={[Function]}
-                        size="small"
-                        type="button"
+              color="platinum"
+              content=""
+              icon={
+                <Icon
+                  className=""
+                  color="charcoal"
+                  name="arrow-right"
+                  style={Object {}}
+                />
+              }
+              iconPosition="right"
+              id="create-new-protocol-button"
+              onClick={[Function]}
+              size="small"
+              type="button"
             >
-                        Create new
+              Create new
             </Button>
             <Button
-                        color="cyber-grape"
-                        content=""
-                        icon={
-                                    <Icon
-                                                className=""
-                                                color=""
-                                                name="arrow-right"
-                                                style={Object {}}
-                                    />
-                        }
-                        iconPosition="right"
-                        id="open-existing-protocol-button"
-                        onClick={[Function]}
-                        size="small"
-                        type="button"
+              color="cyber-grape"
+              content=""
+              icon={
+                <Icon
+                  className=""
+                  color=""
+                  name="arrow-right"
+                  style={Object {}}
+                />
+              }
+              iconPosition="right"
+              id="open-existing-protocol-button"
+              onClick={[Function]}
+              size="small"
+              type="button"
             >
-                        Open existing
+              Open existing
             </Button>
-</div>,
+          </div>,
         ],
         "className": "start",
       },
@@ -310,14 +310,14 @@ ShallowWrapper {
             "children": Array [
               <h1
                 className="start__welcome-title"
->
+              >
                 Architect
-</h1>,
+              </h1>,
               <h2
                 className="start__welcome-lead"
->
+              >
                 A tool for creating Network Canvas interviews
-</h2>,
+              </h2>,
             ],
             "className": "start__welcome",
           },
@@ -360,40 +360,40 @@ ShallowWrapper {
                 color="platinum"
                 content=""
                 icon={
-                                <Icon
-                                                className=""
-                                                color="charcoal"
-                                                name="arrow-right"
-                                                style={Object {}}
-                                />
+                  <Icon
+                    className=""
+                    color="charcoal"
+                    name="arrow-right"
+                    style={Object {}}
+                  />
                 }
                 iconPosition="right"
                 id="create-new-protocol-button"
                 onClick={[Function]}
                 size="small"
                 type="button"
->
+              >
                 Create new
-</Button>,
+              </Button>,
               <Button
                 color="cyber-grape"
                 content=""
                 icon={
-                                <Icon
-                                                className=""
-                                                color=""
-                                                name="arrow-right"
-                                                style={Object {}}
-                                />
+                  <Icon
+                    className=""
+                    color=""
+                    name="arrow-right"
+                    style={Object {}}
+                  />
                 }
                 iconPosition="right"
                 id="open-existing-protocol-button"
                 onClick={[Function]}
                 size="small"
                 type="button"
->
+              >
                 Open existing
-</Button>,
+              </Button>,
             ],
             "className": "start__call-to-action",
           },
@@ -412,7 +412,7 @@ ShallowWrapper {
                   color="charcoal"
                   name="arrow-right"
                   style={Object {}}
-/>,
+                />,
                 "iconPosition": "right",
                 "id": "create-new-protocol-button",
                 "onClick": [Function],
@@ -436,7 +436,7 @@ ShallowWrapper {
                   color=""
                   name="arrow-right"
                   style={Object {}}
-/>,
+                />,
                 "iconPosition": "right",
                 "id": "open-existing-protocol-button",
                 "onClick": [Function],
