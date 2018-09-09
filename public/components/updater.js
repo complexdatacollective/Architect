@@ -1,51 +1,49 @@
-/**
- * updater.js
- *
- * Please use manual update only when it is really required, otherwise please
- * use recommended non-intrusive auto update.
- *
- * Import steps:
- * 1. create `updater.js` for the code snippet
- * 2. require `updater.js` for menu implementation, and set `checkForUpdates`
- *    callback from `updater` for the click property of `Check Updates...` MenuItem.
- */
-
 const { autoUpdater } = require('electron-updater');
 const { dialog } = require('electron');
 
-autoUpdater.autoDownload = false;
+const releasesUrl = 'https://github.com/codaco/Architect/releases';
 
-autoUpdater.on('error', (error) => {
-  dialog.showErrorBox('Error: ', error == null ? 'unknown' : (error.stack || error).toString());
-});
-
-autoUpdater.on('update-available', () => {
+const onUpdateAvailable = (updateInfo) => {
   dialog.showMessageBox({
-    type: 'info',
-    title: 'Found Updates',
-    message: 'Found updates, do you want update now?',
-    buttons: ['Yes', 'No'],
-  }, (buttonIndex) => {
+    type: 'question',
+    title: 'Update Available',
+    message: 'Do you want update now?',
+    detail: `Version ${updateInfo.releaseName} is available.\n\nRelease notes are available:\n${releasesUrl}`,
+    buttons: ['Update and Restart', 'Cancel'],
+  },
+  (buttonIndex) => {
     if (buttonIndex === 0) {
       autoUpdater.downloadUpdate();
     }
   });
-});
+};
 
-autoUpdater.on('update-not-available', () => {
+const onUpdateNotAvailable = () => {
   dialog.showMessageBox({
-    title: 'No Updates',
-    message: 'Current version is up-to-date.',
+    title: 'No Updates Available',
+    message: 'Architect is up-to-date.',
   });
-});
+};
 
-autoUpdater.on('update-downloaded', () => {
+const onUpdateDownloaded = () => {
   dialog.showMessageBox({
-    title: 'Install Updates',
-    message: 'Updates downloaded, application will be quit for update...',
-  }, () => {
-    setImmediate(() => autoUpdater.quitAndInstall());
-  });
-});
+    title: 'Install Update',
+    message: 'Download Complete',
+    detail: 'Your update is ready to install. Click this notification to restart the app and install the update.',
+    buttons: ['Restart'],
+  },
+  () => setImmediate(() => autoUpdater.quitAndInstall()));
+};
+
+const onError = (error) => {
+  const message = error ? (error.stack || error).toString() : 'An unknown error occurred';
+  dialog.showErrorBox('Error', message);
+};
+
+autoUpdater.autoDownload = false;
+autoUpdater.on('error', onError);
+autoUpdater.on('update-available', onUpdateAvailable);
+autoUpdater.on('update-downloaded', onUpdateDownloaded);
+autoUpdater.on('update-not-available', onUpdateNotAvailable);
 
 module.exports = autoUpdater;
