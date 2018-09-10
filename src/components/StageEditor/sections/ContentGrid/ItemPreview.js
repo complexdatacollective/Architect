@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
 import { Icon } from '../../../../ui/components';
 import { SMALL, MEDIUM, LARGE } from './index';
 
-const ItemPreview = ({ content, type, size, onDelete }) => (
+const ItemPreview = ({ name, onDelete }) => (
   <div className="content-grid-preview">
-    <div className="content-grid-preview__name">{content}:{type}:{size}</div>
+    <div className="content-grid-preview__name">
+      <Field name={name} component={props => <div>{JSON.stringify(props)}</div>} />
+    </div>
     <div className="content-grid-preview__delete" onClick={onDelete}>
       <Icon name="delete" />
     </div>

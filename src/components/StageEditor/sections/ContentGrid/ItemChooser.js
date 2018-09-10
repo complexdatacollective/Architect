@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const ItemChooser = ({ itemOptions, onChooseItemType, show }) => (
+const itemOptions = [
+  'text',
+  'image',
+  'video',
+  'audio',
+];
+
+const ItemChooser = ({ onChooseItemType, show }) => (
   <div className={cx('content-grid-chooser', { 'content-grid-chooser--show': show })}>
     { itemOptions.map(itemType => (
       <div
@@ -17,13 +24,11 @@ const ItemChooser = ({ itemOptions, onChooseItemType, show }) => (
 );
 
 ItemChooser.propTypes = {
-  itemOptions: PropTypes.object,
   onChooseItemType: PropTypes.func.isRequired,
   show: PropTypes.bool,
 };
 
 ItemChooser.defaultProps = {
-  itemOptions: [],
   show: false,
 };
 

@@ -1,136 +1,83 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { omit, map, pickBy } from 'lodash';
-import { withHandlers, compose } from 'recompose';
 import { connect } from 'react-redux';
-import { change, FormSection } from 'redux-form';
+import { FieldArray, arrayPush, change } from 'redux-form';
 import RoundButton from '../../../Form/RoundButton';
-import Variable from './Item';
-
-const withVaribleActions = withHandlers({
-  createVariable: props => (variable) => {
-    // don't add existing property
-    if (Object.prototype.hasOwnProperty.call(props.values, variable)) { return; }
-    props.change({ ...props.values, [variable]: undefined });
-  },
-  deleteVariable: props => variable =>
-    props.change(omit(props.values, variable)),
-});
+import Items from './Items';
+import Item from './Item';
 
 class ContentGrid extends Component {
   static propTypes = {
-    variableRegistry: PropTypes.object.isRequired,
-    name: PropTypes.string.isRequired,
-    values: PropTypes.object,
-    createVariable: PropTypes.func.isRequired,
-    deleteVariable: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    values: {},
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      new: false,
       editing: null,
     };
   }
 
-  get variables() {
-    const variableMap = map(
-      this.props.values,
-      (value, variable) => ({ value, variable }),
-    );
-
-    return this.state.new ?
-      variableMap.concat({ value: undefined, variable: undefined }) :
-      variableMap;
-  }
-
-  get variableRegistry() {
-    return pickBy(this.props.variableRegistry, ({ type }) => type !== 'layout');
-  }
-
-  get unusedVariables() {
-    return omit(this.variableRegistry, map(this.variables, 'variable'));
-  }
-
-  handleEditVariable = (variable) => {
-    if (this.state.editing === variable) { this.setState({ editing: null }); }
-
-    this.setState({ editing: variable, new: false });
+  handleEditItem = (itemId) => {
+    if (this.state.editing === itemId) {
+      // If we're already editing it then act like a toggle
+      this.setState({ editing: null });
+    }
+    this.setState({ editing: itemId });
   };
 
-  handleCreateVariable = () => {
-    this.setState({ new: true, editing: undefined });
-  };
+  handleChooseItemType = (fieldId, type) =>
+    this.props.setInputType(fieldId, type);
 
-  handleChooseVariable = (variable) => {
-    this.props.createVariable(variable);
-    this.setState({ new: false, editing: variable });
-  };
-
-  handleDeleteVariable = (variable) => {
-    this.props.deleteVariable(variable);
+  handleCreateItem = () => {
+    const itemId = this.props.createNewItem();
+    this.setState({ editing: itemId });
   };
 
   render() {
-    const {
-      name,
-    } = this.props;
-
-    const rows = this.variables.map(({ value, variable }, index) => {
-      const isEditing = this.state.editing === variable;
-
-      return (
-        <div className="attributes-table__variable" key={index}>
-          <Variable
-            value={value}
-            variable={variable}
-            variableRegistry={this.variableRegistry}
-            unusedVariables={this.unusedVariables}
-            isEditing={isEditing}
-            onChooseVariable={this.handleChooseVariable}
-            onToggleEdit={() => this.handleEditVariable(variable)}
-            onDelete={() => this.handleDeleteVariable(variable)}
-          />
-        </div>
-      );
-    });
+    const { form } = this.props;
 
     return (
-      <div className="attributes-table">
-        <FormSection name={name} className="attributes-table__variables">
-          {rows}
-        </FormSection>
+      <div className="content-grid">
+        <FieldArray
+          name="items"
+          component={Items}
+          itemComponent={Item}
+          onEditItem={this.handleEditItem}
+          onChooseItemType={this.handleChooseItemType}
+          editing={this.state.editing}
+          form={form}
+        />
 
         <RoundButton
-          onClick={this.handleCreateVariable}
-          className="attributes-table__add"
+          onClick={this.handleCreateItem}
+          className="content-grid__add"
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, { name, form }) => ({
-  values: form.getValues(state, name),
+ContentGrid.propTypes = {
+  createNewItem: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    name: PropTypes.string,
+    getValues: PropTypes.func,
+  }).isRequired,
+};
+
+const mapDispatchToProps = (dispatch, { form }) => ({
+  createNewItem: () => {
+    const itemId = uuid();
+    dispatch(arrayPush(form.name, 'items', { id: itemId }));
+    return itemId;
+  },
+  setInputType: (fieldId, type) => dispatch(change(form.name, `${fieldId}.type`, type)),
 });
 
-const mapDispatchToProps = (dispatch, { name, form }) => ({
-  change: bindActionCreators(
-    value => change(form.name, name, value),
-    dispatch,
-  ),
-});
-
-export { ContentGrid };
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withVaribleActions,
-)(ContentGrid);
+export default connect(null, mapDispatchToProps)(ContentGrid);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ItemPreview from './ItemPreview';
@@ -7,7 +8,6 @@ import ItemEditor from './ItemEditor';
 
 class Item extends Component {
   static propTypes = {
-    itemOptions: PropTypes.array,
     name: PropTypes.string,
     type: PropTypes.string,
     isEditing: PropTypes.bool,
@@ -17,7 +17,6 @@ class Item extends Component {
   };
 
   static defaultProps = {
-    itemOptions: [],
     isEditing: false,
     type: null,
     value: null,
@@ -25,23 +24,30 @@ class Item extends Component {
   };
 
   get isNew() {
-    return true;
+    return !this.props.type;
   }
+
+  get isEditing() {
+    return this.props.itemId === this.props.editing;
+  }
+
+  handleChooseItemType = type =>
+    this.props.onChooseItemType(this.props.fieldId, type);
 
   render() {
     const {
-      itemOptions,
-      name,
+      fieldId: name,
+      form,
       type,
-      isEditing,
       onToggleEdit,
       onDelete,
-      onChooseItemType,
     } = this.props;
+
+    console.log(`item->render(${this.props.itemId})`, { props: this.props });
 
     const variableClasses = cx(
       'content-grid-item',
-      { 'content-grid-item--edit': isEditing },
+      { 'content-grid-item--edit': this.isEditing },
       { 'content-grid-item--new': this.isNew },
     );
 
@@ -59,11 +65,11 @@ class Item extends Component {
         <div className="content-grid-item__edit">
           <ItemChooser
             show={this.isNew}
-            onChooseItemType={onChooseItemType}
-            itemOptions={itemOptions}
+            onChooseItemType={this.handleChooseItemType}
           />
           <ItemEditor
             show={!this.isNew}
+            form={form}
             name={name}
             type={type}
           />
@@ -73,6 +79,15 @@ class Item extends Component {
   }
 }
 
+const mapStateToProps = (state, { fieldId, form }) => {
+  const {
+    type,
+    id: itemId,
+  } = form.getValues(state, `${fieldId}`);
+
+  return { type, itemId };
+};
+
 export { Item };
 
-export default Item;
+export default connect(mapStateToProps)(Item);
