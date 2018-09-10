@@ -1,30 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map } from 'lodash';
 import cx from 'classnames';
 
-const VariableChooser = ({ unusedVariables, onChooseVariable, show }) => (
-  <div className={cx('attributes-table-chooser', { 'attributes-table-chooser--show': show })}>
-    { map(unusedVariables, (variable, variableId) => (
+const ItemChooser = ({ itemOptions, onChooseItem, show }) => (
+  <div className={cx('content-grid-chooser', { 'content-grid-chooser--show': show })}>
+    { itemOptions.map(itemType => (
       <div
-        className="attributes-table-chooser-variable"
-        onClick={(e) => { e.stopPropagation(); onChooseVariable(variableId); }}
+        key={itemType}
+        className="content-grid-chooser-item"
+        onClick={(e) => { e.stopPropagation(); onChooseItem(itemType); }}
       >
-        {variable.label}
+        {itemType}
       </div>
     )) }
   </div>
 );
 
-VariableChooser.propTypes = {
-  unusedVariables: PropTypes.object,
-  onChooseVariable: PropTypes.func.isRequired,
+ItemChooser.propTypes = {
+  itemOptions: PropTypes.object,
+  onChooseItem: PropTypes.func.isRequired,
   show: PropTypes.bool,
 };
 
-VariableChooser.defaultProps = {
-  unusedVariables: {},
+ItemChooser.defaultProps = {
+  itemOptions: [],
   show: false,
 };
 
-export default VariableChooser;
+export default ItemChooser;
