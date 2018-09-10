@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const ItemChooser = ({ itemOptions, onChooseItem, show }) => (
+const ItemChooser = ({ itemOptions, onChooseItemType, show }) => (
   <div className={cx('content-grid-chooser', { 'content-grid-chooser--show': show })}>
     { itemOptions.map(itemType => (
       <div
         key={itemType}
         className="content-grid-chooser-item"
-        onClick={(e) => { e.stopPropagation(); onChooseItem(itemType); }}
+        onClick={(e) => { e.stopPropagation(); onChooseItemType(itemType); }}
       >
         {itemType}
       </div>
@@ -18,7 +18,7 @@ const ItemChooser = ({ itemOptions, onChooseItem, show }) => (
 
 ItemChooser.propTypes = {
   itemOptions: PropTypes.object,
-  onChooseItem: PropTypes.func.isRequired,
+  onChooseItemType: PropTypes.func.isRequired,
   show: PropTypes.bool,
 };
 

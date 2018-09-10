@@ -1,52 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import VariablePreview from './ItemPreview';
-import VariableChooser from './ItemChooser';
-import VariableEditor from './ItemEditor';
+import ItemPreview from './ItemPreview';
+import ItemChooser from './ItemChooser';
+import ItemEditor from './ItemEditor';
 
-class Variable extends Component {
+class Item extends Component {
   static propTypes = {
-    unusedVariables: PropTypes.array,
-    variableRegistry: PropTypes.object.isRequired,
-    variable: PropTypes.string,
-    value: PropTypes.any,
+    itemOptions: PropTypes.array,
+    name: PropTypes.string,
+    type: PropTypes.string,
     isEditing: PropTypes.bool,
     onToggleEdit: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    onChooseVariable: PropTypes.func.isRequired,
+    onChooseItemType: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    unusedVariables: [],
+    itemOptions: [],
     isEditing: false,
+    type: null,
     value: null,
-    variable: null,
+    name: null,
   };
 
-  get variableMeta() {
-    return this.props.variableRegistry[this.props.variable];
-  }
-
   get isNew() {
-    return !this.props.variable;
+    return true;
   }
 
   render() {
     const {
-      unusedVariables,
-      variable,
-      value,
+      itemOptions,
+      name,
+      type,
       isEditing,
       onToggleEdit,
       onDelete,
-      onChooseVariable,
+      onChooseItemType,
     } = this.props;
 
     const variableClasses = cx(
-      'attributes-table-variable',
-      { 'attributes-table-variable--edit': isEditing },
-      { 'attributes-table-variable--new': this.isNew },
+      'content-grid-item',
+      { 'content-grid-item--edit': isEditing },
+      { 'content-grid-item--new': this.isNew },
     );
 
     return (
@@ -55,21 +51,21 @@ class Variable extends Component {
         onClick={onToggleEdit}
       >
         { !this.isNew &&
-          <div className="attributes-table-variable__preview">
-            <VariablePreview variable={variable} value={value} onDelete={onDelete} />
+          <div className="content-grid-item__preview">
+            <ItemPreview name={name} onDelete={onDelete} />
           </div>
         }
 
-        <div className="attributes-table-variable__edit">
-          <VariableChooser
+        <div className="content-grid-item__edit">
+          <ItemChooser
             show={this.isNew}
-            onChooseVariable={onChooseVariable}
-            unusedVariables={unusedVariables}
+            onChooseItemType={onChooseItemType}
+            itemOptions={itemOptions}
           />
-          <VariableEditor
+          <ItemEditor
             show={!this.isNew}
-            name={variable}
-            variableMeta={this.variableMeta}
+            name={name}
+            type={type}
           />
         </div>
       </div>
@@ -77,6 +73,6 @@ class Variable extends Component {
   }
 }
 
-export { Variable };
+export { Item };
 
-export default Variable;
+export default Item;
