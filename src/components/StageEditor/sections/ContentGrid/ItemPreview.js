@@ -1,33 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isBoolean, isArray } from 'lodash';
 import { Icon } from '../../../../ui/components';
+import { SMALL, MEDIUM, LARGE } from './index';
 
-const formatValue = (value) => {
-  if (isBoolean(value)) { return value ? <em>TRUE</em> : <em>FALSE</em>; }
-  if (isArray(value)) { return value.join(', '); }
-  return value;
-};
-
-const VariablePreview = ({ variable, value, onDelete }) => (
-  <div className="attributes-table-preview">
-    <div className="attributes-table-preview__name">{variable}</div>
-    <div className="attributes-table-preview__value">{formatValue(value)}</div>
-    <div className="attributes-table-preview__delete" onClick={onDelete}>
+const ItemPreview = ({ content, type, size, onDelete }) => (
+  <div className="content-grid-preview">
+    <div className="content-grid-preview__name">{content}:{type}:{size}</div>
+    <div className="content-grid-preview__delete" onClick={onDelete}>
       <Icon name="delete" />
     </div>
   </div>
 );
 
-VariablePreview.propTypes = {
-  variable: PropTypes.string,
-  value: PropTypes.any,
+ItemPreview.propTypes = {
+  content: PropTypes.string,
+  type: PropTypes.string,
+  size: PropTypes.oneOf([SMALL, MEDIUM, LARGE]),
   onDelete: PropTypes.func.isRequired,
 };
 
-VariablePreview.defaultProps = {
-  value: null,
-  variable: null,
+ItemPreview.defaultProps = {
+  content: null,
+  type: null,
+  size: null,
 };
 
-export default VariablePreview;
+export default ItemPreview;
