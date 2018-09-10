@@ -1,14 +1,14 @@
 import {
   Name,
   Title,
-  ContentItems,
+  ContentGrid,
 } from '../sections';
 
 const Information = {
   sections: [
     Name,
     Title,
-    ContentItems,
+    ContentGrid,
   ],
 };
 
