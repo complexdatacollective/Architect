@@ -1,31 +1,48 @@
+import { last } from 'lodash';
+
 const SET_GUIDANCE = Symbol('PROTOCOL/SET_GUIDANCE');
-const RESET_GUIDANCE = Symbol('PROTOCOL/RESET_GUIDANCE');
+const UNSET_GUIDANCE = Symbol('PROTOCOL/UNSET_GUIDANCE');
 
 const initialState = {
   id: null,
+  history: [],
 };
 
-const setGuidance = id =>
+const setGuidance = (id, name = 'default') =>
   ({
     type: SET_GUIDANCE,
     id,
+    name,
   });
 
-const resetGuidance = () =>
+const unsetGuidance = (name = 'default') =>
   ({
-    type: RESET_GUIDANCE,
+    type: UNSET_GUIDANCE,
+    name,
   });
-
 
 function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case SET_GUIDANCE:
+    case SET_GUIDANCE: {
+      const history = state.history.filter(({ name }) => name !== action.name);
       return {
         ...state,
+        history: [
+          ...history,
+          { name: action.name, id: action.id },
+        ],
         id: action.id,
       };
-    case RESET_GUIDANCE:
-      return { ...initialState };
+    }
+    case UNSET_GUIDANCE: {
+      const history = state.history.filter(({ name }) => name !== action.name);
+
+      return {
+        ...state,
+        history,
+        id: history.length > 0 ? last(history).id : null,
+      };
+    }
     default:
       return state;
   }
@@ -33,12 +50,12 @@ function reducer(state = initialState, action = {}) {
 
 const actionCreators = {
   setGuidance,
-  resetGuidance,
+  unsetGuidance,
 };
 
 const actionTypes = {
   SET_GUIDANCE,
-  RESET_GUIDANCE,
+  UNSET_GUIDANCE,
 };
 
 export {

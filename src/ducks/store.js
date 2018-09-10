@@ -8,7 +8,7 @@ import { rootReducer } from './modules/root';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['form', 'protocol', 'session'],
+  blacklist: ['form', 'protocol', 'session', 'guidance'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

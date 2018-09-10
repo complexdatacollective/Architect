@@ -8,32 +8,48 @@ class Guided extends Component {
   static propTypes = {
     contentId: PropTypes.string.isRequired,
     setGuidance: PropTypes.func.isRequired,
-    clearGuidance: PropTypes.func.isRequired,
+    unsetGuidance: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
+    focus: PropTypes.bool,
   };
 
-  handleMouseEnter = () => {
-    this.props.setGuidance(this.props.contentId);
+  static defaultProps = {
+    focus: false,
+  };
+
+  interactionHandlers() {
+    if (this.props.focus) {
+      return {
+        onFocus: this.handleSet,
+        onBlur: this.handleUnset,
+      };
+    }
+
+    return {
+      onMouseEnter: this.handleSet,
+      onMouseLeave: this.handleUnset,
+    };
   }
 
-  handleMouseLeave = () => {
-    this.props.clearGuidance();
+  handleSet = () => {
+    this.props.setGuidance(this.props.contentId, this.props.focus ? 'focus' : 'mouse');
+  }
+
+  handleUnset = () => {
+    this.props.unsetGuidance(this.props.focus ? 'focus' : 'mouse');
   }
 
   render() {
     return React.cloneElement(
       this.props.children,
-      {
-        onMouseEnter: this.handleMouseEnter,
-        onMouseLeave: this.handleMouseLeave,
-      },
+      this.interactionHandlers(),
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   setGuidance: bindActionCreators(guidedActionCreators.setGuidance, dispatch),
-  clearGuidance: bindActionCreators(guidedActionCreators.resetGuidance, dispatch),
+  unsetGuidance: bindActionCreators(guidedActionCreators.unsetGuidance, dispatch),
 });
 
 export { Guided };
