@@ -39,7 +39,7 @@ const onUpdateDownloaded = () => {
 const onError = (error) => {
   const detail = error ? (error.stack || error).toString() : 'An unknown error occurred';
   log.error(detail);
-  dialog.showErrorBox('Error', 'Something went wrong!');
+  dialog.showErrorBox('Error', 'There was an error checking for updates. You may need to update this app manually.');
 };
 
 autoUpdater.autoDownload = false;
