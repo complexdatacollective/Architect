@@ -1,5 +1,6 @@
 const { autoUpdater } = require('electron-updater');
 const { dialog } = require('electron');
+const log = require('./log');
 
 const releasesUrl = 'https://github.com/codaco/Architect/releases';
 
@@ -36,8 +37,9 @@ const onUpdateDownloaded = () => {
 };
 
 const onError = (error) => {
-  const message = error ? (error.stack || error).toString() : 'An unknown error occurred';
-  dialog.showErrorBox('Error', message);
+  const detail = error ? (error.stack || error).toString() : 'An unknown error occurred';
+  log.error(detail);
+  dialog.showErrorBox('Error', 'Something went wrong!');
 };
 
 autoUpdater.autoDownload = false;
