@@ -12,7 +12,4 @@ log.transports.file.maxSize = 5 * 1024 * 1024;
 log.transports.file.streamConfig = { flags: 'w+' };
 log.transports.file.stream = fs.createWriteStream(path.join(userDataPath, 'debug.log'));
 
-console.log('logs stored in:');
-console.log(path.join(userDataPath, 'debug.log'));
-
 module.exports = log;

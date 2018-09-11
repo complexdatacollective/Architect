@@ -4,6 +4,7 @@ const { dialog } = require('electron');
 const updater = require('../updater');
 
 jest.mock('electron');
+jest.mock('fs');
 jest.mock('electron-updater');
 
 describe('updater', () => {
