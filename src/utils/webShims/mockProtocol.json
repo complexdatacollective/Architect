@@ -667,7 +667,7 @@
       "type": "Information",
       "title": "Title for the screen",
       "items": [
-        { "id": "1", "type": "text", "content": "<p>Some arbitrary text content that can contain <strong>HTML</strong> tags.</p>" },
+        { "id": "1", "type": "text", "content": "Some arbitrary text content that can contain *Markdown* tags." },
         { "id": "2", "type": "audio", "content": "click_the_thing.mp3", "description": "Click by clicking the thing" },
         { "id": "3", "type": "video", "content": "video.mov", "description": "Click by clicking the thing" },
         { "id": "4", "type": "image", "content": "rubberduck.jpg" }

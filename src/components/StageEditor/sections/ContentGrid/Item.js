@@ -34,12 +34,15 @@ class Item extends Component {
   handleChooseItemType = type =>
     this.props.onChooseItemType(this.props.fieldId, type);
 
+  handleToggleItemEdit = () => {
+    this.props.onToggleItemEdit(this.props.itemId);
+  }
+
   render() {
     const {
       fieldId: name,
       form,
       type,
-      onToggleEdit,
       onDelete,
     } = this.props;
 
@@ -54,7 +57,7 @@ class Item extends Component {
     return (
       <div
         className={variableClasses}
-        onClick={onToggleEdit}
+        onClick={this.handleToggleItemEdit}
       >
         { !this.isNew &&
           <div className="content-grid-item__preview">

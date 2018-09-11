@@ -17,7 +17,7 @@ const getInputComponent = type =>
 
 const ItemEditor = ({ name, type, show }) => (
   <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
-    <Field name={name} component={getInputComponent(type)} />;
+    <Field name={name} component={getInputComponent(type)} />
   </div>
 );
 

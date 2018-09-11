@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush, change } from 'redux-form';
@@ -23,7 +22,7 @@ class ContentGrid extends Component {
     };
   }
 
-  handleEditItem = (itemId) => {
+  handleToggleItemEdit = (itemId) => {
     if (this.state.editing === itemId) {
       // If we're already editing it then act like a toggle
       this.setState({ editing: null });
@@ -48,7 +47,7 @@ class ContentGrid extends Component {
           name="items"
           component={Items}
           itemComponent={Item}
-          onEditItem={this.handleEditItem}
+          onToggleItemEdit={this.handleToggleItemEdit}
           onChooseItemType={this.handleChooseItemType}
           editing={this.state.editing}
           form={form}
