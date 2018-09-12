@@ -1,6 +1,5 @@
 const { app } = require('electron');
 const log = require('electron-log');
-const updater = require('./components/updater');
 
 const appManager = require('./components/appManager');
 
@@ -20,7 +19,6 @@ if (shouldQuit) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  updater.checkForUpdates();
   appManager.start();
   appManager.loadDevTools();
 });
