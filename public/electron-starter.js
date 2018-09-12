@@ -20,7 +20,6 @@ if (shouldQuit) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  updater.checkForUpdates();
   appManager.start();
   appManager.loadDevTools();
 });
