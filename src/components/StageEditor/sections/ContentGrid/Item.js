@@ -41,12 +41,9 @@ class Item extends Component {
   render() {
     const {
       fieldId: name,
-      form,
       type,
       onDelete,
     } = this.props;
-
-    console.log(`item->render(${this.props.itemId})`, { props: this.props });
 
     const variableClasses = cx(
       'content-grid-item',
@@ -72,7 +69,6 @@ class Item extends Component {
           />
           <ItemEditor
             show={!this.isNew}
-            form={form}
             name={name}
             type={type}
           />
