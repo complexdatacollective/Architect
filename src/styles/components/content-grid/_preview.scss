@@ -45,12 +45,6 @@
   }
 
   &--type {
-    &-audio,
-    &-text {
-      // background-color: var(--architect-media-background);
-      // background-color: var(--input-background);
-    }
-
     &-video,
     &-image {
       background-color: var(--architect-media-background);

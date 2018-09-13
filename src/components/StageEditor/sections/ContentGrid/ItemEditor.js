@@ -62,6 +62,7 @@ ItemEditor.propTypes = {
   size: PropTypes.oneOf([sizes.SMALL, sizes.MEDIUM, sizes.LARGE]),
   show: PropTypes.bool,
   spareCapacity: PropTypes.number,
+  onComplete: PropTypes.func.isRequired,
 };
 
 ItemEditor.defaultProps = {

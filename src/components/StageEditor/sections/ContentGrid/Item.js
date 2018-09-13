@@ -75,7 +75,8 @@ class Item extends Component {
               content={this.item.content}
               type={this.item.type}
               size={this.item.size}
-              onDeleteItem={handleDelete} />
+              onDeleteItem={handleDelete}
+            />
           </div>
         }
 

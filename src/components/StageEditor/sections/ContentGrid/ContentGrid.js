@@ -79,8 +79,6 @@ const mapStateToProps = (state, { form }) => {
   const items = formValueSelector(form.name)(state, 'items') || [];
   const spareCapacity = items.reduce((memo, item) => memo - (units[item.size] || 0), capacity);
 
-  console.log({ items, spareCapacity });
-
   return {
     spareCapacity,
   };
