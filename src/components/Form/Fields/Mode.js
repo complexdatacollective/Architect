@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { asOptionObject, getValue } from '../../../ui/components/Fields/utils/options';
 
 class Mode extends PureComponent {
   static propTypes = {
@@ -17,31 +18,30 @@ class Mode extends PureComponent {
     disabled: false,
   };
 
-  get value() {
-    return this.props.input.value;
-  }
-
-  handleClickMode = (option) => {
-    this.props.input.onChange(option);
-  }
+  handleClickMode = index =>
+    this.props.input.onChange(getValue(this.props.options[index]));
 
   isModeSelected = option =>
     this.props.input.value === option;
 
-  renderMode = (option) => {
-    const [value, label] = option.length ? option : [option, option.toString()];
+  renderMode = (option, index) => {
+    const { input: { value } } = this.props;
+    const { value: optionValue, label: optionLabel, ...optionRest } = asOptionObject(option);
+    const selected = optionValue === value;
+
     const optionClasses = cx(
       'form-fields-mode__option',
-      { 'form-fields-mode__option--selected': this.isModeSelected(value) },
+      { 'form-fields-mode__option--selected': selected },
     );
 
     return (
       <div
         className={optionClasses}
-        onClick={() => this.handleClickMode(value)}
-        key={value}
+        onClick={() => this.handleClickMode(index)}
+        key={optionValue}
+        {...optionRest}
       >
-        {label}
+        {optionLabel}
       </div>
     );
   }
@@ -54,6 +54,7 @@ class Mode extends PureComponent {
     } = this.props;
 
     const classNames = cx(
+      'form-field-container',
       'form-fields-mode',
       className,
     );

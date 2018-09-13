@@ -4,15 +4,12 @@ $duration: var(--animation-duration-standard);
   min-height: 50px;
   background: transparent;
   transition: background $duration;
-  padding: unit(2) 0;
-
-  .form-field-container,
-  .form-field {
-    margin: 0;
-  };
+  margin: unit(2) 0;
+  border-radius: unit(2);
+  overflow: hidden;
 
   &__preview {
-    max-height: 50px;
+    max-height: 100vh;
     overflow: hidden;
     transition: opacity $duration $duration, max-height $duration $duration;
   }
@@ -30,7 +27,7 @@ $duration: var(--animation-duration-standard);
     background: var(--architect-table-edit-background);
 
     .content-grid-item__edit {
-      max-height: 500px;
+      max-height: 100vh;
       opacity: 1;
       transition: opacity $duration $duration, max-height $duration $duration;
     }

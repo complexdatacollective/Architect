@@ -1,14 +1,2 @@
-import ContentGrid from './ContentGrid';
-
-const SMALL = 'small';
-const MEDIUM = 'medium';
-const LARGE = 'large';
-
-export {
-  SMALL,
-  MEDIUM,
-  LARGE,
-  ContentGrid,
-};
-
-export default ContentGrid;
+export { default } from './ContentGrid';
+export { default as ContentGrid } from './ContentGrid';

@@ -8,19 +8,17 @@ import ItemEditor from './ItemEditor';
 
 class Item extends Component {
   static propTypes = {
-    name: PropTypes.string,
-    type: PropTypes.string,
-    isEditing: PropTypes.bool,
-    onToggleEdit: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
+    itemId: PropTypes.string.isRequired,
+    fieldId: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    editing: PropTypes.string,
+    onToggleItemEdit: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
     onChooseItemType: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    isEditing: false,
-    type: null,
-    value: null,
-    name: null,
+    editing: false,
   };
 
   get isNew() {
@@ -42,7 +40,7 @@ class Item extends Component {
     const {
       fieldId: name,
       type,
-      onDelete,
+      handleDelete,
     } = this.props;
 
     const variableClasses = cx(
@@ -58,7 +56,7 @@ class Item extends Component {
       >
         { !this.isNew &&
           <div className="content-grid-item__preview">
-            <ItemPreview name={name} onDelete={onDelete} />
+            <ItemPreview name={name} onDeleteItem={handleDelete} />
           </div>
         }
 

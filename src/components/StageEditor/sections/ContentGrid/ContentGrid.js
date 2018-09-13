@@ -3,8 +3,7 @@ import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FieldArray, arrayPush, change } from 'redux-form';
-import RoundButton from '../../../Form/RoundButton';
-import Items from './Items';
+import { Items, NewButton } from '../../../Items';
 import Item from './Item';
 
 class ContentGrid extends Component {
@@ -26,6 +25,7 @@ class ContentGrid extends Component {
     if (this.state.editing === itemId) {
       // If we're already editing it then act like a toggle
       this.setState({ editing: null });
+      return;
     }
     this.setState({ editing: itemId });
   };
@@ -53,9 +53,8 @@ class ContentGrid extends Component {
           form={form}
         />
 
-        <RoundButton
+        <NewButton
           onClick={this.handleCreateItem}
-          className="content-grid__add"
         />
       </div>
     );
@@ -64,6 +63,7 @@ class ContentGrid extends Component {
 
 ContentGrid.propTypes = {
   createNewItem: PropTypes.func.isRequired,
+  setInputType: PropTypes.func.isRequired,
   form: PropTypes.shape({
     name: PropTypes.string,
     getValues: PropTypes.func,

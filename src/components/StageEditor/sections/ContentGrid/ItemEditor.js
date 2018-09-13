@@ -3,21 +3,41 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get } from 'lodash';
 import { Field } from 'redux-form';
-import * as Fields from '../../../Form/Fields';
+import { Markdown, Image, Audio, Video, Mode } from '../../../Form/Fields';
+import { RadioGroup } from '../../../../ui/components/Fields';
+import * as sizes from './sizes';
+
+const sizeOptions = [
+  { label: 'Small', value: sizes.SMALL },
+  { label: 'Medium', value: sizes.MEDIUM },
+  { label: 'Large', value: sizes.LARGE },
+];
 
 const contentInputs = {
-  text: Fields.Markdown,
-  image: Fields.Image,
-  audio: Fields.Audio,
-  video: Fields.Video,
+  text: Markdown,
+  image: Image,
+  audio: Audio,
+  video: Video,
 };
 
 const getInputComponent = type =>
-  get(contentInputs, type, Fields.Markdown);
+  get(contentInputs, type, Markdown);
 
 const ItemEditor = ({ name, type, show }) => (
   <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
-    <Field name={`${name}.content`} component={getInputComponent(type)} />
+    <div onClick={e => e.stopPropagation()}>
+      <Field
+        component={Mode}
+        name={`${name}.size`}
+        label="Display size"
+        options={sizeOptions}
+      />
+      <Field
+        label="Content"
+        name={`${name}.content`}
+        component={getInputComponent(type)}
+      />
+    </div>
   </div>
 );
 

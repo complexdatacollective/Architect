@@ -6,11 +6,20 @@ $duration: var(--animation-duration-standard);
   opacity: 0;
   transition: transform $duration, opacity $duration, max-height $duration;
   transform: translateX(-100%);
+  padding: unit(2);
 
   &--show {
-    max-height: 500px;
+    max-height: 100vh;
     opacity: 1;
     transform: translateX(0);
     transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;
+  }
+
+  .form-field-container {
+    margin: unit(1) 0 0;
+
+    &:first-child {
+      margin: 0;
+    }
   }
 }

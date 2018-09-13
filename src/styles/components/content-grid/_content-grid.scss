@@ -13,16 +13,4 @@
       background: var(--architect-table-background--alt);
     }
   }
-
-  &__add {
-    margin: unit(1) 0 0;
-
-    &::before {
-      content: '+';
-      color: var(--text-light);
-      display: block;
-      position: relative;
-      top: unit(-.2);
-    }
-  }
 }
