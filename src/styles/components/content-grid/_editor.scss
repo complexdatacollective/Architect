@@ -6,7 +6,7 @@ $duration: var(--animation-duration-standard);
   opacity: 0;
   transition: transform $duration, opacity $duration, max-height $duration;
   transform: translateX(-100%);
-  padding: unit(2);
+  padding: unit(4) unit(2);
 
   &--show {
     max-height: 100vh;
@@ -16,10 +16,24 @@ $duration: var(--animation-duration-standard);
   }
 
   .form-field-container {
-    margin: unit(1) 0 0;
+    margin: unit(2) 0 0;
 
     &:first-child {
       margin: 0;
+    }
+  }
+
+  label {
+    margin: 0;
+  }
+
+  .button {
+    margin: unit(2) 0 0;
+  }
+
+  .form-fields-file {
+    .form-dropzone {
+      background: var(--color-navy-taupe);
     }
   }
 }

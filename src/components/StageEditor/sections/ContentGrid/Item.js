@@ -5,42 +5,55 @@ import cx from 'classnames';
 import ItemPreview from './ItemPreview';
 import ItemChooser from './ItemChooser';
 import ItemEditor from './ItemEditor';
+import { sizes } from './sizes';
 
 class Item extends Component {
   static propTypes = {
-    itemId: PropTypes.string.isRequired,
     fieldId: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
     editing: PropTypes.string,
     onToggleItemEdit: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
     onChooseItemType: PropTypes.func.isRequired,
+    item: PropTypes.shape({
+      content: PropTypes.string,
+      type: PropTypes.string,
+      size: PropTypes.oneOf([sizes.SMALL, sizes.MEDIUM, sizes.LARGE]),
+    }),
+    spareCapacity: PropTypes.number,
   };
 
   static defaultProps = {
     editing: false,
+    item: {
+      content: null,
+      type: null,
+      size: null,
+    },
+    spareCapacity: 0,
   };
 
+  get item() {
+    return this.props.item;
+  }
+
   get isNew() {
-    return !this.props.type;
+    return !this.item.type;
   }
 
   get isEditing() {
-    return this.props.itemId === this.props.editing;
+    return this.item.id === this.props.editing;
   }
 
   handleChooseItemType = type =>
     this.props.onChooseItemType(this.props.fieldId, type);
 
   handleToggleItemEdit = () => {
-    this.props.onToggleItemEdit(this.props.itemId);
+    this.props.onToggleItemEdit(this.item.id);
   }
 
   render() {
     const {
-      fieldId: name,
-      type,
-      size,
+      fieldId,
       handleDelete,
       spareCapacity,
     } = this.props;
@@ -58,7 +71,11 @@ class Item extends Component {
       >
         { !this.isNew &&
           <div className="content-grid-item__preview">
-            <ItemPreview name={name} onDeleteItem={handleDelete} />
+            <ItemPreview
+              content={this.item.content}
+              type={this.item.type}
+              size={this.item.size}
+              onDeleteItem={handleDelete} />
           </div>
         }
 
@@ -69,10 +86,11 @@ class Item extends Component {
           />
           <ItemEditor
             show={!this.isNew}
-            name={name}
-            type={type}
-            size={size}
+            name={fieldId}
+            type={this.item.type}
+            size={this.item.size}
             spareCapacity={spareCapacity}
+            onComplete={this.handleToggleItemEdit}
           />
         </div>
       </div>
@@ -80,11 +98,9 @@ class Item extends Component {
   }
 }
 
-const mapStateToProps = (state, { fieldId, form }) => {
-  const item = form.getValues(state, `${fieldId}`);
-
-  return !item ? {} : { type: item.type, size: item.size, itemId: item.id };
-};
+const mapStateToProps = (state, { fieldId, form }) => ({
+  item: form.getValues(state, `${fieldId}`),
+});
 
 export { Item };
 

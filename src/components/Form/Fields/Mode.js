@@ -64,7 +64,7 @@ class Mode extends PureComponent {
     return (
       <div className={classNames}>
         { label &&
-          <div className="form-fields-mode__label">{label}</div>
+          <h4 className="form-fields-mode__label">{label}</h4>
         }
         <div>
           <div className="form-fields-mode__options">

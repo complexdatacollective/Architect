@@ -2,11 +2,6 @@
   @include form-field;
   width: 100%;
 
-  &__label {
-    @include preset('title-4');
-    font-weight: 600;
-  }
-
   &__edit {
     display: flex;
     cursor: text;

@@ -53,7 +53,7 @@ class FileInput extends PureComponent {
     return (
       <div className={cx(className, 'form-field-container', { [completeClassName]: !!value })}>
         { label &&
-          <h4>{label}</h4>
+          <h4 className="form-fields-file__label">{label}</h4>
         }
         <div className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}>
           <Dropzone

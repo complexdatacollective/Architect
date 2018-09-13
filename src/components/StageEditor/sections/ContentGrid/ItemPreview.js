@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import cx from 'classnames';
 import Markdown from 'react-markdown';
 import { Handle, DeleteButton } from '../../../Items/';
@@ -22,9 +21,11 @@ const AssetComponent = ({ type, content }) => {
   }
 };
 
-const PreviewComponent = ({
+const ItemPreview = ({
   onDeleteItem,
-  input: { value: { type, content, size } },
+  type,
+  content,
+  size,
 }) => (
   <div
     className={cx(
@@ -41,37 +42,17 @@ const PreviewComponent = ({
   </div>
 );
 
-PreviewComponent.propTypes = {
-  input: PropTypes.shape({
-    value: PropTypes.shape({
-      content: PropTypes.string,
-      type: PropTypes.string,
-      size: PropTypes.oneOf([sizes.SMALL, sizes.MEDIUM, sizes.LARGE]),
-    }),
-  }).isRequired,
-};
-
-PreviewComponent.defaultProps = {
-  input: {
-    value: {
-      id: null,
-      content: null,
-      type: null,
-      size: null,
-    },
-  },
-};
-
-const ItemPreview = ({ name, onDeleteItem }) => (
-  <Field name={name} component={PreviewComponent} onDeleteItem={onDeleteItem} />
-);
-
 ItemPreview.propTypes = {
-  name: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  type: PropTypes.string,
+  size: PropTypes.oneOf([sizes.SMALL, sizes.MEDIUM, sizes.LARGE]),
+  onDeleteItem: PropTypes.func.isRequired,
 };
 
 ItemPreview.defaultProps = {
-  name: null,
+  content: null,
+  type: null,
+  size: null,
 };
 
 export default ItemPreview;
