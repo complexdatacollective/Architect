@@ -5,7 +5,7 @@ import cx from 'classnames';
 import Markdown from 'react-markdown';
 import { Handle, DeleteButton } from '../../../Items/';
 import { BackgroundImage, Video, Audio } from '../../../Assets';
-import * as sizes from './sizes';
+import { sizes } from './sizes';
 
 const AssetComponent = ({ type, content }) => {
   switch (type) {

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FieldArray, arrayPush, change } from 'redux-form';
+import { FieldArray, arrayPush, change, formValueSelector } from 'redux-form';
 import { Items, NewButton } from '../../../Items';
 import Item from './Item';
+import { units, capacity } from './sizes';
 
 class ContentGrid extends Component {
   static propTypes = {
@@ -39,7 +40,7 @@ class ContentGrid extends Component {
   };
 
   render() {
-    const { form } = this.props;
+    const { form, spareCapacity } = this.props;
 
     return (
       <div className="content-grid">
@@ -51,11 +52,14 @@ class ContentGrid extends Component {
           onChooseItemType={this.handleChooseItemType}
           editing={this.state.editing}
           form={form}
+          spareCapacity={spareCapacity}
         />
 
-        <NewButton
-          onClick={this.handleCreateItem}
-        />
+        { spareCapacity > 0 &&
+          <NewButton
+            onClick={this.handleCreateItem}
+          />
+        }
       </div>
     );
   }
@@ -63,11 +67,23 @@ class ContentGrid extends Component {
 
 ContentGrid.propTypes = {
   createNewItem: PropTypes.func.isRequired,
+  spareCapacity: PropTypes.number.isRequired,
   setInputType: PropTypes.func.isRequired,
   form: PropTypes.shape({
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
+};
+
+const mapStateToProps = (state, { form }) => {
+  const items = formValueSelector(form.name)(state, 'items') || [];
+  const spareCapacity = items.reduce((memo, item) => memo - (units[item.size] || 0), capacity);
+
+  console.log({ items, spareCapacity });
+
+  return {
+    spareCapacity,
+  };
 };
 
 const mapDispatchToProps = (dispatch, { form }) => ({
@@ -79,4 +95,4 @@ const mapDispatchToProps = (dispatch, { form }) => ({
   setInputType: (fieldId, type) => dispatch(change(form.name, `${fieldId}.type`, type)),
 });
 
-export default connect(null, mapDispatchToProps)(ContentGrid);
+export default connect(mapStateToProps, mapDispatchToProps)(ContentGrid);

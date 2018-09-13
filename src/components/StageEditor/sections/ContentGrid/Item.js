@@ -40,7 +40,9 @@ class Item extends Component {
     const {
       fieldId: name,
       type,
+      size,
       handleDelete,
+      spareCapacity,
     } = this.props;
 
     const variableClasses = cx(
@@ -69,6 +71,8 @@ class Item extends Component {
             show={!this.isNew}
             name={name}
             type={type}
+            size={size}
+            spareCapacity={spareCapacity}
           />
         </div>
       </div>
@@ -77,12 +81,9 @@ class Item extends Component {
 }
 
 const mapStateToProps = (state, { fieldId, form }) => {
-  const {
-    type,
-    id: itemId,
-  } = form.getValues(state, `${fieldId}`);
+  const item = form.getValues(state, `${fieldId}`);
 
-  return { type, itemId };
+  return !item ? {} : { type: item.type, size: item.size, itemId: item.id };
 };
 
 export { Item };

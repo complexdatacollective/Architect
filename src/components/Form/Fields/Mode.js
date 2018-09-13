@@ -28,16 +28,18 @@ class Mode extends PureComponent {
     const { input: { value } } = this.props;
     const { value: optionValue, label: optionLabel, ...optionRest } = asOptionObject(option);
     const selected = optionValue === value;
+    const disabled = optionRest.disabled || false;
 
     const optionClasses = cx(
       'form-fields-mode__option',
       { 'form-fields-mode__option--selected': selected },
+      { 'form-fields-mode__option--disabled': disabled },
     );
 
     return (
       <div
         className={optionClasses}
-        onClick={() => this.handleClickMode(index)}
+        onClick={disabled ? null : () => this.handleClickMode(index)}
         key={optionValue}
         {...optionRest}
       >

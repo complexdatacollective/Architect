@@ -4,8 +4,7 @@ import cx from 'classnames';
 import { get } from 'lodash';
 import { Field } from 'redux-form';
 import { Markdown, Image, Audio, Video, Mode } from '../../../Form/Fields';
-import { RadioGroup } from '../../../../ui/components/Fields';
-import * as sizes from './sizes';
+import { units, sizes } from './sizes';
 
 const sizeOptions = [
   { label: 'Small', value: sizes.SMALL },
@@ -20,17 +19,30 @@ const contentInputs = {
   video: Video,
 };
 
+const getSizeOptions = (currentSize, spareCapacity) => {
+  console.log({ units, sizeOptions, currentSize, spareCapacity });
+  return sizeOptions.map(
+    option => (
+      units[option.value] <= spareCapacity ||
+      units[option.value] <= units[currentSize] ?
+        option :
+        { ...option, disabled: true }
+    ),
+  );
+};
+
 const getInputComponent = type =>
   get(contentInputs, type, Markdown);
 
-const ItemEditor = ({ name, type, show }) => (
+const ItemEditor = ({ name, type, size, show, spareCapacity }) => (
   <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
     <div onClick={e => e.stopPropagation()}>
+      {size}
       <Field
         component={Mode}
         name={`${name}.size`}
         label="Display size"
-        options={sizeOptions}
+        options={getSizeOptions(size, spareCapacity)}
       />
       <Field
         label="Content"

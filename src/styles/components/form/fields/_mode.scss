@@ -10,6 +10,7 @@ $module-name: form-fields-mode;
     border-radius: unit(1);
     overflow: hidden;
     border: 2px solid var(--architect-ui-radio-border);
+    background: var(--background);
   }
 
   &__option {
@@ -21,13 +22,19 @@ $module-name: form-fields-mode;
     border-radius: unit(.5);
     justify-content: center;
     align-items: center;
+    color: var(--text-dark);
     transition: background-color var(--animation-easing) var(--animation-duration-standard),
     color var(--animation-easing) var(--animation-duration-standard);
     cursor: pointer;
 
     &--selected {
       background-color: var(--architect-ui-radio-dot);
-      color: var(--color-white);
+      color: var(--text-light);
+    }
+
+    &--disabled {
+      opacity: .5;
+      cursor: not-allowed;
     }
   }
 }
