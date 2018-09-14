@@ -60,8 +60,8 @@ describe('<ItemEditor />', () => {
     expect(completeHandler.mock.calls.length).toBe(1);
   });
 
-  it('shows correct options based on spareCapacity', () => {
-    let component = shallow((
+  it('if spare capacity is 0 all options are disabled', () => {
+    const component = shallow((
       <ItemEditor
         {...mockProps}
         spareCapacity={0}
@@ -69,12 +69,14 @@ describe('<ItemEditor />', () => {
       />
     ));
 
-    let optionsResult = optionStates(component.instance().options);
+    const optionsResult = optionStates(component.instance().options);
 
     expect(optionsResult.count).toBe(3);
     expect(optionsResult.disabledOptionCount).toBe(3);
+  });
 
-    component = shallow((
+  it('if spare capacity is max, all options are enabled', () => {
+    const component = shallow((
       <ItemEditor
         {...mockProps}
         spareCapacity={4}
@@ -82,13 +84,13 @@ describe('<ItemEditor />', () => {
       />
     ));
 
-    optionsResult = optionStates(component.instance().options);
+    const optionsResult = optionStates(component.instance().options);
 
     expect(optionsResult.count).toBe(3);
     expect(optionsResult.enabledOptionCount).toBe(3);
   });
 
-  it('if size set, that option or below is not disabled regardless of spareCapacity', () => {
+  it('all options that will fit are enabled', () => {
     const component = shallow((
       <ItemEditor
         {...mockProps}

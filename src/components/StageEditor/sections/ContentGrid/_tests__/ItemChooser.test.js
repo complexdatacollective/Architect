@@ -16,7 +16,7 @@ describe('<ItemChooser />', () => {
       <ItemChooser {...mockProps} onChooseItemType={chooseItemTypeHandler} />
     ));
 
-    component.find('.content-grid-chooser__item').first().simulate('click', fakeEvent);
+    component.find('.content-grid-chooser__type').first().simulate('click', fakeEvent);
 
     expect(fakeEvent.stopPropagation.mock.calls.length).toBe(1);
     expect(chooseItemTypeHandler.mock.calls.length).toBe(1);

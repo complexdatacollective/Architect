@@ -23,14 +23,16 @@ const contentInputs = {
 const willFit = (option, currentSize, spareCapacity) =>
   option <= spareCapacity + currentSize;
 
-const getSizeOptions = (currentSize, spareCapacity) =>
-  sizeOptions.map(
+const getSizeOptions = (sizeSetting, spareCapacity) => {
+  const currentSize = !sizeSetting ? 0 : units[sizeSetting];
+  return sizeOptions.map(
     option => (
       willFit(units[option.value], currentSize, spareCapacity) ?
         option :
         { ...option, disabled: true }
     ),
   );
+};
 
 const getInputComponent = type =>
   get(contentInputs, type, Markdown);
@@ -38,7 +40,7 @@ const getInputComponent = type =>
 class ItemEditor extends Component {
   get options() {
     const { size, spareCapacity } = this.props;
-    return getSizeOptions(units[size], spareCapacity);
+    return getSizeOptions(size, spareCapacity);
   }
 
   get inputComponent() {
