@@ -2,7 +2,7 @@ const SMALL = 'SMALL';
 const MEDIUM = 'MEDIUM';
 const LARGE = 'LARGE';
 
-const capacity = 8;
+const capacity = 4;
 
 const units = {
   [SMALL]: 1,

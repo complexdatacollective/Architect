@@ -667,10 +667,9 @@
       "type": "Information",
       "title": "Title for the screen",
       "items": [
-        { "id": "1", "size": "MEDIUM", "type": "text", "content": "Some arbitrary text content that can contain *Markdown* tags." },
         { "id": "2", "size": "SMALL", "type": "audio", "content": "click_the_thing.mp3" },
         { "id": "3", "size": "MEDIUM", "type": "video", "content": "video.mov" },
-        { "id": "4", "size": "MEDIUM", "type": "image", "content": "rubberduck.jpg" }
+        { "id": "4", "size": "SMALL", "type": "image", "content": "rubberduck.jpg" }
       ]
     },
     {

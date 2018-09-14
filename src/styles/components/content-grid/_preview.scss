@@ -27,19 +27,19 @@
   &--size {
     &-SMALL {
       .content-grid-preview__preview {
-        height: 10vh;
+        height: 20vh;
       }
     }
 
     &-MEDIUM {
       .content-grid-preview__preview {
-        height: 20vh;
+        height: 40vh;
       }
     }
 
     &-LARGE {
       .content-grid-preview__preview {
-        height: 40vh;
+        height: 80vh;
       }
     }
   }
