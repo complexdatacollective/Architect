@@ -23,7 +23,7 @@ class Item extends Component {
   };
 
   static defaultProps = {
-    editing: false,
+    editing: null,
     item: {
       content: null,
       type: null,

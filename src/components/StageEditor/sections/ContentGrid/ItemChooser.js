@@ -32,4 +32,6 @@ ItemChooser.defaultProps = {
   show: false,
 };
 
+export { ItemChooser };
+
 export default ItemChooser;

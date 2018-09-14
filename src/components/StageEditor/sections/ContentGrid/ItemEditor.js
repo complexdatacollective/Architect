@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get } from 'lodash';
@@ -33,28 +33,45 @@ const getSizeOptions = (currentSize, spareCapacity) =>
 const getInputComponent = type =>
   get(contentInputs, type, Markdown);
 
-const ItemEditor = ({ name, show, type, size, spareCapacity, onComplete }) => (
-  <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
-    <div onClick={e => e.stopPropagation()}>
-      <Field
-        component={Mode}
-        name={`${name}.size`}
-        label="Display size"
-        options={getSizeOptions(size, spareCapacity)}
-      />
-      <Field
-        label="Content"
-        name={`${name}.content`}
-        component={getInputComponent(type)}
-      />
-      <Button
-        type="button"
-        size="small"
-        onClick={onComplete}
-      >Done</Button>
-    </div>
-  </div>
-);
+class ItemEditor extends Component {
+  get options() {
+    const { size, spareCapacity } = this.props;
+    return getSizeOptions(size, spareCapacity);
+  }
+
+  get inputComponent() {
+    const { type } = this.props;
+    return getInputComponent(type);
+  }
+
+  render() {
+    const { name, show, onComplete } = this.props;
+
+    return (
+      <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
+        <div onClick={e => e.stopPropagation()}>
+          <Field
+            component={Mode}
+            name={`${name}.size`}
+            label="Display size"
+            options={this.options}
+          />
+          <Field
+            label="Content"
+            name={`${name}.content`}
+            component={this.inputComponent}
+          />
+          <Button
+            type="button"
+            size="small"
+            onClick={onComplete}
+          >Done</Button>
+        </div>
+      </div>
+    );
+  }
+}
+
 
 ItemEditor.propTypes = {
   name: PropTypes.string.isRequired,
@@ -72,5 +89,7 @@ ItemEditor.defaultProps = {
   size: null,
   spareCapacity: 0,
 };
+
+export { ItemEditor };
 
 export default ItemEditor;

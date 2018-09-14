@@ -55,4 +55,6 @@ ItemPreview.defaultProps = {
   size: null,
 };
 
+export { ItemPreview };
+
 export default ItemPreview;

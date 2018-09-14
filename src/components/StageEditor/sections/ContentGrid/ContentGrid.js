@@ -93,4 +93,6 @@ const mapDispatchToProps = (dispatch, { form }) => ({
   setInputType: (fieldId, type) => dispatch(change(form.name, `${fieldId}.type`, type)),
 });
 
+export { ContentGrid };
+
 export default connect(mapStateToProps, mapDispatchToProps)(ContentGrid);
