@@ -20,11 +20,13 @@ const contentInputs = {
   video: Video,
 };
 
+const willFit = (option, currentSize, spareCapacity) =>
+  option <= spareCapacity + currentSize;
+
 const getSizeOptions = (currentSize, spareCapacity) =>
   sizeOptions.map(
     option => (
-      units[option.value] <= spareCapacity ||
-      units[option.value] <= units[currentSize] ?
+      willFit(units[option.value], currentSize, spareCapacity) ?
         option :
         { ...option, disabled: true }
     ),
@@ -36,7 +38,7 @@ const getInputComponent = type =>
 class ItemEditor extends Component {
   get options() {
     const { size, spareCapacity } = this.props;
-    return getSizeOptions(size, spareCapacity);
+    return getSizeOptions(units[size], spareCapacity);
   }
 
   get inputComponent() {

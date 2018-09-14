@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FieldArray, arrayPush, change, formValueSelector } from 'redux-form';
 import { Items, NewButton } from '../../../Items';
 import Item from './Item';
-import { units, capacity } from './sizes';
+import { units, capacity, sizes } from './sizes';
 
 class ContentGrid extends Component {
   static propTypes = {
@@ -77,7 +77,11 @@ ContentGrid.propTypes = {
 
 const mapStateToProps = (state, { form }) => {
   const items = formValueSelector(form.name)(state, 'items') || [];
-  const spareCapacity = items.reduce((memo, item) => memo - (units[item.size] || 0), capacity);
+  const spareCapacity = items.reduce(
+    (memo, item) =>
+      memo - (item.size ? units[item.size] : 0),
+    capacity,
+  );
 
   return {
     spareCapacity,
@@ -87,7 +91,7 @@ const mapStateToProps = (state, { form }) => {
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewItem: () => {
     const itemId = uuid();
-    dispatch(arrayPush(form.name, 'items', { id: itemId }));
+    dispatch(arrayPush(form.name, 'items', { id: itemId, size: sizes.SMALL }));
     return itemId;
   },
   setInputType: (fieldId, type) => dispatch(change(form.name, `${fieldId}.type`, type)),
