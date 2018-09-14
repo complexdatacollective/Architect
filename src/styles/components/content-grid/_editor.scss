@@ -6,7 +6,10 @@ $duration: var(--animation-duration-standard);
   opacity: 0;
   transition: transform $duration, opacity $duration, max-height $duration;
   transform: translateX(-100%);
-  padding: unit(4) unit(2);
+
+  &__content {
+    padding: unit(4) unit(2);
+  }
 
   &--show {
     max-height: 100vh;

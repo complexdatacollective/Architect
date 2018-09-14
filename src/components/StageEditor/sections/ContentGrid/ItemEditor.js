@@ -49,7 +49,7 @@ class ItemEditor extends Component {
 
     return (
       <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
-        <div onClick={e => e.stopPropagation()}>
+        <div className="content-grid-editor__content" onClick={e => e.stopPropagation()}>
           <Field
             component={Mode}
             name={`${name}.size`}

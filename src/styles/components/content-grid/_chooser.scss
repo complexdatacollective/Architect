@@ -2,31 +2,15 @@ $duration: var(--animation-duration-standard);
 
 .content-grid-chooser {
   display: flex;
-  flex-wrap: wrap;
   max-height: 0;
-  overflow: hidden;
   opacity: 0;
   transition: transform $duration, opacity $duration, max-height $duration;
   transform: translateX(-100%);
+  align-items: center;
+  justify-content: center;
 
-  &-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex: 0 0 calc(25% - #{unit(2)});
-    height: unit(12);
-    padding: unit(2);
-    margin: unit(1);
-    border-radius: unit(2);
-    border: 3px solid var(--architect-table-chooser);
-    background-color: transparent;
-    cursor: pointer;
-    transition: background-color $duration;
-
-    &:hover {
-      background-color: var(--architect-table-chooser);
-    }
+  &__type {
+    margin: unit(2);
   }
 
   &--show {

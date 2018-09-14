@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { Button } from '../../../../ui/components';
 
 const itemOptions = [
   'text',
@@ -12,13 +13,14 @@ const itemOptions = [
 const ItemChooser = ({ onChooseItemType, show }) => (
   <div className={cx('content-grid-chooser', { 'content-grid-chooser--show': show })}>
     { itemOptions.map(itemType => (
-      <div
+      <Button
         key={itemType}
-        className="content-grid-chooser-item"
+        type="button"
+        className="button button--small content-grid-chooser__type"
         onClick={(e) => { e.stopPropagation(); onChooseItemType(itemType); }}
       >
         {itemType}
-      </div>
+      </Button>
     )) }
   </div>
 );
