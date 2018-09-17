@@ -1,6 +1,4 @@
-$module-name: form-fields-mode;
-
-.#{$module-name} {
+.form-fields-mode {
   @include form-field;
   display: block;
   position: relative;
@@ -9,7 +7,8 @@ $module-name: form-fields-mode;
     display: inline-flex;
     border-radius: unit(1);
     overflow: hidden;
-    border: 2px solid var(--architect-ui-radio-border);
+    border: 2px solid var(--input-border);
+    background-color: var(--input-background);
   }
 
   &__option {
@@ -21,13 +20,19 @@ $module-name: form-fields-mode;
     border-radius: unit(.5);
     justify-content: center;
     align-items: center;
+    color: var(--text-dark);
     transition: background-color var(--animation-easing) var(--animation-duration-standard),
     color var(--animation-easing) var(--animation-duration-standard);
     cursor: pointer;
 
     &--selected {
-      background-color: var(--architect-ui-radio-dot);
-      color: var(--color-white);
+      background-color: var(--architect-selected);
+      color: var(--text-light);
+    }
+
+    &--disabled {
+      opacity: .5;
+      cursor: not-allowed;
     }
   }
 }

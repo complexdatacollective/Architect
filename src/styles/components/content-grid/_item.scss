@@ -1,0 +1,41 @@
+$duration: var(--animation-duration-standard);
+
+.content-grid-item {
+  min-height: 50px;
+  background: transparent;
+  transition: background $duration;
+  margin: unit(2) 0;
+  border-radius: unit(2);
+  overflow: hidden;
+
+  &__preview {
+    max-height: 100vh;
+    overflow: hidden;
+    transition: opacity $duration $duration, max-height $duration $duration;
+  }
+
+  &__edit {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity $duration, max-height $duration;
+    color: var(--text-light);
+    padding: 0 unit(2);
+  }
+
+  &--edit {
+    background: var(--architect-table-edit-background);
+
+    .content-grid-item__edit {
+      max-height: 100vh;
+      opacity: 1;
+      transition: opacity $duration $duration, max-height $duration $duration;
+    }
+
+    .content-grid-item__preview {
+      max-height: 0;
+      opacity: 0;
+      transition: opacity $duration, max-height $duration;
+    }
+  }
+}

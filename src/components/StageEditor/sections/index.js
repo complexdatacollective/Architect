@@ -1,4 +1,4 @@
-export { default as ContentItems } from './ContentItems';
+export { default as ContentGrid } from './ContentGrid';
 export { default as Title } from './Title';
 export { default as Name } from './Name';
 export { default as NodeType } from './NodeType';

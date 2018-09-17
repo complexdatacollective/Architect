@@ -51,9 +51,9 @@ class FileInput extends PureComponent {
     } = this.props;
 
     return (
-      <div className={cx(className, { [completeClassName]: !!value })}>
+      <div className={cx(className, 'form-field-container', { [completeClassName]: !!value })}>
         { label &&
-          <div className="form-fields-file__label">{label}</div>
+          <h4 className="form-fields-file__label">{label}</h4>
         }
         <div className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}>
           <Dropzone

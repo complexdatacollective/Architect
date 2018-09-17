@@ -1,0 +1,22 @@
+$duration: var(--animation-duration-standard);
+
+.content-grid-chooser {
+  display: flex;
+  max-height: 0;
+  opacity: 0;
+  transition: transform $duration, opacity $duration, max-height $duration;
+  transform: translateX(-100%);
+  align-items: center;
+  justify-content: center;
+
+  &__type {
+    margin: unit(2);
+  }
+
+  &--show {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateX(0);
+    transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;
+  }
+}

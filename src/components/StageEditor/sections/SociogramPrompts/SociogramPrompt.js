@@ -252,8 +252,8 @@ class SociogramPrompt extends Component {
                 label="Choose a background type"
                 className="stage-editor-section-prompt__setting"
                 options={[
-                  [CONCENTRIC_CIRCLES, 'Circles'],
-                  [BACKGROUND_IMAGE, 'Image'],
+                  { value: CONCENTRIC_CIRCLES, label: 'Circles' },
+                  { value: BACKGROUND_IMAGE, label: 'Image' },
                 ]}
                 input={{
                   value: backgroundType,

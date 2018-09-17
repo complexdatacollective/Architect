@@ -1,0 +1,16 @@
+.content-grid {
+  &__variables {
+    display: flex;
+    width: 100%;
+    background: var(--architect-table-background);
+    border-radius: 10px;
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  &__variable {
+    &:nth-child(even) {
+      background: var(--architect-table-background--alt);
+    }
+  }
+}
