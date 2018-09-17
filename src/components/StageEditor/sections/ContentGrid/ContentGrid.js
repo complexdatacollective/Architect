@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FieldArray, arrayPush, change, formValueSelector } from 'redux-form';
+import {
+  FieldArray,
+  arrayPush,
+  change,
+  formValueSelector,
+  getFormSyncErrors,
+} from 'redux-form';
+import Guidance from '../../../Guidance';
 import { Items, NewButton } from '../../../Items';
 import Item from './Item';
 import { units, capacity, sizes } from './sizes';
@@ -18,17 +25,22 @@ class ContentGrid extends Component {
     super(props);
 
     this.state = {
-      editing: null,
+      editing: {},
     };
   }
 
-  handleToggleItemEdit = (itemId) => {
-    if (this.state.editing === itemId) {
-      // If we're already editing it then act like a toggle
-      this.setState({ editing: null });
+  editItem = (itemId) => {
+    if (!this.state.editing[itemId]) {
+      this.setState({ editing: { ...this.state.editing, [itemId]: true } });
       return;
     }
-    this.setState({ editing: itemId });
+
+    // If we're already editing it then act like a toggle
+    this.setState({ editing: { ...this.state.editing, [itemId]: false } });
+  };
+
+  handleToggleItemEdit = (itemId) => {
+    this.editItem(itemId);
   };
 
   handleChooseItemType = (fieldId, type) =>
@@ -36,31 +48,39 @@ class ContentGrid extends Component {
 
   handleCreateItem = () => {
     const itemId = this.props.createNewItem();
-    this.setState({ editing: itemId });
+    this.editItem(itemId);
   };
 
   render() {
     const { form, spareCapacity } = this.props;
 
     return (
-      <div className="content-grid">
-        <FieldArray
-          name="items"
-          component={Items}
-          itemComponent={Item}
-          onToggleItemEdit={this.handleToggleItemEdit}
-          onChooseItemType={this.handleChooseItemType}
-          editing={this.state.editing}
-          form={form}
-          spareCapacity={spareCapacity}
-        />
+      <Guidance contentId="guidance.editor.content_items">
+        <div className="stage-editor-section">
 
-        { spareCapacity > 0 &&
-          <NewButton
-            onClick={this.handleCreateItem}
-          />
-        }
-      </div>
+          <h2>Content</h2>
+
+          <div className="content-grid">
+            <FieldArray
+              name="items"
+              component={Items}
+              itemComponent={Item}
+              onToggleItemEdit={this.handleToggleItemEdit}
+              onChooseItemType={this.handleChooseItemType}
+              editing={this.state.editing}
+              form={form}
+              errors={this.props.errors}
+              spareCapacity={spareCapacity}
+            />
+          </div>
+
+          { spareCapacity > 0 &&
+            <NewButton
+              onClick={this.handleCreateItem}
+            />
+          }
+        </div>
+      </Guidance>
     );
   }
 }
@@ -73,18 +93,23 @@ ContentGrid.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, { form }) => {
   const items = formValueSelector(form.name)(state, 'items') || [];
+
   const spareCapacity = items.reduce(
     (memo, item) =>
       memo - (item.size ? units[item.size] : 0),
     capacity,
   );
 
+  const errors = getFormSyncErrors(form.name)(state);
+
   return {
     spareCapacity,
+    errors,
   };
 };
 

@@ -11,20 +11,19 @@ import { actionCreators as assetActions } from '../../../ducks/modules/protocol/
 class FileInput extends PureComponent {
   static propTypes = {
     importAsset: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    completeClassName: PropTypes.string,
     accept: PropTypes.string,
     children: PropTypes.func,
     label: PropTypes.string,
+    className: PropTypes.string,
     ...fieldPropTypes,
   };
 
   static defaultProps = {
     value: '',
-    className: 'form-fields-file',
-    completeClassName: 'form-fields-file--complete',
+    meta: { invalid: false, error: null, touched: false },
     accept: '',
     label: '',
+    className: '',
     children: value => value,
   };
 
@@ -44,14 +43,24 @@ class FileInput extends PureComponent {
   render() {
     const {
       input: { value },
+      meta: { touched, invalid, error },
       accept,
       label,
       className,
-      completeClassName,
     } = this.props;
 
+    const fieldClasses = cx(
+      'form-fields-file',
+      className,
+      'form-field-container',
+      {
+        'form-fields-mode--has-error': touched && invalid,
+        'form-fields-file--complete': !!value,
+      },
+    );
+
     return (
-      <div className={cx(className, 'form-field-container', { [completeClassName]: !!value })}>
+      <div className={fieldClasses}>
         { label &&
           <h4 className="form-fields-file__label">{label}</h4>
         }
@@ -72,6 +81,7 @@ class FileInput extends PureComponent {
             </div>
           }
         </div>
+        { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
       </div>
     );
   }

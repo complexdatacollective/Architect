@@ -7,6 +7,7 @@ class Mode extends PureComponent {
   static propTypes = {
     options: PropTypes.array,
     label: PropTypes.string,
+    meta: PropTypes.object,
     className: PropTypes.string,
     input: PropTypes.object.isRequired,
   };
@@ -14,6 +15,7 @@ class Mode extends PureComponent {
   static defaultProps = {
     className: null,
     label: null,
+    meta: { invalid: false, error: null, touched: false },
     options: [],
     disabled: false,
   };
@@ -53,12 +55,16 @@ class Mode extends PureComponent {
       options,
       className,
       label,
+      meta: { touched, invalid, error },
     } = this.props;
 
     const classNames = cx(
       'form-field-container',
       'form-fields-mode',
       className,
+      {
+        'form-fields-mode--has-error': touched && invalid,
+      },
     );
 
     return (
@@ -66,11 +72,10 @@ class Mode extends PureComponent {
         { label &&
           <h4 className="form-fields-mode__label">{label}</h4>
         }
-        <div>
-          <div className="form-fields-mode__options">
-            { options.map(this.renderMode) }
-          </div>
+        <div className="form-fields-mode__options">
+          { options.map(this.renderMode) }
         </div>
+        { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
       </div>
     );
   }

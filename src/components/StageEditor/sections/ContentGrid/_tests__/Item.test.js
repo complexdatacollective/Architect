@@ -28,7 +28,7 @@ describe('<Item />', () => {
 
   it('shows edit/preview correctly', () => {
     const componentWithType = shallow(<Item {...mockProps} item={{ type: 'foo' }} />);
-    const componentWithEditor = shallow(<Item {...mockProps} editing="foo" item={{ id: 'foo' }} />);
+    const componentWithEditor = shallow(<Item {...mockProps} editing={{ foo: true }} item={{ id: 'foo' }} />);
     const componentWithPreview = shallow(<Item {...mockProps} editing={null} item={{ id: 'foo' }} />);
 
     expect(componentWithType.find('ItemPreview').exists()).toBe(true);

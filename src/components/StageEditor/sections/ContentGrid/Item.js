@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { get } from 'lodash';
 import ItemPreview from './ItemPreview';
 import ItemChooser from './ItemChooser';
 import ItemEditor from './ItemEditor';
@@ -10,10 +11,11 @@ import { sizes } from './sizes';
 class Item extends Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
-    editing: PropTypes.string,
+    editing: PropTypes.object,
     onToggleItemEdit: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
     onChooseItemType: PropTypes.func.isRequired,
+    error: PropTypes.object,
     item: PropTypes.shape({
       content: PropTypes.string,
       type: PropTypes.string,
@@ -23,6 +25,7 @@ class Item extends Component {
   };
 
   static defaultProps = {
+    error: undefined,
     editing: null,
     item: {
       content: null,
@@ -41,13 +44,18 @@ class Item extends Component {
   }
 
   get isEditing() {
-    return this.item.id === this.props.editing;
+    return get(this.props.editing, this.item.id);
+  }
+
+  get hasError() {
+    return this.props.error;
   }
 
   handleChooseItemType = type =>
     this.props.onChooseItemType(this.props.fieldId, type);
 
   handleToggleItemEdit = () => {
+    if (this.hasError) { return; }
     this.props.onToggleItemEdit(this.item.id);
   }
 
@@ -60,7 +68,7 @@ class Item extends Component {
 
     const variableClasses = cx(
       'content-grid-item',
-      { 'content-grid-item--edit': this.isEditing },
+      { 'content-grid-item--edit': this.isEditing || this.hasError },
       { 'content-grid-item--new': this.isNew },
     );
 
@@ -91,6 +99,7 @@ class Item extends Component {
             type={this.item.type}
             size={this.item.size}
             spareCapacity={spareCapacity}
+            error={this.props.error}
             onComplete={this.handleToggleItemEdit}
           />
         </div>
@@ -99,8 +108,9 @@ class Item extends Component {
   }
 }
 
-const mapStateToProps = (state, { fieldId, form }) => ({
+const mapStateToProps = (state, { fieldId, form, errors }) => ({
   item: form.getValues(state, `${fieldId}`),
+  error: get(errors, fieldId),
 });
 
 export { Item };

@@ -9,6 +9,7 @@ const mockProps = {
   spareCapacity: 0,
   setInputType: () => {},
   form: {},
+  errors: {},
 };
 
 describe('<ContentGrid />', () => {
@@ -31,16 +32,16 @@ describe('<ContentGrid />', () => {
     component.find('NewButton').simulate('click');
 
     expect(createNewItemHandler.mock.calls.length).toBe(1);
-    expect(component.state('editing')).toBe('foo');
+    expect(component.state('editing')).toEqual({ foo: true });
   });
 
   it('toggle item edit changes state', () => {
     const component = shallow(<ContentGrid {...mockProps} />);
 
     component.instance().handleToggleItemEdit('bar');
-    expect(component.state('editing')).toBe('bar');
+    expect(component.state('editing')).toEqual({ bar: true });
 
     component.instance().handleToggleItemEdit('bar');
-    expect(component.state('editing')).toBe(null);
+    expect(component.state('editing')).toEqual({ bar: false });
   });
 });
