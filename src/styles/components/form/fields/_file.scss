@@ -12,6 +12,7 @@
   &__file {
     position: relative;
     min-height: 100px;
+    overflow: hidden;
 
     .form-dropzone {
       min-height: 150px;
@@ -41,5 +42,10 @@
     }
   }
 
-
+  &--has-error {
+    .form-fields-file__error {
+      opacity: 1;
+      max-height: 50px;
+    }
+  }
 }

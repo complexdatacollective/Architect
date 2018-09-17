@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get } from 'lodash';
-import { Field } from 'redux-form';
+import ValidatedField from '../../../Form/ValidatedField';
 import { Markdown, Image, Audio, Video, Mode } from '../../../Form/Fields';
 import { Button } from '../../../../ui/components';
+import { getFieldId } from '../../../../utils/issues';
 import { units, sizes } from './sizes';
 
 const sizeOptions = [
@@ -49,26 +50,31 @@ class ItemEditor extends Component {
   }
 
   render() {
-    const { name, show, onComplete } = this.props;
+    const { name, show, onComplete, error, type } = this.props;
 
     return (
       <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
         <div className="content-grid-editor__content" onClick={e => e.stopPropagation()}>
-          <Field
+          <div id={getFieldId(`${name}.size`)} data-name="Display size" />
+          <ValidatedField
             component={Mode}
             name={`${name}.size`}
             label="Display size"
             options={this.options}
+            validation={{ required: true }}
           />
-          <Field
+          <div id={getFieldId(`${name}.content`)} data-name={`${type} content`} />
+          <ValidatedField
             label="Content"
             name={`${name}.content`}
             component={this.inputComponent}
+            validation={{ required: true }}
           />
           <Button
             type="button"
             size="small"
             onClick={onComplete}
+            disabled={error}
           >Done</Button>
         </div>
       </div>
@@ -84,6 +90,7 @@ ItemEditor.propTypes = {
   show: PropTypes.bool,
   spareCapacity: PropTypes.number,
   onComplete: PropTypes.func.isRequired,
+  error: PropTypes.object,
 };
 
 ItemEditor.defaultProps = {
@@ -92,6 +99,7 @@ ItemEditor.defaultProps = {
   type: null,
   size: null,
   spareCapacity: 0,
+  error: undefined,
 };
 
 export { ItemEditor };

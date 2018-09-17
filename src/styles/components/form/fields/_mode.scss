@@ -35,4 +35,11 @@
       cursor: not-allowed;
     }
   }
+
+  &--has-error {
+    .form-fields-mode__error {
+      opacity: 1;
+      max-height: 50px;
+    }
+  }
 }

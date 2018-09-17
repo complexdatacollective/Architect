@@ -5,11 +5,11 @@ import { Audio } from '../../Assets';
 const AudioInput = props => (
   <File
     accept="audio/*"
-    completeClassName="form-fields-audio--complete"
+    className="form-fields-audio"
     {...props}
   >
     { url => (
-      <div className="form-fields-audio">
+      <div className="form-fields-audio__preview">
         <Audio url={url} controls />
       </div>
     ) }
