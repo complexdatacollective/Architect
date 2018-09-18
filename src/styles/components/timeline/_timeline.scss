@@ -51,4 +51,10 @@ $bottom-spacing: unit(12);
     }
   }
 
+  &--sorting {
+    .timeline__stages-highlight {
+      background-color: transparent !important;
+    }
+  }
+
 }

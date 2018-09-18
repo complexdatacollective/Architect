@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
-import { compose, withHandlers, defaultProps } from 'recompose';
+import { compose, withStateHandlers, defaultProps } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
 import None from '../Transitions/None';
@@ -154,10 +154,18 @@ class Timeline extends Component {
   }
 
   render() {
-    const { show } = this.props;
+    const { show, sorting } = this.props;
+
+    const timelineStyles = cx(
+      'timeline',
+      {
+        'timeline--show': show,
+        'timeline--sorting': sorting,
+      },
+    );
 
     return (
-      <div className={cx('timeline', { 'timeline--show': show })}>
+      <div className={timelineStyles}>
         <div className="timeline__stages">
           { this.hasStages() && this.renderHighlight() }
           <TransitionGroup>
@@ -184,24 +192,38 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
   goTo: bindActionCreators(navigationActions.goTo, dispatch),
-  onSortEnd: ({ oldIndex, newIndex }) => dispatch(stageActions.moveStage(oldIndex, newIndex)),
+  onSortEnd: ({ oldIndex, newIndex }) => {
+    props.setSorting(false);
+    dispatch(stageActions.moveStage(oldIndex, newIndex));
+  },
+  onSortStart: () => {
+    props.setSorting(true);
+  },
 });
 
 export { Timeline };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
   defaultProps({
     lockAxis: 'y',
+    helperClass: 'foo',
     transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
     sortable: true,
   }),
-  // withHandlers({
-  //   onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
-  // }),
+  withStateHandlers(
+    ({ sorting = false }) => ({
+      sorting,
+    }),
+    {
+      setSorting: () => sortingState => ({
+        sorting: sortingState,
+      }),
+    },
+  ),
+  connect(mapStateToProps, mapDispatchToProps),
   SortableContainer,
-  withRouter,
 )(Timeline);
