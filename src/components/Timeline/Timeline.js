@@ -19,6 +19,7 @@ import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 class Timeline extends Component {
   static propTypes = {
     stages: PropTypes.array,
+    sorting: PropTypes.bool,
     deleteStage: PropTypes.func.isRequired,
     goTo: PropTypes.func.isRequired,
     show: PropTypes.bool,
@@ -26,6 +27,7 @@ class Timeline extends Component {
 
   static defaultProps = {
     show: true,
+    sorting: false,
     stages: [],
     overview: {},
   };

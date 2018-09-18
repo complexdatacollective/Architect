@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { SortableHandle, SortableElement } from 'react-sortable-hoc';
+import { SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
 import cx from 'classnames';
 import { Zoom } from '../../behaviours';
