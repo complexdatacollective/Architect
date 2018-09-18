@@ -59,7 +59,7 @@ const ConfigureSkipLogicButton = Zoom(
   ),
 );
 
-class TimelineStage extends PureComponent {
+class Stage extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
@@ -136,6 +136,6 @@ class TimelineStage extends PureComponent {
   }
 }
 
-export { TimelineStage };
+export { Stage };
 
-export default SortableElement(TimelineStage);
+export default SortableElement(Stage);

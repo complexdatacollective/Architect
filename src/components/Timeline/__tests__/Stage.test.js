@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Stage from '../Stage';
+import { Stage } from '../Stage';
 
 jest.mock('../../../utils/CSSVariables');
 

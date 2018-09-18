@@ -9,6 +9,7 @@ ShallowWrapper {
     goTo={[Function]}
     overview={Object {}}
     show={true}
+    sorting={false}
     stages={Array []}
   />,
   Symbol(enzyme.__renderer__): Object {

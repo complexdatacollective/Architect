@@ -21,6 +21,6 @@ describe('<Timeline />', () => {
 
     const component = shallow(<Timeline {...mockProps} stages={mockStages} />);
 
-    expect(component.find('TimelineStage').length).toEqual(2);
+    expect(component.find('sortableElement(Stage)').length).toEqual(2);
   });
 });
