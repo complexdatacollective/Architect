@@ -12,6 +12,7 @@ import Guidance from '../Guidance';
 import Card from '../Card';
 import EdgeIcon from '../EdgeIcon';
 import { getProtocol } from '../../selectors/protocol';
+import { getTypeUsage } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
 const Type = ({ label, link, children, handleDelete }) => (
@@ -54,11 +55,16 @@ class VariableRegistry extends Component {
     ];
   }
 
-  handleDelete = (category, type) => {
-    // eslint-disable-next-line no-alert
-    if (confirm(`Are you sure you want to delete "${type}:${category}"?`)) {
-      this.props.deleteType(category, type);
+  handleDelete = (entity, type) => {
+    const usage = this.props.typeUsage[entity][type];
+
+    if (usage.length > 0) {
+      if(!confirm(`This is used by a bunch of things ${JSON.stringify(usage)}`)) { return; }
     }
+
+    // eslint-disable-next-line no-alert
+    if (!confirm(`Are you sure you want to delete "${type}:${entity}"?`)) { return; }
+    this.props.deleteType(entity, type);
   };
 
   handleCancel = this.props.onComplete;
@@ -193,6 +199,7 @@ VariableRegistry.propTypes = {
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
   }).isRequired,
+  typeUsage: PropTypes.object.isRequired,
   protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteType: PropTypes.func.isRequired,
@@ -210,9 +217,12 @@ VariableRegistry.defaultProps = {
 
 const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
+  const variableRegistry = protocol.variableRegistry;
+  const typeUsage = getTypeUsage(state);
 
   return {
-    variableRegistry: protocol.variableRegistry,
+    variableRegistry,
+    typeUsage,
     protocolPath: has(props, 'match.params.protocol') ?
       `/edit/${get(props, 'match.params.protocol')}` : null,
   };
