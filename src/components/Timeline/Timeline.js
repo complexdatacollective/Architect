@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
+import { compose, withHandlers, defaultProps } from 'recompose';
+import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
 import None from '../Transitions/None';
 import Drawer from '../Transitions/Drawer';
@@ -12,6 +14,7 @@ import InsertStage from './InsertStage';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as navigationActions } from '../../ducks/modules/navigation';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 class Timeline extends Component {
   static propTypes = {
@@ -134,6 +137,7 @@ class Timeline extends Component {
       <None key={`stage_${stage.id}`}>
         <Stage
           key={`stage_${stage.id}`}
+          index={index}
           id={stage.id}
           type={stage.type}
           label={stage.label}
@@ -183,11 +187,21 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
   goTo: bindActionCreators(navigationActions.goTo, dispatch),
+  onSortEnd: ({ oldIndex, newIndex }) => dispatch(stageActions.moveStage(oldIndex, newIndex)),
 });
 
 export { Timeline };
 
 export default compose(
-  withRouter,
   connect(mapStateToProps, mapDispatchToProps),
+  defaultProps({
+    lockAxis: 'y',
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+    sortable: true,
+  }),
+  // withHandlers({
+  //   onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
+  // }),
+  SortableContainer,
+  withRouter,
 )(Timeline);
