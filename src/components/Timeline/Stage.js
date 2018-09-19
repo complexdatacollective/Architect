@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
 import cx from 'classnames';
 import { Zoom } from '../../behaviours';
@@ -41,7 +42,6 @@ const EditStageButton = Zoom(
         </div>
       </div>
     </div>
-
   ),
 );
 
@@ -59,7 +59,7 @@ const ConfigureSkipLogicButton = Zoom(
   ),
 );
 
-class TimelineStage extends PureComponent {
+class Stage extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     label: PropTypes.string,
@@ -136,4 +136,6 @@ class TimelineStage extends PureComponent {
   }
 }
 
-export default TimelineStage;
+export { Stage };
+
+export default SortableElement(Stage);

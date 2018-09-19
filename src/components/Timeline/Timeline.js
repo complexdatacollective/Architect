@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
+import { compose, withStateHandlers, defaultProps } from 'recompose';
+import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
 import None from '../Transitions/None';
 import Drawer from '../Transitions/Drawer';
@@ -12,10 +14,12 @@ import InsertStage from './InsertStage';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as navigationActions } from '../../ducks/modules/navigation';
+import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 class Timeline extends Component {
   static propTypes = {
     stages: PropTypes.array,
+    sorting: PropTypes.bool,
     deleteStage: PropTypes.func.isRequired,
     goTo: PropTypes.func.isRequired,
     show: PropTypes.bool,
@@ -23,6 +27,7 @@ class Timeline extends Component {
 
   static defaultProps = {
     show: true,
+    sorting: false,
     stages: [],
     overview: {},
   };
@@ -134,6 +139,7 @@ class Timeline extends Component {
       <None key={`stage_${stage.id}`}>
         <Stage
           key={`stage_${stage.id}`}
+          index={index}
           id={stage.id}
           type={stage.type}
           label={stage.label}
@@ -150,10 +156,18 @@ class Timeline extends Component {
   }
 
   render() {
-    const { show } = this.props;
+    const { show, sorting } = this.props;
+
+    const timelineStyles = cx(
+      'timeline',
+      {
+        'timeline--show': show,
+        'timeline--sorting': sorting,
+      },
+    );
 
     return (
-      <div className={cx('timeline', { 'timeline--show': show })}>
+      <div className={timelineStyles}>
         <div className="timeline__stages">
           { this.hasStages() && this.renderHighlight() }
           <TransitionGroup>
@@ -180,14 +194,37 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
   goTo: bindActionCreators(navigationActions.goTo, dispatch),
+  onSortEnd: ({ oldIndex, newIndex }) => {
+    props.setSorting(false);
+    dispatch(stageActions.moveStage(oldIndex, newIndex));
+  },
+  onSortStart: () => {
+    props.setSorting(true);
+  },
 });
 
 export { Timeline };
 
 export default compose(
   withRouter,
+  withStateHandlers(
+    ({ sorting = false }) => ({
+      sorting,
+    }),
+    {
+      setSorting: () => sortingState => ({
+        sorting: sortingState,
+      }),
+    },
+  ),
+  defaultProps({
+    lockAxis: 'y',
+    distance: 5,
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+  }),
   connect(mapStateToProps, mapDispatchToProps),
+  SortableContainer,
 )(Timeline);

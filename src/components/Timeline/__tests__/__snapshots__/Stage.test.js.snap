@@ -4,7 +4,7 @@ exports[`<Stage /> can render 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <TimelineStage
+  Symbol(enzyme.__unrendered__): <Stage
     className=""
     label=""
     onDeleteStage={[Function]}

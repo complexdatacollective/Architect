@@ -1,8 +1,10 @@
 import uuid from 'uuid/v1';
 import { get } from 'lodash';
+import { arrayMove } from 'react-sortable-hoc';
 
 const CREATE_STAGE = Symbol('PROTOCOL/CREATE_STAGE');
 const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
+const MOVE_STAGE = Symbol('PROTOCOL/MOVE_STAGE');
 const DELETE_STAGE = Symbol('PROTOCOL/DELETE_STAGE');
 
 const initialState = [];
@@ -34,6 +36,8 @@ export default function reducer(state = initialState, action = {}) {
           id: stage.id,
         };
       });
+    case MOVE_STAGE:
+      return arrayMove(state, action.oldIndex, action.newIndex);
     case DELETE_STAGE:
       return state.filter(stage => (stage.id !== action.id));
     default:
@@ -46,6 +50,14 @@ function createStage(stage, index) {
     type: CREATE_STAGE,
     stage,
     index,
+  };
+}
+
+function moveStage(oldIndex, newIndex) {
+  return {
+    type: MOVE_STAGE,
+    oldIndex,
+    newIndex,
   };
 }
 
@@ -69,12 +81,14 @@ const actionCreators = {
   createStage,
   updateStage,
   deleteStage,
+  moveStage,
 };
 
 const actionTypes = {
   CREATE_STAGE,
   UPDATE_STAGE,
   DELETE_STAGE,
+  MOVE_STAGE,
 };
 
 export {
