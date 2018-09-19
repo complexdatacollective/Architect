@@ -1,12 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 
 import { combineReducers } from 'redux';
+import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
 import undoable from 'redux-undo';
 import protocol from './protocol';
 import protocols from './protocols';
 import recentProtocols from './recentProtocols';
-import session from './session';
+import session, { epics as sessionEpics } from './session';
 import guidance from './guidance';
 
 const combineFilters = (...filters) =>
@@ -15,6 +16,12 @@ const combineFilters = (...filters) =>
       (memo, filter) => memo && filter(...args),
       true,
     );
+
+
+export const rootEpic = combineEpics(
+  sessionEpics,
+);
+
 
 /*
  * state: {

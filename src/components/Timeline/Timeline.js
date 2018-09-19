@@ -210,12 +210,6 @@ export { Timeline };
 
 export default compose(
   withRouter,
-  defaultProps({
-    lockAxis: 'y',
-    helperClass: 'foo',
-    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-    sortable: true,
-  }),
   withStateHandlers(
     ({ sorting = false }) => ({
       sorting,
@@ -226,6 +220,11 @@ export default compose(
       }),
     },
   ),
+  defaultProps({
+    lockAxis: 'y',
+    distance: 5,
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+  }),
   connect(mapStateToProps, mapDispatchToProps),
   SortableContainer,
 )(Timeline);
