@@ -1,9 +1,15 @@
 /* eslint-env jest */
 
 import uuid from 'uuid';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import { actionCreators as formActions } from '../forms';
+import { actionCreators as stageActions } from '../stages';
 import reducer, { actionCreators } from '../variableRegistry';
 
 jest.mock('uuid');
+
+const mockStore = configureStore([thunk]);
 
 const mockState = {
   node: {
@@ -76,5 +82,48 @@ describe('protocol.variableRegistry', () => {
       },
       edge: { },
     });
+  });
+
+  it('deleteTypeAndRelatedObjects()', () => {
+    const mockStateWithProtocol = {
+      protocol: {
+        present: {
+          stages: [
+            {
+              id: 'bazz',
+              subject: { entity: 'node', type: 'foo' },
+            },
+            {
+              id: 'buzz',
+              prompts: [
+                {
+                  id: 'fizz',
+                  subject: { entity: 'node', type: 'foo' },
+                },
+              ],
+            },
+          ],
+          forms: {
+            bar: {
+              entity: 'node',
+              type: 'foo',
+            },
+          },
+        },
+      },
+    };
+
+    const store = mockStore(mockStateWithProtocol);
+
+    store.dispatch(actionCreators.deleteTypeAndRelatedObjects('node', 'foo'));
+
+    const actions = store.getActions();
+
+    expect(actions).toEqual(expect.arrayContaining([
+      actionCreators.deleteType('node', 'foo'),
+      stageActions.deleteStage('bazz'),
+      stageActions.deletePrompt('buzz', 'fizz', true),
+      formActions.deleteForm('bar'),
+    ]));
   });
 });

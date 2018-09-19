@@ -63,7 +63,7 @@ class VariableRegistry extends Component {
           `${memo}\n    stage prompt: ${owner.stageId}: ${owner.promptId}` :
           `${memo}\n    ${owner.type}: ${owner.id}`
       ),
-      ''
+      '',
     );
 
     if (usage.length > 0) {

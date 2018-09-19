@@ -5,7 +5,8 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <VariableRegistry
-    deleteType={[Function]}
+    deleteTypeAndRelatedObjects={[Function]}
+    getUsageForType={[Function]}
     onComplete={[Function]}
     protocolPath=""
     show={true}

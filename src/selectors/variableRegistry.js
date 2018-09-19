@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get, map, reduce, compact, flatMap, memoize } from 'lodash';
+import { get, map, compact, flatMap, memoize } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 

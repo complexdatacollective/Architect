@@ -59,7 +59,7 @@ function deleteTypeAndRelatedObjects(category, type) {
     const getUsageForType = makeGetUsageForType(getState());
     const usageForType = getUsageForType(category, type);
 
-    // dispatch(deleteType(category, type));
+    dispatch(deleteType(category, type));
 
     usageForType.forEach(({ owner }) => {
       switch (owner.type) {

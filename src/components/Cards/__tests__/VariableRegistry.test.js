@@ -9,7 +9,8 @@ const mockProps = {
     node: {},
     edge: {},
   },
-  deleteType: () => {},
+  getUsageForType: () => {},
+  deleteTypeAndRelatedObjects: () => {},
   protocolPath: '',
 };
 
