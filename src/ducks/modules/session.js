@@ -34,6 +34,7 @@ export default function reducer(state = initialState, action = {}) {
       };
     // All these actions are considered saveable changes:
     case protocolStageActionTypes.CREATE_STAGE:
+    case protocolStageActionTypes.MOVE_STAGE:
     case protocolStageActionTypes.UPDATE_STAGE:
     case protocolStageActionTypes.DELETE_STAGE:
     case protocolRegistryActionTypes.UPDATE_TYPE:
