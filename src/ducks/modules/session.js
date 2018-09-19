@@ -13,6 +13,7 @@ const savableChanges = [
   protocolStageActionTypes.MOVE_STAGE,
   protocolStageActionTypes.UPDATE_STAGE,
   protocolStageActionTypes.DELETE_STAGE,
+  protocolStageActionTypes.DELETE_PROMPT,
   protocolRegistryActionTypes.UPDATE_TYPE,
   protocolRegistryActionTypes.CREATE_TYPE,
   protocolRegistryActionTypes.DELETE_TYPE,

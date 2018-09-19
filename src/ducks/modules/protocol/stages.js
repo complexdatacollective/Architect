@@ -1,11 +1,12 @@
 import uuid from 'uuid/v1';
-import { get } from 'lodash';
+import { get, compact } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 
 const CREATE_STAGE = Symbol('PROTOCOL/CREATE_STAGE');
 const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
 const MOVE_STAGE = Symbol('PROTOCOL/MOVE_STAGE');
 const DELETE_STAGE = Symbol('PROTOCOL/DELETE_STAGE');
+const DELETE_PROMPT = Symbol('PROTOCOL/DELETE_PROMPT');
 
 const initialState = [];
 const initialStage = {
@@ -40,6 +41,22 @@ export default function reducer(state = initialState, action = {}) {
       return arrayMove(state, action.oldIndex, action.newIndex);
     case DELETE_STAGE:
       return state.filter(stage => (stage.id !== action.id));
+    case DELETE_PROMPT:
+      return compact(
+        state.map((stage) => {
+          if (stage.id !== action.stageId) { return stage; }
+
+          const prompts = stage.prompts.filter(({ id }) => id !== action.promptId);
+
+          // If prompt is empty, we can delete the stage too
+          if (action.deleteEmptyStage && prompts.length === 0) { return null; }
+
+          return {
+            ...stage,
+            prompts,
+          };
+        }),
+      );
     default:
       return state;
   }
@@ -77,11 +94,21 @@ function deleteStage(stageId) {
   };
 }
 
+function deletePrompt(stageId, promptId, deleteEmptyStage = false) {
+  return {
+    type: DELETE_PROMPT,
+    stageId,
+    promptId,
+    deleteEmptyStage,
+  };
+}
+
 const actionCreators = {
   createStage,
   updateStage,
   deleteStage,
   moveStage,
+  deletePrompt,
 };
 
 const actionTypes = {
@@ -89,6 +116,7 @@ const actionTypes = {
   UPDATE_STAGE,
   DELETE_STAGE,
   MOVE_STAGE,
+  DELETE_PROMPT,
 };
 
 export {

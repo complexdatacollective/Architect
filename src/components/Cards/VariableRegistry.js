@@ -12,7 +12,7 @@ import Guidance from '../Guidance';
 import Card from '../Card';
 import EdgeIcon from '../EdgeIcon';
 import { getProtocol } from '../../selectors/protocol';
-import { getTypeUsage } from '../../selectors/variableRegistry';
+import { makeGetUsageForType } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
 const Type = ({ label, link, children, handleDelete }) => (
@@ -56,15 +56,27 @@ class VariableRegistry extends Component {
   }
 
   handleDelete = (entity, type) => {
-    const usage = this.props.typeUsage[entity][type];
+    const usage = this.props.getUsageForType(entity, type);
+    const deletedObjects = usage.reduce(
+      (memo, { owner }) => (
+        owner.type === 'prompt' ?
+          `${memo}\n    stage prompt: ${owner.stageId}: ${owner.promptId}` :
+          `${memo}\n    ${owner.type}: ${owner.id}`
+      ),
+      ''
+    );
 
     if (usage.length > 0) {
-      if(!confirm(`This is used by a bunch of things ${JSON.stringify(usage)}`)) { return; }
+      // eslint-disable-next-line no-alert
+      if (!confirm(`
+Because a number of other objects depend on this type, they will also be removed:
+${deletedObjects}
+      `)) { return; }
     }
 
     // eslint-disable-next-line no-alert
-    if (!confirm(`Are you sure you want to delete "${type}:${entity}"?`)) { return; }
-    this.props.deleteType(entity, type);
+    if (!confirm(`Are you sure you want to delete "${type} ${entity}"?`)) { return; }
+    this.props.deleteTypeAndRelatedObjects(entity, type);
   };
 
   handleCancel = this.props.onComplete;
@@ -199,10 +211,10 @@ VariableRegistry.propTypes = {
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
   }).isRequired,
-  typeUsage: PropTypes.object.isRequired,
+  getUsageForType: PropTypes.func.isRequired,
   protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
-  deleteType: PropTypes.func.isRequired,
+  deleteTypeAndRelatedObjects: PropTypes.func.isRequired,
 };
 
 VariableRegistry.defaultProps = {
@@ -218,18 +230,21 @@ VariableRegistry.defaultProps = {
 const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
   const variableRegistry = protocol.variableRegistry;
-  const typeUsage = getTypeUsage(state);
+  const getUsageForType = makeGetUsageForType(state);
 
   return {
     variableRegistry,
-    typeUsage,
+    getUsageForType,
     protocolPath: has(props, 'match.params.protocol') ?
       `/edit/${get(props, 'match.params.protocol')}` : null,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  deleteType: bindActionCreators(variableRegistryActions.deleteType, dispatch),
+  deleteTypeAndRelatedObjects: bindActionCreators(
+    variableRegistryActions.deleteTypeAndRelatedObjects,
+    dispatch,
+  ),
 });
 
 export { VariableRegistry };
