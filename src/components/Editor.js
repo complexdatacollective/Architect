@@ -35,7 +35,7 @@ Editor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
   showCodeView: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  issues: PropTypes.array.isRequired,
+  issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
   form: PropTypes.string.isRequired,
   component: PropTypes.func,

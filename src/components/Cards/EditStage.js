@@ -88,7 +88,7 @@ const mapStateToProps = (state, props) => {
   return ({
     stage,
     stageId,
-    insertAtIndex: get(query, 'insertAtIndex'),
+    insertAtIndex: query.insertAtIndex ? parseInt(query.insertAtIndex, 10) : null,
     dirty: isFormDirty('edit-stage')(state),
     invalid: isFormInvalid('edit-stage')(state),
   });
