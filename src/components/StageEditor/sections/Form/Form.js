@@ -10,11 +10,17 @@ import ValidatedField from '../../../Form/ValidatedField';
 import EditForm from '../../../Cards/EditForm';
 import { Icon } from '../../../../ui/components';
 import { RadioGroup } from '../../../../ui/components/Fields';
+import { getProtocol } from '../../../../selectors/protocol';
 import FormCard from './FormCard';
+
+const formOption = PropTypes.shape({
+  label: PropTypes.string,
+  value: PropTypes.string,
+});
 
 class Form extends Component {
   static propTypes = {
-    forms: PropTypes.arrayOf(PropTypes.string),
+    forms: PropTypes.arrayOf(formOption),
     disabled: PropTypes.bool,
     nodeType: PropTypes.string,
     change: PropTypes.func.isRequired,
@@ -111,11 +117,11 @@ class Form extends Component {
   }
 }
 
-const getNodeFormOptions = (state, nodeType) => {
-  const forms = toPairs(get(state, 'protocol.present.forms', {}));
+const getNodeFormOptions = (forms, nodeType) => {
+  const formsAsPairs = toPairs(forms);
 
   const validForms = pickBy(
-    forms,
+    formsAsPairs,
     ([, form]) =>
       form.type === nodeType && form.entity === 'node',
   );
@@ -131,10 +137,11 @@ const getNodeFormOptions = (state, nodeType) => {
 };
 
 const mapStateToProps = (state, props) => {
+  const protocol = getProtocol(state);
   const formValues = props.form.getValues(state, 'subject', 'form');
   const nodeType = get(formValues, 'subject.type', null);
   const selectedForm = get(formValues, 'form', undefined);
-  const formOptions = getNodeFormOptions(state, nodeType);
+  const formOptions = getNodeFormOptions(protocol.forms, nodeType);
 
   return {
     nodeType,
