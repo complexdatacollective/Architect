@@ -5,7 +5,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import reducer, { actionCreators } from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
-import { actionCreators as registryActions } from '../protocol/variableRegistry';
+import { actionCreators as registryActions, testing as registryTesting } from '../protocol/variableRegistry';
 import { actionCreators as formActions } from '../protocol/forms';
 import { rootEpic } from '../../modules/root';
 
@@ -68,7 +68,7 @@ describe('session reducer', () => {
     });
 
     it('tracks delete type as change', () => {
-      itTracksActionAsChange(registryActions.deleteType());
+      itTracksActionAsChange(registryTesting.deleteTypeAction());
     });
 
     it('tracks create form as change', () => {

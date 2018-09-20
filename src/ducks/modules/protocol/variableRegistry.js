@@ -13,53 +13,47 @@ const initialState = {
   node: {},
 };
 
-function createType(category, configuration) {
+function createType(entity, configuration) {
   return {
     type: CREATE_TYPE,
     meta: {
       type: uuid(),
-      category,
+      entity,
     },
     configuration,
   };
 }
 
-function updateType(category, type, configuration) {
+function updateType(entity, type, configuration) {
   return {
     type: UPDATE_TYPE,
     meta: {
-      category,
+      entity,
       type,
     },
     configuration,
   };
 }
 
-const setType = (state, category, type, configuration) => ({
-  ...state,
-  [category]: {
-    ...state[category],
-    [type]: configuration,
-  },
-});
-
-function deleteType(category, type) {
+function deleteTypeAction(entity, type) {
   return {
     type: DELETE_TYPE,
     meta: {
-      category,
+      entity,
       type,
     },
   };
 }
 
-// check usage elsewhere, and delete related stages/forms
-function deleteTypeAndRelatedObjects(category, type) {
+function deleteType(entity, type, deleteRelatedObjects = false) {
   return (dispatch, getState) => {
-    const getUsageForType = makeGetUsageForType(getState());
-    const usageForType = getUsageForType(category, type);
+    dispatch(deleteTypeAction(entity, type));
 
-    dispatch(deleteType(category, type));
+    if (!deleteRelatedObjects) { return; }
+
+    // check usage elsewhere, and delete related stages/forms
+    const getUsageForType = makeGetUsageForType(getState());
+    const usageForType = getUsageForType(entity, type);
 
     usageForType.forEach(({ owner }) => {
       switch (owner.type) {
@@ -79,16 +73,24 @@ function deleteTypeAndRelatedObjects(category, type) {
   };
 }
 
+const setType = (state, entity, type, configuration) => ({
+  ...state,
+  [entity]: {
+    ...state[entity],
+    [type]: configuration,
+  },
+});
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_TYPE:
     case UPDATE_TYPE:
-      return setType(state, action.meta.category, action.meta.type, action.configuration);
+      return setType(state, action.meta.entity, action.meta.type, action.configuration);
     case DELETE_TYPE:
       return {
         ...state,
-        [action.meta.category]: {
-          ...omit(state[action.meta.category], [action.meta.type]),
+        [action.meta.entity]: {
+          ...omit(state[action.meta.entity], [action.meta.type]),
         },
       };
     default:
@@ -100,7 +102,6 @@ const actionCreators = {
   updateType,
   createType,
   deleteType,
-  deleteTypeAndRelatedObjects,
 };
 
 const actionTypes = {
@@ -109,7 +110,12 @@ const actionTypes = {
   DELETE_TYPE,
 };
 
+const testing = {
+  deleteTypeAction,
+};
+
 export {
   actionCreators,
   actionTypes,
+  testing,
 };

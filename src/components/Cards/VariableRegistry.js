@@ -76,7 +76,7 @@ ${deletedObjects}
 
     // eslint-disable-next-line no-alert
     if (!confirm(`Are you sure you want to delete "${type} ${entity}"?`)) { return; }
-    this.props.deleteTypeAndRelatedObjects(entity, type);
+    this.props.deleteType(entity, type, true);
   };
 
   handleCancel = this.props.onComplete;
@@ -214,7 +214,7 @@ VariableRegistry.propTypes = {
   getUsageForType: PropTypes.func.isRequired,
   protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
-  deleteTypeAndRelatedObjects: PropTypes.func.isRequired,
+  deleteType: PropTypes.func.isRequired,
 };
 
 VariableRegistry.defaultProps = {
@@ -241,10 +241,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  deleteTypeAndRelatedObjects: bindActionCreators(
-    variableRegistryActions.deleteTypeAndRelatedObjects,
-    dispatch,
-  ),
+  deleteType: bindActionCreators(variableRegistryActions.deleteType, dispatch),
 });
 
 export { VariableRegistry };
