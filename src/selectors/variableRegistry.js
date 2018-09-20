@@ -81,6 +81,22 @@ const getPromptTypeUsageIndex = createSelector(
 );
 
 /**
+ * Returns "subject" index array for sociogram prompts, where owner.type === 'prompt'
+ * @returns {array} in format: [{ subject: { entity, type }, owner: { id, type } }, ...]
+ */
+const getSociogramTypeUsageIndex = createSelector(
+  getProtocol,
+  protocol =>
+    flatMap(
+      flattenPromptsFromStages(protocol.stages.filter(({ type }) => type === 'Sociogram')),
+      ({ edges: { creates, display }, stageId, id: promptId }) => ([
+        { subject: { entity: 'edge', type: creates }, owner: { type: 'prompt', promptId, stageId } },
+        ...display.map(edge => ({ subject: { entity: 'edge', type: edge }, owner: { type: 'prompt', promptId, stageId } })),
+      ]),
+    ),
+);
+
+/**
  * Returns a combined "subject" index array for forms, stages and prompts
  * @returns {array} in format: [{ subject: { entity, type }, owner: { id, type } }, ...]
  */
@@ -88,8 +104,18 @@ const getTypeUsageIndex = createSelector(
   getFormTypeUsageIndex,
   getStageTypeUsageIndex,
   getPromptTypeUsageIndex,
-  (formTypeUsageIndex, stageTypeUsageIndex, promptTypeUsageIndex) =>
-    [...formTypeUsageIndex, ...stageTypeUsageIndex, ...promptTypeUsageIndex],
+  getSociogramTypeUsageIndex,
+  (
+    formTypeUsageIndex,
+    stageTypeUsageIndex,
+    promptTypeUsageIndex,
+    sociogramTypeUsageIndex,
+  ) => [
+    ...formTypeUsageIndex,
+    ...stageTypeUsageIndex,
+    ...promptTypeUsageIndex,
+    ...sociogramTypeUsageIndex,
+  ],
 );
 
 /**
@@ -105,6 +131,7 @@ const makeGetUsageForType = createSelector(
           ({ subject: { type, entity } }) =>
             type === searchType && entity === searchEntity,
         ),
+      (searchEntity, searchType) => `${searchEntity}:${searchType}`,
     ),
 );
 
@@ -122,6 +149,7 @@ export {
   getNodeTypes,
   getVariablesForNodeType,
   getTypeUsageIndex,
+  getSociogramTypeUsageIndex,
   makeGetUsageForType,
   getTypes,
 };

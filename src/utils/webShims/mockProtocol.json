@@ -877,8 +877,8 @@
             "allowPositioning": true
           },
           "edges": {
-            "display": ["friends", "professional"],
-            "create": "friends"
+            "display": ["friend", "professional"],
+            "create": "friend"
           },
           "highlight": {
             "variable": "has_given_advice",

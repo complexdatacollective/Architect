@@ -15,7 +15,7 @@ import { getProtocol } from '../../selectors/protocol';
 import { makeGetUsageForType } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
-const Type = ({ label, link, children, handleDelete }) => (
+const Type = ({ label, link, children, usage, handleDelete }) => (
   <div className="list__item">
     <div className="list__attribute list__attribute--icon">
       <Link to={link}>
@@ -28,6 +28,7 @@ const Type = ({ label, link, children, handleDelete }) => (
           {label}
         </Link>
       </h3>
+      { usage.length === 0 && <div className="list__tag">unused</div> }
     </div>
     <div className="list__attribute list__attribute--options">
       <Button size="small" color="neon-coral" onClick={handleDelete}>
@@ -40,8 +41,13 @@ const Type = ({ label, link, children, handleDelete }) => (
 Type.propTypes = {
   label: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  usage: PropTypes.array,
   handleDelete: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+};
+
+Type.defaultProps = {
+  usage: [],
 };
 
 /**
@@ -83,6 +89,7 @@ ${deletedObjects}
 
   renderNode = (node, key) => {
     const nodeColor = get(node, 'color', '');
+    const usage = this.props.getUsageForType('node', key);
 
     return (
       <Wipe key={key}>
@@ -90,6 +97,7 @@ ${deletedObjects}
           link={`${this.props.protocolPath}/registry/node/${key}`}
           label={node.label}
           handleDelete={() => this.handleDelete('node', key)}
+          usage={usage}
         >
           <Node label="" color={nodeColor} />
         </Type>
@@ -99,6 +107,7 @@ ${deletedObjects}
 
   renderEdge = (edge, key) => {
     const edgeColor = `var(--${get(edge, 'color', '')})`;
+    const usage = this.props.getUsageForType('edge', key);
 
     return (
       <Wipe key={key}>
@@ -106,6 +115,7 @@ ${deletedObjects}
           link={`${this.props.protocolPath}/registry/edge/${key}`}
           label={edge.label}
           handleDelete={() => this.handleDelete('edge', key)}
+          usage={usage}
         >
           <EdgeIcon color={edgeColor} />
         </Type>
