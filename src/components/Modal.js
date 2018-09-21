@@ -1,60 +1,45 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import propTypes from 'prop-types';
-import cx from 'classnames';
+import PropTypes from 'prop-types';
 import Fade from './Transitions/Fade';
 import Drop from './Transitions/Drop';
+import window from './window';
 
 class Modal extends Component {
-  static propTypes = {
-    show: propTypes.bool,
-    children: propTypes.element,
-  };
-
-  static defaultProps = {
-    show: false,
-    children: null,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.portal = document.createElement('div');
-    const body = document.getElementsByTagName('body')[0];
-    body.appendChild(this.portal);
-
-    this.state = { show: false };
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({ show: newProps.show });
+  handleBlur = (event) => {
+    if (event.target !== event.currentTarget) { return; }
+    this.props.onBlur(event);
   }
 
   render() {
-    const { show, children } = this.props;
+    const { children, show } = this.props;
 
-    const modalClasses = cx(
-      'modal',
-    );
-
-    return ReactDOM.createPortal(
-      (
-        <Fade className={modalClasses} in={show}>
-          <div>
-            <div className="modal__background" />
-            <div className="modal__content">
-              <Drop in>
-                { children }
-              </Drop>
-            </div>
+    return (
+      <Fade in={show}>
+        <div className="modal">
+          <div className="modal__background" />
+          <div className="modal__content" onClick={this.handleBlur} >
+            <Drop in>
+              { children }
+            </Drop>
           </div>
-        </Fade>
-      ),
-      this.portal,
+        </div>
+      </Fade>
     );
   }
 }
 
+Modal.propTypes = {
+  show: PropTypes.bool,
+  children: PropTypes.element,
+  onBlur: PropTypes.func,
+};
+
+Modal.defaultProps = {
+  show: false,
+  children: null,
+  onBlur: () => {},
+};
+
 export { Modal };
 
-export default Modal;
+export default window(Modal);

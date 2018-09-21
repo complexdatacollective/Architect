@@ -1,0 +1,14 @@
+.dialog {
+  background: white;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    background: grey;
+    padding: 20px;
+  }
+
+  &__content {
+    padding: 50px;
+  }
+}
