@@ -72,16 +72,15 @@ class VariableRegistry extends Component {
       '',
     );
 
-    if (usage.length > 0) {
-      // eslint-disable-next-line no-alert
-      if (!confirm(`
-Because a number of other objects depend on this type, they will also be removed:
-${deletedObjects}
-      `)) { return; }
-    }
+    const confirmMessage = `Are you sure you want to delete "${type} ${entity}" ${
+      usage.length > 0 ?
+        `\n\nBecause a number of other objects depend on this type, they will also be removed: \n${deletedObjects}` :
+        ''
+    }`;
 
     // eslint-disable-next-line no-alert
-    if (!confirm(`Are you sure you want to delete "${type} ${entity}"?`)) { return; }
+    if (!confirm(confirmMessage)) { return; }
+
     this.props.deleteType(entity, type, true);
   };
 
