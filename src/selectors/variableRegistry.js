@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get, map, compact, flatMap, memoize } from 'lodash';
+import { get, map, compact, flatMap, uniqBy, memoize } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 
@@ -135,6 +135,71 @@ const makeGetUsageForType = createSelector(
     ),
 );
 
+/**
+ * Counts each unique promptId stageId pair, grouped by stageId
+ * @returns {object} { [stageId]: count, ... }
+ */
+const perStagePromptCountFromUsage = (usage) => {
+  const prompts = [];
+
+  return usage.reduce(
+    (memo, { owner }) => {
+      if (owner.type !== 'prompt' || prompts.includes(owner.promptId)) { return memo; }
+
+      return { ...memo, [owner.stageId]: (memo[owner.stageId] ? memo[owner.stageId] + 1 : 1) };
+    },
+    {},
+  );
+};
+
+/**
+ * Calcuates delete impact of removing type, including removing stages when prompts are emptied
+ * @returns {array} in format: [{ type, (id | stageId, promptId )}]
+ */
+const makeGetDeleteImpact = createSelector(
+  getProtocol,
+  makeGetUsageForType,
+  (protocol, getUsageForType) =>
+    memoize(
+      (searchEntity, searchType) => {
+        const usage = getUsageForType(searchEntity, searchType);
+
+        const perStagePromptCount = perStagePromptCountFromUsage(usage);
+
+        const additionallyDeletedStageIds = protocol.stages
+          .reduce((memo, { id, prompts }) => {
+            if (!prompts || prompts.length !== perStagePromptCount[id]) { return memo; }
+            return [
+              ...memo,
+              id,
+            ];
+          }, []);
+
+        const deletedObjects = uniqBy(
+          usage
+            .map(({ owner }) => {
+              if (
+                owner.type === 'prompt' &&
+                additionallyDeletedStageIds.includes(owner.stageId)
+              ) {
+                return { id: owner.stageId, type: 'stage' };
+              }
+
+              return owner;
+            }),
+          ({ id, type }) => `${id}:${type}`,
+        );
+
+        return deletedObjects;
+      },
+      (searchEntity, searchType) => `${searchEntity}:${searchType}`,
+    ),
+);
+
+/**
+ * Returns a flat list of all nodes and edges in protocol
+ * @returns {array} in format: [{ entity, type }, ...]
+ */
 const getTypes = createSelector(
   getProtocol,
   protocol =>
@@ -145,11 +210,39 @@ const getTypes = createSelector(
     ),
 );
 
+const makeGetObjectLabel = createSelector(
+  getProtocol,
+  protocol =>
+    memoize(
+      (protocolObject) => {
+        switch (protocolObject.type) {
+          case 'form':
+            return protocol.forms[protocolObject.id].title;
+          case 'stage':
+            return protocol.stages.find(({ id }) => id === protocolObject.id).label;
+          case 'prompt':
+            return protocol.stages
+              .find(({ id }) => id === protocolObject.stageId).prompts
+              .find(({ id }) => id === protocolObject.promptId).text;
+          default:
+            return '';
+        }
+      },
+      protocolObject => `${protocolObject.type}: ${
+        protocolObject.type === 'prompt' ?
+          `${protocolObject.stageId}:${protocolObject.promptId}` :
+          protocolObject.id
+      }`,
+    ),
+);
+
 export {
   getNodeTypes,
   getVariablesForNodeType,
   getTypeUsageIndex,
   getSociogramTypeUsageIndex,
   makeGetUsageForType,
+  makeGetDeleteImpact,
+  makeGetObjectLabel,
   getTypes,
 };

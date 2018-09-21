@@ -3,6 +3,7 @@
 import {
   getTypeUsageIndex,
   makeGetUsageForType,
+  makeGetDeleteImpact,
   getSociogramTypeUsageIndex,
 } from '../variableRegistry';
 
@@ -24,6 +25,19 @@ const mockStateWithProtocol = {
             {
               id: 'fizz',
               subject: { entity: 'node', type: 'foo' },
+            },
+          ],
+        },
+        {
+          id: 'foxtrot',
+          prompts: [
+            {
+              id: 'golf',
+              subject: { entity: 'node', type: 'foo' },
+            },
+            {
+              id: 'hotel',
+              subject: { entity: 'node', type: 'pop' },
             },
           ],
         },
@@ -95,6 +109,14 @@ describe('variableRegistry selectors', () => {
             subject: { entity: 'node', type: 'foo' },
           },
           {
+            owner: { promptId: 'golf', stageId: 'foxtrot', type: 'prompt' },
+            subject: { entity: 'node', type: 'foo' },
+          },
+          {
+            owner: { promptId: 'hotel', stageId: 'foxtrot', type: 'prompt' },
+            subject: { entity: 'node', type: 'pop' },
+          },
+          {
             owner: { promptId: 'bravo', stageId: 'alpha', type: 'prompt' },
             subject: { entity: 'edge', type: 'charlie' },
           }, {
@@ -108,36 +130,61 @@ describe('variableRegistry selectors', () => {
       );
   });
 
-  it('makeGetUsageForType()', () => {
-    let result;
+  describe('makeGetUsageForType()', () => {
     const getUsageForType = makeGetUsageForType(mockStateWithProtocol);
 
-    result = getUsageForType('node', 'pop');
+    it('returns correct results for ["node", "pop"]', () => {
+      const result = getUsageForType('node', 'pop');
+
+      expect(result)
+        .toEqual([
+          {
+            owner: { id: 'pip', type: 'stage' },
+            subject: { entity: 'node', type: 'pop' },
+          },
+          {
+            owner: { promptId: 'hotel', stageId: 'foxtrot', type: 'prompt' },
+            subject: { entity: 'node', type: 'pop' },
+          },
+        ]);
+    });
+
+    it('returns correct results for ["node", "foo"]', () => {
+      const result = getUsageForType('node', 'foo');
+
+      expect(result)
+        .toEqual([
+          {
+            owner: { id: 'bar', type: 'form' },
+            subject: { entity: 'node', type: 'foo' },
+          },
+          {
+            owner: { id: 'bazz', type: 'stage' },
+            subject: { entity: 'node', type: 'foo' },
+          },
+          {
+            owner: { promptId: 'fizz', stageId: 'buzz', type: 'prompt' },
+            subject: { entity: 'node', type: 'foo' },
+          },
+          {
+            owner: { promptId: 'golf', stageId: 'foxtrot', type: 'prompt' },
+            subject: { entity: 'node', type: 'foo' },
+          },
+        ]);
+    });
+  });
+
+  it('makeGetDeleteImpact("node", "foo")', () => {
+    const getDeleteImpact = makeGetDeleteImpact(mockStateWithProtocol);
+
+    const result = getDeleteImpact('node', 'foo');
 
     expect(result)
       .toEqual([
-        {
-          owner: { id: 'pip', type: 'stage' },
-          subject: { entity: 'node', type: 'pop' },
-        },
-      ]);
-
-    result = getUsageForType('node', 'foo');
-
-    expect(result)
-      .toEqual([
-        {
-          owner: { id: 'bar', type: 'form' },
-          subject: { entity: 'node', type: 'foo' },
-        },
-        {
-          owner: { id: 'bazz', type: 'stage' },
-          subject: { entity: 'node', type: 'foo' },
-        },
-        {
-          owner: { promptId: 'fizz', stageId: 'buzz', type: 'prompt' },
-          subject: { entity: 'node', type: 'foo' },
-        },
+        { id: 'bar', type: 'form' },
+        { id: 'bazz', type: 'stage' },
+        { id: 'buzz', type: 'stage' },
+        { promptId: 'golf', stageId: 'foxtrot', type: 'prompt' },
       ]);
   });
 });

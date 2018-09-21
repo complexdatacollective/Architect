@@ -12,7 +12,7 @@ import Guidance from '../Guidance';
 import Card from '../Card';
 import EdgeIcon from '../EdgeIcon';
 import { getProtocol } from '../../selectors/protocol';
-import { makeGetUsageForType } from '../../selectors/variableRegistry';
+import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 
 const Type = ({ label, link, children, usage, handleDelete }) => (
@@ -62,19 +62,15 @@ class VariableRegistry extends Component {
   }
 
   handleDelete = (entity, type) => {
-    const usage = this.props.getUsageForType(entity, type);
-    const deletedObjects = usage.reduce(
-      (memo, { owner }) => (
-        owner.type === 'prompt' ?
-          `${memo}\n    stage prompt: ${owner.stageId}: ${owner.promptId}` :
-          `${memo}\n    ${owner.type}: ${owner.id}`
-      ),
-      '',
-    );
+    const deletedObjects = this.props.getDeleteImpact(entity, type);
+
+    const deletedObjectsMessage = deletedObjects
+      .map(item => `${item.type.toUpperCase()}: ${this.props.getObjectLabel(item)}`)
+      .join('\n');
 
     const confirmMessage = `Are you sure you want to delete "${type} ${entity}" ${
-      usage.length > 0 ?
-        `\n\nBecause a number of other objects depend on this type, they will also be removed: \n${deletedObjects}` :
+      deletedObjects.length > 0 ?
+        `\n\nBecause a number of other objects depend on this type, they will also be removed: \n${deletedObjectsMessage}` :
         ''
     }`;
 
@@ -240,10 +236,14 @@ const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
   const variableRegistry = protocol.variableRegistry;
   const getUsageForType = makeGetUsageForType(state);
+  const getDeleteImpact = makeGetDeleteImpact(state);
+  const getObjectLabel = makeGetObjectLabel(state);
 
   return {
     variableRegistry,
     getUsageForType,
+    getDeleteImpact,
+    getObjectLabel,
     protocolPath: has(props, 'match.params.protocol') ?
       `/edit/${get(props, 'match.params.protocol')}` : null,
   };
