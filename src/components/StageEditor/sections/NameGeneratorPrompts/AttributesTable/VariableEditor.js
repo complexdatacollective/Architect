@@ -14,7 +14,7 @@ const VARIABLE_INPUT_TYPES = {
 };
 
 const getInput = (name, variableMeta) => {
-  if (!name) { return null; }
+  if (!name || !variableMeta) { return null; }
 
   const inputType = VARIABLE_INPUT_TYPES[variableMeta.type] || VARIABLE_INPUT_TYPES.text;
   const inputComponent = fields[inputType];
@@ -37,13 +37,15 @@ const VariableEditor = ({ name, variableMeta, show }) => (
 );
 
 VariableEditor.propTypes = {
-  variableMeta: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
+  variableMeta: PropTypes.object,
+  name: PropTypes.string,
   show: PropTypes.bool,
 };
 
 VariableEditor.defaultProps = {
   show: false,
+  name: null,
+  variableMeta: {},
 };
 
 export default VariableEditor;

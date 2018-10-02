@@ -9,6 +9,7 @@ const VariableChooser = ({ unusedVariables, onChooseVariable, show }) => (
       <div
         className="attributes-table-chooser-variable"
         onClick={(e) => { e.stopPropagation(); onChooseVariable(variableId); }}
+        key={variableId}
       >
         {variable.label}
       </div>
