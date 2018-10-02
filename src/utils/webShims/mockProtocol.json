@@ -773,7 +773,7 @@
     {
       "id": "namegenroster2",
       "type": "NameGeneratorList",
-      "label": "NG Classmates",
+      "label": "NG Classmates 2",
       "showExistingNodes": false,
       "prompts": [
         {
@@ -877,8 +877,8 @@
             "allowPositioning": true
           },
           "edges": {
-            "display": ["friends", "professional"],
-            "create": "friends"
+            "display": ["friend", "professional"],
+            "create": "friend"
           },
           "highlight": {
             "variable": "has_given_advice",

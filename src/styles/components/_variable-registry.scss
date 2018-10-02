@@ -13,5 +13,15 @@
         flex-grow: 0;
       }
     }
+
+    &__tag {
+      @include typography('copy-small');
+      display: inline-block;
+      border-radius: unit(.5);
+      padding: unit(.3) unit(.5);
+      margin-left: unit(1);
+      color: var(--text-light);
+      background-color: var(--architect-warning);
+    }
   }
 }

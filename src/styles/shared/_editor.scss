@@ -42,35 +42,4 @@
       padding-top: calc(30vh);
     }
   }
-
-  .list {
-    &:first-child {
-      border-top: unit(.25) solid var(--architect-divider);
-    }
-
-    &__item {
-      display: flex;
-      width: 100%;
-      border-bottom: unit(.25) solid var(--architect-divider);
-    }
-
-    &__attribute {
-      display: flex;
-      flex-grow: 1;
-      flex-basis: auto;
-      justify-content: flex-start;
-      align-items: center;
-      padding: unit(2) unit(1);
-
-      a {
-        text-decoration: none;
-        color: var(--text);
-        cursor: pointer;
-      }
-
-      h3 {
-        margin: 0;
-      }
-    }
-  }
 }

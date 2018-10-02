@@ -4,7 +4,16 @@ import reducer, { actionCreators } from '../stages';
 
 const mockStages = [
   { id: 3, type: 'Information', label: 'Foo' },
-  { id: 9, type: 'NameGenerator', label: 'Bar' },
+  {
+    id: 9,
+    type: 'NameGenerator',
+    label: 'Bar',
+    prompts: [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ],
+  },
   { id: 5, type: 'OrdinalBin', label: 'Baz' },
 ];
 
@@ -66,6 +75,31 @@ describe('protocol.stages', () => {
         updatedStages,
       ).toEqual([
         { id: 3, type: 'Information', label: 'Foo' },
+        { id: 5, type: 'OrdinalBin', label: 'Baz' },
+      ]);
+    });
+  });
+
+  describe('DELETE_PROMPT', () => {
+    it('Deletes the stage with stageId', () => {
+      const updatedStages = reducer(
+        mockStages,
+        actionCreators.deletePrompt(9, 2),
+      );
+
+      expect(
+        updatedStages,
+      ).toEqual([
+        { id: 3, type: 'Information', label: 'Foo' },
+        {
+          id: 9,
+          type: 'NameGenerator',
+          label: 'Bar',
+          prompts: [
+            { id: 1 },
+            { id: 3 },
+          ],
+        },
         { id: 5, type: 'OrdinalBin', label: 'Baz' },
       ]);
     });

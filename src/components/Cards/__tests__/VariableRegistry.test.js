@@ -9,8 +9,11 @@ const mockProps = {
     node: {},
     edge: {},
   },
+  getUsageForType: () => {},
   deleteType: () => {},
   protocolPath: '',
+  getDeleteImpact: () => {},
+  getObjectLabel: () => {},
 };
 
 describe('<VariableRegistry />', () => {
