@@ -7,7 +7,7 @@ import VariableEditor from './VariableEditor';
 
 class Variable extends Component {
   static propTypes = {
-    unusedVariables: PropTypes.array,
+    unusedVariables: PropTypes.object,
     variableRegistry: PropTypes.object.isRequired,
     variable: PropTypes.string,
     value: PropTypes.any,
@@ -18,14 +18,14 @@ class Variable extends Component {
   };
 
   static defaultProps = {
-    unusedVariables: [],
+    unusedVariables: {},
     isEditing: false,
     value: null,
     variable: null,
   };
 
   get variableMeta() {
-    return this.props.variableRegistry[this.props.variable];
+    return this.props.variable && this.props.variableRegistry[this.props.variable];
   }
 
   get isNew() {
