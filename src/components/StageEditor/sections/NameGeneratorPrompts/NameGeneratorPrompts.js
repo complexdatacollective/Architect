@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { arrayPush } from 'redux-form';
-import { get, isEqual } from 'lodash';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import cx from 'classnames';
@@ -20,10 +20,6 @@ const notEmpty = value => (
 );
 
 class NameGeneratorPromptsSection extends PureComponent {
-  // componentShouldUpdate(nextProps) {
-  //   return !isEqual(nextProps, this.props);
-  // }
-
   render() {
     const {
       nodeType,
@@ -58,32 +54,25 @@ class NameGeneratorPromptsSection extends PureComponent {
 }
 
 NameGeneratorPromptsSection.propTypes = {
-  // variableRegistry: PropTypes.object,
   form: PropTypes.shape({
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
   disabled: PropTypes.bool,
   addNewPrompt: PropTypes.func.isRequired,
+  nodeType: PropTypes.string.isRequired,
 };
 
 NameGeneratorPromptsSection.defaultProps = {
-  // variableRegistry: {},
   disabled: false,
+  nodeType: null,
 };
-
-// const getVariablesForNodeType = (state, nodeType) => {
-//   const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-//   return get(variableRegistry, ['node', nodeType, 'variables'], {});
-// };
 
 const mapStateToProps = (state, props) => {
   const nodeType = get(props.form.getValues(state, 'subject'), 'type');
   return {
     disabled: !nodeType,
     nodeType,
-    // variableRegistry: getVariablesForNodeType(state, nodeType),
-    // prompts: props.form.getValues(state, fieldName),
   };
 };
 
