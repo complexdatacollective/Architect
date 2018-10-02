@@ -13,31 +13,29 @@ const VARIABLE_INPUT_TYPES = {
   categorical: 'CheckboxGroup',
 };
 
-const getInput = (name, variableMeta) => {
-  if (!name || !variableMeta) { return null; }
+const getInput = (name, label, type, options) => {
+  if (!name || !type) { return null; }
 
-  const inputType = VARIABLE_INPUT_TYPES[variableMeta.type] || VARIABLE_INPUT_TYPES.text;
+  const inputType = VARIABLE_INPUT_TYPES[type] || VARIABLE_INPUT_TYPES.text;
   const inputComponent = fields[inputType];
-  const options = variableMeta.options || null;
 
   return (
     <Field
       name={name}
-      label={variableMeta.label}
+      label={label}
       component={inputComponent}
       options={options}
     />
   );
 };
 
-const VariableEditor = ({ name, variableMeta, show }) => (
+const VariableEditor = ({ name, type, label, options, show }) => (
   <div className={cx('attributes-table-editor', { 'attributes-table-editor--show': show })}>
-    {getInput(name, variableMeta)}
+    {getInput(name, label, type, options)}
   </div>
 );
 
 VariableEditor.propTypes = {
-  variableMeta: PropTypes.object,
   name: PropTypes.string,
   show: PropTypes.bool,
 };
@@ -45,7 +43,6 @@ VariableEditor.propTypes = {
 VariableEditor.defaultProps = {
   show: false,
   name: null,
-  variableMeta: {},
 };
 
 export default VariableEditor;

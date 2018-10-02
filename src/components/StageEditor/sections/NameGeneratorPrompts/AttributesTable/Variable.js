@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
 import cx from 'classnames';
 import VariablePreview from './VariablePreview';
 import VariableChooser from './VariableChooser';
 import VariableEditor from './VariableEditor';
+import { getVariablesForNodeType } from '../../../../../selectors/variableRegistry';
 
 class Variable extends Component {
   static propTypes = {
-    unusedVariables: PropTypes.object,
-    variableRegistry: PropTypes.object.isRequired,
+    unusedVariables: PropTypes.array,
+    label: PropTypes.string,
+    nodeType: PropTypes.string,
+    type: PropTypes.string,
+    options: PropTypes.array,
     variable: PropTypes.string,
-    value: PropTypes.any,
     isEditing: PropTypes.bool,
     onToggleEdit: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
@@ -18,15 +23,15 @@ class Variable extends Component {
   };
 
   static defaultProps = {
-    unusedVariables: {},
+    label: '',
+    type: null,
+    nodeType: null,
+    options: null,
+    unusedVariables: [],
     isEditing: false,
     value: null,
     variable: null,
   };
-
-  get variableMeta() {
-    return this.props.variable && this.props.variableRegistry[this.props.variable];
-  }
 
   get isNew() {
     return !this.props.variable;
@@ -36,7 +41,10 @@ class Variable extends Component {
     const {
       unusedVariables,
       variable,
-      value,
+      label,
+      type,
+      options,
+      nodeType,
       isEditing,
       onToggleEdit,
       onDelete,
@@ -56,20 +64,29 @@ class Variable extends Component {
       >
         { !this.isNew &&
           <div className="attributes-table-variable__preview">
-            <VariablePreview variable={variable} value={value} onDelete={onDelete} />
+            <Field
+              name={variable}
+              variable={variable}
+              label={label}
+              component={VariablePreview}
+              onDelete={onDelete}
+            />
           </div>
         }
 
         <div className="attributes-table-variable__edit">
           <VariableChooser
             show={this.isNew}
+            nodeType={nodeType}
             onChooseVariable={onChooseVariable}
             unusedVariables={unusedVariables}
           />
           <VariableEditor
             show={!this.isNew}
             name={variable}
-            variableMeta={this.variableMeta}
+            type={type}
+            label={label}
+            options={options}
           />
         </div>
       </div>
@@ -77,6 +94,19 @@ class Variable extends Component {
   }
 }
 
+const mapStateToProps = (state, props) => {
+  if (!props.variable) { return {}; }
+
+  const variablesForNodeType = getVariablesForNodeType(state, props.nodeType);
+  const variableMeta = variablesForNodeType[props.variable];
+
+  return {
+    label: variableMeta.name,
+    type: variableMeta.type,
+    options: variableMeta.options || null,
+  };
+};
+
 export { Variable };
 
-export default Variable;
+export default connect(mapStateToProps)(Variable);

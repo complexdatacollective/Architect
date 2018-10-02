@@ -1,31 +1,44 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { map } from 'lodash';
 import cx from 'classnames';
+import { getVariablesForNodeType } from '../../../../../selectors/variableRegistry';
 
-const VariableChooser = ({ unusedVariables, onChooseVariable, show }) => (
+const VariableChooser = ({ unusedVariables, labels, onChooseVariable, show }) => (
   <div className={cx('attributes-table-chooser', { 'attributes-table-chooser--show': show })}>
-    { map(unusedVariables, (variable, variableId) => (
+    { unusedVariables.map((variable, index) => (
       <div
         className="attributes-table-chooser-variable"
-        onClick={(e) => { e.stopPropagation(); onChooseVariable(variableId); }}
-        key={variableId}
+        onClick={(e) => { e.stopPropagation(); onChooseVariable(variable); }}
+        key={variable}
       >
-        {variable.label}
+        {labels[index]}
       </div>
     )) }
   </div>
 );
 
 VariableChooser.propTypes = {
-  unusedVariables: PropTypes.object,
   onChooseVariable: PropTypes.func.isRequired,
+  unusedVariables: PropTypes.array.isRequired,
+  labels: PropTypes.array.isRequired,
   show: PropTypes.bool,
 };
 
 VariableChooser.defaultProps = {
-  unusedVariables: {},
   show: false,
 };
 
-export default VariableChooser;
+const mapStateToProps = (state, { nodeType, unusedVariables }) => {
+  const variablesForNodeType = getVariablesForNodeType(state, nodeType);
+
+  const labels = unusedVariables.map(variable => variablesForNodeType[variable].label);
+
+  return {
+    labels,
+  };
+};
+
+export { VariableChooser };
+
+export default connect(mapStateToProps)(VariableChooser);
