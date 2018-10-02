@@ -38,11 +38,17 @@ const VariableEditor = ({ name, type, label, options, show }) => (
 VariableEditor.propTypes = {
   name: PropTypes.string,
   show: PropTypes.bool,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  options: PropTypes.array,
 };
 
 VariableEditor.defaultProps = {
   show: false,
   name: null,
+  type: null,
+  label: '',
+  options: [],
 };
 
 export default VariableEditor;
