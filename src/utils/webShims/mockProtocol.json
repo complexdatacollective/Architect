@@ -773,7 +773,7 @@
     {
       "id": "namegenroster2",
       "type": "NameGeneratorList",
-      "label": "NG Classmates",
+      "label": "NG Classmates 2",
       "showExistingNodes": false,
       "prompts": [
         {

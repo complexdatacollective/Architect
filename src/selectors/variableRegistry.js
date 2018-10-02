@@ -187,7 +187,7 @@ const makeGetDeleteImpact = createSelector(
 
               return owner;
             }),
-          ({ id, type }) => `${id}:${type}`,
+          ({ type, ...owner }) => (owner.id ? `${owner.id}:${type}` : `${owner.stageId}:${owner.promptId}:${type}`),
         );
 
         return deletedObjects;
@@ -220,10 +220,14 @@ const makeGetObjectLabel = createSelector(
             return protocol.forms[protocolObject.id].title;
           case 'stage':
             return protocol.stages.find(({ id }) => id === protocolObject.id).label;
-          case 'prompt':
-            return protocol.stages
+          case 'prompt': {
+            const stageLabel = protocol.stages.find(({ id }) =>
+              id === protocolObject.stageId).label;
+            const promptLabel = protocol.stages
               .find(({ id }) => id === protocolObject.stageId).prompts
               .find(({ id }) => id === protocolObject.promptId).text;
+            return `${stageLabel} -> ${promptLabel}`;
+          }
           default:
             return '';
         }

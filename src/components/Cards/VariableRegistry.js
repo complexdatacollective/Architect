@@ -220,6 +220,8 @@ VariableRegistry.propTypes = {
   protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteType: PropTypes.func.isRequired,
+  getDeleteImpact: PropTypes.func.isRequired,
+  getObjectLabel: PropTypes.func.isRequired,
 };
 
 VariableRegistry.defaultProps = {
