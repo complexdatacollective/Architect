@@ -101,7 +101,7 @@ const mapStateToProps = (state, props) => {
   const variableMeta = variablesForNodeType[props.variable];
 
   return {
-    label: variableMeta.name,
+    label: variableMeta.label,
     type: variableMeta.type,
     options: variableMeta.options || null,
   };
