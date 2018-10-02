@@ -29,7 +29,7 @@
         "dist:win": "npm run build && electron-builder -w --publish=always",
         "dist:all": "npm run build && electron-builder -mlw --publish=always",
         "bump": "sh scripts/bump",
-        "preflight": "[[ -z $(git status --porcelain) ]] && npm run lint && npm run lint:sass -- --max-warnings 0 && npm test -- --coverage"
+        "preflight": "npm run lint && npm run lint:sass -- --max-warnings 0 && npm test -- --coverage"
     },
     "repository": {
         "type": "git"

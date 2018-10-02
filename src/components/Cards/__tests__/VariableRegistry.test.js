@@ -12,6 +12,8 @@ const mockProps = {
   getUsageForType: () => {},
   deleteType: () => {},
   protocolPath: '',
+  getDeleteImpact: () => {},
+  getObjectLabel: () => {},
 };
 
 describe('<VariableRegistry />', () => {
