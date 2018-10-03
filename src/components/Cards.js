@@ -23,7 +23,9 @@ class Cards extends Component {
   }
 
   handleDeepComplete = () => {
-    this.props.goBack();
+    this.props.goTo();
+    // if (!window.history) { this.props.goTo(); return; }
+    // this.props.goBack();
   }
 
   render() {

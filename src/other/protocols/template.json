@@ -9,17 +9,20 @@
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
         "variables": {
-          "closenessLayout": {
+          "1d84d7782a65d41d727f7c71fcb38b6aea633a80": {
+            "name": "notcloselayout",
             "label": "Closeness layout",
             "description": "Earthling readable description",
             "type": "layout"
           },
-          "geographicalLayout": {
+          "dea16657f68e9caa74a1e785bc8e0ed11382332b": {
+            "name": "notgeolayout",
             "label": "Geographical closeness layout",
             "description": "Earthling readable description",
             "type": "layout"
           },
-          "name": {
+          "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
+            "name": "notname",
             "label": "Name",
             "description": "Human readable description",
             "type": "text",
@@ -29,7 +32,8 @@
               "maxLength": 24
             }
           },
-          "age": {
+          "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": {
+            "name": "notage",
             "label": "Age",
             "description": "Human readable description",
             "type": "number",
@@ -39,7 +43,8 @@
               "maxValue": 100
             }
           },
-          "nickname": {
+          "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
+            "name": "notnickname",
             "label": "Nickname",
             "description": "Human readable description",
             "type": "text",
@@ -49,7 +54,8 @@
               "maxLength": 8
             }
           },
-          "close_friend": {
+          "5d69e2e1f8a9ea63d425602943831500c3d5c01d": {
+            "name": "notclosefriend",
             "label": "Close Friend",
             "description": "Human readable description",
             "type": "boolean"
@@ -58,17 +64,20 @@
       }
     },
     "edge": {
-      "knows": {
+      "b03a9feef3ef45901e37ec704a455ea952e1768b": {
         "color": "edge-color-seq-1",
-        "label": "Knows"
+        "label": "Knows",
+        "name": "knows"
       },
-      "likes": {
+      "aecba335e84ca9e3a2b7990230dcf248e6826e42": {
         "color": "edge-color-seq-2",
-        "label": "Likes"
+        "label": "Likes",
+        "name": "likes"
       },
-      "dislikes": {
+      "ce067d6be617487a5f5120834a05dbac9564fc5f": {
         "color": "edge-color-seq-3",
-        "label": "Dislikes"
+        "label": "Dislikes",
+        "name": "dislikes"
       }
     }
   },
@@ -80,15 +89,15 @@
       "optionToAddAnother": true,
       "fields": [
         {
-          "variable": "name",
+          "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
           "component": "TextInput"
         },
         {
-          "variable": "nickname",
+          "variable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
           "component": "TextInput"
         },
         {
-          "variable": "age",
+          "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2",
           "component": "TextInput"
         }
       ]

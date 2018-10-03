@@ -114,7 +114,7 @@ const getVariablesForNodeType = (state, nodeType) => {
 };
 
 const mapStateToProps = (state, { name, form, nodeType }) => {
-  const value = form.getValues(state, name);
+  const value = form.getValues(state, name) || {};
   const variables = keys(value);
   const variablesRegistryForNodeType = keys(getVariablesForNodeType(state, nodeType));
   const unusedVariables = difference(variablesRegistryForNodeType, variables);
