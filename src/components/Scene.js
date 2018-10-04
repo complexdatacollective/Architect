@@ -11,7 +11,7 @@ import Overview from './Overview';
 import Timeline from './Timeline';
 import ProtocolControlBar from './ProtocolControlBar';
 import Cards from './Cards';
-import Dialog from './Dialog';
+import DialogManager from './DialogManager';
 import architectLogoIcon from '../images/architect-logo-icon.svg';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
 
@@ -35,13 +35,7 @@ const Scene = ({
       <div className="scene__background scene__background--bottom" />
       <img className="scene__brand" src={networkCanvasBrand} alt="" />
 
-      <Dialog
-        title="foo"
-        options={[<button onClick={() => alert('hi world2')}>OK</button>]}
-        onBlur={() => alert('hi world')}
-      >
-        My example dialog
-      </Dialog>
+      <DialogManager />
 
       <NavLink className="scene__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />

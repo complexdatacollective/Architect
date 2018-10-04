@@ -10,8 +10,14 @@ const window = WrappedComponent =>
       super(props);
 
       this.portal = document.createElement('div');
-      const body = document.getElementsByTagName('body')[0];
-      body.appendChild(this.portal);
+    }
+
+    componentDidMount() {
+      document.body.appendChild(this.portal);
+    }
+
+    componentWillUnmount() {
+      document.body.removeChild(this.portal);
     }
 
     static get displayName() {
