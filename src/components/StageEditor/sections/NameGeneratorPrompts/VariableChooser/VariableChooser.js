@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
 import { Button } from '../../../../../ui/components';
-import Dialog from '../../../../Dialog';
+import Modal from '../../../../Modal';
 import ValidatedField from '../../../../Form/ValidatedField';
 import RoundButton from '../../../../Form/RoundButton';
 import Select from '../../../../Form/Fields/Select';
@@ -87,7 +87,7 @@ class VariableChooser extends Component {
               onClick={this.openEditVariable}
             />
           </div>
-          <Dialog show={!!this.state.isEditing}>
+          <Modal show={!!this.state.isEditing}>
             <div className="form-fields-variable-chooser__modal">
               <h2 className="form-fields-variable-chooser__modal-title">
                 Edit variable
@@ -134,7 +134,7 @@ class VariableChooser extends Component {
                 </Button>
               </div>
             </div>
-          </Dialog>
+          </Modal>
         </FormSection>
       </div>
     );
