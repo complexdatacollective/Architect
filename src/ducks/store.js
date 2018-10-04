@@ -9,7 +9,7 @@ import { rootReducer, rootEpic } from './modules/root';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['form', 'protocol', 'session', 'guidance'],
+  whitelist: ['recentProtocols', 'protocols'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
