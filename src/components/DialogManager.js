@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose, bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { omit } from 'lodash';
 import * as Dialogs from './Dialog';
 import { actionCreators as dialogsActions } from '../ducks/modules/dialogs';
 
 class DialogManager extends Component {
+  static propTypes = {
+    dialogs: PropTypes.array,
+  }
+
+  static defaultProps = {
+    dialogs: [],
+  };
+
   get dialogs() {
     return this.props.dialogs;
   }
@@ -44,7 +53,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
   closeDialog: bindActionCreators(dialogsActions.closeDialog, dispatch),
 });
 

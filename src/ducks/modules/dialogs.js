@@ -4,30 +4,7 @@ const OPEN_DIALOG = Symbol('PROTOCOL/OPEN_DIALOG');
 const CLOSE_DIALOG = Symbol('PROTOCOL/CLOSE_DIALOG');
 
 const initialState = {
-  dialogs: [
-    {
-      id: uuid(),
-      type: 'Warning',
-      title: 'Warning!',
-      text: 'Something happened',
-      confirm: () => { console.log('confirm warning'); },
-    },
-    {
-      id: uuid(),
-      type: 'Confirm',
-      title: 'Do you want to confirm the thing?',
-      text: 'We might have more details here',
-      confirm: () => { console.log('confirm confirm'); },
-      cancel: () => { console.log('cancel confirm'); },
-    },
-    {
-      id: uuid(),
-      type: 'Notice',
-      title: 'Hi',
-      text: 'Notice me',
-      confirm: () => { console.log('confirm notice'); },
-    },
-  ],
+  dialogs: [],
 };
 
 const openDialog = dialog =>

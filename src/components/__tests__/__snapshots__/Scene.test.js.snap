@@ -2,7 +2,6 @@
 
 exports[`<Scene /> can render 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Scene
     location={Object {}}
@@ -12,6 +11,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -32,6 +32,7 @@ ShallowWrapper {
           className="scene__brand"
           src="network-canvas-brand.svg"
         />,
+        <Connect(DialogManager) />,
         <NavLink
           activeClassName="active"
           aria-current="page"
@@ -123,6 +124,15 @@ ShallowWrapper {
         "ref": null,
         "rendered": null,
         "type": "img",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -355,6 +365,7 @@ ShallowWrapper {
             className="scene__brand"
             src="network-canvas-brand.svg"
           />,
+          <Connect(DialogManager) />,
           <NavLink
             activeClassName="active"
             aria-current="page"
@@ -446,6 +457,15 @@ ShallowWrapper {
           "ref": null,
           "rendered": null,
           "type": "img",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
         },
         Object {
           "instance": null,
@@ -665,15 +685,26 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
 
 exports[`<Scene /> shows protocol when there is one 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Scene
     location={Object {}}
@@ -687,6 +718,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -707,6 +739,7 @@ ShallowWrapper {
           className="scene__brand"
           src="network-canvas-brand.svg"
         />,
+        <Connect(DialogManager) />,
         <NavLink
           activeClassName="active"
           aria-current="page"
@@ -798,6 +831,15 @@ ShallowWrapper {
         "ref": null,
         "rendered": null,
         "type": "img",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -1030,6 +1072,7 @@ ShallowWrapper {
             className="scene__brand"
             src="network-canvas-brand.svg"
           />,
+          <Connect(DialogManager) />,
           <NavLink
             activeClassName="active"
             aria-current="page"
@@ -1121,6 +1164,15 @@ ShallowWrapper {
           "ref": null,
           "rendered": null,
           "type": "img",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
         },
         Object {
           "instance": null,
@@ -1340,8 +1392,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
