@@ -106,14 +106,8 @@ ShallowWrapper {
           </Connect(Guided)>
         </Connect(Guided)>
       </div>,
-      "enterDelay": 0,
-      "enterDuration": 100,
-      "exitDelay": 0,
-      "exitDuration": 100,
       "onAcknowledgeError": [Function],
       "show": true,
-      "style": "wipe",
-      "type": "default",
     },
     "ref": null,
     "rendered": Object {
@@ -601,14 +595,8 @@ ShallowWrapper {
             </Connect(Guided)>
           </Connect(Guided)>
         </div>,
-        "enterDelay": 0,
-        "enterDuration": 100,
-        "exitDelay": 0,
-        "exitDuration": 100,
         "onAcknowledgeError": [Function],
         "show": true,
-        "style": "wipe",
-        "type": "default",
       },
       "ref": null,
       "rendered": Object {
