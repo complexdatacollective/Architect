@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ValidatedField } from '../../../Form';
 import Markdown from '../../../Form/Fields/Markdown';
-import VariableChooser from '../../../Form/Fields/VariableChooser';
+import AttributesTable from './AttributesTable';
 import { Item } from '../../../Items';
 import { getFieldId } from '../../../../utils/issues';
 
-const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
+const NameGeneratorPrompt = ({ fieldId, form, nodeType, ...rest }) => (
   <Item {...rest}>
     <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
     <ValidatedField
@@ -19,12 +19,11 @@ const NameGeneratorPrompt = ({ fieldId, form, variableRegistry, ...rest }) => (
       validation={{ required: true }}
     />
     <div id={getFieldId(`${fieldId}.additionalAttributes`)} data-name="Prompt additional attributes" />
-    <VariableChooser
-      className="stage-editor-section-prompt__setting-value"
+    <h3>Additional attributes</h3>
+    <AttributesTable
       name={`${fieldId}.additionalAttributes`}
       id="additionalAttributes"
-      variableRegistry={variableRegistry}
-      label="Additional attributes"
+      nodeType={nodeType}
       form={form}
     />
   </Item>
@@ -36,11 +35,11 @@ NameGeneratorPrompt.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
-  variableRegistry: PropTypes.object,
+  nodeType: PropTypes.string,
 };
 
 NameGeneratorPrompt.defaultProps = {
-  variableRegistry: {},
+  nodeType: null,
 };
 
 export { NameGeneratorPrompt };

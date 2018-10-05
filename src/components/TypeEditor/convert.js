@@ -17,7 +17,6 @@ const format = configuration => ({
         ...memo,
         {
           ...variable,
-          name: key,
           id: key,
           validation: formatValidations(get(variable, 'validation', {})),
         },
@@ -39,9 +38,9 @@ const parse = configuration => ({
   ...configuration,
   variables: reduce(
     configuration.variables,
-    (memo, { name, ...variable }) => ({
+    (memo, variable) => ({
       ...memo,
-      [name]: {
+      [variable.id]: {
         ...omit(variable, ['id', 'options']),
         // Ideally we'd remove this at source, but reduxForm doesn't seem to let us?
         ...(get(variable, 'options') ? { options: get(variable, 'options') } : {}),

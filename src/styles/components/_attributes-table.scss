@@ -1,0 +1,14 @@
+
+// Tables
+:root {
+  --architect-table-background: var(--color-white);
+  --architect-table-background--alt: var(--color-mustard);
+  --architect-table-edit-background: var(--color-cyber-grape);
+  --architect-table-chooser: var(--color-sea-green);
+}
+
+@import './attributes-table/attributes-table';
+@import './attributes-table/chooser';
+@import './attributes-table/editor';
+@import './attributes-table/preview';
+@import './attributes-table/variable';

@@ -6,11 +6,11 @@ import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { FormSection, change } from 'redux-form';
 import cx from 'classnames';
-import { Button } from '../../../../ui/components';
-import Modal from '../../../Modal';
-import ValidatedField from '../../ValidatedField';
-import RoundButton from '../../RoundButton';
-import Select from '../Select';
+import { Button } from '../../../../../ui/components';
+import Modal from '../../../../Modal';
+import ValidatedField from '../../../../Form/ValidatedField';
+import RoundButton from '../../../../Form/RoundButton';
+import Select from '../../../../Form/Fields/Select';
 import Tag from './Tag';
 import VariableField from './VariableField';
 

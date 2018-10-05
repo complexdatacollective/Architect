@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, get, map, has, difference } from 'lodash';
+import { keys, get, map, difference } from 'lodash';
 import cx from 'classnames';
 import Guidance from '../../Guidance';
 import NodeSelect from '../../../components/Form/Fields/NodeSelect';
@@ -68,17 +68,19 @@ class NodeType extends Component {
 
 const mapStateToProps = (state, { form }) => {
   const stage = getFormValues(form.name)(state);
+  const nodeTypes = map(
+    getNodeTypes(state),
+    (nodeOptions, promptNodeType) => ({
+      label: get(nodeOptions, 'label', ''),
+      value: promptNodeType,
+      color: get(nodeOptions, 'color', ''),
+    }),
+  );
+  const disabled = !!get(stage, 'subject.type', false);
 
   return {
-    nodeTypes: map(
-      getNodeTypes(state),
-      (nodeOptions, promptNodeType) => ({
-        label: get(nodeOptions, 'label', ''),
-        value: promptNodeType,
-        color: get(nodeOptions, 'color', ''),
-      }),
-    ),
-    disabled: has(stage, 'subject.type'),
+    nodeTypes,
+    disabled,
     stage,
   };
 };

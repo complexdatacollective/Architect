@@ -181,8 +181,8 @@ class SociogramPrompt extends Component {
                 validation={{ required: true }}
               >
                 <option disabled value="">&mdash; Select a layout variable &mdash;</option>
-                {layoutsForNodeType.map(([variableName, meta]) => (
-                  <option value={variableName} key={variableName}>{meta.label}</option>
+                {layoutsForNodeType.map(([variableId, meta]) => (
+                  <option value={variableId} key={variableId}>{meta.label}</option>
                 ))}
               </ValidatedField>
               <Field

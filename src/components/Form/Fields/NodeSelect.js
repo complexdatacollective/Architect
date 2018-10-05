@@ -5,7 +5,9 @@ import Node from '../../../ui/components/Node';
 import * as Fields from '../../../ui/components/Fields';
 
 const PreviewNode = ({ label, color, input: { value, checked, onChange } }) => (
-  <Node onClick={() => onChange(value)} label={label} selected={checked} color={color} />
+  <div className="preview-node" onClick={() => onChange(value)}>
+    <Node label={label} selected={checked} color={color} />
+  </div>
 );
 
 PreviewNode.propTypes = {

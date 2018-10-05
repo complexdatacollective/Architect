@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { fieldPropTypes } from 'redux-form';
 import { last, toPath } from 'lodash';
 import cx from 'classnames';
-import RoundButton from '../../RoundButton';
+import RoundButton from '../../../../Form/RoundButton';
 
 const Tag = ({
   editVariable,

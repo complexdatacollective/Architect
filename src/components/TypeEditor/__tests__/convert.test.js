@@ -8,13 +8,15 @@ const mockConfiguration = {
   displayVariable: 'nickname',
   iconVariant: 'add-a-person',
   variables: {
-    closenessLayout: {
+    1234: {
+      name: 'closenessLayout',
       label: 'Closeness layout',
       description: 'Earthling readable description',
       type: 'layout',
       validation: {},
     },
-    name: {
+    5678: {
+      name: 'name',
       label: 'Name',
       description: 'Human readable description',
       type: 'text',
@@ -34,6 +36,7 @@ const mockFormConfiguration = {
   iconVariant: 'add-a-person',
   variables: [
     {
+      id: '1234',
       name: 'closenessLayout',
       label: 'Closeness layout',
       description: 'Earthling readable description',
@@ -41,6 +44,7 @@ const mockFormConfiguration = {
       validation: [],
     },
     {
+      id: '5678',
       name: 'name',
       label: 'Name',
       description: 'Human readable description',
