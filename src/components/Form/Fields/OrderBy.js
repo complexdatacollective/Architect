@@ -62,11 +62,12 @@ const Rule = compose(
           >
             <option value="" disabled>&mdash; select property &mdash;</option>
             {
-              variables.map(value => (
+              variables.map(({ label, value }) => (
                 <option
                   key={value}
+                  value={value}
                   disabled={disabledVariables.includes(value)}
-                >{value}</option>
+                >{label}</option>
               ))
             }
           </Select>
@@ -159,12 +160,12 @@ class OrderBy extends Component {
     return toPairs(this.props.variables).filter(
       ([, { type }]) => !NON_SORTABLE_TYPES.includes(type),
     ).map(
-      ([name]) => name,
+      ([id, { name }]) => ({ label: name, value: id }),
     );
   }
 
   get variables() {
-    return ['*', ...this.sortableVariableNames];
+    return [{ label: '*', value: '*' }, ...this.sortableVariableNames];
   }
 
   get areRulesFull() {
