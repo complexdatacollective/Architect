@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from './Modal';
+import Modal from '../ui/components/Modal';
 
 const ExampleForm = ({ show, onComplete, onBlur }) => (
   <Modal show={show} onBlur={onBlur}>
