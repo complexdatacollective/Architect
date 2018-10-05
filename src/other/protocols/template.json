@@ -10,19 +10,19 @@
         "iconVariant": "add-a-person",
         "variables": {
           "1d84d7782a65d41d727f7c71fcb38b6aea633a80": {
-            "name": "notcloselayout",
+            "name": "closenessLayout",
             "label": "Closeness layout",
             "description": "Earthling readable description",
             "type": "layout"
           },
           "dea16657f68e9caa74a1e785bc8e0ed11382332b": {
-            "name": "notgeolayout",
+            "name": "geoLayout",
             "label": "Geographical closeness layout",
             "description": "Earthling readable description",
             "type": "layout"
           },
           "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
-            "name": "notname",
+            "name": "name",
             "label": "Name",
             "description": "Human readable description",
             "type": "text",
@@ -33,7 +33,7 @@
             }
           },
           "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": {
-            "name": "notage",
+            "name": "age",
             "label": "Age",
             "description": "Human readable description",
             "type": "number",
@@ -44,7 +44,7 @@
             }
           },
           "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
-            "name": "notnickname",
+            "name": "nickname",
             "label": "Nickname",
             "description": "Human readable description",
             "type": "text",
@@ -55,7 +55,7 @@
             }
           },
           "5d69e2e1f8a9ea63d425602943831500c3d5c01d": {
-            "name": "notclosefriend",
+            "name": "closefriend",
             "label": "Close Friend",
             "description": "Human readable description",
             "type": "boolean"
