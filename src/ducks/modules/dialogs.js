@@ -6,35 +6,35 @@ const CLOSE_DIALOG = Symbol('PROTOCOL/CLOSE_DIALOG');
 // TODO: remove these examples!
 const initialState = {
   dialogs: [
-    {
-      id: '1234-1234-1',
-      type: 'Confirm',
-      title: 'Something to confirm',
-      message: 'More detail about confirmation',
-      confirm: () => {},
-      cancel: () => {},
-    },
-    {
-      id: '1234-1234-2',
-      type: 'Notice',
-      title: 'Something info for the user',
-      message: 'More detail...',
-      confirm: () => {},
-    },
-    {
-      id: '1234-1234-3',
-      type: 'Warning',
-      title: 'Something to warn the user about, maybe a non-failing error',
-      message: 'More detail...',
-      confirm: () => {},
-    },
-    {
-      id: '1234-1234-4',
-      type: 'Error',
-      error: new Error('message and title are automatic'),
-      confirm: () => {},
-      cancel: () => {},
-    },
+    // {
+    //   id: '1234-1234-1',
+    //   type: 'Confirm',
+    //   title: 'Something to confirm',
+    //   message: 'More detail about confirmation',
+    //   confirm: () => {},
+    //   cancel: () => {},
+    // },
+    // {
+    //   id: '1234-1234-2',
+    //   type: 'Notice',
+    //   title: 'Something info for the user',
+    //   message: 'More detail...',
+    //   confirm: () => {},
+    // },
+    // {
+    //   id: '1234-1234-3',
+    //   type: 'Warning',
+    //   title: 'Something to warn the user about, maybe a non-failing error',
+    //   message: 'More detail...',
+    //   confirm: () => {},
+    // },
+    // {
+    //   id: '1234-1234-4',
+    //   type: 'Error',
+    //   error: new Error('message and title are automatic'),
+    //   confirm: () => {},
+    //   cancel: () => {},
+    // },
   ],
 };
 
