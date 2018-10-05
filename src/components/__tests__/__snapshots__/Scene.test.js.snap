@@ -32,7 +32,6 @@ ShallowWrapper {
           className="scene__brand"
           src="network-canvas-brand.svg"
         />,
-        <Connect(DialogManager) />,
         <NavLink
           activeClassName="active"
           aria-current="page"
@@ -124,15 +123,6 @@ ShallowWrapper {
         "ref": null,
         "rendered": null,
         "type": "img",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {},
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
       },
       Object {
         "instance": null,
@@ -365,7 +355,6 @@ ShallowWrapper {
             className="scene__brand"
             src="network-canvas-brand.svg"
           />,
-          <Connect(DialogManager) />,
           <NavLink
             activeClassName="active"
             aria-current="page"
@@ -457,15 +446,6 @@ ShallowWrapper {
           "ref": null,
           "rendered": null,
           "type": "img",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
         },
         Object {
           "instance": null,
@@ -739,7 +719,6 @@ ShallowWrapper {
           className="scene__brand"
           src="network-canvas-brand.svg"
         />,
-        <Connect(DialogManager) />,
         <NavLink
           activeClassName="active"
           aria-current="page"
@@ -831,15 +810,6 @@ ShallowWrapper {
         "ref": null,
         "rendered": null,
         "type": "img",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {},
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
       },
       Object {
         "instance": null,
@@ -1072,7 +1042,6 @@ ShallowWrapper {
             className="scene__brand"
             src="network-canvas-brand.svg"
           />,
-          <Connect(DialogManager) />,
           <NavLink
             activeClassName="active"
             aria-current="page"
@@ -1164,15 +1133,6 @@ ShallowWrapper {
           "ref": null,
           "rendered": null,
           "type": "img",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {},
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
         },
         Object {
           "instance": null,
