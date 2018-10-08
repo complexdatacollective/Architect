@@ -5,6 +5,7 @@ const codenames = {
   '4.0.0-alpha.2': 'Anning',
   '4.0.0-alpha.3': 'Hercules',
   '4.0.0-alpha.4': 'Gold-Bug',
+  '4.0.0-alpha.8': 'Lochs & Glens',
 };
 
 const appVersion = remote.app.getVersion();
