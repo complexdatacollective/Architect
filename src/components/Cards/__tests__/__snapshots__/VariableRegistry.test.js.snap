@@ -9,6 +9,7 @@ ShallowWrapper {
     getObjectLabel={[Function]}
     getUsageForType={[Function]}
     onComplete={[Function]}
+    openDialog={[Function]}
     protocolPath=""
     show={true}
     variableRegistry={

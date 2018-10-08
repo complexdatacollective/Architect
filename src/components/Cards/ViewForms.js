@@ -12,6 +12,7 @@ import Guidance from '../Guidance';
 import Card from '../Card';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 class ViewForms extends Component {
   get buttons() {
@@ -21,10 +22,12 @@ class ViewForms extends Component {
   }
 
   handleDelete = (form) => {
-    // eslint-disable-next-line no-alert
-    if (confirm(`Are you sure you want to delete "${form}"?`)) {
-      this.props.deleteForm(form);
-    }
+    this.props.openDialog({
+      type: 'Confirm',
+      title: 'Delete form',
+      message: `Are you sure you want to delete "${form}"?`,
+      confirm: () => { this.props.deleteForm(form); },
+    });
   };
 
   handleCancel = this.props.onComplete;
@@ -116,6 +119,7 @@ ViewForms.propTypes = {
   protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteForm: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
 };
 
 ViewForms.defaultProps = {
@@ -137,6 +141,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => ({
   deleteForm: bindActionCreators(formActions.deleteForm, dispatch),
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
 export { ViewForms };

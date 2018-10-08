@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { compose, defaultProps, withProps, withHandlers } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
@@ -7,6 +8,7 @@ import { FieldArray, formValueSelector } from 'redux-form';
 import { Icon } from '../../ui/components';
 import Select from './Fields/Select';
 import ValidatedField from '../Form/ValidatedField';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const ItemHandle = compose(
   SortableHandle,
@@ -30,19 +32,25 @@ const AddItem = props => (
   </div>
 );
 
+const mapStateToItemProps = (state, { field, fields: { name: fieldsName }, meta: { form } }) => ({
+  rowValues: formValueSelector(form)(state, field),
+  allValues: formValueSelector(form)(state, fieldsName),
+});
+
+const mapDispatchToItemProps = dispatch => ({
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
+});
+
 const Item = compose(
-  connect(
-    (state, { field, fields: { name: fieldsName }, meta: { form } }) => ({
-      rowValues: formValueSelector(form)(state, field),
-      allValues: formValueSelector(form)(state, fieldsName),
-    }),
-  ),
-  withHandlers(({ fields, sortIndex: index }) => ({
+  connect(mapStateToItemProps, mapDispatchToItemProps),
+  withHandlers(({ fields, openDialog, index }) => ({
     handleDelete: () => {
-      // eslint-disable-next-line no-alert
-      if (confirm('Are you sure you want to remove this item?')) {
-        fields.remove(index);
-      }
+      openDialog({
+        type: 'Confirm',
+        title: 'Remove item',
+        message: 'Are you sure you want to remove this item?',
+        confirm: () => { fields.remove(index); },
+      });
     },
   })),
   SortableElement,
@@ -104,7 +112,6 @@ const Items = compose(
               <Item
                 index={index}
                 key={index}
-                sortIndex={index}
                 field={field}
                 fields={fields}
                 {...rest}

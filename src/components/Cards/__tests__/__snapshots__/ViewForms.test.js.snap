@@ -8,6 +8,7 @@ ShallowWrapper {
     forms={Object {}}
     nodes={Object {}}
     onComplete={[Function]}
+    openDialog={[Function]}
     protocolPath={null}
     show={true}
   />,

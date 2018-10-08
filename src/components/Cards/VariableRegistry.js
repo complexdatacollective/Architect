@@ -14,6 +14,7 @@ import EdgeIcon from '../EdgeIcon';
 import { getProtocol } from '../../selectors/protocol';
 import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const Type = ({ label, link, children, usage, handleDelete }) => (
   <div className="list__item">
@@ -74,10 +75,12 @@ class VariableRegistry extends Component {
         ''
     }`;
 
-    // eslint-disable-next-line no-alert
-    if (!confirm(confirmMessage)) { return; }
-
-    this.props.deleteType(entity, type, true);
+    this.props.openDialog({
+      type: 'Confirm',
+      title: `Delete ${type} ${entity}`,
+      message: confirmMessage,
+      confirm: () => { this.props.deleteType(entity, type, true); },
+    });
   };
 
   handleCancel = this.props.onComplete;
@@ -220,6 +223,7 @@ VariableRegistry.propTypes = {
   protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteType: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
   getDeleteImpact: PropTypes.func.isRequired,
   getObjectLabel: PropTypes.func.isRequired,
 };
@@ -253,6 +257,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => ({
   deleteType: bindActionCreators(variableRegistryActions.deleteType, dispatch),
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
 export { VariableRegistry };

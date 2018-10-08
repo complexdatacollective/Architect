@@ -14,6 +14,7 @@ import InsertStage from './InsertStage';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as navigationActions } from '../../ducks/modules/navigation';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 class Timeline extends Component {
@@ -21,6 +22,7 @@ class Timeline extends Component {
     stages: PropTypes.array,
     sorting: PropTypes.bool,
     deleteStage: PropTypes.func.isRequired,
+    openDialog: PropTypes.func.isRequired,
     goTo: PropTypes.func.isRequired,
     show: PropTypes.bool,
   };
@@ -56,10 +58,12 @@ class Timeline extends Component {
   };
 
   handleDeleteStage = (stageId) => {
-    // eslint-disable-next-line
-    if (confirm('Are you sure you want to remove this stage?')) {
-      this.props.deleteStage(stageId);
-    }
+    this.props.openDialog({
+      type: 'Confirm',
+      title: 'Delete stage',
+      message: 'Are you sure you want to remove this stage?',
+      confirm: () => { this.props.deleteStage(stageId); },
+    });
   }
 
   handleEditStage = stageId =>
@@ -196,6 +200,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
   goTo: bindActionCreators(navigationActions.goTo, dispatch),
   onSortEnd: ({ oldIndex, newIndex }) => {
     props.setSorting(false);

@@ -6,6 +6,7 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <Timeline
     deleteStage={[Function]}
     goTo={[Function]}
+    openDialog={[Function]}
     overview={Object {}}
     show={true}
     sorting={false}
