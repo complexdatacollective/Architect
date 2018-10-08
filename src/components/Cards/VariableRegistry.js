@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,6 +14,7 @@ import EdgeIcon from '../EdgeIcon';
 import { getProtocol } from '../../selectors/protocol';
 import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const Type = ({ label, link, children, usage, handleDelete }) => (
   <div className="list__item">
@@ -64,20 +65,30 @@ class VariableRegistry extends Component {
   handleDelete = (entity, type) => {
     const deletedObjects = this.props.getDeleteImpact(entity, type);
 
-    const deletedObjectsMessage = deletedObjects
-      .map(item => `${item.type.toUpperCase()}: ${this.props.getObjectLabel(item)}`)
-      .join('\n');
+    const confirmMessage = (
+      <Fragment>
+        <p>Are you sure you want to delete {type} {entity}?</p>
+        { deletedObjects.length > 0 &&
+          <Fragment>
+            <p>Because a number of other objects depend on this type, they will also be removed:</p>
+            <ul>
+              {deletedObjects.map(
+                item =>
+                  <li>{item.type.toUpperCase()}: {this.props.getObjectLabel(item)}</li>,
+              )}
+            </ul>
+          </Fragment>
+        }
+      </Fragment>
+    );
 
-    const confirmMessage = `Are you sure you want to delete "${type} ${entity}" ${
-      deletedObjects.length > 0 ?
-        `\n\nBecause a number of other objects depend on this type, they will also be removed: \n${deletedObjectsMessage}` :
-        ''
-    }`;
-
-    // eslint-disable-next-line no-alert
-    if (!confirm(confirmMessage)) { return; }
-
-    this.props.deleteType(entity, type, true);
+    this.props.openDialog({
+      type: 'Warning',
+      title: `Delete ${type} ${entity}`,
+      message: confirmMessage,
+      onConfirm: () => { this.props.deleteType(entity, type, true); },
+      confirmLabel: `Delete ${type} ${entity}`,
+    });
   };
 
   handleCancel = this.props.onComplete;
@@ -220,6 +231,7 @@ VariableRegistry.propTypes = {
   protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteType: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
   getDeleteImpact: PropTypes.func.isRequired,
   getObjectLabel: PropTypes.func.isRequired,
 };
@@ -253,6 +265,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => ({
   deleteType: bindActionCreators(variableRegistryActions.deleteType, dispatch),
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
 export { VariableRegistry };

@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Transition } from 'react-transition-group';
 import anime from 'animejs';
 import ControlBar from './ControlBar';
 import { CardErrorBoundary } from './Errors/';
+import window from '../ui/components/window';
 import { getCSSVariableAsNumber } from '../utils/CSSVariables';
 
 const fadeIn = {
@@ -48,14 +48,6 @@ class Card extends PureComponent {
     onAcknowledgeError: null,
   }
 
-  constructor(props) {
-    super(props);
-
-    this.portal = document.createElement('div');
-    const body = document.getElementsByTagName('body')[0];
-    body.appendChild(this.portal);
-  }
-
   get anyButtons() { return this.props.buttons.length > 0; }
 
   handleAcknowledgeError = () => this.props.onAcknowledgeError();
@@ -74,7 +66,7 @@ class Card extends PureComponent {
     const classes = cx('card', `card--${this.props.type}`);
     const timeout = enterDuration + enterDelay + exitDuration + exitDelay;
 
-    return ReactDOM.createPortal(
+    return (
       <Transition
         timeout={timeout}
         unmountOnExit
@@ -123,11 +115,10 @@ class Card extends PureComponent {
             </ControlBar>
           </div>
         )}
-      </Transition>,
-      this.portal,
+      </Transition>
     );
   }
 }
 
 export { Card };
-export default Card;
+export default window(Card);

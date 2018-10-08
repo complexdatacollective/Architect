@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { get, map, toPairs, fromPairs } from 'lodash';
@@ -9,6 +11,7 @@ import Guidance from '../Guidance';
 import Disable from '../Disable';
 import NodeType from './NodeType';
 import { getFieldId } from '../../utils/issues';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const allowedTypes = ['text', 'number', 'boolean', 'ordinal', 'categorical'];
 
@@ -57,10 +60,13 @@ const optionGetter = (variables) => {
 
 class FormEditor extends Component {
   handleAttemptTypeChange = () => {
-    // eslint-disable-next-line no-alert
-    if (confirm('First you will need to reset the rest of the form, are you sure?')) {
-      this.props.resetFields();
-    }
+    this.props.openDialog({
+      type: 'Confirm',
+      title: 'Change node type',
+      message: 'First you will need to reset the rest of the form, are you sure?',
+      onConfirm: () => { this.props.resetFields(); },
+      confirmLabel: 'Continue',
+    });
   }
 
   render() {
@@ -145,12 +151,17 @@ FormEditor.propTypes = {
   nodeType: PropTypes.string,
   variables: PropTypes.object.isRequired,
   nodeTypes: PropTypes.array.isRequired,
+  openDialog: PropTypes.func.isRequired,
 };
 
 FormEditor.defaultProps = {
   nodeType: null,
 };
 
+const mapDispatchToProps = dispatch => ({
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
+});
+
 export { FormEditor };
 
-export default FormEditor;
+export default connect(null, mapDispatchToProps)(FormEditor);

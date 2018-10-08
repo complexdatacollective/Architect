@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { get, map } from 'lodash';
@@ -7,6 +8,7 @@ import { Field, FieldArray } from 'redux-form';
 import { Icon } from '../../ui/components';
 import { Select } from '../Form/Fields';
 import ValidatedField from '../Form/ValidatedField';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const VALIDATION_TYPES = {
   text: [
@@ -71,19 +73,26 @@ const AddItem = props => (
   </div>
 );
 
+const mapStateToItemProps = (state, { fields, index }) => ({
+  rowValues: fields.get(index),
+  allValues: fields.getAll(),
+});
+
+const mapDispatchToItemProps = dispatch => ({
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
+});
+
 const Item = compose(
-  connect(
-    (state, { fields, index }) => ({
-      rowValues: fields.get(index),
-      allValues: fields.getAll(),
-    }),
-  ),
-  withHandlers(({ fields, index }) => ({
+  connect(mapStateToItemProps, mapDispatchToItemProps),
+  withHandlers(({ fields, openDialog, index }) => ({
     handleDelete: () => {
-      // eslint-disable-next-line no-alert
-      if (confirm('Are you sure you want to remove this item?')) {
-        fields.remove(index);
-      }
+      openDialog({
+        type: 'Confirm',
+        title: 'Remove validation',
+        message: 'Are you sure you want to remove this rule?',
+        onConfirm: () => { fields.remove(index); },
+        confirmLabel: 'Remove validation',
+      });
     },
   })),
 )(

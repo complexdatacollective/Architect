@@ -8,6 +8,7 @@ const mockProps = {
   forms: {},
   nodes: {},
   deleteForm: () => {},
+  openDialog: () => {},
 };
 
 describe('<ViewForms />', () => {

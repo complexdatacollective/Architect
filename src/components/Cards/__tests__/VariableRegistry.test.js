@@ -14,6 +14,7 @@ const mockProps = {
   protocolPath: '',
   getDeleteImpact: () => {},
   getObjectLabel: () => {},
+  openDialog: () => {},
 };
 
 describe('<VariableRegistry />', () => {

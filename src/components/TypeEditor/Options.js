@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { compose, defaultProps, withProps } from 'recompose';
 import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
 import { Icon } from '../../ui/components';
+import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const isNumberLike = value =>
   parseInt(value, 10) == value; // eslint-disable-line
@@ -31,15 +34,25 @@ const AddItem = props => (
   </div>
 );
 
+const mapDispatchToItemProps = dispatch => ({
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
+});
+
 const Item = compose(
-  withProps(({ fields, index }) => ({
-    handleDelete: () => {
-      // eslint-disable-next-line no-alert
-      if (confirm('Are you sure you want to remove this item?')) {
-        fields.remove(index);
-      }
-    },
-  })),
+  connect(null, mapDispatchToItemProps),
+  withProps(
+    ({ fields, openDialog, index }) => ({
+      handleDelete: () => {
+        openDialog({
+          type: 'Confirm',
+          title: 'Remove item',
+          message: 'Are you sure you want to remove this item?',
+          onConfirm: () => { fields.remove(index); },
+          confirmLabel: 'Remove item',
+        });
+      },
+    }),
+  ),
   SortableElement,
 )(
   ({ field, handleDelete }) => (

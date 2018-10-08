@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
 import undoable from 'redux-undo';
+import dialogs from './dialogs';
 import protocol from './protocol';
 import protocols from './protocols';
 import recentProtocols from './recentProtocols';
@@ -35,6 +36,7 @@ export const rootReducer = combineReducers({
   session,
   locale: () => 'en-US',
   guidance,
+  dialogs,
   protocol: undoable(
     protocol,
     {

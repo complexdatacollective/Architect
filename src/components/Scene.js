@@ -4,6 +4,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Flipper } from 'react-flip-toolkit';
+import { compose } from 'recompose';
 import { getActiveProtocolMeta } from '../selectors/protocol';
 import Start from './Start';
 import RecentProtocols from './RecentProtocols';
@@ -36,7 +37,7 @@ const Scene = ({
 
       <NavLink className="scene__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />
-      </NavLink>
+      </NavLink>`
 
       <Flipper flipKey={flipKey}>
 
@@ -82,6 +83,6 @@ const mapStateToProps = state => ({
 
 export { Scene };
 
-export default connect(
-  mapStateToProps,
+export default compose(
+  connect(mapStateToProps),
 )(Scene);

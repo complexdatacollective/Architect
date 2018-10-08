@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, map, difference } from 'lodash';
@@ -8,6 +9,7 @@ import Guidance from '../../Guidance';
 import NodeSelect from '../../../components/Form/Fields/NodeSelect';
 import { getNodeTypes } from '../../../selectors/variableRegistry';
 import { getFieldId } from '../../../utils/issues';
+import { actionCreators as dialogsActions } from '../../../ducks/modules/dialogs';
 
 class NodeType extends Component {
   static propTypes = {
@@ -15,6 +17,7 @@ class NodeType extends Component {
     disabled: PropTypes.bool,
     stage: PropTypes.object.isRequired,
     resetField: PropTypes.func.isRequired,
+    openDialog: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -22,14 +25,20 @@ class NodeType extends Component {
     disabled: false,
   };
 
-  resetStage() {
-    const { stage, resetField } = this.props;
-    // eslint-disable-next-line
-    if (confirm('First you will need to reset the rest of the stage, are you sure?')) {
-      const fieldsToReset = difference(keys(stage), ['id', 'type', 'label']);
+  handleResetStage = () => {
+    this.props.openDialog({
+      type: 'Confirm',
+      title: 'Reset node type',
+      message: 'First you will need to reset the rest of the stage, are you sure?',
+      onConfirm: this.resetStage,
+      confirmLabel: 'Continue',
+    });
+  }
 
-      fieldsToReset.forEach(resetField);
-    }
+  resetStage = () => {
+    const { stage, resetField } = this.props;
+    const fieldsToReset = difference(keys(stage), ['id', 'type', 'label']);
+    fieldsToReset.forEach(resetField);
   }
 
   render() {
@@ -48,7 +57,7 @@ class NodeType extends Component {
           <p>Which node type does this name generator create?</p>
           <div
             className="stage-editor-section-node-type__edit"
-            onClick={disabled ? () => this.resetStage() : () => {}}
+            onClick={disabled ? () => this.handleResetStage() : () => {}}
           >
             <div className="stage-editor-section-node-type__edit-capture">
               <Field
@@ -87,6 +96,7 @@ const mapStateToProps = (state, { form }) => {
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   resetField: field => dispatch(changeField(form.name, field, null)),
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
 export { NodeType };

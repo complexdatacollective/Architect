@@ -5,7 +5,7 @@ import anime from 'animejs';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
 const appear = {
-  translateY: ['-100%', 0],
+  translateY: ['-100vh', 0],
   elasticity: 0,
   easing: 'easeInOutQuad',
   duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),

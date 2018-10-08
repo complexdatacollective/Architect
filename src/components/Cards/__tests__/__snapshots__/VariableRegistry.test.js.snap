@@ -2,7 +2,6 @@
 
 exports[`<VariableRegistry /> can render 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <VariableRegistry
     deleteType={[Function]}
@@ -10,6 +9,7 @@ ShallowWrapper {
     getObjectLabel={[Function]}
     getUsageForType={[Function]}
     onComplete={[Function]}
+    openDialog={[Function]}
     protocolPath=""
     show={true}
     variableRegistry={
@@ -23,6 +23,7 @@ ShallowWrapper {
     "batchedUpdates": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -106,14 +107,8 @@ ShallowWrapper {
           </Connect(Guided)>
         </Connect(Guided)>
       </div>,
-      "enterDelay": 0,
-      "enterDuration": 100,
-      "exitDelay": 0,
-      "exitDuration": 100,
       "onAcknowledgeError": [Function],
       "show": true,
-      "style": "wipe",
-      "type": "default",
     },
     "ref": null,
     "rendered": Object {
@@ -601,14 +596,8 @@ ShallowWrapper {
             </Connect(Guided)>
           </Connect(Guided)>
         </div>,
-        "enterDelay": 0,
-        "enterDuration": 100,
-        "exitDelay": 0,
-        "exitDuration": 100,
         "onAcknowledgeError": [Function],
         "show": true,
-        "style": "wipe",
-        "type": "default",
       },
       "ref": null,
       "rendered": Object {
@@ -1020,8 +1009,20 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
   },
 }
 `;
