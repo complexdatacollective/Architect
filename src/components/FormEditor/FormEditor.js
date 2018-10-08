@@ -64,7 +64,8 @@ class FormEditor extends Component {
       type: 'Confirm',
       title: 'Change node type',
       message: 'First you will need to reset the rest of the form, are you sure?',
-      confirm: () => { this.props.resetFields(); },
+      onConfirm: () => { this.props.resetFields(); },
+      confirmLabel: 'Continue',
     });
   }
 

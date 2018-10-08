@@ -88,9 +88,10 @@ const Item = compose(
     handleDelete: () => {
       openDialog({
         type: 'Confirm',
-        title: 'Remove item',
-        message: 'Are you sure you want to remove this item?',
-        confirm: () => { fields.remove(index); },
+        title: 'Remove validation',
+        message: 'Are you sure you want to remove this rule?',
+        onConfirm: () => { fields.remove(index); },
+        confirmLabel: 'Remove validation',
       });
     },
   })),

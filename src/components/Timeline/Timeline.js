@@ -59,10 +59,11 @@ class Timeline extends Component {
 
   handleDeleteStage = (stageId) => {
     this.props.openDialog({
-      type: 'Confirm',
+      type: 'Warning',
       title: 'Delete stage',
       message: 'Are you sure you want to remove this stage?',
-      confirm: () => { this.props.deleteStage(stageId); },
+      onConfirm: () => { this.props.deleteStage(stageId); },
+      confirmLabel: 'Delete stage',
     });
   }
 

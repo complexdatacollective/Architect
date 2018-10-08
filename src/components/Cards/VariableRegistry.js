@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -65,21 +65,29 @@ class VariableRegistry extends Component {
   handleDelete = (entity, type) => {
     const deletedObjects = this.props.getDeleteImpact(entity, type);
 
-    const deletedObjectsMessage = deletedObjects
-      .map(item => `${item.type.toUpperCase()}: ${this.props.getObjectLabel(item)}`)
-      .join('\n');
-
-    const confirmMessage = `Are you sure you want to delete "${type} ${entity}" ${
-      deletedObjects.length > 0 ?
-        `\n\nBecause a number of other objects depend on this type, they will also be removed: \n${deletedObjectsMessage}` :
-        ''
-    }`;
+    const confirmMessage = (
+      <Fragment>
+        <p>Are you sure you want to delete {type} {entity}?</p>
+        { deletedObjects.length > 0 &&
+          <Fragment>
+            <p>Because a number of other objects depend on this type, they will also be removed:</p>
+            <ul>
+              {deletedObjects.map(
+                item =>
+                  <li>{item.type.toUpperCase()}: {this.props.getObjectLabel(item)}</li>,
+              )}
+            </ul>
+          </Fragment>
+        }
+      </Fragment>
+    );
 
     this.props.openDialog({
-      type: 'Confirm',
+      type: 'Warning',
       title: `Delete ${type} ${entity}`,
       message: confirmMessage,
-      confirm: () => { this.props.deleteType(entity, type, true); },
+      onConfirm: () => { this.props.deleteType(entity, type, true); },
+      confirmLabel: `Delete ${type} ${entity}`,
     });
   };
 

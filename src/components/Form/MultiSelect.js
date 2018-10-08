@@ -49,7 +49,8 @@ const Item = compose(
         type: 'Confirm',
         title: 'Remove item',
         message: 'Are you sure you want to remove this item?',
-        confirm: () => { fields.remove(index); },
+        onConfirm: () => { fields.remove(index); },
+        confirmLabel: 'Remove item',
       });
     },
   })),

@@ -30,7 +30,8 @@ class NodeType extends Component {
       type: 'Confirm',
       title: 'Reset node type',
       message: 'First you will need to reset the rest of the stage, are you sure?',
-      confirm: this.resetStage,
+      onConfirm: this.resetStage,
+      confirmLabel: 'Continue',
     });
   }
 

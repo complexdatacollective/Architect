@@ -23,10 +23,11 @@ class ViewForms extends Component {
 
   handleDelete = (form) => {
     this.props.openDialog({
-      type: 'Confirm',
+      type: 'Warning',
       title: 'Delete form',
       message: `Are you sure you want to delete "${form}"?`,
-      confirm: () => { this.props.deleteForm(form); },
+      onConfirm: () => { this.props.deleteForm(form); },
+      confirmLabel: 'Delete form',
     });
   };
 
