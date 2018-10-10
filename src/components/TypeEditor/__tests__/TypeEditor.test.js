@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import TypeEditor from '../TypeEditor';
+import { TypeEditor } from '../TypeEditor';
 
 const mockProps = {
   dirty: false,
@@ -12,6 +12,8 @@ const mockProps = {
   form: 'TYPE_EDITOR',
   toggleCodeView: () => {},
   showCodeView: true,
+  autofill: () => {},
+  nameTouched: false,
 };
 
 describe('<TypeEditor />', () => {

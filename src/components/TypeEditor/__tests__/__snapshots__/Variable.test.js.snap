@@ -35,20 +35,6 @@ ShallowWrapper {
         >
           <div>
             <div
-              data-name="Variable name"
-              id="field_bar_name"
-            />
-            <Validated
-              component={[Function]}
-              label="Name"
-              name="name"
-              validation={
-                Object {
-                  "required": true,
-                }
-              }
-            />
-            <div
               data-name="Variable label"
               id="field_bar_label"
             />
@@ -56,6 +42,22 @@ ShallowWrapper {
               component={[Function]}
               label="Label"
               name="label"
+              onChange={[Function]}
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+            <div
+              data-name="Variable name"
+              id="field_bar_name"
+            />
+            <Validated
+              component={[Function]}
+              label="Name"
+              name="name"
+              normalize={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -149,20 +151,6 @@ ShallowWrapper {
         >
           <div>
             <div
-              data-name="Variable name"
-              id="field_bar_name"
-            />
-            <Validated
-              component={[Function]}
-              label="Name"
-              name="name"
-              validation={
-                Object {
-                  "required": true,
-                }
-              }
-            />
-            <div
               data-name="Variable label"
               id="field_bar_label"
             />
@@ -170,6 +158,22 @@ ShallowWrapper {
               component={[Function]}
               label="Label"
               name="label"
+              onChange={[Function]}
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+            <div
+              data-name="Variable name"
+              id="field_bar_name"
+            />
+            <Validated
+              component={[Function]}
+              label="Name"
+              name="name"
+              normalize={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -228,20 +232,6 @@ ShallowWrapper {
         "props": Object {
           "children": <div>
             <div
-              data-name="Variable name"
-              id="field_bar_name"
-            />
-            <Validated
-              component={[Function]}
-              label="Name"
-              name="name"
-              validation={
-                Object {
-                  "required": true,
-                }
-              }
-            />
-            <div
               data-name="Variable label"
               id="field_bar_label"
             />
@@ -249,6 +239,22 @@ ShallowWrapper {
               component={[Function]}
               label="Label"
               name="label"
+              onChange={[Function]}
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+            <div
+              data-name="Variable name"
+              id="field_bar_name"
+            />
+            <Validated
+              component={[Function]}
+              label="Name"
+              name="name"
+              normalize={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -305,20 +311,6 @@ ShallowWrapper {
           "props": Object {
             "children": Array [
               <div
-                data-name="Variable name"
-                id="field_bar_name"
-              />,
-              <Validated
-                component={[Function]}
-                label="Name"
-                name="name"
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />,
-              <div
                 data-name="Variable label"
                 id="field_bar_label"
               />,
@@ -326,6 +318,22 @@ ShallowWrapper {
                 component={[Function]}
                 label="Label"
                 name="label"
+                onChange={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />,
+              <div
+                data-name="Variable name"
+                id="field_bar_name"
+              />,
+              <Validated
+                component={[Function]}
+                label="Name"
+                name="name"
+                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -382,34 +390,6 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "data-name": "Variable name",
-                "id": "field_bar_name",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "component": [Function],
-                "label": "Name",
-                "name": "name",
-                "validation": Object {
-                  "required": true,
-                },
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
                 "data-name": "Variable label",
                 "id": "field_bar_label",
               },
@@ -425,6 +405,36 @@ ShallowWrapper {
                 "component": [Function],
                 "label": "Label",
                 "name": "label",
+                "onChange": [Function],
+                "validation": Object {
+                  "required": true,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "data-name": "Variable name",
+                "id": "field_bar_name",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "label": "Name",
+                "name": "name",
+                "normalize": [Function],
                 "validation": Object {
                   "required": true,
                 },
@@ -528,20 +538,6 @@ ShallowWrapper {
           >
             <div>
               <div
-                data-name="Variable name"
-                id="field_bar_name"
-              />
-              <Validated
-                component={[Function]}
-                label="Name"
-                name="name"
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />
-              <div
                 data-name="Variable label"
                 id="field_bar_label"
               />
@@ -549,6 +545,22 @@ ShallowWrapper {
                 component={[Function]}
                 label="Label"
                 name="label"
+                onChange={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+              <div
+                data-name="Variable name"
+                id="field_bar_name"
+              />
+              <Validated
+                component={[Function]}
+                label="Name"
+                name="name"
+                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -642,20 +654,6 @@ ShallowWrapper {
           >
             <div>
               <div
-                data-name="Variable name"
-                id="field_bar_name"
-              />
-              <Validated
-                component={[Function]}
-                label="Name"
-                name="name"
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />
-              <div
                 data-name="Variable label"
                 id="field_bar_label"
               />
@@ -663,6 +661,22 @@ ShallowWrapper {
                 component={[Function]}
                 label="Label"
                 name="label"
+                onChange={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+              <div
+                data-name="Variable name"
+                id="field_bar_name"
+              />
+              <Validated
+                component={[Function]}
+                label="Name"
+                name="name"
+                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -721,20 +735,6 @@ ShallowWrapper {
           "props": Object {
             "children": <div>
               <div
-                data-name="Variable name"
-                id="field_bar_name"
-              />
-              <Validated
-                component={[Function]}
-                label="Name"
-                name="name"
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />
-              <div
                 data-name="Variable label"
                 id="field_bar_label"
               />
@@ -742,6 +742,22 @@ ShallowWrapper {
                 component={[Function]}
                 label="Label"
                 name="label"
+                onChange={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+              <div
+                data-name="Variable name"
+                id="field_bar_name"
+              />
+              <Validated
+                component={[Function]}
+                label="Name"
+                name="name"
+                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -798,20 +814,6 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <div
-                  data-name="Variable name"
-                  id="field_bar_name"
-                />,
-                <Validated
-                  component={[Function]}
-                  label="Name"
-                  name="name"
-                  validation={
-                    Object {
-                      "required": true,
-                    }
-                  }
-                />,
-                <div
                   data-name="Variable label"
                   id="field_bar_label"
                 />,
@@ -819,6 +821,22 @@ ShallowWrapper {
                   component={[Function]}
                   label="Label"
                   name="label"
+                  onChange={[Function]}
+                  validation={
+                    Object {
+                      "required": true,
+                    }
+                  }
+                />,
+                <div
+                  data-name="Variable name"
+                  id="field_bar_name"
+                />,
+                <Validated
+                  component={[Function]}
+                  label="Name"
+                  name="name"
+                  normalize={[Function]}
                   validation={
                     Object {
                       "required": true,
@@ -875,34 +893,6 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "data-name": "Variable name",
-                  "id": "field_bar_name",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "div",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "component": [Function],
-                  "label": "Name",
-                  "name": "name",
-                  "validation": Object {
-                    "required": true,
-                  },
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
                   "data-name": "Variable label",
                   "id": "field_bar_label",
                 },
@@ -918,6 +908,36 @@ ShallowWrapper {
                   "component": [Function],
                   "label": "Label",
                   "name": "label",
+                  "onChange": [Function],
+                  "validation": Object {
+                    "required": true,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "data-name": "Variable name",
+                  "id": "field_bar_name",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "label": "Name",
+                  "name": "name",
+                  "normalize": [Function],
                   "validation": Object {
                     "required": true,
                   },
