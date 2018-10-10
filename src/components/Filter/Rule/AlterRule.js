@@ -8,7 +8,7 @@ import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
-import { getVariableRegistry } from '../../selectors/protocol';
+import { getVariableRegistry } from '../../../selectors/protocol';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',

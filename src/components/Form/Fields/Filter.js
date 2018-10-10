@@ -1,6 +1,6 @@
 import React from 'react';
 import { fieldPropTypes } from 'redux-form';
-import FilterGroup from '../../FilterGroup';
+import FilterControls from '../../Filter';
 
 const defaultFilter = {
   join: '',
@@ -8,7 +8,7 @@ const defaultFilter = {
 };
 
 const Filter = ({ input, ...rest }) => (
-  <FilterGroup
+  <FilterControls
     filter={{ ...defaultFilter, ...input.value }}
     onChange={input.onChange}
     {...rest}

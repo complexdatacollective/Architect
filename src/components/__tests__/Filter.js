@@ -2,15 +2,15 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import FilterGroup from '../FilterGroup';
+import Filter from '../Filter';
 
 const mockProps = {
 };
 
 const makeSubject = props =>
-  shallow(<FilterGroup {...mockProps} {...props} />);
+  shallow(<Filter {...mockProps} {...props} />);
 
-describe('<FilterGroup />', () => {
+describe('<Filter />', () => {
   it('can render', () => {
     const subject = makeSubject();
     expect(subject).toMatchSnapshot();

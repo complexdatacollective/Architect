@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, includes, keys } from 'lodash';
+import { toPairs, has, includes, keys, flow, map, fromPairs } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
-import { getVariableRegistry } from '../../selectors/protocol';
+import { getVariableRegistry } from '../../../selectors/protocol';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -21,7 +21,7 @@ const operators = toPairs({
   LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
 });
 
-class EgoRule extends PureComponent {
+class EdgeRule extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([
       PropTypes.string,
@@ -30,25 +30,33 @@ class EgoRule extends PureComponent {
     onUpdateRule: PropTypes.func,
     onDeleteRule: PropTypes.func,
     options: PropTypes.shape({
-      attribute: PropTypes.string,
+      type: PropTypes.string,
       operator: PropTypes.string,
+      attribute: PropTypes.string,
       value: PropTypes.string,
     }),
-    nodeAttributes: PropTypes.array,
+    edgeTypes: PropTypes.array,
+    edgeAttributes: PropTypes.object,
     className: PropTypes.string,
   };
 
   static defaultProps = {
     options: {
-      attribute: '',
+      type: '',
       operator: '',
+      attribute: '',
       value: '',
     },
+    edgeTypes: [],
+    edgeAttributes: {},
     onUpdateRule: () => {},
     onDeleteRule: () => {},
-    nodeAttributes: [],
     className: '',
   };
+
+  showAttributes() {
+    return has(this.props.edgeAttributes, this.props.options.type);
+  }
 
   showOperator() {
     return !!this.props.options.attribute;
@@ -62,25 +70,36 @@ class EgoRule extends PureComponent {
   render() {
     const {
       id,
-      nodeAttributes,
+      edgeTypes,
+      edgeAttributes,
       onUpdateRule,
       onDeleteRule,
-      options: { operator, attribute, value },
+      options: { type, operator, attribute, value },
       className,
     } = this.props;
 
     return (
-      <div className={cx('rule', 'rule--ego', className)}>
+      <div className={cx('rule', 'rule--edge', className)}>
         <DragHandle />
         <div className="rule__options">
-          <div className="rule__option rule__option--attribute">
+          <div className="rule__option rule__option--type">
             <DropDown
-              options={nodeAttributes}
-              value={attribute}
-              placeholder="{variable}"
-              onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
+              options={edgeTypes}
+              value={type}
+              placeholder="{type}"
+              onChange={newValue => onUpdateRule(newValue, id, 'type')}
             />
           </div>
+          {this.showAttributes() && (
+            <div className="rule__option rule__option--attribute">
+              <DropDown
+                options={has(edgeAttributes, type) ? edgeAttributes[type] : []}
+                value={attribute}
+                placeholder="{variable}"
+                onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
+              />
+            </div>
+          )}
           { this.showOperator() && (
             <div className="rule__option rule__option--operator">
               <DropDown
@@ -91,7 +110,7 @@ class EgoRule extends PureComponent {
               />
             </div>
           )}
-          {this.showValue() && (
+          { this.showValue() && (
             <div className="rule__option rule__option--value">
               <Input
                 value={value}
@@ -109,14 +128,25 @@ class EgoRule extends PureComponent {
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
 
+  const edgeAttributes = flow(
+    toPairs,
+    edgeTypes => map(
+      edgeTypes,
+      ([edgeType, options]) => [edgeType, keys(options.variables)],
+    ),
+    fromPairs,
+  );
+
   return {
-    nodeAttributes: keys(variableRegistry.node.person.variables),
+    edgeTypes: keys(variableRegistry.edge),
+    edgeAttributes: edgeAttributes(variableRegistry.edge),
   };
 }
 
-export { EgoRule };
+export { EdgeRule };
 
 export default compose(
   SortableElement,
   connect(mapStateToProps),
-)(EgoRule);
+)(EdgeRule);
+
