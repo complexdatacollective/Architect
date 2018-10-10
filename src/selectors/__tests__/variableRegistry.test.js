@@ -54,6 +54,15 @@ const mockStateWithProtocol = {
             },
           ],
         },
+        {
+          id: 'mike',
+          type: 'Sociogram',
+          prompts: [
+            {
+              id: 'oscar',
+            },
+          ],
+        },
       ],
       forms: {
         bar: {
