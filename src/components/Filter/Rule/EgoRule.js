@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, includes, keys } from 'lodash';
+import { toPairs, includes } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
+import { getVariableOptions } from './selectors';
 import { getVariableRegistry } from '../../../selectors/protocol';
 
 const operators = toPairs({
@@ -109,8 +110,9 @@ class EgoRule extends PureComponent {
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
 
+  // TODO: Person is an implicitly required node type
   return {
-    nodeAttributes: keys(variableRegistry.node.person.variables),
+    nodeAttributes: getVariableOptions(variableRegistry.node).person,
   };
 }
 

@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, has, includes, keys, flow, map, fromPairs } from 'lodash';
+import { toPairs, has, includes, keys } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
 import { getVariableRegistry } from '../../../selectors/protocol';
+import { getVariableOptions } from './selectors';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -128,18 +129,9 @@ class EdgeRule extends PureComponent {
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
 
-  const edgeAttributes = flow(
-    toPairs,
-    edgeTypes => map(
-      edgeTypes,
-      ([edgeType, options]) => [edgeType, keys(options.variables)],
-    ),
-    fromPairs,
-  );
-
   return {
     edgeTypes: keys(variableRegistry.edge),
-    edgeAttributes: edgeAttributes(variableRegistry.edge),
+    edgeAttributes: getVariableOptions(variableRegistry.edge),
   };
 }
 
