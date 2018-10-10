@@ -157,10 +157,10 @@ class SociogramPrompt extends Component {
                 />
               </div>
             </Guidance>
-            <Guidance contentId="guidance.editor.sociogram_prompt.sortOrderBy">
+            <Guidance contentId="guidance.editor.sociogram_prompt.sortOrder">
               <div>
                 <Field
-                  name="sortOrderBy"
+                  name="sortOrder"
                   component={ArchitectFields.OrderBy}
                   className="stage-editor-section-prompt__setting"
                   variables={variablesForNodeType}

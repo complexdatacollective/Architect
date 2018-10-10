@@ -104,7 +104,7 @@ export default {
       <p>guidance.editor.sociogram_prompt.edges</p>
     </Fragment>
   ),
-  'guidance.editor.sociogram_prompt.sortOrderBy': (
+  'guidance.editor.sociogram_prompt.sortOrder': (
     <Fragment>
       <h3>Sort order</h3>
       <p>
