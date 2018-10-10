@@ -10,9 +10,7 @@ import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';
 import IconOption from './IconOption';
 import { getFieldId } from '../../utils/issues';
-
-const safeName = name =>
-  name.replace(/[^a-zA-Z0-9]+/g, '');
+import safeName from './safeName';
 
 class TypeEditor extends Component {
   handleChangeLabel = (e, value) => {

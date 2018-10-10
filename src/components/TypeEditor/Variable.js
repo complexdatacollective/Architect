@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -9,7 +9,10 @@ import {
   FormSection,
   change,
   formValueSelector,
+  getFormMeta,
+  autofill,
 } from 'redux-form';
+import { get } from 'lodash';
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
@@ -18,6 +21,7 @@ import Validations from './Validations';
 import Options from './Options';
 import ExpandableItem from '../Items/ExpandableItem';
 import { getFieldId } from '../../utils/issues';
+import safeName from './safeName';
 
 const VARIABLE_TYPES = [
   'text',
@@ -35,100 +39,115 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
   'categorical',
 ];
 
-const Variable = ({
-  fieldId,
-  isDirty,
-  isInvalid,
-  hasSubmitFailed,
-  form,
-  variableType,
-  resetOptions,
-  ...rest
-}) => (
-  <ExpandableItem
-    open={isDirty}
-    lockOpen={isInvalid && hasSubmitFailed}
-    preview={(
-      <FormSection name={fieldId}>
-        <h3 className="variable__preview-title">
-          <Field
-            name="name"
-            component={({ input: { value } }) => value || 'undefined'}
-          />
-          &nbsp;:&nbsp;
-          <em>
-            <Field
-              name="type"
-              component={({ input: { value } }) => value || 'undefined'}
-            />
-          </em>
-        </h3>
-        <p className="variable__preview-description">
-          <Field
-            name="description"
-            component={({ input: { value } }) => value}
-          />
-        </p>
-      </FormSection>
-    )}
-    {...rest}
-  >
-    <FormSection name={fieldId}>
-      <Guidance contentId="guidance.registry.type.variable">
-        <div>
-          <div id={getFieldId(`${fieldId}.name`)} data-name="Variable name" />
-          <ValidatedField
-            name="name"
-            component={Fields.Text}
-            label="Name"
-            validation={{ required: true }}
-          />
-          <div id={getFieldId(`${fieldId}.label`)} data-name="Variable label" />
-          <ValidatedField
-            name="label"
-            component={Fields.Text}
-            label="Label"
-            validation={{ required: true }}
-          />
-          <Field
-            name="description"
-            component={Fields.Text}
-            label="Description"
-          />
-          <div id={getFieldId(`${fieldId}.type`)} data-name="Variable type" />
-          <ValidatedField
-            name="type"
-            className="form-field-container"
-            component={ArchitectFields.Select}
-            label="Variable type"
-            options={VARIABLE_TYPES}
-            validation={{ required: true }}
-            onChange={resetOptions}
-          >
-            <option value="">&mdash; Select variable type &mdash;</option>
-          </ValidatedField>
+class Variable extends Component {
+  handleChangeLabel = (e, value) => {
+    if (this.props.nameTouched) { return; }
+    this.props.autofill('name', safeName(value));
+  }
 
-          { VARIABLE_TYPES_WITH_OPTIONS.includes(variableType) &&
-            <Options
-              name="options"
-              label="Options"
-              meta={{ form }}
-            />
-          }
+  handleNormalizeName = value => safeName(value);
 
-          { variableType &&
-            <Validations
-              name="validation"
-              label="Validations"
-              variableType={variableType}
-              meta={{ form }}
-            />
-          }
-        </div>
-      </Guidance>
-    </FormSection>
-  </ExpandableItem>
-);
+  render() {
+    const {
+      fieldId,
+      isDirty,
+      isInvalid,
+      hasSubmitFailed,
+      form,
+      variableType,
+      resetOptions,
+      ...rest
+    } = this.props;
+
+    return (
+      <ExpandableItem
+        open={isDirty}
+        lockOpen={isInvalid && hasSubmitFailed}
+        preview={(
+          <FormSection name={fieldId}>
+            <h3 className="variable__preview-title">
+              <Field
+                name="name"
+                component={({ input: { value } }) => value || 'undefined'}
+              />
+              &nbsp;:&nbsp;
+              <em>
+                <Field
+                  name="type"
+                  component={({ input: { value } }) => value || 'undefined'}
+                />
+              </em>
+            </h3>
+            <p className="variable__preview-description">
+              <Field
+                name="description"
+                component={({ input: { value } }) => value}
+              />
+            </p>
+          </FormSection>
+        )}
+        {...rest}
+      >
+        <FormSection name={fieldId}>
+          <Guidance contentId="guidance.registry.type.variable">
+            <div>
+              <div id={getFieldId(`${fieldId}.label`)} data-name="Variable label" />
+              <ValidatedField
+                name="label"
+                component={Fields.Text}
+                label="Label"
+                onChange={this.handleChangeLabel}
+                validation={{ required: true }}
+              />
+              <div id={getFieldId(`${fieldId}.name`)} data-name="Variable name" />
+              <ValidatedField
+                name="name"
+                component={Fields.Text}
+                label="Name"
+                normalize={this.handleNormalizeName}
+                validation={{ required: true }}
+              />
+              <Field
+                name="description"
+                component={Fields.Text}
+                label="Description"
+              />
+              <div id={getFieldId(`${fieldId}.type`)} data-name="Variable type" />
+              <ValidatedField
+                name="type"
+                className="form-field-container"
+                component={ArchitectFields.Select}
+                label="Variable type"
+                options={VARIABLE_TYPES}
+                validation={{ required: true }}
+                onChange={resetOptions}
+              >
+                <option value="">&mdash; Select variable type &mdash;</option>
+              </ValidatedField>
+
+              { VARIABLE_TYPES_WITH_OPTIONS.includes(variableType) &&
+                <Options
+                  name="options"
+                  label="Options"
+                  meta={{ form }}
+                />
+              }
+
+              { variableType &&
+                <Validations
+                  name="validation"
+                  label="Validations"
+                  variableType={variableType}
+                  meta={{ form }}
+                />
+              }
+            </div>
+          </Guidance>
+        </FormSection>
+      </ExpandableItem>
+    );
+  }
+}
 
 Variable.propTypes = {
   fieldId: PropTypes.string.isRequired,
@@ -145,14 +164,20 @@ Variable.defaultProps = {
   variableType: null,
 };
 
-const mapStateToProps = (state, { form, fieldId }) => ({
-  isDirty: isFieldDirty(form)(state, fieldId),
-  isInvalid: isFieldInvalid(form)(state, fieldId),
-  hasSubmitFailed: reduxHasSubmitFailed(form)(state),
-  variableType: formValueSelector(form)(state, `${fieldId}.type`),
-});
+const mapStateToProps = (state, { form, fieldId }) => {
+  const formMeta = getFormMeta(form)(state);
+
+  return {
+    nameTouched: get(formMeta, `${fieldId}.name.touched`, false),
+    isDirty: isFieldDirty(form)(state, fieldId),
+    isInvalid: isFieldInvalid(form)(state, fieldId),
+    hasSubmitFailed: reduxHasSubmitFailed(form)(state),
+    variableType: formValueSelector(form)(state, `${fieldId}.type`),
+  };
+};
 
 const mapDispatchToProps = (dispatch, { form, fieldId }) => ({
+  autofill: (field, value) => dispatch(autofill(form, `${fieldId}.name`, value)),
   resetOptions: () => {
     dispatch(change(form, `${fieldId}.options`, null));
     dispatch(change(form, `${fieldId}.validation`, []));
