@@ -89,10 +89,23 @@ const getSociogramTypeUsageIndex = createSelector(
   protocol =>
     flatMap(
       flattenPromptsFromStages(protocol.stages.filter(({ type }) => type === 'Sociogram')),
-      ({ edges: { creates, display }, stageId, id: promptId }) => ([
-        { subject: { entity: 'edge', type: creates }, owner: { type: 'prompt', promptId, stageId } },
-        ...display.map(edge => ({ subject: { entity: 'edge', type: edge }, owner: { type: 'prompt', promptId, stageId } })),
-      ]),
+      ({ stageId, id: promptId, ...prompt }) => {
+        if (!prompt.edges) { return []; }
+
+        const { display, creates } = prompt.edges;
+        let usage = [];
+
+        if (creates) {
+          usage = usage.concat({ subject: { entity: 'edge', type: creates }, owner: { type: 'prompt', promptId, stageId } });
+        }
+        if (display) {
+          usage = usage.concat(
+            display.map(edge => ({ subject: { entity: 'edge', type: edge }, owner: { type: 'prompt', promptId, stageId } })),
+          );
+        }
+
+        return usage;
+      },
     ),
 );
 
