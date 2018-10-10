@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, includes } from 'lodash';
+import { toPairs, includes, find } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
@@ -37,6 +37,7 @@ class EgoRule extends PureComponent {
     }),
     nodeAttributes: PropTypes.array,
     className: PropTypes.string,
+    hasPersonType: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -49,6 +50,7 @@ class EgoRule extends PureComponent {
     onDeleteRule: () => {},
     nodeAttributes: [],
     className: '',
+    hasPersonType: false,
   };
 
   showOperator() {
@@ -66,6 +68,7 @@ class EgoRule extends PureComponent {
       nodeAttributes,
       onUpdateRule,
       onDeleteRule,
+      hasPersonType,
       options: { operator, attribute, value },
       className,
     } = this.props;
@@ -73,46 +76,53 @@ class EgoRule extends PureComponent {
     return (
       <div className={cx('rule', 'rule--ego', className)}>
         <DragHandle />
-        <div className="rule__options">
-          <div className="rule__option rule__option--attribute">
-            <DropDown
-              options={nodeAttributes}
-              value={attribute}
-              placeholder="{variable}"
-              onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
-            />
-          </div>
-          { this.showOperator() && (
-            <div className="rule__option rule__option--operator">
+        { hasPersonType &&
+          <div className="rule__options">
+            <div className="rule__option rule__option--attribute">
               <DropDown
-                options={operators}
-                value={operator}
-                placeholder="{rule}"
-                onChange={newValue => onUpdateRule(newValue, id, 'operator')}
+                options={nodeAttributes}
+                value={attribute}
+                placeholder="{variable}"
+                onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
               />
             </div>
-          )}
-          {this.showValue() && (
-            <div className="rule__option rule__option--value">
-              <Input
-                value={value}
-                onChange={newValue => onUpdateRule(newValue, id, 'value')}
-              />
-            </div>
-          )}
-        </div>
+            { this.showOperator() && (
+              <div className="rule__option rule__option--operator">
+                <DropDown
+                  options={operators}
+                  value={operator}
+                  placeholder="{rule}"
+                  onChange={newValue => onUpdateRule(newValue, id, 'operator')}
+                />
+              </div>
+            )}
+            {this.showValue() && (
+              <div className="rule__option rule__option--value">
+                <Input
+                  value={value}
+                  onChange={newValue => onUpdateRule(newValue, id, 'value')}
+                />
+              </div>
+            )}
+          </div>
+        }
+        { !hasPersonType && <div>No &quot;Person&quot; node type found!</div> }
         <div className="rule__delete" onClick={() => onDeleteRule(id)} />
       </div>
     );
   }
 }
 
+
+// TODO: Person is an implicitly required node type
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
+  const personType = find(toPairs(variableRegistry.node), ([, node]) => node.name === 'Person');
+  const personId = personType && personType[0];
 
-  // TODO: Person is an implicitly required node type
   return {
-    nodeAttributes: getVariableOptions(variableRegistry.node).person,
+    hasPersonType: !!personType,
+    nodeAttributes: getVariableOptions(variableRegistry.node)[personId],
   };
 }
 

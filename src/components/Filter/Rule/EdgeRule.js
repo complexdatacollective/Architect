@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, has, includes, keys } from 'lodash';
+import { toPairs, has, includes, map } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
@@ -128,9 +128,10 @@ class EdgeRule extends PureComponent {
 
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
+  const edgeTypes = map(variableRegistry.edge, (edge, edgeId) => [edgeId, edge.name]);
 
   return {
-    edgeTypes: keys(variableRegistry.edge),
+    edgeTypes,
     edgeAttributes: getVariableOptions(variableRegistry.edge),
   };
 }

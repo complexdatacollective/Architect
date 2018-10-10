@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, has, includes, keys } from 'lodash';
+import { toPairs, has, includes, map } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
@@ -128,9 +128,10 @@ class AlterRule extends PureComponent {
 
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
+  const nodeTypes = map(variableRegistry.node, (node, nodeId) => [nodeId, node.name]);
 
   return {
-    nodeTypes: keys(variableRegistry.node),
+    nodeTypes,
     nodeAttributes: getVariableOptions(variableRegistry.node),
   };
 }

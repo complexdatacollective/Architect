@@ -4,8 +4,9 @@
   "networkCanvasVersion": "~4.0.0",
   "variableRegistry": {
     "node": {
-      "person": {
+      "d39a47507bbe27c2a7948861847f3607eda8e1be": {
         "label": "Person",
+        "name": "Person",
         "color": "node-color-seq-1",
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
@@ -108,7 +109,8 @@
           }
         }
       },
-      "venue": {
+      "32185118d94a1840ef8a0bff5914fd5a82e8b96c": {
+        "name": "Venue",
         "label": "Venue",
         "color": "node-color-seq-2",
         "iconVariant": "add-a-place",
@@ -146,7 +148,8 @@
       }
     },
     "edge": {
-      "friend": {
+      "e69867ca7d5a7b0ab60a2a61e7b791c106f7bf64": {
+        "name": "Friend",
         "label": "Friend",
         "color": "edge-color-seq-1",
         "variables": {
@@ -165,7 +168,8 @@
           }
         }
       },
-      "professional": {
+      "18342d1b3da732537b73fc2e7f7da69f5304e17a": {
+        "name": "Professional",
         "label": "Professional",
         "color": "edge-color-seq-2",
         "variables": {
