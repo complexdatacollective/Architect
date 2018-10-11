@@ -17,7 +17,7 @@ import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 class ViewForms extends Component {
   get buttons() {
     return ([
-      <Button key="cancel" size="small" color="platinum" onClick={this.handleCancel}>Back</Button>,
+      <Button key="cancel" color="platinum" onClick={this.handleCancel}>Back</Button>,
     ]);
   }
 

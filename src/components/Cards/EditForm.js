@@ -35,7 +35,6 @@ class EditForm extends PureComponent {
     const saveButton = (
       <Button
         key="save"
-        size="small"
         onClick={this.props.submitForm}
         iconPosition="right"
       >

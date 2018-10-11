@@ -58,7 +58,7 @@ Type.defaultProps = {
 class VariableRegistry extends Component {
   get buttons() {
     return [
-      <Button key="cancel" size="small" color="platinum" onClick={this.handleCancel}>Back</Button>,
+      <Button key="cancel" color="platinum" onClick={this.handleCancel}>Back</Button>,
     ];
   }
 

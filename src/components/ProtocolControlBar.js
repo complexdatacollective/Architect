@@ -17,7 +17,6 @@ const ProtocolControlBar = ({
 }) => (
   <ControlBar show={show && hasUnsavedChanges}>
     <Button
-      size="small"
       onClick={saveProtocol}
       color="white"
       icon={RightArrow}
