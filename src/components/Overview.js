@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
-import { Node } from '../ui/components';
+import { Node, Button } from '../ui/components';
 import EdgeIcon from './EdgeIcon';
 import ProtocolLink from './ProtocolLink';
 import { getProtocol } from '../selectors/protocol';
@@ -98,8 +98,8 @@ class Overview extends Component {
                   { this.renderEdgeTypes }
                 </div>
                 <div className="overview__manage-button">
-                  <ProtocolLink className="button button--small" to={'registry'}>
-                    Manage registry
+                  <ProtocolLink to={'registry'}>
+                    <Button>Manage registry</Button>
                   </ProtocolLink>
                 </div>
               </div>
@@ -107,8 +107,8 @@ class Overview extends Component {
                 <h3 className="overview__group-title">Forms</h3>
                 { this.renderForms }
                 <div className="overview__manage-button">
-                  <ProtocolLink className="button button--small" to={'forms'}>
-                    Manage forms
+                  <ProtocolLink to={'forms'}>
+                    <Button>Manage forms</Button>
                   </ProtocolLink>
                 </div>
               </div>
