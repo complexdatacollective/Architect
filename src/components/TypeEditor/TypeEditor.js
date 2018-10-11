@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { Field } from 'redux-form';
+import { Field, autofill, getFormMeta } from 'redux-form';
 import { ValidatedField } from '../Form';
 import Guidance from '../Guidance';
 import * as Fields from '../../ui/components/Fields';
@@ -9,89 +10,117 @@ import * as ArchitectFields from '../Form/Fields';
 import Variables from './Variables';
 import IconOption from './IconOption';
 import { getFieldId } from '../../utils/issues';
+import safeName from './safeName';
 
-const TypeEditor = ({
-  toggleCodeView,
-  form,
-  category,
-  type,
-  colorOptions,
-  iconOptions,
-  displayVariables,
-}) => (
-  <div className="type-editor editor__sections">
-    { type && <h1>Edit {category}</h1> }
-    { !type && <h1>Create {category}</h1> }
-    <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+class TypeEditor extends Component {
+  handleChangeLabel = (e, value) => {
+    if (this.props.nameTouched) { return; }
+    this.props.autofill('name', safeName(value));
+  }
 
-    <Guidance contentId="guidance.registry.type.label">
-      <div className="editor__section">
-        <h2 id={getFieldId('label')}>Label</h2>
+  handleNormalizeName = value => safeName(value);
 
-        <ValidatedField
-          component={Fields.Text}
-          name="label"
-          validation={{ required: true }}
-        />
-      </div>
-    </Guidance>
+  render() {
+    const {
+      toggleCodeView,
+      form,
+      category,
+      type,
+      colorOptions,
+      iconOptions,
+      displayVariables,
+    } = this.props;
 
-    <Guidance contentId="guidance.registry.type.color">
-      <div className="editor__section">
-        <h2 id={getFieldId('color')}>Color</h2>
+    return (
+      <div className="type-editor editor__sections">
+        { type && <h1>Edit {category}</h1> }
+        { !type && <h1>Create {category}</h1> }
+        <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
 
-        <ValidatedField
-          component={ArchitectFields.ColorPicker}
-          name="color"
-          colors={get(colorOptions, category, [])}
-          validation={{ required: true }}
-        />
-      </div>
-    </Guidance>
-
-    { category === 'node' &&
-      <React.Fragment>
-        <Guidance contentId="guidance.registry.type.icon">
+        <Guidance contentId="guidance.registry.type.label">
           <div className="editor__section">
-            <h2 id={getFieldId('iconVariant')}>Icon</h2>
+            <h2 id={getFieldId('label')}>Label</h2>
 
             <ValidatedField
-              component={Fields.RadioGroup}
-              name="iconVariant"
-              options={iconOptions}
-              optionComponent={IconOption}
+              component={Fields.Text}
+              name="label"
+              validation={{ required: true }}
+              onChange={this.handleChangeLabel}
+            />
+          </div>
+        </Guidance>
+
+        <Guidance contentId="guidance.registry.type.label">
+          <div className="editor__section">
+            <h2 id={getFieldId('name')}>Name</h2>
+
+            <ValidatedField
+              component={Fields.Text}
+              name="name"
+              normalize={this.handleNormalizeName}
               validation={{ required: true }}
             />
           </div>
         </Guidance>
 
-        <Guidance contentId="guidance.registry.type.displayVariable">
+        <Guidance contentId="guidance.registry.type.color">
           <div className="editor__section">
-            <h2>Display Variable</h2>
+            <h2 id={getFieldId('color')}>Color</h2>
 
-            <Field
-              component={ArchitectFields.Select}
-              name="displayVariable"
-              options={displayVariables}
-            >
-              <option value="">&mdash; Select display variable &mdash;</option>
-            </Field>
+            <ValidatedField
+              component={ArchitectFields.ColorPicker}
+              name="color"
+              colors={get(colorOptions, category, [])}
+              validation={{ required: true }}
+            />
           </div>
         </Guidance>
-      </React.Fragment>
-    }
 
-    <Guidance contentId="guidance.registry.type.variables">
-      <div className="editor__section">
-        <h2>Variables</h2>
-        <Variables
-          form={form}
-          name="variables"
-        />
+        { category === 'node' &&
+          <React.Fragment>
+            <Guidance contentId="guidance.registry.type.icon">
+              <div className="editor__section">
+                <h2 id={getFieldId('iconVariant')}>Icon</h2>
+
+                <ValidatedField
+                  component={Fields.RadioGroup}
+                  name="iconVariant"
+                  options={iconOptions}
+                  optionComponent={IconOption}
+                  validation={{ required: true }}
+                />
+              </div>
+            </Guidance>
+
+            <Guidance contentId="guidance.registry.type.displayVariable">
+              <div className="editor__section">
+                <h2>Display Variable</h2>
+
+                <Field
+                  component={ArchitectFields.Select}
+                  name="displayVariable"
+                  options={displayVariables}
+                >
+                  <option value="">&mdash; Select display variable &mdash;</option>
+                </Field>
+              </div>
+            </Guidance>
+          </React.Fragment>
+        }
+
+        <Guidance contentId="guidance.registry.type.variables">
+          <div className="editor__section">
+            <h2>Variables</h2>
+            <Variables
+              form={form}
+              name="variables"
+            />
+          </div>
+        </Guidance>
       </div>
-    </Guidance>
-  </div>
-);
+    );
+  }
+}
 
 TypeEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
@@ -104,6 +133,8 @@ TypeEditor.propTypes = {
   category: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
+  autofill: PropTypes.func.isRequired,
+  nameTouched: PropTypes.bool.isRequired,
 };
 
 TypeEditor.defaultProps = {
@@ -112,6 +143,18 @@ TypeEditor.defaultProps = {
   iconOptions: [],
 };
 
+const mapStateToProps = (state, { form }) => {
+  const formMeta = getFormMeta(form)(state);
+
+  return ({
+    nameTouched: get(formMeta, 'name.touched', false),
+  });
+};
+
+const mapDispatchToProps = (dispatch, { form }) => ({
+  autofill: (field, value) => dispatch(autofill(form, field, value)),
+});
+
 export { TypeEditor };
 
-export default TypeEditor;
+export default connect(mapStateToProps, mapDispatchToProps)(TypeEditor);
