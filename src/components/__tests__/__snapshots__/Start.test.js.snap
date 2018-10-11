@@ -53,7 +53,7 @@ ShallowWrapper {
             iconPosition="right"
             id="create-new-protocol-button"
             onClick={[Function]}
-            size="small"
+            size=""
             type="button"
           >
             Create new
@@ -72,7 +72,7 @@ ShallowWrapper {
             iconPosition="right"
             id="open-existing-protocol-button"
             onClick={[Function]}
-            size="small"
+            size=""
             type="button"
           >
             Open existing
@@ -151,7 +151,7 @@ ShallowWrapper {
               iconPosition="right"
               id="create-new-protocol-button"
               onClick={[Function]}
-              size="small"
+              size=""
               type="button"
             >
               Create new
@@ -170,7 +170,7 @@ ShallowWrapper {
               iconPosition="right"
               id="open-existing-protocol-button"
               onClick={[Function]}
-              size="small"
+              size=""
               type="button"
             >
               Open existing
@@ -197,7 +197,7 @@ ShallowWrapper {
               "iconPosition": "right",
               "id": "create-new-protocol-button",
               "onClick": [Function],
-              "size": "small",
+              "size": "",
               "type": "button",
             },
             "ref": null,
@@ -221,7 +221,7 @@ ShallowWrapper {
               "iconPosition": "right",
               "id": "open-existing-protocol-button",
               "onClick": [Function],
-              "size": "small",
+              "size": "",
               "type": "button",
             },
             "ref": null,
@@ -272,7 +272,7 @@ ShallowWrapper {
               iconPosition="right"
               id="create-new-protocol-button"
               onClick={[Function]}
-              size="small"
+              size=""
               type="button"
             >
               Create new
@@ -291,7 +291,7 @@ ShallowWrapper {
               iconPosition="right"
               id="open-existing-protocol-button"
               onClick={[Function]}
-              size="small"
+              size=""
               type="button"
             >
               Open existing
@@ -370,7 +370,7 @@ ShallowWrapper {
                 iconPosition="right"
                 id="create-new-protocol-button"
                 onClick={[Function]}
-                size="small"
+                size=""
                 type="button"
               >
                 Create new
@@ -389,7 +389,7 @@ ShallowWrapper {
                 iconPosition="right"
                 id="open-existing-protocol-button"
                 onClick={[Function]}
-                size="small"
+                size=""
                 type="button"
               >
                 Open existing
@@ -416,7 +416,7 @@ ShallowWrapper {
                 "iconPosition": "right",
                 "id": "create-new-protocol-button",
                 "onClick": [Function],
-                "size": "small",
+                "size": "",
                 "type": "button",
               },
               "ref": null,
@@ -440,7 +440,7 @@ ShallowWrapper {
                 "iconPosition": "right",
                 "id": "open-existing-protocol-button",
                 "onClick": [Function],
-                "size": "small",
+                "size": "",
                 "type": "button",
               },
               "ref": null,

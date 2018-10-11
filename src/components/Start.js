@@ -22,14 +22,12 @@ const Start = ({
         id="create-new-protocol-button"
         type="button"
         color="platinum"
-        size="small"
         icon={<Icon name="arrow-right" color="charcoal" />}
         onClick={createAndLoadProtocol}
       >Create new</Button>
       <Button
         id="open-existing-protocol-button"
         type="button"
-        size="small"
         color="cyber-grape"
         icon={<Icon name="arrow-right" />}
         onClick={openProtocol}

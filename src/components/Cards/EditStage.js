@@ -41,7 +41,6 @@ class EditStage extends PureComponent {
     return this.isDirty ? [
       <Button
         key="continue"
-        size="small"
         onClick={this.props.submitForm}
       >Continue</Button>,
     ] : [];

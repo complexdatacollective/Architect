@@ -59,10 +59,18 @@ ShallowWrapper {
                 className="overview__manage-button"
               >
                 <Connect(ProtocolLink)
-                  className="button button--small"
                   to="registry"
                 >
-                  Manage registry
+                  <Button
+                    color=""
+                    content=""
+                    icon=""
+                    iconPosition="right"
+                    onClick={[Function]}
+                    size=""
+                  >
+                    Manage registry
+                  </Button>
                 </Connect(ProtocolLink)>
               </div>
             </div>
@@ -79,10 +87,18 @@ ShallowWrapper {
                 className="overview__manage-button"
               >
                 <Connect(ProtocolLink)
-                  className="button button--small"
                   to="forms"
                 >
-                  Manage forms
+                  <Button
+                    color=""
+                    content=""
+                    icon=""
+                    iconPosition="right"
+                    onClick={[Function]}
+                    size=""
+                  >
+                    Manage forms
+                  </Button>
                 </Connect(ProtocolLink)>
               </div>
             </div>
@@ -130,10 +146,18 @@ ShallowWrapper {
                 className="overview__manage-button"
               >
                 <Connect(ProtocolLink)
-                  className="button button--small"
                   to="registry"
                 >
-                  Manage registry
+                  <Button
+                    color=""
+                    content=""
+                    icon=""
+                    iconPosition="right"
+                    onClick={[Function]}
+                    size=""
+                  >
+                    Manage registry
+                  </Button>
                 </Connect(ProtocolLink)>
               </div>
             </div>
@@ -150,10 +174,18 @@ ShallowWrapper {
                 className="overview__manage-button"
               >
                 <Connect(ProtocolLink)
-                  className="button button--small"
                   to="forms"
                 >
-                  Manage forms
+                  <Button
+                    color=""
+                    content=""
+                    icon=""
+                    iconPosition="right"
+                    onClick={[Function]}
+                    size=""
+                  >
+                    Manage forms
+                  </Button>
                 </Connect(ProtocolLink)>
               </div>
             </div>
@@ -198,10 +230,18 @@ ShallowWrapper {
                   className="overview__manage-button"
                 >
                   <Connect(ProtocolLink)
-                    className="button button--small"
                     to="registry"
                   >
-                    Manage registry
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size=""
+                    >
+                      Manage registry
+                    </Button>
                   </Connect(ProtocolLink)>
                 </div>
               </div>
@@ -218,10 +258,18 @@ ShallowWrapper {
                   className="overview__manage-button"
                 >
                   <Connect(ProtocolLink)
-                    className="button button--small"
                     to="forms"
                   >
-                    Manage forms
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size=""
+                    >
+                      Manage forms
+                    </Button>
                   </Connect(ProtocolLink)>
                 </div>
               </div>
@@ -271,10 +319,18 @@ ShallowWrapper {
                     className="overview__manage-button"
                   >
                     <Connect(ProtocolLink)
-                      className="button button--small"
                       to="registry"
                     >
-                      Manage registry
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                      >
+                        Manage registry
+                      </Button>
                     </Connect(ProtocolLink)>
                   </div>
                 </div>,
@@ -291,10 +347,18 @@ ShallowWrapper {
                     className="overview__manage-button"
                   >
                     <Connect(ProtocolLink)
-                      className="button button--small"
                       to="forms"
                     >
-                      Manage forms
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                      >
+                        Manage forms
+                      </Button>
                     </Connect(ProtocolLink)>
                   </div>
                 </div>,
@@ -328,10 +392,18 @@ ShallowWrapper {
                       className="overview__manage-button"
                     >
                       <Connect(ProtocolLink)
-                        className="button button--small"
                         to="registry"
                       >
-                        Manage registry
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage registry
+                        </Button>
                       </Connect(ProtocolLink)>
                     </div>,
                   ],
@@ -419,10 +491,18 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": <Connect(ProtocolLink)
-                        className="button button--small"
                         to="registry"
                       >
-                        Manage registry
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage registry
+                        </Button>
                       </Connect(ProtocolLink)>,
                       "className": "overview__manage-button",
                     },
@@ -432,12 +512,36 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "class",
                       "props": Object {
-                        "children": "Manage registry",
-                        "className": "button button--small",
+                        "children": <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage registry
+                        </Button>,
                         "to": "registry",
                       },
                       "ref": null,
-                      "rendered": "Manage registry",
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": "Manage registry",
+                          "color": "",
+                          "content": "",
+                          "icon": "",
+                          "iconPosition": "right",
+                          "onClick": [Function],
+                          "size": "",
+                        },
+                        "ref": null,
+                        "rendered": "Manage registry",
+                        "type": [Function],
+                      },
                       "type": [Function],
                     },
                     "type": "div",
@@ -461,10 +565,18 @@ ShallowWrapper {
                       className="overview__manage-button"
                     >
                       <Connect(ProtocolLink)
-                        className="button button--small"
                         to="forms"
                       >
-                        Manage forms
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage forms
+                        </Button>
                       </Connect(ProtocolLink)>
                     </div>,
                   ],
@@ -501,10 +613,18 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": <Connect(ProtocolLink)
-                        className="button button--small"
                         to="forms"
                       >
-                        Manage forms
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage forms
+                        </Button>
                       </Connect(ProtocolLink)>,
                       "className": "overview__manage-button",
                     },
@@ -514,12 +634,36 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "class",
                       "props": Object {
-                        "children": "Manage forms",
-                        "className": "button button--small",
+                        "children": <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage forms
+                        </Button>,
                         "to": "forms",
                       },
                       "ref": null,
-                      "rendered": "Manage forms",
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": "Manage forms",
+                          "color": "",
+                          "content": "",
+                          "icon": "",
+                          "iconPosition": "right",
+                          "onClick": [Function],
+                          "size": "",
+                        },
+                        "ref": null,
+                        "rendered": "Manage forms",
+                        "type": [Function],
+                      },
                       "type": [Function],
                     },
                     "type": "div",
@@ -579,10 +723,18 @@ ShallowWrapper {
                   className="overview__manage-button"
                 >
                   <Connect(ProtocolLink)
-                    className="button button--small"
                     to="registry"
                   >
-                    Manage registry
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size=""
+                    >
+                      Manage registry
+                    </Button>
                   </Connect(ProtocolLink)>
                 </div>
               </div>
@@ -599,10 +751,18 @@ ShallowWrapper {
                   className="overview__manage-button"
                 >
                   <Connect(ProtocolLink)
-                    className="button button--small"
                     to="forms"
                   >
-                    Manage forms
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size=""
+                    >
+                      Manage forms
+                    </Button>
                   </Connect(ProtocolLink)>
                 </div>
               </div>
@@ -650,10 +810,18 @@ ShallowWrapper {
                   className="overview__manage-button"
                 >
                   <Connect(ProtocolLink)
-                    className="button button--small"
                     to="registry"
                   >
-                    Manage registry
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size=""
+                    >
+                      Manage registry
+                    </Button>
                   </Connect(ProtocolLink)>
                 </div>
               </div>
@@ -670,10 +838,18 @@ ShallowWrapper {
                   className="overview__manage-button"
                 >
                   <Connect(ProtocolLink)
-                    className="button button--small"
                     to="forms"
                   >
-                    Manage forms
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size=""
+                    >
+                      Manage forms
+                    </Button>
                   </Connect(ProtocolLink)>
                 </div>
               </div>
@@ -718,10 +894,18 @@ ShallowWrapper {
                     className="overview__manage-button"
                   >
                     <Connect(ProtocolLink)
-                      className="button button--small"
                       to="registry"
                     >
-                      Manage registry
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                      >
+                        Manage registry
+                      </Button>
                     </Connect(ProtocolLink)>
                   </div>
                 </div>
@@ -738,10 +922,18 @@ ShallowWrapper {
                     className="overview__manage-button"
                   >
                     <Connect(ProtocolLink)
-                      className="button button--small"
                       to="forms"
                     >
-                      Manage forms
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                      >
+                        Manage forms
+                      </Button>
                     </Connect(ProtocolLink)>
                   </div>
                 </div>
@@ -791,10 +983,18 @@ ShallowWrapper {
                       className="overview__manage-button"
                     >
                       <Connect(ProtocolLink)
-                        className="button button--small"
                         to="registry"
                       >
-                        Manage registry
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage registry
+                        </Button>
                       </Connect(ProtocolLink)>
                     </div>
                   </div>,
@@ -811,10 +1011,18 @@ ShallowWrapper {
                       className="overview__manage-button"
                     >
                       <Connect(ProtocolLink)
-                        className="button button--small"
                         to="forms"
                       >
-                        Manage forms
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                        >
+                          Manage forms
+                        </Button>
                       </Connect(ProtocolLink)>
                     </div>
                   </div>,
@@ -848,10 +1056,18 @@ ShallowWrapper {
                         className="overview__manage-button"
                       >
                         <Connect(ProtocolLink)
-                          className="button button--small"
                           to="registry"
                         >
-                          Manage registry
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                          >
+                            Manage registry
+                          </Button>
                         </Connect(ProtocolLink)>
                       </div>,
                     ],
@@ -939,10 +1155,18 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": <Connect(ProtocolLink)
-                          className="button button--small"
                           to="registry"
                         >
-                          Manage registry
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                          >
+                            Manage registry
+                          </Button>
                         </Connect(ProtocolLink)>,
                         "className": "overview__manage-button",
                       },
@@ -952,12 +1176,36 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "class",
                         "props": Object {
-                          "children": "Manage registry",
-                          "className": "button button--small",
+                          "children": <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                          >
+                            Manage registry
+                          </Button>,
                           "to": "registry",
                         },
                         "ref": null,
-                        "rendered": "Manage registry",
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": "Manage registry",
+                            "color": "",
+                            "content": "",
+                            "icon": "",
+                            "iconPosition": "right",
+                            "onClick": [Function],
+                            "size": "",
+                          },
+                          "ref": null,
+                          "rendered": "Manage registry",
+                          "type": [Function],
+                        },
                         "type": [Function],
                       },
                       "type": "div",
@@ -981,10 +1229,18 @@ ShallowWrapper {
                         className="overview__manage-button"
                       >
                         <Connect(ProtocolLink)
-                          className="button button--small"
                           to="forms"
                         >
-                          Manage forms
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                          >
+                            Manage forms
+                          </Button>
                         </Connect(ProtocolLink)>
                       </div>,
                     ],
@@ -1021,10 +1277,18 @@ ShallowWrapper {
                       "nodeType": "host",
                       "props": Object {
                         "children": <Connect(ProtocolLink)
-                          className="button button--small"
                           to="forms"
                         >
-                          Manage forms
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                          >
+                            Manage forms
+                          </Button>
                         </Connect(ProtocolLink)>,
                         "className": "overview__manage-button",
                       },
@@ -1034,12 +1298,36 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "class",
                         "props": Object {
-                          "children": "Manage forms",
-                          "className": "button button--small",
+                          "children": <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                          >
+                            Manage forms
+                          </Button>,
                           "to": "forms",
                         },
                         "ref": null,
-                        "rendered": "Manage forms",
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": "Manage forms",
+                            "color": "",
+                            "content": "",
+                            "icon": "",
+                            "iconPosition": "right",
+                            "onClick": [Function],
+                            "size": "",
+                          },
+                          "ref": null,
+                          "rendered": "Manage forms",
+                          "type": [Function],
+                        },
                         "type": [Function],
                       },
                       "type": "div",

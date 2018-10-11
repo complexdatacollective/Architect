@@ -39,7 +39,7 @@ ShallowWrapper {
           icon=""
           iconPosition="right"
           onClick={[Function]}
-          size="small"
+          size=""
         >
           Back
         </Button>,
@@ -528,7 +528,7 @@ ShallowWrapper {
             icon=""
             iconPosition="right"
             onClick={[Function]}
-            size="small"
+            size=""
           >
             Back
           </Button>,

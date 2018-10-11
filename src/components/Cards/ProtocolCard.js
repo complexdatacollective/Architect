@@ -30,7 +30,7 @@ class ProtocolCard extends PureComponent {
 
   get buttons() {
     return this.props.buttons.concat([
-      <Button key="cancel" size="small" color="platinum" onClick={this.handleCancel}>Cancel</Button>,
+      <Button key="cancel" color="platinum" onClick={this.handleCancel}>Cancel</Button>,
     ]);
   }
 

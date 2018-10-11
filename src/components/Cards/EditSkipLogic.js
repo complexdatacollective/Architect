@@ -40,7 +40,7 @@ class EditSkipLogic extends PureComponent {
 
   get buttons() {
     return this.props.hasChanges ?
-      [<Button key="save" size="small" onClick={this.handleSave}>Continue</Button>] :
+      [<Button key="save" onClick={this.handleSave}>Continue</Button>] :
       [];
   }
 

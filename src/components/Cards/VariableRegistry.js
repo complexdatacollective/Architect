@@ -58,7 +58,7 @@ Type.defaultProps = {
 class VariableRegistry extends Component {
   get buttons() {
     return [
-      <Button key="cancel" size="small" color="platinum" onClick={this.handleCancel}>Back</Button>,
+      <Button key="cancel" color="platinum" onClick={this.handleCancel}>Back</Button>,
     ];
   }
 
@@ -187,9 +187,10 @@ class VariableRegistry extends Component {
                   <div className="editor__subsection">
                     <Link
                       to={`${protocolPath}/registry/node/`}
-                      className="button button--small"
                     >
-                      Create new Node type
+                      <Button>
+                        Create new Node type
+                      </Button>
                     </Link>
                   </div>
                 }
@@ -206,9 +207,10 @@ class VariableRegistry extends Component {
                   { protocolPath &&
                     <Link
                       to={`${protocolPath}/registry/edge/`}
-                      className="button button--small"
                     >
-                      Create new Edge type
+                      <Button>
+                        Create new Edge type
+                      </Button>
                     </Link>
                   }
                 </div>
