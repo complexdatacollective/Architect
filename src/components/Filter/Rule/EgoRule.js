@@ -114,10 +114,10 @@ class EgoRule extends PureComponent {
 }
 
 
-// TODO: Person is an implicitly required node type
+// TODO: person is an implicitly required node type
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
-  const personType = find(toPairs(variableRegistry.node), ([, node]) => node.name === 'Person');
+  const personType = find(toPairs(variableRegistry.node), ([, node]) => node.name === 'person');
   const personId = personType && personType[0];
 
   return {
