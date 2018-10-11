@@ -98,9 +98,10 @@ class ViewForms extends Component {
                   <div className="editor__subsection">
                     <Link
                       to={`${protocolPath}/form/`}
-                      className="button button--small"
                     >
-                      Create new Form
+                      <Button>
+                        Create new Form
+                      </Button>
                     </Link>
                   </div>
                 }
