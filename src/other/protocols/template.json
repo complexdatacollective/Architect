@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "variableRegistry": {
     "node": {
-      "person": {
+      "d39a47507bbe27c2a7948861847f3607eda8e1be": {
+        "name": "person",
         "label": "Person",
         "color": "node-color-seq-1",
         "displayVariable": "nickname",
@@ -85,7 +86,7 @@
     "person": {
       "title": "Add A Person",
       "entity": "node",
-      "type": "person",
+      "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
       "optionToAddAnother": true,
       "fields": [
         {

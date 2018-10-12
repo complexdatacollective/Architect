@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, includes, keys } from 'lodash';
+import { toPairs, has, includes, map } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
-import { getVariableRegistry } from '../../selectors/protocol';
+import { getVariableRegistry } from '../../../selectors/protocol';
+import { getVariableOptions } from './selectors';
 
 const operators = toPairs({
   EXACTLY: 'is Exactly',
@@ -21,7 +22,7 @@ const operators = toPairs({
   LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
 });
 
-class EgoRule extends PureComponent {
+class AlterRule extends PureComponent {
   static propTypes = {
     id: PropTypes.oneOfType([
       PropTypes.string,
@@ -30,25 +31,33 @@ class EgoRule extends PureComponent {
     onUpdateRule: PropTypes.func,
     onDeleteRule: PropTypes.func,
     options: PropTypes.shape({
-      attribute: PropTypes.string,
+      type: PropTypes.string,
       operator: PropTypes.string,
+      attribute: PropTypes.string,
       value: PropTypes.string,
     }),
-    nodeAttributes: PropTypes.array,
+    nodeTypes: PropTypes.array,
+    nodeAttributes: PropTypes.object,
     className: PropTypes.string,
   };
 
   static defaultProps = {
     options: {
-      attribute: '',
+      type: '',
       operator: '',
+      attribute: '',
       value: '',
     },
     onUpdateRule: () => {},
     onDeleteRule: () => {},
-    nodeAttributes: [],
+    nodeTypes: [],
+    nodeAttributes: {},
     className: '',
   };
+
+  showAttributes() {
+    return has(this.props.nodeAttributes, this.props.options.type);
+  }
 
   showOperator() {
     return !!this.props.options.attribute;
@@ -62,26 +71,37 @@ class EgoRule extends PureComponent {
   render() {
     const {
       id,
+      nodeTypes,
       nodeAttributes,
       onUpdateRule,
       onDeleteRule,
-      options: { operator, attribute, value },
+      options: { type, operator, attribute, value },
       className,
     } = this.props;
 
     return (
-      <div className={cx('rule', 'rule--ego', className)}>
+      <div className={cx('rule', 'rule--alter', className)}>
         <DragHandle />
         <div className="rule__options">
-          <div className="rule__option rule__option--attribute">
+          <div className="rule__option rule__option--type">
             <DropDown
-              options={nodeAttributes}
-              value={attribute}
-              placeholder="{variable}"
-              onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
+              options={nodeTypes}
+              value={type}
+              placeholder="{type}"
+              onChange={newValue => onUpdateRule(newValue, id, 'type')}
             />
           </div>
-          { this.showOperator() && (
+          {this.showAttributes() && (
+            <div className="rule__option rule__option--attribute">
+              <DropDown
+                options={has(nodeAttributes, type) ? nodeAttributes[type] : []}
+                value={attribute}
+                placeholder="{variable}"
+                onChange={newValue => onUpdateRule(newValue, id, 'attribute')}
+              />
+            </div>
+          )}
+          {this.showOperator() && (
             <div className="rule__option rule__option--operator">
               <DropDown
                 options={operators}
@@ -108,15 +128,17 @@ class EgoRule extends PureComponent {
 
 function mapStateToProps(state) {
   const variableRegistry = getVariableRegistry(state);
+  const nodeTypes = map(variableRegistry.node, (node, nodeId) => [nodeId, node.name]);
 
   return {
-    nodeAttributes: keys(variableRegistry.node.person.variables),
+    nodeTypes,
+    nodeAttributes: getVariableOptions(variableRegistry.node),
   };
 }
 
-export { EgoRule };
+export { AlterRule };
 
 export default compose(
   SortableElement,
   connect(mapStateToProps),
-)(EgoRule);
+)(AlterRule);

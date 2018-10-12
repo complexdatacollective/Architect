@@ -4,6 +4,7 @@ exports[`<TypeEditor /> can render for edge 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TypeEditor
+    autofill={[Function]}
     category="edge"
     colorOptions={
       Object {
@@ -16,6 +17,7 @@ ShallowWrapper {
     form="TYPE_EDITOR"
     handleSubmit={[Function]}
     iconOptions={Array []}
+    nameTouched={false}
     showCodeView={true}
     toggleCodeView={[Function]}
     type={null}
@@ -63,6 +65,30 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
+              onChange={[Function]}
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+          </div>
+        </Connect(Guided)>,
+        <Connect(Guided)
+          contentId="guidance.registry.type.label"
+        >
+          <div
+            className="editor__section"
+          >
+            <h2
+              id="field_name"
+            >
+              Name
+            </h2>
+            <Validated
+              component={[Function]}
+              name="name"
+              normalize={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -183,6 +209,7 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
+              onChange={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -207,6 +234,7 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
+                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -237,6 +265,93 @@ ShallowWrapper {
               "props": Object {
                 "component": [Function],
                 "name": "label",
+                "onChange": [Function],
+                "validation": Object {
+                  "required": true,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="editor__section"
+          >
+            <h2
+              id="field_name"
+            >
+              Name
+            </h2>
+            <Validated
+              component={[Function]}
+              name="name"
+              normalize={[Function]}
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+          </div>,
+          "contentId": "guidance.registry.type.label",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h2
+                id="field_name"
+              >
+                Name
+              </h2>,
+              <Validated
+                component={[Function]}
+                name="name"
+                normalize={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />,
+            ],
+            "className": "editor__section",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Name",
+                "id": "field_name",
+              },
+              "ref": null,
+              "rendered": "Name",
+              "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "name": "name",
+                "normalize": [Function],
                 "validation": Object {
                   "required": true,
                 },
@@ -440,6 +555,30 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
+                onChange={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+            </div>
+          </Connect(Guided)>,
+          <Connect(Guided)
+            contentId="guidance.registry.type.label"
+          >
+            <div
+              className="editor__section"
+            >
+              <h2
+                id="field_name"
+              >
+                Name
+              </h2>
+              <Validated
+                component={[Function]}
+                name="name"
+                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -560,6 +699,7 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
+                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -584,6 +724,7 @@ ShallowWrapper {
                 <Validated
                   component={[Function]}
                   name="label"
+                  onChange={[Function]}
                   validation={
                     Object {
                       "required": true,
@@ -614,6 +755,93 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "name": "label",
+                  "onChange": [Function],
+                  "validation": Object {
+                    "required": true,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <div
+              className="editor__section"
+            >
+              <h2
+                id="field_name"
+              >
+                Name
+              </h2>
+              <Validated
+                component={[Function]}
+                name="name"
+                normalize={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+            </div>,
+            "contentId": "guidance.registry.type.label",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h2
+                  id="field_name"
+                >
+                  Name
+                </h2>,
+                <Validated
+                  component={[Function]}
+                  name="name"
+                  normalize={[Function]}
+                  validation={
+                    Object {
+                      "required": true,
+                    }
+                  }
+                />,
+              ],
+              "className": "editor__section",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Name",
+                  "id": "field_name",
+                },
+                "ref": null,
+                "rendered": "Name",
+                "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "name": "name",
+                  "normalize": [Function],
                   "validation": Object {
                     "required": true,
                   },
@@ -807,6 +1035,7 @@ exports[`<TypeEditor /> can render for node 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <TypeEditor
+    autofill={[Function]}
     category="node"
     colorOptions={
       Object {
@@ -819,6 +1048,7 @@ ShallowWrapper {
     form="TYPE_EDITOR"
     handleSubmit={[Function]}
     iconOptions={Array []}
+    nameTouched={false}
     showCodeView={true}
     toggleCodeView={[Function]}
     type={null}
@@ -866,6 +1096,30 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
+              onChange={[Function]}
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+          </div>
+        </Connect(Guided)>,
+        <Connect(Guided)
+          contentId="guidance.registry.type.label"
+        >
+          <div
+            className="editor__section"
+          >
+            <h2
+              id="field_name"
+            >
+              Name
+            </h2>
+            <Validated
+              component={[Function]}
+              name="name"
+              normalize={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -1033,6 +1287,7 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
+              onChange={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -1057,6 +1312,7 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
+                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -1087,6 +1343,93 @@ ShallowWrapper {
               "props": Object {
                 "component": [Function],
                 "name": "label",
+                "onChange": [Function],
+                "validation": Object {
+                  "required": true,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="editor__section"
+          >
+            <h2
+              id="field_name"
+            >
+              Name
+            </h2>
+            <Validated
+              component={[Function]}
+              name="name"
+              normalize={[Function]}
+              validation={
+                Object {
+                  "required": true,
+                }
+              }
+            />
+          </div>,
+          "contentId": "guidance.registry.type.label",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h2
+                id="field_name"
+              >
+                Name
+              </h2>,
+              <Validated
+                component={[Function]}
+                name="name"
+                normalize={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />,
+            ],
+            "className": "editor__section",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Name",
+                "id": "field_name",
+              },
+              "ref": null,
+              "rendered": "Name",
+              "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": [Function],
+                "name": "name",
+                "normalize": [Function],
                 "validation": Object {
                   "required": true,
                 },
@@ -1533,6 +1876,30 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
+                onChange={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+            </div>
+          </Connect(Guided)>,
+          <Connect(Guided)
+            contentId="guidance.registry.type.label"
+          >
+            <div
+              className="editor__section"
+            >
+              <h2
+                id="field_name"
+              >
+                Name
+              </h2>
+              <Validated
+                component={[Function]}
+                name="name"
+                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -1700,6 +2067,7 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
+                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -1724,6 +2092,7 @@ ShallowWrapper {
                 <Validated
                   component={[Function]}
                   name="label"
+                  onChange={[Function]}
                   validation={
                     Object {
                       "required": true,
@@ -1754,6 +2123,93 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "name": "label",
+                  "onChange": [Function],
+                  "validation": Object {
+                    "required": true,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <div
+              className="editor__section"
+            >
+              <h2
+                id="field_name"
+              >
+                Name
+              </h2>
+              <Validated
+                component={[Function]}
+                name="name"
+                normalize={[Function]}
+                validation={
+                  Object {
+                    "required": true,
+                  }
+                }
+              />
+            </div>,
+            "contentId": "guidance.registry.type.label",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h2
+                  id="field_name"
+                >
+                  Name
+                </h2>,
+                <Validated
+                  component={[Function]}
+                  name="name"
+                  normalize={[Function]}
+                  validation={
+                    Object {
+                      "required": true,
+                    }
+                  }
+                />,
+              ],
+              "className": "editor__section",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Name",
+                  "id": "field_name",
+                },
+                "ref": null,
+                "rendered": "Name",
+                "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "component": [Function],
+                  "name": "name",
+                  "normalize": [Function],
                   "validation": Object {
                     "required": true,
                   },

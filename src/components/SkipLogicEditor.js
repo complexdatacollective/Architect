@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { toPairs } from 'lodash';
 import { Guided } from './Guided';
-import FilterGroup from './FilterGroup';
-import { NetworkRule, DropDown } from './Rule';
+import Filter from './Filter';
+import { NetworkRule, DropDown } from './Filter/Rule';
 
 class SkipLogicEditor extends PureComponent {
   static propTypes = {
@@ -47,7 +47,7 @@ class SkipLogicEditor extends PureComponent {
           </div>
         </div>
         <div className="edit-skip-logic__section">
-          <FilterGroup
+          <Filter
             filter={filter}
             onChange={newFilter => onChange({ filter: newFilter })}
           />

@@ -2,7 +2,7 @@ import React from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import { TransitionGroup } from 'react-transition-group';
 import Rule from './Rule';
-import AppearTransition from './Transitions/Appear';
+import AppearTransition from '../Transitions/Appear';
 
 const Rules = SortableContainer(
   ({ rules, onUpdateRule, onDeleteRule }) => (

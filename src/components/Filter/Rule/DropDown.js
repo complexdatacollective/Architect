@@ -1,18 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-for */
 
 import React from 'react';
-import { isArray, find, isEmpty } from 'lodash';
+import { isArray, find } from 'lodash';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const withLabels = options =>
   options.map(option => (isArray(option) ? option : [option, option]));
 
-const getSpacer = (optionsWithLabels, placeholder, value) => (
-  isEmpty(value) ?
-    placeholder : // return placeholder text
-    find(optionsWithLabels, [0, value])[1] // return matching label
-);
+// Returns string used to give div correct width (hidden)
+const getSpacer = (optionsWithLabels, placeholder, value) => {
+  const option = find(optionsWithLabels, [0, value]);
+  return option ? option[1] : placeholder;
+};
 
 const DropDown = ({
   options,
@@ -24,6 +24,7 @@ const DropDown = ({
   if (options.length === 0) { return null; }
 
   const optionsWithLabels = withLabels(options);
+
   const spacer = getSpacer(optionsWithLabels, placeholder, value);
 
   return (

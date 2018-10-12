@@ -4,8 +4,9 @@
   "networkCanvasVersion": "~4.0.0",
   "variableRegistry": {
     "node": {
-      "person": {
+      "d39a47507bbe27c2a7948861847f3607eda8e1be": {
         "label": "Person",
+        "name": "person",
         "color": "node-color-seq-1",
         "displayVariable": "nickname",
         "iconVariant": "add-a-person",
@@ -108,7 +109,8 @@
           }
         }
       },
-      "venue": {
+      "32185118d94a1840ef8a0bff5914fd5a82e8b96c": {
+        "name": "venue",
         "label": "Venue",
         "color": "node-color-seq-2",
         "iconVariant": "add-a-place",
@@ -146,7 +148,8 @@
       }
     },
     "edge": {
-      "friend": {
+      "e69867ca7d5a7b0ab60a2a61e7b791c106f7bf64": {
+        "name": "friend",
         "label": "Friend",
         "color": "edge-color-seq-1",
         "variables": {
@@ -165,7 +168,8 @@
           }
         }
       },
-      "professional": {
+      "18342d1b3da732537b73fc2e7f7da69f5304e17a": {
+        "name": "professional",
         "label": "Professional",
         "color": "edge-color-seq-2",
         "variables": {
@@ -218,7 +222,7 @@
     "person": {
       "title": "Add A Person",
       "entity": "node",
-      "type": "person",
+      "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
       "optionToAddAnother": true,
       "fields": [
         {
@@ -238,7 +242,7 @@
     "myCustomForm": {
       "title": "My custom form",
       "entity": "node",
-      "type": "person",
+      "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
       "optionToAddAnother": false,
       "fields": [
         {
@@ -267,7 +271,7 @@
       "form": "myCustomForm",
       "subject": {
         "entity": "node",
-        "type": "person"
+        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
       },
       "skipLogic": {
         "action": "SHOW",
@@ -280,7 +284,7 @@
               "type": "alter",
               "id": "15218241538622",
               "options": {
-                "type": "person",
+                "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
                 "attribute": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
                 "operator": "EXACTLY",
                 "value": "Dee"
@@ -309,7 +313,7 @@
                 "type": "alter",
                 "id": "15233783455451",
                 "options": {
-                  "type": "person",
+                  "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
                   "attribute": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
                   "operator": "EXACTLY",
                   "value": "Fred"
@@ -319,7 +323,7 @@
                 "type": "alter",
                 "id": "15233783569462",
                 "options": {
-                  "type": "venue",
+                  "type": "32185118d94a1840ef8a0bff5914fd5a82e8b96c",
                   "attribute": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
                   "operator": "NOT",
                   "value": "Pavillion"
@@ -368,23 +372,21 @@
           "text": "Position the nodes amongst the concentric circles. Place people you are closer to towards the middle",
           "subject": {
             "entity": "node",
-            "type": "person"
+            "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
           },
-          "filter": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'GREATER_THAN', value: 29 })]);",
           "layout": {
             "layoutVariable": "1d84d7782a65d41d727f7c71fcb38b6aea633a80",
             "allowPositioning": true
           },
           "edges": {
-            "display": ["friend", "professional"],
-            "create": "friend"
+            "display": ["e69867ca7d5a7b0ab60a2a61e7b791c106f7bf64", "18342d1b3da732537b73fc2e7f7da69f5304e17a"],
+            "create": "e69867ca7d5a7b0ab60a2a61e7b791c106f7bf64"
           },
           "highlight": {
             "variable": "9ec1f5e83cd1df32d106bbad53e6a9d86003d86d",
             "value": true,
             "allowHighlighting": true
           },
-          "disable": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'LESS_THAN', value: 29 })]);",
           "nodeBinSortOrder": {
             "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "DESC"
           },
@@ -399,23 +401,21 @@
           "text": "Place people you are closer to towards the middle",
           "subject": {
             "entity": "node",
-            "type": "person"
+            "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
           },
-          "filter": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'GREATER_THAN', value: 29 })]);",
           "layout": {
             "layoutVariable": "1d84d7782a65d41d727f7c71fcb38b6aea633a80",
             "allowPositioning": true
           },
           "edges": {
-            "display": ["friends", "professional"],
-            "create": "friends"
+            "display": ["3d9209c4598bfbc38b3c096081bee3a09697e939", "18342d1b3da732537b73fc2e7f7da69f5304e17a"],
+            "create": "3d9209c4598bfbc38b3c096081bee3a09697e939"
           },
           "highlight": {
             "variable": "9ec1f5e83cd1df32d106bbad53e6a9d86003d86d",
             "value": true,
             "allowHighlighting": true
           },
-          "disable": "return operator.or([\nselect.edge({ type: 'friend' }),\nselect.alter({ type: 'person', attribute: 'age', operator: 'LESS_THAN', value: 29 })]);",
           "nodeBinSortOrder": {
             "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "DESC"
           },
