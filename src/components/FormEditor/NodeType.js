@@ -7,12 +7,13 @@ const NodeType = ({
   color,
   input: { value, checked, onChange },
 }) => (
-  <Node
-    onClick={() => onChange(value)}
-    label={label}
-    selected={checked}
-    color={color}
-  />
+  <div className="node-type" onClick={() => onChange(value)}>
+    <Node
+      label={label}
+      selected={checked}
+      color={color}
+    />
+  </div>
 );
 
 NodeType.propTypes = {
