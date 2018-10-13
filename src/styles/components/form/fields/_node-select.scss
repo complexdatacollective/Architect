@@ -1,11 +1,14 @@
 .form-fields-node-select {
-  display: block;
   background: none;
+  display: block;
   padding: 0;
 
-  .node {
+  .node-type {
     display: inline-block;
-    font-size: 7rem;
     margin-right: unit(2);
+
+    .node {
+      font-size: 7rem;
+    }
   }
 }
