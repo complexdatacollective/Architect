@@ -4,7 +4,9 @@ import { Field } from 'redux-form';
 import SeamlessText from '../../../Form/Fields/SeamlessText';
 import Select from '../../../Form/Fields/Select';
 import Filter from '../../../Form/Fields/Filter';
+import ValidatedField from '../../../Form/ValidatedField';
 import { Item } from '../../../Items';
+import { getFieldId } from '../../../../utils/issues';
 
 const NodePanel = ({ fieldId, dataSources, ...rest }) => (
   <Item {...rest}>
@@ -17,11 +19,16 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
       />
     </div>
     <div className="stage-editor-section-prompt__group">
-      <div className="stage-editor-section-prompt__group-title">Data source</div>
-      <Field
+      <div
+        className="stage-editor-section-prompt__group-title"
+        id={getFieldId(`${fieldId}.dataSource`)}
+        data-name="Panel data source"
+      >Data source</div>
+      <ValidatedField
         name={`${fieldId}.dataSource`}
         component={Select}
         placeholder="Panel title"
+        validation={{ required: true }}
       >
         <option value="" disabled>&mdash; Select data source &mdash;</option>
         <option value="existing">Current network</option>
@@ -31,7 +38,7 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
               <option key={dataSource} value={dataSource}>Protocol: {dataSource}</option>
             ))
         }
-      </Field>
+      </ValidatedField>
     </div>
     <div className="stage-editor-section-prompt__group">
       <div className="stage-editor-section-prompt__group-title">Filter</div>
