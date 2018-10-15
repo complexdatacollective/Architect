@@ -99,7 +99,7 @@ class Overview extends Component {
                 </div>
                 <div className="overview__manage-button">
                   <ProtocolLink to={'registry'}>
-                    <Button>Manage registry</Button>
+                    <Button size="small">Manage registry</Button>
                   </ProtocolLink>
                 </div>
               </div>
@@ -108,7 +108,7 @@ class Overview extends Component {
                 { this.renderForms }
                 <div className="overview__manage-button">
                   <ProtocolLink to={'forms'}>
-                    <Button>Manage forms</Button>
+                    <Button size="small">Manage forms</Button>
                   </ProtocolLink>
                 </div>
               </div>
