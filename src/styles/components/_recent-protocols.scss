@@ -1,6 +1,6 @@
 .recent-protocols {
-  width: 90vw;
   max-width: 1300px;
+  min-width: 1000px;
   margin: 0 auto;
   padding: unit(3);
   border-radius: unit(1);
@@ -12,6 +12,6 @@
     display: flex;
     flex: 0 0 33%;
     justify-content: center;
-    padding: unit(2) unit(2) 0;
+    padding: unit(2) unit(4) 0;
   }
 }
