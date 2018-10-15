@@ -58,6 +58,11 @@ function createWindow() {
       evt.preventDefault();
     });
 
+    // For now, any navigation off the SPA is unneeded
+    mainWindow.webContents.on('will-navigate', (evt) => {
+      evt.preventDefault();
+    });
+
     if (process.env.NODE_ENV === 'development') {
       mainWindow.openDevTools();
     }
