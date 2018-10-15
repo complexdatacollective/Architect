@@ -67,7 +67,7 @@ ShallowWrapper {
                     icon=""
                     iconPosition="right"
                     onClick={[Function]}
-                    size=""
+                    size="small"
                   >
                     Manage registry
                   </Button>
@@ -95,7 +95,7 @@ ShallowWrapper {
                     icon=""
                     iconPosition="right"
                     onClick={[Function]}
-                    size=""
+                    size="small"
                   >
                     Manage forms
                   </Button>
@@ -154,7 +154,7 @@ ShallowWrapper {
                     icon=""
                     iconPosition="right"
                     onClick={[Function]}
-                    size=""
+                    size="small"
                   >
                     Manage registry
                   </Button>
@@ -182,7 +182,7 @@ ShallowWrapper {
                     icon=""
                     iconPosition="right"
                     onClick={[Function]}
-                    size=""
+                    size="small"
                   >
                     Manage forms
                   </Button>
@@ -238,7 +238,7 @@ ShallowWrapper {
                       icon=""
                       iconPosition="right"
                       onClick={[Function]}
-                      size=""
+                      size="small"
                     >
                       Manage registry
                     </Button>
@@ -266,7 +266,7 @@ ShallowWrapper {
                       icon=""
                       iconPosition="right"
                       onClick={[Function]}
-                      size=""
+                      size="small"
                     >
                       Manage forms
                     </Button>
@@ -327,7 +327,7 @@ ShallowWrapper {
                         icon=""
                         iconPosition="right"
                         onClick={[Function]}
-                        size=""
+                        size="small"
                       >
                         Manage registry
                       </Button>
@@ -355,7 +355,7 @@ ShallowWrapper {
                         icon=""
                         iconPosition="right"
                         onClick={[Function]}
-                        size=""
+                        size="small"
                       >
                         Manage forms
                       </Button>
@@ -400,7 +400,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage registry
                         </Button>
@@ -499,7 +499,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage registry
                         </Button>
@@ -518,7 +518,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage registry
                         </Button>,
@@ -536,7 +536,7 @@ ShallowWrapper {
                           "icon": "",
                           "iconPosition": "right",
                           "onClick": [Function],
-                          "size": "",
+                          "size": "small",
                         },
                         "ref": null,
                         "rendered": "Manage registry",
@@ -573,7 +573,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage forms
                         </Button>
@@ -621,7 +621,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage forms
                         </Button>
@@ -640,7 +640,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage forms
                         </Button>,
@@ -658,7 +658,7 @@ ShallowWrapper {
                           "icon": "",
                           "iconPosition": "right",
                           "onClick": [Function],
-                          "size": "",
+                          "size": "small",
                         },
                         "ref": null,
                         "rendered": "Manage forms",
@@ -731,7 +731,7 @@ ShallowWrapper {
                       icon=""
                       iconPosition="right"
                       onClick={[Function]}
-                      size=""
+                      size="small"
                     >
                       Manage registry
                     </Button>
@@ -759,7 +759,7 @@ ShallowWrapper {
                       icon=""
                       iconPosition="right"
                       onClick={[Function]}
-                      size=""
+                      size="small"
                     >
                       Manage forms
                     </Button>
@@ -818,7 +818,7 @@ ShallowWrapper {
                       icon=""
                       iconPosition="right"
                       onClick={[Function]}
-                      size=""
+                      size="small"
                     >
                       Manage registry
                     </Button>
@@ -846,7 +846,7 @@ ShallowWrapper {
                       icon=""
                       iconPosition="right"
                       onClick={[Function]}
-                      size=""
+                      size="small"
                     >
                       Manage forms
                     </Button>
@@ -902,7 +902,7 @@ ShallowWrapper {
                         icon=""
                         iconPosition="right"
                         onClick={[Function]}
-                        size=""
+                        size="small"
                       >
                         Manage registry
                       </Button>
@@ -930,7 +930,7 @@ ShallowWrapper {
                         icon=""
                         iconPosition="right"
                         onClick={[Function]}
-                        size=""
+                        size="small"
                       >
                         Manage forms
                       </Button>
@@ -991,7 +991,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage registry
                         </Button>
@@ -1019,7 +1019,7 @@ ShallowWrapper {
                           icon=""
                           iconPosition="right"
                           onClick={[Function]}
-                          size=""
+                          size="small"
                         >
                           Manage forms
                         </Button>
@@ -1064,7 +1064,7 @@ ShallowWrapper {
                             icon=""
                             iconPosition="right"
                             onClick={[Function]}
-                            size=""
+                            size="small"
                           >
                             Manage registry
                           </Button>
@@ -1163,7 +1163,7 @@ ShallowWrapper {
                             icon=""
                             iconPosition="right"
                             onClick={[Function]}
-                            size=""
+                            size="small"
                           >
                             Manage registry
                           </Button>
@@ -1182,7 +1182,7 @@ ShallowWrapper {
                             icon=""
                             iconPosition="right"
                             onClick={[Function]}
-                            size=""
+                            size="small"
                           >
                             Manage registry
                           </Button>,
@@ -1200,7 +1200,7 @@ ShallowWrapper {
                             "icon": "",
                             "iconPosition": "right",
                             "onClick": [Function],
-                            "size": "",
+                            "size": "small",
                           },
                           "ref": null,
                           "rendered": "Manage registry",
@@ -1237,7 +1237,7 @@ ShallowWrapper {
                             icon=""
                             iconPosition="right"
                             onClick={[Function]}
-                            size=""
+                            size="small"
                           >
                             Manage forms
                           </Button>
@@ -1285,7 +1285,7 @@ ShallowWrapper {
                             icon=""
                             iconPosition="right"
                             onClick={[Function]}
-                            size=""
+                            size="small"
                           >
                             Manage forms
                           </Button>
@@ -1304,7 +1304,7 @@ ShallowWrapper {
                             icon=""
                             iconPosition="right"
                             onClick={[Function]}
-                            size=""
+                            size="small"
                           >
                             Manage forms
                           </Button>,
@@ -1322,7 +1322,7 @@ ShallowWrapper {
                             "icon": "",
                             "iconPosition": "right",
                             "onClick": [Function],
-                            "size": "",
+                            "size": "small",
                           },
                           "ref": null,
                           "rendered": "Manage forms",
