@@ -43,17 +43,18 @@ const mapDispatchToItemProps = dispatch => ({
 
 const Item = compose(
   connect(mapStateToItemProps, mapDispatchToItemProps),
-  withHandlers(({ fields, openDialog, index }) => ({
-    handleDelete: () => {
-      openDialog({
-        type: 'Confirm',
-        title: 'Remove item',
-        message: 'Are you sure you want to remove this item?',
-        onConfirm: () => { fields.remove(index); },
-        confirmLabel: 'Remove item',
-      });
-    },
-  })),
+  withHandlers({
+    handleDelete: ({ fields, openDialog, index }) =>
+      () => {
+        openDialog({
+          type: 'Confirm',
+          title: 'Remove item',
+          message: 'Are you sure you want to remove this item?',
+          onConfirm: () => { fields.remove(index); },
+          confirmLabel: 'Remove item',
+        });
+      },
+  }),
   SortableElement,
 )(
   ({
