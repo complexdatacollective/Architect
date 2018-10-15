@@ -36,14 +36,16 @@ class NameGeneratorPromptsSection extends PureComponent {
           <p>Name gen prompt specific</p>
           <div className="stage-editor-section-prompts">
             <div className="stage-editor-section-prompts__prompts">
-              <ValidatedFieldArray
-                name={fieldName}
-                component={Items}
-                itemComponent={NameGeneratorPrompt}
-                nodeType={nodeType}
-                form={form}
-                validation={{ notEmpty }}
-              />
+              { nodeType &&
+                <ValidatedFieldArray
+                  name={fieldName}
+                  component={Items}
+                  itemComponent={NameGeneratorPrompt}
+                  nodeType={nodeType}
+                  form={form}
+                  validation={{ notEmpty }}
+                />
+              }
             </div>
             <NewButton onClick={addNewPrompt} />
           </div>
@@ -60,7 +62,7 @@ NameGeneratorPromptsSection.propTypes = {
   }).isRequired,
   disabled: PropTypes.bool,
   addNewPrompt: PropTypes.func.isRequired,
-  nodeType: PropTypes.string.isRequired,
+  nodeType: PropTypes.string,
 };
 
 NameGeneratorPromptsSection.defaultProps = {
