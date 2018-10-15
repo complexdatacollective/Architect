@@ -64,10 +64,11 @@ class VariableRegistry extends Component {
 
   handleDelete = (entity, type) => {
     const deletedObjects = this.props.getDeleteImpact(entity, type);
+    const typeName = this.props.variableRegistry[entity][type].name;
 
     const confirmMessage = (
       <Fragment>
-        <p>Are you sure you want to delete {type} {entity}?</p>
+        <p>Are you sure you want to delete {typeName} {entity}?</p>
         { deletedObjects.length > 0 &&
           <Fragment>
             <p>Because a number of other objects depend on this type, they will also be removed:</p>
@@ -84,10 +85,10 @@ class VariableRegistry extends Component {
 
     this.props.openDialog({
       type: 'Warning',
-      title: `Delete ${type} ${entity}`,
+      title: `Delete ${typeName} ${entity}`,
       message: confirmMessage,
       onConfirm: () => { this.props.deleteType(entity, type, true); },
-      confirmLabel: `Delete ${type} ${entity}`,
+      confirmLabel: `Delete ${typeName} ${entity}`,
     });
   };
 
