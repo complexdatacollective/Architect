@@ -42,6 +42,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3003;
 const HOST = process.env.HOST || '0.0.0.0';
+const AUTO_OPEN_BROWSER = process.env.AUTO_OPEN_BROWSER === 'false' ? false : true;
 
 // We attempt to use the default port but if it is busy, we offer the user to
 // run on a different port. `detect()` Promise resolves to the next free port.
@@ -74,7 +75,7 @@ choosePort(HOST, DEFAULT_PORT)
         clearConsole();
       }
       console.log(chalk.cyan('Starting the development server...\n'));
-      if (process.env.BUILD_TARGET === 'web') {
+      if (process.env.BUILD_TARGET === 'web' && AUTO_OPEN_BROWSER) {
         openBrowser(urls.localUrlForBrowser);
       }
     });

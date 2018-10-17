@@ -53,6 +53,14 @@ Example: enabling Redux Devtools on macOS:
 NC_DEVTOOLS_EXENSION_PATH=~/Library/Application\ Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.15.2_0 npm run electron:dev
 ```
 
+#### Environment options
+
+```bash
+AUTO_OPEN_BROWSER=false  # Set to false to disable browser auto open on `npm run start`, Default: true
+WEBPACK_DEV_SERVER_PORT=3003  # Configure port for dev server. Default: 3003
+CSC_IDENTITY_AUTO_DISCOVERY=false  # Set to false to disable signing builds (speeds up build process)
+```
+
 ## Application Structure
 
 ```
