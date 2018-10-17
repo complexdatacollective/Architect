@@ -1,29 +1,54 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { omit, isEqual, get, keys, difference } from 'lodash';
+import { omit, isEqual, get, keys, difference, omitBy, toPairs } from 'lodash';
 import { withHandlers, compose } from 'recompose';
 import { connect } from 'react-redux';
-import { change, FormSection } from 'redux-form';
+import { change } from 'redux-form';
 import RoundButton from '../../../../Form/RoundButton';
 import Variable from './Variable';
+
+const validTypes = [
+  'ordinal',
+  'categorical',
+  'boolean',
+  'text',
+  'number',
+];
+
+const defaultsByType = {
+  boolean: false,
+  ordinal: [],
+  text: '',
+  number: '',
+};
+
+const getVariableDefault = (variableMeta) => {
+  if (variableMeta.default) { return variableMeta.default; }
+  return get(defaultsByType, variableMeta.type, '');
+};
 
 const withVaribleActions = withHandlers({
   createVariable: props => (variable) => {
     // don't add existing property
-    if (Object.prototype.hasOwnProperty.call(props.value, variable)) { return; }
-    props.change({ ...props.value, [variable]: undefined });
+    if (Object.prototype.hasOwnProperty.call(props.variables, variable)) { return; }
+    props.change({
+      ...props.variables,
+      [variable]: getVariableDefault(props.variablesForNodeType[variable]),
+    });
   },
   deleteVariable: props => variable =>
-    props.change(omit(props.value, variable)),
+    props.change(omit(props.variables, variable)),
+  updateVariable: props => variable =>
+    props.change({ ...props.variables, ...variable }),
 });
 
 class AttributesTable extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
     createVariable: PropTypes.func.isRequired,
+    updateVariable: PropTypes.func.isRequired,
     deleteVariable: PropTypes.func.isRequired,
-    variables: PropTypes.array.isRequired,
+    variables: PropTypes.object.isRequired,
     nodeType: PropTypes.string.isRequired,
     unusedVariables: PropTypes.array.isRequired,
   };
@@ -42,11 +67,13 @@ class AttributesTable extends Component {
   }
 
   get variables() {
-    const variables = this.props.variables;
+    const variables = toPairs(this.props.variables);
 
-    return this.state.new ?
-      variables.concat(undefined) :
-      variables;
+    if (!this.state.new) {
+      return variables;
+    }
+
+    return variables.concat([[]]);
   }
 
   handleEditVariable = (variable) => {
@@ -68,36 +95,45 @@ class AttributesTable extends Component {
     this.props.deleteVariable(variable);
   };
 
-  render() {
+  handleChange = (variable) => {
+    this.props.updateVariable(variable);
+  }
+
+  renderVariable({ value, variable, key }) {
     const {
-      name,
       nodeType,
       unusedVariables,
     } = this.props;
+    const isEditing = this.state.editing === variable;
 
-    const rows = this.variables.map((variable, index) => {
-      const isEditing = this.state.editing === variable;
+    return (
+      <div className="attributes-table__variable" key={key}>
+        <Variable
+          variable={variable}
+          value={value}
+          nodeType={nodeType}
+          unusedVariables={unusedVariables}
+          onChange={this.handleChange}
+          isEditing={isEditing}
+          onChooseVariable={this.handleChooseVariable}
+          onToggleEdit={() => this.handleEditVariable(variable)}
+          onDelete={() => this.handleDeleteVariable(variable)}
+        />
+      </div>
+    );
+  }
 
-      return (
-        <div className="attributes-table__variable" key={index}>
-          <Variable
-            variable={variable}
-            nodeType={nodeType}
-            unusedVariables={unusedVariables}
-            isEditing={isEditing}
-            onChooseVariable={this.handleChooseVariable}
-            onToggleEdit={() => this.handleEditVariable(variable)}
-            onDelete={() => this.handleDeleteVariable(variable)}
-          />
-        </div>
-      );
-    });
+  render() {
+    const rows = this.variables.map(
+      ([variable, value], index) =>
+        this.renderVariable({ variable, value, key: index }),
+    );
 
     return (
       <div className="attributes-table">
-        <FormSection name={name} className="attributes-table__variables">
+        <div className="attributes-table__variables">
           {rows}
-        </FormSection>
+        </div>
 
         <RoundButton
           onClick={this.handleCreateVariable}
@@ -114,14 +150,17 @@ const getVariablesForNodeType = (state, nodeType) => {
 };
 
 const mapStateToProps = (state, { name, form, nodeType }) => {
-  const value = form.getValues(state, name) || {};
-  const variables = keys(value);
-  const variablesRegistryForNodeType = keys(getVariablesForNodeType(state, nodeType));
-  const unusedVariables = difference(variablesRegistryForNodeType, variables);
+  const variables = form.getValues(state, name) || {};
+  const variablesForNodeType = omitBy(
+    getVariablesForNodeType(state, nodeType),
+    variableMeta => !validTypes.includes(variableMeta.type),
+  );
+
+  const unusedVariables = difference(keys(variablesForNodeType), keys(variables));
 
   return ({
-    value,
     variables,
+    variablesForNodeType,
     unusedVariables,
   });
 };

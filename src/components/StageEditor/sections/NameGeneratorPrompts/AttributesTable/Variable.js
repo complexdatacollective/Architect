@@ -20,6 +20,8 @@ class Variable extends Component {
     onToggleEdit: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onChooseVariable: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.any,
   };
 
   static defaultProps = {
@@ -29,7 +31,7 @@ class Variable extends Component {
     options: null,
     unusedVariables: [],
     isEditing: false,
-    value: null,
+    value: undefined,
     variable: null,
   };
 
@@ -41,6 +43,7 @@ class Variable extends Component {
     const {
       unusedVariables,
       variable,
+      value,
       label,
       type,
       options,
@@ -48,6 +51,7 @@ class Variable extends Component {
       isEditing,
       onToggleEdit,
       onDelete,
+      onChange,
       onChooseVariable,
     } = this.props;
 
@@ -83,9 +87,11 @@ class Variable extends Component {
           />
           <VariableEditor
             show={!this.isNew}
-            name={variable}
+            value={value}
+            variable={variable}
             type={type}
             label={label}
+            onChange={onChange}
             options={options}
           />
         </div>

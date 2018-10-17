@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Field } from 'redux-form';
 import * as fields from '../../../../../ui/components/Fields';
 
 const VARIABLE_INPUT_TYPES = {
@@ -13,30 +12,52 @@ const VARIABLE_INPUT_TYPES = {
   categorical: 'CheckboxGroup',
 };
 
-const getInput = (name, label, type, options) => {
-  if (!name || !type) { return null; }
+const getInput = (type) => {
+  if (!type) { return null; }
 
   const inputType = VARIABLE_INPUT_TYPES[type] || VARIABLE_INPUT_TYPES.text;
-  const inputComponent = fields[inputType];
+  const InputComponent = fields[inputType];
 
-  return (
-    <Field
-      name={name}
-      label={label}
-      component={inputComponent}
-      options={options}
-    />
-  );
+  return InputComponent;
 };
 
-const VariableEditor = ({ name, type, label, options, show }) => (
-  <div className={cx('attributes-table-editor', { 'attributes-table-editor--show': show })}>
-    {getInput(name, label, type, options)}
-  </div>
-);
+class VariableEditor extends Component {
+  handleChange = (eventOrValue) => {
+    const { onChange, variable } = this.props;
+
+    if (!eventOrValue.target) {
+      onChange({ [variable]: eventOrValue });
+      return;
+    }
+
+    const target = eventOrValue.target;
+    const newValue = target.type === 'checkbox' ? target.checked : target.value;
+    onChange({ [variable]: newValue });
+  }
+
+  render() {
+    const { type, variable, value, label, options, show } = this.props;
+
+    const InputComponent = getInput(type);
+
+    return (
+      <div className={cx('attributes-table-editor', { 'attributes-table-editor--show': show })}>
+        { InputComponent &&
+          <InputComponent
+            label={label}
+            input={{ value, onChange: this.handleChange, name: variable }}
+            options={options}
+          />
+        }
+      </div>
+    );
+  }
+}
 
 VariableEditor.propTypes = {
-  name: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func.isRequired,
+  variable: PropTypes.string,
   show: PropTypes.bool,
   type: PropTypes.string,
   label: PropTypes.string,
@@ -44,8 +65,9 @@ VariableEditor.propTypes = {
 };
 
 VariableEditor.defaultProps = {
+  variable: null,
   show: false,
-  name: null,
+  value: undefined,
   type: null,
   label: '',
   options: [],
