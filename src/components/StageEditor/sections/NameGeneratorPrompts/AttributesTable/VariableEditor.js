@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import * as fields from '../../../../../ui/components/Fields';
+import Field from '../../../../Form/DetachedField';
 
 const VARIABLE_INPUT_TYPES = {
   text: 'Text',
@@ -22,33 +23,32 @@ const getInput = (type) => {
 };
 
 class VariableEditor extends Component {
-  handleChange = (eventOrValue) => {
-    const { onChange, variable } = this.props;
-
-    if (!eventOrValue.target) {
-      onChange({ [variable]: eventOrValue });
-      return;
-    }
-
-    const target = eventOrValue.target;
-    const newValue = target.type === 'checkbox' ? target.checked : target.value;
-    onChange({ [variable]: newValue });
-  }
-
-  render() {
-    const { type, variable, value, label, options, show } = this.props;
+  renderInput() {
+    const { type, validation, variable, value, label, options, onChange } = this.props;
 
     const InputComponent = getInput(type);
 
+    if (!InputComponent) { return null; }
+
+    return (
+      <Field
+        component={InputComponent}
+        name={variable}
+        onChange={onChange}
+        validation={validation}
+        value={value}
+        label={label}
+        options={options}
+      />
+    );
+  }
+
+  render() {
+    const { show } = this.props;
+
     return (
       <div className={cx('attributes-table-editor', { 'attributes-table-editor--show': show })}>
-        { InputComponent &&
-          <InputComponent
-            label={label}
-            input={{ value, onChange: this.handleChange, name: variable }}
-            options={options}
-          />
-        }
+        {this.renderInput()}
       </div>
     );
   }

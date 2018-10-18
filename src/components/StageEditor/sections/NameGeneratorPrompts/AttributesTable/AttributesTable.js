@@ -102,6 +102,7 @@ class AttributesTable extends Component {
   renderVariable({ value, variable, key }) {
     const {
       nodeType,
+      variablesForNodeType,
       unusedVariables,
     } = this.props;
     const isEditing = this.state.editing === variable;
@@ -110,6 +111,7 @@ class AttributesTable extends Component {
       <div className="attributes-table__variable" key={key}>
         <Variable
           variable={variable}
+          validation={get(variablesForNodeType, [variable, 'validation'])}
           value={value}
           nodeType={nodeType}
           unusedVariables={unusedVariables}

@@ -39,10 +39,16 @@ class Variable extends Component {
     return !this.props.variable;
   }
 
+  handleChange = (value) => {
+    const { onChange, variable } = this.props;
+    onChange({ [variable]: value });
+  }
+
   render() {
     const {
       unusedVariables,
       variable,
+      validation,
       value,
       label,
       type,
@@ -51,7 +57,6 @@ class Variable extends Component {
       isEditing,
       onToggleEdit,
       onDelete,
-      onChange,
       onChooseVariable,
     } = this.props;
 
@@ -89,9 +94,10 @@ class Variable extends Component {
             show={!this.isNew}
             value={value}
             variable={variable}
+            validation={validation}
             type={type}
             label={label}
-            onChange={onChange}
+            onChange={this.handleChange}
             options={options}
           />
         </div>
