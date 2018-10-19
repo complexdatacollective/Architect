@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { compact, isEqual } from 'lodash';
+import { isEqual } from 'lodash';
 import withValidation from './withValidation';
 
 const getValue = (eventOrValue) => {

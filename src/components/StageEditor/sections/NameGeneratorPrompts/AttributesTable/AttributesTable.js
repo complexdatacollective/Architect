@@ -51,6 +51,7 @@ class AttributesTable extends Component {
     variables: PropTypes.object.isRequired,
     nodeType: PropTypes.string.isRequired,
     unusedVariables: PropTypes.array.isRequired,
+    variablesForNodeType: PropTypes.object.isRequired,
   };
 
   constructor(props) {
