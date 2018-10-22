@@ -1,0 +1,174 @@
+{
+  "router": {
+    "location": {
+      "pathname": null,
+      "search": "",
+      "hash": ""
+    }
+  },
+  "session": "preview",
+  "sessions": {
+    "preview": {
+      "path": "/",
+      "promptIndex": 0,
+      "network": {
+        "ego": {},
+        "nodes": [],
+        "edges": []
+      },
+      "updatedAt": 0,
+      "protocolPath": null
+    }
+  },
+  "externalData": {},
+  "protocol": {
+    "isLoaded": true,
+    "isLoading": false,
+    "error": null,
+    "name": "FakeState",
+    "version": "1.0.0",
+    "required": "",
+    "stages": [
+      {
+        "label": "It's a nameg",
+        "type": "NameGenerator",
+        "subject": {
+          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+          "entity": "node"
+        },
+        "form": "person",
+        "prompts": [
+          {
+            "id": "27dec626-9256-41af-aa70-192db5093cf4",
+            "text": "Think of a person"
+          },
+          {
+            "id": "9033d55d-7a5a-4417-939e-047ad99945f3",
+            "text": "Any Person"
+          }
+        ],
+        "id": "9b286fb0-d601-11e8-92f4-4106d174df18"
+      }
+    ],
+    "type": "download",
+    "workerUrlMap": {},
+    "variableRegistry": {
+      "node": {
+        "d39a47507bbe27c2a7948861847f3607eda8e1be": {
+          "name": "person",
+          "label": "Person",
+          "color": "node-color-seq-1",
+          "displayVariable": "nickname",
+          "iconVariant": "add-a-person",
+          "variables": {
+            "1d84d7782a65d41d727f7c71fcb38b6aea633a80": {
+              "name": "closenessLayout",
+              "label": "Closeness layout",
+              "description": "Earthling readable description",
+              "type": "layout"
+            },
+            "dea16657f68e9caa74a1e785bc8e0ed11382332b": {
+              "name": "geoLayout",
+              "label": "Geographical closeness layout",
+              "description": "Earthling readable description",
+              "type": "layout"
+            },
+            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
+              "name": "name",
+              "label": "Name",
+              "description": "Human readable description",
+              "type": "text",
+              "validation": {
+                "required": true,
+                "minLength": 1,
+                "maxLength": 24
+              }
+            },
+            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": {
+              "name": "age",
+              "label": "Age",
+              "description": "Human readable description",
+              "type": "number",
+              "validation": {
+                "required": true,
+                "minValue": 16,
+                "maxValue": 100
+              }
+            },
+            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
+              "name": "nickname",
+              "label": "Nickname",
+              "description": "Human readable description",
+              "type": "text",
+              "validation": {
+                "required": true,
+                "minLength": 1,
+                "maxLength": 8
+              }
+            },
+            "5d69e2e1f8a9ea63d425602943831500c3d5c01d": {
+              "name": "closefriend",
+              "label": "Close Friend",
+              "description": "Human readable description",
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "edge": {
+        "b03a9feef3ef45901e37ec704a455ea952e1768b": {
+          "color": "edge-color-seq-1",
+          "label": "Knows",
+          "name": "knows"
+        },
+        "aecba335e84ca9e3a2b7990230dcf248e6826e42": {
+          "color": "edge-color-seq-2",
+          "label": "Likes",
+          "name": "likes"
+        },
+        "ce067d6be617487a5f5120834a05dbac9564fc5f": {
+          "color": "edge-color-seq-3",
+          "label": "Dislikes",
+          "name": "dislikes"
+        }
+      }
+    },
+    "forms": {
+      "person": {
+        "title": "Add A Person",
+        "entity": "node",
+        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+        "optionToAddAnother": true,
+        "fields": [
+          {
+            "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
+            "component": "TextInput"
+          },
+          {
+            "variable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
+            "component": "TextInput"
+          },
+          {
+            "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2",
+            "component": "TextInput"
+          }
+        ]
+      }
+    },
+    "path": "ade25934-a5ed-4e44-af50-86378ead948b"
+  },
+  "protocols": [
+  ],
+  "modals": [],
+  "dialogs": {
+    "dialogs": []
+  },
+  "errors": {
+    "errors": [],
+    "acknowledged": true
+  },
+  "search": {
+    "collapsed": false,
+    "selectedResults": []
+  }
+}

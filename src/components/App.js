@@ -26,6 +26,7 @@ const App = ({ children }) => {
           { children }
         </AppErrorBoundary>
       </div>
+      <div id="page-wrap" />
 
       <DialogManager />
       <Version />

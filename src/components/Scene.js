@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron';
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
@@ -33,7 +34,12 @@ const Scene = ({
     <div className={sceneClasses}>
       <div className="scene__background scene__background--top" />
       <div className="scene__background scene__background--bottom" />
-      <img className="scene__brand" src={networkCanvasBrand} alt="" />
+      <img
+        className="scene__brand"
+        src={networkCanvasBrand}
+        alt=""
+        onClick={() => { ipcRenderer.send('OPEN_PREVIEW', 'wienfhpoiewnf'); }}
+      />
 
       <NavLink className="scene__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />

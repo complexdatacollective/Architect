@@ -1,6 +1,7 @@
-const { app } = require('electron');
+const { app, ipcMain } = require('electron');
 const log = require('./components/log');
 
+const preview = require('./preview');
 const appManager = require('./components/appManager');
 
 log.info('App starting...');
@@ -20,7 +21,11 @@ if (shouldQuit) {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   appManager.start();
-  appManager.loadDevTools();
+  // appManager.loadDevTools();
+});
+
+ipcMain.on('OPEN_PREVIEW', (protocolId) => {
+  preview(protocolId);
 });
 
 // Quit when all windows are closed.

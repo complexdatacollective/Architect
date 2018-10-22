@@ -331,10 +331,6 @@
               }
             ]
           }
-        },
-        {
-          "title": "People from your previous visit",
-          "dataSource": "previousInterview"
         }
       ],
       "prompts": [
