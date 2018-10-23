@@ -69,8 +69,14 @@ class Routes extends Component {
       <Switch>
         <Route
           path="/preview/:protocol"
-          component={Preview}
-        />
+        >
+          { props => (
+            <React.Fragment>
+              <ProtocolLoader {...props} />
+              <Preview {...props} />
+            </React.Fragment>
+          ) }
+        </Route>
         <Route>
           <React.Fragment>
             <Route
