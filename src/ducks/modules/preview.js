@@ -14,9 +14,7 @@ const loadPreview = protocol => ({
 });
 
 const previewReducer = (state = initialState, action) => {
-  console.log('PREVIEW REDUCER', action.type);
   if (action.type === LOAD_PREVIEW) {
-    console.log('PREVIEW REDUCER');
     return {
       ...state,
       protocol: {

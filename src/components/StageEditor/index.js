@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron';
 import { connect } from 'react-redux';
 import {
   reduxForm,
@@ -10,9 +11,14 @@ const formName = 'edit-stage';
 
 const mapStateToProps = (state, props) => {
   const issues = getFormSyncErrors(formName)(state);
+
+  const stageIndex = state.protocol.present.stages.findIndex(({ id }) => id === props.stage.id);
+
   return {
     initialValues: props.stage,
     issues,
+    activeProtocol: state.session.activeProtocol,
+    stageIndex,
   };
 };
 
@@ -21,7 +27,7 @@ export default compose(
   withState('codeView', 'updateCodeView', false),
   withHandlers({
     toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-    handleShowPreview: () => {},
+    handleShowPreview: ({ activeProtocol, stageIndex }) => { ipcRenderer.send('OPEN_PREVIEW', activeProtocol, stageIndex); },
   }),
   reduxForm({
     form: formName,

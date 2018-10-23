@@ -2,30 +2,21 @@ import { ipcRenderer } from 'electron';
 import { Provider } from 'react-redux';
 import React from 'react';
 import previewStore from '../../ducks/previewStore';
-import window from '../../ui/components/window';
 import history from '../../history';
-import Stage from './Stage';
+import Preview from './Preview';
 
-const Preview = ({ stageIndex, protocolId }) => (
+const PreviewContainer = ({ stageIndex }) => (
   <Provider store={previewStore}>
-    <div className="network-canvas">
-      <div className="protocol">
-        <div className="protocol__content">
-          <Stage stageIndex={stageIndex} />
-        </div>
-      </div>
-    </div>
+    <Preview stageIndex={stageIndex} />
   </Provider>
 );
 
-Preview.defaultProps = {
-  stageIndex: 0,
-};
+export default PreviewContainer;
 
 // TODO: Move this elsewhere?
-ipcRenderer.on('OPEN_PREVIEW', (protocolId) => {
-  console.log(`Open preview: /preview/${protocolId}`);
-  history.push(`/preview/${protocolId}`);
-});
+ipcRenderer.on('OPEN_PREVIEW', (event, protocolId, stageIndex) => {
+  // console.log(`Open preview: /preview/${protocolId}/${stageIndex}`);
+  console.log('Open preview', protocolId, stageIndex);
 
-export default window(Preview);
+  history.push(`/preview/${protocolId}/${stageIndex}`);
+});
