@@ -6,13 +6,14 @@ import { Router, Route } from 'react-router-dom';
 import { ipcRenderer, remote } from 'electron';
 import { find } from 'lodash';
 import { PersistGate } from 'redux-persist/integration/react';
-import './styles/main.scss';
 import appHistory from './history';
 import { store, persistor } from './ducks/store';
 import App from './components/App';
 import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
 import { actionCreators as protocolsActions } from './ducks/modules/protocols';
+
+import './styles/main.scss';
 
 // This prevents user from being able to drop a file anywhere on the app
 document.addEventListener('drop', (e) => {

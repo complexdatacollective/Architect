@@ -183,6 +183,7 @@ const loaderRules = Object.freeze([
       // extensions .module.scss or .module.sass
       {
         test: sassRegex,
+        include: paths.appStyles,
         use: getStyleLoaders('sass-loader'),
       },
       {

@@ -6,8 +6,6 @@ import window from '../../ui/components/window';
 import history from '../../history';
 import Stage from './Stage';
 
-import '../../network-canvas/src/styles/main.scss';
-
 const Preview = ({ stageIndex, protocolId }) => (
   <Provider store={previewStore}>
     <div className="network-canvas">
