@@ -2,14 +2,14 @@ const electron = require('electron');
 const fs = require('fs');
 const log = require('./log');
 
-const registerProtocolProtocol = () =>
-  electron.protocol.registerFileProtocol('protocol', (request, callback) => {
-    const filePath = request.url.substr(10);
+const registerAssetProtocol = () =>
+  electron.protocol.registerFileProtocol('asset', (request, callback) => {
+    const filePath = request.url.substr(7);
 
     // eslint-disable-next-line
     fs.access(filePath, fs.constants.R_OK, (error) => {
       if (error) { console.log(error); }
-      log.info('open protocol://', filePath);
+      log.info('open asset://', filePath);
       callback({ path: filePath });
     });
   }, (error) => {
@@ -18,4 +18,4 @@ const registerProtocolProtocol = () =>
     }
   });
 
-exports.registerProtocolProtocol = registerProtocolProtocol;
+exports.registerAssetProtocol = registerAssetProtocol;

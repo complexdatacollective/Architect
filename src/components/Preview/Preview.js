@@ -21,8 +21,8 @@ Preview.defaultProps = {
   promptIndex: 0,
 };
 
-const mapStateToProps = (state, props) => {
-  const stage = get(state, ['protocol', 'stages', 0]); // TODO: get Stage index from state
+const mapStateToProps = (state, { stageIndex }) => {
+  const stage = get(state, ['protocol', 'stages', stageIndex]);
   const promptIndex = state.sessions[state.session].promptIndex;
 
   if (!stage) { return {}; }

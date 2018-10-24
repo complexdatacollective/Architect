@@ -38,12 +38,12 @@ const appUrl = (function getAppUrl() {
   });
 }());
 
-function createPreview({ protocol, stageIndex = 0 }) {
+function createPreview({ protocol, path, stageIndex = 0 }) {
   // Create the browser window.
   mainWindow = new BrowserWindow(windowParameters);
 
   mainWindow.webContents.once('dom-ready', () => {
-    mainWindow.webContents.send('OPEN_PREVIEW', { protocol, stageIndex });
+    mainWindow.webContents.send('OPEN_PREVIEW', { protocol, path, stageIndex });
   });
 
   mainWindow.loadURL(appUrl);

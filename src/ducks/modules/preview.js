@@ -1,6 +1,7 @@
 import { ipcRenderer } from 'electron';
 import { omit } from 'lodash';
 import { getFormValues } from 'redux-form';
+import { getActiveProtocolMeta } from '../../selectors/protocol';
 import previewStoreData from '../../components/Preview/previewStore.json';
 import rootReducer from '../../network-canvas/src/ducks/modules/rootReducer';
 
@@ -12,9 +13,10 @@ const SET_PROTOCOL = 'ARCHITECT/SET_PROTOCOL';
 const PREVIEW_DRAFT = 'ARCHITECT/PREVIEW_DRAFT';
 const PREVIEW_STAGE_BY_FORMNAME = 'ARCHITECT/PREVIEW_STAGE_BY_FORMNAME';
 
-const setProtocol = (protocol, stageIndex = 0) => ({
+const setProtocol = ({ protocol, path, stageIndex = 0 }) => ({
   type: SET_PROTOCOL,
   protocol,
+  path,
   stageIndex,
 });
 
@@ -30,6 +32,9 @@ const previewDraft = (draft, stageIndex) =>
 
     const state = getState();
 
+    const activeProtocolMeta = getActiveProtocolMeta(state);
+    const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
+
     const protocol = state.protocol.present;
 
     const draftProtocol = {
@@ -37,7 +42,7 @@ const previewDraft = (draft, stageIndex) =>
       ...draft,
     };
 
-    ipcRenderer.send('OPEN_PREVIEW', { protocol: draftProtocol, stageIndex });
+    ipcRenderer.send('OPEN_PREVIEW', { protocol: draftProtocol, path: workingPath, stageIndex });
   };
 
 
@@ -75,6 +80,7 @@ const previewReducer = (state = initialState, action) => {
       protocol: {
         ...state.protocol,
         ...omit(action.protocol, 'externalData'),
+        path: action.path.slice(1),
         protocolPath: null, // TODO: Do we need this for assets?
       },
     };

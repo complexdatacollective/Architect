@@ -1,14 +1,22 @@
 
 .preview {
-  @import '../../network-canvas/src/styles/main.scss';
+  --color-shadow: rgba(0, 0, 0, .15);
+  --color-modal-shadow: rgba(20, 0, 0, .2);
+  --background: var(--color-navy-taupe);
+  --text: var(--color-white);
+  --input-background: var(--color-platinum--dark);
+  --input-label: var(--color-charcoal);
+  --text-light: var(--color-white);
+  --text-dark: var(--color-charcoal);
+  --background-dark: var(--color-navy-taupe);
+
+  @import '../../network-canvas/src/styles/main';
 
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-
-  .protocol__content {
-    background-color: red;
-  }
+  color: var(--text);
+  background: var(--background);
 }
