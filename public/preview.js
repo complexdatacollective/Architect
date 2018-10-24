@@ -38,12 +38,12 @@ const appUrl = (function getAppUrl() {
   });
 }());
 
-function createPreview(protocolId, stageIndex = 0) {
+function createPreview({ protocol, stageIndex = 0 }) {
   // Create the browser window.
   mainWindow = new BrowserWindow(windowParameters);
 
   mainWindow.webContents.once('dom-ready', () => {
-    mainWindow.webContents.send('OPEN_PREVIEW', protocolId, stageIndex);
+    mainWindow.webContents.send('OPEN_PREVIEW', { protocol, stageIndex });
   });
 
   mainWindow.loadURL(appUrl);
@@ -61,6 +61,10 @@ function createPreview(protocolId, stageIndex = 0) {
     evt.preventDefault();
     shell.openExternal(newUrl);
   });
+
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.openDevTools();
+  }
 }
 
 // Quit when all windows are closed.

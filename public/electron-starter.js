@@ -24,9 +24,9 @@ app.on('ready', () => {
   // appManager.loadDevTools();
 });
 
-ipcMain.on('OPEN_PREVIEW', (event, protocolId, stageIndex) => {
-  console.log('OPEN PREVIEW:', protocolId, stageIndex);
-  preview(protocolId, stageIndex);
+ipcMain.on('OPEN_PREVIEW', (event, { protocol, stageIndex }) => {
+  console.log('OPEN PREVIEW:', protocol.name, stageIndex);
+  preview({ protocol, stageIndex });
 });
 
 // Quit when all windows are closed.

@@ -34,16 +34,11 @@ const Scene = ({
     <div className={sceneClasses}>
       <div className="scene__background scene__background--top" />
       <div className="scene__background scene__background--bottom" />
-      <img
-        className="scene__brand"
-        src={networkCanvasBrand}
-        alt=""
-        onClick={() => { ipcRenderer.send('OPEN_PREVIEW', 'wienfhpoiewnf'); }}
-      />
+      <img className="scene__brand" src={networkCanvasBrand} alt="" />
 
       <NavLink className="scene__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />
-      </NavLink>`
+      </NavLink>
 
       <Flipper flipKey={flipKey}>
 

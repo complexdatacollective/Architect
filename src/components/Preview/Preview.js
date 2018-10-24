@@ -22,11 +22,7 @@ Preview.defaultProps = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log({
-    stages: state.protocol.stages,
-    stageIndex: props.stageIndex,
-  });
-  const stage = get(state, ['protocol', 'stages', props.stageIndex]);
+  const stage = get(state, ['protocol', 'stages', 0]); // TODO: get Stage index from state
   const promptIndex = state.sessions[state.session].promptIndex;
 
   if (!stage) { return {}; }

@@ -8,9 +8,10 @@ const initialState = {
 
 const LOAD_PREVIEW = 'ARCHITECT/LOAD_PREVIEW';
 
-const loadPreview = protocol => ({
+const loadPreview = (protocol, stageIndex = 0) => ({
   type: LOAD_PREVIEW,
   protocol,
+  stageIndex,
 });
 
 const previewReducer = (state = initialState, action) => {
@@ -24,6 +25,7 @@ const previewReducer = (state = initialState, action) => {
       },
     };
   }
+
   return rootReducer(state, action);
 };
 

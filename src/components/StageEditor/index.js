@@ -27,7 +27,7 @@ export default compose(
   withState('codeView', 'updateCodeView', false),
   withHandlers({
     toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-    handleShowPreview: ({ activeProtocol, stageIndex }) => { ipcRenderer.send('OPEN_PREVIEW', activeProtocol, stageIndex); },
+    handleShowPreview: ({ activeProtocol, stageIndex }) => { ipcRenderer.send('OPEN_PREVIEW', { protocol: { activeProtocol, name: 'foo' }, stageIndex }); },
   }),
   reduxForm({
     form: formName,
