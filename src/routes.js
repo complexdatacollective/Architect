@@ -68,7 +68,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route
-          path="/preview/:protocol/:stageIndex"
+          path="/preview"
           component={Preview}
         />
         <Route>
