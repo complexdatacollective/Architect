@@ -38,6 +38,7 @@ $component-name: form-fields-multi-select;
       display: flex;
       align-items: center;
       margin-left: unit(1);
+      flex-grow: 1;
 
       &:first-child {
         margin-left: 0;

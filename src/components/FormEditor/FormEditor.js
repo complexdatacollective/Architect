@@ -16,26 +16,29 @@ import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 const allowedTypes = ['text', 'number', 'boolean', 'ordinal', 'categorical'];
 
 const getInputsForType = (type) => {
+  console.log('getinput for type', type);
   switch (type) {
     case 'number':
-      return ['NumberInput'];
+      return [{ value: 'TextInput', label: 'text' }];
+    case 'text':
+      return [{ value: 'TextInput', label: 'text' }];
     case 'boolean':
-      return ['Checkbox', 'Toggle', 'ToggleButton'];
+      return [{ value: 'Checkbox', label: 'checkbox' }, { value: 'Toggle', label: 'toggle' }, { value: 'ToggleButton', label: 'Toggle button' }];
     case 'ordinal':
-      return ['RadioGroup'];
+      return [{ value: 'RadioGroup', label: 'radio group' }];
     case 'categorical':
-      return ['CheckboxGroup', 'ToggleButtonGroup'];
+      return [{ value: 'CheckboxGroup', label: 'checkboxgroup' }, { value: 'ToggleButtonGroup', label: 'togglebutton group' }];
     default:
-      return ['TextInput'];
+      return [{ value: 'unknown', label: 'unknown' }];
   }
 };
 
 const optionGetter = (variables) => {
+  console.log('optiongetter');
   const allowedVariables = fromPairs(
     toPairs(variables)
       .filter(([, options]) => allowedTypes.includes(options.type)),
   );
-
   return (property, rowValues, allValues) => {
     const variable = get(rowValues, 'variable');
     switch (property) {
@@ -51,9 +54,12 @@ const optionGetter = (variables) => {
         );
       }
       case 'component':
+        console.log('case:component');
+        console.log('looking for', variable, 'in', variables[variable]);
         return getInputsForType(get(variables, [variable, 'type']));
       default:
-        return [];
+        console.warn('optiongetter default');
+        return [{}];
     }
   };
 };
