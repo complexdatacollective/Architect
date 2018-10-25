@@ -85,42 +85,44 @@ class Overview extends Component {
     if (!show || !flipId) { return null; }
 
     return (
-      <Flipped flipId={flipId}>
-        <div className="overview">
-          <div className="overview__panel">
-            <h1 className="overview__name">{name}</h1>
-            <div className="overview__groups">
-              <div className="overview__group">
-                <h3 className="overview__group-title">Variable registry</h3>
-                <br />
-                <h4>Node types</h4>
-                <div>
-                  { this.renderNodeTypes }
-                </div>
-                <br />
-                <h4>Edge types</h4>
-                <div>
-                  { this.renderEdgeTypes }
-                </div>
-                <div className="overview__manage-button">
-                  <ProtocolLink to={'registry'}>
-                    <Button size="small">Manage registry</Button>
-                  </ProtocolLink>
-                </div>
-              </div>
-              <div className="overview__group">
-                <h3 className="overview__group-title">Forms</h3>
-                { this.renderForms }
-                <div className="overview__manage-button">
-                  <ProtocolLink to={'forms'}>
-                    <Button size="small">Manage forms</Button>
-                  </ProtocolLink>
-                </div>
+      <React.Fragment>
+        <h1 className="overview__name">{name}</h1>
+        <Flipped flipId={flipId}>
+          <div className="overview">
+            <div className="overview__panel">
+              <div className="overview__groups">
+                <fieldset className="overview__group">
+                  <legend className="overview__group-title">Variable registry</legend>
+                  <br />
+                  <h4>Node types</h4>
+                  <div>
+                    { this.renderNodeTypes }
+                  </div>
+                  <br />
+                  <h4>Edge types</h4>
+                  <div>
+                    { this.renderEdgeTypes }
+                  </div>
+                  <div className="overview__manage-button">
+                    <ProtocolLink to={'registry'}>
+                      <Button size="small">Manage registry</Button>
+                    </ProtocolLink>
+                  </div>
+                </fieldset>
+                <fieldset className="overview__group">
+                  <legend className="overview__group-title">Forms</legend>
+                  { this.renderForms }
+                  <div className="overview__manage-button">
+                    <ProtocolLink to={'forms'}>
+                      <Button size="small">Manage forms</Button>
+                    </ProtocolLink>
+                  </div>
+                </fieldset>
               </div>
             </div>
           </div>
-        </div>
-      </Flipped>
+        </Flipped>
+      </React.Fragment>
     );
   }
 }

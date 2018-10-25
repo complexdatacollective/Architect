@@ -17,19 +17,11 @@
   }
 
   &__name {
-    height: 9vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1vh;
-
-    input {
-      @include typography('title-1', font-size);
-      @include typography('title-1', font-family);
-      @include typography('title-1', font-weight);
-      text-align: center;
-      color: var(--text-dark);
-    }
+    margin: 4rem;
+    color: var(--text-light);
   }
 
   &__asset-group {
@@ -69,6 +61,11 @@
 
     .node {
       margin-bottom: 1rem;
+    }
+
+    .stage-editor-section-form__card {
+      width: 200px;
+      float: left;
     }
   }
 
