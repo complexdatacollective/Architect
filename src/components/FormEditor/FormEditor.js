@@ -192,8 +192,8 @@ class FormEditor extends Component {
             <Field
               name="optionToAddAnother"
               component={Fields.Toggle}
-              fieldLabel="Continuous entry"
-              label="Enable 'Add another' option in form"
+              fieldLabel="Use the 'Add another' option?"
+              label="Enable 'Add another' option in this form?"
             />
           </div>
         </Guidance>
