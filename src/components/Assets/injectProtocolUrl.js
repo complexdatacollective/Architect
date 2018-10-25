@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
   return {
     getProtocolUrl: url => (
       url && workingPath ?
-        `protocol:/${path.join(workingPath, 'assets', path.basename(url))}` :
+        `asset:/${path.join(workingPath, 'assets', path.basename(url))}` :
         ''
     ),
   };

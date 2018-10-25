@@ -1,9 +1,7 @@
 const { ipcMain, app, BrowserWindow } = require('electron');
 const path = require('path');
 const windowManager = require('./windowManager');
-// TODO: migrate to asset:// only?
-const registerProtocolProtocol = require('./protocolProtocol').registerProtocolProtocol;
-const registerAssetProtocol = require('./assetProtocol').registerAssetProtocol;
+const registerAssetProtocol = require('./assetProtocol').registerProtocol;
 
 function getFileFromArgs(argv) {
   if (argv.length >= 2) {
@@ -90,7 +88,6 @@ const appManager = {
     }
   },
   start: function start() {
-    registerProtocolProtocol();
     registerAssetProtocol();
 
     return windowManager
