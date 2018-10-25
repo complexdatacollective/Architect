@@ -1,13 +1,14 @@
 const { ipcMain, app, BrowserWindow } = require('electron');
+const log = require('./log');
 const path = require('path');
-const windowManager = require('./windowManager');
+const appWindowManager = require('./appWindowManager');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
 
 function getFileFromArgs(argv) {
   if (argv.length >= 2) {
     const filePath = argv[1];
     if (path.extname(filePath) === '.netcanvas') {
-      console.log('.netcanvas found in argv', JSON.stringify({ argv }, null, 2));
+      log.info('.netcanvas found in argv', JSON.stringify({ argv }, null, 2));
       return filePath;
     }
   }
@@ -35,16 +36,16 @@ const appManager = {
     const extensions = process.env.NC_DEVTOOLS_EXENSION_PATH;
     if (process.env.NODE_ENV !== 'development' || !extensions) { return; }
     try {
-      console.log(extensions);
+      log.info(extensions);
       extensions.split(';').forEach(
         filepath =>
           BrowserWindow.addDevToolsExtension(filepath),
       );
     } catch (err) {
       /* eslint-disable no-console */
-      console.warn(err);
-      console.warn('A Chrome dev tools extension failed to load. If the extension has upgraded, update your NC_DEVTOOLS_EXENSION_PATH:');
-      console.warn(process.env.NC_DEVTOOLS_EXENSION_PATH);
+      log.warn(err);
+      log.warn('A Chrome dev tools extension failed to load. If the extension has upgraded, update your NC_DEVTOOLS_EXENSION_PATH:');
+      log.warn(process.env.NC_DEVTOOLS_EXENSION_PATH);
       /* eslint-enable */
     }
   },
@@ -64,7 +65,7 @@ const appManager = {
   restore: function restore() {
     if (!app.isReady()) { return Promise.reject(); }
 
-    return windowManager.getWindow()
+    return appWindowManager.getWindow()
       .then((window) => {
         if (window.isMinimized()) {
           window.restore();
@@ -80,7 +81,7 @@ const appManager = {
       // defer action
       this.openFileWhenReady = fileToOpen;
     } else {
-      windowManager.getWindow()
+      appWindowManager.getWindow()
         .then((window) => {
           window.webContents.send('OPEN_FILE', fileToOpen);
         });
@@ -90,7 +91,7 @@ const appManager = {
   start: function start() {
     registerAssetProtocol();
 
-    return windowManager
+    return appWindowManager
       .getWindow();
   },
 };

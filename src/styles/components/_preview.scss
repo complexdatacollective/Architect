@@ -19,4 +19,14 @@
   left: 0;
   color: var(--text);
   background: var(--background);
+
+  &-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+
+    .button {
+      margin-right: 20px;
+    }
+  }
 }
