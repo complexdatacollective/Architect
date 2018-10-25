@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { get, map } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
-import { Icon } from '../../ui/components';
+import { Icon, Button } from '../../ui/components';
 import { Select } from '../Form/Fields';
 import ValidatedField from '../Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
@@ -68,9 +68,9 @@ const ItemDelete = props => (
 );
 
 const AddItem = props => (
-  <div className="form-fields-multi-select__add" {...props}>
-    <Icon name="add" /> Add new
-  </div>
+  <Button color="primary" icon="add" size="small" {...props}>
+    Add new
+  </Button>
 );
 
 const mapStateToItemProps = (state, { fields, index }) => ({

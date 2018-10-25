@@ -6,7 +6,7 @@ import { compose, defaultProps, withProps } from 'recompose';
 import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
-import { Icon } from '../../ui/components';
+import { Icon, Button } from '../../ui/components';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const isNumberLike = value =>
@@ -29,9 +29,9 @@ const ItemDelete = props => (
 );
 
 const AddItem = props => (
-  <div className="form-fields-multi-select__add" {...props}>
-    <Icon name="add" /> Add new
-  </div>
+  <Button color="primary" icon="add" size="small" {...props}>
+    Add new
+  </Button>
 );
 
 const mapDispatchToItemProps = dispatch => ({
