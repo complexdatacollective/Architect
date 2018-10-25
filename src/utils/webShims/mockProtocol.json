@@ -228,6 +228,14 @@
         {
           "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
           "component": "TextInput"
+        },
+        {
+          "variable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
+          "component": "TextInput"
+        },
+        {
+          "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2",
+          "component": "TextInput"
         }
       ]
     },

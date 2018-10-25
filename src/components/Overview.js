@@ -5,6 +5,7 @@ import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
 import { Node, Button } from '../ui/components';
 import EdgeIcon from './EdgeIcon';
+import FormCard from './StageEditor/sections/Form/FormCard';
 import ProtocolLink from './ProtocolLink';
 import { getProtocol } from '../selectors/protocol';
 
@@ -55,18 +56,22 @@ class Overview extends Component {
     }
 
     return (
-      <ul>
+      <React.Fragment>
         {map(
           forms,
           (form, key) => (
-            <li key={key}>
-              <ProtocolLink to={`form/${key}`}>
-                {form.title}
-              </ProtocolLink>
-            </li>
+            <ProtocolLink key={key} to={`form/${key}`}>
+              <FormCard
+                label={form.title}
+                input={{
+                  onChange: () => {},
+                  value: ' ',
+                }}
+              />
+            </ProtocolLink>
           ),
         )}
-      </ul>
+      </React.Fragment>
     );
   }
 
