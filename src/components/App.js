@@ -8,17 +8,20 @@ import { AppErrorBoundary } from './Errors';
 import DialogManager from './DialogManager';
 import Version from './Version';
 
-const App = ({ children }) => {
+const App = ({ children, location }) => {
+  const isPreview = /^\/preview/.test(location.pathname);
+
   const appClasses = cx(
     'app',
     {
       'app--macos': isMacOS(),
+      'app--preview': isPreview,
     },
   );
 
   return (
     <div className={appClasses}>
-      {isMacOS() &&
+      {(isMacOS() || isPreview) &&
         <div className="app__electron-titlebar" />
       }
       <div className="app__window">

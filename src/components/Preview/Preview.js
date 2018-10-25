@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { get } from 'lodash';
 import React from 'react';
-import window from '../../ui/components/window';
+// import window from '../../ui/components/window';
 import Stage from '../../network-canvas/src/containers/Stage';
 import PreviewControls from './PreviewControls';
 
@@ -37,7 +37,6 @@ const mapStateToProps = (state, { stageIndex }) => {
 
 export default compose(
   connect(mapStateToProps),
-  window,
 )(
   Preview,
 );
