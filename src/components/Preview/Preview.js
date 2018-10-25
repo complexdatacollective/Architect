@@ -8,7 +8,6 @@ import PreviewControls from './PreviewControls';
 
 const Preview = ({ stage, promptIndex }) => (
   <div className="preview">
-    <PreviewControls />
     <div className="protocol">
       <div className="protocol__content">
         { stage &&
@@ -16,6 +15,7 @@ const Preview = ({ stage, promptIndex }) => (
         }
       </div>
     </div>
+    <PreviewControls />
   </div>
 );
 

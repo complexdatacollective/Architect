@@ -56,6 +56,12 @@ function createWindow() {
     global.previewWindow.webContents.on('did-finish-load', () => resolve(global.previewWindow));
 
     global.previewWindow.loadURL(getAppUrl());
+
+    global.previewWindow.openDevTools();
+
+    if (process.env.NODE_ENV === 'development') {
+      global.previewWindow.openDevTools();
+    }
   });
 }
 
