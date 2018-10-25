@@ -33,7 +33,10 @@ class NameGeneratorPromptsSection extends PureComponent {
         <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
           <div id={getFieldId(`${fieldName}._error`)} data-name="Prompts" />
           <h2>Prompts</h2>
-          <p>Name gen prompt specific</p>
+          <p>
+            Add one or more &quot;prompts&quot; below, to ecourage your participants to create
+            nodes.
+          </p>
           <div className="stage-editor-section-prompts">
             <div className="stage-editor-section-prompts__prompts">
               { nodeType &&

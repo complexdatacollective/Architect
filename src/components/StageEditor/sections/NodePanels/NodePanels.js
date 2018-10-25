@@ -18,7 +18,7 @@ const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => 
       <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
         <div className="stage-editor-section-content-items">
           <h2>Panels</h2>
-          <p>Create any content you wish to display on the information screen.</p>
+          <p>Use this section to configure up to two side panels on this name generator.</p>
           <FieldArray
             name="panels"
             component={Items}
