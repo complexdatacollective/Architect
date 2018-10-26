@@ -18,6 +18,7 @@
  */
 
 const autoprefixer = require('autoprefixer');
+const rebaseUrl = require('postcss-url');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -84,6 +85,11 @@ const getStyleLoaders = (preProcessor) => {
         plugins: () => [
           autoprefixer({
             flexbox: 'no-2009',
+          }),
+          rebaseUrl({
+            url: 'rebase',
+            basePath: path.resolve('../src/network-canvas/src/styles/'),
+            assetsPath: path.resolve('../src/network-canvas/src/styles/'),
           }),
         ],
         sourceMap: shouldUseSourceMap,

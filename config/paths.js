@@ -47,6 +47,7 @@ module.exports = {
   appIndexJs: resolveApp('src/index.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
+  networkCanvasSrc: resolveApp('src/network-canvas/src'),
   appStyles: resolveApp('src/styles'),
   electronDev: resolveApp('electron-dev'),
   yarnLockFile: resolveApp('yarn.lock'),

@@ -108,6 +108,7 @@
         "path-to-regexp": "^2.4.0",
         "postcss-flexbugs-fixes": "3.2.0",
         "postcss-loader": "^2.1.6",
+        "postcss-url": "^8.0.0",
         "promise": "7.1.1",
         "prop-types": "^15.6.2",
         "query-string": "^6.2.0",
