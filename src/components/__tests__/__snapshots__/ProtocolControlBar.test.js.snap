@@ -22,7 +22,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "children": <Button
+      "buttons": <Button
         color="white"
         content=""
         disabled={true}
@@ -41,32 +41,12 @@ ShallowWrapper {
         Save
       </Button>,
       "className": "",
+      "flip": false,
+      "secondaryButtons": null,
       "show": false,
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "children": "Save",
-        "color": "white",
-        "content": "",
-        "disabled": true,
-        "icon": <Icon
-          className=""
-          color=""
-          name="arrow-right"
-          style={Object {}}
-        />,
-        "iconPosition": "right",
-        "onClick": [Function],
-        "size": "",
-      },
-      "ref": null,
-      "rendered": "Save",
-      "type": [Function],
-    },
+    "rendered": null,
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -75,7 +55,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "function",
       "props": Object {
-        "children": <Button
+        "buttons": <Button
           color="white"
           content=""
           disabled={true}
@@ -94,32 +74,12 @@ ShallowWrapper {
           Save
         </Button>,
         "className": "",
+        "flip": false,
+        "secondaryButtons": null,
         "show": false,
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": "Save",
-          "color": "white",
-          "content": "",
-          "disabled": true,
-          "icon": <Icon
-            className=""
-            color=""
-            name="arrow-right"
-            style={Object {}}
-          />,
-          "iconPosition": "right",
-          "onClick": [Function],
-          "size": "",
-        },
-        "ref": null,
-        "rendered": "Save",
-        "type": [Function],
-      },
+      "rendered": null,
       "type": [Function],
     },
   ],

@@ -9,6 +9,7 @@ ShallowWrapper {
     insertAtIndex={null}
     invalid={false}
     onComplete={[Function]}
+    previewStage={[Function]}
     show={true}
     stage={Object {}}
     stageId={null}
@@ -40,20 +41,36 @@ ShallowWrapper {
           Continue
         </Button>,
       ],
-      "children": <Connect(withState(withHandlers(ReduxForm)))
+      "children": <defaultProps(Connect(withState(withHandlers(ReduxForm))))
+        form="edit-stage"
         onSubmit={[Function]}
+        previewStage={[Function]}
         stage={Object {}}
       />,
       "onCancel": [Function],
+      "secondaryButtons": Array [
+        <Button
+          color="paradise-pink"
+          content=""
+          icon=""
+          iconPosition="right"
+          onClick={[Function]}
+          size=""
+        >
+          Preview
+        </Button>,
+      ],
       "show": true,
     },
     "ref": null,
     "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
+        "form": "edit-stage",
         "onSubmit": [Function],
+        "previewStage": [Function],
         "stage": Object {},
       },
       "ref": null,
@@ -80,20 +97,36 @@ ShallowWrapper {
             Continue
           </Button>,
         ],
-        "children": <Connect(withState(withHandlers(ReduxForm)))
+        "children": <defaultProps(Connect(withState(withHandlers(ReduxForm))))
+          form="edit-stage"
           onSubmit={[Function]}
+          previewStage={[Function]}
           stage={Object {}}
         />,
         "onCancel": [Function],
+        "secondaryButtons": Array [
+          <Button
+            color="paradise-pink"
+            content=""
+            icon=""
+            iconPosition="right"
+            onClick={[Function]}
+            size=""
+          >
+            Preview
+          </Button>,
+        ],
         "show": true,
       },
       "ref": null,
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
+          "form": "edit-stage",
           "onSubmit": [Function],
+          "previewStage": [Function],
           "stage": Object {},
         },
         "ref": null,

@@ -211,7 +211,9 @@
             "<rootDir>/config/jest/automock.js"
         ],
         "testPathIgnorePatterns": [
-            "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]"
+            "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]",
+            "<rootDir>[/\\\\](src/network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](src/ui)[/\\\\]"
         ],
         "testEnvironment": "node",
         "testURL": "http://localhost",

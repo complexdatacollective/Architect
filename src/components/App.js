@@ -40,7 +40,7 @@ const App = ({ children, location }) => {
 App.propTypes = {
   children: PropTypes.element,
   location: PropTypes.shape({
-    pathName: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
   }).isRequired,
 };
 
