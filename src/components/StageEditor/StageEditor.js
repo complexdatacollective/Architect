@@ -16,13 +16,13 @@ const getFormValues = formValueSelector(formName);
 const form = { name: formName, getValues: getFormValues };
 
 class StageEditor extends Component {
-  // componentDidMount() {
-  //   ipcRenderer.on('REFRESH_PREVIEW', this.handleRefreshPreview);
-  // }
+  componentDidMount() {
+    this.props.previewStage();
+  }
 
-  // componentWillUnmount() {
-  //   ipcRenderer.removeListener('REFRESH_PREVIEW', this.handleRefreshPreview);
-  // }
+  componentWillUnmount() {
+    this.props.previewStage();
+  }
 
   get sections() {
     return getInterface(this.props.stage.type).sections;

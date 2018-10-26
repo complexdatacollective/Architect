@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { parse as parseQueryString } from 'query-string';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { remote, ipcRenderer } from 'electron';
 import { compose } from 'recompose';
 import {
   submit as submitForm,
@@ -18,7 +17,7 @@ import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as previewActions } from '../../ducks/modules/preview';
 
-const insertAtIndex = query =>
+const getInsertAtIndex = query =>
   (query.insertAtIndex ? parseInt(query.insertAtIndex, 10) : null);
 
 const formName = 'edit-stage';
@@ -40,14 +39,6 @@ class EditStage extends PureComponent {
     stageId: null,
     insertAtIndex: null,
   };
-
-  componentDidMount() {
-    ipcRenderer.on('REFRESH_PREVIEW', this.handlePreview);
-  }
-
-  componentWillUnmount() {
-    ipcRenderer.removeListener('REFRESH_PREVIEW', this.handlePreview);
-  }
 
   get isDirty() {
     return this.props.dirty || !has(this.props.stage, 'id');
@@ -118,7 +109,7 @@ const mapStateToProps = (state, props) => {
   return ({
     stage,
     stageId,
-    insertAtIndex: insertAtIndex(query),
+    insertAtIndex: getInsertAtIndex(query),
     dirty: isFormDirty(formName)(state),
     invalid: isFormInvalid(formName)(state),
   });
