@@ -5,7 +5,6 @@ import { actionCreators as previewActions } from './ducks/modules/preview';
 
 const initPreview = () => {
   ipcRenderer.on('OPEN_PREVIEW', (event, { protocol, path, stageIndex }) => {
-    console.log('OPEN_PREVIEW', { protocol, path, stageIndex });
     previewStore.dispatch(previewActions.setProtocol({ protocol, path }));
     history.push(`/preview/${stageIndex}`);
   });

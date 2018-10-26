@@ -63,10 +63,8 @@ const previewStageByFormName = (stageMeta, formName) =>
     let stageIndex;
     let draftStages;
 
-    console.log('previewStageByFormName', { stageMeta });
-
+    // TODO: use reducer?
     if (stageMeta.id) {
-      console.log({ stageMeta });
       stageIndex = protocol.stages.findIndex(({ id }) => id === stageMeta.id);
 
       draftStages = protocol.stages.map((stage) => {

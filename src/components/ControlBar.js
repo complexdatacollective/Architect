@@ -22,7 +22,7 @@ const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
       { flip ? buttonLayout.reverse() : buttonLayout }
     </div>
   );
-}
+};
 
 ControlBar.propTypes = {
   buttons: PropTypes.node,

@@ -1,9 +1,10 @@
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { get } from 'lodash';
+import PropTypes from 'prop-types';
 import React from 'react';
-import Stage from '../../network-canvas/src/containers/Stage';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { get } from 'lodash';
 import PreviewControls from './PreviewControls';
+import Stage from '../../network-canvas/src/containers/Stage';
 
 const Preview = ({ stage, promptIndex }) => (
   <div className="preview">
@@ -18,7 +19,13 @@ const Preview = ({ stage, promptIndex }) => (
   </div>
 );
 
+Preview.propTypes = {
+  stage: PropTypes.object,
+  promptIndex: PropTypes.number,
+};
+
 Preview.defaultProps = {
+  stage: null,
   promptIndex: 0,
 };
 

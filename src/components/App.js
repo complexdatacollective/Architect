@@ -39,6 +39,9 @@ const App = ({ children, location }) => {
 
 App.propTypes = {
   children: PropTypes.element,
+  location: PropTypes.shape({
+    pathName: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 App.defaultProps = {

@@ -33,6 +33,7 @@ class EditStage extends PureComponent {
     insertAtIndex: PropTypes.number,
     updateStage: PropTypes.func.isRequired,
     createStage: PropTypes.func.isRequired,
+    previewStage: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -132,7 +133,7 @@ const mapDispatchToProps = (dispatch, props) => {
     createStage: bindActionCreators(stageActions.createStage, dispatch),
     previewStage: () => dispatch(previewActions.previewStageByFormName(stageMeta, formName)),
   };
-}
+};
 
 export { EditStage };
 
