@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { remote, ipcRenderer } from 'electron';
 import {
   Form as ReduxForm,
   formValueSelector,
@@ -17,20 +16,16 @@ const getFormValues = formValueSelector(formName);
 const form = { name: formName, getValues: getFormValues };
 
 class StageEditor extends Component {
-  componentDidMount() {
-    ipcRenderer.on('REFRESH_PREVIEW', this.handleRefreshPreview);
-  }
+  // componentDidMount() {
+  //   ipcRenderer.on('REFRESH_PREVIEW', this.handleRefreshPreview);
+  // }
 
-  componentWillUnmount() {
-    ipcRenderer.removeListener('REFRESH_PREVIEW', this.handleRefreshPreview);
-  }
+  // componentWillUnmount() {
+  //   ipcRenderer.removeListener('REFRESH_PREVIEW', this.handleRefreshPreview);
+  // }
 
   get sections() {
     return getInterface(this.props.stage.type).sections;
-  }
-
-  handleRefreshPreview = () => {
-    this.props.handleShowPreview();
   }
 
   renderSections() {
@@ -43,7 +38,6 @@ class StageEditor extends Component {
     const {
       stage,
       handleSubmit,
-      handleShowPreview,
       toggleCodeView,
       codeView,
       issues,
@@ -60,7 +54,6 @@ class StageEditor extends Component {
         >
           <h1>Edit {stage.type} Screen</h1>
           <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
-          <small>(<a onClick={handleShowPreview}>Preview</a>)</small>
 
           {this.renderSections()}
 

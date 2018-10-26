@@ -2,9 +2,11 @@
 
 const showSaveDialog = (_, callback) => { callback('demo.netcanvas'); };
 const showOpenDialog = (_, callback) => { callback(['demo.netcanvas']); };
+
 const ipcRenderer = {
-  on: (...args) => console.log('ipcRenderer ON:', ...args),
-  send: (...args) => console.log('ipcRenderer SEND', ...args),
+  on: (...args) => console.log('ipcRenderer.on', ...args),
+  send: (...args) => console.log('ipcRenderer.send', ...args),
+  removeListener: (...args) => console.log('ipcRenderer.removeListener', ...args),
 };
 
 

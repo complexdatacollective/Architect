@@ -1,13 +1,10 @@
 import { connect } from 'react-redux';
 import { reduxForm, getFormSyncErrors } from 'redux-form';
-import { compose, withState, withHandlers } from 'recompose';
-import { actionCreators as previewActions } from '../../ducks/modules/preview';
+import { compose, defaultProps, withState, withHandlers } from 'recompose';
 import StageEditor from './StageEditor';
 
-const formName = 'edit-stage';
-
 const mapStateToProps = (state, props) => {
-  const issues = getFormSyncErrors(formName)(state);
+  const issues = getFormSyncErrors(props.form)(state);
 
   return {
     initialValues: props.stage,
@@ -15,19 +12,16 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  previewStage: () => dispatch(previewActions.previewStageByFormName(formName)),
-});
-
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  defaultProps({
+    form: 'edit-stage',
+  }),
+  connect(mapStateToProps),
   withState('codeView', 'updateCodeView', false),
   withHandlers({
     toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-    handleShowPreview: ({ previewStage }) => () => previewStage(),
   }),
   reduxForm({
-    form: formName,
     touchOnBlur: false,
     touchOnChange: true,
     enableReinitialize: true,

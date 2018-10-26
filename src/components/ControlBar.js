@@ -2,28 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const ControlBar = ({ children, show, className }) => (
-  <div
-    className={cx(
-      'control-bar',
-      { 'control-bar--show': show },
-      className,
-    )}
-  >
-    { children }
-  </div>
-);
+const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
+  const buttonLayout = [
+    <div className="control-bar__primary-buttons">{ buttons }</div>,
+    <div className="control-bar__secondary-buttons">{ secondaryButtons }</div>,
+  ];
+
+  return (
+    <div
+      className={cx(
+        'control-bar',
+        {
+          'control-bar--show': show,
+          'control-bar--flip': flip,
+        },
+        className,
+      )}
+    >
+      { flip ? buttonLayout.reverse() : buttonLayout }
+    </div>
+  );
+}
 
 ControlBar.propTypes = {
-  children: PropTypes.node,
+  buttons: PropTypes.node,
+  secondaryButtons: PropTypes.node,
   className: PropTypes.string,
   show: PropTypes.bool,
+  flip: PropTypes.bool,
 };
 
 ControlBar.defaultProps = {
-  children: null,
+  buttons: null,
+  secondaryButtons: null,
   className: '',
   show: true,
+  flip: false,
 };
 
 export { ControlBar };

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { parse as parseQueryString } from 'query-string';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { remote, ipcRenderer } from 'electron';
+import { compose } from 'recompose';
 import {
   submit as submitForm,
   isDirty as isFormDirty,
@@ -14,6 +16,12 @@ import Card from './ProtocolCard';
 import StageEditor from '../../components/StageEditor';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
+import { actionCreators as previewActions } from '../../ducks/modules/preview';
+
+const insertAtIndex = query =>
+  (query.insertAtIndex ? parseInt(query.insertAtIndex, 10) : null);
+
+const formName = 'edit-stage';
 
 class EditStage extends PureComponent {
   static propTypes = {
@@ -33,6 +41,14 @@ class EditStage extends PureComponent {
     insertAtIndex: null,
   };
 
+  componentDidMount() {
+    ipcRenderer.on('REFRESH_PREVIEW', this.handlePreview);
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener('REFRESH_PREVIEW', this.handlePreview);
+  }
+
   get isDirty() {
     return this.props.dirty || !has(this.props.stage, 'id');
   }
@@ -45,6 +61,18 @@ class EditStage extends PureComponent {
       >Continue</Button>,
     ] : [];
   }
+
+  get secondaryButtons() {
+    return [
+      <Button
+        key="preview"
+        onClick={this.handlePreview}
+        color="paradise-pink"
+      >Preview</Button>,
+    ];
+  }
+
+  handlePreview = () => this.props.previewStage();
 
   handleSubmit = (stage) => {
     const { stageId, insertAtIndex } = this.props;
@@ -66,12 +94,15 @@ class EditStage extends PureComponent {
     return (
       <Card
         buttons={this.buttons}
+        secondaryButtons={this.secondaryButtons}
         show={show}
         onCancel={this.handleCancel}
       >
         <StageEditor
           stage={stage}
+          form={formName}
           onSubmit={this.handleSubmit}
+          previewStage={this.props.previewStage}
         />
       </Card>
     );
@@ -87,17 +118,21 @@ const mapStateToProps = (state, props) => {
   return ({
     stage,
     stageId,
-    insertAtIndex: query.insertAtIndex ? parseInt(query.insertAtIndex, 10) : null,
-    dirty: isFormDirty('edit-stage')(state),
-    invalid: isFormInvalid('edit-stage')(state),
+    insertAtIndex: insertAtIndex(query),
+    dirty: isFormDirty(formName)(state),
+    invalid: isFormInvalid(formName)(state),
   });
 };
+
 const mapDispatchToProps = dispatch => ({
-  submitForm: () => dispatch(submitForm('edit-stage')),
+  submitForm: () => dispatch(submitForm(formName)),
   updateStage: bindActionCreators(stageActions.updateStage, dispatch),
   createStage: bindActionCreators(stageActions.createStage, dispatch),
+  previewStage: () => dispatch(previewActions.previewStageByFormName(formName)),
 });
 
 export { EditStage };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditStage);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+)(EditStage);

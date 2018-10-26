@@ -1,10 +1,10 @@
 .control-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   position: fixed;
   bottom: 0;
   left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: unit(8);
   padding: 0 unit(2);
@@ -19,8 +19,26 @@
     margin: 0 unit(1);
   }
 
-  &--align-right {
+  &__primary-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &__secondary-buttons {
+    display: flex;
+    align-items: center;
     justify-content: flex-end;
+  }
+
+  &--flip {
+    .control-bar__primary-buttons {
+      justify-content: flex-end;
+    }
+
+    .control-bar__secondary-buttons {
+      justify-content: flex-start;
+    }
   }
 
   &--delayed {
