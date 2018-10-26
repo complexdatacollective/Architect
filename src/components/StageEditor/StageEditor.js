@@ -4,6 +4,7 @@ import {
   formValueSelector,
   formPropTypes,
 } from 'redux-form';
+import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Guided } from '../Guided';
@@ -17,15 +18,19 @@ const form = { name: formName, getValues: getFormValues };
 
 class StageEditor extends Component {
   componentDidMount() {
-    this.props.previewStage();
+    ipcRenderer.on('REFRESH_PREVIEW', this.handleRefresh);
   }
 
   componentWillUnmount() {
-    this.props.previewStage();
+    ipcRenderer.removeListener('REFRESH_PREVIEW', this.handleRefresh);
   }
 
   get sections() {
     return getInterface(this.props.stage.type).sections;
+  }
+
+  handleRefresh = () => {
+    this.props.previewStage();
   }
 
   renderSections() {
