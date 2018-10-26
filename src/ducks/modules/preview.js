@@ -46,12 +46,13 @@ const previewDraft = (draft, stageIndex) =>
   };
 
 
-const previewStageByFormName = formName =>
+const previewStageByFormName = (stageMeta, formName) =>
   (dispatch, getState) => {
     dispatch({
       type: PREVIEW_STAGE_BY_FORMNAME,
       meta: {
         formName,
+        stage: stageMeta,
       },
     });
 
@@ -59,12 +60,28 @@ const previewStageByFormName = formName =>
 
     const draftStage = getFormValues(formName)(state);
     const protocol = state.protocol.present;
-    const stageIndex = protocol.stages.findIndex(({ id }) => id === draftStage.id);
+    let stageIndex;
+    let draftStages;
 
-    const draftStages = protocol.stages.map((stage) => {
-      if (stage.id !== draftStage.id) { return stage; }
-      return draftStage;
-    });
+    console.log('previewStageByFormName', { stageMeta });
+
+    if (stageMeta.id) {
+      console.log({ stageMeta });
+      stageIndex = protocol.stages.findIndex(({ id }) => id === stageMeta.id);
+
+      draftStages = protocol.stages.map((stage) => {
+        if (stage.id !== draftStage.id) { return stage; }
+        return draftStage;
+      });
+    } else {
+      stageIndex = stageMeta.insertAtIndex;
+
+      draftStages = [
+        ...protocol.stages.slice(0, stageMeta.insertAtIndex),
+        draftStage,
+        ...protocol.stages.slice(stageMeta.insertAtIndex),
+      ];
+    }
 
     const draftProtocol = {
       stages: draftStages,

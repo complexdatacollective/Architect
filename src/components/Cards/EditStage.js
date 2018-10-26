@@ -105,22 +105,34 @@ const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
   const query = parseQueryString(props.location.search);
   const stage = find(protocol.stages, ['id', stageId]) || { type: query.type };
+  const insertAtIndex = getInsertAtIndex(query);
 
   return ({
     stage,
     stageId,
-    insertAtIndex: getInsertAtIndex(query),
+    insertAtIndex,
     dirty: isFormDirty(formName)(state),
     invalid: isFormInvalid(formName)(state),
   });
 };
 
-const mapDispatchToProps = dispatch => ({
-  submitForm: () => dispatch(submitForm(formName)),
-  updateStage: bindActionCreators(stageActions.updateStage, dispatch),
-  createStage: bindActionCreators(stageActions.createStage, dispatch),
-  previewStage: () => dispatch(previewActions.previewStageByFormName(formName)),
-});
+const mapDispatchToProps = (dispatch, props) => {
+  const stageId = get(props, 'match.params.id');
+  const query = parseQueryString(props.location.search);
+  const insertAtIndex = getInsertAtIndex(query);
+
+  const stageMeta = {
+    id: stageId,
+    insertAtIndex,
+  };
+
+  return {
+    submitForm: () => dispatch(submitForm(formName)),
+    updateStage: bindActionCreators(stageActions.updateStage, dispatch),
+    createStage: bindActionCreators(stageActions.createStage, dispatch),
+    previewStage: () => dispatch(previewActions.previewStageByFormName(stageMeta, formName)),
+  };
+}
 
 export { EditStage };
 
