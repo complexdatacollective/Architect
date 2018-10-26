@@ -1,5 +1,6 @@
 
 .preview {
+  // sass-lint:disable no-color-literals
   --color-shadow: rgba(0, 0, 0, .15);
   --color-modal-shadow: rgba(20, 0, 0, .2);
   --background: var(--color-navy-taupe);
