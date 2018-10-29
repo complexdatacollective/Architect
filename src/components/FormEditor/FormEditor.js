@@ -26,7 +26,7 @@ const getInputsForType = (type) => {
     case 'categorical':
       return ['CheckboxGroup', 'ToggleButtonGroup'];
     default:
-      return ['TextInput'];
+      return ['Text'];
   }
 };
 
