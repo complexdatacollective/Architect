@@ -17,13 +17,13 @@ const SortableItem = SortableElement(
 
 const Items = ({
   fields,
-  meta: { error, dirty },
+  meta: { error, dirty, submitFailed },
   itemComponent: ItemComponent,
   disabled: sortable,
   ...rest
 }) => (
   <div className="items">
-    { dirty && error && <p className="items__error">{error}</p> }
+    { (dirty || submitFailed) && error && <p className="items__error">{error}</p> }
     <TransitionGroup className="items__items">
       { fields.map((fieldId, index) => (
         <WipeTransition key={get(fields.get(index), 'id', index)}>
