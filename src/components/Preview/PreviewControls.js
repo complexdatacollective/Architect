@@ -12,8 +12,14 @@ const handleRefresh = () => {
 
 const PreviewControls = () => (
   <div className="preview-controls">
-    <Button onClick={handleRefresh}>Refresh</Button>
-    <Button onClick={handleClose}>Close</Button>
+    <Button
+      onClick={handleRefresh}
+      color="paradise-pink"
+    >Refresh</Button>
+    <Button
+      onClick={handleClose}
+      color="white"
+    >Close</Button>
   </div>
 );
 
