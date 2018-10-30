@@ -2,7 +2,7 @@ import { ipcRenderer } from 'electron';
 import { omit } from 'lodash';
 import { getFormValues } from 'redux-form';
 import { getActiveProtocolMeta } from '../../selectors/protocol';
-import previewStoreData from '../../components/Preview/previewStore.json';
+import previewStoreData from './previewStore.json';
 import rootReducer from '../../network-canvas/src/ducks/modules/rootReducer';
 
 const initialState = {
@@ -88,6 +88,9 @@ const previewStageByFormName = (stageMeta, formName) =>
     dispatch(previewDraft(draftProtocol, stageIndex));
   };
 
+/**
+ * Reducer for previewStore, not available in ../store.js
+ */
 const previewReducer = (state = initialState, action) => {
   if (action.type === SET_PROTOCOL) {
     return {
@@ -96,7 +99,7 @@ const previewReducer = (state = initialState, action) => {
         ...state.protocol,
         ...omit(action.protocol, 'externalData'),
         path: action.path.slice(1),
-        protocolPath: null, // TODO: Do we need this for assets?
+        protocolPath: null,
       },
     };
   }

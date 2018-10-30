@@ -1,0 +1,55 @@
+{
+  "router": {
+    "location": {
+      "pathname": null,
+      "search": "",
+      "hash": ""
+    }
+  },
+  "session": "preview",
+  "sessions": {
+    "preview": {
+      "path": "/",
+      "promptIndex": 0,
+      "network": {
+        "ego": {},
+        "nodes": [],
+        "edges": []
+      },
+      "updatedAt": 0,
+      "protocolPath": null
+    }
+  },
+  "externalData": {},
+  "protocol": {
+    "isLoaded": true,
+    "isLoading": false,
+    "error": null,
+    "name": "FakeState",
+    "version": "1.0.0",
+    "required": "",
+    "stages": [
+    ],
+    "type": "download",
+    "workerUrlMap": {},
+    "variableRegistry": {
+    },
+    "forms": {
+    },
+    "path": ""
+  },
+  "protocols": [
+  ],
+  "modals": [],
+  "dialogs": {
+    "dialogs": []
+  },
+  "errors": {
+    "errors": [],
+    "acknowledged": true
+  },
+  "search": {
+    "collapsed": false,
+    "selectedResults": []
+  }
+}
