@@ -1,12 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { get, reduce } from 'lodash';
+import { compose, withHandlers } from 'recompose';
 import { ValidatedField } from '../../../Form';
 import TextArea from '../../../../ui/components/Fields/TextArea';
 import AttributesTable from './AttributesTable';
 import { Item } from '../../../Items';
 import { getFieldId } from '../../../../utils/issues';
+import { getValidations } from '../../../../utils/validations';
 
-const NameGeneratorPrompt = ({ fieldId, form, nodeType, ...rest }) => (
+const withValidation = withHandlers({
+  handleValidateAttributes: props => (attributes) => {
+    const variables = get(props.variableRegistry, ['node', props.nodeType, 'variables'], {});
+    return reduce(attributes, (errors, attribute, variable) => {
+      const validations = getValidations(get(variables, [variable, 'validation'], {}));
+      return validations.reduce((error, validate) => error || validate(attribute), errors);
+    }, undefined);
+  },
+});
+
+const NameGeneratorPrompt = ({ handleValidateAttributes, fieldId, form, nodeType, ...rest }) => (
   <Item {...rest}>
     <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
     <h3>Text for Prompt</h3>
@@ -20,11 +35,12 @@ const NameGeneratorPrompt = ({ fieldId, form, nodeType, ...rest }) => (
     />
     <div id={getFieldId(`${fieldId}.additionalAttributes`)} data-name="Prompt additional attributes" />
     <h3>Additional attributes</h3>
-    <AttributesTable
+    <Field
+      component={AttributesTable}
       name={`${fieldId}.additionalAttributes`}
       id="additionalAttributes"
+      validate={handleValidateAttributes}
       nodeType={nodeType}
-      form={form}
     />
   </Item>
 );
@@ -42,6 +58,13 @@ NameGeneratorPrompt.defaultProps = {
   nodeType: null,
 };
 
+const mapStateToProps = state => ({
+  variableRegistry: get(state, 'protocol.present.variableRegistry', {}),
+});
+
 export { NameGeneratorPrompt };
 
-export default NameGeneratorPrompt;
+export default compose(
+  connect(mapStateToProps),
+  withValidation,
+)(NameGeneratorPrompt);

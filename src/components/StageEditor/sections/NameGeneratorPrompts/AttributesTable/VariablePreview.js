@@ -9,7 +9,7 @@ const formatValue = (value) => {
   return value;
 };
 
-const VariablePreview = ({ input: { value }, label, variable, onDelete }) => (
+const VariablePreview = ({ value, label, variable, onDelete }) => (
   <div className="attributes-table-preview">
     <div className="attributes-table-preview__name">{label}</div>
     <div className="attributes-table-preview__value">{formatValue(value)}</div>
@@ -21,9 +21,7 @@ const VariablePreview = ({ input: { value }, label, variable, onDelete }) => (
 
 VariablePreview.propTypes = {
   label: PropTypes.string,
-  input: PropTypes.shape({
-    value: PropTypes.any.isRequired,
-  }).isRequired,
+  value: PropTypes.any.isRequired,
   variable: PropTypes.string,
   onDelete: PropTypes.func.isRequired,
 };

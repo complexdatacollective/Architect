@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { omit, isEqual, get, keys, difference, omitBy, toPairs } from 'lodash';
 import { withHandlers, compose } from 'recompose';
 import { connect } from 'react-redux';
-import { change } from 'redux-form';
 import RoundButton from '../../../../Form/RoundButton';
 import Variable from './Variable';
 
@@ -17,7 +15,7 @@ const validTypes = [
 ];
 
 const defaultsByType = {
-  boolean: false,
+  boolean: true,
   ordinal: [],
   text: '',
   number: '',
@@ -32,15 +30,15 @@ const withVaribleActions = withHandlers({
   createVariable: props => (variable) => {
     // don't add existing property
     if (Object.prototype.hasOwnProperty.call(props.variables, variable)) { return; }
-    props.change({
+    props.input.onChange({
       ...props.variables,
       [variable]: getVariableDefault(props.variablesForNodeType[variable]),
     });
   },
   deleteVariable: props => variable =>
-    props.change(omit(props.variables, variable)),
+    props.input.onChange(omit(props.variables, variable)),
   updateVariable: props => variable =>
-    props.change({ ...props.variables, ...variable }),
+    props.input.onChange({ ...props.variables, ...variable }),
 });
 
 class AttributesTable extends Component {
@@ -152,8 +150,8 @@ const getVariablesForNodeType = (state, nodeType) => {
   return get(variableRegistry, ['node', nodeType, 'variables'], {});
 };
 
-const mapStateToProps = (state, { name, form, nodeType }) => {
-  const variables = form.getValues(state, name) || {};
+const mapStateToProps = (state, { input, nodeType }) => {
+  const variables = input.value || {};
   const variablesForNodeType = omitBy(
     getVariablesForNodeType(state, nodeType),
     variableMeta => !validTypes.includes(variableMeta.type),
@@ -168,16 +166,9 @@ const mapStateToProps = (state, { name, form, nodeType }) => {
   });
 };
 
-const mapDispatchToProps = (dispatch, { name, form }) => ({
-  change: bindActionCreators(
-    value => change(form.name, name, value),
-    dispatch,
-  ),
-});
-
 export { AttributesTable };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps),
   withVaribleActions,
 )(AttributesTable);

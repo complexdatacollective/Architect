@@ -62,6 +62,9 @@
             "label": "specialcategory",
             "description": "A categorical variable.",
             "type": "categorical",
+            "validation": {
+              "minSelected": 1
+            },
             "options": [{
               "label": "Foo",
               "value": "foo"

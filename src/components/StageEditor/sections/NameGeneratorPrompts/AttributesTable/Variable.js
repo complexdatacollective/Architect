@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import cx from 'classnames';
 import VariablePreview from './VariablePreview';
 import VariableChooser from './VariableChooser';
@@ -75,11 +74,10 @@ class Variable extends Component {
       >
         { !this.isNew &&
           <div className="attributes-table-variable__preview">
-            <Field
-              name={variable}
-              variable={variable}
+            <VariablePreview
               label={label}
-              component={VariablePreview}
+              value={value}
+              variable={variable}
               onDelete={onDelete}
             />
           </div>
