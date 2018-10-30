@@ -4,8 +4,8 @@ const url = require('url');
 const path = require('path');
 
 const windowParameters = {
-  width: 960,
-  height: 600,
+  width: 1024,
+  height: 768,
   resizable: false,
   center: true,
   frame: false,
