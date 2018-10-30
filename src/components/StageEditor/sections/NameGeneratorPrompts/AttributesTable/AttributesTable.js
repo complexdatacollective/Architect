@@ -50,6 +50,8 @@ class AttributesTable extends Component {
     nodeType: PropTypes.string.isRequired,
     unusedVariables: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.object.isRequired,
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -103,8 +105,12 @@ class AttributesTable extends Component {
       nodeType,
       variablesForNodeType,
       unusedVariables,
+      meta,
+      input,
     } = this.props;
+
     const isEditing = this.state.editing === variable;
+    const error = meta && meta.error && meta.error[variable];
 
     return (
       <div className="attributes-table__variable" key={key}>
@@ -112,6 +118,8 @@ class AttributesTable extends Component {
           variable={variable}
           validation={get(variablesForNodeType, [variable, 'validation'])}
           value={value}
+          name={`${input.name}.${variable}`}
+          error={error}
           nodeType={nodeType}
           unusedVariables={unusedVariables}
           onChange={this.handleChange}

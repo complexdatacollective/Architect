@@ -15,9 +15,24 @@ const withValidation = withHandlers({
   handleValidateAttributes: props => (attributes) => {
     const variables = get(props.variableRegistry, ['node', props.nodeType, 'variables'], {});
     return reduce(attributes, (errors, attribute, variable) => {
-      const validations = getValidations(get(variables, [variable, 'validation'], {}));
-      return validations.reduce((error, validate) => error || validate(attribute), errors);
-    }, undefined);
+      const variableMeta = get(variables, variable, {});
+      const validations = getValidations(get(variableMeta, 'validation', {}));
+      const result = validations.reduce(
+        (error, validate) => error || validate(attribute),
+        undefined,
+      );
+
+      if (!result) { return errors; }
+
+      return {
+        ...errors,
+        // variableMeta.name?
+        [variable]: validations.reduce(
+          (error, validate) => error || validate(attribute),
+          undefined,
+        ),
+      };
+    }, {});
   },
 });
 

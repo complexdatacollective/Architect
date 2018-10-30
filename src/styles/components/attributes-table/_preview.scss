@@ -4,6 +4,7 @@
 
   &__name,
   &__value,
+  &__error,
   &__delete {
     padding: 0 unit(2);
   }
@@ -13,8 +14,14 @@
     font-weight: 600;
   }
 
-  &__value {
+  &__value,
+  &__error {
     flex-grow: 1;
+  }
+
+  &__error {
+    font-style: italic;
+    color: var(--error);
   }
 
   &__delete {

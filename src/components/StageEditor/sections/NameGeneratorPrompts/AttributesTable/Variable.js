@@ -5,6 +5,7 @@ import cx from 'classnames';
 import VariablePreview from './VariablePreview';
 import VariableChooser from './VariableChooser';
 import VariableEditor from './VariableEditor';
+import { getFieldId } from '../../../../../utils/issues';
 import { getVariablesForNodeType } from '../../../../../selectors/variableRegistry';
 
 class Variable extends Component {
@@ -22,10 +23,13 @@ class Variable extends Component {
     onChooseVariable: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.any,
+    name: PropTypes.string.isRequired,
+    error: PropTypes.string,
   };
 
   static defaultProps = {
     label: '',
+    error: undefined,
     type: null,
     nodeType: null,
     options: null,
@@ -53,6 +57,8 @@ class Variable extends Component {
       value,
       label,
       type,
+      name,
+      error,
       options,
       nodeType,
       isEditing,
@@ -71,12 +77,15 @@ class Variable extends Component {
       <div
         className={variableClasses}
         onClick={onToggleEdit}
+        id={getFieldId(name)}
+        data-name={`Additional attributes: ${label}`}
       >
         { !this.isNew &&
           <div className="attributes-table-variable__preview">
             <VariablePreview
               label={label}
               value={value}
+              error={error}
               variable={variable}
               onDelete={onDelete}
             />
