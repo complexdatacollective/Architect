@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
+import { bindActionCreators } from 'redux';
+import { compose } from 'recompose';
 import { Node, Button } from '../ui/components';
 import EdgeIcon from './EdgeIcon';
 import FormCard from './StageEditor/sections/Form/FormCard';
+import { SeamlessText } from './Form/Fields';
 import ProtocolLink from './ProtocolLink';
 import { getProtocol } from '../selectors/protocol';
+import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 
 class Overview extends Component {
   get renderNodeTypes() {
@@ -78,6 +82,8 @@ class Overview extends Component {
   render() {
     const {
       name,
+      description,
+      updateOptions,
       show,
       flipId,
     } = this.props;
@@ -86,11 +92,25 @@ class Overview extends Component {
 
     return (
       <React.Fragment>
-        <h1 className="overview__name">{name}</h1>
         <Flipped flipId={flipId}>
           <div className="overview">
             <div className="overview__panel">
               <div className="overview__groups">
+                <fieldset className="overview__group overview__group--title">
+                  <h1 className="overview__name">{name}</h1>
+                  <SeamlessText
+                    className="timeline-overview__name"
+                    placeholder="Enter a description for your protocol here"
+                    input={{
+                      value: description,
+                      onChange:
+                        ({ target: { value } }) => {
+                          console.log(value);
+                          updateOptions({ description: value });
+                        },
+                    }}
+                  />
+                </fieldset>
                 <fieldset className="overview__group">
                   <legend className="overview__group-title">Variable registry</legend>
                   <br />
@@ -129,8 +149,10 @@ class Overview extends Component {
 
 Overview.propTypes = {
   name: PropTypes.string,
+  description: PropTypes.string,
   forms: PropTypes.object.isRequired,
   variableRegistry: PropTypes.object.isRequired,
+  updateOptions: PropTypes.func,
   flipId: PropTypes.string,
   show: PropTypes.bool,
 };
@@ -138,14 +160,21 @@ Overview.propTypes = {
 Overview.defaultProps = {
   show: true,
   name: null,
+  description: null,
   flipId: null,
+  updateOptions: () => {},
 };
+
+const mapDispatchToProps = dispatch => ({
+  updateOptions: bindActionCreators(protocolActions.updateOptions, dispatch),
+});
 
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
 
   return {
     name: protocol && protocol.name,
+    description: protocol && protocol.description,
     forms: protocol && protocol.forms,
     variableRegistry: protocol && protocol.variableRegistry,
   };
@@ -153,4 +182,4 @@ const mapStateToProps = (state) => {
 
 export { Overview };
 
-export default connect(mapStateToProps)(Overview);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Overview);

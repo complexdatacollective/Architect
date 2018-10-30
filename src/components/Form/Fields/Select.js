@@ -67,7 +67,7 @@ class Select extends PureComponent {
           {...input}
           options={options}
           value={getValue(this.props.options, this.props.input.value)}
-          components={{Option: SelectImageItem }}
+          components={{ Option: SelectImageItem }}
           styles={{ menuPortal: base => ({ ...base, zIndex: 9999, width: 450 }) }}
           menuPortalTarget={document.body}
           onChange={(e) => {

@@ -1,5 +1,6 @@
 {
   "name": "Development Protocol",
+  "description": "My protocol description",
   "version": "1.0.0",
   "networkCanvasVersion": "~4.0.0",
   "variableRegistry": {

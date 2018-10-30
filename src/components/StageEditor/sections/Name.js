@@ -11,7 +11,7 @@ const Name = () => (
       <h2>Name</h2>
       <p>
         Enter a name for your stage here. This name will appear in the timeline view of your
-        protocol in both Architect and Network Canvas
+        protocol in both Architect and Network Canvas.
       </p>
       <ValidatedField
         name="label"

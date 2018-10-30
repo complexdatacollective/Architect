@@ -16,14 +16,6 @@
     box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
   }
 
-  &__name {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 4rem;
-    color: var(--text-light);
-  }
-
   &__asset-group {
     display: block;
     margin: unit(1) 0;
@@ -58,6 +50,11 @@
     text-align: left;
     position: relative;
     flex: 0 0 calc(50% - #{unit(2)});
+
+    &--title {
+      flex: 100%;
+      padding: unit(2) unit(4);
+    }
 
     .node {
       margin-bottom: 1rem;
