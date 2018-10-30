@@ -20,6 +20,7 @@ module.exports = {
       getPath: () => '/tmp/foo/bar',
       getVersion: () => 'x.x.x',
     },
+    getGlobal: (...args) => console.log('remote.getGlobal', ...args),
   },
   ipcRenderer,
 };
