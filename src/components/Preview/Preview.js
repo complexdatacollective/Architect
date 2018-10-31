@@ -16,6 +16,7 @@ const Preview = ({ stage, promptIndex }) => (
       </div>
     </div>
     <PreviewControls />
+    <div id="window" />
   </div>
 );
 
