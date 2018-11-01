@@ -258,7 +258,7 @@
       "id": "welcome",
       "label": "Welcome",
       "type": "Information",
-      "title": "Title for the screen",
+      "title": "Title for the welcome stage",
       "items": [
         { "id": "2", "size": "SMALL", "type": "audio", "content": "click_the_thing.mp3" },
         { "id": "3", "size": "MEDIUM", "type": "video", "content": "video.mov" },

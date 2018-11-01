@@ -1,7 +1,7 @@
 import React from 'react';
 import Guidance from '../../Guidance';
 import { ValidatedField } from '../../../components/Form';
-import SeamlessText from '../../../components/Form/Fields/SeamlessText';
+import * as Fields from '../../../ui/components/Fields';
 import { getFieldId } from '../../../utils/issues';
 
 const Name = () => (
@@ -15,7 +15,7 @@ const Name = () => (
       </p>
       <ValidatedField
         name="label"
-        component={SeamlessText}
+        component={Fields.Text}
         placeholder="Enter your stage name here"
         className="stage-editor-section-title"
         maxLength="50"
