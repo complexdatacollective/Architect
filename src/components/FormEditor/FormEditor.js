@@ -138,7 +138,7 @@ class FormEditor extends Component {
             <h2 id={getFieldId('title')}>Title</h2>
             <ValidatedField
               name="title"
-              component={ArchitectFields.SeamlessText}
+              component={Fields.Text}
               placeholder="Enter your title here"
               validation={{ required: true }}
             />

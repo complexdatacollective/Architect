@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-export { default as SeamlessText } from './SeamlessText';
 export { default as TextArea } from './TextArea';
 export { default as Select } from './Select';
 export { default as Markdown } from './Markdown';

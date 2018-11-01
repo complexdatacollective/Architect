@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import SeamlessText from '../../../Form/Fields/SeamlessText';
+import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
 import Filter from '../../../Form/Fields/Filter';
 import ValidatedField from '../../../Form/ValidatedField';
@@ -25,7 +25,7 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
       <div className="stage-editor-section-prompt__group-title">Panel title</div>
       <Field
         name={`${fieldId}.title`}
-        component={SeamlessText}
+        component={Fields.Text}
         placeholder="Panel title"
       />
     </div>

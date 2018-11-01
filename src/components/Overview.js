@@ -8,7 +8,7 @@ import { compose } from 'recompose';
 import { Node, Button } from '../ui/components';
 import EdgeIcon from './EdgeIcon';
 import FormCard from './StageEditor/sections/Form/FormCard';
-import { SeamlessText } from './Form/Fields';
+import * as Fields from '../ui/components/Fields';
 import ProtocolLink from './ProtocolLink';
 import { getProtocol } from '../selectors/protocol';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
@@ -98,7 +98,7 @@ class Overview extends Component {
               <div className="overview__groups">
                 <div className="overview__group overview__group--title">
                   <h1 className="overview__name">{name}</h1>
-                  <SeamlessText
+                  <Fields.Text
                     className="timeline-overview__name"
                     placeholder="Enter a description for your protocol here"
                     input={{

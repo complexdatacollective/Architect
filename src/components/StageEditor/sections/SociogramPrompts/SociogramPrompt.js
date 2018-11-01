@@ -132,7 +132,7 @@ class SociogramPrompt extends Component {
               <h3 className="stage-editor-section-prompt__group-title">Prompt text</h3>
               <p>
                 Enter the text to use for your prompt below. Remember that you can add emphasis to
-                your prompt using markdown symtax.
+                your prompt using markdown syntax.
               </p>
               <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
               <ValidatedField

@@ -1,8 +1,13 @@
 .stage-editor-section-prompt {
+
   &__group {
     margin: 0 0 unit(2);
     padding: unit(2) 0 0;
     border-top: 2px solid var(--architect-border);
+
+    .form-field-container {
+      --input-background: var(--background);
+    }
 
     &:first-child {
       border: 0;
@@ -10,7 +15,8 @@
     }
 
     &-title {
-      margin: 0 0 unit(2);
+      margin: unit(2) 0;
+      font-weight: bold;
     }
   }
 
