@@ -2,6 +2,10 @@
   margin: unit(8) auto 0;
   width: 75vw;
 
+  .form-field-container {
+    --input-background: var(--background);
+  }
+
   .edge-icon {
     margin: 0 unit(2) unit(2) 0;
   }
@@ -79,6 +83,13 @@
       flex: 0 0 auto;
       height: 130px;
       margin: 0 .6rem 1.6rem 0;
+      background-color: var(--background);
+      border-color: var(--background);
+      color: var(--text);
+
+      &:hover {
+        border-color: var(--color-mustard);
+      }
     }
   }
 

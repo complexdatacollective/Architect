@@ -213,7 +213,7 @@ class SociogramPrompt extends Component {
                     name="background.skewedTowardCenter"
                     component={Fields.Checkbox}
                     className="stage-editor-section-prompt__setting"
-                    label="Skew the size of the circles so that the middle is larger."
+                    label="Skew the size of the circles so that the middle is proportionally larger."
                   />
                 </Fragment>
               }

@@ -87,7 +87,7 @@ const Item = compose(
   withHandlers(({ fields, openDialog, index }) => ({
     handleDelete: () => {
       openDialog({
-        type: 'Confirm',
+        type: 'Warning',
         title: 'Remove validation',
         message: 'Are you sure you want to remove this rule?',
         onConfirm: () => { fields.remove(index); },
@@ -104,18 +104,17 @@ const Item = compose(
             component={Select}
             name={`${field}.type`}
             validation={{ required: true }}
-          >
-            <option value="" disabled>&mdash; Select type &mdash;</option>
-            { getValidationTypesForVariable(variableType).map(
-              (validation, key) => (
-                <option
-                  key={key}
-                  value={validation}
-                  disabled={map(allValues, 'type').includes(validation)}
-                >{validation}</option>
+            placeholder="&mdash; Select type &mdash;"
+            options={getValidationTypesForVariable(variableType).map(
+              validation => (
+                {
+                  value: validation,
+                  label: validation,
+                  isDisabled: map(allValues, 'type').includes(validation),
+                }
               ),
-            ) }
-          </ValidatedField>
+            )}
+          />
         </div>
         <div className="form-fields-multi-select__rule-option">
           {

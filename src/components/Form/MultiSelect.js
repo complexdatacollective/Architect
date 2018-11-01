@@ -47,7 +47,7 @@ const Item = compose(
     handleDelete: ({ fields, openDialog, index }) =>
       () => {
         openDialog({
-          type: 'Confirm',
+          type: 'Warning',
           title: 'Remove item',
           message: 'Are you sure you want to remove this item?',
           onConfirm: () => { fields.remove(index); },
@@ -79,9 +79,8 @@ const Item = compose(
                 name={`${field}.${property}`}
                 options={options(property, rowValues, allValues)}
                 validation={{ required: true }}
-              >
-                <option value="" disabled>&mdash; Select {property} &mdash;</option>
-              </ValidatedField>
+                placeholder="&mdash; Select {property} &mdash;"
+              />
             </div>
           ),
         )}

@@ -14,6 +14,7 @@ $component-name: items-expandable-item;
     &-content {
       flex-grow: 1;
       padding: unit(2);
+
     }
   }
 
@@ -86,6 +87,10 @@ $component-name: items-expandable-item;
       animation-name: grow;
       animation-duration: var(--animation-duration-standard);
       animation-timing-function: var(--animation-easing);
+
+      .form-field-container {
+        --input-background: var(--background);
+      }
     }
 
     .#{$component-name}__expand {

@@ -44,7 +44,7 @@ const Item = compose(
     ({ fields, openDialog, index }) => ({
       handleDelete: () => {
         openDialog({
-          type: 'Confirm',
+          type: 'Warning',
           title: 'Remove item',
           message: 'Are you sure you want to remove this item?',
           onConfirm: () => { fields.remove(index); },

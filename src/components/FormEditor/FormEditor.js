@@ -6,7 +6,6 @@ import { Field } from 'redux-form';
 import { get, map, toPairs, fromPairs } from 'lodash';
 import { ValidatedField, MultiSelect } from '../Form';
 import * as Fields from '../../ui/components/Fields';
-import * as ArchitectFields from '../Form/Fields';
 import Guidance from '../Guidance';
 import Disable from '../Disable';
 import NodeType from './NodeType';
