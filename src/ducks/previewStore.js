@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from '../network-canvas/src/ducks/middleware/logger';
 import epics from '../network-canvas/src/ducks/middleware/epics';
-import rootReducer from './modules/preview';
+import rootReducer from './preview/preview';
 
 const store = createStore(
   rootReducer,

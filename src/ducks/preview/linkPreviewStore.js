@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { filter, tap, mapTo } from 'rxjs/operators';
 import previewStore from '../previewStore';
-import { actionTypes as loadActionTypes } from './protocols/load';
+import { actionTypes as loadActionTypes } from '../modules/protocols/load';
 import { actionCreators as previewActions } from './preview';
 
 const loadPreviewEpic = action$ =>

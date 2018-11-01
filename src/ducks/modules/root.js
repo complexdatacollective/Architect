@@ -9,7 +9,6 @@ import protocol from './protocol';
 import protocols from './protocols';
 import recentProtocols from './recentProtocols';
 import session, { epics as sessionEpics } from './session';
-import linkPreviewStore from './linkPreviewStore';
 import guidance from './guidance';
 
 const combineFilters = (...filters) =>
@@ -22,7 +21,6 @@ const combineFilters = (...filters) =>
 
 export const rootEpic = combineEpics(
   sessionEpics,
-  linkPreviewStore,
 );
 
 
