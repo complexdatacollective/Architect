@@ -30,14 +30,11 @@ class TypeEditor extends Component {
       iconOptions,
       displayVariables,
     } = this.props;
-
-    console.log(displayVariables);
     return (
       <div className="type-editor editor__sections">
         { type && <h1>Edit {category}</h1> }
         { !type && <h1>Create {category}</h1> }
         <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
-        <h2>Node Name</h2>
         <Guidance contentId="guidance.registry.type.label">
           <div className="editor__section">
             <h3 id={getFieldId('label')}>Label</h3>
