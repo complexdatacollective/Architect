@@ -31,16 +31,19 @@ class TypeEditor extends Component {
       displayVariables,
     } = this.props;
 
+    console.log(displayVariables);
     return (
       <div className="type-editor editor__sections">
         { type && <h1>Edit {category}</h1> }
         { !type && <h1>Create {category}</h1> }
         <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
-
+        <h2>Node Name</h2>
         <Guidance contentId="guidance.registry.type.label">
           <div className="editor__section">
-            <h2 id={getFieldId('label')}>Label</h2>
-
+            <h3 id={getFieldId('label')}>Label</h3>
+            <p>
+              The node name is how you will refer to this node type in the rest of Architect.
+            </p>
             <ValidatedField
               component={Fields.Text}
               name="label"
@@ -52,8 +55,11 @@ class TypeEditor extends Component {
 
         <Guidance contentId="guidance.registry.type.label">
           <div className="editor__section">
-            <h2 id={getFieldId('name')}>Name</h2>
-
+            <h3 id={getFieldId('name')}>Short Label</h3>
+            <p>
+              The short name is automatically generated from the node name you entered above, but
+              you can change it here if you wish.
+            </p>
             <ValidatedField
               component={Fields.Text}
               name="name"
@@ -66,7 +72,9 @@ class TypeEditor extends Component {
         <Guidance contentId="guidance.registry.type.color">
           <div className="editor__section">
             <h2 id={getFieldId('color')}>Color</h2>
-
+            <p>
+              Choose a color for this node type.
+            </p>
             <ValidatedField
               component={ArchitectFields.ColorPicker}
               name="color"
@@ -81,7 +89,9 @@ class TypeEditor extends Component {
             <Guidance contentId="guidance.registry.type.icon">
               <div className="editor__section">
                 <h2 id={getFieldId('iconVariant')}>Icon</h2>
-
+                <p>
+                  Choose an icon to display on interfaces that create this node.
+                </p>
                 <ValidatedField
                   component={Fields.RadioGroup}
                   name="iconVariant"
@@ -95,7 +105,9 @@ class TypeEditor extends Component {
             <Guidance contentId="guidance.registry.type.displayVariable">
               <div className="editor__section">
                 <h2>Display Variable</h2>
-
+                <p>
+                  Select a variable to use as a label when displaying this node.
+                </p>
                 <Field
                   component={ArchitectFields.Select}
                   name="displayVariable"

@@ -105,7 +105,6 @@ class Overview extends Component {
                       value: description,
                       onChange:
                         ({ target: { value } }) => {
-                          console.log(value);
                           updateOptions({ description: value });
                         },
                     }}

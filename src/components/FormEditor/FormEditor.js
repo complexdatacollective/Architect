@@ -67,7 +67,6 @@ const inputDefinitions = {
 };
 
 const getInputsForType = (type) => {
-  console.log('getinputsfortypes', type);
   switch (type) {
     case 'number':
       return [inputDefinitions.NumberInput];
@@ -85,7 +84,6 @@ const getInputsForType = (type) => {
 };
 
 const optionGetter = (variables) => {
-  console.log('optiongetter');
   const allowedVariables = fromPairs(
     toPairs(variables)
       .filter(([, options]) => allowedTypes.includes(options.type)),
