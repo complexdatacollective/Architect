@@ -8,6 +8,17 @@ import ValidatedField from '../../../Form/ValidatedField';
 import { Item } from '../../../Items';
 import { getFieldId } from '../../../../utils/issues';
 
+const getDataSourceOptions = (dataSources) => {
+  const externalData = dataSources.map(dataSource => (
+    { value: dataSource, label: dataSource }
+  ));
+
+  return ([
+    { value: 'existing', label: 'Current network' },
+    ...externalData,
+  ]);
+};
+
 const NodePanel = ({ fieldId, dataSources, ...rest }) => (
   <Item {...rest}>
     <div className="stage-editor-section-prompt__group">
@@ -27,18 +38,10 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
       <ValidatedField
         name={`${fieldId}.dataSource`}
         component={Select}
-        placeholder="Panel title"
+        placeholder="&mdash; Select data source &mdash;"
         validation={{ required: true }}
-      >
-        <option value="" disabled>&mdash; Select data source &mdash;</option>
-        <option value="existing">Current network</option>
-        {
-          dataSources
-            .map(dataSource => (
-              <option key={dataSource} value={dataSource}>Protocol: {dataSource}</option>
-            ))
-        }
-      </ValidatedField>
+        options={getDataSourceOptions(dataSources)}
+      />
     </div>
     <div className="stage-editor-section-prompt__group">
       <div className="stage-editor-section-prompt__group-title">Filter</div>
