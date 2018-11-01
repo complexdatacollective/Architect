@@ -1,28 +1,40 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import PreviewControls from './PreviewControls';
 import Stage from '../../network-canvas/src/containers/Stage';
+import windowRootProvider from '../../ui/components/windowRootProvider';
 
-const Preview = ({ stage, promptIndex }) => (
-  <div className="preview">
-    <div className="protocol">
-      <div className="protocol__content">
-        { stage &&
-          <Stage stage={stage} promptId={promptIndex} />
-        }
+class Preview extends Component {
+  setWindowRootRef = (element) => {
+    this.props.setWindowRoot(element);
+  }
+
+  render() {
+    const { stage, promptIndex } = this.props;
+
+    return (
+      <div className="preview">
+        <div className="protocol">
+          <div className="protocol__content">
+            { stage &&
+              <Stage stage={stage} promptId={promptIndex} />
+            }
+          </div>
+        </div>
+        <PreviewControls />
+        <div id="window" ref={this.setWindowRootRef} />
       </div>
-    </div>
-    <PreviewControls />
-    <div id="window" />
-  </div>
-);
+    );
+  }
+}
 
 Preview.propTypes = {
   stage: PropTypes.object,
   promptIndex: PropTypes.number,
+  setWindowRoot: PropTypes.func.isRequired,
 };
 
 Preview.defaultProps = {
@@ -43,6 +55,7 @@ const mapStateToProps = (state, { stageIndex }) => {
 };
 
 export default compose(
+  windowRootProvider,
   connect(mapStateToProps),
 )(
   Preview,
