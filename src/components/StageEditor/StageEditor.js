@@ -48,8 +48,12 @@ class StageEditor extends Component {
           defaultGuidance={`guidance.interface.${stage.type}`}
           form={form}
         >
-          <h1>Edit {stage.type} Screen</h1>
-          <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+          <div className="code-button">
+            <small>
+              (<a onClick={toggleCodeView}>Show Code View</a>)
+            </small>
+          </div>
+          <h1 className="editor__heading">Edit {stage.type} Screen</h1>
 
           {this.renderSections()}
 

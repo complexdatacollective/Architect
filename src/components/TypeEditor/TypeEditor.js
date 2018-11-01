@@ -32,9 +32,14 @@ class TypeEditor extends Component {
     } = this.props;
     return (
       <div className="type-editor editor__sections">
-        { type && <h1>Edit {category}</h1> }
-        { !type && <h1>Create {category}</h1> }
-        <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+        <div className="code-button">
+          <small>
+            (<a onClick={toggleCodeView}>Show Code View</a>)
+          </small>
+        </div>
+        { type && <h1 className="editor__heading">Edit {category}</h1> }
+        { !type && <h1 className="editor__heading">Create {category}</h1> }
+        
         <Guidance contentId="guidance.registry.type.label">
           <div className="editor__section">
             <h3 id={getFieldId('label')}>Label</h3>

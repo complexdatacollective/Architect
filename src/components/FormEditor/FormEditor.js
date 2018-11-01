@@ -129,8 +129,12 @@ class FormEditor extends Component {
 
     return (
       <div>
-        <h1>Edit Form</h1>
-        <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+        <div className="code-button">
+          <small>
+            (<a onClick={toggleCodeView}>Show Code View</a>)
+          </small>
+        </div>
+        <h1 className="editor__heading">Edit Form</h1>
 
         <Guidance contentId="guidance.form.title">
           <div className="stage-editor-section">

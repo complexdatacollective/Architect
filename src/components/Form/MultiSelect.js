@@ -79,7 +79,7 @@ const Item = compose(
                 name={`${field}.${property}`}
                 options={options(property, rowValues, allValues)}
                 validation={{ required: true }}
-                placeholder="&mdash; Select {property} &mdash;"
+                placeholder="&mdash; Select... &mdash;"
               />
             </div>
           ),

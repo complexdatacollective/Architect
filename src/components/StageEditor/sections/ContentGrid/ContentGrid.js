@@ -60,7 +60,7 @@ class ContentGrid extends Component {
 
           <h2>Content Boxes</h2>
           <p>
-            Use this section to configure up to three content boxes, containing images, video, 
+            Use this section to configure up to three content boxes, containing images, video,
             audio, or text.
           </p>
           <div className="content-grid">

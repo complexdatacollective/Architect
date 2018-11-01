@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { get, map } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
+import * as Fields from '../../ui/components/Fields';
 import { Icon, Button } from '../../ui/components';
 import { Select } from '../Form/Fields';
 import ValidatedField from '../Form/ValidatedField';
@@ -51,7 +52,7 @@ const renderValidationOptions = ({ field, validationType }) => {
       return (
         <Field
           name={`${field}.value`}
-          component="input"
+          component={Fields.Text}
           type="number"
           parse={value => parseInt(value, 10)}
         />

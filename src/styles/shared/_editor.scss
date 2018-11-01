@@ -4,6 +4,10 @@
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
 
+  &__heading {
+    margin-bottom: unit(4);
+  }
+
   &__reset {
     cursor: pointer;
   }
@@ -16,7 +20,7 @@
     transition-property: opacity, transform, max-height;
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
-
+    margin-top: 3rem;
     opacity: 1;
     max-height: auto;
     transform: translateX(0);
@@ -41,4 +45,10 @@
       padding-top: calc(30vh);
     }
   }
+}
+
+.code-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
 }

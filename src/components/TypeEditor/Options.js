@@ -7,6 +7,7 @@ import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
 import { Icon, Button } from '../../ui/components';
+import * as Fields from '../../ui/components/Fields';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const isNumberLike = value =>
@@ -63,11 +64,11 @@ const Item = compose(
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Label</div>
-          <Field component="input" type="text" name={`${field}.label`} placeholder="label" />
+          <Field component={Fields.Text} type="text" name={`${field}.label`} placeholder="label" />
         </div>
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Value</div>
-          <Field component="input" type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
+          <Field component={Fields.Text} type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
         </div>
       </div>
       <div className="form-fields-multi-select__rule-control">
