@@ -10,7 +10,6 @@ const windowParameters = {
   center: true,
   frame: false,
   show: false,
-  alwaysOnTop: true,
 };
 
 global.previewWindow = null;
@@ -70,6 +69,7 @@ const windowManager = {
         log.info('OPEN_PREVIEW', protocol.name, workingPath, stageIndex);
         window.webContents.send('OPEN_PREVIEW', { protocol, path: workingPath, stageIndex });
         window.show();
+        window.moveTop();
       },
     );
   },
