@@ -4,8 +4,6 @@ import { combineEpics } from 'redux-observable';
 import linkPreviewStore from './linkPreviewStore';
 import previewReducer from './preview';
 
-console.log({ previewReducer });
-
 const rootEpic = combineEpics(
   linkPreviewStore,
 );

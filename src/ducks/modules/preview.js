@@ -17,14 +17,6 @@ const closePreview = () =>
 
 const previewDraft = (draft, stageIndex) =>
   (dispatch, getState) => {
-    dispatch({
-      type: PREVIEW_DRAFT,
-      meta: {
-        draft,
-        stageIndex,
-      },
-    });
-
     const state = getState();
 
     const activeProtocolMeta = getActiveProtocolMeta(state);
@@ -36,6 +28,14 @@ const previewDraft = (draft, stageIndex) =>
       ...protocol,
       ...draft,
     };
+
+    dispatch({
+      type: PREVIEW_DRAFT,
+      meta: {
+        draft: draftProtocol,
+        stageIndex,
+      },
+    });
 
     ipcRenderer.send('OPEN_PREVIEW', { protocol: draftProtocol, path: workingPath, stageIndex });
   };
