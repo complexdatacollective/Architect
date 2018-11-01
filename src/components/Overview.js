@@ -96,7 +96,7 @@ class Overview extends Component {
           <div className="overview">
             <div className="overview__panel">
               <div className="overview__groups">
-                <fieldset className="overview__group overview__group--title">
+                <div className="overview__group overview__group--title">
                   <h1 className="overview__name">{name}</h1>
                   <SeamlessText
                     className="timeline-overview__name"
@@ -110,8 +110,8 @@ class Overview extends Component {
                         },
                     }}
                   />
-                </fieldset>
-                <fieldset className="overview__group">
+                </div>
+                <div className="overview__group">
                   <legend className="overview__group-title">Variable registry</legend>
                   <br />
                   <h4>Node types</h4>
@@ -128,8 +128,8 @@ class Overview extends Component {
                       <Button size="small">Manage registry</Button>
                     </ProtocolLink>
                   </div>
-                </fieldset>
-                <fieldset className="overview__group">
+                </div>
+                <div className="overview__group overview__group--forms">
                   <legend className="overview__group-title">Forms</legend>
                   { this.renderForms }
                   <div className="overview__manage-button">
@@ -137,7 +137,7 @@ class Overview extends Component {
                       <Button size="small">Manage forms</Button>
                     </ProtocolLink>
                   </div>
-                </fieldset>
+                </div>
               </div>
             </div>
           </div>

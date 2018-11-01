@@ -6,6 +6,10 @@
     margin: 0 unit(2) unit(2) 0;
   }
 
+  &__name {
+    text-align: center;
+  }
+
   &__panel {
     background-color: var(--architect-panel-background);
     color: var(--architect-panel-text);
@@ -44,12 +48,23 @@
   &__group {
     --base-node-size: 90px;
     border: 1px solid var(--architect-panel-divider);
-    padding: unit(2) unit(4) unit(6);
+    padding: unit(4) unit(4) unit(6);
     margin: unit(1);
     border-radius:  unit(1);
     text-align: left;
     position: relative;
     flex: 0 0 calc(50% - #{unit(2)});
+
+    &--forms {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      & > a {
+        flex: 0 0 50%;
+        padding: 0 .5rem;
+      }
+    }
 
     &--title {
       flex: 100%;
@@ -61,8 +76,9 @@
     }
 
     .stage-editor-section-form__card {
-      width: 200px;
-      float: left;
+      flex: 0 0 auto;
+      height: 130px;
+      margin: 0 .6rem 1.6rem 0;
     }
   }
 
@@ -73,8 +89,10 @@
   }
 
   &__group-title {
-    text-align: center;
-    margin-bottom: unit(2);
+    position: absolute;
+    top: -.5rem;
+    background: var(--architect-panel-background);
+    padding: 0 unit(2);
   }
 
   &__forms {
