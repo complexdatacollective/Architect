@@ -55,8 +55,6 @@ class Select extends PureComponent {
       className,
     );
 
-    console.log(options);
-
     return (
       <div className={componentClasses}>
         { label &&
@@ -71,11 +69,13 @@ class Select extends PureComponent {
           styles={{ menuPortal: base => ({ ...base, zIndex: 9999, width: 450 }) }}
           menuPortalTarget={document.body}
           onChange={(e) => {
-            console.log('onChange', e.value);
             this.props.input.onChange(e.value);
-            console.log(this);
           }}
-          onBlur={() => input.onBlur(input.value)}
+          onBlur={() => {
+            if (input.onBlur) {
+              input.onBlur(input.value);
+            }
+          }}
           {...rest}
         >
           {children}

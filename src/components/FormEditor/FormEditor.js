@@ -100,16 +100,13 @@ const optionGetter = (variables) => {
           (value, id) => ({
             value: id,
             label: value.name,
-            disabled: value !== variable && used.includes(value),
+            isDisabled: value !== variable && used.includes(value),
           }),
         );
       }
       case 'component':
-        console.log('case:component');
-        console.log('looking for', variable, 'in', variables[variable]);
         return getInputsForType(get(variables, [variable, 'type']));
       default:
-        console.warn('optiongetter default');
         return [{}];
     }
   };
