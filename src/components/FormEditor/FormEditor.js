@@ -191,7 +191,7 @@ class FormEditor extends Component {
               name="optionToAddAnother"
               component={Fields.Toggle}
               fieldLabel="Use the 'Add another' option?"
-              label="Enable 'Add another' option in this form?"
+              label="Enable 'Add another' option in this form"
             />
           </div>
         </Guidance>

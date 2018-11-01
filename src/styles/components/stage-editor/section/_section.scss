@@ -2,7 +2,7 @@
   transition-property: opacity, transform, max-height;
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
-
+  margin-top: 3rem;
   opacity: 1;
   max-height: auto;
   transform: translateX(0);
@@ -11,5 +11,14 @@
     opacity: 0;
     max-height: 0;
     transform: translateX(-100%);
+  }
+
+  .form-field-container {
+    margin-bottom: 0;
+
+    .form-field {
+      margin-bottom: 0;
+    }
+
   }
 }

@@ -9,9 +9,9 @@
 
   &__brand {
     position: absolute;
-    bottom: unit(4);
+    top: unit(4);
     right: unit(3);
-    width: unit(23);
+    width: 6rem;
     z-index: var(--z-global-ui);
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
@@ -24,8 +24,8 @@
     position: fixed;
     width: unit(10);
     height: unit(10);
-    top: unit(2);
-    left: unit(2);
+    top: unit(4);
+    left: unit(4);
     cursor: pointer;
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
