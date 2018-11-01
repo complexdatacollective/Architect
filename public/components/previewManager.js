@@ -11,6 +11,10 @@ const previewManager = {
     ipcMain.on('OPEN_PREVIEW', (event, previewOptions) => {
       previewWindowManager.openPreview(previewOptions);
     });
+
+    ipcMain.on('CLOSE_PREVIEW', () => {
+      previewWindowManager.closePreview();
+    });
   },
 };
 

@@ -73,6 +73,14 @@ const windowManager = {
       },
     );
   },
+  closePreview: function closePreview() {
+    this.getWindow().then(
+      (window) => {
+        log.info('HIDE_PREVIEW');
+        window.hide();
+      },
+    );
+  },
 };
 
 module.exports = windowManager;

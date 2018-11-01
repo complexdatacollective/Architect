@@ -34,6 +34,7 @@ class EditStage extends PureComponent {
     updateStage: PropTypes.func.isRequired,
     createStage: PropTypes.func.isRequired,
     previewStage: PropTypes.func.isRequired,
+    closePreview: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -64,6 +65,12 @@ class EditStage extends PureComponent {
     ];
   }
 
+  handleComplete = () => {
+    // Hide preview
+    this.props.closePreview();
+    this.props.onComplete();
+  }
+
   handlePreview = () => this.props.previewStage();
 
   handleSubmit = (stage) => {
@@ -75,10 +82,10 @@ class EditStage extends PureComponent {
       this.props.createStage(stage, insertAtIndex);
     }
 
-    this.props.onComplete();
+    this.handleComplete();
   }
 
-  handleCancel = this.props.onComplete;
+  handleCancel = this.handleComplete;
 
   render() {
     const { stage, show } = this.props;
@@ -131,6 +138,7 @@ const mapDispatchToProps = (dispatch, props) => {
     submitForm: () => dispatch(submitForm(formName)),
     updateStage: bindActionCreators(stageActions.updateStage, dispatch),
     createStage: bindActionCreators(stageActions.createStage, dispatch),
+    closePreview: bindActionCreators(previewActions.closePreview, dispatch),
     previewStage: () => dispatch(previewActions.previewStageByFormName(stageMeta, formName)),
   };
 };

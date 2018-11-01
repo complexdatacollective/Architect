@@ -5,14 +5,18 @@ import { getActiveProtocolMeta } from '../../selectors/protocol';
 import previewStoreData from './previewStore.json';
 import rootReducer from '../../network-canvas/src/ducks/modules/rootReducer';
 
+// TODO: This contains actionCreators that overlap stores, and probably ought to be separated
+
 const initialState = {
   ...previewStoreData,
 };
 
 const SET_PROTOCOL = 'PREVIEW/SET_PROTOCOL';
 const PREVIEW_DRAFT = 'PREVIEW/PREVIEW_DRAFT';
+const CLOSE_PREVIEW = 'PREVIEW/CLOSE_PREVIEW';
 const PREVIEW_STAGE_BY_FORMNAME = 'PREVIEW/PREVIEW_STAGE_BY_FORMNAME';
 
+// previewStore
 const setProtocol = ({ protocol, path, stageIndex = 0 }) => ({
   type: SET_PROTOCOL,
   protocol,
@@ -20,6 +24,17 @@ const setProtocol = ({ protocol, path, stageIndex = 0 }) => ({
   stageIndex,
 });
 
+// store
+const closePreview = () =>
+  (dispatch) => {
+    dispatch({
+      type: CLOSE_PREVIEW,
+    });
+
+    ipcRenderer.send('CLOSE_PREVIEW');
+  };
+
+// store
 const previewDraft = (draft, stageIndex) =>
   (dispatch, getState) => {
     dispatch({
@@ -45,7 +60,7 @@ const previewDraft = (draft, stageIndex) =>
     ipcRenderer.send('OPEN_PREVIEW', { protocol: draftProtocol, path: workingPath, stageIndex });
   };
 
-
+// store
 const previewStageByFormName = (stageMeta, formName) =>
   (dispatch, getState) => {
     dispatch({
@@ -88,9 +103,7 @@ const previewStageByFormName = (stageMeta, formName) =>
     dispatch(previewDraft(draftProtocol, stageIndex));
   };
 
-/**
- * Reducer for previewStore, not available in ../store.js
- */
+// previewStore
 const previewReducer = (state = initialState, action) => {
   if (action.type === SET_PROTOCOL) {
     return {
@@ -115,6 +128,7 @@ const actionTypes = {
 
 const actionCreators = {
   setProtocol,
+  closePreview,
   previewDraft,
   previewStageByFormName,
 };
