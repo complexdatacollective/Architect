@@ -7,6 +7,11 @@
 
     .form-field-container {
       --input-background: var(--background);
+      margin-bottom: 3rem;
+
+      h4 {
+        font-weight: bold;
+      }
     }
 
     &:first-child {

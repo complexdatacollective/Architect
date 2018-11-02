@@ -1,15 +1,27 @@
 import React, { PureComponent } from 'react';
-import ReactSelect from 'react-select';
+import ReactSelect, { components } from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import SelectImageItem from './SelectImageItem';
 
 const getValue = (opts, val) => opts.find(o => o.value === val);
+
+const { Option } = components;
+
+const DefaultSelectItem = props => (
+  <Option
+    {...props}
+    className="form-fields-select__item"
+    classNamePrefix="form-fields-select__item"
+  >
+    <p>{props.data.label}</p>
+  </Option>
+);
 
 class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     options: PropTypes.array,
+    selectComponent: PropTypes.any,
     input: PropTypes.object,
     label: PropTypes.string,
     children: PropTypes.node,
@@ -18,6 +30,7 @@ class Select extends PureComponent {
 
   static defaultProps = {
     className: '',
+    selectComponent: DefaultSelectItem,
     options: [],
     input: {},
     label: null,
@@ -45,6 +58,7 @@ class Select extends PureComponent {
       input,
       children,
       options,
+      selectComponent,
       label,
       meta: { invalid, error },
       ...rest
@@ -61,12 +75,13 @@ class Select extends PureComponent {
           <h4>{label}</h4>
         }
         <ReactSelect
-          className="form-fields-select__input"
+          className="form-fields-select"
+          classNamePrefix="form-fields-select"
           {...input}
           options={options}
           value={getValue(this.props.options, this.props.input.value)}
-          components={{ Option: SelectImageItem }}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 9999, width: 450 }) }}
+          components={{ Option: selectComponent }}
+          styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
           menuPortalTarget={document.body}
           onChange={(e) => {
             this.props.input.onChange(e.value);
