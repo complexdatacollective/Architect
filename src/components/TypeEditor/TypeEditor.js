@@ -39,7 +39,7 @@ class TypeEditor extends Component {
         </div>
         { type && <h1 className="editor__heading">Edit {category}</h1> }
         { !type && <h1 className="editor__heading">Create {category}</h1> }
-        
+
         <Guidance contentId="guidance.registry.type.label">
           <div className="editor__section">
             <h3 id={getFieldId('label')}>Label</h3>

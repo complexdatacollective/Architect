@@ -6,11 +6,9 @@ $bottom-spacing: unit(12);
   z-index: var(--z-default);
   transition-property: opacity;
   transition-duration: 500ms;
-  will-change: opacity;
 
   &::before {
     transition: transform var(--animation-duration-slow) var(--animation-easing);
-    will-change: transform;
     z-index: -1;
     content: '';
     display: block;
@@ -34,7 +32,6 @@ $bottom-spacing: unit(12);
       height: calc(#{$stage-height} + #{2 * $stage-padding});
       width: 100%;
       background-color: transparent;
-      will-change: transform background-color;
       transition: transform var(--animation-duration-standard) var(--animation-easing),
       background-color var(--animation-duration-standard) var(--animation-easing);
       transform: translateZ(0);

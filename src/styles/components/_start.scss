@@ -6,16 +6,15 @@
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
   transition-property: opacity;
-  will-change: opacity;
 
   #create-new-protocol-button,
   #open-existing-protocol-button {
     transition: transform var(--animation-duration-standard) var(--animation-easing);
-    will-change: transform;
   }
 
   &__welcome {
     padding: 0 0 2.4rem;
+    text-align: center;
 
     &-title,
     &-lead {

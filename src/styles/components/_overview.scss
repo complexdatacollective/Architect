@@ -152,7 +152,6 @@
     $transition-after: 300ms;
     $transition-duration: 500ms;
     $transition-easing: cubic-bezier(.25, .1, .25, 1);
-    will-change: transform, opacity;
     transform: translateZ(0);
     transition: opacity $transition-after $transition-easing;
 
@@ -161,7 +160,6 @@
     }
 
     .timeline-overview__panel {
-      will-change: transform;
       transform: translateZ(0);
       transition: border-radius $transition-duration $transition-easing,
       transform $transition-duration $transition-easing;

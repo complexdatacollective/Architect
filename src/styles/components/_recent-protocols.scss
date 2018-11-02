@@ -1,17 +1,37 @@
 .recent-protocols {
-  max-width: 1300px;
-  min-width: 1000px;
+  max-height: 50vh;
+  height: 300px;
+  width: 100%;
+  position: relative;
   margin: 0 auto;
   padding: unit(3);
   border-radius: unit(1);
   background-color: var(--light-background);
   display: flex;
-  box-shadow: inset 5px 5px 15px var(--color-shadow);
+  flex-wrap: wrap;
+  align-items: center;
+  overflow-y: scroll;
+  z-index: 2;
+
+  &__title {
+    position: absolute;
+    width: 100%;
+    top: 1rem;
+    text-align: center;
+    color: var(--text-light);
+  }
 
   &__protocol {
     display: flex;
-    flex: 0 0 33%;
+    flex: 0 0 25%;
     justify-content: center;
-    padding: unit(2) unit(4) 0;
+  }
+
+  &__welcome {
+    text-align: center;
+    width: 80%;
+    color: var(--text-light);
+    margin: 0 auto;
+    align-self: center;
   }
 }

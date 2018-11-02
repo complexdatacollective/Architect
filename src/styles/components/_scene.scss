@@ -68,23 +68,17 @@
   }
 
   &__start {
-    position: absolute;
-    top: 15vh;
-    left: 0;
     width: 100%;
-    height: 20vh;
-    z-index: 2;
+    margin-top: 10vh;
   }
 
   &__recent-protocols {
-    position: absolute;
-    top: 45vh;
-    left: 0;
-    width: 100%;
+    width: 1000px;
     display: flex;
     opacity: 1;
     visibility: visible;
     z-index: 2;
+    margin: 0 auto;
   }
 
   &__protocol {
@@ -113,7 +107,7 @@
     .scene {
       &__brand {
         opacity: 0;
-        transform: translateY(100%);
+        transform: translateX(100%);
       }
 
       &__protocol {
