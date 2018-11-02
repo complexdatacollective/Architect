@@ -59,7 +59,7 @@ class RecentProtocols extends Component {
 }
 
 const mapStateToProps = state => ({
-  recentProtocols: get(state, 'recentProtocols', []).slice(0, 3),
+  recentProtocols: get(state, 'recentProtocols', []).slice(0, 4),
 });
 
 export { RecentProtocols };

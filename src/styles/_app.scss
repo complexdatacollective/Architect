@@ -6,7 +6,7 @@ $component-name: app;
     visibility: visible;
     position: absolute;
     z-index: var(--z-chrome);
-    background: var(--architect-titlebar);
+    background: transparent;
     top: 0;
     left: 0;
     right: 0;
@@ -43,7 +43,6 @@ $component-name: app;
 
   &--macos {
     .#{$component-name}__window {
-      top: unit(2.5);
       height: calc(100% - #{unit(2.5)});
     }
   }
