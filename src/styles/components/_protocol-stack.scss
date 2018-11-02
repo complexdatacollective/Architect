@@ -4,7 +4,7 @@ $component-name: protocol-stack;
 .protocol-stack {
   width: 100%;
   cursor: pointer;
-  max-width: 15vh;
+  max-width: 11rem;
 
   &__preview {
     width: 100%;
@@ -22,14 +22,12 @@ $component-name: protocol-stack;
 
     &-cover {
       position: relative;
-      background: var(--architect-panel-background);
       border-radius: unit(1);
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 3;
-      box-shadow: $card-shadow;
       padding: 20px;
 
       img {
