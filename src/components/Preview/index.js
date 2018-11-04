@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import previewStore from '../../ducks/previewStore';
 import Preview from './Preview';
+import Chrome from './Chrome';
 
 const PreviewContainer = ({ match }) => (
   <Provider store={previewStore}>
@@ -18,5 +19,7 @@ PreviewContainer.propTypes = {
 PreviewContainer.defaultProps = {
   match: null,
 };
+
+export { Chrome };
 
 export default PreviewContainer;

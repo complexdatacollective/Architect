@@ -47,10 +47,4 @@ $component-name: app;
       height: calc(100% - #{unit(2.5)});
     }
   }
-
-  &--preview {
-    .#{$component-name}__electron-titlebar {
-      background: var(--background-dark);
-    }
-  }
 }

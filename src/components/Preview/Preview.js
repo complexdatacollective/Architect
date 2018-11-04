@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import PreviewControls from './PreviewControls';
 import Stage from '../../network-canvas/src/containers/Stage';
 import windowRootProvider from '../../ui/components/windowRootProvider';
 
@@ -17,15 +16,16 @@ class Preview extends Component {
 
     return (
       <div className="preview">
-        <div className="protocol">
-          <div className="protocol__content">
-            { stage &&
-              <Stage stage={stage} promptId={promptIndex} />
-            }
-          </div>
+        <div className="network-canvas">
+          { stage &&
+            <Stage stage={stage} promptId={promptIndex} />
+          }
+          <div
+            id="window"
+            className="window"
+            ref={this.setWindowRootRef}
+          />
         </div>
-        <PreviewControls />
-        <div id="window" ref={this.setWindowRootRef} />
       </div>
     );
   }

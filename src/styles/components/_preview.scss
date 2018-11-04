@@ -1,5 +1,26 @@
 
-.preview {
+.preview { }
+
+.previewer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 0 0;
+  background: #888;
+
+  &__content {
+    width: 1024px;
+    height: 768px;
+    border: 0;
+  }
+}
+
+.network-canvas {
   // sass-lint:disable no-color-literals
   --color-shadow: rgba(0, 0, 0, .15);
   --color-modal-shadow: rgba(20, 0, 0, .2);
@@ -13,21 +34,43 @@
 
   @import '../../network-canvas/src/styles/main';
 
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
   color: var(--text);
   background: var(--background);
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
 
-  &-controls {
+  .window {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
 
-    .button {
-      margin-right: 20px;
+    .modal {
+      position: absolute !important;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
     }
+  }
+}
+
+.preview-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: red;
+  z-index: 2;
+  -webkit-app-region: drag;
+  z-index: var(--z-chrome);
+  background: var(--architect-titlebar);
+  padding: unit(1);
+
+  .button {
+    margin-right: unit(1);
   }
 }

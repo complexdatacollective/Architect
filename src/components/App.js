@@ -21,7 +21,7 @@ const App = ({ children, location }) => {
 
   return (
     <div className={appClasses}>
-      {(isMacOS() || isPreview) &&
+      {isMacOS() &&
         <div className="app__electron-titlebar" />
       }
       <div className="app__window">
@@ -32,7 +32,9 @@ const App = ({ children, location }) => {
       <div id="page-wrap" />
 
       <DialogManager />
-      <Version />
+      { !isPreview &&
+        <Version />
+      }
     </div>
   );
 };
