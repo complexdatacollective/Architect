@@ -5,7 +5,7 @@ import { nth, find, get } from 'lodash';
 import { Route, Switch } from 'react-router-dom';
 import Scene from './components/Scene';
 import ProtocolLoader from './components/ProtocolLoader';
-import Preview, { Chrome } from './components/Preview';
+import Preview from './components/Preview';
 import tween from './behaviours/Tweened/tween';
 
 const getProtocolPath = pathname =>
@@ -69,10 +69,6 @@ class Routes extends Component {
       <Switch>
         <Route
           path="/preview/:stageIndex/:protocol?"
-          component={Chrome}
-        />
-        <Route
-          path="/nc/preview/:stageIndex/:protocol?"
         >
           { props => (
             <React.Fragment>
