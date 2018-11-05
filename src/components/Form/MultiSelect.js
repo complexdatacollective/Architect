@@ -41,6 +41,10 @@ const mapDispatchToItemProps = dispatch => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
+const resetLinkedSelectValue = (event) => {
+  console.log(event);
+};
+
 const Item = compose(
   connect(mapStateToItemProps, mapDispatchToItemProps),
   withHandlers({
@@ -80,7 +84,8 @@ const Item = compose(
                 name={`${field}.${property.fieldName}`}
                 options={options(property.fieldName, rowValues, allValues)}
                 validation={{ required: true }}
-                placeholder="&mdash; Select... &mdash;"
+                placeholder="&mdash; Select &mdash;"
+                onChange={e => resetLinkedSelectValue(e)}
               />
             </div>
           ),

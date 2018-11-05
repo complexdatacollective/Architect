@@ -3,7 +3,14 @@ import ReactSelect, { components } from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const getValue = (opts, val) => opts.find(o => o.value === val);
+const getValue = (opts, val) => {
+  const foundValue = opts.find(o => o.value === val);
+  if (!foundValue) {
+    return null;
+  }
+
+  return opts.find(o => o.value === val);
+};
 
 const { Option } = components;
 
@@ -43,15 +50,6 @@ class Select extends PureComponent {
     this.state = { visited: false };
   }
 
-  // Redux Form's visited tracking seems wonky for Select elements. So we are tracking it manually.
-  handleBlur = (e) => {
-    this.setState({ visited: true });
-
-    if (this.props.input.onBlur) {
-      this.props.input.onBlur(e);
-    }
-  }
-
   render() {
     const {
       className,
@@ -61,7 +59,6 @@ class Select extends PureComponent {
       selectOptionComponent,
       label,
       meta: { invalid, error },
-      ...rest
     } = this.props;
 
     const componentClasses = cx(
@@ -77,21 +74,19 @@ class Select extends PureComponent {
         <ReactSelect
           className="form-fields-select"
           classNamePrefix="form-fields-select"
-          {...input}
           options={options}
-          value={getValue(this.props.options, this.props.input.value)}
+          value={getValue(options, input.value)}
           components={{ Option: selectOptionComponent }}
           styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
           menuPortalTarget={document.body}
           onChange={(e) => {
-            this.props.input.onChange(e.value);
+            input.onChange(e.value);
           }}
           onBlur={() => {
             if (input.onBlur) {
               input.onBlur(input.value);
             }
           }}
-          {...rest}
         >
           {children}
         </ReactSelect>
