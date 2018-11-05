@@ -1,11 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 
 import { combineEpics } from 'redux-observable';
-import linkPreviewStore from './linkPreviewStore';
-import previewReducer from './preview';
+import previewReducer, { epics } from './preview';
 
 const rootEpic = combineEpics(
-  linkPreviewStore,
+  epics,
 );
 
 const rootReducer = previewReducer;

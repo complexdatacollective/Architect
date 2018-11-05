@@ -218,8 +218,8 @@
             "<rootDir>[/\\\\](src/ui)[/\\\\]"
         ],
         "modulePathIgnorePatterns": [
-          "<rootDir>[/\\\\](src/network-canvas)[/\\\\]",
-          "<rootDir>[/\\\\](src/ui)[/\\\\]"
+            "<rootDir>[/\\\\](src/network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](src/ui)[/\\\\]"
         ],
         "testEnvironment": "node",
         "testURL": "http://localhost",

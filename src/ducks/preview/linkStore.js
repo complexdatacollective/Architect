@@ -4,6 +4,11 @@ import previewStore from '../previewStore';
 import { actionTypes as loadActionTypes } from '../modules/protocols/load';
 import { actionCreators as previewActions } from './preview';
 
+/**
+ * When we load a protocol in Architect, automatically load it into the preview state.
+ * This is only used for debugging the preview view, normally preview state is loaded
+ * via ipc.
+ */
 const loadPreviewEpic = action$ =>
   action$.pipe(
     // // onloadsucess,

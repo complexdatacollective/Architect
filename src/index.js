@@ -12,7 +12,6 @@ import App from './components/App';
 import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
 import { actionCreators as protocolsActions } from './ducks/modules/protocols';
-import initPreview from './preview';
 
 import './styles/main.scss';
 
@@ -51,7 +50,6 @@ const startApp = () => {
 };
 
 startApp();
-initPreview();
 
 ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
   // eslint-disable-next-line no-console

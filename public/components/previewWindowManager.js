@@ -67,7 +67,11 @@ const windowManager = {
     this.getWindow().then(
       (window) => {
         log.info('OPEN_PREVIEW', protocol.name, workingPath, stageIndex);
-        window.webContents.send('OPEN_PREVIEW', { protocol, path: workingPath, stageIndex });
+        // window.webContents.send('OPEN_PREVIEW', { protocol, path: workingPath, stageIndex });
+        window.webContents.send('ACTION', {
+          type: 'OPEN_PREVIEW',
+          payload: { protocol, path: workingPath, stageIndex },
+        });
         window.show();
         window.moveTop();
       },

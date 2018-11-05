@@ -1,8 +1,9 @@
+import { combineEpics } from 'redux-observable';
+import { filter, map } from 'rxjs/operators';
 import { omit } from 'lodash';
+import history from '../../history';
 import previewStoreData from './previewStore.json';
 import rootReducer from '../../network-canvas/src/ducks/modules/rootReducer';
-
-// TODO: This contains actionCreators that overlap stores, and probably ought to be separated
 
 const initialState = {
   ...previewStoreData,
@@ -33,6 +34,18 @@ const previewReducer = (state = initialState, action) => {
   return rootReducer(state, action);
 };
 
+const openPreviewEpic = action$ =>
+  action$.pipe(
+    filter(({ type }) => type === 'OPEN_PREVIEW'),
+    map((action) => {
+      const { protocol, path, stageIndex } = action.payload;
+
+      history.push(`/preview/${stageIndex}`);
+
+      return setProtocol({ protocol, path, stageIndex });
+    }),
+  );
+
 const actionTypes = {
   SET_PROTOCOL,
 };
@@ -41,9 +54,14 @@ const actionCreators = {
   setProtocol,
 };
 
+const epics = combineEpics(
+  openPreviewEpic,
+);
+
 export {
   actionTypes,
   actionCreators,
+  epics,
 };
 
 export default previewReducer;
