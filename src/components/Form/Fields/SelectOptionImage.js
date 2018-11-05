@@ -9,14 +9,18 @@ const getInputImage = type =>
 
 const { Option } = components;
 
-const SelectImageIcon = props => (
-  <Option {...props} className="select-option">
+const SelectOptionImage = props => (
+  <Option
+    {...props}
+    className="form-fields-select__item"
+    classNamePrefix="form-fields-select__item"
+  >
     { props.data.image ? (
-      <img className="select-option__image" src={getInputImage(props.data.image)} alt={props.data.label} />
+      <img className="form-fields-select__item--image" src={getInputImage(props.data.image)} alt={props.data.label} />
     ) : ''}
     <h4>{props.data.label}</h4>
     <p>{props.data.description}</p>
   </Option>
 );
 
-export default SelectImageIcon;
+export default SelectOptionImage;

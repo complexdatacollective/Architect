@@ -73,11 +73,12 @@ const Item = compose(
       <div className="form-fields-multi-select__rule-options">
         {properties.map(
           property => (
-            <div className="form-fields-multi-select__rule-option" key={property}>
+            <div className="form-fields-multi-select__rule-option" key={property.fieldName}>
               <ValidatedField
                 component={Select}
-                name={`${field}.${property}`}
-                options={options(property, rowValues, allValues)}
+                selectOptionComponent={property.selectOptionComponent}
+                name={`${field}.${property.fieldName}`}
+                options={options(property.fieldName, rowValues, allValues)}
                 validation={{ required: true }}
                 placeholder="&mdash; Select... &mdash;"
               />

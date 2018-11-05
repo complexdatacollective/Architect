@@ -6,11 +6,14 @@ import { Field } from 'redux-form';
 import { get, map, toPairs, fromPairs } from 'lodash';
 import { ValidatedField, MultiSelect } from '../Form';
 import * as Fields from '../../ui/components/Fields';
+import SelectOptionImage from '../Form/Fields/SelectOptionImage';
+import SelectOptionVariable from '../Form/Fields/SelectOptionVariable';
 import Guidance from '../Guidance';
 import Disable from '../Disable';
 import NodeType from './NodeType';
 import { getFieldId } from '../../utils/issues';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
+
 
 const allowedTypes = ['text', 'number', 'boolean', 'ordinal', 'categorical'];
 
@@ -96,7 +99,9 @@ const optionGetter = (variables) => {
           allowedVariables,
           (value, id) => ({
             value: id,
-            label: value.name,
+            label: value.label,
+            name: value.name,
+            description: value.description,
             isDisabled: value !== variable && used.includes(value),
           }),
         );
@@ -173,12 +178,22 @@ class FormEditor extends Component {
 
         <Guidance contentId="guidance.form.variables">
           <div className="stage-editor-section">
-            <h2>Form variables</h2>
+            <h2>Add Variables and Input Types</h2>
+            <p>
+              Use this section to add variables from the variable registry to the form, and map them
+              to your preferred input type.
+            </p>
             <MultiSelect
               name="fields"
               properties={[
-                'variable',
-                'component',
+                {
+                  fieldName: 'variable',
+                  selectOptionComponent: SelectOptionVariable,
+                },
+                {
+                  fieldName: 'component',
+                  selectOptionComponent: SelectOptionImage,
+                },
               ]}
               options={optionGetter(variables)}
             />

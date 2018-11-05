@@ -271,10 +271,9 @@ export default {
   ),
   'guidance.form.variables': (
     <Fragment>
-      <h3>Form Variables</h3>
+      <h3>Form Variables and Input Types</h3>
       <p>
-        Choose the variables you would like to edit in this form, and which type of control for
-        each.
+        guidance.form.variables
       </p>
     </Fragment>
   ),

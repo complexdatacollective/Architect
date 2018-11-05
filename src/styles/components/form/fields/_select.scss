@@ -1,4 +1,5 @@
-div.form-fields-select {
+div.form-fields-select,
+img.form-fields-select {
   @include form-field;
 
   &__control {
@@ -33,6 +34,12 @@ div.form-fields-select {
 
   &__item {
     padding: .5rem 1rem;
+    min-height: 4rem;
+
+    &--image {
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
   }
 
   &__option {

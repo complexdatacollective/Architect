@@ -21,7 +21,7 @@ class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     options: PropTypes.array,
-    selectComponent: PropTypes.any,
+    selectOptionComponent: PropTypes.any,
     input: PropTypes.object,
     label: PropTypes.string,
     children: PropTypes.node,
@@ -30,7 +30,7 @@ class Select extends PureComponent {
 
   static defaultProps = {
     className: '',
-    selectComponent: DefaultSelectItem,
+    selectOptionComponent: DefaultSelectItem,
     options: [],
     input: {},
     label: null,
@@ -58,7 +58,7 @@ class Select extends PureComponent {
       input,
       children,
       options,
-      selectComponent,
+      selectOptionComponent,
       label,
       meta: { invalid, error },
       ...rest
@@ -80,7 +80,7 @@ class Select extends PureComponent {
           {...input}
           options={options}
           value={getValue(this.props.options, this.props.input.value)}
-          components={{ Option: selectComponent }}
+          components={{ Option: selectOptionComponent }}
           styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
           menuPortalTarget={document.body}
           onChange={(e) => {
