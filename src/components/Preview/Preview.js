@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { get } from 'lodash';
 import Stage from '../../network-canvas/src/containers/Stage';
 import windowRootProvider from '../../ui/components/windowRootProvider';
-import PreviewControls from './PreviewControls';
 
 class Preview extends Component {
   setWindowRootRef = (element) => {
@@ -27,8 +26,6 @@ class Preview extends Component {
             ref={this.setWindowRootRef}
           />
         </div>
-
-        <PreviewControls />
       </div>
     );
   }
