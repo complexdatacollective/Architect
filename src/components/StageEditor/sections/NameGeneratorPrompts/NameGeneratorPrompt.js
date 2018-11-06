@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { connect } from 'react-redux';
-import { get, reduce } from 'lodash';
+import { get, reduce, isEmpty } from 'lodash';
 import { compose, withHandlers } from 'recompose';
 import { ValidatedField } from '../../../Form';
 import TextArea from '../../../../ui/components/Fields/TextArea';
@@ -14,7 +14,7 @@ import { getValidations } from '../../../../utils/validations';
 const withValidation = withHandlers({
   handleValidateAttributes: props => (attributes) => {
     const variables = get(props.variableRegistry, ['node', props.nodeType, 'variables'], {});
-    return reduce(attributes, (errors, attribute, variable) => {
+    const allErrors = reduce(attributes, (errors, attribute, variable) => {
       const variableMeta = get(variables, variable, {});
       const validations = getValidations(get(variableMeta, 'validation', {}));
       const result = validations.reduce(
@@ -33,6 +33,10 @@ const withValidation = withHandlers({
         ),
       };
     }, {});
+
+    if (isEmpty(allErrors)) { return undefined; }
+
+    return allErrors;
   },
 });
 
