@@ -85,8 +85,10 @@ const Item = compose(
                 validation={{ required: true }}
                 placeholder="&mdash; Select &mdash;"
                 onChange={() => {
-                  console.log('onchange');
-                  props.change(props.form, `${field}.component`, null);
+                  // Reset the value of the second select when the first one changes.
+                  if (`${property.fieldName}` === 'variable') {
+                    props.change(props.form, `${field}.component`, null);
+                  }
                 }
                 }
               />
