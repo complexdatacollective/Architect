@@ -42,7 +42,6 @@ function createWindow() {
     global.appWindow = new BrowserWindow(windowParameters);
 
     const appMenu = Menu.buildFromTemplate(mainMenu(global.appWindow));
-    Menu.setApplicationMenu(appMenu);
 
     global.appWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action
@@ -52,6 +51,10 @@ function createWindow() {
     // For now, any navigation off the SPA is unneeded
     global.appWindow.webContents.on('will-navigate', (evt) => {
       evt.preventDefault();
+    });
+
+    global.appWindow.on('focus', () => {
+      Menu.setApplicationMenu(appMenu);
     });
 
     global.appWindow.on('closed', () => {

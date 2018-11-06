@@ -2,9 +2,20 @@ import { ipcRenderer } from 'electron';
 import { getFormValues } from 'redux-form';
 import { getActiveProtocolMeta } from '../../selectors/protocol';
 
+const SET_ZOOM = 'PREVIEW/ZOOM';
+const REFRESH_PREVIEW = 'PREVIEW/REFRESH_PREVIEW';
 const PREVIEW_DRAFT = 'PREVIEW/PREVIEW_DRAFT';
 const CLOSE_PREVIEW = 'PREVIEW/CLOSE_PREVIEW';
 const PREVIEW_STAGE_BY_FORMNAME = 'PREVIEW/PREVIEW_STAGE_BY_FORMNAME';
+
+const zoom = zoomFactor => ({
+  type: SET_ZOOM,
+  zoom: zoomFactor,
+});
+
+const refresh = () => ({
+  type: REFRESH_PREVIEW,
+});
 
 const closePreview = () =>
   (dispatch) => {
@@ -85,12 +96,16 @@ const previewStageByFormName = (stageMeta, formName) =>
 const actionTypes = {
   PREVIEW_DRAFT,
   PREVIEW_STAGE_BY_FORMNAME,
+  SET_ZOOM,
+  REFRESH_PREVIEW,
 };
 
 const actionCreators = {
   closePreview,
   previewDraft,
   previewStageByFormName,
+  zoom,
+  refresh,
 };
 
 export {

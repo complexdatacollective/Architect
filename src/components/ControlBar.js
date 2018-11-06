@@ -4,8 +4,8 @@ import cx from 'classnames';
 
 const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
   const buttonLayout = [
-    <div className="control-bar__primary-buttons">{ buttons }</div>,
-    <div className="control-bar__secondary-buttons">{ secondaryButtons }</div>,
+    <div className="control-bar__primary-buttons" key="primary">{ buttons }</div>,
+    <div className="control-bar__secondary-buttons" key="secondary">{ secondaryButtons }</div>,
   ];
 
   return (

@@ -40,6 +40,9 @@
   },
   "protocols": [
   ],
+  "deviceSettings": {
+    "interfaceScale": 1
+  },
   "modals": [],
   "dialogs": {
     "dialogs": []

@@ -7,6 +7,22 @@ import Stage from '../../network-canvas/src/containers/Stage';
 import windowRootProvider from '../../ui/components/windowRootProvider';
 
 class Preview extends Component {
+  componentDidMount() {
+    this.setFontSize();
+  }
+
+  componentDidUpdate() {
+    this.setFontSize();
+  }
+
+  setFontSize = () => {
+    const root = document.documentElement;
+    // const newFontSize = `${(1.75 * this.props.interfaceScale)}vmin`;
+    const newFontSize = `${(14 * this.props.interfaceScale)}px`;
+
+    root.style.setProperty('--base-font-size', newFontSize);
+  }
+
   setWindowRootRef = (element) => {
     this.props.setWindowRoot(element);
   }
@@ -51,6 +67,8 @@ const mapStateToProps = (state, { stageIndex }) => {
   return {
     stage,
     promptIndex,
+    interfaceScale: state.deviceSettings.interfaceScale,
+    // interfaceScale: 1,
   };
 };
 

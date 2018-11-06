@@ -6,7 +6,7 @@ const previewWindowManager = require('./previewWindowManager');
 const previewManager = {
   init: function init() {
     log.info('Initialise preview manager');
-    previewWindowManager.getWindow();
+    previewWindowManager.getWindow().then(win => win.show());
 
     ipcMain.on('OPEN_PREVIEW', (event, previewOptions) => {
       previewWindowManager.openPreview(previewOptions);

@@ -15,7 +15,7 @@ const loadPreviewEpic = action$ =>
     filter(({ type }) => type === loadActionTypes.LOAD_PROTOCOL_SUCCESS),
     // update state with loadpreview
     tap((action) => {
-      previewStore.dispatch(previewActions.setProtocol({ path: '', protocol: action.protocol }));
+      previewStore.dispatch(previewActions.setProtocol(action.protocol));
     }),
     mapTo(() => ({ type: 'PREVIEW/LINKED_PREVIEW_STORE' })),
   );
