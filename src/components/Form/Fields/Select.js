@@ -3,15 +3,6 @@ import ReactSelect, { components } from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const getValue = (opts, val) => {
-  const foundValue = opts.find(o => o.value === val);
-  if (!foundValue) {
-    return null;
-  }
-
-  return opts.find(o => o.value === val);
-};
-
 const { Option } = components;
 
 const DefaultSelectItem = props => (
@@ -59,12 +50,22 @@ class Select extends PureComponent {
       selectOptionComponent,
       label,
       meta: { invalid, error },
+      ...rest
     } = this.props;
 
     const componentClasses = cx(
       'form-fields-select',
       className,
     );
+
+    const getValue = (opts, val) => {
+      const foundValue = opts.find(o => o.value === val);
+      if (!foundValue) {
+        return null;
+      }
+
+      return opts.find(o => o.value === val);
+    };
 
     return (
       <div className={componentClasses}>
@@ -74,19 +75,21 @@ class Select extends PureComponent {
         <ReactSelect
           className="form-fields-select"
           classNamePrefix="form-fields-select"
+          {...input}
           options={options}
-          value={getValue(options, input.value)}
+          value={getValue(this.props.options, this.props.input.value)}
           components={{ Option: selectOptionComponent }}
           styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
           menuPortalTarget={document.body}
           onChange={(e) => {
-            input.onChange(e.value);
+            this.props.input.onChange(e.value);
           }}
           onBlur={() => {
             if (input.onBlur) {
               input.onBlur(input.value);
             }
           }}
+          {...rest}
         >
           {children}
         </ReactSelect>

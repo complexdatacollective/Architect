@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { compose, defaultProps, withProps, withHandlers } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
-import { FieldArray, formValueSelector } from 'redux-form';
+import { FieldArray, formValueSelector, change } from 'redux-form';
 import { Icon, Button } from '../../ui/components';
 import Select from './Fields/Select';
 import ValidatedField from '../Form/ValidatedField';
@@ -35,15 +35,13 @@ const AddItem = props => (
 const mapStateToItemProps = (state, { field, fields: { name: fieldsName }, meta: { form } }) => ({
   rowValues: formValueSelector(form)(state, field),
   allValues: formValueSelector(form)(state, fieldsName),
+  form,
 });
 
 const mapDispatchToItemProps = dispatch => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
+  change: bindActionCreators(change, dispatch),
 });
-
-const resetLinkedSelectValue = (event) => {
-  console.log(event);
-};
 
 const Item = compose(
   connect(mapStateToItemProps, mapDispatchToItemProps),
@@ -68,6 +66,7 @@ const Item = compose(
     rowValues,
     allValues,
     handleDelete,
+    ...props
   }) => (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-control">
@@ -85,7 +84,11 @@ const Item = compose(
                 options={options(property.fieldName, rowValues, allValues)}
                 validation={{ required: true }}
                 placeholder="&mdash; Select &mdash;"
-                onChange={e => resetLinkedSelectValue(e)}
+                onChange={() => {
+                  console.log('onchange');
+                  props.change(props.form, `${field}.component`, null);
+                }
+                }
               />
             </div>
           ),
