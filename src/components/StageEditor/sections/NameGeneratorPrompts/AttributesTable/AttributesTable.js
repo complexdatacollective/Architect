@@ -1,52 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { omit, isEqual, get, keys, difference, omitBy, toPairs } from 'lodash';
-import { withHandlers, compose } from 'recompose';
-import { connect } from 'react-redux';
+import { isEqual, toPairs } from 'lodash';
+import { compose } from 'recompose';
 import RoundButton from '../../../../Form/RoundButton';
 import Variable from './Variable';
-
-const validTypes = [
-  'ordinal',
-  'categorical',
-  'boolean',
-  'text',
-  'number',
-];
-
-const defaultsByType = {
-  boolean: true,
-  ordinal: [],
-  text: '',
-  number: '',
-};
-
-const getVariableDefault = (variableMeta) => {
-  if (variableMeta.default) { return variableMeta.default; }
-  return get(defaultsByType, variableMeta.type, '');
-};
-
-const withVaribleActions = withHandlers({
-  createVariable: props => (variable) => {
-    // don't add existing property
-    if (Object.prototype.hasOwnProperty.call(props.variables, variable)) { return; }
-    props.input.onChange({
-      ...props.variables,
-      [variable]: getVariableDefault(props.variablesForNodeType[variable]),
-    });
-  },
-  deleteVariable: props => variable =>
-    props.input.onChange(omit(props.variables, variable)),
-  updateVariable: props => variable =>
-    props.input.onChange({ ...props.variables, ...variable }),
-});
+import withVaribleActions from './withVariableActions';
+import withUnusedVariables from './withUnusedVariables';
 
 class AttributesTable extends Component {
   static propTypes = {
     createVariable: PropTypes.func.isRequired,
     updateVariable: PropTypes.func.isRequired,
     deleteVariable: PropTypes.func.isRequired,
-    variables: PropTypes.object.isRequired,
     nodeType: PropTypes.string.isRequired,
     unusedVariables: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.object.isRequired,
@@ -68,7 +33,7 @@ class AttributesTable extends Component {
   }
 
   get variables() {
-    const variables = toPairs(this.props.variables);
+    const variables = toPairs(this.props.input.value || {});
 
     if (!this.state.new) {
       return variables;
@@ -83,11 +48,11 @@ class AttributesTable extends Component {
     this.setState({ editing: variable, new: false });
   };
 
-  handleCreateVariable = () => {
+  handleAddVariable = () => {
     this.setState({ new: true, editing: undefined });
   };
 
-  handleChooseVariable = (variable) => {
+  handleChooseVariableType = (variable) => {
     this.props.createVariable(variable);
     this.setState({ new: false, editing: variable });
   };
@@ -116,15 +81,15 @@ class AttributesTable extends Component {
       <div className="attributes-table__variable" key={key}>
         <Variable
           variable={variable}
-          validation={get(variablesForNodeType, [variable, 'validation'])}
           value={value}
           name={`${input.name}.${variable}`}
           error={error}
           nodeType={nodeType}
+          variablesForNodeType={variablesForNodeType}
           unusedVariables={unusedVariables}
-          onChange={this.handleChange}
           isEditing={isEditing}
-          onChooseVariable={this.handleChooseVariable}
+          onChange={this.handleChange}
+          onChooseVariable={this.handleChooseVariableType}
           onToggleEdit={() => this.handleEditVariable(variable)}
           onDelete={() => this.handleDeleteVariable(variable)}
         />
@@ -145,7 +110,7 @@ class AttributesTable extends Component {
         </div>
 
         <RoundButton
-          onClick={this.handleCreateVariable}
+          onClick={this.handleAddVariable}
           className="attributes-table__add"
         />
       </div>
@@ -153,30 +118,9 @@ class AttributesTable extends Component {
   }
 }
 
-const getVariablesForNodeType = (state, nodeType) => {
-  const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-  return get(variableRegistry, ['node', nodeType, 'variables'], {});
-};
-
-const mapStateToProps = (state, { input, nodeType }) => {
-  const variables = input.value || {};
-  const variablesForNodeType = omitBy(
-    getVariablesForNodeType(state, nodeType),
-    variableMeta => !validTypes.includes(variableMeta.type),
-  );
-
-  const unusedVariables = difference(keys(variablesForNodeType), keys(variables));
-
-  return ({
-    variables,
-    variablesForNodeType,
-    unusedVariables,
-  });
-};
-
 export { AttributesTable };
 
 export default compose(
-  connect(mapStateToProps),
   withVaribleActions,
+  withUnusedVariables,
 )(AttributesTable);

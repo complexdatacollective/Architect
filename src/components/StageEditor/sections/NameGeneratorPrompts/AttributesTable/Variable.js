@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { get } from 'lodash';
+import { getFieldId } from '../../../../../utils/issues';
 import VariablePreview from './VariablePreview';
 import VariableChooser from './VariableChooser';
 import VariableEditor from './VariableEditor';
-import { getFieldId } from '../../../../../utils/issues';
-import { getVariablesForNodeType } from '../../../../../selectors/variableRegistry';
 
 class Variable extends Component {
   static propTypes = {
@@ -115,13 +115,14 @@ class Variable extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state, { variablesForNodeType, ...props }) => {
   if (!props.variable) { return {}; }
 
-  const variablesForNodeType = getVariablesForNodeType(state, props.nodeType);
   const variableMeta = variablesForNodeType[props.variable];
+  const validation = get(variablesForNodeType, [props.variable, 'validation']);
 
   return {
+    validation,
     label: variableMeta.label,
     type: variableMeta.type,
     options: variableMeta.options || null,
