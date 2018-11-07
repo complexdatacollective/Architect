@@ -4,6 +4,7 @@ exports[`<EditStage /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <EditStage
+    closePreview={[Function]}
     createStage={[Function]}
     dirty={false}
     insertAtIndex={null}

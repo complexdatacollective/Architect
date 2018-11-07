@@ -14,6 +14,7 @@ const mockProps = {
   updateStage: () => {},
   createStage: () => {},
   previewStage: () => {},
+  closePreview: () => {},
 };
 
 describe('<EditStage />', () => {

@@ -17,7 +17,6 @@ class Preview extends Component {
 
   setFontSize = () => {
     const root = document.documentElement;
-    // const newFontSize = `${(1.75 * this.props.interfaceScale)}vmin`;
     const newFontSize = `${(14 * this.props.interfaceScale)}px`;
 
     root.style.setProperty('--base-font-size', newFontSize);
@@ -51,6 +50,7 @@ Preview.propTypes = {
   stage: PropTypes.object,
   promptIndex: PropTypes.number,
   setWindowRoot: PropTypes.func.isRequired,
+  interfaceScale: PropTypes.number.isRequired,
 };
 
 Preview.defaultProps = {
@@ -68,7 +68,6 @@ const mapStateToProps = (state, { stageIndex }) => {
     stage,
     promptIndex,
     interfaceScale: state.deviceSettings.interfaceScale,
-    // interfaceScale: 1,
   };
 };
 

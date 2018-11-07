@@ -38,8 +38,6 @@ const previewReducer = (state = initialState, action) => {
     };
   }
 
-  console.log(action);
-
   return rootReducer(state, action);
 };
 
