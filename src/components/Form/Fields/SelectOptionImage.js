@@ -1,5 +1,5 @@
 import React from 'react';
-import { components } from 'react-select';
+import { components as ReactSelectComponents } from 'react-select';
 import { get } from 'lodash';
 
 import inputImages from '../../../images/inputs';
@@ -7,7 +7,7 @@ import inputImages from '../../../images/inputs';
 const getInputImage = type =>
   get(inputImages, type);
 
-const { Option } = components;
+const { Option } = ReactSelectComponents;
 
 const SelectOptionImage = props => (
   <Option

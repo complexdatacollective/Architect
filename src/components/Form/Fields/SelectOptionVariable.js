@@ -1,7 +1,7 @@
 import React from 'react';
-import { components } from 'react-select';
+import { components as ReactSelectComponents } from 'react-select';
 
-const { Option } = components;
+const { Option } = ReactSelectComponents;
 
 const SelectOptionVariable = props => (
   <Option
