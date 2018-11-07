@@ -40,6 +40,7 @@ ShallowWrapper {
           iconPosition="right"
           onClick={[Function]}
           size=""
+          type="button"
         >
           Back
         </Button>,
@@ -50,9 +51,14 @@ ShallowWrapper {
         <Connect(Guided)
           className="editor__sections"
         >
-          <h1>
+          <h1
+            className="editor__heading"
+          >
             Variable Registry
           </h1>
+          <p>
+            Use this screen to create, edit, and manage your node and edge types.
+          </p>
           <Connect(Guided)
             contentId="guidance.registry.nodes"
           >
@@ -119,9 +125,14 @@ ShallowWrapper {
         "children": <Connect(Guided)
           className="editor__sections"
         >
-          <h1>
+          <h1
+            className="editor__heading"
+          >
             Variable Registry
           </h1>
+          <p>
+            Use this screen to create, edit, and manage your node and edge types.
+          </p>
           <Connect(Guided)
             contentId="guidance.registry.nodes"
           >
@@ -184,9 +195,14 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <h1>
+            <h1
+              className="editor__heading"
+            >
               Variable Registry
             </h1>,
+            <p>
+              Use this screen to create, edit, and manage your node and edge types.
+            </p>,
             <Connect(Guided)
               contentId="guidance.registry.nodes"
             >
@@ -250,10 +266,22 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "Variable Registry",
+              "className": "editor__heading",
             },
             "ref": null,
             "rendered": "Variable Registry",
             "type": "h1",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Use this screen to create, edit, and manage your node and edge types.",
+            },
+            "ref": null,
+            "rendered": "Use this screen to create, edit, and manage your node and edge types.",
+            "type": "p",
           },
           Object {
             "instance": null,
@@ -529,6 +557,7 @@ ShallowWrapper {
             iconPosition="right"
             onClick={[Function]}
             size=""
+            type="button"
           >
             Back
           </Button>,
@@ -539,9 +568,14 @@ ShallowWrapper {
           <Connect(Guided)
             className="editor__sections"
           >
-            <h1>
+            <h1
+              className="editor__heading"
+            >
               Variable Registry
             </h1>
+            <p>
+              Use this screen to create, edit, and manage your node and edge types.
+            </p>
             <Connect(Guided)
               contentId="guidance.registry.nodes"
             >
@@ -608,9 +642,14 @@ ShallowWrapper {
           "children": <Connect(Guided)
             className="editor__sections"
           >
-            <h1>
+            <h1
+              className="editor__heading"
+            >
               Variable Registry
             </h1>
+            <p>
+              Use this screen to create, edit, and manage your node and edge types.
+            </p>
             <Connect(Guided)
               contentId="guidance.registry.nodes"
             >
@@ -673,9 +712,14 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <h1>
+              <h1
+                className="editor__heading"
+              >
                 Variable Registry
               </h1>,
+              <p>
+                Use this screen to create, edit, and manage your node and edge types.
+              </p>,
               <Connect(Guided)
                 contentId="guidance.registry.nodes"
               >
@@ -739,10 +783,22 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Variable Registry",
+                "className": "editor__heading",
               },
               "ref": null,
               "rendered": "Variable Registry",
               "type": "h1",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Use this screen to create, edit, and manage your node and edge types.",
+              },
+              "ref": null,
+              "rendered": "Use this screen to create, edit, and manage your node and edge types.",
+              "type": "p",
             },
             Object {
               "instance": null,

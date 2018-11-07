@@ -37,6 +37,7 @@ ShallowWrapper {
         iconPosition="right"
         onClick={[Function]}
         size=""
+        type="button"
       >
         Save
       </Button>,
@@ -62,6 +63,7 @@ ShallowWrapper {
         "iconPosition": "right",
         "onClick": [Function],
         "size": "",
+        "type": "button",
       },
       "ref": null,
       "rendered": "Save",
@@ -90,6 +92,7 @@ ShallowWrapper {
           iconPosition="right"
           onClick={[Function]}
           size=""
+          type="button"
         >
           Save
         </Button>,
@@ -115,6 +118,7 @@ ShallowWrapper {
           "iconPosition": "right",
           "onClick": [Function],
           "size": "",
+          "type": "button",
         },
         "ref": null,
         "rendered": "Save",
