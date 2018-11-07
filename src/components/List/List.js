@@ -1,30 +1,13 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { toPairs } from 'lodash';
-import Controls from './Controls';
-
-/*
-
-var options = {
-  shouldSort: true,
-  threshold: 0.6,
-  location: 0,
-  distance: 100,
-  maxPatternLength: 32,
-  minMatchCharLength: 1,
-  keys: [
-    "title",
-    "author.firstName"
-]
-};
-var fuse = new Fuse(list, options); // "list" is the item array
-var result = fuse.search("steve");
-*/
+import { map } from 'lodash';
+import DefaultControls from './Controls';
+import Items from './Items';
 
 class List extends Component {
   static defaultProps = {
-    controls: Controls,
-    filter: () => items => items,
+    controls: DefaultControls,
+    search: items => items,
   };
 
   constructor(props) {
@@ -40,37 +23,35 @@ class List extends Component {
   }
 
   items() {
-    const { items, filter } = this.props;
+    const { items, search } = this.props;
     const { parameters } = this.state;
 
-    const withIndices = toPairs(items);
-    const filterFunc = filter(parameters);
+    const withIndices = map(items, (item, _index) => ({ ...item, _index }));
 
-    const filteredItems = withIndices.filter(([, item]) => filterFunc(item));
-    // filterFunc(withIndices)
-
-    // debugger;
-
-    return filteredItems;
+    return search(withIndices, parameters);
   }
 
   render() {
     const {
       controls: Controls,
-      component: Component,
+      component,
       className,
+      ...rest
     } = this.props;
 
     return (
       <div className={cx(className)}>
-        { Controls &&
-          <Controls onChange={this.handleUpdateParameters} />
-        }
+        { Controls && (
+          <div className="list__controls">
+            <Controls onChange={this.handleUpdateParameters} />
+          </div>
+        )}
         <div className="list__items">
-          {this.items().map(
-            ([index, item]) =>
-              <Component item={item} index={index} key={JSON.stringify(item)} />,
-          )}
+          <Items
+            {...rest}
+            items={this.items()}
+            component={component}
+          />
         </div>
       </div>
     );

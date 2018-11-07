@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 class Controls extends Component {
   constructor(props) {
@@ -12,7 +12,6 @@ class Controls extends Component {
 
   handleUpdateQuery = (event) => {
     const query = event.target.value;
-    console.log({ query });
 
     this.updateParameter({ query });
   }
@@ -23,12 +22,8 @@ class Controls extends Component {
   }
 
   render() {
-    const {
-      className,
-    } = this.props;
-
     return (
-      <div className={cx(className)}>
+      <div>
         <input
           type="text"
           value={this.state.query}
@@ -38,5 +33,13 @@ class Controls extends Component {
     );
   }
 }
+
+Controls.propTypes = {
+  onChange: PropTypes.func,
+};
+
+Controls.defaultProps = {
+  onChange: () => {},
+};
 
 export default Controls;

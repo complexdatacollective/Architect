@@ -12,6 +12,7 @@ import {
   getFormMeta,
   autofill,
 } from 'redux-form';
+import { mapProps, compose } from 'recompose';
 import { get } from 'lodash';
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
@@ -63,6 +64,7 @@ class Variable extends Component {
       <ExpandableItem
         open={isDirty}
         lockOpen={isInvalid && hasSubmitFailed}
+        sortable={false}
         preview={(
           <FormSection name={fieldId}>
             <h3 className="variable__preview-title">
@@ -185,9 +187,23 @@ const mapDispatchToProps = (dispatch, { form, fieldId }) => ({
   },
 });
 
+const reduxFieldAdapter = mapProps({
+  fieldId: ({ name, index }) => `${name}[${index}]`,
+  onDelete: ({ index, onDelete }) => () => onDelete(index),
+});
+
+// const Variable = ({ item, index, name, form, onDelete }) => (
+//   <Variable
+//     fieldId={`${name}[${index}]`} // we need the "real" index for redux form to work
+//     onDelete={() => onDelete(index)}
+//     key={index}
+//     form={form}
+//   />
+// );
+
 export { Variable };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  reduxFieldAdapter,
 )(Variable);
