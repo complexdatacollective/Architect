@@ -48,8 +48,24 @@ const getPreviewMenu = (window) => {
           click: () => { setSize(window, { width: 1024, height: 768 }); },
         },
         {
+          label: 'iPad Pro (1336x1024)',
+          click: () => { setSize(window, { width: 1336, height: 1024 }); },
+        },
+        {
           label: 'Pixel C (1280x900)',
           click: () => { setSize(window, { width: 1280, height: 900 }); },
+        },
+        {
+          label: 'Chromebook (1280x800)',
+          click: () => { setSize(window, { width: 1280, height: 800 }); },
+        },
+        {
+          label: 'Apple Laptop (1440x900)',
+          click: () => { setSize(window, { width: 1440, height: 900 }); },
+        },
+        {
+          label: 'Widescreen laptop (1280x720)',
+          click: () => { setSize(window, { width: 1280, height: 720 }); },
         },
       ],
     },
@@ -57,20 +73,28 @@ const getPreviewMenu = (window) => {
       label: 'Scale',
       submenu: [
         {
-          label: '0.25x',
+          label: '0.25 x',
           click: () => { setSize(window, { scale: 0.25 }); },
         },
         {
-          label: '0.5x',
+          label: '0.5 x',
           click: () => { setSize(window, { scale: 0.5 }); },
         },
         {
-          label: '1x',
+          label: '0.75 x',
+          click: () => { setSize(window, { scale: 0.75 }); },
+        },
+        {
+          label: '1 x',
           click: () => { setSize(window, { scale: 1 }); },
         },
         {
-          label: '2x',
-          click: () => { setSize(window, { scale: 2 }); },
+          label: '1.25 x',
+          click: () => { setSize(window, { scale: 1.25 }); },
+        },
+        {
+          label: '1.5 x',
+          click: () => { setSize(window, { scale: 1.5 }); },
         },
       ],
     },
