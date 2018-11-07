@@ -26,6 +26,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
+    margin-top: unit(1) !important; // sass-lint:disable-line no-important
   }
 
   &__card {
@@ -57,30 +58,6 @@
       align-items: center;
       font-style: italic;
       color: var(--architect-form-selector-no-form);
-    }
-  }
-
-  &__new-form {
-
-    &-button {
-      width: unit(6);
-      height: unit(6);
-      cursor: pointer;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--architect-edit-button-background);
-      border-radius: 50%;
-
-      .icon {
-        width: unit(2);
-        height: unit(2);
-
-        .cls-1 {
-          fill: var(--architect-edit-button-fill);
-        }
-      }
     }
   }
 }

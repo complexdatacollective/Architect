@@ -8,7 +8,7 @@ import { toPairs, map, get, pickBy } from 'lodash';
 import Guidance from '../../../Guidance';
 import ValidatedField from '../../../Form/ValidatedField';
 import EditForm from '../../../Cards/EditForm';
-import { Icon } from '../../../../ui/components';
+import { Button } from '../../../../ui/components';
 import { RadioGroup } from '../../../../ui/components/Fields';
 import { getProtocol } from '../../../../selectors/protocol';
 import FormCard from './FormCard';
@@ -96,14 +96,7 @@ class Form extends Component {
               validation={{ requiredAcceptsNull: true }}
             />
 
-            <div className="stage-editor-section-form__new-form">
-              <div
-                className="stage-editor-section-form__new-form-button"
-                onClick={this.handleClickCreateNewForm}
-              >
-                <Icon name="add" title="Create new form..." />
-              </div>
-            </div>
+            <Button onClick={this.handleClickCreateNewForm}>Create new form</Button>
           </div>
 
           <EditForm
