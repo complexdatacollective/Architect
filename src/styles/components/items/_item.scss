@@ -22,7 +22,7 @@ $component-name: items-item;
   }
 
   &__content {
-    padding: unit(2);
+    padding: unit(4) unit(2);
     flex-grow: 1;
   }
 }

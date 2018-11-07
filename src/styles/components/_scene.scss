@@ -15,8 +15,7 @@
     z-index: var(--z-global-ui);
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
-    transition-property: transform, opacity;
-    will-change: transform, opacity;
+    transition-property: opacity;
   }
 
   &__home {
@@ -107,7 +106,6 @@
     .scene {
       &__brand {
         opacity: 0;
-        transform: translateX(100%);
       }
 
       &__protocol {

@@ -10,7 +10,7 @@ const SelectOptionVariable = props => (
     classNamePrefix="form-fields-select__item"
   >
     <h4>
-      {props.data.name} <span className="select-item__variable--variable-name">&lt;{props.data.label}&gt;</span>
+      {props.data.label} <span className="select-item__variable--variable-name">&lt;{props.data.name}&gt;</span>
     </h4>
     <p>{props.data.description}</p>
   </Option>

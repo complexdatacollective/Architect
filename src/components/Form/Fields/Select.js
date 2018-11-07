@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import ReactSelect, { components } from 'react-select';
+import ReactSelect, { components as ReactSelecComponents } from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const { Option } = components;
+const { Option } = ReactSelecComponents;
 
 const DefaultSelectItem = props => (
   <Option

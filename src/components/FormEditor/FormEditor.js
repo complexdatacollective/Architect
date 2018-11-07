@@ -20,7 +20,7 @@ const allowedTypes = ['text', 'number', 'boolean', 'ordinal', 'categorical'];
 const inputDefinitions = {
   NumberInput: {
     label: 'Number Input',
-    value: 'NumberInput',
+    value: 'Text',
     description: 'This input is optomized for collecting numerical data, and will show a number pad if available.',
     image: 'TextInput',
   },
@@ -62,7 +62,7 @@ const inputDefinitions = {
   },
   TextInput: {
     label: 'Text Input',
-    value: 'TextInput',
+    value: 'Text',
     description: 'This is a standard text input, allowing for simple data entry up to approximately 30 characters.',
     image: 'TextInput',
   },

@@ -138,7 +138,6 @@ class SociogramPrompt extends Component {
               <ValidatedField
                 name="text"
                 component={Fields.TextArea}
-                className="stage-editor-section-prompt__setting"
                 label=""
                 placeholder="Enter text for the prompt here"
                 validation={{ required: true }}
@@ -150,6 +149,9 @@ class SociogramPrompt extends Component {
               <div>
                 <div id={getFieldId(`${fieldId}.subject`)} data-name="Prompt node type" />
                 <h3 className="stage-editor-section-prompt__group-title">Nodes</h3>
+                <p>
+                  Select the type of node to be displayed on this prompt.
+                </p>
                 <ValidatedField
                   name="subject"
                   component={ArchitectFields.NodeSelect}
@@ -157,7 +159,7 @@ class SociogramPrompt extends Component {
                   parse={value => ({ type: value, entity: 'node' })}
                   format={value => get(value, 'type')}
                   options={nodeTypes}
-                  label="Select the type of node to be displayed on this prompt."
+                  label=""
                   validation={{ hasSubject }}
                 />
               </div>

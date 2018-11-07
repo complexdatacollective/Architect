@@ -7,7 +7,7 @@
 
     .form-field-container {
       --input-background: var(--background);
-      margin-bottom: 3rem;
+      margin: 0 0 unit(2);
 
       h4 {
         font-weight: bold;
@@ -27,6 +27,10 @@
 
   &__setting {
     margin: 0 0 unit(2);
+  }
+
+  &__textarea {
+    margin-bottom: 3rem;
   }
 
   &__label {

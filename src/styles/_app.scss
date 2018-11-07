@@ -40,10 +40,4 @@ $component-name: app;
     width: 100%;
     background-color: var(--architect-background);
   }
-
-  &--macos {
-    .#{$component-name}__window {
-      height: calc(100% - #{unit(2.5)});
-    }
-  }
 }
