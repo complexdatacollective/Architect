@@ -4,13 +4,11 @@
   width: 100%;
   position: relative;
   margin: 0 auto;
-  padding: 1.8rem 1.2rem 0;
   border-radius: unit(1);
   background-color: var(--light-background);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  overflow-y: scroll;
   filter: drop-shadow(10px 10px 0 var(--architect-control-bar-shadow));
   z-index: 2;
 
