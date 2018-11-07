@@ -28,7 +28,6 @@ $component-name: protocol-stack;
       width: 100%;
       height: 100%;
       z-index: 3;
-      padding: 20px;
 
       img {
         max-width: 100%;
@@ -38,9 +37,6 @@ $component-name: protocol-stack;
   }
 
   &__label {
-    @include typography('title-3');
-    padding-top: unit(1);
-    font-weight: bold;
     margin: 0;
     text-align: center;
     color: var(--text-light);
