@@ -1,5 +1,5 @@
-div.form-fields-select,
-img.form-fields-select {
+div.form-fields-select, // sass-lint:disable-line no-qualifying-elements, force-element-nesting
+img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force-element-nesting
   @include form-field;
 
   &__control {
