@@ -159,7 +159,7 @@ Overview.propTypes = {
 Overview.defaultProps = {
   show: true,
   name: null,
-  description: null,
+  description: '',
   flipId: null,
   updateOptions: () => {},
 };
