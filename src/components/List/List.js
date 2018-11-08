@@ -8,6 +8,8 @@ class List extends Component {
   static defaultProps = {
     controls: DefaultControls,
     search: items => items,
+    onDelete: () => {},
+    onSort: () => {},
   };
 
   constructor(props) {
@@ -34,13 +36,17 @@ class List extends Component {
   render() {
     const {
       controls: Controls,
-      component,
+      item: Item,
       className,
+      onSort,
+      onDelete,
+      children,
       ...rest
     } = this.props;
 
     return (
       <div className={cx(className)}>
+        { children }
         { Controls && (
           <div className="list__controls">
             <Controls onChange={this.handleUpdateParameters} />
@@ -50,7 +56,9 @@ class List extends Component {
           <Items
             {...rest}
             items={this.items()}
-            component={component}
+            onSort={onSort}
+            onDelete={onDelete}
+            item={Item}
           />
         </div>
       </div>

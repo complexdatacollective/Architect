@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers, defaultProps, renameProp } from 'recompose';
+import { compose, defaultProps, renameProps } from 'recompose';
 import { TransitionGroup } from 'react-transition-group';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import WipeTransition from '../Transitions/Wipe';
@@ -16,19 +16,23 @@ const SortableItem = SortableElement(
 
 const Items = ({
   items,
-  component: Component,
+  item: Item,
+  onDelete,
+  disabled: sortable, // Maybe better to rename this back in compose()?
   ...rest
 }) => (
-  <TransitionGroup className="list__items">
+  <TransitionGroup className="items">
     {items.map(
       ({ _index, ...item }) => (
         <WipeTransition key={_index}>
           <SortableItem index={_index}>
-            <Component
+            <Item
               {...rest}
               item={item}
               index={_index}
               key={_index}
+              sortable={sortable}
+              onDelete={() => onDelete(_index)}
             />
           </SortableItem>
         </WipeTransition>
@@ -39,7 +43,9 @@ const Items = ({
 
 Items.propTypes = {
   items: PropTypes.array.isRequired,
-  component: PropTypes.node.isRequired,
+  item: PropTypes.node.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export { Items };
@@ -51,12 +57,10 @@ export default compose(
     transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
     sortable: true,
   }),
-  renameProp('sortable', 'disabled'),
-  withHandlers({
-    onSortEnd: () => () => {},
-    // onSortEnd: props => ({ oldIndex, newIndex }) => {
-    //   props.fields.move(oldIndex, newIndex)
-    // },
+  renameProps({ // rename for sortable-hoc
+    onSort: 'onSortEnd',
+    sortable: 'disabled',
   }),
   SortableContainer,
+
 )(Items);

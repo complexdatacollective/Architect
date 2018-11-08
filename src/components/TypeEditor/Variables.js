@@ -1,14 +1,14 @@
+/* eslint-disable */
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { arrayPush, formValueSelector } from 'redux-form';
+import { FieldArray, arrayPush } from 'redux-form';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import Fuse from 'fuse.js';
 import { NewButton } from '../Items';
 import Variable from './Variable';
-import List from '../List';
+import { FieldArrayAdapter as List } from '../List';
 
 const fuseOptions = {
   shouldSort: true,
@@ -30,32 +30,24 @@ const search = (list, { query }) => {
 };
 
 class Variables extends Component {
-  handleSort = () => {
-  }
-
-  handleDelete = () => {
-  }
-
   render() {
     const {
       form,
       name,
       addNew,
-      variables,
     } = this.props;
 
     return (
       <React.Fragment>
         <div className="items">
           <div className="items__items">
-            <List
-              items={variables}
-              search={search}
-              form={form}
+            <FieldArray
+              component={List}
+              item={Variable}
               name={name}
-              onSort={this.handleSort}
-              onDelete={this.handleDelete}
-              component={Variable}
+              form={form}
+              sortable={false} // manual sort
+              search={search}
             />
           </div>
         </div>
@@ -72,30 +64,16 @@ Variables.propTypes = {
   form: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   addNew: PropTypes.func.isRequired,
-  variables: PropTypes.array,
 };
-
-Variables.defaultProps = {
-  variables: [],
-};
-
-const mapStateToProps = (state, props) => ({
-  variables: formValueSelector(props.form)(state, props.name),
-});
 
 const mapDispatchToProps = (dispatch, { form, name }) => ({
-  addNew: bindActionCreators(
-    () => arrayPush(
-      form,
-      name,
-      { id: uuid() },
-    ),
-    dispatch,
+  addNew: () => dispatch(
+    arrayPush(form, name, { id: uuid() })
   ),
 });
 
 export { Variables };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
 )(Variables);
