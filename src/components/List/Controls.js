@@ -7,6 +7,7 @@ class Controls extends Component {
 
     this.state = {
       query: '',
+      sortOrder: [],
     };
   }
 
@@ -22,8 +23,34 @@ class Controls extends Component {
   }
 
   render() {
+    const { sortFields } = this.props;
+    const { sortOrder } = this.state;
+
     return (
       <div>
+        { sortFields && sortFields.map(
+          (field) => {
+            const optionIndex = sortOrder.findIndex(property => property === field);
+            const option = optionIndex ?
+              sortOrder[optionIndex] :
+              { property: field, direction: 'asc' };
+
+            const toggleSort = () => this.updateParameter({
+              sortOrder: Object.assign([], sortOrder, { [optionIndex]: !option.directon }),
+            });
+
+            return (
+              <Button
+                // color={this.state.activeSortOrder.property === sortField.variable ? 'primary' : 'white'}
+                key={field}
+                onClick={toggleSort}
+              >
+                {field} {option.direction}
+              </Button>
+            );
+          },
+        )}
+
         <input
           type="text"
           value={this.state.query}
