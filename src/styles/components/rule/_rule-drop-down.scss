@@ -23,5 +23,9 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+
+    option {
+      color: var(--text-dark); // Needed for dropdown on Windows
+    }
   }
 }
