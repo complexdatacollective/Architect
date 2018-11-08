@@ -41,7 +41,7 @@ const FieldArrayAdapter = ({
     name={name}
     {...rest}
   >
-    { (dirty || submitFailed) && error && <p className="items__error">{error}</p> }
+    { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
   </List>
 );
 
