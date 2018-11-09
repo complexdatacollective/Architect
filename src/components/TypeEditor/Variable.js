@@ -20,7 +20,7 @@ import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Validations from './Validations';
 import Options from './Options';
-import ExpandableItem from '../Items/ExpandableItem';
+import { ExpandableItem } from '../UnorderedList';
 import { getFieldId } from '../../utils/issues';
 import safeName from './safeName';
 

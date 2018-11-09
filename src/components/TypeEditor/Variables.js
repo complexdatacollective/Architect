@@ -7,9 +7,8 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import Fuse from 'fuse.js';
 import { orderBy } from 'lodash';
-import { NewButton } from '../Items';
 import Variable from './Variable';
-import { FieldArrayAdapter as UnorderedList } from '../UnorderedList';
+import { FieldArrayAdapter as UnorderedList, NewButton } from '../UnorderedList';
 
 const fuseOptions = {
   shouldSort: true,

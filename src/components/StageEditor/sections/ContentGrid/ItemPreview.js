@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Markdown from 'react-markdown';
-import { Handle, DeleteButton } from '../../../Items/';
+import { Handle, DeleteButton } from '../../../OrderedList';
 import { BackgroundImage, Video, Audio } from '../../../Assets';
 import { sizes } from './sizes';
 

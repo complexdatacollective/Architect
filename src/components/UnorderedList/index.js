@@ -1,7 +1,7 @@
 export { default } from './UnorderedList';
 export { default as FieldArrayAdapter } from './FieldArrayAdapter';
-export { default as Item } from '../Items/Item';
-export { default as ExpandableItem } from '../Items/ExpandableItem';
-export { default as NewButton } from '../Items/NewButton';
-export { default as Handle } from '../Items/Handle';
-export { default as DeleteButton } from '../Items/DeleteButton';
+export { default as Item } from '../OrderedList/Item';
+export { default as ExpandableItem } from '../OrderedList/ExpandableItem';
+export { default as NewButton } from '../OrderedList/NewButton';
+export { default as Handle } from '../OrderedList/Handle';
+export { default as DeleteButton } from '../OrderedList/DeleteButton';

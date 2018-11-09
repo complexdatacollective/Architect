@@ -65,7 +65,7 @@ ShallowWrapper {
                 className="editor__subsection"
               >
                 <div
-                  className="list"
+                  className="simple-list"
                 >
                   <TransitionGroup
                     childFactory={[Function]}
@@ -109,7 +109,7 @@ ShallowWrapper {
                 className="editor__subsection"
               >
                 <div
-                  className="list"
+                  className="simple-list"
                 >
                   <TransitionGroup
                     childFactory={[Function]}
@@ -150,7 +150,7 @@ ShallowWrapper {
                   className="editor__subsection"
                 >
                   <div
-                    className="list"
+                    className="simple-list"
                   >
                     <TransitionGroup
                       childFactory={[Function]}
@@ -203,7 +203,7 @@ ShallowWrapper {
                   className="editor__subsection"
                 >
                   <div
-                    className="list"
+                    className="simple-list"
                   >
                     <TransitionGroup
                       childFactory={[Function]}
@@ -228,7 +228,7 @@ ShallowWrapper {
                     className="editor__subsection"
                   >
                     <div
-                      className="list"
+                      className="simple-list"
                     >
                       <TransitionGroup
                         childFactory={[Function]}
@@ -259,7 +259,7 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": <div
-                      className="list"
+                      className="simple-list"
                     >
                       <TransitionGroup
                         childFactory={[Function]}
@@ -278,7 +278,7 @@ ShallowWrapper {
                         childFactory={[Function]}
                         component="div"
                       />,
-                      "className": "list",
+                      "className": "simple-list",
                     },
                     "ref": null,
                     "rendered": Object {
@@ -357,7 +357,7 @@ ShallowWrapper {
                   className="editor__subsection"
                 >
                   <div
-                    className="list"
+                    className="simple-list"
                   >
                     <TransitionGroup
                       childFactory={[Function]}
@@ -401,7 +401,7 @@ ShallowWrapper {
                   className="editor__subsection"
                 >
                   <div
-                    className="list"
+                    className="simple-list"
                   >
                     <TransitionGroup
                       childFactory={[Function]}
@@ -442,7 +442,7 @@ ShallowWrapper {
                     className="editor__subsection"
                   >
                     <div
-                      className="list"
+                      className="simple-list"
                     >
                       <TransitionGroup
                         childFactory={[Function]}
@@ -495,7 +495,7 @@ ShallowWrapper {
                     className="editor__subsection"
                   >
                     <div
-                      className="list"
+                      className="simple-list"
                     >
                       <TransitionGroup
                         childFactory={[Function]}
@@ -520,7 +520,7 @@ ShallowWrapper {
                       className="editor__subsection"
                     >
                       <div
-                        className="list"
+                        className="simple-list"
                       >
                         <TransitionGroup
                           childFactory={[Function]}
@@ -551,7 +551,7 @@ ShallowWrapper {
                     "nodeType": "host",
                     "props": Object {
                       "children": <div
-                        className="list"
+                        className="simple-list"
                       >
                         <TransitionGroup
                           childFactory={[Function]}
@@ -570,7 +570,7 @@ ShallowWrapper {
                           childFactory={[Function]}
                           component="div"
                         />,
-                        "className": "list",
+                        "className": "simple-list",
                       },
                       "ref": null,
                       "rendered": Object {

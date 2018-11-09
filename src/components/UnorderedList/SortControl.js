@@ -49,8 +49,6 @@ class SortControl extends Component {
   render() {
     const { sortableProperties } = this.props;
 
-    console.log({ sortableProperties });
-
     if (!sortableProperties) { return null; }
 
     return sortableProperties.map(
