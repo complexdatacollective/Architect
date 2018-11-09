@@ -18,9 +18,6 @@ import UnorderedList from '.';
  */
 
 const fieldHandlers = withHandlers({
-  handleSort: props => ({ oldIndex, newIndex }) => {
-    props.fields.move(oldIndex, newIndex);
-  },
   handleDelete: props => (index) => {
     props.fields.remove(index);
   },
@@ -30,13 +27,11 @@ const FieldArrayAdapter = ({
   fields: { name },
   meta: { error, dirty, submitFailed },
   items,
-  handleSort,
   handleDelete,
   ...rest
 }) => (
   <UnorderedList
     items={items}
-    onSort={handleSort}
     onDelete={handleDelete}
     name={name}
     {...rest}
@@ -50,7 +45,6 @@ FieldArrayAdapter.propTypes = {
   items: PropTypes.array,
   fields: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
-  handleSort: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };
 

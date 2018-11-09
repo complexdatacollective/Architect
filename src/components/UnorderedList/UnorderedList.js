@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import cx from 'classnames';
 import { map } from 'lodash';
 import DefaultControls from './Controls';
-import Items from './Items';
 
 class List extends Component {
   static defaultProps = {
@@ -42,7 +41,6 @@ class List extends Component {
       item: Item,
       className,
       sortableFields,
-      onSort,
       onDelete,
       children,
       ...rest
@@ -60,13 +58,17 @@ class List extends Component {
           </div>
         )}
         <div className="list__items">
-          <Items
-            {...rest}
-            items={this.items()}
-            onSort={onSort}
-            onDelete={onDelete}
-            item={Item}
-          />
+          {this.items().map(({ _index, ...item }) => (
+            <div className="list__item">
+              <Item
+                {...rest}
+                index={_index}
+                key={_index}
+                sortable={false}
+                onDelete={() => onDelete(_index)}
+              />
+            </div>
+          ))}
         </div>
       </div>
     );
