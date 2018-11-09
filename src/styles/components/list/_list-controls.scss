@@ -14,6 +14,14 @@
       h4 { display: none; }
     }
 
+    &--search {
+      flex: 1;
+
+      .form-field-container {
+        flex: 1;
+      }
+    }
+
     &-name {
       padding-right: unit(1);
     }

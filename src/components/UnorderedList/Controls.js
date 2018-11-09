@@ -31,7 +31,7 @@ class Controls extends Component {
   render() {
     return (
       <div className="list-controls">
-        <div className="list-controls__section">
+        <div className="list-controls__section list-controls__section--search">
           <div className="list-controls__section-name">
             Search:
           </div>
