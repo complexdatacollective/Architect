@@ -6,6 +6,7 @@ import { FieldArray, arrayPush } from 'redux-form';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import Fuse from 'fuse.js';
+import { orderBy } from 'lodash';
 import { NewButton } from '../Items';
 import Variable from './Variable';
 import { FieldArrayAdapter as List } from '../List';
@@ -23,10 +24,19 @@ const fuseOptions = {
   ],
 };
 
-const search = (list, { query }) => {
+const search = (list, query) => {
   if (!query) { return list; }
   const fuse = new Fuse(list, fuseOptions);
   return fuse.search(query);
+};
+
+const sort = (list, sortOrder) => {
+  if (!sortOrder) { return list; }
+  return orderBy(list, ...sortOrder);
+};
+
+const filter = (list, { query, sortOrder }) => {
+  return sort(search(list, query), sortOrder);
 };
 
 class Variables extends Component {
@@ -47,7 +57,8 @@ class Variables extends Component {
               name={name}
               form={form}
               sortable={false} // manual sort
-              search={search}
+              filter={filter}
+              sortableFields={['name']}
             />
           </div>
         </div>

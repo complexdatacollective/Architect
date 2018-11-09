@@ -7,7 +7,7 @@ import Items from './Items';
 class List extends Component {
   static defaultProps = {
     controls: DefaultControls,
-    search: items => items,
+    filter: items => items,
     onDelete: () => {},
     onSort: () => {},
   };
@@ -21,16 +21,16 @@ class List extends Component {
   }
 
   handleUpdateParameters = (parameters) => {
-    this.setState({ parameters });
+    this.setState({ parameters }, () => console.log(this.state));
   }
 
   items() {
-    const { items, search } = this.props;
+    const { items, filter } = this.props;
     const { parameters } = this.state;
 
     const withIndices = map(items, (item, _index) => ({ ...item, _index }));
 
-    return search(withIndices, parameters);
+    return filter(withIndices, parameters);
   }
 
   render() {
@@ -38,6 +38,7 @@ class List extends Component {
       controls: Controls,
       item: Item,
       className,
+      sortableFields,
       onSort,
       onDelete,
       children,
@@ -49,7 +50,10 @@ class List extends Component {
         { children }
         { Controls && (
           <div className="list__controls">
-            <Controls onChange={this.handleUpdateParameters} />
+            <Controls
+              onChange={this.handleUpdateParameters}
+              sortableFields={sortableFields}
+            />
           </div>
         )}
         <div className="list__items">
