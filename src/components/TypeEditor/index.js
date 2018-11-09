@@ -13,7 +13,10 @@ const getIsValid = isValid(formName);
 
 const mapStateToProps = (state) => {
   const variables = getFormValue(state, 'variables') || {};
-  const displayVariables = compact(map(variables, 'name'));
+  const displayVariables = compact(map(variables, variable => ({
+    label: variable.label,
+    value: variable.id,
+  })));
 
   return {
     dirty: getIsDirty(state),

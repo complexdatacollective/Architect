@@ -28,21 +28,38 @@ class RecentProtocols extends Component {
     </div>
   );
 
+  renderWelcomeText = () => (
+    <div className="recent-protocols__welcome">
+      <h1>Getting Started</h1>
+      <p>
+        Welcome to Network Canvas Architect! To get started, use the buttons above to create a new
+        interview protocol, or open an existing one from elsewhere. When you return to this screen
+        later, recent protocols you have opened will be shown here.
+      </p>
+    </div>
+  );
+
   render() {
     const { show, recentProtocols } = this.props;
 
-    if (!show || recentProtocols.length === 0) { return null; }
+    if (!show) { return null; }
 
     return (
       <div className="recent-protocols">
-        { recentProtocols.map(this.renderRecentProtocol) }
+        { (recentProtocols.length === 0) ?
+          this.renderWelcomeText() :
+          [
+            <h3 className="recent-protocols__title" key="heading">Recently Opened Protocols</h3>,
+            recentProtocols.map(this.renderRecentProtocol),
+          ]
+        }
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  recentProtocols: get(state, 'recentProtocols', []).slice(0, 3),
+  recentProtocols: get(state, 'recentProtocols', []).slice(0, 4),
 });
 
 export { RecentProtocols };

@@ -33,6 +33,7 @@ ShallowWrapper {
           iconPosition="right"
           onClick={[Function]}
           size=""
+          type="button"
         >
           Back
         </Button>,
@@ -43,9 +44,14 @@ ShallowWrapper {
         <Connect(Guided)
           className="editor__sections"
         >
-          <h1>
+          <h1
+            className="editor__heading"
+          >
             Form Manager
           </h1>
+          <p>
+            Use this screen to create, edit, and manage your forms.
+          </p>
           <Connect(Guided)
             contentId="guidance.forms.index"
           >
@@ -82,9 +88,14 @@ ShallowWrapper {
         "children": <Connect(Guided)
           className="editor__sections"
         >
-          <h1>
+          <h1
+            className="editor__heading"
+          >
             Form Manager
           </h1>
+          <p>
+            Use this screen to create, edit, and manage your forms.
+          </p>
           <Connect(Guided)
             contentId="guidance.forms.index"
           >
@@ -118,9 +129,14 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <h1>
+            <h1
+              className="editor__heading"
+            >
               Form Manager
             </h1>,
+            <p>
+              Use this screen to create, edit, and manage your forms.
+            </p>,
             <Connect(Guided)
               contentId="guidance.forms.index"
             >
@@ -155,10 +171,22 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "Form Manager",
+              "className": "editor__heading",
             },
             "ref": null,
             "rendered": "Form Manager",
             "type": "h1",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Use this screen to create, edit, and manage your forms.",
+            },
+            "ref": null,
+            "rendered": "Use this screen to create, edit, and manage your forms.",
+            "type": "p",
           },
           Object {
             "instance": null,
@@ -297,6 +325,7 @@ ShallowWrapper {
             iconPosition="right"
             onClick={[Function]}
             size=""
+            type="button"
           >
             Back
           </Button>,
@@ -307,9 +336,14 @@ ShallowWrapper {
           <Connect(Guided)
             className="editor__sections"
           >
-            <h1>
+            <h1
+              className="editor__heading"
+            >
               Form Manager
             </h1>
+            <p>
+              Use this screen to create, edit, and manage your forms.
+            </p>
             <Connect(Guided)
               contentId="guidance.forms.index"
             >
@@ -346,9 +380,14 @@ ShallowWrapper {
           "children": <Connect(Guided)
             className="editor__sections"
           >
-            <h1>
+            <h1
+              className="editor__heading"
+            >
               Form Manager
             </h1>
+            <p>
+              Use this screen to create, edit, and manage your forms.
+            </p>
             <Connect(Guided)
               contentId="guidance.forms.index"
             >
@@ -382,9 +421,14 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <h1>
+              <h1
+                className="editor__heading"
+              >
                 Form Manager
               </h1>,
+              <p>
+                Use this screen to create, edit, and manage your forms.
+              </p>,
               <Connect(Guided)
                 contentId="guidance.forms.index"
               >
@@ -419,10 +463,22 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Form Manager",
+                "className": "editor__heading",
               },
               "ref": null,
               "rendered": "Form Manager",
               "type": "h1",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Use this screen to create, edit, and manage your forms.",
+              },
+              "ref": null,
+              "rendered": "Use this screen to create, edit, and manage your forms.",
+              "type": "p",
             },
             Object {
               "instance": null,

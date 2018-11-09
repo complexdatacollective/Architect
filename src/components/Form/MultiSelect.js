@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { compose, defaultProps, withProps, withHandlers } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
-import { FieldArray, formValueSelector } from 'redux-form';
-import { Icon } from '../../ui/components';
+import { FieldArray, formValueSelector, change } from 'redux-form';
+import { Icon, Button } from '../../ui/components';
 import Select from './Fields/Select';
 import ValidatedField from '../Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
@@ -27,18 +27,20 @@ const ItemDelete = props => (
 );
 
 const AddItem = props => (
-  <div className="form-fields-multi-select__add" {...props}>
-    <Icon name="add" /> Add new
-  </div>
+  <Button color="primary" icon="add" size="small" {...props}>
+    Add new
+  </Button>
 );
 
 const mapStateToItemProps = (state, { field, fields: { name: fieldsName }, meta: { form } }) => ({
   rowValues: formValueSelector(form)(state, field),
   allValues: formValueSelector(form)(state, fieldsName),
+  form,
 });
 
 const mapDispatchToItemProps = dispatch => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
+  change: bindActionCreators(change, dispatch),
 });
 
 const Item = compose(
@@ -47,7 +49,7 @@ const Item = compose(
     handleDelete: ({ fields, openDialog, index }) =>
       () => {
         openDialog({
-          type: 'Confirm',
+          type: 'Warning',
           title: 'Remove item',
           message: 'Are you sure you want to remove this item?',
           onConfirm: () => { fields.remove(index); },
@@ -64,6 +66,7 @@ const Item = compose(
     rowValues,
     allValues,
     handleDelete,
+    ...props
   }) => (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-control">
@@ -73,15 +76,22 @@ const Item = compose(
       <div className="form-fields-multi-select__rule-options">
         {properties.map(
           property => (
-            <div className="form-fields-multi-select__rule-option" key={property}>
+            <div className="form-fields-multi-select__rule-option" key={property.fieldName}>
               <ValidatedField
                 component={Select}
-                name={`${field}.${property}`}
-                options={options(property, rowValues, allValues)}
+                selectOptionComponent={property.selectOptionComponent}
+                name={`${field}.${property.fieldName}`}
+                options={options(property.fieldName, rowValues, allValues)}
                 validation={{ required: true }}
-              >
-                <option value="" disabled>&mdash; Select {property} &mdash;</option>
-              </ValidatedField>
+                placeholder="&mdash; Select &mdash;"
+                onChange={() => {
+                  // Reset the value of the second select when the first one changes.
+                  if (`${property.fieldName}` === 'variable') {
+                    props.change(props.form, `${field}.component`, null);
+                  }
+                }
+                }
+              />
             </div>
           ),
         )}

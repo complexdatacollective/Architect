@@ -1,8 +1,18 @@
 .stage-editor-section-prompt {
+
   &__group {
     margin: 0 0 unit(2);
     padding: unit(2) 0 0;
     border-top: 2px solid var(--architect-border);
+
+    .form-field-container {
+      --input-background: var(--background);
+      margin: 0 0 unit(2);
+
+      h4 {
+        font-weight: bold;
+      }
+    }
 
     &:first-child {
       border: 0;
@@ -10,14 +20,17 @@
     }
 
     &-title {
-      @include preset(title-3, font-size);
-      font-weight: 600;
-      margin: 0 0 unit(2);
+      margin: unit(2) 0;
+      font-weight: bold;
     }
   }
 
   &__setting {
     margin: 0 0 unit(2);
+  }
+
+  &__textarea {
+    margin-bottom: 3rem;
   }
 
   &__label {

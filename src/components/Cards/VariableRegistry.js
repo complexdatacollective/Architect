@@ -176,8 +176,10 @@ class VariableRegistry extends Component {
       >
         <div className="editor variable-registry">
           <Guided className="editor__sections">
-            <h1>Variable Registry</h1>
-
+            <h1 className="editor__heading">Variable Registry</h1>
+            <p>
+              Use this screen to create, edit, and manage your node and edge types.
+            </p>
             <Guidance contentId="guidance.registry.nodes">
               <div className="editor__section">
                 <h2>Node Types</h2>
@@ -189,7 +191,7 @@ class VariableRegistry extends Component {
                     <Link
                       to={`${protocolPath}/registry/node/`}
                     >
-                      <Button>
+                      <Button size="small" icon="add">
                         Create new Node type
                       </Button>
                     </Link>
@@ -209,7 +211,7 @@ class VariableRegistry extends Component {
                     <Link
                       to={`${protocolPath}/registry/edge/`}
                     >
-                      <Button>
+                      <Button size="small" icon="add">
                         Create new Edge type
                       </Button>
                     </Link>

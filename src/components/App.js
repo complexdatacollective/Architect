@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import { isMacOS } from '../utils/platform';
 import { AppErrorBoundary } from './Errors';
 import DialogManager from './DialogManager';
-import Version from './Version';
 
 const App = ({ children }) => {
   const appClasses = cx(
@@ -28,7 +27,6 @@ const App = ({ children }) => {
       </div>
 
       <DialogManager />
-      <Version />
     </div>
   );
 };

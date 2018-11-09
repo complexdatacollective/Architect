@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 export default {
   'guidance.editor.name': (
     <Fragment>
+      <h3>Naming Your Stage</h3>
       <p>
         A good stage name should be descriptive, but not too long. It should help you to remember
         the purpose of this stage later.
@@ -25,7 +26,7 @@ export default {
   ),
   'guidance.editor.content_items': (
     <Fragment>
-      <h3>Content Items help</h3>
+      <h3>About Content Boxes</h3>
       <p>
         Each information interface can display up to four
         &quot;content boxes&quot;. Each content box can display
@@ -61,7 +62,7 @@ export default {
   ),
   'guidance.editor.form': (
     <Fragment>
-      <h3>Form help</h3>
+      <h3>Choosing a Form</h3>
       <p>
         Now you have selected a node type, you must decide which form is shown to the participant
         when they create a new node.
@@ -81,32 +82,37 @@ export default {
   ),
   'guidance.editor.sociogram_prompt.nodes': (
     <Fragment>
+      <h3>Prompt Node Type</h3>
       <p>guidance.editor.sociogram_prompt.nodes</p>
     </Fragment>
   ),
   'guidance.editor.sociogram_prompt.text': (
     <Fragment>
+      <h3>Sociogram Prompt</h3>
       <p>guidance.editor.sociogram_prompt.text</p>
     </Fragment>
   ),
   'guidance.editor.sociogram_prompt.layout': (
     <Fragment>
+      <h3>Layout Settings</h3>
       <p>guidance.editor.sociogram_prompt.layout</p>
     </Fragment>
   ),
   'guidance.editor.sociogram_prompt.background': (
     <Fragment>
+      <h3>Prompt Background</h3>
       <p>guidance.editor.sociogram_prompt.background</p>
     </Fragment>
   ),
   'guidance.editor.sociogram_prompt.edges': (
     <Fragment>
+      <h3>Showing and Creating Edges</h3>
       <p>guidance.editor.sociogram_prompt.edges</p>
     </Fragment>
   ),
   'guidance.editor.sociogram_prompt.sortOrder': (
     <Fragment>
-      <h3>Sort order</h3>
+      <h3>Sort Order</h3>
       <p>
         By default (with no ordering rules), Nodes will be unsorted. This means that they will be
         displayed in the order that they were created.
@@ -119,9 +125,9 @@ export default {
   ),
   'guidance.editor.sociogram_prompt.attributes': (
     <Fragment>
-      <h3>Attributes</h3>
+      <h3>Attributes Highlighting on the Sociogram</h3>
       <p>
-        Demo item specific guidance.
+        guidance.editor.sociogram_prompt.attributes
       </p>
     </Fragment>
   ),
@@ -161,7 +167,7 @@ export default {
   ),
   'guidance.editor.node_panels': (
     <Fragment>
-      <h3>Panels help</h3>
+      <h3>Configuring Panels</h3>
       <p>
         The Name Generator interfaces allows you to configure up to two &quot;panels&quot;. Panels
         let you display lists of nodes to the participant, that may speed up the task of creating
@@ -184,7 +190,7 @@ export default {
   ),
   'guidance.interface.Information': (
     <Fragment>
-      <h3>Information screen guidance</h3>
+      <h3>The Information Screen Interface</h3>
       <p>
         The Information Interface allows you to display text and rich media (including pictures,
         video and audio) to your participants. Use it to help explain interview tasks, or introduce
@@ -194,7 +200,7 @@ export default {
   ),
   'guidance.interface.NameGenerator': (
     <Fragment>
-      <h3>Name Generator guidance</h3>
+      <h3>The Name Generator Interface</h3>
       <p>
         The Name Generator interface is designed to allow your research participants
         to name alters for later analysis.
@@ -212,7 +218,7 @@ export default {
   ),
   'guidance.interface.Sociogram': (
     <Fragment>
-      <h3>Sociogram guidance</h3>
+      <h3>The Sociogram Interface</h3>
       <p>
         The Sociogram interface is designed to do three things:
       </p>
@@ -235,6 +241,7 @@ export default {
   ),
   'guidance.form.title': (
     <Fragment>
+      <h3>Form Title</h3>
       <p>
         A good form title should be descriptive, but not too long. It should help you to remember
         the purpose of this form later.
@@ -247,7 +254,7 @@ export default {
   ),
   'guidance.form.type': (
     <Fragment>
-      <h3>Type</h3>
+      <h3>Form Node Type</h3>
       <p>
         Here, you can determine the type of node that this form will work with.
       </p>
@@ -264,10 +271,9 @@ export default {
   ),
   'guidance.form.variables': (
     <Fragment>
-      <h3>Form variables</h3>
+      <h3>Form Variables and Input Types</h3>
       <p>
-        Choose the variables you would like to edit in this form, and which type of control for
-        each.
+        guidance.form.variables
       </p>
     </Fragment>
   ),

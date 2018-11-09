@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ValidatedField } from '../../../Form';
-import Markdown from '../../../Form/Fields/Markdown';
+import TextArea from '../../../../ui/components/Fields/TextArea';
 import AttributesTable from './AttributesTable';
 import { Item } from '../../../Items';
 import { getFieldId } from '../../../../utils/issues';
@@ -9,12 +9,12 @@ import { getFieldId } from '../../../../utils/issues';
 const NameGeneratorPrompt = ({ fieldId, form, nodeType, ...rest }) => (
   <Item {...rest}>
     <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
+    <h3>Text for Prompt</h3>
     <ValidatedField
       name={`${fieldId}.text`}
-      component={Markdown}
-      label="Text for prompt"
-      id="text"
-      className="stage-editor-section-prompt__setting-value"
+      component={TextArea}
+      className="stage-editor-section-prompt__textarea"
+      label=""
       placeholder="Enter text for the prompt here"
       validation={{ required: true }}
     />

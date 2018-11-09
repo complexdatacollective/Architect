@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { get, map } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
-import { Icon } from '../../ui/components';
+import * as Fields from '../../ui/components/Fields';
+import { Icon, Button } from '../../ui/components';
 import { Select } from '../Form/Fields';
 import ValidatedField from '../Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
@@ -51,7 +52,7 @@ const renderValidationOptions = ({ field, validationType }) => {
       return (
         <Field
           name={`${field}.value`}
-          component="input"
+          component={Fields.Text}
           type="number"
           parse={value => parseInt(value, 10)}
         />
@@ -68,9 +69,9 @@ const ItemDelete = props => (
 );
 
 const AddItem = props => (
-  <div className="form-fields-multi-select__add" {...props}>
-    <Icon name="add" /> Add new
-  </div>
+  <Button color="primary" icon="add" size="small" {...props}>
+    Add new
+  </Button>
 );
 
 const mapStateToItemProps = (state, { fields, index }) => ({
@@ -87,7 +88,7 @@ const Item = compose(
   withHandlers(({ fields, openDialog, index }) => ({
     handleDelete: () => {
       openDialog({
-        type: 'Confirm',
+        type: 'Warning',
         title: 'Remove validation',
         message: 'Are you sure you want to remove this rule?',
         onConfirm: () => { fields.remove(index); },
@@ -104,18 +105,17 @@ const Item = compose(
             component={Select}
             name={`${field}.type`}
             validation={{ required: true }}
-          >
-            <option value="" disabled>&mdash; Select type &mdash;</option>
-            { getValidationTypesForVariable(variableType).map(
-              (validation, key) => (
-                <option
-                  key={key}
-                  value={validation}
-                  disabled={map(allValues, 'type').includes(validation)}
-                >{validation}</option>
+            placeholder="&mdash; Select type &mdash;"
+            options={getValidationTypesForVariable(variableType).map(
+              validation => (
+                {
+                  value: validation,
+                  label: validation,
+                  isDisabled: map(allValues, 'type').includes(validation),
+                }
               ),
-            ) }
-          </ValidatedField>
+            )}
+          />
         </div>
         <div className="form-fields-multi-select__rule-option">
           {

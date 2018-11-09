@@ -1,5 +1,6 @@
 {
   "name": "Development Protocol",
+  "description": "My protocol description",
   "version": "1.0.0",
   "networkCanvasVersion": "~4.0.0",
   "variableRegistry": {
@@ -8,25 +9,25 @@
         "label": "Person",
         "name": "person",
         "color": "node-color-seq-1",
-        "displayVariable": "nickname",
+        "displayVariable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
         "iconVariant": "add-a-person",
         "variables": {
           "1d84d7782a65d41d727f7c71fcb38b6aea633a80": {
             "name": "Closeness Layout",
-            "label": "Closeness layout",
-            "description": "Earthling readable description",
+            "label": "closenesslayout",
+            "description": "A variable for storing a node layout organized by percieved closeness.",
             "type": "layout"
           },
           "dea16657f68e9caa74a1e785bc8e0ed11382332b": {
             "name": "Geographical Layout",
-            "label": "Geographical closeness layout",
-            "description": "Earthling readable description",
+            "label": "geographicalclosenesslayout",
+            "description": "A variable for storing node layout organised by geographical space.",
             "type": "layout"
           },
           "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
             "name": "Name",
-            "label": "Name",
-            "description": "Human readable description",
+            "label": "name",
+            "description": "Alter name.",
             "type": "text",
             "validation": {
               "required": true,
@@ -36,8 +37,8 @@
           },
           "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": {
             "name": "Age",
-            "label": "Age",
-            "description": "Human readable description",
+            "label": "age",
+            "description": "Alter age.",
             "type": "number",
             "validation": {
               "required": true,
@@ -47,8 +48,8 @@
           },
           "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
             "name": "Nickname",
-            "label": "Nickname",
-            "description": "Human readable description",
+            "label": "nickname",
+            "description": "Alter nickname.",
             "type": "text",
             "validation": {
               "required": true,
@@ -58,8 +59,8 @@
           },
           "d8bd7e53fb408002394509cf33fa439a15177f0a": {
             "name": "Special Category",
-            "label": "Special category",
-            "description": "Human readable description",
+            "label": "specialcategory",
+            "description": "A categorical variable.",
             "type": "categorical",
             "options": [{
               "label": "Foo",
@@ -72,8 +73,8 @@
           },
           "3aece568101d62dfbbf73bc98be43a2398f2ffc7": {
             "name": "Some Options",
-            "label": "Some possible options",
-            "description": "Human readable description",
+            "label": "someoptions",
+            "description": "An ordinal variable.",
             "type": "ordinal",
             "options": [{
               "label": "bazz",
@@ -85,26 +86,26 @@
           },
           "5d69e2e1f8a9ea63d425602943831500c3d5c01d": {
             "name": "Close Friend",
-            "label": "Close Friend",
-            "description": "Human readable description",
+            "label": "closefriend",
+            "description": "A boolean variable indicating if alter is a close friend.",
             "type": "boolean"
           },
           "ba5397013f9cf10a08ac193cc197c7f97d2d8374": {
             "name": "Support Friend",
-            "label": "Support Friend",
-            "description": "Human readable description",
+            "label": "supportfriend",
+            "description": "A boolean variable indicating if alter offers support.",
             "type": "boolean"
           },
           "285ecc8323cd69e7e7bfb8e8586023c76fcd86f6": {
             "name": "Advice Friend",
-            "label": "Advice Friend",
-            "description": "Human readable description",
+            "label": "advicefriend",
+            "description": "A boolean variable indicating if alter offers advice.",
             "type": "boolean"
           },
           "9ec1f5e83cd1df32d106bbad53e6a9d86003d86d": {
             "name": "Has given advice",
-            "label": "Has given advice?",
-            "description": "Human readable description",
+            "label": "hasgivenadvice",
+            "description": "A boolean variable indicating if alter has given advice.",
             "type": "boolean"
           }
         }
@@ -117,7 +118,7 @@
         "variables": {
           "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
             "name": "Name",
-            "label": "Name",
+            "label": "name",
             "description": "Human readable description",
             "type": "text",
             "validation": {
@@ -128,20 +129,20 @@
           },
           "6469ac84a89748bb67b923c833ed0c778a17aea3": {
             "name": "Location",
-            "label": "Location",
-            "description": "Human readable description",
+            "label": "location",
+            "description": "Location variable",
             "type": "location"
           },
           "207b877e13437b35b3fbae5c20219eecd6c828f1": {
             "name": "Layout",
-            "label": "Layout",
-            "description": "Human readable description",
+            "label": "layout",
+            "description": "Layout variable",
             "type": "layout"
           },
           "5039d155a71c0a5f7a2b2654ad49cb7ee47a8980": {
             "name": "Boolean",
-            "label": "Boolean variable",
-            "description": "Human readable description",
+            "label": "booleanvariable",
+            "description": "Boolean variable",
             "type": "boolean"
           }
         }
@@ -227,15 +228,15 @@
       "fields": [
         {
           "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-          "component": "TextInput"
+          "component": "Text"
         },
         {
           "variable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
-          "component": "TextInput"
+          "component": "Text"
         },
         {
           "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2",
-          "component": "TextInput"
+          "component": "Number"
         }
       ]
     },
@@ -247,7 +248,7 @@
       "fields": [
         {
           "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-          "component": "TextInput"
+          "component": "Text"
         }
       ]
     }
@@ -257,7 +258,7 @@
       "id": "welcome",
       "label": "Welcome",
       "type": "Information",
-      "title": "Title for the screen",
+      "title": "Title for the welcome stage",
       "items": [
         { "id": "2", "size": "SMALL", "type": "audio", "content": "click_the_thing.mp3" },
         { "id": "3", "size": "MEDIUM", "type": "video", "content": "video.mov" },

@@ -12,6 +12,15 @@ $component-name: timeline-insert-stage-filter;
 
   &__option {
     margin-right: unit(2);
+    width: 300px;
+
+    .form-field-container {
+      margin-bottom: 0;
+
+      .form-field {
+        margin-bottom: 0;
+      }
+    }
 
     h4 {
       font-family: var(--body-font-family);

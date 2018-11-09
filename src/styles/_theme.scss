@@ -7,7 +7,7 @@
   // UI overwrites
   --background: var(--color-white);
   --text: var(--color-charcoal);
-  --input-background: var(--color-platinum--dark);
+  --input-background: var(--color-platinum);
   --input-label: var(--color-charcoal);
   --text-light: var(--color-white); // actually this one is new
   --text-dark: var(--color-charcoal);
@@ -37,7 +37,7 @@
   --architect-control-bar-text: var(--color-white);
 
   // forms
-  --form-control: var(--color-sea-green);
+  --form-control: var(--color-platinum);
 
   // dialog
   --architect-dialog-background: var(--color-platinum);
@@ -56,6 +56,13 @@
   --architect-logic-background: var(--color-mustard);
   --architect-logic-guidance: var(--color-mustard--dark);
   --architect-logic-text: var(--color-white);
+
+  // Guidance
+  --architect-guidance-background: var(--color-platinum);
+  --architect-guidance-text: var(--text);
+  --architect-guidance-toggle-background: var(--info);
+  --architect-guidance-toggle-background--hover: var(--color-sea-serpent--dark);
+  --architect-guidance-toggle-label: var(--color-white);
 
   // TODO: review below
   --architect-edit-button-background: var(--primary);
@@ -76,9 +83,6 @@
   --architect-panel-shadow: var(--color-shadow);
   --architect-panel-text: var(--color-charcoal);
   --architect-panel-divider: var(--color-platinum--dark);
-  --architect-panel-tab: var(--color-sea-green);
-  --architect-panel-tab--hover: var(--color-sea-green--dark);
-  --architect-panel-tab-label: var(--color-white);
   --architect-border: var(--color-platinum--dark);
   --architect-input-placeholder: var(--color-platinum);
   --architect-input-focus: var(--color-sea-green);

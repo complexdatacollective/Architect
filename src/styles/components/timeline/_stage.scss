@@ -31,7 +31,6 @@ $component-name: timeline-stage;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    will-change: transform;
     transition: opacity var(--animation-duration-standard) var(--animation-easing),
     transform var(--animation-duration-standard) var(--animation-easing);
     opacity: 0;

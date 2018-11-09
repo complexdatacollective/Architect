@@ -1,11 +1,65 @@
-.form-fields-select {
+div.form-fields-select, // sass-lint:disable-line no-qualifying-elements, force-element-nesting
+img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force-element-nesting
   @include form-field;
-  width: 100%;
-  font-size: var(--base-font-size);
 
-  option {
+  &__control {
+    color: var(--input-text);
+    border: 0;
+    border-radius: 1rem 1rem 0 0;
+    padding: 0 1rem;
     width: 100%;
-    font-size: var(--base-font-size);
+    min-height: 4rem;
+    box-shadow: unset;
+
+    &:hover {
+      border-color: var(--primary);
+      box-shadow: unset;
+    }
+  }
+
+  &__value-container {
+    padding: 0;
+  }
+
+  &__menu {
+    border-radius: 0 0 1rem 1rem;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  &__menu-list {
+    padding: 0;
+  }
+
+  &__item {
+    padding: .5rem 1rem;
+    min-height: 4rem;
+
+    &--image {
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__option {
+
+    &:active {
+      background-color: var(--color-sea-green--dark);
+      color: var(--text-light);
+    }
+
+    &--is-focused {
+      background-color: var(--color-platinum);
+    }
+
+    &--is-selected {
+      background-color: var(--primary);
+    }
+
+  }
+
+  &__full {
+    width: 100%;
   }
 
   &__error {
@@ -17,4 +71,5 @@
     @include preset('title-4');
     font-weight: 600;
   }
+
 }

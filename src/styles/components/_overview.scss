@@ -2,8 +2,16 @@
   margin: unit(8) auto 0;
   width: 75vw;
 
+  .form-field-container {
+    --input-background: var(--background);
+  }
+
   .edge-icon {
     margin: 0 unit(2) unit(2) 0;
+  }
+
+  &__name {
+    text-align: center;
   }
 
   &__panel {
@@ -14,22 +22,6 @@
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
-  }
-
-  &__name {
-    height: 9vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1vh;
-
-    input {
-      @include typography('title-1', font-size);
-      @include typography('title-1', font-family);
-      @include typography('title-1', font-weight);
-      text-align: center;
-      color: var(--text-dark);
-    }
   }
 
   &__asset-group {
@@ -60,15 +52,44 @@
   &__group {
     --base-node-size: 90px;
     border: 1px solid var(--architect-panel-divider);
-    padding: unit(2) unit(4) unit(6);
+    padding: unit(4) unit(4) unit(6);
     margin: unit(1);
     border-radius:  unit(1);
     text-align: left;
     position: relative;
     flex: 0 0 calc(50% - #{unit(2)});
 
+    &--forms {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      & > a {
+        flex: 0 0 50%;
+        padding: 0 .5rem;
+      }
+    }
+
+    &--title {
+      flex: 100%;
+      padding: unit(2) unit(4);
+    }
+
     .node {
       margin-bottom: 1rem;
+    }
+
+    .stage-editor-section-form__card {
+      flex: 0 0 auto;
+      height: 130px;
+      margin: 0 .6rem 1.6rem 0;
+      background-color: var(--background);
+      border-color: var(--background);
+      color: var(--text);
+
+      &:hover {
+        border-color: var(--color-mustard);
+      }
     }
   }
 
@@ -79,8 +100,10 @@
   }
 
   &__group-title {
-    text-align: center;
-    margin-bottom: unit(2);
+    position: absolute;
+    top: -.5rem;
+    background: var(--architect-panel-background);
+    padding: 0 unit(2);
   }
 
   &__forms {
@@ -129,7 +152,6 @@
     $transition-after: 300ms;
     $transition-duration: 500ms;
     $transition-easing: cubic-bezier(.25, .1, .25, 1);
-    will-change: transform, opacity;
     transform: translateZ(0);
     transition: opacity $transition-after $transition-easing;
 
@@ -138,7 +160,6 @@
     }
 
     .timeline-overview__panel {
-      will-change: transform;
       transform: translateZ(0);
       transition: border-radius $transition-duration $transition-easing,
       transform $transition-duration $transition-easing;
