@@ -75,6 +75,7 @@ class Issues extends Component {
     // for each issue get friendly title from dom
     this.flatIssues.forEach(({ field }) => {
       const fieldId = getFieldId(field);
+
       const targetField = document.querySelector(`#${fieldId}`);
 
       if (!targetField) { return; }

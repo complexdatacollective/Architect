@@ -46,31 +46,35 @@ class SortControl extends Component {
     this.props.onChange(newSortOrder);
   }
 
+  renderButton = (property) => {
+    const [option] = this.getSortOption(property);
+    const isSorted = this.getIsSorted(property);
+    const color = isSorted ? 'white' : 'primary';
+    const label = isSorted ?
+      `${property} ${getDirectionLabel(option.direction)}` :
+      property;
+
+    return (
+      <Button
+        color={color}
+        type="button"
+        key={property}
+        onClick={() => this.toggleSort(property)}
+      >
+        {label}
+      </Button>
+    );
+  }
+
   render() {
     const { sortableProperties } = this.props;
 
     if (!sortableProperties) { return null; }
 
-    return sortableProperties.map(
-      (property) => {
-        const [option] = this.getSortOption(property);
-        const isSorted = this.getIsSorted(property);
-        const color = isSorted ? 'white' : 'primary';
-        const label = isSorted ?
-          `${property} ${getDirectionLabel(option.direction)}` :
-          property;
-
-        return (
-          <Button
-            color={color}
-            type="button"
-            key={property}
-            onClick={() => this.toggleSort(property)}
-          >
-            {label}
-          </Button>
-        );
-      },
+    return (
+      <div className="list-sort-control">
+        {sortableProperties.map(this.renderButton)}
+      </div>
     );
   }
 }

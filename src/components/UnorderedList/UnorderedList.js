@@ -7,7 +7,6 @@ class List extends Component {
     controls: DefaultControls,
     filter: items => items,
     onDelete: () => {},
-    onSort: () => {},
   };
 
   constructor(props) {
@@ -41,6 +40,8 @@ class List extends Component {
       sortableProperties,
       onDelete,
       children,
+      items,
+      filter,
       ...rest
     } = this.props;
 
@@ -56,12 +57,12 @@ class List extends Component {
           </div>
         )}
         <div className="list__items">
-          {this.items().map(({ _index }) => (
-            <div className="list__item">
+          {this.items().map(({ _index, ...item }) => (
+            <div className="list__item" key={_index}>
               <Item
+                item={item}
                 {...rest}
                 index={_index}
-                key={_index}
                 sortable={false}
                 onDelete={() => onDelete(_index)}
               />
