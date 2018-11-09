@@ -7,7 +7,7 @@ import uuid from 'uuid';
 import cx from 'classnames';
 import { keys, has, get } from 'lodash';
 import Guidance from '../../../Guidance';
-import { Items, NewButton } from '../../../Items';
+import OrderedList, { NewButton } from '../../../OrderedList';
 import NodePanel from './NodePanel';
 
 const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => {
@@ -21,8 +21,8 @@ const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => 
           <p>Use this section to configure up to two side panels on this name generator.</p>
           <FieldArray
             name="panels"
-            component={Items}
-            itemComponent={NodePanel}
+            component={OrderedList}
+            item={NodePanel}
             form={form}
             dataSources={dataSources}
           />

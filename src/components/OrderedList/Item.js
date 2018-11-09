@@ -5,16 +5,16 @@ import Handle from './Handle';
 import DeleteButton from './DeleteButton';
 
 const Item = ({ children, handleDelete, className, sortable }) => (
-  <div className={cx('items-item', className)}>
+  <div className={cx('list-item', className)}>
     { sortable &&
-      <div className="items-item__control items-item__control--left">
+      <div className="list-item__control list-item__control--left">
         <Handle />
       </div>
     }
-    <div className="items-item__content">
+    <div className="list-item__content">
       {children}
     </div>
-    <div className="items-item__control items-item__control--right">
+    <div className="list-item__control list-item__control--right">
       <DeleteButton onClick={handleDelete} />
     </div>
   </div>

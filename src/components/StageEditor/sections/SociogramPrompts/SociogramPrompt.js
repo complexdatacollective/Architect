@@ -10,7 +10,7 @@ import Node from '../../../../ui/components/Node';
 import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
 import * as Fields from '../../../../ui/components/Fields';
-import { ExpandableItem } from '../../../Items';
+import { ExpandableItem } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 
 // Background options

@@ -15,20 +15,20 @@ const SortableItem = SortableElement(
   ),
 );
 
-const Items = ({
+const OrderedList = ({
   fields,
   meta: { error, dirty, submitFailed },
-  itemComponent: ItemComponent,
+  item: Item,
   disabled: sortable,
   ...rest
 }) => (
-  <div className="items">
-    { (dirty || submitFailed) && error && <p className="items__error">{error}</p> }
-    <TransitionGroup className="items__items">
+  <div className="list">
+    { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
+    <TransitionGroup className="list__items">
       { fields.map((fieldId, index) => (
         <WipeTransition key={get(fields.get(index), 'id', index)}>
           <SortableItem index={index}>
-            <ItemComponent
+            <Item
               fieldId={fieldId}
               index={index}
               fields={fields}
@@ -43,19 +43,19 @@ const Items = ({
   </div>
 );
 
-Items.propTypes = {
+OrderedList.propTypes = {
   fields: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
-  itemComponent: PropTypes.func.isRequired,
+  item: PropTypes.func.isRequired,
   getId: PropTypes.func,
   disabled: PropTypes.bool.isRequired,
 };
 
-Items.defaultProps = {
+OrderedList.defaultProps = {
   getId: fieldId => fieldId,
 };
 
-export { Items };
+export { OrderedList };
 
 export default compose(
   defaultProps({
@@ -69,4 +69,4 @@ export default compose(
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
   SortableContainer,
-)(Items);
+)(OrderedList);

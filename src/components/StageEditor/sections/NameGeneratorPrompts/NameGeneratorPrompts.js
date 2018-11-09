@@ -9,7 +9,7 @@ import uuid from 'uuid';
 import cx from 'classnames';
 import Guidance from '../../../Guidance';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
-import { Items, NewButton } from '../../../Items';
+import OrderedList, { NewButton } from '../../../OrderedList';
 import ValidatedFieldArray from '../../../Form/ValidatedFieldArray';
 import { getFieldId } from '../../../../utils/issues';
 
@@ -42,8 +42,8 @@ class NameGeneratorPromptsSection extends PureComponent {
               { nodeType &&
                 <ValidatedFieldArray
                   name={fieldName}
-                  component={Items}
-                  itemComponent={NameGeneratorPrompt}
+                  component={OrderedList}
+                  item={NameGeneratorPrompt}
                   nodeType={nodeType}
                   form={form}
                   validation={{ notEmpty }}

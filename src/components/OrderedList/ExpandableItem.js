@@ -56,47 +56,47 @@ class ExpandableItem extends Component {
     } = this.props;
 
     const componentClasses = cx(
-      'items-expandable-item',
-      { 'items-expandable-item--open': this.state.isOpen },
-      { 'items-expandable-item--lock': this.props.lockOpen },
+      'list-expandable-item',
+      { 'list-expandable-item--open': this.state.isOpen },
+      { 'list-expandable-item--lock': this.props.lockOpen },
       this.props.className,
     );
 
     return (
       <div className={componentClasses}>
-        <div className="items-expandable-item__preview">
+        <div className="list-expandable-item__preview">
           { sortable &&
             <div
-              className="items-expandable-item__control items-expandable-item__control--left"
+              className="list-expandable-item__control list-expandable-item__control--left"
             >
               <Handle />
             </div>
           }
-          <div className="items-expandable-item__preview-content">
+          <div className="list-expandable-item__preview-content">
             {preview}
           </div>
           <div
-            className="items-expandable-item__control items-expandable-item__control--right"
+            className="list-expandable-item__control list-expandable-item__control--right"
           >
             <DeleteButton onClick={handleDelete} />
           </div>
         </div>
         <div
-          className="items-expandable-item__expand"
+          className="list-expandable-item__expand"
           onClick={this.handleToggleOpen}
         >
           <Icon
             name="chevron-down"
             color="white"
-            className="items-expandable-item__expand--open"
+            className="list-expandable-item__expand--open"
           />
           <Icon
             name="chevron-up"
             color="white"
-            className="items-expandable-item__expand--close"
+            className="list-expandable-item__expand--close"
           />
         </div>
-        <div className="items-expandable-item__content">
+        <div className="list-expandable-item__content">
           {children}
         </div>
       </div>
