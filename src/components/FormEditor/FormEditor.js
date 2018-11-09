@@ -20,7 +20,7 @@ const allowedTypes = ['text', 'number', 'boolean', 'ordinal', 'categorical'];
 const inputDefinitions = {
   NumberInput: {
     label: 'Number Input',
-    value: 'Text',
+    value: 'Number',
     description: 'This input is optomized for collecting numerical data, and will show a number pad if available.',
     image: 'TextInput',
   },
@@ -71,7 +71,7 @@ const inputDefinitions = {
 const getInputsForType = (type) => {
   switch (type) {
     case 'number':
-      return [inputDefinitions.NumberInput];
+      return [inputDefinitions.TextInput, inputDefinitions.NumberInput];
     case 'text':
       return [inputDefinitions.TextInput];
     case 'boolean':
