@@ -32,7 +32,9 @@ const search = (list, query) => {
 
 const sort = (list, sortOrder) => {
   if (!sortOrder) { return list; }
-  return orderBy(list, ...sortOrder);
+  const properties = sortOrder.map(({ property }) => property);
+  const orders = sortOrder.map(({ direction }) => direction);
+  return orderBy(list, properties, orders);
 };
 
 const filter = (list, { query, sortOrder }) => {

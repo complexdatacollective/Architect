@@ -21,7 +21,10 @@ class List extends Component {
   }
 
   handleUpdateParameters = (parameters) => {
-    this.setState({ parameters }, () => console.log(this.state));
+    this.setState({ parameters: {
+      ...this.state.parameters,
+      ...parameters,
+    } });
   }
 
   items() {
