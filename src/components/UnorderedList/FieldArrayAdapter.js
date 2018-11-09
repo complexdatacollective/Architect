@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
-import List from '.';
+import UnorderedList from '.';
 
 /**
  * Usage:
@@ -34,7 +34,7 @@ const FieldArrayAdapter = ({
   handleDelete,
   ...rest
 }) => (
-  <List
+  <UnorderedList
     items={items}
     onSort={handleSort}
     onDelete={handleDelete}
@@ -42,7 +42,7 @@ const FieldArrayAdapter = ({
     {...rest}
   >
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
-  </List>
+  </UnorderedList>
 );
 
 FieldArrayAdapter.propTypes = {

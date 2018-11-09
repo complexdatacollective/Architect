@@ -1,4 +1,4 @@
-export { default } from './List';
+export { default } from './UnorderedList';
 export { default as FieldArrayAdapter } from './FieldArrayAdapter';
 export { default as Item } from '../Items/Item';
 export { default as ExpandableItem } from '../Items/ExpandableItem';

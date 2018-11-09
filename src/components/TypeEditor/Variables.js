@@ -9,7 +9,7 @@ import Fuse from 'fuse.js';
 import { orderBy } from 'lodash';
 import { NewButton } from '../Items';
 import Variable from './Variable';
-import { FieldArrayAdapter as List } from '../List';
+import { FieldArrayAdapter as UnorderedList } from '../UnorderedList';
 
 const fuseOptions = {
   shouldSort: true,
@@ -54,11 +54,10 @@ class Variables extends Component {
         <div className="items">
           <div className="items__items">
             <FieldArray
-              component={List}
+              component={UnorderedList}
               item={Variable}
               name={name}
               form={form}
-              sortable={false} // manual sort
               filter={filter}
               sortableFields={['name']}
             />
