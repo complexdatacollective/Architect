@@ -1,0 +1,28 @@
+$component-name: list-item;
+
+.#{$component-name} {
+  width: 100%;
+  background-color: var(--architect-sortable-background);
+  color: var(--architect-sortable-text);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  border-radius: unit(1.5);
+
+  &__control {
+    padding: unit(2);
+    flex-grow: 0;
+
+    .icon {
+      .cls-1,
+      .cls-2 {
+        fill: var(--architect-sortable-text);
+      }
+    }
+  }
+
+  &__content {
+    padding: unit(2);
+    flex-grow: 1;
+  }
+}

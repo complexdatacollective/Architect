@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Text from '../../ui/components/Fields/Text';
 import SortControl from './SortControl';
 
 class Controls extends Component {
@@ -29,17 +30,30 @@ class Controls extends Component {
 
   render() {
     return (
-      <div>
-        <SortControl
-          sortableFields={this.props.sortableFields}
-          sortOrder={this.state.sortOrder}
-          onChange={this.handleUpdateSortOrder}
-        />
-        <input
-          type="text"
-          value={this.state.query}
-          onChange={this.handleUpdateQuery}
-        />
+      <div className="list-controls">
+        <div className="list-controls__section">
+          <div className="list-controls__section-name">
+            Search:
+          </div>
+          <Text
+            input={{
+              value: this.state.query,
+              onChange: this.handleUpdateQuery,
+            }}
+          />
+        </div>
+        { this.props.sortableProperties &&
+          <div className="list-controls__section">
+            <div className="list-controls__section-name">
+              Sort by:
+            </div>
+            <SortControl
+              sortableProperties={this.props.sortableProperties}
+              sortOrder={this.state.sortOrder}
+              onChange={this.handleUpdateSortOrder}
+            />
+          </div>
+        }
       </div>
     );
   }
@@ -47,11 +61,12 @@ class Controls extends Component {
 
 Controls.propTypes = {
   onChange: PropTypes.func,
+  sortableProperties: PropTypes.array,
 };
 
 Controls.defaultProps = {
   onChange: () => {},
-  sortableFields: [],
+  sortableProperties: [],
 };
 
 export default Controls;

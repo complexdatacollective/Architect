@@ -37,20 +37,20 @@ class ViewForms extends Component {
 
   renderForm = (form, key) => (
     <Wipe key={key}>
-      <div className="list__item" key={key}>
-        <div className="list__attribute list__attribute--icon">
+      <div className="simple-list__item" key={key}>
+        <div className="simple-list__attribute simple-list__attribute--icon">
           <Link to={`${this.props.protocolPath}/form/${key}`}>
             <Node label={get(this.props.nodes, [form.type, 'label'], '')} color={get(this.props.nodes, [form.type, 'color'], '')} />
           </Link>
         </div>
-        <div className="list__attribute">
+        <div className="simple-list__attribute">
           <h3>
             <Link to={`${this.props.protocolPath}/form/${key}`}>
               {form.title}
             </Link>
           </h3>
         </div>
-        <div className="list__attribute list__attribute--options">
+        <div className="simple-list__attribute simple-list__attribute--options">
           <Button size="small" color="neon-coral" onClick={() => this.handleDelete(key)}>
             Delete
           </Button>
@@ -67,7 +67,7 @@ class ViewForms extends Component {
     }
 
     return (
-      <div className="list">
+      <div className="simple-list">
         <TransitionGroup>
           {map(forms, this.renderForm)}
         </TransitionGroup>

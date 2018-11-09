@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import cx from 'classnames';
 import { map } from 'lodash';
 import DefaultControls from './Controls';
 
@@ -39,26 +38,25 @@ class List extends Component {
     const {
       controls: Controls,
       item: Item,
-      className,
-      sortableFields,
+      sortableProperties,
       onDelete,
       children,
       ...rest
     } = this.props;
 
     return (
-      <div className={cx(className)}>
+      <div className="list">
         { children }
         { Controls && (
           <div className="list__controls">
             <Controls
               onChange={this.handleUpdateParameters}
-              sortableFields={sortableFields}
+              sortableProperties={sortableProperties}
             />
           </div>
         )}
         <div className="list__items">
-          {this.items().map(({ _index, ...item }) => (
+          {this.items().map(({ _index }) => (
             <div className="list__item">
               <Item
                 {...rest}

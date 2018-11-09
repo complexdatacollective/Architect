@@ -59,7 +59,7 @@ class Variables extends Component {
               name={name}
               form={form}
               filter={filter}
-              sortableFields={['name']}
+              sortableProperties={['name']}
             />
           </div>
         </div>

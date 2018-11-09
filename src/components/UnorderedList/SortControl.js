@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '../../ui/components';
 
+const getDirectionLabel = direction =>
+  (direction === 'asc' ? '\u25B2' : '\u25BC');
+
 class SortControl extends Component {
+  getIsSorted(checkedProperty) {
+    return this.props.sortOrder
+      .map(({ property }) => property)
+      .includes(checkedProperty);
+  }
+
   getSortOption(property) {
     const { sortOrder } = this.props;
 
@@ -38,22 +47,29 @@ class SortControl extends Component {
   }
 
   render() {
-    const { sortableFields } = this.props;
+    const { sortableProperties } = this.props;
 
-    if (!sortableFields) { return null; }
+    console.log({ sortableProperties });
 
-    return sortableFields.map(
-      (field) => {
-        const [option] = this.getSortOption(field);
+    if (!sortableProperties) { return null; }
+
+    return sortableProperties.map(
+      (property) => {
+        const [option] = this.getSortOption(property);
+        const isSorted = this.getIsSorted(property);
+        const color = isSorted ? 'white' : 'primary';
+        const label = isSorted ?
+          `${property} ${getDirectionLabel(option.direction)}` :
+          property;
 
         return (
           <Button
-            // color={this.state.activeSortOrder.property === sortField.variable ? 'primary' : 'white'}
+            color={color}
             type="button"
-            key={field}
-            onClick={() => this.toggleSort(field)}
+            key={property}
+            onClick={() => this.toggleSort(property)}
           >
-            {field} {option.direction}
+            {label}
           </Button>
         );
       },
@@ -63,13 +79,13 @@ class SortControl extends Component {
 
 SortControl.propTypes = {
   onChange: PropTypes.func,
-  sortableFields: PropTypes.array,
+  sortableProperties: PropTypes.array,
   sortOrder: PropTypes.array,
 };
 
 SortControl.defaultProps = {
   onChange: () => {},
-  sortableFields: [],
+  sortableProperties: [],
   sortOrder: [],
 };
 
