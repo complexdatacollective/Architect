@@ -7,8 +7,8 @@
       connect-src 'self' http://localhost:* https://localhost:* %REACT_APP_CONNECT_SRC_CSP%;
       script-src 'self' %REACT_APP_SCRIPT_SRC_CSP%;
       style-src 'self' 'unsafe-inline';
-      media-src 'self' data: protocol:;
-      img-src 'self' data: protocol:;
+      media-src 'self' data: protocol: asset:;
+      img-src 'self' data: protocol: asset:;
     ">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="%PUBLIC_URL%/icons/netCanvas-icon.ico">

@@ -37,7 +37,7 @@ const Scene = ({
 
       <NavLink className="scene__home" to="/" exact>
         <img src={architectLogoIcon} alt="" />
-      </NavLink>`
+      </NavLink>
 
       <Flipper flipKey={flipKey}>
 

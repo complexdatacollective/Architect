@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { parse as parseQueryString } from 'query-string';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { compose } from 'recompose';
 import {
   submit as submitForm,
   isDirty as isFormDirty,
@@ -14,6 +15,12 @@ import Card from './ProtocolCard';
 import StageEditor from '../../components/StageEditor';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
+import { actionCreators as previewActions } from '../../ducks/modules/preview';
+
+const getInsertAtIndex = query =>
+  (query.insertAtIndex ? parseInt(query.insertAtIndex, 10) : null);
+
+const formName = 'edit-stage';
 
 class EditStage extends PureComponent {
   static propTypes = {
@@ -26,6 +33,8 @@ class EditStage extends PureComponent {
     insertAtIndex: PropTypes.number,
     updateStage: PropTypes.func.isRequired,
     createStage: PropTypes.func.isRequired,
+    previewStage: PropTypes.func.isRequired,
+    closePreview: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -46,6 +55,24 @@ class EditStage extends PureComponent {
     ] : [];
   }
 
+  get secondaryButtons() {
+    return [
+      <Button
+        key="preview"
+        onClick={this.handlePreview}
+        color="paradise-pink"
+      >Preview</Button>,
+    ];
+  }
+
+  handleComplete = () => {
+    // Hide preview
+    this.props.closePreview();
+    this.props.onComplete();
+  }
+
+  handlePreview = () => this.props.previewStage();
+
   handleSubmit = (stage) => {
     const { stageId, insertAtIndex } = this.props;
 
@@ -55,10 +82,10 @@ class EditStage extends PureComponent {
       this.props.createStage(stage, insertAtIndex);
     }
 
-    this.props.onComplete();
+    this.handleComplete();
   }
 
-  handleCancel = this.props.onComplete;
+  handleCancel = this.handleComplete;
 
   render() {
     const { stage, show } = this.props;
@@ -66,12 +93,15 @@ class EditStage extends PureComponent {
     return (
       <Card
         buttons={this.buttons}
+        secondaryButtons={this.secondaryButtons}
         show={show}
         onCancel={this.handleCancel}
       >
         <StageEditor
           stage={stage}
+          form={formName}
           onSubmit={this.handleSubmit}
+          previewStage={this.props.previewStage}
         />
       </Card>
     );
@@ -83,21 +113,38 @@ const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
   const query = parseQueryString(props.location.search);
   const stage = find(protocol.stages, ['id', stageId]) || { type: query.type };
+  const insertAtIndex = getInsertAtIndex(query);
 
   return ({
     stage,
     stageId,
-    insertAtIndex: query.insertAtIndex ? parseInt(query.insertAtIndex, 10) : null,
-    dirty: isFormDirty('edit-stage')(state),
-    invalid: isFormInvalid('edit-stage')(state),
+    insertAtIndex,
+    dirty: isFormDirty(formName)(state),
+    invalid: isFormInvalid(formName)(state),
   });
 };
-const mapDispatchToProps = dispatch => ({
-  submitForm: () => dispatch(submitForm('edit-stage')),
-  updateStage: bindActionCreators(stageActions.updateStage, dispatch),
-  createStage: bindActionCreators(stageActions.createStage, dispatch),
-});
+
+const mapDispatchToProps = (dispatch, props) => {
+  const stageId = get(props, 'match.params.id');
+  const query = parseQueryString(props.location.search);
+  const insertAtIndex = getInsertAtIndex(query);
+
+  const stageMeta = {
+    id: stageId,
+    insertAtIndex,
+  };
+
+  return {
+    submitForm: () => dispatch(submitForm(formName)),
+    updateStage: bindActionCreators(stageActions.updateStage, dispatch),
+    createStage: bindActionCreators(stageActions.createStage, dispatch),
+    closePreview: bindActionCreators(previewActions.closePreview, dispatch),
+    previewStage: () => dispatch(previewActions.previewStageByFormName(stageMeta, formName)),
+  };
+};
 
 export { EditStage };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditStage);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+)(EditStage);

@@ -1,6 +1,7 @@
 const { app } = require('electron');
 const log = require('./components/log');
 
+const previewManager = require('./components/previewManager');
 const appManager = require('./components/appManager');
 
 log.info('App starting...');
@@ -19,8 +20,10 @@ if (shouldQuit) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+  console.log('ready');
   appManager.start();
-  appManager.loadDevTools();
+  previewManager.init();
+  // appManager.loadDevTools();
 });
 
 // Quit when all windows are closed.

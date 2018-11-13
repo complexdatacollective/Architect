@@ -17,20 +17,24 @@ This repository assumes that `npm` is installed. If you don't have it installed,
 
 1. Clone this repo.
 2. Go into the repo directory
+3. Initialise the submodules `npm run update-submodules`
+
+### Available commands:
 
 |`npm run <script>`|Description|
 |------------------|-----------|
 |`start`|Serves your app at `localhost:3000`.|
+|`start:electron`|Serves your app for consumption by electron.|
+|`electron:dev`|Runs electron window with contents of `start:electron` (must be run concurrently)|
 |`build`|Compiles assets and prepares app for production in the /build directory.|
-|`test`|Runs testing suite.|
-|`build-docs`|Builds HTML API docs into the docs-build directory.|
-|`electron`|Runs the current code in electron, for testing.|
-|`generate-icons`|Uses icon-gen package to generate iconsets and icon files for OSX and Windows.|
-|`package-mac`|Uses electron-packager to package an OSX release.|
-|`package-win`|Uses electron-packager to package a Windows release.|
-|`package-linux`|Uses electron-packager to package a Linux release.|
-|`package-cordova`|Builds Android and iOS cordova projects|
-|`create-installer-mac`|Creates a DMG based installer for OSX.|
+|`lint`|Lints js/scss|
+|`test`|Runs testing suite|
+|`preflight`|Runs linting & testing. Useful as a prepush/build hook|
+|`dist:mac`|Build and publish OS X verison|
+|`dist:linux`|Build and publish Linux version|
+|`dist:win`|Build and publish Windows version|
+|`dist:all`|Build and publish all platforms|
+|`update-submodules`|Update git submodules|
 
 ### Development workflow in Electron
 

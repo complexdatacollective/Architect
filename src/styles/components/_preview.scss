@@ -1,0 +1,42 @@
+
+.preview {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.network-canvas {
+  // sass-lint:disable no-color-literals
+  --color-shadow: rgba(0, 0, 0, .15);
+  --color-modal-shadow: rgba(20, 0, 0, .2);
+  --background: var(--color-navy-taupe);
+  --text: var(--color-white);
+  --input-background: var(--color-platinum--dark);
+  --input-label: var(--color-charcoal);
+  --text-light: var(--color-white);
+  --text-dark: var(--color-charcoal);
+  --background-dark: var(--color-navy-taupe);
+
+  @import '../../network-canvas/src/styles/main';
+
+  color: var(--text);
+  background: var(--background);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  .window {
+    .modal {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+}

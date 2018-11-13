@@ -18,6 +18,8 @@
  */
 
 const autoprefixer = require('autoprefixer');
+const postUrl = require('postcss-url');
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -84,6 +86,19 @@ const getStyleLoaders = (preProcessor) => {
         plugins: () => [
           autoprefixer({
             flexbox: 'no-2009',
+          }),
+          postUrl({
+            url: ({ url }) => {
+              const ncPath = path.resolve(`src/network-canvas/src/styles/${url}`);
+              const ncUrl = path.normalize(`../network-canvas/src/styles/${url}`);
+
+              try {
+                fs.accessSync(ncPath, fs.constants.R_OK);
+                return ncUrl;
+              } catch (err) {
+                return url;
+              }
+            },
           }),
         ],
         sourceMap: shouldUseSourceMap,
@@ -183,6 +198,7 @@ const loaderRules = Object.freeze([
       // extensions .module.scss or .module.sass
       {
         test: sassRegex,
+        include: paths.appStyles,
         use: getStyleLoaders('sass-loader'),
       },
       {

@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import {
-  reduxForm,
   Form as ReduxForm,
   formValueSelector,
   formPropTypes,
-  getFormSyncErrors,
 } from 'redux-form';
+import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
-import { compose, withState, withHandlers } from 'recompose';
 import cx from 'classnames';
 import { Guided } from '../Guided';
 import { getInterface } from './Interfaces';
@@ -20,8 +17,20 @@ const getFormValues = formValueSelector(formName);
 const form = { name: formName, getValues: getFormValues };
 
 class StageEditor extends Component {
+  componentDidMount() {
+    ipcRenderer.on('REFRESH_PREVIEW', this.handleRefresh);
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener('REFRESH_PREVIEW', this.handleRefresh);
+  }
+
   get sections() {
     return getInterface(this.props.stage.type).sections;
+  }
+
+  handleRefresh = () => {
+    this.props.previewStage();
   }
 
   renderSections() {
@@ -71,24 +80,6 @@ StageEditor.propTypes = {
   ...formPropTypes,
 };
 
-const mapStateToProps = (state, props) => {
-  const issues = getFormSyncErrors(formName)(state);
-  return {
-    initialValues: props.stage,
-    issues,
-  };
-};
+export { StageEditor };
 
-export default compose(
-  connect(mapStateToProps),
-  withState('codeView', 'updateCodeView', false),
-  withHandlers({
-    toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-  }),
-  reduxForm({
-    form: formName,
-    touchOnBlur: false,
-    touchOnChange: true,
-    enableReinitialize: true,
-  }),
-)(StageEditor);
+export default StageEditor;

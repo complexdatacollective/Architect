@@ -44,7 +44,6 @@ ShallowWrapper {
             src="architect-logo-icon.svg"
           />
         </NavLink>,
-        "\`",
         <Flipper
           applyTransformOrigin={true}
           element="div"
@@ -155,7 +154,6 @@ ShallowWrapper {
         },
         "type": [Function],
       },
-      "\`",
       Object {
         "instance": null,
         "key": undefined,
@@ -369,7 +367,6 @@ ShallowWrapper {
               src="architect-logo-icon.svg"
             />
           </NavLink>,
-          "\`",
           <Flipper
             applyTransformOrigin={true}
             element="div"
@@ -480,7 +477,6 @@ ShallowWrapper {
           },
           "type": [Function],
         },
-        "\`",
         Object {
           "instance": null,
           "key": undefined,
@@ -733,7 +729,6 @@ ShallowWrapper {
             src="architect-logo-icon.svg"
           />
         </NavLink>,
-        "\`",
         <Flipper
           applyTransformOrigin={true}
           element="div"
@@ -844,7 +839,6 @@ ShallowWrapper {
         },
         "type": [Function],
       },
-      "\`",
       Object {
         "instance": null,
         "key": undefined,
@@ -1058,7 +1052,6 @@ ShallowWrapper {
               src="architect-logo-icon.svg"
             />
           </NavLink>,
-          "\`",
           <Flipper
             applyTransformOrigin={true}
             element="div"
@@ -1169,7 +1162,6 @@ ShallowWrapper {
           },
           "type": [Function],
         },
-        "\`",
         Object {
           "instance": null,
           "key": undefined,

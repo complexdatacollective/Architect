@@ -7,7 +7,7 @@ const isMacOS = () => process.platform === 'darwin';
 
 const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false } : {};
 
-let window;
+global.appWindow = null;
 
 function getAppUrl() {
   if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
@@ -23,24 +23,11 @@ function getAppUrl() {
   });
 }
 
-function setApplicationMenu(appWindow) {
-  const appMenu = Menu.buildFromTemplate(mainMenu(appWindow));
-  Menu.setApplicationMenu(appMenu);
-}
-
-function loadApp(appWindow, cb) {
-  appWindow.webContents.on('did-finish-load', cb);
-
-  appWindow.loadURL(getAppUrl());
-}
-
 function createWindow() {
-  if (window) { return Promise.resolve(window); }
+  if (global.appWindow) { return Promise.resolve(global.appWindow); }
 
   return new Promise((resolve) => {
     // Create the browser window.
-    console.log('make window');
-
     const windowParameters = Object.assign({
       width: 1440,
       height: 900,
@@ -48,42 +35,51 @@ function createWindow() {
       minHeight: 800,
       center: true,
       title: 'Network Canvas Architect',
+      show: false,
 
     }, titlebarParameters);
 
-    const mainWindow = new BrowserWindow(windowParameters);
+    global.appWindow = new BrowserWindow(windowParameters);
 
-    mainWindow.webContents.on('new-window', (evt) => {
+    const appMenu = Menu.buildFromTemplate(mainMenu(global.appWindow));
+
+    global.appWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action
       evt.preventDefault();
     });
 
     // For now, any navigation off the SPA is unneeded
-    mainWindow.webContents.on('will-navigate', (evt) => {
+    global.appWindow.webContents.on('will-navigate', (evt) => {
       evt.preventDefault();
     });
 
-    if (process.env.NODE_ENV === 'development') {
-      mainWindow.openDevTools();
-    }
+    global.appWindow.on('focus', () => {
+      Menu.setApplicationMenu(appMenu);
+    });
 
-    window = mainWindow;
-
-    window.on('closed', () => {
+    global.appWindow.on('closed', () => {
       // Dereference the window object, usually you would store windows
       // in an array if your app supports multi windows, this is the time
       // when you should delete the corresponding element.
-      window = null;
+      global.appWindow = null;
     });
 
-    setApplicationMenu(window);
+    global.appWindow.once('ready-to-show', () => {
+      global.appWindow.show();
+    });
 
-    loadApp(window, () => resolve(window));
+    global.appWindow.webContents.on('did-finish-load', () => resolve(global.appWindow));
+
+    global.appWindow.loadURL(getAppUrl());
+
+    if (process.env.NODE_ENV === 'development') {
+      global.appWindow.openDevTools();
+    }
   });
 }
 
 const windowManager = {
-  get hasWindow() { return !!window; },
+  get hasWindow() { return !!global.appWindow; },
   getWindow: function getWindow() {
     return createWindow();
   },

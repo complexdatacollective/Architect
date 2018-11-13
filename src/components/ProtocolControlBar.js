@@ -15,17 +15,20 @@ const ProtocolControlBar = ({
   hasAnyStages,
   show,
 }) => (
-  <ControlBar show={show && hasUnsavedChanges}>
-    <Button
-      onClick={saveProtocol}
-      color="white"
-      icon={RightArrow}
-      iconPosition="right"
-      disabled={!hasAnyStages}
-    >
-      Save
-    </Button>
-  </ControlBar>
+  <ControlBar
+    show={show && hasUnsavedChanges}
+    buttons={(
+      <Button
+        onClick={saveProtocol}
+        color="white"
+        icon={RightArrow}
+        iconPosition="right"
+        disabled={!hasAnyStages}
+      >
+        Save
+      </Button>
+    )}
+  />
 );
 
 ProtocolControlBar.propTypes = {

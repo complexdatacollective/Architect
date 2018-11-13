@@ -7,17 +7,20 @@ import { isMacOS } from '../utils/platform';
 import { AppErrorBoundary } from './Errors';
 import DialogManager from './DialogManager';
 
-const App = ({ children }) => {
+const App = ({ children, location }) => {
+  const isPreview = () => /^\/preview/.test(location.pathname);
+
   const appClasses = cx(
     'app',
     {
-      'app--macos': isMacOS(),
+      'app--macos': isMacOS() && !isPreview(),
+      'app--preview': isPreview(),
     },
   );
 
   return (
     <div className={appClasses}>
-      {isMacOS() &&
+      {isMacOS() && !isPreview() &&
         <div className="app__electron-titlebar" />
       }
       <div className="app__window">
@@ -25,6 +28,7 @@ const App = ({ children }) => {
           { children }
         </AppErrorBoundary>
       </div>
+      <div id="page-wrap" />
 
       <DialogManager />
     </div>
@@ -33,6 +37,9 @@ const App = ({ children }) => {
 
 App.propTypes = {
   children: PropTypes.element,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 App.defaultProps = {

@@ -25,6 +25,7 @@ class Card extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     buttons: PropTypes.arrayOf(PropTypes.node),
+    secondaryButtons: PropTypes.node,
     type: PropTypes.string,
     show: PropTypes.bool,
     style: PropTypes.oneOf(['fade', 'wipe']),
@@ -39,6 +40,7 @@ class Card extends PureComponent {
     type: 'default',
     children: null,
     buttons: [],
+    secondaryButtons: null,
     show: false,
     style: 'wipe',
     enterDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
@@ -48,13 +50,12 @@ class Card extends PureComponent {
     onAcknowledgeError: null,
   }
 
-  get anyButtons() { return this.props.buttons.length > 0; }
-
   handleAcknowledgeError = () => this.props.onAcknowledgeError();
 
   render() {
     const {
       buttons,
+      secondaryButtons,
       show,
       style,
       enterDuration,
@@ -109,10 +110,11 @@ class Card extends PureComponent {
             </div>
             <ControlBar
               show={(state === 'entering' || state === 'entered')}
-              className="control-bar--delayed control-bar--align-right"
-            >
-              { buttons }
-            </ControlBar>
+              className="control-bar--delayed"
+              flip
+              buttons={buttons}
+              secondaryButtons={secondaryButtons}
+            />
           </div>
         )}
       </Transition>
