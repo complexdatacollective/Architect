@@ -125,7 +125,7 @@ ShallowWrapper {
           </div>
         </Connect(Guided)>
       </FormSection>,
-      "className": null,
+      "className": "type-editor-variable",
       "handleDelete": [MockFunction],
       "lockOpen": false,
       "open": false,
@@ -713,7 +713,7 @@ ShallowWrapper {
             </div>
           </Connect(Guided)>
         </FormSection>,
-        "className": null,
+        "className": "type-editor-variable",
         "handleDelete": [MockFunction],
         "lockOpen": false,
         "open": false,
