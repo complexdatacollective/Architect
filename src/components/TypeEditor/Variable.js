@@ -63,9 +63,8 @@ class Variable extends Component {
 
     return (
       <ExpandableItem
-        // open={isDirty}
-        // lockOpen={isInvalid && hasSubmitFailed}
         sortable={false}
+        className="type-editor-variable"
         preview={(
           <FormSection name={fieldId}>
             <h3 className="variable__preview-title">

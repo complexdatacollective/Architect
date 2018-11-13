@@ -1,11 +1,5 @@
-.variable {
-  &__preview {
-    &-title {
-      margin: 0;
-    }
-
-    &-description {
-      margin: unit(1) 0 0;
-    }
+.type-editor-variable {
+  .form-field-container {
+    --input-background: var(--background);
   }
 }
