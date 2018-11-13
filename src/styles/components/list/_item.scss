@@ -9,6 +9,11 @@ $component-name: list-item;
   align-items: stretch;
   border-radius: unit(1.5);
 
+  .form-field,
+  .form-fields-select__control {
+    --input-background: var(--background);
+  }
+
   &__control {
     padding: unit(2);
     flex-grow: 0;

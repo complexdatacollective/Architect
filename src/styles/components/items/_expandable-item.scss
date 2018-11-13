@@ -3,6 +3,11 @@ $component-name: items-expandable-item;
 .#{$component-name} {
   width: 100%;
 
+  .form-field,
+  .form-fields-select__control {
+    --input-background: var(--background);
+  }
+
   &__preview {
     background-color: var(--architect-sortable-preview-background);
     color: var(--architect-sortable-text);
