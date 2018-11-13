@@ -75,7 +75,9 @@ class ItemEditor extends Component {
             size="small"
             onClick={onComplete}
             disabled={error}
-          >Done</Button>
+          >
+           Done
+          </Button>
         </div>
       </div>
     );

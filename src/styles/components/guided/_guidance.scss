@@ -7,7 +7,8 @@
   z-index: 1000;
   width: 30vw;
   height: 100%;
-  background-color: var(--architect-panel-background);
+  background-color: var(--architect-guidance-background);
+  color: var(--architect-guidance-text);
 
   &__content {
     opacity: 0;
@@ -70,8 +71,8 @@
     left: 0;
     border-top-left-radius: unit(6);
     border-bottom-left-radius: unit(6);
-    background-color: var(--architect-panel-tab);
-    color: var(--architect-panel-tab-label);
+    background-color: var(--architect-guidance-toggle-background);
+    color: var(--architect-guidance-toggle-label);
     width: unit(3);
     height: unit(5);
     cursor: pointer;
@@ -96,7 +97,7 @@
     }
 
     &:hover {
-      background-color: var(--architect-panel-tab--hover);
+      background-color: var(--architect-guidance-toggle-background--hover);
     }
   }
 

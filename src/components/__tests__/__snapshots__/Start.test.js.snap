@@ -35,6 +35,7 @@ ShallowWrapper {
           >
             A tool for creating Network Canvas interviews
           </h2>
+          <Version />
         </div>,
         <div
           className="start__call-to-action"
@@ -99,6 +100,7 @@ ShallowWrapper {
             >
               A tool for creating Network Canvas interviews
             </h2>,
+            <Version />,
           ],
           "className": "start__welcome",
         },
@@ -127,6 +129,15 @@ ShallowWrapper {
             "ref": null,
             "rendered": "A tool for creating Network Canvas interviews",
             "type": "h2",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
           },
         ],
         "type": "div",
@@ -254,6 +265,7 @@ ShallowWrapper {
             >
               A tool for creating Network Canvas interviews
             </h2>
+            <Version />
           </div>,
           <div
             className="start__call-to-action"
@@ -318,6 +330,7 @@ ShallowWrapper {
               >
                 A tool for creating Network Canvas interviews
               </h2>,
+              <Version />,
             ],
             "className": "start__welcome",
           },
@@ -346,6 +359,15 @@ ShallowWrapper {
               "ref": null,
               "rendered": "A tool for creating Network Canvas interviews",
               "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
             },
           ],
           "type": "div",

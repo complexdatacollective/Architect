@@ -6,7 +6,7 @@ import * as fields from '../../../../../ui/components/Fields';
 
 const VARIABLE_INPUT_TYPES = {
   text: 'Text',
-  number: 'Text', // TODO: numeric only!
+  number: 'Number',
   datetime: 'Text',
   boolean: 'Toggle',
   ordinal: 'RadioGroup',

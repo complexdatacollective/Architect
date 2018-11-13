@@ -1,7 +1,8 @@
 :root {
   --text: var(--color-charcoal);
   --input-label: var(--color-charcoal);
-  --input-background: var(--color-platinum--dark);
+  --input-background: var(--color-platinum);
+  --input-placeholder: var(--color-platinum--dark);
 }
 
 .node__label-text {
@@ -26,10 +27,6 @@ a {
   &--platinum--dark {
     color: var(--text-dark);
   }
-}
-
-.form-field {
-  border-radius: unit(1.5);
 }
 
 .form-fields-textarea__error,

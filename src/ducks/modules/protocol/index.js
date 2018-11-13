@@ -21,7 +21,7 @@ function protocolReducer(state = initialState, action = {}) {
     case UPDATE_OPTIONS:
       return {
         ...state,
-        ...pick(action.options, ['name', 'version']),
+        ...pick(action.options, ['name', 'version', 'description']),
       };
     default:
       return state;

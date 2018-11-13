@@ -37,31 +37,40 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
+        <div
+          className="code-button"
+        >
+          <small>
+            (
+            <a
+              onClick={[Function]}
+            >
+              Show Code View
+            </a>
+            )
+          </small>
+        </div>,
         null,
-        <h1>
+        <h1
+          className="editor__heading"
+        >
           Create 
           edge
         </h1>,
-        <small>
-          (
-          <a
-            onClick={[Function]}
-          >
-            Show Code View
-          </a>
-          )
-        </small>,
         <Connect(Guided)
           contentId="guidance.registry.type.label"
         >
           <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_label"
             >
               Label
-            </h2>
+            </h3>
+            <p>
+              The node name is how you will refer to this node type in the rest of Architect.
+            </p>
             <Validated
               component={[Function]}
               name="label"
@@ -80,11 +89,14 @@ ShallowWrapper {
           <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_name"
             >
-              Name
-            </h2>
+              Short Label
+            </h3>
+            <p>
+              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+            </p>
             <Validated
               component={[Function]}
               name="name"
@@ -108,6 +120,9 @@ ShallowWrapper {
             >
               Color
             </h2>
+            <p>
+              Choose a color for this node type.
+            </p>
             <Validated
               colors={Array []}
               component={[Function]}
@@ -141,6 +156,59 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <small>
+            (
+            <a
+              onClick={[Function]}
+            >
+              Show Code View
+            </a>
+            )
+          </small>,
+          "className": "code-button",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "(",
+              <a
+                onClick={[Function]}
+              >
+                Show Code View
+              </a>,
+              ")",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "(",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Show Code View",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": "Show Code View",
+              "type": "a",
+            },
+            ")",
+          ],
+          "type": "small",
+        },
+        "type": "div",
+      },
       null,
       Object {
         "instance": null,
@@ -151,6 +219,7 @@ ShallowWrapper {
             "Create ",
             "edge",
           ],
+          "className": "editor__heading",
         },
         "ref": null,
         "rendered": Array [
@@ -162,50 +231,19 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            "(",
-            <a
-              onClick={[Function]}
-            >
-              Show Code View
-            </a>,
-            ")",
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          "(",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Show Code View",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": "Show Code View",
-            "type": "a",
-          },
-          ")",
-        ],
-        "type": "small",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "children": <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_label"
             >
               Label
-            </h2>
+            </h3>
+            <p>
+              The node name is how you will refer to this node type in the rest of Architect.
+            </p>
             <Validated
               component={[Function]}
               name="label"
@@ -226,11 +264,14 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2
+              <h3
                 id="field_label"
               >
                 Label
-              </h2>,
+              </h3>,
+              <p>
+                The node name is how you will refer to this node type in the rest of Architect.
+              </p>,
               <Validated
                 component={[Function]}
                 name="label"
@@ -256,7 +297,18 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": "Label",
-              "type": "h2",
+              "type": "h3",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "The node name is how you will refer to this node type in the rest of Architect.",
+              },
+              "ref": null,
+              "rendered": "The node name is how you will refer to this node type in the rest of Architect.",
+              "type": "p",
             },
             Object {
               "instance": null,
@@ -287,11 +339,14 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_name"
             >
-              Name
-            </h2>
+              Short Label
+            </h3>
+            <p>
+              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+            </p>
             <Validated
               component={[Function]}
               name="name"
@@ -312,11 +367,14 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2
+              <h3
                 id="field_name"
               >
-                Name
-              </h2>,
+                Short Label
+              </h3>,
+              <p>
+                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+              </p>,
               <Validated
                 component={[Function]}
                 name="name"
@@ -337,12 +395,23 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Name",
+                "children": "Short Label",
                 "id": "field_name",
               },
               "ref": null,
-              "rendered": "Name",
-              "type": "h2",
+              "rendered": "Short Label",
+              "type": "h3",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+              },
+              "ref": null,
+              "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+              "type": "p",
             },
             Object {
               "instance": null,
@@ -378,6 +447,9 @@ ShallowWrapper {
             >
               Color
             </h2>
+            <p>
+              Choose a color for this node type.
+            </p>
             <Validated
               colors={Array []}
               component={[Function]}
@@ -403,6 +475,9 @@ ShallowWrapper {
               >
                 Color
               </h2>,
+              <p>
+                Choose a color for this node type.
+              </p>,
               <Validated
                 colors={Array []}
                 component={[Function]}
@@ -429,6 +504,17 @@ ShallowWrapper {
               "ref": null,
               "rendered": "Color",
               "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Choose a color for this node type.",
+              },
+              "ref": null,
+              "rendered": "Choose a color for this node type.",
+              "type": "p",
             },
             Object {
               "instance": null,
@@ -527,31 +613,40 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
+          <div
+            className="code-button"
+          >
+            <small>
+              (
+              <a
+                onClick={[Function]}
+              >
+                Show Code View
+              </a>
+              )
+            </small>
+          </div>,
           null,
-          <h1>
+          <h1
+            className="editor__heading"
+          >
             Create 
             edge
           </h1>,
-          <small>
-            (
-            <a
-              onClick={[Function]}
-            >
-              Show Code View
-            </a>
-            )
-          </small>,
           <Connect(Guided)
             contentId="guidance.registry.type.label"
           >
             <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_label"
               >
                 Label
-              </h2>
+              </h3>
+              <p>
+                The node name is how you will refer to this node type in the rest of Architect.
+              </p>
               <Validated
                 component={[Function]}
                 name="label"
@@ -570,11 +665,14 @@ ShallowWrapper {
             <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_name"
               >
-                Name
-              </h2>
+                Short Label
+              </h3>
+              <p>
+                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+              </p>
               <Validated
                 component={[Function]}
                 name="name"
@@ -598,6 +696,9 @@ ShallowWrapper {
               >
                 Color
               </h2>
+              <p>
+                Choose a color for this node type.
+              </p>
               <Validated
                 colors={Array []}
                 component={[Function]}
@@ -631,6 +732,59 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <small>
+              (
+              <a
+                onClick={[Function]}
+              >
+                Show Code View
+              </a>
+              )
+            </small>,
+            "className": "code-button",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "(",
+                <a
+                  onClick={[Function]}
+                >
+                  Show Code View
+                </a>,
+                ")",
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              "(",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Show Code View",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": "Show Code View",
+                "type": "a",
+              },
+              ")",
+            ],
+            "type": "small",
+          },
+          "type": "div",
+        },
         null,
         Object {
           "instance": null,
@@ -641,6 +795,7 @@ ShallowWrapper {
               "Create ",
               "edge",
             ],
+            "className": "editor__heading",
           },
           "ref": null,
           "rendered": Array [
@@ -652,50 +807,19 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              "(",
-              <a
-                onClick={[Function]}
-              >
-                Show Code View
-              </a>,
-              ")",
-            ],
-          },
-          "ref": null,
-          "rendered": Array [
-            "(",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Show Code View",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": "Show Code View",
-              "type": "a",
-            },
-            ")",
-          ],
-          "type": "small",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "children": <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_label"
               >
                 Label
-              </h2>
+              </h3>
+              <p>
+                The node name is how you will refer to this node type in the rest of Architect.
+              </p>
               <Validated
                 component={[Function]}
                 name="label"
@@ -716,11 +840,14 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2
+                <h3
                   id="field_label"
                 >
                   Label
-                </h2>,
+                </h3>,
+                <p>
+                  The node name is how you will refer to this node type in the rest of Architect.
+                </p>,
                 <Validated
                   component={[Function]}
                   name="label"
@@ -746,7 +873,18 @@ ShallowWrapper {
                 },
                 "ref": null,
                 "rendered": "Label",
-                "type": "h2",
+                "type": "h3",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "The node name is how you will refer to this node type in the rest of Architect.",
+                },
+                "ref": null,
+                "rendered": "The node name is how you will refer to this node type in the rest of Architect.",
+                "type": "p",
               },
               Object {
                 "instance": null,
@@ -777,11 +915,14 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_name"
               >
-                Name
-              </h2>
+                Short Label
+              </h3>
+              <p>
+                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+              </p>
               <Validated
                 component={[Function]}
                 name="name"
@@ -802,11 +943,14 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2
+                <h3
                   id="field_name"
                 >
-                  Name
-                </h2>,
+                  Short Label
+                </h3>,
+                <p>
+                  The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+                </p>,
                 <Validated
                   component={[Function]}
                   name="name"
@@ -827,12 +971,23 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Name",
+                  "children": "Short Label",
                   "id": "field_name",
                 },
                 "ref": null,
-                "rendered": "Name",
-                "type": "h2",
+                "rendered": "Short Label",
+                "type": "h3",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+                },
+                "ref": null,
+                "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+                "type": "p",
               },
               Object {
                 "instance": null,
@@ -868,6 +1023,9 @@ ShallowWrapper {
               >
                 Color
               </h2>
+              <p>
+                Choose a color for this node type.
+              </p>
               <Validated
                 colors={Array []}
                 component={[Function]}
@@ -893,6 +1051,9 @@ ShallowWrapper {
                 >
                   Color
                 </h2>,
+                <p>
+                  Choose a color for this node type.
+                </p>,
                 <Validated
                   colors={Array []}
                   component={[Function]}
@@ -919,6 +1080,17 @@ ShallowWrapper {
                 "ref": null,
                 "rendered": "Color",
                 "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Choose a color for this node type.",
+                },
+                "ref": null,
+                "rendered": "Choose a color for this node type.",
+                "type": "p",
               },
               Object {
                 "instance": null,
@@ -1068,31 +1240,40 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
+        <div
+          className="code-button"
+        >
+          <small>
+            (
+            <a
+              onClick={[Function]}
+            >
+              Show Code View
+            </a>
+            )
+          </small>
+        </div>,
         null,
-        <h1>
+        <h1
+          className="editor__heading"
+        >
           Create 
           node
         </h1>,
-        <small>
-          (
-          <a
-            onClick={[Function]}
-          >
-            Show Code View
-          </a>
-          )
-        </small>,
         <Connect(Guided)
           contentId="guidance.registry.type.label"
         >
           <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_label"
             >
               Label
-            </h2>
+            </h3>
+            <p>
+              The node name is how you will refer to this node type in the rest of Architect.
+            </p>
             <Validated
               component={[Function]}
               name="label"
@@ -1111,11 +1292,14 @@ ShallowWrapper {
           <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_name"
             >
-              Name
-            </h2>
+              Short Label
+            </h3>
+            <p>
+              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+            </p>
             <Validated
               component={[Function]}
               name="name"
@@ -1139,6 +1323,9 @@ ShallowWrapper {
             >
               Color
             </h2>
+            <p>
+              Choose a color for this node type.
+            </p>
             <Validated
               colors={Array []}
               component={[Function]}
@@ -1163,6 +1350,9 @@ ShallowWrapper {
               >
                 Icon
               </h2>
+              <p>
+                Choose an icon to display on interfaces that create this node.
+              </p>
               <Validated
                 component={[Function]}
                 name="iconVariant"
@@ -1185,6 +1375,9 @@ ShallowWrapper {
               <h2>
                 Display Variable
               </h2>
+              <p>
+                Select a variable to use as a label when displaying this node.
+              </p>
               <Field
                 component={[Function]}
                 name="displayVariable"
@@ -1219,6 +1412,59 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <small>
+            (
+            <a
+              onClick={[Function]}
+            >
+              Show Code View
+            </a>
+            )
+          </small>,
+          "className": "code-button",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "(",
+              <a
+                onClick={[Function]}
+              >
+                Show Code View
+              </a>,
+              ")",
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            "(",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Show Code View",
+                "onClick": [Function],
+              },
+              "ref": null,
+              "rendered": "Show Code View",
+              "type": "a",
+            },
+            ")",
+          ],
+          "type": "small",
+        },
+        "type": "div",
+      },
       null,
       Object {
         "instance": null,
@@ -1229,6 +1475,7 @@ ShallowWrapper {
             "Create ",
             "node",
           ],
+          "className": "editor__heading",
         },
         "ref": null,
         "rendered": Array [
@@ -1240,50 +1487,19 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            "(",
-            <a
-              onClick={[Function]}
-            >
-              Show Code View
-            </a>,
-            ")",
-          ],
-        },
-        "ref": null,
-        "rendered": Array [
-          "(",
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Show Code View",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": "Show Code View",
-            "type": "a",
-          },
-          ")",
-        ],
-        "type": "small",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "children": <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_label"
             >
               Label
-            </h2>
+            </h3>
+            <p>
+              The node name is how you will refer to this node type in the rest of Architect.
+            </p>
             <Validated
               component={[Function]}
               name="label"
@@ -1304,11 +1520,14 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2
+              <h3
                 id="field_label"
               >
                 Label
-              </h2>,
+              </h3>,
+              <p>
+                The node name is how you will refer to this node type in the rest of Architect.
+              </p>,
               <Validated
                 component={[Function]}
                 name="label"
@@ -1334,7 +1553,18 @@ ShallowWrapper {
               },
               "ref": null,
               "rendered": "Label",
-              "type": "h2",
+              "type": "h3",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "The node name is how you will refer to this node type in the rest of Architect.",
+              },
+              "ref": null,
+              "rendered": "The node name is how you will refer to this node type in the rest of Architect.",
+              "type": "p",
             },
             Object {
               "instance": null,
@@ -1365,11 +1595,14 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
           >
-            <h2
+            <h3
               id="field_name"
             >
-              Name
-            </h2>
+              Short Label
+            </h3>
+            <p>
+              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+            </p>
             <Validated
               component={[Function]}
               name="name"
@@ -1390,11 +1623,14 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h2
+              <h3
                 id="field_name"
               >
-                Name
-              </h2>,
+                Short Label
+              </h3>,
+              <p>
+                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+              </p>,
               <Validated
                 component={[Function]}
                 name="name"
@@ -1415,12 +1651,23 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Name",
+                "children": "Short Label",
                 "id": "field_name",
               },
               "ref": null,
-              "rendered": "Name",
-              "type": "h2",
+              "rendered": "Short Label",
+              "type": "h3",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+              },
+              "ref": null,
+              "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+              "type": "p",
             },
             Object {
               "instance": null,
@@ -1456,6 +1703,9 @@ ShallowWrapper {
             >
               Color
             </h2>
+            <p>
+              Choose a color for this node type.
+            </p>
             <Validated
               colors={Array []}
               component={[Function]}
@@ -1481,6 +1731,9 @@ ShallowWrapper {
               >
                 Color
               </h2>,
+              <p>
+                Choose a color for this node type.
+              </p>,
               <Validated
                 colors={Array []}
                 component={[Function]}
@@ -1507,6 +1760,17 @@ ShallowWrapper {
               "ref": null,
               "rendered": "Color",
               "type": "h2",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Choose a color for this node type.",
+              },
+              "ref": null,
+              "rendered": "Choose a color for this node type.",
+              "type": "p",
             },
             Object {
               "instance": null,
@@ -1546,6 +1810,9 @@ ShallowWrapper {
                 >
                   Icon
                 </h2>
+                <p>
+                  Choose an icon to display on interfaces that create this node.
+                </p>
                 <Validated
                   component={[Function]}
                   name="iconVariant"
@@ -1568,6 +1835,9 @@ ShallowWrapper {
                 <h2>
                   Display Variable
                 </h2>
+                <p>
+                  Select a variable to use as a label when displaying this node.
+                </p>
                 <Field
                   component={[Function]}
                   name="displayVariable"
@@ -1598,6 +1868,9 @@ ShallowWrapper {
                 >
                   Icon
                 </h2>
+                <p>
+                  Choose an icon to display on interfaces that create this node.
+                </p>
                 <Validated
                   component={[Function]}
                   name="iconVariant"
@@ -1624,6 +1897,9 @@ ShallowWrapper {
                   >
                     Icon
                   </h2>,
+                  <p>
+                    Choose an icon to display on interfaces that create this node.
+                  </p>,
                   <Validated
                     component={[Function]}
                     name="iconVariant"
@@ -1651,6 +1927,17 @@ ShallowWrapper {
                   "ref": null,
                   "rendered": "Icon",
                   "type": "h2",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Choose an icon to display on interfaces that create this node.",
+                  },
+                  "ref": null,
+                  "rendered": "Choose an icon to display on interfaces that create this node.",
+                  "type": "p",
                 },
                 Object {
                   "instance": null,
@@ -1685,6 +1972,9 @@ ShallowWrapper {
                 <h2>
                   Display Variable
                 </h2>
+                <p>
+                  Select a variable to use as a label when displaying this node.
+                </p>
                 <Field
                   component={[Function]}
                   name="displayVariable"
@@ -1709,6 +1999,9 @@ ShallowWrapper {
                   <h2>
                     Display Variable
                   </h2>,
+                  <p>
+                    Select a variable to use as a label when displaying this node.
+                  </p>,
                   <Field
                     component={[Function]}
                     name="displayVariable"
@@ -1735,6 +2028,17 @@ ShallowWrapper {
                   "ref": null,
                   "rendered": "Display Variable",
                   "type": "h2",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Select a variable to use as a label when displaying this node.",
+                  },
+                  "ref": null,
+                  "rendered": "Select a variable to use as a label when displaying this node.",
+                  "type": "p",
                 },
                 Object {
                   "instance": null,
@@ -1848,31 +2152,40 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
+          <div
+            className="code-button"
+          >
+            <small>
+              (
+              <a
+                onClick={[Function]}
+              >
+                Show Code View
+              </a>
+              )
+            </small>
+          </div>,
           null,
-          <h1>
+          <h1
+            className="editor__heading"
+          >
             Create 
             node
           </h1>,
-          <small>
-            (
-            <a
-              onClick={[Function]}
-            >
-              Show Code View
-            </a>
-            )
-          </small>,
           <Connect(Guided)
             contentId="guidance.registry.type.label"
           >
             <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_label"
               >
                 Label
-              </h2>
+              </h3>
+              <p>
+                The node name is how you will refer to this node type in the rest of Architect.
+              </p>
               <Validated
                 component={[Function]}
                 name="label"
@@ -1891,11 +2204,14 @@ ShallowWrapper {
             <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_name"
               >
-                Name
-              </h2>
+                Short Label
+              </h3>
+              <p>
+                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+              </p>
               <Validated
                 component={[Function]}
                 name="name"
@@ -1919,6 +2235,9 @@ ShallowWrapper {
               >
                 Color
               </h2>
+              <p>
+                Choose a color for this node type.
+              </p>
               <Validated
                 colors={Array []}
                 component={[Function]}
@@ -1943,6 +2262,9 @@ ShallowWrapper {
                 >
                   Icon
                 </h2>
+                <p>
+                  Choose an icon to display on interfaces that create this node.
+                </p>
                 <Validated
                   component={[Function]}
                   name="iconVariant"
@@ -1965,6 +2287,9 @@ ShallowWrapper {
                 <h2>
                   Display Variable
                 </h2>
+                <p>
+                  Select a variable to use as a label when displaying this node.
+                </p>
                 <Field
                   component={[Function]}
                   name="displayVariable"
@@ -1999,6 +2324,59 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <small>
+              (
+              <a
+                onClick={[Function]}
+              >
+                Show Code View
+              </a>
+              )
+            </small>,
+            "className": "code-button",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "(",
+                <a
+                  onClick={[Function]}
+                >
+                  Show Code View
+                </a>,
+                ")",
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              "(",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Show Code View",
+                  "onClick": [Function],
+                },
+                "ref": null,
+                "rendered": "Show Code View",
+                "type": "a",
+              },
+              ")",
+            ],
+            "type": "small",
+          },
+          "type": "div",
+        },
         null,
         Object {
           "instance": null,
@@ -2009,6 +2387,7 @@ ShallowWrapper {
               "Create ",
               "node",
             ],
+            "className": "editor__heading",
           },
           "ref": null,
           "rendered": Array [
@@ -2020,50 +2399,19 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              "(",
-              <a
-                onClick={[Function]}
-              >
-                Show Code View
-              </a>,
-              ")",
-            ],
-          },
-          "ref": null,
-          "rendered": Array [
-            "(",
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Show Code View",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": "Show Code View",
-              "type": "a",
-            },
-            ")",
-          ],
-          "type": "small",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "children": <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_label"
               >
                 Label
-              </h2>
+              </h3>
+              <p>
+                The node name is how you will refer to this node type in the rest of Architect.
+              </p>
               <Validated
                 component={[Function]}
                 name="label"
@@ -2084,11 +2432,14 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2
+                <h3
                   id="field_label"
                 >
                   Label
-                </h2>,
+                </h3>,
+                <p>
+                  The node name is how you will refer to this node type in the rest of Architect.
+                </p>,
                 <Validated
                   component={[Function]}
                   name="label"
@@ -2114,7 +2465,18 @@ ShallowWrapper {
                 },
                 "ref": null,
                 "rendered": "Label",
-                "type": "h2",
+                "type": "h3",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "The node name is how you will refer to this node type in the rest of Architect.",
+                },
+                "ref": null,
+                "rendered": "The node name is how you will refer to this node type in the rest of Architect.",
+                "type": "p",
               },
               Object {
                 "instance": null,
@@ -2145,11 +2507,14 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
             >
-              <h2
+              <h3
                 id="field_name"
               >
-                Name
-              </h2>
+                Short Label
+              </h3>
+              <p>
+                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+              </p>
               <Validated
                 component={[Function]}
                 name="name"
@@ -2170,11 +2535,14 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": Array [
-                <h2
+                <h3
                   id="field_name"
                 >
-                  Name
-                </h2>,
+                  Short Label
+                </h3>,
+                <p>
+                  The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
+                </p>,
                 <Validated
                   component={[Function]}
                   name="name"
@@ -2195,12 +2563,23 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "host",
                 "props": Object {
-                  "children": "Name",
+                  "children": "Short Label",
                   "id": "field_name",
                 },
                 "ref": null,
-                "rendered": "Name",
-                "type": "h2",
+                "rendered": "Short Label",
+                "type": "h3",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+                },
+                "ref": null,
+                "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
+                "type": "p",
               },
               Object {
                 "instance": null,
@@ -2236,6 +2615,9 @@ ShallowWrapper {
               >
                 Color
               </h2>
+              <p>
+                Choose a color for this node type.
+              </p>
               <Validated
                 colors={Array []}
                 component={[Function]}
@@ -2261,6 +2643,9 @@ ShallowWrapper {
                 >
                   Color
                 </h2>,
+                <p>
+                  Choose a color for this node type.
+                </p>,
                 <Validated
                   colors={Array []}
                   component={[Function]}
@@ -2287,6 +2672,17 @@ ShallowWrapper {
                 "ref": null,
                 "rendered": "Color",
                 "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Choose a color for this node type.",
+                },
+                "ref": null,
+                "rendered": "Choose a color for this node type.",
+                "type": "p",
               },
               Object {
                 "instance": null,
@@ -2326,6 +2722,9 @@ ShallowWrapper {
                   >
                     Icon
                   </h2>
+                  <p>
+                    Choose an icon to display on interfaces that create this node.
+                  </p>
                   <Validated
                     component={[Function]}
                     name="iconVariant"
@@ -2348,6 +2747,9 @@ ShallowWrapper {
                   <h2>
                     Display Variable
                   </h2>
+                  <p>
+                    Select a variable to use as a label when displaying this node.
+                  </p>
                   <Field
                     component={[Function]}
                     name="displayVariable"
@@ -2378,6 +2780,9 @@ ShallowWrapper {
                   >
                     Icon
                   </h2>
+                  <p>
+                    Choose an icon to display on interfaces that create this node.
+                  </p>
                   <Validated
                     component={[Function]}
                     name="iconVariant"
@@ -2404,6 +2809,9 @@ ShallowWrapper {
                     >
                       Icon
                     </h2>,
+                    <p>
+                      Choose an icon to display on interfaces that create this node.
+                    </p>,
                     <Validated
                       component={[Function]}
                       name="iconVariant"
@@ -2431,6 +2839,17 @@ ShallowWrapper {
                     "ref": null,
                     "rendered": "Icon",
                     "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Choose an icon to display on interfaces that create this node.",
+                    },
+                    "ref": null,
+                    "rendered": "Choose an icon to display on interfaces that create this node.",
+                    "type": "p",
                   },
                   Object {
                     "instance": null,
@@ -2465,6 +2884,9 @@ ShallowWrapper {
                   <h2>
                     Display Variable
                   </h2>
+                  <p>
+                    Select a variable to use as a label when displaying this node.
+                  </p>
                   <Field
                     component={[Function]}
                     name="displayVariable"
@@ -2489,6 +2911,9 @@ ShallowWrapper {
                     <h2>
                       Display Variable
                     </h2>,
+                    <p>
+                      Select a variable to use as a label when displaying this node.
+                    </p>,
                     <Field
                       component={[Function]}
                       name="displayVariable"
@@ -2515,6 +2940,17 @@ ShallowWrapper {
                     "ref": null,
                     "rendered": "Display Variable",
                     "type": "h2",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Select a variable to use as a label when displaying this node.",
+                    },
+                    "ref": null,
+                    "rendered": "Select a variable to use as a label when displaying this node.",
+                    "type": "p",
                   },
                   Object {
                     "instance": null,

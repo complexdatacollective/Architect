@@ -8,10 +8,10 @@
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="FormCard">
             <g id="Group-Copy-3">
-                <rect id="Rectangle" fill="#D8D8D8" fill-rule="nonzero" mask="url(#mask-2)" x="12" y="54" width="127" height="19" rx="5"></rect>
-                <rect id="Rectangle-Copy-2" fill="#D8D8D8" fill-rule="nonzero" mask="url(#mask-2)" x="12" y="92" width="127" height="19" rx="5"></rect>
-                <path d="M16.5,43.25 L89.5,43.25" id="Line" stroke="#979797" stroke-width="4" stroke-linecap="square" fill-rule="nonzero" mask="url(#mask-2)"></path>
-                <path d="M16.5,82.25 L89.5,82.25" id="Line" stroke="#979797" stroke-width="4" stroke-linecap="square" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                <rect id="Rectangle" fill-opacity="0.2" fill="#c0c0c0" fill-rule="nonzero" mask="url(#mask-2)" x="12" y="54" width="127" height="19" rx="5"></rect>
+                <rect id="Rectangle-Copy-2" fill-opacity="0.2" fill="#c0c0c0" fill-rule="nonzero" mask="url(#mask-2)" x="12" y="92" width="127" height="19" rx="5"></rect>
+                <path d="M16.5,43.25 L89.5,43.25" opacity="0.5" id="Line" stroke="#c0c0c0" stroke-width="4" stroke-linecap="square" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                <path d="M16.5,82.25 L89.5,82.25" opacity="0.5" id="Line" stroke="#c0c0c0" stroke-width="4" stroke-linecap="square" fill-rule="nonzero" mask="url(#mask-2)"></path>
             </g>
         </g>
     </g>

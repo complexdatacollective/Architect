@@ -81,28 +81,47 @@ ShallowWrapper {
               onChange={[MockFunction]}
               options={
                 Array [
-                  "text",
-                  "number",
-                  "datetime",
-                  "boolean",
-                  "ordinal",
-                  "categorical",
-                  "layout",
-                  "location",
+                  Object {
+                    "label": "text",
+                    "value": "text",
+                  },
+                  Object {
+                    "label": "number",
+                    "value": "number",
+                  },
+                  Object {
+                    "label": "datetime",
+                    "value": "datetime",
+                  },
+                  Object {
+                    "label": "boolean",
+                    "value": "boolean",
+                  },
+                  Object {
+                    "label": "ordinal",
+                    "value": "ordinal",
+                  },
+                  Object {
+                    "label": "categorical",
+                    "value": "categorical",
+                  },
+                  Object {
+                    "label": "layout",
+                    "value": "layout",
+                  },
+                  Object {
+                    "label": "location",
+                    "value": "location",
+                  },
                 ]
               }
+              placeHolder="— Select variable type —"
               validation={
                 Object {
                   "required": true,
                 }
               }
-            >
-              <option
-                value=""
-              >
-                — Select variable type —
-              </option>
-            </Validated>
+            />
           </div>
         </Connect(Guided)>
       </FormSection>,
@@ -197,28 +216,47 @@ ShallowWrapper {
               onChange={[MockFunction]}
               options={
                 Array [
-                  "text",
-                  "number",
-                  "datetime",
-                  "boolean",
-                  "ordinal",
-                  "categorical",
-                  "layout",
-                  "location",
+                  Object {
+                    "label": "text",
+                    "value": "text",
+                  },
+                  Object {
+                    "label": "number",
+                    "value": "number",
+                  },
+                  Object {
+                    "label": "datetime",
+                    "value": "datetime",
+                  },
+                  Object {
+                    "label": "boolean",
+                    "value": "boolean",
+                  },
+                  Object {
+                    "label": "ordinal",
+                    "value": "ordinal",
+                  },
+                  Object {
+                    "label": "categorical",
+                    "value": "categorical",
+                  },
+                  Object {
+                    "label": "layout",
+                    "value": "layout",
+                  },
+                  Object {
+                    "label": "location",
+                    "value": "location",
+                  },
                 ]
               }
+              placeHolder="— Select variable type —"
               validation={
                 Object {
                   "required": true,
                 }
               }
-            >
-              <option
-                value=""
-              >
-                — Select variable type —
-              </option>
-            </Validated>
+            />
           </div>
         </Connect(Guided)>,
         "component": "div",
@@ -278,28 +316,47 @@ ShallowWrapper {
               onChange={[MockFunction]}
               options={
                 Array [
-                  "text",
-                  "number",
-                  "datetime",
-                  "boolean",
-                  "ordinal",
-                  "categorical",
-                  "layout",
-                  "location",
+                  Object {
+                    "label": "text",
+                    "value": "text",
+                  },
+                  Object {
+                    "label": "number",
+                    "value": "number",
+                  },
+                  Object {
+                    "label": "datetime",
+                    "value": "datetime",
+                  },
+                  Object {
+                    "label": "boolean",
+                    "value": "boolean",
+                  },
+                  Object {
+                    "label": "ordinal",
+                    "value": "ordinal",
+                  },
+                  Object {
+                    "label": "categorical",
+                    "value": "categorical",
+                  },
+                  Object {
+                    "label": "layout",
+                    "value": "layout",
+                  },
+                  Object {
+                    "label": "location",
+                    "value": "location",
+                  },
                 ]
               }
+              placeHolder="— Select variable type —"
               validation={
                 Object {
                   "required": true,
                 }
               }
-            >
-              <option
-                value=""
-              >
-                — Select variable type —
-              </option>
-            </Validated>
+            />
           </div>,
           "contentId": "guidance.registry.type.variable",
         },
@@ -357,28 +414,47 @@ ShallowWrapper {
                 onChange={[MockFunction]}
                 options={
                   Array [
-                    "text",
-                    "number",
-                    "datetime",
-                    "boolean",
-                    "ordinal",
-                    "categorical",
-                    "layout",
-                    "location",
+                    Object {
+                      "label": "text",
+                      "value": "text",
+                    },
+                    Object {
+                      "label": "number",
+                      "value": "number",
+                    },
+                    Object {
+                      "label": "datetime",
+                      "value": "datetime",
+                    },
+                    Object {
+                      "label": "boolean",
+                      "value": "boolean",
+                    },
+                    Object {
+                      "label": "ordinal",
+                      "value": "ordinal",
+                    },
+                    Object {
+                      "label": "categorical",
+                      "value": "categorical",
+                    },
+                    Object {
+                      "label": "layout",
+                      "value": "layout",
+                    },
+                    Object {
+                      "label": "location",
+                      "value": "location",
+                    },
                   ]
                 }
+                placeHolder="— Select variable type —"
                 validation={
                   Object {
                     "required": true,
                   }
                 }
-              >
-                <option
-                  value=""
-                >
-                  — Select variable type —
-                </option>
-              </Validated>,
+              />,
               false,
               null,
             ],
@@ -473,43 +549,52 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "children": <option
-                  value=""
-                >
-                  — Select variable type —
-                </option>,
                 "className": "form-field-container",
                 "component": [Function],
                 "label": "Variable type",
                 "name": "type",
                 "onChange": [MockFunction],
                 "options": Array [
-                  "text",
-                  "number",
-                  "datetime",
-                  "boolean",
-                  "ordinal",
-                  "categorical",
-                  "layout",
-                  "location",
+                  Object {
+                    "label": "text",
+                    "value": "text",
+                  },
+                  Object {
+                    "label": "number",
+                    "value": "number",
+                  },
+                  Object {
+                    "label": "datetime",
+                    "value": "datetime",
+                  },
+                  Object {
+                    "label": "boolean",
+                    "value": "boolean",
+                  },
+                  Object {
+                    "label": "ordinal",
+                    "value": "ordinal",
+                  },
+                  Object {
+                    "label": "categorical",
+                    "value": "categorical",
+                  },
+                  Object {
+                    "label": "layout",
+                    "value": "layout",
+                  },
+                  Object {
+                    "label": "location",
+                    "value": "location",
+                  },
                 ],
+                "placeHolder": "— Select variable type —",
                 "validation": Object {
                   "required": true,
                 },
               },
               "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "— Select variable type —",
-                  "value": "",
-                },
-                "ref": null,
-                "rendered": "— Select variable type —",
-                "type": "option",
-              },
+              "rendered": null,
               "type": [Function],
             },
             false,
@@ -584,28 +669,47 @@ ShallowWrapper {
                 onChange={[MockFunction]}
                 options={
                   Array [
-                    "text",
-                    "number",
-                    "datetime",
-                    "boolean",
-                    "ordinal",
-                    "categorical",
-                    "layout",
-                    "location",
+                    Object {
+                      "label": "text",
+                      "value": "text",
+                    },
+                    Object {
+                      "label": "number",
+                      "value": "number",
+                    },
+                    Object {
+                      "label": "datetime",
+                      "value": "datetime",
+                    },
+                    Object {
+                      "label": "boolean",
+                      "value": "boolean",
+                    },
+                    Object {
+                      "label": "ordinal",
+                      "value": "ordinal",
+                    },
+                    Object {
+                      "label": "categorical",
+                      "value": "categorical",
+                    },
+                    Object {
+                      "label": "layout",
+                      "value": "layout",
+                    },
+                    Object {
+                      "label": "location",
+                      "value": "location",
+                    },
                   ]
                 }
+                placeHolder="— Select variable type —"
                 validation={
                   Object {
                     "required": true,
                   }
                 }
-              >
-                <option
-                  value=""
-                >
-                  — Select variable type —
-                </option>
-              </Validated>
+              />
             </div>
           </Connect(Guided)>
         </FormSection>,
@@ -700,28 +804,47 @@ ShallowWrapper {
                 onChange={[MockFunction]}
                 options={
                   Array [
-                    "text",
-                    "number",
-                    "datetime",
-                    "boolean",
-                    "ordinal",
-                    "categorical",
-                    "layout",
-                    "location",
+                    Object {
+                      "label": "text",
+                      "value": "text",
+                    },
+                    Object {
+                      "label": "number",
+                      "value": "number",
+                    },
+                    Object {
+                      "label": "datetime",
+                      "value": "datetime",
+                    },
+                    Object {
+                      "label": "boolean",
+                      "value": "boolean",
+                    },
+                    Object {
+                      "label": "ordinal",
+                      "value": "ordinal",
+                    },
+                    Object {
+                      "label": "categorical",
+                      "value": "categorical",
+                    },
+                    Object {
+                      "label": "layout",
+                      "value": "layout",
+                    },
+                    Object {
+                      "label": "location",
+                      "value": "location",
+                    },
                   ]
                 }
+                placeHolder="— Select variable type —"
                 validation={
                   Object {
                     "required": true,
                   }
                 }
-              >
-                <option
-                  value=""
-                >
-                  — Select variable type —
-                </option>
-              </Validated>
+              />
             </div>
           </Connect(Guided)>,
           "component": "div",
@@ -781,28 +904,47 @@ ShallowWrapper {
                 onChange={[MockFunction]}
                 options={
                   Array [
-                    "text",
-                    "number",
-                    "datetime",
-                    "boolean",
-                    "ordinal",
-                    "categorical",
-                    "layout",
-                    "location",
+                    Object {
+                      "label": "text",
+                      "value": "text",
+                    },
+                    Object {
+                      "label": "number",
+                      "value": "number",
+                    },
+                    Object {
+                      "label": "datetime",
+                      "value": "datetime",
+                    },
+                    Object {
+                      "label": "boolean",
+                      "value": "boolean",
+                    },
+                    Object {
+                      "label": "ordinal",
+                      "value": "ordinal",
+                    },
+                    Object {
+                      "label": "categorical",
+                      "value": "categorical",
+                    },
+                    Object {
+                      "label": "layout",
+                      "value": "layout",
+                    },
+                    Object {
+                      "label": "location",
+                      "value": "location",
+                    },
                   ]
                 }
+                placeHolder="— Select variable type —"
                 validation={
                   Object {
                     "required": true,
                   }
                 }
-              >
-                <option
-                  value=""
-                >
-                  — Select variable type —
-                </option>
-              </Validated>
+              />
             </div>,
             "contentId": "guidance.registry.type.variable",
           },
@@ -860,28 +1002,47 @@ ShallowWrapper {
                   onChange={[MockFunction]}
                   options={
                     Array [
-                      "text",
-                      "number",
-                      "datetime",
-                      "boolean",
-                      "ordinal",
-                      "categorical",
-                      "layout",
-                      "location",
+                      Object {
+                        "label": "text",
+                        "value": "text",
+                      },
+                      Object {
+                        "label": "number",
+                        "value": "number",
+                      },
+                      Object {
+                        "label": "datetime",
+                        "value": "datetime",
+                      },
+                      Object {
+                        "label": "boolean",
+                        "value": "boolean",
+                      },
+                      Object {
+                        "label": "ordinal",
+                        "value": "ordinal",
+                      },
+                      Object {
+                        "label": "categorical",
+                        "value": "categorical",
+                      },
+                      Object {
+                        "label": "layout",
+                        "value": "layout",
+                      },
+                      Object {
+                        "label": "location",
+                        "value": "location",
+                      },
                     ]
                   }
+                  placeHolder="— Select variable type —"
                   validation={
                     Object {
                       "required": true,
                     }
                   }
-                >
-                  <option
-                    value=""
-                  >
-                    — Select variable type —
-                  </option>
-                </Validated>,
+                />,
                 false,
                 null,
               ],
@@ -976,43 +1137,52 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "children": <option
-                    value=""
-                  >
-                    — Select variable type —
-                  </option>,
                   "className": "form-field-container",
                   "component": [Function],
                   "label": "Variable type",
                   "name": "type",
                   "onChange": [MockFunction],
                   "options": Array [
-                    "text",
-                    "number",
-                    "datetime",
-                    "boolean",
-                    "ordinal",
-                    "categorical",
-                    "layout",
-                    "location",
+                    Object {
+                      "label": "text",
+                      "value": "text",
+                    },
+                    Object {
+                      "label": "number",
+                      "value": "number",
+                    },
+                    Object {
+                      "label": "datetime",
+                      "value": "datetime",
+                    },
+                    Object {
+                      "label": "boolean",
+                      "value": "boolean",
+                    },
+                    Object {
+                      "label": "ordinal",
+                      "value": "ordinal",
+                    },
+                    Object {
+                      "label": "categorical",
+                      "value": "categorical",
+                    },
+                    Object {
+                      "label": "layout",
+                      "value": "layout",
+                    },
+                    Object {
+                      "label": "location",
+                      "value": "location",
+                    },
                   ],
+                  "placeHolder": "— Select variable type —",
                   "validation": Object {
                     "required": true,
                   },
                 },
                 "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "— Select variable type —",
-                    "value": "",
-                  },
-                  "ref": null,
-                  "rendered": "— Select variable type —",
-                  "type": "option",
-                },
+                "rendered": null,
                 "type": [Function],
               },
               false,

@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   z-index: var(--z-fx);
-  background-color: var(--color-mustard);
+  background-color: var(--color-sea-serpent);
   transform-origin: 0 100%;
   transform: scaleY(0);
   transition-duration: var(--animation-duration-fast);
@@ -15,7 +15,7 @@
 
   &__title-bar {
     @include typography(title-2);
-    background-color: var(--color-mustard--dark);
+    background-color: var(--color-sea-serpent--dark);
     padding: 0 unit(4);
     height: unit(8);
     cursor: pointer;

@@ -6,7 +6,8 @@ import { compose, defaultProps, withProps } from 'recompose';
 import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
-import { Icon } from '../../ui/components';
+import { Icon, Button } from '../../ui/components';
+import * as Fields from '../../ui/components/Fields';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const isNumberLike = value =>
@@ -29,9 +30,9 @@ const ItemDelete = props => (
 );
 
 const AddItem = props => (
-  <div className="form-fields-multi-select__add" {...props}>
-    <Icon name="add" /> Add new
-  </div>
+  <Button color="primary" icon="add" size="small" {...props}>
+    Add new
+  </Button>
 );
 
 const mapDispatchToItemProps = dispatch => ({
@@ -44,7 +45,7 @@ const Item = compose(
     ({ fields, openDialog, index }) => ({
       handleDelete: () => {
         openDialog({
-          type: 'Confirm',
+          type: 'Warning',
           title: 'Remove item',
           message: 'Are you sure you want to remove this item?',
           onConfirm: () => { fields.remove(index); },
@@ -63,11 +64,11 @@ const Item = compose(
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Label</div>
-          <Field component="input" type="text" name={`${field}.label`} placeholder="label" />
+          <Field component={Fields.Text} type="text" name={`${field}.label`} placeholder="label" />
         </div>
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Value</div>
-          <Field component="input" type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
+          <Field component={Fields.Text} type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
         </div>
       </div>
       <div className="form-fields-multi-select__rule-control">

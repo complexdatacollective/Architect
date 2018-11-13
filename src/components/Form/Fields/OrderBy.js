@@ -55,38 +55,32 @@ const Rule = compose(
         <div className="form-fields-order-by__rule-option">
           <Select
             input={{
-              onChange: event =>
-                handleChange(index, { property: event.target.value }),
+              onChange: value =>
+                handleChange(index, { property: value }),
               value: property,
             }}
-          >
-            <option value="" disabled>&mdash; select property &mdash;</option>
-            {
-              variables.map(({ label, value }) => (
-                <option
-                  key={value}
-                  value={value}
-                  disabled={disabledVariables.includes(value)}
-                >{label}</option>
-              ))
-            }
-          </Select>
+            placeholder="&mdash; select property &mdash;"
+            options={variables.map(({ label, value }) => (
+              {
+                value,
+                isDisabled: disabledVariables.includes(value),
+                label,
+              }
+            ))}
+          />
         </div>
         <div className="form-fields-order-by__rule-option">
           <Select
             input={{
-              onChange: event =>
-                handleChange(index, { direction: event.target.value }),
+              onChange: value =>
+                handleChange(index, { direction: value }),
               value: direction,
             }}
-          >
-            <option value="" disabled>&mdash; select direction &mdash;</option>
-            {
-              DIRECTIONS.map(([value, label]) => (
-                <option key={value} value={value}>{label}</option>
-              ))
-            }
-          </Select>
+            placeholder="&mdash; select direction &mdash;"
+            options={DIRECTIONS.map(([value, label]) => (
+              { value, label }
+            ))}
+          />
         </div>
       </div>
       <div className="form-fields-order-by__rule-control">

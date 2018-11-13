@@ -88,8 +88,10 @@ class ViewForms extends Component {
       >
         <div className="editor variable-registry">
           <Guided className="editor__sections">
-            <h1>Form Manager</h1>
-
+            <h1 className="editor__heading">Form Manager</h1>
+            <p>
+              Use this screen to create, edit, and manage your forms.
+            </p>
             <Guidance contentId="guidance.forms.index">
               <div className="editor__section">
                 <h2>Existing Forms</h2>

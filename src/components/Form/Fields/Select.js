@@ -1,19 +1,25 @@
 import React, { PureComponent } from 'react';
+import ReactSelect, { components as ReactSelectComponents } from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const asOptionObject = (option) => {
-  if (typeof option !== 'string') { return option; }
-  return {
-    value: option,
-    label: option,
-  };
-};
+const { Option } = ReactSelectComponents;
+
+const DefaultSelectItem = props => (
+  <Option
+    {...props}
+    className="form-fields-select__item"
+    classNamePrefix="form-fields-select__item"
+  >
+    <p>{props.data.label}</p>
+  </Option>
+);
 
 class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     options: PropTypes.array,
+    selectOptionComponent: PropTypes.any,
     input: PropTypes.object,
     label: PropTypes.string,
     children: PropTypes.node,
@@ -22,6 +28,7 @@ class Select extends PureComponent {
 
   static defaultProps = {
     className: '',
+    selectOptionComponent: DefaultSelectItem,
     options: [],
     input: {},
     label: null,
@@ -34,21 +41,13 @@ class Select extends PureComponent {
     this.state = { visited: false };
   }
 
-  // Redux Form's visited tracking seems wonky for Select elements. So we are tracking it manually.
-  handleBlur = (e) => {
-    this.setState({ visited: true });
-
-    if (this.props.input.onBlur) {
-      this.props.input.onBlur(e);
-    }
-  }
-
   render() {
     const {
       className,
       input,
       children,
       options,
+      selectOptionComponent,
       label,
       meta: { invalid, error },
       ...rest
@@ -59,20 +58,41 @@ class Select extends PureComponent {
       className,
     );
 
+    const getValue = (opts, val) => {
+      const foundValue = opts.find(o => o.value === val);
+      if (!foundValue) {
+        return null;
+      }
+
+      return opts.find(o => o.value === val);
+    };
+
     return (
       <div className={componentClasses}>
         { label &&
           <h4>{label}</h4>
         }
-        <select className="form-fields-select__input" {...input} onBlur={this.handleBlur} {...rest}>
+        <ReactSelect
+          className="form-fields-select"
+          classNamePrefix="form-fields-select"
+          {...input}
+          options={options}
+          value={getValue(this.props.options, this.props.input.value)}
+          components={{ Option: selectOptionComponent }}
+          styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
+          menuPortalTarget={document.body}
+          onChange={(e) => {
+            this.props.input.onChange(e.value);
+          }}
+          onBlur={() => {
+            if (input.onBlur) {
+              input.onBlur(input.value);
+            }
+          }}
+          {...rest}
+        >
           {children}
-          {options.map(
-            (option) => {
-              const { value, label: optionLabel, ...optionRest } = asOptionObject(option);
-              return (<option value={value} key={value} {...optionRest}>{optionLabel}</option>);
-            },
-          )}
-        </select>
+        </ReactSelect>
         {this.state.visited && invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );

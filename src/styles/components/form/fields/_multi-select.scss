@@ -1,12 +1,18 @@
 $component-name: form-fields-multi-select;
 
 .#{$component-name} {
+  --form-control: var(--color-platinum--dark);
+
   @include form-field;
   display: block;
 
   &__label {
     @include preset('title-4');
     font-weight: 600;
+  }
+
+  button {
+    margin: 0;
   }
 
   &__rules {
@@ -24,7 +30,7 @@ $component-name: form-fields-multi-select;
       flex-grow: 0;
       display: flex;
       align-items: center;
-      padding: 0 unit(1);
+      padding: 0 unit(2);
     }
 
     &-options {
@@ -38,14 +44,23 @@ $component-name: form-fields-multi-select;
       display: flex;
       align-items: center;
       margin-left: unit(1);
+      flex-grow: 1;
 
       &:first-child {
         margin-left: 0;
       }
 
       &-label {
-        color:  var(--text-light);
         margin-right: unit(1);
+      }
+
+      .form-field-container {
+        margin: 0;
+        width: 100%;
+
+        .form-field {
+          margin: 0;
+        }
       }
     }
   }
@@ -60,7 +75,7 @@ $component-name: form-fields-multi-select;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-light);
+    color: var(--architect-sortable-text);
 
     .icon {
       width: unit(1.5);
@@ -68,7 +83,7 @@ $component-name: form-fields-multi-select;
 
       .cls-1,
       .cls-2 {
-        fill: var(--text-light);
+        fill: var(--architect-sortable-text);
       }
     }
   }

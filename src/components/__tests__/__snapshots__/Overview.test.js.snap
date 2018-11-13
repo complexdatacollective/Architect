@@ -4,10 +4,12 @@ exports[`<Overview /> can render? 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Overview
+    description=""
     flipId="foo"
     forms={Object {}}
     name=""
     show={true}
+    updateOptions={[Function]}
     variableRegistry={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -21,201 +23,53 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "children": <div
-        className="overview"
+      "children": <FlippedWithContext
+        flipId="foo"
       >
         <div
-          className="overview__panel"
+          className="overview"
         >
-          <h1
-            className="overview__name"
-          >
-            
-          </h1>
           <div
-            className="overview__groups"
+            className="overview__panel"
           >
-            <div
-              className="overview__group"
-            >
-              <h3
-                className="overview__group-title"
-              >
-                Variable registry
-              </h3>
-              <br />
-              <h4>
-                Node types
-              </h4>
-              <div />
-              <br />
-              <h4>
-                Edge types
-              </h4>
-              <div />
-              <div
-                className="overview__manage-button"
-              >
-                <Connect(ProtocolLink)
-                  to="registry"
-                >
-                  <Button
-                    color=""
-                    content=""
-                    icon=""
-                    iconPosition="right"
-                    onClick={[Function]}
-                    size="small"
-                  >
-                    Manage registry
-                  </Button>
-                </Connect(ProtocolLink)>
-              </div>
-            </div>
-            <div
-              className="overview__group"
-            >
-              <h3
-                className="overview__group-title"
-              >
-                Forms
-              </h3>
-              <ul />
-              <div
-                className="overview__manage-button"
-              >
-                <Connect(ProtocolLink)
-                  to="forms"
-                >
-                  <Button
-                    color=""
-                    content=""
-                    icon=""
-                    iconPosition="right"
-                    onClick={[Function]}
-                    size="small"
-                  >
-                    Manage forms
-                  </Button>
-                </Connect(ProtocolLink)>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>,
-      "flipId": "foo",
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": <div
-          className="overview__panel"
-        >
-          <h1
-            className="overview__name"
-          >
-            
-          </h1>
-          <div
-            className="overview__groups"
-          >
-            <div
-              className="overview__group"
-            >
-              <h3
-                className="overview__group-title"
-              >
-                Variable registry
-              </h3>
-              <br />
-              <h4>
-                Node types
-              </h4>
-              <div />
-              <br />
-              <h4>
-                Edge types
-              </h4>
-              <div />
-              <div
-                className="overview__manage-button"
-              >
-                <Connect(ProtocolLink)
-                  to="registry"
-                >
-                  <Button
-                    color=""
-                    content=""
-                    icon=""
-                    iconPosition="right"
-                    onClick={[Function]}
-                    size="small"
-                  >
-                    Manage registry
-                  </Button>
-                </Connect(ProtocolLink)>
-              </div>
-            </div>
-            <div
-              className="overview__group"
-            >
-              <h3
-                className="overview__group-title"
-              >
-                Forms
-              </h3>
-              <ul />
-              <div
-                className="overview__manage-button"
-              >
-                <Connect(ProtocolLink)
-                  to="forms"
-                >
-                  <Button
-                    color=""
-                    content=""
-                    icon=""
-                    iconPosition="right"
-                    onClick={[Function]}
-                    size="small"
-                  >
-                    Manage forms
-                  </Button>
-                </Connect(ProtocolLink)>
-              </div>
-            </div>
-          </div>
-        </div>,
-        "className": "overview",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <h1
-              className="overview__name"
-            >
-              
-            </h1>,
             <div
               className="overview__groups"
             >
               <div
+                className="overview__group overview__group--title"
+              >
+                <h1
+                  className="overview__name"
+                >
+                  
+                </h1>
+                <TextInput
+                  autoFocus={false}
+                  className="timeline-overview__name"
+                  fieldLabel={null}
+                  hidden={false}
+                  input={
+                    Object {
+                      "onChange": [Function],
+                      "value": "",
+                    }
+                  }
+                  label={null}
+                  meta={Object {}}
+                  placeholder="Enter a description for your protocol here"
+                  type="text"
+                />
+              </div>
+              <div
                 className="overview__group"
               >
-                <h3
+                <legend
                   className="overview__group-title"
                 >
                   Variable registry
-                </h3>
+                </legend>
                 <br />
                 <h4>
                   Node types
@@ -239,6 +93,7 @@ ShallowWrapper {
                       iconPosition="right"
                       onClick={[Function]}
                       size="small"
+                      type="button"
                     >
                       Manage registry
                     </Button>
@@ -246,14 +101,14 @@ ShallowWrapper {
                 </div>
               </div>
               <div
-                className="overview__group"
+                className="overview__group overview__group--forms"
               >
-                <h3
+                <legend
                   className="overview__group-title"
                 >
                   Forms
-                </h3>
-                <ul />
+                </legend>
+                <React.Fragment />
                 <div
                   className="overview__manage-button"
                 >
@@ -267,6 +122,333 @@ ShallowWrapper {
                       iconPosition="right"
                       onClick={[Function]}
                       size="small"
+                      type="button"
+                    >
+                      Manage forms
+                    </Button>
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </FlippedWithContext>,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <div
+          className="overview"
+        >
+          <div
+            className="overview__panel"
+          >
+            <div
+              className="overview__groups"
+            >
+              <div
+                className="overview__group overview__group--title"
+              >
+                <h1
+                  className="overview__name"
+                >
+                  
+                </h1>
+                <TextInput
+                  autoFocus={false}
+                  className="timeline-overview__name"
+                  fieldLabel={null}
+                  hidden={false}
+                  input={
+                    Object {
+                      "onChange": [Function],
+                      "value": "",
+                    }
+                  }
+                  label={null}
+                  meta={Object {}}
+                  placeholder="Enter a description for your protocol here"
+                  type="text"
+                />
+              </div>
+              <div
+                className="overview__group"
+              >
+                <legend
+                  className="overview__group-title"
+                >
+                  Variable registry
+                </legend>
+                <br />
+                <h4>
+                  Node types
+                </h4>
+                <div />
+                <br />
+                <h4>
+                  Edge types
+                </h4>
+                <div />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    to="registry"
+                  >
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size="small"
+                      type="button"
+                    >
+                      Manage registry
+                    </Button>
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+              <div
+                className="overview__group overview__group--forms"
+              >
+                <legend
+                  className="overview__group-title"
+                >
+                  Forms
+                </legend>
+                <React.Fragment />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    to="forms"
+                  >
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size="small"
+                      type="button"
+                    >
+                      Manage forms
+                    </Button>
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>,
+        "flipId": "foo",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="overview__panel"
+          >
+            <div
+              className="overview__groups"
+            >
+              <div
+                className="overview__group overview__group--title"
+              >
+                <h1
+                  className="overview__name"
+                >
+                  
+                </h1>
+                <TextInput
+                  autoFocus={false}
+                  className="timeline-overview__name"
+                  fieldLabel={null}
+                  hidden={false}
+                  input={
+                    Object {
+                      "onChange": [Function],
+                      "value": "",
+                    }
+                  }
+                  label={null}
+                  meta={Object {}}
+                  placeholder="Enter a description for your protocol here"
+                  type="text"
+                />
+              </div>
+              <div
+                className="overview__group"
+              >
+                <legend
+                  className="overview__group-title"
+                >
+                  Variable registry
+                </legend>
+                <br />
+                <h4>
+                  Node types
+                </h4>
+                <div />
+                <br />
+                <h4>
+                  Edge types
+                </h4>
+                <div />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    to="registry"
+                  >
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size="small"
+                      type="button"
+                    >
+                      Manage registry
+                    </Button>
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+              <div
+                className="overview__group overview__group--forms"
+              >
+                <legend
+                  className="overview__group-title"
+                >
+                  Forms
+                </legend>
+                <React.Fragment />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    to="forms"
+                  >
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size="small"
+                      type="button"
+                    >
+                      Manage forms
+                    </Button>
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+            </div>
+          </div>,
+          "className": "overview",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="overview__groups"
+            >
+              <div
+                className="overview__group overview__group--title"
+              >
+                <h1
+                  className="overview__name"
+                >
+                  
+                </h1>
+                <TextInput
+                  autoFocus={false}
+                  className="timeline-overview__name"
+                  fieldLabel={null}
+                  hidden={false}
+                  input={
+                    Object {
+                      "onChange": [Function],
+                      "value": "",
+                    }
+                  }
+                  label={null}
+                  meta={Object {}}
+                  placeholder="Enter a description for your protocol here"
+                  type="text"
+                />
+              </div>
+              <div
+                className="overview__group"
+              >
+                <legend
+                  className="overview__group-title"
+                >
+                  Variable registry
+                </legend>
+                <br />
+                <h4>
+                  Node types
+                </h4>
+                <div />
+                <br />
+                <h4>
+                  Edge types
+                </h4>
+                <div />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    to="registry"
+                  >
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size="small"
+                      type="button"
+                    >
+                      Manage registry
+                    </Button>
+                  </Connect(ProtocolLink)>
+                </div>
+              </div>
+              <div
+                className="overview__group overview__group--forms"
+              >
+                <legend
+                  className="overview__group-title"
+                >
+                  Forms
+                </legend>
+                <React.Fragment />
+                <div
+                  className="overview__manage-button"
+                >
+                  <Connect(ProtocolLink)
+                    to="forms"
+                  >
+                    <Button
+                      color=""
+                      content=""
+                      icon=""
+                      iconPosition="right"
+                      onClick={[Function]}
+                      size="small"
+                      type="button"
                     >
                       Manage forms
                     </Button>
@@ -274,37 +456,48 @@ ShallowWrapper {
                 </div>
               </div>
             </div>,
-          ],
-          "className": "overview__panel",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "",
-              "className": "overview__name",
-            },
-            "ref": null,
-            "rendered": "",
-            "type": "h1",
+            "className": "overview__panel",
           },
-          Object {
+          "ref": null,
+          "rendered": Object {
             "instance": null,
             "key": undefined,
             "nodeType": "host",
             "props": Object {
               "children": Array [
                 <div
+                  className="overview__group overview__group--title"
+                >
+                  <h1
+                    className="overview__name"
+                  >
+                    
+                  </h1>
+                  <TextInput
+                    autoFocus={false}
+                    className="timeline-overview__name"
+                    fieldLabel={null}
+                    hidden={false}
+                    input={
+                      Object {
+                        "onChange": [Function],
+                        "value": "",
+                      }
+                    }
+                    label={null}
+                    meta={Object {}}
+                    placeholder="Enter a description for your protocol here"
+                    type="text"
+                  />
+                </div>,
+                <div
                   className="overview__group"
                 >
-                  <h3
+                  <legend
                     className="overview__group-title"
                   >
                     Variable registry
-                  </h3>
+                  </legend>
                   <br />
                   <h4>
                     Node types
@@ -328,6 +521,7 @@ ShallowWrapper {
                         iconPosition="right"
                         onClick={[Function]}
                         size="small"
+                        type="button"
                       >
                         Manage registry
                       </Button>
@@ -335,14 +529,14 @@ ShallowWrapper {
                   </div>
                 </div>,
                 <div
-                  className="overview__group"
+                  className="overview__group overview__group--forms"
                 >
-                  <h3
+                  <legend
                     className="overview__group-title"
                   >
                     Forms
-                  </h3>
-                  <ul />
+                  </legend>
+                  <React.Fragment />
                   <div
                     className="overview__manage-button"
                   >
@@ -356,6 +550,7 @@ ShallowWrapper {
                         iconPosition="right"
                         onClick={[Function]}
                         size="small"
+                        type="button"
                       >
                         Manage forms
                       </Button>
@@ -373,11 +568,80 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": Array [
-                    <h3
+                    <h1
+                      className="overview__name"
+                    >
+                      
+                    </h1>,
+                    <TextInput
+                      autoFocus={false}
+                      className="timeline-overview__name"
+                      fieldLabel={null}
+                      hidden={false}
+                      input={
+                        Object {
+                          "onChange": [Function],
+                          "value": "",
+                        }
+                      }
+                      label={null}
+                      meta={Object {}}
+                      placeholder="Enter a description for your protocol here"
+                      type="text"
+                    />,
+                  ],
+                  "className": "overview__group overview__group--title",
+                },
+                "ref": null,
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "",
+                      "className": "overview__name",
+                    },
+                    "ref": null,
+                    "rendered": "",
+                    "type": "h1",
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "autoFocus": false,
+                      "className": "timeline-overview__name",
+                      "fieldLabel": null,
+                      "hidden": false,
+                      "input": Object {
+                        "onChange": [Function],
+                        "value": "",
+                      },
+                      "label": null,
+                      "meta": Object {},
+                      "placeholder": "Enter a description for your protocol here",
+                      "type": "text",
+                    },
+                    "ref": null,
+                    "rendered": null,
+                    "type": [Function],
+                  },
+                ],
+                "type": "div",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    <legend
                       className="overview__group-title"
                     >
                       Variable registry
-                    </h3>,
+                    </legend>,
                     <br />,
                     <h4>
                       Node types
@@ -401,6 +665,7 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage registry
                         </Button>
@@ -421,7 +686,7 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Variable registry",
-                    "type": "h3",
+                    "type": "legend",
                   },
                   Object {
                     "instance": null,
@@ -500,6 +765,7 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage registry
                         </Button>
@@ -519,6 +785,7 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage registry
                         </Button>,
@@ -537,6 +804,7 @@ ShallowWrapper {
                           "iconPosition": "right",
                           "onClick": [Function],
                           "size": "small",
+                          "type": "button",
                         },
                         "ref": null,
                         "rendered": "Manage registry",
@@ -555,12 +823,12 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "children": Array [
-                    <h3
+                    <legend
                       className="overview__group-title"
                     >
                       Forms
-                    </h3>,
-                    <ul />,
+                    </legend>,
+                    <React.Fragment />,
                     <div
                       className="overview__manage-button"
                     >
@@ -574,13 +842,14 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage forms
                         </Button>
                       </Connect(ProtocolLink)>
                     </div>,
                   ],
-                  "className": "overview__group",
+                  "className": "overview__group overview__group--forms",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -594,18 +863,18 @@ ShallowWrapper {
                     },
                     "ref": null,
                     "rendered": "Forms",
-                    "type": "h3",
+                    "type": "legend",
                   },
                   Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "host",
+                    "nodeType": "function",
                     "props": Object {
                       "children": Array [],
                     },
                     "ref": null,
                     "rendered": Array [],
-                    "type": "ul",
+                    "type": Symbol(react.fragment),
                   },
                   Object {
                     "instance": null,
@@ -622,6 +891,7 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage forms
                         </Button>
@@ -641,6 +911,7 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage forms
                         </Button>,
@@ -659,6 +930,7 @@ ShallowWrapper {
                           "iconPosition": "right",
                           "onClick": [Function],
                           "size": "small",
+                          "type": "button",
                         },
                         "ref": null,
                         "rendered": "Manage forms",
@@ -674,212 +946,65 @@ ShallowWrapper {
             ],
             "type": "div",
           },
-        ],
+          "type": "div",
+        },
         "type": "div",
       },
-      "type": "div",
+      "type": [Function],
     },
-    "type": [Function],
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "children": <div
-          className="overview"
+        "children": <FlippedWithContext
+          flipId="foo"
         >
           <div
-            className="overview__panel"
+            className="overview"
           >
-            <h1
-              className="overview__name"
-            >
-              
-            </h1>
             <div
-              className="overview__groups"
+              className="overview__panel"
             >
-              <div
-                className="overview__group"
-              >
-                <h3
-                  className="overview__group-title"
-                >
-                  Variable registry
-                </h3>
-                <br />
-                <h4>
-                  Node types
-                </h4>
-                <div />
-                <br />
-                <h4>
-                  Edge types
-                </h4>
-                <div />
-                <div
-                  className="overview__manage-button"
-                >
-                  <Connect(ProtocolLink)
-                    to="registry"
-                  >
-                    <Button
-                      color=""
-                      content=""
-                      icon=""
-                      iconPosition="right"
-                      onClick={[Function]}
-                      size="small"
-                    >
-                      Manage registry
-                    </Button>
-                  </Connect(ProtocolLink)>
-                </div>
-              </div>
-              <div
-                className="overview__group"
-              >
-                <h3
-                  className="overview__group-title"
-                >
-                  Forms
-                </h3>
-                <ul />
-                <div
-                  className="overview__manage-button"
-                >
-                  <Connect(ProtocolLink)
-                    to="forms"
-                  >
-                    <Button
-                      color=""
-                      content=""
-                      icon=""
-                      iconPosition="right"
-                      onClick={[Function]}
-                      size="small"
-                    >
-                      Manage forms
-                    </Button>
-                  </Connect(ProtocolLink)>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>,
-        "flipId": "foo",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <div
-            className="overview__panel"
-          >
-            <h1
-              className="overview__name"
-            >
-              
-            </h1>
-            <div
-              className="overview__groups"
-            >
-              <div
-                className="overview__group"
-              >
-                <h3
-                  className="overview__group-title"
-                >
-                  Variable registry
-                </h3>
-                <br />
-                <h4>
-                  Node types
-                </h4>
-                <div />
-                <br />
-                <h4>
-                  Edge types
-                </h4>
-                <div />
-                <div
-                  className="overview__manage-button"
-                >
-                  <Connect(ProtocolLink)
-                    to="registry"
-                  >
-                    <Button
-                      color=""
-                      content=""
-                      icon=""
-                      iconPosition="right"
-                      onClick={[Function]}
-                      size="small"
-                    >
-                      Manage registry
-                    </Button>
-                  </Connect(ProtocolLink)>
-                </div>
-              </div>
-              <div
-                className="overview__group"
-              >
-                <h3
-                  className="overview__group-title"
-                >
-                  Forms
-                </h3>
-                <ul />
-                <div
-                  className="overview__manage-button"
-                >
-                  <Connect(ProtocolLink)
-                    to="forms"
-                  >
-                    <Button
-                      color=""
-                      content=""
-                      icon=""
-                      iconPosition="right"
-                      onClick={[Function]}
-                      size="small"
-                    >
-                      Manage forms
-                    </Button>
-                  </Connect(ProtocolLink)>
-                </div>
-              </div>
-            </div>
-          </div>,
-          "className": "overview",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <h1
-                className="overview__name"
-              >
-                
-              </h1>,
               <div
                 className="overview__groups"
               >
                 <div
+                  className="overview__group overview__group--title"
+                >
+                  <h1
+                    className="overview__name"
+                  >
+                    
+                  </h1>
+                  <TextInput
+                    autoFocus={false}
+                    className="timeline-overview__name"
+                    fieldLabel={null}
+                    hidden={false}
+                    input={
+                      Object {
+                        "onChange": [Function],
+                        "value": "",
+                      }
+                    }
+                    label={null}
+                    meta={Object {}}
+                    placeholder="Enter a description for your protocol here"
+                    type="text"
+                  />
+                </div>
+                <div
                   className="overview__group"
                 >
-                  <h3
+                  <legend
                     className="overview__group-title"
                   >
                     Variable registry
-                  </h3>
+                  </legend>
                   <br />
                   <h4>
                     Node types
@@ -903,6 +1028,7 @@ ShallowWrapper {
                         iconPosition="right"
                         onClick={[Function]}
                         size="small"
+                        type="button"
                       >
                         Manage registry
                       </Button>
@@ -910,14 +1036,14 @@ ShallowWrapper {
                   </div>
                 </div>
                 <div
-                  className="overview__group"
+                  className="overview__group overview__group--forms"
                 >
-                  <h3
+                  <legend
                     className="overview__group-title"
                   >
                     Forms
-                  </h3>
-                  <ul />
+                  </legend>
+                  <React.Fragment />
                   <div
                     className="overview__manage-button"
                   >
@@ -931,6 +1057,333 @@ ShallowWrapper {
                         iconPosition="right"
                         onClick={[Function]}
                         size="small"
+                        type="button"
+                      >
+                        Manage forms
+                      </Button>
+                    </Connect(ProtocolLink)>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </FlippedWithContext>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="overview"
+          >
+            <div
+              className="overview__panel"
+            >
+              <div
+                className="overview__groups"
+              >
+                <div
+                  className="overview__group overview__group--title"
+                >
+                  <h1
+                    className="overview__name"
+                  >
+                    
+                  </h1>
+                  <TextInput
+                    autoFocus={false}
+                    className="timeline-overview__name"
+                    fieldLabel={null}
+                    hidden={false}
+                    input={
+                      Object {
+                        "onChange": [Function],
+                        "value": "",
+                      }
+                    }
+                    label={null}
+                    meta={Object {}}
+                    placeholder="Enter a description for your protocol here"
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="overview__group"
+                >
+                  <legend
+                    className="overview__group-title"
+                  >
+                    Variable registry
+                  </legend>
+                  <br />
+                  <h4>
+                    Node types
+                  </h4>
+                  <div />
+                  <br />
+                  <h4>
+                    Edge types
+                  </h4>
+                  <div />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      to="registry"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Manage registry
+                      </Button>
+                    </Connect(ProtocolLink)>
+                  </div>
+                </div>
+                <div
+                  className="overview__group overview__group--forms"
+                >
+                  <legend
+                    className="overview__group-title"
+                  >
+                    Forms
+                  </legend>
+                  <React.Fragment />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      to="forms"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Manage forms
+                      </Button>
+                    </Connect(ProtocolLink)>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+          "flipId": "foo",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="overview__panel"
+            >
+              <div
+                className="overview__groups"
+              >
+                <div
+                  className="overview__group overview__group--title"
+                >
+                  <h1
+                    className="overview__name"
+                  >
+                    
+                  </h1>
+                  <TextInput
+                    autoFocus={false}
+                    className="timeline-overview__name"
+                    fieldLabel={null}
+                    hidden={false}
+                    input={
+                      Object {
+                        "onChange": [Function],
+                        "value": "",
+                      }
+                    }
+                    label={null}
+                    meta={Object {}}
+                    placeholder="Enter a description for your protocol here"
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="overview__group"
+                >
+                  <legend
+                    className="overview__group-title"
+                  >
+                    Variable registry
+                  </legend>
+                  <br />
+                  <h4>
+                    Node types
+                  </h4>
+                  <div />
+                  <br />
+                  <h4>
+                    Edge types
+                  </h4>
+                  <div />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      to="registry"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Manage registry
+                      </Button>
+                    </Connect(ProtocolLink)>
+                  </div>
+                </div>
+                <div
+                  className="overview__group overview__group--forms"
+                >
+                  <legend
+                    className="overview__group-title"
+                  >
+                    Forms
+                  </legend>
+                  <React.Fragment />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      to="forms"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Manage forms
+                      </Button>
+                    </Connect(ProtocolLink)>
+                  </div>
+                </div>
+              </div>
+            </div>,
+            "className": "overview",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                className="overview__groups"
+              >
+                <div
+                  className="overview__group overview__group--title"
+                >
+                  <h1
+                    className="overview__name"
+                  >
+                    
+                  </h1>
+                  <TextInput
+                    autoFocus={false}
+                    className="timeline-overview__name"
+                    fieldLabel={null}
+                    hidden={false}
+                    input={
+                      Object {
+                        "onChange": [Function],
+                        "value": "",
+                      }
+                    }
+                    label={null}
+                    meta={Object {}}
+                    placeholder="Enter a description for your protocol here"
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="overview__group"
+                >
+                  <legend
+                    className="overview__group-title"
+                  >
+                    Variable registry
+                  </legend>
+                  <br />
+                  <h4>
+                    Node types
+                  </h4>
+                  <div />
+                  <br />
+                  <h4>
+                    Edge types
+                  </h4>
+                  <div />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      to="registry"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Manage registry
+                      </Button>
+                    </Connect(ProtocolLink)>
+                  </div>
+                </div>
+                <div
+                  className="overview__group overview__group--forms"
+                >
+                  <legend
+                    className="overview__group-title"
+                  >
+                    Forms
+                  </legend>
+                  <React.Fragment />
+                  <div
+                    className="overview__manage-button"
+                  >
+                    <Connect(ProtocolLink)
+                      to="forms"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
                       >
                         Manage forms
                       </Button>
@@ -938,37 +1391,48 @@ ShallowWrapper {
                   </div>
                 </div>
               </div>,
-            ],
-            "className": "overview__panel",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "",
-                "className": "overview__name",
-              },
-              "ref": null,
-              "rendered": "",
-              "type": "h1",
+              "className": "overview__panel",
             },
-            Object {
+            "ref": null,
+            "rendered": Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
               "props": Object {
                 "children": Array [
                   <div
+                    className="overview__group overview__group--title"
+                  >
+                    <h1
+                      className="overview__name"
+                    >
+                      
+                    </h1>
+                    <TextInput
+                      autoFocus={false}
+                      className="timeline-overview__name"
+                      fieldLabel={null}
+                      hidden={false}
+                      input={
+                        Object {
+                          "onChange": [Function],
+                          "value": "",
+                        }
+                      }
+                      label={null}
+                      meta={Object {}}
+                      placeholder="Enter a description for your protocol here"
+                      type="text"
+                    />
+                  </div>,
+                  <div
                     className="overview__group"
                   >
-                    <h3
+                    <legend
                       className="overview__group-title"
                     >
                       Variable registry
-                    </h3>
+                    </legend>
                     <br />
                     <h4>
                       Node types
@@ -992,6 +1456,7 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage registry
                         </Button>
@@ -999,14 +1464,14 @@ ShallowWrapper {
                     </div>
                   </div>,
                   <div
-                    className="overview__group"
+                    className="overview__group overview__group--forms"
                   >
-                    <h3
+                    <legend
                       className="overview__group-title"
                     >
                       Forms
-                    </h3>
-                    <ul />
+                    </legend>
+                    <React.Fragment />
                     <div
                       className="overview__manage-button"
                     >
@@ -1020,6 +1485,7 @@ ShallowWrapper {
                           iconPosition="right"
                           onClick={[Function]}
                           size="small"
+                          type="button"
                         >
                           Manage forms
                         </Button>
@@ -1037,11 +1503,80 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": Array [
-                      <h3
+                      <h1
+                        className="overview__name"
+                      >
+                        
+                      </h1>,
+                      <TextInput
+                        autoFocus={false}
+                        className="timeline-overview__name"
+                        fieldLabel={null}
+                        hidden={false}
+                        input={
+                          Object {
+                            "onChange": [Function],
+                            "value": "",
+                          }
+                        }
+                        label={null}
+                        meta={Object {}}
+                        placeholder="Enter a description for your protocol here"
+                        type="text"
+                      />,
+                    ],
+                    "className": "overview__group overview__group--title",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "",
+                        "className": "overview__name",
+                      },
+                      "ref": null,
+                      "rendered": "",
+                      "type": "h1",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "autoFocus": false,
+                        "className": "timeline-overview__name",
+                        "fieldLabel": null,
+                        "hidden": false,
+                        "input": Object {
+                          "onChange": [Function],
+                          "value": "",
+                        },
+                        "label": null,
+                        "meta": Object {},
+                        "placeholder": "Enter a description for your protocol here",
+                        "type": "text",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                  ],
+                  "type": "div",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <legend
                         className="overview__group-title"
                       >
                         Variable registry
-                      </h3>,
+                      </legend>,
                       <br />,
                       <h4>
                         Node types
@@ -1065,6 +1600,7 @@ ShallowWrapper {
                             iconPosition="right"
                             onClick={[Function]}
                             size="small"
+                            type="button"
                           >
                             Manage registry
                           </Button>
@@ -1085,7 +1621,7 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Variable registry",
-                      "type": "h3",
+                      "type": "legend",
                     },
                     Object {
                       "instance": null,
@@ -1164,6 +1700,7 @@ ShallowWrapper {
                             iconPosition="right"
                             onClick={[Function]}
                             size="small"
+                            type="button"
                           >
                             Manage registry
                           </Button>
@@ -1183,6 +1720,7 @@ ShallowWrapper {
                             iconPosition="right"
                             onClick={[Function]}
                             size="small"
+                            type="button"
                           >
                             Manage registry
                           </Button>,
@@ -1201,6 +1739,7 @@ ShallowWrapper {
                             "iconPosition": "right",
                             "onClick": [Function],
                             "size": "small",
+                            "type": "button",
                           },
                           "ref": null,
                           "rendered": "Manage registry",
@@ -1219,12 +1758,12 @@ ShallowWrapper {
                   "nodeType": "host",
                   "props": Object {
                     "children": Array [
-                      <h3
+                      <legend
                         className="overview__group-title"
                       >
                         Forms
-                      </h3>,
-                      <ul />,
+                      </legend>,
+                      <React.Fragment />,
                       <div
                         className="overview__manage-button"
                       >
@@ -1238,13 +1777,14 @@ ShallowWrapper {
                             iconPosition="right"
                             onClick={[Function]}
                             size="small"
+                            type="button"
                           >
                             Manage forms
                           </Button>
                         </Connect(ProtocolLink)>
                       </div>,
                     ],
-                    "className": "overview__group",
+                    "className": "overview__group overview__group--forms",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -1258,18 +1798,18 @@ ShallowWrapper {
                       },
                       "ref": null,
                       "rendered": "Forms",
-                      "type": "h3",
+                      "type": "legend",
                     },
                     Object {
                       "instance": null,
                       "key": undefined,
-                      "nodeType": "host",
+                      "nodeType": "function",
                       "props": Object {
                         "children": Array [],
                       },
                       "ref": null,
                       "rendered": Array [],
-                      "type": "ul",
+                      "type": Symbol(react.fragment),
                     },
                     Object {
                       "instance": null,
@@ -1286,6 +1826,7 @@ ShallowWrapper {
                             iconPosition="right"
                             onClick={[Function]}
                             size="small"
+                            type="button"
                           >
                             Manage forms
                           </Button>
@@ -1305,6 +1846,7 @@ ShallowWrapper {
                             iconPosition="right"
                             onClick={[Function]}
                             size="small"
+                            type="button"
                           >
                             Manage forms
                           </Button>,
@@ -1323,6 +1865,7 @@ ShallowWrapper {
                             "iconPosition": "right",
                             "onClick": [Function],
                             "size": "small",
+                            "type": "button",
                           },
                           "ref": null,
                           "rendered": "Manage forms",
@@ -1338,12 +1881,13 @@ ShallowWrapper {
               ],
               "type": "div",
             },
-          ],
+            "type": "div",
+          },
           "type": "div",
         },
-        "type": "div",
+        "type": [Function],
       },
-      "type": [Function],
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {

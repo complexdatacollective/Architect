@@ -3,10 +3,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
+import { bindActionCreators } from 'redux';
+import { compose } from 'recompose';
 import { Node, Button } from '../ui/components';
 import EdgeIcon from './EdgeIcon';
+import FormCard from './StageEditor/sections/Form/FormCard';
+import * as Fields from '../ui/components/Fields';
 import ProtocolLink from './ProtocolLink';
 import { getProtocol } from '../selectors/protocol';
+import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 
 class Overview extends Component {
   get renderNodeTypes() {
@@ -55,24 +60,30 @@ class Overview extends Component {
     }
 
     return (
-      <ul>
+      <React.Fragment>
         {map(
           forms,
           (form, key) => (
-            <li key={key}>
-              <ProtocolLink to={`form/${key}`}>
-                {form.title}
-              </ProtocolLink>
-            </li>
+            <ProtocolLink key={key} to={`form/${key}`}>
+              <FormCard
+                label={form.title}
+                input={{
+                  onChange: () => {},
+                  value: ' ',
+                }}
+              />
+            </ProtocolLink>
           ),
         )}
-      </ul>
+      </React.Fragment>
     );
   }
 
   render() {
     const {
       name,
+      description,
+      updateOptions,
       show,
       flipId,
     } = this.props;
@@ -80,50 +91,67 @@ class Overview extends Component {
     if (!show || !flipId) { return null; }
 
     return (
-      <Flipped flipId={flipId}>
-        <div className="overview">
-          <div className="overview__panel">
-            <h1 className="overview__name">{name}</h1>
-            <div className="overview__groups">
-              <div className="overview__group">
-                <h3 className="overview__group-title">Variable registry</h3>
-                <br />
-                <h4>Node types</h4>
-                <div>
-                  { this.renderNodeTypes }
+      <React.Fragment>
+        <Flipped flipId={flipId}>
+          <div className="overview">
+            <div className="overview__panel">
+              <div className="overview__groups">
+                <div className="overview__group overview__group--title">
+                  <h1 className="overview__name">{name}</h1>
+                  <Fields.Text
+                    className="timeline-overview__name"
+                    placeholder="Enter a description for your protocol here"
+                    input={{
+                      value: description,
+                      onChange:
+                        ({ target: { value } }) => {
+                          updateOptions({ description: value });
+                        },
+                    }}
+                  />
                 </div>
-                <br />
-                <h4>Edge types</h4>
-                <div>
-                  { this.renderEdgeTypes }
+                <div className="overview__group">
+                  <legend className="overview__group-title">Variable registry</legend>
+                  <br />
+                  <h4>Node types</h4>
+                  <div>
+                    { this.renderNodeTypes }
+                  </div>
+                  <br />
+                  <h4>Edge types</h4>
+                  <div>
+                    { this.renderEdgeTypes }
+                  </div>
+                  <div className="overview__manage-button">
+                    <ProtocolLink to={'registry'}>
+                      <Button size="small">Manage registry</Button>
+                    </ProtocolLink>
+                  </div>
                 </div>
-                <div className="overview__manage-button">
-                  <ProtocolLink to={'registry'}>
-                    <Button size="small">Manage registry</Button>
-                  </ProtocolLink>
-                </div>
-              </div>
-              <div className="overview__group">
-                <h3 className="overview__group-title">Forms</h3>
-                { this.renderForms }
-                <div className="overview__manage-button">
-                  <ProtocolLink to={'forms'}>
-                    <Button size="small">Manage forms</Button>
-                  </ProtocolLink>
+                <div className="overview__group overview__group--forms">
+                  <legend className="overview__group-title">Forms</legend>
+                  { this.renderForms }
+                  <div className="overview__manage-button">
+                    <ProtocolLink to={'forms'}>
+                      <Button size="small">Manage forms</Button>
+                    </ProtocolLink>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </Flipped>
+        </Flipped>
+      </React.Fragment>
     );
   }
 }
 
 Overview.propTypes = {
   name: PropTypes.string,
+  description: PropTypes.string,
   forms: PropTypes.object.isRequired,
   variableRegistry: PropTypes.object.isRequired,
+  updateOptions: PropTypes.func,
   flipId: PropTypes.string,
   show: PropTypes.bool,
 };
@@ -131,14 +159,21 @@ Overview.propTypes = {
 Overview.defaultProps = {
   show: true,
   name: null,
+  description: '',
   flipId: null,
+  updateOptions: () => {},
 };
+
+const mapDispatchToProps = dispatch => ({
+  updateOptions: bindActionCreators(protocolActions.updateOptions, dispatch),
+});
 
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
 
   return {
     name: protocol && protocol.name,
+    description: protocol && protocol.description,
     forms: protocol && protocol.forms,
     variableRegistry: protocol && protocol.variableRegistry,
   };
@@ -146,4 +181,4 @@ const mapStateToProps = (state) => {
 
 export { Overview };
 
-export default connect(mapStateToProps)(Overview);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Overview);

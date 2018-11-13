@@ -9,14 +9,13 @@
 
   &__brand {
     position: absolute;
-    bottom: unit(4);
+    top: unit(4);
     right: unit(3);
-    width: unit(23);
+    width: 8rem;
     z-index: var(--z-global-ui);
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
-    transition-property: transform, opacity;
-    will-change: transform, opacity;
+    transition-property: opacity;
   }
 
   &__home {
@@ -24,8 +23,8 @@
     position: fixed;
     width: unit(10);
     height: unit(10);
-    top: unit(2);
-    left: unit(2);
+    top: unit(4);
+    left: unit(4);
     cursor: pointer;
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
@@ -68,23 +67,17 @@
   }
 
   &__start {
-    position: absolute;
-    top: 15vh;
-    left: 0;
     width: 100%;
-    height: 20vh;
-    z-index: 2;
+    margin-top: 10vh;
   }
 
   &__recent-protocols {
-    position: absolute;
-    top: 45vh;
-    left: 0;
-    width: 100%;
+    width: 1000px;
     display: flex;
     opacity: 1;
     visibility: visible;
     z-index: 2;
+    margin: 0 auto;
   }
 
   &__protocol {
@@ -113,7 +106,6 @@
     .scene {
       &__brand {
         opacity: 0;
-        transform: translateY(100%);
       }
 
       &__protocol {

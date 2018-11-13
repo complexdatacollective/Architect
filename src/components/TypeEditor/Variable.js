@@ -118,12 +118,13 @@ class Variable extends Component {
                 className="form-field-container"
                 component={ArchitectFields.Select}
                 label="Variable type"
-                options={VARIABLE_TYPES}
+                options={VARIABLE_TYPES.map(variable => (
+                  { value: variable, label: variable }
+                ))}
                 validation={{ required: true }}
                 onChange={resetOptions}
-              >
-                <option value="">&mdash; Select variable type &mdash;</option>
-              </ValidatedField>
+                placeHolder="&mdash; Select variable type &mdash;"
+              />
 
               { VARIABLE_TYPES_WITH_OPTIONS.includes(variableType) &&
                 <Options
