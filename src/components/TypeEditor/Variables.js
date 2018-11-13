@@ -14,11 +14,12 @@ const fuseOptions = {
   shouldSort: true,
   threshold: 0.6,
   location: 0,
-  distance: 100,
+  distance: 10,
   maxPatternLength: 32,
   minMatchCharLength: 1,
   keys: [
     'name',
+    'label',
     'description',
   ],
 };
@@ -26,7 +27,8 @@ const fuseOptions = {
 const search = (list, query) => {
   if (!query) { return list; }
   const fuse = new Fuse(list, fuseOptions);
-  return fuse.search(query);
+  const result = fuse.search(query);
+  return result;
 };
 
 const sort = (list, sortOrder) => {
