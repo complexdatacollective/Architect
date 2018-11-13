@@ -1,31 +1,22 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { omit, isEqual, get, keys, difference } from 'lodash';
-import { withHandlers, compose } from 'recompose';
-import { connect } from 'react-redux';
-import { change, FormSection } from 'redux-form';
+import { isEqual, toPairs } from 'lodash';
+import { compose } from 'recompose';
 import RoundButton from '../../../../Form/RoundButton';
 import Variable from './Variable';
-
-const withVaribleActions = withHandlers({
-  createVariable: props => (variable) => {
-    // don't add existing property
-    if (Object.prototype.hasOwnProperty.call(props.value, variable)) { return; }
-    props.change({ ...props.value, [variable]: undefined });
-  },
-  deleteVariable: props => variable =>
-    props.change(omit(props.value, variable)),
-});
+import withVaribleActions from './withVariableActions';
+import withUnusedVariables from './withUnusedVariables';
 
 class AttributesTable extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
     createVariable: PropTypes.func.isRequired,
+    updateVariable: PropTypes.func.isRequired,
     deleteVariable: PropTypes.func.isRequired,
-    variables: PropTypes.array.isRequired,
     nodeType: PropTypes.string.isRequired,
     unusedVariables: PropTypes.array.isRequired,
+    variablesForNodeType: PropTypes.object.isRequired,
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -42,11 +33,13 @@ class AttributesTable extends Component {
   }
 
   get variables() {
-    const variables = this.props.variables;
+    const variables = toPairs(this.props.input.value || {});
 
-    return this.state.new ?
-      variables.concat(undefined) :
-      variables;
+    if (!this.state.new) {
+      return variables;
+    }
+
+    return variables.concat([[]]);
   }
 
   handleEditVariable = (variable) => {
@@ -55,11 +48,11 @@ class AttributesTable extends Component {
     this.setState({ editing: variable, new: false });
   };
 
-  handleCreateVariable = () => {
+  handleAddVariable = () => {
     this.setState({ new: true, editing: undefined });
   };
 
-  handleChooseVariable = (variable) => {
+  handleChooseVariableType = (variable) => {
     this.props.createVariable(variable);
     this.setState({ new: false, editing: variable });
   };
@@ -68,39 +61,56 @@ class AttributesTable extends Component {
     this.props.deleteVariable(variable);
   };
 
-  render() {
+  handleChange = (variable) => {
+    this.props.updateVariable(variable);
+  }
+
+  renderVariable({ value, variable, key }) {
     const {
-      name,
       nodeType,
+      variablesForNodeType,
       unusedVariables,
+      meta,
+      input,
     } = this.props;
 
-    const rows = this.variables.map((variable, index) => {
-      const isEditing = this.state.editing === variable;
+    const isEditing = this.state.editing === variable;
+    const error = meta && meta.error && meta.error[variable];
 
-      return (
-        <div className="attributes-table__variable" key={index}>
-          <Variable
-            variable={variable}
-            nodeType={nodeType}
-            unusedVariables={unusedVariables}
-            isEditing={isEditing}
-            onChooseVariable={this.handleChooseVariable}
-            onToggleEdit={() => this.handleEditVariable(variable)}
-            onDelete={() => this.handleDeleteVariable(variable)}
-          />
-        </div>
-      );
-    });
+    return (
+      <div className="attributes-table__variable" key={key}>
+        <Variable
+          variable={variable}
+          value={value}
+          name={`${input.name}.${variable}`}
+          error={error}
+          nodeType={nodeType}
+          variablesForNodeType={variablesForNodeType}
+          unusedVariables={unusedVariables}
+          isEditing={isEditing}
+          onChange={this.handleChange}
+          onChooseVariable={this.handleChooseVariableType}
+          onToggleEdit={() => this.handleEditVariable(variable)}
+          onDelete={() => this.handleDeleteVariable(variable)}
+        />
+      </div>
+    );
+  }
+
+  render() {
+    const rows = this.variables.map(
+      ([variable, value], index) =>
+        this.renderVariable({ variable, value, key: index }),
+    );
 
     return (
       <div className="attributes-table">
-        <FormSection name={name} className="attributes-table__variables">
+        <div className="attributes-table__variables">
           {rows}
-        </FormSection>
+        </div>
 
         <RoundButton
-          onClick={this.handleCreateVariable}
+          onClick={this.handleAddVariable}
           className="attributes-table__add"
         />
       </div>
@@ -108,34 +118,9 @@ class AttributesTable extends Component {
   }
 }
 
-const getVariablesForNodeType = (state, nodeType) => {
-  const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-  return get(variableRegistry, ['node', nodeType, 'variables'], {});
-};
-
-const mapStateToProps = (state, { name, form, nodeType }) => {
-  const value = form.getValues(state, name) || {};
-  const variables = keys(value);
-  const variablesRegistryForNodeType = keys(getVariablesForNodeType(state, nodeType));
-  const unusedVariables = difference(variablesRegistryForNodeType, variables);
-
-  return ({
-    value,
-    variables,
-    unusedVariables,
-  });
-};
-
-const mapDispatchToProps = (dispatch, { name, form }) => ({
-  change: bindActionCreators(
-    value => change(form.name, name, value),
-    dispatch,
-  ),
-});
-
 export { AttributesTable };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
   withVaribleActions,
+  withUnusedVariables,
 )(AttributesTable);

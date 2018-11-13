@@ -66,7 +66,10 @@ class StageEditor extends Component {
 
           {this.renderSections()}
 
-          <Issues issues={issues} show={submitFailed} />
+          <Issues
+            issues={issues}
+            show={submitFailed}
+          />
         </Guided>
       </ReduxForm>
     );

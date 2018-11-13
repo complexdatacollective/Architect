@@ -62,6 +62,9 @@
             "label": "specialcategory",
             "description": "A categorical variable.",
             "type": "categorical",
+            "validation": {
+              "minSelected": 1
+            },
             "options": [{
               "label": "Foo",
               "value": "foo"
@@ -345,17 +348,11 @@
         },
         {
           "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?",
-          "additionalAttributes": {
-            "ba5397013f9cf10a08ac193cc197c7f97d2d8374": true
-          }
+          "text": "Within the past 6 months, who has been supportive?"
         },
         {
           "id": "2we",
-          "text": "Within the past 2 weeks, who has provided advice?",
-          "additionalAttributes": {
-            "285ecc8323cd69e7e7bfb8e8586023c76fcd86f6": true
-          }
+          "text": "Within the past 2 weeks, who has provided advice?"
         }
       ]
     },

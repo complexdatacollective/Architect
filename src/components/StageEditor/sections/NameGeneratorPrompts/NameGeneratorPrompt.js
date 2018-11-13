@@ -6,7 +6,7 @@ import AttributesTable from './AttributesTable';
 import { Item } from '../../../Items';
 import { getFieldId } from '../../../../utils/issues';
 
-const NameGeneratorPrompt = ({ fieldId, form, nodeType, ...rest }) => (
+const NameGeneratorPrompt = ({ handleValidateAttributes, fieldId, form, nodeType, ...rest }) => (
   <Item {...rest}>
     <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
     <h3>Text for Prompt</h3>
@@ -24,7 +24,6 @@ const NameGeneratorPrompt = ({ fieldId, form, nodeType, ...rest }) => (
       name={`${fieldId}.additionalAttributes`}
       id="additionalAttributes"
       nodeType={nodeType}
-      form={form}
     />
   </Item>
 );

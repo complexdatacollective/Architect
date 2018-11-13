@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import cx from 'classnames';
+import { get } from 'lodash';
+import { getFieldId } from '../../../../../utils/issues';
 import VariablePreview from './VariablePreview';
 import VariableChooser from './VariableChooser';
 import VariableEditor from './VariableEditor';
-import { getVariablesForNodeType } from '../../../../../selectors/variableRegistry';
 
 class Variable extends Component {
   static propTypes = {
@@ -16,20 +16,27 @@ class Variable extends Component {
     type: PropTypes.string,
     options: PropTypes.array,
     variable: PropTypes.string,
+    validation: PropTypes.object,
     isEditing: PropTypes.bool,
     onToggleEdit: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
     onChooseVariable: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.any,
+    name: PropTypes.string.isRequired,
+    error: PropTypes.string,
   };
 
   static defaultProps = {
     label: '',
+    error: undefined,
     type: null,
     nodeType: null,
     options: null,
+    validation: {},
     unusedVariables: [],
     isEditing: false,
-    value: null,
+    value: undefined,
     variable: null,
   };
 
@@ -37,12 +44,21 @@ class Variable extends Component {
     return !this.props.variable;
   }
 
+  handleChange = (value) => {
+    const { onChange, variable } = this.props;
+    onChange({ [variable]: value });
+  }
+
   render() {
     const {
       unusedVariables,
       variable,
+      validation,
+      value,
       label,
       type,
+      name,
+      error,
       options,
       nodeType,
       isEditing,
@@ -61,14 +77,16 @@ class Variable extends Component {
       <div
         className={variableClasses}
         onClick={onToggleEdit}
+        id={getFieldId(name)}
+        data-name={`Additional attributes: ${label}`}
       >
         { !this.isNew &&
           <div className="attributes-table-variable__preview">
-            <Field
-              name={variable}
-              variable={variable}
+            <VariablePreview
               label={label}
-              component={VariablePreview}
+              value={value}
+              error={error}
+              variable={variable}
               onDelete={onDelete}
             />
           </div>
@@ -83,9 +101,12 @@ class Variable extends Component {
           />
           <VariableEditor
             show={!this.isNew}
-            name={variable}
+            value={value}
+            variable={variable}
+            validation={validation}
             type={type}
             label={label}
+            onChange={this.handleChange}
             options={options}
           />
         </div>
@@ -94,13 +115,14 @@ class Variable extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state, { variablesForNodeType, ...props }) => {
   if (!props.variable) { return {}; }
 
-  const variablesForNodeType = getVariablesForNodeType(state, props.nodeType);
   const variableMeta = variablesForNodeType[props.variable];
+  const validation = get(variablesForNodeType, [props.variable, 'validation']);
 
   return {
+    validation,
     label: variableMeta.label,
     type: variableMeta.type,
     options: variableMeta.options || null,
