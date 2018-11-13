@@ -1,0 +1,20 @@
+.list-new-button {
+  width: unit(6);
+  height: unit(6);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--architect-edit-button-background);
+  border-radius: 50%;
+
+  .icon {
+    width: unit(2);
+    height: unit(2);
+
+    .cls-1 {
+      fill: var(--architect-edit-button-fill);
+    }
+  }
+}

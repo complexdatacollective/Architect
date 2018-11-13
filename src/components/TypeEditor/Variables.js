@@ -1,32 +1,77 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
+/* eslint-disable */
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { arrayPush, FieldArray } from 'redux-form';
+import { FieldArray, arrayPush } from 'redux-form';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
-import Items, { NewButton } from '../Items';
+import Fuse from 'fuse.js';
+import { orderBy } from 'lodash';
 import Variable from './Variable';
+import { FieldArrayAdapter as UnorderedList, NewButton } from '../UnorderedList';
 
-const Variables = ({
-  form,
-  name,
-  addNew,
-}) => (
-  <React.Fragment>
-    <FieldArray
-      name={name}
-      sortable={false}
-      component={Items}
-      itemComponent={Variable}
-      form={form}
-    />
+const fuseOptions = {
+  shouldSort: true,
+  threshold: 0.6,
+  location: 0,
+  distance: 10,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: [
+    'name',
+    'label',
+    'description',
+  ],
+};
 
-    <div className="editor__subsection">
-      <NewButton onClick={addNew} />
-    </div>
-  </React.Fragment>
-);
+const search = (list, query) => {
+  if (!query) { return list; }
+  const fuse = new Fuse(list, fuseOptions);
+  const result = fuse.search(query);
+  return result;
+};
+
+const sort = (list, sortOrder) => {
+  if (!sortOrder) { return list; }
+  const properties = sortOrder.map(({ property }) => property);
+  const orders = sortOrder.map(({ direction }) => direction);
+  return orderBy(list, properties, orders);
+};
+
+const filter = (list, { query, sortOrder }) => {
+  return sort(search(list, query), sortOrder);
+};
+
+class Variables extends Component {
+  render() {
+    const {
+      form,
+      name,
+      addNew,
+    } = this.props;
+
+    return (
+      <React.Fragment>
+        <div className="items">
+          <div className="items__items">
+            <FieldArray
+              component={UnorderedList}
+              item={Variable}
+              name={name}
+              form={form}
+              filter={filter}
+              sortableProperties={['name']}
+            />
+          </div>
+        </div>
+
+        <div className="editor__subsection">
+          <NewButton onClick={addNew} />
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 Variables.propTypes = {
   form: PropTypes.string.isRequired,
@@ -35,13 +80,8 @@ Variables.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch, { form, name }) => ({
-  addNew: bindActionCreators(
-    () => arrayPush(
-      form,
-      name,
-      { id: uuid() },
-    ),
-    dispatch,
+  addNew: () => dispatch(
+    arrayPush(form, name, { id: uuid() })
   ),
 });
 

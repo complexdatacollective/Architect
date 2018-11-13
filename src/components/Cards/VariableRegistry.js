@@ -17,21 +17,21 @@ import { actionCreators as variableRegistryActions } from '../../ducks/modules/p
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const Type = ({ label, link, children, usage, handleDelete }) => (
-  <div className="list__item">
-    <div className="list__attribute list__attribute--icon">
+  <div className="simple-list__item">
+    <div className="simple-list__attribute simple-list__attribute--icon">
       <Link to={link}>
         {children}
       </Link>
     </div>
-    <div className="list__attribute">
+    <div className="simple-list__attribute">
       <h3>
         <Link to={link}>
           {label}
         </Link>
       </h3>
-      { usage.length === 0 && <div className="list__tag">unused</div> }
+      { usage.length === 0 && <div className="simple-list__tag">unused</div> }
     </div>
-    <div className="list__attribute list__attribute--options">
+    <div className="simple-list__attribute simple-list__attribute--options">
       <Button size="small" color="neon-coral" onClick={handleDelete}>
         Delete
       </Button>
@@ -138,7 +138,7 @@ class VariableRegistry extends Component {
     }
 
     return (
-      <div className="list">
+      <div className="simple-list">
         <TransitionGroup>
           {map(edges, this.renderEdge)}
         </TransitionGroup>
@@ -154,7 +154,7 @@ class VariableRegistry extends Component {
     }
 
     return (
-      <div className="list">
+      <div className="simple-list">
         <TransitionGroup>
           {map(nodes, this.renderNode)}
         </TransitionGroup>

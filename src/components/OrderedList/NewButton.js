@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from '../../ui/components';
 
 const NewButton = props => (
-  <div className="items-new-button" {...props}>
+  <div className="list-new-button" {...props}>
     <Icon name="add" />
   </div>
 );

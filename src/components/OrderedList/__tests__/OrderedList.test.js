@@ -2,17 +2,19 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Items } from '../Items';
+import { OrderedList } from '../OrderedList';
 
 const mockProps = {
   fields: {
     map: () => {},
   },
-  itemComponent: () => {},
+  item: () => {},
   disabled: false,
 };
 
-describe('<Items />', () => {
+const className = 'list';
+
+describe('<OrderedList />', () => {
   describe('errors', () => {
     it('shows no errors by default', () => {
       const props = {
@@ -22,9 +24,9 @@ describe('<Items />', () => {
           error: null,
         },
       };
-      const component = shallow(<Items {...mockProps} {...props} />);
+      const component = shallow(<OrderedList {...mockProps} {...props} />);
 
-      expect(component.exists('.items__error')).toBe(false);
+      expect(component.exists(`.${className}__error`)).toBe(false);
     });
 
     it('shows error on submit', () => {
@@ -34,9 +36,9 @@ describe('<Items />', () => {
           error: 'foo',
         },
       };
-      const component = shallow(<Items {...mockProps} {...props} />);
+      const component = shallow(<OrderedList {...mockProps} {...props} />);
 
-      expect(component.exists('.items__error')).toBe(true);
+      expect(component.exists(`.${className}__error`)).toBe(true);
     });
 
     it('shows error on changed', () => {
@@ -46,9 +48,9 @@ describe('<Items />', () => {
           error: 'foo',
         },
       };
-      const component = shallow(<Items {...mockProps} {...props} />);
+      const component = shallow(<OrderedList {...mockProps} {...props} />);
 
-      expect(component.exists('.items__error')).toBe(true);
+      expect(component.exists(`.${className}__error`)).toBe(true);
     });
   });
 });

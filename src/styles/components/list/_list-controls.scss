@@ -1,0 +1,29 @@
+.list-controls {
+  display: flex;
+  width: 100%;
+
+  &__section {
+    display: flex;
+    align-items: center;
+    padding-right: unit(4);
+
+    .form-field-container,
+    .form-field {
+      margin: 0;
+
+      h4 { display: none; }
+    }
+
+    &--search {
+      flex: 1;
+
+      .form-field-container {
+        flex: 1;
+      }
+    }
+
+    &-name {
+      padding-right: unit(1);
+    }
+  }
+}

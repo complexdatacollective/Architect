@@ -5,7 +5,7 @@ import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
 import Filter from '../../../Form/Fields/Filter';
 import ValidatedField from '../../../Form/ValidatedField';
-import { Item } from '../../../Items';
+import { Item } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 
 const getDataSourceOptions = (dataSources) => {

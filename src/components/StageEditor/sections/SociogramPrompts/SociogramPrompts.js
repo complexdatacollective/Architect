@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import Guidance from '../../../Guidance';
 import SociogramPrompt from './SociogramPrompt';
-import { Items, NewButton } from '../../../Items';
+import OrderedList, { NewButton } from '../../../OrderedList';
 import ValidatedFieldArray from '../../../Form/ValidatedFieldArray';
 import { getFieldId } from '../../../../utils/issues';
 
@@ -30,8 +30,8 @@ const SociogramPrompts = ({
         <div className="stage-editor-section-prompts__prompts">
           <ValidatedFieldArray
             name={fieldName}
-            component={Items}
-            itemComponent={SociogramPrompt}
+            component={OrderedList}
+            item={SociogramPrompt}
             form={form}
             validation={{ notEmpty }}
           />

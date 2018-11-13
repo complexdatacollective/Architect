@@ -12,6 +12,7 @@ import {
   getFormMeta,
   autofill,
 } from 'redux-form';
+import { mapProps, compose } from 'recompose';
 import { get } from 'lodash';
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
@@ -19,7 +20,7 @@ import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
 import Validations from './Validations';
 import Options from './Options';
-import ExpandableItem from '../Items/ExpandableItem';
+import { ExpandableItem } from '../UnorderedList';
 import { getFieldId } from '../../utils/issues';
 import safeName from './safeName';
 
@@ -56,13 +57,14 @@ class Variable extends Component {
       form,
       variableType,
       resetOptions,
+      onDelete,
       ...rest
     } = this.props;
 
     return (
       <ExpandableItem
-        open={isDirty}
-        lockOpen={isInvalid && hasSubmitFailed}
+        sortable={false}
+        className="type-editor-variable"
         preview={(
           <FormSection name={fieldId}>
             <h3 className="variable__preview-title">
@@ -86,12 +88,13 @@ class Variable extends Component {
             </p>
           </FormSection>
         )}
+        handleDelete={onDelete}
         {...rest}
       >
         <FormSection name={fieldId}>
           <Guidance contentId="guidance.registry.type.variable">
             <div>
-              <div id={getFieldId(`${fieldId}.label`)} data-name="Variable label" />
+              <div id={getFieldId(`${name}.label`)} data-name="Variable label" />
               <ValidatedField
                 name="label"
                 component={Fields.Text}
@@ -99,7 +102,7 @@ class Variable extends Component {
                 onChange={this.handleChangeLabel}
                 validation={{ required: true }}
               />
-              <div id={getFieldId(`${fieldId}.name`)} data-name="Variable name" />
+              <div id={getFieldId(`${name}.name`)} data-name="Variable name" />
               <ValidatedField
                 name="name"
                 component={Fields.Text}
@@ -112,7 +115,7 @@ class Variable extends Component {
                 component={Fields.Text}
                 label="Description"
               />
-              <div id={getFieldId(`${fieldId}.type`)} data-name="Variable type" />
+              <div id={getFieldId(`${name}.type`)} data-name="Variable type" />
               <ValidatedField
                 name="type"
                 className="form-field-container"
@@ -151,7 +154,6 @@ class Variable extends Component {
 }
 
 Variable.propTypes = {
-  fieldId: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   isDirty: PropTypes.bool,
   resetOptions: PropTypes.func.isRequired,
@@ -178,16 +180,23 @@ const mapStateToProps = (state, { form, fieldId }) => {
 };
 
 const mapDispatchToProps = (dispatch, { form, fieldId }) => ({
-  autofill: (field, value) => dispatch(autofill(form, `${fieldId}.name`, value)),
+  autofill: (field, value) => dispatch(autofill(form, `${fieldId}.fieldId`, value)),
   resetOptions: () => {
     dispatch(change(form, `${fieldId}.options`, null));
     dispatch(change(form, `${fieldId}.validation`, []));
   },
 });
 
+const reduxFieldAdapter = mapProps(
+  ({ name, index, ...rest }) => ({
+    ...rest,
+    fieldId: `${name}[${index}]`,
+  }),
+);
+
 export { Variable };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  reduxFieldAdapter,
+  connect(mapStateToProps, mapDispatchToProps),
 )(Variable);

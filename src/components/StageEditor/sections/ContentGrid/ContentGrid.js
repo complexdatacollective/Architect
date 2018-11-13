@@ -10,7 +10,7 @@ import {
   getFormSyncErrors,
 } from 'redux-form';
 import Guidance from '../../../Guidance';
-import { Items, NewButton } from '../../../Items';
+import OrderedList, { NewButton } from '../../../OrderedList';
 import Item from './Item';
 import { units, capacity, sizes } from './sizes';
 
@@ -66,8 +66,8 @@ class ContentGrid extends Component {
           <div className="content-grid">
             <FieldArray
               name="items"
-              component={Items}
-              itemComponent={Item}
+              component={OrderedList}
+              item={Item}
               onToggleItemEdit={this.handleToggleItemEdit}
               onChooseItemType={this.handleChooseItemType}
               editing={this.state.editing}

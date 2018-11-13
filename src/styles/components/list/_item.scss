@@ -1,4 +1,4 @@
-$component-name: items-item;
+$component-name: list-item;
 
 .#{$component-name} {
   width: 100%;
@@ -27,7 +27,7 @@ $component-name: items-item;
   }
 
   &__content {
-    padding: unit(4) unit(2);
+    padding: unit(2);
     flex-grow: 1;
   }
 }

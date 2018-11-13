@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ValidatedField } from '../../../Form';
 import TextArea from '../../../../ui/components/Fields/TextArea';
 import AttributesTable from './AttributesTable';
-import { Item } from '../../../Items';
+import { Item } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 
 const NameGeneratorPrompt = ({ handleValidateAttributes, fieldId, form, nodeType, ...rest }) => (
