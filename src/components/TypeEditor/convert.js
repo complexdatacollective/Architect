@@ -29,7 +29,7 @@ const parseValidations = validation =>
   reduce(
     validation,
     (memo, { type, value }) =>
-      ({ ...memo, [type]: value }),
+      ({ ...memo, [type]: value || true }),
     {},
   );
 
