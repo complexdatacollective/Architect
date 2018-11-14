@@ -5,7 +5,7 @@ const CSSVariable = (variableName) => {
     .getPropertyValue(variableName)
     .trim();
   // eslint-disable-next-line no-console
-  if (isEmpty(variable)) { console.log(`CSS variable "${variableName}" not found.`); }
+  if (isEmpty(variable)) { throw Error(`CSS variable "${variableName}" not found.`); }
   return variable;
 };
 

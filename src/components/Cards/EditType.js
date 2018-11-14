@@ -24,12 +24,12 @@ const asColorOption = name => ({
   color: getColorByVariable(`--${name}`),
 });
 
-const COLOR_OPTIONS = {
+const colorOptions = () => ({
   node: times(8, index => `node-color-seq-${(index + 1)}`)
     .map(asColorOption),
   edge: times(10, index => `edge-color-seq-${(index + 1)}`)
     .map(asColorOption),
-};
+});
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -38,7 +38,7 @@ const ICON_OPTIONS = [
 
 const getNextCategoryColor = ({ protocol, category }) => {
   if (!protocol || !category) { return null; }
-  const categoryOptions = COLOR_OPTIONS[category];
+  const categoryOptions = colorOptions()[category];
   const typeCount = size(get(protocol, ['variableRegistry', category], {}));
 
   return get(categoryOptions, [typeCount % size(categoryOptions), 'name']);
@@ -124,7 +124,7 @@ class EditType extends PureComponent {
             form={formName}
             category={category}
             type={type}
-            colorOptions={COLOR_OPTIONS}
+            colorOptions={colorOptions()}
             iconOptions={ICON_OPTIONS}
             onSubmit={this.handleSubmit}
           />

@@ -36,7 +36,7 @@ ShallowWrapper {
           <div>
             <div
               data-name="Variable label"
-              id="field_nodejs.label"
+              id="field_nodejs_label"
             />
             <Validated
               component={[Function]}
@@ -51,7 +51,7 @@ ShallowWrapper {
             />
             <div
               data-name="Variable name"
-              id="field_nodejs.name"
+              id="field_nodejs_name"
             />
             <Validated
               component={[Function]}
@@ -71,7 +71,7 @@ ShallowWrapper {
             />
             <div
               data-name="Variable type"
-              id="field_nodejs.type"
+              id="field_nodejs_type"
             />
             <Validated
               className="form-field-container"
@@ -171,7 +171,7 @@ ShallowWrapper {
           <div>
             <div
               data-name="Variable label"
-              id="field_nodejs.label"
+              id="field_nodejs_label"
             />
             <Validated
               component={[Function]}
@@ -186,7 +186,7 @@ ShallowWrapper {
             />
             <div
               data-name="Variable name"
-              id="field_nodejs.name"
+              id="field_nodejs_name"
             />
             <Validated
               component={[Function]}
@@ -206,7 +206,7 @@ ShallowWrapper {
             />
             <div
               data-name="Variable type"
-              id="field_nodejs.type"
+              id="field_nodejs_type"
             />
             <Validated
               className="form-field-container"
@@ -271,7 +271,7 @@ ShallowWrapper {
           "children": <div>
             <div
               data-name="Variable label"
-              id="field_nodejs.label"
+              id="field_nodejs_label"
             />
             <Validated
               component={[Function]}
@@ -286,7 +286,7 @@ ShallowWrapper {
             />
             <div
               data-name="Variable name"
-              id="field_nodejs.name"
+              id="field_nodejs_name"
             />
             <Validated
               component={[Function]}
@@ -306,7 +306,7 @@ ShallowWrapper {
             />
             <div
               data-name="Variable type"
-              id="field_nodejs.type"
+              id="field_nodejs_type"
             />
             <Validated
               className="form-field-container"
@@ -369,7 +369,7 @@ ShallowWrapper {
             "children": Array [
               <div
                 data-name="Variable label"
-                id="field_nodejs.label"
+                id="field_nodejs_label"
               />,
               <Validated
                 component={[Function]}
@@ -384,7 +384,7 @@ ShallowWrapper {
               />,
               <div
                 data-name="Variable name"
-                id="field_nodejs.name"
+                id="field_nodejs_name"
               />,
               <Validated
                 component={[Function]}
@@ -404,7 +404,7 @@ ShallowWrapper {
               />,
               <div
                 data-name="Variable type"
-                id="field_nodejs.type"
+                id="field_nodejs_type"
               />,
               <Validated
                 className="form-field-container"
@@ -467,7 +467,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "data-name": "Variable label",
-                "id": "field_nodejs.label",
+                "id": "field_nodejs_label",
               },
               "ref": null,
               "rendered": null,
@@ -496,7 +496,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "data-name": "Variable name",
-                "id": "field_nodejs.name",
+                "id": "field_nodejs_name",
               },
               "ref": null,
               "rendered": null,
@@ -538,7 +538,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "data-name": "Variable type",
-                "id": "field_nodejs.type",
+                "id": "field_nodejs_type",
               },
               "ref": null,
               "rendered": null,
@@ -624,7 +624,7 @@ ShallowWrapper {
             <div>
               <div
                 data-name="Variable label"
-                id="field_nodejs.label"
+                id="field_nodejs_label"
               />
               <Validated
                 component={[Function]}
@@ -639,7 +639,7 @@ ShallowWrapper {
               />
               <div
                 data-name="Variable name"
-                id="field_nodejs.name"
+                id="field_nodejs_name"
               />
               <Validated
                 component={[Function]}
@@ -659,7 +659,7 @@ ShallowWrapper {
               />
               <div
                 data-name="Variable type"
-                id="field_nodejs.type"
+                id="field_nodejs_type"
               />
               <Validated
                 className="form-field-container"
@@ -759,7 +759,7 @@ ShallowWrapper {
             <div>
               <div
                 data-name="Variable label"
-                id="field_nodejs.label"
+                id="field_nodejs_label"
               />
               <Validated
                 component={[Function]}
@@ -774,7 +774,7 @@ ShallowWrapper {
               />
               <div
                 data-name="Variable name"
-                id="field_nodejs.name"
+                id="field_nodejs_name"
               />
               <Validated
                 component={[Function]}
@@ -794,7 +794,7 @@ ShallowWrapper {
               />
               <div
                 data-name="Variable type"
-                id="field_nodejs.type"
+                id="field_nodejs_type"
               />
               <Validated
                 className="form-field-container"
@@ -859,7 +859,7 @@ ShallowWrapper {
             "children": <div>
               <div
                 data-name="Variable label"
-                id="field_nodejs.label"
+                id="field_nodejs_label"
               />
               <Validated
                 component={[Function]}
@@ -874,7 +874,7 @@ ShallowWrapper {
               />
               <div
                 data-name="Variable name"
-                id="field_nodejs.name"
+                id="field_nodejs_name"
               />
               <Validated
                 component={[Function]}
@@ -894,7 +894,7 @@ ShallowWrapper {
               />
               <div
                 data-name="Variable type"
-                id="field_nodejs.type"
+                id="field_nodejs_type"
               />
               <Validated
                 className="form-field-container"
@@ -957,7 +957,7 @@ ShallowWrapper {
               "children": Array [
                 <div
                   data-name="Variable label"
-                  id="field_nodejs.label"
+                  id="field_nodejs_label"
                 />,
                 <Validated
                   component={[Function]}
@@ -972,7 +972,7 @@ ShallowWrapper {
                 />,
                 <div
                   data-name="Variable name"
-                  id="field_nodejs.name"
+                  id="field_nodejs_name"
                 />,
                 <Validated
                   component={[Function]}
@@ -992,7 +992,7 @@ ShallowWrapper {
                 />,
                 <div
                   data-name="Variable type"
-                  id="field_nodejs.type"
+                  id="field_nodejs_type"
                 />,
                 <Validated
                   className="form-field-container"
@@ -1055,7 +1055,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "data-name": "Variable label",
-                  "id": "field_nodejs.label",
+                  "id": "field_nodejs_label",
                 },
                 "ref": null,
                 "rendered": null,
@@ -1084,7 +1084,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "data-name": "Variable name",
-                  "id": "field_nodejs.name",
+                  "id": "field_nodejs_name",
                 },
                 "ref": null,
                 "rendered": null,
@@ -1126,7 +1126,7 @@ ShallowWrapper {
                 "nodeType": "host",
                 "props": Object {
                   "data-name": "Variable type",
-                  "id": "field_nodejs.type",
+                  "id": "field_nodejs_type",
                 },
                 "ref": null,
                 "rendered": null,

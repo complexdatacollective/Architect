@@ -4,15 +4,15 @@ import { Transition } from 'react-transition-group';
 import anime from 'animejs';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 
-const appear = {
+const appear = () => ({
   opacity: [0, 1],
   scale: [0, 1],
   elasticity: 0,
   easing: 'easeInOutQuad',
   duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-};
+});
 
-const disappear = {
+const disappear = () => ({
   opacity: [1, 0],
   scale: [1, 0],
   height: 0,
@@ -20,15 +20,15 @@ const disappear = {
   elasticity: 0,
   easing: 'easeInOutQuad',
   duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-};
+});
 
 const AppearTransition = ({ children, ...props }) => (
   <Transition
     mountOnEnter
     unmountOnExit
     timeout={getCSSVariableAsNumber('--animation-duration-standard-ms')}
-    onEntering={el => anime({ targets: el, ...appear })}
-    onExiting={el => anime({ targets: el, ...disappear })}
+    onEntering={el => anime({ targets: el, ...appear() })}
+    onExiting={el => anime({ targets: el, ...disappear() })}
     {...props}
   >
     { children }

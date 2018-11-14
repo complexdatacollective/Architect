@@ -5,7 +5,7 @@ import anime from 'animejs';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
 import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 
-const appear = {
+const appear = () => ({
   opacity: {
     value: [0, 1],
     duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
@@ -16,16 +16,15 @@ const appear = {
     duration: getCSSVariableAsNumber('--animation-duration-slow-ms'),
     easing: 'easeInOutQuad',
   },
+});
 
-};
-
-const disappear = {
+const disappear = () => ({
   opacity: 0,
   scaleY: 0,
   margin: 0,
   maxHeight: 0,
   duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-};
+});
 
 const FolderTransition = ({ children, ...props }) => (
   <Transition
@@ -45,7 +44,7 @@ const FolderTransition = ({ children, ...props }) => (
             easing: 'easeInOutQuad',
             duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
           },
-          ...appear,
+          ...appear(),
         });
       }
     }
@@ -55,7 +54,7 @@ const FolderTransition = ({ children, ...props }) => (
           targets: el,
           elasticity: 0,
           easing: 'easeInOutQuad',
-          ...disappear,
+          ...disappear(),
         });
       }
     }

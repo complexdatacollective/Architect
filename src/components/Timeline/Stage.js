@@ -7,7 +7,7 @@ import { Zoom } from '../../behaviours';
 import { getCSSVariableAsString } from '../../utils/CSSVariables';
 import timelineImages from '../../images/timeline';
 
-const zoomColors = [getCSSVariableAsString('--light-background'), '#ffffff'];
+const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];
 
 const getTimelineImage = type =>
   get(timelineImages, type);
@@ -102,7 +102,7 @@ class Stage extends PureComponent {
           onEditStage={onEditStage}
           type={type}
           label={label}
-          zoomColors={zoomColors}
+          zoomColors={zoomColors()}
         />
         <div className="timeline-stage__controls">
           <a

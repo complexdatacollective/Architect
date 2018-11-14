@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers, defaultProps, renameProp } from 'recompose';
+import { compose, withHandlers, defaultProps, renameProp, withProps } from 'recompose';
 import { TransitionGroup } from 'react-transition-group';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
@@ -61,12 +61,14 @@ export default compose(
   defaultProps({
     lockAxis: 'y',
     useDragHandle: true,
-    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
     sortable: true,
   }),
   renameProp('sortable', 'disabled'),
   withHandlers({
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
+  withProps(() => ({
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+  })),
   SortableContainer,
 )(OrderedList);

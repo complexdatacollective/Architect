@@ -196,6 +196,7 @@ const mapStateToProps = (state) => {
   return {
     activeProtocol: state.session.activeProtocol,
     stages: protocol ? protocol.stages : [],
+    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
   };
 };
 
@@ -229,7 +230,6 @@ export default compose(
   defaultProps({
     lockAxis: 'y',
     distance: 5,
-    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
   }),
   connect(mapStateToProps, mapDispatchToProps),
   SortableContainer,

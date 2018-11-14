@@ -43,9 +43,9 @@ class Card extends PureComponent {
     secondaryButtons: null,
     show: false,
     style: 'wipe',
-    enterDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+    enterDuration: null,
     enterDelay: 0,
-    exitDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+    exitDuration: null,
     exitDelay: 0,
     onAcknowledgeError: null,
   }
@@ -58,11 +58,12 @@ class Card extends PureComponent {
       secondaryButtons,
       show,
       style,
-      enterDuration,
       enterDelay,
-      exitDuration,
       exitDelay,
     } = this.props;
+
+    const enterDuration = this.props.enterDuration || getCSSVariableAsNumber('--animation-duration-standard-ms');
+    const exitDuration = this.props.exitDuration || getCSSVariableAsNumber('--animation-duration-standard-ms');
 
     const classes = cx('card', `card--${this.props.type}`);
     const timeout = enterDuration + enterDelay + exitDuration + exitDelay;
