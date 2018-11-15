@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { uniqueId as _uniqueId } from 'lodash';
+import uuid from 'uuid';
 import { arrayMove } from 'react-sortable-hoc';
+import { parse } from './convert';
 import { AddButton, DropDown } from './Rule';
 import Rules from './Rules';
-
-const uniqueId = () => _uniqueId(new Date().getTime());
+import { getVariableTypes } from './Rule/selectors';
 
 const defaultFilter = {
   join: '',
@@ -27,7 +29,7 @@ const filterGroupClasses = join =>
     },
   );
 
-const updateRuleOption = (rule, option, value) => ({
+const mergeRuleOption = (rule, option, value) => ({
   ...rule,
   options: {
     ...rule.options,
@@ -39,6 +41,7 @@ class FilterGroup extends PureComponent {
   static propTypes = {
     filter: PropTypes.object,
     onChange: PropTypes.func,
+    variableTypes: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -64,13 +67,18 @@ class FilterGroup extends PureComponent {
     const { filter, onChange } = this.props;
 
     const rules = filter.rules.map(
-      rule => (id !== rule.id ? rule : updateRuleOption(rule, option, value)),
+      rule => (id !== rule.id ? rule : mergeRuleOption(rule, option, value)),
     );
 
-    onChange({
-      ...filter,
-      rules,
-    });
+    const newFilter = parse(
+      {
+        ...filter,
+        rules,
+      },
+      { types: this.props.variableTypes },
+    );
+
+    onChange(newFilter);
   };
 
   onMoveRule = ({ oldIndex, newIndex }) => {
@@ -87,7 +95,7 @@ class FilterGroup extends PureComponent {
 
     onChange({
       ...filter,
-      rules: [...filter.rules, { type, id: uniqueId() }],
+      rules: [...filter.rules, { type, id: uuid() }],
     });
   };
 
@@ -132,4 +140,12 @@ class FilterGroup extends PureComponent {
   }
 }
 
-export default FilterGroup;
+const mapStateToProps = state => ({
+  variableTypes: getVariableTypes(state),
+});
+
+export { FilterGroup };
+
+export default compose(
+  connect(mapStateToProps),
+)(FilterGroup);

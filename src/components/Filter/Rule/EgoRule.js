@@ -33,7 +33,10 @@ class EgoRule extends PureComponent {
     options: PropTypes.shape({
       attribute: PropTypes.string,
       operator: PropTypes.string,
-      value: PropTypes.string,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
     }),
     nodeAttributes: PropTypes.array,
     className: PropTypes.string,

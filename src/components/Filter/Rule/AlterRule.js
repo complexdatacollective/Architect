@@ -34,7 +34,10 @@ class AlterRule extends PureComponent {
       type: PropTypes.string,
       operator: PropTypes.string,
       attribute: PropTypes.string,
-      value: PropTypes.string,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
     }),
     nodeTypes: PropTypes.array,
     nodeAttributes: PropTypes.object,

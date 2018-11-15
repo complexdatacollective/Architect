@@ -34,7 +34,10 @@ class EdgeRule extends PureComponent {
       type: PropTypes.string,
       operator: PropTypes.string,
       attribute: PropTypes.string,
-      value: PropTypes.string,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
     }),
     edgeTypes: PropTypes.array,
     edgeAttributes: PropTypes.object,
