@@ -50,7 +50,7 @@ const mockFormConfiguration = {
       description: 'Human readable description',
       type: 'text',
       validation: [
-        { type: 'required', value: true },
+        { type: 'required' },
         { type: 'minLength', value: 1 },
         { type: 'maxLength', value: 24 },
       ],
