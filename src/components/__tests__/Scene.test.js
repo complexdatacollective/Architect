@@ -7,6 +7,7 @@ import { Scene } from '../Scene';
 const mockProps = {
   protocolMeta: {},
   location: {},
+  handleClickStart: () => {},
 };
 
 describe('<Scene />', () => {

@@ -4,6 +4,7 @@ exports[`<Scene /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Scene
+    handleClickStart={[Function]}
     location={Object {}}
     protocolMeta={Object {}}
   />,
@@ -32,18 +33,15 @@ ShallowWrapper {
           className="scene__brand"
           src="network-canvas-brand.svg"
         />,
-        <NavLink
-          activeClassName="active"
-          aria-current="page"
+        <div
           className="scene__home"
-          exact={true}
-          to="/"
+          onClick={[Function]}
         >
           <img
             alt=""
             src="architect-logo-icon.svg"
           />
-        </NavLink>,
+        </div>,
         <Flipper
           applyTransformOrigin={true}
           element="div"
@@ -127,17 +125,14 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "function",
+        "nodeType": "host",
         "props": Object {
-          "activeClassName": "active",
-          "aria-current": "page",
           "children": <img
             alt=""
             src="architect-logo-icon.svg"
           />,
           "className": "scene__home",
-          "exact": true,
-          "to": "/",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Object {
@@ -152,7 +147,7 @@ ShallowWrapper {
           "rendered": null,
           "type": "img",
         },
-        "type": [Function],
+        "type": "div",
       },
       Object {
         "instance": null,
@@ -355,18 +350,15 @@ ShallowWrapper {
             className="scene__brand"
             src="network-canvas-brand.svg"
           />,
-          <NavLink
-            activeClassName="active"
-            aria-current="page"
+          <div
             className="scene__home"
-            exact={true}
-            to="/"
+            onClick={[Function]}
           >
             <img
               alt=""
               src="architect-logo-icon.svg"
             />
-          </NavLink>,
+          </div>,
           <Flipper
             applyTransformOrigin={true}
             element="div"
@@ -450,17 +442,14 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
+          "nodeType": "host",
           "props": Object {
-            "activeClassName": "active",
-            "aria-current": "page",
             "children": <img
               alt=""
               src="architect-logo-icon.svg"
             />,
             "className": "scene__home",
-            "exact": true,
-            "to": "/",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Object {
@@ -475,7 +464,7 @@ ShallowWrapper {
             "rendered": null,
             "type": "img",
           },
-          "type": [Function],
+          "type": "div",
         },
         Object {
           "instance": null,
@@ -685,6 +674,7 @@ exports[`<Scene /> shows protocol when there is one 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Scene
+    handleClickStart={[Function]}
     location={Object {}}
     protocolMeta={
       Object {
@@ -717,18 +707,15 @@ ShallowWrapper {
           className="scene__brand"
           src="network-canvas-brand.svg"
         />,
-        <NavLink
-          activeClassName="active"
-          aria-current="page"
+        <div
           className="scene__home"
-          exact={true}
-          to="/"
+          onClick={[Function]}
         >
           <img
             alt=""
             src="architect-logo-icon.svg"
           />
-        </NavLink>,
+        </div>,
         <Flipper
           applyTransformOrigin={true}
           element="div"
@@ -812,17 +799,14 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "function",
+        "nodeType": "host",
         "props": Object {
-          "activeClassName": "active",
-          "aria-current": "page",
           "children": <img
             alt=""
             src="architect-logo-icon.svg"
           />,
           "className": "scene__home",
-          "exact": true,
-          "to": "/",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": Object {
@@ -837,7 +821,7 @@ ShallowWrapper {
           "rendered": null,
           "type": "img",
         },
-        "type": [Function],
+        "type": "div",
       },
       Object {
         "instance": null,
@@ -1040,18 +1024,15 @@ ShallowWrapper {
             className="scene__brand"
             src="network-canvas-brand.svg"
           />,
-          <NavLink
-            activeClassName="active"
-            aria-current="page"
+          <div
             className="scene__home"
-            exact={true}
-            to="/"
+            onClick={[Function]}
           >
             <img
               alt=""
               src="architect-logo-icon.svg"
             />
-          </NavLink>,
+          </div>,
           <Flipper
             applyTransformOrigin={true}
             element="div"
@@ -1135,17 +1116,14 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "function",
+          "nodeType": "host",
           "props": Object {
-            "activeClassName": "active",
-            "aria-current": "page",
             "children": <img
               alt=""
               src="architect-logo-icon.svg"
             />,
             "className": "scene__home",
-            "exact": true,
-            "to": "/",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": Object {
@@ -1160,7 +1138,7 @@ ShallowWrapper {
             "rendered": null,
             "type": "img",
           },
-          "type": [Function],
+          "type": "div",
         },
         Object {
           "instance": null,
