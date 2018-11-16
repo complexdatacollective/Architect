@@ -177,6 +177,12 @@
         "label": "Professional",
         "color": "edge-color-seq-2",
         "variables": {
+          "7939c453c8c65765f704f73520eb62fef22db972": {
+            "label": "contact_freq",
+            "name": "Contact frequency discription",
+            "description": "Contact frequency description.",
+            "type": "text"
+          }
         }
       }
     }

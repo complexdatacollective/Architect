@@ -2,9 +2,10 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Filter from '../Filter';
+import { Filter } from '../Filter';
 
 const mockProps = {
+  variableTypes: {},
 };
 
 const makeSubject = props =>

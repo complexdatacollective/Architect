@@ -1,1 +1,1 @@
-export { default } from './FilterGroup';
+export { default, FilterGroup as Filter } from './FilterGroup';

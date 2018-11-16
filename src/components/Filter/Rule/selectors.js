@@ -15,7 +15,7 @@ const validTypes = [
   'datetime',
   'boolean',
   'categorical',
-  'location',
+  'ordinal',
 ];
 
 export const getVariableOptions = type =>

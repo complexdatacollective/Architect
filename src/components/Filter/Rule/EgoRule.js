@@ -3,24 +3,14 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, includes, find } from 'lodash';
+import { toPairs, includes, find, get } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
 import { getVariableOptions } from './selectors';
 import { getVariableRegistry } from '../../../selectors/protocol';
-
-const operators = toPairs({
-  EXACTLY: 'is Exactly',
-  EXISTS: 'Exists',
-  NOT_EXISTS: 'Not Exists',
-  NOT: 'is Not',
-  GREATER_THAN: 'is Greater Than',
-  GREATER_THAN_OR_EQUAL: 'is Greater Than or Exactly',
-  LESS_THAN: 'is Less Than',
-  LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
-});
+import { getOperatorsForType } from './operators';
 
 class EgoRule extends PureComponent {
   static propTypes = {
@@ -41,6 +31,7 @@ class EgoRule extends PureComponent {
     nodeAttributes: PropTypes.array,
     className: PropTypes.string,
     hasPersonType: PropTypes.bool,
+    valueInputType: PropTypes.string,
   };
 
   static defaultProps = {
@@ -53,6 +44,7 @@ class EgoRule extends PureComponent {
     onDeleteRule: () => {},
     nodeAttributes: [],
     className: '',
+    valueInputType: null,
     hasPersonType: false,
   };
 
@@ -73,6 +65,7 @@ class EgoRule extends PureComponent {
       onDeleteRule,
       hasPersonType,
       options: { operator, attribute, value },
+      valueInputType,
       className,
     } = this.props;
 
@@ -92,7 +85,7 @@ class EgoRule extends PureComponent {
             { this.showOperator() && (
               <div className="rule__option rule__option--operator">
                 <DropDown
-                  options={operators}
+                  options={getOperatorsForType(valueInputType)}
                   value={operator}
                   placeholder="{rule}"
                   onChange={newValue => onUpdateRule(newValue, id, 'operator')}
@@ -103,6 +96,7 @@ class EgoRule extends PureComponent {
               <div className="rule__option rule__option--value">
                 <Input
                   value={value}
+                  type={valueInputType}
                   onChange={newValue => onUpdateRule(newValue, id, 'value')}
                 />
               </div>
@@ -118,14 +112,18 @@ class EgoRule extends PureComponent {
 
 
 // TODO: person is an implicitly required node type
-function mapStateToProps(state) {
+function mapStateToProps(state, { options }) {
   const variableRegistry = getVariableRegistry(state);
   const personType = find(toPairs(variableRegistry.node), ([, node]) => node.name === 'person');
   const personId = personType && personType[0];
+  const valueInputType = options ?
+    get(variableRegistry.node, [personId, 'variables', options.attribute, 'type']) :
+    undefined;
 
   return {
     hasPersonType: !!personType,
     nodeAttributes: getVariableOptions(variableRegistry.node)[personId],
+    valueInputType,
   };
 }
 

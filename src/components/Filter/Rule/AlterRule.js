@@ -31,7 +31,7 @@ class AlterRule extends PureComponent {
     }),
     nodeTypes: PropTypes.array,
     nodeAttributes: PropTypes.object,
-    valueInputType: PropTypes.string.isRequired,
+    valueInputType: PropTypes.string,
     className: PropTypes.string,
   };
 
@@ -46,6 +46,7 @@ class AlterRule extends PureComponent {
     onDeleteRule: () => {},
     nodeTypes: [],
     nodeAttributes: {},
+    valueInputType: null,
     className: '',
   };
 
