@@ -57,7 +57,6 @@ class ContentGrid extends Component {
     return (
       <Guidance contentId="guidance.editor.content_items">
         <div className="stage-editor-section">
-
           <h2>Content Boxes</h2>
           <p>
             Use this section to configure up to three content boxes, containing images, video,
@@ -77,10 +76,14 @@ class ContentGrid extends Component {
             />
           </div>
 
-          { spareCapacity > 0 &&
+          { spareCapacity > 0 ?
             <NewButton
               onClick={this.handleCreateItem}
-            />
+            /> :
+            <p>
+              <strong>Information screen full</strong>. No more room for additional content boxes.
+              Add content to existing boxes, or make them smaller to free up space.
+            </p>
           }
         </div>
       </Guidance>
