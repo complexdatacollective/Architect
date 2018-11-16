@@ -56,13 +56,29 @@ class ItemEditor extends Component {
       <div className={cx('content-grid-editor', { 'content-grid-editor--show': show })}>
         <div className="content-grid-editor__content" onClick={e => e.stopPropagation()}>
           <div id={getFieldId(`${name}.size`)} data-name="Display size" />
+          <h4>Display Size</h4>
+          <p>
+            Your information screen has limited space for different sized content boxes. You have a
+            budget of 4 units of space, and each box size costs as follows:
+          </p>
+          <ul>
+            <li>Large: 4 units</li>
+            <li>Medium: 2 units</li>
+            <li>Small: 1 unit</li>
+          </ul>
+          <p>
+            Since an information screen can only show so much information, you must choose the size
+            of your content boxes carefully. Remember that you can display multiple information
+            screens consecutively, if needed.
+          </p>
           <ValidatedField
             component={Mode}
             name={`${name}.size`}
-            label="Display size"
+            label=""
             options={this.options}
             validation={{ required: true }}
           />
+          <br />
           <div id={getFieldId(`${name}.content`)} data-name={`${type} content`} />
           <ValidatedField
             label="Content"
