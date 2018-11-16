@@ -60,12 +60,12 @@ export default function reducer(state = initialState, action = {}) {
     case exportProtocolActionTypes.EXPORT_PROTOCOL_SUCCESS:
       return {
         ...state,
-        lastSaved: new Date().getTime(),
+        lastSaved: new Date().toJSON(),
       };
     case PROTOCOL_CHANGED:
       return {
         ...state,
-        lastChanged: new Date().getTime(),
+        lastChanged: new Date().toJSON(),
       };
     case RESET_SESSION:
       return {
