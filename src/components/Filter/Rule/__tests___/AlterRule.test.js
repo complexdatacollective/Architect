@@ -15,6 +15,7 @@ const mockProps = {
     value: '',
   },
   nodeTypes: ['foo', 'bar'],
+  valueInputType: undefined,
   nodeAttributes: {
     foo: ['baz', 'buzz'],
   },

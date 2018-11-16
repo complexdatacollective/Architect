@@ -3,24 +3,14 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, has, includes, map } from 'lodash';
+import { has, includes, map, get } from 'lodash';
 import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
 import { getVariableRegistry } from '../../../selectors/protocol';
 import { getVariableOptions } from './selectors';
-
-const operators = toPairs({
-  EXACTLY: 'is Exactly',
-  EXISTS: 'Exists',
-  NOT_EXISTS: 'Not Exists',
-  NOT: 'is Not',
-  GREATER_THAN: 'is Greater Than',
-  GREATER_THAN_OR_EQUAL: 'is Greater Than or Exactly',
-  LESS_THAN: 'is Less Than',
-  LESS_THAN_OR_EQUAL: 'is Less Than or Exactly',
-});
+import { getOperatorsForType } from './operators';
 
 class EdgeRule extends PureComponent {
   static propTypes = {
@@ -34,10 +24,14 @@ class EdgeRule extends PureComponent {
       type: PropTypes.string,
       operator: PropTypes.string,
       attribute: PropTypes.string,
-      value: PropTypes.string,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
     }),
     edgeTypes: PropTypes.array,
     edgeAttributes: PropTypes.object,
+    valueInputType: PropTypes.string,
     className: PropTypes.string,
   };
 
@@ -52,6 +46,7 @@ class EdgeRule extends PureComponent {
     edgeAttributes: {},
     onUpdateRule: () => {},
     onDeleteRule: () => {},
+    valueInputType: null,
     className: '',
   };
 
@@ -76,6 +71,7 @@ class EdgeRule extends PureComponent {
       onUpdateRule,
       onDeleteRule,
       options: { type, operator, attribute, value },
+      valueInputType,
       className,
     } = this.props;
 
@@ -104,7 +100,7 @@ class EdgeRule extends PureComponent {
           { this.showOperator() && (
             <div className="rule__option rule__option--operator">
               <DropDown
-                options={operators}
+                options={getOperatorsForType(valueInputType)}
                 value={operator}
                 placeholder="{rule}"
                 onChange={newValue => onUpdateRule(newValue, id, 'operator')}
@@ -115,6 +111,7 @@ class EdgeRule extends PureComponent {
             <div className="rule__option rule__option--value">
               <Input
                 value={value}
+                type={valueInputType}
                 onChange={newValue => onUpdateRule(newValue, id, 'value')}
               />
             </div>
@@ -126,13 +123,17 @@ class EdgeRule extends PureComponent {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { options }) {
   const variableRegistry = getVariableRegistry(state);
   const edgeTypes = map(variableRegistry.edge, (edge, edgeId) => [edgeId, edge.name]);
+  const valueInputType = options ?
+    get(variableRegistry.node, [options.type, 'variables', options.attribute, 'type']) :
+    undefined;
 
   return {
     edgeTypes,
     edgeAttributes: getVariableOptions(variableRegistry.edge),
+    valueInputType,
   };
 }
 

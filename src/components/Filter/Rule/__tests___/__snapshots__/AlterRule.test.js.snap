@@ -30,6 +30,7 @@ ShallowWrapper {
         "value": "",
       }
     }
+    valueInputType={null}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

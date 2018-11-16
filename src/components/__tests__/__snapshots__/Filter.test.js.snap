@@ -11,6 +11,7 @@ ShallowWrapper {
       }
     }
     onChange={[Function]}
+    variableTypes={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
