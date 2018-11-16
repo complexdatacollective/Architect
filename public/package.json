@@ -13,7 +13,7 @@
   "main": "electron-starter.js",
   "dependencies": {
     "electron-log": "^2.2.7",
-    "electron-updater": "^3.1.1"
+    "electron-updater": "^3.2.3"
   },
   "browser": {
      "canvas": false,
