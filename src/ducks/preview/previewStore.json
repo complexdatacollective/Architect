@@ -41,7 +41,8 @@
   "protocols": [
   ],
   "deviceSettings": {
-    "interfaceScale": 1
+    "interfaceScale": 1,
+    "useFullScreenForms": false
   },
   "modals": [],
   "dialogs": {

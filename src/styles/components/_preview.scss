@@ -13,11 +13,25 @@
   --color-modal-shadow: rgba(20, 0, 0, .2);
   --background: var(--color-navy-taupe);
   --text: var(--color-white);
-  --input-background: var(--color-platinum--dark);
   --input-label: var(--color-charcoal);
   --text-light: var(--color-white);
   --text-dark: var(--color-charcoal);
   --background-dark: var(--color-navy-taupe);
+  --body-font-family: #{$netcanvas-font-stack};
+  // Inputs
+  --input-background: #{transparentize(rgb(0, 0, 0), .67)};
+  --input-label: #{transparentize(rgb(255, 255, 255), 0)};
+  --input-placeholder: #{transparentize(rgb(255, 255, 255), .75)};
+
+  --modal-overlay: #{transparentize(rgb(0, 0, 0), .2)};
+  --modal-window-box-shadow: #{transparentize(rgb(22, 21, 43), .25)};
+
+  --panel-selected-node-bg-color: #{transparentize(rgb(255, 255, 255), .95)};
+
+  --panel-bg-muted: #36315f; //sass-lint:disable-line no-color-literals
+
+  --menu-item-hover: #{darken(rgb(0, 201, 162), 5%)};
+  --menu-item-hover-settings: #{darken(rgb(107, 114, 236), 5%)};
 
   @import '../../network-canvas/src/styles/main';
 
