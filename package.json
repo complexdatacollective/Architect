@@ -95,6 +95,7 @@
         "i": "^0.3.6",
         "icon-gen": "^1.2.3",
         "jest": "^23.6.0",
+        "jest-date-mock": "^1.0.5",
         "jsdoc": "^3.4.3",
         "jsdoc-babel": "^0.3.0",
         "json-loader": "^0.5.7",
@@ -208,6 +209,7 @@
             "!src/ui/**"
         ],
         "setupFiles": [
+            "jest-date-mock",
             "<rootDir>/config/polyfills.js",
             "<rootDir>/config/jest/polyfills.js",
             "<rootDir>/config/jest/enzyme.js",

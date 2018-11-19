@@ -44,8 +44,8 @@ ProtocolControlBar.defaultProps = {
 
 const mapStateToProps = state => ({
   hasUnsavedChanges: (
-    new Date(state.session.lastChanged) >
-    new Date(state.session.lastSaved)
+    state.session.lastChanged >
+    state.session.lastSaved
   ),
   hasAnyStages: getProtocol(state).stages.length > 0,
 });

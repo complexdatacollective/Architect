@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
 import { createStore, applyMiddleware } from 'redux';
+import { advanceTo } from 'jest-date-mock';
 import thunk from 'redux-thunk';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as importActionCreators } from '../import';
@@ -61,11 +62,12 @@ describe('protocols', () => {
   });
 
   describe('saveAndExportProtocol()', () => {
+    advanceTo(new Date(2017, 5, 27, 0, 0, 0));
     it('triggers save and export actions', () =>
       store.dispatch(actionCreators.saveAndExportProtocol())
         .then(() => {
           expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/SAVE' }]);
-          expect(log.mock.calls[1]).toEqual([{ destinationPath: '/dev/null/fake/user/protocol/path', protocol: { name: 'mock protocol' }, type: 'PROTOCOLS/SAVE_SUCCESS' }]);
+          expect(log.mock.calls[1]).toEqual([{ destinationPath: '/dev/null/fake/user/protocol/path', protocol: { lastModified: new Date().toJSON(), name: 'mock protocol' }, type: 'PROTOCOLS/SAVE_SUCCESS' }]);
           expect(log.mock.calls[2]).toEqual([{ type: 'PROTOCOLS/EXPORT' }]);
           expect(log.mock.calls[3]).toEqual([{ filePath: '', type: 'PROTOCOLS/EXPORT_SUCCESS' }]);
         }),
