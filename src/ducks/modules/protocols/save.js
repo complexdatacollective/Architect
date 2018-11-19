@@ -27,6 +27,8 @@ const saveProtocolThunk = () =>
     const meta = find(state.protocols, ['id', activeProtocolId]);
     const protocol = getProtocol(state);
 
+    protocol.lastModified = new Date().toJSON();
+
     if (!meta) {
       // Always return a promise
       return Promise.resolve(dispatch(saveProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`)));
