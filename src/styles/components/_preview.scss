@@ -19,14 +19,14 @@
   --background-dark: var(--color-navy-taupe);
   --body-font-family: #{$netcanvas-font-stack};
   // Inputs
-  --input-background: #{transparentize(rgb(0, 0, 0), 0.67)};
+  --input-background: #{transparentize(rgb(0, 0, 0), .67)};
   --input-label: #{transparentize(rgb(255, 255, 255), 0)};
-  --input-placeholder: #{transparentize(rgb(255, 255, 255), 0.75)};
+  --input-placeholder: #{transparentize(rgb(255, 255, 255), .75)};
 
-  --modal-overlay: #{transparentize(rgb(0, 0, 0), 0.2)};
-  --modal-window-box-shadow: #{transparentize(rgb(22, 21, 43), 0.25)};
+  --modal-overlay: #{transparentize(rgb(0, 0, 0), .2)};
+  --modal-window-box-shadow: #{transparentize(rgb(22, 21, 43), .25)};
 
-  --panel-selected-node-bg-color: #{transparentize(rgb(255, 255, 255), 0.95)};
+  --panel-selected-node-bg-color: #{transparentize(rgb(255, 255, 255), .95)};
 
   --panel-bg-muted: #36315f; //sass-lint:disable-line no-color-literals
 
