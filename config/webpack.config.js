@@ -93,12 +93,12 @@ const getStyleLoaders = (preProcessor) => {
                * If file exists in the Network Canvas submodule, update path to
                * resolve there relatively from Architect.
                */
-              const ncPath = path.resolve(`src/network-canvas/src/styles/${url}`);
-              const ncUrl = path.normalize(`../network-canvas/src/styles/${url}`);
+              const ncPath = path.resolve('src', 'network-canvas', 'src', 'styles', url);
+              const ncCSSPath = `../network-canvas/src/styles/${url}`;
 
               try {
                 fs.accessSync(ncPath, fs.constants.R_OK);
-                return ncUrl;
+                return ncCSSPath;
               } catch (err) {
                 return url;
               }
