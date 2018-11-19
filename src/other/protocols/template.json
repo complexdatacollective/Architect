@@ -1,6 +1,5 @@
 {
   "name": "Protocol",
-  "version": "1.0.0",
   "variableRegistry": {
     "node": {
       "d39a47507bbe27c2a7948861847f3607eda8e1be": {
