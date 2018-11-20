@@ -38,9 +38,9 @@ const mapStateToItemProps = (state, { field, fields: { name: fieldsName }, meta:
   form,
 });
 
-const mapDispatchToItemProps = dispatch => ({
+const mapDispatchToItemProps = (dispatch, { meta: { form } }) => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
-  change: bindActionCreators(change, dispatch),
+  resetField: fieldName => dispatch(change(form, fieldName, null)),
 });
 
 const Item = compose(
@@ -56,6 +56,14 @@ const Item = compose(
           confirmLabel: 'Remove item',
         });
       },
+    handleChange: ({ properties, field, resetField }) =>
+      (index) => {
+        // Reset any fields after this one in the property index
+        properties.slice(index + 1).forEach(
+          ({ fieldName: propertyFieldName }) =>
+            resetField(`${field}.${propertyFieldName}`),
+        );
+      },
   }),
   SortableElement,
 )(
@@ -66,7 +74,7 @@ const Item = compose(
     rowValues,
     allValues,
     handleDelete,
-    ...props
+    handleChange,
   }) => (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-control">
@@ -75,22 +83,16 @@ const Item = compose(
 
       <div className="form-fields-multi-select__rule-options">
         {properties.map(
-          property => (
-            <div className="form-fields-multi-select__rule-option" key={property.fieldName}>
+          ({ fieldName, ...rest }, index) => (
+            <div className="form-fields-multi-select__rule-option" key={fieldName}>
               <ValidatedField
                 component={Select}
-                selectOptionComponent={property.selectOptionComponent}
-                name={`${field}.${property.fieldName}`}
-                options={options(property.fieldName, rowValues, allValues)}
+                name={`${field}.${fieldName}`}
+                options={options(fieldName, rowValues, allValues)}
                 validation={{ required: true }}
                 placeholder="&mdash; Select &mdash;"
-                onChange={() => {
-                  // Reset the value of the second select when the first one changes.
-                  if (`${property.fieldName}` === 'variable') {
-                    props.change(props.form, `${field}.component`, null);
-                  }
-                }
-                }
+                onChange={() => handleChange(index)}
+                {...rest}
               />
             </div>
           ),
