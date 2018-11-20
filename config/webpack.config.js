@@ -94,7 +94,8 @@ const getStyleLoaders = (preProcessor) => {
                * resolve there relatively from Architect.
                */
               const ncPath = path.resolve(`src/network-canvas/src/styles/${url}`);
-              const ncUrl = path.normalize(`../network-canvas/src/styles/${url}`);
+              // normalize is properly for paths not urls, `replace` ensures it works on windows too
+              const ncUrl = path.normalize(`../network-canvas/src/styles/${url}`).replace(/\\/g, '/');
 
               try {
                 fs.accessSync(ncPath, fs.constants.R_OK);
