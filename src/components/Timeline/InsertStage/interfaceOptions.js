@@ -9,6 +9,13 @@ export default [
     },
   },
   {
+    type: 'NameGeneratorList',
+    guidance: {
+      title: 'Name Generator Roster List',
+      description: (<p>{''}</p>),
+    },
+  },
+  {
     type: 'Sociogram',
     guidance: {
       title: 'Sociogram',
