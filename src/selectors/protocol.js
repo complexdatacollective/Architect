@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { createSelector } from 'reselect';
-import { find } from 'lodash';
+import { find, reduce } from 'lodash';
 
 const propStageId = (_, props) => props.stageId;
 const activeProtocolId = state => state.session.activeProtocol;
@@ -25,4 +25,18 @@ export const makeGetStage = () =>
 export const getVariableRegistry = createSelector(
   getProtocol,
   protocol => protocol.variableRegistry,
+);
+
+export const getExternalDataSources = createSelector(
+  getProtocol,
+  protocol =>
+    reduce(
+      protocol.externalData,
+      (memo, dataSource, name) => {
+        if (!Object.prototype.hasOwnProperty.call(dataSource, 'nodes')) { return memo; }
+
+        return [...memo, name];
+      },
+      [],
+    ),
 );
