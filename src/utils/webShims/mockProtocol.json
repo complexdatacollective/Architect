@@ -191,39 +191,45 @@
     "previousInterview": {
       "nodes": [
         {
-          "uid": "previous_1",
-          "type": "person",
-          "name": "Anita",
-          "nickname": "Annie",
-          "age": "23"
+          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+          "attributes": {
+            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Anita",
+            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Annie",
+            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "23"
+          }
         },
         {
-          "uid": "previous_2",
-          "type": "person",
-          "name": "Barry",
-          "nickname": "Baz",
-          "age": "23"
+          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+          "attributes": {
+            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Barry",
+            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Baz",
+            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "23"
+          }
         },
         {
-          "uid": "previous_3",
-          "type": "person",
-          "name": "Carlito",
-          "nickname": "Carl",
-          "age": "23"
+          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+          "attributes": {
+            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Carlito",
+            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Carl",
+            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "23"
+          }
         },
         {
-          "uid": "previous_4",
-          "type": "person",
-          "name": "Dee",
-          "nickname": "Dee",
-          "age": "23"
+          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+          "attributes": {
+            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Dee",
+            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Dee",
+            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "23"
+          }
         },
         {
-          "uid": "previous_5",
-          "type": "person",
-          "name": "Eugine",
-          "nickname": "Eu",
-          "age": "23"
+          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+          "attributes": {
+            "type": "person",
+            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Eugine",
+            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Eu",
+            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "23"
+          }
         }
       ]
     }

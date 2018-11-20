@@ -8,6 +8,8 @@ const activeProtocolId = state => state.session.activeProtocol;
 const protocolsMeta = state => state.protocols;
 
 export const getProtocol = state => state.protocol.present;
+export const getExternalData = state => state.protocol.present.externalData;
+export const getVariableRegistry = state => state.protocol.present.variableRegistry;
 
 export const getActiveProtocolMeta = createSelector(
   protocolsMeta,
@@ -22,16 +24,11 @@ export const makeGetStage = () =>
     (protocol, stageId) => find(protocol.stages, ['id', stageId]),
   );
 
-export const getVariableRegistry = createSelector(
-  getProtocol,
-  protocol => protocol.variableRegistry,
-);
-
 export const getExternalDataSources = createSelector(
-  getProtocol,
-  protocol =>
+  getExternalData,
+  externalData =>
     reduce(
-      protocol.externalData,
+      externalData,
       (memo, dataSource, name) => {
         if (!Object.prototype.hasOwnProperty.call(dataSource, 'nodes')) { return memo; }
 
@@ -40,3 +37,4 @@ export const getExternalDataSources = createSelector(
       [],
     ),
 );
+
