@@ -89,6 +89,7 @@ class Select extends PureComponent {
               input.onBlur(input.value);
             }
           }}
+          blurInputOnSelect={false}
           {...rest}
         >
           {children}
