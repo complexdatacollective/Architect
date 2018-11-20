@@ -5,6 +5,14 @@ import cx from 'classnames';
 
 const { Option } = ReactSelectComponents;
 
+const getValue = (options, value) => {
+  const foundValue = options.find(option => option.value === value);
+
+  if (!foundValue) { return null; }
+
+  return foundValue;
+};
+
 const DefaultSelectItem = props => (
   <Option
     {...props}
@@ -36,20 +44,23 @@ class Select extends PureComponent {
     meta: { invalid: false, error: null, touched: false },
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { visited: false };
+  get value() {
+    return getValue(this.props.options, this.props.input.value);
   }
+
+  handleChange = option =>
+    this.props.input.onChange(option.value);
 
   render() {
     const {
       className,
-      input,
+
+      input: { onBlur, ...input },
       children,
       options,
       selectOptionComponent,
       label,
-      meta: { invalid, error },
+      meta: { invalid, error, visited },
       ...rest
     } = this.props;
 
@@ -57,15 +68,6 @@ class Select extends PureComponent {
       'form-fields-select',
       className,
     );
-
-    const getValue = (opts, val) => {
-      const foundValue = opts.find(o => o.value === val);
-      if (!foundValue) {
-        return null;
-      }
-
-      return opts.find(o => o.value === val);
-    };
 
     return (
       <div className={componentClasses}>
@@ -77,13 +79,11 @@ class Select extends PureComponent {
           classNamePrefix="form-fields-select"
           {...input}
           options={options}
-          value={getValue(this.props.options, this.props.input.value)}
+          value={this.value}
           components={{ Option: selectOptionComponent }}
           styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
           menuPortalTarget={document.body}
-          onChange={(e) => {
-            this.props.input.onChange(e.value);
-          }}
+          onChange={this.handleChange}
           onBlur={() => {
             if (input.onBlur) {
               input.onBlur(input.value);
@@ -94,7 +94,7 @@ class Select extends PureComponent {
         >
           {children}
         </ReactSelect>
-        {this.state.visited && invalid && <p className="form-fields-select__error">{error}</p>}
+        {visited && invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );
   }

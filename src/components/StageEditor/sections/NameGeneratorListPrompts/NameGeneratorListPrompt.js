@@ -1,14 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { get, uniq, keys } from 'lodash';
+import { get, uniq, keys, map } from 'lodash';
 import { ValidatedField } from '../../../Form';
-import TextArea from '../../../../ui/components/Fields/TextArea';
+import { TextArea, Text } from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
+import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
 import { Item, Section } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
+
+const optionGetter = (externalDataPropertyOptions) => {
+  return (property, rowValues, allValues) => {
+    const variable = get(rowValues, 'variable');
+
+    const used = map(allValues, 'variable');
+
+    return externalDataPropertyOptions.map(
+      option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
+    );
+  };
+};
 
 const NameGeneratorPrompt = ({
   handleValidateAttributes,
@@ -52,7 +65,7 @@ const NameGeneratorPrompt = ({
         validation={{ required: true }}
       />
     </Section>
-    <Section id={getFieldId(`${fieldId}.displayLabel`)} data-name="Display Label">
+    <Section id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt Display Label">
       <h3>Display Label</h3>
       <ValidatedField
         component={Select}
@@ -62,6 +75,27 @@ const NameGeneratorPrompt = ({
         validation={{ required: true }}
       />
     </Section>
+    <Section
+      id={getFieldId(`${fieldId}.cardOptions.additionalProperties`)}
+      data-name="Additional Display Properties"
+    >
+      <h3>Additional Display Properties</h3>
+      <MultiSelect
+        name={`${fieldId}.additionalProperties`}
+        properties={[
+          {
+            fieldName: 'variable',
+          },
+          {
+            fieldName: 'label',
+            component: Text,
+            placeholder: '',
+          },
+        ]}
+        options={optionGetter(externalDataPropertyOptions)}
+      />
+    </Section>
+
   </Item>
 );
 
@@ -119,6 +153,7 @@ const mapStateToProps = (state, { fieldId, form, nodeType }) => {
   );
 
   return {
+    dataSource,
     externalDataPropertyOptions,
   };
 };
