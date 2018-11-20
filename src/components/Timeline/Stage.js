@@ -18,12 +18,11 @@ const EditStageButton = Zoom(
     type,
     label,
   }) => (
-    <div className="timeline-stage__edit-stage">
+    <div className="timeline-stage__edit-stage" onClick={onEditStage}>
       <div className="timeline-stage__edit-stage-title">{label || '\u00A0'}</div>
       <div
         className="timeline-stage__screen"
         role="button"
-        onClick={onEditStage}
         tabIndex="0"
       >
         <div className="timeline-stage__screen-preview">
