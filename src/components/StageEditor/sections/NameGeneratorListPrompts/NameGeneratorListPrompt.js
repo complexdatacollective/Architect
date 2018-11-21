@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { get, uniq, keys, map } from 'lodash';
+import { compose } from 'recompose';
 import { ValidatedField } from '../../../Form';
 import { TextArea, Text } from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
@@ -9,64 +8,13 @@ import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
 import { Item, Row, Group } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
-import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
-
-/**
- * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
- * options depending on the value of `property`, `rowValues`, `allValues`.
- */
-const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
-  (property, rowValues, allValues) => {
-    const used = map(allValues, 'variable');
-
-    return externalDataPropertyOptions
-      .map(
-        option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
-      );
-  };
-
-/**
- * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
- * options depending on the value of `property`, `rowValues`, `allValues`.
- *
- * This optionGetter is for additionalProperties, and removes the item being used as the
- * displayLabel.
- */
-const getAdditionalPropertiesOptionGetter = (externalDataPropertyOptions, displayLabel) => {
-  const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
-    externalDataPropertyOptions,
-  );
-
-  return (property, rowValues, allValues) =>
-    externalPropertiesOptionGetter(property, rowValues, allValues)
-      .filter(({ value }) => value !== displayLabel);
-};
-
-/**
- * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
- * options depending on the value of `property`, `rowValues`, `allValues`
- *
- * This optionGetter is for sortOrder, and also defines value for a secondary direction property.
- */
-const getSortOrderOptionGetter = (externalDataPropertyOptions) => {
-  const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
-    externalDataPropertyOptions,
-  );
-
-  return (property, rowValues, allValues) => {
-    switch (property) {
-      case 'property':
-        return externalPropertiesOptionGetter(property, rowValues, allValues);
-      case 'direction':
-        return [
-          { value: 'desc', label: 'Descending' },
-          { value: 'asc', label: 'Ascending' },
-        ];
-      default:
-        return [];
-    }
-  };
-};
+import {
+  getExternalPropertiesOptionGetter,
+  getAdditionalPropertiesOptionGetter,
+  getSortOrderOptionGetter,
+} from './optionGetters';
+import withFieldValues from './withFieldValues';
+import withExternalDataPropertyOptions from './withExternalDataPropertyOptions';
 
 const NameGeneratorPrompt = ({
   handleValidateAttributes,
@@ -75,10 +23,12 @@ const NameGeneratorPrompt = ({
   nodeType,
   dataSources,
   dataSource,
-  displayLabel,
+  cardOptions,
   externalDataPropertyOptions,
   ...rest
 }) => {
+  const displayLabel = cardOptions && cardOptions.displayLabel;
+
   const additionalPropertiesOptions = getAdditionalPropertiesOptionGetter(
     externalDataPropertyOptions,
     displayLabel,
@@ -105,7 +55,6 @@ const NameGeneratorPrompt = ({
           id="additionalAttributes"
           nodeType={nodeType}
         />
-        <div id={getFieldId(`${fieldId}.dataSource`)} data-name="Prompt data-source" />
       </Row>
       <Row id={getFieldId(`${fieldId}.dataSource`)} data-name="Data source">
         <h3>Data-source</h3>
@@ -120,8 +69,9 @@ const NameGeneratorPrompt = ({
 
       { dataSource &&
         <Group>
-          <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt Display Label">
-            <h3>Display Label</h3>
+          <h3>Card options</h3>
+          <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt card display label">
+            <h4>Display Label</h4>
             <ValidatedField
               component={Select}
               name={`${fieldId}.cardOptions.displayLabel`}
@@ -132,11 +82,8 @@ const NameGeneratorPrompt = ({
           </Row>
 
           { displayLabel &&
-            <Row
-              id={getFieldId(`${fieldId}.cardOptions.additionalProperties`)}
-              data-name="Additional Display Properties"
-            >
-              <h3>Additional Display Properties</h3>
+            <Row>
+              <h4>Additional Display Properties</h4>
               <MultiSelect
                 name={`${fieldId}.cardOptions.additionalProperties`}
                 maxItems={externalDataPropertyOptions.length - 1}
@@ -159,11 +106,9 @@ const NameGeneratorPrompt = ({
 
       { dataSource && displayLabel && // we don't need display label, but lets go step-by-step
         <Group>
-          <Row
-            id={getFieldId(`${fieldId}.sortOptions.sortOrder`)}
-            data-name="sortOrder"
-          >
-            <h3>Sort Order</h3>
+          <h3>Sort options</h3>
+          <Row>
+            <h4>Sort Order</h4>
             <MultiSelect
               name={`${fieldId}.sortOptions.sortOrder`}
               maxItems={1}
@@ -174,11 +119,8 @@ const NameGeneratorPrompt = ({
               options={getSortOrderOptionGetter(externalDataPropertyOptions)}
             />
           </Row>
-          <Row
-            id={getFieldId(`${fieldId}.sortOptions.sortableProperties`)}
-            data-name="sortableProperties"
-          >
-            <h3>Sortable Properties</h3>
+          <Row>
+            <h4>Sortable Properties</h4>
             <MultiSelect
               name={`${fieldId}.sortOptions.sortableProperties`}
               maxItems={externalDataPropertyOptions.length}
@@ -199,32 +141,6 @@ const NameGeneratorPrompt = ({
   );
 };
 
-/**
- * cardOptions.displayLabel
- * cardOptions.additionalProperties
- * sortOptions.sortOrder
- * sortOptions.sortableProperties
- *
- * sortOptions don't seem to match the sort lib? check ref protocol:
- *
- * "sortOrder": [{
- *   "property": "6be95f85-c2d9-4daf-9de1-3939418af888",
- *   "direction": "asc"
- * }],
- * "sortableProperties": [
- *   {
- *     "label": "Pupil Name",
- *     "variable": "6be95f85-c2d9-4daf-9de1-3939418af888"
- *   },
- *   {
- *     "label": "Pupil Age",
- *     "variable": "c5fee926-855d-4419-b5bb-54e89010cea6"
- *   }
- * ]
- *
- * Update docs
- */
-
 NameGeneratorPrompt.propTypes = {
   fieldId: PropTypes.string.isRequired,
   form: PropTypes.shape({
@@ -242,43 +158,9 @@ NameGeneratorPrompt.defaultProps = {
   externalDataPropertyOptions: [],
 };
 
-// "nodes": [
-//   {
-//     "type": "4aebf73e-95e3-4fd1-95e7-237dcc4a4466",
-//     "attributes": {
-//       "6be95f85-c2d9-4daf-9de1-3939418af888": "Anita",
-//       "0ff25001-a2b8-46de-82a9-53143aa00d10": "Li",
-//       "0e75ec18-2cb1-4606-9f18-034d28b07c19": "Annie",
-//       "c5fee926-855d-4419-b5bb-54e89010cea6": 23
-//     }
-
-const mapStateToProps = (state, { fieldId, form, nodeType }) => {
-  if (!nodeType) { return {}; }
-
-  const { dataSource, cardOptions } = form.getValues(state, fieldId);
-  const displayLabel = cardOptions && cardOptions.displayLabel;
-  const externalData = get(getExternalData(state), dataSource, { nodes: [] });
-  const variableRegistry = getVariableRegistry(state);
-
-  const dataAttributes = externalData.nodes
-    .filter(node => node.type === nodeType)
-    .reduce((memo, node) => uniq([...memo, ...keys(node.attributes)]), []);
-
-  const externalDataPropertyOptions = dataAttributes.map(
-    attributeId => ({
-      // should we check it exists in registry? and omit if not
-      label: get(variableRegistry, ['node', nodeType, 'variables', attributeId, 'name'], attributeId),
-      value: attributeId,
-    }),
-  );
-
-  return {
-    dataSource,
-    displayLabel,
-    externalDataPropertyOptions,
-  };
-};
-
 export { NameGeneratorPrompt };
 
-export default connect(mapStateToProps)(NameGeneratorPrompt);
+export default compose(
+  withFieldValues(['dataSource', 'cardOptions']),
+  withExternalDataPropertyOptions,
+)(NameGeneratorPrompt);
