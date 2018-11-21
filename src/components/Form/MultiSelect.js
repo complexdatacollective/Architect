@@ -109,6 +109,7 @@ const Items = compose(
   defaultProps({
     lockAxis: 'y',
     useDragHandle: true,
+    maxItems: null,
   }),
   withProps(
     ({ fields }) => ({
@@ -117,7 +118,7 @@ const Items = compose(
   ),
   SortableContainer,
 )(
-  ({ fields, ...rest }) => (
+  ({ fields, maxItems, ...rest }) => (
     <React.Fragment>
       <div className="form-fields-multi-select">
         <div className="form-fields-multi-select__rules">
@@ -135,7 +136,7 @@ const Items = compose(
         </div>
       </div>
 
-      { true &&
+      { (!maxItems || fields.length < maxItems) &&
         <AddItem onClick={() => fields.push({ })} />
       }
     </React.Fragment>
