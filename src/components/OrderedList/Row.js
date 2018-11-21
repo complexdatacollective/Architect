@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Section = ({ children }) => (
-  <div className="list-section">
+const Row = ({ children }) => (
+  <div className="list-row">
     {children}
   </div>
 );
 
-Section.propTypes = {
+Row.propTypes = {
   children: PropTypes.node,
 };
 
-Section.defaultProps = {
+Row.defaultProps = {
   children: null,
 };
 
-export default Section;
+export default Row;

@@ -60,7 +60,7 @@ class Select extends PureComponent {
       options,
       selectOptionComponent,
       label,
-      meta: { invalid, error, visited },
+      meta: { invalid, error, touched },
       ...rest
     } = this.props;
 
@@ -84,17 +84,17 @@ class Select extends PureComponent {
           styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
-          onBlur={() => {
-            if (input.onBlur) {
-              input.onBlur(input.value);
-            }
-          }}
+          // ReactSelect has unusual onBlur that doesn't play nicely with redux-forms
+          // https://github.com/erikras/redux-form/issues/82#issuecomment-386108205
+          // Sending the old value on blur, and disabling blurInputOnSelect work in
+          // a round about way, and still allow us to use the `touched` property.
+          onBlur={() => onBlur(this.props.input.value)}
           blurInputOnSelect={false}
           {...rest}
         >
           {children}
         </ReactSelect>
-        {visited && invalid && <p className="form-fields-select__error">{error}</p>}
+        {touched && invalid && <p className="form-fields-select__error">{error}</p>}
       </div>
     );
   }

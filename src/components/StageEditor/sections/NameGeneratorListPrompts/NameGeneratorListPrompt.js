@@ -7,7 +7,7 @@ import { TextArea, Text } from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
 import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
-import { Item, Section } from '../../../OrderedList';
+import { Item, Row, Group } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
 
@@ -78,118 +78,126 @@ const NameGeneratorPrompt = ({
   displayLabel,
   externalDataPropertyOptions,
   ...rest
-}) => (
-  <Item {...rest}>
-    <Section>
-      <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
-      <h3>Text for Prompt</h3>
-      <ValidatedField
-        name={`${fieldId}.text`}
-        component={TextArea}
-        label=""
-        placeholder="Enter text for the prompt here"
-        validation={{ required: true }}
-      />
-    </Section>
-    <Section>
-      <div id={getFieldId(`${fieldId}.additionalAttributes`)} data-name="Prompt additional attributes" />
-      <h3>Additional attributes</h3>
-      <AttributesTable
-        name={`${fieldId}.additionalAttributes`}
-        id="additionalAttributes"
-        nodeType={nodeType}
-      />
-      <div id={getFieldId(`${fieldId}.dataSource`)} data-name="Prompt data-source" />
-    </Section>
-    <Section id={getFieldId(`${fieldId}.dataSource`)} data-name="Data source">
-      <h3>Data-source</h3>
-      <ValidatedField
-        component={Select}
-        name={`${fieldId}.dataSource`}
-        id="dataSource"
-        options={dataSources}
-        validation={{ required: true }}
-      />
-    </Section>
+}) => {
+  const additionalPropertiesOptions = getAdditionalPropertiesOptionGetter(
+    externalDataPropertyOptions,
+    displayLabel,
+  );
 
-    { dataSource &&
-      <Section id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt Display Label">
-        <h3>Display Label</h3>
+  return (
+    <Item {...rest}>
+      <Row>
+        <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
+        <h3>Text for Prompt</h3>
         <ValidatedField
-          component={Select}
-          name={`${fieldId}.cardOptions.displayLabel`}
-          id="displayLabel"
-          options={externalDataPropertyOptions}
+          name={`${fieldId}.text`}
+          component={TextArea}
+          label=""
+          placeholder="Enter text for the prompt here"
           validation={{ required: true }}
         />
-      </Section>
-    }
-
-    { displayLabel &&
-      <Section
-        id={getFieldId(`${fieldId}.cardOptions.additionalProperties`)}
-        data-name="Additional Display Properties"
-      >
-        <h3>Additional Display Properties</h3>
-        <MultiSelect
-          name={`${fieldId}.cardOptions.additionalProperties`}
-          maxItems={externalDataPropertyOptions.length - 1}
-          properties={[
-            {
-              fieldName: 'variable',
-            },
-            {
-              fieldName: 'label',
-              component: Text,
-              placeholder: '',
-            },
-          ]}
-          options={getAdditionalPropertiesOptionGetter(externalDataPropertyOptions, displayLabel)}
+      </Row>
+      <Row>
+        <div id={getFieldId(`${fieldId}.additionalAttributes`)} data-name="Prompt additional attributes" />
+        <h3>Additional attributes</h3>
+        <AttributesTable
+          name={`${fieldId}.additionalAttributes`}
+          id="additionalAttributes"
+          nodeType={nodeType}
         />
-      </Section>
-    }
-
-    { dataSource && displayLabel && // we don't need display label, but lets go step-by-step
-      <Section
-        id={getFieldId(`${fieldId}.sortOptions.sortOrder`)}
-        data-name="sortOrder"
-      >
-        <h3>Sort Order</h3>
-        <MultiSelect
-          name={`${fieldId}.sortOptions.sortOrder`}
-          maxItems={1}
-          properties={[
-            { fieldName: 'property' },
-            { fieldName: 'direction' },
-          ]}
-          options={getSortOrderOptionGetter(externalDataPropertyOptions)}
+        <div id={getFieldId(`${fieldId}.dataSource`)} data-name="Prompt data-source" />
+      </Row>
+      <Row id={getFieldId(`${fieldId}.dataSource`)} data-name="Data source">
+        <h3>Data-source</h3>
+        <ValidatedField
+          component={Select}
+          name={`${fieldId}.dataSource`}
+          id="dataSource"
+          options={dataSources}
+          validation={{ required: true }}
         />
-      </Section>
-    }
+      </Row>
 
-    { dataSource && displayLabel && // we don't need display label, but lets go step-by-step
-      <Section
-        id={getFieldId(`${fieldId}.sortOptions.sortableProperties`)}
-        data-name="sortableProperties"
-      >
-        <h3>Sortable Properties</h3>
-        <MultiSelect
-          name={`${fieldId}.sortOptions.sortableProperties`}
-          maxItems={externalDataPropertyOptions.length}
-          properties={[
-            { fieldName: 'variable' },
-            {
-              fieldName: 'label',
-              component: Text,
-              placeholder: '',
-            },
-          ]}
-          options={getExternalPropertiesOptionGetter(externalDataPropertyOptions)}
-        />
-      </Section>
-    }
-  </Item>
-);
+      { dataSource &&
+        <Group>
+          <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt Display Label">
+            <h3>Display Label</h3>
+            <ValidatedField
+              component={Select}
+              name={`${fieldId}.cardOptions.displayLabel`}
+              id="displayLabel"
+              options={externalDataPropertyOptions}
+              validation={{ required: true }}
+            />
+          </Row>
+
+          { displayLabel &&
+            <Row
+              id={getFieldId(`${fieldId}.cardOptions.additionalProperties`)}
+              data-name="Additional Display Properties"
+            >
+              <h3>Additional Display Properties</h3>
+              <MultiSelect
+                name={`${fieldId}.cardOptions.additionalProperties`}
+                maxItems={externalDataPropertyOptions.length - 1}
+                properties={[
+                  {
+                    fieldName: 'variable',
+                  },
+                  {
+                    fieldName: 'label',
+                    component: Text,
+                    placeholder: '',
+                  },
+                ]}
+                options={additionalPropertiesOptions}
+              />
+            </Row>
+          }
+        </Group>
+      }
+
+      { dataSource && displayLabel && // we don't need display label, but lets go step-by-step
+        <Group>
+          <Row
+            id={getFieldId(`${fieldId}.sortOptions.sortOrder`)}
+            data-name="sortOrder"
+          >
+            <h3>Sort Order</h3>
+            <MultiSelect
+              name={`${fieldId}.sortOptions.sortOrder`}
+              maxItems={1}
+              properties={[
+                { fieldName: 'property' },
+                { fieldName: 'direction' },
+              ]}
+              options={getSortOrderOptionGetter(externalDataPropertyOptions)}
+            />
+          </Row>
+          <Row
+            id={getFieldId(`${fieldId}.sortOptions.sortableProperties`)}
+            data-name="sortableProperties"
+          >
+            <h3>Sortable Properties</h3>
+            <MultiSelect
+              name={`${fieldId}.sortOptions.sortableProperties`}
+              maxItems={externalDataPropertyOptions.length}
+              properties={[
+                { fieldName: 'variable' },
+                {
+                  fieldName: 'label',
+                  component: Text,
+                  placeholder: '',
+                },
+              ]}
+              options={getExternalPropertiesOptionGetter(externalDataPropertyOptions)}
+            />
+          </Row>
+        </Group>
+      }
+    </Item>
+  );
+};
 
 /**
  * cardOptions.displayLabel
