@@ -1,0 +1,11 @@
+.list-group {
+  background: var(--color-shadow); // TODO: which color?
+  margin: unit(4) 0;
+  padding: unit(2);
+
+  .list-row {
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
