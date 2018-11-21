@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { get, uniq, keys, map } from 'lodash';
+import { get, uniq, keys } from 'lodash';
 import { Field } from 'redux-form';
 import { ValidatedField } from '../../../Form';
 import * as Fields from '../../../../ui/components/Fields';
@@ -11,24 +11,9 @@ import AttributesTable from '../../../AttributesTable';
 import { Item, Row, Group } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
-
-/**
- * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
- * options depending on the value of `property`, `rowValues`, `allValues`.
- *
- * This optionGetter is for additionalProperties, and removes the item being used as the
- * displayLabel.
- */
-const getAdditionalPropertiesOptionGetter = (externalDataPropertyOptions, displayLabel) =>
-  (property, rowValues, allValues) => {
-    const used = map(allValues, 'variable');
-
-    return externalDataPropertyOptions
-      .map(
-        option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
-      )
-      .filter(({ value }) => value !== displayLabel);
-  };
+import {
+  getAdditionalPropertiesOptionGetter,
+} from '../NameGeneratorListPrompts/optionGetters';
 
 const NameGeneratorAutoCompletePrompt = ({
   handleValidateAttributes,
@@ -67,9 +52,8 @@ const NameGeneratorAutoCompletePrompt = ({
           id="additionalAttributes"
           nodeType={nodeType}
         />
-        <div id={getFieldId(`${fieldId}.dataSource`)} data-name="Prompt data-source" />
       </Row>
-      <Row id={getFieldId(`${fieldId}.dataSource`)} data-name="Data source">
+      <Row id={getFieldId(`${fieldId}.dataSource`)} data-name="Prompt data source">
         <h3>Data-source</h3>
         <ValidatedField
           component={Select}
@@ -82,7 +66,7 @@ const NameGeneratorAutoCompletePrompt = ({
 
       { dataSource &&
         <Group>
-          <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt Display Label">
+          <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt card display Label">
             <h3>Display Label</h3>
             <ValidatedField
               component={Select}
@@ -94,10 +78,7 @@ const NameGeneratorAutoCompletePrompt = ({
           </Row>
 
           { displayLabel &&
-            <Row
-              id={getFieldId(`${fieldId}.cardOptions.additionalProperties`)}
-              data-name="Additional Display Properties"
-            >
+            <Row>
               <h3>Additional Display Properties</h3>
               <MultiSelect
                 name={`${fieldId}.cardOptions.additionalProperties`}
