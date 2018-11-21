@@ -383,6 +383,21 @@
       ]
     },
     {
+      "id": "namegenlist2",
+      "type": "NameGeneratorAutoComplete",
+      "label": "NG Closeness AutoComplete",
+      "subject": {
+        "entity": "node",
+        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
+      },
+      "prompts": [
+        {
+          "id": "6su",
+          "text": "Within the past 6 months, who has been supportive?"
+        }
+      ]
+    },
+    {
       "id": "sociogram",
       "type": "Sociogram",
       "label": "Sociogram",
