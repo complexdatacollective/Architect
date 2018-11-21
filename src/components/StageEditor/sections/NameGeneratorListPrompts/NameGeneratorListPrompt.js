@@ -11,15 +11,43 @@ import { Item, Section } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
 
-const optionGetter = (externalDataPropertyOptions) => {
-  return (property, rowValues, allValues) => {
-    const variable = get(rowValues, 'variable');
-
+const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
+  (property, rowValues, allValues) => {
     const used = map(allValues, 'variable');
 
-    return externalDataPropertyOptions.map(
-      option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
-    );
+    return externalDataPropertyOptions
+      .map(
+        option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
+      );
+  };
+
+const getAdditionalPropertiesOptionGetter = (externalDataPropertyOptions, displayLabel) => {
+  const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
+    externalDataPropertyOptions,
+  );
+
+  return (property, rowValues, allValues) =>
+    externalPropertiesOptionGetter(property, rowValues, allValues)
+      .filter(({ value }) => value !== displayLabel);
+};
+
+const getSortOrderOptionGetter = (externalDataPropertyOptions) => {
+  const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
+    externalDataPropertyOptions,
+  );
+
+  return (property, rowValues, allValues) => {
+    switch (property) {
+      case 'property':
+        return externalPropertiesOptionGetter(property, rowValues, allValues);
+      case 'direction':
+        return [
+          { value: 'desc', label: 'Descending' },
+          { value: 'asc', label: 'Ascending' },
+        ];
+      default:
+        return [];
+    }
   };
 };
 
@@ -29,6 +57,7 @@ const NameGeneratorPrompt = ({
   form,
   nodeType,
   dataSources,
+  displayLabel,
   externalDataPropertyOptions,
   ...rest
 }) => (
@@ -69,7 +98,7 @@ const NameGeneratorPrompt = ({
       <h3>Display Label</h3>
       <ValidatedField
         component={Select}
-        name={`${fieldId}.displayLabel`}
+        name={`${fieldId}.cardOptions.displayLabel`}
         id="displayLabel"
         options={externalDataPropertyOptions}
         validation={{ required: true }}
@@ -81,7 +110,7 @@ const NameGeneratorPrompt = ({
     >
       <h3>Additional Display Properties</h3>
       <MultiSelect
-        name={`${fieldId}.additionalProperties`}
+        name={`${fieldId}.cardOptions.additionalProperties`}
         properties={[
           {
             fieldName: 'variable',
@@ -92,7 +121,41 @@ const NameGeneratorPrompt = ({
             placeholder: '',
           },
         ]}
-        options={optionGetter(externalDataPropertyOptions)}
+        options={getAdditionalPropertiesOptionGetter(externalDataPropertyOptions, displayLabel)}
+      />
+    </Section>
+
+    <Section
+      id={getFieldId(`${fieldId}.sortOptions.sortOrder`)}
+      data-name="sortOrder"
+    >
+      <h3>sortOrder</h3>
+      <MultiSelect
+        name={`${fieldId}.sortOptions.sortOrder`}
+        properties={[
+          { fieldName: 'property' },
+          { fieldName: 'direction' },
+        ]}
+        options={getSortOrderOptionGetter(externalDataPropertyOptions)}
+      />
+    </Section>
+
+    <Section
+      id={getFieldId(`${fieldId}.sortOptions.sortableProperties`)}
+      data-name="sortableProperties"
+    >
+      <h3>sortableProperties</h3>
+      <MultiSelect
+        name={`${fieldId}.sortOptions.sortableProperties`}
+        properties={[
+          { fieldName: 'variable' },
+          {
+            fieldName: 'label',
+            component: Text,
+            placeholder: '',
+          },
+        ]}
+        options={getExternalPropertiesOptionGetter(externalDataPropertyOptions)}
       />
     </Section>
 
@@ -104,6 +167,25 @@ const NameGeneratorPrompt = ({
  * cardOptions.additionalProperties
  * sortOptions.sortOrder
  * sortOptions.sortableProperties
+ *
+ * sortOptions don't seem to match the sort lib? check ref protocol:
+ *
+ * "sortOrder": [{
+ *   "property": "6be95f85-c2d9-4daf-9de1-3939418af888",
+ *   "direction": "asc"
+ * }],
+ * "sortableProperties": [
+ *   {
+ *     "label": "Pupil Name",
+ *     "variable": "6be95f85-c2d9-4daf-9de1-3939418af888"
+ *   },
+ *   {
+ *     "label": "Pupil Age",
+ *     "variable": "c5fee926-855d-4419-b5bb-54e89010cea6"
+ *   }
+ * ]
+ *
+ * Update docs
  */
 
 NameGeneratorPrompt.propTypes = {
@@ -136,7 +218,8 @@ NameGeneratorPrompt.defaultProps = {
 const mapStateToProps = (state, { fieldId, form, nodeType }) => {
   if (!nodeType) { return {}; }
 
-  const dataSource = form.getValues(state, `${fieldId}.dataSource`);
+  const { dataSource, cardOptions } = form.getValues(state, fieldId);
+  const displayLabel = cardOptions && cardOptions.displayLabel;
   const externalData = get(getExternalData(state), dataSource, { nodes: [] });
   const variableRegistry = getVariableRegistry(state);
 
@@ -154,6 +237,7 @@ const mapStateToProps = (state, { fieldId, form, nodeType }) => {
 
   return {
     dataSource,
+    displayLabel,
     externalDataPropertyOptions,
   };
 };
