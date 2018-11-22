@@ -92,7 +92,7 @@ const NameGeneratorPrompt = ({
                   {
                     fieldName: 'label',
                     component: Text,
-                    placeholder: '',
+                    placeholder: 'Label',
                   },
                 ]}
                 options={additionalPropertiesOptions}
@@ -127,7 +127,7 @@ const NameGeneratorPrompt = ({
                 {
                   fieldName: 'label',
                   component: Text,
-                  placeholder: '',
+                  placeholder: 'Label',
                 },
               ]}
               options={getExternalPropertiesOptionGetter(externalDataPropertyOptions)}

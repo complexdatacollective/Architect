@@ -89,7 +89,7 @@ const NameGeneratorAutoCompletePrompt = ({
                   {
                     fieldName: 'label',
                     component: Fields.Text,
-                    placeholder: '',
+                    placeholder: 'Label',
                   },
                 ]}
                 options={additionalPropertiesOptions}
