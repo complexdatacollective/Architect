@@ -4,7 +4,7 @@ import { map } from 'lodash';
  * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
  * options depending on the value of `property`, `rowValues`, `allValues`.
  */
-export const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
+const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
   (property, rowValues, allValues) => {
     const used = map(allValues, 'variable');
 
@@ -21,7 +21,7 @@ export const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
  * This optionGetter is for additionalProperties, and removes the item being used as the
  * displayLabel.
  */
-export const getAdditionalPropertiesOptionGetter = (externalDataPropertyOptions, displayLabel) => {
+const getAdditionalPropertiesOptionGetter = (externalDataPropertyOptions, displayLabel) => {
   const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
     externalDataPropertyOptions,
   );
@@ -37,7 +37,7 @@ export const getAdditionalPropertiesOptionGetter = (externalDataPropertyOptions,
  *
  * This optionGetter is for sortOrder, and also defines value for a secondary direction property.
  */
-export const getSortOrderOptionGetter = (externalDataPropertyOptions) => {
+const getSortOrderOptionGetter = (externalDataPropertyOptions) => {
   const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
     externalDataPropertyOptions,
   );
@@ -56,3 +56,17 @@ export const getSortOrderOptionGetter = (externalDataPropertyOptions) => {
     }
   };
 };
+
+const optionGetters = {
+  getExternalPropertiesOptionGetter,
+  getAdditionalPropertiesOptionGetter,
+  getSortOrderOptionGetter,
+};
+
+export {
+  getExternalPropertiesOptionGetter,
+  getAdditionalPropertiesOptionGetter,
+  getSortOrderOptionGetter,
+};
+
+export default optionGetters;

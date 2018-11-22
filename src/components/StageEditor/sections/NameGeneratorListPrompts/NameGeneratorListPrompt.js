@@ -149,7 +149,7 @@ NameGeneratorPrompt.propTypes = {
   }).isRequired,
   nodeType: PropTypes.string,
   dataSources: PropTypes.array,
-  externalDataPropertyOptions: [],
+  externalDataPropertyOptions: PropTypes.array,
 };
 
 NameGeneratorPrompt.defaultProps = {

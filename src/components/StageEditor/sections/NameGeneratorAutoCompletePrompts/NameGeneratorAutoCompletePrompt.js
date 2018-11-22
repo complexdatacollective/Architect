@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { get, uniq, keys } from 'lodash';
+import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import { ValidatedField } from '../../../Form';
 import * as Fields from '../../../../ui/components/Fields';
@@ -10,10 +9,11 @@ import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
 import { Item, Row, Group } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
-import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
 import {
-  getAdditionalPropertiesOptionGetter,
-} from '../NameGeneratorListPrompts/optionGetters';
+  optionGetters,
+  withFieldValues,
+  withExternalDataPropertyOptions,
+} from '../NameGeneratorListPrompts';
 
 const NameGeneratorAutoCompletePrompt = ({
   handleValidateAttributes,
@@ -26,7 +26,7 @@ const NameGeneratorAutoCompletePrompt = ({
   externalDataPropertyOptions,
   ...rest
 }) => {
-  const additionalPropertiesOptions = getAdditionalPropertiesOptionGetter(
+  const additionalPropertiesOptions = optionGetters.getAdditionalPropertiesOptionGetter(
     externalDataPropertyOptions,
     displayLabel,
   );
@@ -140,7 +140,7 @@ NameGeneratorAutoCompletePrompt.propTypes = {
   }).isRequired,
   nodeType: PropTypes.string,
   dataSources: PropTypes.array,
-  externalDataPropertyOptions: [],
+  externalDataPropertyOptions: PropTypes.array,
 };
 
 NameGeneratorAutoCompletePrompt.defaultProps = {
@@ -149,33 +149,9 @@ NameGeneratorAutoCompletePrompt.defaultProps = {
   externalDataPropertyOptions: [],
 };
 
-const mapStateToProps = (state, { fieldId, form, nodeType }) => {
-  if (!nodeType) { return {}; }
-
-  const { dataSource, cardOptions } = form.getValues(state, fieldId);
-  const displayLabel = cardOptions && cardOptions.displayLabel;
-  const externalData = get(getExternalData(state), dataSource, { nodes: [] });
-  const variableRegistry = getVariableRegistry(state);
-
-  const dataAttributes = externalData.nodes
-    .filter(node => node.type === nodeType)
-    .reduce((memo, node) => uniq([...memo, ...keys(node.attributes)]), []);
-
-  const externalDataPropertyOptions = dataAttributes.map(
-    attributeId => ({
-      // should we check it exists in registry? and omit if not
-      label: get(variableRegistry, ['node', nodeType, 'variables', attributeId, 'name'], attributeId),
-      value: attributeId,
-    }),
-  );
-
-  return {
-    dataSource,
-    displayLabel,
-    externalDataPropertyOptions,
-  };
-};
-
 export { NameGeneratorAutoCompletePrompt };
 
-export default connect(mapStateToProps)(NameGeneratorAutoCompletePrompt);
+export default compose(
+  withFieldValues(['dataSource', 'cardOptions']),
+  withExternalDataPropertyOptions,
+)(NameGeneratorAutoCompletePrompt);

@@ -1,95 +1,21 @@
-import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { arrayPush } from 'redux-form';
-import { get } from 'lodash';
-import PropTypes from 'prop-types';
-import uuid from 'uuid';
-import cx from 'classnames';
-import Guidance from '../../../Guidance';
+import React from 'react';
 import NameGeneratorPrompt from './NameGeneratorPrompt';
-import OrderedList, { NewButton } from '../../../OrderedList';
-import ValidatedFieldArray from '../../../Form/ValidatedFieldArray';
-import { getFieldId } from '../../../../utils/issues';
+import Prompts from '../../../Prompts';
 
-const fieldName = 'prompts';
-
-const notEmpty = value => (
-  value && value.length > 0 ? undefined : 'You must create at least one prompt'
+const NameGeneratorPrompts = props => (
+  <Prompts
+    contentId="guidance.editor.name_generator_prompts"
+    promptComponent={NameGeneratorPrompt}
+    {...props}
+  >
+    <h2>Prompts</h2>
+    <p>
+      Add one or more &quot;prompts&quot; below, to ecourage your participants to create
+      nodes.
+    </p>
+  </Prompts>
 );
 
-class NameGeneratorPromptsSection extends PureComponent {
-  render() {
-    const {
-      nodeType,
-      form,
-      disabled,
-      addNewPrompt,
-    } = this.props;
+export { NameGeneratorPrompts };
 
-    return (
-      <Guidance contentId="guidance.editor.name_generator_prompts">
-        <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
-          <div id={getFieldId(`${fieldName}._error`)} data-name="Prompts" />
-          <h2>Prompts</h2>
-          <p>
-            Add one or more &quot;prompts&quot; below, to ecourage your participants to create
-            nodes.
-          </p>
-          <div className="stage-editor-section-prompts">
-            <div className="stage-editor-section-prompts__prompts">
-              { nodeType &&
-                <ValidatedFieldArray
-                  name={fieldName}
-                  component={OrderedList}
-                  item={NameGeneratorPrompt}
-                  nodeType={nodeType}
-                  form={form}
-                  validation={{ notEmpty }}
-                />
-              }
-            </div>
-            <NewButton onClick={addNewPrompt} />
-          </div>
-        </div>
-      </Guidance>
-    );
-  }
-}
-
-NameGeneratorPromptsSection.propTypes = {
-  form: PropTypes.shape({
-    name: PropTypes.string,
-    getValues: PropTypes.func,
-  }).isRequired,
-  disabled: PropTypes.bool,
-  addNewPrompt: PropTypes.func.isRequired,
-  nodeType: PropTypes.string,
-};
-
-NameGeneratorPromptsSection.defaultProps = {
-  disabled: false,
-  nodeType: null,
-};
-
-const mapStateToProps = (state, props) => {
-  const nodeType = get(props.form.getValues(state, 'subject'), 'type');
-  return {
-    disabled: !nodeType,
-    nodeType,
-  };
-};
-
-const mapDispatchToProps = (dispatch, { form: { name } }) => ({
-  addNewPrompt: bindActionCreators(
-    () => arrayPush(name, fieldName, { id: uuid() }),
-    dispatch,
-  ),
-});
-
-export { NameGeneratorPromptsSection };
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(NameGeneratorPromptsSection);
+export default NameGeneratorPrompts;
