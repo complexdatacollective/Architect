@@ -26,9 +26,8 @@ const NameGeneratorAutoCompletePrompt = ({
   externalDataPropertyOptions,
   ...rest
 }) => {
-  const additionalPropertiesOptions = optionGetters.getAdditionalPropertiesOptionGetter(
-    externalDataPropertyOptions,
-    displayLabel,
+  const additionalPropertiesOptions = optionGetters.getExternalPropertiesOptionGetter(
+    externalDataPropertyOptions.filter(({ value }) => value === displayLabel),
   );
 
   return (

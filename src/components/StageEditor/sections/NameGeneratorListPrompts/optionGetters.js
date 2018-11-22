@@ -1,8 +1,9 @@
 import { map } from 'lodash';
 
 /**
- * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
- * options depending on the value of `property`, `rowValues`, `allValues`.
+ * Creates a optionGetter function for <MultiSelect />
+ *
+ * This optionGetter is for externalProperties, which defines properties for the `variable` column.
  */
 const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
   (property, rowValues, allValues) => {
@@ -15,37 +16,22 @@ const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
   };
 
 /**
- * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
- * options depending on the value of `property`, `rowValues`, `allValues`.
+ * Creates a optionGetter function for <MultiSelect />
  *
- * This optionGetter is for additionalProperties, and removes the item being used as the
- * displayLabel.
+ * This optionGetter is for sortOrder, which defines properties for `property` and `direction`
+ * columns.
  */
-const getAdditionalPropertiesOptionGetter = (externalDataPropertyOptions, displayLabel) => {
-  const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
-    externalDataPropertyOptions,
-  );
-
-  return (property, rowValues, allValues) =>
-    externalPropertiesOptionGetter(property, rowValues, allValues)
-      .filter(({ value }) => value !== displayLabel);
-};
-
-/**
- * Creates a optionGetter function, `f(property, rowValues, allValues)`, which returns a list of
- * options depending on the value of `property`, `rowValues`, `allValues`
- *
- * This optionGetter is for sortOrder, and also defines value for a secondary direction property.
- */
-const getSortOrderOptionGetter = (externalDataPropertyOptions) => {
-  const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
-    externalDataPropertyOptions,
-  );
-
-  return (property, rowValues, allValues) => {
+const getSortOrderOptionGetter = externalDataPropertyOptions =>
+  (property, rowValues, allValues) => {
     switch (property) {
-      case 'property':
-        return externalPropertiesOptionGetter(property, rowValues, allValues);
+      case 'property': {
+        const used = map(allValues, 'property');
+
+        return externalDataPropertyOptions
+          .map(
+            option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
+          );
+      }
       case 'direction':
         return [
           { value: 'desc', label: 'Descending' },
@@ -55,17 +41,14 @@ const getSortOrderOptionGetter = (externalDataPropertyOptions) => {
         return [];
     }
   };
-};
 
 const optionGetters = {
   getExternalPropertiesOptionGetter,
-  getAdditionalPropertiesOptionGetter,
   getSortOrderOptionGetter,
 };
 
 export {
   getExternalPropertiesOptionGetter,
-  getAdditionalPropertiesOptionGetter,
   getSortOrderOptionGetter,
 };
 

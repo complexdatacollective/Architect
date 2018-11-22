@@ -10,7 +10,6 @@ import { Item, Row, Group } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 import {
   getExternalPropertiesOptionGetter,
-  getAdditionalPropertiesOptionGetter,
   getSortOrderOptionGetter,
 } from './optionGetters';
 import withFieldValues from './withFieldValues';
@@ -29,9 +28,8 @@ const NameGeneratorPrompt = ({
 }) => {
   const displayLabel = cardOptions && cardOptions.displayLabel;
 
-  const additionalPropertiesOptions = getAdditionalPropertiesOptionGetter(
-    externalDataPropertyOptions,
-    displayLabel,
+  const additionalPropertiesOptions = getExternalPropertiesOptionGetter(
+    externalDataPropertyOptions.filter(({ value }) => value === displayLabel),
   );
 
   return (
