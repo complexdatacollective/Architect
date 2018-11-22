@@ -65,8 +65,9 @@ const NameGeneratorAutoCompletePrompt = ({
 
       { dataSource &&
         <Group>
+          <h3>Card options</h3>
           <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt card display Label">
-            <h3>Display Label</h3>
+            <h4>Display Label</h4>
             <ValidatedField
               component={Select}
               name={`${fieldId}.cardOptions.displayLabel`}
@@ -78,7 +79,7 @@ const NameGeneratorAutoCompletePrompt = ({
 
           { displayLabel &&
             <Row>
-              <h3>Additional Display Properties</h3>
+              <h4>Additional Display Properties</h4>
               <MultiSelect
                 name={`${fieldId}.cardOptions.additionalProperties`}
                 maxItems={externalDataPropertyOptions.length - 1}
@@ -101,24 +102,27 @@ const NameGeneratorAutoCompletePrompt = ({
 
       { dataSource &&
         <Group>
+          <h3>Search options</h3>
           <Row
             id={getFieldId(`${fieldId}.searchOptions.fuzziness`)}
             data-name="Prompt Search Fuzziness"
           >
-            <h3>Fuzziness</h3>
+            <h4>Fuzziness</h4>
             <Field
               name={`${fieldId}.searchOptions.fuzziness`}
-              component={Fields.Number}
-              min="0"
-              max="1"
-              step="0.1"
+              component={Fields.RadioGroup}
+              options={[
+                { value: 0, label: 'Exact' },
+                { value: 0.3, label: 'Low' },
+                { value: 0.6, label: 'High' },
+              ]}
             />
           </Row>
           <Row
             id={getFieldId(`${fieldId}.searchOptions.matchProperties`)}
             data-name="Prompt Search Match Properties"
           >
-            <h3>Match Properties</h3>
+            <h4>Match Properties</h4>
             <Field
               name={`${fieldId}.searchOptions.matchProperties`}
               component={Fields.CheckboxGroup}
