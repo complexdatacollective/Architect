@@ -11,11 +11,16 @@ const mapStateToProps = (state, { dataSource, nodeType }) => {
     .reduce((memo, node) => uniq([...memo, ...keys(node.attributes)]), []);
 
   const externalDataPropertyOptions = dataAttributes.map(
-    attributeId => ({
-      // should we check it exists in registry? and omit if not
-      label: get(variableRegistry, ['node', nodeType, 'variables', attributeId, 'name'], attributeId),
-      value: attributeId,
-    }),
+    (attributeId) => {
+      const label = get(variableRegistry, ['node', nodeType, 'variables', attributeId, 'name']);
+
+      if (!label) { throw new Error(`"${attributeId}" couldn't be found in variable registry.`); }
+
+      return {
+        label,
+        value: attributeId,
+      };
+    },
   );
 
   return {
