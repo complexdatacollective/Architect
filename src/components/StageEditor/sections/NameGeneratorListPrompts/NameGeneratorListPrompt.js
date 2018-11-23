@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { Field, FormSection } from 'redux-form';
 import { ValidatedField } from '../../../Form';
 import { TextArea, Text } from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
 import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
-import { Item, Row, Group } from '../../../OrderedList';
+import { ExpandableItem, Row, Group } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 import {
   getExternalPropertiesOptionGetter,
@@ -33,7 +34,20 @@ const NameGeneratorPrompt = ({
   );
 
   return (
-    <Item {...rest}>
+    <ExpandableItem
+      {...rest}
+      preview={(
+        <FormSection name={fieldId}>
+          <Row>
+            <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
+            <Field
+              name="text"
+              component={({ input: { value } }) => (<h3>{value}</h3>)}
+            />
+          </Row>
+        </FormSection>
+      )}
+    >
       <Row>
         <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
         <h3>Text for Prompt</h3>
@@ -67,7 +81,12 @@ const NameGeneratorPrompt = ({
 
       { dataSource &&
         <Group>
-          <h3>Card options</h3>
+          <Row>
+            <h3>Card options</h3>
+            <p>
+              How would you like to the search results to be displayed?
+            </p>
+          </Row>
           <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt card display label">
             <h4>Display Label</h4>
             <ValidatedField
@@ -104,7 +123,12 @@ const NameGeneratorPrompt = ({
 
       { dataSource && displayLabel && // we don't need display label, but lets go step-by-step
         <Group>
-          <h3>Sort options</h3>
+          <Row>
+            <h3>Sort options</h3>
+            <p>
+              How would you like to sort the available options?
+            </p>
+          </Row>
           <Row>
             <h4>Sort Order</h4>
             <MultiSelect
@@ -135,7 +159,7 @@ const NameGeneratorPrompt = ({
           </Row>
         </Group>
       }
-    </Item>
+    </ExpandableItem>
   );
 };
 

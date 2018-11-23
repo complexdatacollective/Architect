@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Field } from 'redux-form';
+import { Field, FormSection } from 'redux-form';
 import { ValidatedField } from '../../../Form';
 import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
 import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
-import { Item, Row, Group } from '../../../OrderedList';
+import { ExpandableItem, Row, Group } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 import {
   optionGetters,
@@ -33,7 +33,20 @@ const NameGeneratorAutoCompletePrompt = ({
   );
 
   return (
-    <Item {...rest}>
+    <ExpandableItem
+      {...rest}
+      preview={(
+        <FormSection name={fieldId}>
+          <Row>
+            <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
+            <Field
+              name="text"
+              component={({ input: { value } }) => (<h3>{value}</h3>)}
+            />
+          </Row>
+        </FormSection>
+      )}
+    >
       <Row>
         <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
         <h3>Text for Prompt</h3>
@@ -67,7 +80,12 @@ const NameGeneratorAutoCompletePrompt = ({
 
       { dataSource &&
         <Group>
-          <h3>Card options</h3>
+          <Row>
+            <h3>Card options</h3>
+            <p>
+              How would you like to the search results to be displayed?
+            </p>
+          </Row>
           <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt card display Label">
             <h4>Display Label</h4>
             <ValidatedField
@@ -104,7 +122,23 @@ const NameGeneratorAutoCompletePrompt = ({
 
       { dataSource &&
         <Group>
-          <h3>Search options</h3>
+          <Row>
+            <h3>Search options</h3>
+            <p>
+              Which properties would you like to make searchable?
+            </p>
+          </Row>
+          <Row
+            id={getFieldId(`${fieldId}.searchOptions.matchProperties`)}
+            data-name="Prompt Search Match Properties"
+          >
+            <h4>Match Properties</h4>
+            <Field
+              name={`${fieldId}.searchOptions.matchProperties`}
+              component={Fields.CheckboxGroup}
+              options={externalDataPropertyOptions}
+            />
+          </Row>
           <Row
             id={getFieldId(`${fieldId}.searchOptions.fuzziness`)}
             data-name="Prompt Search Fuzziness"
@@ -120,20 +154,9 @@ const NameGeneratorAutoCompletePrompt = ({
               ]}
             />
           </Row>
-          <Row
-            id={getFieldId(`${fieldId}.searchOptions.matchProperties`)}
-            data-name="Prompt Search Match Properties"
-          >
-            <h4>Match Properties</h4>
-            <Field
-              name={`${fieldId}.searchOptions.matchProperties`}
-              component={Fields.CheckboxGroup}
-              options={externalDataPropertyOptions}
-            />
-          </Row>
         </Group>
       }
-    </Item>
+    </ExpandableItem>
   );
 };
 
