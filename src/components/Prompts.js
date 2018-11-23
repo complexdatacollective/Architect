@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { compose, defaultProps } from 'recompose';
 import { arrayPush } from 'redux-form';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
@@ -65,7 +65,7 @@ Prompts.propTypes = {
   disabled: PropTypes.bool,
   addNewPrompt: PropTypes.func.isRequired,
   nodeType: PropTypes.string,
-  fieldName: PropTypes.string,
+  fieldName: PropTypes.string.isRequired,
   contentId: PropTypes.string,
   children: PropTypes.node,
   promptComponent: PropTypes.func.isRequired,
@@ -74,7 +74,6 @@ Prompts.propTypes = {
 Prompts.defaultProps = {
   disabled: false,
   nodeType: null,
-  fieldName: 'prompts',
   contentId: null,
   children: null,
 };
@@ -95,8 +94,13 @@ const mapDispatchToProps = (dispatch, { fieldName, form: { name } }) => ({
   ),
 });
 
+const withFieldNameDefault = defaultProps({
+  fieldName: 'prompts',
+});
+
 export { Prompts };
 
 export default compose(
+  withFieldNameDefault,
   connect(mapStateToProps, mapDispatchToProps),
 )(Prompts);
