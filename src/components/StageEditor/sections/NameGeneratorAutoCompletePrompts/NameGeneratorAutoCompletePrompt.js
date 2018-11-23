@@ -22,12 +22,14 @@ const NameGeneratorAutoCompletePrompt = ({
   nodeType,
   dataSources,
   dataSource,
-  displayLabel,
+  cardOptions,
   externalDataPropertyOptions,
   ...rest
 }) => {
+  const displayLabel = cardOptions && cardOptions.displayLabel;
+
   const additionalPropertiesOptions = optionGetters.getExternalPropertiesOptionGetter(
-    externalDataPropertyOptions.filter(({ value }) => value === displayLabel),
+    externalDataPropertyOptions.filter(({ value }) => value !== displayLabel),
   );
 
   return (

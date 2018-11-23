@@ -29,7 +29,7 @@ const NameGeneratorPrompt = ({
   const displayLabel = cardOptions && cardOptions.displayLabel;
 
   const additionalPropertiesOptions = getExternalPropertiesOptionGetter(
-    externalDataPropertyOptions.filter(({ value }) => value === displayLabel),
+    externalDataPropertyOptions.filter(({ value }) => value !== displayLabel),
   );
 
   return (
