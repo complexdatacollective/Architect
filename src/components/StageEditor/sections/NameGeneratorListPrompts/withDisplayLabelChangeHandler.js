@@ -2,6 +2,12 @@ import { change } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 
+/**
+ * Ensures that displayField isn't contained in additionalProperties.
+ *
+ * When displayField is updated, this handler will update additionalProperties
+ * minus any matching properties.
+ */
 const withDisplayLabelChangeHandler = withHandlers({
   handleChangeDisplayLabel: ({ updateField, cardOptions }) =>
     (e, newValue) => {
@@ -21,6 +27,8 @@ const mapDispatchToProps = (dispatch, { form, fieldId: containerFieldId }) => ({
     change(form.name, `${containerFieldId}.${fieldId}`, value),
   ),
 });
+
+export { withDisplayLabelChangeHandler };
 
 export default compose(
   connect(null, mapDispatchToProps),

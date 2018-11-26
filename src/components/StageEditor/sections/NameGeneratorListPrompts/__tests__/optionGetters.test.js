@@ -40,6 +40,7 @@ describe('optionGetters', () => {
       const subject = sortOrderOptionGetter('property', undefined, mockAllValues);
 
       expect(subject).toEqual([
+        { label: '*', value: '*' },
         { label: 'Name', value: '1234-1234-1234-1' },
         { label: 'Age', value: '1234-1234-1234-2', isDisabled: true },
         { label: 'Favourite Color', value: '1234-1234-1234-3' },

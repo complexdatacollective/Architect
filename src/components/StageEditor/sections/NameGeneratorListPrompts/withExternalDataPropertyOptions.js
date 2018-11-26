@@ -2,6 +2,12 @@ import { connect } from 'react-redux';
 import { get, uniq, keys } from 'lodash';
 import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
 
+/**
+ * Provides `externalDataPropertyOptions` (options) prop
+ *
+ * Extracts unique variables used in `dataSource`, and combines them with the registry to
+ * create list of options in the format: `[ { value, label }, ...]`
+ */
 const mapStateToProps = (state, { dataSource, nodeType }) => {
   const externalData = get(getExternalData(state), dataSource, { nodes: [] });
   const variableRegistry = getVariableRegistry(state);
