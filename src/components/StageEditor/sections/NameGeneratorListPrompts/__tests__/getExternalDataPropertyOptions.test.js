@@ -1,9 +1,5 @@
 /* eslint-env jest */
-
-import React from 'react';
-import { createStore } from 'redux';
-import { shallow } from 'enzyme';
-import withExternalDataPropertyOptions from '../withExternalDataPropertyOptions';
+import { getExternalDataPropertyOptions } from '../selectors';
 
 const mockState = {
   protocol: {
@@ -31,24 +27,18 @@ const mockState = {
   },
 };
 
-const mockStore = createStore(state => state, mockState);
 
-const MockComponent = withExternalDataPropertyOptions(() => null);
-
-describe('withExternalDataPropertyOptions() HOC', () => {
-  it('provides a `externalDataPropertyOptions` prop', () => {
+describe('getExternalDataPropertyOptions()', () => {
+  it('extracts dataSource properties into options list', () => {
     const dataSource = 'foo';
     const nodeType = 'bar';
 
-    const subject = shallow((
-      <MockComponent
-        store={mockStore}
-        dataSource={dataSource}
-        nodeType={nodeType}
-      />
-    ));
+    const mockProps = {
+      dataSource,
+      nodeType,
+    };
 
-    expect(subject.prop('externalDataPropertyOptions')).toEqual([
+    expect(getExternalDataPropertyOptions(mockState, mockProps)).toEqual([
       { value: 'alpha', label: 'ALPHA' },
       { value: 'bravo', label: 'BRAVO' },
       { value: 'charlie', label: 'CHARLIE' },
