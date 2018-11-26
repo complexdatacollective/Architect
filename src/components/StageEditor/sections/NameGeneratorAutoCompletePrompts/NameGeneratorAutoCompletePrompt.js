@@ -14,6 +14,7 @@ import {
   withFieldValues,
   withExternalDataPropertyOptions,
 } from '../NameGeneratorListPrompts';
+import withDisplayLabelChangeHandler from '../NameGeneratorListPrompts/withDisplayLabelChangeHandler';
 
 const NameGeneratorAutoCompletePrompt = ({
   handleValidateAttributes,
@@ -24,6 +25,7 @@ const NameGeneratorAutoCompletePrompt = ({
   dataSource,
   cardOptions,
   externalDataPropertyOptions,
+  handleChangeDisplayLabel,
   ...rest
 }) => {
   const displayLabel = cardOptions && cardOptions.displayLabel;
@@ -94,6 +96,7 @@ const NameGeneratorAutoCompletePrompt = ({
               id="displayLabel"
               options={externalDataPropertyOptions}
               validation={{ required: true }}
+              onChange={handleChangeDisplayLabel}
             />
           </Row>
 
@@ -182,4 +185,5 @@ export { NameGeneratorAutoCompletePrompt };
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
   withExternalDataPropertyOptions,
+  withDisplayLabelChangeHandler,
 )(NameGeneratorAutoCompletePrompt);
