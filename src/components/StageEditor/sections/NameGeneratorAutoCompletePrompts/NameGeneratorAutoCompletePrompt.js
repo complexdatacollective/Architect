@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Field, FormSection } from 'redux-form';
+import Markdown from 'react-markdown';
+import { Field } from 'redux-form';
 import { ValidatedField } from '../../../Form';
 import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
@@ -38,15 +39,12 @@ const NameGeneratorAutoCompletePrompt = ({
     <ExpandableItem
       {...rest}
       preview={(
-        <FormSection name={fieldId}>
-          <Row>
-            <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
-            <Field
-              name="text"
-              component={({ input: { value } }) => (<h3>{value}</h3>)}
-            />
-          </Row>
-        </FormSection>
+        <div className="stage-editor-section-prompt__preview--centered">
+          <Field
+            name={`${fieldId}.text`}
+            component={field => <Markdown source={field.input.value} />}
+          />
+        </div>
       )}
     >
       <Row>
@@ -154,8 +152,8 @@ const NameGeneratorAutoCompletePrompt = ({
           >
             <h4>Search Fuzziness</h4>
             <p>How accurate does the participant need to be when searching?</p>
-            <p>If the roster contains many similar nodes, you might want to help narrow down searches
-              by selecting &quot;low&quot; fuzziness.
+            <p>If the roster contains many similar nodes, you might want to help narrow down
+              searches by selecting &quot;low&quot; fuzziness.
             </p>
             <Field
               name={`${fieldId}.searchOptions.fuzziness`}

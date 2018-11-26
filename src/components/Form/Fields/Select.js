@@ -51,6 +51,11 @@ class Select extends PureComponent {
   handleChange = option =>
     this.props.input.onChange(option.value);
 
+  handleBlur = () => {
+    if (!this.props.input.onBlur) { return; }
+    this.props.input.onBlur(this.props.input.value);
+  }
+
   render() {
     const {
       className,
@@ -88,7 +93,7 @@ class Select extends PureComponent {
           // https://github.com/erikras/redux-form/issues/82#issuecomment-386108205
           // Sending the old value on blur, and disabling blurInputOnSelect work in
           // a round about way, and still allow us to use the `touched` property.
-          onBlur={() => onBlur(this.props.input.value)}
+          onBlur={this.handleBlur}
           blurInputOnSelect={false}
           {...rest}
         >
