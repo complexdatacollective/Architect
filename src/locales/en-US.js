@@ -144,6 +144,48 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.name_generator_list_prompts': (
+    <Fragment>
+      <h3>Name Generator Roster List Prompts</h3>
+      <p>
+        Prompts allow you to specify one or more specific questions to post to the participant, in
+        order to encourage the recall of nodes.
+      </p>
+      <p>
+        Prompts should be carefully considered, and grounded in existing literature wherever
+        possible.  Think carefully about if you want to use one name generator with muiltiple
+        prompts, or many name generators with a single prompt. Your choice depends on your specific
+        research goals, and the needs of your research population.
+      </p>
+      <p>
+        Each prompt can optionally assign a value to one or more node variables. You can use this
+        functionality to keep track of where a node was created, or to assign an attribute to a node
+        based on the prompt (such as indicating a node is a potential family member, if elicited in
+        a prompt about family).
+      </p>
+    </Fragment>
+  ),
+  'guidance.editor.name_generator_auto_complete_prompts': (
+    <Fragment>
+      <h3>Name Generator Auto-complete Roster List Prompts</h3>
+      <p>
+        Prompts allow you to specify one or more specific questions to post to the participant, in
+        order to encourage the recall of nodes.
+      </p>
+      <p>
+        Prompts should be carefully considered, and grounded in existing literature wherever
+        possible.  Think carefully about if you want to use one name generator with muiltiple
+        prompts, or many name generators with a single prompt. Your choice depends on your specific
+        research goals, and the needs of your research population.
+      </p>
+      <p>
+        Each prompt can optionally assign a value to one or more node variables. You can use this
+        functionality to keep track of where a node was created, or to assign an attribute to a node
+        based on the prompt (such as indicating a node is a potential family member, if elicited in
+        a prompt about family).
+      </p>
+    </Fragment>
+  ),
   'guidance.editor.name_generator_prompts': (
     <Fragment>
       <h3>Name Generator Prompts</h3>

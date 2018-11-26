@@ -71,7 +71,8 @@ const NameGeneratorPrompt = ({
         />
       </Row>
       <Row id={getFieldId(`${fieldId}.dataSource`)} data-name="Data source">
-        <h3>Data-source</h3>
+        <h3>External data-source for roster</h3>
+        <p>This prompt needs a source of nodes to populate the roster.</p>
         <ValidatedField
           component={Select}
           name={`${fieldId}.dataSource`}
@@ -104,6 +105,9 @@ const NameGeneratorPrompt = ({
           { displayLabel &&
             <Row>
               <h4>Additional Display Properties</h4>
+              <p>
+                Would you like do display any other attributes to help identify each node?
+              </p>
               <MultiSelect
                 name={`${fieldId}.cardOptions.additionalProperties`}
                 maxItems={externalDataPropertyOptions.length - 1}
@@ -133,7 +137,8 @@ const NameGeneratorPrompt = ({
             </p>
           </Row>
           <Row>
-            <h4>Sort Order</h4>
+            <h4>Default Sort Order</h4>
+            <p>How would you like to sort nodes by default?</p>
             <MultiSelect
               name={`${fieldId}.sortOptions.sortOrder`}
               maxItems={1}
@@ -146,6 +151,9 @@ const NameGeneratorPrompt = ({
           </Row>
           <Row>
             <h4>Sortable Properties</h4>
+            <p>
+              What manual options would you like to provide for sorting nodes?
+            </p>
             <MultiSelect
               name={`${fieldId}.sortOptions.sortableProperties`}
               maxItems={externalDataPropertyOptions.length}

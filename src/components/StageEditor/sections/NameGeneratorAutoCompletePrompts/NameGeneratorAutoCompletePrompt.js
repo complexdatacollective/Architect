@@ -70,7 +70,8 @@ const NameGeneratorAutoCompletePrompt = ({
         />
       </Row>
       <Row id={getFieldId(`${fieldId}.dataSource`)} data-name="Prompt data source">
-        <h3>Data-source</h3>
+        <h3>External data-source for roster</h3>
+        <p>This prompt needs a source of nodes to populate the roster.</p>
         <ValidatedField
           component={Select}
           name={`${fieldId}.dataSource`}
@@ -90,6 +91,7 @@ const NameGeneratorAutoCompletePrompt = ({
           </Row>
           <Row id={getFieldId(`${fieldId}.cardOptions.displayLabel`)} data-name="Prompt card display Label">
             <h4>Display Label</h4>
+            <p>Which property should be used to uniquely identify each node?</p>
             <ValidatedField
               component={Select}
               name={`${fieldId}.cardOptions.displayLabel`}
@@ -103,6 +105,9 @@ const NameGeneratorAutoCompletePrompt = ({
           { displayLabel &&
             <Row>
               <h4>Additional Display Properties</h4>
+              <p>
+                Would you like do display any other attributes to help identify each node?
+              </p>
               <MultiSelect
                 name={`${fieldId}.cardOptions.additionalProperties`}
                 maxItems={externalDataPropertyOptions.length - 1}
@@ -135,7 +140,8 @@ const NameGeneratorAutoCompletePrompt = ({
             id={getFieldId(`${fieldId}.searchOptions.matchProperties`)}
             data-name="Prompt Search Match Properties"
           >
-            <h4>Match Properties</h4>
+            <h4>Search Properties</h4>
+            <p>When the participant searches, which properties should be searched?</p>
             <Field
               name={`${fieldId}.searchOptions.matchProperties`}
               component={Fields.CheckboxGroup}
@@ -146,7 +152,11 @@ const NameGeneratorAutoCompletePrompt = ({
             id={getFieldId(`${fieldId}.searchOptions.fuzziness`)}
             data-name="Prompt Search Fuzziness"
           >
-            <h4>Fuzziness</h4>
+            <h4>Search Fuzziness</h4>
+            <p>How accurate does the participant need to be when searching?</p>
+            <p>If the roster contains many similar nodes, you might want to help narrow down searches
+              by selecting &quot;low&quot; fuzziness.
+            </p>
             <Field
               name={`${fieldId}.searchOptions.fuzziness`}
               component={Fields.RadioGroup}
