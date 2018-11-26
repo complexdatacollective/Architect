@@ -10,8 +10,8 @@ const NON_SORTABLE_TYPES = ['layout'];
 const ASC = 'asc';
 const DESC = 'desc';
 const DIRECTIONS = [
-  [ASC, 'ascending'],
-  [DESC, 'descending'],
+  [ASC, 'Ascending'],
+  [DESC, 'Descending'],
 ];
 
 const RuleHandle = compose(

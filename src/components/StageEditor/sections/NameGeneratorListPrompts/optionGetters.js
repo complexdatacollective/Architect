@@ -1,5 +1,7 @@
 import { map } from 'lodash';
 
+const NON_SORTABLE_TYPES = ['layout'];
+
 /**
  * Creates a optionGetter function for <MultiSelect />
  *
@@ -27,7 +29,13 @@ const getSortOrderOptionGetter = externalDataPropertyOptions =>
       case 'property': {
         const used = map(allValues, 'property');
 
-        return externalDataPropertyOptions
+        return [
+          { value: '*', label: '*' },
+          ...externalDataPropertyOptions,
+        ]
+          .filter(
+            option => !NON_SORTABLE_TYPES.includes(option.value),
+          )
           .map(
             option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
           );
