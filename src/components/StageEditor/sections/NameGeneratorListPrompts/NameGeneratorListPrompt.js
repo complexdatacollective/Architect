@@ -15,6 +15,7 @@ import {
 } from './optionGetters';
 import withFieldValues from './withFieldValues';
 import withExternalDataPropertyOptions from './withExternalDataPropertyOptions';
+import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
 
 const NameGeneratorPrompt = ({
   handleValidateAttributes,
@@ -25,6 +26,7 @@ const NameGeneratorPrompt = ({
   dataSource,
   cardOptions,
   externalDataPropertyOptions,
+  handleChangeDisplayLabel,
   ...rest
 }) => {
   const displayLabel = cardOptions && cardOptions.displayLabel;
@@ -95,6 +97,7 @@ const NameGeneratorPrompt = ({
               id="displayLabel"
               options={externalDataPropertyOptions}
               validation={{ required: true }}
+              onChange={handleChangeDisplayLabel}
             />
           </Row>
 
@@ -185,4 +188,5 @@ export { NameGeneratorPrompt };
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
   withExternalDataPropertyOptions,
+  withDisplayLabelChangeHandler,
 )(NameGeneratorPrompt);
