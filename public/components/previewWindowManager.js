@@ -185,7 +185,7 @@ function createWindow() {
     global.previewWindow.loadURL(getAppUrl());
 
     if (process.env.NODE_ENV === 'development') {
-      global.appWindow.openDevTools();
+      global.previewWindow.openDevTools();
     }
   });
 }
