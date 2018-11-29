@@ -117,7 +117,7 @@ class EdgeRule extends PureComponent {
             </div>
           )}
         </div>
-        <div className="rule__delete" onClick={() => onDeleteRule(id)} />
+        <button className="rule__delete" onClick={() => onDeleteRule(id)} />
       </div>
     );
   }
