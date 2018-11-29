@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
 import anime from 'animejs';
 import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
-import getAbsoluteBoundingRect from '../../utils/getAbsoluteBoundingRect';
 
 const appear = () => ({
   opacity: {
@@ -33,7 +32,7 @@ const FolderTransition = ({ children, ...props }) => (
     timeout={getCSSVariableAsNumber('--animation-duration-slow-ms')}
     onEntering={
       (el) => {
-        const { height } = getAbsoluteBoundingRect(el);
+        const { height } = el.getBoundingClientRect();
 
         anime({
           targets: el,
