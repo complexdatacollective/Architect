@@ -8,7 +8,6 @@ import { SortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
-import { getVariableRegistry } from '../../../selectors/protocol';
 import { getVariableOptions } from './selectors';
 import { getOperatorsForType } from './operators';
 
@@ -123,8 +122,7 @@ class AlterRule extends PureComponent {
   }
 }
 
-function mapStateToProps(state, { options }) {
-  const variableRegistry = getVariableRegistry(state);
+function mapStateToProps(state, { options, variableRegistry }) {
   const nodeTypes = map(variableRegistry.node, (node, nodeId) => [nodeId, node.name]);
   const valueInputType = options ?
     get(variableRegistry.node, [options.type, 'variables', options.attribute, 'type']) :

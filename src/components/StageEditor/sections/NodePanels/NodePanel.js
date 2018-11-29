@@ -19,7 +19,7 @@ const getDataSourceOptions = (dataSources) => {
   ]);
 };
 
-const NodePanel = ({ fieldId, dataSources, ...rest }) => (
+const NodePanel = ({ fieldId, dataSources, variableRegistry, ...rest }) => (
   <Item {...rest}>
     <div className="stage-editor-section-prompt__group">
       <div className="stage-editor-section-prompt__group-title">Panel title</div>
@@ -48,6 +48,7 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
       <Field
         name={`${fieldId}.filter`}
         component={Filter}
+        variableRegistry={variableRegistry}
       />
     </div>
   </Item>
@@ -56,6 +57,7 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
 NodePanel.propTypes = {
   fieldId: PropTypes.string.isRequired,
   dataSources: PropTypes.array.isRequired,
+  variableRegistry: PropTypes.object.isRequired,
 };
 
 export { NodePanel };

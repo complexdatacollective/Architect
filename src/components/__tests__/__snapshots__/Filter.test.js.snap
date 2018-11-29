@@ -11,6 +11,7 @@ ShallowWrapper {
       }
     }
     onChange={[Function]}
+    variableRegistry={Object {}}
     variableTypes={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -64,6 +65,7 @@ ShallowWrapper {
             transitionDuration={300}
             useDragHandle={true}
             useWindowAsScrollContainer={false}
+            variableRegistry={Object {}}
           />
           <div
             className="filter-group__add"
@@ -142,6 +144,7 @@ ShallowWrapper {
               transitionDuration={300}
               useDragHandle={true}
               useWindowAsScrollContainer={false}
+              variableRegistry={Object {}}
             />,
             <div
               className="filter-group__add"
@@ -177,6 +180,7 @@ ShallowWrapper {
               "transitionDuration": 300,
               "useDragHandle": true,
               "useWindowAsScrollContainer": false,
+              "variableRegistry": Object {},
             },
             "ref": null,
             "rendered": null,
@@ -256,6 +260,7 @@ ShallowWrapper {
               transitionDuration={300}
               useDragHandle={true}
               useWindowAsScrollContainer={false}
+              variableRegistry={Object {}}
             />
             <div
               className="filter-group__add"
@@ -334,6 +339,7 @@ ShallowWrapper {
                 transitionDuration={300}
                 useDragHandle={true}
                 useWindowAsScrollContainer={false}
+                variableRegistry={Object {}}
               />,
               <div
                 className="filter-group__add"
@@ -369,6 +375,7 @@ ShallowWrapper {
                 "transitionDuration": 300,
                 "useDragHandle": true,
                 "useWindowAsScrollContainer": false,
+                "variableRegistry": Object {},
               },
               "ref": null,
               "rendered": null,

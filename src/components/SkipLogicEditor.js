@@ -9,6 +9,7 @@ class SkipLogicEditor extends PureComponent {
   static propTypes = {
     rules: PropTypes.any.isRequired,
     onChange: PropTypes.func.isRequired,
+    variableRegistry: PropTypes.object.isRequired,
   };
 
   render() {
@@ -21,6 +22,7 @@ class SkipLogicEditor extends PureComponent {
         filter,
         ...predicate
       },
+      variableRegistry,
     } = this.props;
 
     return (
@@ -50,6 +52,7 @@ class SkipLogicEditor extends PureComponent {
           <Filter
             filter={filter}
             onChange={newFilter => onChange({ filter: newFilter })}
+            variableRegistry={variableRegistry}
           />
         </div>
       </Guided>

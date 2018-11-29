@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { Filter } from '../Filter';
 
 const mockProps = {
+  variableRegistry: {},
   variableTypes: {},
 };
 

@@ -6,11 +6,12 @@ import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import cx from 'classnames';
 import { keys, has, get } from 'lodash';
+import { getVariableRegistry } from '../../../../selectors/protocol';
 import Guidance from '../../../Guidance';
 import OrderedList, { NewButton } from '../../../OrderedList';
 import NodePanel from './NodePanel';
 
-const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => {
+const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels, variableRegistry }) => {
   const isFull = panels && panels.length === 2;
 
   return (
@@ -25,6 +26,7 @@ const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => 
             item={NodePanel}
             form={form}
             dataSources={dataSources}
+            props={{ variableRegistry }}
           />
 
           { !isFull &&
@@ -47,6 +49,7 @@ NodePanels.propTypes = {
     name: PropTypes.string,
     getValues: PropTypes.func,
   }).isRequired,
+  variableRegistry: PropTypes.object.isRequired,
 };
 
 NodePanels.defaultProps = {
@@ -63,6 +66,7 @@ const mapStateToProps = (state, props) => ({
   disabled: !has(props.form.getValues(state, 'subject'), 'type'),
   dataSources: getDataSources(state),
   panels: props.form.getValues(state, 'panels'),
+  variableRegistry: getVariableRegistry(state),
 });
 
 const mapDispatchToProps = (dispatch, { form }) => ({

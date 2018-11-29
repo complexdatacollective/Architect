@@ -6,7 +6,7 @@ import { get, find } from 'lodash';
 import { Button } from '../../ui/components';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import Card from './ProtocolCard';
-import { getProtocol } from '../../selectors/protocol';
+import { getProtocol, getVariableRegistry } from '../../selectors/protocol';
 import { Draft } from '../../behaviours';
 import SkipLogicEditor from '../SkipLogicEditor';
 
@@ -29,6 +29,7 @@ class EditSkipLogic extends PureComponent {
     draft: PropTypes.any.isRequired,
     updateStage: PropTypes.func.isRequired,
     updateDraft: PropTypes.func.isRequired,
+    variableRegistry: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -67,6 +68,7 @@ class EditSkipLogic extends PureComponent {
     const {
       show,
       draft,
+      variableRegistry,
     } = this.props;
 
     return (
@@ -76,7 +78,11 @@ class EditSkipLogic extends PureComponent {
         show={show}
         onCancel={this.handleCancel}
       >
-        <SkipLogicEditor onChange={this.handleChange} rules={draft} />
+        <SkipLogicEditor
+          onChange={this.handleChange}
+          rules={draft}
+          variableRegistry={variableRegistry}
+        />
       </Card>
     );
   }
@@ -87,10 +93,12 @@ const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
   const stage = find(protocol.stages, ['id', stageId]);
   const logic = get(stage, 'skipLogic', defaultLogic);
+  const variableRegistry = getVariableRegistry(state);
 
   return {
     stageId,
     draft: logic,
+    variableRegistry,
   };
 };
 

@@ -5,7 +5,7 @@ import Rule from './Rule';
 import AppearTransition from '../Transitions/Appear';
 
 const Rules = SortableContainer(
-  ({ rules, onUpdateRule, onDeleteRule }) => (
+  ({ rules, onUpdateRule, onDeleteRule, variableRegistry }) => (
     <TransitionGroup className="rules">
       {rules.map((rule, index) => (
         <AppearTransition
@@ -18,6 +18,7 @@ const Rules = SortableContainer(
             onUpdateRule={onUpdateRule}
             onDeleteRule={onDeleteRule}
             className="rules__rule"
+            variableRegistry={variableRegistry}
           />
         </AppearTransition>
       ))}

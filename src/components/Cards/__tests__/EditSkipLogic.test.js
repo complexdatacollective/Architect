@@ -10,6 +10,7 @@ const mockProps = {
   updateDraft: () => {},
   rules: {},
   onChange: () => {},
+  variableRegistry: {},
 };
 
 describe('<EditForm />', () => {

@@ -9,7 +9,6 @@ import DragHandle from './DragHandle';
 import DropDown from './DropDown';
 import Input from './Input';
 import { getVariableOptions } from './selectors';
-import { getVariableRegistry } from '../../../selectors/protocol';
 import { getOperatorsForType } from './operators';
 
 class EgoRule extends PureComponent {
@@ -112,8 +111,7 @@ class EgoRule extends PureComponent {
 
 
 // TODO: person is an implicitly required node type
-function mapStateToProps(state, { options }) {
-  const variableRegistry = getVariableRegistry(state);
+function mapStateToProps(state, { options, variableRegistry }) {
   const personType = find(toPairs(variableRegistry.node), ([, node]) => node.name === 'person');
   const personId = personType && personType[0];
   const valueInputType = options ?
