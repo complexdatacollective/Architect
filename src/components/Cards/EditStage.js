@@ -25,6 +25,7 @@ const formName = 'edit-stage';
 class EditStage extends PureComponent {
   static propTypes = {
     dirty: PropTypes.bool.isRequired,
+    invalid: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
     submitForm: PropTypes.func.isRequired,
     onComplete: PropTypes.func.isRequired,
@@ -56,6 +57,8 @@ class EditStage extends PureComponent {
   }
 
   get secondaryButtons() {
+    if (this.props.invalid) { return []; }
+
     return [
       <Button
         key="preview"
