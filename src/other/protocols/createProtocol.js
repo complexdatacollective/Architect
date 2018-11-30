@@ -2,7 +2,6 @@ import { remote } from 'electron';
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
-import { archive } from './archive';
 import { getLocalDirectoryFromArchivePath } from './utils';
 import template from './template.json';
 
@@ -41,16 +40,16 @@ const createProtocolWorkingPath = (destinationPath, protocol) =>
   });
 
 /**
- * Creates a blank bundled protocol at filePath
+ * Creates a blank protocol in a tempory path
  * Expects a valid protocol object as input.
  * @param {string} destinationPath - destination for protocol bundle.
  * @param {object} protocol - protocol object, probably a template.
  */
-export const createProtocolArchive = (destinationPath, protocol) => {
+export const createProtocolFiles = (destinationPath, protocol) => {
   const tempPath = getLocalDirectoryFromArchivePath(destinationPath);
 
   return createProtocolWorkingPath(tempPath, protocol)
-    .then(() => archive(tempPath, destinationPath));
+    .then(() => tempPath);
 };
 
 /**
@@ -64,8 +63,8 @@ const createProtocol = () =>
         name: path.basename(filePath, '.netcanvas'),
       };
 
-      return createProtocolArchive(filePath, protocol)
-        .then(() => filePath);
+      return createProtocolFiles(filePath, protocol)
+        .then(tempPath => ({ filePath, workingPath: tempPath }));
     });
 
 export default createProtocol;

@@ -1,10 +1,11 @@
 import { actionCreators as createActionCreators } from './create';
-import {
-  actionCreators as importActionCreators,
-  actionTypes as importActionTypes,
-} from './import';
+import { actionCreators as importActionCreators } from './import';
 import { actionCreators as saveActionCreators } from './save';
 import { actionCreators as exportActionCreators } from './export';
+import {
+  actionCreators as registerActionCreators,
+  actionTypes as registerActionTypes,
+} from './register';
 import locateProtocol from '../../../other/protocols/locateProtocol';
 import history from '../../../history';
 
@@ -57,13 +58,19 @@ const importAndLoadThunk = filePath =>
       .catch(e => dispatch(importAndLoadError(e)));
 
 /**
- * 1. Create - Create a new protocol from template in user space
+ * 1. Create - Create a new protocol from template
  * 2. Run importAndLoadThunk on new protocol
  */
 const createAndLoadProtocolThunk = () =>
   dispatch =>
     dispatch(createActionCreators.createProtocol())
-      .then(({ filePath }) => dispatch(importAndLoadThunk(filePath)))
+      .then(({ filePath, workingPath }) =>
+        dispatch(registerActionCreators.registerProtocol({ filePath, workingPath })),
+      )
+      .then(({ id }) => {
+        history.push(`/edit/${id}/`);
+        return id;
+      })
       .catch(e => dispatch(createAndLoadError(e)));
 
 /**
@@ -80,7 +87,7 @@ const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case importActionTypes.IMPORT_PROTOCOL_SUCCESS:
+    case registerActionTypes.REGISTER_PROTOCOL:
       return [
         ...state,
         {
