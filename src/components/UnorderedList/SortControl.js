@@ -7,51 +7,25 @@ const getDirectionLabel = direction =>
 
 class SortControl extends Component {
   getIsSorted(checkedProperty) {
-    return this.props.sortOrder
-      .map(({ property }) => property)
-      .includes(checkedProperty);
-  }
-
-  getSortOption(property) {
-    const { sortOrder } = this.props;
-
-    const optionIndex = sortOrder.findIndex(sortRule => sortRule.property === property);
-
-    if (optionIndex === -1) {
-      return [
-        { property, direction: 'asc' },
-        sortOrder.length,
-      ];
-    }
-
-    return [
-      sortOrder[optionIndex],
-      optionIndex,
-    ];
+    return this.props.sortOrder.property === checkedProperty;
   }
 
   toggleSort = (property) => {
-    const { sortOrder } = this.props;
-
-    const [option, optionIndex] = this.getSortOption(property);
-
+    const option = this.props.sortOrder;
     const newDirection = option.direction === 'desc' ? 'asc' : 'desc';
-
-    const newSortOrder = Object.assign(
-      [],
-      sortOrder,
-      { [optionIndex]: { ...option, direction: newDirection } },
-    );
+    const newSortOrder = {
+      property,
+      direction: newDirection,
+    };
 
     this.props.onChange(newSortOrder);
   }
 
   renderButton = (property) => {
-    const [option] = this.getSortOption(property);
     const isSorted = this.getIsSorted(property);
-    const color = isSorted ? 'white' : 'primary';
+    const color = isSorted ? 'primary' : 'platinum';
     const label = isSorted ?
-      `${property} ${getDirectionLabel(option.direction)}` :
+      `${property} ${getDirectionLabel(this.props.sortOrder.direction)}` :
       property;
 
     return (
@@ -82,13 +56,13 @@ class SortControl extends Component {
 SortControl.propTypes = {
   onChange: PropTypes.func,
   sortableProperties: PropTypes.array,
-  sortOrder: PropTypes.array,
+  sortOrder: PropTypes.object,
 };
 
 SortControl.defaultProps = {
   onChange: () => {},
   sortableProperties: [],
-  sortOrder: [],
+  sortOrder: {},
 };
 
 export default SortControl;

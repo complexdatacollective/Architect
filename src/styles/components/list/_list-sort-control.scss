@@ -1,0 +1,10 @@
+.list-sort-control {
+  .button {
+    min-width: 10rem;
+    margin-right: 1rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

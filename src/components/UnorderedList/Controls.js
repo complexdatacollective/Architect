@@ -9,7 +9,10 @@ class Controls extends Component {
 
     this.state = {
       query: '',
-      sortOrder: [],
+      sortOrder: {
+        direction: 'asc',
+        property: 'name',
+      },
     };
   }
 
@@ -33,7 +36,7 @@ class Controls extends Component {
       <div className="list-controls">
         <div className="list-controls__section list-controls__section--search">
           <div className="list-controls__section-name">
-            Search:
+            Filter:
           </div>
           <Text
             input={{

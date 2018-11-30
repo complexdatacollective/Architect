@@ -33,9 +33,7 @@ const search = (list, query) => {
 
 const sort = (list, sortOrder) => {
   if (!sortOrder) { return list; }
-  const properties = sortOrder.map(({ property }) => property);
-  const orders = sortOrder.map(({ direction }) => direction);
-  return orderBy(list, properties, orders);
+  return orderBy(list, sortOrder.property, sortOrder.direction);
 };
 
 const filter = (list, { query, sortOrder }) => {
@@ -60,7 +58,7 @@ class Variables extends Component {
               name={name}
               form={form}
               filter={filter}
-              sortableProperties={['name']}
+              sortableProperties={['name', 'type']}
             />
           </div>
         </div>
