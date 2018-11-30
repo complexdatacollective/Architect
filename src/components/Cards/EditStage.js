@@ -57,13 +57,12 @@ class EditStage extends PureComponent {
   }
 
   get secondaryButtons() {
-    if (this.props.invalid) { return []; }
-
     return [
       <Button
         key="preview"
         onClick={this.handlePreview}
         color="paradise-pink"
+        disabled={this.props.invalid}
       >Preview</Button>,
     ];
   }
