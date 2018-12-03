@@ -1,12 +1,16 @@
-$preview-offset: unit(4);
-$preview-width: 22vw;
+$preview-offset: unit(8);
+$preview-width: 15vw;
 $preview-ratio: 9 / 16;
-$border-width: unit(.3);
 $component-name: timeline-stage;
 
 .#{$component-name} {
   padding: unit(5) 0;
   position: relative;
+  transition: transform var(--animation-duration-fast) var(--animation-easing);
+
+  &:hover {
+    transform: scale(1.2);
+  }
 
   &__notch {
     cursor: pointer;
@@ -25,7 +29,7 @@ $component-name: timeline-stage;
     position: absolute;
     width: $preview-width;
     top: 0;
-    left: calc(50% + #{$preview-offset});
+    left: 70rem;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -34,7 +38,7 @@ $component-name: timeline-stage;
     transition: opacity var(--animation-duration-standard) var(--animation-easing),
     transform var(--animation-duration-standard) var(--animation-easing);
     opacity: 0;
-    transform: translateZ(0) translateX(unit(-4));
+    transform: translateZ(0) translateX(unit(-10));
   }
 
   &__control {
@@ -54,18 +58,13 @@ $component-name: timeline-stage;
   &__edit-stage {
     cursor: pointer;
     position: relative;
-    display: inline-block;
-    width: $preview-width;
-    left: calc(50% - #{$preview-width} - #{$preview-offset});
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &-title {
-      @include typography('title-5', font-size);
-      text-align: center;
-      color: var(--text);
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      margin: calc(#{-.5 * $preview-width * $preview-ratio} - #{unit(2.5)}) 0 0;
+      margin: 0 0 0 $preview-offset;
+      width: $preview-width;
     }
   }
 
@@ -76,6 +75,9 @@ $component-name: timeline-stage;
     position: relative;
     z-index: var(--z-default);
     text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0.6rem 0.6rem 0 0 var(--architect-panel-shadow);
 
     &-preview {
       width: 100%;
@@ -93,50 +95,6 @@ $component-name: timeline-stage;
       img {
         max-width: 100%;
       }
-    }
-
-    &::before {
-      content: '';
-      display: block;
-      background: var(--architect-shadow);
-      position: absolute;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      top: unit(1);
-      left: unit(1);
-    }
-
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      z-index: 4;
-      width: calc(100% + #{$border-width * 2});
-      height: calc(100% + #{$border-width * 2});
-      top: -$border-width;
-      left: -$border-width;
-      border-width: $border-width;
-      border-style: solid;
-      border-color: transparent;
-      transition: border-color var(--animation-easing) var(--animation-duration-standard);
-    }
-
-    &:hover {
-      &::after {
-        border-color: var(--architect-intent);
-      }
-    }
-  }
-
-  &--flip {
-    .#{$component-name}__edit-stage {
-      left: calc(50% + #{$preview-offset});
-    }
-
-    .#{$component-name}__controls {
-      left: calc(50% - #{$preview-width} - #{$preview-offset});
-      transform: translateX(unit(4));
     }
   }
 

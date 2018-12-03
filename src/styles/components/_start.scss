@@ -41,11 +41,11 @@
       margin: 0 unit(2) 0 0;
       padding: 1.8em;
       width: unit(30);
+      transition: transform 5s ease-in;
     }
   }
 
   &--hide {
-    opacity: 0;
 
     #create-new-protocol-button {
       transform: translateX(-100%);
