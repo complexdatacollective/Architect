@@ -1,11 +1,25 @@
 import React from 'react';
+import { TransitionGroup } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import Fade from './Transitions/Fade';
 
 const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
   const buttonLayout = [
-    <div className="control-bar__primary-buttons" key="primary">{ buttons }</div>,
-    <div className="control-bar__secondary-buttons" key="secondary">{ secondaryButtons }</div>,
+    <div className="control-bar__primary-buttons" key="primary">
+      <TransitionGroup component={null}>
+        { buttons &&
+          Array.from(buttons).map(button => <Fade key={button.key}>{button}</Fade>)
+        }
+      </TransitionGroup>
+    </div>,
+    <div className="control-bar__secondary-buttons" key="secondary">
+      <TransitionGroup component={null}>
+        { secondaryButtons &&
+          Array.from(secondaryButtons).map(button => <Fade key={button.key}>{button}</Fade>)
+        }
+      </TransitionGroup>
+    </div>,
   ];
 
   return (
