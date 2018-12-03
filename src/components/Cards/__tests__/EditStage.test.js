@@ -23,4 +23,14 @@ describe('<EditStage />', () => {
 
     expect(component).toMatchSnapshot();
   });
+
+  it('hides preview button when form is invalid', () => {
+    const component = shallow(<EditStage {...mockProps} invalid />);
+
+    expect(
+      component.prop('secondaryButtons')
+        .find(({ key }) => key === 'preview')
+        .props.disabled,
+    ).toBe(true);
+  });
 });
