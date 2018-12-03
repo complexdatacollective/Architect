@@ -148,20 +148,25 @@ const NameGeneratorAutoCompletePrompt = ({
           </Row>
           <Row
             id={getFieldId(`${fieldId}.searchOptions.fuzziness`)}
-            data-name="Prompt Search Fuzziness"
+            data-name="Prompt Search Accuracy"
           >
-            <h4>Search Fuzziness</h4>
-            <p>How accurate does the participant need to be when searching?</p>
-            <p>If the roster contains many similar nodes, you might want to help narrow down
-              searches by selecting &quot;low&quot; fuzziness.
+            <h4>Search Accuracy</h4>
+            <p>How accurate does a query need to be when searching?</p>
+            <p>
+              If the roster contains many similar nodes, you might want to help narrow down
+              searches by selecting &quot;Exact&quot; or high accuracy.
+            </p>
+            <p>
+              A low accuracy search will allow for typos and spelling mistakes.
             </p>
             <Field
               name={`${fieldId}.searchOptions.fuzziness`}
               component={Fields.RadioGroup}
               options={[
                 { value: 0, label: 'Exact' },
-                { value: 0.3, label: 'Low' },
-                { value: 0.6, label: 'High' },
+                { value: 0.25, label: 'High accuracy' },
+                { value: 0.5, label: 'Medium accurary' },
+                { value: 0.75, label: 'Low accuracy' },
               ]}
             />
           </Row>
