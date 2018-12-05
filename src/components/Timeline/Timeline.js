@@ -144,7 +144,7 @@ class Timeline extends Component {
         index={index}
         id={stage.id}
         type={stage.type}
-        label={stage.label}
+        label={`${index + 1}. ${stage.label}`}
         onMouseEnter={this.handleMouseEnterStage}
         onMouseLeave={this.handleMouseLeaveStage}
         onEditStage={() => this.handleEditStage(stage.id)}

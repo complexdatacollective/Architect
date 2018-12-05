@@ -6,11 +6,6 @@ $component-name: timeline-stage;
 .#{$component-name} {
   padding: unit(5) 0;
   position: relative;
-  transition: transform var(--animation-duration-fast) var(--animation-easing);
-
-  &:hover {
-    transform: scale(1.2);
-  }
 
   &__notch {
     cursor: pointer;
@@ -35,8 +30,8 @@ $component-name: timeline-stage;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    transition: opacity var(--animation-duration-standard) var(--animation-easing),
-    transform var(--animation-duration-standard) var(--animation-easing);
+    transition: opacity var(--animation-duration-fast) var(--animation-easing),
+    transform var(--animation-duration-fast) var(--animation-easing);
     opacity: 0;
     transform: translateZ(0) translateX(unit(-10));
   }
@@ -94,6 +89,7 @@ $component-name: timeline-stage;
 
       img {
         max-width: 100%;
+        pointer-events: none;
       }
     }
   }
@@ -102,8 +98,8 @@ $component-name: timeline-stage;
     .#{$component-name}__controls {
       opacity: 1;
       transform: translateX(0);
-      transition: opacity var(--animation-duration-standard) var(--animation-duration-standard) var(--animation-easing),
-      transform var(--animation-duration-standard) var(--animation-duration-standard) var(--animation-easing);
+      transition: opacity var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing),
+      transform var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing);
     }
   }
 }
