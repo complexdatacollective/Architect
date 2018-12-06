@@ -1,5 +1,5 @@
 $stage-columns: 3;
-$stage-gap: unit(2);
+$stage-gap: unit(1);
 $stage-width: calc(#{100% / $stage-columns} - #{($stage-columns - 1) * $stage-gap / $stage-columns});
 $component-name: timeline-insert-stage-option-grid;
 
@@ -12,11 +12,18 @@ $component-name: timeline-insert-stage-option-grid;
 
   &__option {
     cursor: pointer;
+    background: var(--background-light);
+    padding: unit(2);
 
     &:hover {
       .#{$component-name}__preview {
         border-color: var(--architect-intent);
       }
+    }
+
+    h3 {
+      height: 2.2em;
+      margin-bottom: unit(1);
     }
   }
 

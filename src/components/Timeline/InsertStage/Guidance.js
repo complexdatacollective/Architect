@@ -16,7 +16,7 @@ class Guidance extends PureComponent {
     children: null,
   }
 
-  renderGuidance = ({ guidance, type }) => {
+  renderGuidance = ({ guidance, title, type }) => {
     const guidanceClasses = cx(
       'timeline-insert-stage-guidance__item',
       {
@@ -26,7 +26,7 @@ class Guidance extends PureComponent {
 
     return (
       <div className={guidanceClasses} key={type}>
-        <h3>{ guidance.title }</h3>
+        <h3>{ title }</h3>
         { guidance.description }
       </div>
     );

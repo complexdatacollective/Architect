@@ -3,8 +3,8 @@ import React from 'react';
 export default [
   {
     type: 'NameGenerator',
+    title: 'Name Generator',
     guidance: {
-      title: 'Name Generator',
       description: (
         <p>
           The Name Generator interface is designed to prompt your research
@@ -16,22 +16,22 @@ export default [
   },
   {
     type: 'NameGeneratorList',
+    title: 'Roster Name Generator (list)',
     guidance: {
-      title: 'Name Generator Roster List',
-      description: (<p>Name Generator Roster List</p>),
+      description: (<p>Roster Name Generator (list)</p>),
     },
   },
   {
     type: 'NameGeneratorAutoComplete',
+    title: 'Roster Name Generator (search)',
     guidance: {
-      title: 'Name Generator Auto Complete Roster List',
-      description: (<p>Name Generator Auto Complete Roster List</p>),
+      description: (<p>Roster Name Generator (search)</p>),
     },
   },
   {
     type: 'Sociogram',
+    title: 'Sociogram',
     guidance: {
-      title: 'Sociogram',
       description: (
         <div>
           <p>
@@ -48,8 +48,8 @@ export default [
   },
   {
     type: 'OrdinalBin',
+    title: 'Ordinal Bin',
     guidance: {
-      title: 'Ordinal Bin',
       description: (
         <p>
           The Ordinal Bin interface allows your participants to quickly assign the
@@ -60,8 +60,8 @@ export default [
   },
   {
     type: 'CategoricalBin',
+    title: 'Categorical Bin',
     guidance: {
-      title: 'Categorical Bin',
       description: (
         <p>
           The Categorical Bin interface allows your participants to quickly
@@ -72,8 +72,8 @@ export default [
   },
   {
     type: 'Information',
+    title: 'Information',
     guidance: {
-      title: 'Information',
       description: (
         <p>
           The Information Interface allows you to display text and rich
