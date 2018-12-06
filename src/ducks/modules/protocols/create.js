@@ -6,9 +6,10 @@ const CREATE_PROTOCOL_ERROR = 'PROTOCOLS/CREATE_PROTOCOL_ERROR';
 
 const createProtocol = () => ({ type: CREATE_PROTOCOL });
 
-const createProtocolSuccess = filePath => ({
+const createProtocolSuccess = (filePath, workingPath) => ({
   type: CREATE_PROTOCOL_SUCCESS,
   filePath,
+  workingPath,
 });
 
 const createProtocolError = error => ({
@@ -21,7 +22,11 @@ const createProtocolThunk = () =>
     dispatch(createProtocol());
 
     return createProtocolFile()
-      .then(filePath => dispatch(createProtocolSuccess(filePath)))
+      .then(({ filePath, workingPath }) => {
+        dispatch(createProtocolSuccess(filePath, workingPath));
+
+        return { filePath, workingPath };
+      })
       .catch(e => dispatch(createProtocolError(e)));
   };
 

@@ -1,30 +1,18 @@
-import uuid from 'uuid';
-import path from 'path';
 import { importProtocol as importProtocolFiles } from '../../../other/protocols';
+import { actionCreators as registerActions } from './register';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
 const IMPORT_PROTOCOL_ERROR = 'PROTOCOLS/IMPORT_ERROR';
-
-const isNetcanvasFile = fileName =>
-  path.extname(fileName) === '.netcanvas';
-
-const getMeta = (filePath, isAdvanced = false) => ({
-  filePath,
-  id: uuid(),
-  advanced: isAdvanced,
-});
 
 const importProtocol = filePath => ({
   type: IMPORT_PROTOCOL,
   filePath,
 });
 
-const importProtocolSuccess = ({ filePath, id, advanced, workingPath }) => ({
+const importProtocolSuccess = ({ filePath, workingPath }) => ({
   type: IMPORT_PROTOCOL_SUCCESS,
   filePath,
-  id,
-  advanced,
   workingPath,
 });
 
@@ -38,14 +26,11 @@ const importProtocolThunk = filePath =>
   (dispatch) => {
     dispatch(importProtocol(filePath));
 
-    const protocolMeta = getMeta(
-      filePath,
-      !isNetcanvasFile(filePath),
-    );
-
     return importProtocolFiles(filePath)
-      .then(workingPath => ({ ...protocolMeta, workingPath }))
-      .then(metaWithWorkingPath => dispatch(importProtocolSuccess(metaWithWorkingPath)))
+      .then((workingPath) => {
+        dispatch(importProtocolSuccess({ filePath, workingPath }));
+        return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
+      })
       .catch(e => dispatch(importProtocolError(e, filePath)));
   };
 
