@@ -7,7 +7,7 @@ import SortControl from '../SortControl';
 const mockProps = {
   onChange: () => {},
   sortableProperties: [],
-  sortOrder: [],
+  sortOrder: {},
 };
 
 describe('<SortControl />', () => {
@@ -35,17 +35,13 @@ describe('<SortControl />', () => {
 
     subject.find('Button').first().simulate('click');
 
-    const expectedValueOfSortOrder = [
-      { direction: 'desc', property: 'foo' },
-    ];
+    const expectedValueOfSortOrder = { direction: 'desc', property: 'foo' };
 
     expect(onChange.mock.calls[0]).toEqual([expectedValueOfSortOrder]);
   });
 
   it('toggles sort order', () => {
-    const startingSortOrder = [
-      { direction: 'desc', property: 'foo' },
-    ];
+    const startingSortOrder = { direction: 'desc', property: 'foo' };
 
     const onChange = jest.fn();
     const subject = shallow((
@@ -59,9 +55,7 @@ describe('<SortControl />', () => {
 
     subject.find('Button').first().simulate('click');
 
-    const nextExpectedValueOfSortOrder = [
-      { direction: 'asc', property: 'foo' },
-    ];
+    const nextExpectedValueOfSortOrder = { direction: 'asc', property: 'foo' };
 
     expect(onChange.mock.calls[0]).toEqual([nextExpectedValueOfSortOrder]);
   });

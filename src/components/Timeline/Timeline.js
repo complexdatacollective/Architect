@@ -137,28 +137,23 @@ class Timeline extends Component {
     return itemsWithInsertStage;
   }
 
-  renderStage = (stage, index) => {
-    const className = cx({ 'timeline-stage--flip': index % 2 === 0 });
-
-    return (
-      <None key={`stage_${stage.id}`}>
-        <Stage
-          key={`stage_${stage.id}`}
-          index={index}
-          id={stage.id}
-          type={stage.type}
-          label={stage.label}
-          className={className}
-          onMouseEnter={this.handleMouseEnterStage}
-          onMouseLeave={this.handleMouseLeaveStage}
-          onEditStage={() => this.handleEditStage(stage.id)}
-          onDeleteStage={() => this.handleDeleteStage(stage.id)}
-          onInsertStage={position => this.handleInsertStage(index + position)}
-          onEditSkipLogic={() => this.handleEditSkipLogic(stage.id)}
-        />
-      </None>
-    );
-  }
+  renderStage = (stage, index) => (
+    <None key={`stage_${stage.id}`}>
+      <Stage
+        key={`stage_${stage.id}`}
+        index={index}
+        id={stage.id}
+        type={stage.type}
+        label={`${index + 1}. ${stage.label}`}
+        onMouseEnter={this.handleMouseEnterStage}
+        onMouseLeave={this.handleMouseLeaveStage}
+        onEditStage={() => this.handleEditStage(stage.id)}
+        onDeleteStage={() => this.handleDeleteStage(stage.id)}
+        onInsertStage={position => this.handleInsertStage(index + position)}
+        onEditSkipLogic={() => this.handleEditSkipLogic(stage.id)}
+      />
+    </None>
+  );
 
   render() {
     const { show, sorting } = this.props;

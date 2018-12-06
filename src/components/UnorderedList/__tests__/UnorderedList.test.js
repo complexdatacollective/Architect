@@ -61,6 +61,6 @@ describe('<UnorderedList />', () => {
 
     subject.find('MockControls').first().prop('onChange')({ foo: 'bar' });
 
-    expect(subject.state('parameters')).toEqual({ foo: 'bar' });
+    expect(subject.state('parameters')).toMatchObject({ foo: 'bar' });
   });
 });
