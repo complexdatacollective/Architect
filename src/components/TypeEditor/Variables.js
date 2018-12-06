@@ -59,6 +59,10 @@ class Variables extends Component {
               form={form}
               filter={filter}
               sortableProperties={['name', 'type']}
+              initialSortOrder={{
+                direction: 'asc',
+                property: 'name',
+              }}
             />
           </div>
         </div>

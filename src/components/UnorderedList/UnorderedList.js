@@ -7,13 +7,16 @@ class List extends Component {
     controls: DefaultControls,
     filter: items => items,
     onDelete: () => {},
+    initialSortOrder: {},
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      parameters: {},
+      parameters: {
+        sortOrder: this.props.initialSortOrder,
+      },
     };
   }
 
@@ -38,6 +41,7 @@ class List extends Component {
       controls: Controls,
       item: Item,
       sortableProperties,
+      initialSortOrder,
       onDelete,
       children,
       items,
@@ -53,6 +57,7 @@ class List extends Component {
             <Controls
               onChange={this.handleUpdateParameters}
               sortableProperties={sortableProperties}
+              initialSortOrder={initialSortOrder}
             />
           </div>
         )}

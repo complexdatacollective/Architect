@@ -9,10 +9,7 @@ class Controls extends Component {
 
     this.state = {
       query: '',
-      sortOrder: {
-        direction: 'asc',
-        property: 'name',
-      },
+      sortOrder: this.props.initialSortOrder,
     };
   }
 
@@ -65,11 +62,13 @@ class Controls extends Component {
 Controls.propTypes = {
   onChange: PropTypes.func,
   sortableProperties: PropTypes.array,
+  initialSortOrder: PropTypes.object,
 };
 
 Controls.defaultProps = {
   onChange: () => {},
   sortableProperties: [],
+  initialSortOrder: {},
 };
 
 export default Controls;
