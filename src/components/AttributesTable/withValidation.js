@@ -1,7 +1,7 @@
 import { get, reduce, isEmpty } from 'lodash';
 import { withHandlers, compose } from 'recompose';
 import { connect } from 'react-redux';
-import { getValidations } from '../../../../../utils/validations';
+import { getValidations } from '../../utils/validations';
 
 const mapStateToProps = state => ({
   variableRegistry: get(state, 'protocol.present.variableRegistry', {}),

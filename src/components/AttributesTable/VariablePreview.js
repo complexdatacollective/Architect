@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isBoolean, isArray } from 'lodash';
-import { Icon } from '../../../../../ui/components';
+import { Icon } from '../../ui/components';
 
 const formatValue = (value) => {
   if (isBoolean(value)) { return value ? <em>TRUE</em> : <em>FALSE</em>; }

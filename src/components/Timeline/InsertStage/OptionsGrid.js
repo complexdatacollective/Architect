@@ -8,7 +8,7 @@ const getTimelineImage = type =>
   get(timelineImages, type);
 
 const StageType = Zoom(
-  ({ type, onSelectStageType, onMouseEnterStageType, onMouseLeaveStageType }) => {
+  ({ type, title, onSelectStageType, onMouseEnterStageType, onMouseLeaveStageType }) => {
     const image = getTimelineImage(type);
 
     return (
@@ -19,12 +19,12 @@ const StageType = Zoom(
         onMouseEnter={onMouseEnterStageType}
         onMouseLeave={onMouseLeaveStageType}
       >
-        <h3>{ type }</h3>
+        <h3>{ title }</h3>
         <div
           className="timeline-insert-stage-option-grid__preview"
         >
-          { image && <img className="timeline-insert-stage-option-grid__screen" src={image} alt={type} /> }
-          { !image && <div className="timeline-insert-stage-option-grid__description">{type} Interface</div> }
+          { image && <img className="timeline-insert-stage-option-grid__screen" src={image} alt={title} /> }
+          { !image && <div className="timeline-insert-stage-option-grid__description">{title} Interface</div> }
         </div>
       </div>
     );
@@ -43,10 +43,11 @@ class Options extends Component {
     options: [],
   };
 
-  renderOption = ({ type }, index) => (
+  renderOption = ({ type, title }, index) => (
     <StageType
       key={`${type}_${index}`}
       type={type}
+      title={title}
       zoomColors={['#2d2955', '#ffffff']}
       onSelectStageType={() => this.props.handleOptionSelected(type)}
       onMouseEnterStageType={() => this.props.handleOptionActive(type)}

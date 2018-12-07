@@ -30,4 +30,11 @@ $component-name: list-item;
     padding: unit(2);
     flex-grow: 1;
   }
+
+  .list-row,
+  .list-group {
+    &:last-child {
+      margin: 0;
+    }
+  }
 }

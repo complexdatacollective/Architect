@@ -1,0 +1,11 @@
+.list-group {
+  border-top: 2px solid var(--color-shadow);
+  margin: unit(4) 0;
+  padding: unit(2) 0 0;
+
+  .list-row {
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

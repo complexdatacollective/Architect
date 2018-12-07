@@ -1,43 +1,9 @@
 .stage-editor-section-prompt {
-
-  &__group {
-    margin: 0 0 unit(2);
-    padding: unit(2) 0 0;
-    border-top: 2px solid var(--architect-border);
-
-    .form-field-container {
-      --input-background: var(--background);
-      margin: 0 0 unit(2);
-
-      h4 {
-        font-weight: bold;
-      }
-    }
-
-    &:first-child {
-      border: 0;
-      padding: 0;
-    }
-
-    &-title {
-      margin: unit(2) 0;
-      font-weight: bold;
-    }
-  }
-
-  &__setting {
-    margin: 0 0 unit(2);
-  }
-
-  &__textarea {
-    margin-bottom: 3rem;
-  }
-
-  &__label {
-    @include preset(copy-standard);
-    font-weight: 200;
-    font-family: var(--body-font-family);
-    display: block;
-    margin: 0 0 unit(1);
+  &__preview--centered {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
