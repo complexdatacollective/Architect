@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, toPairs } from 'lodash';
 import { compose } from 'recompose';
-import RoundButton from '../../../../Form/RoundButton';
+import RoundButton from '../Form/RoundButton';
 import Variable from './Variable';
 import withVaribleActions from './withVariableActions';
 import withUnusedVariables from './withUnusedVariables';
@@ -105,9 +105,11 @@ class AttributesTable extends Component {
 
     return (
       <div className="attributes-table">
-        <div className="attributes-table__variables">
-          {rows}
-        </div>
+        { rows.length > 0 && (
+          <div className="attributes-table__variables">
+            {rows}
+          </div>
+        ) }
 
         <RoundButton
           onClick={this.handleAddVariable}

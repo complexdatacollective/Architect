@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { get } from 'lodash';
-import { getFieldId } from '../../../../../utils/issues';
+import { getFieldId } from '../../utils/issues';
 import VariablePreview from './VariablePreview';
 import VariableChooser from './VariableChooser';
 import VariableEditor from './VariableEditor';

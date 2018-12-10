@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import * as fields from '../../../../../ui/components/Fields';
-import Field from '../../../../Form/DetachedField';
+import * as fields from '../../ui/components/Fields';
+import Field from '../Form/DetachedField';
 
 const VARIABLE_INPUT_TYPES = {
   text: 'Text',

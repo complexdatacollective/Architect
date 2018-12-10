@@ -10,7 +10,7 @@ const sortByType = sortBy(['type']);
 
 const filterByType = query =>
   items =>
-    items.filter(item => (query === '' || item.type.toLowerCase().indexOf(query.toLowerCase()) !== -1));
+    items.filter(item => (query === '' || item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1));
 
 const sortDirection = order =>
   items =>

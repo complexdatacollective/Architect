@@ -16,6 +16,16 @@ const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
 const form = { name: formName, getValues: getFormValues };
 
+const INTERFACE_NAMES = {
+  Information: 'Information',
+  NameGenerator: 'Name Generator',
+  NameGeneratorList: 'Roster Name Generator (list)',
+  NameGeneratorAutoComplete: 'Roster Name Generator (search)',
+  Sociogram: 'Sociogram',
+};
+
+const getInterfaceName = type => INTERFACE_NAMES[type] || type;
+
 class StageEditor extends Component {
   componentDidMount() {
     ipcRenderer.on('REFRESH_PREVIEW', this.handleRefresh);
@@ -62,7 +72,7 @@ class StageEditor extends Component {
               (<a onClick={toggleCodeView}>Show Code View</a>)
             </small>
           </div>
-          <h1 className="editor__heading">Edit {stage.type} Screen</h1>
+          <h1 className="editor__heading">Edit {getInterfaceName(stage.type)}</h1>
 
           {this.renderSections()}
 
