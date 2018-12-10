@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import * as fields from '../../ui/components/Fields';
-import Field from '../Form/DetachedField';
+import Field from '../DetachedField';
 
 const VARIABLE_INPUT_TYPES = {
   text: 'Text',
@@ -23,8 +23,12 @@ const getInput = (type) => {
 };
 
 class VariableEditor extends Component {
+  handleChange = (e, value) => {
+    this.onChange(value);
+  }
+
   renderInput() {
-    const { type, validation, variable, value, label, options, onChange } = this.props;
+    const { type, validation, variable, value, label, options } = this.props;
 
     const InputComponent = getInput(type);
 
@@ -34,7 +38,7 @@ class VariableEditor extends Component {
       <Field
         component={InputComponent}
         name={variable}
-        onChange={onChange}
+        onChange={this.handleChange}
         validation={validation}
         value={value}
         label={label}

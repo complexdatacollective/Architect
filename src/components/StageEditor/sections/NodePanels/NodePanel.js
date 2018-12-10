@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
-import Filter from '../../../Form/Fields/Filter';
+import Filter from '../../../Filter';
 import ValidatedField from '../../../Form/ValidatedField';
 import { Item } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';

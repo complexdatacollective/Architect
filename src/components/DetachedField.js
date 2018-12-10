@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
-import withValidation from './withValidation';
+import withValidation from './Form/withValidation';
 
 const getValue = (eventOrValue) => {
   if (!eventOrValue.target) {
@@ -40,7 +40,8 @@ class DetachedField extends Component {
     const value = getValue(eventOrValue);
     this.setState({ touched: true });
     this.validate(value);
-    this.props.onChange(value);
+    this.props.onChange(eventOrValue, value, this.props.value, this.props.name)
+    // this.props.onChange(value);
   }
 
   validate(value) {

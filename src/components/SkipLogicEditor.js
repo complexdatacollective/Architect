@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { toPairs } from 'lodash';
 import { Guided } from './Guided';
 import Filter from './Filter';
-import { NetworkRule, DropDown } from './Filter/Rule';
+// import { NetworkRule, DropDown } from './Filter/Rule';
 
 class SkipLogicEditor extends PureComponent {
   static propTypes = {
@@ -29,7 +29,7 @@ class SkipLogicEditor extends PureComponent {
         defaultGuidance="guidance.skipLogicEditor"
       >
         <h1>Edit Skip Logic</h1>
-        <div className="edit-skip-logic__section edit-skip-logic__section--first">
+        {/* <div className="edit-skip-logic__section edit-skip-logic__section--first">
           <div className="edit-skip-logic__action">
             <DropDown
               options={toPairs({ SHOW: 'Show this stage if', SKIP: 'Skip this stage if' })}
@@ -51,7 +51,7 @@ class SkipLogicEditor extends PureComponent {
             filter={filter}
             onChange={newFilter => onChange({ filter: newFilter })}
           />
-        </div>
+        </div> */}
       </Guided>
     );
   }

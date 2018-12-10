@@ -86,7 +86,7 @@ class Select extends PureComponent {
           options={options}
           value={this.value}
           components={{ Option: selectOptionComponent }}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
+          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
           // ReactSelect has unusual onBlur that doesn't play nicely with redux-forms
