@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import DetachedField from '../DetachedField';
 import NodeSelect from '../Form/Fields/NodeSelect';
 import Select from '../Form/Fields/Select';
-import Text from '../../ui/components/Fields/Text';
+import EditValue from './EditValue';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 
@@ -18,15 +18,13 @@ const defaultOptions = {
 const EditAlterVariableRule = ({
   rule,
   typeOptions,
+  variableType,
   variableOptions,
   operatorOptions,
   handleRuleChange,
 }) => {
-
   const options = rule && rule.options;
   const optionsWithDefaults = { ...defaultOptions, ...options };
-
-  console.log('rendered', { options, defaultOptions, optionsWithDefaults });
 
   return (
     <div>
@@ -35,7 +33,7 @@ const EditAlterVariableRule = ({
           component={NodeSelect}
           name="type"
           label="Type"
-          options={typeOptions()}
+          options={typeOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.type}
           validation={{}}
@@ -46,7 +44,7 @@ const EditAlterVariableRule = ({
           component={Select}
           name="variable"
           label="Variable"
-          options={variableOptions()}
+          options={variableOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.variable}
           validation={{}}
@@ -57,17 +55,15 @@ const EditAlterVariableRule = ({
           component={Select}
           name="operator"
           label="Operator"
-          options={operatorOptions()}
+          options={operatorOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.operator}
           validation={{}}
         />
       </div>
       <div>
-        <DetachedField
-          component={Text}
-          label="Value"
-          name="value"
+        <EditValue
+          variableType={variableType}
           onChange={handleRuleChange}
           value={optionsWithDefaults.value}
           validation={{}}
@@ -81,10 +77,11 @@ EditAlterVariableRule.propTypes = {
   rule: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
-  typeOptions: PropTypes.func.isRequired,
-  variableOptions: PropTypes.func.isRequired,
-  operatorOptions: PropTypes.func.isRequired,
+  typeOptions: PropTypes.array.isRequired,
+  variableOptions: PropTypes.array.isRequired,
+  operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
+  variableType: PropTypes.string.isRequired,
 };
 
 export { EditAlterVariableRule };

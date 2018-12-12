@@ -18,7 +18,13 @@ Variable.propTypes = { value: PropTypes.string };
 Variable.defaultProps = { value: '' };
 
 const Value = ({ value }) => (<div className="value">{value}</div>);
-Value.propTypes = { value: PropTypes.string };
+Value.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
+};
 Value.defaultProps = { value: '' };
 
 const Rule = ({ type, options }) => {

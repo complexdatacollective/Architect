@@ -34,33 +34,34 @@ const getOperatorsForType = (type) => {
 };
 
 const withOptions = entityCategory =>
-  withProps(props => ({
-    typeOptions: () => {
-      const entityTypes = get(props.variableRegistry, entityCategory, {});
+  withProps((props) => {
+    const entityTypes = get(props.variableRegistry, entityCategory, {});
 
-      const typeOptions = map(entityTypes, (entity, entityId) => ({
-        value: entityId,
-        label: entity.label,
-      }));
+    const entityId = get(props.rule, 'options.type', null);
 
-      return typeOptions;
-    },
-    variableOptions: () => {
-      const entityId = get(props.rule, 'options.type', null);
-      return getVariableOptions(props.variableRegistry, entityCategory, entityId);
-    },
-    operatorOptions: () => {
-      const entityId = get(props.rule, 'options.type', null);
-      const variableId = get(props.rule, 'options.variable', null);
-      const variableType = get(
-        props.variableRegistry,
-        [entityCategory, entityId, 'variables', variableId, 'type'],
-        {},
-      );
-      const operatorOptions = getOperatorsForType(variableType);
+    const variableId = get(props.rule, 'options.variable', null);
 
-      return operatorOptions;
-    },
-  }));
+    const variableType = get(
+      props.variableRegistry,
+      [entityCategory, entityId, 'variables', variableId, 'type'],
+      '',
+    );
+
+    const typeOptions = map(entityTypes, (entity, id) => ({
+      value: id,
+      label: entity.label,
+    }));
+
+    const variableOptions = getVariableOptions(props.variableRegistry, entityCategory, entityId);
+
+    const operatorOptions = getOperatorsForType(variableType);
+
+    return {
+      typeOptions,
+      variableOptions,
+      operatorOptions,
+      variableType,
+    };
+  });
 
 export default withOptions;
