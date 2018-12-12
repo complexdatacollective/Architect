@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid';
 import Preview from './Preview';
 import EditRule from './EditRule';
+
+const generateRule = (id, type, options = {}) => ({
+  id,
+  type,
+  options: { type: null, operator: null, ...options },
+});
 
 class Rules extends Component {
   constructor(props) {
@@ -12,13 +19,38 @@ class Rules extends Component {
     };
   }
 
+  editRule(editingRuleId = null) {
+    this.setState({ editingRuleId });
+  }
+
   handleCloseEditRule = () => {
-    this.setState({ editingRuleId: null });
+    this.editRule();
   }
 
   handleClickRule = (id) => {
-    this.setState({ editingRuleId: id });
+    this.editRule(id);
   }
+
+  handleAddAlterTypeRule = () => {
+    const id = uuid();
+    this.props.onChange([...this.props.rules, generateRule(id, 'alter')]);
+    this.editRule(id);
+  };
+
+  handleAddAlterVariableRule = () => {
+    const id = uuid();
+    this.props.onChange([
+      ...this.props.rules,
+      generateRule(id, 'alter', { variable: null, value: null }),
+    ]);
+    this.editRule(id);
+  };
+
+  handleAddEdgeRule = () => {
+    const id = uuid();
+    this.props.onChange([...this.props.rules, generateRule(id, 'edge')]);
+    this.editRule(id);
+  };
 
   handleRuleChange = (newRuleValue) => {
     const updatedRules = this.props.rules.map(
@@ -53,6 +85,10 @@ class Rules extends Component {
             onClose={this.handleCloseEditRule}
           />
         }
+
+        <button type="button" onClick={this.handleAddAlterTypeRule}>Add alter type rule</button>
+        <button type="button" onClick={this.handleAddAlterVariableRule}>Add alter variable rule</button>
+        <button type="button" onClick={this.handleAddEdgeRule}>Add edge rule</button>
       </div>
     );
   }
