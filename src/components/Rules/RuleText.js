@@ -1,26 +1,41 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-export const Join = ({ value }) => (<div className="rules-rule-text__join">{ value }</div>);
-Join.propTypes = { value: PropTypes.string.isRequired };
+const formatValue = (value) => {
+  switch (typeof value) {
+    case 'boolean':
+      return value ? 'true' : 'false';
+    default:
+      return value;
+  }
+};
 
-const Type = ({ value }) => (<div className="rules-rule-text__type">{value}</div>);
-Type.propTypes = { value: PropTypes.string };
-Type.defaultProps = { value: '' };
+export const Join = ({ value }) => (<div className="rules-rule-text__join">{ value.toLowerCase() }</div>);
+Join.propTypes = { value: PropTypes.string };
+Join.defaultProps = { value: '' };
 
-const Entity = ({ value }) => (<div className="rules-rule-text__entity">{value}</div>);
-Entity.propTypes = { value: PropTypes.string };
-Entity.defaultProps = { value: '' };
+const Type = ({ children }) => (<div className="rules-rule-text__type">{children}</div>);
+Type.propTypes = { children: PropTypes.node };
+Type.defaultProps = { children: '' };
 
-const Operator = ({ value }) => (<div className="rules-rule-text__operator">{value}</div>);
+const Entity = ({ children }) => (<div className="rules-rule-text__entity">{children}</div>);
+Entity.propTypes = { children: PropTypes.node };
+Entity.defaultProps = { children: '' };
+
+const Variable = ({ children }) => (<div className="rules-rule-text__variable">{children}</div>);
+Variable.propTypes = { children: PropTypes.node };
+Variable.defaultProps = { children: '' };
+
+const Operator = ({ value }) => (<div className="rules-rule-text__operator">{value.toLowerCase()}</div>);
 Operator.propTypes = { value: PropTypes.string };
 Operator.defaultProps = { value: '' };
 
-const Variable = ({ value }) => (<div className="rules-rule-text__variable">{value}</div>);
-Variable.propTypes = { value: PropTypes.string };
-Variable.defaultProps = { value: '' };
-
-const Value = ({ value }) => (<div className="rules-rule-text__value">{value}</div>);
+const Value = ({ value }) => {
+  const formattedValue = formatValue(value);
+  return (
+    <div className="rules-rule-text__value">{formattedValue}</div>
+  );
+};
 Value.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -30,21 +45,30 @@ Value.propTypes = {
 };
 Value.defaultProps = { value: '' };
 
+const Copy = ({ children }) => (<div className="rules-rule-text__connector">{children}</div>);
+Copy.propTypes = { children: PropTypes.string };
+Copy.defaultProps = { children: '' };
+
 const Rule = ({ type, options }) => {
   switch (type) {
     case 'alter': {
       if (!options.variable) {
         return (
           <Fragment>
-            <Entity value="alter" /> of type <Type value={options.value} />
+            <Entity>alter</Entity>
+            <Copy>of type</Copy>
+            <Type>{options.type}</Type>
+            <Operator value={options.operator} />
           </Fragment>
         );
       }
       return (
         <Fragment>
-          <Entity value="alter" /> of type <Type value={options.value} />
-          with
-          <Variable value={options.variable} />
+          <Entity>alter</Entity>
+          <Copy>of type</Copy>
+          <Type>{options.type}</Type>
+          <Copy>with</Copy>
+          <Variable>{options.variable}</Variable>
           <Operator value={options.operator} />
           <Value value={options.value} />
         </Fragment>
@@ -53,7 +77,10 @@ const Rule = ({ type, options }) => {
     case 'edge':
       return (
         <Fragment>
-          has <Entity value="edge" /> of type <Type value={options.value} />
+          <Operator value={options.operator} />
+          <Entity>edge</Entity>
+          <Copy>of type</Copy>
+          <Type>{options.type}</Type>
         </Fragment>
       );
     default:

@@ -17,8 +17,8 @@ class EditRule extends Component {
     return EditAlterVariableRule;
   }
 
-  handleClose = () => {
-    this.props.onClose();
+  handleSave = () => {
+    this.props.onSave();
   }
 
   render() {
@@ -32,7 +32,7 @@ class EditRule extends Component {
               onChange={this.props.onChange}
             />
           }
-          <Button type="button" onClick={this.handleClose}>Done</Button>
+          <Button type="button" onClick={this.handleSave}>Save</Button>
         </div>
       </Modal>
     );
@@ -46,7 +46,7 @@ EditRule.propTypes = {
   }).isRequired,
   variableRegistry: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };
 
 export { EditRule };

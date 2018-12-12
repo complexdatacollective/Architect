@@ -4,12 +4,13 @@
   &__operator,
   &__variable,
   &__join,
+  &__connector,
   &__value {
+    display: inline-block;
+
     &::after {
       content: '\00a0';
     }
-
-    display: inline-block;
   }
 
   &__type {
@@ -24,6 +25,7 @@
 
   &__operator {
     color: var(--architect-rules-assert);
+    font-style: italic;
   }
 
   &__variable {

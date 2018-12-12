@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import Preview from './Preview';
 import EditRule from './EditRule';
+import Button from '../../ui/components/Button';
 
-const generateRule = (id, type, options = {}) => ({
-  id,
+const generateRule = (type, options = {}) => ({
   type,
   options: { type: undefined, operator: undefined, ...options },
 });
@@ -15,80 +15,103 @@ class Rules extends Component {
     super(props);
 
     this.state = {
-      editingRuleId: null,
+      editRule: null,
     };
   }
 
-  editRule(editingRuleId = null) {
-    this.setState({ editingRuleId });
+  updateRuleState(editRule = null) {
+    this.setState({ editRule });
+  }
+
+  closeEditRule() {
+    this.setState({ editRule: null });
   }
 
   handleCloseEditRule = () => {
-    this.editRule();
+    this.closeEditRule();
   }
 
-  handleClickRule = (id) => {
-    this.editRule(id);
+  handleClickRule = (ruleId) => {
+    const rule = this.props.rules.find(({ id }) => id === ruleId);
+    this.updateRuleState(rule);
   }
 
   handleAddAlterTypeRule = () => {
-    const id = uuid();
-    this.props.onChange([...this.props.rules, generateRule(id, 'alter')]);
-    this.editRule(id);
+    this.updateRuleState(generateRule('alter'));
   };
 
   handleAddAlterVariableRule = () => {
-    const id = uuid();
-    this.props.onChange([
-      ...this.props.rules,
-      generateRule(id, 'alter', { variable: undefined, value: undefined }),
-    ]);
-    this.editRule(id);
+    this.updateRuleState(generateRule('alter', { variable: undefined, value: undefined }));
   };
 
   handleAddEdgeRule = () => {
-    const id = uuid();
-    this.props.onChange([...this.props.rules, generateRule(id, 'edge')]);
-    this.editRule(id);
+    this.updateRuleState(generateRule('edge'));
   };
 
   handleRuleChange = (newRuleValue) => {
-    const updatedRules = this.props.rules.map(
-      (rule) => {
-        if (rule.id !== this.state.editingRuleId) { return rule; }
-        return newRuleValue;
-      },
-    );
-
-    this.props.onChange(updatedRules);
+    this.updateRuleState(newRuleValue);
   }
+
+  handleSaveRule = () => {
+    let updatedRules = [];
+
+    if (!this.state.editRule.id) {
+      updatedRules = [
+        ...this.props.rules,
+        { ...this.state.editRule, id: uuid() },
+      ];
+    } else {
+      updatedRules = this.props.rules.map(
+        (rule) => {
+          if (rule.id === this.state.editRule.id) { return this.state.editRule; }
+          return rule;
+        },
+      );
+    }
+
+    this.closeEditRule();
+    this.props.onChange(updatedRules);
+  };
 
   render() {
     const { rules, join, variableRegistry } = this.props;
-    const { editingRuleId } = this.state;
-    const rule = editingRuleId && rules.find(({ id }) => editingRuleId === id);
+    const { editRule } = this.state;
 
     return (
-      <div>
-        <Preview
-          rules={rules}
-          join={join}
-          onClickRule={this.handleClickRule}
+      <div className="rules-rules">
+        <EditRule
           variableRegistry={variableRegistry}
+          rule={editRule}
+          onChange={this.handleRuleChange}
+          onSave={this.handleSaveRule}
         />
 
-        { editingRuleId &&
-          <EditRule
+        <div className="rules-rules__preview">
+          <Preview
+            rules={rules}
+            join={join}
+            onClickRule={this.handleClickRule}
             variableRegistry={variableRegistry}
-            rule={rule}
-            onChange={this.handleRuleChange}
-            onClose={this.handleCloseEditRule}
           />
-        }
+        </div>
 
-        <button type="button" onClick={this.handleAddAlterTypeRule}>Add alter type rule</button>
-        <button type="button" onClick={this.handleAddAlterVariableRule}>Add alter variable rule</button>
-        <button type="button" onClick={this.handleAddEdgeRule}>Add edge rule</button>
+        <div className="rules-rules__add-new">
+          <Button
+            type="button"
+            size="small"
+            onClick={this.handleAddAlterTypeRule}
+          >Add alter type rule</Button>
+          <Button
+            type="button"
+            size="small"
+            onClick={this.handleAddAlterVariableRule}
+          >Add alter variable rule</Button>
+          <Button
+            type="button"
+            size="small"
+            onClick={this.handleAddEdgeRule}
+          >Add edge rule</Button>
+        </div>
       </div>
     );
   }

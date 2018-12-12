@@ -4,6 +4,7 @@ import { withProps } from 'recompose';
 import { get } from 'lodash';
 import RuleText, { Join } from './RuleText';
 
+// convert options to labels
 const withDisplayOptions = withProps(({ options, variableRegistry }) => {
   const type = get(variableRegistry, ['node', options.type, 'label']);
   const variable = get(
@@ -33,7 +34,7 @@ const PreviewRule = ({ id, type, options, join, onClick }) => (
 PreviewRule.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  // displayOptions: PropTypes.object.isRequired,
+  options: PropTypes.object.isRequired,
   join: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
