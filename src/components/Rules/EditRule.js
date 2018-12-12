@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../../ui/components/Modal';
 import EditAlterVariableRule from './EditAlterVariableRule';
+import EditAlterTypeRule from './EditAlterTypeRule';
+import EditEdgeRule from './EditEdgeRule';
 
 class EditRule extends Component {
   get TypeComponent() {
-    switch (this.props.rule.type) {
-      default:
-        return EditAlterVariableRule;
+    if (this.props.rule.type === 'edge') {
+      return EditEdgeRule;
     }
+    if (this.props.rule.type === 'alter' && !this.props.rule.options.variable) {
+      return EditAlterTypeRule;
+    }
+    return EditAlterVariableRule;
   }
 
   handleClose = () => {

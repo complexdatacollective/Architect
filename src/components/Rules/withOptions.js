@@ -28,7 +28,7 @@ const getVariableOptions = (variableRegistry, entityCategory, entityId) => {
 };
 
 const getOperatorsForType = (type) => {
-  const operatorsForType = get(operatorsByType, type, operatorsByType.text);
+  const operatorsForType = get(operatorsByType, type, operatorsByType.exists);
 
   return operatorsAsOptions.filter(({ value }) => operatorsForType.has(value));
 };

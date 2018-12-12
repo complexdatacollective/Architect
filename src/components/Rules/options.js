@@ -44,4 +44,5 @@ export const operatorsByType = {
   text: new Set(['EXACTLY', 'EXISTS', 'NOT_EXISTS', 'NOT']),
   number: new Set(['EXACTLY', 'EXISTS', 'NOT_EXISTS', 'NOT', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL']),
   boolean: new Set(['EXACTLY', 'EXISTS', 'NOT_EXISTS']),
+  exists: new Set(['EXISTS', 'NOT_EXISTS']),
 };
