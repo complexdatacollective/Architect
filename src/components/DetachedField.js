@@ -40,8 +40,7 @@ class DetachedField extends Component {
     const value = getValue(eventOrValue);
     this.setState({ touched: true });
     this.validate(value);
-    this.props.onChange(eventOrValue, value, this.props.value, this.props.name)
-    // this.props.onChange(value);
+    this.props.onChange(eventOrValue, value, this.props.value, this.props.name);
   }
 
   validate(value) {

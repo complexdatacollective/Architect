@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose, mapProps } from 'recompose';
+import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import Rules from '../Rules';
 import { getProtocol } from '../../selectors/protocol';
@@ -29,6 +30,13 @@ class Filter extends Component {
   }
 }
 
+Filter.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  rules: PropTypes.array.isRequired,
+  variableRegistry: PropTypes.object.isRequired,
+  join: PropTypes.string.isRequired,
+};
+
 const connectToField = mapProps(
   props => ({
     rules: get(props.input.value, 'rules', []),
@@ -43,7 +51,7 @@ const mapStateToProps = (state) => {
   return {
     variableRegistry: protocol.variableRegistry,
   };
-}
+};
 
 export { Filter };
 

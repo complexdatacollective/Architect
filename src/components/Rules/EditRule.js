@@ -45,6 +45,7 @@ EditRule.propTypes = {
   }).isRequired,
   variableRegistry: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export { EditRule };

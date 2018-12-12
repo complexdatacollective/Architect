@@ -16,6 +16,12 @@ const Preview = ({ join, rules, onClickRule }) => (
   </div>
 );
 
+Preview.propTypes = {
+  join: PropTypes.string.isRequired,
+  rules: PropTypes.array.isRequired,
+  onClickRule: PropTypes.func.isRequired,
+};
+
 export { Preview };
 
 export default Preview;
