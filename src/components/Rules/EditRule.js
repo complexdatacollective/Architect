@@ -4,6 +4,7 @@ import Modal from '../../ui/components/Modal';
 import EditAlterVariableRule from './EditAlterVariableRule';
 import EditAlterTypeRule from './EditAlterTypeRule';
 import EditEdgeRule from './EditEdgeRule';
+import Button from '../../ui/components/Button';
 
 class EditRule extends Component {
   get TypeComponent() {
@@ -23,7 +24,7 @@ class EditRule extends Component {
   render() {
     return (
       <Modal show={!!this.props.rule}>
-        <div style={{ backgroundColor: 'white', padding: '10px' }}>
+        <div className="rules-edit-rule">
           { this.props.rule && this.props.rule.options &&
             <this.TypeComponent
               rule={this.props.rule}
@@ -31,7 +32,7 @@ class EditRule extends Component {
               onChange={this.props.onChange}
             />
           }
-          <button type="button" onClick={this.handleClose}>Done</button>
+          <Button type="button" onClick={this.handleClose}>Done</Button>
         </div>
       </Modal>
     );

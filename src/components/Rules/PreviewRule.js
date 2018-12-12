@@ -1,9 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RuleText from './RuleText';
+import { withProps } from 'recompose';
+import { get } from 'lodash';
+import RuleText, { Join } from './RuleText';
 
-const Join = ({ value }) => (<div>{ value }</div>);
-Join.propTypes = { value: PropTypes.string.isRequired };
+const withDisplayOptions = withProps(({ options, variableRegistry }) => {
+  const type = get(variableRegistry, ['node', options.type, 'label']);
+  const variable = get(
+    variableRegistry,
+    ['node', options.type, 'variables', options.variable, 'label'],
+  );
+
+  return {
+    options: {
+      ...options,
+      type,
+      variable,
+    },
+  };
+});
 
 const PreviewRule = ({ id, type, options, join, onClick }) => (
   <div
@@ -18,9 +33,10 @@ const PreviewRule = ({ id, type, options, join, onClick }) => (
 PreviewRule.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  options: PropTypes.object.isRequired,
+  // displayOptions: PropTypes.object.isRequired,
   join: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export default PreviewRule;
+export { PreviewRule };
+export default withDisplayOptions(PreviewRule);

@@ -3,29 +3,36 @@
   &__entity,
   &__operator,
   &__variable,
+  &__join,
   &__value {
     &::after {
       content: '\00a0';
     }
+
+    display: inline-block;
   }
 
   &__type {
-    color: red;
+    color: var(--architect-rules-type);
+    font-weight: 600;
   }
 
   &__entity {
-    color: green;
+    color: var(--architect-rules-type);
+    font-style: italic;
   }
 
   &__operator {
-    color:blue
+    color: var(--architect-rules-assert);
   }
 
   &__variable {
-    color:purple;
+    color: var(--architect-rules-assert);
+    font-weight: 600;
   }
 
   &__value {
-    color: black;
+    color: var(--architect-rules-assert);
+    font-weight: 600;
   }
 }

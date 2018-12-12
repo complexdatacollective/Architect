@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+export const Join = ({ value }) => (<div className="rules-rule-text__join">{ value }</div>);
+Join.propTypes = { value: PropTypes.string.isRequired };
+
 const Type = ({ value }) => (<div className="rules-rule-text__type">{value}</div>);
 Type.propTypes = { value: PropTypes.string };
 Type.defaultProps = { value: '' };
