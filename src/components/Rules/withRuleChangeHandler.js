@@ -17,7 +17,10 @@ const withRuleChangeHandler = withHandlers({
         [name]: value,
       }).reduce((acc, [optionName, optionValue]) => {
         // Reset subsequent options
-        if (RULE_ORDER.indexOf(optionName) > resetAfter) { return acc; }
+        if (RULE_ORDER.indexOf(optionName) > resetAfter) {
+          return Object.assign(acc, { [optionName]: undefined });
+          // return acc;
+        }
         // Or keep as is
         return Object.assign(acc, { [optionName]: optionValue });
       }, {});

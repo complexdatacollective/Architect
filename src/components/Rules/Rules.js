@@ -7,7 +7,7 @@ import EditRule from './EditRule';
 const generateRule = (id, type, options = {}) => ({
   id,
   type,
-  options: { type: null, operator: null, ...options },
+  options: { type: undefined, operator: undefined, ...options },
 });
 
 class Rules extends Component {
@@ -41,7 +41,7 @@ class Rules extends Component {
     const id = uuid();
     this.props.onChange([
       ...this.props.rules,
-      generateRule(id, 'alter', { variable: null, value: null }),
+      generateRule(id, 'alter', { variable: undefined, value: undefined }),
     ]);
     this.editRule(id);
   };

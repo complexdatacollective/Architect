@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { operatorsWithValue } from './options';
 import DetachedField from '../DetachedField';
 import NodeSelect from '../Form/Fields/NodeSelect';
 import Select from '../Form/Fields/Select';
@@ -25,6 +26,7 @@ const EditAlterVariableRule = ({
 }) => {
   const options = rule && rule.options;
   const optionsWithDefaults = { ...defaultOptions, ...options };
+  const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
 
   return (
     <div>
@@ -61,14 +63,16 @@ const EditAlterVariableRule = ({
           validation={{}}
         />
       </div>
-      <div>
-        <EditValue
-          variableType={variableType}
-          onChange={handleRuleChange}
-          value={optionsWithDefaults.value}
-          validation={{}}
-        />
-      </div>
+      { operatorNeedsValue &&
+        <div>
+          <EditValue
+            variableType={variableType}
+            onChange={handleRuleChange}
+            value={optionsWithDefaults.value}
+            validation={{}}
+          />
+        </div>
+      }
     </div>
   );
 };

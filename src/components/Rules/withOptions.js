@@ -1,6 +1,6 @@
 import { map, get, reduce } from 'lodash';
 import { withProps } from 'recompose';
-import { validTypes, operators, operatorsByType } from './options';
+import { validTypes, operatorsAsOptions, operatorsByType } from './options';
 
 const getVariableOptions = (variableRegistry, entityCategory, entityId) => {
   const variables = get(
@@ -30,7 +30,7 @@ const getVariableOptions = (variableRegistry, entityCategory, entityId) => {
 const getOperatorsForType = (type) => {
   const operatorsForType = get(operatorsByType, type, operatorsByType.text);
 
-  return operators.filter(({ value }) => operatorsForType.has(value));
+  return operatorsAsOptions.filter(({ value }) => operatorsForType.has(value));
 };
 
 const withOptions = entityCategory =>
