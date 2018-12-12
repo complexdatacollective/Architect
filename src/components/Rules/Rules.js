@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Preview from './Preview';
-import RuleEditor from './EditRule';
+import EditRule from './EditRule';
 
 class Rules extends Component {
   constructor(props) {
@@ -10,6 +10,10 @@ class Rules extends Component {
     this.state = {
       editingRuleId: null,
     };
+  }
+
+  handleCloseEditRule = () => {
+    this.setState({ editingRuleId: null });
   }
 
   handleClickRule = (id) => {
@@ -31,12 +35,9 @@ class Rules extends Component {
     const { rules, join, variableRegistry } = this.props;
     const { editingRuleId } = this.state;
     const rule = editingRuleId && rules.find(({ id }) => editingRuleId === id);
-    console.log({ rules });
 
     return (
       <div>
-        Preview
-
         <Preview
           rules={rules}
           join={join}
@@ -44,13 +45,14 @@ class Rules extends Component {
           variableRegistry={variableRegistry}
         />
 
-        { editingRuleId && <RuleEditor
-          variableRegistry={variableRegistry}
-          rule={rule}
-          // rules={rule}
-          // join={join}
-          onChange={this.handleRuleChange}
-        /> }
+        { editingRuleId &&
+          <EditRule
+            variableRegistry={variableRegistry}
+            rule={rule}
+            onChange={this.handleRuleChange}
+            onClose={this.handleCloseEditRule}
+          />
+        }
       </div>
     );
   }

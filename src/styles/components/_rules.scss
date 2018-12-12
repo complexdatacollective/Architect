@@ -1,8 +1,3 @@
-.rules {
-  @include flex-stack;
-  @include flex-align(left, top);
-
-  &__rule {
-    margin-bottom: 30px;
-  }
-}
+@import './rules/rules';
+@import './rules/preview-rule';
+@import './rules/rule-text';

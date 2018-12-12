@@ -11,16 +11,23 @@ class EditRule extends Component {
     }
   }
 
+  handleClose = () => {
+    this.props.onClose();
+  }
+
   render() {
     return (
       <Modal show={!!this.props.rule}>
-        { this.props.rule && this.props.rule.options &&
-          <this.TypeComponent
-            rule={this.props.rule}
-            variableRegistry={this.props.variableRegistry}
-            onChange={this.props.onChange}
-          />
-        }
+        <div style={{ backgroundColor: 'white', padding: '10px' }}>
+          { this.props.rule && this.props.rule.options &&
+            <this.TypeComponent
+              rule={this.props.rule}
+              variableRegistry={this.props.variableRegistry}
+              onChange={this.props.onChange}
+            />
+          }
+          <button type="button" onClick={this.handleClose}>Done</button>
+        </div>
       </Modal>
     );
   }

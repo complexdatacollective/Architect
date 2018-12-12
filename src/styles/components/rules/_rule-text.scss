@@ -1,0 +1,31 @@
+.rules-rule-text {
+  &__type,
+  &__entity,
+  &__operator,
+  &__variable,
+  &__value {
+    &::after {
+      content: '\00a0';
+    }
+  }
+
+  &__type {
+    color: red;
+  }
+
+  &__entity {
+    color: green;
+  }
+
+  &__operator {
+    color:blue
+  }
+
+  &__variable {
+    color:purple;
+  }
+
+  &__value {
+    color: black;
+  }
+}

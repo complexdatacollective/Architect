@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const Type = ({ value }) => (<div className="type">{value}</div>);
+const Type = ({ value }) => (<div className="rules-rule-text__type">{value}</div>);
 Type.propTypes = { value: PropTypes.string };
 Type.defaultProps = { value: '' };
 
-const Entity = ({ value }) => (<div className="entity">{value}</div>);
+const Entity = ({ value }) => (<div className="rules-rule-text__entity">{value}</div>);
 Entity.propTypes = { value: PropTypes.string };
 Entity.defaultProps = { value: '' };
 
-const Operator = ({ value }) => (<div className="operator">{value}</div>);
+const Operator = ({ value }) => (<div className="rules-rule-text__operator">{value}</div>);
 Operator.propTypes = { value: PropTypes.string };
 Operator.defaultProps = { value: '' };
 
-const Variable = ({ value }) => (<div className="variable">{value}</div>);
+const Variable = ({ value }) => (<div className="rules-rule-text__variable">{value}</div>);
 Variable.propTypes = { value: PropTypes.string };
 Variable.defaultProps = { value: '' };
 
-const Value = ({ value }) => (<div className="value">{value}</div>);
+const Value = ({ value }) => (<div className="rules-rule-text__value">{value}</div>);
 Value.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
