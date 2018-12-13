@@ -52,6 +52,16 @@ class Rules extends Component {
 
   handleRuleChange = (newRuleValue) => {
     this.updateRuleState(newRuleValue);
+  };
+
+  handleChange = (config) => {
+    const updatedConfig = {
+      rules: this.props.rules,
+      join: this.props.join,
+      ...config,
+    };
+
+    this.props.onChange(updatedConfig);
   }
 
   handleSaveRule = () => {
@@ -90,13 +100,11 @@ class Rules extends Component {
       type: 'Warning',
       title: 'Are you sure you want to delete this rule?',
       onConfirm: () => {
-        this.props.onChange({
+        this.handleChange({
           rules: updateRules,
         });
       },
-    })
-
-
+    });
   }
 
   render() {
@@ -161,6 +169,7 @@ Rules.propTypes = {
   rules: PropTypes.array,
   join: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  confirmAction: PropTypes.func.isRequired,
   variableRegistry: PropTypes.object.isRequired,
 };
 

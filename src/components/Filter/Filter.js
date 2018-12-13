@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, mapProps } from 'recompose';
@@ -8,45 +8,21 @@ import Rules from '../Rules';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
-class Filter extends Component {
-  /**
-   * move this to rules?
-   */
-  get filter() {
-    return {
-      rules: this.props.rules,
-      join: this.props.join,
-    };
-  }
-
-  handleChange = (config) => {
-    const filter = {
-      ...this.filter,
-      ...config,
-    };
-
-    this.props.onChange(filter);
-  }
-
-  render() {
-    const { rules, join, variableRegistry, confirmAction } = this.props;
-
-    return (
-      <div>
-        <Rules
-          rules={rules}
-          join={join}
-          onChange={this.handleChange}
-          confirmAction={confirmAction}
-          variableRegistry={variableRegistry}
-        />
-      </div>
-    );
-  }
-}
+const Filter = ({ rules, join, variableRegistry, onChange, confirmAction }) => (
+  <div>
+    <Rules
+      rules={rules}
+      join={join}
+      onChange={onChange}
+      confirmAction={confirmAction}
+      variableRegistry={variableRegistry}
+    />
+  </div>
+);
 
 Filter.propTypes = {
   onChange: PropTypes.func.isRequired,
+  confirmAction: PropTypes.func.isRequired,
   rules: PropTypes.array.isRequired,
   variableRegistry: PropTypes.object.isRequired,
   join: PropTypes.string.isRequired,
