@@ -10,30 +10,30 @@ const formatValue = (value) => {
   }
 };
 
-export const Join = ({ value }) => (<div className="rules-rule-text__join">{ value.toLowerCase() }</div>);
+export const Join = ({ value }) => (<div className="rules-preview-text__join">{ value.toLowerCase() }</div>);
 Join.propTypes = { value: PropTypes.string };
 Join.defaultProps = { value: '' };
 
-const Type = ({ children }) => (<div className="rules-rule-text__type">{children}</div>);
+const Type = ({ children }) => (<div className="rules-preview-text__type">{children}</div>);
 Type.propTypes = { children: PropTypes.node };
 Type.defaultProps = { children: '' };
 
-const Entity = ({ children }) => (<div className="rules-rule-text__entity">{children}</div>);
+const Entity = ({ children }) => (<div className="rules-preview-text__entity">{children}</div>);
 Entity.propTypes = { children: PropTypes.node };
 Entity.defaultProps = { children: '' };
 
-const Variable = ({ children }) => (<div className="rules-rule-text__variable">{children}</div>);
+const Variable = ({ children }) => (<div className="rules-preview-text__variable">{children}</div>);
 Variable.propTypes = { children: PropTypes.node };
 Variable.defaultProps = { children: '' };
 
-const Operator = ({ value }) => (<div className="rules-rule-text__operator">{value.toLowerCase()}</div>);
+const Operator = ({ value }) => (<div className="rules-preview-text__operator">{value.toLowerCase()}</div>);
 Operator.propTypes = { value: PropTypes.string };
 Operator.defaultProps = { value: '' };
 
 const Value = ({ value }) => {
   const formattedValue = formatValue(value);
   return (
-    <div className="rules-rule-text__value">{formattedValue}</div>
+    <div className="rules-preview-text__value">{formattedValue}</div>
   );
 };
 Value.propTypes = {
@@ -45,11 +45,11 @@ Value.propTypes = {
 };
 Value.defaultProps = { value: '' };
 
-const Copy = ({ children }) => (<div className="rules-rule-text__connector">{children}</div>);
+const Copy = ({ children }) => (<div className="rules-preview-text__copy">{children}</div>);
 Copy.propTypes = { children: PropTypes.string };
 Copy.defaultProps = { children: '' };
 
-const Rule = ({ type, options }) => {
+const PreviewText = ({ type, options }) => {
   switch (type) {
     case 'alter': {
       if (!options.variable) {
@@ -88,4 +88,4 @@ const Rule = ({ type, options }) => {
   }
 };
 
-export default Rule;
+export default PreviewText;

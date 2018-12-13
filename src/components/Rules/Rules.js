@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
-import Preview from './Preview';
+import PreviewRules from './PreviewRules';
 import EditRule from './EditRule';
 import Button from '../../ui/components/Button';
 import RadioGroup from '../../ui/components/Fields/RadioGroup';
@@ -83,6 +83,22 @@ class Rules extends Component {
     });
   }
 
+  handleDeleteRule = (ruleId) => {
+    const updateRules = this.props.rules.filter(rule => rule.id !== ruleId);
+
+    this.props.confirmAction({
+      type: 'Warning',
+      title: 'Are you sure you want to delete this rule?',
+      onConfirm: () => {
+        this.props.onChange({
+          rules: updateRules,
+        });
+      },
+    })
+
+
+  }
+
   render() {
     const { rules, join, variableRegistry } = this.props;
     const { editRule } = this.state;
@@ -110,10 +126,11 @@ class Rules extends Component {
         />
 
         <div className="rules-rules__preview">
-          <Preview
+          <PreviewRules
             rules={rules}
             join={join}
             onClickRule={this.handleClickRule}
+            onDeleteRule={this.handleDeleteRule}
             variableRegistry={variableRegistry}
           />
         </div>

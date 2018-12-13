@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PreviewRule from './PreviewRule';
 
-const Preview = ({ join, rules, variableRegistry, onClickRule }) => (
-  <div className="rules-preview">
-    <div className="rules-preview__rules">
+const PreviewRules = ({ join, rules, variableRegistry, onClickRule, onDeleteRule }) => (
+  <div className="rules-preview-rules">
+    <div className="rules-preview-rules__rules">
       {rules.map(
         (rule, index) => (
-          <div className="rules-preview__rule">
+          <div className="rules-preview-rules__rule">
             <PreviewRule
               {...rule}
               join={index !== rules.length - 1 && join}
               variableRegistry={variableRegistry}
               onClick={() => onClickRule(rule.id)}
+              onDelete={() => onDeleteRule(rule.id)}
             />
           </div>
         ),
@@ -21,13 +22,14 @@ const Preview = ({ join, rules, variableRegistry, onClickRule }) => (
   </div>
 );
 
-Preview.propTypes = {
+PreviewRules.propTypes = {
   join: PropTypes.string.isRequired,
   rules: PropTypes.array.isRequired,
   variableRegistry: PropTypes.object.isRequired,
   onClickRule: PropTypes.func.isRequired,
+  onDeleteRule: PropTypes.func.isRequired,
 };
 
-export { Preview };
+export { PreviewRules };
 
-export default Preview;
+export default PreviewRules;

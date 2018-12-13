@@ -1,45 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withProps } from 'recompose';
-import { get } from 'lodash';
-import RuleText, { Join } from './RuleText';
+import { compose, withHandlers } from 'recompose';
+import RuleText, { Join } from './PreviewText';
+import withDisplayOptions from './withDisplayOptions';
+import { Icon } from '../../ui/components';
 
-// convert options to labels
-const withDisplayOptions = withProps(({ type, options, variableRegistry }) => {
-  const entityType = type === 'edge' ? 'edge' : 'node';
-  const typeLabel = get(variableRegistry, [entityType, options.type, 'label'], options.type);
-  const variableLabel = get(
-    variableRegistry,
-    [entityType, options.type, 'variables', options.variable, 'label'],
-    options.variable,
-  );
+const withDeleteHandler = withHandlers({
+  handleDelete: props =>
+    (e) => {
+      e.stopPropagation();
 
-  return {
-    options: {
-      ...options,
-      type: typeLabel,
-      variable: variableLabel,
+      props.onDelete();
     },
-  };
 });
 
-const PreviewRule = ({ id, type, options, join, onClick }) => (
+const PreviewRule = ({ type, options, join, onClick, handleDelete }) => (
   <div
     className="rules-preview-rule"
-    onClick={() => onClick(id)}
+    onClick={onClick}
   >
-    <RuleText type={type} options={options} />
-    { join && <Join value={join} /> }
+    <div className="rules-preview-rule__text">
+      <RuleText type={type} options={options} />
+      { join && <Join value={join} /> }
+    </div>
+    <button
+      type="button"
+      className="rules-preview-rule__delete"
+      onClick={handleDelete}
+    >
+      <Icon name="delete" />
+    </button>
   </div>
 );
 
 PreviewRule.propTypes = {
-  id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   options: PropTypes.object.isRequired,
   join: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export { PreviewRule };
-export default withDisplayOptions(PreviewRule);
+export default compose(
+  withDeleteHandler,
+  withDisplayOptions,
+)(PreviewRule);
