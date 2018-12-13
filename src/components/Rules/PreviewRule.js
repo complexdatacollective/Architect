@@ -5,18 +5,20 @@ import { get } from 'lodash';
 import RuleText, { Join } from './RuleText';
 
 // convert options to labels
-const withDisplayOptions = withProps(({ options, variableRegistry }) => {
-  const type = get(variableRegistry, ['node', options.type, 'label']);
-  const variable = get(
+const withDisplayOptions = withProps(({ type, options, variableRegistry }) => {
+  const entityType = type === 'edge' ? 'edge' : 'node';
+  const typeLabel = get(variableRegistry, [entityType, options.type, 'label'], options.type);
+  const variableLabel = get(
     variableRegistry,
-    ['node', options.type, 'variables', options.variable, 'label'],
+    [entityType, options.type, 'variables', options.variable, 'label'],
+    options.variable,
   );
 
   return {
     options: {
       ...options,
-      type,
-      variable,
+      type: typeLabel,
+      variable: variableLabel,
     },
   };
 });

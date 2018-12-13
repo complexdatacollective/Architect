@@ -4,6 +4,8 @@ import uuid from 'uuid';
 import Preview from './Preview';
 import EditRule from './EditRule';
 import Button from '../../ui/components/Button';
+import RadioGroup from '../../ui/components/Fields/RadioGroup';
+import DetachedField from '../DetachedField';
 
 const generateRule = (type, options = {}) => ({
   type,
@@ -70,8 +72,16 @@ class Rules extends Component {
     }
 
     this.closeEditRule();
-    this.props.onChange(updatedRules);
+    this.props.onChange({
+      rules: updatedRules,
+    });
   };
+
+  handleChangeJoin = (newValue) => {
+    this.props.onChange({
+      join: newValue,
+    });
+  }
 
   render() {
     const { rules, join, variableRegistry } = this.props;
@@ -79,6 +89,19 @@ class Rules extends Component {
 
     return (
       <div className="rules-rules">
+        <div className="rules-rules__join">
+          Must match:
+          <DetachedField
+            component={RadioGroup}
+            options={[
+              { label: 'All', value: 'AND' },
+              { label: 'Any', value: 'OR' },
+            ]}
+            value={join}
+            onChange={this.handleChangeJoin}
+          />
+        </div>
+
         <EditRule
           variableRegistry={variableRegistry}
           rule={editRule}

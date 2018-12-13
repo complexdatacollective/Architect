@@ -7,11 +7,20 @@ import Rules from '../Rules';
 import { getProtocol } from '../../selectors/protocol';
 
 class Filter extends Component {
-  handleRuleChange = (rules) => {
-    this.props.onChange({
-      rules,
+  get filter() {
+    return {
+      rules: this.props.rules,
       join: this.props.join,
-    });
+    };
+  }
+
+  handleChange = (config) => {
+    const filter = {
+      ...this.filter,
+      ...config,
+    };
+
+    this.props.onChange(filter);
   }
 
   render() {
@@ -22,7 +31,7 @@ class Filter extends Component {
         <Rules
           rules={rules}
           join={join}
-          onChange={this.handleRuleChange}
+          onChange={this.handleChange}
           variableRegistry={variableRegistry}
         />
       </div>

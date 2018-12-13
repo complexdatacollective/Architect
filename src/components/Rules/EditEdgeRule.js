@@ -22,8 +22,8 @@ const EditEdgeRule = ({
   const optionsWithDefaults = { ...defaultOptions, ...options };
 
   return (
-    <div>
-      <div>
+    <div className="rules-edit-rule__fields">
+      <div className="rules-edit-rule__row">
         <DetachedField
           component={NodeSelect}
           name="type"
@@ -34,7 +34,7 @@ const EditEdgeRule = ({
           validation={{}}
         />
       </div>
-      <div>
+      <div className="rules-edit-rule__row">
         <DetachedField
           component={Select}
           name="operator"

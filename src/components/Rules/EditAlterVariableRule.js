@@ -29,8 +29,8 @@ const EditAlterVariableRule = ({
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
 
   return (
-    <div>
-      <div>
+    <div className="rules-edit-rule__fields">
+      <div className="rules-edit-rule__row">
         <DetachedField
           component={NodeSelect}
           name="type"
@@ -41,7 +41,7 @@ const EditAlterVariableRule = ({
           validation={{}}
         />
       </div>
-      <div>
+      <div className="rules-edit-rule__row">
         <DetachedField
           component={Select}
           name="variable"
@@ -52,7 +52,7 @@ const EditAlterVariableRule = ({
           validation={{}}
         />
       </div>
-      <div>
+      <div className="rules-edit-rule__row">
         <DetachedField
           component={Select}
           name="operator"
@@ -64,7 +64,7 @@ const EditAlterVariableRule = ({
         />
       </div>
       { operatorNeedsValue &&
-        <div>
+        <div className="rules-edit-rule__row">
           <EditValue
             variableType={variableType}
             onChange={handleRuleChange}

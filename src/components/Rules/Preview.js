@@ -4,18 +4,20 @@ import PreviewRule from './PreviewRule';
 
 const Preview = ({ join, rules, variableRegistry, onClickRule }) => (
   <div className="rules-preview">
-    {rules.map(
-      (rule, index) => (
-        <div className="rules-preview__rule">
-          <PreviewRule
-            {...rule}
-            join={index !== rules.length - 1 && join}
-            variableRegistry={variableRegistry}
-            onClick={() => onClickRule(rule.id)}
-          />
-        </div>
-      ),
-    )}
+    <div className="rules-preview__rules">
+      {rules.map(
+        (rule, index) => (
+          <div className="rules-preview__rule">
+            <PreviewRule
+              {...rule}
+              join={index !== rules.length - 1 && join}
+              variableRegistry={variableRegistry}
+              onClick={() => onClickRule(rule.id)}
+            />
+          </div>
+        ),
+      )}
+    </div>
   </div>
 );
 

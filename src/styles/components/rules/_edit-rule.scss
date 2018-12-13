@@ -3,4 +3,9 @@
   padding: unit(4);
   border-radius: unit(4);
   min-width: 600px;
+
+  &__row {
+    // sass-lint:disable placeholder-in-extend
+    @extend .list-row;
+  }
 }

@@ -77,10 +77,10 @@ const Rule = ({ type, options }) => {
     case 'edge':
       return (
         <Fragment>
-          <Operator value={options.operator} />
           <Entity>edge</Entity>
           <Copy>of type</Copy>
           <Type>{options.type}</Type>
+          <Operator value={options.operator} />
         </Fragment>
       );
     default:
