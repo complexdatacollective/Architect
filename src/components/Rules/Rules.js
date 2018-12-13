@@ -9,7 +9,7 @@ import DetachedField from '../DetachedField';
 
 const generateRule = (type, options = {}) => ({
   type,
-  options: { type: undefined, operator: undefined, ...options },
+  options: { operator: undefined, ...options },
 });
 
 class Rules extends Component {
@@ -39,15 +39,19 @@ class Rules extends Component {
   }
 
   handleAddAlterTypeRule = () => {
-    this.updateRuleState(generateRule('alter'));
+    this.updateRuleState(generateRule('alter', { type: undefined }));
   };
 
   handleAddAlterVariableRule = () => {
-    this.updateRuleState(generateRule('alter', { variable: undefined, value: undefined }));
+    this.updateRuleState(generateRule('alter', { type: undefined, variable: undefined, value: undefined }));
   };
 
   handleAddEdgeRule = () => {
-    this.updateRuleState(generateRule('edge'));
+    this.updateRuleState(generateRule('edge', { type: undefined }));
+  };
+
+  handleAddEgoRule = () => {
+    this.updateRuleState(generateRule('ego', { variable: undefined, value: undefined }));
   };
 
   handleRuleChange = (newRuleValue) => {
@@ -108,7 +112,7 @@ class Rules extends Component {
   }
 
   render() {
-    const { rules, join, variableRegistry } = this.props;
+    const { type, rules, join, variableRegistry } = this.props;
     const { editRule } = this.state;
 
     return (
@@ -159,6 +163,13 @@ class Rules extends Component {
             size="small"
             onClick={this.handleAddEdgeRule}
           >Add edge rule</Button>
+          { type === 'query' &&
+            <Button
+              type="button"
+              size="small"
+              onClick={this.handleAddEgoRule}
+            >Add ego rule</Button>
+          }
         </div>
       </div>
     );
@@ -166,6 +177,7 @@ class Rules extends Component {
 }
 
 Rules.propTypes = {
+  type: PropTypes.oneOf(['filter', 'query']),
   rules: PropTypes.array,
   join: PropTypes.string,
   onChange: PropTypes.func.isRequired,
@@ -176,6 +188,7 @@ Rules.propTypes = {
 Rules.defaultProps = {
   rules: [],
   join: null,
+  type: 'filter',
 };
 
 export { Rules };

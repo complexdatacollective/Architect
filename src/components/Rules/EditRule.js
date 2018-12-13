@@ -5,17 +5,25 @@ import Modal from '../../ui/components/Modal';
 import EditAlterVariableRule from './EditAlterVariableRule';
 import EditAlterTypeRule from './EditAlterTypeRule';
 import EditEdgeRule from './EditEdgeRule';
+import EditEgoRule from './EditEgoRule';
 import Button from '../../ui/components/Button';
 
 class EditRule extends Component {
   get TypeComponent() {
-    if (this.props.rule.type === 'edge') {
-      return EditEdgeRule;
+    switch (this.props.rule.type) {
+      case 'ego':
+        return EditEgoRule;
+      case 'edge':
+        return EditEdgeRule;
+      case 'alter': {
+        if (!has(this.props.rule.options, 'variable')) {
+          return EditAlterTypeRule;
+        }
+        return EditAlterVariableRule;
+      }
+      default:
+        return null;
     }
-    if (this.props.rule.type === 'alter' && !has(this.props.rule.options, 'variable')) {
-      return EditAlterTypeRule;
-    }
-    return EditAlterVariableRule;
   }
 
   handleSave = () => {

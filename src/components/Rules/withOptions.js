@@ -2,13 +2,7 @@ import { map, get, reduce } from 'lodash';
 import { withProps } from 'recompose';
 import { validTypes, operatorsAsOptions, operatorsByType } from './options';
 
-const getVariableOptions = (variableRegistry, entityCategory, entityId) => {
-  const variables = get(
-    variableRegistry,
-    [entityCategory, entityId, 'variables'],
-    {},
-  );
-
+const getVariablesAsOptions = (variables) => {
   const variableOptions = reduce(
     variables,
     (acc, variable, variableId) => {
@@ -24,6 +18,8 @@ const getVariableOptions = (variableRegistry, entityCategory, entityId) => {
     [],
   );
 
+  console.log(variables, variableOptions);
+
   return variableOptions;
 };
 
@@ -35,24 +31,29 @@ const getOperatorsForType = (type) => {
 
 const withOptions = entityCategory =>
   withProps((props) => {
-    const entityTypes = get(props.variableRegistry, entityCategory, {});
-
     const entityId = get(props.rule, 'options.type', null);
-
     const variableId = get(props.rule, 'options.variable', null);
 
-    const variableType = get(
-      props.variableRegistry,
-      [entityCategory, entityId, 'variables', variableId, 'type'],
-      '',
-    );
+    const variablesRoot = entityCategory === 'ego' ?
+      ['ego', 'variables'] :
+      [entityCategory, entityId, 'variables'];
+
+    const entityTypes = get(props.variableRegistry, entityCategory, {});
 
     const typeOptions = map(entityTypes, (entity, id) => ({
       value: id,
       label: entity.label,
     }));
 
-    const variableOptions = getVariableOptions(props.variableRegistry, entityCategory, entityId);
+    console.log(props.variableRegistry, variablesRoot);
+
+    const variableOptions = getVariablesAsOptions(get(props.variableRegistry, variablesRoot, {}));
+
+    const variableType = get(
+      props.variableRegistry,
+      [...variablesRoot, variableId, 'type'],
+      '',
+    );
 
     const operatorOptions = getOperatorsForType(variableType);
 

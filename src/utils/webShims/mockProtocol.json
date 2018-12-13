@@ -4,6 +4,21 @@
   "lastModified": 0,
   "networkCanvasVersion": "~4.0.0",
   "variableRegistry": {
+    "ego": {
+      "variables": {
+        "416c8c2db6093444bcff9c212a4f40ed9dd8d9d4": {
+          "name": "Age",
+          "label": "age",
+          "description": "Alter age.",
+          "type": "number",
+          "validation": {
+            "required": true,
+            "minValue": 16,
+            "maxValue": 100
+          }
+        }
+      }
+    },
     "node": {
       "d39a47507bbe27c2a7948861847f3607eda8s8j": {
         "iconVariant": "add-a-person",
