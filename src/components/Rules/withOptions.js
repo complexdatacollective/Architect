@@ -18,8 +18,6 @@ const getVariablesAsOptions = (variables) => {
     [],
   );
 
-  console.log(variables, variableOptions);
-
   return variableOptions;
 };
 

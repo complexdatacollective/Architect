@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
+import { compose, defaultProps } from 'recompose';
 import withValidation from './Form/withValidation';
 
 const getValue = (eventOrValue) => {
@@ -75,6 +76,7 @@ class DetachedField extends Component {
       validate,
       value,
       name,
+      meta,
       ...props
     } = this.props;
 
@@ -88,10 +90,16 @@ class DetachedField extends Component {
       <FieldComponent
         {...props}
         input={input}
-        meta={this.state}
+        meta={{
+          ...meta,
+          ...this.state,
+        }}
       />
     );
   }
 }
 
-export default withValidation(DetachedField);
+export default compose(
+  defaultProps({ validation: {} }),
+  withValidation,
+)(DetachedField);

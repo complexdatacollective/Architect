@@ -28,6 +28,7 @@ const EditValue = ({
   fieldComponent: FieldComponent,
   value,
   onChange,
+  ...rest
 }) => (
   <DetachedField
     component={FieldComponent}
@@ -35,7 +36,7 @@ const EditValue = ({
     name="value"
     onChange={onChange}
     value={value}
-    validation={{}}
+    {...rest}
   />
 );
 

@@ -31,7 +31,7 @@ const EditEdgeRule = ({
           options={typeOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.type}
-          validation={{}}
+          validation={{ required: true }}
         />
       </div>
       <div className="rules-edit-rule__row">
@@ -42,7 +42,7 @@ const EditEdgeRule = ({
           options={operatorOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.operator}
-          validation={{}}
+          validation={{ required: true }}
         />
       </div>
     </div>

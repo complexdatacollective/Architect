@@ -6,6 +6,7 @@ import EditRule from './EditRule';
 import Button from '../../ui/components/Button';
 import RadioGroup from '../../ui/components/Fields/RadioGroup';
 import DetachedField from '../DetachedField';
+import validateRule from './validateRule';
 
 const generateRule = (type, options = {}) => ({
   type,
@@ -68,8 +69,15 @@ class Rules extends Component {
     this.props.onChange(updatedConfig);
   }
 
+  handleCancelEditRule = () => {
+    this.closeEditRule();
+  };
+
   handleSaveRule = () => {
     let updatedRules = [];
+
+    // Let the user know?
+    if (!validateRule(this.state.editRule)) { return; }
 
     if (!this.state.editRule.id) {
       updatedRules = [
@@ -134,6 +142,7 @@ class Rules extends Component {
           variableRegistry={variableRegistry}
           rule={editRule}
           onChange={this.handleRuleChange}
+          onCancel={this.handleCancelEditRule}
           onSave={this.handleSaveRule}
         />
 

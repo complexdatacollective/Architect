@@ -41,7 +41,8 @@ class EditRule extends Component {
               onChange={this.props.onChange}
             />
           }
-          <Button type="button" onClick={this.handleSave}>Save</Button>
+          <Button type="button" onClick={this.props.onSave}>Save</Button>
+          <Button type="button" onClick={this.props.onCancel}>Cancel</Button>
         </div>
       </Modal>
     );

@@ -36,7 +36,7 @@ const EditAlterVariableRule = ({
           options={variableOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.variable}
-          validation={{}}
+          validation={{ required: true }}
         />
       </div>
       <div className="rules-edit-rule__row">
@@ -47,7 +47,7 @@ const EditAlterVariableRule = ({
           options={operatorOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.operator}
-          validation={{}}
+          validation={{ required: true }}
         />
       </div>
       { operatorNeedsValue &&
@@ -56,7 +56,7 @@ const EditAlterVariableRule = ({
             variableType={variableType}
             onChange={handleRuleChange}
             value={optionsWithDefaults.value}
-            validation={{}}
+            validation={{ required: true }}
           />
         </div>
       }
