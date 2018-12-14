@@ -2,8 +2,10 @@
   padding: unit(1) unit(2);
   cursor: pointer;
   background-color: transparent;
-  transition: background-color ease 300ms;
+  transition: background-color var(--animation-duration-standard) var(--animation-easing);
   display: flex;
+  border-radius: unit(5);
+
   &__text {
     font-size: 1.5rem;
     flex-grow: 1;
@@ -19,7 +21,7 @@
     margin: 0 0 0 unit(1);
     border-radius: unit(1);
     opacity: 0;
-    transition: opacity ease 300ms;
+    transition: opacity var(--animation-duration-standard) var(--animation-easing);
     cursor: pointer;
     overflow: hidden;
     display: flex;
@@ -39,7 +41,6 @@
 
   &:hover {
     background-color: var(--background-light);
-    border-radius: unit(1);
 
     .rules-preview-rule__delete {
       opacity: 1;
