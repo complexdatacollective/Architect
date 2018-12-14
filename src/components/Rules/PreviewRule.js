@@ -36,9 +36,13 @@ const PreviewRule = ({ type, options, join, onClick, handleDelete }) => (
 PreviewRule.propTypes = {
   type: PropTypes.string.isRequired,
   options: PropTypes.object.isRequired,
-  join: PropTypes.string.isRequired,
+  join: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
+};
+
+PreviewRule.defaultProps = {
+  join: null,
 };
 
 export { PreviewRule };

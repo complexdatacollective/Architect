@@ -91,6 +91,6 @@ EditAlterVariableRule.propTypes = {
 export { EditAlterVariableRule };
 
 export default compose(
-  withRuleChangeHandler,
   withOptions('node'),
+  withRuleChangeHandler,
 )(EditAlterVariableRule);

@@ -7,10 +7,10 @@ const PreviewRules = ({ join, rules, variableRegistry, onClickRule, onDeleteRule
     <div className="rules-preview-rules__rules">
       {rules.map(
         (rule, index) => (
-          <div className="rules-preview-rules__rule">
+          <div className="rules-preview-rules__rule" key={rule.id}>
             <PreviewRule
               {...rule}
-              join={index !== rules.length - 1 && join}
+              join={index !== rules.length - 1 ? null : join}
               variableRegistry={variableRegistry}
               onClick={() => onClickRule(rule.id)}
               onDelete={() => onDeleteRule(rule.id)}

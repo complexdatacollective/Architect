@@ -61,6 +61,6 @@ EditAlterTypeRule.propTypes = {
 export { EditAlterTypeRule };
 
 export default compose(
-  withRuleChangeHandler,
   withOptions('node'),
+  withRuleChangeHandler,
 )(EditAlterTypeRule);

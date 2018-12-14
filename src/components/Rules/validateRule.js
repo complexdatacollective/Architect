@@ -1,8 +1,12 @@
-import { isEmpty } from 'lodash';
+import { isBoolean, isEmpty } from 'lodash';
 import { operatorsWithValue } from './options';
 
 const validateFields = (fields = [], options = {}) =>
-  fields.every(field => !isEmpty(options[field]));
+  fields.every(
+    field => (
+      isBoolean(options[field]) ? true : !isEmpty(options[field])
+    ),
+  );
 
 const validateRule = (rule) => {
   const options = rule.options || {};

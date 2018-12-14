@@ -90,7 +90,7 @@ Rules.propTypes = {
   rules: PropTypes.array,
   join: PropTypes.string,
   variableRegistry: PropTypes.object.isRequired,
-  draftRule: PropTypes.object.isRequired,
+  draftRule: PropTypes.object,
   handleChangeJoin: PropTypes.func.isRequired,
   handleChangeDraft: PropTypes.func.isRequired,
   handleCancelDraft: PropTypes.func.isRequired,
@@ -107,6 +107,7 @@ Rules.defaultProps = {
   rules: [],
   join: null,
   type: 'filter',
+  draftRule: {},
 };
 
 export { Rules };

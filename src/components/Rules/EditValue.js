@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 
 import React from 'react';
-import { withProps, compose } from 'recompose';
+import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import DetachedField from '../DetachedField';
 import { Text, Checkbox, Number } from '../../ui/components/Fields';
@@ -15,18 +15,17 @@ const INPUT_TYPES = {
 /**
  * Convert variable type to input type
  */
-const withMappedFieldComponent = compose(
-  withProps(
-    ({ variableType }) => ({
-      fieldComponent: variableType &&
-        INPUT_TYPES[variableType] ? INPUT_TYPES[variableType] : Text,
-    }),
-  ),
+const withMappedFieldComponent = withProps(
+  ({ variableType }) => ({
+    fieldComponent: variableType &&
+      INPUT_TYPES[variableType] ? INPUT_TYPES[variableType] : Text,
+  }),
 );
 
 const EditValue = ({
   fieldComponent: FieldComponent,
   value,
+  variableType,
   onChange,
   ...rest
 }) => (

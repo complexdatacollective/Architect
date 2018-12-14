@@ -8,25 +8,25 @@ const RULE_ORDER = [
 ];
 
 const withRuleChangeHandler = withHandlers({
-  handleRuleChange: props =>
+  handleRuleChange: ({ onChange, rule, variableType }) =>
     (e, value, oldValue, name) => {
       const resetAfter = RULE_ORDER.indexOf(name);
 
       const options = Object.entries({
-        ...props.rule.options,
+        ...rule.options,
         [name]: value,
       }).reduce((acc, [optionName, optionValue]) => {
         // Reset subsequent options
         if (RULE_ORDER.indexOf(optionName) > resetAfter) {
-          return Object.assign(acc, { [optionName]: undefined });
-          // return acc;
+          const newValue = variableType === 'boolean' ? false : undefined;
+          return Object.assign(acc, { [optionName]: newValue });
         }
         // Or keep as is
         return Object.assign(acc, { [optionName]: optionValue });
       }, {});
 
-      props.onChange({
-        ...props.rule,
+      onChange({
+        ...rule,
         options,
       });
     },

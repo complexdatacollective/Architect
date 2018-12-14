@@ -4,20 +4,18 @@ import { bindActionCreators } from 'redux';
 import { compose, mapProps } from 'recompose';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import Rules from '../Rules';
-import { getProtocol } from '../../selectors/protocol';
-import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
+import Rules from './Rules';
+import { getProtocol } from '../selectors/protocol';
+import { actionCreators as dialogsActions } from '../ducks/modules/dialogs';
 
 const Filter = ({ rules, join, variableRegistry, onChange, openDialog }) => (
-  <div>
-    <Rules
-      rules={rules}
-      join={join}
-      onChange={onChange}
-      openDialog={openDialog}
-      variableRegistry={variableRegistry}
-    />
-  </div>
+  <Rules
+    rules={rules}
+    join={join}
+    onChange={onChange}
+    openDialog={openDialog}
+    variableRegistry={variableRegistry}
+  />
 );
 
 Filter.propTypes = {

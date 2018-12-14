@@ -61,6 +61,6 @@ EditEdgeRule.propTypes = {
 export { EditEdgeRule };
 
 export default compose(
-  withRuleChangeHandler,
   withOptions('edge'),
+  withRuleChangeHandler,
 )(EditEdgeRule);
