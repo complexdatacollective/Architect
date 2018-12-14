@@ -1,5 +1,17 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
+
+const operatorsAsText = {
+  EXACTLY: 'exactly',
+  EXISTS: 'with',
+  NOT_EXISTS: 'without',
+  NOT: 'is not',
+  GREATER_THAN: 'greater than',
+  GREATER_THAN_OR_EQUAL: 'greater than or equal to',
+  LESS_THAN: 'less than',
+  LESS_THAN_OR_EQUAL: 'less that or equal to',
+};
 
 const formatValue = (value) => {
   switch (typeof value) {
@@ -26,7 +38,7 @@ const Variable = ({ children }) => (<div className="rules-preview-text__variable
 Variable.propTypes = { children: PropTypes.node };
 Variable.defaultProps = { children: '' };
 
-const Operator = ({ value }) => (<div className="rules-preview-text__operator">{value.toLowerCase()}</div>);
+const Operator = ({ value }) => (<div className="rules-preview-text__operator">{get(operatorsAsText, value, value.toLowerCase())}</div>);
 Operator.propTypes = { value: PropTypes.string };
 Operator.defaultProps = { value: '' };
 
@@ -62,6 +74,17 @@ const PreviewText = ({ type, options }) => {
           </Fragment>
         );
       }
+      if (!options.value) {
+        return (
+          <Fragment>
+            <Entity>alter</Entity>
+            <Copy>of type</Copy>
+            <Type>{options.type}</Type>
+            <Operator value={options.operator} />
+            <Variable>{options.variable}</Variable>
+          </Fragment>
+        );
+      }
       return (
         <Fragment>
           <Entity>alter</Entity>
@@ -77,17 +100,17 @@ const PreviewText = ({ type, options }) => {
     case 'edge':
       return (
         <Fragment>
+          <Operator value={options.operator} />
           <Entity>edge</Entity>
           <Copy>of type</Copy>
           <Type>{options.type}</Type>
-          <Operator value={options.operator} />
         </Fragment>
       );
     case 'ego':
       return (
         <Fragment>
           <Entity>ego</Entity>
-          <Copy>with</Copy>
+          <Copy>has</Copy>
           <Variable>{options.variable}</Variable>
           <Operator value={options.operator} />
           <Value value={options.value} />
