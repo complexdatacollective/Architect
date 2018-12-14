@@ -27,8 +27,16 @@ const Rules = ({
   handleCreateEgoRule,
 }) => (
   <div className="rules-rules">
+    <EditRule
+      variableRegistry={variableRegistry}
+      rule={draftRule}
+      onChange={handleChangeDraft}
+      onCancel={handleCancelDraft}
+      onSave={handleSaveDraft}
+    />
+
     <div className="rules-rules__join">
-      Must match:
+      <h3>Must match:</h3>
       <DetachedField
         component={RadioGroup}
         options={[
@@ -40,15 +48,8 @@ const Rules = ({
       />
     </div>
 
-    <EditRule
-      variableRegistry={variableRegistry}
-      rule={draftRule}
-      onChange={handleChangeDraft}
-      onCancel={handleCancelDraft}
-      onSave={handleSaveDraft}
-    />
-
     <div className="rules-rules__preview">
+      <h3>Rules:</h3>
       <PreviewRules
         rules={rules}
         join={join}
@@ -62,22 +63,26 @@ const Rules = ({
       <Button
         type="button"
         size="small"
+        color="sea-serpent"
         onClick={handleCreateAlterTypeRule}
       >Add alter type rule</Button>
       <Button
         type="button"
         size="small"
+        color="sea-serpent--dark"
         onClick={handleCreateAlterVariableRule}
       >Add alter variable rule</Button>
       <Button
         type="button"
         size="small"
+        color="paradise-pink"
         onClick={handleCreateEdgeRule}
       >Add edge rule</Button>
       { type === 'query' &&
         <Button
           type="button"
           size="small"
+          color="neon-carrot"
           onClick={handleCreateEgoRule}
         >Add ego rule</Button>
       }

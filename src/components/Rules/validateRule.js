@@ -21,8 +21,12 @@ const validateRule = (rule) => {
       }
       return validateFields(['type', 'operator'], options);
     }
-    case 'ego':
-      return validateFields(['variable', 'operator', 'value'], options);
+    case 'ego': {
+      if (operatorsWithValue.has(options.operator)) {
+        return validateFields(['variable', 'operator', 'value'], options);
+      }
+      return validateFields(['variable', 'operator'], options);
+    }
     case 'edge':
       return validateFields(['type', 'operator'], options);
     default:

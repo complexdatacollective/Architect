@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
-import Filter from '../../../Filter';
+import { Filter, withFieldConnector, withStoreConnector } from '../../../Query';
 import ValidatedField from '../../../Form/ValidatedField';
 import { Item, Row } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
+
+const FilterField = withFieldConnector(withStoreConnector(Filter));
 
 const getDataSourceOptions = (dataSources) => {
   const externalData = dataSources.map(dataSource => (
@@ -46,7 +48,7 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
       <h3>Filter</h3>
       <Field
         name={`${fieldId}.filter`}
-        component={Filter}
+        component={FilterField}
       />
     </Row>
   </Item>

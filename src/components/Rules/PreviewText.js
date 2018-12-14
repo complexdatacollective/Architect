@@ -83,8 +83,18 @@ const PreviewText = ({ type, options }) => {
           <Operator value={options.operator} />
         </Fragment>
       );
+    case 'ego':
+      return (
+        <Fragment>
+          <Entity>ego</Entity>
+          <Copy>with</Copy>
+          <Variable>{options.variable}</Variable>
+          <Operator value={options.operator} />
+          <Value value={options.value} />
+        </Fragment>
+      );
     default:
-      return '';
+      return `Syntax for "${type}" is not defined`;
   }
 };
 
