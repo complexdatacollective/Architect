@@ -1,0 +1,46 @@
+.form-fields-edge-select {
+  background: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  .preview-edge {
+    margin: 0 unit(2) unit(2) 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: unit(1) unit(2);
+    cursor: pointer;
+
+    &__background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0;
+      border-radius: unit(5);
+      // background-color: var(--color-platinum);
+      border-width: 2px;
+      border-style: solid;
+      border-color: transparent;
+      transition: opacity var(--animation-duration-standard) var(--animation-easing),
+        border-color var(--animation-duration-standard) var(--animation-easing);
+    }
+
+    .edge-icon {
+      margin: 0 unit(1) 0 0;
+    }
+
+    &--selected {
+      .preview-edge__background {
+        opacity: 1;
+        border-color: var(--color-sea-green);
+      }
+    }
+  }
+}

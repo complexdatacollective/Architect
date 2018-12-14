@@ -41,8 +41,10 @@ class EditRule extends Component {
               onChange={this.props.onChange}
             />
           }
-          <Button type="button" onClick={this.props.onSave}>Save</Button>
-          <Button type="button" onClick={this.props.onCancel}>Cancel</Button>
+          <div className="rules-edit-rule__controls">
+            <Button type="button" onClick={this.props.onSave} color="neon-coral">Save</Button>
+            <Button type="button" onClick={this.props.onCancel} color="platinum">Cancel</Button>
+          </div>
         </div>
       </Modal>
     );
@@ -57,6 +59,7 @@ EditRule.propTypes = {
   variableRegistry: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 export { EditRule };

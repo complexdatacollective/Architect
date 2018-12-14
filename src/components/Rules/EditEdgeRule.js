@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import DetachedField from '../DetachedField';
-import NodeSelect from '../Form/Fields/NodeSelect';
+import EdgeSelect from '../Form/Fields/EdgeSelect';
 import Select from '../Form/Fields/Select';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
@@ -25,7 +25,7 @@ const EditEdgeRule = ({
     <div className="rules-edit-rule__fields">
       <div className="rules-edit-rule__row">
         <DetachedField
-          component={NodeSelect}
+          component={EdgeSelect}
           name="type"
           label="Type"
           options={typeOptions}

@@ -8,4 +8,10 @@
     // sass-lint:disable placeholder-in-extend
     @extend .list-row;
   }
+
+  &__controls {
+    button {
+      margin: 0 unit(1) 0 0;
+    }
+  }
 }

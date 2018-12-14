@@ -8,13 +8,13 @@ import Rules from '../Rules';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
-const Filter = ({ rules, join, variableRegistry, onChange, confirmAction }) => (
+const Filter = ({ rules, join, variableRegistry, onChange, openDialog }) => (
   <div>
     <Rules
       rules={rules}
       join={join}
       onChange={onChange}
-      confirmAction={confirmAction}
+      openDialog={openDialog}
       variableRegistry={variableRegistry}
     />
   </div>
@@ -22,7 +22,7 @@ const Filter = ({ rules, join, variableRegistry, onChange, confirmAction }) => (
 
 Filter.propTypes = {
   onChange: PropTypes.func.isRequired,
-  confirmAction: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
   rules: PropTypes.array.isRequired,
   variableRegistry: PropTypes.object.isRequired,
   join: PropTypes.string.isRequired,
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  confirmAction: bindActionCreators(dialogsActions.openDialog, dispatch),
+  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
 export { Filter };

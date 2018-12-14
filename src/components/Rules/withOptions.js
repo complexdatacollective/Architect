@@ -41,9 +41,8 @@ const withOptions = entityCategory =>
     const typeOptions = map(entityTypes, (entity, id) => ({
       value: id,
       label: entity.label,
+      color: entity.color,
     }));
-
-    console.log(props.variableRegistry, variablesRoot);
 
     const variableOptions = getVariablesAsOptions(get(props.variableRegistry, variablesRoot, {}));
 

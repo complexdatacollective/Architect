@@ -23,7 +23,7 @@ PreviewNode.defaultProps = {
 const NodeSelect = ({ className, ...rest }) => (
   <Fields.RadioGroup
     optionComponent={PreviewNode}
-    className={cx('form-node-select', className)}
+    className={cx('form-fields-node-select', 'form-node-select', className)}
     {...rest}
   />
 );

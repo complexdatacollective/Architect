@@ -77,7 +77,14 @@ class Rules extends Component {
     let updatedRules = [];
 
     // Let the user know?
-    if (!validateRule(this.state.editRule)) { return; }
+    if (!validateRule(this.state.editRule)) {
+      this.props.openDialog({
+        type: 'Warning',
+        title: 'Please complete all fields',
+        canCancel: false,
+      });
+      return;
+    }
 
     if (!this.state.editRule.id) {
       updatedRules = [
@@ -108,8 +115,8 @@ class Rules extends Component {
   handleDeleteRule = (ruleId) => {
     const updateRules = this.props.rules.filter(rule => rule.id !== ruleId);
 
-    this.props.confirmAction({
-      type: 'Warning',
+    this.props.openDialog({
+      type: 'Confirm',
       title: 'Are you sure you want to delete this rule?',
       onConfirm: () => {
         this.handleChange({
@@ -190,7 +197,7 @@ Rules.propTypes = {
   rules: PropTypes.array,
   join: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  confirmAction: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
   variableRegistry: PropTypes.object.isRequired,
 };
 
