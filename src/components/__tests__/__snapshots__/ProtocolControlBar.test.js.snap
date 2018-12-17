@@ -22,41 +22,8 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "function",
     "props": Object {
-      "buttons": <Button
-        color="white"
-        content=""
-        disabled={true}
-        icon={
-          <Icon
-            className=""
-            color=""
-            name="arrow-right"
-            style={Object {}}
-          />
-        }
-        iconPosition="right"
-        onClick={[Function]}
-        size=""
-        type="button"
-      >
-        Save
-      </Button>,
-      "className": "",
-      "flip": false,
-      "secondaryButtons": null,
-      "show": false,
-    },
-    "ref": null,
-    "rendered": null,
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "buttons": <Button
+      "buttons": Array [
+        <Button
           color="white"
           content=""
           disabled={true}
@@ -75,6 +42,43 @@ ShallowWrapper {
         >
           Save
         </Button>,
+      ],
+      "className": "",
+      "flip": false,
+      "secondaryButtons": null,
+      "show": false,
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "buttons": Array [
+          <Button
+            color="white"
+            content=""
+            disabled={true}
+            icon={
+              <Icon
+                className=""
+                color=""
+                name="arrow-right"
+                style={Object {}}
+              />
+            }
+            iconPosition="right"
+            onClick={[Function]}
+            size=""
+            type="button"
+          >
+            Save
+          </Button>,
+        ],
         "className": "",
         "flip": false,
         "secondaryButtons": null,
