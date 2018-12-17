@@ -20,6 +20,7 @@
   --text-dark: var(--color-charcoal);
   --background-dark: var(--color-navy-taupe);
   --body-font-family: #{$netcanvas-font-stack};
+  --interface-prompt-flex-basis: 10rem;
 
   // Inputs
   --input-background: #{transparentize(rgb(0, 0, 0), .67)};
