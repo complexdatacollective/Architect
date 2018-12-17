@@ -15,7 +15,7 @@ import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as navigationActions } from '../../ducks/modules/navigation';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
-import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
+import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
 
 class Timeline extends Component {
   static propTypes = {

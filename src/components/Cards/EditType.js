@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
 import Color from 'color';
 import { get, times, size } from 'lodash';
-import { getCSSVariableAsString } from '../../utils/CSSVariables';
+import { getCSSVariableAsString } from '../../ui/utils/CSSVariables';
 import { Button } from '../../ui/components';
 import TypeEditor, { formName, parse, format } from '../TypeEditor';
 import Card from './ProtocolCard';

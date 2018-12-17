@@ -6,7 +6,7 @@ import anime from 'animejs';
 import ControlBar from './ControlBar';
 import { CardErrorBoundary } from './Errors/';
 import window from '../ui/components/window';
-import { getCSSVariableAsNumber } from '../utils/CSSVariables';
+import { getCSSVariableAsNumber } from '../ui/utils/CSSVariables';
 
 const fadeIn = {
   opacity: [0, 1],

@@ -101,7 +101,7 @@ class Overview extends Component {
                   <Fields.Text
                     className="timeline-overview__name"
                     placeholder="Enter a description for your protocol here"
-                    label="Protocol description:"
+                    label="Protocol description"
                     input={{
                       value: description,
                       onChange:
