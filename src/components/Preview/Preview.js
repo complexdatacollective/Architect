@@ -10,7 +10,6 @@ import windowRootProvider from '../../ui/components/windowRootProvider';
 import { actionCreators as sessionsActions } from '../../network-canvas/src/ducks/modules/sessions';
 
 class Preview extends Component {
-  
   componentDidMount() {
     this.setFontSize();
   }
@@ -32,13 +31,15 @@ class Preview extends Component {
 
   promptForward = () => {
     this.props.updatePrompt(
-      (this.props.stage.prompts.length + this.props.promptIndex + 1) % this.props.stage.prompts.length,
+      (this.props.stage.prompts.length + this.props.promptIndex + 1) %
+        this.props.stage.prompts.length,
     );
   }
 
   promptBackward = () => {
     this.props.updatePrompt(
-      (this.props.stage.prompts.length + this.props.promptIndex - 1) % this.props.stage.prompts.length,
+      (this.props.stage.prompts.length + this.props.promptIndex - 1) %
+        this.props.stage.prompts.length,
     );
   }
 
