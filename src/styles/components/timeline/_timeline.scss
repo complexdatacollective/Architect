@@ -2,56 +2,57 @@ $stage-height: (9 / 16) * 15vw;
 $stage-padding: unit(5);
 $bottom-spacing: unit(12);
 
-.timeline {
-  z-index: var(--z-default);
-  transition-property: opacity;
-  transition-duration: 500ms;
+.scene__timeline {
+  .timeline {
+    z-index: var(--z-default);
+    transition-property: opacity;
+    transition-duration: 500ms;
 
-  &::before {
-    transition: transform var(--animation-duration-slow) var(--animation-easing);
-    z-index: -1;
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: calc(50% - #{unit(.3)});
-    width: 0;
-    height: calc(100% - #{$stage-padding} - #{$stage-height / 2} - #{$bottom-spacing});
-    border-left-width: unit(.6);
-    border-left-color: var(--architect-timeline-line);
-    border-left-style: solid;
-  }
-
-  &__stages {
-    position: relative;
-    margin: unit(6) 0 $bottom-spacing;
-
-    &-highlight {
-      position: absolute;
+    &::before {
+      transition: transform var(--animation-duration-slow) var(--animation-easing);
       z-index: -1;
-      height: calc(#{$stage-height} + #{2 * $stage-padding});
-      width: 100%;
-      background-color: transparent;
-      transition: transform var(--animation-duration-standard) var(--animation-easing),
-      background-color var(--animation-duration-standard) var(--animation-easing);
-      transform: translateZ(0);
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: calc(50% - #{unit(.3)});
+      width: 0;
+      height: calc(100% - #{$stage-padding} - #{$stage-height / 2} - #{$bottom-spacing});
+      border-left-width: unit(.6);
+      border-left-color: var(--architect-timeline-line);
+      border-left-style: solid;
     }
 
-    &:hover {
-      .timeline__stages-highlight {
-        background-color: var(--architect-timeline-highlight);
+    &__stages {
+      position: relative;
+      margin: unit(6) 0 $bottom-spacing;
+
+      &-highlight {
+        position: absolute;
+        z-index: -1;
+        height: calc(#{$stage-height} + #{2 * $stage-padding});
+        width: 100%;
+        background-color: transparent;
+        transition: transform var(--animation-duration-standard) var(--animation-easing),
+        background-color var(--animation-duration-standard) var(--animation-easing);
+        transform: translateZ(0);
+      }
+
+      &:hover {
+        .timeline__stages-highlight {
+          background-color: var(--architect-timeline-highlight);
+        }
+      }
+
+      &--show {
+        opacity: 1;
       }
     }
 
-    &--show {
-      opacity: 1;
+    &--sorting {
+      .timeline__stages-highlight {
+        background-color: transparent !important; // sass-lint:disable-line no-important
+      }
     }
   }
-
-  &--sorting {
-    .timeline__stages-highlight {
-      background-color: transparent !important; // sass-lint:disable-line no-important
-    }
-  }
-
 }

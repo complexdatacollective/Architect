@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { get } from 'lodash';
 import Stage from '../../network-canvas/src/containers/Stage';
+import Timeline from '../../network-canvas/src/components/Timeline';
 import windowRootProvider from '../../ui/components/windowRootProvider';
+import { actionCreators as sessionsActions } from '../../network-canvas/src/ducks/modules/sessions';
 
 class Preview extends Component {
   componentDidMount() {
@@ -26,12 +29,32 @@ class Preview extends Component {
     this.props.setWindowRoot(element);
   }
 
+  promptForward = () => {
+    this.props.updatePrompt(
+      (this.props.stage.prompts.length + this.props.promptIndex + 1) %
+        this.props.stage.prompts.length,
+    );
+  }
+
+  promptBackward = () => {
+    this.props.updatePrompt(
+      (this.props.stage.prompts.length + this.props.promptIndex - 1) %
+        this.props.stage.prompts.length,
+    );
+  }
+
   render() {
     const { stage, promptIndex } = this.props;
-
+    const percentProgress = stage && stage.prompts ? (promptIndex / stage.prompts.length) * 100 : 0;
     return (
       <div className="preview">
         <div className="network-canvas">
+          <Timeline
+            id="TIMELINE"
+            onClickBack={this.promptBackward}
+            onClickNext={this.promptForward}
+            percentProgress={percentProgress}
+          />
           { stage &&
             <Stage stage={stage} promptId={promptIndex} />
           }
@@ -51,6 +74,7 @@ Preview.propTypes = {
   promptIndex: PropTypes.number,
   setWindowRoot: PropTypes.func.isRequired,
   interfaceScale: PropTypes.number.isRequired,
+  updatePrompt: PropTypes.func.isRequired,
 };
 
 Preview.defaultProps = {
@@ -71,9 +95,15 @@ const mapStateToProps = (state, { stageIndex }) => {
   };
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    updatePrompt: bindActionCreators(sessionsActions.updatePrompt, dispatch),
+  };
+}
+
 export default compose(
   windowRootProvider,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(
   Preview,
 );

@@ -60,6 +60,10 @@ const getPreviewMenu = (window) => {
           click: () => { setSize(window, { width: 1280, height: 800 }); },
         },
         {
+          label: 'Microsoft Surface Device',
+          click: () => { setSize(window, { width: 1500, height: 1000 }); },
+        },
+        {
           label: 'Apple Laptop (1440x900)',
           click: () => { setSize(window, { width: 1440, height: 900 }); },
         },
