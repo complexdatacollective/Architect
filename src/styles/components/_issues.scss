@@ -57,10 +57,11 @@
     padding: 0;
     list-style: none;
     counter-reset: issue;
-    max-height: 0;
     transition-property: max-height;
     transition-timing-function: var(--animation-easing);
     transition-duration: var(--animation-duration-standard);
+    overflow: hidden auto;
+    max-height: 0;
   }
 
   &__issue {
@@ -95,8 +96,9 @@
   }
 
   &--open {
+
     .issues__issues {
-      max-height: 100vh;
+      max-height: 300px;
     }
 
     .issues__toggle--open {

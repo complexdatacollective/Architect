@@ -5,7 +5,7 @@ import { map, isEmpty } from 'lodash';
 import scrollparent from 'scrollparent';
 import anime from 'animejs';
 import { Icon } from '../ui/components';
-import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../utils/CSSVariables';
+import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../ui/utils/CSSVariables';
 import { flattenIssues, getFieldId } from '../utils/issues';
 
 const scrollTo = (destination) => {

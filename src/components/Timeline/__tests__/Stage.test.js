@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Stage } from '../Stage';
 
-jest.mock('../../../utils/CSSVariables');
+jest.mock('../../../ui/utils/CSSVariables');
 
 const mockProps = {
   type: 'Foo',

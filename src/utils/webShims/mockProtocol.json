@@ -5,6 +5,215 @@
   "networkCanvasVersion": "~4.0.0",
   "variableRegistry": {
     "node": {
+      "d39a47507bbe27c2a7948861847f3607eda8s8j": {
+        "iconVariant": "add-a-person",
+        "color": "node-color-seq-3",
+        "variables": [
+          {
+            "id": "acec0568-938b-42f0-bd3a-485e22d775d6",
+            "fieldId": "One",
+            "label": "One",
+            "name": "one",
+            "description": "one",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "308eafd0-adb5-4140-92cd-1b5bcd5cd1b5",
+            "fieldId": "two",
+            "label": "two",
+            "name": "two",
+            "description": "two",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "c64b9807-1a41-45b6-a94d-1d2f166dd595",
+            "fieldId": "three",
+            "label": "three",
+            "name": "three",
+            "description": "three",
+            "options": null,
+            "validation": [],
+            "type": "text"
+            
+          },
+          {
+            "id": "6150aab8-c698-4e74-8c50-dbdf2656faab",
+            "fieldId": "four",
+            "label": "four",
+            "name": "four",
+            "description": "four",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "d8453e47-5b4f-40d5-9b6c-3fed4477b369",
+            "fieldId": "five",
+            "label": "five",
+            "name": "five",
+            "description": "five",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "91fc8d5a-a5ed-4bda-9d99-2c728bb23170",
+            "fieldId": "six",
+            "label": "six",
+            "name": "six",
+            "description": "six",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "0b6a3ac6-5cb6-4614-bf3c-9526bd7bba28",
+            "fieldId": "seven",
+            "label": "seven",
+            "name": "seven",
+            "description": "seven",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "0fd01a79-af39-45f8-be20-6adc9557ad75",
+            "fieldId": "eight",
+            "label": "eight",
+            "name": "eight",
+            "description": "eight",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "867fd187-af3a-4ba0-adad-b5e387aeeb1f",
+            "fieldId": "nine",
+            "label": "nine",
+            "name": "nine",
+            "description": "nine",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "33bd06bf-5e51-4c91-b796-6aa6033987ac",
+            "fieldId": "ten",
+            "label": "ten",
+            "name": "ten",
+            "description": "ten",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "9313a4cb-d140-4a27-b15b-9cdd09f1aea6",
+            "fieldId": "eleven",
+            "label": "eleven",
+            "name": "eleven",
+            "description": "eleven",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "5c453fae-b7bf-4177-8a01-da0081cac839",
+            "fieldId": "twelve",
+            "label": "twelve",
+            "name": "twelve",
+            "description": "twelve",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "a11483a9-c85b-4335-928d-74d2d49cf654",
+            "fieldId": "thirteen",
+            "label": "thirteen",
+            "name": "thirteen",
+            "description": "thirteen",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "e2a591f2-baab-4174-ab8a-c2c1f2a2f411",
+            "fieldId": "fourteen",
+            "label": "fourteen",
+            "name": "fourteen",
+            "description": "fourteen",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "500af489-3528-4748-bf81-38fd720e7422",
+            "fieldId": "fifteen",
+            "label": "fifteen",
+            "name": "fifteen",
+            "description": "fifteen",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "53590ea1-e9cd-4a59-b47d-412c3b07cf0f",
+            "fieldId": "sixteen",
+            "label": "sixteen",
+            "name": "sixteen",
+            "description": "sixteen",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "5b39629c-105e-4eb7-89f6-52e34218a936",
+            "fieldId": "seventeen",
+            "label": "seventeen",
+            "name": "seventeen",
+            "description": "seventeen",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "d191bb1e-b515-4204-af03-060b9898f0bb",
+            "fieldId": "eighteen",
+            "label": "eighteen",
+            "name": "eighteen",
+            "description": "eighteen",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "c9088ea5-9446-4b18-98fd-2f05d8fab0fb",
+            "fieldId": "nineteen",
+            "label": "nineteen",
+            "name": "nineteen",
+            "description": "nineteen",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          },
+          {
+            "id": "078811de-4b58-4cd5-903d-7ab5798596b2",
+            "fieldId": "twenty",
+            "label": "twenty",
+            "name": "twenty",
+            "description": "twenty",
+            "options": null,
+            "validation": [],
+            "type": "text"
+          }
+        ],
+        "name": "ManyVariables",
+        "label": "Many Variables"
+      },
       "d39a47507bbe27c2a7948861847f3607eda8e1be": {
         "label": "Person",
         "name": "person",

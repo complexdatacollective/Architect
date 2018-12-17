@@ -39,7 +39,7 @@ const startApp = () => {
   );
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   startApp();
   initFileOpener();
 });

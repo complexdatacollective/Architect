@@ -4,7 +4,7 @@ import { compose, withHandlers, defaultProps, renameProp, withProps } from 'reco
 import { TransitionGroup } from 'react-transition-group';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
-import { getCSSVariableAsNumber } from '../../utils/CSSVariables';
+import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
 import WipeTransition from '../Transitions/Wipe';
 
 const SortableItem = SortableElement(
