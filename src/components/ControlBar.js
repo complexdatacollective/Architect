@@ -39,8 +39,8 @@ const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
 };
 
 ControlBar.propTypes = {
-  buttons: PropTypes.node,
-  secondaryButtons: PropTypes.node,
+  buttons: PropTypes.arrayOf(PropTypes.node),
+  secondaryButtons: PropTypes.arrayOf(PropTypes.node),
   className: PropTypes.string,
   show: PropTypes.bool,
   flip: PropTypes.bool,

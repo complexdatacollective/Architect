@@ -17,7 +17,7 @@ const ProtocolControlBar = ({
 }) => (
   <ControlBar
     show={show && hasUnsavedChanges}
-    buttons={(
+    buttons={[
       <Button
         onClick={saveProtocol}
         color="white"
@@ -26,8 +26,8 @@ const ProtocolControlBar = ({
         disabled={!hasAnyStages}
       >
         Save
-      </Button>
-    )}
+      </Button>,
+    ]}
   />
 );
 
