@@ -4,7 +4,7 @@ import { SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
 import cx from 'classnames';
 import { Zoom } from '../../behaviours';
-import { getCSSVariableAsString } from '../../utils/CSSVariables';
+import { getCSSVariableAsString } from '../../ui/utils/CSSVariables';
 import timelineImages from '../../images/timeline';
 
 const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];

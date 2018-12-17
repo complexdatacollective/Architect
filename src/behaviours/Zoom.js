@@ -1,11 +1,9 @@
-/* eslint-disable */
 import React, { PureComponent } from 'react';
-import { compose } from 'redux';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { getContext } from 'recompose';
-import { getCSSVariableAsNumber } from '../utils/CSSVariables';
+import { getCSSVariableAsNumber } from '../ui/utils/CSSVariables';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -85,17 +83,17 @@ const Zoom = WrappedComponent =>
           scaleX: [scaleX, 1],
           backgroundColor: this.props.zoomColors,
         })
-        .add({
-          targets: pseudoElement,
-          elasticity: 0,
-          easing: 'easeInOutQuad',
-          delay: 50,
-          duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-          opacity: [1, 0],
-        })
-        .finished.then(() => {
-          this.root.removeChild(pseudoElement);
-        });
+          .add({
+            targets: pseudoElement,
+            elasticity: 0,
+            easing: 'easeInOutQuad',
+            delay: 50,
+            duration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+            opacity: [1, 0],
+          })
+          .finished.then(() => {
+            this.root.removeChild(pseudoElement);
+          });
       }
 
       render() {
@@ -103,12 +101,11 @@ const Zoom = WrappedComponent =>
           <WrappedComponent {...this.props} />
         );
       }
-    }
-  )
-
+    },
+  );
 
 export const Zoomer = ({ children, ...rest }) => {
-  const Zoomable = Zoom((props) => children(props));
+  const Zoomable = Zoom(props => children(props));
   return <Zoomable {...rest} />;
 };
 
