@@ -56,7 +56,7 @@ ShallowWrapper {
                       "value": "",
                     }
                   }
-                  label={null}
+                  label="Protocol description:"
                   meta={Object {}}
                   placeholder="Enter a description for your protocol here"
                   type="text"
@@ -168,7 +168,7 @@ ShallowWrapper {
                       "value": "",
                     }
                   }
-                  label={null}
+                  label="Protocol description:"
                   meta={Object {}}
                   placeholder="Enter a description for your protocol here"
                   type="text"
@@ -277,7 +277,7 @@ ShallowWrapper {
                       "value": "",
                     }
                   }
-                  label={null}
+                  label="Protocol description:"
                   meta={Object {}}
                   placeholder="Enter a description for your protocol here"
                   type="text"
@@ -382,7 +382,7 @@ ShallowWrapper {
                       "value": "",
                     }
                   }
-                  label={null}
+                  label="Protocol description:"
                   meta={Object {}}
                   placeholder="Enter a description for your protocol here"
                   type="text"
@@ -484,7 +484,7 @@ ShallowWrapper {
                         "value": "",
                       }
                     }
-                    label={null}
+                    label="Protocol description:"
                     meta={Object {}}
                     placeholder="Enter a description for your protocol here"
                     type="text"
@@ -584,7 +584,7 @@ ShallowWrapper {
                           "value": "",
                         }
                       }
-                      label={null}
+                      label="Protocol description:"
                       meta={Object {}}
                       placeholder="Enter a description for your protocol here"
                       type="text"
@@ -619,7 +619,7 @@ ShallowWrapper {
                         "onChange": [Function],
                         "value": "",
                       },
-                      "label": null,
+                      "label": "Protocol description:",
                       "meta": Object {},
                       "placeholder": "Enter a description for your protocol here",
                       "type": "text",
@@ -991,7 +991,7 @@ ShallowWrapper {
                         "value": "",
                       }
                     }
-                    label={null}
+                    label="Protocol description:"
                     meta={Object {}}
                     placeholder="Enter a description for your protocol here"
                     type="text"
@@ -1103,7 +1103,7 @@ ShallowWrapper {
                         "value": "",
                       }
                     }
-                    label={null}
+                    label="Protocol description:"
                     meta={Object {}}
                     placeholder="Enter a description for your protocol here"
                     type="text"
@@ -1212,7 +1212,7 @@ ShallowWrapper {
                         "value": "",
                       }
                     }
-                    label={null}
+                    label="Protocol description:"
                     meta={Object {}}
                     placeholder="Enter a description for your protocol here"
                     type="text"
@@ -1317,7 +1317,7 @@ ShallowWrapper {
                         "value": "",
                       }
                     }
-                    label={null}
+                    label="Protocol description:"
                     meta={Object {}}
                     placeholder="Enter a description for your protocol here"
                     type="text"
@@ -1419,7 +1419,7 @@ ShallowWrapper {
                           "value": "",
                         }
                       }
-                      label={null}
+                      label="Protocol description:"
                       meta={Object {}}
                       placeholder="Enter a description for your protocol here"
                       type="text"
@@ -1519,7 +1519,7 @@ ShallowWrapper {
                             "value": "",
                           }
                         }
-                        label={null}
+                        label="Protocol description:"
                         meta={Object {}}
                         placeholder="Enter a description for your protocol here"
                         type="text"
@@ -1554,7 +1554,7 @@ ShallowWrapper {
                           "onChange": [Function],
                           "value": "",
                         },
-                        "label": null,
+                        "label": "Protocol description:",
                         "meta": Object {},
                         "placeholder": "Enter a description for your protocol here",
                         "type": "text",
