@@ -30,7 +30,7 @@ $duration: var(--animation-duration-standard);
     background: var(--architect-table-edit-background);
 
     .attributes-table-variable__edit {
-      max-height: 500px;
+      max-height: fit-content;
       opacity: 1;
       transition: opacity $duration $duration, max-height $duration $duration;
     }

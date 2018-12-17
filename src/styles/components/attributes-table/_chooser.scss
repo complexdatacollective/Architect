@@ -30,7 +30,7 @@ $duration: var(--animation-duration-standard);
   }
 
   &--show {
-    max-height: 500px;
+    max-height: 100%;
     opacity: 1;
     transform: translateX(0);
     transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;
