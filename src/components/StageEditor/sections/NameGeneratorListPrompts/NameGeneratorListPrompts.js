@@ -1,9 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Prompts from '../../../Prompts';
 import NameGeneratorListPrompt from './NameGeneratorListPrompt';
-import { getExternalDataSources } from '../../../../selectors/protocol';
 
 const NameGeneratorListPrompts = props => (
   <Prompts
@@ -20,23 +17,6 @@ const NameGeneratorListPrompts = props => (
   </Prompts>
 );
 
-NameGeneratorListPrompts.propTypes = {
-  dataSources: PropTypes.array,
-};
-
-NameGeneratorListPrompts.defaultProps = {
-  dataSources: [],
-};
-
-const mapStateToProps = (state) => {
-  const dataSources = getExternalDataSources(state)
-    .map(source => ({ value: source, label: source }));
-
-  return {
-    dataSources,
-  };
-};
-
 export { NameGeneratorListPrompts };
 
-export default connect(mapStateToProps)(NameGeneratorListPrompts);
+export default NameGeneratorListPrompts;

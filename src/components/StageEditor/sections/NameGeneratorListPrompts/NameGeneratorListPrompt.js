@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Markdown from 'react-markdown';
 import { ValidatedField } from '../../../Form';
-import { TextArea, Text, Toggle, Checkbox } from '../../../../ui/components/Fields';
+import { TextArea, Text, Checkbox } from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
 import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
@@ -17,6 +17,7 @@ import {
 import withFieldValues from './withFieldValues';
 import withExternalDataPropertyOptions from './withExternalDataPropertyOptions';
 import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
+import withDataSourcesForNodeType from './withDataSourcesForNodeType';
 
 const NameGeneratorPrompt = ({
   handleValidateAttributes,
@@ -204,4 +205,5 @@ export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
   withExternalDataPropertyOptions,
   withDisplayLabelChangeHandler,
+  withDataSourcesForNodeType,
 )(NameGeneratorPrompt);
