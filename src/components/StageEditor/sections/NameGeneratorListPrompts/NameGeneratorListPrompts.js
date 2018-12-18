@@ -9,6 +9,7 @@ const NameGeneratorListPrompts = props => (
   <Prompts
     contentId="guidance.editor.name_generator_list_prompts"
     promptComponent={NameGeneratorListPrompt}
+    template={{ showExistingNodes: true }}
     {...props}
   >
     <h2>Prompts</h2>
