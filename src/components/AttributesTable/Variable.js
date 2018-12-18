@@ -118,14 +118,18 @@ class Variable extends Component {
 const mapStateToProps = (state, { variablesForNodeType, ...props }) => {
   if (!props.variable) { return {}; }
 
-  const variableMeta = variablesForNodeType[props.variable];
-  const validation = get(variablesForNodeType, [props.variable, 'validation']);
+  const variable = get(variablesForNodeType, props.variable, {});
+  const validation = get(variable, 'validation', []);
+  const label = get(variable, 'label', '');
+  const type = get(variable, 'type', '');
+  const options = get(variable, 'options', null);
+
 
   return {
     validation,
-    label: variableMeta.label,
-    type: variableMeta.type,
-    options: variableMeta.options || null,
+    label,
+    type,
+    options,
   };
 };
 
