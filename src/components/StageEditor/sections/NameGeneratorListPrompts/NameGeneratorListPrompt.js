@@ -15,9 +15,8 @@ import {
   getSortOrderOptionGetter,
 } from './optionGetters';
 import withFieldValues from './withFieldValues';
-import withExternalDataPropertyOptions from './withExternalDataPropertyOptions';
+import withDataSourceOptions from './withDataSourceOptions';
 import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
-import withDataSourcesForNodeType from './withDataSourcesForNodeType';
 
 const NameGeneratorPrompt = ({
   handleValidateAttributes,
@@ -203,7 +202,6 @@ export { NameGeneratorPrompt };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
-  withExternalDataPropertyOptions,
+  withDataSourceOptions,
   withDisplayLabelChangeHandler,
-  withDataSourcesForNodeType,
 )(NameGeneratorPrompt);

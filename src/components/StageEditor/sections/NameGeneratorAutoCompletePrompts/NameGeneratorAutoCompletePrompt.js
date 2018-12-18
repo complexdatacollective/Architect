@@ -13,7 +13,7 @@ import { getFieldId } from '../../../../utils/issues';
 import {
   optionGetters,
   withFieldValues,
-  withExternalDataPropertyOptions,
+  withDataSourceOptions,
 } from '../NameGeneratorListPrompts';
 import withDisplayLabelChangeHandler from '../NameGeneratorListPrompts/withDisplayLabelChangeHandler';
 
@@ -197,6 +197,6 @@ export { NameGeneratorAutoCompletePrompt };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
-  withExternalDataPropertyOptions,
+  withDataSourceOptions,
   withDisplayLabelChangeHandler,
 )(NameGeneratorAutoCompletePrompt);

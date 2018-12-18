@@ -1,21 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 
 import { createSelector } from 'reselect';
-import { has, get, uniq, keys, map, mapValues, reduce } from 'lodash';
+import { get, uniq, map, mapValues, reduce } from 'lodash';
 import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
-
-const getDataSource = (_, props) => props.dataSource;
-const getNodeType = (_, props) => props.nodeType;
-
-const getDataForDataSource = createSelector(
-  getExternalData,
-  getDataSource,
-  (externalData, dataSource) =>
-    get(externalData, dataSource, { nodes: [] }),
-);
 
 const getUniqueTypes = data =>
   uniq(map(data, 'type'));
+
+const getNodeType = (_, props) => props.nodeType;
 
 /**
  * Create an index of types available in each data source
@@ -34,9 +26,9 @@ const getTypesBySource = createSelector(
 );
 
 /**
- * Create an index of types available in each data source
+ * Return a list of options for the current props.nodeType
  */
-const makeGetDataSourcesWithNodeType = () =>
+const makeGetDataSourcesWithNodeTypeOptions = () =>
   createSelector(
     getTypesBySource,
     getNodeType,
@@ -44,7 +36,10 @@ const makeGetDataSourcesWithNodeType = () =>
       typesBySource,
       (acc, source, name) => {
         if (!source.has(nodeType)) { return acc; }
-        return [...acc, name];
+        return [
+          ...acc,
+          { label: name, value: name },
+        ];
       },
       [],
     ),
@@ -54,37 +49,34 @@ const makeGetDataSourcesWithNodeType = () =>
  * Extracts unique variables used in `dataSource`, and combines them with the registry to
  * create list of options in the format: `[ { value, label }, ...]`
  */
-const getExternalDataPropertyOptions = createSelector(
-  getDataForDataSource,
-  getVariableRegistry,
-  getNodeType,
-  (externalData, variableRegistry, nodeType) => {
-    const dataVariables = externalData.nodes
-      .filter(node => node.type === nodeType)
-      .reduce((memo, node) => uniq([...memo, ...keys(node.attributes)]), []);
+const makeGetExternalDataPropertyOptions = () =>
+  createSelector(
+    getVariableRegistry,
+    getNodeType,
+    (variableRegistry, nodeType) => {
+      const variables = get(variableRegistry, ['node', nodeType, 'variables'], {});
 
-    const externalDataPropertyOptions = dataVariables.reduce(
-      (acc, variableId) => {
-        if (!has(variableRegistry, ['node', nodeType, 'variables', variableId])) { return acc; }
+      const externalDataPropertyOptions = reduce(
+        variables,
+        (acc, variable, variableId) => {
+          const label = get(variable, 'name', variableId);
 
-        const label = get(variableRegistry, ['node', nodeType, 'variables', variableId, 'name'], variableId);
+          return [
+            ...acc,
+            {
+              label,
+              value: variableId,
+            },
+          ];
+        },
+        [],
+      );
 
-        return [
-          ...acc,
-          {
-            label,
-            value: variableId,
-          },
-        ];
-      },
-      [],
-    );
-
-    return externalDataPropertyOptions;
-  },
-);
+      return externalDataPropertyOptions;
+    },
+  );
 
 export {
-  makeGetDataSourcesWithNodeType,
-  getExternalDataPropertyOptions,
+  makeGetDataSourcesWithNodeTypeOptions,
+  makeGetExternalDataPropertyOptions,
 };
