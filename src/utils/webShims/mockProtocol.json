@@ -38,7 +38,7 @@
             "options": null,
             "validation": [],
             "type": "text"
-            
+
           },
           {
             "id": "6150aab8-c698-4e74-8c50-dbdf2656faab",
@@ -587,7 +587,11 @@
       "prompts": [
         {
           "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?"
+          "text": "Within the past 6 months, who has been supportive?",
+          "dataSource": "previousInterview",
+          "cardOptions": {
+            "displayLabel": "1d84d7782a65d41d727f7c71fcb38b6aea633a80"
+          }
         }
       ]
     },
@@ -602,7 +606,11 @@
       "prompts": [
         {
           "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?"
+          "text": "Within the past 6 months, who has been supportive?",
+          "dataSource": "previousInterview",
+          "cardOptions": {
+            "displayLabel": "1d84d7782a65d41d727f7c71fcb38b6aea633a80"
+          }
         }
       ]
     },
