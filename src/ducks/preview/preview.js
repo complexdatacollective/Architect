@@ -29,6 +29,7 @@ const previewReducer = (state = initialState, action) => {
   if (action.type === SET_PROTOCOL) {
     return {
       ...state,
+      externalData: action.protocol.externalData,
       protocol: {
         ...state.protocol,
         ...omit(action.protocol, 'externalData'),
