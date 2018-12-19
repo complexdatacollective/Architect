@@ -1,8 +1,7 @@
-/* eslint-disable import/prefer-default-export */
-
 import { createSelector } from 'reselect';
 import { get, uniq, map, mapValues, reduce } from 'lodash';
 import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
+import { LABEL_VARIABLE_TYPES } from '../../../../config';
 
 const getUniqueTypes = data =>
   uniq(map(data, 'type'));
@@ -60,6 +59,10 @@ const makeGetExternalDataPropertyOptions = () =>
         variables,
         (acc, variable, variableId) => {
           const label = get(variable, 'name', variableId);
+          const type = variable && variable.type;
+
+          // Only allow text fields for label.
+          if (!LABEL_VARIABLE_TYPES.has(type)) { return acc; }
 
           return [
             ...acc,

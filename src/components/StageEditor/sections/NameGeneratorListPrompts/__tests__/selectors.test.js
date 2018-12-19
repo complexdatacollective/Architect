@@ -26,9 +26,9 @@ const mockState = {
         node: {
           bar: {
             variables: {
-              alpha: { name: 'ALPHA' },
-              bravo: { name: 'BRAVO' },
-              charlie: { name: 'CHARLIE' },
+              alpha: { name: 'ALPHA', type: 'text' },
+              bravo: { name: 'BRAVO', type: 'text' },
+              charlie: { name: 'CHARLIE', type: 'location' },
             },
           },
         },
@@ -77,7 +77,8 @@ describe('NameGeneratorListPrompts selectors', () => {
       expect(getExternalDataPropertyOptions(mockState, mockProps)).toEqual([
         { value: 'alpha', label: 'ALPHA' },
         { value: 'bravo', label: 'BRAVO' },
-        { value: 'charlie', label: 'CHARLIE' },
+        // We filter certain types of variable:
+        // { value: 'charlie', label: 'CHARLIE' },
       ]);
     });
   });
