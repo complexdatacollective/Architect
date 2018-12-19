@@ -81,6 +81,10 @@ const NameGeneratorPrompt = ({
       </Row>
       <Row>
         <h3 id={getFieldId(`${fieldId}.showExistingNodes`)}>Show existing nodes</h3>
+        <p>
+          Show nodes added from other prompts, otherwise only nodes added on this
+          prompt will be shown.
+        </p>
         <Field
           name={`${fieldId}.showExistingNodes`}
           component={Checkbox}
