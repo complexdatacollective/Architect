@@ -1,3 +1,4 @@
+// sass-lint:disable no-ids
 
 .preview {
   position: absolute;
@@ -72,4 +73,10 @@
       left: 0;
     }
   }
+}
+
+// Draggable preview gets added directly to the page dom so we need this import
+// to be global.
+#page-wrap {
+  @import '../../network-canvas/src/styles/components/draggable-preview';
 }
