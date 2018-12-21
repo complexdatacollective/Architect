@@ -8,6 +8,7 @@ const codenames = {
   // Skip versions to sync with Network Canvas
   '4.0.0-alpha.8': 'Lochs & Glens',
   '4.0.0-alpha.9': 'Arrakis',
+  '4.0.0-alpha.10': 'Porthleven',
 };
 
 const appVersion = remote.app.getVersion();
