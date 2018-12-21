@@ -38,7 +38,7 @@
             "options": null,
             "validation": [],
             "type": "text"
-            
+
           },
           {
             "id": "6150aab8-c698-4e74-8c50-dbdf2656faab",
@@ -587,7 +587,29 @@
       "prompts": [
         {
           "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?"
+          "text": "Within the past 6 months, who has been supportive?",
+          "dataSource": "previousInterview",
+          "showExistingNodes": true,
+          "additionalAttributes": {
+            "5d69e2e1f8a9ea63d425602943831500c3d5c01d": true
+          },
+          "cardOptions": {
+            "displayLabel": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
+            "additionalProperties": [
+              {
+                "label": "AGE",
+                "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2"
+              }
+            ]
+          },
+          "sortOptions": {
+            "sortableProperties": [
+              {
+                "label": "AGE",
+                "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2"
+              }
+            ]
+          }
         }
       ]
     },
@@ -602,7 +624,23 @@
       "prompts": [
         {
           "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?"
+          "text": "Within the past 6 months, who has been supportive?",
+          "dataSource": "previousInterview",
+          "cardOptions": {
+            "displayLabel": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
+            "additionalProperties": [
+              {
+                "label": "AGE",
+                "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2"
+              }
+            ]
+          },
+          "searchOptions": {
+            "matchProperties": [
+              "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c"
+            ],
+            "fuzziness": 0.5
+          }
         }
       ]
     },

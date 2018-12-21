@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Markdown from 'react-markdown';
 import { ValidatedField } from '../../../Form';
-import { TextArea, Text } from '../../../../ui/components/Fields';
+import { TextArea, Text, Checkbox } from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
 import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
@@ -15,7 +15,7 @@ import {
   getSortOrderOptionGetter,
 } from './optionGetters';
 import withFieldValues from './withFieldValues';
-import withExternalDataPropertyOptions from './withExternalDataPropertyOptions';
+import withDataSourceOptions from './withDataSourceOptions';
 import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
 
 const NameGeneratorPrompt = ({
@@ -76,6 +76,19 @@ const NameGeneratorPrompt = ({
           name={`${fieldId}.dataSource`}
           id="dataSource"
           options={dataSources}
+          validation={{ required: true }}
+        />
+      </Row>
+      <Row>
+        <h3 id={getFieldId(`${fieldId}.showExistingNodes`)}>Show existing nodes</h3>
+        <p>
+          Show nodes added from other prompts, otherwise only nodes added on this
+          prompt will be shown.
+        </p>
+        <Field
+          name={`${fieldId}.showExistingNodes`}
+          component={Checkbox}
+          label="Show existing nodes"
           validation={{ required: true }}
         />
       </Row>
@@ -193,6 +206,6 @@ export { NameGeneratorPrompt };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
-  withExternalDataPropertyOptions,
+  withDataSourceOptions,
   withDisplayLabelChangeHandler,
 )(NameGeneratorPrompt);

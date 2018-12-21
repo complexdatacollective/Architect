@@ -87,9 +87,9 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { fieldName, form: { name } }) => ({
+const mapDispatchToProps = (dispatch, { fieldName, form: { name }, template = {} }) => ({
   addNewPrompt: bindActionCreators(
-    () => arrayPush(name, fieldName, { id: uuid() }),
+    () => arrayPush(name, fieldName, { ...template, id: uuid() }),
     dispatch,
   ),
 });

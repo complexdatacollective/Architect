@@ -1,9 +1,9 @@
 import { combineEpics } from 'redux-observable';
 import { filter, map } from 'rxjs/operators';
-import { omit } from 'lodash';
 import history from '../../history';
 import previewStoreData from './previewStore.json';
 import rootReducer from '../../network-canvas/src/ducks/modules/rootReducer';
+import { actionCreators as networkCanvasProtocolActions } from '../../network-canvas/src/ducks/modules/protocol';
 
 const initialState = {
   ...previewStoreData,
@@ -27,16 +27,16 @@ const setProtocol = (protocol, path = '') => ({
 
 const previewReducer = (state = initialState, action) => {
   if (action.type === SET_PROTOCOL) {
-    return {
-      ...state,
-      protocol: {
-        ...state.protocol,
-        ...omit(action.protocol, 'externalData'),
-        path: action.path.slice(1),
-        protocolPath: null,
-      },
-    };
+    // Adapt our setProtocol action to be compatible with Network Canvas'
+    const adjustedAction = networkCanvasProtocolActions.setProtocol(
+      action.path.slice(1),
+      action.protocol,
+      false,
+    );
+
+    return rootReducer(state, adjustedAction);
   }
+
 
   return rootReducer(state, action);
 };

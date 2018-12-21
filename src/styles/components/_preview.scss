@@ -1,3 +1,4 @@
+// sass-lint:disable no-ids
 
 .preview {
   position: absolute;
@@ -9,6 +10,15 @@
 
 .network-canvas {
   @import '../../network-canvas/src/styles/main';
+
+  // :root in '../../network-canvas/src/styles/main';
+  --code-font: courier;
+  --timeline-width: 9rem;
+  --interface-prompt-flex-basis: 10rem;
+  --interface-right-margin: 2rem;
+  --base-font-size: 1.75vmin;
+  --border-radius: .75rem;
+  --padding-unit: 1rem;
 
   // sass-lint:disable no-color-literals
   --color-shadow: rgba(0, 0, 0, .15);
@@ -63,4 +73,10 @@
       left: 0;
     }
   }
+}
+
+// Draggable preview gets added directly to the page dom so we need this import
+// to be global.
+#page-wrap {
+  @import '../../network-canvas/src/styles/components/draggable-preview';
 }

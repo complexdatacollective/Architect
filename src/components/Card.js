@@ -65,7 +65,7 @@ class Card extends PureComponent {
     const enterDuration = this.props.enterDuration || getCSSVariableAsNumber('--animation-duration-standard-ms');
     const exitDuration = this.props.exitDuration || getCSSVariableAsNumber('--animation-duration-standard-ms');
 
-    const classes = cx('card', `card--${this.props.type}`);
+    const classes = cx('arch-card', `arch-card--${this.props.type}`);
     const timeout = enterDuration + enterDelay + exitDuration + exitDelay;
 
     return (
@@ -102,8 +102,8 @@ class Card extends PureComponent {
       >
         {state => (
           <div className={classes}>
-            <div className="card__container">
-              <div className="card__content">
+            <div className="arch-card__container">
+              <div className="arch-card__content">
                 <CardErrorBoundary onAcknowledge={this.handleAcknowledgeError}>
                   { show && this.props.children }
                 </CardErrorBoundary>

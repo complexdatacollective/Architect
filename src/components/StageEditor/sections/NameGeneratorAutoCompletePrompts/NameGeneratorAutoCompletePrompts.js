@@ -1,9 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Prompts from '../../../Prompts';
 import NameGeneratorPrompt from './NameGeneratorAutoCompletePrompt';
-import { getExternalDataSources } from '../../../../selectors/protocol';
 
 const NameGeneratorAutoCompletePrompts = props => (
   <Prompts
@@ -19,23 +16,6 @@ const NameGeneratorAutoCompletePrompts = props => (
   </Prompts>
 );
 
-NameGeneratorAutoCompletePrompts.propTypes = {
-  dataSources: PropTypes.array,
-};
-
-NameGeneratorAutoCompletePrompts.defaultProps = {
-  dataSources: [],
-};
-
-const mapStateToProps = (state) => {
-  const dataSources = getExternalDataSources(state)
-    .map(source => ({ value: source, label: source }));
-
-  return {
-    dataSources,
-  };
-};
-
 export { NameGeneratorAutoCompletePrompts };
 
-export default connect(mapStateToProps)(NameGeneratorAutoCompletePrompts);
+export default NameGeneratorAutoCompletePrompts;
