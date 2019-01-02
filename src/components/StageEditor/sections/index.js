@@ -8,3 +8,4 @@ export { default as NameGeneratorListPrompts } from './NameGeneratorListPrompts'
 export { default as NameGeneratorAutoCompletePrompts } from './NameGeneratorAutoCompletePrompts';
 export { default as SociogramPrompts } from './SociogramPrompts';
 export { default as NodePanels } from './NodePanels';
+export { default as CategoricalBinPrompts } from './CategoricalBinPrompts';

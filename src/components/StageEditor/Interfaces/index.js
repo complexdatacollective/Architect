@@ -1,11 +1,11 @@
 /* eslint-disable import/prefer-default-export */
-
 import { get } from 'lodash';
 import Information from './Information';
 import NameGenerator from './NameGenerator';
 import NameGeneratorList from './NameGeneratorList';
 import NameGeneratorAutoComplete from './NameGeneratorAutoComplete';
 import Sociogram from './Sociogram';
+import CategoricalBin from './CategoricalBin';
 
 const interfaces = {
   Information,
@@ -13,6 +13,7 @@ const interfaces = {
   NameGeneratorList,
   NameGeneratorAutoComplete,
   Sociogram,
+  CategoricalBin,
 };
 
 const emptyInterface = {
