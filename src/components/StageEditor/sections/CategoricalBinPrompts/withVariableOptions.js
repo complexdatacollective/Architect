@@ -9,9 +9,16 @@ import {
 const makeMapStateToProps = () => {
   const getVariableOptions = makeGetVariableOptions();
 
-  const mapStateToProps = (state, props) => ({
-    variableOptions: getVariableOptions(state, props),
-  });
+  const mapStateToProps = (state, props) => {
+    const variableOptions = getVariableOptions(state, props);
+    const categoricalVariableOptions = variableOptions
+      .filter(({ type }) => type === 'categorical');
+
+    return {
+      variableOptions,
+      categoricalVariableOptions,
+    };
+  };
 
   return mapStateToProps;
 };

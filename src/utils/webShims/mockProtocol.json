@@ -577,6 +577,22 @@
       ]
     },
     {
+      "id": "catbin",
+      "type": "CategoricalBin",
+      "subject": {
+        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+        "entity": "node"
+      },
+      "label": "Boop",
+      "prompts": [
+        {
+          "showExistingNodes": true,
+          "id": "9ae9a824-ae32-4715-b554-ba4b86b0f4a0",
+          "text": "rstrstrst"
+        }
+      ]
+    },
+    {
       "id": "namegenlist1",
       "type": "NameGeneratorList",
       "label": "NG Closeness List",
