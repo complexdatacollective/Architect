@@ -1,12 +1,22 @@
-import { isBoolean, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import { operatorsWithValue } from './options';
 
+const valididateField = (value) => {
+  const type = typeof value;
+  switch (type) {
+    case 'string':
+      return !isEmpty(value);
+    case 'boolean':
+      return true;
+    case 'number':
+      return true;
+    default:
+      throw Error(`Could not validate unknown type "${type}"`);
+  }
+};
+
 const validateFields = (fields = [], options = {}) =>
-  fields.every(
-    field => (
-      isBoolean(options[field]) ? true : !isEmpty(options[field])
-    ),
-  );
+  fields.every(field => valididateField(options[field]));
 
 const validateRule = (rule) => {
   const options = rule.options || {};
