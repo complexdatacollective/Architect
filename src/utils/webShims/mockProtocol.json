@@ -577,18 +577,32 @@
       ]
     },
     {
-      "id": "catbin",
+      "id": "4e9d7157aaf18dbcd65a733e9e42d1ed9b777f9f",
       "type": "CategoricalBin",
       "subject": {
         "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
         "entity": "node"
       },
-      "label": "Boop",
+      "label": "Categorical Bin Example",
       "prompts": [
         {
-          "showExistingNodes": true,
           "id": "9ae9a824-ae32-4715-b554-ba4b86b0f4a0",
-          "text": "rstrstrst"
+          "text": "Put nodes in categories"
+        }
+      ]
+    },
+    {
+      "id": "dda5030b5ce1d9f06b39ccaa38f9f432ba0e7167",
+      "type": "OrdinalBin",
+      "subject": {
+        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
+        "entity": "node"
+      },
+      "label": "Ordinal Bin Example",
+      "prompts": [
+        {
+          "id": "9ae9a824-ae32-4715-b554-ba4b86b0f4a0",
+          "text": "Put nodes in ordinals"
         }
       ]
     },

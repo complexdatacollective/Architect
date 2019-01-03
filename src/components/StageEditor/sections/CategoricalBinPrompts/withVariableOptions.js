@@ -11,12 +11,9 @@ const makeMapStateToProps = () => {
 
   const mapStateToProps = (state, props) => {
     const variableOptions = getVariableOptions(state, props);
-    const categoricalVariableOptions = variableOptions
-      .filter(({ type }) => type === 'categorical');
 
     return {
       variableOptions,
-      categoricalVariableOptions,
     };
   };
 

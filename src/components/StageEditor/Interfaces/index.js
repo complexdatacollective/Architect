@@ -6,6 +6,7 @@ import NameGeneratorList from './NameGeneratorList';
 import NameGeneratorAutoComplete from './NameGeneratorAutoComplete';
 import Sociogram from './Sociogram';
 import CategoricalBin from './CategoricalBin';
+import OrdinalBin from './OrdinalBin';
 
 const interfaces = {
   Information,
@@ -14,6 +15,7 @@ const interfaces = {
   NameGeneratorAutoComplete,
   Sociogram,
   CategoricalBin,
+  OrdinalBin,
 };
 
 const emptyInterface = {

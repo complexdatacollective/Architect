@@ -9,17 +9,19 @@ import { TextArea } from '../../../../ui/components/Fields';
 import MultiSelect from '../../../Form/MultiSelect';
 import { ExpandableItem, Row } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
-import { getSortOrderOptionGetter } from './optionGetters';
-import withVariableOptions from './withVariableOptions';
+import {
+  optionGetters,
+  withVariableOptions,
+} from '../CategoricalBinPrompts';
 
-const CategoricalBinPrompt = ({
+const OrdinalBinPrompt = ({
   fieldId,
   form,
   variableOptions,
   ...rest
 }) => {
-  const categoricalVariableOptions = variableOptions
-    .filter(({ type }) => type === 'categorical');
+  const ordinalVariableOptions = variableOptions
+    .filter(({ type }) => type === 'ordinal');
 
   return (
     <ExpandableItem
@@ -45,12 +47,12 @@ const CategoricalBinPrompt = ({
         />
       </Row>
       <Row>
-        <h3 id={getFieldId(`${fieldId}.variable`)}>Category variable</h3>
+        <h3 id={getFieldId(`${fieldId}.variable`)}>Ordinal variable</h3>
         <ValidatedField
           name={`${fieldId}.variable`}
           component={Select}
           label=""
-          options={categoricalVariableOptions}
+          options={ordinalVariableOptions}
           validation={{ required: true }}
         />
       </Row>
@@ -63,7 +65,7 @@ const CategoricalBinPrompt = ({
             { fieldName: 'property' },
             { fieldName: 'direction' },
           ]}
-          options={getSortOrderOptionGetter(variableOptions)}
+          options={optionGetters.getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
       <Row>
@@ -75,14 +77,14 @@ const CategoricalBinPrompt = ({
             { fieldName: 'property' },
             { fieldName: 'direction' },
           ]}
-          options={getSortOrderOptionGetter(variableOptions)}
+          options={optionGetters.getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
     </ExpandableItem>
   );
 };
 
-CategoricalBinPrompt.propTypes = {
+OrdinalBinPrompt.propTypes = {
   fieldId: PropTypes.string.isRequired,
   form: PropTypes.shape({
     name: PropTypes.string,
@@ -91,13 +93,13 @@ CategoricalBinPrompt.propTypes = {
   nodeType: PropTypes.string,
 };
 
-CategoricalBinPrompt.defaultProps = {
+OrdinalBinPrompt.defaultProps = {
   nodeType: null,
   variableOptions: [],
 };
 
-export { CategoricalBinPrompt };
+export { OrdinalBinPrompt };
 
 export default compose(
   withVariableOptions,
-)(CategoricalBinPrompt);
+)(OrdinalBinPrompt);
