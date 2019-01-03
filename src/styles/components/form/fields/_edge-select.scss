@@ -24,12 +24,11 @@
       z-index: -1;
       opacity: 0;
       border-radius: unit(5);
-      // background-color: var(--color-platinum);
       border-width: 2px;
       border-style: solid;
       border-color: transparent;
       transition: opacity var(--animation-duration-standard) var(--animation-easing),
-        border-color var(--animation-duration-standard) var(--animation-easing);
+      border-color var(--animation-duration-standard) var(--animation-easing);
     }
 
     .edge-icon {
