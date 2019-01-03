@@ -11,6 +11,7 @@
     flex-grow: 1;
     display: flex;
     color: var(--text-dark);
+    transition: color var(--animation-duration-fast) var(--animation-easing);
   }
 
   &__delete {
@@ -20,9 +21,9 @@
     width: unit(3);
     height: unit(3);
     margin: 0 0 0 unit(1);
-    border-radius: unit(1);
+    border-radius: unit(3);
     opacity: 0;
-    transition: opacity var(--animation-duration-standard) var(--animation-easing);
+    transition: opacity var(--animation-duration-fast) var(--animation-easing);
     cursor: pointer;
     overflow: hidden;
     display: flex;
@@ -41,10 +42,14 @@
   }
 
   &:hover {
-    background-color: var(--background-light);
+    background-color: var(--background-dark);
 
     .rules-preview-rule__delete {
       opacity: 1;
+    }
+
+    .rules-preview-rule__text {
+      color: var(--text-light);
     }
   }
 }

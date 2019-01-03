@@ -8,21 +8,26 @@ const PreviewRules = ({ join, rules, variableRegistry, onClickRule, onDeleteRule
 
   return (
     <div className="rules-preview-rules">
-      <div className="rules-preview-rules__rules">
-        {rules.map(
-          (rule, index) => (
-            <div className="rules-preview-rules__rule" key={rule.id}>
-              <PreviewRule
-                {...rule}
-                join={getJoin(index)}
-                variableRegistry={variableRegistry}
-                onClick={() => onClickRule(rule.id)}
-                onDelete={() => onDeleteRule(rule.id)}
-              />
-            </div>
-          ),
-        )}
-      </div>
+      {rules.length === 0 &&
+        <div className="rules-preview-rules__empty">Add rule types from the options below.</div>
+      }
+      {rules.length > 0 &&
+        <div className="rules-preview-rules__rules">
+          {rules.map(
+            (rule, index) => (
+              <div className="rules-preview-rules__rule" key={rule.id}>
+                <PreviewRule
+                  {...rule}
+                  join={getJoin(index)}
+                  variableRegistry={variableRegistry}
+                  onClick={() => onClickRule(rule.id)}
+                  onDelete={() => onDeleteRule(rule.id)}
+                />
+              </div>
+            ),
+          )}
+        </div>
+      }
     </div>
   );
 };
