@@ -1,6 +1,8 @@
 import { map } from 'lodash';
+import { pick } from 'lodash/fp';
 
 const NON_SORTABLE_TYPES = ['layout'];
+const getOptionProperties = pick(['label', 'value']);
 
 /**
  * Creates a optionGetter function for <MultiSelect />
@@ -8,7 +10,7 @@ const NON_SORTABLE_TYPES = ['layout'];
  * This optionGetter is for sortOrder, which defines properties for `property` and `direction`
  * columns.
  */
-const getSortOrderOptionsGetter = variableOptions =>
+const getSortOrderOptionGetter = variableOptions =>
   (property, rowValues, allValues) => {
     switch (property) {
       case 'property': {
@@ -21,9 +23,11 @@ const getSortOrderOptionsGetter = variableOptions =>
           .filter(
             option => !NON_SORTABLE_TYPES.includes(option.type),
           )
-          .map(
-            option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
-          );
+          .map(option => (
+            !used.includes(option.value) ?
+              getOptionProperties(option) :
+              { ...getOptionProperties(option), isDisabled: true }
+          ));
       }
       case 'direction':
         return [
@@ -36,11 +40,11 @@ const getSortOrderOptionsGetter = variableOptions =>
   };
 
 const optionGetters = {
-  getSortOrderOptionsGetter,
+  getSortOrderOptionGetter,
 };
 
 export {
-  getSortOrderOptionsGetter,
+  getSortOrderOptionGetter,
 };
 
 export default optionGetters;

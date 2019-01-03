@@ -7,9 +7,9 @@ import { ValidatedField } from '../../../Form';
 import Select from '../../../Form/Fields/Select';
 import { TextArea } from '../../../../ui/components/Fields';
 import MultiSelect from '../../../Form/MultiSelect';
-import { ExpandableItem, Row, Group } from '../../../OrderedList';
+import { ExpandableItem, Row } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
-import { getSortOrderOptionsGetter } from './optionGetters';
+import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 
 const CategoricalBinPrompt = ({
@@ -60,7 +60,7 @@ const CategoricalBinPrompt = ({
           { fieldName: 'property' },
           { fieldName: 'direction' },
         ]}
-        options={getSortOrderOptionsGetter(variableOptions)}
+        options={getSortOrderOptionGetter(variableOptions)}
       />
     </Row>
     <Row>
@@ -72,7 +72,7 @@ const CategoricalBinPrompt = ({
           { fieldName: 'property' },
           { fieldName: 'direction' },
         ]}
-        options={getSortOrderOptionsGetter(variableOptions)}
+        options={getSortOrderOptionGetter(variableOptions)}
       />
     </Row>
   </ExpandableItem>
