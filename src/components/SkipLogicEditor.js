@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { toPairs } from 'lodash';
 import { Guided } from './Guided';
 import { Query, withStoreConnector } from './Query';
 import Select from './Form/Fields/Select';

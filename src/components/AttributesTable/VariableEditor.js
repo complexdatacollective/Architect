@@ -60,7 +60,6 @@ class VariableEditor extends Component {
 
 VariableEditor.propTypes = {
   value: PropTypes.any,
-  onChange: PropTypes.func.isRequired,
   variable: PropTypes.string,
   show: PropTypes.bool,
   type: PropTypes.string,
