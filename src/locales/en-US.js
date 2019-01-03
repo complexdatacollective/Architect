@@ -144,6 +144,24 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.ordinal_bin_prompts': (
+    <Fragment>
+      <h3>Ordinal Bin Prompts</h3>
+      <p>
+        Prompts allow you to specify one or more specific questions to post to the participant,
+        in order to describe the task you want them to complete.
+      </p>
+    </Fragment>
+  ),
+  'guidance.editor.categorical_bin_prompts': (
+    <Fragment>
+      <h3>Categorical Bin Prompts</h3>
+      <p>
+        Prompts allow you to specify one or more specific questions to post to the participant,
+        in order to describe the task you want them to complete.
+      </p>
+    </Fragment>
+  ),
   'guidance.editor.name_generator_list_prompts': (
     <Fragment>
       <h3>Name Generator Roster List Prompts</h3>
