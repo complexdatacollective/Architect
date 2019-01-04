@@ -6,6 +6,7 @@ const OrdinalBinPrompts = props => (
   <Prompts
     contentId="guidance.editor.ordinal_bin_prompts"
     promptComponent={OrdinalBinPrompt}
+    template={{ color: 'ord-color-seq-1' }}
     {...props}
   >
     <h2>Prompts</h2>
