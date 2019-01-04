@@ -6,11 +6,10 @@ import { Link } from 'react-router-dom';
 import { map, has, get } from 'lodash';
 import { TransitionGroup } from 'react-transition-group';
 import { Wipe } from '../Transitions';
-import { Node, Button } from '../../ui/components';
+import { Node, Button, Icon } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Card from '../Card';
-import EdgeIcon from '../EdgeIcon';
 import { getProtocol } from '../../selectors/protocol';
 import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
@@ -113,7 +112,7 @@ class VariableRegistry extends Component {
   }
 
   renderEdge = (edge, key) => {
-    const edgeColor = `var(--${get(edge, 'color', '')})`;
+    const edgeColor = get(edge, 'color', '');
     const usage = this.props.getUsageForType('edge', key);
 
     return (
@@ -124,7 +123,7 @@ class VariableRegistry extends Component {
           handleDelete={() => this.handleDelete('edge', key)}
           usage={usage}
         >
-          <EdgeIcon color={edgeColor} />
+          <Icon name="links" color={edgeColor} />
         </Type>
       </Wipe>
     );

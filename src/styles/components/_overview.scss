@@ -6,8 +6,10 @@
     --input-background: var(--background);
   }
 
-  .edge-icon {
-    margin: 0 unit(2) unit(2) 0;
+  .icon {
+    &[name='links'] {
+      margin: 0 unit(2) unit(2) 0;
+    }
   }
 
   &__name {
