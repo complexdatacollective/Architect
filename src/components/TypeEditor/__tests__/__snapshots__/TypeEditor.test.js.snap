@@ -124,9 +124,10 @@ ShallowWrapper {
               Choose a color for this node type.
             </p>
             <Validated
-              colors={Array []}
               component={[Function]}
               name="color"
+              palette="edge-color-seq"
+              paletteRange={8}
               validation={
                 Object {
                   "required": true,
@@ -451,9 +452,10 @@ ShallowWrapper {
               Choose a color for this node type.
             </p>
             <Validated
-              colors={Array []}
               component={[Function]}
               name="color"
+              palette="edge-color-seq"
+              paletteRange={8}
               validation={
                 Object {
                   "required": true,
@@ -479,9 +481,10 @@ ShallowWrapper {
                 Choose a color for this node type.
               </p>,
               <Validated
-                colors={Array []}
                 component={[Function]}
                 name="color"
+                palette="edge-color-seq"
+                paletteRange={8}
                 validation={
                   Object {
                     "required": true,
@@ -521,9 +524,10 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "colors": Array [],
                 "component": [Function],
                 "name": "color",
+                "palette": "edge-color-seq",
+                "paletteRange": 8,
                 "validation": Object {
                   "required": true,
                 },
@@ -700,9 +704,10 @@ ShallowWrapper {
                 Choose a color for this node type.
               </p>
               <Validated
-                colors={Array []}
                 component={[Function]}
                 name="color"
+                palette="edge-color-seq"
+                paletteRange={8}
                 validation={
                   Object {
                     "required": true,
@@ -1027,9 +1032,10 @@ ShallowWrapper {
                 Choose a color for this node type.
               </p>
               <Validated
-                colors={Array []}
                 component={[Function]}
                 name="color"
+                palette="edge-color-seq"
+                paletteRange={8}
                 validation={
                   Object {
                     "required": true,
@@ -1055,9 +1061,10 @@ ShallowWrapper {
                   Choose a color for this node type.
                 </p>,
                 <Validated
-                  colors={Array []}
                   component={[Function]}
                   name="color"
+                  palette="edge-color-seq"
+                  paletteRange={8}
                   validation={
                     Object {
                       "required": true,
@@ -1097,9 +1104,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "colors": Array [],
                   "component": [Function],
                   "name": "color",
+                  "palette": "edge-color-seq",
+                  "paletteRange": 8,
                   "validation": Object {
                     "required": true,
                   },
@@ -1327,9 +1335,10 @@ ShallowWrapper {
               Choose a color for this node type.
             </p>
             <Validated
-              colors={Array []}
               component={[Function]}
               name="color"
+              palette="node-color-seq"
+              paletteRange={10}
               validation={
                 Object {
                   "required": true,
@@ -1707,9 +1716,10 @@ ShallowWrapper {
               Choose a color for this node type.
             </p>
             <Validated
-              colors={Array []}
               component={[Function]}
               name="color"
+              palette="node-color-seq"
+              paletteRange={10}
               validation={
                 Object {
                   "required": true,
@@ -1735,9 +1745,10 @@ ShallowWrapper {
                 Choose a color for this node type.
               </p>,
               <Validated
-                colors={Array []}
                 component={[Function]}
                 name="color"
+                palette="node-color-seq"
+                paletteRange={10}
                 validation={
                   Object {
                     "required": true,
@@ -1777,9 +1788,10 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "colors": Array [],
                 "component": [Function],
                 "name": "color",
+                "palette": "node-color-seq",
+                "paletteRange": 10,
                 "validation": Object {
                   "required": true,
                 },
@@ -2239,9 +2251,10 @@ ShallowWrapper {
                 Choose a color for this node type.
               </p>
               <Validated
-                colors={Array []}
                 component={[Function]}
                 name="color"
+                palette="node-color-seq"
+                paletteRange={10}
                 validation={
                   Object {
                     "required": true,
@@ -2619,9 +2632,10 @@ ShallowWrapper {
                 Choose a color for this node type.
               </p>
               <Validated
-                colors={Array []}
                 component={[Function]}
                 name="color"
+                palette="node-color-seq"
+                paletteRange={10}
                 validation={
                   Object {
                     "required": true,
@@ -2647,9 +2661,10 @@ ShallowWrapper {
                   Choose a color for this node type.
                 </p>,
                 <Validated
-                  colors={Array []}
                   component={[Function]}
                   name="color"
+                  palette="node-color-seq"
+                  paletteRange={10}
                   validation={
                     Object {
                       "required": true,
@@ -2689,9 +2704,10 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "colors": Array [],
                   "component": [Function],
                   "name": "color",
+                  "palette": "node-color-seq",
+                  "paletteRange": 10,
                   "validation": Object {
                     "required": true,
                   },

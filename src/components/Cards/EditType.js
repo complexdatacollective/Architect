@@ -2,34 +2,13 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submit, isDirty, isInvalid } from 'redux-form';
-import Color from 'color';
-import { get, times, size } from 'lodash';
-import { getCSSVariableAsString } from '../../ui/utils/CSSVariables';
+import { get, size } from 'lodash';
 import { Button } from '../../ui/components';
 import TypeEditor, { formName, parse, format } from '../TypeEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
-
-const getColorByVariable = (variable) => {
-  try {
-    return Color(getCSSVariableAsString(variable)).hex().toLowerCase();
-  } catch (e) {
-    return '';
-  }
-};
-
-const asColorOption = name => ({
-  name,
-  color: getColorByVariable(`--${name}`),
-});
-
-const colorOptions = () => ({
-  node: times(8, index => `node-color-seq-${(index + 1)}`)
-    .map(asColorOption),
-  edge: times(10, index => `edge-color-seq-${(index + 1)}`)
-    .map(asColorOption),
-});
+import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../config';
 
 const ICON_OPTIONS = [
   'add-a-person',
@@ -38,10 +17,15 @@ const ICON_OPTIONS = [
 
 const getNextCategoryColor = ({ protocol, category }) => {
   if (!protocol || !category) { return null; }
-  const categoryOptions = colorOptions()[category];
+  const paletteName = category === 'edge' ?
+    COLOR_PALETTE_BY_ENTITY.edge :
+    COLOR_PALETTE_BY_ENTITY.node;
+  const paletteSize = COLOR_PALETTES[paletteName];
   const typeCount = size(get(protocol, ['variableRegistry', category], {}));
+  const nextNumber = (typeCount % paletteSize) + 1;
+  const nextColor = `${paletteName}-${nextNumber}`;
 
-  return get(categoryOptions, [typeCount % size(categoryOptions), 'name']);
+  return nextColor;
 };
 
 const getNewTypeTemplate = ({ protocol, category }) => ({
@@ -124,7 +108,6 @@ class EditType extends PureComponent {
             form={formName}
             category={category}
             type={type}
-            colorOptions={colorOptions()}
             iconOptions={ICON_OPTIONS}
             onSubmit={this.handleSubmit}
           />

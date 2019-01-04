@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Markdown from 'react-markdown';
-import Color from 'color';
-import { times } from 'lodash';
 import { ValidatedField } from '../../../Form';
 import Select from '../../../Form/Fields/Select';
 import ColorPicker from '../../../Form/Fields/ColorPicker';
-import { getCSSVariableAsString } from '../../../../ui/utils/CSSVariables';
 import { TextArea } from '../../../../ui/components/Fields';
 import MultiSelect from '../../../Form/MultiSelect';
 import { ExpandableItem, Row } from '../../../OrderedList';
@@ -17,23 +14,6 @@ import {
   optionGetters,
   withVariableOptions,
 } from '../CategoricalBinPrompts';
-
-const getColorByVariable = (variable) => {
-  try {
-    return Color(getCSSVariableAsString(variable)).hex().toLowerCase();
-  } catch (e) {
-    return '';
-  }
-};
-
-const asColorOption = name => ({
-  name,
-  color: getColorByVariable(`--${name}`),
-});
-
-const colorOptions = () =>
-  times(8, index => `ord-color-seq-${(index + 1)}`)
-    .map(asColorOption);
 
 const OrdinalBinPrompt = ({
   fieldId,
@@ -83,7 +63,8 @@ const OrdinalBinPrompt = ({
         <ValidatedField
           component={ColorPicker}
           name={`${fieldId}.color`}
-          colors={colorOptions()}
+          palette="ord-color-seq"
+          paletteRange={8}
           validation={{ required: true }}
         />
       </Row>
