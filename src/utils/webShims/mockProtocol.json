@@ -396,50 +396,26 @@
       }
     }
   },
-  "externalData": {
-    "previousInterview": {
-      "nodes": [
-        {
-          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-          "attributes": {
-            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Anita",
-            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Annie",
-            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "21"
-          }
-        },
-        {
-          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-          "attributes": {
-            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Barry",
-            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Baz",
-            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "28"
-          }
-        },
-        {
-          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-          "attributes": {
-            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Carlito",
-            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Carl",
-            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "23"
-          }
-        },
-        {
-          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-          "attributes": {
-            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Dee",
-            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Dee",
-            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "40"
-          }
-        },
-        {
-          "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-          "attributes": {
-            "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": "Eugine",
-            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "Eu",
-            "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": "18"
-          }
-        }
-      ]
+  "assetManifest": {
+    "475fd0720355e5fb2bf96964820e6d82159c2dd2": {
+      "type": "network",
+      "name": "Previous Interview",
+      "source": "previous_interview.json"
+    },
+    "c9b7477e17321509df4a4b88731b2ab3674a21f8": {
+      "type": "image",
+      "name": "Rubber Duck",
+      "source": "rubberduck.jpg"
+    },
+    "f65e5c7753fd9db39e7b9bdf6352ec139d49f03d": {
+      "type": "video",
+      "name": "Video",
+      "source": "video.mov"
+    },
+    "79879b313425e99ea0b1b8cede607374eab0b1f3": {
+      "type": "audio",
+      "name": "Click the thing",
+      "source": "click_the_thing.mp3"
     }
   },
   "forms": {
@@ -483,9 +459,9 @@
       "type": "Information",
       "title": "Title for the welcome stage",
       "items": [
-        { "id": "2", "size": "SMALL", "type": "audio", "content": "click_the_thing.mp3" },
-        { "id": "3", "size": "MEDIUM", "type": "video", "content": "video.mov" },
-        { "id": "4", "size": "SMALL", "type": "image", "content": "rubberduck.jpg" }
+        { "id": "2", "size": "SMALL", "type": "asset", "content": "79879b313425e99ea0b1b8cede607374eab0b1f3" },
+        { "id": "3", "size": "MEDIUM", "type": "asset", "content": "f65e5c7753fd9db39e7b9bdf6352ec139d49f03d" },
+        { "id": "4", "size": "SMALL", "type": "asset", "content": "c9b7477e17321509df4a4b88731b2ab3674a21f8" }
       ]
     },
     {
@@ -588,7 +564,7 @@
         {
           "id": "6su",
           "text": "Within the past 6 months, who has been supportive?",
-          "dataSource": "previousInterview",
+          "dataSource": "475fd0720355e5fb2bf96964820e6d82159c2dd2",
           "showExistingNodes": true,
           "additionalAttributes": {
             "5d69e2e1f8a9ea63d425602943831500c3d5c01d": true
@@ -625,7 +601,7 @@
         {
           "id": "6su",
           "text": "Within the past 6 months, who has been supportive?",
-          "dataSource": "previousInterview",
+          "dataSource": "475fd0720355e5fb2bf96964820e6d82159c2dd2",
           "cardOptions": {
             "displayLabel": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
             "additionalProperties": [
