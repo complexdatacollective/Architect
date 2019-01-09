@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import {
-  makeGetDataSourcesWithNodeTypeOptions,
+  getNetworkOptions,
   makeGetExternalDataPropertyOptions,
 } from '../selectors';
 
@@ -8,18 +8,16 @@ import {
 const mockState = {
   protocol: {
     present: {
-      externalData: {
+      assetManifest: {
         foo: {
-          nodes: [
-            { type: 'bar', attributes: { alpha: 1, bravo: 2 } },
-            { type: 'bar', attributes: { charlie: 3, bravo: 2 } },
-          ],
+          type: 'network',
+          name: 'My Network',
+          source: 'myNetwork.json',
         },
-        sourceWithMixedNodes: {
-          nodes: [
-            { type: 'something', attributes: { alpha: 1, bravo: 2 } },
-            { type: 'else', attributes: { charlie: 3, bravo: 2 } },
-          ],
+        bar: {
+          type: 'image',
+          name: 'An Image',
+          source: 'anImage.jpg',
         },
       },
       variableRegistry: {
@@ -38,22 +36,10 @@ const mockState = {
 };
 
 describe('NameGeneratorListPrompts selectors', () => {
-  describe('getDataSourcesWithNodeTypeOptions()', () => {
-    let getDataSourcesWithNodeTypeOptions;
-
-    beforeEach(() => {
-      getDataSourcesWithNodeTypeOptions = makeGetDataSourcesWithNodeTypeOptions();
-    });
-
-    it('extracts dataSource properties into options list', () => {
-      const nodeType = 'something';
-
-      const mockProps = {
-        nodeType,
-      };
-
-      expect(getDataSourcesWithNodeTypeOptions(mockState, mockProps)).toEqual([
-        { value: 'sourceWithMixedNodes', label: 'sourceWithMixedNodes' },
+  describe('getNetworkOptions()', () => {
+    it('extracts assetManifest networks into options list', () => {
+      expect(getNetworkOptions(mockState)).toEqual([
+        { value: 'foo', label: 'My Network' },
       ]);
     });
   });

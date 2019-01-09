@@ -8,16 +8,10 @@ import ValidatedField from '../../../Form/ValidatedField';
 import { Item } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 
-const getDataSourceOptions = (dataSources) => {
-  const externalData = dataSources.map(dataSource => (
-    { value: dataSource, label: dataSource }
-  ));
-
-  return ([
-    { value: 'existing', label: 'Current network' },
-    ...externalData,
-  ]);
-};
+const getDataSourceOptions = dataSources => ([
+  { value: 'existing', label: 'Current network' },
+  ...dataSources,
+]);
 
 const NodePanel = ({ fieldId, dataSources, ...rest }) => (
   <Item {...rest}>
