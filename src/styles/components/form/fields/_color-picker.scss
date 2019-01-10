@@ -1,0 +1,52 @@
+$component-name: form-fields-color-picker;
+$color-picker-size: unit(7);
+$color-picker-border-size: 5px;
+
+.#{$component-name} {
+  &__colors {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__color {
+    display: flex;
+    width: $color-picker-size;
+    height: $color-picker-size;
+    border-radius: $color-picker-size;
+    margin: 0 unit(1) unit(1) 0;
+    overflow: hidden;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    transition-duration: var(--animation-duration-standard);
+    transition-timing-function: var(--animation-easing);
+    transition-property: background-color;
+
+    &::after {
+      margin: $color-picker-border-size;
+      background-color: var(--color);
+      content: '';
+      width: calc(#{$color-picker-size} - #{$color-picker-border-size * 2});
+      height: calc(#{$color-picker-size} - #{$color-picker-border-size * 2});
+      border-radius: $color-picker-size;
+      border-color: transparent;
+      border-style: solid;
+      border-width: .15rem;
+      transition-duration: var(--animation-duration-standard);
+      transition-timing-function: var(--animation-easing);
+      transition-property: border-color;
+    }
+
+    &.#{$component-name}__color--selected {
+      background-color: var(--node-outer-trim-stroke);
+
+      &::after {
+        border-color: var(--background-light);
+      }
+    }
+  }
+
+  &__color-label {
+    display: none;
+  }
+}

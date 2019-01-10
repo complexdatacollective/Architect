@@ -11,6 +11,7 @@ import Variables from './Variables';
 import IconOption from './IconOption';
 import { getFieldId } from '../../utils/issues';
 import safeName from './safeName';
+import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../config';
 
 class TypeEditor extends Component {
   handleChangeLabel = (e, value) => {
@@ -26,10 +27,16 @@ class TypeEditor extends Component {
       form,
       category,
       type,
-      colorOptions,
       iconOptions,
       displayVariables,
     } = this.props;
+
+    const paletteName = category === 'edge' ?
+      COLOR_PALETTE_BY_ENTITY.edge :
+      COLOR_PALETTE_BY_ENTITY.node;
+
+    const paletteSize = COLOR_PALETTES[paletteName];
+
     return (
       <div className="type-editor editor__sections">
         <div className="code-button">
@@ -80,7 +87,8 @@ class TypeEditor extends Component {
             <ValidatedField
               component={ArchitectFields.ColorPicker}
               name="color"
-              colors={get(colorOptions, category, [])}
+              palette={paletteName}
+              paletteRange={paletteSize}
               validation={{ required: true }}
             />
           </div>
@@ -139,10 +147,6 @@ class TypeEditor extends Component {
 TypeEditor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
   type: PropTypes.string,
-  colorOptions: PropTypes.shape({
-    node: PropTypes.array.isRequired,
-    edge: PropTypes.array.isRequired,
-  }),
   iconOptions: PropTypes.array,
   category: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
