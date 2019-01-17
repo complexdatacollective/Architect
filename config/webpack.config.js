@@ -256,7 +256,7 @@ module.exports = {
       process.env.NODE_PATH.split(path.delimiter).filter(Boolean),
     ),
     alias: {
-      concaveman: path.join(__dirname, 'concavemock.js'),
+      concaveman: path.join(paths.appSrc, 'utils', 'webShims', 'concavemock.js'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
