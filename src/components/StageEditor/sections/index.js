@@ -3,6 +3,7 @@ export { default as Title } from './Title';
 export { default as Name } from './Name';
 export { default as NodeType } from './NodeType';
 export { default as Form } from './Form';
+export { default as NameGeneratorFormWithQuickAdd } from './NameGeneratorFormWithQuickAdd';
 export { default as NameGeneratorPrompts } from './NameGeneratorPrompts';
 export { default as NameGeneratorListPrompts } from './NameGeneratorListPrompts';
 export { default as NameGeneratorAutoCompletePrompts } from './NameGeneratorAutoCompletePrompts';
