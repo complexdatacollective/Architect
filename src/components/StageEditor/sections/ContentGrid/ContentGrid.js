@@ -57,9 +57,9 @@ class ContentGrid extends Component {
     return (
       <Guidance contentId="guidance.editor.content_items">
         <div className="stage-editor-section">
-          <h2>Content Boxes</h2>
+          <h2>Content Items</h2>
           <p>
-            Use this section to configure up to three content boxes, containing images, video,
+            Use this section to configure up to three content items, containing images, video,
             audio, or text.
           </p>
           <div className="content-grid">

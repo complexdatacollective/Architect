@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import {
+  getNetworkOptions,
   makeGetExternalDataPropertyOptions,
-  makeGetDataSourcesWithNodeTypeOptions,
 } from './selectors';
 
 /**
@@ -9,10 +9,9 @@ import {
  */
 const makeMapStateToProps = () => {
   const getExternalDataPropertyOptions = makeGetExternalDataPropertyOptions();
-  const getDataSourcesWithNodeTypeOptions = makeGetDataSourcesWithNodeTypeOptions();
 
   const mapStateToProps = (state, props) => ({
-    dataSources: getDataSourcesWithNodeTypeOptions(state, props),
+    dataSources: getNetworkOptions(state),
     externalDataPropertyOptions: getExternalDataPropertyOptions(state, props),
   });
 

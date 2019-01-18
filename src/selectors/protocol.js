@@ -8,7 +8,7 @@ const activeProtocolId = state => state.session.activeProtocol;
 const protocolsMeta = state => state.protocols;
 
 export const getProtocol = state => state.protocol.present;
-export const getExternalData = state => state.protocol.present.externalData;
+export const getAssetManifest = state => state.protocol.present.assetManifest;
 export const getVariableRegistry = state => state.protocol.present.variableRegistry;
 
 export const getActiveProtocolMeta = createSelector(
@@ -24,17 +24,23 @@ export const makeGetStage = () =>
     (protocol, stageId) => find(protocol.stages, ['id', stageId]),
   );
 
-export const getExternalDataSources = createSelector(
-  getExternalData,
-  externalData =>
-    reduce(
-      externalData,
-      (memo, dataSource, name) => {
-        if (!Object.prototype.hasOwnProperty.call(dataSource, 'nodes')) { return memo; }
+const networkTypes = new Set([
+  'network',
+  'async:network',
+]);
 
-        return [...memo, name];
+// TODO: Does this method make sense here?
+export const getNetworkAssets = createSelector(
+  getAssetManifest,
+  assetManifest =>
+    reduce(
+      assetManifest,
+      (memo, asset, name) => {
+        if (!networkTypes.has(asset.type)) { return memo; }
+
+        return { ...memo, [name]: asset };
       },
-      [],
+      {},
     ),
 );
 

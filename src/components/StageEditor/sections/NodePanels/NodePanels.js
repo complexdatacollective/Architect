@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import { FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import cx from 'classnames';
-import { keys, has, get } from 'lodash';
+import { has } from 'lodash';
 import Guidance from '../../../Guidance';
 import OrderedList, { NewButton } from '../../../OrderedList';
+import { getNetworkOptions } from '../NameGeneratorListPrompts/selectors';
 import NodePanel from './NodePanel';
 
 const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => {
@@ -54,14 +55,9 @@ NodePanels.defaultProps = {
   panels: [],
 };
 
-const getDataSources = (state) => {
-  const externalData = get(state, 'protocol.present.externalData', {});
-  return keys(externalData);
-};
-
 const mapStateToProps = (state, props) => ({
   disabled: !has(props.form.getValues(state, 'subject'), 'type'),
-  dataSources: getDataSources(state),
+  dataSources: getNetworkOptions(state),
   panels: props.form.getValues(state, 'panels'),
 });
 

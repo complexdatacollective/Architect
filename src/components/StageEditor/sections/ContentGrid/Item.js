@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { compose } from 'recompose';
 import { get } from 'lodash';
 import ItemPreview from './ItemPreview';
 import ItemChooser from './ItemChooser';
 import ItemEditor from './ItemEditor';
 import { sizes } from './sizes';
+import withItemMeta from './withItemMeta';
+import withFilteredFieldErrors from './withFilteredFieldErrors';
 
 class Item extends Component {
   static propTypes = {
@@ -108,11 +110,9 @@ class Item extends Component {
   }
 }
 
-const mapStateToProps = (state, { fieldId, form, errors }) => ({
-  item: form.getValues(state, `${fieldId}`),
-  error: get(errors, fieldId),
-});
-
 export { Item };
 
-export default connect(mapStateToProps)(Item);
+export default compose(
+  withFilteredFieldErrors,
+  withItemMeta,
+)(Item);
