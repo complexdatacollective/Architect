@@ -19,7 +19,6 @@ class FormWithQuickAdd extends PureComponent {
               <Field
                 name="quickAdd"
                 component={Toggle}
-                value={quickAdd}
                 label="Enable the quick add function"
               />
             </div>
