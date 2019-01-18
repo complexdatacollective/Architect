@@ -1,7 +1,7 @@
 import {
   Name,
   NodeType,
-  NameGeneratorFormWithQuickAdd,
+  FormWithQuickAdd,
   NameGeneratorPrompts,
   NodePanels,
 } from '../sections';
@@ -10,7 +10,7 @@ const NameGenerator = {
   sections: [
     Name,
     NodeType,
-    NameGeneratorFormWithQuickAdd,
+    FormWithQuickAdd,
     NameGeneratorPrompts,
     NodePanels,
   ],

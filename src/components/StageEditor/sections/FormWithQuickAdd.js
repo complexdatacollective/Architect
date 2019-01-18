@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import cx from 'classnames';
 import { Field, formValueSelector } from 'redux-form';
-import Guidance from '../../../Guidance';
-import { Toggle } from '../../../../ui/components/Fields';
-import Form from '../Form';
+import Guidance from '../../Guidance';
+import { Toggle } from '../../../ui/components/Fields';
+import Form from './Form';
 
 class FormWithQuickAdd extends PureComponent {
   render() {
