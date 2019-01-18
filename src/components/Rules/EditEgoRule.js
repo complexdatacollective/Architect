@@ -39,17 +39,19 @@ const EditAlterVariableRule = ({
           validation={{ required: true }}
         />
       </div>
-      <div className="rules-edit-rule__row">
-        <DetachedField
-          component={Select}
-          name="operator"
-          label="Operator"
-          options={operatorOptions}
-          onChange={handleRuleChange}
-          value={optionsWithDefaults.operator}
-          validation={{ required: true }}
-        />
-      </div>
+      { optionsWithDefaults.variable &&
+        <div className="rules-edit-rule__row">
+          <DetachedField
+            component={Select}
+            name="operator"
+            label="Operator"
+            options={operatorOptions}
+            onChange={handleRuleChange}
+            value={optionsWithDefaults.operator}
+            validation={{ required: true }}
+          />
+        </div>
+      }
       { operatorNeedsValue &&
         <div className="rules-edit-rule__row">
           <EditValue

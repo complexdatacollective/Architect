@@ -34,17 +34,19 @@ const EditEdgeRule = ({
           validation={{ required: true }}
         />
       </div>
-      <div className="rules-edit-rule__row">
-        <DetachedField
-          component={Select}
-          name="operator"
-          label="Operator"
-          options={operatorOptions}
-          onChange={handleRuleChange}
-          value={optionsWithDefaults.operator}
-          validation={{ required: true }}
-        />
-      </div>
+      { optionsWithDefaults.type &&
+        <div className="rules-edit-rule__row">
+          <DetachedField
+            component={Select}
+            name="operator"
+            label="Operator"
+            options={operatorOptions}
+            onChange={handleRuleChange}
+            value={optionsWithDefaults.operator}
+            validation={{ required: true }}
+          />
+        </div>
+      }
     </div>
   );
 };
