@@ -205,7 +205,8 @@
     "jest": {
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
-            "!src/ui/**"
+            "!src/ui/**",
+            "!src/network-canvas/**"
         ],
         "setupFiles": [
             "jest-date-mock",
