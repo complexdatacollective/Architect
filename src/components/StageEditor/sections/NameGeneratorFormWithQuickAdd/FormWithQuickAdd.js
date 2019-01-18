@@ -31,8 +31,8 @@ class FormWithQuickAdd extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  const selector = formValueSelector('edit-stage');
+const mapStateToProps = (state, { form }) => {
+  const selector = formValueSelector(form.name);
   const quickAdd = selector(state, 'quickAdd');
 
   return {
