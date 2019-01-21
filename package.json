@@ -103,6 +103,7 @@
         "lodash": "^4.17.11",
         "mdns": "^2.4.0",
         "mini-css-extract-plugin": "^0.4.3",
+        "mousetrap": "^1.6.2",
         "node-sass": "^4.9.3",
         "npm": "^6.4.1",
         "object-assign": "4.1.1",
