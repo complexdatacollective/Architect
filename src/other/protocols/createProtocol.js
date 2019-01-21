@@ -1,9 +1,8 @@
 import { remote } from 'electron';
-import fs from 'fs';
-import mkdirp from 'mkdirp';
+import fse from 'fs-extra';
 import path from 'path';
 import { getLocalDirectoryFromArchivePath } from './utils';
-import template from './template.json';
+// import template from './template/protocol.json';
 
 const saveDialogOptions = {
   buttonLabel: 'Create',
@@ -25,19 +24,35 @@ const saveDialog = () =>
 
 /**
  * Creates an blank protocol directory at destinationPath, with correct directory structure.
- * Expects a valid protocol object as input.
  * @param {string} destinationPath - destination for skeleton protocol.
+ */
+const createProtocolWorkingPath = destinationPath =>
+  new Promise((resolve) => {
+    const appPath = remote.app.getAppPath();
+    const templatePath = path.join(appPath, 'template');
+    fse.copySync(templatePath, destinationPath);
+    resolve(destinationPath);
+  });
+
+/**
+ * Updates protocol at protocolWorkingPath, merges with existing protocol.
+ * Expects a valid protocol object as input.
+ * @param {string} protocolWorkingPath - location of protocol
  * @param {object} protocol - protocol object, probably a template.
  */
-const createProtocolWorkingPath = (destinationPath, protocol) =>
-  new Promise((resolve) => {
-    const assetsPath = path.join(destinationPath, 'assets');
-    const protocolPath = path.join(destinationPath, 'protocol.json');
-    mkdirp.sync(destinationPath);
-    fs.mkdirSync(assetsPath);
-    fs.writeFileSync(protocolPath, JSON.stringify(protocol, null, 2));
-    resolve();
-  });
+const updateProtocol = (protocolWorkingPath, protocol) => {
+  const protocolPath = path.join(protocolWorkingPath, 'protocol.json');
+
+  return fse.readJson(protocolPath)
+    .then((protocolTemplate) => {
+      const updatedProtocol = {
+        ...protocolTemplate,
+        ...protocol,
+      };
+
+      return fse.writeJson(protocolPath, updatedProtocol);
+    });
+};
 
 /**
  * Creates a blank protocol in a tempory path
@@ -48,7 +63,8 @@ const createProtocolWorkingPath = (destinationPath, protocol) =>
 export const createProtocolFiles = (destinationPath, protocol) => {
   const tempPath = getLocalDirectoryFromArchivePath(destinationPath);
 
-  return createProtocolWorkingPath(tempPath, protocol)
+  return createProtocolWorkingPath(tempPath)
+    .then(protocolWorkingPath => updateProtocol(protocolWorkingPath, protocol))
     .then(() => tempPath);
 };
 
@@ -59,7 +75,6 @@ const createProtocol = () =>
   saveDialog()
     .then((filePath) => {
       const protocol = {
-        ...template,
         name: path.basename(filePath, '.netcanvas'),
       };
 
