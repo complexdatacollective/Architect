@@ -1,7 +1,15 @@
 import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { compose, defaultProps } from 'recompose';
+import {
+  compose,
+  defaultProps,
+  withState,
+} from 'recompose';
+import {
+  Flipper,
+  Flipped,
+} from 'react-flip-toolkit';
 import { arrayPush } from 'redux-form';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
@@ -11,6 +19,29 @@ import Guidance from './Guidance';
 import OrderedList, { NewButton } from './OrderedList';
 import ValidatedFieldArray from './Form/ValidatedFieldArray';
 import { getFieldId } from '../utils/issues';
+import window from '../ui/components/window';
+import Fade from '../ui/components/Transitions/Fade';
+
+const Modal = window(
+  ({
+    show,
+    children,
+    handleBlur,
+  }) => (
+    <Fade in={!!show}>
+      <div className={cx('modal', { 'modal--show': !!show })}>
+        <div className="modal__background" />
+        <div className="modal__content" onClick={handleBlur} >
+    <Flipped flipId={show}>
+          <div style={{ padding: '100px', width: '90vw', height: '70vh', backgroundColor: 'silver', borderRadius: '20px' }}>
+            {children}
+          </div>
+    </Flipped>
+        </div>
+      </div>
+    </Fade>
+  ),
+);
 
 const notEmpty = value => (
   value && value.length > 0 ? undefined : 'You must create at least one prompt'
@@ -19,6 +50,8 @@ const notEmpty = value => (
 class Prompts extends PureComponent {
   render() {
     const {
+      isEditing,
+      setIsEditing,
       nodeType,
       form,
       disabled,
@@ -33,24 +66,34 @@ class Prompts extends PureComponent {
     return (
       <Guidance contentId={`${contentId}`}>
         <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
-          <div id={getFieldId(`${fieldName}._error`)} data-name="Prompts" />
-          {children}
-          <div className="stage-editor-section-prompts">
-            <div className="stage-editor-section-prompts__prompts">
-              { nodeType &&
-                <ValidatedFieldArray
-                  name={fieldName}
-                  component={OrderedList}
-                  item={PromptComponent}
-                  nodeType={nodeType}
-                  form={form}
-                  validation={{ notEmpty }}
-                  {...rest}
-                />
-              }
+          <Flipper
+            flipKey={!!isEditing}
+            portalKey="prompts"
+          >
+            <div id={getFieldId(`${fieldName}._error`)} data-name="Prompts" />
+            {children}
+            <div className="stage-editor-section-prompts">
+              <div className="stage-editor-section-prompts__prompts">
+                { nodeType &&
+                  <ValidatedFieldArray
+                    name={fieldName}
+                    component={OrderedList}
+                    onClickPrompt={(id) => setIsEditing(id)}
+                    isEditing={isEditing}
+                    item={PromptComponent}
+                    nodeType={nodeType}
+                    form={form}
+                    validation={{ notEmpty }}
+                    {...rest}
+                  />
+                }
+              </div>
+              <NewButton onClick={addNewPrompt} />
             </div>
-            <NewButton onClick={addNewPrompt} />
-          </div>
+            <Modal show={isEditing} handleBlur={() => setIsEditing(null)}>
+              hello world
+            </Modal>
+          </Flipper>
         </div>
       </Guidance>
     );
@@ -98,9 +141,12 @@ const withFieldNameDefault = defaultProps({
   fieldName: 'prompts',
 });
 
+const withEditingState = withState('isEditing', 'setIsEditing', false);
+
 export { Prompts };
 
 export default compose(
   withFieldNameDefault,
+  withEditingState,
   connect(mapStateToProps, mapDispatchToProps),
 )(Prompts);
