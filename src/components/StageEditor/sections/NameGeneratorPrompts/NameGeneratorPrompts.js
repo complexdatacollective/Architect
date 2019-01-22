@@ -1,11 +1,13 @@
 import React from 'react';
-import NameGeneratorPrompt from './NameGeneratorPrompt';
+import PromptPreview from './PromptPreview';
+import PromptForm from './PromptForm';
 import Prompts from '../../../Prompts';
 
 const NameGeneratorPrompts = props => (
   <Prompts
     contentId="guidance.editor.name_generator_prompts"
-    promptComponent={NameGeneratorPrompt}
+    previewComponent={PromptPreview}
+    editComponent={PromptForm}
     {...props}
   >
     <h2>Prompts</h2>
