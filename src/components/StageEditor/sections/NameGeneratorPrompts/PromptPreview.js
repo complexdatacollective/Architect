@@ -9,12 +9,10 @@ class PromptPreview extends Preview {
     const fieldId = this.props.fieldId;
 
     return (
-      <div className="stage-editor-section-prompt__preview--centered">
-        <Field
-          name={`${fieldId}.text`}
-          component={field => <Markdown source={field.input.value} />}
-        />
-      </div>
+      <Field
+        name={`${fieldId}.text`}
+        component={field => <Markdown source={field.input.value} />}
+      />
     );
   }
 }

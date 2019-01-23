@@ -1,8 +1,8 @@
 import React from 'react';
 import { withProps, compose } from 'recompose';
-import PromptPreview from './PromptPreview';
-import PromptForm from './PromptForm';
 import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import { PromptPreview } from '../NameGeneratorPrompts';
+import PromptForm from './PromptForm';
 
 const OrdinalBinPrompts = props => (
   <Prompts

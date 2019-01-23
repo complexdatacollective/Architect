@@ -1,7 +1,7 @@
 import React from 'react';
 import { withProps, compose } from 'recompose';
 import Prompts, { withSubjectNodeType } from '../../../Prompts';
-import PromptPreview from './PromptPreview';
+import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptForm from './PromptForm';
 
 const CategoricalBinPrompts = props => (

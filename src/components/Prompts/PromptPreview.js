@@ -14,17 +14,17 @@ class PromptPreview extends PureComponent {
 
     if (editField === fieldId) return null;
 
+    const handleClick = () => onClickPrompt(fieldId);
+
     return (
       <Flipped flipId={fieldId}>
         {flipProps => (
-          <Item {...flipProps} handleDelete={handleDelete}>
-            <Row onClick={() => onClickPrompt(fieldId)}>
-              <Flipped inverseFlipId={fieldId} scale>
-                <div>
-                  {this.preview && this.preview()}
-                </div>
-              </Flipped>
-            </Row>
+          <Item {...flipProps} handleDelete={handleDelete} handleClick={handleClick}>
+            <Flipped inverseFlipId={fieldId} scale>
+              <div className="prompts-prompt-preview">
+                {this.preview && this.preview()}
+              </div>
+            </Flipped>
           </Item>
         )}
       </Flipped>

@@ -12,25 +12,20 @@ class PromptPreview extends Preview {
     } = this.props;
 
     return (
-      <div className="stage-editor-section-sociogram-prompt__preview">
-        <div className="stage-editor-section-sociogram-prompt__preview-icon">
+      <React.Fragment>
+        <div className="prompts-prompt-preview__icon">
           <Field
             name={`${fieldId}.subject.type`}
             component={
-              field => <PreviewNode type={field.input.value} />
+              field => <PreviewNode type={field.input.value} className="foo" />
             }
           />
         </div>
         <Field
           name={`${fieldId}.text`}
-          component={field => (
-            <Markdown
-              className="stage-editor-section-sociogram-prompt__preview-text"
-              source={field.input.value}
-            />
-          )}
+          component={field => <Markdown source={field.input.value} />}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
