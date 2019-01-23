@@ -14,16 +14,17 @@ const PromptForm = ({
   handleSubmit,
   onCancel,
 }) => (
-
-  <form onSubmit={stopPropagation(handleSubmit)}>
-    <div>
-      {children}
-    </div>
-    <div>
-      <Button type="submit">Submit</Button>
-      <Button onClick={onCancel} color="platinum">Cancel</Button>
-    </div>
-  </form>
+  <div className="prompts-prompt-form">
+    <form onSubmit={stopPropagation(handleSubmit)}>
+      <div className="prompts-prompt-form__fields">
+        {children}
+      </div>
+      <div className="prompts-prompt-form__controls">
+        <Button type="submit">Submit</Button>
+        <Button onClick={onCancel} color="platinum">Cancel</Button>
+      </div>
+    </form>
+  </div>
 );
 
 PromptForm.propTypes = {
