@@ -1,11 +1,13 @@
 import React from 'react';
 import Prompts from '../../../Prompts';
-import OrdinalBinPrompt from './OrdinalBinPrompt';
+import PromptPreview from './PromptPreview';
+import PromptForm from './PromptForm';
 
 const OrdinalBinPrompts = props => (
   <Prompts
     contentId="guidance.editor.ordinal_bin_prompts"
-    promptComponent={OrdinalBinPrompt}
+    previewComponent={PromptPreview}
+    editComponent={PromptForm}
     template={{ color: 'ord-color-seq-1' }}
     {...props}
   >
