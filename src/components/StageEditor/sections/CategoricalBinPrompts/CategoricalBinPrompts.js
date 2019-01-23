@@ -1,11 +1,13 @@
 import React from 'react';
 import Prompts from '../../../Prompts';
-import CategoricalBinPrompt from './CategoricalBinPrompt';
+import PromptPreview from './PromptPreview';
+import PromptForm from './PromptForm';
 
 const CategoricalBinPrompts = props => (
   <Prompts
     contentId="guidance.editor.categorical_bin_prompts"
-    promptComponent={CategoricalBinPrompt}
+    previewComponent={PromptPreview}
+    editComponent={PromptForm}
     {...props}
   >
     <h2>Prompts</h2>

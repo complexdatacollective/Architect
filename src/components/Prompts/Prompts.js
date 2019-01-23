@@ -7,7 +7,7 @@ import {
   withState,
   withHandlers,
 } from 'recompose';
-import { Flipper, Flipped } from 'react-flip-toolkit';
+import { Flipper } from 'react-flip-toolkit';
 import { arrayPush } from 'redux-form';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
@@ -73,15 +73,11 @@ class Prompts extends PureComponent {
               editField={editField}
               onBlur={handleResetEditField}
             >
-              <Flipped flipId={editField}>
-                <div className="prompts-prompt-window" >
-                  <EditComponent
-                    fieldId={editField}
-                    onComplete={handleResetEditField}
-                    {...rest}
-                  />
-                </div>
-              </Flipped>
+              <EditComponent
+                fieldId={editField}
+                onComplete={handleResetEditField}
+                {...rest}
+              />
             </PromptWindow>
           </Flipper>
         </div>

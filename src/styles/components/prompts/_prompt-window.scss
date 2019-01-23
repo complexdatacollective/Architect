@@ -2,7 +2,14 @@
   padding: unit(4);
   width: 65vw;
   min-width: 700px;
+  max-height: 80vh;
   background-color: var(--architect-sortable-background);
   color: var(--architect-sortable-text);
   border-radius: unit(1.5);
+  display: flex;
+
+  &__content {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+  }
 }
