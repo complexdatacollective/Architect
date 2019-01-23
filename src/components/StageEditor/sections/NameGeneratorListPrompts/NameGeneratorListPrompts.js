@@ -2,13 +2,13 @@ import React from 'react';
 import { withProps, compose } from 'recompose';
 import Prompts, { withSubjectNodeType } from '../../../Prompts';
 import { PromptPreview } from '../NameGeneratorPrompts';
-import PromptForm from './PromptForm';
+import PromptFields from './PromptFields';
 
 const NameGeneratorListPrompts = props => (
   <Prompts
     contentId="guidance.editor.name_generator_list_prompts"
     previewComponent={PromptPreview}
-    editComponent={PromptForm}
+    editComponent={PromptFields}
     template={{ showExistingNodes: true }}
     {...props}
   >

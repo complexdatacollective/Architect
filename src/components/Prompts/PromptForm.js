@@ -1,22 +1,39 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import Button from '../../ui/components/Button';
 
-class PromptForm extends PureComponent {
-  render() {
-    const onComplete = this.props.onComplete;
+const stopPropagation = f =>
+  (e, ...rest) => {
+    e.stopPropagation();
+    f(e, ...rest);
+  };
 
-    return (
-      <div>
-        {this.form && this.form() }
-        <Button onClick={onComplete}>Continue</Button>
-      </div>
-    );
-  }
-}
+const PromptForm = ({
+  children,
+  handleSubmit,
+  onCancel,
+}) => (
+
+  <form onSubmit={stopPropagation(handleSubmit)}>
+    <div>
+      {children}
+    </div>
+    <div>
+      <Button type="submit">Submit</Button>
+      <Button onClick={onCancel} color="platinum">Cancel</Button>
+    </div>
+  </form>
+);
 
 PromptForm.propTypes = {
-  onComplete: PropTypes.func.isRequired,
+  children: PropTypes.node,
+  handleSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
-export default PromptForm;
+PromptForm.defaultProps = {
+  children: null,
+};
+
+export default reduxForm({ form: 'prompt-form' })(PromptForm);

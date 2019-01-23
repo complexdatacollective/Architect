@@ -2,13 +2,13 @@ import React from 'react';
 import { withProps, compose } from 'recompose';
 import Prompts, { withSubjectNodeType } from '../../../Prompts';
 import { PromptPreview } from '../NameGeneratorPrompts';
-import PromptForm from './PromptForm';
+import PromptFields from './PromptFields';
 
 const CategoricalBinPrompts = props => (
   <Prompts
     contentId="guidance.editor.categorical_bin_prompts"
     previewComponent={PromptPreview}
-    editComponent={PromptForm}
+    editComponent={PromptFields}
     {...props}
   >
     <h2>Prompts</h2>

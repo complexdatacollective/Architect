@@ -8,7 +8,12 @@ import {
   withHandlers,
 } from 'recompose';
 import { Flipper } from 'react-flip-toolkit';
-import { arrayPush, formValueSelector } from 'redux-form';
+import {
+  arrayPush,
+  change,
+  formValueSelector,
+} from 'redux-form';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import cx from 'classnames';
@@ -17,6 +22,7 @@ import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import PromptWindow from './PromptWindow';
+import PromptForm from './PromptForm';
 
 const notEmpty = value => (
   value && value.length > 0 ? undefined : 'You must create at least one prompt'
@@ -28,6 +34,7 @@ class Prompts extends PureComponent {
       editField,
       handleEditField,
       handleResetEditField,
+      handleUpdatePrompt,
       disabled,
       handleAddNewPrompt,
       fieldName,
@@ -36,6 +43,7 @@ class Prompts extends PureComponent {
       addNewPrompt,
       promptCount,
       setEditField,
+      initialValues,
       editComponent: EditComponent,
       previewComponent: PreviewComponent,
       ...rest
@@ -74,13 +82,20 @@ class Prompts extends PureComponent {
             <PromptWindow
               show={!!editField}
               editField={editField}
-              onBlur={handleResetEditField}
             >
-              { editField && <EditComponent
-                fieldId={editField}
-                onComplete={handleResetEditField}
-                {...rest}
-              /> }
+              { editField &&
+                <PromptForm
+                  initialValues={initialValues}
+                  onSubmit={handleUpdatePrompt}
+                  onCancel={handleResetEditField}
+                >
+                  <EditComponent
+                    fieldId={editField}
+                    onComplete={handleResetEditField}
+                    {...rest}
+                  />
+                </PromptForm>
+              }
             </PromptWindow>
           </Flipper>
         </div>
@@ -109,11 +124,13 @@ Prompts.defaultProps = {
   children: null,
 };
 
-const mapStateToProps = (state, { form, fieldName }) => {
+const mapStateToProps = (state, { form, fieldName, editField }) => {
   const prompts = formValueSelector(form.name)(state, fieldName);
   const promptCount = prompts ? prompts.length : 0;
+  const initialValues = get({ prompts }, editField, {});
 
   return {
+    initialValues,
     promptCount,
   };
 };
@@ -124,6 +141,7 @@ const mapDispatchToProps = (dispatch, { fieldName, form: { name }, template = {}
 
   return {
     addNewPrompt: bindActionCreators(addNewPrompt, dispatch),
+    updatePrompt: (fieldId, value) => dispatch(change(name, fieldId, value)),
   };
 };
 
@@ -141,6 +159,12 @@ const withPromptHandlers = compose(
       addNewPrompt();
       setImmediate(() => {
         setEditField(`${fieldName}[${promptCount}]`);
+      });
+    },
+    handleUpdatePrompt: ({ updatePrompt, setEditField, editField }) => (value) => {
+      updatePrompt(editField, value);
+      setImmediate(() => {
+        setEditField();
       });
     },
   }),

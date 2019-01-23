@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { getFieldId } from '../../../../utils/issues';
 import { ValidatedField } from '../../../Form';
 import TextArea from '../../../../ui/components/Fields/TextArea';
 import Select from '../../../Form/Fields/Select';
 import ColorPicker from '../../../Form/Fields/ColorPicker';
 import MultiSelect from '../../../Form/MultiSelect';
 import { Row } from '../../../OrderedList';
-import Form from '../../../Prompts/PromptForm';
 import {
   optionGetters,
   withVariableOptions,
 } from '../CategoricalBinPrompts';
 
-class PromptForm extends Form {
-  form() {
+class PromptFields extends PureComponent {
+  render() {
     const {
-      fieldId,
       variableOptions,
     } = this.props;
 
@@ -27,10 +24,9 @@ class PromptForm extends Form {
     return (
       <div>
         <Row>
-          <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
           <h3>Text for Prompt</h3>
           <ValidatedField
-            name={`${fieldId}.text`}
+            name="text"
             component={TextArea}
             label=""
             placeholder="Enter text for the prompt here"
@@ -38,9 +34,8 @@ class PromptForm extends Form {
           />
         </Row>
         <Row>
-          <h3 id={getFieldId(`${fieldId}.variable`)}>Ordinal variable</h3>
           <ValidatedField
-            name={`${fieldId}.variable`}
+            name="variable"
             component={Select}
             label=""
             options={ordinalVariableOptions}
@@ -48,11 +43,10 @@ class PromptForm extends Form {
           />
         </Row>
         <Row>
-          <h3 id={getFieldId(`${fieldId}.color`)}>Color</h3>
           <p>What color would you like to use for the gradient?</p>
           <ValidatedField
             component={ColorPicker}
-            name={`${fieldId}.color`}
+            name="color"
             palette="ord-color-seq"
             paletteRange={8}
             validation={{ required: true }}
@@ -62,7 +56,7 @@ class PromptForm extends Form {
           <h3>Bin Sort Order</h3>
           <p>How would you like to sort the node categories?</p>
           <MultiSelect
-            name={`${fieldId}.binSortOrder`}
+            name="binSortOrder"
             properties={[
               { fieldName: 'property' },
               { fieldName: 'direction' },
@@ -74,7 +68,7 @@ class PromptForm extends Form {
           <h3>Bucket Sort Order</h3>
           <p>How would you like to sort the unplaced nodes?</p>
           <MultiSelect
-            name={`${fieldId}.bucketSortOrder`}
+            name="bucketSortOrder"
             properties={[
               { fieldName: 'property' },
               { fieldName: 'direction' },
@@ -87,17 +81,16 @@ class PromptForm extends Form {
   }
 }
 
-PromptForm.propTypes = {
-  fieldId: PropTypes.string.isRequired,
+PromptFields.propTypes = {
   variableOptions: PropTypes.array,
 };
 
-PromptForm.defaultProps = {
+PromptFields.defaultProps = {
   variableOptions: [],
 };
 
-export { PromptForm };
+export { PromptFields };
 
 export default compose(
   withVariableOptions,
-)(PromptForm);
+)(PromptFields);

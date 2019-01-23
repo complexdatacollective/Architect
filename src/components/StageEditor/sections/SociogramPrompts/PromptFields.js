@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   Field,
   clearFields,
   isInvalid,
-  FormSection,
   hasSubmitFailed,
   formValueSelector,
 } from 'redux-form';
@@ -16,8 +15,6 @@ import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
 import * as Fields from '../../../../ui/components/Fields';
 import { Row, Group } from '../../../OrderedList';
-import Form from '../../../Prompts/PromptForm';
-import { getFieldId } from '../../../../utils/issues';
 
 // Background options
 const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
@@ -32,7 +29,7 @@ const disableBlur = event => event.preventDefault();
 const hasSubject = value =>
   (get(value, 'type') && get(value, 'entity') ? undefined : 'Required');
 
-class PromptForm extends Form {
+class PromptFields extends Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
     nodeTypes: PropTypes.array.isRequired,
@@ -84,10 +81,9 @@ class PromptForm extends Form {
     }
   }
 
-  form() {
+  render() {
     const { backgroundType } = this.state;
     const {
-      fieldId,
       nodeTypes,
       edgeTypes,
       variablesForNodeType,
@@ -96,7 +92,7 @@ class PromptForm extends Form {
     } = this.props;
 
     return (
-      <FormSection name={fieldId}>
+      <div>
         <Guidance contentId="guidance.editor.sociogram_prompt.text">
           <Row>
             <h3>Prompt text</h3>
@@ -104,7 +100,6 @@ class PromptForm extends Form {
               Enter the text to use for your prompt below. Remember that you can add emphasis to
               your prompt using markdown syntax.
             </p>
-            <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
             <ValidatedField
               name="text"
               component={Fields.TextArea}
@@ -117,7 +112,6 @@ class PromptForm extends Form {
         <Group>
           <Guidance contentId="guidance.editor.sociogram_prompt.nodes">
             <Row>
-              <div id={getFieldId(`${fieldId}.subject`)} data-name="Prompt node type" />
               <h3>Nodes</h3>
               <p>
                 Select the type of node to be displayed on this prompt.
@@ -210,7 +204,6 @@ class PromptForm extends Form {
         <Guidance contentId="guidance.editor.sociogram_prompt.layout">
           <Group>
             <Row>
-              <div id={getFieldId(`${fieldId}.layout.layoutVariable`)} data-name="Prompt layout variable" />
               <h3>Layout</h3>
               <p>
                 This section controls the position of nodes on this sociogram prompt. Decide
@@ -308,7 +301,7 @@ class PromptForm extends Form {
             </Row>
           </Group>
         </Guidance>
-      </FormSection>
+      </div>
     );
   }
 }
@@ -352,11 +345,11 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
 });
 
-export { PromptForm };
+export { PromptFields };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(
-  PromptForm,
+  PromptFields,
 );

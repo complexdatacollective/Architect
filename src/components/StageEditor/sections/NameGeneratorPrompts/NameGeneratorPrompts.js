@@ -1,14 +1,14 @@
 import React from 'react';
 import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
-import PromptForm from './PromptForm';
+import PromptFields from './PromptFields';
 import Prompts, { withSubjectNodeType } from '../../../Prompts';
 
 const NameGeneratorPrompts = props => (
   <Prompts
     contentId="guidance.editor.name_generator_prompts"
     previewComponent={PromptPreview}
-    editComponent={PromptForm}
+    editComponent={PromptFields}
     {...props}
   >
     <h2>Prompts</h2>

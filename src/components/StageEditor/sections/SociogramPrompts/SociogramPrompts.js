@@ -1,13 +1,13 @@
 import React from 'react';
 import PromptPreview from './PromptPreview';
-import PromptForm from './PromptForm';
+import PromptFields from './PromptFields';
 import Prompts from '../../../Prompts';
 
 const SociogramPrompts = props => (
   <Prompts
     contentId="guidance.editor.sociogram_prompts"
     previewComponent={PromptPreview}
-    editComponent={PromptForm}
+    editComponent={PromptFields}
     template={{ sortOrder: [] }}
     {...props}
   >

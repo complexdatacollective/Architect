@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { ValidatedField } from '../../../Form';
@@ -6,15 +6,12 @@ import Select from '../../../Form/Fields/Select';
 import { TextArea } from '../../../../ui/components/Fields';
 import MultiSelect from '../../../Form/MultiSelect';
 import { Row } from '../../../OrderedList';
-import { getFieldId } from '../../../../utils/issues';
-import Form from '../../../Prompts/PromptForm';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 
-class PromptForm extends Form {
-  form() {
+class PromptFields extends PureComponent {
+  render() {
     const {
-      fieldId,
       variableOptions,
     } = this.props;
 
@@ -24,10 +21,9 @@ class PromptForm extends Form {
     return (
       <React.Fragment>
         <Row>
-          <div id={getFieldId(`${fieldId}.text`)} data-name="Prompt text" />
           <h3>Text for Prompt</h3>
           <ValidatedField
-            name={`${fieldId}.text`}
+            name={'text'}
             component={TextArea}
             label=""
             placeholder="Enter text for the prompt here"
@@ -35,9 +31,8 @@ class PromptForm extends Form {
           />
         </Row>
         <Row>
-          <h3 id={getFieldId(`${fieldId}.variable`)}>Category variable</h3>
           <ValidatedField
-            name={`${fieldId}.variable`}
+            name={'variable'}
             component={Select}
             label=""
             options={categoricalVariableOptions}
@@ -48,7 +43,7 @@ class PromptForm extends Form {
           <h3>Bin Sort Order</h3>
           <p>How would you like to sort the node categories?</p>
           <MultiSelect
-            name={`${fieldId}.binSortOrder`}
+            name={'binSortOrder'}
             properties={[
               { fieldName: 'property' },
               { fieldName: 'direction' },
@@ -60,7 +55,7 @@ class PromptForm extends Form {
           <h3>Bucket Sort Order</h3>
           <p>How would you like to sort the unplaced nodes?</p>
           <MultiSelect
-            name={`${fieldId}.bucketSortOrder`}
+            name={'bucketSortOrder'}
             properties={[
               { fieldName: 'property' },
               { fieldName: 'direction' },
@@ -73,17 +68,16 @@ class PromptForm extends Form {
   }
 }
 
-PromptForm.propTypes = {
-  fieldId: PropTypes.string.isRequired,
+PromptFields.propTypes = {
   variableOptions: PropTypes.array,
 };
 
-PromptForm.defaultProps = {
+PromptFields.defaultProps = {
   variableOptions: [],
 };
 
-export { PromptForm };
+export { PromptFields };
 
 export default compose(
   withVariableOptions,
-)(PromptForm);
+)(PromptFields);
