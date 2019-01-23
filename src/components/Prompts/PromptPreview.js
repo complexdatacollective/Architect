@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
-import { Item, Row } from '../OrderedList';
+import { Item } from '../OrderedList';
 
 class PromptPreview extends PureComponent {
   render() {
