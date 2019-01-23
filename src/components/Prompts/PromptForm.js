@@ -9,7 +9,7 @@ class PromptForm extends PureComponent {
     return (
       <div>
         {this.form && this.form() }
-        <Button onClick={onComplete}>Done</Button>
+        <Button onClick={onComplete}>Continue</Button>
       </div>
     );
   }

@@ -20,7 +20,7 @@ describe('<SociogramPrompts />', () => {
     });
 
     it('defines sortOrder for new prompts', async () => {
-      const addFunc = subject.prop('addNewPrompt');
+      const addFunc = subject.find('Prompts').prop('addNewPrompt');
       expect(addFunc).toBeInstanceOf(Function);
       expect(addFunc().payload).toMatchObject({ sortOrder: [] });
     });

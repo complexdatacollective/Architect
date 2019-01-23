@@ -1,7 +1,14 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Field, clearFields, isInvalid, FormSection, hasSubmitFailed } from 'redux-form';
+import {
+  Field,
+  clearFields,
+  isInvalid,
+  FormSection,
+  hasSubmitFailed,
+  formValueSelector,
+} from 'redux-form';
 import { get, toPairs, isEmpty, map } from 'lodash';
 import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import Guidance from '../../../Guidance';
@@ -322,7 +329,7 @@ const mapAsOptions = keyValueObject =>
   );
 
 const mapStateToProps = (state, props) => {
-  const nodeType = get(props.form.getValues(state, props.fieldId), 'subject.type');
+  const nodeType = get(formValueSelector(props.form.name)(state, props.fieldId), 'subject.type');
   const variables = getVariablesForNodeType(state, nodeType);
   const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
   const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');

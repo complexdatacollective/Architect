@@ -8,7 +8,7 @@ const SociogramPrompts = props => (
     contentId="guidance.editor.sociogram_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptForm}
-    nodeType="FOO"
+    template={{ sortOrder: [] }}
     {...props}
   >
     <h2>Prompts</h2>

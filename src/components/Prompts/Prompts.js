@@ -8,7 +8,7 @@ import {
   withHandlers,
 } from 'recompose';
 import { Flipper } from 'react-flip-toolkit';
-import { arrayPush } from 'redux-form';
+import { arrayPush, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import cx from 'classnames';
@@ -110,7 +110,7 @@ Prompts.defaultProps = {
 };
 
 const mapStateToProps = (state, { form, fieldName }) => {
-  const prompts = form.getValues(state, fieldName);
+  const prompts = formValueSelector(form.name)(state, fieldName);
   const promptCount = prompts ? prompts.length : 0;
 
   return {

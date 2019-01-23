@@ -138,7 +138,7 @@ ShallowWrapper {
     "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": <div
           className="overview"
@@ -1073,7 +1073,7 @@ ShallowWrapper {
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
           "children": <div
             className="overview"

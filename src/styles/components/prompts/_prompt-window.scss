@@ -1,15 +1,16 @@
 .prompts-prompt-window {
-  padding: unit(4);
+  padding: unit(0) unit(3);
   width: 65vw;
   min-width: 700px;
-  max-height: 80vh;
-  background-color: var(--architect-sortable-background);
-  color: var(--architect-sortable-text);
+  max-height: 90vh;
+  background-color: var(--architect-background);
+  color: var(--architect-text);
   border-radius: unit(1.5);
   display: flex;
 
   &__content {
     flex: 1 1 auto;
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding: unit(4) unit(.5) unit(4) 0;
   }
 }
