@@ -1,33 +1,36 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { Item, Row } from '../OrderedList';
 
-const PromptPreview = ({
-  onClickPrompt,
-  editField,
-  fieldId,
-  children,
-}) => {
-  // Intentionally mis-match ids when 'opening' prompt, to stop it being removed from the screen.
-  const flipId = editField === fieldId ? `_${fieldId}` : fieldId;
+class PromptPreview extends PureComponent {
+  render() {
+    const {
+      onClickPrompt,
+      editField,
+      fieldId,
+      ...rest
+    } = this.props;
 
-  return (
-    <Flipped flipId={flipId}>
-      {flipProps => (
-        <Item {...flipProps} >
-          <Row onClick={() => onClickPrompt(fieldId)}>
-            <Flipped inverseFlipId={fieldId} scale>
-              <div>
-                {children}
-              </div>
-            </Flipped>
-          </Row>
-        </Item>
-      )}
-    </Flipped>
-  );
-};
+    if (editField === fieldId) return null;
+
+    return (
+      <Flipped flipId={fieldId}>
+        {flipProps => (
+          <Item {...flipProps} {...rest}>
+            <Row onClick={() => onClickPrompt(fieldId)}>
+              <Flipped inverseFlipId={fieldId} scale>
+                <div>
+                  {this.preview && this.preview()}
+                </div>
+              </Flipped>
+            </Row>
+          </Item>
+        )}
+      </Flipped>
+    );
+  }
+}
 
 PromptPreview.propTypes = {
   fieldId: PropTypes.string.isRequired,

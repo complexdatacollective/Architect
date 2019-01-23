@@ -8,7 +8,7 @@ import {
   withHandlers,
 } from 'recompose';
 import { Flipper, Flipped } from 'react-flip-toolkit';
-import { arrayPush, Field } from 'redux-form';
+import { arrayPush } from 'redux-form';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
@@ -67,7 +67,7 @@ class Prompts extends PureComponent {
                     item={PreviewComponent}
                     form={form}
                     validation={{ notEmpty }}
-                    handleEditField={handleEditField}
+                    onClickPrompt={handleEditField}
                     editField={editField}
                     {...rest}
                   />
