@@ -62,7 +62,7 @@ VariableEditor.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   options: PropTypes.array,
-  validation: PropTypes.object,
+  validation: PropTypes.any,
 };
 
 VariableEditor.defaultProps = {

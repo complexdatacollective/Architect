@@ -33,6 +33,9 @@ class Prompts extends PureComponent {
       fieldName,
       contentId,
       children,
+      addNewPrompt,
+      promptCount,
+      setEditField,
       editComponent: EditComponent,
       previewComponent: PreviewComponent,
       ...rest
@@ -73,11 +76,11 @@ class Prompts extends PureComponent {
               editField={editField}
               onBlur={handleResetEditField}
             >
-              <EditComponent
+              { editField && <EditComponent
                 fieldId={editField}
                 onComplete={handleResetEditField}
                 {...rest}
-              />
+              /> }
             </PromptWindow>
           </Flipper>
         </div>
@@ -93,16 +96,15 @@ Prompts.propTypes = {
   }).isRequired,
   disabled: PropTypes.bool,
   addNewPrompt: PropTypes.func.isRequired,
-  nodeType: PropTypes.string,
   fieldName: PropTypes.string.isRequired,
   contentId: PropTypes.string,
   children: PropTypes.node,
-  promptComponent: PropTypes.func.isRequired,
+  previewComponent: PropTypes.any.isRequired,
+  editComponent: PropTypes.any.isRequired,
 };
 
 Prompts.defaultProps = {
   disabled: false,
-  nodeType: null,
   contentId: null,
   children: null,
 };

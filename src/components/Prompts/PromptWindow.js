@@ -9,11 +9,12 @@ class PromptWindow extends PureComponent {
     show: PropTypes.bool,
     children: PropTypes.node,
     onBlur: PropTypes.func.isRequired,
-    editField: PropTypes.string.isRequired,
+    editField: PropTypes.string,
   };
 
   static defaultProps = {
     show: false,
+    editField: null,
     children: null,
   };
 

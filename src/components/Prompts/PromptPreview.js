@@ -9,7 +9,7 @@ class PromptPreview extends PureComponent {
       onClickPrompt,
       editField,
       fieldId,
-      ...rest
+      handleDelete,
     } = this.props;
 
     if (editField === fieldId) return null;
@@ -17,7 +17,7 @@ class PromptPreview extends PureComponent {
     return (
       <Flipped flipId={fieldId}>
         {flipProps => (
-          <Item {...flipProps} {...rest}>
+          <Item {...flipProps} handleDelete={handleDelete}>
             <Row onClick={() => onClickPrompt(fieldId)}>
               <Flipped inverseFlipId={fieldId} scale>
                 <div>

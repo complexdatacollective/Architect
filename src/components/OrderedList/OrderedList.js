@@ -21,7 +21,7 @@ const OrderedList = ({
   <div className="list">
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
     { fields.map((fieldId, index) => (
-      <SortableItem index={index}>
+      <SortableItem index={index} key={index}>
         <Item
           fieldId={fieldId}
           index={index}

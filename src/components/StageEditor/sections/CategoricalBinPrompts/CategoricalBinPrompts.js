@@ -1,5 +1,6 @@
 import React from 'react';
-import Prompts from '../../../Prompts';
+import { withProps, compose } from 'recompose';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
 import PromptPreview from './PromptPreview';
 import PromptForm from './PromptForm';
 
@@ -19,4 +20,7 @@ const CategoricalBinPrompts = props => (
 
 export { CategoricalBinPrompts };
 
-export default CategoricalBinPrompts;
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(CategoricalBinPrompts);

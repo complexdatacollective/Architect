@@ -1,11 +1,14 @@
 import React from 'react';
-import Prompts from '../../../Prompts';
-import NameGeneratorListPrompt from './NameGeneratorListPrompt';
+import { withProps, compose } from 'recompose';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import PromptPreview from './PromptPreview';
+import PromptForm from './PromptForm';
 
 const NameGeneratorListPrompts = props => (
   <Prompts
     contentId="guidance.editor.name_generator_list_prompts"
-    promptComponent={NameGeneratorListPrompt}
+    previewComponent={PromptPreview}
+    editComponent={PromptForm}
     template={{ showExistingNodes: true }}
     {...props}
   >
@@ -19,4 +22,7 @@ const NameGeneratorListPrompts = props => (
 
 export { NameGeneratorListPrompts };
 
-export default NameGeneratorListPrompts;
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(NameGeneratorListPrompts);
