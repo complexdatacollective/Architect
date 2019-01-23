@@ -1,7 +1,8 @@
 import React from 'react';
-import Prompts from '../../../Prompts';
+import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
 import PromptForm from './PromptForm';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
 
 const OrdinalBinPrompts = props => (
   <Prompts
@@ -20,4 +21,7 @@ const OrdinalBinPrompts = props => (
 
 export { OrdinalBinPrompts };
 
-export default OrdinalBinPrompts;
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(OrdinalBinPrompts);

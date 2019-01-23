@@ -1,7 +1,8 @@
 import React from 'react';
+import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
 import PromptForm from './PromptForm';
-import Prompts from '../../../Prompts';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
 
 const NameGeneratorPrompts = props => (
   <Prompts
@@ -20,4 +21,7 @@ const NameGeneratorPrompts = props => (
 
 export { NameGeneratorPrompts };
 
-export default NameGeneratorPrompts;
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(NameGeneratorPrompts);

@@ -9,7 +9,6 @@ import {
 } from 'recompose';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import { arrayPush } from 'redux-form';
-import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import cx from 'classnames';
@@ -29,8 +28,6 @@ class Prompts extends PureComponent {
       editField,
       handleEditField,
       handleResetEditField,
-      nodeType,
-      form,
       disabled,
       handleAddNewPrompt,
       fieldName,
@@ -48,7 +45,6 @@ class Prompts extends PureComponent {
 
     const isEditing = !!editField;
 
-
     return (
       <Guidance contentId={contentId}>
         <div className={stageEditorStyles}>
@@ -60,18 +56,15 @@ class Prompts extends PureComponent {
             {children}
             <div className="stage-editor-section-prompts">
               <div className="stage-editor-section-prompts__prompts">
-                { nodeType &&
-                  <ValidatedFieldArray
-                    name={fieldName}
-                    component={OrderedList}
-                    item={PreviewComponent}
-                    form={form}
-                    validation={{ notEmpty }}
-                    onClickPrompt={handleEditField}
-                    editField={editField}
-                    {...rest}
-                  />
-                }
+                <ValidatedFieldArray
+                  name={fieldName}
+                  component={OrderedList}
+                  item={PreviewComponent}
+                  validation={{ notEmpty }}
+                  onClickPrompt={handleEditField}
+                  editField={editField}
+                  {...rest}
+                />
               </div>
               <NewButton onClick={handleAddNewPrompt} />
             </div>
@@ -85,7 +78,6 @@ class Prompts extends PureComponent {
                   <EditComponent
                     fieldId={editField}
                     onComplete={handleResetEditField}
-                    nodeType={nodeType}
                     {...rest}
                   />
                 </div>
@@ -120,13 +112,10 @@ Prompts.defaultProps = {
 };
 
 const mapStateToProps = (state, { form, fieldName }) => {
-  const nodeType = get(form.getValues(state, 'subject'), 'type');
   const prompts = form.getValues(state, fieldName);
-  const promptCount = prompts.length;
+  const promptCount = prompts ? prompts.length : 0;
 
   return {
-    disabled: !nodeType,
-    nodeType,
     promptCount,
   };
 };
