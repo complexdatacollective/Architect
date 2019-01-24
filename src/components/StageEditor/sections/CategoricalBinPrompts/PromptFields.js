@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { getFieldId } from '../../../../utils/issues';
 import { ValidatedField } from '../../../Form';
 import Select from '../../../Form/Fields/Select';
 import { TextArea } from '../../../../ui/components/Fields';
@@ -21,7 +22,7 @@ class PromptFields extends PureComponent {
     return (
       <React.Fragment>
         <Row>
-          <h3>Text for Prompt</h3>
+          <h3 id={getFieldId('text')}>Text for Prompt</h3>
           <ValidatedField
             name={'text'}
             component={TextArea}
@@ -31,6 +32,7 @@ class PromptFields extends PureComponent {
           />
         </Row>
         <Row>
+          <div id={getFieldId('variable')} data-name="Variable" />
           <ValidatedField
             name={'variable'}
             component={Select}

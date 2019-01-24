@@ -10,6 +10,7 @@ import {
 } from 'redux-form';
 import { get, toPairs, isEmpty, map } from 'lodash';
 import { getNodeTypes } from '../../../../selectors/variableRegistry';
+import { getFieldId } from '../../../../utils/issues';
 import Guidance from '../../../Guidance';
 import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
@@ -95,7 +96,7 @@ class PromptFields extends Component {
       <div>
         <Guidance contentId="guidance.editor.sociogram_prompt.text">
           <Row>
-            <h3>Prompt text</h3>
+            <h3 id={getFieldId('text')}>Prompt text</h3>
             <p>
               Enter the text to use for your prompt below. Remember that you can add emphasis to
               your prompt using markdown syntax.
@@ -112,7 +113,7 @@ class PromptFields extends Component {
         <Group>
           <Guidance contentId="guidance.editor.sociogram_prompt.nodes">
             <Row>
-              <h3>Nodes</h3>
+              <h3 id={getFieldId('subject')}>Nodes</h3>
               <p>
                 Select the type of node to be displayed on this prompt.
               </p>
@@ -204,6 +205,7 @@ class PromptFields extends Component {
         <Guidance contentId="guidance.editor.sociogram_prompt.layout">
           <Group>
             <Row>
+              <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
               <h3>Layout</h3>
               <p>
                 This section controls the position of nodes on this sociogram prompt. Decide

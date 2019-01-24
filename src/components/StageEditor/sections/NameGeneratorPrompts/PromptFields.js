@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { getFieldId } from '../../../../utils/issues';
 import TextArea from '../../../../ui/components/Fields/TextArea';
 import { ValidatedField } from '../../../Form';
 import AttributesTable from '../../../AttributesTable';
@@ -14,7 +15,7 @@ class PromptFields extends PureComponent {
     return (
       <React.Fragment>
         <Row>
-          <h3>Text for Prompt</h3>
+          <h3 id={getFieldId('text')}>Text for Prompt</h3>
           <ValidatedField
             name="text"
             component={TextArea}

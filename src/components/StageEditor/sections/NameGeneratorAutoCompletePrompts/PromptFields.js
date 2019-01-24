@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
+import { getFieldId } from '../../../../utils/issues';
 import { ValidatedField } from '../../../Form';
 import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
@@ -35,7 +36,7 @@ class PromptFields extends PureComponent {
     return (
       <React.Fragment>
         <Row>
-          <h3>Text for Prompt</h3>
+          <h3 id={getFieldId('text')}>Text for Prompt</h3>
           <ValidatedField
             name="text"
             component={Fields.TextArea}
@@ -53,6 +54,7 @@ class PromptFields extends PureComponent {
           />
         </Row>
         <Row>
+          <div id={getFieldId('dataSource')} data-name="Roster data-source" />
           <h3>External data-source for roster</h3>
           <p>This prompt needs a source of nodes to populate the roster.</p>
           <ValidatedField
@@ -73,6 +75,7 @@ class PromptFields extends PureComponent {
               </p>
             </Row>
             <Row>
+              <div id={getFieldId('cardOptions.displayLabel')} data-name="Card display label" />
               <h4>Display Label</h4>
               <p>Which property should be used to uniquely identify each node?</p>
               <ValidatedField

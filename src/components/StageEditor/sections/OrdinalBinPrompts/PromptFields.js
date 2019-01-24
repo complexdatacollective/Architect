@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { getFieldId } from '../../../../utils/issues';
 import { ValidatedField } from '../../../Form';
 import TextArea from '../../../../ui/components/Fields/TextArea';
 import Select from '../../../Form/Fields/Select';
@@ -24,7 +25,7 @@ class PromptFields extends PureComponent {
     return (
       <div>
         <Row>
-          <h3>Text for Prompt</h3>
+          <h3 id={getFieldId('text')}>Text for Prompt</h3>
           <ValidatedField
             name="text"
             component={TextArea}
@@ -33,6 +34,7 @@ class PromptFields extends PureComponent {
             validation={{ required: true }}
           />
         </Row>
+        <div id={getFieldId('variable')} data-name="Variable" />
         <Row>
           <ValidatedField
             name="variable"
@@ -43,6 +45,7 @@ class PromptFields extends PureComponent {
           />
         </Row>
         <Row>
+          <div id={getFieldId('color')} data-name="Gradient color" />
           <p>What color would you like to use for the gradient?</p>
           <ValidatedField
             component={ColorPicker}
