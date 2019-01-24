@@ -37,12 +37,10 @@ const PromptForm = ({
         </div>
       </form>
     </div>
-    <div className="prompts-prompt-form__issues">
-      <Issues
-        issues={issues}
-        show={submitFailed}
-      />
-    </div>
+    <Issues
+      issues={issues}
+      show={submitFailed}
+    />
   </div>
 );
 
