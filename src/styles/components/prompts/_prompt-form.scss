@@ -2,8 +2,8 @@
   flex: 1 1 auto;
 
   &__content {
-    padding: unit(6) unit(6) unit(16);
     @include no-scrollbars
+    padding: unit(6) unit(6) unit(16);
     overflow-x: hidden;
     overflow-y: scroll;
     width: 100%;

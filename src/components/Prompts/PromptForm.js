@@ -48,10 +48,14 @@ PromptForm.propTypes = {
   children: PropTypes.node,
   handleSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  submitFailed: PropTypes.bool,
+  issues: PropTypes.object,
 };
 
 PromptForm.defaultProps = {
   children: null,
+  submitFailed: false,
+  issues: {},
 };
 
 export default compose(
