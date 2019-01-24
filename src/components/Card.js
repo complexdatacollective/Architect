@@ -102,12 +102,10 @@ class Card extends PureComponent {
       >
         {state => (
           <div className={classes}>
-            <div className="arch-card__container">
-              <div className="arch-card__content">
-                <CardErrorBoundary onAcknowledge={this.handleAcknowledgeError}>
-                  { show && this.props.children }
-                </CardErrorBoundary>
-              </div>
+            <div className="arch-card__content">
+              <CardErrorBoundary onAcknowledge={this.handleAcknowledgeError}>
+                { show && this.props.children }
+              </CardErrorBoundary>
             </div>
             <ControlBar
               show={(state === 'entering' || state === 'entered')}

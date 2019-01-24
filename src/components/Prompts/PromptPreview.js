@@ -12,12 +12,14 @@ class PromptPreview extends PureComponent {
       handleDelete,
     } = this.props;
 
-    if (editField === fieldId) return null;
+    // Switch out flipId when fields match to prevent removal
+    // from DOM but still allow FLIP to work
+    const flipId = editField === fieldId ? `_${fieldId}` : fieldId;
 
     const handleClick = () => onClickPrompt(fieldId);
 
     return (
-      <Flipped flipId={fieldId}>
+      <Flipped flipId={flipId}>
         {flipProps => (
           <Item {...flipProps} handleDelete={handleDelete} handleClick={handleClick}>
             <Flipped inverseFlipId={fieldId} scale>

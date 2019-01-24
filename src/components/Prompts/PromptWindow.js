@@ -1,14 +1,12 @@
 import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
-import window from '../../ui/components/window';
-import Fade from '../../ui/components/Transitions/Fade';
 
 class PromptWindow extends PureComponent {
   static propTypes = {
     show: PropTypes.bool,
     children: PropTypes.node,
-    onBlur: PropTypes.func.isRequired,
     editField: PropTypes.string,
   };
 
@@ -18,31 +16,48 @@ class PromptWindow extends PureComponent {
     children: null,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.portal = document.createElement('div');
+  }
+
+  componentDidMount() {
+    this.root.appendChild(this.portal);
+  }
+
+  componentWillUnmount() {
+    this.root.removeChild(this.portal);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  get root() {
+    // If a root reference element is provided by windowRootConsumer() use that,
+    // otherwise default to document.body
+    return document.getElementById('stage-editor-context') || document.body;
+  }
+
   render() {
     const {
       show,
       children,
-      onBlur,
       editField,
     } = this.props;
 
-    return (
-      <Fade in={show}>
-        <div className="modal" onClick={onBlur}>
-          <div className="modal__background" />
-          <div className="modal__content">
-            <Flipped flipId={editField}>
-              <div className="prompts-prompt-window" onClick={e => e.stopPropagation()}>
-                <div className="prompts-prompt-window__content ">
-                  {children}
-                </div>
-              </div>
-            </Flipped>
+    return ReactDOM.createPortal(
+      (
+        show &&
+        <Flipped flipId={editField}>
+          <div className="prompts-prompt-window" onClick={e => e.stopPropagation()}>
+            <div className="prompts-prompt-window__content ">
+              {children}
+            </div>
           </div>
-        </div>
-      </Fade>
+        </Flipped>
+      ),
+      this.portal,
     );
   }
 }
 
-export default window(PromptWindow);
+export default PromptWindow;

@@ -1,12 +1,13 @@
 .guided {
   position: relative;
   z-index: var(--z-default);
+  flex: 1 1 auto;
+  display: flex;
 
   &__content {
     display: flex;
     flex-direction: column;
     width: calc(100vw);
-    padding: unit(6) unit(6) unit(16);
     transition-property: width;
     transition-duration: var(--animation-duration-slow);
     transition-timing-function: var(--animation-easing);

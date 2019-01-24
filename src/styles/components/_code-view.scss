@@ -21,4 +21,10 @@
   pre {
     white-space: pre-wrap;
   }
+
+  &--show {
+    opacity: 1;
+    max-height: 30vh;
+    transform: scaleY(1);
+  }
 }
