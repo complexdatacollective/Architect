@@ -13,19 +13,8 @@
     transition-timing-function: var(--animation-easing);
   }
 
-  .issues {
-    bottom: unit(8);
-    width: calc(100vw);
-    transition-property: transform, width;
-    transition-duration: var(--animation-duration-fast), var(--animation-duration-slow);
-  }
-
   &--show-guidance {
     .guided__content {
-      width: calc(70vw);
-    }
-
-    .issues {
       width: calc(70vw);
     }
   }

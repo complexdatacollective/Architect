@@ -1,4 +1,15 @@
 .prompts-prompt-form {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  &__content {
+    flex: 1 1 auto;
+    padding: unit(6) unit(6) unit(16);
+    @include no-scrollbars
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
 
   &__controls {
     padding: unit(2);
@@ -7,5 +18,11 @@
     button {
       margin-right: unit(2);
     }
+  }
+
+  &__issues {
+    position: sticky;
+    bottom: unit(8);
+    left: 0;
   }
 }

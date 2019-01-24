@@ -49,9 +49,7 @@ class PromptWindow extends PureComponent {
         show &&
         <Flipped flipId={editField}>
           <div className="prompts-prompt-window" onClick={e => e.stopPropagation()}>
-            <div className="prompts-prompt-window__content ">
-              {children}
-            </div>
+            {children}
           </div>
         </Flipped>
       ),

@@ -8,11 +8,8 @@
   color: var(--architect-text);
   display: flex;
 
-  &__content {
-    @include no-scrollbars
-    flex: 1 1 auto;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    padding: unit(6) unit(6) unit(16);
-  }
+  //&__content {
+    //flex: 1 1 auto;
+    //padding: unit(6) unit(6) unit(16);
+  //}
 }

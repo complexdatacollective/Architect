@@ -1,7 +1,16 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+import { compose } from 'recompose';
 import PropTypes from 'prop-types';
+import withFormSubmitErrors from '../Form/withFormSubmitErrors';
 import Button from '../../ui/components/Button';
+import Issues from '../Issues';
+
+const formOptions = {
+  form: 'prompt-form',
+  touchOnBlur: false,
+  touchOnChange: true,
+};
 
 const stopPropagation = f =>
   (e, ...rest) => {
@@ -12,18 +21,28 @@ const stopPropagation = f =>
 const PromptForm = ({
   children,
   handleSubmit,
+  submitFailed,
+  issues,
   onCancel,
 }) => (
   <div className="prompts-prompt-form">
-    <form onSubmit={stopPropagation(handleSubmit)}>
-      <div className="prompts-prompt-form__fields">
-        {children}
-      </div>
-      <div className="prompts-prompt-form__controls">
-        <Button type="submit">Submit</Button>
-        <Button onClick={onCancel} color="platinum">Cancel</Button>
-      </div>
-    </form>
+    <div className="prompts-prompt-form__content">
+      <form onSubmit={stopPropagation(handleSubmit)}>
+        <div className="prompts-prompt-form__fields">
+          {children}
+        </div>
+        <div className="prompts-prompt-form__controls">
+          <Button type="submit">Submit</Button>
+          <Button onClick={onCancel} color="platinum">Cancel</Button>
+        </div>
+      </form>
+    </div>
+    <div className="prompts-prompt-form__issues">
+      <Issues
+        issues={issues}
+        show={submitFailed}
+      />
+    </div>
   </div>
 );
 
@@ -37,4 +56,7 @@ PromptForm.defaultProps = {
   children: null,
 };
 
-export default reduxForm({ form: 'prompt-form' })(PromptForm);
+export default compose(
+  reduxForm(formOptions),
+  withFormSubmitErrors(formOptions.form),
+)(PromptForm);

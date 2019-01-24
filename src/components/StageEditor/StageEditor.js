@@ -6,7 +6,6 @@ import {
 } from 'redux-form';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { Guided } from '../Guided';
 import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
@@ -68,20 +67,23 @@ class StageEditor extends Component {
         >
           <div className="stage-editor" id="stage-editor-context">
             <div className="stage-editor__window">
-              <div className="code-button">
-                <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+              <div className="stage-editor__content">
+                <div className="code-button">
+                  <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+                </div>
+
+                <h1 className="editor__heading">Edit {getInterfaceName(stage.type)}</h1>
+
+                <ReduxForm onSubmit={handleSubmit}>
+                  {this.renderSections()}
+                </ReduxForm>
               </div>
-
-              <h1 className="editor__heading">Edit {getInterfaceName(stage.type)}</h1>
-
-              <ReduxForm onSubmit={handleSubmit}>
-                {this.renderSections()}
-
+              <div className="stage-editor__issues">
                 <Issues
                   issues={issues}
                   show={submitFailed}
                 />
-              </ReduxForm>
+              </div>
             </div>
           </div>
         </Guided>
