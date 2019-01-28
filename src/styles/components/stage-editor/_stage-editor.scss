@@ -17,6 +17,7 @@
   &__content {
     @include no-scrollbars;
     padding: unit(6) unit(6) unit(16);
+    position: relative;
     overflow-x: hidden;
     overflow-y: scroll;
     height: 100%;
