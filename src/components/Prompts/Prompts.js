@@ -72,23 +72,19 @@ class Prompts extends PureComponent {
                 <NewButton onClick={handleAddNewPrompt} />
               </Flipped>
             </div>
-            <PromptWindow
-              show={!!editField}
-              editField={editField}
-            >
-              { editField &&
-                <PromptForm
-                  initialValues={initialValues}
-                  onSubmit={handleUpdatePrompt}
-                  onCancel={handleResetEditField}
-                >
-                  <EditComponent
-                    fieldId={editField}
-                    onComplete={handleResetEditField}
-                    {...rest}
-                  />
-                </PromptForm>
-              }
+            <PromptWindow show={!!editField}>
+              <PromptForm
+                initialValues={initialValues}
+                flipId={editField}
+                onSubmit={handleUpdatePrompt}
+                onCancel={handleResetEditField}
+              >
+                <EditComponent
+                  fieldId={editField}
+                  onComplete={handleResetEditField}
+                  {...rest}
+                />
+              </PromptForm>
             </PromptWindow>
           </Flipper>
         </div>

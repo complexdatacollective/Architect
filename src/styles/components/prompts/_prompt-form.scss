@@ -1,8 +1,11 @@
 .prompts-prompt-form {
   flex: 1 1 auto;
+  background: var(--background-light);
+  border-radius: unit(1);
+  box-shadow: 0 0 4rem 0 var(--modal-window-box-shadow);
 
   &__content {
-    @include no-scrollbars
+    @include no-scrollbars;
     padding: unit(6) unit(6) unit(16);
     overflow-x: hidden;
     overflow-y: scroll;

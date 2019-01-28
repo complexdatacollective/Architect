@@ -1,18 +1,16 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { Flipped } from 'react-flip-toolkit';
+import Fade from '../Transitions/Fade';
 
 class PromptWindow extends PureComponent {
   static propTypes = {
     show: PropTypes.bool,
     children: PropTypes.node,
-    editField: PropTypes.string,
   };
 
   static defaultProps = {
     show: false,
-    editField: null,
     children: null,
   };
 
@@ -41,17 +39,15 @@ class PromptWindow extends PureComponent {
     const {
       show,
       children,
-      editField,
     } = this.props;
 
     return ReactDOM.createPortal(
       (
-        show &&
-        <Flipped flipId={editField}>
+        <Fade in={show}>
           <div className="prompts-prompt-window" onClick={e => e.stopPropagation()}>
-            {children}
+            {show && children}
           </div>
-        </Flipped>
+        </Fade>
       ),
       this.portal,
     );
