@@ -24,6 +24,30 @@
     width: 100%;
   }
 
+  &__subsection {
+    margin: unit(2) 0 0;
+
+    button {
+      margin: 0;
+    }
+  }
+
+  &__section {
+    transition-property: opacity, transform, max-height;
+    transition-duration: var(--animation-duration-standard);
+    transition-timing-function: var(--animation-easing);
+    margin-top: 3rem;
+    opacity: 1;
+    max-height: auto;
+    transform: translateX(0);
+
+    &--disabled {
+      opacity: 0;
+      max-height: 0;
+      transform: translateX(-100%);
+    }
+  }
+
   .issues {
     position: sticky;
     bottom: unit(8);

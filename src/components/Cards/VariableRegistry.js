@@ -173,53 +173,57 @@ class VariableRegistry extends Component {
         buttons={this.buttons}
         onAcknowledgeError={this.handleCancel}
       >
-        <div className="editor variable-registry">
-          <Guided className="editor__sections">
-            <h1 className="editor__heading">Variable Registry</h1>
-            <p>
-              Use this screen to create, edit, and manage your node and edge types.
-            </p>
-            <Guidance contentId="guidance.registry.nodes">
-              <div className="editor__section">
-                <h2>Node Types</h2>
-                <div className="editor__subsection">
-                  {this.renderNodes()}
-                </div>
-                { protocolPath &&
-                  <div className="editor__subsection">
-                    <Link
-                      to={`${protocolPath}/registry/node/`}
-                    >
-                      <Button size="small" icon="add">
-                        Create new Node type
-                      </Button>
-                    </Link>
+        <Guided>
+          <div className="editor variable-registry">
+            <div className="editor__window">
+              <div className="editor__content">
+                <h1 className="editor__heading">Variable Registry</h1>
+                <p>
+                  Use this screen to create, edit, and manage your node and edge types.
+                </p>
+                <Guidance contentId="guidance.registry.nodes">
+                  <div className="editor__section">
+                    <h2>Node Types</h2>
+                    <div className="editor__subsection">
+                      {this.renderNodes()}
+                    </div>
+                    { protocolPath &&
+                      <div className="editor__subsection">
+                        <Link
+                          to={`${protocolPath}/registry/node/`}
+                        >
+                          <Button size="small" icon="add">
+                            Create new Node type
+                          </Button>
+                        </Link>
+                      </div>
+                    }
                   </div>
-                }
-              </div>
-            </Guidance>
+                </Guidance>
 
-            <Guidance contentId="guidance.registry.edges">
-              <div className="editor__section">
-                <h2>Edge Types</h2>
-                <div className="editor__subsection">
-                  {this.renderEdges()}
-                </div>
-                <div className="editor__subsection">
-                  { protocolPath &&
-                    <Link
-                      to={`${protocolPath}/registry/edge/`}
-                    >
-                      <Button size="small" icon="add">
-                        Create new Edge type
-                      </Button>
-                    </Link>
-                  }
-                </div>
+                <Guidance contentId="guidance.registry.edges">
+                  <div className="editor__section">
+                    <h2>Edge Types</h2>
+                    <div className="editor__subsection">
+                      {this.renderEdges()}
+                    </div>
+                    <div className="editor__subsection">
+                      { protocolPath &&
+                        <Link
+                          to={`${protocolPath}/registry/edge/`}
+                        >
+                          <Button size="small" icon="add">
+                            Create new Edge type
+                          </Button>
+                        </Link>
+                      }
+                    </div>
+                  </div>
+                </Guidance>
               </div>
-            </Guidance>
-          </Guided>
-        </div>
+            </div>
+          </div>
+        </Guided>
       </Card>
     );
   }
