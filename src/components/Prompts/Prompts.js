@@ -7,7 +7,7 @@ import {
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { getFieldId } from '../../utils/issues';
+import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
@@ -18,6 +18,10 @@ import withPromptHandlers from './withPromptHandlers';
 const notEmpty = value => (
   value && value.length > 0 ? undefined : 'You must create at least one prompt'
 );
+
+const handleSubmitFail = (issues) => {
+  scrollToFirstIssue(issues);
+};
 
 class Prompts extends PureComponent {
   render() {
@@ -77,6 +81,7 @@ class Prompts extends PureComponent {
                 initialValues={initialValues}
                 flipId={editField}
                 onSubmit={handleUpdatePrompt}
+                onSubmitFail={handleSubmitFail}
                 onCancel={handleResetEditField}
               >
                 <EditComponent

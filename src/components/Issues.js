@@ -2,26 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { map, isEmpty } from 'lodash';
-import scrollparent from 'scrollparent';
-import anime from 'animejs';
 import { Icon } from '../ui/components';
-import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../ui/utils/CSSVariables';
 import { flattenIssues, getFieldId } from '../utils/issues';
-
-const scrollTo = (destination) => {
-  if (!destination) { return; }
-  const scroller = scrollparent(destination);
-  const scrollStart = scroller.scrollTop;
-  const destinationOffset = parseInt(destination.getBoundingClientRect().top, 10);
-  const scrollEnd = scrollStart + destinationOffset;
-
-  anime({
-    targets: scroller,
-    scrollTop: scrollEnd,
-    easing: getCSSVariableAsObject('--animation-easing-js'),
-    duration: getCSSVariableAsNumber('--animation-duration-fast-ms'),
-  });
-};
+import scrollTo from '../utils/scrollTo';
 
 class Issues extends Component {
   static propTypes = {

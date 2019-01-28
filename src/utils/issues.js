@@ -1,4 +1,8 @@
-import { flatMap, isPlainObject } from 'lodash';
+import {
+  flatMap,
+  isPlainObject,
+} from 'lodash';
+import scrollTo from './scrollTo';
 
 /**
  * Converts a nested object into a flattened version with paths.
@@ -29,7 +33,7 @@ import { flatMap, isPlainObject } from 'lodash';
  * //   { issue: 'bop', field: 'baz[0].beep.boop' },
  * // ]"
  */
-export const flattenIssues = (issues, path = '') =>
+const flattenIssues = (issues, path = '') =>
   flatMap(
     issues,
     (issue, field) => {
@@ -46,8 +50,50 @@ export const flattenIssues = (issues, path = '') =>
     },
   );
 
-export const getFieldId = (field) => {
+const getFieldId = (field) => {
   // Needs to be safe for urls and ids
   const safeFieldName = encodeURIComponent(field.replace(/\[|\]|\./g, '_'));
   return `field_${safeFieldName}`;
+};
+
+const getTopOffsetById = (fieldId) => {
+  const target = document.getElementById(fieldId);
+
+  if (!target) { return null; }
+
+  const top = target.getBoundingClientRect().top;
+
+  return top;
+};
+
+const asOffsetIdPair = ({ field }) => {
+  const fieldId = getFieldId(field);
+  const top = getTopOffsetById(fieldId);
+  return [top, fieldId];
+};
+
+const scrollToFirstIssue = (issues) => {
+  const issueOffsets = flattenIssues(issues)
+    .map(asOffsetIdPair);
+
+  const [, firstIssueField] = issueOffsets
+    .reduce((memo, issue) => {
+      if (issue[0] === null) return memo;
+      if (issue[0] > memo[0]) return memo;
+      return issue;
+    }, []);
+
+  if (!firstIssueField) { return; }
+
+  const target = document.getElementById(firstIssueField);
+
+  if (!target) { return; }
+
+  scrollTo(target);
+};
+
+export {
+  getFieldId,
+  flattenIssues,
+  scrollToFirstIssue,
 };

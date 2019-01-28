@@ -5,8 +5,6 @@ import { Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import stopPropagationFromHandler from '../../utils/stopPropagationFromHandler';
 import Button from '../../ui/components/Button';
-import withFormSubmitErrors from '../Form/withFormSubmitErrors';
-import Issues from '../Issues';
 
 const formOptions = {
   form: 'prompt-form',
@@ -17,8 +15,6 @@ const formOptions = {
 const PromptForm = ({
   children,
   handleSubmit,
-  submitFailed,
-  issues,
   onCancel,
   flipId,
 }) => (
@@ -36,10 +32,6 @@ const PromptForm = ({
           </div>
         </form>
       </div>
-      <Issues
-        issues={issues}
-        show={submitFailed}
-      />
     </div>
   </Flipped>
 );
@@ -49,18 +41,15 @@ PromptForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   submitFailed: PropTypes.bool,
-  issues: PropTypes.object,
   flipId: PropTypes.string,
 };
 
 PromptForm.defaultProps = {
   children: null,
   submitFailed: false,
-  issues: {},
   flipId: null,
 };
 
 export default compose(
   reduxForm(formOptions),
-  withFormSubmitErrors(formOptions.form),
 )(PromptForm);
