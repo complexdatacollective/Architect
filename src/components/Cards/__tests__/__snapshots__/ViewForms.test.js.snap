@@ -38,397 +38,24 @@ ShallowWrapper {
           Back
         </Button>,
       ],
-      "children": <div
-        className="editor variable-registry"
-      >
-        <Connect(Guided)
-          className="editor__sections"
-        >
-          <h1
-            className="editor__heading"
-          >
-            Form Manager
-          </h1>
-          <p>
-            Use this screen to create, edit, and manage your forms.
-          </p>
-          <Connect(Guided)
-            contentId="guidance.forms.index"
-          >
-            <div
-              className="editor__section"
-            >
-              <h2>
-                Existing Forms
-              </h2>
-              <div
-                className="editor__subsection"
-              >
-                <div
-                  className="simple-list"
-                >
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
-                  />
-                </div>
-              </div>
-            </div>
-          </Connect(Guided)>
-        </Connect(Guided)>
-      </div>,
-      "show": true,
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": <Connect(Guided)
-          className="editor__sections"
-        >
-          <h1
-            className="editor__heading"
-          >
-            Form Manager
-          </h1>
-          <p>
-            Use this screen to create, edit, and manage your forms.
-          </p>
-          <Connect(Guided)
-            contentId="guidance.forms.index"
-          >
-            <div
-              className="editor__section"
-            >
-              <h2>
-                Existing Forms
-              </h2>
-              <div
-                className="editor__subsection"
-              >
-                <div
-                  className="simple-list"
-                >
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
-                  />
-                </div>
-              </div>
-            </div>
-          </Connect(Guided)>
-        </Connect(Guided)>,
-        "className": "editor variable-registry",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": Array [
-            <h1
-              className="editor__heading"
-            >
-              Form Manager
-            </h1>,
-            <p>
-              Use this screen to create, edit, and manage your forms.
-            </p>,
-            <Connect(Guided)
-              contentId="guidance.forms.index"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Existing Forms
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Connect(Guided)>,
-          ],
-          "className": "editor__sections",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Form Manager",
-              "className": "editor__heading",
-            },
-            "ref": null,
-            "rendered": "Form Manager",
-            "type": "h1",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Use this screen to create, edit, and manage your forms.",
-            },
-            "ref": null,
-            "rendered": "Use this screen to create, edit, and manage your forms.",
-            "type": "p",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <div
-                className="editor__section"
-              >
-                <h2>
-                  Existing Forms
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-              </div>,
-              "contentId": "guidance.forms.index",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h2>
-                    Existing Forms
-                  </h2>,
-                  <div
-                    className="editor__subsection"
-                  >
-                    <div
-                      className="simple-list"
-                    >
-                      <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />
-                    </div>
-                  </div>,
-                  null,
-                ],
-                "className": "editor__section",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Existing Forms",
-                  },
-                  "ref": null,
-                  "rendered": "Existing Forms",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <div
-                      className="simple-list"
-                    >
-                      <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />
-                    </div>,
-                    "className": "editor__subsection",
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />,
-                      "className": "simple-list",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "childFactory": [Function],
-                        "children": Array [],
-                        "component": "div",
-                      },
-                      "ref": null,
-                      "rendered": Array [],
-                      "type": [Function],
-                    },
-                    "type": "div",
-                  },
-                  "type": "div",
-                },
-                null,
-              ],
-              "type": "div",
-            },
-            "type": [Function],
-          },
-        ],
-        "type": [Function],
-      },
-      "type": "div",
-    },
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "buttons": Array [
-          <Button
-            color="platinum"
-            content=""
-            icon=""
-            iconPosition="right"
-            onClick={[Function]}
-            size=""
-            type="button"
-          >
-            Back
-          </Button>,
-        ],
-        "children": <div
+      "children": <Connect(Guided)>
+        <div
           className="editor variable-registry"
         >
-          <Connect(Guided)
-            className="editor__sections"
+          <div
+            className="editor__window"
           >
-            <h1
-              className="editor__heading"
+            <div
+              className="editor__content"
             >
-              Form Manager
-            </h1>
-            <p>
-              Use this screen to create, edit, and manage your forms.
-            </p>
-            <Connect(Guided)
-              contentId="guidance.forms.index"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Existing Forms
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Connect(Guided)>
-          </Connect(Guided)>
-        </div>,
-        "show": true,
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <Connect(Guided)
-            className="editor__sections"
-          >
-            <h1
-              className="editor__heading"
-            >
-              Form Manager
-            </h1>
-            <p>
-              Use this screen to create, edit, and manage your forms.
-            </p>
-            <Connect(Guided)
-              contentId="guidance.forms.index"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Existing Forms
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Connect(Guided)>
-          </Connect(Guided)>,
-          "className": "editor variable-registry",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
               <h1
                 className="editor__heading"
               >
                 Form Manager
-              </h1>,
+              </h1>
               <p>
                 Use this screen to create, edit, and manage your forms.
-              </p>,
+              </p>
               <Connect(Guided)
                 contentId="guidance.forms.index"
               >
@@ -451,41 +78,40 @@ ShallowWrapper {
                     </div>
                   </div>
                 </div>
-              </Connect(Guided)>,
-            ],
-            "className": "editor__sections",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Form Manager",
-                "className": "editor__heading",
-              },
-              "ref": null,
-              "rendered": "Form Manager",
-              "type": "h1",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Use this screen to create, edit, and manage your forms.",
-              },
-              "ref": null,
-              "rendered": "Use this screen to create, edit, and manage your forms.",
-              "type": "p",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <div
+              </Connect(Guided)>
+            </div>
+          </div>
+        </div>
+      </Connect(Guided)>,
+      "show": true,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <div
+          className="editor variable-registry"
+        >
+          <div
+            className="editor__window"
+          >
+            <div
+              className="editor__content"
+            >
+              <h1
+                className="editor__heading"
+              >
+                Form Manager
+              </h1>
+              <p>
+                Use this screen to create, edit, and manage your forms.
+              </p>
+              <Connect(Guided)
+                contentId="guidance.forms.index"
+              >
+                <div
                   className="editor__section"
                 >
                   <h2>
@@ -503,19 +129,126 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
-                </div>,
-                "contentId": "guidance.forms.index",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
+                </div>
+              </Connect(Guided)>
+            </div>
+          </div>
+        </div>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="editor__window"
+          >
+            <div
+              className="editor__content"
+            >
+              <h1
+                className="editor__heading"
+              >
+                Form Manager
+              </h1>
+              <p>
+                Use this screen to create, edit, and manage your forms.
+              </p>
+              <Connect(Guided)
+                contentId="guidance.forms.index"
+              >
+                <div
+                  className="editor__section"
+                >
+                  <h2>
+                    Existing Forms
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="simple-list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Connect(Guided)>
+            </div>
+          </div>,
+          "className": "editor variable-registry",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="editor__content"
+            >
+              <h1
+                className="editor__heading"
+              >
+                Form Manager
+              </h1>
+              <p>
+                Use this screen to create, edit, and manage your forms.
+              </p>
+              <Connect(Guided)
+                contentId="guidance.forms.index"
+              >
+                <div
+                  className="editor__section"
+                >
+                  <h2>
+                    Existing Forms
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="simple-list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Connect(Guided)>
+            </div>,
+            "className": "editor__window",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h1
+                  className="editor__heading"
+                >
+                  Form Manager
+                </h1>,
+                <p>
+                  Use this screen to create, edit, and manage your forms.
+                </p>,
+                <Connect(Guided)
+                  contentId="guidance.forms.index"
+                >
+                  <div
+                    className="editor__section"
+                  >
                     <h2>
                       Existing Forms
-                    </h2>,
+                    </h2>
                     <div
                       className="editor__subsection"
                     >
@@ -527,79 +260,560 @@ ShallowWrapper {
                           component="div"
                         />
                       </div>
-                    </div>,
-                    null,
-                  ],
-                  "className": "editor__section",
+                    </div>
+                  </div>
+                </Connect(Guided)>,
+              ],
+              "className": "editor__content",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Form Manager",
+                  "className": "editor__heading",
                 },
                 "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Existing Forms",
-                    },
-                    "ref": null,
-                    "rendered": "Existing Forms",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <div
+                "rendered": "Form Manager",
+                "type": "h1",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Use this screen to create, edit, and manage your forms.",
+                },
+                "ref": null,
+                "rendered": "Use this screen to create, edit, and manage your forms.",
+                "type": "p",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Existing Forms
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
                         className="simple-list"
                       >
                         <TransitionGroup
                           childFactory={[Function]}
                           component="div"
                         />
+                      </div>
+                    </div>
+                  </div>,
+                  "contentId": "guidance.forms.index",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <h2>
+                        Existing Forms
+                      </h2>,
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
                       </div>,
-                      "className": "editor__subsection",
-                    },
-                    "ref": null,
-                    "rendered": Object {
+                      null,
+                    ],
+                    "className": "editor__section",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
                       "instance": null,
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": <TransitionGroup
-                          childFactory={[Function]}
-                          component="div"
-                        />,
-                        "className": "simple-list",
+                        "children": "Existing Forms",
+                      },
+                      "ref": null,
+                      "rendered": "Existing Forms",
+                      "type": "h2",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>,
+                        "className": "editor__subsection",
                       },
                       "ref": null,
                       "rendered": Object {
                         "instance": null,
                         "key": undefined,
-                        "nodeType": "class",
+                        "nodeType": "host",
                         "props": Object {
-                          "childFactory": [Function],
-                          "children": Array [],
-                          "component": "div",
+                          "children": <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />,
+                          "className": "simple-list",
                         },
                         "ref": null,
-                        "rendered": Array [],
-                        "type": [Function],
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "childFactory": [Function],
+                            "children": Array [],
+                            "component": "div",
+                          },
+                          "ref": null,
+                          "rendered": Array [],
+                          "type": [Function],
+                        },
+                        "type": "div",
                       },
                       "type": "div",
                     },
-                    "type": "div",
-                  },
-                  null,
-                ],
-                "type": "div",
+                    null,
+                  ],
+                  "type": "div",
+                },
+                "type": [Function],
               },
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
+            ],
+            "type": "div",
+          },
+          "type": "div",
         },
         "type": "div",
+      },
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "buttons": Array [
+          <Button
+            color="platinum"
+            content=""
+            icon=""
+            iconPosition="right"
+            onClick={[Function]}
+            size=""
+            type="button"
+          >
+            Back
+          </Button>,
+        ],
+        "children": <Connect(Guided)>
+          <div
+            className="editor variable-registry"
+          >
+            <div
+              className="editor__window"
+            >
+              <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Form Manager
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your forms.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.forms.index"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Existing Forms
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>
+            </div>
+          </div>
+        </Connect(Guided)>,
+        "show": true,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="editor variable-registry"
+          >
+            <div
+              className="editor__window"
+            >
+              <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Form Manager
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your forms.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.forms.index"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Existing Forms
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>
+            </div>
+          </div>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="editor__window"
+            >
+              <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Form Manager
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your forms.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.forms.index"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Existing Forms
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>
+            </div>,
+            "className": "editor variable-registry",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Form Manager
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your forms.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.forms.index"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Existing Forms
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>,
+              "className": "editor__window",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <h1
+                    className="editor__heading"
+                  >
+                    Form Manager
+                  </h1>,
+                  <p>
+                    Use this screen to create, edit, and manage your forms.
+                  </p>,
+                  <Connect(Guided)
+                    contentId="guidance.forms.index"
+                  >
+                    <div
+                      className="editor__section"
+                    >
+                      <h2>
+                        Existing Forms
+                      </h2>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </Connect(Guided)>,
+                ],
+                "className": "editor__content",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Form Manager",
+                    "className": "editor__heading",
+                  },
+                  "ref": null,
+                  "rendered": "Form Manager",
+                  "type": "h1",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Use this screen to create, edit, and manage your forms.",
+                  },
+                  "ref": null,
+                  "rendered": "Use this screen to create, edit, and manage your forms.",
+                  "type": "p",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <div
+                      className="editor__section"
+                    >
+                      <h2>
+                        Existing Forms
+                      </h2>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
+                      </div>
+                    </div>,
+                    "contentId": "guidance.forms.index",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <h2>
+                          Existing Forms
+                        </h2>,
+                        <div
+                          className="editor__subsection"
+                        >
+                          <div
+                            className="simple-list"
+                          >
+                            <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />
+                          </div>
+                        </div>,
+                        null,
+                      ],
+                      "className": "editor__section",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Existing Forms",
+                        },
+                        "ref": null,
+                        "rendered": "Existing Forms",
+                        "type": "h2",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <div
+                            className="simple-list"
+                          >
+                            <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />
+                          </div>,
+                          "className": "editor__subsection",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />,
+                            "className": "simple-list",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "childFactory": [Function],
+                              "children": Array [],
+                              "component": "div",
+                            },
+                            "ref": null,
+                            "rendered": Array [],
+                            "type": [Function],
+                          },
+                          "type": "div",
+                        },
+                        "type": "div",
+                      },
+                      null,
+                    ],
+                    "type": "div",
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+            "type": "div",
+          },
+          "type": "div",
+        },
+        "type": [Function],
       },
       "type": [Function],
     },
