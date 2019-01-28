@@ -29,7 +29,7 @@ const PromptForm = ({
             </div>
           </div>
           <div className="prompts-prompt-form__controls">
-            <Button type="submit">Continue</Button>
+            <Button type="submit">Save and continue</Button>
             <Button onClick={onCancel} color="platinum">Cancel</Button>
           </div>
         </form>
