@@ -20,11 +20,13 @@ const PromptForm = ({
 }) => (
   <Flipped flipId={flipId}>
     <div className="prompts-prompt-form">
-      <div className="prompts-prompt-form__content">
+      <div className="prompts-prompt-form__container">
         <form onSubmit={stopPropagationFromHandler(handleSubmit)}>
-          <h1>Edit Prompt</h1>
-          <div className="prompts-prompt-form__fields">
-            {children}
+          <div className="prompts-prompt-form__content">
+            <h1>Edit Prompt</h1>
+            <div className="prompts-prompt-form__fields">
+              {children}
+            </div>
           </div>
           <div className="prompts-prompt-form__controls">
             <Button type="submit">Continue</Button>
@@ -40,13 +42,11 @@ PromptForm.propTypes = {
   children: PropTypes.node,
   handleSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  submitFailed: PropTypes.bool,
   flipId: PropTypes.string,
 };
 
 PromptForm.defaultProps = {
   children: null,
-  submitFailed: false,
   flipId: null,
 };
 
