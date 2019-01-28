@@ -10,10 +10,11 @@
     height: 100%;
   }
 
-  &__controls {
-    padding: unit(2);
-    background-color: var(--architect-panel-background);
+  &__fields {
+    margin-top: unit(5);
+  }
 
+  &__controls {
     button {
       margin-right: unit(2);
     }

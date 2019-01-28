@@ -28,11 +28,12 @@ const PromptForm = ({
   <div className="prompts-prompt-form">
     <div className="prompts-prompt-form__content">
       <form onSubmit={stopPropagation(handleSubmit)}>
+        <h1>Edit Prompt</h1>
         <div className="prompts-prompt-form__fields">
           {children}
         </div>
         <div className="prompts-prompt-form__controls">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Continue</Button>
           <Button onClick={onCancel} color="platinum">Cancel</Button>
         </div>
       </form>
