@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
+// Variable types that can be used in rules
 export const validTypes = new Set([
   'text',
   'number',
@@ -9,6 +10,7 @@ export const validTypes = new Set([
   'ordinal',
 ]);
 
+// List of operators
 export const operators = {
   EXACTLY: 'EXACTLY',
   EXISTS: 'EXISTS',
@@ -20,6 +22,7 @@ export const operators = {
   LESS_THAN_OR_EQUAL: 'LESS_THAN_OR_EQUAL',
 };
 
+// List of operator options with labels
 export const operatorsAsOptions = [
   [operators.EXACTLY, 'is Exactly'],
   [operators.EXISTS, 'Exists'],
@@ -31,6 +34,7 @@ export const operatorsAsOptions = [
   [operators.LESS_THAN_OR_EQUAL, 'is Less Than or Exactly'],
 ].map(([value, label]) => ({ value, label }));
 
+// Operators that also require a value to be used
 export const operatorsWithValue = new Set([
   operators.EXACTLY,
   operators.NOT,
@@ -45,4 +49,19 @@ export const operatorsByType = {
   number: new Set(['EXACTLY', 'EXISTS', 'NOT_EXISTS', 'NOT', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL']),
   boolean: new Set(['EXACTLY', 'EXISTS', 'NOT_EXISTS']),
   exists: new Set(['EXISTS', 'NOT_EXISTS']),
+};
+
+export const templates = {
+  edgeRule: { type: undefined, operator: undefined },
+  alterTypeRule: { type: undefined, operator: undefined },
+  alterVariableRule: {
+    type: undefined,
+    operator: undefined,
+    variable: undefined,
+    value: undefined,
+  },
+  egoRule: {
+    variable: undefined,
+    value: undefined,
+  },
 };

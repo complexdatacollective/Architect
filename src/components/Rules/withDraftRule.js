@@ -1,4 +1,5 @@
 import { compose, withState, withHandlers } from 'recompose';
+import { templates } from './options';
 
 const generateRule = (type, options = {}) => ({
   type,
@@ -17,12 +18,12 @@ const withDraftRule = compose(
       setDraftRule(generateRule(type, options)),
   }),
   withHandlers({
-    handleCreateAlterTypeRule: ({ createDraft }) => () => createDraft('alter', { type: undefined }),
-    handleCreateAlterVariableRule: ({ createDraft }) => () =>
-      createDraft('alter', { type: undefined, variable: undefined, value: undefined }),
-    handleCreateEdgeRule: ({ createDraft }) => () => createDraft('edge', { type: undefined }),
+    handleCreateAlterRule: ({ createDraft }) => () =>
+      createDraft('alter', templates.alterTypeRule),
+    handleCreateEdgeRule: ({ createDraft }) => () =>
+      createDraft('edge', templates.edgeTypeRule),
     handleCreateEgoRule: ({ createDraft }) => () =>
-      createDraft('ego', { variable: undefined, value: undefined }),
+      createDraft('ego', templates.egoRule),
     handleClickRule: ({ startDraft }) => ruleId => startDraft(ruleId),
     handleChangeDraft: ({ setDraftRule }) => rule => setDraftRule(rule),
     handleCancelDraft: ({ resetDraft }) => () => resetDraft(),

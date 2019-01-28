@@ -21,8 +21,7 @@ const Rules = ({
   handleSaveDraft,
   handleClickRule,
   handleDeleteRule,
-  handleCreateAlterTypeRule,
-  handleCreateAlterVariableRule,
+  handleCreateAlterRule,
   handleCreateEdgeRule,
   handleCreateEgoRule,
 }) => (
@@ -64,14 +63,8 @@ const Rules = ({
         type="button"
         size="small"
         color="sea-serpent"
-        onClick={handleCreateAlterTypeRule}
-      >Add alter type rule</Button>
-      <Button
-        type="button"
-        size="small"
-        color="sea-serpent--dark"
-        onClick={handleCreateAlterVariableRule}
-      >Add alter variable rule</Button>
+        onClick={handleCreateAlterRule}
+      >Add alter rule</Button>
       <Button
         type="button"
         size="small"
@@ -102,8 +95,7 @@ Rules.propTypes = {
   handleSaveDraft: PropTypes.func.isRequired,
   handleClickRule: PropTypes.func.isRequired,
   handleDeleteRule: PropTypes.func.isRequired,
-  handleCreateAlterTypeRule: PropTypes.func.isRequired,
-  handleCreateAlterVariableRule: PropTypes.func.isRequired,
+  handleCreateAlterRule: PropTypes.func.isRequired,
   handleCreateEdgeRule: PropTypes.func.isRequired,
   handleCreateEgoRule: PropTypes.func.isRequired,
 };

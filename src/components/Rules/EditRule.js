@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { has } from 'lodash';
 import Modal from '../../ui/components/Modal';
-import EditAlterVariableRule from './EditAlterVariableRule';
-import EditAlterTypeRule from './EditAlterTypeRule';
+import EditAlterRule from './EditAlterRule';
 import EditEdgeRule from './EditEdgeRule';
 import EditEgoRule from './EditEgoRule';
 import Button from '../../ui/components/Button';
@@ -16,10 +14,7 @@ class EditRule extends Component {
       case 'edge':
         return EditEdgeRule;
       case 'alter': {
-        if (!has(this.props.rule.options, 'variable')) {
-          return EditAlterTypeRule;
-        }
-        return EditAlterVariableRule;
+        return EditAlterRule;
       }
       default:
         return null;

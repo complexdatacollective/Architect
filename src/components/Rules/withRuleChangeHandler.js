@@ -7,7 +7,7 @@ const RULE_ORDER = [
   'value',
 ];
 
-const withRuleChangeHandler = withHandlers({
+const withRuleChangeHandlers = withHandlers({
   handleRuleChange: ({ onChange, rule, variableType }) =>
     (e, value, oldValue, name) => {
       const resetAfter = RULE_ORDER.indexOf(name);
@@ -32,4 +32,4 @@ const withRuleChangeHandler = withHandlers({
     },
 });
 
-export default withRuleChangeHandler;
+export default withRuleChangeHandlers;
