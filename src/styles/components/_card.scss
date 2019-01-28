@@ -22,12 +22,16 @@
   }
 
   &--logic {
-    background: var(--architect-logic-background);
-    color: var(--architect-logic-text);
+    .editor__window {
+      background: var(--architect-logic-background);
+      color: var(--architect-logic-text);
+    }
   }
 
   &--choice {
-    background: var(--architect-card-background--choice);
-    color: var(--architect-card-text--choice);
+    .editor__window {
+      background: var(--architect-card-background--choice);
+      color: var(--architect-card-text--choice);
+    }
   }
 }

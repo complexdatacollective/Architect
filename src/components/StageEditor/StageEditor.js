@@ -65,9 +65,9 @@ class StageEditor extends Component {
           defaultGuidance={`guidance.interface.${stage.type}`}
           form={form}
         >
-          <div className="stage-editor" id="stage-editor-context">
-            <div className="stage-editor__window">
-              <div className="stage-editor__content">
+          <div className="editor stage-editor" id="stage-editor-context">
+            <div className="editor__window">
+              <div className="editor__content">
                 <div className="code-button">
                   <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
                 </div>
