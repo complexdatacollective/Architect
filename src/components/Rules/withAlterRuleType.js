@@ -19,8 +19,17 @@ const withAlterRuleType = compose(
     'alterRuleType',
     'setAlterRuleType',
     // If an existing rule, we need to determine the type
-    ({ rule: { options: variable } }) =>
-      (variable ? VARIABLE_ALTER : TYPE_ALTER),
+    ({ rule }) => {
+      const { options: { variable, type } } = rule;
+
+      if (!type) { return null; }
+
+      const alterRuleType = variable ?
+        VARIABLE_ALTER :
+        TYPE_ALTER;
+
+      return alterRuleType;
+    },
   ),
   withHandlers({
     handleChangeAlterRuleType:

@@ -10,6 +10,8 @@ const valididateField = (value) => {
       return true;
     case 'number':
       return true;
+    case 'undefined':
+      return false;
     default:
       throw Error(`Could not validate unknown type "${type}"`);
   }
