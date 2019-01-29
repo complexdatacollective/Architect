@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import EdgeIcon from '../../EdgeIcon';
+import Icon from '../../../ui/components/Icon';
 import * as Fields from '../../../ui/components/Fields';
 
 const PreviewEdge = ({ label, color, input: { value, checked, onChange } }) => (
@@ -10,7 +10,7 @@ const PreviewEdge = ({ label, color, input: { value, checked, onChange } }) => (
     onClick={() => onChange(value)}
   >
     <div className="preview-edge__background" />
-    <EdgeIcon color={`var(--${color})`} />
+    <Icon name="edge" color={`var(--${color})`} />
     {label}
   </div>
 );

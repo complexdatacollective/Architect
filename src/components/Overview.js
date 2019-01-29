@@ -5,8 +5,7 @@ import { Flipped } from 'react-flip-toolkit';
 import { map, get } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
-import { Node, Button } from '../ui/components';
-import EdgeIcon from './EdgeIcon';
+import { Node, Button, Icon } from '../ui/components';
 import FormCard from './StageEditor/sections/Form/FormCard';
 import * as Fields from '../ui/components/Fields';
 import ProtocolLink from './ProtocolLink';
@@ -46,7 +45,7 @@ class Overview extends Component {
           key={key}
           title={edge.label}
         >
-          <EdgeIcon color={`var(--${get(edge, 'color', '')})`} />
+          <Icon name="links" color={get(edge, 'color', '')} />
         </ProtocolLink>
       ),
     );

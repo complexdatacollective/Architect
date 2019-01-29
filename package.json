@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "4.0.0-alpha.10",
+    "version": "4.0.0-alpha.11",
     "productName": "Network Canvas Architect",
     "description": "A tool for creating Network Canvas interviews.",
     "author": "Complex Data Collective",
@@ -103,7 +103,6 @@
         "lodash": "^4.17.11",
         "mdns": "^2.4.0",
         "mini-css-extract-plugin": "^0.4.3",
-        "mkdirp": "^0.5.1",
         "node-sass": "^4.9.3",
         "npm": "^6.4.1",
         "object-assign": "4.1.1",
@@ -116,7 +115,6 @@
         "prop-types": "^15.6.2",
         "query-string": "^6.2.0",
         "react": "^16.5.2",
-        "react-color": "^2.14.1",
         "react-dev-utils": "6.0.0-next.3e165448",
         "react-dom": "^16.5.2",
         "react-draggable": "^2.2.3",
@@ -164,7 +162,7 @@
         "url-loader": "^1.1.1",
         "uuid": "^3.3.2",
         "webpack": "^4.19.0",
-        "webpack-dev-server": "^3.1.9",
+        "webpack-dev-server": "^3.1.14",
         "webpack-manifest-plugin": "^2.0.4",
         "whatwg-fetch": "2.0.3",
         "xss": "^0.3.4"
@@ -206,7 +204,8 @@
     "jest": {
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
-            "!src/ui/**"
+            "!src/ui/**",
+            "!src/network-canvas/**"
         ],
         "setupFiles": [
             "jest-date-mock",

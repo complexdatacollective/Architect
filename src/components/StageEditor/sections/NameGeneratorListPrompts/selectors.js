@@ -1,52 +1,28 @@
 import { createSelector } from 'reselect';
-import { get, uniq, map, mapValues, reduce } from 'lodash';
-import { getExternalData, getVariableRegistry } from '../../../../selectors/protocol';
+import { get, map, reduce } from 'lodash';
+import { getNetworkAssets, getVariableRegistry } from '../../../../selectors/protocol';
 import { LABEL_VARIABLE_TYPES } from '../../../../config';
-
-const getUniqueTypes = data =>
-  uniq(map(data, 'type'));
 
 const getNodeType = (_, props) => props.nodeType;
 
 /**
- * Create an index of types available in each data source
- */
-const getTypesBySource = createSelector(
-  getExternalData,
-  getVariableRegistry,
-  (externalData) => {
-    const typesBySource = mapValues(
-      externalData,
-      data => new Set(getUniqueTypes(data.nodes)),
-    );
-
-    return typesBySource;
-  },
-);
-
-/**
  * Return a list of options for the current props.nodeType
  */
-const makeGetDataSourcesWithNodeTypeOptions = () =>
-  createSelector(
-    getTypesBySource,
-    getNodeType,
-    (typesBySource, nodeType) => reduce(
-      typesBySource,
-      (acc, source, name) => {
-        if (!source.has(nodeType)) { return acc; }
-        return [
-          ...acc,
-          { label: name, value: name },
-        ];
-      },
-      [],
-    ),
+const getNetworkOptions = (state) => {
+  const networkAssets = getNetworkAssets(state);
+
+  return map(
+    networkAssets,
+    (asset, name) => ({
+      label: asset.name,
+      value: name,
+    }),
   );
+};
 
 /**
- * Extracts unique variables used in `dataSource`, and combines them with the registry to
- * create list of options in the format: `[ { value, label }, ...]`
+ * Create list of options for attributes from the variable registry in
+ * the format: `[ { value, label }, ...]`
  */
 const makeGetExternalDataPropertyOptions = () =>
   createSelector(
@@ -80,6 +56,6 @@ const makeGetExternalDataPropertyOptions = () =>
   );
 
 export {
-  makeGetDataSourcesWithNodeTypeOptions,
+  getNetworkOptions,
   makeGetExternalDataPropertyOptions,
 };

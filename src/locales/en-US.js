@@ -60,6 +60,20 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.quickAdd': (
+    <Fragment>
+      <h3>The Quick Add function</h3>
+      <p>Using the quick add function allowa your participants to create a node by simply
+        entering a display label for it and pressing the enter key. The quick add form does not
+        obscure the node list, and will stay open and focused while the participant types,
+        providing an ideal environment for quickly listing off names.
+      </p>
+      <p>This function bypasses the new node form, and no other node attribute data collection is
+        possible at the time the node is created (although it can of course be collected in future
+        stages).
+      </p>
+    </Fragment>
+  ),
   'guidance.editor.form': (
     <Fragment>
       <h3>Choosing a Form</h3>
@@ -141,6 +155,24 @@ export default {
       <p>
         Prompts should be carefully considered, and grounded in existing literature wherever
         possible.
+      </p>
+    </Fragment>
+  ),
+  'guidance.editor.ordinal_bin_prompts': (
+    <Fragment>
+      <h3>Ordinal Bin Prompts</h3>
+      <p>
+        Prompts allow you to specify one or more specific questions to post to the participant,
+        in order to describe the task you want them to complete.
+      </p>
+    </Fragment>
+  ),
+  'guidance.editor.categorical_bin_prompts': (
+    <Fragment>
+      <h3>Categorical Bin Prompts</h3>
+      <p>
+        Prompts allow you to specify one or more specific questions to post to the participant,
+        in order to describe the task you want them to complete.
       </p>
     </Fragment>
   ),
