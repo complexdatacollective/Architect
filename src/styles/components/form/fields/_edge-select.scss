@@ -1,0 +1,30 @@
+.form-fields-edge-select {
+  background: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  .preview-edge {
+    margin: 0 unit(2) unit(2) 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: unit(1) unit(2);
+    border: 2px solid transparent;
+    border-radius: unit(20); // arbitrarily large
+    cursor: pointer;
+    transition: border-color var(--animation-easing) var(--animation-duration-standard);
+
+    .icon {
+      margin: 0 unit(1) 0 0;
+      border: 2px solid transparent;
+    }
+
+    &--selected {
+      border-color: var(--edge-color);
+    }
+  }
+}

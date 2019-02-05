@@ -1,0 +1,17 @@
+.rules-preview-rules {
+  background-color: var(--background-light);
+  border-radius: 1rem 1rem 0 0;
+  padding: unit(1);
+
+  &__rules {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__empty {
+    padding: unit(1);
+    color: var(--text-dark);
+    font-style: italic;
+  }
+}

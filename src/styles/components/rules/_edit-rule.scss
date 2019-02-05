@@ -1,0 +1,20 @@
+.rules-edit-rule {
+  background: var(--background-light);
+  padding: unit(4);
+  border-radius: unit(4);
+  min-width: 600px;
+
+  &__row {
+    // sass-lint:disable placeholder-in-extend
+    @extend .list-row;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin: 0 unit(1) 0 0;
+    }
+  }
+}
