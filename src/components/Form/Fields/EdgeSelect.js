@@ -7,10 +7,10 @@ import * as Fields from '../../../ui/components/Fields';
 const PreviewEdge = ({ label, color, input: { value, checked, onChange } }) => (
   <div
     className={cx('preview-edge', { 'preview-edge--selected': checked })}
+    style={{ '--edge-color': `var(--${color})` }}
     onClick={() => onChange(value)}
   >
-    <div className="preview-edge__background" />
-    <Icon name="edge" color={`var(--${color})`} />
+    <Icon name="links" color={color} />
     {label}
   </div>
 );

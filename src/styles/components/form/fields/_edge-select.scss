@@ -13,33 +13,18 @@
     align-items: center;
     position: relative;
     padding: unit(1) unit(2);
+    border: 2px solid transparent;
+    border-radius: unit(20); // arbitrarily large
     cursor: pointer;
+    transition: border-color var(--animation-easing) var(--animation-duration-standard);
 
-    &__background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      opacity: 0;
-      border-radius: unit(5);
-      border-width: 2px;
-      border-style: solid;
-      border-color: transparent;
-      transition: opacity var(--animation-duration-standard) var(--animation-easing),
-      border-color var(--animation-duration-standard) var(--animation-easing);
-    }
-
-    .edge-icon {
+    .icon {
       margin: 0 unit(1) 0 0;
+      border: 2px solid transparent;
     }
 
     &--selected {
-      .preview-edge__background {
-        opacity: 1;
-        border-color: var(--color-sea-green);
-      }
+      border-color: var(--edge-color);
     }
   }
 }
