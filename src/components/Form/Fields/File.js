@@ -7,6 +7,7 @@ import { uniqueId } from 'lodash';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
 import { actionCreators as assetActions } from '../../../ducks/modules/protocol/assetManifest';
+import AssetBrowser from '../../AssetBrowser';
 
 class FileInput extends PureComponent {
   static propTypes = {
@@ -27,11 +28,23 @@ class FileInput extends PureComponent {
     children: value => value,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      assetBrowser: false,
+    };
+  }
+
   componentWillMount() {
     this.id = uniqueId('label');
   }
 
-  onDrop = (acceptedFiles) => {
+  handleClick = () => {
+    this.setState({ assetBrowser: true });
+  }
+
+  handleDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
       const type = this.props.type || file.type;
       this.props.importAsset(file, type)
@@ -50,6 +63,8 @@ class FileInput extends PureComponent {
       className,
     } = this.props;
 
+    const { assetBrowser } = this.state;
+
     const fieldClasses = cx(
       'form-fields-file',
       className,
@@ -65,9 +80,13 @@ class FileInput extends PureComponent {
         { label &&
           <h4 className="form-fields-file__label">{label}</h4>
         }
-        <div className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}>
+        <div
+          className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}
+          onClick={this.handleClick}
+        >
           <Dropzone
-            onDrop={this.onDrop}
+            onDrop={this.handleDrop}
+            disableClick
             multiple={false}
             accept={accept}
             className={cx('form-dropzone', { 'form-dropzone--replace': !!value })}
@@ -83,6 +102,7 @@ class FileInput extends PureComponent {
           }
         </div>
         { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
+        { assetBrowser && <AssetBrowser /> }
       </div>
     );
   }
