@@ -1,9 +1,13 @@
+import uuid from 'uuid';
 import { importAssetToProtocol } from '../../../other/protocols';
 import { getActiveProtocolMeta } from '../../../selectors/protocol';
 
 const IMPORT_ASSET = Symbol('PROTOCOL/IMPORT_ASSET');
 const IMPORT_ASSET_COMPLETE = Symbol('PROTOCOL/IMPORT_ASSET_COMPLETE');
 const IMPORT_ASSET_FAILED = Symbol('PROTOCOL/IMPORT_ASSET_FAILED');
+
+const getNameFromFilename = filename =>
+  filename.split('.')[0];
 
 /**
  * @param {string} filename - Name of file
@@ -16,30 +20,45 @@ const importAsset = filename =>
 
 /**
  * @param {string} filename - Name of file
+ * @param {string} fileType - File MIME type
  */
-const importAssetComplete = filename =>
+const importAssetComplete = (filename, name, assetType) =>
   ({
+    id: uuid(),
     type: IMPORT_ASSET_COMPLETE,
+    name,
     filename,
+    assetType,
   });
 
-const importAssetFailed = () =>
+/**
+ * @param {string} filename - Name of file
+ */
+const importAssetFailed = filename =>
   ({
     type: IMPORT_ASSET_FAILED,
+    filename,
   });
 
 /**
  * @param {File} asset - File to import
  */
-const importAssetAction = asset =>
+const importAssetAction = (asset, type) =>
   (dispatch, getState) => {
-    dispatch(importAsset(asset));
     const state = getState();
     const { workingPath } = getActiveProtocolMeta(state);
-    if (!workingPath) { return Promise.reject(dispatch(importAssetFailed())); }
+    const name = getNameFromFilename(asset.name);
+    const reject = () =>
+      dispatch(importAssetFailed(name));
+
+    dispatch(importAsset(name));
+
+    if (!workingPath) { return Promise.reject(reject()); }
+
     return importAssetToProtocol(workingPath, asset)
-      .then(filename => dispatch(importAssetComplete(filename)))
-      .catch(() => dispatch(importAssetFailed()));
+      .then(filename =>
+        dispatch(importAssetComplete(filename, name, type)))
+      .catch(reject);
   };
 
 const actionCreators = {

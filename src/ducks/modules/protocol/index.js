@@ -2,7 +2,7 @@ import { pick } from 'lodash';
 import stages from './stages';
 import forms from './forms';
 import variableRegistry from './variableRegistry';
-import externalData from './externalData';
+import assetManifest from './assetManifest';
 import { actionTypes as loadProtocolActionTypes } from '../protocols/load';
 
 const initialState = {};
@@ -52,6 +52,6 @@ export default reduceReducers(
     stages: stages(state.stages, action),
     forms: forms(state.forms, action),
     variableRegistry: variableRegistry(state.variableRegistry, action),
-    externalData: externalData(state.externalData, action),
+    assetManifest: assetManifest(state.assetManifest, action),
   }),
 );

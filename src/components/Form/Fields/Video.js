@@ -6,6 +6,7 @@ import { Video } from '../../Assets';
 const VideoInput = props => (
   <File
     accept="video/*"
+    type="video"
     {...props}
   >
     { url => (

@@ -5,6 +5,7 @@ import File from './File';
 const NetworkFile = props => (
   <File
     accept="application/json"
+    type="network"
     {...props}
   >
     { url => (

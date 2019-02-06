@@ -33,9 +33,10 @@ class FileInput extends PureComponent {
 
   onDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
-      this.props.importAsset(file)
-        .then(({ filename }) => {
-          this.props.input.onChange(filename);
+      const type = this.props.type || file.type;
+      this.props.importAsset(file, type)
+        .then(({ id }) => {
+          this.props.input.onChange(id);
         });
     });
   }
