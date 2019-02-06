@@ -2,7 +2,7 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { actionCreators, actionTypes } from '../assets';
+import reducer, { actionCreators, actionTypes } from '../assetManifest';
 import { importAssetToProtocol } from '../../../../other/protocols';
 
 jest.mock('../../../../other/protocols');
@@ -32,21 +32,30 @@ const getStore = () =>
     applyMiddleware(thunk, logger),
   );
 
-describe('protocol/assets', () => {
+describe('protocol/assetManifest', () => {
+  beforeEach(() => {
+    log.mockClear();
+  });
+
   describe('importAsset()', () => {
+    const file = {
+      name: 'baz.jpg',
+    };
+
+    const assetType = 'buzz';
+
     beforeEach(() => {
       importAssetToProtocol.mockClear();
-      log.mockClear();
     });
 
     it('calls importAssetToProtocol and fires complete action', () => {
       const store = getStore();
 
-      return store.dispatch(actionCreators.importAsset('baz.jpg'))
+      return store.dispatch(actionCreators.importAsset(file, assetType))
         .then(() => {
           expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
           expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_COMPLETE);
-          expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', 'baz.jpg']]);
+          expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', file]]);
         });
     });
 
@@ -58,10 +67,29 @@ describe('protocol/assets', () => {
 
       const store = getStore();
 
-      return store.dispatch(actionCreators.importAsset('baz.jpg')).then(() => {
+      return store.dispatch(actionCreators.importAsset(file, assetType)).then(() => {
         expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
         expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
-        expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', 'baz.jpg']]);
+        expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', file]]);
+      });
+    });
+  });
+
+  describe('importAssetComplete', () => {
+    it('calls importAssetToProtocol and fires complete action', () => {
+      const filename = '577925e0e0f72582f4d2ea8ac29150057197aed4';
+      const name = 'foo.jpg';
+      const assetType = 'bar';
+
+      const action = actionCreators.importAssetComplete(filename, name, assetType);
+
+      const result = reducer(null, action);
+
+      expect(result[action.id]).toMatchObject({
+        id: action.id,
+        name,
+        source: filename,
+        type: assetType,
       });
     });
   });
