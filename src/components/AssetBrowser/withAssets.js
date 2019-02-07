@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import {
   filter,
+  map,
 } from 'lodash';
 import {
   compose,
@@ -9,14 +10,20 @@ import {
 } from 'recompose';
 import { getAssetManifest } from '../../selectors/protocol';
 
-const filterByAssetType = (assets, assetType) => (
+const filterByAssetType = (assetType, assets) => (
   assetType ?
-    filter(
-      assets,
-      ({ type }) => type === assetType,
-    ) :
+    filter(assets, ({ type }) => type === assetType) :
     assets
 );
+
+const withKeysAsIds = assets =>
+  map(assets, (asset, id) => ({ ...asset, id }));
+
+const filterAssets = (assetType, assets) =>
+  filterByAssetType(
+    assetType,
+    withKeysAsIds(assets),
+  );
 
 const filterHandlers = withHandlers({
   onUpdateAssetFilter: ({ setAssetType }) =>
@@ -27,7 +34,7 @@ const mapStateToProps = (state, { assetType }) => {
   const assets = getAssetManifest(state);
 
   return {
-    assets: filterByAssetType(assets, assetType),
+    assets: filterAssets(assetType, assets),
   };
 };
 

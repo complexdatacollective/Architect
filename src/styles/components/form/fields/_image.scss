@@ -1,8 +1,7 @@
 $component-name: form-fields-image;
 
 .#{$component-name} {
-  max-width: 100%;
-  background: var(--architect-panel-background);
+  width: 100%;
 
   &__image {
     background-size: contain;

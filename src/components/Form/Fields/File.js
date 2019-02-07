@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
 import { uniqueId } from 'lodash';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
 import { actionCreators as assetActions } from '../../../ducks/modules/protocol/assetManifest';
+import Dropzone from '../Dropzone';
 import AssetBrowser from '../../AssetBrowser';
 
 class FileInput extends PureComponent {
@@ -44,7 +44,8 @@ class FileInput extends PureComponent {
     this.setState({ assetBrowser: !this.state.assetBrowser });
   }
 
-  handleClick = () => {
+  handleBrowseLibrary = (e) => {
+    e.stopPropagation();
     this.toggleBrowser();
   }
 
@@ -64,6 +65,7 @@ class FileInput extends PureComponent {
 
   handleSelectAsset = (assetId) => {
     this.toggleBrowser();
+    console.log({ assetId });
     this.props.input.onChange(assetId);
   }
 
@@ -96,24 +98,15 @@ class FileInput extends PureComponent {
         }
         <div
           className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}
-          onClick={this.handleClick}
         >
           <Dropzone
             onDrop={this.handleDrop}
-            disableClick
-            multiple={false}
+            onBrowseLibrary={this.handleBrowseLibrary}
+            value={value}
             accept={accept}
-            className={cx('form-dropzone', { 'form-dropzone--replace': !!value })}
-            activeClassName="form-dropzone--active"
-            acceptClassName="form-dropzone--accept"
-            rejectClassName="form-dropzone--reject"
-            disabledClassName="form-dropzone--disabled"
-          />
-          { value &&
-            <div className="form-fields-file__preview">
-              {this.props.children(value)}
-            </div>
-          }
+          >
+            {this.props.children(value)}
+          </Dropzone>
         </div>
         { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
         <AssetBrowser
