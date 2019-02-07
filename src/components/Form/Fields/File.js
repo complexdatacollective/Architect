@@ -40,8 +40,16 @@ class FileInput extends PureComponent {
     this.id = uniqueId('label');
   }
 
+  toggleBrowser() {
+    this.setState({ assetBrowser: !this.state.assetBrowser });
+  }
+
   handleClick = () => {
-    this.setState({ assetBrowser: true });
+    this.toggleBrowser();
+  }
+
+  handleBlurBrowser = () => {
+    this.toggleBrowser();
   }
 
   handleDrop = (acceptedFiles) => {
@@ -54,12 +62,18 @@ class FileInput extends PureComponent {
     });
   }
 
+  handleSelectAsset = (assetId) => {
+    this.toggleBrowser();
+    this.props.input.onChange(assetId);
+  }
+
   render() {
     const {
       input: { value },
       meta: { touched, invalid, error },
       accept,
       label,
+      type,
       className,
     } = this.props;
 
@@ -102,7 +116,12 @@ class FileInput extends PureComponent {
           }
         </div>
         { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
-        { assetBrowser && <AssetBrowser /> }
+        <AssetBrowser
+          show={assetBrowser}
+          type={type}
+          onSelectAsset={this.handleSelectAsset}
+          onCancel={this.handleBlurBrowser}
+        />
       </div>
     );
   }
