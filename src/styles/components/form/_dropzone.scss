@@ -1,20 +1,55 @@
 .form-dropzone {
+  @include preset('copy-standard');
   cursor: pointer;
-  padding: unit(1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: var(--color-white);
   background: var(--color-cyber-grape);
+  position: relative;
+  display: flex;
 
-  &::after {
-    @include preset('copy-standard');
-    content: 'Drop content here or click to browse';
+  &__preview {
+    min-height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    display: inline;
+    transform: translateY(2px);
+    border-bottom: 2px solid var(--color-sea-green);
+    line-height: unit(2);
+  }
+
+  &__message {
+    background: var(--color-navy-taupe);
+    padding: unit(1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: unit(2);
+    width: 100%;
+    min-height: 75px;
   }
 
   &--replace {
-    &::after {
-      content: 'Drop content here or click to browse';
+    .form-dropzone__message {
+      z-index: 1000;
+      top: 0;
+      position: absolute !important; // sass-lint:disable-line no-important
+      border-bottom: unit(.2) solid var(--color-sea-green);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition-property: transform, opacity;
+      transition-duration: var(--animation-duration-standard);
+      transition-timing-function: var(--animation-easing);
+    }
+
+    &:hover {
+      .form-dropzone__message {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   }
 }

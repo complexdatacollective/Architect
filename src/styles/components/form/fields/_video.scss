@@ -1,10 +1,10 @@
 $component-name: form-fields-video;
 
 .#{$component-name} {
+  width: 100%;
   padding-bottom: 57%;
   position: relative;
   overflow: hidden;
-  background: var(--architect-panel-background);
 
   &__name {
     padding: unit(2);
