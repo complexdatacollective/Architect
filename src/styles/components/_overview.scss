@@ -72,6 +72,12 @@
       }
     }
 
+    &--variable-registry {
+      .overview__group-section {
+        margin-bottom: unit(4);
+      }
+    }
+
     &--title {
       flex: 100%;
       padding: unit(2) unit(4);

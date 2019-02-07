@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
-import { map, get } from 'lodash';
+import { map, get, size } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { Node, Button, Icon } from '../ui/components';
@@ -15,9 +15,12 @@ import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 class Overview extends Component {
   get renderNodeTypes() {
     const nodeTypes = get(this.props.variableRegistry, 'node', {});
-
-    if (nodeTypes.length === 0) {
-      return 'No node types defined';
+    if (size(nodeTypes) === 0) {
+      return (
+        <React.Fragment>
+          <em>No node types defined, yet. <ProtocolLink to={`registry/node/`}>Create one?</ProtocolLink></em>
+        </React.Fragment>
+      )
     }
 
     return map(
@@ -33,8 +36,12 @@ class Overview extends Component {
   get renderEdgeTypes() {
     const edgeTypes = get(this.props.variableRegistry, 'edge', {});
 
-    if (edgeTypes.length === 0) {
-      return 'No edge types defined';
+    if (size(edgeTypes) === 0) {
+      return (
+        <React.Fragment>
+          <em>No edge types defined, yet. <ProtocolLink to={`registry/edge/`}>Create one?</ProtocolLink></em>
+        </React.Fragment>
+      )
     }
 
     return map(
@@ -53,9 +60,23 @@ class Overview extends Component {
 
   get renderForms() {
     const forms = this.props.forms;
+    const nodeTypes = get(this.props.variableRegistry, 'node', {});
+    if (size(nodeTypes) === 0) {
+      return (
+        <React.Fragment>
+          <em>No forms defined, yet. Create one or more node types and then create a form.</em>
+        </React.Fragment>
+      )
+    }
 
-    if (forms.length === 0) {
-      return 'No forms defined';
+
+
+    if (size(forms) === 0) {
+      return (
+        <React.Fragment>
+          <em>No forms defined, yet. <ProtocolLink to={`form/`}>Create one?</ProtocolLink></em>
+        </React.Fragment>
+      )
     }
 
     return (
@@ -110,16 +131,14 @@ class Overview extends Component {
                     }}
                   />
                 </div>
-                <div className="overview__group">
+                <div className="overview__group overview__group--variable-registry">
                   <legend className="overview__group-title">Variable registry</legend>
-                  <br />
-                  <h4>Node types</h4>
-                  <div>
+                  <div className="overview__group-section">
+                    <h4>Node types</h4>
                     { this.renderNodeTypes }
                   </div>
-                  <br />
-                  <h4>Edge types</h4>
-                  <div>
+                  <div className="overview__group-section">
+                    <h4>Edge types</h4>
                     { this.renderEdgeTypes }
                   </div>
                   <div className="overview__manage-button">
