@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import PropTypes from 'prop-types';
-import injectProtocolUrl from './injectProtocolUrl';
+import withAssetUrl from './withAssetUrl';
 
 const Video = ({ url, description, ...props }) =>
   <video src={url} {...props} playsInline>{description}</video>;
@@ -17,4 +17,4 @@ Video.defaultProps = {
 
 export { Video };
 
-export default injectProtocolUrl(Video);
+export default withAssetUrl(Video);

@@ -8,9 +8,9 @@ const ImageInput = props => (
     type="image"
     {...props}
   >
-    { url => (
+    { id => (
       <div className="form-fields-image">
-        <BackgroundImage url={url} className="form-fields-image__image" />
+        <BackgroundImage id={id} className="form-fields-image__image" />
       </div>
     ) }
   </File>

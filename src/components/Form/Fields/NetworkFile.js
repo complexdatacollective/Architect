@@ -8,9 +8,9 @@ const NetworkFile = props => (
     type="network"
     {...props}
   >
-    { url => (
+    { id => (
       <div className="form-fields-network-file">
-        {url}
+        {id}
       </div>
     ) }
   </File>

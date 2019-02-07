@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import injectProtocolUrl from './injectProtocolUrl';
+import withAssetUrl from './withAssetUrl';
 
 const Image = ({ url, alt, ...props }) =>
   <img src={url} alt={alt} {...props} />;
@@ -16,4 +16,4 @@ Image.defaultProps = {
 
 export { Image };
 
-export default injectProtocolUrl(Image);
+export default withAssetUrl(Image);

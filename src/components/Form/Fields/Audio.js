@@ -9,9 +9,9 @@ const AudioInput = props => (
     type="audio"
     {...props}
   >
-    { url => (
+    { id => (
       <div className="form-fields-audio__preview">
-        <Audio url={url} controls />
+        <Audio id={id} controls />
       </div>
     ) }
   </File>
