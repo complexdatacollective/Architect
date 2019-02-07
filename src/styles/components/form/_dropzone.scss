@@ -9,13 +9,12 @@
 
   &::after {
     @include preset('copy-standard');
-    content: 'Drop content here or click to upload';
-
+    content: 'Drop content here or click to browse';
   }
 
   &--replace {
     &::after {
-      content: 'Drop content here or click to update';
+      content: 'Drop content here or click to browse';
     }
   }
 }

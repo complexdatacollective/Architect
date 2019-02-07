@@ -9,9 +9,9 @@ const VideoInput = props => (
     type="video"
     {...props}
   >
-    { url => (
+    { id => (
       <div className="form-fields-video">
-        <Video className="form-fields-video__still" url={url} controls />
+        <Video className="form-fields-video__still" id={id} controls />
       </div>
     ) }
   </File>

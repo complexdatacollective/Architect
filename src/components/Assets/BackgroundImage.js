@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import injectProtocolUrl from './injectProtocolUrl';
+import withAssetUrl from './withAssetUrl';
 
 const backgroundStyles = url => ({
   backgroundImage: `url(${url})`,
@@ -18,4 +18,4 @@ BackgroundImage.propTypes = {
 
 export { BackgroundImage };
 
-export default injectProtocolUrl(BackgroundImage);
+export default withAssetUrl(BackgroundImage);
