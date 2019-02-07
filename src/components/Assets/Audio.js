@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import PropTypes from 'prop-types';
-import injectProtocolUrl from './injectProtocolUrl';
+import withAssetUrl from './withAssetUrl';
 
 const Audio = ({ url, description, ...props }) =>
   <audio src={url} {...props}>{description}</audio>;
@@ -17,4 +17,4 @@ Audio.defaultProps = {
 
 export { Audio };
 
-export default injectProtocolUrl(Audio);
+export default withAssetUrl(Audio);

@@ -9,11 +9,11 @@ import { sizes } from './sizes';
 const AssetComponent = ({ type, content }) => {
   switch (type) {
     case 'image':
-      return <BackgroundImage url={content} className="content-grid-preview__image" />;
+      return <BackgroundImage id={content} className="content-grid-preview__image" />;
     case 'video':
-      return <Video url={content} controls className="content-grid-preview__video" />;
+      return <Video id={content} controls className="content-grid-preview__video" />;
     case 'audio':
-      return <Audio url={content} controls className="content-grid-preview__audio" />;
+      return <Audio id={content} controls className="content-grid-preview__audio" />;
     case 'text':
       return <Markdown source={content} className="content-grid-preview__text" />;
     default:
