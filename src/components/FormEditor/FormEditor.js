@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import { get, map, toPairs, fromPairs } from 'lodash';
 import { ValidatedField, MultiSelect } from '../Form';
 import * as Fields from '../../ui/components/Fields';
@@ -196,17 +195,6 @@ class FormEditor extends Component {
                 },
               ]}
               options={optionGetter(variables)}
-            />
-          </div>
-        </Guidance>
-
-        <Guidance contentId="guidance.form.continue">
-          <div className="stage-editor-section">
-            <Field
-              name="optionToAddAnother"
-              component={Fields.Toggle}
-              fieldLabel="Use the 'Add another' option?"
-              label="Enable 'Add another' option in this form"
             />
           </div>
         </Guidance>
