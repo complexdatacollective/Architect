@@ -7,7 +7,6 @@ const getNextIndexForGroup = (indexes, group) =>
   reduce(
     indexes,
     (memo, stackable) => {
-      console.log({ group, stackable, memo });
       if (group === stackable.group && stackable.index >= memo) {
         return stackable.index + 1;
       }
@@ -20,6 +19,7 @@ const defaultGroup = 'GLOBAL';
 
 const REGISTER_STACKABLE = 'stacks/registerStackable';
 const UNREGISTER_STACKABLE = 'stacks/unregisterStackable';
+const MOVE_TO_TOP = 'stacks/moveToTop';
 
 const registerStackable = (id, group = defaultGroup) => ({
   type: REGISTER_STACKABLE,
@@ -29,6 +29,11 @@ const registerStackable = (id, group = defaultGroup) => ({
 
 const unregisterStackable = id => ({
   type: UNREGISTER_STACKABLE,
+  id,
+});
+
+const moveToTop = id => ({
+  type: MOVE_TO_TOP,
   id,
 });
 
@@ -48,6 +53,18 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case MOVE_TO_TOP: {
+      const item = state[action.id];
+      if (!item) { return state; }
+      const nextIndex = getNextIndexForGroup(state, item.group);
+      return {
+        ...state,
+        [action.id]: {
+          ...item,
+          index: nextIndex,
+        },
+      };
+    }
     case UNREGISTER_STACKABLE:
       return omit(state, action.id);
     default:
@@ -58,9 +75,11 @@ export default (state = initialState, action) => {
 export const actionTypes = {
   REGISTER_STACKABLE,
   UNREGISTER_STACKABLE,
+  MOVE_TO_TOP,
 };
 
 export const actionCreators = {
   registerStackable,
   unregisterStackable,
+  moveToTop,
 };
