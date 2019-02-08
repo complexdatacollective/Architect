@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { map } from 'lodash';
 import window from '../../ui/components/window';
+import Button from '../../ui/components/Button';
 import BasicDialog from '../../ui/components/Dialog/Basic';
 import Select from '../../components/Form/Fields/Select';
 import Stackable from '../../components/Stackable';
 import withAssets from './withAssets';
+import Asset from './Asset';
 
 const ASSET_TYPES = [
   { label: 'Any', value: null },
@@ -25,9 +26,12 @@ const AssetBrowser = ({
   onUpdateAssetFilter,
   onSelectAsset,
 }) => {
-  const renderedAssets = map(assets, asset => (
-    <div key={asset.id} onClick={() => onSelectAsset(asset.id)}>
-      {asset.id}:{asset.source}
+  const renderedAssets = assets.map(asset => (
+    <div className="asset-browser__assets-asset" key={asset.id}>
+      <Asset
+        {...asset}
+        onClick={onSelectAsset}
+      />
     </div>
   ));
 
@@ -39,6 +43,15 @@ const AssetBrowser = ({
     },
   };
 
+  const cancelButton = (
+    <Button
+      color="white"
+      onClick={onCancel}
+    >
+      Cancel
+    </Button>
+  );
+
   return (
     <Stackable stackKey={show}>
       {({ stackIndex }) => (
@@ -47,10 +60,13 @@ const AssetBrowser = ({
           onBlur={onCancel}
           zIndex={stackIndex + 10000}
           title="Asset Browser"
+          options={cancelButton}
         >
-          Choose some assets
+          <p>Please select an asset</p>
           { !type && <Select {...selectProps} /> }
-          {renderedAssets}
+          <div className="asset-browser__assets">
+            {renderedAssets}
+          </div>
         </BasicDialog>
       )}
     </Stackable>

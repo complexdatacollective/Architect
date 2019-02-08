@@ -65,7 +65,6 @@ class FileInput extends PureComponent {
 
   handleSelectAsset = (assetId) => {
     this.toggleBrowser();
-    console.log({ assetId });
     this.props.input.onChange(assetId);
   }
 
