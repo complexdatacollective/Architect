@@ -4,45 +4,16 @@ import { compose } from 'recompose';
 import window from '../../ui/components/window';
 import Button from '../../ui/components/Button';
 import BasicDialog from '../../ui/components/Dialog/Basic';
-import Select from '../../components/Form/Fields/Select';
 import Stackable from '../../components/Stackable';
-import withAssets from './withAssets';
-import Asset from './Asset';
-
-const ASSET_TYPES = [
-  { label: 'Any', value: null },
-  { label: 'Image', value: 'image' },
-  { label: 'Video', value: 'video' },
-  { label: 'Audio', value: 'audio' },
-  { label: 'Network', value: 'network' },
-];
+import Assets from './Assets';
+import NewAsset from './NewAsset';
 
 const AssetBrowser = ({
   show,
   type,
   onCancel,
-  assets,
-  assetType,
-  onUpdateAssetFilter,
-  onSelectAsset,
+  onSelect,
 }) => {
-  const renderedAssets = assets.map(asset => (
-    <div className="asset-browser__assets-asset" key={asset.id}>
-      <Asset
-        {...asset}
-        onClick={onSelectAsset}
-      />
-    </div>
-  ));
-
-  const selectProps = {
-    options: ASSET_TYPES,
-    input: {
-      onChange: onUpdateAssetFilter,
-      value: assetType,
-    },
-  };
-
   const cancelButton = (
     <Button
       color="white"
@@ -62,10 +33,18 @@ const AssetBrowser = ({
           title="Asset Browser"
           options={cancelButton}
         >
-          <p>Please select an asset</p>
-          { !type && <Select {...selectProps} /> }
-          <div className="asset-browser__assets">
-            {renderedAssets}
+          <div className="asset-browser">
+            <div className="asset-browser__create">
+              <p>Create an asset</p>
+              <NewAsset onCreate={onSelect} />
+            </div>
+            <div className="asset-browser__assets">
+              <p>Please select an asset</p>
+              <Assets
+                onSelect={onSelect}
+                type={type}
+              />
+            </div>
           </div>
         </BasicDialog>
       )}
@@ -75,16 +54,19 @@ const AssetBrowser = ({
 
 AssetBrowser.propTypes = {
   show: PropTypes.bool,
+  type: PropTypes.string,
+  onSelect: PropTypes.func,
   onCancel: PropTypes.func,
 };
 
 AssetBrowser.defaultProps = {
   show: true,
+  type: null,
+  onSelect: () => {},
   onCancel: () => {},
   stackIndex: null,
 };
 
 export default compose(
   window,
-  withAssets,
 )(AssetBrowser);

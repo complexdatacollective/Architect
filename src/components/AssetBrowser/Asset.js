@@ -30,12 +30,12 @@ const Asset = ({
   return (
     <div
       onClick={() => onClick(id)}
-      className="asset-browser__asset"
+      className="asset-browser-asset"
     >
-      <div className="asset-browser__asset-preview">
+      <div className="asset-browser-asset__preview">
         <PreviewComponent id={id} />
       </div>
-      <div className="asset-browser__asset-name">{name}</div>
+      <div className="asset-browser-asset__name">{name}</div>
     </div>
   );
 };

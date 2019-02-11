@@ -1,0 +1,8 @@
+.asset-browser {
+  @include no-scrollbars;
+  max-width: 90vw;
+  min-width: 75vw;
+  max-height: 50vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
