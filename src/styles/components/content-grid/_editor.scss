@@ -12,7 +12,7 @@ $duration: var(--animation-duration-standard);
   }
 
   &--show {
-    max-height: 100vh;
+    max-height: 2000px;
     opacity: 1;
     transform: translateX(0);
     transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;

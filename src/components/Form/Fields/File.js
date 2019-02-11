@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { uniqueId } from 'lodash';
+import uuid from 'uuid';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
-import { actionCreators as assetActions } from '../../../ducks/modules/protocol/assetManifest';
-import Dropzone from '../Dropzone';
 import AssetBrowser from '../../AssetBrowser';
+import Button from '../../../ui/components/Button';
 
 class FileInput extends PureComponent {
   static propTypes = {
@@ -37,7 +34,7 @@ class FileInput extends PureComponent {
   }
 
   componentWillMount() {
-    this.id = uniqueId('label');
+    this.id = uuid();
   }
 
   toggleBrowser() {
@@ -53,16 +50,6 @@ class FileInput extends PureComponent {
     this.toggleBrowser();
   }
 
-  handleDrop = (acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      const type = this.props.type || file.type;
-      this.props.importAsset(file, type)
-        .then(({ id }) => {
-          this.props.input.onChange(id);
-        });
-    });
-  }
-
   handleSelectAsset = (assetId) => {
     this.toggleBrowser();
     this.props.input.onChange(assetId);
@@ -72,7 +59,6 @@ class FileInput extends PureComponent {
     const {
       input: { value },
       meta: { touched, invalid, error },
-      accept,
       label,
       type,
       className,
@@ -86,7 +72,7 @@ class FileInput extends PureComponent {
       'form-field-container',
       {
         'form-fields-mode--has-error': touched && invalid,
-        'form-fields-file--complete': !!value,
+        'form-fields-file--replace': !!value,
       },
     );
 
@@ -95,33 +81,27 @@ class FileInput extends PureComponent {
         { label &&
           <h4 className="form-fields-file__label">{label}</h4>
         }
-        <div
-          className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}
-        >
-          <Dropzone
-            onDrop={this.handleDrop}
-            onBrowseLibrary={this.handleBrowseLibrary}
-            value={value}
-            accept={accept}
-          >
-            {this.props.children(value)}
-          </Dropzone>
+        <div className="form-fields-file__preview">
+          {this.props.children(value)}
         </div>
+        <Button
+          onClick={this.handleBrowseLibrary}
+          color="paradise-pink"
+        >
+          { !value ? 'Select asset' : 'Update asset' }
+        </Button>
         { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
         <AssetBrowser
           show={assetBrowser}
           type={type}
-          onSelectAsset={this.handleSelectAsset}
+          onSelect={this.handleSelectAsset}
           onCancel={this.handleBlurBrowser}
         />
       </div>
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  importAsset: bindActionCreators(assetActions.importAsset, dispatch),
-});
 
 export { FileInput };
 
-export default connect(null, mapDispatchToProps)(FileInput);
+export default FileInput;

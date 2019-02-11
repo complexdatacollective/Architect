@@ -4,13 +4,15 @@
   overflow: hidden;
   position: relative;
 
-  &__file {
+  &__preview {
     position: relative;
-    min-height: 100px;
     overflow: hidden;
+    display: none;
+  }
 
-    .form-dropzone {
-      min-height: 150px;
+  &--replace {
+    .form-fields-file__preview {
+      display: block;
     }
   }
 

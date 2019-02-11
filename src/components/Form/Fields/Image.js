@@ -4,7 +4,6 @@ import { BackgroundImage } from '../../Assets';
 
 const ImageInput = props => (
   <File
-    accept="image/*"
     type="image"
     {...props}
   >

@@ -9,7 +9,7 @@ $duration: var(--animation-duration-standard);
   overflow: hidden;
 
   &__preview {
-    max-height: 100vh;
+    max-height: 2000px;
     overflow: hidden;
     transition: opacity $duration $duration, max-height $duration $duration;
   }
@@ -27,7 +27,7 @@ $duration: var(--animation-duration-standard);
     background: var(--architect-table-edit-background);
 
     .content-grid-item__edit {
-      max-height: 100vh;
+      max-height: 2000px;
       opacity: 1;
       transition: opacity $duration $duration, max-height $duration $duration;
     }

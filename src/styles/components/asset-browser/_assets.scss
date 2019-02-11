@@ -1,0 +1,16 @@
+.asset-browser-assets {
+  &__controls {
+    margin-bottom: unit(2);
+    width: 50%;
+  }
+
+  &__assets {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__asset {
+    flex: 0 0 calc(33% - #{unit(2)});
+    margin: 0 unit(2) unit(2) 0;
+  }
+}
