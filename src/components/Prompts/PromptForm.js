@@ -21,18 +21,16 @@ const PromptForm = ({
   <Flipped flipId={flipId}>
     <div className="prompts-prompt-form">
       <div className="prompts-prompt-form__container">
-        <form onSubmit={stopPropagationFromHandler(handleSubmit)}>
-          <div className="prompts-prompt-form__content">
-            <h1>Edit Prompt</h1>
-            <div className="prompts-prompt-form__fields">
-              {children}
-            </div>
-          </div>
-          <div className="prompts-prompt-form__controls">
-            <Button type="submit">Save and continue</Button>
-            <Button onClick={onCancel} color="platinum">Cancel</Button>
+        <form onSubmit={stopPropagationFromHandler(handleSubmit)} className="prompts-prompt-form__content">
+          <h1>Edit Prompt</h1>
+          <div className="prompts-prompt-form__fields">
+            {children}
           </div>
         </form>
+        <div className="prompts-prompt-form__controls">
+          <Button type="submit">Save and continue</Button>
+          <Button onClick={onCancel} color="platinum">Cancel</Button>
+        </div>
       </div>
     </div>
   </Flipped>

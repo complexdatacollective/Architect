@@ -14,6 +14,7 @@
   }
 
   &__content {
+    min-height: 100%;
     padding: unit(6);
   }
 
@@ -31,6 +32,7 @@
     border-bottom-right-radius: unit(1);
     display: flex;
     justify-content: flex-end;
+    transform: translateY(1px);
 
     button {
       margin-right: unit(2);
