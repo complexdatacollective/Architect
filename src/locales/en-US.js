@@ -334,15 +334,6 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.form.continue': (
-    <Fragment>
-      <h3>Add Another</h3>
-      <p>
-        When this option is enabled, your form will allow the user to create muiltiple nodes in
-        quick succession.
-      </p>
-    </Fragment>
-  ),
   'guidance.form.variables': (
     <Fragment>
       <h3>Form Variables and Input Types</h3>
