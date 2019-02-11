@@ -1,0 +1,40 @@
+.rules-preview-text {
+  &__type,
+  &__entity,
+  &__operator,
+  &__variable,
+  &__join,
+  &__copy,
+  &__value {
+    display: inline-block;
+
+    &::after {
+      content: '\00a0';
+    }
+  }
+
+  &__type {
+    color: var(--architect-rules-type);
+    font-weight: 600;
+  }
+
+  &__entity {
+    color: var(--architect-rules-type);
+    font-style: italic;
+  }
+
+  &__operator {
+    color: var(--architect-rules-assert);
+    font-style: italic;
+  }
+
+  &__variable {
+    color: var(--architect-rules-assert);
+    font-weight: 600;
+  }
+
+  &__value {
+    color: var(--architect-rules-assert);
+    font-weight: 600;
+  }
+}

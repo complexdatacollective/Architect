@@ -4,6 +4,21 @@
   "lastModified": 0,
   "networkCanvasVersion": "~4.0.0",
   "variableRegistry": {
+    "ego": {
+      "variables": {
+        "416c8c2db6093444bcff9c212a4f40ed9dd8d9d4": {
+          "name": "Age",
+          "label": "age",
+          "description": "Alter age.",
+          "type": "number",
+          "validation": {
+            "required": true,
+            "minValue": 16,
+            "maxValue": 100
+          }
+        }
+      }
+    },
     "node": {
       "d39a47507bbe27c2a7948861847f3607eda8s8j": {
         "iconVariant": "add-a-person",
@@ -485,7 +500,7 @@
                 "id": "15233783455451",
                 "options": {
                   "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-                  "attribute": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
+                  "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
                   "operator": "EXACTLY",
                   "value": "Fred"
                 }
@@ -495,7 +510,7 @@
                 "id": "15233783569462",
                 "options": {
                   "type": "32185118d94a1840ef8a0bff5914fd5a82e8b96c",
-                  "attribute": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
+                  "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
                   "operator": "NOT",
                   "value": "Pavillion"
                 }

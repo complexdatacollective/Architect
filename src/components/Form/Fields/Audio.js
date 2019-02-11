@@ -6,6 +6,7 @@ const AudioInput = props => (
   <File
     accept="audio/*"
     className="form-fields-audio"
+    type="audio"
     {...props}
   >
     { url => (

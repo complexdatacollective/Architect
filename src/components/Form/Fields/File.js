@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone';
 import { uniqueId } from 'lodash';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
-import { actionCreators as assetActions } from '../../../ducks/modules/protocol/assets';
+import { actionCreators as assetActions } from '../../../ducks/modules/protocol/assetManifest';
 
 class FileInput extends PureComponent {
   static propTypes = {
@@ -33,9 +33,10 @@ class FileInput extends PureComponent {
 
   onDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
-      this.props.importAsset(file)
-        .then(({ filename }) => {
-          this.props.input.onChange(filename);
+      const type = this.props.type || file.type;
+      this.props.importAsset(file, type)
+        .then(({ id }) => {
+          this.props.input.onChange(id);
         });
     });
   }

@@ -1,0 +1,14 @@
+.rules-rules {
+  &__join,
+  &__preview {
+    margin-top: unit(2);
+  }
+
+  &__add-new {
+    margin-top: unit(2);
+
+    button {
+      margin: 0 unit(2) 0 0;
+    }
+  }
+}

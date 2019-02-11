@@ -8,7 +8,7 @@ describe('protocol root reducer', () => {
       const initialState = reducer();
       expect(initialState).toEqual(
         {
-          externalData: {},
+          assetManifest: {},
           forms: {},
           stages: [],
           variableRegistry: {
@@ -23,7 +23,7 @@ describe('protocol root reducer', () => {
   describe('updateOptions()', () => {
     const currentProtocol = {
       name: 'foo',
-      externalData: { nodes: [{ foo: 'bar' }] },
+      assetManifest: { nodes: [{ foo: 'bar' }] },
       forms: { fooForm: { bar: 'baz' } },
       stages: [{ type: 'foobar' }],
       variableRegistry: { fooVar: { baz: 'buzz' } },
@@ -40,7 +40,7 @@ describe('protocol root reducer', () => {
       expect(newStateFromFileAction)
         .toEqual({
           name: 'bar',
-          externalData: { nodes: [{ foo: 'bar' }] },
+          assetManifest: { nodes: [{ foo: 'bar' }] },
           forms: { fooForm: { bar: 'baz' } },
           stages: [{ type: 'foobar' }],
           variableRegistry: { fooVar: { baz: 'buzz' } },

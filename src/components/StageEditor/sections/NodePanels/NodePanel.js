@@ -3,32 +3,39 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '../../../../ui/components/Fields';
 import Select from '../../../Form/Fields/Select';
-import Filter from '../../../Form/Fields/Filter';
+import { Filter, withFieldConnector, withStoreConnector } from '../../../Query';
 import ValidatedField from '../../../Form/ValidatedField';
-import { Item } from '../../../OrderedList';
+import { Item, Row } from '../../../OrderedList';
 import { getFieldId } from '../../../../utils/issues';
 
-const getDataSourceOptions = dataSources => ([
-  { value: 'existing', label: 'Current network' },
-  ...dataSources,
-]);
+const FilterField = withFieldConnector(withStoreConnector(Filter));
+
+const getDataSourceOptions = (dataSources) => {
+  const externalData = dataSources.map(dataSource => (
+    { value: dataSource, label: dataSource }
+  ));
+
+  return ([
+    { value: 'existing', label: 'Current network' },
+    ...externalData,
+  ]);
+};
 
 const NodePanel = ({ fieldId, dataSources, ...rest }) => (
   <Item {...rest}>
-    <div className="stage-editor-section-prompt__group">
-      <div className="stage-editor-section-prompt__group-title">Panel title</div>
+    <Row>
+      <h3>Panel title</h3>
       <Field
         name={`${fieldId}.title`}
         component={Fields.Text}
         placeholder="Panel title"
       />
-    </div>
-    <div className="stage-editor-section-prompt__group">
-      <div
-        className="stage-editor-section-prompt__group-title"
+    </Row>
+    <Row>
+      <h3
         id={getFieldId(`${fieldId}.dataSource`)}
         data-name="Panel data source"
-      >Data source</div>
+      >Data source</h3>
       <ValidatedField
         name={`${fieldId}.dataSource`}
         component={Select}
@@ -36,14 +43,14 @@ const NodePanel = ({ fieldId, dataSources, ...rest }) => (
         validation={{ required: true }}
         options={getDataSourceOptions(dataSources)}
       />
-    </div>
-    <div className="stage-editor-section-prompt__group">
-      <div className="stage-editor-section-prompt__group-title">Filter</div>
+    </Row>
+    <Row>
+      <h3>Filter</h3>
       <Field
         name={`${fieldId}.filter`}
-        component={Filter}
+        component={FilterField}
       />
-    </div>
+    </Row>
   </Item>
 );
 
