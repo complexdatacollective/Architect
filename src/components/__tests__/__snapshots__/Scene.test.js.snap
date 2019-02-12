@@ -46,6 +46,7 @@ ShallowWrapper {
           applyTransformOrigin={true}
           element="div"
           flipKey="start"
+          retainTransform={false}
         >
           <div
             className="scene__start"
@@ -190,6 +191,7 @@ ShallowWrapper {
           ],
           "element": "div",
           "flipKey": "start",
+          "retainTransform": false,
         },
         "ref": null,
         "rendered": Array [
@@ -363,6 +365,7 @@ ShallowWrapper {
             applyTransformOrigin={true}
             element="div"
             flipKey="start"
+            retainTransform={false}
           >
             <div
               className="scene__start"
@@ -507,6 +510,7 @@ ShallowWrapper {
             ],
             "element": "div",
             "flipKey": "start",
+            "retainTransform": false,
           },
           "ref": null,
           "rendered": Array [
@@ -720,6 +724,7 @@ ShallowWrapper {
           applyTransformOrigin={true}
           element="div"
           flipKey="foo"
+          retainTransform={false}
         >
           <div
             className="scene__start"
@@ -864,6 +869,7 @@ ShallowWrapper {
           ],
           "element": "div",
           "flipKey": "foo",
+          "retainTransform": false,
         },
         "ref": null,
         "rendered": Array [
@@ -1037,6 +1043,7 @@ ShallowWrapper {
             applyTransformOrigin={true}
             element="div"
             flipKey="foo"
+            retainTransform={false}
           >
             <div
               className="scene__start"
@@ -1181,6 +1188,7 @@ ShallowWrapper {
             ],
             "element": "div",
             "flipKey": "foo",
+            "retainTransform": false,
           },
           "ref": null,
           "rendered": Array [

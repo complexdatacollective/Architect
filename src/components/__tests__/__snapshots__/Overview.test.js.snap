@@ -63,23 +63,43 @@ ShallowWrapper {
                 />
               </div>
               <div
-                className="overview__group"
+                className="overview__group overview__group--variable-registry"
               >
                 <legend
                   className="overview__group-title"
                 >
                   Variable registry
                 </legend>
-                <br />
-                <h4>
-                  Node types
-                </h4>
-                <div />
-                <br />
-                <h4>
-                  Edge types
-                </h4>
-                <div />
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Node types
+                  </h4>
+                  <em>
+                    No node types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/node/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Edge types
+                  </h4>
+                  <em>
+                    No edge types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/edge/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
                 <div
                   className="overview__manage-button"
                 >
@@ -108,7 +128,11 @@ ShallowWrapper {
                 >
                   Forms
                 </legend>
-                <React.Fragment />
+                <React.Fragment>
+                  <em>
+                    No forms defined, yet. Create one or more node types and then create a form.
+                  </em>
+                </React.Fragment>
                 <div
                   className="overview__manage-button"
                 >
@@ -138,7 +162,7 @@ ShallowWrapper {
     "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
         "children": <div
           className="overview"
@@ -175,23 +199,43 @@ ShallowWrapper {
                 />
               </div>
               <div
-                className="overview__group"
+                className="overview__group overview__group--variable-registry"
               >
                 <legend
                   className="overview__group-title"
                 >
                   Variable registry
                 </legend>
-                <br />
-                <h4>
-                  Node types
-                </h4>
-                <div />
-                <br />
-                <h4>
-                  Edge types
-                </h4>
-                <div />
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Node types
+                  </h4>
+                  <em>
+                    No node types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/node/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Edge types
+                  </h4>
+                  <em>
+                    No edge types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/edge/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
                 <div
                   className="overview__manage-button"
                 >
@@ -220,7 +264,11 @@ ShallowWrapper {
                 >
                   Forms
                 </legend>
-                <React.Fragment />
+                <React.Fragment>
+                  <em>
+                    No forms defined, yet. Create one or more node types and then create a form.
+                  </em>
+                </React.Fragment>
                 <div
                   className="overview__manage-button"
                 >
@@ -284,23 +332,43 @@ ShallowWrapper {
                 />
               </div>
               <div
-                className="overview__group"
+                className="overview__group overview__group--variable-registry"
               >
                 <legend
                   className="overview__group-title"
                 >
                   Variable registry
                 </legend>
-                <br />
-                <h4>
-                  Node types
-                </h4>
-                <div />
-                <br />
-                <h4>
-                  Edge types
-                </h4>
-                <div />
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Node types
+                  </h4>
+                  <em>
+                    No node types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/node/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Edge types
+                  </h4>
+                  <em>
+                    No edge types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/edge/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
                 <div
                   className="overview__manage-button"
                 >
@@ -329,7 +397,11 @@ ShallowWrapper {
                 >
                   Forms
                 </legend>
-                <React.Fragment />
+                <React.Fragment>
+                  <em>
+                    No forms defined, yet. Create one or more node types and then create a form.
+                  </em>
+                </React.Fragment>
                 <div
                   className="overview__manage-button"
                 >
@@ -389,23 +461,43 @@ ShallowWrapper {
                 />
               </div>
               <div
-                className="overview__group"
+                className="overview__group overview__group--variable-registry"
               >
                 <legend
                   className="overview__group-title"
                 >
                   Variable registry
                 </legend>
-                <br />
-                <h4>
-                  Node types
-                </h4>
-                <div />
-                <br />
-                <h4>
-                  Edge types
-                </h4>
-                <div />
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Node types
+                  </h4>
+                  <em>
+                    No node types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/node/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
+                <div
+                  className="overview__group-section"
+                >
+                  <h4>
+                    Edge types
+                  </h4>
+                  <em>
+                    No edge types defined, yet. 
+                    <Connect(ProtocolLink)
+                      to="registry/edge/"
+                    >
+                      Create one?
+                    </Connect(ProtocolLink)>
+                  </em>
+                </div>
                 <div
                   className="overview__manage-button"
                 >
@@ -434,7 +526,11 @@ ShallowWrapper {
                 >
                   Forms
                 </legend>
-                <React.Fragment />
+                <React.Fragment>
+                  <em>
+                    No forms defined, yet. Create one or more node types and then create a form.
+                  </em>
+                </React.Fragment>
                 <div
                   className="overview__manage-button"
                 >
@@ -491,23 +587,43 @@ ShallowWrapper {
                   />
                 </div>,
                 <div
-                  className="overview__group"
+                  className="overview__group overview__group--variable-registry"
                 >
                   <legend
                     className="overview__group-title"
                   >
                     Variable registry
                   </legend>
-                  <br />
-                  <h4>
-                    Node types
-                  </h4>
-                  <div />
-                  <br />
-                  <h4>
-                    Edge types
-                  </h4>
-                  <div />
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Node types
+                    </h4>
+                    <em>
+                      No node types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/node/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Edge types
+                    </h4>
+                    <em>
+                      No edge types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/edge/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
                   <div
                     className="overview__manage-button"
                   >
@@ -536,7 +652,11 @@ ShallowWrapper {
                   >
                     Forms
                   </legend>
-                  <React.Fragment />
+                  <React.Fragment>
+                    <em>
+                      No forms defined, yet. Create one or more node types and then create a form.
+                    </em>
+                  </React.Fragment>
                   <div
                     className="overview__manage-button"
                   >
@@ -642,16 +762,36 @@ ShallowWrapper {
                     >
                       Variable registry
                     </legend>,
-                    <br />,
-                    <h4>
-                      Node types
-                    </h4>,
-                    <div />,
-                    <br />,
-                    <h4>
-                      Edge types
-                    </h4>,
-                    <div />,
+                    <div
+                      className="overview__group-section"
+                    >
+                      <h4>
+                        Node types
+                      </h4>
+                      <em>
+                        No node types defined, yet. 
+                        <Connect(ProtocolLink)
+                          to="registry/node/"
+                        >
+                          Create one?
+                        </Connect(ProtocolLink)>
+                      </em>
+                    </div>,
+                    <div
+                      className="overview__group-section"
+                    >
+                      <h4>
+                        Edge types
+                      </h4>
+                      <em>
+                        No edge types defined, yet. 
+                        <Connect(ProtocolLink)
+                          to="registry/edge/"
+                        >
+                          Create one?
+                        </Connect(ProtocolLink)>
+                      </em>
+                    </div>,
                     <div
                       className="overview__manage-button"
                     >
@@ -672,7 +812,7 @@ ShallowWrapper {
                       </Connect(ProtocolLink)>
                     </div>,
                   ],
-                  "className": "overview__group",
+                  "className": "overview__group overview__group--variable-registry",
                 },
                 "ref": null,
                 "rendered": Array [
@@ -692,62 +832,136 @@ ShallowWrapper {
                     "instance": null,
                     "key": undefined,
                     "nodeType": "host",
-                    "props": Object {},
-                    "ref": null,
-                    "rendered": null,
-                    "type": "br",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
                     "props": Object {
-                      "children": "Node types",
+                      "children": Array [
+                        <h4>
+                          Node types
+                        </h4>,
+                        <em>
+                          No node types defined, yet. 
+                          <Connect(ProtocolLink)
+                            to="registry/node/"
+                          >
+                            Create one?
+                          </Connect(ProtocolLink)>
+                        </em>,
+                      ],
+                      "className": "overview__group-section",
                     },
                     "ref": null,
-                    "rendered": "Node types",
-                    "type": "h4",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [],
-                    },
-                    "ref": null,
-                    "rendered": Array [],
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Node types",
+                        },
+                        "ref": null,
+                        "rendered": "Node types",
+                        "type": "h4",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            "No node types defined, yet. ",
+                            <Connect(ProtocolLink)
+                              to="registry/node/"
+                            >
+                              Create one?
+                            </Connect(ProtocolLink)>,
+                          ],
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          "No node types defined, yet. ",
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "children": "Create one?",
+                              "to": "registry/node/",
+                            },
+                            "ref": null,
+                            "rendered": "Create one?",
+                            "type": [Function],
+                          },
+                        ],
+                        "type": "em",
+                      },
+                    ],
                     "type": "div",
                   },
                   Object {
                     "instance": null,
                     "key": undefined,
                     "nodeType": "host",
-                    "props": Object {},
-                    "ref": null,
-                    "rendered": null,
-                    "type": "br",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
                     "props": Object {
-                      "children": "Edge types",
+                      "children": Array [
+                        <h4>
+                          Edge types
+                        </h4>,
+                        <em>
+                          No edge types defined, yet. 
+                          <Connect(ProtocolLink)
+                            to="registry/edge/"
+                          >
+                            Create one?
+                          </Connect(ProtocolLink)>
+                        </em>,
+                      ],
+                      "className": "overview__group-section",
                     },
                     "ref": null,
-                    "rendered": "Edge types",
-                    "type": "h4",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": Array [],
-                    },
-                    "ref": null,
-                    "rendered": Array [],
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Edge types",
+                        },
+                        "ref": null,
+                        "rendered": "Edge types",
+                        "type": "h4",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": Array [
+                            "No edge types defined, yet. ",
+                            <Connect(ProtocolLink)
+                              to="registry/edge/"
+                            >
+                              Create one?
+                            </Connect(ProtocolLink)>,
+                          ],
+                        },
+                        "ref": null,
+                        "rendered": Array [
+                          "No edge types defined, yet. ",
+                          Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "children": "Create one?",
+                              "to": "registry/edge/",
+                            },
+                            "ref": null,
+                            "rendered": "Create one?",
+                            "type": [Function],
+                          },
+                        ],
+                        "type": "em",
+                      },
+                    ],
                     "type": "div",
                   },
                   Object {
@@ -828,7 +1042,11 @@ ShallowWrapper {
                     >
                       Forms
                     </legend>,
-                    <React.Fragment />,
+                    <React.Fragment>
+                      <em>
+                        No forms defined, yet. Create one or more node types and then create a form.
+                      </em>
+                    </React.Fragment>,
                     <div
                       className="overview__manage-button"
                     >
@@ -870,10 +1088,22 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "function",
                     "props": Object {
-                      "children": Array [],
+                      "children": <em>
+                        No forms defined, yet. Create one or more node types and then create a form.
+                      </em>,
                     },
                     "ref": null,
-                    "rendered": Array [],
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "No forms defined, yet. Create one or more node types and then create a form.",
+                      },
+                      "ref": null,
+                      "rendered": "No forms defined, yet. Create one or more node types and then create a form.",
+                      "type": "em",
+                    },
                     "type": Symbol(react.fragment),
                   },
                   Object {
@@ -998,23 +1228,43 @@ ShallowWrapper {
                   />
                 </div>
                 <div
-                  className="overview__group"
+                  className="overview__group overview__group--variable-registry"
                 >
                   <legend
                     className="overview__group-title"
                   >
                     Variable registry
                   </legend>
-                  <br />
-                  <h4>
-                    Node types
-                  </h4>
-                  <div />
-                  <br />
-                  <h4>
-                    Edge types
-                  </h4>
-                  <div />
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Node types
+                    </h4>
+                    <em>
+                      No node types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/node/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Edge types
+                    </h4>
+                    <em>
+                      No edge types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/edge/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
                   <div
                     className="overview__manage-button"
                   >
@@ -1043,7 +1293,11 @@ ShallowWrapper {
                   >
                     Forms
                   </legend>
-                  <React.Fragment />
+                  <React.Fragment>
+                    <em>
+                      No forms defined, yet. Create one or more node types and then create a form.
+                    </em>
+                  </React.Fragment>
                   <div
                     className="overview__manage-button"
                   >
@@ -1073,7 +1327,7 @@ ShallowWrapper {
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "class",
+        "nodeType": "function",
         "props": Object {
           "children": <div
             className="overview"
@@ -1110,23 +1364,43 @@ ShallowWrapper {
                   />
                 </div>
                 <div
-                  className="overview__group"
+                  className="overview__group overview__group--variable-registry"
                 >
                   <legend
                     className="overview__group-title"
                   >
                     Variable registry
                   </legend>
-                  <br />
-                  <h4>
-                    Node types
-                  </h4>
-                  <div />
-                  <br />
-                  <h4>
-                    Edge types
-                  </h4>
-                  <div />
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Node types
+                    </h4>
+                    <em>
+                      No node types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/node/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Edge types
+                    </h4>
+                    <em>
+                      No edge types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/edge/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
                   <div
                     className="overview__manage-button"
                   >
@@ -1155,7 +1429,11 @@ ShallowWrapper {
                   >
                     Forms
                   </legend>
-                  <React.Fragment />
+                  <React.Fragment>
+                    <em>
+                      No forms defined, yet. Create one or more node types and then create a form.
+                    </em>
+                  </React.Fragment>
                   <div
                     className="overview__manage-button"
                   >
@@ -1219,23 +1497,43 @@ ShallowWrapper {
                   />
                 </div>
                 <div
-                  className="overview__group"
+                  className="overview__group overview__group--variable-registry"
                 >
                   <legend
                     className="overview__group-title"
                   >
                     Variable registry
                   </legend>
-                  <br />
-                  <h4>
-                    Node types
-                  </h4>
-                  <div />
-                  <br />
-                  <h4>
-                    Edge types
-                  </h4>
-                  <div />
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Node types
+                    </h4>
+                    <em>
+                      No node types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/node/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Edge types
+                    </h4>
+                    <em>
+                      No edge types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/edge/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
                   <div
                     className="overview__manage-button"
                   >
@@ -1264,7 +1562,11 @@ ShallowWrapper {
                   >
                     Forms
                   </legend>
-                  <React.Fragment />
+                  <React.Fragment>
+                    <em>
+                      No forms defined, yet. Create one or more node types and then create a form.
+                    </em>
+                  </React.Fragment>
                   <div
                     className="overview__manage-button"
                   >
@@ -1324,23 +1626,43 @@ ShallowWrapper {
                   />
                 </div>
                 <div
-                  className="overview__group"
+                  className="overview__group overview__group--variable-registry"
                 >
                   <legend
                     className="overview__group-title"
                   >
                     Variable registry
                   </legend>
-                  <br />
-                  <h4>
-                    Node types
-                  </h4>
-                  <div />
-                  <br />
-                  <h4>
-                    Edge types
-                  </h4>
-                  <div />
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Node types
+                    </h4>
+                    <em>
+                      No node types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/node/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
+                  <div
+                    className="overview__group-section"
+                  >
+                    <h4>
+                      Edge types
+                    </h4>
+                    <em>
+                      No edge types defined, yet. 
+                      <Connect(ProtocolLink)
+                        to="registry/edge/"
+                      >
+                        Create one?
+                      </Connect(ProtocolLink)>
+                    </em>
+                  </div>
                   <div
                     className="overview__manage-button"
                   >
@@ -1369,7 +1691,11 @@ ShallowWrapper {
                   >
                     Forms
                   </legend>
-                  <React.Fragment />
+                  <React.Fragment>
+                    <em>
+                      No forms defined, yet. Create one or more node types and then create a form.
+                    </em>
+                  </React.Fragment>
                   <div
                     className="overview__manage-button"
                   >
@@ -1426,23 +1752,43 @@ ShallowWrapper {
                     />
                   </div>,
                   <div
-                    className="overview__group"
+                    className="overview__group overview__group--variable-registry"
                   >
                     <legend
                       className="overview__group-title"
                     >
                       Variable registry
                     </legend>
-                    <br />
-                    <h4>
-                      Node types
-                    </h4>
-                    <div />
-                    <br />
-                    <h4>
-                      Edge types
-                    </h4>
-                    <div />
+                    <div
+                      className="overview__group-section"
+                    >
+                      <h4>
+                        Node types
+                      </h4>
+                      <em>
+                        No node types defined, yet. 
+                        <Connect(ProtocolLink)
+                          to="registry/node/"
+                        >
+                          Create one?
+                        </Connect(ProtocolLink)>
+                      </em>
+                    </div>
+                    <div
+                      className="overview__group-section"
+                    >
+                      <h4>
+                        Edge types
+                      </h4>
+                      <em>
+                        No edge types defined, yet. 
+                        <Connect(ProtocolLink)
+                          to="registry/edge/"
+                        >
+                          Create one?
+                        </Connect(ProtocolLink)>
+                      </em>
+                    </div>
                     <div
                       className="overview__manage-button"
                     >
@@ -1471,7 +1817,11 @@ ShallowWrapper {
                     >
                       Forms
                     </legend>
-                    <React.Fragment />
+                    <React.Fragment>
+                      <em>
+                        No forms defined, yet. Create one or more node types and then create a form.
+                      </em>
+                    </React.Fragment>
                     <div
                       className="overview__manage-button"
                     >
@@ -1577,16 +1927,36 @@ ShallowWrapper {
                       >
                         Variable registry
                       </legend>,
-                      <br />,
-                      <h4>
-                        Node types
-                      </h4>,
-                      <div />,
-                      <br />,
-                      <h4>
-                        Edge types
-                      </h4>,
-                      <div />,
+                      <div
+                        className="overview__group-section"
+                      >
+                        <h4>
+                          Node types
+                        </h4>
+                        <em>
+                          No node types defined, yet. 
+                          <Connect(ProtocolLink)
+                            to="registry/node/"
+                          >
+                            Create one?
+                          </Connect(ProtocolLink)>
+                        </em>
+                      </div>,
+                      <div
+                        className="overview__group-section"
+                      >
+                        <h4>
+                          Edge types
+                        </h4>
+                        <em>
+                          No edge types defined, yet. 
+                          <Connect(ProtocolLink)
+                            to="registry/edge/"
+                          >
+                            Create one?
+                          </Connect(ProtocolLink)>
+                        </em>
+                      </div>,
                       <div
                         className="overview__manage-button"
                       >
@@ -1607,7 +1977,7 @@ ShallowWrapper {
                         </Connect(ProtocolLink)>
                       </div>,
                     ],
-                    "className": "overview__group",
+                    "className": "overview__group overview__group--variable-registry",
                   },
                   "ref": null,
                   "rendered": Array [
@@ -1627,62 +1997,136 @@ ShallowWrapper {
                       "instance": null,
                       "key": undefined,
                       "nodeType": "host",
-                      "props": Object {},
-                      "ref": null,
-                      "rendered": null,
-                      "type": "br",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
                       "props": Object {
-                        "children": "Node types",
+                        "children": Array [
+                          <h4>
+                            Node types
+                          </h4>,
+                          <em>
+                            No node types defined, yet. 
+                            <Connect(ProtocolLink)
+                              to="registry/node/"
+                            >
+                              Create one?
+                            </Connect(ProtocolLink)>
+                          </em>,
+                        ],
+                        "className": "overview__group-section",
                       },
                       "ref": null,
-                      "rendered": "Node types",
-                      "type": "h4",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": Array [],
-                      },
-                      "ref": null,
-                      "rendered": Array [],
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Node types",
+                          },
+                          "ref": null,
+                          "rendered": "Node types",
+                          "type": "h4",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": Array [
+                              "No node types defined, yet. ",
+                              <Connect(ProtocolLink)
+                                to="registry/node/"
+                              >
+                                Create one?
+                              </Connect(ProtocolLink)>,
+                            ],
+                          },
+                          "ref": null,
+                          "rendered": Array [
+                            "No node types defined, yet. ",
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "class",
+                              "props": Object {
+                                "children": "Create one?",
+                                "to": "registry/node/",
+                              },
+                              "ref": null,
+                              "rendered": "Create one?",
+                              "type": [Function],
+                            },
+                          ],
+                          "type": "em",
+                        },
+                      ],
                       "type": "div",
                     },
                     Object {
                       "instance": null,
                       "key": undefined,
                       "nodeType": "host",
-                      "props": Object {},
-                      "ref": null,
-                      "rendered": null,
-                      "type": "br",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
                       "props": Object {
-                        "children": "Edge types",
+                        "children": Array [
+                          <h4>
+                            Edge types
+                          </h4>,
+                          <em>
+                            No edge types defined, yet. 
+                            <Connect(ProtocolLink)
+                              to="registry/edge/"
+                            >
+                              Create one?
+                            </Connect(ProtocolLink)>
+                          </em>,
+                        ],
+                        "className": "overview__group-section",
                       },
                       "ref": null,
-                      "rendered": "Edge types",
-                      "type": "h4",
-                    },
-                    Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": Array [],
-                      },
-                      "ref": null,
-                      "rendered": Array [],
+                      "rendered": Array [
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": "Edge types",
+                          },
+                          "ref": null,
+                          "rendered": "Edge types",
+                          "type": "h4",
+                        },
+                        Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": Array [
+                              "No edge types defined, yet. ",
+                              <Connect(ProtocolLink)
+                                to="registry/edge/"
+                              >
+                                Create one?
+                              </Connect(ProtocolLink)>,
+                            ],
+                          },
+                          "ref": null,
+                          "rendered": Array [
+                            "No edge types defined, yet. ",
+                            Object {
+                              "instance": null,
+                              "key": undefined,
+                              "nodeType": "class",
+                              "props": Object {
+                                "children": "Create one?",
+                                "to": "registry/edge/",
+                              },
+                              "ref": null,
+                              "rendered": "Create one?",
+                              "type": [Function],
+                            },
+                          ],
+                          "type": "em",
+                        },
+                      ],
                       "type": "div",
                     },
                     Object {
@@ -1763,7 +2207,11 @@ ShallowWrapper {
                       >
                         Forms
                       </legend>,
-                      <React.Fragment />,
+                      <React.Fragment>
+                        <em>
+                          No forms defined, yet. Create one or more node types and then create a form.
+                        </em>
+                      </React.Fragment>,
                       <div
                         className="overview__manage-button"
                       >
@@ -1805,10 +2253,22 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "function",
                       "props": Object {
-                        "children": Array [],
+                        "children": <em>
+                          No forms defined, yet. Create one or more node types and then create a form.
+                        </em>,
                       },
                       "ref": null,
-                      "rendered": Array [],
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "No forms defined, yet. Create one or more node types and then create a form.",
+                        },
+                        "ref": null,
+                        "rendered": "No forms defined, yet. Create one or more node types and then create a form.",
+                        "type": "em",
+                      },
                       "type": Symbol(react.fragment),
                     },
                     Object {
