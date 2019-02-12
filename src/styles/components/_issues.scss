@@ -1,9 +1,5 @@
 .issues {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  z-index: var(--z-fx);
   background-color: var(--color-sea-serpent);
   transform-origin: 0 100%;
   transform: scaleY(0);
@@ -53,6 +49,7 @@
   }
 
   &__issues {
+    @include no-scrollbars;
     margin: 0;
     padding: 0;
     list-style: none;

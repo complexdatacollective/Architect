@@ -86,33 +86,37 @@ class ViewForms extends Component {
         show={show}
         buttons={this.buttons}
       >
-        <div className="editor variable-registry">
-          <Guided className="editor__sections">
-            <h1 className="editor__heading">Form Manager</h1>
-            <p>
-              Use this screen to create, edit, and manage your forms.
-            </p>
-            <Guidance contentId="guidance.forms.index">
-              <div className="editor__section">
-                <h2>Existing Forms</h2>
-                <div className="editor__subsection">
-                  {this.renderForms()}
-                </div>
-                { protocolPath &&
-                  <div className="editor__subsection">
-                    <Link
-                      to={`${protocolPath}/form/`}
-                    >
-                      <Button>
-                        Create new Form
-                      </Button>
-                    </Link>
+        <Guided>
+          <div className="editor variable-registry">
+            <div className="editor__window">
+              <div className="editor__content">
+                <h1 className="editor__heading">Form Manager</h1>
+                <p>
+                  Use this screen to create, edit, and manage your forms.
+                </p>
+                <Guidance contentId="guidance.forms.index">
+                  <div className="editor__section">
+                    <h2>Existing Forms</h2>
+                    <div className="editor__subsection">
+                      {this.renderForms()}
+                    </div>
+                    { protocolPath &&
+                      <div className="editor__subsection">
+                        <Link
+                          to={`${protocolPath}/form/`}
+                        >
+                          <Button>
+                            Create new Form
+                          </Button>
+                        </Link>
+                      </div>
+                    }
                   </div>
-                }
+                </Guidance>
               </div>
-            </Guidance>
-          </Guided>
-        </div>
+            </div>
+          </div>
+        </Guided>
       </Card>
     );
   }

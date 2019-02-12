@@ -1,11 +1,14 @@
 import React from 'react';
-import Prompts from '../../../Prompts';
-import CategoricalBinPrompt from './CategoricalBinPrompt';
+import { withProps, compose } from 'recompose';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import { PromptPreview } from '../NameGeneratorPrompts';
+import PromptFields from './PromptFields';
 
 const CategoricalBinPrompts = props => (
   <Prompts
     contentId="guidance.editor.categorical_bin_prompts"
-    promptComponent={CategoricalBinPrompt}
+    previewComponent={PromptPreview}
+    editComponent={PromptFields}
     {...props}
   >
     <h2>Prompts</h2>
@@ -17,4 +20,7 @@ const CategoricalBinPrompts = props => (
 
 export { CategoricalBinPrompts };
 
-export default CategoricalBinPrompts;
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(CategoricalBinPrompts);

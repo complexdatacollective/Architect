@@ -6,7 +6,6 @@ import {
 } from 'redux-form';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { Guided } from '../Guided';
 import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
@@ -60,28 +59,33 @@ class StageEditor extends Component {
     } = this.props;
 
     return (
-      <ReduxForm onSubmit={handleSubmit} className={cx('stage-editor', { 'stage-editor--show-code': codeView })}>
-        <FormCodeView toggleCodeView={toggleCodeView} form={form.name} />
+      <React.Fragment>
+        <FormCodeView toggleCodeView={toggleCodeView} form={form.name} show={codeView} />
         <Guided
-          className="stage-editor__sections"
           defaultGuidance={`guidance.interface.${stage.type}`}
           form={form}
         >
-          <div className="code-button">
-            <small>
-              (<a onClick={toggleCodeView}>Show Code View</a>)
-            </small>
+          <div className="editor stage-editor" id="stage-editor-context">
+            <div className="editor__window">
+              <div className="editor__content">
+                <div className="code-button">
+                  <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+                </div>
+
+                <h1 className="editor__heading">Edit {getInterfaceName(stage.type)}</h1>
+
+                <ReduxForm onSubmit={handleSubmit}>
+                  {this.renderSections()}
+                </ReduxForm>
+              </div>
+              <Issues
+                issues={issues}
+                show={submitFailed}
+              />
+            </div>
           </div>
-          <h1 className="editor__heading">Edit {getInterfaceName(stage.type)}</h1>
-
-          {this.renderSections()}
-
-          <Issues
-            issues={issues}
-            show={submitFailed}
-          />
         </Guided>
-      </ReduxForm>
+      </React.Fragment>
     );
   }
 }

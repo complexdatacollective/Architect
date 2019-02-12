@@ -1,24 +1,32 @@
 .stage-editor {
   width: 100%;
+  height: 100%;
   position: relative;
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
 
-  &__reset {
-    cursor: pointer;
+  &__window {
+    background: var(--background);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  &.stage-editor--show-code {
-    padding-top: 30vh;
+  &__content {
+    @include no-scrollbars;
+    padding: unit(6) unit(6) unit(16);
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+  }
 
-    .code-view {
-      opacity: 1;
-      max-height: 30vh;
-      transform: scaleY(1);
-    }
-
-    .guided-guidance {
-      padding-top: calc(30vh);
-    }
+  .issues {
+    position: sticky;
+    bottom: unit(8);
+    left: 0;
   }
 }

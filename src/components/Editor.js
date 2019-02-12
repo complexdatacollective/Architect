@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { reduxForm, Form, getFormSyncErrors, hasSubmitFailed } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
-import cx from 'classnames';
 import { Guided } from './Guided';
 import { FormCodeView } from './CodeView';
 import Issues from './Issues';
@@ -18,17 +17,24 @@ const Editor = ({
   component: Component,
   ...rest
 }) => (
-  <Form
-    onSubmit={handleSubmit}
-    className={cx('editor', { 'editor--show-code': showCodeView })}
-  >
-    <FormCodeView toggleCodeView={toggleCodeView} form={form} />
+  <React.Fragment>
+    <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
     <Guided form={form}>
-      <Component form={form} toggleCodeView={toggleCodeView} {...rest} />
-
-      <Issues issues={issues} show={submitFailed} />
+      <div className="editor">
+        <div className="editor__window">
+          <div className="editor__content">
+            <Form onSubmit={handleSubmit}>
+              <Component form={form} toggleCodeView={toggleCodeView} {...rest} />
+            </Form>
+          </div>
+          <Issues
+            issues={issues}
+            show={submitFailed}
+          />
+        </div>
+      </div>
     </Guided>
-  </Form>
+  </React.Fragment>
 );
 
 Editor.propTypes = {

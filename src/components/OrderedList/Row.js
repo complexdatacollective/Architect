@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Row = ({ children }) => (
-  <div className="list-row">
+const Row = ({ children, ...rest }) => (
+  <div className="list-row" {...rest}>
     {children}
   </div>
 );

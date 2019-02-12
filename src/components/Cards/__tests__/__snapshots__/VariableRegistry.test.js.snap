@@ -45,681 +45,24 @@ ShallowWrapper {
           Back
         </Button>,
       ],
-      "children": <div
-        className="editor variable-registry"
-      >
-        <Connect(Guided)
-          className="editor__sections"
-        >
-          <h1
-            className="editor__heading"
-          >
-            Variable Registry
-          </h1>
-          <p>
-            Use this screen to create, edit, and manage your node and edge types.
-          </p>
-          <Connect(Guided)
-            contentId="guidance.registry.nodes"
-          >
-            <div
-              className="editor__section"
-            >
-              <h2>
-                Node Types
-              </h2>
-              <div
-                className="editor__subsection"
-              >
-                <div
-                  className="simple-list"
-                >
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
-                  />
-                </div>
-              </div>
-              
-            </div>
-          </Connect(Guided)>
-          <Connect(Guided)
-            contentId="guidance.registry.edges"
-          >
-            <div
-              className="editor__section"
-            >
-              <h2>
-                Edge Types
-              </h2>
-              <div
-                className="editor__subsection"
-              >
-                <div
-                  className="simple-list"
-                >
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
-                  />
-                </div>
-              </div>
-              <div
-                className="editor__subsection"
-              >
-                
-              </div>
-            </div>
-          </Connect(Guided)>
-        </Connect(Guided)>
-      </div>,
-      "onAcknowledgeError": [Function],
-      "show": true,
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": <Connect(Guided)
-          className="editor__sections"
-        >
-          <h1
-            className="editor__heading"
-          >
-            Variable Registry
-          </h1>
-          <p>
-            Use this screen to create, edit, and manage your node and edge types.
-          </p>
-          <Connect(Guided)
-            contentId="guidance.registry.nodes"
-          >
-            <div
-              className="editor__section"
-            >
-              <h2>
-                Node Types
-              </h2>
-              <div
-                className="editor__subsection"
-              >
-                <div
-                  className="simple-list"
-                >
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
-                  />
-                </div>
-              </div>
-              
-            </div>
-          </Connect(Guided)>
-          <Connect(Guided)
-            contentId="guidance.registry.edges"
-          >
-            <div
-              className="editor__section"
-            >
-              <h2>
-                Edge Types
-              </h2>
-              <div
-                className="editor__subsection"
-              >
-                <div
-                  className="simple-list"
-                >
-                  <TransitionGroup
-                    childFactory={[Function]}
-                    component="div"
-                  />
-                </div>
-              </div>
-              <div
-                className="editor__subsection"
-              >
-                
-              </div>
-            </div>
-          </Connect(Guided)>
-        </Connect(Guided)>,
-        "className": "editor variable-registry",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": Array [
-            <h1
-              className="editor__heading"
-            >
-              Variable Registry
-            </h1>,
-            <p>
-              Use this screen to create, edit, and manage your node and edge types.
-            </p>,
-            <Connect(Guided)
-              contentId="guidance.registry.nodes"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Node Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                
-              </div>
-            </Connect(Guided)>,
-            <Connect(Guided)
-              contentId="guidance.registry.edges"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Edge Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="editor__subsection"
-                >
-                  
-                </div>
-              </div>
-            </Connect(Guided)>,
-          ],
-          "className": "editor__sections",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Variable Registry",
-              "className": "editor__heading",
-            },
-            "ref": null,
-            "rendered": "Variable Registry",
-            "type": "h1",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": "Use this screen to create, edit, and manage your node and edge types.",
-            },
-            "ref": null,
-            "rendered": "Use this screen to create, edit, and manage your node and edge types.",
-            "type": "p",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <div
-                className="editor__section"
-              >
-                <h2>
-                  Node Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                
-              </div>,
-              "contentId": "guidance.registry.nodes",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h2>
-                    Node Types
-                  </h2>,
-                  <div
-                    className="editor__subsection"
-                  >
-                    <div
-                      className="simple-list"
-                    >
-                      <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />
-                    </div>
-                  </div>,
-                  "",
-                ],
-                "className": "editor__section",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Node Types",
-                  },
-                  "ref": null,
-                  "rendered": "Node Types",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <div
-                      className="simple-list"
-                    >
-                      <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />
-                    </div>,
-                    "className": "editor__subsection",
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />,
-                      "className": "simple-list",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "childFactory": [Function],
-                        "children": Array [],
-                        "component": "div",
-                      },
-                      "ref": null,
-                      "rendered": Array [],
-                      "type": [Function],
-                    },
-                    "type": "div",
-                  },
-                  "type": "div",
-                },
-                "",
-              ],
-              "type": "div",
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <div
-                className="editor__section"
-              >
-                <h2>
-                  Edge Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="editor__subsection"
-                >
-                  
-                </div>
-              </div>,
-              "contentId": "guidance.registry.edges",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h2>
-                    Edge Types
-                  </h2>,
-                  <div
-                    className="editor__subsection"
-                  >
-                    <div
-                      className="simple-list"
-                    >
-                      <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />
-                    </div>
-                  </div>,
-                  <div
-                    className="editor__subsection"
-                  >
-                    
-                  </div>,
-                ],
-                "className": "editor__section",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Edge Types",
-                  },
-                  "ref": null,
-                  "rendered": "Edge Types",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <div
-                      className="simple-list"
-                    >
-                      <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />
-                    </div>,
-                    "className": "editor__subsection",
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <TransitionGroup
-                        childFactory={[Function]}
-                        component="div"
-                      />,
-                      "className": "simple-list",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {
-                        "childFactory": [Function],
-                        "children": Array [],
-                        "component": "div",
-                      },
-                      "ref": null,
-                      "rendered": Array [],
-                      "type": [Function],
-                    },
-                    "type": "div",
-                  },
-                  "type": "div",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "",
-                    "className": "editor__subsection",
-                  },
-                  "ref": null,
-                  "rendered": "",
-                  "type": "div",
-                },
-              ],
-              "type": "div",
-            },
-            "type": [Function],
-          },
-        ],
-        "type": [Function],
-      },
-      "type": "div",
-    },
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "buttons": Array [
-          <Button
-            color="platinum"
-            content=""
-            icon=""
-            iconPosition="right"
-            onClick={[Function]}
-            size=""
-            type="button"
-          >
-            Back
-          </Button>,
-        ],
-        "children": <div
+      "children": <Connect(Guided)>
+        <div
           className="editor variable-registry"
         >
-          <Connect(Guided)
-            className="editor__sections"
+          <div
+            className="editor__window"
           >
-            <h1
-              className="editor__heading"
+            <div
+              className="editor__content"
             >
-              Variable Registry
-            </h1>
-            <p>
-              Use this screen to create, edit, and manage your node and edge types.
-            </p>
-            <Connect(Guided)
-              contentId="guidance.registry.nodes"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Node Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                
-              </div>
-            </Connect(Guided)>
-            <Connect(Guided)
-              contentId="guidance.registry.edges"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Edge Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="editor__subsection"
-                >
-                  
-                </div>
-              </div>
-            </Connect(Guided)>
-          </Connect(Guided)>
-        </div>,
-        "onAcknowledgeError": [Function],
-        "show": true,
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <Connect(Guided)
-            className="editor__sections"
-          >
-            <h1
-              className="editor__heading"
-            >
-              Variable Registry
-            </h1>
-            <p>
-              Use this screen to create, edit, and manage your node and edge types.
-            </p>
-            <Connect(Guided)
-              contentId="guidance.registry.nodes"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Node Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                
-              </div>
-            </Connect(Guided)>
-            <Connect(Guided)
-              contentId="guidance.registry.edges"
-            >
-              <div
-                className="editor__section"
-              >
-                <h2>
-                  Edge Types
-                </h2>
-                <div
-                  className="editor__subsection"
-                >
-                  <div
-                    className="simple-list"
-                  >
-                    <TransitionGroup
-                      childFactory={[Function]}
-                      component="div"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="editor__subsection"
-                >
-                  
-                </div>
-              </div>
-            </Connect(Guided)>
-          </Connect(Guided)>,
-          "className": "editor variable-registry",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
               <h1
                 className="editor__heading"
               >
                 Variable Registry
-              </h1>,
+              </h1>
               <p>
                 Use this screen to create, edit, and manage your node and edge types.
-              </p>,
+              </p>
               <Connect(Guided)
                 contentId="guidance.registry.nodes"
               >
@@ -743,7 +86,7 @@ ShallowWrapper {
                   </div>
                   
                 </div>
-              </Connect(Guided)>,
+              </Connect(Guided)>
               <Connect(Guided)
                 contentId="guidance.registry.edges"
               >
@@ -771,41 +114,41 @@ ShallowWrapper {
                     
                   </div>
                 </div>
-              </Connect(Guided)>,
-            ],
-            "className": "editor__sections",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Variable Registry",
-                "className": "editor__heading",
-              },
-              "ref": null,
-              "rendered": "Variable Registry",
-              "type": "h1",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Use this screen to create, edit, and manage your node and edge types.",
-              },
-              "ref": null,
-              "rendered": "Use this screen to create, edit, and manage your node and edge types.",
-              "type": "p",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <div
+              </Connect(Guided)>
+            </div>
+          </div>
+        </div>
+      </Connect(Guided)>,
+      "onAcknowledgeError": [Function],
+      "show": true,
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <div
+          className="editor variable-registry"
+        >
+          <div
+            className="editor__window"
+          >
+            <div
+              className="editor__content"
+            >
+              <h1
+                className="editor__heading"
+              >
+                Variable Registry
+              </h1>
+              <p>
+                Use this screen to create, edit, and manage your node and edge types.
+              </p>
+              <Connect(Guided)
+                contentId="guidance.registry.nodes"
+              >
+                <div
                   className="editor__section"
                 >
                   <h2>
@@ -824,105 +167,12 @@ ShallowWrapper {
                     </div>
                   </div>
                   
-                </div>,
-                "contentId": "guidance.registry.nodes",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <h2>
-                      Node Types
-                    </h2>,
-                    <div
-                      className="editor__subsection"
-                    >
-                      <div
-                        className="simple-list"
-                      >
-                        <TransitionGroup
-                          childFactory={[Function]}
-                          component="div"
-                        />
-                      </div>
-                    </div>,
-                    "",
-                  ],
-                  "className": "editor__section",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Node Types",
-                    },
-                    "ref": null,
-                    "rendered": "Node Types",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <div
-                        className="simple-list"
-                      >
-                        <TransitionGroup
-                          childFactory={[Function]}
-                          component="div"
-                        />
-                      </div>,
-                      "className": "editor__subsection",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": <TransitionGroup
-                          childFactory={[Function]}
-                          component="div"
-                        />,
-                        "className": "simple-list",
-                      },
-                      "ref": null,
-                      "rendered": Object {
-                        "instance": null,
-                        "key": undefined,
-                        "nodeType": "class",
-                        "props": Object {
-                          "childFactory": [Function],
-                          "children": Array [],
-                          "component": "div",
-                        },
-                        "ref": null,
-                        "rendered": Array [],
-                        "type": [Function],
-                      },
-                      "type": "div",
-                    },
-                    "type": "div",
-                  },
-                  "",
-                ],
-                "type": "div",
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <div
+                </div>
+              </Connect(Guided)>
+              <Connect(Guided)
+                contentId="guidance.registry.edges"
+              >
+                <div
                   className="editor__section"
                 >
                   <h2>
@@ -945,19 +195,184 @@ ShallowWrapper {
                   >
                     
                   </div>
-                </div>,
-                "contentId": "guidance.registry.edges",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
+                </div>
+              </Connect(Guided)>
+            </div>
+          </div>
+        </div>,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="editor__window"
+          >
+            <div
+              className="editor__content"
+            >
+              <h1
+                className="editor__heading"
+              >
+                Variable Registry
+              </h1>
+              <p>
+                Use this screen to create, edit, and manage your node and edge types.
+              </p>
+              <Connect(Guided)
+                contentId="guidance.registry.nodes"
+              >
+                <div
+                  className="editor__section"
+                >
+                  <h2>
+                    Node Types
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="simple-list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                  
+                </div>
+              </Connect(Guided)>
+              <Connect(Guided)
+                contentId="guidance.registry.edges"
+              >
+                <div
+                  className="editor__section"
+                >
+                  <h2>
+                    Edge Types
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="simple-list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="editor__subsection"
+                  >
+                    
+                  </div>
+                </div>
+              </Connect(Guided)>
+            </div>
+          </div>,
+          "className": "editor variable-registry",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="editor__content"
+            >
+              <h1
+                className="editor__heading"
+              >
+                Variable Registry
+              </h1>
+              <p>
+                Use this screen to create, edit, and manage your node and edge types.
+              </p>
+              <Connect(Guided)
+                contentId="guidance.registry.nodes"
+              >
+                <div
+                  className="editor__section"
+                >
+                  <h2>
+                    Node Types
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="simple-list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                  
+                </div>
+              </Connect(Guided)>
+              <Connect(Guided)
+                contentId="guidance.registry.edges"
+              >
+                <div
+                  className="editor__section"
+                >
+                  <h2>
+                    Edge Types
+                  </h2>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <div
+                      className="simple-list"
+                    >
+                      <TransitionGroup
+                        childFactory={[Function]}
+                        component="div"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="editor__subsection"
+                  >
+                    
+                  </div>
+                </div>
+              </Connect(Guided)>
+            </div>,
+            "className": "editor__window",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <h1
+                  className="editor__heading"
+                >
+                  Variable Registry
+                </h1>,
+                <p>
+                  Use this screen to create, edit, and manage your node and edge types.
+                </p>,
+                <Connect(Guided)
+                  contentId="guidance.registry.nodes"
+                >
+                  <div
+                    className="editor__section"
+                  >
                     <h2>
-                      Edge Types
-                    </h2>,
+                      Node Types
+                    </h2>
                     <div
                       className="editor__subsection"
                     >
@@ -969,94 +384,1009 @@ ShallowWrapper {
                           component="div"
                         />
                       </div>
-                    </div>,
+                    </div>
+                    
+                  </div>
+                </Connect(Guided)>,
+                <Connect(Guided)
+                  contentId="guidance.registry.edges"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Edge Types
+                    </h2>
                     <div
                       className="editor__subsection"
                     >
-                      
-                    </div>,
-                  ],
-                  "className": "editor__section",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Edge Types",
-                    },
-                    "ref": null,
-                    "rendered": "Edge Types",
-                    "type": "h2",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <div
+                      <div
                         className="simple-list"
                       >
                         <TransitionGroup
                           childFactory={[Function]}
                           component="div"
                         />
+                      </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      
+                    </div>
+                  </div>
+                </Connect(Guided)>,
+              ],
+              "className": "editor__content",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Variable Registry",
+                  "className": "editor__heading",
+                },
+                "ref": null,
+                "rendered": "Variable Registry",
+                "type": "h1",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Use this screen to create, edit, and manage your node and edge types.",
+                },
+                "ref": null,
+                "rendered": "Use this screen to create, edit, and manage your node and edge types.",
+                "type": "p",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Node Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    
+                  </div>,
+                  "contentId": "guidance.registry.nodes",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <h2>
+                        Node Types
+                      </h2>,
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
                       </div>,
-                      "className": "editor__subsection",
-                    },
-                    "ref": null,
-                    "rendered": Object {
+                      "",
+                    ],
+                    "className": "editor__section",
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
                       "instance": null,
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": <TransitionGroup
-                          childFactory={[Function]}
-                          component="div"
-                        />,
-                        "className": "simple-list",
+                        "children": "Node Types",
+                      },
+                      "ref": null,
+                      "rendered": "Node Types",
+                      "type": "h2",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>,
+                        "className": "editor__subsection",
                       },
                       "ref": null,
                       "rendered": Object {
                         "instance": null,
                         "key": undefined,
-                        "nodeType": "class",
+                        "nodeType": "host",
                         "props": Object {
-                          "childFactory": [Function],
-                          "children": Array [],
-                          "component": "div",
+                          "children": <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />,
+                          "className": "simple-list",
                         },
                         "ref": null,
-                        "rendered": Array [],
-                        "type": [Function],
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "childFactory": [Function],
+                            "children": Array [],
+                            "component": "div",
+                          },
+                          "ref": null,
+                          "rendered": Array [],
+                          "type": [Function],
+                        },
+                        "type": "div",
                       },
                       "type": "div",
                     },
-                    "type": "div",
+                    "",
+                  ],
+                  "type": "div",
+                },
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Edge Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      
+                    </div>
+                  </div>,
+                  "contentId": "guidance.registry.edges",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      <h2>
+                        Edge Types
+                      </h2>,
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
+                      </div>,
+                      <div
+                        className="editor__subsection"
+                      >
+                        
+                      </div>,
+                    ],
+                    "className": "editor__section",
                   },
-                  Object {
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "Edge Types",
+                      },
+                      "ref": null,
+                      "rendered": "Edge Types",
+                      "type": "h2",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>,
+                        "className": "editor__subsection",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />,
+                          "className": "simple-list",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "childFactory": [Function],
+                            "children": Array [],
+                            "component": "div",
+                          },
+                          "ref": null,
+                          "rendered": Array [],
+                          "type": [Function],
+                        },
+                        "type": "div",
+                      },
+                      "type": "div",
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": "",
+                        "className": "editor__subsection",
+                      },
+                      "ref": null,
+                      "rendered": "",
+                      "type": "div",
+                    },
+                  ],
+                  "type": "div",
+                },
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          "type": "div",
+        },
+        "type": "div",
+      },
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "buttons": Array [
+          <Button
+            color="platinum"
+            content=""
+            icon=""
+            iconPosition="right"
+            onClick={[Function]}
+            size=""
+            type="button"
+          >
+            Back
+          </Button>,
+        ],
+        "children": <Connect(Guided)>
+          <div
+            className="editor variable-registry"
+          >
+            <div
+              className="editor__window"
+            >
+              <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Variable Registry
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your node and edge types.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.registry.nodes"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Node Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    
+                  </div>
+                </Connect(Guided)>
+                <Connect(Guided)
+                  contentId="guidance.registry.edges"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Edge Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>
+            </div>
+          </div>
+        </Connect(Guided)>,
+        "onAcknowledgeError": [Function],
+        "show": true,
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <div
+            className="editor variable-registry"
+          >
+            <div
+              className="editor__window"
+            >
+              <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Variable Registry
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your node and edge types.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.registry.nodes"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Node Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    
+                  </div>
+                </Connect(Guided)>
+                <Connect(Guided)
+                  contentId="guidance.registry.edges"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Edge Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>
+            </div>
+          </div>,
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="editor__window"
+            >
+              <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Variable Registry
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your node and edge types.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.registry.nodes"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Node Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    
+                  </div>
+                </Connect(Guided)>
+                <Connect(Guided)
+                  contentId="guidance.registry.edges"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Edge Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>
+            </div>,
+            "className": "editor variable-registry",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                className="editor__content"
+              >
+                <h1
+                  className="editor__heading"
+                >
+                  Variable Registry
+                </h1>
+                <p>
+                  Use this screen to create, edit, and manage your node and edge types.
+                </p>
+                <Connect(Guided)
+                  contentId="guidance.registry.nodes"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Node Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    
+                  </div>
+                </Connect(Guided)>
+                <Connect(Guided)
+                  contentId="guidance.registry.edges"
+                >
+                  <div
+                    className="editor__section"
+                  >
+                    <h2>
+                      Edge Types
+                    </h2>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <div
+                        className="simple-list"
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          component="div"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      
+                    </div>
+                  </div>
+                </Connect(Guided)>
+              </div>,
+              "className": "editor__window",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <h1
+                    className="editor__heading"
+                  >
+                    Variable Registry
+                  </h1>,
+                  <p>
+                    Use this screen to create, edit, and manage your node and edge types.
+                  </p>,
+                  <Connect(Guided)
+                    contentId="guidance.registry.nodes"
+                  >
+                    <div
+                      className="editor__section"
+                    >
+                      <h2>
+                        Node Types
+                      </h2>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </Connect(Guided)>,
+                  <Connect(Guided)
+                    contentId="guidance.registry.edges"
+                  >
+                    <div
+                      className="editor__section"
+                    >
+                      <h2>
+                        Edge Types
+                      </h2>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="editor__subsection"
+                      >
+                        
+                      </div>
+                    </div>
+                  </Connect(Guided)>,
+                ],
+                "className": "editor__content",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Variable Registry",
+                    "className": "editor__heading",
+                  },
+                  "ref": null,
+                  "rendered": "Variable Registry",
+                  "type": "h1",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Use this screen to create, edit, and manage your node and edge types.",
+                  },
+                  "ref": null,
+                  "rendered": "Use this screen to create, edit, and manage your node and edge types.",
+                  "type": "p",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <div
+                      className="editor__section"
+                    >
+                      <h2>
+                        Node Types
+                      </h2>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
+                      </div>
+                      
+                    </div>,
+                    "contentId": "guidance.registry.nodes",
+                  },
+                  "ref": null,
+                  "rendered": Object {
                     "instance": null,
                     "key": undefined,
                     "nodeType": "host",
                     "props": Object {
-                      "children": "",
-                      "className": "editor__subsection",
+                      "children": Array [
+                        <h2>
+                          Node Types
+                        </h2>,
+                        <div
+                          className="editor__subsection"
+                        >
+                          <div
+                            className="simple-list"
+                          >
+                            <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />
+                          </div>
+                        </div>,
+                        "",
+                      ],
+                      "className": "editor__section",
                     },
                     "ref": null,
-                    "rendered": "",
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Node Types",
+                        },
+                        "ref": null,
+                        "rendered": "Node Types",
+                        "type": "h2",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <div
+                            className="simple-list"
+                          >
+                            <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />
+                          </div>,
+                          "className": "editor__subsection",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />,
+                            "className": "simple-list",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "childFactory": [Function],
+                              "children": Array [],
+                              "component": "div",
+                            },
+                            "ref": null,
+                            "rendered": Array [],
+                            "type": [Function],
+                          },
+                          "type": "div",
+                        },
+                        "type": "div",
+                      },
+                      "",
+                    ],
                     "type": "div",
                   },
-                ],
-                "type": "div",
-              },
-              "type": [Function],
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <div
+                      className="editor__section"
+                    >
+                      <h2>
+                        Edge Types
+                      </h2>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <div
+                          className="simple-list"
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            component="div"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="editor__subsection"
+                      >
+                        
+                      </div>
+                    </div>,
+                    "contentId": "guidance.registry.edges",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": Array [
+                        <h2>
+                          Edge Types
+                        </h2>,
+                        <div
+                          className="editor__subsection"
+                        >
+                          <div
+                            className="simple-list"
+                          >
+                            <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />
+                          </div>
+                        </div>,
+                        <div
+                          className="editor__subsection"
+                        >
+                          
+                        </div>,
+                      ],
+                      "className": "editor__section",
+                    },
+                    "ref": null,
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "Edge Types",
+                        },
+                        "ref": null,
+                        "rendered": "Edge Types",
+                        "type": "h2",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <div
+                            className="simple-list"
+                          >
+                            <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />
+                          </div>,
+                          "className": "editor__subsection",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "host",
+                          "props": Object {
+                            "children": <TransitionGroup
+                              childFactory={[Function]}
+                              component="div"
+                            />,
+                            "className": "simple-list",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "childFactory": [Function],
+                              "children": Array [],
+                              "component": "div",
+                            },
+                            "ref": null,
+                            "rendered": Array [],
+                            "type": [Function],
+                          },
+                          "type": "div",
+                        },
+                        "type": "div",
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": "",
+                          "className": "editor__subsection",
+                        },
+                        "ref": null,
+                        "rendered": "",
+                        "type": "div",
+                      },
+                    ],
+                    "type": "div",
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
             },
-          ],
-          "type": [Function],
+            "type": "div",
+          },
+          "type": "div",
         },
-        "type": "div",
+        "type": [Function],
       },
       "type": [Function],
     },

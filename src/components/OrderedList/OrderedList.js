@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers, defaultProps, renameProp, withProps } from 'recompose';
-import { TransitionGroup } from 'react-transition-group';
+import { compose, withHandlers, defaultProps, renameProp } from 'recompose';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { get } from 'lodash';
-import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
-import WipeTransition from '../Transitions/Wipe';
 
 const SortableItem = SortableElement(
   ({ children }) => (
@@ -24,22 +20,18 @@ const OrderedList = ({
 }) => (
   <div className="list">
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
-    <TransitionGroup className="list__items">
-      { fields.map((fieldId, index) => (
-        <WipeTransition key={get(fields.get(index), 'id', index)}>
-          <SortableItem index={index}>
-            <Item
-              fieldId={fieldId}
-              index={index}
-              fields={fields}
-              handleDelete={() => { fields.remove(index); }}
-              sortable={sortable}
-              {...rest}
-            />
-          </SortableItem>
-        </WipeTransition>
-      )) }
-    </TransitionGroup>
+    { fields.map((fieldId, index) => (
+      <SortableItem index={index} key={index}>
+        <Item
+          fieldId={fieldId}
+          index={index}
+          fields={fields}
+          handleDelete={() => { fields.remove(index); }}
+          sortable={sortable}
+          {...rest}
+        />
+      </SortableItem>
+    )) }
   </div>
 );
 
@@ -67,8 +59,5 @@ export default compose(
   withHandlers({
     onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
-  withProps(() => ({
-    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-  })),
   SortableContainer,
 )(OrderedList);

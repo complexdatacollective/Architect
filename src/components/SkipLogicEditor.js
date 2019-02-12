@@ -24,6 +24,7 @@ class SkipLogicEditor extends PureComponent {
     } = this.props;
 
     return (
+
       <Guided
         className="edit-skip-logic"
         defaultGuidance="guidance.skipLogicEditor"

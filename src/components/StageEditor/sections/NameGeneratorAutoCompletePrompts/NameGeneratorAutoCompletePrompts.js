@@ -1,11 +1,14 @@
 import React from 'react';
-import Prompts from '../../../Prompts';
-import NameGeneratorPrompt from './NameGeneratorAutoCompletePrompt';
+import { withProps, compose } from 'recompose';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import { PromptPreview } from '../NameGeneratorPrompts';
+import PromptFields from './PromptFields';
 
 const NameGeneratorAutoCompletePrompts = props => (
   <Prompts
     contentId="guidance.editor.name_generator_auto_complete_prompts"
-    promptComponent={NameGeneratorPrompt}
+    editComponent={PromptFields}
+    previewComponent={PromptPreview}
     {...props}
   >
     <h2>Prompts</h2>
@@ -18,4 +21,7 @@ const NameGeneratorAutoCompletePrompts = props => (
 
 export { NameGeneratorAutoCompletePrompts };
 
-export default NameGeneratorAutoCompletePrompts;
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(NameGeneratorAutoCompletePrompts);

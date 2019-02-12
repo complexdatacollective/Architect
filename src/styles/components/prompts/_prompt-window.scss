@@ -1,0 +1,16 @@
+.prompts-prompt-window {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: unit(4) unit(4) unit(12);
+  color: var(--architect-text);
+  display: flex;
+  background-color: var(--modal-overlay);
+
+  @supports (backdrop-filter: blur(.75rem)) {
+    background: var(--modal-overlay);
+    backdrop-filter: blur(.75rem);
+  }
+}

@@ -1,11 +1,14 @@
 import React from 'react';
-import Prompts from '../../../Prompts';
-import OrdinalBinPrompt from './OrdinalBinPrompt';
+import { withProps, compose } from 'recompose';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import { PromptPreview } from '../NameGeneratorPrompts';
+import PromptFields from './PromptFields';
 
 const OrdinalBinPrompts = props => (
   <Prompts
     contentId="guidance.editor.ordinal_bin_prompts"
-    promptComponent={OrdinalBinPrompt}
+    previewComponent={PromptPreview}
+    editComponent={PromptFields}
     template={{ color: 'ord-color-seq-1' }}
     {...props}
   >
@@ -18,4 +21,7 @@ const OrdinalBinPrompts = props => (
 
 export { OrdinalBinPrompts };
 
-export default OrdinalBinPrompts;
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(OrdinalBinPrompts);
