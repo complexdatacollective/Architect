@@ -17,10 +17,8 @@ class Overview extends Component {
     const nodeTypes = get(this.props.variableRegistry, 'node', {});
     if (size(nodeTypes) === 0) {
       return (
-        <React.Fragment>
-          <em>No node types defined, yet. <ProtocolLink to={`registry/node/`}>Create one?</ProtocolLink></em>
-        </React.Fragment>
-      )
+        <em>No node types defined, yet. <ProtocolLink to="registry/node/">Create one?</ProtocolLink></em>
+      );
     }
 
     return map(
@@ -38,10 +36,8 @@ class Overview extends Component {
 
     if (size(edgeTypes) === 0) {
       return (
-        <React.Fragment>
-          <em>No edge types defined, yet. <ProtocolLink to={`registry/edge/`}>Create one?</ProtocolLink></em>
-        </React.Fragment>
-      )
+        <em>No edge types defined, yet. <ProtocolLink to="registry/edge/">Create one?</ProtocolLink></em>
+      );
     }
 
     return map(
@@ -66,17 +62,13 @@ class Overview extends Component {
         <React.Fragment>
           <em>No forms defined, yet. Create one or more node types and then create a form.</em>
         </React.Fragment>
-      )
+      );
     }
-
-
 
     if (size(forms) === 0) {
       return (
-        <React.Fragment>
-          <em>No forms defined, yet. <ProtocolLink to={`form/`}>Create one?</ProtocolLink></em>
-        </React.Fragment>
-      )
+        <em>No forms defined, yet. <ProtocolLink to="form/">Create one?</ProtocolLink></em>
+      );
     }
 
     return (
