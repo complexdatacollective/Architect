@@ -35,11 +35,13 @@ const AssetBrowser = ({
         >
           <div className="asset-browser">
             <div className="asset-browser__create">
-              <p>Create an asset</p>
-              <NewAsset onCreate={onSelect} />
+              <NewAsset
+                onCreate={onSelect}
+                type={type}
+              />
             </div>
             <div className="asset-browser__assets">
-              <p>Please select an asset</p>
+              <h3>Choose asset from library</h3>
               <Assets
                 onSelect={onSelect}
                 type={type}

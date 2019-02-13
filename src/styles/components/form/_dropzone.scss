@@ -1,55 +1,66 @@
 .form-dropzone {
   @include preset('copy-standard');
   cursor: pointer;
-  color: var(--color-white);
-  background: var(--color-cyber-grape);
   position: relative;
+  border-radius: unit(2);
+  height: unit(12);
+  border-width: 2px;
+  border-style: solid;
+  transition-duration: var(--animation-duration-fast);
+  transition-timing-function: var(--animation-easing);
+  transition-property: border-color;
+  border-color: transparent;
+  background-color: var(--background-dark);
+  overflow: hidden;
+  position: relative;
+  padding: unit(4);
   display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &__preview {
-    min-height: 150px;
+  &__container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    background-color: transparent;
+    transition-duration: var(--animation-duration-fast);
+    transition-timing-function: var(--animation-easing);
+    transition-property: filter, background-color;
+  }
+
+  &__label {
+    color: var(--color-white);
+    transition-duration: var(--animation-duration-standard);
+    transition-timing-function: var(--animation-easing);
+    transition-property: filter;
+    line-height: unit(2);
   }
 
   &__link {
-    display: inline;
-    transform: translateY(2px);
-    border-bottom: 2px solid var(--color-sea-green);
+    display: inline-block;
+    border-bottom: 2px solid var(--notice);
     line-height: unit(2);
+    cursor: pointer;
   }
 
-  &__message {
-    background: var(--color-navy-taupe);
-    padding: unit(1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    line-height: unit(2);
-    width: 100%;
-    min-height: 75px;
-  }
-
-  &--replace {
-    .form-dropzone__message {
-      z-index: 1000;
-      top: 0;
-      position: absolute !important; // sass-lint:disable-line no-important
-      border-bottom: unit(.2) solid var(--color-sea-green);
-      transform: translateY(-100%);
-      opacity: 0;
-      transition-property: transform, opacity;
-      transition-duration: var(--animation-duration-standard);
-      transition-timing-function: var(--animation-easing);
+  &--active {
+    .form-dropzone__label {
+      filter: blur(5px);
     }
+  }
 
-    &:hover {
-      .form-dropzone__message {
-        transform: translateY(0);
-        opacity: 1;
-      }
+  &--accept {
+    border-color: var(--notice);
+  }
+
+  &--reject {
+    border-color: var(--error);
+
+    .form-dropzone__container {
+      background-color: var(--error);
+      filter: brightness(0.3);
     }
   }
 }

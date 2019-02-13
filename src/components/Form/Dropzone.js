@@ -32,8 +32,11 @@ const Dropzone = ({
             },
           )}
         >
+          <div className="form-dropzone__container" />
+          <div className="form-dropzone__label">
+            Drop a file here or&nbsp;<div className="form-dropzone__link">click to browse</div>
+          </div>
           <input {...getInputProps()} />
-          Drop file here or click to choose file.
         </div>
       )
     }
