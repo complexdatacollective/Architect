@@ -2,26 +2,24 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import cx from 'classnames';
-import { fieldPropTypes } from 'redux-form';
 import AssetBrowser from '../../AssetBrowser';
 import Button from '../../../ui/components/Button';
 
 class FileInput extends PureComponent {
   static propTypes = {
-    importAsset: PropTypes.func.isRequired,
-    accept: PropTypes.string,
     children: PropTypes.func,
+    onChange: PropTypes.func,
+    type: PropTypes.string,
     label: PropTypes.string,
     className: PropTypes.string,
-    ...fieldPropTypes,
   };
 
   static defaultProps = {
     value: '',
-    meta: { invalid: false, error: null, touched: false },
-    accept: '',
     label: '',
     className: '',
+    onChange: () => {},
+    type: null,
     children: value => value,
   };
 
@@ -58,7 +56,6 @@ class FileInput extends PureComponent {
   render() {
     const {
       input: { value },
-      meta: { touched, invalid, error },
       label,
       type,
       className,
@@ -71,7 +68,6 @@ class FileInput extends PureComponent {
       className,
       'form-field-container',
       {
-        'form-fields-mode--has-error': touched && invalid,
         'form-fields-file--replace': !!value,
       },
     );
@@ -84,13 +80,14 @@ class FileInput extends PureComponent {
         <div className="form-fields-file__preview">
           {this.props.children(value)}
         </div>
-        <Button
-          onClick={this.handleBrowseLibrary}
-          color="paradise-pink"
-        >
-          { !value ? 'Select asset' : 'Update asset' }
-        </Button>
-        { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
+        <div className="form-fields-file__browse">
+          <Button
+            onClick={this.handleBrowseLibrary}
+            color="paradise-pink"
+          >
+            { !value ? 'Select asset' : 'Update asset' }
+          </Button>
+        </div>
         <AssetBrowser
           show={assetBrowser}
           type={type}

@@ -1,8 +1,16 @@
 .asset-browser {
-  @include no-scrollbars;
-  max-width: 90vw;
-  min-width: 75vw;
-  max-height: 50vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: 75vh;
+
+  &__create {
+    flex: 0 0 150px;
+  }
+
+  &__assets {
+    @include no-scrollbars;
+    width: 75vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }

@@ -10,16 +10,13 @@
     display: none;
   }
 
+  &__browse {
+    margin: unit(2) 0 0;
+  }
+
   &--replace {
     .form-fields-file__preview {
       display: block;
-    }
-  }
-
-  &--has-error {
-    .form-fields-file__error {
-      opacity: 1;
-      max-height: 50px;
     }
   }
 }
