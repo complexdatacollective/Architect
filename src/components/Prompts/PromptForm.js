@@ -14,7 +14,7 @@ const formOptions = {
 
 const PromptForm = ({
   children,
-  handleSubmit,
+  handleSubmit, // redux form wraps `onSubmit` and passes this prop in it's place
   onCancel,
   flipId,
 }) => (
@@ -28,7 +28,7 @@ const PromptForm = ({
           </div>
         </form>
         <div className="prompts-prompt-form__controls">
-          <Button type="submit">Save and continue</Button>
+          <Button onClick={handleSubmit} type="submit">Save and continue</Button>
           <Button onClick={onCancel} color="platinum">Cancel</Button>
         </div>
       </div>
@@ -47,6 +47,8 @@ PromptForm.defaultProps = {
   children: null,
   flipId: null,
 };
+
+export { PromptForm };
 
 export default compose(
   reduxForm(formOptions),
