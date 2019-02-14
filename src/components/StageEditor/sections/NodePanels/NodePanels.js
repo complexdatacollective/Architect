@@ -8,10 +8,9 @@ import cx from 'classnames';
 import { has } from 'lodash';
 import Guidance from '../../../Guidance';
 import OrderedList, { NewButton } from '../../../OrderedList';
-import { getNetworkOptions } from '../NameGeneratorListPrompts/selectors';
 import NodePanel from './NodePanel';
 
-const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => {
+const NodePanels = ({ form, createNewPanel, disabled, panels }) => {
   const isFull = panels && panels.length === 2;
 
   return (
@@ -25,7 +24,6 @@ const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => 
             component={OrderedList}
             item={NodePanel}
             form={form}
-            dataSources={dataSources}
           />
 
           { !isFull &&
@@ -41,7 +39,6 @@ const NodePanels = ({ form, createNewPanel, dataSources, disabled, panels }) => 
 
 NodePanels.propTypes = {
   createNewPanel: PropTypes.func.isRequired,
-  dataSources: PropTypes.array.isRequired,
   disabled: PropTypes.bool,
   panels: PropTypes.array,
   form: PropTypes.shape({
@@ -57,7 +54,6 @@ NodePanels.defaultProps = {
 
 const mapStateToProps = (state, props) => ({
   disabled: !has(props.form.getValues(state, 'subject'), 'type'),
-  dataSources: getNetworkOptions(state),
   panels: props.form.getValues(state, 'panels'),
 });
 

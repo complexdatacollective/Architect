@@ -60,7 +60,6 @@ class PromptFields extends PureComponent {
           <ValidatedField
             component={DataSource}
             name="dataSource"
-            id="dataSource"
             validation={{ required: true }}
           />
         </Row>
