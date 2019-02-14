@@ -2,12 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Assets from '../Assets';
 
-// TODO: we need a component for this?
-// eslint-disable-next-line
-const NetworkAsset = ({ url }) => (
-  <div>{url}</div>
-);
-
 const FallBackAssetComponent = () => (
   <div>No suitable component found.</div>
 );
@@ -16,7 +10,7 @@ const ASSET_COMPONENTS = {
   image: Assets.Image,
   video: Assets.Video,
   audio: Assets.Audio,
-  network: NetworkAsset,
+  network: Assets.Network,
 };
 
 const Asset = ({
@@ -35,7 +29,6 @@ const Asset = ({
       <div className="asset-browser-asset__preview">
         <PreviewComponent id={id} />
       </div>
-      <div className="asset-browser-asset__name">{name}</div>
     </div>
   );
 };

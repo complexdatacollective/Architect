@@ -4,6 +4,7 @@ import uuid from 'uuid';
 import cx from 'classnames';
 import AssetBrowser from '../../AssetBrowser';
 import Button from '../../../ui/components/Button';
+import Icon from '../../../ui/components/Icon';
 
 class FileInput extends PureComponent {
   static propTypes = {
@@ -12,6 +13,8 @@ class FileInput extends PureComponent {
     type: PropTypes.string,
     label: PropTypes.string,
     className: PropTypes.string,
+    meta: PropTypes.object.isRequired,
+    input: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -56,6 +59,7 @@ class FileInput extends PureComponent {
   render() {
     const {
       input: { value },
+      meta: { error, invalid, touched },
       label,
       type,
       className,
@@ -88,6 +92,7 @@ class FileInput extends PureComponent {
             { !value ? 'Select asset' : 'Update asset' }
           </Button>
         </div>
+        {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div>}
         <AssetBrowser
           show={assetBrowser}
           type={type}
