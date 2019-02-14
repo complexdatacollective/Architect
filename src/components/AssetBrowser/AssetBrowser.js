@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import window from '../../ui/components/window';
 import Button from '../../ui/components/Button';
-import BasicDialog from '../../ui/components/Dialog/Basic';
+import SimpleDialog from '../../ui/components/Dialog/Simple';
 import Stackable from '../../components/Stackable';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
@@ -26,7 +26,7 @@ const AssetBrowser = ({
   return (
     <Stackable stackKey={show}>
       {({ stackIndex }) => (
-        <BasicDialog
+        <SimpleDialog
           show={show}
           onBlur={onCancel}
           zIndex={stackIndex + 10000}
@@ -48,7 +48,7 @@ const AssetBrowser = ({
               />
             </div>
           </div>
-        </BasicDialog>
+        </SimpleDialog>
       )}
     </Stackable>
   );
