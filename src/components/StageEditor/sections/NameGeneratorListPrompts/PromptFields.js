@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 import { getFieldId } from '../../../../utils/issues';
 import { ValidatedField } from '../../../Form';
 import { TextArea, Text, Checkbox } from '../../../../ui/components/Fields';
+import DataSource from '../../../Form/Fields/DataSource';
 import Select from '../../../Form/Fields/Select';
 import MultiSelect from '../../../Form/MultiSelect';
 import AttributesTable from '../../../AttributesTable';
@@ -14,14 +15,12 @@ import {
   getSortOrderOptionGetter,
 } from './optionGetters';
 import withFieldValues from './withFieldValues';
-import withDataSourceOptions from './withDataSourceOptions';
 import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
 
 class PromptFields extends PureComponent {
   render() {
     const {
       nodeType,
-      dataSources,
       dataSource,
       cardOptions,
       externalDataPropertyOptions,
@@ -59,10 +58,9 @@ class PromptFields extends PureComponent {
           <h3>External data-source for roster</h3>
           <p>This prompt needs a source of nodes to populate the roster.</p>
           <ValidatedField
-            component={Select}
+            component={DataSource}
             name="dataSource"
             id="dataSource"
-            options={dataSources}
             validation={{ required: true }}
           />
         </Row>
@@ -195,6 +193,5 @@ export { PromptFields };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
-  withDataSourceOptions,
   withDisplayLabelChangeHandler,
 )(PromptFields);
