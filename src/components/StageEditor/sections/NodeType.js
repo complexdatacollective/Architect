@@ -28,8 +28,8 @@ class NodeType extends Component {
   handleResetStage = () => {
     this.props.openDialog({
       type: 'Confirm',
-      title: 'Reset node type',
-      message: 'First you will need to reset the rest of the stage, are you sure?',
+      title: 'Change node type for this stage',
+      message: 'You attemped to change the node type of a stage that you have already configured. Before you can procede the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?',
       onConfirm: this.resetStage,
       confirmLabel: 'Continue',
     });

@@ -8,9 +8,7 @@
 
   &__error {
     opacity: 0;
-    max-height: 0;
-    color: var(--error);
-    margin: unit(1) 0 0;
+    color: var(--form-error-text);
     transition: opacity var(--animation-easing) var(--animation-duration-standard),
     max-height var(--animation-easing) var(--animation-duration-standard);
   }

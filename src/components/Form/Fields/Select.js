@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import ReactSelect, { components as ReactSelectComponents } from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import Icon from '../../../ui/components/Icon';
 
 const { Option } = ReactSelectComponents;
 
@@ -70,8 +71,11 @@ class Select extends PureComponent {
     } = this.props;
 
     const componentClasses = cx(
-      'form-fields-select',
       className,
+      'form-fields-select',
+      {
+        'form-fields-select--has-error': invalid && touched && error,
+      },
     );
 
     return (
@@ -99,7 +103,7 @@ class Select extends PureComponent {
         >
           {children}
         </ReactSelect>
-        {touched && invalid && <p className="form-fields-select__error">{error}</p>}
+        {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
       </div>
     );
   }
