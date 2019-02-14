@@ -2,7 +2,7 @@ import React from 'react';
 import { fieldPropTypes } from 'redux-form';
 import File from './File';
 
-const NetworkFile = props => (
+const DataSource = props => (
   <File
     type="network"
     {...props}
@@ -15,8 +15,8 @@ const NetworkFile = props => (
   </File>
 );
 
-NetworkFile.propTypes = {
+DataSource.propTypes = {
   ...fieldPropTypes,
 };
 
-export default NetworkFile;
+export default DataSource;
