@@ -640,14 +640,19 @@
       "id": "sociogram",
       "type": "Sociogram",
       "label": "Sociogram",
+      "subject": {
+        "entity": "node",
+        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
+      },
+      "background": {
+        "image": "rubberduck.jpg",
+        "concentricCircles": 4,
+        "skewedTowardCenter": true
+      },
       "prompts": [
         {
           "id": "closeness1",
           "text": "Position the nodes amongst the concentric circles. Place people you are closer to towards the middle",
-          "subject": {
-            "entity": "node",
-            "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
-          },
           "layout": {
             "layoutVariable": "1d84d7782a65d41d727f7c71fcb38b6aea633a80",
             "allowPositioning": true
@@ -663,20 +668,11 @@
           },
           "nodeBinSortOrder": {
             "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "DESC"
-          },
-          "background": {
-            "image": "rubberduck.jpg",
-            "concentricCircles": 4,
-            "skewedTowardCenter": true
           }
         },
         {
           "id": "closeness2",
           "text": "Place people you are closer to towards the middle",
-          "subject": {
-            "entity": "node",
-            "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
-          },
           "layout": {
             "layoutVariable": "1d84d7782a65d41d727f7c71fcb38b6aea633a80",
             "allowPositioning": true
@@ -692,11 +688,6 @@
           },
           "nodeBinSortOrder": {
             "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "DESC"
-          },
-          "background": {
-            "image": "rubberduck.jpg",
-            "concentricCircles": 4,
-            "skewedTowardCenter": true
           }
         }
       ]

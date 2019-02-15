@@ -1,7 +1,8 @@
 import React from 'react';
+import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
-import Prompts from '../../../Prompts';
+import Prompts, { withSubjectNodeType } from '../../../Prompts';
 
 const SociogramPrompts = props => (
   <Prompts
@@ -16,4 +17,9 @@ const SociogramPrompts = props => (
   </Prompts>
 );
 
-export default SociogramPrompts;
+export { SociogramPrompts };
+
+export default compose(
+  withSubjectNodeType,
+  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+)(SociogramPrompts);

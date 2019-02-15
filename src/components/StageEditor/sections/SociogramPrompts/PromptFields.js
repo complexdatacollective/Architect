@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -9,7 +9,6 @@ import {
   formValueSelector,
 } from 'redux-form';
 import { get, toPairs, isEmpty, map } from 'lodash';
-import { getNodeTypes } from '../../../../selectors/variableRegistry';
 import { getFieldId } from '../../../../utils/issues';
 import Guidance from '../../../Guidance';
 import { ValidatedField } from '../../../Form';
@@ -18,7 +17,6 @@ import * as Fields from '../../../../ui/components/Fields';
 import { Row, Group } from '../../../OrderedList';
 
 // Background options
-const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
 const CONCENTRIC_CIRCLES = 'BACKGROUND/CONCENTRIC_CIRCLES';
 
 // On node click options
@@ -27,13 +25,9 @@ const CREATE_EDGE = 'CLICK/CREATE_EDGE';
 
 const disableBlur = event => event.preventDefault();
 
-const hasSubject = value =>
-  (get(value, 'type') && get(value, 'entity') ? undefined : 'Required');
-
 class PromptFields extends Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
-    nodeTypes: PropTypes.array.isRequired,
     edgeTypes: PropTypes.array.isRequired,
     layoutsForNodeType: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.object.isRequired,
@@ -60,10 +54,6 @@ class PromptFields extends Component {
     return this.props.isInvalid && this.props.hasSubmitFailed;
   }
 
-  handleChooseBackgroundType = (option) => {
-    this.setState({ backgroundType: option });
-  }
-
   handleHighlightOrCreateEdge = (type) => {
     switch (type) {
       case HIGHLIGHT:
@@ -83,9 +73,7 @@ class PromptFields extends Component {
   }
 
   render() {
-    const { backgroundType } = this.state;
     const {
-      nodeTypes,
       edgeTypes,
       variablesForNodeType,
       layoutsForNodeType,
@@ -109,98 +97,6 @@ class PromptFields extends Component {
               validation={{ required: true }}
             />
           </Row>
-        </Guidance>
-        <Group>
-          <Guidance contentId="guidance.editor.sociogram_prompt.nodes">
-            <Row>
-              <h3 id={getFieldId('subject')}>Nodes</h3>
-              <p>
-                Select the type of node to be displayed on this prompt.
-              </p>
-              <ValidatedField
-                name="subject"
-                component={ArchitectFields.NodeSelect}
-                className="stage-editor-section-prompt__setting"
-                parse={value => ({ type: value, entity: 'node' })}
-                format={value => get(value, 'type')}
-                options={nodeTypes}
-                label=""
-                validation={{ hasSubject }}
-              />
-            </Row>
-          </Guidance>
-          <Guidance contentId="guidance.editor.sociogram_prompt.sortOrder">
-            <Row>
-              <p>
-                If you wish to customise the order that nodes are displayed in the bin before they
-                are positioned, create one or more sorting rules below.
-              </p>
-              <Field
-                name="sortOrder"
-                component={ArchitectFields.OrderBy}
-                className="stage-editor-section-prompt__setting"
-                variables={variablesForNodeType}
-                label="Node bin sorting rules:"
-              />
-            </Row>
-          </Guidance>
-        </Group>
-        <Guidance contentId="guidance.editor.sociogram_prompt.background">
-          <Group>
-            <Row>
-              <h3>Background</h3>
-              <p>
-                This section determines the graphical background for this prompt. You can choose
-                between a conventional series of concentric circles, or provide your own
-                background image.
-              </p>
-            </Row>
-            <Row>
-              <ArchitectFields.Mode
-                label="Choose a background type"
-                options={[
-                  { value: CONCENTRIC_CIRCLES, label: 'Circles' },
-                  { value: BACKGROUND_IMAGE, label: 'Image' },
-                ]}
-                input={{
-                  value: backgroundType,
-                  onChange: this.handleChooseBackgroundType,
-                }}
-              />
-            </Row>
-            { (backgroundType === CONCENTRIC_CIRCLES) &&
-              <Fragment>
-                <Row>
-                  <Field
-                    name="background.concentricCircles"
-                    component={Fields.Text}
-                    label="Number of concentric circles to use:"
-                    type="number"
-                    placeholder="3"
-                    normalize={value => parseInt(value, 10)}
-                  />
-                </Row>
-                <Row>
-                  <Field
-                    name="background.skewedTowardCenter"
-                    component={Fields.Checkbox}
-                    label="Skew the size of the circles so that the middle is proportionally larger."
-                  />
-                </Row>
-              </Fragment>
-            }
-            { (backgroundType === BACKGROUND_IMAGE) &&
-              <Row>
-                <div style={{ position: 'relative', minHeight: '100px' }}>
-                  <Field
-                    name="background.image"
-                    component={ArchitectFields.Image}
-                    label="Background image"
-                  />
-                </div>
-              </Row>
-            }
-          </Group>
         </Guidance>
         <Guidance contentId="guidance.editor.sociogram_prompt.layout">
           <Group>
@@ -234,7 +130,23 @@ class PromptFields extends Component {
             </Row>
           </Group>
         </Guidance>
-
+        <Group>
+          <Guidance contentId="guidance.editor.sociogram_prompt.sortOrder">
+            <Row>
+              <p>
+                If you wish to customise the order that nodes are displayed in the bin before they
+                are positioned, create one or more sorting rules below.
+              </p>
+              <Field
+                name="sortOrder"
+                component={ArchitectFields.OrderBy}
+                className="stage-editor-section-prompt__setting"
+                variables={variablesForNodeType}
+                label="Node bin sorting rules:"
+              />
+            </Row>
+          </Guidance>
+        </Group>
         <Guidance contentId="guidance.editor.sociogram_prompt.attributes">
           <Group>
             <Row>
@@ -324,7 +236,7 @@ const mapAsOptions = keyValueObject =>
   );
 
 const mapStateToProps = (state, props) => {
-  const nodeType = get(formValueSelector(props.form.name)(state, props.fieldId), 'subject.type');
+  const nodeType = get(formValueSelector(props.form.name)(state, 'subject'), 'type');
   const variables = getVariablesForNodeType(state, nodeType);
   const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
   const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
@@ -336,7 +248,6 @@ const mapStateToProps = (state, props) => {
     variablesForNodeType: variables,
     isInvalid: isFieldInvalid(state, props.fieldId),
     hasSubmitFailed: hasSubmitFailed(props.form.name)(state),
-    nodeTypes: mapAsOptions(getNodeTypes(state)),
     edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),
   };
 };
