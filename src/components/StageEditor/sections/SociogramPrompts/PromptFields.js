@@ -236,7 +236,7 @@ const mapAsOptions = keyValueObject =>
   );
 
 const mapStateToProps = (state, props) => {
-  const nodeType = get(formValueSelector('edit-stage')(state, 'subject'), 'type');
+  const nodeType = get(formValueSelector(props.form.name)(state, 'subject'), 'type');
   const variables = getVariablesForNodeType(state, nodeType);
   const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
   const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
