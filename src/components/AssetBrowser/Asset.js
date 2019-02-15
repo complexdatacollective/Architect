@@ -15,7 +15,6 @@ const ASSET_COMPONENTS = {
 
 const Asset = ({
   id,
-  name,
   onClick,
   type,
 }) => {
@@ -35,7 +34,6 @@ const Asset = ({
 
 Asset.propTypes = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };

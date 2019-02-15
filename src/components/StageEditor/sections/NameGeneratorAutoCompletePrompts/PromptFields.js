@@ -163,7 +163,6 @@ PromptFields.propTypes = {
     getValues: PropTypes.func,
   }).isRequired,
   nodeType: PropTypes.string,
-  dataSources: PropTypes.array,
   dataSource: PropTypes.string,
   cardOptions: PropTypes.object,
   handleChangeDisplayLabel: PropTypes.func.isRequired,
@@ -172,7 +171,6 @@ PromptFields.propTypes = {
 
 PromptFields.defaultProps = {
   nodeType: null,
-  dataSources: [],
   dataSource: null,
   cardOptions: {},
   externalDataPropertyOptions: [],

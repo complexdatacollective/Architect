@@ -12,7 +12,6 @@
   border-color: transparent;
   background-color: var(--background-dark);
   overflow: hidden;
-  position: relative;
   padding: unit(4);
   display: flex;
   align-items: center;
@@ -60,7 +59,7 @@
 
     .form-dropzone__container {
       background-color: var(--error);
-      filter: brightness(0.3);
+      filter: brightness(.3);
     }
   }
 }
