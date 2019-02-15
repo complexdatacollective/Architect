@@ -173,7 +173,6 @@ class PromptFields extends PureComponent {
 
 PromptFields.propTypes = {
   nodeType: PropTypes.string,
-  dataSources: PropTypes.array,
   externalDataPropertyOptions: PropTypes.array,
   handleChangeDisplayLabel: PropTypes.func.isRequired,
   dataSource: PropTypes.string,
@@ -182,7 +181,6 @@ PromptFields.propTypes = {
 
 PromptFields.defaultProps = {
   nodeType: null,
-  dataSources: [],
   dataSource: null,
   cardOptions: {},
   externalDataPropertyOptions: [],
