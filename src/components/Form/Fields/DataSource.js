@@ -13,7 +13,7 @@ class DataSource extends Component {
 
   render() {
     const {
-      useExisting,
+      canUseExisting,
       input,
     } = this.props;
 
@@ -24,7 +24,7 @@ class DataSource extends Component {
 
     return (
       <div>
-        { useExisting &&
+        { canUseExisting &&
           <Checkbox
             label="Use network from interview"
             input={checkboxInput}
@@ -44,11 +44,11 @@ class DataSource extends Component {
 
 DataSource.propTypes = {
   ...fieldPropTypes,
-  useExisting: PropTypes.bool,
+  canUseExisting: PropTypes.bool,
 };
 
 DataSource.defaultProps = {
-  useExisting: true,
+  canUseExisting: false,
 };
 
 export default DataSource;
