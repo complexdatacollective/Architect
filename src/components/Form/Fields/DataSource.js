@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withState } from 'recompose';
+import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
 import Radio from '../../../ui/components/Fields/Radio';
 import NetworkAsset from '../../Assets/Network';
@@ -31,17 +32,18 @@ class DataSource extends Component {
       input,
     } = this.props;
 
+    const isInterviewNetwork = input.value === 'existing';
+    const showNetworkAssetInput = selectNetworkAsset || !isInterviewNetwork;
+
     const existingInput = {
-      value: input.value === 'existing',
+      value: input.value && isInterviewNetwork,
       onChange: this.handleClickUseExisting,
     };
 
     const networkAssetInput = {
-      value: input.value !== 'existing',
+      value: input.value && !isInterviewNetwork,
       onClick: this.handleClickUseNetworkAsset,
     };
-
-    const showNetworkAssetInput = selectNetworkAsset || input.value !== 'existing';
 
     return (
       <div className="form-fields-data-source">
@@ -52,16 +54,23 @@ class DataSource extends Component {
             </div>
             <div className="form-fields-data-source__option">
               <Radio input={networkAssetInput} label="Use network asset" />
-              { showNetworkAssetInput &&
-                <File
-                  type="network"
-                  showBrowser={selectNetworkAsset}
-                  onCloseBrowser={this.handleCloseBrowser}
-                  {...this.props}
-                >
-                  { id => <NetworkAsset id={id} /> }
-                </File>
-              }
+              <div
+                className={cx(
+                  'form-fields-data-source__option-file',
+                  { 'form-fields-data-source__option-file--hide': !networkAssetInput.value },
+                )}
+              >
+                { showNetworkAssetInput &&
+                  <File
+                    type="network"
+                    showBrowser={selectNetworkAsset}
+                    onCloseBrowser={this.handleCloseBrowser}
+                    {...this.props}
+                  >
+                    { id => <NetworkAsset id={id} /> }
+                  </File>
+                }
+              </div>
             </div>
           </div>
         }
