@@ -29,11 +29,14 @@ const AssetBrowser = ({
         <SimpleDialog
           show={show}
           onBlur={onCancel}
-          zIndex={stackIndex + 10000}
           title="Asset Browser"
           options={cancelButton}
+          style={{
+            zIndex: stackIndex + 10000,
+          }}
+          className="asset-browser"
         >
-          <div className="asset-browser">
+          <div className="asset-browser__content">
             <div className="asset-browser__create">
               <NewAsset
                 onCreate={onSelect}
