@@ -29,6 +29,7 @@ const NodePanel = ({ fieldId, ...rest }) => (
         component={DataSource}
         name={`${fieldId}.dataSource`}
         validation={{ required: true }}
+        canUseExisting
       />
     </Row>
     <Row>
