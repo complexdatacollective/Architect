@@ -19,4 +19,26 @@
       display: block;
     }
   }
+
+  &__error {
+    opacity: 0;
+    color: var(--error);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
+    padding: .5rem .25rem;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      height: 1.2rem;
+      width: 1.2rem;
+      margin-right: unit(1);
+    }
+  }
+
+  &--has-error {
+    .form-fields-file__error {
+      opacity: 1;
+    }
+  }
 }

@@ -1,15 +1,25 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { withState } from 'recompose';
 import uuid from 'uuid';
 import cx from 'classnames';
 import AssetBrowser from '../../AssetBrowser';
 import Button from '../../../ui/components/Button';
 import Icon from '../../../ui/components/Icon';
 
+const withShowBrowser = withState(
+  'showBrowser',
+  'setShowBrowser',
+  ({ showBrowser }) => !!showBrowser,
+);
+
 class FileInput extends PureComponent {
   static propTypes = {
     children: PropTypes.func,
     onChange: PropTypes.func,
+    onCloseBrowser: PropTypes.func,
+    showBrowser: PropTypes.bool.isRequired,
+    setShowBrowser: PropTypes.func.isRequired,
     type: PropTypes.string,
     label: PropTypes.string,
     className: PropTypes.string,
@@ -22,37 +32,35 @@ class FileInput extends PureComponent {
     label: '',
     className: '',
     onChange: () => {},
+    onCloseBrowser: () => {},
     type: null,
     children: value => value,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      assetBrowser: false,
-    };
-  }
 
   componentWillMount() {
     this.id = uuid();
   }
 
-  toggleBrowser() {
-    this.setState({ assetBrowser: !this.state.assetBrowser });
+  closeBrowser() {
+    this.props.setShowBrowser(false);
+    this.props.onCloseBrowser();
+  }
+
+  openBrowser() {
+    this.props.setShowBrowser(true);
   }
 
   handleBrowseLibrary = (e) => {
     e.stopPropagation();
-    this.toggleBrowser();
+    this.openBrowser();
   }
 
   handleBlurBrowser = () => {
-    this.toggleBrowser();
+    this.closeBrowser();
   }
 
   handleSelectAsset = (assetId) => {
-    this.toggleBrowser();
+    this.closeBrowser();
     this.props.input.onChange(assetId);
   }
 
@@ -60,12 +68,11 @@ class FileInput extends PureComponent {
     const {
       input: { value },
       meta: { error, invalid, touched },
+      showBrowser,
       label,
       type,
       className,
     } = this.props;
-
-    const { assetBrowser } = this.state;
 
     const fieldClasses = cx(
       'form-fields-file',
@@ -73,6 +80,7 @@ class FileInput extends PureComponent {
       'form-field-container',
       {
         'form-fields-file--replace': !!value,
+        'form-fields-file--has-error': error,
       },
     );
 
@@ -81,6 +89,7 @@ class FileInput extends PureComponent {
         { label &&
           <h4 className="form-fields-file__label">{label}</h4>
         }
+        {invalid && touched && <div className="form-fields-file__error"><Icon name="warning" />{error}</div>}
         <div className="form-fields-file__preview">
           {this.props.children(value)}
         </div>
@@ -92,9 +101,8 @@ class FileInput extends PureComponent {
             { !value ? 'Select asset' : 'Update asset' }
           </Button>
         </div>
-        {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div>}
         <AssetBrowser
-          show={assetBrowser}
+          show={showBrowser}
           type={type}
           onSelect={this.handleSelectAsset}
           onCancel={this.handleBlurBrowser}
@@ -106,4 +114,4 @@ class FileInput extends PureComponent {
 
 export { FileInput };
 
-export default FileInput;
+export default withShowBrowser(FileInput);
