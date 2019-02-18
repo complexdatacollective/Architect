@@ -87,7 +87,7 @@ class ViewForms extends Component {
         buttons={this.buttons}
       >
         <Guided>
-          <div className="editor variable-registry">
+          <div className="editor variable-codebook">
             <div className="editor__window">
               <div className="editor__content">
                 <h1 className="editor__heading">Form Manager</h1>
@@ -143,7 +143,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     forms: get(protocol, 'forms', {}),
-    nodes: get(protocol, 'variableRegistry.node', {}),
+    nodes: get(protocol, 'codebook.node', {}),
     protocolPath: has(props, 'match.params.protocol') ?
       `/edit/${get(props, 'match.params.protocol')}` : null,
   };

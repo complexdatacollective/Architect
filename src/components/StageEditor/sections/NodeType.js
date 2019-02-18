@@ -7,7 +7,7 @@ import { keys, get, map, difference } from 'lodash';
 import cx from 'classnames';
 import Guidance from '../../Guidance';
 import NodeSelect from '../../../components/Form/Fields/NodeSelect';
-import { getNodeTypes } from '../../../selectors/variableRegistry';
+import { getNodeTypes } from '../../../selectors/codebook';
 import { getFieldId } from '../../../utils/issues';
 import { actionCreators as dialogsActions } from '../../../ducks/modules/dialogs';
 

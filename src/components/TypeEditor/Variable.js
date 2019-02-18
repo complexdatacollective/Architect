@@ -92,7 +92,7 @@ class Variable extends Component {
         {...rest}
       >
         <FormSection name={fieldId}>
-          <Guidance contentId="guidance.registry.type.variable">
+          <Guidance contentId="guidance.codebook.type.variable">
             <div>
               <div id={getFieldId(`${name}.label`)} data-name="Variable label" />
               <ValidatedField

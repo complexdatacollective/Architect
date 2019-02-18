@@ -83,7 +83,7 @@ export default {
       </p>
       <p>
         By default, Network Canvas will generate a node form for you, which will contain all of the
-        variables you have assigned to this node type in the variable registry. If this is
+        variables you have assigned to this node type in the codebook. If this is
         appropriate to your needs, you can skip this section.
       </p>
       <p>
@@ -342,7 +342,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.type.label': (
+  'guidance.codebook.type.label': (
     <Fragment>
       <h3>Label</h3>
       <p>
@@ -350,7 +350,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.type.color': (
+  'guidance.codebook.type.color': (
     <Fragment>
       <h3>Color</h3>
       <p>
@@ -363,7 +363,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.type.icon': (
+  'guidance.codebook.type.icon': (
     <Fragment>
       <h3>Icon</h3>
       <p>
@@ -372,7 +372,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.type.displayVariable': (
+  'guidance.codebook.type.displayVariable': (
     <Fragment>
       <h3>Display Variable</h3>
       <p>
@@ -381,7 +381,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.type.variables': (
+  'guidance.codebook.type.variables': (
     <Fragment>
       <h3>Variables</h3>
       <p>
@@ -391,7 +391,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.type.variable': (
+  'guidance.codebook.type.variable': (
     <Fragment>
       <h3>Variable</h3>
       <p>
@@ -437,7 +437,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.nodes': (
+  'guidance.codebook.nodes': (
     <Fragment>
       <h3>Node Types</h3>
       <p>
@@ -449,7 +449,7 @@ export default {
       </p>
     </Fragment>
   ),
-  'guidance.registry.edges': (
+  'guidance.codebook.edges': (
     <Fragment>
       <h3>Edge Types</h3>
       <p>

@@ -2,15 +2,15 @@
 
 import { createSelector } from 'reselect';
 import { get, reduce } from 'lodash';
-import { getVariableRegistry } from '../../../../selectors/protocol';
+import { getCodebook } from '../../../../selectors/protocol';
 
 const getNodeType = (_, props) => props.nodeType;
 
 const makeGetVariablesForNodeType = () =>
   createSelector(
-    getVariableRegistry,
+    getCodebook,
     getNodeType,
-    (variableRegistry, nodeType) => get(variableRegistry, ['node', nodeType, 'variables'], []),
+    (codebook, nodeType) => get(codebook, ['node', nodeType, 'variables'], []),
   );
 
 /**

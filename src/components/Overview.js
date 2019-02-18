@@ -14,17 +14,17 @@ import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 
 class Overview extends Component {
   get renderNodeTypes() {
-    const nodeTypes = get(this.props.variableRegistry, 'node', {});
+    const nodeTypes = get(this.props.codebook, 'node', {});
     if (size(nodeTypes) === 0) {
       return (
-        <em>No node types defined, yet. <ProtocolLink to="registry/node/">Create one?</ProtocolLink></em>
+        <em>No node types defined, yet. <ProtocolLink to="codebook/node/">Create one?</ProtocolLink></em>
       );
     }
 
     return map(
       nodeTypes,
       (node, key) => (
-        <ProtocolLink to={`registry/node/${key}`} key={key}>
+        <ProtocolLink to={`codebook/node/${key}`} key={key}>
           <Node label={node.label} color={get(node, 'color', '')} />
         </ProtocolLink>
       ),
@@ -32,11 +32,11 @@ class Overview extends Component {
   }
 
   get renderEdgeTypes() {
-    const edgeTypes = get(this.props.variableRegistry, 'edge', {});
+    const edgeTypes = get(this.props.codebook, 'edge', {});
 
     if (size(edgeTypes) === 0) {
       return (
-        <em>No edge types defined, yet. <ProtocolLink to="registry/edge/">Create one?</ProtocolLink></em>
+        <em>No edge types defined, yet. <ProtocolLink to="codebook/edge/">Create one?</ProtocolLink></em>
       );
     }
 
@@ -44,7 +44,7 @@ class Overview extends Component {
       edgeTypes,
       (edge, key) => (
         <ProtocolLink
-          to={`registry/edge/${key}`}
+          to={`codebook/edge/${key}`}
           key={key}
           title={edge.label}
         >
@@ -56,7 +56,7 @@ class Overview extends Component {
 
   get renderForms() {
     const forms = this.props.forms;
-    const nodeTypes = get(this.props.variableRegistry, 'node', {});
+    const nodeTypes = get(this.props.codebook, 'node', {});
     if (size(nodeTypes) === 0) {
       return (
         <React.Fragment>
@@ -123,8 +123,8 @@ class Overview extends Component {
                     }}
                   />
                 </div>
-                <div className="overview__group overview__group--variable-registry">
-                  <legend className="overview__group-title">Variable registry</legend>
+                <div className="overview__group overview__group--codebook">
+                  <legend className="overview__group-title">Codebook</legend>
                   <div className="overview__group-section">
                     <h4>Node types</h4>
                     { this.renderNodeTypes }
@@ -134,8 +134,8 @@ class Overview extends Component {
                     { this.renderEdgeTypes }
                   </div>
                   <div className="overview__manage-button">
-                    <ProtocolLink to={'registry'}>
-                      <Button size="small">Manage registry</Button>
+                    <ProtocolLink to={'codebook'}>
+                      <Button size="small">Manage codebook</Button>
                     </ProtocolLink>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ Overview.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   forms: PropTypes.object.isRequired,
-  variableRegistry: PropTypes.object.isRequired,
+  codebook: PropTypes.object.isRequired,
   updateOptions: PropTypes.func,
   flipId: PropTypes.string,
   show: PropTypes.bool,
@@ -186,7 +186,7 @@ const mapStateToProps = (state) => {
     name: protocol && protocol.name,
     description: protocol && protocol.description,
     forms: protocol && protocol.forms,
-    variableRegistry: protocol && protocol.variableRegistry,
+    codebook: protocol && protocol.codebook,
   };
 };
 

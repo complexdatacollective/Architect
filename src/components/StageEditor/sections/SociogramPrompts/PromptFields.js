@@ -10,6 +10,7 @@ import {
 } from 'redux-form';
 import { get, toPairs, isEmpty, map } from 'lodash';
 import { getFieldId } from '../../../../utils/issues';
+import { getCodebook } from '../../../../selectors/protocol';
 import Guidance from '../../../Guidance';
 import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
@@ -220,10 +221,8 @@ class PromptFields extends Component {
   }
 }
 
-const getVariablesForNodeType = (state, nodeType) => {
-  const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-  return get(variableRegistry, ['node', nodeType, 'variables'], {});
-};
+const getVariablesForNodeType = (codebook, nodeType) =>
+  get(codebook, ['node', nodeType, 'variables'], {});
 
 const mapAsOptions = keyValueObject =>
   map(
@@ -236,8 +235,9 @@ const mapAsOptions = keyValueObject =>
   );
 
 const mapStateToProps = (state, props) => {
+  const codebook = getCodebook(state);
   const nodeType = get(formValueSelector(props.form.name)(state, 'subject'), 'type');
-  const variables = getVariablesForNodeType(state, nodeType);
+  const variables = getVariablesForNodeType(codebook, nodeType);
   const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
   const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
   const isFieldInvalid = isInvalid(props.form.name);
@@ -248,7 +248,7 @@ const mapStateToProps = (state, props) => {
     variablesForNodeType: variables,
     isInvalid: isFieldInvalid(state, props.fieldId),
     hasSubmitFailed: hasSubmitFailed(props.form.name)(state),
-    edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),
+    edgeTypes: mapAsOptions(codebook.edge),
   };
 };
 

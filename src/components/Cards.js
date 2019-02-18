@@ -6,7 +6,7 @@ import ShowRoute from './ShowRoute';
 import EditSkipLogic from './Cards/EditSkipLogic';
 import EditStage from './Cards/EditStage';
 import EditForm from './Cards/EditForm';
-import VariableRegistry from './Cards/VariableRegistry';
+import Codebook from './Cards/Codebook';
 import ViewForms from './Cards/ViewForms';
 import EditType from './Cards/EditType';
 import { actionCreators as navigationActions } from '../ducks/modules/navigation';
@@ -60,14 +60,14 @@ class Cards extends Component {
         />
 
         <ShowRoute
-          path="/edit/:protocol/registry"
+          path="/edit/:protocol/codebook"
           location={location}
-          component={VariableRegistry}
+          component={Codebook}
           onComplete={this.handleIndexComplete}
         />
 
         <ShowRoute
-          path="/edit/:protocol/registry/:category/:type?"
+          path="/edit/:protocol/codebook/:category/:type?"
           location={location}
           component={EditType}
           onComplete={this.handleDeepComplete}

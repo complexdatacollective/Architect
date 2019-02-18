@@ -5,56 +5,22 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { map, has, get } from 'lodash';
 import { TransitionGroup } from 'react-transition-group';
-import { Wipe } from '../Transitions';
-import { Node, Button, Icon } from '../../ui/components';
-import { Guided } from '../Guided';
-import Guidance from '../Guidance';
-import Card from '../Card';
-import { getProtocol } from '../../selectors/protocol';
-import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
-import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
-import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
-
-const Type = ({ label, link, children, usage, handleDelete }) => (
-  <div className="simple-list__item">
-    <div className="simple-list__attribute simple-list__attribute--icon">
-      <Link to={link}>
-        {children}
-      </Link>
-    </div>
-    <div className="simple-list__attribute">
-      <h3>
-        <Link to={link}>
-          {label}
-        </Link>
-      </h3>
-      { usage.length === 0 && <div className="simple-list__tag">unused</div> }
-    </div>
-    <div className="simple-list__attribute simple-list__attribute--options">
-      <Button size="small" color="neon-coral" onClick={handleDelete}>
-        Delete
-      </Button>
-    </div>
-  </div>
-);
-
-Type.propTypes = {
-  label: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-  usage: PropTypes.array,
-  handleDelete: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-};
-
-Type.defaultProps = {
-  usage: [],
-};
+import { Wipe } from '../../Transitions';
+import { Node, Button, Icon } from '../../../ui/components';
+import { Guided } from '../../Guided';
+import Guidance from '../../Guidance';
+import Card from '../../Card';
+import { getProtocol } from '../../../selectors/protocol';
+import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../../selectors/codebook';
+import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import { actionCreators as dialogsActions } from '../../../ducks/modules/dialogs';
+import Type from './Type';
 
 /**
  * This component acts as an index for types. i.e. Nodes and Edges,
  * and links to the EditType.
  */
-class VariableRegistry extends Component {
+class Codebook extends Component {
   get buttons() {
     return [
       <Button key="cancel" color="platinum" onClick={this.handleCancel}>Back</Button>,
@@ -63,7 +29,7 @@ class VariableRegistry extends Component {
 
   handleDelete = (entity, type) => {
     const deletedObjects = this.props.getDeleteImpact(entity, type);
-    const typeName = this.props.variableRegistry[entity][type].name;
+    const typeName = this.props.codebook[entity][type].name;
 
     const confirmMessage = (
       <Fragment>
@@ -100,7 +66,7 @@ class VariableRegistry extends Component {
     return (
       <Wipe key={key}>
         <Type
-          link={`${this.props.protocolPath}/registry/node/${key}`}
+          link={`${this.props.protocolPath}/codebook/node/${key}`}
           label={node.label}
           handleDelete={() => this.handleDelete('node', key)}
           usage={usage}
@@ -118,7 +84,7 @@ class VariableRegistry extends Component {
     return (
       <Wipe key={key}>
         <Type
-          link={`${this.props.protocolPath}/registry/edge/${key}`}
+          link={`${this.props.protocolPath}/codebook/edge/${key}`}
           label={edge.label}
           handleDelete={() => this.handleDelete('edge', key)}
           usage={usage}
@@ -130,7 +96,7 @@ class VariableRegistry extends Component {
   }
 
   renderEdges() {
-    const edges = get(this.props.variableRegistry, 'edge', {});
+    const edges = get(this.props.codebook, 'edge', {});
 
     if (edges.length === 0) {
       return 'No node types defined';
@@ -146,7 +112,7 @@ class VariableRegistry extends Component {
   }
 
   renderNodes() {
-    const nodes = get(this.props.variableRegistry, 'node', {});
+    const nodes = get(this.props.codebook, 'node', {});
 
     if (nodes.length === 0) {
       return 'No node types defined';
@@ -174,14 +140,14 @@ class VariableRegistry extends Component {
         onAcknowledgeError={this.handleCancel}
       >
         <Guided>
-          <div className="editor variable-registry">
+          <div className="editor codebook">
             <div className="editor__window">
               <div className="editor__content">
-                <h1 className="editor__heading">Variable Registry</h1>
+                <h1 className="editor__heading">Codebook</h1>
                 <p>
                   Use this screen to create, edit, and manage your node and edge types.
                 </p>
-                <Guidance contentId="guidance.registry.nodes">
+                <Guidance contentId="guidance.codebook.nodes">
                   <div className="editor__section">
                     <h2>Node Types</h2>
                     <div className="editor__subsection">
@@ -190,7 +156,7 @@ class VariableRegistry extends Component {
                     { protocolPath &&
                       <div className="editor__subsection">
                         <Link
-                          to={`${protocolPath}/registry/node/`}
+                          to={`${protocolPath}/codebook/node/`}
                         >
                           <Button size="small" icon="add">
                             Create new Node type
@@ -201,7 +167,7 @@ class VariableRegistry extends Component {
                   </div>
                 </Guidance>
 
-                <Guidance contentId="guidance.registry.edges">
+                <Guidance contentId="guidance.codebook.edges">
                   <div className="editor__section">
                     <h2>Edge Types</h2>
                     <div className="editor__subsection">
@@ -210,7 +176,7 @@ class VariableRegistry extends Component {
                     <div className="editor__subsection">
                       { protocolPath &&
                         <Link
-                          to={`${protocolPath}/registry/edge/`}
+                          to={`${protocolPath}/codebook/edge/`}
                         >
                           <Button size="small" icon="add">
                             Create new Edge type
@@ -229,9 +195,9 @@ class VariableRegistry extends Component {
   }
 }
 
-VariableRegistry.propTypes = {
+Codebook.propTypes = {
   show: PropTypes.bool,
-  variableRegistry: PropTypes.shape({
+  codebook: PropTypes.shape({
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
   }).isRequired,
@@ -244,9 +210,9 @@ VariableRegistry.propTypes = {
   getObjectLabel: PropTypes.func.isRequired,
 };
 
-VariableRegistry.defaultProps = {
+Codebook.defaultProps = {
   protocolPath: null,
-  variableRegistry: {
+  codebook: {
     node: {},
     edge: {},
   },
@@ -256,13 +222,13 @@ VariableRegistry.defaultProps = {
 
 const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
-  const variableRegistry = protocol.variableRegistry;
+  const codebook = protocol.codebook;
   const getUsageForType = makeGetUsageForType(state);
   const getDeleteImpact = makeGetDeleteImpact(state);
   const getObjectLabel = makeGetObjectLabel(state);
 
   return {
-    variableRegistry,
+    codebook,
     getUsageForType,
     getDeleteImpact,
     getObjectLabel,
@@ -272,13 +238,13 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  deleteType: bindActionCreators(variableRegistryActions.deleteType, dispatch),
+  deleteType: bindActionCreators(codebookActions.deleteType, dispatch),
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
-export { VariableRegistry };
+export { Codebook };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(VariableRegistry);
+)(Codebook);

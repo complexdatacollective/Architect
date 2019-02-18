@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
-import { actionTypes as protocolRegistryActionTypes } from './protocol/variableRegistry';
+import { actionTypes as protocolRegistryActionTypes } from './protocol/codebook';
 import { actionTypes as formActionTypes } from './protocol/forms';
 import { actionTypes as protocolActionTypes } from './protocol';
 import { actionTypes as exportProtocolActionTypes } from './protocols/export';

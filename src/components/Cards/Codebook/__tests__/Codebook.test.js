@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { VariableRegistry } from '../VariableRegistry';
+import { Codebook } from '../Codebook';
 
 const mockProps = {
-  variableRegistry: {
+  codebook: {
     node: {},
     edge: {},
   },
@@ -17,9 +17,9 @@ const mockProps = {
   openDialog: () => {},
 };
 
-describe('<VariableRegistry />', () => {
+describe('<Codebook />', () => {
   it('can render', () => {
-    const component = shallow(<VariableRegistry {...mockProps} />);
+    const component = shallow(<Codebook {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });

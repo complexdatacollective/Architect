@@ -7,7 +7,7 @@ import { Button } from '../../ui/components';
 import TypeEditor, { formName, parse, format } from '../TypeEditor';
 import Card from './ProtocolCard';
 import { getProtocol } from '../../selectors/protocol';
-import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
+import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../config';
 
 const ICON_OPTIONS = [
@@ -21,7 +21,7 @@ const getNextCategoryColor = ({ protocol, category }) => {
     COLOR_PALETTE_BY_ENTITY.edge :
     COLOR_PALETTE_BY_ENTITY.node;
   const paletteSize = COLOR_PALETTES[paletteName];
-  const typeCount = size(get(protocol, ['variableRegistry', category], {}));
+  const typeCount = size(get(protocol, ['codebook', category], {}));
   const nextNumber = (typeCount % paletteSize) + 1;
   const nextColor = `${paletteName}-${nextNumber}`;
 
@@ -127,7 +127,7 @@ function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
   const typeConfiguration = get(
     protocol,
-    ['variableRegistry', category, type],
+    ['codebook', category, type],
     getNewTypeTemplate({ protocol, category }),
   );
 
@@ -143,10 +143,10 @@ function mapStateToProps(state, props) {
 const mapDispatchToProps = dispatch => ({
   submitForm: () => dispatch(submit(formName)),
   updateType: (category, type, form) => {
-    dispatch(variableRegistryActions.updateType(category, type, parse(form)));
+    dispatch(codebookActions.updateType(category, type, parse(form)));
   },
   createType: (category, form) => {
-    dispatch(variableRegistryActions.createType(category, parse(form)));
+    dispatch(codebookActions.createType(category, parse(form)));
   },
 });
 

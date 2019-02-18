@@ -179,7 +179,7 @@ class FormEditor extends Component {
           <div className="stage-editor-section">
             <h2>Add Variables and Input Types</h2>
             <p>
-              Use this section to add variables from the variable registry to the form, and map them
+              Use this section to add variables from the codebook to the form, and map them
               to your preferred input type.
             </p>
             <MultiSelect

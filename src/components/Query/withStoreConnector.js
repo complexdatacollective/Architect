@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
 
   return {
-    variableRegistry: protocol.variableRegistry,
+    codebook: protocol.codebook,
   };
 };
 

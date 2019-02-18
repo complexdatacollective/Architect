@@ -5,7 +5,7 @@ import {
   makeGetUsageForType,
   makeGetDeleteImpact,
   getSociogramTypeUsageIndex,
-} from '../variableRegistry';
+} from '../codebook';
 
 const mockStateWithProtocol = {
   protocol: {
@@ -74,7 +74,7 @@ const mockStateWithProtocol = {
   },
 };
 
-describe('variableRegistry selectors', () => {
+describe('codebook selectors', () => {
   it('getSociogramTypeUsageIndex()', () => {
     const result = getSociogramTypeUsageIndex(mockStateWithProtocol);
 

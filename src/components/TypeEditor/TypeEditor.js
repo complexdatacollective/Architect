@@ -47,7 +47,7 @@ class TypeEditor extends Component {
         { type && <h1 className="editor__heading">Edit {category}</h1> }
         { !type && <h1 className="editor__heading">Create {category}</h1> }
 
-        <Guidance contentId="guidance.registry.type.label">
+        <Guidance contentId="guidance.codebook.type.label">
           <div className="editor__section">
             <h3 id={getFieldId('label')}>Label</h3>
             <p>
@@ -62,7 +62,7 @@ class TypeEditor extends Component {
           </div>
         </Guidance>
 
-        <Guidance contentId="guidance.registry.type.label">
+        <Guidance contentId="guidance.codebook.type.label">
           <div className="editor__section">
             <h3 id={getFieldId('name')}>Short Label</h3>
             <p>
@@ -78,7 +78,7 @@ class TypeEditor extends Component {
           </div>
         </Guidance>
 
-        <Guidance contentId="guidance.registry.type.color">
+        <Guidance contentId="guidance.codebook.type.color">
           <div className="editor__section">
             <h2 id={getFieldId('color')}>Color</h2>
             <p>
@@ -96,7 +96,7 @@ class TypeEditor extends Component {
 
         { category === 'node' &&
           <React.Fragment>
-            <Guidance contentId="guidance.registry.type.icon">
+            <Guidance contentId="guidance.codebook.type.icon">
               <div className="editor__section">
                 <h2 id={getFieldId('iconVariant')}>Icon</h2>
                 <p>
@@ -112,7 +112,7 @@ class TypeEditor extends Component {
               </div>
             </Guidance>
 
-            <Guidance contentId="guidance.registry.type.displayVariable">
+            <Guidance contentId="guidance.codebook.type.displayVariable">
               <div className="editor__section">
                 <h2>Display Variable</h2>
                 <p>
@@ -130,7 +130,7 @@ class TypeEditor extends Component {
           </React.Fragment>
         }
 
-        <Guidance contentId="guidance.registry.type.variables">
+        <Guidance contentId="guidance.codebook.type.variables">
           <div className="editor__section">
             <h2>Variables</h2>
             <Variables

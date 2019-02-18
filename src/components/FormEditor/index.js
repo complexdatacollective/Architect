@@ -7,7 +7,7 @@ import {
 } from 'redux-form';
 import { compose, withProps } from 'recompose';
 import { map, get } from 'lodash';
-import { getVariablesForNodeType, getNodeTypes } from '../../selectors/variableRegistry';
+import { getVariablesForNodeType, getNodeTypes } from '../../selectors/codebook';
 import Editor from '../Editor';
 import FormEditor from './FormEditor';
 

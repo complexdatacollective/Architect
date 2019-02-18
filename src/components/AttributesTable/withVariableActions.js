@@ -1,6 +1,7 @@
 import { omit, get, omitBy } from 'lodash';
 import { withHandlers, defaultProps, compose } from 'recompose';
 import { connect } from 'react-redux';
+import { getCodebook } from '../../selectors/protocol';
 
 const validTypes = [
   'ordinal',
@@ -23,8 +24,8 @@ const getVariableDefault = (variableMeta) => {
 };
 
 const getVariablesForNodeType = (state, nodeType) => {
-  const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-  return get(variableRegistry, ['node', nodeType, 'variables'], {});
+  const codebook = getCodebook(state);
+  return get(codebook, ['node', nodeType, 'variables'], {});
 };
 
 const mapStateToProps = (state, { nodeType }) => {

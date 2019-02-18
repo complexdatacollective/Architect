@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 import { sortBy } from 'lodash/fp';
 import { actionCreators as formActions } from '../forms';
 import { actionCreators as stageActions } from '../stages';
-import reducer, { actionCreators, testing } from '../variableRegistry';
+import reducer, { actionCreators, testing } from '../codebook';
 
 jest.mock('uuid');
 
@@ -22,7 +22,7 @@ const mockState = {
   edge: { },
 };
 
-describe('protocol.variableRegistry', () => {
+describe('protocol.codebook', () => {
   it('does nothing', () => {
     const noop = reducer();
     expect(noop).toEqual({
