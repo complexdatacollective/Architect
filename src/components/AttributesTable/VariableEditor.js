@@ -24,7 +24,7 @@ const getInput = (type) => {
 
 class VariableEditor extends Component {
   handleChange = (e, value) => {
-    this.onChange(value);
+    this.props.onChange(value);
   }
 
   renderInput() {
@@ -66,6 +66,7 @@ VariableEditor.propTypes = {
   label: PropTypes.string,
   options: PropTypes.array,
   validation: PropTypes.any,
+  onChange: PropTypes.func.isRequired,
 };
 
 VariableEditor.defaultProps = {
