@@ -39,12 +39,7 @@ OrderedList.propTypes = {
   fields: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   item: PropTypes.func.isRequired,
-  getId: PropTypes.func,
   disabled: PropTypes.bool.isRequired,
-};
-
-OrderedList.defaultProps = {
-  getId: fieldId => fieldId,
 };
 
 export { OrderedList };
