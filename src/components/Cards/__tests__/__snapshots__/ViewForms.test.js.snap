@@ -40,7 +40,7 @@ ShallowWrapper {
       ],
       "children": <Connect(Guided)>
         <div
-          className="editor variable-registry"
+          className="editor variable-codebook"
         >
           <div
             className="editor__window"
@@ -92,7 +92,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": <div
-          className="editor variable-registry"
+          className="editor variable-codebook"
         >
           <div
             className="editor__window"
@@ -180,7 +180,7 @@ ShallowWrapper {
               </Connect(Guided)>
             </div>
           </div>,
-          "className": "editor variable-registry",
+          "className": "editor variable-codebook",
         },
         "ref": null,
         "rendered": Object {
@@ -439,7 +439,7 @@ ShallowWrapper {
         ],
         "children": <Connect(Guided)>
           <div
-            className="editor variable-registry"
+            className="editor variable-codebook"
           >
             <div
               className="editor__window"
@@ -491,7 +491,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <div
-            className="editor variable-registry"
+            className="editor variable-codebook"
           >
             <div
               className="editor__window"
@@ -579,7 +579,7 @@ ShallowWrapper {
                 </Connect(Guided)>
               </div>
             </div>,
-            "className": "editor variable-registry",
+            "className": "editor variable-codebook",
           },
           "ref": null,
           "rendered": Object {

@@ -50,13 +50,13 @@ ShallowWrapper {
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
-          path="/edit/:protocol/registry"
+          path="/edit/:protocol/codebook"
         />,
         <ShowRoute
           component={[Function]}
           location={Object {}}
           onComplete={[Function]}
-          path="/edit/:protocol/registry/:category/:type?"
+          path="/edit/:protocol/codebook/:category/:type?"
         />,
       ],
     },
@@ -126,7 +126,7 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
-          "path": "/edit/:protocol/registry",
+          "path": "/edit/:protocol/codebook",
         },
         "ref": null,
         "rendered": null,
@@ -140,7 +140,7 @@ ShallowWrapper {
           "component": [Function],
           "location": Object {},
           "onComplete": [Function],
-          "path": "/edit/:protocol/registry/:category/:type?",
+          "path": "/edit/:protocol/codebook/:category/:type?",
         },
         "ref": null,
         "rendered": null,
@@ -184,13 +184,13 @@ ShallowWrapper {
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
-            path="/edit/:protocol/registry"
+            path="/edit/:protocol/codebook"
           />,
           <ShowRoute
             component={[Function]}
             location={Object {}}
             onComplete={[Function]}
-            path="/edit/:protocol/registry/:category/:type?"
+            path="/edit/:protocol/codebook/:category/:type?"
           />,
         ],
       },
@@ -260,7 +260,7 @@ ShallowWrapper {
             "component": [Function],
             "location": Object {},
             "onComplete": [Function],
-            "path": "/edit/:protocol/registry",
+            "path": "/edit/:protocol/codebook",
           },
           "ref": null,
           "rendered": null,
@@ -274,7 +274,7 @@ ShallowWrapper {
             "component": [Function],
             "location": Object {},
             "onComplete": [Function],
-            "path": "/edit/:protocol/registry/:category/:type?",
+            "path": "/edit/:protocol/codebook/:category/:type?",
           },
           "ref": null,
           "rendered": null,

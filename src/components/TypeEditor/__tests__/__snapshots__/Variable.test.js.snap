@@ -31,7 +31,7 @@ ShallowWrapper {
         name="bar"
       >
         <Connect(Guided)
-          contentId="guidance.registry.type.variable"
+          contentId="guidance.codebook.type.variable"
         >
           <div>
             <div
@@ -166,7 +166,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": <Connect(Guided)
-          contentId="guidance.registry.type.variable"
+          contentId="guidance.codebook.type.variable"
         >
           <div>
             <div
@@ -358,7 +358,7 @@ ShallowWrapper {
               }
             />
           </div>,
-          "contentId": "guidance.registry.type.variable",
+          "contentId": "guidance.codebook.type.variable",
         },
         "ref": null,
         "rendered": Object {
@@ -619,7 +619,7 @@ ShallowWrapper {
           name="bar"
         >
           <Connect(Guided)
-            contentId="guidance.registry.type.variable"
+            contentId="guidance.codebook.type.variable"
           >
             <div>
               <div
@@ -754,7 +754,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <Connect(Guided)
-            contentId="guidance.registry.type.variable"
+            contentId="guidance.codebook.type.variable"
           >
             <div>
               <div
@@ -946,7 +946,7 @@ ShallowWrapper {
                 }
               />
             </div>,
-            "contentId": "guidance.registry.type.variable",
+            "contentId": "guidance.codebook.type.variable",
           },
           "ref": null,
           "rendered": Object {
