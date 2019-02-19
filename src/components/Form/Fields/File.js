@@ -1,52 +1,76 @@
 import React, { PureComponent } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dropzone from 'react-dropzone';
-import { uniqueId } from 'lodash';
+import { withState } from 'recompose';
+import uuid from 'uuid';
 import cx from 'classnames';
-import { fieldPropTypes } from 'redux-form';
-import { actionCreators as assetActions } from '../../../ducks/modules/protocol/assetManifest';
+import AssetBrowser from '../../AssetBrowser';
+import Button from '../../../ui/components/Button';
+import Icon from '../../../ui/components/Icon';
+
+const withShowBrowser = withState(
+  'showBrowser',
+  'setShowBrowser',
+  ({ showBrowser }) => !!showBrowser,
+);
 
 class FileInput extends PureComponent {
   static propTypes = {
-    importAsset: PropTypes.func.isRequired,
-    accept: PropTypes.string,
     children: PropTypes.func,
+    onChange: PropTypes.func,
+    onCloseBrowser: PropTypes.func,
+    showBrowser: PropTypes.bool.isRequired,
+    setShowBrowser: PropTypes.func.isRequired,
+    type: PropTypes.string,
     label: PropTypes.string,
     className: PropTypes.string,
-    ...fieldPropTypes,
+    meta: PropTypes.object.isRequired,
+    input: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
     value: '',
-    meta: { invalid: false, error: null, touched: false },
-    accept: '',
     label: '',
     className: '',
+    onChange: () => {},
+    onCloseBrowser: () => {},
+    type: null,
     children: value => value,
   };
 
   componentWillMount() {
-    this.id = uniqueId('label');
+    this.id = uuid();
   }
 
-  onDrop = (acceptedFiles) => {
-    acceptedFiles.forEach((file) => {
-      const type = this.props.type || file.type;
-      this.props.importAsset(file, type)
-        .then(({ id }) => {
-          this.props.input.onChange(id);
-        });
-    });
+  closeBrowser() {
+    this.props.setShowBrowser(false);
+    this.props.onCloseBrowser();
+  }
+
+  openBrowser() {
+    this.props.setShowBrowser(true);
+  }
+
+  handleBrowseLibrary = (e) => {
+    e.stopPropagation();
+    this.openBrowser();
+  }
+
+  handleBlurBrowser = () => {
+    this.closeBrowser();
+  }
+
+  handleSelectAsset = (assetId) => {
+    this.closeBrowser();
+    this.props.input.onChange(assetId);
   }
 
   render() {
     const {
       input: { value },
-      meta: { touched, invalid, error },
-      accept,
+      meta: { error, invalid, touched },
+      showBrowser,
       label,
+      type,
       className,
     } = this.props;
 
@@ -55,8 +79,8 @@ class FileInput extends PureComponent {
       className,
       'form-field-container',
       {
-        'form-fields-mode--has-error': touched && invalid,
-        'form-fields-file--complete': !!value,
+        'form-fields-file--replace': !!value,
+        'form-fields-file--has-error': error,
       },
     );
 
@@ -65,32 +89,29 @@ class FileInput extends PureComponent {
         { label &&
           <h4 className="form-fields-file__label">{label}</h4>
         }
-        <div className={cx('form-fields-file__file', { 'form-fields-file__file--replace': !!value })}>
-          <Dropzone
-            onDrop={this.onDrop}
-            multiple={false}
-            accept={accept}
-            className={cx('form-dropzone', { 'form-dropzone--replace': !!value })}
-            activeClassName="form-dropzone--active"
-            acceptClassName="form-dropzone--accept"
-            rejectClassName="form-dropzone--reject"
-            disabledClassName="form-dropzone--disabled"
-          />
-          { value &&
-            <div className="form-fields-file__preview">
-              {this.props.children(value)}
-            </div>
-          }
+        {invalid && touched && <div className="form-fields-file__error"><Icon name="warning" />{error}</div>}
+        <div className="form-fields-file__preview">
+          {this.props.children(value)}
         </div>
-        { touched && invalid && <p className="form-fields-mode__error">{error}</p> }
+        <div className="form-fields-file__browse">
+          <Button
+            onClick={this.handleBrowseLibrary}
+            color="paradise-pink"
+          >
+            { !value ? 'Select asset' : 'Update asset' }
+          </Button>
+        </div>
+        <AssetBrowser
+          show={showBrowser}
+          type={type}
+          onSelect={this.handleSelectAsset}
+          onCancel={this.handleBlurBrowser}
+        />
       </div>
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  importAsset: bindActionCreators(assetActions.importAsset, dispatch),
-});
 
 export { FileInput };
 
-export default connect(null, mapDispatchToProps)(FileInput);
+export default withShowBrowser(FileInput);

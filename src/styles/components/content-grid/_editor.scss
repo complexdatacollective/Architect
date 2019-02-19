@@ -12,7 +12,7 @@ $duration: var(--animation-duration-standard);
   }
 
   &--show {
-    max-height: 100vh;
+    max-height: 2000px;
     opacity: 1;
     transform: translateX(0);
     transition: transform $duration $duration, opacity $duration $duration, max-height $duration $duration;
@@ -30,13 +30,10 @@ $duration: var(--animation-duration-standard);
     margin: 0;
   }
 
-  .button {
-    margin: unit(2) 0 0;
-  }
-
-  .form-fields-file {
-    .form-dropzone {
-      background: var(--color-navy-taupe);
-    }
+  &__controls {
+    margin: unit(4) 0 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
 }

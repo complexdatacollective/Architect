@@ -1,0 +1,25 @@
+.asset-browser {
+  max-width: 90vw;
+  max-height: 95vh;
+
+  .dialog__footer {
+    text-align: right;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    max-height: 75vh;
+  }
+
+  &__create {
+    flex: 0 0 150px;
+  }
+
+  &__assets {
+    @include no-scrollbars;
+    width: 75vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}

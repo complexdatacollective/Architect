@@ -1,21 +1,62 @@
 .form-dropzone {
+  @include preset('copy-standard');
   cursor: pointer;
-  padding: unit(1);
+  position: relative;
+  border-radius: unit(2);
+  height: unit(12);
+  border-width: 2px;
+  border-style: solid;
+  transition-duration: var(--animation-duration-fast);
+  transition-timing-function: var(--animation-easing);
+  transition-property: border-color;
+  border-color: transparent;
+  background-color: var(--background-dark);
+  overflow: hidden;
+  padding: unit(4);
   display: flex;
-  justify-content: center;
   align-items: center;
-  color: var(--color-white);
-  background: var(--color-cyber-grape);
+  justify-content: center;
 
-  &::after {
-    @include preset('copy-standard');
-    content: 'Drop content here or click to upload';
-
+  &__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: transparent;
+    transition-duration: var(--animation-duration-fast);
+    transition-timing-function: var(--animation-easing);
+    transition-property: filter, background-color;
   }
 
-  &--replace {
-    &::after {
-      content: 'Drop content here or click to update';
+  &__label {
+    position: relative;
+    z-index: 2;
+    color: var(--color-white);
+    transition-duration: var(--animation-duration-standard);
+    transition-timing-function: var(--animation-easing);
+    transition-property: filter;
+    line-height: unit(2);
+  }
+
+  &__link {
+    display: inline-block;
+    border-bottom: 2px solid var(--notice);
+    line-height: unit(2);
+    cursor: pointer;
+  }
+
+  &--accept {
+    border-color: var(--notice);
+  }
+
+  &--reject {
+    border-color: var(--error);
+
+    .form-dropzone__container {
+      background-color: var(--error);
+      filter: brightness(.3);
     }
   }
 }

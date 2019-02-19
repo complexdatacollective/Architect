@@ -1,23 +1,12 @@
 $component-name: form-fields-audio;
 
 .#{$component-name} {
-  &__preview {
-    background: var(--architect-panel-background);
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 
-    audio {
-      width: 100%;
-    }
-  }
-
-  &.form-fields-file--complete {
-    .form-dropzone {
-      position: static !important; // sass-lint:disable-line no-important
-      transform: translateY(0);
-      opacity: 1;
-      border-bottom: 0;
-    }
+  audio {
+    width: 100%;
   }
 }

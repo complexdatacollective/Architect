@@ -86,14 +86,15 @@ class ItemEditor extends Component {
             component={this.inputComponent}
             validation={{ required: true }}
           />
-          <Button
-            type="button"
-            size="small"
-            onClick={onComplete}
-            disabled={error}
-          >
-           Done
-          </Button>
+          <div className="content-grid-editor__controls">
+            <Button
+              type="button"
+              onClick={onComplete}
+              disabled={error}
+            >
+             Done
+            </Button>
+          </div>
         </div>
       </div>
     );

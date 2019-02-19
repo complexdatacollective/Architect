@@ -5,47 +5,40 @@
   position: relative;
 
   &__preview {
-    width: 100%;
-    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: none;
   }
 
-  &__file {
-    position: relative;
-    min-height: 100px;
-    overflow: hidden;
+  &__browse {
+    margin: unit(2) 0 0;
+  }
 
-    .form-dropzone {
-      min-height: 150px;
+  &--replace {
+    .form-fields-file__preview {
+      display: block;
     }
+  }
 
-    &--replace {
-      .form-dropzone {
-        z-index: 1000;
-        top: 0;
-        position: absolute !important; // sass-lint:disable-line no-important
-        width: 100%;
-        min-height: 75px;
-        border-bottom: unit(.2) solid var(--color-sea-green);
-        transform: translateY(-100%);
-        opacity: 0;
-        transition-property: transform, opacity;
-        transition-duration: var(--animation-duration-standard);
-        transition-timing-function: var(--animation-easing);
-      }
+  &__error {
+    opacity: 0;
+    color: var(--error);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
+    padding: .5rem .25rem;
+    display: flex;
+    align-items: center;
 
-      &:hover {
-        .form-dropzone {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
+    .icon {
+      height: 1.2rem;
+      width: 1.2rem;
+      margin-right: unit(1);
     }
   }
 
   &--has-error {
     .form-fields-file__error {
       opacity: 1;
-      max-height: 50px;
     }
   }
 }
