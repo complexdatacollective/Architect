@@ -561,18 +561,6 @@
       ],
       "prompts": [
         {
-          "id": "6cl",
-          "text": "This is the factory preset protocol",
-          "additionalAttributes": {
-            "d8bd7e53fb408002394509cf33fa439a15177f0a": ["foo"],
-            "5d69e2e1f8a9ea63d425602943831500c3d5c01d": true
-          }
-        },
-        {
-          "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?"
-        },
-        {
           "id": "2we",
           "text": "Within the past 2 weeks, who has provided advice?"
         }

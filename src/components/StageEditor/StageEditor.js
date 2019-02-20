@@ -10,6 +10,8 @@ import { Guided } from '../Guided';
 import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
 import Issues from '../Issues';
+import windowRootProvider from '../../ui/components/windowRootProvider';
+import PromptWindow from '../Prompts/PromptWindow';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
@@ -43,9 +45,14 @@ class StageEditor extends Component {
   }
 
   renderSections() {
-    return this.sections.map((SectionComponent, index) =>
-      <SectionComponent key={index} form={form} hasSubmitFailed={this.props.submitFailed} />,
-    );
+    return this.sections.map((SectionComponent, index) => (
+      <SectionComponent
+        key={index}
+        form={form}
+        hasSubmitFailed={this.props.submitFailed}
+        windowRoot={this.props.windowRoot} // This will ensure connect() components re-render when the window root changes
+      />
+    ));
   }
 
   render() {
@@ -65,7 +72,7 @@ class StageEditor extends Component {
           defaultGuidance={`guidance.interface.${stage.type}`}
           form={form}
         >
-          <div className="editor stage-editor" id="stage-editor-context">
+          <div className="editor stage-editor" ref={this.props.setWindowRoot} >
             <div className="editor__window">
               <div className="editor__content">
                 <div className="code-button">
@@ -99,4 +106,4 @@ StageEditor.propTypes = {
 
 export { StageEditor };
 
-export default StageEditor;
+export default windowRootProvider(StageEditor);
