@@ -20,7 +20,7 @@ class EditForm extends PureComponent {
     createForm: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
     hasUnsavedChanges: PropTypes.bool,
-    onComplete: PropTypes.func.isRequired,
+    onComplete: PropTypes.func,
     show: PropTypes.bool,
   };
 
@@ -28,6 +28,7 @@ class EditForm extends PureComponent {
     formName: null,
     form: {},
     show: true,
+    onComplete: () => {},
     hasUnsavedChanges: false,
   };
 
@@ -53,8 +54,11 @@ class EditForm extends PureComponent {
     }
 
     this.props.onComplete({
-      formName: this.props.formName || formNameFromTitle(form.title),
-      form,
+      type: 'NEW_FORM',
+      payload: {
+        formName: this.props.formName || formNameFromTitle(form.title),
+        form,
+      },
     });
   }
 

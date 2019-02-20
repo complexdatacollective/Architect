@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, map, get, pickBy } from 'lodash';
+import { toPairs, map, get, pickBy, isEqual } from 'lodash';
 import Guidance from '../../../Guidance';
 import ValidatedField from '../../../Form/ValidatedField';
-import EditForm from '../../../Cards/EditForm';
 import { Button } from '../../../../ui/components';
 import { RadioGroup } from '../../../../ui/components/Fields';
 import { getProtocol } from '../../../../selectors/protocol';
+import { actionCreators as uiActions } from '../../../../ducks/modules/ui';
 import FormCard from './FormCard';
 
 const formOption = PropTypes.shape({
@@ -24,47 +25,36 @@ class Form extends Component {
     disabled: PropTypes.bool,
     nodeType: PropTypes.string,
     change: PropTypes.func.isRequired,
+    openScreen: PropTypes.func.isRequired,
+    ui: PropTypes.object,
   };
 
   static defaultProps = {
     disabled: false,
     selectedForm: null,
     nodeType: null,
+    ui: {},
     forms: [],
   };
 
-  constructor(props) {
-    super(props);
+  componentDidUpdate({ ui: prevUI }) {
+    const ui = this.props.ui;
 
-    this.state = {
-      editForm: false,
-    };
+    if (!isEqual(ui, prevUI)) {
+      if (ui.type === 'NEW_FORM') {
+        if (ui.payload.form.type === this.props.nodeType) {
+          this.props.change(ui.payload.formName);
+        }
+      }
+    }
   }
 
   handleClickCreateNewForm = () => {
     this.showFormEditor();
   };
 
-  handleEditFormComplete = (result) => {
-    if (!result) { this.closeFormEditor(); return; }
-
-    const { formName, form } = result;
-
-    // Thes form editor UI allows us to select different node types from
-    // the one selected here, so we can't assume that they match.
-    if (form.type === this.props.nodeType) {
-      this.props.change(formName);
-    }
-
-    this.closeFormEditor();
-  };
-
   showFormEditor = () => {
-    this.setState({ editForm: true });
-  };
-
-  closeFormEditor = () => {
-    this.setState({ editForm: false });
+    this.props.openScreen('form');
   };
 
   render() {
@@ -98,12 +88,6 @@ class Form extends Component {
 
             <Button onClick={this.handleClickCreateNewForm}>Create new form</Button>
           </div>
-
-          <EditForm
-            show={this.state.editForm}
-            onComplete={this.handleEditFormComplete}
-            onCancel={this.closeFormEditor}
-          />
         </div>
       </Guidance>
     );
@@ -138,6 +122,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     nodeType,
+    ui: state.ui.params,
     forms: formOptions,
     disabled: !nodeType,
     selectedForm,
@@ -147,6 +132,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, { form }) => ({
   reset: () => dispatch(changeField(form.name, 'form', null)),
   change: value => dispatch(changeField(form.name, 'form', value)),
+  openScreen: bindActionCreators(uiActions.openScreen, dispatch),
 });
 
 export { Form };

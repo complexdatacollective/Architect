@@ -13,13 +13,12 @@ import RecentProtocols from './RecentProtocols';
 import Overview from './Overview';
 import Timeline from './Timeline';
 import ProtocolControlBar from './ProtocolControlBar';
-import Cards from './Cards';
+import Screens from './Screens';
 import architectLogoIcon from '../images/architect-logo-icon.svg';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
 
 const Scene = ({
   protocolMeta,
-  location,
   handleClickStart,
 }) => {
   const protocolId = protocolMeta && protocolMeta.id;
@@ -66,14 +65,13 @@ const Scene = ({
         </div>
       </Flipper>
 
-      <Cards location={location} />
+      <Screens />
     </div>
   );
 };
 
 Scene.propTypes = {
   protocolMeta: PropTypes.object,
-  location: PropTypes.object.isRequired,
   handleClickStart: PropTypes.func.isRequired,
 };
 
