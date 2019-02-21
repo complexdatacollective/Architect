@@ -56,11 +56,8 @@ class EditForm extends PureComponent {
     }
 
     this.props.onComplete({
-      type: 'NEW_FORM',
-      payload: {
-        formName: this.props.formName || formNameFromTitle(form.title),
-        form,
-      },
+      formName: this.props.formName || formNameFromTitle(form.title),
+      form,
     });
   }
 
@@ -96,7 +93,7 @@ const editFormIsInvalid = isInvalid(reduxFormName);
 
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
-  const formName = get(props.match, 'params.form', null);
+  const formName = props.id;
   const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
 
   return {

@@ -78,11 +78,16 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No node types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/node/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
@@ -93,18 +98,23 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No edge types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/edge/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="registry"
+                  <Connect(Link)
+                    screen="codebook"
                   >
                     <Button
                       color=""
@@ -115,9 +125,9 @@ ShallowWrapper {
                       size="small"
                       type="button"
                     >
-                      Manage registry
+                      Manage codebook
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
               <div
@@ -136,8 +146,8 @@ ShallowWrapper {
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="forms"
+                  <Connect(Link)
+                    screen="forms"
                   >
                     <Button
                       color=""
@@ -150,7 +160,7 @@ ShallowWrapper {
                     >
                       Manage forms
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
             </div>
@@ -214,11 +224,16 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No node types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/node/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
@@ -229,18 +244,23 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No edge types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/edge/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="registry"
+                  <Connect(Link)
+                    screen="codebook"
                   >
                     <Button
                       color=""
@@ -251,9 +271,9 @@ ShallowWrapper {
                       size="small"
                       type="button"
                     >
-                      Manage registry
+                      Manage codebook
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
               <div
@@ -272,8 +292,8 @@ ShallowWrapper {
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="forms"
+                  <Connect(Link)
+                    screen="forms"
                   >
                     <Button
                       color=""
@@ -286,7 +306,7 @@ ShallowWrapper {
                     >
                       Manage forms
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
             </div>
@@ -347,11 +367,16 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No node types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/node/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
@@ -362,18 +387,23 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No edge types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/edge/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="registry"
+                  <Connect(Link)
+                    screen="codebook"
                   >
                     <Button
                       color=""
@@ -384,9 +414,9 @@ ShallowWrapper {
                       size="small"
                       type="button"
                     >
-                      Manage registry
+                      Manage codebook
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
               <div
@@ -405,8 +435,8 @@ ShallowWrapper {
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="forms"
+                  <Connect(Link)
+                    screen="forms"
                   >
                     <Button
                       color=""
@@ -419,7 +449,7 @@ ShallowWrapper {
                     >
                       Manage forms
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
             </div>
@@ -476,11 +506,16 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No node types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/node/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
@@ -491,18 +526,23 @@ ShallowWrapper {
                   </h4>
                   <em>
                     No edge types defined, yet. 
-                    <Connect(ProtocolLink)
-                      to="registry/edge/"
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
                     >
                       Create one?
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </em>
                 </div>
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="registry"
+                  <Connect(Link)
+                    screen="codebook"
                   >
                     <Button
                       color=""
@@ -513,9 +553,9 @@ ShallowWrapper {
                       size="small"
                       type="button"
                     >
-                      Manage registry
+                      Manage codebook
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
               <div
@@ -534,8 +574,8 @@ ShallowWrapper {
                 <div
                   className="overview__manage-button"
                 >
-                  <Connect(ProtocolLink)
-                    to="forms"
+                  <Connect(Link)
+                    screen="forms"
                   >
                     <Button
                       color=""
@@ -548,7 +588,7 @@ ShallowWrapper {
                     >
                       Manage forms
                     </Button>
-                  </Connect(ProtocolLink)>
+                  </Connect(Link)>
                 </div>
               </div>
             </div>,
@@ -602,11 +642,16 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No node types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/node/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
@@ -617,18 +662,23 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No edge types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/edge/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="registry"
+                    <Connect(Link)
+                      screen="codebook"
                     >
                       <Button
                         color=""
@@ -639,9 +689,9 @@ ShallowWrapper {
                         size="small"
                         type="button"
                       >
-                        Manage registry
+                        Manage codebook
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>,
                 <div
@@ -660,8 +710,8 @@ ShallowWrapper {
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="forms"
+                    <Connect(Link)
+                      screen="forms"
                     >
                       <Button
                         color=""
@@ -674,7 +724,7 @@ ShallowWrapper {
                       >
                         Manage forms
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>,
               ],
@@ -770,11 +820,16 @@ ShallowWrapper {
                       </h4>
                       <em>
                         No node types defined, yet. 
-                        <Connect(ProtocolLink)
-                          to="registry/node/"
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "node",
+                            }
+                          }
+                          screen="type"
                         >
                           Create one?
-                        </Connect(ProtocolLink)>
+                        </Connect(Link)>
                       </em>
                     </div>,
                     <div
@@ -785,18 +840,23 @@ ShallowWrapper {
                       </h4>
                       <em>
                         No edge types defined, yet. 
-                        <Connect(ProtocolLink)
-                          to="registry/edge/"
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "edge",
+                            }
+                          }
+                          screen="type"
                         >
                           Create one?
-                        </Connect(ProtocolLink)>
+                        </Connect(Link)>
                       </em>
                     </div>,
                     <div
                       className="overview__manage-button"
                     >
-                      <Connect(ProtocolLink)
-                        to="registry"
+                      <Connect(Link)
+                        screen="codebook"
                       >
                         <Button
                           color=""
@@ -807,9 +867,9 @@ ShallowWrapper {
                           size="small"
                           type="button"
                         >
-                          Manage registry
+                          Manage codebook
                         </Button>
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </div>,
                   ],
                   "className": "overview__group overview__group--variable-registry",
@@ -839,11 +899,16 @@ ShallowWrapper {
                         </h4>,
                         <em>
                           No node types defined, yet. 
-                          <Connect(ProtocolLink)
-                            to="registry/node/"
+                          <Connect(Link)
+                            params={
+                              Object {
+                                "category": "node",
+                              }
+                            }
+                            screen="type"
                           >
                             Create one?
-                          </Connect(ProtocolLink)>
+                          </Connect(Link)>
                         </em>,
                       ],
                       "className": "overview__group-section",
@@ -868,11 +933,16 @@ ShallowWrapper {
                         "props": Object {
                           "children": Array [
                             "No node types defined, yet. ",
-                            <Connect(ProtocolLink)
-                              to="registry/node/"
+                            <Connect(Link)
+                              params={
+                                Object {
+                                  "category": "node",
+                                }
+                              }
+                              screen="type"
                             >
                               Create one?
-                            </Connect(ProtocolLink)>,
+                            </Connect(Link)>,
                           ],
                         },
                         "ref": null,
@@ -884,7 +954,10 @@ ShallowWrapper {
                             "nodeType": "class",
                             "props": Object {
                               "children": "Create one?",
-                              "to": "registry/node/",
+                              "params": Object {
+                                "category": "node",
+                              },
+                              "screen": "type",
                             },
                             "ref": null,
                             "rendered": "Create one?",
@@ -907,11 +980,16 @@ ShallowWrapper {
                         </h4>,
                         <em>
                           No edge types defined, yet. 
-                          <Connect(ProtocolLink)
-                            to="registry/edge/"
+                          <Connect(Link)
+                            params={
+                              Object {
+                                "category": "edge",
+                              }
+                            }
+                            screen="type"
                           >
                             Create one?
-                          </Connect(ProtocolLink)>
+                          </Connect(Link)>
                         </em>,
                       ],
                       "className": "overview__group-section",
@@ -936,11 +1014,16 @@ ShallowWrapper {
                         "props": Object {
                           "children": Array [
                             "No edge types defined, yet. ",
-                            <Connect(ProtocolLink)
-                              to="registry/edge/"
+                            <Connect(Link)
+                              params={
+                                Object {
+                                  "category": "edge",
+                                }
+                              }
+                              screen="type"
                             >
                               Create one?
-                            </Connect(ProtocolLink)>,
+                            </Connect(Link)>,
                           ],
                         },
                         "ref": null,
@@ -952,7 +1035,10 @@ ShallowWrapper {
                             "nodeType": "class",
                             "props": Object {
                               "children": "Create one?",
-                              "to": "registry/edge/",
+                              "params": Object {
+                                "category": "edge",
+                              },
+                              "screen": "type",
                             },
                             "ref": null,
                             "rendered": "Create one?",
@@ -969,8 +1055,8 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "host",
                     "props": Object {
-                      "children": <Connect(ProtocolLink)
-                        to="registry"
+                      "children": <Connect(Link)
+                        screen="codebook"
                       >
                         <Button
                           color=""
@@ -981,9 +1067,9 @@ ShallowWrapper {
                           size="small"
                           type="button"
                         >
-                          Manage registry
+                          Manage codebook
                         </Button>
-                      </Connect(ProtocolLink)>,
+                      </Connect(Link)>,
                       "className": "overview__manage-button",
                     },
                     "ref": null,
@@ -1001,9 +1087,9 @@ ShallowWrapper {
                           size="small"
                           type="button"
                         >
-                          Manage registry
+                          Manage codebook
                         </Button>,
-                        "to": "registry",
+                        "screen": "codebook",
                       },
                       "ref": null,
                       "rendered": Object {
@@ -1011,7 +1097,7 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "class",
                         "props": Object {
-                          "children": "Manage registry",
+                          "children": "Manage codebook",
                           "color": "",
                           "content": "",
                           "icon": "",
@@ -1021,7 +1107,7 @@ ShallowWrapper {
                           "type": "button",
                         },
                         "ref": null,
-                        "rendered": "Manage registry",
+                        "rendered": "Manage codebook",
                         "type": [Function],
                       },
                       "type": [Function],
@@ -1050,8 +1136,8 @@ ShallowWrapper {
                     <div
                       className="overview__manage-button"
                     >
-                      <Connect(ProtocolLink)
-                        to="forms"
+                      <Connect(Link)
+                        screen="forms"
                       >
                         <Button
                           color=""
@@ -1064,7 +1150,7 @@ ShallowWrapper {
                         >
                           Manage forms
                         </Button>
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </div>,
                   ],
                   "className": "overview__group overview__group--forms",
@@ -1111,8 +1197,8 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "host",
                     "props": Object {
-                      "children": <Connect(ProtocolLink)
-                        to="forms"
+                      "children": <Connect(Link)
+                        screen="forms"
                       >
                         <Button
                           color=""
@@ -1125,7 +1211,7 @@ ShallowWrapper {
                         >
                           Manage forms
                         </Button>
-                      </Connect(ProtocolLink)>,
+                      </Connect(Link)>,
                       "className": "overview__manage-button",
                     },
                     "ref": null,
@@ -1145,7 +1231,7 @@ ShallowWrapper {
                         >
                           Manage forms
                         </Button>,
-                        "to": "forms",
+                        "screen": "forms",
                       },
                       "ref": null,
                       "rendered": Object {
@@ -1243,11 +1329,16 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No node types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/node/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
@@ -1258,18 +1349,23 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No edge types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/edge/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="registry"
+                    <Connect(Link)
+                      screen="codebook"
                     >
                       <Button
                         color=""
@@ -1280,9 +1376,9 @@ ShallowWrapper {
                         size="small"
                         type="button"
                       >
-                        Manage registry
+                        Manage codebook
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
                 <div
@@ -1301,8 +1397,8 @@ ShallowWrapper {
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="forms"
+                    <Connect(Link)
+                      screen="forms"
                     >
                       <Button
                         color=""
@@ -1315,7 +1411,7 @@ ShallowWrapper {
                       >
                         Manage forms
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
               </div>
@@ -1379,11 +1475,16 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No node types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/node/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
@@ -1394,18 +1495,23 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No edge types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/edge/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="registry"
+                    <Connect(Link)
+                      screen="codebook"
                     >
                       <Button
                         color=""
@@ -1416,9 +1522,9 @@ ShallowWrapper {
                         size="small"
                         type="button"
                       >
-                        Manage registry
+                        Manage codebook
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
                 <div
@@ -1437,8 +1543,8 @@ ShallowWrapper {
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="forms"
+                    <Connect(Link)
+                      screen="forms"
                     >
                       <Button
                         color=""
@@ -1451,7 +1557,7 @@ ShallowWrapper {
                       >
                         Manage forms
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
               </div>
@@ -1512,11 +1618,16 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No node types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/node/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
@@ -1527,18 +1638,23 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No edge types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/edge/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="registry"
+                    <Connect(Link)
+                      screen="codebook"
                     >
                       <Button
                         color=""
@@ -1549,9 +1665,9 @@ ShallowWrapper {
                         size="small"
                         type="button"
                       >
-                        Manage registry
+                        Manage codebook
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
                 <div
@@ -1570,8 +1686,8 @@ ShallowWrapper {
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="forms"
+                    <Connect(Link)
+                      screen="forms"
                     >
                       <Button
                         color=""
@@ -1584,7 +1700,7 @@ ShallowWrapper {
                       >
                         Manage forms
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
               </div>
@@ -1641,11 +1757,16 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No node types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/node/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
@@ -1656,18 +1777,23 @@ ShallowWrapper {
                     </h4>
                     <em>
                       No edge types defined, yet. 
-                      <Connect(ProtocolLink)
-                        to="registry/edge/"
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
                       >
                         Create one?
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </em>
                   </div>
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="registry"
+                    <Connect(Link)
+                      screen="codebook"
                     >
                       <Button
                         color=""
@@ -1678,9 +1804,9 @@ ShallowWrapper {
                         size="small"
                         type="button"
                       >
-                        Manage registry
+                        Manage codebook
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
                 <div
@@ -1699,8 +1825,8 @@ ShallowWrapper {
                   <div
                     className="overview__manage-button"
                   >
-                    <Connect(ProtocolLink)
-                      to="forms"
+                    <Connect(Link)
+                      screen="forms"
                     >
                       <Button
                         color=""
@@ -1713,7 +1839,7 @@ ShallowWrapper {
                       >
                         Manage forms
                       </Button>
-                    </Connect(ProtocolLink)>
+                    </Connect(Link)>
                   </div>
                 </div>
               </div>,
@@ -1767,11 +1893,16 @@ ShallowWrapper {
                       </h4>
                       <em>
                         No node types defined, yet. 
-                        <Connect(ProtocolLink)
-                          to="registry/node/"
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "node",
+                            }
+                          }
+                          screen="type"
                         >
                           Create one?
-                        </Connect(ProtocolLink)>
+                        </Connect(Link)>
                       </em>
                     </div>
                     <div
@@ -1782,18 +1913,23 @@ ShallowWrapper {
                       </h4>
                       <em>
                         No edge types defined, yet. 
-                        <Connect(ProtocolLink)
-                          to="registry/edge/"
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "edge",
+                            }
+                          }
+                          screen="type"
                         >
                           Create one?
-                        </Connect(ProtocolLink)>
+                        </Connect(Link)>
                       </em>
                     </div>
                     <div
                       className="overview__manage-button"
                     >
-                      <Connect(ProtocolLink)
-                        to="registry"
+                      <Connect(Link)
+                        screen="codebook"
                       >
                         <Button
                           color=""
@@ -1804,9 +1940,9 @@ ShallowWrapper {
                           size="small"
                           type="button"
                         >
-                          Manage registry
+                          Manage codebook
                         </Button>
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </div>
                   </div>,
                   <div
@@ -1825,8 +1961,8 @@ ShallowWrapper {
                     <div
                       className="overview__manage-button"
                     >
-                      <Connect(ProtocolLink)
-                        to="forms"
+                      <Connect(Link)
+                        screen="forms"
                       >
                         <Button
                           color=""
@@ -1839,7 +1975,7 @@ ShallowWrapper {
                         >
                           Manage forms
                         </Button>
-                      </Connect(ProtocolLink)>
+                      </Connect(Link)>
                     </div>
                   </div>,
                 ],
@@ -1935,11 +2071,16 @@ ShallowWrapper {
                         </h4>
                         <em>
                           No node types defined, yet. 
-                          <Connect(ProtocolLink)
-                            to="registry/node/"
+                          <Connect(Link)
+                            params={
+                              Object {
+                                "category": "node",
+                              }
+                            }
+                            screen="type"
                           >
                             Create one?
-                          </Connect(ProtocolLink)>
+                          </Connect(Link)>
                         </em>
                       </div>,
                       <div
@@ -1950,18 +2091,23 @@ ShallowWrapper {
                         </h4>
                         <em>
                           No edge types defined, yet. 
-                          <Connect(ProtocolLink)
-                            to="registry/edge/"
+                          <Connect(Link)
+                            params={
+                              Object {
+                                "category": "edge",
+                              }
+                            }
+                            screen="type"
                           >
                             Create one?
-                          </Connect(ProtocolLink)>
+                          </Connect(Link)>
                         </em>
                       </div>,
                       <div
                         className="overview__manage-button"
                       >
-                        <Connect(ProtocolLink)
-                          to="registry"
+                        <Connect(Link)
+                          screen="codebook"
                         >
                           <Button
                             color=""
@@ -1972,9 +2118,9 @@ ShallowWrapper {
                             size="small"
                             type="button"
                           >
-                            Manage registry
+                            Manage codebook
                           </Button>
-                        </Connect(ProtocolLink)>
+                        </Connect(Link)>
                       </div>,
                     ],
                     "className": "overview__group overview__group--variable-registry",
@@ -2004,11 +2150,16 @@ ShallowWrapper {
                           </h4>,
                           <em>
                             No node types defined, yet. 
-                            <Connect(ProtocolLink)
-                              to="registry/node/"
+                            <Connect(Link)
+                              params={
+                                Object {
+                                  "category": "node",
+                                }
+                              }
+                              screen="type"
                             >
                               Create one?
-                            </Connect(ProtocolLink)>
+                            </Connect(Link)>
                           </em>,
                         ],
                         "className": "overview__group-section",
@@ -2033,11 +2184,16 @@ ShallowWrapper {
                           "props": Object {
                             "children": Array [
                               "No node types defined, yet. ",
-                              <Connect(ProtocolLink)
-                                to="registry/node/"
+                              <Connect(Link)
+                                params={
+                                  Object {
+                                    "category": "node",
+                                  }
+                                }
+                                screen="type"
                               >
                                 Create one?
-                              </Connect(ProtocolLink)>,
+                              </Connect(Link)>,
                             ],
                           },
                           "ref": null,
@@ -2049,7 +2205,10 @@ ShallowWrapper {
                               "nodeType": "class",
                               "props": Object {
                                 "children": "Create one?",
-                                "to": "registry/node/",
+                                "params": Object {
+                                  "category": "node",
+                                },
+                                "screen": "type",
                               },
                               "ref": null,
                               "rendered": "Create one?",
@@ -2072,11 +2231,16 @@ ShallowWrapper {
                           </h4>,
                           <em>
                             No edge types defined, yet. 
-                            <Connect(ProtocolLink)
-                              to="registry/edge/"
+                            <Connect(Link)
+                              params={
+                                Object {
+                                  "category": "edge",
+                                }
+                              }
+                              screen="type"
                             >
                               Create one?
-                            </Connect(ProtocolLink)>
+                            </Connect(Link)>
                           </em>,
                         ],
                         "className": "overview__group-section",
@@ -2101,11 +2265,16 @@ ShallowWrapper {
                           "props": Object {
                             "children": Array [
                               "No edge types defined, yet. ",
-                              <Connect(ProtocolLink)
-                                to="registry/edge/"
+                              <Connect(Link)
+                                params={
+                                  Object {
+                                    "category": "edge",
+                                  }
+                                }
+                                screen="type"
                               >
                                 Create one?
-                              </Connect(ProtocolLink)>,
+                              </Connect(Link)>,
                             ],
                           },
                           "ref": null,
@@ -2117,7 +2286,10 @@ ShallowWrapper {
                               "nodeType": "class",
                               "props": Object {
                                 "children": "Create one?",
-                                "to": "registry/edge/",
+                                "params": Object {
+                                  "category": "edge",
+                                },
+                                "screen": "type",
                               },
                               "ref": null,
                               "rendered": "Create one?",
@@ -2134,8 +2306,8 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": <Connect(ProtocolLink)
-                          to="registry"
+                        "children": <Connect(Link)
+                          screen="codebook"
                         >
                           <Button
                             color=""
@@ -2146,9 +2318,9 @@ ShallowWrapper {
                             size="small"
                             type="button"
                           >
-                            Manage registry
+                            Manage codebook
                           </Button>
-                        </Connect(ProtocolLink)>,
+                        </Connect(Link)>,
                         "className": "overview__manage-button",
                       },
                       "ref": null,
@@ -2166,9 +2338,9 @@ ShallowWrapper {
                             size="small"
                             type="button"
                           >
-                            Manage registry
+                            Manage codebook
                           </Button>,
-                          "to": "registry",
+                          "screen": "codebook",
                         },
                         "ref": null,
                         "rendered": Object {
@@ -2176,7 +2348,7 @@ ShallowWrapper {
                           "key": undefined,
                           "nodeType": "class",
                           "props": Object {
-                            "children": "Manage registry",
+                            "children": "Manage codebook",
                             "color": "",
                             "content": "",
                             "icon": "",
@@ -2186,7 +2358,7 @@ ShallowWrapper {
                             "type": "button",
                           },
                           "ref": null,
-                          "rendered": "Manage registry",
+                          "rendered": "Manage codebook",
                           "type": [Function],
                         },
                         "type": [Function],
@@ -2215,8 +2387,8 @@ ShallowWrapper {
                       <div
                         className="overview__manage-button"
                       >
-                        <Connect(ProtocolLink)
-                          to="forms"
+                        <Connect(Link)
+                          screen="forms"
                         >
                           <Button
                             color=""
@@ -2229,7 +2401,7 @@ ShallowWrapper {
                           >
                             Manage forms
                           </Button>
-                        </Connect(ProtocolLink)>
+                        </Connect(Link)>
                       </div>,
                     ],
                     "className": "overview__group overview__group--forms",
@@ -2276,8 +2448,8 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": <Connect(ProtocolLink)
-                          to="forms"
+                        "children": <Connect(Link)
+                          screen="forms"
                         >
                           <Button
                             color=""
@@ -2290,7 +2462,7 @@ ShallowWrapper {
                           >
                             Manage forms
                           </Button>
-                        </Connect(ProtocolLink)>,
+                        </Connect(Link)>,
                         "className": "overview__manage-button",
                       },
                       "ref": null,
@@ -2310,7 +2482,7 @@ ShallowWrapper {
                           >
                             Manage forms
                           </Button>,
-                          "to": "forms",
+                          "screen": "forms",
                         },
                         "ref": null,
                         "rendered": Object {

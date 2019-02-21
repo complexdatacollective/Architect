@@ -85,7 +85,10 @@ class EditType extends PureComponent {
       this.props.updateType(category, type, form);
     }
 
-    this.props.onComplete();
+    this.props.onComplete({
+      category,
+      type,
+    });
   }
 
   handleCancel = this.props.onComplete;
@@ -125,8 +128,8 @@ const editFormIsDirty = isDirty(formName);
 const editFormIsInvalid = isInvalid(formName);
 
 function mapStateToProps(state, props) {
-  const category = get(props, 'match.params.category');
-  const type = get(props, 'match.params.type');
+  const category = props.category;
+  const type = props.type;
 
   const protocol = getProtocol(state);
   const typeConfiguration = get(

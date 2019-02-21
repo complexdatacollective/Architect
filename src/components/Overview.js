@@ -8,53 +8,58 @@ import { compose } from 'recompose';
 import { Node, Button, Icon } from '../ui/components';
 import FormCard from './StageEditor/sections/Form/FormCard';
 import * as Fields from '../ui/components/Fields';
-import ProtocolLink from './ProtocolLink';
 import { getProtocol } from '../selectors/protocol';
+import Link from './Link';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
+import { actionCreators as uiActions } from '../ducks/modules/ui';
 
 class Overview extends Component {
-  get renderNodeTypes() {
+  renderNodeTypes() {
     const nodeTypes = get(this.props.variableRegistry, 'node', {});
     if (size(nodeTypes) === 0) {
       return (
-        <em>No node types defined, yet. <ProtocolLink to="registry/node/">Create one?</ProtocolLink></em>
+        <em>No node types defined, yet. <Link screen="type" params={{ category: 'node' }}>Create one?</Link></em>
       );
     }
 
     return map(
       nodeTypes,
-      (node, key) => (
-        <ProtocolLink to={`registry/node/${key}`} key={key}>
+      (node, type) => (
+        <Link
+          screen="type"
+          params={{ category: 'node', type }}
+          key={type}
+        >
           <Node label={node.label} color={get(node, 'color', '')} />
-        </ProtocolLink>
+        </Link>
       ),
     );
   }
 
-  get renderEdgeTypes() {
+  renderEdgeTypes() {
     const edgeTypes = get(this.props.variableRegistry, 'edge', {});
 
     if (size(edgeTypes) === 0) {
       return (
-        <em>No edge types defined, yet. <ProtocolLink to="registry/edge/">Create one?</ProtocolLink></em>
+        <em>No edge types defined, yet. <Link screen="type" params={{ category: 'edge' }}>Create one?</Link></em>
       );
     }
 
     return map(
       edgeTypes,
-      (edge, key) => (
-        <ProtocolLink
-          to={`registry/edge/${key}`}
-          key={key}
-          title={edge.label}
+      (edge, type) => (
+        <Link
+          screen="type"
+          params={{ category: 'edge', type }}
+          key={type}
         >
           <Icon name="links" color={get(edge, 'color', '')} />
-        </ProtocolLink>
+        </Link>
       ),
     );
   }
 
-  get renderForms() {
+  renderForms() {
     const forms = this.props.forms;
     const nodeTypes = get(this.props.variableRegistry, 'node', {});
     if (size(nodeTypes) === 0) {
@@ -67,7 +72,7 @@ class Overview extends Component {
 
     if (size(forms) === 0) {
       return (
-        <em>No forms defined, yet. <ProtocolLink to="form/">Create one?</ProtocolLink></em>
+        <em>No forms defined, yet. <Link screen="form">Create one?</Link></em>
       );
     }
 
@@ -75,8 +80,12 @@ class Overview extends Component {
       <React.Fragment>
         {map(
           forms,
-          (form, key) => (
-            <ProtocolLink key={key} to={`form/${key}`}>
+          (form, formName) => (
+            <Link
+              key={formName}
+              screen="form"
+              params={{ form: formName }}
+            >
               <FormCard
                 label={form.title}
                 input={{
@@ -84,7 +93,7 @@ class Overview extends Component {
                   value: ' ',
                 }}
               />
-            </ProtocolLink>
+            </Link>
           ),
         )}
       </React.Fragment>
@@ -127,25 +136,25 @@ class Overview extends Component {
                   <legend className="overview__group-title">Variable registry</legend>
                   <div className="overview__group-section">
                     <h4>Node types</h4>
-                    { this.renderNodeTypes }
+                    { this.renderNodeTypes() }
                   </div>
                   <div className="overview__group-section">
                     <h4>Edge types</h4>
-                    { this.renderEdgeTypes }
+                    { this.renderEdgeTypes() }
                   </div>
                   <div className="overview__manage-button">
-                    <ProtocolLink to={'registry'}>
-                      <Button size="small">Manage registry</Button>
-                    </ProtocolLink>
+                    <Link screen="codebook">
+                      <Button size="small">Manage codebook</Button>
+                    </Link>
                   </div>
                 </div>
                 <div className="overview__group overview__group--forms">
                   <legend className="overview__group-title">Forms</legend>
-                  { this.renderForms }
+                  { this.renderForms() }
                   <div className="overview__manage-button">
-                    <ProtocolLink to={'forms'}>
+                    <Link screen="forms">
                       <Button size="small">Manage forms</Button>
-                    </ProtocolLink>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -177,6 +186,7 @@ Overview.defaultProps = {
 
 const mapDispatchToProps = dispatch => ({
   updateOptions: bindActionCreators(protocolActions.updateOptions, dispatch),
+  openScreen: bindActionCreators(uiActions.openScreen, dispatch),
 });
 
 const mapStateToProps = (state) => {

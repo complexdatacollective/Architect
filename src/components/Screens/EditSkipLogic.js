@@ -87,7 +87,7 @@ class EditSkipLogic extends PureComponent {
 }
 
 const mapStateToProps = (state, props) => {
-  const stageId = get(props, 'match.params.id');
+  const stageId = props.id;
   const protocol = getProtocol(state);
   const stage = find(protocol.stages, ['id', stageId]);
   const logic = get(stage, 'skipLogic', defaultLogic);

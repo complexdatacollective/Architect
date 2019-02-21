@@ -41,9 +41,9 @@ class Form extends Component {
     const ui = this.props.ui;
 
     if (!isEqual(ui, prevUI)) {
-      if (ui.type === 'NEW_FORM') {
-        if (ui.payload.form.type === this.props.nodeType) {
-          this.props.change(ui.payload.formName);
+      if (ui.screen === 'form') {
+        if (ui.form.type === this.props.nodeType) {
+          this.props.change(ui.formName);
         }
       }
     }

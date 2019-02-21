@@ -8,7 +8,7 @@ import EditStage from './EditStage';
 import EditSkipLogic from './EditSkipLogic';
 import ViewForms from './ViewForms';
 import EditForm from './EditForm';
-// import Codebook from './Codebook';
+import Codebook from './VariableRegistry';
 import EditType from './EditType';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import TimelineScreenTransition from '../Transitions/TimelineScreen';
@@ -20,7 +20,7 @@ const NAMES = {
   skip: EditSkipLogic,
   forms: ViewForms,
   form: EditForm,
-  // codebook: Codebook,
+  codebook: Codebook,
   type: EditType,
 };
 
@@ -38,7 +38,7 @@ const Screens = (props) => {
             {...params}
             show
             state={state}
-            onComplete={result => props.closeScreen(screen, result)}
+            onComplete={result => props.closeScreen(screen, { ...result, screen })}
             key={screen}
           />
         )}
