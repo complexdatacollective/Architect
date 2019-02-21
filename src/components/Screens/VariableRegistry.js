@@ -164,12 +164,14 @@ class VariableRegistry extends Component {
   render() {
     const {
       show,
+      state,
       protocolPath,
     } = this.props;
 
     return (
       <Card
         show={show}
+        state={state}
         buttons={this.buttons}
         onAcknowledgeError={this.handleCancel}
       >
@@ -231,6 +233,7 @@ class VariableRegistry extends Component {
 
 VariableRegistry.propTypes = {
   show: PropTypes.bool,
+  state: PropTypes.object,
   variableRegistry: PropTypes.shape({
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
@@ -251,6 +254,7 @@ VariableRegistry.defaultProps = {
     edge: {},
   },
   show: true,
+  state: null,
   onComplete: () => {},
 };
 

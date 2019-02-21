@@ -22,12 +22,14 @@ class EditForm extends PureComponent {
     hasUnsavedChanges: PropTypes.bool,
     onComplete: PropTypes.func,
     show: PropTypes.bool,
+    state: PropTypes.object,
   };
 
   static defaultProps = {
     formName: null,
     form: {},
     show: true,
+    state: null,
     onComplete: () => {},
     hasUnsavedChanges: false,
   };
@@ -69,6 +71,7 @@ class EditForm extends PureComponent {
   render() {
     const {
       form,
+      state,
       show,
     } = this.props;
 
@@ -76,6 +79,7 @@ class EditForm extends PureComponent {
       <Card
         buttons={this.buttons}
         show={show}
+        state={state}
         onCancel={this.handleCancel}
       >
         <FormEditor

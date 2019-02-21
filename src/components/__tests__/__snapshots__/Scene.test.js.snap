@@ -80,9 +80,7 @@ ShallowWrapper {
             />
           </div>
         </Flipper>,
-        <Connect(Cards)
-          location={Object {}}
-        />,
+        <Connect(Screens) />,
       ],
       "className": "scene",
     },
@@ -324,9 +322,7 @@ ShallowWrapper {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
-        "props": Object {
-          "location": Object {},
-        },
+        "props": Object {},
         "ref": null,
         "rendered": null,
         "type": [Function],
@@ -399,9 +395,7 @@ ShallowWrapper {
               />
             </div>
           </Flipper>,
-          <Connect(Cards)
-            location={Object {}}
-          />,
+          <Connect(Screens) />,
         ],
         "className": "scene",
       },
@@ -643,9 +637,7 @@ ShallowWrapper {
           "instance": null,
           "key": undefined,
           "nodeType": "class",
-          "props": Object {
-            "location": Object {},
-          },
+          "props": Object {},
           "ref": null,
           "rendered": null,
           "type": [Function],
@@ -758,9 +750,7 @@ ShallowWrapper {
             />
           </div>
         </Flipper>,
-        <Connect(Cards)
-          location={Object {}}
-        />,
+        <Connect(Screens) />,
       ],
       "className": "scene scene--protocol",
     },
@@ -1002,9 +992,7 @@ ShallowWrapper {
         "instance": null,
         "key": undefined,
         "nodeType": "class",
-        "props": Object {
-          "location": Object {},
-        },
+        "props": Object {},
         "ref": null,
         "rendered": null,
         "type": [Function],
@@ -1077,9 +1065,7 @@ ShallowWrapper {
               />
             </div>
           </Flipper>,
-          <Connect(Cards)
-            location={Object {}}
-          />,
+          <Connect(Screens) />,
         ],
         "className": "scene scene--protocol",
       },
@@ -1321,9 +1307,7 @@ ShallowWrapper {
           "instance": null,
           "key": undefined,
           "nodeType": "class",
-          "props": Object {
-            "location": Object {},
-          },
+          "props": Object {},
           "ref": null,
           "rendered": null,
           "type": [Function],

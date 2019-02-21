@@ -8,6 +8,7 @@ import window from '../ui/components/window';
 class Card extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
+    state: PropTypes.object,
     buttons: PropTypes.arrayOf(PropTypes.node),
     secondaryButtons: PropTypes.node,
     type: PropTypes.string,
@@ -17,6 +18,7 @@ class Card extends PureComponent {
 
   static defaultProps = {
     type: 'default',
+    state: null,
     children: null,
     buttons: [],
     show: true,
@@ -30,13 +32,15 @@ class Card extends PureComponent {
     const {
       buttons,
       secondaryButtons,
-      // state,
+      state,
       children,
       type,
       show,
     } = this.props;
 
     const classes = cx('arch-card', `arch-card--${type}`);
+
+    const isEntering = state === 'entering' || state === 'entered';
 
     return (
       <div className={classes}>
@@ -46,7 +50,7 @@ class Card extends PureComponent {
           </CardErrorBoundary>
         </div>
         <ControlBar
-          show={true} //(state === 'entering' || state === 'entered')}
+          show={isEntering}
           className="control-bar--delayed"
           flip
           buttons={buttons}

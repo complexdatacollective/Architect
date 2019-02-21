@@ -11,6 +11,7 @@ ShallowWrapper {
     openDialog={[Function]}
     protocolPath={null}
     show={true}
+    state={null}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -84,6 +85,7 @@ ShallowWrapper {
         </div>
       </Connect(Guided)>,
       "show": true,
+      "state": null,
     },
     "ref": null,
     "rendered": Object {
@@ -483,6 +485,7 @@ ShallowWrapper {
           </div>
         </Connect(Guided)>,
         "show": true,
+        "state": null,
       },
       "ref": null,
       "rendered": Object {

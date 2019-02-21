@@ -48,10 +48,12 @@ class EditType extends PureComponent {
     hasUnsavedChanges: PropTypes.bool,
     onComplete: PropTypes.func.isRequired,
     show: PropTypes.bool,
+    state: PropTypes.object,
   };
 
   static defaultProps = {
     show: true,
+    state: null,
     hasUnsavedChanges: false,
     category: null,
     type: null,
@@ -92,6 +94,7 @@ class EditType extends PureComponent {
     const {
       initialValues,
       show,
+      state,
       category,
       type,
     } = this.props;
@@ -100,6 +103,7 @@ class EditType extends PureComponent {
       <Card
         buttons={this.buttons}
         show={show}
+        state={state}
         onCancel={this.handleCancel}
       >
         { category &&

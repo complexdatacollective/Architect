@@ -6,8 +6,8 @@ import { Timeline } from '../Timeline';
 
 const mockProps = {
   deleteStage: () => {},
-  goTo: () => {},
   openDialog: () => {},
+  openScreen: () => {},
 };
 
 describe('<Timeline />', () => {

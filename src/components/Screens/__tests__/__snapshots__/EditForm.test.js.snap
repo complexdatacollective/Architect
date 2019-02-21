@@ -10,6 +10,7 @@ ShallowWrapper {
     hasUnsavedChanges={false}
     onComplete={[Function]}
     show={true}
+    state={null}
     submitForm={[Function]}
     updateForm={[Function]}
   />,
@@ -33,6 +34,7 @@ ShallowWrapper {
       />,
       "onCancel": [Function],
       "show": true,
+      "state": null,
     },
     "ref": null,
     "rendered": Object {
@@ -62,6 +64,7 @@ ShallowWrapper {
         />,
         "onCancel": [Function],
         "show": true,
+        "state": null,
       },
       "ref": null,
       "rendered": Object {

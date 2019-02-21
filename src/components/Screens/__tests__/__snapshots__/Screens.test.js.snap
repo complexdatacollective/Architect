@@ -1,19 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EditType /> can render 1`] = `
+exports[`<Screens /> can render? 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <EditType
-    category={null}
-    createType={[Function]}
-    hasUnsavedChanges={false}
-    initialValues={Object {}}
-    onComplete={[Function]}
-    show={true}
-    state={null}
-    submitForm={[Function]}
-    type={null}
-    updateType={[Function]}
+  Symbol(enzyme.__unrendered__): <Screens
+    closeScreen={[Function]}
+    screens={Array []}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -28,14 +20,13 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "buttons": Array [],
-      "children": null,
-      "onCancel": [Function],
-      "show": true,
-      "state": null,
+      "childFactory": [Function],
+      "children": Array [],
+      "className": "screens",
+      "component": "div",
     },
     "ref": null,
-    "rendered": null,
+    "rendered": Array [],
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -44,14 +35,13 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "buttons": Array [],
-        "children": null,
-        "onCancel": [Function],
-        "show": true,
-        "state": null,
+        "childFactory": [Function],
+        "children": Array [],
+        "className": "screens",
+        "component": "div",
       },
       "ref": null,
-      "rendered": null,
+      "rendered": Array [],
       "type": [Function],
     },
   ],

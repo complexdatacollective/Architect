@@ -11,7 +11,6 @@ import { getInterface } from './Interfaces';
 import { FormCodeView } from '../CodeView';
 import Issues from '../Issues';
 import windowRootProvider from '../../ui/components/windowRootProvider';
-import PromptWindow from '../Prompts/PromptWindow';
 
 const formName = 'edit-stage';
 const getFormValues = formValueSelector(formName);
@@ -50,7 +49,8 @@ class StageEditor extends Component {
         key={index}
         form={form}
         hasSubmitFailed={this.props.submitFailed}
-        windowRoot={this.props.windowRoot} // This will ensure connect() components re-render when the window root changes
+        // `windowRoot` will ensure connect() components re-render when the window root changes
+        windowRoot={this.props.windowRoot}
       />
     ));
   }

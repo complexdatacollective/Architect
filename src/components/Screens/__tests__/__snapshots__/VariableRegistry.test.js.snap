@@ -12,6 +12,7 @@ ShallowWrapper {
     openDialog={[Function]}
     protocolPath=""
     show={true}
+    state={null}
     variableRegistry={
       Object {
         "edge": Object {},
@@ -121,6 +122,7 @@ ShallowWrapper {
       </Connect(Guided)>,
       "onAcknowledgeError": [Function],
       "show": true,
+      "state": null,
     },
     "ref": null,
     "rendered": Object {
@@ -803,6 +805,7 @@ ShallowWrapper {
         </Connect(Guided)>,
         "onAcknowledgeError": [Function],
         "show": true,
+        "state": null,
       },
       "ref": null,
       "rendered": Object {

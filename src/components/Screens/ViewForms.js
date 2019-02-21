@@ -78,12 +78,14 @@ class ViewForms extends Component {
   render() {
     const {
       show,
+      state,
       protocolPath,
     } = this.props;
 
     return (
       <Card
         show={show}
+        state={state}
         buttons={this.buttons}
       >
         <Guided>
@@ -124,6 +126,7 @@ class ViewForms extends Component {
 
 ViewForms.propTypes = {
   show: PropTypes.bool,
+  state: PropTypes.object,
   forms: PropTypes.object.isRequired,
   nodes: PropTypes.object.isRequired,
   protocolPath: PropTypes.string,
@@ -135,6 +138,7 @@ ViewForms.propTypes = {
 ViewForms.defaultProps = {
   protocolPath: null,
   show: true,
+  state: null,
   onComplete: () => {},
 };
 

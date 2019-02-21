@@ -54,7 +54,7 @@ export default (state = initialState, { type, payload } = { type: null, payload:
           ...state.screens,
           {
             screen: payload.screen,
-            params: { ...payload.params, },
+            params: { ...payload.params },
           },
         ],
       };
