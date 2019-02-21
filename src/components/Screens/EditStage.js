@@ -32,12 +32,14 @@ class EditStage extends PureComponent {
     createStage: PropTypes.func.isRequired,
     previewStage: PropTypes.func.isRequired,
     closePreview: PropTypes.func.isRequired,
+    state: PropTypes.string,
   };
 
   static defaultProps = {
     id: null,
     insertAtIndex: null,
     onComplete: () => {},
+    state: null,
   };
 
   get isDirty() {
@@ -86,13 +88,14 @@ class EditStage extends PureComponent {
   handleCancel = this.handleComplete;
 
   render() {
-    const { stage, show } = this.props;
+    const { stage, show, state } = this.props;
 
     return (
       <Card
         buttons={this.buttons}
         secondaryButtons={this.secondaryButtons}
         show={show}
+        state={state}
         onCancel={this.handleCancel}
       >
         <StageEditor

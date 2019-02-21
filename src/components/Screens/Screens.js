@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
+import { TransitionGroup } from 'react-transition-group';
 import EditStage from './EditStage';
 import EditSkipLogic from './EditSkipLogic';
 import ViewForms from './ViewForms';
@@ -10,6 +11,7 @@ import EditForm from './EditForm';
 // import Codebook from './Codebook';
 import EditType from './EditType';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
+import TimelineScreenTransition from '../Transitions/TimelineScreen';
 
 const NotFound = () => (<div> Screen not found </div>);
 
@@ -30,19 +32,24 @@ const Screens = (props) => {
     const ScreenComponent = getScreenComponent(screen);
 
     return (
-      <ScreenComponent
-        {...params}
-        show
-        onComplete={result => props.closeScreen(screen, result)}
-        key={screen}
-      />
+      <TimelineScreenTransition>
+        {state => (
+          <ScreenComponent
+            {...params}
+            show
+            state={state}
+            onComplete={result => props.closeScreen(screen, result)}
+            key={screen}
+          />
+        )}
+      </TimelineScreenTransition>
     );
   });
 
   return (
-    <div className="screens">
+    <TransitionGroup className="screens">
       {screens}
-    </div>
+    </TransitionGroup>
   );
 };
 

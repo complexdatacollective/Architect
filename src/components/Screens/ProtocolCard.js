@@ -55,7 +55,7 @@ class ProtocolCard extends PureComponent {
         buttons={this.buttons}
         style={cancel ? 'wipe' : 'fade'}
       >
-        { this.props.children }
+        { children }
       </Card>
     );
   }

@@ -133,7 +133,7 @@
         "react-sortable-hoc": "^0.6.8",
         "react-test-renderer": "^16.5.2",
         "react-transform-hmr": "^1.0.4",
-        "react-transition-group": "^2.5.0",
+        "react-transition-group": "^2.5.3",
         "recompose": "^0.26.0",
         "redux": "^3.6.0",
         "redux-form": "^7.4.2",
