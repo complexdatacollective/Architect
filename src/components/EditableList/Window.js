@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Fade from '../Transitions/Fade';
 import window from '../../ui/components/window';
 
-const PromptWindow = ({
+const Window = ({
   show,
   children,
 }) => (
@@ -14,15 +14,15 @@ const PromptWindow = ({
   </Fade>
 );
 
-PromptWindow.propTypes = {
+Window.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node,
 };
 
-PromptWindow.defaultProps = {
+Window.defaultProps = {
   show: false,
   children: null,
 };
 
-export default window(PromptWindow);
+export default window(Window);
 

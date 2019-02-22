@@ -2,10 +2,10 @@ import React from 'react';
 import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
-import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import EditableList, { withSubjectNodeType } from '../../../EditableList';
 
 const SociogramPrompts = props => (
-  <Prompts
+  <EditableList
     contentId="guidance.editor.sociogram_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
@@ -14,7 +14,7 @@ const SociogramPrompts = props => (
   >
     <h2>Prompts</h2>
     <p>Add prompts to your Sociogram:</p>
-  </Prompts>
+  </EditableList>
 );
 
 export { SociogramPrompts };

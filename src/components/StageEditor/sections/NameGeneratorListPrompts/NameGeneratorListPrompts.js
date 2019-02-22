@@ -1,14 +1,15 @@
 import React from 'react';
 import { withProps, compose } from 'recompose';
-import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import EditableList, { withSubjectNodeType } from '../../../EditableList';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 
 const NameGeneratorListPrompts = props => (
-  <Prompts
+  <EditableList
     contentId="guidance.editor.name_generator_list_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
+    title="Edit Prompt"
     template={{ showExistingNodes: true }}
     {...props}
   >
@@ -17,7 +18,7 @@ const NameGeneratorListPrompts = props => (
       Add one or more &quot;prompts&quot; below, to ecourage your participants to create
       nodes.
     </p>
-  </Prompts>
+  </EditableList>
 );
 
 export { NameGeneratorListPrompts };

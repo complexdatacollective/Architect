@@ -6,6 +6,7 @@ import { compose, withState, withHandlers } from 'recompose';
 import { Guided } from './Guided';
 import { FormCodeView } from './CodeView';
 import Issues from './Issues';
+import windowRootProvider from '../ui/components/windowRootProvider';
 
 const Editor = ({
   handleSubmit,
@@ -15,12 +16,13 @@ const Editor = ({
   issues,
   submitFailed,
   component: Component,
+  setWindowRoot,
   ...rest
 }) => (
   <React.Fragment>
     <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
     <Guided form={form}>
-      <div className="editor">
+      <div className="editor" ref={setWindowRoot}>
         <div className="editor__window">
           <div className="editor__content">
             <Form onSubmit={handleSubmit}>
@@ -72,4 +74,5 @@ export default compose(
     enableReinitialize: true,
   }),
   connect(mapStateToProps),
+  windowRootProvider,
 )(Editor);

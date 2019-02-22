@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Field, autofill, getFormMeta } from 'redux-form';
+import { compose } from 'recompose';
 import { ValidatedField } from '../Form';
 import Guidance from '../Guidance';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
-import Variables from './Variables';
 import IconOption from './IconOption';
 import { getFieldId } from '../../utils/issues';
 import safeName from './safeName';
 import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../config';
+import VariablePreview from './VariablePreview';
+import VariableFields from './VariableFields';
+import EditableList from '../EditableList';
 
 class TypeEditor extends Component {
   handleChangeLabel = (e, value) => {
@@ -38,7 +41,7 @@ class TypeEditor extends Component {
     const paletteSize = COLOR_PALETTES[paletteName];
 
     return (
-      <div className="type-editor editor__sections">
+      <React.Fragment>
         <div className="code-button">
           <small>
             (<a onClick={toggleCodeView}>Show Code View</a>)
@@ -132,14 +135,20 @@ class TypeEditor extends Component {
 
         <Guidance contentId="guidance.registry.type.variables">
           <div className="editor__section">
-            <h2>Variables</h2>
-            <Variables
-              form={form}
-              name="variables"
-            />
+            <EditableList
+              previewComponent={VariablePreview}
+              editComponent={VariableFields}
+              fieldName="variables"
+              form={{ name: form }}
+              title="Edit Variable"
+              canSort={false}
+            >
+              <h2>Variables</h2>
+            </EditableList>
+
           </div>
         </Guidance>
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -175,4 +184,6 @@ const mapDispatchToProps = (dispatch, { form }) => ({
 
 export { TypeEditor };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeEditor);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+)(TypeEditor);

@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { Item } from '../OrderedList';
 
-class PromptPreview extends PureComponent {
+class Preview extends PureComponent {
   render() {
     const {
       onClickPrompt,
       editField,
       fieldId,
       handleDelete,
+      canSort,
     } = this.props;
 
     // Switch out flipId when fields match to prevent removal
@@ -21,7 +22,12 @@ class PromptPreview extends PureComponent {
     return (
       <Flipped flipId={flipId}>
         {flipProps => (
-          <Item {...flipProps} handleDelete={handleDelete} handleClick={handleClick}>
+          <Item
+            {...flipProps}
+            sortable={canSort}
+            handleDelete={handleDelete}
+            handleClick={handleClick}
+          >
             <Flipped inverseFlipId={fieldId} scale>
               <div className="prompts-prompt-preview">
                 {this.preview && this.preview()}
@@ -34,10 +40,15 @@ class PromptPreview extends PureComponent {
   }
 }
 
-PromptPreview.propTypes = {
+Preview.propTypes = {
   fieldId: PropTypes.string.isRequired,
+  canSort: PropTypes.bool,
 };
 
-export { PromptPreview };
+Preview.defaultProps = {
+  canSort: true,
+};
 
-export default PromptPreview;
+export { Preview };
+
+export default Preview;

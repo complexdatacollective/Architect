@@ -12,8 +12,9 @@ const formOptions = {
   touchOnChange: true,
 };
 
-const PromptForm = ({
+const Form = ({
   children,
+  title,
   handleSubmit, // redux form wraps `onSubmit` and passes this prop in it's place
   onCancel,
   flipId,
@@ -22,7 +23,7 @@ const PromptForm = ({
     <div className="prompts-prompt-form">
       <div className="prompts-prompt-form__container">
         <form onSubmit={stopPropagationFromHandler(handleSubmit)} className="prompts-prompt-form__content">
-          <h1>Edit Prompt</h1>
+          <h1>{title}</h1>
           <div className="prompts-prompt-form__fields">
             {children}
           </div>
@@ -36,20 +37,22 @@ const PromptForm = ({
   </Flipped>
 );
 
-PromptForm.propTypes = {
+Form.propTypes = {
   children: PropTypes.node,
+  title: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   flipId: PropTypes.string,
 };
 
-PromptForm.defaultProps = {
+Form.defaultProps = {
+  title: null,
   children: null,
   flipId: null,
 };
 
-export { PromptForm };
+export { Form };
 
 export default compose(
   reduxForm(formOptions),
-)(PromptForm);
+)(Form);

@@ -11,9 +11,9 @@ import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
-import PromptWindow from './PromptWindow';
-import PromptForm from './PromptForm';
-import withPromptHandlers from './withPromptHandlers';
+import Window from './Window';
+import Form from './Form';
+import withEditHandlers from './withEditHandlers';
 
 const notEmpty = value => (
   value && value.length > 0 ? undefined : 'You must create at least one prompt'
@@ -23,20 +23,21 @@ const handleSubmitFail = (issues) => {
   scrollToFirstIssue(issues);
 };
 
-class Prompts extends PureComponent {
+class EditableList extends PureComponent {
   render() {
     const {
       editField,
       handleEditField,
       handleResetEditField,
-      handleUpdatePrompt,
+      handleUpdate,
       disabled,
-      handleAddNewPrompt,
+      handleAddNew,
       fieldName,
       contentId,
       children,
-      upsertPrompt,
-      promptCount,
+      upsert,
+      title,
+      itemCount,
       setEditField,
       initialValues,
       editComponent: EditComponent,
@@ -58,7 +59,7 @@ class Prompts extends PureComponent {
             flipKey={isEditing}
             portalKey="prompts"
           >
-            <div id={getFieldId(`${fieldName}._error`)} data-name="Prompts" />
+            <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
             {children}
             <div className="stage-editor-section-prompts">
               <div className="stage-editor-section-prompts__prompts">
@@ -73,14 +74,15 @@ class Prompts extends PureComponent {
                 />
               </div>
               <Flipped flipId={null}>
-                <NewButton onClick={handleAddNewPrompt} />
+                <NewButton onClick={handleAddNew} />
               </Flipped>
             </div>
-            <PromptWindow show={!!editField}>
-              <PromptForm
+            <Window show={!!editField}>
+              <Form
                 initialValues={initialValues}
                 flipId={editField}
-                onSubmit={handleUpdatePrompt}
+                title={title}
+                onSubmit={handleUpdate}
                 onSubmitFail={handleSubmitFail}
                 onCancel={handleResetEditField}
               >
@@ -89,8 +91,8 @@ class Prompts extends PureComponent {
                   onComplete={handleResetEditField}
                   {...rest}
                 />
-              </PromptForm>
-            </PromptWindow>
+              </Form>
+            </Window>
           </Flipper>
         </div>
       </Guidance>
@@ -98,7 +100,7 @@ class Prompts extends PureComponent {
   }
 }
 
-Prompts.propTypes = {
+EditableList.propTypes = {
   form: PropTypes.shape({
     name: PropTypes.string,
     getValues: PropTypes.func,
@@ -106,15 +108,17 @@ Prompts.propTypes = {
   disabled: PropTypes.bool,
   fieldName: PropTypes.string.isRequired,
   contentId: PropTypes.string,
+  title: PropTypes.string,
   children: PropTypes.node,
   previewComponent: PropTypes.any.isRequired,
   editComponent: PropTypes.any.isRequired,
 };
 
-Prompts.defaultProps = {
+EditableList.defaultProps = {
   disabled: false,
   contentId: null,
   children: null,
+  title: null,
 };
 
 const withDefaultFieldName = defaultProps({
@@ -123,10 +127,10 @@ const withDefaultFieldName = defaultProps({
 
 const withEditingState = withState('editField', 'setEditField', null);
 
-export { Prompts };
+export { EditableList };
 
 export default compose(
   withDefaultFieldName,
   withEditingState,
-  withPromptHandlers,
-)(Prompts);
+  withEditHandlers,
+)(EditableList);

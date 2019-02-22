@@ -1,2 +1,2 @@
-export { default } from './Prompts';
+export { default } from './EditableList';
 export { default as withSubjectNodeType } from './withSubjectNodeType';

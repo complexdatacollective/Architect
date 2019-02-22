@@ -1,14 +1,15 @@
 import React from 'react';
 import { withProps, compose } from 'recompose';
-import Prompts, { withSubjectNodeType } from '../../../Prompts';
+import EditableList, { withSubjectNodeType } from '../../../EditableList';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 
 const OrdinalBinPrompts = props => (
-  <Prompts
+  <EditableList
     contentId="guidance.editor.ordinal_bin_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
+    title="Edit Prompt"
     template={{ color: 'ord-color-seq-1' }}
     {...props}
   >
@@ -16,7 +17,7 @@ const OrdinalBinPrompts = props => (
     <p>
       Add one or more &quot;prompts&quot; below, to enable your participants to organise nodes.
     </p>
-  </Prompts>
+  </EditableList>
 );
 
 export { OrdinalBinPrompts };
