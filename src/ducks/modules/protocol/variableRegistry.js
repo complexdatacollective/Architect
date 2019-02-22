@@ -13,16 +13,26 @@ const initialState = {
   node: {},
 };
 
-function createType(entity, configuration) {
-  return {
-    type: CREATE_TYPE,
-    meta: {
-      type: uuid(),
-      entity,
-    },
-    configuration,
+const createType = (entity, configuration) =>
+  (dispatch) => {
+    const type = uuid();
+
+    const action = {
+      type: CREATE_TYPE,
+      meta: {
+        type,
+        entity,
+      },
+      configuration,
+    };
+
+    dispatch(action);
+
+    return {
+      type,
+      category: entity,
+    };
   };
-}
 
 function updateType(entity, type, configuration) {
   return {

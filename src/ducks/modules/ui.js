@@ -1,3 +1,11 @@
+import { isEqual } from 'lodash';
+
+export const onUIMessage = (ui, prevUI, screen, handler) => {
+  if (isEqual(ui, prevUI)) { return false; }
+  if (ui.screen !== screen) { return false; }
+  return handler(ui.params);
+};
+
 const OPEN_SCREEN = 'UI/OPEN_SCREEN';
 const UPDATE_SCREEN = 'UI/UPDATE_SCREEN';
 const CLOSE_SCREEN = 'UI/CLOSE_SCREEN';

@@ -4,6 +4,11 @@ import { Transition } from 'react-transition-group';
 import anime from 'animejs';
 import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
 
+const styles = {
+  FADE: 'FADE',
+  WIPE: 'WIPE',
+};
+
 const fadeIn = {
   opacity: [0, 1],
   translateX: [0, 0],
@@ -15,6 +20,10 @@ const fadeOut = {
 
 const wipeOut = {
   translateX: [0, '100%'],
+};
+
+const wipeIn = {
+  translateX: ['100%', 0],
 };
 
 const TimelineScreen = ({
@@ -42,7 +51,7 @@ const TimelineScreen = ({
             easing: 'easeInOutQuad',
             duration: enterDuration,
             delay: enterDelay,
-            ...fadeIn,
+            ...(style === styles.WIPE ? wipeIn : fadeIn),
           });
         }
       }
@@ -54,7 +63,7 @@ const TimelineScreen = ({
             easing: 'easeInOutQuad',
             duration: exitDuration,
             delay: exitDelay,
-            ...(style === 'wipe' ? wipeOut : fadeOut),
+            ...(style === styles.WIPE ? wipeOut : fadeOut),
           });
         }
       }
@@ -80,7 +89,12 @@ TimelineScreen.defaultProps = {
   exitDelay: 0,
   enterDuration: null,
   exitDuration: null,
-  style: 'wipe',
+  style: styles.FADE,
+};
+
+export {
+  styles,
+  TimelineScreen,
 };
 
 export default TimelineScreen;
