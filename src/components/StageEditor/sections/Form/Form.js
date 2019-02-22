@@ -19,6 +19,12 @@ const formOption = PropTypes.shape({
   value: PropTypes.string,
 });
 
+const onUIMessage = (ui, prevUI, screen, handler) => {
+  if (isEqual(ui, prevUI)) { return false; }
+  if (ui.screen !== screen) { return false; }
+  return handler(ui.params);
+};
+
 class Form extends Component {
   static propTypes = {
     forms: PropTypes.arrayOf(formOption),
@@ -37,17 +43,18 @@ class Form extends Component {
     forms: [],
   };
 
-  componentDidUpdate({ ui: prevUI }) {
-    const ui = this.props.ui;
-
-    if (!isEqual(ui, prevUI)) {
-      if (ui.screen === 'form') {
-        if (ui.form.type === this.props.nodeType) {
-          this.props.change(ui.formName);
-        }
-      }
-    }
+  componentDidUpdate({ ui: prevMessage }) {
+    const message = this.props.ui;
+    onUIMessage(message, prevMessage, 'form', this.handleNewFormMessage);
   }
+
+  handleNewFormMessage = (params) => {
+    const newFormNodeType = get(params, 'form.type');
+    const newFormName = get(params, 'formName');
+    if (newFormName && newFormNodeType === this.props.nodeType) {
+      this.props.change(newFormName);
+    }
+  };
 
   handleClickCreateNewForm = () => {
     this.showFormEditor();
@@ -122,7 +129,7 @@ const mapStateToProps = (state, props) => {
 
   return {
     nodeType,
-    ui: state.ui.params,
+    ui: state.ui.message,
     forms: formOptions,
     disabled: !nodeType,
     selectedForm,

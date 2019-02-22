@@ -30,6 +30,8 @@ const getScreenComponent = screen =>
 const Screens = (props) => {
   const screens = props.screens.map(({ screen, params }) => {
     const ScreenComponent = getScreenComponent(screen);
+    const onComplete = result =>
+      props.closeScreen(screen, result);
 
     return (
       <TimelineScreenTransition>
@@ -38,7 +40,7 @@ const Screens = (props) => {
             {...params}
             show
             state={state}
-            onComplete={result => props.closeScreen(screen, { ...result, screen })}
+            onComplete={onComplete}
             key={screen}
           />
         )}

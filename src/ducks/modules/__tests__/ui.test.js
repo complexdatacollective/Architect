@@ -2,18 +2,22 @@
 
 import reducer, { actionCreators } from '../ui';
 
+const initialState = {
+  root: {
+    screen: 'start',
+    params: {},
+  },
+  screens: [],
+  message: {},
+};
+
 describe('ui', () => {
   it('initialState', () => {
     expect(
       reducer(),
-    ).toEqual({
-      root: {
-        screen: 'start',
-        params: {},
-      },
-      screens: [],
-      params: {},
-    });
+    ).toEqual(
+      initialState,
+    );
   });
 
   describe('OPEN_SCREEN', () => {
@@ -21,9 +25,16 @@ describe('ui', () => {
     const params = { foo: 'bar' };
 
     describe('not root', () => {
-      const openAction = actionCreators.openScreen(screenName, params);
+      const initialStateWithMessage = {
+        ...initialState,
+        message: {
+          screen: 'foo',
+          params: { bar: 'bazz' },
+        },
+      };
 
-      const subject = reducer(undefined, openAction);
+      const openAction = actionCreators.openScreen(screenName, params);
+      const subject = reducer(initialStateWithMessage, openAction);
 
       it('adds screen to the list (with params)', () => {
         expect(
@@ -34,6 +45,10 @@ describe('ui', () => {
             params: { ...params },
           },
         ]);
+      });
+
+      it('resets message', () => {
+        expect(subject.message).toEqual({});
       });
     });
   });
@@ -50,11 +65,12 @@ describe('ui', () => {
 
     expect(openState.screens.length).toBe(1);
 
-    it('sets params', () => {
+    it('sets message', () => {
       expect(
-        closeState.params,
+        closeState.message,
       ).toEqual({
-        ...params,
+        screen: screenName,
+        params,
       });
     });
 
@@ -62,6 +78,19 @@ describe('ui', () => {
       expect(
         closeState.screens.length,
       ).toBe(0);
+    });
+
+    describe('if params not set', () => {
+      const closeActionNoParams = actionCreators.closeScreen(screenName);
+      const closeStateNoParams = reducer(openState, closeActionNoParams);
+
+      it("doesn't set message", () => {
+        expect(
+          closeStateNoParams.params,
+        ).toEqual(
+          openState.params,
+        );
+      });
     });
   });
 

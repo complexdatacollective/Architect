@@ -8,7 +8,7 @@ const initialState = {
     params: {},
   },
   screens: [],
-  params: {},
+  message: {},
 };
 
 const openScreen = (screen, params = {}, root = false) => ({
@@ -20,11 +20,11 @@ const openScreen = (screen, params = {}, root = false) => ({
   },
 });
 
-const closeScreen = (screen, params = {}) => ({
+const closeScreen = (screen, params = null) => ({
   type: CLOSE_SCREEN,
   payload: {
     screen,
-    params,
+    ...(params ? { params } : {}),
   },
 });
 
@@ -57,16 +57,24 @@ export default (state = initialState, { type, payload } = { type: null, payload:
             params: { ...payload.params },
           },
         ],
+        message: {},
       };
-    case CLOSE_SCREEN:
+    case CLOSE_SCREEN: {
+      const message = payload.params ?
+        {
+          ...state.message,
+          screen: payload.screen,
+          params: payload.params,
+        } :
+        state.message;
+
       return {
         ...state,
         screens: state.screens
           .filter(({ screen }) => screen !== payload.screen),
-        params: {
-          ...payload.params,
-        },
+        message,
       };
+    }
     case UPDATE_SCREEN:
       return {
         ...state,
