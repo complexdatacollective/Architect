@@ -15,7 +15,16 @@ const initialState = {
     screen: 'start', // start or protocol,
     params: {},
   },
-  screens: [],
+  screens: [
+    {
+      screen: 'variable',
+      params: {
+        id: 'acec0568-938b-42f0-bd3a-485e22d775d6',
+        type: 'd39a47507bbe27c2a7948861847f3607eda8s8j',
+        entity: 'node',
+      },
+    },
+  ],
   message: {},
 };
 

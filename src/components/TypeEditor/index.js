@@ -5,7 +5,7 @@ import { compose, withProps } from 'recompose';
 import Editor from '../Editor';
 import TypeEditor from './TypeEditor';
 
-const formName = 'VARIABLE_REGISTRY';
+const formName = 'TYPE_EDITOR';
 
 const getFormValue = formValueSelector(formName);
 const getIsDirty = isDirty(formName);

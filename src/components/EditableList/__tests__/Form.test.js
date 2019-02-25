@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { PromptForm } from '../PromptForm';
+import { Form } from '../Form';
 
 const requiredProps = {
   onCancel: () => {},
@@ -10,13 +10,13 @@ const requiredProps = {
 
 const getSubject = props =>
   shallow((
-    <PromptForm
+    <Form
       {...requiredProps}
       {...props}
     />
   ));
 
-describe('PromptForm', () => {
+describe('Form', () => {
   describe('handlers', () => {
     it('handleSubmit', () => {
       const mockProps = {

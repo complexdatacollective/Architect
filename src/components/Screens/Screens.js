@@ -10,6 +10,7 @@ import ViewForms from './ViewForms';
 import EditForm from './EditForm';
 import Codebook from './VariableRegistry';
 import EditType from './EditType';
+import EditVariable from './EditVariable';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import TimelineScreenTransition, { styles } from '../Transitions/TimelineScreen';
 
@@ -22,6 +23,7 @@ const NAMES = {
   form: EditForm,
   codebook: Codebook,
   type: EditType,
+  variable: EditVariable,
 };
 
 const getScreenComponent = screen =>
@@ -35,14 +37,16 @@ const Screens = (props) => {
       props.closeScreen(screen, result);
 
     return (
-      <TimelineScreenTransition style={transitionStyle}>
+      <TimelineScreenTransition
+        style={transitionStyle}
+        key={screen}
+      >
         {state => (
           <ScreenComponent
             {...params}
             show
             state={state}
             onComplete={onComplete}
-            key={screen}
           />
         )}
       </TimelineScreenTransition>

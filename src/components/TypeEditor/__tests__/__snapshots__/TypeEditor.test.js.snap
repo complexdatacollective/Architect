@@ -34,7 +34,7 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
       "children": Array [
         <div
@@ -143,17 +143,25 @@ ShallowWrapper {
           <div
             className="editor__section"
           >
-            <h2>
-              Variables
-            </h2>
-            <Connect(Variables)
-              form="TYPE_EDITOR"
-              name="variables"
-            />
+            <defaultProps(withState(Connect(withHandlers(EditableList))))
+              canSort={false}
+              editComponent={[Function]}
+              fieldName="variables"
+              form={
+                Object {
+                  "name": "TYPE_EDITOR",
+                }
+              }
+              previewComponent={[Function]}
+              title="Edit Variable"
+            >
+              <h2>
+                Variables
+              </h2>
+            </defaultProps(withState(Connect(withHandlers(EditableList))))>
           </div>
         </Connect(Guided)>,
       ],
-      "className": "type-editor editor__sections",
     },
     "ref": null,
     "rendered": Array [
@@ -550,13 +558,22 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
           >
-            <h2>
-              Variables
-            </h2>
-            <Connect(Variables)
-              form="TYPE_EDITOR"
-              name="variables"
-            />
+            <defaultProps(withState(Connect(withHandlers(EditableList))))
+              canSort={false}
+              editComponent={[Function]}
+              fieldName="variables"
+              form={
+                Object {
+                  "name": "TYPE_EDITOR",
+                }
+              }
+              previewComponent={[Function]}
+              title="Edit Variable"
+            >
+              <h2>
+                Variables
+              </h2>
+            </defaultProps(withState(Connect(withHandlers(EditableList))))>
           </div>,
           "contentId": "guidance.registry.type.variables",
         },
@@ -566,20 +583,44 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": Array [
+            "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
+              canSort={false}
+              editComponent={[Function]}
+              fieldName="variables"
+              form={
+                Object {
+                  "name": "TYPE_EDITOR",
+                }
+              }
+              previewComponent={[Function]}
+              title="Edit Variable"
+            >
               <h2>
                 Variables
-              </h2>,
-              <Connect(Variables)
-                form="TYPE_EDITOR"
-                name="variables"
-              />,
-            ],
+              </h2>
+            </defaultProps(withState(Connect(withHandlers(EditableList))))>,
             "className": "editor__section",
           },
           "ref": null,
-          "rendered": Array [
-            Object {
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "canSort": false,
+              "children": <h2>
+                Variables
+              </h2>,
+              "editComponent": [Function],
+              "fieldName": "variables",
+              "form": Object {
+                "name": "TYPE_EDITOR",
+              },
+              "previewComponent": [Function],
+              "title": "Edit Variable",
+            },
+            "ref": null,
+            "rendered": Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
@@ -590,31 +631,20 @@ ShallowWrapper {
               "rendered": "Variables",
               "type": "h2",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "form": "TYPE_EDITOR",
-                "name": "variables",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
+            "type": [Function],
+          },
           "type": "div",
         },
         "type": [Function],
       },
     ],
-    "type": "div",
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
           <div
@@ -723,17 +753,25 @@ ShallowWrapper {
             <div
               className="editor__section"
             >
-              <h2>
-                Variables
-              </h2>
-              <Connect(Variables)
-                form="TYPE_EDITOR"
-                name="variables"
-              />
+              <defaultProps(withState(Connect(withHandlers(EditableList))))
+                canSort={false}
+                editComponent={[Function]}
+                fieldName="variables"
+                form={
+                  Object {
+                    "name": "TYPE_EDITOR",
+                  }
+                }
+                previewComponent={[Function]}
+                title="Edit Variable"
+              >
+                <h2>
+                  Variables
+                </h2>
+              </defaultProps(withState(Connect(withHandlers(EditableList))))>
             </div>
           </Connect(Guided)>,
         ],
-        "className": "type-editor editor__sections",
       },
       "ref": null,
       "rendered": Array [
@@ -1130,13 +1168,22 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
             >
-              <h2>
-                Variables
-              </h2>
-              <Connect(Variables)
-                form="TYPE_EDITOR"
-                name="variables"
-              />
+              <defaultProps(withState(Connect(withHandlers(EditableList))))
+                canSort={false}
+                editComponent={[Function]}
+                fieldName="variables"
+                form={
+                  Object {
+                    "name": "TYPE_EDITOR",
+                  }
+                }
+                previewComponent={[Function]}
+                title="Edit Variable"
+              >
+                <h2>
+                  Variables
+                </h2>
+              </defaultProps(withState(Connect(withHandlers(EditableList))))>
             </div>,
             "contentId": "guidance.registry.type.variables",
           },
@@ -1146,20 +1193,44 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": Array [
+              "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
+                canSort={false}
+                editComponent={[Function]}
+                fieldName="variables"
+                form={
+                  Object {
+                    "name": "TYPE_EDITOR",
+                  }
+                }
+                previewComponent={[Function]}
+                title="Edit Variable"
+              >
                 <h2>
                   Variables
-                </h2>,
-                <Connect(Variables)
-                  form="TYPE_EDITOR"
-                  name="variables"
-                />,
-              ],
+                </h2>
+              </defaultProps(withState(Connect(withHandlers(EditableList))))>,
               "className": "editor__section",
             },
             "ref": null,
-            "rendered": Array [
-              Object {
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "canSort": false,
+                "children": <h2>
+                  Variables
+                </h2>,
+                "editComponent": [Function],
+                "fieldName": "variables",
+                "form": Object {
+                  "name": "TYPE_EDITOR",
+                },
+                "previewComponent": [Function],
+                "title": "Edit Variable",
+              },
+              "ref": null,
+              "rendered": Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "host",
@@ -1170,25 +1241,14 @@ ShallowWrapper {
                 "rendered": "Variables",
                 "type": "h2",
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "form": "TYPE_EDITOR",
-                  "name": "variables",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
+              "type": [Function],
+            },
             "type": "div",
           },
           "type": [Function],
         },
       ],
-      "type": "div",
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -1245,7 +1305,7 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
       "children": Array [
         <div
@@ -1407,17 +1467,25 @@ ShallowWrapper {
           <div
             className="editor__section"
           >
-            <h2>
-              Variables
-            </h2>
-            <Connect(Variables)
-              form="TYPE_EDITOR"
-              name="variables"
-            />
+            <defaultProps(withState(Connect(withHandlers(EditableList))))
+              canSort={false}
+              editComponent={[Function]}
+              fieldName="variables"
+              form={
+                Object {
+                  "name": "TYPE_EDITOR",
+                }
+              }
+              previewComponent={[Function]}
+              title="Edit Variable"
+            >
+              <h2>
+                Variables
+              </h2>
+            </defaultProps(withState(Connect(withHandlers(EditableList))))>
           </div>
         </Connect(Guided)>,
       ],
-      "className": "type-editor editor__sections",
     },
     "ref": null,
     "rendered": Array [
@@ -2097,13 +2165,22 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
           >
-            <h2>
-              Variables
-            </h2>
-            <Connect(Variables)
-              form="TYPE_EDITOR"
-              name="variables"
-            />
+            <defaultProps(withState(Connect(withHandlers(EditableList))))
+              canSort={false}
+              editComponent={[Function]}
+              fieldName="variables"
+              form={
+                Object {
+                  "name": "TYPE_EDITOR",
+                }
+              }
+              previewComponent={[Function]}
+              title="Edit Variable"
+            >
+              <h2>
+                Variables
+              </h2>
+            </defaultProps(withState(Connect(withHandlers(EditableList))))>
           </div>,
           "contentId": "guidance.registry.type.variables",
         },
@@ -2113,20 +2190,44 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": Array [
+            "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
+              canSort={false}
+              editComponent={[Function]}
+              fieldName="variables"
+              form={
+                Object {
+                  "name": "TYPE_EDITOR",
+                }
+              }
+              previewComponent={[Function]}
+              title="Edit Variable"
+            >
               <h2>
                 Variables
-              </h2>,
-              <Connect(Variables)
-                form="TYPE_EDITOR"
-                name="variables"
-              />,
-            ],
+              </h2>
+            </defaultProps(withState(Connect(withHandlers(EditableList))))>,
             "className": "editor__section",
           },
           "ref": null,
-          "rendered": Array [
-            Object {
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "canSort": false,
+              "children": <h2>
+                Variables
+              </h2>,
+              "editComponent": [Function],
+              "fieldName": "variables",
+              "form": Object {
+                "name": "TYPE_EDITOR",
+              },
+              "previewComponent": [Function],
+              "title": "Edit Variable",
+            },
+            "ref": null,
+            "rendered": Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
@@ -2137,31 +2238,20 @@ ShallowWrapper {
               "rendered": "Variables",
               "type": "h2",
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "form": "TYPE_EDITOR",
-                "name": "variables",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
+            "type": [Function],
+          },
           "type": "div",
         },
         "type": [Function],
       },
     ],
-    "type": "div",
+    "type": Symbol(react.fragment),
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
         "children": Array [
           <div
@@ -2323,17 +2413,25 @@ ShallowWrapper {
             <div
               className="editor__section"
             >
-              <h2>
-                Variables
-              </h2>
-              <Connect(Variables)
-                form="TYPE_EDITOR"
-                name="variables"
-              />
+              <defaultProps(withState(Connect(withHandlers(EditableList))))
+                canSort={false}
+                editComponent={[Function]}
+                fieldName="variables"
+                form={
+                  Object {
+                    "name": "TYPE_EDITOR",
+                  }
+                }
+                previewComponent={[Function]}
+                title="Edit Variable"
+              >
+                <h2>
+                  Variables
+                </h2>
+              </defaultProps(withState(Connect(withHandlers(EditableList))))>
             </div>
           </Connect(Guided)>,
         ],
-        "className": "type-editor editor__sections",
       },
       "ref": null,
       "rendered": Array [
@@ -3013,13 +3111,22 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
             >
-              <h2>
-                Variables
-              </h2>
-              <Connect(Variables)
-                form="TYPE_EDITOR"
-                name="variables"
-              />
+              <defaultProps(withState(Connect(withHandlers(EditableList))))
+                canSort={false}
+                editComponent={[Function]}
+                fieldName="variables"
+                form={
+                  Object {
+                    "name": "TYPE_EDITOR",
+                  }
+                }
+                previewComponent={[Function]}
+                title="Edit Variable"
+              >
+                <h2>
+                  Variables
+                </h2>
+              </defaultProps(withState(Connect(withHandlers(EditableList))))>
             </div>,
             "contentId": "guidance.registry.type.variables",
           },
@@ -3029,20 +3136,44 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": Array [
+              "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
+                canSort={false}
+                editComponent={[Function]}
+                fieldName="variables"
+                form={
+                  Object {
+                    "name": "TYPE_EDITOR",
+                  }
+                }
+                previewComponent={[Function]}
+                title="Edit Variable"
+              >
                 <h2>
                   Variables
-                </h2>,
-                <Connect(Variables)
-                  form="TYPE_EDITOR"
-                  name="variables"
-                />,
-              ],
+                </h2>
+              </defaultProps(withState(Connect(withHandlers(EditableList))))>,
               "className": "editor__section",
             },
             "ref": null,
-            "rendered": Array [
-              Object {
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "function",
+              "props": Object {
+                "canSort": false,
+                "children": <h2>
+                  Variables
+                </h2>,
+                "editComponent": [Function],
+                "fieldName": "variables",
+                "form": Object {
+                  "name": "TYPE_EDITOR",
+                },
+                "previewComponent": [Function],
+                "title": "Edit Variable",
+              },
+              "ref": null,
+              "rendered": Object {
                 "instance": null,
                 "key": undefined,
                 "nodeType": "host",
@@ -3053,25 +3184,14 @@ ShallowWrapper {
                 "rendered": "Variables",
                 "type": "h2",
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "form": "TYPE_EDITOR",
-                  "name": "variables",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
+              "type": [Function],
+            },
             "type": "div",
           },
           "type": [Function],
         },
       ],
-      "type": "div",
+      "type": Symbol(react.fragment),
     },
   ],
   Symbol(enzyme.__options__): Object {

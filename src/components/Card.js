@@ -8,7 +8,7 @@ import window from '../ui/components/window';
 class Card extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
-    state: PropTypes.object,
+    state: PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.node),
     secondaryButtons: PropTypes.node,
     type: PropTypes.string,
