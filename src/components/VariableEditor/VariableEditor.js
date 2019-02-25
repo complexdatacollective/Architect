@@ -23,7 +23,7 @@ const mapStateToProps = (state, { entity, type, ...props }) => {
 
 const mapDispatchToProps = dispatch => ({
   updateVariable: bindActionCreators(actions.updateVariable, dispatch),
-  createVarible: bindActionCreators(actions.createVariable, dispatch),
+  createVariable: bindActionCreators(actions.createVariable, dispatch),
 });
 
 const VariableEditor = compose(

@@ -128,22 +128,26 @@ const getStateWithUpdatedType = (state, entity, type, configuration) => ({
   },
 });
 
-const getStateWithUpdatedVariable = (state, entity, type, variableId, configuration) => ({
-  ...state,
-  [entity]: {
-    ...state[entity],
-    [type]: {
-      ...state[entity][type],
-      variables: state[entity][type].variables.map((variable) => {
-        if (variable.id !== variableId) { return variable; }
-        return {
-          ...configuration,
-          id: variable.id,
-        };
-      }),
+const getStateWithUpdatedVariable = (state, entity, type, variableId, configuration) => {
+  const variables = state[entity][type].variables.map((variable) => {
+    if (variable.id !== variableId) { return variable; }
+    return {
+      ...configuration,
+      id: variable.id,
+    };
+  });
+
+  return {
+    ...state,
+    [entity]: {
+      ...state[entity],
+      [type]: {
+        ...state[entity][type],
+        variables,
+      },
     },
-  },
-});
+  };
+};
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -155,7 +159,26 @@ export default function reducer(state = initialState, action = {}) {
         action.meta.type,
         action.configuration,
       );
-    case CREATE_VARIABLE:
+    case CREATE_VARIABLE: {
+      const { entity, type, variable } = action.meta;
+      const variableWithId = {
+        ...action.configuration,
+        id: variable,
+      };
+      return {
+        ...state,
+        [entity]: {
+          ...state[entity],
+          [type]: {
+            ...state[entity][type],
+            variables: [
+              ...state[entity][type].variables,
+              variableWithId,
+            ],
+          },
+        },
+      };
+    }
     case UPDATE_VARIABLE:
       return getStateWithUpdatedVariable(
         state,
