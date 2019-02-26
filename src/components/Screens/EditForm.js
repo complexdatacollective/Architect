@@ -20,14 +20,17 @@ class EditForm extends PureComponent {
     createForm: PropTypes.func.isRequired,
     submitForm: PropTypes.func.isRequired,
     hasUnsavedChanges: PropTypes.bool,
-    onComplete: PropTypes.func.isRequired,
+    onComplete: PropTypes.func,
     show: PropTypes.bool,
+    state: PropTypes.object,
   };
 
   static defaultProps = {
     formName: null,
     form: {},
     show: true,
+    state: null,
+    onComplete: () => {},
     hasUnsavedChanges: false,
   };
 
@@ -65,6 +68,7 @@ class EditForm extends PureComponent {
   render() {
     const {
       form,
+      state,
       show,
     } = this.props;
 
@@ -72,6 +76,7 @@ class EditForm extends PureComponent {
       <Card
         buttons={this.buttons}
         show={show}
+        state={state}
         onCancel={this.handleCancel}
       >
         <FormEditor
@@ -88,7 +93,7 @@ const editFormIsInvalid = isInvalid(reduxFormName);
 
 function mapStateToProps(state, props) {
   const protocol = getProtocol(state);
-  const formName = get(props.match, 'params.form', null);
+  const formName = props.id;
   const form = get(protocol, ['forms', formName], { optionToAddAnother: false });
 
   return {

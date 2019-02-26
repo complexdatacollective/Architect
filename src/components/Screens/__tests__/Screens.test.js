@@ -2,17 +2,16 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Cards } from '../Cards';
+import { Screens } from '../Screens';
 
 const mockProps = {
-  location: {},
-  goTo: () => {},
-  goBack: () => {},
+  screens: [],
+  closeScreen: () => {},
 };
 
-describe('<Cards />', () => {
+describe('<Screens />', () => {
   it('can render?', () => {
-    const component = shallow(<Cards {...mockProps} />);
+    const component = shallow(<Screens {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });

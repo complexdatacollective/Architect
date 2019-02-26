@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { map, has, get } from 'lodash';
+import { map, get } from 'lodash';
 import { TransitionGroup } from 'react-transition-group';
 import { Node, Button } from '../../ui/components';
 import { Wipe } from '../Transitions';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Card from '../Card';
+import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
@@ -35,23 +35,29 @@ class ViewForms extends Component {
 
   handleCancel = this.props.onComplete;
 
-  renderForm = (form, key) => (
-    <Wipe key={key}>
-      <div className="simple-list__item" key={key}>
+  renderForm = (form, id) => (
+    <Wipe key={id}>
+      <div className="simple-list__item">
         <div className="simple-list__attribute simple-list__attribute--icon">
-          <Link to={`${this.props.protocolPath}/form/${key}`}>
+          <Link
+            screen="form"
+            params={{ id }}
+          >
             <Node label={get(this.props.nodes, [form.type, 'label'], '')} color={get(this.props.nodes, [form.type, 'color'], '')} />
           </Link>
         </div>
         <div className="simple-list__attribute">
           <h3>
-            <Link to={`${this.props.protocolPath}/form/${key}`}>
+            <Link
+              screen="form"
+              params={{ id }}
+            >
               {form.title}
             </Link>
           </h3>
         </div>
         <div className="simple-list__attribute simple-list__attribute--options">
-          <Button size="small" color="neon-coral" onClick={() => this.handleDelete(key)}>
+          <Button size="small" color="neon-coral" onClick={() => this.handleDelete(id)}>
             Delete
           </Button>
         </div>
@@ -78,12 +84,13 @@ class ViewForms extends Component {
   render() {
     const {
       show,
-      protocolPath,
+      state,
     } = this.props;
 
     return (
       <Card
         show={show}
+        state={state}
         buttons={this.buttons}
       >
         <Guided>
@@ -100,17 +107,15 @@ class ViewForms extends Component {
                     <div className="editor__subsection">
                       {this.renderForms()}
                     </div>
-                    { protocolPath &&
-                      <div className="editor__subsection">
-                        <Link
-                          to={`${protocolPath}/form/`}
-                        >
-                          <Button>
-                            Create new Form
-                          </Button>
-                        </Link>
-                      </div>
-                    }
+                    <div className="editor__subsection">
+                      <Link
+                        screen="form"
+                      >
+                        <Button>
+                          Create new Form
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </Guidance>
               </div>
@@ -124,28 +129,26 @@ class ViewForms extends Component {
 
 ViewForms.propTypes = {
   show: PropTypes.bool,
+  state: PropTypes.object,
   forms: PropTypes.object.isRequired,
   nodes: PropTypes.object.isRequired,
-  protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteForm: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
 };
 
 ViewForms.defaultProps = {
-  protocolPath: null,
   show: true,
+  state: null,
   onComplete: () => {},
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
 
   return {
     forms: get(protocol, 'forms', {}),
     nodes: get(protocol, 'variableRegistry.node', {}),
-    protocolPath: has(props, 'match.params.protocol') ?
-      `/edit/${get(props, 'match.params.protocol')}` : null,
   };
 };
 

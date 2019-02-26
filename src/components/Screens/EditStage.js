@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { parse as parseQueryString } from 'query-string';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
@@ -9,16 +8,13 @@ import {
   isDirty as isFormDirty,
   isInvalid as isFormInvalid,
 } from 'redux-form';
-import { has, get, find } from 'lodash';
+import { has, find } from 'lodash';
 import { Button } from '../../ui/components';
 import Card from './ProtocolCard';
 import StageEditor from '../../components/StageEditor';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as previewActions } from '../../ducks/modules/preview';
-
-const getInsertAtIndex = query =>
-  (query.insertAtIndex ? parseInt(query.insertAtIndex, 10) : null);
 
 const formName = 'edit-stage';
 
@@ -28,19 +24,22 @@ class EditStage extends PureComponent {
     invalid: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
     submitForm: PropTypes.func.isRequired,
-    onComplete: PropTypes.func.isRequired,
+    onComplete: PropTypes.func,
     stage: PropTypes.object.isRequired,
-    stageId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     insertAtIndex: PropTypes.number,
     updateStage: PropTypes.func.isRequired,
     createStage: PropTypes.func.isRequired,
     previewStage: PropTypes.func.isRequired,
     closePreview: PropTypes.func.isRequired,
+    state: PropTypes.string,
   };
 
   static defaultProps = {
-    stageId: null,
+    id: null,
     insertAtIndex: null,
+    onComplete: () => {},
+    state: null,
   };
 
   get isDirty() {
@@ -68,18 +67,17 @@ class EditStage extends PureComponent {
   }
 
   handleComplete = () => {
-    // Hide preview
-    this.props.closePreview();
+    this.props.closePreview(); // Hide preview
     this.props.onComplete();
   }
 
   handlePreview = () => this.props.previewStage();
 
   handleSubmit = (stage) => {
-    const { stageId, insertAtIndex } = this.props;
+    const { id, insertAtIndex } = this.props;
 
-    if (stageId) {
-      this.props.updateStage(stageId, stage);
+    if (id) {
+      this.props.updateStage(id, stage);
     } else {
       this.props.createStage(stage, insertAtIndex);
     }
@@ -90,13 +88,14 @@ class EditStage extends PureComponent {
   handleCancel = this.handleComplete;
 
   render() {
-    const { stage, show } = this.props;
+    const { stage, show, state } = this.props;
 
     return (
       <Card
         buttons={this.buttons}
         secondaryButtons={this.secondaryButtons}
         show={show}
+        state={state}
         onCancel={this.handleCancel}
       >
         <StageEditor
@@ -111,29 +110,19 @@ class EditStage extends PureComponent {
 }
 
 const mapStateToProps = (state, props) => {
-  const stageId = get(props, 'match.params.id');
   const protocol = getProtocol(state);
-  const query = parseQueryString(props.location.search);
-  const stage = find(protocol.stages, ['id', stageId]) || { type: query.type };
-  const insertAtIndex = getInsertAtIndex(query);
+  const stage = find(protocol.stages, ['id', props.id]) || { type: props.type };
 
   return ({
     stage,
-    stageId,
-    insertAtIndex,
     dirty: isFormDirty(formName)(state),
     invalid: isFormInvalid(formName)(state),
   });
 };
 
 const mapDispatchToProps = (dispatch, props) => {
-  const stageId = get(props, 'match.params.id');
-  const query = parseQueryString(props.location.search);
-  const insertAtIndex = getInsertAtIndex(query);
-
   const stageMeta = {
-    id: stageId,
-    insertAtIndex,
+    id: props.id,
   };
 
   return {

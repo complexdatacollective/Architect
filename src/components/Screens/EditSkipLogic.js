@@ -23,6 +23,7 @@ const defaultLogic = {
 class EditSkipLogic extends PureComponent {
   static propTypes = {
     show: PropTypes.bool,
+    state: PropTypes.object,
     hasChanges: PropTypes.bool,
     stageId: PropTypes.string,
     onComplete: PropTypes.func,
@@ -33,6 +34,7 @@ class EditSkipLogic extends PureComponent {
 
   static defaultProps = {
     show: false,
+    state: null,
     stageId: null,
     hasChanges: false,
     onComplete: () => {},
@@ -66,6 +68,7 @@ class EditSkipLogic extends PureComponent {
   render() {
     const {
       show,
+      state,
       draft,
     } = this.props;
 
@@ -74,6 +77,7 @@ class EditSkipLogic extends PureComponent {
         type="logic"
         buttons={this.buttons}
         show={show}
+        state={state}
         onCancel={this.handleCancel}
       >
         <SkipLogicEditor onChange={this.handleChange} rules={draft} />
@@ -83,7 +87,7 @@ class EditSkipLogic extends PureComponent {
 }
 
 const mapStateToProps = (state, props) => {
-  const stageId = get(props, 'match.params.id');
+  const stageId = props.id;
   const protocol = getProtocol(state);
   const stage = find(protocol.stages, ['id', stageId]);
   const logic = get(stage, 'skipLogic', defaultLogic);

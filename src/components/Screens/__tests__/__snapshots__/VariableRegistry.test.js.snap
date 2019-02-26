@@ -12,6 +12,7 @@ ShallowWrapper {
     openDialog={[Function]}
     protocolPath=""
     show={true}
+    state={null}
     variableRegistry={
       Object {
         "edge": Object {},
@@ -84,7 +85,30 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
-                  
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Node type
+                      </Button>
+                    </Connect(Link)>
+                  </div>
                 </div>
               </Connect(Guided)>
               <Connect(Guided)
@@ -111,7 +135,26 @@ ShallowWrapper {
                   <div
                     className="editor__subsection"
                   >
-                    
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Edge type
+                      </Button>
+                    </Connect(Link)>
                   </div>
                 </div>
               </Connect(Guided)>
@@ -121,6 +164,7 @@ ShallowWrapper {
       </Connect(Guided)>,
       "onAcknowledgeError": [Function],
       "show": true,
+      "state": null,
     },
     "ref": null,
     "rendered": Object {
@@ -166,7 +210,30 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
-                  
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Node type
+                      </Button>
+                    </Connect(Link)>
+                  </div>
                 </div>
               </Connect(Guided)>
               <Connect(Guided)
@@ -193,7 +260,26 @@ ShallowWrapper {
                   <div
                     className="editor__subsection"
                   >
-                    
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Edge type
+                      </Button>
+                    </Connect(Link)>
                   </div>
                 </div>
               </Connect(Guided)>
@@ -242,7 +328,30 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
-                  
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Node type
+                      </Button>
+                    </Connect(Link)>
+                  </div>
                 </div>
               </Connect(Guided)>
               <Connect(Guided)
@@ -269,7 +378,26 @@ ShallowWrapper {
                   <div
                     className="editor__subsection"
                   >
-                    
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Edge type
+                      </Button>
+                    </Connect(Link)>
                   </div>
                 </div>
               </Connect(Guided)>
@@ -315,7 +443,30 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
-                  
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "node",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Node type
+                      </Button>
+                    </Connect(Link)>
+                  </div>
                 </div>
               </Connect(Guided)>
               <Connect(Guided)
@@ -342,7 +493,26 @@ ShallowWrapper {
                   <div
                     className="editor__subsection"
                   >
-                    
+                    <Connect(Link)
+                      params={
+                        Object {
+                          "category": "edge",
+                        }
+                      }
+                      screen="type"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon="add"
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size="small"
+                        type="button"
+                      >
+                        Create new Edge type
+                      </Button>
+                    </Connect(Link)>
                   </div>
                 </div>
               </Connect(Guided)>
@@ -385,7 +555,30 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
-                    
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Node type
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>,
                 <Connect(Guided)
@@ -412,7 +605,26 @@ ShallowWrapper {
                     <div
                       className="editor__subsection"
                     >
-                      
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Edge type
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>
                 </Connect(Guided)>,
@@ -467,7 +679,30 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
-                    
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Node type
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>,
                   "contentId": "guidance.registry.nodes",
                 },
@@ -493,7 +728,30 @@ ShallowWrapper {
                           />
                         </div>
                       </div>,
-                      "",
+                      <div
+                        className="editor__subsection"
+                      >
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "node",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Node type
+                          </Button>
+                        </Connect(Link)>
+                      </div>,
                     ],
                     "className": "editor__section",
                   },
@@ -555,7 +813,78 @@ ShallowWrapper {
                       },
                       "type": "div",
                     },
-                    "",
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <Connect(Link)
+                          params={
+                            Object {
+                              "category": "node",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Node type
+                          </Button>
+                        </Connect(Link)>,
+                        "className": "editor__subsection",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Node type
+                          </Button>,
+                          "params": Object {
+                            "category": "node",
+                          },
+                          "screen": "type",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": "Create new Node type",
+                            "color": "",
+                            "content": "",
+                            "icon": "add",
+                            "iconPosition": "right",
+                            "onClick": [Function],
+                            "size": "small",
+                            "type": "button",
+                          },
+                          "ref": null,
+                          "rendered": "Create new Node type",
+                          "type": [Function],
+                        },
+                        "type": [Function],
+                      },
+                      "type": "div",
+                    },
                   ],
                   "type": "div",
                 },
@@ -587,7 +916,26 @@ ShallowWrapper {
                     <div
                       className="editor__subsection"
                     >
-                      
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Edge type
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>,
                   "contentId": "guidance.registry.edges",
@@ -617,7 +965,26 @@ ShallowWrapper {
                       <div
                         className="editor__subsection"
                       >
-                        
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "edge",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Edge type
+                          </Button>
+                        </Connect(Link)>
                       </div>,
                     ],
                     "className": "editor__section",
@@ -685,11 +1052,71 @@ ShallowWrapper {
                       "key": undefined,
                       "nodeType": "host",
                       "props": Object {
-                        "children": "",
+                        "children": <Connect(Link)
+                          params={
+                            Object {
+                              "category": "edge",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Edge type
+                          </Button>
+                        </Connect(Link)>,
                         "className": "editor__subsection",
                       },
                       "ref": null,
-                      "rendered": "",
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Edge type
+                          </Button>,
+                          "params": Object {
+                            "category": "edge",
+                          },
+                          "screen": "type",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": "Create new Edge type",
+                            "color": "",
+                            "content": "",
+                            "icon": "add",
+                            "iconPosition": "right",
+                            "onClick": [Function],
+                            "size": "small",
+                            "type": "button",
+                          },
+                          "ref": null,
+                          "rendered": "Create new Edge type",
+                          "type": [Function],
+                        },
+                        "type": [Function],
+                      },
                       "type": "div",
                     },
                   ],
@@ -766,7 +1193,30 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
-                    
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Node type
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>
                 <Connect(Guided)
@@ -793,7 +1243,26 @@ ShallowWrapper {
                     <div
                       className="editor__subsection"
                     >
-                      
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Edge type
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>
                 </Connect(Guided)>
@@ -803,6 +1272,7 @@ ShallowWrapper {
         </Connect(Guided)>,
         "onAcknowledgeError": [Function],
         "show": true,
+        "state": null,
       },
       "ref": null,
       "rendered": Object {
@@ -848,7 +1318,30 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
-                    
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Node type
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>
                 <Connect(Guided)
@@ -875,7 +1368,26 @@ ShallowWrapper {
                     <div
                       className="editor__subsection"
                     >
-                      
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Edge type
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>
                 </Connect(Guided)>
@@ -924,7 +1436,30 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
-                    
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Node type
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>
                 <Connect(Guided)
@@ -951,7 +1486,26 @@ ShallowWrapper {
                     <div
                       className="editor__subsection"
                     >
-                      
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Edge type
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>
                 </Connect(Guided)>
@@ -997,7 +1551,30 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
-                    
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "node",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Node type
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>
                 <Connect(Guided)
@@ -1024,7 +1601,26 @@ ShallowWrapper {
                     <div
                       className="editor__subsection"
                     >
-                      
+                      <Connect(Link)
+                        params={
+                          Object {
+                            "category": "edge",
+                          }
+                        }
+                        screen="type"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon="add"
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size="small"
+                          type="button"
+                        >
+                          Create new Edge type
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>
                 </Connect(Guided)>
@@ -1067,7 +1663,30 @@ ShallowWrapper {
                           />
                         </div>
                       </div>
-                      
+                      <div
+                        className="editor__subsection"
+                      >
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "node",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Node type
+                          </Button>
+                        </Connect(Link)>
+                      </div>
                     </div>
                   </Connect(Guided)>,
                   <Connect(Guided)
@@ -1094,7 +1713,26 @@ ShallowWrapper {
                       <div
                         className="editor__subsection"
                       >
-                        
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "edge",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Edge type
+                          </Button>
+                        </Connect(Link)>
                       </div>
                     </div>
                   </Connect(Guided)>,
@@ -1149,7 +1787,30 @@ ShallowWrapper {
                           />
                         </div>
                       </div>
-                      
+                      <div
+                        className="editor__subsection"
+                      >
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "node",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Node type
+                          </Button>
+                        </Connect(Link)>
+                      </div>
                     </div>,
                     "contentId": "guidance.registry.nodes",
                   },
@@ -1175,7 +1836,30 @@ ShallowWrapper {
                             />
                           </div>
                         </div>,
-                        "",
+                        <div
+                          className="editor__subsection"
+                        >
+                          <Connect(Link)
+                            params={
+                              Object {
+                                "category": "node",
+                              }
+                            }
+                            screen="type"
+                          >
+                            <Button
+                              color=""
+                              content=""
+                              icon="add"
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                            >
+                              Create new Node type
+                            </Button>
+                          </Connect(Link)>
+                        </div>,
                       ],
                       "className": "editor__section",
                     },
@@ -1237,7 +1921,78 @@ ShallowWrapper {
                         },
                         "type": "div",
                       },
-                      "",
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <Connect(Link)
+                            params={
+                              Object {
+                                "category": "node",
+                              }
+                            }
+                            screen="type"
+                          >
+                            <Button
+                              color=""
+                              content=""
+                              icon="add"
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                            >
+                              Create new Node type
+                            </Button>
+                          </Connect(Link)>,
+                          "className": "editor__subsection",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": <Button
+                              color=""
+                              content=""
+                              icon="add"
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                            >
+                              Create new Node type
+                            </Button>,
+                            "params": Object {
+                              "category": "node",
+                            },
+                            "screen": "type",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "children": "Create new Node type",
+                              "color": "",
+                              "content": "",
+                              "icon": "add",
+                              "iconPosition": "right",
+                              "onClick": [Function],
+                              "size": "small",
+                              "type": "button",
+                            },
+                            "ref": null,
+                            "rendered": "Create new Node type",
+                            "type": [Function],
+                          },
+                          "type": [Function],
+                        },
+                        "type": "div",
+                      },
                     ],
                     "type": "div",
                   },
@@ -1269,7 +2024,26 @@ ShallowWrapper {
                       <div
                         className="editor__subsection"
                       >
-                        
+                        <Connect(Link)
+                          params={
+                            Object {
+                              "category": "edge",
+                            }
+                          }
+                          screen="type"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon="add"
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size="small"
+                            type="button"
+                          >
+                            Create new Edge type
+                          </Button>
+                        </Connect(Link)>
                       </div>
                     </div>,
                     "contentId": "guidance.registry.edges",
@@ -1299,7 +2073,26 @@ ShallowWrapper {
                         <div
                           className="editor__subsection"
                         >
-                          
+                          <Connect(Link)
+                            params={
+                              Object {
+                                "category": "edge",
+                              }
+                            }
+                            screen="type"
+                          >
+                            <Button
+                              color=""
+                              content=""
+                              icon="add"
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                            >
+                              Create new Edge type
+                            </Button>
+                          </Connect(Link)>
                         </div>,
                       ],
                       "className": "editor__section",
@@ -1367,11 +2160,71 @@ ShallowWrapper {
                         "key": undefined,
                         "nodeType": "host",
                         "props": Object {
-                          "children": "",
+                          "children": <Connect(Link)
+                            params={
+                              Object {
+                                "category": "edge",
+                              }
+                            }
+                            screen="type"
+                          >
+                            <Button
+                              color=""
+                              content=""
+                              icon="add"
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                            >
+                              Create new Edge type
+                            </Button>
+                          </Connect(Link)>,
                           "className": "editor__subsection",
                         },
                         "ref": null,
-                        "rendered": "",
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": <Button
+                              color=""
+                              content=""
+                              icon="add"
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size="small"
+                              type="button"
+                            >
+                              Create new Edge type
+                            </Button>,
+                            "params": Object {
+                              "category": "edge",
+                            },
+                            "screen": "type",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "children": "Create new Edge type",
+                              "color": "",
+                              "content": "",
+                              "icon": "add",
+                              "iconPosition": "right",
+                              "onClick": [Function],
+                              "size": "small",
+                              "type": "button",
+                            },
+                            "ref": null,
+                            "rendered": "Create new Edge type",
+                            "type": [Function],
+                          },
+                          "type": [Function],
+                        },
                         "type": "div",
                       },
                     ],

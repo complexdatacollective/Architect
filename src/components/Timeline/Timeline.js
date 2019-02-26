@@ -13,8 +13,8 @@ import Stage from './Stage';
 import InsertStage from './InsertStage';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
-import { actionCreators as navigationActions } from '../../ducks/modules/navigation';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
+import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
 
 class Timeline extends Component {
@@ -23,7 +23,7 @@ class Timeline extends Component {
     sorting: PropTypes.bool,
     deleteStage: PropTypes.func.isRequired,
     openDialog: PropTypes.func.isRequired,
-    goTo: PropTypes.func.isRequired,
+    openScreen: PropTypes.func.isRequired,
     show: PropTypes.bool,
   };
 
@@ -67,19 +67,19 @@ class Timeline extends Component {
     });
   }
 
-  handleEditStage = stageId =>
-    this.props.goTo(`stage/${stageId}`);
+  handleEditStage = id =>
+    this.props.openScreen('stage', { id });
 
-  handleEditSkipLogic = stageId =>
-    this.props.goTo(`skip/${stageId}`);
+  handleEditSkipLogic = id =>
+    this.props.openScreen('skip', { id });
 
   handleCancelInsertStage = () => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
   }
 
-  createStage = (type, index) => {
+  createStage = (type, insertAtIndex) => {
     this.setState({ insertStageAtIndex: null, highlightHide: true });
-    this.props.goTo(`stage?type=${type}&insertAtIndex=${index}`);
+    this.props.openScreen('stage', { type, insertAtIndex });
   };
 
   hasStages = () => this.props.stages.length > 0;
@@ -198,7 +198,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
-  goTo: bindActionCreators(navigationActions.goTo, dispatch),
+  openScreen: bindActionCreators(uiActions.openScreen, dispatch),
   onSortEnd: ({ oldIndex, newIndex }) => {
     props.setSorting(false);
     dispatch(stageActions.moveStage(oldIndex, newIndex));

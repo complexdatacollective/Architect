@@ -2,29 +2,35 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { map, has, get } from 'lodash';
+import { map, get } from 'lodash';
 import { TransitionGroup } from 'react-transition-group';
 import { Wipe } from '../Transitions';
 import { Node, Button, Icon } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Card from '../Card';
+import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
 import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
 import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
-const Type = ({ label, link, children, usage, handleDelete }) => (
+const Type = ({ label, category, type, children, usage, handleDelete }) => (
   <div className="simple-list__item">
     <div className="simple-list__attribute simple-list__attribute--icon">
-      <Link to={link}>
+      <Link
+        screen="type"
+        params={{ category, type }}
+      >
         {children}
       </Link>
     </div>
     <div className="simple-list__attribute">
       <h3>
-        <Link to={link}>
+        <Link
+          screen="type"
+          params={{ category, type }}
+        >
           {label}
         </Link>
       </h3>
@@ -40,7 +46,8 @@ const Type = ({ label, link, children, usage, handleDelete }) => (
 
 Type.propTypes = {
   label: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  type: PropTypes.string,
   usage: PropTypes.array,
   handleDelete: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
@@ -48,6 +55,7 @@ Type.propTypes = {
 
 Type.defaultProps = {
   usage: [],
+  type: null,
 };
 
 /**
@@ -93,16 +101,17 @@ class VariableRegistry extends Component {
 
   handleCancel = this.props.onComplete;
 
-  renderNode = (node, key) => {
+  renderNode = (node, type) => {
     const nodeColor = get(node, 'color', '');
-    const usage = this.props.getUsageForType('node', key);
+    const usage = this.props.getUsageForType('node', type);
 
     return (
-      <Wipe key={key}>
+      <Wipe key={type}>
         <Type
-          link={`${this.props.protocolPath}/registry/node/${key}`}
+          category="node"
+          type={type}
           label={node.label}
-          handleDelete={() => this.handleDelete('node', key)}
+          handleDelete={() => this.handleDelete('node', type)}
           usage={usage}
         >
           <Node label="" color={nodeColor} />
@@ -111,16 +120,17 @@ class VariableRegistry extends Component {
     );
   }
 
-  renderEdge = (edge, key) => {
+  renderEdge = (edge, type) => {
     const edgeColor = get(edge, 'color', '');
-    const usage = this.props.getUsageForType('edge', key);
+    const usage = this.props.getUsageForType('edge', type);
 
     return (
-      <Wipe key={key}>
+      <Wipe key={type}>
         <Type
-          link={`${this.props.protocolPath}/registry/edge/${key}`}
+          category="edge"
+          type={type}
           label={edge.label}
-          handleDelete={() => this.handleDelete('edge', key)}
+          handleDelete={() => this.handleDelete('edge', type)}
           usage={usage}
         >
           <Icon name="links" color={edgeColor} />
@@ -164,12 +174,13 @@ class VariableRegistry extends Component {
   render() {
     const {
       show,
-      protocolPath,
+      state,
     } = this.props;
 
     return (
       <Card
         show={show}
+        state={state}
         buttons={this.buttons}
         onAcknowledgeError={this.handleCancel}
       >
@@ -187,17 +198,16 @@ class VariableRegistry extends Component {
                     <div className="editor__subsection">
                       {this.renderNodes()}
                     </div>
-                    { protocolPath &&
-                      <div className="editor__subsection">
-                        <Link
-                          to={`${protocolPath}/registry/node/`}
-                        >
-                          <Button size="small" icon="add">
-                            Create new Node type
-                          </Button>
-                        </Link>
-                      </div>
-                    }
+                    <div className="editor__subsection">
+                      <Link
+                        screen="type"
+                        params={{ category: 'node' }}
+                      >
+                        <Button size="small" icon="add">
+                          Create new Node type
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </Guidance>
 
@@ -208,15 +218,14 @@ class VariableRegistry extends Component {
                       {this.renderEdges()}
                     </div>
                     <div className="editor__subsection">
-                      { protocolPath &&
-                        <Link
-                          to={`${protocolPath}/registry/edge/`}
-                        >
-                          <Button size="small" icon="add">
-                            Create new Edge type
-                          </Button>
-                        </Link>
-                      }
+                      <Link
+                        screen="type"
+                        params={{ category: 'edge' }}
+                      >
+                        <Button size="small" icon="add">
+                          Create new Edge type
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Guidance>
@@ -231,12 +240,12 @@ class VariableRegistry extends Component {
 
 VariableRegistry.propTypes = {
   show: PropTypes.bool,
+  state: PropTypes.object,
   variableRegistry: PropTypes.shape({
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
   }).isRequired,
   getUsageForType: PropTypes.func.isRequired,
-  protocolPath: PropTypes.string,
   onComplete: PropTypes.func,
   deleteType: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
@@ -245,16 +254,16 @@ VariableRegistry.propTypes = {
 };
 
 VariableRegistry.defaultProps = {
-  protocolPath: null,
   variableRegistry: {
     node: {},
     edge: {},
   },
   show: true,
+  state: null,
   onComplete: () => {},
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
   const variableRegistry = protocol.variableRegistry;
   const getUsageForType = makeGetUsageForType(state);
@@ -266,8 +275,6 @@ const mapStateToProps = (state, props) => {
     getUsageForType,
     getDeleteImpact,
     getObjectLabel,
-    protocolPath: has(props, 'match.params.protocol') ?
-      `/edit/${get(props, 'match.params.protocol')}` : null,
   };
 };
 

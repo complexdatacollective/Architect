@@ -67,9 +67,7 @@ class Routes extends Component {
     const { location, history } = this.props;
     return (
       <Switch>
-        <Route
-          path="/preview/:stageIndex/:protocol?"
-        >
+        <Route path="/preview/:stageIndex/:protocol?">
           { props => (
             <React.Fragment>
               { props.match.params.protocol && <ProtocolLoader {...props} /> }
@@ -77,15 +75,9 @@ class Routes extends Component {
             </React.Fragment>
           )}
         </Route>
-        {/* <Route
-          path="/preview/:stageIndex"
-          component={Preview}
-        /> */}
         <Route>
           <React.Fragment>
-            <Route
-              path="/edit/:protocol"
-            >
+            <Route path="/edit/:protocol">
               { props => <ProtocolLoader {...props} /> }
             </Route>
             <Scene history={history} location={location} />

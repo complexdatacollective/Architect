@@ -1,18 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EditForm /> can render 1`] = `
+exports[`<EditType /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <EditSkipLogic
-    draft={Object {}}
-    hasChanges={false}
-    onChange={[Function]}
+  Symbol(enzyme.__unrendered__): <EditType
+    category={null}
+    createType={[Function]}
+    hasUnsavedChanges={false}
+    initialValues={Object {}}
     onComplete={[Function]}
-    rules={Object {}}
-    show={false}
-    stageId={null}
-    updateDraft={[Function]}
-    updateStage={[Function]}
+    show={true}
+    state={null}
+    submitForm={[Function]}
+    type={null}
+    updateType={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -28,27 +29,13 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "buttons": Array [],
-      "children": <SkipLogicEditor
-        onChange={[Function]}
-        rules={Object {}}
-      />,
+      "children": null,
       "onCancel": [Function],
-      "show": false,
-      "type": "logic",
+      "show": true,
+      "state": null,
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "onChange": [Function],
-        "rules": Object {},
-      },
-      "ref": null,
-      "rendered": null,
-      "type": [Function],
-    },
+    "rendered": null,
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
@@ -58,27 +45,13 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "buttons": Array [],
-        "children": <SkipLogicEditor
-          onChange={[Function]}
-          rules={Object {}}
-        />,
+        "children": null,
         "onCancel": [Function],
-        "show": false,
-        "type": "logic",
+        "show": true,
+        "state": null,
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "onChange": [Function],
-          "rules": Object {},
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
+      "rendered": null,
       "type": [Function],
     },
   ],

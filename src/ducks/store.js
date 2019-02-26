@@ -11,7 +11,7 @@ import linkStore from './preview/linkStore';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['recentProtocols', 'protocols'],
+  whitelist: ['recentProtocols', 'protocols', 'ui'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -3,15 +3,17 @@
 exports[`<EditForm /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <EditForm
-    createForm={[Function]}
-    form={Object {}}
-    formName={null}
-    hasUnsavedChanges={false}
+  Symbol(enzyme.__unrendered__): <EditSkipLogic
+    draft={Object {}}
+    hasChanges={false}
+    onChange={[Function]}
     onComplete={[Function]}
-    show={true}
-    submitForm={[Function]}
-    updateForm={[Function]}
+    rules={Object {}}
+    show={false}
+    stageId={null}
+    state={null}
+    updateDraft={[Function]}
+    updateStage={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -27,12 +29,14 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "buttons": Array [],
-      "children": <Connect(withProps(withState(withHandlers(ReduxForm))))
-        initialValues={Object {}}
-        onSubmit={[Function]}
+      "children": <SkipLogicEditor
+        onChange={[Function]}
+        rules={Object {}}
       />,
       "onCancel": [Function],
-      "show": true,
+      "show": false,
+      "state": null,
+      "type": "logic",
     },
     "ref": null,
     "rendered": Object {
@@ -40,8 +44,8 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "initialValues": Object {},
-        "onSubmit": [Function],
+        "onChange": [Function],
+        "rules": Object {},
       },
       "ref": null,
       "rendered": null,
@@ -56,12 +60,14 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "buttons": Array [],
-        "children": <Connect(withProps(withState(withHandlers(ReduxForm))))
-          initialValues={Object {}}
-          onSubmit={[Function]}
+        "children": <SkipLogicEditor
+          onChange={[Function]}
+          rules={Object {}}
         />,
         "onCancel": [Function],
-        "show": true,
+        "show": false,
+        "state": null,
+        "type": "logic",
       },
       "ref": null,
       "rendered": Object {
@@ -69,8 +75,8 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "initialValues": Object {},
-          "onSubmit": [Function],
+          "onChange": [Function],
+          "rules": Object {},
         },
         "ref": null,
         "rendered": null,

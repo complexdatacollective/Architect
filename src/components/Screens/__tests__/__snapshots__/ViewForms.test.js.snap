@@ -9,8 +9,8 @@ ShallowWrapper {
     nodes={Object {}}
     onComplete={[Function]}
     openDialog={[Function]}
-    protocolPath={null}
     show={true}
+    state={null}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -77,6 +77,25 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      screen="form"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                        type="button"
+                      >
+                        Create new Form
+                      </Button>
+                    </Connect(Link)>
+                  </div>
                 </div>
               </Connect(Guided)>
             </div>
@@ -84,6 +103,7 @@ ShallowWrapper {
         </div>
       </Connect(Guided)>,
       "show": true,
+      "state": null,
     },
     "ref": null,
     "rendered": Object {
@@ -128,6 +148,25 @@ ShallowWrapper {
                         component="div"
                       />
                     </div>
+                  </div>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      screen="form"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                        type="button"
+                      >
+                        Create new Form
+                      </Button>
+                    </Connect(Link)>
                   </div>
                 </div>
               </Connect(Guided)>
@@ -176,6 +215,25 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      screen="form"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                        type="button"
+                      >
+                        Create new Form
+                      </Button>
+                    </Connect(Link)>
+                  </div>
                 </div>
               </Connect(Guided)>
             </div>
@@ -220,6 +278,25 @@ ShallowWrapper {
                       />
                     </div>
                   </div>
+                  <div
+                    className="editor__subsection"
+                  >
+                    <Connect(Link)
+                      screen="form"
+                    >
+                      <Button
+                        color=""
+                        content=""
+                        icon=""
+                        iconPosition="right"
+                        onClick={[Function]}
+                        size=""
+                        type="button"
+                      >
+                        Create new Form
+                      </Button>
+                    </Connect(Link)>
+                  </div>
                 </div>
               </Connect(Guided)>
             </div>,
@@ -260,6 +337,25 @@ ShallowWrapper {
                           component="div"
                         />
                       </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        screen="form"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                          type="button"
+                        >
+                          Create new Form
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>
                 </Connect(Guided)>,
@@ -314,6 +410,25 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        screen="form"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                          type="button"
+                        >
+                          Create new Form
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>,
                   "contentId": "guidance.forms.index",
                 },
@@ -339,7 +454,25 @@ ShallowWrapper {
                           />
                         </div>
                       </div>,
-                      null,
+                      <div
+                        className="editor__subsection"
+                      >
+                        <Connect(Link)
+                          screen="form"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                            type="button"
+                          >
+                            Create new Form
+                          </Button>
+                        </Connect(Link)>
+                      </div>,
                     ],
                     "className": "editor__section",
                   },
@@ -401,7 +534,70 @@ ShallowWrapper {
                       },
                       "type": "div",
                     },
-                    null,
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "host",
+                      "props": Object {
+                        "children": <Connect(Link)
+                          screen="form"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                            type="button"
+                          >
+                            Create new Form
+                          </Button>
+                        </Connect(Link)>,
+                        "className": "editor__subsection",
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                            type="button"
+                          >
+                            Create new Form
+                          </Button>,
+                          "screen": "form",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": "Create new Form",
+                            "color": "",
+                            "content": "",
+                            "icon": "",
+                            "iconPosition": "right",
+                            "onClick": [Function],
+                            "size": "",
+                            "type": "button",
+                          },
+                          "ref": null,
+                          "rendered": "Create new Form",
+                          "type": [Function],
+                        },
+                        "type": [Function],
+                      },
+                      "type": "div",
+                    },
                   ],
                   "type": "div",
                 },
@@ -476,6 +672,25 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        screen="form"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                          type="button"
+                        >
+                          Create new Form
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>
               </div>
@@ -483,6 +698,7 @@ ShallowWrapper {
           </div>
         </Connect(Guided)>,
         "show": true,
+        "state": null,
       },
       "ref": null,
       "rendered": Object {
@@ -527,6 +743,25 @@ ShallowWrapper {
                           component="div"
                         />
                       </div>
+                    </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        screen="form"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                          type="button"
+                        >
+                          Create new Form
+                        </Button>
+                      </Connect(Link)>
                     </div>
                   </div>
                 </Connect(Guided)>
@@ -575,6 +810,25 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        screen="form"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                          type="button"
+                        >
+                          Create new Form
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>
               </div>
@@ -619,6 +873,25 @@ ShallowWrapper {
                         />
                       </div>
                     </div>
+                    <div
+                      className="editor__subsection"
+                    >
+                      <Connect(Link)
+                        screen="form"
+                      >
+                        <Button
+                          color=""
+                          content=""
+                          icon=""
+                          iconPosition="right"
+                          onClick={[Function]}
+                          size=""
+                          type="button"
+                        >
+                          Create new Form
+                        </Button>
+                      </Connect(Link)>
+                    </div>
                   </div>
                 </Connect(Guided)>
               </div>,
@@ -659,6 +932,25 @@ ShallowWrapper {
                             component="div"
                           />
                         </div>
+                      </div>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <Connect(Link)
+                          screen="form"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                            type="button"
+                          >
+                            Create new Form
+                          </Button>
+                        </Connect(Link)>
                       </div>
                     </div>
                   </Connect(Guided)>,
@@ -713,6 +1005,25 @@ ShallowWrapper {
                           />
                         </div>
                       </div>
+                      <div
+                        className="editor__subsection"
+                      >
+                        <Connect(Link)
+                          screen="form"
+                        >
+                          <Button
+                            color=""
+                            content=""
+                            icon=""
+                            iconPosition="right"
+                            onClick={[Function]}
+                            size=""
+                            type="button"
+                          >
+                            Create new Form
+                          </Button>
+                        </Connect(Link)>
+                      </div>
                     </div>,
                     "contentId": "guidance.forms.index",
                   },
@@ -738,7 +1049,25 @@ ShallowWrapper {
                             />
                           </div>
                         </div>,
-                        null,
+                        <div
+                          className="editor__subsection"
+                        >
+                          <Connect(Link)
+                            screen="form"
+                          >
+                            <Button
+                              color=""
+                              content=""
+                              icon=""
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size=""
+                              type="button"
+                            >
+                              Create new Form
+                            </Button>
+                          </Connect(Link)>
+                        </div>,
                       ],
                       "className": "editor__section",
                     },
@@ -800,7 +1129,70 @@ ShallowWrapper {
                         },
                         "type": "div",
                       },
-                      null,
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "host",
+                        "props": Object {
+                          "children": <Connect(Link)
+                            screen="form"
+                          >
+                            <Button
+                              color=""
+                              content=""
+                              icon=""
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size=""
+                              type="button"
+                            >
+                              Create new Form
+                            </Button>
+                          </Connect(Link)>,
+                          "className": "editor__subsection",
+                        },
+                        "ref": null,
+                        "rendered": Object {
+                          "instance": null,
+                          "key": undefined,
+                          "nodeType": "class",
+                          "props": Object {
+                            "children": <Button
+                              color=""
+                              content=""
+                              icon=""
+                              iconPosition="right"
+                              onClick={[Function]}
+                              size=""
+                              type="button"
+                            >
+                              Create new Form
+                            </Button>,
+                            "screen": "form",
+                          },
+                          "ref": null,
+                          "rendered": Object {
+                            "instance": null,
+                            "key": undefined,
+                            "nodeType": "class",
+                            "props": Object {
+                              "children": "Create new Form",
+                              "color": "",
+                              "content": "",
+                              "icon": "",
+                              "iconPosition": "right",
+                              "onClick": [Function],
+                              "size": "",
+                              "type": "button",
+                            },
+                            "ref": null,
+                            "rendered": "Create new Form",
+                            "type": [Function],
+                          },
+                          "type": [Function],
+                        },
+                        "type": "div",
+                      },
                     ],
                     "type": "div",
                   },

@@ -1,57 +1,28 @@
-import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Fade from '../Transitions/Fade';
+import window from '../../ui/components/window';
 
-class PromptWindow extends PureComponent {
-  static propTypes = {
-    show: PropTypes.bool,
-    children: PropTypes.node,
-  };
+const PromptWindow = ({
+  show,
+  children,
+}) => (
+  <Fade in={show}>
+    <div className="prompts-prompt-window" onClick={e => e.stopPropagation()}>
+      {show && children}
+    </div>
+  </Fade>
+);
 
-  static defaultProps = {
-    show: false,
-    children: null,
-  };
+PromptWindow.propTypes = {
+  show: PropTypes.bool,
+  children: PropTypes.node,
+};
 
-  constructor(props) {
-    super(props);
+PromptWindow.defaultProps = {
+  show: false,
+  children: null,
+};
 
-    this.portal = document.createElement('div');
-  }
+export default window(PromptWindow);
 
-  componentDidMount() {
-    this.root.appendChild(this.portal);
-  }
-
-  componentWillUnmount() {
-    this.root.removeChild(this.portal);
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  get root() {
-    // If a root reference element is provided by windowRootConsumer() use that,
-    // otherwise default to document.body
-    return document.getElementById('stage-editor-context') || document.body;
-  }
-
-  render() {
-    const {
-      show,
-      children,
-    } = this.props;
-
-    return ReactDOM.createPortal(
-      (
-        <Fade in={show}>
-          <div className="prompts-prompt-window" onClick={e => e.stopPropagation()}>
-            {show && children}
-          </div>
-        </Fade>
-      ),
-      this.portal,
-    );
-  }
-}
-
-export default PromptWindow;
