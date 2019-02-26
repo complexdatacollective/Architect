@@ -11,55 +11,56 @@ import {
 } from 'redux-form';
 
 const mapStateToProps = (state, { form, fieldName, editField, template = {} }) => {
-  const prompts = formValueSelector(form.name)(state, fieldName);
-  const promptCount = prompts ? prompts.length : 0;
+  const items = formValueSelector(form.name)(state, fieldName);
+  const itemCount = items ? items.length : 0;
+
   const initialValues = get(
-    { prompts },
+    { [fieldName]: items },
     editField,
     { ...template, id: uuid() },
   );
 
 
   return {
-    promptCount,
+    itemCount,
     initialValues,
   };
 };
 
 const mapDispatchToProps = (dispatch, { form: { name } }) => ({
-  upsertPrompt: (fieldId, value) => dispatch(change(name, fieldId, value)),
+  upsert: (fieldId, value) => dispatch(change(name, fieldId, value)),
 });
 
-const promptHandlers = withHandlers({
+const handlers = withHandlers({
   handleEditField: ({ setEditField }) =>
     fieldId => setEditField(fieldId),
   handleResetEditField: ({ setEditField }) =>
     () => setEditField(),
-  handleAddNewPrompt: ({
+  handleAddNew: ({
     setEditField,
-    promptCount,
+    itemCount,
     fieldName,
   }) =>
     () => {
-      const newPromptName = `${fieldName}[${promptCount}]`;
-      setEditField(newPromptName);
+      const newItemFieldName = `${fieldName}[${itemCount}]`;
+      setEditField(newItemFieldName);
     },
-  handleUpdatePrompt: ({
-    upsertPrompt,
+  handleUpdate: ({
+    upsert,
     setEditField,
     editField,
   }) =>
     (value) => {
-      upsertPrompt(editField, value);
+      upsert(editField, value);
       setImmediate(() => {
         setEditField();
       });
     },
 });
 
-const withPromptHandlers = compose(
+const withEditHandlers = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  promptHandlers,
+  handlers,
 );
 
-export default withPromptHandlers;
+export default withEditHandlers;

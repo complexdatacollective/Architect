@@ -1,3 +1,14 @@
+import { isEqual } from 'lodash';
+
+export const onUIMessage = (ui, prevUI, screen, handler) => {
+  if (typeof handler !== 'function') {
+    throw Error('onUIMessage: no handler provided');
+  }
+  if (isEqual(ui, prevUI)) { return false; }
+  if (ui.screen !== screen) { return false; }
+  return handler(ui.params);
+};
+
 const OPEN_SCREEN = 'UI/OPEN_SCREEN';
 const UPDATE_SCREEN = 'UI/UPDATE_SCREEN';
 const CLOSE_SCREEN = 'UI/CLOSE_SCREEN';
@@ -7,7 +18,15 @@ const initialState = {
     screen: 'start', // start or protocol,
     params: {},
   },
-  screens: [],
+  screens: [
+    // {
+    //   screen: 'variable',
+    //   params: {
+    //     entity: 'node',
+    //     type: 'd39a47507bbe27c2a7948861847f3607eda8s8j',
+    //   },
+    // },
+  ],
   message: {},
 };
 

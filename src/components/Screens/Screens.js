@@ -10,8 +10,9 @@ import ViewForms from './ViewForms';
 import EditForm from './EditForm';
 import Codebook from './VariableRegistry';
 import EditType from './EditType';
+import EditVariable from './EditVariable';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
-import TimelineScreenTransition from '../Transitions/TimelineScreen';
+import TimelineScreenTransition, { styles } from '../Transitions/TimelineScreen';
 
 const NotFound = () => (<div> Screen not found </div>);
 
@@ -22,26 +23,30 @@ const NAMES = {
   form: EditForm,
   codebook: Codebook,
   type: EditType,
+  variable: EditVariable,
 };
 
 const getScreenComponent = screen =>
   get(NAMES, screen, NotFound);
 
 const Screens = (props) => {
-  const screens = props.screens.map(({ screen, params }) => {
+  const screens = props.screens.map(({ screen, params }, index) => {
     const ScreenComponent = getScreenComponent(screen);
+    const transitionStyle = index > 0 ? styles.WIPE : styles.FADE;
     const onComplete = result =>
       props.closeScreen(screen, result);
 
     return (
-      <TimelineScreenTransition>
+      <TimelineScreenTransition
+        style={transitionStyle}
+        key={screen}
+      >
         {state => (
           <ScreenComponent
             {...params}
             show
             state={state}
             onComplete={onComplete}
-            key={screen}
           />
         )}
       </TimelineScreenTransition>

@@ -78,17 +78,15 @@ class EditType extends PureComponent {
       category,
       type,
     } = this.props;
+    let entity;
 
     if (!type) {
-      this.props.createType(category, form);
+      entity = this.props.createType(category, form);
     } else {
-      this.props.updateType(category, type, form);
+      entity = this.props.updateType(category, type, form);
     }
 
-    this.props.onComplete({
-      category,
-      type,
-    });
+    this.props.onComplete(entity);
   }
 
   handleCancel = this.props.onComplete;
@@ -130,7 +128,6 @@ const editFormIsInvalid = isInvalid(formName);
 function mapStateToProps(state, props) {
   const category = props.category;
   const type = props.type;
-
   const protocol = getProtocol(state);
   const typeConfiguration = get(
     protocol,

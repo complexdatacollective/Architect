@@ -17,6 +17,8 @@ const savableChanges = [
   protocolRegistryActionTypes.UPDATE_TYPE,
   protocolRegistryActionTypes.CREATE_TYPE,
   protocolRegistryActionTypes.DELETE_TYPE,
+  protocolRegistryActionTypes.CREATE_VARIABLE,
+  protocolRegistryActionTypes.UPDATE_VARIABLE,
   formActionTypes.CREATE_FORM,
   formActionTypes.UPDATE_FORM,
   formActionTypes.DELETE_FORM,

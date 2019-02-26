@@ -20,7 +20,7 @@ describe('<SociogramPrompts />', () => {
     });
 
     it('defines sortOrder for new prompts', async () => {
-      const initialValues = subject.find('Prompts').prop('initialValues');
+      const initialValues = subject.find('EditableList').prop('initialValues');
       expect(initialValues).toMatchObject({ sortOrder: [] });
     });
   });

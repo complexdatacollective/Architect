@@ -6,6 +6,8 @@ import { makeGetUsageForType } from '../../../selectors/variableRegistry';
 
 const UPDATE_TYPE = 'UPDATE_TYPE';
 const CREATE_TYPE = 'CREATE_TYPE';
+const UPDATE_VARIABLE = 'UPDATE_VARIABLE';
+const CREATE_VARIABLE = 'CREATE_VARIABLE';
 const DELETE_TYPE = 'DELETE_TYPE';
 
 const initialState = {
@@ -13,16 +15,26 @@ const initialState = {
   node: {},
 };
 
-function createType(entity, configuration) {
-  return {
-    type: CREATE_TYPE,
-    meta: {
-      type: uuid(),
-      entity,
-    },
-    configuration,
+const createType = (entity, configuration) =>
+  (dispatch) => {
+    const type = uuid();
+
+    const action = {
+      type: CREATE_TYPE,
+      meta: {
+        type,
+        entity,
+      },
+      configuration,
+    };
+
+    dispatch(action);
+
+    return {
+      type,
+      category: entity,
+    };
   };
-}
 
 function updateType(entity, type, configuration) {
   return {
@@ -30,6 +42,41 @@ function updateType(entity, type, configuration) {
     meta: {
       entity,
       type,
+    },
+    configuration,
+  };
+}
+
+const createVariable = (entity, type, configuration) =>
+  (dispatch) => {
+    const variable = uuid();
+
+    const action = {
+      type: CREATE_VARIABLE,
+      meta: {
+        type,
+        entity,
+        variable,
+      },
+      configuration,
+    };
+
+    dispatch(action);
+
+    return {
+      entity,
+      type,
+      variable,
+    };
+  };
+
+function updateVariable(entity, type, variable, configuration) {
+  return {
+    type: UPDATE_VARIABLE,
+    meta: {
+      entity,
+      type,
+      variable,
     },
     configuration,
   };
@@ -73,7 +120,7 @@ function deleteType(entity, type, deleteRelatedObjects = false) {
   };
 }
 
-const setType = (state, entity, type, configuration) => ({
+const getStateWithUpdatedType = (state, entity, type, configuration) => ({
   ...state,
   [entity]: {
     ...state[entity],
@@ -81,11 +128,61 @@ const setType = (state, entity, type, configuration) => ({
   },
 });
 
+const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
+  const variables = {
+    ...state[entity][type].variables,
+    [variable]: configuration,
+  };
+
+  return {
+    ...state,
+    [entity]: {
+      ...state[entity],
+      [type]: {
+        ...state[entity][type],
+        variables,
+      },
+    },
+  };
+};
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_TYPE:
     case UPDATE_TYPE:
-      return setType(state, action.meta.entity, action.meta.type, action.configuration);
+      return getStateWithUpdatedType(
+        state,
+        action.meta.entity,
+        action.meta.type,
+        action.configuration,
+      );
+    case CREATE_VARIABLE: {
+      const { entity, type, variable } = action.meta;
+
+      const variables = {
+        ...state[entity][type].variables,
+        [variable]: action.configuration,
+      };
+
+      return {
+        ...state,
+        [entity]: {
+          ...state[entity],
+          [type]: {
+            ...state[entity][type],
+            variables,
+          },
+        },
+      };
+    }
+    case UPDATE_VARIABLE:
+      return getStateWithUpdatedVariable(
+        state,
+        action.meta.entity,
+        action.meta.type,
+        action.meta.variable,
+        action.configuration,
+      );
     case DELETE_TYPE:
       return {
         ...state,
@@ -102,9 +199,13 @@ const actionCreators = {
   updateType,
   createType,
   deleteType,
+  createVariable,
+  updateVariable,
 };
 
 const actionTypes = {
+  CREATE_VARIABLE,
+  UPDATE_VARIABLE,
   UPDATE_TYPE,
   CREATE_TYPE,
   DELETE_TYPE,

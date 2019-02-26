@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { isEqual, toPairs } from 'lodash';
+import { toPairs } from 'lodash';
 import { compose } from 'recompose';
 import RoundButton from '../Form/RoundButton';
 import Variable from './Variable';
 import withVaribleActions from './withVariableActions';
 import withUnusedVariables from './withUnusedVariables';
+import { onUIMessage } from '../../ducks/modules/ui';
 
 class AttributesTable extends Component {
   static propTypes = {
+    ui: PropTypes.object.isRequired,
     createVariable: PropTypes.func.isRequired,
     updateVariable: PropTypes.func.isRequired,
     deleteVariable: PropTypes.func.isRequired,
@@ -28,9 +31,14 @@ class AttributesTable extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(nextState, this.state) || !isEqual(nextProps, this.props);
+  componentDidUpdate({ ui: prevMessage }) {
+    const message = this.props.ui;
+    onUIMessage(message, prevMessage, 'variable', this.handleNewVariableMessage);
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return !isEqual(nextState, this.state) || !isEqual(nextProps, this.props);
+  // }
 
   get variables() {
     const variables = toPairs(this.props.input.value || {});
@@ -41,6 +49,11 @@ class AttributesTable extends Component {
 
     return variables.concat([[]]);
   }
+
+  handleNewVariableMessage = ({ variable }) => {
+    this.props.createVariable(variable);
+    this.handleEditVariable(variable);
+  };
 
   handleEditVariable = (variable) => {
     if (this.state.editing === variable) { this.setState({ editing: null }); }
@@ -120,9 +133,14 @@ class AttributesTable extends Component {
   }
 }
 
+const withUI = connect(state => ({
+  ui: state.ui.message,
+}));
+
 export { AttributesTable };
 
 export default compose(
   withVaribleActions,
   withUnusedVariables,
+  withUI,
 )(AttributesTable);

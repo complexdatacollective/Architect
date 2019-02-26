@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import { Field } from 'redux-form';
-import Preview from '../../../Prompts/PromptPreview';
+import Preview from '../../../EditableList/Preview';
 
 class PromptPreview extends Preview {
   preview() {
