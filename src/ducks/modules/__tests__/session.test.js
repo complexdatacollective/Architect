@@ -2,6 +2,7 @@
 
 import configureStore from 'redux-mock-store';
 import { createEpicMiddleware } from 'redux-observable';
+import thunk from 'redux-thunk';
 import reducer, { actionCreators } from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
@@ -10,7 +11,7 @@ import { actionCreators as formActions } from '../protocol/forms';
 import { rootEpic } from '../../modules/root';
 
 const epics = createEpicMiddleware(rootEpic);
-const middlewares = [epics];
+const middlewares = [epics, thunk];
 const mockStore = configureStore(middlewares);
 
 const itTracksActionAsChange = (action) => {
@@ -69,6 +70,14 @@ describe('session reducer', () => {
 
     it('tracks delete type as change', () => {
       itTracksActionAsChange(registryTesting.deleteTypeAction());
+    });
+
+    it('tracks create variable as change', () => {
+      itTracksActionAsChange(registryActions.createVariable());
+    });
+
+    it('tracks update variable as change', () => {
+      itTracksActionAsChange(registryActions.updateVariable());
     });
 
     it('tracks create form as change', () => {

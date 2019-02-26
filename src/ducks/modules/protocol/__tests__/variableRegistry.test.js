@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 import { sortBy } from 'lodash/fp';
 import { actionCreators as formActions } from '../forms';
 import { actionCreators as stageActions } from '../stages';
-import reducer, { actionCreators, testing } from '../variableRegistry';
+import reducer, { actionTypes, actionCreators, testing } from '../variableRegistry';
 
 jest.mock('uuid');
 
@@ -31,23 +31,55 @@ describe('protocol.variableRegistry', () => {
     });
   });
 
-  it('createType()', () => {
-    const nextState = reducer(
-      {
-        node: {},
-        edge: {},
-      },
-      actionCreators.createType(
-        'node',
-        { bazz: 'buzz' },
-      ),
-    );
+  describe('createType()', () => {
+    const emptyState = {
+      node: {},
+      edge: {},
+    };
 
-    expect(nextState).toEqual({
-      node: {
-        [uuid()]: { bazz: 'buzz' },
-      },
-      edge: { },
+    const typeOptions = { bazz: 'buzz' };
+
+    it('dispatches the CREATE_TYPE action with a type id', () => {
+      const store = mockStore(mockState);
+
+      store.dispatch(actionCreators.createType(
+        'node',
+        {},
+      ));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toMatchObject({
+        type: actionTypes.CREATE_TYPE,
+        meta: {
+          type: uuid(),
+        },
+      });
+    });
+
+    it('updates the state correctly', () => {
+      const store = mockStore(emptyState);
+
+      store.dispatch(actionCreators.createType(
+        'node',
+        typeOptions,
+      ));
+
+      const actions = store.getActions();
+      const action = actions[0];
+
+      expect(
+        reducer(emptyState, action),
+      ).toEqual(
+        {
+          edge: {},
+          node: {
+            '809895df-bbd7-4c76-ac58-e6ada2625f9b': {
+              bazz: 'buzz',
+            },
+          },
+        },
+      );
     });
   });
 

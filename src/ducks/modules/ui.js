@@ -1,6 +1,9 @@
 import { isEqual } from 'lodash';
 
 export const onUIMessage = (ui, prevUI, screen, handler) => {
+  if (typeof handler !== 'function') {
+    throw Error('onUIMessage: no handler provided');
+  }
   if (isEqual(ui, prevUI)) { return false; }
   if (ui.screen !== screen) { return false; }
   return handler(ui.params);
@@ -16,14 +19,13 @@ const initialState = {
     params: {},
   },
   screens: [
-    {
-      screen: 'variable',
-      params: {
-        // id: 'acec0568-938b-42f0-bd3a-485e22d775d6',
-        type: 'd39a47507bbe27c2a7948861847f3607eda8s8j',
-        entity: 'node',
-      },
-    },
+    // {
+    //   screen: 'variable',
+    //   params: {
+    //     entity: 'node',
+    //     type: 'd39a47507bbe27c2a7948861847f3607eda8s8j',
+    //   },
+    // },
   ],
   message: {},
 };

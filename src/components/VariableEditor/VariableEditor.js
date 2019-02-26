@@ -31,15 +31,15 @@ const VariableEditor = compose(
   withProps(({ entity, type, onComplete, createVariable, updateVariable }) => ({
     form: formName,
     component: VariableFields,
-    onSubmit: (variable) => {
-      if (!variable.id) {
-        createVariable(entity, type, variable);
-        onComplete();
+    onSubmit: (options) => {
+      if (!options.id) {
+        const newVariable = createVariable(entity, type, options);
+        onComplete(newVariable);
+      } else {
+        const id = options.id;
+        updateVariable(entity, type, id, options);
+        onComplete({ entity, type, variable: id });
       }
-
-      const { id, ...rest } = variable;
-      updateVariable(entity, type, id, rest);
-      onComplete();
     },
   })),
 )(Editor);

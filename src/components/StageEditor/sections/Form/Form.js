@@ -5,25 +5,19 @@ import { compose } from 'recompose';
 import { change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { toPairs, map, get, pickBy, isEqual } from 'lodash';
+import { toPairs, map, get, pickBy } from 'lodash';
 import Guidance from '../../../Guidance';
 import ValidatedField from '../../../Form/ValidatedField';
 import { Button } from '../../../../ui/components';
 import { RadioGroup } from '../../../../ui/components/Fields';
 import { getProtocol } from '../../../../selectors/protocol';
-import { actionCreators as uiActions } from '../../../../ducks/modules/ui';
+import { actionCreators as uiActions, onUIMessage } from '../../../../ducks/modules/ui';
 import FormCard from './FormCard';
 
 const formOption = PropTypes.shape({
   label: PropTypes.string,
   value: PropTypes.string,
 });
-
-const onUIMessage = (ui, prevUI, screen, handler) => {
-  if (isEqual(ui, prevUI)) { return false; }
-  if (ui.screen !== screen) { return false; }
-  return handler(ui.params);
-};
 
 class Form extends Component {
   static propTypes = {

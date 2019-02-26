@@ -50,14 +50,15 @@ const withVaribleActions = compose(
   }),
   connect(mapStateToProps),
   withHandlers({
-    createVariable: ({ input: { value, onChange }, variablesForNodeType }) => (variable) => {
-      // don't add existing property
-      if (Object.prototype.hasOwnProperty.call(value, variable)) { return; }
-      onChange({
-        ...value,
-        [variable]: getVariableDefault(variablesForNodeType[variable]),
-      });
-    },
+    createVariable: ({ input: { value, onChange }, variablesForNodeType }) =>
+      (variable) => {
+        // don't add existing property
+        if (Object.prototype.hasOwnProperty.call(value, variable)) { return; }
+        onChange({
+          ...value,
+          [variable]: getVariableDefault(variablesForNodeType[variable]),
+        });
+      },
     deleteVariable: ({ input: { onChange, value } }) => variable =>
       onChange(omit(value, variable)),
     updateVariable: ({ input: { onChange, value } }) => variable =>

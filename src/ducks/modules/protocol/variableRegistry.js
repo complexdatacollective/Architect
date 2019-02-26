@@ -128,14 +128,11 @@ const getStateWithUpdatedType = (state, entity, type, configuration) => ({
   },
 });
 
-const getStateWithUpdatedVariable = (state, entity, type, variableId, configuration) => {
-  const variables = state[entity][type].variables.map((variable) => {
-    if (variable.id !== variableId) { return variable; }
-    return {
-      ...configuration,
-      id: variable.id,
-    };
-  });
+const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
+  const variables = {
+    ...state[entity][type].variables,
+    [variable]: configuration,
+  };
 
   return {
     ...state,
@@ -161,20 +158,19 @@ export default function reducer(state = initialState, action = {}) {
       );
     case CREATE_VARIABLE: {
       const { entity, type, variable } = action.meta;
-      const variableWithId = {
-        ...action.configuration,
-        id: variable,
+
+      const variables = {
+        ...state[entity][type].variables,
+        [variable]: action.configuration,
       };
+
       return {
         ...state,
         [entity]: {
           ...state[entity],
           [type]: {
             ...state[entity][type],
-            variables: [
-              ...state[entity][type].variables,
-              variableWithId,
-            ],
+            variables,
           },
         },
       };
