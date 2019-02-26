@@ -69,7 +69,7 @@ describe('session reducer', () => {
     });
 
     it('tracks delete type as change', () => {
-      itTracksActionAsChange(registryTesting.deleteTypeAction());
+      itTracksActionAsChange(registryTesting.deleteType());
     });
 
     it('tracks create variable as change', () => {

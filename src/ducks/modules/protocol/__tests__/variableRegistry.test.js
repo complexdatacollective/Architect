@@ -23,141 +23,181 @@ const mockState = {
 };
 
 describe('protocol.variableRegistry', () => {
-  it('does nothing', () => {
-    const noop = reducer();
-    expect(noop).toEqual({
-      node: {},
-      edge: {},
-    });
-  });
+  describe('reducer', () => {
+    it('initialState', () => {
+      const initialState = reducer();
 
-  describe('createType()', () => {
-    const emptyState = {
-      node: {},
-      edge: {},
-    };
-
-    const typeOptions = { bazz: 'buzz' };
-
-    it('dispatches the CREATE_TYPE action with a type id', () => {
-      const store = mockStore(mockState);
-
-      store.dispatch(actionCreators.createType(
-        'node',
-        {},
-      ));
-
-      const actions = store.getActions();
-
-      expect(actions[0]).toMatchObject({
-        type: actionTypes.CREATE_TYPE,
-        meta: {
-          type: uuid(),
-        },
+      expect(initialState).toEqual({
+        node: {},
+        edge: {},
       });
     });
 
-    it('updates the state correctly', () => {
-      const store = mockStore(emptyState);
-
-      store.dispatch(actionCreators.createType(
-        'node',
-        typeOptions,
-      ));
-
-      const actions = store.getActions();
-      const action = actions[0];
-
-      expect(
-        reducer(emptyState, action),
-      ).toEqual(
-        {
-          edge: {},
-          node: {
-            '809895df-bbd7-4c76-ac58-e6ada2625f9b': {
-              bazz: 'buzz',
-            },
-          },
-        },
+    it('CREATE_TYPE', () => {
+      const result = reducer(
+        undefined,
+        testing.createType('node', 'foo', { bar: 'bazz' }),
       );
+
+      expect(result).toEqual({
+        node: { foo: { bar: 'bazz' } },
+        edge: {},
+      });
+    });
+
+    it('UPDATE_TYPE', () => {
+      const result = reducer(
+        {
+          node: { foo: { bar: 'bazz' } },
+          edge: {},
+        },
+        actionCreators.updateType('node', 'foo', { fizz: 'pop' }),
+      );
+
+      expect(result).toEqual({
+        node: { foo: { fizz: 'pop' } },
+        edge: {},
+      });
+    });
+
+    it('DELETE_TYPE', () => {
+      const result = reducer(
+        {
+          node: { foo: { bar: 'bazz' } },
+          edge: {},
+        },
+        testing.deleteType('node', 'foo'),
+      );
+
+      expect(result).toEqual({
+        node: {},
+        edge: {},
+      });
+    });
+
+    it('CREATE_VARIABLE', () => {
+      const result = reducer(
+        {
+          node: { foo: { variables: {} } },
+          edge: {},
+        },
+        testing.createVariable('node', 'foo', 'bar', { baz: 'buzz' }),
+      );
+
+      expect(result).toEqual({
+        node: { foo: { variables: { bar: { baz: 'buzz' } } } },
+        edge: {},
+      });
+    });
+
+    it('UPDATE_VARIABLE', () => {
+      const result = reducer(
+        {
+          node: { foo: { variables: { bar: { baz: 'buzz' } } } },
+          edge: {},
+        },
+        actionCreators.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
+      );
+
+      expect(result).toEqual({
+        node: { foo: { variables: { bar: { fizz: 'pop' } } } },
+        edge: {},
+      });
     });
   });
 
-  it('updateType()', () => {
-    const nextState = reducer(
-      mockState,
-      actionCreators.updateType(
-        'node',
-        'person',
-        { bazz: 'buzz' },
-      ),
-    );
+  describe('async actions', () => {
+    describe('createType()', () => {
+      it('dispatches the CREATE_TYPE action with a type id', () => {
+        const store = mockStore(mockState);
 
-    expect(nextState).toEqual({
-      node: {
-        place: { foo: 'bar' },
-        person: { bazz: 'buzz' },
-      },
-      edge: { },
+        store.dispatch(actionCreators.createType(
+          'node',
+          { fizz: 'buzz' },
+        ));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toMatchObject({
+          type: actionTypes.CREATE_TYPE,
+          meta: {
+            entity: 'node',
+            type: uuid(),
+          },
+          configuration: { fizz: 'buzz' },
+        });
+      });
     });
-  });
 
-  it('deleteType()', () => {
-    const nextState = reducer(
-      mockState,
-      testing.deleteTypeAction('node', 'person'),
-    );
+    describe('createVariable()', () => {
+      it('dispatches the CREATE_VARIABLE action with a variable id', () => {
+        const store = mockStore(mockState);
 
-    expect(nextState).toEqual({
-      node: {
-        place: { foo: 'bar' },
-      },
-      edge: { },
+        store.dispatch(actionCreators.createVariable(
+          'node',
+          'foo',
+          { fizz: 'buzz' },
+        ));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toMatchObject({
+          type: actionTypes.CREATE_VARIABLE,
+          meta: {
+            entity: 'node',
+            type: 'foo',
+            variable: uuid(),
+          },
+          configuration: { fizz: 'buzz' },
+        });
+      });
     });
-  });
 
-  it('deleteType() and delete related objects', () => {
-    const mockStateWithProtocol = {
-      protocol: {
-        present: {
-          stages: [
-            {
-              id: 'bazz',
-              subject: { entity: 'node', type: 'foo' },
-            },
-            {
-              id: 'buzz',
-              prompts: [
+    describe('deleteType()', () => {
+      it('Dispatches delete actions for all related objects', () => {
+        const mockStateWithProtocol = {
+          protocol: {
+            present: {
+              stages: [
                 {
-                  id: 'fizz',
+                  id: 'bazz',
                   subject: { entity: 'node', type: 'foo' },
                 },
+                {
+                  id: 'buzz',
+                  prompts: [
+                    {
+                      id: 'fizz',
+                      subject: { entity: 'node', type: 'foo' },
+                    },
+                  ],
+                },
               ],
-            },
-          ],
-          forms: {
-            bar: {
-              entity: 'node',
-              type: 'foo',
+              forms: {
+                bar: {
+                  entity: 'node',
+                  type: 'foo',
+                },
+              },
             },
           },
-        },
-      },
-    };
+        };
 
-    const store = mockStore(mockStateWithProtocol);
+        const store = mockStore(mockStateWithProtocol);
 
-    store.dispatch(actionCreators.deleteType('node', 'foo', true));
+        store.dispatch(actionCreators.deleteType('node', 'foo', true));
 
-    const actions = store.getActions();
+        const actions = store.getActions();
 
-    const expectedActions = sortByType([
-      testing.deleteTypeAction('node', 'foo'),
-      stageActions.deleteStage('bazz'),
-      stageActions.deletePrompt('buzz', 'fizz', true),
-      formActions.deleteForm('bar'),
-    ]);
+        const expectedActions = sortByType([
+          testing.deleteType('node', 'foo'),
+          stageActions.deleteStage('bazz'),
+          stageActions.deletePrompt('buzz', 'fizz', true),
+          formActions.deleteForm('bar'),
+        ]);
 
-    expect(sortByType(actions)).toEqual(expectedActions);
+        expect(sortByType(actions)).toEqual(expectedActions);
+      });
+    });
   });
 });

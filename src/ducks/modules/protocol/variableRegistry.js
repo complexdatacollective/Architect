@@ -15,20 +15,20 @@ const initialState = {
   node: {},
 };
 
-const createType = (entity, configuration) =>
+const createType = (entity, type, configuration) => ({
+  type: CREATE_TYPE,
+  meta: {
+    type,
+    entity,
+  },
+  configuration,
+});
+
+const createTypeThunk = (entity, configuration) =>
   (dispatch) => {
     const type = uuid();
 
-    const action = {
-      type: CREATE_TYPE,
-      meta: {
-        type,
-        entity,
-      },
-      configuration,
-    };
-
-    dispatch(action);
+    dispatch(createType(entity, type, configuration));
 
     return {
       type,
@@ -36,32 +36,30 @@ const createType = (entity, configuration) =>
     };
   };
 
-function updateType(entity, type, configuration) {
-  return {
-    type: UPDATE_TYPE,
-    meta: {
-      entity,
-      type,
-    },
-    configuration,
-  };
-}
+const updateType = (entity, type, configuration) => ({
+  type: UPDATE_TYPE,
+  meta: {
+    entity,
+    type,
+  },
+  configuration,
+});
 
-const createVariable = (entity, type, configuration) =>
+const createVariable = (entity, type, variable, configuration) => ({
+  type: CREATE_VARIABLE,
+  meta: {
+    type,
+    entity,
+    variable,
+  },
+  configuration,
+});
+
+const createVariableThunk = (entity, type, configuration) =>
   (dispatch) => {
     const variable = uuid();
 
-    const action = {
-      type: CREATE_VARIABLE,
-      meta: {
-        type,
-        entity,
-        variable,
-      },
-      configuration,
-    };
-
-    dispatch(action);
+    dispatch(createVariable(entity, type, variable, configuration));
 
     return {
       entity,
@@ -70,31 +68,41 @@ const createVariable = (entity, type, configuration) =>
     };
   };
 
-function updateVariable(entity, type, variable, configuration) {
-  return {
-    type: UPDATE_VARIABLE,
-    meta: {
-      entity,
-      type,
-      variable,
-    },
-    configuration,
-  };
-}
+const updateVariable = (entity, type, variable, configuration) => ({
+  type: UPDATE_VARIABLE,
+  meta: {
+    entity,
+    type,
+    variable,
+  },
+  configuration,
+});
 
-function deleteTypeAction(entity, type) {
-  return {
-    type: DELETE_TYPE,
-    meta: {
-      entity,
-      type,
-    },
-  };
-}
+const deleteType = (entity, type) => ({
+  type: DELETE_TYPE,
+  meta: {
+    entity,
+    type,
+  },
+});
 
-function deleteType(entity, type, deleteRelatedObjects = false) {
-  return (dispatch, getState) => {
-    dispatch(deleteTypeAction(entity, type));
+const getDeleteAction = ({ type, ...owner }) => {
+  switch (type) {
+    case 'form':
+      return formActions.deleteForm(owner.id);
+    case 'stage':
+      return stageActions.deleteStage(owner.id);
+    case 'prompt':
+      return stageActions.deletePrompt(owner.stageId, owner.promptId, true);
+    default:
+      // noop
+      return {};
+  }
+};
+
+const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) =>
+  (dispatch, getState) => {
+    dispatch(deleteType(entity, type));
 
     if (!deleteRelatedObjects) { return; }
 
@@ -102,23 +110,14 @@ function deleteType(entity, type, deleteRelatedObjects = false) {
     const getUsageForType = makeGetUsageForType(getState());
     const usageForType = getUsageForType(entity, type);
 
-    usageForType.forEach(({ owner }) => {
-      switch (owner.type) {
-        case 'form':
-          dispatch(formActions.deleteForm(owner.id));
-          break;
-        case 'stage':
-          dispatch(stageActions.deleteStage(owner.id));
-          break;
-        case 'prompt':
-          dispatch(stageActions.deletePrompt(owner.stageId, owner.promptId, true));
-          break;
-        default:
-          // noop
-      }
-    });
+    usageForType
+      .map(({ owner }) => getDeleteAction(owner))
+      .forEach(dispatch);
   };
-}
+
+/**
+ * Reducer helpers
+ */
 
 const getStateWithUpdatedType = (state, entity, type, configuration) => ({
   ...state,
@@ -197,9 +196,9 @@ export default function reducer(state = initialState, action = {}) {
 
 const actionCreators = {
   updateType,
-  createType,
-  deleteType,
-  createVariable,
+  createType: createTypeThunk,
+  deleteType: deleteTypeThunk,
+  createVariable: createVariableThunk,
   updateVariable,
 };
 
@@ -212,7 +211,9 @@ const actionTypes = {
 };
 
 const testing = {
-  deleteTypeAction,
+  createType,
+  deleteType,
+  createVariable,
 };
 
 export {
