@@ -29,7 +29,7 @@ class Preview extends PureComponent {
             handleClick={handleClick}
           >
             <Flipped inverseFlipId={fieldId} scale>
-              <div className="prompts-prompt-preview">
+              <div className="editable-list-preview">
                 {this.preview && this.preview()}
               </div>
             </Flipped>

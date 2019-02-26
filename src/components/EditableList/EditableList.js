@@ -57,12 +57,12 @@ class EditableList extends PureComponent {
         <div className={stageEditorStyles}>
           <Flipper
             flipKey={isEditing}
-            portalKey="prompts"
+            portalKey="editable-list"
           >
             <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
             {children}
-            <div className="stage-editor-section-prompts">
-              <div className="stage-editor-section-prompts__prompts">
+            <div className="editable-list">
+              <div className="editable-list__items">
                 <ValidatedFieldArray
                   name={fieldName}
                   component={OrderedList}

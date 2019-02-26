@@ -140,7 +140,6 @@ class PromptFields extends Component {
               <Field
                 name="sortOrder"
                 component={ArchitectFields.OrderBy}
-                className="stage-editor-section-prompt__setting"
                 variables={variablesForNodeType}
                 label="Node bin sorting rules:"
               />
