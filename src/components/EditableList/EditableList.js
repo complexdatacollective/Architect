@@ -12,7 +12,7 @@ import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Window from './Window';
-import Form from './Form';
+import Form, { formName } from './Form';
 import withEditHandlers from './withEditHandlers';
 
 const notEmpty = value => (
@@ -87,9 +87,10 @@ class EditableList extends PureComponent {
                 onCancel={handleResetEditField}
               >
                 <EditComponent
+                  {...rest}
+                  form={formName}
                   fieldId={editField}
                   onComplete={handleResetEditField}
-                  {...rest}
                 />
               </Form>
             </Window>

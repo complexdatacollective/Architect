@@ -6,8 +6,10 @@ import PropTypes from 'prop-types';
 import stopPropagationFromHandler from '../../utils/stopPropagationFromHandler';
 import Button from '../../ui/components/Button';
 
+export const formName = 'editiable-list-form';
+
 const formOptions = {
-  form: 'prompt-form',
+  form: formName,
   touchOnBlur: false,
   touchOnChange: true,
 };

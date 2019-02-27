@@ -7,7 +7,7 @@ import VariableFields from '../TypeEditor/VariableFields';
 import { getVariableRegistry } from '../../selectors/protocol';
 import { actionCreators as actions } from '../../ducks/modules/protocol/variableRegistry';
 
-const formName = 'VARIABLE_EDITOR';
+const formName = 'variable-editor';
 
 const mapStateToProps = (state, { entity, type, ...props }) => {
   if (!props.id) { return {}; }

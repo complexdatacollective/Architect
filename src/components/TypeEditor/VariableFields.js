@@ -114,27 +114,20 @@ VariableFields.propTypes = {
   form: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   variableType: PropTypes.string,
   resetOptions: PropTypes.func,
-  autofill: PropTypes.func,
-  nameTouched: PropTypes.bool,
+  autofill: PropTypes.func.isRequired,
+  nameTouched: PropTypes.bool.isRequired,
 };
 
 VariableFields.defaultProps = {
   form: null,
   variableType: null,
   resetOptions: null,
-  autofill: () => {},
-  nameTouched: () => {},
 };
 
-// Both form types (type editor and variable editor) use different formats for this prop
-const getFormName = form => form.name || form;
-
-const mapStateToProps = (state, { form, fieldId }) => {
-  const field = fieldId ? `${fieldId}.type` : 'type'; // This is used by two different forms
-  const formName = getFormName(form);
-  const formMeta = getFormMeta(formName)(state);
+const mapStateToProps = (state, { form }) => {
+  const formMeta = getFormMeta(form)(state);
   const nameTouched = get(formMeta, 'name.touched', false);
-  const variableType = formValueSelector(formName)(state, field);
+  const variableType = formValueSelector(form)(state, 'type');
 
   return {
     nameTouched,
@@ -142,13 +135,10 @@ const mapStateToProps = (state, { form, fieldId }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { form }) => {
-  const formName = getFormName(form);
-
-  return {
-    autofill: (field, value) => dispatch(autofill(formName, field, value)),
-  };
-};
+const mapDispatchToProps = (dispatch, { form }) => ({
+  autofill: (field, value) =>
+    dispatch(autofill(form, field, value)),
+});
 
 export { VariableFields };
 

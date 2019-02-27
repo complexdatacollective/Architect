@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
-import { Field, autofill, getFormMeta } from 'redux-form';
-import { compose } from 'recompose';
+import { Field } from 'redux-form';
 import { ValidatedField } from '../Form';
 import Guidance from '../Guidance';
 import * as Fields from '../../ui/components/Fields';
@@ -170,20 +167,6 @@ TypeEditor.defaultProps = {
   iconOptions: [],
 };
 
-const mapStateToProps = (state, { form }) => {
-  const formMeta = getFormMeta(form)(state);
-
-  return ({
-    nameTouched: get(formMeta, 'name.touched', false),
-  });
-};
-
-const mapDispatchToProps = (dispatch, { form }) => ({
-  autofill: (field, value) => dispatch(autofill(form, field, value)),
-});
-
 export { TypeEditor };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(TypeEditor);
+export default TypeEditor;
