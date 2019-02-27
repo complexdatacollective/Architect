@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Field, formValueSelector } from 'redux-form';
+import { Field, formValueSelector, getFormMeta, autofill } from 'redux-form';
 import { connect } from 'react-redux';
+import { get } from 'lodash';
 import ValidatedField from '../Form/ValidatedField';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
@@ -125,16 +126,30 @@ VariableFields.defaultProps = {
   nameTouched: () => {},
 };
 
-const withVariableType = connect((state, { form, fieldId }) => {
+// Both form types (type editor and variable editor) use different formats for this prop
+const getFormName = form => form.name || form;
+
+const mapStateToProps = (state, { form, fieldId }) => {
   const field = fieldId ? `${fieldId}.type` : 'type'; // This is used by two different forms
-  const formName = form.name || form; // Both forms use different formats for this prop.
+  const formName = getFormName(form);
+  const formMeta = getFormMeta(formName)(state);
+  const nameTouched = get(formMeta, 'name.touched', false);
   const variableType = formValueSelector(formName)(state, field);
 
   return {
+    nameTouched,
     variableType,
   };
-});
+};
+
+const mapDispatchToProps = (dispatch, { form }) => {
+  const formName = getFormName(form);
+
+  return {
+    autofill: (field, value) => dispatch(autofill(formName, field, value)),
+  };
+};
 
 export { VariableFields };
 
-export default withVariableType(VariableFields);
+export default connect(mapStateToProps, mapDispatchToProps)(VariableFields);
