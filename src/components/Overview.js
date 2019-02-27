@@ -80,11 +80,11 @@ class Overview extends Component {
       <React.Fragment>
         {map(
           forms,
-          (form, formName) => (
+          (form, id) => (
             <Link
-              key={formName}
+              key={id}
               screen="form"
-              params={{ form: formName }}
+              params={{ id }}
             >
               <FormCard
                 label={form.title}
