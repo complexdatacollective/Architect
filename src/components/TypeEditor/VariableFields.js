@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field, formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
 import ValidatedField from '../Form/ValidatedField';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
@@ -108,10 +109,8 @@ class VariableFields extends PureComponent {
   }
 }
 
-// TODO: reimplement these props
-
 VariableFields.propTypes = {
-  form: PropTypes.string,
+  form: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   variableType: PropTypes.string,
   resetOptions: PropTypes.func,
   autofill: PropTypes.func,
@@ -126,6 +125,16 @@ VariableFields.defaultProps = {
   nameTouched: () => {},
 };
 
+const withVariableType = connect((state, { form, fieldId }) => {
+  const field = fieldId ? `${fieldId}.type` : 'type'; // This is used by two different forms
+  const formName = form.name || form; // Both forms use different formats for this prop.
+  const variableType = formValueSelector(formName)(state, field);
+
+  return {
+    variableType,
+  };
+});
+
 export { VariableFields };
 
-export default VariableFields;
+export default withVariableType(VariableFields);

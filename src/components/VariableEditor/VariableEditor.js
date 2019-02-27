@@ -30,6 +30,7 @@ const VariableEditor = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withProps(({ entity, type, onComplete, createVariable, updateVariable }) => ({
     form: formName,
+    fieldId: '',
     component: VariableFields,
     onSubmit: (options) => {
       if (!options.id) {
