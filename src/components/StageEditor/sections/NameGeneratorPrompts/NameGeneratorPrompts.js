@@ -10,6 +10,7 @@ const NameGeneratorPrompts = props => (
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
+    fieldName="prompts"
     {...props}
   >
     <h2>Prompts</h2>

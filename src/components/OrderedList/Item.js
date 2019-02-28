@@ -4,25 +4,25 @@ import PropTypes from 'prop-types';
 import Handle from './Handle';
 import DeleteButton from './DeleteButton';
 
-const Item = ({ children, handleDelete, handleClick, className, sortable, ...rest }) => (
+const Item = ({ children, onDelete, onClick, className, sortable, ...rest }) => (
   <div className={cx('list-item', className)} {...rest} >
     { sortable &&
       <div className="list-item__control list-item__control--left">
         <Handle />
       </div>
     }
-    <div className="list-item__content" onClick={handleClick}>
+    <div className="list-item__content" onClick={onClick}>
       {children}
     </div>
     <div className="list-item__control list-item__control--right">
-      <DeleteButton onClick={handleDelete} />
+      <DeleteButton onClick={onDelete} />
     </div>
   </div>
 );
 
 Item.propTypes = {
   className: PropTypes.string,
-  handleDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   children: PropTypes.node,
   sortable: PropTypes.bool,
 };

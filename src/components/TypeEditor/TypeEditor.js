@@ -9,9 +9,7 @@ import IconOption from './IconOption';
 import { getFieldId } from '../../utils/issues';
 import safeName from './safeName';
 import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../config';
-import VariablePreview from './VariablePreview';
-import VariableFields from './VariableFields';
-import EditableList from '../EditableList';
+import Variables from './Variables';
 
 class TypeEditor extends Component {
   handleChangeLabel = (e, value) => {
@@ -132,17 +130,15 @@ class TypeEditor extends Component {
 
         <Guidance contentId="guidance.registry.type.variables">
           <div className="editor__section">
-            <EditableList
-              previewComponent={VariablePreview}
-              editComponent={VariableFields}
-              fieldName="variables"
-              form={{ name: form }}
-              title="Edit Variable"
-              canSort={false}
-            >
-              <h2>Variables</h2>
-            </EditableList>
-
+            <Variables
+              form={form}
+              name="variables"
+              sortableProperties={['name', 'type']}
+              initialSortOrder={{
+                direction: 'asc',
+                property: 'name',
+              }}
+            />
           </div>
         </Guidance>
       </React.Fragment>

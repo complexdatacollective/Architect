@@ -10,6 +10,7 @@ import cx from 'classnames';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
+import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Window from './Window';
 import Form, { formName } from './Form';
@@ -31,6 +32,7 @@ class EditableList extends PureComponent {
       handleResetEditField,
       handleUpdate,
       disabled,
+      sortMode,
       handleAddNew,
       fieldName,
       contentId,
@@ -52,6 +54,8 @@ class EditableList extends PureComponent {
 
     const isEditing = !!editField;
 
+    const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
+
     return (
       <Guidance contentId={contentId}>
         <div className={stageEditorStyles}>
@@ -65,7 +69,7 @@ class EditableList extends PureComponent {
               <div className="editable-list__items">
                 <ValidatedFieldArray
                   name={fieldName}
-                  component={OrderedList}
+                  component={ListComponent}
                   item={PreviewComponent}
                   validation={{ notEmpty }}
                   onClickPrompt={handleEditField}
@@ -107,6 +111,7 @@ EditableList.propTypes = {
     getValues: PropTypes.func,
   }).isRequired,
   disabled: PropTypes.bool,
+  sortMode: PropTypes.oneOf(['manual', 'auto']),
   fieldName: PropTypes.string.isRequired,
   contentId: PropTypes.string,
   title: PropTypes.string,
@@ -120,6 +125,7 @@ EditableList.defaultProps = {
   contentId: null,
   children: null,
   title: null,
+  sortMode: 'manual',
 };
 
 const withDefaultFieldName = defaultProps({

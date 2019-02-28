@@ -143,22 +143,22 @@ ShallowWrapper {
           <div
             className="editor__section"
           >
-            <defaultProps(withState(Connect(withHandlers(EditableList))))
-              canSort={false}
-              editComponent={[Function]}
-              fieldName="variables"
-              form={
+            <Variables
+              form="TYPE_EDITOR"
+              initialSortOrder={
                 Object {
-                  "name": "TYPE_EDITOR",
+                  "direction": "asc",
+                  "property": "name",
                 }
               }
-              previewComponent={[Function]}
-              title="Edit Variable"
-            >
-              <h2>
-                Variables
-              </h2>
-            </defaultProps(withState(Connect(withHandlers(EditableList))))>
+              name="variables"
+              sortableProperties={
+                Array [
+                  "name",
+                  "type",
+                ]
+              }
+            />
           </div>
         </Connect(Guided)>,
       ],
@@ -558,22 +558,22 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
           >
-            <defaultProps(withState(Connect(withHandlers(EditableList))))
-              canSort={false}
-              editComponent={[Function]}
-              fieldName="variables"
-              form={
+            <Variables
+              form="TYPE_EDITOR"
+              initialSortOrder={
                 Object {
-                  "name": "TYPE_EDITOR",
+                  "direction": "asc",
+                  "property": "name",
                 }
               }
-              previewComponent={[Function]}
-              title="Edit Variable"
-            >
-              <h2>
-                Variables
-              </h2>
-            </defaultProps(withState(Connect(withHandlers(EditableList))))>
+              name="variables"
+              sortableProperties={
+                Array [
+                  "name",
+                  "type",
+                ]
+              }
+            />
           </div>,
           "contentId": "guidance.registry.type.variables",
         },
@@ -583,22 +583,22 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
-              canSort={false}
-              editComponent={[Function]}
-              fieldName="variables"
-              form={
+            "children": <Variables
+              form="TYPE_EDITOR"
+              initialSortOrder={
                 Object {
-                  "name": "TYPE_EDITOR",
+                  "direction": "asc",
+                  "property": "name",
                 }
               }
-              previewComponent={[Function]}
-              title="Edit Variable"
-            >
-              <h2>
-                Variables
-              </h2>
-            </defaultProps(withState(Connect(withHandlers(EditableList))))>,
+              name="variables"
+              sortableProperties={
+                Array [
+                  "name",
+                  "type",
+                ]
+              }
+            />,
             "className": "editor__section",
           },
           "ref": null,
@@ -607,30 +607,19 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "canSort": false,
-              "children": <h2>
-                Variables
-              </h2>,
-              "editComponent": [Function],
-              "fieldName": "variables",
-              "form": Object {
-                "name": "TYPE_EDITOR",
+              "form": "TYPE_EDITOR",
+              "initialSortOrder": Object {
+                "direction": "asc",
+                "property": "name",
               },
-              "previewComponent": [Function],
-              "title": "Edit Variable",
+              "name": "variables",
+              "sortableProperties": Array [
+                "name",
+                "type",
+              ],
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Variables",
-              },
-              "ref": null,
-              "rendered": "Variables",
-              "type": "h2",
-            },
+            "rendered": null,
             "type": [Function],
           },
           "type": "div",
@@ -753,22 +742,22 @@ ShallowWrapper {
             <div
               className="editor__section"
             >
-              <defaultProps(withState(Connect(withHandlers(EditableList))))
-                canSort={false}
-                editComponent={[Function]}
-                fieldName="variables"
-                form={
+              <Variables
+                form="TYPE_EDITOR"
+                initialSortOrder={
                   Object {
-                    "name": "TYPE_EDITOR",
+                    "direction": "asc",
+                    "property": "name",
                   }
                 }
-                previewComponent={[Function]}
-                title="Edit Variable"
-              >
-                <h2>
-                  Variables
-                </h2>
-              </defaultProps(withState(Connect(withHandlers(EditableList))))>
+                name="variables"
+                sortableProperties={
+                  Array [
+                    "name",
+                    "type",
+                  ]
+                }
+              />
             </div>
           </Connect(Guided)>,
         ],
@@ -1168,22 +1157,22 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
             >
-              <defaultProps(withState(Connect(withHandlers(EditableList))))
-                canSort={false}
-                editComponent={[Function]}
-                fieldName="variables"
-                form={
+              <Variables
+                form="TYPE_EDITOR"
+                initialSortOrder={
                   Object {
-                    "name": "TYPE_EDITOR",
+                    "direction": "asc",
+                    "property": "name",
                   }
                 }
-                previewComponent={[Function]}
-                title="Edit Variable"
-              >
-                <h2>
-                  Variables
-                </h2>
-              </defaultProps(withState(Connect(withHandlers(EditableList))))>
+                name="variables"
+                sortableProperties={
+                  Array [
+                    "name",
+                    "type",
+                  ]
+                }
+              />
             </div>,
             "contentId": "guidance.registry.type.variables",
           },
@@ -1193,22 +1182,22 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
-                canSort={false}
-                editComponent={[Function]}
-                fieldName="variables"
-                form={
+              "children": <Variables
+                form="TYPE_EDITOR"
+                initialSortOrder={
                   Object {
-                    "name": "TYPE_EDITOR",
+                    "direction": "asc",
+                    "property": "name",
                   }
                 }
-                previewComponent={[Function]}
-                title="Edit Variable"
-              >
-                <h2>
-                  Variables
-                </h2>
-              </defaultProps(withState(Connect(withHandlers(EditableList))))>,
+                name="variables"
+                sortableProperties={
+                  Array [
+                    "name",
+                    "type",
+                  ]
+                }
+              />,
               "className": "editor__section",
             },
             "ref": null,
@@ -1217,30 +1206,19 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "canSort": false,
-                "children": <h2>
-                  Variables
-                </h2>,
-                "editComponent": [Function],
-                "fieldName": "variables",
-                "form": Object {
-                  "name": "TYPE_EDITOR",
+                "form": "TYPE_EDITOR",
+                "initialSortOrder": Object {
+                  "direction": "asc",
+                  "property": "name",
                 },
-                "previewComponent": [Function],
-                "title": "Edit Variable",
+                "name": "variables",
+                "sortableProperties": Array [
+                  "name",
+                  "type",
+                ],
               },
               "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Variables",
-                },
-                "ref": null,
-                "rendered": "Variables",
-                "type": "h2",
-              },
+              "rendered": null,
               "type": [Function],
             },
             "type": "div",
@@ -1467,22 +1445,22 @@ ShallowWrapper {
           <div
             className="editor__section"
           >
-            <defaultProps(withState(Connect(withHandlers(EditableList))))
-              canSort={false}
-              editComponent={[Function]}
-              fieldName="variables"
-              form={
+            <Variables
+              form="TYPE_EDITOR"
+              initialSortOrder={
                 Object {
-                  "name": "TYPE_EDITOR",
+                  "direction": "asc",
+                  "property": "name",
                 }
               }
-              previewComponent={[Function]}
-              title="Edit Variable"
-            >
-              <h2>
-                Variables
-              </h2>
-            </defaultProps(withState(Connect(withHandlers(EditableList))))>
+              name="variables"
+              sortableProperties={
+                Array [
+                  "name",
+                  "type",
+                ]
+              }
+            />
           </div>
         </Connect(Guided)>,
       ],
@@ -2165,22 +2143,22 @@ ShallowWrapper {
           "children": <div
             className="editor__section"
           >
-            <defaultProps(withState(Connect(withHandlers(EditableList))))
-              canSort={false}
-              editComponent={[Function]}
-              fieldName="variables"
-              form={
+            <Variables
+              form="TYPE_EDITOR"
+              initialSortOrder={
                 Object {
-                  "name": "TYPE_EDITOR",
+                  "direction": "asc",
+                  "property": "name",
                 }
               }
-              previewComponent={[Function]}
-              title="Edit Variable"
-            >
-              <h2>
-                Variables
-              </h2>
-            </defaultProps(withState(Connect(withHandlers(EditableList))))>
+              name="variables"
+              sortableProperties={
+                Array [
+                  "name",
+                  "type",
+                ]
+              }
+            />
           </div>,
           "contentId": "guidance.registry.type.variables",
         },
@@ -2190,22 +2168,22 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
-              canSort={false}
-              editComponent={[Function]}
-              fieldName="variables"
-              form={
+            "children": <Variables
+              form="TYPE_EDITOR"
+              initialSortOrder={
                 Object {
-                  "name": "TYPE_EDITOR",
+                  "direction": "asc",
+                  "property": "name",
                 }
               }
-              previewComponent={[Function]}
-              title="Edit Variable"
-            >
-              <h2>
-                Variables
-              </h2>
-            </defaultProps(withState(Connect(withHandlers(EditableList))))>,
+              name="variables"
+              sortableProperties={
+                Array [
+                  "name",
+                  "type",
+                ]
+              }
+            />,
             "className": "editor__section",
           },
           "ref": null,
@@ -2214,30 +2192,19 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "function",
             "props": Object {
-              "canSort": false,
-              "children": <h2>
-                Variables
-              </h2>,
-              "editComponent": [Function],
-              "fieldName": "variables",
-              "form": Object {
-                "name": "TYPE_EDITOR",
+              "form": "TYPE_EDITOR",
+              "initialSortOrder": Object {
+                "direction": "asc",
+                "property": "name",
               },
-              "previewComponent": [Function],
-              "title": "Edit Variable",
+              "name": "variables",
+              "sortableProperties": Array [
+                "name",
+                "type",
+              ],
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Variables",
-              },
-              "ref": null,
-              "rendered": "Variables",
-              "type": "h2",
-            },
+            "rendered": null,
             "type": [Function],
           },
           "type": "div",
@@ -2413,22 +2380,22 @@ ShallowWrapper {
             <div
               className="editor__section"
             >
-              <defaultProps(withState(Connect(withHandlers(EditableList))))
-                canSort={false}
-                editComponent={[Function]}
-                fieldName="variables"
-                form={
+              <Variables
+                form="TYPE_EDITOR"
+                initialSortOrder={
                   Object {
-                    "name": "TYPE_EDITOR",
+                    "direction": "asc",
+                    "property": "name",
                   }
                 }
-                previewComponent={[Function]}
-                title="Edit Variable"
-              >
-                <h2>
-                  Variables
-                </h2>
-              </defaultProps(withState(Connect(withHandlers(EditableList))))>
+                name="variables"
+                sortableProperties={
+                  Array [
+                    "name",
+                    "type",
+                  ]
+                }
+              />
             </div>
           </Connect(Guided)>,
         ],
@@ -3111,22 +3078,22 @@ ShallowWrapper {
             "children": <div
               className="editor__section"
             >
-              <defaultProps(withState(Connect(withHandlers(EditableList))))
-                canSort={false}
-                editComponent={[Function]}
-                fieldName="variables"
-                form={
+              <Variables
+                form="TYPE_EDITOR"
+                initialSortOrder={
                   Object {
-                    "name": "TYPE_EDITOR",
+                    "direction": "asc",
+                    "property": "name",
                   }
                 }
-                previewComponent={[Function]}
-                title="Edit Variable"
-              >
-                <h2>
-                  Variables
-                </h2>
-              </defaultProps(withState(Connect(withHandlers(EditableList))))>
+                name="variables"
+                sortableProperties={
+                  Array [
+                    "name",
+                    "type",
+                  ]
+                }
+              />
             </div>,
             "contentId": "guidance.registry.type.variables",
           },
@@ -3136,22 +3103,22 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": <defaultProps(withState(Connect(withHandlers(EditableList))))
-                canSort={false}
-                editComponent={[Function]}
-                fieldName="variables"
-                form={
+              "children": <Variables
+                form="TYPE_EDITOR"
+                initialSortOrder={
                   Object {
-                    "name": "TYPE_EDITOR",
+                    "direction": "asc",
+                    "property": "name",
                   }
                 }
-                previewComponent={[Function]}
-                title="Edit Variable"
-              >
-                <h2>
-                  Variables
-                </h2>
-              </defaultProps(withState(Connect(withHandlers(EditableList))))>,
+                name="variables"
+                sortableProperties={
+                  Array [
+                    "name",
+                    "type",
+                  ]
+                }
+              />,
               "className": "editor__section",
             },
             "ref": null,
@@ -3160,30 +3127,19 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "function",
               "props": Object {
-                "canSort": false,
-                "children": <h2>
-                  Variables
-                </h2>,
-                "editComponent": [Function],
-                "fieldName": "variables",
-                "form": Object {
-                  "name": "TYPE_EDITOR",
+                "form": "TYPE_EDITOR",
+                "initialSortOrder": Object {
+                  "direction": "asc",
+                  "property": "name",
                 },
-                "previewComponent": [Function],
-                "title": "Edit Variable",
+                "name": "variables",
+                "sortableProperties": Array [
+                  "name",
+                  "type",
+                ],
               },
               "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Variables",
-                },
-                "ref": null,
-                "rendered": "Variables",
-                "type": "h2",
-              },
+              "rendered": null,
               "type": [Function],
             },
             "type": "div",

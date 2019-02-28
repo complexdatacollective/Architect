@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
-import UnorderedList from '.';
+import UnorderedList from './UnorderedList';
 
 /**
  * Usage:
@@ -18,9 +18,8 @@ import UnorderedList from '.';
  */
 
 const fieldHandlers = withHandlers({
-  handleDelete: props => (index) => {
-    props.fields.remove(index);
-  },
+  handleDelete: ({ fields }) => index =>
+    fields.remove(index),
 });
 
 const FieldArrayAdapter = ({
@@ -41,7 +40,6 @@ const FieldArrayAdapter = ({
 );
 
 FieldArrayAdapter.propTypes = {
-  form: PropTypes.string.isRequired,
   items: PropTypes.array,
   fields: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
@@ -52,8 +50,11 @@ FieldArrayAdapter.defaultProps = {
   items: [],
 };
 
-const mapStateToProps = (state, { form, fields: { name } }) => {
-  const items = formValueSelector(form)(state, name);
+const mapStateToProps = (state, { form, fields }) => {
+  if (!fields || !form) { return {}; }
+
+  const items = formValueSelector(form.name)(state, fields.name)
+    .map((item, index) => ({ ...item, index, fieldId: `${fields.name}[${index}]` }));
 
   return ({
     items,

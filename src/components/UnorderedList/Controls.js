@@ -42,7 +42,7 @@ class Controls extends Component {
             }}
           />
         </div>
-        { this.props.sortableProperties &&
+        { this.props.sortableProperties.length > 0 &&
           <div className="list-controls__section">
             <div className="list-controls__section-name">
               Sort by:

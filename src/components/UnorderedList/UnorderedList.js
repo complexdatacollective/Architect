@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { map } from 'lodash';
 import DefaultControls from './Controls';
 
 class List extends Component {
@@ -27,13 +26,11 @@ class List extends Component {
     } });
   }
 
-  items() {
+  filteredItems() {
     const { items, filter } = this.props;
     const { parameters } = this.state;
 
-    const withIndices = map(items, (item, _index) => ({ ...item, _index }));
-
-    return filter(withIndices, parameters);
+    return filter(items, parameters);
   }
 
   render() {
@@ -62,14 +59,13 @@ class List extends Component {
           </div>
         )}
         <div className="list__items">
-          {this.items().map(({ _index, ...item }) => (
-            <div className="list__item" key={_index}>
+          {this.filteredItems().map(({ fieldId, index, ...item }) => (
+            <div className="list__item" key={item.id || fieldId}>
               <Item
-                item={item}
-                {...rest}
-                index={_index}
                 sortable={false}
-                onDelete={() => onDelete(_index)}
+                onDelete={() => onDelete(index)}
+                fieldId={fieldId}
+                {...rest}
               />
             </div>
           ))}

@@ -9,7 +9,7 @@ class Preview extends PureComponent {
       onClickPrompt,
       editField,
       fieldId,
-      handleDelete,
+      onDelete,
       canSort,
     } = this.props;
 
@@ -25,8 +25,8 @@ class Preview extends PureComponent {
           <Item
             {...flipProps}
             sortable={canSort}
-            handleDelete={handleDelete}
-            handleClick={handleClick}
+            onDelete={onDelete}
+            onClick={handleClick}
           >
             <Flipped inverseFlipId={fieldId} scale>
               <div className="editable-list-preview">

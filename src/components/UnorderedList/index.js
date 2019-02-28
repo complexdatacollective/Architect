@@ -1,5 +1,6 @@
-export { default } from './UnorderedList';
-export { default as FieldArrayAdapter } from './FieldArrayAdapter';
+// 'FieldArrayAdapter' same as 'UnorderedList' but redux-form FieldArray compatible
+export { default } from './FieldArrayAdapter';
+export { default as UnorderedList } from './UnorderedList';
 export { default as Item } from '../OrderedList/Item';
 export { default as ExpandableItem } from '../OrderedList/ExpandableItem';
 export { default as NewButton } from '../OrderedList/NewButton';

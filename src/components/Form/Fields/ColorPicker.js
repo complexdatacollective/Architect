@@ -47,6 +47,7 @@ class ColorPicker extends PureComponent {
         className={colorClasses}
         onClick={() => this.handleClick(value)}
         style={{ '--color': `var(--${value})` }}
+        key={value}
       >
         <div className="form-fields-color-picker__color-label">{label}</div>
       </div>
