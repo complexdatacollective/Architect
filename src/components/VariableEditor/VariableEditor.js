@@ -7,7 +7,7 @@ import VariableFields from '../TypeEditor/VariableFields';
 import { getVariableRegistry } from '../../selectors/protocol';
 import { actionCreators as actions } from '../../ducks/modules/protocol/variableRegistry';
 
-const formName = 'variable-editor';
+export const formName = 'variable-editor';
 
 const mapStateToProps = (state, { entity, type, ...props }) => {
   if (!props.id) { return {}; }
@@ -26,11 +26,13 @@ const mapDispatchToProps = dispatch => ({
   createVariable: bindActionCreators(actions.createVariable, dispatch),
 });
 
+/**
+ * An extended <Editor />, with preconfigured props (form, onSubmit, component).
+ */
 const VariableEditor = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withProps(({ entity, type, onComplete, createVariable, updateVariable }) => ({
     form: formName,
-    fieldId: '',
     component: VariableFields,
     onSubmit: (options) => {
       if (!options.id) {
@@ -44,7 +46,5 @@ const VariableEditor = compose(
     },
   })),
 )(Editor);
-
-export { formName };
 
 export default VariableEditor;

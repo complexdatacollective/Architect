@@ -24,7 +24,7 @@ class EditScreen extends PureComponent {
   render() {
     const {
       show,
-      state,
+      transitionState,
       editor: Editor,
       ...rest
     } = this.props;
@@ -33,7 +33,7 @@ class EditScreen extends PureComponent {
       <Card
         buttons={this.buttons}
         show={show}
-        state={state}
+        transitionState={transitionState}
         onCancel={this.handleCancel}
       >
         <Editor {...rest} />

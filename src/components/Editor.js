@@ -8,6 +8,49 @@ import { FormCodeView } from './CodeView';
 import Issues from './Issues';
 import windowRootProvider from '../ui/components/windowRootProvider';
 
+/**
+ * Editor is a scaffold for specific editor components.
+ *
+ * It includes:
+ * - `<Guided />` component (info sidebar)
+ * - `<Issues />` component, which provides interactive form errors
+ * - `<FormCodeView />` component, which reveals the form's working copy of the configuration
+ * - A redux-form `<Form />` component, which allows us to dispatch submit from outside
+ *   the editor (necessary for our button footers).
+ *
+ * Required props:
+ * - {string} form Name to use for the form in redux-form, this must match any child form
+ *   components which hard-code this values
+ * - {Component} component A React component which contains any number of redux-form `<Field />`
+ * - {func} onSubmit(values) The submit handler, it receives the values of the form as an argument
+ *   and will likely be hooked up to redux state.
+ * - It also accepts the same props as `reduxForm()`, such as `initialValues`
+ *
+ * @example
+ * export const formName = 'MY_EDITOR';
+ *
+ * const MySpecificEditor = ({
+ *   submitHandler,
+ * }) => (
+ *   <Editor
+ *     form={formName}
+ *     component={MyFieldsComponent}
+ *     onSubmit={submitHandler}
+ *   />
+ * );
+ *
+ * const mapDispatchToProps = (dispatch) => ({
+ *   onSubmit: (values) => {
+ *     if (values.id) {
+ *       dispatch(actions.update(values.id, values));
+ *     } else {
+ *       dispatch(actions.create(values));
+ *     }
+ *   },
+ * });
+ *
+ * export default connect(null, mapDispatchToProps)(MySpecificEditor);
+ */
 const Editor = ({
   handleSubmit,
   toggleCodeView,
