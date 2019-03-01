@@ -1,6 +1,6 @@
 import React from 'react';
 import { get } from 'lodash';
-import EditStage from './EditStage';
+import StageEditorScreen from './StageEditorScreen';
 import EditSkipLogic from './EditSkipLogic';
 import ViewForms from './ViewForms';
 import EditForm from './EditForm';
@@ -11,7 +11,7 @@ import VariableEditorScreen from './VariableEditorScreen';
 const NotFound = () => (<div> Screen not found </div>);
 
 const SCREEN_INDEX = {
-  stage: EditStage,
+  stage: StageEditorScreen,
   skip: EditSkipLogic,
   forms: ViewForms,
   form: EditForm,

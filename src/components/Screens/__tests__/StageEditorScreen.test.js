@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EditStage } from '../EditStage';
+import { StageEditorScreen } from '../StageEditorScreen';
 
 const mockProps = {
   dirty: false,
@@ -17,15 +17,15 @@ const mockProps = {
   closePreview: () => {},
 };
 
-describe('<EditStage />', () => {
+describe('<StageEditorScreen />', () => {
   it('can render', () => {
-    const component = shallow(<EditStage {...mockProps} />);
+    const component = shallow(<StageEditorScreen {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });
 
   it('hides preview button when form is invalid', () => {
-    const component = shallow(<EditStage {...mockProps} invalid />);
+    const component = shallow(<StageEditorScreen {...mockProps} invalid />);
 
     expect(
       component.prop('secondaryButtons')

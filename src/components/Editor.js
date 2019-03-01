@@ -56,7 +56,9 @@ const Editor = ({
   toggleCodeView,
   showCodeView,
   form,
+  children,
   issues,
+  title,
   submitFailed,
   component: Component,
   setWindowRoot,
@@ -69,7 +71,19 @@ const Editor = ({
         <div className="editor__window">
           <div className="editor__content">
             <Form onSubmit={handleSubmit}>
-              <Component form={form} toggleCodeView={toggleCodeView} {...rest} />
+              <div className="code-button">
+                <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+              </div>
+              { title &&
+                <h1 className="editor__heading">{title}</h1>
+              }
+              { typeof children === 'function' &&
+                children({ form, toggleCodeView, ...rest })
+              }
+              { children && typeof children !== 'function' && children }
+              { !children &&
+                <Component form={form} {...rest} />
+              }
             </Form>
           </div>
           <Issues
@@ -98,6 +112,7 @@ Editor.defaultProps = {
 
 const mapStateToProps = (state, props) => {
   const issues = getFormSyncErrors(props.form)(state);
+
   return {
     issues,
     hasSubmitFailed: hasSubmitFailed(props.form)(state),

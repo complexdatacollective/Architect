@@ -1,29 +1,55 @@
 import { connect } from 'react-redux';
-import { reduxForm, getFormSyncErrors } from 'redux-form';
-import { compose, defaultProps, withState, withHandlers } from 'recompose';
-import StageEditor from './StageEditor';
+import { bindActionCreators } from 'redux';
+import {
+  isDirty as isFormDirty,
+  isInvalid as isFormInvalid,
+} from 'redux-form';
+import { compose, defaultProps, withHandlers } from 'recompose';
+import { find } from 'lodash';
+import { getProtocol } from '../../selectors/protocol';
+import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
+import StageEditor, { formName } from './StageEditor';
+
+const getStageById = (protocol, id) =>
+  find(protocol.stages, ['id', id]);
 
 const mapStateToProps = (state, props) => {
-  const issues = getFormSyncErrors(props.form)(state);
+  const protocol = getProtocol(state);
+  const initialValues = getStageById(protocol, props.id) || { type: props.type };
 
-  return {
-    initialValues: props.stage,
-    issues,
-  };
+  return ({
+    initialValues,
+    type: initialValues.type,
+    dirty: isFormDirty(formName)(state),
+    invalid: isFormInvalid(formName)(state),
+  });
 };
+
+const mapDispatchToProps = dispatch => ({
+  updateStage: bindActionCreators(stageActions.updateStage, dispatch),
+  createStage: bindActionCreators(stageActions.createStage, dispatch),
+});
+
+const stageEditorState = connect(mapStateToProps, mapDispatchToProps);
+
+const stageEditorHanders = withHandlers({
+  onSubmit: ({ id, insertAtIndex, updateStage, createStage, onComplete }) =>
+    (stage) => {
+      if (id) {
+        updateStage(id, stage);
+      } else {
+        createStage(stage, insertAtIndex);
+      }
+      onComplete();
+    },
+});
+
+export { formName };
 
 export default compose(
   defaultProps({
-    form: 'edit-stage',
+    form: formName,
   }),
-  connect(mapStateToProps),
-  withState('codeView', 'updateCodeView', false),
-  withHandlers({
-    toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-  }),
-  reduxForm({
-    touchOnBlur: false,
-    touchOnChange: true,
-    enableReinitialize: true,
-  }),
+  stageEditorState,
+  stageEditorHanders,
 )(StageEditor);
