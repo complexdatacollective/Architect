@@ -5,7 +5,7 @@ import EditSkipLogic from './EditSkipLogic';
 import ViewForms from './ViewForms';
 import FormEditorScreen from './FormEditorScreen';
 import Codebook from './VariableRegistry';
-import EditType from './EditType';
+import TypeEditorScreen from './TypeEditorScreen';
 import VariableEditorScreen from './VariableEditorScreen';
 
 const NotFound = () => (<div> Screen not found </div>);
@@ -16,7 +16,7 @@ const SCREEN_INDEX = {
   forms: ViewForms,
   form: FormEditorScreen,
   codebook: Codebook,
-  type: EditType,
+  type: TypeEditorScreen,
   variable: VariableEditorScreen,
 };
 

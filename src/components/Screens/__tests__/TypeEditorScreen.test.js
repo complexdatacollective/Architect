@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EditType } from '../EditType';
+import { TypeEditorScreen } from '../TypeEditorScreen';
 
 const mockProps = {
   initialValues: {},
@@ -12,9 +12,9 @@ const mockProps = {
   submitForm: () => {},
 };
 
-describe('<EditType />', () => {
+describe('<TypeEditorScreen />', () => {
   it('can render', () => {
-    const component = shallow(<EditType {...mockProps} />);
+    const component = shallow(<TypeEditorScreen {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });

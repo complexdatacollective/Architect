@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { ValidatedField } from '../Form';
-import Guidance from '../Guidance';
+import { getFieldId } from '../../utils/issues';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
+import { ValidatedField } from '../Form';
+import Guidance from '../Guidance';
 import IconOption from './IconOption';
-import { getFieldId } from '../../utils/issues';
 import safeName from './safeName';
-import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../config';
+import getPalette from './getPalette';
 import Variables from './Variables';
+
+const ICON_OPTIONS = [
+  'add-a-person',
+  'add-a-place',
+];
 
 class TypeEditor extends Component {
   handleChangeLabel = (e, value) => {
@@ -21,27 +26,16 @@ class TypeEditor extends Component {
 
   render() {
     const {
-      toggleCodeView,
       form,
       category,
       type,
-      iconOptions,
       displayVariables,
     } = this.props;
 
-    const paletteName = category === 'edge' ?
-      COLOR_PALETTE_BY_ENTITY.edge :
-      COLOR_PALETTE_BY_ENTITY.node;
-
-    const paletteSize = COLOR_PALETTES[paletteName];
+    const { name: paletteName, size: paletteSize } = getPalette(category);
 
     return (
       <React.Fragment>
-        <div className="code-button">
-          <small>
-            (<a onClick={toggleCodeView}>Show Code View</a>)
-          </small>
-        </div>
         { type && <h1 className="editor__heading">Edit {category}</h1> }
         { !type && <h1 className="editor__heading">Create {category}</h1> }
 
@@ -103,7 +97,7 @@ class TypeEditor extends Component {
                 <ValidatedField
                   component={Fields.RadioGroup}
                   name="iconVariant"
-                  options={iconOptions}
+                  options={ICON_OPTIONS}
                   optionComponent={IconOption}
                   validation={{ required: true }}
                 />
@@ -147,9 +141,7 @@ class TypeEditor extends Component {
 }
 
 TypeEditor.propTypes = {
-  toggleCodeView: PropTypes.func.isRequired,
   type: PropTypes.string,
-  iconOptions: PropTypes.array,
   category: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
@@ -160,7 +152,6 @@ TypeEditor.propTypes = {
 TypeEditor.defaultProps = {
   type: null,
   colorOptions: { node: [], edge: [] },
-  iconOptions: [],
 };
 
 export { TypeEditor };
