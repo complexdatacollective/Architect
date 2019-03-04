@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import StageEditorScreen from './StageEditorScreen';
 import EditSkipLogic from './EditSkipLogic';
 import ViewForms from './ViewForms';
-import EditForm from './EditForm';
+import FormEditorScreen from './FormEditorScreen';
 import Codebook from './VariableRegistry';
 import EditType from './EditType';
 import VariableEditorScreen from './VariableEditorScreen';
@@ -14,7 +14,7 @@ const SCREEN_INDEX = {
   stage: StageEditorScreen,
   skip: EditSkipLogic,
   forms: ViewForms,
-  form: EditForm,
+  form: FormEditorScreen,
   codebook: Codebook,
   type: EditType,
   variable: VariableEditorScreen,

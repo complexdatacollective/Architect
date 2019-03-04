@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EditForm } from '../EditForm';
+import { FormEditorScreen } from '../FormEditorScreen';
 
 const mockProps = {
   updateForm: () => {},
@@ -11,9 +11,9 @@ const mockProps = {
   onComplete: () => {},
 };
 
-describe('<EditForm />', () => {
+describe('<FormEditorScreen />', () => {
   it('can render', () => {
-    const component = shallow(<EditForm {...mockProps} />);
+    const component = shallow(<FormEditorScreen {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });
