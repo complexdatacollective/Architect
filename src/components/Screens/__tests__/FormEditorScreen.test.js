@@ -2,13 +2,9 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FormEditorScreen } from '../FormEditorScreen';
+import FormEditorScreen from '../FormEditorScreen';
 
 const mockProps = {
-  updateForm: () => {},
-  createForm: () => {},
-  submitForm: () => {},
-  onComplete: () => {},
 };
 
 describe('<FormEditorScreen />', () => {
