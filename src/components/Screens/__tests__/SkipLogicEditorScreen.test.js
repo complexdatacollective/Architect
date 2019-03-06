@@ -2,19 +2,14 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EditSkipLogic } from '../EditSkipLogic';
+import SkipLogicEditorScreen from '../SkipLogicEditorScreen';
 
 const mockProps = {
-  draft: {},
-  updateStage: () => {},
-  updateDraft: () => {},
-  rules: {},
-  onChange: () => {},
 };
 
 describe('<EditForm />', () => {
   it('can render', () => {
-    const component = shallow(<EditSkipLogic {...mockProps} />);
+    const component = shallow(<SkipLogicEditorScreen {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });
