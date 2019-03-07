@@ -12,6 +12,7 @@ const INTERFACE_NAMES = {
   NameGeneratorList: 'Roster Name Generator (list)',
   NameGeneratorAutoComplete: 'Roster Name Generator (search)',
   Sociogram: 'Sociogram',
+  Narrative: 'Narrative',
 };
 
 const getInterfaceName = type => INTERFACE_NAMES[type] || type;

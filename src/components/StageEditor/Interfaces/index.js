@@ -8,6 +8,7 @@ import Sociogram from './Sociogram';
 import CategoricalBin from './CategoricalBin';
 import OrdinalBin from './OrdinalBin';
 import PerAlterForm from './PerAlterForm';
+import Narrative from './Narrative';
 
 const interfaces = {
   Information,
@@ -18,6 +19,7 @@ const interfaces = {
   CategoricalBin,
   OrdinalBin,
   PerAlterForm,
+  Narrative,
 };
 
 const emptyInterface = {
