@@ -16,6 +16,11 @@ import Window from './Window';
 import Form, { formName } from './Form';
 import withEditHandlers from './withEditHandlers';
 
+const sortModes = [
+  'auto',
+  'manual',
+];
+
 const notEmpty = value => (
   value && value.length > 0 ? undefined : 'You must create at least one prompt'
 );
@@ -111,7 +116,7 @@ EditableList.propTypes = {
     getValues: PropTypes.func,
   }).isRequired,
   disabled: PropTypes.bool,
-  sortMode: PropTypes.oneOf(['manual', 'auto']),
+  sortMode: PropTypes.oneOf(sortModes),
   fieldName: PropTypes.string.isRequired,
   contentId: PropTypes.string,
   title: PropTypes.string,

@@ -10,7 +10,7 @@ class Preview extends PureComponent {
       editField,
       fieldId,
       onDelete,
-      canSort,
+      sortable,
     } = this.props;
 
     // Switch out flipId when fields match to prevent removal
@@ -24,7 +24,7 @@ class Preview extends PureComponent {
         {flipProps => (
           <Item
             {...flipProps}
-            sortable={canSort}
+            sortable={sortable}
             onDelete={onDelete}
             onClick={handleClick}
           >
@@ -42,11 +42,11 @@ class Preview extends PureComponent {
 
 Preview.propTypes = {
   fieldId: PropTypes.string.isRequired,
-  canSort: PropTypes.bool,
+  sortable: PropTypes.bool,
 };
 
 Preview.defaultProps = {
-  canSort: true,
+  sortable: true,
 };
 
 export { Preview };
