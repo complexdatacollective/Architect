@@ -5,7 +5,7 @@ import { Button } from '../../ui/components';
 import Card from './ProtocolCard';
 
 class EditScreen extends PureComponent {
-  get buttons() {
+  buttons() {
     const saveButton = (
       <Button
         key="save"
@@ -24,16 +24,18 @@ class EditScreen extends PureComponent {
   render() {
     const {
       show,
-      state,
+      secondaryButtons,
+      transitionState,
       editor: Editor,
       ...rest
     } = this.props;
 
     return (
       <Card
-        buttons={this.buttons}
+        buttons={this.buttons()}
+        secondaryButtons={secondaryButtons}
         show={show}
-        state={state}
+        transitionState={transitionState}
         onCancel={this.handleCancel}
       >
         <Editor {...rest} />
@@ -41,6 +43,10 @@ class EditScreen extends PureComponent {
     );
   }
 }
+
+EditScreen.defaultProps = {
+  secondaryButtons: null,
+};
 
 const mapStateToProps = (state, { form }) => ({
   hasUnsavedChanges: isDirty(form)(state),

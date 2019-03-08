@@ -17,8 +17,8 @@ describe('<UnorderedList />', () => {
       <UnorderedList
         {...mockProps}
         items={[
-          { foo: 'bar' },
-          { bazz: 'buzz' },
+          { foo: 'bar', index: 'bar', fieldId: 'bar' },
+          { bazz: 'buzz', index: 'buzz', fieldId: 'buzz' },
         ]}
       />
     ));
@@ -36,9 +36,9 @@ describe('<UnorderedList />', () => {
       <UnorderedList
         {...mockProps}
         items={[
-          { foo: 'bar' },
-          { foo: 'bazz' },
-          { foo: 'buzz' },
+          { foo: 'bar', index: 0, fieldId: 'bar' },
+          { foo: 'bazz', index: 1, fieldId: 'bazz' },
+          { foo: 'buzz', index: 2, fieldId: 'buzz' },
         ]}
         filter={mockFilter}
       />
@@ -46,7 +46,7 @@ describe('<UnorderedList />', () => {
 
     subject.instance().handleUpdateParameters({ index: 1 });
 
-    expect(subject.find('MockItem').at(0).prop('item')).toEqual({ foo: 'bazz' });
+    expect(subject.find('MockItem').at(0).prop('fieldId')).toEqual('bazz');
   });
 
   it('parameters are controlled by Controls', () => {

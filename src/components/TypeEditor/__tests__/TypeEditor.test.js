@@ -3,6 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { TypeEditor } from '../TypeEditor';
+import Variables from '../Variables';
 
 const mockProps = {
   dirty: false,
@@ -14,6 +15,16 @@ const mockProps = {
   showCodeView: true,
   autofill: () => {},
   nameTouched: false,
+};
+
+const variablesProps = {
+  form: mockProps.form,
+  name: 'variables',
+  sortableProperties: ['name', 'type'],
+  initialSortOrder: {
+    direction: 'asc',
+    property: 'name',
+  },
 };
 
 describe('<TypeEditor />', () => {
@@ -34,7 +45,7 @@ describe('<TypeEditor />', () => {
       <h2>Color</h2>,
       <h2>Icon</h2>,
       <h2>Display Variable</h2>,
-      <h2>Variables</h2>,
+      <Variables {...variablesProps} />,
     ])).toBe(true);
   });
 
@@ -43,7 +54,7 @@ describe('<TypeEditor />', () => {
 
     expect(subject.containsAllMatchingElements([
       <h2>Color</h2>,
-      <h2>Variables</h2>,
+      <Variables {...variablesProps} />,
     ])).toBe(true);
 
     expect(subject.containsAllMatchingElements([

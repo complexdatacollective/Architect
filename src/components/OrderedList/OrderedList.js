@@ -26,7 +26,7 @@ const OrderedList = ({
           fieldId={fieldId}
           index={index}
           fields={fields}
-          handleDelete={() => { fields.remove(index); }}
+          onDelete={() => { fields.remove(index); }}
           sortable={sortable}
           {...rest}
         />

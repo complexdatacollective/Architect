@@ -10,10 +10,16 @@ import cx from 'classnames';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
+import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Window from './Window';
-import Form from './Form';
+import Form, { formName } from './Form';
 import withEditHandlers from './withEditHandlers';
+
+const sortModes = [
+  'auto',
+  'manual',
+];
 
 const notEmpty = value => (
   value && value.length > 0 ? undefined : 'You must create at least one prompt'
@@ -31,6 +37,7 @@ class EditableList extends PureComponent {
       handleResetEditField,
       handleUpdate,
       disabled,
+      sortMode,
       handleAddNew,
       fieldName,
       contentId,
@@ -52,20 +59,22 @@ class EditableList extends PureComponent {
 
     const isEditing = !!editField;
 
+    const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
+
     return (
       <Guidance contentId={contentId}>
         <div className={stageEditorStyles}>
           <Flipper
             flipKey={isEditing}
-            portalKey="prompts"
+            portalKey="editable-list"
           >
             <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
             {children}
-            <div className="stage-editor-section-prompts">
-              <div className="stage-editor-section-prompts__prompts">
+            <div className="editable-list">
+              <div className="editable-list__items">
                 <ValidatedFieldArray
                   name={fieldName}
-                  component={OrderedList}
+                  component={ListComponent}
                   item={PreviewComponent}
                   validation={{ notEmpty }}
                   onClickPrompt={handleEditField}
@@ -87,9 +96,10 @@ class EditableList extends PureComponent {
                 onCancel={handleResetEditField}
               >
                 <EditComponent
+                  {...rest}
+                  form={formName}
                   fieldId={editField}
                   onComplete={handleResetEditField}
-                  {...rest}
                 />
               </Form>
             </Window>
@@ -106,6 +116,7 @@ EditableList.propTypes = {
     getValues: PropTypes.func,
   }).isRequired,
   disabled: PropTypes.bool,
+  sortMode: PropTypes.oneOf(sortModes),
   fieldName: PropTypes.string.isRequired,
   contentId: PropTypes.string,
   title: PropTypes.string,
@@ -119,6 +130,7 @@ EditableList.defaultProps = {
   contentId: null,
   children: null,
   title: null,
+  sortMode: 'manual',
 };
 
 const withDefaultFieldName = defaultProps({

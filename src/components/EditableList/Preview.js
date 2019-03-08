@@ -9,8 +9,8 @@ class Preview extends PureComponent {
       onClickPrompt,
       editField,
       fieldId,
-      handleDelete,
-      canSort,
+      onDelete,
+      sortable,
     } = this.props;
 
     // Switch out flipId when fields match to prevent removal
@@ -24,12 +24,12 @@ class Preview extends PureComponent {
         {flipProps => (
           <Item
             {...flipProps}
-            sortable={canSort}
-            handleDelete={handleDelete}
-            handleClick={handleClick}
+            sortable={sortable}
+            onDelete={onDelete}
+            onClick={handleClick}
           >
             <Flipped inverseFlipId={fieldId} scale>
-              <div className="prompts-prompt-preview">
+              <div className="editable-list-preview">
                 {this.preview && this.preview()}
               </div>
             </Flipped>
@@ -42,11 +42,11 @@ class Preview extends PureComponent {
 
 Preview.propTypes = {
   fieldId: PropTypes.string.isRequired,
-  canSort: PropTypes.bool,
+  sortable: PropTypes.bool,
 };
 
 Preview.defaultProps = {
-  canSort: true,
+  sortable: true,
 };
 
 export { Preview };

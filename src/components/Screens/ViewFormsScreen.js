@@ -8,19 +8,13 @@ import { Node, Button } from '../../ui/components';
 import { Wipe } from '../Transitions';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
-import Card from '../Card';
+import Card from './ProtocolCard';
 import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 class ViewForms extends Component {
-  get buttons() {
-    return ([
-      <Button key="cancel" color="platinum" onClick={this.handleCancel}>Back</Button>,
-    ]);
-  }
-
   handleDelete = (form) => {
     const formTitle = this.props.forms[form].title;
 
@@ -84,13 +78,14 @@ class ViewForms extends Component {
   render() {
     const {
       show,
-      state,
+      transitionState,
     } = this.props;
 
     return (
       <Card
         show={show}
-        state={state}
+        onCancel={this.handleCancel}
+        transitionState={transitionState}
         buttons={this.buttons}
       >
         <Guided>
@@ -129,7 +124,7 @@ class ViewForms extends Component {
 
 ViewForms.propTypes = {
   show: PropTypes.bool,
-  state: PropTypes.object,
+  transitionState: PropTypes.string,
   forms: PropTypes.object.isRequired,
   nodes: PropTypes.object.isRequired,
   onComplete: PropTypes.func,
@@ -139,7 +134,7 @@ ViewForms.propTypes = {
 
 ViewForms.defaultProps = {
   show: true,
-  state: null,
+  transitionState: null,
   onComplete: () => {},
 };
 

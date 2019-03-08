@@ -8,12 +8,57 @@ import { FormCodeView } from './CodeView';
 import Issues from './Issues';
 import windowRootProvider from '../ui/components/windowRootProvider';
 
+/**
+ * Editor is a scaffold for specific editor components.
+ *
+ * It includes:
+ * - `<Guided />` component (info sidebar)
+ * - `<Issues />` component, which provides interactive form errors
+ * - `<FormCodeView />` component, which reveals the form's working copy of the configuration
+ * - A redux-form `<Form />` component, which allows us to dispatch submit from outside
+ *   the editor (necessary for our button footers).
+ *
+ * Required props:
+ * - {string} form Name to use for the form in redux-form, this must match any child form
+ *   components which hard-code this values
+ * - {Component} component A React component which contains any number of redux-form `<Field />`
+ * - {func} onSubmit(values) The submit handler, it receives the values of the form as an argument
+ *   and will likely be hooked up to redux state.
+ * - It also accepts the same props as `reduxForm()`, such as `initialValues`
+ *
+ * @example
+ * export const formName = 'MY_EDITOR';
+ *
+ * const MySpecificEditor = ({
+ *   submitHandler,
+ * }) => (
+ *   <Editor
+ *     form={formName}
+ *     component={MyFieldsComponent}
+ *     onSubmit={submitHandler}
+ *   />
+ * );
+ *
+ * const mapDispatchToProps = (dispatch) => ({
+ *   onSubmit: (values) => {
+ *     if (values.id) {
+ *       dispatch(actions.update(values.id, values));
+ *     } else {
+ *       dispatch(actions.create(values));
+ *     }
+ *   },
+ * });
+ *
+ * export default connect(null, mapDispatchToProps)(MySpecificEditor);
+ */
 const Editor = ({
   handleSubmit,
   toggleCodeView,
   showCodeView,
   form,
+  children,
   issues,
+  title,
   submitFailed,
   component: Component,
   setWindowRoot,
@@ -26,7 +71,19 @@ const Editor = ({
         <div className="editor__window">
           <div className="editor__content">
             <Form onSubmit={handleSubmit}>
-              <Component form={form} toggleCodeView={toggleCodeView} {...rest} />
+              <div className="code-button">
+                <small>(<a onClick={toggleCodeView}>Show Code View</a>)</small>
+              </div>
+              { title &&
+                <h1 className="editor__heading">{title}</h1>
+              }
+              { typeof children === 'function' &&
+                children({ form, toggleCodeView, ...rest })
+              }
+              { children && typeof children !== 'function' && children }
+              { !children &&
+                <Component form={form} {...rest} />
+              }
             </Form>
           </div>
           <Issues
@@ -55,6 +112,7 @@ Editor.defaultProps = {
 
 const mapStateToProps = (state, props) => {
   const issues = getFormSyncErrors(props.form)(state);
+
   return {
     issues,
     hasSubmitFailed: hasSubmitFailed(props.form)(state),

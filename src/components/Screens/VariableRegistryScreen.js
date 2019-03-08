@@ -8,7 +8,7 @@ import { Wipe } from '../Transitions';
 import { Node, Button, Icon } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
-import Card from '../Card';
+import Card from './ProtocolCard';
 import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
 import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
@@ -63,12 +63,6 @@ Type.defaultProps = {
  * and links to the EditType.
  */
 class VariableRegistry extends Component {
-  get buttons() {
-    return [
-      <Button key="cancel" color="platinum" onClick={this.handleCancel}>Back</Button>,
-    ];
-  }
-
   handleDelete = (entity, type) => {
     const deletedObjects = this.props.getDeleteImpact(entity, type);
     const typeName = this.props.variableRegistry[entity][type].name;
@@ -174,14 +168,14 @@ class VariableRegistry extends Component {
   render() {
     const {
       show,
-      state,
+      transitionState,
     } = this.props;
 
     return (
       <Card
         show={show}
-        state={state}
-        buttons={this.buttons}
+        onCancel={this.handleCancel}
+        transitionState={transitionState}
         onAcknowledgeError={this.handleCancel}
       >
         <Guided>
@@ -240,7 +234,7 @@ class VariableRegistry extends Component {
 
 VariableRegistry.propTypes = {
   show: PropTypes.bool,
-  state: PropTypes.object,
+  transitionState: PropTypes.string,
   variableRegistry: PropTypes.shape({
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
@@ -259,7 +253,7 @@ VariableRegistry.defaultProps = {
     edge: {},
   },
   show: true,
-  state: null,
+  transitionState: null,
   onComplete: () => {},
 };
 

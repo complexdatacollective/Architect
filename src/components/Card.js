@@ -8,7 +8,7 @@ import window from '../ui/components/window';
 class Card extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
-    state: PropTypes.string,
+    transitionState: PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.node),
     secondaryButtons: PropTypes.node,
     type: PropTypes.string,
@@ -18,7 +18,7 @@ class Card extends PureComponent {
 
   static defaultProps = {
     type: 'default',
-    state: null,
+    transitionState: null,
     children: null,
     buttons: [],
     show: true,
@@ -32,7 +32,7 @@ class Card extends PureComponent {
     const {
       buttons,
       secondaryButtons,
-      state,
+      transitionState,
       children,
       type,
       show,
@@ -40,7 +40,7 @@ class Card extends PureComponent {
 
     const classes = cx('arch-card', `arch-card--${type}`);
 
-    const isEntering = state === 'entering' || state === 'entered';
+    const isEntering = transitionState === 'entering' || transitionState === 'entered';
 
     return (
       <div className={classes}>

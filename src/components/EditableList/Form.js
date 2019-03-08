@@ -6,8 +6,10 @@ import PropTypes from 'prop-types';
 import stopPropagationFromHandler from '../../utils/stopPropagationFromHandler';
 import Button from '../../ui/components/Button';
 
+export const formName = 'editiable-list-form';
+
 const formOptions = {
-  form: 'prompt-form',
+  form: formName,
   touchOnBlur: false,
   touchOnChange: true,
 };
@@ -20,15 +22,15 @@ const Form = ({
   flipId,
 }) => (
   <Flipped flipId={flipId}>
-    <div className="prompts-prompt-form">
-      <div className="prompts-prompt-form__container">
-        <form onSubmit={stopPropagationFromHandler(handleSubmit)} className="prompts-prompt-form__content">
+    <div className="editable-list-form">
+      <div className="editable-list-form__container">
+        <form onSubmit={stopPropagationFromHandler(handleSubmit)} className="editable-list-form__content">
           <h1>{title}</h1>
-          <div className="prompts-prompt-form__fields">
+          <div className="editable-list-form__fields">
             {children}
           </div>
         </form>
-        <div className="prompts-prompt-form__controls">
+        <div className="editable-list-form__controls">
           <Button onClick={handleSubmit} type="submit">Save and continue</Button>
           <Button onClick={onCancel} color="platinum">Cancel</Button>
         </div>

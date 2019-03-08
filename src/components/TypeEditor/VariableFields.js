@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field, formValueSelector, getFormMeta, autofill } from 'redux-form';
+import { connect } from 'react-redux';
+import { get } from 'lodash';
 import ValidatedField from '../Form/ValidatedField';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
@@ -108,24 +110,36 @@ class VariableFields extends PureComponent {
   }
 }
 
-// TODO: reimplement these props
-
 VariableFields.propTypes = {
-  form: PropTypes.string,
+  form: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   variableType: PropTypes.string,
   resetOptions: PropTypes.func,
-  autofill: PropTypes.func,
-  nameTouched: PropTypes.bool,
+  autofill: PropTypes.func.isRequired,
+  nameTouched: PropTypes.bool.isRequired,
 };
 
 VariableFields.defaultProps = {
   form: null,
   variableType: null,
   resetOptions: null,
-  autofill: () => {},
-  nameTouched: () => {},
 };
+
+const mapStateToProps = (state, { form }) => {
+  const formMeta = getFormMeta(form)(state);
+  const nameTouched = get(formMeta, 'name.touched', false);
+  const variableType = formValueSelector(form)(state, 'type');
+
+  return {
+    nameTouched,
+    variableType,
+  };
+};
+
+const mapDispatchToProps = (dispatch, { form }) => ({
+  autofill: (field, value) =>
+    dispatch(autofill(form, field, value)),
+});
 
 export { VariableFields };
 
-export default VariableFields;
+export default connect(mapStateToProps, mapDispatchToProps)(VariableFields);
