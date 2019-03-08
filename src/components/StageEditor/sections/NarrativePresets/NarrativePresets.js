@@ -4,6 +4,15 @@ import PresetPreview from './PresetPreview';
 import PresetFields from './PresetFields';
 import EditableList, { withSubjectNodeType } from '../../../EditableList';
 
+const narrativePresetTemplate = {
+  layoutVariable: null,
+  // groupVariable: null, // TODO: How does NC handle this for empty value?
+  edges: {
+    display: [],
+  },
+  highlight: [],
+};
+
 const NarrativePresets = props => (
   <EditableList
     contentId="guidance.editor.narrative_presets"
@@ -11,6 +20,7 @@ const NarrativePresets = props => (
     editComponent={PresetFields}
     title="Edit Preset"
     fieldName="presets"
+    template={narrativePresetTemplate}
     {...props}
   >
     <h2>Narrative Presets</h2>

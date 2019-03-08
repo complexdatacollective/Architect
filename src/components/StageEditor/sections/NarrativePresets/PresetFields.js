@@ -9,14 +9,15 @@ import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
 import * as Fields from '../../../../ui/components/Fields';
 import { Row } from '../../../OrderedList';
+import withOptionsForPreset from './withOptionsForPreset';
 
 class PresetFields extends Component {
   render() {
     const {
       layoutVariblesForNodeType,
-      groupVariblesForNodeType,
+      groupVariablesForNodeType,
       edgesForNodeType,
-      highlightableForNodeType,
+      highlightVariablesForNodeType,
     } = this.props;
 
     return (
@@ -38,21 +39,16 @@ class PresetFields extends Component {
             label="Layout variable"
             placeholder="&mdash; Select a layout variable &mdash;"
             validation={{ required: true }}
-            options={layoutVariblesForNodeType.map(([variableId, meta]) => (
-              { value: variableId, label: meta.label }
-            ))}
+            options={layoutVariblesForNodeType}
           />
         </Row>
         <Row>
           <ValidatedField
             name="groupVariable"
             component={ArchitectFields.Select}
-            label="Layout variable"
+            label="Group variable"
             placeholder="&mdash; Select a group variable &mdash;"
-            validation={{ required: true }}
-            options={groupVariblesForNodeType.map(([variableId, meta]) => (
-              { value: variableId, label: meta.label }
-            ))}
+            options={groupVariablesForNodeType}
           />
         </Row>
         <Row>
@@ -61,9 +57,7 @@ class PresetFields extends Component {
             component={Fields.CheckboxGroup}
             label="Display the following edges:"
             placeholder="&mdash; Toggle an edge to display &mdash;"
-            options={edgesForNodeType.map(([variableName, meta]) => (
-              { value: variableName, label: meta.label }
-            ))}
+            options={edgesForNodeType}
           />
         </Row>
         <Row>
@@ -72,9 +66,7 @@ class PresetFields extends Component {
             component={Fields.CheckboxGroup}
             label="Highlight nodes with the following attribute:"
             placeholder="&mdash; Toggle a variable to highlight &mdash;"
-            options={highlightableForNodeType.map(([variableName, meta]) => (
-              { value: variableName, label: meta.label }
-            ))}
+            options={highlightVariablesForNodeType}
           />
         </Row>
       </React.Fragment>
@@ -84,18 +76,18 @@ class PresetFields extends Component {
 
 PresetFields.propTypes = {
   layoutVariblesForNodeType: PropTypes.array,
-  groupVariblesForNodeType: PropTypes.array,
+  groupVariablesForNodeType: PropTypes.array,
   edgesForNodeType: PropTypes.array,
-  highlightableForNodeType: PropTypes.array,
+  highlightVariablesForNodeType: PropTypes.array,
 };
 
 PresetFields.defaultProps = {
   layoutVariblesForNodeType: [],
-  groupVariblesForNodeType: [],
+  groupVariablesForNodeType: [],
   edgesForNodeType: [],
-  highlightableForNodeType: [],
+  highlightVariablesForNodeType: [],
 };
 
 export { PresetFields };
 
-export default PresetFields;
+export default withOptionsForPreset(PresetFields);
