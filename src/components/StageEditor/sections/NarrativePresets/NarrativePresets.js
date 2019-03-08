@@ -6,7 +6,7 @@ import EditableList, { withSubjectNodeType } from '../../../EditableList';
 
 const narrativePresetTemplate = {
   layoutVariable: null,
-  // groupVariable: null, // TODO: How does NC handle this for empty value?
+  groupVariable: null,
   edges: {
     display: [],
   },
