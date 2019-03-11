@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 import fs from 'fs';
 import { actionCreators as loadActions } from '../protocols/load';
 import { actionCreators as exportActions } from '../protocols/export';
+import { actionCreators as importActions } from '../protocols/import';
 import reducer, { actionCreators } from '../recentProtocols';
 
 describe('recentProtocols', () => {
@@ -50,6 +51,22 @@ describe('recentProtocols', () => {
       });
 
       store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/2'));
+    });
+
+    it('IMPORT_PROTOCOL_SUCCESS adds to recentProtocolsList', (done) => {
+      store.dispatch(importActions.importProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }));
+
+      store.subscribe(() => {
+        const state = store.getState();
+
+        expect(state.length).toBe(2);
+        expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/2' });
+        expect(state[1]).toMatchObject({ filePath: '/dev/null/mock/recent/path/1' });
+
+        done();
+      });
+
+      store.dispatch(importActions.importProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
     });
 
     it('CLEAR_DEAD_LINKS', (done) => {
