@@ -1,8 +1,7 @@
 import { remote } from 'electron';
 import fse from 'fs-extra';
 import path from 'path';
-import { getLocalDirectoryFromArchivePath } from './utils';
-// import template from './template/protocol.json';
+import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
 
 const saveDialogOptions = {
   buttonLabel: 'Create',

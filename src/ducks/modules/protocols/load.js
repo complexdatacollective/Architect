@@ -1,5 +1,5 @@
 import { find } from 'lodash';
-import { loadProtocolData } from '../../../other/protocols';
+import { loadProtocolConfiguration } from '../../../other/protocols';
 import history from '../../../history';
 
 const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';
@@ -39,7 +39,7 @@ const loadProtocolThunk = id =>
       return Promise.resolve(dispatch(loadProtocolError(`Protocol "${id}" not found in 'protocols'`)));
     }
 
-    return loadProtocolData(meta.workingPath)
+    return loadProtocolConfiguration(meta.workingPath)
       .then(protocolData => dispatch(loadProtocolSuccess(meta, protocolData)))
       .catch(error => dispatch(loadProtocolError(error)));
   };

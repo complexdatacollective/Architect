@@ -3,7 +3,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducer, { actionCreators, actionTypes } from '../assetManifest';
-import { importAssetToProtocol } from '../../../../other/protocols';
+import { importAsset } from '../../../../other/protocols';
 
 jest.mock('../../../../other/protocols');
 
@@ -45,22 +45,22 @@ describe('protocol/assetManifest', () => {
     const assetType = 'buzz';
 
     beforeEach(() => {
-      importAssetToProtocol.mockClear();
+      importAsset.mockClear();
     });
 
-    it('calls importAssetToProtocol and fires complete action', () => {
+    it('calls importAsset and fires complete action', () => {
       const store = getStore();
 
       return store.dispatch(actionCreators.importAsset(file, assetType))
         .then(() => {
           expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
           expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_COMPLETE);
-          expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', file]]);
+          expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file]]);
         });
     });
 
-    it('when importAssetToProtocol throws an error it fires failed action', () => {
-      importAssetToProtocol.mockImplementation(
+    it('when importAsset throws an error it fires failed action', () => {
+      importAsset.mockImplementation(
         () =>
           new Promise(() => { throw new Error(); }),
       );
@@ -70,13 +70,13 @@ describe('protocol/assetManifest', () => {
       return store.dispatch(actionCreators.importAsset(file, assetType)).then(() => {
         expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
         expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
-        expect(importAssetToProtocol.mock.calls).toEqual([['/tmp/foo/bar', file]]);
+        expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file]]);
       });
     });
   });
 
   describe('importAssetComplete', () => {
-    it('calls importAssetToProtocol and fires complete action', () => {
+    it('calls importAsset and fires complete action', () => {
       const filename = '577925e0e0f72582f4d2ea8ac29150057197aed4';
       const name = 'foo.jpg';
       const assetType = 'bar';
