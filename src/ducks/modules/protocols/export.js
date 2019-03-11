@@ -36,6 +36,7 @@ const exportProtocolThunk = () =>
 
 const actionCreators = {
   exportProtocol: exportProtocolThunk,
+  exportProtocolSuccess,
 };
 
 const actionTypes = {
