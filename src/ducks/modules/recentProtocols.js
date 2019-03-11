@@ -1,8 +1,11 @@
 import { existsSync } from 'fs';
 import { uniqBy } from 'lodash';
 import {
-  actionTypes as importActionTypes,
+  actionTypes as loadActions,
 } from './protocols/load';
+import {
+  actionTypes as exportActions,
+} from './protocols/export';
 
 const protocolExists = ({ filePath }) => existsSync(filePath);
 
@@ -16,12 +19,23 @@ const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case importActionTypes.LOAD_PROTOCOL_SUCCESS:
+    case loadActions.LOAD_PROTOCOL_SUCCESS: {
+      return state.map((protocol) => {
+        if (protocol.filePath !== action.meta.filePath) { return protocol; }
+
+        return {
+          ...protocol,
+          lastOpened: new Date().getTime(),
+        };
+      }).sort((a, b) => a.lastOpened < b.lastOpened);
+    }
+    case exportActions.EXPORT_PROTOCOL_SUCCESS: {
       return uniqBy([
-        { filePath: action.meta.filePath, lastOpened: new Date().getTime() },
+        { filePath: action.filePath, lastOpened: new Date().getTime() },
         ...state,
       ], 'filePath')
         .slice(0, 50);
+    }
     case CLEAR_DEAD_LINKS:
       return state.filter(protocolExists);
     default:
