@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  formValueSelector,
-} from 'redux-form';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import Editor from '../Editor';
