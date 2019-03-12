@@ -235,25 +235,25 @@ const mapAsOptions = keyValueObject =>
   );
 
 const mapStateToProps = (state, props) => {
-  const nodeType = get(formValueSelector(props.form.name)(state, 'subject'), 'type');
+  const nodeType = get(formValueSelector(props.form)(state, 'subject'), 'type');
   const variables = getVariablesForNodeType(state, nodeType);
   const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
   const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
-  const isFieldInvalid = isInvalid(props.form.name);
+  const isFieldInvalid = isInvalid(props.form);
 
   return {
     layoutsForNodeType,
     highlightableForNodeType,
     variablesForNodeType: variables,
     isInvalid: isFieldInvalid(state, props.fieldId),
-    hasSubmitFailed: hasSubmitFailed(props.form.name)(state),
+    hasSubmitFailed: hasSubmitFailed(props.form)(state),
     edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),
   };
 };
 
 const mapDispatchToProps = (dispatch, props) => ({
   clearField: (fieldName) => {
-    dispatch(clearFields(props.form.name, false, false, fieldName));
+    dispatch(clearFields(props.form, false, false, fieldName));
   },
 });
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { change as changeField } from 'redux-form';
+import { change as changeField, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { toPairs, map, get, pickBy } from 'lodash';
@@ -116,7 +116,7 @@ const getNodeFormOptions = (forms, nodeType) => {
 
 const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
-  const formValues = props.form.getValues(state, 'subject', 'form');
+  const formValues = formValueSelector(props.form)(state, 'subject', 'form');
   const nodeType = get(formValues, 'subject.type', null);
   const selectedForm = get(formValues, 'form', undefined);
   const formOptions = getNodeFormOptions(protocol.forms, nodeType);
@@ -131,8 +131,8 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch, { form }) => ({
-  reset: () => dispatch(changeField(form.name, 'form', null)),
-  change: value => dispatch(changeField(form.name, 'form', value)),
+  reset: () => dispatch(changeField(form, 'form', null)),
+  change: value => dispatch(changeField(form, 'form', value)),
   openScreen: bindActionCreators(uiActions.openScreen, dispatch),
 });
 

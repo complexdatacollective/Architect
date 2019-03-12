@@ -14,7 +14,7 @@ describe('<SociogramPrompts />', () => {
     let subject;
     beforeEach(() => {
       const store = createStore(() => ({}));
-      const props = { form: { name: 'myForm' } };
+      const props = { form: 'myForm' };
       const provider = mount(<Provider store={store}><SociogramPrompts {...props} /></Provider>);
       subject = provider.find('SociogramPrompts');
     });

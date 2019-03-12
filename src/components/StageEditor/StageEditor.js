@@ -37,11 +37,6 @@ class StageEditor extends Component {
   }
 
   render() {
-    const getFormValues = formValueSelector(formName);
-    // TODO: remove form value getter and make this a string,
-    // requires updating components
-    const form = { name: formName, getValues: getFormValues };
-
     return (
       <Editor
         formName={formName}
@@ -53,7 +48,7 @@ class StageEditor extends Component {
             this.sections().map((SectionComponent, index) => (
               <SectionComponent
                 key={index}
-                form={form}
+                form={formName}
                 hasSubmitFailed={submitFailed}
                 // `windowRoot` will ensure connect() components re-render
                 // when the window root changes

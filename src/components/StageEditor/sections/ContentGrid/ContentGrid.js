@@ -95,15 +95,12 @@ ContentGrid.propTypes = {
   createNewItem: PropTypes.func.isRequired,
   spareCapacity: PropTypes.number.isRequired,
   setInputType: PropTypes.func.isRequired,
-  form: PropTypes.shape({
-    name: PropTypes.string,
-    getValues: PropTypes.func,
-  }).isRequired,
+  form: PropTypes.string.isRequired,
   errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, { form }) => {
-  const items = formValueSelector(form.name)(state, 'items') || [];
+  const items = formValueSelector(form)(state, 'items') || [];
 
   const spareCapacity = items.reduce(
     (memo, item) =>
@@ -111,7 +108,7 @@ const mapStateToProps = (state, { form }) => {
     capacity,
   );
 
-  const errors = getFormSyncErrors(form.name)(state);
+  const errors = getFormSyncErrors(form)(state);
 
   return {
     spareCapacity,
@@ -122,10 +119,10 @@ const mapStateToProps = (state, { form }) => {
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewItem: () => {
     const itemId = uuid();
-    dispatch(arrayPush(form.name, 'items', { id: itemId, size: sizes.SMALL }));
+    dispatch(arrayPush(form, 'items', { id: itemId, size: sizes.SMALL }));
     return itemId;
   },
-  setInputType: (fieldId, type) => dispatch(change(form.name, `${fieldId}.type`, type)),
+  setInputType: (fieldId, type) => dispatch(change(form, `${fieldId}.type`, type)),
 });
 
 export { ContentGrid };

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import { get } from 'lodash';
 
 // TODO: move to selectors
@@ -6,7 +7,7 @@ const getAssetManifest = state =>
   get(state, 'protocol.present.assetManifest', {});
 
 const mapStateToProps = (state, { fieldId, form }) => {
-  const field = form.getValues(state, `${fieldId}`);
+  const field = formValueSelector(form)(state, `${fieldId}`);
 
   if (!field) { return {}; }
 
