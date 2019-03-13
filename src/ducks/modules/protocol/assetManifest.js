@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { importAssetToProtocol } from '../../../other/protocols';
+import { importAsset as fsImportAsset } from '../../../other/protocols';
 import { getActiveProtocolMeta } from '../../../selectors/protocol';
 
 const IMPORT_ASSET = Symbol('PROTOCOL/IMPORT_ASSET');
@@ -44,7 +44,7 @@ const importAssetFailed = filename =>
  * @param {File} asset - File to import
  * @param {string} assetType - type of asset, as listed in asset manifest
  */
-const importAssetAction = (asset, assetType) =>
+const importAssetThunk = (asset, assetType) =>
   (dispatch, getState) => {
     const state = getState();
     const { workingPath } = getActiveProtocolMeta(state);
@@ -56,7 +56,7 @@ const importAssetAction = (asset, assetType) =>
 
     if (!workingPath) { return Promise.reject(reject()); }
 
-    return importAssetToProtocol(workingPath, asset)
+    return fsImportAsset(workingPath, asset)
       .then(filename =>
         dispatch(importAssetComplete(filename, name, assetType)))
       .catch(reject);
@@ -82,7 +82,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  importAsset: importAssetAction,
+  importAsset: importAssetThunk,
   importAssetComplete,
 };
 

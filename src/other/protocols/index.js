@@ -1,8 +1,6 @@
 export { default as saveProtocol } from './saveProtocol';
-export { default as importProtocol } from './importProtocol';
-export { default as exportProtocol } from './exportProtocol';
+export { default as unbundleProtocol } from './unbundleProtocol';
+export { default as bundleProtocol } from './bundleProtocol';
 export { default as createProtocol } from './createProtocol';
-export { default as loadProtocolData } from './loadProtocolData';
-export { default as importAssetToProtocol } from './importAssetToProtocol';
-export { default as locateProtocol } from './locateProtocol';
-export { default as pruneProtocolAssets } from './pruneProtocolAssets';
+export { default as loadProtocolConfiguration } from './loadProtocolConfiguration';
+export { default as importAsset } from './importAsset';

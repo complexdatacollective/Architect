@@ -11,11 +11,13 @@ import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
 import initPreventFileDrop from './utils/initPreventFileDrop';
 import initFileOpener from './utils/initFileOpener';
+import resetAppStorage from './other/protocols/utils/resetAppStorage';
 
 import './styles/main.scss';
 
 initPreventFileDrop();
 initReactFastclick();
+resetAppStorage();
 
 const startApp = () => {
   ReactDOM.render(

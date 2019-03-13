@@ -1,14 +1,14 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { archive } from './archive';
+import { archive } from './lib/archive';
 
 /**
- * Write protocol from the working directory to the protocol path
+ * Write protocol from the working directory to the user file system
  *
  * @param {string} workingPath - meta data about for protocol RE file system
  * @param {string} filePath - The protocol path.
  */
-const exportProtocol = (workingPath, filePath) =>
+const bundleProtocol = (workingPath, filePath) =>
   new Promise((resolve) => {
     if (path.extname(filePath) === '.netcanvas') {
       // also save zip
@@ -19,4 +19,4 @@ const exportProtocol = (workingPath, filePath) =>
     }
   });
 
-export default exportProtocol;
+export default bundleProtocol;

@@ -1,6 +1,6 @@
 import path from 'path';
-import { writeFile } from '../filesystem';
-import pruneProtocolAssets from './pruneProtocolAssets';
+import { writeFile } from 'fs-extra';
+import pruneAssets from './utils/pruneAssets';
 
 /**
  * Save a protocol object to disk, and prune any unused assets from
@@ -15,7 +15,7 @@ const saveProtocol = (workingPath, protocol) => {
   return writeFile(destinationPath, JSON.stringify(protocol, null, 2))
     .then(() =>
       // Now that the protocol is commited to disk we can safely prune unused assets.
-      pruneProtocolAssets(workingPath),
+      pruneAssets(workingPath),
     )
     .then(() => destinationPath);
 };

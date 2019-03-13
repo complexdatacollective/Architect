@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import path from 'path';
 import fs from 'fs';
-import { readFile } from '../filesystem';
+import { readFile } from 'fs-extra';
 
 const contains = (protocol, string) =>
   protocol.indexOf(string) !== -1;
@@ -24,7 +24,7 @@ const removeFile = (filePath) => {
  * Remove unused protocol assets
  * @param {string} workingPath - The working directory of the protocol to prune
  */
-const pruneProtocolAssets = (workingPath) => {
+const pruneAssets = (workingPath) => {
   const protocolPath = path.join(workingPath, 'protocol.json');
   const protocolAssetsPath = path.join(workingPath, 'assets');
 
@@ -48,4 +48,4 @@ const pruneProtocolAssets = (workingPath) => {
     });
 };
 
-export default pruneProtocolAssets;
+export default pruneAssets;

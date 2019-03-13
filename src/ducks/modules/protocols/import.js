@@ -1,4 +1,4 @@
-import { importProtocol as importProtocolFiles } from '../../../other/protocols';
+import { unbundleProtocol } from '../../../other/protocols';
 import { actionCreators as registerActions } from './register';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
@@ -26,7 +26,7 @@ const importProtocolThunk = filePath =>
   (dispatch) => {
     dispatch(importProtocol(filePath));
 
-    return importProtocolFiles(filePath)
+    return unbundleProtocol(filePath)
       .then((workingPath) => {
         dispatch(importProtocolSuccess({ filePath, workingPath }));
         return dispatch(registerActions.registerProtocol({ filePath, workingPath }));

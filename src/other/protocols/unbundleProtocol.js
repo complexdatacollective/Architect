@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { extract } from './archive';
-import { getLocalDirectoryFromArchivePath } from './utils';
+import { extract } from './lib/archive';
+import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
 
 /**
  * Create a working copy of a protocol in the application
@@ -11,7 +11,7 @@ import { getLocalDirectoryFromArchivePath } from './utils';
  *
  * @returns A promise which resolves to the destination path.
  */
-const importProtocol = filePath =>
+const unbundleProtocol = filePath =>
   new Promise((resolve) => {
     const destinationPath = getLocalDirectoryFromArchivePath(filePath);
 
@@ -24,4 +24,4 @@ const importProtocol = filePath =>
     }
   });
 
-export default importProtocol;
+export default unbundleProtocol;

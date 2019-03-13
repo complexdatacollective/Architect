@@ -6,7 +6,7 @@ import {
   actionCreators as registerActionCreators,
   actionTypes as registerActionTypes,
 } from './register';
-import locateProtocol from '../../../other/protocols/locateProtocol';
+import openProtocolDialog from '../../../other/protocols/utils/openProtocolDialog';
 import history from '../../../history';
 
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
@@ -79,7 +79,7 @@ const createAndLoadProtocolThunk = () =>
  */
 const openProtocol = () =>
   dispatch =>
-    locateProtocol()
+    openProtocolDialog()
       .then(filePath => dispatch(importAndLoadThunk(filePath)))
       .catch(e => dispatch(openError(e)));
 
