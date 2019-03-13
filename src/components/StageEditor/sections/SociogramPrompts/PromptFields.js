@@ -1,40 +1,26 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  Field,
-  clearFields,
-  isInvalid,
-  hasSubmitFailed,
-  formValueSelector,
-} from 'redux-form';
-import { get, toPairs, isEmpty, map } from 'lodash';
+import { Field } from 'redux-form';
+import { compose } from 'recompose';
 import { getFieldId } from '../../../../utils/issues';
 import Guidance from '../../../Guidance';
 import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
 import * as Fields from '../../../../ui/components/Fields';
 import { Row, Group } from '../../../OrderedList';
-
-// Background options
-const CONCENTRIC_CIRCLES = 'BACKGROUND/CONCENTRIC_CIRCLES';
-
-// On node click options
-const HIGHLIGHT = 'CLICK/HIGHLIGHT';
-const CREATE_EDGE = 'CLICK/CREATE_EDGE';
+import withOptions from './withOptions';
+import withFormHandlers from './withFormHandlers';
 
 const disableBlur = event => event.preventDefault();
 
 class PromptFields extends Component {
   static propTypes = {
-    fieldId: PropTypes.string.isRequired,
-    edgeTypes: PropTypes.array.isRequired,
-    layoutsForNodeType: PropTypes.array.isRequired,
+    edgesForNodeType: PropTypes.array.isRequired,
+    layoutVariablesForNodeType: PropTypes.array.isRequired,
     variablesForNodeType: PropTypes.object.isRequired,
-    highlightableForNodeType: PropTypes.array.isRequired,
+    highlightVariablesForNodeType: PropTypes.array.isRequired,
     clearField: PropTypes.func.isRequired,
-    isInvalid: PropTypes.bool,
-    hasSubmitFailed: PropTypes.bool,
+    clearFieldIfEmpty: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -42,42 +28,25 @@ class PromptFields extends Component {
     hasSubmitFailed: false,
   };
 
-  constructor(props) {
-    super(props);
+  handleChangeAllowHighlighting = () => {
+    this.props.clearField('edges.create');
+  };
 
-    this.state = {
-      backgroundType: CONCENTRIC_CIRCLES,
-    };
-  }
+  handleChangeCreateEdge = (event, value) => {
+    this.props.clearField('highlight.allowHighlighting');
+    this.props.clearFieldIfEmpty(event, 'edges.create', value);
+  };
 
-  get isLockedOpen() {
-    return this.props.isInvalid && this.props.hasSubmitFailed;
-  }
-
-  handleHighlightOrCreateEdge = (type) => {
-    switch (type) {
-      case HIGHLIGHT:
-        return this.props.clearField(`${this.props.fieldId}.edges.create`);
-      case CREATE_EDGE:
-        return this.props.clearField(`${this.props.fieldId}.highlight.allowHighlighting`);
-      default:
-        return null;
-    }
-  }
-
-  clearEmptyField = (event, value, previousValue, name) => {
-    if (isEmpty(value)) {
-      this.props.clearField(name);
-      event.preventDefault();
-    }
+  handleChangeHighlightVariable = (event, value) => {
+    this.props.clearFieldIfEmpty(event, 'highlight.variable', value);
   }
 
   render() {
     const {
-      edgeTypes,
       variablesForNodeType,
-      layoutsForNodeType,
-      highlightableForNodeType,
+      layoutVariablesForNodeType,
+      highlightVariablesForNodeType,
+      edgesForNodeType,
     } = this.props;
 
     return (
@@ -123,9 +92,7 @@ class PromptFields extends Component {
                 label="Layout variable"
                 placeholder="&mdash; Select a layout variable &mdash;"
                 validation={{ required: true }}
-                options={layoutsForNodeType.map(([variableId, meta]) => (
-                  { value: variableId, label: meta.label }
-                ))}
+                options={layoutVariablesForNodeType}
               />
             </Row>
           </Group>
@@ -163,12 +130,10 @@ class PromptFields extends Component {
                 name="highlight.variable"
                 component={ArchitectFields.Select}
                 label="Highlight nodes with the following attribute:"
-                onChange={this.clearEmptyField}
+                onChange={this.handleChangeHighlightVariable}
                 onBlur={disableBlur}
                 placeholder="&mdash; Select a variable to highlight &mdash;"
-                options={highlightableForNodeType.map(([variableName, meta]) => (
-                  { value: variableName, label: meta.label }
-                ))}
+                options={highlightVariablesForNodeType}
               />
             </Row>
             <Row>
@@ -176,7 +141,7 @@ class PromptFields extends Component {
                 name="highlight.allowHighlighting"
                 component={Fields.Checkbox}
                 label="Toggle this attribute by tapping on a node"
-                onChange={() => this.handleHighlightOrCreateEdge(HIGHLIGHT)}
+                onChange={this.handleChangeAllowHighlighting}
               />
             </Row>
           </Group>
@@ -194,7 +159,7 @@ class PromptFields extends Component {
               <Field
                 name="edges.display"
                 component={Fields.CheckboxGroup}
-                options={edgeTypes}
+                options={edgesForNodeType}
                 label="Display edges of the following type(s):"
               />
             </Row>
@@ -202,11 +167,8 @@ class PromptFields extends Component {
               <Field
                 name="edges.create"
                 component={ArchitectFields.Select}
-                options={edgeTypes}
-                onChange={(...args) => {
-                  this.clearEmptyField(...args);
-                  this.handleHighlightOrCreateEdge(CREATE_EDGE);
-                }}
+                options={edgesForNodeType}
+                onChange={this.handleChangeCreateEdge}
                 onBlur={disableBlur}
                 placeholder="&mdash; Select an edge type &mdash;"
                 label="Create edges of the following type (this will disable attribute toggling):"
@@ -219,49 +181,9 @@ class PromptFields extends Component {
   }
 }
 
-const getVariablesForNodeType = (state, nodeType) => {
-  const variableRegistry = get(state, 'protocol.present.variableRegistry', {});
-  return get(variableRegistry, ['node', nodeType, 'variables'], {});
-};
-
-const mapAsOptions = keyValueObject =>
-  map(
-    keyValueObject,
-    (value, key) => ({
-      label: get(value, 'label', ''),
-      value: key,
-      color: get(value, 'color', ''),
-    }),
-  );
-
-const mapStateToProps = (state, props) => {
-  const nodeType = get(formValueSelector(props.form)(state, 'subject'), 'type');
-  const variables = getVariablesForNodeType(state, nodeType);
-  const layoutsForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'layout');
-  const highlightableForNodeType = toPairs(variables).filter(([, meta]) => meta.type === 'boolean');
-  const isFieldInvalid = isInvalid(props.form);
-
-  return {
-    layoutsForNodeType,
-    highlightableForNodeType,
-    variablesForNodeType: variables,
-    isInvalid: isFieldInvalid(state, props.fieldId),
-    hasSubmitFailed: hasSubmitFailed(props.form)(state),
-    edgeTypes: mapAsOptions(state.protocol.present.variableRegistry.edge),
-  };
-};
-
-const mapDispatchToProps = (dispatch, props) => ({
-  clearField: (fieldName) => {
-    dispatch(clearFields(props.form, false, false, fieldName));
-  },
-});
-
 export { PromptFields };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(
-  PromptFields,
-);
+export default compose(
+  withOptions,
+  withFormHandlers,
+)(PromptFields);
