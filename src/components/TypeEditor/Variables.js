@@ -43,7 +43,7 @@ const Variables = ({
   <EditableList
     previewComponent={VariablePreview}
     editComponent={VariableFields}
-    form={{ name: form }}
+    form={form}
     fieldName={name}
     title="Edit Variable"
     filter={filter}

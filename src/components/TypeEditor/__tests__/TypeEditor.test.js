@@ -38,6 +38,22 @@ describe('<TypeEditor />', () => {
     expect(subject).toMatchSnapshot();
   });
 
+  it('passes correct props to Variables', () => {
+    const subject = shallow(<TypeEditor {...mockProps} category="node" />);
+
+    const variables = subject.find('Variables');
+
+    expect(variables.props()).toMatchObject({
+      form: 'TYPE_EDITOR',
+      initialSortOrder: {
+        direction: 'asc',
+        property: 'name',
+      },
+      name: 'variables',
+      sortableProperties: ['name', 'type'],
+    });
+  });
+
   it('it renders the correct sections for a node', () => {
     const subject = shallow(<TypeEditor {...mockProps} category="node" />);
 
