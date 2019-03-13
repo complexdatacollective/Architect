@@ -2,6 +2,7 @@ import {
   Name,
   NodeType,
   Form,
+  IntroductionPanel,
 } from '../sections';
 
 const NameGenerator = {
@@ -9,6 +10,7 @@ const NameGenerator = {
     Name,
     NodeType,
     Form,
+    IntroductionPanel,
   ],
 };
 

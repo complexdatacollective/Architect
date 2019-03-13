@@ -1,5 +1,5 @@
 .stage-editor-section {
-  transition-property: opacity, transform, max-height;
+  transition-property: opacity, transform, max-height, margin-top;
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
   margin-top: 3rem;
@@ -11,14 +11,15 @@
     opacity: 0;
     max-height: 0;
     transform: translateX(-100%);
+    margin-top: 0;
   }
 
-  .form-field-container {
-    margin-bottom: 0;
+  // .form-field-container {
+  //   margin-bottom: 0;
 
-    .form-field {
-      margin-bottom: 0;
-    }
+  //   .form-field {
+  //     margin-bottom: 0;
+  //   }
 
-  }
+  // }
 }
