@@ -22,7 +22,7 @@ const sortModes = [
 ];
 
 const notEmpty = value => (
-  value && value.length > 0 ? undefined : 'You must create at least one prompt'
+  value && value.length > 0 ? undefined : 'You must create at least one item'
 );
 
 const handleSubmitFail = (issues) => {

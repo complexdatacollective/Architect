@@ -54,7 +54,7 @@ class NodeType extends Component {
         <div className={nodeTypeClasses}>
           <div id={getFieldId('subject')} data-name="Node type" />
           <h2>Node Type</h2>
-          <p>Which node type does this name generator create?</p>
+          <p>Which node type is used on this interface?</p>
           <div
             className="stage-editor-section-node-type__edit"
             onClick={disabled ? () => this.handleResetStage() : () => {}}
