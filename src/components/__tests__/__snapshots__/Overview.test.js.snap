@@ -4,13 +4,13 @@ exports[`<Overview /> can render? 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Overview
+    codebook={Object {}}
     description=""
     flipId="foo"
     forms={Object {}}
     name=""
     show={true}
     updateOptions={[Function]}
-    variableRegistry={Object {}}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

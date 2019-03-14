@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<VariableRegistryScreen /> can render 1`] = `
+exports[`<CodebookScreen /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Connect(VariableRegistry)
+  Symbol(enzyme.__unrendered__): <Connect(Codebook)
     store={
       Object {
         "dispatch": [Function],
@@ -27,6 +27,10 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "codebook": Object {
+        "edge": Object {},
+        "node": Object {},
+      },
       "deleteType": [Function],
       "getDeleteImpact": [Function],
       "getObjectLabel": [Function],
@@ -60,10 +64,6 @@ ShallowWrapper {
         "unsubscribe": [Function],
       },
       "transitionState": null,
-      "variableRegistry": Object {
-        "edge": Object {},
-        "node": Object {},
-      },
     },
     "ref": null,
     "rendered": null,
@@ -75,6 +75,10 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "codebook": Object {
+          "edge": Object {},
+          "node": Object {},
+        },
         "deleteType": [Function],
         "getDeleteImpact": [Function],
         "getObjectLabel": [Function],
@@ -108,10 +112,6 @@ ShallowWrapper {
           "unsubscribe": [Function],
         },
         "transitionState": null,
-        "variableRegistry": Object {
-          "edge": Object {},
-          "node": Object {},
-        },
       },
       "ref": null,
       "rendered": null,
