@@ -7,7 +7,7 @@ import Text from '../../../ui/components/Fields/Text';
 import IssueAnchor from '../../IssueAnchor';
 
 const Name = () => (
-  <Guidance contentId="guidance.editor.name">
+  <Guidance contentId="guidance.editor.introduction_panel">
     <div>
       <FormSection name="introductionPanel">
         <div className="stage-editor-section">
