@@ -8,7 +8,7 @@ import {
 
 const nodeType = '1234-1234-1234';
 
-const mockVariableRegistry = {
+const mockCodebook = {
   node: {
     [nodeType]: {
       variables: {
@@ -38,7 +38,7 @@ const mockVariableRegistry = {
 const mockState = {
   protocol: {
     present: {
-      variableRegistry: mockVariableRegistry,
+      codebook: mockCodebook,
     },
   },
 };

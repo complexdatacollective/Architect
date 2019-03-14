@@ -1,10 +1,10 @@
 import { get, map, reduce } from 'lodash';
-import { getVariableRegistry } from '../../../../selectors/protocol';
+import { getCodebook } from '../../../../selectors/protocol';
 
 export const getVariablesForNodeType = (state, props) => {
   const nodeType = props.nodeType;
-  const variableRegistry = getVariableRegistry(state);
-  return get(variableRegistry, ['node', nodeType, 'variables'], {});
+  const codebook = getCodebook(state);
+  return get(codebook, ['node', nodeType, 'variables'], {});
 };
 
 const asOption = (value, key) =>
@@ -54,7 +54,7 @@ export const getGroupVariablesForNodeType = (state, props) => {
 };
 
 export const getEdgesForNodeType = (state) => {
-  const variableRegistry = getVariableRegistry(state);
+  const codebook = getCodebook(state);
 
-  return map(variableRegistry.edge, asOption);
+  return map(codebook.edge, asOption);
 };
