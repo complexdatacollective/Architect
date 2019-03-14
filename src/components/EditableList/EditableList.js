@@ -111,10 +111,7 @@ class EditableList extends PureComponent {
 }
 
 EditableList.propTypes = {
-  form: PropTypes.shape({
-    name: PropTypes.string,
-    getValues: PropTypes.func,
-  }).isRequired,
+  form: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   sortMode: PropTypes.oneOf(sortModes),
   fieldName: PropTypes.string.isRequired,

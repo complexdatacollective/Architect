@@ -53,7 +53,7 @@ FieldArrayAdapter.defaultProps = {
 const mapStateToProps = (state, { form, fields }) => {
   if (!fields || !form) { return {}; }
 
-  const items = formValueSelector(form.name)(state, fields.name)
+  const items = formValueSelector(form)(state, fields.name)
     .map((item, index) => ({ ...item, index, fieldId: `${fields.name}[${index}]` }));
 
   return ({

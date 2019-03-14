@@ -24,7 +24,7 @@ const withDisplayLabelChangeHandler = withHandlers({
 
 const mapDispatchToProps = (dispatch, { form, fieldId: containerFieldId }) => ({
   updateField: (fieldId, value) => dispatch(
-    change(form.name, `${containerFieldId}.${fieldId}`, value),
+    change(form, `${containerFieldId}.${fieldId}`, value),
   ),
 });
 

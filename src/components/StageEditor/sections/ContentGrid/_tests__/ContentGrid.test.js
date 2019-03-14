@@ -8,7 +8,7 @@ const mockProps = {
   createNewItem: () => {},
   spareCapacity: 0,
   setInputType: () => {},
-  form: {},
+  form: '',
   errors: {},
 };
 

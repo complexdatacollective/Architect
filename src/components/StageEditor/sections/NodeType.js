@@ -76,7 +76,7 @@ class NodeType extends Component {
 }
 
 const mapStateToProps = (state, { form }) => {
-  const stage = getFormValues(form.name)(state);
+  const stage = getFormValues(form)(state);
   const nodeTypes = map(
     getNodeTypes(state),
     (nodeOptions, promptNodeType) => ({
@@ -95,7 +95,7 @@ const mapStateToProps = (state, { form }) => {
 };
 
 const mapDispatchToProps = (dispatch, { form }) => ({
-  resetField: field => dispatch(changeField(form.name, field, null)),
+  resetField: field => dispatch(changeField(form, field, null)),
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 

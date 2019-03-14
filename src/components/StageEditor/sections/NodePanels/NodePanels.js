@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { FieldArray, arrayPush } from 'redux-form';
+import { formValueSelector, FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import cx from 'classnames';
 import { has } from 'lodash';
@@ -41,10 +41,7 @@ NodePanels.propTypes = {
   createNewPanel: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   panels: PropTypes.array,
-  form: PropTypes.shape({
-    name: PropTypes.string,
-    getValues: PropTypes.func,
-  }).isRequired,
+  form: PropTypes.string.isRequired,
 };
 
 NodePanels.defaultProps = {
@@ -52,14 +49,20 @@ NodePanels.defaultProps = {
   panels: [],
 };
 
-const mapStateToProps = (state, props) => ({
-  disabled: !has(props.form.getValues(state, 'subject'), 'type'),
-  panels: props.form.getValues(state, 'panels'),
-});
+const mapStateToProps = (state, props) => {
+  const getFormValues = formValueSelector(props.form);
+  const panels = getFormValues(state, 'panels');
+  const disabled = !has(getFormValues(state, 'subject'), 'type');
+
+  return {
+    disabled,
+    panels,
+  };
+};
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewPanel: bindActionCreators(
-    () => arrayPush(form.name, 'panels', { id: uuid(), title: null, dataSource: 'existing', filter: null }),
+    () => arrayPush(form, 'panels', { id: uuid(), title: null, dataSource: 'existing', filter: null }),
     dispatch,
   ),
 });

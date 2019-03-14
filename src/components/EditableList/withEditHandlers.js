@@ -11,7 +11,7 @@ import {
 } from 'redux-form';
 
 const mapStateToProps = (state, { form, fieldName, editField, template = {} }) => {
-  const items = formValueSelector(form.name)(state, fieldName);
+  const items = formValueSelector(form)(state, fieldName);
   const itemCount = items ? items.length : 0;
 
   const initialValues = get(
@@ -27,8 +27,8 @@ const mapStateToProps = (state, { form, fieldName, editField, template = {} }) =
   };
 };
 
-const mapDispatchToProps = (dispatch, { form: { name } }) => ({
-  upsert: (fieldId, value) => dispatch(change(name, fieldId, value)),
+const mapDispatchToProps = (dispatch, { form }) => ({
+  upsert: (fieldId, value) => dispatch(change(form, fieldId, value)),
 });
 
 const handlers = withHandlers({

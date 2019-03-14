@@ -158,10 +158,6 @@ class PromptFields extends PureComponent {
 }
 
 PromptFields.propTypes = {
-  form: PropTypes.shape({
-    name: PropTypes.string,
-    getValues: PropTypes.func,
-  }).isRequired,
   nodeType: PropTypes.string,
   dataSource: PropTypes.string,
   cardOptions: PropTypes.object,
