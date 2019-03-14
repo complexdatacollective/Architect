@@ -85,6 +85,7 @@ const Editor = ({
                 <Component form={form} {...rest} />
               }
             </Form>
+            <div className="editor__spacer" />
           </div>
           <Issues
             issues={issues}

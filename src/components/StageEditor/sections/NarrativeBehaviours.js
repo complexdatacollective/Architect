@@ -6,11 +6,12 @@ import * as Fields from '../../../ui/components/Fields';
 import { getFieldId } from '../../../utils/issues';
 
 const NarrativeBehaviours = () => (
-  <Guidance contentId="guidance.editor.name">
+  <Guidance contentId="guidance.editor.narrative_behaviours">
     <div className="stage-editor-section">
+      <h2>Narrative Behaviours</h2>
       <FormSection name="behaviours">
         <div id={getFieldId('freeDraw')} data-name="Free draw" />
-        <h2>Free-draw</h2>
+        <h4>Free-draw</h4>
         <ValidatedField
           name="behaviours.freeDraw"
           label="Allow drawing on the canvas."
@@ -18,7 +19,7 @@ const NarrativeBehaviours = () => (
         />
 
         <div id={getFieldId('allowRepositioning')} data-name="Allow repositioning" />
-        <h2>Allow repositioning</h2>
+        <h4>Allow repositioning</h4>
         <ValidatedField
           name="behaviours.allowRepositioning"
           label="Allow repositioning of nodes."

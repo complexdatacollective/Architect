@@ -28,7 +28,7 @@ class Background extends React.Component {
     const { backgroundType } = this.state;
 
     return (
-      <Guidance contentId="guidance.editor.sociogram.background">
+      <Guidance contentId="guidance.editor.background">
         <div className="stage-editor-section">
           <Row>
             <h3>Background</h3>
