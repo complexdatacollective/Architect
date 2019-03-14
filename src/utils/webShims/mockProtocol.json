@@ -8,8 +8,6 @@
       "variables": {
         "416c8c2db6093444bcff9c212a4f40ed9dd8d9d4": {
           "name": "Age",
-          "label": "age",
-          "description": "Alter age.",
           "type": "number",
           "validation": {
             "required": true,
@@ -27,9 +25,7 @@
           {
             "id": "acec0568-938b-42f0-bd3a-485e22d775d6",
             "fieldId": "One",
-            "label": "One",
             "name": "one",
-            "description": "one",
             "options": null,
             "validation": [],
             "type": "text"
@@ -37,9 +33,7 @@
           {
             "id": "308eafd0-adb5-4140-92cd-1b5bcd5cd1b5",
             "fieldId": "two",
-            "label": "two",
             "name": "two",
-            "description": "two",
             "options": null,
             "validation": [],
             "type": "text"
@@ -47,9 +41,7 @@
           {
             "id": "c64b9807-1a41-45b6-a94d-1d2f166dd595",
             "fieldId": "three",
-            "label": "three",
             "name": "three",
-            "description": "three",
             "options": null,
             "validation": [],
             "type": "text"
@@ -58,9 +50,7 @@
           {
             "id": "6150aab8-c698-4e74-8c50-dbdf2656faab",
             "fieldId": "four",
-            "label": "four",
             "name": "four",
-            "description": "four",
             "options": null,
             "validation": [],
             "type": "text"
@@ -68,9 +58,7 @@
           {
             "id": "d8453e47-5b4f-40d5-9b6c-3fed4477b369",
             "fieldId": "five",
-            "label": "five",
             "name": "five",
-            "description": "five",
             "options": null,
             "validation": [],
             "type": "text"
@@ -78,9 +66,7 @@
           {
             "id": "91fc8d5a-a5ed-4bda-9d99-2c728bb23170",
             "fieldId": "six",
-            "label": "six",
             "name": "six",
-            "description": "six",
             "options": null,
             "validation": [],
             "type": "text"
@@ -88,9 +74,7 @@
           {
             "id": "0b6a3ac6-5cb6-4614-bf3c-9526bd7bba28",
             "fieldId": "seven",
-            "label": "seven",
             "name": "seven",
-            "description": "seven",
             "options": null,
             "validation": [],
             "type": "text"
@@ -98,9 +82,7 @@
           {
             "id": "0fd01a79-af39-45f8-be20-6adc9557ad75",
             "fieldId": "eight",
-            "label": "eight",
             "name": "eight",
-            "description": "eight",
             "options": null,
             "validation": [],
             "type": "text"
@@ -108,9 +90,7 @@
           {
             "id": "867fd187-af3a-4ba0-adad-b5e387aeeb1f",
             "fieldId": "nine",
-            "label": "nine",
             "name": "nine",
-            "description": "nine",
             "options": null,
             "validation": [],
             "type": "text"
@@ -118,9 +98,7 @@
           {
             "id": "33bd06bf-5e51-4c91-b796-6aa6033987ac",
             "fieldId": "ten",
-            "label": "ten",
             "name": "ten",
-            "description": "ten",
             "options": null,
             "validation": [],
             "type": "text"
@@ -128,9 +106,7 @@
           {
             "id": "9313a4cb-d140-4a27-b15b-9cdd09f1aea6",
             "fieldId": "eleven",
-            "label": "eleven",
             "name": "eleven",
-            "description": "eleven",
             "options": null,
             "validation": [],
             "type": "text"
@@ -138,9 +114,7 @@
           {
             "id": "5c453fae-b7bf-4177-8a01-da0081cac839",
             "fieldId": "twelve",
-            "label": "twelve",
             "name": "twelve",
-            "description": "twelve",
             "options": null,
             "validation": [],
             "type": "text"
@@ -148,9 +122,7 @@
           {
             "id": "a11483a9-c85b-4335-928d-74d2d49cf654",
             "fieldId": "thirteen",
-            "label": "thirteen",
             "name": "thirteen",
-            "description": "thirteen",
             "options": null,
             "validation": [],
             "type": "text"
@@ -158,9 +130,7 @@
           {
             "id": "e2a591f2-baab-4174-ab8a-c2c1f2a2f411",
             "fieldId": "fourteen",
-            "label": "fourteen",
             "name": "fourteen",
-            "description": "fourteen",
             "options": null,
             "validation": [],
             "type": "text"
@@ -168,9 +138,7 @@
           {
             "id": "500af489-3528-4748-bf81-38fd720e7422",
             "fieldId": "fifteen",
-            "label": "fifteen",
             "name": "fifteen",
-            "description": "fifteen",
             "options": null,
             "validation": [],
             "type": "text"
@@ -178,9 +146,7 @@
           {
             "id": "53590ea1-e9cd-4a59-b47d-412c3b07cf0f",
             "fieldId": "sixteen",
-            "label": "sixteen",
             "name": "sixteen",
-            "description": "sixteen",
             "options": null,
             "validation": [],
             "type": "text"
@@ -188,9 +154,7 @@
           {
             "id": "5b39629c-105e-4eb7-89f6-52e34218a936",
             "fieldId": "seventeen",
-            "label": "seventeen",
             "name": "seventeen",
-            "description": "seventeen",
             "options": null,
             "validation": [],
             "type": "text"
@@ -198,9 +162,7 @@
           {
             "id": "d191bb1e-b515-4204-af03-060b9898f0bb",
             "fieldId": "eighteen",
-            "label": "eighteen",
             "name": "eighteen",
-            "description": "eighteen",
             "options": null,
             "validation": [],
             "type": "text"
@@ -208,9 +170,7 @@
           {
             "id": "c9088ea5-9446-4b18-98fd-2f05d8fab0fb",
             "fieldId": "nineteen",
-            "label": "nineteen",
             "name": "nineteen",
-            "description": "nineteen",
             "options": null,
             "validation": [],
             "type": "text"
@@ -218,9 +178,7 @@
           {
             "id": "078811de-4b58-4cd5-903d-7ab5798596b2",
             "fieldId": "twenty",
-            "label": "twenty",
             "name": "twenty",
-            "description": "twenty",
             "options": null,
             "validation": [],
             "type": "text"
@@ -238,20 +196,14 @@
         "variables": {
           "1d84d7782a65d41d727f7c71fcb38b6aea633a80": {
             "name": "Closeness Layout",
-            "label": "closenesslayout",
-            "description": "A variable for storing a node layout organized by percieved closeness.",
             "type": "layout"
           },
           "dea16657f68e9caa74a1e785bc8e0ed11382332b": {
             "name": "Geographical Layout",
-            "label": "geographicalclosenesslayout",
-            "description": "A variable for storing node layout organised by geographical space.",
             "type": "layout"
           },
           "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
             "name": "Name",
-            "label": "name",
-            "description": "Alter name.",
             "type": "text",
             "validation": {
               "required": true,
@@ -261,8 +213,6 @@
           },
           "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": {
             "name": "Age",
-            "label": "age",
-            "description": "Alter age.",
             "type": "number",
             "validation": {
               "required": true,
@@ -272,8 +222,6 @@
           },
           "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
             "name": "Nickname",
-            "label": "nickname",
-            "description": "Alter nickname.",
             "type": "text",
             "validation": {
               "required": true,
@@ -283,8 +231,6 @@
           },
           "d8bd7e53fb408002394509cf33fa439a15177f0a": {
             "name": "Special Category",
-            "label": "specialcategory",
-            "description": "A categorical variable.",
             "type": "categorical",
             "validation": {
               "minSelected": 1
@@ -313,26 +259,18 @@
           },
           "5d69e2e1f8a9ea63d425602943831500c3d5c01d": {
             "name": "Close Friend",
-            "label": "closefriend",
-            "description": "A boolean variable indicating if alter is a close friend.",
             "type": "boolean"
           },
           "ba5397013f9cf10a08ac193cc197c7f97d2d8374": {
             "name": "Support Friend",
-            "label": "supportfriend",
-            "description": "A boolean variable indicating if alter offers support.",
             "type": "boolean"
           },
           "285ecc8323cd69e7e7bfb8e8586023c76fcd86f6": {
             "name": "Advice Friend",
-            "label": "advicefriend",
-            "description": "A boolean variable indicating if alter offers advice.",
             "type": "boolean"
           },
           "9ec1f5e83cd1df32d106bbad53e6a9d86003d86d": {
             "name": "Has given advice",
-            "label": "hasgivenadvice",
-            "description": "A boolean variable indicating if alter has given advice.",
             "type": "boolean"
           }
         }
@@ -345,8 +283,6 @@
         "variables": {
           "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
             "name": "Name",
-            "label": "name",
-            "description": "Human readable description",
             "type": "text",
             "validation": {
               "required": true,
@@ -356,20 +292,14 @@
           },
           "6469ac84a89748bb67b923c833ed0c778a17aea3": {
             "name": "Location",
-            "label": "location",
-            "description": "Location variable",
             "type": "location"
           },
           "207b877e13437b35b3fbae5c20219eecd6c828f1": {
             "name": "Layout",
-            "label": "layout",
-            "description": "Layout variable",
             "type": "layout"
           },
           "5039d155a71c0a5f7a2b2654ad49cb7ee47a8980": {
             "name": "Boolean",
-            "label": "booleanvariable",
-            "description": "Boolean variable",
             "type": "boolean"
           }
         }
@@ -382,9 +312,7 @@
         "color": "edge-color-seq-1",
         "variables": {
           "7939c453c8c65765f704f73520eb62fef22db972": {
-            "label": "contact_freq",
             "name": "Contact frequency",
-            "description": "Contact frequency.",
             "type": "ordinal",
             "options": [
               { "label": "Very Often", "value": 4 },
@@ -402,9 +330,7 @@
         "color": "edge-color-seq-2",
         "variables": {
           "7939c453c8c65765f704f73520eb62fef22db972": {
-            "label": "contact_freq",
             "name": "Contact frequency discription",
-            "description": "Contact frequency description.",
             "type": "text"
           }
         }
