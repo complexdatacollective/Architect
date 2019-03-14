@@ -13,7 +13,7 @@ const NarrativeBehaviours = () => (
         <div id={getFieldId('freeDraw')} data-name="Free draw" />
         <h4>Free-draw</h4>
         <ValidatedField
-          name="behaviours.freeDraw"
+          name="freeDraw"
           label="Allow drawing on the canvas."
           component={Fields.Checkbox}
         />
@@ -21,7 +21,7 @@ const NarrativeBehaviours = () => (
         <div id={getFieldId('allowRepositioning')} data-name="Allow repositioning" />
         <h4>Allow repositioning</h4>
         <ValidatedField
-          name="behaviours.allowRepositioning"
+          name="allowRepositioning"
           label="Allow repositioning of nodes."
           component={Fields.Checkbox}
         />
