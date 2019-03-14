@@ -12,3 +12,4 @@ export { default as SociogramPrompts } from './SociogramPrompts';
 export { default as NodePanels } from './NodePanels';
 export { default as CategoricalBinPrompts } from './CategoricalBinPrompts';
 export { default as OrdinalBinPrompts } from './OrdinalBinPrompts';
+export { default as IntroductionPanel } from './IntroductionPanel';

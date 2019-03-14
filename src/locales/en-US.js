@@ -94,6 +94,12 @@ export default {
       </p>
     </Fragment>
   ),
+  'guidance.editor.introduction_panel': (
+    <Fragment>
+      <h3>Introduction Panel</h3>
+      <p>guidance.editor.introduction_panel</p>
+    </Fragment>
+  ),
   'guidance.editor.sociogram_prompt.nodes': (
     <Fragment>
       <h3>Prompt Node Type</h3>

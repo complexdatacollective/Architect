@@ -84,4 +84,17 @@ export default [
       ),
     },
   },
+  {
+    type: 'PerAlterForm',
+    title: 'Per Alter Form',
+    guidance: {
+      description: (
+        <p>
+          The Per Alter Form Interface is for back-filling additional information
+          about nodes which might be missed during the general flow of your
+          interview.
+        </p>
+      ),
+    },
+  },
 ];

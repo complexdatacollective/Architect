@@ -6,7 +6,7 @@ import OrdinalBin from './stage--OrdinalBin.png';
 import Sociogram from './stage--Sociogram.png';
 import Narrative from './stage--Narrative.png';
 import Information from './stage--Information.png';
-
+import PerAlterForm from './stage--PerAlterForm.png';
 
 export default {
   CategoricalBin,
@@ -17,4 +17,5 @@ export default {
   Information,
   OrdinalBin,
   Sociogram,
+  PerAlterForm,
 };
