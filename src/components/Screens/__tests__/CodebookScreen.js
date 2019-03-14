@@ -3,7 +3,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import VariableRegistryScreen from '../VariableRegistryScreen';
+import CodebookScreen from '../CodebookScreen';
 
 const mockState = {
   protocol: {
@@ -17,9 +17,9 @@ const mockProps = {
   store: createStore(() => mockState),
 };
 
-describe('<VariableRegistryScreen />', () => {
+describe('<CodebookScreen />', () => {
   it('can render', () => {
-    const component = shallow(<VariableRegistryScreen {...mockProps} />);
+    const component = shallow(<CodebookScreen {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });

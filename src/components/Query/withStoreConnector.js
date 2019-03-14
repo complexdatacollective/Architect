@@ -1,15 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getProtocol } from '../../selectors/protocol';
+import { getCodebook } from '../../selectors/protocol';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
-const mapStateToProps = (state) => {
-  const protocol = getProtocol(state);
-
-  return {
-    variableRegistry: protocol.variableRegistry,
-  };
-};
+const mapStateToProps = state => ({
+  codebook: getCodebook(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),

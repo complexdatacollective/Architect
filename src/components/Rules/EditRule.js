@@ -32,7 +32,7 @@ class EditRule extends Component {
           { this.props.rule && this.props.rule.options &&
             <this.TypeComponent
               rule={this.props.rule}
-              variableRegistry={this.props.variableRegistry}
+              codebook={this.props.codebook}
               onChange={this.props.onChange}
             />
           }
@@ -51,7 +51,7 @@ EditRule.propTypes = {
     type: PropTypes.string,
     options: PropTypes.object,
   }),
-  variableRegistry: PropTypes.object.isRequired,
+  codebook: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

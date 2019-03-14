@@ -4,7 +4,7 @@ import { compact, map, get } from 'lodash';
 import { compose, withProps, withHandlers } from 'recompose';
 import Editor from '../Editor';
 import { getProtocol } from '../../selectors/protocol';
-import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
+import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 import getNewTypeTemplate from './getNewTypeTemplate';
 import { parse, format } from './convert';
 import TypeEditor from './TypeEditor';
@@ -20,7 +20,7 @@ function mapStateToProps(state, props) {
   const initialValues = format(
     get(
       protocol,
-      ['variableRegistry', category, type],
+      ['codebook', category, type],
       getNewTypeTemplate({ protocol, category }),
       {},
     ),
@@ -40,10 +40,10 @@ function mapStateToProps(state, props) {
 
 const mapDispatchToProps = dispatch => ({
   updateType: (category, type, form) => {
-    dispatch(variableRegistryActions.updateType(category, type, parse(form)));
+    dispatch(codebookActions.updateType(category, type, parse(form)));
   },
   createType: (category, form) => {
-    dispatch(variableRegistryActions.createType(category, parse(form)));
+    dispatch(codebookActions.createType(category, parse(form)));
   },
 });
 

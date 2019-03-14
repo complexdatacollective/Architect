@@ -1,5 +1,5 @@
 import { get, map, reduce } from 'lodash';
-import { getVariableRegistry } from '../../../../selectors/protocol';
+import { getCodebook } from '../../../../selectors/protocol';
 
 const asOption = (value, key) =>
   ({
@@ -19,8 +19,8 @@ const filterAsOption = rule =>
 
 export const getVariablesForNodeType = (state, props) => {
   const nodeType = props.nodeType;
-  const variableRegistry = getVariableRegistry(state);
-  return get(variableRegistry, ['node', nodeType, 'variables'], {});
+  const codebook = getCodebook(state);
+  return get(codebook, ['node', nodeType, 'variables'], {});
 };
 
 export const getLayoutVariablesForNodeType = (state, props) => {
@@ -44,7 +44,7 @@ export const getHighlightVariablesForNodeType = (state, props) => {
 };
 
 export const getEdgesForNodeType = (state) => {
-  const variableRegistry = getVariableRegistry(state);
+  const codebook = getCodebook(state);
 
-  return map(variableRegistry.edge, asOption);
+  return map(codebook.edge, asOption);
 };

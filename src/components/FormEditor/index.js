@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { formValueSelector, change } from 'redux-form';
 import { compose, withProps, withHandlers } from 'recompose';
 import { map, get } from 'lodash';
-import { getVariablesForNodeType, getNodeTypes } from '../../selectors/variableRegistry';
+import { getVariablesForNodeType, getNodeTypes } from '../../selectors/codebook';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as formActions } from '../../ducks/modules/protocol/forms';
 import Editor from '../Editor';

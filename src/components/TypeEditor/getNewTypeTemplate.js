@@ -7,7 +7,7 @@ const getNextCategoryColor = ({ protocol, category }) => {
     COLOR_PALETTE_BY_ENTITY.edge :
     COLOR_PALETTE_BY_ENTITY.node;
   const paletteSize = COLOR_PALETTES[paletteName];
-  const typeCount = size(get(protocol, ['variableRegistry', category], {}));
+  const typeCount = size(get(protocol, ['codebook', category], {}));
   const nextNumber = (typeCount % paletteSize) + 1;
   const nextColor = `${paletteName}-${nextNumber}`;
 

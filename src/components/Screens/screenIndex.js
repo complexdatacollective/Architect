@@ -4,7 +4,7 @@ import StageEditorScreen from './StageEditorScreen';
 import SkipLogicEditorScreen from './SkipLogicEditorScreen';
 import ViewFormsScreen from './ViewFormsScreen';
 import FormEditorScreen from './FormEditorScreen';
-import Codebook from './VariableRegistryScreen';
+import Codebook from './CodebookScreen';
 import TypeEditorScreen from './TypeEditorScreen';
 import VariableEditorScreen from './VariableEditorScreen';
 

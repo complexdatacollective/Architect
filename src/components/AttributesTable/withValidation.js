@@ -2,9 +2,10 @@ import { get, reduce, isEmpty } from 'lodash';
 import { withHandlers, compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getValidations } from '../../utils/validations';
+import { getCodebook } from '../../selectors/protocol';
 
 const mapStateToProps = state => ({
-  variableRegistry: get(state, 'protocol.present.variableRegistry', {}),
+  codebook: getCodebook(state),
 });
 
 /**
@@ -14,8 +15,8 @@ const mapStateToProps = state => ({
 const withValidation = compose(
   connect(mapStateToProps),
   withHandlers({
-    validate: ({ variableRegistry, nodeType }) => (attributes) => {
-      const variables = get(variableRegistry, ['node', nodeType, 'variables'], {});
+    validate: ({ codebook, nodeType }) => (attributes) => {
+      const variables = get(codebook, ['node', nodeType, 'variables'], {});
       const allErrors = reduce(attributes, (errors, attribute, variable) => {
         const variableMeta = get(variables, variable, {});
         const validations = getValidations(get(variableMeta, 'validation', {}));

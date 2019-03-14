@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import reducer, { actionCreators } from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
-import { actionCreators as registryActions, testing as registryTesting } from '../protocol/variableRegistry';
+import { actionCreators as codebookActions, testing as codebookTesting } from '../protocol/codebook';
 import { actionCreators as formActions } from '../protocol/forms';
 import { rootEpic } from '../../modules/root';
 
@@ -61,23 +61,23 @@ describe('session reducer', () => {
     });
 
     it('tracks create type as change', () => {
-      itTracksActionAsChange(registryActions.createType());
+      itTracksActionAsChange(codebookActions.createType());
     });
 
     it('tracks update type as change', () => {
-      itTracksActionAsChange(registryActions.updateType());
+      itTracksActionAsChange(codebookActions.updateType());
     });
 
     it('tracks delete type as change', () => {
-      itTracksActionAsChange(registryTesting.deleteType());
+      itTracksActionAsChange(codebookTesting.deleteType());
     });
 
     it('tracks create variable as change', () => {
-      itTracksActionAsChange(registryActions.createVariable());
+      itTracksActionAsChange(codebookActions.createVariable());
     });
 
     it('tracks update variable as change', () => {
-      itTracksActionAsChange(registryActions.updateVariable());
+      itTracksActionAsChange(codebookActions.updateVariable());
     });
 
     it('tracks create form as change', () => {

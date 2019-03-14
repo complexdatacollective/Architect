@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
-import { actionTypes as protocolRegistryActionTypes } from './protocol/variableRegistry';
+import { actionTypes as codebookActionTypes } from './protocol/codebook';
 import { actionTypes as formActionTypes } from './protocol/forms';
 import { actionTypes as protocolActionTypes } from './protocol';
 import { actionTypes as exportProtocolActionTypes } from './protocols/export';
@@ -14,11 +14,11 @@ const savableChanges = [
   protocolStageActionTypes.UPDATE_STAGE,
   protocolStageActionTypes.DELETE_STAGE,
   protocolStageActionTypes.DELETE_PROMPT,
-  protocolRegistryActionTypes.UPDATE_TYPE,
-  protocolRegistryActionTypes.CREATE_TYPE,
-  protocolRegistryActionTypes.DELETE_TYPE,
-  protocolRegistryActionTypes.CREATE_VARIABLE,
-  protocolRegistryActionTypes.UPDATE_VARIABLE,
+  codebookActionTypes.UPDATE_TYPE,
+  codebookActionTypes.CREATE_TYPE,
+  codebookActionTypes.DELETE_TYPE,
+  codebookActionTypes.CREATE_VARIABLE,
+  codebookActionTypes.UPDATE_VARIABLE,
   formActionTypes.CREATE_FORM,
   formActionTypes.UPDATE_FORM,
   formActionTypes.DELETE_FORM,

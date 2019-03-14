@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 
 const getNodeTypes = state =>
-  get(getProtocol(state).variableRegistry, 'node', {});
+  get(getProtocol(state).codebook, 'node', {});
 
 const getVariablesForNodeType = (state, nodeType) =>
   get(getNodeTypes(state), [nodeType, 'variables'], {});
@@ -217,7 +217,7 @@ const getTypes = createSelector(
   getProtocol,
   protocol =>
     flatMap(
-      protocol.variableRegistry,
+      protocol.codebook,
       (entityTypes, entity) =>
         map(entityTypes, (_, type) => ({ entity, type })),
     ),

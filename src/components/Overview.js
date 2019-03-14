@@ -15,7 +15,7 @@ import { actionCreators as uiActions } from '../ducks/modules/ui';
 
 class Overview extends Component {
   renderNodeTypes() {
-    const nodeTypes = get(this.props.variableRegistry, 'node', {});
+    const nodeTypes = get(this.props.codebook, 'node', {});
     if (size(nodeTypes) === 0) {
       return (
         <em>No node types defined, yet. <Link screen="type" params={{ category: 'node' }}>Create one?</Link></em>
@@ -37,7 +37,7 @@ class Overview extends Component {
   }
 
   renderEdgeTypes() {
-    const edgeTypes = get(this.props.variableRegistry, 'edge', {});
+    const edgeTypes = get(this.props.codebook, 'edge', {});
 
     if (size(edgeTypes) === 0) {
       return (
@@ -61,7 +61,7 @@ class Overview extends Component {
 
   renderForms() {
     const forms = this.props.forms;
-    const nodeTypes = get(this.props.variableRegistry, 'node', {});
+    const nodeTypes = get(this.props.codebook, 'node', {});
     if (size(nodeTypes) === 0) {
       return (
         <React.Fragment>
@@ -170,7 +170,7 @@ Overview.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   forms: PropTypes.object.isRequired,
-  variableRegistry: PropTypes.object.isRequired,
+  codebook: PropTypes.object.isRequired,
   updateOptions: PropTypes.func,
   flipId: PropTypes.string,
   show: PropTypes.bool,
@@ -196,7 +196,7 @@ const mapStateToProps = (state) => {
     name: protocol && protocol.name,
     description: protocol && protocol.description,
     forms: protocol && protocol.forms,
-    variableRegistry: protocol && protocol.variableRegistry,
+    codebook: protocol && protocol.codebook,
   };
 };
 

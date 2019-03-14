@@ -32,7 +32,7 @@
     ],
     "type": "download",
     "workerUrlMap": {},
-    "variableRegistry": {
+    "codebook": {
     },
     "forms": {
     },
