@@ -5,7 +5,7 @@ import {
   IntroductionPanel,
 } from '../sections';
 
-const NameGenerator = {
+const PerAlterForm = {
   sections: [
     Name,
     NodeType,
@@ -14,4 +14,4 @@ const NameGenerator = {
   ],
 };
 
-export default NameGenerator;
+export default PerAlterForm;
