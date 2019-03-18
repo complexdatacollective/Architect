@@ -2,10 +2,10 @@
 
 import { get, map, compact, flatMap, uniqBy, memoize } from 'lodash';
 import { createSelector } from 'reselect';
-import { getProtocol } from './protocol';
+import { getProtocol, getCodebook } from './protocol';
 
 const getNodeTypes = state =>
-  get(getProtocol(state).codebook, 'node', {});
+  get(getCodebook(state), 'node', {});
 
 const getVariablesForNodeType = (state, nodeType) =>
   get(getNodeTypes(state), [nodeType, 'variables'], {});

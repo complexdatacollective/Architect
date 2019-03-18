@@ -14,8 +14,9 @@ import {
   getExternalPropertiesOptionGetter,
   getSortOrderOptionGetter,
 } from './optionGetters';
-import withFieldValues from './withFieldValues';
 import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
+import withFieldValues from './withFieldValues';
+import withExternalDataPropertyOptions from './withExternalDataPropertyOptions';
 
 class PromptFields extends PureComponent {
   render() {
@@ -190,5 +191,6 @@ export { PromptFields };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
+  withExternalDataPropertyOptions,
   withDisplayLabelChangeHandler,
 )(PromptFields);
