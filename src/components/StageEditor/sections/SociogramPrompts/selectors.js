@@ -3,7 +3,7 @@ import { getCodebook } from '../../../../selectors/protocol';
 
 const asOption = (value, key) =>
   ({
-    label: get(value, 'label', ''),
+    label: get(value, 'name', ''),
     value: key,
     color: get(value, 'color', ''),
   });
@@ -26,21 +26,25 @@ export const getVariablesForNodeType = (state, props) => {
 export const getLayoutVariablesForNodeType = (state, props) => {
   const variables = getVariablesForNodeType(state, props);
 
-  return reduce(
+  const layoutVariables = reduce(
     variables,
     filterAsOption(item => item.type === 'layout'),
     [],
   );
+
+  return layoutVariables;
 };
 
 export const getHighlightVariablesForNodeType = (state, props) => {
   const variables = getVariablesForNodeType(state, props);
 
-  return reduce(
+  const highlightVariables = reduce(
     variables,
     filterAsOption(item => item.type === 'boolean'),
     [],
   );
+
+  return highlightVariables;
 };
 
 export const getEdgesForNodeType = (state) => {

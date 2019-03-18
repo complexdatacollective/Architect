@@ -9,9 +9,9 @@ const formatValue = (value) => {
   return value;
 };
 
-const VariablePreview = ({ value, label, error, variable, onDelete }) => (
+const VariablePreview = ({ value, name, error, variable, onDelete }) => (
   <div className="attributes-table-preview">
-    <div className="attributes-table-preview__name">{label}</div>
+    <div className="attributes-table-preview__name">{name}</div>
     { error &&
       <div className="attributes-table-preview__error">{error}</div>
     }
@@ -25,7 +25,7 @@ const VariablePreview = ({ value, label, error, variable, onDelete }) => (
 );
 
 VariablePreview.propTypes = {
-  label: PropTypes.string,
+  name: PropTypes.string,
   value: PropTypes.any.isRequired,
   error: PropTypes.string,
   variable: PropTypes.string,
@@ -34,7 +34,7 @@ VariablePreview.propTypes = {
 
 VariablePreview.defaultProps = {
   error: undefined,
-  label: null,
+  name: null,
   variable: null,
 };
 

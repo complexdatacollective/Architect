@@ -17,9 +17,7 @@ const optionGetter = (variables) => {
           allowedVariables,
           (value, id) => ({
             value: id,
-            label: value.label,
-            name: value.name,
-            description: value.description,
+            label: value.name,
             isDisabled: value !== variable && used.includes(value),
           }),
         );

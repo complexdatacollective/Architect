@@ -11,7 +11,7 @@ const getVariablesAsOptions = (variables) => {
         ...acc,
         {
           value: variableId,
-          label: variable.label,
+          label: variable.name,
         },
       ];
     },

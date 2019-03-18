@@ -28,7 +28,7 @@ function mapStateToProps(state, props) {
 
   const variables = getFormValue(state, 'variables') || {};
   const displayVariables = compact(map(variables, variable => ({
-    label: variable.label,
+    label: variable.name,
     value: variable.id,
   })));
 

@@ -5,10 +5,10 @@ import { get } from 'lodash';
 const withDisplayOptions = withProps(({ type, options, codebook }) => {
   const entityType = type === 'alter' ? 'node' : 'edge';
   const entityRoot = type === 'ego' ? ['ego'] : [entityType, options.type];
-  const typeLabel = get(codebook, [entityType, options.type, 'label'], options.type); // noop for ego
+  const typeLabel = get(codebook, [entityType, options.type, 'name'], options.type); // noop for ego
   const variableLabel = get(
     codebook,
-    [...entityRoot, 'variables', options.variable, 'label'],
+    [...entityRoot, 'variables', options.variable, 'name'],
     options.variable,
   );
 

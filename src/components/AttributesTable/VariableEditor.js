@@ -28,7 +28,7 @@ class VariableEditor extends Component {
   }
 
   renderInput() {
-    const { type, validation, variable, value, label, options } = this.props;
+    const { type, validation, value, name, options } = this.props;
 
     const InputComponent = getInput(type);
 
@@ -37,11 +37,10 @@ class VariableEditor extends Component {
     return (
       <Field
         component={InputComponent}
-        name={variable}
         onChange={this.handleChange}
         validation={validation}
         value={value}
-        label={label}
+        name={name}
         options={options}
       />
     );
@@ -60,10 +59,9 @@ class VariableEditor extends Component {
 
 VariableEditor.propTypes = {
   value: PropTypes.any,
-  variable: PropTypes.string,
   show: PropTypes.bool,
   type: PropTypes.string,
-  label: PropTypes.string,
+  name: PropTypes.string,
   options: PropTypes.array,
   validation: PropTypes.any,
   onChange: PropTypes.func.isRequired,
@@ -74,7 +72,7 @@ VariableEditor.defaultProps = {
   show: false,
   value: undefined,
   type: null,
-  label: '',
+  name: '',
   options: [],
   validation: {},
 };

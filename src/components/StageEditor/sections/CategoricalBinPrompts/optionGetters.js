@@ -1,8 +1,10 @@
 import { map } from 'lodash';
-import { pick } from 'lodash/fp';
 
 const NON_SORTABLE_TYPES = ['layout'];
-const getOptionProperties = pick(['label', 'value']);
+const getOptionProperties = option => ({
+  value: option.value,
+  label: option.label,
+});
 
 /**
  * Creates a optionGetter function for <MultiSelect />

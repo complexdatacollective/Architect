@@ -17,7 +17,10 @@ describe('CategoricalBin optionGetters', () => {
         mockVariableOptions,
       );
 
-      const mockAllValues = [{ property: '1234-1234-1234-2', direction: 'asc' }];
+      const mockAllValues = [{
+        property: '1234-1234-1234-2',
+        direction: 'asc',
+      }];
 
       const subject = sortOrderOptionGetter('property', undefined, mockAllValues);
 

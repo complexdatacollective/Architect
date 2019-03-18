@@ -28,7 +28,6 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
 ];
 
 class VariableFields extends Component {
-
   handleNormalizeName = value => safeName(value);
 
   render() {
