@@ -9,7 +9,7 @@ const protocolsMeta = state => state.protocols;
 
 export const getProtocol = state => state.protocol.present;
 export const getAssetManifest = state => state.protocol.present.assetManifest;
-export const getVariableRegistry = state => state.protocol.present.variableRegistry;
+export const getCodebook = state => state.protocol.present.codebook;
 
 export const getActiveProtocolMeta = createSelector(
   protocolsMeta,

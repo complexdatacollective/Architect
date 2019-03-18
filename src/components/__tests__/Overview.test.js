@@ -7,7 +7,7 @@ import { Overview } from '../Overview';
 const mockProps = {
   name: '',
   forms: {},
-  variableRegistry: {},
+  codebook: {},
   flipId: 'foo',
 };
 

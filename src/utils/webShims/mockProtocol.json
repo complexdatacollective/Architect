@@ -3,7 +3,7 @@
   "description": "My protocol description",
   "lastModified": 0,
   "networkCanvasVersion": "~4.0.0",
-  "variableRegistry": {
+  "codebook": {
     "ego": {
       "variables": {
         "416c8c2db6093444bcff9c212a4f40ed9dd8d9d4": {

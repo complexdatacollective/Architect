@@ -143,7 +143,7 @@ const mapStateToProps = (state) => {
 
   return {
     forms: get(protocol, 'forms', {}),
-    nodes: get(protocol, 'variableRegistry.node', {}),
+    nodes: get(protocol, 'codebook.node', {}),
   };
 };
 

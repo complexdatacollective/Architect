@@ -11,7 +11,7 @@ describe('protocol root reducer', () => {
           assetManifest: {},
           forms: {},
           stages: [],
-          variableRegistry: {
+          codebook: {
             node: {},
             edge: {},
           },
@@ -26,7 +26,7 @@ describe('protocol root reducer', () => {
       assetManifest: { nodes: [{ foo: 'bar' }] },
       forms: { fooForm: { bar: 'baz' } },
       stages: [{ type: 'foobar' }],
-      variableRegistry: { fooVar: { baz: 'buzz' } },
+      codebook: { fooVar: { baz: 'buzz' } },
     };
 
     it('updates any top level properties', () => {
@@ -43,7 +43,7 @@ describe('protocol root reducer', () => {
           assetManifest: { nodes: [{ foo: 'bar' }] },
           forms: { fooForm: { bar: 'baz' } },
           stages: [{ type: 'foobar' }],
-          variableRegistry: { fooVar: { baz: 'buzz' } },
+          codebook: { fooVar: { baz: 'buzz' } },
         });
     });
   });

@@ -36,7 +36,7 @@ const withOptions = entityCategory =>
       ['ego', 'variables'] :
       [entityCategory, entityId, 'variables'];
 
-    const entityTypes = get(props.variableRegistry, entityCategory, {});
+    const entityTypes = get(props.codebook, entityCategory, {});
 
     const typeOptions = map(entityTypes, (entity, id) => ({
       value: id,
@@ -44,10 +44,10 @@ const withOptions = entityCategory =>
       color: entity.color,
     }));
 
-    const variableOptions = getVariablesAsOptions(get(props.variableRegistry, variablesRoot, {}));
+    const variableOptions = getVariablesAsOptions(get(props.codebook, variablesRoot, {}));
 
     const variableType = get(
-      props.variableRegistry,
+      props.codebook,
       [...variablesRoot, variableId, 'type'],
       '',
     );

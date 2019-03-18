@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PreviewRule from './PreviewRule';
 
-const PreviewRules = ({ join, rules, variableRegistry, onClickRule, onDeleteRule }) => {
+const PreviewRules = ({ join, rules, codebook, onClickRule, onDeleteRule }) => {
   const getJoin = index =>
     (rules.length !== 1 && index < rules.length - 1 ? join : null);
 
@@ -19,7 +19,7 @@ const PreviewRules = ({ join, rules, variableRegistry, onClickRule, onDeleteRule
                 <PreviewRule
                   {...rule}
                   join={getJoin(index)}
-                  variableRegistry={variableRegistry}
+                  codebook={codebook}
                   onClick={() => onClickRule(rule.id)}
                   onDelete={() => onDeleteRule(rule.id)}
                 />
@@ -35,7 +35,7 @@ const PreviewRules = ({ join, rules, variableRegistry, onClickRule, onDeleteRule
 PreviewRules.propTypes = {
   join: PropTypes.string.isRequired,
   rules: PropTypes.array.isRequired,
-  variableRegistry: PropTypes.object.isRequired,
+  codebook: PropTypes.object.isRequired,
   onClickRule: PropTypes.func.isRequired,
   onDeleteRule: PropTypes.func.isRequired,
 };

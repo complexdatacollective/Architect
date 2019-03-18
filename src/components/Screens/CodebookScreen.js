@@ -11,8 +11,8 @@ import Guidance from '../Guidance';
 import Card from './ProtocolCard';
 import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
-import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/variableRegistry';
-import { actionCreators as variableRegistryActions } from '../../ducks/modules/protocol/variableRegistry';
+import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/codebook';
+import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const Type = ({ label, category, type, children, usage, handleDelete }) => (
@@ -62,10 +62,10 @@ Type.defaultProps = {
  * This component acts as an index for types. i.e. Nodes and Edges,
  * and links to the EditType.
  */
-class VariableRegistry extends Component {
+class Codebook extends Component {
   handleDelete = (entity, type) => {
     const deletedObjects = this.props.getDeleteImpact(entity, type);
-    const typeName = this.props.variableRegistry[entity][type].name;
+    const typeName = this.props.codebook[entity][type].name;
 
     const confirmMessage = (
       <Fragment>
@@ -134,7 +134,7 @@ class VariableRegistry extends Component {
   }
 
   renderEdges() {
-    const edges = get(this.props.variableRegistry, 'edge', {});
+    const edges = get(this.props.codebook, 'edge', {});
 
     if (edges.length === 0) {
       return 'No node types defined';
@@ -150,7 +150,7 @@ class VariableRegistry extends Component {
   }
 
   renderNodes() {
-    const nodes = get(this.props.variableRegistry, 'node', {});
+    const nodes = get(this.props.codebook, 'node', {});
 
     if (nodes.length === 0) {
       return 'No node types defined';
@@ -232,10 +232,10 @@ class VariableRegistry extends Component {
   }
 }
 
-VariableRegistry.propTypes = {
+Codebook.propTypes = {
   show: PropTypes.bool,
   transitionState: PropTypes.string,
-  variableRegistry: PropTypes.shape({
+  codebook: PropTypes.shape({
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
   }).isRequired,
@@ -247,8 +247,8 @@ VariableRegistry.propTypes = {
   getObjectLabel: PropTypes.func.isRequired,
 };
 
-VariableRegistry.defaultProps = {
-  variableRegistry: {
+Codebook.defaultProps = {
+  codebook: {
     node: {},
     edge: {},
   },
@@ -259,13 +259,13 @@ VariableRegistry.defaultProps = {
 
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
-  const variableRegistry = protocol.variableRegistry;
+  const codebook = protocol.codebook;
   const getUsageForType = makeGetUsageForType(state);
   const getDeleteImpact = makeGetDeleteImpact(state);
   const getObjectLabel = makeGetObjectLabel(state);
 
   return {
-    variableRegistry,
+    codebook,
     getUsageForType,
     getDeleteImpact,
     getObjectLabel,
@@ -273,13 +273,13 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  deleteType: bindActionCreators(variableRegistryActions.deleteType, dispatch),
+  deleteType: bindActionCreators(codebookActions.deleteType, dispatch),
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
-export { VariableRegistry };
+export { Codebook };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(VariableRegistry);
+)(Codebook);

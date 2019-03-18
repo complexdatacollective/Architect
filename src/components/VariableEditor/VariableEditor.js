@@ -4,16 +4,16 @@ import { compose, withProps } from 'recompose';
 import { get } from 'lodash';
 import Editor from '../Editor';
 import VariableFields from '../TypeEditor/VariableFields';
-import { getVariableRegistry } from '../../selectors/protocol';
-import { actionCreators as actions } from '../../ducks/modules/protocol/variableRegistry';
+import { getCodebook } from '../../selectors/protocol';
+import { actionCreators as actions } from '../../ducks/modules/protocol/codebook';
 
-export const formName = 'variable-editor';
+export const formName = 'codebook';
 
 const mapStateToProps = (state, { entity, type, ...props }) => {
   if (!props.id) { return {}; }
 
-  const variableRegistry = getVariableRegistry(state);
-  const variable = get(variableRegistry, [entity, type, 'variables'], [])
+  const codebook = getCodebook(state);
+  const variable = get(codebook, [entity, type, 'variables'], [])
     .find(({ id }) => id === props.id);
 
   return {

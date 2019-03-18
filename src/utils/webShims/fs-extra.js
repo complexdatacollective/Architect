@@ -13,7 +13,7 @@ const readJson = (...args) => {
     default:
       return Promise.resolve({});
   }
-}
+};
 
 module.exports = {
   copySync,

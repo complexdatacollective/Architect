@@ -7,7 +7,7 @@ import {
 const mockState = {
   protocol: {
     present: {
-      variableRegistry: {
+      codebook: {
         node: {
           bar: {
             variables: {

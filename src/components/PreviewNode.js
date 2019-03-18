@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import Node from '../ui/components/Node';
-import { getNodeTypes } from '../selectors/variableRegistry';
+import { getNodeTypes } from '../selectors/codebook';
 
 const mapStateToProps = state => ({
   nodeTypes: getNodeTypes(state),

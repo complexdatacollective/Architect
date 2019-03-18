@@ -13,7 +13,7 @@ const Rules = ({
   type,
   rules,
   join,
-  variableRegistry,
+  codebook,
   draftRule,
   handleChangeJoin,
   handleChangeDraft,
@@ -27,7 +27,7 @@ const Rules = ({
 }) => (
   <div className="rules-rules">
     <EditRule
-      variableRegistry={variableRegistry}
+      codebook={codebook}
       rule={draftRule}
       onChange={handleChangeDraft}
       onCancel={handleCancelDraft}
@@ -54,7 +54,7 @@ const Rules = ({
         join={join}
         onClickRule={handleClickRule}
         onDeleteRule={handleDeleteRule}
-        variableRegistry={variableRegistry}
+        codebook={codebook}
       />
     </div>
 
@@ -87,7 +87,7 @@ Rules.propTypes = {
   type: PropTypes.oneOf(['filter', 'query']),
   rules: PropTypes.array,
   join: PropTypes.string,
-  variableRegistry: PropTypes.object.isRequired,
+  codebook: PropTypes.object.isRequired,
   draftRule: PropTypes.object,
   handleChangeJoin: PropTypes.func.isRequired,
   handleChangeDraft: PropTypes.func.isRequired,

@@ -2,7 +2,7 @@ import uuid from 'uuid';
 import { omit } from 'lodash';
 import { actionCreators as formActions } from './forms';
 import { actionCreators as stageActions } from './stages';
-import { makeGetUsageForType } from '../../../selectors/variableRegistry';
+import { makeGetUsageForType } from '../../../selectors/codebook';
 
 const UPDATE_TYPE = 'UPDATE_TYPE';
 const CREATE_TYPE = 'CREATE_TYPE';
