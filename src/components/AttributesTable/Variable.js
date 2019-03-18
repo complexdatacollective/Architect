@@ -14,7 +14,7 @@ import { actionCreators as actions } from '../../ducks/modules/ui';
 class Variable extends Component {
   static propTypes = {
     unusedVariables: PropTypes.array,
-    label: PropTypes.string,
+    name: PropTypes.string,
     nodeType: PropTypes.string,
     type: PropTypes.string,
     options: PropTypes.array,
@@ -27,12 +27,11 @@ class Variable extends Component {
     onNewVariable: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.any,
-    name: PropTypes.string.isRequired,
     error: PropTypes.string,
   };
 
   static defaultProps = {
-    label: '',
+    name: '',
     error: undefined,
     type: null,
     nodeType: null,
@@ -59,9 +58,8 @@ class Variable extends Component {
       variable,
       validation,
       value,
-      label,
-      type,
       name,
+      type,
       error,
       options,
       nodeType,
@@ -83,12 +81,12 @@ class Variable extends Component {
         className={variableClasses}
         onClick={onToggleEdit}
         id={getFieldId(name)}
-        data-name={`Additional attributes: ${label}`}
+        data-name={`Additional attributes: ${name}`}
       >
         { !this.isNew &&
           <div className="attributes-table-variable__preview">
             <VariablePreview
-              label={label}
+              name={name}
               value={value}
               error={error}
               variable={variable}
@@ -111,7 +109,7 @@ class Variable extends Component {
             variable={variable}
             validation={validation}
             type={type}
-            label={label}
+            name={name}
             onChange={this.handleChange}
             options={options}
           />
@@ -126,13 +124,13 @@ const mapStateToProps = (state, { variablesForNodeType, ...props }) => {
 
   const variable = get(variablesForNodeType, props.variable, {});
   const validation = get(variable, 'validation', {});
-  const label = get(variable, 'label', '');
+  const name = get(variable, 'name', '');
   const type = get(variable, 'type', '');
   const options = get(variable, 'options', null);
 
   return {
     validation,
-    label,
+    name,
     type,
     options,
   };

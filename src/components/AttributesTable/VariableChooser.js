@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getVariablesForNodeType } from '../../selectors/codebook';
 
-const VariableChooser = ({ unusedVariables, labels, onChooseVariable, onNewVariable, show }) => (
+const VariableChooser = ({ unusedVariables, names, onChooseVariable, onNewVariable, show }) => (
   <div className={cx('attributes-table-chooser', { 'attributes-table-chooser--show': show })}>
     { unusedVariables.map((variable, index) => (
       <div
@@ -12,7 +12,7 @@ const VariableChooser = ({ unusedVariables, labels, onChooseVariable, onNewVaria
         onClick={(e) => { e.stopPropagation(); onChooseVariable(variable); }}
         key={variable}
       >
-        {labels[index]}
+        {names[index]}
       </div>
     )) }
     <div
@@ -28,7 +28,7 @@ VariableChooser.propTypes = {
   onChooseVariable: PropTypes.func.isRequired,
   onNewVariable: PropTypes.func.isRequired,
   unusedVariables: PropTypes.array.isRequired,
-  labels: PropTypes.array.isRequired,
+  names: PropTypes.array.isRequired,
   show: PropTypes.bool,
 };
 
@@ -38,11 +38,10 @@ VariableChooser.defaultProps = {
 
 const mapStateToProps = (state, { nodeType, unusedVariables }) => {
   const variablesForNodeType = getVariablesForNodeType(state, nodeType);
-
-  const labels = unusedVariables.map(variable => variablesForNodeType[variable].label);
+  const names = unusedVariables.map(variable => variablesForNodeType[variable].name);
 
   return {
-    labels,
+    names,
   };
 };
 

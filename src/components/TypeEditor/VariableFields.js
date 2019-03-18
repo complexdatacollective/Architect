@@ -1,8 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, formValueSelector, getFormMeta, autofill } from 'redux-form';
+import { formValueSelector, autofill } from 'redux-form';
 import { connect } from 'react-redux';
-import { get } from 'lodash';
 import ValidatedField from '../Form/ValidatedField';
 import * as Fields from '../../ui/components/Fields';
 import * as ArchitectFields from '../Form/Fields';
@@ -28,12 +27,7 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
   'categorical',
 ];
 
-class VariableFields extends PureComponent {
-  handleChangeLabel = (e, value) => {
-    if (this.props.nameTouched) { return; }
-    this.props.autofill('name', safeName(value));
-  }
-
+class VariableFields extends Component {
   handleNormalizeName = value => safeName(value);
 
   render() {
@@ -46,16 +40,6 @@ class VariableFields extends PureComponent {
     return (
       <React.Fragment>
         <Row>
-          <div id={getFieldId('label')} data-name="Variable label" />
-          <ValidatedField
-            name="label"
-            component={Fields.Text}
-            label="Label"
-            onChange={this.handleChangeLabel}
-            validation={{ required: true }}
-          />
-        </Row>
-        <Row>
           <div id={getFieldId('name')} data-name="Variable name" />
           <ValidatedField
             name="name"
@@ -63,13 +47,6 @@ class VariableFields extends PureComponent {
             label="Name"
             normalize={this.handleNormalizeName}
             validation={{ required: true }}
-          />
-        </Row>
-        <Row>
-          <Field
-            name="description"
-            component={Fields.Text}
-            label="Description"
           />
         </Row>
         <Row>
@@ -114,8 +91,6 @@ VariableFields.propTypes = {
   form: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   variableType: PropTypes.string,
   resetOptions: PropTypes.func,
-  autofill: PropTypes.func.isRequired,
-  nameTouched: PropTypes.bool.isRequired,
 };
 
 VariableFields.defaultProps = {
@@ -125,12 +100,9 @@ VariableFields.defaultProps = {
 };
 
 const mapStateToProps = (state, { form }) => {
-  const formMeta = getFormMeta(form)(state);
-  const nameTouched = get(formMeta, 'name.touched', false);
   const variableType = formValueSelector(form)(state, 'type');
 
   return {
-    nameTouched,
     variableType,
   };
 };

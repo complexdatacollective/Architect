@@ -12,7 +12,7 @@ const CategoricalBinPrompts = props => (
     title="Edit Prompt"
     {...props}
   >
-    <h2>EditableList</h2>
+    <h2>Edit Prompts</h2>
     <p>
       Add one or more &quot;prompts&quot; below, to enable your participants to organise nodes.
     </p>

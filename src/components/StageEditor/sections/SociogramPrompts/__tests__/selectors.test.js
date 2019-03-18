@@ -12,15 +12,15 @@ const mockCodebook = {
     [nodeType]: {
       variables: {
         '1234-1234-1': {
-          label: 'my layout',
+          name: 'my layout',
           type: 'layout',
         },
         '1234-1234-2': {
-          label: 'my category',
+          name: 'my category',
           type: 'categorical',
         },
         '1234-1234-3': {
-          label: 'my boolean',
+          name: 'my boolean',
           type: 'boolean',
         },
       },
@@ -28,7 +28,7 @@ const mockCodebook = {
   },
   edge: {
     '1234-5': {
-      label: 'an edge',
+      name: 'an edge',
       color: 'blue',
     },
   },
