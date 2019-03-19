@@ -3,6 +3,13 @@ $color-picker-size: unit(7);
 $color-picker-border-size: 5px;
 
 .#{$component-name} {
+  &__edit {
+    background: var(--input-background);
+    color: var(--input-text);
+    border-radius: 1rem 1rem 0 0;
+    padding: unit(1) 0 0 unit(1);
+  }
+
   &__colors {
     display: flex;
     flex-wrap: wrap;
@@ -48,5 +55,30 @@ $color-picker-border-size: 5px;
 
   &__color-label {
     display: none;
+  }
+
+  &__error {
+    opacity: 0;
+    background: var(--error);
+    color: var(--form-error-text);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard),
+    max-height var(--animation-easing) var(--animation-duration-standard);
+    padding: .5rem .25rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+      max-height: 1.2rem;
+    }
+  }
+
+  &--has-error {
+    .#{$component-name}__edit {
+      border: .1rem solid var(--error);
+    }
+
+    .#{$component-name}__error {
+      opacity: 1;
+    }
   }
 }
