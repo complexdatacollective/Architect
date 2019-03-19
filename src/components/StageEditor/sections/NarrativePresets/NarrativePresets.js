@@ -1,5 +1,6 @@
 import React from 'react';
 import { withProps, compose } from 'recompose';
+import { omit, isEmpty } from 'lodash';
 import PresetPreview from './PresetPreview';
 import PresetFields from './PresetFields';
 import EditableList, { withSubjectNodeType } from '../../../EditableList';
@@ -13,6 +14,13 @@ const narrativePresetTemplate = {
   highlight: [],
 };
 
+const normalizePreset = (values) => {
+  if (!isEmpty(values.groupVariable)) {
+    return omit(values, ['groupVariable']);
+  }
+  return values;
+};
+
 const NarrativePresets = props => (
   <EditableList
     contentId="guidance.editor.narrative_presets"
@@ -21,6 +29,7 @@ const NarrativePresets = props => (
     title="Edit Preset"
     fieldName="presets"
     template={narrativePresetTemplate}
+    normalize={normalizePreset}
     {...props}
   >
     <h2>Narrative Presets</h2>

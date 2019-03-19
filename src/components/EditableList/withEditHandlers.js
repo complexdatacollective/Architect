@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid';
 import {
   compose,
+  defaultProps,
   withHandlers,
 } from 'recompose';
 import { get } from 'lodash';
@@ -49,9 +50,10 @@ const handlers = withHandlers({
     upsert,
     setEditField,
     editField,
+    normalize,
   }) =>
     (value) => {
-      upsert(editField, value);
+      upsert(editField, normalize(value));
       setImmediate(() => {
         setEditField();
       });
@@ -59,6 +61,9 @@ const handlers = withHandlers({
 });
 
 const withEditHandlers = compose(
+  defaultProps({
+    normalize: value => value,
+  }),
   connect(mapStateToProps, mapDispatchToProps),
   handlers,
 );

@@ -13,15 +13,15 @@ const mockCodebook = {
     [nodeType]: {
       variables: {
         '1234-1234-1': {
-          label: 'my layout',
+          name: 'my layout',
           type: 'layout',
         },
         '1234-1234-2': {
-          label: 'my category',
+          name: 'my category',
           type: 'categorical',
         },
         '1234-1234-3': {
-          label: 'my boolean',
+          name: 'my boolean',
           type: 'boolean',
         },
       },
@@ -29,7 +29,7 @@ const mockCodebook = {
   },
   edge: {
     '1234-5': {
-      label: 'an edge',
+      name: 'an edge',
       color: 'blue',
     },
   },
@@ -68,11 +68,17 @@ describe('NarrativePresets', () => {
     it('get group variables for node type', () => {
       const result = getGroupVariablesForNodeType(mockState, { nodeType });
 
-      expect(result).toEqual([{
-        value: '1234-1234-2',
-        label: 'my category',
-        color: '',
-      }]);
+      expect(result).toEqual([
+        {
+          value: '',
+          label: '\u2014 None \u2014',
+        },
+        {
+          value: '1234-1234-2',
+          label: 'my category',
+          color: '',
+        },
+      ]);
     });
 
     it('get edges for node type', () => {

@@ -1,9 +1,8 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Field,
-} from 'redux-form';
+import { compose } from 'recompose';
+import { Field } from 'redux-form';
 import { getFieldId } from '../../../../utils/issues';
 import { ValidatedField } from '../../../Form';
 import * as ArchitectFields from '../../../Form/Fields';
@@ -47,7 +46,6 @@ class PresetFields extends Component {
             name="groupVariable"
             component={ArchitectFields.Select}
             label="Group variable"
-            placeholder="&mdash; Select a group variable &mdash;"
             options={groupVariablesForNodeType}
           />
         </Row>
@@ -90,4 +88,7 @@ PresetFields.defaultProps = {
 
 export { PresetFields };
 
-export default withOptionsForPreset(PresetFields);
+export default compose(
+  withOptionsForPreset,
+  // withChangeGroupVariableHandler,
+)(PresetFields);
