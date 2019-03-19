@@ -97,4 +97,17 @@ export default [
       ),
     },
   },
+  {
+    type: 'Narrative',
+    title: 'Narrative',
+    guidance: {
+      description: (
+        <p>
+          The Narrative Interface is used to guide a conversation with a participants.
+          It does not modify the participant network. You are expected to use your own
+          audio/visual recording equipment.
+        </p>
+      ),
+    },
+  },
 ];

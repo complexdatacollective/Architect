@@ -118,10 +118,16 @@ export default {
       <p>guidance.editor.sociogram_prompt.layout</p>
     </Fragment>
   ),
-  'guidance.editor.sociogram.background': (
+  'guidance.editor.background': (
     <Fragment>
-      <h3>Sociogram Background</h3>
-      <p>guidance.editor.sociogram.background</p>
+      <h3>Background</h3>
+      <p>guidance.editor.background</p>
+    </Fragment>
+  ),
+  'guidance.editor.narrative_behaviours': (
+    <Fragment>
+      <h3>Narrative Behaviours</h3>
+      <p>guidance.editor.narrative_behaviours</p>
     </Fragment>
   ),
   'guidance.editor.sociogram_prompt.edges': (
