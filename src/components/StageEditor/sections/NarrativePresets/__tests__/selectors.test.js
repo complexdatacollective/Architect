@@ -46,27 +46,27 @@ const mockState = {
 describe('NarrativePresets', () => {
   describe('selectors', () => {
     it('get layout variables for node type', () => {
-      const result = getLayoutVariablesForNodeType(mockState, { nodeType });
+      const result = getLayoutVariablesForNodeType(mockState, nodeType);
 
       expect(result).toEqual([{
         value: '1234-1234-1',
         label: 'my layout',
-        color: '',
+        type: 'layout',
       }]);
     });
 
     it('get highlight variables for node type', () => {
-      const result = getHighlightVariablesForNodeType(mockState, { nodeType });
+      const result = getHighlightVariablesForNodeType(mockState, nodeType);
 
       expect(result).toEqual([{
         value: '1234-1234-3',
         label: 'my boolean',
-        color: '',
+        type: 'boolean',
       }]);
     });
 
     it('get group variables for node type', () => {
-      const result = getGroupVariablesForNodeType(mockState, { nodeType });
+      const result = getGroupVariablesForNodeType(mockState, nodeType);
 
       expect(result).toEqual([
         {
@@ -76,13 +76,13 @@ describe('NarrativePresets', () => {
         {
           value: '1234-1234-2',
           label: 'my category',
-          color: '',
+          type: 'categorical',
         },
       ]);
     });
 
     it('get edges for node type', () => {
-      const result = getEdgesForNodeType(mockState, { nodeType });
+      const result = getEdgesForNodeType(mockState, nodeType);
 
       expect(result).toEqual([{
         value: '1234-5',

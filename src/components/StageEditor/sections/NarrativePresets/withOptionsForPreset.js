@@ -7,11 +7,11 @@ import {
 } from './selectors';
 
 
-const mapStateToProps = (state, props) => {
-  const layoutVariblesForNodeType = getLayoutVariablesForNodeType(state, props);
-  const highlightVariablesForNodeType = getHighlightVariablesForNodeType(state, props);
-  const groupVariablesForNodeType = getGroupVariablesForNodeType(state, props);
-  const edgesForNodeType = getEdgesForNodeType(state, props);
+const mapStateToProps = (state, { nodeType }) => {
+  const layoutVariblesForNodeType = getLayoutVariablesForNodeType(state, nodeType);
+  const highlightVariablesForNodeType = getHighlightVariablesForNodeType(state, nodeType);
+  const groupVariablesForNodeType = getGroupVariablesForNodeType(state, nodeType);
+  const edgesForNodeType = getEdgesForNodeType(state, nodeType);
 
   return {
     layoutVariblesForNodeType,
