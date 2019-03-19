@@ -15,7 +15,7 @@ class Item extends Component {
     fieldId: PropTypes.string.isRequired,
     editing: PropTypes.object,
     onToggleItemEdit: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     onChooseItemType: PropTypes.func.isRequired,
     error: PropTypes.object,
     item: PropTypes.shape({
@@ -64,7 +64,7 @@ class Item extends Component {
   render() {
     const {
       fieldId,
-      handleDelete,
+      onDelete,
       spareCapacity,
     } = this.props;
 
@@ -85,7 +85,7 @@ class Item extends Component {
               content={this.item.content}
               type={this.item.type}
               size={this.item.size}
-              onDeleteItem={handleDelete}
+              onDeleteItem={onDelete}
             />
           </div>
         }
