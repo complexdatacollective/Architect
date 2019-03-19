@@ -10,7 +10,6 @@ const getVariablesAsOptions = variables =>
     (variable, id) => ({
       label: variable.name,
       value: id,
-      color: variable.color,
       type: variable.type,
     }),
   );

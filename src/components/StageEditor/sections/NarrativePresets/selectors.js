@@ -1,63 +1,38 @@
-import { get, map, reduce } from 'lodash';
+import { map } from 'lodash';
 import { getCodebook } from '../../../../selectors/protocol';
+import { getVariableOptionsForNodeType } from '../../../../selectors/codebook';
 
-// TODO: refactor this to use new selector
-export const getVariablesForNodeType = (state, props) => {
-  const nodeType = props.nodeType;
-  const codebook = getCodebook(state);
-  return get(codebook, ['node', nodeType, 'variables'], {});
+export const getLayoutVariablesForNodeType = (state, nodeType) => {
+  const variables = getVariableOptionsForNodeType(state, nodeType);
+
+  return variables.filter(item => item.type === 'layout');
 };
 
-const asOption = (value, key) =>
-  ({
-    label: get(value, 'name', ''),
-    value: key,
-    color: get(value, 'color', ''),
-  });
+export const getHighlightVariablesForNodeType = (state, nodeType) => {
+  const variables = getVariableOptionsForNodeType(state, nodeType);
 
-const filterAsOption = rule =>
-  (memo, item, id) => {
-    if (!rule(item)) { return memo; }
-    return [
-      ...memo,
-      asOption(item, id),
-    ];
-  };
-
-export const getLayoutVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props);
-
-  return reduce(
-    variables,
-    filterAsOption(item => item.type === 'layout'),
-    [],
-  );
+  return variables.filter(item => item.type === 'boolean');
 };
 
-export const getHighlightVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props);
+export const getGroupVariablesForNodeType = (state, nodeType) => {
+  const variables = getVariableOptionsForNodeType(state, nodeType);
 
-  return reduce(
-    variables,
-    filterAsOption(item => item.type === 'boolean'),
-    [],
-  );
-};
-
-export const getGroupVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props);
-
-  const options = reduce(
-    variables,
-    filterAsOption(item => item.type === 'categorical'),
-    [{ label: '\u2014 None \u2014', value: '' }],
+  const categoricalOptions = variables.filter(
+    item => item.type === 'categorical',
   );
 
-  return options;
+  return [
+    { label: '\u2014 None \u2014', value: '' },
+    ...categoricalOptions,
+  ];
 };
 
 export const getEdgesForNodeType = (state) => {
   const codebook = getCodebook(state);
 
-  return map(codebook.edge, asOption);
+  return map(codebook.edge, (edge, edgeId) => ({
+    label: edge.name,
+    color: edge.color,
+    value: edgeId,
+  }));
 };
