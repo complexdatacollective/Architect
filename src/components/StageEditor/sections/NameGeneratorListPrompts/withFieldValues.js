@@ -1,15 +1,13 @@
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { pick } from 'lodash';
 
 const makeMapStateToProps = (attributes = []) =>
-  (state, { fieldId, form }) => {
-    const values = formValueSelector(form)(state, fieldId);
+  (state, { form }) => {
+    if (attributes.length === 0) { return {}; }
 
-    // If no attributes are defined, return all of them
-    if (attributes.length === 0) { return values; }
+    const values = formValueSelector(form)(state, ...attributes);
 
-    return pick(values, attributes);
+    return values;
   };
 
 const withFieldState = (attributes = []) =>

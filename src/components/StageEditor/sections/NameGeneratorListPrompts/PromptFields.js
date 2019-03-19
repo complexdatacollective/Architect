@@ -14,8 +14,9 @@ import {
   getExternalPropertiesOptionGetter,
   getSortOrderOptionGetter,
 } from './optionGetters';
-import withFieldValues from './withFieldValues';
 import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
+import withFieldValues from './withFieldValues';
+import withVariableOptions from './withVariableOptions';
 
 class PromptFields extends PureComponent {
   render() {
@@ -23,14 +24,14 @@ class PromptFields extends PureComponent {
       nodeType,
       dataSource,
       cardOptions,
-      externalDataPropertyOptions,
+      variableOptions,
       handleChangeDisplayLabel,
     } = this.props;
 
     const displayLabel = cardOptions && cardOptions.displayLabel;
 
     const additionalPropertiesOptions = getExternalPropertiesOptionGetter(
-      externalDataPropertyOptions.filter(({ value }) => value !== displayLabel),
+      variableOptions.filter(({ value }) => value !== displayLabel),
     );
 
     return (
@@ -92,7 +93,7 @@ class PromptFields extends PureComponent {
                 component={Select}
                 name="cardOptions.displayLabel"
                 id="displayLabel"
-                options={externalDataPropertyOptions}
+                options={variableOptions}
                 validation={{ required: true }}
                 onChange={handleChangeDisplayLabel}
               />
@@ -106,7 +107,7 @@ class PromptFields extends PureComponent {
                 </p>
                 <MultiSelect
                   name="cardOptions.additionalProperties"
-                  maxItems={externalDataPropertyOptions.length - 1}
+                  maxItems={variableOptions.length - 1}
                   properties={[
                     {
                       fieldName: 'variable',
@@ -142,7 +143,7 @@ class PromptFields extends PureComponent {
                   { fieldName: 'property' },
                   { fieldName: 'direction' },
                 ]}
-                options={getSortOrderOptionGetter(externalDataPropertyOptions)}
+                options={getSortOrderOptionGetter(variableOptions)}
               />
             </Row>
             <Row>
@@ -152,7 +153,7 @@ class PromptFields extends PureComponent {
               </p>
               <MultiSelect
                 name="sortOptions.sortableProperties"
-                maxItems={externalDataPropertyOptions.length}
+                maxItems={variableOptions.length}
                 properties={[
                   { fieldName: 'variable' },
                   {
@@ -161,7 +162,7 @@ class PromptFields extends PureComponent {
                     placeholder: 'Label',
                   },
                 ]}
-                options={getExternalPropertiesOptionGetter(externalDataPropertyOptions)}
+                options={getExternalPropertiesOptionGetter(variableOptions)}
               />
             </Row>
           </Group>
@@ -173,7 +174,7 @@ class PromptFields extends PureComponent {
 
 PromptFields.propTypes = {
   nodeType: PropTypes.string,
-  externalDataPropertyOptions: PropTypes.array,
+  variableOptions: PropTypes.array,
   handleChangeDisplayLabel: PropTypes.func.isRequired,
   dataSource: PropTypes.string,
   cardOptions: PropTypes.object,
@@ -183,12 +184,13 @@ PromptFields.defaultProps = {
   nodeType: null,
   dataSource: null,
   cardOptions: {},
-  externalDataPropertyOptions: [],
+  variableOptions: [],
 };
 
 export { PromptFields };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
+  withVariableOptions,
   withDisplayLabelChangeHandler,
 )(PromptFields);

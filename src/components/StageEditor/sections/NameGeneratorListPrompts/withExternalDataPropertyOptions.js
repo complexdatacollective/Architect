@@ -9,6 +9,8 @@ const mapStateToProps = (state, { nodeType }) => {
   };
 };
 
-const withVariableOptions = connect(mapStateToProps);
+const withVariableOptions = connect(
+  mapStateToProps,
+);
 
 export default withVariableOptions;

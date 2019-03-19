@@ -2,13 +2,31 @@
 
 import { get, map, compact, flatMap, uniqBy, memoize } from 'lodash';
 import { createSelector } from 'reselect';
-import { getProtocol } from './protocol';
+import { getProtocol, getCodebook } from './protocol';
+
+const getVariablesAsOptions = variables =>
+  map(
+    variables,
+    (variable, id) => ({
+      label: variable.name,
+      value: id,
+      color: variable.color,
+      type: variable.type,
+    }),
+  );
 
 const getNodeTypes = state =>
-  get(getProtocol(state).codebook, 'node', {});
+  get(getCodebook(state), 'node', {});
 
 const getVariablesForNodeType = (state, nodeType) =>
   get(getNodeTypes(state), [nodeType, 'variables'], {});
+
+const getVariableOptionsForNodeType = (state, nodeType) => {
+  const variables = getVariablesForNodeType(state, nodeType);
+  const options = getVariablesAsOptions(variables);
+
+  return options;
+};
 
 /**
  * Returns "subject" index array for forms, where owner.type === 'form'
@@ -256,6 +274,7 @@ const makeGetObjectLabel = createSelector(
 export {
   getNodeTypes,
   getVariablesForNodeType,
+  getVariableOptionsForNodeType,
   getTypeUsageIndex,
   getSociogramTypeUsageIndex,
   makeGetUsageForType,

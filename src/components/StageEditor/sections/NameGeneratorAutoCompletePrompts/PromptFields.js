@@ -15,6 +15,7 @@ import {
   withFieldValues,
 } from '../NameGeneratorListPrompts';
 import withDisplayLabelChangeHandler from '../NameGeneratorListPrompts/withDisplayLabelChangeHandler';
+import withExternalDataPropertyOptions from '../NameGeneratorListPrompts/withExternalDataPropertyOptions';
 
 class PromptFields extends PureComponent {
   render() {
@@ -176,5 +177,6 @@ export { PromptFields };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
+  withExternalDataPropertyOptions,
   withDisplayLabelChangeHandler,
 )(PromptFields);
