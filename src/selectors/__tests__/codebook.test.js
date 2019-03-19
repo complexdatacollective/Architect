@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
 import {
+  getVariableOptionsForNodeType,
   getTypeUsageIndex,
   makeGetUsageForType,
   makeGetDeleteImpact,
@@ -10,6 +11,17 @@ import {
 const mockStateWithProtocol = {
   protocol: {
     present: {
+      codebook: {
+        node: {
+          bar: {
+            variables: {
+              alpha: { name: 'ALPHA', type: 'text' },
+              bravo: { name: 'BRAVO', type: 'text' },
+              charlie: { name: 'CHARLIE', type: 'location' },
+            },
+          },
+        },
+      },
       stages: [
         {
           id: 'bazz',
@@ -75,6 +87,22 @@ const mockStateWithProtocol = {
 };
 
 describe('codebook selectors', () => {
+  describe('getVariableOptionsForNodeType()', () => {
+    it('extracts variables for nodeType into options list', () => {
+      const nodeType = 'bar';
+      const subject = getVariableOptionsForNodeType(
+        mockStateWithProtocol,
+        nodeType,
+      );
+
+      expect(subject).toEqual([
+        { value: 'alpha', label: 'ALPHA', type: 'text' },
+        { value: 'bravo', label: 'BRAVO', type: 'text' },
+        { value: 'charlie', label: 'CHARLIE', type: 'location' },
+      ]);
+    });
+  });
+
   it('getSociogramTypeUsageIndex()', () => {
     const result = getSociogramTypeUsageIndex(mockStateWithProtocol);
 

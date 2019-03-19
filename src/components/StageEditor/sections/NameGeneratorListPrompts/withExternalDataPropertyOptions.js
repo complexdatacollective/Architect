@@ -1,27 +1,16 @@
-import { get, map } from 'lodash';
 import { connect } from 'react-redux';
-import { getCodebook } from '../../../../selectors/protocol';
-
-const asOptions = variables =>
-  map(
-    variables,
-    (variable, id) => ({ label: variable.name, value: id, color: variable.color }),
-  );
+import { getVariableOptionsForNodeType } from '../../../../selectors/codebook';
 
 const mapStateToProps = (state, { nodeType }) => {
-  const codebook = getCodebook(state);
-
-  const externalDataVariables = get(codebook, ['node', nodeType, 'variables'], {});
-
-  const externalDataPropertyOptions = asOptions(externalDataVariables);
+  const variableOptions = getVariableOptionsForNodeType(state, nodeType);
 
   return {
-    externalDataPropertyOptions,
+    variableOptions,
   };
 };
 
-const withExternalDataPropertyOptions = connect(
+const withVariableOptions = connect(
   mapStateToProps,
 );
 
-export default withExternalDataPropertyOptions;
+export default withVariableOptions;
