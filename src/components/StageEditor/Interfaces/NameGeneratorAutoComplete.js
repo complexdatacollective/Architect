@@ -2,7 +2,7 @@ import {
   Name,
   NodeType,
   NameGeneratorAutoCompletePrompts,
-} from '../sections';
+} from '../../sections';
 
 const NameGeneratorAutoComplete = {
   sections: [

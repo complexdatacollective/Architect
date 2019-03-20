@@ -6,7 +6,7 @@ import { map, get, size } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { Node, Button, Icon } from '../ui/components';
-import FormCard from './StageEditor/sections/Form/FormCard';
+import FormCard from './sections/Form/FormCard';
 import * as Fields from '../ui/components/Fields';
 import { getProtocol } from '../selectors/protocol';
 import Link from './Link';

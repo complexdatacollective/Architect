@@ -2,7 +2,7 @@ import {
   Name,
   NodeType,
   OrdinalBinPrompts,
-} from '../sections';
+} from '../../sections';
 
 const OrdinalBin = {
   sections: [

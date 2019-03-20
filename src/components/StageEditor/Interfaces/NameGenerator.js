@@ -4,7 +4,7 @@ import {
   FormWithQuickAdd,
   NameGeneratorPrompts,
   NodePanels,
-} from '../sections';
+} from '../../sections';
 
 const NameGenerator = {
   sections: [

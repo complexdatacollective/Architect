@@ -2,7 +2,7 @@ import {
   Name,
   NodeType,
   NameGeneratorListPrompts,
-} from '../sections';
+} from '../../sections';
 
 const NameGeneratorList = {
   sections: [
