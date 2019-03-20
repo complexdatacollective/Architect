@@ -399,40 +399,6 @@
       "source": "click_the_thing.mp3"
     }
   },
-  "forms": {
-    "person": {
-      "title": "Add A Person",
-      "entity": "node",
-      "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-      "optionToAddAnother": true,
-      "fields": [
-        {
-          "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-          "component": "Text"
-        },
-        {
-          "variable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
-          "component": "Text"
-        },
-        {
-          "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2",
-          "component": "Number"
-        }
-      ]
-    },
-    "myCustomForm": {
-      "title": "My custom form",
-      "entity": "node",
-      "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-      "optionToAddAnother": false,
-      "fields": [
-        {
-          "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-          "component": "Text"
-        }
-      ]
-    }
-  },
   "stages": [
     {
       "id": "welcome",
@@ -449,7 +415,6 @@
       "id": "namegen1",
       "type": "NameGenerator",
       "label": "NG Closeness",
-      "form": "myCustomForm",
       "subject": {
         "entity": "node",
         "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"

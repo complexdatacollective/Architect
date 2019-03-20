@@ -5,7 +5,6 @@ import {
   defaultProps,
   withHandlers,
 } from 'recompose';
-import { get } from 'lodash';
 import {
   formValueSelector,
   change,
@@ -14,13 +13,9 @@ import {
 const mapStateToProps = (state, { form, fieldName, editField, template = {} }) => {
   const items = formValueSelector(form)(state, fieldName);
   const itemCount = items ? items.length : 0;
+  const item = formValueSelector(form)(state, editField);
 
-  const initialValues = get(
-    { [fieldName]: items },
-    editField,
-    { ...template, id: uuid() },
-  );
-
+  const initialValues = item || { ...template, id: uuid() };
 
   return {
     itemCount,
