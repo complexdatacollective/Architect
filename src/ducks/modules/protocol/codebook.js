@@ -156,6 +156,7 @@ export default function reducer(state = initialState, action = {}) {
         action.configuration,
       );
     case CREATE_VARIABLE: {
+      // Same as update variable?
       const { entity, type, variable } = action.meta;
 
       const variables = {
