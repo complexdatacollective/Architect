@@ -46,9 +46,11 @@ const handlers = withHandlers({
     setEditField,
     editField,
     normalize,
+    onChange,
   }) =>
     (value) => {
       upsert(editField, normalize(value));
+      if (onChange) { onChange(normalize(value)); }
       setImmediate(() => {
         setEditField();
       });
