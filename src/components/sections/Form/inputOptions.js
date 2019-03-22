@@ -51,7 +51,7 @@ const components = {
   },
 };
 
-const getInputsForType = (type) => {
+const getComponentsForType = (type) => {
   switch (type) {
     case 'number':
       return [components.TextInput, components.NumberInput];
@@ -68,7 +68,7 @@ const getInputsForType = (type) => {
   }
 };
 
-const getTypeForInput = (input) => {
+const getTypeForComponent = (input) => {
   switch (input) {
     case components.NumberInput.value:
       return 'number';
@@ -85,7 +85,7 @@ const getTypeForInput = (input) => {
     case components.ToggleButtonGroup.value:
       return 'categorical';
     default:
-      return 'text';
+      return null;
   }
 };
 
@@ -94,8 +94,8 @@ const inputOptions = values(components);
 export {
   components,
   inputOptions,
-  getTypeForInput,
-  getInputsForType,
+  getTypeForComponent,
+  getComponentsForType,
 };
 
 export default inputOptions;

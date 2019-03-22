@@ -32,6 +32,8 @@ const VALIDATIONS_WITH_VALUES = [
   'maxLength',
   'minValue',
   'maxValue',
+  'minSelected',
+  'maxSelected',
 ];
 
 const isValidationWithValue = validation =>

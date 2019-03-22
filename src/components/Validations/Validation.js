@@ -21,7 +21,7 @@ const Validation = ({
   const keyInputProps = { value: itemKey };
 
   const valueInputProps = {
-    value: itemValue,
+    value: itemValue || '',
     onChange: handleValueChange,
   };
 
@@ -57,7 +57,7 @@ Validation.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   options: PropTypes.array,
   itemKey: PropTypes.string,
-  itemValue: PropTypes.string,
+  itemValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Validation.defaultProps = {

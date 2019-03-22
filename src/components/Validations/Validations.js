@@ -112,7 +112,7 @@ Validations.propTypes = {
   name: PropTypes.string.isRequired,
   validationOptions: PropTypes.array,
   value: PropTypes.object,
-  addNew: PropTypes.func.isRequired,
+  addNew: PropTypes.bool.isRequired,
   setAddNew: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
