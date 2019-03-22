@@ -12,9 +12,8 @@ const Validation = ({
   itemKey,
   itemValue,
 }) => {
-  const handleKeyChange = (option) => {
+  const handleKeyChange = option =>
     onUpdate(option.value, itemValue, itemKey);
-  };
 
   const handleValueChange = newValue =>
     onUpdate(itemKey, newValue, itemKey);

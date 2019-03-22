@@ -1,9 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { keys, toPairs } from 'lodash';
+import { keys as getKeys, toPairs, isNull } from 'lodash';
 import { Field } from 'redux-form';
 import { Button } from '../../ui/components';
 import Validation from './Validation';
+
+const validate = (validations) => {
+  const values = toPairs(validations);
+  const check = values.reduce(
+    (acc, [key, value]) => {
+      if (!isNull(value)) { return acc; }
+      return [...acc, key];
+    },
+    [],
+  );
+
+  if (check.length === 0) { return undefined; }
+
+  return `Validations (${check.join(', ')}) must have values`;
+};
 
 const format = (value = {}) => toPairs(value);
 
@@ -19,19 +34,29 @@ const AddItem = props => (
   </Button>
 );
 
-const ValidationsField = ({ input, options, ...rest }) =>
-  input.value.map(([key, value]) => (
-    <Validation
-      key={key}
-      itemKey={key}
-      itemValue={value}
-      options={options}
-      {...rest}
-    />
-  ));
+const ValidationsField = ({
+  input,
+  options,
+  meta: { touched, error },
+  ...rest
+}) => (
+  <div>
+    { input.value.map(([key, value]) => (
+      <Validation
+        key={key}
+        itemKey={key}
+        itemValue={value}
+        options={options}
+        {...rest}
+      />
+    )) }
+    { touched && error }
+  </div>
+);
 
 ValidationsField.propTypes = {
   input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
   options: PropTypes.array,
 };
 
@@ -49,7 +74,7 @@ const Validations = ({
   handleDelete,
   handleAddNew,
 }) => {
-  const usedOptions = keys(value);
+  const usedOptions = getKeys(value);
   const availableOptions = getOptionsWithUsedDisabled(validationOptions, usedOptions);
   const isFull = usedOptions.length === availableOptions.length;
 
@@ -64,6 +89,7 @@ const Validations = ({
           options={availableOptions}
           onUpdate={handleChange}
           onDelete={handleDelete}
+          validate={validate}
         />
 
         { addNew &&
