@@ -7,13 +7,7 @@
     "ego": {
       "variables": {
         "416c8c2db6093444bcff9c212a4f40ed9dd8d9d4": {
-          "name": "Age",
-          "type": "number",
-          "validation": {
-            "required": true,
-            "minValue": 16,
-            "maxValue": 100
-          }
+          "type": "number"
         }
       }
     },
@@ -21,169 +15,69 @@
       "d39a47507bbe27c2a7948861847f3607eda8s8j": {
         "iconVariant": "add-a-person",
         "color": "node-color-seq-3",
-        "variables": [
-          {
-            "id": "acec0568-938b-42f0-bd3a-485e22d775d6",
-            "fieldId": "One",
-            "name": "one",
-            "options": null,
-            "validation": [],
+        "variables": {
+          "acec0568-938b-42f0-bd3a-485e22d775d": {
             "type": "text"
           },
-          {
-            "id": "308eafd0-adb5-4140-92cd-1b5bcd5cd1b5",
-            "fieldId": "two",
-            "name": "two",
-            "options": null,
-            "validation": [],
+          "308eafd0-adb5-4140-92cd-1b5bcd5cd1b5": {
             "type": "text"
           },
-          {
-            "id": "c64b9807-1a41-45b6-a94d-1d2f166dd595",
-            "fieldId": "three",
-            "name": "three",
-            "options": null,
-            "validation": [],
+          "c64b9807-1a41-45b6-a94d-1d2f166dd595": {
             "type": "text"
 
           },
-          {
-            "id": "6150aab8-c698-4e74-8c50-dbdf2656faab",
-            "fieldId": "four",
-            "name": "four",
-            "options": null,
-            "validation": [],
+          "6150aab8-c698-4e74-8c50-dbdf2656faab": {
             "type": "text"
           },
-          {
-            "id": "d8453e47-5b4f-40d5-9b6c-3fed4477b369",
-            "fieldId": "five",
-            "name": "five",
-            "options": null,
-            "validation": [],
+          "d8453e47-5b4f-40d5-9b6c-3fed4477b369": {
             "type": "text"
           },
-          {
-            "id": "91fc8d5a-a5ed-4bda-9d99-2c728bb23170",
-            "fieldId": "six",
-            "name": "six",
-            "options": null,
-            "validation": [],
+          "91fc8d5a-a5ed-4bda-9d99-2c728bb23170": {
             "type": "text"
           },
-          {
-            "id": "0b6a3ac6-5cb6-4614-bf3c-9526bd7bba28",
-            "fieldId": "seven",
-            "name": "seven",
-            "options": null,
-            "validation": [],
+          "0b6a3ac6-5cb6-4614-bf3c-9526bd7bba28": {
             "type": "text"
           },
-          {
-            "id": "0fd01a79-af39-45f8-be20-6adc9557ad75",
-            "fieldId": "eight",
-            "name": "eight",
-            "options": null,
-            "validation": [],
+          "0fd01a79-af39-45f8-be20-6adc9557ad75": {
             "type": "text"
           },
-          {
-            "id": "867fd187-af3a-4ba0-adad-b5e387aeeb1f",
-            "fieldId": "nine",
-            "name": "nine",
-            "options": null,
-            "validation": [],
+          "867fd187-af3a-4ba0-adad-b5e387aeeb1f": {
             "type": "text"
           },
-          {
-            "id": "33bd06bf-5e51-4c91-b796-6aa6033987ac",
-            "fieldId": "ten",
-            "name": "ten",
-            "options": null,
-            "validation": [],
+          "33bd06bf-5e51-4c91-b796-6aa6033987ac": {
             "type": "text"
           },
-          {
-            "id": "9313a4cb-d140-4a27-b15b-9cdd09f1aea6",
-            "fieldId": "eleven",
-            "name": "eleven",
-            "options": null,
-            "validation": [],
+          "9313a4cb-d140-4a27-b15b-9cdd09f1aea6": {
             "type": "text"
           },
-          {
-            "id": "5c453fae-b7bf-4177-8a01-da0081cac839",
-            "fieldId": "twelve",
-            "name": "twelve",
-            "options": null,
-            "validation": [],
+          "5c453fae-b7bf-4177-8a01-da0081cac839": {
             "type": "text"
           },
-          {
-            "id": "a11483a9-c85b-4335-928d-74d2d49cf654",
-            "fieldId": "thirteen",
-            "name": "thirteen",
-            "options": null,
-            "validation": [],
+          "a11483a9-c85b-4335-928d-74d2d49cf654": {
             "type": "text"
           },
-          {
-            "id": "e2a591f2-baab-4174-ab8a-c2c1f2a2f411",
-            "fieldId": "fourteen",
-            "name": "fourteen",
-            "options": null,
-            "validation": [],
+          "e2a591f2-baab-4174-ab8a-c2c1f2a2f411": {
             "type": "text"
           },
-          {
-            "id": "500af489-3528-4748-bf81-38fd720e7422",
-            "fieldId": "fifteen",
-            "name": "fifteen",
-            "options": null,
-            "validation": [],
+          "500af489-3528-4748-bf81-38fd720e7422": {
             "type": "text"
           },
-          {
-            "id": "53590ea1-e9cd-4a59-b47d-412c3b07cf0f",
-            "fieldId": "sixteen",
-            "name": "sixteen",
-            "options": null,
-            "validation": [],
+          "53590ea1-e9cd-4a59-b47d-412c3b07cf0f": {
             "type": "text"
           },
-          {
-            "id": "5b39629c-105e-4eb7-89f6-52e34218a936",
-            "fieldId": "seventeen",
-            "name": "seventeen",
-            "options": null,
-            "validation": [],
+          "5b39629c-105e-4eb7-89f6-52e34218a936": {
             "type": "text"
           },
-          {
-            "id": "d191bb1e-b515-4204-af03-060b9898f0bb",
-            "fieldId": "eighteen",
-            "name": "eighteen",
-            "options": null,
-            "validation": [],
+          "d191bb1e-b515-4204-af03-060b9898f0bb": {
             "type": "text"
           },
-          {
-            "id": "c9088ea5-9446-4b18-98fd-2f05d8fab0fb",
-            "fieldId": "nineteen",
-            "name": "nineteen",
-            "options": null,
-            "validation": [],
+          "c9088ea5-9446-4b18-98fd-2f05d8fab0fb": {
             "type": "text"
           },
-          {
-            "id": "078811de-4b58-4cd5-903d-7ab5798596b2",
-            "fieldId": "twenty",
-            "name": "twenty",
-            "options": null,
-            "validation": [],
+          "078811de-4b58-4cd5-903d-7ab5798596b2": {
             "type": "text"
           }
-        ],
+        },
         "name": "ManyVariables",
         "label": "Many Variables"
       },
@@ -204,58 +98,23 @@
           },
           "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
             "name": "Name",
-            "type": "text",
-            "validation": {
-              "required": true,
-              "minLength": 1,
-              "maxLength": 24
-            }
+            "type": "text"
           },
           "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": {
             "name": "Age",
-            "type": "number",
-            "validation": {
-              "required": true,
-              "minValue": 16,
-              "maxValue": 100
-            }
+            "type": "number"
           },
           "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
             "name": "Nickname",
-            "type": "text",
-            "validation": {
-              "required": true,
-              "minLength": 1,
-              "maxLength": 8
-            }
+            "type": "text"
           },
           "d8bd7e53fb408002394509cf33fa439a15177f0a": {
             "name": "Special Category",
-            "type": "categorical",
-            "validation": {
-              "minSelected": 1
-            },
-            "options": [{
-              "label": "Foo",
-              "value": "foo"
-            },
-            {
-              "label": "Bar",
-              "value": "bar"
-            }]
+            "type": "categorical"
           },
           "3aece568101d62dfbbf73bc98be43a2398f2ffc7": {
             "name": "Some Options",
-            "label": "someoptions",
-            "description": "An ordinal variable.",
-            "type": "ordinal",
-            "options": [{
-              "label": "bazz",
-              "value": "fizz"
-            }],
-            "validation": {
-              "max": 1
-            }
+            "type": "ordinal"
           },
           "5d69e2e1f8a9ea63d425602943831500c3d5c01d": {
             "name": "Close Friend",
@@ -283,12 +142,7 @@
         "variables": {
           "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
             "name": "Name",
-            "type": "text",
-            "validation": {
-              "required": true,
-              "minLength": 1,
-              "maxLength": 24
-            }
+            "type": "text"
           },
           "6469ac84a89748bb67b923c833ed0c778a17aea3": {
             "name": "Location",
@@ -313,14 +167,7 @@
         "variables": {
           "7939c453c8c65765f704f73520eb62fef22db972": {
             "name": "Contact frequency",
-            "type": "ordinal",
-            "options": [
-              { "label": "Very Often", "value": 4 },
-              { "label": "Often", "value": 3 },
-              { "label": "Sometimes", "value": 2 },
-              { "label": "Rarely", "value": 1 },
-              { "label": "Never", "value": -1 }
-             ]
+            "type": "ordinal"
           }
         }
       },
