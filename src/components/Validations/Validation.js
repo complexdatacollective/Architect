@@ -57,7 +57,7 @@ Validation.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   options: PropTypes.array,
   itemKey: PropTypes.string,
-  itemValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  itemValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
 };
 
 Validation.defaultProps = {
