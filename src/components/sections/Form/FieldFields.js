@@ -12,17 +12,6 @@ import { Row } from '../../OrderedList';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
 import inputOptions, { getTypeForComponent } from './inputOptions';
 
-/**
- *  "variable": "2377af3f-3c79-41da-9b0b-6570fb519b93",
-    "component": "Text",
-    "prompt": "What is this person's name?",
-    // reset if input changes
-    "validation": {
-      "required": true,
-      "minLength": 30,
-    },
- */
-
 const mapStateToProps = (state, { form }) => ({
   variableType: getTypeForComponent(
     formValueSelector(form)(state, 'component'),
@@ -74,9 +63,11 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
   </React.Fragment>
 );
 
-PromptFields.propTypes = {};
-
-PromptFields.defaultProps = {};
+PromptFields.propTypes = {
+  form: PropTypes.string.isRequired,
+  variableType: PropTypes.string.isRequired,
+  handleChangeComponent: PropTypes.func.isRequired,
+};
 
 export { PromptFields };
 
