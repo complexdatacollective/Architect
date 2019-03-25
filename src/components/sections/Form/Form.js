@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import uuid from 'uuid';
+import { omit } from 'lodash';
 import TextField from '../../../ui/components/Fields/Text';
 import Guidance from '../../Guidance';
 import ValidatedField from '../../Form/ValidatedField';
@@ -14,6 +15,9 @@ import { getTypeForComponent } from './inputOptions';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 
 const template = () => ({ variable: uuid() });
+
+const normalizeField = field =>
+  omit(field, ['id', 'name']);
 
 const Form = ({ handleChangeFields, form }) => (
   <Guidance contentId="guidance.editor.form">
@@ -38,6 +42,7 @@ const Form = ({ handleChangeFields, form }) => (
         title="Edit Field"
         onChange={handleChangeFields}
         template={template}
+        normalize={normalizeField}
         form={form}
       >
         <h4>Fields</h4>
@@ -56,9 +61,9 @@ Form.propTypes = {
 
 const handlers = {
   handleChangeFields: ({ updateVariable, nodeType }) =>
-    ({ id, component }) => {
+    ({ id, component, name }) => {
       const type = getTypeForComponent(component);
-      const configuration = { type };
+      const configuration = { type, name };
 
       updateVariable(
         'node',
