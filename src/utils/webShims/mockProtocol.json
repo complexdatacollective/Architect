@@ -6,9 +6,6 @@
   "codebook": {
     "ego": {
       "variables": {
-        "416c8c2db6093444bcff9c212a4f40ed9dd8d9d4": {
-          "type": "number"
-        }
       }
     },
     "node": {
@@ -16,67 +13,6 @@
         "iconVariant": "add-a-person",
         "color": "node-color-seq-3",
         "variables": {
-          "acec0568-938b-42f0-bd3a-485e22d775d": {
-            "type": "text"
-          },
-          "308eafd0-adb5-4140-92cd-1b5bcd5cd1b5": {
-            "type": "text"
-          },
-          "c64b9807-1a41-45b6-a94d-1d2f166dd595": {
-            "type": "text"
-
-          },
-          "6150aab8-c698-4e74-8c50-dbdf2656faab": {
-            "type": "text"
-          },
-          "d8453e47-5b4f-40d5-9b6c-3fed4477b369": {
-            "type": "text"
-          },
-          "91fc8d5a-a5ed-4bda-9d99-2c728bb23170": {
-            "type": "text"
-          },
-          "0b6a3ac6-5cb6-4614-bf3c-9526bd7bba28": {
-            "type": "text"
-          },
-          "0fd01a79-af39-45f8-be20-6adc9557ad75": {
-            "type": "text"
-          },
-          "867fd187-af3a-4ba0-adad-b5e387aeeb1f": {
-            "type": "text"
-          },
-          "33bd06bf-5e51-4c91-b796-6aa6033987ac": {
-            "type": "text"
-          },
-          "9313a4cb-d140-4a27-b15b-9cdd09f1aea6": {
-            "type": "text"
-          },
-          "5c453fae-b7bf-4177-8a01-da0081cac839": {
-            "type": "text"
-          },
-          "a11483a9-c85b-4335-928d-74d2d49cf654": {
-            "type": "text"
-          },
-          "e2a591f2-baab-4174-ab8a-c2c1f2a2f411": {
-            "type": "text"
-          },
-          "500af489-3528-4748-bf81-38fd720e7422": {
-            "type": "text"
-          },
-          "53590ea1-e9cd-4a59-b47d-412c3b07cf0f": {
-            "type": "text"
-          },
-          "5b39629c-105e-4eb7-89f6-52e34218a936": {
-            "type": "text"
-          },
-          "d191bb1e-b515-4204-af03-060b9898f0bb": {
-            "type": "text"
-          },
-          "c9088ea5-9446-4b18-98fd-2f05d8fab0fb": {
-            "type": "text"
-          },
-          "078811de-4b58-4cd5-903d-7ab5798596b2": {
-            "type": "text"
-          }
         },
         "name": "ManyVariables",
         "label": "Many Variables"
@@ -88,50 +24,6 @@
         "displayVariable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
         "iconVariant": "add-a-person",
         "variables": {
-          "1d84d7782a65d41d727f7c71fcb38b6aea633a80": {
-            "name": "Closeness Layout",
-            "type": "layout"
-          },
-          "dea16657f68e9caa74a1e785bc8e0ed11382332b": {
-            "name": "Geographical Layout",
-            "type": "layout"
-          },
-          "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
-            "name": "Name",
-            "type": "text"
-          },
-          "5dc56b9aab61867257a3c1bd7c786c9410d38cd2": {
-            "name": "Age",
-            "type": "number"
-          },
-          "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
-            "name": "Nickname",
-            "type": "text"
-          },
-          "d8bd7e53fb408002394509cf33fa439a15177f0a": {
-            "name": "Special Category",
-            "type": "categorical"
-          },
-          "3aece568101d62dfbbf73bc98be43a2398f2ffc7": {
-            "name": "Some Options",
-            "type": "ordinal"
-          },
-          "5d69e2e1f8a9ea63d425602943831500c3d5c01d": {
-            "name": "Close Friend",
-            "type": "boolean"
-          },
-          "ba5397013f9cf10a08ac193cc197c7f97d2d8374": {
-            "name": "Support Friend",
-            "type": "boolean"
-          },
-          "285ecc8323cd69e7e7bfb8e8586023c76fcd86f6": {
-            "name": "Advice Friend",
-            "type": "boolean"
-          },
-          "9ec1f5e83cd1df32d106bbad53e6a9d86003d86d": {
-            "name": "Has given advice",
-            "type": "boolean"
-          }
         }
       },
       "32185118d94a1840ef8a0bff5914fd5a82e8b96c": {
@@ -140,22 +32,6 @@
         "color": "node-color-seq-2",
         "iconVariant": "add-a-place",
         "variables": {
-          "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c": {
-            "name": "Name",
-            "type": "text"
-          },
-          "6469ac84a89748bb67b923c833ed0c778a17aea3": {
-            "name": "Location",
-            "type": "location"
-          },
-          "207b877e13437b35b3fbae5c20219eecd6c828f1": {
-            "name": "Layout",
-            "type": "layout"
-          },
-          "5039d155a71c0a5f7a2b2654ad49cb7ee47a8980": {
-            "name": "Boolean",
-            "type": "boolean"
-          }
         }
       }
     },
@@ -165,10 +41,6 @@
         "label": "Friend",
         "color": "edge-color-seq-1",
         "variables": {
-          "7939c453c8c65765f704f73520eb62fef22db972": {
-            "name": "Contact frequency",
-            "type": "ordinal"
-          }
         }
       },
       "18342d1b3da732537b73fc2e7f7da69f5304e17a": {
@@ -176,10 +48,6 @@
         "label": "Professional",
         "color": "edge-color-seq-2",
         "variables": {
-          "7939c453c8c65765f704f73520eb62fef22db972": {
-            "name": "Contact frequency discription",
-            "type": "text"
-          }
         }
       }
     }
@@ -247,216 +115,5 @@
     }
   },
   "stages": [
-    {
-      "id": "welcome",
-      "label": "Welcome",
-      "type": "Information",
-      "title": "Title for the welcome stage",
-      "items": [
-        { "id": "2", "size": "SMALL", "type": "asset", "content": "79879b313425e99ea0b1b8cede607374eab0b1f3" },
-        { "id": "3", "size": "MEDIUM", "type": "asset", "content": "f65e5c7753fd9db39e7b9bdf6352ec139d49f03d" },
-        { "id": "4", "size": "SMALL", "type": "asset", "content": "c9b7477e17321509df4a4b88731b2ab3674a21f8" }
-      ]
-    },
-    {
-      "id": "namegen1",
-      "type": "NameGenerator",
-      "label": "NG Closeness",
-      "subject": {
-        "entity": "node",
-        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
-      },
-      "panels": [
-        {
-          "title": "Already mentioned",
-          "dataSource": "existing",
-          "filter": {
-            "join": "OR",
-            "rules": [
-              {
-                "type": "alter",
-                "id": "15233783455451",
-                "options": {
-                  "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-                  "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-                  "operator": "EXACTLY",
-                  "value": "Fred"
-                }
-              },
-              {
-                "type": "alter",
-                "id": "15233783569462",
-                "options": {
-                  "type": "32185118d94a1840ef8a0bff5914fd5a82e8b96c",
-                  "variable": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-                  "operator": "NOT",
-                  "value": "Pavillion"
-                }
-              }
-            ]
-          }
-        }
-      ],
-      "prompts": [
-        {
-          "id": "2we",
-          "text": "Within the past 2 weeks, who has provided advice?"
-        }
-      ]
-    },
-    {
-      "id": "4e9d7157aaf18dbcd65a733e9e42d1ed9b777f9f",
-      "type": "CategoricalBin",
-      "subject": {
-        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-        "entity": "node"
-      },
-      "label": "Categorical Bin Example",
-      "prompts": [
-        {
-          "id": "9ae9a824-ae32-4715-b554-ba4b86b0f4a0",
-          "text": "Put nodes in categories"
-        }
-      ]
-    },
-    {
-      "id": "dda5030b5ce1d9f06b39ccaa38f9f432ba0e7167",
-      "type": "OrdinalBin",
-      "subject": {
-        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be",
-        "entity": "node"
-      },
-      "label": "Ordinal Bin Example",
-      "prompts": [
-        {
-          "id": "9ae9a824-ae32-4715-b554-ba4b86b0f4a0",
-          "text": "Put nodes in ordinals"
-        }
-      ]
-    },
-    {
-      "id": "namegenlist1",
-      "type": "NameGeneratorList",
-      "label": "NG Closeness List",
-      "subject": {
-        "entity": "node",
-        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
-      },
-      "prompts": [
-        {
-          "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?",
-          "dataSource": "475fd0720355e5fb2bf96964820e6d82159c2dd2",
-          "showExistingNodes": true,
-          "additionalAttributes": {
-            "5d69e2e1f8a9ea63d425602943831500c3d5c01d": true
-          },
-          "cardOptions": {
-            "displayLabel": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-            "additionalProperties": [
-              {
-                "label": "AGE",
-                "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2"
-              }
-            ]
-          },
-          "sortOptions": {
-            "sortableProperties": [
-              {
-                "label": "AGE",
-                "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "namegenlist2",
-      "type": "NameGeneratorAutoComplete",
-      "label": "NG Closeness AutoComplete",
-      "subject": {
-        "entity": "node",
-        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
-      },
-      "prompts": [
-        {
-          "id": "6su",
-          "text": "Within the past 6 months, who has been supportive?",
-          "dataSource": "475fd0720355e5fb2bf96964820e6d82159c2dd2",
-          "cardOptions": {
-            "displayLabel": "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c",
-            "additionalProperties": [
-              {
-                "label": "AGE",
-                "variable": "5dc56b9aab61867257a3c1bd7c786c9410d38cd2"
-              }
-            ]
-          },
-          "searchOptions": {
-            "matchProperties": [
-              "6ae999552a0d2dca14d62e2bc8b764d377b1dd6c"
-            ],
-            "fuzziness": 0.5
-          }
-        }
-      ]
-    },
-    {
-      "id": "sociogram",
-      "type": "Sociogram",
-      "label": "Sociogram",
-      "subject": {
-        "entity": "node",
-        "type": "d39a47507bbe27c2a7948861847f3607eda8e1be"
-      },
-      "background": {
-        "image": "rubberduck.jpg",
-        "concentricCircles": 4,
-        "skewedTowardCenter": true
-      },
-      "prompts": [
-        {
-          "id": "closeness1",
-          "text": "Position the nodes amongst the concentric circles. Place people you are closer to towards the middle",
-          "layout": {
-            "layoutVariable": "1d84d7782a65d41d727f7c71fcb38b6aea633a80",
-            "allowPositioning": true
-          },
-          "edges": {
-            "display": ["e69867ca7d5a7b0ab60a2a61e7b791c106f7bf64", "18342d1b3da732537b73fc2e7f7da69f5304e17a"],
-            "create": "e69867ca7d5a7b0ab60a2a61e7b791c106f7bf64"
-          },
-          "highlight": {
-            "variable": "9ec1f5e83cd1df32d106bbad53e6a9d86003d86d",
-            "value": true,
-            "allowHighlighting": true
-          },
-          "nodeBinSortOrder": {
-            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "DESC"
-          }
-        },
-        {
-          "id": "closeness2",
-          "text": "Place people you are closer to towards the middle",
-          "layout": {
-            "layoutVariable": "1d84d7782a65d41d727f7c71fcb38b6aea633a80",
-            "allowPositioning": true
-          },
-          "edges": {
-            "display": ["3d9209c4598bfbc38b3c096081bee3a09697e939", "18342d1b3da732537b73fc2e7f7da69f5304e17a"],
-            "create": "3d9209c4598bfbc38b3c096081bee3a09697e939"
-          },
-          "highlight": {
-            "variable": "9ec1f5e83cd1df32d106bbad53e6a9d86003d86d",
-            "value": true,
-            "allowHighlighting": true
-          },
-          "nodeBinSortOrder": {
-            "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": "DESC"
-          }
-        }
-      ]
-    }
   ]
 }
