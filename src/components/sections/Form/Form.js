@@ -9,19 +9,20 @@ import Guidance from '../../Guidance';
 import ValidatedField from '../../Form/ValidatedField';
 import EditableList, { withSubjectNodeType } from '../../EditableList';
 import { getFieldId } from '../../../utils/issues';
+import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import Section from '../Section';
 import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
 import { getTypeForComponent } from './inputOptions';
-import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 
 const template = () => ({ variable: uuid() });
 
 const normalizeField = field =>
   omit(field, ['id', 'name']);
 
-const Form = ({ handleChangeFields, form }) => (
+const Form = ({ handleChangeFields, form, disabled }) => (
   <Guidance contentId="guidance.editor.form">
-    <div className="stage-editor-section">
+    <Section disabled={disabled}>
       <div id={getFieldId('form.title')} data-name="Form title" />
       <h2>Form</h2>
 
@@ -50,13 +51,18 @@ const Form = ({ handleChangeFields, form }) => (
           Create fields for your form here
         </p>
       </EditableList>
-    </div>
+    </Section>
   </Guidance>
 );
 
 Form.propTypes = {
   handleChangeFields: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Form.defaultProps = {
+  disabled: false,
 };
 
 const handlers = {

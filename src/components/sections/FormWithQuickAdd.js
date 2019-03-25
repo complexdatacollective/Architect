@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import cx from 'classnames';
 import { Field, formValueSelector } from 'redux-form';
 import Guidance from '../Guidance';
 import { Toggle } from '../../ui/components/Fields';
 import Form from './Form';
+import Section from './Section';
 
 class FormWithQuickAdd extends PureComponent {
   render() {
@@ -14,15 +14,10 @@ class FormWithQuickAdd extends PureComponent {
       disabled,
     } = this.props;
 
-    const formClasses = cx(
-      'stage-editor-section',
-      { 'stage-editor-section--disabled': disabled },
-    );
-
     return (
-      <div>
+      <React.Fragment>
         <Guidance contentId="guidance.editor.quickAdd">
-          <div className={formClasses}>
+          <Section disabled={disabled}>
             <h2 id="issue-form">Quick Add</h2>
             <p>Should this stage use the quick add function?</p>
             <div className="stage-editor-section-form">
@@ -32,10 +27,10 @@ class FormWithQuickAdd extends PureComponent {
                 label="Enable the quick add function"
               />
             </div>
-          </div>
+          </Section>
         </Guidance>
         { !quickAdd && <Form {...this.props} /> }
-      </div>
+      </React.Fragment>
     );
   }
 }
