@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Text from '../../ui/components/Fields/Text';
+import TextField from '../../ui/components/Fields/Text';
 import SortControl from './SortControl';
 
 class Controls extends Component {
@@ -35,7 +35,7 @@ class Controls extends Component {
           <div className="list-controls__section-name">
             Filter:
           </div>
-          <Text
+          <TextField
             input={{
               value: this.state.query,
               onChange: this.handleUpdateQuery,

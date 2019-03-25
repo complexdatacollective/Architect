@@ -5,7 +5,7 @@ import { formValueSelector, change } from 'redux-form';
 import { withHandlers, compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
-import TextArea from '../../../ui/components/Fields/TextArea';
+import * as Fields from '../../../ui/components/Fields';
 import Select from '../../Form/Fields/Select';
 import Validations from '../../Validations';
 import { Row } from '../../OrderedList';
@@ -33,7 +33,7 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
       <h3 id={getFieldId('prompt')}>Prompt</h3>
       <ValidatedField
         name="prompt"
-        component={TextArea}
+        component={Fields.TextArea}
         placeholder="e.g. What is this person's name?"
         validation={{ required: true }}
       />

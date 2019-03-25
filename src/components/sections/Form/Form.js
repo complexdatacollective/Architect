@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
-import Text from '../../../ui/components/Fields/Text';
 import uuid from 'uuid';
+import TextField from '../../../ui/components/Fields/Text';
 import Guidance from '../../Guidance';
 import ValidatedField from '../../Form/ValidatedField';
 import EditableList, { withSubjectNodeType } from '../../EditableList';
@@ -24,7 +24,7 @@ const Form = ({ handleChangeFields, form }) => (
       <ValidatedField
         name="form.title"
         label="Form title"
-        component={Text}
+        component={TextField}
         placeholder="Enter your title here"
         className="stage-editor-section-title"
         validation={{ required: true }}

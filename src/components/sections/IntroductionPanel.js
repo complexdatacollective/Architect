@@ -3,7 +3,7 @@ import { FormSection } from 'redux-form';
 import Guidance from '../Guidance';
 import { ValidatedField } from '../Form';
 import Markdown from '../Form/Fields/Markdown';
-import Text from '../../ui/components/Fields/Text';
+import TextField from '../../ui/components/Fields/Text';
 import IssueAnchor from '../IssueAnchor';
 
 const Name = () => (
@@ -26,7 +26,7 @@ const Name = () => (
           <ValidatedField
             name="title"
             label="Title"
-            component={Text}
+            component={TextField}
             maxLength="50"
             validation={{ required: true }}
           />
