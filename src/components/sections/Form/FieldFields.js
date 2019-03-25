@@ -12,7 +12,7 @@ import { Row } from '../../OrderedList';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
 import inputOptions, { getTypeForComponent } from './inputOptions';
 
-const mapStateToProps = (state, { form, fieldId }) => ({
+const mapStateToProps = (state, { form }) => ({
   variableType: getTypeForComponent(
     formValueSelector(form)(state, 'component'),
   ),
@@ -27,7 +27,7 @@ const handlers = {
     () => changeField(form, 'validation', {}),
 };
 
-const PromptFields = ({ form, variableType, handleChangeComponent, ...rest }) => (
+const PromptFields = ({ form, variableType, handleChangeComponent }) => (
   <React.Fragment>
     <Row>
       <h3 id={getFieldId('name')}>Variable name</h3>
