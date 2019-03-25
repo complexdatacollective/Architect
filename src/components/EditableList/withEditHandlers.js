@@ -10,12 +10,12 @@ import {
   change,
 } from 'redux-form';
 
-const mapStateToProps = (state, { form, fieldName, editField, template = {} }) => {
+const mapStateToProps = (state, { form, fieldName, editField, template = () => {} }) => {
   const items = formValueSelector(form)(state, fieldName);
   const itemCount = items ? items.length : 0;
   const item = formValueSelector(form)(state, editField);
 
-  const initialValues = item || { ...template, id: uuid() };
+  const initialValues = item || { ...template(), id: uuid() };
 
   return {
     itemCount,

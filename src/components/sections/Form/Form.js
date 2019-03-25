@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import Text from '../../../ui/components/Fields/Text';
+import uuid from 'uuid';
 import Guidance from '../../Guidance';
 import ValidatedField from '../../Form/ValidatedField';
 import EditableList, { withSubjectNodeType } from '../../EditableList';
@@ -11,6 +12,8 @@ import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
 import { getTypeForComponent } from './inputOptions';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+
+const template = () => ({ variable: uuid() });
 
 const Form = ({ handleChangeFields, form }) => (
   <Guidance contentId="guidance.editor.form">
@@ -34,6 +37,7 @@ const Form = ({ handleChangeFields, form }) => (
         fieldName="form.fields"
         title="Edit Field"
         onChange={handleChangeFields}
+        template={template}
         form={form}
       >
         <h4>Fields</h4>

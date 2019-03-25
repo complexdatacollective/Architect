@@ -4,13 +4,15 @@ import EditableList, { withSubjectNodeType } from '../../EditableList';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 
+const template = () => ({ showExistingNodes: true });
+
 const NameGeneratorListPrompts = props => (
   <EditableList
     contentId="guidance.editor.name_generator_list_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
-    template={{ showExistingNodes: true }}
+    template={template}
     {...props}
   >
     <h2>Prompts</h2>

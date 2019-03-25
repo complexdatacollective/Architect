@@ -4,12 +4,14 @@ import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
 import EditableList, { withSubjectNodeType } from '../../EditableList';
 
+const template = () => ({ sortOrder: [] });
+
 const SociogramPrompts = props => (
   <EditableList
     contentId="guidance.editor.sociogram_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
-    template={{ sortOrder: [] }}
+    template={template}
     {...props}
   >
     <h2>Prompts</h2>

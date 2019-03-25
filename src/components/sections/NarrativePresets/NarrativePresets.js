@@ -5,21 +5,21 @@ import PresetPreview from './PresetPreview';
 import PresetFields from './PresetFields';
 import EditableList, { withSubjectNodeType } from '../../EditableList';
 
-const narrativePresetTemplate = {
-  layoutVariable: null,
-  groupVariable: null,
-  edges: {
-    display: [],
-  },
-  highlight: [],
-};
-
 const normalizePreset = (values) => {
   if (!isEmpty(values.groupVariable)) {
     return omit(values, ['groupVariable']);
   }
   return values;
 };
+
+const template = () => ({
+  layoutVariable: null,
+  groupVariable: null,
+  edges: {
+    display: [],
+  },
+  highlight: [],
+});
 
 const NarrativePresets = props => (
   <EditableList
@@ -28,7 +28,7 @@ const NarrativePresets = props => (
     editComponent={PresetFields}
     title="Edit Preset"
     fieldName="presets"
-    template={narrativePresetTemplate}
+    template={template}
     normalize={normalizePreset}
     {...props}
   >

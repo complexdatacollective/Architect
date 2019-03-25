@@ -4,13 +4,15 @@ import EditableList, { withSubjectNodeType } from '../../EditableList';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 
+const template = () => ({ color: 'ord-color-seq-1' });
+
 const OrdinalBinPrompts = props => (
   <EditableList
     contentId="guidance.editor.ordinal_bin_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
-    template={{ color: 'ord-color-seq-1' }}
+    template={template}
     {...props}
   >
     <h2>Prompts</h2>
