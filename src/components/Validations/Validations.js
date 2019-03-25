@@ -80,7 +80,6 @@ const Validations = ({
 
   return (
     <div className="form-fields-multi-select">
-      <div className="form-fields-multi-select__label">Validations</div>
       <div className="form-fields-multi-select__rules">
         <Field
           name={name}
