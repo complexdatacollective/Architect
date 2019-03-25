@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { keys as getKeys, toPairs, isNull } from 'lodash';
 import { Field } from 'redux-form';
 import { Button } from '../../ui/components';
+import FieldError from '../Form/FieldError';
 import Validation from './Validation';
 
 const validate = (validations) => {
@@ -38,30 +40,43 @@ const ValidationsField = ({
   input,
   options,
   meta: { touched, error },
+  children,
   ...rest
-}) => (
-  <div>
-    { input.value.map(([key, value]) => (
-      <Validation
-        key={key}
-        itemKey={key}
-        itemValue={value}
-        options={options}
-        {...rest}
-      />
-    )) }
-    { touched && error }
-  </div>
-);
+}) => {
+  const fieldClassNames = cx(
+    'form-fields-multi-select__field',
+    { 'form-fields-multi-select__field--has-error': touched && error },
+  );
+
+  return (
+    <div className={fieldClassNames}>
+      <div className="form-fields-multi-select__rules">
+        { input.value.map(([key, value]) => (
+          <Validation
+            key={key}
+            itemKey={key}
+            itemValue={value}
+            options={options}
+            {...rest}
+          />
+        )) }
+        {children}
+      </div>
+      <FieldError show={touched && error} error={error} />
+    </div>
+  );
+};
 
 ValidationsField.propTypes = {
   input: PropTypes.object.isRequired,
   meta: PropTypes.object.isRequired,
   options: PropTypes.array,
+  children: PropTypes.node,
 };
 
 ValidationsField.defaultProps = {
   options: [],
+  children: null,
 };
 
 const Validations = ({
@@ -80,17 +95,15 @@ const Validations = ({
 
   return (
     <div className="form-fields-multi-select">
-      <div className="form-fields-multi-select__rules">
-        <Field
-          name={name}
-          component={ValidationsField}
-          format={format}
-          options={availableOptions}
-          onUpdate={handleChange}
-          onDelete={handleDelete}
-          validate={validate}
-        />
-
+      <Field
+        name={name}
+        component={ValidationsField}
+        format={format}
+        options={availableOptions}
+        onUpdate={handleChange}
+        onDelete={handleDelete}
+        validate={validate}
+      >
         { addNew &&
           <Validation
             onUpdate={handleAddNew}
@@ -98,7 +111,7 @@ const Validations = ({
             options={availableOptions}
           />
         }
-      </div>
+      </Field>
 
       { !isFull &&
         <AddItem onClick={() => setAddNew(true)} />

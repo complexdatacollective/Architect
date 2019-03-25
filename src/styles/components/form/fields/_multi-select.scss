@@ -1,14 +1,14 @@
-$component-name: form-fields-multi-select;
+$component-name: 'form-fields-multi-select';
 
 .#{$component-name} {
   --form-control: var(--color-platinum--dark);
-
-  @include form-field;
   display: block;
 
   &__label {
     @include preset('title-4');
     font-weight: 600;
+    display: block;
+    margin: 0 0 unit(1);
   }
 
   button {
@@ -16,7 +16,7 @@ $component-name: form-fields-multi-select;
   }
 
   &__rules {
-    margin: unit(1) 0;
+    margin: unit(-1) 0 unit(1);
   }
 
   &__rule {
@@ -25,6 +25,7 @@ $component-name: form-fields-multi-select;
     background-color: var(--form-control);
     border-radius: unit(1);
     z-index: var(--z-fx);
+    transition: background-color var(--animation-easing) var(--animation-duration-standard);
 
     &-control {
       flex-grow: 0;
@@ -99,6 +100,22 @@ $component-name: form-fields-multi-select;
       width: unit(2);
       height: unit(2);
       margin-right: unit(1);
+    }
+  }
+
+  &__field--has-error {
+    .form-field-error {
+      margin: unit(1) 0;
+      border-radius: unit(1);
+    }
+
+    .#{$component-name}__rule {
+      background-color: var(--error);
+    }
+
+    .#{$component-name}__delete {
+      background-color: transparent;
+      filter: brightness(100);
     }
   }
 
