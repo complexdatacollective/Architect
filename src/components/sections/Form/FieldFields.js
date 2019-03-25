@@ -42,7 +42,7 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
       <h3 id={getFieldId('prompt')}>Prompt</h3>
       <ValidatedField
         name="prompt"
-        component={Fields.TextArea}
+        component={Fields.Text}
         placeholder="e.g. What is this person's name?"
         validation={{ required: true }}
       />
