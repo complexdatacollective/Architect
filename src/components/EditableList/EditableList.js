@@ -44,6 +44,7 @@ class EditableList extends PureComponent {
       children,
       upsert,
       title,
+      validation,
       itemCount,
       setEditField,
       initialValues,
@@ -76,7 +77,7 @@ class EditableList extends PureComponent {
                   name={fieldName}
                   component={ListComponent}
                   item={PreviewComponent}
-                  validation={{ notEmpty }}
+                  validation={validation}
                   onClickPrompt={handleEditField}
                   editField={editField}
                   {...rest}
@@ -120,6 +121,7 @@ EditableList.propTypes = {
   children: PropTypes.node,
   previewComponent: PropTypes.any.isRequired,
   editComponent: PropTypes.any.isRequired,
+  validation: PropTypes.object,
 };
 
 EditableList.defaultProps = {
@@ -128,6 +130,7 @@ EditableList.defaultProps = {
   children: null,
   title: null,
   sortMode: 'manual',
+  validation: { notEmpty },
 };
 
 const withDefaultFieldName = defaultProps({
