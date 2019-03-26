@@ -14,6 +14,14 @@
     margin-top: 0;
   }
 
+  &--group {
+    margin-left: unit(-2);
+    margin-right: unit(-2);
+    padding: unit(2);
+    border: unit(.2) solid var(--background-alt);
+    border-radius: unit(1);
+  }
+
   // .form-field-container {
   //   margin-bottom: 0;
 

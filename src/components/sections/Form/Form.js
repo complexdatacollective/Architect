@@ -21,8 +21,8 @@ const normalizeField = field =>
   omit(field, ['id', 'name']);
 
 const Form = ({ handleChangeFields, form, disabled }) => (
-    <Section disabled={disabled}>
   <Guidance contentId="guidance.section.form">
+    <Section disabled={disabled} group>
       <div id={getFieldId('form.title')} data-name="Form title" />
       <h2>Form</h2>
 
