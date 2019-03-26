@@ -14,11 +14,15 @@ import Guidance from '../../Guidance';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
 import inputOptions, { getTypeForComponent, isVariableTypeWithOptions } from './inputOptions';
 
-const mapStateToProps = (state, { form }) => ({
-  variableType: getTypeForComponent(
-    formValueSelector(form)(state, 'component'),
-  ),
-});
+const mapStateToProps = (state, { form }) => {
+  const formSelector = formValueSelector(form);
+  const component = formSelector(state, 'component');
+  const variableType = getTypeForComponent(component);
+
+  return {
+    variableType,
+  };
+};
 
 const mapDispatchToProps = {
   changeField: change,
@@ -26,7 +30,10 @@ const mapDispatchToProps = {
 
 const handlers = {
   handleChangeComponent: ({ changeField, form }) =>
-    () => changeField(form, 'validation', {}),
+    () => {
+      changeField(form, 'options', null);
+      changeField(form, 'validation', {});
+    },
 };
 
 const PromptFields = ({ form, variableType, handleChangeComponent }) => (
@@ -40,7 +47,7 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
           component={Fields.Text}
           placeholder="e.g. Name"
           validation={{ required: true }}
-          // safename
+          // TODO: safename
         />
       </Row>
     </Guidance>

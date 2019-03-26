@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import { compose, withHandlers } from 'recompose';
 import uuid from 'uuid';
-import { omit } from 'lodash';
+import { omit, get } from 'lodash';
 import TextField from '../../../ui/components/Fields/Text';
 import Guidance from '../../Guidance';
 import ValidatedField from '../../Form/ValidatedField';
@@ -14,13 +15,32 @@ import Section from '../Section';
 import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
 import { getTypeForComponent } from './inputOptions';
+import { getCodebook } from '../../../selectors/protocol';
 
 const template = () => ({ variable: uuid() });
 
 const normalizeField = field =>
   omit(field, ['id', 'name']);
 
-const Form = ({ handleChangeFields, form, disabled }) => (
+// Merge item with variable info from codebook
+const itemSelector = nodeType =>
+  (state, { form, editField }) => {
+    const item = formValueSelector(form)(state, editField);
+    const codebook = getCodebook(state);
+    const variable = item && item.variable;
+    const name = variable
+      ? get(codebook, ['node', nodeType, 'variables', variable, 'name'], '')
+      : '';
+
+    if (!item) { return null; }
+
+    return {
+      ...item,
+      name,
+    };
+  };
+
+const Form = ({ handleChangeFields, form, disabled, nodeType }) => (
   <Guidance contentId="guidance.section.form">
     <Section disabled={disabled} group>
       <div id={getFieldId('form.title')} data-name="Form title" />
@@ -43,6 +63,7 @@ const Form = ({ handleChangeFields, form, disabled }) => (
         onChange={handleChangeFields}
         template={template}
         normalize={normalizeField}
+        itemSelector={itemSelector(nodeType)}
         form={form}
       >
         <h4>Fields</h4>
@@ -66,14 +87,14 @@ Form.defaultProps = {
 
 const handlers = {
   handleChangeFields: ({ updateVariable, nodeType }) =>
-    ({ id, component, name }) => {
+    ({ variable, component, name }) => {
       const type = getTypeForComponent(component);
       const configuration = { type, name };
 
       updateVariable(
         'node',
         nodeType,
-        id,
+        variable,
         configuration,
       );
     },
