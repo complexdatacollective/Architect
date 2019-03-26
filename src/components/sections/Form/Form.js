@@ -21,8 +21,8 @@ const normalizeField = field =>
   omit(field, ['id', 'name']);
 
 const Form = ({ handleChangeFields, form, disabled }) => (
-  <Guidance contentId="guidance.editor.form">
     <Section disabled={disabled}>
+  <Guidance contentId="guidance.section.form">
       <div id={getFieldId('form.title')} data-name="Form title" />
       <h2>Form</h2>
 
@@ -36,7 +36,6 @@ const Form = ({ handleChangeFields, form, disabled }) => (
       />
 
       <EditableList
-        contentId="guidance.editor.section.form"
         editComponent={FieldFields}
         previewComponent={FieldPreview}
         fieldName="form.fields"

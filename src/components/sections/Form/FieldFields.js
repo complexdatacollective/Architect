@@ -9,6 +9,7 @@ import * as Fields from '../../../ui/components/Fields';
 import Select from '../../Form/Fields/Select';
 import Validations from '../../Validations';
 import { Row } from '../../OrderedList';
+import Guidance from '../../Guidance';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
 import inputOptions, { getTypeForComponent } from './inputOptions';
 
@@ -29,45 +30,58 @@ const handlers = {
 
 const PromptFields = ({ form, variableType, handleChangeComponent }) => (
   <React.Fragment>
-    <Row>
-      <h3 id={getFieldId('name')}>Variable name</h3>
-      <ValidatedField
-        name="name"
-        component={Fields.Text}
-        placeholder="e.g. Name"
-        validation={{ required: true }}
-      />
-    </Row>
-    <Row>
-      <h3 id={getFieldId('prompt')}>Prompt</h3>
-      <ValidatedField
-        name="prompt"
-        component={Fields.Text}
-        placeholder="e.g. What is this person's name?"
-        validation={{ required: true }}
-      />
-    </Row>
-    <Row>
-      <h3 id={getFieldId('component')}>Input component</h3>
-      <ValidatedField
-        name="component"
-        component={Select}
-        placeholder="Select component"
-        options={inputOptions}
-        selectOptionComponent={SelectOptionImage}
-        validation={{ required: true }}
-        onChange={handleChangeComponent}
-      />
-    </Row>
-    { variableType &&
+    <Guidance contentId="guidance.section.form.field.name">
       <Row>
-        <h3 id={getFieldId('validation')}>Validation</h3>
-        <Validations
-          form={form}
-          name="validation"
-          variableType={variableType}
+        <h3 id={getFieldId('name')}>Variable name</h3>
+        <p>Enter a name for this variable which will be used to export data</p>
+        <ValidatedField
+          name="name"
+          component={Fields.Text}
+          placeholder="e.g. Name"
+          validation={{ required: true }}
+          // safename
         />
       </Row>
+    </Guidance>
+    <Guidance contentId="guidance.section.form.field.prompt">
+      <Row>
+        <h3 id={getFieldId('prompt')}>Prompt</h3>
+        <p>Enter question for the particpant. e.g. What is this person&apos;s name?</p>
+        <ValidatedField
+          name="prompt"
+          component={Fields.Text}
+          placeholder="What is this person's name?"
+          validation={{ required: true }}
+        />
+      </Row>
+    </Guidance>
+    <Guidance contentId="guidance.section.form.field.component">
+      <Row>
+        <h3 id={getFieldId('component')}>Input control</h3>
+        <p>Choose a control to collect the answer</p>
+        <ValidatedField
+          name="component"
+          component={Select}
+          placeholder="Select component"
+          options={inputOptions}
+          selectOptionComponent={SelectOptionImage}
+          validation={{ required: true }}
+          onChange={handleChangeComponent}
+        />
+      </Row>
+    </Guidance>
+    { variableType &&
+      <Guidance contentId="guidance.section.form.field.validation">
+        <Row>
+          <h3 id={getFieldId('validation')}>Validation</h3>
+          <p>Select any input requirements that you would like to enforce</p>
+          <Validations
+            form={form}
+            name="validation"
+            variableType={variableType}
+          />
+        </Row>
+      </Guidance>
     }
   </React.Fragment>
 );

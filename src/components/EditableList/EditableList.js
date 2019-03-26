@@ -6,12 +6,12 @@ import {
 } from 'recompose';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
 import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
+import Section from '../sections/Section'; // Should this exist out of sections if it's used here?
 import Window from './Window';
 import Form, { formName } from './Form';
 import withEditHandlers from './withEditHandlers';
@@ -53,59 +53,62 @@ class EditableList extends PureComponent {
       ...rest
     } = this.props;
 
-    const stageEditorStyles = cx(
-      'stage-editor-section',
-      { 'stage-editor-section--disabled': disabled },
-    );
-
     const isEditing = !!editField;
 
     const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
 
+    const editableListSection = (
+      <Section disabled={disabled}>
+        <Flipper
+          flipKey={isEditing}
+          portalKey="editable-list"
+        >
+          <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
+          {children}
+          <div className="editable-list">
+            <div className="editable-list__items">
+              <ValidatedFieldArray
+                name={fieldName}
+                component={ListComponent}
+                item={PreviewComponent}
+                validation={validation}
+                onClickPrompt={handleEditField}
+                editField={editField}
+                {...rest}
+              />
+            </div>
+            <Flipped flipId={null}>
+              <NewButton onClick={handleAddNew} />
+            </Flipped>
+          </div>
+          <Window show={!!editField}>
+            <Form
+              initialValues={initialValues}
+              flipId={editField}
+              title={title}
+              onSubmit={handleUpdate}
+              onSubmitFail={handleSubmitFail}
+              onCancel={handleResetEditField}
+            >
+              <EditComponent
+                {...rest}
+                form={formName}
+                fieldId={editField}
+                onComplete={handleResetEditField}
+              />
+            </Form>
+          </Window>
+        </Flipper>
+      </Section>
+    );
+
+    if (!contentId) {
+      return editableListSection;
+    }
+
     return (
       <Guidance contentId={contentId}>
-        <div className={stageEditorStyles}>
-          <Flipper
-            flipKey={isEditing}
-            portalKey="editable-list"
-          >
-            <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
-            {children}
-            <div className="editable-list">
-              <div className="editable-list__items">
-                <ValidatedFieldArray
-                  name={fieldName}
-                  component={ListComponent}
-                  item={PreviewComponent}
-                  validation={validation}
-                  onClickPrompt={handleEditField}
-                  editField={editField}
-                  {...rest}
-                />
-              </div>
-              <Flipped flipId={null}>
-                <NewButton onClick={handleAddNew} />
-              </Flipped>
-            </div>
-            <Window show={!!editField}>
-              <Form
-                initialValues={initialValues}
-                flipId={editField}
-                title={title}
-                onSubmit={handleUpdate}
-                onSubmitFail={handleSubmitFail}
-                onCancel={handleResetEditField}
-              >
-                <EditComponent
-                  {...rest}
-                  form={formName}
-                  fieldId={editField}
-                  onComplete={handleResetEditField}
-                />
-              </Form>
-            </Window>
-          </Flipper>
-        </div>
+        {editableListSection}
       </Guidance>
     );
   }
