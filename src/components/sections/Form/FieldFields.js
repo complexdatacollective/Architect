@@ -7,11 +7,12 @@ import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import * as Fields from '../../../ui/components/Fields';
 import Select from '../../Form/Fields/Select';
+import Options from '../../Options';
 import Validations from '../../Validations';
 import { Row } from '../../OrderedList';
 import Guidance from '../../Guidance';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
-import inputOptions, { getTypeForComponent } from './inputOptions';
+import inputOptions, { getTypeForComponent, isVariableTypeWithOptions } from './inputOptions';
 
 const mapStateToProps = (state, { form }) => ({
   variableType: getTypeForComponent(
@@ -70,6 +71,19 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
         />
       </Row>
     </Guidance>
+    { isVariableTypeWithOptions(variableType) &&
+      <Guidance contentId="guidance.section.form.field.Options">
+        <Row>
+          <h3 id={getFieldId('options')}>Options</h3>
+          <p>Create some options for this input control</p>
+          <Options
+            name="options"
+            label="Options"
+            meta={{ form }}
+          />
+        </Row>
+      </Guidance>
+    }
     { variableType &&
       <Guidance contentId="guidance.section.form.field.validation">
         <Row>

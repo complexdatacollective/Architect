@@ -1,6 +1,6 @@
 import { values } from 'lodash';
 
-const components = {
+const COMPONENTS = {
   NumberInput: {
     label: 'Number Input',
     value: 'Number',
@@ -51,51 +51,61 @@ const components = {
   },
 };
 
+const VARIABLE_TYPES_WITH_OPTIONS = [
+  'ordinal',
+  'categorical',
+];
+
 const getComponentsForType = (type) => {
   switch (type) {
     case 'number':
-      return [components.TextInput, components.NumberInput];
+      return [COMPONENTS.TextInput, COMPONENTS.NumberInput];
     case 'text':
-      return [components.TextInput];
+      return [COMPONENTS.TextInput];
     case 'boolean':
-      return [components.Checkbox, components.Toggle, components.ToggleButton];
+      return [COMPONENTS.Checkbox, COMPONENTS.Toggle, COMPONENTS.ToggleButton];
     case 'ordinal':
-      return [components.RadioGroup];
+      return [COMPONENTS.RadioGroup];
     case 'categorical':
-      return [components.CheckboxGroup, components.ToggleButtonGroup];
+      return [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup];
     default:
-      return [components.TextInput];
+      return [COMPONENTS.TextInput];
   }
 };
 
 const getTypeForComponent = (input) => {
   switch (input) {
-    case components.NumberInput.value:
+    case COMPONENTS.NumberInput.value:
       return 'number';
-    case components.TextInput.value:
+    case COMPONENTS.TextInput.value:
       return 'text';
-    case components.Checkbox.value:
-    case components.Toggle.value:
-    case components.ToggleButton.value:
+    case COMPONENTS.Checkbox.value:
+    case COMPONENTS.Toggle.value:
+    case COMPONENTS.ToggleButton.value:
       return 'boolean';
-    case components.RadioGroup.value:
+    case COMPONENTS.RadioGroup.value:
       return 'ordinal';
     case 'categorical':
-    case components.CheckboxGroup.value:
-    case components.ToggleButtonGroup.value:
+    case COMPONENTS.CheckboxGroup.value:
+    case COMPONENTS.ToggleButtonGroup.value:
       return 'categorical';
     default:
       return null;
   }
 };
 
-const inputOptions = values(components);
+const isVariableTypeWithOptions = variableType =>
+  VARIABLE_TYPES_WITH_OPTIONS.includes(variableType);
+
+const inputOptions = values(COMPONENTS);
 
 export {
-  components,
+  COMPONENTS,
+  VARIABLE_TYPES_WITH_OPTIONS,
   inputOptions,
   getTypeForComponent,
   getComponentsForType,
+  isVariableTypeWithOptions,
 };
 
 export default inputOptions;
