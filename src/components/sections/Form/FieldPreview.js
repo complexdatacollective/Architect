@@ -1,8 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
 import { Field } from 'redux-form';
 import Preview from '../../EditableList/Preview';
+import Badge from '../../Badge';
+import { getColorForType, getTypeForComponent } from './inputOptions';
+
+const PreviewFieldComponent = ({
+  input: {
+    value,
+  },
+}) => {
+  const type = getTypeForComponent(value.component);
+
+  return (
+    <div>
+      {value.prompt}
+      <Badge color={getColorForType(type)}>{value.component}:{type}</Badge>
+    </div>
+  );
+};
+
+PreviewFieldComponent.propTypes = {
+  input: PropTypes.object.isRequired,
+};
 
 class PromptPreview extends Preview {
   preview() {
@@ -10,8 +30,8 @@ class PromptPreview extends Preview {
 
     return (
       <Field
-        name={`${fieldId}.prompt`}
-        component={field => <Markdown source={field.input.value} />}
+        name={fieldId}
+        component={PreviewFieldComponent}
       />
     );
   }

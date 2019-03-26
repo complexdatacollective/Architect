@@ -99,12 +99,28 @@ const isVariableTypeWithOptions = variableType =>
 
 const inputOptions = values(COMPONENTS);
 
+const getColorForType = (type) => {
+  switch (type) {
+    case 'number':
+    case 'text':
+      return 'var(--color-mustard--dark)';
+    case 'boolean':
+      return 'var(--color-sea-green)';
+    case 'ordinal':
+    case 'categorical':
+      return 'var(--color-sea-green--dark)';
+    default:
+      return 'var(--color-slate-blue--dark)';
+  }
+};
+
 export {
   COMPONENTS,
   VARIABLE_TYPES_WITH_OPTIONS,
   inputOptions,
   getTypeForComponent,
   getComponentsForType,
+  getColorForType,
   isVariableTypeWithOptions,
 };
 

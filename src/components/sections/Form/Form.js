@@ -79,6 +79,7 @@ Form.propTypes = {
   handleChangeFields: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  nodeType: PropTypes.string.isRequired,
 };
 
 Form.defaultProps = {
