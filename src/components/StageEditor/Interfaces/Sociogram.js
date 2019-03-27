@@ -3,7 +3,7 @@ import {
   Background,
   NodeType,
   SociogramPrompts,
-} from '../sections';
+} from '../../sections';
 
 const Sociogram = {
   sections: [

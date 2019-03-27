@@ -1,6 +1,31 @@
 import React, { Fragment } from 'react';
 
 export default {
+  'guidance.section.form': (
+    <p>
+      guidance.section.form
+    </p>
+  ),
+  'guidance.section.form.field.name': (
+    <p>
+      guidance.section.form.field.name
+    </p>
+  ),
+  'guidance.section.form.field.prompt': (
+    <p>
+      guidance.section.form.field.prompt
+    </p>
+  ),
+  'guidance.section.form.field.component': (
+    <p>
+      guidance.section.form.field.component
+    </p>
+  ),
+  'guidance.section.form.field.validation': (
+    <p>
+      guidance.section.form.field.validation
+    </p>
+  ),
   'guidance.editor.name': (
     <Fragment>
       <h3>Naming Your Stage</h3>
@@ -71,26 +96,6 @@ export default {
       <p>This function bypasses the new node form, and no other node attribute data collection is
         possible at the time the node is created (although it can of course be collected in future
         stages).
-      </p>
-    </Fragment>
-  ),
-  'guidance.editor.form': (
-    <Fragment>
-      <h3>Choosing a Form</h3>
-      <p>
-        Now you have selected a node type, you must decide which form is shown to the participant
-        when they create a new node.
-      </p>
-      <p>
-        By default, Network Canvas will generate a node form for you, which will contain all of the
-        variables you have assigned to this node type in the variable registry. If this is
-        appropriate to your needs, you can skip this section.
-      </p>
-      <p>
-        However, you should consider which variables must be collected here, and which are better
-        collected later, using a specific interview stage. Be mindful that asking the participant to
-        fill out a long form each time they create a new node will dramatically increase response
-        burden.
       </p>
     </Fragment>
   ),

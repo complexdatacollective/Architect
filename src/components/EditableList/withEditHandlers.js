@@ -5,22 +5,16 @@ import {
   defaultProps,
   withHandlers,
 } from 'recompose';
-import { get } from 'lodash';
 import {
   formValueSelector,
   change,
 } from 'redux-form';
 
-const mapStateToProps = (state, { form, fieldName, editField, template = {} }) => {
+const mapStateToProps = (state, { form, fieldName, itemSelector, editField, template }) => {
   const items = formValueSelector(form)(state, fieldName);
   const itemCount = items ? items.length : 0;
-
-  const initialValues = get(
-    { [fieldName]: items },
-    editField,
-    { ...template, id: uuid() },
-  );
-
+  const item = itemSelector(state, { form, editField });
+  const initialValues = item || { ...template(), id: uuid() };
 
   return {
     itemCount,
@@ -51,9 +45,11 @@ const handlers = withHandlers({
     setEditField,
     editField,
     normalize,
+    onChange,
   }) =>
     (value) => {
       upsert(editField, normalize(value));
+      if (onChange) { onChange(value); }
       setImmediate(() => {
         setEditField();
       });
@@ -63,6 +59,9 @@ const handlers = withHandlers({
 const withEditHandlers = compose(
   defaultProps({
     normalize: value => value,
+    template: () => {},
+    itemSelector: (state, { form, editField }) =>
+      formValueSelector(form)(state, editField),
   }),
   connect(mapStateToProps, mapDispatchToProps),
   handlers,

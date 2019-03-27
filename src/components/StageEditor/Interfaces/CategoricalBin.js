@@ -2,7 +2,7 @@ import {
   Name,
   NodeType,
   CategoricalBinPrompts,
-} from '../sections';
+} from '../../sections';
 
 const CategoricalBin = {
   sections: [

@@ -2,7 +2,7 @@ import {
   Name,
   Title,
   ContentGrid,
-} from '../sections';
+} from '../../sections';
 
 const Information = {
   sections: [

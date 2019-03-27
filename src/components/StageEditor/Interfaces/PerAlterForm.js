@@ -3,7 +3,7 @@ import {
   NodeType,
   Form,
   IntroductionPanel,
-} from '../sections';
+} from '../../sections';
 
 const PerAlterForm = {
   sections: [
