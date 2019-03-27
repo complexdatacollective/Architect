@@ -24,6 +24,10 @@
         "displayVariable": "7428c4145a49b9d07e4f88033b7fc97aa98b6b99",
         "iconVariant": "add-a-person",
         "variables": {
+          "7428c4145a49b9d07e4f88033b7fc97aa98b6b99": {
+            "name": "Nickname",
+            "type": "text"
+          }
         }
       },
       "32185118d94a1840ef8a0bff5914fd5a82e8b96c": {

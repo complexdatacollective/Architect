@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import ReactSelect, { components as ReactSelectComponents } from 'react-select';
+import { components as ReactSelectComponents } from 'react-select';
+import CreatableSelect from 'react-select/lib/Creatable';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../../../ui/components/Icon';
@@ -30,6 +31,7 @@ class Select extends PureComponent {
     options: PropTypes.array,
     selectOptionComponent: PropTypes.any,
     input: PropTypes.object,
+    onCreateOption: PropTypes.func.isRequired,
     label: PropTypes.string,
     children: PropTypes.node,
     meta: PropTypes.object,
@@ -52,6 +54,11 @@ class Select extends PureComponent {
   handleChange = option =>
     this.props.input.onChange(option.value);
 
+  handleCreateOption = (value) => {
+    const result = this.props.onCreateOption(value);
+    this.props.input.onChange(result);
+  }
+
   handleBlur = () => {
     if (!this.props.input.onBlur) { return; }
     this.props.input.onBlur(this.props.input.value);
@@ -65,6 +72,7 @@ class Select extends PureComponent {
       options,
       selectOptionComponent,
       label,
+      onCreateOption,
       meta: { invalid, error, touched },
       ...rest
     } = this.props;
@@ -82,7 +90,7 @@ class Select extends PureComponent {
         { label &&
           <h4>{label}</h4>
         }
-        <ReactSelect
+        <CreatableSelect
           className="form-fields-select"
           classNamePrefix="form-fields-select"
           {...input}
@@ -92,7 +100,8 @@ class Select extends PureComponent {
           styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
-          // ReactSelect has unusual onBlur that doesn't play nicely with redux-forms
+          onCreateOption={this.handleCreateOption}
+          // CreatableSelect has unusual onBlur that doesn't play nicely with redux-forms
           // https://github.com/erikras/redux-form/issues/82#issuecomment-386108205
           // Sending the old value on blur, and disabling blurInputOnSelect work in
           // a round about way, and still allow us to use the `touched` property.
@@ -101,7 +110,7 @@ class Select extends PureComponent {
           {...rest}
         >
           {children}
-        </ReactSelect>
+        </CreatableSelect>
         {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
       </div>
     );

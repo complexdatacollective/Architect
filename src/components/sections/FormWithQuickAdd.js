@@ -1,53 +1,50 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { Field, formValueSelector } from 'redux-form';
+import { withState, compose } from 'recompose';
 import Guidance from '../Guidance';
+import DetachedField from '../DetachedField';
 import { Toggle } from '../../ui/components/Fields';
 import Form from './Form';
+import QuickAdd from './QuickAdd';
 import Section from './Section';
+import { withSubjectNodeType } from '../EditableList';
 
 class FormWithQuickAdd extends PureComponent {
   render() {
     const {
-      quickAdd,
-      disabled,
+      quickAddEnabled,
+      nodeType,
     } = this.props;
+
+    const disabled = !nodeType;
 
     return (
       <React.Fragment>
         <Guidance contentId="guidance.editor.quickAdd">
-          <Section disabled={disabled}>
-            <h2 id="issue-form">Quick Add</h2>
+          <Section disabled={disabled} compactNext>
+            <h2>Quick Add</h2>
             <p>Should this stage use the quick add function?</p>
             <div className="stage-editor-section-form">
-              <Field
-                name="quickAdd"
+              <DetachedField
                 component={Toggle}
+                value={quickAddEnabled}
+                onChange={() => this.props.setQuickAddEnabled(!quickAddEnabled)}
                 label="Enable the quick add function"
               />
             </div>
           </Section>
         </Guidance>
-        { !quickAdd && <Form {...this.props} /> }
+        { quickAddEnabled && <QuickAdd {...this.props} disabled={disabled} /> }
+        { !quickAddEnabled && <Form {...this.props} disabled={disabled} /> }
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state, { form }) => {
-  const selector = formValueSelector(form);
-  const quickAdd = selector(state, 'quickAdd');
-  const nodeType = selector(state, 'subject.type');
-
-  return {
-    quickAdd,
-    disabled: !nodeType,
-  };
-};
+const withQuickAddEnabled = withState('quickAddEnabled', 'setQuickAddEnabled', false);
 
 export { FormWithQuickAdd };
 
 export default compose(
-  connect(mapStateToProps),
+  withSubjectNodeType,
+  withQuickAddEnabled,
 )(FormWithQuickAdd);
