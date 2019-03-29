@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
-import { compose, withState } from 'recompose';
+import { formValueSelector, change } from 'redux-form';
+import { compose, withState, withHandlers } from 'recompose';
 
-const withQuickAdd = connect(
+const withQuickAddState = connect(
   (state, { form }) => ({
     quickAdd: formValueSelector(form)(state, 'quickAdd'),
   }),
+  { changeForm: change },
 );
 
 const withQuickAddEnabled = withState(
@@ -14,9 +15,24 @@ const withQuickAddEnabled = withState(
   ({ quickAdd }) => !!quickAdd,
 );
 
-const withQuickAddState = compose(
-  withQuickAdd,
+const withQuickAddHandlers = withHandlers({
+  handleChangeQuickAdd: ({
+    setQuickAddEnabled,
+    quickAddEnabled,
+    form,
+    changeForm,
+  }) =>
+    () => {
+      setQuickAddEnabled(!quickAddEnabled);
+      changeForm(form, 'form', null);
+      changeForm(form, 'quickAdd', null);
+    },
+});
+
+const withQuickAdd = compose(
+  withQuickAddState,
   withQuickAddEnabled,
+  withQuickAddHandlers,
 );
 
-export default withQuickAddState;
+export default withQuickAdd;

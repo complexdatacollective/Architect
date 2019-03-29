@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { change, formValueSelector } from 'redux-form';
-import { lifecycle, compose } from 'recompose';
+import { lifecycle, compose, withHandlers } from 'recompose';
 import { getCodebook } from '../../../selectors/protocol';
 
 const mapStateToProps = (state, { form, nodeType }) => {
@@ -15,23 +15,32 @@ const mapStateToProps = (state, { form, nodeType }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { form }) => ({
-  change: (field, value) => dispatch(change(form, field, value)),
+const mapDispatchToProps = { changeForm: change };
+
+const withAutoSetDefaultState = connect(mapStateToProps, mapDispatchToProps);
+
+const withAutoSetDefaultHandlers = withHandlers({
+  autoSetDefault: ({ form, changeForm, quickAdd, displayVariable }) =>
+    () => {
+      if (!quickAdd && displayVariable) {
+        changeForm(form, 'quickAdd', displayVariable);
+      }
+    },
 });
 
-const withAutoSetDefault = lifecycle({
+const withAutoSetDefaultLifecycle = lifecycle({
   componentDidUpdate() {
-    const { quickAdd, displayVariable } = this.props;
-
-    if (!quickAdd && displayVariable) {
-      this.props.change('quickAdd', displayVariable);
-    }
+    this.props.autoSetDefault();
+  },
+  componentDidMount() {
+    this.props.autoSetDefault();
   },
 });
 
 const withDefaultToDisplayVariable = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withAutoSetDefault,
+  withAutoSetDefaultState,
+  withAutoSetDefaultHandlers,
+  withAutoSetDefaultLifecycle,
 );
 
 export default withDefaultToDisplayVariable;

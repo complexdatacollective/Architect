@@ -13,6 +13,7 @@ class FormWithQuickAdd extends PureComponent {
   render() {
     const {
       quickAddEnabled,
+      handleChangeQuickAdd,
       nodeType,
     } = this.props;
 
@@ -28,13 +29,18 @@ class FormWithQuickAdd extends PureComponent {
               <DetachedField
                 component={Toggle}
                 value={quickAddEnabled}
-                onChange={() => this.props.setQuickAddEnabled(!quickAddEnabled)}
+                onChange={handleChangeQuickAdd}
                 label="Enable the quick add function"
               />
             </div>
           </Section>
         </Guidance>
-        { quickAddEnabled && <QuickAdd {...this.props} disabled={disabled} /> }
+        { quickAddEnabled &&
+          <QuickAdd
+            {...this.props}
+            disabled={disabled}
+          />
+        }
         { !quickAddEnabled && <Form {...this.props} disabled={disabled} /> }
       </React.Fragment>
     );
