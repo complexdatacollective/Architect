@@ -6,7 +6,7 @@ import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ValidatedField from '../../Form/ValidatedField';
 import Section from '../Section';
 import withOptionsForNodeType from './withOptionsForNodeType';
-import withCreateHandlers from './withCreateHandlers';
+import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
 import withDefaultToDisplayVariable from './withDefaultToDisplayVariable';
 import withSubjectNodeType from '../../EditableList/withSubjectNodeType';
 
@@ -15,7 +15,7 @@ import withSubjectNodeType from '../../EditableList/withSubjectNodeType';
 const QuickAdd = ({
   disabled,
   options,
-  handleCreateOption,
+  handleCreateVariable,
 }) => (
   <React.Fragment>
     <Guidance contentId="guidance.editor.quickAdd">
@@ -28,7 +28,7 @@ const QuickAdd = ({
             component={CreatableSelect}
             placeholder="Select component"
             options={options}
-            onCreateOption={handleCreateOption}
+            onCreateOption={value => handleCreateVariable(value, 'text')}
             validation={{ required: true }}
           />
         </div>
@@ -40,7 +40,7 @@ const QuickAdd = ({
 QuickAdd.propTypes = {
   disabled: PropTypes.bool,
   options: PropTypes.array,
-  handleCreateOption: PropTypes.func.isRequired,
+  handleCreateVariable: PropTypes.func.isRequired,
 };
 
 QuickAdd.defaultProps = {
@@ -54,5 +54,5 @@ export default compose(
   withSubjectNodeType,
   withDefaultToDisplayVariable,
   withOptionsForNodeType,
-  withCreateHandlers,
+  withCreateVariableHandler,
 )(QuickAdd);

@@ -10,6 +10,7 @@ import * as Fields from '../../../ui/components/Fields';
 import { Row, Group } from '../../OrderedList';
 import withOptions from './withOptions';
 import withFormHandlers from './withFormHandlers';
+import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
 
 const disableBlur = event => event.preventDefault();
 
@@ -21,6 +22,7 @@ class PromptFields extends Component {
     highlightVariablesForNodeType: PropTypes.array.isRequired,
     clearField: PropTypes.func.isRequired,
     clearFieldIfEmpty: PropTypes.func.isRequired,
+    handleCreateVariable: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -40,6 +42,9 @@ class PromptFields extends Component {
   handleChangeHighlightVariable = (event, value) => {
     this.props.clearFieldIfEmpty(event, 'highlight.variable', value);
   }
+
+  handleCreateLayoutOption = value =>
+    this.props.handleCreateVariable(value, 'layout');
 
   render() {
     const {
@@ -88,11 +93,12 @@ class PromptFields extends Component {
             <Row>
               <ValidatedField
                 name="layout.layoutVariable"
-                component={ArchitectFields.Select}
+                component={ArchitectFields.CreatableSelect}
                 label="Layout variable"
                 placeholder="&mdash; Select a layout variable &mdash;"
                 validation={{ required: true }}
                 options={layoutVariablesForNodeType}
+                onCreateOption={this.handleCreateLayoutOption}
               />
             </Row>
           </Group>
@@ -185,5 +191,6 @@ export { PromptFields };
 
 export default compose(
   withOptions,
+  withCreateVariableHandlers,
   withFormHandlers,
 )(PromptFields);
