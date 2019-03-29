@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
-import { withState, compose } from 'recompose';
-import Guidance from '../Guidance';
-import DetachedField from '../DetachedField';
-import { Toggle } from '../../ui/components/Fields';
-import Form from './Form';
-import QuickAdd from './QuickAdd';
-import Section from './Section';
-import { withSubjectNodeType } from '../EditableList';
+import { compose } from 'recompose';
+import Guidance from '../../Guidance';
+import DetachedField from '../../DetachedField';
+import { Toggle } from '../../../ui/components/Fields';
+import Form from '../Form';
+import QuickAdd from '../QuickAdd';
+import Section from '../Section';
+import { withSubjectNodeType } from '../../EditableList';
+import withQuickAddState from './withQuickAddState';
 
 class FormWithQuickAdd extends PureComponent {
   render() {
@@ -42,22 +41,9 @@ class FormWithQuickAdd extends PureComponent {
   }
 }
 
-const withQuickAddEnabled = withState(
-  'quickAddEnabled',
-  'setQuickAddEnabled',
-  ({ quickAdd }) => !!quickAdd,
-);
-
-const withQuickAdd = connect(
-  (state, { form }) => ({
-    quickAdd: formValueSelector(form)(state, 'quickAdd'),
-  }),
-);
-
 export { FormWithQuickAdd };
 
 export default compose(
   withSubjectNodeType,
-  withQuickAdd,
-  withQuickAddEnabled,
+  withQuickAddState,
 )(FormWithQuickAdd);
