@@ -1,17 +1,19 @@
 import React, { PureComponent } from 'react';
-import { withState, compose } from 'recompose';
-import Guidance from '../Guidance';
-import DetachedField from '../DetachedField';
-import { Toggle } from '../../ui/components/Fields';
-import Form from './Form';
-import QuickAdd from './QuickAdd';
-import Section from './Section';
-import { withSubjectNodeType } from '../EditableList';
+import { compose } from 'recompose';
+import Guidance from '../../Guidance';
+import DetachedField from '../../DetachedField';
+import { Toggle } from '../../../ui/components/Fields';
+import Form from '../Form';
+import QuickAdd from '../QuickAdd';
+import Section from '../Section';
+import { withSubjectNodeType } from '../../EditableList';
+import withQuickAddState from './withQuickAddState';
 
 class FormWithQuickAdd extends PureComponent {
   render() {
     const {
       quickAddEnabled,
+      handleChangeQuickAdd,
       nodeType,
     } = this.props;
 
@@ -27,24 +29,27 @@ class FormWithQuickAdd extends PureComponent {
               <DetachedField
                 component={Toggle}
                 value={quickAddEnabled}
-                onChange={() => this.props.setQuickAddEnabled(!quickAddEnabled)}
+                onChange={handleChangeQuickAdd}
                 label="Enable the quick add function"
               />
             </div>
           </Section>
         </Guidance>
-        { quickAddEnabled && <QuickAdd {...this.props} disabled={disabled} /> }
+        { quickAddEnabled &&
+          <QuickAdd
+            {...this.props}
+            disabled={disabled}
+          />
+        }
         { !quickAddEnabled && <Form {...this.props} disabled={disabled} /> }
       </React.Fragment>
     );
   }
 }
 
-const withQuickAddEnabled = withState('quickAddEnabled', 'setQuickAddEnabled', false);
-
 export { FormWithQuickAdd };
 
 export default compose(
   withSubjectNodeType,
-  withQuickAddEnabled,
+  withQuickAddState,
 )(FormWithQuickAdd);
