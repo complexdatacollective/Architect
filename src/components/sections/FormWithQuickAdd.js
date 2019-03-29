@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import { withState, compose } from 'recompose';
 import Guidance from '../Guidance';
 import DetachedField from '../DetachedField';
@@ -40,11 +42,22 @@ class FormWithQuickAdd extends PureComponent {
   }
 }
 
-const withQuickAddEnabled = withState('quickAddEnabled', 'setQuickAddEnabled', false);
+const withQuickAddEnabled = withState(
+  'quickAddEnabled',
+  'setQuickAddEnabled',
+  ({ quickAdd }) => !!quickAdd,
+);
+
+const withQuickAdd = connect(
+  (state, { form }) => ({
+    quickAdd: formValueSelector(form)(state, 'quickAdd'),
+  }),
+);
 
 export { FormWithQuickAdd };
 
 export default compose(
   withSubjectNodeType,
+  withQuickAdd,
   withQuickAddEnabled,
 )(FormWithQuickAdd);
