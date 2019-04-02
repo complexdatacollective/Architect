@@ -21,7 +21,7 @@ const PromptFields = props => (
         </p>
         <ValidatedField
           name="text"
-          component={Fields.TextArea}
+          component={Fields.Text}
           label=""
           placeholder="Enter text for the prompt here"
           validation={{ required: true }}

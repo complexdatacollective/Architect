@@ -35,7 +35,7 @@ const PromptFields = ({
           name="layout.layoutVariable"
           component={ArchitectFields.CreatableSelect}
           label="Which layout do you want to use?"
-          placeholder="&mdash; Select a layout variable &mdash;"
+          placeholder="&mdash; Select or create a new layout variable &mdash;"
           validation={{ required: true }}
           options={layoutVariablesForNodeType}
           onCreateOption={value => handleCreateVariable(value, 'layout')}
@@ -51,7 +51,7 @@ const PromptFields = ({
       { allowPositioning &&
         <Guidance contentId="guidance.editor.sociogram_prompt.sortOrder">
           <Row>
-            <h4>Unplaced nodes</h4>
+            <h4>Sort unplaced nodes</h4>
             <p>
               Would you like to sort unplaced nodes in the node bin?
             </p>

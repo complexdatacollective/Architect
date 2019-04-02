@@ -57,8 +57,8 @@ const EdgeFields = ({
               component={ArchitectFields.CreatableSelect}
               options={edgesForNodeType}
               onCreateOption={handleCreateEdge}
-              placeholder="&mdash; Select an edge type &mdash;"
-              label="Create edges of the following type (this will disable attribute toggling):"
+              placeholder="&mdash; Select or create a new edge type &mdash;"
+              label="Create edges of the following type"
             />
           </Row>
         }

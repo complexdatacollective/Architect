@@ -29,37 +29,25 @@ const HighlightFields = ({
       <Section group>
         <h3>Attributes</h3>
         <p>
-          Use this section to configure node highlighting. Choose a
-          boolean variable below, and nodes with this attribute will
-          automatically be highlighted. You can also allow the
-          participant to toggle this attribute by simply tapping (or
+          Use this section to configure node highlighting. The particiant
+          will be able to toggle this attribute by simply tapping (or
           clicking) a node.
         </p>
         <Field
           component={Fields.Toggle}
           name="highlight.allowHighlighting"
           onChange={handleChangeAllowHighlighting}
-          label="Toggle this attribute by tapping on a node"
+          label="Toggle attribute by tapping on a node"
         />
 
         { allowHighlighting &&
           <Field
             name="highlight.variable"
             component={ArchitectFields.CreatableSelect}
-            label="Toggle nodes with the following attribute:"
+            label="Toggle variable of the following type"
             onCreateOption={value => handleCreateVariable(value, 'boolean')}
-            placeholder="&mdash; Select a variable to toggle &mdash;"
+            placeholder="&mdash; Select or create a new variable to toggle &mdash;"
             options={unusedHighlightVariablesForNodeType}
-          />
-        }
-
-        { !allowHighlighting &&
-          <Field
-            name="highlight.variable"
-            component={ArchitectFields.Select}
-            label="Highlight nodes with the following attribute:"
-            placeholder="&mdash; Select a variable to highlight &mdash;"
-            options={highlightVariablesForNodeType}
           />
         }
       </Section>
