@@ -7,7 +7,7 @@ const mapDispatchToProps = {
 };
 
 const createEdgeHandler = {
-  handleCreateVariable: ({ createType }) =>
+  handleCreateEdge: ({ createType }) =>
     (name) => {
       const configuration = {
         name,

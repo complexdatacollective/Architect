@@ -6,6 +6,7 @@ import Guidance from '../../Guidance';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
 import DetachedField from '../../DetachedField';
+import { Row } from '../../OrderedList';
 import Section from '../Section';
 import withEdgesOptions from './withEdgesOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
@@ -25,31 +26,32 @@ const EdgeFields = ({
 
   return (
     <Guidance contentId="guidance.editor.sociogram_prompt.edges">
-      <div>
-        <Section>
+      <Section group>
+        <Row>
           <h3>Edges</h3>
           <p>
             This section controls edge creation and display. You can choose to display one or
             more edge types, and also allow the participant to create an edge of a given type.
           </p>
-        </Section>
-        <Section>
+        </Row>
+        <Row>
           <Field
             name="edges.display"
             component={Fields.CheckboxGroup}
             options={edgesForNodeType}
             label="Display edges of the following type(s):"
           />
-        </Section>
-        <Section>
+        </Row>
+        <Row>
           <DetachedField
             component={Fields.Toggle}
             value={canCreateEdge}
             onChange={handleToggleCreateEdge}
             label="Create edges by tapping on a node"
           />
-
-          { canCreateEdge &&
+        </Row>
+        { canCreateEdge &&
+          <Row>
             <Field
               name="edges.create"
               component={ArchitectFields.CreatableSelect}
@@ -58,9 +60,9 @@ const EdgeFields = ({
               placeholder="&mdash; Select an edge type &mdash;"
               label="Create edges of the following type (this will disable attribute toggling):"
             />
-          }
-        </Section>
-      </div>
+          </Row>
+        }
+      </Section>
     </Guidance>
   );
 };

@@ -68,13 +68,17 @@ const HighlightFields = ({
 };
 
 HighlightFields.propTypes = {
-  allowHighlighting: PropTypes.bool.isRequired,
   unusedHighlightVariablesForNodeType: PropTypes.array.isRequired,
   highlightVariablesForNodeType: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
+  allowHighlighting: PropTypes.bool,
+};
+
+HighlightFields.defaultProps = {
+  allowHighlighting: false,
 };
 
 export { HighlightFields };
