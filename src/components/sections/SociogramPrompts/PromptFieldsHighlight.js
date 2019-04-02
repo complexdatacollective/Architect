@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import Guidance from '../../Guidance';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
+import Row from '../Row';
 import Section from '../Section';
 import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
 import withHighlightOptions from './withHighlightOptions';
@@ -13,7 +14,6 @@ import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
 const HighlightFields = ({
   allowHighlighting,
   unusedHighlightVariablesForNodeType,
-  highlightVariablesForNodeType,
   handleEdgeHighlightChange,
   handleCreateVariable,
   canCreateEdge,
@@ -37,10 +37,10 @@ const HighlightFields = ({
           component={Fields.Toggle}
           name="highlight.allowHighlighting"
           onChange={handleChangeAllowHighlighting}
-          label="Toggle attribute by tapping on a node"
+          label="Toggle attribute by tapping on a node?"
+          disabled
         />
-
-        { allowHighlighting &&
+        <Row disabled={!allowHighlighting}>
           <Field
             name="highlight.variable"
             component={ArchitectFields.CreatableSelect}
@@ -49,7 +49,7 @@ const HighlightFields = ({
             placeholder="&mdash; Select or create a new variable to toggle &mdash;"
             options={unusedHighlightVariablesForNodeType}
           />
-        }
+        </Row>
       </Section>
     </Guidance>
   );
@@ -57,7 +57,6 @@ const HighlightFields = ({
 
 HighlightFields.propTypes = {
   unusedHighlightVariablesForNodeType: PropTypes.array.isRequired,
-  highlightVariablesForNodeType: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,

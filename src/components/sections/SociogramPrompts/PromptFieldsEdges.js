@@ -6,7 +6,7 @@ import Guidance from '../../Guidance';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
 import DetachedField from '../../DetachedField';
-import { Row } from '../../OrderedList';
+import Row from '../Row';
 import Section from '../Section';
 import withEdgesOptions from './withEdgesOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
@@ -47,7 +47,7 @@ const EdgeFields = ({
             component={Fields.Toggle}
             value={canCreateEdge}
             onChange={handleToggleCreateEdge}
-            label="Create edges by tapping on a node"
+            label="Create edges by tapping on a node?"
           />
         </Row>
         { canCreateEdge &&

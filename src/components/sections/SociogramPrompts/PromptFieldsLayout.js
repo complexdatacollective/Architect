@@ -7,7 +7,7 @@ import Guidance from '../../Guidance';
 import { ValidatedField } from '../../Form';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
-import { Row } from '../../OrderedList';
+import Row from '../Row';
 import Section from '../Section';
 import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
 import withLayoutOptions from './withLayoutOptions';
@@ -31,10 +31,11 @@ const PromptFields = ({
         </p>
       </Row>
       <Row>
+        <h4>Layout variable</h4>
+        <p>Which layout do you want to use on this prompt?</p>
         <ValidatedField
           name="layout.layoutVariable"
           component={ArchitectFields.CreatableSelect}
-          label="Which layout do you want to use?"
           placeholder="&mdash; Select or create a new layout variable &mdash;"
           validation={{ required: true }}
           options={layoutVariablesForNodeType}
@@ -42,10 +43,12 @@ const PromptFields = ({
         />
       </Row>
       <Row>
+        <h4>Can nodes be positioned?</h4>
+        <p>Allow nodes to be positioned by dragging.</p>
         <Field
           name="layout.allowPositioning"
           component={Fields.Toggle}
-          label="Allow nodes to be positioned? (by dragging)"
+          label="Allow positioning?"
         />
       </Row>
       { allowPositioning &&
