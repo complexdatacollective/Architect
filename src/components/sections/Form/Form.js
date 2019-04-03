@@ -20,7 +20,7 @@ import { getCodebook } from '../../../selectors/protocol';
 const template = () => ({ variable: uuid() });
 
 const normalizeField = field =>
-  omit(field, ['id', 'name']);
+  omit(field, ['id', 'name', 'options']);
 
 // Merge item with variable info from codebook
 const itemSelector = nodeType =>
@@ -28,15 +28,15 @@ const itemSelector = nodeType =>
     const item = formValueSelector(form)(state, editField);
     const codebook = getCodebook(state);
     const variable = item && item.variable;
-    const name = variable
-      ? get(codebook, ['node', nodeType, 'variables', variable, 'name'], '')
-      : '';
+    const name = get(codebook, ['node', nodeType, 'variables', variable, 'name'], '');
+    const options = get(codebook, ['node', nodeType, 'variables', variable, 'options'], []);
 
     if (!item) { return null; }
 
     return {
       ...item,
       name,
+      options,
     };
   };
 
@@ -88,9 +88,9 @@ Form.defaultProps = {
 
 const handlers = {
   handleChangeFields: ({ updateVariable, nodeType }) =>
-    ({ variable, component, name }) => {
+    ({ variable, component, name, options }) => {
       const type = getTypeForComponent(component);
-      const configuration = { type, name };
+      const configuration = { type, name, options };
 
       updateVariable(
         'node',
