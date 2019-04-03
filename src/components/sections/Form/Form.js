@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { compose, withHandlers } from 'recompose';
 import uuid from 'uuid';
-import { omit, get } from 'lodash';
+import { omit, get, reduce } from 'lodash';
 import TextField from '../../../ui/components/Fields/Text';
 import Guidance from '../../Guidance';
 import ValidatedField from '../../Form/ValidatedField';
@@ -19,24 +19,40 @@ import { getCodebook } from '../../../selectors/protocol';
 
 const template = () => ({ variable: uuid() });
 
+const CODEBOOK_PROPERTIES = ['name', 'options'];
+
+const getCodebookProperties = properties =>
+  reduce(
+    CODEBOOK_PROPERTIES,
+    (memo, key) => {
+      const property = properties[key];
+      if (!property) { return memo; }
+      return {
+        ...memo,
+        [key]: property,
+      };
+    },
+    {},
+  );
+
 const normalizeField = field =>
-  omit(field, ['id', 'name']);
+  omit(field, ['id', ...CODEBOOK_PROPERTIES]);
 
 // Merge item with variable info from codebook
 const itemSelector = nodeType =>
   (state, { form, editField }) => {
     const item = formValueSelector(form)(state, editField);
-    const codebook = getCodebook(state);
-    const variable = item && item.variable;
-    const name = variable
-      ? get(codebook, ['node', nodeType, 'variables', variable, 'name'], '')
-      : '';
 
     if (!item) { return null; }
 
+    const codebook = getCodebook(state);
+    const variable = item && item.variable;
+    const codebookConfiguration = get(codebook, ['node', nodeType, 'variables', variable], {});
+    const codebookProperties = getCodebookProperties(codebookConfiguration);
+
     return {
       ...item,
-      name,
+      ...codebookProperties,
     };
   };
 
@@ -88,9 +104,10 @@ Form.defaultProps = {
 
 const handlers = {
   handleChangeFields: ({ updateVariable, nodeType }) =>
-    ({ variable, component, name }) => {
+    ({ variable, component, ...rest }) => {
       const type = getTypeForComponent(component);
-      const configuration = { type, name };
+      const codebookProperties = getCodebookProperties(rest);
+      const configuration = { type, ...codebookProperties };
 
       updateVariable(
         'node',
