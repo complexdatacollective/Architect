@@ -38,7 +38,8 @@ const HighlightFields = ({
           name="highlight.allowHighlighting"
           onChange={handleChangeAllowHighlighting}
           label="Toggle attribute by tapping on a node?"
-          disabled
+          disabled={canCreateEdge}
+          title={canCreateEdge && 'Create edge must be disabled to allow highlighting'}
         />
         <Row disabled={!allowHighlighting}>
           <Field

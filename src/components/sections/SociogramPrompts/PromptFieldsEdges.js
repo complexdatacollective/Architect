@@ -16,6 +16,7 @@ const EdgeFields = ({
   edgesForNodeType,
   handleEdgeHighlightChange,
   handleCreateEdge,
+  allowHighlighting,
   canCreateEdge,
   setCanCreateEdge,
 }) => {
@@ -48,6 +49,8 @@ const EdgeFields = ({
             value={canCreateEdge}
             onChange={handleToggleCreateEdge}
             label="Create edges by tapping on a node?"
+            disabled={allowHighlighting}
+            title={allowHighlighting && 'Allow highlighting must be disabled to create edge'}
           />
         </Row>
         { canCreateEdge &&
@@ -73,6 +76,7 @@ EdgeFields.propTypes = {
   handleCreateEdge: PropTypes.func.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,
+  allowHighlighting: PropTypes.string.isRequired,
 };
 
 export { EdgeFields };
