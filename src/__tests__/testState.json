@@ -1,0 +1,95 @@
+{
+  "protocol": {
+    "present": {
+      "codebook": {
+        "node": {
+          "bar": {
+            "variables": {
+              "alpha": { "name": "ALPHA", "type": "text" },
+              "bravo": { "name": "BRAVO", "type": "text" },
+              "charlie": { "name": "CHARLIE", "type": "location" }
+            }
+          }
+        }
+      },
+      "stages": [
+        {
+          "id": "bazz",
+          "subject": { "entity": "node", "type": "foo" },
+          "prompts": [
+            {
+              "form": {
+                "fields": [
+                  { "variable": "alpha" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "pip",
+          "subject": { "entity": "node", "type": "pop" },
+          "prompts": [
+            {
+              "form": {
+                "fields": [
+                  { "variable": "bravo" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "buzz",
+          "prompts": [
+            {
+              "id": "fizz",
+              "subject": { "entity": "node", "type": "foo" }
+            }
+          ]
+        },
+        {
+          "id": "foxtrot",
+          "prompts": [
+            {
+              "id": "golf",
+              "subject": { "entity": "node", "type": "foo" }
+            },
+            {
+              "id": "hotel",
+              "subject": { "entity": "node", "type": "pop" }
+            }
+          ]
+        },
+        {
+          "id": "alpha",
+          "type": "Sociogram",
+          "prompts": [
+            {
+              "id": "bravo",
+              "edges": {
+                "creates": "charlie",
+                "display": ["delta", "echo"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "mike",
+          "type": "Sociogram",
+          "prompts": [
+            {
+              "id": "oscar"
+            }
+          ]
+        }
+      ],
+      "forms": {
+        "bar": {
+          "entity": "node",
+          "type": "foo"
+        }
+      }
+    }
+  }
+}

@@ -1,17 +1,22 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get, map, compact, flatMap, uniqBy, memoize } from 'lodash';
+import { get, map, has, filter, compact, flatMap, uniqBy, memoize } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol, getCodebook } from './protocol';
+import { getVariableIndex } from './indexes';
 
-const getVariablesAsOptions = variables =>
+const asOption = (item, key) =>
+  ({
+    label: get(item, 'name', ''),
+    value: key,
+    type: get(item, 'type', ''),
+    color: get(item, 'color', ''),
+  });
+
+const asOptions = items =>
   map(
-    variables,
-    (variable, id) => ({
-      label: variable.name,
-      value: id,
-      type: variable.type,
-    }),
+    items,
+    asOption,
   );
 
 const getNodeTypes = state =>
@@ -20,9 +25,21 @@ const getNodeTypes = state =>
 const getVariablesForNodeType = (state, nodeType) =>
   get(getNodeTypes(state), [nodeType, 'variables'], {});
 
+const getUnusedVariablesForNodeType = (state, nodeType) => {
+  const variableIndex = getVariableIndex(state);
+  const variablesForNodeType = getVariablesForNodeType(state, nodeType);
+
+  const unusedVariables = filter(
+    variablesForNodeType,
+    (_, variableId) => !has(variableIndex, variableId),
+  );
+
+  return unusedVariables;
+};
+
 const getVariableOptionsForNodeType = (state, nodeType) => {
   const variables = getVariablesForNodeType(state, nodeType);
-  const options = getVariablesAsOptions(variables);
+  const options = asOptions(variables);
 
   return options;
 };
@@ -270,9 +287,16 @@ const makeGetObjectLabel = createSelector(
     ),
 );
 
+const utils = {
+  asOption,
+  asOptions,
+};
+
 export {
+  getCodebook,
   getNodeTypes,
   getVariablesForNodeType,
+  getUnusedVariablesForNodeType,
   getVariableOptionsForNodeType,
   getTypeUsageIndex,
   getSociogramTypeUsageIndex,
@@ -280,4 +304,5 @@ export {
   makeGetDeleteImpact,
   makeGetObjectLabel,
   getTypes,
+  utils,
 };

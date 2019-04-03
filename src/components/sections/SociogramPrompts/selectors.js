@@ -1,47 +1,23 @@
-import { get, map, reduce } from 'lodash';
 import { getCodebook } from '../../../selectors/protocol';
-
-const asOption = (value, key) =>
-  ({
-    label: get(value, 'name', ''),
-    value: key,
-    color: get(value, 'color', ''),
-  });
-
-const filterAsOption = rule =>
-  (memo, item, id) => {
-    if (!rule(item)) { return memo; }
-    return [
-      ...memo,
-      asOption(item, id),
-    ];
-  };
-
-export const getVariablesForNodeType = (state, props) => {
-  const nodeType = props.nodeType;
-  const codebook = getCodebook(state);
-  return get(codebook, ['node', nodeType, 'variables'], {});
-};
+import { utils as codebookUtils, getVariablesForNodeType } from '../../../selectors/codebook';
+import { utils as indexUtils, getVariableIndex } from '../../../selectors/indexes';
 
 export const getLayoutVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props);
+  const variables = getVariablesForNodeType(state, props.nodeType);
+  const variableOptions = codebookUtils.asOptions(variables);
+  const layoutOptions = variableOptions.filter(({ type }) => type === 'layout');
 
-  const layoutVariables = reduce(
-    variables,
-    filterAsOption(item => item.type === 'layout'),
-    [],
-  );
-
-  return layoutVariables;
+  return layoutOptions;
 };
 
 export const getHighlightVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props);
+  const variables = getVariablesForNodeType(state, props.nodeType);
+  const variableOptions = codebookUtils.asOptions(variables);
+  const variableLookup = indexUtils.getLookup(getVariableIndex(state));
 
-  const highlightVariables = reduce(
-    variables,
-    filterAsOption(item => item.type === 'boolean'),
-    [],
+  const highlightVariables = variableOptions.filter(
+    ({ type, value }) => type === 'boolean' &&
+    !variableLookup.has(value),
   );
 
   return highlightVariables;
@@ -49,6 +25,7 @@ export const getHighlightVariablesForNodeType = (state, props) => {
 
 export const getEdgesForNodeType = (state) => {
   const codebook = getCodebook(state);
+  const codebookOptions = codebookUtils.asOptions(codebook.edge);
 
-  return map(codebook.edge, asOption);
+  return codebookOptions;
 };
