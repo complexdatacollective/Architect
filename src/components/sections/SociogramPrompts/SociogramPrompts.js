@@ -3,6 +3,7 @@ import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
 import EditableList, { withSubjectNodeType } from '../../EditableList';
+import withFormUsedVariableIndex from './withFormUsedVariableIndex';
 
 const template = () => ({ sortOrder: [] });
 
@@ -23,5 +24,6 @@ export { SociogramPrompts };
 
 export default compose(
   withSubjectNodeType,
+  withFormUsedVariableIndex,
   withProps(({ nodeType }) => ({ disabled: !nodeType })),
 )(SociogramPrompts);

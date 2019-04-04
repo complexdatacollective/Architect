@@ -4,10 +4,10 @@ import { getHighlightVariablesForNodeType } from './selectors';
 
 const withHighlightOptions = (state, props) => {
   const allowHighlighting = formValueSelector(props.form)(state, 'highlight.allowHighlighting');
-  const unusedHighlightVariablesForNodeType = getHighlightVariablesForNodeType(state, props);
+  const highlightVariablesForNodeType = getHighlightVariablesForNodeType(state, props);
 
   return {
-    unusedHighlightVariablesForNodeType,
+    highlightVariablesForNodeType,
     allowHighlighting,
   };
 };

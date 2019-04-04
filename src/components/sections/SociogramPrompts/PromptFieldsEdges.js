@@ -76,7 +76,7 @@ EdgeFields.propTypes = {
   handleCreateEdge: PropTypes.func.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,
-  allowHighlighting: PropTypes.string.isRequired,
+  allowHighlighting: PropTypes.bool.isRequired,
 };
 
 export { EdgeFields };
