@@ -9,6 +9,36 @@
               "bravo": { "name": "BRAVO", "type": "text" },
               "charlie": { "name": "CHARLIE", "type": "location" }
             }
+          },
+          "1234-1234-1234": {
+            "variables": {
+              "1234-1234-1": {
+                "name": "my layout",
+                "type": "layout"
+              },
+              "1234-1234-2": {
+                "name": "my category",
+                "type": "categorical"
+              },
+              "1234-1234-3": {
+                "name": "my boolean",
+                "type": "boolean"
+              },
+              "1234-1234-4": {
+                "name": "other boolean 2",
+                "type": "boolean"
+              },
+              "1234-1234-5": {
+                "name": "other boolean 4",
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "edge": {
+          "1234-5": {
+            "name": "an edge",
+            "color": "blue"
           }
         }
       },
@@ -20,7 +50,8 @@
             {
               "form": {
                 "fields": [
-                  { "variable": "alpha" }
+                  { "variable": "alpha" },
+                  { "variable": "1234-1234-4" }
                 ]
               }
             }
@@ -33,7 +64,8 @@
             {
               "form": {
                 "fields": [
-                  { "variable": "bravo" }
+                  { "variable": "bravo" },
+                  { "variable": "1234-1234-5" }
                 ]
               }
             }
@@ -83,13 +115,7 @@
             }
           ]
         }
-      ],
-      "forms": {
-        "bar": {
-          "entity": "node",
-          "type": "foo"
-        }
-      }
+      ]
     }
   }
 }

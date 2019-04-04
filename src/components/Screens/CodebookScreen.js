@@ -11,7 +11,7 @@ import Guidance from '../Guidance';
 import Card from './ProtocolCard';
 import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
-import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/codebook';
+import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/usage';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 

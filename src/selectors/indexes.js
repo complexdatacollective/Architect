@@ -69,14 +69,6 @@ const collectPaths = (paths, obj, memoPath) => {
   return {};
 };
 
-
-/**
- * Creates a set of variable ids from a path object
- * @param {string} paths path object, e.g. from `collectPaths()`
- * @returns {Set} of variable Ids
- */
-const getLookup = paths => new Set(values(paths));
-
 /**
  * Returns index of used variables
  * Checks for usage in the following:
@@ -100,8 +92,29 @@ const getVariableIndex = createSelector(
   },
 );
 
+const combineLists = lists =>
+  lists.reduce(list => (!isArray(list) ? values(list) : list));
+
+/**
+ * Creates a Set of items from arrays or path objects
+ * @param {Array[paths|Array]} include array of path object
+ * e.g. from `collectPaths()` or array of ids
+ * @param {Array[paths|Array]} excluded array of path object
+ * e.g. from `collectPaths()` or array of ids
+ * @returns {Set} of ids
+ */
+const buildSearch = (include = [], exclude = []) => {
+  const combinedInclude = combineLists(include);
+  const combinedExclude = combineLists(exclude);
+  const lookup = new Set(combinedInclude);
+
+  combinedExclude.forEach(value => lookup.delete(value));
+
+  return lookup;
+};
+
 const utils = {
-  getLookup,
+  buildSearch,
   collectPaths,
 };
 

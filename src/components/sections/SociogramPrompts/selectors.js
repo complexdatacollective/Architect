@@ -11,28 +11,30 @@ export const getLayoutVariablesForNodeType = (state, props) => {
   return layoutOptions;
 };
 
-export const getHighlightVariablesForNodeType = (state, props) => {
+export const getHighlightVariablesForNodeType = (
+  state,
+  { form, nodeType, formUsedVariableIndex },
+) => {
   // Currently selected variable
-  const currentVariable = formValueSelector(props.form)(state, 'highlight.variable');
+  const currentVariable = formValueSelector(form)(state, 'highlight.variable');
 
   // All defined variables that match nodeType
-  const variables = getVariablesForNodeType(state, props.nodeType);
+  const variables = getVariablesForNodeType(state, nodeType);
   const variableOptions = codebookUtils.asOptions(variables);
 
-  // Already used in protocol
-  const variableLookup = indexUtils.getLookup(getVariableIndex(state));
-  // Already used in form, i.e. current draft
-  const unsavedLookup = indexUtils.getLookup(props.formUsedVariableIndex);
+  // variables that are already used in protocol
+  const variableIndex = getVariableIndex(state);
 
-  // Currently selected variable is always available
-  variableLookup.delete(currentVariable);
-  unsavedLookup.delete(currentVariable);
+  // Build a Set which whe can check variable ids against
+  const lookup = indexUtils.buildSearch(
+    [variableIndex, formUsedVariableIndex], // include
+    [[currentVariable]], // exclude
+  );
 
   // Boolean variables which aren't already used (+ currently selected)
   const highlightVariables = variableOptions.filter(
     ({ type, value }) => type === 'boolean' &&
-    !variableLookup.has(value) &&
-    !unsavedLookup.has(value),
+    !lookup.has(value),
   );
 
   return highlightVariables;
