@@ -13,11 +13,6 @@ Array [
 exports[`SociogramPrompts selectors get highlight variables for node type 1`] = `
 Array [
   Object {
-    "label": "my boolean",
-    "type": "boolean",
-    "value": "1234-1234-3",
-  },
-  Object {
     "label": "other boolean 2",
     "type": "boolean",
     "value": "1234-1234-4",

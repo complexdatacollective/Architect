@@ -93,7 +93,9 @@ const getVariableIndex = createSelector(
 );
 
 const combineLists = lists =>
-  lists.reduce(list => (!isArray(list) ? values(list) : list));
+  lists
+    .map(list => (!isArray(list) ? values(list) : list))
+    .reduce((acc, list) => [...acc, ...list], []);
 
 /**
  * Creates a Set of items from arrays or path objects

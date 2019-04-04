@@ -25,7 +25,11 @@ describe('SociogramPrompts', () => {
     });
 
     it('get highlight variables for node type', () => {
-      const result = getHighlightVariablesForNodeType(mockState, { form, nodeType });
+      const result = getHighlightVariablesForNodeType(mockState, {
+        form,
+        nodeType,
+        formUsedVariableIndex: ['1234-1234-3'],
+      });
 
       expect(result).toMatchSnapshot();
     });
