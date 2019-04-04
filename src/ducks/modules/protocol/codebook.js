@@ -1,8 +1,9 @@
 import uuid from 'uuid';
-import { omit } from 'lodash';
+import { omit, size, get } from 'lodash';
+import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../../config';
+import { makeGetUsageForType } from '../../../selectors/usage';
 import { actionCreators as formActions } from './forms';
 import { actionCreators as stageActions } from './stages';
-import { makeGetUsageForType } from '../../../selectors/usage';
 
 const UPDATE_TYPE = 'UPDATE_TYPE';
 const CREATE_TYPE = 'CREATE_TYPE';
@@ -15,13 +16,34 @@ const initialState = {
   node: {},
 };
 
+const defaultTypeTemplate = {
+  color: '',
+  variables: {},
+};
+
+export const getNextCategoryColor = (protocol, entity) => {
+  if (!protocol || !entity) { return null; }
+  const paletteName = entity === 'edge' ?
+    COLOR_PALETTE_BY_ENTITY.edge :
+    COLOR_PALETTE_BY_ENTITY.node;
+  const paletteSize = COLOR_PALETTES[paletteName];
+  const typeCount = size(get(protocol, ['codebook', entity], {}));
+  const nextNumber = (typeCount % paletteSize) + 1;
+  const nextColor = `${paletteName}-${nextNumber}`;
+
+  return nextColor;
+};
+
 const createType = (entity, type, configuration) => ({
   type: CREATE_TYPE,
   meta: {
     type,
     entity,
   },
-  configuration,
+  configuration: {
+    ...defaultTypeTemplate,
+    ...configuration,
+  },
 });
 
 const createTypeThunk = (entity, configuration) =>
@@ -29,6 +51,22 @@ const createTypeThunk = (entity, configuration) =>
     const type = uuid();
 
     dispatch(createType(entity, type, configuration));
+
+    return {
+      type,
+      category: entity,
+    };
+  };
+
+const createEdgeThunk = configuration =>
+  (dispatch, getState) => {
+    const entity = 'edge';
+    const state = getState();
+    const protocol = state.protocol.present;
+    const color = configuration.color || getNextCategoryColor(protocol, entity);
+    const type = uuid();
+
+    dispatch(createType(entity, type, { ...configuration, color }));
 
     return {
       type,
@@ -198,6 +236,7 @@ export default function reducer(state = initialState, action = {}) {
 const actionCreators = {
   updateType,
   createType: createTypeThunk,
+  createEdge: createEdgeThunk,
   deleteType: deleteTypeThunk,
   createVariable: createVariableThunk,
   updateVariable,

@@ -5,12 +5,10 @@ import { compose, withState } from 'recompose';
 const edgesState = connect(
   (state, props) => {
     const getFormValues = formValueSelector(props.form);
-    // const allowHighlighting = getFormValues(state, 'highlight.allowHighlighting');
     const createEdge = getFormValues(state, 'edges.create');
 
     return {
       createEdge,
-      // allowHighlighting,
     };
   });
 

@@ -3,19 +3,13 @@ import { withHandlers, compose } from 'recompose';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 
 const mapDispatchToProps = {
-  createVariable: codebookActions.createType,
+  createEdge: codebookActions.createEdge,
 };
 
 const createEdgeHandler = {
-  handleCreateEdge: ({ createType }) =>
+  handleCreateEdge: ({ createEdge }) =>
     (name) => {
-      const configuration = {
-        name,
-        color: 'edge-color-seq-1', // Calculate this, or handle in reducer
-        variables: {}, // TODO, what to do about default properties? handle in reducer?
-      };
-
-      const { type } = createType('edge', configuration);
+      const { type } = createEdge({ name });
 
       return type;
     },
@@ -29,7 +23,6 @@ const createEdgeHandler = {
   *   <div handler={() => handleCreateEdge(name)} />
   * )
   */
-
 const withCreateEdgeHandler =
   compose(
     connect(null, mapDispatchToProps),
