@@ -26,6 +26,8 @@ function mapStateToProps(state, props) {
     ),
   );
 
+  const isNew = !type;
+
   const variables = getFormValue(state, 'variables') || {};
   const displayVariables = compact(map(variables, variable => ({
     label: variable.name,
@@ -35,6 +37,7 @@ function mapStateToProps(state, props) {
   return {
     initialValues,
     displayVariables,
+    isNew,
   };
 }
 

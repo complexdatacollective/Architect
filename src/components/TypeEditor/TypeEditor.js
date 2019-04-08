@@ -20,6 +20,7 @@ const TypeEditor = ({
   category,
   type,
   displayVariables,
+  isNew,
 }) => {
   const { name: paletteName, size: paletteSize } = getPalette(category);
 
@@ -76,37 +77,41 @@ const TypeEditor = ({
             </div>
           </Guidance>
 
-          <Guidance contentId="guidance.registry.type.displayVariable">
-            <div className="editor__section">
-              <h2>Display Variable</h2>
-              <p>
-                Select a variable to use as a label when displaying this node.
-              </p>
-              <Field
-                component={ArchitectFields.Select}
-                name="displayVariable"
-                options={displayVariables}
-              >
-                <option value="">&mdash; Select display variable &mdash;</option>
-              </Field>
-            </div>
-          </Guidance>
+          {!isNew &&
+            <Guidance contentId="guidance.registry.type.displayVariable">
+              <div className="editor__section">
+                <h2>Display Variable</h2>
+                <p>
+                  Select a variable to use as a label when displaying this node.
+                </p>
+                <Field
+                  component={ArchitectFields.Select}
+                  name="displayVariable"
+                  options={displayVariables}
+                >
+                  <option value="">&mdash; Select display variable &mdash;</option>
+                </Field>
+              </div>
+            </Guidance>
+          }
         </React.Fragment>
       }
 
-      <Guidance contentId="guidance.registry.type.variables">
-        <div className="editor__section">
-          <Variables
-            form={form}
-            name="variables"
-            sortableProperties={['name', 'type']}
-            initialSortOrder={{
-              direction: 'asc',
-              property: 'name',
-            }}
-          />
-        </div>
-      </Guidance>
+      {!isNew &&
+        <Guidance contentId="guidance.registry.type.variables">
+          <div className="editor__section">
+            <Variables
+              form={form}
+              name="variables"
+              sortableProperties={['name', 'type']}
+              initialSortOrder={{
+                direction: 'asc',
+                property: 'name',
+              }}
+            />
+          </div>
+        </Guidance>
+      }
     </React.Fragment>
   );
 };
@@ -116,11 +121,13 @@ TypeEditor.propTypes = {
   category: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
+  isNew: PropTypes.bool,
 };
 
 TypeEditor.defaultProps = {
   type: null,
   colorOptions: { node: [], edge: [] },
+  isNew: false,
 };
 
 export { TypeEditor };
