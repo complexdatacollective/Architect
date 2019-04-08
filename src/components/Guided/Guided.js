@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Guidance from './Guidance';
 import { getGuidance } from '../../selectors/guidance';
 import { getContent } from '../../selectors/locales';
+import { actionCreators as uiActions } from '../../ducks/modules/ui';
 
 const getDefaultGuidance = (state, defaultGuidanceContentId) => {
   if (defaultGuidanceContentId === null) { return null; }
@@ -23,6 +24,8 @@ class Guided extends Component {
       content: PropTypes.node,
       id: PropTypes.string,
     }).isRequired,
+    updateGuidance: PropTypes.func.isRequired,
+    active: PropTypes.bool.isRequired,
     /* defaultGuidance is used in mapStateToProps */
     // eslint-disable-next-line react/no-unused-prop-types
     defaultGuidance: PropTypes.string,
@@ -34,31 +37,19 @@ class Guided extends Component {
     defaultGuidance: null,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      active: true,
-    };
-  }
-
-  get active() {
-    return this.state.active;
-  }
-
   get guidance() {
     return this.props.guidance;
   }
 
   toggleGuidance = () => {
-    this.setState({ active: !this.active });
+    this.props.updateGuidance(!this.props.active);
   }
 
   render() {
     const classNames = cx(
       this.props.className,
       'guided',
-      { 'guided--show-guidance': this.active },
+      { 'guided--show-guidance': this.props.active },
     );
 
     return (
@@ -68,7 +59,7 @@ class Guided extends Component {
         </div>
 
         <Guidance
-          show={this.active}
+          show={this.props.active}
           handleClickToggle={this.toggleGuidance}
           guidance={this.guidance}
         />
@@ -79,10 +70,16 @@ class Guided extends Component {
 
 const mapStateToProps = (state, props) => ({
   guidance: getGuidance(state) || getDefaultGuidance(state, props.defaultGuidance),
+  active: state.ui.guidance,
 });
+
+const mapDispatchToProps = {
+  updateGuidance: uiActions.updateGuidance,
+};
 
 export { Guided };
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(Guided);
