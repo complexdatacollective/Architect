@@ -5,11 +5,11 @@ import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, map, difference } from 'lodash';
 import cx from 'classnames';
-import Guidance from '../Guidance';
-import NodeSelect from '../../components/Form/Fields/NodeSelect';
-import { getNodeTypes } from '../../selectors/codebook';
-import { getFieldId } from '../../utils/issues';
-import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
+import Guidance from '../../Guidance';
+import NodeSelect from '../../Form/Fields/NodeSelect';
+import { getNodeTypes } from '../../../selectors/codebook';
+import { getFieldId } from '../../../utils/issues';
+import { actionCreators as dialogsActions } from '../../../ducks/modules/dialogs';
 
 class NodeType extends Component {
   static propTypes = {
