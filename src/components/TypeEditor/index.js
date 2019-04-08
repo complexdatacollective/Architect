@@ -39,12 +39,10 @@ function mapStateToProps(state, props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateType: (category, type, form) => {
-    dispatch(codebookActions.updateType(category, type, parse(form)));
-  },
-  createType: (category, form) => {
-    dispatch(codebookActions.createType(category, parse(form)));
-  },
+  updateType: (category, type, form) =>
+    dispatch(codebookActions.updateType(category, type, parse(form))),
+  createType: (category, form) =>
+    dispatch(codebookActions.createType(category, parse(form))),
 });
 
 const withTypeProps = withProps({

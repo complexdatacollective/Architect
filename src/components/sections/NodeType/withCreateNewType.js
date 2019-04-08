@@ -21,11 +21,10 @@ const createTypeState = connect(
 const createTypeHandlers = withHandlers({
   handleUIMessage: ({ ui: message, changeForm, form }) =>
     (prevMessage) => {
-      const handleTypeMessage = (nodeType) => {
-        changeForm(form, 'nodeType', nodeType);
-      };
+      const handleTypeMessage = entity =>
+        changeForm(form, 'subject', { type: entity.type, entity: 'node' });
 
-      onUIMessage(message, prevMessage, 'variable', handleTypeMessage);
+      onUIMessage(message, prevMessage, 'type', handleTypeMessage);
     },
   handleOpenCreateNewType: ({ openScreen }) =>
     () => {
