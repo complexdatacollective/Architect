@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../../../ui/components/Icon';
 
-// const { Option as RSOption } = ReactSelectComponents;
+/**
+ * Contains WIP changes to add inline delete, which is paused for now.
+ */
 
 const getValue = (options, value) => {
   const foundValue = options.find(option => option.value === value);
@@ -15,9 +17,9 @@ const getValue = (options, value) => {
   return foundValue;
 };
 
+/* eslint-disable */
 const DefaultSelectItem = (props) => {
-  // eslint-disable-next-line no-underscore-dangle
-  const isNew = !!props.data.__isNew__;
+  // const isNew = !!props.data.__isNew__;
 
   return (
     <ReactSelectComponents.Option
@@ -27,18 +29,19 @@ const DefaultSelectItem = (props) => {
     >
       <div className="form-fields-select__item-label">
         {props.data.label}
-        { !isNew &&
+        {/* { !isNew &&
           <div
             className="form-fields-select__item-delete"
             onClick={() => props.onDeleteOption(props.data.value)}
           >
             <Icon name="delete" />
           </div>
-        }
+        } */}
       </div>
     </ReactSelectComponents.Option>
   );
 };
+/* eslint-enable */
 
 class Select extends PureComponent {
   static propTypes = {
@@ -137,7 +140,6 @@ class Select extends PureComponent {
           blurInputOnSelect={false}
           giveThisToOption={() => false}
           {...rest}
-          menuIsOpen
         >
           {children}
         </CreatableSelect>

@@ -43,6 +43,7 @@ QuickAdd.propTypes = {
   disabled: PropTypes.bool,
   options: PropTypes.array,
   handleCreateVariable: PropTypes.func.isRequired,
+  handleDeleteVariable: PropTypes.func.isRequired,
 };
 
 QuickAdd.defaultProps = {

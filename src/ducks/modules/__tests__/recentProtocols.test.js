@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import fs from 'fs';
 import { actionCreators as loadActions } from '../protocols/load';
 import { actionCreators as exportActions } from '../protocols/export';
@@ -12,7 +13,7 @@ describe('recentProtocols', () => {
     let store;
 
     beforeEach(() => {
-      store = createStore(reducer);
+      store = createStore(reducer, applyMiddleware(thunk));
     });
 
     it('LOAD_PROTOCOL_SUCCESS updates timestamp and sorts recent protocols', (done) => {
