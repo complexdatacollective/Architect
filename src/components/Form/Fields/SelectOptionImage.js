@@ -12,14 +12,16 @@ const { Option } = ReactSelectComponents;
 const SelectOptionImage = props => (
   <Option
     {...props}
-    className="form-fields-select__item"
-    classNamePrefix="form-fields-select__item"
+    className="form-fields-select__item form-fields-select__item--image"
+    classNamePrefix="form-fields-select__item form-fields-select__item--image"
   >
-    { props.data.image ? (
-      <img className="form-fields-select__item--image" src={getInputImage(props.data.image)} alt={props.data.label} />
-    ) : ''}
-    <h4>{props.data.label}</h4>
-    <p>{props.data.description}</p>
+    <div className="select-item select-item__image select-item__image--image">
+      <img className="" src={getInputImage(props.data.image)} alt={props.data.label} />
+      <h4>{props.data.label}</h4>
+    </div>
+    <div className="select-item select-item__image select-item__image--description">
+      <p>{props.data.description}</p>
+    </div>
   </Option>
 );
 

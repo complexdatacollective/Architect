@@ -2,14 +2,8 @@ const inputDefinitions = {
   NumberInput: {
     label: 'Number Input',
     value: 'Number',
-    description: 'This input is optomized for collecting numerical data, and will show a number pad if available.',
+    description: 'This input is optimized for collecting numerical data, and will show a number pad if available.',
     image: 'TextInput',
-  },
-  Checkbox: {
-    label: 'Checkbox',
-    value: 'Checkbox',
-    description: 'This is a simple checkbox component that can be clicked or tapped to toggle a value between true or false.',
-    image: 'Checkbox',
   },
   CheckboxGroup: {
     label: 'Checkbox Group',
@@ -28,12 +22,6 @@ const inputDefinitions = {
     value: 'RadioGroup',
     description: 'This will render a group of options and allow the user to choose one. Useful for likert-type scales or other ordinal variables.',
     image: 'RadioGroup',
-  },
-  ToggleButton: {
-    label: 'Toggle Button',
-    value: 'ToggleButton',
-    description: 'This component provides a colorful button that can be toggled "on" or "off". It is useful for categorical variables where multiple options can be selected.',
-    image: 'ToggleButton',
   },
   ToggleButtonGroup: {
     label: 'Toggle Button Group',
@@ -56,7 +44,7 @@ const getInputsForType = (type) => {
     case 'text':
       return [inputDefinitions.TextInput];
     case 'boolean':
-      return [inputDefinitions.Checkbox, inputDefinitions.Toggle, inputDefinitions.ToggleButton];
+      return [inputDefinitions.Toggle];
     case 'ordinal':
       return [inputDefinitions.RadioGroup];
     case 'categorical':

@@ -1,0 +1,23 @@
+.select-item {
+  &__image {
+    width: 50%;
+    margin: 1rem;
+
+    &--image {
+      text-align: center;
+
+      img {
+        max-width: 100%;
+        margin-bottom: .5rem;
+      }
+
+      h4 {
+        margin: 0;
+      }
+    }
+
+
+  }
+
+
+}
