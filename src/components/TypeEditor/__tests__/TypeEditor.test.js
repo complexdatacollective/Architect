@@ -78,4 +78,13 @@ describe('<TypeEditor />', () => {
       <h2>Display Variable</h2>,
     ])).toBe(false);
   });
+
+  it('if "new" hides variable secion', () => {
+    const subject = shallow(<TypeEditor {...mockProps} category="node" isNew />);
+
+    expect(subject.containsAllMatchingElements([
+      <h2>Display Variable</h2>,
+      <Variables {...variablesProps} />,
+    ])).toBe(false);
+  });
 });

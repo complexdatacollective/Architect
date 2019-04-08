@@ -16,6 +16,7 @@ ShallowWrapper {
     displayVariables={Array []}
     form="TYPE_EDITOR"
     handleSubmit={[Function]}
+    isNew={false}
     nameTouched={false}
     showCodeView={true}
     toggleCodeView={[Function]}
@@ -60,33 +61,6 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
-              onChange={[Function]}
-              validation={
-                Object {
-                  "required": true,
-                }
-              }
-            />
-          </div>
-        </Connect(Guided)>,
-        <Connect(Guided)
-          contentId="guidance.registry.type.label"
-        >
-          <div
-            className="editor__section"
-          >
-            <h3
-              id="field_name"
-            >
-              Short Label
-            </h3>
-            <p>
-              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-            </p>
-            <Validated
-              component={[Function]}
-              name="name"
-              normalize={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -189,7 +163,6 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
-              onChange={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -217,7 +190,6 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
-                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -259,110 +231,6 @@ ShallowWrapper {
               "props": Object {
                 "component": [Function],
                 "name": "label",
-                "onChange": [Function],
-                "validation": Object {
-                  "required": true,
-                },
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": "div",
-        },
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": <div
-            className="editor__section"
-          >
-            <h3
-              id="field_name"
-            >
-              Short Label
-            </h3>
-            <p>
-              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-            </p>
-            <Validated
-              component={[Function]}
-              name="name"
-              normalize={[Function]}
-              validation={
-                Object {
-                  "required": true,
-                }
-              }
-            />
-          </div>,
-          "contentId": "guidance.registry.type.label",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <h3
-                id="field_name"
-              >
-                Short Label
-              </h3>,
-              <p>
-                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-              </p>,
-              <Validated
-                component={[Function]}
-                name="name"
-                normalize={[Function]}
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />,
-            ],
-            "className": "editor__section",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Short Label",
-                "id": "field_name",
-              },
-              "ref": null,
-              "rendered": "Short Label",
-              "type": "h3",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-              },
-              "ref": null,
-              "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-              "type": "p",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "component": [Function],
-                "name": "name",
-                "normalize": [Function],
                 "validation": Object {
                   "required": true,
                 },
@@ -593,33 +461,6 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
-                onChange={[Function]}
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />
-            </div>
-          </Connect(Guided)>,
-          <Connect(Guided)
-            contentId="guidance.registry.type.label"
-          >
-            <div
-              className="editor__section"
-            >
-              <h3
-                id="field_name"
-              >
-                Short Label
-              </h3>
-              <p>
-                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-              </p>
-              <Validated
-                component={[Function]}
-                name="name"
-                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -722,7 +563,6 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
-                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -750,7 +590,6 @@ ShallowWrapper {
                 <Validated
                   component={[Function]}
                   name="label"
-                  onChange={[Function]}
                   validation={
                     Object {
                       "required": true,
@@ -792,110 +631,6 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "name": "label",
-                  "onChange": [Function],
-                  "validation": Object {
-                    "required": true,
-                  },
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
-            "type": "div",
-          },
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": <div
-              className="editor__section"
-            >
-              <h3
-                id="field_name"
-              >
-                Short Label
-              </h3>
-              <p>
-                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-              </p>
-              <Validated
-                component={[Function]}
-                name="name"
-                normalize={[Function]}
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />
-            </div>,
-            "contentId": "guidance.registry.type.label",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <h3
-                  id="field_name"
-                >
-                  Short Label
-                </h3>,
-                <p>
-                  The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-                </p>,
-                <Validated
-                  component={[Function]}
-                  name="name"
-                  normalize={[Function]}
-                  validation={
-                    Object {
-                      "required": true,
-                    }
-                  }
-                />,
-              ],
-              "className": "editor__section",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Short Label",
-                  "id": "field_name",
-                },
-                "ref": null,
-                "rendered": "Short Label",
-                "type": "h3",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-                },
-                "ref": null,
-                "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-                "type": "p",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "component": [Function],
-                  "name": "name",
-                  "normalize": [Function],
                   "validation": Object {
                     "required": true,
                   },
@@ -1132,6 +867,7 @@ ShallowWrapper {
     displayVariables={Array []}
     form="TYPE_EDITOR"
     handleSubmit={[Function]}
+    isNew={false}
     nameTouched={false}
     showCodeView={true}
     toggleCodeView={[Function]}
@@ -1176,33 +912,6 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
-              onChange={[Function]}
-              validation={
-                Object {
-                  "required": true,
-                }
-              }
-            />
-          </div>
-        </Connect(Guided)>,
-        <Connect(Guided)
-          contentId="guidance.registry.type.label"
-        >
-          <div
-            className="editor__section"
-          >
-            <h3
-              id="field_name"
-            >
-              Short Label
-            </h3>
-            <p>
-              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-            </p>
-            <Validated
-              component={[Function]}
-              name="name"
-              normalize={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -1363,7 +1072,6 @@ ShallowWrapper {
             <Validated
               component={[Function]}
               name="label"
-              onChange={[Function]}
               validation={
                 Object {
                   "required": true,
@@ -1391,7 +1099,6 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
-                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -1433,110 +1140,6 @@ ShallowWrapper {
               "props": Object {
                 "component": [Function],
                 "name": "label",
-                "onChange": [Function],
-                "validation": Object {
-                  "required": true,
-                },
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
-          "type": "div",
-        },
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": <div
-            className="editor__section"
-          >
-            <h3
-              id="field_name"
-            >
-              Short Label
-            </h3>
-            <p>
-              The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-            </p>
-            <Validated
-              component={[Function]}
-              name="name"
-              normalize={[Function]}
-              validation={
-                Object {
-                  "required": true,
-                }
-              }
-            />
-          </div>,
-          "contentId": "guidance.registry.type.label",
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <h3
-                id="field_name"
-              >
-                Short Label
-              </h3>,
-              <p>
-                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-              </p>,
-              <Validated
-                component={[Function]}
-                name="name"
-                normalize={[Function]}
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />,
-            ],
-            "className": "editor__section",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "Short Label",
-                "id": "field_name",
-              },
-              "ref": null,
-              "rendered": "Short Label",
-              "type": "h3",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-              },
-              "ref": null,
-              "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-              "type": "p",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "component": [Function],
-                "name": "name",
-                "normalize": [Function],
                 "validation": Object {
                   "required": true,
                 },
@@ -2068,33 +1671,6 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
-                onChange={[Function]}
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />
-            </div>
-          </Connect(Guided)>,
-          <Connect(Guided)
-            contentId="guidance.registry.type.label"
-          >
-            <div
-              className="editor__section"
-            >
-              <h3
-                id="field_name"
-              >
-                Short Label
-              </h3>
-              <p>
-                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-              </p>
-              <Validated
-                component={[Function]}
-                name="name"
-                normalize={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -2255,7 +1831,6 @@ ShallowWrapper {
               <Validated
                 component={[Function]}
                 name="label"
-                onChange={[Function]}
                 validation={
                   Object {
                     "required": true,
@@ -2283,7 +1858,6 @@ ShallowWrapper {
                 <Validated
                   component={[Function]}
                   name="label"
-                  onChange={[Function]}
                   validation={
                     Object {
                       "required": true,
@@ -2325,110 +1899,6 @@ ShallowWrapper {
                 "props": Object {
                   "component": [Function],
                   "name": "label",
-                  "onChange": [Function],
-                  "validation": Object {
-                    "required": true,
-                  },
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
-            "type": "div",
-          },
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": <div
-              className="editor__section"
-            >
-              <h3
-                id="field_name"
-              >
-                Short Label
-              </h3>
-              <p>
-                The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-              </p>
-              <Validated
-                component={[Function]}
-                name="name"
-                normalize={[Function]}
-                validation={
-                  Object {
-                    "required": true,
-                  }
-                }
-              />
-            </div>,
-            "contentId": "guidance.registry.type.label",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <h3
-                  id="field_name"
-                >
-                  Short Label
-                </h3>,
-                <p>
-                  The short name is automatically generated from the node name you entered above, but you can change it here if you wish.
-                </p>,
-                <Validated
-                  component={[Function]}
-                  name="name"
-                  normalize={[Function]}
-                  validation={
-                    Object {
-                      "required": true,
-                    }
-                  }
-                />,
-              ],
-              "className": "editor__section",
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Short Label",
-                  "id": "field_name",
-                },
-                "ref": null,
-                "rendered": "Short Label",
-                "type": "h3",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-                },
-                "ref": null,
-                "rendered": "The short name is automatically generated from the node name you entered above, but you can change it here if you wish.",
-                "type": "p",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "component": [Function],
-                  "name": "name",
-                  "normalize": [Function],
                   "validation": Object {
                     "required": true,
                   },
