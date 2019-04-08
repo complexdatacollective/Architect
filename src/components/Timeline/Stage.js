@@ -10,7 +10,7 @@ import timelineImages from '../../images/timeline';
 const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];
 
 const getTimelineImage = type =>
-  get(timelineImages, type);
+  get(timelineImages, type, timelineImages.Default);
 
 const EditStageButton = Zoom(
   ({
