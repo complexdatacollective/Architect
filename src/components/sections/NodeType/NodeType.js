@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { compose } from 'recompose';
 import { Field, getFormValues, change as changeField } from 'redux-form';
 import PropTypes from 'prop-types';
 import { keys, get, map, difference } from 'lodash';
@@ -11,6 +12,7 @@ import Node from '../../../ui/components/Node';
 import { getNodeTypes } from '../../../selectors/codebook';
 import { getFieldId } from '../../../utils/issues';
 import { actionCreators as dialogsActions } from '../../../ducks/modules/dialogs';
+import withCreateNewType from './withCreateNewType';
 
 class NodeType extends Component {
   static propTypes = {
@@ -19,12 +21,18 @@ class NodeType extends Component {
     stage: PropTypes.object.isRequired,
     resetField: PropTypes.func.isRequired,
     openDialog: PropTypes.func.isRequired,
+    handleOpenCreateNewType: PropTypes.func.isRequired,
+    handleUIMessage: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     nodeTypes: [],
     disabled: false,
   };
+
+  componentDidUpdate({ ui: prevMessage }) {
+    this.props.handleUIMessage(prevMessage);
+  }
 
   handleResetStage = () => {
     this.props.openDialog({
@@ -46,6 +54,7 @@ class NodeType extends Component {
     const {
       nodeTypes,
       disabled,
+      handleOpenCreateNewType,
     } = this.props;
 
     const nodeTypeClasses = cx('stage-editor-section', 'stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
@@ -68,7 +77,9 @@ class NodeType extends Component {
                 options={nodeTypes}
                 component={NodeSelect}
               >
-                <Node label="+" />
+                <div className="preview-node"onClick={handleOpenCreateNewType}>
+                  <Node label="+" />
+                </div>
               </Field>
             </div>
           </div>
@@ -104,7 +115,7 @@ const mapDispatchToProps = (dispatch, { form }) => ({
 
 export { NodeType };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withCreateNewType,
 )(NodeType);
