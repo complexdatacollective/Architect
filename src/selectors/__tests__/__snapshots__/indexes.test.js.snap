@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`indexes selectors getVariableIndex() extracts variables into index 1`] = `
+Object {
+  "stages[0].prompts[0].form.fields[0].variable": "alpha",
+  "stages[0].prompts[0].form.fields[1].variable": "1234-1234-4",
+  "stages[1].prompts[0].form.fields[0].variable": "bravo",
+  "stages[1].prompts[0].form.fields[1].variable": "1234-1234-5",
+}
+`;

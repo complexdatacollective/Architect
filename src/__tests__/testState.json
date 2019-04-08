@@ -1,0 +1,121 @@
+{
+  "protocol": {
+    "present": {
+      "codebook": {
+        "node": {
+          "bar": {
+            "variables": {
+              "alpha": { "name": "ALPHA", "type": "text" },
+              "bravo": { "name": "BRAVO", "type": "text" },
+              "charlie": { "name": "CHARLIE", "type": "location" }
+            }
+          },
+          "1234-1234-1234": {
+            "variables": {
+              "1234-1234-1": {
+                "name": "my layout",
+                "type": "layout"
+              },
+              "1234-1234-2": {
+                "name": "my category",
+                "type": "categorical"
+              },
+              "1234-1234-3": {
+                "name": "my boolean",
+                "type": "boolean"
+              },
+              "1234-1234-4": {
+                "name": "other boolean 2",
+                "type": "boolean"
+              },
+              "1234-1234-5": {
+                "name": "other boolean 4",
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "edge": {
+          "1234-5": {
+            "name": "an edge",
+            "color": "blue"
+          }
+        }
+      },
+      "stages": [
+        {
+          "id": "bazz",
+          "subject": { "entity": "node", "type": "foo" },
+          "prompts": [
+            {
+              "form": {
+                "fields": [
+                  { "variable": "alpha" },
+                  { "variable": "1234-1234-4" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "pip",
+          "subject": { "entity": "node", "type": "pop" },
+          "prompts": [
+            {
+              "form": {
+                "fields": [
+                  { "variable": "bravo" },
+                  { "variable": "1234-1234-5" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "buzz",
+          "prompts": [
+            {
+              "id": "fizz",
+              "subject": { "entity": "node", "type": "foo" }
+            }
+          ]
+        },
+        {
+          "id": "foxtrot",
+          "prompts": [
+            {
+              "id": "golf",
+              "subject": { "entity": "node", "type": "foo" }
+            },
+            {
+              "id": "hotel",
+              "subject": { "entity": "node", "type": "pop" }
+            }
+          ]
+        },
+        {
+          "id": "alpha",
+          "type": "Sociogram",
+          "prompts": [
+            {
+              "id": "bravo",
+              "edges": {
+                "creates": "charlie",
+                "display": ["delta", "echo"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "mike",
+          "type": "Sociogram",
+          "prompts": [
+            {
+              "id": "oscar"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

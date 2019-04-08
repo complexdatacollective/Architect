@@ -109,8 +109,12 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
 
 PromptFields.propTypes = {
   form: PropTypes.string.isRequired,
-  variableType: PropTypes.string.isRequired,
+  variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
+};
+
+PromptFields.defaultProps = {
+  variableType: null,
 };
 
 export { PromptFields };

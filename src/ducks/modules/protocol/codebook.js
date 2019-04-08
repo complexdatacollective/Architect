@@ -1,18 +1,26 @@
 import uuid from 'uuid';
 import { omit } from 'lodash';
+import { makeGetUsageForType } from '../../../selectors/usage';
+import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
+import { getNextCategoryColor } from './utils';
 import { actionCreators as formActions } from './forms';
 import { actionCreators as stageActions } from './stages';
-import { makeGetUsageForType } from '../../../selectors/codebook';
 
-const UPDATE_TYPE = 'UPDATE_TYPE';
-const CREATE_TYPE = 'CREATE_TYPE';
-const UPDATE_VARIABLE = 'UPDATE_VARIABLE';
-const CREATE_VARIABLE = 'CREATE_VARIABLE';
-const DELETE_TYPE = 'DELETE_TYPE';
+const UPDATE_TYPE = 'PROTOCOL/UPDATE_TYPE';
+const CREATE_TYPE = 'PROTOCOL/CREATE_TYPE';
+const DELETE_TYPE = 'PROTOCOL/DELETE_TYPE';
+const UPDATE_VARIABLE = 'PROTOCOL/UPDATE_VARIABLE';
+const CREATE_VARIABLE = 'PROTOCOL/CREATE_VARIABLE';
+const DELETE_VARIABLE = 'PROTOCOL/DELETE_VARIABLE';
 
 const initialState = {
   edge: {},
   node: {},
+};
+
+const defaultTypeTemplate = {
+  color: '',
+  variables: {},
 };
 
 const createType = (entity, type, configuration) => ({
@@ -21,7 +29,56 @@ const createType = (entity, type, configuration) => ({
     type,
     entity,
   },
+  configuration: {
+    ...defaultTypeTemplate,
+    ...configuration,
+  },
+});
+
+const updateType = (entity, type, configuration) => ({
+  type: UPDATE_TYPE,
+  meta: {
+    entity,
+    type,
+  },
   configuration,
+});
+
+const deleteType = (entity, type) => ({
+  type: DELETE_TYPE,
+  meta: {
+    entity,
+    type,
+  },
+});
+
+const createVariable = (entity, type, variable, configuration) => ({
+  type: CREATE_VARIABLE,
+  meta: {
+    type,
+    entity,
+    variable,
+  },
+  configuration,
+});
+
+const updateVariable = (entity, type, variable, configuration) => ({
+  type: UPDATE_VARIABLE,
+  meta: {
+    entity,
+    type,
+    variable,
+  },
+  configuration,
+});
+
+const deleteVariable = (entity, type, variable) => ({
+  type: DELETE_VARIABLE,
+  meta: {
+    type,
+    entity,
+    variable,
+  },
 });
 
 const createTypeThunk = (entity, configuration) =>
@@ -36,24 +93,21 @@ const createTypeThunk = (entity, configuration) =>
     };
   };
 
-const updateType = (entity, type, configuration) => ({
-  type: UPDATE_TYPE,
-  meta: {
-    entity,
-    type,
-  },
-  configuration,
-});
+const createEdgeThunk = configuration =>
+  (dispatch, getState) => {
+    const entity = 'edge';
+    const state = getState();
+    const protocol = state.protocol.present;
+    const color = configuration.color || getNextCategoryColor(protocol, entity);
+    const type = uuid();
 
-const createVariable = (entity, type, variable, configuration) => ({
-  type: CREATE_VARIABLE,
-  meta: {
-    type,
-    entity,
-    variable,
-  },
-  configuration,
-});
+    dispatch(createType(entity, type, { ...configuration, color }));
+
+    return {
+      type,
+      category: entity,
+    };
+  };
 
 const createVariableThunk = (entity, type, configuration) =>
   (dispatch) => {
@@ -68,23 +122,13 @@ const createVariableThunk = (entity, type, configuration) =>
     };
   };
 
-const updateVariable = (entity, type, variable, configuration) => ({
-  type: UPDATE_VARIABLE,
-  meta: {
-    entity,
-    type,
-    variable,
-  },
-  configuration,
-});
-
-const deleteType = (entity, type) => ({
-  type: DELETE_TYPE,
-  meta: {
-    entity,
-    type,
-  },
-});
+const deleteVariableThunk = (entity, type, variable) =>
+  (dispatch, getState) => {
+    const variableSearch = indexUtils.buildSearch([getVariableIndex(getState())]);
+    if (variableSearch.has(variable)) { return false; }
+    dispatch(deleteVariable(entity, type, variable));
+    return true;
+  };
 
 const getDeleteAction = ({ type, ...owner }) => {
   switch (type) {
@@ -198,14 +242,17 @@ export default function reducer(state = initialState, action = {}) {
 const actionCreators = {
   updateType,
   createType: createTypeThunk,
+  createEdge: createEdgeThunk,
   deleteType: deleteTypeThunk,
   createVariable: createVariableThunk,
+  deleteVariable: deleteVariableThunk,
   updateVariable,
 };
 
 const actionTypes = {
   CREATE_VARIABLE,
   UPDATE_VARIABLE,
+  DELETE_VARIABLE,
   UPDATE_TYPE,
   CREATE_TYPE,
   DELETE_TYPE,

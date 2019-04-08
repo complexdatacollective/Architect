@@ -43,6 +43,18 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
       max-width: unit(35);
       margin-bottom: 1rem;
     }
+
+    &-label {
+      margin: unit(1.5) 0;
+    }
+
+    &-delete {
+      float: right;
+
+      .icon {
+        height: 1rem;
+      }
+    }
   }
 
   &__option {

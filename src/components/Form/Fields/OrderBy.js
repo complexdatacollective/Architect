@@ -100,6 +100,7 @@ const Rules = compose(
   ({ variables, rules, handleChange, handleDelete }) => (
     <div className="form-fields-order-by">
       <div className="form-fields-order-by__rules">
+        { rules.length === 0 && <em>No sorting rules.</em> }
         {
           rules.map((rule, index) => (
             <Rule

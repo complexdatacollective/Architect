@@ -40,7 +40,7 @@ describe('protocol.codebook', () => {
       );
 
       expect(result).toEqual({
-        node: { foo: { bar: 'bazz' } },
+        node: { foo: { bar: 'bazz', color: '', variables: {} } },
         edge: {},
       });
     });

@@ -143,7 +143,8 @@ export default {
   ),
   'guidance.editor.sociogram_prompt.sortOrder': (
     <Fragment>
-      <h3>Sort Order</h3>
+      <h3>Unplaced nodes</h3>
+      <p>Unpositioned nodes are presented one at a time for placement.</p>
       <p>
         By default (with no ordering rules), Nodes will be unsorted. This means that they will be
         displayed in the order that they were created.

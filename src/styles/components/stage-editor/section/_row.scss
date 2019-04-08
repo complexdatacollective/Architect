@@ -1,4 +1,4 @@
-.stage-editor-section {
+.stage-editor-row {
   transition-property: opacity, transform, max-height, margin-top;
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
@@ -6,11 +6,6 @@
   opacity: 1;
   max-height: auto;
   transform: translateX(0);
-  overflow: hidden;
-
-  &:first-child {
-    margin-top: 0;
-  }
 
   &--disabled {
     opacity: 0;
@@ -19,15 +14,7 @@
     margin-top: 0;
   }
 
-  &--group {
-    margin-left: unit(-2);
-    margin-right: unit(-2);
-    padding: unit(2);
-    border: unit(.2) solid var(--background-alt);
-    border-radius: unit(1);
-  }
-
-  &--compact-next {
-    margin-bottom: -3rem;
+  &:first-child {
+    margin-top: 0;
   }
 }

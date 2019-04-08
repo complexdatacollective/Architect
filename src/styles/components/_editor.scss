@@ -57,4 +57,16 @@
     bottom: unit(8);
     left: 0;
   }
+
+  .form-field-container {
+    margin: unit(2) 0 0;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+
+  .form-field {
+    margin: 0;
+  }
 }

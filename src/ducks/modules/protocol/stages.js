@@ -2,11 +2,11 @@ import uuid from 'uuid/v1';
 import { get, compact } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 
-const CREATE_STAGE = Symbol('PROTOCOL/CREATE_STAGE');
-const UPDATE_STAGE = Symbol('PROTOCOL/UPDATE_STAGE');
-const MOVE_STAGE = Symbol('PROTOCOL/MOVE_STAGE');
-const DELETE_STAGE = Symbol('PROTOCOL/DELETE_STAGE');
-const DELETE_PROMPT = Symbol('PROTOCOL/DELETE_PROMPT');
+const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
+const UPDATE_STAGE = 'PROTOCOL/UPDATE_STAGE';
+const MOVE_STAGE = 'PROTOCOL/MOVE_STAGE';
+const DELETE_STAGE = 'PROTOCOL/DELETE_STAGE';
+const DELETE_PROMPT = 'PROTOCOL/DELETE_PROMPT';
 
 const initialState = [];
 const initialStage = {

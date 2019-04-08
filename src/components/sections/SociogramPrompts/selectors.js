@@ -1,47 +1,40 @@
-import { get, map, reduce } from 'lodash';
+import { formValueSelector } from 'redux-form';
 import { getCodebook } from '../../../selectors/protocol';
-
-const asOption = (value, key) =>
-  ({
-    label: get(value, 'name', ''),
-    value: key,
-    color: get(value, 'color', ''),
-  });
-
-const filterAsOption = rule =>
-  (memo, item, id) => {
-    if (!rule(item)) { return memo; }
-    return [
-      ...memo,
-      asOption(item, id),
-    ];
-  };
-
-export const getVariablesForNodeType = (state, props) => {
-  const nodeType = props.nodeType;
-  const codebook = getCodebook(state);
-  return get(codebook, ['node', nodeType, 'variables'], {});
-};
+import { utils as codebookUtils, getVariablesForNodeType } from '../../../selectors/codebook';
+import { utils as indexUtils, getVariableIndex } from '../../../selectors/indexes';
 
 export const getLayoutVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props);
+  const variables = getVariablesForNodeType(state, props.nodeType);
+  const variableOptions = codebookUtils.asOptions(variables);
+  const layoutOptions = variableOptions.filter(({ type }) => type === 'layout');
 
-  const layoutVariables = reduce(
-    variables,
-    filterAsOption(item => item.type === 'layout'),
-    [],
-  );
-
-  return layoutVariables;
+  return layoutOptions;
 };
 
-export const getHighlightVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props);
+export const getHighlightVariablesForNodeType = (
+  state,
+  { form, nodeType, formUsedVariableIndex },
+) => {
+  // Currently selected variable
+  const currentVariable = formValueSelector(form)(state, 'highlight.variable');
 
-  const highlightVariables = reduce(
-    variables,
-    filterAsOption(item => item.type === 'boolean'),
-    [],
+  // All defined variables that match nodeType
+  const variables = getVariablesForNodeType(state, nodeType);
+  const variableOptions = codebookUtils.asOptions(variables);
+
+  // variables that are already used in protocol
+  const variableIndex = getVariableIndex(state);
+
+  // Build a Set which whe can check variable ids against
+  const lookup = indexUtils.buildSearch(
+    [variableIndex, formUsedVariableIndex], // include
+    [[currentVariable]], // exclude
+  );
+
+  // Boolean variables which aren't already used (+ currently selected)
+  const highlightVariables = variableOptions.filter(
+    ({ type, value }) => type === 'boolean' &&
+    !lookup.has(value),
   );
 
   return highlightVariables;
@@ -49,6 +42,7 @@ export const getHighlightVariablesForNodeType = (state, props) => {
 
 export const getEdgesForNodeType = (state) => {
   const codebook = getCodebook(state);
+  const codebookOptions = codebookUtils.asOptions(codebook.edge);
 
-  return map(codebook.edge, asOption);
+  return codebookOptions;
 };

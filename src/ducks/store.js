@@ -23,15 +23,18 @@ const rootEpic = combineEpics(
 
 const epics = createEpicMiddleware(rootEpic);
 
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
+
+const enhancers = composeEnhancers(
+  applyMiddleware(thunk, logger, ipc, epics),
+);
+
 const store = createStore(
   persistedReducer,
   undefined,
-  compose(
-    applyMiddleware(thunk, logger, ipc, epics),
-    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
-      ? window.devToolsExtension()
-      : f => f,
-  ),
+  enhancers,
 );
 
 const persistor = persistStore(store);

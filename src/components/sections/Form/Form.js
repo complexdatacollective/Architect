@@ -95,11 +95,12 @@ Form.propTypes = {
   handleChangeFields: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  nodeType: PropTypes.string.isRequired,
+  nodeType: PropTypes.string,
 };
 
 Form.defaultProps = {
   disabled: false,
+  nodeType: null,
 };
 
 const handlers = {

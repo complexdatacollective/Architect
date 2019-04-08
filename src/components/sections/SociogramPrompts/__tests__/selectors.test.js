@@ -1,77 +1,43 @@
 /* eslint-env jest */
+
+import mockState from '../../../../__tests__/testState.json';
+
 import {
   getLayoutVariablesForNodeType,
   getHighlightVariablesForNodeType,
   getEdgesForNodeType,
 } from '../selectors';
 
+jest.mock('redux-form', () => ({
+  formValueSelector: () =>
+    () => '1234-1234-4',
+}));
+
 const nodeType = '1234-1234-1234';
+const form = 'edit-prompt';
 
-const mockCodebook = {
-  node: {
-    [nodeType]: {
-      variables: {
-        '1234-1234-1': {
-          name: 'my layout',
-          type: 'layout',
-        },
-        '1234-1234-2': {
-          name: 'my category',
-          type: 'categorical',
-        },
-        '1234-1234-3': {
-          name: 'my boolean',
-          type: 'boolean',
-        },
-      },
-    },
-  },
-  edge: {
-    '1234-5': {
-      name: 'an edge',
-      color: 'blue',
-    },
-  },
-};
-
-const mockState = {
-  protocol: {
-    present: {
-      codebook: mockCodebook,
-    },
-  },
-};
-
-describe('NarrativePresets', () => {
+describe('SociogramPrompts', () => {
   describe('selectors', () => {
     it('get layout variables for node type', () => {
       const result = getLayoutVariablesForNodeType(mockState, { nodeType });
 
-      expect(result).toEqual([{
-        value: '1234-1234-1',
-        label: 'my layout',
-        color: '',
-      }]);
+      expect(result).toMatchSnapshot();
     });
 
     it('get highlight variables for node type', () => {
-      const result = getHighlightVariablesForNodeType(mockState, { nodeType });
+      const result = getHighlightVariablesForNodeType(mockState, {
+        form,
+        nodeType,
+        formUsedVariableIndex: ['1234-1234-3'],
+      });
 
-      expect(result).toEqual([{
-        value: '1234-1234-3',
-        label: 'my boolean',
-        color: '',
-      }]);
+      expect(result).toMatchSnapshot();
     });
 
     it('get edges for node type', () => {
       const result = getEdgesForNodeType(mockState, { nodeType });
 
-      expect(result).toEqual([{
-        value: '1234-5',
-        label: 'an edge',
-        color: 'blue',
-      }]);
+      expect(result).toMatchSnapshot();
     });
   });
 });

@@ -3,20 +3,26 @@ import stages from './stages';
 import forms from './forms';
 import codebook from './codebook';
 import assetManifest from './assetManifest';
-import { actionTypes as loadProtocolActionTypes } from '../protocols/load';
 
 const initialState = {};
 
 const UPDATE_OPTIONS = 'PROTOCOL/UPDATE_OPTIONS';
+const SET_PROTOCOL = 'PROTOCOL/SET';
 
 const updateOptions = options => ({
   type: UPDATE_OPTIONS,
   options,
 });
 
+const setProtocol = (meta, protocol) => ({
+  type: SET_PROTOCOL,
+  meta,
+  protocol,
+});
+
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case loadProtocolActionTypes.LOAD_PROTOCOL_SUCCESS:
+    case SET_PROTOCOL:
       return { ...action.protocol };
     case UPDATE_OPTIONS:
       return {
@@ -30,10 +36,12 @@ function protocolReducer(state = initialState, action = {}) {
 
 const actionCreators = {
   updateOptions,
+  setProtocol,
 };
 
 const actionTypes = {
   UPDATE_OPTIONS,
+  SET_PROTOCOL,
 };
 
 export {

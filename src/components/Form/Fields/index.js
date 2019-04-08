@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 export { default as TextArea } from './TextArea';
 export { default as Select } from './Select';
+export { default as CreatableSelect } from './CreatableSelect';
 export { default as Markdown } from './Markdown';
 export { default as File } from './File';
 export { default as Image } from './Image';
