@@ -12,6 +12,7 @@ export const onUIMessage = (ui, prevUI, screen, handler) => {
 const OPEN_SCREEN = 'UI/OPEN_SCREEN';
 const UPDATE_SCREEN = 'UI/UPDATE_SCREEN';
 const CLOSE_SCREEN = 'UI/CLOSE_SCREEN';
+const UPDATE_GUIDANCE = 'UI/UPDATE_GUIDANCE';
 
 const initialState = {
   root: {
@@ -28,6 +29,7 @@ const initialState = {
     // },
   ],
   message: {},
+  guidance: true,
 };
 
 const openScreen = (screen, params = {}, root = false) => ({
@@ -63,8 +65,20 @@ const getUpdatedScreen = (screen, params) => ({
   },
 });
 
+const updateGuidance = open => ({
+  type: UPDATE_GUIDANCE,
+  payload: {
+    open,
+  },
+});
+
 export default (state = initialState, { type, payload } = { type: null, payload: null }) => {
   switch (type) {
+    case UPDATE_GUIDANCE:
+      return {
+        ...state,
+        guidance: payload.open,
+      };
     case OPEN_SCREEN:
       // TODO: root
       return {
@@ -115,10 +129,12 @@ export const actionTypes = {
   OPEN_SCREEN,
   CLOSE_SCREEN,
   UPDATE_SCREEN,
+  UPDATE_GUIDANCE,
 };
 
 export const actionCreators = {
   openScreen,
   closeScreen,
   updateScreen,
+  updateGuidance,
 };
