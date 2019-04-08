@@ -1,39 +1,71 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Node from '../../../ui/components/Node';
-import * as Fields from '../../../ui/components/Fields';
 
-const PreviewNode = ({ label, color, input: { value, checked, onChange } }) => (
-  <div className="preview-node" onClick={() => onChange(value)}>
-    <Node label={label} selected={checked} color={color} />
+const PreviewNode = ({ label, color, onClick, selected }) => (
+  <div className="preview-node" onClick={onClick}>
+    <Node label={label} selected={selected} color={color} />
   </div>
 );
 
 PreviewNode.propTypes = {
-  input: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
+  selected: PropTypes.bool,
   label: PropTypes.string.isRequired,
   color: PropTypes.string,
 };
 
 PreviewNode.defaultProps = {
   color: 'node-color-seq-1',
+  selected: false,
 };
 
-const NodeSelect = ({ className, ...rest }) => (
-  <Fields.RadioGroup
-    optionComponent={PreviewNode}
-    className={cx('form-fields-node-select', 'form-node-select', className)}
-    {...rest}
-  />
-);
+class NodeSelect extends Component {
+  handleClickNode = (value) => {
+    this.props.input.onChange(value);
+  };
+
+  render() {
+    const {
+      children,
+      options,
+      input: {
+        value,
+      },
+    } = this.props;
+
+    const renderedOptions = options.map(
+      ({ label, color, value: optionValue }) => (
+        <PreviewNode
+          key={optionValue}
+          label={label}
+          color={color}
+          onClick={() => this.handleClickNode(optionValue)}
+          selected={value === optionValue}
+        />
+      ),
+    );
+
+    return (
+      <div className={cx('form-fields-node-select', 'form-node-select')}>
+        {renderedOptions}
+        {children}
+      </div>
+    );
+  }
+}
 
 NodeSelect.propTypes = {
-  className: PropTypes.string,
+  children: PropTypes.node,
+  options: PropTypes.array,
+  input: PropTypes.object.isRequired,
 };
 
 NodeSelect.defaultProps = {
-  className: '',
+  children: null,
+  options: [],
 };
 
 export default NodeSelect;
+
