@@ -16,6 +16,7 @@ const QuickAdd = ({
   disabled,
   options,
   handleCreateVariable,
+  handleDeleteVariable,
 }) => (
   <React.Fragment>
     <Guidance contentId="guidance.editor.quickAdd">
@@ -29,6 +30,7 @@ const QuickAdd = ({
             placeholder="Select component"
             options={options}
             onCreateOption={value => handleCreateVariable(value, 'text')}
+            onDeleteOption={handleDeleteVariable}
             validation={{ required: true }}
           />
         </div>

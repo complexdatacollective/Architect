@@ -4,17 +4,24 @@ import { actionCreators as codebookActions } from '../../ducks/modules/protocol/
 
 const mapDispatchToProps = {
   createVariable: codebookActions.createVariable,
+  deleteVariable: codebookActions.deleteVariable,
 };
 
 const createVariableHandler = {
   handleCreateVariable: ({ createVariable, nodeType }) =>
-    (value, variableType) => {
+    (variableName, variableType) => {
       const configuration = {
         type: variableType,
-        name: value,
+        name: variableName,
       };
 
       const { variable } = createVariable('node', nodeType, configuration);
+
+      return variable;
+    },
+  handleDeleteVariable: ({ deleteVariable, nodeType }) =>
+    (variableId) => {
+      const { variable } = deleteVariable('node', nodeType, variableId);
 
       return variable;
     },

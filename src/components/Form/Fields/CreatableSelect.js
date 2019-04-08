@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../../../ui/components/Icon';
 
-const { Option } = ReactSelectComponents;
+// const { Option as RSOption } = ReactSelectComponents;
 
 const getValue = (options, value) => {
   const foundValue = options.find(option => option.value === value);
@@ -15,15 +15,30 @@ const getValue = (options, value) => {
   return foundValue;
 };
 
-const DefaultSelectItem = props => (
-  <Option
-    {...props}
-    className="form-fields-select__item"
-    classNamePrefix="form-fields-select__item"
-  >
-    <p>{props.data.label}</p>
-  </Option>
-);
+const DefaultSelectItem = (props) => {
+  // eslint-disable-next-line no-underscore-dangle
+  const isNew = !!props.data.__isNew__;
+
+  return (
+    <ReactSelectComponents.Option
+      {...props}
+      className="form-fields-select__item"
+      classNamePrefix="form-fields-select__item"
+    >
+      <div className="form-fields-select__item-label">
+        {props.data.label}
+        { !isNew &&
+          <div
+            className="form-fields-select__item-delete"
+            onClick={() => props.onDeleteOption(props.data.value)}
+          >
+            <Icon name="delete" />
+          </div>
+        }
+      </div>
+    </ReactSelectComponents.Option>
+  );
+};
 
 class Select extends PureComponent {
   static propTypes = {
@@ -32,6 +47,7 @@ class Select extends PureComponent {
     selectOptionComponent: PropTypes.any,
     input: PropTypes.object,
     onCreateOption: PropTypes.func.isRequired,
+    onDeleteOption: PropTypes.func.isRequired,
     label: PropTypes.string,
     children: PropTypes.node,
     meta: PropTypes.object,
@@ -59,6 +75,11 @@ class Select extends PureComponent {
     this.props.input.onChange(result);
   }
 
+  handleDeleteOption = (value) => {
+    this.props.onDeleteOption(value);
+    // TODO: If current value, reset?
+  };
+
   handleBlur = () => {
     if (!this.props.input.onBlur) { return; }
     this.props.input.onBlur(this.props.input.value);
@@ -70,7 +91,7 @@ class Select extends PureComponent {
       input: { onBlur, ...input },
       children,
       options,
-      selectOptionComponent,
+      selectOptionComponent: SelectOptionComponent,
       label,
       onCreateOption,
       meta: { invalid, error, touched },
@@ -85,6 +106,13 @@ class Select extends PureComponent {
       },
     );
 
+    const Option = props => (
+      <SelectOptionComponent
+        {...props}
+        onDeleteOption={this.handleDeleteOption}
+      />
+    );
+
     return (
       <div className={componentClasses}>
         { label &&
@@ -96,7 +124,7 @@ class Select extends PureComponent {
           {...input}
           options={options}
           value={this.value}
-          components={{ Option: selectOptionComponent }}
+          components={{ Option }}
           styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
@@ -107,7 +135,9 @@ class Select extends PureComponent {
           // a round about way, and still allow us to use the `touched` property.
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
+          giveThisToOption={() => false}
           {...rest}
+          menuIsOpen
         >
           {children}
         </CreatableSelect>

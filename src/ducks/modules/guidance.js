@@ -1,7 +1,7 @@
 import { last } from 'lodash';
 
-const SET_GUIDANCE = Symbol('PROTOCOL/SET_GUIDANCE');
-const UNSET_GUIDANCE = Symbol('PROTOCOL/UNSET_GUIDANCE');
+const SET_GUIDANCE = 'GUIDANCE/SET';
+const UNSET_GUIDANCE = 'GUIDANCE/UNSET';
 
 const initialState = {
   id: null,

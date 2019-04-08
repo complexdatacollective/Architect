@@ -1,5 +1,6 @@
 import { find } from 'lodash';
 import { loadProtocolConfiguration } from '../../../other/protocols';
+import { actionCreators as protocolActions } from '../protocol';
 import history from '../../../history';
 
 const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';
@@ -16,6 +17,12 @@ const loadProtocolSuccess = (meta, protocol) => ({
   meta,
   protocol,
 });
+
+const loadProtocolSuccessThunk = (meta, protocol) =>
+  (dispatch) => {
+    dispatch(loadProtocolSuccess(meta, protocol));
+    dispatch(protocolActions.setProtocol(meta, protocol));
+  };
 
 const loadProtocolError = error =>
   (dispatch) => {
@@ -40,13 +47,13 @@ const loadProtocolThunk = id =>
     }
 
     return loadProtocolConfiguration(meta.workingPath)
-      .then(protocolData => dispatch(loadProtocolSuccess(meta, protocolData)))
+      .then(protocolData => dispatch(loadProtocolSuccessThunk(meta, protocolData)))
       .catch(error => dispatch(loadProtocolError(error)));
   };
 
 const actionCreators = {
   loadProtocol: loadProtocolThunk,
-  loadProtocolSuccess,
+  loadProtocolSuccess: loadProtocolSuccessThunk,
 };
 
 const actionTypes = {

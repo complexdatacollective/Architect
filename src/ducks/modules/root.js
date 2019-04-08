@@ -13,14 +13,6 @@ import recentProtocols from './recentProtocols';
 import session, { epics as sessionEpics } from './session';
 import guidance from './guidance';
 
-const combineFilters = (...filters) =>
-  (...args) =>
-    filters.reduce(
-      (memo, filter) => memo && filter(...args),
-      true,
-    );
-
-
 export const rootEpic = combineEpics(
   sessionEpics,
 );
@@ -44,12 +36,8 @@ export const rootReducer = combineReducers({
   protocol: undoable(
     protocol,
     {
-      limit: 25,
-      filter: combineFilters(
-        ({ type }) => !/^@@redux-form\//.test(type.toString()),
-        ({ type }) => !/^persist\//.test(type.toString()),
-        ({ type }) => !/^PROTOCOLS\//.test(type.toString()),
-      ),
+      limit: 100,
+      filter: ({ type }) => /^PROTOCOL\//.test(type.toString()),
     },
   ),
   protocols,

@@ -1,8 +1,8 @@
 import { omit } from 'lodash';
 
-const CREATE_FORM = 'CREATE_FORM';
-const UPDATE_FORM = 'UPDATE_FORM';
-const DELETE_FORM = 'DELETE_FORM';
+const CREATE_FORM = 'PROTOCOL/CREATE_FORM';
+const UPDATE_FORM = 'PROTOCOL/UPDATE_FORM';
+const DELETE_FORM = 'PROTOCOL/DELETE_FORM';
 
 const initialState = {
 };
