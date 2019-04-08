@@ -1,26 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
-import { Field, getFormValues, change as changeField } from 'redux-form';
+import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import { keys, get, map, difference } from 'lodash';
+import { get } from 'lodash';
 import cx from 'classnames';
 import Guidance from '../../Guidance';
 import NodeSelect from '../../Form/Fields/NodeSelect';
 import Node from '../../../ui/components/Node';
-import { getNodeTypes } from '../../../selectors/codebook';
 import { getFieldId } from '../../../utils/issues';
-import { actionCreators as dialogsActions } from '../../../ducks/modules/dialogs';
+import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
+import withNodeTypeOptions from './withNodeTypeOptions';
 
 class NodeType extends Component {
   static propTypes = {
     nodeTypes: PropTypes.arrayOf(PropTypes.object),
     disabled: PropTypes.bool,
-    stage: PropTypes.object.isRequired,
-    resetField: PropTypes.func.isRequired,
-    openDialog: PropTypes.func.isRequired,
+    handleResetStage: PropTypes.func.isRequired,
     handleOpenCreateNewType: PropTypes.func.isRequired,
     handleUIMessage: PropTypes.func.isRequired,
   };
@@ -34,26 +30,11 @@ class NodeType extends Component {
     this.props.handleUIMessage(prevMessage);
   }
 
-  handleResetStage = () => {
-    this.props.openDialog({
-      type: 'Confirm',
-      title: 'Change node type for this stage',
-      message: 'You attemped to change the node type of a stage that you have already configured. Before you can procede the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?',
-      onConfirm: this.resetStage,
-      confirmLabel: 'Continue',
-    });
-  }
-
-  resetStage = () => {
-    const { stage, resetField } = this.props;
-    const fieldsToReset = difference(keys(stage), ['id', 'type', 'label']);
-    fieldsToReset.forEach(resetField);
-  }
-
   render() {
     const {
       nodeTypes,
       disabled,
+      handleResetStage,
       handleOpenCreateNewType,
     } = this.props;
 
@@ -67,7 +48,7 @@ class NodeType extends Component {
           <p>Which node type is used on this interface?</p>
           <div
             className="stage-editor-section-node-type__edit"
-            onClick={disabled ? () => this.handleResetStage() : () => {}}
+            onClick={handleResetStage}
           >
             <div className="stage-editor-section-node-type__edit-capture">
               <Field
@@ -89,33 +70,10 @@ class NodeType extends Component {
   }
 }
 
-const mapStateToProps = (state, { form }) => {
-  const stage = getFormValues(form)(state);
-  const nodeTypes = map(
-    getNodeTypes(state),
-    (nodeOptions, promptNodeType) => ({
-      label: get(nodeOptions, 'label', ''),
-      value: promptNodeType,
-      color: get(nodeOptions, 'color', ''),
-    }),
-  );
-  const disabled = !!get(stage, 'subject.type', false);
-
-  return {
-    nodeTypes,
-    disabled,
-    stage,
-  };
-};
-
-const mapDispatchToProps = (dispatch, { form }) => ({
-  resetField: field => dispatch(changeField(form, field, null)),
-  openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
-});
-
 export { NodeType };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  withNodeTypeOptions,
+  withDisableAndReset,
   withCreateNewType,
 )(NodeType);
