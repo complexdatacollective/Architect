@@ -6,7 +6,6 @@ import { map, get, size } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { Node, Icon } from '../ui/components';
-import FormCard from './sections/Form/FormCard';
 import * as Fields from '../ui/components/Fields';
 import { getProtocol } from '../selectors/protocol';
 import Link from './Link';
@@ -56,47 +55,6 @@ class Overview extends Component {
           <Icon name="links" color={get(edge, 'color', '')} />
         </Link>
       ),
-    );
-  }
-
-  renderForms() {
-    const forms = this.props.forms;
-    const nodeTypes = get(this.props.codebook, 'node', {});
-    if (size(nodeTypes) === 0) {
-      return (
-        <React.Fragment>
-          <em>No forms defined, yet. Create one or more node types and then create a form.</em>
-        </React.Fragment>
-      );
-    }
-
-    if (size(forms) === 0) {
-      return (
-        <em>No forms defined, yet. <Link screen="form">Create one?</Link></em>
-      );
-    }
-
-    return (
-      <React.Fragment>
-        {map(
-          forms,
-          (form, id) => (
-            <Link
-              key={id}
-              screen="form"
-              params={{ id }}
-            >
-              <FormCard
-                label={form.title}
-                input={{
-                  onChange: () => {},
-                  value: ' ',
-                }}
-              />
-            </Link>
-          ),
-        )}
-      </React.Fragment>
     );
   }
 
