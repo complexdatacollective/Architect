@@ -14,7 +14,7 @@ import { actionCreators as codebookActions } from '../../../ducks/modules/protoc
 import Section from '../Section';
 import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
-import { getTypeForComponent } from './inputOptions';
+import { getTypeForComponent } from '../../Form/inputOptions';
 import { getCodebook } from '../../../selectors/protocol';
 
 const template = () => ({ variable: uuid() });
