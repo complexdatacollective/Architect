@@ -3,13 +3,13 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import cx from 'classnames';
+import Button from '../../../ui/components/Button';
+import { getFieldId } from '../../../utils/issues';
 import Guidance from '../../Guidance';
 import NodeSelect from '../../Form/Fields/NodeSelect';
 import Select from '../../Form/Fields/Select';
 import ValidatedField from '../../Form/ValidatedField';
 import DetachedField from '../../DetachedField';
-import Node from '../../../ui/components/Node';
-import { getFieldId } from '../../../utils/issues';
 import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
@@ -71,11 +71,22 @@ class NodeType extends Component {
                   options={nodeTypes}
                   component={NodeSelect}
                   validation={{ required: true }}
+                />
+
+                { nodeTypes.length === 0 &&
+                  <p className="stage-editor-section-node-type__empty">
+                    No node types currently defined. Use the button below to create one.
+                  </p>
+                }
+
+                <Button
+                  color="primary"
+                  icon="add"
+                  size="small"
+                  onClick={handleOpenCreateNewType}
                 >
-                  <div className="preview-node"onClick={handleOpenCreateNewType}>
-                    <Node label="+" />
-                  </div>
-                </ValidatedField>
+                  Create new node type
+                </Button>
               </div>
             </div>
           </Row>
