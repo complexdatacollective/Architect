@@ -5,7 +5,7 @@ import { Flipped } from 'react-flip-toolkit';
 import { map, get, size } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
-import { Node, Button, Icon } from '../ui/components';
+import { Node, Icon } from '../ui/components';
 import FormCard from './sections/Form/FormCard';
 import * as Fields from '../ui/components/Fields';
 import { getProtocol } from '../selectors/protocol';
@@ -132,7 +132,7 @@ class Overview extends Component {
                     }}
                   />
                 </div>
-                <div className="overview__group overview__group--variable-registry">
+                {/* <div className="overview__group overview__group--variable-registry">
                   <legend className="overview__group-title">Variable registry</legend>
                   <div className="overview__group-section">
                     <h4>Node types</h4>
@@ -147,16 +147,7 @@ class Overview extends Component {
                       <Button size="small">Manage codebook</Button>
                     </Link>
                   </div>
-                </div>
-                <div className="overview__group overview__group--forms">
-                  <legend className="overview__group-title">Forms</legend>
-                  { this.renderForms() }
-                  <div className="overview__manage-button">
-                    <Link screen="forms">
-                      <Button size="small">Manage forms</Button>
-                    </Link>
-                  </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -169,7 +160,6 @@ class Overview extends Component {
 Overview.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
-  forms: PropTypes.object.isRequired,
   codebook: PropTypes.object.isRequired,
   updateOptions: PropTypes.func,
   flipId: PropTypes.string,
@@ -195,7 +185,6 @@ const mapStateToProps = (state) => {
   return {
     name: protocol && protocol.name,
     description: protocol && protocol.description,
-    forms: protocol && protocol.forms,
     codebook: protocol && protocol.codebook,
   };
 };
