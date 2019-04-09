@@ -28,16 +28,6 @@ const variablesProps = {
 };
 
 describe('<TypeEditor />', () => {
-  it('can render for node', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="node" />);
-    expect(subject).toMatchSnapshot();
-  });
-
-  it('can render for edge', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="edge" />);
-    expect(subject).toMatchSnapshot();
-  });
-
   it('passes correct props to Variables', () => {
     const subject = shallow(<TypeEditor {...mockProps} category="node" />);
 
