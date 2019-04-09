@@ -3,7 +3,6 @@ import { get } from 'lodash';
 import StageEditorScreen from './StageEditorScreen';
 import SkipLogicEditorScreen from './SkipLogicEditorScreen';
 import ViewFormsScreen from './ViewFormsScreen';
-import FormEditorScreen from './FormEditorScreen';
 import Codebook from './CodebookScreen';
 import TypeEditorScreen from './TypeEditorScreen';
 import VariableEditorScreen from './VariableEditorScreen';
@@ -14,7 +13,6 @@ const SCREEN_INDEX = {
   stage: StageEditorScreen,
   skip: SkipLogicEditorScreen,
   forms: ViewFormsScreen,
-  form: FormEditorScreen,
   codebook: Codebook,
   type: TypeEditorScreen,
   variable: VariableEditorScreen,
