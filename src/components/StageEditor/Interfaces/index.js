@@ -7,7 +7,7 @@ import NameGeneratorAutoComplete from './NameGeneratorAutoComplete';
 import Sociogram from './Sociogram';
 import CategoricalBin from './CategoricalBin';
 import OrdinalBin from './OrdinalBin';
-import PerAlterForm from './PerAlterForm';
+import AlterForm from './AlterForm';
 import Narrative from './Narrative';
 
 const interfaces = {
@@ -18,7 +18,7 @@ const interfaces = {
   Sociogram,
   CategoricalBin,
   OrdinalBin,
-  PerAlterForm,
+  AlterForm,
   Narrative,
 };
 

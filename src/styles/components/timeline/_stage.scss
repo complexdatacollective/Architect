@@ -1,6 +1,6 @@
 $preview-offset: unit(8);
-$preview-width: 15vw;
-$preview-ratio: 9 / 16;
+$preview-width: 16vw;
+$preview-ratio: 10 / 16;
 $component-name: timeline-stage;
 
 .#{$component-name} {
@@ -65,11 +65,13 @@ $component-name: timeline-stage;
 
   &__screen {
     display: block;
+    background: var(--color-navy-taupe);
+    padding: .5rem;
     width: $preview-width;
     position: relative;
     z-index: var(--z-default);
     text-align: center;
-    border-radius: 10px;
+    border-radius: .5rem;
     overflow: hidden;
     box-shadow: .6rem .6rem 0 0 var(--architect-panel-shadow);
 

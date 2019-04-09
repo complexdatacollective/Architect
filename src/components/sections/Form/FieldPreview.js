@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import Preview from '../../EditableList/Preview';
 import Badge from '../../Badge';
-import { getColorForType, getTypeForComponent } from './inputOptions';
+import { getColorForType, getTypeForComponent } from '../../Form/inputOptions';
 
 const PreviewFieldComponent = ({
   input: {

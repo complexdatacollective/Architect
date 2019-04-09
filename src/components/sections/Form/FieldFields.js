@@ -12,7 +12,7 @@ import Validations from '../../Validations';
 import { Row } from '../../OrderedList';
 import Guidance from '../../Guidance';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
-import inputOptions, { getTypeForComponent, isVariableTypeWithOptions } from './inputOptions';
+import inputOptions, { getTypeForComponent, isVariableTypeWithOptions } from '../../Form/inputOptions';
 
 const mapStateToProps = (state, { form }) => {
   const formSelector = formValueSelector(form);

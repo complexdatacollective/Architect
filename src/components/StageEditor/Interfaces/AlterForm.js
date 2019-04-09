@@ -5,7 +5,7 @@ import {
   IntroductionPanel,
 } from '../../sections';
 
-const PerAlterForm = {
+const AlterForm = {
   sections: [
     Name,
     NodeType,
@@ -14,4 +14,4 @@ const PerAlterForm = {
   ],
 };
 
-export default PerAlterForm;
+export default AlterForm;

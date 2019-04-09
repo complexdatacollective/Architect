@@ -85,7 +85,7 @@ export default [
     },
   },
   {
-    type: 'PerAlterForm',
+    type: 'AlterForm',
     title: 'Per Alter Form',
     guidance: {
       description: (

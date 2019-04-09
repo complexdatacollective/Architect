@@ -30,7 +30,7 @@ $bottom-spacing: unit(12);
       &-highlight {
         position: absolute;
         z-index: -1;
-        height: calc(#{$stage-height} + #{2 * $stage-padding});
+        height: 17rem;
         width: 100%;
         background-color: transparent;
         transition: transform var(--animation-duration-standard) var(--animation-easing),

@@ -39,9 +39,7 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     min-height: 4rem;
 
     &--image {
-      width: 100%;
-      max-width: unit(35);
-      margin-bottom: 1rem;
+      display: flex;
     }
 
     &-label {
