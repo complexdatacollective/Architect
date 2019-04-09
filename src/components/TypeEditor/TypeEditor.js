@@ -31,13 +31,13 @@ const TypeEditor = ({
 
       <Guidance contentId="guidance.registry.type.label">
         <div className="editor__section">
-          <h3 id={getFieldId('label')}>Label</h3>
+          <h3 id={getFieldId('name')}>Name</h3>
           <p>
             The node name is how you will refer to this node type in the rest of Architect.
           </p>
           <ValidatedField
             component={Fields.Text}
-            name="label"
+            name="name"
             validation={{ required: true }}
           />
         </div>
