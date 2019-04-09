@@ -7,11 +7,12 @@ import RoundButton from '../Form/RoundButton';
 import Variable from './Variable';
 import withVaribleActions from './withVariableActions';
 import withUnusedVariables from './withUnusedVariables';
-import { onUIMessage } from '../../ducks/modules/ui';
+import { onScreenMessage } from '../../ducks/modules/ui/screens';
+import { getScreensMessage } from '../../selectors/ui';
 
 class AttributesTable extends Component {
   static propTypes = {
-    ui: PropTypes.object.isRequired,
+    screensMessage: PropTypes.object.isRequired,
     createVariable: PropTypes.func.isRequired,
     updateVariable: PropTypes.func.isRequired,
     deleteVariable: PropTypes.func.isRequired,
@@ -31,9 +32,9 @@ class AttributesTable extends Component {
     };
   }
 
-  componentDidUpdate({ ui: prevMessage }) {
-    const message = this.props.ui;
-    onUIMessage(message, prevMessage, 'variable', this.handleNewVariableMessage);
+  componentDidUpdate({ screensMessage: previousMessage }) {
+    const message = this.props.screensMessage;
+    onScreenMessage(message, previousMessage, 'variable', this.handleNewVariableMessage);
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
@@ -134,7 +135,7 @@ class AttributesTable extends Component {
 }
 
 const withUI = connect(state => ({
-  ui: state.ui.message,
+  screensMessage: getScreensMessage(state),
 }));
 
 export { AttributesTable };

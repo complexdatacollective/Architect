@@ -1,8 +1,8 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
+import { getScreensStack } from '../../selectors/ui';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import TimelineScreenTransition, { styles } from '../Transitions/TimelineScreen';
 import { getScreenComponent } from './screenIndex';
@@ -57,12 +57,12 @@ Screens.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  screens: state.ui.screens,
+  screens: getScreensStack(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  closeScreen: bindActionCreators(uiActions.closeScreen, dispatch),
-});
+const mapDispatchToProps = {
+  closeScreen: uiActions.closeScreen,
+};
 
 export { Screens };
 
