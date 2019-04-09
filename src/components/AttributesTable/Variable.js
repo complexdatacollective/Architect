@@ -9,7 +9,7 @@ import { getFieldId } from '../../utils/issues';
 import VariablePreview from './VariablePreview';
 import VariableChooser from './VariableChooser';
 import VariableEditor from './VariableEditor';
-import { actionCreators as actions } from '../../ducks/modules/ui';
+import { actionCreators as uiActions } from '../../ducks/modules/ui';
 
 class Variable extends Component {
   static propTypes = {
@@ -137,7 +137,7 @@ const mapStateToProps = (state, { variablesForNodeType, ...props }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  openScreen: bindActionCreators(actions.openScreen, dispatch),
+  openScreen: bindActionCreators(uiActions.openScreen, dispatch),
 });
 
 const withNewVariableHandler = withHandlers({

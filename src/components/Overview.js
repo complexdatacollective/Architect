@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { map, get, size } from 'lodash';
-import { bindActionCreators } from 'redux';
 import { compose } from 'recompose';
 import { Node, Icon } from '../ui/components';
 import * as Fields from '../ui/components/Fields';
@@ -132,10 +131,10 @@ Overview.defaultProps = {
   updateOptions: () => {},
 };
 
-const mapDispatchToProps = dispatch => ({
-  updateOptions: bindActionCreators(protocolActions.updateOptions, dispatch),
-  openScreen: bindActionCreators(uiActions.openScreen, dispatch),
-});
+const mapDispatchToProps = {
+  updateOptions: protocolActions.updateOptions,
+  openScreen: uiActions.openScreen,
+};
 
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
