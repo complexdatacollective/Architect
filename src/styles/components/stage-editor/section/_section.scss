@@ -2,7 +2,8 @@
   transition-property: opacity, transform, max-height, margin-top;
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
-  margin-top: 3rem;
+  margin-top: 2.5rem;
+  padding-bottom: .5rem;
   opacity: 1;
   max-height: auto;
   transform: translateX(0);
@@ -28,6 +29,6 @@
   }
 
   &--compact-next {
-    margin-bottom: -3rem;
+    margin-bottom: -2.5rem;
   }
 }

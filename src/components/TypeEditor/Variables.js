@@ -48,7 +48,7 @@ const Variables = ({
     title="Edit Variable"
     filter={filter}
     sortMode="auto"
-    validation={null}
+    validation={{}}
     {...rest}
   >
     <h2>Variables</h2>

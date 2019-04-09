@@ -26,6 +26,8 @@ function mapStateToProps(state, props) {
     ),
   );
 
+  const isNew = !type;
+
   const variables = getFormValue(state, 'variables') || {};
   const displayVariables = compact(map(variables, variable => ({
     label: variable.name,
@@ -35,16 +37,15 @@ function mapStateToProps(state, props) {
   return {
     initialValues,
     displayVariables,
+    isNew,
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateType: (category, type, form) => {
-    dispatch(codebookActions.updateType(category, type, parse(form)));
-  },
-  createType: (category, form) => {
-    dispatch(codebookActions.createType(category, parse(form)));
-  },
+  updateType: (category, type, form) =>
+    dispatch(codebookActions.updateType(category, type, parse(form))),
+  createType: (category, form) =>
+    dispatch(codebookActions.createType(category, parse(form))),
 });
 
 const withTypeProps = withProps({

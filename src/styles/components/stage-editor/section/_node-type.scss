@@ -16,6 +16,14 @@ $component-name: stage-editor-section-node-type;
       }
     }
   }
+
+  &__empty {
+    font-style: italic;
+  }
+
+  button {
+    margin: 1rem 0 0;
+  }
 }
 
 .preview-node {

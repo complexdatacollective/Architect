@@ -28,16 +28,6 @@ const variablesProps = {
 };
 
 describe('<TypeEditor />', () => {
-  it('can render for node', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="node" />);
-    expect(subject).toMatchSnapshot();
-  });
-
-  it('can render for edge', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="edge" />);
-    expect(subject).toMatchSnapshot();
-  });
-
   it('passes correct props to Variables', () => {
     const subject = shallow(<TypeEditor {...mockProps} category="node" />);
 
@@ -76,6 +66,15 @@ describe('<TypeEditor />', () => {
     expect(subject.containsAllMatchingElements([
       <h2>Icon</h2>,
       <h2>Display Variable</h2>,
+    ])).toBe(false);
+  });
+
+  it('if "new" hides variable secion', () => {
+    const subject = shallow(<TypeEditor {...mockProps} category="node" isNew />);
+
+    expect(subject.containsAllMatchingElements([
+      <h2>Display Variable</h2>,
+      <Variables {...variablesProps} />,
     ])).toBe(false);
   });
 });

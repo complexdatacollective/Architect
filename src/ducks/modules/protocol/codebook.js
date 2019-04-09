@@ -1,5 +1,6 @@
 import uuid from 'uuid';
 import { omit } from 'lodash';
+import { getCodebook } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
 import { getNextCategoryColor } from './utils';
@@ -130,6 +131,18 @@ const deleteVariableThunk = (entity, type, variable) =>
     return true;
   };
 
+const updateDisplayVariableThunk = (type, variable) =>
+  (dispatch, getState) => {
+    const codebook = getCodebook(getState());
+
+    const updatedConfiguration = {
+      ...codebook.node[type],
+      displayVariable: variable,
+    };
+
+    dispatch(updateType('node', type, updatedConfiguration));
+  };
+
 const getDeleteAction = ({ type, ...owner }) => {
   switch (type) {
     case 'form':
@@ -247,6 +260,7 @@ const actionCreators = {
   createVariable: createVariableThunk,
   deleteVariable: deleteVariableThunk,
   updateVariable,
+  updateDisplayVariable: updateDisplayVariableThunk,
 };
 
 const actionTypes = {
