@@ -12,6 +12,7 @@ import protocols from './protocols';
 import recentProtocols from './recentProtocols';
 import session, { epics as sessionEpics } from './session';
 import guidance from './guidance';
+import settings from './settings';
 
 export const rootEpic = combineEpics(
   sessionEpics,
@@ -32,6 +33,7 @@ export const rootReducer = combineReducers({
   guidance,
   dialogs,
   ui,
+  settings,
   stacks,
   protocol: undoable(
     protocol,

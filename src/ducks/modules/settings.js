@@ -1,6 +1,8 @@
 const UPDATE_GUIDANCE = 'UI/UPDATE_GUIDANCE';
 
-const initialState = true;
+const initialState = {
+  showGuidance: true,
+};
 
 const updateGuidance = open => ({
   type: UPDATE_GUIDANCE,
@@ -12,7 +14,10 @@ const updateGuidance = open => ({
 export default (state = initialState, { type, payload } = { type: null, payload: null }) => {
   switch (type) {
     case UPDATE_GUIDANCE:
-      return payload.open;
+      return {
+        ...state,
+        showGuidance: payload.open,
+      };
     default:
       return state;
   }

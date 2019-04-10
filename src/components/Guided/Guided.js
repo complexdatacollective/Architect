@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Guidance from './Guidance';
 import { getGuidance } from '../../selectors/guidance';
 import { getContent } from '../../selectors/locales';
-import { actionCreators as guidanceActions } from '../../ducks/modules/ui/guidance';
+import { actionCreators as settingsActions } from '../../ducks/modules/settings';
 
 const getDefaultGuidance = (state, defaultGuidanceContentId) => {
   if (defaultGuidanceContentId === null) { return null; }
@@ -70,11 +70,11 @@ class Guided extends Component {
 
 const mapStateToProps = (state, props) => ({
   guidance: getGuidance(state) || getDefaultGuidance(state, props.defaultGuidance),
-  active: state.ui.guidance,
+  active: state.settings.showGuidance,
 });
 
 const mapDispatchToProps = {
-  updateGuidance: guidanceActions.updateGuidance,
+  updateGuidance: settingsActions.updateGuidance,
 };
 
 export { Guided };
