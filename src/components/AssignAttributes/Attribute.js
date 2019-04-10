@@ -3,8 +3,9 @@ import { get, first } from 'lodash';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
-import { getCodebook } from '../../selectors/codebook';
+import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
+import { getCodebook } from '../../selectors/codebook';
 import { getComponentsForType } from '../Form/inputOptions';
 import Select from '../Form/Fields/CreatableSelect';
 
@@ -27,6 +28,8 @@ const getInputComponentForType = (type) => {
 
 const Attribute = ({
   field,
+  fields,
+  index,
   type,
   variableOptions,
 }) => {
@@ -48,6 +51,12 @@ const Attribute = ({
             component={ValueComponent}
           />
         }
+      </div>
+      <div
+        className="assign-attributes-attribute__delete"
+        onClick={() => fields.remove(index)}
+      >
+        <Icon name="delete" />
       </div>
     </div>
   );
