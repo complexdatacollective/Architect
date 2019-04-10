@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import reducer, { actionCreators } from '../ui';
+import reducer, { actionCreators } from '../screens';
 
 const initialState = {
   root: {

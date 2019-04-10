@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import { withHandlers, compose } from 'recompose';
-import { actionCreators as uiAction, onUIMessage } from '../../../ducks/modules/ui';
+import { actionCreators as screenActions, onScreenMessage } from '../../../ducks/modules/ui/screens';
 
 const createTypeState = connect(
   state => ({
     ui: state.ui.message,
   }),
   {
-    openScreen: uiAction.openScreen,
+    openScreen: screenActions.openScreen,
     changeForm: change,
   },
 );
@@ -24,7 +24,7 @@ const createTypeHandlers = withHandlers({
       const handleTypeMessage = entity =>
         changeForm(form, 'subject', { type: entity.type, entity: 'node' });
 
-      onUIMessage(message, prevMessage, 'type', handleTypeMessage);
+      onScreenMessage(message, prevMessage, 'type', handleTypeMessage);
     },
   handleOpenCreateNewType: ({ openScreen }) =>
     () => {

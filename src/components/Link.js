@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionCreators as uiActions } from '../ducks/modules/ui';
@@ -30,9 +29,9 @@ Link.defaultProps = {
   params: {},
 };
 
-const mapDispatchToProps = dispatch => ({
-  openScreen: bindActionCreators(uiActions.openScreen, dispatch),
-});
+const mapDispatchToProps = {
+  openScreen: uiActions.openScreen,
+};
 
 export { Link };
 

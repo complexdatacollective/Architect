@@ -1,8 +1,8 @@
 import { isEqual } from 'lodash';
 
-export const onUIMessage = (ui, prevUI, screen, handler) => {
+export const onScreenMessage = (ui, prevUI, screen, handler) => {
   if (typeof handler !== 'function') {
-    throw Error('onUIMessage: no handler provided');
+    throw Error('onScreenMessage: no handler provided');
   }
   if (isEqual(ui, prevUI)) { return false; }
   if (ui.screen !== screen) { return false; }
