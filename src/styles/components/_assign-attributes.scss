@@ -1,0 +1,37 @@
+.assign-attributes {
+  &__attributes {
+  }
+
+  &__empty {
+    margin-top: unit(2);
+    font-style: italic;
+  }
+
+  &__add {
+    margin-top: unit(2);
+
+    button {
+      margin: 0;
+    }
+  }
+}
+
+.assign-attributes-attribute {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: unit(2);
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &__variable {
+    flex: 1 0 40%;
+  }
+
+  &__value {
+    flex: 1 0 60%;
+    padding-left: unit(2);
+  }
+}

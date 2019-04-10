@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { getFieldId } from '../../../utils/issues';
 import TextArea from '../../../ui/components/Fields/TextArea';
 import { ValidatedField } from '../../Form';
-import AttributesTable from '../../AttributesTable';
+import AssignAttributes from '../../AssignAttributes';
 import { Row } from '../../OrderedList';
 
 class PromptFields extends PureComponent {
   render() {
     const {
       nodeType,
+      form,
     } = this.props;
 
     return (
@@ -27,7 +28,8 @@ class PromptFields extends PureComponent {
         </Row>
         <Row>
           <h3>Additional attributes</h3>
-          <AttributesTable
+          <AssignAttributes
+            form={form}
             name="additionalAttributes"
             id="additionalAttributes"
             nodeType={nodeType}
