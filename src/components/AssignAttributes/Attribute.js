@@ -1,6 +1,6 @@
 import React from 'react';
 import { get, first } from 'lodash';
-import { compose } from 'recompose';
+import { compose, mapProps } from 'recompose';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 import Icon from '../../ui/components/Icon';
