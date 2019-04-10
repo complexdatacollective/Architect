@@ -1,13 +1,13 @@
 import React from 'react';
 import { get, first } from 'lodash';
-import { compose, mapProps } from 'recompose';
+import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
 import { getCodebook } from '../../selectors/codebook';
 import { getComponentsForType } from '../Form/inputOptions';
-import Select from '../Form/Fields/CreatableSelect';
+import Select from '../Form/Fields/Select';
 
 const withVariableMeta = connect(
   (state, { nodeType, form, field }) => {
@@ -31,6 +31,7 @@ const Attribute = ({
   fields,
   index,
   type,
+  onCreateNew,
   variableOptions,
 }) => {
   const ValueComponent = type && getInputComponentForType(type);
@@ -42,6 +43,8 @@ const Attribute = ({
           name={`${field}.variable`}
           component={Select}
           options={variableOptions}
+          onCreateNew={() => { onCreateNew(index); }}
+          createNewOption
         />
       </div>
       <div className="assign-attributes-attribute__value">

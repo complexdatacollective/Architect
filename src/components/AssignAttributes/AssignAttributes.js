@@ -1,10 +1,15 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import { compose } from 'recompose';
+import { compose, withState } from 'recompose';
 import Button from '../../ui/components/Button';
 import Attribute from './Attribute';
 import withVariableOptions from './withVariableOptions';
+// import CreateNewVariable from './CreateNewVariable';
+
+const withCreateNewVariable = withState(
+  'createNewVariable', 'setCreateNewVariable', null,
+);
 
 class AssignAttributes extends Component {
   render() {
@@ -12,6 +17,7 @@ class AssignAttributes extends Component {
       variableOptions,
       fields,
       nodeType,
+      onCreateNew,
       form,
     } = this.props;
 
@@ -28,6 +34,7 @@ class AssignAttributes extends Component {
                 form={form}
                 field={field}
                 fields={fields}
+                onCreateNew={onCreateNew}
               />
             ))}
           </div>
@@ -49,6 +56,10 @@ class AssignAttributes extends Component {
             Assign new attribute
           </Button>
         </div>
+
+        {/* <CreateNewVariable
+          show={createNewVariable}
+        /> */}
       </div>
     );
   }
@@ -58,4 +69,5 @@ export { AssignAttributes };
 
 export default compose(
   withVariableOptions,
+  // withCreateNewVariable,
 )(AssignAttributes);

@@ -12,9 +12,11 @@ import OrderedList, { NewButton } from '../OrderedList';
 import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Section from '../sections/Section'; // Should this exist out of sections if it's used here?
-import Window from './Window';
-import Form, { formName } from './Form';
+import Window from '../Window';
+import Form from '../Form';
 import withEditHandlers from './withEditHandlers';
+
+const formName = 'editiable-list-form';
 
 const sortModes = [
   'auto',
@@ -89,6 +91,7 @@ class EditableList extends PureComponent {
               onSubmit={handleUpdate}
               onSubmitFail={handleSubmitFail}
               onCancel={handleResetEditField}
+              form={formName}
             >
               <EditComponent
                 {...rest}
