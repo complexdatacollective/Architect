@@ -27,7 +27,7 @@ class PromptFields extends PureComponent {
           />
         </Row>
         <Row>
-          <h3>Additional attributes</h3>
+          <h3>Assign attributes</h3>
           <AssignAttributes
             form={form}
             name="additionalAttributes"

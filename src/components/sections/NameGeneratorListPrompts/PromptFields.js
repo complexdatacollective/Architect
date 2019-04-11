@@ -8,7 +8,7 @@ import { TextArea, Text, Checkbox } from '../../../ui/components/Fields';
 import DataSource from '../../Form/Fields/DataSource';
 import Select from '../../Form/Fields/Select';
 import MultiSelect from '../../Form/MultiSelect';
-import AttributesTable from '../../AttributesTable';
+import AssignAttributes from '../../AssignAttributes';
 import { Row, Group } from '../../OrderedList';
 import {
   getExternalPropertiesOptionGetter,
@@ -26,6 +26,7 @@ class PromptFields extends PureComponent {
       cardOptions,
       variableOptions,
       handleChangeDisplayLabel,
+      form,
     } = this.props;
 
     const displayLabel = cardOptions && cardOptions.displayLabel;
@@ -47,10 +48,11 @@ class PromptFields extends PureComponent {
           />
         </Row>
         <Row>
-          <h3>Additional attributes</h3>
-          <AttributesTable
+          <h3>Assign attributes</h3>
+          <AssignAttributes
             name="additionalAttributes"
             id="additionalAttributes"
+            form={form}
             nodeType={nodeType}
           />
         </Row>
@@ -177,6 +179,7 @@ PromptFields.propTypes = {
   variableOptions: PropTypes.array,
   handleChangeDisplayLabel: PropTypes.func.isRequired,
   dataSource: PropTypes.string,
+  form: PropTypes.string.isRequired,
   cardOptions: PropTypes.object,
 };
 
