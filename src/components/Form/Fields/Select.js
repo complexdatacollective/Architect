@@ -38,7 +38,10 @@ const CreateNewSelectItem = props => (
     className="form-fields-select__item form-fields-select__item--create-new"
     classNamePrefix="form-fields-select__item"
   >
-    <p>+ Create new item</p>
+    <div className="form-fields-select__item-label">
+      <Icon name="add" />
+      Create new item
+    </div>
   </Option>
 );
 

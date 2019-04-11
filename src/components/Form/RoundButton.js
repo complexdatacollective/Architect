@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Icon } from '../../ui/components';
 
-const Round = ({ icon, content, size, className, ...props }) => (
+const RoundButton = ({ icon, content, size, className, ...props }) => (
   <button
     className={cx('form-round-button', className, { [`form-round-button--${size}`]: !!size })}
     {...props}
@@ -12,14 +12,14 @@ const Round = ({ icon, content, size, className, ...props }) => (
   </button>
 );
 
-Round.propTypes = {
+RoundButton.propTypes = {
   icon: PropTypes.string,
   content: PropTypes.string,
   size: PropTypes.oneOf(['small', 'default', 'large']),
   className: PropTypes.string,
 };
 
-Round.defaultProps = {
+RoundButton.defaultProps = {
   icon: null,
   content: null,
   className: '',
@@ -27,4 +27,4 @@ Round.defaultProps = {
   type: 'button',
 };
 
-export default Round;
+export default RoundButton;
