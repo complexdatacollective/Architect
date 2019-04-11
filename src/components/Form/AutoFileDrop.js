@@ -5,13 +5,14 @@ import Dropzone from './Dropzone';
 import { actionCreators as assetActions } from '../../ducks/modules/protocol/assetManifest';
 
 const ACCEPTS = {
-  network: 'application/json',
-  image: 'image/*',
-  audio: 'audio/*',
-  video: 'video/*',
+  network: ['text/csv', 'application/json'],
+  image: ['image/*'],
+  audio: ['audio/*'],
+  video: ['video/*'],
 };
 
 const TYPES = [
+  [/text\/csv/, 'network'],
   [/application\/json/, 'network'],
   [/image\/.*/, 'image'],
   [/audio\/.*/, 'audio'],
