@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import { getFieldId } from '../../../utils/issues';
-import { ValidatedField } from '../../Form';
+import ValidatedField from '../../Form/ValidatedField';
 import { TextArea, Text, Checkbox } from '../../../ui/components/Fields';
 import DataSource from '../../Form/Fields/DataSource';
 import Select from '../../Form/Fields/Select';

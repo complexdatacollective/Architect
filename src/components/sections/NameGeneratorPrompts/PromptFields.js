@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { getFieldId } from '../../../utils/issues';
 import TextArea from '../../../ui/components/Fields/TextArea';
-import { ValidatedField } from '../../Form';
+import ValidatedField from '../../Form/ValidatedField';
 import AssignAttributes from '../../AssignAttributes';
 import { Row } from '../../OrderedList';
 

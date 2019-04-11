@@ -3,8 +3,8 @@ import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import { Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
-import stopPropagationFromHandler from '../utils/stopPropagationFromHandler';
-import Button from '../ui/components/Button';
+import stopPropagationFromHandler from '../../utils/stopPropagationFromHandler';
+import Button from '../../ui/components/Button';
 
 const formOptions = {
   touchOnBlur: false,

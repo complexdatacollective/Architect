@@ -1,139 +1,62 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { formValueSelector, change } from 'redux-form';
-import { withHandlers, compose } from 'recompose';
 import { getFieldId } from '../../utils/issues';
-import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
+import ValidatedField from '../Form/ValidatedField';
 import Select from '../Form/Fields/Select';
+import { isVariableTypeWithOptions, variableOptions } from '../Form/inputOptions';
 import Options from '../Options';
-import Validations from '../Validations';
 import { Row } from '../OrderedList';
-import Guidance from '../Guidance';
-import SelectOptionImage from '../Form/Fields/SelectOptionImage';
-import inputOptions, { getTypeForComponent, isVariableTypeWithOptions } from '../Form/inputOptions';
+import FormWindow from '../FormWindow';
+import withCreateNewVariableState, { form } from './withCreateNewVariableState';
 
-/*
+console.log({ variableOptions });
 
-        <Window show={!!editField}>
-          <Form
-            flipId={editField}
-            title={title}
-            onSubmit={handleUpdate}
-            onSubmitFail={handleSubmitFail}
-            onCancel={handleResetEditField}
-          >
-            <>
-          </Form>
-        </Window>*/
-
-const mapStateToProps = (state, { form }) => {
-  const formSelector = formValueSelector(form);
-  const component = formSelector(state, 'component');
-  const variableType = getTypeForComponent(component);
-
-  return {
-    variableType,
-  };
-};
-
-const mapDispatchToProps = {
-  changeField: change,
-};
-
-const handlers = {
-  handleChangeComponent: ({ changeField, form }) =>
-    () => {
-      changeField(form, 'options', null);
-      changeField(form, 'validation', {});
-    },
-};
-
-const PromptFields = ({ form, variableType, handleChangeComponent }) => (
-  <React.Fragment>
-    <Guidance contentId="guidance.section.form.field.name">
-      <Row>
-        <h3 id={getFieldId('name')}>Variable name</h3>
-        <p>Enter a name for this variable which will be used to export data</p>
-        <ValidatedField
-          name="name"
-          component={Fields.Text}
-          placeholder="e.g. Name"
-          validation={{ required: true }}
-          // TODO: safename
-        />
-      </Row>
-    </Guidance>
-    <Guidance contentId="guidance.section.form.field.prompt">
-      <Row>
-        <h3 id={getFieldId('prompt')}>Prompt</h3>
-        <p>Enter question for the particpant. e.g. What is this person&apos;s name?</p>
-        <ValidatedField
-          name="prompt"
-          component={Fields.Text}
-          placeholder="What is this person's name?"
-          validation={{ required: true }}
-        />
-      </Row>
-    </Guidance>
-    <Guidance contentId="guidance.section.form.field.component">
-      <Row>
-        <h3 id={getFieldId('component')}>Input control</h3>
-        <p>Choose a control to collect the answer</p>
-        <ValidatedField
-          name="component"
-          component={Select}
-          placeholder="Select component"
-          options={inputOptions}
-          selectOptionComponent={SelectOptionImage}
-          validation={{ required: true }}
-          onChange={handleChangeComponent}
-        />
-      </Row>
-    </Guidance>
+const CreateNewVariable = ({
+  show,
+  variableTypeOptions,
+  variableType,
+  onSubmit,
+  onCancel,
+}) => (
+  <FormWindow
+    show={show}
+    form={form}
+    onSubmit={onSubmit}
+    onCancel={onCancel}
+  >
+    <Row>
+      <h3 id={getFieldId('name')}>Variable name</h3>
+      <p>Enter a name for this variable which will be used to export data</p>
+      <ValidatedField
+        name="name"
+        component={Fields.Text}
+        placeholder="e.g. Name"
+      />
+    </Row>
+    <Row>
+      <h3 id={getFieldId('type')}>Variable type</h3>
+      <p>Choose a variable type</p>
+      <ValidatedField
+        name="type"
+        component={Select}
+        placeholder="Select variable type"
+        options={variableOptions}
+      />
+    </Row>
     { isVariableTypeWithOptions(variableType) &&
-      <Guidance contentId="guidance.section.form.field.Options">
-        <Row>
-          <h3 id={getFieldId('options')}>Options</h3>
-          <p>Create some options for this input control</p>
-          <Options
-            name="options"
-            label="Options"
-            meta={{ form }}
-          />
-        </Row>
-      </Guidance>
+      <Row>
+        <h3 id={getFieldId('options')}>Options</h3>
+        <p>Create some options for this input control</p>
+        <Options
+          name="options"
+          label="Options"
+          meta={{ form }}
+        />
+      </Row>
     }
-    { variableType &&
-      <Guidance contentId="guidance.section.form.field.validation">
-        <Row>
-          <h3 id={getFieldId('validation')}>Validation</h3>
-          <p>Select any input requirements that you would like to enforce</p>
-          <Validations
-            form={form}
-            name="validation"
-            variableType={variableType}
-          />
-        </Row>
-      </Guidance>
-    }
-  </React.Fragment>
+  </FormWindow>
 );
 
-PromptFields.propTypes = {
-  form: PropTypes.string.isRequired,
-  variableType: PropTypes.string,
-  handleChangeComponent: PropTypes.func.isRequired,
-};
+export { CreateNewVariable };
 
-PromptFields.defaultProps = {
-  variableType: null,
-};
-
-export { PromptFields };
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withHandlers(handlers),
-)(PromptFields);
+export default withCreateNewVariableState(CreateNewVariable);
