@@ -74,7 +74,7 @@ const getComponentsForType = (type) => {
     case 'text':
       return [COMPONENTS.TextInput];
     case 'boolean':
-      return [COMPONENTS.ToggleButton];
+      return [COMPONENTS.Toggle];
     case 'ordinal':
       return [COMPONENTS.RadioGroup];
     case 'categorical':

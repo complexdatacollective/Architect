@@ -1,5 +1,5 @@
 import React from 'react';
-import { get, first } from 'lodash';
+import { get } from 'lodash';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
@@ -22,7 +22,8 @@ const withVariableMeta = connect(
 );
 
 const getInputComponentForType = (type) => {
-  const componentName = first(getComponentsForType(type)).value;
+  const components = getComponentsForType(type);
+  const componentName = get(components, [0, 'value']); // Use the first possible option
   return Fields[componentName];
 };
 
@@ -52,6 +53,8 @@ const Attribute = ({
           <Field
             name={`${field}.value`}
             component={ValueComponent}
+            label={null}
+            fieldLabel={null}
           />
         }
       </div>

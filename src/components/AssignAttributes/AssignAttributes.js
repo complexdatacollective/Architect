@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { compose } from 'recompose';
 import Button from '../../ui/components/Button';
 import Attribute from './Attribute';
@@ -20,7 +20,7 @@ const AssignAttributes = ({
     <div className="assign-attributes">
       { fields.length > 0 && (
         <div className="assign-attributes__attributes">
-          {fields.map((field, index, fields) => (
+          {fields.map((field, index) => (
             <Attribute
               key={index}
               index={index}

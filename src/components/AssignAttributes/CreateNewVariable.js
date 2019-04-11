@@ -9,11 +9,8 @@ import { Row } from '../OrderedList';
 import FormWindow from '../FormWindow';
 import withCreateNewVariableState, { form } from './withCreateNewVariableState';
 
-console.log({ variableOptions });
-
 const CreateNewVariable = ({
   show,
-  variableTypeOptions,
   variableType,
   onSubmit,
   onCancel,
@@ -30,7 +27,8 @@ const CreateNewVariable = ({
       <ValidatedField
         name="name"
         component={Fields.Text}
-        placeholder="e.g. Name"
+        placeholder="e.g. Nickname"
+        validation={{ required: true }}
       />
     </Row>
     <Row>
@@ -41,6 +39,7 @@ const CreateNewVariable = ({
         component={Select}
         placeholder="Select variable type"
         options={variableOptions}
+        validation={{ required: true }}
       />
     </Row>
     { isVariableTypeWithOptions(variableType) &&
