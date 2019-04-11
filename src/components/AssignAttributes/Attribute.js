@@ -14,9 +14,11 @@ const withVariableMeta = connect(
     const codebook = getCodebook(state);
     const variable = formValueSelector(form)(state, `${field}.variable`);
     const type = get(codebook, ['node', nodeType, 'variables', variable, 'type']);
+    const options = get(codebook, ['node', nodeType, 'variables', variable, 'options']);
 
     return {
       type,
+      options,
     };
   },
 );
@@ -32,6 +34,7 @@ const Attribute = ({
   fields,
   index,
   type,
+  options,
   onCreateNew,
   variableOptions,
 }) => {
@@ -53,8 +56,7 @@ const Attribute = ({
           <Field
             name={`${field}.value`}
             component={ValueComponent}
-            label={null}
-            fieldLabel={null}
+            options={options}
           />
         }
       </div>
