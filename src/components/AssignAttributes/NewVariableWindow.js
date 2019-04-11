@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getFieldId } from '../../utils/issues';
 import * as Fields from '../../ui/components/Fields';
 import ValidatedField from '../Form/ValidatedField';
@@ -7,9 +8,9 @@ import { isVariableTypeWithOptions, variableOptions } from '../Form/inputOptions
 import Options from '../Options';
 import { Row } from '../OrderedList';
 import FormWindow from '../FormWindow';
-import withCreateNewVariableState, { form } from './withCreateNewVariableState';
+import withNewVariableWindowState, { form } from './withNewVariableWindowState';
 
-const CreateNewVariable = ({
+const NewVariableWindow = ({
   show,
   variableType,
   onSubmit,
@@ -56,6 +57,18 @@ const CreateNewVariable = ({
   </FormWindow>
 );
 
-export { CreateNewVariable };
+NewVariableWindow.propTypes = {
+  show: PropTypes.bool,
+  variableType: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
 
-export default withCreateNewVariableState(CreateNewVariable);
+NewVariableWindow.defaultProps = {
+  show: false,
+  variableType: null,
+};
+
+export { NewVariableWindow };
+
+export default withNewVariableWindowState(NewVariableWindow);

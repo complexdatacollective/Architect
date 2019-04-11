@@ -32,7 +32,7 @@ const createNewVariableHandlers = withHandlers({
       changeForm(form, attributeName, { variable, value: null });
       setCreateNewVariable(null);
     },
-  openCreateNewVariable: ({ setCreateNewVariable }) =>
+  openNewVariableWindow: ({ setCreateNewVariable }) =>
     (index) => {
       setCreateNewVariable(index);
     },
@@ -46,15 +46,15 @@ const createNewVariableProps = withProps(
   ({
     createNewVariable,
   }) => ({
-    showCreateNewVariable: createNewVariable !== null,
+    showNewVariableWindow: createNewVariable !== null,
   }),
 );
 
-const withCreateNewVariable = compose(
+const withAssignAttributesHandlers = compose(
   createNewVariableState,
   createNewVariableWindowState,
   createNewVariableProps,
   createNewVariableHandlers,
 );
 
-export default withCreateNewVariable;
+export default withAssignAttributesHandlers;

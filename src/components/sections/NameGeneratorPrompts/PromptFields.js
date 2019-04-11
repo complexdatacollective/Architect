@@ -42,6 +42,7 @@ class PromptFields extends PureComponent {
 
 PromptFields.propTypes = {
   nodeType: PropTypes.string,
+  form: PropTypes.string.isRequired,
 };
 
 PromptFields.defaultProps = {

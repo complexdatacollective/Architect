@@ -11,6 +11,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const withCreateNewVariableState = connect(mapStateToProps);
+const withNewVariableWindowState = connect(mapStateToProps);
 
-export default withCreateNewVariableState;
+export default withNewVariableWindowState;

@@ -19,6 +19,6 @@ const mapStateToProps = (state, { nodeType, form, fields }) => {
   };
 };
 
-const withVariableOptions = connect(mapStateToProps);
+const withAssignAttributesOptions = connect(mapStateToProps);
 
-export default withVariableOptions;
+export default withAssignAttributesOptions;

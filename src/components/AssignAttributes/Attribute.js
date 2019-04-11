@@ -1,27 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { compose } from 'recompose';
-import { connect } from 'react-redux';
-import { Field, formValueSelector } from 'redux-form';
+import { Field } from 'redux-form';
 import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
-import { getCodebook } from '../../selectors/codebook';
 import { getComponentsForType } from '../Form/inputOptions';
 import Select from '../Form/Fields/Select';
-
-const withVariableMeta = connect(
-  (state, { nodeType, form, field }) => {
-    const codebook = getCodebook(state);
-    const variable = formValueSelector(form)(state, `${field}.variable`);
-    const type = get(codebook, ['node', nodeType, 'variables', variable, 'type']);
-    const options = get(codebook, ['node', nodeType, 'variables', variable, 'options']);
-
-    return {
-      type,
-      options,
-    };
-  },
-);
+import withAttributeState from './withAttributeState';
 
 const getInputComponentForType = (type) => {
   const components = getComponentsForType(type);
@@ -70,8 +55,21 @@ const Attribute = ({
   );
 };
 
+Attribute.propTypes = {
+  field: PropTypes.string.isRequired,
+  fields: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  type: PropTypes.string,
+  options: PropTypes.array,
+  onCreateNew: PropTypes.func.isRequired,
+  variableOptions: PropTypes.array.isRequired,
+};
+
+Attribute.defaultProps = {
+  type: null,
+  options: [],
+};
+
 export { Attribute };
 
-export default compose(
-  withVariableMeta,
-)(Attribute);
+export default withAttributeState(Attribute);
