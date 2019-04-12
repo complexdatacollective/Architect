@@ -10,7 +10,10 @@ const fieldChangeHandlers = withHandlers({
     ({ variable, component, ...rest }) => {
       const variableType = getTypeForComponent(component);
       const codebookProperties = getCodebookProperties(rest);
-      const configuration = { type: variableType, ...codebookProperties };
+      const configuration = {
+        type: variableType,
+        ...codebookProperties,
+      };
 
       updateVariable(
         entity,

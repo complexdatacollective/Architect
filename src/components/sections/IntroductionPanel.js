@@ -13,9 +13,8 @@ const Name = () => (
         <div className="stage-editor-section">
           <h2>Introduction Panel</h2>
           <p>
-            This panel is shown prior to completion of the forms
-            for the alters, and should serve as an introduction
-            to the task.
+            This panel is shown prior to completion of the forms,
+            and should serve as an introduction to the task.
           </p>
         </div>
         <div className="stage-editor-section">

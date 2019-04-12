@@ -1,7 +1,7 @@
 
 import { formValueSelector } from 'redux-form';
 import { omit, get, reduce } from 'lodash';
-import { getCodebook } from '../../../selectors/protocol';
+import { getVariablesForSubject } from '../../../selectors/codebook';
 
 export const CODEBOOK_PROPERTIES = ['name', 'options'];
 
@@ -29,10 +29,11 @@ export const itemSelector = (entity, type) =>
 
     if (!item) { return null; }
 
-    const codebook = getCodebook(state);
     const variable = item && item.variable;
-    const codebookConfiguration = get(codebook, [entity, type, 'variables', variable], {});
-    const codebookProperties = getCodebookProperties(codebookConfiguration);
+
+    const codebookVariables = getVariablesForSubject(state, { entity, type });
+    const codebookVariable = get(codebookVariables, variable, {});
+    const codebookProperties = getCodebookProperties(codebookVariable);
 
     return {
       ...item,

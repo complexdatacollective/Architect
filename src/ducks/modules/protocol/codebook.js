@@ -90,7 +90,7 @@ const createTypeThunk = (entity, configuration) =>
 
     return {
       type,
-      category: entity,
+      category: entity, // TODO: this should remain as 'entity'
     };
   };
 
@@ -106,7 +106,7 @@ const createEdgeThunk = configuration =>
 
     return {
       type,
-      category: entity,
+      category: entity, // TODO: this should remain as 'entity'
     };
   };
 
@@ -178,32 +178,39 @@ const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) =>
  * Reducer helpers
  */
 
- // TODO: type is optional for ego!
-
-const getStateWithUpdatedType = (state, entity, type, configuration) => ({
-  ...state,
-  [entity]: {
-    ...state[entity],
-    [type]: configuration,
-  },
-});
-
-const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
-  const variables = {
-    ...state[entity][type].variables,
-    [variable]: configuration,
-  };
+const getStateWithUpdatedType = (state, entity, type, configuration) => {
+  const entityConfiguration = entity === 'ego' ?
+    configuration :
+    {
+      ...state[entity],
+      [type]: configuration,
+    };
 
   return {
     ...state,
-    [entity]: {
-      ...state[entity],
-      [type]: {
-        ...state[entity][type],
-        variables,
-      },
-    },
+    [entity]: entityConfiguration,
   };
+};
+
+const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
+  const variables = entity === 'ego' ?
+    {
+      ...state[entity].variables,
+      [variable]: configuration,
+    } :
+    {
+      ...state[entity][type].variables,
+      [variable]: configuration,
+    };
+
+  const typeConfiguration = entity === 'ego' ?
+    state[entity] :
+    state[entity][type];
+
+  return getStateWithUpdatedType(state, entity, type, {
+    ...typeConfiguration,
+    variables,
+  });
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -216,26 +223,7 @@ export default function reducer(state = initialState, action = {}) {
         action.meta.type,
         action.configuration,
       );
-    case CREATE_VARIABLE: {
-      // Same as update variable?
-      const { entity, type, variable } = action.meta;
-
-      const variables = {
-        ...state[entity][type].variables,
-        [variable]: action.configuration,
-      };
-
-      return {
-        ...state,
-        [entity]: {
-          ...state[entity],
-          [type]: {
-            ...state[entity][type],
-            variables,
-          },
-        },
-      };
-    }
+    case CREATE_VARIABLE:
     case UPDATE_VARIABLE:
       return getStateWithUpdatedVariable(
         state,
@@ -245,6 +233,7 @@ export default function reducer(state = initialState, action = {}) {
         action.configuration,
       );
     case DELETE_TYPE:
+      if (action.meta.entity === 'ego') { return state; }
       return {
         ...state,
         [action.meta.entity]: {
