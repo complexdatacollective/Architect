@@ -13,7 +13,7 @@ import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
 import withCreateEdgeHandlers from '../../enhancers/withCreateEdgeHandler';
 
 const EdgeFields = ({
-  edgesForNodeType,
+  edgesForSubject,
   handleEdgeHighlightChange,
   handleCreateEdge,
   allowHighlighting,
@@ -39,7 +39,7 @@ const EdgeFields = ({
           <Field
             name="edges.display"
             component={Fields.CheckboxGroup}
-            options={edgesForNodeType}
+            options={edgesForSubject}
             label="Display edges of the following type(s):"
           />
         </Row>
@@ -58,7 +58,7 @@ const EdgeFields = ({
             <Field
               name="edges.create"
               component={ArchitectFields.CreatableSelect}
-              options={edgesForNodeType}
+              options={edgesForSubject}
               onCreateOption={handleCreateEdge}
               placeholder="&mdash; Select or create a new edge type &mdash;"
               label="Create edges of the following type"
@@ -71,7 +71,7 @@ const EdgeFields = ({
 };
 
 EdgeFields.propTypes = {
-  edgesForNodeType: PropTypes.array.isRequired,
+  edgesForSubject: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateEdge: PropTypes.func.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,

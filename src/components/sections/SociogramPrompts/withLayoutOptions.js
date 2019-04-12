@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { getLayoutVariablesForNodeType } from './selectors';
-import { getVariablesForNodeType } from '../../../selectors/codebook';
+import { getLayoutVariablesForSubject } from './selectors';
+import { getVariablesForSubject } from '../../../selectors/codebook';
 
 const withLayoutOptions = (state, props) => {
-  const variablesForNodeType = getVariablesForNodeType(state, props.nodeType);
-  const layoutVariablesForNodeType = getLayoutVariablesForNodeType(state, props);
+  const variablesForSubject = getVariablesForSubject(state, props.nodeType);
+  const layoutVariablesForSubject = getLayoutVariablesForSubject(state, props);
   const allowPositioning = formValueSelector(props.form)(state, 'layout.allowPositioning');
 
   return {
-    variablesForNodeType,
-    layoutVariablesForNodeType,
+    variablesForSubject,
+    layoutVariablesForSubject,
     allowPositioning,
   };
 };

@@ -5,10 +5,10 @@ import Guidance from '../../Guidance';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ValidatedField from '../../Form/ValidatedField';
 import Section from '../Section';
-import withOptionsForNodeType from './withOptionsForNodeType';
+import withOptions from './withOptions';
 import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
 import withDefaultToDisplayVariable from './withDefaultToDisplayVariable';
-import withSubjectNodeType from '../../EditableList/withSubjectNodeType';
+import withSubject from '../../enhancers/withSubject';
 
 /* select from text, or creat text, default to display */
 
@@ -54,8 +54,8 @@ QuickAdd.defaultProps = {
 export { QuickAdd };
 
 export default compose(
-  withSubjectNodeType,
+  withSubject,
   withDefaultToDisplayVariable,
-  withOptionsForNodeType,
+  withOptions,
   withCreateVariableHandler,
 )(QuickAdd);

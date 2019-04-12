@@ -1,23 +1,23 @@
 import { connect } from 'react-redux';
 import {
-  getLayoutVariablesForNodeType,
-  getHighlightVariablesForNodeType,
-  getGroupVariablesForNodeType,
-  getEdgesForNodeType,
+  getLayoutVariablesForSubject,
+  getHighlightVariablesForSubject,
+  getGroupVariablesForSubject,
+  getEdgesForSubject,
 } from './selectors';
 
 
-const mapStateToProps = (state, { nodeType }) => {
-  const layoutVariblesForNodeType = getLayoutVariablesForNodeType(state, nodeType);
-  const highlightVariablesForNodeType = getHighlightVariablesForNodeType(state, nodeType);
-  const groupVariablesForNodeType = getGroupVariablesForNodeType(state, nodeType);
-  const edgesForNodeType = getEdgesForNodeType(state, nodeType);
+const mapStateToProps = (state, { entity, type }) => {
+  const layoutVariblesForSubject = getLayoutVariablesForSubject(state, { entity, type });
+  const highlightVariablesForSubject = getHighlightVariablesForSubject(state, { entity, type });
+  const groupVariablesForSubject = getGroupVariablesForSubject(state, { entity, type });
+  const edgesForSubject = getEdgesForSubject(state, { entity, type });
 
   return {
-    layoutVariblesForNodeType,
-    highlightVariablesForNodeType,
-    groupVariablesForNodeType,
-    edgesForNodeType,
+    layoutVariblesForSubject,
+    highlightVariablesForSubject,
+    groupVariablesForSubject,
+    edgesForSubject,
   };
 };
 

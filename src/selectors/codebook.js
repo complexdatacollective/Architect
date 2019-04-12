@@ -30,23 +30,31 @@ const asOptions = items =>
 const getNodeTypes = state =>
   get(getCodebook(state), 'node', {});
 
-const getVariablesForNodeType = (state, nodeType) =>
-  get(getNodeTypes(state), [nodeType, 'variables'], {});
+const getType = (state, subject) => {
+  if (!subject) { return {}; }
 
-const getUnusedVariablesForNodeType = (state, nodeType) => {
+  const path = subject.type ? [subject.entity, subject.type] : [subject.entity];
+
+  return get(getCodebook(state), path, {});
+};
+
+const getVariablesForSubject = (state, subject) =>
+  get(getType(state, subject), 'variables', {});
+
+const getUnusedVariablesForSubject = (state, subject) => {
   const variableIndex = getVariableIndex(state);
-  const variablesForNodeType = getVariablesForNodeType(state, nodeType);
+  const variablesForSubject = getVariablesForSubject(state, subject);
 
   const unusedVariables = filter(
-    variablesForNodeType,
+    variablesForSubject,
     (_, variableId) => !has(variableIndex, variableId),
   );
 
   return unusedVariables;
 };
 
-const getVariableOptionsForNodeType = (state, nodeType) => {
-  const variables = getVariablesForNodeType(state, nodeType);
+const getVariableOptionsForSubject = (state, subject) => {
+  const variables = getVariablesForSubject(state, subject);
   const options = asOptions(variables);
 
   return options;
@@ -60,8 +68,8 @@ const utils = {
 export {
   getCodebook,
   getNodeTypes,
-  getVariablesForNodeType,
-  getUnusedVariablesForNodeType,
-  getVariableOptionsForNodeType,
+  getVariablesForSubject,
+  getUnusedVariablesForSubject,
+  getVariableOptionsForSubject,
   utils,
 };

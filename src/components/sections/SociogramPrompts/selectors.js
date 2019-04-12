@@ -1,25 +1,25 @@
 import { formValueSelector } from 'redux-form';
 import { getCodebook } from '../../../selectors/protocol';
-import { utils as codebookUtils, getVariablesForNodeType } from '../../../selectors/codebook';
+import { utils as codebookUtils, getVariablesForSubject } from '../../../selectors/codebook';
 import { utils as indexUtils, getVariableIndex } from '../../../selectors/indexes';
 
-export const getLayoutVariablesForNodeType = (state, props) => {
-  const variables = getVariablesForNodeType(state, props.nodeType);
+export const getLayoutVariablesForSubject = (state, props) => {
+  const variables = getVariablesForSubject(state, props.nodeType);
   const variableOptions = codebookUtils.asOptions(variables);
   const layoutOptions = variableOptions.filter(({ type }) => type === 'layout');
 
   return layoutOptions;
 };
 
-export const getHighlightVariablesForNodeType = (
+export const getHighlightVariablesForSubject = (
   state,
-  { form, nodeType, formUsedVariableIndex },
+  { form, type, entity, formUsedVariableIndex },
 ) => {
   // Currently selected variable
   const currentVariable = formValueSelector(form)(state, 'highlight.variable');
 
   // All defined variables that match nodeType
-  const variables = getVariablesForNodeType(state, nodeType);
+  const variables = getVariablesForSubject(state, { entity, type });
   const variableOptions = codebookUtils.asOptions(variables);
 
   // variables that are already used in protocol
@@ -33,14 +33,14 @@ export const getHighlightVariablesForNodeType = (
 
   // Boolean variables which aren't already used (+ currently selected)
   const highlightVariables = variableOptions.filter(
-    ({ type, value }) => type === 'boolean' &&
+    ({ type: variableType, value }) => variableType === 'boolean' &&
     !lookup.has(value),
   );
 
   return highlightVariables;
 };
 
-export const getEdgesForNodeType = (state) => {
+export const getEdgesForSubject = (state) => {
   const codebook = getCodebook(state);
   const codebookOptions = codebookUtils.asOptions(codebook.edge);
 

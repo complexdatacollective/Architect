@@ -6,7 +6,7 @@ import { Toggle } from '../../../ui/components/Fields';
 import Form from '../Form';
 import QuickAdd from '../QuickAdd';
 import Section from '../Section';
-import { withSubjectNodeType } from '../../EditableList';
+import withSubject from '../../enhancers/withSubject';
 import withQuickAddState from './withQuickAddState';
 
 class FormWithQuickAdd extends PureComponent {
@@ -14,10 +14,10 @@ class FormWithQuickAdd extends PureComponent {
     const {
       quickAddEnabled,
       handleChangeQuickAdd,
-      nodeType,
+      entity,
     } = this.props;
 
-    const disabled = !nodeType;
+    const disabled = !entity;
 
     return (
       <React.Fragment>
@@ -50,6 +50,6 @@ class FormWithQuickAdd extends PureComponent {
 export { FormWithQuickAdd };
 
 export default compose(
-  withSubjectNodeType,
+  withSubject,
   withQuickAddState,
 )(FormWithQuickAdd);

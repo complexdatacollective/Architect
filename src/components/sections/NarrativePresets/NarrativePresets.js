@@ -3,7 +3,8 @@ import { withProps, compose } from 'recompose';
 import { omit, isEmpty } from 'lodash';
 import PresetPreview from './PresetPreview';
 import PresetFields from './PresetFields';
-import EditableList, { withSubjectNodeType } from '../../EditableList';
+import EditableList from '../../EditableList';
+import withSubject from '../../enhancers/withSubject';
 
 const normalizePreset = (values) => {
   if (!isEmpty(values.groupVariable)) {
@@ -42,6 +43,6 @@ const NarrativePresets = props => (
 export { NarrativePresets };
 
 export default compose(
-  withSubjectNodeType,
-  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+  withSubject,
+  withProps(({ entity }) => ({ disabled: !entity })),
 )(NarrativePresets);

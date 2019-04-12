@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { getHighlightVariablesForNodeType } from './selectors';
+import { getHighlightVariablesForSubject } from './selectors';
 
 const withHighlightOptions = (state, props) => {
   const allowHighlighting = formValueSelector(props.form)(state, 'highlight.allowHighlighting');
-  const highlightVariablesForNodeType = getHighlightVariablesForNodeType(state, props);
+  const highlightVariablesForSubject = getHighlightVariablesForSubject(state, props);
 
   return {
-    highlightVariablesForNodeType,
+    highlightVariablesForSubject,
     allowHighlighting,
   };
 };

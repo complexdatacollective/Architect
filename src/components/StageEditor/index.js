@@ -9,17 +9,22 @@ import { find } from 'lodash';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import StageEditor, { formName } from './StageEditor';
+import { getInterface } from './Interfaces';
 
 const getStageById = (protocol, id) =>
   find(protocol.stages, ['id', id]);
 
 const mapStateToProps = (state, props) => {
   const protocol = getProtocol(state);
-  const initialValues = getStageById(protocol, props.id) || { type: props.type };
+  const stage = getStageById(protocol, props.id);
+  const type = (stage && stage.type) || props.type;
+  const template = getInterface(type).template;
+  const initialValues = getStageById(protocol, props.id) ||
+    { ...template, type };
 
   return ({
     initialValues,
-    type: initialValues.type,
+    interfaceType: type,
     dirty: isFormDirty(formName)(state),
     invalid: isFormInvalid(formName)(state),
   });

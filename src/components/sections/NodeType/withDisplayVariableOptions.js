@@ -2,18 +2,20 @@ import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { formValueSelector } from 'redux-form';
 import { get } from 'lodash';
-import { getCodebook, getVariableOptionsForNodeType } from '../../../selectors/codebook';
+import { getCodebook, getVariableOptionsForSubject } from '../../../selectors/codebook';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 
 const withDisplayVariableState = connect(
   (state, { form }) => {
-    const nodeType = formValueSelector(form)(state, 'subject.type');
-    const displayVariableOptions = getVariableOptionsForNodeType(state, nodeType)
-      .filter(({ type }) => type === 'text');
-    const displayVariable = get(getCodebook(state), ['node', nodeType, 'displayVariable']);
+    const subject = formValueSelector(form)(state, 'subject');
+    const entity = subject && subject.entity;
+    const type = subject && subject.type;
+    const displayVariableOptions = getVariableOptionsForSubject(state, { entity, type })
+      .filter(({ type: variableType }) => variableType === 'text');
+    const displayVariable = get(getCodebook(state), [entity, type, 'displayVariable']);
 
     return {
-      nodeType,
+      ...subject,
       displayVariableOptions,
       displayVariable,
     };
@@ -24,9 +26,9 @@ const withDisplayVariableState = connect(
 );
 
 const withDisplayVariableHandlers = withHandlers({
-  handleChangeDisplayVariable: ({ nodeType, updateDisplayVariable }) =>
+  handleChangeDisplayVariable: ({ entity, type, updateDisplayVariable }) =>
     (variable) => {
-      updateDisplayVariable(nodeType, variable);
+      updateDisplayVariable(entity, type, variable);
     },
 });
 

@@ -14,6 +14,7 @@ const NameGenerator = {
     NameGeneratorPrompts,
     NodePanels,
   ],
+  name: 'Name Generator',
 };
 
 export default NameGenerator;

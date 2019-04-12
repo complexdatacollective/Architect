@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { omit } from 'lodash';
+import { omit, get } from 'lodash';
 import { getCodebook } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
@@ -131,16 +131,18 @@ const deleteVariableThunk = (entity, type, variable) =>
     return true;
   };
 
-const updateDisplayVariableThunk = (type, variable) =>
+const updateDisplayVariableThunk = (entity, type, variable) =>
   (dispatch, getState) => {
     const codebook = getCodebook(getState());
 
+    const previousConfiguration = get(codebook, [entity, type], {});
+
     const updatedConfiguration = {
-      ...codebook.node[type],
+      ...previousConfiguration,
       displayVariable: variable,
     };
 
-    dispatch(updateType('node', type, updatedConfiguration));
+    dispatch(updateType(entity, type, updatedConfiguration));
   };
 
 const getDeleteAction = ({ type, ...owner }) => {
@@ -175,6 +177,8 @@ const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) =>
 /**
  * Reducer helpers
  */
+
+ // TODO: type is optional for ego!
 
 const getStateWithUpdatedType = (state, entity, type, configuration) => ({
   ...state,

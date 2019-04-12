@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { getVariableOptionsForNodeType } from '../../../selectors/codebook';
+import { getVariableOptionsForSubject } from '../../../selectors/codebook';
 
-const mapStateToProps = (state, { nodeType }) => {
-  const variableOptions = getVariableOptionsForNodeType(state, nodeType);
+const mapStateToProps = (state, { type, entity }) => {
+  const variableOptions = getVariableOptionsForSubject(state, { type, entity });
 
   return {
     variableOptions,

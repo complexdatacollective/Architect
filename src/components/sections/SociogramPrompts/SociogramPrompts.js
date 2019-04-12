@@ -2,7 +2,8 @@ import React from 'react';
 import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
-import EditableList, { withSubjectNodeType } from '../../EditableList';
+import EditableList from '../../EditableList';
+import withSubject from '../../enhancers/withSubject';
 import withFormUsedVariableIndex from './withFormUsedVariableIndex';
 
 const template = () => ({ sortOrder: [] });
@@ -23,7 +24,7 @@ const SociogramPrompts = props => (
 export { SociogramPrompts };
 
 export default compose(
-  withSubjectNodeType,
+  withSubject,
   withFormUsedVariableIndex,
-  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+  withProps(({ entity }) => ({ disabled: !entity })),
 )(SociogramPrompts);

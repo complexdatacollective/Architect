@@ -13,7 +13,7 @@ import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
 
 const HighlightFields = ({
   allowHighlighting,
-  highlightVariablesForNodeType,
+  highlightVariablesForSubject,
   handleEdgeHighlightChange,
   handleCreateVariable,
   canCreateEdge,
@@ -48,7 +48,7 @@ const HighlightFields = ({
             label="Toggle variable of the following type"
             onCreateOption={value => handleCreateVariable(value, 'boolean')}
             placeholder="&mdash; Select or create a new variable to toggle &mdash;"
-            options={highlightVariablesForNodeType}
+            options={highlightVariablesForSubject}
           />
         </Row>
       </Section>
@@ -57,7 +57,7 @@ const HighlightFields = ({
 };
 
 HighlightFields.propTypes = {
-  highlightVariablesForNodeType: PropTypes.array.isRequired,
+  highlightVariablesForSubject: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,

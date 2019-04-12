@@ -8,20 +8,20 @@ const mapDispatchToProps = {
 };
 
 const createVariableHandler = {
-  handleCreateVariable: ({ createVariable, nodeType }) =>
+  handleCreateVariable: ({ createVariable, type, entity }) =>
     (variableName, variableType) => {
       const configuration = {
         type: variableType,
         name: variableName,
       };
 
-      const { variable } = createVariable('node', nodeType, configuration);
+      const { variable } = createVariable(entity, type, configuration);
 
       return variable;
     },
-  handleDeleteVariable: ({ deleteVariable, nodeType }) =>
+  handleDeleteVariable: ({ deleteVariable, type, entity }) =>
     (variableId) => {
-      const { variable } = deleteVariable('node', nodeType, variableId);
+      const { variable } = deleteVariable(entity, type, variableId);
 
       return variable;
     },

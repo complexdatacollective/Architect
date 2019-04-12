@@ -1,6 +1,7 @@
 import React from 'react';
 import { withProps, compose } from 'recompose';
-import EditableList, { withSubjectNodeType } from '../../EditableList';
+import EditableList from '../../EditableList';
+import withSubject from '../../enhancers/withSubject';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 
@@ -22,6 +23,6 @@ const CategoricalBinPrompts = props => (
 export { CategoricalBinPrompts };
 
 export default compose(
-  withSubjectNodeType,
-  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+  withSubject,
+  withProps(({ entity }) => ({ disabled: !entity })),
 )(CategoricalBinPrompts);

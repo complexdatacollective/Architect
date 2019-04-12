@@ -26,6 +26,7 @@ const interfaces = {
 
 const emptyInterface = {
   sections: [],
+  template: {},
 };
 
 export const getInterface = interfaceType =>
