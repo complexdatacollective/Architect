@@ -50,7 +50,7 @@ class Select extends PureComponent {
     selectOptionComponent: PropTypes.any,
     input: PropTypes.object,
     onCreateOption: PropTypes.func.isRequired,
-    onDeleteOption: PropTypes.func.isRequired,
+    onDeleteOption: PropTypes.func,
     label: PropTypes.string,
     children: PropTypes.node,
     meta: PropTypes.object,
@@ -59,6 +59,7 @@ class Select extends PureComponent {
   static defaultProps = {
     className: '',
     selectOptionComponent: DefaultSelectItem,
+    onDeleteOption: null,
     options: [],
     input: {},
     label: null,

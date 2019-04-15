@@ -1,0 +1,50 @@
+.assign-attributes {
+  &__empty {
+    margin-top: unit(2);
+    font-style: italic;
+  }
+
+  &__add {
+    margin-top: unit(2);
+
+    button {
+      margin: 0;
+    }
+  }
+}
+
+.assign-attributes-attribute {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: unit(2);
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &__variable {
+    flex: 1 0 35%;
+  }
+
+  &__value {
+    flex: 1 0 60%;
+    padding-left: unit(2);
+  }
+
+  &__delete {
+    flex: 1 0 5%;
+    padding-left: unit(2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      height: 1rem;
+
+      .cls-1 {
+        fill: var(--text-dark);
+      }
+    }
+  }
+}

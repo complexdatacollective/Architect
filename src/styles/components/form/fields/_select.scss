@@ -36,14 +36,31 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
 
   &__item {
     padding: .5rem 1rem;
-    min-height: 4rem;
 
     &--image {
       display: flex;
     }
 
+    &--create-new {
+      .icon {
+        height: 1.5rem;
+        line-height: 1rem;
+        padding: .3rem;
+        margin-right: unit(1);
+        background: var(--color-sea-green);
+        border-radius: 1rem;
+
+        .cls-1 {
+          fill: var(--text-light);
+        }
+      }
+    }
+
     &-label {
       margin: unit(1.5) 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     &-delete {

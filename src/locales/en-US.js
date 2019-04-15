@@ -26,6 +26,21 @@ export default {
       guidance.section.form.field.validation
     </p>
   ),
+  'guidance.newVariable.name': (
+    <p>
+      guidance.newVariable.name
+    </p>
+  ),
+  'guidance.newVariable.type': (
+    <p>
+      guidance.newVariable.type
+    </p>
+  ),
+  'guidance.newVariable.options': (
+    <p>
+      guidance.newVariable.options
+    </p>
+  ),
   'guidance.editor.name': (
     <Fragment>
       <h3>Naming Your Stage</h3>

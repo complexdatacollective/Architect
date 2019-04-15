@@ -1,5 +1,28 @@
 import { values } from 'lodash';
 
+const VARIABLE_TYPES = {
+  number: {
+    label: 'Number',
+    value: 'number',
+  },
+  text: {
+    label: 'Text',
+    value: 'text',
+  },
+  boolean: {
+    label: 'Boolean',
+    value: 'boolean',
+  },
+  ordinal: {
+    label: 'Ordinal',
+    value: 'ordinal',
+  },
+  categorical: {
+    label: 'Categorical',
+    value: 'categorical',
+  },
+};
+
 const COMPONENTS = {
   TextInput: {
     label: 'Text Input',
@@ -51,7 +74,7 @@ const getComponentsForType = (type) => {
     case 'text':
       return [COMPONENTS.TextInput];
     case 'boolean':
-      return [COMPONENTS.ToggleButton];
+      return [COMPONENTS.Toggle];
     case 'ordinal':
       return [COMPONENTS.RadioGroup];
     case 'categorical':
@@ -85,6 +108,8 @@ const isVariableTypeWithOptions = variableType =>
 
 const inputOptions = values(COMPONENTS);
 
+const variableOptions = values(VARIABLE_TYPES);
+
 const getColorForType = (type) => {
   switch (type) {
     case 'number':
@@ -105,6 +130,7 @@ export {
   COMPONENTS,
   VARIABLE_TYPES_WITH_OPTIONS,
   inputOptions,
+  variableOptions,
   getTypeForComponent,
   getComponentsForType,
   getColorForType,
