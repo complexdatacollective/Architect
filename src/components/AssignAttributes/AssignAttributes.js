@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import Button from '../../ui/components/Button';
 import Attribute from './Attribute';
-import withAssignAttributesOptions from './withAssignAttributesOptions';
-import withAssignAttributesHandlers from './withAssignAttributesHandlers';
-import NewVariableWindow from './NewVariableWindow';
+import withVariableOptions from './withVariableOptions';
+import withNewVariableHandlers from './withNewVariableHandlers';
+import NewVariableWindow from '../NewVariableWindow';
 
 const AssignAttributes = ({
   variableOptions,
   fields,
-  nodeType,
+  type,
+  entity,
   openNewVariableWindow,
   showNewVariableWindow,
   handleCreateNewVariable,
@@ -25,7 +26,8 @@ const AssignAttributes = ({
             key={index}
             index={index}
             variableOptions={variableOptions}
-            nodeType={nodeType}
+            type={type}
+            entity={entity}
             form={form}
             field={field}
             fields={fields}
@@ -54,9 +56,10 @@ const AssignAttributes = ({
 
     <NewVariableWindow
       show={showNewVariableWindow}
-      onSubmit={handleCreateNewVariable}
+      onComplete={handleCreateNewVariable}
       onCancel={handleCancelCreateNewVariable}
-      nodeType={nodeType}
+      entity={entity}
+      type={type}
     />
   </div>
 );
@@ -64,7 +67,8 @@ const AssignAttributes = ({
 AssignAttributes.propTypes = {
   variableOptions: PropTypes.array.isRequired,
   fields: PropTypes.object.isRequired,
-  nodeType: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  entity: PropTypes.string.isRequired,
   openNewVariableWindow: PropTypes.func.isRequired,
   showNewVariableWindow: PropTypes.bool.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
@@ -75,6 +79,6 @@ AssignAttributes.propTypes = {
 export { AssignAttributes };
 
 export default compose(
-  withAssignAttributesOptions,
-  withAssignAttributesHandlers,
+  withVariableOptions,
+  withNewVariableHandlers,
 )(AssignAttributes);

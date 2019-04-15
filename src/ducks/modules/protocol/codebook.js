@@ -179,6 +179,8 @@ const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) =>
  */
 
 const getStateWithUpdatedType = (state, entity, type, configuration) => {
+  if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
+
   const entityConfiguration = entity === 'ego' ?
     configuration :
     {
@@ -193,13 +195,15 @@ const getStateWithUpdatedType = (state, entity, type, configuration) => {
 };
 
 const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
+  if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
+
   const variables = entity === 'ego' ?
     {
-      ...state[entity].variables,
+      ...get(state, [entity, 'variables'], {}),
       [variable]: configuration,
     } :
     {
-      ...state[entity][type].variables,
+      ...get(state, [entity, type, 'variables'], {}),
       [variable]: configuration,
     };
 

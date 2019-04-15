@@ -19,6 +19,6 @@ const mapStateToProps = (state, { entity, type, form, fields }) => {
   };
 };
 
-const withAssignAttributesOptions = connect(mapStateToProps);
+const withVariableOptions = connect(mapStateToProps);
 
-export default withAssignAttributesOptions;
+export default withVariableOptions;

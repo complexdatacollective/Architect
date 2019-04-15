@@ -9,18 +9,18 @@ import { isVariableTypeWithOptions, variableOptions } from '../Form/inputOptions
 import Options from '../Options';
 import Section from '../sections/Section';
 import FormWindow from '../FormWindow';
-import withNewVariableWindowState, { form } from './withNewVariableWindowState';
+import withNewVariableHandler, { form } from './withNewVariableHandler';
 
 const NewVariableWindow = ({
   show,
   variableType,
-  onSubmit,
+  handleCreateNewVariable,
   onCancel,
 }) => (
   <FormWindow
     show={show}
     form={form}
-    onSubmit={onSubmit}
+    onSubmit={handleCreateNewVariable}
     onCancel={onCancel}
   >
     <Guidance contentId="guidance.newVariable.name">
@@ -67,7 +67,10 @@ const NewVariableWindow = ({
 NewVariableWindow.propTypes = {
   show: PropTypes.bool,
   variableType: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
+  // This prop is required by withNewVariableHandler
+  // eslint-disable-next-line
+  onComplete: PropTypes.func.isRequired,
+  handleCreateNewVariable: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 
@@ -78,4 +81,4 @@ NewVariableWindow.defaultProps = {
 
 export { NewVariableWindow };
 
-export default withNewVariableWindowState(NewVariableWindow);
+export default withNewVariableHandler(NewVariableWindow);

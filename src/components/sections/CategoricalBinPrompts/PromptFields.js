@@ -32,7 +32,7 @@ class PromptFields extends PureComponent {
           />
         </Row>
         <Row>
-          <div id={getFieldId('variable')} data-name="Variable" />
+          <h3 id={getFieldId('variable')}>Categorical variable</h3>
           <ValidatedField
             name={'variable'}
             component={Select}
