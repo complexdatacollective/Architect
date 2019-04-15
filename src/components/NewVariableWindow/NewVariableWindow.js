@@ -16,12 +16,14 @@ const NewVariableWindow = ({
   variableType,
   handleCreateNewVariable,
   onCancel,
+  initialValues,
 }) => (
   <FormWindow
     show={show}
     form={form}
     onSubmit={handleCreateNewVariable}
     onCancel={onCancel}
+    initialValues={initialValues}
   >
     <Guidance contentId="guidance.newVariable.name">
       <Section>
@@ -72,11 +74,13 @@ NewVariableWindow.propTypes = {
   onComplete: PropTypes.func.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  initialValues: PropTypes.object,
 };
 
 NewVariableWindow.defaultProps = {
   show: false,
   variableType: null,
+  initialValues: null,
 };
 
 export { NewVariableWindow };
