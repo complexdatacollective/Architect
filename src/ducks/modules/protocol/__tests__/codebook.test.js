@@ -7,6 +7,7 @@ import { sortBy } from 'lodash/fp';
 import { actionCreators as formActions } from '../forms';
 import { actionCreators as stageActions } from '../stages';
 import reducer, { actionTypes, actionCreators, testing } from '../codebook';
+import testState from '../../../../__tests__/testState.json';
 
 jest.mock('uuid');
 
@@ -14,13 +15,13 @@ const sortByType = sortBy('type');
 
 const mockStore = configureStore([thunk]);
 
-const mockState = {
-  node: {
-    place: { foo: 'bar' },
-    person: { hello: 'world' },
-  },
-  edge: { },
-};
+// const mockState = {
+//   node: {
+//     place: { foo: 'bar' },
+//     person: { hello: 'world' },
+//   },
+//   edge: { },
+// };
 
 describe('protocol.codebook', () => {
   describe('reducer', () => {
@@ -75,33 +76,53 @@ describe('protocol.codebook', () => {
       });
     });
 
-    it('CREATE_VARIABLE', () => {
-      const result = reducer(
-        {
-          node: { foo: { variables: {} } },
-          edge: {},
-        },
-        testing.createVariable('node', 'foo', 'bar', { baz: 'buzz' }),
-      );
+    describe('CREATE_VARIABLE', () => {
+      it('CREATE_VARIABLE for node entity', () => {
+        const result = reducer(
+          {
+            node: { foo: { variables: {} } },
+            edge: {},
+          },
+          testing.createVariable('node', 'foo', 'bar', { baz: 'buzz' }),
+        );
 
-      expect(result).toEqual({
-        node: { foo: { variables: { bar: { baz: 'buzz' } } } },
-        edge: {},
+        expect(result).toMatchSnapshot();
+      });
+
+      it('CREATE_VARIABLE for ego entity', () => {
+        const result = reducer(
+          {
+            ego: { variables: {} },
+          },
+          testing.createVariable('ego', undefined, 'bar', { baz: 'buzz' }),
+        );
+
+        expect(result).toMatchSnapshot();
       });
     });
 
-    it('UPDATE_VARIABLE', () => {
-      const result = reducer(
-        {
-          node: { foo: { variables: { bar: { baz: 'buzz' } } } },
-          edge: {},
-        },
-        actionCreators.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
-      );
+    describe('UPDATE_VARIABLE', () => {
+      it('UPDATE_VARIABLE for node entity', () => {
+        const result = reducer(
+          {
+            node: { foo: { variables: { bar: { baz: 'buzz' } } } },
+            edge: {},
+          },
+          actionCreators.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
+        );
 
-      expect(result).toEqual({
-        node: { foo: { variables: { bar: { fizz: 'pop' } } } },
-        edge: {},
+        expect(result).toMatchSnapshot();
+      });
+
+      it('UPDATE_VARIABLE for ego entity', () => {
+        const result = reducer(
+          {
+            ego: { variables: { bar: { baz: 'buzz' } } },
+          },
+          actionCreators.updateVariable('ego', undefined, 'bar', { fizz: 'pop' }),
+        );
+
+        expect(result).toMatchSnapshot();
       });
     });
   });
@@ -109,7 +130,7 @@ describe('protocol.codebook', () => {
   describe('async actions', () => {
     describe('createType()', () => {
       it('dispatches the CREATE_TYPE action with a type id', () => {
-        const store = mockStore(mockState);
+        const store = mockStore(testState);
 
         store.dispatch(actionCreators.createType(
           'node',
@@ -130,8 +151,8 @@ describe('protocol.codebook', () => {
     });
 
     describe('createVariable()', () => {
-      it('dispatches the CREATE_VARIABLE action with a variable id', () => {
-        const store = mockStore(mockState);
+      it('dispatches the CREATE_VARIABLE action with a variable id for node', () => {
+        const store = mockStore(testState);
 
         store.dispatch(actionCreators.createVariable(
           'node',
@@ -146,6 +167,28 @@ describe('protocol.codebook', () => {
           meta: {
             entity: 'node',
             type: 'foo',
+            variable: uuid(),
+          },
+          configuration: { fizz: 'buzz' },
+        });
+      });
+
+      it('dispatches the CREATE_VARIABLE action with a variable id for ego', () => {
+        const store = mockStore(testState);
+
+        store.dispatch(actionCreators.createVariable(
+          'ego',
+          undefined,
+          { fizz: 'buzz' },
+        ));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toMatchObject({
+          type: actionTypes.CREATE_VARIABLE,
+          meta: {
+            entity: 'ego',
+            type: undefined,
             variable: uuid(),
           },
           configuration: { fizz: 'buzz' },

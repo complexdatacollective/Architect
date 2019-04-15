@@ -3,9 +3,9 @@
 import mockState from '../../../../__tests__/testState.json';
 
 import {
-  getLayoutVariablesForNodeType,
-  getHighlightVariablesForNodeType,
-  getEdgesForNodeType,
+  getLayoutVariablesForSubject,
+  getHighlightVariablesForSubject,
+  getEdgesForSubject,
 } from '../selectors';
 
 jest.mock('redux-form', () => ({
@@ -13,21 +13,24 @@ jest.mock('redux-form', () => ({
     () => '1234-1234-4',
 }));
 
-const nodeType = '1234-1234-1234';
+const subject = {
+  entity: 'node',
+  type: '1234-1234-1234',
+};
 const form = 'edit-prompt';
 
 describe('SociogramPrompts', () => {
   describe('selectors', () => {
     it('get layout variables for node type', () => {
-      const result = getLayoutVariablesForNodeType(mockState, { nodeType });
+      const result = getLayoutVariablesForSubject(mockState, subject);
 
       expect(result).toMatchSnapshot();
     });
 
     it('get highlight variables for node type', () => {
-      const result = getHighlightVariablesForNodeType(mockState, {
+      const result = getHighlightVariablesForSubject(mockState, {
         form,
-        nodeType,
+        ...subject,
         formUsedVariableIndex: ['1234-1234-3'],
       });
 
@@ -35,7 +38,7 @@ describe('SociogramPrompts', () => {
     });
 
     it('get edges for node type', () => {
-      const result = getEdgesForNodeType(mockState, { nodeType });
+      const result = getEdgesForSubject(mockState, subject);
 
       expect(result).toMatchSnapshot();
     });

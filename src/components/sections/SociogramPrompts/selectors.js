@@ -1,12 +1,14 @@
 import { formValueSelector } from 'redux-form';
 import { getCodebook } from '../../../selectors/protocol';
-import { utils as codebookUtils, getVariablesForSubject } from '../../../selectors/codebook';
+import { utils as codebookUtils, getVariableOptionsForSubject } from '../../../selectors/codebook';
 import { utils as indexUtils, getVariableIndex } from '../../../selectors/indexes';
 
-export const getLayoutVariablesForSubject = (state, props) => {
-  const variables = getVariablesForSubject(state, props.nodeType);
-  const variableOptions = codebookUtils.asOptions(variables);
-  const layoutOptions = variableOptions.filter(({ type }) => type === 'layout');
+export const getLayoutVariablesForSubject = (state, { entity, type }) => {
+  const variableOptions = getVariableOptionsForSubject(state, { entity, type });
+  const layoutOptions = variableOptions.filter(
+    ({ type: variableType }) =>
+      variableType === 'layout',
+  );
 
   return layoutOptions;
 };
@@ -19,8 +21,7 @@ export const getHighlightVariablesForSubject = (
   const currentVariable = formValueSelector(form)(state, 'highlight.variable');
 
   // All defined variables that match nodeType
-  const variables = getVariablesForSubject(state, { entity, type });
-  const variableOptions = codebookUtils.asOptions(variables);
+  const variableOptions = getVariableOptionsForSubject(state, { entity, type });
 
   // variables that are already used in protocol
   const variableIndex = getVariableIndex(state);
