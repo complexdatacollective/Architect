@@ -67,8 +67,10 @@ class Timeline extends Component {
     });
   }
 
-  handleEditStage = id =>
-    this.props.openScreen('stage', { id });
+  handleEditStage = (id) => {
+    const { openScreen, locus } = this.props;
+    openScreen('stage', { id, locus });
+  };
 
   handleEditSkipLogic = id =>
     this.props.openScreen('skip', { id });
@@ -78,8 +80,9 @@ class Timeline extends Component {
   }
 
   createStage = (type, insertAtIndex) => {
+    const { openScreen, locus } = this.props;
     this.setState({ insertStageAtIndex: null, highlightHide: true });
-    this.props.openScreen('stage', { type, insertAtIndex });
+    openScreen('stage', { type, insertAtIndex, locus });
   };
 
   hasStages = () => this.props.stages.length > 0;
@@ -189,6 +192,7 @@ const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
 
   return {
+    locus: state.protocol.timeline[state.protocol.timeline.length - 1],
     activeProtocol: state.session.activeProtocol,
     stages: protocol ? protocol.stages : [],
     transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
