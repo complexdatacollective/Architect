@@ -1,10 +1,14 @@
 import { change } from 'redux-form';
 import { connect } from 'react-redux';
 import { withState, withHandlers, compose } from 'recompose';
+import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 
-const withFormState = connect(
+const withActions = connect(
   null,
-  { changeForm: change },
+  {
+    changeForm: change,
+    deleteVariable: codebookActions.deleteVariable,
+  },
 );
 
 const createNewVariableState = withState(
@@ -22,12 +26,15 @@ const newVariableHandlers = withHandlers({
       changeForm(form, 'variable', variable);
       setCreateNewVariable(null);
     },
+
+  handleDeleteVariable: ({ entity, type, deleteVariable }) =>
+    variable => deleteVariable(entity, type, variable),
 });
 
-const withNewVariableHandlers = compose(
-  withFormState,
+const withVariableHandlers = compose(
+  withActions,
   createNewVariableState,
   newVariableHandlers,
 );
 
-export default withNewVariableHandlers;
+export default withVariableHandlers;

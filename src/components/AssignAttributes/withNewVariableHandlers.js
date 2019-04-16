@@ -1,4 +1,3 @@
-
 import { compose, withState, withHandlers, withProps } from 'recompose';
 
 const createNewVariableWindowState = withState(
@@ -20,6 +19,8 @@ const createNewVariableHandlers = withHandlers({
     index => setCreateNewVariableAtIndex(index),
   handleCancelCreateNewVariable: ({ setCreateNewVariableAtIndex }) =>
     () => setCreateNewVariableAtIndex(null),
+  handleDeleteVariable: ({ entity, type, deleteVariable }) =>
+    variable => deleteVariable(entity, type, variable),
 });
 
 const showNewVariableWindow = withProps(
@@ -28,10 +29,10 @@ const showNewVariableWindow = withProps(
   }),
 );
 
-const withAssignAttributesHandlers = compose(
+const withNewVariableHandlers = compose(
   createNewVariableWindowState,
   createNewVariableHandlers,
   showNewVariableWindow,
 );
 
-export default withAssignAttributesHandlers;
+export default withNewVariableHandlers;

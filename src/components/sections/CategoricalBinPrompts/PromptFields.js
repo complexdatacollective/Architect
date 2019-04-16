@@ -10,7 +10,7 @@ import Row from '../Row';
 import NewVariableWindow from '../../NewVariableWindow';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
-import withNewVariableHandlers from './withNewVariableHandlers';
+import withVariableHandlers from './withVariableHandlers';
 
 const PromptFields = ({
   variableOptions,
@@ -18,6 +18,7 @@ const PromptFields = ({
   setCreateNewVariable,
   handleCancelNewVariable,
   handleCreateNewVariable,
+  handleDeleteVariable,
   createNewVariable,
   entity,
   type,
@@ -35,12 +36,14 @@ const PromptFields = ({
     </Row>
     <Row>
       <h3 id={getFieldId('variable')}>Categorical variable</h3>
+      {console.log(handleDeleteVariable)}
       <ValidatedField
         name={'variable'}
         component={CreatableSelect}
         label=""
         options={categoricalVariableOptions}
         onCreateOption={variableName => setCreateNewVariable(variableName)}
+        onDeleteOption={handleDeleteVariable}
         validation={{ required: true }}
       />
     </Row>
@@ -89,7 +92,7 @@ PromptFields.propTypes = {
   setCreateNewVariable: PropTypes.func.isRequired,
   handleCancelNewVariable: PropTypes.func.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
-  createNewVariable: PropTypes.func.isRequired,
+  createNewVariable: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
@@ -103,5 +106,5 @@ export { PromptFields };
 
 export default compose(
   withVariableOptions,
-  withNewVariableHandlers,
+  withVariableHandlers,
 )(PromptFields);

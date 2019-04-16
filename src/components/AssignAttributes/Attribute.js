@@ -16,7 +16,7 @@ const getInputComponentForType = (type) => {
 
 const Attribute = ({
   field,
-  fields,
+  handleDelete,
   index,
   variableType,
   options,
@@ -47,7 +47,7 @@ const Attribute = ({
       </div>
       <div
         className="assign-attributes-attribute__delete"
-        onClick={() => fields.remove(index)}
+        onClick={() => handleDelete(index)}
       >
         <Icon name="delete" />
       </div>
@@ -57,7 +57,6 @@ const Attribute = ({
 
 Attribute.propTypes = {
   field: PropTypes.string.isRequired,
-  fields: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   variableType: PropTypes.string,
   options: PropTypes.array,
