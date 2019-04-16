@@ -23,6 +23,7 @@ const PresetFields = ({
   highlightVariablesForSubject,
   handleCreateLayoutVariable,
   handleCreateGroupVariable,
+  handleDeleteVariable,
   openNewVariableWindow,
   closeNewVariableWindow,
   newVariableName,
@@ -48,6 +49,7 @@ const PresetFields = ({
         validation={{ required: true }}
         options={layoutVariblesForSubject}
         onCreateOption={handleCreateLayoutVariable}
+        onDeleteOption={handleDeleteVariable}
       />
     </Row>
     <Row>
@@ -57,6 +59,7 @@ const PresetFields = ({
         label="Group variable"
         options={groupVariablesForSubject}
         onCreateOption={name => openNewVariableWindow(name)}
+        onDeleteOption={handleDeleteVariable}
       />
     </Row>
     <Row>
@@ -99,6 +102,7 @@ PresetFields.propTypes = {
   highlightVariablesForSubject: PropTypes.array,
   handleCreateLayoutVariable: PropTypes.func.isRequired,
   handleCreateGroupVariable: PropTypes.func.isRequired,
+  handleDeleteVariable: PropTypes.func.isRequired,
   ...newVariableWindowPropTypes,
 };
 
