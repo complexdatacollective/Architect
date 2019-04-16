@@ -9,7 +9,7 @@ import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
 import { Row } from '../../OrderedList';
 import NewVariableWindow from '../../NewVariableWindow';
-import withOptionsForPreset from './withOptionsForPreset';
+import withPresetProps from './withPresetProps';
 import withNewVariableWindowHandlers, {
   propTypes as newVariableWindowPropTypes,
 } from '../../enhancers/withNewVariableWindowHandlers';
@@ -113,5 +113,5 @@ export { PresetFields };
 
 export default compose(
   withNewVariableWindowHandlers,
-  withOptionsForPreset,
+  withPresetProps,
 )(PresetFields);

@@ -42,9 +42,9 @@ const variableHandlers = withHandlers({
     },
 });
 
-const withOptionsForPreset = compose(
+const withPresetProps = compose(
   connect(mapStateToProps, mapDispatchToProps),
   variableHandlers,
 );
 
-export default withOptionsForPreset;
+export default withPresetProps;

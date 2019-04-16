@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import { withState, withHandlers, withProps, compose } from 'recompose';
 
+/**
+ * Helper props for use with <NewVariableWindow />
+ *
+ * TODO: Should these live with NewVariableWindow?
+ */
+
 const newVariableNameState = withState(
   'newVariableName', 'setNewVariableName', null,
 );
