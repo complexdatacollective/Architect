@@ -33,7 +33,7 @@ const Attribute = ({
           component={Select}
           options={variableOptions}
           onCreateNew={() => { onCreateNew(index); }}
-          createNewOption
+          createNewOption="Create new variable"
         />
       </div>
       <div className="assign-attributes-attribute__value">

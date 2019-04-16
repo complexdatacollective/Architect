@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import ReactSelect, { components as ReactSelectComponents } from 'react-select';
+import ReactSelect from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../../../ui/components/Icon';
-
-const { Option } = ReactSelectComponents;
+import DefaultSelectOption from './DefaultSelectOption';
 
 const getValue = (options, value) => {
   const foundValue = options.find(option => option.value === value);
@@ -14,42 +13,12 @@ const getValue = (options, value) => {
   return foundValue;
 };
 
-const DefaultSelectItem = (props) => {
-  /* eslint-disable no-underscore-dangle */
-  if (props.data.__createNewOption__) {
-    return <CreateNewSelectItem {...props} />;
-  }
-  /* eslint-enable */
-
-  return (
-    <Option
-      {...props}
-      className="form-fields-select__item"
-      classNamePrefix="form-fields-select__item"
-    >
-      <p>{props.data.label}</p>
-    </Option>
-  );
-};
-
-const CreateNewSelectItem = props => (
-  <Option
-    {...props}
-    className="form-fields-select__item form-fields-select__item--create-new"
-    classNamePrefix="form-fields-select__item"
-  >
-    <div className="form-fields-select__item-label">
-      <Icon name="add" />
-      Create new item
-    </div>
-  </Option>
-);
-
 class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     options: PropTypes.array,
     selectOptionComponent: PropTypes.any,
+    onDeleteOption: PropTypes.func,
     input: PropTypes.object,
     label: PropTypes.string,
     children: PropTypes.node,
@@ -58,7 +27,8 @@ class Select extends PureComponent {
 
   static defaultProps = {
     className: '',
-    selectOptionComponent: DefaultSelectItem,
+    selectOptionComponent: DefaultSelectOption,
+    onDeleteOption: null,
     options: [],
     input: {},
     label: null,
@@ -99,7 +69,7 @@ class Select extends PureComponent {
     } = this.props;
 
     const optionsWithNew = createNewOption ?
-      [...this.props.options, { __createNewOption__: true }] :
+      [...this.props.options, { __createNewOption__: createNewOption }] :
       this.props.options;
 
     const componentClasses = cx(
