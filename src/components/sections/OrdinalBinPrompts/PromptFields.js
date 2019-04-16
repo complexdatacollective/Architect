@@ -8,21 +8,23 @@ import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ColorPicker from '../../Form/Fields/ColorPicker';
 import MultiSelect from '../../Form/MultiSelect';
 import Row from '../Row';
-
 import NewVariableWindow from '../../NewVariableWindow';
-import withVariableOptions from '../CategoricalBinPrompts/withVariableOptions';
-import withVariableHandlers from '../CategoricalBinPrompts/withVariableHandlers';
 import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
+import withPromptProps from '../CategoricalBinPrompts/withPromptProps';
+import withNewVariableWindowHandlers, {
+  propTypes as newWindowVariablePropTypes,
+} from '../../enhancers/withNewVariableWindowHandlers';
 
 const PromptFields = ({
   variableOptions,
-  setCreateNewVariable,
-  handleCancelNewVariable,
   handleCreateNewVariable,
   handleDeleteVariable,
-  createNewVariable,
   entity,
   type,
+  openNewVariableWindow,
+  closeNewVariableWindow,
+  newVariableName,
+  showNewVariableWindow,
 }) => {
   const ordinalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'ordinal');
@@ -46,7 +48,7 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={ordinalVariableOptions}
-          onCreateOption={variableName => setCreateNewVariable(variableName)}
+          onCreateOption={openNewVariableWindow}
           onDeleteOption={handleDeleteVariable}
           validation={{ required: true }}
         />
@@ -90,13 +92,13 @@ const PromptFields = ({
       <NewVariableWindow
         initialValues={{
           type: 'ordinal',
-          name: createNewVariable,
+          name: newVariableName,
         }}
-        show={createNewVariable !== null}
+        show={showNewVariableWindow}
         entity={entity}
         type={type}
         onComplete={handleCreateNewVariable}
-        onCancel={handleCancelNewVariable}
+        onCancel={closeNewVariableWindow}
       />
     </React.Fragment>
   );
@@ -104,13 +106,11 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   variableOptions: PropTypes.array,
-  setCreateNewVariable: PropTypes.func.isRequired,
-  handleCancelNewVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
-  createNewVariable: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  ...newWindowVariablePropTypes,
 };
 
 PromptFields.defaultProps = {
@@ -120,6 +120,6 @@ PromptFields.defaultProps = {
 export { PromptFields };
 
 export default compose(
-  withVariableOptions,
-  withVariableHandlers,
+  withNewVariableWindowHandlers,
+  withPromptProps,
 )(PromptFields);

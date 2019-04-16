@@ -9,18 +9,21 @@ import MultiSelect from '../../Form/MultiSelect';
 import Row from '../Row';
 import NewVariableWindow from '../../NewVariableWindow';
 import { getSortOrderOptionGetter } from './optionGetters';
-import withVariableOptions from './withVariableOptions';
-import withVariableHandlers from './withVariableHandlers';
+import withPromptProps from './withPromptProps';
+import withNewVariableWindowHandlers, {
+  propTypes as newWindowVariablePropTypes,
+} from '../../enhancers/withNewVariableWindowHandlers';
 
 const PromptFields = ({
   variableOptions,
-  setCreateNewVariable,
-  handleCancelNewVariable,
   handleCreateNewVariable,
   handleDeleteVariable,
-  createNewVariable,
   entity,
   type,
+  openNewVariableWindow,
+  closeNewVariableWindow,
+  newVariableName,
+  showNewVariableWindow,
 }) => {
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
@@ -44,7 +47,7 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={categoricalVariableOptions}
-          onCreateOption={variableName => setCreateNewVariable(variableName)}
+          onCreateOption={openNewVariableWindow}
           onDeleteOption={handleDeleteVariable}
           validation={{ required: true }}
         />
@@ -77,13 +80,13 @@ const PromptFields = ({
       <NewVariableWindow
         initialValues={{
           type: 'categorical',
-          name: createNewVariable,
+          name: newVariableName,
         }}
-        show={createNewVariable !== null}
+        show={showNewVariableWindow}
         entity={entity}
         type={type}
         onComplete={handleCreateNewVariable}
-        onCancel={handleCancelNewVariable}
+        onCancel={closeNewVariableWindow}
       />
     </React.Fragment>
   );
@@ -91,13 +94,11 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   variableOptions: PropTypes.array,
-  setCreateNewVariable: PropTypes.func.isRequired,
-  handleCancelNewVariable: PropTypes.func.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
-  createNewVariable: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  ...newWindowVariablePropTypes,
 };
 
 PromptFields.defaultProps = {
@@ -108,6 +109,6 @@ PromptFields.defaultProps = {
 export { PromptFields };
 
 export default compose(
-  withVariableOptions,
-  withVariableHandlers,
+  withNewVariableWindowHandlers,
+  withPromptProps,
 )(PromptFields);
