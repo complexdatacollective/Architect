@@ -20,7 +20,8 @@ import withExternalDataPropertyOptions from '../NameGeneratorListPrompts/withExt
 class PromptFields extends PureComponent {
   render() {
     const {
-      nodeType,
+      type,
+      entity,
       dataSource,
       cardOptions,
       externalDataPropertyOptions,
@@ -52,7 +53,8 @@ class PromptFields extends PureComponent {
             name="additionalAttributes"
             id="additionalAttributes"
             form={form}
-            nodeType={nodeType}
+            type={type}
+            entity={entity}
           />
         </Row>
         <Row>
@@ -161,7 +163,8 @@ class PromptFields extends PureComponent {
 }
 
 PromptFields.propTypes = {
-  nodeType: PropTypes.string,
+  type: PropTypes.string,
+  entity: PropTypes.string,
   dataSource: PropTypes.string,
   cardOptions: PropTypes.object,
   form: PropTypes.string.isRequired,
@@ -170,7 +173,8 @@ PromptFields.propTypes = {
 };
 
 PromptFields.defaultProps = {
-  nodeType: null,
+  type: null,
+  entity: null,
   dataSource: null,
   cardOptions: {},
   externalDataPropertyOptions: [],
