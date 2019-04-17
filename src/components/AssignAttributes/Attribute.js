@@ -62,6 +62,7 @@ Attribute.propTypes = {
   options: PropTypes.array,
   onCreateNew: PropTypes.func.isRequired,
   variableOptions: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 Attribute.defaultProps = {

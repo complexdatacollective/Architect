@@ -5,7 +5,7 @@ import { compose, withHandlers } from 'recompose';
 const newVariableHandlers = withHandlers({
   handleCreateNewSearchVariable: ({ pushField, form, closeNewVariableWindow }) =>
     (variable) => {
-      pushField(form, 'searchOptions.matchProperties', variable),
+      pushField(form, 'searchOptions.matchProperties', variable);
       closeNewVariableWindow();
     },
 });

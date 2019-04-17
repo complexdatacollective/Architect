@@ -8,15 +8,10 @@ const mockProps = {
   deleteStage: () => {},
   openDialog: () => {},
   openScreen: () => {},
+  locus: 0,
 };
 
 describe('<Timeline />', () => {
-  it('can render', () => {
-    const component = shallow(<Timeline {...mockProps} />);
-
-    expect(component).toMatchSnapshot();
-  });
-
   it('renders stages', () => {
     const mockStages = [{ id: 1, type: 'NameGenerator' }, { id: 2, type: 'Sociogram' }];
 

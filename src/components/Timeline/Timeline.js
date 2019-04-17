@@ -25,6 +25,7 @@ class Timeline extends Component {
     openDialog: PropTypes.func.isRequired,
     openScreen: PropTypes.func.isRequired,
     show: PropTypes.bool,
+    locus: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   };
 
   static defaultProps = {
