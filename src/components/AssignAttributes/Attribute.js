@@ -6,7 +6,7 @@ import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
 import { getComponentsForType } from '../Form/inputOptions';
 import Select from '../Form/Fields/Select';
-import withAttributeState from './withAttributeState';
+import withVariableMeta from './withVariableMeta';
 
 const getInputComponentForType = (type) => {
   const components = getComponentsForType(type);
@@ -18,12 +18,12 @@ const Attribute = ({
   field,
   fields,
   index,
-  type,
+  variableType,
   options,
   onCreateNew,
   variableOptions,
 }) => {
-  const ValueComponent = type && getInputComponentForType(type);
+  const ValueComponent = variableType && getInputComponentForType(variableType);
 
   return (
     <div className="assign-attributes-attribute">
@@ -37,7 +37,7 @@ const Attribute = ({
         />
       </div>
       <div className="assign-attributes-attribute__value">
-        { type &&
+        { variableType &&
           <Field
             name={`${field}.value`}
             component={ValueComponent}
@@ -59,17 +59,17 @@ Attribute.propTypes = {
   field: PropTypes.string.isRequired,
   fields: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-  type: PropTypes.string,
+  variableType: PropTypes.string,
   options: PropTypes.array,
   onCreateNew: PropTypes.func.isRequired,
   variableOptions: PropTypes.array.isRequired,
 };
 
 Attribute.defaultProps = {
-  type: null,
+  variableType: null,
   options: [],
 };
 
 export { Attribute };
 
-export default withAttributeState(Attribute);
+export default withVariableMeta(Attribute);

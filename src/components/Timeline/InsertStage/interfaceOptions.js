@@ -98,6 +98,17 @@ export default [
     },
   },
   {
+    type: 'EgoForm',
+    title: 'Ego Form',
+    guidance: {
+      description: (
+        <p>
+          The Ego Form Interface is for...
+        </p>
+      ),
+    },
+  },
+  {
     type: 'Narrative',
     title: 'Narrative',
     guidance: {

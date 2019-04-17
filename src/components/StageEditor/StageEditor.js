@@ -6,17 +6,6 @@ import { getInterface } from './Interfaces';
 
 const formName = 'edit-stage';
 
-const INTERFACE_NAMES = {
-  Information: 'Information',
-  NameGenerator: 'Name Generator',
-  NameGeneratorList: 'Roster Name Generator (list)',
-  NameGeneratorAutoComplete: 'Roster Name Generator (search)',
-  Sociogram: 'Sociogram',
-  Narrative: 'Narrative',
-};
-
-const getInterfaceName = type => INTERFACE_NAMES[type] || type;
-
 class StageEditor extends Component {
   componentDidMount() {
     ipcRenderer.on('REFRESH_PREVIEW', this.handleRefresh);
@@ -27,7 +16,11 @@ class StageEditor extends Component {
   }
 
   sections() {
-    return getInterface(this.props.type).sections;
+    return getInterface(this.props.interfaceType).sections;
+  }
+
+  name() {
+    return getInterface(this.props.interfaceType).name || this.props.interfaceType;
   }
 
   handleRefresh = () => {
@@ -38,7 +31,7 @@ class StageEditor extends Component {
     return (
       <Editor
         formName={formName}
-        title={`Edit ${getInterfaceName(this.props.type)}`}
+        title={`Edit ${this.name()}`}
         {...this.props}
       >
         {
@@ -51,6 +44,7 @@ class StageEditor extends Component {
                 // `windowRoot` will ensure connect() components re-render
                 // when the window root changes
                 windowRoot={windowRoot}
+                interfaceType={this.props.interfaceType}
               />
             ))
         }
@@ -60,7 +54,7 @@ class StageEditor extends Component {
 }
 
 StageEditor.propTypes = {
-  type: PropTypes.string.isRequired,
+  interfaceType: PropTypes.string.isRequired,
 };
 
 export {

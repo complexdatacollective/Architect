@@ -10,6 +10,7 @@ const NameGeneratorList = {
     NodeType,
     NameGeneratorListPrompts,
   ],
+  name: 'Roster Name Generator (list)',
 };
 
 export default NameGeneratorList;

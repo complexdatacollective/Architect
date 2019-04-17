@@ -1,16 +1,19 @@
 /* eslint-env jest */
 import {
-  getLayoutVariablesForNodeType,
-  getHighlightVariablesForNodeType,
-  getGroupVariablesForNodeType,
-  getEdgesForNodeType,
+  getLayoutVariablesForSubject,
+  getHighlightVariablesForSubject,
+  getGroupVariablesForSubject,
+  getEdgesForSubject,
 } from '../selectors';
 
-const nodeType = '1234-1234-1234';
+const subject = {
+  entity: 'node',
+  type: '1234-1234-1234',
+};
 
 const mockCodebook = {
   node: {
-    [nodeType]: {
+    [subject.type]: {
       variables: {
         '1234-1234-1': {
           name: 'my layout',
@@ -46,7 +49,7 @@ const mockState = {
 describe('NarrativePresets', () => {
   describe('selectors', () => {
     it('get layout variables for node type', () => {
-      const result = getLayoutVariablesForNodeType(mockState, nodeType);
+      const result = getLayoutVariablesForSubject(mockState, subject);
 
       expect(result).toEqual([{
         value: '1234-1234-1',
@@ -56,7 +59,7 @@ describe('NarrativePresets', () => {
     });
 
     it('get highlight variables for node type', () => {
-      const result = getHighlightVariablesForNodeType(mockState, nodeType);
+      const result = getHighlightVariablesForSubject(mockState, subject);
 
       expect(result).toEqual([{
         value: '1234-1234-3',
@@ -66,7 +69,7 @@ describe('NarrativePresets', () => {
     });
 
     it('get group variables for node type', () => {
-      const result = getGroupVariablesForNodeType(mockState, nodeType);
+      const result = getGroupVariablesForSubject(mockState, subject);
 
       expect(result).toEqual([
         {
@@ -82,7 +85,7 @@ describe('NarrativePresets', () => {
     });
 
     it('get edges for node type', () => {
-      const result = getEdgesForNodeType(mockState, nodeType);
+      const result = getEdgesForSubject(mockState, subject);
 
       expect(result).toEqual([{
         value: '1234-5',

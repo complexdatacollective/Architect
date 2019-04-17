@@ -4,9 +4,9 @@ import { change, formValueSelector } from 'redux-form';
 import { lifecycle, compose, withHandlers } from 'recompose';
 import { getCodebook } from '../../../selectors/protocol';
 
-const mapStateToProps = (state, { form, nodeType }) => {
+const mapStateToProps = (state, { form, type, entity }) => {
   const codebook = getCodebook(state);
-  const displayVariable = get(codebook, ['node', nodeType, 'displayVariable']);
+  const displayVariable = get(codebook, [entity, type, 'displayVariable']);
   const quickAdd = formValueSelector(form)(state, 'quickAdd');
 
   return {

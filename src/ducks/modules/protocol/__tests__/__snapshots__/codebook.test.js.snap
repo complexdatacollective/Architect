@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`protocol.codebook reducer CREATE_VARIABLE CREATE_VARIABLE for ego entity 1`] = `
+Object {
+  "ego": Object {
+    "variables": Object {
+      "bar": Object {
+        "baz": "buzz",
+      },
+    },
+  },
+}
+`;
+
+exports[`protocol.codebook reducer CREATE_VARIABLE CREATE_VARIABLE for node entity 1`] = `
+Object {
+  "edge": Object {},
+  "node": Object {
+    "foo": Object {
+      "variables": Object {
+        "bar": Object {
+          "baz": "buzz",
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`protocol.codebook reducer UPDATE_VARIABLE UPDATE_VARIABLE for ego entity 1`] = `
+Object {
+  "ego": Object {
+    "variables": Object {
+      "bar": Object {
+        "fizz": "pop",
+      },
+    },
+  },
+}
+`;
+
+exports[`protocol.codebook reducer UPDATE_VARIABLE UPDATE_VARIABLE for node entity 1`] = `
+Object {
+  "edge": Object {},
+  "node": Object {
+    "foo": Object {
+      "variables": Object {
+        "bar": Object {
+          "fizz": "pop",
+        },
+      },
+    },
+  },
+}
+`;

@@ -13,10 +13,10 @@ import withOptionsForPreset from './withOptionsForPreset';
 class PresetFields extends Component {
   render() {
     const {
-      layoutVariblesForNodeType,
-      groupVariablesForNodeType,
-      edgesForNodeType,
-      highlightVariablesForNodeType,
+      layoutVariblesForSubject,
+      groupVariablesForSubject,
+      edgesForSubject,
+      highlightVariablesForSubject,
     } = this.props;
 
     return (
@@ -38,7 +38,7 @@ class PresetFields extends Component {
             label="Layout variable"
             placeholder="&mdash; Select a layout variable &mdash;"
             validation={{ required: true }}
-            options={layoutVariblesForNodeType}
+            options={layoutVariblesForSubject}
           />
         </Row>
         <Row>
@@ -46,7 +46,7 @@ class PresetFields extends Component {
             name="groupVariable"
             component={ArchitectFields.Select}
             label="Group variable"
-            options={groupVariablesForNodeType}
+            options={groupVariablesForSubject}
           />
         </Row>
         <Row>
@@ -55,7 +55,7 @@ class PresetFields extends Component {
             component={Fields.CheckboxGroup}
             label="Display the following edges:"
             placeholder="&mdash; Toggle an edge to display &mdash;"
-            options={edgesForNodeType}
+            options={edgesForSubject}
           />
         </Row>
         <Row>
@@ -64,7 +64,7 @@ class PresetFields extends Component {
             component={Fields.CheckboxGroup}
             label="Highlight nodes with the following attribute:"
             placeholder="&mdash; Toggle a variable to highlight &mdash;"
-            options={highlightVariablesForNodeType}
+            options={highlightVariablesForSubject}
           />
         </Row>
       </React.Fragment>
@@ -73,17 +73,17 @@ class PresetFields extends Component {
 }
 
 PresetFields.propTypes = {
-  layoutVariblesForNodeType: PropTypes.array,
-  groupVariablesForNodeType: PropTypes.array,
-  edgesForNodeType: PropTypes.array,
-  highlightVariablesForNodeType: PropTypes.array,
+  layoutVariblesForSubject: PropTypes.array,
+  groupVariablesForSubject: PropTypes.array,
+  edgesForSubject: PropTypes.array,
+  highlightVariablesForSubject: PropTypes.array,
 };
 
 PresetFields.defaultProps = {
-  layoutVariblesForNodeType: [],
-  groupVariablesForNodeType: [],
-  edgesForNodeType: [],
-  highlightVariablesForNodeType: [],
+  layoutVariblesForSubject: [],
+  groupVariablesForSubject: [],
+  edgesForSubject: [],
+  highlightVariablesForSubject: [],
 };
 
 export { PresetFields };

@@ -10,6 +10,7 @@ const NameGeneratorAutoComplete = {
     NodeType,
     NameGeneratorAutoCompletePrompts,
   ],
+  name: 'Roster Name Generator (search)',
 };
 
 export default NameGeneratorAutoComplete;

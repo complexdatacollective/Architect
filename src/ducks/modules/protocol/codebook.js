@@ -1,10 +1,9 @@
 import uuid from 'uuid';
-import { omit } from 'lodash';
+import { omit, get } from 'lodash';
 import { getCodebook } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
 import { getNextCategoryColor } from './utils';
-import { actionCreators as formActions } from './forms';
 import { actionCreators as stageActions } from './stages';
 
 const UPDATE_TYPE = 'PROTOCOL/UPDATE_TYPE';
@@ -90,7 +89,7 @@ const createTypeThunk = (entity, configuration) =>
 
     return {
       type,
-      category: entity,
+      category: entity, // TODO: this should remain as 'entity'
     };
   };
 
@@ -106,7 +105,7 @@ const createEdgeThunk = configuration =>
 
     return {
       type,
-      category: entity,
+      category: entity, // TODO: this should remain as 'entity'
     };
   };
 
@@ -131,22 +130,22 @@ const deleteVariableThunk = (entity, type, variable) =>
     return true;
   };
 
-const updateDisplayVariableThunk = (type, variable) =>
+const updateDisplayVariableThunk = (entity, type, variable) =>
   (dispatch, getState) => {
     const codebook = getCodebook(getState());
 
+    const previousConfiguration = get(codebook, [entity, type], {});
+
     const updatedConfiguration = {
-      ...codebook.node[type],
+      ...previousConfiguration,
       displayVariable: variable,
     };
 
-    dispatch(updateType('node', type, updatedConfiguration));
+    dispatch(updateType(entity, type, updatedConfiguration));
   };
 
 const getDeleteAction = ({ type, ...owner }) => {
   switch (type) {
-    case 'form':
-      return formActions.deleteForm(owner.id);
     case 'stage':
       return stageActions.deleteStage(owner.id);
     case 'prompt':
@@ -176,30 +175,43 @@ const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) =>
  * Reducer helpers
  */
 
-const getStateWithUpdatedType = (state, entity, type, configuration) => ({
-  ...state,
-  [entity]: {
-    ...state[entity],
-    [type]: configuration,
-  },
-});
+const getStateWithUpdatedType = (state, entity, type, configuration) => {
+  if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
 
-const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
-  const variables = {
-    ...state[entity][type].variables,
-    [variable]: configuration,
-  };
+  const entityConfiguration = entity === 'ego' ?
+    configuration :
+    {
+      ...state[entity],
+      [type]: configuration,
+    };
 
   return {
     ...state,
-    [entity]: {
-      ...state[entity],
-      [type]: {
-        ...state[entity][type],
-        variables,
-      },
-    },
+    [entity]: entityConfiguration,
   };
+};
+
+const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
+  if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
+
+  const variables = entity === 'ego' ?
+    {
+      ...get(state, [entity, 'variables'], {}),
+      [variable]: configuration,
+    } :
+    {
+      ...get(state, [entity, type, 'variables'], {}),
+      [variable]: configuration,
+    };
+
+  const typeConfiguration = entity === 'ego' ?
+    state[entity] :
+    state[entity][type];
+
+  return getStateWithUpdatedType(state, entity, type, {
+    ...typeConfiguration,
+    variables,
+  });
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -212,26 +224,7 @@ export default function reducer(state = initialState, action = {}) {
         action.meta.type,
         action.configuration,
       );
-    case CREATE_VARIABLE: {
-      // Same as update variable?
-      const { entity, type, variable } = action.meta;
-
-      const variables = {
-        ...state[entity][type].variables,
-        [variable]: action.configuration,
-      };
-
-      return {
-        ...state,
-        [entity]: {
-          ...state[entity],
-          [type]: {
-            ...state[entity][type],
-            variables,
-          },
-        },
-      };
-    }
+    case CREATE_VARIABLE:
     case UPDATE_VARIABLE:
       return getStateWithUpdatedVariable(
         state,
@@ -241,6 +234,7 @@ export default function reducer(state = initialState, action = {}) {
         action.configuration,
       );
     case DELETE_TYPE:
+      if (action.meta.entity === 'ego') { return state; }
       return {
         ...state,
         [action.meta.entity]: {

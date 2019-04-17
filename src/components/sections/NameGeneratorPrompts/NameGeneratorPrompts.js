@@ -2,7 +2,8 @@ import React from 'react';
 import { withProps, compose } from 'recompose';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
-import EditableList, { withSubjectNodeType } from '../../EditableList';
+import EditableList from '../../EditableList';
+import withSubject from '../../enhancers/withSubject';
 
 const NameGeneratorPrompts = props => (
   <EditableList
@@ -24,6 +25,6 @@ const NameGeneratorPrompts = props => (
 export { NameGeneratorPrompts };
 
 export default compose(
-  withSubjectNodeType,
-  withProps(({ nodeType }) => ({ disabled: !nodeType })),
+  withSubject,
+  withProps(({ entity }) => ({ disabled: !entity })),
 )(NameGeneratorPrompts);

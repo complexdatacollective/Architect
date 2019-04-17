@@ -21,7 +21,8 @@ import withVariableOptions from './withVariableOptions';
 class PromptFields extends PureComponent {
   render() {
     const {
-      nodeType,
+      type,
+      entity,
       dataSource,
       cardOptions,
       variableOptions,
@@ -53,7 +54,8 @@ class PromptFields extends PureComponent {
             name="additionalAttributes"
             id="additionalAttributes"
             form={form}
-            nodeType={nodeType}
+            type={type}
+            entity={entity}
           />
         </Row>
         <Row>
@@ -175,7 +177,8 @@ class PromptFields extends PureComponent {
 }
 
 PromptFields.propTypes = {
-  nodeType: PropTypes.string,
+  type: PropTypes.string,
+  entity: PropTypes.string,
   variableOptions: PropTypes.array,
   handleChangeDisplayLabel: PropTypes.func.isRequired,
   dataSource: PropTypes.string,
@@ -184,7 +187,8 @@ PromptFields.propTypes = {
 };
 
 PromptFields.defaultProps = {
-  nodeType: null,
+  type: null,
+  entity: null,
   dataSource: null,
   cardOptions: {},
   variableOptions: [],

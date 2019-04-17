@@ -35,6 +35,12 @@
             }
           }
         },
+        "ego": {
+          "variables": {
+            "sierra": { "name": "SIERRA", "type": "text" },
+            "tango": { "name": "TANGO", "type": "text" }
+          }
+        },
         "edge": {
           "1234-5": {
             "name": "an edge",

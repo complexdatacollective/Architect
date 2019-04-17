@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { getVariableOptionsForNodeType } from '../../selectors/codebook';
+import { getVariableOptionsForSubject } from '../../selectors/codebook';
 
-const mapStateToProps = (state, { nodeType, form, fields }) => {
+const mapStateToProps = (state, { entity, type, form, fields }) => {
   const usedVariables = (formValueSelector(form)(state, fields.name) || [])
     .map(({ variable }) => variable);
-  const variableOptions = getVariableOptionsForNodeType(state, nodeType);
+  const variableOptions = getVariableOptionsForSubject(state, { entity, type });
 
   const variableOptionsWithUsedDisabled = variableOptions
     .map(({ value, ...rest }) => ({
@@ -19,6 +19,6 @@ const mapStateToProps = (state, { nodeType, form, fields }) => {
   };
 };
 
-const withAssignAttributesOptions = connect(mapStateToProps);
+const withVariableOptions = connect(mapStateToProps);
 
-export default withAssignAttributesOptions;
+export default withVariableOptions;

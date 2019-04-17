@@ -34,7 +34,7 @@ class PromptFields extends PureComponent {
             validation={{ required: true }}
           />
         </Row>
-        <div id={getFieldId('variable')} data-name="Variable" />
+        <h3 id={getFieldId('variable')}>Oridinal variable</h3>
         <Row>
           <ValidatedField
             name="variable"

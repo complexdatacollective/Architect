@@ -1,21 +1,21 @@
 import { map } from 'lodash';
 import { getCodebook } from '../../../selectors/protocol';
-import { getVariableOptionsForNodeType } from '../../../selectors/codebook';
+import { getVariableOptionsForSubject } from '../../../selectors/codebook';
 
-export const getLayoutVariablesForNodeType = (state, nodeType) => {
-  const variables = getVariableOptionsForNodeType(state, nodeType);
+export const getLayoutVariablesForSubject = (state, { entity, type }) => {
+  const variables = getVariableOptionsForSubject(state, { entity, type });
 
   return variables.filter(item => item.type === 'layout');
 };
 
-export const getHighlightVariablesForNodeType = (state, nodeType) => {
-  const variables = getVariableOptionsForNodeType(state, nodeType);
+export const getHighlightVariablesForSubject = (state, { entity, type }) => {
+  const variables = getVariableOptionsForSubject(state, { entity, type });
 
   return variables.filter(item => item.type === 'boolean');
 };
 
-export const getGroupVariablesForNodeType = (state, nodeType) => {
-  const variables = getVariableOptionsForNodeType(state, nodeType);
+export const getGroupVariablesForSubject = (state, { entity, type }) => {
+  const variables = getVariableOptionsForSubject(state, { entity, type });
 
   const categoricalOptions = variables.filter(
     item => item.type === 'categorical',
@@ -27,7 +27,7 @@ export const getGroupVariablesForNodeType = (state, nodeType) => {
   ];
 };
 
-export const getEdgesForNodeType = (state) => {
+export const getEdgesForSubject = (state) => {
   const codebook = getCodebook(state);
 
   return map(codebook.edge, (edge, edgeId) => ({

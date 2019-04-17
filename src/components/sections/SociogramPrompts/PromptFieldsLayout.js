@@ -15,8 +15,8 @@ import withCanCreateEdgesState from './withCanCreateEdgesState';
 
 const PromptFields = ({
   handleCreateVariable,
-  variablesForNodeType,
-  layoutVariablesForNodeType,
+  variablesForSubject,
+  layoutVariablesForSubject,
   allowPositioning,
 }) => (
   <Guidance contentId="guidance.editor.sociogram_prompt.layout">
@@ -38,7 +38,7 @@ const PromptFields = ({
           component={ArchitectFields.CreatableSelect}
           placeholder="&mdash; Select or create a new layout variable &mdash;"
           validation={{ required: true }}
-          options={layoutVariablesForNodeType}
+          options={layoutVariablesForSubject}
           onCreateOption={value => handleCreateVariable(value, 'layout')}
         />
       </Row>
@@ -61,7 +61,7 @@ const PromptFields = ({
             <Field
               name="sortOrder"
               component={ArchitectFields.OrderBy}
-              variables={variablesForNodeType}
+              variables={variablesForSubject}
             />
           </Row>
         </Guidance>
@@ -72,8 +72,8 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   handleCreateVariable: PropTypes.func.isRequired,
-  variablesForNodeType: PropTypes.object.isRequired,
-  layoutVariablesForNodeType: PropTypes.array.isRequired,
+  variablesForSubject: PropTypes.object.isRequired,
+  layoutVariablesForSubject: PropTypes.array.isRequired,
   allowPositioning: PropTypes.bool,
 };
 

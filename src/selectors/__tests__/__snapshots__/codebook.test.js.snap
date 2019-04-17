@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`codebook selectors getVariableOptionsForSubject() extracts variables for nodeType into options list for ego entity 1`] = `
+Array [
+  Object {
+    "label": "SIERRA",
+    "type": "text",
+    "value": "sierra",
+  },
+  Object {
+    "label": "TANGO",
+    "type": "text",
+    "value": "tango",
+  },
+]
+`;
+
+exports[`codebook selectors getVariableOptionsForSubject() extracts variables for nodeType into options list for node entity 1`] = `
+Array [
+  Object {
+    "label": "ALPHA",
+    "type": "text",
+    "value": "alpha",
+  },
+  Object {
+    "label": "BRAVO",
+    "type": "text",
+    "value": "bravo",
+  },
+  Object {
+    "label": "CHARLIE",
+    "type": "location",
+    "value": "charlie",
+  },
+]
+`;

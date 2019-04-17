@@ -9,7 +9,8 @@ import { Row } from '../../OrderedList';
 class PromptFields extends PureComponent {
   render() {
     const {
-      nodeType,
+      type,
+      entity,
       form,
     } = this.props;
 
@@ -32,7 +33,8 @@ class PromptFields extends PureComponent {
             form={form}
             name="additionalAttributes"
             id="additionalAttributes"
-            nodeType={nodeType}
+            type={type}
+            entity={entity}
           />
         </Row>
       </React.Fragment>
@@ -41,12 +43,14 @@ class PromptFields extends PureComponent {
 }
 
 PromptFields.propTypes = {
-  nodeType: PropTypes.string,
+  type: PropTypes.string,
+  entity: PropTypes.string,
   form: PropTypes.string.isRequired,
 };
 
 PromptFields.defaultProps = {
-  nodeType: null,
+  type: null,
+  entity: null,
 };
 
 export { PromptFields };

@@ -1,6 +1,5 @@
 import { pick } from 'lodash';
 import stages from './stages';
-import forms from './forms';
 import codebook from './codebook';
 import assetManifest from './assetManifest';
 
@@ -58,7 +57,6 @@ export default reduceReducers(
   (state, action) => ({
     ...state,
     stages: stages(state.stages, action),
-    forms: forms(state.forms, action),
     codebook: codebook(state.codebook, action),
     assetManifest: assetManifest(state.assetManifest, action),
   }),

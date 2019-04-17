@@ -9,7 +9,6 @@ describe('protocol root reducer', () => {
       expect(initialState).toEqual(
         {
           assetManifest: {},
-          forms: {},
           stages: [],
           codebook: {
             node: {},
