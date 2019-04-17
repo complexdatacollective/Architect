@@ -26,5 +26,5 @@ export { SociogramPrompts };
 export default compose(
   withSubject,
   withFormUsedVariableIndex,
-  withProps(({ entity }) => ({ disabled: !entity })),
+  withProps(({ type }) => ({ disabled: !type })),
 )(SociogramPrompts);
