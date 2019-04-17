@@ -118,29 +118,36 @@ const Items = compose(
   ),
   SortableContainer,
 )(
-  ({ fields, maxItems, ...rest }) => (
-    <React.Fragment>
-      <div className="form-fields-multi-select">
-        <div className="form-fields-multi-select__rules">
-          {
-            fields.map((field, index) => (
-              <Item
-                index={index}
-                key={index}
-                field={field}
-                fields={fields}
-                {...rest}
-              />
-            ))
-          }
+  ({ fields, maxItems, ...rest }) => {
+    const showAdd = maxItems !== null && fields.length < maxItems;
+    return (
+      <React.Fragment>
+        <div className="form-fields-multi-select">
+          <div className="form-fields-multi-select__rules">
+            {
+              fields.map((field, index) => (
+                <Item
+                  index={index}
+                  key={index}
+                  field={field}
+                  fields={fields}
+                  {...rest}
+                />
+              ))
+            }
+          </div>
         </div>
-      </div>
 
-      { (!maxItems || fields.length < maxItems) &&
-        <AddItem onClick={() => fields.push({ })} />
-      }
-    </React.Fragment>
-  ),
+        { showAdd &&
+          <AddItem onClick={() => fields.push({ })} />
+        }
+
+        { !showAdd && fields.length === 0 &&
+          <p><em>No properties available.</em></p>
+        }
+      </React.Fragment>
+    );
+  },
 );
 
 const MultiSelect = ({

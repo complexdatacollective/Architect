@@ -4,8 +4,16 @@ import { withState, withHandlers, withProps, compose } from 'recompose';
 /**
  * Helper props for use with <NewVariableWindow />
  *
+ * openNewVariableWindow,
+ * closeNewVariableWindow,
+ * newVariableName,
+ * showNewVariableWindow,
+ *
  * TODO: Should these live with NewVariableWindow?
  */
+
+const parseVariableName = variableName =>
+  (typeof variableName === 'string' ? variableName : '');
 
 const newVariableNameState = withState(
   'newVariableName', 'setNewVariableName', null,
@@ -13,7 +21,7 @@ const newVariableNameState = withState(
 
 const newVariableHandlers = withHandlers({
   openNewVariableWindow: ({ setNewVariableName }) =>
-    variableName => setNewVariableName(variableName),
+    variableName => setNewVariableName(parseVariableName(variableName)),
   closeNewVariableWindow: ({ setNewVariableName }) =>
     () => setNewVariableName(null),
 });
@@ -24,7 +32,7 @@ const showVariableWindow = withProps(
   }),
 );
 
-const withVariableHandlers = compose(
+const withNewVariableWindowHandlers = compose(
   newVariableNameState,
   newVariableHandlers,
   showVariableWindow,
@@ -37,4 +45,4 @@ export const propTypes = {
   showNewVariableWindow: PropTypes.bool.isRequired,
 };
 
-export default withVariableHandlers;
+export default withNewVariableWindowHandlers;
