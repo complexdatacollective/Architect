@@ -175,7 +175,7 @@ const PromptFields = ({
       show={showNewVariableWindow}
       entity={entity}
       type={type}
-      variableTypes={displayLabelTypes}
+      allowVariableTypes={displayLabelTypes}
       onComplete={handleCreateNewSearchVariable}
       onCancel={closeNewVariableWindow}
     />
