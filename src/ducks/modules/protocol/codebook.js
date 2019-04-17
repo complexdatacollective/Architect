@@ -4,7 +4,6 @@ import { getCodebook } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
 import { getNextCategoryColor } from './utils';
-import { actionCreators as formActions } from './forms';
 import { actionCreators as stageActions } from './stages';
 
 const UPDATE_TYPE = 'PROTOCOL/UPDATE_TYPE';
@@ -147,8 +146,6 @@ const updateDisplayVariableThunk = (entity, type, variable) =>
 
 const getDeleteAction = ({ type, ...owner }) => {
   switch (type) {
-    case 'form':
-      return formActions.deleteForm(owner.id);
     case 'stage':
       return stageActions.deleteStage(owner.id);
     case 'prompt':

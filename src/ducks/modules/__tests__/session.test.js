@@ -7,7 +7,6 @@ import reducer, { actionCreators } from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
 import { actionCreators as codebookActions, testing as codebookTesting } from '../protocol/codebook';
-import { actionCreators as formActions } from '../protocol/forms';
 import { rootEpic } from '../../modules/root';
 
 const epics = createEpicMiddleware(rootEpic);
@@ -78,18 +77,6 @@ describe('session reducer', () => {
 
     it('tracks update variable as change', () => {
       itTracksActionAsChange(codebookActions.updateVariable());
-    });
-
-    it('tracks create form as change', () => {
-      itTracksActionAsChange(formActions.createForm());
-    });
-
-    it('tracks update form as change', () => {
-      itTracksActionAsChange(formActions.updateForm());
-    });
-
-    it('tracks delete form as change', () => {
-      itTracksActionAsChange(formActions.deleteForm());
     });
   });
 });
