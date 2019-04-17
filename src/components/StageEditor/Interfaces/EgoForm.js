@@ -5,7 +5,6 @@ import {
 } from '../../sections';
 
 const template = {
-  subject: { entity: 'ego' },
 };
 
 const EgoForm = {
