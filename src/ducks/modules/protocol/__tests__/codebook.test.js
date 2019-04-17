@@ -4,7 +4,6 @@ import uuid from 'uuid';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { sortBy } from 'lodash/fp';
-import { actionCreators as formActions } from '../forms';
 import { actionCreators as stageActions } from '../stages';
 import reducer, { actionTypes, actionCreators, testing } from '../codebook';
 import testState from '../../../../__tests__/testState.json';
@@ -216,12 +215,6 @@ describe('protocol.codebook', () => {
                   ],
                 },
               ],
-              forms: {
-                bar: {
-                  entity: 'node',
-                  type: 'foo',
-                },
-              },
             },
           },
         };
@@ -236,7 +229,6 @@ describe('protocol.codebook', () => {
           testing.deleteType('node', 'foo'),
           stageActions.deleteStage('bazz'),
           stageActions.deletePrompt('buzz', 'fizz', true),
-          formActions.deleteForm('bar'),
         ]);
 
         expect(sortByType(actions)).toEqual(expectedActions);
