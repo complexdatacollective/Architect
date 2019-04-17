@@ -2,8 +2,8 @@
   "name": "",
   "codebook": {
     "node": {},
-    "edge": {}
+    "edge": {},
+    "ego": {}
   },
-  "assetManifest": {},
-  "forms": {}
+  "assetManifest": {}
 }
