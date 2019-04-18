@@ -1,14 +1,3 @@
-import { isEqual } from 'lodash';
-
-export const onScreenMessage = (ui, prevUI, screen, handler) => {
-  if (typeof handler !== 'function') {
-    throw Error('onScreenMessage: no handler provided');
-  }
-  if (isEqual(ui, prevUI)) { return false; }
-  if (ui.screen !== screen) { return false; }
-  return handler(ui.params);
-};
-
 const OPEN_SCREEN = 'UI/OPEN_SCREEN';
 const UPDATE_SCREEN = 'UI/UPDATE_SCREEN';
 const CLOSE_SCREEN = 'UI/CLOSE_SCREEN';

@@ -98,6 +98,17 @@ export default [
     },
   },
   {
+    type: 'AlterEdgeForm',
+    title: 'Per Alter Edge Form',
+    guidance: {
+      description: (
+        <p>
+          The Per Alter Form Interface is for...
+        </p>
+      ),
+    },
+  },
+  {
     type: 'EgoForm',
     title: 'Ego Form',
     guidance: {

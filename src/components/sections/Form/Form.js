@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
+import { compose, withProps } from 'recompose';
 import uuid from 'uuid';
 import TextField from '../../../ui/components/Fields/Text';
 import Guidance from '../../Guidance';
@@ -74,4 +74,9 @@ export { Form };
 
 export default compose(
   withFieldChangeHandlers,
+  withProps(({ interfaceType, type }) => {
+    if (interfaceType === 'EgoForm') { return { disabled: false }; }
+
+    return { disabled: !type };
+  }),
 )(Form);

@@ -30,6 +30,9 @@ const asOptions = items =>
 const getNodeTypes = state =>
   get(getCodebook(state), 'node', {});
 
+const getEdgeTypes = state =>
+  get(getCodebook(state), 'edge', {});
+
 const getType = (state, subject) => {
   if (!subject) { return {}; }
 
@@ -68,6 +71,7 @@ const utils = {
 export {
   getCodebook,
   getNodeTypes,
+  getEdgeTypes,
   getVariablesForSubject,
   getUnusedVariablesForSubject,
   getVariableOptionsForSubject,
