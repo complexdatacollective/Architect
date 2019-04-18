@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`protocol.codebook DELETE_VARIABLE DELETE_VARIABLE for node entity 1`] = `
+Object {
+  "edge": Object {},
+  "node": Object {
+    "foo": Object {
+      "variables": Object {},
+    },
+  },
+}
+`;
+
 exports[`protocol.codebook reducer CREATE_VARIABLE CREATE_VARIABLE for ego entity 1`] = `
 Object {
   "ego": Object {

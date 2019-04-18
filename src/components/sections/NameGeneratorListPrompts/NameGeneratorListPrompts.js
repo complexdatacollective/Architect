@@ -28,5 +28,5 @@ export { NameGeneratorListPrompts };
 
 export default compose(
   withSubject,
-  withProps(({ entity }) => ({ disabled: !entity })),
+  withProps(({ type }) => ({ disabled: !type })),
 )(NameGeneratorListPrompts);

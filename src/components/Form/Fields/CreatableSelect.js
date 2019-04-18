@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { components as ReactSelectComponents } from 'react-select';
 import CreatableSelect from 'react-select/lib/Creatable';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '../../../ui/components/Icon';
+import DefaultSelectOption from './DefaultSelectOption';
 
 /**
  * Contains WIP changes to add inline delete, which is paused for now.
@@ -16,32 +16,6 @@ const getValue = (options, value) => {
 
   return foundValue;
 };
-
-/* eslint-disable */
-const DefaultSelectItem = (props) => {
-  // const isNew = !!props.data.__isNew__;
-
-  return (
-    <ReactSelectComponents.Option
-      {...props}
-      className="form-fields-select__item"
-      classNamePrefix="form-fields-select__item"
-    >
-      <div className="form-fields-select__item-label">
-        {props.data.label}
-        {/* { !isNew &&
-          <div
-            className="form-fields-select__item-delete"
-            onClick={() => props.onDeleteOption(props.data.value)}
-          >
-            <Icon name="delete" />
-          </div>
-        } */}
-      </div>
-    </ReactSelectComponents.Option>
-  );
-};
-/* eslint-enable */
 
 class Select extends PureComponent {
   static propTypes = {
@@ -58,7 +32,7 @@ class Select extends PureComponent {
 
   static defaultProps = {
     className: '',
-    selectOptionComponent: DefaultSelectItem,
+    selectOptionComponent: DefaultSelectOption,
     onDeleteOption: null,
     options: [],
     input: {},
@@ -71,6 +45,14 @@ class Select extends PureComponent {
     return getValue(this.props.options, this.props.input.value);
   }
 
+  getOptionWithDeleteProp = WrappedComponent =>
+    props => (
+      <WrappedComponent
+        {...props}
+        onDeleteOption={this.handleDeleteOption}
+      />
+    );
+
   handleChange = option =>
     this.props.input.onChange(option.value);
 
@@ -80,8 +62,14 @@ class Select extends PureComponent {
   }
 
   handleDeleteOption = (value) => {
+    if (!this.props.onDeleteOption) { return; }
+
     this.props.onDeleteOption(value);
-    // TODO: If current value, reset?
+
+    // Reset input if current value
+    if (value === this.props.input.value) {
+      this.props.input.onChange(null);
+    }
   };
 
   handleBlur = () => {
@@ -110,12 +98,9 @@ class Select extends PureComponent {
       },
     );
 
-    const Option = props => (
-      <SelectOptionComponent
-        {...props}
-        onDeleteOption={this.handleDeleteOption}
-      />
-    );
+    const Option = this.props.onDeleteOption ?
+      this.getOptionWithDeleteProp(SelectOptionComponent) :
+      SelectOptionComponent;
 
     return (
       <div className={componentClasses}>

@@ -126,6 +126,32 @@ describe('protocol.codebook', () => {
     });
   });
 
+  describe('DELETE_VARIABLE', () => {
+    it('DELETE_VARIABLE for node entity', () => {
+      const result = reducer(
+        {
+          node: { foo: { variables: { bar: { baz: 'buzz' } } } },
+          edge: {},
+        },
+        testing.deleteVariable('node', 'foo', 'bar'),
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it.skip('DELETE_VARIABLE for ego entity', () => {
+      const result = reducer(
+        {
+          ego: { variables: { bar: { baz: 'buzz' } } },
+          edge: {},
+        },
+        testing.deleteVariable('ego', undefined, 'bar'),
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+  });
+
   describe('async actions', () => {
     describe('createType()', () => {
       it('dispatches the CREATE_TYPE action with a type id', () => {

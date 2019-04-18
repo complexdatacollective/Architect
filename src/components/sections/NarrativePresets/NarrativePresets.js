@@ -44,5 +44,5 @@ export { NarrativePresets };
 
 export default compose(
   withSubject,
-  withProps(({ entity }) => ({ disabled: !entity })),
+  withProps(({ type }) => ({ disabled: !type })),
 )(NarrativePresets);

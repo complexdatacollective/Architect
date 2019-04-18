@@ -224,6 +224,14 @@ export default function reducer(state = initialState, action = {}) {
         action.meta.type,
         action.configuration,
       );
+    case DELETE_TYPE:
+      if (action.meta.entity === 'ego') { return state; }
+      return {
+        ...state,
+        [action.meta.entity]: {
+          ...omit(state[action.meta.entity], action.meta.type),
+        },
+      };
     case CREATE_VARIABLE:
     case UPDATE_VARIABLE:
       return getStateWithUpdatedVariable(
@@ -233,14 +241,18 @@ export default function reducer(state = initialState, action = {}) {
         action.meta.variable,
         action.configuration,
       );
-    case DELETE_TYPE:
-      if (action.meta.entity === 'ego') { return state; }
+    case DELETE_VARIABLE: {
+      const variablePath = action.meta.entity !== 'ego' ?
+        `${action.meta.type}.variables.${action.meta.variable}` :
+        `variables.${action.meta.variable}`;
+
       return {
         ...state,
         [action.meta.entity]: {
-          ...omit(state[action.meta.entity], [action.meta.type]),
+          ...omit(state[action.meta.entity], variablePath),
         },
       };
+    }
     default:
       return state;
   }
@@ -270,6 +282,7 @@ const testing = {
   createType,
   deleteType,
   createVariable,
+  deleteVariable,
 };
 
 export {

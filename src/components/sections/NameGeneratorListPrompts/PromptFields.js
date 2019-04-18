@@ -16,7 +16,9 @@ import {
 } from './optionGetters';
 import withDisplayLabelChangeHandler from './withDisplayLabelChangeHandler';
 import withFieldValues from './withFieldValues';
-import withVariableOptions from './withVariableOptions';
+import withExternalDataPropertyOptions, {
+  propTypes as externalDataPropTypes,
+} from '../NameGeneratorListPrompts/withExternalDataPropertyOptions';
 
 class PromptFields extends PureComponent {
   render() {
@@ -24,17 +26,14 @@ class PromptFields extends PureComponent {
       type,
       entity,
       dataSource,
-      cardOptions,
+      displayLabel,
       variableOptions,
+      displayLabelOptions,
+      additionalPropertiesOptionGetter,
+      maxAdditionalDisplayProperties,
       handleChangeDisplayLabel,
       form,
     } = this.props;
-
-    const displayLabel = cardOptions && cardOptions.displayLabel;
-
-    const additionalPropertiesOptions = getExternalPropertiesOptionGetter(
-      variableOptions.filter(({ value }) => value !== displayLabel),
-    );
 
     return (
       <React.Fragment>
@@ -97,13 +96,13 @@ class PromptFields extends PureComponent {
                 component={Select}
                 name="cardOptions.displayLabel"
                 id="displayLabel"
-                options={variableOptions}
+                options={displayLabelOptions}
                 validation={{ required: true }}
                 onChange={handleChangeDisplayLabel}
               />
             </Row>
 
-            { displayLabel &&
+            { displayLabel && maxAdditionalDisplayProperties > 0 &&
               <Row>
                 <h4>Additional Display Properties</h4>
                 <p>
@@ -111,7 +110,7 @@ class PromptFields extends PureComponent {
                 </p>
                 <MultiSelect
                   name="cardOptions.additionalProperties"
-                  maxItems={variableOptions.length - 1}
+                  maxItems={maxAdditionalDisplayProperties}
                   properties={[
                     {
                       fieldName: 'variable',
@@ -122,7 +121,7 @@ class PromptFields extends PureComponent {
                       placeholder: 'Label',
                     },
                   ]}
-                  options={additionalPropertiesOptions}
+                  options={additionalPropertiesOptionGetter}
                 />
               </Row>
             }
@@ -179,11 +178,10 @@ class PromptFields extends PureComponent {
 PromptFields.propTypes = {
   type: PropTypes.string,
   entity: PropTypes.string,
-  variableOptions: PropTypes.array,
   handleChangeDisplayLabel: PropTypes.func.isRequired,
   dataSource: PropTypes.string,
   form: PropTypes.string.isRequired,
-  cardOptions: PropTypes.object,
+  ...externalDataPropTypes,
 };
 
 PromptFields.defaultProps = {
@@ -191,13 +189,12 @@ PromptFields.defaultProps = {
   entity: null,
   dataSource: null,
   cardOptions: {},
-  variableOptions: [],
 };
 
 export { PromptFields };
 
 export default compose(
   withFieldValues(['dataSource', 'cardOptions']),
-  withVariableOptions,
+  withExternalDataPropertyOptions,
   withDisplayLabelChangeHandler,
 )(PromptFields);

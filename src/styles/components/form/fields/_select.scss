@@ -35,13 +35,29 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
   }
 
   &__item {
-    padding: .5rem 1rem;
+    padding: 0 1rem;
+    display: flex;
+    min-height: 4rem;
 
     &--image {
       display: flex;
     }
 
-    &--create-new {
+    &-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: left;
+      flex-grow: 1;
+    }
+
+    &-add,
+    &-delete {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 1rem;
+    }
+
+    &-add {
       .icon {
         height: 1.5rem;
         line-height: 1rem;
@@ -56,16 +72,7 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
       }
     }
 
-    &-label {
-      margin: unit(1.5) 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     &-delete {
-      float: right;
-
       .icon {
         height: 1rem;
       }

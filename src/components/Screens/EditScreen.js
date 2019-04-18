@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { submit, isDirty } from 'redux-form';
 import { Button } from '../../ui/components';
+import { actionCreators as timemachineActions } from '../../ducks/middleware/timemachine';
 import Card from './ProtocolCard';
 
 class EditScreen extends PureComponent {
@@ -19,7 +21,10 @@ class EditScreen extends PureComponent {
     return this.props.hasUnsavedChanges ? [saveButton] : [];
   }
 
-  handleCancel = this.props.onComplete;
+  handleCancel = () => {
+    this.props.jump(this.props.locus);
+    this.props.onComplete();
+  };
 
   render() {
     const {
@@ -54,6 +59,7 @@ const mapStateToProps = (state, { form }) => ({
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   submitForm: () => dispatch(submit(form)),
+  jump: bindActionCreators(timemachineActions.jump, dispatch),
 });
 
 export { EditScreen };
