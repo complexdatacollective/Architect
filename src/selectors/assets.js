@@ -18,8 +18,22 @@ export const getAssetPath = (state, dataSource) => {
   return assetPath;
 };
 
+const getNeworkFromList = (nodes = [], edges = []) => {
+  const nodesWithAttributes = nodes.map(
+    node => ({ attributes: { ...node } }),
+  );
+  const edgesWithAttributes = edges.map(
+    edge => ({ attributes: { ...edge } }),
+  );
+
+  return {
+    nodes: nodesWithAttributes,
+    edges: edgesWithAttributes,
+  };
+};
+
 /**
- * Read external asset data and return as json object
+ * Read external asset data and return as json network object
  *
  * @param {string} assetPath path to file on disk
  */
@@ -29,7 +43,10 @@ export const readExternalData = async (assetPath) => {
   switch (extname) {
     case '.csv': {
       const csvData = await fs.readFile(assetPath);
-      return csv().fromString(csvData.toString('utf8'));
+      const items = await csv().fromString(csvData.toString('utf8'));
+      // mock up network object that matches expected json format
+      const network = getNeworkFromList(items);
+      return network;
     }
     case '.json':
       return fs.readJson(assetPath);
@@ -41,10 +58,14 @@ export const readExternalData = async (assetPath) => {
 /**
  * Extract all unique variables from an external data network asset
  *
- * @param {Array[Object]} externalData A list of node/edge objects
+ * @param {Object} externalData A network object { nodes: [], edges: [] }
  */
-export const getVariablesFromExternalData = (externalData) => {
-  const allAttributes = flatMap(externalData, item => keys(item));
+export const getVariablesFromExternalData = (externalData, entity = 'nodes') => {
+  const items = externalData[entity] || [];
+  const allAttributes = flatMap(
+    items,
+    item => (item.attributes && keys(item.attributes)) || [],
+  );
   const uniqueAttributes = uniq(allAttributes);
   const variableOptions = uniqueAttributes
     .map(attribute => ({ label: attribute, value: attribute }));

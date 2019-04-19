@@ -17,9 +17,11 @@ describe('assets', () => {
   });
 
   describe('readExternalData()', () => {
-    const mockJsonData = [
-      { label: 'Bob', name: 'Bob Jr' },
-    ];
+    const mockJsonData = {
+      nodes: [
+        { attributes: { label: 'Bob', name: 'Bob Jr' } },
+      ],
+    };
 
     const mockCSVData = 'label,name\nBob,"Bob Jr"\n';
 
@@ -34,16 +36,18 @@ describe('assets', () => {
       fs.readFile.mockImplementationOnce(() => Promise.resolve(mockCSVData));
       const filePath = '/dev/null/my-asset.csv';
       const result = await assets.readExternalData(filePath);
-      expect(result).toEqual(mockJsonData);
+      expect(result).toMatchObject(mockJsonData);
     });
   });
 
   describe('getVariablesFromExternalData', () => {
     it('converts list of objects into list of { label, value } objects from unique attributes', () => {
-      const mockExternalData = [
-        { foo: 'bar', bazz: 'buzz' },
-        { foo: 'bar', fizz: 'pop' },
-      ];
+      const mockExternalData = {
+        nodes: [
+          { attributes: { foo: 'bar', bazz: 'buzz' } },
+          { attributes: { foo: 'bar', fizz: 'pop' } },
+        ],
+      };
 
       const expectedOptions = ['foo', 'bazz', 'fizz']
         .map(attribute => ({ label: attribute, value: attribute }));
