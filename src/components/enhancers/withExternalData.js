@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { getAssetPath, getExternalData } from '../../selectors/externalData';
+import { getAssetPath, readExternalData } from '../../selectors/assets';
 
 const mapStateToProps = (state, props) => {
   if (!props.dataSource) { return {}; }
@@ -44,7 +44,7 @@ const withExternalData = WrappedComponent =>
       this.setState({ loading: true, externalData: null, error: null });
 
       try {
-        const externalData = await getExternalData(this.props.assetPath);
+        const externalData = await readExternalData(this.props.assetPath);
         this.setState({ loading: false, externalData });
       } catch (e) {
         this.setState({ loading: false, error: e.toString() });

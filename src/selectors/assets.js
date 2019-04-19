@@ -1,17 +1,29 @@
-/* eslint-disable import/prefer-default-export */
-
 import path from 'path';
 import { get, keys, uniq, flatMap } from 'lodash';
 import fs from 'fs-extra';
 import csv from 'csvtojson';
 import { getAssetManifest, getActiveProtocolMeta } from './protocol';
 
-// id: action.id,
-// type: action.assetType,
-// name: action.name,
-// source: action.filename,
+/**
+ * Generate asset path using the assetManifest and protocol meta
+ *
+ * @param state redux state
+ * @param {string} dataSource id of entry in assetManifest
+ */
+export const getAssetPath = (state, dataSource) => {
+  const { workingPath } = getActiveProtocolMeta(state);
+  const assetManifest = getAssetManifest(state);
+  const asset = get(assetManifest, dataSource);
+  const assetPath = path.join(workingPath, 'assets', asset.source);
+  return assetPath;
+};
 
-export const getExternalData = async (assetPath) => {
+/**
+ * Read external asset data and return as json object
+ *
+ * @param {string} assetPath path to file on disk
+ */
+export const readExternalData = async (assetPath) => {
   const extname = path.extname(assetPath).toLowerCase();
 
   switch (extname) {
@@ -26,14 +38,11 @@ export const getExternalData = async (assetPath) => {
   }
 };
 
-export const getAssetPath = (state, dataSource) => {
-  const { workingPath } = getActiveProtocolMeta(state);
-  const assetManifest = getAssetManifest(state);
-  const asset = get(assetManifest, dataSource);
-  const assetPath = path.join(workingPath, 'assets', asset.source);
-  return assetPath;
-};
-
+/**
+ * Extract all unique variables from an external data network asset
+ *
+ * @param {Array[Object]} externalData A list of node/edge objects
+ */
 export const getVariablesFromExternalData = (externalData) => {
   const allAttributes = flatMap(externalData, item => keys(item));
   const uniqueAttributes = uniq(allAttributes);
