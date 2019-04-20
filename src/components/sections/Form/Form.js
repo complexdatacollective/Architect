@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withProps } from 'recompose';
+import { compose } from 'recompose';
 import uuid from 'uuid';
 import TextField from '../../../ui/components/Fields/Text';
 import Guidance from '../../Guidance';
@@ -11,6 +11,7 @@ import Section from '../Section';
 import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
 import withFieldChangeHandlers from './withFieldChangeHandlers';
+import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { itemSelector, normalizeField } from './helpers';
 
 const template = () => ({ variable: uuid() });
@@ -74,9 +75,5 @@ export { Form };
 
 export default compose(
   withFieldChangeHandlers,
-  withProps(({ interfaceType, type }) => {
-    if (interfaceType === 'EgoForm') { return { disabled: false }; }
-
-    return { disabled: !type };
-  }),
+  withDisabledSubjectRequired,
 )(Form);

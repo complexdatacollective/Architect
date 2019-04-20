@@ -1,10 +1,11 @@
 import React from 'react';
-import { withProps, compose } from 'recompose';
+import { compose } from 'recompose';
 import { omit, isEmpty } from 'lodash';
-import PresetPreview from './PresetPreview';
-import PresetFields from './PresetFields';
 import EditableList from '../../EditableList';
 import withSubject from '../../enhancers/withSubject';
+import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
+import PresetPreview from './PresetPreview';
+import PresetFields from './PresetFields';
 
 const normalizePreset = (values) => {
   if (!isEmpty(values.groupVariable)) {
@@ -44,5 +45,5 @@ export { NarrativePresets };
 
 export default compose(
   withSubject,
-  withProps(({ type }) => ({ disabled: !type })),
+  withDisabledSubjectRequired,
 )(NarrativePresets);

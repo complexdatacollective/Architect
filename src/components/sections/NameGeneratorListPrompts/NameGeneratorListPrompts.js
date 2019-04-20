@@ -1,7 +1,8 @@
 import React from 'react';
-import { withProps, compose } from 'recompose';
+import { compose } from 'recompose';
 import EditableList from '../../EditableList';
 import withSubject from '../../enhancers/withSubject';
+import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 
@@ -28,5 +29,5 @@ export { NameGeneratorListPrompts };
 
 export default compose(
   withSubject,
-  withProps(({ type }) => ({ disabled: !type })),
+  withDisabledSubjectRequired,
 )(NameGeneratorListPrompts);
