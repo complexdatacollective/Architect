@@ -5,40 +5,21 @@ import { Field } from 'redux-form';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
 import * as Fields from '../../../ui/components/Fields';
-import Button from '../../../ui/components/Button';
 import DataSource from '../../Form/Fields/DataSource';
-import Select from '../../Form/Fields/Select';
 import MultiSelect from '../../Form/MultiSelect';
 import AssignAttributes from '../../AssignAttributes';
 import { Row, Group } from '../../OrderedList';
-import withNewVariableWindowHandlers, {
-  propTypes as newVariableWindowPropTypes,
-} from '../../enhancers/withNewVariableWindowHandlers';
-import NewVariableWindow from '../../NewVariableWindow';
-import {
-  withFieldValues,
-} from '../NameGeneratorListPrompts';
-import withDisplayLabelChangeHandler from '../NameGeneratorListPrompts/withDisplayLabelChangeHandler';
-import withExternalDataPropertyOptions, {
-  displayLabelTypes,
-  propTypes as externalDataPropTypes,
-} from '../NameGeneratorListPrompts/withExternalDataPropertyOptions';
-import withNewVariableHandlers from './withNewVariableHandlers';
+import withFieldValues from '../NameGeneratorListPrompts/withFieldValues';
+import withExternalDataPropertyOptions, { propTypes as externalDataPropTypes } from '../NameGeneratorListPrompts/withExternalDataPropertyOptions';
 
 const PromptFields = ({
   dataSource,
-  displayLabel,
-  displayLabelOptions,
+  variableOptions,
   additionalPropertiesOptionGetter,
   maxAdditionalDisplayProperties,
-  handleChangeDisplayLabel,
-  handleCreateNewSearchVariable,
   form,
   entity,
   type,
-  openNewVariableWindow,
-  closeNewVariableWindow,
-  showNewVariableWindow,
 }) => (
   <React.Fragment>
     <Row>
@@ -80,27 +61,22 @@ const PromptFields = ({
           <p>
             How would you like to the search results to be displayed?
           </p>
+          <p>
+            Cards will use the <strong>label</strong> attribute from your external data as
+            the main card title.
+          </p>
         </Row>
         <Row>
-          <div id={getFieldId('cardOptions.displayLabel')} data-name="Card display label" />
-          <h4>Display Label</h4>
-          <p>Which property should be used to uniquely identify each node?</p>
-          <ValidatedField
-            component={Select}
-            name="cardOptions.displayLabel"
-            id="displayLabel"
-            options={displayLabelOptions}
-            validation={{ required: true }}
-            onChange={handleChangeDisplayLabel}
-          />
-        </Row>
+          <h4>Additional Display Properties</h4>
+          <p>
+            Would you like do display any other attributes to help identify each node?
+          </p>
 
-        { displayLabel && maxAdditionalDisplayProperties > 0 &&
-          <Row>
-            <h4>Additional Display Properties</h4>
-            <p>
-              Would you like do display any other attributes to help identify each node?
-            </p>
+          { maxAdditionalDisplayProperties === 0 &&
+            <p><em>Your external data does not contain any usable attributes.</em></p>
+          }
+
+          { maxAdditionalDisplayProperties > 0 &&
             <MultiSelect
               name="cardOptions.additionalProperties"
               maxItems={maxAdditionalDisplayProperties}
@@ -116,8 +92,8 @@ const PromptFields = ({
               ]}
               options={additionalPropertiesOptionGetter}
             />
-          </Row>
-        }
+          }
+        </Row>
       </Group>
     }
 
@@ -135,17 +111,8 @@ const PromptFields = ({
           <Field
             name="searchOptions.matchProperties"
             component={Fields.CheckboxGroup}
-            options={displayLabelOptions}
+            options={variableOptions}
           />
-          <Button
-            color="primary"
-            icon="add"
-            size="small"
-            style={{ margin: '1rem 0 0 0' }}
-            onClick={openNewVariableWindow}
-          >
-            Create new variable
-          </Button>
         </Row>
         <Row>
           <h4>Search Accuracy</h4>
@@ -170,15 +137,6 @@ const PromptFields = ({
         </Row>
       </Group>
     }
-
-    <NewVariableWindow
-      show={showNewVariableWindow}
-      entity={entity}
-      type={type}
-      allowVariableTypes={displayLabelTypes}
-      onComplete={handleCreateNewSearchVariable}
-      onCancel={closeNewVariableWindow}
-    />
   </React.Fragment>
 );
 
@@ -186,26 +144,19 @@ PromptFields.propTypes = {
   type: PropTypes.string,
   entity: PropTypes.string,
   dataSource: PropTypes.string,
-  cardOptions: PropTypes.object,
   form: PropTypes.string.isRequired,
-  handleChangeDisplayLabel: PropTypes.func.isRequired,
   ...externalDataPropTypes,
-  ...newVariableWindowPropTypes,
 };
 
 PromptFields.defaultProps = {
   type: null,
   entity: null,
   dataSource: null,
-  cardOptions: {},
 };
 
 export { PromptFields };
 
 export default compose(
-  withFieldValues(['dataSource', 'cardOptions']),
+  withFieldValues(['dataSource']),
   withExternalDataPropertyOptions,
-  withNewVariableWindowHandlers,
-  withNewVariableHandlers,
-  withDisplayLabelChangeHandler,
 )(PromptFields);

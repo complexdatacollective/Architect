@@ -59,8 +59,13 @@
   "assetManifest": {
     "475fd0720355e5fb2bf96964820e6d82159c2dd2": {
       "type": "network",
-      "name": "Previous Interview",
+      "name": "Previous Interview JSON",
       "source": "previous_interview.json"
+    },
+    "bfb1d81cfb74c3a8be267931097db73462b50374": {
+      "type": "network",
+      "name": "Previous Interview CSV",
+      "source": "previous_interview.csv"
     },
     "c9b7477e17321509df4a4b88731b2ab3674a21f8": {
       "type": "image",
