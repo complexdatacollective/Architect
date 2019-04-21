@@ -12,7 +12,6 @@ const AssetBrowserWindow = ({
   type,
   onCancel,
   onSelect,
-  onDelete,
 }) => {
   const cancelButton = (
     <Button
@@ -39,7 +38,6 @@ const AssetBrowserWindow = ({
           <AssetBrowser
             type={type}
             onSelect={onSelect}
-            onDelete={onDelete}
           />
         </SimpleDialog>
       )}
@@ -51,7 +49,6 @@ AssetBrowserWindow.propTypes = {
   show: PropTypes.bool,
   type: PropTypes.string,
   onSelect: PropTypes.func,
-  onDelete: PropTypes.func,
   onCancel: PropTypes.func,
 };
 
@@ -59,7 +56,6 @@ AssetBrowserWindow.defaultProps = {
   show: true,
   type: null,
   onSelect: () => {},
-  onDelete: () => {},
   onCancel: () => {},
   stackIndex: null,
 };

@@ -85,7 +85,8 @@ export default function reducer(state = initialState, action = {}) {
         },
       };
     case DELETE_ASSET:
-      // Should we delete it from the disk, or clean up automatically later?
+      // Don't delete from disk, this allows us to rollback the protocol. Disk changes should
+      // be commited on save.
       return omit(state, action.id);
     default:
       return state;
