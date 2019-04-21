@@ -7,12 +7,14 @@ import SimpleDialog from '../../ui/components/Dialog/Simple';
 import Stackable from '../../components/Stackable';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
+import withAssetActions from './withAssetActions';
 
 const AssetBrowser = ({
   show,
   type,
   onCancel,
   onSelect,
+  onDelete,
 }) => {
   const cancelButton = (
     <Button
@@ -47,6 +49,7 @@ const AssetBrowser = ({
               <h3>Choose asset from library</h3>
               <Assets
                 onSelect={onSelect}
+                onDelete={onDelete}
                 type={type}
               />
             </div>
@@ -61,6 +64,7 @@ AssetBrowser.propTypes = {
   show: PropTypes.bool,
   type: PropTypes.string,
   onSelect: PropTypes.func,
+  onDelete: PropTypes.func,
   onCancel: PropTypes.func,
 };
 
@@ -68,10 +72,12 @@ AssetBrowser.defaultProps = {
   show: true,
   type: null,
   onSelect: () => {},
+  onDelete: () => {},
   onCancel: () => {},
   stackIndex: null,
 };
 
 export default compose(
+  withAssetActions,
   window,
 )(AssetBrowser);

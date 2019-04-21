@@ -31,4 +31,26 @@
     text-shadow: 1px 1px 2px var(--color-rich-black)
     0 0 10px var(--color-white);
   }
+
+  &__delete {
+    position: absolute;
+    top: unit(1);
+    right: unit(1);
+    width: unit(1.5);
+    height: unit(1.5);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      width: unit(1.5);
+      height: unit(1.5);
+
+      .cls-1,
+      .cls-2 {
+        fill: var(--text-light);
+      }
+    }
+  }
 }
