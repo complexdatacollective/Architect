@@ -1,9 +1,12 @@
 .asset-browser {
-  max-width: 90vw;
-  max-height: 95vh;
 
-  .dialog__footer {
-    text-align: right;
+  &__window {
+    max-width: 90vw;
+    max-height: 95vh;
+
+    .dialog__footer {
+      text-align: right;
+    }
   }
 
   &__content {
