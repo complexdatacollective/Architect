@@ -12,7 +12,6 @@
   &__content {
     display: flex;
     flex-direction: column;
-    max-height: 75vh;
   }
 
   &__create {
@@ -21,5 +20,11 @@
 
   &__assets {
     width: 100%;
+  }
+}
+
+.dialog {
+  .asset-browser__content {
+    max-height: 75vh;
   }
 }

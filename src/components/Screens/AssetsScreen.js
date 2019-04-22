@@ -34,9 +34,9 @@ const AssetBrowserScreen = ({
             <div className="editor__content">
               <h1 className="editor__heading">Assets</h1>
               <p>
-                Introguction to assets.
+                Introduction to assets.
               </p>
-              <Guidance contentId="guidance.registry.nodes">
+              <Guidance contentId="guidance.screen.assets">
                 <AssetBrowser />
               </Guidance>
             </div>
