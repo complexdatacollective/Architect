@@ -1,8 +1,8 @@
 .asset-browser {
-
   &__window {
-    max-width: 90vw;
-    max-height: 95vh;
+    max-height: calc(95vh - #{unit(16)});
+    width: 85%;
+    max-width: initial;
 
     .dialog__footer {
       text-align: right;
@@ -20,9 +20,6 @@
   }
 
   &__assets {
-    @include no-scrollbars;
-    width: 75vw;
-    overflow-x: hidden;
-    overflow-y: auto;
+    width: 100%;
   }
 }
