@@ -89,7 +89,7 @@ const createTypeThunk = (entity, configuration) =>
 
     return {
       type,
-      category: entity, // TODO: this should remain as 'entity'
+      entity,
     };
   };
 
@@ -105,7 +105,7 @@ const createEdgeThunk = configuration =>
 
     return {
       type,
-      category: entity, // TODO: this should remain as 'entity'
+      entity,
     };
   };
 

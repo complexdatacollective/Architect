@@ -8,6 +8,7 @@ import Sociogram from './Sociogram';
 import CategoricalBin from './CategoricalBin';
 import OrdinalBin from './OrdinalBin';
 import AlterForm from './AlterForm';
+import AlterEdgeForm from './AlterEdgeForm';
 import EgoForm from './EgoForm';
 import Narrative from './Narrative';
 
@@ -20,6 +21,7 @@ const interfaces = {
   CategoricalBin,
   OrdinalBin,
   AlterForm,
+  AlterEdgeForm,
   EgoForm,
   Narrative,
 };

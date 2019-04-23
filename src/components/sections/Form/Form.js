@@ -11,6 +11,7 @@ import Section from '../Section';
 import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
 import withFieldChangeHandlers from './withFieldChangeHandlers';
+import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { itemSelector, normalizeField } from './helpers';
 
 const template = () => ({ variable: uuid() });
@@ -74,4 +75,5 @@ export { Form };
 
 export default compose(
   withFieldChangeHandlers,
+  withDisabledSubjectRequired,
 )(Form);

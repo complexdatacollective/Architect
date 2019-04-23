@@ -3,6 +3,7 @@ export { default as Background } from './Background';
 export { default as Title } from './Title';
 export { default as Name } from './Name';
 export { default as NodeType } from './NodeType';
+export { default as EdgeType } from './EdgeType';
 export { default as Form } from './Form';
 export { default as FormWithQuickAdd } from './FormWithQuickAdd';
 export { default as NameGeneratorPrompts } from './NameGeneratorPrompts';

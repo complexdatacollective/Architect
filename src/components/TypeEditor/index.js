@@ -12,7 +12,7 @@ import TypeEditor from './TypeEditor';
 const formName = 'TYPE_EDITOR';
 
 function mapStateToProps(state, props) {
-  const category = props.category;
+  const entity = props.entity;
   const type = props.type;
   const getFormValue = formValueSelector(formName);
   const protocol = getProtocol(state);
@@ -20,8 +20,8 @@ function mapStateToProps(state, props) {
   const initialValues = format(
     get(
       protocol,
-      ['codebook', category, type],
-      getNewTypeTemplate({ protocol, category }),
+      ['codebook', entity, type],
+      getNewTypeTemplate({ protocol, entity }),
       {},
     ),
   );
@@ -42,10 +42,10 @@ function mapStateToProps(state, props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateType: (category, type, form) =>
-    dispatch(codebookActions.updateType(category, type, parse(form))),
-  createType: (category, form) =>
-    dispatch(codebookActions.createType(category, parse(form))),
+  updateType: (entity, type, form) =>
+    dispatch(codebookActions.updateType(entity, type, parse(form))),
+  createType: (entity, form) =>
+    dispatch(codebookActions.createType(entity, parse(form))),
 });
 
 const withTypeProps = withProps({
@@ -56,17 +56,16 @@ const withTypeProps = withProps({
 const withTypeState = connect(mapStateToProps, mapDispatchToProps);
 
 const withTypeHandlers = withHandlers({
-  onSubmit: ({ createType, updateType, onComplete, category, type }) =>
-    (form) => {
-      let entity;
-
+  onSubmit: ({ createType, updateType, onComplete, entity, type }) =>
+    (values) => {
+      let result;
       if (!type) {
-        entity = createType(category, form);
+        result = createType(entity, values);
       } else {
-        entity = updateType(category, type, form);
+        result = updateType(entity, type, values);
       }
 
-      onComplete(entity);
+      onComplete(result);
     },
 });
 

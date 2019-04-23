@@ -7,6 +7,7 @@ import Form from '../Form';
 import QuickAdd from '../QuickAdd';
 import Section from '../Section';
 import withSubject from '../../enhancers/withSubject';
+import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import withQuickAddState from './withQuickAddState';
 
 class FormWithQuickAdd extends PureComponent {
@@ -14,10 +15,8 @@ class FormWithQuickAdd extends PureComponent {
     const {
       quickAddEnabled,
       handleChangeQuickAdd,
-      entity,
+      disabled,
     } = this.props;
-
-    const disabled = !entity;
 
     return (
       <React.Fragment>
@@ -51,5 +50,6 @@ export { FormWithQuickAdd };
 
 export default compose(
   withSubject,
+  withDisabledSubjectRequired,
   withQuickAddState,
 )(FormWithQuickAdd);
