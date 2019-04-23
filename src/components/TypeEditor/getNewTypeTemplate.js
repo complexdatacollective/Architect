@@ -1,8 +1,8 @@
 import { getNextCategoryColor } from '../../ducks/modules/protocol/utils';
 
-const getNewTypeTemplate = ({ protocol, category }) => ({
+const getNewTypeTemplate = ({ protocol, entity }) => ({
   iconVariant: 'add-a-person',
-  color: getNextCategoryColor(protocol, category),
+  color: getNextCategoryColor(protocol, entity),
 });
 
 export default getNewTypeTemplate;

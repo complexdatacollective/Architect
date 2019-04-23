@@ -29,7 +29,7 @@ const variablesProps = {
 
 describe('<TypeEditor />', () => {
   it('passes correct props to Variables', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="node" />);
+    const subject = shallow(<TypeEditor {...mockProps} entity="node" />);
 
     const variables = subject.find('Variables');
 
@@ -45,7 +45,7 @@ describe('<TypeEditor />', () => {
   });
 
   it('it renders the correct sections for a node', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="node" />);
+    const subject = shallow(<TypeEditor {...mockProps} entity="node" />);
 
     expect(subject.containsAllMatchingElements([
       <h2>Color</h2>,
@@ -56,7 +56,7 @@ describe('<TypeEditor />', () => {
   });
 
   it('it renders the correct sections for an edge', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="edge" />);
+    const subject = shallow(<TypeEditor {...mockProps} entity="edge" />);
 
     expect(subject.containsAllMatchingElements([
       <h2>Color</h2>,
@@ -70,7 +70,7 @@ describe('<TypeEditor />', () => {
   });
 
   it('if "new" hides variable secion', () => {
-    const subject = shallow(<TypeEditor {...mockProps} category="node" isNew />);
+    const subject = shallow(<TypeEditor {...mockProps} entity="node" isNew />);
 
     expect(subject.containsAllMatchingElements([
       <h2>Display Variable</h2>,

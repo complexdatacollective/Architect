@@ -30,7 +30,7 @@ const createTypeHandlers = withHandlers({
     },
   handleOpenCreateNewType: ({ openScreen }) =>
     () => {
-      openScreen('type', { category: 'edge' });
+      openScreen('type', { entity: 'edge' });
     },
 });
 

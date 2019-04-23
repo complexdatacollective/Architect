@@ -12,7 +12,7 @@ import TypeEditor from './TypeEditor';
 const formName = 'TYPE_EDITOR';
 
 function mapStateToProps(state, props) {
-  const category = props.category;
+  const entity = props.entity;
   const type = props.type;
   const getFormValue = formValueSelector(formName);
   const protocol = getProtocol(state);
@@ -20,8 +20,8 @@ function mapStateToProps(state, props) {
   const initialValues = format(
     get(
       protocol,
-      ['codebook', category, type],
-      getNewTypeTemplate({ protocol, category }),
+      ['codebook', entity, type],
+      getNewTypeTemplate({ protocol, entity }),
       {},
     ),
   );
@@ -56,7 +56,7 @@ const withTypeProps = withProps({
 const withTypeState = connect(mapStateToProps, mapDispatchToProps);
 
 const withTypeHandlers = withHandlers({
-  onSubmit: ({ createType, updateType, onComplete, category: entity, type }) =>
+  onSubmit: ({ createType, updateType, onComplete, entity, type }) =>
     (values) => {
       let result;
       if (!type) {

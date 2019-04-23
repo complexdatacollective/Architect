@@ -17,17 +17,17 @@ const ICON_OPTIONS = [
 
 const TypeEditor = ({
   form,
-  category,
+  entity,
   type,
   displayVariables,
   isNew,
 }) => {
-  const { name: paletteName, size: paletteSize } = getPalette(category);
+  const { name: paletteName, size: paletteSize } = getPalette(entity);
 
   return (
     <React.Fragment>
-      { type && <h1 className="editor__heading">Edit {category}</h1> }
-      { !type && <h1 className="editor__heading">Create {category}</h1> }
+      { type && <h1 className="editor__heading">Edit {entity}</h1> }
+      { !type && <h1 className="editor__heading">Create {entity}</h1> }
 
       <Guidance contentId="guidance.registry.type.label">
         <div className="editor__section">
@@ -59,7 +59,7 @@ const TypeEditor = ({
         </div>
       </Guidance>
 
-      { category === 'node' &&
+      { entity === 'node' &&
         <React.Fragment>
           <Guidance contentId="guidance.registry.type.icon">
             <div className="editor__section">
@@ -118,7 +118,7 @@ const TypeEditor = ({
 
 TypeEditor.propTypes = {
   type: PropTypes.string,
-  category: PropTypes.string.isRequired,
+  entity: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
