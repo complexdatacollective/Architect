@@ -24,15 +24,11 @@ const Row = ({
 
 Row.propTypes = {
   disabled: PropTypes.bool,
-  group: PropTypes.bool,
-  compactNext: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 Row.defaultProps = {
   disabled: false,
-  group: false,
-  compactNext: false,
 };
 
 export default Row;

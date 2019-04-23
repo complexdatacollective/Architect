@@ -1,0 +1,48 @@
+.new-stage-interface {
+  cursor: pointer;
+
+  &__title {
+    margin: 0;
+  }
+
+  &__preview {
+    margin-top: 1rem;
+    width: 20vw;
+    min-width: unit(30);
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
+    transition-property: border-color;
+    transition-duration: var(--animation-duration-standard);
+    transition-timing-function: var(--animation-easing);
+  }
+
+  &__tags {
+    margin-top: 1rem;
+  }
+
+  &__tag {
+    background: transparent;
+    color: var(--text-light);
+    display: inline-block;
+    font-size: .8rem;
+    padding: 0 .5rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    border-radius: 1.3rem;
+
+    @each $category in $new-stage-categories {
+      &--#{$category} {
+        background: var(--color-#{$category});
+      }
+    }
+  }
+
+  &:hover {
+    .new-stage-interface {
+      &__preview {
+        border-color: red;
+      }
+    }
+  }
+}

@@ -16,12 +16,11 @@ const initialStage = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_STAGE: {
-      const stage = { ...initialStage, ...action.stage, id: uuid() };
       const insertAtIndex = get(action, 'index', state.length);
 
       return [
         ...state.slice(0, insertAtIndex),
-        stage,
+        action.stage,
         ...state.slice(insertAtIndex),
       ];
     }
@@ -62,49 +61,47 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-function createStage(stage, index) {
-  return {
-    type: CREATE_STAGE,
-    stage,
-    index,
-  };
-}
+const createStage = (stage, index) => ({
+  type: CREATE_STAGE,
+  stage,
+  index,
+});
 
-function moveStage(oldIndex, newIndex) {
-  return {
-    type: MOVE_STAGE,
-    oldIndex,
-    newIndex,
-  };
-}
+const moveStage = (oldIndex, newIndex) => ({
+  type: MOVE_STAGE,
+  oldIndex,
+  newIndex,
+});
 
-function updateStage(stageId, stage, overwrite = false) {
-  return {
-    type: UPDATE_STAGE,
-    id: stageId,
-    stage,
-    overwrite,
-  };
-}
+const updateStage = (stageId, stage, overwrite = false) => ({
+  type: UPDATE_STAGE,
+  id: stageId,
+  stage,
+  overwrite,
+});
 
-function deleteStage(stageId) {
-  return {
-    type: DELETE_STAGE,
-    id: stageId,
-  };
-}
+const deleteStage = stageId => ({
+  type: DELETE_STAGE,
+  id: stageId,
+});
 
-function deletePrompt(stageId, promptId, deleteEmptyStage = false) {
-  return {
-    type: DELETE_PROMPT,
-    stageId,
-    promptId,
-    deleteEmptyStage,
+const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
+  type: DELETE_PROMPT,
+  stageId,
+  promptId,
+  deleteEmptyStage,
+});
+
+const createStageThunk = (options, index) =>
+  (dispatch) => {
+    const stageId = uuid();
+    const stage = { ...initialStage, ...options, id: stageId };
+    dispatch(createStage(stage, index));
+    return stage;
   };
-}
 
 const actionCreators = {
-  createStage,
+  createStage: createStageThunk,
   updateStage,
   deleteStage,
   moveStage,

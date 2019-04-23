@@ -1,0 +1,32 @@
+$new-stage-categories: [name-generators, name-interpreters, sociograms, utilities];
+
+.new-stage {
+  --color-name-generators: red;
+  --color-name-interpreters: green;
+  --color-sociograms: yellow;
+  --color-utilities: blue;
+
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+
+  &__navigation {
+    position: sticky;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &__options {
+    padding: unit(5) unit(5) unit(20);
+  }
+
+  &__category {
+    margin-top: unit(5);
+
+    &:first-child {
+      margin: 0;
+    }
+  }
+}
