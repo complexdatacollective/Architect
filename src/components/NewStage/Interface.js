@@ -4,6 +4,7 @@ import { compose, defaultProps } from 'recompose';
 import changeCase from 'change-case';
 import { Zoom } from '../../behaviours';
 import timelineImages from '../../images/timeline';
+import Guidance from '../Guidance';
 
 const getTimelineImage = type =>
   get(timelineImages, type);
@@ -16,9 +17,10 @@ const Interface = ({
 }) => {
   const image = getTimelineImage(type);
   return (
-    <div
+    <Guidance
       className="new-stage-interface"
       onClick={() => onSelect(type)}
+      contentId={`guidance.new_stage.${type}`}
     >
       <h3 className="new-stage-interface__title">{ title }</h3>
       { image && <img className="new-stage-interface__preview" src={image} alt={title} /> }
@@ -30,7 +32,7 @@ const Interface = ({
           >{tag}</div>
         ))}
       </div>
-    </div>
+    </Guidance>
   );
 };
 
