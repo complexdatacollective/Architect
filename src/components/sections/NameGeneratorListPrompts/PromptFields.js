@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Field } from 'redux-form';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
-import { TextArea, Text, Checkbox } from '../../../ui/components/Fields';
+import { TextArea, Text } from '../../../ui/components/Fields';
 import DataSource from '../../Form/Fields/DataSource';
 import MultiSelect from '../../Form/MultiSelect';
 import AssignAttributes from '../../AssignAttributes';
@@ -59,20 +58,6 @@ const PromptFields = ({
           validation={{ required: true }}
         />
       </Row>
-      <Row>
-        <h3 id={getFieldId('showExistingNodes')}>Show existing nodes</h3>
-        <p>
-          Show nodes added from other prompts, otherwise only nodes added on this
-          prompt will be shown.
-        </p>
-        <Field
-          name="showExistingNodes"
-          component={Checkbox}
-          label="Show existing nodes"
-          validation={{ required: true }}
-        />
-      </Row>
-
       { dataSource &&
         <Section group>
           <Row>
