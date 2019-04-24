@@ -19,7 +19,7 @@ class FormWithQuickAdd extends PureComponent {
 
     return (
       <React.Fragment>
-        <Section disabled={disabled} compactNext contentId="guidance.editor.quickAdd">
+        <Section disabled={disabled} contentId="guidance.editor.quickAdd">
           <h2>Quick Add</h2>
           <p>Should this stage use the quick add function?</p>
           <div className="stage-editor-section-form">
