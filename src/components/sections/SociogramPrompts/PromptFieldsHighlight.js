@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { compose } from 'recompose';
-import Guidance from '../../Guidance';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
 import Row from '../Row';
@@ -25,34 +24,32 @@ const HighlightFields = ({
   };
 
   return (
-    <Guidance contentId="guidance.editor.sociogram_prompt.attributes">
-      <Section group>
-        <h3>Attributes</h3>
-        <p>
-          Use this section to configure node highlighting. The particiant
-          will be able to toggle this attribute by simply tapping (or
-          clicking) a node.
-        </p>
+    <Section contentId="guidance.editor.sociogram_prompt.attributes" group>
+      <h3>Attributes</h3>
+      <p>
+        Use this section to configure node highlighting. The particiant
+        will be able to toggle this attribute by simply tapping (or
+        clicking) a node.
+      </p>
+      <Field
+        component={Fields.Toggle}
+        name="highlight.allowHighlighting"
+        onChange={handleChangeAllowHighlighting}
+        label="Toggle attribute by tapping on a node?"
+        disabled={canCreateEdge}
+        title={canCreateEdge && 'Create edge must be disabled to allow highlighting'}
+      />
+      <Row disabled={!allowHighlighting}>
         <Field
-          component={Fields.Toggle}
-          name="highlight.allowHighlighting"
-          onChange={handleChangeAllowHighlighting}
-          label="Toggle attribute by tapping on a node?"
-          disabled={canCreateEdge}
-          title={canCreateEdge && 'Create edge must be disabled to allow highlighting'}
+          name="highlight.variable"
+          component={ArchitectFields.CreatableSelect}
+          label="Toggle variable of the following type"
+          onCreateOption={value => handleCreateVariable(value, 'boolean')}
+          placeholder="&mdash; Select or create a new variable to toggle &mdash;"
+          options={highlightVariablesForSubject}
         />
-        <Row disabled={!allowHighlighting}>
-          <Field
-            name="highlight.variable"
-            component={ArchitectFields.CreatableSelect}
-            label="Toggle variable of the following type"
-            onCreateOption={value => handleCreateVariable(value, 'boolean')}
-            placeholder="&mdash; Select or create a new variable to toggle &mdash;"
-            options={highlightVariablesForSubject}
-          />
-        </Row>
-      </Section>
-    </Guidance>
+      </Row>
+    </Section>
   );
 };
 

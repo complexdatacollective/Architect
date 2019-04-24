@@ -1,4 +1,5 @@
 import React from 'react';
+import Guided from '../Guided';
 import Navigation from './Navigation';
 import interfaceOptions from './interfaceOptions';
 import InterfaceCategory from './InterfaceCategory';
@@ -15,13 +16,15 @@ const NewStage = ({
         <Navigation categories={categories} />
       </div>
       <div className="new-stage__options">
-        <h1>New Stage</h1>
-        <p>Brief intro text here?</p>
-        {interfaceOptions.map((props, index) => (
-          <div className="new-stage__category" key={index}>
-            <InterfaceCategory {...props} onSelect={handleCreateNew} />
-          </div>
-        ))}
+        <Guided defaultGuidance="guidance.new_stage">
+          <h1>New Stage</h1>
+          <p>Brief intro text here?</p>
+          {interfaceOptions.map((props, index) => (
+            <div className="new-stage__category" key={index}>
+              <InterfaceCategory {...props} onSelect={handleCreateNew} />
+            </div>
+          ))}
+        </Guided>
       </div>
     </div>
   );

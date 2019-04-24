@@ -7,6 +7,7 @@ import TextArea from '../../../ui/components/Fields/TextArea';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ColorPicker from '../../Form/Fields/ColorPicker';
 import MultiSelect from '../../Form/MultiSelect';
+import Section from '../Section';
 import Row from '../Row';
 import NewVariableWindow from '../../NewVariableWindow';
 import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
@@ -30,7 +31,7 @@ const PromptFields = ({
     .filter(({ type: variableType }) => variableType === 'ordinal');
 
   return (
-    <React.Fragment>
+    <Section>
       <Row>
         <h3 id={getFieldId('text')}>Text for Prompt</h3>
         <ValidatedField
@@ -100,7 +101,7 @@ const PromptFields = ({
         onComplete={handleCreateNewVariable}
         onCancel={closeNewVariableWindow}
       />
-    </React.Fragment>
+    </Section>
   );
 };
 

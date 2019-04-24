@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import Guidance from '../Guidance';
 
 const Section = ({
   disabled,
   group,
   compactNext,
   children,
+  contentId,
   ...rest
 }) => {
   const sectionClasses = cx(
@@ -16,11 +18,16 @@ const Section = ({
     { 'stage-editor-section--compact-next': compactNext },
   );
 
+  if (contentId) {
+    return (
+      <Guidance contentId={contentId} className={sectionClasses} {...rest}>
+        {children}
+      </Guidance>
+    );
+  }
+
   return (
-    <div
-      className={sectionClasses}
-      {...rest}
-    >
+    <div className={sectionClasses} {...rest}>
       {children}
     </div>
   );

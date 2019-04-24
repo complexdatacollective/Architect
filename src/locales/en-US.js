@@ -1,6 +1,80 @@
 import React, { Fragment } from 'react';
 
 export default {
+  'guidance.new_stage': (
+    <p>
+      guidance.new_stage
+    </p>
+  ),
+  'guidance.new_stage.NameGenerator': (
+    <p>
+      The Name Generator interface is designed to prompt your research
+      participants to name alters. It includes the ability to include
+      external network data in the form of a roster.
+    </p>
+  ),
+  'guidance.new_stage.NameGeneratorList': (
+    <p>Roster Name Generator (list)</p>
+  ),
+  'guidance.new_stage.NameGeneratorSearch': (
+    <p>Roster Name Generator (search)</p>
+  ),
+  'guidance.new_stage.Sociogram': (
+    <div>
+      <p>
+        The Sociogram interface allows your participants to position alters
+        spatially, either using the concentric circles framework, or a
+        background image of your choosing.
+      </p>
+      <p>It also allows the creation of edges between alters based on any
+        criteria, and the nomination of alters using an boolean variable.
+      </p>
+    </div>
+  ),
+  'guidance.new_stage.OrdinalBin': (
+    <p>
+      The Ordinal Bin interface allows your participants to quickly assign the
+      value of an ordinal variable to an alter or edge.
+    </p>
+  ),
+  'guidance.new_stage.CategoricalBin': (
+    <p>
+      The Categorical Bin interface allows your participants to quickly
+      assign the value of a categorical variable to an alter or edge.
+    </p>
+  ),
+  'guidance.new_stage.AlterForm': (
+    <p>
+      The Per Alter Form Interface is for back-filling additional information
+      about nodes which might be missed during the general flow of your
+      interview.
+    </p>
+  ),
+  'guidance.new_stage.AlterEdgeForm': (
+    <p>
+      The Per Alter Edge Form Interface is for...
+    </p>
+  ),
+  'guidance.new_stage.EgoForm': (
+    <p>
+      The Ego Form Interface is for...
+    </p>
+  ),
+  'guidance.new_stage.Information': (
+    <p>
+      The Information Interface allows you to display text and rich
+      media (including pictures, video and audio) to your participants.
+      Use it to introduce your research, help explain interview tasks,
+      or illustrate concepts or ideas.
+    </p>
+  ),
+  'guidance.new_stage.Narrative': (
+    <p>
+      The Narrative Interface is used to guide a conversation with a participants.
+      It does not modify the participant network. You are expected to use your own
+      audio/visual recording equipment.
+    </p>
+  ),
   'guidance.section.form': (
     <p>
       guidance.section.form
