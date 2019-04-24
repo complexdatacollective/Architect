@@ -41,7 +41,7 @@
   &:hover {
     .new-stage-interface {
       &__preview {
-        border-color: red;
+        border-color: var(--architect-active);
       }
     }
   }

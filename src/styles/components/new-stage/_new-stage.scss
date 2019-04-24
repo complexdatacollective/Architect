@@ -1,10 +1,10 @@
-$new-stage-categories: [name-generators, name-interpreters, sociograms, utilities];
+$new-stage-categories: [name-generators name-interpreters sociograms utilities];
 
 .new-stage {
-  --color-name-generators: red;
-  --color-name-interpreters: green;
-  --color-sociograms: yellow;
-  --color-utilities: blue;
+  --color-name-generators: var(--ord-color-seq-2);
+  --color-sociograms: var(--ord-color-seq-3);
+  --color-name-interpreters: var(--ord-color-seq-4);
+  --color-utilities: var(--ord-color-seq-5);
 
   width: 100%;
   height: 100%;
