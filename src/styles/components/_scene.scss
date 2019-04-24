@@ -65,6 +65,10 @@
   &__start {
     width: 100%;
     margin-top: 10vh;
+    transition-duration: var(--animation-duration-standard);
+    transition-timing-function: var(--animation-easing);
+    transition-property: transform, opacity;
+    will-change: transform;
   }
 
   &__recent-protocols {
@@ -104,9 +108,12 @@
         opacity: 0;
       }
 
+      &__start {
+        opacity: 0;
+      }
+
       &__home {
         transform: translateY(0);
-        opacity: 1;
         pointer-events: auto;
       }
 
@@ -123,7 +130,7 @@
       &__background--top {
         visibility: visible;
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-20vh);
       }
 
       &__background--bottom {
