@@ -23,7 +23,8 @@ const ProtocolStack = ({ importAndLoadProtocol, protocol: { filePath } }) => (
         </div>
       </Flipped>
     </div>
-    <p className="protocol-stack__label">{ getFilename(filePath) }</p>
+    <h4 className="protocol-stack__label">{ getFilename(filePath) }</h4>
+    <p className="protocol-stack__filepath" alt={filePath}>{ filePath }</p>
   </div>
 );
 

@@ -64,15 +64,16 @@
 
   &__start {
     width: 100%;
-    margin-top: 10vh;
+    margin-top: 20vh;
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
     transition-property: transform, opacity;
     will-change: transform;
+    position: relative;
+    z-index: 2;
   }
 
   &__recent-protocols {
-    width: 1000px;
     display: flex;
     opacity: 1;
     visibility: visible;
