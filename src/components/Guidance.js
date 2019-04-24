@@ -1,59 +1,55 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { compose, withHandlers, defaultProps } from 'recompose';
 import { actionCreators as guidedActionCreators } from '../ducks/modules/guidance';
 
-class Guided extends Component {
-  static propTypes = {
-    contentId: PropTypes.string.isRequired,
-    setGuidance: PropTypes.func.isRequired,
-    unsetGuidance: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-    focus: PropTypes.bool,
-  };
+const mapDispatchToProps = {
+  setGuidance: guidedActionCreators.setGuidance,
+  unsetGuidance: guidedActionCreators.unsetGuidance,
+};
 
-  static defaultProps = {
-    focus: false,
-  };
+const guidanceSetters = connect(null, mapDispatchToProps);
 
-  interactionHandlers() {
-    if (this.props.focus) {
+const interactionHandlers = withHandlers(
+  ({ focus, setGuidance, unsetGuidance }) => {
+    const focusType = focus ? 'focus' : 'mouse';
+    const handleSet = ({ contentId }) =>
+      () => setGuidance(contentId, focusType);
+    const handleUnset = () => () => unsetGuidance(focusType);
+
+    if (focus) {
       return {
-        onFocus: this.handleSet,
-        onBlur: this.handleUnset,
+        onFocus: handleSet,
+        onBlur: handleUnset,
       };
     }
 
     return {
-      onMouseEnter: this.handleSet,
-      onMouseLeave: this.handleUnset,
+      onMouseEnter: handleSet,
+      onMouseLeave: handleUnset,
     };
-  }
+  },
+);
 
-  handleSet = () => {
-    this.props.setGuidance(this.props.contentId, this.props.focus ? 'focus' : 'mouse');
-  }
+const withGuidance = compose(
+  defaultProps({ focus: false }),
+  guidanceSetters,
+  interactionHandlers,
+);
 
-  handleUnset = () => {
-    this.props.unsetGuidance(this.props.focus ? 'focus' : 'mouse');
-  }
+const Guidance = ({
+  setGuidance,
+  unsetGuidance,
+  focus,
+  contentId,
+  children,
+  ...props
+}) => (
+  <div {...props}>
+    {children}
+  </div>
+);
 
-  render() {
-    return React.cloneElement(
-      this.props.children,
-      this.interactionHandlers(),
-    );
-  }
-}
+export { withGuidance };
 
-const mapDispatchToProps = dispatch => ({
-  setGuidance: bindActionCreators(guidedActionCreators.setGuidance, dispatch),
-  unsetGuidance: bindActionCreators(guidedActionCreators.unsetGuidance, dispatch),
-});
-
-export { Guided };
-
-export default connect(
-  null, mapDispatchToProps,
-)(Guided);
+export default withGuidance(Guidance);

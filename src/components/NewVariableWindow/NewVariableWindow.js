@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getFieldId } from '../../utils/issues';
 import * as Fields from '../../ui/components/Fields';
-import Guidance from '../Guidance';
 import ValidatedField from '../Form/ValidatedField';
 import Select from '../Form/Fields/Select';
 import { isVariableTypeWithOptions, variableOptions } from '../Form/inputOptions';
@@ -34,43 +33,37 @@ const NewVariableWindow = ({
       onCancel={onCancel}
       initialValues={initialValues}
     >
-      <Guidance contentId="guidance.newVariable.name">
-        <Section>
-          <h3 id={getFieldId('name')}>Variable name</h3>
-          <p>Enter a name for this variable which will be used to export data</p>
-          <ValidatedField
-            name="name"
-            component={Fields.Text}
-            placeholder="e.g. Nickname"
-            validation={{ required: true }}
-          />
-        </Section>
-      </Guidance>
-      <Guidance contentId="guidance.newVariable.type">
-        <Section>
-          <h3 id={getFieldId('type')}>Variable type</h3>
-          <p>Choose a variable type</p>
-          <ValidatedField
-            name="type"
-            component={Select}
-            placeholder="Select variable type"
-            options={filteredVariableOptions}
-            validation={{ required: true }}
-          />
-        </Section>
-      </Guidance>
+      <Section contentId="guidance.newVariable.name">
+        <h3 id={getFieldId('name')}>Variable name</h3>
+        <p>Enter a name for this variable which will be used to export data</p>
+        <ValidatedField
+          name="name"
+          component={Fields.Text}
+          placeholder="e.g. Nickname"
+          validation={{ required: true }}
+        />
+      </Section>
+      <Section contentId="guidance.newVariable.type">
+        <h3 id={getFieldId('type')}>Variable type</h3>
+        <p>Choose a variable type</p>
+        <ValidatedField
+          name="type"
+          component={Select}
+          placeholder="Select variable type"
+          options={filteredVariableOptions}
+          validation={{ required: true }}
+        />
+      </Section>
       { isVariableTypeWithOptions(variableType) &&
-        <Guidance contentId="guidance.newVariable.options">
-          <Section>
-            <h3 id={getFieldId('options')}>Options</h3>
-            <p>Create some options for this input control</p>
-            <Options
-              name="options"
-              label="Options"
-              meta={{ form }}
-            />
-          </Section>
-        </Guidance>
+        <Section contentId="guidance.newVariable.options">
+          <h3 id={getFieldId('options')}>Options</h3>
+          <p>Create some options for this input control</p>
+          <Options
+            name="options"
+            label="Options"
+            meta={{ form }}
+          />
+        </Section>
       }
     </FormWindow>
   );

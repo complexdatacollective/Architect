@@ -186,41 +186,37 @@ class Codebook extends Component {
                 <p>
                   Use this screen to create, edit, and manage your node and edge types.
                 </p>
-                <Guidance contentId="guidance.registry.nodes">
-                  <div className="editor__section">
-                    <h2>Node Types</h2>
-                    <div className="editor__subsection">
-                      {this.renderNodes()}
-                    </div>
-                    <div className="editor__subsection">
-                      <Link
-                        screen="type"
-                        params={{ category: 'node' }}
-                      >
-                        <Button size="small" icon="add">
-                          Create new Node type
-                        </Button>
-                      </Link>
-                    </div>
+                <Guidance contentId="guidance.registry.nodes" className="editor__section">
+                  <h2>Node Types</h2>
+                  <div className="editor__subsection">
+                    {this.renderNodes()}
+                  </div>
+                  <div className="editor__subsection">
+                    <Link
+                      screen="type"
+                      params={{ category: 'node' }}
+                    >
+                      <Button size="small" icon="add">
+                        Create new Node type
+                      </Button>
+                    </Link>
                   </div>
                 </Guidance>
 
-                <Guidance contentId="guidance.registry.edges">
-                  <div className="editor__section">
-                    <h2>Edge Types</h2>
-                    <div className="editor__subsection">
-                      {this.renderEdges()}
-                    </div>
-                    <div className="editor__subsection">
-                      <Link
-                        screen="type"
-                        params={{ category: 'edge' }}
-                      >
-                        <Button size="small" icon="add">
-                          Create new Edge type
-                        </Button>
-                      </Link>
-                    </div>
+                <Guidance contentId="guidance.registry.edges" className="editor__section">
+                  <h2>Edge Types</h2>
+                  <div className="editor__subsection">
+                    {this.renderEdges()}
+                  </div>
+                  <div className="editor__subsection">
+                    <Link
+                      screen="type"
+                      params={{ category: 'edge' }}
+                    >
+                      <Button size="small" icon="add">
+                        Create new Edge type
+                      </Button>
+                    </Link>
                   </div>
                 </Guidance>
               </div>

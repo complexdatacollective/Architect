@@ -2,12 +2,12 @@ import anime from 'animejs';
 import scrollparent from 'scrollparent';
 import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../ui/utils/CSSVariables';
 
-const scrollTo = (destination) => {
+const scrollTo = (destination, offset = 0) => {
   if (!destination) { return; }
   const scroller = scrollparent(destination);
   const scrollStart = scroller.scrollTop;
   const destinationOffset = parseInt(destination.getBoundingClientRect().top, 10);
-  const scrollEnd = scrollStart + destinationOffset;
+  const scrollEnd = scrollStart + destinationOffset + offset;
 
   anime({
     targets: scroller,

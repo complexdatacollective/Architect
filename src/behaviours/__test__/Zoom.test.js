@@ -9,8 +9,6 @@ const mockProps = {
 
 describe('<Zoom />', () => {
   it('can render', () => {
-    const component = shallow(<Zoom {...mockProps} >Foo</Zoom>);
-
-    expect(component).toMatchSnapshot();
+    shallow(<Zoom {...mockProps} >Foo</Zoom>);
   });
 });

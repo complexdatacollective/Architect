@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import Guidance from '../Guidance';
 
 const Row = ({
   disabled,
+  contentId,
   children,
   ...rest
 }) => {
@@ -12,11 +14,16 @@ const Row = ({
     { 'stage-editor-row--disabled': disabled },
   );
 
+  if (contentId) {
+    return (
+      <Guidance contentId={contentId} className={rowClasses} {...rest}>
+        {children}
+      </Guidance>
+    );
+  }
+
   return (
-    <div
-      className={rowClasses}
-      {...rest}
-    >
+    <div className={rowClasses} {...rest}>
       {children}
     </div>
   );
@@ -24,15 +31,11 @@ const Row = ({
 
 Row.propTypes = {
   disabled: PropTypes.bool,
-  group: PropTypes.bool,
-  compactNext: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 Row.defaultProps = {
   disabled: false,
-  group: false,
-  compactNext: false,
 };
 
 export default Row;

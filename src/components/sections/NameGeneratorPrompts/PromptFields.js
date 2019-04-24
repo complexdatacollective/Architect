@@ -4,7 +4,8 @@ import { getFieldId } from '../../../utils/issues';
 import TextArea from '../../../ui/components/Fields/TextArea';
 import ValidatedField from '../../Form/ValidatedField';
 import AssignAttributes from '../../AssignAttributes';
-import { Row } from '../../OrderedList';
+import Row from '../Row';
+import Section from '../Section';
 
 class PromptFields extends PureComponent {
   render() {
@@ -15,7 +16,7 @@ class PromptFields extends PureComponent {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <Section>
         <Row>
           <h3 id={getFieldId('text')}>Text for Prompt</h3>
           <ValidatedField
@@ -37,7 +38,7 @@ class PromptFields extends PureComponent {
             entity={entity}
           />
         </Row>
-      </React.Fragment>
+      </Section>
     );
   }
 }
