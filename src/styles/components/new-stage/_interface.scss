@@ -9,12 +9,14 @@
     margin-top: 1rem;
     width: 20vw;
     min-width: unit(30);
-    border-width: 2px;
+    border-width: .4rem;
     border-style: solid;
-    border-color: transparent;
+    border-color: var(--background-dark);
+    background-color: var(--background-dark);
     transition-property: border-color;
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
+    border-radius: .75rem;
   }
 
   &__tags {

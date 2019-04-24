@@ -17,8 +17,13 @@ const NewStage = ({
         <Navigation categories={categories} />
       </div>
       <div className="new-stage__options">
-        <h1>New Stage</h1>
-        <p>Brief intro text here?</p>
+        <h1>Choose a stage to add to your interview</h1>
+        <p>
+          Below you can find the available interfaces currently bundled in network canvas,
+          grouped by type. Hover each interface with the guidance panel open to see further
+          information.
+        </p>
+
         {interfaceOptions.map((props, index) => (
           <div className="new-stage__category" key={index}>
             <InterfaceCategory {...props} onSelect={handleCreateNew} />

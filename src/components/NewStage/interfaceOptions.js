@@ -23,6 +23,10 @@ const interfaceOptions = [
         type: 'Sociogram',
         title: 'Sociogram',
       },
+      {
+        type: 'Narrative',
+        title: 'Narrative',
+      },
     ],
   },
   {
@@ -56,10 +60,6 @@ const interfaceOptions = [
       {
         type: 'Information',
         title: 'Information',
-      },
-      {
-        type: 'Narrative',
-        title: 'Narrative',
       },
     ],
   },
