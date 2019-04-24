@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withState } from 'recompose';
 import uuid from 'uuid';
 import cx from 'classnames';
-import AssetBrowser from '../../AssetBrowser';
+import AssetBrowserWindow from '../../AssetBrowser/AssetBrowserWindow';
 import Button from '../../../ui/components/Button';
 import Icon from '../../../ui/components/Icon';
 
@@ -101,7 +101,7 @@ class FileInput extends PureComponent {
             { !value ? 'Select asset' : 'Update asset' }
           </Button>
         </div>
-        <AssetBrowser
+        <AssetBrowserWindow
           show={showBrowser}
           type={type}
           onSelect={this.handleSelectAsset}

@@ -1,13 +1,21 @@
 import uuid from 'uuid';
+import { omit } from 'lodash';
 import { importAsset as fsImportAsset } from '../../../other/protocols';
 import { getActiveProtocolMeta } from '../../../selectors/protocol';
 
 const IMPORT_ASSET = Symbol('PROTOCOL/IMPORT_ASSET');
 const IMPORT_ASSET_COMPLETE = Symbol('PROTOCOL/IMPORT_ASSET_COMPLETE');
 const IMPORT_ASSET_FAILED = Symbol('PROTOCOL/IMPORT_ASSET_FAILED');
+const DELETE_ASSET = Symbol('PROTOCOL/DELETE_ASSET');
 
 const getNameFromFilename = filename =>
   filename.split('.')[0];
+
+const deleteAsset = id =>
+  ({
+    type: DELETE_ASSET,
+    id,
+  });
 
 /**
  * @param {string} filename - Name of file
@@ -76,6 +84,10 @@ export default function reducer(state = initialState, action = {}) {
           source: action.filename,
         },
       };
+    case DELETE_ASSET:
+      // Don't delete from disk, this allows us to rollback the protocol. Disk changes should
+      // be commited on save.
+      return omit(state, action.id);
     default:
       return state;
   }
@@ -84,12 +96,14 @@ export default function reducer(state = initialState, action = {}) {
 const actionCreators = {
   importAsset: importAssetThunk,
   importAssetComplete,
+  deleteAsset,
 };
 
 const actionTypes = {
   IMPORT_ASSET,
   IMPORT_ASSET_COMPLETE,
   IMPORT_ASSET_FAILED,
+  DELETE_ASSET,
 };
 
 export {

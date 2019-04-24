@@ -19,12 +19,14 @@ const Assets = ({
   assetType,
   onUpdateAssetFilter,
   onSelect,
+  onDelete,
 }) => {
   const renderedAssets = assets.map(asset => (
     <div className="asset-browser-assets__asset" key={asset.id}>
       <Asset
         {...asset}
         onClick={onSelect}
+        onDelete={onDelete}
       />
     </div>
   ));
@@ -55,11 +57,13 @@ const Assets = ({
 Assets.propTypes = {
   type: PropTypes.string,
   onSelect: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 Assets.defaultProps = {
   type: null,
   onSelect: () => {},
+  onDelete: null,
 };
 
 export default compose(

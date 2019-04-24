@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
-import { Node, Icon } from '../ui/components';
+import { Node, Icon, Button } from '../ui/components';
 import * as Fields from '../ui/components/Fields';
 import { getProtocol } from '../selectors/protocol';
 import Link from './Link';
@@ -88,6 +88,9 @@ class Overview extends Component {
                         },
                     }}
                   />
+                </div>
+                <div style={{ padding: '1rem 0 0' }}>
+                  <Link screen="assets"><Button>Manage assets</Button></Link>
                 </div>
                 {/* <div className="overview__group overview__group--variable-registry">
                   <legend className="overview__group-title">Variable registry</legend>

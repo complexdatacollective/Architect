@@ -1,15 +1,17 @@
 .asset-browser {
-  max-width: 90vw;
-  max-height: 95vh;
+  &__window {
+    max-height: calc(95vh - #{unit(16)});
+    width: 85%;
+    max-width: initial;
 
-  .dialog__footer {
-    text-align: right;
+    .dialog__footer {
+      text-align: right;
+    }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    max-height: 75vh;
   }
 
   &__create {
@@ -17,9 +19,12 @@
   }
 
   &__assets {
-    @include no-scrollbars;
-    width: 75vw;
-    overflow-x: hidden;
-    overflow-y: auto;
+    width: 100%;
+  }
+}
+
+.dialog {
+  .asset-browser__content {
+    max-height: 75vh;
   }
 }

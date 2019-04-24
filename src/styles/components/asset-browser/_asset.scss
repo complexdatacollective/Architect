@@ -31,4 +31,44 @@
     text-shadow: 1px 1px 2px var(--color-rich-black)
     0 0 10px var(--color-white);
   }
+
+  &__delete {
+    position: absolute;
+    top: unit(.5);
+    right: unit(.5);
+    width: unit(2.6);
+    height: unit(2.6);
+    border-radius: unit(2.6);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    transition-property: background-color;
+    transition-duration: var(--animation-duration-fast);
+
+    .icon {
+      width: unit(1.2);
+      height: unit(1.2);
+
+      .cls-1,
+      .cls-2 {
+        fill: var(--text-light);
+        background-color: transparent;
+        transition-property: fill;
+        transition-duration: var(--animation-duration-fast);
+      }
+    }
+
+    &:hover {
+      background-color: var(--background-light);
+
+      .icon {
+        .cls-1,
+        .cls-2 {
+          fill: var(--text-dark);
+        }
+      }
+    }
+  }
 }

@@ -12,7 +12,16 @@ $assets-per-row: 5;
   }
 
   &__asset {
-    flex: 0 0 calc(#{100% / $assets-per-row} - #{unit(2)});
+    flex: 0 0 unit(25);
     margin: 0 unit(2) unit(2) 0;
+  }
+}
+
+.dialog {
+  .asset-browser-assets__assets {
+    @include no-scrollbars;
+    max-height: 50vh;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }

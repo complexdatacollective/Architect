@@ -5,6 +5,7 @@ import SkipLogicEditorScreen from './SkipLogicEditorScreen';
 import Codebook from './CodebookScreen';
 import TypeEditorScreen from './TypeEditorScreen';
 import VariableEditorScreen from './VariableEditorScreen';
+import AssetsScreen from './AssetsScreen';
 
 const NotFound = () => (<div> Screen not found </div>);
 
@@ -14,6 +15,7 @@ const SCREEN_INDEX = {
   codebook: Codebook,
   type: TypeEditorScreen,
   variable: VariableEditorScreen,
+  assets: AssetsScreen,
 };
 
 const getScreenComponent = screen =>
