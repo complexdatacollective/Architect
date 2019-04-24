@@ -15,7 +15,6 @@ const createNewHandlers = withHandlers({
   handleCreateNew: ({ openScreen, closeScreen, insertAtIndex, locus }) =>
     (type) => {
       closeScreen('newStage');
-      // TODO: must also supply locus!!!
       openScreen('stage', { type, locus, insertAtIndex });
     },
 });

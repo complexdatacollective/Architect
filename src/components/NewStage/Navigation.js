@@ -6,8 +6,6 @@ const scrollToCategory = (category) => {
   const categoryId = changeCase.param(category);
   const target = document.getElementById(`new-stage-${categoryId}`);
 
-  console.log({ category, categoryId, target });
-
   if (!target) { return; }
 
   scrollTo(target, -100);

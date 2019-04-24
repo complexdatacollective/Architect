@@ -35,6 +35,6 @@ const Interface = ({
 };
 
 export default compose(
-  Zoom,
   defaultProps({ zoomColors: ['#2d2955', '#ffffff'] }),
+  Zoom,
 )(Interface);
