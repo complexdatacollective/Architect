@@ -73,8 +73,6 @@ const Zoom = WrappedComponent =>
 
       this.root.appendChild(pseudoElement);
 
-      console.log({ props: this.props });
-
       anime.timeline().add({
         targets: pseudoElement,
         elasticity: 0,

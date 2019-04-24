@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { compose, defaultProps } from 'recompose';
 import changeCase from 'change-case';
@@ -34,6 +35,17 @@ const Interface = ({
       </div>
     </Guidance>
   );
+};
+
+Interface.propTypes = {
+  type: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  tags: PropTypes.array,
+};
+
+Interface.defaultProps = {
+  tags: [],
 };
 
 export default compose(

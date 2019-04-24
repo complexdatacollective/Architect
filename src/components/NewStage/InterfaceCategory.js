@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import changeCase from 'change-case';
 import Interface from './Interface';
 
@@ -29,6 +30,16 @@ const InterfaceCategory = ({
       </div>
     </div>
   );
+};
+
+InterfaceCategory.propTypes = {
+  interfaces: PropTypes.array,
+  category: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
+
+InterfaceCategory.defaultProps = {
+  interfaces: [],
 };
 
 export default InterfaceCategory;

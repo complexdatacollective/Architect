@@ -20,14 +20,21 @@ const Section = ({
 
   if (contentId) {
     return (
-      <Guidance contentId={contentId} className={sectionClasses} {...rest}>
+      <Guidance
+        contentId={contentId}
+        className={sectionClasses}
+        {...rest}
+      >
         {children}
       </Guidance>
     );
   }
 
   return (
-    <div className={sectionClasses} {...rest}>
+    <div
+      className={sectionClasses}
+      {...rest}
+    >
       {children}
     </div>
   );

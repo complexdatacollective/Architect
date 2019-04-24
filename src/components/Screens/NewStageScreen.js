@@ -8,17 +8,15 @@ const NewStageScreen = ({
   transitionState,
   onComplete,
   ...rest
-}) => {
-  return (
-    <Card
-      show={show}
-      transitionState={transitionState}
-      onCancel={onComplete}
-    >
-      <NewStage {...rest} />
-    </Card>
-  );
-};
+}) => (
+  <Card
+    show={show}
+    transitionState={transitionState}
+    onCancel={onComplete}
+  >
+    <NewStage {...rest} />
+  </Card>
+);
 
 NewStageScreen.propTypes = {
   show: PropTypes.bool,

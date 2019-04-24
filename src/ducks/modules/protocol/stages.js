@@ -116,6 +116,10 @@ const actionTypes = {
   DELETE_PROMPT,
 };
 
+export const test = {
+  createStage,
+};
+
 export {
   actionCreators,
   actionTypes,

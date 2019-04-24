@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import Guidance from '../../Guidance';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ValidatedField from '../../Form/ValidatedField';
 import Section from '../Section';

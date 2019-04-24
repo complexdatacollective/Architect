@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import changeCase from 'change-case';
 import scrollTo from '../../utils/scrollTo';
 
@@ -11,7 +12,9 @@ const scrollToCategory = (category) => {
   scrollTo(target, -100);
 };
 
-const Navigation = ({ categories }) => (
+const Navigation = ({
+  categories,
+}) => (
   <div className="new-stage-navigation">
     {categories.map((category, index) => (
       <div
@@ -24,5 +27,13 @@ const Navigation = ({ categories }) => (
     ))}
   </div>
 );
+
+Navigation.propTypes = {
+  categories: PropTypes.array,
+};
+
+Navigation.defaultProps = {
+  categories: [],
+};
 
 export default Navigation;

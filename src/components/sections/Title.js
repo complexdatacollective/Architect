@@ -2,6 +2,7 @@ import React from 'react';
 import { ValidatedField } from '../Form';
 import * as Fields from '../../ui/components/Fields';
 import { getFieldId } from '../../utils/issues';
+import Section from './Section';
 
 const Title = () => (
   <Section contentId="guidance.editor.title">
