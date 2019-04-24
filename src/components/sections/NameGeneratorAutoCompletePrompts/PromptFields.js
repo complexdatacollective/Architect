@@ -8,10 +8,9 @@ import * as Fields from '../../../ui/components/Fields';
 import DataSource from '../../Form/Fields/DataSource';
 import MultiSelect from '../../Form/MultiSelect';
 import AssignAttributes from '../../AssignAttributes';
+import { Row, Group } from '../../OrderedList';
 import withFieldValues from '../NameGeneratorListPrompts/withFieldValues';
 import withExternalDataPropertyOptions, { propTypes as externalDataPropTypes } from '../NameGeneratorListPrompts/withExternalDataPropertyOptions';
-import Row from '../Row';
-import Section from '../Section';
 
 const PromptFields = ({
   dataSource,
@@ -22,7 +21,7 @@ const PromptFields = ({
   entity,
   type,
 }) => (
-  <Section>
+  <React.Fragment>
     <Row>
       <h3 id={getFieldId('text')}>Text for Prompt</h3>
       <ValidatedField
@@ -56,7 +55,7 @@ const PromptFields = ({
     </Row>
 
     { dataSource &&
-      <Section group>
+      <Group>
         <Row>
           <h3>Card options</h3>
           <p>
@@ -95,11 +94,11 @@ const PromptFields = ({
             />
           }
         </Row>
-      </Section>
+      </Group>
     }
 
     { dataSource &&
-      <Section group>
+      <Group>
         <Row>
           <h3>Search options</h3>
           <p>
@@ -136,9 +135,9 @@ const PromptFields = ({
             ]}
           />
         </Row>
-      </Section>
+      </Group>
     }
-  </Section>
+  </React.Fragment>
 );
 
 PromptFields.propTypes = {

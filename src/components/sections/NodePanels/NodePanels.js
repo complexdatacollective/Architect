@@ -4,33 +4,36 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { formValueSelector, FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
+import cx from 'classnames';
 import { has } from 'lodash';
+import Guidance from '../../Guidance';
 import OrderedList, { NewButton } from '../../OrderedList';
-import Section from '../Section';
 import NodePanel from './NodePanel';
 
-const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
+const NodePanels = ({ form, createNewPanel, disabled, panels }) => {
   const isFull = panels && panels.length === 2;
 
   return (
-    <Section contentId="guidance.editor.node_panels" {...rest}>
-      <div className="stage-editor-section-content-items">
-        <h2>Panels</h2>
-        <p>Use this section to configure up to two side panels on this name generator.</p>
-        <FieldArray
-          name="panels"
-          component={OrderedList}
-          item={NodePanel}
-          form={form}
-        />
+    <Guidance contentId="guidance.editor.node_panels">
+      <div className={cx('stage-editor-section', { 'stage-editor-section--disabled': disabled })}>
+        <div className="stage-editor-section-content-items">
+          <h2>Panels</h2>
+          <p>Use this section to configure up to two side panels on this name generator.</p>
+          <FieldArray
+            name="panels"
+            component={OrderedList}
+            item={NodePanel}
+            form={form}
+          />
 
-        { !isFull &&
-          <div className="stage-editor-section-content-items__controls">
-            <NewButton onClick={() => createNewPanel()} />
-          </div>
-        }
+          { !isFull &&
+            <div className="stage-editor-section-content-items__controls">
+              <NewButton onClick={() => createNewPanel()} />
+            </div>
+          }
+        </div>
       </div>
-    </Section>
+    </Guidance>
   );
 };
 

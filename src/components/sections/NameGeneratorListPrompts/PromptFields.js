@@ -8,12 +8,11 @@ import { TextArea, Text, Checkbox } from '../../../ui/components/Fields';
 import DataSource from '../../Form/Fields/DataSource';
 import MultiSelect from '../../Form/MultiSelect';
 import AssignAttributes from '../../AssignAttributes';
+import { Row, Group } from '../../OrderedList';
 import getSortOrderOptionGetter from './getSortOrderOptionGetter';
 import getExternalPropertiesOptionGetter from './getExternalPropertiesOptionGetter';
 import withFieldValues from './withFieldValues';
 import withExternalDataPropertyOptions, { propTypes as externalDataPropTypes } from './withExternalDataPropertyOptions';
-import Row from '../Row';
-import Section from '../Section';
 
 const PromptFields = ({
   type,
@@ -28,7 +27,7 @@ const PromptFields = ({
   const sortablePropertiesOptionGetter = getExternalPropertiesOptionGetter(variableOptions);
 
   return (
-    <Section>
+    <React.Fragment>
       <Row>
         <h3 id={getFieldId('text')}>Text for Prompt</h3>
         <ValidatedField
@@ -74,7 +73,7 @@ const PromptFields = ({
       </Row>
 
       { dataSource &&
-        <Section group>
+        <Group>
           <Row>
             <h3>Card options</h3>
             <p>
@@ -111,11 +110,11 @@ const PromptFields = ({
               />
             }
           </Row>
-        </Section>
+        </Group>
       }
 
       { dataSource &&
-        <Section group>
+        <Group>
           <Row>
             <h3>Sort options</h3>
             <p>
@@ -154,9 +153,9 @@ const PromptFields = ({
               options={sortablePropertiesOptionGetter}
             />
           </Row>
-        </Section>
+        </Group>
       }
-    </Section>
+    </React.Fragment>
   );
 };
 

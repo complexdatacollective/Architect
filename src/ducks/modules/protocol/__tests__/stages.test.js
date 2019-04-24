@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import reducer, { actionCreators, test } from '../stages';
+import reducer, { actionCreators } from '../stages';
 
 const mockStages = [
   { id: 3, type: 'Information', label: 'Foo' },
@@ -24,13 +24,13 @@ describe('protocol.stages', () => {
 
       const appendStageToState = reducer(
         mockStages,
-        test.createStage(newStage),
+        actionCreators.createStage(newStage),
       );
       expect(appendStageToState[3]).toMatchObject({ ...newStage });
 
       const addStageToExistingState = reducer(
         mockStages,
-        test.createStage(newStage, 1),
+        actionCreators.createStage(newStage, 1),
       );
       expect(addStageToExistingState[1]).toMatchObject({ ...newStage });
     });

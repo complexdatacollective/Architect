@@ -23,7 +23,6 @@ const createTimemachine = (reducer, options) => {
 
     switch (action.type) {
       case JUMP_BKWD: {
-        if (past.length === 0) { return state; }
         const previous = past[past.length - 1];
         const newPast = past.slice(0, past.length - 1);
 
@@ -34,7 +33,6 @@ const createTimemachine = (reducer, options) => {
         };
       }
       case JUMP: {
-        if (!action.payload.locus) { return state; }
         const locusIndex = timeline.indexOf(action.payload.locus);
 
         // the last point in the timeline is the present

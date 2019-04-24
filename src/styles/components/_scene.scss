@@ -11,7 +11,7 @@
     position: absolute;
     top: unit(4);
     right: unit(3);
-    width: 12rem;
+    width: 8rem;
     z-index: var(--z-global-ui);
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
@@ -65,10 +65,6 @@
   &__start {
     width: 100%;
     margin-top: 10vh;
-    transition-duration: var(--animation-duration-standard);
-    transition-timing-function: var(--animation-easing);
-    transition-property: transform, opacity;
-    will-change: transform;
   }
 
   &__recent-protocols {
@@ -108,12 +104,9 @@
         opacity: 0;
       }
 
-      &__start {
-        opacity: 0;
-      }
-
       &__home {
         transform: translateY(0);
+        opacity: 1;
         pointer-events: auto;
       }
 
@@ -130,7 +123,7 @@
       &__background--top {
         visibility: visible;
         opacity: 1;
-        transform: translateY(-20vh);
+        transform: translateY(0);
       }
 
       &__background--bottom {

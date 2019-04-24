@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import uuid from 'uuid';
 import TextField from '../../../ui/components/Fields/Text';
+import Guidance from '../../Guidance';
 import ValidatedField from '../../Form/ValidatedField';
 import EditableList from '../../EditableList';
 import { getFieldId } from '../../../utils/issues';
@@ -22,36 +23,38 @@ const Form = ({
   type,
   entity,
 }) => (
-  <Section disabled={disabled} group contentId="guidance.section.form">
-    <div id={getFieldId('form.title')} data-name="Form title" />
-    <h2>Form</h2>
+  <Guidance contentId="guidance.section.form">
+    <Section disabled={disabled} group>
+      <div id={getFieldId('form.title')} data-name="Form title" />
+      <h2>Form</h2>
 
-    <ValidatedField
-      name="form.title"
-      label="Form title"
-      component={TextField}
-      placeholder="Enter your title here"
-      className="stage-editor-section-title"
-      validation={{ required: true }}
-    />
+      <ValidatedField
+        name="form.title"
+        label="Form title"
+        component={TextField}
+        placeholder="Enter your title here"
+        className="stage-editor-section-title"
+        validation={{ required: true }}
+      />
 
-    <EditableList
-      editComponent={FieldFields}
-      previewComponent={FieldPreview}
-      fieldName="form.fields"
-      title="Edit Field"
-      onChange={handleChangeFields}
-      template={template}
-      normalize={normalizeField}
-      itemSelector={itemSelector(entity, type)}
-      form={form}
-    >
-      <h4>Fields</h4>
-      <p>
-        Create fields for your form here
-      </p>
-    </EditableList>
-  </Section>
+      <EditableList
+        editComponent={FieldFields}
+        previewComponent={FieldPreview}
+        fieldName="form.fields"
+        title="Edit Field"
+        onChange={handleChangeFields}
+        template={template}
+        normalize={normalizeField}
+        itemSelector={itemSelector(entity, type)}
+        form={form}
+      >
+        <h4>Fields</h4>
+        <p>
+          Create fields for your form here
+        </p>
+      </EditableList>
+    </Section>
+  </Guidance>
 );
 
 Form.propTypes = {

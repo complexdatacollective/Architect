@@ -8,13 +8,14 @@ import { compose, withStateHandlers, defaultProps } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
 import None from '../Transitions/None';
+import Drawer from '../Transitions/Drawer';
 import Stage from './Stage';
+import InsertStage from './InsertStage';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
-import { NewButton } from '../OrderedList';
 
 class Timeline extends Component {
   static propTypes = {
@@ -53,8 +54,9 @@ class Timeline extends Component {
     this.setState({ highlightHide: true });
   };
 
-  handleInsertStage = index =>
-    this.props.openScreen('newStage', { insertStageAtIndex: index, highlightHide: true });
+  handleInsertStage = (index) => {
+    this.setState({ insertStageAtIndex: index, highlightHide: true });
+  };
 
   handleDeleteStage = (stageId) => {
     this.props.openDialog({
@@ -74,6 +76,10 @@ class Timeline extends Component {
   handleEditSkipLogic = id =>
     this.props.openScreen('skip', { id });
 
+  handleCancelInsertStage = () => {
+    this.setState({ insertStageAtIndex: null, highlightHide: true });
+  }
+
   createStage = (type, insertAtIndex) => {
     const { openScreen, locus } = this.props;
     this.setState({ insertStageAtIndex: null, highlightHide: true });
@@ -81,6 +87,34 @@ class Timeline extends Component {
   };
 
   hasStages = () => this.props.stages.length > 0;
+
+  injectInsertStage = (items) => {
+    const { insertStageAtIndex } = this.state;
+
+    if (insertStageAtIndex !== null) {
+      return [
+        ...items.slice(0, insertStageAtIndex),
+        this.renderInsertStage(insertStageAtIndex),
+        ...items.slice(insertStageAtIndex),
+      ];
+    }
+
+    return items;
+  }
+
+  renderInsertStage = insertStageAtIndex => (
+    <Drawer
+      key={`insert_${insertStageAtIndex}`}
+      timeout={1000}
+      unmountOnExit
+      mountOnEnter
+    >
+      <InsertStage
+        onSelectStage={type => this.createStage(type, insertStageAtIndex)}
+        onCancel={this.handleCancelInsertStage}
+      />
+    </Drawer>
+  );
 
   renderHighlight = () => {
     const opacity = this.state.highlightHide ? 0 : 1;
@@ -100,8 +134,12 @@ class Timeline extends Component {
     );
   }
 
-  renderStages = () =>
-    this.props.stages.map(this.renderStage);
+  renderStages = () => {
+    const items = this.props.stages.map(this.renderStage);
+    const itemsWithInsertStage = this.injectInsertStage(items);
+
+    return itemsWithInsertStage;
+  }
 
   renderStage = (stage, index) => (
     <None key={`stage_${stage.id}`}>
@@ -139,12 +177,12 @@ class Timeline extends Component {
           <TransitionGroup>
             { this.renderStages() }
           </TransitionGroup>
-        </div>
-        <div className="timeline__new">
-          <NewButton onClick={() => this.handleInsertStage(0)} />
-          <div className="timeline__new-label">
-            Add new stage
-          </div>
+          { !this.hasStages() && (
+            <InsertStage
+              key="insertStage"
+              onSelectStage={type => this.createStage(type, 0)}
+            />
+          ) }
         </div>
       </div>
     );

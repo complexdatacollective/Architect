@@ -16,11 +16,12 @@ const initialStage = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case CREATE_STAGE: {
+      const stage = { ...initialStage, ...action.stage, id: uuid() };
       const insertAtIndex = get(action, 'index', state.length);
 
       return [
         ...state.slice(0, insertAtIndex),
-        action.stage,
+        stage,
         ...state.slice(insertAtIndex),
       ];
     }
@@ -61,47 +62,49 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const createStage = (stage, index) => ({
-  type: CREATE_STAGE,
-  stage,
-  index,
-});
-
-const moveStage = (oldIndex, newIndex) => ({
-  type: MOVE_STAGE,
-  oldIndex,
-  newIndex,
-});
-
-const updateStage = (stageId, stage, overwrite = false) => ({
-  type: UPDATE_STAGE,
-  id: stageId,
-  stage,
-  overwrite,
-});
-
-const deleteStage = stageId => ({
-  type: DELETE_STAGE,
-  id: stageId,
-});
-
-const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
-  type: DELETE_PROMPT,
-  stageId,
-  promptId,
-  deleteEmptyStage,
-});
-
-const createStageThunk = (options, index) =>
-  (dispatch) => {
-    const stageId = uuid();
-    const stage = { ...initialStage, ...options, id: stageId };
-    dispatch(createStage(stage, index));
-    return stage;
+function createStage(stage, index) {
+  return {
+    type: CREATE_STAGE,
+    stage,
+    index,
   };
+}
+
+function moveStage(oldIndex, newIndex) {
+  return {
+    type: MOVE_STAGE,
+    oldIndex,
+    newIndex,
+  };
+}
+
+function updateStage(stageId, stage, overwrite = false) {
+  return {
+    type: UPDATE_STAGE,
+    id: stageId,
+    stage,
+    overwrite,
+  };
+}
+
+function deleteStage(stageId) {
+  return {
+    type: DELETE_STAGE,
+    id: stageId,
+  };
+}
+
+function deletePrompt(stageId, promptId, deleteEmptyStage = false) {
+  return {
+    type: DELETE_PROMPT,
+    stageId,
+    promptId,
+    deleteEmptyStage,
+  };
+}
 
 const actionCreators = {
-  createStage: createStageThunk,
+  createStage,
   updateStage,
   deleteStage,
   moveStage,
@@ -114,10 +117,6 @@ const actionTypes = {
   DELETE_STAGE,
   MOVE_STAGE,
   DELETE_PROMPT,
-};
-
-export const test = {
-  createStage,
 };
 
 export {

@@ -7,7 +7,6 @@ import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import { TextArea } from '../../../ui/components/Fields';
 import MultiSelect from '../../Form/MultiSelect';
 import Row from '../Row';
-import Section from '../Section';
 import NewVariableWindow from '../../NewVariableWindow';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withPromptProps from './withPromptProps';
@@ -30,7 +29,7 @@ const PromptFields = ({
     .filter(({ type: variableType }) => variableType === 'categorical');
 
   return (
-    <Section>
+    <React.Fragment>
       <Row>
         <h3 id={getFieldId('text')}>Text for Prompt</h3>
         <ValidatedField
@@ -89,7 +88,7 @@ const PromptFields = ({
         onComplete={handleCreateNewVariable}
         onCancel={closeNewVariableWindow}
       />
-    </Section>
+    </React.Fragment>
   );
 };
 

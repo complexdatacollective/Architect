@@ -8,20 +8,6 @@ $bottom-spacing: unit(12);
     transition-property: opacity;
     transition-duration: 500ms;
 
-    &__new {
-      position: relative;
-      display: flex;
-      justify-content: center;
-
-      &-label {
-        position: absolute;
-        top: calc(50% - 2rem);
-        left: calc(50% + 2.5rem);
-        height: 4rem;
-        line-height: 4rem;
-      }
-    }
-
     &::before {
       transition: transform var(--animation-duration-slow) var(--animation-easing);
       z-index: -1;
@@ -31,7 +17,7 @@ $bottom-spacing: unit(12);
       top: 0;
       left: calc(50% - #{unit(.3)});
       width: 0;
-      height: 100%;
+      height: calc(100% - #{$stage-padding} - #{$stage-height / 2} - #{$bottom-spacing});
       border-left-width: unit(.6);
       border-left-color: var(--architect-timeline-line);
       border-left-style: solid;

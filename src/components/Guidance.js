@@ -1,55 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { compose, withHandlers, defaultProps } from 'recompose';
+import { bindActionCreators } from 'redux';
 import { actionCreators as guidedActionCreators } from '../ducks/modules/guidance';
 
-const mapDispatchToProps = {
-  setGuidance: guidedActionCreators.setGuidance,
-  unsetGuidance: guidedActionCreators.unsetGuidance,
-};
+class Guided extends Component {
+  static propTypes = {
+    contentId: PropTypes.string.isRequired,
+    setGuidance: PropTypes.func.isRequired,
+    unsetGuidance: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+    focus: PropTypes.bool,
+  };
 
-const guidanceSetters = connect(null, mapDispatchToProps);
+  static defaultProps = {
+    focus: false,
+  };
 
-const interactionHandlers = withHandlers(
-  ({ focus, setGuidance, unsetGuidance }) => {
-    const focusType = focus ? 'focus' : 'mouse';
-    const handleSet = ({ contentId }) =>
-      () => setGuidance(contentId, focusType);
-    const handleUnset = () => () => unsetGuidance(focusType);
-
-    if (focus) {
+  interactionHandlers() {
+    if (this.props.focus) {
       return {
-        onFocus: handleSet,
-        onBlur: handleUnset,
+        onFocus: this.handleSet,
+        onBlur: this.handleUnset,
       };
     }
 
     return {
-      onMouseEnter: handleSet,
-      onMouseLeave: handleUnset,
+      onMouseEnter: this.handleSet,
+      onMouseLeave: this.handleUnset,
     };
-  },
-);
+  }
 
-const withGuidance = compose(
-  defaultProps({ focus: false }),
-  guidanceSetters,
-  interactionHandlers,
-);
+  handleSet = () => {
+    this.props.setGuidance(this.props.contentId, this.props.focus ? 'focus' : 'mouse');
+  }
 
-const Guidance = ({
-  setGuidance,
-  unsetGuidance,
-  focus,
-  contentId,
-  children,
-  ...props
-}) => (
-  <div {...props}>
-    {children}
-  </div>
-);
+  handleUnset = () => {
+    this.props.unsetGuidance(this.props.focus ? 'focus' : 'mouse');
+  }
 
-export { withGuidance };
+  render() {
+    return React.cloneElement(
+      this.props.children,
+      this.interactionHandlers(),
+    );
+  }
+}
 
-export default withGuidance(Guidance);
+const mapDispatchToProps = dispatch => ({
+  setGuidance: bindActionCreators(guidedActionCreators.setGuidance, dispatch),
+  unsetGuidance: bindActionCreators(guidedActionCreators.unsetGuidance, dispatch),
+});
+
+export { Guided };
+
+export default connect(
+  null, mapDispatchToProps,
+)(Guided);

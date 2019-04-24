@@ -9,10 +9,10 @@ import {
   formValueSelector,
   getFormSyncErrors,
 } from 'redux-form';
+import Guidance from '../../Guidance';
 import OrderedList, { NewButton } from '../../OrderedList';
 import Item from './Item';
 import { units, capacity, sizes } from './sizes';
-import Section from '../Section';
 
 class ContentGrid extends Component {
   static propTypes = {
@@ -55,36 +55,38 @@ class ContentGrid extends Component {
     const { form, spareCapacity } = this.props;
 
     return (
-      <Section contentId="guidance.editor.content_items">
-        <h2>Content Items</h2>
-        <p>
-          Use this section to configure up to three content items, containing images, video,
-          audio, or text.
-        </p>
-        <div className="content-grid">
-          <FieldArray
-            name="items"
-            component={OrderedList}
-            item={Item}
-            onToggleItemEdit={this.handleToggleItemEdit}
-            onChooseItemType={this.handleChooseItemType}
-            editing={this.state.editing}
-            form={form}
-            errors={this.props.errors}
-            spareCapacity={spareCapacity}
-          />
-        </div>
-
-        { spareCapacity > 0 ?
-          <NewButton
-            onClick={this.handleCreateItem}
-          /> :
+      <Guidance contentId="guidance.editor.content_items">
+        <div className="stage-editor-section">
+          <h2>Content Items</h2>
           <p>
-            <strong>Information screen full</strong>. No more room for additional content boxes.
-            Add content to existing boxes, or make them smaller to free up space.
+            Use this section to configure up to three content items, containing images, video,
+            audio, or text.
           </p>
-        }
-      </Section>
+          <div className="content-grid">
+            <FieldArray
+              name="items"
+              component={OrderedList}
+              item={Item}
+              onToggleItemEdit={this.handleToggleItemEdit}
+              onChooseItemType={this.handleChooseItemType}
+              editing={this.state.editing}
+              form={form}
+              errors={this.props.errors}
+              spareCapacity={spareCapacity}
+            />
+          </div>
+
+          { spareCapacity > 0 ?
+            <NewButton
+              onClick={this.handleCreateItem}
+            /> :
+            <p>
+              <strong>Information screen full</strong>. No more room for additional content boxes.
+              Add content to existing boxes, or make them smaller to free up space.
+            </p>
+          }
+        </div>
+      </Guidance>
     );
   }
 }

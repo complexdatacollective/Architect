@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import Guidance from '../../Guidance';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ValidatedField from '../../Form/ValidatedField';
 import Section from '../Section';
@@ -17,21 +18,25 @@ const QuickAdd = ({
   handleCreateVariable,
   handleDeleteVariable,
 }) => (
-  <Section disabled={disabled} group contentId="guidance.editor.quickAdd">
-    <h3 id="issue-form">Quick Variable</h3>
-    <p>Choose a varible to set for the quick add input</p>
-    <div className="stage-editor-section-form">
-      <ValidatedField
-        name="quickAdd"
-        component={CreatableSelect}
-        placeholder="Select component"
-        options={options}
-        onCreateOption={value => handleCreateVariable(value, 'text')}
-        onDeleteOption={handleDeleteVariable}
-        validation={{ required: true }}
-      />
-    </div>
-  </Section>
+  <React.Fragment>
+    <Guidance contentId="guidance.editor.quickAdd">
+      <Section disabled={disabled} group>
+        <h3 id="issue-form">Quick Variable</h3>
+        <p>Choose a varible to set for the quick add input</p>
+        <div className="stage-editor-section-form">
+          <ValidatedField
+            name="quickAdd"
+            component={CreatableSelect}
+            placeholder="Select component"
+            options={options}
+            onCreateOption={value => handleCreateVariable(value, 'text')}
+            onDeleteOption={handleDeleteVariable}
+            validation={{ required: true }}
+          />
+        </div>
+      </Section>
+    </Guidance>
+  </React.Fragment>
 );
 
 QuickAdd.propTypes = {

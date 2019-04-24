@@ -7,6 +7,7 @@ import {
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
+import Guidance from '../Guidance';
 import OrderedList, { NewButton } from '../OrderedList';
 import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
@@ -58,8 +59,8 @@ class EditableList extends PureComponent {
 
     const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
 
-    return (
-      <Section disabled={disabled} contentId={contentId}>
+    const editableListSection = (
+      <Section disabled={disabled}>
         <Flipper
           flipKey={isEditing}
           portalKey="editable-list"
@@ -102,6 +103,16 @@ class EditableList extends PureComponent {
           </Window>
         </Flipper>
       </Section>
+    );
+
+    if (!contentId) {
+      return editableListSection;
+    }
+
+    return (
+      <Guidance contentId={contentId}>
+        {editableListSection}
+      </Guidance>
     );
   }
 }

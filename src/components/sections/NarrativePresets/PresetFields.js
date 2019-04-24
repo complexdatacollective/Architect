@@ -7,13 +7,12 @@ import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
+import { Row } from '../../OrderedList';
 import NewVariableWindow from '../../NewVariableWindow';
 import withPresetProps from './withPresetProps';
 import withNewVariableWindowHandlers, {
   propTypes as newVariableWindowPropTypes,
 } from '../../enhancers/withNewVariableWindowHandlers';
-import Section from '../Section';
-import Row from '../Row';
 
 const PresetFields = ({
   entity,
@@ -30,7 +29,7 @@ const PresetFields = ({
   newVariableName,
   showNewVariableWindow,
 }) => (
-  <Section>
+  <React.Fragment>
     <Row>
       <h3 id={getFieldId('text')}>Preset label</h3>
       <ValidatedField
@@ -93,7 +92,7 @@ const PresetFields = ({
       onComplete={handleCreateGroupVariable}
       onCancel={closeNewVariableWindow}
     />
-  </Section>
+  </React.Fragment>
 );
 
 PresetFields.propTypes = {

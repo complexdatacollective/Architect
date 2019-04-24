@@ -1,25 +1,13 @@
 /* eslint-env jest */
 
 import React from 'react';
-import { reduxForm } from 'redux-form';
 import { mount } from 'enzyme';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import SociogramPrompts from '../SociogramPrompts';
 
-/* eslint-disable */
-const MockComponent = ({ children }) => (
-  <div>
-    {children}
-  </div>
-);
-
-const MockForm = reduxForm({
-  form: 'foo',
-  onSubmit: () => {},
-})(MockComponent);
-/* eslint-enable */
+jest.mock('../../../Guidance');
 
 describe('<SociogramPrompts />', () => {
   describe('when connected', () => {
@@ -27,13 +15,7 @@ describe('<SociogramPrompts />', () => {
     beforeEach(() => {
       const store = createStore(() => ({}));
       const props = { form: 'myForm' };
-      const provider = mount((
-        <Provider store={store}>
-          <MockForm>
-            <SociogramPrompts {...props} />
-          </MockForm>
-        </Provider>
-      ));
+      const provider = mount(<Provider store={store}><SociogramPrompts {...props} /></Provider>);
       subject = provider.find('SociogramPrompts');
     });
 
