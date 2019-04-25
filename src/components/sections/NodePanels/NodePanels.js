@@ -15,7 +15,7 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
   return (
     <Section contentId="guidance.editor.node_panels" {...rest}>
       <div className="stage-editor-section-content-items">
-        <h2>Panels</h2>
+        <h2>Side Panels</h2>
         <p>Use this section to configure up to two side panels on this name generator.</p>
         <FieldArray
           name="panels"
