@@ -78,7 +78,7 @@ class VariableFields extends Component {
               name="validation"
               label="Validations"
               variableType={variableType}
-              meta={{ form }}
+              form={form}
             />
           }
         </Row>
