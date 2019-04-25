@@ -40,7 +40,10 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
   <Section>
     <Row contentId="guidance.section.form.field.name">
       <h3 id={getFieldId('name')}>Variable name</h3>
-      <p>Enter a name for this variable which will be used to export data</p>
+      <p>
+        Enter a name for this variable. The variable name is how you will
+        reference the variable elsewhere, including in exported data.
+      </p>
       <ValidatedField
         name="name"
         component={Fields.Text}
@@ -50,7 +53,7 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
       />
     </Row>
     <Row contentId="guidance.section.form.field.prompt">
-      <h3 id={getFieldId('prompt')}>Prompt</h3>
+      <h3 id={getFieldId('prompt')}>Question prompt</h3>
       <p>Enter question for the particpant. e.g. What is this person&apos;s name?</p>
       <ValidatedField
         name="prompt"
@@ -61,7 +64,7 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
     </Row>
     <Row contentId="guidance.section.form.field.component">
       <h3 id={getFieldId('component')}>Input control</h3>
-      <p>Choose a control to collect the answer</p>
+      <p>Choose an input control that should be used to collect the answer.</p>
       <ValidatedField
         name="component"
         component={Select}
@@ -74,8 +77,12 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
     </Row>
     { isVariableTypeWithOptions(variableType) &&
       <Row contentId="guidance.section.form.field.Options">
-        <h3 id={getFieldId('options')}>Options</h3>
-        <p>Create some options for this input control</p>
+        <h3 id={getFieldId('options')}>Categorical/Ordinal options</h3>
+        <p>
+          The input type you selected indicates that this is a categorical or ordinal variable.
+          Next, please create a minimum of two possible values for the participant to choose
+          between.
+        </p>
         <Options
           name="options"
           label="Options"
@@ -86,7 +93,7 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
     { variableType &&
       <Row contentId="guidance.section.form.field.validation">
         <h3 id={getFieldId('validation')}>Validation</h3>
-        <p>Select any input requirements that you would like to enforce</p>
+        <p>Select any input requirements that you would like to enforce.</p>
         <Validations
           form={form}
           name="validation"

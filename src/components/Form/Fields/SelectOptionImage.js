@@ -12,8 +12,8 @@ const { Option } = ReactSelectComponents;
 const SelectOptionImage = props => (
   <Option
     {...props}
-    className="form-fields-select__item form-fields-select__item--image"
-    classNamePrefix="form-fields-select__item form-fields-select__item--image"
+    className="form-fields-select__item form-fields-select__item__image"
+    classNamePrefix="form-fields-select__item form-fields-select__item__image"
   >
     <div className="select-item select-item__image select-item__image--image">
       <img className="" src={getInputImage(props.data.image)} alt={props.data.label} />

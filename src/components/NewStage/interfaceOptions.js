@@ -8,11 +8,11 @@ const interfaceOptions = [
       },
       {
         type: 'NameGeneratorList',
-        title: 'Roster Name Generator (list)',
+        title: 'Small Roster Name Generator',
       },
       {
         type: 'NameGeneratorAutoComplete',
-        title: 'Roster Name Generator (search)',
+        title: 'Large Roster Name Generator',
       },
     ],
   },
