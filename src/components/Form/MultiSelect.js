@@ -118,7 +118,7 @@ const Items = compose(
   ),
   SortableContainer,
 )(
-  ({ fields, maxItems, options, ...rest }) => {
+  ({ fields, maxItems, ...rest }) => {
     const hasSpace = maxItems === null || fields.length < maxItems;
     const showAdd = hasSpace;
 
@@ -133,7 +133,6 @@ const Items = compose(
                   key={index}
                   field={field}
                   fields={fields}
-                  options={options}
                   {...rest}
                 />
               ))
