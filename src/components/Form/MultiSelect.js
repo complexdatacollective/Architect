@@ -118,8 +118,10 @@ const Items = compose(
   ),
   SortableContainer,
 )(
-  ({ fields, maxItems, ...rest }) => {
-    const showAdd = maxItems !== null && fields.length < maxItems;
+  ({ fields, maxItems, options, ...rest }) => {
+    const hasSpace = maxItems === null || fields.length < maxItems;
+    const showAdd = hasSpace;
+
     return (
       <React.Fragment>
         <div className="form-fields-multi-select">
@@ -131,6 +133,7 @@ const Items = compose(
                   key={index}
                   field={field}
                   fields={fields}
+                  options={options}
                   {...rest}
                 />
               ))
@@ -180,6 +183,7 @@ MultiSelect.propTypes = {
 
 MultiSelect.defaultProps = {
   label: '',
+  maxItems: null,
 };
 
 export default MultiSelect;

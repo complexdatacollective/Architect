@@ -30,6 +30,8 @@ const PromptFields = ({
   const ordinalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'ordinal');
 
+  const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
+
   return (
     <Section>
       <Row>
@@ -74,6 +76,7 @@ const PromptFields = ({
             { fieldName: 'property' },
             { fieldName: 'direction' },
           ]}
+          maxItems={sortMaxItems}
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
@@ -86,6 +89,7 @@ const PromptFields = ({
             { fieldName: 'property' },
             { fieldName: 'direction' },
           ]}
+          maxItems={sortMaxItems}
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
