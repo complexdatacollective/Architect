@@ -34,9 +34,14 @@
 
   &__welcome {
     text-align: center;
-    width: 80%;
+    width: 85vmin;
+    padding: unit(4);
     color: var(--text-light);
     margin: 0 auto;
     align-self: center;
+
+    p {
+      text-align: left;
+    }
   }
 }

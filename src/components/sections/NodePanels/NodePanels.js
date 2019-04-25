@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { formValueSelector, FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import { has } from 'lodash';
-import OrderedList, { NewButton } from '../../OrderedList';
+import { Button } from '../../../ui/';
+import OrderedList from '../../OrderedList';
 import Section from '../Section';
 import NodePanel from './NodePanel';
 
@@ -26,7 +27,7 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
 
         { !isFull &&
           <div className="stage-editor-section-content-items__controls">
-            <NewButton onClick={() => createNewPanel()} />
+            <Button onClick={() => createNewPanel()} size="small" icon="add">Add new panel</Button>
           </div>
         }
       </div>

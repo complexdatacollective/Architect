@@ -7,7 +7,8 @@ import {
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
-import OrderedList, { NewButton } from '../OrderedList';
+import OrderedList from '../OrderedList';
+import { Button } from '../../ui/';
 import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Section from '../sections/Section'; // Should this exist out of sections if it's used here?
@@ -79,7 +80,7 @@ class EditableList extends PureComponent {
               />
             </div>
             <Flipped flipId={null}>
-              <NewButton onClick={handleAddNew} />
+              <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
             </Flipped>
           </div>
           <Window show={!!editField}>
