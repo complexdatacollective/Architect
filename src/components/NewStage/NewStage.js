@@ -39,6 +39,7 @@ const NewStage = ({
 
 NewStage.propTypes = {
   handleCreateNew: PropTypes.func.isRequired,
+  setWindowRoot: PropTypes.func.isRequired,
 };
 
 export { NewStage };
