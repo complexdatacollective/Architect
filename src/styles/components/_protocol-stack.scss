@@ -17,6 +17,7 @@ $component-name: protocol-stack;
 
 
     &-cover {
+      margin-bottom: 1rem;
     }
   }
 
@@ -40,6 +41,7 @@ $component-name: protocol-stack;
     max-height: 100%;
     max-width: 100%;
     word-break: break-all;
+    font-size: 80%;
   }
 
 }

@@ -15,13 +15,14 @@
     text-align: center;
     color: var(--text-light);
     margin-bottom: 2rem;
+    margin-top: 0;
   }
 
   &__protocol {
     display: flex;
     flex: 0 0;
     justify-content: center;
-    width: 15vw;
+    width: 25vmin;
     margin: 1rem;
   }
 

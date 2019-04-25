@@ -1,3 +1,14 @@
+.code-button {
+  font-weight: 900;
+  display: inline-block;
+  padding-left: .5rem;
+
+  a {
+    color: var(--primary);
+    cursor: pointer;
+  }
+}
+
 .code-view {
   position: fixed;
   opacity: 0;
@@ -7,16 +18,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 30vh;
+  height: 50vh;
   max-height: 0;
   overflow-y: scroll;
   overflow-x: hidden;
   background: var(--settings);
   color: var(--text-light);
-  padding: unit(4) unit(2);
+  padding: unit(4);
   transition: opacity var(--animation-duration-standard) var(--animation-easing),
   max-height var(--animation-duration-standard) var(--animation-easing),
   transform var(--animation-duration-standard) var(--animation-easing);
+  user-select: all;
+  font-weight: 600;
 
   pre {
     white-space: pre-wrap;
@@ -24,7 +37,7 @@
 
   &--show {
     opacity: 1;
-    max-height: 30vh;
+    max-height: 50vh;
     transform: scaleY(1);
   }
 }
