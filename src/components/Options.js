@@ -1,17 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { compose, defaultProps, withProps } from 'recompose';
+import { compose, defaultProps, withHandlers } from 'recompose';
 import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
 import { Icon, Button } from '../ui/components';
 import * as Fields from '../ui/components/Fields';
+import FieldError from './Form/FieldError';
 import { actionCreators as dialogsActions } from '../ducks/modules/dialogs';
 
 const isNumberLike = value =>
   parseInt(value, 10) == value; // eslint-disable-line
+
+const minTwoOptions = value => (
+  !value || value.length < 2 ?
+    'Requires a minimum of two options (a single option can be modelled by a checkbox field)' :
+    undefined
+);
 
 const ItemHandle = compose(
   SortableHandle,
@@ -41,9 +49,9 @@ const mapDispatchToItemProps = dispatch => ({
 
 const Item = compose(
   connect(null, mapDispatchToItemProps),
-  withProps(
-    ({ fields, openDialog, index }) => ({
-      handleDelete: () => {
+  withHandlers({
+    handleDelete: ({ fields, openDialog, index }) =>
+      () => {
         openDialog({
           type: 'Warning',
           title: 'Remove item',
@@ -52,8 +60,7 @@ const Item = compose(
           confirmLabel: 'Remove item',
         });
       },
-    }),
-  ),
+  }),
   SortableElement,
 )(
   ({ field, handleDelete }) => (
@@ -89,34 +96,50 @@ const Items = compose(
     lockAxis: 'y',
     useDragHandle: true,
   }),
-  withProps(
-    ({ fields }) => ({
-      onSortEnd: ({ oldIndex, newIndex }) => fields.move(oldIndex, newIndex),
-    }),
-  ),
+  withHandlers({
+    onSortEnd: ({ fields }) =>
+      ({ oldIndex, newIndex }) => fields.move(oldIndex, newIndex),
+  }),
   SortableContainer,
 )(
-  ({ fields, ...rest }) => (
-    <div className="form-field-container">
-      <div className="form-fields-multi-select">
-        <div className="form-fields-multi-select__rules">
-          {
-            fields.map((field, index) => (
-              <Item
-                {...rest}
-                key={index}
-                index={index}
-                field={field}
-                fields={fields}
-              />
-            ))
-          }
+  ({
+    fields,
+    meta: { error, submitFailed },
+    ...rest
+  }) => {
+    const classes = cx(
+      'form-fields-multi-select__field',
+      { 'form-fields-multi-select__field--has-error': submitFailed && error },
+    );
+
+    return (
+      <div className="form-field-container">
+        <div className="form-fields-multi-select">
+          <div className={classes}>
+            <div className="form-fields-multi-select__rules">
+              {
+                fields.map((field, index) => (
+                  <Item
+                    {...rest}
+                    key={index}
+                    index={index}
+                    field={field}
+                    fields={fields}
+                  />
+                ))
+              }
+            </div>
+
+            <FieldError
+              show={submitFailed && error}
+              error={error}
+            />
+          </div>
+          <AddItem onClick={() => fields.push({})} />
         </div>
       </div>
-
-      <AddItem onClick={() => fields.push({})} />
-    </div>
-  ),
+    );
+  },
 );
 
 Items.propTypes = {
@@ -133,6 +156,7 @@ const Options = ({
     <FieldArray
       name={name}
       component={Items}
+      validate={minTwoOptions}
       {...rest}
     />
   </div>

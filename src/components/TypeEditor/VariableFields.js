@@ -69,7 +69,7 @@ class VariableFields extends Component {
             <Options
               name="options"
               label="Options"
-              meta={{ form }}
+              form={form}
             />
           }
 
@@ -78,7 +78,7 @@ class VariableFields extends Component {
               name="validation"
               label="Validations"
               variableType={variableType}
-              meta={{ form }}
+              form={form}
             />
           }
         </Row>

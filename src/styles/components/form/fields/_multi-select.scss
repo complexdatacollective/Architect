@@ -53,6 +53,7 @@ $component-name: 'form-fields-multi-select';
 
       &-label {
         margin-right: unit(1);
+        transition: color var(--animation-easing) var(--animation-duration-standard);
       }
 
       .form-field-container {
@@ -70,7 +71,7 @@ $component-name: 'form-fields-multi-select';
   &__add,
   &__handle {
     cursor: pointer;
-    background-color: var(--form-control);
+    background-color: transparent; //var(--form-control);
     width: unit(3);
     height: unit(3);
     display: flex;
@@ -111,9 +112,14 @@ $component-name: 'form-fields-multi-select';
 
     .#{$component-name}__rule {
       background-color: var(--error);
+
+      &-option-label {
+        color: var(--text-light);
+      }
     }
 
-    .#{$component-name}__delete {
+    .#{$component-name}__delete,
+    .#{$component-name}__handle {
       background-color: transparent;
       filter: brightness(100);
     }

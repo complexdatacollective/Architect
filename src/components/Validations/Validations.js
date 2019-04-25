@@ -39,13 +39,13 @@ const AddItem = props => (
 const ValidationsField = ({
   input,
   options,
-  meta: { touched, error },
+  meta: { submitFailed, error },
   children,
   ...rest
 }) => {
   const fieldClassNames = cx(
     'form-fields-multi-select__field',
-    { 'form-fields-multi-select__field--has-error': touched && error },
+    { 'form-fields-multi-select__field--has-error': submitFailed && error },
   );
 
   return (
@@ -62,7 +62,7 @@ const ValidationsField = ({
         )) }
         {children}
       </div>
-      <FieldError show={touched && error} error={error} />
+      <FieldError show={submitFailed && error} error={error} />
     </div>
   );
 };
