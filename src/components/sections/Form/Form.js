@@ -26,7 +26,7 @@ const Form = ({
     <div id={getFieldId('form.title')} data-name="Form title" />
     <h2>Form</h2>
     <p>
-      Use this section to define the fields to collect when a new node is created on this screen.
+      Use this section to define the fields to collect when this form is shown.
     </p>
     <ValidatedField
       name="form.title"

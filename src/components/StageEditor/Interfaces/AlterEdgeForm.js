@@ -12,8 +12,8 @@ const AlterEdgeForm = {
   sections: [
     Name,
     EdgeType,
-    Form,
     IntroductionPanel,
+    Form,
   ],
   template,
 };
