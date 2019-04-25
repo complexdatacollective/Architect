@@ -61,7 +61,7 @@ const NewVariableWindow = ({
           <Options
             name="options"
             label="Options"
-            meta={{ form }}
+            form={form}
           />
         </Section>
       }

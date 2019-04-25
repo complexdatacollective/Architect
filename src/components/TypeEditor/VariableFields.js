@@ -69,7 +69,7 @@ class VariableFields extends Component {
             <Options
               name="options"
               label="Options"
-              meta={{ form }}
+              form={form}
             />
           }
 

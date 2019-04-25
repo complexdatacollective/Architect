@@ -79,7 +79,7 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
         <Options
           name="options"
           label="Options"
-          meta={{ form }}
+          form={form}
         />
       </Row>
     }
