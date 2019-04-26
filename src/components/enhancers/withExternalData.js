@@ -15,7 +15,11 @@ const mapStateToProps = (state, props) => {
 const withExternalData = WrappedComponent =>
   class WithExternalData extends Component {
     static propTypes = {
-      assetPath: PropTypes.string.isRequired,
+      assetPath: PropTypes.string,
+    };
+
+    static defaultProps = {
+      assetPath: null,
     };
 
     constructor(props) {
