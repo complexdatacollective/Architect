@@ -25,10 +25,12 @@ const Form = ({
   <Section disabled={disabled} group contentId="guidance.section.form">
     <div id={getFieldId('form.title')} data-name="Form title" />
     <h2>Form</h2>
-
+    <p>
+      Use this section to define the fields to collect when this form is shown.
+    </p>
     <ValidatedField
       name="form.title"
-      label="Form title"
+      label="Form heading text (e.g 'Add a person')"
       component={TextField}
       placeholder="Enter your title here"
       className="stage-editor-section-title"
@@ -48,7 +50,11 @@ const Form = ({
     >
       <h4>Fields</h4>
       <p>
-        Create fields for your form here
+        Add one or more fields to your form to collect attributes about each
+        node the participant creates.
+      </p>
+      <p>
+        Use the drag handle on the left of each prompt adjust its order.
       </p>
     </EditableList>
   </Section>

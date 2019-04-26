@@ -1,7 +1,12 @@
 .stage-editor-section-content-items {
-
   &__controls {
     margin-top: unit(2);
+
+    .button {
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
   &__control {

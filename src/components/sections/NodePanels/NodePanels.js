@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { formValueSelector, FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import { has } from 'lodash';
-import OrderedList, { NewButton } from '../../OrderedList';
+import { Button } from '../../../ui/';
+import OrderedList from '../../OrderedList';
 import Section from '../Section';
 import NodePanel from './NodePanel';
 
@@ -15,7 +16,7 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
   return (
     <Section contentId="guidance.editor.node_panels" {...rest}>
       <div className="stage-editor-section-content-items">
-        <h2>Panels</h2>
+        <h2>Side Panels</h2>
         <p>Use this section to configure up to two side panels on this name generator.</p>
         <FieldArray
           name="panels"
@@ -26,7 +27,7 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
 
         { !isFull &&
           <div className="stage-editor-section-content-items__controls">
-            <NewButton onClick={() => createNewPanel()} />
+            <Button onClick={() => createNewPanel()} size="small" icon="add">Add new panel</Button>
           </div>
         }
       </div>

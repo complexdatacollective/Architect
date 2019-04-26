@@ -2,10 +2,13 @@
 
 .start {
   margin: 0 auto;
-  width: unit(70);
+  width: 60rem;
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
   transition-property: opacity;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   #create-new-protocol-button,
   #open-existing-protocol-button {
@@ -13,22 +16,29 @@
   }
 
   &__welcome {
-    padding: 0 0 2.4rem;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3vmin;
+
+    &-logo {
+      width: 20vmin;
+      margin-right: 3vmin;
+    }
 
     &-title,
     &-lead {
-      color: var(--architect-panel-text);
+      color: var(--color-navy-taupe);
     }
 
     &-title {
-      font-size: 3.6rem;
+      font-size: 5.6vmin;
       font-weight: bold;
+      margin-top: 0;
       margin-bottom: unit(2);
     }
 
     &-lead {
-      font-size: 1.65rem;
+      font-size: 2.5vmin;
       font-weight: 400;
     }
 

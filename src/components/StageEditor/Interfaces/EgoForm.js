@@ -10,8 +10,8 @@ const template = {
 const EgoForm = {
   sections: [
     Name,
-    Form,
     IntroductionPanel,
+    Form,
   ],
   template,
 };

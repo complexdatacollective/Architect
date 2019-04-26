@@ -16,7 +16,7 @@ describe('<ContentGrid />', () => {
   it('New button hidden when spareCapacity is 0', () => {
     const component = shallow(<ContentGrid {...mockProps} />);
 
-    expect(component.find('NewButton').exists()).toBe(false);
+    expect(component.find('Button').exists()).toBe(false);
   });
 
   it('New button trigger createNewItem', () => {
@@ -29,7 +29,7 @@ describe('<ContentGrid />', () => {
       />
     ));
 
-    component.find('NewButton').simulate('click');
+    component.find('Button').simulate('click');
 
     expect(createNewItemHandler.mock.calls.length).toBe(1);
     expect(component.state('editing')).toEqual({ foo: true });

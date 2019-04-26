@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 import Guided from '../Guided';
 import Navigation from './Navigation';
 import interfaceOptions from './interfaceOptions';
 import InterfaceCategory from './InterfaceCategory';
 import withCreateNewStage from './withCreateNewStage';
+import windowRootProvider from '../../ui/components/windowRootProvider';
 
 const categories = interfaceOptions.map(({ category }) => category);
 
 const NewStage = ({
   handleCreateNew,
+  setWindowRoot,
 }) => (
   <Guided defaultGuidance="guidance.new_stage">
-    <div className="new-stage">
+    <div className="new-stage" ref={setWindowRoot}>
       <div className="new-stage__navigation">
         <Navigation categories={categories} />
       </div>
@@ -36,8 +39,12 @@ const NewStage = ({
 
 NewStage.propTypes = {
   handleCreateNew: PropTypes.func.isRequired,
+  setWindowRoot: PropTypes.func.isRequired,
 };
 
 export { NewStage };
 
-export default withCreateNewStage(NewStage);
+export default compose(
+  withCreateNewStage,
+  windowRootProvider,
+)(NewStage);

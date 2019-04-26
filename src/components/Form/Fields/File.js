@@ -97,6 +97,7 @@ class FileInput extends PureComponent {
           <Button
             onClick={this.handleBrowseLibrary}
             color="paradise-pink"
+            size="small"
           >
             { !value ? 'Select asset' : 'Update asset' }
           </Button>

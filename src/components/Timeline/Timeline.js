@@ -14,7 +14,7 @@ import { actionCreators as stageActions } from '../../ducks/modules/protocol/sta
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
-import { NewButton } from '../OrderedList';
+import NewButton from './NewButton';
 
 class Timeline extends Component {
   static propTypes = {
@@ -140,8 +140,8 @@ class Timeline extends Component {
             { this.renderStages() }
           </TransitionGroup>
         </div>
-        <div className="timeline__new">
-          <NewButton onClick={() => this.handleInsertStage(0)} />
+        <div className="timeline__new" onClick={() => this.handleInsertStage(0)}>
+          <NewButton />
           <div className="timeline__new-label">
             Add new stage
           </div>

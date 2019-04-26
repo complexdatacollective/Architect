@@ -9,8 +9,8 @@ const AlterForm = {
   sections: [
     Name,
     NodeType,
-    Form,
     IntroductionPanel,
+    Form,
   ],
 };
 

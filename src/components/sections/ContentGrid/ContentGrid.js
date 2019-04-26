@@ -9,7 +9,8 @@ import {
   formValueSelector,
   getFormSyncErrors,
 } from 'redux-form';
-import OrderedList, { NewButton } from '../../OrderedList';
+import OrderedList from '../../OrderedList';
+import { Button } from '../../../ui/';
 import Item from './Item';
 import { units, capacity, sizes } from './sizes';
 import Section from '../Section';
@@ -76,9 +77,11 @@ class ContentGrid extends Component {
         </div>
 
         { spareCapacity > 0 ?
-          <NewButton
+          <Button
+            size="small"
+            icon="add"
             onClick={this.handleCreateItem}
-          /> :
+          >Add content box</Button> :
           <p>
             <strong>Information screen full</strong>. No more room for additional content boxes.
             Add content to existing boxes, or make them smaller to free up space.

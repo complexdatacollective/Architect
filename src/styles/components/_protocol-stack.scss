@@ -4,35 +4,20 @@ $component-name: protocol-stack;
 .protocol-stack {
   width: 100%;
   cursor: pointer;
-  max-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &__preview {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-    position: relative;
+    width: 12vmin;
+    height: auto;
   }
 
   &__stack {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+
 
     &-cover {
-      position: relative;
-      border-radius: unit(1);
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-
-      img {
-        max-width: 100%;
-        border-radius: unit(1);
-      }
+      margin-bottom: 1rem;
     }
   }
 
@@ -45,6 +30,18 @@ $component-name: protocol-stack;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__filepath {
+    margin: 0;
+    text-align: center;
+    color: var(--text-light);
+    max-height: 100%;
+    max-width: 100%;
+    word-break: break-all;
+    font-size: 80%;
   }
 
 }

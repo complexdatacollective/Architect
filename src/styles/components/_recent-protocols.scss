@@ -1,7 +1,4 @@
 .recent-protocols {
-  max-height: 50vh;
-  height: 300px;
-  width: 100%;
   position: relative;
   margin: 0 auto;
   border-radius: unit(1);
@@ -11,27 +8,40 @@
   align-items: center;
   filter: drop-shadow(10px 10px 0 var(--architect-control-bar-shadow));
   z-index: 2;
+  padding: unit(3);
 
   &__title {
-    position: absolute;
     width: 100%;
-    top: 1.5rem;
     text-align: center;
     color: var(--text-light);
+    margin-bottom: 2rem;
+    margin-top: 0;
   }
 
   &__protocol {
     display: flex;
-    flex: 0 0 25%;
+    flex: 0 0;
     justify-content: center;
-    margin-top: unit(4);
+    width: 25vmin;
+    margin: 1rem;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
   }
 
   &__welcome {
     text-align: center;
-    width: 80%;
+    width: 85vmin;
+    padding: unit(4);
     color: var(--text-light);
     margin: 0 auto;
     align-self: center;
+
+    p {
+      text-align: left;
+    }
   }
 }

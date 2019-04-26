@@ -17,6 +17,8 @@ $component-name: list-item;
   &__control {
     padding: unit(2);
     flex-grow: 0;
+    display: flex;
+    align-items: center;
 
     .icon {
       .cls-1,

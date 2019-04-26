@@ -15,7 +15,7 @@ const PreviewFieldComponent = ({
   return (
     <div>
       {value.prompt}
-      <Badge color={getColorForType(type)}>{value.component}:{type}</Badge>
+      <Badge color={getColorForType(type)}>{type} Variable: {value.component} Input</Badge>
     </div>
   );
 };

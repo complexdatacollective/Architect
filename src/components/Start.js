@@ -6,6 +6,7 @@ import cx from 'classnames';
 import { Button, Icon } from '../ui/components';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import Version from './Version';
+import architectLogoIcon from '../images/architect-logo-icon.svg';
 
 const Start = ({
   show,
@@ -14,9 +15,15 @@ const Start = ({
 }) => (
   <div className={cx('start', { 'start--hide': !show })}>
     <div className="start__welcome">
-      <h1 className="start__welcome-title">Architect</h1>
-      <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>
-      <Version />
+      <div className="start__welcome-logo">
+        <img src={architectLogoIcon} alt="" />
+      </div>
+      <div>
+        <h1 className="start__welcome-title">Architect</h1>
+        <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>
+        <Version />
+      </div>
+
     </div>
 
     <div className="start__call-to-action">

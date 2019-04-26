@@ -35,7 +35,10 @@ const NewVariableWindow = ({
     >
       <Section contentId="guidance.newVariable.name">
         <h3 id={getFieldId('name')}>Variable name</h3>
-        <p>Enter a name for this variable which will be used to export data</p>
+        <p>
+          Enter a name for this variable. The variable name is how you will reference
+          the variable elsewhere, including in exported data.
+        </p>
         <ValidatedField
           name="name"
           component={Fields.Text}

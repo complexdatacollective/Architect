@@ -2,78 +2,146 @@ import React, { Fragment } from 'react';
 
 export default {
   'guidance.new_stage': (
-    <p>
-      guidance.new_stage
-    </p>
+    <Fragment>
+      <h3>Add an Interview Stage</h3>
+      <p>
+        This screen shows a grouped list of the interfaces available in this
+        version of Architect.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.NameGenerator': (
-    <p>
-      The Name Generator interface is designed to prompt your research
-      participants to name alters. It includes the ability to include
-      external network data in the form of a roster.
-    </p>
+    <Fragment>
+      <h3>Name Generator Interface</h3>
+      <p>
+        The Name Generator interface is designed to prompt your research
+        participants to name alters. It includes the ability to include
+        external network data in the form of a roster.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.NameGeneratorList': (
-    <p>Roster Name Generator (list)</p>
+    <Fragment>
+      <h3>Small Roster Name Generator Interface</h3>
+      <p>
+        The small roster name generator is designed for roster data up to
+        approximately 100 nodes.
+      </p>
+      <p>
+        It shows the roster as a filterable and sortable list of cards, which can be
+        tapped in order to add them to the interview.
+      </p>
+    </Fragment>
   ),
-  'guidance.new_stage.NameGeneratorSearch': (
-    <p>Roster Name Generator (search)</p>
+  'guidance.new_stage.NameGeneratorAutoComplete': (
+    <Fragment>
+      <h3>Large Roster Name Generator Interface</h3>
+      <p>
+        The large roster name generator is designed for roster data larger than
+        approximately 100 nodes.
+      </p>
+      <p>
+        It provides a search mechanism with configurable parameters, including fuzziness
+        and selective attribute indexing. One or more nodes can be brought into the interview after
+        searching.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.Sociogram': (
     <div>
+      <h3>Sociogram Interface</h3>
+      <p>The Sociogram interface provides three main features:</p>
       <p>
-        The Sociogram interface allows your participants to position alters
-        spatially, either using the concentric circles framework, or a
-        background image of your choosing.
+        It allows your participants to position alters spatially,
+        either using concentric circles, or a background image of
+        your choosing.
       </p>
-      <p>It also allows the creation of edges between alters based on any
-        criteria, and the nomination of alters using an boolean variable.
+      <p>
+        It allows the creation of edges between alters, using consecutive tapping.
+      </p>
+      <p>
+        Finally, it allows toggling an alter variable to true or false by tapping an alter.
       </p>
     </div>
   ),
   'guidance.new_stage.OrdinalBin': (
-    <p>
-      The Ordinal Bin interface allows your participants to quickly assign the
-      value of an ordinal variable to an alter or edge.
-    </p>
+    <Fragment>
+      <h3>Ordinal Bin Interface</h3>
+      <p>
+        The Ordinal Bin interface allows your participants to quickly assign the
+        value of an ordinal variable to an alter by dragging it into a bin.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.CategoricalBin': (
-    <p>
-      The Categorical Bin interface allows your participants to quickly
-      assign the value of a categorical variable to an alter or edge.
-    </p>
+    <Fragment>
+      <h3>Categorical Bin Interface</h3>
+      <p>
+        The Categorical Bin interface allows your participants to quickly
+        assign the value of a categorical variable to an alter by dragging it into a bin.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.AlterForm': (
-    <p>
-      The Per Alter Form Interface is for back-filling additional information
-      about nodes which might be missed during the general flow of your
-      interview.
-    </p>
+    <Fragment>
+      <h3>Alter Form Interface</h3>
+      <p>
+        The Per Alter Form Interface is designed for back-filling additional information
+        about nodes which might be missed during the general flow of your
+        interview
+      </p>
+      <p>
+        It shows a form of your choosing on a per-alter basis - that is, one form for each
+        alter of a given type.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.AlterEdgeForm': (
-    <p>
-      The Per Alter Edge Form Interface is for...
-    </p>
+    <Fragment>
+      <h3>Alter Edge Form Interface</h3>
+      <p>
+        This interface is designed to allow you to collect data about any
+        alter-alter edges that your participant has created. Place this interface
+        after an edge creation stage, such as a sociogram, to ask further in-depth
+        questions about the nature of an alter-alter relationship.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.EgoForm': (
-    <p>
-      The Ego Form Interface is for...
-    </p>
+    <Fragment>
+      <h3>Ego Form Interface</h3>
+      <p>
+        The ego form interface is designed for you to collect information about
+        your participant (&apos;Ego&apos;). It provides an information box, followed
+        by a form section, which can contain as many questions as you wish.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.Information': (
-    <p>
-      The Information Interface allows you to display text and rich
-      media (including pictures, video and audio) to your participants.
-      Use it to introduce your research, help explain interview tasks,
-      or illustrate concepts or ideas.
-    </p>
+    <Fragment>
+      <h3>Information Interface</h3>
+      <p>
+        The Information Interface allows you to display text and rich
+        media (including pictures, video and audio) to your participants.
+        Use it to introduce your research, help explain interview tasks,
+        or illustrate concepts or ideas.
+      </p>
+    </Fragment>
   ),
   'guidance.new_stage.Narrative': (
-    <p>
-      The Narrative Interface is used to guide a conversation with a participants.
-      It does not modify the participant network. You are expected to use your own
-      audio/visual recording equipment.
-    </p>
+    <Fragment>
+      <h3>Narrative Interface</h3>
+      <p>
+        The Narrative Interface is designed to facilitate more open-ended
+        discussion of the network object that has been co-created during the
+        interview process.
+      </p>
+      <p>
+        It allows the researcher to create one or more &apos;presets&apos;, which map
+        interview variables to visual aspects of the sociogram. It also allows freeform
+        annotation of the sociogram.
+      </p>
+    </Fragment>
   ),
   'guidance.section.form': (
     <p>
@@ -91,9 +159,16 @@ export default {
     </p>
   ),
   'guidance.section.form.field.component': (
-    <p>
-      guidance.section.form.field.component
-    </p>
+    <Fragment>
+      <h3>Input Component</h3>
+      <p>
+        The input control you choose will determine the &apos;type&apos; of the variable.
+        For example, choosing a text input will mean the variable is treated as a string.
+        Choosing a checkbox group will mean the variable is stored as categorical. Some
+        variable types have more than one available input control, and you should think
+        about which is best for your specific question.
+      </p>
+    </Fragment>
   ),
   'guidance.section.form.field.validation': (
     <p>
@@ -133,6 +208,7 @@ export default {
   ),
   'guidance.editor.title': (
     <Fragment>
+      <h3>Title</h3>
       <p>
         This text is displayed on the information screen as large centered text.
       </p>

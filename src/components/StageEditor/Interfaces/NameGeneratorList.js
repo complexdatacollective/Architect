@@ -12,7 +12,7 @@ const NameGeneratorList = {
     ShowExistingNodes,
     NameGeneratorListPrompts,
   ],
-  name: 'Roster Name Generator (list)',
+  name: 'Small Roster Name Generator',
   template: {
     showExistingNodes: false,
   },

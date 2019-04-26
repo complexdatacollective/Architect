@@ -29,6 +29,8 @@ const PromptFields = ({
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
 
+  const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
+
   return (
     <Section>
       <Row>
@@ -55,13 +57,14 @@ const PromptFields = ({
       </Row>
       <Row>
         <h3>Bin Sort Order</h3>
-        <p>How would you like to sort the node categories?</p>
+        <p>How should nodes be sorted when inside the bins?</p>
         <MultiSelect
           name={'binSortOrder'}
           properties={[
             { fieldName: 'property' },
             { fieldName: 'direction' },
           ]}
+          maxItems={sortMaxItems}
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
@@ -74,6 +77,7 @@ const PromptFields = ({
             { fieldName: 'property' },
             { fieldName: 'direction' },
           ]}
+          maxItems={sortMaxItems}
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>

@@ -25,17 +25,27 @@ ShallowWrapper {
         <div
           className="start__welcome"
         >
-          <h1
-            className="start__welcome-title"
+          <div
+            className="start__welcome-logo"
           >
-            Architect
-          </h1>
-          <h2
-            className="start__welcome-lead"
-          >
-            A tool for creating Network Canvas interviews
-          </h2>
-          <Version />
+            <img
+              alt=""
+              src="architect-logo-icon.svg"
+            />
+          </div>
+          <div>
+            <h1
+              className="start__welcome-title"
+            >
+              Architect
+            </h1>
+            <h2
+              className="start__welcome-lead"
+            >
+              A tool for creating Network Canvas interviews
+            </h2>
+            <Version />
+          </div>
         </div>,
         <div
           className="start__call-to-action"
@@ -90,17 +100,27 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            <h1
-              className="start__welcome-title"
+            <div
+              className="start__welcome-logo"
             >
-              Architect
-            </h1>,
-            <h2
-              className="start__welcome-lead"
-            >
-              A tool for creating Network Canvas interviews
-            </h2>,
-            <Version />,
+              <img
+                alt=""
+                src="architect-logo-icon.svg"
+              />
+            </div>,
+            <div>
+              <h1
+                className="start__welcome-title"
+              >
+                Architect
+              </h1>
+              <h2
+                className="start__welcome-lead"
+              >
+                A tool for creating Network Canvas interviews
+              </h2>
+              <Version />
+            </div>,
           ],
           "className": "start__welcome",
         },
@@ -111,33 +131,83 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "Architect",
-              "className": "start__welcome-title",
+              "children": <img
+                alt=""
+                src="architect-logo-icon.svg"
+              />,
+              "className": "start__welcome-logo",
             },
             "ref": null,
-            "rendered": "Architect",
-            "type": "h1",
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "alt": "",
+                "src": "architect-logo-icon.svg",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "img",
+            },
+            "type": "div",
           },
           Object {
             "instance": null,
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "A tool for creating Network Canvas interviews",
-              "className": "start__welcome-lead",
+              "children": Array [
+                <h1
+                  className="start__welcome-title"
+                >
+                  Architect
+                </h1>,
+                <h2
+                  className="start__welcome-lead"
+                >
+                  A tool for creating Network Canvas interviews
+                </h2>,
+                <Version />,
+              ],
             },
             "ref": null,
-            "rendered": "A tool for creating Network Canvas interviews",
-            "type": "h2",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {},
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Architect",
+                  "className": "start__welcome-title",
+                },
+                "ref": null,
+                "rendered": "Architect",
+                "type": "h1",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "A tool for creating Network Canvas interviews",
+                  "className": "start__welcome-lead",
+                },
+                "ref": null,
+                "rendered": "A tool for creating Network Canvas interviews",
+                "type": "h2",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
           },
         ],
         "type": "div",
@@ -255,17 +325,27 @@ ShallowWrapper {
           <div
             className="start__welcome"
           >
-            <h1
-              className="start__welcome-title"
+            <div
+              className="start__welcome-logo"
             >
-              Architect
-            </h1>
-            <h2
-              className="start__welcome-lead"
-            >
-              A tool for creating Network Canvas interviews
-            </h2>
-            <Version />
+              <img
+                alt=""
+                src="architect-logo-icon.svg"
+              />
+            </div>
+            <div>
+              <h1
+                className="start__welcome-title"
+              >
+                Architect
+              </h1>
+              <h2
+                className="start__welcome-lead"
+              >
+                A tool for creating Network Canvas interviews
+              </h2>
+              <Version />
+            </div>
           </div>,
           <div
             className="start__call-to-action"
@@ -320,17 +400,27 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              <h1
-                className="start__welcome-title"
+              <div
+                className="start__welcome-logo"
               >
-                Architect
-              </h1>,
-              <h2
-                className="start__welcome-lead"
-              >
-                A tool for creating Network Canvas interviews
-              </h2>,
-              <Version />,
+                <img
+                  alt=""
+                  src="architect-logo-icon.svg"
+                />
+              </div>,
+              <div>
+                <h1
+                  className="start__welcome-title"
+                >
+                  Architect
+                </h1>
+                <h2
+                  className="start__welcome-lead"
+                >
+                  A tool for creating Network Canvas interviews
+                </h2>
+                <Version />
+              </div>,
             ],
             "className": "start__welcome",
           },
@@ -341,33 +431,83 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "Architect",
-                "className": "start__welcome-title",
+                "children": <img
+                  alt=""
+                  src="architect-logo-icon.svg"
+                />,
+                "className": "start__welcome-logo",
               },
               "ref": null,
-              "rendered": "Architect",
-              "type": "h1",
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "",
+                  "src": "architect-logo-icon.svg",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              "type": "div",
             },
             Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "A tool for creating Network Canvas interviews",
-                "className": "start__welcome-lead",
+                "children": Array [
+                  <h1
+                    className="start__welcome-title"
+                  >
+                    Architect
+                  </h1>,
+                  <h2
+                    className="start__welcome-lead"
+                  >
+                    A tool for creating Network Canvas interviews
+                  </h2>,
+                  <Version />,
+                ],
               },
               "ref": null,
-              "rendered": "A tool for creating Network Canvas interviews",
-              "type": "h2",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {},
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Architect",
+                    "className": "start__welcome-title",
+                  },
+                  "ref": null,
+                  "rendered": "Architect",
+                  "type": "h1",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "A tool for creating Network Canvas interviews",
+                    "className": "start__welcome-lead",
+                  },
+                  "ref": null,
+                  "rendered": "A tool for creating Network Canvas interviews",
+                  "type": "h2",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {},
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
             },
           ],
           "type": "div",

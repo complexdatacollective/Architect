@@ -39,6 +39,15 @@ class RecentProtocols extends Component {
     </div>
   );
 
+  renderProtocolList = recentProtocols => (
+    <React.Fragment>
+      <h3 className="recent-protocols__title" key="heading">Recently Opened Protocols</h3>
+      <div className="recent-protocols__wrapper">
+        {recentProtocols.map(this.renderRecentProtocol)}
+      </div>
+    </React.Fragment>
+  );
+
   render() {
     const { show, recentProtocols } = this.props;
 
@@ -47,11 +56,7 @@ class RecentProtocols extends Component {
     return (
       <div className="recent-protocols">
         { (recentProtocols.length === 0) ?
-          this.renderWelcomeText() :
-          [
-            <h3 className="recent-protocols__title" key="heading">Recently Opened Protocols</h3>,
-            recentProtocols.map(this.renderRecentProtocol),
-          ]
+          this.renderWelcomeText() : this.renderProtocolList(recentProtocols)
         }
       </div>
     );
