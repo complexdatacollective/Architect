@@ -1,13 +1,28 @@
 /* eslint-env jest */
 
-const copySync = jest.fn();
-const emptyDirSync = jest.fn();
-const readJson = jest.fn(() => Promise.resolve());
-const readFile = jest.fn(() => Promise.resolve());
+export const copySync = jest.fn();
+export const emptyDirSync = jest.fn();
+export const readJson = jest.fn(() => Promise.resolve());
+export const readFile = jest.fn((...args) => {
+  const lastArg = args[args.length - 1];
+  if (typeof lastArg === 'function') {
+    lastArg(null, 'mock file contents');
+    return null;
+  }
+  return Promise.resolve();
+});
+export const writeFile = jest.fn((filename, content, cb) => cb());
+export const readdirSync = jest.fn(() => ([]));
+export const existsSync = jest.fn(() => true);
+export const createWriteStream = () => {};
 
 export default {
   copySync,
   emptyDirSync,
   readJson,
   readFile,
+  writeFile,
+  readdirSync,
+  existsSync,
+  createWriteStream,
 };

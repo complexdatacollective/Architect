@@ -1,10 +1,10 @@
-import { existsSync } from 'fs';
+import fs from 'fs-extra';
 import { uniqBy } from 'lodash';
 import { actionTypes as loadActionTypes } from './protocols/load';
 import { actionTypes as exportActionTypes } from './protocols/export';
 import { actionTypes as importActionTypes } from './protocols/import';
 
-const protocolExists = ({ filePath }) => existsSync(filePath);
+const protocolExists = ({ filePath }) => fs.existsSync(filePath);
 
 const CLEAR_DEAD_LINKS = 'RECENT_PROTOCOLS/CLEAR_DEAD_LINKS';
 

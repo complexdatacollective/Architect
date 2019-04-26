@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import fs from 'fs';
+import fs from 'fs-extra';
 import getAssetData from '../getAssetData';
 
 const mockData = {
