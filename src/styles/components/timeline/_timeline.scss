@@ -12,6 +12,7 @@ $bottom-spacing: unit(12);
       position: relative;
       display: flex;
       justify-content: center;
+      cursor: pointer;
 
       &-label {
         position: absolute;
