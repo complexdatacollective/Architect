@@ -1,7 +1,7 @@
 /* eslint-disable */
 
-const mockProtocol = require('./mockProtocol.json');
-const mockExternalJSONData = require('./mockExternalData.json');
+const mockProtocol = require('../../development-protocol/protocol.json');
+const mockExternalJSONData = require('../../development-protocol/assets/previousInterview.json');
 const mockExternalCSVData = "Name,Nickname,Age\nAnita,Annie,21\nBarry,Baz,28\nCarlito,Carl,23\nDee,Dee,40\nEugine,Eu,18\n";
 
 const copySync = () => {};

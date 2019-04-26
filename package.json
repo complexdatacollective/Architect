@@ -205,6 +205,7 @@
     "jest": {
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
+            "!src/development-protocol/**",
             "!src/ui/**",
             "!src/network-canvas/**"
         ],
