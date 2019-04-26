@@ -4,3 +4,6 @@
 [submodule "src/network-canvas"]
 	path = src/network-canvas
 	url = https://github.com/codaco/Network-Canvas
+[submodule "src/development-protocol"]
+	path = src/development-protocol
+	url = git@github.com:codaco/development-protocol.git
