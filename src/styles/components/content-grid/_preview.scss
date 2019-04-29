@@ -1,47 +1,24 @@
 .content-grid-preview {
+  position: absolute;
+  height: 100%;
   // sass-lint:disable-block class-name-format
   display: flex;
   width: 100%;
   align-items: center;
   background-color: var(--architect-sortable-background);
   color: var(--architect-sortable-text);
+  border-radius: 2rem;
 
-  &__preview {
-    @include no-scrollbars;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    flex-grow: 1;
-    min-height: 50px;
+  &__edit {
+    flex: 0 1 30px;
   }
 
-  &__image {
-    width: 100%;
-    height: 100%;
+  &__content {
+    flex: 1 0 auto;
   }
 
-  &__text {
-    box-sizing: border-box;
-    padding: unit(2);
-  }
-
-  &--size {
-    &-SMALL {
-      .content-grid-preview__preview {
-        height: 20vh;
-      }
-    }
-
-    &-MEDIUM {
-      .content-grid-preview__preview {
-        height: 40vh;
-      }
-    }
-
-    &-LARGE {
-      .content-grid-preview__preview {
-        height: 80vh;
-      }
-    }
+  &__delete {
+    flex: 0 1 30px;
   }
 
   &--type {
@@ -75,6 +52,8 @@
     .cls-2 {
       fill: var(--architect-sortable-text);
     }
+
+    height: 1rem;
   }
 
   .form-field-container,
