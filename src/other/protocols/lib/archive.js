@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import decompress from 'decompress';
 import archiver from 'archiver';
 

@@ -9,7 +9,7 @@ const Section = ({
   compactNext,
   children,
   contentId,
-  ...rest
+  focus,
 }) => {
   const sectionClasses = cx(
     'stage-editor-section',
@@ -23,7 +23,7 @@ const Section = ({
       <Guidance
         contentId={contentId}
         className={sectionClasses}
-        {...rest}
+        focus={focus}
       >
         {children}
       </Guidance>
@@ -33,7 +33,6 @@ const Section = ({
   return (
     <div
       className={sectionClasses}
-      {...rest}
     >
       {children}
     </div>
@@ -44,12 +43,16 @@ Section.propTypes = {
   disabled: PropTypes.bool,
   group: PropTypes.bool,
   compactNext: PropTypes.bool,
+  contentId: PropTypes.string,
+  focus: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 Section.defaultProps = {
+  contentId: null,
   disabled: false,
   group: false,
+  focus: false,
   compactNext: false,
 };
 

@@ -1,7 +1,6 @@
 import { remote } from 'electron';
 import path from 'path';
-import fs from 'fs';
-import { readFile } from 'fs-extra';
+import fs from 'fs-extra';
 
 const contains = (protocol, string) =>
   protocol.indexOf(string) !== -1;
@@ -29,7 +28,7 @@ const pruneAssets = (workingPath) => {
   const protocolAssetsPath = path.join(workingPath, 'assets');
 
   // Read protocol file
-  return readFile(protocolPath)
+  return fs.readFile(protocolPath)
     .then((protocolFile) => {
       // List assets directory
       const files = fs.readdirSync(protocolAssetsPath);

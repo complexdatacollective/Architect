@@ -13,14 +13,15 @@ const AssetBrowserWindow = ({
   onCancel,
   onSelect,
 }) => {
-  const cancelButton = (
+  const cancelButton = [(
     <Button
       color="white"
       onClick={onCancel}
+      key="cancel"
     >
       Cancel
     </Button>
-  );
+  )];
 
   return (
     <Stackable stackKey={show}>

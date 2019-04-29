@@ -6,8 +6,8 @@ import Guidance from '../Guidance';
 const Row = ({
   disabled,
   contentId,
+  focus,
   children,
-  ...rest
 }) => {
   const rowClasses = cx(
     'stage-editor-row',
@@ -16,14 +16,18 @@ const Row = ({
 
   if (contentId) {
     return (
-      <Guidance contentId={contentId} className={rowClasses} {...rest}>
+      <Guidance
+        contentId={contentId}
+        className={rowClasses}
+        focus={focus}
+      >
         {children}
       </Guidance>
     );
   }
 
   return (
-    <div className={rowClasses} {...rest}>
+    <div className={rowClasses}>
       {children}
     </div>
   );
@@ -31,10 +35,14 @@ const Row = ({
 
 Row.propTypes = {
   disabled: PropTypes.bool,
+  contentId: PropTypes.string,
+  focus: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 Row.defaultProps = {
+  focus: false,
+  contentId: null,
   disabled: false,
 };
 

@@ -2,7 +2,7 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import fs from 'fs';
+import fs from 'fs-extra';
 import { actionCreators as loadActions } from '../protocols/load';
 import { actionCreators as exportActions } from '../protocols/export';
 import { actionCreators as importActions } from '../protocols/import';
