@@ -43,7 +43,7 @@ const GridManager = ({
   setEditField,
   initialValues,
   editComponent: EditComponent,
-  previewComponent: PreviewComponent,
+  previewComponent,
   ...rest
 }) => {
   const isEditing = !!editField;
@@ -61,7 +61,7 @@ const GridManager = ({
             <ValidatedFieldArray
               name={fieldName}
               component={Grid}
-              item={PreviewComponent}
+              previewComponent={previewComponent}
               validation={validation}
               onEditItem={handleEditField}
               editField={editField}

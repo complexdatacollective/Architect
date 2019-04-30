@@ -19,7 +19,7 @@
   }
 }
 
-.content-grid-preview {
+.grid-item {
   position: absolute;
   height: 100%;
   display: flex;
@@ -52,32 +52,9 @@
     display: flex;
     align-items: center;
 
-    div,
-    video,
-    audio {
-      width: 100%;
-    }
-
-    div,
-    video {
+    div {
       height: 100%;
-    }
-  }
-
-  &--type {
-    &-video,
-    &-image {
-      background-color: var(--architect-media-background);
-    }
-
-    &-video,
-    &-audio,
-    &-image {
-      .content-grid-preview__preview {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+      padding: 1rem 2rem;
     }
   }
 

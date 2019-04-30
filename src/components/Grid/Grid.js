@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import GridLayout from 'react-grid-layout';
-import { connect } from 'react-redux';
-import { Flipped } from 'react-flip-toolkit';
-import { formValueSelector } from 'redux-form';
-import Icon from '../../ui/components/Icon';
-
-const mapStateToProps = (state, { form, fields }) => {
-  const items = formValueSelector(form)(state, fields.name);
-  const itemCount = items ? items.length : 0;
-
-  return {
-    itemCount,
-    items,
-  };
-};
+import GridItem from './GridItem';
+import withItems from './withItems';
 
 const getLayout = (items = []) => {
   const capacity = 4;
@@ -24,7 +13,7 @@ const getLayout = (items = []) => {
   );
 
   const layout = items.reduce(
-    (memo, { id, size }, index) => {
+    (memo, { id, size }) => {
       const y = memo.reduce((acc, { h }) => acc + h, 0);
       const h = size || 1;
       const maxH = h + remainingSpace;
@@ -48,8 +37,9 @@ const getLayout = (items = []) => {
 };
 
 class Grid extends Component {
-  static defaultProps = {
-    items: [],
+  static propTypes = {
+    fields: PropTypes.object.isRequired,
+    items: PropTypes.array.isRequired,
   };
 
   onDragStop = (layout, from) => {
@@ -73,53 +63,36 @@ class Grid extends Component {
     fields.splice(index, 1, newItem);
   };
 
-  renderItem = ({ id, ...rest }, index) => {
-    const {
-      fields,
-      editField,
-      onEditItem,
-      item: ItemComponent,
-    } = this.props;
-
-    const fieldId = `${fields.name}[${index}]`;
-    const flipId = editField === fieldId ? `_${fieldId}` : fieldId;
-
-    return (
-      <div key={id} className="grid__item">
-        <Flipped flipId={flipId}>
-          <div className="content-grid-preview">
-            <div className="content-grid-preview__content">
-              <ItemComponent id={id} {...rest} />
-            </div>
-            <div
-              className="content-grid-preview__edit"
-              onClick={() => onEditItem(fieldId)}
-            ><Icon name="edit" /></div>
-            <div
-              className="content-grid-preview__delete"
-              onClick={() => fields.remove(index)}
-            ><Icon name="delete" /></div>
-          </div>
-        </Flipped>
-      </div>
-    );
-  };
   render() {
     const {
       items,
+      previewComponent,
+      fields,
     } = this.props;
+
+    console.log({ props: this.props });
 
     return (
       <GridLayout
         className="layout grid"
         layout={getLayout(items)}
         cols={1}
-        rowHeight={50}
+        rowHeight={100}
         width={500}
         onDragStop={this.onDragStop}
         onResizeStop={this.onResizeStop}
       >
-        {items.map(this.renderItem)}
+        {items.map(({ id, ...rest }, index) => (
+          <div key={id} className="grid__item">
+            <GridItem
+              id={id}
+              index={index}
+              fields={fields}
+              previewComponent={previewComponent}
+              {...rest}
+            />
+          </div>
+        ))}
       </GridLayout>
     );
   }
@@ -127,6 +100,4 @@ class Grid extends Component {
 
 export { Grid };
 
-export default connect(
-  mapStateToProps,
-)(Grid);
+export default withItems(Grid);
