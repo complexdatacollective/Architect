@@ -23,6 +23,7 @@ const getInputComponent = type =>
 
 const ItemEditor = ({
   type,
+  handleChangeType,
 }) => (
   <Section>
     <Row>
@@ -32,6 +33,7 @@ const ItemEditor = ({
         component={RadioGroup}
         options={options}
         validation={{ required: true }}
+        onChange={handleChangeType}
       />
     </Row>
     <Row disabled={!type}>
@@ -47,6 +49,7 @@ const ItemEditor = ({
 
 ItemEditor.propTypes = {
   type: PropTypes.string,
+  handleChangeType: PropTypes.func.isRequired,
 };
 
 ItemEditor.defaultProps = {

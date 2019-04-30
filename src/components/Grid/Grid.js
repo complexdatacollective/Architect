@@ -98,6 +98,7 @@ class Grid extends Component {
       items,
       capacity,
       previewComponent,
+      onEditItem,
       fields,
     } = this.props;
 
@@ -119,6 +120,7 @@ class Grid extends Component {
                 index={index}
                 fields={fields}
                 previewComponent={previewComponent}
+                onEditItem={onEditItem}
                 {...rest}
               />
             </div>
