@@ -3,6 +3,7 @@ import GridLayout from 'react-grid-layout';
 import { connect } from 'react-redux';
 import { Flipped } from 'react-flip-toolkit';
 import { formValueSelector } from 'redux-form';
+import Icon from '../../ui/components/Icon';
 
 const mapStateToProps = (state, { form, fields }) => {
   const items = formValueSelector(form)(state, fields.name);
@@ -14,15 +15,19 @@ const mapStateToProps = (state, { form, fields }) => {
   };
 };
 
-const getLayout = (items) => {
+const getLayout = (items = []) => {
+  const capacity = 4;
+
   const remainingSpace = items.reduce(
     (acc, { size }) => acc - size,
-    8,
+    capacity,
   );
 
-  return items.reduce(
+  const layout = items.reduce(
     (memo, { id, size }, index) => {
       const y = memo.reduce((acc, { h }) => acc + h, 0);
+      const h = size || 1;
+      const maxH = h + remainingSpace;
 
       return [
         ...memo,
@@ -30,17 +35,23 @@ const getLayout = (items) => {
           i: id,
           y,
           w: 1,
-          h: size,
-          x: index,
-          maxH: (remainingSpace - size),
+          h,
+          x: 0,
+          maxH,
         },
       ];
     },
     [],
   );
+
+  return layout;
 };
 
 class Grid extends Component {
+  static defaultProps = {
+    items: [],
+  };
+
   onDragStop = (layout, from) => {
     const { fields, items } = this.props;
     const newOrder = layout
@@ -76,12 +87,19 @@ class Grid extends Component {
     return (
       <div key={id} className="grid__item">
         <Flipped flipId={flipId}>
-          <ItemComponent
-            id={id}
-            onDelete={() => fields.remove(index)}
-            onEdit={() => onEditItem(fieldId)}
-            {...rest}
-          />
+          <div className="content-grid-preview">
+            <div className="content-grid-preview__content">
+              <ItemComponent id={id} {...rest} />
+            </div>
+            <div
+              className="content-grid-preview__edit"
+              onClick={() => onEditItem(fieldId)}
+            ><Icon name="edit" /></div>
+            <div
+              className="content-grid-preview__delete"
+              onClick={() => fields.remove(index)}
+            ><Icon name="delete" /></div>
+          </div>
         </Flipped>
       </div>
     );

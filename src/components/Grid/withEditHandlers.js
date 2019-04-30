@@ -11,10 +11,12 @@ import {
 } from 'redux-form';
 
 const mapStateToProps = (state, { form, fieldName, itemSelector, editField, template }) => {
-  const items = formValueSelector(form)(state, fieldName);
+  const items = formValueSelector(form)(state, fieldName) || [];
   const itemCount = items ? items.length : 0;
   const item = itemSelector(state, { form, editField });
   const initialValues = item || { ...template(), id: uuid() };
+
+  console.log({ items });
 
   return {
     itemCount,
@@ -60,7 +62,7 @@ const handlers = withHandlers({
 const withEditHandlers = compose(
   defaultProps({
     normalize: value => value,
-    template: () => {},
+    template: () => ({ size: 1 }),
     itemSelector: (state, { form, editField }) =>
       formValueSelector(form)(state, editField),
   }),
