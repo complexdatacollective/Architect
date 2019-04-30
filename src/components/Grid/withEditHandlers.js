@@ -10,16 +10,25 @@ import {
   change,
 } from 'redux-form';
 
-const mapStateToProps = (state, { form, fieldName, itemSelector, editField, template }) => {
+const mapStateToProps = (
+  state, {
+    capacity,
+    form,
+    fieldName,
+    itemSelector,
+    editField,
+    template,
+  },
+) => {
   const items = formValueSelector(form)(state, fieldName) || [];
   const itemCount = items ? items.length : 0;
   const item = itemSelector(state, { form, editField });
   const initialValues = item || { ...template(), id: uuid() };
-
-  console.log({ items });
+  const hasSpace = capacity - items.reduce((acc, { size }) => acc + size, 0) > 0;
 
   return {
     itemCount,
+    hasSpace,
     items,
     initialValues,
   };

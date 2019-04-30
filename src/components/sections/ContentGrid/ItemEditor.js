@@ -3,22 +3,23 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { getFieldId } from '../../../utils/issues';
 import RadioGroup from '../../../ui/components/Fields/RadioGroup';
+import TextArea from '../../../ui/components/Fields/TextArea';
 import ValidatedField from '../../Form/ValidatedField';
-import { Markdown, Image, Audio, Video } from '../../Form/Fields';
+import { Image, Audio, Video } from '../../Form/Fields';
 import Row from '../Row';
 import Section from '../Section';
 import { options } from './options';
 import withItemHandlers from './withItemHandlers';
 
 const contentInputs = {
-  text: Markdown,
+  text: TextArea,
   image: Image,
   audio: Audio,
   video: Video,
 };
 
 const getInputComponent = type =>
-  get(contentInputs, type, Markdown);
+  get(contentInputs, type, TextArea);
 
 const ItemEditor = ({
   type,
@@ -27,17 +28,15 @@ const ItemEditor = ({
     <Row>
       <h3 id={getFieldId('type')}>Type</h3>
       <ValidatedField
-        label="Type"
         name="type"
         component={RadioGroup}
         options={options}
         validation={{ required: true }}
       />
     </Row>
-    <Row>
+    <Row disabled={!type}>
       <h3 id={getFieldId('content')}>Content</h3>
       <ValidatedField
-        label="Content"
         name="content"
         component={getInputComponent(type)}
         validation={{ required: true }}

@@ -27,6 +27,7 @@ const handleSubmitFail = (issues) => {
 
 const GridManager = ({
   editField,
+  hasSpace,
   handleLayoutChange,
   handleEditField,
   handleResetEditField,
@@ -40,6 +41,7 @@ const GridManager = ({
   title,
   validation,
   itemCount,
+  capacity,
   setEditField,
   initialValues,
   editComponent: EditComponent,
@@ -65,10 +67,15 @@ const GridManager = ({
               validation={validation}
               onEditItem={handleEditField}
               editField={editField}
+              capacity={capacity}
               {...rest}
             />
           </div>
-          <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
+          { hasSpace &&
+            <Button onClick={handleAddNew} size="small" icon="add">
+              Create new
+            </Button>
+          }
         </div>
         <Window show={!!editField}>
           <Form

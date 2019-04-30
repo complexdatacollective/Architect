@@ -4,9 +4,7 @@ import GridLayout from 'react-grid-layout';
 import GridItem from './GridItem';
 import withItems from './withItems';
 
-const getLayout = (items = []) => {
-  const capacity = 4;
-
+const getLayout = (items = [], capacity = 4) => {
   const remainingSpace = items.reduce(
     (acc, { size }) => acc - size,
     capacity,
@@ -66,16 +64,15 @@ class Grid extends Component {
   render() {
     const {
       items,
+      capacity,
       previewComponent,
       fields,
     } = this.props;
 
-    console.log({ props: this.props });
-
     return (
       <GridLayout
         className="layout grid"
-        layout={getLayout(items)}
+        layout={getLayout(items, capacity)}
         cols={1}
         rowHeight={100}
         width={500}
