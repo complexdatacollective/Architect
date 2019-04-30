@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { throttle } from 'lodash';
 import PropTypes from 'prop-types';
 import GridLayout from 'react-grid-layout';
 import GridItem from './GridItem';
@@ -40,6 +41,23 @@ class Grid extends Component {
     items: PropTypes.array.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.ref = React.createRef();
+    this.state = {
+      width: 100,
+    };
+  }
+
+  componentDidMount() {
+    this.resizeSensor = setInterval(this.checkSize, 50);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.resizeSensor);
+  }
+
   onDragStop = (layout, from) => {
     const { fields, items } = this.props;
     const newOrder = layout
@@ -61,6 +79,20 @@ class Grid extends Component {
     fields.splice(index, 1, newItem);
   };
 
+  setWidth = throttle((width) => {
+    this.setState({ width });
+  }, 500);
+
+  checkSize = () => {
+    if (!this.ref.current) { return; }
+
+    const width = this.ref.current.parentElement.offsetWidth;
+
+    if (this.state.width !== width) {
+      this.setWidth(width);
+    }
+  };
+
   render() {
     const {
       items,
@@ -70,27 +102,29 @@ class Grid extends Component {
     } = this.props;
 
     return (
-      <GridLayout
-        className="layout grid"
-        layout={getLayout(items, capacity)}
-        cols={1}
-        rowHeight={100}
-        width={500}
-        onDragStop={this.onDragStop}
-        onResizeStop={this.onResizeStop}
-      >
-        {items.map(({ id, ...rest }, index) => (
-          <div key={id} className="grid__item">
-            <GridItem
-              id={id}
-              index={index}
-              fields={fields}
-              previewComponent={previewComponent}
-              {...rest}
-            />
-          </div>
-        ))}
-      </GridLayout>
+      <div ref={this.ref}>
+        <GridLayout
+          className="layout grid"
+          layout={getLayout(items, capacity)}
+          cols={1}
+          rowHeight={100}
+          width={this.state.width}
+          onDragStop={this.onDragStop}
+          onResizeStop={this.onResizeStop}
+        >
+          {items.map(({ id, ...rest }, index) => (
+            <div key={id} className="grid__item">
+              <GridItem
+                id={id}
+                index={index}
+                fields={fields}
+                previewComponent={previewComponent}
+                {...rest}
+              />
+            </div>
+          ))}
+        </GridLayout>
+      </div>
     );
   }
 }
