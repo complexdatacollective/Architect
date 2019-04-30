@@ -15,7 +15,13 @@ const ContentGrid = props => (
   >
     <h2>Edit Items</h2>
     <p>
-      Add one or more &quot;items&quot; below.
+      Add up to 4 &quot;items&quot; below.
+    </p>
+    <p>
+      Items can be resized by dragging.
+    </p>
+    <p>
+      Larger items will take up more the 4 slots available.
     </p>
   </Grid>
 );

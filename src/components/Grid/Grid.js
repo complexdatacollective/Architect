@@ -102,6 +102,8 @@ class Grid extends Component {
       fields,
     } = this.props;
 
+    if (!items) { return null; }
+
     return (
       <div ref={this.ref}>
         <GridLayout
