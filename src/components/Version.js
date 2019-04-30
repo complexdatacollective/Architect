@@ -3,7 +3,7 @@ import { appVersion, codename } from '../utils/appVersion';
 
 const Version = () => (
   <div className="version">
-    <h4>{appVersion} - &quot;{codename}&quot;</h4>
+    <h4>{appVersion} {codename && (<span>- {codename} </span>)}</h4>
   </div>
 );
 
