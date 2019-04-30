@@ -23,14 +23,17 @@ const GridItem = ({
           <div className="grid-item__content">
             <PreviewComponent id={id} {...rest} />
           </div>
-          <div
-            className="grid-item__edit"
-            onClick={() => onEditItem(fieldId)}
-          ><Icon name="edit" /></div>
-          <div
-            className="grid-item__delete"
-            onClick={() => fields.remove(index)}
-          ><Icon name="delete" /></div>
+          <div className="grid-item__controls">
+            <div
+              className="grid-item__edit"
+              onClick={() => onEditItem(fieldId)}
+            ><Icon name="edit" /></div>
+            <div
+              className="grid-item__delete"
+              onClick={() => fields.remove(index)}
+            ><Icon name="delete" /></div>
+          </div>
+
         </div>
       </Flipped>
     </div>

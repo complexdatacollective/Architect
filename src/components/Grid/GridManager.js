@@ -59,12 +59,12 @@ const GridManager = ({
     <Section disabled={disabled} contentId={contentId}>
       <Flipper
         flipKey={isEditing}
-        portalKey="editable-list"
+        portalKey="grid-manager"
       >
         <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
         {children}
-        <div className="editable-list">
-          <div className="editable-list__items">
+        <div className="grid-manager">
+          <div className="grid-manager__items">
             <ValidatedFieldArray
               name={fieldName}
               component={Grid}
@@ -77,9 +77,11 @@ const GridManager = ({
             />
           </div>
           { hasSpace &&
-            <Button onClick={handleAddNew} size="small" icon="add">
-              Create new
-            </Button>
+            <div className="grid-manager__add">
+              <Button onClick={handleAddNew} size="small" icon="add">
+                Create new
+              </Button>
+            </div>
           }
         </div>
         <Window show={!!editField}>

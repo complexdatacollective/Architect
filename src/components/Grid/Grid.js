@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { throttle } from 'lodash';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import GridLayout from 'react-grid-layout';
+import Icon from '../../ui/components/Icon';
 import GridItem from './GridItem';
 import withItems from './withItems';
 
@@ -100,14 +102,30 @@ class Grid extends Component {
       previewComponent,
       onEditItem,
       fields,
+      meta,
     } = this.props;
 
-    if (!items) { return null; }
+    const { error, submitFailed } = meta;
+
+    const gridClasses = cx(
+      'grid',
+      {
+        'grid--has-error': submitFailed && error,
+      },
+    );
+
+    if (!items) {
+      return (
+        <div className="grid">
+          <p><em>Currently no items.</em></p>
+        </div>
+      );
+    }
 
     return (
-      <div ref={this.ref}>
+      <div className={gridClasses} ref={this.ref}>
         <GridLayout
-          className="layout grid"
+          className="layout"
           layout={getLayout(items, capacity)}
           cols={1}
           rowHeight={100}
@@ -115,7 +133,7 @@ class Grid extends Component {
           onDragStop={this.onDragStop}
           onResizeStop={this.onResizeStop}
         >
-          {items.map(({ id, ...rest }, index) => (
+          {items.map(({ id, ...item }, index) => (
             <div key={id} className="grid__item">
               <GridItem
                 id={id}
@@ -123,11 +141,15 @@ class Grid extends Component {
                 fields={fields}
                 previewComponent={previewComponent}
                 onEditItem={onEditItem}
-                {...rest}
+                {...item}
               />
             </div>
           ))}
         </GridLayout>
+
+        { submitFailed && error &&
+          <p className="grid__error"><Icon name="warning" /> {error}</p>
+        }
       </div>
     );
   }

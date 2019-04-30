@@ -21,7 +21,7 @@ const ContentGrid = props => (
       Items can be resized by dragging.
     </p>
     <p>
-      Larger items will take up more the 4 slots available.
+      Larger items will take up more than one of the 4 spaces available.
     </p>
   </Grid>
 );
