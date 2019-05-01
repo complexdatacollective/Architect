@@ -22,14 +22,6 @@ const env = getClientEnvironment(publicUrl);
 let nodeConfig = baseConfig.node;
 
 if (process.env.BUILD_TARGET === 'web') {
-  // To open the dev app in a browser, electron needs to be polyfilled.
-  // The trailing $ tells webpack to match 'electron' exactly.
-  baseConfig.resolve.alias.process$ = path.join(paths.appSrc, 'utils', 'webShims', 'process.js');
-  baseConfig.resolve.alias.electron$ = path.join(paths.appSrc, 'utils', 'webShims', 'electron.js');
-  baseConfig.resolve.alias['fs-extra$'] = path.join(paths.appSrc, 'utils', 'webShims', 'fs-extra.js');
-  baseConfig.resolve.alias.archiver$ = path.join(paths.appSrc, 'utils', 'webShims', 'archiver.js');
-  baseConfig.resolve.alias.decompress$ = path.join(paths.appSrc, 'utils', 'webShims', 'decompress.js');
-
   nodeConfig = {
     dgram: 'empty',
     fs: 'empty',
