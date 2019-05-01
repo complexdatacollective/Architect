@@ -99,8 +99,6 @@ class Grid extends Component {
       );
     }
 
-    console.log({ layout: getLayout(items, capacity) });
-
     return (
       <div className={gridClasses} ref={this.ref}>
         <GridLayout
