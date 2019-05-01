@@ -9,6 +9,7 @@ import {
   formValueSelector,
   change,
 } from 'redux-form';
+import { getRemainingSpace } from './helpers';
 
 const mapStateToProps = (
   state, {
@@ -24,7 +25,7 @@ const mapStateToProps = (
   const itemCount = items ? items.length : 0;
   const item = itemSelector(state, { form, editField });
   const initialValues = item || { ...template(), id: uuid() };
-  const hasSpace = capacity - items.reduce((acc, { size }) => acc + size, 0) > 0;
+  const hasSpace = getRemainingSpace(items, capacity) > 0;
 
   return {
     itemCount,
@@ -71,7 +72,7 @@ const handlers = withHandlers({
 const withEditHandlers = compose(
   defaultProps({
     normalize: value => value,
-    template: () => ({ size: 1 }),
+    template: () => ({ size: 'small' }),
     itemSelector: (state, { form, editField }) =>
       formValueSelector(form)(state, editField),
   }),

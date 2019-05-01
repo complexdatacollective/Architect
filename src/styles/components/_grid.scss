@@ -1,4 +1,10 @@
 .grid {
+  .layout {
+    height: 450px;
+    background: var(--background-dark);
+    border-radius: 1rem;
+  }
+
   &__item {
     position: relative;
 
@@ -9,11 +15,11 @@
         position: absolute;
         right: 0;
         bottom: 0;
-        width: .75rem;
-        height: .75rem;
-        border-bottom-right-radius: .75rem;
-        border-bottom: 2px solid var(--text-dark);
-        border-right: 2px solid var(--text-dark);
+        width: 1rem;
+        height: 1rem;
+        border-bottom-right-radius: .5rem;
+        border-bottom: 2px solid var(--architect-active);
+        border-right: 2px solid var(--architect-active);
       }
     }
   }
@@ -61,7 +67,7 @@
   justify-content: flex-start;
   background-color: var(--architect-sortable-background);
   color: var(--architect-sortable-text);
-  border-radius: 1rem;
+  border-radius: .5rem;
 
   &__controls {
     flex: 0 1 auto;

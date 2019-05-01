@@ -6,36 +6,11 @@ import GridLayout from 'react-grid-layout';
 import Icon from '../../ui/components/Icon';
 import GridItem from './GridItem';
 import withItems from './withItems';
-
-const getLayout = (items = [], capacity = 4) => {
-  const remainingSpace = items.reduce(
-    (acc, { size }) => acc - size,
-    capacity,
-  );
-
-  const layout = items.reduce(
-    (memo, { id, size }) => {
-      const y = memo.reduce((acc, { h }) => acc + h, 0);
-      const h = size || 1;
-      const maxH = h + remainingSpace;
-
-      return [
-        ...memo,
-        {
-          i: id,
-          y,
-          w: 1,
-          h,
-          x: 0,
-          maxH,
-        },
-      ];
-    },
-    [],
-  );
-
-  return layout;
-};
+import {
+  trimSize,
+  convertSize,
+  getLayout,
+} from './helpers';
 
 class Grid extends Component {
   static propTypes = {
@@ -60,7 +35,11 @@ class Grid extends Component {
     clearInterval(this.resizeSensor);
   }
 
-  onDragStop = (layout, from) => {
+  setWidth = throttle((width) => {
+    this.setState({ width });
+  }, 500);
+
+  handleDragStop = (layout, from) => {
     const { fields, items } = this.props;
     const newOrder = layout
       .sort((a, b) => a.y - b.y)
@@ -71,19 +50,17 @@ class Grid extends Component {
     fields.swap(oldIndex, newIndex);
   };
 
-  onResizeStop = (layout, from, to) => {
-    const { fields, items } = this.props;
+  handleResizeStop = (layout, from, to) => {
+    const { fields, items, capacity } = this.props;
     const index = items.findIndex(({ id }) => id === from.i);
+    const size = convertSize(trimSize(from.h, to.h, items, capacity));
+
     const newItem = {
       ...items[index],
-      size: to.h,
+      size,
     };
     fields.splice(index, 1, newItem);
   };
-
-  setWidth = throttle((width) => {
-    this.setState({ width });
-  }, 500);
 
   checkSize = () => {
     if (!this.ref.current) { return; }
@@ -122,6 +99,8 @@ class Grid extends Component {
       );
     }
 
+    console.log({ layout: getLayout(items, capacity) });
+
     return (
       <div className={gridClasses} ref={this.ref}>
         <GridLayout
@@ -129,9 +108,12 @@ class Grid extends Component {
           layout={getLayout(items, capacity)}
           cols={1}
           rowHeight={100}
+          autoSize={false}
+          height={500}
           width={this.state.width}
-          onDragStop={this.onDragStop}
-          onResizeStop={this.onResizeStop}
+          onDragStop={this.handleDragStop}
+          onResizeStop={this.handleResizeStop}
+          onLayoutChange={this.handleLayoutChange}
         >
           {items.map(({ id, ...item }, index) => (
             <div key={id} className="grid__item">
