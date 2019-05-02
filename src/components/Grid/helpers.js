@@ -1,19 +1,19 @@
 export const convertSize = (size) => {
   switch (size) {
     case 2:
-      return 'medium';
+      return 'MEDIUM';
     case 4:
-      return 'large';
+      return 'LARGE';
     default:
-      return 'small';
+      return 'SMALL';
   }
 };
 
 export const parseSize = (size) => {
   switch (size) {
-    case 'medium':
+    case 'MEDIUM':
       return 2;
-    case 'large':
+    case 'LARGE':
       return 4;
     default:
       return 1;
