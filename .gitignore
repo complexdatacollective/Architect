@@ -5,6 +5,7 @@
 /coverage
 /release-builds
 /www
+/app
 /.idea
 /docs-build
 /plugins
