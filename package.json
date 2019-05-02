@@ -17,6 +17,7 @@
         "preelectron:dev": "node scripts/build-electron-dev.js",
         "electron:dev": "cross-env NODE_ENV=development WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
         "build": "node scripts/build.js",
+        "build:network-canvas": "npm install --prefix=network-canvas && npm run build:electron --prefix=network-canvas && mv -f network-canvas/www app/network-canvas",
         "lint": "npm run lint:js && npm run lint:sass",
         "lint:js": "eslint src",
         "lint:sass": "sass-lint -vc .sass-lint.yml",
