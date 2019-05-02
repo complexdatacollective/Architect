@@ -23,7 +23,7 @@
         "test": "node scripts/test.js --env=jsdom",
         "test-update-snapshots": "node scripts/test.js --env=jsdom --updateSnapshot",
         "build-docs": "jsdoc src -r -d docs-build -c ./jsdoc.conf.json --verbose",
-        "electron": "electron ./www",
+        "electron": "env NODE_ENV=build npx electron ./app",
         "generate-icons": "node scripts/generate-app-icons.js",
         "dist": "electron-builder",
         "dist:mac": "npm run build && electron-builder -m --publish=always",
