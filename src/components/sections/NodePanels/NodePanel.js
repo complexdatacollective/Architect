@@ -15,10 +15,11 @@ const NodePanel = ({ fieldId, ...rest }) => (
     <Row>
       <h3>Panel title</h3>
       <p>The panel title will be shown above the list of nodes within the panel.</p>
-      <Field
+      <ValidatedField
         name={`${fieldId}.title`}
         component={Fields.Text}
         placeholder="Panel title"
+        validation={{ required: true }}
       />
     </Row>
     <Row>

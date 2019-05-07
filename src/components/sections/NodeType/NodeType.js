@@ -101,7 +101,7 @@ class NodeType extends Component {
             </p>
             <p>
               <strong>
-                This open is global: changing it here will change it for every interface that uses
+                This option is global: changing it here will change it for every interface that uses
                 this node type.
               </strong>
             </p>
