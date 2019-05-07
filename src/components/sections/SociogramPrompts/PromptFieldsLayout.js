@@ -32,7 +32,7 @@ const PromptFields = ({
       <ValidatedField
         name="layout.layoutVariable"
         component={ArchitectFields.CreatableSelect}
-        placeholder="&mdash; Select or create a new layout variable &mdash;"
+        placeholder="&mdash; Select a new layout variable, or type to create a new one &mdash;"
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={value => handleCreateVariable(value, 'layout')}
