@@ -50,10 +50,10 @@ class DataSource extends Component {
         { canUseExisting &&
           <div className="form-field-data-source__options">
             <div className="form-fields-data-source__option">
-              <Radio input={existingInput} label="Use network from interview" />
+              <Radio input={existingInput} label="Use the network from the in-progress interview" />
             </div>
             <div className="form-fields-data-source__option">
-              <Radio input={networkAssetInput} label="Use network asset" />
+              <Radio input={networkAssetInput} label="Use a network data file" />
               <div
                 className={cx(
                   'form-fields-data-source__option-file',
