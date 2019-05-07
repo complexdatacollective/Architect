@@ -3,6 +3,7 @@ import {
   Field,
 } from 'redux-form';
 import * as Fields from '../../ui/components/Fields';
+import ValidatedField from '../Form/ValidatedField';
 import * as ArchitectFields from '../Form/Fields';
 import Section from './Section';
 import Row from './Row';
@@ -53,7 +54,7 @@ class Background extends React.Component {
         { (backgroundType === CONCENTRIC_CIRCLES) &&
           <React.Fragment>
             <Row>
-              <Field
+              <ValidatedField
                 name="background.concentricCircles"
                 component={Fields.Number}
                 label="Number of concentric circles to use:"
