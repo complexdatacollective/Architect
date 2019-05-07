@@ -13,8 +13,9 @@ const mapStateToProps = (state, { id }) => {
   const assetManifest = getAssetManifest(state);
   const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
   const source = get(assetManifest, [id, 'source'], '');
+  const encodedURI = encodeURIComponent(path.join(workingPath, 'assets', path.basename(source)));
   const url = source ?
-    `asset:/${path.join(workingPath, 'assets', path.basename(source))}` :
+    `asset:/${encodedURI}` :
     '';
 
   return {
