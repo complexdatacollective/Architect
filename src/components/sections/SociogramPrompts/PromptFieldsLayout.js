@@ -23,14 +23,12 @@ const PromptFields = ({
       <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
       <h3>Layout</h3>
       <p>
-        This section controls the position of nodes on this sociogram prompt. Decide
-        if you want the participant to be able to drag nodes to position them, and
-        select a layout variable to use for storing or retrieving position data.
+        This section controls the position of nodes on this sociogram prompt.
       </p>
     </Row>
     <Row>
       <h4>Layout variable</h4>
-      <p>Which layout do you want to use on this prompt?</p>
+      <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
       <ValidatedField
         name="layout.layoutVariable"
         component={ArchitectFields.CreatableSelect}
