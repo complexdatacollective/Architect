@@ -1,6 +1,6 @@
 const { app } = require('electron');
 const log = require('./components/log');
-const previewWindowManager = require('./components/previewWindowManager');
+const createPreviewManager = require('./components/createPreviewManager');
 const appManager = require('./components/appManager');
 
 log.info('App starting...');
@@ -21,8 +21,10 @@ if (shouldQuit) {
 app.on('ready', () => {
   console.log('ready');
   appManager.start();
+  createPreviewManager().then(() => {
+    log.info('created preview manager');
+  });
   // appManager.loadDevTools();
-  previewWindowManager.getWindow();
 });
 
 // Quit when all windows are closed.
