@@ -39,8 +39,7 @@ function createWindow() {
       minHeight: 800,
       center: true,
       title: 'Network Canvas Preview',
-      show: false,
-
+      // show: false,
     });
 
     global.previewWindow = new BrowserWindow(windowParameters);
@@ -62,10 +61,6 @@ function createWindow() {
       global.previewWindow = null;
     });
 
-    global.previewWindow.once('ready-to-show', () => {
-      global.previewWindow.show();
-    });
-
     global.previewWindow.webContents.on('did-finish-load', () => resolve(global.previewWindow));
 
     global.previewWindow.loadURL(getAppUrl());
@@ -76,11 +71,17 @@ function createWindow() {
   });
 }
 
-const windowManager = {
-  get hasWindow() { return !!global.appWindow; },
-  getWindow: function getWindow() {
-    return createWindow();
-  },
-};
+const createPreviewWindow = () =>
+  createWindow()
+    .then(window => ({
+      window,
+      loadIndex: () => {
+        window.loadURL(getAppUrl());
+      },
+      webContents: window.webContents,
+      send: (...args) => window.webContents.send(...args),
+      show: () => window.show(),
+      hide: () => window.hide(),
+    }));
 
-module.exports = windowManager;
+module.exports = createPreviewWindow;
