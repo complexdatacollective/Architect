@@ -22,6 +22,7 @@ class Background extends React.Component {
   }
 
   handleChooseBackgroundType = (option) => {
+    console.log(option);
     this.setState({ backgroundType: option });
   }
 
