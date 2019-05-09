@@ -8,9 +8,13 @@ const createPreviewManager = () => {
   return createPreviewWindow()
     .then((window) => {
       ipcMain.on('preview:preview', (event, protocol, stageId) => {
-        window.loadIndex();
+        // window.loadIndex();
         window.send('remote:preview', protocol, stageId);
         window.show();
+      });
+
+      ipcMain.on('preview:close', () => {
+        window.hide();
       });
 
       ipcMain.on('preview:reset', () => {
@@ -18,9 +22,9 @@ const createPreviewManager = () => {
         window.send('remote:reset');
       });
 
-      setTimeout(() => {
+      setImmediate(() => {
         window.send('remote:reset');
-      }, 1);
+      });
 
       return window;
     });
