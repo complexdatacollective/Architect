@@ -39,6 +39,10 @@ function createWindow() {
       minHeight: 800,
       center: true,
       title: 'Network Canvas Preview',
+      closable: false,
+      // webPreferences: {
+      //   partition: null,
+      // },
       // show: false,
     });
 
@@ -54,11 +58,19 @@ function createWindow() {
       evt.preventDefault();
     });
 
-    global.previewWindow.on('closed', () => {
-      // Dereference the window object, usually you would store windows
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
-      global.previewWindow = null;
+    // global.previewWindow.on('closed', () => {
+    //   // Dereference the window object, usually you would store windows
+    //   // in an array if your app supports multi windows, this is the time
+    //   // when you should delete the corresponding element.
+    //   global.previewWindow = null;
+    // });
+
+    global.previewWindow.on('close', (e) => {
+      e.preventDefault();
+
+      global.previewWindow.hide();
+
+      return false;
     });
 
     global.previewWindow.webContents.on('did-finish-load', () => resolve(global.previewWindow));

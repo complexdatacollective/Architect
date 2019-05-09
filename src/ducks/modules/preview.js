@@ -1,6 +1,6 @@
-import { ipcRenderer } from 'electron';
 import { getFormValues } from 'redux-form';
-import { getActiveProtocolMeta } from '../../selectors/protocol';
+// import { getActiveProtocolMeta } from '../../selectors/protocol';
+import previewDriver from '../../utils/previewDriver';
 
 const SET_ZOOM = 'PREVIEW/ZOOM';
 const REFRESH_PREVIEW = 'PREVIEW/REFRESH_PREVIEW';
@@ -23,15 +23,15 @@ const closePreview = () =>
       type: CLOSE_PREVIEW,
     });
 
-    ipcRenderer.send('CLOSE_PREVIEW');
+    previewDriver.close();
   };
 
 const previewDraft = (draft, stageIndex) =>
   (dispatch, getState) => {
     const state = getState();
 
-    const activeProtocolMeta = getActiveProtocolMeta(state);
-    const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
+    // const activeProtocolMeta = getActiveProtocolMeta(state);
+    // const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
 
     const protocol = state.protocol.present;
 
@@ -48,7 +48,7 @@ const previewDraft = (draft, stageIndex) =>
       },
     });
 
-    ipcRenderer.send('OPEN_PREVIEW', { protocol: draftProtocol, path: workingPath, stageIndex });
+    previewDriver.preview(draftProtocol, stageIndex);
   };
 
 const previewStageByFormName = (stageMeta, formName) =>
