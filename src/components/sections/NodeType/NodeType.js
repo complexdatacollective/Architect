@@ -90,31 +90,6 @@ class NodeType extends Component {
             </div>
           </div>
         </Row>
-
-        { disabled &&
-          <Row>
-            <h4>Display Variable <small>(optional)</small></h4>
-            <p>
-                Optionally, you may specify an existing variable to use as a label when
-                displaying this node type. If you do not specify a variable, Network Canvas
-                will select an appropriate one for you, using <a href="https://documentation.networkcanvas.com">these rules</a>.
-            </p>
-            <p>
-              <strong>
-                This option is global: changing it here will change it for every interface that uses
-                this node type.
-              </strong>
-            </p>
-            <DetachedField
-              label=""
-              component={Select}
-              placeholder="&mdash; Select from your existing variables &mdash;"
-              value={displayVariable}
-              onChange={handleChangeDisplayVariable}
-              options={displayVariableOptions}
-            />
-          </Row>
-        }
       </Section>
     );
   }

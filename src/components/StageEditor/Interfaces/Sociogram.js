@@ -8,8 +8,8 @@ import {
 const Sociogram = {
   sections: [
     Name,
-    Background,
     NodeType,
+    Background,
     SociogramPrompts,
   ],
 };
