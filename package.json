@@ -207,7 +207,7 @@
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
             "!src/ui/**",
-            "!src/network-canvas/**"
+            "!network-canvas/**"
         ],
         "setupFiles": [
             "jest-date-mock",
@@ -218,11 +218,11 @@
         ],
         "testPathIgnorePatterns": [
             "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]",
-            "<rootDir>[/\\\\](src/network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](network-canvas)[/\\\\]",
             "<rootDir>[/\\\\](src/ui)[/\\\\]"
         ],
         "modulePathIgnorePatterns": [
-            "<rootDir>[/\\\\](src/network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](network-canvas)[/\\\\]",
             "<rootDir>[/\\\\](src/ui)[/\\\\]"
         ],
         "testEnvironment": "node",
