@@ -1,5 +1,5 @@
 import { getFormValues } from 'redux-form';
-// import { getActiveProtocolMeta } from '../../selectors/protocol';
+import { getActiveProtocolMeta } from '../../selectors/protocol';
 import previewDriver from '../../utils/previewDriver';
 
 const SET_ZOOM = 'PREVIEW/ZOOM';
@@ -30,14 +30,23 @@ const previewDraft = (draft, stageIndex) =>
   (dispatch, getState) => {
     const state = getState();
 
-    // const activeProtocolMeta = getActiveProtocolMeta(state);
-    // const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
+    const activeProtocolMeta = getActiveProtocolMeta(state);
+    const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
 
     const protocol = state.protocol.present;
 
     const draftProtocol = {
       ...protocol,
       ...draft,
+      /**
+       * This allows assets to work correctly in the Network Canvas preview.
+       *
+       * Network canvas uses relative paths for the assets:// protocol, whereas
+       * Architect uses full paths. Since Network Canvas prepares urls as:
+       * `assets://${protocolUID}/assets/${asset}` this allows us to load files
+       * from the correct location.
+       */
+      uid: workingPath,
     };
 
     dispatch({

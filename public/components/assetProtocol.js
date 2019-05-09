@@ -1,5 +1,5 @@
 const { protocol, app } = require('electron');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const log = require('./log');
 
@@ -15,18 +15,20 @@ const isValidPath = filePath =>
 
 const registerProtocol = () =>
   protocol.registerFileProtocol(protocolName, (request, callback) => {
-    const filePath = path.normalize(request.url.substr(protocolName.length + 2));
+    const urlPath = request.url.substr(protocolName.length + 2);
+    const filePath = path.normalize(urlPath);
 
     if (!isValidPath(filePath)) {
-      throw new Error('path outside of valid directories');
+      log.error(`path outside of valid directories: "${filePath}"`);
+      return;
     }
 
-    // eslint-disable-next-line
-    fs.access(filePath, fs.constants.R_OK, (error) => {
-      if (error) { console.log(error); }
-      log.info(`open ${protocolName}://`, filePath);
-      callback({ path: filePath });
-    });
+    fs.access(filePath, fs.constants.R_OK)
+      .then(() => {
+        log.info(`open ${protocolName}://`, filePath);
+        callback({ path: filePath });
+      })
+      .catch(error => log.error(error));
   }, (error) => {
     if (error) {
       log.error(`Failed to register ${protocolName}:// protocol`);

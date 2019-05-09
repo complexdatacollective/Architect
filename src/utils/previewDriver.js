@@ -2,7 +2,6 @@
 import { ipcRenderer } from 'electron';
 
 const preview = (protocol = {}, stageId = 0) => {
-  console.log('ipc send, preview:preview', protocol, stageId);
   ipcRenderer.send('preview:preview', protocol, stageId);
 };
 
