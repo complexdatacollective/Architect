@@ -3,4 +3,4 @@
 	url = https://github.com/codaco/Network-Canvas-UI.git
 [submodule "network-canvas"]
 	path = network-canvas
-	url = git@github.com:codaco/network-canvas.git
+	url = https://github.com/codaco/network-canvas.git
