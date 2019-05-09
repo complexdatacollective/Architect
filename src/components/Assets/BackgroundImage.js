@@ -9,7 +9,7 @@ const backgroundStyles = url => ({
   backgroundPosition: 'center',
 });
 
-const BackgroundImage = ({ url, ...props }) =>
+const BackgroundImage = ({ url, dispatch, ...props }) =>
   <div style={backgroundStyles(url)} {...props} />;
 
 BackgroundImage.propTypes = {

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withAssetUrl from './withAssetUrl';
 
-const Audio = ({ url, description, ...props }) =>
+const Audio = ({ url, description, dispatch, ...props }) =>
   <audio src={url} {...props}>{description}</audio>;
 
 Audio.propTypes = {

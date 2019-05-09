@@ -1,58 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import Markdown from 'react-markdown';
-import { Handle, DeleteButton } from '../../OrderedList';
 import { BackgroundImage, Video, Audio } from '../../Assets';
-import { sizes } from './sizes';
 
-const AssetComponent = ({ type, content }) => {
+const ItemPreview = ({ type, content }) => {
   switch (type) {
     case 'image':
-      return <BackgroundImage id={content} className="content-grid-preview__image" />;
+      return <BackgroundImage id={content} />;
     case 'video':
-      return <Video id={content} controls className="content-grid-preview__video" />;
+      return <Video id={content} controls />;
     case 'audio':
-      return <Audio id={content} controls className="content-grid-preview__audio" />;
+      return <Audio id={content} controls />;
     case 'text':
-      return <Markdown source={content} className="content-grid-preview__text" />;
+      return <Markdown source={content} />;
     default:
       return content;
   }
 };
 
-const ItemPreview = ({
-  onDeleteItem,
-  type,
-  content,
-  size,
-}) => (
-  <div
-    className={cx(
-      'content-grid-preview',
-      `content-grid-preview--size-${size}`,
-      `content-grid-preview--type-${type}`,
-    )}
-  >
-    <Handle />
-    <div className="content-grid-preview__preview">
-      <AssetComponent type={type} content={content} />
-    </div>
-    <DeleteButton onClick={onDeleteItem} />
-  </div>
-);
-
 ItemPreview.propTypes = {
   content: PropTypes.string,
   type: PropTypes.string,
-  size: PropTypes.oneOf([sizes.SMALL, sizes.MEDIUM, sizes.LARGE]),
-  onDeleteItem: PropTypes.func.isRequired,
 };
 
 ItemPreview.defaultProps = {
   content: null,
   type: null,
-  size: null,
 };
 
 export { ItemPreview };
