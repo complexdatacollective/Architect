@@ -72,7 +72,7 @@ const handlers = withHandlers({
 const withEditHandlers = compose(
   defaultProps({
     normalize: value => value,
-    template: () => ({ size: 'small' }),
+    template: () => ({ size: 'SMALL' }),
     itemSelector: (state, { form, editField }) =>
       formValueSelector(form)(state, editField),
   }),

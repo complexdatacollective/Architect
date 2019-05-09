@@ -8,7 +8,7 @@ import ValidatedField from '../../Form/ValidatedField';
 import { Image, Audio, Video } from '../../Form/Fields';
 import Row from '../Row';
 import Section from '../Section';
-import { options } from './options';
+import { typeOptions } from './options';
 import withItemHandlers from './withItemHandlers';
 
 const contentInputs = {
@@ -31,7 +31,7 @@ const ItemEditor = ({
       <ValidatedField
         name="type"
         component={RadioGroup}
-        options={options}
+        options={typeOptions}
         validation={{ required: true }}
         onChange={handleChangeType}
       />

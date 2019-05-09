@@ -1,4 +1,4 @@
-export const options = [
+export const typeOptions = [
   { value: 'image', label: 'Image' },
   { value: 'video', label: 'Video' },
   { value: 'audio', label: 'Audio' },
