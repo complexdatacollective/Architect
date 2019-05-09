@@ -8,7 +8,6 @@ const createPreviewManager = () => {
   return createPreviewWindow()
     .then((window) => {
       ipcMain.on('preview:preview', (event, protocol, stageId) => {
-        // window.loadIndex();
         window.send('remote:preview', protocol, stageId);
         window.show();
       });
