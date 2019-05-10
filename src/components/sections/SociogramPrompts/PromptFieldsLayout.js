@@ -29,6 +29,9 @@ const PromptFields = ({
     <Row>
       <h4>Layout variable</h4>
       <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
+      <p><strong>
+        Tip: Remember, you can create a new layout variable here by typing a name into the box.
+      </strong></p>
       <ValidatedField
         name="layout.layoutVariable"
         component={ArchitectFields.CreatableSelect}
