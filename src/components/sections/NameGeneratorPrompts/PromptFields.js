@@ -29,7 +29,12 @@ class PromptFields extends PureComponent {
           />
         </Row>
         <Row>
-          <h3>Assign attributes</h3>
+          <h3>Assign additional variables <small>(optional)</small></h3>
+          <p>
+            You may optionally assign variable values to all nodes created on this prompt.
+            Select an existing variable (and set a value), or select &quot;create new variable&quot;
+            from the bottom of the list.
+          </p>
           <AssignAttributes
             form={form}
             name="additionalAttributes"

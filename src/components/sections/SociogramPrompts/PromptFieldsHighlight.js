@@ -47,6 +47,11 @@ const HighlightFields = ({
           onCreateOption={value => handleCreateVariable(value, 'boolean')}
           placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
           options={highlightVariablesForSubject}
+          formatCreateLabel={inputValue => (
+            <span>
+              Press enter to create a new boolean variable named &quot;{inputValue}&quot;.
+            </span>
+          )}
         />
       </Row>
     </Section>
