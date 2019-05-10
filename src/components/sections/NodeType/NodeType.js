@@ -50,7 +50,7 @@ class NodeType extends Component {
         <Row>
           <div id={getFieldId('subject')} data-name="Node type" />
           <h2>Node Type</h2>
-          <p>Which node type is used on this interface?</p>
+          <p>Which node type is used on this stage?</p>
           <div
             className="stage-editor-section-node-type__edit"
             onClick={handleResetStage}

@@ -35,6 +35,11 @@ const PromptFields = ({
     <Section>
       <Row>
         <h3 id={getFieldId('text')}>Text for Prompt</h3>
+        <p>Enter the text that the participant will see below.</p>
+        <p><strong>
+          Tip: You can use markdown formatting in this prompt to create
+          bold or underlined text.
+        </strong></p>
         <ValidatedField
           name={'text'}
           component={TextArea}
