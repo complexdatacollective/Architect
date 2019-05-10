@@ -8,7 +8,7 @@ import ipc from './ipc';
 import { rootReducer, rootEpic as architectRootEpic } from './modules/root';
 
 const persistConfig = {
-  key: 'root',
+  key: 'architect',
   storage,
   whitelist: [
     'recentProtocols',
