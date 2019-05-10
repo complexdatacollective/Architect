@@ -54,6 +54,11 @@ const PromptFields = ({
           onCreateOption={openNewVariableWindow}
           onDeleteOption={handleDeleteVariable}
           validation={{ required: true }}
+          formatCreateLabel={inputValue => (
+            <span>
+              Press enter to create a new ordinal variable named &quot;{inputValue}&quot;.
+            </span>
+          )}
         />
       </Row>
       <Row>

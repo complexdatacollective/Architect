@@ -36,6 +36,9 @@ const PromptFields = ({
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={value => handleCreateVariable(value, 'layout')}
+        formatCreateLabel={inputValue => (
+          <span>Press enter to create a new layout variable named &quot;{inputValue}&quot;.</span>
+        )}
       />
     </Row>
     <Row>

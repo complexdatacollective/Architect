@@ -54,6 +54,9 @@ const EdgeFields = ({
             placeholder="&mdash; Select an edge type, or type to create a new one &mdash;"
             label="Create edges of the following type"
             validation={{ required: true }}
+            formatCreateLabel={inputValue => (
+              <span>Press enter to create a edge type named &quot;{inputValue}&quot;.</span>
+            )}
           />
         </Row>
       }

@@ -19,16 +19,28 @@ const QuickAdd = ({
 }) => (
   <Section disabled={disabled} group contentId="guidance.editor.quickAdd">
     <h3 id="issue-form">Quick Add Variable</h3>
-    <p>Choose which variable to use to store the value of the quick add form.</p>
+    <p>
+      Choose which variable to use to store the value of the quick add form. To create
+      a new variable, type a name into the box below.
+    </p>
+    <p>
+      <strong>
+        Tip: create or assign a variable called &quot;name&quot; and network
+        canvas will automatically use it as a label.
+      </strong>
+    </p>
     <div className="stage-editor-section-form">
       <ValidatedField
         name="quickAdd"
         component={CreatableSelect}
-        placeholder="Select component"
+        placeholder="Select an existing variable, or type to create a new one..."
         options={options}
         onCreateOption={value => handleCreateVariable(value, 'text')}
         onDeleteOption={handleDeleteVariable}
         validation={{ required: true }}
+        formatCreateLabel={inputValue => (
+          <span>Press enter to create a new variable named &quot;{inputValue}&quot;.</span>
+        )}
       />
     </div>
   </Section>
