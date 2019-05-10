@@ -3,6 +3,8 @@ const log = require('./components/log');
 const createPreviewManager = require('./components/createPreviewManager');
 const appManager = require('./components/appManager');
 
+global.NETWORK_CANVAS_PREVIEW = true;
+
 log.info('App starting...');
 appManager.init();
 
