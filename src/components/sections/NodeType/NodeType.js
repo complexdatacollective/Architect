@@ -6,9 +6,7 @@ import cx from 'classnames';
 import Button from '../../../ui/components/Button';
 import { getFieldId } from '../../../utils/issues';
 import NodeSelect from '../../Form/Fields/NodeSelect';
-import Select from '../../Form/Fields/Select';
 import ValidatedField from '../../Form/ValidatedField';
-import DetachedField from '../../DetachedField';
 import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
@@ -24,9 +22,6 @@ class NodeType extends Component {
     handleResetStage: PropTypes.func.isRequired,
     handleOpenCreateNewType: PropTypes.func.isRequired,
     handleTypeScreenMessage: PropTypes.func.isRequired,
-    displayVariable: PropTypes.string,
-    handleChangeDisplayVariable: PropTypes.func.isRequired,
-    displayVariableOptions: PropTypes.array.isRequired,
   };
 
   static defaultProps = {
@@ -46,9 +41,6 @@ class NodeType extends Component {
       disabled,
       handleResetStage,
       handleOpenCreateNewType,
-      displayVariable,
-      handleChangeDisplayVariable,
-      displayVariableOptions,
     } = this.props;
 
     const nodeTypeClasses = cx('stage-editor-section', 'stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });

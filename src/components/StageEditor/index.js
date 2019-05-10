@@ -5,7 +5,7 @@ import {
   isInvalid as isFormInvalid,
 } from 'redux-form';
 import { compose, defaultProps, withHandlers } from 'recompose';
-import { find } from 'lodash';
+import { find, isArray, isObject, toPairs, isNull, isEmpty } from 'lodash';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import StageEditor, { formName } from './StageEditor';
@@ -35,15 +35,55 @@ const mapDispatchToProps = dispatch => ({
   createStage: bindActionCreators(stageActions.createStage, dispatch),
 });
 
+const assignForType = (memo, key, value) => {
+  if (isArray(memo)) {
+    return [
+      ...memo,
+      value,
+    ];
+  }
+
+  return {
+    ...memo,
+    [key]: value,
+  };
+};
+
+let prune;
+
+const shouldPrune = x =>
+  isNull(x) || (isObject(x) && isEmpty(x)) || (isArray(x) && x.length === 0);
+
+const getNextValue = (value) => {
+  if (isObject(value) || isArray(value)) {
+    return prune(value);
+  }
+
+  return value;
+};
+
+prune = obj =>
+  toPairs(obj).reduce(
+    (memo, [key, value]) => {
+      const nextValue = getNextValue(value);
+
+      // Ditch nulls and empties
+      if (shouldPrune(nextValue)) { return memo; }
+
+      return assignForType(memo, key, nextValue);
+    },
+    (isArray(obj) ? [] : {}),
+  );
+
 const stageEditorState = connect(mapStateToProps, mapDispatchToProps);
 
 const stageEditorHanders = withHandlers({
   onSubmit: ({ id, insertAtIndex, updateStage, createStage, onComplete }) =>
     (stage) => {
       if (id) {
-        updateStage(id, stage);
+        updateStage(id, prune(stage));
       } else {
-        createStage(stage, insertAtIndex);
+        createStage(prune(stage), insertAtIndex);
       }
       onComplete();
     },
