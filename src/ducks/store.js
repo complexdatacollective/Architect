@@ -6,10 +6,9 @@ import thunk from 'redux-thunk';
 import logger from './middleware/logger';
 import ipc from './ipc';
 import { rootReducer, rootEpic as architectRootEpic } from './modules/root';
-import linkStore from './preview/linkStore';
 
 const persistConfig = {
-  key: 'root',
+  key: 'architect',
   storage,
   whitelist: [
     'recentProtocols',
@@ -23,7 +22,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const rootEpic = combineEpics(
   architectRootEpic,
-  linkStore,
 );
 
 const epics = createEpicMiddleware(rootEpic);

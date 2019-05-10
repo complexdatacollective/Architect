@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { nth, find, get } from 'lodash';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Scene from './components/Scene';
 import ProtocolLoader from './components/ProtocolLoader';
-import Preview from './components/Preview';
 import tween from './behaviours/Tweened/tween';
 
 const getProtocolPath = pathname =>
@@ -66,24 +65,12 @@ class Routes extends Component {
   render() {
     const { location, history } = this.props;
     return (
-      <Switch>
-        <Route path="/preview/:stageIndex/:protocol?">
-          { props => (
-            <React.Fragment>
-              { props.match.params.protocol && <ProtocolLoader {...props} /> }
-              <Preview {...props} />
-            </React.Fragment>
-          )}
+      <React.Fragment>
+        <Route path="/edit/:protocol">
+          { props => <ProtocolLoader {...props} /> }
         </Route>
-        <Route>
-          <React.Fragment>
-            <Route path="/edit/:protocol">
-              { props => <ProtocolLoader {...props} /> }
-            </Route>
-            <Scene history={history} location={location} />
-          </React.Fragment>
-        </Route>
-      </Switch>
+        <Scene history={history} location={location} />
+      </React.Fragment>
     );
   }
 }

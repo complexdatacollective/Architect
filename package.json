@@ -13,17 +13,20 @@
         "pack": "electron-builder --dir",
         "update-submodules": "git submodule update --init --recursive",
         "start": "cross-env BUILD_TARGET=web node scripts/start.js",
-        "start:electron": "node scripts/start.js",
+        "start:architect:electron": "node scripts/start.js",
+        "start:network-canvas:electron": "npm run start:electron --prefix=network-canvas",
         "preelectron:dev": "node scripts/build-electron-dev.js",
-        "electron:dev": "cross-env NODE_ENV=development WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
-        "build": "node scripts/build.js",
+        "electron:dev": "cross-env NODE_ENV=development WEBPACK_NC_DEV_SERVER_PORT=3000 WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
+        "build": "npm run build:architect && npm run build:network-canvas",
+        "build:architect": "node scripts/build.js",
+        "build:network-canvas": "npm install --prefix=network-canvas && npm run build:electron --prefix=network-canvas && mv -f network-canvas/www app/network-canvas",
         "lint": "npm run lint:js && npm run lint:sass",
         "lint:js": "eslint src",
         "lint:sass": "sass-lint -vc .sass-lint.yml",
         "test": "node scripts/test.js --env=jsdom",
         "test-update-snapshots": "node scripts/test.js --env=jsdom --updateSnapshot",
         "build-docs": "jsdoc src -r -d docs-build -c ./jsdoc.conf.json --verbose",
-        "electron": "electron ./www",
+        "electron": "env NODE_ENV=build electron ./app",
         "generate-icons": "node scripts/generate-app-icons.js",
         "dist": "electron-builder",
         "dist:mac": "npm run build && electron-builder -m --publish=always",
@@ -123,6 +126,7 @@
         "react-error-overlay": "^5.0.4",
         "react-fastclick": "^3.0.2",
         "react-flip-toolkit": "^6.5.4",
+        "react-grid-layout": "^0.16.6",
         "react-hammerjs": "^1.0.1",
         "react-id-swiper": "^1.6.8",
         "react-markdown": "^3.6.0",
@@ -206,7 +210,7 @@
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
             "!src/ui/**",
-            "!src/network-canvas/**"
+            "!network-canvas/**"
         ],
         "setupFiles": [
             "jest-date-mock",
@@ -217,11 +221,11 @@
         ],
         "testPathIgnorePatterns": [
             "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]",
-            "<rootDir>[/\\\\](src/network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](network-canvas)[/\\\\]",
             "<rootDir>[/\\\\](src/ui)[/\\\\]"
         ],
         "modulePathIgnorePatterns": [
-            "<rootDir>[/\\\\](src/network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](network-canvas)[/\\\\]",
             "<rootDir>[/\\\\](src/ui)[/\\\\]"
         ],
         "testEnvironment": "node",

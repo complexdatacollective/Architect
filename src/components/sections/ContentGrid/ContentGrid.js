@@ -1,131 +1,57 @@
-import React, { Component } from 'react';
-import uuid from 'uuid';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {
-  FieldArray,
-  arrayPush,
-  change,
-  formValueSelector,
-  getFormSyncErrors,
-} from 'redux-form';
-import OrderedList from '../../OrderedList';
-import { Button } from '../../../ui/';
-import Item from './Item';
-import { units, capacity, sizes } from './sizes';
-import Section from '../Section';
+import React from 'react';
+import { formValueSelector } from 'redux-form';
+import { get } from 'lodash';
+import Grid from '../../Grid';
+import ItemPreview from './ItemPreview';
+import ItemEditor from './ItemEditor';
+import { capacity } from './options';
+import { getAssetManifest } from '../../../selectors/protocol';
 
-class ContentGrid extends Component {
-  static propTypes = {
-  };
+const normalizeType = item => ({
+  ...item,
+  type: item.type === 'text' ? 'text' : 'asset',
+});
 
-  static defaultProps = {
-  };
+const denormalizeType = (state, { form, editField }) => {
+  const item = formValueSelector(form)(state, editField);
 
-  constructor(props) {
-    super(props);
+  if (!item) { return null; }
 
-    this.state = {
-      editing: {},
-    };
-  }
+  if (item.type === 'text') { return item; }
 
-  editItem = (itemId) => {
-    if (!this.state.editing[itemId]) {
-      this.setState({ editing: { ...this.state.editing, [itemId]: true } });
-      return;
-    }
-
-    // If we're already editing it then act like a toggle
-    this.setState({ editing: { ...this.state.editing, [itemId]: false } });
-  };
-
-  handleToggleItemEdit = (itemId) => {
-    this.editItem(itemId);
-  };
-
-  handleChooseItemType = (fieldId, type) =>
-    this.props.setInputType(fieldId, type);
-
-  handleCreateItem = () => {
-    const itemId = this.props.createNewItem();
-    this.editItem(itemId);
-  };
-
-  render() {
-    const { form, spareCapacity } = this.props;
-
-    return (
-      <Section contentId="guidance.editor.content_items">
-        <h2>Content Items</h2>
-        <p>
-          Use this section to configure up to three content items, containing images, video,
-          audio, or text.
-        </p>
-        <div className="content-grid">
-          <FieldArray
-            name="items"
-            component={OrderedList}
-            item={Item}
-            onToggleItemEdit={this.handleToggleItemEdit}
-            onChooseItemType={this.handleChooseItemType}
-            editing={this.state.editing}
-            form={form}
-            errors={this.props.errors}
-            spareCapacity={spareCapacity}
-          />
-        </div>
-
-        { spareCapacity > 0 ?
-          <Button
-            size="small"
-            icon="add"
-            onClick={this.handleCreateItem}
-          >Add content box</Button> :
-          <p>
-            <strong>Information screen full</strong>. No more room for additional content boxes.
-            Add content to existing boxes, or make them smaller to free up space.
-          </p>
-        }
-      </Section>
-    );
-  }
-}
-
-ContentGrid.propTypes = {
-  createNewItem: PropTypes.func.isRequired,
-  spareCapacity: PropTypes.number.isRequired,
-  setInputType: PropTypes.func.isRequired,
-  form: PropTypes.string.isRequired,
-  errors: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state, { form }) => {
-  const items = formValueSelector(form)(state, 'items') || [];
-
-  const spareCapacity = items.reduce(
-    (memo, item) =>
-      memo - (item.size ? units[item.size] : 0),
-    capacity,
-  );
-
-  const errors = getFormSyncErrors(form)(state);
+  const assetManifest = getAssetManifest(state);
+  const manifestType = get(assetManifest, [item.content, 'type']);
 
   return {
-    spareCapacity,
-    errors,
+    ...item,
+    type: manifestType,
   };
 };
 
-const mapDispatchToProps = (dispatch, { form }) => ({
-  createNewItem: () => {
-    const itemId = uuid();
-    dispatch(arrayPush(form, 'items', { id: itemId, size: sizes.SMALL }));
-    return itemId;
-  },
-  setInputType: (fieldId, type) => dispatch(change(form, `${fieldId}.type`, type)),
-});
+const ContentGrid = props => (
+  <Grid
+    contentId="guidance.editor.content_items"
+    previewComponent={ItemPreview}
+    editComponent={ItemEditor}
+    normalize={normalizeType}
+    itemSelector={denormalizeType}
+    title="Edit Items"
+    capacity={capacity}
+    {...props}
+  >
+    <h2>Edit Items</h2>
+    <p>
+      Add up to 4 &quot;items&quot; below.
+    </p>
+    <p>
+      Items can be resized by dragging.
+    </p>
+    <p>
+      Available sizes are: Small (1 space), Medium (2 spaces) and large (4 spaces).
+    </p>
+  </Grid>
+);
 
 export { ContentGrid };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContentGrid);
+export default ContentGrid;

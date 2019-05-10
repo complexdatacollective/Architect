@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withAssetUrl from './withAssetUrl';
 
-const Video = ({ url, description, ...props }) =>
+const Video = ({ url, description, dispatch, ...props }) =>
   <video src={url} {...props} playsInline>{description}</video>;
 
 Video.propTypes = {

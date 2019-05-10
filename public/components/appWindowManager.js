@@ -1,6 +1,7 @@
 const { BrowserWindow, Menu } = require('electron');
 const url = require('url');
 const path = require('path');
+const log = require('./log');
 const mainMenu = require('./mainMenu');
 
 const isMacOS = () => process.platform === 'darwin';
@@ -11,16 +12,24 @@ global.appWindow = null;
 
 function getAppUrl() {
   if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
-    return url.format({
+    const appUrl = url.format({
       host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
       protocol: 'http',
     });
+
+    log.info('appUrl host:', appUrl);
+
+    return appUrl;
   }
 
-  return url.format({
+  const appUrl = url.format({
     pathname: path.join(__dirname, '../', 'index.html'),
     protocol: 'file:',
   });
+
+  log.info('appUrl path: ', appUrl);
+
+  return appUrl;
 }
 
 function createWindow() {

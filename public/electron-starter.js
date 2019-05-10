@@ -1,8 +1,9 @@
 const { app } = require('electron');
 const log = require('./components/log');
-
-const previewManager = require('./components/previewManager');
+const createPreviewManager = require('./components/createPreviewManager');
 const appManager = require('./components/appManager');
+
+global.NETWORK_CANVAS_PREVIEW = true;
 
 log.info('App starting...');
 appManager.init();
@@ -22,7 +23,9 @@ if (shouldQuit) {
 app.on('ready', () => {
   console.log('ready');
   appManager.start();
-  previewManager.init();
+  createPreviewManager().then(() => {
+    log.info('created preview manager');
+  });
   // appManager.loadDevTools();
 });
 

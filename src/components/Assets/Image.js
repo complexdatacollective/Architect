@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withAssetUrl from './withAssetUrl';
 
-const Image = ({ url, alt, ...props }) =>
+const Image = ({ url, alt, dispatch, ...props }) =>
   <img src={url} alt={alt} {...props} />;
 
 Image.propTypes = {

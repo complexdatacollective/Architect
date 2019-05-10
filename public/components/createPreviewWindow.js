@@ -4,6 +4,8 @@ const path = require('path');
 const log = require('./log');
 const { dispatch, actionCreators } = require('./actions');
 
+global.previewWindow = null;
+
 let settings = {
   width: 1024,
   height: 768,
@@ -138,20 +140,26 @@ const getPreviewMenu = (window) => {
   return menu;
 };
 
-global.previewWindow = null;
-
 function getAppUrl() {
-  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
-    return url.format({
-      host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
+  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_NC_DEV_SERVER_PORT) {
+    const appUrl = url.format({
+      host: `localhost:${process.env.WEBPACK_NC_DEV_SERVER_PORT}/`,
       protocol: 'http',
     });
+
+    log.info('appUrl host:', appUrl);
+
+    return appUrl;
   }
 
-  return url.format({
-    pathname: path.join(__dirname, '../', 'index.html'),
+  const appUrl = url.format({
+    pathname: path.join(__dirname, '../network-canvas/', 'index.html'),
     protocol: 'file:',
   });
+
+  log.info('appUrl path: ', appUrl);
+
+  return appUrl;
 }
 
 function createWindow() {
@@ -173,15 +181,23 @@ function createWindow() {
       evt.preventDefault();
     });
 
+    // global.previewWindow.on('closed', () => {
+    //   // Dereference the window object, usually you would store windows
+    //   // in an array if your app supports multi windows, this is the time
+    //   // when you should delete the corresponding element.
+    //   global.previewWindow = null;
+    // });
+
     global.previewWindow.on('focus', () => {
       Menu.setApplicationMenu(previewMenu);
     });
 
-    global.previewWindow.on('closed', () => {
-      // Dereference the window object, usually you would store windows
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
-      global.previewWindow = null;
+    global.previewWindow.on('close', (e) => {
+      e.preventDefault();
+
+      global.previewWindow.hide();
+
+      return false;
     });
 
     global.previewWindow.webContents.on('did-finish-load', () => resolve(global.previewWindow));
@@ -194,35 +210,17 @@ function createWindow() {
   });
 }
 
-const windowManager = {
-  get hasWindow() { return !!global.appWindow; },
-  getWindow: function getWindow() {
-    return createWindow();
-  },
-  openPreview: function openPreview({ protocol, path: workingPath, stageIndex }) {
-    this.getWindow().then(
-      (window) => {
-        log.info('OPEN_PREVIEW', protocol.name, workingPath, stageIndex);
-
-        window.webContents.send('ACTION', {
-          type: 'PREVIEW/OPEN_PREVIEW',
-          protocol,
-          path: workingPath,
-          stageIndex,
-        });
-        window.show();
-        window.moveTop();
+const createPreviewWindow = () =>
+  createWindow()
+    .then(window => ({
+      window,
+      loadIndex: () => {
+        window.loadURL(getAppUrl());
       },
-    );
-  },
-  closePreview: function closePreview() {
-    this.getWindow().then(
-      (window) => {
-        log.info('HIDE_PREVIEW');
-        window.hide();
-      },
-    );
-  },
-};
+      webContents: window.webContents,
+      send: (...args) => window.webContents.send(...args),
+      show: () => window.show(),
+      hide: () => window.hide(),
+    }));
 
-module.exports = windowManager;
+module.exports = createPreviewWindow;
