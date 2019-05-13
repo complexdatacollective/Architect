@@ -30,9 +30,10 @@ const TypeEditor = ({
       { !type && <h1 className="editor__heading">Create {entity}</h1> }
 
       <Guidance contentId="guidance.registry.type.label" className="editor__section">
-        <h3 id={getFieldId('name')}>Name</h3>
+        <h3 id={getFieldId('name')}>Node Type</h3>
         <p>
-          The node name is how you will refer to this node type in the rest of Architect.
+          What type of node is this? Common examples might be &quot;Person&quot;,
+          &quot;Place&quot;, or &quot;Agency&quot;.
         </p>
         <ValidatedField
           component={Fields.Text}

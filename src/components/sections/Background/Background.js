@@ -1,31 +1,28 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import {
   Field,
 } from 'redux-form';
-import * as Fields from '../../ui/components/Fields';
-import * as ArchitectFields from '../Form/Fields';
-import Section from './Section';
-import Row from './Row';
+import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import * as Fields from '../../../ui/components/Fields';
+import DetachedField from '../../DetachedField';
+import ValidatedField from '../../Form/ValidatedField';
+import * as ArchitectFields from '../../Form/Fields';
+import Section from '../Section';
+import Row from '../Row';
+import withBackgroundChangeHandler from './withBackgroundChangeHandler';
 
-// Background options
-const BACKGROUND_IMAGE = 'BACKGROUND/BACKGROUND_IMAGE';
-const CONCENTRIC_CIRCLES = 'BACKGROUND/CONCENTRIC_CIRCLES';
-
-class Background extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      backgroundType: CONCENTRIC_CIRCLES,
-    };
-  }
-
-  handleChooseBackgroundType = (option) => {
-    this.setState({ backgroundType: option });
-  }
+class Background extends PureComponent {
+  static propTypes = {
+    handleChooseBackgroundType: PropTypes.func.isRequired,
+    useImage: PropTypes.bool.isRequired,
+  };
 
   render() {
-    const { backgroundType } = this.state;
+    const {
+      handleChooseBackgroundType,
+      useImage,
+    } = this.props;
 
     return (
       <Section contentId="guidance.editor.background">
@@ -38,22 +35,21 @@ class Background extends React.Component {
           </p>
         </Row>
         <Row>
-          <ArchitectFields.Mode
-            label="Choose a background type"
+          <DetachedField
+            component={ArchitectFields.Mode}
+            value={useImage}
             options={[
-              { value: CONCENTRIC_CIRCLES, label: 'Circles' },
-              { value: BACKGROUND_IMAGE, label: 'Image' },
+              { value: false, label: 'Circles' },
+              { value: true, label: 'Image' },
             ]}
-            input={{
-              value: backgroundType,
-              onChange: this.handleChooseBackgroundType,
-            }}
+            onChange={handleChooseBackgroundType}
+            label="Choose a background type"
           />
         </Row>
-        { (backgroundType === CONCENTRIC_CIRCLES) &&
+        { (!useImage) &&
           <React.Fragment>
             <Row>
-              <Field
+              <ValidatedField
                 name="background.concentricCircles"
                 component={Fields.Number}
                 label="Number of concentric circles to use:"
@@ -72,7 +68,7 @@ class Background extends React.Component {
             </Row>
           </React.Fragment>
         }
-        { (backgroundType === BACKGROUND_IMAGE) &&
+        { (useImage) &&
           <Row>
             <div style={{ position: 'relative', minHeight: '100px' }}>
               <Field
@@ -88,4 +84,8 @@ class Background extends React.Component {
   }
 }
 
-export default Background;
+export { Background };
+
+export default compose(
+  withBackgroundChangeHandler,
+)(Background);

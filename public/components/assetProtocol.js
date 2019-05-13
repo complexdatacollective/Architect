@@ -15,7 +15,8 @@ const isValidPath = filePath =>
 
 const registerProtocol = () =>
   protocol.registerFileProtocol(protocolName, (request, callback) => {
-    const filePath = path.normalize(request.url.substr(protocolName.length + 2));
+    const decodedURI = decodeURIComponent(request.url.substr(protocolName.length + 2));
+    const filePath = path.normalize(decodedURI);
 
     if (!isValidPath(filePath)) {
       throw new Error('path outside of valid directories');

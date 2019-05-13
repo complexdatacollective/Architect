@@ -45,8 +45,13 @@ const HighlightFields = ({
           component={ArchitectFields.CreatableSelect}
           label="Toggle variable of the following type"
           onCreateOption={value => handleCreateVariable(value, 'boolean')}
-          placeholder="&mdash; Select or create a new variable to toggle &mdash;"
+          placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
           options={highlightVariablesForSubject}
+          formatCreateLabel={inputValue => (
+            <span>
+              Press enter to create a new boolean variable named &quot;{inputValue}&quot;.
+            </span>
+          )}
         />
       </Row>
     </Section>

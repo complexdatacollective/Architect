@@ -35,6 +35,11 @@ const PromptFields = ({
     <Section>
       <Row>
         <h3 id={getFieldId('text')}>Text for Prompt</h3>
+        <p>Enter the text that the participant will see below.</p>
+        <p><strong>
+          Tip: You can use markdown formatting in this prompt to create
+          bold or underlined text.
+        </strong></p>
         <ValidatedField
           name={'text'}
           component={TextArea}
@@ -53,6 +58,11 @@ const PromptFields = ({
           onCreateOption={openNewVariableWindow}
           onDeleteOption={handleDeleteVariable}
           validation={{ required: true }}
+          formatCreateLabel={inputValue => (
+            <span>
+              Press enter to create a new categorical variable named &quot;{inputValue}&quot;.
+            </span>
+          )}
         />
       </Row>
       <Row>

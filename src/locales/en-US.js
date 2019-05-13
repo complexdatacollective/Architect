@@ -245,7 +245,7 @@ export default {
       </p>
       <p>
         Node types are fundamental to the way that Network Canvas works. A node&apos;s type
-        determines it&apos;s visual properties, as well as the variables available to assign on
+        determines its visual properties, as well as the variables available to assign on
         other interfaces.
       </p>
     </Fragment>
@@ -253,7 +253,7 @@ export default {
   'guidance.editor.quickAdd': (
     <Fragment>
       <h3>The Quick Add function</h3>
-      <p>Using the quick add function allowa your participants to create a node by simply
+      <p>Using the quick add function allows your participants to create a node by simply
         entering a display label for it and pressing the enter key. The quick add form does not
         obscure the node list, and will stay open and focused while the participant types,
         providing an ideal environment for quickly listing off names.
@@ -368,7 +368,7 @@ export default {
       </p>
       <p>
         Prompts should be carefully considered, and grounded in existing literature wherever
-        possible.  Think carefully about if you want to use one name generator with muiltiple
+        possible.  Think carefully about if you want to use one name generator with multiple
         prompts, or many name generators with a single prompt. Your choice depends on your specific
         research goals, and the needs of your research population.
       </p>
@@ -389,7 +389,7 @@ export default {
       </p>
       <p>
         Prompts should be carefully considered, and grounded in existing literature wherever
-        possible.  Think carefully about if you want to use one name generator with muiltiple
+        possible.  Think carefully about if you want to use one name generator with multiple
         prompts, or many name generators with a single prompt. Your choice depends on your specific
         research goals, and the needs of your research population.
       </p>
@@ -410,7 +410,7 @@ export default {
       </p>
       <p>
         Prompts should be carefully considered, and grounded in existing literature wherever
-        possible.  Think carefully about if you want to use one name generator with muiltiple
+        possible.  Think carefully about if you want to use one name generator with multiple
         prompts, or many name generators with a single prompt. Your choice depends on your specific
         research goals, and the needs of your research population.
       </p>

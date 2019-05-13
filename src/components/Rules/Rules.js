@@ -39,8 +39,8 @@ const Rules = ({
       <DetachedField
         component={RadioGroup}
         options={[
-          { label: 'All', value: 'AND' },
-          { label: 'Any', value: 'OR' },
+          { label: 'All of the following rules', value: 'AND' },
+          { label: 'Any of the following rules', value: 'OR' },
         ]}
         value={join}
         onChange={handleChangeJoin}

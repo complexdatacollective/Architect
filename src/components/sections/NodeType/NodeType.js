@@ -6,9 +6,7 @@ import cx from 'classnames';
 import Button from '../../../ui/components/Button';
 import { getFieldId } from '../../../utils/issues';
 import NodeSelect from '../../Form/Fields/NodeSelect';
-import Select from '../../Form/Fields/Select';
 import ValidatedField from '../../Form/ValidatedField';
-import DetachedField from '../../DetachedField';
 import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
@@ -24,9 +22,6 @@ class NodeType extends Component {
     handleResetStage: PropTypes.func.isRequired,
     handleOpenCreateNewType: PropTypes.func.isRequired,
     handleTypeScreenMessage: PropTypes.func.isRequired,
-    displayVariable: PropTypes.string,
-    handleChangeDisplayVariable: PropTypes.func.isRequired,
-    displayVariableOptions: PropTypes.array.isRequired,
   };
 
   static defaultProps = {
@@ -46,9 +41,6 @@ class NodeType extends Component {
       disabled,
       handleResetStage,
       handleOpenCreateNewType,
-      displayVariable,
-      handleChangeDisplayVariable,
-      displayVariableOptions,
     } = this.props;
 
     const nodeTypeClasses = cx('stage-editor-section', 'stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
@@ -58,7 +50,7 @@ class NodeType extends Component {
         <Row>
           <div id={getFieldId('subject')} data-name="Node type" />
           <h2>Node Type</h2>
-          <p>Which node type is used on this interface?</p>
+          <p>Which node type is used on this stage?</p>
           <div
             className="stage-editor-section-node-type__edit"
             onClick={handleResetStage}
@@ -90,31 +82,6 @@ class NodeType extends Component {
             </div>
           </div>
         </Row>
-
-        { disabled &&
-          <Row>
-            <h4>Display Variable</h4>
-            <p>
-                Optionally, you may specify a variable to use as a label when displaying this node.
-                If you do not specify a variable, Network Canvas will select an appropriate
-                one for you, using <a href="https://documentation.networkcanvas.com">these rules</a>.
-            </p>
-            <p>
-              <strong>
-                This open is global: changing it here will change it for every interface that uses
-                this node type.
-              </strong>
-            </p>
-            <DetachedField
-              label=""
-              component={Select}
-              placeholder="&mdash; Select or create a display variable &mdash;"
-              value={displayVariable}
-              onChange={handleChangeDisplayVariable}
-              options={displayVariableOptions}
-            />
-          </Row>
-        }
       </Section>
     );
   }

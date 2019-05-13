@@ -10,6 +10,7 @@ import Section from '../Section';
 import withEdgesOptions from './withEdgesOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
 import withCreateEdgeHandlers from '../../enhancers/withCreateEdgeHandler';
+import { ValidatedField } from '../../Form';
 
 const EdgeFields = ({
   edgesForSubject,
@@ -34,14 +35,6 @@ const EdgeFields = ({
         </p>
       </Row>
       <Row>
-        <Field
-          name="edges.display"
-          component={Fields.CheckboxGroup}
-          options={edgesForSubject}
-          label="Display edges of the following type(s):"
-        />
-      </Row>
-      <Row>
         <DetachedField
           component={Fields.Toggle}
           value={canCreateEdge}
@@ -53,16 +46,37 @@ const EdgeFields = ({
       </Row>
       { canCreateEdge &&
         <Row>
-          <Field
+          <ValidatedField
             name="edges.create"
             component={ArchitectFields.CreatableSelect}
             options={edgesForSubject}
             onCreateOption={handleCreateEdge}
-            placeholder="&mdash; Select or create a new edge type &mdash;"
+            placeholder="&mdash; Select an edge type, or type to create a new one &mdash;"
             label="Create edges of the following type"
+            validation={{ required: true }}
+            formatCreateLabel={inputValue => (
+              <span>Press enter to create a edge type named &quot;{inputValue}&quot;.</span>
+            )}
           />
         </Row>
       }
+      <Row>
+        { edgesForSubject.length > 0 ?
+          (
+            <Field
+              name="edges.display"
+              component={Fields.CheckboxGroup}
+              options={edgesForSubject}
+              label="Display edges of the following type(s):"
+            />
+          ) : (
+            <React.Fragment>
+              <h4>No edge types defined.</h4>
+              <p>Create some edge types elsewhere in your interview, and they will appear here.</p>
+            </React.Fragment>
+          )
+        }
+      </Row>
     </Section>
   );
 };

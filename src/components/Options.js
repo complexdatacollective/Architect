@@ -17,7 +17,7 @@ const isNumberLike = value =>
 
 const minTwoOptions = value => (
   !value || value.length < 2 ?
-    'Requires a minimum of two options (a single option can be modelled by a checkbox field)' :
+    'Requires a minimum of two options. If you need fewer options, consider using a boolean variable.' :
     undefined
 );
 

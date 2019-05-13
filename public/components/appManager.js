@@ -33,7 +33,7 @@ const appManager = {
     });
   },
   loadDevTools: () => {
-    const extensions = process.env.NC_DEVTOOLS_EXENSION_PATH;
+    const extensions = process.env.NC_DEVTOOLS_EXTENSION_PATH;
     if (process.env.NODE_ENV !== 'development' || !extensions) { return; }
     try {
       log.info(extensions);
@@ -44,8 +44,8 @@ const appManager = {
     } catch (err) {
       /* eslint-disable no-console */
       log.warn(err);
-      log.warn('A Chrome dev tools extension failed to load. If the extension has upgraded, update your NC_DEVTOOLS_EXENSION_PATH:');
-      log.warn(process.env.NC_DEVTOOLS_EXENSION_PATH);
+      log.warn('A Chrome dev tools extension failed to load. If the extension has upgraded, update your NC_DEVTOOLS_EXTENSION_PATH:');
+      log.warn(process.env.NC_DEVTOOLS_EXTENSION_PATH);
       /* eslint-enable */
     }
   },
