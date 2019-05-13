@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import { omit, get } from 'lodash';
-import { getCodebook } from '../../../selectors/codebook';
+import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
 import { getNextCategoryColor } from './utils';
@@ -11,6 +11,7 @@ const CREATE_TYPE = 'PROTOCOL/CREATE_TYPE';
 const DELETE_TYPE = 'PROTOCOL/DELETE_TYPE';
 const UPDATE_VARIABLE = 'PROTOCOL/UPDATE_VARIABLE';
 const CREATE_VARIABLE = 'PROTOCOL/CREATE_VARIABLE';
+const CREATE_VARIABLE_ERROR = 'PROTOCOL/CREATE_VARIABLE_ERROR';
 const DELETE_VARIABLE = 'PROTOCOL/DELETE_VARIABLE';
 
 const initialState = {
@@ -58,6 +59,15 @@ const createVariable = (entity, type, variable, configuration) => ({
     type,
     entity,
     variable,
+  },
+  configuration,
+});
+
+const createVariableError = (entity, type, configuration) => ({
+  type: CREATE_VARIABLE_ERROR,
+  meta: {
+    type,
+    entity,
   },
   configuration,
 });
@@ -110,7 +120,17 @@ const createEdgeThunk = configuration =>
   };
 
 const createVariableThunk = (entity, type, configuration) =>
-  (dispatch) => {
+  (dispatch, getState) => {
+    const variables = getVariablesForSubject(getState(), { entity, type });
+    const variableNameExists = variables
+      .some(({ name }) => name === configuration.name);
+
+    // We can't use same variable name twice.
+    if (variableNameExists) {
+      dispatch(createVariableError(entity, type, configuration));
+      return null;
+    }
+
     const variable = uuid();
 
     dispatch(createVariable(entity, type, variable, configuration));
