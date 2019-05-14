@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
 import { getFieldId } from '../../utils/issues';
 import * as Fields from '../../ui/components/Fields';
 import ValidatedField from '../Form/ValidatedField';
@@ -9,12 +10,14 @@ import Options from '../Options';
 import Section from '../sections/Section';
 import FormWindow from '../FormWindow';
 import withNewVariableHandler, { form } from './withNewVariableHandler';
+import { validateName } from '../../utils/validations';
 
 const NewVariableWindow = ({
   show,
   variableType,
   allowVariableTypes,
   handleCreateNewVariable,
+  existingVariableNames,
   onCancel,
   initialValues,
 }) => {
@@ -32,6 +35,7 @@ const NewVariableWindow = ({
       onSubmit={handleCreateNewVariable}
       onCancel={onCancel}
       initialValues={initialValues}
+      existingVariableNames={existingVariableNames}
     >
       <Section contentId="guidance.newVariable.name">
         <h3 id={getFieldId('name')}>Variable name</h3>
@@ -39,11 +43,11 @@ const NewVariableWindow = ({
           Enter a name for this variable. The variable name is how you will reference
           the variable elsewhere, including in exported data.
         </p>
-        <ValidatedField
+        <Field
           name="name"
           component={Fields.Text}
           placeholder="e.g. Nickname"
-          validation={{ required: true }}
+          validate={validateName}
         />
       </Section>
       <Section contentId="guidance.newVariable.type">
@@ -82,6 +86,7 @@ NewVariableWindow.propTypes = {
   handleCreateNewVariable: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   initialValues: PropTypes.object,
+  existingVariableNames: PropTypes.array.isRequired,
 };
 
 NewVariableWindow.defaultProps = {

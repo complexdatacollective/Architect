@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { omit, get } from 'lodash';
+import { omit, get, has } from 'lodash';
 import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
@@ -11,7 +11,6 @@ const CREATE_TYPE = 'PROTOCOL/CREATE_TYPE';
 const DELETE_TYPE = 'PROTOCOL/DELETE_TYPE';
 const UPDATE_VARIABLE = 'PROTOCOL/UPDATE_VARIABLE';
 const CREATE_VARIABLE = 'PROTOCOL/CREATE_VARIABLE';
-const CREATE_VARIABLE_ERROR = 'PROTOCOL/CREATE_VARIABLE_ERROR';
 const DELETE_VARIABLE = 'PROTOCOL/DELETE_VARIABLE';
 
 const initialState = {
@@ -59,15 +58,6 @@ const createVariable = (entity, type, variable, configuration) => ({
     type,
     entity,
     variable,
-  },
-  configuration,
-});
-
-const createVariableError = (entity, type, configuration) => ({
-  type: CREATE_VARIABLE_ERROR,
-  meta: {
-    type,
-    entity,
   },
   configuration,
 });
@@ -127,8 +117,7 @@ const createVariableThunk = (entity, type, configuration) =>
 
     // We can't use same variable name twice.
     if (variableNameExists) {
-      dispatch(createVariableError(entity, type, configuration));
-      return null;
+      throw new Error(`Variable with name "${configuration.name}" already exists`);
     }
 
     const variable = uuid();
@@ -140,6 +129,18 @@ const createVariableThunk = (entity, type, configuration) =>
       type,
       variable,
     };
+  };
+
+const updateVariableThunk = (entity, type, variable, configuration) =>
+  (dispatch, getState) => {
+    const state = getState();
+    const variableExists = has(getVariablesForSubject(state, { entity, type }), variable);
+
+    if (!variableExists) {
+      throw new Error(`Variable "${variable}" does not exist`);
+    }
+
+    dispatch(updateVariable(entity, type, variable, configuration));
   };
 
 const deleteVariableThunk = (entity, type, variable) =>
@@ -285,7 +286,7 @@ const actionCreators = {
   deleteType: deleteTypeThunk,
   createVariable: createVariableThunk,
   deleteVariable: deleteVariableThunk,
-  updateVariable,
+  updateVariable: updateVariableThunk,
   updateDisplayVariable: updateDisplayVariableThunk,
 };
 

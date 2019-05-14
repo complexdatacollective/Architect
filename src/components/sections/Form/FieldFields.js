@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { formValueSelector, change } from 'redux-form';
+import { formValueSelector, change, Field } from 'redux-form';
 import { withHandlers, compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
@@ -11,6 +11,7 @@ import Options from '../../Options';
 import Validations from '../../Validations';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
 import inputOptions, { getTypeForComponent, isVariableTypeWithOptions } from '../../Form/inputOptions';
+import { validateName } from '../../../utils/validations';
 import Row from '../Row';
 import Section from '../Section';
 
@@ -36,7 +37,11 @@ const handlers = {
     },
 };
 
-const PromptFields = ({ form, variableType, handleChangeComponent }) => (
+const PromptFields = ({
+  form,
+  variableType,
+  handleChangeComponent,
+}) => (
   <Section>
     <Row contentId="guidance.section.form.field.name">
       <h3 id={getFieldId('name')}>Variable name</h3>
@@ -44,12 +49,11 @@ const PromptFields = ({ form, variableType, handleChangeComponent }) => (
         Enter a name for this variable. The variable name is how you will
         reference the variable elsewhere, including in exported data.
       </p>
-      <ValidatedField
+      <Field
         name="name"
         component={Fields.Text}
         placeholder="e.g. Name"
-        validation={{ required: true }}
-        // TODO: safename
+        validate={validateName}
       />
     </Row>
     <Row contentId="guidance.section.form.field.prompt">
