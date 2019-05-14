@@ -124,7 +124,6 @@ class Select extends PureComponent {
           // a round about way, and still allow us to use the `touched` property.
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
-          giveThisToOption={() => false}
           {...rest}
         >
           {children}
