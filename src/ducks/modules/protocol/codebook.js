@@ -122,7 +122,7 @@ const createEdgeThunk = configuration =>
 const createVariableThunk = (entity, type, configuration) =>
   (dispatch, getState) => {
     const variables = getVariablesForSubject(getState(), { entity, type });
-    const variableNameExists = variables
+    const variableNameExists = Object.values(variables)
       .some(({ name }) => name === configuration.name);
 
     // We can't use same variable name twice.
