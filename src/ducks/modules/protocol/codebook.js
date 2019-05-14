@@ -115,6 +115,8 @@ const createVariableThunk = (entity, type, configuration) =>
     const variableNameExists = Object.values(variables)
       .some(({ name }) => name === configuration.name);
 
+    // console.log('HI IT ME', { variables, values: Object.values(variables), variableNameExists });
+
     // We can't use same variable name twice.
     if (variableNameExists) {
       throw new Error(`Variable with name "${configuration.name}" already exists`);
@@ -303,6 +305,7 @@ const testing = {
   createType,
   deleteType,
   createVariable,
+  updateVariable,
   deleteVariable,
 };
 
