@@ -18,8 +18,9 @@ const getDraftStages = (protocol, stageMeta, draftStage) => {
 
   if (stageMeta.id) {
     return stages.map((stage) => {
-      if (stage.id !== draftStage.id) { return stage; }
-      return draftStage;
+      if (stage.id === draftStage.id) { return draftStage; }
+
+      return stage;
     });
   }
 
@@ -36,7 +37,6 @@ const SET_ZOOM = 'PREVIEW/ZOOM';
 const REFRESH_PREVIEW = 'PREVIEW/REFRESH_PREVIEW';
 const PREVIEW_DRAFT = 'PREVIEW/PREVIEW_DRAFT';
 const CLOSE_PREVIEW = 'PREVIEW/CLOSE_PREVIEW';
-const PREVIEW_STAGE_FROM_FORM = 'PREVIEW/PREVIEW_STAGE_FROM_FORM';
 
 const zoom = zoomFactor => ({
   type: SET_ZOOM,
@@ -78,10 +78,8 @@ const previewDraft = (draft, stageIndex) =>
 
     dispatch({
       type: PREVIEW_DRAFT,
-      meta: {
-        draft: draftProtocol,
-        stageIndex,
-      },
+      draft: draftProtocol,
+      stageIndex,
     });
 
     previewDriver.preview(draftProtocol, stageIndex);
@@ -89,14 +87,6 @@ const previewDraft = (draft, stageIndex) =>
 
 const previewStageFromForm = (stageMeta, formName) =>
   (dispatch, getState) => {
-    dispatch({
-      type: PREVIEW_STAGE_FROM_FORM,
-      meta: {
-        formName,
-        stage: stageMeta,
-      },
-    });
-
     const state = getState();
     const protocol = getProtocol(state);
 
@@ -110,7 +100,6 @@ const previewStageFromForm = (stageMeta, formName) =>
 
 const actionTypes = {
   PREVIEW_DRAFT,
-  PREVIEW_STAGE_FROM_FORM,
   SET_ZOOM,
   REFRESH_PREVIEW,
 };

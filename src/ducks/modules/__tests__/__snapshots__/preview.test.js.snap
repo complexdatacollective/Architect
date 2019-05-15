@@ -1,0 +1,299 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`preview previewStageFromForm() dispatches previewDraft() for end of stages 1`] = `
+Array [
+  Object {
+    "id": "bazz",
+    "prompts": Array [
+      Object {
+        "form": Object {
+          "fields": Array [
+            Object {
+              "variable": "alpha",
+            },
+            Object {
+              "variable": "1234-1234-4",
+            },
+          ],
+        },
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "foo",
+    },
+  },
+  Object {
+    "id": "pip",
+    "prompts": Array [
+      Object {
+        "form": Object {
+          "fields": Array [
+            Object {
+              "variable": "bravo",
+            },
+            Object {
+              "variable": "1234-1234-5",
+            },
+          ],
+        },
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "pop",
+    },
+  },
+  Object {
+    "id": "buzz",
+    "prompts": Array [
+      Object {
+        "id": "fizz",
+        "subject": Object {
+          "entity": "node",
+          "type": "foo",
+        },
+      },
+    ],
+  },
+  Object {
+    "id": "foxtrot",
+    "prompts": Array [
+      Object {
+        "id": "golf",
+        "subject": Object {
+          "entity": "node",
+          "type": "foo",
+        },
+      },
+      Object {
+        "id": "hotel",
+        "subject": Object {
+          "entity": "node",
+          "type": "pop",
+        },
+      },
+    ],
+  },
+  Object {
+    "id": "alpha",
+    "prompts": Array [
+      Object {
+        "edges": Object {
+          "creates": "charlie",
+          "display": Array [
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  Object {
+    "id": "mike",
+    "prompts": Array [
+      Object {
+        "id": "oscar",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  Object {
+    "fizz": "pop",
+  },
+]
+`;
+
+exports[`preview previewStageFromForm() dispatches previewDraft() for insert at index 1`] = `
+Array [
+  Object {
+    "id": "bazz",
+    "prompts": Array [
+      Object {
+        "form": Object {
+          "fields": Array [
+            Object {
+              "variable": "alpha",
+            },
+            Object {
+              "variable": "1234-1234-4",
+            },
+          ],
+        },
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "foo",
+    },
+  },
+  Object {
+    "id": "pip",
+    "prompts": Array [
+      Object {
+        "form": Object {
+          "fields": Array [
+            Object {
+              "variable": "bravo",
+            },
+            Object {
+              "variable": "1234-1234-5",
+            },
+          ],
+        },
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "pop",
+    },
+  },
+  Object {
+    "bazz": "buzz",
+  },
+  Object {
+    "id": "buzz",
+    "prompts": Array [
+      Object {
+        "id": "fizz",
+        "subject": Object {
+          "entity": "node",
+          "type": "foo",
+        },
+      },
+    ],
+  },
+  Object {
+    "id": "foxtrot",
+    "prompts": Array [
+      Object {
+        "id": "golf",
+        "subject": Object {
+          "entity": "node",
+          "type": "foo",
+        },
+      },
+      Object {
+        "id": "hotel",
+        "subject": Object {
+          "entity": "node",
+          "type": "pop",
+        },
+      },
+    ],
+  },
+  Object {
+    "id": "alpha",
+    "prompts": Array [
+      Object {
+        "edges": Object {
+          "creates": "charlie",
+          "display": Array [
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  Object {
+    "id": "mike",
+    "prompts": Array [
+      Object {
+        "id": "oscar",
+      },
+    ],
+    "type": "Sociogram",
+  },
+]
+`;
+
+exports[`preview previewStageFromForm() dispatches previewDraft() for stage id 1`] = `
+Array [
+  Object {
+    "id": "bazz",
+    "prompts": Array [
+      Object {
+        "form": Object {
+          "fields": Array [
+            Object {
+              "variable": "alpha",
+            },
+            Object {
+              "variable": "1234-1234-4",
+            },
+          ],
+        },
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "foo",
+    },
+  },
+  Object {
+    "foo": "bar",
+    "id": "pip",
+  },
+  Object {
+    "id": "buzz",
+    "prompts": Array [
+      Object {
+        "id": "fizz",
+        "subject": Object {
+          "entity": "node",
+          "type": "foo",
+        },
+      },
+    ],
+  },
+  Object {
+    "id": "foxtrot",
+    "prompts": Array [
+      Object {
+        "id": "golf",
+        "subject": Object {
+          "entity": "node",
+          "type": "foo",
+        },
+      },
+      Object {
+        "id": "hotel",
+        "subject": Object {
+          "entity": "node",
+          "type": "pop",
+        },
+      },
+    ],
+  },
+  Object {
+    "id": "alpha",
+    "prompts": Array [
+      Object {
+        "edges": Object {
+          "creates": "charlie",
+          "display": Array [
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  Object {
+    "id": "mike",
+    "prompts": Array [
+      Object {
+        "id": "oscar",
+      },
+    ],
+    "type": "Sociogram",
+  },
+]
+`;
