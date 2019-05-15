@@ -61,7 +61,7 @@ class Asset extends Component {
       </div>
     );
   }
-};
+}
 
 Asset.propTypes = {
   id: PropTypes.string.isRequired,
