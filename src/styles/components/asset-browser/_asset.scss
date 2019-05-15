@@ -70,9 +70,26 @@
         }
       }
     }
+  }
 
-    &--is-used {
+  &::after {
+    content: 'unused';
+    position: absolute;
+    top: unit(.5);
+    left: unit(.5);
+    background: var(--architect-active);
+    color: var(--text-light);
+    border-radius: unit(1);
+    padding: unit(.25) unit(.75);
+  }
+
+  &--is-used {
+    .asset-browser-asset__delete {
       cursor: not-allowed;
+    }
+
+    &::after {
+      display: none;
     }
   }
 }

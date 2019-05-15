@@ -35,15 +35,15 @@ class Asset extends Component {
 
     const PreviewComponent = ASSET_COMPONENTS[type] || FallBackAssetComponent;
 
-    const deleteClasses = cx(
-      'asset-browser-asset__delete',
-      { 'asset-browser-asset__delete--is-used': isUsed },
+    const assetClasses = cx(
+      'asset-browser-asset',
+      { 'asset-browser-asset--is-used': isUsed },
     );
 
     return (
       <div
         onClick={this.handleClick}
-        className="asset-browser-asset"
+        className={assetClasses}
       >
         <div className="asset-browser-asset__preview">
           <PreviewComponent id={id} />
@@ -51,7 +51,7 @@ class Asset extends Component {
 
         { onDelete &&
           <div
-            className={deleteClasses}
+            className="asset-browser-asset__delete"
             onClick={this.handleDelete}
             title={isUsed ? 'This asset is in use by the protocol and cannot be deleted' : ''}
           >
