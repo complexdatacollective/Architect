@@ -1,4 +1,4 @@
-.badge {
+%badge {
   display: inline-flex;
   background-color: var(--color-mid-grey);
   border-radius: unit(.5);
@@ -7,4 +7,8 @@
   font-size: .7rem;
   color: var(--text-light);
   text-transform: capitalize;
+}
+
+.badge {
+  @extend %badge;
 }

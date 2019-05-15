@@ -34,8 +34,8 @@
 
   &__delete {
     position: absolute;
-    top: unit(.5);
-    right: unit(.5);
+    top: unit(.75);
+    right: unit(.75);
     width: unit(2.6);
     height: unit(2.6);
     border-radius: unit(2.6);
@@ -73,14 +73,13 @@
   }
 
   &::after {
-    content: 'unused';
+    @extend %badge;
+    content: 'Unused';
     position: absolute;
-    top: unit(.5);
-    left: unit(.5);
-    background: var(--architect-active);
-    color: var(--text-light);
-    border-radius: unit(1);
-    padding: unit(.25) unit(.75);
+    margin: 0;
+    bottom: unit(.75);
+    left: unit(.75);
+    background: var(--error);
   }
 
   &--is-used {
