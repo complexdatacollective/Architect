@@ -16,9 +16,18 @@ const connectActions = connect(
 
 const assetHandlers = withHandlers({
   onDelete: ({ deleteAsset, openDialog }) =>
-    (assetId) => {
+    (assetId, isUsed = false) => {
+      if (isUsed) {
+        openDialog({
+          type: 'Notice',
+          title: 'Cannot delete asset',
+          message: 'Cannot delete this asset because it is used by the protocol.',
+          confirmLabel: 'Ok',
+        });
+        return;
+      }
+
       openDialog({
-        id: '1234-1234-1',
         type: 'Confirm',
         title: 'Delete Asset',
         message: 'Are you sure you want to delete this asset?',

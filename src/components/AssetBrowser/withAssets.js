@@ -9,6 +9,7 @@ import {
   withHandlers,
 } from 'recompose';
 import { getAssetManifest } from '../../selectors/protocol';
+import { getAssetIndex, utils as indexUtils } from '../../selectors/indexes';
 
 const filterByAssetType = (assetType, assets) => (
   assetType ?
@@ -31,10 +32,25 @@ const filterHandlers = withHandlers({
 });
 
 const mapStateToProps = (state, { assetType }) => {
-  const assets = getAssetManifest(state);
+  const allAssets = getAssetManifest(state);
+  const filteredAssets = filterAssets(assetType, allAssets);
+
+  // Get asset usage index
+  const assetIndex = getAssetIndex(state);
+  const assetSearch = indexUtils.buildSearch([assetIndex]);
+
+  // Check for asset usage
+  const assets = filteredAssets.map((asset) => {
+    if (!assetSearch.has(asset.id)) { return asset; }
+
+    return {
+      ...asset,
+      isUsed: true,
+    };
+  });
 
   return {
-    assets: filterAssets(assetType, assets),
+    assets,
   };
 };
 

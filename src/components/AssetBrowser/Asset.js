@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import Icon from '../../ui/components/Icon';
 import * as Assets from '../Assets';
 
@@ -14,45 +15,58 @@ const ASSET_COMPONENTS = {
   network: Assets.Network,
 };
 
-const Asset = ({
-  id,
-  onClick,
-  onDelete,
-  type,
-}) => {
-  const PreviewComponent = ASSET_COMPONENTS[type] || FallBackAssetComponent;
+class Asset extends Component {
+  handleClick = () => this.props.onClick(this.props.id);
 
-  const handleClick = () => onClick(id);
-
-  const handleDelete = (e) => {
+  handleDelete = (e) => {
+    const { isUsed, onDelete, id } = this.props;
     e.stopPropagation();
-    onDelete(id);
+
+    onDelete(id, isUsed);
   };
 
-  return (
-    <div
-      onClick={handleClick}
-      className="asset-browser-asset"
-    >
-      <div className="asset-browser-asset__preview">
-        <PreviewComponent id={id} />
-      </div>
+  render() {
+    const {
+      id,
+      onDelete,
+      type,
+      isUsed,
+    } = this.props;
 
-      { onDelete &&
-        <div
-          className="asset-browser-asset__delete"
-          onClick={handleDelete}
-        >
-          <Icon name="delete" />
+    const PreviewComponent = ASSET_COMPONENTS[type] || FallBackAssetComponent;
+
+    const deleteClasses = cx(
+      'asset-browser-asset__delete',
+      { 'asset-browser-asset__delete--is-used': isUsed },
+    );
+
+    return (
+      <div
+        onClick={this.handleClick}
+        className="asset-browser-asset"
+      >
+        <div className="asset-browser-asset__preview">
+          <PreviewComponent id={id} />
         </div>
-      }
-    </div>
-  );
+
+        { onDelete &&
+          <div
+            className={deleteClasses}
+            onClick={this.handleDelete}
+            title={isUsed ? 'This asset is in use by the protocol and cannot be deleted' : ''}
+          >
+            <Icon name="delete" />
+          </div>
+        }
+      </div>
+    );
+  }
 };
 
 Asset.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  isUsed: PropTypes.bool,
   onClick: PropTypes.func,
   onDelete: PropTypes.func,
 };
@@ -60,6 +74,7 @@ Asset.propTypes = {
 Asset.defaultProps = {
   onClick: () => {},
   onDelete: null,
+  isUsed: false,
 };
 
 export default Asset;
