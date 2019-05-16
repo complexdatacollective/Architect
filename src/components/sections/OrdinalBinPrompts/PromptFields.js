@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
-import TextArea from '../../../ui/components/Fields/TextArea';
+import Text from '../../../ui/components/Fields/Text';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ColorPicker from '../../Form/Fields/ColorPicker';
 import MultiSelect from '../../Form/MultiSelect';
@@ -35,24 +35,26 @@ const PromptFields = ({
   return (
     <Section>
       <Row>
-        <h3 id={getFieldId('text')}>Text for Prompt</h3>
-        <p>Enter the text that the participant will see below.</p>
+        <h3 id={getFieldId('text')}>Prompt Text</h3>
+        <p>
+          The prompt text instructs your participant about the task on this stage.
+          Enter the text to use for your prompt below.
+        </p>
         <p><strong>
-          Tip: You can use markdown formatting in this prompt to create
-          bold or underlined text.
+          Tip: You can use markdown formatting in this prompt to create bold or underlined text.
         </strong></p>
         <ValidatedField
           name="text"
-          component={TextArea}
+          component={Text}
           label=""
           placeholder="Enter text for the prompt here"
-          validation={{ required: true }}
+          validation={{ required: true, maxLength: 220 }}
         />
       </Row>
       <Row>
-        <h3 id={getFieldId('variable')}>Ordinal variable</h3>
+        <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
         <p>
-          Select an existing ordinal variable from the list below, or create a new onDeleteOption
+          Select an existing ordinal variable from the list below, or create a new one
           by typing a name into the box and pressing enter.
         </p>
         <ValidatedField
@@ -90,10 +92,10 @@ const PromptFields = ({
       <Row>
         <h3>Bucket Sort Order <small>(optional)</small></h3>
         <p>
-          Nodes begin in the bucket before they are placed, and so this option impacts the
-          order that nodes are categorised. You may optionally configure a list of rules
-          to determine how nodes are sorted in the bucket when the task starts. Network Canvas
-          will default to using the order in which nodes were named.
+          Nodes are stacked in the bucket before they are placed by the participant. You may
+          optionally configure a list of rules to determine how nodes are sorted in the bucket
+          when the task starts, which will determine the order that your participant places them
+          into bins. Network Canvas will default to using the order in which nodes were named.
         </p>
         <p><strong>
           Tip: Use the asterisk property to sort by the order that nodes were created.

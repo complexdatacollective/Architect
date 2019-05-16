@@ -27,7 +27,7 @@ const PromptFields = ({
       </p>
     </Row>
     <Row>
-      <h4>Layout variable</h4>
+      <h4>Layout Variable</h4>
       <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
       <p><strong>
         Tip: Remember, you can create a new layout variable here by typing a name into the box.
@@ -44,20 +44,29 @@ const PromptFields = ({
         )}
       />
     </Row>
-    <Row>
-      <h4>Can nodes be positioned?</h4>
-      <p>Allow nodes to be positioned by dragging.</p>
+    {/* <Row>
+      <h4>Can nodes be positioned by the participant?</h4>
+      <p>
+        Nodes without any coordinates are stacked in a bucket in the bottom-center of the screen,
+        until your participant drags them into a position.
+      </p>
+      <p>
+        Disable this when your nodes already have coordinates (e.g from a previous interface), and
+        you wish to prevent your participant moving them.
+      </p>
       <Field
         name="layout.allowPositioning"
         component={Fields.Toggle}
         label="Allow positioning?"
       />
-    </Row>
+    </Row> */}
     { allowPositioning &&
       <Row contentId="guidance.editor.sociogram_prompt.sortOrder">
-        <h4>Sort unplaced nodes</h4>
+        <h4>Sort Unplaced Nodes <small>(optional)</small></h4>
         <p>
-          Would you like to sort unplaced nodes in the node bin?
+          Nodes without any coordinates are stacked in a bucket until your participant drags them
+          into position. You can control the order of this stack, which will determine the order
+          that your participant is able to position the nodes.
         </p>
         <Field
           name="sortOrder"
@@ -77,7 +86,7 @@ PromptFields.propTypes = {
 };
 
 PromptFields.defaultProps = {
-  allowPositioning: false,
+  allowPositioning: true,
 };
 
 export { PromptFields };

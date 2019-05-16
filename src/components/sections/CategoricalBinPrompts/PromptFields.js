@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
-import { TextArea } from '../../../ui/components/Fields';
+import { Text } from '../../../ui/components/Fields';
 import MultiSelect from '../../Form/MultiSelect';
 import Row from '../Row';
 import Section from '../Section';
@@ -34,22 +34,24 @@ const PromptFields = ({
   return (
     <Section>
       <Row>
-        <h3 id={getFieldId('text')}>Text for Prompt</h3>
-        <p>Enter the text that the participant will see below.</p>
+        <h3 id={getFieldId('text')}>Prompt Text</h3>
+        <p>
+          The prompt text instructs your participant about the task on this stage.
+          Enter the text to use for your prompt below.
+        </p>
         <p><strong>
-          Tip: You can use markdown formatting in this prompt to create
-          bold or underlined text.
+          Tip: You can use markdown formatting in this prompt to create bold or underlined text.
         </strong></p>
         <ValidatedField
           name={'text'}
-          component={TextArea}
+          component={Text}
           label=""
           placeholder="Enter text for the prompt here"
-          validation={{ required: true }}
+          validation={{ required: true, maxLength: 220 }}
         />
       </Row>
       <Row>
-        <h3 id={getFieldId('variable')}>Categorical variable</h3>
+        <h3 id={getFieldId('variable')}>Categorical Variable</h3>
         <ValidatedField
           name={'variable'}
           component={CreatableSelect}
@@ -66,10 +68,18 @@ const PromptFields = ({
         />
       </Row>
       <Row>
-        <h3>Bin Sort Order</h3>
-        <p>How should nodes be sorted when inside the bins?</p>
+        <h3>Bucket Sort Order <small>(optional)</small></h3>
+        <p>
+          Nodes are stacked in the bucket before they are placed by the participant. You may
+          optionally configure a list of rules to determine how nodes are sorted in the bucket
+          when the task starts, which will determine the order that your participant places them
+          into bins. Network Canvas will default to using the order in which nodes were named.
+        </p>
+        <p><strong>
+          Tip: Use the asterisk property to sort by the order that nodes were created.
+        </strong></p>
         <MultiSelect
-          name={'binSortOrder'}
+          name={'bucketSortOrder'}
           properties={[
             { fieldName: 'property' },
             { fieldName: 'direction' },
@@ -79,10 +89,13 @@ const PromptFields = ({
         />
       </Row>
       <Row>
-        <h3>Bucket Sort Order</h3>
-        <p>How would you like to sort the unplaced nodes?</p>
+        <h3>Bin Sort Order <small>(optional)</small></h3>
+        <p>
+          You may also configure one or more sort rules that determine the order that nodes
+          are listed after they have been placed into a bin.
+        </p>
         <MultiSelect
-          name={'bucketSortOrder'}
+          name={'binSortOrder'}
           properties={[
             { fieldName: 'property' },
             { fieldName: 'direction' },

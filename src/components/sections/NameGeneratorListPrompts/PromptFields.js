@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
-import { TextArea, Text } from '../../../ui/components/Fields';
+import { Text } from '../../../ui/components/Fields';
 import DataSource from '../../Form/Fields/DataSource';
 import MultiSelect from '../../Form/MultiSelect';
 import AssignAttributes from '../../AssignAttributes';
@@ -29,27 +29,29 @@ const PromptFields = ({
   return (
     <Section>
       <Row>
-        <h3 id={getFieldId('text')}>Text for Prompt</h3>
-        <p>Enter the text that the participant will see below.</p>
+        <h3 id={getFieldId('text')}>Prompt Text</h3>
+        <p>
+          The prompt text instructs your participant about the task on this stage.
+          Enter the text to use for your prompt below.
+        </p>
         <p><strong>
-          Tip: You can use markdown formatting in this prompt to create
-          bold or underlined text.
+          Tip: You can use markdown formatting in this prompt to create bold or underlined text.
         </strong></p>
         <ValidatedField
           name="text"
-          component={TextArea}
+          component={Text}
           label=""
           placeholder="Enter text for the prompt here"
-          validation={{ required: true }}
+          validation={{ required: true, maxLength: 220 }}
         />
       </Row>
       <Row>
         <h3>Assign Additional Variables? <small>(optional)</small></h3>
         <p>
-          You might also wish to assign additional variables to any nodes that are created by a
+          You can assign additional variables to any nodes that are created by a
           participant on this prompt. You can use this feature to keep track of meta-data,
           such as where a node was elicited, or to reflect a name interpreter element of
-          your prompt (for example by adding a variable called &quot;close_tie&quot; variable to a
+          your prompt (for example by adding a variable called &quot;close_tie&quot; to a
           prompt that asks about closeness).
         </p>
         <p>
@@ -67,8 +69,11 @@ const PromptFields = ({
       </Row>
       <Row>
         <div id={getFieldId('dataSource')} data-name="Roster data-source" />
-        <h3>External data-source for roster</h3>
-        <p>This prompt needs a source of nodes to populate the roster.</p>
+        <h3>External Data-source for Roster</h3>
+        <p>
+          This prompt needs a source of nodes to populate the roster.
+          Select a network data file to use.
+        </p>
         <ValidatedField
           component={DataSource}
           name="dataSource"
@@ -78,22 +83,27 @@ const PromptFields = ({
       { dataSource &&
         <Section group>
           <Row>
-            <h3>Card options</h3>
+            <h3>Card Display Options</h3>
             <p>
-              How would you like to the search results to be displayed?
+              This section controls how the cards (which represent each item in your roster
+              data file) are displayed to the participant.
             </p>
             <p>
-              Cards will use the <strong>label</strong> attribute from your external data as
+              Cards will use the <strong>name</strong> attribute from your external data as
               the main card title.
             </p>
           </Row>
           <Row>
             <h4>Additional Display Properties</h4>
             <p>
-              Would you like do display any other attributes to help identify each node?
+              Would you like to display any other attributes to help the participant recognize
+              a roster alter?
             </p>
             { maxAdditionalDisplayProperties === 0 &&
-              <p><em>Your external data does not contain any usable attributes.</em></p>
+              <p><em>
+                Your external data does not seem to contain any usable attributes.
+                Is it correctly formatted?
+              </em></p>
             }
             { maxAdditionalDisplayProperties > 0 &&
               <MultiSelect
@@ -119,14 +129,18 @@ const PromptFields = ({
       { dataSource &&
         <Section group>
           <Row>
-            <h3>Sort options</h3>
+            <h3>Sort Options</h3>
             <p>
-              How would you like to sort the available options?
+              This section controls how the cards in the roster are sorted.
             </p>
           </Row>
           <Row>
-            <h4>Default Sort Order</h4>
-            <p>How would you like to sort nodes by default?</p>
+            <h4>Initial Sort Order <small>(optional)</small></h4>
+            <p>
+              Create one or more rules to determine the default sort order or the roster,
+              when it is first shown to the participant. By default, Network Canvas will
+              use the order that nodes are defined in your data file.
+            </p>
             <MultiSelect
               name="sortOptions.sortOrder"
               maxItems={1}
@@ -138,9 +152,11 @@ const PromptFields = ({
             />
           </Row>
           <Row>
-            <h4>Sortable Properties</h4>
+            <h4>Participant Sortable Properties <small>(optional)</small></h4>
             <p>
-              What manual options would you like to provide for sorting nodes?
+              This interface allows the participant to sort the roster, to help with locating
+              a specific member. Select one or more attributes from your roster that the
+              participant can use to sort the list.
             </p>
             <MultiSelect
               name="sortOptions.sortableProperties"
