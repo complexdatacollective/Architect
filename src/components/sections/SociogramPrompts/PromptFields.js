@@ -29,8 +29,8 @@ const PromptFields = props => (
       />
     </Section>
     <FieldsLayout {...props} />
-    <FieldsHighlight {...props} />
     <FieldsEdges {...props} />
+    <FieldsHighlight {...props} />
   </div>
 );
 

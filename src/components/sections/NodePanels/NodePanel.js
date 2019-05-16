@@ -42,7 +42,7 @@ const NodePanel = ({ fieldId, ...rest }) => (
     <Row>
       <h3>Filter <small>(optional)</small></h3>
       <p>
-        You can (optionally) filter the data to be shown in this panel, by one or more rules
+        You can optionally filter the data to be shown in this panel, by creating one or more rules
         using the options below.
       </p>
       <Field
