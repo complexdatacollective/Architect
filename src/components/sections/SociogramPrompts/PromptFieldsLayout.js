@@ -5,7 +5,6 @@ import { compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import * as ArchitectFields from '../../Form/Fields';
-import * as Fields from '../../../ui/components/Fields';
 import Row from '../Row';
 import Section from '../Section';
 import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
