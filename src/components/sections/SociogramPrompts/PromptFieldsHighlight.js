@@ -43,7 +43,7 @@ const HighlightFields = ({
         <Field
           name="highlight.variable"
           component={ArchitectFields.CreatableSelect}
-          label="Toggle variable of the following type"
+          label="Toggle the following boolean variable"
           onCreateOption={value => handleCreateVariable(value, 'boolean')}
           placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
           options={highlightVariablesForSubject}
