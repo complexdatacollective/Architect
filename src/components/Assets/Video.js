@@ -1,20 +1,29 @@
-/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import PropTypes from 'prop-types';
-import withAssetUrl from './withAssetUrl';
+import cx from 'classnames';
+import Icon from '../../ui/components/Icon';
+import withAssetMeta from './withAssetMeta';
 
-const Video = ({ url, description, dispatch, ...props }) =>
-  <video src={url} {...props} playsInline>{description}</video>;
+const Video = ({ id, meta }) => (
+  <div className={cx('assets-video', { 'assets-video--existing': id === 'existing' })}>
+    <div className="assets-video__icon"><Icon name="menu-custom-interface" /></div>
+    <div className="assets-video__label">
+      {meta.name}
+    </div>
+  </div>
+);
 
 Video.propTypes = {
-  description: PropTypes.string,
-  url: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  meta: PropTypes.object,
 };
 
 Video.defaultProps = {
-  description: '',
+  meta: {
+    name: '',
+  },
 };
 
 export { Video };
 
-export default withAssetUrl(Video);
+export default withAssetMeta(Video);

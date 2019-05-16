@@ -73,7 +73,7 @@ const PromptFields = ({
         />
       </Row>
       <Row>
-        <div id={getFieldId('color')} data-name="Gradient color" />
+        <h3 id={getFieldId('color')} data-name="Gradient color">Color</h3>
         <p>
           Network Canvas will render each option in your ordinal variable using a
           color gradient. Which color would you like to use for this scale?

@@ -35,7 +35,7 @@ const AssetBrowserScreen = ({
               <h1 className="editor__heading">Assets</h1>
               <p>
                 Welcome to the asset management screen. Here, you can load in images,
-                video, audio, or even externalnetwork data which can be used elsewhere
+                video, audio, or even external network data which can be used elsewhere
                 within your protocol.
               </p>
               <Guidance contentId="guidance.screen.assets">

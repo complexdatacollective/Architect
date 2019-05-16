@@ -10,6 +10,7 @@ import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
 import withFieldChangeHandlers from './withFieldChangeHandlers';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
+import withDisabledFormTitle from '../../enhancers/withDisabledFormTitle';
 import { itemSelector, normalizeField } from './helpers';
 
 const Form = ({
@@ -19,6 +20,7 @@ const Form = ({
   type,
   entity,
   existingVariableNames,
+  disableFormTitle,
 }) => (
   <Section disabled={disabled} group contentId="guidance.section.form">
     <div id={getFieldId('form.title')} data-name="Form title" />
@@ -26,6 +28,7 @@ const Form = ({
     <p>
       Use this section to define the fields to collect when this form is shown.
     </p>
+    {!disableFormTitle &&
     <ValidatedField
       name="form.title"
       label="Form heading text (e.g 'Add a person')"
@@ -34,7 +37,7 @@ const Form = ({
       className="stage-editor-section-title"
       validation={{ required: true }}
     />
-
+    }
     <EditableList
       editComponent={FieldFields}
       editProps={{
@@ -66,6 +69,7 @@ Form.propTypes = {
   handleChangeFields: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  disableFormTitle: PropTypes.bool,
   type: PropTypes.string,
   entity: PropTypes.string,
   existingVariableNames: PropTypes.array.isRequired,
@@ -73,6 +77,7 @@ Form.propTypes = {
 
 Form.defaultProps = {
   disabled: false,
+  disableFormTitle: false,
   type: null,
   entity: null,
 };
@@ -81,5 +86,6 @@ export { Form };
 
 export default compose(
   withFieldChangeHandlers,
+  withDisabledFormTitle,
   withDisabledSubjectRequired,
 )(Form);

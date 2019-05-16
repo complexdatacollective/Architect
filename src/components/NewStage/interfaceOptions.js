@@ -4,7 +4,11 @@ const interfaceOptions = [
     interfaces: [
       {
         type: 'NameGenerator',
-        title: 'Name Generator',
+        title: 'Name Generator (using forms)',
+      },
+      {
+        type: 'NameGeneratorQuickAdd',
+        title: 'Name Generator (using quick add)',
       },
       {
         type: 'NameGeneratorList',

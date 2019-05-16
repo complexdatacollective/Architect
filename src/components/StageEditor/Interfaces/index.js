@@ -2,6 +2,7 @@
 import { get } from 'lodash';
 import Information from './Information';
 import NameGenerator from './NameGenerator';
+import NameGeneratorQuickAdd from './NameGeneratorQuickAdd';
 import NameGeneratorList from './NameGeneratorList';
 import NameGeneratorAutoComplete from './NameGeneratorAutoComplete';
 import Sociogram from './Sociogram';
@@ -15,6 +16,7 @@ import Narrative from './Narrative';
 const interfaces = {
   Information,
   NameGenerator,
+  NameGeneratorQuickAdd,
   NameGeneratorList,
   NameGeneratorAutoComplete,
   Sociogram,
