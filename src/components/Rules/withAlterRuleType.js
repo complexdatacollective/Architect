@@ -20,11 +20,11 @@ const withAlterRuleType = compose(
     'setAlterRuleType',
     // If an existing rule, we need to determine the type
     ({ rule }) => {
-      const { options: { variable, type } } = rule;
+      const { options: { attribute, type } } = rule;
 
       if (!type) { return null; }
 
-      const alterRuleType = variable ?
+      const alterRuleType = attribute ?
         VARIABLE_ALTER :
         TYPE_ALTER;
 

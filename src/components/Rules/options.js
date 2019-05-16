@@ -48,6 +48,8 @@ export const operatorsByType = {
   text: new Set(['EXACTLY', 'NOT']),
   number: new Set(['EXACTLY', 'NOT', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL']),
   boolean: new Set(['EXACTLY']),
+  ordinal: new Set(['EXACTLY']),
+  categorical: new Set(['EXACTLY']),
   exists: new Set(['EXISTS', 'NOT_EXISTS']), // TODO: Better words for these?
 };
 
@@ -57,11 +59,11 @@ export const templates = {
   alterVariableRule: {
     type: undefined,
     operator: undefined,
-    variable: undefined,
+    attribute: undefined,
     value: undefined,
   },
   egoRule: {
-    variable: undefined,
+    attribute: undefined,
     value: undefined,
   },
 };

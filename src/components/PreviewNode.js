@@ -14,7 +14,7 @@ const PreviewNode = ({
   type,
 }) => {
   const color = get(nodeTypes, [type, 'color'], 'node-color-seq-1');
-  const label = get(nodeTypes, [type, 'label'], '');
+  const label = get(nodeTypes, [type, 'name'], '');
 
   return (
     <Node label={label} color={color} />

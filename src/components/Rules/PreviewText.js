@@ -83,7 +83,7 @@ Copy.defaultProps = { children: '' };
 const PreviewText = ({ type, options }) => {
   switch (type) {
     case 'alter': {
-      if (!options.variable) {
+      if (!options.attribute) {
         return (
           <Fragment>
             <TypeOperator value={options.operator} />
@@ -100,7 +100,7 @@ const PreviewText = ({ type, options }) => {
             <Copy>of type</Copy>
             <Type>{options.type}</Type>
             <Operator value={options.operator} />
-            <Variable>{options.variable}</Variable>
+            <Variable>{options.attribute}</Variable>
           </Fragment>
         );
       }
@@ -110,7 +110,7 @@ const PreviewText = ({ type, options }) => {
           <Copy>of type</Copy>
           <Type>{options.type}</Type>
           <Copy>with</Copy>
-          <Variable>{options.variable}</Variable>
+          <Variable>{options.attribute}</Variable>
           <Operator value={options.operator} />
           <Value value={options.value} />
         </Fragment>
@@ -130,7 +130,7 @@ const PreviewText = ({ type, options }) => {
         <Fragment>
           <Entity>ego</Entity>
           <Copy>has</Copy>
-          <Variable>{options.variable}</Variable>
+          <Variable>{options.attribute}</Variable>
           <Operator value={options.operator} />
           <Value value={options.value} />
         </Fragment>

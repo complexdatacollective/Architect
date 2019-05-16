@@ -2,7 +2,7 @@ import { withHandlers } from 'recompose';
 
 const RULE_ORDER = [
   'type',
-  'variable',
+  'attribute',
   'operator',
   'value',
 ];

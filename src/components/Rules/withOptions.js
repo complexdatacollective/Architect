@@ -30,7 +30,7 @@ const getOperatorsForType = (type) => {
 const withOptions = entityCategory =>
   withProps((props) => {
     const entityId = get(props.rule, 'options.type', null);
-    const variableId = get(props.rule, 'options.variable', null);
+    const variableId = get(props.rule, 'options.attribute', null);
 
     const variablesRoot = entityCategory === 'ego' ?
       ['ego', 'variables'] :
@@ -40,7 +40,7 @@ const withOptions = entityCategory =>
 
     const typeOptions = map(entityTypes, (entity, id) => ({
       value: id,
-      label: entity.label,
+      label: entity.name,
       color: entity.color,
     }));
 
