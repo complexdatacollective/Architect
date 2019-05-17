@@ -101,6 +101,27 @@ Array [
     "type": "Sociogram",
   },
   Object {
+    "background": Object {
+      "image": "1234-asset-5",
+    },
+    "id": "assets",
+    "items": Array [
+      Object {
+        "content": "1234-asset-4",
+      },
+    ],
+    "panels": Array [
+      Object {
+        "dataSource": "1234-asset-2",
+      },
+    ],
+    "prompts": Array [
+      Object {
+        "dataSource": "1234-asset-3",
+      },
+    ],
+  },
+  Object {
     "fizz": "pop",
   },
 ]
@@ -209,6 +230,27 @@ Array [
     ],
     "type": "Sociogram",
   },
+  Object {
+    "background": Object {
+      "image": "1234-asset-5",
+    },
+    "id": "assets",
+    "items": Array [
+      Object {
+        "content": "1234-asset-4",
+      },
+    ],
+    "panels": Array [
+      Object {
+        "dataSource": "1234-asset-2",
+      },
+    ],
+    "prompts": Array [
+      Object {
+        "dataSource": "1234-asset-3",
+      },
+    ],
+  },
 ]
 `;
 
@@ -294,6 +336,27 @@ Array [
       },
     ],
     "type": "Sociogram",
+  },
+  Object {
+    "background": Object {
+      "image": "1234-asset-5",
+    },
+    "id": "assets",
+    "items": Array [
+      Object {
+        "content": "1234-asset-4",
+      },
+    ],
+    "panels": Array [
+      Object {
+        "dataSource": "1234-asset-2",
+      },
+    ],
+    "prompts": Array [
+      Object {
+        "dataSource": "1234-asset-3",
+      },
+    ],
   },
 ]
 `;

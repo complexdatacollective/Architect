@@ -52,6 +52,9 @@ describe('preview', () => {
     it('dispatches previewDraft() for end of stages', () => {
       actionCreators.previewDraft = jest.fn();
 
+      const state = store.getState();
+      const expectedStageIndex = state.protocol.present.stages.length;
+
       store.dispatch(actionCreators.previewStageFromForm(
         {},
         'draft-insert-at-end',
@@ -61,7 +64,7 @@ describe('preview', () => {
       const draftStages = actions[0].draft.stages;
       const stageIndex = actions[0].stageIndex;
 
-      expect(stageIndex).toBe(6);
+      expect(stageIndex).toBe(expectedStageIndex);
       expect(draftStages).toMatchSnapshot();
     });
   });
