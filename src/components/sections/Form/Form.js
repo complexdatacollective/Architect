@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import uuid from 'uuid';
 import TextField from '../../../ui/components/Fields/Text';
 import ValidatedField from '../../Form/ValidatedField';
 import EditableList from '../../EditableList';
@@ -13,14 +12,13 @@ import withFieldChangeHandlers from './withFieldChangeHandlers';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { itemSelector, normalizeField } from './helpers';
 
-const template = () => ({ variable: uuid() });
-
 const Form = ({
   handleChangeFields,
   form,
   disabled,
   type,
   entity,
+  existingVariableNames,
 }) => (
   <Section disabled={disabled} group contentId="guidance.section.form">
     <div id={getFieldId('form.title')} data-name="Form title" />
@@ -39,11 +37,15 @@ const Form = ({
 
     <EditableList
       editComponent={FieldFields}
+      editProps={{
+        type,
+        entity,
+        existingVariableNames,
+      }}
       previewComponent={FieldPreview}
       fieldName="form.fields"
       title="Edit Field"
       onChange={handleChangeFields}
-      template={template}
       normalize={normalizeField}
       itemSelector={itemSelector(entity, type)}
       form={form}
@@ -66,6 +68,7 @@ Form.propTypes = {
   disabled: PropTypes.bool,
   type: PropTypes.string,
   entity: PropTypes.string,
+  existingVariableNames: PropTypes.array.isRequired,
 };
 
 Form.defaultProps = {

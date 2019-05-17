@@ -107,7 +107,7 @@ describe('protocol.codebook', () => {
             node: { foo: { variables: { bar: { baz: 'buzz' } } } },
             edge: {},
           },
-          actionCreators.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
+          testing.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
         );
 
         expect(result).toMatchSnapshot();
@@ -118,7 +118,7 @@ describe('protocol.codebook', () => {
           {
             ego: { variables: { bar: { baz: 'buzz' } } },
           },
-          actionCreators.updateVariable('ego', undefined, 'bar', { fizz: 'pop' }),
+          testing.updateVariable('ego', undefined, 'bar', { fizz: 'pop' }),
         );
 
         expect(result).toMatchSnapshot();
@@ -218,6 +218,49 @@ describe('protocol.codebook', () => {
           },
           configuration: { fizz: 'buzz' },
         });
+      });
+
+      it('throws an error if a variable with the same name already exists', () => {
+        const createAction = actionCreators.createVariable('node', 'bar', { name: 'ALPHA' });
+        const store = mockStore(testState);
+
+        expect(() => {
+          store.dispatch(createAction);
+        }).toThrow(new Error('Variable with name "ALPHA" already exists'));
+      });
+    });
+
+    describe('updateVariable()', () => {
+      it('dispatches the UPDATE_VARIABLE action', () => {
+        const store = mockStore(testState);
+
+        store.dispatch(actionCreators.updateVariable(
+          'node',
+          'bar',
+          'alpha',
+          { fizz: 'buzz' },
+        ));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toMatchObject({
+          type: actionTypes.UPDATE_VARIABLE,
+          meta: {
+            entity: 'node',
+            type: 'bar',
+            variable: 'alpha',
+          },
+          configuration: { fizz: 'buzz' },
+        });
+      });
+
+      it('throws an error if the variable does not already exist', () => {
+        const createAction = actionCreators.updateVariable('node', 'bar', 'xenon', { name: 'XENON' });
+        const store = mockStore(testState);
+
+        expect(() => {
+          store.dispatch(createAction);
+        }).toThrow(new Error('Variable "xenon" does not exist'));
       });
     });
 

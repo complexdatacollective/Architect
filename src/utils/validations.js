@@ -37,6 +37,19 @@ export const maxSelected = max =>
   value =>
     (!value || coerceArray(value).length > max ? `Must choose ${max} or less` : undefined);
 
+export const validateName = (value, allValues, { existingVariableNames = [] }) => {
+  const validateRequired = required();
+  if (validateRequired(value)) { return validateRequired(value); }
+
+  if (!value) { return undefined; }
+
+  const isUsed = existingVariableNames
+    .some(name => name.toLowerCase() === value.toLowerCase());
+  if (isUsed) { return `Variable name "${value}" is already used elsewhere`; }
+
+  return undefined;
+};
+
 const validations = {
   required,
   requiredAcceptsNull,
@@ -46,6 +59,7 @@ const validations = {
   maxValue,
   minSelected,
   maxSelected,
+  validateName,
 };
 
 /**

@@ -52,6 +52,7 @@ class EditableList extends PureComponent {
       initialValues,
       editComponent: EditComponent,
       previewComponent: PreviewComponent,
+      editProps,
       ...rest
     } = this.props;
 
@@ -92,9 +93,11 @@ class EditableList extends PureComponent {
               onSubmitFail={handleSubmitFail}
               onCancel={handleResetEditField}
               form={formName}
+              {...editProps}
             >
               <EditComponent
                 {...rest}
+                {...editProps}
                 form={formName}
                 fieldId={editField}
                 onComplete={handleResetEditField}

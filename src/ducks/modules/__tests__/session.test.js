@@ -72,11 +72,11 @@ describe('session reducer', () => {
     });
 
     it('tracks create variable as change', () => {
-      itTracksActionAsChange(codebookActions.createVariable());
+      itTracksActionAsChange(codebookTesting.createVariable());
     });
 
     it('tracks update variable as change', () => {
-      itTracksActionAsChange(codebookActions.updateVariable());
+      itTracksActionAsChange(codebookTesting.updateVariable());
     });
   });
 });
