@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
-import { values } from 'lodash';
+import { values as getValues } from 'lodash';
 import withSubject from '../../enhancers/withSubject';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 import { getTypeForComponent } from '../../Form/inputOptions';
@@ -9,7 +9,7 @@ import { getVariablesForSubject } from '../../../selectors/codebook';
 
 const mapFormProperties = (state, { entity, type }) => {
   const existingVariables = getVariablesForSubject(state, { entity, type });
-  const existingVariableNames = values(existingVariables)
+  const existingVariableNames = getValues(existingVariables)
     .map(({ name }) => name);
 
   return {
@@ -19,7 +19,8 @@ const mapFormProperties = (state, { entity, type }) => {
 
 const fieldChangeHandlers = withHandlers({
   handleChangeFields: ({ createVariable, updateVariable, type, entity }) =>
-    ({ variable, component, ...rest }) => {
+    (values) => {
+      const { variable, component, ...rest } = values;
       const variableType = getTypeForComponent(component);
       // prune properties that are not part of the codebook:
       const codebookProperties = getCodebookProperties(rest);
@@ -29,10 +30,12 @@ const fieldChangeHandlers = withHandlers({
       };
 
       if (variable) {
-        return updateVariable(entity, type, variable, configuration);
+        updateVariable(entity, type, variable, configuration);
+        return values;
       }
 
-      return createVariable(entity, type, configuration); // TODO: we need variable id
+      const result = createVariable(entity, type, configuration);
+      return { ...values, variable: result.variable };
     },
 });
 
