@@ -11,9 +11,9 @@ const titlebarParameters = isMacOS() ? { titleBarStyle: 'hidden', frame: false }
 global.appWindow = null;
 
 function getAppUrl() {
-  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_DEV_SERVER_PORT) {
+  if (process.env.NODE_ENV === 'development' && process.env.NC_ARCHITECT_PPORT) {
     const appUrl = url.format({
-      host: `localhost:${process.env.WEBPACK_DEV_SERVER_PORT}/`,
+      host: `localhost:${process.env.NC_ARCHITECT_PPORT}/`,
       protocol: 'http',
     });
 

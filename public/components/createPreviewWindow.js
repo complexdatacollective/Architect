@@ -141,9 +141,9 @@ const getPreviewMenu = (window) => {
 };
 
 function getAppUrl() {
-  if (process.env.NODE_ENV === 'development' && process.env.WEBPACK_NC_DEV_SERVER_PORT) {
+  if (process.env.NODE_ENV === 'development' && process.env.NC_PORT) {
     const appUrl = url.format({
-      host: `localhost:${process.env.WEBPACK_NC_DEV_SERVER_PORT}/`,
+      host: `localhost:${process.env.NC_PORT}/`,
       protocol: 'http',
     });
 
