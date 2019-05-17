@@ -92,6 +92,33 @@ const getVariableIndex = createSelector(
   },
 );
 
+
+/**
+ * Returns index of used assets
+ * Checks for usage in the following:
+ * - `stages[].prompts[].items[].content`
+ * - `stages[].prompts[].panels[].dataSource`
+ * - `stages[].prompts[].dataSource`
+ * - `stages[].background.image`
+ * @returns {object} in format: { [path]: variable }
+ */
+const getAssetIndex = createSelector(
+  getProtocol,
+  (protocol) => {
+    const informationItems = collectPaths('stages[].items[].content', protocol);
+    const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
+    const nameGeneratorDataSources = collectPaths('stages[].prompts[].dataSource', protocol);
+    const sociogramBackground = collectPaths('stages[].background.image', protocol);
+
+    return {
+      ...informationItems,
+      ...nameGeneratorPanels,
+      ...nameGeneratorDataSources,
+      ...sociogramBackground,
+    };
+  },
+);
+
 const combineLists = lists =>
   lists
     .map(list => (!isArray(list) ? values(list) : list))
@@ -122,5 +149,6 @@ const utils = {
 
 export {
   getVariableIndex,
+  getAssetIndex,
   utils,
 };

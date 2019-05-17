@@ -13,6 +13,18 @@
       "assetManifest": {
         "1234-asset-1": {
           "source": "1234-4567-asset-1"
+        },
+        "1234-asset-2": {
+          "source": "1234-4567-asset-2"
+        },
+        "1234-asset-3": {
+          "source": "1234-4567-asset-3"
+        },
+        "1234-asset-4": {
+          "source": "1234-4567-asset-4"
+        },
+        "1234-asset-5": {
+          "source": "1234-4567-asset-5"
         }
       },
       "codebook": {
@@ -134,6 +146,21 @@
               "id": "oscar"
             }
           ]
+        },
+        {
+          "id": "assets",
+          "panels": [
+            { "dataSource": "1234-asset-2" }
+          ],
+          "prompts": [
+            { "dataSource" : "1234-asset-3" }
+          ],
+          "items": [
+            { "content": "1234-asset-4" }
+          ],
+          "background": {
+            "image": "1234-asset-5"
+          }
         }
       ]
     }

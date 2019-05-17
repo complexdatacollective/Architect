@@ -4,18 +4,11 @@ import testState from '../../__tests__/testState.json';
 
 import {
   getVariableIndex,
+  getAssetIndex,
   utils,
 } from '../indexes';
 
 describe('indexes selectors', () => {
-  describe('getVariableIndex()', () => {
-    it('extracts variables into index', () => {
-      const subject = getVariableIndex(testState);
-
-      expect(subject).toMatchSnapshot();
-    });
-  });
-
   describe('utils.buildSearch()', () => {
     it('correctly builds the Set', () => {
       const index1 = {
@@ -37,6 +30,22 @@ describe('indexes selectors', () => {
       const search = utils.buildSearch([index1, index2], [excludeList]);
 
       expect(search).toEqual(new Set([1, 2, 4, 5, 6]));
+    });
+  });
+
+  describe('getVariableIndex()', () => {
+    it('extracts variables into index', () => {
+      const subject = getVariableIndex(testState);
+
+      expect(subject).toMatchSnapshot();
+    });
+  });
+
+  describe('getAssetIndex()', () => {
+    it('extracts asset references into index', () => {
+      const subject = getAssetIndex(testState);
+
+      expect(subject).toMatchSnapshot();
     });
   });
 });
