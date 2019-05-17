@@ -10,6 +10,7 @@
         "npm": "6.4.1"
     },
     "scripts": {
+        "postinstall": "npm install --prefix=network-canvas",
         "pack": "electron-builder --dir",
         "update-submodules": "git submodule update --init --recursive",
         "start": "cross-env BUILD_TARGET=web node scripts/start.js",
