@@ -8,9 +8,10 @@ import { getFieldId } from '../../../utils/issues';
 import Section from '../Section';
 import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
-import withFieldChangeHandlers from './withFieldChangeHandlers';
+import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import withDisabledFormTitle from '../../enhancers/withDisabledFormTitle';
+import withFieldChangeHandlers from './withFieldChangeHandlers';
 import { itemSelector, normalizeField } from './helpers';
 
 const Form = ({
@@ -19,7 +20,6 @@ const Form = ({
   disabled,
   type,
   entity,
-  existingVariableNames,
   disableFormTitle,
 }) => (
   <Section disabled={disabled} group contentId="guidance.section.form">
@@ -43,7 +43,6 @@ const Form = ({
       editProps={{
         type,
         entity,
-        existingVariableNames,
       }}
       previewComponent={FieldPreview}
       fieldName="form.fields"
@@ -72,7 +71,6 @@ Form.propTypes = {
   disableFormTitle: PropTypes.bool,
   type: PropTypes.string,
   entity: PropTypes.string,
-  existingVariableNames: PropTypes.array.isRequired,
 };
 
 Form.defaultProps = {
@@ -85,6 +83,7 @@ Form.defaultProps = {
 export { Form };
 
 export default compose(
+  withSubject,
   withFieldChangeHandlers,
   withDisabledFormTitle,
   withDisabledSubjectRequired,

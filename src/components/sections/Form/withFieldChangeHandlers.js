@@ -1,21 +1,8 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
-import { values as getValues } from 'lodash';
-import withSubject from '../../enhancers/withSubject';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 import { getTypeForComponent } from '../../Form/inputOptions';
 import { getCodebookProperties } from './helpers';
-import { getVariablesForSubject } from '../../../selectors/codebook';
-
-const mapFormProperties = (state, { entity, type }) => {
-  const existingVariables = getVariablesForSubject(state, { entity, type });
-  const existingVariableNames = getValues(existingVariables)
-    .map(({ name }) => name);
-
-  return {
-    existingVariableNames,
-  };
-};
 
 const fieldChangeHandlers = withHandlers({
   handleChangeFields: ({ createVariable, updateVariable, type, entity }) =>
@@ -45,8 +32,7 @@ const mapDispatchToProps = {
 };
 
 const withFieldChangeHandlers = compose(
-  withSubject,
-  connect(mapFormProperties, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
   fieldChangeHandlers,
 );
 
