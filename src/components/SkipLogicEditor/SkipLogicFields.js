@@ -31,8 +31,10 @@ class SkipLogicEditor extends PureComponent {
               { value: 'SHOW', label: 'Show this stage if' },
               { value: 'SKIP', label: 'Skip this stage if' },
             ]}
-            onChange={value => onChange('action', value)}
-            value={action}
+            onChange={value => onChange('action', value.value)}
+            input={{
+              value: action,
+            }}
           />
         </div>
         <div>
