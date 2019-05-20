@@ -54,7 +54,7 @@ class Timeline extends Component {
   };
 
   handleInsertStage = index =>
-    this.props.openScreen('newStage', { insertStageAtIndex: index, highlightHide: true });
+    this.props.openScreen('newStage', { insertAtIndex: index });
 
   handleDeleteStage = (stageId) => {
     this.props.openDialog({
@@ -140,7 +140,7 @@ class Timeline extends Component {
             { this.renderStages() }
           </TransitionGroup>
         </div>
-        <div className="timeline__new" onClick={() => this.handleInsertStage(0)}>
+        <div className="timeline__new" onClick={() => this.handleInsertStage()}>
           <NewButton />
           <div className="timeline__new-label">
             Add new stage

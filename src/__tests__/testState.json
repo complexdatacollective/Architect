@@ -8,6 +8,24 @@
       "workingPath": "/dev/null/1234-active-protocol"
     }
   ],
+  "form": {
+    "draft-by-id": {
+      "values": {
+        "id": "pip",
+        "foo": "bar"
+      }
+    },
+    "draft-insert-at-index": {
+      "values": {
+        "bazz": "buzz"
+      }
+    },
+    "draft-insert-at-end": {
+      "values": {
+        "fizz": "pop"
+      }
+    }
+  },
   "protocol": {
     "present": {
       "assetManifest": {

@@ -24,8 +24,9 @@ This repository assumes that `npm` is installed. If you don't have it installed,
 |`npm run <script>`|Description|
 |------------------|-----------|
 |`start`|Serves your app at `localhost:3000`.|
-|`start:electron`|Serves your app for consumption by electron.|
-|`electron:dev`|Runs electron window with contents of `start:electron` (must be run concurrently)|
+|`start:architect:electron`|Serves your app for consumption by electron.|
+|`start:network-canvas:electron`|Serves network canvas for consumption by previewer.|
+|`electron:dev`|Runs electron window with contents of `start:architect:electron`  and `start:network-canvas:electron`(must be run concurrently)|
 |`build`|Compiles assets and prepares app for production in the /build directory.|
 |`lint`|Lints js/scss|
 |`test`|Runs testing suite|
@@ -40,7 +41,9 @@ This repository assumes that `npm` is installed. If you don't have it installed,
 
 There are two additional tasks to enable development within an electron app natively:
 
-1. `npm run start:electron`: to start the webpack dev server
+1. `npm run start:architect:electron`: to start the webpack dev server
+  - Note: must be running on port 3003.
+1. `npm run start:network-canvas:electron`: to start the webpack dev server
   - Note: must be running on port 3000.
 2. `npm run electron:dev` (in another terminal session)
   1. Copies the electron source to `./electron-dev`

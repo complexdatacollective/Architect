@@ -1,12 +1,42 @@
-import { ipcRenderer } from 'electron';
 import { getFormValues } from 'redux-form';
-import { getActiveProtocolMeta } from '../../selectors/protocol';
+import { getActiveProtocolMeta, getProtocol } from '../../selectors/protocol';
+import previewDriver from '../../utils/previewDriver';
+
+const getStageIndex = (protocol, stageMeta) => {
+  switch (true) {
+    case !!stageMeta.id:
+      return protocol.stages.findIndex(({ id }) => id === stageMeta.id);
+    case !!stageMeta.insertAtIndex:
+      return stageMeta.insertAtIndex;
+    default:
+      return protocol.stages.length;
+  }
+};
+
+const getDraftStages = (protocol, stageMeta, draftStage) => {
+  const stages = protocol.stages;
+
+  if (stageMeta.id) {
+    return stages.map((stage) => {
+      if (stage.id === draftStage.id) { return draftStage; }
+
+      return stage;
+    });
+  }
+
+  const stageIndex = getStageIndex(protocol, stageMeta);
+
+  return [
+    ...protocol.stages.slice(0, stageIndex),
+    draftStage,
+    ...protocol.stages.slice(stageIndex),
+  ];
+};
 
 const SET_ZOOM = 'PREVIEW/ZOOM';
 const REFRESH_PREVIEW = 'PREVIEW/REFRESH_PREVIEW';
 const PREVIEW_DRAFT = 'PREVIEW/PREVIEW_DRAFT';
 const CLOSE_PREVIEW = 'PREVIEW/CLOSE_PREVIEW';
-const PREVIEW_STAGE_BY_FORMNAME = 'PREVIEW/PREVIEW_STAGE_BY_FORMNAME';
 
 const zoom = zoomFactor => ({
   type: SET_ZOOM,
@@ -23,7 +53,7 @@ const closePreview = () =>
       type: CLOSE_PREVIEW,
     });
 
-    ipcRenderer.send('CLOSE_PREVIEW');
+    previewDriver.close();
   };
 
 const previewDraft = (draft, stageIndex) =>
@@ -33,69 +63,43 @@ const previewDraft = (draft, stageIndex) =>
     const activeProtocolMeta = getActiveProtocolMeta(state);
     const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
 
-    const protocol = state.protocol.present;
-
     const draftProtocol = {
-      ...protocol,
       ...draft,
+      /**
+       * This allows assets to work correctly in the Network Canvas preview.
+       *
+       * Network canvas uses relative paths for the assets:// protocol, whereas
+       * Architect uses full paths. Since Network Canvas prepares urls as:
+       * `assets://${protocolUID}/assets/${asset}` this allows us to load files
+       * from the correct location.
+       */
+      uid: workingPath,
     };
 
     dispatch({
       type: PREVIEW_DRAFT,
-      meta: {
-        draft: draftProtocol,
-        stageIndex,
-      },
+      draft: draftProtocol,
+      stageIndex,
     });
 
-    ipcRenderer.send('OPEN_PREVIEW', { protocol: draftProtocol, path: workingPath, stageIndex });
+    previewDriver.preview(draftProtocol, stageIndex);
   };
 
-const previewStageByFormName = (stageMeta, formName) =>
+const previewStageFromForm = (stageMeta, formName) =>
   (dispatch, getState) => {
-    dispatch({
-      type: PREVIEW_STAGE_BY_FORMNAME,
-      meta: {
-        formName,
-        stage: stageMeta,
-      },
-    });
-
     const state = getState();
+    const protocol = getProtocol(state);
 
     const draftStage = getFormValues(formName)(state);
-    const protocol = state.protocol.present;
-    let stageIndex;
-    let draftStages;
-
-    // TODO: use reducer?
-    if (stageMeta.id) {
-      stageIndex = protocol.stages.findIndex(({ id }) => id === stageMeta.id);
-
-      draftStages = protocol.stages.map((stage) => {
-        if (stage.id !== draftStage.id) { return stage; }
-        return draftStage;
-      });
-    } else {
-      stageIndex = stageMeta.insertAtIndex;
-
-      draftStages = [
-        ...protocol.stages.slice(0, stageMeta.insertAtIndex),
-        draftStage,
-        ...protocol.stages.slice(stageMeta.insertAtIndex),
-      ];
-    }
-
-    const draftProtocol = {
-      stages: draftStages,
-    };
+    const stageIndex = getStageIndex(protocol, stageMeta);
+    const draftStages = getDraftStages(protocol, stageMeta, draftStage);
+    const draftProtocol = { ...protocol, stages: draftStages };
 
     dispatch(previewDraft(draftProtocol, stageIndex));
   };
 
 const actionTypes = {
   PREVIEW_DRAFT,
-  PREVIEW_STAGE_BY_FORMNAME,
   SET_ZOOM,
   REFRESH_PREVIEW,
 };
@@ -103,7 +107,7 @@ const actionTypes = {
 const actionCreators = {
   closePreview,
   previewDraft,
-  previewStageByFormName,
+  previewStageFromForm,
   zoom,
   refresh,
 };

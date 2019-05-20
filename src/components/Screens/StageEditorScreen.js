@@ -17,11 +17,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, props) => {
   const stageMeta = {
     id: props.id,
+    insertAtIndex: props.insertAtIndex,
   };
 
   return {
     closePreview: bindActionCreators(previewActions.closePreview, dispatch),
-    previewStage: () => dispatch(previewActions.previewStageByFormName(stageMeta, formName)),
+    previewStage: () => dispatch(previewActions.previewStageFromForm(stageMeta, formName)),
   };
 };
 
