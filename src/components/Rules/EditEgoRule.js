@@ -10,7 +10,7 @@ import withOptions from './withOptions';
 
 const defaultOptions = {
   type: null,
-  variable: null,
+  attribute: null,
   operator: null,
   value: '',
 };
@@ -31,15 +31,15 @@ const EditAlterVariableRule = ({
       <div className="rules-edit-rule__row">
         <DetachedField
           component={Select}
-          name="variable"
+          name="attribute"
           label="Variable"
           options={variableOptions}
           onChange={handleRuleChange}
-          value={optionsWithDefaults.variable}
+          value={optionsWithDefaults.attribute}
           validation={{ required: true }}
         />
       </div>
-      { optionsWithDefaults.variable &&
+      { optionsWithDefaults.attribute &&
         <div className="rules-edit-rule__row">
           <DetachedField
             component={Select}

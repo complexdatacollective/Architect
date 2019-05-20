@@ -36,13 +36,6 @@ const AssignAttributes = ({
         ))}
       </div>
     ) }
-
-    { fields.length === 0 &&
-      <p className="assign-attributes__empty">
-        No attributes currently defined. Use the button below to create one.
-      </p>
-    }
-
     <div className="assign-attributes__add">
       <Button
         color="primary"
@@ -50,7 +43,7 @@ const AssignAttributes = ({
         size="small"
         onClick={() => fields.push({ variable: null, value: null })}
       >
-        Assign new attribute
+        Add new variable to assign
       </Button>
     </div>
 

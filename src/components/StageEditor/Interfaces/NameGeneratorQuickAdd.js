@@ -1,20 +1,20 @@
 import {
   Name,
   NodeType,
-  Form,
+  QuickAdd,
   NameGeneratorPrompts,
   NodePanels,
 } from '../../sections';
 
-const NameGenerator = {
+const NameGeneratorQuickAdd = {
   sections: [
     Name,
     NodeType,
-    Form,
+    QuickAdd,
     NameGeneratorPrompts,
     NodePanels,
   ],
-  name: 'Name Generator (using forms)',
+  name: 'Name Generator (quick add mode)',
 };
 
-export default NameGenerator;
+export default NameGeneratorQuickAdd;

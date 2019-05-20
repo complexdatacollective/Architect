@@ -36,6 +36,7 @@ const NewVariableWindow = ({
       onCancel={onCancel}
       initialValues={initialValues}
       existingVariableNames={existingVariableNames}
+      title="Create New Variable"
     >
       <Section contentId="guidance.newVariable.name">
         <h3 id={getFieldId('name')}>Variable name</h3>

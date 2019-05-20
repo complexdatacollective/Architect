@@ -1,8 +1,8 @@
 import {
   Name,
   NodeType,
-  NarrativePresets,
   Background,
+  NarrativePresets,
   NarrativeBehaviours,
 } from '../../sections';
 
@@ -10,8 +10,8 @@ const Narrative = {
   sections: [
     Name,
     NodeType,
-    NarrativePresets,
     Background,
+    NarrativePresets,
     NarrativeBehaviours,
   ],
 };

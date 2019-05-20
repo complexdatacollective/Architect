@@ -8,15 +8,15 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
   const typeLabel = get(codebook, [entityType, options.type, 'name'], options.type); // noop for ego
   const variableLabel = get(
     codebook,
-    [...entityRoot, 'variables', options.variable, 'name'],
-    options.variable,
+    [...entityRoot, 'variables', options.attribute, 'name'],
+    options.attribute,
   );
 
   return {
     options: {
       ...options,
       type: typeLabel,
-      variable: variableLabel,
+      attribute: variableLabel,
     },
   };
 });

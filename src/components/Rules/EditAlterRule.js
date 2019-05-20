@@ -17,7 +17,7 @@ import {
 
 const defaultOptions = {
   type: null,
-  variable: null,
+  attribute: null,
   operator: null,
   value: '',
 };
@@ -40,7 +40,9 @@ const EditAlterRule = ({
 
   return (
     <div className="rules-edit-rule__fields">
+      <h1>Edit Rule</h1>
       <div className="rules-edit-rule__row">
+        <h4>Choose Node Type</h4>
         <DetachedField
           component={NodeSelect}
           name="type"
@@ -78,16 +80,16 @@ const EditAlterRule = ({
         <div className="rules-edit-rule__row">
           <DetachedField
             component={Select}
-            name="variable"
+            name="attribute"
             label="Variable"
             options={variableOptions}
             onChange={handleRuleChange}
-            value={optionsWithDefaults.variable}
+            value={optionsWithDefaults.attribute}
             validation={{ required: true }}
           />
         </div>
       }
-      { isVariableRule && optionsWithDefaults.variable &&
+      { isVariableRule && optionsWithDefaults.attribute &&
         <div className="rules-edit-rule__row">
           <DetachedField
             component={Select}

@@ -6,7 +6,6 @@ import withAssets from './withAssets';
 import Asset from './Asset';
 
 const ASSET_TYPES = [
-  { label: 'Any', value: null },
   { label: 'Image', value: 'image' },
   { label: 'Video', value: 'video' },
   { label: 'Audio', value: 'audio' },
@@ -36,6 +35,7 @@ const Assets = ({
     input: {
       onChange: onUpdateAssetFilter,
       value: assetType,
+      placeholder: 'Filter by asset type...',
     },
   };
 

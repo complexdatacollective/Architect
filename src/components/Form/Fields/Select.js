@@ -7,7 +7,6 @@ import DefaultSelectOption from './DefaultSelectOption';
 
 const getValue = (options, value) => {
   const foundValue = options.find(option => option.value === value);
-
   if (!foundValue) { return null; }
 
   return foundValue;
@@ -79,7 +78,6 @@ class Select extends PureComponent {
         'form-fields-select--has-error': invalid && touched && error,
       },
     );
-
     return (
       <div className={componentClasses}>
         { label &&

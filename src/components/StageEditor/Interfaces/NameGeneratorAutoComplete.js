@@ -1,6 +1,9 @@
 import {
   Name,
   NodeType,
+  ExternalDataWithCardOptions,
+  CardDisplayOptions,
+  SearchOptions,
   NameGeneratorAutoCompletePrompts,
 } from '../../sections';
 
@@ -8,9 +11,12 @@ const NameGeneratorAutoComplete = {
   sections: [
     Name,
     NodeType,
+    ExternalDataWithCardOptions,
+    CardDisplayOptions,
+    SearchOptions,
     NameGeneratorAutoCompletePrompts,
   ],
-  name: 'Roster Name Generator (search)',
+  name: 'Large Roster Name Generator',
 };
 
 export default NameGeneratorAutoComplete;

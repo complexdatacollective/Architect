@@ -6,6 +6,7 @@ import ValidatedField from '../../Form/ValidatedField';
 import Section from '../Section';
 import withOptions from './withOptions';
 import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
+import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import withDefaultToDisplayVariable from './withDefaultToDisplayVariable';
 import withSubject from '../../enhancers/withSubject';
 
@@ -26,7 +27,7 @@ const QuickAdd = ({
     <p>
       <strong>
         Tip: create or assign a variable called &quot;name&quot; and network
-        canvas will automatically use it as a label.
+        canvas will automatically use it as the visual label for the node.
       </strong>
     </p>
     <div className="stage-editor-section-form">
@@ -62,7 +63,9 @@ export { QuickAdd };
 
 export default compose(
   withSubject,
+  withDisabledSubjectRequired,
   withDefaultToDisplayVariable,
   withOptions,
   withCreateVariableHandler,
 )(QuickAdd);
+

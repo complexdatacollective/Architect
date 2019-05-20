@@ -28,7 +28,6 @@ const mapInitialValues = (state, props) => {
 
 const mapFormState = (state) => {
   const logic = getFormValues(formName)(state) || defaultLogic;
-
   return {
     logic,
   };
@@ -59,11 +58,13 @@ const submitHandlers = withHandlers({
   onSubmit: ({ id, updateStage, logic, onComplete }) =>
     () => {
       const stageId = id;
-
       updateStage(
         stageId,
         {
-          skipLogic: logic,
+          skipLogic: {
+            action: logic.action,
+            filter: logic.filter,
+          },
         },
       );
 

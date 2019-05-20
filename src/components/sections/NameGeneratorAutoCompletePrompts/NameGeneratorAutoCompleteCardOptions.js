@@ -5,18 +5,13 @@ import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
-import withDataSource from '../../enhancers/withDataSource';
-import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 
-const template = () => ({ showExistingNodes: true });
-
-const NameGeneratorListPrompts = props => (
+const NameGeneratorAutoCompletePrompts = props => (
   <EditableList
-    contentId="guidance.editor.name_generator_list_prompts"
-    previewComponent={PromptPreview}
+    contentId="guidance.editor.name_generator_auto_complete_prompts"
     editComponent={PromptFields}
+    previewComponent={PromptPreview}
     title="Edit Prompt"
-    template={template}
     {...props}
   >
     <h2>Prompts</h2>
@@ -28,11 +23,9 @@ const NameGeneratorListPrompts = props => (
   </EditableList>
 );
 
-export { NameGeneratorListPrompts };
+export { NameGeneratorAutoCompletePrompts };
 
 export default compose(
   withSubject,
-  withDataSource,
   withDisabledSubjectRequired,
-  withDisabledAssetRequired,
-)(NameGeneratorListPrompts);
+)(NameGeneratorAutoCompletePrompts);

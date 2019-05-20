@@ -31,7 +31,7 @@ class StageEditor extends Component {
     return (
       <Editor
         formName={formName}
-        title={`Edit ${this.name()}`}
+        title={`Editing ${this.name()}`}
         {...this.props}
       >
         {

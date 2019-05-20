@@ -29,10 +29,14 @@ a {
   }
 }
 
-.form-fields-textarea__error,
-.form-field-radio-group__error {
+.form-fields-textarea__error {
   max-height: initial;
   opacity: 1;
   margin: unit(1) 0 0;
   color: var(--error);
+}
+
+.form-field-checkbox-group__error,
+.form-field-radio-group__error {
+  color: var(--text-light);
 }

@@ -25,17 +25,23 @@ const HighlightFields = ({
 
   return (
     <Section contentId="guidance.editor.sociogram_prompt.attributes" group>
-      <h3>Attributes</h3>
+      <h3>Variable Toggling</h3>
       <p>
-        Use this section to configure node highlighting. The particiant
-        will be able to toggle this attribute by simply tapping (or
-        clicking) a node.
+        The sociogram can be configured to allow the participant to toggle
+        a node variable to true or false by tapping it.
+      </p>
+      <p>
+        <strong>
+        Important: you cannot use this setting at the same time
+        as the &quot;Create edges&quot; option above. Enabling this setting will
+        disable that option.
+        </strong>
       </p>
       <Field
         component={Fields.Toggle}
         name="highlight.allowHighlighting"
         onChange={handleChangeAllowHighlighting}
-        label="Toggle attribute by tapping on a node?"
+        label="Enable variable toggling by tapping a node"
         disabled={canCreateEdge}
         title={canCreateEdge && 'Create edge must be disabled to allow highlighting'}
       />
@@ -43,7 +49,7 @@ const HighlightFields = ({
         <Field
           name="highlight.variable"
           component={ArchitectFields.CreatableSelect}
-          label="Toggle variable of the following type"
+          label="Which boolean variable should be toggled?"
           onCreateOption={value => handleCreateVariable(value, 'boolean')}
           placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
           options={highlightVariablesForSubject}

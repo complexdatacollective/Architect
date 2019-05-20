@@ -25,19 +25,19 @@ const validateRule = (rule) => {
 
   switch (rule.type) {
     case 'alter': {
-      if (Object.prototype.hasOwnProperty.call(options, 'variable')) {
+      if (Object.prototype.hasOwnProperty.call(options, 'attribute')) {
         if (operatorsWithValue.has(options.operator)) {
-          return validateFields(['type', 'variable', 'operator', 'value'], options);
+          return validateFields(['type', 'attribute', 'operator', 'value'], options);
         }
-        return validateFields(['type', 'variable', 'operator'], options);
+        return validateFields(['type', 'attribute', 'operator'], options);
       }
       return validateFields(['type', 'operator'], options);
     }
     case 'ego': {
       if (operatorsWithValue.has(options.operator)) {
-        return validateFields(['variable', 'operator', 'value'], options);
+        return validateFields(['attribute', 'operator', 'value'], options);
       }
-      return validateFields(['variable', 'operator'], options);
+      return validateFields(['attribute', 'operator'], options);
     }
     case 'edge':
       return validateFields(['type', 'operator'], options);
