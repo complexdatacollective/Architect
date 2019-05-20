@@ -8,7 +8,7 @@ import PromptFields from './PromptFields';
 import withDataSource from '../../enhancers/withDataSource';
 import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 
-const template = () => ({ showExistingNodes: true });
+const template = () => ({});
 
 const NameGeneratorListPrompts = props => (
   <EditableList
