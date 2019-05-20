@@ -15,8 +15,7 @@ const isValidPath = filePath =>
 
 const registerProtocol = () =>
   protocol.registerFileProtocol(protocolName, (request, callback) => {
-
-    const urlPath = request.url.substr(protocolName.length + 2);
+    const urlPath = request.url.substr(protocolName.length + 3);
     const decodedPath = decodeURIComponent(urlPath);
     const filePath = path.normalize(decodedPath);
 
