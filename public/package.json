@@ -6,14 +6,14 @@
   "author": "Complex Data Collective",
   "private": true,
   "engines": {
-    "node": "8.11.1",
+    "node": "8.16.0",
     "npm": "6.4.1"
   },
   "homepage": ".",
   "main": "electron-starter.js",
   "dependencies": {
     "electron-log": "^2.2.7",
-    "electron-updater": "^3.2.3"
+    "electron-updater": "^4.0.0"
   },
   "browser": {
      "canvas": false,
