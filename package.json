@@ -10,7 +10,7 @@
         "npm": "6.4.1"
     },
     "scripts": {
-        "postinstall": "npm install --prefix=network-canvas",
+        "postinstall": "cd network-canvas && npm install && cd ../",
         "pack": "electron-builder --dir",
         "update-submodules": "git submodule update --init --recursive",
         "start": "cross-env BUILD_TARGET=web node scripts/start.js",
@@ -20,7 +20,7 @@
         "electron:dev": "cross-env NODE_ENV=development WEBPACK_NC_DEV_SERVER_PORT=3000 WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
         "build": "npm run build:architect && npm run build:network-canvas",
         "build:architect": "node scripts/build.js",
-        "build:network-canvas": "npm install --prefix=network-canvas && npm run build:electron --prefix=network-canvas && node scripts/move-network-canvas-build.js",
+        "build:network-canvas": "cd network-canvas && npm install && npm run build:electron && cd ../ && node scripts/move-network-canvas-build.js",
         "lint": "npm run lint:js && npm run lint:sass",
         "lint:js": "eslint src",
         "lint:sass": "sass-lint -vc .sass-lint.yml",
@@ -191,7 +191,7 @@
         },
         "win": {
             "target": "nsis",
-            "certificateSubjectName": "Complex Data Collective"
+            "certificateSha1": "512E5573B1961B0ADCAFB21288935F8A3E6E656F"
         },
         "fileAssociations": {
             "ext": "netcanvas",
