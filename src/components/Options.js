@@ -6,10 +6,11 @@ import PropTypes from 'prop-types';
 import { compose, defaultProps, withHandlers } from 'recompose';
 import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
-import { Field, FieldArray } from 'redux-form';
+import { FieldArray } from 'redux-form';
 import { Icon, Button } from '../ui/components';
 import * as Fields from '../ui/components/Fields';
 import FieldError from './Form/FieldError';
+import ValidatedField from './Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../ducks/modules/dialogs';
 
 const isNumberLike = value =>
@@ -63,7 +64,10 @@ const Item = compose(
   }),
   SortableElement,
 )(
-  ({ field, handleDelete }) => (
+  ({
+    field,
+    handleDelete,
+  }) => (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-control">
         <ItemHandle />
@@ -71,11 +75,24 @@ const Item = compose(
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Label</div>
-          <Field component={Fields.Text} type="text" name={`${field}.label`} placeholder="label" />
+          <ValidatedField
+            component={Fields.Text}
+            type="text"
+            name={`${field}.label`}
+            placeholder="label"
+            validation={{ required: true, uniqueArrayAttribute: true }}
+          />
         </div>
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Value</div>
-          <Field component={Fields.Text} type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
+          <ValidatedField
+            component={Fields.Text}
+            type="text"
+            name={`${field}.value`}
+            parse={value => (isNumberLike(value) ? toNumber(value) : value)}
+            placeholder="value"
+            validation={{ required: true, uniqueArrayAttribute: true }}
+          />
         </div>
       </div>
       <div className="form-fields-multi-select__rule-control">

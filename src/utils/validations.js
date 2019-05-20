@@ -1,4 +1,4 @@
-import { keys, pickBy, map, toPairs, isUndefined } from 'lodash';
+import { keys, get, pickBy, map, toPairs, isUndefined } from 'lodash';
 
 const coerceArray = (value) => {
   if (value instanceof Object) {
@@ -9,6 +9,9 @@ const coerceArray = (value) => {
   }
   return [];
 };
+
+const capitalize = sentence =>
+  sentence.replace(/^\w/, firstLetter => firstLetter.toUpperCase());
 
 export const required = () =>
   value =>
@@ -50,6 +53,23 @@ export const validateName = (value, allValues, { existingVariableNames = [] }) =
   return undefined;
 };
 
+export const uniqueArrayAttribute = () =>
+  (value, allValues, formProps, name) => {
+    // expects `name` of format: `fieldName[n].attribute`
+    const fieldName = name.split('[')[0];
+    const attribute = name.split('.')[1];
+    const instanceCount = get(allValues, fieldName)
+      .reduce((count, option) => {
+        if (option[attribute] !== value) { return count; }
+        return count + 1;
+      }, 0);
+    if (!value) { return undefined; }
+    if (instanceCount >= 2) {
+      return `${capitalize(attribute)}s must be unique`;
+    }
+    return undefined;
+  };
+
 const validations = {
   required,
   requiredAcceptsNull,
@@ -60,6 +80,7 @@ const validations = {
   minSelected,
   maxSelected,
   validateName,
+  uniqueArrayAttribute,
 };
 
 /**
