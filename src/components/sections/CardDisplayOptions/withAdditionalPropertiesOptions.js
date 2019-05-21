@@ -1,5 +1,5 @@
 import { compose, withProps, defaultProps } from 'recompose';
-import getExternalPropertiesOptionGetter from './getExternalPropertiesOptionGetter';
+import getAdditionalPropertiesOptionGetter from './getAdditionalPropertiesOptionGetter';
 
 const defaultVariableOptions = defaultProps({
   additionalPropertiesOptionGetter: () => [],
@@ -7,9 +7,8 @@ const defaultVariableOptions = defaultProps({
 });
 
 const variableOptionProps = withProps(({ variableOptions }) => {
-  const additionalOptions = variableOptions.filter(({ value }) => value !== 'label');
-  const additionalPropertiesOptionGetter = getExternalPropertiesOptionGetter(additionalOptions);
-  const maxAdditionalDisplayProperties = additionalOptions.length;
+  const additionalPropertiesOptionGetter = getAdditionalPropertiesOptionGetter(variableOptions);
+  const maxAdditionalDisplayProperties = variableOptions.length;
 
   return {
     additionalPropertiesOptionGetter,

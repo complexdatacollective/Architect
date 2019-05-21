@@ -5,7 +5,7 @@ import { map } from 'lodash';
  *
  * This optionGetter is for externalProperties, which defines properties for the `variable` column.
  */
-const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
+const getAdditionalPropertiesOptionGetter = externalDataPropertyOptions =>
   (property, rowValues, allValues) => {
     const used = map(allValues, 'variable');
 
@@ -15,4 +15,4 @@ const getExternalPropertiesOptionGetter = externalDataPropertyOptions =>
       );
   };
 
-export default getExternalPropertiesOptionGetter;
+export default getAdditionalPropertiesOptionGetter;
