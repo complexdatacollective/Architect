@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
+import { compose, defaultProps } from 'recompose';
 import Editor from '../Editor';
 import { getInterface } from './Interfaces';
+import withStageEditorHandlers from './withStageEditorHandlers';
+import withStageEditorMeta from './withStageEditorMeta';
 
 const formName = 'edit-stage';
 
@@ -62,4 +65,10 @@ export {
   StageEditor,
 };
 
-export default StageEditor;
+export default compose(
+  defaultProps({
+    form: formName,
+  }),
+  withStageEditorMeta,
+  withStageEditorHandlers,
+)(StageEditor);
