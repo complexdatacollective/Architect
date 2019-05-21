@@ -1,4 +1,4 @@
-import { keys, pickBy, map, toPairs, isUndefined } from 'lodash';
+import { keys, get, pickBy, map, toPairs, isUndefined } from 'lodash';
 
 const coerceArray = (value) => {
   if (value instanceof Object) {
@@ -9,6 +9,9 @@ const coerceArray = (value) => {
   }
   return [];
 };
+
+const capitalize = sentence =>
+  sentence.replace(/^\w/, firstLetter => firstLetter.toUpperCase());
 
 export const required = () =>
   value =>
@@ -37,18 +40,41 @@ export const maxSelected = max =>
   value =>
     (!value || coerceArray(value).length > max ? `Must choose ${max} or less` : undefined);
 
-export const validateName = (value, allValues, { existingVariableNames = [] }) => {
-  const validateRequired = required();
-  if (validateRequired(value)) { return validateRequired(value); }
+export const uniqueArrayAttribute = () =>
+  (value, allValues, formProps, name) => {
+    if (!value) { return undefined; }
 
-  if (!value) { return undefined; }
+    // expects `name` of format: `fieldName[n].attribute`
+    const fieldName = name.split('[')[0];
+    const attribute = name.split('.')[1];
+    const instanceCount = get(allValues, fieldName)
+      .reduce((count, option) => {
+        const optionValue = option[attribute];
+        if (optionValue && value && optionValue.toLowerCase() === value.toLowerCase()) {
+          return count + 1;
+        }
+        return count;
+      }, 0);
 
-  const isUsed = existingVariableNames
-    .some(name => name.toLowerCase() === value.toLowerCase());
-  if (isUsed) { return `Variable name "${value}" is already used elsewhere`; }
+    if (instanceCount >= 2) {
+      return `${capitalize(attribute)}s must be unique`;
+    }
+    return undefined;
+  };
 
-  return undefined;
-};
+export const uniqueByList = (list = []) =>
+  (value) => {
+    if (!value) { return undefined; }
+
+    const existsAlready = list
+      .some(existingValue => existingValue && existingValue.toLowerCase() === value.toLowerCase());
+
+    if (existsAlready) {
+      return `"${value}" is already used elsewhere`;
+    }
+
+    return undefined;
+  };
 
 const validations = {
   required,
@@ -59,7 +85,8 @@ const validations = {
   maxValue,
   minSelected,
   maxSelected,
-  validateName,
+  uniqueArrayAttribute,
+  uniqueByList,
 };
 
 /**
