@@ -9,11 +9,11 @@ import Row from '../Row';
 import withMapFormToProps from '../../enhancers/withMapFormToProps';
 import withExternalData from '../../enhancers/withExternalData';
 import withVariableOptionsFromExternalData from '../../enhancers/withVariableOptionsFromExternalData';
-import withAdditionalPropertiesOptions from './withAdditionalPropertiesOptions';
+import withVariableOptionsGetter from '../SortOptionsForExternalData/withVariableOptionsGetter';
 
 const CardDisplayOptions = ({
-  maxAdditionalDisplayProperties,
-  additionalPropertiesOptionGetter,
+  maxVariableOptions,
+  variableOptionsGetter,
   disabled,
 }) => (
   <Section group contentId="guidance.editor.cardDisplayOptions" disabled={disabled}>
@@ -34,16 +34,16 @@ const CardDisplayOptions = ({
         Would you like to display any other attributes to help the participant recognize
         a roster alter?
       </p>
-      { maxAdditionalDisplayProperties === 0 &&
+      { maxVariableOptions === 0 &&
         <p><em>
           Your external data does not seem to contain any usable attributes.
           Is it correctly formatted?
         </em></p>
       }
-      { maxAdditionalDisplayProperties > 0 &&
+      { maxVariableOptions > 0 &&
         <MultiSelect
           name="cardOptions.additionalProperties"
-          maxItems={maxAdditionalDisplayProperties}
+          maxItems={maxVariableOptions}
           properties={[
             {
               fieldName: 'variable',
@@ -54,7 +54,7 @@ const CardDisplayOptions = ({
               placeholder: 'Label',
             },
           ]}
-          options={additionalPropertiesOptionGetter}
+          options={variableOptionsGetter}
         />
       }
     </Row>
@@ -62,8 +62,8 @@ const CardDisplayOptions = ({
 );
 
 CardDisplayOptions.propTypes = {
-  maxAdditionalDisplayProperties: PropTypes.number.isRequired,
-  additionalPropertiesOptionGetter: PropTypes.func.isRequired,
+  maxVariableOptions: PropTypes.number.isRequired,
+  variableOptionsGetter: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
 
@@ -74,6 +74,6 @@ export default compose(
   withDisabledAssetRequired,
   withExternalData,
   withVariableOptionsFromExternalData,
-  withAdditionalPropertiesOptions,
+  withVariableOptionsGetter,
 )(CardDisplayOptions);
 

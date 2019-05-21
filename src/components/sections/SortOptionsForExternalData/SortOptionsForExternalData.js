@@ -10,14 +10,15 @@ import Section from '../Section';
 import Row from '../Row';
 import variableOptionsFromExternalData from '../../enhancers/withVariableOptionsFromExternalData';
 import getSortOrderOptionGetter from './getSortOrderOptionGetter';
-import getExternalPropertiesOptionGetter from '../CardDisplayOptions/getExternalPropertiesOptionGetter';
+import withVariableOptionsGetter from './withVariableOptionsGetter';
 
 const SortOptions = ({
   variableOptions,
+  maxVariableOptions,
+  variableOptionsGetter,
   disabled,
 }) => {
   const sortOrderOptionGetter = getSortOrderOptionGetter(variableOptions);
-  const sortablePropertiesOptionGetter = getExternalPropertiesOptionGetter(variableOptions);
 
   return (
     <Section group contentId="guidance.editor.SortOptions" disabled={disabled}>
@@ -53,7 +54,7 @@ const SortOptions = ({
         </p>
         <MultiSelect
           name="sortOptions.sortableProperties"
-          maxItems={variableOptions.length}
+          maxItems={maxVariableOptions}
           properties={[
             { fieldName: 'variable' },
             {
@@ -62,7 +63,7 @@ const SortOptions = ({
               placeholder: 'Label',
             },
           ]}
-          options={sortablePropertiesOptionGetter}
+          options={variableOptionsGetter}
         />
       </Row>
     </Section>
@@ -71,6 +72,8 @@ const SortOptions = ({
 
 SortOptions.propTypes = {
   variableOptions: PropTypes.array.isRequired,
+  maxVariableOptions: PropTypes.number.isRequired,
+  variableOptionsGetter: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
 
@@ -81,5 +84,6 @@ export default compose(
   withDisabledAssetRequired,
   withExternalData,
   variableOptionsFromExternalData,
+  withVariableOptionsGetter,
 )(SortOptions);
 
