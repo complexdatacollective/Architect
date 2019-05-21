@@ -8,7 +8,7 @@ import Row from './Row';
 import withSubject from '../enhancers/withSubject';
 import withDisabledSubjectRequired from '../enhancers/withDisabledSubjectRequired';
 
-const ExternalDataWithCardOptions = props => (
+const ExternalDataSource = props => (
   <Section contentId="guidance.editor.externalData" {...props}>
     <Row>
       <div id={getFieldId('dataSource')} data-name="Roster data-source" />
@@ -27,10 +27,10 @@ const ExternalDataWithCardOptions = props => (
   </Section>
 );
 
-export { ExternalDataWithCardOptions };
+export { ExternalDataSource };
 
 export default compose(
   withSubject,
   withDisabledSubjectRequired,
-)(ExternalDataWithCardOptions);
+)(ExternalDataSource);
 

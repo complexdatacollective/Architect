@@ -5,9 +5,9 @@ import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
 import MultiSelect from '../Form/MultiSelect';
 import Section from './Section';
 import Row from './Row';
-import withDataSource from '../enhancers/withDataSource';
-import withFieldValues from './NameGeneratorListPrompts/withFieldValues';
-import withExternalDataPropertyOptions from './NameGeneratorListPrompts/withExternalDataPropertyOptions';
+import withMapFormToProps from '../enhancers/withMapFormToProps';
+import withExternalData from '../enhancers/withExternalData';
+import withExternalDataPropertyOptions from './SortOptionsForExternalData/withExternalDataPropertyOptions';
 
 const CardDisplayOptions = ({
   maxAdditionalDisplayProperties,
@@ -62,9 +62,9 @@ const CardDisplayOptions = ({
 export { CardDisplayOptions };
 
 export default compose(
-  withDataSource,
+  withMapFormToProps('dataSource'),
   withDisabledAssetRequired,
-  withFieldValues(['dataSource']),
+  withExternalData,
   withExternalDataPropertyOptions,
 )(CardDisplayOptions);
 

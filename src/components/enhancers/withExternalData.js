@@ -26,9 +26,9 @@ const withExternalData = WrappedComponent =>
       super(props);
 
       this.state = {
-        loading: false,
+        externalDataIsLoading: false,
         externalData: null,
-        error: null,
+        externalDataError: null,
       };
     }
 
@@ -45,13 +45,13 @@ const withExternalData = WrappedComponent =>
     async fetchExternalData() {
       if (!this.props.assetPath) { return; }
 
-      this.setState({ loading: true, externalData: null, error: null });
+      this.setState({ externalDataIsLoading: true, externalData: null, externalDataError: null });
 
       try {
         const externalData = await readExternalData(this.props.assetPath);
-        this.setState({ loading: false, externalData });
+        this.setState({ externalDataIsLoading: false, externalData });
       } catch (e) {
-        this.setState({ loading: false, error: e.toString() });
+        this.setState({ externalDataIsLoading: false, externalDataError: e.toString() });
       }
     }
 

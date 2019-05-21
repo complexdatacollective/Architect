@@ -1,9 +1,9 @@
 import {
   Name,
   NodeType,
-  ExternalDataWithCardOptions,
+  ExternalDataSource,
   CardDisplayOptions,
-  SortOptions,
+  SortOptionsForExternalData,
   NameGeneratorListPrompts,
 } from '../../sections';
 
@@ -11,15 +11,12 @@ const NameGeneratorList = {
   sections: [
     Name,
     NodeType,
-    ExternalDataWithCardOptions,
+    ExternalDataSource,
     CardDisplayOptions,
-    SortOptions,
+    SortOptionsForExternalData,
     NameGeneratorListPrompts,
   ],
   name: 'Small Roster Name Generator',
-  template: {
-    showExistingNodes: false,
-  },
 };
 
 export default NameGeneratorList;

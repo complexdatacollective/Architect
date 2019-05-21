@@ -6,7 +6,7 @@ import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequ
 import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
-import withDataSource from '../../enhancers/withDataSource';
+import withMapFormToProps from '../../enhancers/withMapFormToProps';
 
 const NameGeneratorAutoCompletePrompts = props => (
   <EditableList
@@ -29,7 +29,7 @@ export { NameGeneratorAutoCompletePrompts };
 
 export default compose(
   withSubject,
-  withDataSource,
+  withMapFormToProps('dataSource'),
   withDisabledSubjectRequired,
   withDisabledAssetRequired,
 )(NameGeneratorAutoCompletePrompts);

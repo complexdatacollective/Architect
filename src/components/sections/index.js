@@ -1,9 +1,9 @@
 export { default as ContentGrid } from './ContentGrid';
 export { default as Background } from './Background';
-export { default as ExternalDataWithCardOptions } from './ExternalDataWithCardOptions';
+export { default as ExternalDataSource } from './ExternalDataSource';
 export { default as CardDisplayOptions } from './CardDisplayOptions';
-export { default as SearchOptions } from './SearchOptions';
-export { default as SortOptions } from './SortOptions';
+export { default as SearchOptionsForExternalData } from './SearchOptionsForExternalData';
+export { default as SortOptionsForExternalData } from './SortOptionsForExternalData';
 export { default as QuickAdd } from './QuickAdd';
 export { default as Title } from './Title';
 export { default as Name } from './Name';

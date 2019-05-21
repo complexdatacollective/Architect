@@ -14,6 +14,9 @@ export const getAssetPath = (state, dataSource) => {
   const { workingPath } = getActiveProtocolMeta(state);
   const assetManifest = getAssetManifest(state);
   const asset = get(assetManifest, dataSource);
+
+  if (!asset) { return null; }
+
   const assetPath = path.join(workingPath, 'assets', asset.source);
   return assetPath;
 };

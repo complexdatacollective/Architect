@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
 import { Text } from '../../../ui/components/Fields';
 import AssignAttributes from '../../AssignAttributes';
-import withFieldValues from './withFieldValues';
-import withExternalDataPropertyOptions, { propTypes as externalDataPropTypes } from './withExternalDataPropertyOptions';
 import Row from '../Row';
 import Section from '../Section';
 
@@ -61,9 +58,7 @@ const PromptFields = ({
 PromptFields.propTypes = {
   type: PropTypes.string,
   entity: PropTypes.string,
-  dataSource: PropTypes.string,
   form: PropTypes.string.isRequired,
-  ...externalDataPropTypes,
 };
 
 PromptFields.defaultProps = {
@@ -74,7 +69,4 @@ PromptFields.defaultProps = {
 
 export { PromptFields };
 
-export default compose(
-  withFieldValues(['dataSource']),
-  withExternalDataPropertyOptions,
-)(PromptFields);
+export default PromptFields;

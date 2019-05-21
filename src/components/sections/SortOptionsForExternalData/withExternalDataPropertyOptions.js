@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import { compose, withProps, defaultProps } from 'recompose';
-import withExternalData from '../../enhancers/withExternalData';
 import { getVariablesFromExternalData } from '../../../selectors/assets';
 import getExternalPropertiesOptionGetter from './getExternalPropertiesOptionGetter';
-
 
 const defaultVariableOptions = defaultProps({
   variableOptions: [],
@@ -33,7 +31,6 @@ export const propTypes = {
 };
 
 const withVariableOptions = compose(
-  withExternalData,
   defaultVariableOptions,
   variableOptionProps,
 );
