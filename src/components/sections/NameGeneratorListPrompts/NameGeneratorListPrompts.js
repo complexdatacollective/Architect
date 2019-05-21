@@ -3,10 +3,10 @@ import { compose } from 'recompose';
 import EditableList from '../../EditableList';
 import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
+import withMapFormToProps from '../../enhancers/withMapFormToProps';
+import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
-import withDataSource from '../../enhancers/withDataSource';
-import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 
 const template = () => ({});
 
@@ -32,7 +32,7 @@ export { NameGeneratorListPrompts };
 
 export default compose(
   withSubject,
-  withDataSource,
+  withMapFormToProps('dataSource'),
   withDisabledSubjectRequired,
   withDisabledAssetRequired,
 )(NameGeneratorListPrompts);

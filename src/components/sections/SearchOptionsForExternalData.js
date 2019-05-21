@@ -1,21 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '../../ui/components/Fields';
 import ValidatedField from '../Form/ValidatedField';
 import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
+import withMapFormToProps from '../enhancers/withMapFormToProps';
+import withExternalData from '../enhancers/withExternalData';
 import Section from './Section';
 import Row from './Row';
-import withDataSource from '../enhancers/withDataSource';
-import withFieldValues from './NameGeneratorListPrompts/withFieldValues';
-import withExternalDataPropertyOptions from './NameGeneratorListPrompts/withExternalDataPropertyOptions';
+import withVariableOptionsFromExternalData from '../enhancers/withVariableOptionsFromExternalData';
 
 const SearchOptions = ({
-  maxAdditionalDisplayProperties,
-  additionalPropertiesOptionGetter,
   variableOptions,
-  ...props
+  disabled,
 }) => (
-  <Section group contentId="guidance.editor.SearchOptions" {...props}>
+  <Section group contentId="guidance.editor.SearchOptions" disabled={disabled}>
     <Row>
       <h3>Search Options</h3>
       <p>
@@ -62,12 +61,17 @@ const SearchOptions = ({
   </Section>
 );
 
+SearchOptions.propTypes = {
+  variableOptions: PropTypes.array.isRequired,
+  disabled: PropTypes.bool.isRequired,
+};
+
 export { SearchOptions };
 
 export default compose(
-  withDataSource,
+  withMapFormToProps(['dataSource']),
   withDisabledAssetRequired,
-  withFieldValues(['dataSource']),
-  withExternalDataPropertyOptions,
+  withExternalData,
+  withVariableOptionsFromExternalData,
 )(SearchOptions);
 

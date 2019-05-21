@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import getExternalPropertiesOptionGetter from '../getExternalPropertiesOptionGetter';
+import getVariableOptionsGetter from '../getVariableOptionsGetter';
 
 const mockExternalDataPropertyOptions = [
   { label: 'Name', value: '1234-1234-1234-1' },
@@ -8,9 +8,9 @@ const mockExternalDataPropertyOptions = [
   { label: 'Favourite Color', value: '1234-1234-1234-3' },
 ];
 
-describe('getExternalPropertiesOptionGetter()', () => {
+describe('getVariableOptionsGetter()', () => {
   it('options for `variable`', () => {
-    const externalPropertiesOptionGetter = getExternalPropertiesOptionGetter(
+    const externalPropertiesOptionGetter = getVariableOptionsGetter(
       mockExternalDataPropertyOptions,
     );
     const mockAllValues = [{ variable: '1234-1234-1234-3', value: 'Black' }];

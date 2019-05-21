@@ -1,26 +1,27 @@
 import React from 'react';
 import { compose } from 'recompose';
-import MultiSelect from '../Form/MultiSelect';
-import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
-import { Text } from '../../ui/components/Fields';
-import Section from './Section';
-import Row from './Row';
-import withDataSource from '../enhancers/withDataSource';
-import withFieldValues from './NameGeneratorListPrompts/withFieldValues';
-import withExternalDataPropertyOptions from './NameGeneratorListPrompts/withExternalDataPropertyOptions';
-import getSortOrderOptionGetter from './NameGeneratorListPrompts/getSortOrderOptionGetter';
-import getExternalPropertiesOptionGetter from './NameGeneratorListPrompts/getExternalPropertiesOptionGetter';
+import PropTypes from 'prop-types';
+import MultiSelect from '../../Form/MultiSelect';
+import { Text } from '../../../ui/components/Fields';
+import withMapFormToProps from '../../enhancers/withMapFormToProps';
+import withExternalData from '../../enhancers/withExternalData';
+import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
+import Section from '../Section';
+import Row from '../Row';
+import variableOptionsFromExternalData from '../../enhancers/withVariableOptionsFromExternalData';
+import getSortOrderOptionGetter from './getSortOrderOptionGetter';
+import withVariableOptionsGetter from './withVariableOptionsGetter';
 
 const SortOptions = ({
-  maxAdditionalDisplayProperties,
-  additionalPropertiesOptionGetter,
   variableOptions,
-  ...props
+  maxVariableOptions,
+  variableOptionsGetter,
+  disabled,
 }) => {
   const sortOrderOptionGetter = getSortOrderOptionGetter(variableOptions);
-  const sortablePropertiesOptionGetter = getExternalPropertiesOptionGetter(variableOptions);
+
   return (
-    <Section group contentId="guidance.editor.SortOptions" {...props}>
+    <Section group contentId="guidance.editor.SortOptions" disabled={disabled}>
       <Row>
         <h3>Sort Options</h3>
         <p>
@@ -53,7 +54,7 @@ const SortOptions = ({
         </p>
         <MultiSelect
           name="sortOptions.sortableProperties"
-          maxItems={variableOptions.length}
+          maxItems={maxVariableOptions}
           properties={[
             { fieldName: 'variable' },
             {
@@ -62,19 +63,27 @@ const SortOptions = ({
               placeholder: 'Label',
             },
           ]}
-          options={sortablePropertiesOptionGetter}
+          options={variableOptionsGetter}
         />
       </Row>
     </Section>
   );
 };
 
+SortOptions.propTypes = {
+  variableOptions: PropTypes.array.isRequired,
+  maxVariableOptions: PropTypes.number.isRequired,
+  variableOptionsGetter: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+};
+
 export { SortOptions };
 
 export default compose(
-  withDataSource,
+  withMapFormToProps('dataSource'),
   withDisabledAssetRequired,
-  withFieldValues(['dataSource']),
-  withExternalDataPropertyOptions,
+  withExternalData,
+  variableOptionsFromExternalData,
+  withVariableOptionsGetter,
 )(SortOptions);
 

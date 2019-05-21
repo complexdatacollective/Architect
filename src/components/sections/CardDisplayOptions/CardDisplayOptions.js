@@ -1,20 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import * as Fields from '../../ui/components/Fields';
-import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
-import MultiSelect from '../Form/MultiSelect';
-import Section from './Section';
-import Row from './Row';
-import withDataSource from '../enhancers/withDataSource';
-import withFieldValues from './NameGeneratorListPrompts/withFieldValues';
-import withExternalDataPropertyOptions from './NameGeneratorListPrompts/withExternalDataPropertyOptions';
+import * as Fields from '../../../ui/components/Fields';
+import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
+import MultiSelect from '../../Form/MultiSelect';
+import Section from '../Section';
+import Row from '../Row';
+import withMapFormToProps from '../../enhancers/withMapFormToProps';
+import withExternalData from '../../enhancers/withExternalData';
+import withVariableOptionsFromExternalData from '../../enhancers/withVariableOptionsFromExternalData';
+import withVariableOptionsGetter from '../SortOptionsForExternalData/withVariableOptionsGetter';
 
 const CardDisplayOptions = ({
-  maxAdditionalDisplayProperties,
-  additionalPropertiesOptionGetter,
-  ...props
+  maxVariableOptions,
+  variableOptionsGetter,
+  disabled,
 }) => (
-  <Section group contentId="guidance.editor.cardDisplayOptions" {...props}>
+  <Section group contentId="guidance.editor.cardDisplayOptions" disabled={disabled}>
     <Row>
       <h3>Card Display Options</h3>
       <p>
@@ -32,16 +34,16 @@ const CardDisplayOptions = ({
         Would you like to display any other attributes to help the participant recognize
         a roster alter?
       </p>
-      { maxAdditionalDisplayProperties === 0 &&
+      { maxVariableOptions === 0 &&
         <p><em>
           Your external data does not seem to contain any usable attributes.
           Is it correctly formatted?
         </em></p>
       }
-      { maxAdditionalDisplayProperties > 0 &&
+      { maxVariableOptions > 0 &&
         <MultiSelect
           name="cardOptions.additionalProperties"
-          maxItems={maxAdditionalDisplayProperties}
+          maxItems={maxVariableOptions}
           properties={[
             {
               fieldName: 'variable',
@@ -52,19 +54,26 @@ const CardDisplayOptions = ({
               placeholder: 'Label',
             },
           ]}
-          options={additionalPropertiesOptionGetter}
+          options={variableOptionsGetter}
         />
       }
     </Row>
   </Section>
 );
 
+CardDisplayOptions.propTypes = {
+  maxVariableOptions: PropTypes.number.isRequired,
+  variableOptionsGetter: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+};
+
 export { CardDisplayOptions };
 
 export default compose(
-  withDataSource,
+  withMapFormToProps('dataSource'),
   withDisabledAssetRequired,
-  withFieldValues(['dataSource']),
-  withExternalDataPropertyOptions,
+  withExternalData,
+  withVariableOptionsFromExternalData,
+  withVariableOptionsGetter,
 )(CardDisplayOptions);
 

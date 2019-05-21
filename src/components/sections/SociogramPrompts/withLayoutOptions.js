@@ -3,10 +3,10 @@ import { formValueSelector } from 'redux-form';
 import { getLayoutVariablesForSubject } from './selectors';
 import { getVariablesForSubject } from '../../../selectors/codebook';
 
-const withLayoutOptions = (state, props) => {
-  const variablesForSubject = getVariablesForSubject(state, props.nodeType);
-  const layoutVariablesForSubject = getLayoutVariablesForSubject(state, props);
-  const allowPositioning = formValueSelector(props.form)(state, 'layout.allowPositioning');
+const withLayoutOptions = (state, { entity, type, form }) => {
+  const variablesForSubject = getVariablesForSubject(state, { entity, type });
+  const layoutVariablesForSubject = getLayoutVariablesForSubject(state, { entity, type });
+  const allowPositioning = formValueSelector(form)(state, 'layout.allowPositioning');
 
   return {
     variablesForSubject,
