@@ -1,20 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import * as Fields from '../../ui/components/Fields';
-import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
-import MultiSelect from '../Form/MultiSelect';
-import Section from './Section';
-import Row from './Row';
-import withMapFormToProps from '../enhancers/withMapFormToProps';
-import withExternalData from '../enhancers/withExternalData';
-import withExternalDataPropertyOptions from './SortOptionsForExternalData/withExternalDataPropertyOptions';
+import * as Fields from '../../../ui/components/Fields';
+import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
+import MultiSelect from '../../Form/MultiSelect';
+import Section from '../Section';
+import Row from '../Row';
+import withMapFormToProps from '../../enhancers/withMapFormToProps';
+import withExternalData from '../../enhancers/withExternalData';
+import withVariableOptionsFromExternalData from '../../enhancers/withVariableOptionsFromExternalData';
+import withAdditionalPropertiesOptions from './withAdditionalPropertiesOptions';
 
 const CardDisplayOptions = ({
   maxAdditionalDisplayProperties,
   additionalPropertiesOptionGetter,
-  ...props
+  disabled,
 }) => (
-  <Section group contentId="guidance.editor.cardDisplayOptions" {...props}>
+  <Section group contentId="guidance.editor.cardDisplayOptions" disabled={disabled}>
     <Row>
       <h3>Card Display Options</h3>
       <p>
@@ -59,12 +61,19 @@ const CardDisplayOptions = ({
   </Section>
 );
 
+CardDisplayOptions.propTypes = {
+  maxAdditionalDisplayProperties: PropTypes.number.isRequired,
+  additionalPropertiesOptionGetter: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+};
+
 export { CardDisplayOptions };
 
 export default compose(
   withMapFormToProps('dataSource'),
   withDisabledAssetRequired,
   withExternalData,
-  withExternalDataPropertyOptions,
+  withVariableOptionsFromExternalData,
+  withAdditionalPropertiesOptions,
 )(CardDisplayOptions);
 
