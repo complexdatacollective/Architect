@@ -41,7 +41,7 @@ const getAssetIndex = createSelector(
   (protocol) => {
     const informationItems = collectPaths('stages[].items[].content', protocol);
     const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
-    const nameGeneratorDataSources = collectPaths('stages[].prompts[].dataSource', protocol);
+    const nameGeneratorDataSources = collectPaths('stages[].dataSource', protocol);
     const sociogramBackground = collectPaths('stages[].background.image', protocol);
 
     return {
