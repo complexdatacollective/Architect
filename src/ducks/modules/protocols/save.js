@@ -1,6 +1,7 @@
 import { find } from 'lodash';
 import { saveProtocol as saveProtocolFile } from '../../../other/protocols';
 import { getProtocol } from '../../../selectors/protocol';
+import validateProtocol from '../../../utils/validateProtocol';
 
 const SAVE_PROTOCOL = 'PROTOCOLS/SAVE';
 const SAVE_PROTOCOL_SUCCESS = 'PROTOCOLS/SAVE_SUCCESS';
@@ -31,12 +32,17 @@ const saveProtocolThunk = () =>
 
     if (!meta) {
       // Always return a promise
-      return Promise.resolve(dispatch(saveProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`)));
+      dispatch(saveProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`));
+      return Promise.resolve();
     }
 
-    return saveProtocolFile(meta.workingPath, protocol)
+    return validateProtocol(protocol)
+      .then(() => saveProtocolFile(meta.workingPath, protocol))
       .then(destinationPath => dispatch(saveProtocolSuccess(destinationPath, protocol)))
-      .catch(e => dispatch(saveProtocolError(e)));
+      .catch((e) => {
+        dispatch(saveProtocolError(e));
+        throw e;
+      });
   };
 
 const actionCreators = {

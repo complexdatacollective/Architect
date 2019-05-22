@@ -1,3 +1,7 @@
+import path from 'path';
+import openProtocolDialog from '../../../other/protocols/utils/openProtocolDialog';
+import history from '../../../history';
+import { actionCreators as dialogActions } from '../dialogs';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as importActionCreators } from './import';
 import { actionCreators as saveActionCreators } from './save';
@@ -6,8 +10,7 @@ import {
   actionCreators as registerActionCreators,
   actionTypes as registerActionTypes,
 } from './register';
-import openProtocolDialog from '../../../other/protocols/utils/openProtocolDialog';
-import history from '../../../history';
+
 
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
 const IMPORT_AND_LOAD_ERROR = 'PROTOCOLS/IMPORT_AND_LOAD_ERROR';
@@ -42,7 +45,16 @@ const saveAndExportThunk = () =>
   dispatch =>
     dispatch(saveActionCreators.saveProtocol())
       .then(() => dispatch(exportActionCreators.exportProtocol()))
-      .catch(e => dispatch(saveAndExportError(e)));
+      .catch((e) => {
+        dispatch(saveAndExportError(e));
+
+        e.friendlyMessage = 'Something went wrong when saving.';
+        dispatch(dialogActions.openDialog({
+          type: 'Error',
+          title: 'Protocol could not be saved.',
+          error: e,
+        }));
+      });
 
 /**
  * 1. Import - extract/copy protocol to /tmp/{working-path}
@@ -55,7 +67,16 @@ const importAndLoadThunk = filePath =>
         history.push(`/edit/${id}/`);
         return id;
       })
-      .catch(e => dispatch(importAndLoadError(e)));
+      .catch((e) => {
+        dispatch(importAndLoadError(e));
+
+        e.friendlyMessage = `Something went wrong when '${path.basename(filePath)}' was imported.`;
+        dispatch(dialogActions.openDialog({
+          type: 'Error',
+          title: 'Protocol could not be imported',
+          error: e,
+        }));
+      });
 
 /**
  * 1. Create - Create a new protocol from template
