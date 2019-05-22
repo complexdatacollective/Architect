@@ -211,6 +211,7 @@
         "collectCoverageFrom": [
             "src/**/*.{js,jsx}",
             "!src/ui/**",
+            "!src/protocol-validation/**",
             "!network-canvas/**"
         ],
         "setupFiles": [
@@ -223,11 +224,13 @@
         "testPathIgnorePatterns": [
             "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]",
             "<rootDir>[/\\\\](network-canvas)[/\\\\]",
-            "<rootDir>[/\\\\](src/ui)[/\\\\]"
+            "<rootDir>[/\\\\](src/ui)[/\\\\]",
+            "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]"
         ],
         "modulePathIgnorePatterns": [
             "<rootDir>[/\\\\](network-canvas)[/\\\\]",
-            "<rootDir>[/\\\\](src/ui)[/\\\\]"
+            "<rootDir>[/\\\\](src/ui)[/\\\\]",
+            "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]"
         ],
         "testEnvironment": "node",
         "testURL": "http://localhost",
