@@ -1,7 +1,9 @@
+import path from 'path';
 import unbundleProtocol from '../../../other/protocols/unbundleProtocol';
 import loadProtocolConfiguration from '../../../other/protocols/loadProtocolConfiguration';
 import { actionCreators as registerActions } from './register';
 import { actionCreators as dialogActions } from '../dialogs';
+import validateProtocol from '../../../utils/validateProtocol';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
@@ -32,8 +34,10 @@ const importProtocolThunk = filePath =>
       .then(workingPath =>
         // check we can open the protocol file
         loadProtocolConfiguration(workingPath)
+          // it loaded okay, check the protocol is valid
+          .then(validateProtocol)
           .then(() => {
-            // it loaded okay
+            // all was well
             dispatch(importProtocolSuccess({ filePath, workingPath }));
             return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
           }),
@@ -41,7 +45,7 @@ const importProtocolThunk = filePath =>
       .catch((e) => {
         dispatch(importProtocolError(e, filePath));
 
-        e.friendlyMessage = `Something went wrong when '${filePath}' was imported.`;
+        e.friendlyMessage = `Something went wrong when '${path.basename(filePath)}' was imported.`;
         dispatch(dialogActions.openDialog({
           type: 'Error',
           title: 'Protocol could not be imported',
