@@ -42,8 +42,8 @@ const loadProtocolThunk = id =>
     const meta = find(state.protocols, ['id', id]);
 
     if (!meta) {
-      // Always return a promise
-      return Promise.resolve(dispatch(loadProtocolError(`Protocol "${id}" not found in 'protocols'`)));
+      dispatch(loadProtocolError(`Protocol "${id}" not found in 'protocols'`));
+      return Promise.resolve(); // Always return a promise
     }
 
     return loadProtocolConfiguration(meta.workingPath)
