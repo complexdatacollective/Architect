@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -55,10 +54,10 @@ Start.defaultProps = {
   show: true,
 };
 
-const mapDispatchToProps = dispatch => ({
-  createAndLoadProtocol: bindActionCreators(protocolsActions.createAndLoadProtocol, dispatch),
-  openProtocol: bindActionCreators(protocolsActions.openProtocol, dispatch),
-});
+const mapDispatchToProps = {
+  createAndLoadProtocol: protocolsActions.createAndLoadProtocol,
+  openProtocol: protocolsActions.openProtocol,
+};
 
 export { Start };
 
