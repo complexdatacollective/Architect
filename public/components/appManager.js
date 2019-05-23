@@ -33,7 +33,6 @@ const appManager = {
     });
 
     ipcMain.on('DO_CLOSE', () => {
-      global.closeWithoutSave = true;
       appWindowManager.getWindow().then(window => window.close());
     });
   },
