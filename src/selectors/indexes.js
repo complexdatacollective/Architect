@@ -14,7 +14,7 @@ import collectPaths from '../utils/collectPaths';
 const getVariableIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const formIndex = collectPaths('stages[].prompts[].form.fields[].variable', protocol);
+    const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
     const sociogramIndex = collectPaths('stages[].prompts[].highlight.variable', protocol);
     const variableIndex = collectPaths('stages[].prompts[].variable', protocol);
 
@@ -41,7 +41,7 @@ const getAssetIndex = createSelector(
   (protocol) => {
     const informationItems = collectPaths('stages[].items[].content', protocol);
     const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
-    const nameGeneratorDataSources = collectPaths('stages[].prompts[].dataSource', protocol);
+    const nameGeneratorDataSources = collectPaths('stages[].dataSource', protocol);
     const sociogramBackground = collectPaths('stages[].background.image', protocol);
 
     return {

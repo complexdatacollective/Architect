@@ -6,23 +6,14 @@ import thunk from 'redux-thunk';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as registerActionCreators } from '../register';
 import history from '../../../../history';
+import testState from '../../../../__tests__/testState.json';
+import { loadProtocolConfiguration } from '../../../../other/protocols';
 
 jest.mock('../../../../other/protocols');
 
-const initalState = {
-  protocols: [
-    {
-      id: '32beec15',
-      filePath: '',
-      workingPath: '',
-    },
-  ],
-  protocol: {
-    present: {
-      name: 'mock protocol',
-    },
-  },
-  session: { activeProtocol: '32beec15' },
+const invalidProtocol = {
+  ...testState.protocol.present,
+  stages: [],
 };
 
 const log = jest.fn();
@@ -34,9 +25,9 @@ const logger = () =>
       return next(action);
     };
 
-const getStore = () =>
+const getStore = (initialState = testState) =>
   createStore(
-    (state = initalState) => state,
+    (state = initialState) => state,
     applyMiddleware(thunk, logger),
   );
 
@@ -75,42 +66,62 @@ describe('protocols', () => {
 
   describe('saveAndExportProtocol()', () => {
     advanceTo(new Date(2017, 5, 27, 0, 0, 0));
+
+    describe('invalid protocol', () => {
+      beforeEach(() => {
+        log.mockClear();
+        store = getStore({
+          ...testState,
+          protocol: {
+            present: invalidProtocol,
+          },
+        });
+      });
+
+      it('throws an error when protocol is invalid', () =>
+        store.dispatch(actionCreators.saveAndExportProtocol())
+          .then(() => {
+            expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/SAVE' }]);
+            expect(log.mock.calls[1][0]).toMatchObject({
+              type: 'PROTOCOLS/SAVE_ERROR',
+            });
+          }),
+      );
+    });
+
     it('triggers save and export actions', () =>
       store.dispatch(actionCreators.saveAndExportProtocol())
-        .then(() => {
-          expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/SAVE' }]);
-          expect(log.mock.calls[1]).toEqual([{ destinationPath: '/dev/null/fake/user/protocol/path', protocol: { lastModified: new Date().toJSON(), name: 'mock protocol' }, type: 'PROTOCOLS/SAVE_SUCCESS' }]);
-          expect(log.mock.calls[2]).toEqual([{ type: 'PROTOCOLS/EXPORT' }]);
-          expect(log.mock.calls[3]).toEqual([{ filePath: '', type: 'PROTOCOLS/EXPORT_SUCCESS' }]);
-        }),
+        .then(() => expect(log.mock.calls).toMatchSnapshot()),
     );
   });
 
   describe('importAndLoadProtocol()', () => {
-    it('triggers import action and load redirect', () =>
+    it('triggers import action and load redirect', done =>
       store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path'))
         .then(() => {
-          expect(log.mock.calls[0][0]).toEqual({
-            filePath: '/dev/null/mock/path',
-            type: 'PROTOCOLS/IMPORT',
-          });
-          expect(log.mock.calls[1][0]).toEqual({
-            filePath: '/dev/null/mock/path',
-            type: 'PROTOCOLS/IMPORT_SUCCESS',
-            workingPath: '/dev/null/fake/working/path',
-          });
-          expect(log.mock.calls[2][0]).toEqual({
-            filePath: '/dev/null/mock/path',
-            type: 'PROTOCOLS/REGISTER',
-            advanced: true,
-            id: '809895df-bbd7-4c76-ac58-e6ada2625f9b',
-            workingPath: '/dev/null/fake/working/path',
-          });
+          expect(log.mock.calls).toMatchSnapshot();
           expect(history.entries.pop()).toMatchObject({
             pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/',
           });
+          done();
         }),
     );
+
+    describe('invalid protocol', () => {
+      beforeEach(() => {
+        log.mockClear();
+        loadProtocolConfiguration.mockReturnValueOnce(
+          Promise.resolve(invalidProtocol),
+        );
+      });
+
+      it('throws an error when protocol is invalid', () =>
+        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
+          .then(() => {
+            expect(log.mock.calls).toMatchSnapshot();
+          }),
+      );
+    });
   });
 
   describe('reducer', () => {

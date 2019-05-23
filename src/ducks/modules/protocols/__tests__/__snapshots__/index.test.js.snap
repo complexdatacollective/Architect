@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`protocols importAndLoadProtocol() invalid protocol throws an error when protocol is invalid 1`] = `
+Array [
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/invalid",
+      "type": "PROTOCOLS/IMPORT",
+    },
+  ],
+  Array [
+    Object {
+      "error": [Error: Protocol.stages should NOT have fewer than 1 items 
+
+],
+      "filePath": "/dev/null/mock/path/invalid",
+      "type": "PROTOCOLS/IMPORT_ERROR",
+    },
+  ],
+  Array [
+    Object {
+      "error": [Error: Protocol.stages should NOT have fewer than 1 items 
+
+],
+      "type": "PROTOCOLS/IMPORT_AND_LOAD_ERROR",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "error": [Error: Protocol.stages should NOT have fewer than 1 items 
+
+],
+        "type": "Error",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": Symbol(PROTOCOL/OPEN_DIALOG),
+    },
+  ],
+]
+`;
+
+exports[`protocols importAndLoadProtocol() triggers import action and load redirect 1`] = `
+Array [
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path",
+      "type": "PROTOCOLS/IMPORT",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path",
+      "type": "PROTOCOLS/IMPORT_SUCCESS",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+  Array [
+    Object {
+      "advanced": true,
+      "filePath": "/dev/null/mock/path",
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOLS/REGISTER",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+]
+`;
+
+exports[`protocols saveAndExportProtocol() triggers save and export actions 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PROTOCOLS/SAVE",
+    },
+  ],
+  Array [
+    Object {
+      "destinationPath": "/dev/null/fake/user/protocol/path",
+      "protocol": Object {
+        "assetManifest": Object {
+          "1234-asset-1": Object {
+            "source": "1234-4567-asset-1",
+          },
+          "1234-asset-2": Object {
+            "source": "1234-4567-asset-2",
+          },
+          "1234-asset-3": Object {
+            "source": "1234-4567-asset-3",
+          },
+          "1234-asset-4": Object {
+            "source": "1234-4567-asset-4",
+          },
+          "1234-asset-5": Object {
+            "source": "1234-4567-asset-5",
+          },
+        },
+        "codebook": Object {
+          "edge": Object {
+            "1234-5": Object {
+              "color": "blue",
+              "name": "an edge",
+            },
+          },
+          "ego": Object {
+            "variables": Object {
+              "sierra": Object {
+                "name": "SIERRA",
+                "type": "text",
+              },
+              "tango": Object {
+                "name": "TANGO",
+                "type": "text",
+              },
+            },
+          },
+          "node": Object {
+            "1234-1234-1234": Object {
+              "color": "red",
+              "name": "1234-1234-1234",
+              "variables": Object {
+                "1234-1234-1": Object {
+                  "name": "my layout",
+                  "type": "layout",
+                },
+                "1234-1234-2": Object {
+                  "name": "my category",
+                  "type": "categorical",
+                },
+                "1234-1234-3": Object {
+                  "name": "my boolean",
+                  "type": "boolean",
+                },
+                "1234-1234-4": Object {
+                  "name": "other boolean 2",
+                  "type": "boolean",
+                },
+                "1234-1234-5": Object {
+                  "name": "other boolean 4",
+                  "type": "boolean",
+                },
+              },
+            },
+            "bar": Object {
+              "color": "blue",
+              "name": "bar",
+              "variables": Object {
+                "1234-1234-4": Object {
+                  "name": "1234-1234-4",
+                  "type": "text",
+                },
+                "1234-1234-5": Object {
+                  "name": "1234-1234-5",
+                  "type": "text",
+                },
+                "alpha": Object {
+                  "name": "ALPHA",
+                  "type": "text",
+                },
+                "bravo": Object {
+                  "name": "BRAVO",
+                  "type": "text",
+                },
+                "charlie": Object {
+                  "name": "CHARLIE",
+                  "type": "location",
+                },
+              },
+            },
+            "foo": Object {
+              "color": "black",
+              "name": "foo",
+              "variables": Object {},
+            },
+            "pop": Object {
+              "color": "black",
+              "name": "pop",
+              "variables": Object {},
+            },
+          },
+        },
+        "lastModified": "2017-06-26T23:00:00.000Z",
+        "name": "fooProtocol",
+        "stages": Array [
+          Object {
+            "form": Object {
+              "fields": Array [
+                Object {
+                  "component": "Text",
+                  "prompt": "message",
+                  "variable": "alpha",
+                },
+                Object {
+                  "component": "Text",
+                  "prompt": "message",
+                  "variable": "1234-1234-4",
+                },
+              ],
+            },
+            "id": "bazz",
+            "label": "bazz",
+            "prompts": Array [
+              Object {
+                "id": "promptId",
+                "text": "not a prompt",
+              },
+            ],
+            "subject": Object {
+              "entity": "node",
+              "type": "bar",
+            },
+            "type": "NameGenerator",
+          },
+          Object {
+            "form": Object {
+              "fields": Array [
+                Object {
+                  "component": "Text",
+                  "prompt": "message",
+                  "variable": "bravo",
+                },
+                Object {
+                  "component": "Text",
+                  "prompt": "message",
+                  "variable": "1234-1234-5",
+                },
+              ],
+            },
+            "id": "pip",
+            "label": "pip",
+            "prompts": Array [
+              Object {
+                "id": "promptId",
+                "text": "not a prompt",
+              },
+            ],
+            "subject": Object {
+              "entity": "node",
+              "type": "bar",
+            },
+            "type": "NameGenerator",
+          },
+          Object {
+            "id": "buzz",
+            "label": "buzz",
+            "prompts": Array [
+              Object {
+                "id": "fizz",
+                "text": "not a prompt",
+              },
+            ],
+            "subject": Object {
+              "entity": "node",
+              "type": "foo",
+            },
+            "type": "NameGenerator",
+          },
+          Object {
+            "id": "foxtrot",
+            "label": "foxtrot",
+            "prompts": Array [
+              Object {
+                "id": "golf",
+                "text": "not a prompt",
+              },
+              Object {
+                "id": "hotel",
+                "text": "not a prompt",
+              },
+            ],
+            "subject": Object {
+              "entity": "node",
+              "type": "pop",
+            },
+            "type": "NameGenerator",
+          },
+          Object {
+            "id": "alpha",
+            "label": "alpha",
+            "prompts": Array [
+              Object {
+                "edges": Object {
+                  "create": "charlie",
+                  "display": Array [
+                    "delta",
+                    "echo",
+                  ],
+                },
+                "id": "bravo",
+                "text": "not a prompt",
+              },
+            ],
+            "type": "Sociogram",
+          },
+          Object {
+            "id": "mike",
+            "label": "mike",
+            "prompts": Array [
+              Object {
+                "id": "oscar",
+                "text": "not a prompt",
+              },
+            ],
+            "type": "Sociogram",
+          },
+          Object {
+            "background": Object {
+              "image": "1234-asset-5",
+            },
+            "dataSource": "1234-asset-3",
+            "id": "assets",
+            "items": Array [
+              Object {
+                "content": "1234-asset-4",
+                "id": "itemId",
+                "type": "asset",
+              },
+            ],
+            "label": "assets",
+            "panels": Array [
+              Object {
+                "dataSource": "1234-asset-2",
+                "id": "panelId",
+                "title": "",
+              },
+            ],
+            "prompts": Array [
+              Object {
+                "id": "promptId",
+                "text": "not a prompt",
+              },
+            ],
+            "type": "Information",
+          },
+        ],
+      },
+      "type": "PROTOCOLS/SAVE_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "type": "PROTOCOLS/EXPORT",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/home/documents/1234-active-protocol",
+      "type": "PROTOCOLS/EXPORT_SUCCESS",
+    },
+  ],
+]
+`;
