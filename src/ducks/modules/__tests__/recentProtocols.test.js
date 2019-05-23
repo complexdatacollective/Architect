@@ -2,11 +2,10 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import fs from 'fs-extra';
 import { actionCreators as loadActions } from '../protocols/load';
 import { actionCreators as exportActions } from '../protocols/export';
-import { actionCreators as importActions } from '../protocols/import';
-import reducer, { actionCreators } from '../recentProtocols';
+import { actionCreators as importActions, actionTypes as importActionTypes } from '../protocols/import';
+import reducer from '../recentProtocols';
 
 describe('recentProtocols', () => {
   describe('reducer', () => {
@@ -70,27 +69,23 @@ describe('recentProtocols', () => {
       store.dispatch(importActions.importProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
     });
 
-    it('CLEAR_DEAD_LINKS', (done) => {
-      // Assume first file doesn't exist
-      fs.existsSync.mockImplementationOnce(() => false);
+    it(`${importActionTypes.IMPORT_PROTOCOL_ERROR}`, () => {
+      const missingFilePath = '/dev/null/non/existent';
 
-      store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/1'));
-      store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/2'));
+      const initialState = [
+        { filePath: missingFilePath },
+        { filePath: '/dev/null/another/protocol' },
+      ];
 
-      const initialState = store.getState();
+      const result = reducer(
+        initialState,
+        importActions.importProtocolError(new Error('File not found'), missingFilePath),
+      );
 
-      expect(initialState.length).toBe(2);
-
-      store.subscribe(() => {
-        const state = store.getState();
-
-        expect(state.length).toBe(1);
-        expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/1' });
-
-        done();
-      });
-
-      store.dispatch(actionCreators.clearDeadLinks());
+      expect(result).toEqual([
+        { filePath: '/dev/null/another/protocol' },
+      ]);
     });
+
   });
 });

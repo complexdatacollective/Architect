@@ -51,6 +51,7 @@ const importProtocolThunk = filePath =>
 const actionCreators = {
   importProtocol: importProtocolThunk,
   importProtocolSuccess,
+  importProtocolError,
 };
 
 const actionTypes = {
