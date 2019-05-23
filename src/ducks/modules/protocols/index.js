@@ -1,16 +1,15 @@
-import path from 'path';
 import openProtocolDialog from '../../../other/protocols/utils/openProtocolDialog';
 import history from '../../../history';
-import { actionCreators as dialogActions } from '../dialogs';
+import { getActiveProtocolMeta } from '../../../selectors/protocols';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as importActionCreators } from './import';
 import { actionCreators as saveActionCreators } from './save';
 import { actionCreators as exportActionCreators } from './export';
+import { saveErrorDialog, importErrorDialog } from './dialogs';
 import {
   actionCreators as registerActionCreators,
   actionTypes as registerActionTypes,
 } from './register';
-
 
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
 const IMPORT_AND_LOAD_ERROR = 'PROTOCOLS/IMPORT_AND_LOAD_ERROR';
@@ -42,19 +41,16 @@ const openError = error => ({
  * 2. Export - write /tmp/{working-path} to user space.
  */
 const saveAndExportThunk = () =>
-  dispatch =>
-    dispatch(saveActionCreators.saveProtocol())
+  (dispatch, getState) => {
+    const { filePath } = getActiveProtocolMeta(getState());
+
+    return dispatch(saveActionCreators.saveProtocol())
       .then(() => dispatch(exportActionCreators.exportProtocol()))
       .catch((e) => {
         dispatch(saveAndExportError(e));
-
-        e.friendlyMessage = 'Something went wrong when saving.';
-        dispatch(dialogActions.openDialog({
-          type: 'Error',
-          title: 'Protocol could not be saved.',
-          error: e,
-        }));
+        dispatch(saveErrorDialog(e, filePath));
       });
+  };
 
 /**
  * 1. Import - extract/copy protocol to /tmp/{working-path}
@@ -69,13 +65,7 @@ const importAndLoadThunk = filePath =>
       })
       .catch((e) => {
         dispatch(importAndLoadError(e));
-
-        e.friendlyMessage = `Something went wrong when '${path.basename(filePath)}' was imported.`;
-        dispatch(dialogActions.openDialog({
-          type: 'Error',
-          title: 'Protocol could not be imported',
-          error: e,
-        }));
+        dispatch(importErrorDialog(e, filePath));
       });
 
 /**

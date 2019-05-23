@@ -1,5 +1,5 @@
 import unbundleProtocol from '../../../other/protocols/unbundleProtocol';
-import loadProtocolConfiguration from '../../../other/protocols/loadProtocolConfiguration';
+import { loadProtocolConfiguration } from '../../../other/protocols';
 import { actionCreators as registerActions } from './register';
 import validateProtocol from '../../../utils/validateProtocol';
 
@@ -32,6 +32,7 @@ const importProtocolThunk = filePath =>
       .then(workingPath =>
         // check we can open the protocol file
         loadProtocolConfiguration(workingPath)
+          // .then((protocol) => { console.log(protocol); return protocol; })
           // it loaded okay, check the protocol is valid
           .then(validateProtocol)
           .then(() => {
