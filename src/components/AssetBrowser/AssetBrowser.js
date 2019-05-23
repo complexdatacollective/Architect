@@ -7,6 +7,7 @@ import withAssetActions from './withAssetActions';
 
 const AssetBrowser = ({
   type,
+  selected,
   onSelect,
   onDelete,
 }) => (
@@ -23,6 +24,7 @@ const AssetBrowser = ({
         <Assets
           onSelect={onSelect}
           onDelete={onDelete}
+          selected={selected}
           type={type}
         />
       </div>
@@ -32,6 +34,7 @@ const AssetBrowser = ({
 
 AssetBrowser.propTypes = {
   type: PropTypes.string,
+  selected: PropTypes.string,
   onSelect: PropTypes.func,
   onDelete: PropTypes.func,
 };
@@ -39,6 +42,7 @@ AssetBrowser.propTypes = {
 AssetBrowser.defaultProps = {
   show: true,
   type: null,
+  selected: null,
   onSelect: () => {},
   onDelete: () => {},
   stackIndex: null,

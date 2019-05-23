@@ -104,6 +104,7 @@ Array [
     "background": Object {
       "image": "1234-asset-5",
     },
+    "dataSource": "1234-asset-3",
     "id": "assets",
     "items": Array [
       Object {
@@ -113,11 +114,6 @@ Array [
     "panels": Array [
       Object {
         "dataSource": "1234-asset-2",
-      },
-    ],
-    "prompts": Array [
-      Object {
-        "dataSource": "1234-asset-3",
       },
     ],
   },
@@ -234,6 +230,7 @@ Array [
     "background": Object {
       "image": "1234-asset-5",
     },
+    "dataSource": "1234-asset-3",
     "id": "assets",
     "items": Array [
       Object {
@@ -243,11 +240,6 @@ Array [
     "panels": Array [
       Object {
         "dataSource": "1234-asset-2",
-      },
-    ],
-    "prompts": Array [
-      Object {
-        "dataSource": "1234-asset-3",
       },
     ],
   },
@@ -341,6 +333,7 @@ Array [
     "background": Object {
       "image": "1234-asset-5",
     },
+    "dataSource": "1234-asset-3",
     "id": "assets",
     "items": Array [
       Object {
@@ -350,11 +343,6 @@ Array [
     "panels": Array [
       Object {
         "dataSource": "1234-asset-2",
-      },
-    ],
-    "prompts": Array [
-      Object {
-        "dataSource": "1234-asset-3",
       },
     ],
   },

@@ -65,6 +65,7 @@ class DataSource extends Component {
                     type="network"
                     showBrowser={selectNetworkAsset}
                     onCloseBrowser={this.handleCloseBrowser}
+                    selected={input.value}
                     {...this.props}
                   >
                     { id => <NetworkAsset id={id} /> }
@@ -77,6 +78,7 @@ class DataSource extends Component {
         { !canUseExisting &&
           <File
             type="network"
+            selected={input.value}
             {...this.props}
           >
             { id => <NetworkAsset id={id} /> }

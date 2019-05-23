@@ -23,6 +23,7 @@ class FileInput extends PureComponent {
     type: PropTypes.string,
     label: PropTypes.string,
     className: PropTypes.string,
+    selected: PropTypes.string,
     meta: PropTypes.object.isRequired,
     input: PropTypes.object.isRequired,
   };
@@ -30,7 +31,8 @@ class FileInput extends PureComponent {
   static defaultProps = {
     value: '',
     label: '',
-    className: '',
+    className: null,
+    selected: null,
     onChange: () => {},
     onCloseBrowser: () => {},
     type: null,
@@ -71,6 +73,7 @@ class FileInput extends PureComponent {
       showBrowser,
       label,
       type,
+      selected,
       className,
     } = this.props;
 
@@ -105,6 +108,7 @@ class FileInput extends PureComponent {
         <AssetBrowserWindow
           show={showBrowser}
           type={type}
+          selected={selected}
           onSelect={this.handleSelectAsset}
           onCancel={this.handleBlurBrowser}
         />

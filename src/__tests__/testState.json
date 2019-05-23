@@ -170,9 +170,7 @@
           "panels": [
             { "dataSource": "1234-asset-2" }
           ],
-          "prompts": [
-            { "dataSource" : "1234-asset-3" }
-          ],
+          "dataSource" : "1234-asset-3",
           "items": [
             { "content": "1234-asset-4" }
           ],

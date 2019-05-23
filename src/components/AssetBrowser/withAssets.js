@@ -31,7 +31,7 @@ const filterHandlers = withHandlers({
     assetType => setAssetType(assetType),
 });
 
-const mapStateToProps = (state, { assetType }) => {
+const mapStateToProps = (state, { assetType, selected }) => {
   const allAssets = getAssetManifest(state);
   const filteredAssets = filterAssets(assetType, allAssets);
 
@@ -41,7 +41,7 @@ const mapStateToProps = (state, { assetType }) => {
 
   // Check for asset usage
   const assets = filteredAssets.map((asset) => {
-    if (!assetSearch.has(asset.id)) { return asset; }
+    if (!assetSearch.has(asset.id) && asset.id !== selected) { return asset; }
 
     return {
       ...asset,
