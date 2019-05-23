@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Flipper } from 'react-flip-toolkit';
+import { ipcRenderer } from 'electron';
 import { compose, withHandlers } from 'recompose';
 import { getActiveProtocolMeta } from '../selectors/protocol';
 import { actionCreators as dialogActions } from '../ducks/modules/dialogs';
@@ -20,6 +21,8 @@ import networkCanvasBrand from '../images/network-canvas-brand.svg';
 const Scene = ({
   protocolMeta,
   handleClickStart,
+  hasUnsavedChanges,
+  openDialog,
 }) => {
   const protocolId = protocolMeta && protocolMeta.id;
   const flipKey = protocolId || 'start';
@@ -30,6 +33,28 @@ const Scene = ({
     'scene',
     { 'scene--protocol': showProtocol },
   );
+
+  window.onbeforeunload = (e) => {
+    if (!window.closeWithoutSave && hasUnsavedChanges) {
+      e.returnValue = false;
+
+      openDialog({
+        type: 'Warning',
+        title: 'Unsaved changes',
+        message: (
+          <div>
+            Are you sure you want to exit the application?
+            <p><strong>Any unsaved changes will be lost!</strong></p>
+          </div>
+        ),
+        confirmLabel: 'Exit application',
+        onConfirm: () => {
+          window.closeWithoutSave = true;
+          ipcRenderer.send('DO_CLOSE');
+        },
+      });
+    }
+  };
 
   return (
     <div className={sceneClasses}>
@@ -73,6 +98,8 @@ const Scene = ({
 Scene.propTypes = {
   protocolMeta: PropTypes.object,
   handleClickStart: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
+  hasUnsavedChanges: PropTypes.bool.isRequired,
 };
 
 Scene.defaultProps = {
