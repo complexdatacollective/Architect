@@ -41,7 +41,7 @@ const AssignAttributes = ({
         color="primary"
         icon="add"
         size="small"
-        onClick={() => fields.push({ variable: null, value: null })}
+        onClick={() => fields.push({})}
       >
         Add new variable to assign
       </Button>
