@@ -35,7 +35,6 @@ const appManager = {
     ipcMain.on('QUIT', () => {
       global.quit = true;
       app.quit();
-      global.quit = false;
     });
   },
   loadDevTools: () => {

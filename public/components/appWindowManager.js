@@ -67,11 +67,13 @@ function createWindow() {
     });
 
     global.appWindow.on('close', (e) => {
-      if (!global.quit) {
-        e.preventDefault();
-
-        global.appWindow.webContents.send('CONFIRM_CLOSE');
+      if (global.quit) {
+        global.quit = false;
+        return;
       }
+
+      e.preventDefault();
+      global.appWindow.webContents.send('CONFIRM_CLOSE');
     });
 
     global.appWindow.on('closed', () => {
