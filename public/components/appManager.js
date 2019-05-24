@@ -31,6 +31,12 @@ const appManager = {
         this.openFileWhenReady = null;
       }
     });
+
+    ipcMain.on('QUIT', () => {
+      global.quit = true;
+      app.quit();
+      global.quit = false;
+    });
   },
   loadDevTools: () => {
     const extensions = process.env.NC_DEVTOOLS_EXTENSION_PATH;

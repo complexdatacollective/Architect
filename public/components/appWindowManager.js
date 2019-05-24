@@ -1,4 +1,4 @@
-const { BrowserWindow, Menu } = require('electron');
+const { BrowserWindow, Menu, ipcMain } = require('electron');
 const url = require('url');
 const path = require('path');
 const log = require('./log');
@@ -64,6 +64,14 @@ function createWindow() {
 
     global.appWindow.on('focus', () => {
       Menu.setApplicationMenu(appMenu);
+    });
+
+    global.appWindow.on('close', (e) => {
+      if (!global.quit) {
+        e.preventDefault();
+
+        global.appWindow.webContents.send('CONFIRM_CLOSE');
+      }
     });
 
     global.appWindow.on('closed', () => {
