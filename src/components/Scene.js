@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cx from 'classnames';
@@ -18,27 +18,25 @@ import Screens from './Screens';
 import architectLogoIcon from '../images/architect-logo-icon.svg';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
 
-const Scene = ({
-  protocolMeta,
-  handleClickStart,
-  hasUnsavedChanges,
-  openDialog,
-}) => {
-  const protocolId = protocolMeta && protocolMeta.id;
-  const flipKey = protocolId || 'start';
-  const showProtocol = !!protocolId;
-  const showStart = !protocolId;
+class Scene extends Component {
+  constructor(props) {
+    super(props);
+    this.onUnload = this.onUnload.bind(this);
+  }
 
-  const sceneClasses = cx(
-    'scene',
-    { 'scene--protocol': showProtocol },
-  );
+  componentDidMount() {
+    window.addEventListener('beforeunload', this.onUnload);
+  }
 
-  window.onbeforeunload = (e) => {
-    if (!window.closeWithoutSave && hasUnsavedChanges) {
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.onUnload);
+  }
+
+  onUnload = (e) => {
+    if (!window.closeWithoutSave && this.props.hasUnsavedChanges) {
       e.returnValue = false;
 
-      openDialog({
+      this.props.openDialog({
         type: 'Warning',
         title: 'Unsaved changes',
         message: (
@@ -54,46 +52,64 @@ const Scene = ({
         },
       });
     }
-  };
+  }
 
-  return (
-    <div className={sceneClasses}>
-      <div className="scene__background scene__background--top" />
-      <div className="scene__background scene__background--bottom" />
-      <img className="scene__brand" src={networkCanvasBrand} alt="" />
+  render() {
+    const {
+      protocolMeta,
+      handleClickStart,
+    } = this.props;
 
-      <div onClick={handleClickStart} className="scene__home">
-        <img src={architectLogoIcon} alt="" />
-      </div>
 
-      <Flipper flipKey={flipKey}>
+    const protocolId = protocolMeta && protocolMeta.id;
+    const flipKey = protocolId || 'start';
+    const showProtocol = !!protocolId;
+    const showStart = !protocolId;
 
-        <div className="scene__start">
-          <Start show={showStart} />
+    const sceneClasses = cx(
+      'scene',
+      { 'scene--protocol': showProtocol },
+    );
+
+    return (
+      <div className={sceneClasses}>
+        <div className="scene__background scene__background--top" />
+        <div className="scene__background scene__background--bottom" />
+        <img className="scene__brand" src={networkCanvasBrand} alt="" />
+
+        <div onClick={handleClickStart} className="scene__home">
+          <img src={architectLogoIcon} alt="" />
         </div>
 
-        <div className="scene__recent-protocols">
-          <RecentProtocols show={showStart} />
-        </div>
+        <Flipper flipKey={flipKey}>
 
-        <div className="scene__protocol">
-          <Overview
-            show={showProtocol}
-            flipId={protocolMeta && protocolMeta.filePath}
-          />
-
-          <div className="scene__timeline">
-            <Timeline show={showProtocol} />
+          <div className="scene__start">
+            <Start show={showStart} />
           </div>
 
-          <ProtocolControlBar show={showProtocol} />
-        </div>
-      </Flipper>
+          <div className="scene__recent-protocols">
+            <RecentProtocols show={showStart} />
+          </div>
 
-      <Screens />
-    </div>
-  );
-};
+          <div className="scene__protocol">
+            <Overview
+              show={showProtocol}
+              flipId={protocolMeta && protocolMeta.filePath}
+            />
+
+            <div className="scene__timeline">
+              <Timeline show={showProtocol} />
+            </div>
+
+            <ProtocolControlBar show={showProtocol} />
+          </div>
+        </Flipper>
+
+        <Screens />
+      </div>
+    );
+  }
+}
 
 Scene.propTypes = {
   protocolMeta: PropTypes.object,
