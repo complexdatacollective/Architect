@@ -14,6 +14,7 @@ const fieldChangeHandlers = withHandlers({
       const codebookProperties = getCodebookProperties(rest);
       const configuration = {
         type: variableType,
+        component,
         ...codebookProperties,
       };
 
@@ -35,9 +36,9 @@ const mapDispatchToProps = {
   updateVariable: codebookActions.updateVariable,
 };
 
-const withFieldChangeHandlers = compose(
+const withFieldsChangeHandlers = compose(
   connect(null, mapDispatchToProps),
   fieldChangeHandlers,
 );
 
-export default withFieldChangeHandlers;
+export default withFieldsChangeHandlers;

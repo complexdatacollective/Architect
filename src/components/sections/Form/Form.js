@@ -11,7 +11,7 @@ import FieldPreview from './FieldPreview';
 import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import withDisabledFormTitle from '../../enhancers/withDisabledFormTitle';
-import withFieldChangeHandlers from './withFieldChangeHandlers';
+import withFieldsChangeHandlers from './withFieldsChangeHandlers';
 import { itemSelector, normalizeField } from './helpers';
 
 const Form = ({
@@ -52,6 +52,7 @@ const Form = ({
       itemSelector={itemSelector(entity, type)}
       form={form}
     >
+      <div id={getFieldId('form.title')} data-name="Form fields" />
       <h4>Fields</h4>
       <p>
         Add one or more fields to your form to collect attributes about each
@@ -84,7 +85,7 @@ export { Form };
 
 export default compose(
   withSubject,
-  withFieldChangeHandlers,
+  withFieldsChangeHandlers,
   withDisabledFormTitle,
   withDisabledSubjectRequired,
 )(Form);
