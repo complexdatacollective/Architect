@@ -33,21 +33,21 @@ class PromptFields extends Component {
     const {
       form,
       variableType,
+      variableOptions,
     } = this.props;
 
     return (
       <Section>
         <Row contentId="guidance.section.form.field.name">
-          <h3 id={getFieldId('name')}>Variable name</h3>
+          <h3 id={getFieldId('variable')}>Variable</h3>
           <p>
-            Enter a name for this variable. The variable name is how you will
-            reference the variable elsewhere, including in exported data.
+            Choose or create a variable.
           </p>
-          <Field
-            name="name"
-            component={Fields.Text}
-            placeholder="e.g. Name"
-            validate={[isRequired, this.validateName]}
+          <ValidatedField
+            name="variable"
+            component={CreatableSelect}
+            options={variableOptions} // from variables
+            validation={{ required: true }}
           />
         </Row>
         <Row contentId="guidance.section.form.field.prompt">

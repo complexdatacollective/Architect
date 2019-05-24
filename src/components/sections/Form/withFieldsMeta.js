@@ -7,23 +7,27 @@ import { getTypeForComponent } from '../../Form/inputOptions';
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
   const component = formSelector(state, 'component');
-  const variable = formSelector(state, 'variable');
 
   const existingVariables = getVariablesForSubject(state, { entity, type });
-  const existingVariableNames = reduce(
+
+  const variableOptions = reduce(
     existingVariables,
     (acc, { name }, variableId) => {
-      if (variable === variableId) { return acc; }
-      return [...acc, name];
+      return [
+        ...acc,
+        { label: name, value: variableId },
+      ];
     },
     [],
   );
+
+  console.log({ variableOptions });
 
   const variableType = getTypeForComponent(component);
 
   return {
     variableType,
-    existingVariableNames,
+    variableOptions,
   };
 };
 
