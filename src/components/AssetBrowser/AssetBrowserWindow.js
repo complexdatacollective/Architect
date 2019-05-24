@@ -10,6 +10,7 @@ import AssetBrowser from './AssetBrowser';
 const AssetBrowserWindow = ({
   show,
   type,
+  selected,
   onCancel,
   onSelect,
 }) => {
@@ -39,6 +40,7 @@ const AssetBrowserWindow = ({
           <AssetBrowser
             type={type}
             onSelect={onSelect}
+            selected={selected}
           />
         </SimpleDialog>
       )}
@@ -49,6 +51,7 @@ const AssetBrowserWindow = ({
 AssetBrowserWindow.propTypes = {
   show: PropTypes.bool,
   type: PropTypes.string,
+  selected: PropTypes.string,
   onSelect: PropTypes.func,
   onCancel: PropTypes.func,
 };
@@ -56,6 +59,7 @@ AssetBrowserWindow.propTypes = {
 AssetBrowserWindow.defaultProps = {
   show: true,
   type: null,
+  selected: null,
   onSelect: () => {},
   onCancel: () => {},
   stackIndex: null,

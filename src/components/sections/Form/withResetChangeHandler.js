@@ -12,7 +12,7 @@ const handlers = {
     (resetObject) => {
       toPairs(resetObject)
         .forEach(
-          (value, variableName) =>
+          ([variableName, value]) =>
             changeField(form, variableName, value),
         );
     },

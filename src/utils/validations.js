@@ -1,4 +1,4 @@
-import { keys, get, pickBy, map, toPairs, isUndefined } from 'lodash';
+import { keys, get, pickBy, map, toPairs, isEqual, isUndefined } from 'lodash';
 
 const coerceArray = (value) => {
   if (value instanceof Object) {
@@ -40,6 +40,14 @@ export const maxSelected = max =>
   value =>
     (!value || coerceArray(value).length > max ? `Must choose ${max} or less` : undefined);
 
+const isRoughlyEqual = (left, right) => {
+  if (typeof left === 'string' && typeof right === 'string') {
+    return left.toLowerCase() === right.toLowerCase();
+  }
+
+  return isEqual(left, right);
+};
+
 export const uniqueArrayAttribute = () =>
   (value, allValues, formProps, name) => {
     if (!value) { return undefined; }
@@ -50,7 +58,8 @@ export const uniqueArrayAttribute = () =>
     const instanceCount = get(allValues, fieldName)
       .reduce((count, option) => {
         const optionValue = option[attribute];
-        if (optionValue && value && optionValue.toLowerCase() === value.toLowerCase()) {
+
+        if (isRoughlyEqual(optionValue, value)) {
           return count + 1;
         }
         return count;
@@ -67,7 +76,7 @@ export const uniqueByList = (list = []) =>
     if (!value) { return undefined; }
 
     const existsAlready = list
-      .some(existingValue => existingValue && existingValue.toLowerCase() === value.toLowerCase());
+      .some(existingValue => isRoughlyEqual(existingValue, value));
 
     if (existsAlready) {
       return `"${value}" is already used elsewhere`;
