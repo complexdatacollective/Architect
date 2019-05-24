@@ -11,12 +11,14 @@ import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
 import initPreventFileDrop from './utils/initPreventFileDrop';
 import initFileOpener from './utils/initFileOpener';
+import initConfirmClose from './utils/initConfirmClose';
 import resetAppStorage from './other/protocols/utils/resetAppStorage';
 
 import './styles/main.scss';
 
 initPreventFileDrop();
 initReactFastclick();
+initConfirmClose();
 resetAppStorage();
 
 const startApp = () => {
