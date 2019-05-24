@@ -11,7 +11,7 @@ import FieldPreview from './FieldPreview';
 import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import withDisabledFormTitle from '../../enhancers/withDisabledFormTitle';
-import withFieldsChangeHandlers from './withFieldsChangeHandlers';
+import withFormHandlers from './withFormHandlers';
 import { itemSelector, normalizeField } from './helpers';
 
 const Form = ({
@@ -85,7 +85,7 @@ export { Form };
 
 export default compose(
   withSubject,
-  withFieldsChangeHandlers,
+  withFormHandlers,
   withDisabledFormTitle,
   withDisabledSubjectRequired,
 )(Form);

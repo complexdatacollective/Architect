@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
@@ -11,18 +10,11 @@ import Options from '../../Options';
 import Validations from '../../Validations';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
 import inputOptions, { isVariableTypeWithOptions } from '../../Form/inputOptions';
-import { required, uniqueByList } from '../../../utils/validations';
 import Row from '../Row';
 import Section from '../Section';
-import withResetChangeHandler from './withResetChangeHandler';
-import withFieldsMeta from './withFieldsMeta';
-
-const isRequired = required();
+import withFieldsMeta from './withFieldsHandlers';
 
 class PromptFields extends Component {
-  validateName = value =>
-    uniqueByList(this.props.existingVariableNames)(value);
-
   handleChangeComponent = () => {
     this.props.resetFields({
       options: null,
@@ -35,6 +27,8 @@ class PromptFields extends Component {
       form,
       variableType,
       variableOptions,
+      createNewVariable,
+      handleChangeVariable,
     } = this.props;
 
     return (
@@ -48,6 +42,8 @@ class PromptFields extends Component {
             name="variable"
             component={CreatableSelect}
             options={variableOptions} // from variables
+            onCreateOption={createNewVariable} // reset later fields, create variable of no type?
+            onChange={handleChangeVariable} // read/reset component options validation
             validation={{ required: true }}
           />
         </Row>
@@ -109,17 +105,18 @@ PromptFields.propTypes = {
   form: PropTypes.string.isRequired,
   variableType: PropTypes.string,
   resetFields: PropTypes.func.isRequired,
-  existingVariableNames: PropTypes.array.isRequired,
+  variableOptions: PropTypes.array,
+  createNewVariable: PropTypes.func.isRequired,
+  handleChangeVariable: PropTypes.func.isRequired,
 };
 
 PromptFields.defaultProps = {
   variableType: null,
-  existingVariableNames: [],
+  variableOptions: null,
 };
 
 export { PromptFields };
 
 export default compose(
-  withResetChangeHandler,
   withFieldsMeta,
 )(PromptFields);
