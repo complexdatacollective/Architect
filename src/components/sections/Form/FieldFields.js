@@ -6,6 +6,7 @@ import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import * as Fields from '../../../ui/components/Fields';
 import Select from '../../Form/Fields/Select';
+import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import Options from '../../Options';
 import Validations from '../../Validations';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
