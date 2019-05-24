@@ -62,7 +62,7 @@ const createVariable = (entity, type, variable, configuration) => ({
   configuration,
 });
 
-const updateVariable = (entity, type, variable, configuration) => ({
+const updateVariable = (entity, type, variable, configuration, merge = false) => ({
   type: UPDATE_VARIABLE,
   meta: {
     entity,
@@ -70,6 +70,7 @@ const updateVariable = (entity, type, variable, configuration) => ({
     variable,
   },
   configuration,
+  merge,
 });
 
 const deleteVariable = (entity, type, variable) => ({
@@ -133,7 +134,7 @@ const createVariableThunk = (entity, type, configuration) =>
     };
   };
 
-const updateVariableThunk = (entity, type, variable, configuration) =>
+const updateVariableThunk = (entity, type, variable, configuration, merge = false) =>
   (dispatch, getState) => {
     const state = getState();
     const variableExists = has(getVariablesForSubject(state, { entity, type }), variable);
@@ -142,7 +143,7 @@ const updateVariableThunk = (entity, type, variable, configuration) =>
       throw new Error(`Variable "${variable}" does not exist`);
     }
 
-    dispatch(updateVariable(entity, type, variable, configuration));
+    dispatch(updateVariable(entity, type, variable, configuration, merge));
   };
 
 const deleteVariableThunk = (entity, type, variable) =>
@@ -214,26 +215,37 @@ const getStateWithUpdatedType = (state, entity, type, configuration) => {
   };
 };
 
-const getStateWithUpdatedVariable = (state, entity, type, variable, configuration) => {
+const getStateWithUpdatedVariable = (
+  state,
+  entity,
+  type,
+  variable,
+  configuration,
+  merge = false,
+) => {
   if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
 
-  const variables = entity === 'ego' ?
-    {
-      ...get(state, [entity, 'variables'], {}),
-      [variable]: configuration,
-    } :
-    {
-      ...get(state, [entity, type, 'variables'], {}),
-      [variable]: configuration,
-    };
+  const entityPath = entity === 'ego' ?
+    [entity] :
+    [entity, type];
 
-  const typeConfiguration = entity === 'ego' ?
-    state[entity] :
-    state[entity][type];
+  const variableConfiguration = merge ?
+    {
+      ...get(state, [...entityPath, 'variables', variable], {}),
+      ...configuration,
+    } :
+    configuration;
+
+  const newVariables = {
+    ...get(state, [...entityPath, 'variables'], {}),
+    [variable]: variableConfiguration,
+  };
+
+  const typeConfiguration = get(state, entityPath, {});
 
   return getStateWithUpdatedType(state, entity, type, {
     ...typeConfiguration,
-    variables,
+    variables: newVariables,
   });
 };
 
@@ -263,6 +275,7 @@ export default function reducer(state = initialState, action = {}) {
         action.meta.type,
         action.meta.variable,
         action.configuration,
+        action.merge,
       );
     case DELETE_VARIABLE: {
       const variablePath = action.meta.entity !== 'ego' ?
