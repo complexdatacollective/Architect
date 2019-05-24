@@ -25,7 +25,7 @@ class PromptFields extends Component {
   handleChangeComponent = () => {
     this.props.resetFields({
       options: null,
-      validation: [],
+      validation: {},
     });
   }
 
