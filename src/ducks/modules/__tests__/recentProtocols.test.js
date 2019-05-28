@@ -86,6 +86,5 @@ describe('recentProtocols', () => {
         { filePath: '/dev/null/another/protocol' },
       ]);
     });
-
   });
 });
