@@ -11,17 +11,18 @@ import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchive
  *
  * @returns A promise which resolves to the destination path.
  */
-const unbundleProtocol = filePath =>
-  new Promise((resolve) => {
-    const destinationPath = getLocalDirectoryFromArchivePath(filePath);
+const unbundleProtocol = (filePath) => {
+  const destinationPath = getLocalDirectoryFromArchivePath(filePath);
 
-    if (path.extname(filePath) === '.netcanvas') {
-      extract(filePath, destinationPath)
-        .then(resolve);
-    } else {
-      fs.copySync(filePath, destinationPath);
-      resolve(destinationPath);
-    }
-  });
+  return fs.access(filePath, fs.constants.R_OK)
+    .then(() => {
+      if (path.extname(filePath) === '.netcanvas') {
+        return extract(filePath, destinationPath);
+      }
+
+      return fs.copy(filePath, destinationPath);
+    })
+    .then(() => destinationPath);
+};
 
 export default unbundleProtocol;

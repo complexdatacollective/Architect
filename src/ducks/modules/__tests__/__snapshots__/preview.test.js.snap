@@ -3,99 +3,122 @@
 exports[`preview previewStageFromForm() dispatches previewDraft() for end of stages 1`] = `
 Array [
   Object {
+    "form": Object {
+      "fields": Array [
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
     "id": "bazz",
+    "label": "bazz",
     "prompts": Array [
       Object {
-        "form": Object {
-          "fields": Array [
-            Object {
-              "variable": "alpha",
-            },
-            Object {
-              "variable": "1234-1234-4",
-            },
-          ],
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  Object {
+    "form": Object {
+      "fields": Array [
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "bravo",
         },
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "1234-1234-5",
+        },
+      ],
+    },
+    "id": "pip",
+    "label": "pip",
+    "prompts": Array [
+      Object {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  Object {
+    "id": "buzz",
+    "label": "buzz",
+    "prompts": Array [
+      Object {
+        "id": "fizz",
+        "text": "not a prompt",
       },
     ],
     "subject": Object {
       "entity": "node",
       "type": "foo",
     },
+    "type": "NameGenerator",
   },
   Object {
-    "id": "pip",
+    "id": "foxtrot",
+    "label": "foxtrot",
     "prompts": Array [
       Object {
-        "form": Object {
-          "fields": Array [
-            Object {
-              "variable": "bravo",
-            },
-            Object {
-              "variable": "1234-1234-5",
-            },
-          ],
-        },
+        "id": "golf",
+        "text": "not a prompt",
+      },
+      Object {
+        "id": "hotel",
+        "text": "not a prompt",
       },
     ],
     "subject": Object {
       "entity": "node",
       "type": "pop",
     },
-  },
-  Object {
-    "id": "buzz",
-    "prompts": Array [
-      Object {
-        "id": "fizz",
-        "subject": Object {
-          "entity": "node",
-          "type": "foo",
-        },
-      },
-    ],
-  },
-  Object {
-    "id": "foxtrot",
-    "prompts": Array [
-      Object {
-        "id": "golf",
-        "subject": Object {
-          "entity": "node",
-          "type": "foo",
-        },
-      },
-      Object {
-        "id": "hotel",
-        "subject": Object {
-          "entity": "node",
-          "type": "pop",
-        },
-      },
-    ],
+    "type": "NameGenerator",
   },
   Object {
     "id": "alpha",
+    "label": "alpha",
     "prompts": Array [
       Object {
         "edges": Object {
-          "creates": "charlie",
+          "create": "charlie",
           "display": Array [
             "delta",
             "echo",
           ],
         },
         "id": "bravo",
+        "text": "not a prompt",
       },
     ],
     "type": "Sociogram",
   },
   Object {
     "id": "mike",
+    "label": "mike",
     "prompts": Array [
       Object {
         "id": "oscar",
+        "text": "not a prompt",
       },
     ],
     "type": "Sociogram",
@@ -109,13 +132,25 @@ Array [
     "items": Array [
       Object {
         "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
       },
     ],
+    "label": "assets",
     "panels": Array [
       Object {
         "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
       },
     ],
+    "prompts": Array [
+      Object {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
   },
   Object {
     "fizz": "pop",
@@ -126,102 +161,125 @@ Array [
 exports[`preview previewStageFromForm() dispatches previewDraft() for insert at index 1`] = `
 Array [
   Object {
+    "form": Object {
+      "fields": Array [
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
     "id": "bazz",
+    "label": "bazz",
     "prompts": Array [
       Object {
-        "form": Object {
-          "fields": Array [
-            Object {
-              "variable": "alpha",
-            },
-            Object {
-              "variable": "1234-1234-4",
-            },
-          ],
-        },
+        "id": "promptId",
+        "text": "not a prompt",
       },
     ],
     "subject": Object {
       "entity": "node",
-      "type": "foo",
+      "type": "bar",
     },
+    "type": "NameGenerator",
   },
   Object {
+    "form": Object {
+      "fields": Array [
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "bravo",
+        },
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "1234-1234-5",
+        },
+      ],
+    },
     "id": "pip",
+    "label": "pip",
     "prompts": Array [
       Object {
-        "form": Object {
-          "fields": Array [
-            Object {
-              "variable": "bravo",
-            },
-            Object {
-              "variable": "1234-1234-5",
-            },
-          ],
-        },
+        "id": "promptId",
+        "text": "not a prompt",
       },
     ],
     "subject": Object {
       "entity": "node",
-      "type": "pop",
+      "type": "bar",
     },
+    "type": "NameGenerator",
   },
   Object {
     "bazz": "buzz",
   },
   Object {
     "id": "buzz",
+    "label": "buzz",
     "prompts": Array [
       Object {
         "id": "fizz",
-        "subject": Object {
-          "entity": "node",
-          "type": "foo",
-        },
+        "text": "not a prompt",
       },
     ],
+    "subject": Object {
+      "entity": "node",
+      "type": "foo",
+    },
+    "type": "NameGenerator",
   },
   Object {
     "id": "foxtrot",
+    "label": "foxtrot",
     "prompts": Array [
       Object {
         "id": "golf",
-        "subject": Object {
-          "entity": "node",
-          "type": "foo",
-        },
+        "text": "not a prompt",
       },
       Object {
         "id": "hotel",
-        "subject": Object {
-          "entity": "node",
-          "type": "pop",
-        },
+        "text": "not a prompt",
       },
     ],
+    "subject": Object {
+      "entity": "node",
+      "type": "pop",
+    },
+    "type": "NameGenerator",
   },
   Object {
     "id": "alpha",
+    "label": "alpha",
     "prompts": Array [
       Object {
         "edges": Object {
-          "creates": "charlie",
+          "create": "charlie",
           "display": Array [
             "delta",
             "echo",
           ],
         },
         "id": "bravo",
+        "text": "not a prompt",
       },
     ],
     "type": "Sociogram",
   },
   Object {
     "id": "mike",
+    "label": "mike",
     "prompts": Array [
       Object {
         "id": "oscar",
+        "text": "not a prompt",
       },
     ],
     "type": "Sociogram",
@@ -235,13 +293,25 @@ Array [
     "items": Array [
       Object {
         "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
       },
     ],
+    "label": "assets",
     "panels": Array [
       Object {
         "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
       },
     ],
+    "prompts": Array [
+      Object {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
   },
 ]
 `;
@@ -249,25 +319,33 @@ Array [
 exports[`preview previewStageFromForm() dispatches previewDraft() for stage id 1`] = `
 Array [
   Object {
+    "form": Object {
+      "fields": Array [
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        Object {
+          "component": "Text",
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
     "id": "bazz",
+    "label": "bazz",
     "prompts": Array [
       Object {
-        "form": Object {
-          "fields": Array [
-            Object {
-              "variable": "alpha",
-            },
-            Object {
-              "variable": "1234-1234-4",
-            },
-          ],
-        },
+        "id": "promptId",
+        "text": "not a prompt",
       },
     ],
     "subject": Object {
       "entity": "node",
-      "type": "foo",
+      "type": "bar",
     },
+    "type": "NameGenerator",
   },
   Object {
     "foo": "bar",
@@ -275,56 +353,63 @@ Array [
   },
   Object {
     "id": "buzz",
+    "label": "buzz",
     "prompts": Array [
       Object {
         "id": "fizz",
-        "subject": Object {
-          "entity": "node",
-          "type": "foo",
-        },
+        "text": "not a prompt",
       },
     ],
+    "subject": Object {
+      "entity": "node",
+      "type": "foo",
+    },
+    "type": "NameGenerator",
   },
   Object {
     "id": "foxtrot",
+    "label": "foxtrot",
     "prompts": Array [
       Object {
         "id": "golf",
-        "subject": Object {
-          "entity": "node",
-          "type": "foo",
-        },
+        "text": "not a prompt",
       },
       Object {
         "id": "hotel",
-        "subject": Object {
-          "entity": "node",
-          "type": "pop",
-        },
+        "text": "not a prompt",
       },
     ],
+    "subject": Object {
+      "entity": "node",
+      "type": "pop",
+    },
+    "type": "NameGenerator",
   },
   Object {
     "id": "alpha",
+    "label": "alpha",
     "prompts": Array [
       Object {
         "edges": Object {
-          "creates": "charlie",
+          "create": "charlie",
           "display": Array [
             "delta",
             "echo",
           ],
         },
         "id": "bravo",
+        "text": "not a prompt",
       },
     ],
     "type": "Sociogram",
   },
   Object {
     "id": "mike",
+    "label": "mike",
     "prompts": Array [
       Object {
         "id": "oscar",
+        "text": "not a prompt",
       },
     ],
     "type": "Sociogram",
@@ -338,13 +423,25 @@ Array [
     "items": Array [
       Object {
         "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
       },
     ],
+    "label": "assets",
     "panels": Array [
       Object {
         "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
       },
     ],
+    "prompts": Array [
+      Object {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
   },
 ]
 `;

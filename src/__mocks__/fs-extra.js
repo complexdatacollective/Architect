@@ -15,6 +15,12 @@ export const writeFile = jest.fn((filename, content, cb) => cb());
 export const readdirSync = jest.fn(() => ([]));
 export const existsSync = jest.fn(() => true);
 export const createWriteStream = () => {};
+export const access = jest.fn(() => Promise.resolve());
+export const copy = jest.fn(() => Promise.resolve());
+
+export const constants = {
+  R_OK: Symbol('R_OK'),
+};
 
 export default {
   copySync,
@@ -25,4 +31,7 @@ export default {
   readdirSync,
   existsSync,
   createWriteStream,
+  access,
+  copy,
+  constants,
 };

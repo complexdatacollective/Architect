@@ -5,7 +5,8 @@
   "protocols": [
     {
       "id": "1234-active-protocol",
-      "workingPath": "/dev/null/1234-active-protocol"
+      "workingPath": "/dev/null/1234-active-protocol",
+      "filePath": "/dev/null/home/documents/1234-active-protocol"
     }
   ],
   "form": {
@@ -28,6 +29,7 @@
   },
   "protocol": {
     "present": {
+      "name": "fooProtocol",
       "assetManifest": {
         "1234-asset-1": {
           "source": "1234-4567-asset-1"
@@ -47,14 +49,22 @@
       },
       "codebook": {
         "node": {
+          "foo": { "name": "foo", "color": "black", "variables": {} },
+          "pop": { "name": "pop", "color": "black", "variables": {} },
           "bar": {
+            "name": "bar",
+            "color": "blue",
             "variables": {
               "alpha": { "name": "ALPHA", "type": "text" },
               "bravo": { "name": "BRAVO", "type": "text" },
-              "charlie": { "name": "CHARLIE", "type": "location" }
+              "charlie": { "name": "CHARLIE", "type": "location" },
+              "1234-1234-4": { "name": "1234-1234-4", "type": "text" },
+              "1234-1234-5": { "name": "1234-1234-5", "type": "text" }
             }
           },
           "1234-1234-1234": {
+            "name": "1234-1234-1234",
+            "color": "red",
             "variables": {
               "1234-1234-1": {
                 "name": "my layout",
@@ -95,62 +105,78 @@
       "stages": [
         {
           "id": "bazz",
-          "subject": { "entity": "node", "type": "foo" },
+          "label": "bazz",
+          "subject": { "entity": "node", "type": "bar" },
+          "type": "NameGenerator",
           "prompts": [
             {
-              "form": {
-                "fields": [
-                  { "variable": "alpha" },
-                  { "variable": "1234-1234-4" }
-                ]
-              }
+              "id": "promptId",
+              "text": "not a prompt"
             }
-          ]
+          ],
+          "form": {
+            "fields": [
+              { "variable": "alpha", "component": "Text", "prompt": "message" },
+              { "variable": "1234-1234-4", "component": "Text", "prompt": "message" }
+            ]
+          }
         },
         {
           "id": "pip",
-          "subject": { "entity": "node", "type": "pop" },
+          "label": "pip",
+          "type": "NameGenerator",
+          "subject": { "entity": "node", "type": "bar" },
           "prompts": [
             {
-              "form": {
-                "fields": [
-                  { "variable": "bravo" },
-                  { "variable": "1234-1234-5" }
-                ]
-              }
+              "id": "promptId",
+              "text": "not a prompt"
             }
-          ]
+          ],
+          "form": {
+            "fields": [
+              { "variable": "bravo", "component": "Text", "prompt": "message" },
+              { "variable": "1234-1234-5", "component": "Text", "prompt": "message" }
+            ]
+          }
         },
         {
           "id": "buzz",
+          "label": "buzz",
+          "type": "NameGenerator",
           "prompts": [
             {
               "id": "fizz",
-              "subject": { "entity": "node", "type": "foo" }
+              "text": "not a prompt"
             }
-          ]
+          ],
+          "subject": { "entity": "node", "type": "foo" }
         },
         {
           "id": "foxtrot",
+          "label": "foxtrot",
+          "type": "NameGenerator",
           "prompts": [
             {
               "id": "golf",
-              "subject": { "entity": "node", "type": "foo" }
+              "text": "not a prompt"
             },
             {
               "id": "hotel",
-              "subject": { "entity": "node", "type": "pop" }
+              "text": "not a prompt"
             }
-          ]
+          ],
+          "subject": { "entity": "node", "type": "pop" }
         },
         {
           "id": "alpha",
+          "label": "alpha",
           "type": "Sociogram",
           "prompts": [
             {
               "id": "bravo",
+              "text": "not a prompt",
               "edges": {
-                "creates": "charlie",
+                "create": "charlie",
                 "display": ["delta", "echo"]
               }
             }
@@ -158,25 +184,35 @@
         },
         {
           "id": "mike",
+          "label": "mike",
           "type": "Sociogram",
           "prompts": [
             {
-              "id": "oscar"
+              "id": "oscar",
+              "text": "not a prompt"
             }
           ]
         },
         {
           "id": "assets",
+          "type": "Information",
+          "label": "assets",
           "panels": [
-            { "dataSource": "1234-asset-2" }
+            { "id": "panelId", "title": "", "dataSource": "1234-asset-2" }
           ],
-          "dataSource" : "1234-asset-3",
+          "prompts": [
+            {
+              "id": "promptId",
+              "text": "not a prompt"
+            }
+          ],
           "items": [
-            { "content": "1234-asset-4" }
+            { "id": "itemId", "type": "asset", "content": "1234-asset-4" }
           ],
           "background": {
             "image": "1234-asset-5"
-          }
+          },
+          "dataSource" : "1234-asset-3"
         }
       ]
     }

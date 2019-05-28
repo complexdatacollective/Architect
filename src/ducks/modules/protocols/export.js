@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import { getActiveProtocolId, getActiveProtocolMeta } from '../../../selectors/protocols';
 import { bundleProtocol } from '../../../other/protocols';
 
 const EXPORT_PROTOCOL = 'PROTOCOLS/EXPORT';
@@ -21,8 +21,8 @@ const exportProtocolThunk = () =>
   (dispatch, getState) => {
     dispatch(exportProtocol());
     const state = getState();
-    const activeProtocolId = state.session.activeProtocol;
-    const meta = find(state.protocols, ['id', activeProtocolId]);
+    const meta = getActiveProtocolMeta(state);
+    const activeProtocolId = getActiveProtocolId(state);
 
     if (!meta) {
       // Always return a promise
