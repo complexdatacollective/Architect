@@ -74,7 +74,6 @@ const createProtocol = () =>
   saveDialog()
     .then((filePath) => {
       const protocol = {
-        name: path.basename(filePath, '.netcanvas'),
       };
 
       return createProtocolFiles(filePath, protocol)
