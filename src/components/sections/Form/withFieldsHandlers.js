@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { reduce, get, toPairs } from 'lodash';
+import { reduce, get } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
 import { compose, withHandlers } from 'recompose';
 import { getVariablesForSubject } from '../../../selectors/codebook';
@@ -8,6 +8,7 @@ import { actionCreators as codebookActions } from '../../../ducks/modules/protoc
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
+  const variable = formSelector(state, 'variable');
   const component = formSelector(state, 'component');
 
   const existingVariables = getVariablesForSubject(state, { entity, type });
@@ -24,6 +25,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const variableType = getTypeForComponent(component);
 
   return {
+    variable,
     variableType,
     variableOptions,
     existingVariables,
@@ -49,11 +51,11 @@ const fieldsHandlers = withHandlers({
       return variable;
     },
   handleChangeVariable: ({ existingVariables, changeField, form }) =>
-    (_, variable) => {
+    (_, value) => {
       // Either load settings from codebook, or reset
-      const options = get(existingVariables, [variable, 'options'], null);
-      const validation = get(existingVariables, [variable, 'validation'], {});
-      const component = get(existingVariables, [variable, 'component'], null);
+      const options = get(existingVariables, [value, 'options'], null);
+      const validation = get(existingVariables, [value, 'validation'], {});
+      const component = get(existingVariables, [value, 'component'], null);
 
       // component?
       changeField(form, 'component', component);

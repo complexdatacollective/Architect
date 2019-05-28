@@ -16,6 +16,7 @@ import withFieldsMeta from './withFieldsHandlers';
 
 const PromptFields = ({
   form,
+  variable,
   variableType,
   variableOptions,
   createNewVariable,
@@ -47,19 +48,21 @@ const PromptFields = ({
         validation={{ required: true }}
       />
     </Row>
-    <Row contentId="guidance.section.form.field.component">
-      <h3 id={getFieldId('component')}>Input control</h3>
-      <p>Choose an input control that should be used to collect the answer.</p>
-      <ValidatedField
-        name="component"
-        component={Select}
-        placeholder="Select component"
-        options={inputOptions}
-        selectOptionComponent={SelectOptionImage}
-        validation={{ required: true }}
-        onChange={handleChangeComponent}
-      />
-    </Row>
+    { variable &&
+      <Row contentId="guidance.section.form.field.component">
+        <h3 id={getFieldId('component')}>Input control</h3>
+        <p>Choose an input control that should be used to collect the answer.</p>
+        <ValidatedField
+          name="component"
+          component={Select}
+          placeholder="Select component"
+          options={inputOptions}
+          selectOptionComponent={SelectOptionImage}
+          validation={{ required: true }}
+          onChange={handleChangeComponent}
+        />
+      </Row>
+    }
     { isVariableTypeWithOptions(variableType) &&
       <Row contentId="guidance.section.form.field.Options">
         <h3 id={getFieldId('options')}>Categorical/Ordinal options</h3>
@@ -91,6 +94,7 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   form: PropTypes.string.isRequired,
+  variable: PropTypes.string,
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
@@ -99,6 +103,7 @@ PromptFields.propTypes = {
 };
 
 PromptFields.defaultProps = {
+  variable: null,
   variableType: null,
   variableOptions: null,
 };
