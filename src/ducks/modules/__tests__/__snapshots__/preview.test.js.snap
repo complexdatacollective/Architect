@@ -6,12 +6,10 @@ Array [
     "form": Object {
       "fields": Array [
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "alpha",
         },
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "1234-1234-4",
         },
@@ -35,12 +33,10 @@ Array [
     "form": Object {
       "fields": Array [
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "bravo",
         },
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "1234-1234-5",
         },
@@ -164,12 +160,10 @@ Array [
     "form": Object {
       "fields": Array [
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "alpha",
         },
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "1234-1234-4",
         },
@@ -193,12 +187,10 @@ Array [
     "form": Object {
       "fields": Array [
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "bravo",
         },
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "1234-1234-5",
         },
@@ -322,12 +314,10 @@ Array [
     "form": Object {
       "fields": Array [
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "alpha",
         },
         Object {
-          "component": "Text",
           "prompt": "message",
           "variable": "1234-1234-4",
         },

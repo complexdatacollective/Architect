@@ -55,7 +55,7 @@
             "name": "bar",
             "color": "blue",
             "variables": {
-              "alpha": { "name": "ALPHA", "type": "text" },
+              "alpha": { "name": "ALPHA", "component": "Text", "type": "text" },
               "bravo": { "name": "BRAVO", "type": "text" },
               "charlie": { "name": "CHARLIE", "type": "location" },
               "1234-1234-4": { "name": "1234-1234-4", "type": "text" },
@@ -116,8 +116,8 @@
           ],
           "form": {
             "fields": [
-              { "variable": "alpha", "component": "Text", "prompt": "message" },
-              { "variable": "1234-1234-4", "component": "Text", "prompt": "message" }
+              { "variable": "alpha", "prompt": "message" },
+              { "variable": "1234-1234-4", "prompt": "message" }
             ]
           }
         },
@@ -134,8 +134,8 @@
           ],
           "form": {
             "fields": [
-              { "variable": "bravo", "component": "Text", "prompt": "message" },
-              { "variable": "1234-1234-5", "component": "Text", "prompt": "message" }
+              { "variable": "bravo", "prompt": "message" },
+              { "variable": "1234-1234-5", "prompt": "message" }
             ]
           }
         },
