@@ -38,13 +38,10 @@ const mapDispatchToProps = {
 const fieldsState = connect(mapStateToProps, mapDispatchToProps);
 
 const fieldsHandlers = withHandlers({
-  resetFields: ({ changeField, form }) =>
-    (resetObject) => {
-      toPairs(resetObject)
-        .forEach(
-          ([variableName, value]) =>
-            changeField(form, variableName, value),
-        );
+  handleChangeComponent: ({ changeField, form }) =>
+    () => {
+      changeField(form, 'options', null);
+      changeField(form, 'validation', {});
     },
   createNewVariable: ({ createVariable, entity, type }) =>
     (name) => {
