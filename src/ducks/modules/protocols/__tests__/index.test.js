@@ -65,7 +65,7 @@ describe('protocols', () => {
   });
 
   describe('saveAndExportProtocol()', () => {
-    advanceTo(new Date(2017, 5, 27, 0, 0, 0));
+    advanceTo(Date.UTC(2017, 5, 27, 0, 0, 0));
 
     describe('invalid protocol', () => {
       beforeEach(() => {
