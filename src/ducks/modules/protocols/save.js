@@ -2,6 +2,7 @@ import { find } from 'lodash';
 import { saveProtocol as saveProtocolFile } from '../../../other/protocols';
 import { getProtocol } from '../../../selectors/protocol';
 import validateProtocol from '../../../utils/validateProtocol';
+import { validationErrorDialog } from './dialogs';
 
 const SAVE_PROTOCOL = 'PROTOCOLS/SAVE';
 const SAVE_PROTOCOL_SUCCESS = 'PROTOCOLS/SAVE_SUCCESS';
@@ -37,6 +38,11 @@ const saveProtocolThunk = () =>
     }
 
     return validateProtocol(protocol)
+      // We don't actually want to stop the protocol from being
+      // saved for a validation error
+      .catch((e) => {
+        dispatch(validationErrorDialog(e));
+      })
       .then(() => saveProtocolFile(meta.workingPath, protocol))
       .then(destinationPath => dispatch(saveProtocolSuccess(destinationPath, protocol)))
       .catch((e) => {

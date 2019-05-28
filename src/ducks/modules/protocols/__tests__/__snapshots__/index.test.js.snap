@@ -10,23 +10,6 @@ Array [
   ],
   Array [
     Object {
-      "error": [Error: Protocol.stages should NOT have fewer than 1 items 
-
-],
-      "filePath": "/dev/null/mock/path/invalid",
-      "type": "PROTOCOLS/IMPORT_ERROR",
-    },
-  ],
-  Array [
-    Object {
-      "error": [Error: Protocol.stages should NOT have fewer than 1 items 
-
-],
-      "type": "PROTOCOLS/IMPORT_AND_LOAD_ERROR",
-    },
-  ],
-  Array [
-    Object {
       "dialog": Object {
         "error": [Error: Protocol.stages should NOT have fewer than 1 items 
 
@@ -35,6 +18,22 @@ Array [
       },
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
       "type": Symbol(PROTOCOL/OPEN_DIALOG),
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/invalid",
+      "type": "PROTOCOLS/IMPORT_SUCCESS",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+  Array [
+    Object {
+      "advanced": true,
+      "filePath": "/dev/null/mock/path/invalid",
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOLS/REGISTER",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
     },
   ],
 ]
@@ -62,6 +61,151 @@ Array [
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
       "type": "PROTOCOLS/REGISTER",
       "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+]
+`;
+
+exports[`protocols saveAndExportProtocol() invalid protocol throws an error when protocol is invalid 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PROTOCOLS/SAVE",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "error": [Error: Protocol.stages should NOT have fewer than 1 items 
+
+],
+        "type": "Error",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": Symbol(PROTOCOL/OPEN_DIALOG),
+    },
+  ],
+  Array [
+    Object {
+      "destinationPath": "/dev/null/fake/user/protocol/path",
+      "protocol": Object {
+        "assetManifest": Object {
+          "1234-asset-1": Object {
+            "source": "1234-4567-asset-1",
+          },
+          "1234-asset-2": Object {
+            "source": "1234-4567-asset-2",
+          },
+          "1234-asset-3": Object {
+            "source": "1234-4567-asset-3",
+          },
+          "1234-asset-4": Object {
+            "source": "1234-4567-asset-4",
+          },
+          "1234-asset-5": Object {
+            "source": "1234-4567-asset-5",
+          },
+        },
+        "codebook": Object {
+          "edge": Object {
+            "1234-5": Object {
+              "color": "blue",
+              "name": "an edge",
+            },
+          },
+          "ego": Object {
+            "variables": Object {
+              "sierra": Object {
+                "name": "SIERRA",
+                "type": "text",
+              },
+              "tango": Object {
+                "name": "TANGO",
+                "type": "text",
+              },
+            },
+          },
+          "node": Object {
+            "1234-1234-1234": Object {
+              "color": "red",
+              "name": "1234-1234-1234",
+              "variables": Object {
+                "1234-1234-1": Object {
+                  "name": "my layout",
+                  "type": "layout",
+                },
+                "1234-1234-2": Object {
+                  "name": "my category",
+                  "type": "categorical",
+                },
+                "1234-1234-3": Object {
+                  "name": "my boolean",
+                  "type": "boolean",
+                },
+                "1234-1234-4": Object {
+                  "name": "other boolean 2",
+                  "type": "boolean",
+                },
+                "1234-1234-5": Object {
+                  "name": "other boolean 4",
+                  "type": "boolean",
+                },
+              },
+            },
+            "bar": Object {
+              "color": "blue",
+              "name": "bar",
+              "variables": Object {
+                "1234-1234-4": Object {
+                  "name": "1234-1234-4",
+                  "type": "text",
+                },
+                "1234-1234-5": Object {
+                  "name": "1234-1234-5",
+                  "type": "text",
+                },
+                "alpha": Object {
+                  "name": "ALPHA",
+                  "type": "text",
+                },
+                "bravo": Object {
+                  "name": "BRAVO",
+                  "type": "text",
+                },
+                "charlie": Object {
+                  "name": "CHARLIE",
+                  "type": "location",
+                },
+              },
+            },
+            "foo": Object {
+              "color": "black",
+              "name": "foo",
+              "variables": Object {},
+            },
+            "pop": Object {
+              "color": "black",
+              "name": "pop",
+              "variables": Object {},
+            },
+          },
+        },
+        "lastModified": "2017-06-27T00:00:00.000Z",
+        "name": "fooProtocol",
+        "stages": Array [],
+      },
+      "type": "PROTOCOLS/SAVE_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "type": "PROTOCOLS/EXPORT",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/home/documents/1234-active-protocol",
+      "type": "PROTOCOLS/EXPORT_SUCCESS",
     },
   ],
 ]

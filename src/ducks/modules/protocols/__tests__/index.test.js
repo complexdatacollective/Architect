@@ -81,10 +81,7 @@ describe('protocols', () => {
       it('throws an error when protocol is invalid', () =>
         store.dispatch(actionCreators.saveAndExportProtocol())
           .then(() => {
-            expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/SAVE' }]);
-            expect(log.mock.calls[1][0]).toMatchObject({
-              type: 'PROTOCOLS/SAVE_ERROR',
-            });
+            expect(log.mock.calls).toMatchSnapshot();
           }),
       );
     });

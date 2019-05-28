@@ -2,6 +2,7 @@ import unbundleProtocol from '../../../other/protocols/unbundleProtocol';
 import { loadProtocolConfiguration } from '../../../other/protocols';
 import { actionCreators as registerActions } from './register';
 import validateProtocol from '../../../utils/validateProtocol';
+import { validationErrorDialog } from './dialogs';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
@@ -32,9 +33,18 @@ const importProtocolThunk = filePath =>
       .then(workingPath =>
         // check we can open the protocol file
         loadProtocolConfiguration(workingPath)
-          // .then((protocol) => { console.log(protocol); return protocol; })
           // it loaded okay, check the protocol is valid
-          .then(validateProtocol)
+          .then((protocol) => {
+            // We don't actually want to stop the protocol from being
+            // imported for a validation error, so this is separate
+            // from the loading logic
+            validateProtocol(protocol)
+              .catch((e) => {
+                dispatch(validationErrorDialog(e, filePath));
+              });
+
+            return protocol;
+          })
           .then(() => {
             // all was well
             dispatch(importProtocolSuccess({ filePath, workingPath }));
