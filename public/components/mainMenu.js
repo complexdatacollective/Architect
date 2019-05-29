@@ -17,19 +17,19 @@ const openDialog = () =>
     });
   });
 
-const openFile = window =>
+const openFile = appManager =>
   () =>
     openDialog()
-      .then(filePath => window.webContents.send('OPEN_FILE', filePath));
+      .then(filePath => appManager.openFile(filePath));
 
-const MenuTemplate = (window) => {
+const MenuTemplate = (appManager) => {
   const menu = [
     {
       label: 'File',
       submenu: [
         {
           label: 'Open...',
-          click: openFile(window),
+          click: openFile(appManager),
         },
       ],
     },
@@ -68,9 +68,7 @@ const MenuTemplate = (window) => {
               buttons: ['OK', 'Cancel'],
             }, (response) => {
               if (response === 0) {
-                window.webContents.session.clearStorageData(() => {
-                  window.webContents.reload();
-                });
+                appManager.clearStorageData();
               }
             });
           },

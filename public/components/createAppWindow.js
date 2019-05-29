@@ -1,8 +1,7 @@
-const { BrowserWindow, Menu } = require('electron');
+const { BrowserWindow } = require('electron');
 const url = require('url');
 const path = require('path');
 const log = require('./log');
-const mainMenu = require('./mainMenu');
 
 const isMacOS = () => process.platform === 'darwin';
 
@@ -48,8 +47,6 @@ function createAppWindow() {
 
     const appWindow = new BrowserWindow(windowParameters);
 
-    const appMenu = Menu.buildFromTemplate(mainMenu(appWindow));
-
     global.quit = false;
 
     appWindow.webContents.on('new-window', (evt) => {
@@ -62,14 +59,11 @@ function createAppWindow() {
       evt.preventDefault();
     });
 
-    appWindow.on('focus', () => {
-      Menu.setApplicationMenu(appMenu);
-    });
-
     appWindow.on('close', (e) => {
       if (!global.quit) {
-        e.preventDefault();
-        appWindow.webContents.send('CONFIRM_CLOSE');
+        // log.info('prevent close');
+        // e.preventDefault();
+        // appWindow.webContents.send('CONFIRM_CLOSE');
       }
     });
 

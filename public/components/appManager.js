@@ -1,6 +1,7 @@
-const { ipcMain, app, BrowserWindow } = require('electron');
+const { ipcMain, app, Menu, BrowserWindow } = require('electron');
 const log = require('./log');
 const path = require('path');
+const mainMenu = require('./mainMenu');
 const createPreviewManager = require('./createPreviewManager');
 const createAppWindow = require('./createAppWindow');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
@@ -34,7 +35,7 @@ class AppManager {
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
     app.on('ready', () => {
-      console.log('Ready');
+      this.initializeMenu();
 
       registerAssetProtocol();
 
@@ -146,6 +147,15 @@ class AppManager {
       });
   }
 
+  clearStorageData() {
+    this.getWindow()
+      .then((window) => {
+        window.webContents.session.clearStorageData(() => {
+          window.webContents.reload();
+        });
+      });
+  }
+
   initializeListeners() {
     ipcMain.on('READY', (event) => {
       this.openFileFromArgs();
@@ -160,6 +170,11 @@ class AppManager {
       global.quit = true;
       app.quit();
     });
+  }
+
+  initializeMenu() {
+    const appMenu = Menu.buildFromTemplate(mainMenu(this));
+    Menu.setApplicationMenu(appMenu);
   }
 }
 
