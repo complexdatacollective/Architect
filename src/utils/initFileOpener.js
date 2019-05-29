@@ -45,7 +45,7 @@ const initFileOpener = () => {
     });
   });
 
-  ipcRenderer.send('GET_ARGF');
+  ipcRenderer.send('READY');
 };
 
 export default initFileOpener;

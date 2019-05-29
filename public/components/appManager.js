@@ -1,7 +1,8 @@
 const { ipcMain, app, BrowserWindow } = require('electron');
 const log = require('./log');
 const path = require('path');
-const appWindowManager = require('./appWindowManager');
+const createPreviewManager = require('./createPreviewManager');
+const createAppWindow = require('./createAppWindow');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
 
 function getFileFromArgs(argv) {
@@ -15,29 +16,45 @@ function getFileFromArgs(argv) {
   return null;
 }
 
-const appManager = {
-  openFileWhenReady: null,
-  init: function init() {
-    ipcMain.on('GET_ARGF', (event) => {
-      if (process.platform === 'win32') {
-        const filePath = getFileFromArgs(process.argv);
-        if (filePath) {
-          event.sender.send('OPEN_FILE', filePath);
+class AppManager {
+  constructor() {
+    this.openFileWhenReady = null;
+    this.appWindow = null;
+    this.isCreatingWindow = false;
+
+    if (this.makeSingleInstance()) { return; }
+
+    this.initializeListeners();
+
+    app.on('open-file', (event, filePath) => {
+      this.openFile(filePath);
+    });
+
+    // This method will be called when Electron has finished
+    // initialization and is ready to create browser windows.
+    // Some APIs can only be used after this event occurs.
+    app.on('ready', () => {
+      console.log('Ready');
+
+      registerAssetProtocol();
+
+      this.openWindow();
+
+      createPreviewManager().then(() => {
+        log.info('created preview manager');
+      });
+
+      app.on('activate', () => {
+        // On OS X it's common to re-create a window in the app when the
+        // dock icon is clicked and there are no other windows open.
+        if (process.platform === 'darwin') {
+          this.openWindow();
         }
-      }
-
-      if (this.openFileWhenReady) {
-        event.sender.send('OPEN_FILE', this.openFileWhenReady);
-        this.openFileWhenReady = null;
-      }
+      });
     });
+  }
 
-    ipcMain.on('QUIT', () => {
-      global.quit = true;
-      app.quit();
-    });
-  },
-  loadDevTools: () => {
+  static loadDevTools() {
     const extensions = process.env.NC_DEVTOOLS_EXTENSION_PATH;
     if (process.env.NODE_ENV !== 'development' || !extensions) { return; }
     try {
@@ -53,24 +70,45 @@ const appManager = {
       log.warn(process.env.NC_DEVTOOLS_EXTENSION_PATH);
       /* eslint-enable */
     }
-  },
-  openFileFromArgs: function openFileFromArgs(argv) {
-    return this.restore()
-      .then((window) => {
-        if (process.platform === 'win32') {
-          const filePath = getFileFromArgs(argv);
-          if (filePath) {
-            window.webContents.send('OPEN_FILE', filePath);
-          }
-        }
+  }
 
-        return window;
-      });
-  },
-  restore: function restore() {
-    if (!app.isReady()) { return Promise.reject(); }
+  makeSingleInstance() {
+    const shouldQuit = app.makeSingleInstance((argv) => {
+      this.openFileFromArgs(argv);
+    });
 
-    return appWindowManager.getWindow()
+    if (shouldQuit) {
+      app.quit();
+    }
+
+    return shouldQuit;
+  }
+
+  openFileFromArgs(argv) {
+    if (process.platform === 'win32') {
+      const filePath = getFileFromArgs(argv);
+      if (filePath) {
+        this.openFile(filePath);
+      }
+    }
+  }
+
+  // File -> Open
+  openFile(fileToOpen) {
+    if (!app.isReady()) {
+      // defer action
+      this.openFileWhenReady = fileToOpen;
+    } else {
+      this.openWindow()
+        .then((window) => {
+          window.webContents.send('OPEN_FILE', fileToOpen);
+        });
+      this.openFileWhenReady = null;
+    }
+  }
+
+  openWindow() {
+    return this.getWindow()
       .then((window) => {
         if (window.isMinimized()) {
           window.restore();
@@ -80,25 +118,49 @@ const appManager = {
 
         return window;
       });
-  },
-  openFile: function openFile(fileToOpen) {
-    if (!app.isReady()) {
-      // defer action
-      this.openFileWhenReady = fileToOpen;
-    } else {
-      appWindowManager.getWindow()
-        .then((window) => {
-          window.webContents.send('OPEN_FILE', fileToOpen);
-        });
-      this.openFileWhenReady = null;
+  }
+
+  getWindow() {
+    if (!app.isReady()) { return Promise.reject(); }
+    if (this.isCreatingWindow) { return Promise.reject(); }
+
+    if (this.appWindow) {
+      return Promise.resolve(this.appWindow);
     }
-  },
-  start: function start() {
-    registerAssetProtocol();
 
-    return appWindowManager
-      .getWindow();
-  },
-};
+    this.isCreatingWindow = true;
 
-module.exports = appManager;
+    return createAppWindow()
+      .then((appWindow) => {
+        appWindow.on('closed', () => {
+          // Dereference the window object, usually you would store windows
+          // in an array if your app supports multi windows, this is the time
+          // when you should delete the corresponding element.
+          this.appWindow = null;
+        });
+
+        this.appWindow = appWindow;
+        this.isCreatingWindow = false;
+
+        return appWindow;
+      });
+  }
+
+  initializeListeners() {
+    ipcMain.on('READY', (event) => {
+      this.openFileFromArgs();
+
+      if (this.openFileWhenReady) {
+        event.sender.send('OPEN_FILE', this.openFileWhenReady);
+        this.openFileWhenReady = null;
+      }
+    });
+
+    ipcMain.on('QUIT', () => {
+      global.quit = true;
+      app.quit();
+    });
+  }
+}
+
+module.exports = () => new AppManager();
