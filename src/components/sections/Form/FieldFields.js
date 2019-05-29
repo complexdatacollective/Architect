@@ -43,6 +43,11 @@ const PromptFields = ({
         onChange={handleChangeVariable} // read/reset component options validation
         validation={{ required: true }}
         placeholder="Type to create a variable..."
+        formatCreateLabel={inputValue => (
+          <span>
+            Press enter to create a variable named &quot;{inputValue}&quot;.
+          </span>
+        )}
       />
     </Row>
     <Row contentId="guidance.section.form.field.prompt">

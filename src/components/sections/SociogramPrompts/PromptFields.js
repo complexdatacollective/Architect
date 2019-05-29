@@ -24,7 +24,7 @@ const PromptFields = props => (
         name="text"
         component={Fields.Text}
         label=""
-        placeholder="Enter text for the prompt here"
+        placeholder="Enter text for the prompt here..."
         validation={{ required: true, maxLength: 220 }}
       />
     </Section>

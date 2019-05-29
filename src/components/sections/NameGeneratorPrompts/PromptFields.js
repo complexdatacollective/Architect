@@ -31,7 +31,7 @@ class PromptFields extends PureComponent {
             component={Text}
             className="stage-editor-section-prompt__textarea"
             label=""
-            placeholder="Enter text for the prompt here"
+            placeholder="Enter text for the prompt here..."
             validation={{ required: true, maxLength: 220 }}
           />
         </Row>
