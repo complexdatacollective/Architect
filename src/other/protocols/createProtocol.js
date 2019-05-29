@@ -34,37 +34,13 @@ const createProtocolWorkingPath = destinationPath =>
   });
 
 /**
- * Updates protocol at protocolWorkingPath, merges with existing protocol.
- * Expects a valid protocol object as input.
- * @param {string} protocolWorkingPath - location of protocol
- * @param {object} protocol - protocol object, probably a template.
- */
-const updateProtocol = (protocolWorkingPath, protocol) => {
-  const protocolPath = path.join(protocolWorkingPath, 'protocol.json');
-
-  return fse.readJson(protocolPath)
-    .then((protocolTemplate) => {
-      const updatedProtocol = {
-        ...protocolTemplate,
-        ...protocol,
-      };
-
-      return fse.writeJson(protocolPath, updatedProtocol);
-    });
-};
-
-/**
  * Creates a blank protocol in a tempory path
- * Expects a valid protocol object as input.
  * @param {string} destinationPath - destination for protocol bundle.
- * @param {object} protocol - protocol object, probably a template.
  */
-export const createProtocolFiles = (destinationPath, protocol) => {
+export const createProtocolFiles = (destinationPath) => {
   const tempPath = getLocalDirectoryFromArchivePath(destinationPath);
 
-  return createProtocolWorkingPath(tempPath)
-    .then(protocolWorkingPath => updateProtocol(protocolWorkingPath, protocol))
-    .then(() => tempPath);
+  return createProtocolWorkingPath(tempPath);
 };
 
 /**
@@ -72,13 +48,9 @@ export const createProtocolFiles = (destinationPath, protocol) => {
  */
 const createProtocol = () =>
   saveDialog()
-    .then((filePath) => {
-      const protocol = {
-        name: path.basename(filePath, '.netcanvas'),
-      };
-
-      return createProtocolFiles(filePath, protocol)
-        .then(tempPath => ({ filePath, workingPath: tempPath }));
-    });
+    .then(filePath =>
+      createProtocolFiles(filePath)
+        .then(tempPath => ({ filePath, workingPath: tempPath })),
+    );
 
 export default createProtocol;

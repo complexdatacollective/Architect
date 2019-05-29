@@ -1,3 +1,4 @@
+import path from 'path';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,7 +7,7 @@ import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
 import { Node, Icon, Button } from '../ui/components';
 import * as Fields from '../ui/components/Fields';
-import { getProtocol } from '../selectors/protocol';
+import { getProtocol, getActiveProtocolMeta } from '../selectors/protocol';
 import Link from './Link';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 import { actionCreators as uiActions } from '../ducks/modules/ui';
@@ -141,9 +142,11 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
+  const meta = getActiveProtocolMeta(state);
+  const filePath = meta && meta.filePath && path.basename(meta.filePath);
 
   return {
-    name: protocol && protocol.name,
+    name: filePath,
     description: protocol && protocol.description,
     codebook: protocol && protocol.codebook,
   };
