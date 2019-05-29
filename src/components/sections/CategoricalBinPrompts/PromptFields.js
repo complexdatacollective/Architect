@@ -46,7 +46,7 @@ const PromptFields = ({
           name={'text'}
           component={Text}
           label=""
-          placeholder="Enter text for the prompt here"
+          placeholder="Enter text for the prompt here..."
           validation={{ required: true, maxLength: 220 }}
         />
       </Row>

@@ -5,8 +5,8 @@ import { actionCreators as codebookActions } from '../../../ducks/modules/protoc
 import { getTypeForComponent } from '../../Form/inputOptions';
 import { getCodebookProperties } from './helpers';
 
-const fieldChangeHandlers = withHandlers({
-  handleChangeFields: ({ createVariable, updateVariable, type, entity, changeForm, form }) =>
+const formHandlers = withHandlers({
+  handleChangeFields: ({ updateVariable, type, entity, changeForm, form }) =>
     (values) => {
       const { variable, component, ...rest } = values;
       const variableType = getTypeForComponent(component);
@@ -14,30 +14,32 @@ const fieldChangeHandlers = withHandlers({
       const codebookProperties = getCodebookProperties(rest);
       const configuration = {
         type: variableType,
+        component,
         ...codebookProperties,
       };
 
-      changeForm(form, '_modified', new Date().getTime()); // Register a change in the stage editor
+      // Register a change in the stage editor
+      // `form` here refers to the `section/` parent form, not the fields form
+      changeForm(form, '_modified', new Date().getTime());
 
-      if (variable) {
-        updateVariable(entity, type, variable, configuration);
-        return values;
-      }
-
-      const result = createVariable(entity, type, configuration);
-      return { ...values, variable: result.variable };
+      updateVariable(entity, type, variable, configuration, true);
+      return values;
     },
 });
 
 const mapDispatchToProps = {
   changeForm: change,
-  createVariable: codebookActions.createVariable,
   updateVariable: codebookActions.updateVariable,
 };
 
-const withFieldChangeHandlers = compose(
-  connect(null, mapDispatchToProps),
-  fieldChangeHandlers,
-);
+const formState = connect(null, mapDispatchToProps);
 
-export default withFieldChangeHandlers;
+export {
+  formState,
+  formHandlers,
+};
+
+export default compose(
+  formState,
+  formHandlers,
+);

@@ -61,7 +61,7 @@ class VariableFields extends Component {
             ))}
             validation={{ required: true }}
             onChange={resetOptions}
-            placeHolder="&mdash; Select variable type &mdash;"
+            placeholder="&mdash; Select variable type &mdash;"
           />
         </Row>
         <Row>

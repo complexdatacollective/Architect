@@ -165,6 +165,7 @@ Array [
                   "type": "text",
                 },
                 "alpha": Object {
+                  "component": "Text",
                   "name": "ALPHA",
                   "type": "text",
                 },
@@ -298,6 +299,7 @@ Array [
                   "type": "text",
                 },
                 "alpha": Object {
+                  "component": "Text",
                   "name": "ALPHA",
                   "type": "text",
                 },
@@ -330,12 +332,10 @@ Array [
             "form": Object {
               "fields": Array [
                 Object {
-                  "component": "Text",
                   "prompt": "message",
                   "variable": "alpha",
                 },
                 Object {
-                  "component": "Text",
                   "prompt": "message",
                   "variable": "1234-1234-4",
                 },
@@ -359,12 +359,10 @@ Array [
             "form": Object {
               "fields": Array [
                 Object {
-                  "component": "Text",
                   "prompt": "message",
                   "variable": "bravo",
                 },
                 Object {
-                  "component": "Text",
                   "prompt": "message",
                   "variable": "1234-1234-5",
                 },
