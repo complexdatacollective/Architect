@@ -27,7 +27,13 @@ const PromptFields = ({
     <Row contentId="guidance.section.form.field.name">
       <h3 id={getFieldId('variable')}>Variable</h3>
       <p>
-        Choose or create a variable.
+        Create a variable below, or choose from existing variables in the drop-down list.
+      </p>
+      <p>
+        <strong>
+        Tip: When selecting an existing variable, changes you make to the input control or
+        validation options will also change other uses of this variable.
+        </strong>
       </p>
       <ValidatedField
         name="variable"
@@ -36,6 +42,7 @@ const PromptFields = ({
         onCreateOption={createNewVariable} // reset later fields, create variable of no type?
         onChange={handleChangeVariable} // read/reset component options validation
         validation={{ required: true }}
+        placeholder="Type to create a variable..."
       />
     </Row>
     <Row contentId="guidance.section.form.field.prompt">

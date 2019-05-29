@@ -20,6 +20,11 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     }
   }
 
+  &__placeholder {
+    color: var(--input-placeholder);
+    font-style: italic;
+  }
+
   &__value-container {
     padding: 0;
   }
