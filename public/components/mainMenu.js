@@ -9,6 +9,13 @@ const openDialogOptions = {
   properties: ['openFile'],
 };
 
+const saveDialogOptions = {
+  buttonLabel: 'Save',
+  nameFieldLabel: 'Save:',
+  defaultPath: 'Protocol.netcanvas', // TODO: something based on existing filename?
+  filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
+};
+
 const openDialog = () =>
   new Promise((resolve, reject) => {
     dialog.showOpenDialog(openDialogOptions, (filename) => {
@@ -22,6 +29,19 @@ const openFile = appManager =>
     openDialog()
       .then(filePath => appManager.openFile(filePath));
 
+const saveDialog = () =>
+  new Promise((resolve, reject) => {
+    dialog.showSaveDialog(saveDialogOptions, (filename) => {
+      if (filename === undefined) { reject(); return; }
+      resolve(filename[0]);
+    });
+  });
+
+const saveCopy = appManager =>
+  () =>
+    saveDialog()
+      .then(filePath => appManager.saveCopy(filePath));
+
 const MenuTemplate = (appManager) => {
   const menu = [
     {
@@ -30,6 +50,10 @@ const MenuTemplate = (appManager) => {
         {
           label: 'Open...',
           click: openFile(appManager),
+        },
+        {
+          label: 'Save copy...',
+          click: saveCopy(appManager),
         },
       ],
     },
