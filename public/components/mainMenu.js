@@ -13,6 +13,10 @@ const MenuTemplate = (options) => {
 
   if (options.isProtocolOpen) {
     fileMenu.submenu.push({
+      label: 'Save',
+      click: options.save,
+    });
+    fileMenu.submenu.push({
       label: 'Save copy...',
       click: options.saveCopy,
     });

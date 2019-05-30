@@ -196,6 +196,13 @@ class AppManager {
       });
   }
 
+  save() {
+    this.getWindow()
+      .then((window) => {
+        window.webContents.send('SAVE');
+      });
+  }
+
   updateMenu() {
     const menuOptions = {
       isProtocolOpen: !!this.activeProtocol,
@@ -205,6 +212,7 @@ class AppManager {
         saveDialog({ defaultPath })
           .then(filePath => this.saveCopy(filePath));
       },
+      save: () => this.save(),
       clearStorageData: () => clearStorageDataDialog().then(() => this.clearStorageData()),
     };
 
