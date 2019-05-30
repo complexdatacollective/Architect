@@ -3,11 +3,10 @@ const log = require('./log');
 const path = require('path');
 const { openDialog, saveDialog, clearStorageDataDialog } = require('./dialogs');
 const mainMenu = require('./mainMenu');
-// const createPreviewManager = require('./createPreviewManager');
-const createAppWindow = require('./createAppWindow');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
 
 function getFileFromArgs(argv) {
+  if (!argv) { return null; }
   if (argv.length >= 2) {
     const filePath = argv[1];
     if (path.extname(filePath) === '.netcanvas') {
@@ -19,25 +18,15 @@ function getFileFromArgs(argv) {
 }
 
 class AppManager {
-  constructor() {
-    this.openFileWhenReady = null;
-    this.appWindow = null;
-    this.isCreatingWindow = false;
-    this.activeProtocol = null;
+  static openWindow() {
+    if (!global.appWindow) { return; }
+    global.appWindow.open();
   }
 
-  start() {
-    registerAssetProtocol();
-    this.initializeListeners();
-
-    this.updateMenu();
-
-    this.openWindow()
-      .catch(e => log.info(e));
-
-    // createPreviewManager().then(() => {
-    //   log.info('created preview manager');
-    // });
+  static removeListeners() {
+    ipcMain.removeAllListeners('READY');
+    ipcMain.removeAllListeners('QUIT');
+    ipcMain.removeAllListeners('ACTION');
   }
 
   static loadDevTools() {
@@ -58,98 +47,96 @@ class AppManager {
     }
   }
 
-  openFileFromArgs(argv) {
+  static send(...args) {
+    if (!global.appWindow) { return; }
+    global.appWindow.webContents.send(...args);
+  }
+
+  static openFileFromArgs(argv) {
     if (process.platform === 'win32') {
       const filePath = getFileFromArgs(argv);
+
       if (filePath) {
-        this.openFile(filePath);
+        if (!app.isReady()) {
+          global.openFileWhenReady = filePath;
+          return;
+        }
+
+        AppManager.openFile(filePath);
       }
     }
   }
 
-  // File -> Open
-  openFile(fileToOpen) {
-    if (!app.isReady()) {
-      // defer action
-      this.openFileWhenReady = fileToOpen;
-    } else {
-      this.openWindow()
-        .then((window) => {
-          window.webContents.send('OPEN_FILE', fileToOpen);
-        })
-        .catch(e => log.info(e));
-      this.openFileWhenReady = null;
-    }
+  static openFile(fileToOpen) {
+    AppManager.send('OPEN_FILE', fileToOpen);
   }
 
-  openWindow() {
-    return this.getWindow()
-      .then((window) => {
-        if (window.isMinimized()) {
-          window.restore();
-        }
+  static clearStorageData() {
+    if (!global.appWindow) { return; }
 
-        window.focus();
-
-        return window;
-      });
+    global.appWindow.webContents.session.clearStorageData(() => {
+      global.appWindow.webContents.reload();
+    });
   }
 
-  getWindow() {
-    if (!app.isReady()) {
-      return Promise.reject(new Error('Could not get window because app is not ready'));
-    }
-
-    if (this.isCreatingWindow) {
-      return Promise.reject(new Error('Could not get window because app is already creating one'));
-    }
-
-    if (this.appWindow) {
-      return Promise.resolve(this.appWindow);
-    }
-
-    this.isCreatingWindow = true;
-
-    return createAppWindow()
-      .then((appWindow) => {
-        appWindow.on('closed', () => {
-          // Dereference the window object, usually you would store windows
-          // in an array if your app supports multi windows, this is the time
-          // when you should delete the corresponding element.
-          this.appWindow = null;
-
-          // TODO: close preview window too.
-        });
-
-        this.appWindow = appWindow;
-        this.isCreatingWindow = false;
-
-        return appWindow;
-      });
+  static saveCopy(filePath) {
+    AppManager.send('SAVE_COPY', filePath);
   }
 
-  clearStorageData() {
-    this.getWindow()
-      .then((window) => {
-        window.webContents.session.clearStorageData(() => {
-          window.webContents.reload();
-        });
-      });
+  static save() {
+    AppManager.send('SAVE');
+  }
+
+  static quit() {
+    global.quit = true;
+
+    AppManager.removeListeners();
+    app.quit();
+  }
+
+  constructor() {
+    this.openFileWhenReady = null;
+    this.activeProtocol = null;
+  }
+
+  start() {
+    log.info('Start appManager');
+
+    global.appWindow.on('focus', () => {
+      this.updateMenu();
+    });
+
+    global.appWindow.on('close', (e) => {
+      if (!global.quit) {
+        log.info('Confirm close');
+        e.preventDefault();
+        AppManager.send('CONFIRM_CLOSE');
+
+        return false;
+      }
+
+      return true;
+    });
+
+    registerAssetProtocol();
+    this.initializeListeners();
+    this.updateMenu();
+
+    if (global.openFileWhenReady) {
+      AppManager.openFile(global.openFileWhenReady);
+      global.openFileWhenReady = null;
+    }
   }
 
   initializeListeners() {
-    ipcMain.on('READY', (event) => {
-      this.openFileFromArgs();
-
-      if (this.openFileWhenReady) {
-        event.sender.send('OPEN_FILE', this.openFileWhenReady);
-        this.openFileWhenReady = null;
-      }
+    ipcMain.on('READY', () => {
+      log.info('Renderer ready');
+      AppManager.openFileFromArgs();
     });
 
     ipcMain.on('QUIT', () => {
-      global.quit = true;
-      app.quit();
+      log.info('Renderer quit');
+      AppManager.quit();
     });
 
     ipcMain.on('ACTION', (e, action) => {
@@ -168,40 +155,17 @@ class AppManager {
     });
   }
 
-  destroy() {
-    this.appWindow = null;
-    ipcMain.removeAllListeners('READY');
-    ipcMain.removeAllListeners('QUIT');
-    ipcMain.removeAllListeners('ACTION');
-  }
-
-  saveCopy(filePath) {
-    this.getWindow()
-      .then((window) => {
-        window.webContents.send('SAVE_COPY', filePath);
-      })
-      .catch(e => log.info(e));
-  }
-
-  save() {
-    this.getWindow()
-      .then((window) => {
-        window.webContents.send('SAVE');
-      })
-      .catch(e => log.info(e));
-  }
-
   updateMenu() {
     const menuOptions = {
       isProtocolOpen: !!this.activeProtocol,
-      openFile: () => openDialog().then(file => this.openFile(file)),
+      openFile: () => openDialog().then(file => AppManager.openFile(file)),
       saveCopy: () => {
         const defaultPath = this.activeProtocol.filePath;
         saveDialog({ defaultPath })
-          .then(filePath => this.saveCopy(filePath));
+          .then(filePath => AppManager.saveCopy(filePath));
       },
-      save: () => this.save(),
-      clearStorageData: () => clearStorageDataDialog().then(() => this.clearStorageData()),
+      save: () => AppManager.save(),
+      clearStorageData: () => clearStorageDataDialog().then(() => AppManager.clearStorageData()),
     };
 
     const appMenu = Menu.buildFromTemplate(mainMenu(menuOptions));
@@ -209,4 +173,4 @@ class AppManager {
   }
 }
 
-module.exports = () => new AppManager();
+module.exports = AppManager;

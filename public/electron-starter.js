@@ -1,25 +1,26 @@
-const log = require('./components/log');
 const { app } = require('electron');
+const log = require('./components/log');
+const createAppWindow = require('./components/createAppWindow');
+const createPreviewWindow = require('./components/createPreviewWindow');
 const AppManager = require('./components/appManager');
+const PreviewManager = require('./components/previewManager');
 
 global.NETWORK_CANVAS_PREVIEW = true;
 
 log.info('App starting...');
 
-let appManager = AppManager();
+const appManager = new AppManager();
+const previewManager = new PreviewManager(); // eslint-disable-line
 
 const shouldQuit = app.makeSingleInstance((argv) => {
-  if (!appManager) { return; }
-
   appManager.openFileFromArgs(argv);
 });
 
 if (shouldQuit) {
-  app.quit();
+  appManager.quit();
 }
 
 app.on('open-file', (event, filePath) => {
-  if (!appManager) { return; }
   appManager.openFile(filePath);
 });
 
@@ -27,21 +28,24 @@ app.on('open-file', (event, filePath) => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  appManager.start();
+  Promise.all([
+    createAppWindow(),
+    createPreviewWindow(),
+  ])
+    .then(() => {
+      log.info('Windows initialized');
+      appManager.start();
+      previewManager.start();
+    })
+    .catch((e) => {
+      log.error(e);
+    });
 });
 
-app.on('activate', () => {
-  if (!appManager) { return; }
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (process.platform === 'darwin') {
-    this.openWindow()
-      .catch(e => log.info(e));
-  }
+app.on('window-all-closed', () => {
+  AppManager.quit();
+  PreviewManager.quit();
+  global.appWindow = null;
+  global.previewWindow = null;
+  app.quit();
 });
-
-// app.on('window-all-closed', () => {
-//   appManager.destroy();
-//   appManager = null;
-//   app.quit();
-// });

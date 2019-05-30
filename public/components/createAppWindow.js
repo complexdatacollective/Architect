@@ -16,7 +16,7 @@ function getAppUrl() {
       protocol: 'http',
     });
 
-    log.info('appUrl host:', appUrl);
+    log.info('appUrl [host]', appUrl);
 
     return appUrl;
   }
@@ -26,13 +26,15 @@ function getAppUrl() {
     protocol: 'file:',
   });
 
-  log.info('appUrl path: ', appUrl);
+  log.info('appUrl [path]', appUrl);
 
   return appUrl;
 }
 
 function createAppWindow() {
   return new Promise((resolve) => {
+    if (global.appWindow) { Promise.resolve(global.appWindow); }
+
     // Create the browser window.
     const windowParameters = Object.assign({
       width: 1440,
@@ -45,38 +47,32 @@ function createAppWindow() {
 
     }, titlebarParameters);
 
-    const appWindow = new BrowserWindow(windowParameters);
+    global.appWindow = new BrowserWindow(windowParameters);
 
-    global.quit = false;
-
-    appWindow.webContents.on('new-window', (evt) => {
+    global.appWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action
       evt.preventDefault();
     });
 
     // For now, any navigation off the SPA is unneeded
-    appWindow.webContents.on('will-navigate', (evt) => {
+    global.appWindow.webContents.on('will-navigate', (evt) => {
       evt.preventDefault();
     });
 
-    appWindow.on('close', (e) => {
-      // if (!global.quit) {
-      //   log.info('prevent close');
-      //   e.preventDefault();
-      //   appWindow.webContents.send('CONFIRM_CLOSE');
-      // }
+    global.appWindow.on('closed', () => {
+      global.appWindow = null;
     });
 
-    appWindow.once('ready-to-show', () => {
-      appWindow.show();
+    global.appWindow.once('ready-to-show', () => {
+      global.appWindow.show();
     });
 
-    appWindow.webContents.on('did-finish-load', () => resolve(appWindow));
+    global.appWindow.webContents.on('did-finish-load', () => resolve(global.appWindow));
 
-    appWindow.loadURL(getAppUrl());
+    global.appWindow.loadURL(getAppUrl());
 
     if (process.env.NODE_ENV === 'development') {
-      appWindow.openDevTools();
+      global.appWindow.openDevTools();
     }
   });
 }
