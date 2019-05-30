@@ -8,13 +8,15 @@ const contains = (protocol, string) =>
 const isInTempPath = (filePath) => {
   const tempPath = remote.app.getPath('temp');
 
-  return new RegExp(`^${tempPath}`)
-    .test(path.normalize(filePath));
+  return path.normalize(filePath).indexOf(tempPath) === 0;
 };
 
 const removeFile = (filePath) => {
   // Check we haven't somehow ended up outside of temppath since we are deleting things
-  if (!isInTempPath(filePath)) { throw new Error('Aborted remove because outside of temp'); }
+  if (!isInTempPath(filePath)) {
+    const tempPath = remote.app.getPath('temp');
+    throw new Error(`File ${filePath}) could not be removed because it is outside of the temporary folder (${tempPath})`);
+  }
 
   fs.unlinkSync(filePath);
 };
