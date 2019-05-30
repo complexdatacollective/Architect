@@ -1,9 +1,14 @@
 const JUMP = 'TIMEMACHINE/JUMP';
 const JUMP_BKWD = 'TIMEMACHINE/JUMP_BKWD';
+const RESET = 'TIMEMACHINE/RESET';
 
 const jump = locus => ({
   type: JUMP,
   payload: { locus },
+});
+
+const reset = () => ({
+  type: RESET,
 });
 
 const defaultLimit = -1000;
@@ -22,6 +27,8 @@ const createTimemachine = (reducer, options) => {
     const { past, present, timeline } = state;
 
     switch (action.type) {
+      case RESET:
+        return initialState;
       case JUMP_BKWD: {
         if (past.length === 0) { return state; }
         const previous = past[past.length - 1];
@@ -88,8 +95,13 @@ const createTimemachine = (reducer, options) => {
   return timemachine;
 };
 
+export const actionTypes = {
+  RESET,
+};
+
 export const actionCreators = {
   jump,
+  reset,
 };
 
 export default createTimemachine;

@@ -21,6 +21,8 @@ const setProtocol = (meta, protocol) => ({
 
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case 'SESSION/RESET':
+      return initialState;
     case SET_PROTOCOL:
       return { ...action.protocol };
     case UPDATE_OPTIONS:

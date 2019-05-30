@@ -16,6 +16,7 @@ const loadProtocolSuccess = (meta, protocol) => ({
   type: LOAD_PROTOCOL_SUCCESS,
   meta,
   protocol,
+  ipc: true,
 });
 
 const loadProtocolSuccessThunk = (meta, protocol) =>

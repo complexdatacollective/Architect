@@ -23,6 +23,7 @@ class AppManager {
     this.openFileWhenReady = null;
     this.appWindow = null;
     this.isCreatingWindow = false;
+    this.activeProtocol = null;
 
     if (this.makeSingleInstance()) { return; }
 
@@ -36,7 +37,7 @@ class AppManager {
     // initialization and is ready to create browser windows.
     // Some APIs can only be used after this event occurs.
     app.on('ready', () => {
-      this.initializeMenu();
+      this.updateMenu();
 
       registerAssetProtocol();
 
@@ -171,16 +172,36 @@ class AppManager {
       global.quit = true;
       app.quit();
     });
+
+    ipcMain.on('ACTION', (e, action) => {
+      switch (action.type) {
+        case 'PROTOCOLS/LOAD_SUCCESS':
+          this.activeProtocol = action.meta;
+          this.updateMenu();
+          break;
+        case 'SESSION/RESET':
+          this.activeProtocol = null;
+          this.updateMenu();
+          break;
+        default:
+          log.info(JSON.stringify(action, null, 2));
+      }
+    });
   }
 
-  initializeMenu() {
-    const menuHandlers = {
+  updateMenu() {
+    const menuOptions = {
+      isProtocolOpen: !!this.activeProtocol,
       openFile: () => openDialog().then(file => this.openFile(file)),
-      saveCopy: () => saveDialog().then(file => this.saveCopy(file)),
+      saveCopy: () => {
+        const defaultPath = this.activeProtocol.filePath;
+        saveDialog({ defaultPath })
+          .then(file => this.saveCopy(file));
+      },
       clearStorageData: () => clearStorageDataDialog().then(() => this.clearStorageData()),
     };
 
-    const appMenu = Menu.buildFromTemplate(mainMenu(menuHandlers));
+    const appMenu = Menu.buildFromTemplate(mainMenu(menuOptions));
     Menu.setApplicationMenu(appMenu);
   }
 }

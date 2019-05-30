@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Flipper } from 'react-flip-toolkit';
@@ -84,27 +83,36 @@ const mapStateToProps = state => ({
   protocolMeta: getActiveProtocolMeta(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  openDialog: bindActionCreators(dialogActions.openDialog, dispatch),
-});
+const mapDispatchToProps = {
+  openDialog: dialogActions.openDialog,
+};
 
 const linkHandler = withHandlers({
-  handleClickStart: ({ hasUnsavedChanges, openDialog }) => () => {
-    const goToStartScreen = () => history.push('/');
-    if (!hasUnsavedChanges) { goToStartScreen(); return; }
-    openDialog({
-      type: 'Warning',
-      title: 'Unsaved changes',
-      message: (
-        <div>
-          Are you sure you want to go back to the start screen?
-          <p><strong>Any unsaved changes will be lost!</strong></p>
-        </div>
-      ),
-      confirmLabel: 'Go to start screen',
-      onConfirm: goToStartScreen,
-    });
-  },
+  handleClickStart: ({
+    hasUnsavedChanges,
+    openDialog,
+  }) =>
+    () => {
+      const goToStartScreen = () => history.push('/');
+
+      if (!hasUnsavedChanges) {
+        goToStartScreen();
+        return;
+      }
+
+      openDialog({
+        type: 'Warning',
+        title: 'Unsaved changes',
+        message: (
+          <div>
+            Are you sure you want to go back to the start screen?
+            <p><strong>Any unsaved changes will be lost!</strong></p>
+          </div>
+        ),
+        confirmLabel: 'Go to start screen',
+        onConfirm: goToStartScreen,
+      });
+    },
 });
 
 export { Scene };

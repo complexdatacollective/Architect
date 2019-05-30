@@ -1,20 +1,25 @@
 const updater = require('./updater');
 
-const MenuTemplate = (handlers) => {
+const MenuTemplate = (options) => {
+  const fileMenu = {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Open...',
+        click: options.openFile,
+      },
+    ],
+  };
+
+  if (options.isProtocolOpen) {
+    fileMenu.submenu.push({
+      label: 'Save copy...',
+      click: options.saveCopy,
+    });
+  }
+
   const menu = [
-    {
-      label: 'File',
-      submenu: [
-        {
-          label: 'Open...',
-          click: handlers.openFile,
-        },
-        {
-          label: 'Save copy...',
-          click: handlers.saveCopy,
-        },
-      ],
-    },
+    fileMenu,
     {
       label: 'Edit',
       submenu: [
@@ -44,7 +49,7 @@ const MenuTemplate = (handlers) => {
         { type: 'separator' },
         {
           label: 'Clear storage data',
-          click: handlers.clearStorageData,
+          click: options.clearStorageData,
         },
       ],
     },
