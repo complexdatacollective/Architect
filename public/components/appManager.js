@@ -1,6 +1,7 @@
 const { ipcMain, app, Menu, BrowserWindow } = require('electron');
 const log = require('./log');
 const path = require('path');
+const { openDialog, saveDialog, clearStorageDataDialog } = require('./dialogs');
 const mainMenu = require('./mainMenu');
 const createPreviewManager = require('./createPreviewManager');
 const createAppWindow = require('./createAppWindow');
@@ -173,7 +174,13 @@ class AppManager {
   }
 
   initializeMenu() {
-    const appMenu = Menu.buildFromTemplate(mainMenu(this));
+    const menuHandlers = {
+      openFile: () => openDialog().then(file => this.openFile(file)),
+      saveCopy: () => saveDialog().then(file => this.saveCopy(file)),
+      clearStorageData: () => clearStorageDataDialog().then(() => this.clearStorageData()),
+    };
+
+    const appMenu = Menu.buildFromTemplate(mainMenu(menuHandlers));
     Menu.setApplicationMenu(appMenu);
   }
 }
