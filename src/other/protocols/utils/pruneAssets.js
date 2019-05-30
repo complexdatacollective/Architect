@@ -15,6 +15,7 @@ const removeFile = (filePath) => {
   // Check we haven't somehow ended up outside of temppath since we are deleting things
   if (!isInTempPath(filePath)) {
     const tempPath = remote.app.getPath('temp');
+
     throw new Error(`File ${filePath}) could not be removed because it is outside of the temporary folder (${tempPath})`);
   }
 

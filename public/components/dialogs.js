@@ -23,7 +23,6 @@ const openDialog = () =>
     });
   });
 
-// TODO: options = { defaultPath } to set preliminary file name
 const saveDialog = (options = {}) =>
   new Promise((resolve, reject) => {
     dialog.showSaveDialog(
@@ -33,7 +32,7 @@ const saveDialog = (options = {}) =>
       },
       (filename) => {
         if (filename === undefined) { reject(); return; }
-        resolve(filename[0]);
+        resolve(filename);
       },
     );
   });

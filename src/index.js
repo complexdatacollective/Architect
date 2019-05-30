@@ -10,15 +10,15 @@ import App from './components/App';
 import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
 import initPreventFileDrop from './utils/initPreventFileDrop';
+import initIPCListeners from './utils/initIPCListeners';
 import initFileOpener from './utils/initFileOpener';
-import initConfirmClose from './utils/initConfirmClose';
 import resetAppStorage from './other/protocols/utils/resetAppStorage';
 
 import './styles/main.scss';
 
+initIPCListeners();
 initPreventFileDrop();
 initReactFastclick();
-initConfirmClose();
 resetAppStorage();
 
 const startApp = () => {
