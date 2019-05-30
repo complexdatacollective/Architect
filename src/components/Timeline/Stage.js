@@ -109,7 +109,7 @@ class Stage extends PureComponent {
             onClick={() => onInsertStage(0)}
           >
             <div className="timeline-stage__control-icon">↑</div>
-            Add screen before
+            Add stage before
           </a>
           <ConfigureSkipLogicButton
             onEditSkipLogic={onEditSkipLogic}
@@ -127,7 +127,7 @@ class Stage extends PureComponent {
             onClick={() => onInsertStage(1)}
           >
             <div className="timeline-stage__control-icon">↓</div>
-            Add screen after
+            Add stage after
           </a>
         </div>
       </div>
