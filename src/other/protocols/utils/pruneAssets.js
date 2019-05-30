@@ -6,6 +6,7 @@ const contains = (protocol, string) =>
   protocol.indexOf(string) !== -1;
 
 const isInTempPath = (filePath) => {
+  console.log('isin temp paath', filePath);
   const tempPath = remote.app.getPath('temp');
 
   return new RegExp(`^${tempPath}`)
