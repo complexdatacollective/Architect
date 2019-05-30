@@ -60,11 +60,11 @@ function createAppWindow() {
     });
 
     appWindow.on('close', (e) => {
-      if (!global.quit) {
-        // log.info('prevent close');
-        // e.preventDefault();
-        // appWindow.webContents.send('CONFIRM_CLOSE');
-      }
+      // if (!global.quit) {
+      //   log.info('prevent close');
+      //   e.preventDefault();
+      //   appWindow.webContents.send('CONFIRM_CLOSE');
+      // }
     });
 
     appWindow.once('ready-to-show', () => {

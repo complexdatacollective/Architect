@@ -3,7 +3,7 @@ const log = require('./log');
 const path = require('path');
 const { openDialog, saveDialog, clearStorageDataDialog } = require('./dialogs');
 const mainMenu = require('./mainMenu');
-const createPreviewManager = require('./createPreviewManager');
+// const createPreviewManager = require('./createPreviewManager');
 const createAppWindow = require('./createAppWindow');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
 
@@ -24,37 +24,20 @@ class AppManager {
     this.appWindow = null;
     this.isCreatingWindow = false;
     this.activeProtocol = null;
+  }
 
-    if (this.makeSingleInstance()) { return; }
-
+  start() {
+    registerAssetProtocol();
     this.initializeListeners();
 
-    app.on('open-file', (event, filePath) => {
-      this.openFile(filePath);
-    });
+    this.updateMenu();
 
-    // This method will be called when Electron has finished
-    // initialization and is ready to create browser windows.
-    // Some APIs can only be used after this event occurs.
-    app.on('ready', () => {
-      this.updateMenu();
+    this.openWindow()
+      .catch(e => log.info(e));
 
-      registerAssetProtocol();
-
-      this.openWindow();
-
-      createPreviewManager().then(() => {
-        log.info('created preview manager');
-      });
-
-      app.on('activate', () => {
-        // On OS X it's common to re-create a window in the app when the
-        // dock icon is clicked and there are no other windows open.
-        if (process.platform === 'darwin') {
-          this.openWindow();
-        }
-      });
-    });
+    // createPreviewManager().then(() => {
+    //   log.info('created preview manager');
+    // });
   }
 
   static loadDevTools() {
@@ -75,18 +58,6 @@ class AppManager {
     }
   }
 
-  makeSingleInstance() {
-    const shouldQuit = app.makeSingleInstance((argv) => {
-      this.openFileFromArgs(argv);
-    });
-
-    if (shouldQuit) {
-      app.quit();
-    }
-
-    return shouldQuit;
-  }
-
   openFileFromArgs(argv) {
     if (process.platform === 'win32') {
       const filePath = getFileFromArgs(argv);
@@ -105,7 +76,8 @@ class AppManager {
       this.openWindow()
         .then((window) => {
           window.webContents.send('OPEN_FILE', fileToOpen);
-        });
+        })
+        .catch(e => log.info(e));
       this.openFileWhenReady = null;
     }
   }
@@ -124,8 +96,13 @@ class AppManager {
   }
 
   getWindow() {
-    if (!app.isReady()) { return Promise.reject(); }
-    if (this.isCreatingWindow) { return Promise.reject(); }
+    if (!app.isReady()) {
+      return Promise.reject(new Error('Could not get window because app is not ready'));
+    }
+
+    if (this.isCreatingWindow) {
+      return Promise.reject(new Error('Could not get window because app is already creating one'));
+    }
 
     if (this.appWindow) {
       return Promise.resolve(this.appWindow);
@@ -140,6 +117,8 @@ class AppManager {
           // in an array if your app supports multi windows, this is the time
           // when you should delete the corresponding element.
           this.appWindow = null;
+
+          // TODO: close preview window too.
         });
 
         this.appWindow = appWindow;
@@ -189,18 +168,27 @@ class AppManager {
     });
   }
 
+  destroy() {
+    this.appWindow = null;
+    ipcMain.removeAllListeners('READY');
+    ipcMain.removeAllListeners('QUIT');
+    ipcMain.removeAllListeners('ACTION');
+  }
+
   saveCopy(filePath) {
     this.getWindow()
       .then((window) => {
         window.webContents.send('SAVE_COPY', filePath);
-      });
+      })
+      .catch(e => log.info(e));
   }
 
   save() {
     this.getWindow()
       .then((window) => {
         window.webContents.send('SAVE');
-      });
+      })
+      .catch(e => log.info(e));
   }
 
   updateMenu() {
