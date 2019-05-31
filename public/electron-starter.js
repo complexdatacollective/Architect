@@ -21,7 +21,7 @@ if (shouldQuit) {
 }
 
 app.on('open-file', (event, filePath) => {
-  appManager.openFile(filePath);
+  AppManager.openFile(filePath);
 });
 
 // This method will be called when Electron has finished
