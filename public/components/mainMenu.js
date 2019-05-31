@@ -1,4 +1,10 @@
-const updater = require('./updater');
+const Updater = require('./Updater');
+
+
+// Instantiate Updater and check for update on first launch.
+// Do not notify user if no update found in this case.
+const updater = new Updater();
+updater.checkForUpdates(false);
 
 const MenuTemplate = (options) => {
   const fileMenu = {
