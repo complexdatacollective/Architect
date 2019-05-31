@@ -17,6 +17,7 @@ const OrderedList = ({
   item: Item,
   disabled: sortable,
   form,
+  ...rest
 }) => (
   <div className="list">
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
@@ -29,6 +30,7 @@ const OrderedList = ({
           onDelete={() => { fields.remove(index); }}
           sortable={sortable}
           form={form}
+          {...rest}
         />
       </SortableItem>
     )) }

@@ -58,7 +58,6 @@ class EditableList extends PureComponent {
     const isEditing = !!editField;
 
     const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
-    console.log('editablelist', handleEditField);
     return (
       <Section disabled={disabled} contentId={contentId}>
         <Flipper
