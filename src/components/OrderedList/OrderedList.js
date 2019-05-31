@@ -16,7 +16,7 @@ const OrderedList = ({
   meta: { error, dirty, submitFailed },
   item: Item,
   disabled: sortable,
-  ...rest
+  form,
 }) => (
   <div className="list">
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
@@ -28,7 +28,7 @@ const OrderedList = ({
           fields={fields}
           onDelete={() => { fields.remove(index); }}
           sortable={sortable}
-          {...rest}
+          form={form}
         />
       </SortableItem>
     )) }
@@ -37,6 +37,7 @@ const OrderedList = ({
 
 OrderedList.propTypes = {
   fields: PropTypes.object.isRequired,
+  form: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
   item: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
