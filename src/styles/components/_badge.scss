@@ -1,14 +1,17 @@
 %badge {
-  display: inline-flex;
+  display: inline;
   background-color: var(--color-mid-grey);
   border-radius: unit(.5);
   padding: unit(.5);
   margin: 0 unit(1);
   font-size: .7rem;
   color: var(--text-light);
-  text-transform: capitalize;
 }
 
 .badge {
   @extend %badge;
+
+  strong {
+    text-transform: capitalize;
+  }
 }

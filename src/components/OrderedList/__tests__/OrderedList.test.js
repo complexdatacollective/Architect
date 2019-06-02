@@ -8,6 +8,7 @@ const mockProps = {
   fields: {
     map: () => {},
   },
+  form: 'form',
   item: () => {},
   disabled: false,
 };

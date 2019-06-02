@@ -55,11 +55,9 @@ class EditableList extends PureComponent {
       editProps,
       ...rest
     } = this.props;
-
     const isEditing = !!editField;
 
     const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
-
     return (
       <Section disabled={disabled} contentId={contentId}>
         <Flipper
@@ -77,6 +75,7 @@ class EditableList extends PureComponent {
                 validation={validation}
                 onClickPrompt={handleEditField}
                 editField={editField}
+                form={formName}
                 {...rest}
               />
             </div>
