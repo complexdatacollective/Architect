@@ -26,6 +26,7 @@ const PROTOCOL_CHANGED = 'SESSION/PROTOCOL_CHANGED';
 
 const resetSession = () => ({
   type: RESET_SESSION,
+  ipc: true,
 });
 
 const protocolChanged = () => ({

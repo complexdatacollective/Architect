@@ -1,38 +1,29 @@
-const { dialog } = require('electron');
 const updater = require('./updater');
 
-const openDialogOptions = {
-  buttonLabel: 'Open',
-  nameFieldLabel: 'Open:',
-  defaultPath: 'Protocol.netcanvas',
-  filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
-  properties: ['openFile'],
-};
+const MenuTemplate = (options) => {
+  const fileMenu = {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Open...',
+        click: options.openFile,
+      },
+    ],
+  };
 
-const openDialog = () =>
-  new Promise((resolve, reject) => {
-    dialog.showOpenDialog(openDialogOptions, (filename) => {
-      if (filename === undefined) { reject(); return; }
-      resolve(filename[0]);
+  if (options.isProtocolOpen) {
+    fileMenu.submenu.push({
+      label: 'Save',
+      click: options.save,
     });
-  });
+    fileMenu.submenu.push({
+      label: 'Save a copy...',
+      click: options.saveCopy,
+    });
+  }
 
-const openFile = window =>
-  () =>
-    openDialog()
-      .then(filePath => window.webContents.send('OPEN_FILE', filePath));
-
-const MenuTemplate = (window) => {
   const menu = [
-    {
-      label: 'File',
-      submenu: [
-        {
-          label: 'Open...',
-          click: openFile(window),
-        },
-      ],
-    },
+    fileMenu,
     {
       label: 'Edit',
       submenu: [
@@ -62,18 +53,7 @@ const MenuTemplate = (window) => {
         { type: 'separator' },
         {
           label: 'Clear storage data',
-          click: () => {
-            dialog.showMessageBox({
-              message: 'This will reset all app data, are you sure?',
-              buttons: ['OK', 'Cancel'],
-            }, (response) => {
-              if (response === 0) {
-                window.webContents.session.clearStorageData(() => {
-                  window.webContents.reload();
-                });
-              }
-            });
-          },
+          click: options.clearStorageData,
         },
       ],
     },

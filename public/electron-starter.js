@@ -1,51 +1,55 @@
 const { app } = require('electron');
 const log = require('./components/log');
-const createPreviewManager = require('./components/createPreviewManager');
-const appManager = require('./components/appManager');
+const createAppWindow = require('./components/createAppWindow');
+const createPreviewWindow = require('./components/createPreviewWindow');
+const AppManager = require('./components/appManager');
+const PreviewManager = require('./components/previewManager');
 
 global.NETWORK_CANVAS_PREVIEW = true;
 
 log.info('App starting...');
-appManager.init();
+log.info('[updated]');
+
+const appManager = new AppManager();
+const previewManager = new PreviewManager(); // eslint-disable-line
 
 const shouldQuit = app.makeSingleInstance((argv) => {
-  appManager.openFileFromArgs(argv);
+  log.info('shouldQuit', argv);
+  AppManager.openFileFromArgs(argv);
 });
 
 if (shouldQuit) {
-  app.quit();
-  return;
+  AppManager.quit();
 }
+
+// open file on os x
+app.on('open-file', (event, filePath) => {
+  log.info('openFile', filePath);
+  AppManager.openFile(filePath);
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  console.log('ready');
-  appManager.start();
-  createPreviewManager().then(() => {
-    log.info('created preview manager');
-  });
-  // appManager.loadDevTools();
+  Promise.all([
+    createAppWindow(),
+    createPreviewWindow(),
+  ])
+    .then(() => {
+      log.info('Windows initialized');
+      appManager.start();
+      previewManager.start();
+    })
+    .catch((e) => {
+      log.error(e);
+    });
 });
 
-// Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (process.platform === 'darwin') {
-    appManager.restore();
-  }
-});
-
-app.on('open-file', (event, filePath) => {
-  appManager.openFile(filePath);
+  AppManager.quit();
+  PreviewManager.quit();
+  global.appWindow = null;
+  global.previewWindow = null;
+  app.quit();
 });

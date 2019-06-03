@@ -1,3 +1,4 @@
+import uuid from 'uuid';
 import openProtocolDialog from '../../../other/protocols/utils/openProtocolDialog';
 import history from '../../../history';
 import { getActiveProtocolMeta } from '../../../selectors/protocols';
@@ -11,6 +12,7 @@ import {
   actionTypes as registerActionTypes,
 } from './register';
 
+const SAVE_COPY = 'PROTOCOLS/SAVE_COPY';
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
 const IMPORT_AND_LOAD_ERROR = 'PROTOCOLS/IMPORT_AND_LOAD_ERROR';
 const CREATE_AND_LOAD_ERROR = 'PROTOCOLS/CREATE_AND_LOAD_ERROR';
@@ -94,6 +96,23 @@ const openProtocol = () =>
       .then(filePath => dispatch(importAndLoadThunk(filePath)))
       .catch(e => dispatch(openError(e)));
 
+/**
+ * 1. Create a duplicate entry in protocols, taking the original's working path
+ * 2. Save to the new location
+ */
+const saveCopyThunk = filePath =>
+  (dispatch, getState) => {
+    const activeProtocolMeta = getActiveProtocolMeta(getState());
+
+    dispatch({
+      type: SAVE_COPY,
+      id: activeProtocolMeta.id,
+      filePath,
+    });
+
+    dispatch(saveAndExportThunk());
+  };
+
 const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
@@ -108,6 +127,35 @@ export default function reducer(state = initialState, action = {}) {
           workingPath: action.workingPath,
         },
       ].slice(-10);
+    case SAVE_COPY: {
+      /**
+       * We modify the original to use the new filePath so we can effectively take the working
+       * changes. Then we make a new entry for the original protocol with the old filePath.
+       */
+
+      const originalProtocolIndex = state.findIndex(({ id }) => id === action.id);
+      const originalProtocolEntry = state[originalProtocolIndex];
+
+      const copyProtocolEntry = {
+        ...originalProtocolEntry,
+        filePath: action.filePath,
+      };
+
+      const updatedOriginalEntry = {
+        ...originalProtocolEntry,
+        id: uuid(),
+        workingPath: null,
+      };
+
+      const newState = [
+        ...state.slice(0, originalProtocolIndex - 1),
+        copyProtocolEntry,
+        updatedOriginalEntry,
+        ...state.slice(originalProtocolIndex + 1),
+      ];
+
+      return newState;
+    }
     default:
       return state;
   }
@@ -118,6 +166,7 @@ const actionCreators = {
   saveAndExportProtocol: saveAndExportThunk,
   importAndLoadProtocol: importAndLoadThunk,
   openProtocol,
+  saveCopy: saveCopyThunk,
 };
 
 const actionTypes = {

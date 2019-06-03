@@ -1,8 +1,7 @@
-const { BrowserWindow, Menu, ipcMain } = require('electron');
+const { BrowserWindow } = require('electron');
 const url = require('url');
 const path = require('path');
 const log = require('./log');
-const mainMenu = require('./mainMenu');
 
 const isMacOS = () => process.platform === 'darwin';
 
@@ -17,7 +16,7 @@ function getAppUrl() {
       protocol: 'http',
     });
 
-    log.info('appUrl host:', appUrl);
+    log.info('appUrl [host]', appUrl);
 
     return appUrl;
   }
@@ -27,15 +26,15 @@ function getAppUrl() {
     protocol: 'file:',
   });
 
-  log.info('appUrl path: ', appUrl);
+  log.info('appUrl [path]', appUrl);
 
   return appUrl;
 }
 
-function createWindow() {
-  if (global.appWindow) { return Promise.resolve(global.appWindow); }
-
+function createAppWindow() {
   return new Promise((resolve) => {
+    if (global.appWindow) { Promise.resolve(global.appWindow); }
+
     // Create the browser window.
     const windowParameters = Object.assign({
       width: 1440,
@@ -50,8 +49,6 @@ function createWindow() {
 
     global.appWindow = new BrowserWindow(windowParameters);
 
-    const appMenu = Menu.buildFromTemplate(mainMenu(global.appWindow));
-
     global.appWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action
       evt.preventDefault();
@@ -62,24 +59,7 @@ function createWindow() {
       evt.preventDefault();
     });
 
-    global.appWindow.on('focus', () => {
-      Menu.setApplicationMenu(appMenu);
-    });
-
-    global.appWindow.on('close', (e) => {
-      if (global.quit) {
-        global.quit = false;
-        return;
-      }
-
-      e.preventDefault();
-      global.appWindow.webContents.send('CONFIRM_CLOSE');
-    });
-
     global.appWindow.on('closed', () => {
-      // Dereference the window object, usually you would store windows
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
       global.appWindow = null;
     });
 
@@ -97,11 +77,4 @@ function createWindow() {
   });
 }
 
-const windowManager = {
-  get hasWindow() { return !!global.appWindow; },
-  getWindow: function getWindow() {
-    return createWindow();
-  },
-};
-
-module.exports = windowManager;
+module.exports = createAppWindow;
