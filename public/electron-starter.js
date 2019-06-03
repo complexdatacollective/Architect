@@ -8,19 +8,23 @@ const PreviewManager = require('./components/previewManager');
 global.NETWORK_CANVAS_PREVIEW = true;
 
 log.info('App starting...');
+log.info('[updated]');
 
 const appManager = new AppManager();
 const previewManager = new PreviewManager(); // eslint-disable-line
 
 const shouldQuit = app.makeSingleInstance((argv) => {
-  appManager.openFileFromArgs(argv);
+  log.info('shouldQuit', argv);
+  AppManager.openFileFromArgs(argv);
 });
 
 if (shouldQuit) {
-  appManager.quit();
+  AppManager.quit();
 }
 
+// open file on os x
 app.on('open-file', (event, filePath) => {
+  log.info('openFile', filePath);
   AppManager.openFile(filePath);
 });
 

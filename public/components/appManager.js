@@ -53,22 +53,32 @@ class AppManager {
     global.appWindow.webContents.send(...args);
   }
 
+  // Check process.argv after startup (win)
+  static checkAndOpenFileFromArgs() {
+    log.info('checkAndOpenFileFromArgs', process.argv);
+    if (process.platform === 'win32') {
+      AppManager.openFileFromArgs(process.argv);
+    }
+  }
+
   static openFileFromArgs(argv) {
+    log.info('openFileFromArgs', argv);
+
     if (process.platform === 'win32') {
       const filePath = getFileFromArgs(argv);
 
       if (filePath) {
-        if (!app.isReady()) {
-          global.openFileWhenReady = filePath;
-          return;
-        }
-
         AppManager.openFile(filePath);
       }
     }
   }
 
   static openFile(fileToOpen) {
+    if (!app.isReady()) {
+      global.openFileWhenReady = fileToOpen;
+      return;
+    }
+
     AppManager.send('OPEN_FILE', fileToOpen);
   }
 
@@ -99,6 +109,21 @@ class AppManager {
     this.openFileWhenReady = null;
     this.activeProtocol = null;
     this.updater = new Updater();
+
+    ipcMain.on('READY', () => {
+      log.info('receive: READY');
+      AppManager.checkAndOpenFileFromArgs(); // windows
+
+      if (global.openFileWhenReady) {
+        AppManager.openFile(global.openFileWhenReady);
+        global.openFileWhenReady = null;
+      }
+    });
+
+    ipcMain.on('QUIT', () => {
+      log.info('receive: QUIT');
+      AppManager.quit();
+    });
   }
 
   start() {
@@ -110,7 +135,7 @@ class AppManager {
 
     global.appWindow.on('close', (e) => {
       if (!global.quit) {
-        log.info('Confirm close');
+        log.info('send: CONFIRM_CLOSE');
         e.preventDefault();
         AppManager.send('CONFIRM_CLOSE');
 
@@ -124,25 +149,11 @@ class AppManager {
     this.initializeListeners();
     this.updateMenu();
     this.updater.checkForUpdates(false);
-
-    if (global.openFileWhenReady) {
-      AppManager.openFile(global.openFileWhenReady);
-      global.openFileWhenReady = null;
-    }
   }
 
   initializeListeners() {
-    ipcMain.on('READY', () => {
-      log.info('Renderer ready');
-      AppManager.openFileFromArgs();
-    });
-
-    ipcMain.on('QUIT', () => {
-      log.info('Renderer quit');
-      AppManager.quit();
-    });
-
     ipcMain.on('ACTION', (e, action) => {
+      log.info('receive: ACTION', action.type);
       switch (action.type) {
         case 'PROTOCOLS/LOAD_SUCCESS':
           this.activeProtocol = action.meta;

@@ -4,5 +4,6 @@
     "edge": {},
     "ego": {}
   },
-  "assetManifest": {}
+  "assetManifest": {},
+  "schemaVersion": "1.0.0"
 }

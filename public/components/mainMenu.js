@@ -15,7 +15,7 @@ const MenuTemplate = (options) => {
       click: options.save,
     });
     fileMenu.submenu.push({
-      label: 'Save copy...',
+      label: 'Save a copy...',
       click: options.saveCopy,
     });
   }

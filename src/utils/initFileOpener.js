@@ -52,6 +52,8 @@ const initFileOpener = () => {
   });
 
   ipcRenderer.send('READY');
+  // eslint-disable-next-line no-console
+  console.log('sent READY');
 };
 
 export default initFileOpener;

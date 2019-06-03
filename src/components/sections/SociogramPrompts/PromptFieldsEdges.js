@@ -14,8 +14,10 @@ import { ValidatedField } from '../../Form';
 
 const EdgeFields = ({
   edgesForSubject,
+  displayEdgesOptions,
   handleEdgeHighlightChange,
   handleCreateEdge,
+  handleChangeCreateEdge,
   allowHighlighting,
   canCreateEdge,
   setCanCreateEdge,
@@ -63,6 +65,7 @@ const EdgeFields = ({
             component={ArchitectFields.CreatableSelect}
             options={edgesForSubject}
             onCreateOption={handleCreateEdge}
+            onChange={handleChangeCreateEdge}
             placeholder="&mdash; Select an edge type from the list, or type a name to create a new one &mdash;"
             label="Create edges of the following type"
             validation={{ required: true }}
@@ -77,7 +80,7 @@ const EdgeFields = ({
         <Field
           name="edges.display"
           component={Fields.CheckboxGroup}
-          options={edgesForSubject}
+          options={displayEdgesOptions}
           label="Display edges of the following type(s):"
         />
       </Row>
@@ -88,8 +91,10 @@ const EdgeFields = ({
 
 EdgeFields.propTypes = {
   edgesForSubject: PropTypes.array.isRequired,
+  displayEdgesOptions: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateEdge: PropTypes.func.isRequired,
+  handleChangeCreateEdge: PropTypes.func.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,
   allowHighlighting: PropTypes.bool.isRequired,

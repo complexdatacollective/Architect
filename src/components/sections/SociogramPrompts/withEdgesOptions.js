@@ -1,17 +1,50 @@
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { formValueSelector, change } from 'redux-form';
+import { withHandlers, compose } from 'recompose';
 import { getEdgesForSubject } from './selectors';
 
-const withEdgesOptions = (state, props) => {
-  const allowHighlighting = formValueSelector(props.form)(state, 'highlight.allowHighlighting');
-  const edgesForSubject = getEdgesForSubject(state, props);
+const mapDispatchToProps = {
+  changeForm: change,
+};
+
+const mapStateToProps = (state, { entity, type, form }) => {
+  const allowHighlighting = formValueSelector(form)(state, 'highlight.allowHighlighting');
+  const edgesForSubject = getEdgesForSubject(state, { entity, type });
+  const displayEdges = formValueSelector(form)(state, 'edges.display') || [];
+  const createEdges = formValueSelector(form)(state, 'edges.create');
+  const displayEdgesOptions = edgesForSubject.map((edge) => {
+    if (edge.value !== createEdges) { return edge; }
+
+    return {
+      ...edge,
+      disabled: true,
+    };
+  });
 
   return {
     edgesForSubject,
     allowHighlighting,
+    displayEdges,
+    displayEdgesOptions,
   };
 };
 
-export { withEdgesOptions };
+const handlers = withHandlers({
+  handleChangeCreateEdge: ({ changeForm, form, displayEdges }) =>
+    (e, value) => {
+      const newDisplayEdges = [
+        ...displayEdges,
+        value,
+      ];
 
-export default connect(withEdgesOptions);
+      changeForm(form, 'edges.display', newDisplayEdges);
+    },
+});
+
+const withEdgesOptions = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  handlers,
+);
+
+export default withEdgesOptions;
+
