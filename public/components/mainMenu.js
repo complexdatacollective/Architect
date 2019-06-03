@@ -1,11 +1,3 @@
-const Updater = require('./Updater');
-
-
-// Instantiate Updater and check for update on first launch.
-// Do not notify user if no update found in this case.
-const updater = new Updater();
-updater.checkForUpdates(false);
-
 const MenuTemplate = (options) => {
   const fileMenu = {
     label: 'File',
@@ -75,7 +67,7 @@ const MenuTemplate = (options) => {
   const appMenu = [
     {
       label: 'Check for updates...',
-      click: () => updater.checkForUpdates(),
+      click: options.checkForUpdates,
     },
     { role: 'quit' },
   ];
