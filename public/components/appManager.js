@@ -52,6 +52,14 @@ class AppManager {
     global.appWindow.webContents.send(...args);
   }
 
+  // Check process.argv after startup (win)
+  static checkAndOpenFileFromArgs() {
+    log.info('checkAndOpenFileFromArgs', process.argv);
+    if (process.platform === 'win32') {
+      AppManager.openFileFromArgs(process.argv);
+    }
+  }
+
   static openFileFromArgs(argv) {
     log.info('openFileFromArgs', argv);
 
@@ -59,23 +67,17 @@ class AppManager {
       const filePath = getFileFromArgs(argv);
 
       if (filePath) {
-        if (!app.isReady()) {
-          global.openFileWhenReady = filePath;
-          return;
-        }
-
         AppManager.openFile(filePath);
       }
     }
   }
 
-  static checkAndOpenFileFromArgs() {
-    if (process.platform === 'win32') {
-      AppManager.openFileFromArgs(process.argv);
-    }
-  }
-
   static openFile(fileToOpen) {
+    if (!app.isReady()) {
+      global.openFileWhenReady = fileToOpen;
+      return;
+    }
+
     AppManager.send('OPEN_FILE', fileToOpen);
   }
 
@@ -108,7 +110,12 @@ class AppManager {
 
     ipcMain.on('READY', () => {
       log.info('receive: READY');
-      AppManager.checkAndOpenFileFromArgs();
+      AppManager.checkAndOpenFileFromArgs(); // windows
+
+      if (global.openFileWhenReady) {
+        AppManager.openFile(global.openFileWhenReady);
+        global.openFileWhenReady = null;
+      }
     });
 
     ipcMain.on('QUIT', () => {

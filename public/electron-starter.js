@@ -22,7 +22,9 @@ if (shouldQuit) {
   AppManager.quit();
 }
 
+// open file on os x
 app.on('open-file', (event, filePath) => {
+  log.info('openFile', filePath);
   AppManager.openFile(filePath);
 });
 
