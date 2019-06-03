@@ -2,6 +2,7 @@ const { ipcMain, app, Menu, BrowserWindow } = require('electron');
 const log = require('./log');
 const path = require('path');
 const { openDialog, saveDialog, clearStorageDataDialog } = require('./dialogs');
+const Updater = require('./Updater');
 const mainMenu = require('./mainMenu');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
 
@@ -107,6 +108,7 @@ class AppManager {
   constructor() {
     this.openFileWhenReady = null;
     this.activeProtocol = null;
+    this.updater = new Updater();
 
     ipcMain.on('READY', () => {
       log.info('receive: READY');
@@ -146,6 +148,7 @@ class AppManager {
     registerAssetProtocol();
     this.initializeListeners();
     this.updateMenu();
+    this.updater.checkForUpdates(false);
   }
 
   initializeListeners() {
@@ -177,6 +180,7 @@ class AppManager {
       },
       save: () => AppManager.save(),
       clearStorageData: () => clearStorageDataDialog().then(() => AppManager.clearStorageData()),
+      checkForUpdates: () => this.updater.checkForUpdates(),
     };
 
     const appMenu = Menu.buildFromTemplate(mainMenu(menuOptions));

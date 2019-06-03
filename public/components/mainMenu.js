@@ -1,5 +1,3 @@
-const updater = require('./updater');
-
 const MenuTemplate = (options) => {
   const fileMenu = {
     label: 'File',
@@ -69,7 +67,7 @@ const MenuTemplate = (options) => {
   const appMenu = [
     {
       label: 'Check for updates...',
-      click: () => updater.checkForUpdates(),
+      click: options.checkForUpdates,
     },
     { role: 'quit' },
   ];
