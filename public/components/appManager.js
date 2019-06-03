@@ -53,6 +53,8 @@ class AppManager {
   }
 
   static openFileFromArgs(argv) {
+    log.info('openFileFromArgs', argv);
+
     if (process.platform === 'win32') {
       const filePath = getFileFromArgs(argv);
 
@@ -64,6 +66,12 @@ class AppManager {
 
         AppManager.openFile(filePath);
       }
+    }
+  }
+
+  static checkAndOpenFileFromArgs() {
+    if (process.platform === 'win32') {
+      AppManager.openFileFromArgs(process.argv);
     }
   }
 
@@ -97,6 +105,16 @@ class AppManager {
   constructor() {
     this.openFileWhenReady = null;
     this.activeProtocol = null;
+
+    ipcMain.on('READY', () => {
+      log.info('receive: READY');
+      AppManager.checkAndOpenFileFromArgs();
+    });
+
+    ipcMain.on('QUIT', () => {
+      log.info('receive: QUIT');
+      AppManager.quit();
+    });
   }
 
   start() {
@@ -108,7 +126,7 @@ class AppManager {
 
     global.appWindow.on('close', (e) => {
       if (!global.quit) {
-        log.info('Confirm close');
+        log.info('send: CONFIRM_CLOSE');
         e.preventDefault();
         AppManager.send('CONFIRM_CLOSE');
 
@@ -121,25 +139,11 @@ class AppManager {
     registerAssetProtocol();
     this.initializeListeners();
     this.updateMenu();
-
-    if (global.openFileWhenReady) {
-      AppManager.openFile(global.openFileWhenReady);
-      global.openFileWhenReady = null;
-    }
   }
 
   initializeListeners() {
-    ipcMain.on('READY', () => {
-      log.info('Renderer ready');
-      AppManager.openFileFromArgs();
-    });
-
-    ipcMain.on('QUIT', () => {
-      log.info('Renderer quit');
-      AppManager.quit();
-    });
-
     ipcMain.on('ACTION', (e, action) => {
+      log.info('receive: ACTION', action.type);
       switch (action.type) {
         case 'PROTOCOLS/LOAD_SUCCESS':
           this.activeProtocol = action.meta;
