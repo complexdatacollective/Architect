@@ -55,7 +55,7 @@ const SearchOptions = ({
           { value: 0.5, label: 'Medium accurary' },
           { value: 0.75, label: 'Low accuracy' },
         ]}
-        validation={{ required: true }}
+        validation={{ requiredAcceptsZero: true }}
       />
     </Row>
   </Section>

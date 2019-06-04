@@ -1,4 +1,4 @@
-import { keys, get, pickBy, map, toPairs, isEqual, isUndefined } from 'lodash';
+import { keys, get, pickBy, map, toPairs, isEqual, isUndefined, isNil } from 'lodash';
 
 const coerceArray = (value) => {
   if (value instanceof Object) {
@@ -16,9 +16,15 @@ const capitalize = sentence =>
 export const required = () =>
   value =>
     (value ? undefined : 'Required');
+
+export const requiredAcceptsZero = () =>
+  value =>
+    (!isNil(value) ? undefined : 'Required');
+
 export const requiredAcceptsNull = () =>
   value =>
     (!isUndefined(value) ? undefined : 'Required');
+
 export const maxLength = max =>
   value =>
     (value && value.length > max ? `Must be ${max} characters or less` : undefined);
@@ -87,6 +93,7 @@ export const uniqueByList = (list = []) =>
 
 const validations = {
   required,
+  requiredAcceptsZero,
   requiredAcceptsNull,
   minLength,
   maxLength,
