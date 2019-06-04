@@ -1,11 +1,23 @@
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import { compose, withHandlers } from 'recompose';
-import { getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { pickBy, reduce } from 'lodash';
+import { getVariablesForSubject } from '../../../selectors/codebook';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 
 const mapStateToProps = (state, { type, entity }) => {
-  const variableOptions = getVariableOptionsForSubject(state, { type, entity });
+  const existingVariables = getVariablesForSubject(state, { type, entity });
+
+  const variablesWithoutComponents = pickBy(existingVariables, value => !value.component);
+
+  const variableOptions = reduce(
+    variablesWithoutComponents,
+    (acc, { name, type: variableType }, variableId) => ([
+      ...acc,
+      { type: variableType, label: name, value: variableId },
+    ]),
+    [],
+  );
 
   return {
     variableOptions,

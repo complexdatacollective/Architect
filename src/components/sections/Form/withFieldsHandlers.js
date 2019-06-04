@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { reduce, get } from 'lodash';
+import { reduce, get, pickBy } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
 import { compose, withHandlers } from 'recompose';
 import { getVariablesForSubject } from '../../../selectors/codebook';
@@ -13,8 +13,10 @@ const mapStateToProps = (state, { form, entity, type }) => {
 
   const existingVariables = getVariablesForSubject(state, { entity, type });
 
+  const variablesWithComponents = pickBy(existingVariables, value => value.component);
+
   const variableOptions = reduce(
-    existingVariables,
+    variablesWithComponents,
     (acc, { name }, variableId) => ([
       ...acc,
       { label: name, value: variableId },
@@ -28,7 +30,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
     variable,
     variableType,
     variableOptions,
-    existingVariables,
+    variablesWithComponents,
   };
 };
 
@@ -50,12 +52,12 @@ const fieldsHandlers = withHandlers({
       const { variable } = createVariable(entity, type, { name });
       return variable;
     },
-  handleChangeVariable: ({ existingVariables, changeField, form }) =>
+  handleChangeVariable: ({ variablesWithComponents, changeField, form }) =>
     (_, value) => {
       // Either load settings from codebook, or reset
-      const options = get(existingVariables, [value, 'options'], null);
-      const validation = get(existingVariables, [value, 'validation'], {});
-      const component = get(existingVariables, [value, 'component'], null);
+      const options = get(variablesWithComponents, [value, 'options'], null);
+      const validation = get(variablesWithComponents, [value, 'validation'], {});
+      const component = get(variablesWithComponents, [value, 'component'], null);
 
       // component?
       changeField(form, 'component', component);

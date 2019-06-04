@@ -42,7 +42,7 @@ const PromptFields = ({
         onCreateOption={createNewVariable} // reset later fields, create variable of no type?
         onChange={handleChangeVariable} // read/reset component options validation
         validation={{ required: true }}
-        placeholder="Type to create a variable..."
+        placeholder="Type to create a new variable, or select an existing one from the list..."
         formatCreateLabel={inputValue => (
           <span>
             Press enter to create a variable named &quot;{inputValue}&quot;.
