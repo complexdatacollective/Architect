@@ -9,7 +9,7 @@ import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import Options from '../../Options';
 import Validations from '../../Validations';
 import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
-import inputOptions, { isVariableTypeWithOptions } from '../../Form/inputOptions';
+import { isVariableTypeWithOptions } from '../../Form/inputOptions';
 import Row from '../Row';
 import Section from '../Section';
 import withFieldsMeta from './withFieldsHandlers';
@@ -19,6 +19,7 @@ const PromptFields = ({
   variable,
   variableType,
   variableOptions,
+  componentOptions,
   createNewVariable,
   handleChangeComponent,
   handleChangeVariable,
@@ -68,7 +69,7 @@ const PromptFields = ({
           name="component"
           component={Select}
           placeholder="Select component"
-          options={inputOptions}
+          options={componentOptions}
           selectOptionComponent={SelectOptionImage}
           validation={{ required: true }}
           onChange={handleChangeComponent}
@@ -110,6 +111,7 @@ PromptFields.propTypes = {
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
+  componentOptions: PropTypes.array,
   createNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
 };
@@ -118,6 +120,7 @@ PromptFields.defaultProps = {
   variable: null,
   variableType: null,
   variableOptions: null,
+  componentOptions: null,
 };
 
 export { PromptFields };
