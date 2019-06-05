@@ -111,6 +111,7 @@ PromptFields.propTypes = {
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
+  componentOptions: PropTypes.array,
   createNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
 };
@@ -119,6 +120,7 @@ PromptFields.defaultProps = {
   variable: null,
   variableType: null,
   variableOptions: null,
+  componentOptions: null,
 };
 
 export { PromptFields };
