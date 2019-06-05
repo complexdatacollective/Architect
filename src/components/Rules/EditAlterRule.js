@@ -22,6 +22,21 @@ const defaultOptions = {
   value: '',
 };
 
+const getDefaultValue = (variableType) => {
+  switch (variableType) {
+    case 'boolean':
+      return false;
+    default:
+      return '';
+  }
+};
+
+const getOptionsWithDefaults = (options, variableType) => ({
+  ...defaultOptions,
+  value: getDefaultValue(variableType),
+  ...options,
+});
+
 const EditAlterRule = ({
   alterRuleType,
   handleChangeAlterRuleType,
@@ -33,7 +48,7 @@ const EditAlterRule = ({
   handleRuleChange,
 }) => {
   const options = rule && rule.options;
-  const optionsWithDefaults = { ...defaultOptions, ...options };
+  const optionsWithDefaults = getOptionsWithDefaults(options, variableType);
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
   const isVariableRule = alterRuleType === alterRuleTypes.VARIABLE_ALTER;
   const isTypeRule = alterRuleType === alterRuleTypes.TYPE_ALTER;

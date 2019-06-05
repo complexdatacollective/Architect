@@ -44,7 +44,7 @@ EditValue.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.bool,
-  ]),
+  ]).isRequired,
   onChange: PropTypes.func,
   fieldComponent: PropTypes.oneOfType([
     PropTypes.node,
@@ -54,7 +54,6 @@ EditValue.propTypes = {
 
 EditValue.defaultProps = {
   onChange: () => {},
-  value: '',
 };
 
 export default withMappedFieldComponent(EditValue);
