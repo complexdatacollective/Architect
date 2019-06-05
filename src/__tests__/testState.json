@@ -176,8 +176,8 @@
               "id": "bravo",
               "text": "not a prompt",
               "edges": {
-                "create": "charlie",
-                "display": ["delta", "echo"]
+                "create": "1234-5",
+                "display": ["1234-5", "delta", "echo"]
               }
             }
           ]

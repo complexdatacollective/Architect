@@ -9,6 +9,24 @@ Object {
 }
 `;
 
+exports[`indexes selectors getEdgeIndex() extracts subject references into type index 1`] = `
+Object {
+  "stages[4].prompts[0].edges.create": "1234-5",
+  "stages[4].prompts[0].edges.display[0]": "1234-5",
+  "stages[4].prompts[0].edges.display[1]": "delta",
+  "stages[4].prompts[0].edges.display[2]": "echo",
+}
+`;
+
+exports[`indexes selectors getNodeIndex() extracts subject references into type index 1`] = `
+Object {
+  "stages[0].subject": "bar",
+  "stages[1].subject": "bar",
+  "stages[2].subject": "foo",
+  "stages[3].subject": "pop",
+}
+`;
+
 exports[`indexes selectors getVariableIndex() extracts variables into index 1`] = `
 Object {
   "stages[0].form.fields[0].variable": "alpha",

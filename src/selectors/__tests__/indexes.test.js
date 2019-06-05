@@ -5,6 +5,9 @@ import testState from '../../__tests__/testState.json';
 import {
   getVariableIndex,
   getAssetIndex,
+  getSubjectIndex,
+  getNodeIndex,
+  getEdgeIndex,
   utils,
 } from '../indexes';
 
@@ -44,6 +47,22 @@ describe('indexes selectors', () => {
   describe('getAssetIndex()', () => {
     it('extracts asset references into index', () => {
       const subject = getAssetIndex(testState);
+
+      expect(subject).toMatchSnapshot();
+    });
+  });
+
+  describe('getNodeIndex()', () => {
+    it('extracts subject references into type index', () => {
+      const subject = getNodeIndex(testState);
+
+      expect(subject).toMatchSnapshot();
+    });
+  });
+
+  describe('getEdgeIndex()', () => {
+    it('extracts subject references into type index', () => {
+      const subject = getEdgeIndex(testState);
 
       expect(subject).toMatchSnapshot();
     });
