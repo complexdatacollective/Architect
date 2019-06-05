@@ -7,12 +7,14 @@ class ProtocolCard extends PureComponent {
   static propTypes = {
     buttons: PropTypes.array,
     onCancel: PropTypes.func,
+    cancelLabel: PropTypes.string,
     children: PropTypes.node,
   };
 
   static defaultProps = {
     buttons: [],
     onCancel: null,
+    cancelLabel: 'Cancel',
     children: null,
   }
 
@@ -30,7 +32,7 @@ class ProtocolCard extends PureComponent {
 
   get buttons() {
     const buttons = this.props.onCancel ?
-      [<Button key="cancel" color="platinum" onClick={this.handleCancel}>Cancel</Button>] :
+      [<Button key="cancel" color="platinum" onClick={this.handleCancel}>{this.props.cancelLabel}</Button>] :
       [];
     return this.props.buttons.concat(buttons);
   }

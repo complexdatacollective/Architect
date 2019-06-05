@@ -9,7 +9,6 @@ import { Node, Button, Icon } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Card from './ProtocolCard';
-import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
 import { getNodeIndex, getEdgeIndex, utils } from '../../selectors/indexes';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
@@ -146,6 +145,7 @@ class Codebook extends Component {
       <Card
         show={show}
         onCancel={this.handleCancel}
+        cancelLabel="Continue"
         transitionState={transitionState}
         onAcknowledgeError={this.handleCancel}
       >
