@@ -1,4 +1,4 @@
-import { values } from 'lodash';
+import { keys, values } from 'lodash';
 
 const VARIABLE_TYPES = {
   number: {
@@ -67,6 +67,8 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
   'categorical',
 ];
 
+const VARIABLE_TYPES_WITH_COMPONENTS = keys(VARIABLE_TYPES);
+
 const getComponentsForType = (type) => {
   switch (type) {
     case 'number':
@@ -129,6 +131,7 @@ const getColorForType = (type) => {
 export {
   COMPONENTS,
   VARIABLE_TYPES_WITH_OPTIONS,
+  VARIABLE_TYPES_WITH_COMPONENTS,
   inputOptions,
   variableOptions,
   getTypeForComponent,
