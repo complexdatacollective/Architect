@@ -92,6 +92,7 @@ class Overview extends Component {
                 </div>
                 <div style={{ padding: '1rem 0 0' }}>
                   <Link screen="assets"><Button>Manage assets</Button></Link>
+                  <Link screen="codebook"><Button>Manage codebook</Button></Link>
                 </div>
                 {/* <div className="overview__group overview__group--variable-registry">
                   <legend className="overview__group-title">Variable registry</legend>
