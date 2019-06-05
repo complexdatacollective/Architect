@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+import { get, isNil } from 'lodash';
 
 const operatorsAsText = {
-  // IS: 'is',
-  // IS_NOT: 'is_not',
   EXISTS: 'with',
   NOT_EXISTS: 'without',
   EXACTLY: 'exactly',
@@ -83,7 +81,7 @@ Copy.defaultProps = { children: '' };
 const PreviewText = ({ type, options }) => {
   switch (type) {
     case 'alter': {
-      if (!options.attribute) {
+      if (isNil(options.attribute)) {
         return (
           <Fragment>
             <TypeOperator value={options.operator} />
@@ -93,7 +91,7 @@ const PreviewText = ({ type, options }) => {
           </Fragment>
         );
       }
-      if (!options.value) {
+      if (isNil(options.value)) {
         return (
           <Fragment>
             <Entity>alter</Entity>
