@@ -5,7 +5,6 @@ import testState from '../../__tests__/testState.json';
 import {
   getVariableIndex,
   getAssetIndex,
-  getSubjectIndex,
   getNodeIndex,
   getEdgeIndex,
   utils,
