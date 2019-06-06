@@ -54,8 +54,7 @@ class Background extends PureComponent {
                 component={Fields.Number}
                 label="Number of concentric circles to use:"
                 type="number"
-                placeholder="3"
-                normalize={value => parseInt(value, 10)}
+                normalize={value => parseInt(value, 10) || value}
                 validation={{ required: true }}
               />
             </Row>
