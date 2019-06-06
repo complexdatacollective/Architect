@@ -90,10 +90,10 @@ class Overview extends Component {
                     }}
                   />
                 </div>
-                <div style={{ padding: '1rem 0 0' }}>
-                  <Link screen="assets"><Button>Manage assets</Button></Link>
+                <div style={{ padding: '1rem 0 0', width: '100%', textAlign: 'right' }}>
+                  <Link screen="assets"><Button size="small">Manage assets</Button></Link>
                   <div style={{ padding: '0 0 0 1rem', display: 'inline-block' }}>
-                    <Link screen="codebook"><Button>Manage codebook</Button></Link>
+                    <Link screen="codebook"><Button size="small" color="neon-coral">Manage codebook</Button></Link>
                   </div>
                 </div>
               </div>

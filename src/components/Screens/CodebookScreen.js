@@ -57,7 +57,11 @@ class Codebook extends Component {
     this.props.openDialog({
       type: 'Warning',
       title: `Delete ${typeName} ${entity}`,
-      message: (<p>Are you sure you want to delete {typeName} {entity}?</p>),
+      message: (
+        <p>
+          Are you sure you want to delete the {entity} called {typeName}? This cannot be undone.
+        </p>
+      ),
       onConfirm: () => { this.props.deleteType(entity, type, true); },
       confirmLabel: `Delete ${typeName} ${entity}`,
     });
@@ -155,10 +159,8 @@ class Codebook extends Component {
               <div className="editor__content">
                 <h1 className="editor__heading">Codebook</h1>
                 <p>
-                  Use this screen to view and delete your node and edge types.
-                </p>
-                <p>
-                  Only unused entities can be deleted.
+                  Below you can find an overview of the node and edge types that you have
+                  defined while creating your interview. Entities that are unused may be deleted.
                 </p>
                 <Guidance contentId="guidance.registry.nodes" className="editor__section">
                   <h2>Node Types</h2>
