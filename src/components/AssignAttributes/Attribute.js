@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { Field } from 'redux-form';
 import ValidatedField from '../Form/ValidatedField';
 import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
@@ -37,13 +36,14 @@ const Attribute = ({
   return (
     <div className="assign-attributes-attribute">
       <div className="assign-attributes-attribute__variable">
-        <Field
+        <ValidatedField
           name={`${field}.variable`}
           component={Select}
           options={variableOptions}
           onCreateNew={() => { onCreateNew(index); }}
           isDisabled={!!variableType}
           createNewOption="Create new variable"
+          validation={{ required: true }}
         />
       </div>
       <div className="assign-attributes-attribute__value">
