@@ -24,7 +24,7 @@ const withMappedFieldComponent = withProps(
 
 const getLabel = (type, value) => {
   if (type !== 'boolean') { return 'Value'; }
-  return value ? 'TRUE' : 'FALSE';
+  return value ? 'True' : 'False';
 };
 
 const EditValue = ({
