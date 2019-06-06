@@ -1,6 +1,7 @@
 import { remote } from 'electron';
 import path from 'path';
 import fs from 'fs-extra';
+import log from 'electron-log';
 
 const contains = (protocol, string) =>
   protocol.indexOf(string) !== -1;
@@ -31,22 +32,25 @@ const pruneAssets = (workingPath) => {
   const protocolAssetsPath = path.join(workingPath, 'assets');
 
   // Read protocol file
-  return fs.readFile(protocolPath)
-    .then((protocolFile) => {
-      // List assets directory
-      const files = fs.readdirSync(protocolAssetsPath);
-
+  return Promise.all([
+    fs.readFile(protocolPath),
+    fs.readdir(protocolAssetsPath),
+  ])
+    .then(([protocolFile, files]) => {
       files.forEach((fileName) => {
         const filePath = path.join(workingPath, 'assets', fileName);
 
         // If asset filename contained in protocol then remove it
         // This simply checks the filename is contained in the protocol (as a string), since
-        // filenames are uids, this should be unlikey to return false negatives - this check
+        // filenames are uids, this should be unlikely to return false negatives - this check
         // shouldn't ever return false positives.
         if (!contains(protocolFile, fileName)) {
           removeFile(filePath);
         }
       });
+    })
+    .catch((e) => {
+      log.error(e);
     });
 };
 
