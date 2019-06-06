@@ -40,15 +40,7 @@ const getEdgeIndex = createSelector(
       {},
     );
 
-    const alterEdgeFormEdges = reduce(
-      collectPaths('stages[].subject', protocol),
-      (memo, subject, key) =>
-        ({
-          ...memo,
-          [key]: subject.type,
-        }),
-      {},
-    );
+    const alterEdgeFormEdges = collectPaths('stages[].subject.type', protocol);
 
     return {
       ...createEdges,
