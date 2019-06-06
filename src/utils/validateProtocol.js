@@ -1,15 +1,24 @@
+import log from 'electron-log';
 import { validateSchema, validateLogic } from '../protocol-validation/validation';
 import { errToString } from '../protocol-validation/validation/helpers';
 
-const validateProtocol = (protocol) => {
-  const schemaErrors = validateSchema(protocol);
-  const logicErrors = validateLogic(protocol);
+const validateProtocol = protocol =>
+  new Promise((resolve, reject) => {
+    log.info('validateProtocol()');
 
-  if (schemaErrors.length > 0 || logicErrors.length > 0) {
-    return Promise.reject(new Error([...schemaErrors, ...logicErrors].map(errToString).join('')));
-  }
+    const schemaErrors = validateSchema(protocol);
+    const logicErrors = validateLogic(protocol);
 
-  return Promise.resolve(protocol);
-};
+    if (schemaErrors.length > 0 || logicErrors.length > 0) {
+      const validationErrors = new Error([...schemaErrors, ...logicErrors].map(errToString).join(''));
+
+      log.error(validationErrors);
+      return reject(validationErrors);
+    }
+
+    log.info('validateProtocol(): valid');
+
+    return resolve(protocol);
+  });
 
 export default validateProtocol;
