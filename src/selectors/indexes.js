@@ -1,4 +1,4 @@
-import { isArray, values, reduce } from 'lodash';
+import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 import collectPaths from '../utils/collectPaths';
@@ -9,46 +9,19 @@ import collectPaths from '../utils/collectPaths';
  * - `stages[].prompts[].edges.create`
  * - `stages[].prompts[].edges.display[]`
  * - `stages[].presets[].edges.display[]`
+ * - `stages[].subject.type`
  * @returns {object} in format: { [path]: variable }
  */
 const getEdgeIndex = createSelector(
   getProtocol,
   (protocol) => {
     const createEdges = collectPaths('stages[].prompts[].edges.create', protocol);
-    // TODO: This reducer shouldn't be necessary, look at updating collectPaths
-    const displayEdges = reduce(
-      collectPaths('stages[].prompts[].edges.display', protocol),
-      (memo, edges, path) => ({
-        ...memo,
-        ...edges.reduce((acc, edge, i) => ({
-          ...acc,
-          [`${path}[${i}]`]: edge,
-        }), {}),
-      }),
-      {},
-    );
 
-    const narrativeEdges = reduce(
-      collectPaths('stages[].presets[].edges.display', protocol),
-      (memo, edges, path) => ({
-        ...memo,
-        ...edges.reduce((acc, edge, i) => ({
-          ...acc,
-          [`${path}[${i}]`]: edge,
-        }), {}),
-      }),
-      {},
-    );
+    const displayEdges = collectPaths('stages[].prompts[].edges.display', protocol);
 
-    const alterEdgeFormEdges = reduce(
-      collectPaths('stages[].subject', protocol),
-      (memo, subject, key) =>
-        ({
-          ...memo,
-          [key]: subject.type,
-        }),
-      {},
-    );
+    const narrativeEdges = collectPaths('stages[].presets[].edges.display', protocol);
+
+    const alterEdgeFormEdges = collectPaths('stages[].subject.type', protocol);
 
     return {
       ...createEdges,
@@ -62,24 +35,12 @@ const getEdgeIndex = createSelector(
 /**
  * Returns index of used nodes (entities)
  * Checks for usage in the following:
- * - `stages[].subject`
+ * - `stages[].subject.type`
  * @returns {object} in format: { [path]: variable }
  */
 const getNodeIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    const subjectIndex = collectPaths('stages[].subject', protocol);
-
-    return reduce(
-      subjectIndex,
-      (memo, subject, key) =>
-        ({
-          ...memo,
-          [key]: subject.type,
-        }),
-      {},
-    );
-  },
+  protocol => collectPaths('stages[].subject.type', protocol),
 );
 
 /**

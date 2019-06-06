@@ -58,7 +58,7 @@ const collectPaths = (paths, obj, memoPath) => {
 
   if (nextObj) {
     return {
-      [path]: nextObj,
+      [path]: isArray(nextObj) ? nextObj[0] : nextObj,
     };
   }
 
