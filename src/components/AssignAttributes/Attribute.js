@@ -15,6 +15,14 @@ const getInputComponentForType = (type) => {
   return Fields[componentName];
 };
 
+const getValidationForType = (type) => {
+  if (type !== 'categorical') { return { required: true }; }
+  return {
+    minSelected: 1,
+    required: true,
+  };
+};
+
 const Attribute = ({
   field,
   handleDelete,
@@ -44,7 +52,7 @@ const Attribute = ({
             name={`${field}.value`}
             component={ValueComponent}
             options={options}
-            validation={{ required: true }}
+            validation={getValidationForType(variableType)}
           />
         }
       </div>
