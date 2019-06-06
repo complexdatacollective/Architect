@@ -55,7 +55,7 @@ class Background extends PureComponent {
                 label="Number of concentric circles to use:"
                 type="number"
                 normalize={value => parseInt(value, 10) || value}
-                validation={{ required: true }}
+                validation={{ required: true, positiveNumber: true }}
               />
             </Row>
             <Row>

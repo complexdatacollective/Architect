@@ -33,6 +33,10 @@ export const requiredAcceptsNull = () =>
   value =>
     (!isUndefined(value) ? undefined : 'Required');
 
+export const positiveNumber = () =>
+  value =>
+    (value && Math.sign(value) === -1 ? 'Number must be positive' : undefined);
+
 export const maxLength = max =>
   value =>
     (value && value.length > max ? `Must be ${max} characters or less` : undefined);
@@ -103,6 +107,7 @@ const validations = {
   required,
   requiredAcceptsZero,
   requiredAcceptsNull,
+  positiveNumber,
   minLength,
   maxLength,
   minValue,
