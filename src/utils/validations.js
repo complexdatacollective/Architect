@@ -13,9 +13,17 @@ const coerceArray = (value) => {
 const capitalize = sentence =>
   sentence.replace(/^\w/, firstLetter => firstLetter.toUpperCase());
 
+const hasValue = (value) => {
+  if (typeof value === 'string') {
+    return !!value;
+  }
+
+  return !isNil(value);
+};
+
 export const required = () =>
   value =>
-    (value ? undefined : 'Required');
+    (hasValue(value) ? undefined : 'Required');
 
 export const requiredAcceptsZero = () =>
   value =>
@@ -24,6 +32,10 @@ export const requiredAcceptsZero = () =>
 export const requiredAcceptsNull = () =>
   value =>
     (!isUndefined(value) ? undefined : 'Required');
+
+export const positiveNumber = () =>
+  value =>
+    (value && Math.sign(value) === -1 ? 'Number must be positive' : undefined);
 
 export const maxLength = max =>
   value =>
@@ -95,6 +107,7 @@ const validations = {
   required,
   requiredAcceptsZero,
   requiredAcceptsNull,
+  positiveNumber,
   minLength,
   maxLength,
   minValue,

@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 import { operatorsWithValue } from './options';
 
 const valididateField = (value) => {
@@ -13,7 +13,7 @@ const valididateField = (value) => {
     case 'undefined':
       return false;
     default:
-      throw Error(`Could not validate unknown type "${type}"`);
+      return !isNil(value);
   }
 };
 

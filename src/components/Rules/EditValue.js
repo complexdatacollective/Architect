@@ -4,12 +4,12 @@ import React from 'react';
 import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import DetachedField from '../DetachedField';
-import { Text, Checkbox, Number } from '../../ui/components/Fields';
+import { Text, Toggle, Number } from '../../ui/components/Fields';
 
 const INPUT_TYPES = {
   string: Text,
   number: Number,
-  boolean: Checkbox,
+  boolean: Toggle,
 };
 
 /**
@@ -22,6 +22,11 @@ const withMappedFieldComponent = withProps(
   }),
 );
 
+const getLabel = (type, value) => {
+  if (type !== 'boolean') { return 'Value'; }
+  return value ? 'True' : 'False';
+};
+
 const EditValue = ({
   fieldComponent: FieldComponent,
   value,
@@ -31,7 +36,7 @@ const EditValue = ({
 }) => (
   <DetachedField
     component={FieldComponent}
-    label="Value"
+    label={getLabel(variableType, value)}
     name="value"
     onChange={onChange}
     value={value}
@@ -44,7 +49,7 @@ EditValue.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.bool,
-  ]),
+  ]).isRequired,
   onChange: PropTypes.func,
   fieldComponent: PropTypes.oneOfType([
     PropTypes.node,
@@ -54,7 +59,6 @@ EditValue.propTypes = {
 
 EditValue.defaultProps = {
   onChange: () => {},
-  value: '',
 };
 
 export default withMappedFieldComponent(EditValue);
