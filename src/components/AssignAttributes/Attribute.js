@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { Field } from 'redux-form';
+import ValidatedField from '../Form/ValidatedField';
 import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
 import { getComponentsForType } from '../Form/inputOptions';
@@ -12,6 +12,14 @@ const getInputComponentForType = (type) => {
   const components = getComponentsForType(type);
   const componentName = get(components, [0, 'value']); // Use the first possible option
   return Fields[componentName];
+};
+
+const getValidationForType = (type) => {
+  if (type !== 'categorical') { return { required: true }; }
+  return {
+    minSelected: 1,
+    required: true,
+  };
 };
 
 const Attribute = ({
@@ -28,20 +36,23 @@ const Attribute = ({
   return (
     <div className="assign-attributes-attribute">
       <div className="assign-attributes-attribute__variable">
-        <Field
+        <ValidatedField
           name={`${field}.variable`}
           component={Select}
           options={variableOptions}
           onCreateNew={() => { onCreateNew(index); }}
+          isDisabled={!!variableType}
           createNewOption="Create new variable"
+          validation={{ required: true }}
         />
       </div>
       <div className="assign-attributes-attribute__value">
         { variableType &&
-          <Field
+          <ValidatedField
             name={`${field}.value`}
             component={ValueComponent}
             options={options}
+            validation={getValidationForType(variableType)}
           />
         }
       </div>
