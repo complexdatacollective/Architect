@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Field } from 'redux-form';
+import ValidatedField from '../Form/ValidatedField';
 import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
 import { getComponentsForType } from '../Form/inputOptions';
@@ -39,10 +40,11 @@ const Attribute = ({
       </div>
       <div className="assign-attributes-attribute__value">
         { variableType &&
-          <Field
+          <ValidatedField
             name={`${field}.value`}
             component={ValueComponent}
             options={options}
+            validation={{ required: true }}
           />
         }
       </div>
