@@ -40,15 +40,13 @@ const getEdgeIndex = createSelector(
       {},
     );
 
-    const alterFormEdges = reduce(
-      collectPaths('stages[].subject[].type', protocol),
-      (memo, edges, path) => ({
-        ...memo,
-        ...edges.reduce((acc, edge, i) => ({
-          ...acc,
-          [`${path}[${i}]`]: edge,
-        }), {}),
-      }),
+    const alterEdgeFormEdges = reduce(
+      collectPaths('stages[].subject', protocol),
+      (memo, subject, key) =>
+        ({
+          ...memo,
+          [key]: subject.type,
+        }),
       {},
     );
 
@@ -56,7 +54,7 @@ const getEdgeIndex = createSelector(
       ...createEdges,
       ...displayEdges,
       ...narrativeEdges,
-      ...alterFormEdges,
+      ...alterEdgeFormEdges,
     };
   },
 );
