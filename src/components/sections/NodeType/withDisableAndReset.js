@@ -33,7 +33,7 @@ const withResetHandlers = withHandlers({
       openDialog({
         type: 'Confirm',
         title: 'Change node type for this stage',
-        message: 'You attemped to change the node type of a stage that you have already configured. Before you can procede the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?',
+        message: 'You attemped to change the node type of a stage that you have already configured. Before you can proceed the stage must be reset, which will remove any existing configuration. Do you want to reset the stage now?',
         onConfirm: resetStage,
         confirmLabel: 'Continue',
       });

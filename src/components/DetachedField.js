@@ -4,7 +4,7 @@ import { compose, defaultProps } from 'recompose';
 import withValidation from './Form/withValidation';
 
 const getValue = (eventOrValue) => {
-  if (!eventOrValue.target) {
+  if (!eventOrValue || !eventOrValue.target) {
     return eventOrValue;
   }
 
