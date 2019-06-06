@@ -30,10 +30,11 @@ const TypeEditor = ({
       { !type && <h1 className="editor__heading">Create {entity}</h1> }
 
       <Guidance contentId="guidance.registry.type.label" className="editor__section">
-        <h3 id={getFieldId('name')}>Node Type</h3>
+        <h3 id={getFieldId('name')}>{entity} Type</h3>
         <p>
-          What type of node is this? Common examples might be &quot;Person&quot;,
-          &quot;Place&quot;, or &quot;Agency&quot;.
+          What type of {entity} is this?
+          { entity === 'node' && ' Some examples might be "Person", "Place", or "Agency".' }
+          { entity === 'edge' && ' Some examples might be "Friend" or "Colleague".' }
         </p>
         <ValidatedField
           component={Fields.Text}
