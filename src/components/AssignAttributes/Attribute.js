@@ -33,6 +33,7 @@ const Attribute = ({
           component={Select}
           options={variableOptions}
           onCreateNew={() => { onCreateNew(index); }}
+          isDisabled={!!variableType}
           createNewOption="Create new variable"
         />
       </div>
