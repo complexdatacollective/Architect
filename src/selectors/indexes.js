@@ -40,7 +40,20 @@ const getEdgeIndex = createSelector(
       {},
     );
 
-    const alterEdgeFormEdges = collectPaths('stages[].subject.type', protocol);
+    // we only want subject of entity node
+    const alterEdgeFormEdges = reduce(
+      collectPaths('stages[].subject', protocol),
+      (memo, subject, path) => {
+        if (subject.entity !== 'edge') {
+          return memo;
+        }
+        return {
+          ...memo,
+          [`${path}.type`]: subject.type,
+        };
+      },
+      {},
+    );
 
     return {
       ...createEdges,
@@ -62,13 +75,18 @@ const getNodeIndex = createSelector(
   (protocol) => {
     const subjectIndex = collectPaths('stages[].subject', protocol);
 
+    // we only want subject of entity node
     return reduce(
       subjectIndex,
-      (memo, subject, key) =>
-        ({
+      (memo, subject, path) => {
+        if (subject.entity !== 'node') {
+          return memo;
+        }
+        return {
           ...memo,
-          [key]: subject.type,
-        }),
+          [`${path}.type`]: subject.type,
+        };
+      },
       {},
     );
   },

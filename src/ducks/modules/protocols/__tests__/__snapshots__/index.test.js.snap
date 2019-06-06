@@ -433,6 +433,10 @@ Array [
                 "text": "not a prompt",
               },
             ],
+            "subject": Object {
+              "entity": "edge",
+              "type": "1234-5",
+            },
             "type": "Sociogram",
           },
           Object {
