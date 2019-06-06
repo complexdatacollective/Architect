@@ -16,9 +16,13 @@ const Query = ({ rules, join, codebook, onChange, openDialog }) => (
 Query.propTypes = {
   onChange: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
-  rules: PropTypes.array.isRequired,
+  rules: PropTypes.array,
   codebook: PropTypes.object.isRequired,
   join: PropTypes.string.isRequired,
+};
+
+Query.defaultProps = {
+  rules: [],
 };
 
 export { Query };
