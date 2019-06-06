@@ -14,16 +14,16 @@ const testObject = {
       prompts: [
         { variable: 'bazz' },
       ],
+      list: [
+        'fizz',
+        'buzz',
+      ],
     },
-  ],
-  list: [
-    'fizz',
-    'buzz',
   ],
 };
 
 describe('collectPaths', () => {
-  it('can extract variables', () => {
+  it('can extract attributes', () => {
     const expectedResult = {
       'stages[0].prompts[0].variable': 'foo',
       'stages[0].prompts[1].variable': 'bar',
@@ -34,4 +34,13 @@ describe('collectPaths', () => {
     expect(paths).toEqual(expectedResult);
   });
 
+  it.skip('can extract arrays', () => {
+    const expectedResult = {
+      'stages[0].prompts[0].list[0]': 'fizz',
+      'stages[0].prompts[1].list[1]': 'buzz',
+    };
+    const paths = collectPaths('stages[].list[]', testObject);
+
+    expect(paths).toEqual(expectedResult);
+  });
 });
