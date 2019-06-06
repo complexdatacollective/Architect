@@ -8,6 +8,7 @@ import collectPaths from '../utils/collectPaths';
  * Checks for usage in the following:
  * - `stages[].prompts[].edges.create`
  * - `stages[].prompts[].edges.display[]`
+ * - `stages[].presets[].edges.display[]`
  * @returns {object} in format: { [path]: variable }
  */
 const getEdgeIndex = createSelector(
@@ -27,9 +28,35 @@ const getEdgeIndex = createSelector(
       {},
     );
 
+    const narrativeEdges = reduce(
+      collectPaths('stages[].presets[].edges.display', protocol),
+      (memo, edges, path) => ({
+        ...memo,
+        ...edges.reduce((acc, edge, i) => ({
+          ...acc,
+          [`${path}[${i}]`]: edge,
+        }), {}),
+      }),
+      {},
+    );
+
+    const alterFormEdges = reduce(
+      collectPaths('stages[].subject[].type', protocol),
+      (memo, edges, path) => ({
+        ...memo,
+        ...edges.reduce((acc, edge, i) => ({
+          ...acc,
+          [`${path}[${i}]`]: edge,
+        }), {}),
+      }),
+      {},
+    );
+
     return {
       ...createEdges,
       ...displayEdges,
+      ...narrativeEdges,
+      ...alterFormEdges,
     };
   },
 );

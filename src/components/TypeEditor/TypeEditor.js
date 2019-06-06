@@ -45,7 +45,7 @@ const TypeEditor = ({
       <Guidance contentId="guidance.registry.type.color" className="editor__section">
         <h2 id={getFieldId('color')}>Color</h2>
         <p>
-          Choose a color for this node type.
+          Choose a color for this {entity} type.
         </p>
         <ValidatedField
           component={ArchitectFields.ColorPicker}
@@ -61,7 +61,7 @@ const TypeEditor = ({
           <Guidance contentId="guidance.registry.type.icon" className="editor__section">
             <h2 id={getFieldId('iconVariant')}>Icon</h2>
             <p>
-              Choose an icon to display on interfaces that create this node.
+              Choose an icon to display on interfaces that create this {entity}.
             </p>
             <ValidatedField
               component={Fields.RadioGroup}
@@ -76,7 +76,7 @@ const TypeEditor = ({
             <Guidance contentId="guidance.registry.type.displayVariable" className="editor__section">
               <h2>Display Variable</h2>
               <p>
-                Select a variable to use as a label when displaying this node.
+                Select a variable to use as a label when displaying this {entity}.
               </p>
               <Field
                 component={ArchitectFields.Select}
