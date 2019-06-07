@@ -11,22 +11,23 @@ import pruneAssets from './utils/pruneAssets';
  */
 const saveProtocol = (workingPath, protocol) =>
   new Promise((resolve, reject) => {
-    log.info('saveProtocol()', workingPath);
+    log.debug('saveProtocol()', workingPath);
     // save json to temp dir
     const destinationPath = path.join(workingPath, 'protocol.json');
 
     try {
+      log.debug('  stringify protocol');
       const protocolString = JSON.stringify(protocol, null, 2);
 
-      resolve(
-        writeFile(destinationPath, protocolString)
-          .then(() =>
-            // Now that the protocol is commited to disk we can safely prune unused assets.
-            pruneAssets(workingPath),
-          )
-          .then(() => destinationPath),
-      );
+      log.info(`save protocol to ${destinationPath}`);
+      writeFile(destinationPath, protocolString)
+        .then(() =>
+          // Now that the protocol is commited to disk we can safely prune unused assets.
+          pruneAssets(workingPath),
+        )
+        .then(() => resolve(destinationPath));
     } catch (e) {
+      log.error(e);
       reject(e);
     }
   });

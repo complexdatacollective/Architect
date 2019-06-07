@@ -30,6 +30,7 @@ const removeFile = (filePath) => {
 const pruneAssets = (workingPath) => {
   const protocolPath = path.join(workingPath, 'protocol.json');
   const protocolAssetsPath = path.join(workingPath, 'assets');
+  log.debug('pruneAssets', workingPath, protocolPath, protocolAssetsPath);
 
   // Read protocol file
   return Promise.all([
@@ -37,6 +38,7 @@ const pruneAssets = (workingPath) => {
     fs.readdir(protocolAssetsPath),
   ])
     .then(([protocolFile, files]) => {
+      log.debug('  file read and readdir successful, iterate files');
       files.forEach((fileName) => {
         const filePath = path.join(workingPath, 'assets', fileName);
 
@@ -45,6 +47,7 @@ const pruneAssets = (workingPath) => {
         // filenames are uids, this should be unlikely to return false negatives - this check
         // shouldn't ever return false positives.
         if (!contains(protocolFile, fileName)) {
+          log.info(`  remove: ${filePath}`);
           removeFile(filePath);
         }
       });

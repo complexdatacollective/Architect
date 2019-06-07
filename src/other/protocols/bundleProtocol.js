@@ -10,11 +10,14 @@ import { archive } from './lib/archive';
  * @param {string} filePath - The protocol path.
  */
 const bundleProtocol = (workingPath, filePath) => {
-  log.info('bundleProtocol()', workingPath, filePath);
+  log.debug('bundleProtocol()', workingPath, filePath);
   if (path.extname(filePath) === '.netcanvas') {
     // also save zip
+    log.debug('  treat as archive');
     return archive(workingPath, filePath);
   }
+
+  log.debug('  treat as directory');
   return fs.copy(workingPath, filePath);
 };
 
