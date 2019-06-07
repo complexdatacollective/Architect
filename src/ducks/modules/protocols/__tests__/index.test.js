@@ -88,7 +88,9 @@ describe('protocols', () => {
 
     it('triggers save and export actions', () =>
       store.dispatch(actionCreators.saveAndExportProtocol())
-        .then(() => expect(log.mock.calls).toMatchSnapshot()),
+        .then(() => {
+          expect(log.mock.calls).toMatchSnapshot();
+        }),
     );
   });
 
