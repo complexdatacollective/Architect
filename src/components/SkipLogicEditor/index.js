@@ -10,7 +10,7 @@ import { actionCreators as stageActions } from '../../ducks/modules/protocol/sta
 const defaultLogic = {
   action: 'SKIP',
   filter: {
-    join: '',
+    join: 'AND',
     rules: [],
   },
 };
