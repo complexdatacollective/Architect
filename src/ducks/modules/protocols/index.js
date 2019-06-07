@@ -4,6 +4,7 @@ import history from '../../../history';
 import { getActiveProtocolMeta } from '../../../selectors/protocols';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as importActionCreators } from './import';
+import { actionCreators as preflightActions } from './preflight';
 import { actionCreators as saveActionCreators } from './save';
 import { actionCreators as exportActionCreators } from './export';
 import { saveErrorDialog, importErrorDialog } from './dialogs';
@@ -46,7 +47,8 @@ const saveAndExportThunk = () =>
   (dispatch, getState) => {
     const { filePath } = getActiveProtocolMeta(getState());
 
-    return dispatch(saveActionCreators.saveProtocol())
+    return dispatch(preflightActions.preflight())
+      .then(() => dispatch(saveActionCreators.saveProtocol()))
       .then(() => dispatch(exportActionCreators.exportProtocol()))
       .catch((e) => {
         dispatch(saveAndExportError(e));
