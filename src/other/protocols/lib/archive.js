@@ -1,3 +1,4 @@
+import log from 'electron-log';
 import fs from 'fs-extra';
 import decompress from 'decompress';
 import archiver from 'archiver';
@@ -28,6 +29,7 @@ const extract = (sourcePath, destinationPath) =>
  */
 const archive = (sourcePath, destinationPath) =>
   new Promise((resolve, reject) => {
+    log.info('archive()', sourcePath, destinationPath);
     const output = fs.createWriteStream(destinationPath);
     const zip = archiver('zip', archiveOptions);
 
