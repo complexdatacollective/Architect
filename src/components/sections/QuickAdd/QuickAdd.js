@@ -17,6 +17,7 @@ const QuickAdd = ({
   options,
   handleCreateVariable,
   handleDeleteVariable,
+  normalizeKeyDown,
 }) => (
   <Section disabled={disabled} group contentId="guidance.editor.quickAdd">
     <h3 id="issue-form">Quick Add Variable</h3>
@@ -38,6 +39,7 @@ const QuickAdd = ({
         options={options}
         onCreateOption={value => handleCreateVariable(value, 'text')}
         onDeleteOption={handleDeleteVariable}
+        onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
         formatCreateLabel={inputValue => (
           <span>Press enter to create a new variable named &quot;{inputValue}&quot;.</span>
@@ -52,6 +54,7 @@ QuickAdd.propTypes = {
   options: PropTypes.array,
   handleCreateVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
+  normalizeKeyDown: PropTypes.func.isRequired,
 };
 
 QuickAdd.defaultProps = {

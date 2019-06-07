@@ -14,6 +14,7 @@ import withNewVariableWindowHandlers, {
 } from '../../enhancers/withNewVariableWindowHandlers';
 import Section from '../Section';
 import Row from '../Row';
+import { normalizeKeyDown } from '../../enhancers/withCreateVariableHandler';
 
 const PresetFields = ({
   entity,
@@ -50,6 +51,7 @@ const PresetFields = ({
         validation={{ required: true }}
         options={layoutVariblesForSubject}
         onCreateOption={handleCreateLayoutVariable}
+        onKeyDown={normalizeKeyDown}
         onDeleteOption={handleDeleteVariable}
         formatCreateLabel={inputValue => (
           <span>Press enter to create a new layout variable named &quot;{inputValue}&quot;.</span>

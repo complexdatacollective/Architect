@@ -19,6 +19,7 @@ import withNewVariableWindowHandlers, {
 const PromptFields = ({
   variableOptions,
   handleCreateNewVariable,
+  normalizeKeyDown,
   handleDeleteVariable,
   entity,
   type,
@@ -64,6 +65,7 @@ const PromptFields = ({
           options={ordinalVariableOptions}
           onCreateOption={openNewVariableWindow}
           onDeleteOption={handleDeleteVariable}
+          onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
             <span>

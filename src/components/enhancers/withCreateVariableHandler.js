@@ -1,10 +1,20 @@
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
+import { isEmpty } from 'lodash';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
+import safeName from '../../utils/safeName';
 
 const mapDispatchToProps = {
   createVariable: codebookActions.createVariable,
   deleteVariable: codebookActions.deleteVariable,
+};
+
+export const normalizeKeyDown = (e) => {
+  const check = safeName(event.key);
+
+  if (isEmpty(check)) {
+    e.preventDefault();
+  }
 };
 
 const createVariableHandler = {
@@ -25,6 +35,7 @@ const createVariableHandler = {
 
       return variable;
     },
+  normalizeKeyDown: () => normalizeKeyDown,
 };
 
 /**
