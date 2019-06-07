@@ -78,7 +78,7 @@ describe('protocols', () => {
         });
       });
 
-      it('throws an error when protocol is invalid', () =>
+      it('dispatches an error when protocol is invalid', () =>
         store.dispatch(actionCreators.saveAndExportProtocol())
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();
@@ -112,7 +112,7 @@ describe('protocols', () => {
         );
       });
 
-      it('throws an error when protocol is invalid', () =>
+      it('dispatches an error when protocol is invalid', () =>
         store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();
