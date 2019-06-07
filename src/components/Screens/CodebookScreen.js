@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,53 +9,41 @@ import { Node, Button, Icon } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Card from './ProtocolCard';
-import Link from '../Link';
 import { getProtocol } from '../../selectors/protocol';
-import { makeGetUsageForType, makeGetDeleteImpact, makeGetObjectLabel } from '../../selectors/usage';
+import { getNodeIndex, getEdgeIndex, utils } from '../../selectors/indexes';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
-const Type = ({ label, category, type, children, usage, handleDelete }) => (
+const Type = ({ label, children, used, handleDelete }) => (
   <div className="simple-list__item">
     <div className="simple-list__attribute simple-list__attribute--icon">
-      <Link
-        screen="type"
-        params={{ category, type }}
-      >
-        {children}
-      </Link>
+      {children}
     </div>
     <div className="simple-list__attribute">
       <h3>
-        <Link
-          screen="type"
-          params={{ category, type }}
-        >
-          {label}
-        </Link>
+        {label}
       </h3>
-      { usage.length === 0 && <div className="simple-list__tag">unused</div> }
+      { !used && <div className="simple-list__tag">unused</div> }
     </div>
-    <div className="simple-list__attribute simple-list__attribute--options">
-      <Button size="small" color="neon-coral" onClick={handleDelete}>
-        Delete
-      </Button>
-    </div>
+    { !used &&
+      <div className="simple-list__attribute simple-list__attribute--options">
+        <Button size="small" color="neon-coral" onClick={handleDelete}>
+          Delete
+        </Button>
+      </div>
+    }
   </div>
 );
 
 Type.propTypes = {
   label: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  usage: PropTypes.array,
+  used: PropTypes.boolean,
   handleDelete: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
 
 Type.defaultProps = {
-  usage: [],
-  type: null,
+  used: false,
 };
 
 /**
@@ -64,30 +52,16 @@ Type.defaultProps = {
  */
 class Codebook extends Component {
   handleDelete = (entity, type) => {
-    const deletedObjects = this.props.getDeleteImpact(entity, type);
     const typeName = this.props.codebook[entity][type].name;
-
-    const confirmMessage = (
-      <Fragment>
-        <p>Are you sure you want to delete {typeName} {entity}?</p>
-        { deletedObjects.length > 0 &&
-          <Fragment>
-            <p>Because a number of other objects depend on this type, they will also be removed:</p>
-            <ul>
-              {deletedObjects.map(
-                item =>
-                  <li>{item.type.toUpperCase()}: {this.props.getObjectLabel(item)}</li>,
-              )}
-            </ul>
-          </Fragment>
-        }
-      </Fragment>
-    );
 
     this.props.openDialog({
       type: 'Warning',
       title: `Delete ${typeName} ${entity}`,
-      message: confirmMessage,
+      message: (
+        <p>
+          Are you sure you want to delete the {entity} called {typeName}? This cannot be undone.
+        </p>
+      ),
       onConfirm: () => { this.props.deleteType(entity, type, true); },
       confirmLabel: `Delete ${typeName} ${entity}`,
     });
@@ -97,16 +71,16 @@ class Codebook extends Component {
 
   renderNode = (node, type) => {
     const nodeColor = get(node, 'color', '');
-    const usage = this.props.getUsageForType('node', type);
+    const used = this.props.nodeUsageIndex.has(type);
 
     return (
       <Wipe key={type}>
         <Type
           category="node"
           type={type}
-          label={node.label}
+          label={node.name}
           handleDelete={() => this.handleDelete('node', type)}
-          usage={usage}
+          used={used}
         >
           <Node label="" color={nodeColor} />
         </Type>
@@ -116,16 +90,16 @@ class Codebook extends Component {
 
   renderEdge = (edge, type) => {
     const edgeColor = get(edge, 'color', '');
-    const usage = this.props.getUsageForType('edge', type);
+    const used = this.props.edgeUsageIndex.has(type);
 
     return (
       <Wipe key={type}>
         <Type
           category="edge"
           type={type}
-          label={edge.label}
+          label={edge.name}
           handleDelete={() => this.handleDelete('edge', type)}
-          usage={usage}
+          used={used}
         >
           <Icon name="links" color={edgeColor} />
         </Type>
@@ -175,6 +149,7 @@ class Codebook extends Component {
       <Card
         show={show}
         onCancel={this.handleCancel}
+        cancelLabel="Continue"
         transitionState={transitionState}
         onAcknowledgeError={this.handleCancel}
       >
@@ -182,24 +157,15 @@ class Codebook extends Component {
           <div className="editor variable-registry">
             <div className="editor__window">
               <div className="editor__content">
-                <h1 className="editor__heading">Variable Registry</h1>
+                <h1 className="editor__heading">Codebook</h1>
                 <p>
-                  Use this screen to create, edit, and manage your node and edge types.
+                  Below you can find an overview of the node and edge types that you have
+                  defined while creating your interview. Entities that are unused may be deleted.
                 </p>
                 <Guidance contentId="guidance.registry.nodes" className="editor__section">
                   <h2>Node Types</h2>
                   <div className="editor__subsection">
                     {this.renderNodes()}
-                  </div>
-                  <div className="editor__subsection">
-                    <Link
-                      screen="type"
-                      params={{ category: 'node' }}
-                    >
-                      <Button size="small" icon="add">
-                        Create new Node type
-                      </Button>
-                    </Link>
                   </div>
                 </Guidance>
 
@@ -207,16 +173,6 @@ class Codebook extends Component {
                   <h2>Edge Types</h2>
                   <div className="editor__subsection">
                     {this.renderEdges()}
-                  </div>
-                  <div className="editor__subsection">
-                    <Link
-                      screen="type"
-                      params={{ category: 'edge' }}
-                    >
-                      <Button size="small" icon="add">
-                        Create new Edge type
-                      </Button>
-                    </Link>
                   </div>
                 </Guidance>
               </div>
@@ -235,12 +191,11 @@ Codebook.propTypes = {
     node: PropTypes.object.isRequired,
     edge: PropTypes.object.isRequired,
   }).isRequired,
-  getUsageForType: PropTypes.func.isRequired,
   onComplete: PropTypes.func,
   deleteType: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
-  getDeleteImpact: PropTypes.func.isRequired,
-  getObjectLabel: PropTypes.func.isRequired,
+  nodeUsageIndex: PropTypes.object.isRequired,
+  edgeUsageIndex: PropTypes.object.isRequired,
 };
 
 Codebook.defaultProps = {
@@ -256,15 +211,15 @@ Codebook.defaultProps = {
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
   const codebook = protocol.codebook;
-  const getUsageForType = makeGetUsageForType(state);
-  const getDeleteImpact = makeGetDeleteImpact(state);
-  const getObjectLabel = makeGetObjectLabel(state);
+  const nodeIndex = getNodeIndex(state);
+  const edgeIndex = getEdgeIndex(state);
+  const nodeUsageIndex = utils.buildSearch([nodeIndex]);
+  const edgeUsageIndex = utils.buildSearch([edgeIndex]);
 
   return {
     codebook,
-    getUsageForType,
-    getDeleteImpact,
-    getObjectLabel,
+    nodeUsageIndex,
+    edgeUsageIndex,
   };
 };
 

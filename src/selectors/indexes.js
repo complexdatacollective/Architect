@@ -1,7 +1,96 @@
-import { isArray, values } from 'lodash';
+import { isArray, values, reduce } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 import collectPaths from '../utils/collectPaths';
+
+/**
+ * Returns index of used edges (entities)
+ * Checks for usage in the following:
+ * - `stages[].prompts[].edges.create`
+ * - `stages[].prompts[].edges.display[]`
+ * - `stages[].presets[].edges.display[]`
+ * @returns {object} in format: { [path]: variable }
+ */
+const getEdgeIndex = createSelector(
+  getProtocol,
+  (protocol) => {
+    const createEdges = collectPaths('stages[].prompts[].edges.create', protocol);
+    // TODO: This reducer shouldn't be necessary, look at updating collectPaths
+    const displayEdges = reduce(
+      collectPaths('stages[].prompts[].edges.display', protocol),
+      (memo, edges, path) => ({
+        ...memo,
+        ...edges.reduce((acc, edge, i) => ({
+          ...acc,
+          [`${path}[${i}]`]: edge,
+        }), {}),
+      }),
+      {},
+    );
+
+    const narrativeEdges = reduce(
+      collectPaths('stages[].presets[].edges.display', protocol),
+      (memo, edges, path) => ({
+        ...memo,
+        ...edges.reduce((acc, edge, i) => ({
+          ...acc,
+          [`${path}[${i}]`]: edge,
+        }), {}),
+      }),
+      {},
+    );
+
+    // we only want subject of entity node
+    const alterEdgeFormEdges = reduce(
+      collectPaths('stages[].subject', protocol),
+      (memo, subject, path) => {
+        if (subject.entity !== 'edge') {
+          return memo;
+        }
+        return {
+          ...memo,
+          [`${path}.type`]: subject.type,
+        };
+      },
+      {},
+    );
+
+    return {
+      ...createEdges,
+      ...displayEdges,
+      ...narrativeEdges,
+      ...alterEdgeFormEdges,
+    };
+  },
+);
+
+/**
+ * Returns index of used nodes (entities)
+ * Checks for usage in the following:
+ * - `stages[].subject`
+ * @returns {object} in format: { [path]: variable }
+ */
+const getNodeIndex = createSelector(
+  getProtocol,
+  (protocol) => {
+    const subjectIndex = collectPaths('stages[].subject', protocol);
+
+    // we only want subject of entity node
+    return reduce(
+      subjectIndex,
+      (memo, subject, path) => {
+        if (subject.entity !== 'node') {
+          return memo;
+        }
+        return {
+          ...memo,
+          [`${path}.type`]: subject.type,
+        };
+      },
+      {},
+    );
+  },
+);
 
 /**
  * Returns index of used variables
@@ -25,7 +114,6 @@ const getVariableIndex = createSelector(
     };
   },
 );
-
 
 /**
  * Returns index of used assets
@@ -84,5 +172,7 @@ const utils = {
 export {
   getVariableIndex,
   getAssetIndex,
+  getNodeIndex,
+  getEdgeIndex,
   utils,
 };

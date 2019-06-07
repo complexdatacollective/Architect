@@ -54,6 +54,10 @@
       max-height: 0;
       transform: translateX(-100%);
     }
+
+    h3 {
+      text-transform: capitalize;
+    }
   }
 
   .issues {

@@ -171,13 +171,14 @@
           "id": "alpha",
           "label": "alpha",
           "type": "Sociogram",
+          "subject": { "entity": "edge", "type": "1234-5" },
           "prompts": [
             {
               "id": "bravo",
               "text": "not a prompt",
               "edges": {
-                "create": "charlie",
-                "display": ["delta", "echo"]
+                "create": "1234-5",
+                "display": ["1234-5", "delta", "echo"]
               }
             }
           ]

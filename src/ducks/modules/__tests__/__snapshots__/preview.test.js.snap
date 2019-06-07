@@ -96,8 +96,9 @@ Array [
     "prompts": Array [
       Object {
         "edges": Object {
-          "create": "charlie",
+          "create": "1234-5",
           "display": Array [
+            "1234-5",
             "delta",
             "echo",
           ],
@@ -106,6 +107,10 @@ Array [
         "text": "not a prompt",
       },
     ],
+    "subject": Object {
+      "entity": "edge",
+      "type": "1234-5",
+    },
     "type": "Sociogram",
   },
   Object {
@@ -253,8 +258,9 @@ Array [
     "prompts": Array [
       Object {
         "edges": Object {
-          "create": "charlie",
+          "create": "1234-5",
           "display": Array [
+            "1234-5",
             "delta",
             "echo",
           ],
@@ -263,6 +269,10 @@ Array [
         "text": "not a prompt",
       },
     ],
+    "subject": Object {
+      "entity": "edge",
+      "type": "1234-5",
+    },
     "type": "Sociogram",
   },
   Object {
@@ -381,8 +391,9 @@ Array [
     "prompts": Array [
       Object {
         "edges": Object {
-          "create": "charlie",
+          "create": "1234-5",
           "display": Array [
+            "1234-5",
             "delta",
             "echo",
           ],
@@ -391,6 +402,10 @@ Array [
         "text": "not a prompt",
       },
     ],
+    "subject": Object {
+      "entity": "edge",
+      "type": "1234-5",
+    },
     "type": "Sociogram",
   },
   Object {
