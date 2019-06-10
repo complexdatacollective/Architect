@@ -8,7 +8,7 @@ import inputOptions, {
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
 } from '../../Form/inputOptions';
-import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -56,7 +56,6 @@ const mapStateToProps = (state, { form, entity, type }) => {
 };
 
 const mapDispatchToProps = {
-  createVariable: codebookActions.createVariable,
   changeField: change,
 };
 
@@ -71,11 +70,6 @@ const fieldsHandlers = withHandlers({
         changeField(form, 'options', null);
         changeField(form, 'validation', {});
       }
-    },
-  createNewVariable: ({ createVariable, entity, type }) =>
-    (name) => {
-      const { variable } = createVariable(entity, type, { name });
-      return variable;
     },
   handleChangeVariable: ({ existingVariables, changeField, form }) =>
     (_, value) => {
@@ -97,6 +91,7 @@ export {
 };
 
 export default compose(
+  withCreateVariableHandler,
   fieldsState,
   fieldsHandlers,
 );

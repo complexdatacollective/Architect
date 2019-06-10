@@ -12,7 +12,7 @@ import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
 import { isVariableTypeWithOptions } from '../../Form/inputOptions';
 import Row from '../Row';
 import Section from '../Section';
-import withFieldsMeta from './withFieldsHandlers';
+import withFieldsHandlers from './withFieldsHandlers';
 
 const PromptFields = ({
   form,
@@ -20,9 +20,10 @@ const PromptFields = ({
   variableType,
   variableOptions,
   componentOptions,
-  createNewVariable,
+  handleCreateVariable,
   handleChangeComponent,
   handleChangeVariable,
+  normalizeKeyDown,
 }) => (
   <Section>
     <Row contentId="guidance.section.form.field.name">
@@ -40,8 +41,9 @@ const PromptFields = ({
         name="variable"
         component={CreatableSelect}
         options={variableOptions} // from variables
-        onCreateOption={createNewVariable} // reset later fields, create variable of no type?
+        onCreateOption={handleCreateVariable} // reset later fields, create variable of no type?
         onChange={handleChangeVariable} // read/reset component options validation
+        onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
         placeholder="Type to create a variable..."
         formatCreateLabel={inputValue => (
@@ -112,8 +114,9 @@ PromptFields.propTypes = {
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
   componentOptions: PropTypes.array,
-  createNewVariable: PropTypes.func.isRequired,
+  handleCreateVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
+  normalizeKeyDown: PropTypes.func.isRequired,
 };
 
 PromptFields.defaultProps = {
@@ -126,5 +129,5 @@ PromptFields.defaultProps = {
 export { PromptFields };
 
 export default compose(
-  withFieldsMeta,
+  withFieldsHandlers,
 )(PromptFields);

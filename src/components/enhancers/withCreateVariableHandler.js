@@ -20,9 +20,11 @@ export const normalizeKeyDown = (e) => {
 const createVariableHandler = {
   handleCreateVariable: ({ createVariable, type, entity }) =>
     (variableName, variableType) => {
+      const withType = variableType ? { type: variableType } : {};
+
       const configuration = {
-        type: variableType,
         name: variableName,
+        ...withType,
       };
 
       const { variable } = createVariable(entity, type, configuration);
