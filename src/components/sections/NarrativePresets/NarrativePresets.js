@@ -8,7 +8,7 @@ import PresetPreview from './PresetPreview';
 import PresetFields from './PresetFields';
 
 const normalizePreset = (values) => {
-  if (!isEmpty(values.groupVariable)) {
+  if (isEmpty(values.groupVariable)) {
     return omit(values, ['groupVariable']);
   }
   return values;
