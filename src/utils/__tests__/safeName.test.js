@@ -3,10 +3,10 @@
 import { range } from 'lodash';
 import safeName from '../safeName';
 
-const testString = range(32, 127).map(code => String.fromCharCode(code)).join();
+const testString = range(32, 127).map(code => String.fromCharCode(code)).join('');
 
 describe('safeName()', () => {
   it('allows alphanumerics, dashes, and underscore', () => {
-    expect(safeName(testString)).toEqual('-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz');
+    expect(safeName(testString)).toMatchSnapshot();
   });
 });
