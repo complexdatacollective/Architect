@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { withState, withHandlers, withProps, compose } from 'recompose';
+import { normalizeKeyDown } from './withCreateVariableHandler';
 
 /**
  * Helper props for use with <NewVariableWindow />
@@ -24,6 +25,7 @@ const newVariableHandlers = withHandlers({
     variableName => setNewVariableName(parseVariableName(variableName)),
   closeNewVariableWindow: ({ setNewVariableName }) =>
     () => setNewVariableName(null),
+  normalizeKeyDown: () => normalizeKeyDown,
 });
 
 const showVariableWindow = withProps(
@@ -43,6 +45,7 @@ export const propTypes = {
   closeNewVariableWindow: PropTypes.func.isRequired,
   newVariableName: PropTypes.string,
   showNewVariableWindow: PropTypes.bool.isRequired,
+  normalizeKeyDown: PropTypes.func.isRequired,
 };
 
 export default withNewVariableWindowHandlers;

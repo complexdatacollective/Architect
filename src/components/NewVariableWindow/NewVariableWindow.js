@@ -11,6 +11,7 @@ import Options from '../Options';
 import Section from '../sections/Section';
 import FormWindow from '../FormWindow';
 import withNewVariableHandler, { form } from './withNewVariableHandler';
+import safeName from '../../utils/safeName';
 
 const isRequired = required();
 
@@ -58,6 +59,7 @@ class NewVariableWindow extends Component {
             component={Fields.Text}
             placeholder="e.g. Nickname"
             validate={[isRequired, this.validateName]}
+            normalize={safeName}
           />
         </Section>
         <Section contentId="guidance.newVariable.type">

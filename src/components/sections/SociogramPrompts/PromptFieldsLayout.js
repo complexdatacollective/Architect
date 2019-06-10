@@ -13,6 +13,7 @@ import withCanCreateEdgesState from './withCanCreateEdgesState';
 
 const PromptFields = ({
   handleCreateVariable,
+  normalizeKeyDown,
   variablesForSubject,
   layoutVariablesForSubject,
   allowPositioning,
@@ -38,6 +39,7 @@ const PromptFields = ({
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={value => handleCreateVariable(value, 'layout')}
+        onKeyDown={normalizeKeyDown}
         formatCreateLabel={inputValue => (
           <span>Press enter to create a new layout variable named &quot;{inputValue}&quot;.</span>
         )}
@@ -79,6 +81,7 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   handleCreateVariable: PropTypes.func.isRequired,
+  normalizeKeyDown: PropTypes.func.isRequired,
   variablesForSubject: PropTypes.object.isRequired,
   layoutVariablesForSubject: PropTypes.array.isRequired,
   allowPositioning: PropTypes.bool,

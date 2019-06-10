@@ -176,26 +176,27 @@ describe('protocol.codebook', () => {
     });
 
     describe('createVariable()', () => {
+      it('It will not create a variable with no name', () => {
+        const createAction = actionCreators.createVariable('node', 'bar', { foo: 'bar' });
+        const store = mockStore(testState);
+
+        expect(() => {
+          store.dispatch(createAction);
+        }).toThrow(new Error('Cannot create a new variable without a name'));
+      });
+
       it('dispatches the CREATE_VARIABLE action with a variable id for node', () => {
         const store = mockStore(testState);
 
         store.dispatch(actionCreators.createVariable(
           'node',
           'foo',
-          { fizz: 'buzz' },
+          { fizz: 'buzz', name: 'bar' },
         ));
 
         const actions = store.getActions();
 
-        expect(actions[0]).toMatchObject({
-          type: actionTypes.CREATE_VARIABLE,
-          meta: {
-            entity: 'node',
-            type: 'foo',
-            variable: uuid(),
-          },
-          configuration: { fizz: 'buzz' },
-        });
+        expect(actions[0]).toMatchSnapshot();
       });
 
       it('dispatches the CREATE_VARIABLE action with a variable id for ego', () => {
@@ -204,20 +205,12 @@ describe('protocol.codebook', () => {
         store.dispatch(actionCreators.createVariable(
           'ego',
           undefined,
-          { fizz: 'buzz' },
+          { fizz: 'buzz', name: 'bar' },
         ));
 
         const actions = store.getActions();
 
-        expect(actions[0]).toMatchObject({
-          type: actionTypes.CREATE_VARIABLE,
-          meta: {
-            entity: 'ego',
-            type: undefined,
-            variable: uuid(),
-          },
-          configuration: { fizz: 'buzz' },
-        });
+        expect(actions[0]).toMatchSnapshot();
       });
 
       it('throws an error if a variable with the same name already exists', () => {

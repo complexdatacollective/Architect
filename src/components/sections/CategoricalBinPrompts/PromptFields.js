@@ -19,6 +19,7 @@ const PromptFields = ({
   variableOptions,
   handleCreateNewVariable,
   handleDeleteVariable,
+  normalizeKeyDown,
   entity,
   type,
   openNewVariableWindow,
@@ -59,6 +60,7 @@ const PromptFields = ({
           options={categoricalVariableOptions}
           onCreateOption={openNewVariableWindow}
           onDeleteOption={handleDeleteVariable}
+          onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
             <span>

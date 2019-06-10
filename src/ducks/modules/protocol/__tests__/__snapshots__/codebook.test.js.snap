@@ -11,6 +11,36 @@ Object {
 }
 `;
 
+exports[`protocol.codebook async actions createVariable() dispatches the CREATE_VARIABLE action with a variable id for ego 1`] = `
+Object {
+  "configuration": Object {
+    "fizz": "buzz",
+    "name": "bar",
+  },
+  "meta": Object {
+    "entity": "ego",
+    "type": undefined,
+    "variable": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+  },
+  "type": "PROTOCOL/CREATE_VARIABLE",
+}
+`;
+
+exports[`protocol.codebook async actions createVariable() dispatches the CREATE_VARIABLE action with a variable id for node 1`] = `
+Object {
+  "configuration": Object {
+    "fizz": "buzz",
+    "name": "bar",
+  },
+  "meta": Object {
+    "entity": "node",
+    "type": "foo",
+    "variable": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+  },
+  "type": "PROTOCOL/CREATE_VARIABLE",
+}
+`;
+
 exports[`protocol.codebook reducer CREATE_VARIABLE CREATE_VARIABLE for ego entity 1`] = `
 Object {
   "ego": Object {

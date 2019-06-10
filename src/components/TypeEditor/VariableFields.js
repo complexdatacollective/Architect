@@ -8,7 +8,7 @@ import * as ArchitectFields from '../Form/Fields';
 import Validations from './Validations';
 import Options from './Options';
 import { getFieldId } from '../../utils/issues';
-import safeName from './safeName';
+import safeName from '../../utils/safeName';
 import { Row } from '../OrderedList';
 
 const VARIABLE_TYPES = [
