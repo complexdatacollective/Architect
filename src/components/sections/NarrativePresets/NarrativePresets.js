@@ -36,7 +36,7 @@ const NarrativePresets = props => (
   >
     <h2>Narrative Presets</h2>
     <p>
-      Add one or more &quot;presets&quot; below, to ecourage lines of discourse with participants.
+      Add one or more &quot;presets&quot; below, to encourage lines of discourse with participants.
     </p>
   </EditableList>
 );
