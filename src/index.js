@@ -12,14 +12,12 @@ import ClipPaths from './components/ClipPaths';
 import initPreventFileDrop from './utils/initPreventFileDrop';
 import initIPCListeners from './utils/initIPCListeners';
 import initFileOpener from './utils/initFileOpener';
-import resetAppStorage from './other/protocols/utils/resetAppStorage';
 
 import './styles/main.scss';
 
 initIPCListeners();
 initPreventFileDrop();
 initReactFastclick();
-resetAppStorage();
 
 const startApp = () => {
   ReactDOM.render(

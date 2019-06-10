@@ -1,4 +1,5 @@
 import path from 'path';
+import log from 'electron-log';
 import { writeFile } from 'fs-extra';
 import pruneAssets from './utils/pruneAssets';
 
@@ -8,16 +9,27 @@ import pruneAssets from './utils/pruneAssets';
  * @param {string} workingPath - working path in application /tmp/ dir
  * @param {object} protocol - The protocol object.
  */
-const saveProtocol = (workingPath, protocol) => {
-  // save json to temp dir
-  const destinationPath = path.join(workingPath, 'protocol.json');
+const saveProtocol = (workingPath, protocol) =>
+  new Promise((resolve, reject) => {
+    log.debug('saveProtocol()', workingPath);
+    // save json to temp dir
+    const destinationPath = path.join(workingPath, 'protocol.json');
 
-  return writeFile(destinationPath, JSON.stringify(protocol, null, 2))
-    .then(() =>
-      // Now that the protocol is commited to disk we can safely prune unused assets.
-      pruneAssets(workingPath),
-    )
-    .then(() => destinationPath);
-};
+    try {
+      log.debug('  stringify protocol');
+      const protocolString = JSON.stringify(protocol, null, 2);
+
+      log.info(`save protocol to ${destinationPath}`);
+      writeFile(destinationPath, protocolString)
+        .then(() =>
+          // Now that the protocol is commited to disk we can safely prune unused assets.
+          pruneAssets(workingPath),
+        )
+        .then(() => resolve(destinationPath));
+    } catch (e) {
+      log.error(e);
+      reject(e);
+    }
+  });
 
 export default saveProtocol;
