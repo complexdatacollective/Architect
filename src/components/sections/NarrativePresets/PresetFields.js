@@ -7,7 +7,6 @@ import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
-import NewVariableWindow from '../../NewVariableWindow';
 import withPresetProps from './withPresetProps';
 import withNewVariableWindowHandlers, {
   propTypes as newVariableWindowPropTypes,
@@ -17,19 +16,12 @@ import Row from '../Row';
 import { normalizeKeyDown } from '../../enhancers/withCreateVariableHandler';
 
 const PresetFields = ({
-  entity,
-  type,
   layoutVariblesForSubject,
   groupVariablesForSubject,
   edgesForSubject,
   highlightVariablesForSubject,
   handleCreateLayoutVariable,
-  handleCreateGroupVariable,
   handleDeleteVariable,
-  openNewVariableWindow,
-  closeNewVariableWindow,
-  newVariableName,
-  showNewVariableWindow,
 }) => (
   <Section>
     <Row>
@@ -61,14 +53,9 @@ const PresetFields = ({
     <Row>
       <ValidatedField
         name="groupVariable"
-        component={ArchitectFields.CreatableSelect}
+        component={ArchitectFields.Select}
         label="Group variable"
         options={groupVariablesForSubject}
-        onCreateOption={name => openNewVariableWindow(name)}
-        onDeleteOption={handleDeleteVariable}
-        formatCreateLabel={inputValue => (
-          <span>Press enter to create a new boolean variable named &quot;{inputValue}&quot;.</span>
-        )}
       />
     </Row>
     <Row>
@@ -89,18 +76,6 @@ const PresetFields = ({
         options={highlightVariablesForSubject}
       />
     </Row>
-
-    <NewVariableWindow
-      initialValues={{
-        type: 'categorical',
-        name: newVariableName,
-      }}
-      show={showNewVariableWindow}
-      entity={entity}
-      type={type}
-      onComplete={handleCreateGroupVariable}
-      onCancel={closeNewVariableWindow}
-    />
   </Section>
 );
 
@@ -110,7 +85,6 @@ PresetFields.propTypes = {
   edgesForSubject: PropTypes.array,
   highlightVariablesForSubject: PropTypes.array,
   handleCreateLayoutVariable: PropTypes.func.isRequired,
-  handleCreateGroupVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
   ...newVariableWindowPropTypes,
 };
