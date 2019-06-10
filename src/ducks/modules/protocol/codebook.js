@@ -1,9 +1,10 @@
 import uuid from 'uuid';
-import { omit, get, has } from 'lodash';
+import { omit, get, has, isEmpty } from 'lodash';
 import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
 import { getNextCategoryColor } from './utils';
+import safeName from '../../../utils/safeName';
 import { actionCreators as stageActions } from './stages';
 
 const UPDATE_TYPE = 'PROTOCOL/UPDATE_TYPE';
@@ -112,20 +113,31 @@ const createEdgeThunk = configuration =>
 
 const createVariableThunk = (entity, type, configuration) =>
   (dispatch, getState) => {
+    if (!configuration.name) {
+      throw new Error('Cannot create a new variable without a name');
+    }
+
+    const safeConfiguration = {
+      ...configuration,
+      name: safeName(configuration.name),
+    };
+
+    if (isEmpty(safeConfiguration.name)) {
+      throw new Error('Variable name contains no valid characters');
+    }
+
     const variables = getVariablesForSubject(getState(), { entity, type });
     const variableNameExists = Object.values(variables)
-      .some(({ name }) => name === configuration.name);
-
-    // console.log('HI IT ME', { variables, values: Object.values(variables), variableNameExists });
+      .some(({ name }) => name === safeConfiguration.name);
 
     // We can't use same variable name twice.
     if (variableNameExists) {
-      throw new Error(`Variable with name "${configuration.name}" already exists`);
+      throw new Error(`Variable with name "${safeConfiguration.name}" already exists`);
     }
 
     const variable = uuid();
 
-    dispatch(createVariable(entity, type, variable, configuration));
+    dispatch(createVariable(entity, type, variable, safeConfiguration));
 
     return {
       entity,
