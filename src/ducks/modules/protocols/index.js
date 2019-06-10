@@ -7,6 +7,7 @@ import { actionCreators as importActionCreators } from './import';
 import { actionCreators as preflightActions } from './preflight';
 import { actionCreators as saveActionCreators } from './save';
 import { actionCreators as exportActionCreators } from './export';
+import { actionCreators as previewActions } from '../preview';
 import { saveErrorDialog, importErrorDialog } from './dialogs';
 import {
   actionCreators as registerActionCreators,
@@ -61,7 +62,9 @@ const saveAndExportThunk = () =>
  * 2. Load - redirect to /edit/ which should trigger load.
  */
 const importAndLoadThunk = filePath =>
-  dispatch =>
+  (dispatch) => {
+    dispatch(previewActions.closePreview());
+    // TODO: Reset `screens` here.
     dispatch(importActionCreators.importProtocol(filePath))
       .then(({ id }) => {
         history.push(`/edit/${id}/`);
@@ -71,6 +74,7 @@ const importAndLoadThunk = filePath =>
         dispatch(importAndLoadError(e));
         dispatch(importErrorDialog(e, filePath));
       });
+  };
 
 /**
  * 1. Create - Create a new protocol from template
