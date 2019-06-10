@@ -4,6 +4,11 @@ exports[`protocols importAndLoadProtocol() invalid protocol dispatches an error 
 Array [
   Array [
     Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
       "filePath": "/dev/null/mock/path/invalid",
       "type": "PROTOCOLS/IMPORT",
     },
@@ -41,6 +46,11 @@ Array [
 
 exports[`protocols importAndLoadProtocol() triggers import action and load redirect 1`] = `
 Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
   Array [
     Object {
       "filePath": "/dev/null/mock/path",

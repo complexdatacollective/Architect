@@ -31,6 +31,11 @@ const stageEditorState = connect(mapStateToProps, mapDispatchToProps);
 const stageEditorHanders = withHandlers({
   handlePreview: ({ previewStage }) =>
     () => previewStage(),
+  onComplete: ({ onComplete, closePreview }) =>
+    (...args) => {
+      closePreview();
+      onComplete(...args);
+    },
 });
 
 const stageEditorProps = withProps(({
