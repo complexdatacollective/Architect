@@ -65,7 +65,7 @@ const importAndLoadThunk = filePath =>
   (dispatch) => {
     dispatch(previewActions.closePreview());
     // TODO: Reset `screens` here.
-    dispatch(importActionCreators.importProtocol(filePath))
+    return dispatch(importActionCreators.importProtocol(filePath))
       .then(({ id }) => {
         history.push(`/edit/${id}/`);
         return id;

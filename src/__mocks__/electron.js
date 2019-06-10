@@ -16,12 +16,18 @@ const remote = {
   },
 };
 
+const ipcRenderer = {
+  send: jest.fn(() => {}),
+};
+
 module.exports = {
   dialog,
   remote,
+  ipcRenderer,
 };
 
 export default {
   dialog,
   remote,
+  ipcRenderer,
 };
