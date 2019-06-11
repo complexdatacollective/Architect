@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '../../ui/components/Button';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
-import Card from './ProtocolCard';
+import Screen from '../Screen/Screen';
 import AssetBrowser from '../AssetBrowser';
 
 const AssetBrowserScreen = ({
@@ -22,7 +22,7 @@ const AssetBrowserScreen = ({
   ];
 
   return (
-    <Card
+    <Screen
       show={show}
       buttons={buttons}
       transitionState={transitionState}
@@ -45,7 +45,7 @@ const AssetBrowserScreen = ({
           </div>
         </div>
       </Guided>
-    </Card>
+    </Screen>
   );
 };
 

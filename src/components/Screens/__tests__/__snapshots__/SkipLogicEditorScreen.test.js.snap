@@ -3,7 +3,7 @@
 exports[`<EditForm /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <withProps(Connect(EditScreen)) />,
+  Symbol(enzyme.__unrendered__): <withProps(Connect(EditorScreen)) />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],

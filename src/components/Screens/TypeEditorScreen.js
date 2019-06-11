@@ -1,6 +1,6 @@
 import { compose, withProps } from 'recompose';
 import TypeEditor, { formName } from '../TypeEditor';
-import EditScreen from './EditScreen';
+import EditorScreen from '../Screen/EditorScreen';
 
 const typeEditorProps = withProps({
   editor: TypeEditor,
@@ -9,6 +9,6 @@ const typeEditorProps = withProps({
 
 const FormEditorScreen = compose(
   typeEditorProps,
-)(EditScreen);
+)(EditorScreen);
 
 export default FormEditorScreen;

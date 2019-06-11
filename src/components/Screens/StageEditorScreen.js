@@ -7,7 +7,7 @@ import {
 } from 'redux-form';
 import { Button } from '../../ui/components';
 import { actionCreators as previewActions } from '../../ducks/modules/preview';
-import EditScreen from './EditScreen';
+import EditorScreen from '../Screen/EditorScreen';
 import StageEditor, { formName } from '../StageEditor';
 
 const mapStateToProps = state => ({
@@ -59,6 +59,6 @@ const StageEditorScreen = compose(
   stageEditorState,
   stageEditorHanders,
   stageEditorProps,
-)(EditScreen);
+)(EditorScreen);
 
 export default StageEditorScreen;

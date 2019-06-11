@@ -19,6 +19,7 @@ const stageEditorHanders = withHandlers({
       } else {
         createStage(normalizedStage, insertAtIndex);
       }
+
       onComplete();
     },
 });

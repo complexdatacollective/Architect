@@ -1,12 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { submit, isDirty } from 'redux-form';
 import { Button } from '../../ui/components';
 import { actionCreators as timemachineActions } from '../../ducks/middleware/timemachine';
-import Card from './ProtocolCard';
+import Screen from './Screen';
 
-class EditScreen extends PureComponent {
+class EditorScreen extends Component {
+  handleCancel = () => {
+    this.props.jump(this.props.locus);
+    this.props.onComplete();
+  };
+
   buttons() {
     const saveButton = (
       <Button
@@ -18,13 +23,18 @@ class EditScreen extends PureComponent {
       </Button>
     );
 
-    return this.props.hasUnsavedChanges ? [saveButton] : [];
-  }
+    const cancelButton = (
+      <Button
+        key="cancel"
+        onClick={this.handleCancel}
+        iconPosition="right"
+      >
+        Cancel
+      </Button>
+    );
 
-  handleCancel = () => {
-    this.props.jump(this.props.locus);
-    this.props.onComplete();
-  };
+    return this.props.hasUnsavedChanges ? [saveButton, cancelButton] : [cancelButton];
+  }
 
   render() {
     const {
@@ -36,20 +46,21 @@ class EditScreen extends PureComponent {
     } = this.props;
 
     return (
-      <Card
+      <Screen
         buttons={this.buttons()}
         secondaryButtons={secondaryButtons}
         show={show}
         transitionState={transitionState}
-        onCancel={this.handleCancel}
       >
-        <Editor {...rest} />
-      </Card>
+        <Editor
+          {...rest}
+        />
+      </Screen>
     );
   }
 }
 
-EditScreen.defaultProps = {
+EditorScreen.defaultProps = {
   secondaryButtons: null,
 };
 
@@ -62,6 +73,6 @@ const mapDispatchToProps = (dispatch, { form }) => ({
   jump: bindActionCreators(timemachineActions.jump, dispatch),
 });
 
-export { EditScreen };
+export { EditorScreen };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EditorScreen);

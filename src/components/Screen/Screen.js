@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import ControlBar from './ControlBar';
-import { CardErrorBoundary } from './Errors/';
-import window from '../ui/components/window';
+import ControlBar from '../ControlBar';
+import { ScreenErrorBoundary } from '../Errors';
+import window from '../../ui/components/window';
 
-class Card extends PureComponent {
+class Screen extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     transitionState: PropTypes.string,
     buttons: PropTypes.arrayOf(PropTypes.node),
-    secondaryButtons: PropTypes.node,
+    secondaryButtons: PropTypes.arrayOf(PropTypes.node),
     type: PropTypes.string,
     show: PropTypes.bool,
     onAcknowledgeError: PropTypes.func,
@@ -22,17 +22,16 @@ class Card extends PureComponent {
     children: null,
     buttons: [],
     show: true,
-    secondaryButtons: null,
-    onAcknowledgeError: null,
+    secondaryButtons: [],
+    onAcknowledgeError: () => {},
   }
-
-  handleAcknowledgeError = () => this.props.onAcknowledgeError();
 
   render() {
     const {
       buttons,
       secondaryButtons,
       transitionState,
+      onAcknowledgeError,
       children,
       type,
       show,
@@ -45,9 +44,9 @@ class Card extends PureComponent {
     return (
       <div className={classes}>
         <div className="arch-card__content">
-          <CardErrorBoundary onAcknowledge={this.handleAcknowledgeError}>
+          <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
             { show && children }
-          </CardErrorBoundary>
+          </ScreenErrorBoundary>
         </div>
         <ControlBar
           show={isEntering}
@@ -61,5 +60,5 @@ class Card extends PureComponent {
   }
 }
 
-export { Card };
-export default window(Card);
+export { Screen };
+export default window(Screen);
