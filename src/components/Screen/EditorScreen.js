@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { submit, isDirty } from 'redux-form';
+import { submit, isDirty, startSubmit, isSubmitting } from 'redux-form';
 import { Button } from '../../ui/components';
 import { actionCreators as timemachineActions } from '../../ducks/middleware/timemachine';
 import Screen from './Screen';
 
 class EditorScreen extends Component {
+  handleSubmit = () => {
+    if (this.props.submitting) { return; }
+
+    this.props.submitForm();
+  }
+
   handleCancel = () => {
     this.props.jump(this.props.locus);
     this.props.onComplete();
@@ -16,8 +22,9 @@ class EditorScreen extends Component {
     const saveButton = (
       <Button
         key="save"
-        onClick={this.props.submitForm}
+        onClick={this.handleSubmit}
         iconPosition="right"
+        disabled={this.props.submitting}
       >
         Continue
       </Button>
@@ -66,10 +73,14 @@ EditorScreen.defaultProps = {
 
 const mapStateToProps = (state, { form }) => ({
   hasUnsavedChanges: isDirty(form)(state),
+  submitting: isSubmitting(form)(state),
 });
 
 const mapDispatchToProps = (dispatch, { form }) => ({
-  submitForm: () => dispatch(submit(form)),
+  submitForm: () => {
+    dispatch(startSubmit(form));
+    dispatch(submit(form));
+  },
   jump: bindActionCreators(timemachineActions.jump, dispatch),
 });
 
