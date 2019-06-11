@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { submit, isDirty, startSubmit, isSubmitting } from 'redux-form';
 import { Button } from '../../ui/components';
 import { actionCreators as timemachineActions } from '../../ducks/middleware/timemachine';
+import { actionCreators as dialogActions } from '../../ducks/modules/dialogs';
 import Screen from './Screen';
 
 class EditorScreen extends Component {
@@ -13,9 +14,24 @@ class EditorScreen extends Component {
     this.props.submitForm();
   }
 
-  handleCancel = () => {
+  cancel() {
     this.props.jump(this.props.locus);
     this.props.onComplete();
+  }
+
+  handleCancel = () => {
+    if (!this.props.hasUnsavedChanges) {
+      this.cancel();
+      return;
+    }
+
+    this.props.openDialog({
+      type: 'Warning',
+      title: 'Unsaved changes will be lost',
+      message: 'Unsaved changes will be lost, do you want to continue?',
+      confirmLabel: 'OK',
+      onConfirm: () => this.cancel(),
+    });
   };
 
   buttons() {
@@ -34,6 +50,7 @@ class EditorScreen extends Component {
       <Button
         key="cancel"
         onClick={this.handleCancel}
+        color="platinum"
         iconPosition="right"
       >
         Cancel
@@ -82,6 +99,7 @@ const mapDispatchToProps = (dispatch, { form }) => ({
     dispatch(submit(form));
   },
   jump: bindActionCreators(timemachineActions.jump, dispatch),
+  openDialog: bindActionCreators(dialogActions.openDialog, dispatch),
 });
 
 export { EditorScreen };
