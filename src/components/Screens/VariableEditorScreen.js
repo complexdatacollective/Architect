@@ -1,5 +1,5 @@
 import { compose, withProps } from 'recompose';
-import EditScreen from './EditScreen';
+import EditorScreen from '../Screen/EditorScreen';
 import VariableEditor, { formName } from '../VariableEditor';
 
 const VariableEditorScreen = compose(
@@ -7,6 +7,6 @@ const VariableEditorScreen = compose(
     editor: VariableEditor,
     form: formName,
   })),
-)(EditScreen);
+)(EditorScreen);
 
 export default VariableEditorScreen;

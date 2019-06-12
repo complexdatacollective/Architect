@@ -1,6 +1,6 @@
 import { compose, withProps } from 'recompose';
 import SkipLogicEditor, { formName } from '../SkipLogicEditor';
-import EditScreen from './EditScreen';
+import EditorScreen from '../Screen/EditorScreen';
 
 const skipLogicEditorProps = withProps({
   editor: SkipLogicEditor,
@@ -9,6 +9,6 @@ const skipLogicEditorProps = withProps({
 
 const SkipLogicEditorScreen = compose(
   skipLogicEditorProps,
-)(EditScreen);
+)(EditorScreen);
 
 export default SkipLogicEditorScreen;

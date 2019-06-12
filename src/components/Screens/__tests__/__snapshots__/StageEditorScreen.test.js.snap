@@ -3,7 +3,7 @@
 exports[`<StageEditorScreen /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Connect(withHandlers(withProps(Connect(EditScreen))))
+  Symbol(enzyme.__unrendered__): <Connect(withHandlers(withProps(Connect(EditorScreen))))
     show={true}
     store={
       Object {

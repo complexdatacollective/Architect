@@ -8,7 +8,7 @@ import { Wipe } from '../Transitions';
 import { Node, Button, Icon } from '../../ui/components';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
-import Card from './ProtocolCard';
+import Screen from '../Screen/Screen';
 import { getProtocol } from '../../selectors/protocol';
 import { getNodeIndex, getEdgeIndex, utils } from '../../selectors/indexes';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
@@ -146,7 +146,7 @@ class Codebook extends Component {
     } = this.props;
 
     return (
-      <Card
+      <Screen
         show={show}
         onCancel={this.handleCancel}
         cancelLabel="Continue"
@@ -179,7 +179,7 @@ class Codebook extends Component {
             </div>
           </div>
         </Guided>
-      </Card>
+      </Screen>
     );
   }
 }

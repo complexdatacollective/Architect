@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from './ProtocolCard';
+import Screen from '../Screen/Screen';
 import NewStage from '../NewStage';
 
 const NewStageScreen = ({
@@ -9,13 +9,13 @@ const NewStageScreen = ({
   onComplete,
   ...rest
 }) => (
-  <Card
+  <Screen
     show={show}
     transitionState={transitionState}
     onCancel={onComplete}
   >
     <NewStage {...rest} />
-  </Card>
+  </Screen>
 );
 
 NewStageScreen.propTypes = {
