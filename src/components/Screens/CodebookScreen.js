@@ -143,13 +143,23 @@ class Codebook extends Component {
     const {
       show,
       transitionState,
+      onComplete,
     } = this.props;
+
+    const buttons = [
+      <Button
+        key="done"
+        onClick={onComplete}
+        iconPosition="right"
+      >
+        Continue
+      </Button>,
+    ];
 
     return (
       <Screen
         show={show}
-        onCancel={this.handleCancel}
-        cancelLabel="Continue"
+        buttons={buttons}
         transitionState={transitionState}
         onAcknowledgeError={this.handleCancel}
       >

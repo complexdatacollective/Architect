@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '../../ui/components/Button';
 import Screen from '../Screen/Screen';
 import NewStage from '../NewStage';
 
@@ -8,15 +9,28 @@ const NewStageScreen = ({
   transitionState,
   onComplete,
   ...rest
-}) => (
-  <Screen
-    show={show}
-    transitionState={transitionState}
-    onCancel={onComplete}
-  >
-    <NewStage {...rest} />
-  </Screen>
-);
+}) => {
+  const buttons = [
+    <Button
+      key="done"
+      onClick={onComplete}
+      iconPosition="right"
+      color="platinum"
+    >
+      Cancel
+    </Button>,
+  ];
+
+  return (
+    <Screen
+      show={show}
+      transitionState={transitionState}
+      buttons={buttons}
+    >
+      <NewStage {...rest} />
+    </Screen>
+  );
+};
 
 NewStageScreen.propTypes = {
   show: PropTypes.bool,
