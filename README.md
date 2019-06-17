@@ -37,6 +37,16 @@ This repository assumes that `npm` is installed. If you don't have it installed,
 |`dist:all`|Build and publish all platforms|
 |`update-submodules`|Update git submodules|
 
+### Bump version
+
+Supply a version mask with x for unchanged values:
+
+`npm run [x.x.1] [codename]`
+
+e.g.
+
+`npm run x.1.0 NameOfVersion`
+
 ### Development workflow in Electron
 
 There are two additional tasks to enable development within an electron app natively:
