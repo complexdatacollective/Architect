@@ -13,6 +13,7 @@ const codenames = {
   '4.0.0-alpha.12': 'No Coffee',
   '4.0.0-beta.1': '',
   '4.0.0': 'Beta 1',
+  '4.0.1': 'Beta 1',
 };
 
 const appVersion = remote.app.getVersion();
