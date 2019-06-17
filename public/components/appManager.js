@@ -108,7 +108,7 @@ class AppManager {
   constructor() {
     this.openFileWhenReady = null;
     this.activeProtocol = null;
-    this.updater = new Updater();
+    this.updater = Updater();
 
     ipcMain.on('READY', () => {
       log.info('receive: READY');
@@ -148,7 +148,7 @@ class AppManager {
     registerAssetProtocol();
     this.initializeListeners();
     this.updateMenu();
-    this.updater.checkForUpdates(false);
+    this.updater.checkForUpdates(true);
   }
 
   initializeListeners() {
