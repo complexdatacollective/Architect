@@ -212,7 +212,9 @@
             "src/**/*.{js,jsx}",
             "!src/ui/**",
             "!src/protocol-validation/**",
-            "!network-canvas/**"
+            "!network-canvas/**",
+            "!app/**",
+            "!electron-dev/**"
         ],
         "setupFiles": [
             "jest-date-mock",
@@ -225,11 +227,15 @@
         "testPathIgnorePatterns": [
             "<rootDir>[/\\\\](www|docs|node_modules|scripts)[/\\\\]",
             "<rootDir>[/\\\\](network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](electron-dev)[/\\\\]",
+            "<rootDir>[/\\\\](app)[/\\\\]",
             "<rootDir>[/\\\\](src/ui)[/\\\\]",
             "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]"
         ],
         "modulePathIgnorePatterns": [
             "<rootDir>[/\\\\](network-canvas)[/\\\\]",
+            "<rootDir>[/\\\\](electron-dev)[/\\\\]",
+            "<rootDir>[/\\\\](app)[/\\\\]",
             "<rootDir>[/\\\\](src/ui)[/\\\\]",
             "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]"
         ],
