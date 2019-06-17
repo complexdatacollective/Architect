@@ -8,7 +8,7 @@ export const validationErrorDialog = (e) => {
       <p>
         The protocol format seems to be invalid. Please help us to troubleshoot this issue
         by sharing your protocol file (or the steps to reproduce this problem) with us by
-        emailing <code>feedback@networkcanvas.com</code>.
+        emailing <code>info@networkcanvas.com</code>.
       </p>
       <p>
         You may still save and edit the protocol but it <strong>will not be compatable with
