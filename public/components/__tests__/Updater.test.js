@@ -29,9 +29,4 @@ describe('updater', () => {
     updater.simulate('update-not-available', {});
     expect(dialog.showMessageBox).toHaveBeenCalled();
   });
-
-  it('shows errors to the user', () => {
-    updater.simulate('error', new Error());
-    expect(dialog.showMessageBox).toHaveBeenCalled();
-  });
 });
