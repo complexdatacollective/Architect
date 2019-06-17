@@ -74,13 +74,11 @@ const fieldsHandlers = withHandlers({
   handleChangeVariable: ({ existingVariables, changeField, form }) =>
     (_, value) => {
       // Either load settings from codebook, or reset
-      const name = get(existingVariables, [value, 'name'], null);
       const options = get(existingVariables, [value, 'options'], null);
       const validation = get(existingVariables, [value, 'validation'], {});
       const component = get(existingVariables, [value, 'component'], null);
 
       // component?
-      changeField(form, 'name', name);
       changeField(form, 'component', component);
       changeField(form, 'options', options);
       changeField(form, 'validation', validation);
