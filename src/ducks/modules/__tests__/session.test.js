@@ -6,7 +6,11 @@ import thunk from 'redux-thunk';
 import reducer, { actionCreators } from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
-import { actionCreators as codebookActions, testing as codebookTesting } from '../protocol/codebook';
+import {
+  actionCreators as codebookActions,
+  testing as codebookTesting,
+} from '../protocol/codebook';
+import { testing as assetManifestTesting } from '../protocol/assetManifest';
 import { rootEpic } from '../../modules/root';
 
 const epics = createEpicMiddleware(rootEpic);
@@ -77,6 +81,18 @@ describe('session reducer', () => {
 
     it('tracks update variable as change', () => {
       itTracksActionAsChange(codebookTesting.updateVariable());
+    });
+
+    it('tracks delete variable as change', () => {
+      itTracksActionAsChange(codebookTesting.deleteVariable());
+    });
+
+    it('tracks new asset as change', () => {
+      itTracksActionAsChange(assetManifestTesting.importAssetComplete());
+    });
+
+    it('tracks delete asset as change', () => {
+      itTracksActionAsChange(assetManifestTesting.deleteAsset());
     });
   });
 });
