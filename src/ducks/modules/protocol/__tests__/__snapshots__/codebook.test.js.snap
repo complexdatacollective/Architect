@@ -16,6 +16,7 @@ Object {
   "configuration": Object {
     "fizz": "buzz",
     "name": "bar",
+    "type": "text",
   },
   "meta": Object {
     "entity": "ego",
@@ -31,6 +32,7 @@ Object {
   "configuration": Object {
     "fizz": "buzz",
     "name": "bar",
+    "type": "text",
   },
   "meta": Object {
     "entity": "node",

@@ -117,6 +117,10 @@ const createVariableThunk = (entity, type, configuration) =>
       throw new Error('Cannot create a new variable without a name');
     }
 
+    if (!configuration.type) {
+      throw new Error('Cannot create a new variable without a type');
+    }
+
     const safeConfiguration = {
       ...configuration,
       name: safeName(configuration.name),
