@@ -185,13 +185,26 @@ describe('protocol.codebook', () => {
         }).toThrow(new Error('Cannot create a new variable without a name'));
       });
 
+      it('It will not create a variable with no type', () => {
+        const createAction = actionCreators.createVariable(
+          'node',
+          'bar',
+          { foo: 'bar', name: 'bazz' },
+        );
+        const store = mockStore(testState);
+
+        expect(() => {
+          store.dispatch(createAction);
+        }).toThrow(new Error('Cannot create a new variable without a type'));
+      });
+
       it('dispatches the CREATE_VARIABLE action with a variable id for node', () => {
         const store = mockStore(testState);
 
         store.dispatch(actionCreators.createVariable(
           'node',
           'foo',
-          { fizz: 'buzz', name: 'bar' },
+          { fizz: 'buzz', name: 'bar', type: 'text' },
         ));
 
         const actions = store.getActions();
@@ -205,7 +218,7 @@ describe('protocol.codebook', () => {
         store.dispatch(actionCreators.createVariable(
           'ego',
           undefined,
-          { fizz: 'buzz', name: 'bar' },
+          { fizz: 'buzz', name: 'bar', type: 'text' },
         ));
 
         const actions = store.getActions();
@@ -214,7 +227,7 @@ describe('protocol.codebook', () => {
       });
 
       it('throws an error if a variable with the same name already exists', () => {
-        const createAction = actionCreators.createVariable('node', 'bar', { name: 'ALPHA' });
+        const createAction = actionCreators.createVariable('node', 'bar', { name: 'ALPHA', type: 'text' });
         const store = mockStore(testState);
 
         expect(() => {

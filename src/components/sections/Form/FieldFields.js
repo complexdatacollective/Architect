@@ -13,6 +13,7 @@ import { isVariableTypeWithOptions } from '../../Form/inputOptions';
 import Row from '../Row';
 import Section from '../Section';
 import withFieldsHandlers from './withFieldsHandlers';
+import { normalizeKeyDown } from '../../enhancers/withCreateVariableHandler';
 
 const PromptFields = ({
   form,
@@ -20,10 +21,9 @@ const PromptFields = ({
   variableType,
   variableOptions,
   componentOptions,
-  handleCreateVariable,
+  handleNewVariable,
   handleChangeComponent,
   handleChangeVariable,
-  normalizeKeyDown,
 }) => (
   <Section>
     <Row contentId="guidance.section.form.field.name">
@@ -41,7 +41,7 @@ const PromptFields = ({
         name="variable"
         component={CreatableSelect}
         options={variableOptions} // from variables
-        onCreateOption={handleCreateVariable} // reset later fields, create variable of no type?
+        onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
         onChange={handleChangeVariable} // read/reset component options validation
         onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
@@ -114,9 +114,8 @@ PromptFields.propTypes = {
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
   componentOptions: PropTypes.array,
-  handleCreateVariable: PropTypes.func.isRequired,
+  handleNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
-  normalizeKeyDown: PropTypes.func.isRequired,
 };
 
 PromptFields.defaultProps = {

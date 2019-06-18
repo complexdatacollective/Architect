@@ -1,19 +1,22 @@
 import { connect } from 'react-redux';
-import { reduce, get } from 'lodash';
+import { reduce, get, has } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
-import { compose, withHandlers } from 'recompose';
+import {
+  compose,
+  withHandlers,
+} from 'recompose';
 import { getVariablesForSubject } from '../../../selectors/codebook';
 import inputOptions, {
   getTypeForComponent,
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
 } from '../../Form/inputOptions';
-import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
   const variable = formSelector(state, 'variable');
   const component = formSelector(state, 'component');
+  const createNewVariable = formSelector(state, '_createNewVariable');
 
   const existingVariables = getVariablesForSubject(state, { entity, type });
 
@@ -32,6 +35,10 @@ const mapStateToProps = (state, { form, entity, type }) => {
     [],
   );
 
+  const variableOptionsWithNewVariable = createNewVariable ?
+    [...variableOptions, { label: createNewVariable, value: createNewVariable }] :
+    variableOptions;
+
   // 1. If type defined use that (existing variable)
   // 2. Othewise derive it from component (new variable)
   const variableType = get(
@@ -49,7 +56,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
   return {
     variable,
     variableType,
-    variableOptions,
+    variableOptions: variableOptionsWithNewVariable,
     componentOptions,
     existingVariables,
   };
@@ -78,10 +85,18 @@ const fieldsHandlers = withHandlers({
       const validation = get(existingVariables, [value, 'validation'], {});
       const component = get(existingVariables, [value, 'component'], null);
 
-      // component?
+      // If value was set to something from codebook, reset this flag
+      if (has(existingVariables, value)) {
+        changeField(form, '_createNewVariable', null);
+      }
       changeField(form, 'component', component);
       changeField(form, 'options', options);
       changeField(form, 'validation', validation);
+    },
+  handleNewVariable: ({ changeField, form }) =>
+    (value) => {
+      changeField(form, '_createNewVariable', value);
+      return value;
     },
 });
 
@@ -91,7 +106,6 @@ export {
 };
 
 export default compose(
-  withCreateVariableHandler,
   fieldsState,
   fieldsHandlers,
 );
