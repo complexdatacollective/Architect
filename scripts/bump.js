@@ -40,8 +40,10 @@ updatePackageVersion('./package.json', newVersion);
 updatePackageVersion('./package-lock.json', newVersion);
 updatePackageVersion('./public/package.json', newVersion);
 
-const codenameObj = fs.readJsonSync('./src/codenames.json');
-fs.writeJsonSync('./src/codenames.json', {
-  ...codenameObj,
-  [newVersion]: userCodename,
-}, { spaces: 2 });
+if (userCodename.length > 0) {
+  const codenameObj = fs.readJsonSync('./src/codenames.json');
+  fs.writeJsonSync('./src/codenames.json', {
+    ...codenameObj,
+    [newVersion]: userCodename,
+  }, { spaces: 2 });
+}
