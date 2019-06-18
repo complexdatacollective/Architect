@@ -7,7 +7,8 @@ $new-stage-categories: [name-generators name-interpreters sociograms utilities];
   --color-utilities: var(--ord-color-seq-5);
 
   width: 100%;
-  // overflow-y: auto;
+  overflow-y: auto;
+  @include no-scrollbars;
 
   &__navigation {
     position: sticky;
