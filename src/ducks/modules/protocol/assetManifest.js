@@ -106,7 +106,13 @@ const actionTypes = {
   DELETE_ASSET,
 };
 
+const testing = {
+  importAssetComplete,
+  deleteAsset,
+};
+
 export {
   actionCreators,
   actionTypes,
+  testing,
 };

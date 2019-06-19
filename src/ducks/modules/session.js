@@ -2,6 +2,7 @@ import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as codebookActionTypes } from './protocol/codebook';
+import { actionTypes as assetManifestTypes } from './protocol/assetManifest';
 import { actionTypes as protocolActionTypes } from './protocol';
 import { actionTypes as exportProtocolActionTypes } from './protocols/export';
 import { actionTypes as loadProtocolActionTypes } from './protocols/load';
@@ -18,7 +19,10 @@ const savableChanges = [
   codebookActionTypes.DELETE_TYPE,
   codebookActionTypes.CREATE_VARIABLE,
   codebookActionTypes.UPDATE_VARIABLE,
+  codebookActionTypes.DELETE_VARIABLE,
   protocolActionTypes.UPDATE_OPTIONS,
+  assetManifestTypes.IMPORT_ASSET_COMPLETE,
+  assetManifestTypes.DELETE_ASSET,
 ];
 
 const RESET_SESSION = 'SESSION/RESET';
