@@ -1,4 +1,5 @@
 import {
+  compact,
   flatMap,
   isPlainObject,
 } from 'lodash';
@@ -34,20 +35,27 @@ import scrollTo from './scrollTo';
  * // ]"
  */
 const flattenIssues = (issues, path = '') =>
-  flatMap(
-    issues,
-    (issue, field) => {
-      // field array
-      if (Array.isArray(issue)) {
-        return flatMap(issue, (item, index) => flattenIssues(item, `${path}${field}[${index}].`));
-      }
-      // nested field
-      if (isPlainObject(issue)) {
-        return flattenIssues(issue, `${path}${field}.`);
-      }
-      // we've found the issue node!
-      return { issue, field: `${path}${field}` };
-    },
+  compact(
+    flatMap(
+      issues,
+      (issue, field) => {
+        // field array
+        if (Array.isArray(issue)) {
+          return flatMap(issue, (item, index) => flattenIssues(item, `${path}${field}[${index}].`));
+        }
+        // nested field
+        if (isPlainObject(issue)) {
+          return flattenIssues(issue, `${path}${field}.`);
+        }
+
+        if (issue === undefined) {
+          return null;
+        }
+
+        // we've found the issue node!
+        return { issue, field: `${path}${field}` };
+      },
+    ),
   );
 
 const getFieldId = (field) => {

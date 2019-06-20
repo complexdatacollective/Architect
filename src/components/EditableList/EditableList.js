@@ -6,6 +6,7 @@ import {
 } from 'recompose';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
+import { startCase } from 'lodash';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import OrderedList from '../OrderedList';
 import { Button } from '../../ui/';
@@ -64,7 +65,7 @@ class EditableList extends PureComponent {
           flipKey={isEditing}
           portalKey="editable-list"
         >
-          <div id={getFieldId(`${fieldName}._error`)} data-name={fieldName} />
+          <div id={getFieldId(`${fieldName}._error`)} data-name={startCase(fieldName)} />
           {children}
           <div className="editable-list">
             <div className="editable-list__items">
