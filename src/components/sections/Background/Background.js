@@ -4,6 +4,7 @@ import {
 } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { getFieldId } from '../../../utils/issues';
 import * as Fields from '../../../ui/components/Fields';
 import DetachedField from '../../DetachedField';
 import ValidatedField from '../../Form/ValidatedField';
@@ -49,6 +50,7 @@ class Background extends PureComponent {
         { (!useImage) &&
           <React.Fragment>
             <Row>
+              <div id={getFieldId('background.concentricCircles')} data-name="Background &gt; Concentric Circles" />
               <ValidatedField
                 name="background.concentricCircles"
                 component={Fields.Number}
