@@ -15,7 +15,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - #{unit(8)});
     overflow: hidden;
     display: flex;
     flex-direction: column;

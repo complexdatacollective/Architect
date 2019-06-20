@@ -166,25 +166,27 @@ class Codebook extends Component {
         <Guided>
           <div className="editor variable-registry">
             <div className="editor__window">
-              <div className="editor__content">
-                <h1 className="editor__heading">Codebook</h1>
-                <p>
-                  Below you can find an overview of the node and edge types that you have
-                  defined while creating your interview. Entities that are unused may be deleted.
-                </p>
-                <Guidance contentId="guidance.registry.nodes" className="editor__section">
-                  <h2>Node Types</h2>
-                  <div className="editor__subsection">
-                    {this.renderNodes()}
-                  </div>
-                </Guidance>
+              <div className="editor__container">
+                <div className="editor__content">
+                  <h1 className="editor__heading">Codebook</h1>
+                  <p>
+                    Below you can find an overview of the node and edge types that you have
+                    defined while creating your interview. Entities that are unused may be deleted.
+                  </p>
+                  <Guidance contentId="guidance.registry.nodes" className="editor__section">
+                    <h2>Node Types</h2>
+                    <div className="editor__subsection">
+                      {this.renderNodes()}
+                    </div>
+                  </Guidance>
 
-                <Guidance contentId="guidance.registry.edges" className="editor__section">
-                  <h2>Edge Types</h2>
-                  <div className="editor__subsection">
-                    {this.renderEdges()}
-                  </div>
-                </Guidance>
+                  <Guidance contentId="guidance.registry.edges" className="editor__section">
+                    <h2>Edge Types</h2>
+                    <div className="editor__subsection">
+                      {this.renderEdges()}
+                    </div>
+                  </Guidance>
+                </div>
               </div>
             </div>
           </div>

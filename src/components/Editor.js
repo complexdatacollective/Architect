@@ -69,31 +69,32 @@ const Editor = ({
     <Guided form={form}>
       <div className="editor" ref={setWindowRoot}>
         <div className="editor__window">
-          <div className="editor__content">
-            <Form onSubmit={handleSubmit}>
-              { title &&
-                <React.Fragment>
-                  <h1 className="editor__heading">{title}</h1>
-                  <div className="code-button">
-                    <small>(<a onClick={toggleCodeView} alt="show the code view for this interface">&lt;/&gt;</a>)</small>
-                  </div>
-                </React.Fragment>
+          <div className="editor__container">
+            <div className="editor__content">
+              <Form onSubmit={handleSubmit}>
+                { title &&
+                  <React.Fragment>
+                    <h1 className="editor__heading">{title}</h1>
+                    <div className="code-button">
+                      <small>(<a onClick={toggleCodeView} alt="show the code view for this interface">&lt;/&gt;</a>)</small>
+                    </div>
+                  </React.Fragment>
 
-              }
-              { typeof children === 'function' &&
-                children({ form, toggleCodeView, ...rest })
-              }
-              { children && typeof children !== 'function' && children }
-              { !children &&
-                <Component form={form} {...rest} />
-              }
-            </Form>
-            <div className="editor__spacer" />
+                }
+                { typeof children === 'function' &&
+                  children({ form, toggleCodeView, ...rest })
+                }
+                { children && typeof children !== 'function' && children }
+                { !children &&
+                  <Component form={form} {...rest} />
+                }
+              </Form>
+            </div>
+            <Issues
+              issues={issues}
+              show={submitFailed}
+            />
           </div>
-          <Issues
-            issues={issues}
-            show={submitFailed}
-          />
         </div>
       </div>
     </Guided>
