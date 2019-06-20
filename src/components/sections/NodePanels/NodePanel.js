@@ -13,7 +13,7 @@ const FilterField = withFieldConnector(withStoreConnector(Filter));
 const NodePanel = ({ fieldId, ...rest }) => (
   <Item {...rest}>
     <Row>
-      <h3>Panel title</h3>
+      <h3 id={getFieldId(`${fieldId}.title`)}>Panel title</h3>
       <p>The panel title will be shown above the list of nodes within the panel.</p>
       <ValidatedField
         name={`${fieldId}.title`}
