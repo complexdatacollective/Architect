@@ -14,6 +14,11 @@ const Narrative = {
     NarrativePresets,
     NarrativeBehaviours,
   ],
+  template: {
+    behaviours: {
+      allowRepositioning: true,
+    },
+  },
 };
 
 export default Narrative;
