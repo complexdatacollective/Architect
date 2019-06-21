@@ -7,6 +7,7 @@ import uuid from 'uuid';
 import { has } from 'lodash';
 import { Button } from '../../../ui/';
 import OrderedList from '../../OrderedList';
+import { getFieldId } from '../../../utils/issues';
 import Section from '../Section';
 import NodePanel from './NodePanel';
 
@@ -16,7 +17,7 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
   return (
     <Section contentId="guidance.editor.node_panels" {...rest}>
       <div className="stage-editor-section-content-items">
-        <h2>Side Panels</h2>
+        <h2 id={getFieldId('panels')}>Side Panels</h2>
         <p>Use this section to configure up to two side panels on this name generator.</p>
         <FieldArray
           name="panels"

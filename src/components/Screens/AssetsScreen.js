@@ -31,16 +31,18 @@ const AssetBrowserScreen = ({
       <Guided>
         <div className="editor variable-registry">
           <div className="editor__window">
-            <div className="editor__content">
-              <h1 className="editor__heading">Assets</h1>
-              <p>
-                Welcome to the asset management screen. Here, you can load in images,
-                video, audio, or even external network data which can be used elsewhere
-                within your protocol.
-              </p>
-              <Guidance contentId="guidance.screen.assets">
-                <AssetBrowser />
-              </Guidance>
+            <div className="editor__container">
+              <div className="editor__content">
+                <h1 className="editor__heading">Assets</h1>
+                <p>
+                  Welcome to the asset management screen. Here, you can load in images,
+                  video, audio, or even external network data which can be used elsewhere
+                  within your protocol.
+                </p>
+                <Guidance contentId="guidance.screen.assets">
+                  <AssetBrowser />
+                </Guidance>
+              </div>
             </div>
           </div>
         </div>

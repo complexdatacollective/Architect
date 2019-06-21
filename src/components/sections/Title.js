@@ -7,7 +7,7 @@ import Section from './Section';
 const Title = () => (
   <Section contentId="guidance.editor.title">
     <div id={getFieldId('title')} data-name="Title text" />
-    <h2 id="title">Page Heading</h2>
+    <h2>Page Heading</h2>
     <p>
       Use the page heading to show a large title element on your information stage.
     </p>

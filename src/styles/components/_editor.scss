@@ -16,20 +16,27 @@
     left: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+  }
+
+  &__container {
+    @include no-scrollbars;
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   &__content {
-    @include no-scrollbars;
-    padding: unit(6) unit(6) unit(16);
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    height: 100%;
-    width: 100%;
+    padding: unit(6);
+    min-height: calc(100% - #{unit(8)});
   }
 
   &__spacer {
-    height: 100px;
+    height: unit(8);
   }
 
   &__subsection {
@@ -62,7 +69,7 @@
 
   .issues {
     position: sticky;
-    bottom: unit(8);
+    bottom: 0;
     left: 0;
   }
 

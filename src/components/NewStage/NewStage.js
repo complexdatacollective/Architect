@@ -23,8 +23,7 @@ const NewStage = ({
         <h1>Choose a stage to add to your interview</h1>
         <p>
           Below you can find the available interfaces currently bundled in network canvas,
-          grouped by type. Hover each interface with the guidance panel open to see further
-          information.
+          grouped by type.
         </p>
 
         {interfaceOptions.map((props, index) => (
