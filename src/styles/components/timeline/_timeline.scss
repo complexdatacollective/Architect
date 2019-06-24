@@ -25,14 +25,15 @@ $bottom-spacing: unit(12);
 
     &::before {
       transition: transform var(--animation-duration-slow) var(--animation-easing);
+      transform: translateX(-50%);
       z-index: -1;
       content: '';
       display: block;
       position: absolute;
       top: 0;
-      left: calc(50% - #{unit(.3)});
+      left: 50%;
       width: 0;
-      height: 100%;
+      height: calc(100% - #{unit(5)});
       border-left-width: unit(.6);
       border-left-color: var(--architect-timeline-line);
       border-left-style: solid;

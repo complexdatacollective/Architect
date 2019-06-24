@@ -7,7 +7,8 @@
   justify-content: center;
   align-items: center;
   background-color: var(--architect-edit-button-background);
-  border-radius: 50%;
+  border-radius: 100%;
+  transform: translateY(-1px);
 
   .icon {
     width: unit(2);
