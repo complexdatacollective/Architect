@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
 import reducer, { actionCreators } from '../screens';
+import { actionTypes as loadActionTypes } from '../../protocols/load';
 
 const initialState = {
   root: {
@@ -18,6 +19,35 @@ describe('ui', () => {
     ).toEqual(
       initialState,
     );
+  });
+
+  describe('LOAD_PROTOCOL_SUCCESS', () => {
+    it('resets screens', () => {
+      const loadAction = { type: loadActionTypes.LOAD_PROTOCOL_SUCCESS };
+      const stateWithScreens = {
+        ...initialState,
+        screens: [
+          {
+            screen: 'bar',
+            params: {
+              foo: 'bar',
+            },
+          },
+          {
+            screen: 'foo',
+            params: {
+              bar: 'foo',
+            },
+          },
+        ],
+      };
+
+      const subject = reducer(stateWithScreens, loadAction);
+
+      expect(
+        subject.screens,
+      ).toEqual([]);
+    });
   });
 
   describe('OPEN_SCREEN', () => {

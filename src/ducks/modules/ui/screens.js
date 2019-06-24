@@ -1,3 +1,5 @@
+import { actionTypes as loadActionTypes } from '../protocols/load';
+
 const OPEN_SCREEN = 'UI/OPEN_SCREEN';
 const UPDATE_SCREEN = 'UI/UPDATE_SCREEN';
 const CLOSE_SCREEN = 'UI/CLOSE_SCREEN';
@@ -54,6 +56,10 @@ const getUpdatedScreen = (screen, params) => ({
 
 export default (state = initialState, { type, payload } = { type: null, payload: null }) => {
   switch (type) {
+    case loadActionTypes.LOAD_PROTOCOL_SUCCESS:
+      return {
+        ...initialState,
+      };
     case OPEN_SCREEN:
       // TODO: root
       return {
