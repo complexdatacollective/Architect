@@ -58,8 +58,8 @@ const EdgeFields = ({
           title={allowHighlighting && 'Allow highlighting must be disabled to create edge'}
         />
       </Row>
-      { canCreateEdge &&
-        <Row>
+      <Row disabled={!canCreateEdge}>
+        { canCreateEdge &&
           <ValidatedField
             name="edges.create"
             component={ArchitectFields.CreatableSelect}
@@ -73,18 +73,18 @@ const EdgeFields = ({
               <span>Press enter to create a edge type named &quot;{inputValue}&quot;.</span>
             )}
           />
-        </Row>
-      }
-      { edgesForSubject.length > 0 &&
-      <Row>
-        <Field
-          name="edges.display"
-          component={Fields.CheckboxGroup}
-          options={displayEdgesOptions}
-          label="Display edges of the following type(s):"
-        />
+        }
       </Row>
-      }
+      <Row disabled={edgesForSubject.length === 0}>
+        { edgesForSubject.length > 0 &&
+          <Field
+            name="edges.display"
+            component={Fields.CheckboxGroup}
+            options={displayEdgesOptions}
+            label="Display edges of the following type(s):"
+          />
+        }
+      </Row>
     </Section>
   );
 };

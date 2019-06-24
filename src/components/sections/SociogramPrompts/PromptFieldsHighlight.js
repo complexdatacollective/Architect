@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import * as ArchitectFields from '../../Form/Fields';
 import * as Fields from '../../../ui/components/Fields';
+import ValidatedField from '../../Form/ValidatedField';
 import Row from '../Row';
 import Section from '../Section';
 import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
@@ -47,20 +48,23 @@ const HighlightFields = ({
         title={canCreateEdge && 'Create edge must be disabled to allow highlighting'}
       />
       <Row disabled={!allowHighlighting}>
-        <Field
-          name="highlight.variable"
-          component={ArchitectFields.CreatableSelect}
-          label="Which boolean variable should be toggled?"
-          onCreateOption={value => handleCreateVariable(value, 'boolean')}
-          onKeyDown={normalizeKeyDown}
-          placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
-          options={highlightVariablesForSubject}
-          formatCreateLabel={inputValue => (
-            <span>
-              Press enter to create a new boolean variable named &quot;{inputValue}&quot;.
-            </span>
-          )}
-        />
+        { allowHighlighting &&
+          <ValidatedField
+            name="highlight.variable"
+            component={ArchitectFields.CreatableSelect}
+            label="Which boolean variable should be toggled?"
+            onCreateOption={value => handleCreateVariable(value, 'boolean')}
+            onKeyDown={normalizeKeyDown}
+            validation={{ required: true }}
+            placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
+            options={highlightVariablesForSubject}
+            formatCreateLabel={inputValue => (
+              <span>
+                Press enter to create a new boolean variable named &quot;{inputValue}&quot;.
+              </span>
+            )}
+          />
+        }
       </Row>
     </Section>
   );
