@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import Button from '../../ui/components/Button';
 import Attribute from './Attribute';
-import withVariableOptions from './withVariableOptions';
-import withNewVariableHandlers from './withNewVariableHandlers';
+import withAssignAttributesHandlers from './withAssignAttributesHandlers';
 import NewVariableWindow from '../NewVariableWindow';
 
 const AssignAttributes = ({
@@ -12,10 +10,11 @@ const AssignAttributes = ({
   fields,
   type,
   entity,
-  openNewVariableWindow,
+  handleCreateNew,
   showNewVariableWindow,
   handleCreateNewVariable,
   handleCancelCreateNewVariable,
+  handleDelete,
   form,
 }) => (
   <div className="assign-attributes">
@@ -26,12 +25,13 @@ const AssignAttributes = ({
             key={index}
             index={index}
             variableOptions={variableOptions}
+            onDelete={handleDelete}
             type={type}
             entity={entity}
             form={form}
             field={field}
             fields={fields}
-            onCreateNew={() => openNewVariableWindow(index)}
+            onCreateNew={handleCreateNew}
           />
         ))}
       </div>
@@ -62,8 +62,9 @@ AssignAttributes.propTypes = {
   fields: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
-  openNewVariableWindow: PropTypes.func.isRequired,
+  handleCreateNew: PropTypes.func.isRequired,
   showNewVariableWindow: PropTypes.bool.isRequired,
+  handleDelete: PropTypes.func.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
   handleCancelCreateNewVariable: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
@@ -71,7 +72,4 @@ AssignAttributes.propTypes = {
 
 export { AssignAttributes };
 
-export default compose(
-  withVariableOptions,
-  withNewVariableHandlers,
-)(AssignAttributes);
+export default withAssignAttributesHandlers(AssignAttributes);

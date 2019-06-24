@@ -6,7 +6,7 @@ import Icon from '../../ui/components/Icon';
 import * as Fields from '../../ui/components/Fields';
 import { getComponentsForType } from '../Form/inputOptions';
 import Select from '../Form/Fields/Select';
-import withVariableMeta from './withVariableMeta';
+import withAttributeHandlers from './withAttributeHandlers';
 
 const getInputComponentForType = (type) => {
   const components = getComponentsForType(type);
@@ -25,10 +25,9 @@ const getValidationForType = (type) => {
 const Attribute = ({
   field,
   handleDelete,
-  index,
   variableType,
   options,
-  onCreateNew,
+  handleCreateNew,
   variableOptions,
 }) => {
   const ValueComponent = variableType && getInputComponentForType(variableType);
@@ -40,7 +39,7 @@ const Attribute = ({
           name={`${field}.variable`}
           component={Select}
           options={variableOptions}
-          onCreateNew={() => { onCreateNew(index); }}
+          onCreateNew={handleCreateNew}
           isDisabled={!!variableType}
           createNewOption="Create new variable"
           validation={{ required: true }}
@@ -58,7 +57,7 @@ const Attribute = ({
       </div>
       <div
         className="assign-attributes-attribute__delete"
-        onClick={() => handleDelete(index)}
+        onClick={handleDelete}
       >
         <Icon name="delete" />
       </div>
@@ -68,11 +67,10 @@ const Attribute = ({
 
 Attribute.propTypes = {
   field: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
   variableType: PropTypes.string,
   options: PropTypes.array,
-  onCreateNew: PropTypes.func.isRequired,
   variableOptions: PropTypes.array.isRequired,
+  handleCreateNew: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };
 
@@ -83,4 +81,4 @@ Attribute.defaultProps = {
 
 export { Attribute };
 
-export default withVariableMeta(Attribute);
+export default withAttributeHandlers(Attribute);
