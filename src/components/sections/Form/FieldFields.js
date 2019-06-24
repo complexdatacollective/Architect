@@ -133,6 +133,7 @@ PromptFields.propTypes = {
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
   componentOptions: PropTypes.array,
+  isNewVariable: PropTypes.bool.isRequired,
   handleNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
 };
