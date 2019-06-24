@@ -60,6 +60,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
     variableOptions: variableOptionsWithNewVariable,
     componentOptions,
     existingVariables,
+    isNewVariable,
   };
 };
 
