@@ -21,6 +21,7 @@ const PromptFields = ({
   variableType,
   variableOptions,
   componentOptions,
+  isNewVariable,
   handleNewVariable,
   handleChangeComponent,
   handleChangeVariable,
@@ -76,6 +77,24 @@ const PromptFields = ({
           validation={{ required: true }}
           onChange={handleChangeComponent}
         />
+        { isNewVariable && variableType &&
+          <p><em>
+            The selected input component creates a <strong>{variableType}</strong> variable.
+          </em></p>
+        }
+        { !isNewVariable && variableType &&
+          <div>
+            <p><em>
+              An existing <strong>{variableType}</strong> variable is selected.
+              Only <strong>{variableType}</strong> compatible components can be selected.
+            </em></p>
+            <p><em>
+              If you would like to use a different component type, you will need to
+              create a new variable.
+            </em></p>
+          </div>
+        }
+
       </Row>
     }
     { isVariableTypeWithOptions(variableType) &&
@@ -114,6 +133,7 @@ PromptFields.propTypes = {
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
   componentOptions: PropTypes.array,
+  isNewVariable: PropTypes.bool.isRequired,
   handleNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
 };

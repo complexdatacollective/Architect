@@ -17,6 +17,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const variable = formSelector(state, 'variable');
   const component = formSelector(state, 'component');
   const createNewVariable = formSelector(state, '_createNewVariable');
+  const isNewVariable = !!createNewVariable;
 
   const existingVariables = getVariablesForSubject(state, { entity, type });
 
@@ -35,7 +36,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
     [],
   );
 
-  const variableOptionsWithNewVariable = createNewVariable ?
+  const variableOptionsWithNewVariable = isNewVariable ?
     [...variableOptions, { label: createNewVariable, value: createNewVariable }] :
     variableOptions;
 
@@ -49,7 +50,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
 
   // 1. If type defined, show components that match (existing variable)
   // 2. Othewise list all inputOptions (new variable)
-  const componentOptions = variableType ?
+  const componentOptions = variableType && !isNewVariable ?
     getComponentsForType(variableType) :
     inputOptions;
 
@@ -59,6 +60,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
     variableOptions: variableOptionsWithNewVariable,
     componentOptions,
     existingVariables,
+    isNewVariable,
   };
 };
 
