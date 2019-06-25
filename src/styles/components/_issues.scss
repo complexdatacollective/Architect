@@ -2,7 +2,7 @@
   width: 100%;
   background-color: var(--color-sea-serpent);
   transform-origin: 0 100%;
-  transform: scaleY(0);
+  transform: scaleY(0) translateY(1px);
   transition-duration: var(--animation-duration-fast);
   transition-timing-function: var(--animation-easing);
   transition-property: transform;
@@ -89,7 +89,7 @@
   }
 
   &--show {
-    transform: scaleY(1);
+    transform: scaleY(1) translateY(1px);
   }
 
   &--open {

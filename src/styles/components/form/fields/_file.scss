@@ -1,7 +1,6 @@
 .form-fields-file {
   @include form-field;
   display: block;
-  overflow: hidden;
   position: relative;
 
   &__preview {
