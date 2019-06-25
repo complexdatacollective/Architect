@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import Button from '../../ui/components/Button';
 import Attribute from './Attribute';
-import withVariableOptions from './withVariableOptions';
-import withNewVariableHandlers from './withNewVariableHandlers';
+import withAssignAttributesHandlers from './withAssignAttributesHandlers';
 import NewVariableWindow from '../NewVariableWindow';
 
 const AssignAttributes = ({
@@ -12,10 +10,12 @@ const AssignAttributes = ({
   fields,
   type,
   entity,
-  openNewVariableWindow,
+  handleOpenCreateNew,
   showNewVariableWindow,
+  handleAddNew,
   handleCreateNewVariable,
-  handleCancelCreateNewVariable,
+  handleCompleteCreateNewVariable,
+  handleDelete,
   form,
 }) => (
   <div className="assign-attributes">
@@ -25,13 +25,13 @@ const AssignAttributes = ({
           <Attribute
             key={index}
             index={index}
-            variableOptions={variableOptions}
             type={type}
             entity={entity}
             form={form}
             field={field}
-            fields={fields}
-            onCreateNew={() => openNewVariableWindow(index)}
+            variableOptions={variableOptions}
+            onCreateNew={handleOpenCreateNew}
+            onDelete={handleDelete}
           />
         ))}
       </div>
@@ -41,7 +41,7 @@ const AssignAttributes = ({
         color="primary"
         icon="add"
         size="small"
-        onClick={() => fields.push({})}
+        onClick={handleAddNew}
       >
         Add new variable to assign
       </Button>
@@ -50,7 +50,7 @@ const AssignAttributes = ({
     <NewVariableWindow
       show={showNewVariableWindow}
       onComplete={handleCreateNewVariable}
-      onCancel={handleCancelCreateNewVariable}
+      onCancel={handleCompleteCreateNewVariable}
       entity={entity}
       type={type}
     />
@@ -62,16 +62,15 @@ AssignAttributes.propTypes = {
   fields: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
-  openNewVariableWindow: PropTypes.func.isRequired,
+  handleOpenCreateNew: PropTypes.func.isRequired,
   showNewVariableWindow: PropTypes.bool.isRequired,
+  handleAddNew: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
-  handleCancelCreateNewVariable: PropTypes.func.isRequired,
+  handleCompleteCreateNewVariable: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
 };
 
 export { AssignAttributes };
 
-export default compose(
-  withVariableOptions,
-  withNewVariableHandlers,
-)(AssignAttributes);
+export default withAssignAttributesHandlers(AssignAttributes);
