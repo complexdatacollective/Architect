@@ -1,4 +1,4 @@
-import { compose, withState, withHandlers, withProps } from 'recompose';
+import { compose, withProps, withStateHandlers, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { getVariableOptionsForSubject } from '../../selectors/codebook';
@@ -33,40 +33,52 @@ const mapStateToProps = (state, { entity, type, form, fields }) => {
 const mapDispatchToProps = {
   deleteVariable: codebookActions.deleteVariable,
 };
-
-const createNewVariableWindowState = withState(
-  'createNewVariableAtIndex', 'setCreateNewVariableAtIndex', null,
+const assignAttributesStateHandlers = withStateHandlers(
+  {
+    createNewVariableAtIndex: null,
+    newVariables: [],
+  },
+  {
+    addNewVariable: ({ newVariables }) =>
+      variable => ({
+        newVariables: [...newVariables, variable],
+      }),
+    removeNewVariable: ({ newVariables }) =>
+      variable => ({
+        newVariables: newVariables
+          .filter(id => id !== variable),
+      }),
+    handleOpenCreateNew: () =>
+      createNewVariableAtIndex => ({ createNewVariableAtIndex }),
+    handleCompleteCreateNewVariable: () =>
+      () => ({ createNewVariableAtIndex: null }),
+  },
 );
 
-const newVariablesState = withState(
-  'newVariables', 'setNewVariables', [],
-);
-
-const createNewVariableHandlers = withHandlers({
-  handleDelete: ({ fields, entity, type, deleteVariable, newVariables }) =>
-    (index, variable) => {
+const assignAttributesHandlers = withHandlers({
+  handleDelete: ({
+    fields, entity, type, deleteVariable, newVariables, removeNewVariable,
+  }) =>
+    (index) => {
+      const field = fields.get(index);
       fields.remove(index);
-      if (variable && newVariables.includes(variable)) {
-        deleteVariable(entity, type, variable);
+      if (field.variable && newVariables.includes(field.variable)) {
+        deleteVariable(entity, type, field.variable);
+        removeNewVariable(field.variable);
       }
+      return undefined;
     },
   handleCreateNewVariable: ({
-    setCreateNewVariableAtIndex,
-    createNewVariableAtIndex,
-    fields,
-    newVariables,
-    setNewVariables,
+    handleCompleteCreateNewVariable, createNewVariableAtIndex, fields, addNewVariable,
   }) =>
     (variable) => {
       const newAttribute = { variable, value: null };
       fields.splice(createNewVariableAtIndex, 1, newAttribute);
-      setCreateNewVariableAtIndex(null);
-      setNewVariables([...newVariables, variable]);
+      handleCompleteCreateNewVariable();
+      addNewVariable(variable);
     },
-  handleCreateNew: ({ setCreateNewVariableAtIndex }) =>
-    index => setCreateNewVariableAtIndex(index),
-  handleCancelCreateNewVariable: ({ setCreateNewVariableAtIndex }) =>
-    () => setCreateNewVariableAtIndex(null),
+  handleAddNew: ({ fields }) =>
+    () => fields.push({}),
 });
 
 const showNewVariableWindow = withProps(
@@ -76,10 +88,9 @@ const showNewVariableWindow = withProps(
 );
 
 const withNewVariableHandlers = compose(
-  createNewVariableWindowState,
-  newVariablesState,
   connect(mapStateToProps, mapDispatchToProps),
-  createNewVariableHandlers,
+  assignAttributesStateHandlers,
+  assignAttributesHandlers,
   showNewVariableWindow,
 );
 

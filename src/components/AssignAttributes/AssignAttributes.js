@@ -10,10 +10,11 @@ const AssignAttributes = ({
   fields,
   type,
   entity,
-  handleCreateNew,
+  handleOpenCreateNew,
   showNewVariableWindow,
+  handleAddNew,
   handleCreateNewVariable,
-  handleCancelCreateNewVariable,
+  handleCompleteCreateNewVariable,
   handleDelete,
   form,
 }) => (
@@ -24,14 +25,13 @@ const AssignAttributes = ({
           <Attribute
             key={index}
             index={index}
-            variableOptions={variableOptions}
-            onDelete={handleDelete}
             type={type}
             entity={entity}
             form={form}
             field={field}
-            fields={fields}
-            onCreateNew={handleCreateNew}
+            variableOptions={variableOptions}
+            onCreateNew={handleOpenCreateNew}
+            onDelete={handleDelete}
           />
         ))}
       </div>
@@ -41,7 +41,7 @@ const AssignAttributes = ({
         color="primary"
         icon="add"
         size="small"
-        onClick={() => fields.push({})}
+        onClick={handleAddNew}
       >
         Add new variable to assign
       </Button>
@@ -50,7 +50,7 @@ const AssignAttributes = ({
     <NewVariableWindow
       show={showNewVariableWindow}
       onComplete={handleCreateNewVariable}
-      onCancel={handleCancelCreateNewVariable}
+      onCancel={handleCompleteCreateNewVariable}
       entity={entity}
       type={type}
     />
@@ -62,11 +62,12 @@ AssignAttributes.propTypes = {
   fields: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,
-  handleCreateNew: PropTypes.func.isRequired,
+  handleOpenCreateNew: PropTypes.func.isRequired,
   showNewVariableWindow: PropTypes.bool.isRequired,
+  handleAddNew: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   handleCreateNewVariable: PropTypes.func.isRequired,
-  handleCancelCreateNewVariable: PropTypes.func.isRequired,
+  handleCompleteCreateNewVariable: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
 };
 

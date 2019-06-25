@@ -8,7 +8,6 @@ const store = connect(
   (state, { entity, type, form, field }) => {
     const variable = formValueSelector(form)(state, `${field}.variable`);
     const codebookVariables = getVariablesForSubject(state, { entity, type });
-
     const variableType = get(codebookVariables, [variable, 'type']);
     const options = get(codebookVariables, [variable, 'options']);
 
@@ -21,8 +20,8 @@ const store = connect(
 );
 
 const handlers = withHandlers({
-  handleDelete: ({ onDelete, variable, index }) =>
-    () => onDelete(index, variable),
+  handleDelete: ({ onDelete, index }) =>
+    () => onDelete(index),
   handleCreateNew: ({ index, onCreateNew }) =>
     () => onCreateNew(index),
 });
