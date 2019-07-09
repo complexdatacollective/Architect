@@ -9,11 +9,13 @@ import MultiSelect from '../../Form/MultiSelect';
 import Row from '../Row';
 import Section from '../Section';
 import NewVariableWindow from '../../NewVariableWindow';
-import { getSortOrderOptionGetter } from './optionGetters';
-import withPromptProps from './withPromptProps';
 import withNewVariableWindowHandlers, {
   propTypes as newWindowVariablePropTypes,
 } from '../../enhancers/withNewVariableWindowHandlers';
+import Options from '../../Options';
+import { getSortOrderOptionGetter } from './optionGetters';
+import withPromptProps from './withPromptProps';
+
 
 const PromptFields = ({
   variableOptions,
@@ -22,6 +24,7 @@ const PromptFields = ({
   normalizeKeyDown,
   entity,
   type,
+  variable,
   openNewVariableWindow,
   closeNewVariableWindow,
   newVariableName,
@@ -68,6 +71,18 @@ const PromptFields = ({
             </span>
           )}
         />
+      </Row>
+      <Row>
+        { variable &&
+          <Section>
+            <h3 id={getFieldId('options')}>Variable Options</h3>
+            <p>Create some options for this variable</p>
+            <Options
+              name="variableOptions"
+              label="Options"
+            />
+          </Section>
+        }
       </Row>
       <Row>
         <h3>Bucket Sort Order <small>(optional)</small></h3>

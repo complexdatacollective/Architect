@@ -82,6 +82,7 @@ const handlers = withHandlers(
       },
     handleUpdate: ({ editField, upsert, normalize, onChange, clearEditField }) =>
       (value) => {
+        // TODO: It seems like a mistake to use the onChange value, is this really necessary?
         const newValue = onChange ? normalize(onChange(value)) : normalize(value);
         upsert(editField, newValue);
 

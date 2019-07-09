@@ -5,13 +5,18 @@ import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
+import { itemSelector, normalizeField } from './helpers';
+import withPromptChangeHandler from './withPromptChangeHandler';
 
-const CategoricalBinPrompts = props => (
+const CategoricalBinPrompts = ({ handleChangePrompt, ...props }) => (
   <EditableList
     contentId="guidance.editor.categorical_bin_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
+    onChange={handleChangePrompt}
+    normalize={normalizeField}
+    itemSelector={itemSelector(props.entity, props.type)}
     {...props}
   >
     <h2>Edit Prompts</h2>
@@ -28,4 +33,5 @@ export { CategoricalBinPrompts };
 export default compose(
   withSubject,
   withDisabledSubjectRequired,
+  withPromptChangeHandler,
 )(CategoricalBinPrompts);
