@@ -3,7 +3,7 @@
 import { times } from 'lodash';
 import uuid from 'uuid';
 import crypto from 'crypto';
-import createTimemachine, { actionCreators } from '../timemachine';
+import createTimeline, { actionCreators } from '../timeline';
 
 jest.mock('uuid');
 
@@ -15,9 +15,9 @@ const defaultReducer = jest.fn(() => ({
 }));
 
 const getRewindableReducer = (reducer = defaultReducer) =>
-  createTimemachine(reducer);
+  createTimeline(reducer);
 
-describe('timemachine middleware', () => {
+describe('timeline middleware', () => {
   let rewindableReducer;
 
   beforeEach(() => {
@@ -27,7 +27,7 @@ describe('timemachine middleware', () => {
   it('modifies an existing reducer to contain past present future', () => {
     const mockState = { foo: 'bar' };
     const reducer = () => mockState;
-    const state = createTimemachine(reducer)(undefined);
+    const state = createTimeline(reducer)(undefined);
 
     expect(state).toEqual(
       expect.objectContaining({

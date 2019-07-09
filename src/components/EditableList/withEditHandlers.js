@@ -14,7 +14,7 @@ import {
 import {
   makeGetLocus,
 } from '../../selectors/timemachine';
-import { actionCreators as timemachineActions } from '../../ducks/middleware/timemachine';
+import { actionCreators as timelineActions } from '../../ducks/middleware/timeline';
 
 const getProtocolLocus = makeGetLocus('protocol');
 
@@ -31,7 +31,7 @@ const mapStateToProps = (state, { form, fieldName }) => {
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   upsert: (fieldId, value) => dispatch(change(form, fieldId, value)),
-  jump: bindActionCreators(timemachineActions.jump, dispatch),
+  jump: bindActionCreators(timelineActions.jump, dispatch),
 });
 
 const mapItemStateToProps = (state, { form, itemSelector, editField, template }) => {

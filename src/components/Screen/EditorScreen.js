@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { submit, isDirty, startSubmit, isSubmitting } from 'redux-form';
 import { Button } from '../../ui/components';
-import { actionCreators as timemachineActions } from '../../ducks/middleware/timemachine';
+import { actionCreators as timelineActions } from '../../ducks/middleware/timeline';
 import { actionCreators as dialogActions } from '../../ducks/modules/dialogs';
 import Screen from './Screen';
 
@@ -98,7 +98,7 @@ const mapDispatchToProps = (dispatch, { form }) => ({
     dispatch(startSubmit(form));
     dispatch(submit(form));
   },
-  jump: bindActionCreators(timemachineActions.jump, dispatch),
+  jump: bindActionCreators(timelineActions.jump, dispatch),
   openDialog: bindActionCreators(dialogActions.openDialog, dispatch),
 });
 

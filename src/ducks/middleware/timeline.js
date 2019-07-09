@@ -5,8 +5,8 @@ const defaultOptions = {
   limit: -1000,
 };
 
-const JUMP = 'TIMEMACHINE/JUMP';
-const RESET = 'TIMEMACHINE/RESET';
+const JUMP = 'TIMELINE/JUMP';
+const RESET = 'TIMELINE/RESET';
 
 const jump = locus => ({
   type: JUMP,
@@ -17,7 +17,7 @@ const reset = () => ({
   type: RESET,
 });
 
-const createTimemachine = (reducer, customOptions) => {
+const createTimelineReducer = (reducer, customOptions) => {
   const options = {
     ...defaultOptions,
     ...customOptions,
@@ -29,7 +29,7 @@ const createTimemachine = (reducer, customOptions) => {
     timeline: [],
   };
 
-  const timemachine = (state = initialState, action) => {
+  const timelineReducer = (state = initialState, action) => {
     const { past, present, timeline } = state;
 
     if (get(action, 'type') === RESET) {
@@ -103,7 +103,7 @@ const createTimemachine = (reducer, customOptions) => {
     };
   };
 
-  return timemachine;
+  return timelineReducer;
 };
 
 export const actionTypes = {
@@ -115,4 +115,4 @@ export const actionCreators = {
   reset,
 };
 
-export default createTimemachine;
+export default createTimelineReducer;
