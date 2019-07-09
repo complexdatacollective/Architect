@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import {
   compose,
   defaultProps,
-  withState,
 } from 'recompose';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
@@ -32,12 +31,17 @@ const handleSubmitFail = (issues) => {
   scrollToFirstIssue(issues);
 };
 
+const withDefaultFieldName = defaultProps({
+  fieldName: 'prompts',
+});
+
 class EditableList extends PureComponent {
   render() {
     const {
       editField,
       handleEditField,
-      handleResetEditField,
+      handleCancelEditField,
+      handleCompleteEditField,
       handleUpdate,
       disabled,
       sortMode,
@@ -56,9 +60,11 @@ class EditableList extends PureComponent {
       editProps,
       ...rest
     } = this.props;
+
     const isEditing = !!editField;
 
     const ListComponent = sortMode !== 'manual' ? UnorderedList : OrderedList;
+
     return (
       <Section disabled={disabled} contentId={contentId}>
         <Flipper
@@ -91,7 +97,7 @@ class EditableList extends PureComponent {
               title={title}
               onSubmit={handleUpdate}
               onSubmitFail={handleSubmitFail}
-              onCancel={handleResetEditField}
+              onCancel={handleCancelEditField}
               form={formName}
               {...editProps}
             >
@@ -100,7 +106,6 @@ class EditableList extends PureComponent {
                 {...editProps}
                 form={formName}
                 fieldId={editField}
-                onComplete={handleResetEditField}
               />
             </Form>
           </Window>
@@ -132,16 +137,9 @@ EditableList.defaultProps = {
   validation: { notEmpty },
 };
 
-const withDefaultFieldName = defaultProps({
-  fieldName: 'prompts',
-});
-
-const withEditingState = withState('editField', 'setEditField', null);
-
 export { EditableList };
 
 export default compose(
   withDefaultFieldName,
-  withEditingState,
   withEditHandlers,
 )(EditableList);

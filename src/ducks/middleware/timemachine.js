@@ -1,3 +1,5 @@
+import uuid from 'uuid';
+
 const JUMP = 'TIMEMACHINE/JUMP';
 const JUMP_BKWD = 'TIMEMACHINE/JUMP_BKWD';
 const RESET = 'TIMEMACHINE/RESET';
@@ -14,7 +16,7 @@ const reset = () => ({
 const defaultLimit = -1000;
 
 const createTimemachine = (reducer, options) => {
-  let locus = 0;
+  const locus = uuid();
   const limit = (options.limit && -options.limit) || defaultLimit;
 
   const initialState = {
@@ -41,16 +43,24 @@ const createTimemachine = (reducer, options) => {
         };
       }
       case JUMP: {
+        console.log('jump state', { state, action });
+
         if (!action.payload.locus) { return state; }
         const locusIndex = timeline.indexOf(action.payload.locus);
 
+        // no events in timeline yet
+        if (timeline.length === 1) {
+          return state;
+        }
+
         // the last point in the timeline is the present
         if (locusIndex === timeline.length - 1) {
-          return {
-            past,
-            present,
-            timeline,
-          };
+          return state;
+          // return {
+          //   past,
+          //   present,
+          //   timeline,
+          // };
         }
 
         const newPresent = past[locusIndex];
@@ -58,7 +68,7 @@ const createTimemachine = (reducer, options) => {
         return {
           past: past.slice(0, locusIndex),
           present: newPresent,
-          timeline: past.slice(0, locusIndex + 1),
+          timeline: timeline.slice(0, locusIndex + 1),
         };
       }
       default: {
@@ -81,12 +91,12 @@ const createTimemachine = (reducer, options) => {
           };
         }
 
-        locus += 1;
+        const newLocus = uuid();
 
         return {
           past: [...past, present].slice(limit),
           present: newPresent,
-          timeline: [...timeline, locus].slice(limit - 1),
+          timeline: [...timeline, newLocus].slice(limit - 1),
         };
       }
     }
