@@ -2,7 +2,8 @@ import uuid from 'uuid';
 import { get } from 'lodash';
 
 const defaultOptions = {
-  limit: -1000,
+  limit: 1000,
+  filter: () => false,
 };
 
 const JUMP = 'TIMELINE/JUMP';
@@ -32,14 +33,6 @@ const createTimelineReducer = (reducer, customOptions) => {
   const timelineReducer = (state = initialState, action) => {
     const { past, present, timeline } = state;
 
-    if (get(action, 'type') === RESET) {
-      return {
-        past: [],
-        present: reducer(undefined, {}),
-        timeline: [uuid()],
-      };
-    }
-
     if (get(action, 'type') === JUMP) {
       if (!action.payload.locus) { return state; }
       const locusIndex = timeline.indexOf(action.payload.locus);
@@ -65,8 +58,8 @@ const createTimelineReducer = (reducer, customOptions) => {
 
     const newPresent = reducer(present, action);
 
-    // This is the first run
-    if (timeline.length === 0) {
+    // This is the first run or we are resetting
+    if (timeline.length === 0 || get(action, 'type') === RESET) {
       const locus = uuid();
 
       return {
@@ -76,17 +69,14 @@ const createTimelineReducer = (reducer, customOptions) => {
       };
     }
 
-    // If newPresent matches the old one, ignore
+    // If newPresent matches the old one, don't treat as a new point in the timeline
     if (present === newPresent) {
       return state;
     }
 
     // If filtered, we don't treat this as a new
-    // point in the timeline.
-    if (
-      options.filter &&
-      !options.filter(action)
-    ) {
+    // point in the timeline, but we do update the state
+    if (options.filter(action)) {
       return {
         past,
         present: newPresent,
@@ -97,9 +87,9 @@ const createTimelineReducer = (reducer, customOptions) => {
     const locus = uuid();
 
     return {
-      past: [...past, present].slice(options.limit),
+      past: [...past, present].slice(-options.limit),
       present: newPresent,
-      timeline: [...timeline, locus].slice(options.limit - 1),
+      timeline: [...timeline, locus].slice(-options.limit - 1),
     };
   };
 
