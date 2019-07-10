@@ -5,16 +5,20 @@ import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
+import { itemSelector, normalizeField } from '../CategoricalBinPrompts/helpers';
+import withPromptChangeHandler from '../CategoricalBinPrompts/withPromptChangeHandler';
 
 const template = () => ({ color: 'ord-color-seq-1' });
 
-const OrdinalBinPrompts = props => (
+const OrdinalBinPrompts = ({ handleChangePrompt, ...props }) => (
   <EditableList
     contentId="guidance.editor.ordinal_bin_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
     template={template}
+    onChange={handleChangePrompt}
+    itemSelector={itemSelector(props.entity, props.type)}
     {...props}
   >
     <h2>Prompts</h2>
@@ -31,4 +35,5 @@ export { OrdinalBinPrompts };
 export default compose(
   withSubject,
   withDisabledSubjectRequired,
+  withPromptChangeHandler,
 )(OrdinalBinPrompts);
