@@ -1,35 +1,54 @@
 import path from 'path';
 import uuid from 'uuid/v1';
 import { findKey } from 'lodash';
+import csvParse from 'csv-parse';
 import { writeFile } from 'fs-extra';
 import readFileAsBuffer from './lib/readFileAsBuffer';
 
-const getTypeFromMime = (mime) => {
-  const MIME_TYPES = [
-    [/text\/csv/, 'network'],
-    [/application\/json/, 'network'],
-    [/text\/*,/, 'network'],
-    [/image\/.*/, 'image'],
-    [/audio\/.*/, 'audio'],
-    [/video\/.*/, 'video'],
-  ];
+const MIME_TYPES = [
+  [/text\/csv/, 'network'],
+  [/application\/json/, 'network'],
+  [/text\/*,/, 'network'],
+  [/image\/.*/, 'image'],
+  [/audio\/.*/, 'audio'],
+  [/video\/.*/, 'video'],
+];
 
-  const match = MIME_TYPES.find(([matcher]) => matcher.test(mime));
+const EXTENSION_TYPES = {
+  network: ['csv', 'json'],
+  image: ['jpg', 'jpeg', 'gif', 'png'],
+  audio: ['mp3', 'aiff'],
+  video: ['mov', 'mp4'],
+};
+
+const getTypeFromMime = (mime, mimeTypes = MIME_TYPES) => {
+  const match = mimeTypes.find(([matcher]) => matcher.test(mime));
   if (!match) { return null; }
   return match[1];
 };
 
-const getTypeFromExtension = (name) => {
-  const EXTENSION_TYPES = {
-    network: ['csv', 'json'], // .csv
-    image: ['jpg', 'jpeg', 'gif', 'png'],
-    audio: ['mp3', 'aiff'],
-    video: ['mov', 'mp4'],
-  };
-
+const getTypeFromExtension = (name, extensionTypes = EXTENSION_TYPES) => {
   const extension = path.extname(name);
 
-  return findKey(EXTENSION_TYPES, type => type.includes(extension));
+  return findKey(extensionTypes, type => type.includes(extension));
+};
+
+const getNetworkType = (file) => {
+  const networkMimeTypes = [
+    [/text\/csv/, 'csv'],
+    [/application\/json/, 'json'],
+    [/text\/*,/, 'csv'],
+  ];
+
+  const networkExtensionTypes = {
+    json: ['json'],
+    csv: ['csv'],
+  };
+
+  const networkType = getTypeFromMime(file.type, networkMimeTypes) ||
+    getTypeFromExtension(file.name, networkExtensionTypes);
+
+  return networkType;
 };
 
 /**
@@ -47,11 +66,61 @@ const importAsset = (protocolPath, file) => {
     .then(() => ({ filePath: destinationName, assetType }));
 };
 
+// const validateJson = data => {
+//   try {
+//     JSON.parse(data);
+//   } catch(e) {
+//     Promise.reject(e);
+//   }
+
+//   Promise.resolve(true);
+// };
+
+const validateJson = data =>
+  new Promise((resolve, reject) => {
+    try {
+      JSON.parse(data);
+      resolve(true);
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+const validateCsv = data =>
+  new Promise((resolve, reject) => {
+    try {
+      csvParse(data, (err) => {
+        if (err) {
+          throw new Error(err);
+        }
+
+        resolve(true);
+      });
+    } catch (e) {
+      reject(e);
+    }
+  });
+
 /**
  * Checks that imported asset is valid
  * @param {buffer} file - The file to check.
  */
-export const validateAsset = () => {
+export const validateAsset = (file) => {
+  const assetType = getTypeFromMime(file.type) || getTypeFromExtension(file.name);
+
+  if (assetType !== 'network') { Promise.resolve(true); }
+
+  const networkType = getNetworkType(file);
+
+  return readFileAsBuffer(file)
+    .then((data) => {
+      if (networkType === 'json') {
+        return validateJson(data);
+      }
+
+      return validateCsv(data);
+    })
+    .then(() => file);
 };
 
 export default importAsset;
