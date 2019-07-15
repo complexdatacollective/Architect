@@ -31,7 +31,8 @@ const autoFileDrop = compose(
           importAsset(file)
             .then(({ id }) => {
               onDrop(id);
-            });
+            })
+            .catch(console.log);
         });
       },
   }),
