@@ -27,5 +27,12 @@
       "import/no-named-as-default": "off",
       "no-console": "error",
       "no-mixed-operators": [1, {"allowSamePrecedence": true}]
+    },
+    "settings": {
+      "import/resolver": {
+        "alias": [
+          ["App", "./src"]
+        ]
+      }
     }
 }
