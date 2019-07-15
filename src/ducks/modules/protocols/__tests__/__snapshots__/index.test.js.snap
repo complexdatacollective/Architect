@@ -35,10 +35,12 @@ Array [
         "error": [Error: Protocol.stages should NOT have fewer than 1 items 
 
 ],
+        "onCancel": [Function],
+        "onConfirm": [Function],
         "type": "Error",
       },
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": Symbol(PROTOCOL/OPEN_DIALOG),
+      "type": "PROTOCOL/OPEN_DIALOG",
     },
   ],
 ]
@@ -203,10 +205,12 @@ Array [
         "error": [Error: Protocol.stages should NOT have fewer than 1 items 
 
 ],
+        "onCancel": [Function],
+        "onConfirm": [Function],
         "type": "Error",
       },
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": Symbol(PROTOCOL/OPEN_DIALOG),
+      "type": "PROTOCOL/OPEN_DIALOG",
     },
   ],
   Array [

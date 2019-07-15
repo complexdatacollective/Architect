@@ -66,16 +66,6 @@ const importAsset = (protocolPath, file) => {
     .then(() => ({ filePath: destinationName, assetType }));
 };
 
-// const validateJson = data => {
-//   try {
-//     JSON.parse(data);
-//   } catch(e) {
-//     Promise.reject(e);
-//   }
-
-//   Promise.resolve(true);
-// };
-
 const validateJson = data =>
   new Promise((resolve, reject) => {
     try {
