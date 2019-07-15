@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { size, get } from 'lodash';
-import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../../config';
+import { COLOR_PALETTE_BY_ENTITY, COLOR_PALETTES } from '../../../../config';
 
 export const getNextCategoryColor = (protocol, entity) => {
   if (!protocol || !entity) { return null; }

@@ -3,7 +3,7 @@ import { omit, get, has, isEmpty } from 'lodash';
 import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
-import { getNextCategoryColor } from './utils';
+import { getNextCategoryColor } from './utils/helpers';
 import safeName from '../../../utils/safeName';
 import { actionCreators as stageActions } from './stages';
 

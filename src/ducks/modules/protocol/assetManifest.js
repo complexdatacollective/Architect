@@ -1,15 +1,16 @@
 import uuid from 'uuid';
 import { omit } from 'lodash';
-import { importAsset as fsImportAsset } from '../../../other/protocols';
-import { getActiveProtocolMeta } from '../../../selectors/protocol';
+import path from 'path';
+import { importAsset as fsImportAsset } from 'App/other/protocols';
+import { getActiveProtocolMeta } from 'App/selectors/protocol';
 
-const IMPORT_ASSET = Symbol('PROTOCOL/IMPORT_ASSET');
-const IMPORT_ASSET_COMPLETE = Symbol('PROTOCOL/IMPORT_ASSET_COMPLETE');
-const IMPORT_ASSET_FAILED = Symbol('PROTOCOL/IMPORT_ASSET_FAILED');
-const DELETE_ASSET = Symbol('PROTOCOL/DELETE_ASSET');
+const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';
+const IMPORT_ASSET_COMPLETE = 'PROTOCOL/IMPORT_ASSET_COMPLETE';
+const IMPORT_ASSET_FAILED = 'PROTOCOL/IMPORT_ASSET_FAILED';
+const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
 
 const getNameFromFilename = filename =>
-  filename.split('.')[0];
+  path.parse(filename).name;
 
 const deleteAsset = id =>
   ({
@@ -52,7 +53,7 @@ const importAssetFailed = filename =>
  * @param {File} asset - File to import
  * @param {string} assetType - type of asset, as listed in asset manifest
  */
-const importAssetThunk = (asset, assetType) =>
+const importAssetThunk = asset =>
   (dispatch, getState) => {
     const state = getState();
     const { workingPath } = getActiveProtocolMeta(state);
@@ -65,8 +66,8 @@ const importAssetThunk = (asset, assetType) =>
     if (!workingPath) { return Promise.reject(reject()); }
 
     return fsImportAsset(workingPath, asset)
-      .then(filename =>
-        dispatch(importAssetComplete(filename, name, assetType)))
+      .then(({ filePath, assetType }) =>
+        dispatch(importAssetComplete(filePath, name, assetType)))
       .catch(reject);
   };
 
@@ -85,8 +86,8 @@ export default function reducer(state = initialState, action = {}) {
         },
       };
     case DELETE_ASSET:
-      // Don't delete from disk, this allows us to rollback the protocol. Disk changes should
-      // be commited on save.
+      // Don't delete from disk, this allows us to rollback the protocol.
+      // Disk changes should be commited on save.
       return omit(state, action.id);
     default:
       return state;
