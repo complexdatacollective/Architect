@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
-import { change } from 'redux-form';
+import { change, formValueSelector } from 'redux-form';
 import { compose, withHandlers } from 'recompose';
 import { getVariableOptionsForSubject } from '../../../selectors/codebook';
 import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 
-const mapStateToProps = (state, { type, entity }) => {
+const mapStateToProps = (state, { form, type, entity }) => {
   const variableOptions = getVariableOptionsForSubject(state, { type, entity });
+  const variable = formValueSelector(form)(state, 'variable');
 
   return {
+    variable,
     variableOptions,
   };
 };
@@ -26,7 +28,6 @@ const variableHandlers = withHandlers({
       changeForm(form, 'variable', variable);
       closeNewVariableWindow();
     },
-
   handleDeleteVariable: ({ entity, type, deleteVariable }) =>
     variable => deleteVariable(entity, type, variable),
 });

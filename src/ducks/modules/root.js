@@ -3,7 +3,7 @@
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
-import timemachine from '../middleware/timemachine';
+import createTimeline from '../middleware/timeline';
 // import undoable from 'redux-undo';
 import dialogs from './dialogs';
 import ui from './ui';
@@ -36,7 +36,7 @@ export const rootReducer = combineReducers({
   ui,
   settings,
   stacks,
-  protocol: timemachine(
+  protocol: createTimeline(
     protocol,
     {
       filter: ({ type }) => /^PROTOCOL\//.test(type.toString()),
