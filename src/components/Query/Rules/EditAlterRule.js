@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { operatorsWithValue } from './options';
-import DetachedField from '../DetachedField';
-import NodeSelect from '../Form/Fields/NodeSelect';
-import Select from '../Form/Fields/Select';
-import RadioGroup from '../../ui/components/Fields/RadioGroup';
+import DetachedField from '@components/DetachedField';
+import NodeSelect from '@components/Form/Fields/NodeSelect';
+import Select from '@components/Form/Fields/Select';
+import RadioGroup from '@ui/components/Fields/RadioGroup';
 import EditValue from './EditValue';
+import { operatorsWithValue } from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 import {

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import DetachedField from '@components/DetachedField';
+import Select from '@components/Form/Fields/Select';
 import { operatorsWithValue } from './options';
-import DetachedField from '../DetachedField';
-import Select from '../Form/Fields/Select';
 import EditValue from './EditValue';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';

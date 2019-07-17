@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import Button from '@ui/components/Button';
+import RadioGroup from '@ui/components/Fields/RadioGroup';
+import DetachedField from '@components/DetachedField';
 import PreviewRules from './PreviewRules';
 import EditRule from './EditRule';
-import Button from '../../ui/components/Button';
-import RadioGroup from '../../ui/components/Fields/RadioGroup';
-import DetachedField from '../DetachedField';
 import withDraftRule from './withDraftRule';
 import withRulesChangeHandlers from './withRulesChangeHandlers';
 

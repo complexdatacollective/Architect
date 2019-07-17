@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
+import { Icon } from '@ui/components';
 import RuleText, { Join } from './PreviewText';
 import withDisplayOptions from './withDisplayOptions';
-import { Icon } from '../../ui/components';
 
 const withDeleteHandler = withHandlers({
   handleDelete: props =>

@@ -3,8 +3,8 @@
 import React from 'react';
 import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
-import DetachedField from '../DetachedField';
-import { Text, Toggle, Number } from '../../ui/components/Fields';
+import DetachedField from '@components/DetachedField';
+import { Text, Toggle, Number } from '@ui/components/Fields';
 
 const INPUT_TYPES = {
   string: Text,
