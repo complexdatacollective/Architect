@@ -1,6 +1,6 @@
 import path from 'path';
 import uuid from 'uuid/v1';
-import { findKey } from 'lodash';
+import { findKey, get } from 'lodash';
 import csvParse from 'csv-parse';
 import { writeFile } from 'fs-extra';
 import readFileAsBuffer from './lib/readFileAsBuffer';
@@ -69,7 +69,12 @@ const importAsset = (protocolPath, file) => {
 const validateJson = data =>
   new Promise((resolve, reject) => {
     try {
-      JSON.parse(data);
+      const network = JSON.parse(data);
+
+      if (get(network, 'nodes', []).length === 0 && get(network, 'edges', []).length === 0) {
+        throw new Error("JSON network asset doesn't include any nodes or edges");
+      }
+
       resolve(true);
     } catch (e) {
       reject(e);

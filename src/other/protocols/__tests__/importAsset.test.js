@@ -2,7 +2,19 @@
 
 import { validateAsset } from '../importAsset';
 
-const validJsonFile = new File(
+const validJsonFileWithNodes = new File(
+  ['{ "nodes": [ { "name": "foo" } ] }'],
+  'foo.json',
+  { type: 'application/json' },
+);
+
+const validJsonFileWithEdges = new File(
+  ['{ "edges": [ { "type": "friend" } ] }'],
+  'foo.json',
+  { type: 'application/json' },
+);
+
+const emptyJsonFile = new File(
   ['{ "foo": "bar" }'],
   'foo.json',
   { type: 'application/json' },
@@ -28,16 +40,26 @@ const invalidCsvFile = new File(
 
 describe('importAsset', () => {
   describe('validateAsset', () => {
-    it('passes for valid json', () => {
-      expect.assertions(1);
-      return expect(validateAsset(validJsonFile))
-        .resolves.toEqual(validJsonFile);
+    it('passes for valid json ', () => {
+      expect.assertions(2);
+
+      return Promise.all([
+        expect(validateAsset(validJsonFileWithNodes))
+          .resolves.toEqual(validJsonFileWithNodes),
+        expect(validateAsset(validJsonFileWithEdges))
+          .resolves.toEqual(validJsonFileWithEdges),
+      ]);
     });
 
-    it('rejects for invalid json', () => {
-      expect.assertions(1);
-      return expect(validateAsset(invalidJsonFile))
-        .rejects.toThrow(Error);
+    it('rejects for invalid/empty json', () => {
+      expect.assertions(2);
+
+      return Promise.all([
+        expect(validateAsset(invalidJsonFile))
+          .rejects.toThrow(Error),
+        expect(validateAsset(emptyJsonFile))
+          .rejects.toThrow(Error),
+      ]);
     });
 
     it('passes for valid csv', () => {
