@@ -32,7 +32,11 @@
     "settings": {
       "import/resolver": {
         "alias": [
-          ["App", "./src"]
+          ["@app", "./src"],
+          ["@components", "./src/components"],
+          ["@modules", "./src/ducks/modules"],
+          ["@selectors", "./src/selectors"],
+          ["@ui", "./src/ui"]
         ]
       }
     }
