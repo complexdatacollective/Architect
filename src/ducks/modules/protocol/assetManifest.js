@@ -1,15 +1,19 @@
 import uuid from 'uuid';
 import { omit } from 'lodash';
-import { importAsset as fsImportAsset } from '../../../other/protocols';
-import { getActiveProtocolMeta } from '../../../selectors/protocol';
+import path from 'path';
+import log from 'electron-log';
+import { importAsset as fsImportAsset } from 'App/other/protocols';
+import { getActiveProtocolMeta } from 'App/selectors/protocol';
+import { validateAsset } from 'App/other/protocols/importAsset';
+import { invalidAssetErrorDialog, importAssetErrorDialog } from 'App/ducks/modules/protocol/utils/dialogs';
 
-const IMPORT_ASSET = Symbol('PROTOCOL/IMPORT_ASSET');
-const IMPORT_ASSET_COMPLETE = Symbol('PROTOCOL/IMPORT_ASSET_COMPLETE');
-const IMPORT_ASSET_FAILED = Symbol('PROTOCOL/IMPORT_ASSET_FAILED');
-const DELETE_ASSET = Symbol('PROTOCOL/DELETE_ASSET');
+const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';
+const IMPORT_ASSET_COMPLETE = 'PROTOCOL/IMPORT_ASSET_COMPLETE';
+const IMPORT_ASSET_FAILED = 'PROTOCOL/IMPORT_ASSET_FAILED';
+const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
 
 const getNameFromFilename = filename =>
-  filename.split('.')[0];
+  path.parse(filename).name;
 
 const deleteAsset = id =>
   ({
@@ -42,32 +46,43 @@ const importAssetComplete = (filename, name, assetType) =>
 /**
  * @param {string} filename - Name of file
  */
-const importAssetFailed = filename =>
+const importAssetFailed = (filename, error) =>
   ({
     type: IMPORT_ASSET_FAILED,
     filename,
+    error,
   });
 
 /**
- * @param {File} asset - File to import
- * @param {string} assetType - type of asset, as listed in asset manifest
+ * @param {File} asset - File() to import
  */
-const importAssetThunk = (asset, assetType) =>
+const importAssetThunk = asset =>
   (dispatch, getState) => {
     const state = getState();
     const { workingPath } = getActiveProtocolMeta(state);
     const name = getNameFromFilename(asset.name);
-    const reject = () =>
-      dispatch(importAssetFailed(name));
 
     dispatch(importAsset(name));
+    log.info('Import asset', asset.name);
 
-    if (!workingPath) { return Promise.reject(reject()); }
+    if (!workingPath) {
+      const error = new Error('No working path found, possibly no active protocol.');
+      dispatch(importAssetFailed(asset.name, error));
+      dispatch(importAssetErrorDialog(error, asset.name));
+      return Promise.reject(error);
+    }
 
-    return fsImportAsset(workingPath, asset)
-      .then(filename =>
-        dispatch(importAssetComplete(filename, name, assetType)))
-      .catch(reject);
+    return validateAsset(asset)
+      .then(() => fsImportAsset(workingPath, asset))
+      .then(({ filePath, assetType }) => {
+        log.info('  OK');
+        return dispatch(importAssetComplete(filePath, name, assetType));
+      })
+      .catch((error) => {
+        log.error('  ERROR', error);
+        dispatch(importAssetFailed(asset.name, error));
+        dispatch(invalidAssetErrorDialog(error, asset.name));
+      });
   };
 
 const initialState = {};
@@ -85,8 +100,8 @@ export default function reducer(state = initialState, action = {}) {
         },
       };
     case DELETE_ASSET:
-      // Don't delete from disk, this allows us to rollback the protocol. Disk changes should
-      // be commited on save.
+      // Don't delete from disk, this allows us to rollback the protocol.
+      // Disk changes should be commited on save.
       return omit(state, action.id);
     default:
       return state;

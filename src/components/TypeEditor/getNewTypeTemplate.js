@@ -1,4 +1,4 @@
-import { getNextCategoryColor } from '../../ducks/modules/protocol/utils';
+import { getNextCategoryColor } from '../../ducks/modules/protocol/utils/helpers';
 
 const getNewTypeTemplate = ({ protocol, entity }) => (
   {
