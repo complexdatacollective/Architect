@@ -4,12 +4,14 @@ import React from 'react';
 import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import DetachedField from '@components/DetachedField';
-import { Text, Toggle, Number } from '@ui/components/Fields';
+import { Text, Toggle, Number, RadioGroup } from '@ui/components/Fields';
 
 const INPUT_TYPES = {
   string: Text,
   number: Number,
   boolean: Toggle,
+  categorical: RadioGroup,
+  ordinal: RadioGroup,
 };
 
 /**
@@ -32,6 +34,7 @@ const EditValue = ({
   value,
   variableType,
   onChange,
+  options,
   ...rest
 }) => (
   <DetachedField
@@ -40,6 +43,7 @@ const EditValue = ({
     name="value"
     onChange={onChange}
     value={value}
+    options={options}
     {...rest}
   />
 );
@@ -50,6 +54,7 @@ EditValue.propTypes = {
     PropTypes.number,
     PropTypes.bool,
   ]).isRequired,
+  options: PropTypes.array,
   onChange: PropTypes.func,
   fieldComponent: PropTypes.oneOfType([
     PropTypes.node,
@@ -59,6 +64,7 @@ EditValue.propTypes = {
 
 EditValue.defaultProps = {
   onChange: () => {},
+  options: [],
 };
 
 export default withMappedFieldComponent(EditValue);

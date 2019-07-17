@@ -43,6 +43,7 @@ const EditAlterRule = ({
   rule,
   typeOptions,
   variableType,
+  variablesAsOptions,
   variableOptions,
   operatorOptions,
   handleRuleChange,
@@ -97,7 +98,7 @@ const EditAlterRule = ({
             component={Select}
             name="attribute"
             label="Variable"
-            options={variableOptions}
+            options={variablesAsOptions}
             onChange={handleRuleChange}
             value={optionsWithDefaults.attribute}
             validation={{ required: true }}
@@ -123,6 +124,7 @@ const EditAlterRule = ({
             variableType={variableType}
             onChange={handleRuleChange}
             value={optionsWithDefaults.value}
+            options={variableOptions}
             validation={{ required: true }}
           />
         </div>
@@ -136,6 +138,7 @@ EditAlterRule.propTypes = {
     options: PropTypes.object,
   }).isRequired,
   typeOptions: PropTypes.array.isRequired,
+  variablesAsOptions: PropTypes.array.isRequired,
   variableOptions: PropTypes.array.isRequired,
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
