@@ -1,4 +1,6 @@
 import { withHandlers } from 'recompose';
+import { keys, pick } from 'lodash';
+import { makeGetOptionsWithDefaults } from './defaultRule';
 
 const RULE_ORDER = [
   'type',
@@ -8,28 +10,31 @@ const RULE_ORDER = [
 ];
 
 const withRuleChangeHandlers = withHandlers({
-  handleRuleChange: ({ onChange, rule, variableType }) =>
-    (e, value, oldValue, name) => {
-      const resetAfter = RULE_ORDER.indexOf(name);
+  handleRuleChange: ({ onChange, rule, variableType }) => {
+    console.log(keys(rule.options));
+    const getOptionsWithDefaults = makeGetOptionsWithDefaults(keys(rule.options), variableType);
 
-      const options = Object.entries({
+    return (event, value, oldValue, name) => {
+      const resetFromIndex = RULE_ORDER.indexOf(name) + 1;
+      const keep = RULE_ORDER.slice(0, resetFromIndex);
+
+      // merge in updated option, and discard following (dependent) properties
+      const options = pick({
         ...rule.options,
         [name]: value,
-      }).reduce((acc, [optionName, optionValue]) => {
-        // Reset subsequent options
-        if (RULE_ORDER.indexOf(optionName) > resetAfter) {
-          const newValue = variableType === 'boolean' ? false : undefined;
-          return Object.assign(acc, { [optionName]: newValue });
-        }
-        // Or keep as is
-        return Object.assign(acc, { [optionName]: optionValue });
-      }, {});
+      }, keep);
+
+      // ensure reset values have defaults
+      const optionsWithDefaults = getOptionsWithDefaults(options);
+
+      console.log("it's me", { options, optionsWithDefaults });
 
       onChange({
         ...rule,
-        options,
+        options: optionsWithDefaults,
       });
-    },
+    };
+  },
 });
 
 export default withRuleChangeHandlers;

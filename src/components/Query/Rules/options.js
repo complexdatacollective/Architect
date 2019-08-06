@@ -54,16 +54,8 @@ export const operatorsByType = {
 };
 
 export const templates = {
-  edgeRule: { type: undefined, operator: undefined },
-  alterTypeRule: { type: undefined, operator: undefined },
-  alterVariableRule: {
-    type: undefined,
-    operator: undefined,
-    attribute: undefined,
-    value: undefined,
-  },
-  egoRule: {
-    attribute: undefined,
-    value: undefined,
-  },
+  edgeRule: ['type', 'operator'],
+  alterTypeRule: ['type', 'operator'],
+  alterVariableRule: ['type', 'operator', 'attribute', 'value'],
+  egoRule: ['attribute', 'value'],
 };

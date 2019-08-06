@@ -14,28 +14,7 @@ import {
   alterRuleTypes,
   alterRuleTypeOptions,
 } from './withAlterRuleType';
-
-const defaultOptions = {
-  type: null,
-  attribute: null,
-  operator: null,
-  value: '',
-};
-
-const getDefaultValue = (variableType) => {
-  switch (variableType) {
-    case 'boolean':
-      return false;
-    default:
-      return '';
-  }
-};
-
-const getOptionsWithDefaults = (options, variableType) => ({
-  ...defaultOptions,
-  value: getDefaultValue(variableType),
-  ...options,
-});
+import { makeGetOptionsWithDefaults } from './defaultRule';
 
 const EditAlterRule = ({
   alterRuleType,
@@ -49,10 +28,16 @@ const EditAlterRule = ({
   handleRuleChange,
 }) => {
   const options = rule && rule.options;
-  const optionsWithDefaults = getOptionsWithDefaults(options, variableType);
+  const getOptionsWithDefaults = makeGetOptionsWithDefaults(
+    variableType,
+    ['type', 'operator', 'attributes', 'value'],
+  );
+  const optionsWithDefaults = getOptionsWithDefaults(options);
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
   const isVariableRule = alterRuleType === alterRuleTypes.VARIABLE_ALTER;
   const isTypeRule = alterRuleType === alterRuleTypes.TYPE_ALTER;
+
+  console.log(optionsWithDefaults);
 
   return (
     <div className="rules-edit-rule__fields">
