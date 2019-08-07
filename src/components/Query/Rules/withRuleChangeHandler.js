@@ -11,7 +11,6 @@ const RULE_ORDER = [
 
 const withRuleChangeHandlers = withHandlers({
   handleRuleChange: ({ onChange, rule, variableType }) => {
-    console.log(keys(rule.options));
     const getOptionsWithDefaults = makeGetOptionsWithDefaults(keys(rule.options), variableType);
 
     return (event, value, oldValue, name) => {
@@ -26,8 +25,6 @@ const withRuleChangeHandlers = withHandlers({
 
       // ensure reset values have defaults
       const optionsWithDefaults = getOptionsWithDefaults(options);
-
-      console.log("it's me", { options, optionsWithDefaults });
 
       onChange({
         ...rule,

@@ -4,14 +4,15 @@ import React from 'react';
 import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import DetachedField from '@components/DetachedField';
-import { Text, Toggle, Number, RadioGroup, CheckboxGroup } from '@ui/components/Fields';
+import { Text, Toggle, Number } from '@ui/components/Fields';
+import RadioCheckbox from './RadioCheckbox';
 
 const INPUT_TYPES = {
   string: Text,
   number: Number,
   boolean: Toggle,
-  categorical: CheckboxGroup,
-  // ordinal: RadioGroup,
+  categorical: RadioCheckbox,
+  ordinal: RadioCheckbox,
 };
 
 /**
@@ -36,20 +37,17 @@ const EditValue = ({
   onChange,
   options,
   ...rest
-}) => {
-  console.log({ value} );
-  return (
-    <DetachedField
-      component={FieldComponent}
-      label={getLabel(variableType, value)}
-      name="value"
-      onChange={(...args) => { console.log(args); onChange(...args); }}
-      value={value}
-      options={options}
-      {...rest}
-    />
-  );
-};
+}) => (
+  <DetachedField
+    component={FieldComponent}
+    label={getLabel(variableType, value)}
+    name="value"
+    onChange={onChange}
+    value={value}
+    options={options}
+    {...rest}
+  />
+);
 
 EditValue.propTypes = {
   value: PropTypes.oneOfType([

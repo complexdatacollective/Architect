@@ -37,8 +37,6 @@ const EditAlterRule = ({
   const isVariableRule = alterRuleType === alterRuleTypes.VARIABLE_ALTER;
   const isTypeRule = alterRuleType === alterRuleTypes.TYPE_ALTER;
 
-  console.log(optionsWithDefaults);
-
   return (
     <div className="rules-edit-rule__fields">
       <h1>Edit Rule</h1>
