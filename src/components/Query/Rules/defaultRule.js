@@ -8,6 +8,7 @@ const DEFAULT_OPTIONS = {
 
 const DEFAULT_VALUES = {
   boolean: false,
+  categorical: [],
 };
 
 const getDefaultValue = variableType =>

@@ -7,7 +7,7 @@ import RadioCheckbox from '../RadioCheckbox';
 
 const getMockInput = (values = {}) => ({
   onChange: jest.fn(),
-  value: null,
+  value: [],
   ...values,
 });
 
@@ -18,20 +18,13 @@ const toggleCheckbox = checkbox =>
   checkbox.find('input').simulate('change', { target: { checked: true } });
 
 describe('RadioCheckbox', () => {
-  describe('translates input value to RadioCheckbox array', () => {
-    it('for null value', () => {
-      const subject = getSubject({ input: getMockInput() });
-      const checkboxGroupInput = subject.find(CheckboxGroup).prop('input');
-      expect(checkboxGroupInput.value).toEqual([]);
-    });
-    it('for string value', () => {
-      const subject = getSubject({ input: getMockInput({ value: 'foo' }) });
-      const checkboxGroupInput = subject.find(CheckboxGroup).prop('input');
-      expect(checkboxGroupInput.value).toEqual(['foo']);
-    });
+  it('sets input value correctly', () => {
+    const subject = getSubject({ input: getMockInput({ value: ['foo'] }) });
+    const checkboxGroupInput = subject.find(CheckboxGroup).prop('input');
+    expect(checkboxGroupInput.value).toEqual(['foo']);
   });
 
-  describe('translates RadioCheckbox onChange to flat value', () => {
+  describe('translates RadioCheckbox onChange to singular value', () => {
     const options = [{ value: 'foo', label: 'foo' }, { value: 'bar', label: 'bar' }];
 
     it('from null value', () => {
@@ -41,18 +34,18 @@ describe('RadioCheckbox', () => {
       const checkbox = subject.find(Checkbox).at(0);
       toggleCheckbox(checkbox);
 
-      // One call to onChange as: onChange('foo')
-      expect(input.onChange.mock.calls).toEqual([['foo']]);
+      // One call to onChange as: onChange(['foo'])
+      expect(input.onChange.mock.calls).toEqual([[['foo']]]);
     });
     it('from null value', () => {
-      const input = getMockInput({ value: 'foo' });
+      const input = getMockInput({ value: ['foo'] });
       const subject = getSubject({ input, options }, mount);
 
       const checkbox = subject.find(Checkbox).at(1);
       toggleCheckbox(checkbox);
 
-      // One call to onChange as: onChange('bar')
-      expect(input.onChange.mock.calls).toEqual([['bar']]);
+      // One call to onChange as: onChange(['bar'])
+      expect(input.onChange.mock.calls).toEqual([[['bar']]]);
     });
   });
 });

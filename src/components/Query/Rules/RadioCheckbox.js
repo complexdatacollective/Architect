@@ -4,14 +4,13 @@ import { CheckboxGroup } from '@ui/components/Fields';
 
 class RadioCheckbox extends Component {
   handleChange = (value) => {
-    const serializedValue = last(value);
-    this.props.input.onChange(serializedValue);
+    const flattenedValue = last(value);
+    this.props.input.onChange([flattenedValue]);
   }
 
   render() {
     const input = {
       ...this.props.input,
-      value: this.props.input.value ? [this.props.input.value] : [],
       onChange: this.handleChange,
     };
 

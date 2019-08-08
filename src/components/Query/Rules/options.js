@@ -14,6 +14,8 @@ export const validTypes = new Set([
 export const operators = {
   EXACTLY: 'EXACTLY',
   EXISTS: 'EXISTS',
+  INCLUDES: 'INCLUDES',
+  EXCLUDES: 'EXCLUDES',
   NOT_EXISTS: 'NOT_EXISTS',
   NOT: 'NOT',
   GREATER_THAN: 'GREATER_THAN',
@@ -32,6 +34,8 @@ export const operatorsAsOptions = [
   [operators.GREATER_THAN_OR_EQUAL, 'is Greater Than or Exactly'],
   [operators.LESS_THAN, 'is Less Than'],
   [operators.LESS_THAN_OR_EQUAL, 'is Less Than or Exactly'],
+  [operators.INCLUDES, 'includes'],
+  [operators.EXCLUDES, 'excludes'],
 ].map(([value, label]) => ({ value, label }));
 
 // Operators that also require a value to be used
@@ -42,14 +46,16 @@ export const operatorsWithValue = new Set([
   operators.GREATER_THAN_OR_EQUAL,
   operators.LESS_THAN,
   operators.LESS_THAN_OR_EQUAL,
+  operators.INCLUDES,
+  operators.EXCLUDES,
 ]);
 
 export const operatorsByType = {
   text: new Set(['EXACTLY', 'NOT']),
   number: new Set(['EXACTLY', 'NOT', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL']),
   boolean: new Set(['EXACTLY']),
-  ordinal: new Set(['EXACTLY']),
-  categorical: new Set(['EXACTLY']),
+  ordinal: new Set(['EXACTLY', 'NOT']),
+  categorical: new Set(['INCLUDES', 'EXCLUDES']),
   exists: new Set(['EXISTS', 'NOT_EXISTS']), // TODO: Better words for these?
 };
 
