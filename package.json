@@ -24,7 +24,7 @@
         "lint": "npm run lint:js && npm run lint:sass",
         "lint:js": "eslint src",
         "lint:sass": "sass-lint -vc .sass-lint.yml",
-        "test": "node scripts/test.js --env=jsdom",
+        "test": "cross-env TEST=true node scripts/test.js --env=jsdom",
         "test-update-snapshots": "node scripts/test.js --env=jsdom --updateSnapshot",
         "build-docs": "jsdoc src -r -d docs-build -c ./jsdoc.conf.json --verbose",
         "electron": "env NODE_ENV=build electron ./app",
