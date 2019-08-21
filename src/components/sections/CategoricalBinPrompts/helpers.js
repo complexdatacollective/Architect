@@ -3,15 +3,22 @@
 import { get } from 'lodash';
 import { formValueSelector } from 'redux-form';
 
+export const getOptionsForVariable = (state, { entity, type, variable }) =>
+  get(
+    state,
+    ['protocol', 'present', 'codebook', entity, type, 'variables', variable, 'options'],
+  );
+
+
 export const itemSelector = (entity, type) =>
   (state, { form, editField }) => {
     const prompt = formValueSelector(form)(state, editField);
 
     if (!prompt) { return {}; }
 
-    const variableOptions = get(
+    const variableOptions = getOptionsForVariable(
       state,
-      ['protocol', 'present', 'codebook', entity, type, 'variables', prompt.variable, 'options'],
+      { entity, type, variable: prompt.variable },
     );
 
     return {
