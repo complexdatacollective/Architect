@@ -69,7 +69,7 @@ describe('protocol/assetManifest', () => {
 
       return store.dispatch(actionCreators.importAsset(file)).then(() => {
         expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
-        expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
+        expect(log.mock.calls[2][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
         expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file]]);
       });
     });
