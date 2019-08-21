@@ -21,6 +21,7 @@ const PromptFields = ({
   variableOptions,
   handleCreateNewVariable,
   handleDeleteVariable,
+  handleUpdateVariable,
   normalizeKeyDown,
   entity,
   type,
@@ -61,6 +62,7 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={categoricalVariableOptions}
+          onChange={handleUpdateVariable}
           onCreateOption={openNewVariableWindow}
           onDeleteOption={handleDeleteVariable}
           onKeyDown={normalizeKeyDown}
@@ -141,6 +143,7 @@ PromptFields.propTypes = {
   variableOptions: PropTypes.array,
   handleCreateNewVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
+  handleUpdateVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   ...newWindowVariablePropTypes,
