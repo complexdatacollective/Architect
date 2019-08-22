@@ -10,7 +10,7 @@ import { getStore } from '../../../../ducks/store';
 
 const mockFormName = 'foo';
 
-const mockStore = getStore({
+const initialState = {
   protocol: {
     timeline: [],
     present: {
@@ -30,7 +30,7 @@ const mockStore = getStore({
       },
     },
   },
-});
+};
 
 const MockForm = reduxForm({
   form: mockFormName,
@@ -42,36 +42,82 @@ const MockForm = reduxForm({
   ),
 );
 
-const getSubject = (node, { form }) =>
+
+const getSubject = (node, store, { form }) =>
   mount((
-    <Provider store={mockStore}>
+    <Provider store={store}>
       <MockForm {...form}>
         {node}
       </MockForm>
     </Provider>
   ));
 
-describe('PromptFields', () => {
-  it('when variable is changed variable options are updated', () => {
-    const subject = getSubject((
-      <PromptFields
-        form={mockFormName}
-        entity="node"
-        type="person"
-      />
-    ),
-    { form: { initialValues: { variable: 'bazz', variableOptions: ['a', 'b', 'c', 'd'] } } });
+// eslint-disable-next-line import/prefer-default-export
+export const testPromptFields = (PromptFieldsComponent) => {
+  let mockStore;
 
-    expect(subject.find(Options).find(Item).length).toBe(4);
-
-    const dropdownChangeHandler = subject.find(ValidatedField)
-      .filter('[name="variable"]')
-      .prop('onChange');
-
-    dropdownChangeHandler(null, 'buzz');
-
-    subject.update();
-
-    expect(subject.find(Options).find(Item).length).toBe(2);
+  beforeEach(() => {
+    mockStore = getStore(initialState);
   });
-});
+
+  describe('PromptFields', () => {
+    it('when variable is created, variable options are updated', () => {
+      const formProps = { initialValues: { variable: 'bazz', variableOptions: ['a', 'b', 'c', 'd'] } };
+      const additionalProps = { form: formProps };
+
+      const subject = getSubject(
+        (
+          <PromptFieldsComponent
+            form={mockFormName}
+            entity="node"
+            type="person"
+          />
+        ),
+        mockStore,
+        additionalProps,
+      );
+
+      expect(subject.find(Options).find(Item).length).toBe(4);
+
+      const newVariableHandler = subject.find('NewVariableWindow')
+        .prop('onComplete');
+
+      newVariableHandler('buzz');
+
+      subject.update();
+
+      expect(subject.find(Options).find(Item).length).toBe(2);
+    });
+
+    it('when variable is changed, variable options are updated', () => {
+      const formProps = { initialValues: { variable: 'bazz', variableOptions: ['a', 'b', 'c', 'd'] } };
+      const additionalProps = { form: formProps };
+
+      const subject = getSubject(
+        (
+          <PromptFieldsComponent
+            form={mockFormName}
+            entity="node"
+            type="person"
+          />
+        ),
+        mockStore,
+        additionalProps,
+      );
+
+      expect(subject.find(Options).find(Item).length).toBe(4);
+
+      const dropdownChangeHandler = subject.find(ValidatedField)
+        .filter('[name="variable"]')
+        .prop('onChange');
+
+      dropdownChangeHandler(null, 'buzz');
+
+      subject.update();
+
+      expect(subject.find(Options).find(Item).length).toBe(2);
+    });
+  });
+};
+
+testPromptFields(PromptFields);
