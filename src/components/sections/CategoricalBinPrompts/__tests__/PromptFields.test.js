@@ -1,12 +1,12 @@
 /* eslint-env jest */
 import React from 'react';
 import { Provider } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, change } from 'redux-form';
 import { mount } from 'enzyme';
-import Options, { Item } from '../../../Options';
-import { ValidatedField } from '../../../Form';
-import PromptFields from '../PromptFields';
 import { getStore } from '../../../../ducks/store';
+import Options, { Item } from '../../../Options';
+import { actionCreators as codebookActions } from '../../../../ducks/modules/protocol/codebook';
+import PromptFields from '../PromptFields';
 
 const mockFormName = 'foo';
 
@@ -79,14 +79,25 @@ export const testPromptFields = (PromptFieldsComponent) => {
 
       expect(subject.find(Options).find(Item).length).toBe(4);
 
-      const newVariableHandler = subject.find('NewVariableWindow')
-        .prop('onComplete');
+      mockStore.dispatch(codebookActions.createVariable(
+        'node',
+        'person',
+        {
+          name: 'fizz',
+          type: 'foo',
+          options: [1, 2, 3],
+        },
+      ));
 
-      newVariableHandler('buzz');
+      mockStore.dispatch(change(
+        mockFormName,
+        'variable',
+        '809895df-bbd7-4c76-ac58-e6ada2625f9b',
+      ));
 
       subject.update();
 
-      expect(subject.find(Options).find(Item).length).toBe(2);
+      expect(subject.find(Options).find(Item).length).toBe(3);
     });
 
     it('when variable is changed, variable options are updated', () => {
@@ -107,11 +118,11 @@ export const testPromptFields = (PromptFieldsComponent) => {
 
       expect(subject.find(Options).find(Item).length).toBe(4);
 
-      const dropdownChangeHandler = subject.find(ValidatedField)
-        .filter('[name="variable"]')
-        .prop('onChange');
-
-      dropdownChangeHandler(null, 'buzz');
+      mockStore.dispatch(change(
+        mockFormName,
+        'variable',
+        'buzz',
+      ));
 
       subject.update();
 
