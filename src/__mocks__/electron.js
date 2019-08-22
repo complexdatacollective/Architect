@@ -18,7 +18,7 @@ const remote = {
 
 const ipcRenderer = {
   send: jest.fn(() => {}),
-  on: jest.fn(() => {})
+  on: jest.fn(() => {}),
 };
 
 module.exports = {

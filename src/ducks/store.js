@@ -37,7 +37,7 @@ const getMiddleware = () => {
   }
 
   return [thunk, logger, ipc, epics];
-}
+};
 
 const getEnhancers = () =>
   composeEnhancers(
