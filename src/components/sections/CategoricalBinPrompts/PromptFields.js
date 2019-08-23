@@ -16,7 +16,6 @@ import Options from '../../Options';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withPromptProps from './withPromptProps';
 
-
 const PromptFields = ({
   variableOptions,
   handleCreateNewVariable,
@@ -47,7 +46,7 @@ const PromptFields = ({
           Tip: You can use markdown formatting in this prompt to create bold or underlined text.
         </strong></p>
         <ValidatedField
-          name={'text'}
+          name="text"
           component={Text}
           label=""
           placeholder="Enter text for the prompt here..."
@@ -57,7 +56,7 @@ const PromptFields = ({
       <Row>
         <h3 id={getFieldId('variable')}>Categorical Variable</h3>
         <ValidatedField
-          name={'variable'}
+          name="variable"
           component={CreatableSelect}
           label=""
           options={categoricalVariableOptions}
@@ -139,8 +138,8 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   variableOptions: PropTypes.array,
-  handleCreateNewVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
+  handleCreateNewVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   ...newWindowVariablePropTypes,

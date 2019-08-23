@@ -41,9 +41,23 @@ const getType = (state, subject) => {
   return get(getCodebook(state), path, {});
 };
 
+/**
+ * Given `subject` return a list of variables
+ * for matching entity
+ *
+ * @param {object} state redux state
+ * @param {object} subject subject object in format `{ entity, type }`
+ */
 const getVariablesForSubject = (state, subject) =>
   get(getType(state, subject), 'variables', {});
 
+/**
+ * Given `subject` return a list of unused variables
+ * for matching entity
+ *
+ * @param {object} state redux state
+ * @param {object} subject subject object in format `{ entity, type }`
+ */
 const getUnusedVariablesForSubject = (state, subject) => {
   const variableIndex = getVariableIndex(state);
   const variablesForSubject = getVariablesForSubject(state, subject);
@@ -56,11 +70,31 @@ const getUnusedVariablesForSubject = (state, subject) => {
   return unusedVariables;
 };
 
+/**
+ * Given `subject` return a list of options (`{ label, value, ...}`)
+ * for matching entity
+ *
+ * @param {object} state redux state
+ * @param {object} subject subject object in format `{ entity, type }`
+ */
 const getVariableOptionsForSubject = (state, subject) => {
   const variables = getVariablesForSubject(state, subject);
   const options = asOptions(variables);
 
   return options;
+};
+
+/**
+ * Given { entity, type, variable } return options for the
+ * matching variable e.g. `state.node.person.variables.closeness.options`
+ *
+ * @param {object} state redux state
+ * @param {object} references references to variable
+ */
+const getOptionsForVariable = (state, { entity, type, variable }) => {
+  const variables = getVariablesForSubject(state, { entity, type });
+
+  return get(variables, [variable, 'options'], []);
 };
 
 const utils = {
@@ -75,5 +109,6 @@ export {
   getVariablesForSubject,
   getUnusedVariablesForSubject,
   getVariableOptionsForSubject,
+  getOptionsForVariable,
   utils,
 };
