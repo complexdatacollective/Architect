@@ -18,7 +18,8 @@ const persistConfig = {
   ],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const getReducer = () =>
+  persistReducer(persistConfig, rootReducer);
 
 const rootEpic = combineEpics(
   architectRootEpic,
@@ -30,19 +31,32 @@ const epics = createEpicMiddleware(rootEpic);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 
-const enhancers = composeEnhancers(
-  applyMiddleware(thunk, logger, ipc, epics),
-);
+const getMiddleware = () => {
+  if (process.env.TEST) {
+    return [thunk, epics];
+  }
 
-const store = createStore(
-  persistedReducer,
-  undefined,
-  enhancers,
-);
+  return [thunk, logger, ipc, epics];
+};
+
+const getEnhancers = () =>
+  composeEnhancers(
+    applyMiddleware(...getMiddleware()),
+  );
+
+const getStore = initialState =>
+  createStore(
+    getReducer(),
+    initialState,
+    getEnhancers(),
+  );
+
+const store = getStore(undefined);
 
 const persistor = persistStore(store);
 
 export {
+  getStore,
   store,
   persistor,
 };
