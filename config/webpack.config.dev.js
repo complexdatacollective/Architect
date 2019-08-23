@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
@@ -87,18 +88,21 @@ const config = {
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // "REACT_APP_" is a recognized prefix (see config/env.js)
-    new InterpolateHtmlPlugin({
-      ...env.raw,
-      // Whitelist inlined content in Content Security Policy
-      // REACT_APP_SCRIPT_SRC_CSP: `'sha256-${inlineCSP.hash256('react-error-overlay')}'`,
-      // Previously we whitelisted the react-error-overlay using the above code to
-      // generate an explicit hash. In the latest version of these tools multiple levels
-      // of indirection make getting at the code to hash very brittle.
-      // For now, hardcode to current version (react-error-overlay@5.0.0-next.3e165448)
-      REACT_APP_SCRIPT_SRC_CSP: "'sha256-gDC0EVcPe9MimCS3ZP14teSHr0GtEx+ggc0VQBfyvRI='",
-      // Whitelist inlined content for the Content-Security-Policy header
-      REACT_APP_CONNECT_SRC_CSP: 'ws://localhost:* wss://localhost:*',
-    }),
+    new InterpolateHtmlPlugin(
+      HtmlWebpackPlugin,
+      {
+        ...env.raw,
+        // Whitelist inlined content in Content Security Policy
+        // REACT_APP_SCRIPT_SRC_CSP: `'sha256-${inlineCSP.hash256('react-error-overlay')}'`,
+        // Previously we whitelisted the react-error-overlay using the above code to
+        // generate an explicit hash. In the latest version of these tools multiple levels
+        // of indirection make getting at the code to hash very brittle.
+        // For now, hardcode to current version (react-error-overlay@5.0.0-next.3e165448)
+        REACT_APP_SCRIPT_SRC_CSP: "'sha256-gDC0EVcPe9MimCS3ZP14teSHr0GtEx+ggc0VQBfyvRI='",
+        // Whitelist inlined content for the Content-Security-Policy header
+        REACT_APP_CONNECT_SRC_CSP: 'ws://localhost:* wss://localhost:*',
+      },
+    ),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     // new webpack.DefinePlugin(env.stringified),

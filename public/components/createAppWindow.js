@@ -44,7 +44,9 @@ function createAppWindow() {
       center: true,
       title: 'Network Canvas Architect',
       show: false,
-
+      webPreferences: {
+        nodeIntegration: true,
+      },
     }, titlebarParameters);
 
     global.appWindow = new BrowserWindow(windowParameters);

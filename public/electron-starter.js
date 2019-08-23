@@ -13,14 +13,12 @@ log.info('[updated]');
 const appManager = new AppManager();
 const previewManager = new PreviewManager(); // eslint-disable-line
 
-const shouldQuit = app.makeSingleInstance((argv) => {
-  log.info('shouldQuit', argv);
-  AppManager.openFileFromArgs(argv);
-});
-
-if (shouldQuit) {
-  AppManager.quit();
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+  app.quit();
+  return;
 }
+app.on('second-instance', argv => appManager.openFileFromArgs(argv));
 
 // open file on os x
 app.on('open-file', (event, filePath) => {
