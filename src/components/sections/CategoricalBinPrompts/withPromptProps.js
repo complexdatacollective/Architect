@@ -25,6 +25,7 @@ const mapDispatchToProps = {
 
 const variableOptions = connect(mapStateToProps, mapDispatchToProps);
 
+// Fix to keep redux 'sub-form' fields in sync
 const updateFormVariableOptions = lifecycle({
   componentDidUpdate(previousProps) {
     const {
@@ -44,10 +45,19 @@ const variableHandlers = withHandlers({
       changeForm(form, 'variable', variable);
       closeNewVariableWindow();
     },
-  handleDeleteVariable: ({ entity, type, deleteVariable, changeForm, form }) =>
+  handleDeleteVariable: ({
+    entity,
+    type,
+    deleteVariable,
+    changeForm,
+    form,
+    variable: selectedVariable,
+  }) =>
     (variable) => {
-      deleteVariable(entity, type, variable);
-      changeForm(form, 'variableOptions', []);
+      const variableDeleted = deleteVariable(entity, type, variable);
+      if (variableDeleted && variable === selectedVariable) {
+        changeForm(form, 'variable', null);
+      }
     },
 });
 
