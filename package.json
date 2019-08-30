@@ -43,7 +43,7 @@
     "devDependencies": {
         "@zippytech/sorty": "^2.0.0",
         "animejs": "^2.2.0",
-        "archiver": "^2.1.1",
+        "archiver": "^3.1.1",
         "autoprefixer": "7.1.2",
         "axios": "^0.18.0",
         "babel-core": "6.25.0",

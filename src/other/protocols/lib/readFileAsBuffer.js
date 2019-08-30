@@ -3,7 +3,7 @@ const readFileAsBuffer = file =>
     const reader = new FileReader();
 
     reader.onloadend = (event) => {
-      resolve(new Buffer(event.target.result));
+      resolve(Buffer.from(event.target.result));
     };
 
     reader.onerror = reject;
