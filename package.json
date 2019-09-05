@@ -105,7 +105,7 @@
         "jsdoc": "^3.4.3",
         "jsdoc-babel": "^0.3.0",
         "json-loader": "^0.5.7",
-        "jszip": "^3.1.5",
+        "jszip": "^3.2.2",
         "lodash": "^4.17.11",
         "mdns": "^2.5.1",
         "mini-css-extract-plugin": "^0.8.0",
