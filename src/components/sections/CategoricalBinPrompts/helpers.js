@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get } from 'lodash';
 import { formValueSelector } from 'redux-form';
+import { getOptionsForVariable } from '../../../selectors/codebook';
 
 export const itemSelector = (entity, type) =>
   (state, { form, editField }) => {
@@ -9,9 +9,9 @@ export const itemSelector = (entity, type) =>
 
     if (!prompt) { return {}; }
 
-    const variableOptions = get(
+    const variableOptions = getOptionsForVariable(
       state,
-      ['protocol', 'present', 'codebook', entity, type, 'variables', prompt.variable, 'options'],
+      { entity, type, variable: prompt.variable },
     );
 
     return {

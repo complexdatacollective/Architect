@@ -80,8 +80,8 @@ const importAssetThunk = asset =>
       })
       .catch((error) => {
         log.error('  ERROR', error);
-        dispatch(importAssetFailed(asset.name, error));
         dispatch(invalidAssetErrorDialog(error, asset.name));
+        return dispatch(importAssetFailed(asset.name, error));
       });
   };
 

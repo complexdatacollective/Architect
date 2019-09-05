@@ -11,6 +11,10 @@ const DefaultSelectOption = (props) => {
   const label = data.__createNewOption__ ?
     data.__createNewOption__ :
     data.label;
+  const handleClickDelete = (e) => {
+    e.stopPropagation();
+    props.onDeleteOption(data.value);
+  };
   /* eslint-enable */
 
   return (
@@ -32,7 +36,7 @@ const DefaultSelectOption = (props) => {
       { showDelete &&
         <div
           className="form-fields-select__item-delete"
-          onClick={() => props.onDeleteOption(data.value)}
+          onClick={handleClickDelete}
         >
           <Icon name="delete" />
         </div>

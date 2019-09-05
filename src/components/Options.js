@@ -48,7 +48,7 @@ const mapDispatchToItemProps = dispatch => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
-const Item = compose(
+export const Item = compose(
   connect(null, mapDispatchToItemProps),
   withHandlers({
     handleDelete: ({ fields, openDialog, index }) =>
@@ -108,7 +108,7 @@ Item.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-const Items = compose(
+export const Items = compose(
   defaultProps({
     lockAxis: 'y',
     useDragHandle: true,

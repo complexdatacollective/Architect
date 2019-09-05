@@ -37,13 +37,14 @@ Row.propTypes = {
   disabled: PropTypes.bool,
   contentId: PropTypes.string,
   focus: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 Row.defaultProps = {
   focus: false,
   contentId: null,
   disabled: false,
+  children: null,
 };
 
 export default Row;

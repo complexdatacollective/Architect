@@ -6,16 +6,26 @@ export const invalidAssetErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <React.Fragment>
       <p>
-        <em>{path.basename(filePath)}</em> seems to be in an invalid format.<br /><br />
-        Please help us to troubleshoot this issue by sharing the asset file (or
-        the steps to reproduce this problem)
-        with us by emailing <code>info@networkcanvas.com</code>.
+        The file you attmpted to import is not in a format supported by Network
+        Canvas.
+      </p>
+      <p>
+        <strong>Reminder:</strong> Network Canvas supports importing network data in
+        either JSON or CSV format. JSON files must contain a &quot;nodes&quot; and/or
+        &quot;edges&quot; list in the root object, and CSV data should contain a header
+        row comprising variable names, and be in the format of a node or edge list.
+      </p>
+      <p>
+        If you believe you are seeing this message in error, please help us to
+        troubleshoot the issue by sharing the asset file with us at&nbsp;
+        <code>info@networkcanvas.com</code>.
       </p>
     </React.Fragment>
   );
 
   return dialogActions.openDialog({
-    type: 'Error',
+    type: 'UserError',
+    title: `Error: ${path.basename(filePath)} is not formatted correctly`,
     error: e,
   });
 };

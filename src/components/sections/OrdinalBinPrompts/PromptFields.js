@@ -79,7 +79,7 @@ const PromptFields = ({
       <Row>
         { variable &&
           <Section>
-            <h3 id={getFieldId('options')}>Variable Options</h3>
+            <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
             <p>Create some options for this variable</p>
             <Options
               name="variableOptions"
