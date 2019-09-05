@@ -1,4 +1,4 @@
-const { app } = require('electron');
+const { app, protocol } = require('electron');
 const log = require('./components/log');
 const createAppWindow = require('./components/createAppWindow');
 const createPreviewWindow = require('./components/createPreviewWindow');
@@ -6,6 +6,16 @@ const AppManager = require('./components/appManager');
 const PreviewManager = require('./components/previewManager');
 
 global.NETWORK_CANVAS_PREVIEW = true;
+
+protocol.registerSchemesAsPrivileged([{
+  scheme: 'asset',
+  privileges: {
+    secure: true,
+    supportFetchAPI: true,
+    bypassCSP: true,
+    corsEnabled: true,
+  },
+}]);
 
 log.info('App starting...');
 log.info('[updated]');

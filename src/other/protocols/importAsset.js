@@ -1,6 +1,6 @@
 import path from 'path';
 import uuid from 'uuid/v1';
-import { findKey, get } from 'lodash';
+import { findKey, get, toLower } from 'lodash';
 import csvParse from 'csv-parse';
 import { writeFile } from 'fs-extra';
 import readFileAsBuffer from './lib/readFileAsBuffer';
@@ -28,8 +28,7 @@ const getTypeFromMime = (mime, mimeTypes = MIME_TYPES) => {
 };
 
 const getTypeFromExtension = (name, extensionTypes = EXTENSION_TYPES) => {
-  const extension = path.extname(name);
-
+  const extension = toLower(path.extname(name).substring(1));
   return findKey(extensionTypes, type => type.includes(extension));
 };
 
@@ -103,7 +102,7 @@ const validateCsv = data =>
 export const validateAsset = (file) => {
   const assetType = getTypeFromMime(file.type) || getTypeFromExtension(file.name);
 
-  if (assetType !== 'network') { Promise.resolve(true); }
+  if (assetType !== 'network') { return Promise.resolve(true); }
 
   const networkType = getNetworkType(file);
 
