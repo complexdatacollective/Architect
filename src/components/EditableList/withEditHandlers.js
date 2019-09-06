@@ -37,7 +37,6 @@ const mapDispatchToProps = (dispatch, { form }) => ({
 const mapItemStateToProps = (state, { form, itemSelector, editField, template }) => {
   const item = itemSelector(state, { form, editField });
   const initialValues = item || { ...template(), id: uuid() };
-
   return { initialValues };
 };
 

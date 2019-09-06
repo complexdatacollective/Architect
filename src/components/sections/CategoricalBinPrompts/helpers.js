@@ -6,8 +6,7 @@ import { getOptionsForVariable } from '../../../selectors/codebook';
 export const itemSelector = (entity, type) =>
   (state, { form, editField }) => {
     const prompt = formValueSelector(form)(state, editField);
-
-    if (!prompt) { return {}; }
+    if (!prompt) { return null; }
 
     const variableOptions = getOptionsForVariable(
       state,
