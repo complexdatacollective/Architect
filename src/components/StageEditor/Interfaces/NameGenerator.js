@@ -1,7 +1,6 @@
 import {
   Name,
   NodeType,
-  Filter,
   Form,
   NameGeneratorPrompts,
   NodePanels,
@@ -11,7 +10,6 @@ const NameGenerator = {
   sections: [
     Name,
     NodeType,
-    Filter,
     Form,
     NameGeneratorPrompts,
     NodePanels,
