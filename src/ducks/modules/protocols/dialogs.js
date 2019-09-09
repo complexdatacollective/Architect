@@ -1,6 +1,18 @@
+import log from 'electron-log';
 import React from 'react';
 import path from 'path';
 import { actionCreators as dialogActions } from '../dialogs';
+
+export const migrateSchemaDialog = (callback) => {
+  log.debug('migrate dialog');
+  return dialogActions.openDialog({
+    type: 'Confirm',
+    title: 'Migrate',
+    message: 'Migrate!',
+    confirmLabel: 'Do it',
+    onConfirm: callback,
+  });
+};
 
 export const validationErrorDialog = (e) => {
   e.friendlyMessage = (

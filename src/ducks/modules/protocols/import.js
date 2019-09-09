@@ -1,8 +1,10 @@
+import log from 'electron-log';
 import unbundleProtocol from '../../../other/protocols/unbundleProtocol';
 import { loadProtocolConfiguration } from '../../../other/protocols';
 import { actionCreators as registerActions } from './register';
 import validateProtocol from '../../../utils/validateProtocol';
-import { validationErrorDialog } from './dialogs';
+// import migrateProtocol from '../../../protocol-validation/migrations/migrateProtocol';
+import { validationErrorDialog, migrateSchemaDialog } from './dialogs';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
@@ -43,10 +45,29 @@ const importProtocolThunk = filePath =>
                 dispatch(validationErrorDialog(e, filePath));
               });
 
+            // Next, check the schema version, and migrate if required.
+            const ARCHITECT_SCHEMA_VERSION = 2;
+
+            if (parseInt(protocol.schemaVersion, 10) < ARCHITECT_SCHEMA_VERSION) {
+              log.error('schema needs updating');
+              log.error(protocol.schemaVersion);
+              dispatch(migrateSchemaDialog(
+                () => console.log('you did it'),
+              ));
+
+              // migrateProtocol(protocol, ARCHITECT_SCHEMA_VERSION)
+              // .catch((e) => {
+              //   dispatch(migrationErrorDialog(e, filePath));
+              // });
+            } else {
+              log.error('schema version okay');
+              log.error(protocol.schemaVersion);
+            }
+
             return protocol;
           })
           .then(() => {
-            // all was well
+            // all was well with the world. for now.
             dispatch(importProtocolSuccess({ filePath, workingPath }));
             return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
           }),

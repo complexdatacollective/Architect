@@ -24,7 +24,7 @@ const asyncValidateLogic = async protocol =>
 
 const validateProtocol = (protocol) => {
   log.debug('validateProtocol()');
-
+  log.error(protocol.schemaVersion);
   return Promise.all([
     asyncValidateLogic(protocol),
     asyncValidateSchema(protocol),
