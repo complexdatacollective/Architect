@@ -5,7 +5,7 @@ import Dropzone from './Dropzone';
 import { actionCreators as assetActions } from '../../ducks/modules/protocol/assetManifest';
 
 const ACCEPTS = {
-  network: ['text/csv', 'application/json', 'text/*,', 'text/*', '.csv'], // text/*, is a workaround for windows not correctly setting mime type for CSV.
+  network: ['text/csv', 'application/json', 'application/vnd.ms-excel'], // application/vnd.ms-excel for windows
   image: ['image/*'],
   audio: ['audio/*'],
   video: ['video/*'],
