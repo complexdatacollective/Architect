@@ -18,16 +18,17 @@ protocol.registerSchemesAsPrivileged([{
 }]);
 
 log.info('App starting...');
-log.info('[updated]');
 
 const appManager = new AppManager();
 const previewManager = new PreviewManager(); // eslint-disable-line
 
 const gotTheLock = app.requestSingleInstanceLock();
 if (!gotTheLock) {
+  log.info('Another instance of Architect is already running...quitting.');
   app.quit();
   return;
 }
+
 app.on('second-instance', argv => appManager.openFileFromArgs(argv));
 
 // open file on os x
