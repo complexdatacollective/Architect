@@ -1,54 +1,49 @@
 import path from 'path';
 import uuid from 'uuid/v1';
+import log from 'electron-log';
 import { findKey, get } from 'lodash';
 import csvParse from 'csv-parse';
 import { writeFile } from 'fs-extra';
 import readFileAsBuffer from './lib/readFileAsBuffer';
 
-const MIME_TYPES = [
-  [/text\/csv/, 'network'],
-  [/application\/json/, 'network'],
-  [/text\/*,/, 'network'],
-  [/image\/.*/, 'image'],
-  [/audio\/.*/, 'audio'],
-  [/video\/.*/, 'video'],
-];
-
-const EXTENSION_TYPES = {
-  network: ['csv', 'json'],
-  image: ['jpg', 'jpeg', 'gif', 'png'],
-  audio: ['mp3', 'aiff'],
-  video: ['mov', 'mp4'],
+// Remember to also update getNetworkType!
+const SUPPORTED_MIME_TYPE_MAP = {
+  network: ['application/json', 'text/csv', 'text/*,', 'application/vnd.ms-excel'],
+  image: ['image/*'],
+  audio: ['audio/*'],
+  video: ['video/*'],
 };
 
-const getTypeFromMime = (mime, mimeTypes = MIME_TYPES) => {
-  const match = mimeTypes.find(([matcher]) => matcher.test(mime));
-  if (!match) { return null; }
-  return match[1];
+// Remember to also update getNetworkType!
+const SUPPORTED_EXTENSION_TYPE_MAP = {
+  network: ['.csv', '.json'],
+  image: ['.jpg', '.jpeg', '.gif', '.png'],
+  audio: ['.mp3', '.aiff'],
+  video: ['.mov', '.mp4'],
 };
 
-const getTypeFromExtension = (name, extensionTypes = EXTENSION_TYPES) => {
-  const extension = path.extname(name);
+// Returns one of network, image, audio, video or returns false if type is unsupported
+const getSupportedAssetType = (asset) => {
+  const extension = path.extname(asset.name);
+  const mimeType = asset.type;
 
-  return findKey(extensionTypes, type => type.includes(extension));
+  const typeFromMap = findKey(SUPPORTED_EXTENSION_TYPE_MAP, type => type.includes(extension)) ||
+  findKey(SUPPORTED_MIME_TYPE_MAP, type => type.includes(mimeType));
+
+  return typeFromMap || false;
 };
 
+// Returns either json or csv, or undefined
 const getNetworkType = (file) => {
-  const networkMimeTypes = [
-    [/text\/csv/, 'csv'],
-    [/application\/json/, 'json'],
-    [/text\/*,/, 'csv'],
-  ];
+  const extension = path.extname(file.name);
+  const mimeType = file.type;
 
-  const networkExtensionTypes = {
-    json: ['json'],
-    csv: ['csv'],
+  const NETWORK_TYPE_MAP = {
+    json: ['application/json', '.json'],
+    csv: ['text/csv', 'text/*,', 'application/vnd.ms-excel', '.csv'],
   };
 
-  const networkType = getTypeFromMime(file.type, networkMimeTypes) ||
-    getTypeFromExtension(file.name, networkExtensionTypes);
-
-  return networkType;
+  return findKey(NETWORK_TYPE_MAP, type => type.includes(mimeType) || type.includes(extension));
 };
 
 /**
@@ -59,7 +54,7 @@ const getNetworkType = (file) => {
 const importAsset = (protocolPath, file) => {
   const destinationName = `${uuid()}${path.extname(file.name)}`;
   const destinationPath = path.join(protocolPath, 'assets', destinationName);
-  const assetType = getTypeFromMime(file.type) || getTypeFromExtension(file.name);
+  const assetType = getSupportedAssetType(file);
 
   return readFileAsBuffer(file)
     .then(data => writeFile(destinationPath, data))
@@ -77,7 +72,8 @@ const validateJson = data =>
 
       resolve(true);
     } catch (e) {
-      reject(e);
+      log.error('  ERROR', e);
+      reject('validationError');
     }
   });
 
@@ -92,7 +88,8 @@ const validateCsv = data =>
         resolve(true);
       });
     } catch (e) {
-      reject(e);
+      log.error('  ERROR', e);
+      reject('validationError');
     }
   });
 
@@ -101,9 +98,15 @@ const validateCsv = data =>
  * @param {buffer} file - The file to check.
  */
 export const validateAsset = (file) => {
-  const assetType = getTypeFromMime(file.type) || getTypeFromExtension(file.name);
+  const assetType = getSupportedAssetType(file);
 
-  if (assetType !== 'network') { Promise.resolve(true); }
+  // Handle unsupported file types
+  if (!assetType) {
+    return Promise.reject('unsupportedError');
+  }
+
+  if (assetType !== 'network') { return Promise.resolve(true); }
+
 
   const networkType = getNetworkType(file);
 

@@ -5,7 +5,7 @@ import log from 'electron-log';
 import { importAsset as fsImportAsset } from 'App/other/protocols';
 import { getActiveProtocolMeta } from 'App/selectors/protocol';
 import { validateAsset } from 'App/other/protocols/importAsset';
-import { invalidAssetErrorDialog, importAssetErrorDialog } from 'App/ducks/modules/protocol/utils/dialogs';
+import { invalidAssetErrorDialog, importAssetErrorDialog, unsupportedAssetErrorDialog } from 'App/ducks/modules/protocol/utils/dialogs';
 
 const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';
 const IMPORT_ASSET_COMPLETE = 'PROTOCOL/IMPORT_ASSET_COMPLETE';
@@ -79,9 +79,18 @@ const importAssetThunk = asset =>
         return dispatch(importAssetComplete(filePath, name, assetType));
       })
       .catch((error) => {
-        log.error('  ERROR', error);
-        dispatch(invalidAssetErrorDialog(error, asset.name));
-        return dispatch(importAssetFailed(asset.name, error));
+        if (error === 'validationError') {
+          dispatch(invalidAssetErrorDialog(asset.name));
+          return dispatch(importAssetFailed(asset.name, error));
+        }
+
+        if (error === 'unsupportedError') {
+          dispatch(unsupportedAssetErrorDialog());
+          return dispatch(importAssetFailed(asset.name, error));
+        }
+
+        dispatch(importAssetErrorDialog(error, asset.name));
+        return Promise.reject(error);
       });
   };
 
