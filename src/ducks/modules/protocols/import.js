@@ -1,8 +1,10 @@
+import checkSupport from '@app/protocol-validation/validation/checkSupport';
 import unbundleProtocol from '../../../other/protocols/unbundleProtocol';
 import { loadProtocolConfiguration } from '../../../other/protocols';
 import { actionCreators as registerActions } from './register';
 import validateProtocol from '../../../utils/validateProtocol';
 import { validationErrorDialog } from './dialogs';
+import { SCHEMA_VERSION } from '../../../config';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
@@ -25,30 +27,43 @@ const importProtocolError = (error, filePath) => ({
   error,
 });
 
+const versionMatchWorkflow = (dispatch, { protocol, filePath, workingPath }) =>
+  validateProtocol(protocol)
+    // We don't actually want to stop the protocol from being
+    // imported for a validation error, so this is separate
+    // from the loading logic
+    .catch((e) => {
+      dispatch(validationErrorDialog(e, filePath));
+    })
+    .then(() => {
+      // all was well
+      dispatch(importProtocolSuccess({ filePath, workingPath }));
+      return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
+    });
+
+const upgradeWorkflow = ({ filePath }) =>
+  dispatch =>
+    dispatch(upgradeAppDialog(filePath));
+
 const importProtocolThunk = filePath =>
   (dispatch) => {
     dispatch(importProtocol(filePath));
 
     return unbundleProtocol(filePath)
       .then(workingPath =>
-        // check we can open the protocol file
         loadProtocolConfiguration(workingPath)
-          // it loaded okay, check the protocol is valid
           .then((protocol) => {
-            // We don't actually want to stop the protocol from being
-            // imported for a validation error, so this is separate
-            // from the loading logic
-            validateProtocol(protocol)
-              .catch((e) => {
-                dispatch(validationErrorDialog(e, filePath));
-              });
+            // If the schema version is higher than the app
+            if (protocol.schemaVersion > SCHEMA_VERSION) {
 
-            return protocol;
-          })
-          .then(() => {
-            // all was well
-            dispatch(importProtocolSuccess({ filePath, workingPath }));
-            return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
+              // show a notice to the user about upgrading
+              return upgradeWorkflow({ filePath });
+            }
+            if (protocol.schemaVersion < SCHEMA_VERSION) {
+              // check migrate, confirm dialog
+            }
+
+            return versionMatchWorkflow(dispatch, { protocol, filePath, workingPath });
           }),
       )
       .catch((e) => {
