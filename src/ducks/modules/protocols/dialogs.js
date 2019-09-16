@@ -1,5 +1,6 @@
 import React from 'react';
 import path from 'path';
+import { APP_SCHEMA_VERSION } from '@app/config';
 import { actionCreators as dialogActions } from '../dialogs';
 
 export const validationErrorDialog = (e) => {
@@ -46,5 +47,20 @@ export const importErrorDialog = (e, filePath) => {
   return dialogActions.openDialog({
     type: 'Error',
     error: e,
+  });
+};
+
+export const upgradeAppDialog = (filePath = '', protocol) => {
+  const message = (
+    <React.Fragment>
+      UPGRADE NOTICE
+      <em>{path.basename(filePath)}</em>
+      cannot be upgraded from {protocol.schemaVersion} to {APP_SCHEMA_VERSION}
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'Warning',
+    message,
   });
 };

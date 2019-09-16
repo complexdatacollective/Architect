@@ -1,10 +1,13 @@
-import checkSupport from '@app/protocol-validation/validation/checkSupport';
-import unbundleProtocol from '../../../other/protocols/unbundleProtocol';
-import { loadProtocolConfiguration } from '../../../other/protocols';
+import { remote } from 'electron';
+import path from 'path';
+import { APP_SCHEMA_VERSION } from '@app/config';
+import hasMigrationPath from '@app/protocol-validation/migrations/hasMigrationPath';
+import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
+import validateProtocol from '@app/utils/validateProtocol';
+import unbundleProtocol from '@app/other/protocols/unbundleProtocol';
+import { loadProtocolConfiguration, saveProtocol, bundleProtocol } from '@app/other/protocols';
 import { actionCreators as registerActions } from './register';
-import validateProtocol from '../../../utils/validateProtocol';
-import { validationErrorDialog } from './dialogs';
-import { SCHEMA_VERSION } from '../../../config';
+import { validationErrorDialog, upgradeAppDialog } from './dialogs';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
@@ -27,23 +30,74 @@ const importProtocolError = (error, filePath) => ({
   error,
 });
 
-const versionMatchWorkflow = (dispatch, { protocol, filePath, workingPath }) =>
-  validateProtocol(protocol)
-    // We don't actually want to stop the protocol from being
-    // imported for a validation error, so this is separate
-    // from the loading logic
-    .catch((e) => {
-      dispatch(validationErrorDialog(e, filePath));
-    })
-    .then(() => {
-      // all was well
-      dispatch(importProtocolSuccess({ filePath, workingPath }));
-      return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
+const getNewFileName = filePath =>
+  new Promise((resolve, reject) => {
+    const basename = path.basename(filePath, '.netcanvas');
+
+    remote.dialog.showSaveDialog(
+      {
+        buttonLabel: 'Save',
+        nameFieldLabel: 'Save:',
+        defaultPath: `${basename}_v${APP_SCHEMA_VERSION}.netcanvas`,
+        filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
+      },
+      (filename) => {
+        if (filename === undefined) { reject(); return; }
+        resolve(filename);
+      },
+    );
+  });
+
+// TODO: make these thunks
+const upgradeWorkflow = ({ filePath, protocol }) =>
+  dispatch =>
+    dispatch(upgradeAppDialog(filePath, protocol));
+
+const checkMigrationPath = ({ protocol, filePath }) =>
+  dispatch =>
+    new Promise((resolve, reject) => {
+      if (!hasMigrationPath(protocol, APP_SCHEMA_VERSION)) {
+        dispatch(upgradeWorkflow({ filePath, protocol }));
+        reject();
+        return;
+      }
+
+      resolve(true);
     });
 
-const upgradeWorkflow = ({ filePath }) =>
+const versionMatchWorkflow = ({ protocol, filePath, workingPath }) =>
   dispatch =>
-    dispatch(upgradeAppDialog(filePath));
+    validateProtocol(protocol)
+      // We don't actually want to stop the protocol from being
+      // imported for a validation error, so this is separate
+      // from the loading logic
+      .catch((e) => {
+        dispatch(validationErrorDialog(e, filePath));
+      })
+      .then(() => {
+        // all was well
+        dispatch(importProtocolSuccess({ filePath, workingPath }));
+        return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
+      });
+
+const migrateWorkflow = ({ protocol, filePath, workingPath }) =>
+  dispatch =>
+    dispatch(checkMigrationPath({ protocol, filePath }))
+      // perform migration
+      .then(() => getNewFileName(filePath))
+      .then((newFilePath) => {
+        const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
+
+        return saveProtocol(workingPath, updatedProtocol)
+          .then(() => bundleProtocol(workingPath, newFilePath))
+          .then(() =>
+            dispatch(versionMatchWorkflow({
+              protocol: updatedProtocol,
+              filePath: newFilePath,
+              workingPath,
+            })),
+          );
+      });
 
 const importProtocolThunk = filePath =>
   (dispatch) => {
@@ -53,17 +107,21 @@ const importProtocolThunk = filePath =>
       .then(workingPath =>
         loadProtocolConfiguration(workingPath)
           .then((protocol) => {
-            // If the schema version is higher than the app
-            if (protocol.schemaVersion > SCHEMA_VERSION) {
+            return dispatch(migrateWorkflow({ protocol, filePath, workingPath }));
 
-              // show a notice to the user about upgrading
-              return upgradeWorkflow({ filePath });
-            }
-            if (protocol.schemaVersion < SCHEMA_VERSION) {
-              // check migrate, confirm dialog
-            }
+            // // If the schema version is higher than the app
+            // if (protocol.schemaVersion > APP_SCHEMA_VERSION) {
+            //   // show a notice to the user about upgrading
+            //   return dispatch(upgradeWorkflow({ filePath }));
+            // }
 
-            return versionMatchWorkflow(dispatch, { protocol, filePath, workingPath });
+            // // If the schema is potentially upgradable
+            // if (protocol.schemaVersion < APP_SCHEMA_VERSION) {
+            //   // check migrate, confirm dialog
+            //   return dispatch(migrateWorkflow({ protocol, filePath }));
+            // }
+
+            // return dispatch(versionMatchWorkflow({ protocol, filePath, workingPath }));
           }),
       )
       .catch((e) => {

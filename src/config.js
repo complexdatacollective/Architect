@@ -19,4 +19,4 @@ export const COLOR_PALETTE_BY_ENTITY = {
   edge: 'edge-color-seq',
 };
 
-export const SCHEMA_VERSION = '2';
+export const APP_SCHEMA_VERSION = '2';
