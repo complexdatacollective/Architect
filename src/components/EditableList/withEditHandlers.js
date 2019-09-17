@@ -35,10 +35,11 @@ const mapDispatchToProps = (dispatch, { form }) => ({
 });
 
 const mapItemStateToProps = (state, { form, itemSelector, editField, template }) => {
-  const item = itemSelector(state, { form, editField });
-  const initialValues = item || { ...template(), id: uuid() };
+  const item = formValueSelector(form)(state, editField);
 
-  return { initialValues };
+  if (!item) { return { initialValues: { ...template(), id: uuid() } }; }
+
+  return { initialValues: itemSelector(state, item) };
 };
 
 const stateHandlers = withStateHandlers(
