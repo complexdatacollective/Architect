@@ -5,7 +5,7 @@ import Icon from '../../ui/components/Icon';
 import withAssetMeta from './withAssetMeta';
 
 const Network = ({ id, meta }) => (
-  <div className={cx('assets-network', { 'assets-network--existing': id === 'existing' })}>
+  <div className={cx('assets assets-network', { 'assets-network--existing': id === 'existing' })}>
     <div className="assets-network__icon"><Icon name="menu-sociogram" /></div>
     <div className="assets-network__label">
       {meta.name}

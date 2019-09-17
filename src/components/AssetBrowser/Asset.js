@@ -5,7 +5,7 @@ import Icon from '../../ui/components/Icon';
 import * as Assets from '../Assets';
 
 const FallBackAssetComponent = () => (
-  <div>No suitable component found.</div>
+  <div>No preview component available for this asset type.</div>
 );
 
 const ASSET_COMPONENTS = {
