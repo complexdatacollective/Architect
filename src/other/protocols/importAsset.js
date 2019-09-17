@@ -1,46 +1,60 @@
 import path from 'path';
 import uuid from 'uuid/v1';
-import log from 'electron-log';
 import { findKey, get } from 'lodash';
 import csvParse from 'csv-parse';
 import { writeFile } from 'fs-extra';
 import readFileAsBuffer from './lib/readFileAsBuffer';
 
-// Remember to also update getNetworkType!
-const SUPPORTED_MIME_TYPE_MAP = {
-  network: ['application/json', 'text/csv', 'text/*,', 'application/vnd.ms-excel'],
+// Remember to also update getNetworkType when changing these (below)!
+export const SUPPORTED_MIME_TYPE_MAP = {
+  network: ['application/json', 'text/csv', 'application/vnd.ms-excel'],
   image: ['image/*'],
   audio: ['audio/*'],
   video: ['video/*'],
 };
 
-// Remember to also update getNetworkType!
-const SUPPORTED_EXTENSION_TYPE_MAP = {
+// Remember to also update getNetworkType when changing these (below)!
+export const SUPPORTED_EXTENSION_TYPE_MAP = {
   network: ['.csv', '.json'],
   image: ['.jpg', '.jpeg', '.gif', '.png'],
   audio: ['.mp3', '.aiff'],
   video: ['.mov', '.mp4'],
 };
 
-// Returns one of network, image, audio, video or returns false if type is unsupported
+/**
+ * Function that determines the type of an asset file when importing. Types are defined
+ * as one of 'network', 'image', 'audio', or video.
+ *
+ * Uses the mime type where possible, and falls back to the file extension.
+ *
+ * @param {string} asset - the filename of the asset
+ * @return {string} Returns one of network, image, audio, video or returns false if type
+ * is unsupported
+ */
 const getSupportedAssetType = (asset) => {
   const extension = path.extname(asset.name);
   const mimeType = asset.type;
 
-  const typeFromMap = findKey(SUPPORTED_EXTENSION_TYPE_MAP, type => type.includes(extension)) ||
-  findKey(SUPPORTED_MIME_TYPE_MAP, type => type.includes(mimeType));
+  const typeFromMap =
+    findKey(SUPPORTED_MIME_TYPE_MAP, type => type.includes(mimeType)) ||
+    findKey(SUPPORTED_EXTENSION_TYPE_MAP, type => type.includes(extension));
 
   return typeFromMap || false;
 };
 
-// Returns either json or csv, or undefined
+/**
+ * Function to determine if network file is CSV or JSON based for validation purposes.
+ * Returns .
+ * @param {string} file - The filename of the network asset
+ * @returns {string} - Returns either json or csv, or undefined
+ */
 const getNetworkType = (file) => {
   const extension = path.extname(file.name);
   const mimeType = file.type;
 
   const NETWORK_TYPE_MAP = {
     json: ['application/json', '.json'],
-    csv: ['text/csv', 'text/*,', 'application/vnd.ms-excel', '.csv'],
+    csv: ['text/csv', 'application/vnd.ms-excel', '.csv'],
   };
 
   return findKey(NETWORK_TYPE_MAP, type => type.includes(mimeType) || type.includes(extension));
@@ -72,8 +86,7 @@ const validateJson = data =>
 
       resolve(true);
     } catch (e) {
-      log.error('  ERROR', e);
-      reject('validationError');
+      reject(e);
     }
   });
 
@@ -88,8 +101,7 @@ const validateCsv = data =>
         resolve(true);
       });
     } catch (e) {
-      log.error('  ERROR', e);
-      reject('validationError');
+      reject(e);
     }
   });
 
@@ -105,6 +117,7 @@ export const validateAsset = (file) => {
     return Promise.reject('unsupportedError');
   }
 
+  // Don't validate non-network assets at this time
   if (assetType !== 'network') { return Promise.resolve(true); }
 
 
