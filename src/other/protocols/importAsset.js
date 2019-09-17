@@ -4,22 +4,8 @@ import { findKey, get } from 'lodash';
 import csvParse from 'csv-parse';
 import { writeFile } from 'fs-extra';
 import readFileAsBuffer from './lib/readFileAsBuffer';
+import { SUPPORTED_EXTENSION_TYPE_MAP, SUPPORTED_MIME_TYPE_MAP } from '../../config';
 
-// Remember to also update getNetworkType when changing these (below)!
-export const SUPPORTED_MIME_TYPE_MAP = {
-  network: ['application/json', 'text/csv', 'application/vnd.ms-excel'],
-  image: ['image/*'],
-  audio: ['audio/*'],
-  video: ['video/*'],
-};
-
-// Remember to also update getNetworkType when changing these (below)!
-export const SUPPORTED_EXTENSION_TYPE_MAP = {
-  network: ['.csv', '.json'],
-  image: ['.jpg', '.jpeg', '.gif', '.png'],
-  audio: ['.mp3', '.aiff'],
-  video: ['.mov', '.mp4'],
-};
 
 /**
  * Function that determines the type of an asset file when importing. Types are defined

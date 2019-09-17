@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { has, each } from 'lodash';
 import { compose, withProps, withHandlers } from 'recompose';
 import Dropzone from './Dropzone';
-import { SUPPORTED_MIME_TYPE_MAP, SUPPORTED_EXTENSION_TYPE_MAP } from '../../other/protocols/importAsset';
+import { SUPPORTED_MIME_TYPE_MAP, SUPPORTED_EXTENSION_TYPE_MAP } from '../../config';
 import { actionCreators as assetActions } from '../../ducks/modules/protocol/assetManifest';
 
 const mapDispatchToProps = dispatch => ({
