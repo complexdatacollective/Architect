@@ -5,7 +5,7 @@ import Icon from '../../ui/components/Icon';
 import withAssetMeta from './withAssetMeta';
 
 const Audio = ({ id, meta }) => (
-  <div className={cx('assets-audio', { 'assets-audio--existing': id === 'existing' })}>
+  <div className={cx('assets assets-audio', { 'assets-audio--existing': id === 'existing' })}>
     <div className="assets-audio__icon"><Icon name="menu-custom-interface" /></div>
     <div className="assets-audio__label">
       {meta.name}

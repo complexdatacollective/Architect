@@ -1,5 +1,4 @@
 
-import { formValueSelector } from 'redux-form';
 import { omit, get, reduce } from 'lodash';
 import { getVariablesForSubject } from '../../../selectors/codebook';
 
@@ -24,19 +23,15 @@ export const normalizeField = field =>
 
 // Merge item with variable info from codebook
 export const itemSelector = (entity, type) =>
-  (state, { form, editField }) => {
-    const item = formValueSelector(form)(state, editField);
-
-    if (!item) { return null; }
-
-    const variable = item && item.variable;
+  (state, prompt) => {
+    const variable = prompt.variable;
 
     const codebookVariables = getVariablesForSubject(state, { entity, type });
     const codebookVariable = get(codebookVariables, variable, {});
     const codebookProperties = getCodebookProperties(codebookVariable);
 
     return {
-      ...item,
+      ...prompt,
       ...codebookProperties,
     };
   };
