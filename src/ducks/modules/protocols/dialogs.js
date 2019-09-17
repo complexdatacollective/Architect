@@ -50,7 +50,7 @@ export const importErrorDialog = (e, filePath) => {
   });
 };
 
-export const upgradeAppDialog = (filePath = '', protocol) => {
+export const appUpgradeRequiredDialog = (filePath = '', protocol) => {
   const message = (
     <React.Fragment>
       UPGRADE NOTICE
@@ -60,7 +60,22 @@ export const upgradeAppDialog = (filePath = '', protocol) => {
   );
 
   return dialogActions.openDialog({
-    type: 'Warning',
+    type: 'UserError',
+    message,
+  });
+};
+
+export const mayUpgradeProtocolDialog = (filePath = '', protocol) => {
+  const message = (
+    <React.Fragment>
+      This can be upgraded, what do you thing?
+      <em>{path.basename(filePath)}</em>
+      cannot be upgraded from {protocol.schemaVersion} to {APP_SCHEMA_VERSION}
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'Confirm',
     message,
   });
 };
