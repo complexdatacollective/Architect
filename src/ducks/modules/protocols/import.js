@@ -59,9 +59,9 @@ const checkMigrationPath = ({ protocol }) =>
     resolve(true);
   });
 
-const upgradeAppWorkflow = ({ filePath, protocol }) =>
+const upgradeAppWorkflow = ({ protocol }) =>
   dispatch =>
-    dispatch(appUpgradeRequiredDialog(filePath, protocol));
+    dispatch(appUpgradeRequiredDialog(protocol));
 
 const versionMatchWorkflow = ({ protocol, filePath, workingPath }) =>
   dispatch =>
@@ -81,28 +81,27 @@ const versionMatchWorkflow = ({ protocol, filePath, workingPath }) =>
 const migrateWorkflow = ({ protocol, filePath, workingPath }) =>
   dispatch =>
     checkMigrationPath({ protocol, filePath })
-      .then(() => dispatch(mayUpgradeProtocolDialog(filePath, protocol)))
+      .then(() => dispatch(mayUpgradeProtocolDialog()))
       .then((confirm) => {
-        if (confirm) {
-          return getNewFileName(filePath)
-            .then((newFilePath) => {
-              const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
+        if (!confirm) { return Promise.reject(); }
+        return getNewFileName(filePath)
+          .then((newFilePath) => {
+            const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
 
-              return saveProtocol(workingPath, updatedProtocol)
-                .then(() => bundleProtocol(workingPath, newFilePath))
-                .then(() =>
-                  dispatch(versionMatchWorkflow({
-                    protocol: updatedProtocol,
-                    filePath: newFilePath,
-                    workingPath,
-                  })),
-                );
-            });
-        }
+            return saveProtocol(workingPath, updatedProtocol)
+              .then(() => bundleProtocol(workingPath, newFilePath))
+              .then(() =>
+                dispatch(versionMatchWorkflow({
+                  protocol: updatedProtocol,
+                  filePath: newFilePath,
+                  workingPath,
+                })),
+              );
+          });
       })
       .catch((err) => {
         if (err instanceof NoMigrationPathError) {
-          return dispatch(upgradeAppWorkflow({ filePath, protocol }));
+          return dispatch(upgradeAppWorkflow({ protocol }));
         }
 
         throw err;
@@ -118,7 +117,7 @@ const importProtocolThunk = filePath =>
           .then((protocol) => {
             // If the schema version is higher than the app, user may need to upgrade the app
             if (protocol.schemaVersion > APP_SCHEMA_VERSION) {
-              return dispatch(upgradeAppWorkflow({ filePath }));
+              return dispatch(upgradeAppWorkflow({ protocol }));
             }
 
             // If the schema is potentially upgradable then try to migrate it

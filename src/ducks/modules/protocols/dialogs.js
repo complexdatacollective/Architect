@@ -1,6 +1,5 @@
 import React from 'react';
 import path from 'path';
-import { APP_SCHEMA_VERSION } from '@app/config';
 import { actionCreators as dialogActions } from '../dialogs';
 
 export const validationErrorDialog = (e) => {
@@ -50,32 +49,37 @@ export const importErrorDialog = (e, filePath) => {
   });
 };
 
-export const appUpgradeRequiredDialog = (filePath = '', protocol) => {
+export const appUpgradeRequiredDialog = (protocol) => {
   const message = (
     <React.Fragment>
-      UPGRADE NOTICE
-      <em>{path.basename(filePath)}</em>
-      cannot be upgraded from {protocol.schemaVersion} to {APP_SCHEMA_VERSION}
+      <p>This protocol is not compatible with the current version of Architect.</p>
+
+      <p>In order to open it, you will need to install a version of Architect that
+        supports schema version {protocol.schemaVersion}.</p>
     </React.Fragment>
   );
 
   return dialogActions.openDialog({
     type: 'UserError',
+    title: 'Protocol not compatible with current version',
     message,
   });
 };
 
-export const mayUpgradeProtocolDialog = (filePath = '', protocol) => {
+export const mayUpgradeProtocolDialog = () => {
   const message = (
     <React.Fragment>
-      This can be upgraded, what do you thing?
-      <em>{path.basename(filePath)}</em>
-      cannot be upgraded from {protocol.schemaVersion} to {APP_SCHEMA_VERSION}
+      <p>This protocol is not compatible with the current version of Architect, but
+      can be upgraded.</p>
+
+      <p>First we will create a copy of the original which will then be upgraded.</p>
     </React.Fragment>
   );
 
   return dialogActions.openDialog({
     type: 'Confirm',
+    title: 'Would you like to upgrade the protocol?',
+    confirmLabel: 'Upgrade and open protocol',
     message,
   });
 };
