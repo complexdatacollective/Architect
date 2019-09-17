@@ -109,6 +109,12 @@
       width: 100%;
       padding: 1rem 2rem;
     }
+
+    .assets {
+      background-color: var(--architect-sortable-background);
+      color: var(--architect-sortable-text);
+      height: auto;
+    }
   }
 
   audio {
