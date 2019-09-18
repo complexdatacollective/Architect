@@ -1,8 +1,13 @@
-import unbundleProtocol from '../../../other/protocols/unbundleProtocol';
-import { loadProtocolConfiguration } from '../../../other/protocols';
+import { remote } from 'electron';
+import path from 'path';
+import { APP_SCHEMA_VERSION } from '@app/config';
+import hasMigrationPath from '@app/protocol-validation/migrations/hasMigrationPath';
+import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
+import validateProtocol from '@app/utils/validateProtocol';
+import unbundleProtocol from '@app/other/protocols/unbundleProtocol';
+import { loadProtocolConfiguration, saveProtocol, bundleProtocol } from '@app/other/protocols';
 import { actionCreators as registerActions } from './register';
-import validateProtocol from '../../../utils/validateProtocol';
-import { validationErrorDialog } from './dialogs';
+import { validationErrorDialog, appUpgradeRequiredDialog, mayUpgradeProtocolDialog } from './dialogs';
 
 const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
 const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
@@ -25,30 +30,103 @@ const importProtocolError = (error, filePath) => ({
   error,
 });
 
+class NoMigrationPathError extends Error {}
+
+const getNewFileName = filePath =>
+  new Promise((resolve, reject) => {
+    const basename = path.basename(filePath, '.netcanvas');
+
+    remote.dialog.showSaveDialog(
+      {
+        buttonLabel: 'Save',
+        nameFieldLabel: 'Save:',
+        defaultPath: `${basename} (schema version ${APP_SCHEMA_VERSION}).netcanvas`,
+        filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
+      },
+      (filename) => {
+        if (filename === undefined) { reject(); return; }
+        resolve(filename);
+      },
+    );
+  });
+
+const checkMigrationPath = ({ protocol }) =>
+  new Promise((resolve, reject) => {
+    if (!hasMigrationPath(protocol, APP_SCHEMA_VERSION)) {
+      reject(NoMigrationPathError);
+    }
+
+    resolve(true);
+  });
+
+const upgradeAppThunk = ({ protocol }) =>
+  dispatch =>
+    dispatch(appUpgradeRequiredDialog(protocol));
+
+const registerProtocolThunk = ({ protocol, filePath, workingPath }) =>
+  dispatch =>
+    validateProtocol(protocol)
+      // We don't actually want to stop the protocol from being
+      // imported for a validation error, so this is separate
+      // from the loading logic
+      .catch((e) => {
+        dispatch(validationErrorDialog(e, filePath));
+      })
+      .then(() => {
+        // all was well
+        dispatch(importProtocolSuccess({ filePath, workingPath }));
+        return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
+      });
+
+const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
+  dispatch =>
+    checkMigrationPath({ protocol, filePath })
+      .then(() => dispatch(mayUpgradeProtocolDialog()))
+      .then((confirm) => {
+        if (!confirm) { return Promise.reject(); }
+        return getNewFileName(filePath)
+          .then((newFilePath) => {
+            const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
+
+            return saveProtocol(workingPath, updatedProtocol)
+              .then(() => bundleProtocol(workingPath, newFilePath))
+              .then(() =>
+                dispatch(registerProtocolThunk({
+                  protocol: updatedProtocol,
+                  filePath: newFilePath,
+                  workingPath,
+                })),
+              );
+          });
+      })
+      .catch((err) => {
+        if (err instanceof NoMigrationPathError) {
+          return dispatch(upgradeAppThunk({ protocol }));
+        }
+
+        throw err;
+      });
+
 const importProtocolThunk = filePath =>
   (dispatch) => {
     dispatch(importProtocol(filePath));
 
     return unbundleProtocol(filePath)
       .then(workingPath =>
-        // check we can open the protocol file
         loadProtocolConfiguration(workingPath)
-          // it loaded okay, check the protocol is valid
           .then((protocol) => {
-            // We don't actually want to stop the protocol from being
-            // imported for a validation error, so this is separate
-            // from the loading logic
-            validateProtocol(protocol)
-              .catch((e) => {
-                dispatch(validationErrorDialog(e, filePath));
-              });
+            // If the schema version is higher than the app, user may need to upgrade the app
+            if (protocol.schemaVersion > APP_SCHEMA_VERSION) {
+              return dispatch(upgradeAppThunk({ protocol }));
+            }
 
-            return protocol;
-          })
-          .then(() => {
-            // all was well
-            dispatch(importProtocolSuccess({ filePath, workingPath }));
-            return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
+            // If the schema is potentially upgradable then try to migrate it
+            if (protocol.schemaVersion < APP_SCHEMA_VERSION) {
+              return dispatch(migrateProtocolThunk({ protocol, filePath, workingPath }));
+            }
+
+            // If the version matches, then we can open it!
+            return dispatch(registerProtocolThunk({ protocol, filePath, workingPath }));
           }),
       )
       .catch((e) => {

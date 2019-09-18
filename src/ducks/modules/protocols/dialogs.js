@@ -48,3 +48,37 @@ export const importErrorDialog = (e, filePath) => {
     error: e,
   });
 };
+
+export const appUpgradeRequiredDialog = (protocol) => {
+  const message = (
+    <React.Fragment>
+      <p>This protocol is not compatible with the current version of Architect.</p>
+
+      <p>In order to open it, you will need to install a version of Architect that
+        supports schema version {protocol.schemaVersion}.</p>
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'UserError',
+    title: 'Protocol not compatible with current version',
+    message,
+  });
+};
+
+export const mayUpgradeProtocolDialog = () => {
+  const message = (
+    <React.Fragment>
+      <p>This protocol can be upgraded to work with this version of Architect.</p>
+
+      <p>An upgraded copy of the protocol will be created and then opened.</p>
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'Confirm',
+    title: 'Would you like to upgrade the protocol?',
+    confirmLabel: 'Create upgraded copy',
+    message,
+  });
+};

@@ -18,3 +18,5 @@ export const COLOR_PALETTE_BY_ENTITY = {
   node: 'node-color-seq',
   edge: 'edge-color-seq',
 };
+
+export const APP_SCHEMA_VERSION = '2';
