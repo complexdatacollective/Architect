@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`protocols importAndLoadProtocol() invalid protocol dispatches an error when protocol is invalid 1`] = `
+exports[`protocols importAndLoadProtocol() invalid protocol dispatches an error when protocol is invalid (but still imports it) 1`] = `
 Array [
   Array [
     Object {
@@ -11,6 +11,20 @@ Array [
     Object {
       "filePath": "/dev/null/mock/path/invalid",
       "type": "PROTOCOLS/IMPORT",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "error": [Error: Protocol.stages should NOT have fewer than 1 items 
+
+],
+        "onCancel": [Function],
+        "onConfirm": [Function],
+        "type": "Error",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOL/OPEN_DIALOG",
     },
   ],
   Array [
@@ -27,20 +41,6 @@ Array [
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
       "type": "PROTOCOLS/REGISTER",
       "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-  Array [
-    Object {
-      "dialog": Object {
-        "error": [Error: Protocol.stages should NOT have fewer than 1 items 
-
-],
-        "onCancel": [Function],
-        "onConfirm": [Function],
-        "type": "Error",
-      },
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOL/OPEN_DIALOG",
     },
   ],
 ]
@@ -70,6 +70,129 @@ Array [
     Object {
       "advanced": true,
       "filePath": "/dev/null/mock/path",
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOLS/REGISTER",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+]
+`;
+
+exports[`protocols importAndLoadProtocol() when the schema version is greater than the app version dispatches an error when protocol is invalid 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/newer-protocol",
+      "type": "PROTOCOLS/IMPORT",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "message": <React.Fragment>
+          <p>
+            This protocol is not compatible with the current version of Architect.
+          </p>
+          <p>
+            In order to open it, you will need to install a version of Architect that supports schema version 
+            999
+            .
+          </p>
+        </React.Fragment>,
+        "onCancel": [Function],
+        "onConfirm": [Function],
+        "title": "Protocol not compatible with current version",
+        "type": "UserError",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOL/OPEN_DIALOG",
+    },
+  ],
+]
+`;
+
+exports[`protocols importAndLoadProtocol() when the schema version is less than the app version dispatches an error when protocol is invalid 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/older-protocol",
+      "type": "PROTOCOLS/IMPORT",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "confirmLabel": "Create upgraded copy",
+        "message": <React.Fragment>
+          <p>
+            This protocol can be upgraded to work with this version of Architect.
+          </p>
+          <p>
+            An upgraded copy of the protocol will be created and then opened.
+          </p>
+        </React.Fragment>,
+        "onCancel": [Function],
+        "onConfirm": [Function],
+        "title": "Would you like to upgrade the protocol?",
+        "type": "Confirm",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOL/OPEN_DIALOG",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "filename.canvas",
+      "type": "PROTOCOLS/IMPORT_SUCCESS",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+  Array [
+    Object {
+      "advanced": true,
+      "filePath": "filename.canvas",
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOLS/REGISTER",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+]
+`;
+
+exports[`protocols importAndLoadProtocol() when the schema version is the sames as the app version dispatches an error when protocol is invalid 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/matching-protocol",
+      "type": "PROTOCOLS/IMPORT",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/matching-protocol",
+      "type": "PROTOCOLS/IMPORT_SUCCESS",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+  Array [
+    Object {
+      "advanced": true,
+      "filePath": "/dev/null/mock/path/matching-protocol",
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
       "type": "PROTOCOLS/REGISTER",
       "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
@@ -190,6 +313,7 @@ Array [
           },
         },
         "name": "fooProtocol",
+        "schemaVersion": "1",
       },
       "type": "PROTOCOL/SET",
     },
@@ -321,6 +445,7 @@ Array [
         },
         "lastModified": "2017-06-27T00:00:00.000Z",
         "name": "fooProtocol",
+        "schemaVersion": "1",
         "stages": Array [],
       },
       "type": "PROTOCOLS/SAVE_SUCCESS",
@@ -452,6 +577,7 @@ Array [
           },
         },
         "name": "fooProtocol",
+        "schemaVersion": "1",
         "stages": Array [
           Object {
             "form": Object {
@@ -722,6 +848,7 @@ Array [
         },
         "lastModified": "2017-06-27T00:00:00.000Z",
         "name": "fooProtocol",
+        "schemaVersion": "1",
         "stages": Array [
           Object {
             "form": Object {

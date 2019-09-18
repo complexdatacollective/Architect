@@ -10,11 +10,17 @@ import testState from '../../../../__tests__/testState.json';
 import { loadProtocolConfiguration } from '../../../../other/protocols';
 
 jest.mock('../../../../other/protocols');
-
-const invalidProtocol = {
-  ...testState.protocol.present,
-  stages: [],
-};
+jest.mock('../../dialogs');
+jest.mock('../../../../config');
+jest.mock(
+  '../../../../protocol-validation/migrations/migrations',
+  () => ([
+    { version: '-999', migration: protocol => protocol },
+    { version: '1', migration: protocol => protocol },
+    { version: '999', migration: protocol => protocol },
+  ]),
+  { virtual: true },
+);
 
 const log = jest.fn();
 
@@ -30,6 +36,11 @@ const getStore = (initialState = testState) =>
     (state = initialState) => state,
     applyMiddleware(thunk, logger),
   );
+
+const getProtocol = (mergeProps = {}) => ({
+  ...testState.protocol.present,
+  ...mergeProps,
+});
 
 describe('protocols', () => {
   let store;
@@ -73,7 +84,7 @@ describe('protocols', () => {
         store = getStore({
           ...testState,
           protocol: {
-            present: invalidProtocol,
+            present: getProtocol({ stages: [] }),
           },
         });
       });
@@ -110,12 +121,60 @@ describe('protocols', () => {
       beforeEach(() => {
         log.mockClear();
         loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(invalidProtocol),
+          Promise.resolve(getProtocol({ stages: [] })),
+        );
+      });
+
+      it('dispatches an error when protocol is invalid (but still imports it)', () =>
+        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
+          .then(() => {
+            expect(log.mock.calls).toMatchSnapshot();
+          }),
+      );
+    });
+
+    describe('when the schema version is greater than the app version', () => {
+      beforeEach(() => {
+        log.mockClear();
+        loadProtocolConfiguration.mockReturnValueOnce(
+          Promise.resolve(getProtocol({ schemaVersion: '999' })),
         );
       });
 
       it('dispatches an error when protocol is invalid', () =>
-        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
+        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
+          .then(() => {
+            expect(log.mock.calls).toMatchSnapshot();
+          }),
+      );
+    });
+
+    describe('when the schema version is less than the app version', () => {
+      beforeEach(() => {
+        log.mockClear();
+        loadProtocolConfiguration.mockReturnValueOnce(
+          Promise.resolve(getProtocol({ schemaVersion: '-999' })),
+        );
+      });
+
+      it('dispatches an error when protocol is invalid', () =>
+        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/older-protocol'))
+          .then(() => {
+            expect(log.mock.calls).toMatchSnapshot();
+          }),
+      );
+    });
+
+    describe('when the schema version is the sames as the app version', () => {
+      beforeEach(() => {
+        log.mockClear();
+        loadProtocolConfiguration.mockReturnValueOnce(
+          Promise.resolve(getProtocol({ schemaVersion: '1' })),
+        );
+      });
+
+      it('dispatches an error when protocol is invalid', () =>
+        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/matching-protocol'))
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();
           }),

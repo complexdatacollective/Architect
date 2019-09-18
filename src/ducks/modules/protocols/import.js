@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
-import hasMigrationPath from '@app/protocol-validation/migrations/hasMigrationPath';
+import assessMigration from '@app/protocol-validation/migrations/assess';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
 import unbundleProtocol from '@app/other/protocols/unbundleProtocol';
@@ -115,18 +115,26 @@ const importProtocolThunk = filePath =>
       .then(workingPath =>
         loadProtocolConfiguration(workingPath)
           .then((protocol) => {
-            // If the schema version is higher than the app, user may need to upgrade the app
-            if (protocol.schemaVersion > APP_SCHEMA_VERSION) {
-              return dispatch(upgradeAppThunk({ protocol }));
-            }
-
-            // If the schema is potentially upgradable then try to migrate it
-            if (protocol.schemaVersion < APP_SCHEMA_VERSION) {
-              return dispatch(migrateProtocolThunk({ protocol, filePath, workingPath }));
+            if (!protocol.schemaVersion) {
+              throw new Error('Schema version not defined in protocol');
             }
 
             // If the version matches, then we can open it!
-            return dispatch(registerProtocolThunk({ protocol, filePath, workingPath }));
+            if (APP_SCHEMA_VERSION === protocol.schemaVersion) {
+              return dispatch(registerProtocolThunk({ protocol, filePath, workingPath }));
+            }
+
+            // If the schema is potentially upgradable then try to migrate it
+            if (assessMigration.isUpgradeable(protocol.schemaVersion, APP_SCHEMA_VERSION)) {
+              return dispatch(migrateProtocolThunk({ protocol, filePath, workingPath }));
+            }
+
+            // If the schema version is higher than the app, user may need to upgrade the app
+            if (assessMigration.isOutmatched(protocol.schemaVersion, APP_SCHEMA_VERSION)) {
+              return dispatch(upgradeAppThunk({ protocol }));
+            }
+
+            throw Error();
           }),
       )
       .catch((e) => {
