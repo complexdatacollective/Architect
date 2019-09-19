@@ -141,7 +141,7 @@ describe('protocols', () => {
         );
       });
 
-      it('dispatches an error when protocol is invalid', () =>
+      it('notifies user to upgrade the app', () =>
         store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();
@@ -157,7 +157,7 @@ describe('protocols', () => {
         );
       });
 
-      it('dispatches an error when protocol is invalid', () =>
+      it('attempts to upgrade protocol and then imports it', () =>
         store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/older-protocol'))
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();
@@ -173,7 +173,7 @@ describe('protocols', () => {
         );
       });
 
-      it('dispatches an error when protocol is invalid', () =>
+      it('imports the protocol', () =>
         store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/matching-protocol'))
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();

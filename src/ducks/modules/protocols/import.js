@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
-import assessMigration from '@app/protocol-validation/migrations/assess';
+import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
 import unbundleProtocol from '@app/other/protocols/unbundleProtocol';
@@ -30,8 +30,6 @@ const importProtocolError = (error, filePath) => ({
   error,
 });
 
-class NoMigrationPathError extends Error {}
-
 const getNewFileName = filePath =>
   new Promise((resolve, reject) => {
     const basename = path.basename(filePath, '.netcanvas');
@@ -48,15 +46,6 @@ const getNewFileName = filePath =>
         resolve(filename);
       },
     );
-  });
-
-const checkMigrationPath = ({ protocol }) =>
-  new Promise((resolve, reject) => {
-    if (!hasMigrationPath(protocol, APP_SCHEMA_VERSION)) {
-      reject(NoMigrationPathError);
-    }
-
-    resolve(true);
   });
 
 const upgradeAppThunk = ({ protocol }) =>
@@ -80,10 +69,10 @@ const registerProtocolThunk = ({ protocol, filePath, workingPath }) =>
 
 const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
   dispatch =>
-    checkMigrationPath({ protocol, filePath })
-      .then(() => dispatch(mayUpgradeProtocolDialog()))
+    dispatch(mayUpgradeProtocolDialog())
       .then((confirm) => {
         if (!confirm) { return Promise.reject(); }
+
         return getNewFileName(filePath)
           .then((newFilePath) => {
             const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
@@ -98,13 +87,6 @@ const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
                 })),
               );
           });
-      })
-      .catch((err) => {
-        if (err instanceof NoMigrationPathError) {
-          return dispatch(upgradeAppThunk({ protocol }));
-        }
-
-        throw err;
       });
 
 const importProtocolThunk = filePath =>
@@ -125,16 +107,13 @@ const importProtocolThunk = filePath =>
             }
 
             // If the schema is potentially upgradable then try to migrate it
-            if (assessMigration.isUpgradeable(protocol.schemaVersion, APP_SCHEMA_VERSION)) {
+            if (canUpgrade(protocol.schemaVersion, APP_SCHEMA_VERSION)) {
               return dispatch(migrateProtocolThunk({ protocol, filePath, workingPath }));
             }
 
-            // If the schema version is higher than the app, user may need to upgrade the app
-            if (assessMigration.isOutmatched(protocol.schemaVersion, APP_SCHEMA_VERSION)) {
-              return dispatch(upgradeAppThunk({ protocol }));
-            }
-
-            throw Error();
+            // If the schema version is higher than the app, or
+            // we can't find an upgrade path user may need to upgrade the app
+            return dispatch(upgradeAppThunk({ protocol }));
           }),
       )
       .catch((e) => {
