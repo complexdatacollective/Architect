@@ -80,11 +80,13 @@ class NodeType extends Component {
                 Create new node type
               </Button>
               { nodeTypes.length !== 0 &&
-              <strong>
-            Tip: ensure you create and assign a variable called &quot;name&quot; for this node type,
-            unless you have a good reason not to. Network Canvas automatically use this
-            variable as the visual label for the node in the interview.
-              </strong>
+              <div>
+                <h4>
+                  Tip: ensure you create and assign a variable called &quot;name&quot; for this
+                  node type, unless you have a good reason not to. Network Canvas will then
+                  automatically use this variable as the label for the node in the interview.
+                </h4>
+              </div>
               }
             </div>
           </div>
