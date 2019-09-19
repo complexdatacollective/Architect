@@ -5,7 +5,7 @@ import Icon from '../../ui/components/Icon';
 import withAssetMeta from './withAssetMeta';
 
 const Video = ({ id, meta }) => (
-  <div className={cx('assets-video', { 'assets-video--existing': id === 'existing' })}>
+  <div className={cx('assets assets-video', { 'assets-video--existing': id === 'existing' })}>
     <div className="assets-video__icon"><Icon name="menu-custom-interface" /></div>
     <div className="assets-video__label">
       {meta.name}
