@@ -19,8 +19,8 @@ export const COLOR_PALETTE_BY_ENTITY = {
   edge: 'edge-color-seq',
 };
 
-// Target protocol schema version. Used to determine compatibility & migration 
-export const APP_SCHEMA_VERSION = '2';
+// Target protocol schema version. Used to determine compatibility & migration
+export const APP_SCHEMA_VERSION = 2;
 
 // Maps for supported asset types within the app. Used by asset chooser.
 // Remember to also update getNetworkType when changing these!
