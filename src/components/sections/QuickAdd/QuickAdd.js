@@ -27,8 +27,9 @@ const QuickAdd = ({
     </p>
     <p>
       <strong>
-        Tip: create or assign a variable called &quot;name&quot; and network
-        canvas will automatically use it as the visual label for the node.
+        Tip: use a variable called &quot;name&quot; unless you have a good reason not to.
+        Network Canvas will then automatically use this variable as the label for the node in
+        the interview.
       </strong>
     </p>
     <div className="stage-editor-section-form">
