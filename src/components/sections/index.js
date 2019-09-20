@@ -6,6 +6,7 @@ export { default as SearchOptionsForExternalData } from './SearchOptionsForExter
 export { default as SortOptionsForExternalData } from './SortOptionsForExternalData';
 export { default as QuickAdd } from './QuickAdd';
 export { default as Title } from './Title';
+export { default as Filter } from './Filter';
 export { default as Name } from './Name';
 export { default as ShowExistingNodes } from './ShowExistingNodes';
 export { default as NodeType } from './NodeType';
