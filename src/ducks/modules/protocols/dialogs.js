@@ -66,10 +66,13 @@ export const appUpgradeRequiredDialog = (protocol) => {
   });
 };
 
-export const mayUpgradeProtocolDialog = () => {
+export const mayUpgradeProtocolDialog = (protocolSchemaVersion, targetSchemaVersion) => {
   const message = (
     <React.Fragment>
-      <p>This protocol can be upgraded to work with this version of Architect.</p>
+      <p>This protocol uses an out-dated schema
+      (schema version &quot;{protocolSchemaVersion}&quot;),
+      but can be upgraded to work with this version of Architect
+      (schema version &quot;{targetSchemaVersion}&quot;).</p>
 
       <p>An upgraded copy of the protocol will be created and then opened.</p>
     </React.Fragment>

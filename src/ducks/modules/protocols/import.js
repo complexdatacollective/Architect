@@ -69,7 +69,7 @@ const registerProtocolThunk = ({ protocol, filePath, workingPath }) =>
 
 const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
   dispatch =>
-    dispatch(mayUpgradeProtocolDialog())
+    dispatch(mayUpgradeProtocolDialog(protocol.schemaVersion, APP_SCHEMA_VERSION))
       .then((confirm) => {
         if (!confirm) { return Promise.reject(); }
 

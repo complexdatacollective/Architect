@@ -15,9 +15,9 @@ jest.mock('../../../../config');
 jest.mock(
   '../../../../protocol-validation/migrations/migrations',
   () => ([
-    { version: '-999', migration: protocol => protocol },
-    { version: '1', migration: protocol => protocol },
-    { version: '999', migration: protocol => protocol },
+    { version: 1, migration: protocol => protocol },
+    { version: 2, migration: protocol => protocol },
+    { version: 3, migration: protocol => protocol },
   ]),
   { virtual: true },
 );
@@ -137,7 +137,7 @@ describe('protocols', () => {
       beforeEach(() => {
         log.mockClear();
         loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(getProtocol({ schemaVersion: '999' })),
+          Promise.resolve(getProtocol({ schemaVersion: 3 })),
         );
       });
 
@@ -153,7 +153,7 @@ describe('protocols', () => {
       beforeEach(() => {
         log.mockClear();
         loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(getProtocol({ schemaVersion: '-999' })),
+          Promise.resolve(getProtocol({ schemaVersion: 1 })),
         );
       });
 
@@ -169,7 +169,7 @@ describe('protocols', () => {
       beforeEach(() => {
         log.mockClear();
         loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(getProtocol({ schemaVersion: '1' })),
+          Promise.resolve(getProtocol({ schemaVersion: 1 })),
         );
       });
 
