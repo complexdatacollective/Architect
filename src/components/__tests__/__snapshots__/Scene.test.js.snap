@@ -6,7 +6,11 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <Scene
     handleClickStart={[Function]}
     location={Object {}}
-    protocolMeta={Object {}}
+    protocolMeta={
+      Object {
+        "filePath": "/foo/bar",
+      }
+    }
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -66,6 +70,7 @@ ShallowWrapper {
             className="scene__protocol"
           >
             <Connect(Overview)
+              flipId="%2Ffoo%2Fbar"
               show={false}
             />
             <div
@@ -173,6 +178,7 @@ ShallowWrapper {
               className="scene__protocol"
             >
               <Connect(Overview)
+                flipId="%2Ffoo%2Fbar"
                 show={false}
               />
               <div
@@ -248,6 +254,7 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <Connect(Overview)
+                  flipId="%2Ffoo%2Fbar"
                   show={false}
                 />,
                 <div
@@ -270,7 +277,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "flipId": undefined,
+                  "flipId": "%2Ffoo%2Fbar",
                   "show": false,
                 },
                 "ref": null,
@@ -381,6 +388,7 @@ ShallowWrapper {
               className="scene__protocol"
             >
               <Connect(Overview)
+                flipId="%2Ffoo%2Fbar"
                 show={false}
               />
               <div
@@ -488,6 +496,7 @@ ShallowWrapper {
                 className="scene__protocol"
               >
                 <Connect(Overview)
+                  flipId="%2Ffoo%2Fbar"
                   show={false}
                 />
                 <div
@@ -563,6 +572,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <Connect(Overview)
+                    flipId="%2Ffoo%2Fbar"
                     show={false}
                   />,
                   <div
@@ -585,7 +595,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "flipId": undefined,
+                    "flipId": "%2Ffoo%2Fbar",
                     "show": false,
                   },
                   "ref": null,
@@ -674,6 +684,7 @@ ShallowWrapper {
     location={Object {}}
     protocolMeta={
       Object {
+        "filePath": "/foo/bar",
         "id": "foo",
       }
     }
@@ -736,6 +747,7 @@ ShallowWrapper {
             className="scene__protocol"
           >
             <Connect(Overview)
+              flipId="%2Ffoo%2Fbar"
               show={true}
             />
             <div
@@ -843,6 +855,7 @@ ShallowWrapper {
               className="scene__protocol"
             >
               <Connect(Overview)
+                flipId="%2Ffoo%2Fbar"
                 show={true}
               />
               <div
@@ -918,6 +931,7 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <Connect(Overview)
+                  flipId="%2Ffoo%2Fbar"
                   show={true}
                 />,
                 <div
@@ -940,7 +954,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "flipId": undefined,
+                  "flipId": "%2Ffoo%2Fbar",
                   "show": true,
                 },
                 "ref": null,
@@ -1051,6 +1065,7 @@ ShallowWrapper {
               className="scene__protocol"
             >
               <Connect(Overview)
+                flipId="%2Ffoo%2Fbar"
                 show={true}
               />
               <div
@@ -1158,6 +1173,7 @@ ShallowWrapper {
                 className="scene__protocol"
               >
                 <Connect(Overview)
+                  flipId="%2Ffoo%2Fbar"
                   show={true}
                 />
                 <div
@@ -1233,6 +1249,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <Connect(Overview)
+                    flipId="%2Ffoo%2Fbar"
                     show={true}
                   />,
                   <div
@@ -1255,7 +1272,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "flipId": undefined,
+                    "flipId": "%2Ffoo%2Fbar",
                     "show": true,
                   },
                   "ref": null,

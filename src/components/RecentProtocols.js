@@ -5,6 +5,10 @@ import { Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import ProtocolStack from './ProtocolStack';
 
+const getRecentProtocols = state =>
+  get(state, 'recentProtocols', [])
+    .slice(0, 4);
+
 class RecentProtocols extends Component {
   static propTypes = {
     recentProtocols: PropTypes.array.isRequired,
@@ -17,10 +21,10 @@ class RecentProtocols extends Component {
 
   renderRecentProtocol = protocol => (
     <div
-      key={protocol.filePath}
+      key={encodeURIComponent(protocol.filePath)}
       className="recent-protocols__protocol"
     >
-      <Flipped flipId={protocol.filePath}>
+      <Flipped flipId={encodeURIComponent(protocol.filePath)}>
         <ProtocolStack
           protocol={protocol}
         />
@@ -64,7 +68,7 @@ class RecentProtocols extends Component {
 }
 
 const mapStateToProps = state => ({
-  recentProtocols: get(state, 'recentProtocols', []).slice(0, 4),
+  recentProtocols: getRecentProtocols(state),
 });
 
 export { RecentProtocols };
