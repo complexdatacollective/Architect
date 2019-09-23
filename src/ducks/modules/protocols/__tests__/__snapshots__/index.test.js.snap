@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`protocols importAndLoadProtocol() invalid protocol dispatches an error when protocol is invalid (but still imports it) 1`] = `
+exports[`protocols importAndLoadProtocol() when the protocol is invalid it dispatches an error when protocol is invalid (but still imports it) 1`] = `
 Array [
   Array [
     Object {
@@ -46,39 +46,7 @@ Array [
 ]
 `;
 
-exports[`protocols importAndLoadProtocol() triggers import action and load redirect 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path",
-      "type": "PROTOCOLS/IMPORT",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path",
-      "type": "PROTOCOLS/IMPORT_SUCCESS",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-  Array [
-    Object {
-      "advanced": true,
-      "filePath": "/dev/null/mock/path",
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOLS/REGISTER",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-]
-`;
-
-exports[`protocols importAndLoadProtocol() when the schema version is greater than the app version notifies user to upgrade the app 1`] = `
+exports[`protocols importAndLoadProtocol() when the schema version is greater than the app version it notifies user to upgrade the app 1`] = `
 Array [
   Array [
     Object {
@@ -100,7 +68,7 @@ Array [
           </p>
           <p>
             In order to open it, you will need to install a version of Architect that supports schema version 
-            999
+            3
             .
           </p>
         </React.Fragment>,
@@ -116,7 +84,7 @@ Array [
 ]
 `;
 
-exports[`protocols importAndLoadProtocol() when the schema version is less than the app version attempts to upgrade protocol and then imports it 1`] = `
+exports[`protocols importAndLoadProtocol() when the schema version is less than the app version it attempts to upgrade protocol and then imports it 1`] = `
 Array [
   Array [
     Object {
@@ -135,7 +103,11 @@ Array [
         "confirmLabel": "Create upgraded copy",
         "message": <React.Fragment>
           <p>
-            This protocol can be upgraded to work with this version of Architect.
+            This protocol uses an out-dated schema (schema version "
+            1
+            "), but can be upgraded to work with this version of Architect (schema version "
+            2
+            ").
           </p>
           <p>
             An upgraded copy of the protocol will be created and then opened.
@@ -169,7 +141,7 @@ Array [
 ]
 `;
 
-exports[`protocols importAndLoadProtocol() when the schema version is the sames as the app version imports the protocol 1`] = `
+exports[`protocols importAndLoadProtocol() when the schema version is the same as the app version it imports the protocol 1`] = `
 Array [
   Array [
     Object {
@@ -313,7 +285,7 @@ Array [
           },
         },
         "name": "fooProtocol",
-        "schemaVersion": "1",
+        "schemaVersion": 2,
       },
       "type": "PROTOCOL/SET",
     },
@@ -445,7 +417,7 @@ Array [
         },
         "lastModified": "2017-06-27T00:00:00.000Z",
         "name": "fooProtocol",
-        "schemaVersion": "1",
+        "schemaVersion": 2,
         "stages": Array [],
       },
       "type": "PROTOCOLS/SAVE_SUCCESS",
@@ -577,7 +549,7 @@ Array [
           },
         },
         "name": "fooProtocol",
-        "schemaVersion": "1",
+        "schemaVersion": 2,
         "stages": Array [
           Object {
             "form": Object {
@@ -848,7 +820,7 @@ Array [
         },
         "lastModified": "2017-06-27T00:00:00.000Z",
         "name": "fooProtocol",
-        "schemaVersion": "1",
+        "schemaVersion": 2,
         "stages": Array [
           Object {
             "form": Object {

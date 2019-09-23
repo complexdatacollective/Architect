@@ -1,5 +1,4 @@
 {
-  "schemaVersion": "1",
   "session": {
     "activeProtocol": "1234-active-protocol"
   },
@@ -30,7 +29,7 @@
   },
   "protocol": {
     "present": {
-      "schemaVersion": "1",
+      "schemaVersion": 2,
       "name": "fooProtocol",
       "assetManifest": {
         "1234-asset-1": {

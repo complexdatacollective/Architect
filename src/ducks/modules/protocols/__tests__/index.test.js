@@ -3,6 +3,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { advanceTo } from 'jest-date-mock';
 import thunk from 'redux-thunk';
+import { isMatch } from 'lodash';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as registerActionCreators } from '../register';
 import history from '../../../../history';
@@ -21,6 +22,49 @@ jest.mock(
   ]),
   { virtual: true },
 );
+
+expect.extend({
+  containsDialogAction(received, dialogMatcher) {
+    const pass = received.some(
+      ([action]) =>
+        action.type === 'PROTOCOL/OPEN_DIALOG' && isMatch(action.dialog, dialogMatcher),
+    );
+
+    if (!pass) {
+      return {
+        message: () =>
+          `expected ${JSON.stringify(received)} to contain dialog action matching ${JSON.stringify(dialogMatcher)}`,
+        pass: false,
+      };
+    }
+
+    return {
+      message: () =>
+        `expected ${JSON.stringify(received)} not to contain dialog action matching ${JSON.stringify(dialogMatcher)}`,
+      pass: true,
+    };
+  },
+});
+
+expect.extend({
+  containsAction(received, actionMatcher) {
+    const pass = received.some(action => isMatch(action[0], actionMatcher));
+
+    if (!pass) {
+      return {
+        message: () =>
+          `expected ${JSON.stringify(received)} to contain action matching ${JSON.stringify(actionMatcher)}`,
+        pass: false,
+      };
+    }
+
+    return {
+      message: () =>
+        `expected ${JSON.stringify(received)} not to contain action matching ${JSON.stringify(actionMatcher)}`,
+      pass: true,
+    };
+  },
+});
 
 const log = jest.fn();
 
@@ -106,10 +150,15 @@ describe('protocols', () => {
   });
 
   describe('importAndLoadProtocol()', () => {
+    beforeEach(() => {
+      log.mockClear();
+    });
+
     it('triggers import action and load redirect', done =>
       store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path'))
         .then(() => {
-          expect(log.mock.calls).toMatchSnapshot();
+          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/IMPORT_SUCCESS' });
+          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/REGISTER' });
           expect(history.entries.pop()).toMatchObject({
             pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/',
           });
@@ -117,68 +166,55 @@ describe('protocols', () => {
         }),
     );
 
-    describe('invalid protocol', () => {
-      beforeEach(() => {
-        log.mockClear();
-        loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(getProtocol({ stages: [] })),
-        );
-      });
-
-      it('dispatches an error when protocol is invalid (but still imports it)', () =>
-        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
-          .then(() => {
-            expect(log.mock.calls).toMatchSnapshot();
-          }),
+    it('when the protocol is invalid it dispatches an error when protocol is invalid (but still imports it)', () => {
+      loadProtocolConfiguration.mockReturnValueOnce(
+        Promise.resolve(getProtocol({ schemaVersion: 2, stages: [] })),
       );
+
+      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
+        .then(() => {
+          expect(log.mock.calls).containsDialogAction({ type: 'Error' });
+          expect(log.mock.calls).toMatchSnapshot();
+        });
     });
 
-    describe('when the schema version is greater than the app version', () => {
-      beforeEach(() => {
-        log.mockClear();
-        loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(getProtocol({ schemaVersion: 3 })),
-        );
-      });
-
-      it('notifies user to upgrade the app', () =>
-        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
-          .then(() => {
-            expect(log.mock.calls).toMatchSnapshot();
-          }),
+    it('when the schema version is greater than the app version it notifies user to upgrade the app', () => {
+      loadProtocolConfiguration.mockReturnValueOnce(
+        Promise.resolve(getProtocol({ schemaVersion: 3 })),
       );
+
+      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
+        .then(() => {
+          expect(log.mock.calls).toMatchSnapshot();
+          expect(log.mock.calls).containsDialogAction({
+            title: 'Protocol not compatible with current version',
+            type: 'UserError',
+          });
+        });
     });
 
-    describe('when the schema version is less than the app version', () => {
-      beforeEach(() => {
-        log.mockClear();
-        loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(getProtocol({ schemaVersion: 1 })),
-        );
-      });
-
-      it('attempts to upgrade protocol and then imports it', () =>
-        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/older-protocol'))
-          .then(() => {
-            expect(log.mock.calls).toMatchSnapshot();
-          }),
+    it('when the schema version is less than the app version it attempts to upgrade protocol and then imports it', () => {
+      loadProtocolConfiguration.mockReturnValueOnce(
+        Promise.resolve(getProtocol({ schemaVersion: 1 })),
       );
+
+      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/older-protocol'))
+        .then(() => {
+          expect(log.mock.calls).toMatchSnapshot();
+          expect(log.mock.calls).containsDialogAction({ title: 'Would you like to upgrade the protocol?', type: 'Confirm' });
+        });
     });
 
-    describe('when the schema version is the sames as the app version', () => {
-      beforeEach(() => {
-        log.mockClear();
-        loadProtocolConfiguration.mockReturnValueOnce(
-          Promise.resolve(getProtocol({ schemaVersion: 1 })),
-        );
-      });
-
-      it('imports the protocol', () =>
-        store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/matching-protocol'))
-          .then(() => {
-            expect(log.mock.calls).toMatchSnapshot();
-          }),
+    it('when the schema version is the same as the app version it imports the protocol', () => {
+      loadProtocolConfiguration.mockReturnValueOnce(
+        Promise.resolve(getProtocol()),
       );
+
+      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/matching-protocol'))
+        .then(() => {
+          expect(log.mock.calls).toMatchSnapshot();
+          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/IMPORT_SUCCESS' });
+        });
     });
   });
 
