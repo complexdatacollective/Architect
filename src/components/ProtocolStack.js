@@ -15,7 +15,7 @@ const ProtocolStack = ({ importAndLoadProtocol, protocol: { filePath } }) => (
     onClick={() => importAndLoadProtocol(filePath)}
   >
     <div className="protocol-stack__preview">
-      <Flipped flipId={filePath}>
+      <Flipped flipId={encodeURIComponent(filePath)}>
         <div className="protocol-stack__stack">
           <div className="protocol-stack__stack-cover">
             <img src={protocolCover} alt="" />
