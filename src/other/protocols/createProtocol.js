@@ -30,6 +30,9 @@ const createProtocolWorkingPath = destinationPath =>
     const appPath = remote.app.getAppPath();
     const templatePath = path.join(appPath, 'template');
     fse.copySync(templatePath, destinationPath);
+
+    // TODO: update protocol with version number
+
     resolve(destinationPath);
   });
 

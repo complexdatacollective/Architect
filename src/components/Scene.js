@@ -53,7 +53,7 @@ const Scene = ({
         <div className="scene__protocol">
           <Overview
             show={showProtocol}
-            flipId={protocolMeta && protocolMeta.filePath}
+            flipId={protocolMeta && encodeURIComponent(protocolMeta.filePath)}
           />
 
           <div className="scene__timeline">

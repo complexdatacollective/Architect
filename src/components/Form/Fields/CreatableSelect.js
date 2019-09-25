@@ -138,6 +138,9 @@ class Select extends PureComponent {
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
           isValidNewOption={(option) => {
+            // Logic for showing the "create" option is simple:
+            // If the input value matches an item in the options collection,
+            // don't show. Otherwise, show.
             const existingIndex = findIndex(options, o => o.label === option);
             if (existingIndex > -1) {
               return false;

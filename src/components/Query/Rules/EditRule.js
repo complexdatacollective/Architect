@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../../ui/components/Modal';
+import Modal from '@ui/components/Modal';
+import Button from '@ui/components/Button';
 import EditAlterRule from './EditAlterRule';
 import EditEdgeRule from './EditEdgeRule';
 import EditEgoRule from './EditEgoRule';
-import Button from '../../ui/components/Button';
 
 class EditRule extends Component {
   get TypeComponent() {
@@ -29,16 +29,18 @@ class EditRule extends Component {
     return (
       <Modal show={!!this.props.rule}>
         <div className="rules-edit-rule">
-          { this.props.rule && this.props.rule.options &&
-            <this.TypeComponent
-              rule={this.props.rule}
-              codebook={this.props.codebook}
-              onChange={this.props.onChange}
-            />
-          }
-          <div className="rules-edit-rule__controls">
-            <Button type="button" onClick={this.props.onSave} color="neon-coral">Save</Button>
-            <Button type="button" onClick={this.props.onCancel} color="platinum">Cancel</Button>
+          <div className="rules-edit-rule__container">
+            { this.props.rule && this.props.rule.options &&
+              <this.TypeComponent
+                rule={this.props.rule}
+                codebook={this.props.codebook}
+                onChange={this.props.onChange}
+              />
+            }
+            <div className="rules-edit-rule__controls">
+              <Button type="button" onClick={this.props.onSave} color="neon-coral">Save</Button>
+              <Button type="button" onClick={this.props.onCancel} color="platinum">Cancel</Button>
+            </div>
           </div>
         </div>
       </Modal>

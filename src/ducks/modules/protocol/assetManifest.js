@@ -2,10 +2,10 @@ import uuid from 'uuid';
 import { omit } from 'lodash';
 import path from 'path';
 import log from 'electron-log';
-import { importAsset as fsImportAsset } from 'App/other/protocols';
-import { getActiveProtocolMeta } from 'App/selectors/protocol';
-import { validateAsset } from 'App/other/protocols/importAsset';
-import { invalidAssetErrorDialog, importAssetErrorDialog } from 'App/ducks/modules/protocol/utils/dialogs';
+import { importAsset as fsImportAsset } from '@app/other/protocols';
+import { getActiveProtocolMeta } from '@selectors/protocol';
+import { validateAsset } from '@app/other/protocols/importAsset';
+import { invalidAssetErrorDialog, importAssetErrorDialog } from '@modules/protocol/utils/dialogs';
 
 const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';
 const IMPORT_ASSET_COMPLETE = 'PROTOCOL/IMPORT_ASSET_COMPLETE';
