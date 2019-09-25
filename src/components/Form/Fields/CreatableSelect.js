@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import CreatableSelect from 'react-select/lib/Creatable';
+import { createFilter } from 'react-select';
+import Creatable from 'react-select/creatable';
 import PropTypes from 'prop-types';
+import { findIndex } from 'lodash';
 import cx from 'classnames';
 import Icon from '../../../ui/components/Icon';
 import DefaultSelectOption from './DefaultSelectOption';
@@ -53,8 +55,13 @@ class Select extends PureComponent {
       />
     );
 
-  handleChange = option =>
-    this.props.input.onChange(option.value);
+  handleChange = (option) => {
+    if (option && option.value) {
+      this.props.input.onChange(option.value);
+    } else {
+      this.props.input.onChange(null);
+    }
+  };
 
   handleCreateOption = (value) => {
     const result = this.props.onCreateOption(value);
@@ -107,11 +114,17 @@ class Select extends PureComponent {
         { label &&
           <h4>{label}</h4>
         }
-        <CreatableSelect
+        <Creatable
           className="form-fields-select"
           classNamePrefix="form-fields-select"
           {...input}
           options={options}
+          filterOption={createFilter({
+            ignoreCase: true,
+            trim: true,
+          })}
+          isClearable
+          isSearchable
           value={this.value}
           components={{ Option }}
           styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
@@ -124,10 +137,19 @@ class Select extends PureComponent {
           // a round about way, and still allow us to use the `touched` property.
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
+          isValidNewOption={(option) => {
+            const existingIndex = findIndex(options, o => o.label === option);
+            if (existingIndex > -1) {
+              return false;
+            }
+
+            return true;
+          }}
+
           {...rest}
         >
           {children}
-        </CreatableSelect>
+        </Creatable>
         {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
       </div>
     );

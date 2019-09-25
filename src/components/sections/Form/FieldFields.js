@@ -49,7 +49,7 @@ const PromptFields = ({
         placeholder="Type to create a variable..."
         formatCreateLabel={inputValue => (
           <span>
-            Press enter to create a variable named &quot;{inputValue}&quot;.
+            Click here to create a variable named &quot;{inputValue}&quot;.
           </span>
         )}
       />
@@ -87,8 +87,6 @@ const PromptFields = ({
             <p><em>
               An existing <strong>{variableType}</strong> variable is selected.
               Only <strong>{variableType}</strong> compatible components can be selected.
-            </em></p>
-            <p><em>
               If you would like to use a different component type, you will need to
               create a new variable.
             </em></p>
