@@ -62,7 +62,7 @@ function createPreviewWindow() {
       return true;
     });
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.SHOW_PREVIEW_DEV_TOOLS) {
       global.previewWindow.openDevTools();
     }
 
