@@ -1,5 +1,6 @@
 import { compose, withState, withHandlers } from 'recompose';
 import { templates } from './options';
+import { getDefaultOptions } from './defaultRule';
 
 const generateRule = (type, options = {}) => ({
   type,
@@ -19,11 +20,11 @@ const withDraftRule = compose(
   }),
   withHandlers({
     handleCreateAlterRule: ({ createDraft }) => () =>
-      createDraft('alter', templates.alterTypeRule),
+      createDraft('alter', getDefaultOptions(templates.alterTypeRule)),
     handleCreateEdgeRule: ({ createDraft }) => () =>
-      createDraft('edge', templates.edgeTypeRule),
+      createDraft('edge', getDefaultOptions(templates.edgeTypeRule)),
     handleCreateEgoRule: ({ createDraft }) => () =>
-      createDraft('ego', templates.egoRule),
+      createDraft('ego', getDefaultOptions(templates.egoRule)),
     handleClickRule: ({ startDraft }) => ruleId => startDraft(ruleId),
     handleChangeDraft: ({ setDraftRule }) => rule => setDraftRule(rule),
     handleCancelDraft: ({ resetDraft }) => () => resetDraft(),

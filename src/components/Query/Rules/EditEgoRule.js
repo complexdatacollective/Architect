@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import DetachedField from '@components/DetachedField';
+import Select from '@components/Form/Fields/Select';
 import { operatorsWithValue } from './options';
-import DetachedField from '../DetachedField';
-import Select from '../Form/Fields/Select';
 import EditValue from './EditValue';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
@@ -18,7 +18,7 @@ const defaultOptions = {
 const EditAlterVariableRule = ({
   rule,
   variableType,
-  variableOptions,
+  variablesAsOptions,
   operatorOptions,
   handleRuleChange,
 }) => {
@@ -33,7 +33,7 @@ const EditAlterVariableRule = ({
           component={Select}
           name="attribute"
           label="Variable"
-          options={variableOptions}
+          options={variablesAsOptions}
           onChange={handleRuleChange}
           value={optionsWithDefaults.attribute}
           validation={{ required: true }}
@@ -70,7 +70,7 @@ EditAlterVariableRule.propTypes = {
   rule: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
-  variableOptions: PropTypes.array.isRequired,
+  variablesAsOptions: PropTypes.array.isRequired,
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
   variableType: PropTypes.string.isRequired,

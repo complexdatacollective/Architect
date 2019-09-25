@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import DetachedField from '../DetachedField';
-import EdgeSelect from '../Form/Fields/EdgeSelect';
-import Select from '../Form/Fields/Select';
+import DetachedField from '@components/DetachedField';
+import EdgeSelect from '@components/Form/Fields/EdgeSelect';
+import Select from '@components/Form/Fields/Select';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 

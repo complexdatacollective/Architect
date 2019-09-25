@@ -1,5 +1,6 @@
 import { compose, withState, withHandlers } from 'recompose';
 import { templates } from './options';
+import { makeGetOptionsWithDefaults } from './defaultRule';
 
 const VARIABLE_ALTER = 'ALTER/VARIABLE';
 const TYPE_ALTER = 'ALTER/TYPE';
@@ -42,10 +43,9 @@ const withAlterRuleType = compose(
             templates.alterVariableRule;
 
           // 'reset' rule options, but keep type
-          const options = {
-            ...ruleTemplate,
+          const options = makeGetOptionsWithDefaults(ruleTemplate)({
             type: rule.options.type,
-          };
+          });
 
           onChange({
             ...rule,

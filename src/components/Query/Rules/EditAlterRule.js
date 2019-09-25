@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { operatorsWithValue } from './options';
-import DetachedField from '../DetachedField';
-import NodeSelect from '../Form/Fields/NodeSelect';
-import Select from '../Form/Fields/Select';
-import RadioGroup from '../../ui/components/Fields/RadioGroup';
+import DetachedField from '@components/DetachedField';
+import NodeSelect from '@components/Form/Fields/NodeSelect';
+import Select from '@components/Form/Fields/Select';
+import RadioGroup from '@ui/components/Fields/RadioGroup';
 import EditValue from './EditValue';
+import { operatorsWithValue } from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 import {
@@ -14,28 +14,7 @@ import {
   alterRuleTypes,
   alterRuleTypeOptions,
 } from './withAlterRuleType';
-
-const defaultOptions = {
-  type: null,
-  attribute: null,
-  operator: null,
-  value: '',
-};
-
-const getDefaultValue = (variableType) => {
-  switch (variableType) {
-    case 'boolean':
-      return false;
-    default:
-      return '';
-  }
-};
-
-const getOptionsWithDefaults = (options, variableType) => ({
-  ...defaultOptions,
-  value: getDefaultValue(variableType),
-  ...options,
-});
+import { makeGetOptionsWithDefaults } from './defaultRule';
 
 const EditAlterRule = ({
   alterRuleType,
@@ -43,12 +22,17 @@ const EditAlterRule = ({
   rule,
   typeOptions,
   variableType,
+  variablesAsOptions,
   variableOptions,
   operatorOptions,
   handleRuleChange,
 }) => {
   const options = rule && rule.options;
-  const optionsWithDefaults = getOptionsWithDefaults(options, variableType);
+  const getOptionsWithDefaults = makeGetOptionsWithDefaults(
+    variableType,
+    ['type', 'operator', 'attributes', 'value'],
+  );
+  const optionsWithDefaults = getOptionsWithDefaults(options);
   const operatorNeedsValue = operatorsWithValue.has(optionsWithDefaults.operator);
   const isVariableRule = alterRuleType === alterRuleTypes.VARIABLE_ALTER;
   const isTypeRule = alterRuleType === alterRuleTypes.TYPE_ALTER;
@@ -97,7 +81,7 @@ const EditAlterRule = ({
             component={Select}
             name="attribute"
             label="Variable"
-            options={variableOptions}
+            options={variablesAsOptions}
             onChange={handleRuleChange}
             value={optionsWithDefaults.attribute}
             validation={{ required: true }}
@@ -123,6 +107,7 @@ const EditAlterRule = ({
             variableType={variableType}
             onChange={handleRuleChange}
             value={optionsWithDefaults.value}
+            options={variableOptions}
             validation={{ required: true }}
           />
         </div>
@@ -136,6 +121,7 @@ EditAlterRule.propTypes = {
     options: PropTypes.object,
   }).isRequired,
   typeOptions: PropTypes.array.isRequired,
+  variablesAsOptions: PropTypes.array.isRequired,
   variableOptions: PropTypes.array.isRequired,
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
