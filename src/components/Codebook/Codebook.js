@@ -41,12 +41,12 @@ const mapStateToProps = (state) => {
   const nodes = map(
     codebook.node,
     (node, id) =>
-      ({ entity: 'node', type: id, used: nodeUsageIndex.has(id) }),
+      ({ entity: 'node', type: id, inUse: nodeUsageIndex.has(id) }),
   );
   const edges = map(
     codebook.edge,
     (edge, id) =>
-      ({ entity: 'edge', type: id, used: edgeUsageIndex.has(id) }),
+      ({ entity: 'edge', type: id, inUse: edgeUsageIndex.has(id) }),
   );
 
   return {

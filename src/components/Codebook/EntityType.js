@@ -1,32 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { map } from 'lodash';
+import { map, reduce } from 'lodash';
 import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
 import { Button } from '@ui/components';
 import Variables from './Variables';
 
-
-// handleDelete = (entity, type) => {
-//   const typeName = this.props.codebook[entity][type].name;
-
-//   this.props.openDialog({
-//     type: 'Warning',
-//     title: `Delete ${typeName} ${entity}`,
-//     message: (
-//       <p>
-//         Are you sure you want to delete the {entity} called {typeName}? This cannot be undone.
-//       </p>
-//     ),
-//     onConfirm: () => { this.props.deleteType(entity, type, true); },
-//     confirmLabel: `Delete ${typeName} ${entity}`,
-//   });
-// };
-
 const EntityIcon = () => (<div />);
 
-const EntityType = ({ name, color, used, entity, type, variables, handleDelete }) => (
+const EntityType = ({ name, color, inUse, entity, type, variables, handleDelete }) => (
   <div>
     <div className="simple-list__item">
       <div className="simple-list__attribute simple-list__attribute--icon">
@@ -36,9 +19,9 @@ const EntityType = ({ name, color, used, entity, type, variables, handleDelete }
         <h3>
           {name}
         </h3>
-        { !used && <div className="simple-list__tag">unused</div> }
+        { !inUse && <div className="simple-list__tag">not in use</div> }
       </div>
-      { !used &&
+      { !inUse &&
         <div className="simple-list__attribute simple-list__attribute--options">
           <Button size="small" color="neon-coral" onClick={handleDelete}>
             Delete
@@ -46,7 +29,7 @@ const EntityType = ({ name, color, used, entity, type, variables, handleDelete }
         </div>
       }
     </div>
-    <Variables variables={variables} />
+    <Variables variables={variables} entity={entity} type={type} />
   </div>
 );
 
@@ -78,8 +61,23 @@ const mapStateToProps = (state, { entity, type }) => {
 
   const variablesWithUsage = map(
     variables,
-    (variable, id) =>
-      ({ ...variable, isUsed: variableLookup.has(id) }),
+    (variable, id) => {
+      const inUse = variableLookup.has(id);
+
+      const usage = inUse ?
+        reduce(variableIndex, (acc, variableId, path) => {
+          if (variableId !== id) { return acc; }
+          return [...acc, path];
+        }, []) :
+        [];
+
+      return ({
+        ...variable,
+        id,
+        inUse,
+        usage,
+      });
+    },
   );
 
   return {
