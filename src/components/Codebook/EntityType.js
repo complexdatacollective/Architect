@@ -2,38 +2,54 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { map, reduce } from 'lodash';
+import { compose, withHandlers } from 'recompose';
+import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
+import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
-import { Button } from '@ui/components';
+import { Button, Icon, Node } from '@ui/components';
 import Variables from './Variables';
 
-const EntityIcon = () => (<div />);
+const EntityIcon = ({ entity, color }) => {
+  switch (entity) {
+    case 'node':
+      return <Node label="" color={color} />;
+    case 'edge':
+      return <Icon name="links" color={color} />
+    default:
+      return `No icon found for ${entity}.`;
+  }
+};
 
 const EntityType = ({ name, color, inUse, entity, type, variables, handleDelete }) => (
-  <div>
-    <div className="simple-list__item">
-      <div className="simple-list__attribute simple-list__attribute--icon">
-        <EntityIcon color={color} entity={entity} type={type} />
-      </div>
-      <div className="simple-list__attribute">
-        <h3>
+  <div className="codebook__entity">
+    <div className="codebook__entity-icon">
+      <EntityIcon color={color} entity={entity} type={type} />
+    </div>
+    <div className="codebook__entity-detail">
+      <div className="codebook__entity-meta">
+        <h2>
           {name}
-        </h3>
-        { !inUse && <div className="simple-list__tag">not in use</div> }
-      </div>
-      { !inUse &&
-        <div className="simple-list__attribute simple-list__attribute--options">
-          <Button size="small" color="neon-coral" onClick={handleDelete}>
+        </h2>
+        { !inUse &&
+          <Button
+            size="small"
+            color="neon-coral"
+            onClick={handleDelete}
+          >
             Delete
           </Button>
-        </div>
-      }
+        }
+      </div>
+      <div className="codebook__entity-variables">
+        <h3>Variables</h3>
+        <Variables
+          variables={variables}
+          entity={entity}
+          type={type}
+        />
+      </div>
     </div>
-    <Variables
-      variables={variables}
-      entity={entity}
-      type={type}
-    />
   </div>
 );
 
@@ -91,9 +107,32 @@ const mapStateToProps = (state, { entity, type }) => {
   };
 };
 
-const mapDispatchToProps = {
-};
+const withEntityHandlers = compose(
+  connect(null, {
+    openDialog: dialogActionCreators.openDialog,
+    deleteType: codebookActionCreators.deleteType,
+  }),
+  withHandlers({
+    handleDelete: ({ deleteType, openDialog, entity, type, name }) =>
+      () => {
+        openDialog({
+          type: 'Warning',
+          title: `Delete ${name} ${entity}`,
+          message: (
+            <p>
+              Are you sure you want to delete the {name} {entity}? This cannot be undone.
+            </p>
+          ),
+          onConfirm: () => { deleteType(entity, type); },
+          confirmLabel: `Delete ${name} ${entity}`,
+        });
+      },
+  }),
+);
 
 export { EntityType };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EntityType);
+export default compose(
+  connect(mapStateToProps),
+  withEntityHandlers,
+)(EntityType);

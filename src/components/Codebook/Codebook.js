@@ -6,22 +6,29 @@ import { getNodeIndex, getEdgeIndex, utils } from '@selectors/indexes';
 import PropTypes from 'prop-types';
 import EntityType from './EntityType';
 
+const CodebookCategory = ({ title, children }) => (
+  <div className="codebook__category">
+    <h1>{title}</h1>
+    <div className="codebook__category-items">
+      {children}
+    </div>
+  </div>
+);
+
 const Codebook = ({ nodes, edges }) => (
-  <div>
+  <div className="codebook">
     <p>
       Below you can find an overview of the node and edge types that you have
       defined while creating your interview. Entities that are unused may be deleted.
     </p>
 
-    <h2>Node Types</h2>
-    <div className="editor__subsection">
+    <CodebookCategory title="Node Types">
       {nodes.map(node => (<EntityType {...node} />))}
-    </div>
+    </CodebookCategory>
 
-    <h2>Edge Types</h2>
-    <div className="editor__subsection">
+    <CodebookCategory title="Edge Types">
       {edges.map(edge => (<EntityType {...edge} />))}
-    </div>
+    </CodebookCategory>
   </div>
 );
 

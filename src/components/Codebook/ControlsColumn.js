@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@ui/components/Button';
 
 const ControlsColumn = ({ rowData, columnData }) => {
-  if (rowData.inUse) { return (<div />); }
+  if (rowData.inUse) { return null; }
   return (
     <Button
       size="small"
