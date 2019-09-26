@@ -141,12 +141,9 @@ class Select extends PureComponent {
             // Logic for showing the "create" option is simple:
             // If the input value matches an item in the options collection,
             // don't show. Otherwise, show.
-            const existingIndex = findIndex(options, o => o.label === option);
-            if (existingIndex > -1) {
-              return false;
-            }
-
-            return true;
+            const alreadyExists = options.some(({ variableLabel }) => variableLabel === option);
+            const isEmpty = option.replace(/ /g, '').length === 0;
+            return !isEmpty && !alreadyExists;
           }}
 
           {...rest}
