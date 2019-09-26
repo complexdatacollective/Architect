@@ -29,7 +29,11 @@ const EntityType = ({ name, color, inUse, entity, type, variables, handleDelete 
         </div>
       }
     </div>
-    <Variables variables={variables} entity={entity} type={type} />
+    <Variables
+      variables={variables}
+      entity={entity}
+      type={type}
+    />
   </div>
 );
 

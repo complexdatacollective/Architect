@@ -8,55 +8,63 @@ import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
-const Variables = ({ variables, handleDelete }) => (
-  <AutoSizer disableHeight>
-    {({ width }) => (
-      <Table
-        width={width}
-        height={500}
-        headerHeight={20}
-        rowHeight={30}
-        rowCount={variables.length}
-        rowGetter={({ index }) => variables[index]}
-        // sortBy="name"
-        // sortDirection={SortDirection.ASC}
-      >
-        <Column
-          label="Name"
-          dataKey="name"
-          flexGrow={1}
-          width={200}
-        />
-        <Column
-          label="Type"
-          dataKey="type"
-          flexGrow={1}
-          width={200}
-        />
-        <Column
-          label="Component"
-          dataKey="component"
-          flexGrow={1}
-          width={200}
-        />
-        <Column
-          width={100}
-          flexGrow={1}
-          label="Usage"
-          dataKey="usage"
-          cellRenderer={UsageColumn}
-        />
-        <Column
-          width={100}
-          dataKey="controls"
-          label="Controls"
-          columnData={{ handleDelete }}
-          cellRenderer={ControlsColumn}
-        />
-      </Table>
-    )}
-  </AutoSizer>
-);
+const HEADER_HEIGHT = 25;
+const ROW_HEIGHT = 50;
+
+const Variables = ({ variables, handleDelete }) => {
+  const contentHeight = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
+  const height = contentHeight > 500 ? 500 : contentHeight;
+
+  return (
+    <AutoSizer disableHeight>
+      {({ width }) => (
+        <Table
+          width={width}
+          height={height}
+          headerHeight={HEADER_HEIGHT}
+          rowHeight={ROW_HEIGHT}
+          rowCount={variables.length}
+          rowGetter={({ index }) => variables[index]}
+          // sortBy="name"
+          // sortDirection={SortDirection.ASC}
+        >
+          <Column
+            label="Name"
+            dataKey="name"
+            flexGrow={1}
+            width={200}
+          />
+          <Column
+            label="Type"
+            dataKey="type"
+            flexGrow={1}
+            width={200}
+          />
+          <Column
+            label="Component"
+            dataKey="component"
+            flexGrow={1}
+            width={200}
+          />
+          <Column
+            width={100}
+            flexGrow={1}
+            label="Usage"
+            dataKey="usage"
+            cellRenderer={UsageColumn}
+          />
+          <Column
+            width={120}
+            dataKey="controls"
+            label="Controls"
+            columnData={{ handleDelete }}
+            cellRenderer={ControlsColumn}
+          />
+        </Table>
+      )}
+    </AutoSizer>
+  );
+};
 
 Variables.propTypes = {
   variables: PropTypes.array,
