@@ -19,6 +19,8 @@ const Variables = ({ variables, handleDelete }) => {
     <AutoSizer disableHeight>
       {({ width }) => (
         <Table
+          className="codebook__variables"
+          headerClassName="codebook__variables-heading"
           width={width}
           height={height}
           headerHeight={HEADER_HEIGHT}
@@ -29,24 +31,28 @@ const Variables = ({ variables, handleDelete }) => {
           // sortDirection={SortDirection.ASC}
         >
           <Column
+            className="codebook__variables-column"
             label="Name"
             dataKey="name"
             flexGrow={1}
             width={200}
           />
           <Column
+            className="codebook__variables-column"
             label="Type"
             dataKey="type"
             flexGrow={1}
             width={200}
           />
           <Column
+            className="codebook__variables-column"
             label="Component"
             dataKey="component"
             flexGrow={1}
             width={200}
           />
           <Column
+            className="codebook__variables-column"
             width={100}
             flexGrow={1}
             label="Usage"
@@ -54,7 +60,8 @@ const Variables = ({ variables, handleDelete }) => {
             cellRenderer={UsageColumn}
           />
           <Column
-            width={120}
+            className="codebook__variables-column"
+            width={200}
             dataKey="controls"
             label="Controls"
             columnData={{ handleDelete }}

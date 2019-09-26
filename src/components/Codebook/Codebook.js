@@ -22,13 +22,17 @@ const Codebook = ({ nodes, edges }) => (
       defined while creating your interview. Entities that are unused may be deleted.
     </p>
 
-    <CodebookCategory title="Node Types">
-      {nodes.map(node => (<EntityType {...node} />))}
-    </CodebookCategory>
+    { nodes.length > 0 &&
+      <CodebookCategory title="Node Types">
+        {nodes.map(node => (<EntityType {...node} />))}
+      </CodebookCategory>
+    }
 
-    <CodebookCategory title="Edge Types">
-      {edges.map(edge => (<EntityType {...edge} />))}
-    </CodebookCategory>
+    { edges.length > 0 &&
+      <CodebookCategory title="Edge Types">
+        {edges.map(edge => (<EntityType {...edge} />))}
+      </CodebookCategory>
+    }
   </div>
 );
 

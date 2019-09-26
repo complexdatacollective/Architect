@@ -23,24 +23,35 @@ const EntityIcon = ({ entity, color }) => {
 
 const EntityType = ({ name, color, inUse, entity, type, variables, handleDelete }) => (
   <div className="codebook__entity">
-    <div className="codebook__entity-icon">
-      <EntityIcon color={color} entity={entity} type={type} />
-    </div>
     <div className="codebook__entity-detail">
+      <div className="codebook__entity-icon">
+        <EntityIcon color={color} entity={entity} type={type} />
+      </div>
       <div className="codebook__entity-meta">
         <h2>
           {name}
+
+          {!inUse &&
+            <React.Fragment>
+              &nbsp;&nbsp;
+              <div className="codebook__tag">not in use</div>
+            </React.Fragment>
+          }
         </h2>
+      </div>
+      <div className="codebook__entity-control">
         { !inUse &&
           <Button
             size="small"
             color="neon-coral"
             onClick={handleDelete}
           >
-            Delete
+            Delete entity
           </Button>
         }
       </div>
+    </div>
+    { variables.length > 0 &&
       <div className="codebook__entity-variables">
         <h3>Variables</h3>
         <Variables
@@ -49,7 +60,7 @@ const EntityType = ({ name, color, inUse, entity, type, variables, handleDelete 
           type={type}
         />
       </div>
-    </div>
+    }
   </div>
 );
 

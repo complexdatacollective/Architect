@@ -9,7 +9,7 @@ const ControlsColumn = ({ rowData, columnData }) => {
       color="neon-coral"
       onClick={() => columnData.handleDelete(rowData.id, rowData.name)}
     >
-      Delete
+      Delete variable
     </Button>
   );
 };
