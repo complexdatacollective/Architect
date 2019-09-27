@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@ui/components/Button';
 
 const ControlsColumn = ({ rowData, columnData }) => {
@@ -12,6 +13,11 @@ const ControlsColumn = ({ rowData, columnData }) => {
       Delete variable
     </Button>
   );
+};
+
+ControlsColumn.propTypes = {
+  rowData: PropTypes.object.isRequired,
+  columnData: PropTypes.object.isRequired,
 };
 
 export { ControlsColumn };

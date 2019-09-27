@@ -7,23 +7,22 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
-import { Button, Icon, Node } from '@ui/components';
+import { Button } from '@ui/components';
 import Variables from './Variables';
 import Tag from './Tag';
+import EntityIcon from './EntityIcon';
 import { getUsage, getUsageAsStageName } from './helpers';
 
-const EntityIcon = ({ entity, color }) => {
-  switch (entity) {
-    case 'node':
-      return <Node label="" color={color} />;
-    case 'edge':
-      return <Icon name="links" color={color} />
-    default:
-      return `No icon found for ${entity}.`;
-  }
-};
-
-const EntityType = ({ name, color, inUse, usage, entity, type, variables, handleDelete }) => (
+const EntityType = ({
+  name,
+  color,
+  inUse,
+  usage,
+  entity,
+  type,
+  variables,
+  handleDelete,
+}) => (
   <div className="codebook__entity">
     <div className="codebook__entity-detail">
       <div className="codebook__entity-icon">
@@ -35,7 +34,7 @@ const EntityType = ({ name, color, inUse, usage, entity, type, variables, handle
         </h2>
       </div>
       <div className="codebook__entity-meta">
-        { !inUse && <Tag>Not in use</Tag> }
+        { !inUse && <Tag>not in use</Tag> }
         { inUse && <React.Fragment><em>used in:</em> {usage.join(', ')}</React.Fragment> }
       </div>
       <div className="codebook__entity-control">
@@ -68,6 +67,7 @@ EntityType.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  usage: PropTypes.array.isRequired,
   inUse: PropTypes.boolean,
   handleDelete: PropTypes.func.isRequired,
   variables: PropTypes.array,

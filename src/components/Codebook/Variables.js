@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { compose, withStateHandlers, withHandlers } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import cx from 'classnames';
-import { AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
+import { AutoSizer, Column, Table } from 'react-virtualized';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';

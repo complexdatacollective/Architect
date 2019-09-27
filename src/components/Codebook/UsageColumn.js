@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Tag from './Tag';
 
 const UsageColumn = ({
   cellData: usage,
   rowData: { inUse },
 }) => {
   if (inUse) { return (<div>{usage.join(', ')}</div>); }
-  return (<div className="codebook__tag">not in use</div>);
+  return (<Tag>not in use</Tag>);
 };
 
 UsageColumn.propTypes = {
-  cellData: PropTypes.string.isRequired,
+  cellData: PropTypes.array.isRequired,
   rowData: PropTypes.object.isRequired,
 };
 
