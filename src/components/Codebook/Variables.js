@@ -2,14 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withStateHandlers, withHandlers } from 'recompose';
+import cx from 'classnames';
 import { AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
-const HEADER_HEIGHT = 25;
+const HEADER_HEIGHT = 50;
 const ROW_HEIGHT = 50;
+
+const rowClassName = ({ index }) => {
+  const isEven = index % 2 === 0;
+  const isHeading = index === -1;
+  return cx(
+    'codebook__variables-row',
+    {
+      'codebook__variables-row--even': isEven && !isHeading,
+      'codebook__variables-row--odd': !isEven && !isHeading,
+      'codebook__variables-row--heading': isHeading,
+    },
+  );
+};
 
 const Variables = ({ variables, handleDelete }) => {
   const contentHeight = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
@@ -21,6 +35,7 @@ const Variables = ({ variables, handleDelete }) => {
         <Table
           className="codebook__variables"
           headerClassName="codebook__variables-heading"
+          rowClassName={rowClassName}
           width={width}
           height={height}
           headerHeight={HEADER_HEIGHT}

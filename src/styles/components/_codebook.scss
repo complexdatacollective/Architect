@@ -55,16 +55,21 @@
   }
 
   &__variables {
-    margin-top: unit(4);
+    margin-top: unit(2);
+
+    &-row {
+      &--heading {
+        border-bottom: unit(.25) solid var(--architect-divider);
+      }
+
+      &--even {
+        background-color: var(--architect-row-background);
+      }
+    }
 
     &-column,
     &-heading {
-      margin-left: unit(4) !important; // sass-lint:disable-line no-important
       margin-right: 0; // sass-lint:disable-line no-important
-
-      &:first-child {
-        margin-left: 0 !important; // sass-lint:disable-line no-important
-      }
 
       &:last-child {
         text-align: right;
