@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, withStateHandlers, withProps } from 'recompose';
+import { get, tap, isString } from 'lodash';
 import cx from 'classnames';
-import { AutoSizer, Column, Table } from 'react-virtualized';
+import { AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
@@ -25,7 +26,7 @@ const rowClassName = ({ index }) => {
   );
 };
 
-const Variables = ({ variables, handleDelete }) => {
+const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => {
   const contentHeight = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
   const height = contentHeight > 500 ? 500 : contentHeight;
 
@@ -42,8 +43,9 @@ const Variables = ({ variables, handleDelete }) => {
           rowHeight={ROW_HEIGHT}
           rowCount={variables.length}
           rowGetter={({ index }) => variables[index]}
-          // sortBy="name"
-          // sortDirection={SortDirection.ASC}
+          sortBy={sortBy}
+          sortDirection={sortDirection}
+          sort={sort}
         >
           <Column
             className="codebook__variables-column"
@@ -71,7 +73,7 @@ const Variables = ({ variables, handleDelete }) => {
             width={100}
             flexGrow={1}
             label="Used in"
-            dataKey="usage"
+            dataKey="inUse"
             cellRenderer={UsageColumn}
           />
           <Column
@@ -91,6 +93,9 @@ const Variables = ({ variables, handleDelete }) => {
 Variables.propTypes = {
   variables: PropTypes.array,
   handleDelete: PropTypes.func.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
+  sort: PropTypes.func.isRequired,
 };
 
 Variables.defaultProps = {
@@ -121,8 +126,45 @@ const withVariableHandlers = compose(
   }),
 );
 
+const uppercaseString = prop =>
+  (isString(prop) ? prop.toUpperCase() : prop);
+
+const sortByProp = sortBy =>
+  (a, b) => {
+    const sortPropA = tap(get(a, sortBy, ''), uppercaseString);
+    const sortPropB = tap(get(b, sortBy, ''), uppercaseString);
+    if (sortPropA < sortPropB) { return -1; }
+    if (sortPropA > sortPropB) { return 1; }
+    return 0;
+  };
+
+const withSort = compose(
+  withStateHandlers(
+    {
+      sortBy: 'name',
+      sortDirection: SortDirection.ASC,
+    },
+    {
+      sort: () =>
+        ({ sortBy, sortDirection }) => ({
+          sortBy,
+          sortDirection,
+        }),
+    },
+  ),
+  withProps(
+    ({ sortBy, sortDirection, variables }) => ({
+      variables: tap(
+        variables.sort(sortByProp(sortBy)),
+        list => (sortDirection === SortDirection.DESC ? list.reverse() : list),
+      ),
+    }),
+  ),
+);
+
 export { Variables };
 
 export default compose(
   withVariableHandlers,
+  withSort,
 )(Variables);
