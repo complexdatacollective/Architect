@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { map, reduce } from 'lodash';
+import { map } from 'lodash';
 import { compose, withHandlers } from 'recompose';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
@@ -9,6 +9,8 @@ import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
 import { Button, Icon, Node } from '@ui/components';
 import Variables from './Variables';
+import Tag from './Tag';
+import { getUsage, getUsageAsStageName } from './helpers';
 
 const EntityIcon = ({ entity, color }) => {
   switch (entity) {
@@ -21,23 +23,20 @@ const EntityIcon = ({ entity, color }) => {
   }
 };
 
-const EntityType = ({ name, color, inUse, entity, type, variables, handleDelete }) => (
+const EntityType = ({ name, color, inUse, usage, entity, type, variables, handleDelete }) => (
   <div className="codebook__entity">
     <div className="codebook__entity-detail">
       <div className="codebook__entity-icon">
         <EntityIcon color={color} entity={entity} type={type} />
       </div>
-      <div className="codebook__entity-meta">
+      <div className="codebook__entity-name">
         <h2>
           {name}
-
-          {!inUse &&
-            <React.Fragment>
-              &nbsp;&nbsp;
-              <div className="codebook__tag">not in use</div>
-            </React.Fragment>
-          }
         </h2>
+      </div>
+      <div className="codebook__entity-meta">
+        { !inUse && <Tag>Not in use</Tag> }
+        { inUse && <React.Fragment><em>used in:</em> {usage.join(', ')}</React.Fragment> }
       </div>
       <div className="codebook__entity-control">
         { !inUse &&
@@ -53,7 +52,7 @@ const EntityType = ({ name, color, inUse, entity, type, variables, handleDelete 
     </div>
     { variables.length > 0 &&
       <div className="codebook__entity-variables">
-        <h3>Variables</h3>
+        <h3>Variables:</h3>
         <Variables
           variables={variables}
           entity={entity}
@@ -69,14 +68,14 @@ EntityType.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  used: PropTypes.boolean,
+  inUse: PropTypes.boolean,
   handleDelete: PropTypes.func.isRequired,
   variables: PropTypes.array,
 };
 
 EntityType.defaultProps = {
   variables: [],
-  used: true, // Don't allow delete unless we explicitly say so
+  inUse: true, // Don't allow delete unless we explicitly say so
   handleDelete: () => {},
 };
 
@@ -96,10 +95,7 @@ const mapStateToProps = (state, { entity, type }) => {
       const inUse = variableLookup.has(id);
 
       const usage = inUse ?
-        reduce(variableIndex, (acc, variableId, path) => {
-          if (variableId !== id) { return acc; }
-          return [...acc, path];
-        }, []) :
+        getUsageAsStageName(state, getUsage(variableIndex, id)) :
         [];
 
       return ({

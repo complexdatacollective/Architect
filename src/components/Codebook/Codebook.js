@@ -5,15 +5,8 @@ import { getCodebook } from '@selectors/codebook';
 import { getNodeIndex, getEdgeIndex, utils } from '@selectors/indexes';
 import PropTypes from 'prop-types';
 import EntityType from './EntityType';
-
-const CodebookCategory = ({ title, children }) => (
-  <div className="codebook__category">
-    <h1>{title}</h1>
-    <div className="codebook__category-items">
-      {children}
-    </div>
-  </div>
-);
+import CodebookCategory from './CodebookCategory';
+import { getUsage, getUsageAsStageName } from './helpers';
 
 const Codebook = ({ nodes, edges }) => (
   <div className="codebook">
@@ -41,23 +34,38 @@ Codebook.propTypes = {
   edges: PropTypes.array.isRequired,
 };
 
+const getEntityWithUsage = (state, index, mergeProps) => {
+  const search = utils.buildSearch([index]);
+
+  return (_, id) => {
+    const inUse = search.has(id);
+
+    const usage = inUse ?
+      getUsageAsStageName(state, getUsage(index, id)) :
+      [];
+
+    return {
+      ...mergeProps,
+      type: id,
+      inUse,
+      usage,
+    };
+  };
+};
+
 const mapStateToProps = (state) => {
   const codebook = getCodebook(state);
 
   const nodeIndex = getNodeIndex(state);
   const edgeIndex = getEdgeIndex(state);
-  const nodeUsageIndex = utils.buildSearch([nodeIndex]);
-  const edgeUsageIndex = utils.buildSearch([edgeIndex]);
 
   const nodes = map(
     codebook.node,
-    (node, id) =>
-      ({ entity: 'node', type: id, inUse: nodeUsageIndex.has(id) }),
+    getEntityWithUsage(state, nodeIndex, { entity: 'node' }),
   );
   const edges = map(
     codebook.edge,
-    (edge, id) =>
-      ({ entity: 'edge', type: id, inUse: edgeUsageIndex.has(id) }),
+    getEntityWithUsage(state, edgeIndex, { entity: 'edge' }),
   );
 
   return {

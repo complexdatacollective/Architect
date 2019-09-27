@@ -32,15 +32,20 @@
 
     &-icon {
       flex-grow: 0;
-      flex-basis: unit(10);
+      flex-basis: unit(8);
 
       .node {
         font-size: unit(8);
       }
     }
 
+    &-name {
+      padding-left: unit(4);
+    }
+
     &-meta {
       flex-grow: 1;
+      padding-left: unit(4);
     }
 
     &-control {
@@ -48,7 +53,7 @@
     }
 
     &-variables {
-      margin-left: unit(10);
+      margin-left: unit(12);
       border-top: unit(.25) solid var(--architect-divider);
       margin-top: unit(4);
     }
@@ -77,7 +82,7 @@
     }
 
     &-heading {
-      text-transform: capitalize;
+      text-transform: none;
     }
   }
 }

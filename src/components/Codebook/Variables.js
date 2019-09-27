@@ -70,7 +70,7 @@ const Variables = ({ variables, handleDelete }) => {
             className="codebook__variables-column"
             width={100}
             flexGrow={1}
-            label="Usage"
+            label="Used in"
             dataKey="usage"
             cellRenderer={UsageColumn}
           />
@@ -78,7 +78,7 @@ const Variables = ({ variables, handleDelete }) => {
             className="codebook__variables-column"
             width={200}
             dataKey="controls"
-            label="Controls"
+            label=""
             columnData={{ handleDelete }}
             cellRenderer={ControlsColumn}
           />
