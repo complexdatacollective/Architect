@@ -5,7 +5,8 @@ import {
   compose,
   withHandlers,
 } from 'recompose';
-import { getVariablesForSubject } from '../../../selectors/codebook';
+import { getVariablesForSubject } from '@selectors/codebook';
+import { getVariableIndex, utils } from '@selectors/indexes';
 import inputOptions, {
   getTypeForComponent,
   getComponentsForType,
@@ -18,10 +19,11 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const component = formSelector(state, 'component');
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
-
   const existingVariables = getVariablesForSubject(state, { entity, type });
+  const variableIndex = getVariableIndex(state, { includeDraftStage: true });
+  const variableSet = utils.buildSearch([variableIndex]);
 
-  const variableOptions = reduce(
+  const existingVariableOptions = reduce(
     existingVariables,
     (acc, { name, type: variableType }, variableId) => {
       // If not a variable with corresponding component, we can't
@@ -37,8 +39,17 @@ const mapStateToProps = (state, { form, entity, type }) => {
   );
 
   const variableOptionsWithNewVariable = isNewVariable ?
-    [...variableOptions, { label: createNewVariable, value: createNewVariable }] :
-    variableOptions;
+    [
+      ...existingVariableOptions,
+      { label: createNewVariable, value: createNewVariable },
+    ] :
+    existingVariableOptions;
+
+  const variableOptions = variableOptionsWithNewVariable
+    .map(option => ({
+      ...option,
+      __canDelete__: !variableSet.has(option.value), // TODO: check index.
+    }));
 
   // 1. If type defined use that (existing variable)
   // 2. Othewise derive it from component (new variable)
@@ -57,7 +68,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
   return {
     variable,
     variableType,
-    variableOptions: variableOptionsWithNewVariable,
+    variableOptions,
     componentOptions,
     existingVariables,
     isNewVariable,

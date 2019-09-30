@@ -100,20 +100,19 @@ const getNodeIndex = createSelector(
  * - `prompts[].highlight.variable`
  * @returns {object} in format: { [path]: variable }
  */
-const getVariableIndex = createSelector(
-  getProtocol,
-  (protocol) => {
-    const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
-    const sociogramIndex = collectPaths('stages[].prompts[].highlight.variable', protocol);
-    const variableIndex = collectPaths('stages[].prompts[].variable', protocol);
+const getVariableIndex = (state, options = {}) => {
+  const protocol = getProtocol(state, options);
 
-    return {
-      ...formIndex,
-      ...sociogramIndex,
-      ...variableIndex,
-    };
-  },
-);
+  const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
+  const sociogramIndex = collectPaths('stages[].prompts[].highlight.variable', protocol);
+  const variableIndex = collectPaths('stages[].prompts[].variable', protocol);
+
+  return {
+    ...formIndex,
+    ...sociogramIndex,
+    ...variableIndex,
+  };
+};
 
 /**
  * Returns index of used assets
