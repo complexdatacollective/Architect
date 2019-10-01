@@ -142,7 +142,7 @@ class Select extends PureComponent {
 
             // True if option matches the label prop of the supplied object
             const matchLabel = ({ label: variableLabel }) => variableLabel === option;
-            const alreadyExists = options.some(matchLabel(option));
+            const alreadyExists = options.some(matchLabel);
 
             return !isEmpty && !alreadyExists;
           }}
