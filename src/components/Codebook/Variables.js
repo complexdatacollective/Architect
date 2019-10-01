@@ -27,8 +27,8 @@ const rowClassName = ({ index }) => {
 };
 
 const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => {
-  const contentHeight = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
-  const height = contentHeight > 500 ? 500 : contentHeight;
+  // Set height to full content height (to prevent scrolling)
+  const height = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
 
   return (
     <AutoSizer disableHeight>
