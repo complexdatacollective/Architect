@@ -137,11 +137,13 @@ class Select extends PureComponent {
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
           isValidNewOption={(option) => {
-            // Logic for showing the "create" option is simple:
-            // If the input value matches an item in the options collection,
-            // don't show. Otherwise, show.
-            const alreadyExists = options.some(({ variableLabel }) => variableLabel === option);
+            // True if option contains only spaces or no chars
             const isEmpty = option.replace(/ /g, '').length === 0;
+
+            // True if option matches the label prop of the supplied object
+            const matchLabel = ({ label: variableLabel }) => variableLabel === option;
+            const alreadyExists = options.some(matchLabel(option));
+
             return !isEmpty && !alreadyExists;
           }}
 
