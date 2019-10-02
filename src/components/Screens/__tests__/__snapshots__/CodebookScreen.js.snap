@@ -3,7 +3,9 @@
 exports[`<CodebookScreen /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Connect(Codebook)
+  Symbol(enzyme.__unrendered__): <CodebookScreen
+    onComplete={[Function]}
+    show={true}
     store={
       Object {
         "dispatch": [Function],
@@ -13,6 +15,7 @@ ShallowWrapper {
         Symbol(observable): [Function],
       }
     }
+    transitionState={null}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -25,94 +28,240 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "codebook": Object {
-        "edge": Object {},
-        "node": Object {},
-      },
-      "deleteType": [Function],
-      "edgeUsageIndex": Set {},
-      "nodeUsageIndex": Set {},
-      "onComplete": [Function],
-      "openDialog": [Function],
+      "buttons": Array [
+        <Button
+          color=""
+          content=""
+          icon=""
+          iconPosition="right"
+          onClick={[Function]}
+          size=""
+          type="button"
+        >
+          Continue
+        </Button>,
+      ],
+      "children": <div
+        className="editor variable-registry"
+      >
+        <div
+          className="editor__window"
+        >
+          <div
+            className="editor__container"
+          >
+            <div
+              className="editor__content"
+            >
+              <Connect(Codebook) />
+            </div>
+          </div>
+        </div>
+      </div>,
+      "onAcknowledgeError": [Function],
       "show": true,
-      "store": Object {
-        "dispatch": [Function],
-        "getState": [Function],
-        "replaceReducer": [Function],
-        "subscribe": [Function],
-        Symbol(observable): [Function],
-      },
-      "storeSubscription": Subscription {
-        "listeners": Object {
-          "clear": [Function],
-          "get": [Function],
-          "notify": [Function],
-          "subscribe": [Function],
-        },
-        "onStateChange": [Function],
-        "parentSub": undefined,
-        "store": Object {
-          "dispatch": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-          Symbol(observable): [Function],
-        },
-        "unsubscribe": [Function],
-      },
       "transitionState": null,
     },
     "ref": null,
-    "rendered": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="editor__window"
+        >
+          <div
+            className="editor__container"
+          >
+            <div
+              className="editor__content"
+            >
+              <Connect(Codebook) />
+            </div>
+          </div>
+        </div>,
+        "className": "editor variable-registry",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="editor__container"
+          >
+            <div
+              className="editor__content"
+            >
+              <Connect(Codebook) />
+            </div>
+          </div>,
+          "className": "editor__window",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="editor__content"
+            >
+              <Connect(Codebook) />
+            </div>,
+            "className": "editor__container",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <Connect(Codebook) />,
+              "className": "editor__content",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": "div",
+          },
+          "type": "div",
+        },
+        "type": "div",
+      },
+      "type": "div",
+    },
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "codebook": Object {
-          "edge": Object {},
-          "node": Object {},
-        },
-        "deleteType": [Function],
-        "edgeUsageIndex": Set {},
-        "nodeUsageIndex": Set {},
-        "onComplete": [Function],
-        "openDialog": [Function],
+        "buttons": Array [
+          <Button
+            color=""
+            content=""
+            icon=""
+            iconPosition="right"
+            onClick={[Function]}
+            size=""
+            type="button"
+          >
+            Continue
+          </Button>,
+        ],
+        "children": <div
+          className="editor variable-registry"
+        >
+          <div
+            className="editor__window"
+          >
+            <div
+              className="editor__container"
+            >
+              <div
+                className="editor__content"
+              >
+                <Connect(Codebook) />
+              </div>
+            </div>
+          </div>
+        </div>,
+        "onAcknowledgeError": [Function],
         "show": true,
-        "store": Object {
-          "dispatch": [Function],
-          "getState": [Function],
-          "replaceReducer": [Function],
-          "subscribe": [Function],
-          Symbol(observable): [Function],
-        },
-        "storeSubscription": Subscription {
-          "listeners": Object {
-            "clear": [Function],
-            "get": [Function],
-            "notify": [Function],
-            "subscribe": [Function],
-          },
-          "onStateChange": [Function],
-          "parentSub": undefined,
-          "store": Object {
-            "dispatch": [Function],
-            "getState": [Function],
-            "replaceReducer": [Function],
-            "subscribe": [Function],
-            Symbol(observable): [Function],
-          },
-          "unsubscribe": [Function],
-        },
         "transitionState": null,
       },
       "ref": null,
-      "rendered": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": <div
+            className="editor__window"
+          >
+            <div
+              className="editor__container"
+            >
+              <div
+                className="editor__content"
+              >
+                <Connect(Codebook) />
+              </div>
+            </div>
+          </div>,
+          "className": "editor variable-registry",
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <div
+              className="editor__container"
+            >
+              <div
+                className="editor__content"
+              >
+                <Connect(Codebook) />
+              </div>
+            </div>,
+            "className": "editor__window",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <div
+                className="editor__content"
+              >
+                <Connect(Codebook) />
+              </div>,
+              "className": "editor__container",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <Connect(Codebook) />,
+                "className": "editor__content",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {},
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": "div",
+            },
+            "type": "div",
+          },
+          "type": "div",
+        },
+        "type": "div",
+      },
       "type": [Function],
     },
   ],

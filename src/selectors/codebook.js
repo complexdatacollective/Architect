@@ -106,6 +106,7 @@ export {
   getCodebook,
   getNodeTypes,
   getEdgeTypes,
+  getType,
   getVariablesForSubject,
   getUnusedVariablesForSubject,
   getVariableOptionsForSubject,
