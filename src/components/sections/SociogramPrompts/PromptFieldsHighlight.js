@@ -60,7 +60,7 @@ const HighlightFields = ({
             options={highlightVariablesForSubject}
             formatCreateLabel={inputValue => (
               <span>
-                Press enter to create a new boolean variable named &quot;{inputValue}&quot;.
+                Click here to create a new boolean variable named &quot;{inputValue}&quot;.
               </span>
             )}
           />

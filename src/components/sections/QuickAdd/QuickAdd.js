@@ -43,7 +43,7 @@ const QuickAdd = ({
         onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
         formatCreateLabel={inputValue => (
-          <span>Press enter to create a new variable named &quot;{inputValue}&quot;.</span>
+          <span>Click here to create a new variable named &quot;{inputValue}&quot;.</span>
         )}
       />
     </div>
