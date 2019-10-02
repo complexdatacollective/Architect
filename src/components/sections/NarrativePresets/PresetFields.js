@@ -46,7 +46,7 @@ const PresetFields = ({
         onKeyDown={normalizeKeyDown}
         onDeleteOption={handleDeleteVariable}
         formatCreateLabel={inputValue => (
-          <span>Press enter to create a new layout variable named &quot;{inputValue}&quot;.</span>
+          <span>Click here to create a new layout variable named &quot;{inputValue}&quot;.</span>
         )}
       />
     </Row>
