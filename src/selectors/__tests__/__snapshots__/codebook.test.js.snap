@@ -1,46 +1,173 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`codebook selectors getVariableOptionsForSubject() extracts variables for nodeType into options list for ego entity 1`] = `
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 1`] = `
 Array [
   Object {
-    "label": "SIERRA",
-    "type": "text",
-    "value": "sierra",
+    "id": "sierra",
+    "inUse": false,
+    "properties": Object {
+      "name": "SIERRA",
+      "type": "text",
+    },
+    "subject": Object {
+      "entity": "ego",
+    },
+    "usage": Array [],
   },
   Object {
-    "label": "TANGO",
-    "type": "text",
-    "value": "tango",
-  },
-]
-`;
-
-exports[`codebook selectors getVariableOptionsForSubject() extracts variables for nodeType into options list for node entity 1`] = `
-Array [
-  Object {
-    "label": "ALPHA",
-    "type": "text",
-    "value": "alpha",
+    "id": "tango",
+    "inUse": false,
+    "properties": Object {
+      "name": "TANGO",
+      "type": "text",
+    },
+    "subject": Object {
+      "entity": "ego",
+    },
+    "usage": Array [],
   },
   Object {
-    "label": "BRAVO",
-    "type": "text",
-    "value": "bravo",
+    "id": "alpha",
+    "inUse": true,
+    "properties": Object {
+      "component": "Text",
+      "name": "ALPHA",
+      "type": "text",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "usage": Array [
+      "stages[0].form.fields[0].variable",
+    ],
   },
   Object {
-    "label": "CHARLIE",
-    "type": "location",
-    "value": "charlie",
+    "id": "bravo",
+    "inUse": true,
+    "properties": Object {
+      "name": "BRAVO",
+      "type": "text",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "usage": Array [
+      "stages[1].form.fields[0].variable",
+    ],
   },
   Object {
-    "label": "1234-1234-4",
-    "type": "text",
-    "value": "1234-1234-4",
+    "id": "charlie",
+    "inUse": false,
+    "properties": Object {
+      "name": "CHARLIE",
+      "type": "location",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "usage": Array [],
   },
   Object {
-    "label": "1234-1234-5",
-    "type": "text",
-    "value": "1234-1234-5",
+    "id": "1234-1234-4",
+    "inUse": true,
+    "properties": Object {
+      "name": "1234-1234-4",
+      "type": "text",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "usage": Array [
+      "stages[0].form.fields[1].variable",
+    ],
+  },
+  Object {
+    "id": "1234-1234-5",
+    "inUse": true,
+    "properties": Object {
+      "name": "1234-1234-5",
+      "type": "text",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "usage": Array [
+      "stages[1].form.fields[1].variable",
+    ],
+  },
+  Object {
+    "id": "1234-1234-1",
+    "inUse": false,
+    "properties": Object {
+      "name": "my layout",
+      "type": "layout",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "1234-1234-1234",
+    },
+    "usage": Array [],
+  },
+  Object {
+    "id": "1234-1234-2",
+    "inUse": false,
+    "properties": Object {
+      "name": "my category",
+      "type": "categorical",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "1234-1234-1234",
+    },
+    "usage": Array [],
+  },
+  Object {
+    "id": "1234-1234-3",
+    "inUse": false,
+    "properties": Object {
+      "name": "my boolean",
+      "type": "boolean",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "1234-1234-1234",
+    },
+    "usage": Array [],
+  },
+  Object {
+    "id": "1234-1234-4",
+    "inUse": true,
+    "properties": Object {
+      "name": "other boolean 2",
+      "type": "boolean",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "1234-1234-1234",
+    },
+    "usage": Array [
+      "stages[0].form.fields[1].variable",
+    ],
+  },
+  Object {
+    "id": "1234-1234-5",
+    "inUse": true,
+    "properties": Object {
+      "name": "other boolean 4",
+      "type": "boolean",
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "1234-1234-1234",
+    },
+    "usage": Array [
+      "stages[1].form.fields[1].variable",
+    ],
   },
 ]
 `;

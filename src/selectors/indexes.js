@@ -100,9 +100,7 @@ const getNodeIndex = createSelector(
  * - `prompts[].highlight.variable`
  * @returns {object} in format: { [path]: variable }
  */
-const getVariableIndex = (state, options = {}) => {
-  const protocol = getProtocol(state, options);
-
+const getVariableIndex = (protocol) => {
   const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
   const sociogramIndex = collectPaths('stages[].prompts[].highlight.variable', protocol);
   const variableIndex = collectPaths('stages[].prompts[].variable', protocol);
@@ -163,9 +161,20 @@ const buildSearch = (include = [], exclude = []) => {
   return lookup;
 };
 
+const getUsage = (index, id) =>
+  reduce(
+    index,
+    (acc, indexId, path) => {
+      if (id === indexId) { return [...acc, path]; }
+      return acc;
+    },
+    [],
+  );
+
 const utils = {
   buildSearch,
   collectPaths,
+  getUsage,
 };
 
 export {

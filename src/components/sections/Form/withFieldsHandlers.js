@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
-import { reduce, get, has } from 'lodash';
+import { isEqual, get } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
 import {
   compose,
   withHandlers,
 } from 'recompose';
-import { getVariablesForSubject } from '@selectors/codebook';
-import { getVariableIndex, utils } from '@selectors/indexes';
+import { getVariables } from '@selectors/codebook';
 import inputOptions, {
   getTypeForComponent,
   getComponentsForType,
@@ -15,47 +14,34 @@ import inputOptions, {
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
-  const variable = formSelector(state, 'variable');
+  const variableId = formSelector(state, 'variable'); // id?
   const component = formSelector(state, 'component');
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
-  const existingVariables = getVariablesForSubject(state, { entity, type });
-  const variableIndex = getVariableIndex(state, { includeDraftStage: true });
-  const variableSet = utils.buildSearch([variableIndex]);
-
-  const existingVariableOptions = reduce(
-    existingVariables,
-    (acc, { name, type: variableType }, variableId) => {
-      // If not a variable with corresponding component, we can't
-      // use it here.
-      if (variableType && !VARIABLE_TYPES_WITH_COMPONENTS.includes(variableType)) { return acc; }
-
-      return [
-        ...acc,
-        { label: name, value: variableId },
-      ];
-    },
-    [],
-  );
-
-  const variableOptionsWithNewVariable = isNewVariable ?
-    [
-      ...existingVariableOptions,
-      { label: createNewVariable, value: createNewVariable },
-    ] :
-    existingVariableOptions;
-
-  const variableOptions = variableOptionsWithNewVariable
-    .map(option => ({
-      ...option,
-      __canDelete__: !variableSet.has(option.value), // TODO: check index.
-    }));
+  const variables = getVariables(state, { includeDraft: true });
+  const subject = { entity, type };
+  const variableOptions = variables
+    .filter((v) => {
+      const matchSubject = isEqual(v.subject, subject);
+      const validType = VARIABLE_TYPES_WITH_COMPONENTS.includes(v.properties.type);
+      return matchSubject && validType;
+    })
+    .map(({ properties, id, inUse }) => ({
+      ...properties,
+      value: id,
+      __canDelete__: inUse,
+    }))
+    .concat(
+      isNewVariable ?
+        [{ label: createNewVariable, value: createNewVariable }] :
+        [],
+    );
 
   // 1. If type defined use that (existing variable)
   // 2. Othewise derive it from component (new variable)
   const variableType = get(
-    existingVariables,
-    [variable, 'type'],
+    variables.find(({ id }) => variableId === id),
+    'type',
     getTypeForComponent(component),
   );
 
@@ -66,11 +52,11 @@ const mapStateToProps = (state, { form, entity, type }) => {
     inputOptions;
 
   return {
-    variable,
+    variable: variableId,
+    variables,
     variableType,
     variableOptions,
     componentOptions,
-    existingVariables,
     isNewVariable,
   };
 };
@@ -91,15 +77,17 @@ const fieldsHandlers = withHandlers({
         changeField(form, 'validation', {});
       }
     },
-  handleChangeVariable: ({ existingVariables, changeField, form }) =>
+  handleChangeVariable: ({ variables, changeField, form }) =>
     (_, value) => {
       // Either load settings from codebook, or reset
-      const options = get(existingVariables, [value, 'options'], null);
-      const validation = get(existingVariables, [value, 'validation'], {});
-      const component = get(existingVariables, [value, 'component'], null);
+      const variable = variables.find(({ id }) => id === value);
+
+      const options = get(variable, 'properties.options', null);
+      const validation = get(variable, 'properties.validation', {});
+      const component = get(variable, 'properties.component', null);
 
       // If value was set to something from codebook, reset this flag
-      if (has(existingVariables, value)) {
+      if (variable) {
         changeField(form, '_createNewVariable', null);
       }
       changeField(form, 'component', component);
