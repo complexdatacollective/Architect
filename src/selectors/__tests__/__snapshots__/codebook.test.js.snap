@@ -1,173 +1,411 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`codebook selectors getVariables gets all variables from the codebook with meta data 1`] = `
+exports[` 1`] = `
+Object {
+  "id": "alpha",
+  "inUse": true,
+  "properties": Object {
+    "component": "Text",
+    "name": "ALPHA",
+    "type": "text",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "bar",
+  },
+  "usage": Array [
+    "stages[0].form.fields[0].variable",
+  ],
+}
+`;
+
+exports[` 2`] = `
 Array [
   Object {
-    "id": "sierra",
-    "inUse": false,
-    "properties": Object {
-      "name": "SIERRA",
-      "type": "text",
-    },
-    "subject": Object {
-      "entity": "ego",
-    },
-    "usage": Array [],
+    "label": "One",
+    "value": "one",
   },
   Object {
-    "id": "tango",
-    "inUse": false,
-    "properties": Object {
-      "name": "TANGO",
-      "type": "text",
-    },
-    "subject": Object {
-      "entity": "ego",
-    },
-    "usage": Array [],
-  },
-  Object {
-    "id": "alpha",
-    "inUse": true,
-    "properties": Object {
-      "component": "Text",
-      "name": "ALPHA",
-      "type": "text",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "bar",
-    },
-    "usage": Array [
-      "stages[0].form.fields[0].variable",
-    ],
-  },
-  Object {
-    "id": "bravo",
-    "inUse": true,
-    "properties": Object {
-      "name": "BRAVO",
-      "type": "text",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "bar",
-    },
-    "usage": Array [
-      "stages[1].form.fields[0].variable",
-    ],
-  },
-  Object {
-    "id": "charlie",
-    "inUse": false,
-    "properties": Object {
-      "name": "CHARLIE",
-      "type": "location",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "bar",
-    },
-    "usage": Array [],
-  },
-  Object {
-    "id": "1234-1234-4",
-    "inUse": true,
-    "properties": Object {
-      "name": "1234-1234-4",
-      "type": "text",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "bar",
-    },
-    "usage": Array [
-      "stages[0].form.fields[1].variable",
-    ],
-  },
-  Object {
-    "id": "1234-1234-5",
-    "inUse": true,
-    "properties": Object {
-      "name": "1234-1234-5",
-      "type": "text",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "bar",
-    },
-    "usage": Array [
-      "stages[1].form.fields[1].variable",
-    ],
-  },
-  Object {
-    "id": "1234-1234-1",
-    "inUse": false,
-    "properties": Object {
-      "name": "my layout",
-      "type": "layout",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "1234-1234-1234",
-    },
-    "usage": Array [],
-  },
-  Object {
-    "id": "1234-1234-2",
-    "inUse": false,
-    "properties": Object {
-      "name": "my category",
-      "type": "categorical",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "1234-1234-1234",
-    },
-    "usage": Array [],
-  },
-  Object {
-    "id": "1234-1234-3",
-    "inUse": false,
-    "properties": Object {
-      "name": "my boolean",
-      "type": "boolean",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "1234-1234-1234",
-    },
-    "usage": Array [],
-  },
-  Object {
-    "id": "1234-1234-4",
-    "inUse": true,
-    "properties": Object {
-      "name": "other boolean 2",
-      "type": "boolean",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "1234-1234-1234",
-    },
-    "usage": Array [
-      "stages[0].form.fields[1].variable",
-    ],
-  },
-  Object {
-    "id": "1234-1234-5",
-    "inUse": true,
-    "properties": Object {
-      "name": "other boolean 4",
-      "type": "boolean",
-    },
-    "subject": Object {
-      "entity": "node",
-      "type": "1234-1234-1234",
-    },
-    "usage": Array [
-      "stages[1].form.fields[1].variable",
-    ],
+    "label": "Two",
+    "value": "two",
   },
 ]
+`;
+
+exports[`codebook selectors getType returns type object with meta 1`] = `
+Object {
+  "properties": Object {
+    "color": "blue",
+    "name": "bar",
+    "variables": Object {
+      "1234-1234-4": Object {
+        "name": "1234-1234-4",
+        "type": "text",
+      },
+      "1234-1234-5": Object {
+        "name": "1234-1234-5",
+        "type": "text",
+      },
+      "alpha": Object {
+        "component": "Text",
+        "name": "ALPHA",
+        "type": "text",
+      },
+      "bravo": Object {
+        "name": "BRAVO",
+        "type": "text",
+      },
+      "charlie": Object {
+        "name": "CHARLIE",
+        "type": "location",
+      },
+    },
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "bar",
+  },
+}
+`;
+
+exports[`codebook selectors getTypes returns list of types 1`] = `
+Array [
+  Object {
+    "properties": Object {
+      "variables": Object {
+        "sierra": Object {
+          "name": "SIERRA",
+          "type": "text",
+        },
+        "tango": Object {
+          "name": "TANGO",
+          "type": "text",
+        },
+      },
+    },
+    "subject": Object {
+      "entity": "ego",
+    },
+  },
+  Object {
+    "properties": Object {
+      "color": "black",
+      "name": "foo",
+      "variables": Object {},
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "foo",
+    },
+  },
+  Object {
+    "properties": Object {
+      "color": "black",
+      "name": "pop",
+      "variables": Object {},
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "pop",
+    },
+  },
+  Object {
+    "properties": Object {
+      "color": "blue",
+      "name": "bar",
+      "variables": Object {
+        "1234-1234-4": Object {
+          "name": "1234-1234-4",
+          "type": "text",
+        },
+        "1234-1234-5": Object {
+          "name": "1234-1234-5",
+          "type": "text",
+        },
+        "alpha": Object {
+          "component": "Text",
+          "name": "ALPHA",
+          "type": "text",
+        },
+        "bravo": Object {
+          "name": "BRAVO",
+          "type": "text",
+        },
+        "charlie": Object {
+          "name": "CHARLIE",
+          "type": "location",
+        },
+      },
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+  },
+  Object {
+    "properties": Object {
+      "color": "red",
+      "name": "1234-1234-1234",
+      "variables": Object {
+        "1234-1234-1": Object {
+          "name": "my layout",
+          "type": "layout",
+        },
+        "1234-1234-2": Object {
+          "name": "my category",
+          "options": Array [
+            Object {
+              "label": "One",
+              "value": "one",
+            },
+            Object {
+              "label": "Two",
+              "value": "two",
+            },
+          ],
+          "type": "categorical",
+        },
+        "1234-1234-3": Object {
+          "name": "my boolean",
+          "type": "boolean",
+        },
+        "1234-1234-4": Object {
+          "name": "other boolean 2",
+          "type": "boolean",
+        },
+        "1234-1234-5": Object {
+          "name": "other boolean 4",
+          "type": "boolean",
+        },
+      },
+    },
+    "subject": Object {
+      "entity": "node",
+      "type": "1234-1234-1234",
+    },
+  },
+  Object {
+    "properties": Object {
+      "color": "blue",
+      "name": "an edge",
+    },
+    "subject": Object {
+      "entity": "edge",
+      "type": "1234-5",
+    },
+  },
+]
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 1`] = `
+Object {
+  "id": "sierra",
+  "inUse": false,
+  "properties": Object {
+    "name": "SIERRA",
+    "type": "text",
+  },
+  "subject": Object {
+    "entity": "ego",
+  },
+  "usage": Array [],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 2`] = `
+Object {
+  "id": "tango",
+  "inUse": false,
+  "properties": Object {
+    "name": "TANGO",
+    "type": "text",
+  },
+  "subject": Object {
+    "entity": "ego",
+  },
+  "usage": Array [],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 3`] = `
+Object {
+  "id": "alpha",
+  "inUse": true,
+  "properties": Object {
+    "component": "Text",
+    "name": "ALPHA",
+    "type": "text",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "bar",
+  },
+  "usage": Array [
+    "stages[0].form.fields[0].variable",
+  ],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 4`] = `
+Object {
+  "id": "bravo",
+  "inUse": true,
+  "properties": Object {
+    "name": "BRAVO",
+    "type": "text",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "bar",
+  },
+  "usage": Array [
+    "stages[1].form.fields[0].variable",
+  ],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 5`] = `
+Object {
+  "id": "charlie",
+  "inUse": false,
+  "properties": Object {
+    "name": "CHARLIE",
+    "type": "location",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "bar",
+  },
+  "usage": Array [],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 6`] = `
+Object {
+  "id": "1234-1234-4",
+  "inUse": true,
+  "properties": Object {
+    "name": "1234-1234-4",
+    "type": "text",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "bar",
+  },
+  "usage": Array [
+    "stages[0].form.fields[1].variable",
+  ],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 7`] = `
+Object {
+  "id": "1234-1234-5",
+  "inUse": true,
+  "properties": Object {
+    "name": "1234-1234-5",
+    "type": "text",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "bar",
+  },
+  "usage": Array [
+    "stages[1].form.fields[1].variable",
+  ],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 8`] = `
+Object {
+  "id": "1234-1234-1",
+  "inUse": false,
+  "properties": Object {
+    "name": "my layout",
+    "type": "layout",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "1234-1234-1234",
+  },
+  "usage": Array [],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 9`] = `
+Object {
+  "id": "1234-1234-2",
+  "inUse": false,
+  "properties": Object {
+    "name": "my category",
+    "options": Array [
+      Object {
+        "label": "One",
+        "value": "one",
+      },
+      Object {
+        "label": "Two",
+        "value": "two",
+      },
+    ],
+    "type": "categorical",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "1234-1234-1234",
+  },
+  "usage": Array [],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 10`] = `
+Object {
+  "id": "1234-1234-3",
+  "inUse": false,
+  "properties": Object {
+    "name": "my boolean",
+    "type": "boolean",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "1234-1234-1234",
+  },
+  "usage": Array [],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 11`] = `
+Object {
+  "id": "1234-1234-4",
+  "inUse": true,
+  "properties": Object {
+    "name": "other boolean 2",
+    "type": "boolean",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "1234-1234-1234",
+  },
+  "usage": Array [
+    "stages[0].form.fields[1].variable",
+  ],
+}
+`;
+
+exports[`codebook selectors getVariables gets all variables from the codebook with meta data 12`] = `
+Object {
+  "id": "1234-1234-5",
+  "inUse": true,
+  "properties": Object {
+    "name": "other boolean 4",
+    "type": "boolean",
+  },
+  "subject": Object {
+    "entity": "node",
+    "type": "1234-1234-1234",
+  },
+  "usage": Array [
+    "stages[1].form.fields[1].variable",
+  ],
+}
 `;

@@ -73,7 +73,11 @@
               },
               "1234-1234-2": {
                 "name": "my category",
-                "type": "categorical"
+                "type": "categorical",
+                "options": [
+                  { "value": "one", "label": "One" },
+                  { "value": "two", "label": "Two" }
+                ]
               },
               "1234-1234-3": {
                 "name": "my boolean",

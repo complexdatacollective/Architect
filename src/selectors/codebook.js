@@ -1,62 +1,64 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get, map, flatMap, has, filter, pickBy } from 'lodash';
+import { get, map, flatMap, pick } from 'lodash';
 import { getCodebook, getProtocol } from './protocol';
 import { getVariableIndex, utils as indexUtils } from './indexes';
 
-const extraProperties = new Set(['type', 'color']);
+const asOption = extraProperties =>
+  ({ properties, id }) => {
+    const required = {
+      label: properties.name,
+      value: id,
+    };
 
-const asOption = (item, id) => {
-  const required = {
-    label: item.name,
-    value: id,
+    const meta = pick(properties, extraProperties);
+
+    return {
+      ...meta,
+      ...required,
+    };
   };
-  const extra = pickBy(
-    item,
-    (value, key) => value && extraProperties.has(key),
-  );
-  return {
-    ...extra,
-    ...required,
-  };
+
+const asOptions = (items, extraProperties = []) => {
+  const getOption = asOption(extraProperties);
+
+  return items.map(getOption);
 };
 
-const asOptions = items =>
-  map(
-    items,
-    asOption,
-  );
-
-const getTypes = (protocol) => {
+// TODO: add usage?
+/**
+ * Returns all types
+ *
+ * @param {object} state redux state
+ * @param {object} options getProtocol options `{ includeDraft }`
+ */
+const getTypes = (state, options) => {
+  const protocol = getProtocol(state, options);
   const nodeTypes = get(protocol, 'codebook.node', {});
   const edgeTypes = get(protocol, 'codebook.edge', {});
+  const egoProperties = get(protocol, 'codebook.ego', {});
 
   return [
-    { entity: 'ego' },
-    ...map(nodeTypes, (_, type) => ({ entity: 'node', type })),
-    ...map(edgeTypes, (_, type) => ({ entity: 'edge', type })),
+    { subject: { entity: 'ego' }, properties: egoProperties },
+    ...map(nodeTypes, (properties, type) => ({ subject: { entity: 'node', type }, properties })),
+    ...map(edgeTypes, (properties, type) => ({ subject: { entity: 'edge', type }, properties })),
   ];
 };
 
-const getType = (protocol, subject) => {
-  if (!subject) { return {}; }
+const getType = (state, { subject, ...options }) => {
+  const protocol = getProtocol(state, options);
 
   const path = subject.type ?
     ['codebook', subject.entity, subject.type] :
     ['codebook', subject.entity];
-  return get(protocol, path, {});
-};
+  const properties = get(protocol, path, {});
 
-const getNodeTypes = (state) => {
-  const protocol = getProtocol(state);
+  if (!properties) { return null; }
 
-  return get(protocol, 'codebook.node', {});
-};
-
-const getEdgeTypes = (state) => {
-  const protocol = getProtocol(state);
-
-  return get(protocol, 'codebook.edge', {});
+  return {
+    subject,
+    properties,
+  };
 };
 
 /**
@@ -67,15 +69,13 @@ const getEdgeTypes = (state) => {
  */
 const getVariables = (state, options) => {
   const protocol = getProtocol(state, options);
-  const types = getTypes(protocol);
+  const types = getTypes(state, options);
   const variableIndex = getVariableIndex(protocol);
   const usageSearch = indexUtils.buildSearch([variableIndex]);
 
-  return flatMap(types, (subject) => {
-    const type = getType(protocol, subject);
-
-    return map(
-      type.variables,
+  return flatMap(types, ({ subject, properties: typeProperties }) =>
+    map(
+      typeProperties.variables,
       (properties, id) => {
         const inUse = usageSearch.has(id);
         const usage = inUse ?
@@ -90,68 +90,22 @@ const getVariables = (state, options) => {
           usage,
         };
       },
-    );
-  });
-};
-
-/**
- * Given `subject` return a list of variables
- * for matching entity
- *
- * @param {object} state redux state
- * @param {object} subject subject object in format `{ entity, type }`
- */
-const getVariablesForSubject = (state, subject) => {
-  const protocol = getProtocol(state);
-  return get(getType(protocol, subject), 'variables', {});
-};
-
-/**
- * Given `subject` return a list of unused variables
- * for matching entity
- *
- * @param {object} state redux state
- * @param {object} subject subject object in format `{ entity, type }`
- */
-const getUnusedVariablesForSubject = (state, subject) => {
-  const variableIndex = getVariableIndex(state);
-  const protocol = getProtocol(state);
-  const variablesForSubject = getVariablesForSubject(protocol, subject);
-
-  const unusedVariables = filter(
-    variablesForSubject,
-    (_, variableId) => !has(variableIndex, variableId),
+    ),
   );
-
-  return unusedVariables;
 };
 
-/**
- * Given `subject` return a list of options (`{ label, value, ...}`)
- * for matching entity
- *
- * @param {object} state redux state
- * @param {object} subject subject object in format `{ entity, type }`
- */
-const getVariableOptionsForSubject = (state, subject) => {
-  const variables = getVariablesForSubject(state, subject);
-  const options = asOptions(variables);
+const getVariable = (state, options) => {
+  const variables = getVariables(state, options);
 
-  return options;
+  return variables.find(({ id }) => id === options.id);
 };
 
-/**
- * Given { entity, type, variable } return options for the
- * matching variable e.g. `state.node.person.variables.closeness.options`
- *
- * @param {object} state redux state
- * @param {object} references references to variable
- */
-const getOptionsForVariable = (state, { entity, type, variable }) => {
-  const variables = getVariablesForSubject(state, { entity, type });
+const getVariableOptions = (state, options) => {
+  const variable = getVariable(state, options);
 
-  return get(variables, [variable, 'options'], []);
+  return get(variable, 'properties.options');
 };
+
 
 const utils = {
   asOption,
@@ -160,12 +114,16 @@ const utils = {
 
 export {
   getCodebook,
-  getNodeTypes, // TODO: replace with getTypes
-  getEdgeTypes, // TODO: replace with getTypes
+  getTypes,
+  getType,
+  // getNodeTypes, // TODO: replace with getTypes
+  // getEdgeTypes, // TODO: replace with getTypes
   getVariables,
-  getVariablesForSubject, // TODO: replace with getVariables
-  getUnusedVariablesForSubject, // TODO: replace with getVariables
-  getVariableOptionsForSubject, // TODO: replace with getVariables
-  getOptionsForVariable,
+  getVariable,
+  getVariableOptions,
+  // getVariablesForSubject, // TODO: replace with getVariables
+  // getUnusedVariablesForSubject, // TODO: replace with getVariables
+  // getVariableOptionsForSubject, // TODO: replace with getVariables
+  // getOptionsForVariable, // TODO: replace with getVariables
   utils,
 };
