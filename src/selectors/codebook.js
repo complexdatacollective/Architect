@@ -1,29 +1,57 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get, map, flatMap, pick } from 'lodash';
+import { get, map, flatMap, reduce } from 'lodash';
 import { getCodebook, getProtocol } from './protocol';
 import { getVariableIndex, utils as indexUtils } from './indexes';
 
-const asOption = extraProperties =>
-  ({ properties, id }) => {
-    const required = {
-      label: properties.name,
-      value: id,
-    };
+// const getProtocolWithDraft = (state, { includeDraft, ...options }) => {
+//   const optionsWithDraftDefault = {
+//     ...options,
+//     includeDraft: isUndefined
+// }
 
-    const meta = pick(properties, extraProperties);
+const variableProperties = {
+  label: 'properties.name',
+  value: 'id',
+  type: 'properties.type',
+};
 
-    return {
-      ...meta,
-      ...required,
-    };
+const entityProperties = {
+  label: 'properties.name',
+  value: 'subject.type',
+  color: 'properties.color',
+};
+
+const propertyMaps = {
+  variable: variableProperties,
+  entity: entityProperties,
+};
+
+const asOption = (
+  propertyMap = variableProperties,
+) =>
+  (item) => {
+    if (!propertyMap.value) {
+      throw Error('option must have a value');
+    }
+
+    return reduce(
+      propertyMap,
+      (memo, path, key) => {
+        const v = get(item, path);
+        return { ...memo, [key]: v };
+      },
+      {},
+    );
   };
 
-const asOptions = (items, extraProperties = []) => {
-  const getOption = asOption(extraProperties);
-
-  return items.map(getOption);
-};
+const matchSubject = (entity, type) => (
+  type ?
+    subject =>
+      subject.entity === entity && subject.type === type :
+    subject =>
+      subject.type === type
+);
 
 // TODO: add usage?
 /**
@@ -40,8 +68,8 @@ const getTypes = (state, options) => {
 
   return [
     { subject: { entity: 'ego' }, properties: egoProperties },
-    ...map(nodeTypes, (properties, type) => ({ subject: { entity: 'node', type }, properties })),
-    ...map(edgeTypes, (properties, type) => ({ subject: { entity: 'edge', type }, properties })),
+    ...map(nodeTypes, (props, type) => ({ subject: { entity: 'node', type }, properties: props })),
+    ...map(edgeTypes, (props, type) => ({ subject: { entity: 'edge', type }, properties: props })),
   ];
 };
 
@@ -51,13 +79,13 @@ const getType = (state, { subject, ...options }) => {
   const path = subject.type ?
     ['codebook', subject.entity, subject.type] :
     ['codebook', subject.entity];
-  const properties = get(protocol, path, {});
+  const props = get(protocol, path, {});
 
-  if (!properties) { return null; }
+  if (!props) { return null; }
 
   return {
     subject,
-    properties,
+    properties: props,
   };
 };
 
@@ -69,14 +97,16 @@ const getType = (state, { subject, ...options }) => {
  */
 const getVariables = (state, options) => {
   const protocol = getProtocol(state, options);
-  const types = getTypes(state, options);
+  const types = options && options.subject ?
+    [getType(state, options)] :
+    getTypes(state, options);
   const variableIndex = getVariableIndex(protocol);
   const usageSearch = indexUtils.buildSearch([variableIndex]);
 
   return flatMap(types, ({ subject, properties: typeProperties }) =>
     map(
       typeProperties.variables,
-      (properties, id) => {
+      (props, id) => {
         const inUse = usageSearch.has(id);
         const usage = inUse ?
           indexUtils.getUsage(variableIndex, id) :
@@ -85,7 +115,7 @@ const getVariables = (state, options) => {
         return {
           id,
           subject,
-          properties,
+          properties: props,
           inUse,
           usage,
         };
@@ -106,10 +136,9 @@ const getVariableOptions = (state, options) => {
   return get(variable, 'properties.options');
 };
 
-
 const utils = {
   asOption,
-  asOptions,
+  matchSubject,
 };
 
 export {
@@ -126,4 +155,6 @@ export {
   // getVariableOptionsForSubject, // TODO: replace with getVariables
   // getOptionsForVariable, // TODO: replace with getVariables
   utils,
+  asOption,
+  propertyMaps,
 };

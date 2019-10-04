@@ -1,8 +1,8 @@
 import uuid from 'uuid';
 import { omit, get, has, isEmpty } from 'lodash';
-import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
-import { makeGetUsageForType } from '../../../selectors/usage';
-import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
+import { getCodebook } from '@selectors/codebook';
+import { makeGetUsageForType } from '@selectors/usage';
+import { getVariableIndex, utils as indexUtils } from '@selectors/indexes';
 import { getNextCategoryColor } from './utils/helpers';
 import safeName from '../../../utils/safeName';
 import { actionCreators as stageActions } from './stages';
@@ -22,6 +22,12 @@ const initialState = {
 const defaultTypeTemplate = {
   color: '',
   variables: {},
+};
+
+const getType = (state, subject) => {
+  const codebook = getCodebook(state);
+  const path = subject.type ? [subject.entity, subject.type] : [subject.entity];
+  return get(codebook, path);
 };
 
 const createType = (entity, type, configuration) => ({
@@ -130,7 +136,8 @@ const createVariableThunk = (entity, type, configuration) =>
       throw new Error('Variable name contains no valid characters');
     }
 
-    const variables = getVariablesForSubject(getState(), { entity, type });
+    const codebookType = getType(getState(), { entity, type });
+    const variables = get(codebookType, 'variables', {});
     const variableNameExists = Object.values(variables)
       .some(({ name }) => name === safeConfiguration.name);
 
@@ -152,8 +159,8 @@ const createVariableThunk = (entity, type, configuration) =>
 
 const updateVariableThunk = (entity, type, variable, configuration, merge = false) =>
   (dispatch, getState) => {
-    const state = getState();
-    const variableExists = has(getVariablesForSubject(state, { entity, type }), variable);
+    const codebook = getCodebook(getState());
+    const variableExists = has(codebook, [entity, type, 'variables', variable]);
 
     if (!variableExists) {
       throw new Error(`Variable "${variable}" does not exist`);

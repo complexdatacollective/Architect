@@ -1,25 +1,24 @@
-import { map } from 'lodash';
-import { getCodebook } from '../../../selectors/protocol';
-import { getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { getTypes, getVariables, asOption, propertyMaps } from '@selectors/codebook';
 
 export const getLayoutVariablesForSubject = (state, { entity, type }) => {
-  const variables = getVariableOptionsForSubject(state, { entity, type });
+  const variables = getVariables(state, { includeDraft: true, entity, type })
+    .filter(({ properties }) => properties.type === 'layout');
 
-  return variables.filter(item => item.type === 'layout');
+  return variables.map(asOption());
 };
 
 export const getHighlightVariablesForSubject = (state, { entity, type }) => {
-  const variables = getVariableOptionsForSubject(state, { entity, type });
+  const variables = getVariables(state, { includeDraft: true, entity, type })
+    .filter(({ properties }) => properties.type === 'boolean');
 
-  return variables.filter(item => item.type === 'boolean');
+  return variables.map(asOption());
 };
 
 export const getGroupVariablesForSubject = (state, { entity, type }) => {
-  const variables = getVariableOptionsForSubject(state, { entity, type });
+  const variables = getVariables(state, { includeDraft: true, entity, type })
+    .filter(({ properties }) => properties.type === 'categorical');
 
-  const categoricalOptions = variables.filter(
-    item => item.type === 'categorical',
-  );
+  const categoricalOptions = variables.map(asOption());
 
   return [
     { label: '\u2014 None \u2014', value: '' },
@@ -28,11 +27,10 @@ export const getGroupVariablesForSubject = (state, { entity, type }) => {
 };
 
 export const getEdgesForSubject = (state) => {
-  const codebook = getCodebook(state);
+  const edges = getTypes(state, { includeDraft: true })
+    .filter(({ subject }) => subject.entity === 'edge');
 
-  return map(codebook.edge, (edge, edgeId) => ({
-    label: edge.name,
-    color: edge.color,
-    value: edgeId,
-  }));
+  const options = edges.map(asOption(propertyMaps.entity));
+
+  return options;
 };

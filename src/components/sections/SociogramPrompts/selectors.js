@@ -1,34 +1,24 @@
-import { getCodebook } from '../../../selectors/protocol';
-import { utils as codebookUtils, getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { getTypes, getVariables, asOption, propertyMaps } from '@selectors/codebook';
 
 export const getLayoutVariablesForSubject = (state, { entity, type }) => {
-  const variableOptions = getVariableOptionsForSubject(state, { entity, type });
-  const layoutOptions = variableOptions.filter(
-    ({ type: variableType }) =>
-      variableType === 'layout',
-  );
-
-  return layoutOptions;
+  const variables = getVariables(state, { subject: { entity, type } })
+    .filter(({ properties }) => properties.type === 'layout');
+  return variables.map(asOption());
 };
 
 export const getHighlightVariablesForSubject = (
   state,
   { type, entity },
 ) => {
-  // All defined variables that match nodeType
-  const variableOptions = getVariableOptionsForSubject(state, { entity, type });
-
-  // Boolean variables which aren't already used (+ currently selected)
-  const highlightVariables = variableOptions.filter(
-    ({ type: variableType }) => variableType === 'boolean',
-  );
-
-  return highlightVariables;
+  const variables = getVariables(state, { subject: { entity, type } })
+    .filter(({ properties }) => properties.type === 'boolean');
+  return variables.map(asOption());
 };
 
 export const getEdgesForSubject = (state) => {
-  const codebook = getCodebook(state);
-  const codebookOptions = codebookUtils.asOptions(codebook.edge);
+  const edges = getTypes(state)
+    .filter(({ subject }) => subject.entity === 'edge');
+  const codebookOptions = edges.map(asOption(propertyMaps.entity));
 
   return codebookOptions;
 };

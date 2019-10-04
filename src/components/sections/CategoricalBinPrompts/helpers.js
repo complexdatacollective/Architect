@@ -1,17 +1,17 @@
 /* eslint-disable import/prefer-default-export */
 
 import { formValueSelector } from 'redux-form';
-import { getOptionsForVariable } from '../../../selectors/codebook';
+import { getVariableOptions } from '@selectors/codebook';
 
-export const itemSelector = (entity, type) =>
+export const itemSelector = () =>
   (state, { form, editField }) => {
     const prompt = formValueSelector(form)(state, editField);
 
     if (!prompt) { return null; }
 
-    const variableOptions = getOptionsForVariable(
+    const variableOptions = getVariableOptions(
       state,
-      { entity, type, variable: prompt.variable },
+      { id: prompt.variable },
     );
 
     return {

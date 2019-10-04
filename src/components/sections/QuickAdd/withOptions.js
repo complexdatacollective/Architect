@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
-import { getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { getVariables, asOption } from '@selectors/codebook';
 
 const mapStateToProps = (state, { entity, type }) => {
-  const variableOptionsForSubject = getVariableOptionsForSubject(state, { entity, type });
-
-  const textOptionsForSubject = variableOptionsForSubject
-    .filter(({ type: variableType }) => variableType === 'text');
+  const variables = getVariables(state, { subject: { entity, type } })
+    .filter(({ properties }) => properties.type === 'text');
+  const options = variables.map(asOption());
 
   return {
-    options: textOptionsForSubject,
+    options,
   };
 };
 

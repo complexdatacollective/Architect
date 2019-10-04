@@ -2,18 +2,18 @@ import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { withHandlers, compose } from 'recompose';
-import { getVariablesForSubject } from '../../selectors/codebook';
+import { getVariable } from '@selectors/codebook';
 
 const store = connect(
-  (state, { entity, type, form, field }) => {
-    const variable = formValueSelector(form)(state, `${field}.variable`);
-    const codebookVariables = getVariablesForSubject(state, { entity, type });
-    const variableType = get(codebookVariables, [variable, 'type']);
-    const options = get(codebookVariables, [variable, 'options']);
+  (state, { form, field }) => {
+    const variableId = formValueSelector(form)(state, `${field}.variable`);
+    const variable = getVariable(state, { id: variableId });
+    const variableType = get(variable, 'type');
+    const options = get(variable, 'options');
 
     return {
       variableType,
-      variable,
+      variable: variableId,
       options,
     };
   },

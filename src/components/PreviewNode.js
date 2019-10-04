@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import Node from '../ui/components/Node';
-import { getNodeTypes } from '../selectors/codebook';
+import Node from '@ui/components/Node';
+import { getTypes } from '@selectors/codebook';
 
 const mapStateToProps = state => ({
-  nodeTypes: getNodeTypes(state),
+  nodeTypes: getTypes(state).filter(({ subject }) => subject.entity === 'node'),
 });
 
 const PreviewNode = ({
   nodeTypes,
   type,
 }) => {
-  const color = get(nodeTypes, [type, 'color'], 'node-color-seq-1');
-  const label = get(nodeTypes, [type, 'name'], '');
+  const nodeType = nodeTypes.find(({ subject }) => subject.type === type);
+  const color = get(nodeType, 'properties.color', 'node-color-seq-1');
+  const label = get(nodeType, 'properties.name', '');
 
   return (
     <Node label={label} color={color} />

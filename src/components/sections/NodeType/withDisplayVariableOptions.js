@@ -2,16 +2,17 @@ import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { formValueSelector } from 'redux-form';
 import { get } from 'lodash';
-import { getCodebook, getVariableOptionsForSubject } from '../../../selectors/codebook';
-import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import { getCodebook, getVariables, asOptions } from '@selectors/codebook';
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 
 const withDisplayVariableState = connect(
   (state, { form }) => {
     const subject = formValueSelector(form)(state, 'subject');
     const entity = subject && subject.entity;
     const type = subject && subject.type;
-    const displayVariableOptions = getVariableOptionsForSubject(state, { entity, type })
-      .filter(({ type: variableType }) => variableType === 'text');
+    const displayVariables = getVariables(state, { entity, type })
+      .filter(({ properties }) => properties.type === 'text');
+    const displayVariableOptions = displayVariables.map(asOptions());
     const displayVariable = get(getCodebook(state), [entity, type, 'displayVariable']);
 
     return {

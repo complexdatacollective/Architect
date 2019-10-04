@@ -2,6 +2,8 @@
 
 import testState from '../../__tests__/testState.json';
 import {
+  asOption,
+  propertyMaps,
   getTypes,
   getType,
   getVariables,
@@ -66,5 +68,24 @@ describe('codebook selectors', () => {
     const variableOptions = getVariableOptions(testState, options);
     expect(variableOptions).toHaveLength(2);
     expect(variableOptions).toMatchSnapshot();
+  });
+
+  describe('asOption', () => {
+    const types = getTypes(testState);
+
+    const typeOptions = types.map(asOption(propertyMaps.entity));
+    typeOptions.forEach((option) => {
+      expect(option).toHaveProperty('value');
+      expect(option).toHaveProperty('label');
+      expect(option).toHaveProperty('color');
+    });
+
+    const variables = getVariables(testState);
+    const variableOptions = variables.map(asOption());
+    variableOptions.forEach((option) => {
+      expect(option).toHaveProperty('value');
+      expect(option).toHaveProperty('label');
+      expect(option).toHaveProperty('type');
+    });
   });
 });

@@ -1,10 +1,11 @@
 
 import { formValueSelector } from 'redux-form';
-import { omit, get, reduce } from 'lodash';
-import { getVariablesForSubject } from '../../../selectors/codebook';
+import { omit, reduce } from 'lodash';
+import { getVariable } from '@selectors/codebook';
 
 export const CODEBOOK_PROPERTIES = ['options', 'component', 'validation'];
 
+// TODO: is this used anywhere, is it needed here?
 export const getCodebookProperties = properties =>
   reduce(
     CODEBOOK_PROPERTIES,
@@ -31,12 +32,10 @@ export const itemSelector = (entity, type) =>
 
     const variable = item && item.variable;
 
-    const codebookVariables = getVariablesForSubject(state, { entity, type });
-    const codebookVariable = get(codebookVariables, variable, {});
-    const codebookProperties = getCodebookProperties(codebookVariable);
+    const codebookVariable = getVariable(state, { id: variable });
 
     return {
       ...item,
-      ...codebookProperties,
+      ...getCodebookProperties(codebookVariable.properties),
     };
   };

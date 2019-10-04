@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
+import { getCodebook } from '@selectors/codebook';
 import withSubject from '../../enhancers/withSubject';
 import Preview from '../../EditableList/Preview';
 import Badge from '../../Badge';
 import { getColorForType } from '../../Form/inputOptions';
-import { getVariablesForSubject } from '../../../selectors/codebook';
 
 const PreviewFieldComponent = ({
   input: {
@@ -41,7 +41,6 @@ class PromptPreview extends Preview {
         name={fieldId}
         component={PreviewFieldComponent}
         subjectVariables={this.props.subjectVariables}
-
       />
     );
   }
@@ -51,8 +50,9 @@ PromptPreview.propTypes = {
   fieldId: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state, props) => ({
-  subjectVariables: getVariablesForSubject(state, props),
+// TODO: Update this to use the new array format getVariables
+const mapStateToProps = (state, { entity, type }) => ({
+  subjectVariables: get(getCodebook(state), [entity, type, 'variables'], {}),
 });
 
 export { PromptPreview };

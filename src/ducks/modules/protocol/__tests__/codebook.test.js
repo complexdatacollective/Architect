@@ -4,23 +4,15 @@ import uuid from 'uuid';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { sortBy } from 'lodash/fp';
+import testState from '@app/__tests__/testState.json';
 import { actionCreators as stageActions } from '../stages';
 import reducer, { actionTypes, actionCreators, testing } from '../codebook';
-import testState from '../../../../__tests__/testState.json';
 
 jest.mock('uuid');
 
 const sortByType = sortBy('type');
 
 const mockStore = configureStore([thunk]);
-
-// const mockState = {
-//   node: {
-//     place: { foo: 'bar' },
-//     person: { hello: 'world' },
-//   },
-//   edge: { },
-// };
 
 describe('protocol.codebook', () => {
   describe('reducer', () => {

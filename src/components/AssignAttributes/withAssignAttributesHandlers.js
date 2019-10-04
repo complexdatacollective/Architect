@@ -1,8 +1,8 @@
 import { compose, withProps, withStateHandlers, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
-import { getVariableOptionsForSubject } from '../../selectors/codebook';
-import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
+import { isEqual } from 'lodash';
+import { getVariables, asOption } from '@selectors/codebook';
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 
 const ALLOWED_TYPES = [
   'text',
@@ -12,21 +12,20 @@ const ALLOWED_TYPES = [
   'categorical',
 ];
 
-const mapStateToProps = (state, { entity, type, form, fields }) => {
-  const usedVariables = (formValueSelector(form)(state, fields.name) || [])
-    .map(({ variable }) => variable);
-  const variableOptions = getVariableOptionsForSubject(state, { entity, type });
+// TODO: ensure works as before
+const mapStateToProps = (state, { entity, type }) => {
+  const variables = getVariables(state, { includeDraft: true })
+    .filter(({ subject, type: variableType }) => {
+      const matchingSubject = isEqual(subject === { entity, type })
+      const allowedType = ALLOWED_TYPES.includes(variableType);
+      return matchingSubject && allowedType;
+    });
 
-  const variableOptionsWithUsedDisabled = variableOptions
-    .filter(({ type: optionType }) => ALLOWED_TYPES.includes(optionType))
-    .map(({ value, ...rest }) => ({
-      ...rest,
-      value,
-      isDisabled: usedVariables.includes(value),
-    }));
+  const variableOptions = variables.map(asOption())
+    .map(({ inUse, ...rest }) => ({ isDisabled: inUse, ...rest }));
 
   return {
-    variableOptions: variableOptionsWithUsedDisabled,
+    variableOptions,
   };
 };
 

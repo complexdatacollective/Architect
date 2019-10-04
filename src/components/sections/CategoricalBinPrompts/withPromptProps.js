@@ -1,20 +1,19 @@
 import { connect } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import { compose, withHandlers, lifecycle } from 'recompose';
-import { get } from 'lodash';
-import { getVariableOptionsForSubject, getVariablesForSubject } from '../../../selectors/codebook';
-import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import { getVariables, getVariableOptions, asOption } from '@selectors/codebook';
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 
 const mapStateToProps = (state, { form, type, entity }) => {
-  const variableOptions = getVariableOptionsForSubject(state, { type, entity });
+  const variables = getVariables(state, { subject: { type, entity }, includeDraft: true });
+  const variablesAsOptions = variables.map(asOption());
   const variable = formValueSelector(form)(state, 'variable');
-  const variables = getVariablesForSubject(state, { type, entity });
-  const optionsForVariable = get(variables, [variable, 'options'], []);
+  const variableOptions = getVariableOptions(state, { includeDraft: true, id: variable });
 
   return {
     variable,
-    variableOptions,
-    optionsForVariable,
+    variableOptions: variablesAsOptions,
+    optionsForVariable: variableOptions,
   };
 };
 
