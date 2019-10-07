@@ -4,6 +4,8 @@ import { createSelector } from 'reselect';
 import { find, reduce } from 'lodash';
 import { getFormValues } from 'redux-form';
 
+const STAGE_FORM = 'edit-stage';
+
 const propStageId = (_, props) => props.stageId;
 const activeProtocolId = state => state.session.activeProtocol;
 const protocolsMeta = state => state.protocols;
@@ -12,15 +14,15 @@ const protocolsMeta = state => state.protocols;
  * Get protocol from app state
  * @param {object} state app state
  * @param {object} options options for protocol, including `includeDraft`, to merge
- * in 'edit-stage' form state.
+ * in STAGE_FORM form state.
  */
 export const getProtocol = (state, options = {}) => {
   const { includeDraft = false } = options;
 
   if (includeDraft) {
-    const draftStage = getFormValues('edit-stage')(state);
+    const draftStage = getFormValues(STAGE_FORM)(state);
 
-    if (draftStage.id) {
+    if (draftStage && draftStage.id) {
       return {
         ...state.protocol.present,
         stages: state.protocol.present.stages.map((stage) => {

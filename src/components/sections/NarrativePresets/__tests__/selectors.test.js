@@ -42,6 +42,7 @@ const mockState = {
   protocol: {
     present: {
       codebook: mockCodebook,
+      stages: [],
     },
   },
 };
