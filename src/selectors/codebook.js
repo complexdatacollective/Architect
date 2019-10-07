@@ -53,7 +53,6 @@ const matchSubject = (entity, type) => (
       subject.type === type
 );
 
-// TODO: add usage?
 /**
  * Returns all types
  *
@@ -73,6 +72,13 @@ const getTypes = (state, options) => {
   ];
 };
 
+/**
+ * Returns a type
+ *
+ * @param {object} state redux state
+ * @param {object} options search term (subject),
+ * and getProtocol options `{ includeDraft, subject }`
+ */
 const getType = (state, { subject, ...options }) => {
   const protocol = getProtocol(state, options);
 
@@ -93,7 +99,8 @@ const getType = (state, { subject, ...options }) => {
  * Returns all variables with meta: usage, and associated subject
  *
  * @param {object} state redux state
- * @param {object} options getProtocol options `{ includeDraft }`
+ * @param {object} options getProtocol options, can also include
+ * optional subject search term `{ includeDraft, subject }`
  */
 const getVariables = (state, options) => {
   const protocol = getProtocol(state, options);
@@ -124,12 +131,24 @@ const getVariables = (state, options) => {
   );
 };
 
+/**
+ * Returns a single variable matching id
+ *
+ * @param {object} state redux state
+ * @param {object} options getProtocol options, and id search term `{ includeDraft, id }`
+ */
 const getVariable = (state, options) => {
   const variables = getVariables(state, options);
 
   return variables.find(({ id }) => id === options.id);
 };
 
+/**
+ * Returns a options for variable matching id
+ *
+ * @param {object} state redux state
+ * @param {object} options getProtocol options, and id search term `{ includeDraft, id }`
+ */
 const getVariableOptions = (state, options) => {
   const variable = getVariable(state, options);
 
@@ -145,15 +164,9 @@ export {
   getCodebook,
   getTypes,
   getType,
-  // getNodeTypes, // TODO: replace with getTypes
-  // getEdgeTypes, // TODO: replace with getTypes
   getVariables,
   getVariable,
   getVariableOptions,
-  // getVariablesForSubject, // TODO: replace with getVariables
-  // getUnusedVariablesForSubject, // TODO: replace with getVariables
-  // getVariableOptionsForSubject, // TODO: replace with getVariables
-  // getOptionsForVariable, // TODO: replace with getVariables
   utils,
   asOption,
   propertyMaps,

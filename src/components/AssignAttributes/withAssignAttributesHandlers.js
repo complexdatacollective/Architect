@@ -1,6 +1,6 @@
 import { compose, withProps, withStateHandlers, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { isEqual } from 'lodash';
+import { formValueSelector } from 'redux-form';
 import { getVariables, asOption } from '@selectors/codebook';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 
@@ -12,17 +12,22 @@ const ALLOWED_TYPES = [
   'categorical',
 ];
 
-// TODO: ensure works as before
-const mapStateToProps = (state, { entity, type }) => {
-  const variables = getVariables(state, { includeDraft: true })
-    .filter(({ subject, type: variableType }) => {
-      const matchingSubject = isEqual(subject === { entity, type })
-      const allowedType = ALLOWED_TYPES.includes(variableType);
-      return matchingSubject && allowedType;
-    });
+const mapStateToProps = (state, { entity, type, form, fields }) => {
+  const variables = getVariables(state, { includeDraft: true, subject: { entity, type } });
+  const selectedVariables = (formValueSelector(form)(state, fields.name) || [])
+    .map(({ variable }) => variable);
 
-  const variableOptions = variables.map(asOption())
-    .map(({ inUse, ...rest }) => ({ isDisabled: inUse, ...rest }));
+  const allowedVariables = variables
+    .filter(({ properties }) =>
+      ALLOWED_TYPES.includes(properties.type));
+
+  const variableOptions = allowedVariables.map(asOption())
+    .map((option) => {
+      if (selectedVariables.includes(option.value)) {
+        return { ...option, isDisabled: true };
+      }
+      return option;
+    });
 
   return {
     variableOptions,

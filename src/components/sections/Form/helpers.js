@@ -34,8 +34,11 @@ export const itemSelector = (entity, type) =>
 
     const codebookVariable = getVariable(state, { id: variable });
 
+    console.log({ codebookVariable });
+
     return {
       ...item,
+      variable: codebookVariable.id, // TODO: check this
       ...getCodebookProperties(codebookVariable.properties),
     };
   };

@@ -1,10 +1,9 @@
 import React from 'react';
-import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
-import { getCodebook } from '@selectors/codebook';
+import { getVariables } from '@selectors/codebook';
 import withSubject from '../../enhancers/withSubject';
 import Preview from '../../EditableList/Preview';
 import Badge from '../../Badge';
@@ -14,15 +13,16 @@ const PreviewFieldComponent = ({
   input: {
     value,
   },
-  subjectVariables,
+  codebookVariables,
 }) => {
-  const codebookVariable = get(subjectVariables, value.variable, {});
+  const codebookVariable = codebookVariables
+    .find(({ id }) => id === value.variable);
   return (
     <div>
       {value.prompt}
-      <Badge color={getColorForType(codebookVariable.type)}>
-        <strong>{codebookVariable.type}</strong> variable
-        using <strong>{codebookVariable.component}</strong> component
+      <Badge color={getColorForType(codebookVariable.properties.type)}>
+        <strong>{codebookVariable.properties.type}</strong> variable
+        using <strong>{codebookVariable.properties.component}</strong> component
       </Badge>
     </div>
   );
@@ -30,7 +30,7 @@ const PreviewFieldComponent = ({
 
 PreviewFieldComponent.propTypes = {
   input: PropTypes.object.isRequired,
-  subjectVariables: PropTypes.object.isRequired,
+  codebookVariables: PropTypes.object.isRequired,
 };
 
 class PromptPreview extends Preview {
@@ -40,7 +40,7 @@ class PromptPreview extends Preview {
       <Field
         name={fieldId}
         component={PreviewFieldComponent}
-        subjectVariables={this.props.subjectVariables}
+        codebookVariables={this.props.codebookVariables}
       />
     );
   }
@@ -52,7 +52,9 @@ PromptPreview.propTypes = {
 
 // TODO: Update this to use the new array format getVariables
 const mapStateToProps = (state, { entity, type }) => ({
-  subjectVariables: get(getCodebook(state), [entity, type, 'variables'], {}),
+
+  codebookVariables: getVariables(state, { subject: { entity, type }}),
+  // subjectVariables: get(getCodebook(state), [entity, type, 'variables'], {}),
 });
 
 export { PromptPreview };

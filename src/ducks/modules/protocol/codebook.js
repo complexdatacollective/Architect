@@ -3,8 +3,8 @@ import { omit, get, has, isEmpty } from 'lodash';
 import { getCodebook } from '@selectors/codebook';
 import { makeGetUsageForType } from '@selectors/usage';
 import { getVariableIndex, utils as indexUtils } from '@selectors/indexes';
+import safeName from '@app/utils/safeName';
 import { getNextCategoryColor } from './utils/helpers';
-import safeName from '../../../utils/safeName';
 import { actionCreators as stageActions } from './stages';
 
 const UPDATE_TYPE = 'PROTOCOL/UPDATE_TYPE';

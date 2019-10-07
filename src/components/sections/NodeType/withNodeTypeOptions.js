@@ -3,7 +3,7 @@ import { asOption, getTypes, propertyMaps } from '@selectors/codebook';
 
 const mapStateToProps = (state) => {
   const nodeTypes = getTypes(state)
-    .filter(({ entity }) => entity === 'node');
+    .filter(({ subject }) => subject.entity === 'node');
 
   return {
     nodeTypes: nodeTypes.map(asOption(propertyMaps.entity)),

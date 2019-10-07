@@ -8,13 +8,16 @@ const propStageId = (_, props) => props.stageId;
 const activeProtocolId = state => state.session.activeProtocol;
 const protocolsMeta = state => state.protocols;
 
-// export const getProtocol = state => state.protocol.present;
-export const getAssetManifest = state => state.protocol.present.assetManifest;
-export const getCodebook = state => state.protocol.present.codebook;
-
+/**
+ * Get protocol from app state
+ * @param {object} state app state
+ * @param {object} options options for protocol, including `includeDraft`, to merge
+ * in 'edit-stage' form state.
+ */
 export const getProtocol = (state, options = {}) => {
-  const { includeDraftStage = false } = options;
-  if (includeDraftStage) {
+  const { includeDraft = false } = options;
+
+  if (includeDraft) {
     const draftStage = getFormValues('edit-stage')(state);
 
     if (draftStage.id) {
@@ -40,6 +43,26 @@ export const getProtocol = (state, options = {}) => {
   }
 
   return state.protocol.present;
+};
+
+/**
+ * Get codebook from app state
+ * @param {object} state app state
+ * @param {object} options options for getProtocol `{ includeDraft }`
+ */
+export const getCodebook = (state, options) => {
+  const protocol = getProtocol(state, options);
+  return protocol.codebook;
+};
+
+/**
+ * Get asset manifest from app state
+ * @param {object} state app state
+ * @param {object} options options for getProtocol `{ includeDraft }`
+ */
+export const getAssetManifest = (state, options) => {
+  const protocol = getProtocol(state, options);
+  return protocol.assetManifest;
 };
 
 export const getActiveProtocolMeta = createSelector(

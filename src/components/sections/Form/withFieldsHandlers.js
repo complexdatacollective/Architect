@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { isEqual, get } from 'lodash';
+import { get } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
 import {
   compose,
   withHandlers,
 } from 'recompose';
-import { getVariables } from '@selectors/codebook';
+import { getVariables, asOption } from '@selectors/codebook';
 import inputOptions, {
   getTypeForComponent,
   getComponentsForType,
@@ -18,19 +18,18 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const component = formSelector(state, 'component');
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
-  const variables = getVariables(state, { includeDraft: true });
-  const subject = { entity, type };
+  const variables = getVariables(state, { includeDraft: true, entity, type });
   const variableOptions = variables
-    .filter((v) => {
-      const matchSubject = isEqual(v.subject, subject);
-      const validType = VARIABLE_TYPES_WITH_COMPONENTS.includes(v.properties.type);
-      return matchSubject && validType;
+    .filter(v =>
+      VARIABLE_TYPES_WITH_COMPONENTS.includes(v.properties.type))
+    .map((item) => {
+      const option = asOption()(item);
+
+      return {
+        ...option,
+        __canDelete__: option.inUse,
+      };
     })
-    .map(({ properties, id, inUse }) => ({
-      ...properties,
-      value: id,
-      __canDelete__: inUse,
-    }))
     .concat(
       isNewVariable ?
         [{ label: createNewVariable, value: createNewVariable }] :
