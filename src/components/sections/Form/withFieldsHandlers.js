@@ -10,7 +10,7 @@ import inputOptions, {
   getTypeForComponent,
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
-} from '../../Form/inputOptions';
+} from '@components/Form/inputOptions';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -19,6 +19,8 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
   const variables = getVariables(state, { includeDraft: true, entity, type });
+
+  // HIDE USED VARIABLES
   const variableOptions = variables
     .filter(v =>
       VARIABLE_TYPES_WITH_COMPONENTS.includes(v.properties.type))
