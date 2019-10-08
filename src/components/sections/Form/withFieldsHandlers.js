@@ -18,9 +18,9 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const component = formSelector(state, 'component');
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
-  const variables = getVariables(state, { includeDraft: true, entity, type });
+  const subject = { entity, type };
+  const variables = getVariables(state, { includeDraft: true, subject });
 
-  // HIDE USED VARIABLES
   const variableOptions = variables
     .filter(v =>
       VARIABLE_TYPES_WITH_COMPONENTS.includes(v.properties.type))

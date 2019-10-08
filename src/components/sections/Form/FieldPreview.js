@@ -20,8 +20,9 @@ const PreviewFieldComponent = withVariableMeta(({
   <div>
     {value.prompt}
     <Badge color={getColorForType(variableMeta.properties.type)}>
-      <strong>{variableMeta.properties.type}</strong> variable
-      using <strong>{variableMeta.properties.component}</strong> component
+      <strong>{variableMeta.properties.name}&lt;{variableMeta.properties.type}&gt;</strong>
+      {' '}variable using{' '}
+      <strong>{variableMeta.properties.component}</strong> component
     </Badge>
   </div>
 ));
