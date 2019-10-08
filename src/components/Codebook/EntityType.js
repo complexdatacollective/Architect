@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { map } from 'lodash';
 import { compose, withHandlers } from 'recompose';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
-import { getType } from '@selectors/codebook';
-import { utils, getVariableIndex } from '@selectors/indexes';
+import { getType, getVariables } from '@selectors/codebook';
 import { Button } from '@ui/components';
 import Variables from './Variables';
 import Tag from './Tag';
 import EntityIcon from './EntityIcon';
-import { getUsage, getUsageAsStageName } from './helpers';
+import { getUsageAsStageName } from './helpers';
 
 const EntityType = ({
   name,
@@ -80,37 +78,22 @@ EntityType.defaultProps = {
 };
 
 const mapStateToProps = (state, { entity, type }) => {
-  const {
-    name,
-    color,
-    variables,
-  } = getType(state, { entity, type });
-
-  const variableIndex = getVariableIndex(state);
-  const variableLookup = utils.buildSearch([variableIndex]);
-
-  const variablesWithUsage = map(
-    variables,
-    (variable, id) => {
-      const inUse = variableLookup.has(id);
-
-      const usage = inUse ?
-        getUsageAsStageName(state, getUsage(variableIndex, id)) :
-        [];
-
-      return ({
-        ...variable,
-        id,
-        inUse,
-        usage,
-      });
-    },
-  );
+  const subject = { entity, type };
+  const entityMeta = getType(state, { subject });
+  const variables = getVariables(state, { subject })
+    .map(({ id, inUse, usage, properties }) => ({
+      id,
+      name: properties.name,
+      type: properties.type,
+      component: properties.component,
+      inUse,
+      usage: getUsageAsStageName(state, usage),
+    }));
 
   return {
-    name,
-    color,
-    variables: variablesWithUsage,
+    name: entityMeta.properties.name,
+    color: entityMeta.properties.color,
+    variables,
   };
 };
 
