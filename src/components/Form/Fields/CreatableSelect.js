@@ -83,6 +83,18 @@ class Select extends PureComponent {
     this.props.input.onBlur(this.props.input.value);
   }
 
+  // Logic for showing the "create" option is simple:
+  // If the input value matches an item in the options collection,
+  // don't show. Otherwise, show.
+  isValidOption = (option) => {
+    const options = this.props.options;
+    const alreadyExists = options.some(
+      ({ label: variableLabel }) => variableLabel === option,
+    );
+    const isEmpty = option.replace(/ /g, '').length === 0;
+    return !isEmpty && !alreadyExists;
+  }
+
   render() {
     const {
       className,
@@ -136,6 +148,7 @@ class Select extends PureComponent {
           // a round about way, and still allow us to use the `touched` property.
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
+<<<<<<< HEAD
           isValidNewOption={(option) => {
             // Logic for showing the "create" option is simple:
             // If the input value matches an item in the options collection,
@@ -149,6 +162,9 @@ class Select extends PureComponent {
             return !isEmpty && !alreadyExists;
           }}
 
+=======
+          isValidNewOption={this.isValidOption}
+>>>>>>> 9f32da74... Lint js
           {...rest}
         >
           {children}

@@ -24,7 +24,7 @@ export const normalizeField = field =>
   omit(field, ['id', ...CODEBOOK_PROPERTIES]);
 
 // Merge item with variable info from codebook
-export const itemSelector = (entity, type) =>
+export const itemSelector = () =>
   (state, { form, editField }) => {
     const item = formValueSelector(form)(state, editField);
 
@@ -33,8 +33,6 @@ export const itemSelector = (entity, type) =>
     const variable = item && item.variable;
 
     const codebookVariable = getVariable(state, { id: variable });
-
-    console.log({ codebookVariable });
 
     return {
       ...item,

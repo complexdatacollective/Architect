@@ -53,7 +53,7 @@ PromptPreview.propTypes = {
 // TODO: Update this to use the new array format getVariables
 const mapStateToProps = (state, { entity, type }) => ({
 
-  codebookVariables: getVariables(state, { subject: { entity, type }}),
+  codebookVariables: getVariables(state, { subject: { entity, type } }),
   // subjectVariables: get(getCodebook(state), [entity, type, 'variables'], {}),
 });
 
