@@ -8,8 +8,8 @@ const store = connect(
   (state, { form, field }) => {
     const variableId = formValueSelector(form)(state, `${field}.variable`);
     const variable = getVariable(state, { id: variableId });
-    const variableType = get(variable, 'type');
-    const options = get(variable, 'options');
+    const variableType = get(variable, 'properties.type');
+    const options = get(variable, 'properties.options');
 
     return {
       variableType,

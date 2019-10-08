@@ -30,6 +30,11 @@ class NewVariableWindow extends Component {
   validateName = value =>
     uniqueByList(this.props.existingVariableNames)(value);
 
+  nameValidators = [
+    isRequired,
+    this.validateName,
+  ];
+
   render() {
     const {
       show,
@@ -58,7 +63,7 @@ class NewVariableWindow extends Component {
             name="name"
             component={Fields.Text}
             placeholder="e.g. Nickname"
-            validate={[isRequired, this.validateName]}
+            validate={this.nameValidators}
             normalize={safeName}
           />
         </Section>
