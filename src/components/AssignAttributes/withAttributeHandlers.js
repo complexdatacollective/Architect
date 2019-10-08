@@ -4,7 +4,7 @@ import { formValueSelector } from 'redux-form';
 import { withHandlers, compose } from 'recompose';
 import { getVariable } from '@selectors/codebook';
 
-const store = connect(
+const attributeState = connect(
   (state, { form, field }) => {
     const variableId = formValueSelector(form)(state, `${field}.variable`);
     const variable = getVariable(state, { id: variableId });
@@ -19,7 +19,7 @@ const store = connect(
   },
 );
 
-const handlers = withHandlers({
+const attributeHandlers = withHandlers({
   handleDelete: ({ onDelete, index }) =>
     () => onDelete(index),
   handleCreateNew: ({ index, onCreateNew }) =>
@@ -27,6 +27,6 @@ const handlers = withHandlers({
 });
 
 export default compose(
-  store,
-  handlers,
+  attributeState,
+  attributeHandlers,
 );

@@ -20,11 +20,13 @@ const App = ({ children }) => {
       {isMacOS() &&
         <div className="app__electron-titlebar" />
       }
+
       <div className="app__window">
         <AppErrorBoundary>
           { children }
         </AppErrorBoundary>
       </div>
+
       <div id="page-wrap" />
 
       <DialogManager />

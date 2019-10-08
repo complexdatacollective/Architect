@@ -23,6 +23,7 @@ const PromptFields = ({
   componentOptions,
   isNewVariable,
   handleNewVariable,
+  handleDeleteVariable,
   handleChangeComponent,
   handleChangeVariable,
 }) => (
@@ -43,6 +44,7 @@ const PromptFields = ({
         component={CreatableSelect}
         options={variableOptions} // from variables
         onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
+        onDeleteOption={handleDeleteVariable}
         onChange={handleChangeVariable} // read/reset component options validation
         onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
@@ -133,6 +135,7 @@ PromptFields.propTypes = {
   componentOptions: PropTypes.array,
   isNewVariable: PropTypes.bool.isRequired,
   handleNewVariable: PropTypes.func.isRequired,
+  handleDeleteVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
 };
 

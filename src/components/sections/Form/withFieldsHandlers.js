@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
-import {
-  compose,
-  withHandlers,
-} from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { getVariables, asOption } from '@selectors/codebook';
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
+import { actionCreators as dialogActions } from '@modules/dialogs';
 import inputOptions, {
   getTypeForComponent,
   getComponentsForType,
@@ -29,7 +28,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
 
       return {
         ...option,
-        __canDelete__: option.inUse,
+        __canDelete__: !item.inUse,
       };
     })
     .concat(
@@ -64,19 +63,31 @@ const mapStateToProps = (state, { form, entity, type }) => {
 
 const mapDispatchToProps = {
   changeField: change,
+  deleteVariable: codebookActions.deleteVariable,
+  openDialog: dialogActions.openDialog,
 };
 
 const fieldsState = connect(mapStateToProps, mapDispatchToProps);
 
 const fieldsHandlers = withHandlers({
-  handleChangeComponent: ({ changeField, form, variableType }) =>
-    (e, value) => {
-      // Only reset if type not defined (new variable)
-      const componentType = getTypeForComponent(value);
-      if (variableType !== componentType) {
-        changeField(form, 'options', null);
-        changeField(form, 'validation', {});
-      }
+  handleNewVariable: ({ changeField, form }) =>
+    (value) => {
+      changeField(form, '_createNewVariable', value);
+      return value;
+    },
+  handleDeleteVariable: ({ variables, deleteVariable, openDialog }) =>
+    (value) => {
+      const variable = variables.find(({ id }) => id === value);
+      const name = variable.properties.name;
+      const { entity, type } = variable.subject;
+
+      openDialog({
+        type: 'Warning',
+        title: `Delete variable '${name}'`,
+        message: `Are you sure you want to delete the variable '${name}'?`,
+        confirmLabel: `Delete '${name}' variable`,
+        onConfirm: () => deleteVariable(entity, type, variable.id),
+      });
     },
   handleChangeVariable: ({ variables, changeField, form }) =>
     (_, value) => {
@@ -95,10 +106,14 @@ const fieldsHandlers = withHandlers({
       changeField(form, 'options', options);
       changeField(form, 'validation', validation);
     },
-  handleNewVariable: ({ changeField, form }) =>
-    (value) => {
-      changeField(form, '_createNewVariable', value);
-      return value;
+  handleChangeComponent: ({ changeField, form, variableType }) =>
+    (e, value) => {
+      // Only reset if type not defined (new variable)
+      const componentType = getTypeForComponent(value);
+      if (variableType !== componentType) {
+        changeField(form, 'options', null);
+        changeField(form, 'validation', {});
+      }
     },
 });
 

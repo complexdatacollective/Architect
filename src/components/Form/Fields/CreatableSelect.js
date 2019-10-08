@@ -138,7 +138,7 @@ class Select extends PureComponent {
           isSearchable
           value={this.value}
           components={{ Option }}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+          styles={{ menuPortal: base => ({ ...base, zIndex: 30 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
           onCreateOption={this.handleCreateOption}
