@@ -5,7 +5,6 @@ import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import DetachedField from '@components/DetachedField';
 import { Text, Toggle, Number, RadioGroup } from '@ui/components/Fields';
-// import RadioCheckbox from './RadioCheckbox';
 
 const INPUT_TYPES = {
   string: Text,
