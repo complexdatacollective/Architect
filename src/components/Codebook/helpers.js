@@ -1,4 +1,4 @@
-import { reduce, get } from 'lodash';
+import { reduce, get, compact } from 'lodash';
 import { getProtocol } from '@selectors/protocol';
 
 const getStageNames = (state) => {
@@ -8,7 +8,8 @@ const getStageNames = (state) => {
 };
 
 const getStageNameFromPath = (stageNames, path) => {
-  const stage = get(/\[([0-9+])\]/.exec(path), 1);
+  const matches = /stages\[([0-9]+)\]/.exec(path);
+  const stage = get(matches, 1);
   if (!stage) { return null; }
   return stageNames[stage];
 };
@@ -21,5 +22,5 @@ export const getUsage = (index, id) =>
 
 export const getUsageAsStageName = (state, usage) => {
   const stageNames = getStageNames(state);
-  return usage.map(path => getStageNameFromPath(stageNames, path));
+  return compact(usage.map(path => getStageNameFromPath(stageNames, path)));
 };
