@@ -69,7 +69,7 @@ const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => 
             width={200}
           />
           <Column
-            className="codebook__variables-column"
+            className="codebook__variables-column codebook__variables-column--usage"
             width={100}
             flexGrow={1}
             label="Used in"
