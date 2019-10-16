@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import testState from '../../__tests__/testState.json';
+import { getMockState } from '@app/__tests__/helpers';
 
 import {
   getVariableIndex,
@@ -9,6 +9,8 @@ import {
   getEdgeIndex,
   utils,
 } from '../indexes';
+
+const testState = getMockState();
 
 describe('indexes selectors', () => {
   describe('utils.buildSearch()', () => {

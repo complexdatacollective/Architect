@@ -147,7 +147,17 @@ const getVariableIndex = createSelector(
 const getAssetIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const informationItems = collectPaths('stages[].items[].content', protocol);
+    const informationItems = reduce(
+      collectPaths('stages[].items[]', protocol),
+      (acc, { type, content }, index) => {
+        if (type === 'text') { return acc; }
+        return {
+          ...acc,
+          [`${index}.content`]: content,
+        };
+      },
+      {},
+    );
     const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
     const nameGeneratorDataSources = collectPaths('stages[].dataSource', protocol);
     const sociogramBackground = collectPaths('stages[].background.image', protocol);
