@@ -103,14 +103,34 @@ const getNodeIndex = createSelector(
 const getVariableIndex = createSelector(
   getProtocol,
   (protocol) => {
+    // Generic prompt usage
     const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
-    const sociogramIndex = collectPaths('stages[].prompts[].highlight.variable', protocol);
-    const variableIndex = collectPaths('stages[].prompts[].variable', protocol);
+    const additionalAttributes = collectPaths('stages[].prompts[].additionalAttributes[].variable', protocol);
+    const nameGeneratorIndex = collectPaths('stages[].panels.filter.rules[].options.attribute', protocol);
+    const categoricalIndex = collectPaths('stages[].prompts[].variable', protocol);
+    // Sociogram usage
+    const sociogramIndex = {
+      ...collectPaths('stages[].prompts[].highlight.variable', protocol),
+      ...collectPaths('stages[].prompts[].layout.layoutVariable', protocol),
+    };
+    const narrativeIndex = {
+      ...collectPaths('stages[].prompts[].presets[].layoutVariable', protocol),
+      ...collectPaths('stages[].prompts[].presets[].groupVariable', protocol),
+      ...collectPaths('stages[].prompts[].presets[].edges.display[]', protocol),
+      ...collectPaths('stages[].prompts[].presets[].highlight[]', protocol),
+    };
+    const skipLogicIndex = collectPaths('stages[].skipLogic.filter.rules[].options.attribute', protocol);
+    const filterIndex = collectPaths('stages[].filter.rules[].options.attribute', protocol);
 
     return {
       ...formIndex,
+      ...additionalAttributes,
+      ...categoricalIndex,
+      ...nameGeneratorIndex,
       ...sociogramIndex,
-      ...variableIndex,
+      ...narrativeIndex,
+      ...skipLogicIndex,
+      ...filterIndex,
     };
   },
 );
