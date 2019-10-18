@@ -252,6 +252,7 @@
         "transformIgnorePatterns": [
             "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
         ],
+        "testRegex": "(/__tests__/.*|(\\.|/))\\.test\\.[jt]sx?$",
         "moduleNameMapper": {
             "@app/(.*)$": "<rootDir>/src/$1",
             "@components/(.*)$": "<rootDir>/src/components/$1",

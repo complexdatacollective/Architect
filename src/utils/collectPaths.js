@@ -36,9 +36,18 @@ import { get, reduce, isArray } from 'lodash';
 const collectPaths = (paths, obj, memoPath) => {
   // We expect a string notation for paths, but it's actually converted to array automatically:
   // 'stages[].prompts[].subject.type' => ['stages', 'prompts', 'subject.type']
-  const [next, ...rest] = isArray(paths) ?
+  const parsedPath = isArray(paths) ?
     paths :
     paths.split('[].');
+  const [, ...rest] = parsedPath;
+  let [next] = parsedPath;
+  let scanArray = false;
+
+  // if end is array then we wanted to parse it as one
+  if (next.slice(-2) === '[]') {
+    next = next.slice(0, -2);
+    scanArray = true;
+  }
 
   const path = memoPath ?
     `${memoPath}.${next}` : `${next}`;
@@ -51,6 +60,18 @@ const collectPaths = (paths, obj, memoPath) => {
       (memo, item, index) => ({
         ...memo,
         ...collectPaths(rest, item, `${path}[${index}]`),
+      }),
+      {},
+    );
+  }
+
+  // special case to parse end array
+  if (Array.isArray(nextObj) && scanArray) {
+    return reduce(
+      nextObj || [],
+      (memo, item, index) => ({
+        ...memo,
+        [`${path}[${index}]`]: item,
       }),
       {},
     );
