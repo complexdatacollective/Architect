@@ -34,10 +34,10 @@ describe('collectPaths', () => {
     expect(paths).toEqual(expectedResult);
   });
 
-  it.skip('can extract arrays', () => {
+  it('can extract arrays', () => {
     const expectedResult = {
-      'stages[0].prompts[0].list[0]': 'fizz',
-      'stages[0].prompts[1].list[1]': 'buzz',
+      'stages[1].list[0]': 'fizz',
+      'stages[1].list[1]': 'buzz',
     };
     const paths = collectPaths('stages[].list[]', testObject);
 
