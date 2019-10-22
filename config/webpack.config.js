@@ -261,7 +261,11 @@ module.exports = {
     ),
     alias: {
       concaveman: path.join(paths.appSrc, 'utils', 'webShims', 'concavemock.js'),
-      App: paths.appSrc,
+      '@app': paths.appSrc,
+      '@components': path.join(paths.appSrc, 'components'),
+      '@ui': path.join(paths.appSrc, 'ui'),
+      '@selectors': path.join(paths.appSrc, 'selectors'),
+      '@modules': path.join(paths.appSrc, 'ducks', 'modules'),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).

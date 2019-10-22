@@ -3,7 +3,7 @@ import { withProps } from 'recompose';
 import { validTypes, operatorsAsOptions, operatorsByType } from './options';
 
 const getVariablesAsOptions = (variables) => {
-  const variableOptions = reduce(
+  const variablesAsOptions = reduce(
     variables,
     (acc, variable, variableId) => {
       if (!validTypes.has(variable.type)) { return acc; }
@@ -18,7 +18,7 @@ const getVariablesAsOptions = (variables) => {
     [],
   );
 
-  return variableOptions;
+  return variablesAsOptions;
 };
 
 const getOperatorsForType = (type) => {
@@ -44,7 +44,7 @@ const withOptions = entityCategory =>
       color: entity.color,
     }));
 
-    const variableOptions = getVariablesAsOptions(get(props.codebook, variablesRoot, {}));
+    const variablesAsOptions = getVariablesAsOptions(get(props.codebook, variablesRoot, {}));
 
     const variableType = get(
       props.codebook,
@@ -52,10 +52,17 @@ const withOptions = entityCategory =>
       '',
     );
 
+    const variableOptions = get(
+      props.codebook,
+      [...variablesRoot, variableId, 'options'],
+      '',
+    );
+
     const operatorOptions = getOperatorsForType(variableType);
 
     return {
       typeOptions,
+      variablesAsOptions,
       variableOptions,
       operatorOptions,
       variableType,

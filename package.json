@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "4.1.0",
+    "version": "4.1.2",
     "productName": "Network Canvas Architect",
     "description": "A tool for creating Network Canvas interviews.",
     "author": "Complex Data Collective",
@@ -120,7 +120,7 @@
         "promise": "7.1.1",
         "prop-types": "^15.6.2",
         "query-string": "^6.2.0",
-        "react": "^16.5.2",
+        "react": "^16.8.6",
         "react-dev-utils": "^6.1.1",
         "react-dom": "^16.5.2",
         "react-draggable": "^2.2.3",
@@ -136,11 +136,12 @@
         "react-router-dom": "^4.3.1",
         "react-router-redux": "^5.0.0-alpha.9",
         "react-scripts": "^2.1.1",
-        "react-select": "^2.1.1",
+        "react-select": "^3.0.5",
         "react-sortable-hoc": "^0.6.8",
         "react-test-renderer": "^16.5.2",
         "react-transform-hmr": "^1.0.4",
         "react-transition-group": "^2.5.3",
+        "react-virtualized": "^9.21.1",
         "recompose": "^0.26.0",
         "redux": "^3.6.0",
         "redux-form": "^7.4.2",
@@ -250,8 +251,13 @@
         "transformIgnorePatterns": [
             "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
         ],
+        "testRegex": "(/__tests__/.*|(\\.|/))\\.test\\.[jt]sx?$",
         "moduleNameMapper": {
-            "App/(.*)$": "<rootDir>/src/$1",
+            "@app/(.*)$": "<rootDir>/src/$1",
+            "@components/(.*)$": "<rootDir>/src/components/$1",
+            "@ui/(.*)$": "<rootDir>/src/ui/$1",
+            "@selectors/(.*)$": "<rootDir>/src/selectors/$1",
+            "@modules/(.*)$": "<rootDir>/src/ducks/modules/$1",
             "^react-native$": "react-native-web"
         }
     }

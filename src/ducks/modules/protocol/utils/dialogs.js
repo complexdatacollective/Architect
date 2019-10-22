@@ -1,6 +1,6 @@
 import React from 'react';
 import path from 'path';
-import { actionCreators as dialogActions } from 'App/ducks/modules/dialogs';
+import { actionCreators as dialogActions } from '@modules/dialogs';
 
 export const invalidAssetErrorDialog = (e, filePath) => {
   e.friendlyMessage = (

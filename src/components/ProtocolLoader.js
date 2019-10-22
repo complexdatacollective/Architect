@@ -25,7 +25,8 @@ class ProtocolLoader extends Component {
 
   checkForProtocolAndLoad = (match) => {
     if (!match) { this.resetSession(); return; }
-    this.loadProtocol(decodeURIComponent(match.params.protocol));
+    const protocolId = decodeURIComponent(match.params.protocol);
+    this.loadProtocol(protocolId);
   };
 
   resetSession = () => {

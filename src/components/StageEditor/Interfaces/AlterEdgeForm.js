@@ -1,6 +1,7 @@
 import {
   Name,
   EdgeType,
+  Filter,
   Form,
   IntroductionPanel,
 } from '../../sections';
@@ -12,6 +13,7 @@ const AlterEdgeForm = {
   sections: [
     Name,
     EdgeType,
+    Filter,
     IntroductionPanel,
     Form,
   ],
