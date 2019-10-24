@@ -34,6 +34,14 @@ const withRulesChangeHandlers = compose(
     deleteRule: ({ join, rules, onChange }) => (ruleId) => {
       const updateRules = rules.filter(rule => rule.id !== ruleId);
 
+      if (updateRules.length < 2) {
+        onChange({
+          rules: updateRules,
+        });
+
+        return;
+      }
+
       onChange({
         join,
         rules: updateRules,

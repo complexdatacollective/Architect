@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import cx from 'classnames';
 import Button from '@ui/components/Button';
 import RadioGroup from '@ui/components/Fields/RadioGroup';
 import DetachedField from '@components/DetachedField';
@@ -13,6 +14,7 @@ const Rules = ({
   type,
   rules,
   join,
+  error,
   codebook,
   draftRule,
   handleChangeJoin,
@@ -24,69 +26,87 @@ const Rules = ({
   handleCreateAlterRule,
   handleCreateEdgeRule,
   handleCreateEgoRule,
-}) => (
-  <div className="rules-rules">
-    <EditRule
-      codebook={codebook}
-      rule={draftRule}
-      onChange={handleChangeDraft}
-      onCancel={handleCancelDraft}
-      onSave={handleSaveDraft}
-    />
+}) => {
+  const classes = cx(
+    'rules-rules',
+    { 'rules-rules--has-error': !!error },
+  );
 
-    <div className="rules-rules__join">
-      <h3>Must match:</h3>
-      <DetachedField
-        component={RadioGroup}
-        options={[
-          { label: 'All of the following rules', value: 'AND' },
-          { label: 'Any of the following rules', value: 'OR' },
-        ]}
-        value={join}
-        onChange={handleChangeJoin}
-      />
-    </div>
-
-    <div className="rules-rules__preview">
-      <h3>Rules:</h3>
-      <PreviewRules
-        rules={rules}
-        join={join}
-        onClickRule={handleClickRule}
-        onDeleteRule={handleDeleteRule}
+  return (
+    <div className={classes}>
+      <EditRule
         codebook={codebook}
+        rule={draftRule}
+        onChange={handleChangeDraft}
+        onCancel={handleCancelDraft}
+        onSave={handleSaveDraft}
       />
-    </div>
 
-    <div className="rules-rules__add-new">
-      <Button
-        type="button"
-        size="small"
-        color="sea-serpent"
-        onClick={handleCreateAlterRule}
-      >Add alter rule</Button>
-      <Button
-        type="button"
-        size="small"
-        color="paradise-pink"
-        onClick={handleCreateEdgeRule}
-      >Add edge rule</Button>
-      { type === 'query' &&
+      <div className="rules-rules__preview">
+        <h3>Rules:</h3>
+        <PreviewRules
+          rules={rules}
+          join={join}
+          onClickRule={handleClickRule}
+          onDeleteRule={handleDeleteRule}
+          codebook={codebook}
+        />
+      </div>
+
+      <div className="rules-rules__add-new">
         <Button
           type="button"
           size="small"
-          color="neon-carrot"
-          onClick={handleCreateEgoRule}
-        >Add ego rule</Button>
+          color="sea-serpent"
+          onClick={handleCreateAlterRule}
+        >Add alter rule</Button>
+        <Button
+          type="button"
+          size="small"
+          color="paradise-pink"
+          onClick={handleCreateEdgeRule}
+        >Add edge rule</Button>
+        { type === 'query' &&
+          <Button
+            type="button"
+            size="small"
+            color="neon-carrot"
+            onClick={handleCreateEgoRule}
+          >Add ego rule</Button>
+        }
+      </div>
+
+      { rules.length > 1 &&
+        <div className="rules-rules__join">
+          <h3>Must match:</h3>
+          <DetachedField
+            component={RadioGroup}
+            options={[
+              { label: 'All rules', value: 'AND' },
+              { label: 'Any rule', value: 'OR' },
+            ]}
+            value={join}
+            onChange={handleChangeJoin}
+          />
+        </div>
+      }
+
+      { error &&
+        <div className="rules-rules__error">
+          {error}
+
+
+        </div>
       }
     </div>
-  </div>
-);
+  );
+};
 
 Rules.propTypes = {
   type: PropTypes.oneOf(['filter', 'query']),
   rules: PropTypes.array,
   join: PropTypes.string,
+  error: PropTypes.string,
   codebook: PropTypes.object.isRequired,
   draftRule: PropTypes.object,
   handleChangeJoin: PropTypes.func.isRequired,
@@ -103,6 +123,7 @@ Rules.propTypes = {
 Rules.defaultProps = {
   rules: [],
   join: null,
+  error: null,
   type: 'filter',
   draftRule: {},
 };

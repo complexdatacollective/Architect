@@ -6,6 +6,7 @@ const withFieldConnector = withProps(
     rules: get(props.input.value, 'rules', []),
     join: get(props.input.value, 'join'),
     onChange: props.input.onChange,
+    error: props.meta.error,
   }),
 );
 
