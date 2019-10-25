@@ -9,11 +9,11 @@ const mapDispatchToProps = {
   deleteVariable: codebookActions.deleteVariable,
 };
 
-export const normalizeKeyDown = (e) => {
+export const normalizeKeyDown = (event) => {
   const check = safeName(event.key);
 
   if (isEmpty(check)) {
-    e.preventDefault();
+    event.preventDefault();
   }
 };
 

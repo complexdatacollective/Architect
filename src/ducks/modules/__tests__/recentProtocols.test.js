@@ -23,8 +23,8 @@ describe('recentProtocols', () => {
       store.subscribe(() => {
         const state = store.getState();
         expect(state.length).toBe(3);
-        expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/2' });
-        expect(state[1]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
+        expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
+        expect(state[1]).toMatchObject({ filePath: '/dev/null/mock/recent/path/2' });
         expect(state[2]).toMatchObject({ filePath: '/dev/null/mock/recent/path/1' });
 
         done();

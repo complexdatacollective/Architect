@@ -250,6 +250,9 @@ if (isProduction) {
 }
 
 module.exports = {
+  externals: {
+    archiver: 'require("archiver")',
+  },
   resolve: {
     modules: ['node_modules'].concat(
       // It is guaranteed to exist because we tweak it in `env.js`

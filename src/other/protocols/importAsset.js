@@ -1,6 +1,6 @@
 import path from 'path';
 import uuid from 'uuid/v1';
-import { findKey, get } from 'lodash';
+import { findKey, get, toLower } from 'lodash';
 import csvParse from 'csv-parse';
 import { writeFile } from 'fs-extra';
 import readFileAsBuffer from './lib/readFileAsBuffer';
@@ -18,7 +18,7 @@ import { SUPPORTED_EXTENSION_TYPE_MAP, SUPPORTED_MIME_TYPE_MAP } from '../../con
  * is unsupported
  */
 const getSupportedAssetType = (asset) => {
-  const extension = path.extname(asset.name);
+  const extension = toLower(path.extname(asset.name));
   const mimeType = asset.type;
 
   const typeFromMap =
@@ -105,7 +105,6 @@ export const validateAsset = (file) => {
 
   // Don't validate non-network assets at this time
   if (assetType !== 'network') { return Promise.resolve(true); }
-
 
   const networkType = getNetworkType(file);
 

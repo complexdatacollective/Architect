@@ -14,6 +14,7 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -46,7 +47,7 @@ ShallowWrapper {
             src="architect-logo-icon.svg"
           />
         </div>,
-        <Flipper
+        <n
           applyTransformOrigin={true}
           element="div"
           flipKey="start"
@@ -84,7 +85,7 @@ ShallowWrapper {
               show={false}
             />
           </div>
-        </Flipper>,
+        </n>,
         <Connect(Screens) />,
       ],
       "className": "scene",
@@ -364,7 +365,7 @@ ShallowWrapper {
               src="architect-logo-icon.svg"
             />
           </div>,
-          <Flipper
+          <n
             applyTransformOrigin={true}
             element="div"
             flipKey="start"
@@ -402,7 +403,7 @@ ShallowWrapper {
                 show={false}
               />
             </div>
-          </Flipper>,
+          </n>,
           <Connect(Screens) />,
         ],
         "className": "scene",
@@ -660,11 +661,18 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
           },
-          "getDerivedStateFromProps": true,
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,
@@ -672,7 +680,9 @@ ShallowWrapper {
         },
       },
     },
+    Symbol(enzyme.__providerValues__): undefined,
   },
+  Symbol(enzyme.__providerValues__): Map {},
 }
 `;
 
@@ -691,6 +701,7 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
     "simulateError": [Function],
@@ -723,7 +734,7 @@ ShallowWrapper {
             src="architect-logo-icon.svg"
           />
         </div>,
-        <Flipper
+        <n
           applyTransformOrigin={true}
           element="div"
           flipKey="foo"
@@ -761,7 +772,7 @@ ShallowWrapper {
               show={true}
             />
           </div>
-        </Flipper>,
+        </n>,
         <Connect(Screens) />,
       ],
       "className": "scene scene--protocol",
@@ -1041,7 +1052,7 @@ ShallowWrapper {
               src="architect-logo-icon.svg"
             />
           </div>,
-          <Flipper
+          <n
             applyTransformOrigin={true}
             element="div"
             flipKey="foo"
@@ -1079,7 +1090,7 @@ ShallowWrapper {
                 show={true}
               />
             </div>
-          </Flipper>,
+          </n>,
           <Connect(Screens) />,
         ],
         "className": "scene scene--protocol",
@@ -1337,11 +1348,18 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
         "lifecycles": Object {
           "componentDidUpdate": Object {
             "onSetState": true,
           },
-          "getDerivedStateFromProps": true,
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
           "getSnapshotBeforeUpdate": true,
           "setState": Object {
             "skipsComponentDidUpdateOnNullish": true,
@@ -1349,6 +1367,8 @@ ShallowWrapper {
         },
       },
     },
+    Symbol(enzyme.__providerValues__): undefined,
   },
+  Symbol(enzyme.__providerValues__): Map {},
 }
 `;

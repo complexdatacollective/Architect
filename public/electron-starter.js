@@ -1,4 +1,4 @@
-const { app } = require('electron');
+const { app, protocol } = require('electron');
 const log = require('./components/log');
 const createAppWindow = require('./components/createAppWindow');
 const createPreviewWindow = require('./components/createPreviewWindow');
@@ -7,20 +7,29 @@ const PreviewManager = require('./components/previewManager');
 
 global.NETWORK_CANVAS_PREVIEW = true;
 
+protocol.registerSchemesAsPrivileged([{
+  scheme: 'asset',
+  privileges: {
+    secure: true,
+    supportFetchAPI: true,
+    bypassCSP: true,
+    corsEnabled: true,
+  },
+}]);
+
 log.info('App starting...');
-log.info('[updated]');
 
 const appManager = new AppManager();
 const previewManager = new PreviewManager(); // eslint-disable-line
 
-const shouldQuit = app.makeSingleInstance((argv) => {
-  log.info('shouldQuit', argv);
-  AppManager.openFileFromArgs(argv);
-});
-
-if (shouldQuit) {
-  AppManager.quit();
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+  log.info('Another instance of Architect is already running...quitting.');
+  app.quit();
+  return;
 }
+
+app.on('second-instance', argv => appManager.openFileFromArgs(argv));
 
 // open file on os x
 app.on('open-file', (event, filePath) => {

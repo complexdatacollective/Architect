@@ -23,7 +23,7 @@ class PreviewManager {
 
   start() {
     log.info('Start previewManager');
-    this.menu = Menu.buildFromTemplate(getPreviewMenu(global.previewWindow));
+    // this.menu = Menu.buildFromTemplate(getPreviewMenu(global.previewWindow));
 
     global.previewWindow.on('focus', () => {
       this.updateMenu();
