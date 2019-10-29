@@ -21,9 +21,9 @@
   &__home {
     z-index: var(--z-global-ui);
     position: fixed;
-    width: unit(10);
-    height: unit(10);
-    top: unit(4);
+    width: unit(12);
+    height: unit(12);
+    top: unit(8);
     left: unit(4);
     cursor: pointer;
     transition-duration: var(--animation-duration-standard);
@@ -33,6 +33,18 @@
     opacity: 0;
     pointer-events: none;
     transform: translateY(calc(-100% - #{unit(2)}));
+    color: var(--text-light);
+    background: var(--color-sea-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: unit(3);
+
+    svg {
+      height: 100%;
+    }
+
   }
 
   &__background {

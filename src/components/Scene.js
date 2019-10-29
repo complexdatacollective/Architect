@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Flipper } from 'react-flip-toolkit';
 import { compose, withHandlers } from 'recompose';
 import { getActiveProtocolMeta } from '../selectors/protocol';
+import Icon from '../ui/components/Icon';
 import { actionCreators as dialogActions } from '../ducks/modules/dialogs';
 import history from '../history';
 import Start from './Start';
@@ -13,7 +14,6 @@ import Overview from './Overview';
 import Timeline from './Timeline';
 import ProtocolControlBar from './ProtocolControlBar';
 import Screens from './Screens';
-import architectLogoIcon from '../images/architect-logo-icon.svg';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
 
 const Scene = ({
@@ -36,8 +36,8 @@ const Scene = ({
       <div className="scene__background scene__background--bottom" />
       <img className="scene__brand" src={networkCanvasBrand} alt="" />
 
-      <div onClick={handleClickStart} className="scene__home">
-        <img src={architectLogoIcon} alt="" />
+      <div className="scene__home">
+        <Icon onClick={handleClickStart} className="start-button__arrow" name="back-arrow" />
       </div>
 
       <Flipper flipKey={flipKey}>
