@@ -40,11 +40,13 @@ ShallowWrapper {
         />,
         <div
           className="scene__home"
-          onClick={[Function]}
         >
-          <img
-            alt=""
-            src="architect-logo-icon.svg"
+          <Icon
+            className="start-button__arrow"
+            color=""
+            name="back-arrow"
+            onClick={[Function]}
+            style={Object {}}
           />
         </div>,
         <n
@@ -132,25 +134,30 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <img
-            alt=""
-            src="architect-logo-icon.svg"
+          "children": <Icon
+            className="start-button__arrow"
+            color=""
+            name="back-arrow"
+            onClick={[Function]}
+            style={Object {}}
           />,
           "className": "scene__home",
-          "onClick": [Function],
         },
         "ref": null,
         "rendered": Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "class",
           "props": Object {
-            "alt": "",
-            "src": "architect-logo-icon.svg",
+            "className": "start-button__arrow",
+            "color": "",
+            "name": "back-arrow",
+            "onClick": [Function],
+            "style": Object {},
           },
           "ref": null,
           "rendered": null,
-          "type": "img",
+          "type": [Function],
         },
         "type": "div",
       },
@@ -358,11 +365,13 @@ ShallowWrapper {
           />,
           <div
             className="scene__home"
-            onClick={[Function]}
           >
-            <img
-              alt=""
-              src="architect-logo-icon.svg"
+            <Icon
+              className="start-button__arrow"
+              color=""
+              name="back-arrow"
+              onClick={[Function]}
+              style={Object {}}
             />
           </div>,
           <n
@@ -450,25 +459,30 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <img
-              alt=""
-              src="architect-logo-icon.svg"
+            "children": <Icon
+              className="start-button__arrow"
+              color=""
+              name="back-arrow"
+              onClick={[Function]}
+              style={Object {}}
             />,
             "className": "scene__home",
-            "onClick": [Function],
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "class",
             "props": Object {
-              "alt": "",
-              "src": "architect-logo-icon.svg",
+              "className": "start-button__arrow",
+              "color": "",
+              "name": "back-arrow",
+              "onClick": [Function],
+              "style": Object {},
             },
             "ref": null,
             "rendered": null,
-            "type": "img",
+            "type": [Function],
           },
           "type": "div",
         },
@@ -727,11 +741,13 @@ ShallowWrapper {
         />,
         <div
           className="scene__home"
-          onClick={[Function]}
         >
-          <img
-            alt=""
-            src="architect-logo-icon.svg"
+          <Icon
+            className="start-button__arrow"
+            color=""
+            name="back-arrow"
+            onClick={[Function]}
+            style={Object {}}
           />
         </div>,
         <n
@@ -819,25 +835,30 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": <img
-            alt=""
-            src="architect-logo-icon.svg"
+          "children": <Icon
+            className="start-button__arrow"
+            color=""
+            name="back-arrow"
+            onClick={[Function]}
+            style={Object {}}
           />,
           "className": "scene__home",
-          "onClick": [Function],
         },
         "ref": null,
         "rendered": Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "class",
           "props": Object {
-            "alt": "",
-            "src": "architect-logo-icon.svg",
+            "className": "start-button__arrow",
+            "color": "",
+            "name": "back-arrow",
+            "onClick": [Function],
+            "style": Object {},
           },
           "ref": null,
           "rendered": null,
-          "type": "img",
+          "type": [Function],
         },
         "type": "div",
       },
@@ -1045,11 +1066,13 @@ ShallowWrapper {
           />,
           <div
             className="scene__home"
-            onClick={[Function]}
           >
-            <img
-              alt=""
-              src="architect-logo-icon.svg"
+            <Icon
+              className="start-button__arrow"
+              color=""
+              name="back-arrow"
+              onClick={[Function]}
+              style={Object {}}
             />
           </div>,
           <n
@@ -1137,25 +1160,30 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": <img
-              alt=""
-              src="architect-logo-icon.svg"
+            "children": <Icon
+              className="start-button__arrow"
+              color=""
+              name="back-arrow"
+              onClick={[Function]}
+              style={Object {}}
             />,
             "className": "scene__home",
-            "onClick": [Function],
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "class",
             "props": Object {
-              "alt": "",
-              "src": "architect-logo-icon.svg",
+              "className": "start-button__arrow",
+              "color": "",
+              "name": "back-arrow",
+              "onClick": [Function],
+              "style": Object {},
             },
             "ref": null,
             "rendered": null,
-            "type": "img",
+            "type": [Function],
           },
           "type": "div",
         },
