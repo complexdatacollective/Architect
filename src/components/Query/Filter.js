@@ -18,12 +18,13 @@ Filter.propTypes = {
   openDialog: PropTypes.func.isRequired,
   rules: PropTypes.array,
   codebook: PropTypes.object.isRequired,
-  join: PropTypes.string.isRequired,
+  join: PropTypes.string,
   error: PropTypes.string,
 };
 
 Filter.defaultProps = {
   rules: [],
+  join: null,
   error: null,
 };
 

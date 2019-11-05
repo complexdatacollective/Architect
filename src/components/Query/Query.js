@@ -19,12 +19,13 @@ Query.propTypes = {
   openDialog: PropTypes.func.isRequired,
   rules: PropTypes.array,
   codebook: PropTypes.object.isRequired,
-  join: PropTypes.string.isRequired,
+  join: PropTypes.string,
   error: PropTypes.string,
 };
 
 Query.defaultProps = {
   rules: [],
+  join: null,
   error: null,
 };
 

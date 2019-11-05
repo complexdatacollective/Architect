@@ -49,13 +49,13 @@ const withOptions = entityCategory =>
     const variableType = get(
       props.codebook,
       [...variablesRoot, variableId, 'type'],
-      '',
+      null,
     );
 
     const variableOptions = get(
       props.codebook,
       [...variablesRoot, variableId, 'options'],
-      '',
+      null,
     );
 
     const operatorOptions = getOperatorsForType(variableType);
