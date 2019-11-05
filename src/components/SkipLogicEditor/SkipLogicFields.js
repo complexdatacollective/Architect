@@ -1,53 +1,32 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { Query, withStoreConnector } from '../Query';
-import Select from '../Form/Fields/Select';
+import React from 'react';
+import { Field } from 'redux-form';
+import Select from '@components/Form/Fields/Select';
+import { Query, withStoreConnector, withFieldConnector, ruleValidator } from '@components/Query';
 
-const ConnectedQuery = withStoreConnector(Query);
+const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 
-class SkipLogicEditor extends PureComponent {
-  static propTypes = {
-    logic: PropTypes.any.isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
-
-  render() {
-    if (!this.props.logic) { return null; }
-
-    const {
-      onChange,
-      logic: {
-        action,
-        filter,
-      },
-    } = this.props;
-
-    return (
-      <div>
-        <h1>Edit Skip Logic</h1>
-        <div>
-          <Select
-            options={[
-              { value: 'SHOW', label: 'Show this stage if' },
-              { value: 'SKIP', label: 'Skip this stage if' },
-            ]}
-            onChange={value => onChange('action', value.value)}
-            input={{
-              value: action,
-            }}
-          />
-        </div>
-        <div>
-          <ConnectedQuery
-            rules={filter.rules}
-            join={filter.join}
-            onChange={value => onChange('filter', value)}
-          />
-        </div>
-      </div>
-    );
-  }
-}
+const SkipLogicEditor = () => (
+  <div>
+    <h1>Edit Skip Logic</h1>
+    <div>
+      <Field
+        component={Select}
+        name="action"
+        options={[
+          { value: 'SHOW', label: 'Show this stage if' },
+          { value: 'SKIP', label: 'Skip this stage if' },
+        ]}
+      />
+    </div>
+    <div>
+      <Field
+        component={ConnectedQuery}
+        name="filter"
+        validate={ruleValidator}
+      />
+    </div>
+  </div>
+);
 
 export { SkipLogicEditor };
 

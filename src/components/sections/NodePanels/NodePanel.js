@@ -1,26 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
 import * as Fields from '@ui/components/Fields';
 import DataSource from '@components/Form/Fields/DataSource';
-import { Filter, withFieldConnector, withStoreConnector } from '@components/Query';
+import { Filter, withFieldConnector, withStoreConnector, ruleValidator } from '@components/Query';
 import ValidatedField from '@components/Form/ValidatedField';
 import { Item, Row } from '@components/OrderedList';
 import { getFieldId } from '@app/utils/issues';
 
 const FilterField = withFieldConnector(withStoreConnector(Filter));
-
-const validateFilter = (value) => {
-  const rules = get(value, 'rules', []);
-  const join = get(value, 'join');
-
-  if (rules.length > 1 && !join) {
-    return 'Filters with more that one rule must select a type of "join"';
-  }
-
-  return undefined;
-};
 
 const NodePanel = ({ fieldId, ...rest }) => (
   <Item {...rest}>
@@ -65,7 +53,7 @@ const NodePanel = ({ fieldId, ...rest }) => (
       <Field
         name={`${fieldId}.filter`}
         component={FilterField}
-        validate={validateFilter}
+        validate={ruleValidator}
       />
     </Row>
   </Item>
