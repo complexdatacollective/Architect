@@ -1,13 +1,13 @@
 import { uniqBy } from 'lodash';
 import { actionTypes as loadActionTypes } from './protocols/load';
-import { actionTypes as exportActionTypes } from './protocols/export';
-import { actionTypes as importActionTypes } from './protocols/import';
+import { actionTypes as bundleActionTypes } from './protocols/bundle';
+import { actionTypes as unbundleActionTypes } from './protocols/unbundle';
 
 const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case importActionTypes.IMPORT_PROTOCOL_ERROR:
+    case unbundleActionTypes.UNBUNDLE_PROTOCOL_ERROR:
       return state.filter(protocol =>
         protocol.filePath !== action.filePath,
       );
@@ -20,8 +20,8 @@ export default function reducer(state = initialState, action = {}) {
           lastOpened: new Date().getTime(),
         };
       }).sort((a, b) => a.lastOpened < b.lastOpened);
-    case importActionTypes.IMPORT_PROTOCOL_SUCCESS:
-    case exportActionTypes.EXPORT_PROTOCOL_SUCCESS:
+    case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
+    case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
       return uniqBy([
         { filePath: action.filePath, lastOpened: new Date().getTime() },
         ...state,

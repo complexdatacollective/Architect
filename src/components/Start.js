@@ -9,7 +9,7 @@ import architectLogoIcon from '../images/architect-logo-icon.svg';
 
 const Start = ({
   show,
-  createAndLoadProtocol,
+  createAndLoad,
   openProtocol,
 }) => (
   <div className={cx('start', { 'start--hide': !show })}>
@@ -31,7 +31,7 @@ const Start = ({
         type="button"
         color="platinum"
         icon={<Icon name="arrow-right" color="charcoal" />}
-        onClick={createAndLoadProtocol}
+        onClick={createAndLoad}
       >Create new</Button>
       <Button
         id="open-existing-protocol-button"
@@ -46,7 +46,7 @@ const Start = ({
 
 Start.propTypes = {
   show: PropTypes.bool,
-  createAndLoadProtocol: PropTypes.func.isRequired,
+  createAndLoad: PropTypes.func.isRequired,
   openProtocol: PropTypes.func.isRequired,
 };
 
@@ -55,7 +55,7 @@ Start.defaultProps = {
 };
 
 const mapDispatchToProps = {
-  createAndLoadProtocol: protocolsActions.createAndLoadProtocol,
+  createAndLoad: protocolsActions.createAndLoad,
   openProtocol: protocolsActions.openProtocol,
 };
 

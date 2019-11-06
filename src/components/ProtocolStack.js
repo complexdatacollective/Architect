@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
@@ -9,10 +8,10 @@ import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 const getFilename = (path = '') => get(path.match(/([^/\\]+)$/), 1, path);
 
-const ProtocolStack = ({ importAndLoadProtocol, protocol: { filePath } }) => (
+const ProtocolStack = ({ unbundleAndLoad, protocol: { filePath } }) => (
   <div
     className="protocol-stack"
-    onClick={() => importAndLoadProtocol(filePath)}
+    onClick={() => unbundleAndLoad(filePath)}
   >
     <div className="protocol-stack__preview">
       <Flipped flipId={encodeURIComponent(filePath)}>
@@ -30,12 +29,12 @@ const ProtocolStack = ({ importAndLoadProtocol, protocol: { filePath } }) => (
 
 ProtocolStack.propTypes = {
   protocol: PropTypes.object.isRequired,
-  importAndLoadProtocol: PropTypes.func.isRequired,
+  unbundleAndLoad: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  importAndLoadProtocol: bindActionCreators(protocolsActions.importAndLoadProtocol, dispatch),
-});
+const mapDispatchToProps = {
+  unbundleAndLoad: protocolsActions.unbundleAndLoad,
+};
 
 export { ProtocolStack };
 

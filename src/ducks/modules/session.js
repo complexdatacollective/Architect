@@ -4,7 +4,7 @@ import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as codebookActionTypes } from './protocol/codebook';
 import { actionTypes as assetManifestTypes } from './protocol/assetManifest';
 import { actionTypes as protocolActionTypes } from './protocol';
-import { actionTypes as exportProtocolActionTypes } from './protocols/export';
+import { actionTypes as bundleActionTypes } from './protocols/bundle';
 import { actionTypes as loadProtocolActionTypes } from './protocols/load';
 
 // All these actions are considered saveable changes:
@@ -60,7 +60,7 @@ export default function reducer(state = initialState, action = {}) {
         lastChanged: 0,
       };
     }
-    case exportProtocolActionTypes.EXPORT_PROTOCOL_SUCCESS:
+    case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
       return {
         ...state,
         lastSaved: new Date().getTime(),

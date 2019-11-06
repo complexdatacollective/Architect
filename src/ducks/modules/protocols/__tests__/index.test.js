@@ -5,6 +5,7 @@ import { advanceTo } from 'jest-date-mock';
 import thunk from 'redux-thunk';
 import { isMatch } from 'lodash';
 import reducer, { actionCreators } from '../index';
+import { actionTypes as unbundleActionTypes } from '../unbundle';
 import { actionCreators as registerActionCreators } from '../register';
 import history from '../../../../history';
 import testState from '../../../../__tests__/testState.json';
@@ -94,9 +95,9 @@ describe('protocols', () => {
     store = getStore();
   });
 
-  describe('createAndLoadProtocol()', () => {
+  describe('createAndLoad()', () => {
     it('triggers create and import actions', () =>
-      store.dispatch(actionCreators.createAndLoadProtocol())
+      store.dispatch(actionCreators.createAndLoad())
         .then(() => {
           expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/CREATE_PROTOCOL' }]);
           expect(log.mock.calls[1]).toEqual([{
@@ -119,7 +120,7 @@ describe('protocols', () => {
     );
   });
 
-  describe('saveAndExportProtocol()', () => {
+  describe('saveAndBundle()', () => {
     advanceTo(Date.UTC(2017, 5, 27, 0, 0, 0));
 
     describe('invalid protocol', () => {
@@ -134,30 +135,30 @@ describe('protocols', () => {
       });
 
       it('dispatches an error when protocol is invalid', () =>
-        store.dispatch(actionCreators.saveAndExportProtocol())
+        store.dispatch(actionCreators.saveAndBundle())
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();
           }),
       );
     });
 
-    it('triggers save and export actions', () =>
-      store.dispatch(actionCreators.saveAndExportProtocol())
+    it('triggers save and bundle actions', () =>
+      store.dispatch(actionCreators.saveAndBundle())
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
         }),
     );
   });
 
-  describe('importAndLoadProtocol()', () => {
+  describe('unbundleAndLoad()', () => {
     beforeEach(() => {
       log.mockClear();
     });
 
     it('triggers import action and load redirect', done =>
-      store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path'))
+      store.dispatch(actionCreators.unbundleAndLoad('/dev/null/mock/path'))
         .then(() => {
-          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/IMPORT_SUCCESS' });
+          expect(log.mock.calls).containsAction({ type: unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS });
           expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/REGISTER' });
           expect(history.entries.pop()).toMatchObject({
             pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/',
@@ -171,7 +172,7 @@ describe('protocols', () => {
         Promise.resolve(getProtocol({ schemaVersion: 2, stages: [] })),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
+      return store.dispatch(actionCreators.unbundleAndLoad('/dev/null/mock/path/invalid'))
         .then(() => {
           expect(log.mock.calls).containsDialogAction({ type: 'Error' });
           expect(log.mock.calls).toMatchSnapshot();
@@ -183,7 +184,7 @@ describe('protocols', () => {
         Promise.resolve(getProtocol({ schemaVersion: 3 })),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
+      return store.dispatch(actionCreators.unbundleAndLoad('/dev/null/mock/path/newer-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
           expect(log.mock.calls).containsDialogAction({
@@ -198,7 +199,7 @@ describe('protocols', () => {
         Promise.resolve(getProtocol({ schemaVersion: 1 })),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/older-protocol'))
+      return store.dispatch(actionCreators.unbundleAndLoad('/dev/null/mock/path/older-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
           expect(log.mock.calls).containsDialogAction({ title: 'Would you like to upgrade the protocol?', type: 'Confirm' });
@@ -210,10 +211,10 @@ describe('protocols', () => {
         Promise.resolve(getProtocol()),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/matching-protocol'))
+      return store.dispatch(actionCreators.unbundleAndLoad('/dev/null/mock/path/matching-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
-          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/IMPORT_SUCCESS' });
+          expect(log.mock.calls).containsAction({ type: unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS });
         });
     });
   });

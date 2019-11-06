@@ -3,8 +3,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { actionCreators as loadActions } from '../protocols/load';
-import { actionCreators as exportActions } from '../protocols/export';
-import { actionCreators as importActions, actionTypes as importActionTypes } from '../protocols/import';
+import { actionCreators as bundleActions } from '../protocols/bundle';
+import {
+  actionCreators as unbundleActions,
+  actionTypes as unbundleActionTypes,
+} from '../protocols/unbundle';
 import reducer from '../recentProtocols';
 
 describe('recentProtocols', () => {
@@ -16,9 +19,9 @@ describe('recentProtocols', () => {
     });
 
     it('LOAD_PROTOCOL_SUCCESS updates timestamp and sorts recent protocols', (done) => {
-      store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/1'));
-      store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/2'));
-      store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/3'));
+      store.dispatch(bundleActions.bundleProtocolSuccess('/dev/null/mock/recent/path/1'));
+      store.dispatch(bundleActions.bundleProtocolSuccess('/dev/null/mock/recent/path/2'));
+      store.dispatch(bundleActions.bundleProtocolSuccess('/dev/null/mock/recent/path/3'));
 
       store.subscribe(() => {
         const state = store.getState();
@@ -38,7 +41,7 @@ describe('recentProtocols', () => {
     });
 
     it('EXPORT_PROTOCOL_SUCCESS adds to recentProtocolsList', (done) => {
-      store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/1'));
+      store.dispatch(bundleActions.bundleProtocolSuccess('/dev/null/mock/recent/path/1'));
 
       store.subscribe(() => {
         const state = store.getState();
@@ -50,11 +53,11 @@ describe('recentProtocols', () => {
         done();
       });
 
-      store.dispatch(exportActions.exportProtocolSuccess('/dev/null/mock/recent/path/2'));
+      store.dispatch(bundleActions.bundleProtocolSuccess('/dev/null/mock/recent/path/2'));
     });
 
     it('IMPORT_PROTOCOL_SUCCESS adds to recentProtocolsList', (done) => {
-      store.dispatch(importActions.importProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }));
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }));
 
       store.subscribe(() => {
         const state = store.getState();
@@ -66,10 +69,10 @@ describe('recentProtocols', () => {
         done();
       });
 
-      store.dispatch(importActions.importProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
     });
 
-    it(`${importActionTypes.IMPORT_PROTOCOL_ERROR}`, () => {
+    it(`${unbundleActionTypes.IMPORT_PROTOCOL_ERROR}`, () => {
       const missingFilePath = '/dev/null/non/existent';
 
       const initialState = [
@@ -79,7 +82,7 @@ describe('recentProtocols', () => {
 
       const result = reducer(
         initialState,
-        importActions.importProtocolError(new Error('File not found'), missingFilePath),
+        unbundleActions.unbundleProtocolError(new Error('File not found'), missingFilePath),
       );
 
       expect(result).toEqual([

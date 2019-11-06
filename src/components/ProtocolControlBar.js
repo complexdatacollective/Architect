@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { getProtocol } from '../selectors/protocol';
 import { Button, Icon } from '../ui/components';
@@ -50,9 +49,9 @@ const mapStateToProps = state => ({
   hasAnyStages: getProtocol(state).stages.length > 0,
 });
 
-const mapDispatchToProps = dispatch => ({
-  saveProtocol: bindActionCreators(protocolsActions.saveAndExportProtocol, dispatch),
-});
+const mapDispatchToProps = {
+  saveProtocol: protocolsActions.saveAndBundle,
+};
 
 export { ProtocolControlBar };
 

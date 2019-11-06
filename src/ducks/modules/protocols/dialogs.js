@@ -37,7 +37,7 @@ export const saveErrorDialog = (e, filePath) => {
   });
 };
 
-export const importErrorDialog = (e, filePath) => {
+export const unbundleErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <React.Fragment>
       <em>{path.basename(filePath)}</em> could not be imported.

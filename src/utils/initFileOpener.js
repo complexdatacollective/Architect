@@ -37,8 +37,8 @@ const initFileOpener = () => {
           ),
           confirmLabel: 'Save changes and open?',
           onConfirm: () => {
-            store.dispatch(protocolsActions.saveAndExportProtocol())
-              .then(() => store.dispatch(protocolsActions.importAndLoadProtocol(protocolPath)));
+            store.dispatch(protocolsActions.saveAndBundle())
+              .then(() => store.dispatch(protocolsActions.unbundleAndLoad(protocolPath)));
           },
         }),
       );
@@ -48,7 +48,7 @@ const initFileOpener = () => {
 
     // eslint-disable-next-line no-console
     console.log('No unsaved changes, open.');
-    store.dispatch(protocolsActions.importAndLoadProtocol(protocolPath));
+    store.dispatch(protocolsActions.unbundleAndLoad(protocolPath));
   });
 
   ipcRenderer.send('READY');

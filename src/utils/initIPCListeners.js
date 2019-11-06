@@ -12,7 +12,7 @@ const initIPCListeners = () => {
   });
 
   ipcRenderer.on('SAVE', () => {
-    store.dispatch(protocolsActions.saveAndExportProtocol());
+    store.dispatch(protocolsActions.saveAndBundle());
   });
 
   ipcRenderer.on('CONFIRM_CLOSE', () => {

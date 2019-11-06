@@ -1,179 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`protocols importAndLoadProtocol() when the protocol is invalid it dispatches an error when protocol is invalid (but still imports it) 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path/invalid",
-      "type": "PROTOCOLS/IMPORT",
-    },
-  ],
-  Array [
-    Object {
-      "dialog": Object {
-        "error": [Error: Protocol.stages should NOT have fewer than 1 items 
-
-],
-        "onCancel": [Function],
-        "onConfirm": [Function],
-        "type": "Error",
-      },
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOL/OPEN_DIALOG",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path/invalid",
-      "type": "PROTOCOLS/IMPORT_SUCCESS",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-  Array [
-    Object {
-      "advanced": true,
-      "filePath": "/dev/null/mock/path/invalid",
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOLS/REGISTER",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-]
-`;
-
-exports[`protocols importAndLoadProtocol() when the schema version is greater than the app version it notifies user to upgrade the app 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path/newer-protocol",
-      "type": "PROTOCOLS/IMPORT",
-    },
-  ],
-  Array [
-    Object {
-      "dialog": Object {
-        "message": <React.Fragment>
-          <p>
-            This protocol is not compatible with the current version of Architect.
-          </p>
-          <p>
-            In order to open it, you will need to install a version of Architect that supports schema version 
-            3
-            .
-          </p>
-        </React.Fragment>,
-        "onCancel": [Function],
-        "onConfirm": [Function],
-        "title": "Protocol not compatible with current version",
-        "type": "UserError",
-      },
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOL/OPEN_DIALOG",
-    },
-  ],
-]
-`;
-
-exports[`protocols importAndLoadProtocol() when the schema version is less than the app version it attempts to upgrade protocol and then imports it 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path/older-protocol",
-      "type": "PROTOCOLS/IMPORT",
-    },
-  ],
-  Array [
-    Object {
-      "dialog": Object {
-        "confirmLabel": "Create upgraded copy",
-        "message": <React.Fragment>
-          <p>
-            This protocol uses an out-dated schema (schema version "
-            1
-            "), but can be upgraded to work with this version of Architect (schema version "
-            2
-            ").
-          </p>
-          <p>
-            An upgraded copy of the protocol will be created and then opened.
-          </p>
-        </React.Fragment>,
-        "onCancel": [Function],
-        "onConfirm": [Function],
-        "title": "Would you like to upgrade the protocol?",
-        "type": "Confirm",
-      },
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOL/OPEN_DIALOG",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "filename.canvas",
-      "type": "PROTOCOLS/IMPORT_SUCCESS",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-  Array [
-    Object {
-      "advanced": true,
-      "filePath": "filename.canvas",
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOLS/REGISTER",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-]
-`;
-
-exports[`protocols importAndLoadProtocol() when the schema version is the same as the app version it imports the protocol 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path/matching-protocol",
-      "type": "PROTOCOLS/IMPORT",
-    },
-  ],
-  Array [
-    Object {
-      "filePath": "/dev/null/mock/path/matching-protocol",
-      "type": "PROTOCOLS/IMPORT_SUCCESS",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-  Array [
-    Object {
-      "advanced": true,
-      "filePath": "/dev/null/mock/path/matching-protocol",
-      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
-      "type": "PROTOCOLS/REGISTER",
-      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
-    },
-  ],
-]
-`;
-
-exports[`protocols saveAndExportProtocol() invalid protocol dispatches an error when protocol is invalid 1`] = `
+exports[`protocols saveAndBundle() invalid protocol dispatches an error when protocol is invalid 1`] = `
 Array [
   Array [
     Object {
@@ -425,19 +252,19 @@ Array [
   ],
   Array [
     Object {
-      "type": "PROTOCOLS/EXPORT",
+      "type": "PROTOCOLS/BUNDLE",
     },
   ],
   Array [
     Object {
       "filePath": "/dev/null/home/documents/1234-active-protocol",
-      "type": "PROTOCOLS/EXPORT_SUCCESS",
+      "type": "PROTOCOLS/BUNDLE_SUCCESS",
     },
   ],
 ]
 `;
 
-exports[`protocols saveAndExportProtocol() triggers save and export actions 1`] = `
+exports[`protocols saveAndBundle() triggers save and bundle actions 1`] = `
 Array [
   Array [
     Object {
@@ -980,13 +807,195 @@ Array [
   ],
   Array [
     Object {
-      "type": "PROTOCOLS/EXPORT",
+      "type": "PROTOCOLS/BUNDLE",
     },
   ],
   Array [
     Object {
       "filePath": "/dev/null/home/documents/1234-active-protocol",
-      "type": "PROTOCOLS/EXPORT_SUCCESS",
+      "type": "PROTOCOLS/BUNDLE_SUCCESS",
+    },
+  ],
+]
+`;
+
+exports[`protocols unbundleAndLoad() when the protocol is invalid it dispatches an error when protocol is invalid (but still imports it) 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/invalid",
+      "type": "PROTOCOLS/UNBUNDLE",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "error": [Error: Protocol.stages should NOT have fewer than 1 items 
+
+],
+        "onCancel": [Function],
+        "onConfirm": [Function],
+        "type": "Error",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOL/OPEN_DIALOG",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/invalid",
+      "type": "PROTOCOLS/UNBUNDLE_SUCCESS",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+  Array [
+    Object {
+      "advanced": true,
+      "filePath": "/dev/null/mock/path/invalid",
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOLS/REGISTER",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+]
+`;
+
+exports[`protocols unbundleAndLoad() when the schema version is greater than the app version it notifies user to upgrade the app 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/newer-protocol",
+      "type": "PROTOCOLS/UNBUNDLE",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "message": <React.Fragment>
+          <p>
+            This protocol is not compatible with the current version of Architect.
+          </p>
+          <p>
+            In order to open it, you will need to install a version of Architect that supports schema version 
+            3
+            .
+          </p>
+        </React.Fragment>,
+        "onCancel": [Function],
+        "onConfirm": [Function],
+        "title": "Protocol not compatible with current version",
+        "type": "UserError",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOL/OPEN_DIALOG",
+    },
+  ],
+]
+`;
+
+exports[`protocols unbundleAndLoad() when the schema version is less than the app version it attempts to upgrade protocol and then imports it 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/older-protocol",
+      "type": "PROTOCOLS/UNBUNDLE",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "confirmLabel": "Create upgraded copy",
+        "message": <React.Fragment>
+          <p>
+            This protocol uses an out-dated schema (schema version "
+            1
+            "), but can be upgraded to work with this version of Architect (schema version "
+            2
+            ").
+          </p>
+          <p>
+            An upgraded copy of the protocol will be created and then opened.
+          </p>
+        </React.Fragment>,
+        "onCancel": [Function],
+        "onConfirm": [Function],
+        "title": "Would you like to upgrade the protocol?",
+        "type": "Confirm",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOL/OPEN_DIALOG",
+    },
+  ],
+  Array [
+    Object {
+      "error": [TypeError: cb is not a function],
+      "filePath": "/dev/null/mock/path/older-protocol",
+      "type": "PROTOCOLS/UNBUNDLE_ERROR",
+    },
+  ],
+  Array [
+    Object {
+      "error": [TypeError: cb is not a function],
+      "type": "PROTOCOLS/UNBUNDLE_AND_LOAD_ERROR",
+    },
+  ],
+  Array [
+    Object {
+      "dialog": Object {
+        "error": [TypeError: cb is not a function],
+        "onCancel": [Function],
+        "onConfirm": [Function],
+        "type": "Error",
+      },
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOL/OPEN_DIALOG",
+    },
+  ],
+]
+`;
+
+exports[`protocols unbundleAndLoad() when the schema version is the same as the app version it imports the protocol 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "PREVIEW/CLOSE_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/matching-protocol",
+      "type": "PROTOCOLS/UNBUNDLE",
+    },
+  ],
+  Array [
+    Object {
+      "filePath": "/dev/null/mock/path/matching-protocol",
+      "type": "PROTOCOLS/UNBUNDLE_SUCCESS",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+  Array [
+    Object {
+      "advanced": true,
+      "filePath": "/dev/null/mock/path/matching-protocol",
+      "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
+      "type": "PROTOCOLS/REGISTER",
+      "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
     },
   ],
 ]
