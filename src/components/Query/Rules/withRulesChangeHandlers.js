@@ -57,6 +57,7 @@ const withRulesChangeHandlers = compose(
         openDialog({
           type: 'Warning',
           title: 'Please complete all fields',
+          message: 'To create your rule, all fields are required. Please complete all fields before clicking save, or use cancel to abandon this rule.',
           canCancel: false,
         });
         return;
