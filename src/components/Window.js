@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Fade from './Transitions/Fade';
+import Fade from '../ui/components/Transitions/Fade';
 import window from '../ui/components/window';
 
 const Window = ({
