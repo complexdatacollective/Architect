@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
 import { getScreensStack } from '../../selectors/ui';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
-import TimelineScreenTransition, { styles } from '../Transitions/TimelineScreen';
+import TimelineScreenTransition, { styles } from '../../ui/components/Transitions/TimelineScreen';
 import { getScreenComponent } from './screenIndex';
 
 /**
