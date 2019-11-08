@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rules from './Rules';
 
-const Query = ({ rules, join, codebook, onChange, openDialog }) => (
+const Query = ({ rules, join, codebook, onChange, openDialog, error }) => (
   <Rules
     rules={rules}
     join={join}
@@ -10,6 +10,7 @@ const Query = ({ rules, join, codebook, onChange, openDialog }) => (
     openDialog={openDialog}
     codebook={codebook}
     type="query"
+    error={error}
   />
 );
 
@@ -18,11 +19,14 @@ Query.propTypes = {
   openDialog: PropTypes.func.isRequired,
   rules: PropTypes.array,
   codebook: PropTypes.object.isRequired,
-  join: PropTypes.string.isRequired,
+  join: PropTypes.string,
+  error: PropTypes.string,
 };
 
 Query.defaultProps = {
   rules: [],
+  join: null,
+  error: null,
 };
 
 export { Query };

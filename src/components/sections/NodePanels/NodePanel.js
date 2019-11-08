@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import * as Fields from '../../../ui/components/Fields';
-import DataSource from '../../Form/Fields/DataSource';
-import { Filter, withFieldConnector, withStoreConnector } from '../../Query';
-import ValidatedField from '../../Form/ValidatedField';
-import { Item, Row } from '../../OrderedList';
-import { getFieldId } from '../../../utils/issues';
+import * as Fields from '@ui/components/Fields';
+import DataSource from '@components/Form/Fields/DataSource';
+import { Filter, withFieldConnector, withStoreConnector, ruleValidator } from '@components/Query';
+import ValidatedField from '@components/Form/ValidatedField';
+import { Item, Row } from '@components/OrderedList';
+import { getFieldId } from '@app/utils/issues';
 
 const FilterField = withFieldConnector(withStoreConnector(Filter));
 
@@ -40,7 +40,12 @@ const NodePanel = ({ fieldId, ...rest }) => (
       />
     </Row>
     <Row>
-      <h3>Filter <small>(optional)</small></h3>
+      <h3
+        id={getFieldId(`${fieldId}.filter`)}
+        data-name="Panel filter"
+      >
+        Filter <small>(optional)</small>
+      </h3>
       <p>
         You can optionally filter the data to be shown in this panel, by creating one or more rules
         using the options below.
@@ -48,6 +53,7 @@ const NodePanel = ({ fieldId, ...rest }) => (
       <Field
         name={`${fieldId}.filter`}
         component={FilterField}
+        validate={ruleValidator}
       />
     </Row>
   </Item>

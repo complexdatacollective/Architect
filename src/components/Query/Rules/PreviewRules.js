@@ -33,11 +33,15 @@ const PreviewRules = ({ join, rules, codebook, onClickRule, onDeleteRule }) => {
 };
 
 PreviewRules.propTypes = {
-  join: PropTypes.string.isRequired,
+  join: PropTypes.string,
   rules: PropTypes.array.isRequired,
   codebook: PropTypes.object.isRequired,
   onClickRule: PropTypes.func.isRequired,
   onDeleteRule: PropTypes.func.isRequired,
+};
+
+PreviewRules.defaultProps = {
+  join: null,
 };
 
 export { PreviewRules };

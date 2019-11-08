@@ -34,6 +34,14 @@ const withRulesChangeHandlers = compose(
     deleteRule: ({ join, rules, onChange }) => (ruleId) => {
       const updateRules = rules.filter(rule => rule.id !== ruleId);
 
+      if (updateRules.length < 2) {
+        onChange({
+          rules: updateRules,
+        });
+
+        return;
+      }
+
       onChange({
         join,
         rules: updateRules,
@@ -49,6 +57,7 @@ const withRulesChangeHandlers = compose(
         openDialog({
           type: 'Warning',
           title: 'Please complete all fields',
+          message: 'To create your rule, all fields are required. Please complete all fields before clicking save, or use cancel to abandon this rule.',
           canCancel: false,
         });
         return;

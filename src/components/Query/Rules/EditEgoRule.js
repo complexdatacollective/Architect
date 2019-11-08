@@ -15,7 +15,7 @@ const defaultOptions = {
   value: '',
 };
 
-const EditAlterVariableRule = ({
+const EditEgoRule = ({
   rule,
   variableType,
   variablesAsOptions,
@@ -66,19 +66,23 @@ const EditAlterVariableRule = ({
   );
 };
 
-EditAlterVariableRule.propTypes = {
+EditEgoRule.propTypes = {
   rule: PropTypes.shape({
     options: PropTypes.object,
   }).isRequired,
   variablesAsOptions: PropTypes.array.isRequired,
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
-  variableType: PropTypes.string.isRequired,
+  variableType: PropTypes.string,
 };
 
-export { EditAlterVariableRule };
+EditEgoRule.defaultProps = {
+  variableType: null,
+};
+
+export { EditEgoRule };
 
 export default compose(
   withOptions('ego'),
   withRuleChangeHandler,
-)(EditAlterVariableRule);
+)(EditEgoRule);

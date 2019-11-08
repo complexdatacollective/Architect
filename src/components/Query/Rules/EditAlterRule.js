@@ -122,12 +122,18 @@ EditAlterRule.propTypes = {
   }).isRequired,
   typeOptions: PropTypes.array.isRequired,
   variablesAsOptions: PropTypes.array.isRequired,
-  variableOptions: PropTypes.array.isRequired,
+  variableOptions: PropTypes.array,
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
-  variableType: PropTypes.string.isRequired,
-  alterRuleType: PropTypes.string.isRequired,
+  alterRuleType: PropTypes.string,
+  variableType: PropTypes.string,
   handleChangeAlterRuleType: PropTypes.func.isRequired,
+};
+
+EditAlterRule.defaultProps = {
+  variableOptions: null,
+  alterRuleType: null,
+  variableType: null,
 };
 
 export { EditAlterRule };
