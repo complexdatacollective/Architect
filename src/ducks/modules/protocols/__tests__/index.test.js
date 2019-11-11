@@ -158,8 +158,10 @@ describe('protocols', () => {
     it('triggers import action and load redirect', done =>
       store.dispatch(actionCreators.unbundleAndLoad('/dev/null/mock/path'))
         .then(() => {
-          expect(log.mock.calls).containsAction({ type: unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS });
-          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/REGISTER' });
+          expect(log.mock.calls)
+            .containsAction({ type: unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS });
+          expect(log.mock.calls)
+            .containsAction({ type: 'PROTOCOLS/REGISTER' });
           expect(history.entries.pop()).toMatchObject({
             pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/',
           });
@@ -214,7 +216,8 @@ describe('protocols', () => {
       return store.dispatch(actionCreators.unbundleAndLoad('/dev/null/mock/path/matching-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
-          expect(log.mock.calls).containsAction({ type: unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS });
+          expect(log.mock.calls)
+            .containsAction({ type: unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS });
         });
     });
   });
