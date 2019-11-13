@@ -184,12 +184,15 @@
     "build": {
         "extends": null,
         "appId": "NetworkCanvasArchitect",
+        "afterSign": "./build-resources/scripts/afterSignHook.js",
         "directories": {
             "buildResources": "build-resources",
             "output": "release-builds"
         },
         "mac": {
-            "category": "public.app-category.education"
+            "category": "public.app-category.education",
+            "hardenedRuntime": true,
+            "entitlements": "./build-resources/entitlements.mac.inherit.plist"
         },
         "win": {
             "target": "nsis",
