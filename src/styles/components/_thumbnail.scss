@@ -26,4 +26,14 @@
     background-color: var(--notice);
     font-style: italic;
   }
+
+  &--image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    &.thumbnail--contain {
+      background-size: contain;
+    }
+  }
 }
