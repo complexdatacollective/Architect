@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import Select from '../../components/Form/Fields/Select';
 import withAssets from './withAssets';
-import Asset from './Asset';
+import Thumbnail from './Thumbnail';
 
 const ASSET_TYPES = [
   { label: 'Image', value: 'image' },
@@ -22,7 +22,7 @@ const Assets = ({
 }) => {
   const renderedAssets = assets.map(asset => (
     <div className="asset-browser-assets__asset" key={asset.id}>
-      <Asset
+      <Thumbnail
         {...asset}
         onClick={onSelect}
         onDelete={onDelete}

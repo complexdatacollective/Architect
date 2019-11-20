@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
   getActiveProtocolMeta,
   getAssetManifest,
-} from '../../selectors/protocol';
+} from '@selectors/protocol';
 
 const mapStateToProps = (state, { id }) => {
   const activeProtocolMeta = getActiveProtocolMeta(state);

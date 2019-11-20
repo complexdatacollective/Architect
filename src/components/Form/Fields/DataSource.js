@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withState } from 'recompose';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
-import Radio from '../../../ui/components/Fields/Radio';
-import NetworkAsset from '../../Assets/Network';
+import Radio from '@ui/components/Fields/Radio';
+import NetworkThumbnail from '@components/Thumbnail/Network';
 import File from './File';
 
 const withSelectNetworkAsset = withState('selectNetworkAsset', 'setSelectNetworkAsset', false);
@@ -68,7 +68,7 @@ class DataSource extends Component {
                     selected={input.value}
                     {...this.props}
                   >
-                    { id => <NetworkAsset id={id} /> }
+                    { id => <NetworkThumbnail id={id} /> }
                   </File>
                 }
               </div>
@@ -81,7 +81,7 @@ class DataSource extends Component {
             selected={input.value}
             {...this.props}
           >
-            { id => <NetworkAsset id={id} /> }
+            { id => <NetworkThumbnail id={id} /> }
           </File>
         }
       </div>
