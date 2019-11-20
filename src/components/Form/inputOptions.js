@@ -21,6 +21,10 @@ const VARIABLE_TYPES = {
     label: 'Categorical',
     value: 'categorical',
   },
+  scalar: {
+    label: 'Scalar',
+    value: 'scalar',
+  },
 };
 
 const COMPONENTS = {
@@ -60,6 +64,24 @@ const COMPONENTS = {
     description: 'This component provides a colorful button that can be toggled "on" or "off". It is useful for categorical variables where multiple options can be selected.',
     image: 'ToggleButtonGroup',
   },
+  Slider: {
+    label: 'Slider',
+    value: 'Slider',
+    description: 'Select a number from from 0.000 - 1.000',
+    image: 'Slider',
+  },
+  LikertScale: {
+    label: 'LikertScale',
+    value: 'LikertScale',
+    description: 'A likert-type scale using option values',
+    image: 'LikertScale',
+  },
+  VisualAnalogScale: {
+    label: 'VisualAnalogScale',
+    value: 'VisualAnalogScale',
+    description: 'A Visual Analog Scale will set a number from 0.000 - 1.000, repesenting either end of the scale.',
+    image: 'VisualAnalogScale',
+  },
 };
 
 const VARIABLE_TYPES_WITH_OPTIONS = [
@@ -67,18 +89,24 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
   'categorical',
 ];
 
+const VARIABLE_TYPES_WITH_PARAMETERS = [
+  'scalar',
+];
+
 const VARIABLE_TYPES_WITH_COMPONENTS = keys(VARIABLE_TYPES);
 
 const getComponentsForType = (type) => {
   switch (type) {
     case 'number':
-      return [COMPONENTS.NumberInput];
+      return [COMPONENTS.NumberInput, COMPONENTS.Slider];
+    case 'scalar':
+      return [COMPONENTS.VisualAnalogScale];
     case 'text':
       return [COMPONENTS.TextInput];
     case 'boolean':
       return [COMPONENTS.Toggle];
     case 'ordinal':
-      return [COMPONENTS.RadioGroup];
+      return [COMPONENTS.RadioGroup, COMPONENTS.LikertScale];
     case 'categorical':
       return [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup];
     default:
@@ -89,13 +117,17 @@ const getComponentsForType = (type) => {
 const getTypeForComponent = (input) => {
   switch (input) {
     case COMPONENTS.NumberInput.value:
+    case COMPONENTS.Slider.value:
       return 'number';
     case COMPONENTS.TextInput.value:
       return 'text';
     case COMPONENTS.Toggle.value:
       return 'boolean';
     case COMPONENTS.RadioGroup.value:
+    case COMPONENTS.LikertScale.value:
       return 'ordinal';
+    case COMPONENTS.VisualAnalogScale.value:
+      return 'scalar';
     case 'categorical':
     case COMPONENTS.CheckboxGroup.value:
     case COMPONENTS.ToggleButtonGroup.value:
