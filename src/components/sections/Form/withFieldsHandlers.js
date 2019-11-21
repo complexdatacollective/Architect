@@ -5,12 +5,12 @@ import {
   compose,
   withHandlers,
 } from 'recompose';
-import { getVariablesForSubject } from '../../../selectors/codebook';
+import { getVariablesForSubject } from '@selectors/codebook';
 import inputOptions, {
   getTypeForComponent,
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
-} from '../../Form/inputOptions';
+} from '@components/Form/inputOptions';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -77,6 +77,7 @@ const fieldsHandlers = withHandlers({
       const componentType = getTypeForComponent(value);
       if (variableType !== componentType) {
         changeField(form, 'options', null);
+        changeField(form, 'parameters', null);
         changeField(form, 'validation', {});
       }
     },
@@ -84,6 +85,7 @@ const fieldsHandlers = withHandlers({
     (_, value) => {
       // Either load settings from codebook, or reset
       const options = get(existingVariables, [value, 'options'], null);
+      const parameters = get(existingVariables, [value, 'parameters'], null);
       const validation = get(existingVariables, [value, 'validation'], {});
       const component = get(existingVariables, [value, 'component'], null);
 
@@ -93,6 +95,7 @@ const fieldsHandlers = withHandlers({
       }
       changeField(form, 'component', component);
       changeField(form, 'options', options);
+      changeField(form, 'parameters', parameters);
       changeField(form, 'validation', validation);
     },
   handleNewVariable: ({ changeField, form }) =>

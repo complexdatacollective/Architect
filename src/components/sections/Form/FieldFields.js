@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { getFieldId } from '../../../utils/issues';
-import { ValidatedField } from '../../Form';
-import * as Fields from '../../../ui/components/Fields';
-import Select from '../../Form/Fields/Select';
-import CreatableSelect from '../../Form/Fields/CreatableSelect';
-import Options from '../../Options';
-import Validations from '../../Validations';
-import SelectOptionImage from '../../Form/Fields/SelectOptionImage';
-import { isVariableTypeWithOptions } from '../../Form/inputOptions';
+import * as Fields from '@ui/components/Fields';
+import { getFieldId } from '@app/utils/issues';
+import ValidatedField from '@components/Form/ValidatedField';
+import Select from '@components/Form/Fields/Select';
+import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import Options from '@components/Options';
+import Parameters from '@components/Parameters';
+import Validations from '@components/Validations';
+import SelectOptionImage from '@components/Form/Fields/SelectOptionImage';
+import { isVariableTypeWithOptions, isVariableTypeWithParameters } from '@components/Form/inputOptions';
+import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
 import Row from '../Row';
 import Section from '../Section';
 import withFieldsHandlers from './withFieldsHandlers';
-import { normalizeKeyDown } from '../../enhancers/withCreateVariableHandler';
 
 const PromptFields = ({
   form,
@@ -107,6 +108,15 @@ const PromptFields = ({
           name="options"
           label="Options"
           form={form}
+        />
+      </Row>
+    }
+    { isVariableTypeWithParameters(variableType) &&
+      <Row contentId="guidance.section.form.field.Parameters">
+        <h3 id={getFieldId('parameters')}>Field parameters</h3>
+        <Parameters
+          type={variableType}
+          name="parameters"
         />
       </Row>
     }

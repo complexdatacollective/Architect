@@ -1,6 +1,6 @@
 import { keys, values } from 'lodash';
 
-const VARIABLE_TYPES = {
+export const VARIABLE_TYPES = {
   number: {
     label: 'Number',
     value: 'number',
@@ -140,6 +140,9 @@ const getTypeForComponent = (input) => {
 const isVariableTypeWithOptions = variableType =>
   VARIABLE_TYPES_WITH_OPTIONS.includes(variableType);
 
+const isVariableTypeWithParameters = variableType =>
+  VARIABLE_TYPES_WITH_PARAMETERS.includes(variableType);
+
 const inputOptions = values(COMPONENTS);
 
 const variableOptions = values(VARIABLE_TYPES);
@@ -163,6 +166,7 @@ const getColorForType = (type) => {
 export {
   COMPONENTS,
   VARIABLE_TYPES_WITH_OPTIONS,
+  VARIABLE_TYPES_WITH_PARAMETERS,
   VARIABLE_TYPES_WITH_COMPONENTS,
   inputOptions,
   variableOptions,
@@ -170,6 +174,7 @@ export {
   getComponentsForType,
   getColorForType,
   isVariableTypeWithOptions,
+  isVariableTypeWithParameters,
 };
 
 export default inputOptions;
