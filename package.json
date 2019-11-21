@@ -121,6 +121,7 @@
         "prop-types": "^15.6.2",
         "query-string": "^6.2.0",
         "react": "16.11.0",
+        "react-compound-slider": "^2.4.0",
         "react-dev-utils": "9.1.0",
         "react-dom": "16.11.0",
         "react-draggable": "^2.2.3",
