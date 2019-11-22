@@ -1,23 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from '@ui/components/Fields/Text';
 import ValidatedField from '@components/Form/ValidatedField';
 
-const ScalarParameters = ({
-  name,
-}) => (
-  <div>
+const ScalarParameters = ({ name }) => (
+  <React.Fragment>
     <ValidatedField
-      label="Min label"
+      label="Minimum label"
       component={TextField}
       name={`${name}.minLabel`}
       r
     />
     <ValidatedField
-      label="Max label"
+      label="Maxium label"
       component={TextField}
       name={`${name}.maxLabel`}
     />
-  </div>
+  </React.Fragment>
 );
+
+ScalarParameters.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 export default ScalarParameters;

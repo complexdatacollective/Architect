@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Scalar from './Scalar';
 
 const getComponent = (type) => {
@@ -16,6 +17,10 @@ const Parameters = ({ type, ...rest }) => {
   if (!ParameterComponent) { return null; }
 
   return <ParameterComponent {...rest} />;
+};
+
+Parameters.propTypes = {
+  type: PropTypes.string.isRequired,
 };
 
 export default Parameters;
