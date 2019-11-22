@@ -158,6 +158,8 @@ const getColorForType = (type) => {
     case 'ordinal':
     case 'categorical':
       return 'var(--color-sea-green--dark)';
+    case 'scalar':
+      return 'var(--color-cerulean-blue)';
     default:
       return 'var(--color-navy-taupe)';
   }
