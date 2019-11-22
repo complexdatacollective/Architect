@@ -64,12 +64,6 @@ const COMPONENTS = {
     description: 'This component provides a colorful button that can be toggled "on" or "off". It is useful for categorical variables where multiple options can be selected.',
     image: 'ToggleButtonGroup',
   },
-  Slider: {
-    label: 'Slider',
-    value: 'Slider',
-    description: 'Select a number from from 0.000 - 1.000',
-    image: 'Slider',
-  },
   LikertScale: {
     label: 'LikertScale',
     value: 'LikertScale',
@@ -98,7 +92,7 @@ const VARIABLE_TYPES_WITH_COMPONENTS = keys(VARIABLE_TYPES);
 const getComponentsForType = (type) => {
   switch (type) {
     case 'number':
-      return [COMPONENTS.NumberInput, COMPONENTS.Slider];
+      return [COMPONENTS.NumberInput];
     case 'scalar':
       return [COMPONENTS.VisualAnalogScale];
     case 'text':
@@ -117,7 +111,6 @@ const getComponentsForType = (type) => {
 const getTypeForComponent = (input) => {
   switch (input) {
     case COMPONENTS.NumberInput.value:
-    case COMPONENTS.Slider.value:
       return 'number';
     case COMPONENTS.TextInput.value:
       return 'text';
