@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
-import withSubject from '../../enhancers/withSubject';
-import Preview from '../../EditableList/Preview';
-import Badge from '../../Badge';
-import { getColorForType } from '../../Form/inputOptions';
-import { getVariablesForSubject } from '../../../selectors/codebook';
+import { getVariablesForSubject } from '@selectors/codebook';
+import withSubject from '@components/enhancers/withSubject';
+import Preview from '@components/EditableList/Preview';
+import { getColorForType } from '@components/Form/inputOptions';
+import Badge from '@components/Badge';
 
 const PreviewFieldComponent = ({
   input: {
