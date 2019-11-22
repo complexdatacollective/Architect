@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Icon from '../../ui/components/Icon';
-import * as Assets from '../Assets';
+import Icon from '@ui/components/Icon';
+import * as Thumbnails from '@components/Thumbnail';
 
 const FallBackAssetComponent = () => (
   <div>No preview component available for this asset type.</div>
 );
 
 const ASSET_COMPONENTS = {
-  image: Assets.Image,
-  video: Assets.Video,
-  audio: Assets.Audio,
-  network: Assets.Network,
+  image: Thumbnails.Image,
+  video: Thumbnails.Video,
+  audio: Thumbnails.Audio,
+  network: Thumbnails.Network,
 };
 
 class Asset extends Component {

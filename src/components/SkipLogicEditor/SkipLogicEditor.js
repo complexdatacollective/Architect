@@ -52,8 +52,8 @@ const withSubmitHandler = withHandlers({
 export { formName };
 
 export default compose(
-  withSubmitHandler,
   withStore,
+  withSubmitHandler,
   withProps(() => ({
     form: formName,
     component: SkipLogicFields,
