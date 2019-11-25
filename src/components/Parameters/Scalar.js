@@ -5,6 +5,10 @@ import ValidatedField from '@components/Form/ValidatedField';
 
 const ScalarParameters = ({ name }) => (
   <React.Fragment>
+    <p>
+      This input type requires a <strong>minimum</strong> and <strong>maximum</strong> label,
+      respectively corresponding to values <strong>0.000</strong> and <strong>1.000</strong>.
+    </p>
     <ValidatedField
       label="Minimum label"
       component={TextField}
@@ -12,7 +16,7 @@ const ScalarParameters = ({ name }) => (
       r
     />
     <ValidatedField
-      label="Maxium label"
+      label="Maximum label"
       component={TextField}
       name={`${name}.maxLabel`}
     />
