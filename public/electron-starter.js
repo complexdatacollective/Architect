@@ -30,7 +30,8 @@ if (!gotTheLock) {
 }
 
 app.on('second-instance', (_, commandLine) => {
-  return AppManager.openFileFromArgs(commandLine);
+  log.info('openFileFromArgs', commandLine);
+  AppManager.openFileFromArgs(commandLine);
 });
 
 // open file on os x
