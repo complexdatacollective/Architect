@@ -9,8 +9,8 @@ const registerAssetProtocol = require('./assetProtocol').registerProtocol;
 function getFileFromArgs(argv) {
   if (!argv) { return null; }
   if (argv.length >= 2) {
-    const filePath = argv[1];
-    if (path.extname(filePath) === '.netcanvas') {
+    const filePath = argv.find(arg => path.extname(arg) === '.netcanvas');
+    if (filePath) {
       log.info('.netcanvas found in argv', JSON.stringify({ argv }, null, 2));
       return filePath;
     }
