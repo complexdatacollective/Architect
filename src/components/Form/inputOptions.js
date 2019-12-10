@@ -25,6 +25,10 @@ export const VARIABLE_TYPES = {
     label: 'Scalar',
     value: 'scalar',
   },
+  datetime: {
+    label: 'Date',
+    value: 'datetime',
+  },
 };
 
 const COMPONENTS = {
@@ -76,6 +80,12 @@ const COMPONENTS = {
     description: 'A Visual Analog Scale will set a number from 0.000 - 1.000, repesenting either end of the scale.',
     image: 'VisualAnalogScale',
   },
+  DatePicker: {
+    label: 'DatePicker',
+    value: 'DatePicker',
+    description: 'A calendar date picker',
+    image: 'DatePicker',
+  },
 };
 
 const VARIABLE_TYPES_WITH_OPTIONS = [
@@ -85,6 +95,7 @@ const VARIABLE_TYPES_WITH_OPTIONS = [
 
 const VARIABLE_TYPES_WITH_PARAMETERS = [
   'scalar',
+  'datetime',
 ];
 
 const VARIABLE_TYPES_WITH_COMPONENTS = keys(VARIABLE_TYPES);
@@ -95,6 +106,8 @@ const getComponentsForType = (type) => {
       return [COMPONENTS.NumberInput];
     case 'scalar':
       return [COMPONENTS.VisualAnalogScale];
+    case 'datetime':
+      return [COMPONENTS.DatePicker];
     case 'text':
       return [COMPONENTS.TextInput];
     case 'boolean':
@@ -114,6 +127,8 @@ const getTypeForComponent = (input) => {
       return 'number';
     case COMPONENTS.TextInput.value:
       return 'text';
+    case COMPONENTS.DatePicker.value:
+      return 'datetime';
     case COMPONENTS.Toggle.value:
       return 'boolean';
     case COMPONENTS.RadioGroup.value:
