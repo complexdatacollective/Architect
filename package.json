@@ -14,6 +14,7 @@
         "pack": "electron-builder --dir",
         "update-submodules": "git submodule update --init --recursive",
         "start": "cross-env BUILD_TARGET=web node scripts/start.js",
+        "start:electron": "npm run start:architect:electron",
         "start:architect:electron": "node scripts/start.js",
         "start:network-canvas:electron": "npm run start:electron --prefix=network-canvas",
         "preelectron:dev": "node scripts/build-electron-dev.js",
