@@ -1,4 +1,5 @@
 import { keys, get, pickBy, map, toPairs, isEqual, isUndefined, isNil } from 'lodash';
+import { DateTime } from 'luxon';
 
 const coerceArray = (value) => {
   if (value instanceof Object) {
@@ -19,6 +20,14 @@ const hasValue = (value) => {
   }
 
   return !isNil(value);
+};
+
+const isRoughlyEqual = (left, right) => {
+  if (typeof left === 'string' && typeof right === 'string') {
+    return left.toLowerCase() === right.toLowerCase();
+  }
+
+  return isEqual(left, right);
 };
 
 export const required = () =>
@@ -58,14 +67,6 @@ export const maxSelected = max =>
   value =>
     (!value || coerceArray(value).length > max ? `Must choose ${max} or less` : undefined);
 
-const isRoughlyEqual = (left, right) => {
-  if (typeof left === 'string' && typeof right === 'string') {
-    return left.toLowerCase() === right.toLowerCase();
-  }
-
-  return isEqual(left, right);
-};
-
 export const uniqueArrayAttribute = () =>
   (value, allValues, formProps, name) => {
     if (!value) { return undefined; }
@@ -103,6 +104,18 @@ export const uniqueByList = (list = []) =>
     return undefined;
   };
 
+export const ISODate = dateFormat =>
+  (value) => {
+    const dt = DateTime.fromISO(value);
+    if (
+      (value && dateFormat.length !== value.length) ||
+      (value && !dt.isValid)
+    ) {
+      return `Date is not valid (${dateFormat.toUpperCase()})`;
+    }
+    return undefined;
+  };
+
 const validations = {
   required,
   requiredAcceptsZero,
@@ -116,6 +129,7 @@ const validations = {
   maxSelected,
   uniqueArrayAttribute,
   uniqueByList,
+  ISODate,
 };
 
 /**

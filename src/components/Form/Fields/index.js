@@ -12,3 +12,4 @@ export { default as Mode } from './Mode';
 export { default as OrderBy } from './OrderBy';
 export { default as NodeSelect } from './NodeSelect';
 export { default as ColorPicker } from './ColorPicker';
+export { default as Date } from './Date';
