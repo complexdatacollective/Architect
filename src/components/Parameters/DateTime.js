@@ -25,7 +25,7 @@ const DateTimeParameters = ({ name, type }) => {
       </p>
       <p>
         If an <strong>End Range</strong> date is not supplied, the input range will default
-        to ending at the current date.
+        to ending at the <strong>current date</strong>.
       </p>
       <ValidatedField
         label="Date Type"

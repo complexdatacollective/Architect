@@ -16,7 +16,6 @@ const filterInput = currentValue =>
     }
     if (!ignoreList.includes(e.key)) { return; }
     e.preventDefault();
-    e.stopPropagation();
   };
 
 const getParsedValue = dateFormat =>
@@ -68,6 +67,13 @@ class TextInput extends PureComponent {
     this.id = uuid();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.dateFormat !== this.props.dateFormat) {
+      const newValue = getParsedValue(this.props.dateFormat)(this.props.input.value);
+      this.props.input.onChange(newValue);
+    }
+  }
+
   render() {
     const {
       input,
@@ -113,7 +119,7 @@ class TextInput extends PureComponent {
             onKeyDown={filterInput(input.value)}
             onChange={handleChange}
           />
-          {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div>}
+          <div className="form-field-text__error"><Icon name="warning" />{error}</div>
         </div>
 
       </div>
