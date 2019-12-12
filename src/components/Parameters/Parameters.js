@@ -1,21 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isMatch } from 'lodash';
 import Scalar from './Scalar';
-import DateTime from './DateTime';
+import DatePicker from './DatePicker';
+import RelativeDatePicker from './RelativeDatePicker';
 
-const getComponent = (type) => {
-  switch (type) {
-    case 'scalar':
-      return Scalar;
-    case 'datetime':
-      return DateTime;
-    default:
-      return null;
-  }
+const definitions = [
+  [Scalar, { type: 'scalar' }],
+  [DatePicker, { type: 'datetime', component: 'DatePicker' }],
+  [RelativeDatePicker, { type: 'datetime', component: 'RelativeDatePicker' }],
+];
+
+const getComponent = (options) => {
+  const [component] = definitions.find(
+    ([, pattern]) =>
+      isMatch(options, pattern),
+  );
+
+  return component;
 };
 
-const Parameters = ({ type, ...rest }) => {
-  const ParameterComponent = getComponent(type);
+const Parameters = ({ type, component, ...rest }) => {
+  const ParameterComponent = getComponent({ type, component });
 
   if (!ParameterComponent) { return null; }
 

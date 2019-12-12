@@ -22,6 +22,7 @@ const PromptFields = ({
   variableType,
   variableOptions,
   componentOptions,
+  component,
   isNewVariable,
   handleNewVariable,
   handleChangeComponent,
@@ -116,6 +117,7 @@ const PromptFields = ({
         <h3 id={getFieldId('parameters')}>Field parameters</h3>
         <Parameters
           type={variableType}
+          component={component}
           name="parameters"
         />
       </Row>
