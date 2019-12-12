@@ -14,7 +14,7 @@ const RelativeDatePickerParameters = ({ name }) => {
     <React.Fragment>
       <p>
         If an <strong>Anchor date</strong> is not supplied the field will anchor
-        to the date at the time of interview.
+        to the date at the <strong>time of interview</strong>.
       </p>
       <p>
         <strong>Months before</strong> is the number of months prior to the anchor

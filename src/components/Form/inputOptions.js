@@ -86,6 +86,12 @@ const COMPONENTS = {
     description: 'A calendar date picker',
     image: 'DatePicker',
   },
+  RelativeDatePicker: {
+    label: 'RelativeDatePicker',
+    value: 'RelativeDatePicker',
+    description: 'A calendar date picker',
+    image: 'RelativeDatePicker',
+  },
 };
 
 const VARIABLE_TYPES_WITH_OPTIONS = [
@@ -107,7 +113,7 @@ const getComponentsForType = (type) => {
     case 'scalar':
       return [COMPONENTS.VisualAnalogScale];
     case 'datetime':
-      return [COMPONENTS.DatePicker];
+      return [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker];
     case 'text':
       return [COMPONENTS.TextInput];
     case 'boolean':
@@ -128,6 +134,7 @@ const getTypeForComponent = (input) => {
     case COMPONENTS.TextInput.value:
       return 'text';
     case COMPONENTS.DatePicker.value:
+    case COMPONENTS.RelativeDatePicker.value:
       return 'datetime';
     case COMPONENTS.Toggle.value:
       return 'boolean';

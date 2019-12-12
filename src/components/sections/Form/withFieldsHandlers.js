@@ -74,13 +74,17 @@ const fieldsState = connect(mapStateToProps, mapDispatchToProps);
 const fieldsHandlers = withHandlers({
   handleChangeComponent: ({ changeField, form, variableType }) =>
     (e, value) => {
-      // Only reset if type not defined (new variable)
-      const componentType = getTypeForComponent(value);
-      if (variableType !== componentType) {
+      // Only reset if type not defined yet (new variable)
+      const typeForComponent = getTypeForComponent(value);
+
+      if (variableType !== typeForComponent) {
         changeField(form, 'options', null);
-        changeField(form, 'parameters', null);
         changeField(form, 'validation', {});
       }
+
+      // Always reset this, since it is at least partly related
+      // to the component
+      changeField(form, 'parameters', null);
     },
   handleChangeVariable: ({ existingVariables, changeField, form }) =>
     (_, value) => {

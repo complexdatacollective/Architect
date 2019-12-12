@@ -139,6 +139,7 @@ const PromptFields = ({
 PromptFields.propTypes = {
   form: PropTypes.string.isRequired,
   variable: PropTypes.string,
+  component: PropTypes.string,
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
   variableOptions: PropTypes.array,
@@ -150,6 +151,7 @@ PromptFields.propTypes = {
 
 PromptFields.defaultProps = {
   variable: null,
+  component: null,
   variableType: null,
   variableOptions: null,
   componentOptions: null,
