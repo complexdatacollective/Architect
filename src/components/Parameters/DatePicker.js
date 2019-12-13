@@ -16,8 +16,8 @@ const DateTimeParameters = ({ name, type }) => {
   return (
     <React.Fragment>
       <p>
-        You can select a <strong>Date Type</strong> if you would like to only select a partial date, e.g. year
-        only.
+        You can select a <strong>Date Type</strong> if you would like to only select a partial
+        date, e.g. year only. <strong>full year</strong> (1970-01-01) by <strong>default</strong>.
       </p>
       <p>
         If a <strong>Start Range</strong> date is not supplied, the input range will default
@@ -53,6 +53,7 @@ const DateTimeParameters = ({ name, type }) => {
 
 DateTimeParameters.propTypes = {
   name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default formValues({ type: 'parameters.type' })(DateTimeParameters);
