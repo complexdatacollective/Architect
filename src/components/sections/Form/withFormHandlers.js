@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { change, SubmissionError } from 'redux-form';
+import { getTypeForComponent } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
-import { getTypeForComponent } from '@components/Form/inputOptions';
 import { getCodebookProperties } from './helpers';
 
 const formHandlers = withHandlers({

@@ -5,12 +5,12 @@ import {
   compose,
   withHandlers,
 } from 'recompose';
-import { getVariablesForSubject } from '@selectors/codebook';
-import inputOptions, {
+import INPUT_OPTIONS, {
   getTypeForComponent,
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
-} from '@components/Form/inputOptions';
+} from '@app/config/variables';
+import { getVariablesForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -49,10 +49,10 @@ const mapStateToProps = (state, { form, entity, type }) => {
   );
 
   // 1. If type defined, show components that match (existing variable)
-  // 2. Othewise list all inputOptions (new variable)
+  // 2. Othewise list all INPUT_OPTIONS (new variable)
   const componentOptions = variableType && !isNewVariable ?
     getComponentsForType(variableType) :
-    inputOptions;
+    INPUT_OPTIONS;
 
   return {
     variable,

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import ValidatedField from '../Form/ValidatedField';
-import Icon from '../../ui/components/Icon';
-import * as Fields from '../../ui/components/Fields';
-import { getComponentsForType } from '../Form/inputOptions';
-import Select from '../Form/Fields/Select';
+import Icon from '@ui/components/Icon';
+import * as Fields from '@ui/components/Fields';
+import { getComponentsForType } from '@app/config/variables';
+import ValidatedField from '@components/Form/ValidatedField';
+import Select from '@components/Form/Fields/Select';
 import withAttributeHandlers from './withAttributeHandlers';
 
 const getInputComponentForType = (type) => {
