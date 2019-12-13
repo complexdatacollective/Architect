@@ -29,7 +29,7 @@
   },
   "protocol": {
     "present": {
-      "schemaVersion": 2,
+      "schemaVersion": 3,
       "name": "fooProtocol",
       "assetManifest": {
         "1234-asset-1": {
