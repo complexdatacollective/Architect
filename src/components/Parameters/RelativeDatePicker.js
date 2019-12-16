@@ -17,12 +17,14 @@ const RelativeDatePickerParameters = ({ name }) => {
         to the date at the <strong>time of interview</strong>.
       </p>
       <p>
-        <strong>Months before</strong> is the number of months prior to the anchor
-        date that can be selected from, rounded to start of month.
+        <strong>Days before</strong> is the number of days prior to the anchor
+        date that can be selected from.
+        Defaults to <strong>180 days</strong> if left blank.
       </p>
       <p>
-        <strong>Months after</strong> is the number of months after the anchor
-        date that can be selected from, rounded to end of month.
+        <strong>Days after</strong> is the number of days after the anchor
+        date that can be selected from.
+        Defaults to <strong>0 days</strong> if left blank.
       </p>
       <ValidatedField
         label="Anchor date"
@@ -32,14 +34,14 @@ const RelativeDatePickerParameters = ({ name }) => {
         dateFormat={dateFormat}
       />
       <ValidatedField
-        label="Months before"
+        label="Days before"
         component={LikertScale}
         name={`${name}.before`}
         type="ordinal"
         options={monthRange}
       />
       <ValidatedField
-        label="Months after"
+        label="Days after"
         component={LikertScale}
         name={`${name}.after`}
         type="ordinal"

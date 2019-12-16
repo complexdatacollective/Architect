@@ -17,7 +17,7 @@ const DateTimeParameters = ({ name, type }) => {
     <React.Fragment>
       <p>
         You can select a <strong>Date Type</strong> if you would like to only select a partial
-        date, e.g. year only. <strong>full year</strong> (1970-01-01) by <strong>default</strong>.
+        date, e.g. year only. Defaults to <strong>full year</strong> (1970-01-01) if left blank.
       </p>
       <p>
         If a <strong>Start Range</strong> date is not supplied, the input range will default
