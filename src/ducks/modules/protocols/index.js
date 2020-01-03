@@ -3,10 +3,10 @@ import openProtocolDialog from '../../../other/protocols/utils/openProtocolDialo
 import history from '../../../history';
 import { getActiveProtocolMeta } from '../../../selectors/protocols';
 import { actionCreators as createActionCreators } from './create';
-import { actionCreators as importActionCreators } from './import';
+import { actionCreators as unbundleActionCreators } from './unbundle';
 import { actionCreators as preflightActions } from './preflight';
 import { actionCreators as saveActionCreators } from './save';
-import { actionCreators as exportActionCreators } from './export';
+import { actionCreators as bundleActionCreators } from './bundle';
 import { actionCreators as previewActions } from '../preview';
 import { saveErrorDialog, importErrorDialog } from './dialogs';
 import {
@@ -16,7 +16,7 @@ import {
 
 const SAVE_COPY = 'PROTOCOLS/SAVE_COPY';
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
-const IMPORT_AND_LOAD_ERROR = 'PROTOCOLS/IMPORT_AND_LOAD_ERROR';
+const UNBUNDLE_AND_LOAD_ERROR = 'PROTOCOLS/UNBUNDLE_AND_LOAD_ERROR';
 const CREATE_AND_LOAD_ERROR = 'PROTOCOLS/CREATE_AND_LOAD_ERROR';
 const OPEN_ERROR = 'PROTOCOLS/OPEN_ERROR';
 
@@ -25,8 +25,8 @@ const saveAndExportError = error => ({
   error,
 });
 
-const importAndLoadError = error => ({
-  type: IMPORT_AND_LOAD_ERROR,
+const unbundleAndLoadError = error => ({
+  type: UNBUNDLE_AND_LOAD_ERROR,
   error,
 });
 
@@ -44,13 +44,13 @@ const openError = error => ({
  * 1. Save - write protocol to protocol.json
  * 2. Export - write /tmp/{working-path} to user space.
  */
-const saveAndExportThunk = () =>
+const saveAndBundleThunk = () =>
   (dispatch, getState) => {
     const { filePath } = getActiveProtocolMeta(getState());
 
     return dispatch(preflightActions.preflight())
       .then(() => dispatch(saveActionCreators.saveProtocol()))
-      .then(() => dispatch(exportActionCreators.exportProtocol()))
+      .then(() => dispatch(bundleActionCreators.bundleProtocol()))
       .catch((e) => {
         dispatch(saveAndExportError(e));
         dispatch(saveErrorDialog(e, filePath));
@@ -61,24 +61,24 @@ const saveAndExportThunk = () =>
  * 1. Import - extract/copy protocol to /tmp/{working-path}
  * 2. Load - redirect to /edit/ which should trigger load.
  */
-const importAndLoadThunk = filePath =>
+const unbundleAndLoadThunk = filePath =>
   (dispatch) => {
     dispatch(previewActions.closePreview());
     // TODO: Reset `screens` here.
-    return dispatch(importActionCreators.importProtocol(filePath))
+    return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
       .then(({ id }) => {
         history.push(`/edit/${id}/`);
         return id;
       })
       .catch((e) => {
-        dispatch(importAndLoadError(e));
+        dispatch(unbundleAndLoadError(e));
         dispatch(importErrorDialog(e, filePath));
       });
   };
 
 /**
  * 1. Create - Create a new protocol from template
- * 2. Run importAndLoadThunk on new protocol
+ * 2. Run unbundleAndLoadThunk on new protocol
  */
 const createAndLoadProtocolThunk = () =>
   dispatch =>
@@ -94,12 +94,12 @@ const createAndLoadProtocolThunk = () =>
 
 /**
  * 1. Locate protocol in user space with Electron dialog
- * 2. Run importAndLoadThunk on specified path
+ * 2. Run unbundleAndLoadThunk on specified path
  */
 const openProtocol = () =>
   dispatch =>
     openProtocolDialog()
-      .then(filePath => dispatch(importAndLoadThunk(filePath)))
+      .then(filePath => dispatch(unbundleAndLoadThunk(filePath)))
       .catch(e => dispatch(openError(e)));
 
 /**
@@ -116,7 +116,7 @@ const saveCopyThunk = filePath =>
       filePath,
     });
 
-    dispatch(saveAndExportThunk());
+    dispatch(saveAndBundleThunk());
   };
 
 const initialState = [];
@@ -169,15 +169,15 @@ export default function reducer(state = initialState, action = {}) {
 
 const actionCreators = {
   createAndLoadProtocol: createAndLoadProtocolThunk,
-  saveAndExportProtocol: saveAndExportThunk,
-  importAndLoadProtocol: importAndLoadThunk,
+  saveAndExportProtocol: saveAndBundleThunk,
+  importAndLoadProtocol: unbundleAndLoadThunk,
   openProtocol,
   saveCopy: saveCopyThunk,
 };
 
 const actionTypes = {
   SAVE_AND_EXPORT_ERROR,
-  IMPORT_AND_LOAD_ERROR,
+  UNBUNDLE_AND_LOAD_ERROR,
   CREATE_AND_LOAD_ERROR,
   OPEN_ERROR,
 };
