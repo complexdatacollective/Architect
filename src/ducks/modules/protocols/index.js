@@ -1,7 +1,7 @@
 import uuid from 'uuid';
-import openProtocolDialog from '../../../other/protocols/utils/openProtocolDialog';
-import history from '../../../history';
-import { getActiveProtocolMeta } from '../../../selectors/protocols';
+import openProtocolDialog from '@app/other/protocols/utils/openProtocolDialog';
+import history from '@app/history';
+import { getActiveProtocolMeta } from '@selectors/protocols';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as unbundleActionCreators } from './unbundle';
 import { actionCreators as preflightActions } from './preflight';
@@ -169,8 +169,8 @@ export default function reducer(state = initialState, action = {}) {
 
 const actionCreators = {
   createAndLoadProtocol: createAndLoadProtocolThunk,
-  saveAndExportProtocol: saveAndBundleThunk,
-  importAndLoadProtocol: unbundleAndLoadThunk,
+  saveAndBundleProtocol: saveAndBundleThunk,
+  unbundleAndLoadProtocol: unbundleAndLoadThunk,
   openProtocol,
   saveCopy: saveCopyThunk,
 };
