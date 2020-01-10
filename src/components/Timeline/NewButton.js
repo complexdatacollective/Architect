@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from '../../ui/components';
+import { Icon } from '@codaco/ui';
 
 const NewButton = props => (
   <div className="list-new-button" {...props}>

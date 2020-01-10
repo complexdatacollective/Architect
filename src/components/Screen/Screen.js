@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import window from '@codaco/ui/lib/components/window';
 import ControlBar from '../ControlBar';
 import { ScreenErrorBoundary } from '../Errors';
-import window from '../../ui/components/window';
 
 class Screen extends PureComponent {
   static propTypes = {

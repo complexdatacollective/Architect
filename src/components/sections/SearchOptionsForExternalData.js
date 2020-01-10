@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import * as Fields from '../../ui/components/Fields';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import ValidatedField from '../Form/ValidatedField';
 import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
 import withMapFormToProps from '../enhancers/withMapFormToProps';

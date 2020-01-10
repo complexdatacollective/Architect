@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flipped } from 'react-flip-toolkit';
-import Icon from '../../ui/components/Icon';
+import Icon from '@codaco/ui/lib/components/Icon';
 
 const GridItem = ({
   fields,

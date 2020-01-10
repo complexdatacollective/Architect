@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { getProtocol } from '../selectors/protocol';
-import { Button, Icon } from '../ui/components';
+import { Button, Icon } from '@codaco/ui';
+import { getProtocol } from '@selectors/protocol';
+import { actionCreators as protocolsActions } from '@modules/protocols';
 import ControlBar from './ControlBar';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 const RightArrow = <Icon name="arrow-right" />;
 

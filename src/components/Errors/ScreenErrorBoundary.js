@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../../ui/components';
+import { Button } from '@codaco/ui';
 
 class CardErrorBoundary extends Component {
   constructor(props) {

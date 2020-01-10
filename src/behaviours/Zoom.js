@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import { compose, getContext } from 'recompose';
-import { getCSSVariableAsNumber } from '../ui/utils/CSSVariables';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';

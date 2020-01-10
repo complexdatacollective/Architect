@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button, Icon } from '../ui/components';
+import { Button, Icon } from '@codaco/ui';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 import Version from './Version';
 import architectLogoIcon from '../images/architect-logo-icon.svg';

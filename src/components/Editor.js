@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { reduxForm, Form, getFormSyncErrors, hasSubmitFailed } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
+import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import { Guided } from './Guided';
 import { FormCodeView } from './CodeView';
 import Issues from './Issues';
-import windowRootProvider from '../ui/components/windowRootProvider';
+
 
 /**
  * Editor is a scaffold for specific editor components.

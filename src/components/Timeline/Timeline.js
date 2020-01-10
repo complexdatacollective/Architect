@@ -7,13 +7,13 @@ import { TransitionGroup } from 'react-transition-group';
 import { compose, withStateHandlers, defaultProps } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
-import None from '../../ui/components/Transitions/None';
+import None from '@codaco/ui/lib/components/Transitions/None';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import Stage from './Stage';
 import { getProtocol } from '../../selectors/protocol';
 import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
-import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
 import NewButton from './NewButton';
 
 class Timeline extends Component {

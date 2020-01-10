@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withState } from 'recompose';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
-import Radio from '@ui/components/Fields/Radio';
+import Radio from '@codaco/ui/lib/components/Fields/Radio';
 import NetworkThumbnail from '@components/Thumbnail/Network';
 import File from './File';
 

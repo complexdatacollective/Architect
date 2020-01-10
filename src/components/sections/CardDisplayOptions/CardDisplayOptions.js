@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import * as Fields from '../../../ui/components/Fields';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 import MultiSelect from '../../Form/MultiSelect';
 import Section from '../Section';

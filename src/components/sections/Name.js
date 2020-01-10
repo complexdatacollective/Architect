@@ -1,6 +1,6 @@
 import React from 'react';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { ValidatedField } from '../../components/Form';
-import * as Fields from '../../ui/components/Fields';
 import { getFieldId } from '../../utils/issues';
 import Section from './Section';
 

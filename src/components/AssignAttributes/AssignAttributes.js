@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../ui/components/Button';
+import Button from '@codaco/ui/lib/components/Button';
 import Attribute from './Attribute';
 import withAssignAttributesHandlers from './withAssignAttributesHandlers';
 import NewVariableWindow from '../NewVariableWindow';

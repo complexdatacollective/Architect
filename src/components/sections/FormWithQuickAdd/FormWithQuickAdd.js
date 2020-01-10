@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { compose } from 'recompose';
+import { Toggle } from '@codaco/ui/lib/components/Fields';
 import DetachedField from '../../DetachedField';
-import { Toggle } from '../../../ui/components/Fields';
 import Form from '../Form';
 import QuickAdd from '../QuickAdd';
 import Section from '../Section';

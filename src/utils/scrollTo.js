@@ -1,6 +1,6 @@
 import anime from 'animejs';
 import scrollparent from 'scrollparent';
-import { getCSSVariableAsObject, getCSSVariableAsNumber } from '../ui/utils/CSSVariables';
+import { getCSSVariableAsObject, getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 
 const scrollTo = (destination, offset = 0) => {
   if (!destination) { return; }

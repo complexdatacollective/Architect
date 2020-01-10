@@ -1,8 +1,8 @@
 import React from 'react';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
+import { Text } from '@codaco/ui/lib/components/Fields';
 import MultiSelect from '../../Form/MultiSelect';
-import { Text } from '../../../ui/components/Fields';
 import withMapFormToProps from '../../enhancers/withMapFormToProps';
 import withExternalData from '../../enhancers/withExternalData';
 import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';

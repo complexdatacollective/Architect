@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Fade from '../ui/components/Transitions/Fade';
-import window from '../ui/components/window';
+import Fade from '@codaco/ui/lib/components/Transitions/Fade';
+import window from '@codaco/ui/lib/components/window';
 
 const Window = ({
   show,

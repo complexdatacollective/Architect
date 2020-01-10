@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from '../../ui/components/Fields/Text';
+import TextField from '@codaco/ui/lib/components/Fields/Text';
 import SortControl from './SortControl';
 
 class Controls extends Component {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import Node from '../ui/components/Node';
+import Node from '@codaco/ui/lib/components/Node';
 import { getNodeTypes } from '../selectors/codebook';
 
 const mapStateToProps = state => ({

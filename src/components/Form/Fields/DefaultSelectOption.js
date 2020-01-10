@@ -1,7 +1,7 @@
 import React from 'react';
 import { components as ReactSelectComponents } from 'react-select';
 import PropTypes from 'prop-types';
-import Icon from '../../../ui/components/Icon';
+import Icon from '@codaco/ui/lib/components/Icon';
 
 const DefaultSelectOption = (props) => {
   const { data } = props;

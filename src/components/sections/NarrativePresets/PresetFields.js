@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import * as ArchitectFields from '../../Form/Fields';
-import * as Fields from '../../../ui/components/Fields';
 import withPresetProps from './withPresetProps';
 import withNewVariableWindowHandlers, {
   propTypes as newVariableWindowPropTypes,

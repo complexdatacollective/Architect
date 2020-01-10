@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from '../../ui/components';
+import { Icon } from '@codaco/ui';
 
 const DeleteButton = props => (
   <div className="list-delete-button" {...props}>
