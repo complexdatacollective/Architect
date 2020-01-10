@@ -1,10 +1,10 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
 import { isDirty } from 'redux-form';
-import { store } from '../ducks/store';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
-import { actionCreators as dialogActions } from '../ducks/modules/dialogs';
-import { formName } from '../components/StageEditor/StageEditor';
+import { store } from '@app/ducks/store';
+import { actionCreators as protocolsActions } from '@modules/protocols';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+import { formName } from '@components/StageEditor/StageEditor';
 
 const initIPCListeners = () => {
   ipcRenderer.on('SAVE_COPY', (e, filePath) => {
@@ -12,7 +12,7 @@ const initIPCListeners = () => {
   });
 
   ipcRenderer.on('SAVE', () => {
-    store.dispatch(protocolsActions.saveAndExportProtocol());
+    store.dispatch(protocolsActions.saveAndBundleProtocol());
   });
 
   ipcRenderer.on('CONFIRM_CLOSE', () => {

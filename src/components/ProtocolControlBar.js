@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { getProtocol } from '../selectors/protocol';
-import { Button, Icon } from '../ui/components';
+import { getProtocol } from '@selectors/protocol';
+import { Button, Icon } from '@ui/components';
+import { actionCreators as protocolsActions } from '@modules/protocols';
 import ControlBar from './ControlBar';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
 
 const RightArrow = <Icon name="arrow-right" />;
 
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveProtocol: bindActionCreators(protocolsActions.saveAndExportProtocol, dispatch),
+  saveProtocol: bindActionCreators(protocolsActions.saveAndBundleProtocol, dispatch),
 });
 
 export { ProtocolControlBar };

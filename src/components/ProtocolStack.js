@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Flipped } from 'react-flip-toolkit';
-import protocolCover from '../images/NC-File.svg';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
+import { actionCreators as protocolsActions } from '@modules/protocols';
+import protocolCover from '@app/images/NC-File.svg';
 
 const getFilename = (path = '') => get(path.match(/([^/\\]+)$/), 1, path);
 
-const ProtocolStack = ({ importAndLoadProtocol, protocol: { filePath } }) => (
+const ProtocolStack = ({ unbundleAndLoadProtocol, protocol: { filePath } }) => (
   <div
     className="protocol-stack"
-    onClick={() => importAndLoadProtocol(filePath)}
+    onClick={() => unbundleAndLoadProtocol(filePath)}
   >
     <div className="protocol-stack__preview">
       <Flipped flipId={encodeURIComponent(filePath)}>
@@ -30,11 +30,11 @@ const ProtocolStack = ({ importAndLoadProtocol, protocol: { filePath } }) => (
 
 ProtocolStack.propTypes = {
   protocol: PropTypes.object.isRequired,
-  importAndLoadProtocol: PropTypes.func.isRequired,
+  unbundleAndLoadProtocol: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  importAndLoadProtocol: bindActionCreators(protocolsActions.importAndLoadProtocol, dispatch),
+  unbundleAndLoadProtocol: bindActionCreators(protocolsActions.unbundleAndLoadProtocol, dispatch),
 });
 
 export { ProtocolStack };

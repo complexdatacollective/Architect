@@ -1,9 +1,9 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
 import { find } from 'lodash';
-import { store } from '../ducks/store';
-import { actionCreators as dialogActions } from '../ducks/modules/dialogs';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
+import { store } from '@app/ducks/store';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionCreators as protocolsActions } from '@modules/protocols';
 
 const initFileOpener = () => {
   ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
@@ -37,8 +37,8 @@ const initFileOpener = () => {
           ),
           confirmLabel: 'Save changes and open?',
           onConfirm: () => {
-            store.dispatch(protocolsActions.saveAndExportProtocol())
-              .then(() => store.dispatch(protocolsActions.importAndLoadProtocol(protocolPath)));
+            store.dispatch(protocolsActions.saveAndBundleProtocol())
+              .then(() => store.dispatch(protocolsActions.unbundleAndLoadProtocol(protocolPath)));
           },
         }),
       );
@@ -48,7 +48,7 @@ const initFileOpener = () => {
 
     // eslint-disable-next-line no-console
     console.log('No unsaved changes, open.');
-    store.dispatch(protocolsActions.importAndLoadProtocol(protocolPath));
+    store.dispatch(protocolsActions.unbundleAndLoadProtocol(protocolPath));
   });
 
   ipcRenderer.send('READY');

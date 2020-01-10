@@ -9,23 +9,23 @@ import { loadProtocolConfiguration, saveProtocol, bundleProtocol } from '@app/ot
 import { actionCreators as registerActions } from './register';
 import { validationErrorDialog, appUpgradeRequiredDialog, mayUpgradeProtocolDialog } from './dialogs';
 
-const IMPORT_PROTOCOL = 'PROTOCOLS/IMPORT';
-const IMPORT_PROTOCOL_SUCCESS = 'PROTOCOLS/IMPORT_SUCCESS';
-const IMPORT_PROTOCOL_ERROR = 'PROTOCOLS/IMPORT_ERROR';
+const UNBUNDLE_PROTOCOL = 'PROTOCOLS/UNBUNDLE';
+const UNBUNDLE_PROTOCOL_SUCCESS = 'PROTOCOLS/UNBUNDLE_SUCCESS';
+const UNBUNDLE_PROTOCOL_ERROR = 'PROTOCOLS/UNBUNDLE_ERROR';
 
-const importProtocol = filePath => ({
-  type: IMPORT_PROTOCOL,
+const unbundleProtocolAction = filePath => ({
+  type: UNBUNDLE_PROTOCOL,
   filePath,
 });
 
-const importProtocolSuccess = ({ filePath, workingPath }) => ({
-  type: IMPORT_PROTOCOL_SUCCESS,
+const unbundleProtocolSuccess = ({ filePath, workingPath }) => ({
+  type: UNBUNDLE_PROTOCOL_SUCCESS,
   filePath,
   workingPath,
 });
 
-const importProtocolError = (error, filePath) => ({
-  type: IMPORT_PROTOCOL_ERROR,
+const unbundleProtocolError = (error, filePath) => ({
+  type: UNBUNDLE_PROTOCOL_ERROR,
   filePath,
   error,
 });
@@ -56,14 +56,14 @@ const registerProtocolThunk = ({ protocol, filePath, workingPath }) =>
   dispatch =>
     validateProtocol(protocol)
       // We don't actually want to stop the protocol from being
-      // imported for a validation error, so this is separate
+      // unbundleed for a validation error, so this is separate
       // from the loading logic
       .catch((e) => {
         dispatch(validationErrorDialog(e, filePath));
       })
       .then(() => {
         // all was well
-        dispatch(importProtocolSuccess({ filePath, workingPath }));
+        dispatch(unbundleProtocolSuccess({ filePath, workingPath }));
         return dispatch(registerActions.registerProtocol({ filePath, workingPath }));
       });
 
@@ -89,9 +89,9 @@ const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
           });
       });
 
-const importProtocolThunk = filePath =>
+const unbundleProtocolThunk = filePath =>
   (dispatch) => {
-    dispatch(importProtocol(filePath));
+    dispatch(unbundleProtocolAction(filePath));
 
     return unbundleProtocol(filePath)
       .then(workingPath =>
@@ -117,22 +117,22 @@ const importProtocolThunk = filePath =>
           }),
       )
       .catch((e) => {
-        dispatch(importProtocolError(e, filePath));
+        dispatch(unbundleProtocolError(e, filePath));
 
         throw e;
       });
   };
 
 const actionCreators = {
-  importProtocol: importProtocolThunk,
-  importProtocolSuccess,
-  importProtocolError,
+  unbundleProtocol: unbundleProtocolThunk,
+  unbundleProtocolSuccess,
+  unbundleProtocolError,
 };
 
 const actionTypes = {
-  IMPORT_PROTOCOL,
-  IMPORT_PROTOCOL_SUCCESS,
-  IMPORT_PROTOCOL_ERROR,
+  UNBUNDLE_PROTOCOL,
+  UNBUNDLE_PROTOCOL_SUCCESS,
+  UNBUNDLE_PROTOCOL_ERROR,
 };
 
 export {
