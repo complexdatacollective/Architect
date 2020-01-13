@@ -29,12 +29,16 @@ const PromptFields = ({
   openNewVariableWindow,
   closeNewVariableWindow,
   newVariableName,
+  newVariableOptions,
   showNewVariableWindow,
 }) => {
   const [otherVariableToggle, setOtherVariableToggle] = useState(false);
 
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
+
+  const otherVariableOptions = variableOptions
+    .filter(({ type: variableType }) => variableType === 'text');
 
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
 
@@ -70,7 +74,7 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={categoricalVariableOptions}
-          onCreateOption={openNewVariableWindow}
+          onCreateOption={variableName => openNewVariableWindow(variableName, { type: 'categorical' })}
           onDeleteOption={handleDeleteVariable}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
@@ -111,8 +115,8 @@ const PromptFields = ({
             name="otherVariable"
             component={CreatableSelect}
             label="Other Variable"
-            options={categoricalVariableOptions}
-            onCreateOption={openNewVariableWindow}
+            options={otherVariableOptions}
+            onCreateOption={variableName => openNewVariableWindow(variableName, { type: 'text' })}
             onDeleteOption={handleDeleteVariable}
             onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
@@ -126,8 +130,8 @@ const PromptFields = ({
             name="otherVariableLabel"
             component={Text}
             label="Other variable label"
-            placeholder="Text to describe the other field"
-            validation={{ required: true, maxLength: 220 }}
+            placeholder="Text to describe the &quot;other&quot; field"
+            validation={{ required: true }}
           />
         </Row>
       }
@@ -173,8 +177,8 @@ const PromptFields = ({
 
       <NewVariableWindow
         initialValues={{
-          type: 'categorical',
           name: newVariableName,
+          ...newVariableOptions,
         }}
         show={showNewVariableWindow}
         entity={entity}
