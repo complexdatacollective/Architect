@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Text } from '@codaco/ui/lib/components/Fields';
-import { getFieldId } from '../../../utils/issues';
-import { ValidatedField } from '../../Form';
-import CreatableSelect from '../../Form/Fields/CreatableSelect';
-import MultiSelect from '../../Form/MultiSelect';
-import Row from '../Row';
-import Section from '../Section';
-import NewVariableWindow from '../../NewVariableWindow';
+import { getFieldId } from '@app/utils/issues';
+import { Text, Toggle } from '@codaco/ui/lib/components/Fields';
+import DetachedField from '@components/DetachedField';
+import { ValidatedField } from '@components/Form';
+import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import MultiSelect from '@components/Form/MultiSelect';
+import NewVariableWindow from '@components/NewVariableWindow';
+import Options from '@components/Options';
+import Row from '@components/sections/Row';
+import Section from '@components/sections/Section';
 import withNewVariableWindowHandlers, {
   propTypes as newWindowVariablePropTypes,
-} from '../../enhancers/withNewVariableWindowHandlers';
-import Options from '../../Options';
+} from '@components/enhancers/withNewVariableWindowHandlers';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withPromptProps from './withPromptProps';
 import Tip from '../../Tip';
@@ -30,10 +31,15 @@ const PromptFields = ({
   newVariableName,
   showNewVariableWindow,
 }) => {
+  const [otherVariableToggle, setOtherVariableToggle] = useState(false);
+
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
 
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
+
+  const clickToggleOtherVariable = () =>
+    setOtherVariableToggle(!otherVariableToggle);
 
   return (
     <Section>
@@ -87,6 +93,44 @@ const PromptFields = ({
           </Section>
         }
       </Row>
+      { variable &&
+        <Row>
+          <h3 id={getFieldId('toggleOtherVariable')}>&quot;Other&quot; variable</h3>
+          <p>Optional free-text field for participant options</p>
+          <DetachedField
+            component={Toggle}
+            name="toggleOtherVariable"
+            value={otherVariableToggle}
+            onChange={clickToggleOtherVariable}
+          />
+        </Row>
+      }
+      { otherVariableToggle &&
+        <Row>
+          <ValidatedField
+            name="otherVariable"
+            component={CreatableSelect}
+            label="Other Variable"
+            options={categoricalVariableOptions}
+            onCreateOption={openNewVariableWindow}
+            onDeleteOption={handleDeleteVariable}
+            onKeyDown={normalizeKeyDown}
+            validation={{ required: true }}
+            formatCreateLabel={inputValue => (
+              <span>
+                Click here to create an other option named &quot;{inputValue}&quot;.
+              </span>
+            )}
+          />
+          <ValidatedField
+            name="otherVariableLabel"
+            component={Text}
+            label="Other variable label"
+            placeholder="Text to describe the other field"
+            validation={{ required: true, maxLength: 220 }}
+          />
+        </Row>
+      }
       <Row>
         <h3>Bucket Sort Order <small>(optional)</small></h3>
         <p>
