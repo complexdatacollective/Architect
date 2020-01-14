@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveProtocol: bindActionCreators(protocolsActions.saveAndExportProtocol, dispatch),
+  saveProtocol: bindActionCreators(protocolsActions.saveAndBundleProtocol, dispatch),
 });
 
 export { ProtocolControlBar };
