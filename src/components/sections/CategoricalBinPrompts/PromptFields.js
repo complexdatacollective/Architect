@@ -11,28 +11,36 @@ import NewVariableWindow from '@components/NewVariableWindow';
 import Options from '@components/Options';
 import Row from '@components/sections/Row';
 import Section from '@components/sections/Section';
+import Tip from '@components/Tip';
 import withNewVariableWindowHandlers, {
   propTypes as newWindowVariablePropTypes,
 } from '@components/enhancers/withNewVariableWindowHandlers';
 import { getSortOrderOptionGetter } from './optionGetters';
-import withPromptProps from './withPromptProps';
-import Tip from '../../Tip';
+import withVariableOptions from './withVariableOptions';
+import withNewVariableHandlers from './withNewVariableHandlers';
 
 const PromptFields = ({
   variableOptions,
-  handleCreateNewVariable,
-  handleDeleteVariable,
+  handleCreateNewVariableForVariable,
+  handleCreateNewVariableForOtherVariable,
+  handleDeleteVariableForVariable,
+  handleDeleteVariableForOtherVarible,
   normalizeKeyDown,
   entity,
   type,
   variable,
   openNewVariableWindow,
   closeNewVariableWindow,
-  newVariableName,
-  newVariableOptions,
   showNewVariableWindow,
 }) => {
   const [otherVariableToggle, setOtherVariableToggle] = useState(false);
+  const [
+    newVariableOptions,
+    setNewVariableOptions,
+  ] = useState({
+    name: null,
+    type: null,
+  });
 
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
@@ -44,6 +52,30 @@ const PromptFields = ({
 
   const clickToggleOtherVariable = () =>
     setOtherVariableToggle(!otherVariableToggle);
+
+  const handleEditNewCategoricalVariable = (name) => {
+    setNewVariableOptions({
+      name,
+      type: 'categorical',
+    });
+    openNewVariableWindow();
+  };
+
+  const handleEditNewTextVariable = (name) => {
+    setNewVariableOptions({
+      name,
+      type: 'text',
+    });
+    openNewVariableWindow();
+  };
+
+  const handleOnCreatedNewVariable = (variableId) => {
+    if (newVariableOptions.type === 'categorical') {
+      handleCreateNewVariableForVariable(variableId);
+    } else {
+      handleCreateNewVariableForOtherVariable(variableId);
+    }
+  };
 
   return (
     <Section>
@@ -74,8 +106,8 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={categoricalVariableOptions}
-          onCreateOption={variableName => openNewVariableWindow(variableName, { type: 'categorical' })}
-          onDeleteOption={handleDeleteVariable}
+          onCreateOption={handleEditNewCategoricalVariable}
+          onDeleteOption={handleDeleteVariableForVariable}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
@@ -116,8 +148,8 @@ const PromptFields = ({
             component={CreatableSelect}
             label="Other Variable"
             options={otherVariableOptions}
-            onCreateOption={variableName => openNewVariableWindow(variableName, { type: 'text' })}
-            onDeleteOption={handleDeleteVariable}
+            onCreateOption={handleEditNewTextVariable}
+            onDeleteOption={handleDeleteVariableForOtherVarible}
             onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
             formatCreateLabel={inputValue => (
@@ -176,14 +208,11 @@ const PromptFields = ({
       </Row>
 
       <NewVariableWindow
-        initialValues={{
-          name: newVariableName,
-          ...newVariableOptions,
-        }}
+        initialValues={newVariableOptions}
         show={showNewVariableWindow}
         entity={entity}
         type={type}
-        onComplete={handleCreateNewVariable}
+        onComplete={handleOnCreatedNewVariable}
         onCancel={closeNewVariableWindow}
       />
     </Section>
@@ -192,11 +221,8 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   variableOptions: PropTypes.array,
-  handleDeleteVariable: PropTypes.func.isRequired,
-  handleCreateNewVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  ...newWindowVariablePropTypes,
 };
 
 PromptFields.defaultProps = {
@@ -208,5 +234,7 @@ export { PromptFields };
 
 export default compose(
   withNewVariableWindowHandlers,
-  withPromptProps,
+  withVariableOptions,
+  withNewVariableHandlers('variable'),
+  withNewVariableHandlers('otherVariable'),
 )(PromptFields);

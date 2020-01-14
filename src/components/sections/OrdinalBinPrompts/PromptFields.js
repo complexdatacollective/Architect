@@ -12,7 +12,8 @@ import Row from '../Row';
 import NewVariableWindow from '../../NewVariableWindow';
 import Options from '../../Options';
 import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
-import withPromptProps from '../CategoricalBinPrompts/withPromptProps';
+import withVariableOptions from '../CategoricalBinPrompts/withVariableOptions';
+import withNewVariableHandlers from '../CategoricalBinPrompts/withNewVariableHandlers';
 import withNewVariableWindowHandlers, {
   propTypes as newWindowVariablePropTypes,
 } from '../../enhancers/withNewVariableWindowHandlers';
@@ -20,7 +21,7 @@ import Tip from '../../Tip';
 
 const PromptFields = ({
   variableOptions,
-  handleCreateNewVariable,
+  handleCreateNewVariableForVariable,
   normalizeKeyDown,
   handleDeleteVariable,
   entity,
@@ -159,7 +160,7 @@ const PromptFields = ({
         show={showNewVariableWindow}
         entity={entity}
         type={type}
-        onComplete={handleCreateNewVariable}
+        onComplete={handleCreateNewVariableForVariable}
         onCancel={closeNewVariableWindow}
       />
     </Section>
@@ -172,7 +173,6 @@ PromptFields.propTypes = {
   handleCreateNewVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  ...newWindowVariablePropTypes,
 };
 
 PromptFields.defaultProps = {
@@ -183,5 +183,6 @@ export { PromptFields };
 
 export default compose(
   withNewVariableWindowHandlers,
-  withPromptProps,
+  withVariableOptions,
+  withNewVariableHandlers('variable'),
 )(PromptFields);
