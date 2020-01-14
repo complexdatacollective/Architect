@@ -10,9 +10,10 @@ const FormWindow = ({
   onSubmit,
   onCancel,
   children,
+  index,
   ...rest
 }) => (
-  <Window show={show}>
+  <Window show={show} index={index}>
     <Form
       flipId={flipId}
       onSubmit={onSubmit}

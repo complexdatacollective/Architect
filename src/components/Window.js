@@ -5,10 +5,11 @@ import window from '@codaco/ui/lib/components/window';
 
 const Window = ({
   show,
+  index,
   children,
 }) => (
   <Fade in={show}>
-    <div className="editable-list-window" onClick={e => e.stopPropagation()}>
+    <div className="editable-list-window" style={{ zIndex: 1000 + index }} onClick={e => e.stopPropagation()}>
       {show && children}
     </div>
   </Fade>

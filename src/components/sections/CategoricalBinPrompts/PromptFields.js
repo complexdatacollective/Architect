@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
@@ -12,15 +12,25 @@ import Options from '@components/Options';
 import Row from '@components/sections/Row';
 import Section from '@components/sections/Section';
 import Tip from '@components/Tip';
-import withNewVariableWindowHandlers, {
-  propTypes as newWindowVariablePropTypes,
-} from '@components/enhancers/withNewVariableWindowHandlers';
+import withNewVariableWindowHandlers from '@components/enhancers/withNewVariableWindowHandlers';
+import { useStack } from '@components/Stack';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 import withNewVariableHandlers from './withNewVariableHandlers';
 
+const useToggle = (initialState) => {
+  const [value, setValue] = useState(initialState);
+
+  const toggleValue = () =>
+    setValue(!value);
+
+  return [value, toggleValue, setValue];
+};
+
 const PromptFields = ({
   variableOptions,
+  form,
+  changeForm,
   handleCreateNewVariableForVariable,
   handleCreateNewVariableForOtherVariable,
   handleDeleteVariableForVariable,
@@ -29,18 +39,46 @@ const PromptFields = ({
   entity,
   type,
   variable,
-  openNewVariableWindow,
-  closeNewVariableWindow,
-  showNewVariableWindow,
 }) => {
-  const [otherVariableToggle, setOtherVariableToggle] = useState(false);
-  const [
-    newVariableOptions,
-    setNewVariableOptions,
-  ] = useState({
-    name: null,
-    type: null,
-  });
+  const [otherVariableToggle, clickToggleOtherVariable] = useToggle(false);
+
+  const [newVariable, setNewVariable] = useState({ type: null, name: null });
+
+  const closeWindow = () => {
+    setNewVariable({ type: null, name: null });
+  };
+
+  const handleCreateNewVariable = (variableId) => {
+    const field = newVariable.type === 'categorical' ? 'variable' : 'otherVariable';
+    changeForm(form, field, variableId);
+    closeWindow();
+  };
+
+  const [updateNewVariableWindow] = useStack(
+    NewVariableWindow, {
+      initialValues: {},
+      show: false,
+      entity,
+      type,
+      onComplete: handleCreateNewVariable,
+      onCancel: closeWindow,
+    },
+  );
+
+  useEffect(() => {
+    // updateNewVariableWindow({
+    //   initialValues: newVariable,
+    //   show: !newVariable.name,
+    // });
+  }, [newVariable.type, newVariable.name]);
+
+  const handleEditNewCategoricalVariable = (name) => {
+    setNewVariable({ type: 'categorical', name });
+  };
+
+  const handleEditNewTextVariable = (name) => {
+    setNewVariable({ type: 'text', name });
+  };
 
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
@@ -49,33 +87,6 @@ const PromptFields = ({
     .filter(({ type: variableType }) => variableType === 'text');
 
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
-
-  const clickToggleOtherVariable = () =>
-    setOtherVariableToggle(!otherVariableToggle);
-
-  const handleEditNewCategoricalVariable = (name) => {
-    setNewVariableOptions({
-      name,
-      type: 'categorical',
-    });
-    openNewVariableWindow();
-  };
-
-  const handleEditNewTextVariable = (name) => {
-    setNewVariableOptions({
-      name,
-      type: 'text',
-    });
-    openNewVariableWindow();
-  };
-
-  const handleOnCreatedNewVariable = (variableId) => {
-    if (newVariableOptions.type === 'categorical') {
-      handleCreateNewVariableForVariable(variableId);
-    } else {
-      handleCreateNewVariableForOtherVariable(variableId);
-    }
-  };
 
   return (
     <Section>
@@ -206,28 +217,20 @@ const PromptFields = ({
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
-
-      <NewVariableWindow
-        initialValues={newVariableOptions}
-        show={showNewVariableWindow}
-        entity={entity}
-        type={type}
-        onComplete={handleOnCreatedNewVariable}
-        onCancel={closeNewVariableWindow}
-      />
     </Section>
   );
 };
 
 PromptFields.propTypes = {
-  variableOptions: PropTypes.array,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  variable: PropTypes.string,
+  variableOptions: PropTypes.array,
 };
 
 PromptFields.defaultProps = {
+  variable: null,
   variableOptions: [],
-  categoricalVariableOptions: [],
 };
 
 export { PromptFields };
