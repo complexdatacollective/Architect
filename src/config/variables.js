@@ -39,13 +39,13 @@ export const COMPONENTS = {
   TextArea: {
     label: 'Text Area',
     value: 'TextArea',
-    description: 'This is an extra lage text input, allowing for simple data entry for more than 30 characters.',
+    description: 'This is an extra large text input, allowing for simple data entry for more than 30 characters.',
     image: 'TextArea',
   },
   NumberInput: {
     label: 'Number Input',
     value: 'Number',
-    description: 'This input is optomized for collecting numerical data, and will show a number pad if available.',
+    description: 'This input is optimized for collecting numerical data, and will show a number pad if available.',
     image: 'NumberInput',
   },
   CheckboxGroup: {
@@ -63,37 +63,37 @@ export const COMPONENTS = {
   RadioGroup: {
     label: 'Radio Group',
     value: 'RadioGroup',
-    description: 'This will render a group of options and allow the user to choose one. Useful for likert-type scales or other ordinal variables.',
+    description: 'This component renders a group of options and allow the user to choose one.',
     image: 'RadioGroup',
   },
   ToggleButtonGroup: {
     label: 'Toggle Button Group',
     value: 'ToggleButtonGroup',
-    description: 'This component provides a colorful button that can be toggled "on" or "off". It is useful for categorical variables where multiple options can be selected.',
+    description: 'This component provides a colorful button that can be toggled "on" or "off". It is an alternative to the Checkbox Group, and allows multiple selection by default.',
     image: 'ToggleButtonGroup',
   },
   LikertScale: {
     label: 'LikertScale',
     value: 'LikertScale',
-    description: 'A likert-type scale using option values',
+    description: 'A component providing a likert-type scale in the form of a slider. Values are derived from the option properties of this variable, with labels for each option label.',
     image: 'LikertScale',
   },
   VisualAnalogScale: {
     label: 'VisualAnalogScale',
     value: 'VisualAnalogScale',
-    description: 'A Visual Analog Scale will set a number from 0.000 - 1.000, repesenting either end of the scale.',
+    description: 'A Visual Analog Scale (VAS) component, which sets a normalized value between 0 and 1 representing the position of the slider between each end of the scale.',
     image: 'VisualAnalogScale',
   },
   DatePicker: {
     label: 'DatePicker',
     value: 'DatePicker',
-    description: 'A calendar date picker',
+    description: 'A calendar date picker that allows a respondent to quickly enter year, month, and day data.',
     image: 'DatePicker',
   },
   RelativeDatePicker: {
     label: 'RelativeDatePicker',
     value: 'RelativeDatePicker',
-    description: 'A calendar date picker',
+    description: 'A calendar date picker that automatically limits available dates relative to an "anchor date", which can be configured to the date of the interview session. ',
     image: 'RelativeDatePicker',
   },
 };

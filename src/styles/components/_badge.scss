@@ -13,5 +13,9 @@
 
   strong {
     text-transform: capitalize;
+    // These properties are a hacky workaround for this:
+    // https://stackoverflow.com/questions/49783681/text-transform-capitalize-css-not-working-correctly
+    content: '';
+    display: inline-block;
   }
 }
