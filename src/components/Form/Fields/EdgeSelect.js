@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Icon from '../../../ui/components/Icon';
-import * as Fields from '../../../ui/components/Fields';
+import Icon from '@codaco/ui/lib/components/Icon';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 
 const PreviewEdge = ({ label, color, input: { value, checked, onChange } }) => (
   <div

@@ -1,7 +1,7 @@
-$font-path: '../ui/assets/fonts';
+$font-path: '~@codaco/ui/lib/assets/fonts';
 @import '~react-grid-layout/css/styles.css';
 @import '~react-resizable/css/styles.css';
-@import '../ui/styles/all';
+@import '~@codaco/ui/lib/styles/all';
 @import './settings';
 @import './hotfix';
 @import './ui';

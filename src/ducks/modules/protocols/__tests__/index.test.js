@@ -120,7 +120,7 @@ describe('protocols', () => {
     );
   });
 
-  describe('saveAndExportProtocol()', () => {
+  describe('saveAndBundleProtocol()', () => {
     advanceTo(Date.UTC(2017, 5, 27, 0, 0, 0));
 
     describe('invalid protocol', () => {
@@ -135,7 +135,7 @@ describe('protocols', () => {
       });
 
       it('dispatches an error when protocol is invalid', () =>
-        store.dispatch(actionCreators.saveAndExportProtocol())
+        store.dispatch(actionCreators.saveAndBundleProtocol())
           .then(() => {
             expect(log.mock.calls).toMatchSnapshot();
           }),
@@ -143,22 +143,22 @@ describe('protocols', () => {
     });
 
     it('triggers save and export actions', () =>
-      store.dispatch(actionCreators.saveAndExportProtocol())
+      store.dispatch(actionCreators.saveAndBundleProtocol())
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
         }),
     );
   });
 
-  describe('importAndLoadProtocol()', () => {
+  describe('unbundleAndLoadProtocol()', () => {
     beforeEach(() => {
       log.mockClear();
     });
 
     it('triggers import action and load redirect', done =>
-      store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path'))
+      store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path'))
         .then(() => {
-          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/IMPORT_SUCCESS' });
+          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/UNBUNDLE_SUCCESS' });
           expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/REGISTER' });
           expect(history.entries.pop()).toMatchObject({
             pathname: '/edit/809895df-bbd7-4c76-ac58-e6ada2625f9b/',
@@ -172,7 +172,7 @@ describe('protocols', () => {
         Promise.resolve(getProtocol({ schemaVersion: APP_SCHEMA_VERSION, stages: [] })),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/invalid'))
+      return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/invalid'))
         .then(() => {
           expect(log.mock.calls).containsDialogAction({ type: 'Error' });
           expect(log.mock.calls).toMatchSnapshot();
@@ -186,7 +186,7 @@ describe('protocols', () => {
         Promise.resolve(getProtocol({ schemaVersion: futureVersion })),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
+      return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
           expect(log.mock.calls).containsDialogAction({
@@ -203,7 +203,7 @@ describe('protocols', () => {
         Promise.resolve(getProtocol({ schemaVersion: pastVersion })),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/older-protocol'))
+      return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/older-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
           expect(log.mock.calls).containsDialogAction({ title: 'Would you like to upgrade the protocol?', type: 'Confirm' });
@@ -215,10 +215,10 @@ describe('protocols', () => {
         Promise.resolve(getProtocol()),
       );
 
-      return store.dispatch(actionCreators.importAndLoadProtocol('/dev/null/mock/path/matching-protocol'))
+      return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/matching-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
-          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/IMPORT_SUCCESS' });
+          expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/UNBUNDLE_SUCCESS' });
         });
     });
   });

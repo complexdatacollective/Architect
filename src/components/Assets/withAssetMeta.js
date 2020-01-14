@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import {
   getAssetManifest,
-} from '../../selectors/protocol';
+} from '@selectors/protocol';
 
 const existingMeta = {
   name: 'Interview network',

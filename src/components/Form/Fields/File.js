@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { withState } from 'recompose';
 import uuid from 'uuid';
 import cx from 'classnames';
+import Button from '@codaco/ui/lib/components/Button';
+import Icon from '@codaco/ui/lib/components/Icon';
 import AssetBrowserWindow from '../../AssetBrowser/AssetBrowserWindow';
-import Button from '../../../ui/components/Button';
-import Icon from '../../../ui/components/Icon';
 
 const withShowBrowser = withState(
   'showBrowser',

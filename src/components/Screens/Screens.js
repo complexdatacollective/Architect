@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
+import TimelineScreenTransition, { styles } from '@codaco/ui/lib/components/Transitions/TimelineScreen';
 import { getScreensStack } from '../../selectors/ui';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
-import TimelineScreenTransition, { styles } from '../../ui/components/Transitions/TimelineScreen';
 import { getScreenComponent } from './screenIndex';
 
 /**

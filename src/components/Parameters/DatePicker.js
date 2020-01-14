@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { formValues } from 'redux-form';
-import { DATE_FORMATS, DATE_TYPES } from '@ui/components/Fields/DatePicker';
+import { DATE_FORMATS, DATE_TYPES } from '@codaco/ui/lib/components/Fields/DatePicker';
 import DateField from '@components/Form/Fields/Date';
 import SelectField from '@components/Form/Fields/Select';
 import ValidatedField from '@components/Form/ValidatedField';

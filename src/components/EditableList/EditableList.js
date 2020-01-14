@@ -6,9 +6,9 @@ import {
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
+import { Button } from '@codaco/ui';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import OrderedList from '../OrderedList';
-import { Button } from '../../ui/';
 import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Section from '../sections/Section'; // Should this exist out of sections if it's used here?

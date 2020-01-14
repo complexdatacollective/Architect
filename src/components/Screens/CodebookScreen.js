@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@ui/components';
+import { Button } from '@codaco/ui/lib/components';
 import Codebook from '@components/Codebook/Codebook';
 import Screen from '@components/Screen/Screen';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Modal from '@ui/components/Modal';
-import Button from '@ui/components/Button';
+import Modal from '@codaco/ui/lib/components/Modal';
+import Button from '@codaco/ui/lib/components/Button';
 import EditAlterRule from './EditAlterRule';
 import EditEdgeRule from './EditEdgeRule';
 import EditEgoRule from './EditEgoRule';

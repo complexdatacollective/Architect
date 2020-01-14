@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import uuid from 'uuid';
-import Icon from '@ui/components/Icon';
+import { Icon } from '@codaco/ui';
 
 const dashIndex = [4, 7];
 

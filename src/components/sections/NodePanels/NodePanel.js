@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import * as Fields from '@ui/components/Fields';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import DataSource from '@components/Form/Fields/DataSource';
 import { Filter, withFieldConnector, withStoreConnector, ruleValidator } from '@components/Query';
 import ValidatedField from '@components/Form/ValidatedField';

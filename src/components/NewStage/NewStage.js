@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import Guided from '../Guided';
 import Navigation from './Navigation';
 import interfaceOptions from './interfaceOptions';
 import InterfaceCategory from './InterfaceCategory';
 import withCreateNewStage from './withCreateNewStage';
-import windowRootProvider from '../../ui/components/windowRootProvider';
 
 const categories = interfaceOptions.map(({ category }) => category);
 

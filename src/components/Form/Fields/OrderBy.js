@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { map, isArray, toPairs } from 'lodash';
-import { Icon } from '../../../ui/components';
+import { Icon } from '@codaco/ui';
 import Select from './Select';
 
 const NON_SORTABLE_TYPES = ['layout'];

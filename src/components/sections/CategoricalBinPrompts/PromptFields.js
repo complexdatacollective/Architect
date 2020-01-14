@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { Text } from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
-import { Text } from '../../../ui/components/Fields';
 import MultiSelect from '../../Form/MultiSelect';
 import Row from '../Row';
 import Section from '../Section';

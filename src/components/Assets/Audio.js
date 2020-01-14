@@ -1,29 +1,20 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-import Icon from '../../ui/components/Icon';
-import withAssetMeta from './withAssetMeta';
+import withAssetUrl from './withAssetUrl';
 
-const Audio = ({ id, meta }) => (
-  <div className={cx('assets assets-audio', { 'assets-audio--existing': id === 'existing' })}>
-    <div className="assets-audio__icon"><Icon name="menu-custom-interface" /></div>
-    <div className="assets-audio__label">
-      {meta.name}
-    </div>
-  </div>
-);
+const Audio = ({ url, description, dispatch, ...props }) =>
+  <audio src={url} {...props}>{description}</audio>;
 
 Audio.propTypes = {
-  id: PropTypes.string.isRequired,
-  meta: PropTypes.object,
+  description: PropTypes.string,
+  url: PropTypes.string.isRequired,
 };
 
 Audio.defaultProps = {
-  meta: {
-    name: '',
-  },
+  description: '',
 };
 
 export { Audio };
 
-export default withAssetMeta(Audio);
+export default withAssetUrl(Audio);

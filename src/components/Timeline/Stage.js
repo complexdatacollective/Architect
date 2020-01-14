@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
 import cx from 'classnames';
+import { getCSSVariableAsString } from '@codaco/ui/lib/utils/CSSVariables';
 import { Zoom } from '../../behaviours';
-import { getCSSVariableAsString } from '../../ui/utils/CSSVariables';
 import timelineImages from '../../images/timeline';
 
 const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { range } from 'lodash';
 import { fieldPropTypes } from 'redux-form';
-import Icon from '../../../ui/components/Icon';
+import Icon from '@codaco/ui/lib/components/Icon';
 
 const asColorOption = name => ({
   label: name,

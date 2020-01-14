@@ -5,7 +5,7 @@ import { compose, withProps, withHandlers } from 'recompose';
 import {
   isInvalid as isFormInvalid,
 } from 'redux-form';
-import { Button } from '../../ui/components';
+import { Button } from '@codaco/ui';
 import { actionCreators as previewActions } from '../../ducks/modules/preview';
 import EditorScreen from '../Screen/EditorScreen';
 import StageEditor, { formName } from '../StageEditor';

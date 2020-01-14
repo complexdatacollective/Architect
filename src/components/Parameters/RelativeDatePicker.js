@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { range } from 'lodash';
-import { DATE_FORMATS } from '@ui/components/Fields/DatePicker';
+import { DATE_FORMATS } from '@codaco/ui/lib/components/Fields/DatePicker';
+import LikertScale from '@codaco/ui/lib/components/Fields/LikertScale';
 import DateField from '@components/Form/Fields/Date';
-import LikertScale from '@ui/components/Fields/LikertScale';
 import ValidatedField from '@components/Form/ValidatedField';
 
 const monthRange = range(1, 25).map(v => ({ label: v, value: v }));

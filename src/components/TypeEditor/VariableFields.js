@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { formValueSelector, autofill } from 'redux-form';
 import { connect } from 'react-redux';
-import * as Fields from '@ui/components/Fields';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { VARIABLE_TYPES, VARIABLE_TYPES_WITH_OPTIONS } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import safeName from '@app/utils/safeName';

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import ReactSelect from 'react-select';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Icon from '../../../ui/components/Icon';
+import Icon from '@codaco/ui/lib/components/Icon';
 import DefaultSelectOption from './DefaultSelectOption';
 
 const getValue = (options, value) => {

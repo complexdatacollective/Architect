@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormSection } from 'redux-form';
+import TextArea from '@codaco/ui/lib/components/Fields/TextArea';
+import TextField from '@codaco/ui/lib/components/Fields/Text';
 import { ValidatedField } from '../Form';
-import TextArea from '../../ui/components/Fields/TextArea';
-import TextField from '../../ui/components/Fields/Text';
 import Section from './Section';
 import Row from './Row';
 import IssueAnchor from '../IssueAnchor';

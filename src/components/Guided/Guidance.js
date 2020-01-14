@@ -2,8 +2,8 @@ import React from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Icon } from '../../ui/components';
-import { getCSSVariableAsNumber } from '../../ui/utils/CSSVariables';
+import { Icon } from '@codaco/ui/lib/components';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 
 const Guidance = ({
   handleClickToggle,

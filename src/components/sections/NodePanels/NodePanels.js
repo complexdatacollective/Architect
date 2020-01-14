@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { formValueSelector, FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import { has } from 'lodash';
-import { Button } from '../../../ui/';
+import { Button } from '@codaco/ui';
 import OrderedList from '../../OrderedList';
 import { getFieldId } from '../../../utils/issues';
 import Section from '../Section';

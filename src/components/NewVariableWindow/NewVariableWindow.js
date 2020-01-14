@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import * as Fields from '@ui/components/Fields';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { isVariableTypeWithOptions, VARIABLE_OPTIONS } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import { required, uniqueByList } from '@app/utils/validations';

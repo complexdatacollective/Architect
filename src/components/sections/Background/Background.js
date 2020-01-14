@@ -4,8 +4,8 @@ import {
 } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '../../../utils/issues';
-import * as Fields from '../../../ui/components/Fields';
 import DetachedField from '../../DetachedField';
 import ValidatedField from '../../Form/ValidatedField';
 import * as ArchitectFields from '../../Form/Fields';

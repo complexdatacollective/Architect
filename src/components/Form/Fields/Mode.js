@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { asOptionObject, getValue } from '../../../ui/components/Fields/utils/options';
+import { asOptionObject, getValue } from '@codaco/ui/lib/components/Fields/utils/options';
 
 class Mode extends PureComponent {
   static propTypes = {

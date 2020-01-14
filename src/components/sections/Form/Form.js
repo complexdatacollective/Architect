@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import TextField from '@ui/components/Fields/Text';
+import TextField from '@codaco/ui/lib/components/Fields/Text';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import EditableList from '@components/EditableList';

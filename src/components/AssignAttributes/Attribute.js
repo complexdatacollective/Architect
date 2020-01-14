@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import Icon from '@ui/components/Icon';
-import * as Fields from '@ui/components/Fields';
+import Icon from '@codaco/ui/lib/components/Icon';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getComponentsForType } from '@app/config/variables';
 import ValidatedField from '@components/Form/ValidatedField';
 import Select from '@components/Form/Fields/Select';

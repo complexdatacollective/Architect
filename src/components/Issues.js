@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { map, isEmpty } from 'lodash';
-import { Icon } from '../ui/components';
+import { Icon } from '@codaco/ui';
 import { flattenIssues, getFieldId } from '../utils/issues';
 import scrollTo from '../utils/scrollTo';
 

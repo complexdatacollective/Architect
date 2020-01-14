@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { compose, defaultProps, withProps, withHandlers } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { FieldArray, formValueSelector, change } from 'redux-form';
-import { Icon, Button } from '../../ui/components';
+import { Icon, Button } from '@codaco/ui';
 import Select from './Fields/Select';
 import ValidatedField from '../Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
