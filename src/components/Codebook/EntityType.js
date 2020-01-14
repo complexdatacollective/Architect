@@ -7,7 +7,7 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
-import { Button } from '@ui/components';
+import { Button } from '@codaco/ui/lib/components';
 import Variables from './Variables';
 import Tag from './Tag';
 import EntityIcon from './EntityIcon';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { keys as getKeys, toPairs, isNull } from 'lodash';
 import { Field } from 'redux-form';
-import { Button } from '../../ui/components';
+import { Button } from '@codaco/ui/lib/components';
 import FieldError from '../Form/FieldError';
 import Validation from './Validation';
 

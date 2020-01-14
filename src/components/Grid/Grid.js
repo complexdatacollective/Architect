@@ -3,7 +3,7 @@ import { throttle } from 'lodash';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import GridLayout from 'react-grid-layout';
-import Icon from '../../ui/components/Icon';
+import Icon from '@codaco/ui/lib/components/Icon';
 import GridItem from './GridItem';
 import withItems from './withItems';
 import {

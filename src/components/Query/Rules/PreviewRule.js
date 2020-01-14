@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
-import { Icon } from '@ui/components';
+import { Icon } from '@codaco/ui/lib/components';
 import RuleText, { Join } from './PreviewText';
 import withDisplayOptions from './withDisplayOptions';
 

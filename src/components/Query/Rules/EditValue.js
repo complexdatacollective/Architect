@@ -4,7 +4,7 @@ import React from 'react';
 import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import DetachedField from '@components/DetachedField';
-import { Text, Toggle, Number, RadioGroup } from '@ui/components/Fields';
+import { Text, Toggle, Number, RadioGroup } from '@codaco/ui/lib/components/Fields';
 
 const INPUT_TYPES = {
   string: Text,

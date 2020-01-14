@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
-import Checkbox from '../../ui/components/Fields/Checkbox';
+import Checkbox from '@codaco/ui/lib/components/Fields/Checkbox';
 import { getFieldId } from '../../utils/issues';
 import withSubject from '../enhancers/withSubject';
 import withDisabledSubjectRequired from '../enhancers/withDisabledSubjectRequired';

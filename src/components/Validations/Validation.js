@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from '../../ui/components';
+import { Icon } from '@codaco/ui';
+import Number from '@codaco/ui/lib/components/Fields/Number';
 import Select from '../Form/Fields/Select';
-import Number from '../../ui/components/Fields/Number';
 import { isValidationWithValue } from './options';
 
 const Validation = ({

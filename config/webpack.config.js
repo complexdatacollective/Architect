@@ -263,7 +263,6 @@ module.exports = {
       concaveman: path.join(paths.appSrc, 'utils', 'webShims', 'concavemock.js'),
       '@app': paths.appSrc,
       '@components': path.join(paths.appSrc, 'components'),
-      '@ui': path.join(paths.appSrc, 'ui'),
       '@selectors': path.join(paths.appSrc, 'selectors'),
       '@modules': path.join(paths.appSrc, 'ducks', 'modules'),
     },

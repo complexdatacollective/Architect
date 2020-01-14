@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
+import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
+import TextArea from '@codaco/ui/lib/components/Fields/TextArea';
 import { getFieldId } from '../../../utils/issues';
-import RadioGroup from '../../../ui/components/Fields/RadioGroup';
-import TextArea from '../../../ui/components/Fields/TextArea';
 import ValidatedField from '../../Form/ValidatedField';
 import { Image, Audio, Video } from '../../Form/Fields';
 import Row from '../Row';

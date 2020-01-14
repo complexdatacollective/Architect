@@ -2,7 +2,7 @@ import React from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Fade from '../ui/components/Transitions/Fade';
+import Fade from '@codaco/ui/lib/components/Transitions/Fade';
 
 const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
   const buttonLayout = [

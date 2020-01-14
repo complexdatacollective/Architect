@@ -3,7 +3,7 @@ import { createFilter } from 'react-select';
 import Creatable from 'react-select/creatable';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Icon from '../../../ui/components/Icon';
+import Icon from '@codaco/ui/lib/components/Icon';
 import DefaultSelectOption from './DefaultSelectOption';
 
 /**

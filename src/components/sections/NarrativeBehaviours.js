@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormSection } from 'redux-form';
-import * as Fields from '../../ui/components/Fields';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '../../utils/issues';
 import { ValidatedField } from '../Form';
 import Section from './Section';

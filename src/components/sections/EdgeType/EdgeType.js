@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import cx from 'classnames';
-import Button from '../../../ui/components/Button';
+import Button from '@codaco/ui/lib/components/Button';
 import { getFieldId } from '../../../utils/issues';
 import EdgeSelect from '../../Form/Fields/EdgeSelect';
 import ValidatedField from '../../Form/ValidatedField';

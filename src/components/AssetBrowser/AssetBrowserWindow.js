@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import window from '../../ui/components/window';
-import Button from '../../ui/components/Button';
-import SimpleDialog from '../../ui/components/Dialog/Simple';
+import window from '@codaco/ui/lib/components/window';
+import Button from '@codaco/ui/lib/components/Button';
+import SimpleDialog from '@codaco/ui/lib/components/Dialog/Simple';
 import Stackable from '../../components/Stackable';
 import AssetBrowser from './AssetBrowser';
 

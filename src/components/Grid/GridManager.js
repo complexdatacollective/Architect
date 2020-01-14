@@ -6,8 +6,8 @@ import {
 } from 'recompose';
 import { Flipper } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
+import { Button } from '@codaco/ui/lib/components';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
-import { Button } from '../../ui/components';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
 import Section from '../sections/Section'; // Should this exist out of sections if it's used here?
 import Window from '../Window';

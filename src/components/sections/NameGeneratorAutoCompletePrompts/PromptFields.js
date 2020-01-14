@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
-import * as Fields from '../../../ui/components/Fields';
 import AssignAttributes from '../../AssignAttributes';
 import Row from '../Row';
 import Section from '../Section';

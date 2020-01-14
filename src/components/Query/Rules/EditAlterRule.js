@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import DetachedField from '@components/DetachedField';
 import NodeSelect from '@components/Form/Fields/NodeSelect';
 import Select from '@components/Form/Fields/Select';
-import RadioGroup from '@ui/components/Fields/RadioGroup';
+import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import EditValue from './EditValue';
 import { operatorsWithValue } from './options';
 import withRuleChangeHandler from './withRuleChangeHandler';

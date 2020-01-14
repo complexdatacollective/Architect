@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '../../utils/issues';
-import * as Fields from '../../ui/components/Fields';
 import { required, uniqueByList } from '../../utils/validations';
 import ValidatedField from '../Form/ValidatedField';
 import Select from '../Form/Fields/Select';

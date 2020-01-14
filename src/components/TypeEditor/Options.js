@@ -6,8 +6,8 @@ import { compose, defaultProps, withProps } from 'recompose';
 import { toNumber } from 'lodash';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { Field, FieldArray } from 'redux-form';
-import { Icon, Button } from '../../ui/components';
-import * as Fields from '../../ui/components/Fields';
+import { Icon, Button } from '@codaco/ui';
+import * as Fields from '@codaco/ui/lib/components/Fields';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
 const isNumberLike = value =>

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import Text from '@codaco/ui/lib/components/Fields/Text';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
-import Text from '../../../ui/components/Fields/Text';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ColorPicker from '../../Form/Fields/ColorPicker';
 import MultiSelect from '../../Form/MultiSelect';

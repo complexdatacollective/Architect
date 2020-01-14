@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { Button, Icon } from '@codaco/ui';
 import { getProtocol } from '@selectors/protocol';
-import { Button, Icon } from '@ui/components';
 import { actionCreators as protocolsActions } from '@modules/protocols';
 import ControlBar from './ControlBar';
 

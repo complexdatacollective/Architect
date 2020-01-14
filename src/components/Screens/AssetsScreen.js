@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../ui/components/Button';
+import Button from '@codaco/ui/lib/components/Button';
 import { Guided } from '../Guided';
 import Guidance from '../Guidance';
 import Screen from '../Screen/Screen';

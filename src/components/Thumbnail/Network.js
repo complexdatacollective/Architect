@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Icon from '@ui/components/Icon';
+import Icon from '@codaco/ui/lib/components/Icon';
 import withAssetMeta from '@components/Assets/withAssetMeta';
 
 const NetworkThumbnail = ({ id, meta }) => (
