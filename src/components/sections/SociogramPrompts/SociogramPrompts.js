@@ -6,6 +6,7 @@ import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequ
 import withFormUsedVariableIndex from './withFormUsedVariableIndex';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
+import Tip from '../../Tip';
 
 const template = () => ({ sortOrder: [] });
 
@@ -19,6 +20,9 @@ const SociogramPrompts = props => (
   >
     <h2>Prompts</h2>
     <p>Add prompts to your Sociogram:</p>
+    <Tip>
+      <p>Tap an existing prompt to edit it.</p>
+    </Tip>
   </EditableList>
 );
 

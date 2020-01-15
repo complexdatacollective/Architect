@@ -10,7 +10,7 @@ import ValidatedField from '../../Form/ValidatedField';
 import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
-import withDisplayVariableOptions from './withDisplayVariableOptions';
+import withSubjectVariables from './withSubjectHasNameVariable';
 import Section from '../Section';
 import Row from '../Row';
 import Tip from '../../Tip';
@@ -23,6 +23,8 @@ class NodeType extends Component {
     handleResetStage: PropTypes.func.isRequired,
     handleOpenCreateNewType: PropTypes.func.isRequired,
     handleTypeScreenMessage: PropTypes.func.isRequired,
+    subjectHasVariableCalledName: PropTypes.bool.isRequired,
+    type: PropTypes.string,
   };
 
   static defaultProps = {
@@ -30,6 +32,7 @@ class NodeType extends Component {
     disabled: false,
     displayVariable: null,
     typeScreenMessage: null,
+    type: null,
   };
 
   componentDidUpdate() {
@@ -42,6 +45,8 @@ class NodeType extends Component {
       disabled,
       handleResetStage,
       handleOpenCreateNewType,
+      subjectHasVariableCalledName,
+      type,
     } = this.props;
 
     const nodeTypeClasses = cx('stage-editor-section', 'stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
@@ -80,7 +85,7 @@ class NodeType extends Component {
               >
                 Create new node type
               </Button>
-              { nodeTypes.length !== 0 &&
+              { nodeTypes.length !== 0 && type && !subjectHasVariableCalledName &&
               <Tip type="warning">
                 <p>
                   Ensure you create and assign a variable called &quot;name&quot; for this
@@ -101,7 +106,7 @@ export { NodeType };
 
 export default compose(
   withNodeTypeOptions,
-  withDisplayVariableOptions,
+  withSubjectVariables,
   withDisableAndReset,
   withCreateNewType,
 )(NodeType);

@@ -10,6 +10,7 @@ import Section from '../Section';
 import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
 import withHighlightOptions from './withHighlightOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
+import Tip from '../../Tip';
 
 const HighlightFields = ({
   allowHighlighting,
@@ -32,13 +33,13 @@ const HighlightFields = ({
         The sociogram can be configured to allow the participant to toggle
         a node variable to true or false by tapping it.
       </p>
-      <p>
-        <strong>
-        Important: you cannot use this setting at the same time
-        as the &quot;Create edges&quot; option above. Enabling this setting will
-        disable that option.
-        </strong>
-      </p>
+      <Tip>
+        <p>
+          You cannot use this setting at the same time
+          as the &quot;Create edges&quot; option above. Enabling this setting will
+          disable that option.
+        </p>
+      </Tip>
       <Field
         component={Fields.Toggle}
         name="highlight.allowHighlighting"

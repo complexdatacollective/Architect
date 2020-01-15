@@ -11,6 +11,7 @@ import withEdgesOptions from './withEdgesOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
 import withCreateEdgeHandlers from '../../enhancers/withCreateEdgeHandler';
 import { ValidatedField } from '../../Form';
+import Tip from '../../Tip';
 
 const EdgeFields = ({
   edgesForSubject,
@@ -42,13 +43,13 @@ const EdgeFields = ({
           The sociogram can be configured to allow the participant to create edges by
           consecutively tapping nodes.
         </p>
-        <p>
-          <strong>
-          Important: you cannot use this setting at the same time
-          as the &quot;Variable toggling&quot; option below. Enabling this setting will
-          disable that option.
-          </strong>
-        </p>
+        <Tip>
+          <p>
+            You cannot use this setting at the same time
+            as the &quot;Variable toggling&quot; option below. Enabling this setting will
+            disable that option.
+          </p>
+        </Tip>
         <DetachedField
           component={Fields.Toggle}
           value={canCreateEdge}
