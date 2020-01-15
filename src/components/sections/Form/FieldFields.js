@@ -61,7 +61,7 @@ const PromptFields = ({
     </Row>
     <Row contentId="guidance.section.form.field.prompt">
       <h3 id={getFieldId('prompt')}>Question prompt</h3>
-      <p>Enter question for the particpant. e.g. What is this person&apos;s name?</p>
+      <p>Enter question for the participant. e.g. What is this person&apos;s name?</p>
       <ValidatedField
         name="prompt"
         component={Fields.Text}

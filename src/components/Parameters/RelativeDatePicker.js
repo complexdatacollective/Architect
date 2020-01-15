@@ -2,50 +2,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { range } from 'lodash';
 import { DATE_FORMATS } from '@codaco/ui/lib/components/Fields/DatePicker';
-import LikertScale from '@codaco/ui/lib/components/Fields/LikertScale';
+import Number from '@codaco/ui/lib/components/Fields/Number';
 import DateField from '@components/Form/Fields/Date';
 import ValidatedField from '@components/Form/ValidatedField';
-
-const monthRange = range(1, 25).map(v => ({ label: v, value: v }));
 
 const RelativeDatePickerParameters = ({ name }) => {
   const dateFormat = DATE_FORMATS.full;
   return (
     <React.Fragment>
+      <p>This input type has three options for you to set.</p>
+      <h4>Anchor Date</h4>
       <p>
-        If an <strong>Anchor date</strong> is not supplied the field will anchor
-        to the date at the <strong>time of interview</strong>.
-      </p>
-      <p>
-        <strong>Days before</strong> is the number of days prior to the anchor
-        date that can be selected from.
-        Defaults to <strong>180 days</strong> if left blank.
-      </p>
-      <p>
-        <strong>Days after</strong> is the number of days after the anchor
-        date that can be selected from.
-        Defaults to <strong>0 days</strong> if left blank.
+        The anchor date defines the point that the participant selects a date relative to.
+        If an anchor date is not supplied, the interview data will be used.
       </p>
       <ValidatedField
-        label="Anchor date"
+        label=""
         component={DateField}
         name={`${name}.min`}
         validation={{ ISODate: dateFormat }}
         dateFormat={dateFormat}
       />
+      <h4>Days Before</h4>
+      <p>
+        Days before is the number of days prior to the anchor
+        date that can be selected from.
+        Defaults to 180 days if left blank.
+      </p>
       <ValidatedField
-        label="Days before"
-        component={LikertScale}
+        label=""
+        component={Number}
         name={`${name}.before`}
-        type="ordinal"
-        options={monthRange}
       />
+      <h4>Days After</h4>
+      <p>
+        Days after is the number of days after the anchor
+        date that can be selected from.
+        Defaults to 0 days if left blank.
+      </p>
       <ValidatedField
-        label="Days after"
-        component={LikertScale}
+        label=""
+        component={Number}
         name={`${name}.after`}
-        type="ordinal"
-        options={monthRange}
       />
     </React.Fragment>
   );
