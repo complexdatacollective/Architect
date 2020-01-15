@@ -119,7 +119,7 @@ class TextInput extends PureComponent {
             onKeyDown={filterInput(input.value)}
             onChange={handleChange}
           />
-          <div className="form-field-text__error"><Icon name="warning" />{error}</div>
+          {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div> }
         </div>
 
       </div>

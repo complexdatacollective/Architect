@@ -20,4 +20,5 @@ yarn.lock
 
 *.zip
 *.pbxproj
+.vscode
 Icon^M^M
