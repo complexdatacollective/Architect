@@ -15,6 +15,7 @@ import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandle
 import Row from '../Row';
 import Section from '../Section';
 import withFieldsHandlers from './withFieldsHandlers';
+import Tip from '../../Tip';
 
 const PromptFields = ({
   form,
@@ -34,12 +35,14 @@ const PromptFields = ({
       <p>
         Create a variable below, or choose from existing variables in the drop-down list.
       </p>
-      <p>
-        <strong>
-        Tip: When selecting an existing variable, changes you make to the input control or
-        validation options will also change other uses of this variable.
-        </strong>
-      </p>
+      { !isNewVariable &&
+        <Tip>
+          <p>
+            When selecting an existing variable, changes you make to the input control or
+            validation options will also change other uses of this variable.
+          </p>
+        </Tip>
+      }
       <ValidatedField
         name="variable"
         component={CreatableSelect}
@@ -80,19 +83,23 @@ const PromptFields = ({
           onChange={handleChangeComponent}
         />
         { isNewVariable && variableType &&
-          <p><em>
-            The selected input component creates a <strong>{variableType}</strong> variable.
-          </em></p>
+          <Tip>
+            <p>
+              The selected input component creates a <strong>{variableType}</strong> variable.
+            </p>
+          </Tip>
         }
         { !isNewVariable && variableType &&
-          <div>
-            <p><em>
-              An existing <strong>{variableType}</strong> variable is selected.
-              Only <strong>{variableType}</strong> compatible components can be selected.
-              If you would like to use a different component type, you will need to
-              create a new variable.
-            </em></p>
-          </div>
+          <Tip type="warning">
+            <div>
+              <p>
+                A pre-existing variable is currently selected. You cannot change a variable&quot;s
+                type after it has been created, so only <strong>{variableType}</strong> compatible
+                input components can be selected above. If you would like to use a different
+                component type, you will need to create a new variable.
+              </p>
+            </div>
+          </Tip>
         }
 
       </Row>
@@ -114,7 +121,7 @@ const PromptFields = ({
     }
     { isVariableTypeWithParameters(variableType) &&
       <Row contentId="guidance.section.form.field.Parameters">
-        <h3 id={getFieldId('parameters')}>Field parameters</h3>
+        <h3 id={getFieldId('parameters')}>Input Options</h3>
         <Parameters
           type={variableType}
           component={component}

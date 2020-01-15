@@ -13,6 +13,7 @@ import withNodeTypeOptions from './withNodeTypeOptions';
 import withDisplayVariableOptions from './withDisplayVariableOptions';
 import Section from '../Section';
 import Row from '../Row';
+import Tip from '../../Tip';
 
 class NodeType extends Component {
   static propTypes = {
@@ -80,13 +81,13 @@ class NodeType extends Component {
                 Create new node type
               </Button>
               { nodeTypes.length !== 0 &&
-              <div>
-                <h4>
-                  Tip: ensure you create and assign a variable called &quot;name&quot; for this
+              <Tip type="warning">
+                <p>
+                  Ensure you create and assign a variable called &quot;name&quot; for this
                   node type, unless you have a good reason not to. Network Canvas will then
                   automatically use this variable as the label for the node in the interview.
-                </h4>
-              </div>
+                </p>
+              </Tip>
               }
             </div>
           </div>

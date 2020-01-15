@@ -15,24 +15,24 @@ const DateTimeParameters = ({ name, type }) => {
   const dateFormat = type ? DATE_FORMATS[type] : DATE_FORMATS.full;
   return (
     <React.Fragment>
+      <p>This input type has three options for you to set.</p>
+      <h4>Date Type</h4>
       <p>
         You can select a <strong>Date Type</strong> if you would like to only select a partial
         date, e.g. year only. Defaults to <strong>full year</strong> (1970-01-01) if left blank.
       </p>
-      <p>
-        If a <strong>Start Range</strong> date is not supplied, the input range will default
-        to starting at <strong>{'1970-01-01'.slice(0, dateFormat.length)}</strong>.
-      </p>
-      <p>
-        If an <strong>End Range</strong> date is not supplied, the input range will default
-        to ending at the <strong>current date</strong>.
-      </p>
       <ValidatedField
-        label="Date Type"
+        label=""
         component={SelectField}
         name={`${name}.type`}
         options={dateTypes}
       />
+
+      <h4>Start Range</h4>
+      <p>
+        If a <strong>Start Range</strong> date is not supplied, the input range will default
+        to starting at <strong>{'1970-01-01'.slice(0, dateFormat.length)}</strong>.
+      </p>
       <ValidatedField
         label="Start range"
         component={DateField}
@@ -40,6 +40,12 @@ const DateTimeParameters = ({ name, type }) => {
         validation={{ ISODate: dateFormat }}
         dateFormat={dateFormat}
       />
+
+      <h4>End Range</h4>
+      <p>
+        If an <strong>End Range</strong> date is not supplied, the input range will default
+        to ending at the <strong>current date</strong>.
+      </p>
       <ValidatedField
         label="End range"
         component={DateField}

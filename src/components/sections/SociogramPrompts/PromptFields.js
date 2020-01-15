@@ -8,6 +8,7 @@ import FieldsLayout from './PromptFieldsLayout';
 import FieldsHighlight from './PromptFieldsHighlight';
 import FieldsEdges from './PromptFieldsEdges';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
+import Tip from '../../Tip';
 
 const PromptFields = props => (
   <div>
@@ -17,9 +18,11 @@ const PromptFields = props => (
         The prompt text instructs your participant about the task on this stage.
         Enter the text to use for your prompt below.
       </p>
-      <p><strong>
-        Tip: You can use markdown formatting in this prompt to create bold or underlined text.
-      </strong></p>
+      <Tip>
+        <p>
+          You can use markdown formatting in this prompt to create bold or underlined text.
+        </p>
+      </Tip>
       <ValidatedField
         name="text"
         component={Fields.Text}

@@ -16,6 +16,7 @@ import withPromptProps from '../CategoricalBinPrompts/withPromptProps';
 import withNewVariableWindowHandlers, {
   propTypes as newWindowVariablePropTypes,
 } from '../../enhancers/withNewVariableWindowHandlers';
+import Tip from '../../Tip';
 
 const PromptFields = ({
   variableOptions,
@@ -43,9 +44,11 @@ const PromptFields = ({
           The prompt text instructs your participant about the task on this stage.
           Enter the text to use for your prompt below.
         </p>
-        <p><strong>
-          Tip: You can use markdown formatting in this prompt to create bold or underlined text.
-        </strong></p>
+        <Tip>
+          <p>
+            You can use markdown formatting in this prompt to create bold or underlined text.
+          </p>
+        </Tip>
         <ValidatedField
           name="text"
           component={Text}
@@ -94,9 +97,11 @@ const PromptFields = ({
           Network Canvas will render each option in your ordinal variable using a
           color gradient. Which color would you like to use for this scale?
         </p>
-        <p><strong>Tip: Consider using a color consistently throughout your interview protocol
+        <Tip>
+          <p>Consider using a color consistently throughout your interview protocol
           to represent each theme, to help reenforce the idea to your participants.
-        </strong></p>
+          </p>
+        </Tip>
         <ValidatedField
           component={ColorPicker}
           name="color"
@@ -113,9 +118,11 @@ const PromptFields = ({
           when the task starts, which will determine the order that your participant places them
           into bins. Network Canvas will default to using the order in which nodes were named.
         </p>
-        <p><strong>
-          Tip: Use the asterisk property to sort by the order that nodes were created.
-        </strong></p>
+        <Tip>
+          <p>
+            Use the asterisk property to sort by the order that nodes were created.
+          </p>
+        </Tip>
         <MultiSelect
           name="bucketSortOrder"
           properties={[
