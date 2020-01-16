@@ -22,7 +22,6 @@ const getComponent = (options) => {
 
 const Parameters = ({ type, component, ...rest }) => {
   const ParameterComponent = getComponent({ type, component });
-  console.log('parameters', rest);
   if (!ParameterComponent) { return null; }
 
   return <ParameterComponent {...rest} />;

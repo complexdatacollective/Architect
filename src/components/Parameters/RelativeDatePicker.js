@@ -24,8 +24,8 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         input={{
           checked: !!useInterviewDate,
           value: useInterviewDate,
-          onChange: () => {
-            if (useInterviewDate) {
+          onChange: (event) => {
+            if (event.target.checked) {
               resetField();
             }
             setUseInterviewDate(!useInterviewDate);
@@ -34,6 +34,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         label="Use interview date"
         fieldLabel=" "
       />
+      { !useInterviewDate &&
       <ValidatedField
         label="Specific Anchor Date"
         component={DateField}
@@ -41,6 +42,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         validation={{ required: !useInterviewDate, ISODate: dateFormat }}
         dateFormat={dateFormat}
       />
+      }
       <h4>Days Before</h4>
       <p>
         Days before is the number of days prior to the anchor
@@ -69,6 +71,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
 
 RelativeDatePickerParameters.propTypes = {
   name: PropTypes.string.isRequired,
+  resetField: PropTypes.func.isRequired,
   anchorValue: PropTypes.string,
 };
 
