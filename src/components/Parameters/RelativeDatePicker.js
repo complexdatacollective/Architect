@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { range } from 'lodash';
 import { DATE_FORMATS } from '@codaco/ui/lib/components/Fields/DatePicker';
 import Number from '@codaco/ui/lib/components/Fields/Number';
 import DateField from '@components/Form/Fields/Date';
