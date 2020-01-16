@@ -128,6 +128,7 @@ const PromptFields = ({
           type={variableType}
           component={component}
           name="parameters"
+          form={form}
         />
       </Row>
     }

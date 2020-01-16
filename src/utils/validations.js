@@ -30,9 +30,14 @@ const isRoughlyEqual = (left, right) => {
   return isEqual(left, right);
 };
 
-export const required = () =>
-  value =>
-    (hasValue(value) ? undefined : 'Required');
+export const required = isRequired =>
+  (value) => {
+    if (!isRequired) {
+      return undefined;
+    }
+
+    return (hasValue(value) ? undefined : 'Required');
+  };
 
 export const requiredAcceptsZero = () =>
   value =>
