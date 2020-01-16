@@ -18,7 +18,7 @@ const RelativeDatePickerParameters = ({ name }) => {
       <ValidatedField
         label=""
         component={DateField}
-        name={`${name}.min`}
+        name={`${name}.anchor`}
         validation={{ ISODate: dateFormat }}
         dateFormat={dateFormat}
       />
