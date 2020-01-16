@@ -1,5 +1,31 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import uuid from 'uuid';
+
+// Example Usage
+// const MyComponent = ({ showWindow }) => {
+//   useStack(({ index, stackKey }) => (
+//     <WindowLikeComponent
+//       index={index}
+//       key={stackKey}
+//       show={showWindow}
+//     />
+//   ), [showWindow]); // any properties that require re-render
+//   return (
+//     <div>
+//       This can be unrelated content
+//     </div>
+//   );
+// };
+// const ParentComponent = ({ showWindow }) => {
+//   return (
+//     <div>
+//       <StackProvider>
+//         <Stacks /> {/* WindowLikeComponent is rendered here */}
+//         <MyComponent />
+//       </StackProvider>
+//     </div>
+//   );
+// };
 
 const initialState = { items: [], setItems: () => {} };
 
@@ -20,67 +46,38 @@ const StackProvider = ({ children }) => {
   );
 };
 
-// example usage in component
-// const MyComponent = ({ setValue }) => {
-//   const handleUpdate = (value) => {
-//     setValue(value);
-//   };
-
-//   const [updateWindow] = useStackable(MyWindowComponent, { handleUpdate, open: false });
-
-//   const handleClickThing = () => {
-//     updateWindow({ open: true });
-//   };
-
-//   return (
-//     <div>
-
-//     </div>
-//   );
-// };
-const useStack = (Component, props = {}, Context = StackContext) => {
+const useStack = (component, watchProps = [], Context = StackContext) => {
   const [itemId] = useState(() => uuid());
   const { items, setItems } = useContext(Context);
+  const componentRef = useRef(component);
+
   const itemIndex = items.findIndex(([id]) => id === itemId);
 
-  const update = (newProps = {}, merge = true) => {
-    const [,, prevProps] = items[itemIndex];
-    const updatedProps = merge ?
-      { ...prevProps, ...newProps } :
-      newProps;
-    const newEntry = [itemId, Component, updatedProps];
-
-    const newItems = [
-      ...items.slice(0, itemIndex - 1),
-      newEntry,
-      ...items.slice(itemIndex + 1),
-    ];
-
-    setItems(newItems);
-  };
+  useEffect(() => {
+    componentRef.current = component;
+  }, [component]);
 
   useEffect(() => {
-    const newEntry = [itemId, Component, props];
+    const newEntry = [itemId, componentRef];
 
-    const newItems = itemIndex !== -1 ?
-      [
-        ...items.slice(0, itemIndex - 1),
-        newEntry,
-        ...items.slice(itemIndex + 1),
-      ] :
-      [
-        ...items,
-        newEntry,
-      ];
-
-    setItems(newItems);
+    setItems(_items => ([
+      ..._items,
+      newEntry,
+    ]));
 
     return () => {
-      setItems(items.filter(([id]) => id === itemId));
+      setItems(_items => _items.filter(([id]) => id === itemId));
     };
   }, [itemId]);
 
-  return [update];
+  useEffect(() => {
+    if (itemIndex === -1) { return; }
+
+    setItems(_items => [
+      ..._items.filter(([id]) => id !== itemId),
+      [itemId, componentRef],
+    ]);
+  }, [itemIndex, ...watchProps]);
 };
 
 const Stack = ({ context }) => {
@@ -89,9 +86,8 @@ const Stack = ({ context }) => {
   if (!items) { return null; }
 
   return items.map(
-    ([id, Component, props], index) => (
-      <Component {...props} key={id} index={index} />
-    ),
+    ([id, componentRef], index) =>
+      componentRef.current({ key: id, index }),
   );
 };
 

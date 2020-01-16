@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
@@ -7,13 +7,12 @@ import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
 import CreatableSelect from '@components/Form/Fields/CreatableSelect';
 import MultiSelect from '@components/Form/MultiSelect';
-import NewVariableWindow from '@components/NewVariableWindow';
 import Options from '@components/Options';
 import Row from '@components/sections/Row';
 import Section from '@components/sections/Section';
 import Tip from '@components/Tip';
 import withNewVariableWindowHandlers from '@components/enhancers/withNewVariableWindowHandlers';
-import { useStack } from '@components/Stack';
+import useNewVariableWindow from './useNewVariableWindow';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
 import withNewVariableHandlers from './withNewVariableHandlers';
@@ -31,8 +30,6 @@ const PromptFields = ({
   variableOptions,
   form,
   changeForm,
-  handleCreateNewVariableForVariable,
-  handleCreateNewVariableForOtherVariable,
   handleDeleteVariableForVariable,
   handleDeleteVariableForOtherVarible,
   normalizeKeyDown,
@@ -42,43 +39,14 @@ const PromptFields = ({
 }) => {
   const [otherVariableToggle, clickToggleOtherVariable] = useToggle(false);
 
-  const [newVariable, setNewVariable] = useState({ type: null, name: null });
+  const [setOtherVariableName] = useNewVariableWindow({ entity, type }, 'text', id => changeForm(form, 'otherVariable', id));
+  const [setVariableName] = useNewVariableWindow({ entity, type }, 'categorical', id => changeForm(form, 'variable', id));
 
-  const closeWindow = () => {
-    setNewVariable({ type: null, name: null });
-  };
+  const handleEditNewCategoricalVariable = name =>
+    setVariableName(name);
 
-  const handleCreateNewVariable = (variableId) => {
-    const field = newVariable.type === 'categorical' ? 'variable' : 'otherVariable';
-    changeForm(form, field, variableId);
-    closeWindow();
-  };
-
-  const [updateNewVariableWindow] = useStack(
-    NewVariableWindow, {
-      initialValues: {},
-      show: false,
-      entity,
-      type,
-      onComplete: handleCreateNewVariable,
-      onCancel: closeWindow,
-    },
-  );
-
-  useEffect(() => {
-    // updateNewVariableWindow({
-    //   initialValues: newVariable,
-    //   show: !newVariable.name,
-    // });
-  }, [newVariable.type, newVariable.name]);
-
-  const handleEditNewCategoricalVariable = (name) => {
-    setNewVariable({ type: 'categorical', name });
-  };
-
-  const handleEditNewTextVariable = (name) => {
-    setNewVariable({ type: 'text', name });
-  };
+  const handleEditNewTextVariable = name =>
+    setOtherVariableName(name);
 
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
