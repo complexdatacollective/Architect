@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { formValues } from 'redux-form';
+import { formValues, Field } from 'redux-form';
 import { DATE_FORMATS, DATE_TYPES } from '@codaco/ui/lib/components/Fields/DatePicker';
 import SelectField from '@components/Form/Fields/Select';
-import ValidatedField from '@components/Form/ValidatedField';
-import DateField from '@components/Form/Fields/Date';
+import { DatePicker } from '@codaco/ui/lib/components/Fields';
 
 const dateTypes = DATE_TYPES.map(type => ({
   ...type,
@@ -14,6 +13,7 @@ const dateTypes = DATE_TYPES.map(type => ({
 
 const DateTimeParameters = ({ name, type }) => {
   const dateFormat = type ? DATE_FORMATS[type] : DATE_FORMATS.full;
+  const [useDateFormat, setUseDateFormat] = useState(null);
   return (
     <React.Fragment>
       <p>This input type has three options for you to set.</p>
@@ -23,11 +23,14 @@ const DateTimeParameters = ({ name, type }) => {
         will ask for a year, a month, and a day. You may optionally choose to collect only a
         year and a month, or only a year.
       </p>
-      <ValidatedField
+      <Field
         label=""
         component={SelectField}
         name={`${name}.type`}
         options={dateTypes}
+        onChange={(_, value) => {
+          setUseDateFormat(value);
+        }}
       />
       <br />
       <h4>Start Range</h4>
@@ -35,12 +38,15 @@ const DateTimeParameters = ({ name, type }) => {
         The start range is the earliest date available for the participant to select.
         If left empty, it will default to starting at {'1970-01-01'.slice(0, dateFormat.length)}.
       </p>
-      <ValidatedField
+      <Field
         label=""
-        component={DateField}
+        component={DatePicker}
         name={`${name}.min`}
-        validation={{ ISODate: dateFormat }}
-        dateFormat={dateFormat}
+        parameters={{
+          type: useDateFormat,
+          min: '1000-01-01',
+          max: '3000-12-31',
+        }}
       />
       <br />
       <h4>End Range</h4>
@@ -48,12 +54,15 @@ const DateTimeParameters = ({ name, type }) => {
         The end range is the latest date available for the participant to select.
         If it is not supplied, the input will default to ending at the current date.
       </p>
-      <ValidatedField
+      <Field
         label=""
-        component={DateField}
+        component={DatePicker}
         name={`${name}.max`}
-        validation={{ ISODate: dateFormat }}
-        dateFormat={dateFormat}
+        parameters={{
+          type: useDateFormat,
+          min: '1000-01-01',
+          max: '3000-12-31',
+        }}
       />
     </React.Fragment>
   );
