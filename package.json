@@ -72,6 +72,7 @@
         "dotenv": "4.0.0",
         "electron": "^5.0.9",
         "electron-builder": "^21.2.0",
+        "electron-devtools-installer": "^2.2.4",
         "electron-installer-dmg": "^3.0.0",
         "electron-log": "^3.0.7",
         "electron-packager": "^14.0.4",
