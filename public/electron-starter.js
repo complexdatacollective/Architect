@@ -4,6 +4,7 @@ const createAppWindow = require('./components/createAppWindow');
 const createPreviewWindow = require('./components/createPreviewWindow');
 const AppManager = require('./components/appManager');
 const PreviewManager = require('./components/previewManager');
+const loadDevTools = require('./components/loadDevTools');
 
 global.NETWORK_CANVAS_PREVIEW = true;
 
@@ -47,6 +48,7 @@ app.on('ready', () => {
   Promise.all([
     createAppWindow(),
     createPreviewWindow(),
+    loadDevTools(),
   ])
     .then(() => {
       log.info('Windows initialized');

@@ -1,4 +1,4 @@
-const { ipcMain, app, Menu, BrowserWindow } = require('electron');
+const { ipcMain, app, Menu } = require('electron');
 const log = require('./log');
 const path = require('path');
 const { openDialog, saveDialog, clearStorageDataDialog } = require('./dialogs');
@@ -28,24 +28,6 @@ class AppManager {
     ipcMain.removeAllListeners('READY');
     ipcMain.removeAllListeners('QUIT');
     ipcMain.removeAllListeners('ACTION');
-  }
-
-  static loadDevTools() {
-    const extensions = process.env.NC_DEVTOOLS_EXTENSION_PATH;
-    if (process.env.NODE_ENV !== 'development' || !extensions) { return; }
-    try {
-      log.info(extensions);
-      extensions.split(';').forEach(
-        filepath =>
-          BrowserWindow.addDevToolsExtension(filepath),
-      );
-    } catch (err) {
-      /* eslint-disable no-console */
-      log.warn(err);
-      log.warn('A Chrome dev tools extension failed to load. If the extension has upgraded, update your NC_DEVTOOLS_EXTENSION_PATH:');
-      log.warn(process.env.NC_DEVTOOLS_EXTENSION_PATH);
-      /* eslint-enable */
-    }
   }
 
   static send(...args) {
