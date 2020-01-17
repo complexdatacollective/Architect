@@ -13,7 +13,6 @@ import RecentProtocols from './RecentProtocols';
 import Overview from './Overview';
 import Timeline from './Timeline';
 import ProtocolControlBar from './ProtocolControlBar';
-import Stack, { StackProvider } from './Stack';
 import Screens from './Screens';
 import networkCanvasBrand from '../images/network-canvas-brand.svg';
 
@@ -65,10 +64,7 @@ const Scene = ({
         </div>
       </Flipper>
 
-      <StackProvider>
-        <Stack />
-        <Screens />
-      </StackProvider>
+      <Screens />
     </div>
   );
 };

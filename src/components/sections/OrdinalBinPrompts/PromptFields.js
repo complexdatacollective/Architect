@@ -2,36 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import Text from '@codaco/ui/lib/components/Fields/Text';
-import { getFieldId } from '../../../utils/issues';
-import { ValidatedField } from '../../Form';
-import CreatableSelect from '../../Form/Fields/CreatableSelect';
-import ColorPicker from '../../Form/Fields/ColorPicker';
-import MultiSelect from '../../Form/MultiSelect';
-import Section from '../Section';
-import Row from '../Row';
-import NewVariableWindow from '../../NewVariableWindow';
-import Options from '../../Options';
+import { getFieldId } from '@app/utils/issues';
+import { ValidatedField } from '@components/Form';
+import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import ColorPicker from '@components/Form/Fields/ColorPicker';
+import MultiSelect from '@components/Form/MultiSelect';
+import Section from '@components/sections/Section';
+import Row from '@components/sections/Row';
+import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
+import Options from '@components/Options';
+import Tip from '@components/Tip';
 import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
 import withVariableOptions from '../CategoricalBinPrompts/withVariableOptions';
-import withNewVariableHandlers from '../CategoricalBinPrompts/withNewVariableHandlers';
-import withNewVariableWindowHandlers, {
-  propTypes as newWindowVariablePropTypes,
-} from '../../enhancers/withNewVariableWindowHandlers';
-import Tip from '../../Tip';
+import withDeleteVariableHandler from '../CategoricalBinPrompts/withDeleteVariableHandler';
 
 const PromptFields = ({
   variableOptions,
-  handleCreateNewVariableForVariable,
   normalizeKeyDown,
-  handleDeleteVariable,
+  deleteVariable,
   entity,
+  changeForm,
+  form,
   type,
   variable,
-  openNewVariableWindow,
-  closeNewVariableWindow,
-  newVariableName,
-  showNewVariableWindow,
 }) => {
+  const newVariableWindowInitialProps = {
+    entity,
+    type,
+    initialValues: { name: null, type: null },
+  };
+
+  const handleCreatedNewVariable = (id, { field }) =>
+    changeForm(form, field, id);
+
+  const [newVariableWindowProps, openNewVariableWindow] = useNewVariableWindowState(
+    newVariableWindowInitialProps,
+    handleCreatedNewVariable,
+  );
+
+  const handleNewVariable = name =>
+    openNewVariableWindow({ initialValues: { name, type: 'ordinal' } }, { field: 'variable' });
+
+  const handleDeleteVariable = v =>
+    deleteVariable(v, 'variable');
+
   const ordinalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'ordinal');
 
@@ -69,7 +83,7 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={ordinalVariableOptions}
-          onCreateOption={openNewVariableWindow}
+          onCreateOption={handleNewVariable}
           onDeleteOption={handleDeleteVariable}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
@@ -152,17 +166,7 @@ const PromptFields = ({
       </Row>
 
 
-      <NewVariableWindow
-        initialValues={{
-          type: 'ordinal',
-          name: newVariableName,
-        }}
-        show={showNewVariableWindow}
-        entity={entity}
-        type={type}
-        onComplete={handleCreateNewVariableForVariable}
-        onCancel={closeNewVariableWindow}
-      />
+      <NewVariableWindow {...newVariableWindowProps} />
     </Section>
   );
 };
@@ -182,7 +186,6 @@ PromptFields.defaultProps = {
 export { PromptFields };
 
 export default compose(
-  withNewVariableWindowHandlers,
   withVariableOptions,
-  withNewVariableHandlers('variable'),
+  withDeleteVariableHandler,
 )(PromptFields);

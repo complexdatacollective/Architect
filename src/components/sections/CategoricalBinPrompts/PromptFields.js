@@ -11,11 +11,10 @@ import Options from '@components/Options';
 import Row from '@components/sections/Row';
 import Section from '@components/sections/Section';
 import Tip from '@components/Tip';
-import withNewVariableWindowHandlers from '@components/enhancers/withNewVariableWindowHandlers';
-import useNewVariableWindow from './useNewVariableWindow';
+import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
-import withNewVariableHandlers from './withNewVariableHandlers';
+import withDeleteVariableHandler from './withDeleteVariableHandler';
 
 const useToggle = (initialState) => {
   const [value, setValue] = useState(initialState);
@@ -30,8 +29,7 @@ const PromptFields = ({
   variableOptions,
   form,
   changeForm,
-  handleDeleteVariableForVariable,
-  handleDeleteVariableForOtherVarible,
+  deleteVariable,
   normalizeKeyDown,
   entity,
   type,
@@ -39,14 +37,25 @@ const PromptFields = ({
 }) => {
   const [otherVariableToggle, clickToggleOtherVariable] = useToggle(false);
 
-  const [setOtherVariableName] = useNewVariableWindow({ entity, type }, 'text', id => changeForm(form, 'otherVariable', id));
-  const [setVariableName] = useNewVariableWindow({ entity, type }, 'categorical', id => changeForm(form, 'variable', id));
+  const newVariableWindowInitialProps = {
+    entity,
+    type,
+    initialValues: { name: null, type: null },
+  };
 
-  const handleEditNewCategoricalVariable = name =>
-    setVariableName(name);
+  const handleCreatedNewVariable = (id, { field }) =>
+    changeForm(form, field, id);
 
-  const handleEditNewTextVariable = name =>
-    setOtherVariableName(name);
+  const [newVariableWindowProps, openNewVariableWindow] = useNewVariableWindowState(
+    newVariableWindowInitialProps,
+    handleCreatedNewVariable,
+  );
+
+  const handleNewVariable = name =>
+    openNewVariableWindow({ initialValues: { name, type: 'categorical' } }, { field: 'variable' });
+
+  const handleNewOtherVariable = name =>
+    openNewVariableWindow({ initialValues: { name, type: 'text' } }, { field: 'otherVariable' });
 
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
@@ -85,8 +94,8 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={categoricalVariableOptions}
-          onCreateOption={handleEditNewCategoricalVariable}
-          onDeleteOption={handleDeleteVariableForVariable}
+          onCreateOption={handleNewVariable}
+          onDeleteOption={v => deleteVariable(v, 'variable')}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
@@ -127,8 +136,8 @@ const PromptFields = ({
             component={CreatableSelect}
             label="Other Variable"
             options={otherVariableOptions}
-            onCreateOption={handleEditNewTextVariable}
-            onDeleteOption={handleDeleteVariableForOtherVarible}
+            onCreateOption={handleNewOtherVariable}
+            onDeleteOption={v => deleteVariable(v, 'otherVariable')}
             onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
             formatCreateLabel={inputValue => (
@@ -185,6 +194,7 @@ const PromptFields = ({
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
+      <NewVariableWindow {...newVariableWindowProps} />
     </Section>
   );
 };
@@ -204,8 +214,6 @@ PromptFields.defaultProps = {
 export { PromptFields };
 
 export default compose(
-  withNewVariableWindowHandlers,
   withVariableOptions,
-  withNewVariableHandlers('variable'),
-  withNewVariableHandlers('otherVariable'),
+  withDeleteVariableHandler,
 )(PromptFields);

@@ -34,7 +34,6 @@ class NewVariableWindow extends Component {
   render() {
     const {
       show,
-      index,
       variableType,
       handleCreateNewVariable,
       onCancel,
@@ -44,7 +43,6 @@ class NewVariableWindow extends Component {
     return (
       <FormWindow
         show={show}
-        index={index}
         form={form}
         onSubmit={handleCreateNewVariable}
         onCancel={onCancel}
