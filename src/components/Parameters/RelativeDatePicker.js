@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { formValueSelector, change } from 'redux-form';
+import { formValueSelector, change, Field } from 'redux-form';
 import { DATE_FORMATS } from '@codaco/ui/lib/components/Fields/DatePicker';
 import Number from '@codaco/ui/lib/components/Fields/Number';
 import Toggle from '@codaco/ui/lib/components/Fields/Toggle';
-import DateField from '@components/Form/Fields/Date';
 import ValidatedField from '@components/Form/ValidatedField';
+import { DatePicker } from '@codaco/ui/lib/components/Fields';
 
 const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
   const dateFormat = DATE_FORMATS.full;
@@ -17,18 +17,21 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
       <p>This input type has three options for you to set.</p><br />
       <h4>Anchor Date</h4>
       <p>
-        The anchor date defines the point that the participant selects a date relative to.
-        You can choose to either use the interview date, or specify a specific date manually.
+        The anchor date defines the point that the participant can select a date relative to.
+        You can choose to either use the interview date, or specify a specific date manually. When
+        using the interview date, the date will be set dynamically based on when your interview
+        is conducted.
       </p>
       <Toggle
         input={{
           checked: !!useInterviewDate,
           value: useInterviewDate,
           onChange: (event) => {
+            // Use event rather than state here because we are also changing state in this function.
             if (event.target.checked) {
               resetField();
             }
-            setUseInterviewDate(!useInterviewDate);
+            setUseInterviewDate(!!event.target.checked);
           },
         }}
         label="Use interview date"
@@ -37,10 +40,14 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
       { !useInterviewDate &&
       <ValidatedField
         label="Specific Anchor Date"
-        component={DateField}
+        component={DatePicker}
         name={`${name}.anchor`}
         validation={{ required: !useInterviewDate, ISODate: dateFormat }}
         dateFormat={dateFormat}
+        parameters={{
+          min: '1000-01-01',
+          max: '3000-01-01',
+        }}
       />
       }
       <h4>Days Before</h4>
@@ -49,7 +56,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         date that can be selected from.
         Defaults to 180 days if left blank.
       </p>
-      <ValidatedField
+      <Field
         label=""
         component={Number}
         name={`${name}.before`}
@@ -60,7 +67,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         date that can be selected from.
         Defaults to 0 days if left blank.
       </p>
-      <ValidatedField
+      <Field
         label=""
         component={Number}
         name={`${name}.after`}
