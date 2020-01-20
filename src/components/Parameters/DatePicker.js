@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { formValues } from 'redux-form';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { formValues, change } from 'redux-form';
 import { DATE_FORMATS, DATE_TYPES } from '@codaco/ui/lib/components/Fields/DatePicker';
 import SelectField from '@components/Form/Fields/Select';
 import ValidatedField from '@components/Form/ValidatedField';
@@ -12,9 +14,13 @@ const dateTypes = DATE_TYPES.map(type => ({
 }));
 
 
-const DateTimeParameters = ({ name, type }) => {
-  const dateFormat = DATE_FORMATS[type] || DATE_FORMATS.full;
+const DateTimeParameters = ({ name, type, setSelectDefault, resetRangeFields }) => {
+  const dateFormat = type ? DATE_FORMATS[type] : DATE_FORMATS.full;
   const [useDateFormat, setUseDateFormat] = useState(type);
+
+  if (!type) {
+    setSelectDefault();
+  }
 
   return (
     <React.Fragment>
@@ -33,6 +39,7 @@ const DateTimeParameters = ({ name, type }) => {
         validation={{ required: true }}
         onChange={(_, value) => {
           setUseDateFormat(value);
+          resetRangeFields();
         }}
       />
       <br />
@@ -76,10 +83,23 @@ const DateTimeParameters = ({ name, type }) => {
 DateTimeParameters.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
+  setSelectDefault: PropTypes.func.isRequired,
+  resetRangeFields: PropTypes.func.isRequired,
 };
 
 DateTimeParameters.defaultProps = {
   type: 'full',
 };
 
-export default formValues({ type: 'parameters.type' })(DateTimeParameters);
+const mapDispatchToProps = (dispatch, { name, form }) => ({
+  setSelectDefault: () => dispatch(change(form, `${name}.type`, 'full')),
+  resetRangeFields: () => {
+    dispatch(change(form, `${name}.max`, null));
+    dispatch(change(form, `${name}.min`, null));
+  },
+});
+
+export default compose(
+  connect(null, mapDispatchToProps),
+  formValues({ type: 'parameters.type' }),
+)(DateTimeParameters);

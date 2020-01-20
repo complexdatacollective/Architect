@@ -60,6 +60,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         label=""
         component={Number}
         name={`${name}.before`}
+        placeholder="180"
       />
       <h4>Days After</h4>
       <p>
@@ -71,6 +72,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         label=""
         component={Number}
         name={`${name}.after`}
+        placeholder="0"
       />
     </React.Fragment>
   );
