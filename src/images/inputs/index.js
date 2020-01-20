@@ -7,6 +7,8 @@ import Toggle from './Toggle.png';
 import ToggleButtonGroup from './ToggleButtonGroup.png';
 import DatePicker from './DatePicker.png';
 import RelativeDatePicker from './RelativeDatePicker.png';
+import LikertScale from './LikertScale.png';
+import VisualAnalogScale from './VisualAnalogScale.png';
 
 export default {
   CheckboxGroup,
@@ -18,4 +20,6 @@ export default {
   ToggleButtonGroup,
   DatePicker,
   RelativeDatePicker,
+  LikertScale,
+  VisualAnalogScale,
 };
