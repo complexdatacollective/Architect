@@ -120,6 +120,7 @@ const getPreviewMenu = (window) => {
     // Use "App" menu for OS X
     menu.unshift({
       submenu: appMenu,
+      label: 'App',
     });
   }
 
