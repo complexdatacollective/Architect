@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
-import ValidatedField from '../../Form/ValidatedField';
-import EditableList from '../../EditableList';
-import { getFieldId } from '../../../utils/issues';
+import { getFieldId } from '@app/utils/issues';
+import ValidatedField from '@components/Form/ValidatedField';
+import EditableList from '@components/EditableList';
+import withSubject from '@components/enhancers/withSubject';
+import withDisabledSubjectRequired from '@components/enhancers/withDisabledSubjectRequired';
+import withDisabledFormTitle from '@components/enhancers/withDisabledFormTitle';
+import withFormHandlers from './withFormHandlers';
 import Section from '../Section';
 import FieldFields from './FieldFields';
 import FieldPreview from './FieldPreview';
-import withSubject from '../../enhancers/withSubject';
-import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
-import withDisabledFormTitle from '../../enhancers/withDisabledFormTitle';
-import withFormHandlers from './withFormHandlers';
 import { itemSelector, normalizeField } from './helpers';
 
 const Form = ({

@@ -113,4 +113,10 @@
   --architect-variant--4: var(--color-sea-green--dark);
 
   --architect-asset-background: var(--color-charcoal);
+
+  .form-field-slider {
+    --slider-color: var(--color-platinum--dark);
+    --tooltip-color: var(--color-navy-taupe);
+    --tooltip-label: var(--color-white);
+  }
 }

@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { getFieldId } from '../../utils/issues';
-import { required, uniqueByList } from '../../utils/validations';
-import ValidatedField from '../Form/ValidatedField';
-import Select from '../Form/Fields/Select';
-import { isVariableTypeWithOptions, variableOptions } from '../Form/inputOptions';
-import Options from '../Options';
-import Section from '../sections/Section';
-import FormWindow from '../FormWindow';
+import { isVariableTypeWithOptions, VARIABLE_OPTIONS } from '@app/config/variables';
+import { getFieldId } from '@app/utils/issues';
+import { required, uniqueByList } from '@app/utils/validations';
+import safeName from '@app/utils/safeName';
+import ValidatedField from '@components/Form/ValidatedField';
+import Select from '@components/Form/Fields/Select';
+import Options from '@components/Options';
+import Section from '@components/sections/Section';
+import FormWindow from '@components/FormWindow';
 import withNewVariableHandler, { form } from './withNewVariableHandler';
-import safeName from '../../utils/safeName';
+
 
 const isRequired = required();
 
@@ -20,11 +21,11 @@ class NewVariableWindow extends Component {
     const { allowVariableTypes } = this.props;
 
     return allowVariableTypes ?
-      variableOptions.filter(
+      VARIABLE_OPTIONS.filter(
         ({ value: optionVariableType }) =>
           allowVariableTypes.includes(optionVariableType),
       ) :
-      variableOptions;
+      VARIABLE_OPTIONS;
   }
 
   validateName = value =>

@@ -1,0 +1,29 @@
+.tip {
+  background-color: var(--color-mid-grey);
+  border-radius: unit(2);
+  padding: 0 unit(2);
+  margin: unit(2) 0;
+  font-size: .9rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+
+  .icon {
+    height: 2rem;
+    width: 2rem;
+    margin-right: unit(1);
+  }
+
+  &__info {
+    background-color: var(--info);
+  }
+
+  &__warning {
+    background-color: var(--warning);
+  }
+
+  &__error {
+    background-color: var(--error);
+  }
+}
+

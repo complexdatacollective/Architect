@@ -9,6 +9,7 @@ import { actionCreators as registerActionCreators } from '../register';
 import history from '../../../../history';
 import testState from '../../../../__tests__/testState.json';
 import { loadProtocolConfiguration } from '../../../../other/protocols';
+import { APP_SCHEMA_VERSION } from '../../../../config';
 
 jest.mock('../../../../other/protocols');
 jest.mock('../../dialogs');
@@ -168,7 +169,7 @@ describe('protocols', () => {
 
     it('when the protocol is invalid it dispatches an error when protocol is invalid (but still imports it)', () => {
       loadProtocolConfiguration.mockReturnValueOnce(
-        Promise.resolve(getProtocol({ schemaVersion: 2, stages: [] })),
+        Promise.resolve(getProtocol({ schemaVersion: APP_SCHEMA_VERSION, stages: [] })),
       );
 
       return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/invalid'))
@@ -179,8 +180,10 @@ describe('protocols', () => {
     });
 
     it('when the schema version is greater than the app version it notifies user to upgrade the app', () => {
+      const futureVersion = APP_SCHEMA_VERSION + 1;
+
       loadProtocolConfiguration.mockReturnValueOnce(
-        Promise.resolve(getProtocol({ schemaVersion: 3 })),
+        Promise.resolve(getProtocol({ schemaVersion: futureVersion })),
       );
 
       return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/newer-protocol'))
@@ -194,8 +197,10 @@ describe('protocols', () => {
     });
 
     it('when the schema version is less than the app version it attempts to upgrade protocol and then imports it', () => {
+      const pastVersion = APP_SCHEMA_VERSION - 1;
+
       loadProtocolConfiguration.mockReturnValueOnce(
-        Promise.resolve(getProtocol({ schemaVersion: 1 })),
+        Promise.resolve(getProtocol({ schemaVersion: pastVersion })),
       );
 
       return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/older-protocol'))

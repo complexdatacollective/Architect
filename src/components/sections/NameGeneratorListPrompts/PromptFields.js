@@ -6,6 +6,7 @@ import ValidatedField from '../../Form/ValidatedField';
 import AssignAttributes from '../../AssignAttributes';
 import Row from '../Row';
 import Section from '../Section';
+import Tip from '../../Tip';
 
 const PromptFields = ({
   type,
@@ -19,9 +20,12 @@ const PromptFields = ({
         The prompt text instructs your participant about the task on this stage.
         Enter the text to use for your prompt below.
       </p>
-      <p><strong>
-        Tip: You can use markdown formatting in this prompt to create bold or underlined text.
-      </strong></p>
+      <Tip>
+        <p>
+          You can use markdown formatting in this prompt to create bold or underlined text.
+        </p>
+      </Tip>
+
       <ValidatedField
         name="text"
         component={Text}
@@ -39,11 +43,14 @@ const PromptFields = ({
         your prompt (for example by adding a variable called &quot;close_tie&quot; to a
         prompt that asks about closeness).
       </p>
-      <p>
-        <strong>Tip: Select an existing variable, or select &quot;create new variable&quot;
-        from the bottom of the list, and then assign a value. You can set different values
-        for this variable for nodes created on different prompts.</strong>
-      </p>
+      <Tip>
+        <p>
+          Select an existing variable, or select &quot;create new variable&quot;
+          from the bottom of the list, and then assign a value. You can set different values
+          for this variable for nodes created on different prompts.
+        </p>
+      </Tip>
+
       <AssignAttributes
         name="additionalAttributes"
         id="additionalAttributes"

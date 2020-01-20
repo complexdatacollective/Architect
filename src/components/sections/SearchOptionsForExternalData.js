@@ -9,6 +9,7 @@ import withExternalData from '../enhancers/withExternalData';
 import Section from './Section';
 import Row from './Row';
 import withVariableOptionsFromExternalData from '../enhancers/withVariableOptionsFromExternalData';
+import Tip from '../Tip';
 
 const SearchOptions = ({
   variableOptions,
@@ -38,14 +39,14 @@ const SearchOptions = ({
         Search accuracy determines how closely the text the participant types
         must be to an attribute for it to be considered a match.
       </p>
-      <p>
-        <strong>
-          Tip: If the roster contains many similar nodes, selecting
+      <Tip>
+        <p>
+          If the roster contains many similar nodes, selecting
           &quot;Exact&quot; or &quot;High accuracy&quot; will help narrow down
           searches. In contrast, a low accuracy search will allow
           for typos and spelling mistakes.
-        </strong>
-      </p>
+        </p>
+      </Tip>
       <ValidatedField
         name="searchOptions.fuzziness"
         component={Fields.RadioGroup}

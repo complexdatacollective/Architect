@@ -112,7 +112,7 @@ Array [
           },
         },
         "name": "fooProtocol",
-        "schemaVersion": 2,
+        "schemaVersion": 3,
       },
       "type": "PROTOCOL/SET",
     },
@@ -244,7 +244,7 @@ Array [
         },
         "lastModified": "2017-06-27T00:00:00.000Z",
         "name": "fooProtocol",
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "stages": Array [],
       },
       "type": "PROTOCOLS/SAVE_SUCCESS",
@@ -376,7 +376,7 @@ Array [
           },
         },
         "name": "fooProtocol",
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "stages": Array [
           Object {
             "form": Object {
@@ -647,7 +647,7 @@ Array [
         },
         "lastModified": "2017-06-27T00:00:00.000Z",
         "name": "fooProtocol",
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "stages": Array [
           Object {
             "form": Object {
@@ -887,7 +887,7 @@ Array [
           </p>
           <p>
             In order to open it, you will need to install a version of Architect that supports schema version 
-            3
+            4
             .
           </p>
         </React.Fragment>,
@@ -923,9 +923,9 @@ Array [
         "message": <React.Fragment>
           <p>
             This protocol uses an out-dated schema (schema version "
-            1
-            "), but can be upgraded to work with this version of Architect (schema version "
             2
+            "), but can be upgraded to work with this version of Architect (schema version "
+            3
             ").
           </p>
           <p>

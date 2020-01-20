@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getValidations } from '../../utils/validations';
+import { isEqual } from 'lodash';
+import { getValidations } from '@app/utils/validations';
 
 /*
  * This converts our `validation` object into redux-form compatible `validate` prop.
@@ -17,11 +18,20 @@ const withValidation = WrappedComponent =>
     constructor(props) {
       super(props);
 
-      this.validate = getValidations(props.validation || []);
+      this.state = { validate: getValidations(props.validation || []) };
+    }
+
+    componentDidUpdate(prevProps) {
+      if (!isEqual(prevProps.validation, this.props.validation)) {
+        // eslint-disable-next-line
+        this.setState({
+          validate: getValidations(this.props.validation || []),
+        });
+      }
     }
 
     render() {
-      return <WrappedComponent {...this.props} validate={this.validate} />;
+      return <WrappedComponent {...this.props} validate={this.state.validate} />;
     }
   };
 

@@ -9,14 +9,16 @@ const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
     <div className="control-bar__primary-buttons" key="primary">
       <TransitionGroup component={null}>
         { buttons &&
-          Array.from(buttons).map(button => <Fade key={button.key}>{button}</Fade>)
+          Array.from(buttons).map(button =>
+            <Fade key={button.key} in={show}>{button}</Fade>)
         }
       </TransitionGroup>
     </div>,
     <div className="control-bar__secondary-buttons" key="secondary">
       <TransitionGroup component={null}>
         { secondaryButtons &&
-          Array.from(secondaryButtons).map(button => <Fade key={button.key}>{button}</Fade>)
+          Array.from(secondaryButtons).map(button =>
+            <Fade key={button.key} in={show}>{button}</Fade>)
         }
       </TransitionGroup>
     </div>,

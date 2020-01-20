@@ -9,6 +9,7 @@ import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import withDefaultToDisplayVariable from './withDefaultToDisplayVariable';
 import withSubject from '../../enhancers/withSubject';
+import Tip from '../../Tip';
 
 /* select from text, or creat text, default to display */
 
@@ -25,13 +26,14 @@ const QuickAdd = ({
       Choose which variable to use to store the value of the quick add form. To create
       a new variable, type a name into the box below.
     </p>
-    <p>
-      <strong>
-        Tip: use a variable called &quot;name&quot; unless you have a good reason not to.
+    <Tip type="warning">
+      <p>
+        Use a variable called &quot;name&quot; unless you have a good reason not to.
         Network Canvas will then automatically use this variable as the label for the node in
         the interview.
-      </strong>
-    </p>
+      </p>
+    </Tip>
+
     <div className="stage-editor-section-form">
       <ValidatedField
         name="quickAdd"

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import Icon from '@codaco/ui/lib/components/Icon';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import ValidatedField from '../Form/ValidatedField';
-import { getComponentsForType } from '../Form/inputOptions';
-import Select from '../Form/Fields/Select';
+import { getComponentsForType } from '@app/config/variables';
+import ValidatedField from '@components/Form/ValidatedField';
+import Select from '@components/Form/Fields/Select';
 import withAttributeHandlers from './withAttributeHandlers';
 
 const getInputComponentForType = (type) => {

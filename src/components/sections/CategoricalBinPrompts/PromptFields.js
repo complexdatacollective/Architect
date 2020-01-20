@@ -15,6 +15,7 @@ import withNewVariableWindowHandlers, {
 import Options from '../../Options';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withPromptProps from './withPromptProps';
+import Tip from '../../Tip';
 
 const PromptFields = ({
   variableOptions,
@@ -42,9 +43,12 @@ const PromptFields = ({
           The prompt text instructs your participant about the task on this stage.
           Enter the text to use for your prompt below.
         </p>
-        <p><strong>
-          Tip: You can use markdown formatting in this prompt to create bold or underlined text.
-        </strong></p>
+        <Tip>
+          <p>
+            You can use markdown formatting in this prompt to create bold or underlined text.
+          </p>
+        </Tip>
+
         <ValidatedField
           name="text"
           component={Text}
@@ -91,9 +95,11 @@ const PromptFields = ({
           when the task starts, which will determine the order that your participant places them
           into bins. Network Canvas will default to using the order in which nodes were named.
         </p>
-        <p><strong>
-          Tip: Use the asterisk property to sort by the order that nodes were created.
-        </strong></p>
+        <Tip>
+          <p>
+            Use the asterisk property to sort by the order that nodes were created.
+          </p>
+        </Tip>
         <MultiSelect
           name={'bucketSortOrder'}
           properties={[

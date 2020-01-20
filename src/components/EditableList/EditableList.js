@@ -105,6 +105,7 @@ class EditableList extends PureComponent {
                 {...rest}
                 {...editProps}
                 form={formName}
+                initialValues={initialValues}
                 fieldId={editField}
               />
             </Form>

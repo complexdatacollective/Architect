@@ -5,12 +5,12 @@ import {
   compose,
   withHandlers,
 } from 'recompose';
-import { getVariablesForSubject } from '../../../selectors/codebook';
-import inputOptions, {
+import INPUT_OPTIONS, {
   getTypeForComponent,
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
-} from '../../Form/inputOptions';
+} from '@app/config/variables';
+import { getVariablesForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -49,16 +49,17 @@ const mapStateToProps = (state, { form, entity, type }) => {
   );
 
   // 1. If type defined, show components that match (existing variable)
-  // 2. Othewise list all inputOptions (new variable)
+  // 2. Othewise list all INPUT_OPTIONS (new variable)
   const componentOptions = variableType && !isNewVariable ?
     getComponentsForType(variableType) :
-    inputOptions;
+    INPUT_OPTIONS;
 
   return {
     variable,
     variableType,
     variableOptions: variableOptionsWithNewVariable,
     componentOptions,
+    component,
     existingVariables,
     isNewVariable,
   };
@@ -73,17 +74,23 @@ const fieldsState = connect(mapStateToProps, mapDispatchToProps);
 const fieldsHandlers = withHandlers({
   handleChangeComponent: ({ changeField, form, variableType }) =>
     (e, value) => {
-      // Only reset if type not defined (new variable)
-      const componentType = getTypeForComponent(value);
-      if (variableType !== componentType) {
+      // Only reset if type not defined yet (new variable)
+      const typeForComponent = getTypeForComponent(value);
+
+      if (variableType !== typeForComponent) {
         changeField(form, 'options', null);
         changeField(form, 'validation', {});
       }
+
+      // Always reset this, since it is at least partly related
+      // to the component
+      changeField(form, 'parameters', null);
     },
   handleChangeVariable: ({ existingVariables, changeField, form }) =>
     (_, value) => {
       // Either load settings from codebook, or reset
       const options = get(existingVariables, [value, 'options'], null);
+      const parameters = get(existingVariables, [value, 'parameters'], null);
       const validation = get(existingVariables, [value, 'validation'], {});
       const component = get(existingVariables, [value, 'component'], null);
 
@@ -93,6 +100,7 @@ const fieldsHandlers = withHandlers({
       }
       changeField(form, 'component', component);
       changeField(form, 'options', options);
+      changeField(form, 'parameters', parameters);
       changeField(form, 'validation', validation);
     },
   handleNewVariable: ({ changeField, form }) =>

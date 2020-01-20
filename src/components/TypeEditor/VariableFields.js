@@ -3,29 +3,16 @@ import PropTypes from 'prop-types';
 import { formValueSelector, autofill } from 'redux-form';
 import { connect } from 'react-redux';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import ValidatedField from '../Form/ValidatedField';
-import * as ArchitectFields from '../Form/Fields';
+import { VARIABLE_TYPES, VARIABLE_TYPES_WITH_OPTIONS } from '@app/config/variables';
+import { getFieldId } from '@app/utils/issues';
+import safeName from '@app/utils/safeName';
+import ValidatedField from '@components/Form/ValidatedField';
+import * as ArchitectFields from '@components/Form/Fields';
+import { Row } from '@components/OrderedList';
 import Validations from './Validations';
 import Options from './Options';
-import { getFieldId } from '../../utils/issues';
-import safeName from '../../utils/safeName';
-import { Row } from '../OrderedList';
 
-const VARIABLE_TYPES = [
-  'text',
-  'number',
-  'datetime',
-  'boolean',
-  'ordinal',
-  'categorical',
-  'layout',
-  'location',
-];
-
-const VARIABLE_TYPES_WITH_OPTIONS = [
-  'ordinal',
-  'categorical',
-];
+const variableTypes = Object.values(VARIABLE_TYPES);
 
 class VariableFields extends Component {
   handleNormalizeName = value => safeName(value);
@@ -56,9 +43,7 @@ class VariableFields extends Component {
             className="form-field-container"
             component={ArchitectFields.Select}
             label="Variable type"
-            options={VARIABLE_TYPES.map(variable => (
-              { value: variable, label: variable }
-            ))}
+            options={variableTypes}
             validation={{ required: true }}
             onChange={resetOptions}
             placeholder="&mdash; Select variable type &mdash;"

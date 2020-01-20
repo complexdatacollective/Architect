@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { keys as getKeys, toPairs, isNull } from 'lodash';
 import { Field } from 'redux-form';
-import { Button } from '@codaco/ui/lib/components';
-import FieldError from '../Form/FieldError';
+import { Button } from '@codaco/ui';
+import FieldError from '@components/Form/FieldError';
 import Validation from './Validation';
 
 const validate = (validations) => {

@@ -10,6 +10,7 @@ import Section from '../Section';
 import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
 import withLayoutOptions from './withLayoutOptions';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
+import Tip from '../../Tip';
 
 const PromptFields = ({
   handleCreateVariable,
@@ -29,9 +30,12 @@ const PromptFields = ({
     <Row>
       <h4>Layout Variable</h4>
       <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
-      <p><strong>
-        Tip: Remember, you can create a new layout variable here by typing a name into the box.
-      </strong></p>
+      <Tip>
+        <p>
+          Remember, you can create a new layout variable here by typing a name into the box.
+        </p>
+      </Tip>
+
       <ValidatedField
         name="layout.layoutVariable"
         component={ArchitectFields.CreatableSelect}

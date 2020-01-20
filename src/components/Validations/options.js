@@ -14,6 +14,9 @@ const VALIDATIONS = {
   datetime: [
     'required',
   ],
+  scalar: [
+    'required',
+  ],
   boolean: [
     'required',
   ],
