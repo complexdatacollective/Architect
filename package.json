@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "5.0.0",
+    "version": "5.1.0",
     "productName": "Network Canvas Architect",
     "description": "A tool for creating Network Canvas interviews.",
     "author": "Complex Data Collective",
@@ -197,8 +197,7 @@
         "mac": {
             "category": "public.app-category.education",
             "hardenedRuntime": true,
-            "entitlements": "./build-resources/entitlements.mac.inherit.plist",
-            "target": "dmg"
+            "entitlements": "./build-resources/entitlements.mac.inherit.plist"
         },
         "win": {
             "target": "nsis",
