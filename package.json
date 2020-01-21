@@ -197,7 +197,7 @@
         "mac": {
             "category": "public.app-category.education",
             "hardenedRuntime": true,
-            "entitlements": "./build-resources/entitlements.mac.inherit.plist",
+            "entitlements": "./build-resources/entitlements.mac.inherit.plist"
         },
         "win": {
             "target": "nsis",
