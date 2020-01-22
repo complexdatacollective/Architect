@@ -12,9 +12,9 @@ import Row from '@components/sections/Row';
 import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import Options from '@components/Options';
 import Tip from '@components/Tip';
-import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
-import withVariableOptions from '../CategoricalBinPrompts/withVariableOptions';
-import withDeleteVariableHandler from '../CategoricalBinPrompts/withDeleteVariableHandler';
+import { getSortOrderOptionGetter } from '@components/sections/CategoricalBinPrompts/optionGetters';
+import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
+import withDeleteVariableHandler from '@components/sections/CategoricalBinPrompts/withDeleteVariableHandler';
 
 const PromptFields = ({
   variableOptions,

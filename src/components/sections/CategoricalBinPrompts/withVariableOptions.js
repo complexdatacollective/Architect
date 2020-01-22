@@ -9,11 +9,13 @@ const mapStateToProps = (state, { form, type, entity }) => {
   const variable = formValueSelector(form)(state, 'variable');
   const variables = getVariablesForSubject(state, { type, entity });
   const optionsForVariable = get(variables, [variable, 'options'], []);
+  const optionsForVariableDraft = formValueSelector(form)(state, 'variableOptions');
 
   return {
     variable,
     variableOptions,
     optionsForVariable,
+    optionsForVariableDraft,
   };
 };
 

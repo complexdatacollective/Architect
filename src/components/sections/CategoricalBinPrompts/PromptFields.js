@@ -27,6 +27,7 @@ const useToggle = (initialState) => {
 
 const PromptFields = ({
   variableOptions,
+  optionsForVariableDraft,
   form,
   changeForm,
   deleteVariable,
@@ -64,6 +65,9 @@ const PromptFields = ({
     .filter(({ type: variableType }) => variableType === 'text');
 
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
+
+  const showVariableOptionsTip =
+    optionsForVariableDraft.length + (!!otherVariableToggle && 1) >= 8;
 
   return (
     <Section>
@@ -105,18 +109,27 @@ const PromptFields = ({
           )}
         />
       </Row>
-      <Row>
-        { variable &&
-          <Section>
-            <h3 id={getFieldId('options')}>Variable Options</h3>
-            <p>Create some options for this variable</p>
-            <Options
-              name="variableOptions"
-              label="Options"
-            />
-          </Section>
-        }
-      </Row>
+      { variable &&
+        <Section>
+          <h3 id={getFieldId('options')}>Variable Options</h3>
+          <p>Create some options for this variable</p>
+          <Options
+            name="variableOptions"
+            label="Options"
+          />
+          { showVariableOptionsTip &&
+            <Tip>
+              <p>
+                The categorical interface is designed to use up to 8 items
+                (including &quot;other variable&quot;).<br />
+                <br />
+                Using more will create a suboptimal experience for participants,
+                and might reduce data quality.
+              </p>
+            </Tip>
+          }
+        </Section>
+      }
       { variable &&
         <Row>
           <h3 id={getFieldId('toggleOtherVariable')}>&quot;Other&quot; variable</h3>
