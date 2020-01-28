@@ -7,12 +7,14 @@ import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors
 const mapStateToProps = (state, { form, type, entity }) => {
   const variableOptions = getVariableOptionsForSubject(state, { type, entity });
   const variable = formValueSelector(form)(state, 'variable');
+  const otherVariable = formValueSelector(form)(state, 'otherVariable');
   const variables = getVariablesForSubject(state, { type, entity });
   const optionsForVariable = get(variables, [variable, 'options'], []);
   const optionsForVariableDraft = formValueSelector(form)(state, 'variableOptions');
 
   return {
     variable,
+    otherVariable,
     variableOptions,
     optionsForVariable,
     optionsForVariableDraft,

@@ -35,8 +35,9 @@ const PromptFields = ({
   entity,
   type,
   variable,
+  otherVariable,
 }) => {
-  const [otherVariableToggle, clickToggleOtherVariable] = useToggle(false);
+  const [otherVariableToggle, toggleOtherVariableToggle] = useToggle(!!otherVariable);
 
   const newVariableWindowInitialProps = {
     entity,
@@ -46,6 +47,15 @@ const PromptFields = ({
 
   const handleCreatedNewVariable = (id, { field }) =>
     changeForm(form, field, id);
+
+  const handleToggleOtherVariable = () => {
+    if (otherVariableToggle) {
+      changeForm(form, 'otherVariable', null);
+      changeForm(form, 'otherVariableLabel', null);
+    }
+
+    toggleOtherVariableToggle();
+  };
 
   const [newVariableWindowProps, openNewVariableWindow] = useNewVariableWindowState(
     newVariableWindowInitialProps,
@@ -66,8 +76,12 @@ const PromptFields = ({
 
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
 
-  const showVariableOptionsTip =
-    optionsForVariableDraft.length + (!!otherVariableToggle && 1) >= 8;
+  const totalOptionsLength = (
+    optionsForVariableDraft && optionsForVariableDraft.length +
+    (!!otherVariableToggle && 1)
+  );
+
+  const showVariableOptionsTip = totalOptionsLength >= 8;
 
   return (
     <Section>
@@ -138,7 +152,7 @@ const PromptFields = ({
             component={Toggle}
             name="toggleOtherVariable"
             value={otherVariableToggle}
-            onChange={clickToggleOtherVariable}
+            onChange={handleToggleOtherVariable}
           />
         </Row>
       }
@@ -216,11 +230,13 @@ PromptFields.propTypes = {
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   variable: PropTypes.string,
+  otherVariable: PropTypes.string,
   variableOptions: PropTypes.array,
 };
 
 PromptFields.defaultProps = {
   variable: null,
+  otherVariable: null,
   variableOptions: [],
 };
 
