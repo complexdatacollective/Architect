@@ -14,7 +14,7 @@ import Options from '@components/Options';
 import Tip from '@components/Tip';
 import { getSortOrderOptionGetter } from '@components/sections/CategoricalBinPrompts/optionGetters';
 import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
-import withDeleteVariableHandler from '@components/sections/CategoricalBinPrompts/withDeleteVariableHandler';
+import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers';
 
 const PromptFields = ({
   variableOptions,
@@ -187,5 +187,5 @@ export { PromptFields };
 
 export default compose(
   withVariableOptions,
-  withDeleteVariableHandler,
+  withVariableHandlers,
 )(PromptFields);

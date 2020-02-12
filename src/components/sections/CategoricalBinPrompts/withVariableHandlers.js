@@ -11,6 +11,7 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = {
   changeForm: change,
   deleteVariable: codebookActions.deleteVariable,
+  createVariable: codebookActions.createVariable,
 };
 
 const deleteVariableState = connect(mapStateToProps, mapDispatchToProps);
@@ -18,8 +19,17 @@ const deleteVariableState = connect(mapStateToProps, mapDispatchToProps);
 const matchingPaths = (obj, paths, value) =>
   paths.filter(path => get(obj, path) === value);
 
-const deleteHandler = withHandlers({
-  deleteVariable: ({
+const variableHandlers = withHandlers({
+  handleCreateOtherVariable: ({
+    createVariable,
+    entity,
+    type,
+  }) =>
+    (name) => {
+      const { variable } = createVariable(entity, type, { type: 'text', name });
+      return variable;
+    },
+  handleDeleteVariable: ({
     entity,
     type,
     deleteVariable,
@@ -41,9 +51,9 @@ const deleteHandler = withHandlers({
     },
 });
 
-const withDeleteVariableHandler = compose(
+const withVariableHandlers = compose(
   deleteVariableState,
-  deleteHandler,
+  variableHandlers,
 );
 
-export default withDeleteVariableHandler;
+export default withVariableHandlers;

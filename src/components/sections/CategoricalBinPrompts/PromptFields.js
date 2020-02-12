@@ -14,7 +14,7 @@ import Tip from '@components/Tip';
 import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
-import withDeleteVariableHandler from './withDeleteVariableHandler';
+import withVariableHandlers from './withVariableHandlers';
 
 const useToggle = (initialState) => {
   const [value, setValue] = useState(initialState);
@@ -30,7 +30,8 @@ const PromptFields = ({
   optionsForVariableDraft,
   form,
   changeForm,
-  deleteVariable,
+  handleDeleteVariable,
+  handleCreateOtherVariable,
   normalizeKeyDown,
   entity,
   type,
@@ -51,7 +52,8 @@ const PromptFields = ({
   const handleToggleOtherVariable = () => {
     if (otherVariableToggle) {
       changeForm(form, 'otherVariable', null);
-      changeForm(form, 'otherVariableLabel', null);
+      changeForm(form, 'otherVariablePrompt', null);
+      changeForm(form, 'otherOptionLabel', null);
     }
 
     toggleOtherVariableToggle();
@@ -64,9 +66,6 @@ const PromptFields = ({
 
   const handleNewVariable = name =>
     openNewVariableWindow({ initialValues: { name, type: 'categorical' } }, { field: 'variable' });
-
-  const handleNewOtherVariable = name =>
-    openNewVariableWindow({ initialValues: { name, type: 'text' } }, { field: 'otherVariable' });
 
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
@@ -113,7 +112,7 @@ const PromptFields = ({
           label=""
           options={categoricalVariableOptions}
           onCreateOption={handleNewVariable}
-          onDeleteOption={v => deleteVariable(v, 'variable')}
+          onDeleteOption={v => handleDeleteVariable(v, 'variable')}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
@@ -135,9 +134,9 @@ const PromptFields = ({
             <Tip>
               <p>
                 The categorical interface is designed to use up to 8 items
-                (including &quot;other variable&quot;).<br />
+                (including an optional &quot;other&quot; variable).<br />
                 <br />
-                Using more will create a suboptimal experience for participants,
+                Using more will create a sub-optimal experience for participants,
                 and might reduce data quality.
               </p>
             </Tip>
@@ -172,7 +171,7 @@ const PromptFields = ({
             validation={{ required: true }}
           />
           <ValidatedField
-            name="otherVariableLabel"
+            name="otherVariablePrompt"
             component={Text}
             placeholder="Enter a question prompt to show to the participant..."
             label="Follow-up dialog prompt"
@@ -183,8 +182,8 @@ const PromptFields = ({
             component={CreatableSelect}
             label="Variable to store response"
             options={otherVariableOptions}
-            onCreateOption={handleNewOtherVariable}
-            onDeleteOption={v => deleteVariable(v, 'otherVariable')}
+            onCreateOption={handleCreateOtherVariable}
+            onDeleteOption={v => handleDeleteVariable(v, 'otherVariable')}
             onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
             formatCreateLabel={inputValue => (
@@ -257,5 +256,5 @@ export { PromptFields };
 
 export default compose(
   withVariableOptions,
-  withDeleteVariableHandler,
+  withVariableHandlers,
 )(PromptFields);
