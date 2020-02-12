@@ -146,10 +146,16 @@ const PromptFields = ({
       }
       { variable &&
         <Row>
-          <h3 id={getFieldId('toggleOtherVariable')}>&quot;Other&quot; variable</h3>
-          <p>Optional free-text field for participant options</p>
+          <h3 id={getFieldId('toggleOtherVariable')}>Follow-up &quot;Other&quot; Option</h3>
+          <p>
+            You can optionally create an &quot;other&quot; option that triggers a follow-up dialog
+            when nodes are dropped within it, and stores the value the participant enters in a
+            designated variable. This feature may be useful in order to collect values
+            you might not have listed above.
+          </p>
           <DetachedField
             component={Toggle}
+            label="Use follow-up &quot;other&quot; option?"
             name="toggleOtherVariable"
             value={otherVariableToggle}
             onChange={handleToggleOtherVariable}
@@ -159,9 +165,23 @@ const PromptFields = ({
       { otherVariableToggle &&
         <Row>
           <ValidatedField
+            name="otherOptionLabel"
+            component={Text}
+            placeholder="Enter a label (such as &quot;other&quot;) for the bin..."
+            label="Other bin label"
+            validation={{ required: true }}
+          />
+          <ValidatedField
+            name="otherVariableLabel"
+            component={Text}
+            placeholder="Enter a question prompt to show to the participant..."
+            label="Follow-up dialog prompt"
+            validation={{ required: true }}
+          />
+          <ValidatedField
             name="otherVariable"
             component={CreatableSelect}
-            label="Other Variable"
+            label="Variable to store response"
             options={otherVariableOptions}
             onCreateOption={handleNewOtherVariable}
             onDeleteOption={v => deleteVariable(v, 'otherVariable')}
@@ -172,13 +192,6 @@ const PromptFields = ({
                 Click here to create an other option named &quot;{inputValue}&quot;.
               </span>
             )}
-          />
-          <ValidatedField
-            name="otherVariableLabel"
-            component={Text}
-            label="Other variable label"
-            placeholder="Text to describe the &quot;other&quot; field"
-            validation={{ required: true }}
           />
         </Row>
       }
