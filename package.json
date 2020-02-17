@@ -184,7 +184,7 @@
     "homepage": ".",
     "main": "www/electron-starter.js",
     "browserslist": [
-        "Chrome 61"
+        "Chrome 72"
     ],
     "build": {
         "extends": null,
