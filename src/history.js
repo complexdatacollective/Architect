@@ -1,6 +1,5 @@
 
-import createBrowserHistory from 'history/createBrowserHistory';
-import createMemoryHistory from 'history/createMemoryHistory';
+import { createMemoryHistory, createBrowserHistory } from 'history';
 import process from 'process';
 
 const getHistory = () => {

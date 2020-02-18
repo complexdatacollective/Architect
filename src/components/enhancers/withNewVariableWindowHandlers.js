@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { withState, withHandlers, withProps, compose } from 'recompose';
+import { withState, withHandlers, mapProps, compose } from 'recompose';
+import { get } from 'lodash';
 import { normalizeKeyDown } from './withCreateVariableHandler';
 
 /**
@@ -8,34 +9,46 @@ import { normalizeKeyDown } from './withCreateVariableHandler';
  * openNewVariableWindow,
  * closeNewVariableWindow,
  * newVariableName,
+ * newVariableOptions, // intended to be used for initialState, but can be used for anything
  * showNewVariableWindow,
  *
  * TODO: Should these live with NewVariableWindow?
  */
 
+const newVariableInitialState = {
+  variableName: null,
+  variableOptions: {},
+};
+
 const parseVariableName = variableName =>
   (typeof variableName === 'string' ? variableName : '');
 
-const newVariableNameState = withState(
-  'newVariableName', 'setNewVariableName', null,
+const newVariablePropertiesState = withState(
+  'newVariableProperties', 'setNewVariableProperties', newVariableInitialState,
 );
 
 const newVariableHandlers = withHandlers({
-  openNewVariableWindow: ({ setNewVariableName }) =>
-    variableName => setNewVariableName(parseVariableName(variableName)),
-  closeNewVariableWindow: ({ setNewVariableName }) =>
-    () => setNewVariableName(null),
+  openNewVariableWindow: ({ setNewVariableProperties }) =>
+    (variableName, variableOptions = {}) => setNewVariableProperties({
+      variableName: parseVariableName(variableName),
+      variableOptions,
+    }),
+  closeNewVariableWindow: ({ setNewVariableProperties }) =>
+    () => setNewVariableProperties(newVariableInitialState),
   normalizeKeyDown: () => normalizeKeyDown,
 });
 
-const showVariableWindow = withProps(
-  ({ newVariableName }) => ({
-    showNewVariableWindow: newVariableName !== null,
+const showVariableWindow = mapProps(
+  ({ newVariableProperties, ...rest }) => ({
+    showNewVariableWindow: newVariableProperties.variableName !== null,
+    newVariableName: get(newVariableProperties, 'variableName', null),
+    newVariableOptions: get(newVariableProperties, 'variableOptions', {}),
+    ...rest,
   }),
 );
 
 const withNewVariableWindowHandlers = compose(
-  newVariableNameState,
+  newVariablePropertiesState,
   newVariableHandlers,
   showVariableWindow,
 );

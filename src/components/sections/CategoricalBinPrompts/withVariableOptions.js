@@ -1,26 +1,28 @@
 import { connect } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
-import { compose, withHandlers, lifecycle } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { get } from 'lodash';
-import { getVariableOptionsForSubject, getVariablesForSubject } from '../../../selectors/codebook';
-import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
+import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { form, type, entity }) => {
   const variableOptions = getVariableOptionsForSubject(state, { type, entity });
   const variable = formValueSelector(form)(state, 'variable');
+  const otherVariable = formValueSelector(form)(state, 'otherVariable');
   const variables = getVariablesForSubject(state, { type, entity });
   const optionsForVariable = get(variables, [variable, 'options'], []);
+  const optionsForVariableDraft = formValueSelector(form)(state, 'variableOptions');
 
   return {
     variable,
+    otherVariable,
     variableOptions,
     optionsForVariable,
+    optionsForVariableDraft,
   };
 };
 
 const mapDispatchToProps = {
   changeForm: change,
-  deleteVariable: codebookActions.deleteVariable,
 };
 
 const variableOptions = connect(mapStateToProps, mapDispatchToProps);
@@ -39,32 +41,9 @@ const updateFormVariableOptions = lifecycle({
   },
 });
 
-const variableHandlers = withHandlers({
-  handleCreateNewVariable: ({ closeNewVariableWindow, changeForm, form }) =>
-    (variable) => {
-      changeForm(form, 'variable', variable);
-      closeNewVariableWindow();
-    },
-  handleDeleteVariable: ({
-    entity,
-    type,
-    deleteVariable,
-    changeForm,
-    form,
-    variable: selectedVariable,
-  }) =>
-    (variable) => {
-      const variableDeleted = deleteVariable(entity, type, variable);
-      if (variableDeleted && variable === selectedVariable) {
-        changeForm(form, 'variable', null);
-      }
-    },
-});
-
-const withPromptProps = compose(
+const withVariableOptions = compose(
   variableOptions,
   updateFormVariableOptions,
-  variableHandlers,
 );
 
-export default withPromptProps;
+export default withVariableOptions;

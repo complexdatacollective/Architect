@@ -2,35 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import Text from '@codaco/ui/lib/components/Fields/Text';
-import { getFieldId } from '../../../utils/issues';
-import { ValidatedField } from '../../Form';
-import CreatableSelect from '../../Form/Fields/CreatableSelect';
-import ColorPicker from '../../Form/Fields/ColorPicker';
-import MultiSelect from '../../Form/MultiSelect';
-import Section from '../Section';
-import Row from '../Row';
-import NewVariableWindow from '../../NewVariableWindow';
-import Options from '../../Options';
-import { getSortOrderOptionGetter } from '../CategoricalBinPrompts/optionGetters';
-import withPromptProps from '../CategoricalBinPrompts/withPromptProps';
-import withNewVariableWindowHandlers, {
-  propTypes as newWindowVariablePropTypes,
-} from '../../enhancers/withNewVariableWindowHandlers';
-import Tip from '../../Tip';
+import { getFieldId } from '@app/utils/issues';
+import { ValidatedField } from '@components/Form';
+import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import ColorPicker from '@components/Form/Fields/ColorPicker';
+import MultiSelect from '@components/Form/MultiSelect';
+import Section from '@components/sections/Section';
+import Row from '@components/sections/Row';
+import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
+import Options from '@components/Options';
+import Tip from '@components/Tip';
+import { getSortOrderOptionGetter } from '@components/sections/CategoricalBinPrompts/optionGetters';
+import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
+import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers';
 
 const PromptFields = ({
   variableOptions,
-  handleCreateNewVariable,
   normalizeKeyDown,
-  handleDeleteVariable,
+  deleteVariable,
   entity,
+  changeForm,
+  form,
   type,
   variable,
-  openNewVariableWindow,
-  closeNewVariableWindow,
-  newVariableName,
-  showNewVariableWindow,
 }) => {
+  const newVariableWindowInitialProps = {
+    entity,
+    type,
+    initialValues: { name: null, type: null },
+  };
+
+  const handleCreatedNewVariable = (id, { field }) =>
+    changeForm(form, field, id);
+
+  const [newVariableWindowProps, openNewVariableWindow] = useNewVariableWindowState(
+    newVariableWindowInitialProps,
+    handleCreatedNewVariable,
+  );
+
+  const handleNewVariable = name =>
+    openNewVariableWindow({ initialValues: { name, type: 'ordinal' } }, { field: 'variable' });
+
+  const handleDeleteVariable = v =>
+    deleteVariable(v, 'variable');
+
   const ordinalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'ordinal');
 
@@ -68,7 +83,7 @@ const PromptFields = ({
           component={CreatableSelect}
           label=""
           options={ordinalVariableOptions}
-          onCreateOption={openNewVariableWindow}
+          onCreateOption={handleNewVariable}
           onDeleteOption={handleDeleteVariable}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
@@ -151,17 +166,7 @@ const PromptFields = ({
       </Row>
 
 
-      <NewVariableWindow
-        initialValues={{
-          type: 'ordinal',
-          name: newVariableName,
-        }}
-        show={showNewVariableWindow}
-        entity={entity}
-        type={type}
-        onComplete={handleCreateNewVariable}
-        onCancel={closeNewVariableWindow}
-      />
+      <NewVariableWindow {...newVariableWindowProps} />
     </Section>
   );
 };
@@ -169,10 +174,8 @@ const PromptFields = ({
 PromptFields.propTypes = {
   variableOptions: PropTypes.array,
   handleDeleteVariable: PropTypes.func.isRequired,
-  handleCreateNewVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  ...newWindowVariablePropTypes,
 };
 
 PromptFields.defaultProps = {
@@ -182,6 +185,6 @@ PromptFields.defaultProps = {
 export { PromptFields };
 
 export default compose(
-  withNewVariableWindowHandlers,
-  withPromptProps,
+  withVariableOptions,
+  withVariableHandlers,
 )(PromptFields);
