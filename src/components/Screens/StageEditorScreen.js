@@ -8,7 +8,7 @@ import {
 import { Button } from '@codaco/ui';
 import { actionCreators as previewActions } from '../../ducks/modules/preview';
 import EditorScreen from '../Screen/EditorScreen';
-import StageEditor, { formName } from '../StageEditor';
+import StageEditor from '@components/StageEditor2';
 
 const mapStateToProps = state => ({
   invalid: isFormInvalid(formName)(state),
@@ -43,7 +43,6 @@ const stageEditorProps = withProps(({
   invalid,
 }) => ({
   editor: StageEditor,
-  form: formName,
   secondaryButtons: [
     <Button
       key="preview"
@@ -56,9 +55,9 @@ const stageEditorProps = withProps(({
 }));
 
 const StageEditorScreen = compose(
-  stageEditorState,
-  stageEditorHanders,
-  stageEditorProps,
-)(EditorScreen);
+  //stageEditorState,
+  //stageEditorHanders,
+  //stageEditorProps,
+)(StageEditor);
 
 export default StageEditorScreen;
