@@ -1,5 +1,6 @@
 .DS_Store
-/node_modules
+.git/modules
+node_modules
 /bower_components
 /platforms
 /coverage

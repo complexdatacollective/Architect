@@ -26,7 +26,9 @@
       "jsx-a11y/no-static-element-interactions": "off",
       "import/no-extraneous-dependencies": "off",
       "import/no-named-as-default": "off",
-      "no-console": "error",
+      // "import/extensions": "off",
+      // "no-console": "error",
+      "no-console": "off",
       "no-mixed-operators": [1, {"allowSamePrecedence": true}]
     },
     "settings": {

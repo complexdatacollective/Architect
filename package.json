@@ -155,6 +155,7 @@
         "redux-observable": "^0.14.1",
         "redux-persist": "^5.10.0",
         "redux-thunk": "^2.3.0",
+        "redux-toolkit": "^1.1.2",
         "redux-undo": "^0.6.1",
         "request": "^2.88.0",
         "request-promise-native": "^1.0.5",

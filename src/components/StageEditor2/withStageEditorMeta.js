@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import {
-  isDirty as isFormDirty,
-  isInvalid as isFormInvalid,
-} from 'redux-form';
+// import {
+//   isDirty as isFormDirty,
+//   isInvalid as isFormInvalid,
+// } from 'redux-form';
 import { find } from 'lodash';
-import { getProtocol } from '../../selectors/protocol';
-import { getInterface } from './Interfaces';
+import { getProtocol } from '@selectors/protocol';
+import { getInterface } from '@components/Interfaces';
 
 const getStageById = (protocol, id) =>
   find(protocol.stages, ['id', id]);

@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { getInterface } from './Interfaces';
+import { set } from 'lodash';
+import { getInterface } from '@components/Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
 
@@ -27,18 +28,50 @@ const useInterface = (interfaceType) => {
   return [iface.sections, name];
 };
 
-const StageEditor = ({ interfaceType, previewStage, ...props }) => {
+const useChangeHandler = (initialValues) => {
+  const [stage, setStage] = useState(initialValues);
+
+  const changeHandler = useCallback((path, value) => {
+    const updatedStage = set({ ...stage }, path, value);
+    setStage(updatedStage);
+  }, [stage, setStage]);
+
+  return [stage, changeHandler];
+};
+
+const StageEditor = ({
+  interfaceType,
+  previewStage,
+  initialValues,
+  ...props
+}) => {
+  const [stage, changeHandler] = useChangeHandler(initialValues);
   const [sections, name] = useInterface(interfaceType);
   usePreviewListener(() => { previewStage(); });
 
+  const styles = {
+    background: 'rgba(255, 255, 255, 0.9)',
+    zIndex: 9999,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    overflowY: 'hidden',
+    overflowX: 'scroll',
+  };
+
   return (
-    <div>
+    <div style={styles}>
       <h1>{name}</h1>
       {
         sections.map((SectionComponent, index) => (
           <SectionComponent
             key={index}
             interfaceType={interfaceType}
+            onChange={changeHandler}
+            stage={stage}
+            l={stage.label}
             {...props}
           />
         ))

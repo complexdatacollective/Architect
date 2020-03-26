@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { omit } from 'lodash';
-import prune from '../../utils/prune';
-import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
+import prune from '@app/utils/prune';
+import { actionCreators as stageActions } from '@modules/protocol/stages';
 
 const mapDispatchToProps = {
   updateStage: stageActions.updateStage,
