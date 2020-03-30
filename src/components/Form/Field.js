@@ -63,6 +63,7 @@ const reducer = createReducer({
 const Field = ({
   component: FieldComponent,
   onChange,
+  onValidate,
   validate: validators,
   value,
   name,
@@ -76,10 +77,9 @@ const Field = ({
     const errors = getErrors(validators, v);
     dispatch(validationErrors(errors));
 
-    if (errors.length === 0) {
-      // Do we really need this interface for compatibility?
-      onChange(eventOrValue, value, v, name);
-    }
+    // Do we really need this interface for compatibility?
+    onValidate(errors.length !== 0 ? errors : null);
+    onChange(eventOrValue, value, v, name);
   });
 
   const inputProp = {

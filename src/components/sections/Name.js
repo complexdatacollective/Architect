@@ -6,7 +6,7 @@ import Field from '@components/Form/Field';
 import { getFieldId } from '../../utils/issues';
 import Section from './Section';
 
-const Name = ({ onChange, stage }) => (
+const Name = ({ onChange, onValidate, stage }) => (
   <Section contentId="guidance.editor.name">
     <div id={getFieldId('label')} data-name="Stage name" />
     <h2>Stage Name</h2>
@@ -22,6 +22,7 @@ const Name = ({ onChange, stage }) => (
       className="stage-editor-section-title"
       maxLength="50"
       value={get(stage, 'label', '')}
+      onValidate={errors => onValidate('label', errors)}
       onChange={(e, oldValue, value) => onChange('label', value)}
       validation={{ required: true, maxLength: 10 }}
     />

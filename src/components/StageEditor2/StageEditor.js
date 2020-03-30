@@ -28,6 +28,17 @@ const useInterface = (interfaceType) => {
   return [iface.sections, name];
 };
 
+const useValidateHandler = (initialValues = {}) => {
+  const [errors, setErrors] = useState(initialValues);
+
+  const validateHandler = useCallback((path, value) => {
+    const updatedStage = set({ ...errors }, path, value);
+    setErrors(updatedStage);
+  }, [errors, setErrors]);
+
+  return [errors, validateHandler];
+};
+
 const useChangeHandler = (initialValues) => {
   const [stage, setStage] = useState(initialValues);
 
@@ -46,6 +57,7 @@ const StageEditor = ({
   ...props
 }) => {
   const [stage, changeHandler] = useChangeHandler(initialValues);
+  const [errors, validateHandler] = useValidateHandler();
   const [sections, name] = useInterface(interfaceType);
   usePreviewListener(() => { previewStage(); });
 
@@ -64,14 +76,16 @@ const StageEditor = ({
   return (
     <div style={styles}>
       <h1>{name}</h1>
+      <p>errors: { JSON.stringify(errors) }</p>
       {
         sections.map((SectionComponent, index) => (
           <SectionComponent
             key={index}
             interfaceType={interfaceType}
             onChange={changeHandler}
+            onValidate={validateHandler}
             stage={stage}
-            l={stage.label}
+            l={stage.label} // TODO: ?
             {...props}
           />
         ))
