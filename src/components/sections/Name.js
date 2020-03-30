@@ -6,22 +6,21 @@ import Field from '@components/Form/Field';
 import { getFieldId } from '../../utils/issues';
 import Section from './Section';
 
-const Name = ({ onChange, onValidate, stage }) => (
+const Name = ({ onChange, onValidate, stageId }) => (
   <Section contentId="guidance.editor.name">
     <div id={getFieldId('label')} data-name="Stage name" />
-    <h2>Stage Name</h2>
+    <h2>Stage Name {stageId}</h2>
     <p>
       Enter a name for your stage here. This name will appear in the timeline view of your
       protocol in both Architect and Network Canvas.
     </p>
-    {console.log('render')};
     <Field
       name="label"
       component={Fields.Text}
       placeholder="Enter your stage name here"
       className="stage-editor-section-title"
       maxLength="50"
-      value={get(stage, 'label', '')}
+      stageId={stageId}
       onValidate={onValidate}
       onChange={onChange}
       validation={{ required: true, maxLength: 10 }}

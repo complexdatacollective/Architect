@@ -39,31 +39,21 @@ const useValidateHandler = (initialValues = {}) => {
   return [errors, validateHandler];
 };
 
-const useChangeHandler = (initialValues) => {
-  const [stage, setStage] = useState(initialValues);
-
-  const changeHandler = useCallback((path, value) => {
-    const updatedStage = set({ ...stage }, path, value);
-    setStage(updatedStage);
-  }, [stage, setStage]);
-
-  return [stage, changeHandler];
-};
-
 const StageEditor = ({
   interfaceType,
   previewStage,
-  initialValues,
+  onChange,
+  onReset,
+  id,
   ...props
 }) => {
-  const [stage, changeHandler] = useChangeHandler(initialValues);
   const [errors, validateHandler] = useValidateHandler();
   const [sections, name] = useInterface(interfaceType);
   usePreviewListener(() => { previewStage(); });
 
   const styles = {
     background: 'rgba(255, 255, 255, 0.9)',
-    zIndex: 9999,
+    zIndex: 20,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -82,10 +72,10 @@ const StageEditor = ({
           <SectionComponent
             key={index}
             interfaceType={interfaceType}
-            onChange={changeHandler}
+            onChange={onChange}
+            onReset={onReset}
             onValidate={validateHandler}
-            stage={stage}
-            l={stage.label} // TODO: ?
+            stageId={id} // TODO: make this context?
             {...props}
           />
         ))

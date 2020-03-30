@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { getNodeTypes, utils } from '../../../selectors/codebook';
+import { getNodeTypeOptions } from '@selectors/codebook';
 
 const mapStateToProps = state => ({
-  nodeTypes: utils.asOptions(getNodeTypes(state)),
+  nodeTypes: getNodeTypeOptions(state),
 });
 
 const withNodeTypeOptions = connect(mapStateToProps);

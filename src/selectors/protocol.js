@@ -22,12 +22,16 @@ export const getStage = (state, id) => {
   return find(protocol.stages, ['id', id]);
 };
 
+export const getStageById = getStage;
+
 export const makeGetStage = () =>
   createSelector(
     getProtocol,
     propStageId,
     (protocol, stageId) => find(protocol.stages, ['id', stageId]),
   );
+
+export const makeGetStageById = makeGetStage;
 
 const networkTypes = new Set([
   'network',

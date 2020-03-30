@@ -1,6 +1,9 @@
 import React, { useReducer, useCallback } from 'react';
 import { createReducer, createAction } from 'redux-toolkit';
 import { compose, defaultProps } from 'recompose';
+import { get } from 'lodash';
+import { makeGetStageById } from '@selectors/protocol';
+import { connect } from 'react-redux';
 import withValidation from '@components/Form/withValidation';
 
 const getValue = (eventOrValue) => {
@@ -86,7 +89,7 @@ const Field = ({
   });
 
   const inputProp = {
-    value: format(value),
+    value,
     name,
     onChange: handleChange,
   };
@@ -105,6 +108,21 @@ const Field = ({
   );
 };
 
+const makeMapStateToProps = () => {
+  const getStageById = makeGetStageById();
+  const mapStateToProps = (state, { format, stageId, name }) => {
+    const stage = getStageById(state, { stageId });
+
+    const value = format(get(stage, name));
+
+    return {
+      value,
+    };
+  };
+
+  return mapStateToProps;
+};
+
 export { Field };
 
 export default compose(
@@ -116,4 +134,5 @@ export default compose(
     format: x => x,
   }),
   withValidation,
+  connect(makeMapStateToProps),
 )(Field);

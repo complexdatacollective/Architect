@@ -1,10 +1,11 @@
 import uuid from 'uuid/v1';
-import { get, compact, set } from 'lodash';
+import { get, compact, set, pick, omit } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 
 const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
 const UPDATE_STAGE = 'PROTOCOL/UPDATE_STAGE';
 const UPDATE_PATH = 'PROTOCOL/UPDATE_PATH';
+const RESET_PATHS = 'PROTOCOL/RESET_PATHS';
 const MOVE_STAGE = 'PROTOCOL/MOVE_STAGE';
 const DELETE_STAGE = 'PROTOCOL/DELETE_STAGE';
 const DELETE_PROMPT = 'PROTOCOL/DELETE_PROMPT';
@@ -45,6 +46,21 @@ export default function reducer(state = initialState, action = {}) {
         const newStage = payload.path ?
           set({ ...stage }, payload.path, payload.value) :
           payload.value;
+
+        return {
+          ...newStage,
+          id: stage.id,
+        };
+      });
+    }
+    case RESET_PATHS: {
+      const payload = action.payload;
+      return state.map((stage) => {
+        if (stage.id !== payload.id) { return stage; }
+
+        const newStage = payload.keep ?
+          pick({ ...stage }, payload.keys) :
+          omit({ ...stage }, payload.keys);
 
         return {
           ...newStage,
@@ -105,6 +121,15 @@ const updatePath = (stageId, path, value) => ({
   },
 });
 
+const resetPaths = (stageId, keys, keep = false) => ({
+  type: RESET_PATHS,
+  payload: {
+    id: stageId,
+    keys,
+    keep,
+  },
+});
+
 const deleteStage = stageId => ({
   type: DELETE_STAGE,
   id: stageId,
@@ -129,6 +154,7 @@ const actionCreators = {
   createStage: createStageThunk,
   updateStage,
   updatePath,
+  resetPaths,
   deleteStage,
   moveStage,
   deletePrompt,
@@ -138,6 +164,7 @@ const actionTypes = {
   CREATE_STAGE,
   UPDATE_STAGE,
   UPDATE_PATH,
+  RESET_PATHS,
   DELETE_STAGE,
   MOVE_STAGE,
   DELETE_PROMPT,

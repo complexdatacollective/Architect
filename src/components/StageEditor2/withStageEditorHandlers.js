@@ -6,6 +6,8 @@ import { actionCreators as stageActions } from '@modules/protocol/stages';
 
 const mapDispatchToProps = {
   updateStage: stageActions.updateStage,
+  updatePath: stageActions.updatePath,
+  resetPaths: stageActions.resetPaths,
   createStage: stageActions.createStage,
 };
 
@@ -22,6 +24,11 @@ const stageEditorHanders = withHandlers({
 
       onComplete();
     },
+  onChange: ({ id, updatePath }) =>
+    (path, value) => updatePath(id, path, value),
+  onReset: ({ id, resetPaths }) =>
+    (keys, keep) =>
+      resetPaths(id, keys, keep),
 });
 
 const withStageEditorHandlers = compose(

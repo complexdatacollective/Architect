@@ -15,6 +15,9 @@ import Section from '../Section';
 import Row from '../Row';
 import Tip from '../../Tip';
 
+const parseSubject = value => ({ type: value, entity: 'node' });
+const formatSubject = value => get(value, 'type');
+
 class NodeType extends Component {
   static propTypes = {
     nodeTypes: PropTypes.arrayOf(PropTypes.object),
@@ -35,20 +38,22 @@ class NodeType extends Component {
     type: null,
   };
 
-  // componentDidUpdate() {
-  //   this.props.handleTypeScreenMessage(this.props.typeScreenMessage);
-  // }
+  componentDidUpdate() {
+    // this.props.handleTypeScreenMessage(this.props.typeScreenMessage);
+  }
 
   render() {
     const {
       nodeTypes,
       disabled,
       handleResetStage,
+      handleResetOnChange,
       handleOpenCreateNewType,
       subjectHasVariableCalledName,
       onChange,
       onValidate,
       type,
+      stageId,
     } = this.props;
 
     const nodeTypeClasses = cx('stage-editor-section', 'stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
@@ -66,12 +71,13 @@ class NodeType extends Component {
             <div className="stage-editor-section-node-type__edit-capture">
               <Field
                 name="subject"
-                parse={value => ({ type: value, entity: 'node' })}
-                format={value => get(value, 'type')}
+                parse={parseSubject}
+                format={formatSubject}
                 options={nodeTypes}
+                stageId={stageId}
                 component={NodeSelect}
                 validation={{ required: true }}
-                onChange={onChange}
+                onChange={handleResetOnChange}
                 onValidate={onValidate}
               />
 
@@ -111,6 +117,6 @@ export { NodeType };
 export default compose(
   withNodeTypeOptions,
   withSubjectVariables,
-  // withDisableAndReset,
+  withDisableAndReset,
   // withCreateNewType,
 )(NodeType);

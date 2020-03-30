@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { get, map, has, filter, pickBy } from 'lodash';
+import { createSelector } from 'reselect';
 import { getCodebook } from './protocol';
 import { getVariableIndex } from './indexes';
 
@@ -40,6 +41,11 @@ const getType = (state, subject) => {
 
   return get(getCodebook(state), path, {});
 };
+
+export const getNodeTypeOptions = createSelector(
+  getNodeTypes,
+  nodeTypes => asOptions(nodeTypes),
+);
 
 /**
  * Given `subject` return a list of variables

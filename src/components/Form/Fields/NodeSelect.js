@@ -35,6 +35,8 @@ class NodeSelect extends Component {
       },
     } = this.props;
 
+    console.log({ value, options });
+
     const renderedOptions = options.map(
       ({ label, color, value: optionValue }) => (
         <PreviewNode

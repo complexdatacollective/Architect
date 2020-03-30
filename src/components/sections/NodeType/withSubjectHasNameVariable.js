@@ -5,10 +5,9 @@ import { getVariableOptionsForSubject } from '../../../selectors/codebook';
 import { getStage } from '../../../selectors/protocol';
 
 const withSubjectNameVariablesState = connect(
-  (state, { stage }) => {
+  (state, { stageId }) => {
     // // const subject = formValueSelector(form)(state, 'subject');
-    const stageEntry = getStage(state, stage);
-    console.log({ stage, stageEntry });
+    const stageEntry = getStage(state, stageId);
     const subject = (stageEntry && stageEntry.subject) || { entity: null, type: null };
     const entity = subject && subject.entity;
     const type = subject && subject.type;
@@ -16,7 +15,7 @@ const withSubjectNameVariablesState = connect(
       .filter(({ label: variableLabel }) => variableLabel === 'name');
 
     return {
-      ...subject,
+      // ...subject,
       subjectHasVariableCalledName: !!variablesCalledName.length > 0,
     };
   },

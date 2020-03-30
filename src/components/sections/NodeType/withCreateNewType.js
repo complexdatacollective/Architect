@@ -21,6 +21,7 @@ const createTypeState = connect(
 );
 
 const createTypeHandlers = withHandlers({
+  // if new one is created this is how it hooks in to update the value...
   handleTypeScreenMessage: ({ changeForm, form }) =>
     (message) => {
       if (!message) { return; }
