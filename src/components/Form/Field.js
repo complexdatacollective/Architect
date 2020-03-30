@@ -68,22 +68,25 @@ const Field = ({
   value,
   name,
   meta,
+  parse,
+  format,
   ...props
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleChange = useCallback((eventOrValue) => {
-    const v = getValue(eventOrValue);
-    const errors = getErrors(validators, v);
+    const newValue = getValue(eventOrValue);
+    const errors = getErrors(validators, newValue);
     dispatch(validationErrors(errors));
 
-    // Do we really need this interface for compatibility?
-    onValidate(errors.length !== 0 ? errors : null);
-    onChange(eventOrValue, value, v, name);
+    onValidate(name, errors.length !== 0 ? errors : null);
+    // TODO: Do we need this interface for compatibility?
+    // onChange(eventOrValue, value, newValue, name);
+    onChange(name, parse(newValue));
   });
 
   const inputProp = {
-    value,
+    value: format(value),
     name,
     onChange: handleChange,
   };
@@ -105,6 +108,12 @@ const Field = ({
 export { Field };
 
 export default compose(
-  defaultProps({ validation: {}, onChange: () => {} }),
+  defaultProps({
+    validation: {},
+    onChange: () => {},
+    onValidate: () => {},
+    parse: x => x,
+    format: x => x,
+  }),
   withValidation,
 )(Field);

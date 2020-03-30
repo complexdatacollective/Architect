@@ -17,6 +17,11 @@ export const getActiveProtocolMeta = createSelector(
   (meta, id) => find(meta, ['id', id]),
 );
 
+export const getStage = (state, id) => {
+  const protocol = getProtocol(state);
+  return find(protocol.stages, ['id', id]);
+};
+
 export const makeGetStage = () =>
   createSelector(
     getProtocol,

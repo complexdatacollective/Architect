@@ -22,8 +22,8 @@ const Name = ({ onChange, onValidate, stage }) => (
       className="stage-editor-section-title"
       maxLength="50"
       value={get(stage, 'label', '')}
-      onValidate={errors => onValidate('label', errors)}
-      onChange={(e, oldValue, value) => onChange('label', value)}
+      onValidate={onValidate}
+      onChange={onChange}
       validation={{ required: true, maxLength: 10 }}
     />
   </Section>

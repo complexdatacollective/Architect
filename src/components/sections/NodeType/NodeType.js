@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import cx from 'classnames';
 import Button from '@codaco/ui/lib/components/Button';
+import Field from '@components/Form/Field';
 import { getFieldId } from '../../../utils/issues';
 import NodeSelect from '../../Form/Fields/NodeSelect';
-import ValidatedField from '../../Form/ValidatedField';
 import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateNewType';
 import withNodeTypeOptions from './withNodeTypeOptions';
@@ -35,9 +35,9 @@ class NodeType extends Component {
     type: null,
   };
 
-  componentDidUpdate() {
-    this.props.handleTypeScreenMessage(this.props.typeScreenMessage);
-  }
+  // componentDidUpdate() {
+  //   this.props.handleTypeScreenMessage(this.props.typeScreenMessage);
+  // }
 
   render() {
     const {
@@ -46,6 +46,8 @@ class NodeType extends Component {
       handleResetStage,
       handleOpenCreateNewType,
       subjectHasVariableCalledName,
+      onChange,
+      onValidate,
       type,
     } = this.props;
 
@@ -62,13 +64,15 @@ class NodeType extends Component {
             onClick={handleResetStage}
           >
             <div className="stage-editor-section-node-type__edit-capture">
-              <ValidatedField
+              <Field
                 name="subject"
                 parse={value => ({ type: value, entity: 'node' })}
                 format={value => get(value, 'type')}
                 options={nodeTypes}
                 component={NodeSelect}
                 validation={{ required: true }}
+                onChange={onChange}
+                onValidate={onValidate}
               />
 
               { nodeTypes.length === 0 &&
@@ -107,6 +111,6 @@ export { NodeType };
 export default compose(
   withNodeTypeOptions,
   withSubjectVariables,
-  withDisableAndReset,
-  withCreateNewType,
+  // withDisableAndReset,
+  // withCreateNewType,
 )(NodeType);
