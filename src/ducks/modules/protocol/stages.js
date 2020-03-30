@@ -1,9 +1,10 @@
 import uuid from 'uuid/v1';
-import { get, compact } from 'lodash';
+import { get, compact, set } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 
 const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
 const UPDATE_STAGE = 'PROTOCOL/UPDATE_STAGE';
+const UPDATE_PATH = 'PROTOCOL/UPDATE_PATH';
 const MOVE_STAGE = 'PROTOCOL/MOVE_STAGE';
 const DELETE_STAGE = 'PROTOCOL/DELETE_STAGE';
 const DELETE_PROMPT = 'PROTOCOL/DELETE_PROMPT';
@@ -36,6 +37,21 @@ export default function reducer(state = initialState, action = {}) {
           id: stage.id,
         };
       });
+    case UPDATE_PATH: {
+      const payload = action.payload;
+      return state.map((stage) => {
+        if (stage.id !== payload.id) { return stage; }
+
+        const newStage = payload.path ?
+          set({ ...stage }, payload.path, payload.value) :
+          payload.value;
+
+        return {
+          ...newStage,
+          id: stage.id,
+        };
+      });
+    }
     case MOVE_STAGE:
       return arrayMove(state, action.oldIndex, action.newIndex);
     case DELETE_STAGE:
@@ -80,6 +96,15 @@ const updateStage = (stageId, stage, overwrite = false) => ({
   overwrite,
 });
 
+const updatePath = (stageId, path, value) => ({
+  type: UPDATE_PATH,
+  payload: {
+    id: stageId,
+    path,
+    value,
+  },
+});
+
 const deleteStage = stageId => ({
   type: DELETE_STAGE,
   id: stageId,
@@ -103,6 +128,7 @@ const createStageThunk = (options, index) =>
 const actionCreators = {
   createStage: createStageThunk,
   updateStage,
+  updatePath,
   deleteStage,
   moveStage,
   deletePrompt,
@@ -111,6 +137,7 @@ const actionCreators = {
 const actionTypes = {
   CREATE_STAGE,
   UPDATE_STAGE,
+  UPDATE_PATH,
   DELETE_STAGE,
   MOVE_STAGE,
   DELETE_PROMPT,
