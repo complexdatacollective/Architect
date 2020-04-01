@@ -28,6 +28,7 @@ const PromptFields = ({
   handleNewVariable,
   handleChangeComponent,
   handleChangeVariable,
+  handleDeleteVariable,
 }) => (
   <Section>
     <Row contentId="guidance.section.form.field.name">
@@ -49,6 +50,7 @@ const PromptFields = ({
         options={variableOptions} // from variables
         onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
         onChange={handleChangeVariable} // read/reset component options validation
+        onDeleteOption={handleDeleteVariable}
         onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
         placeholder="Type to create a variable..."
@@ -157,6 +159,7 @@ PromptFields.propTypes = {
   isNewVariable: PropTypes.bool.isRequired,
   handleNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
+  handleDeleteVariable: PropTypes.func.isRequired,
 };
 
 PromptFields.defaultProps = {

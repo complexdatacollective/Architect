@@ -10,7 +10,9 @@ import INPUT_OPTIONS, {
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
 } from '@app/config/variables';
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { getVariablesForSubject } from '@selectors/codebook';
+import { makeGetIsUsedOptions } from '@selectors/variables';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -36,9 +38,11 @@ const mapStateToProps = (state, { form, entity, type }) => {
     [],
   );
 
+  const variableOptionsWithIsUsed = makeGetIsUsedOptions()(state, variableOptions);
+
   const variableOptionsWithNewVariable = isNewVariable ?
-    [...variableOptions, { label: createNewVariable, value: createNewVariable }] :
-    variableOptions;
+    [...variableOptionsWithIsUsed, { label: createNewVariable, value: createNewVariable }] :
+    variableOptionsWithIsUsed;
 
   // 1. If type defined use that (existing variable)
   // 2. Othewise derive it from component (new variable)
@@ -67,6 +71,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
 
 const mapDispatchToProps = {
   changeField: change,
+  deleteVariable: codebookActions.deleteVariable,
 };
 
 const fieldsState = connect(mapStateToProps, mapDispatchToProps);
@@ -102,6 +107,14 @@ const fieldsHandlers = withHandlers({
       changeField(form, 'options', options);
       changeField(form, 'parameters', parameters);
       changeField(form, 'validation', validation);
+    },
+  handleDeleteVariable: ({
+    entity,
+    type,
+    deleteVariable,
+  }) =>
+    (variable) => {
+      deleteVariable(entity, type, variable);
     },
   handleNewVariable: ({ changeField, form }) =>
     (value) => {
