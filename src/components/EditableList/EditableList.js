@@ -16,7 +16,7 @@ import Window from '../Window';
 import Form from '../Form';
 import withEditHandlers from './withEditHandlers';
 
-const formName = 'editiable-list-form';
+const formName = 'editable-list-form';
 
 const sortModes = [
   'auto',
