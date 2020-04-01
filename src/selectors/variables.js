@@ -22,7 +22,7 @@ const getIdsFromCodebook = codebook =>
 export const makeGetIsUsed = (formNames = ['edit-stage', 'editable-list-form']) =>
   (state) => {
     const protocol = getProtocol(state);
-    const forms = getForms(formNames);
+    const forms = getForms(formNames)(state);
 
     const variableIds = getIdsFromCodebook(protocol.codebook);
 

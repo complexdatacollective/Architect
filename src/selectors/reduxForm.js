@@ -1,6 +1,6 @@
 import { getFormValues } from 'redux-form';
 
-export const getForms = formNames =>
+export const getForms = (formNames = []) =>
   state =>
     formNames.reduce(
       (memo, formName) => ({
