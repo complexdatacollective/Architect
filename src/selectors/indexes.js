@@ -107,7 +107,11 @@ const getVariableIndex = createSelector(
     const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
     const additionalAttributes = collectPaths('stages[].prompts[].additionalAttributes[].variable', protocol);
     const nameGeneratorIndex = collectPaths('stages[].panels.filter.rules[].options.attribute', protocol);
-    const categoricalIndex = collectPaths('stages[].prompts[].variable', protocol);
+    const categoricalIndex = {
+      ...collectPaths('stages[].prompts[].variable', protocol),
+      ...collectPaths('stages[].prompts[].binSortOrder[].property', protocol),
+      ...collectPaths('stages[].prompts[].bucketSortOrder[].property', protocol),
+    };
     // Sociogram usage
     const sociogramIndex = {
       ...collectPaths('stages[].prompts[].highlight.variable', protocol),
