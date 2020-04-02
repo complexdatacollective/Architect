@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withHandlers, withStateHandlers, withProps } from 'recompose';
 import { get, tap, isString } from 'lodash';
 import cx from 'classnames';
-import { AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
+import { CellMeasurerCache, AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
 const HEADER_HEIGHT = 50;
-const ROW_HEIGHT = 50;
+const DEFAULT_ROW_HEIGHT = 50;
 
 const rowClassName = ({ index }) => {
   const isEven = index % 2 === 0;
@@ -28,7 +28,13 @@ const rowClassName = ({ index }) => {
 
 const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => {
   // Set height to full content height (to prevent scrolling)
-  const height = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
+  // const height = (variables.length * DEFAULT_ROW_HEIGHT) + HEADER_HEIGHT;
+
+  const cache = useMemo(() => new CellMeasurerCache({
+    // defaultHeight: DEFAULT_ROW_HEIGHT,
+    minHeight: DEFAULT_ROW_HEIGHT,
+    fixedWidth: true,
+  }), [variables]);
 
   return (
     <AutoSizer disableHeight>
@@ -38,11 +44,12 @@ const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => 
           headerClassName="codebook__variables-heading"
           rowClassName={rowClassName}
           width={width}
-          height={height}
+          height={10000}
           headerHeight={HEADER_HEIGHT}
-          rowHeight={ROW_HEIGHT}
           rowCount={variables.length}
           rowGetter={({ index }) => variables[index]}
+          deferredMeasurementCache={cache}
+          rowHeight={cache.rowHeight}
           sortBy={sortBy}
           sortDirection={sortDirection}
           sort={sort}
@@ -74,7 +81,8 @@ const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => 
             flexGrow={1}
             label="Used in"
             dataKey="inUse"
-            cellRenderer={UsageColumn}
+            cache={cache}
+            cellRenderer={UsageColumn(cache)}
           />
           <Column
             className="codebook__variables-column"

@@ -89,10 +89,10 @@
     &-column {
       padding: 3px 0;
 
-      // TODO: would be better to set height based on contents of this column but quick fix for now
-      &--usage {
-        overflow-x: auto !important; // sass-lint:disable-line no-important
-      }
+      // // TODO: would be better to set height based on contents of this column but quick fix for now
+      // &--usage {
+      //   overflow-x: auto !important; // sass-lint:disable-line no-important
+      // }
     }
   }
 }
