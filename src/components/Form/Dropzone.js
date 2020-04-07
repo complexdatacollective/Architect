@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import cx from 'classnames';
 import { times } from 'lodash';
+import { Spinner } from '@codaco/ui';
 
 const { dialog } = require('electron').remote;
 
@@ -24,6 +25,7 @@ const initialState = {
   isActive: false, // is doing something
   isAcceptable: false, // can accept file
   isDisabled: false, // is disabled
+  isLoading: false, // file is being imported
   error: null,
 };
 
@@ -57,12 +59,14 @@ const Dropzone = ({
       return;
     }
 
-    setState(previousState => ({ ...previousState, isAcceptable: true }));
+    setState(previousState => ({ ...previousState, isAcceptable: true, isLoading: true }));
 
-    onDrop(filePaths)
-      .finally(() => {
-        setState(previousState => ({ ...previousState, ...initialState }));
-      });
+    setTimeout(() => {
+      onDrop(filePaths)
+        .finally(() => {
+          setState(previousState => ({ ...previousState, ...initialState }));
+        });
+    }, 3000);
   };
 
   const handleClick = useCallback((e) => {
@@ -110,8 +114,9 @@ const Dropzone = ({
   const dropzoneClasses = cx(
     className,
     {
-      [`${className}--active`]: true, //state.isActive,
+      [`${className}--active`]: state.isActive,
       [`${className}--hover`]: state.isHover,
+      [`${className}--loading`]: state.isLoading,
       [`${className}--disabled`]: isDisabled,
       [`${className}--error`]: state.error,
     },
@@ -123,13 +128,15 @@ const Dropzone = ({
       onDragEnter={handleDragEnter}
       onDragExit={handleDragExit}
     >
-      <div className={dropzoneClasses}>
+      <div className={dropzoneClasses} onClick={handleClick}>
         <div className={`${className}__container`} />
         <div className={`${className}__label`}>
           Drop a file here or&nbsp;
-          <div className={`${className}__link`} onClick={handleClick}>click to browse</div>
+          <div className={`${className}__link`}>click to browse</div>
         </div>
-
+        <div className={`${className}__loading`}>
+          { state.isActive && <Spinner small /> }
+        </div>
       </div>
     </div>
   );

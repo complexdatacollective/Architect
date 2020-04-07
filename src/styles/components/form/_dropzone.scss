@@ -27,7 +27,7 @@
     background-color: transparent;
     transition-duration: var(--animation-duration-fast);
     transition-timing-function: var(--animation-easing);
-    transition-property: filter, background-color;
+    transition-property: background-color;
   }
 
   &__label {
@@ -36,7 +36,7 @@
     color: var(--color-white);
     transition-duration: var(--animation-duration-standard);
     transition-timing-function: var(--animation-easing);
-    transition-property: filter;
+    transition-property: opacity;
     line-height: unit(2);
   }
 
@@ -47,16 +47,47 @@
     cursor: pointer;
   }
 
-  &--accept {
-    // border-color: var(--notice);
+  &__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition-duration: var(--animation-duration-standard);
+    transition-timing-function: var(--animation-easing);
+    transition-property: opacity;
   }
 
-  // &--reject {
-  //   border-color: var(--error);
+  &--active {
+    cursor: initial;
+    // border-color: var(--notice);
 
-  //   .form-dropzone__container {
-  //     background-color: var(--error);
-  //     filter: brightness(.3);
-  //   }
-  // }
+    .form-dropzone__label {
+      opacity: .5;
+    }
+  }
+
+  &--loading {
+    cursor: wait;
+
+    .form-dropzone__label {
+      opacity: 0;
+    }
+
+    .form-dropzone__loading {
+      opacity: 1;
+    }
+  }
+
+  &--error {
+    border-color: var(--error);
+
+    .form-dropzone__container {
+      background-color: var(--error);
+    }
+  }
 }

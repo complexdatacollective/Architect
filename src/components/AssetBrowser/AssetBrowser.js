@@ -38,7 +38,7 @@ const AssetBrowser = ({
       </div>
     </div>
   );
-}
+};
 
 AssetBrowser.propTypes = {
   type: PropTypes.string,
