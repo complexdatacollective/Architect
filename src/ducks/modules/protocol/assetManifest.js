@@ -54,34 +54,34 @@ const importAssetFailed = (filename, error) =>
   });
 
 /**
- * @param {File} asset - File() to import
+ * @param {File} filePath - File path to import
  */
-const importAssetThunk = asset =>
+const importAssetThunk = filePath =>
   (dispatch, getState) => {
     const state = getState();
     const { workingPath } = getActiveProtocolMeta(state);
-    const name = getNameFromFilename(asset.name);
+    const name = getNameFromFilename(filePath);
 
     dispatch(importAsset(name));
-    log.info('Import asset', asset.name);
+    log.info('Import asset', filePath);
 
     if (!workingPath) {
       const error = new Error('No working path found, possibly no active protocol.');
-      dispatch(importAssetFailed(asset.name, error));
-      dispatch(importAssetErrorDialog(error, asset.name));
+      dispatch(importAssetFailed(filePath, error));
+      dispatch(importAssetErrorDialog(error, filePath));
       return Promise.reject(error);
     }
 
-    return validateAsset(asset)
-      .then(() => fsImportAsset(workingPath, asset))
-      .then(({ filePath, assetType }) => {
+    return validateAsset(filePath)
+      .then(() => fsImportAsset(workingPath, filePath))
+      .then((result) => {
         log.info('  OK');
-        return dispatch(importAssetComplete(filePath, name, assetType));
+        return dispatch(importAssetComplete(result.filePath, name, result.assetType));
       })
       .catch((error) => {
         log.error('  ERROR', error);
-        dispatch(invalidAssetErrorDialog(error, asset.name));
-        return dispatch(importAssetFailed(asset.name, error));
+        dispatch(invalidAssetErrorDialog(error, filePath));
+        return dispatch(importAssetFailed(filePath, error));
       });
   };
 

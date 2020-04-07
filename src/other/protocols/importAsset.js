@@ -2,10 +2,8 @@ import path from 'path';
 import uuid from 'uuid/v1';
 import { findKey, get, toLower } from 'lodash';
 import csvParse from 'csv-parse';
-import { writeFile } from 'fs-extra';
-import readFileAsBuffer from './lib/readFileAsBuffer';
+import { copy, readFile } from 'fs-extra';
 import { SUPPORTED_EXTENSION_TYPE_MAP, SUPPORTED_MIME_TYPE_MAP } from '../../config';
-
 
 /**
  * Function that determines the type of an asset file when importing. Types are defined
@@ -17,12 +15,11 @@ import { SUPPORTED_EXTENSION_TYPE_MAP, SUPPORTED_MIME_TYPE_MAP } from '../../con
  * @return {string} Returns one of network, image, audio, video or returns false if type
  * is unsupported
  */
-const getSupportedAssetType = (asset) => {
-  const extension = toLower(path.extname(asset.name));
-  const mimeType = asset.type;
+const getSupportedAssetType = (filePath) => {
+  const extension = toLower(path.extname(filePath));
 
   const typeFromMap =
-    findKey(SUPPORTED_MIME_TYPE_MAP, type => type.includes(mimeType)) ||
+    // findKey(SUPPORTED_MIME_TYPE_MAP, type => type.includes(mimeType)) ||
     findKey(SUPPORTED_EXTENSION_TYPE_MAP, type => type.includes(extension));
 
   return typeFromMap || false;
@@ -31,33 +28,33 @@ const getSupportedAssetType = (asset) => {
 /**
  * Function to determine if network file is CSV or JSON based for validation purposes.
  * Returns .
- * @param {string} file - The filename of the network asset
+ * @param {string} filepath - The filename of the network asset
  * @returns {string} - Returns either json or csv, or undefined
  */
-const getNetworkType = (file) => {
-  const extension = path.extname(file.name);
-  const mimeType = file.type;
+const getNetworkType = (filePath) => {
+  const extension = path.extname(filePath);
 
   const NETWORK_TYPE_MAP = {
-    json: ['application/json', '.json'],
-    csv: ['text/csv', 'application/vnd.ms-excel', '.csv'],
+    json: ['.json'],
+    csv: ['.csv'],
   };
 
-  return findKey(NETWORK_TYPE_MAP, type => type.includes(mimeType) || type.includes(extension));
+  return findKey(NETWORK_TYPE_MAP, type => type.includes(extension));
 };
 
 /**
  * Makes a copy of a file buffer to `protocolPath`
  * @param {string} protocolPath - The destination directory.
- * @param {buffer} file - The file buffer to copy.
+ * @param {string} filePath - The file buffer to copy.
  */
-const importAsset = (protocolPath, file) => {
-  const destinationName = `${uuid()}${path.extname(file.name)}`;
+const importAsset = (protocolPath, filePath) => {
+  const destinationName = `${uuid()}${path.extname(filePath)}`;
   const destinationPath = path.join(protocolPath, 'assets', destinationName);
-  const assetType = getSupportedAssetType(file);
+  const assetType = getSupportedAssetType(filePath);
 
-  return readFileAsBuffer(file)
-    .then(data => writeFile(destinationPath, data))
+  // console.log({ filePath, destinationPath, destinationName, assetType });
+
+  return copy(filePath, destinationPath)
     .then(() => ({ filePath: destinationName, assetType }));
 };
 
@@ -95,28 +92,27 @@ const validateCsv = data =>
  * Checks that imported asset is valid
  * @param {buffer} file - The file to check.
  */
-export const validateAsset = (file) => {
-  const assetType = getSupportedAssetType(file);
+export const validateAsset = (filePath) => {
+  const assetType = getSupportedAssetType(filePath);
 
-  // Handle unsupported file types
+  // Handle unsupported filePath types
   if (!assetType) {
     return Promise.reject('unsupportedError');
   }
 
   // Don't validate non-network assets at this time
-  if (assetType !== 'network') { return Promise.resolve(true); }
+  if (assetType !== 'network') { return Promise.resolve(); }
 
-  const networkType = getNetworkType(file);
+  const networkType = getNetworkType(filePath);
 
-  return readFileAsBuffer(file)
+  return readFile(filePath)
     .then((data) => {
       if (networkType === 'json') {
         return validateJson(data);
       }
 
       return validateCsv(data);
-    })
-    .then(() => file);
+    });
 };
 
 export default importAsset;

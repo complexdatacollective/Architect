@@ -48,15 +48,15 @@
   }
 
   &--accept {
-    border-color: var(--notice);
+    // border-color: var(--notice);
   }
 
-  &--reject {
-    border-color: var(--error);
+  // &--reject {
+  //   border-color: var(--error);
 
-    .form-dropzone__container {
-      background-color: var(--error);
-      filter: brightness(.3);
-    }
-  }
+  //   .form-dropzone__container {
+  //     background-color: var(--error);
+  //     filter: brightness(.3);
+  //   }
+  // }
 }

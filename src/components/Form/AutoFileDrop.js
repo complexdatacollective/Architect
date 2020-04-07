@@ -31,14 +31,15 @@ const autoFileDrop = compose(
   connect(null, mapDispatchToProps),
   withHandlers({
     onDrop: ({ importAsset, onDrop }) =>
-      (acceptedFiles) => {
-        acceptedFiles.forEach((file) => {
-          importAsset(file)
-            .then(({ id }) => {
-              onDrop(id);
-            });
-        });
-      },
+      filePaths =>
+        Promise.all(
+          filePaths.map(
+            filePath =>
+              importAsset(filePath)
+                .then(({ id }) => id),
+          ),
+        )
+          .then(ids => onDrop(ids)),
   }),
 );
 
