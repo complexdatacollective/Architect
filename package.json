@@ -129,7 +129,7 @@
         "react-dev-utils": "9.1.0",
         "react-dom": "16.11.0",
         "react-draggable": "^2.2.3",
-        "react-dropzone": "^8.0.4",
+        "react-dropzone": "^10.2.2",
         "react-error-overlay": "^5.0.4",
         "react-fastclick": "^3.0.2",
         "react-flip-toolkit": "^6.5.4",

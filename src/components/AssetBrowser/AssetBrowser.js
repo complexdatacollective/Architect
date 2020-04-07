@@ -21,12 +21,12 @@ const AssetBrowser = ({
       </div>
       <div className="asset-browser__assets">
         <h3>Choose asset from library</h3>
-        <Assets
+        {/* <Assets
           onSelect={onSelect}
           onDelete={onDelete}
           selected={selected}
           type={type}
-        />
+        /> */}
       </div>
     </div>
   </div>

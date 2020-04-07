@@ -2,8 +2,8 @@ const readFileAsBuffer = file =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
 
-    reader.onloadend = (event) => {
-      resolve(Buffer.from(event.target.result));
+    reader.onload = () => {
+      resolve(Buffer.from(reader.result));
     };
 
     reader.onerror = reject;

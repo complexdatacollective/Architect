@@ -57,7 +57,7 @@ const importAsset = (protocolPath, file) => {
   const assetType = getSupportedAssetType(file);
 
   return readFileAsBuffer(file)
-    .then(data => writeFile(destinationPath, data))
+    // .then(data => writeFile(destinationPath, data))
     .then(() => ({ filePath: destinationName, assetType }));
 };
 

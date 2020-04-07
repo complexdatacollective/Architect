@@ -60,15 +60,16 @@ const importAssetThunk = asset =>
   (dispatch, getState) => {
     const state = getState();
     const { workingPath } = getActiveProtocolMeta(state);
+    const assetName = asset.name;
     const name = getNameFromFilename(asset.name);
 
     dispatch(importAsset(name));
-    log.info('Import asset', asset.name);
+    log.info('Import asset', assetName);
 
     if (!workingPath) {
       const error = new Error('No working path found, possibly no active protocol.');
-      dispatch(importAssetFailed(asset.name, error));
-      dispatch(importAssetErrorDialog(error, asset.name));
+      dispatch(importAssetFailed(assetName, error));
+      dispatch(importAssetErrorDialog(error, assetName));
       return Promise.reject(error);
     }
 
@@ -80,8 +81,8 @@ const importAssetThunk = asset =>
       })
       .catch((error) => {
         log.error('  ERROR', error);
-        dispatch(invalidAssetErrorDialog(error, asset.name));
-        return dispatch(importAssetFailed(asset.name, error));
+        dispatch(invalidAssetErrorDialog(error, assetName));
+        return dispatch(importAssetFailed(assetName, error));
       });
   };
 

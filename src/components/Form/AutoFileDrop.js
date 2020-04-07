@@ -1,16 +1,22 @@
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { has, each } from 'lodash';
-import { compose, withProps, withHandlers } from 'recompose';
+import { compose, withProps, withHandlers, withState } from 'recompose';
 import Dropzone from './Dropzone';
 import { SUPPORTED_MIME_TYPE_MAP, SUPPORTED_EXTENSION_TYPE_MAP } from '../../config';
+import importAsset, { validateAsset } from '@app/other/protocols/importAsset';
+import { getActiveProtocolMeta } from '@selectors/protocol';
 import { actionCreators as assetActions } from '../../ducks/modules/protocol/assetManifest';
 
-const mapDispatchToProps = dispatch => ({
-  importAsset: bindActionCreators(assetActions.importAsset, dispatch),
+const mapStateToProps = state => ({
+  workingPath: getActiveProtocolMeta(state).workingPath,
 });
 
+const mapDispatchToProps = {
+  importAsset: assetActions.importAsset,
+};
+
 const autoFileDrop = compose(
+  withState('disabled', 'setDisabled', false),
   withProps(({ type }) => {
     // Handle no 'type' required - still enforce only allowing supported file types
     if (!type || !has(SUPPORTED_EXTENSION_TYPE_MAP, type)) {
@@ -28,18 +34,7 @@ const autoFileDrop = compose(
       ],
     };
   }),
-  connect(null, mapDispatchToProps),
-  withHandlers({
-    onDrop: ({ importAsset, onDrop }) =>
-      (acceptedFiles) => {
-        acceptedFiles.forEach((file) => {
-          importAsset(file)
-            .then(({ id }) => {
-              onDrop(id);
-            });
-        });
-      },
-  }),
+  connect(mapStateToProps, mapDispatchToProps),
 );
 
 export { autoFileDrop };
