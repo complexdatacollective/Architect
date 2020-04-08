@@ -75,8 +75,7 @@ const Dropzone = ({
 
     dialog.showOpenDialog({
       filters: [
-        // TODO: name!
-        { name: 'Images', extensions },
+        { name: 'Asset', extensions },
       ],
     }, filePaths => submitPaths(filePaths));
   }, [acceptsKey, isDisabled, submitPaths]);
