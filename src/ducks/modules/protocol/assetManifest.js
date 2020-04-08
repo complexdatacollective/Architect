@@ -72,17 +72,28 @@ const importAssetThunk = filePath =>
       return Promise.reject(error);
     }
 
-    return validateAsset(filePath)
-      .then(() => fsImportAsset(workingPath, filePath))
+    return Promise.resolve()
+      .then(() =>
+        validateAsset(filePath)
+          .catch((error) => {
+            log.error('  INVALID ASSET', error);
+            dispatch(invalidAssetErrorDialog(error, filePath));
+            throw error;
+          }),
+      )
+      .then(() =>
+        fsImportAsset(workingPath, filePath)
+          .catch((error) => {
+            log.error('  IMPORT ERROR', error);
+            dispatch(importAssetErrorDialog(error, filePath));
+            throw error;
+          }),
+      )
       .then((result) => {
         log.info('  OK');
         return dispatch(importAssetComplete(result.filePath, name, result.assetType));
       })
-      .catch((error) => {
-        log.error('  ERROR', error);
-        dispatch(invalidAssetErrorDialog(error, filePath));
-        return dispatch(importAssetFailed(filePath, error));
-      });
+      .catch(error => dispatch(importAssetFailed(filePath, error)));
   };
 
 const initialState = {};

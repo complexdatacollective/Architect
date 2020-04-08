@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { times } from 'lodash';
 import { Spinner } from '@codaco/ui';
@@ -61,12 +62,10 @@ const Dropzone = ({
 
     setState(previousState => ({ ...previousState, isAcceptable: true, isLoading: true }));
 
-    setTimeout(() => {
-      onDrop(filePaths)
-        .finally(() => {
-          setState(previousState => ({ ...previousState, ...initialState }));
-        });
-    }, 3000);
+    onDrop(filePaths)
+      .finally(() => {
+        setState(previousState => ({ ...previousState, ...initialState }));
+      });
   };
 
   const handleClick = useCallback((e) => {
@@ -144,6 +143,15 @@ const Dropzone = ({
 
 Dropzone.defaultProps = {
   className: 'form-dropzone',
+  accepts: [],
+  disabled: false,
+};
+
+Dropzone.propTypes = {
+  onDrop: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  accepts: PropTypes.array,
+  disabled: PropTypes.bool,
 };
 
 export { Dropzone };

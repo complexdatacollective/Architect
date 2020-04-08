@@ -3,7 +3,7 @@ import uuid from 'uuid/v1';
 import { findKey, get, toLower } from 'lodash';
 import csvParse from 'csv-parse';
 import { copy, readFile } from 'fs-extra';
-import { SUPPORTED_EXTENSION_TYPE_MAP, SUPPORTED_MIME_TYPE_MAP } from '../../config';
+import { SUPPORTED_EXTENSION_TYPE_MAP } from '../../config';
 
 /**
  * Function that determines the type of an asset file when importing. Types are defined
@@ -18,28 +18,9 @@ import { SUPPORTED_EXTENSION_TYPE_MAP, SUPPORTED_MIME_TYPE_MAP } from '../../con
 const getSupportedAssetType = (filePath) => {
   const extension = toLower(path.extname(filePath));
 
-  const typeFromMap =
-    // findKey(SUPPORTED_MIME_TYPE_MAP, type => type.includes(mimeType)) ||
-    findKey(SUPPORTED_EXTENSION_TYPE_MAP, type => type.includes(extension));
+  const typeFromMap = findKey(SUPPORTED_EXTENSION_TYPE_MAP, type => type.includes(extension));
 
   return typeFromMap || false;
-};
-
-/**
- * Function to determine if network file is CSV or JSON based for validation purposes.
- * Returns .
- * @param {string} filepath - The filename of the network asset
- * @returns {string} - Returns either json or csv, or undefined
- */
-const getNetworkType = (filePath) => {
-  const extension = path.extname(filePath);
-
-  const NETWORK_TYPE_MAP = {
-    json: ['.json'],
-    csv: ['.csv'],
-  };
-
-  return findKey(NETWORK_TYPE_MAP, type => type.includes(extension));
 };
 
 /**
@@ -47,16 +28,17 @@ const getNetworkType = (filePath) => {
  * @param {string} protocolPath - The destination directory.
  * @param {string} filePath - The file buffer to copy.
  */
-const importAsset = (protocolPath, filePath) => {
-  const destinationName = `${uuid()}${path.extname(filePath)}`;
-  const destinationPath = path.join(protocolPath, 'assets', destinationName);
-  const assetType = getSupportedAssetType(filePath);
+const importAsset = (protocolPath, filePath) =>
+  new Promise((resolve) => {
+    const destinationName = `${uuid()}${path.extname(filePath)}`;
+    const destinationPath = path.join(protocolPath, 'assets', destinationName);
+    const assetType = getSupportedAssetType(filePath);
 
-  // console.log({ filePath, destinationPath, destinationName, assetType });
+    copy(filePath, destinationPath)
+      .then(() => ({ filePath: destinationName, assetType }))
+      .then(resolve);
+  });
 
-  return copy(filePath, destinationPath)
-    .then(() => ({ filePath: destinationName, assetType }));
-};
 
 const validateJson = data =>
   new Promise((resolve, reject) => {
@@ -89,6 +71,25 @@ const validateCsv = data =>
   });
 
 /**
+ * Get validator based on filePath, if no validator available it resolves by default
+ * @param {string} filepath - The filename of the network asset
+ * @returns {string} - Returns a function that returns a promise.
+ */
+const getAssetValidator = (filePath) => {
+  const extension = path.extname(filePath).substr(1); // e.g. 'csv'
+
+  switch (extension) {
+    case 'csv':
+      return validateCsv;
+    case 'json':
+      return validateJson;
+    default:
+      // Don't validate non-network assets at this time
+      return () => Promise.resolve();
+  }
+};
+
+/**
  * Checks that imported asset is valid
  * @param {buffer} file - The file to check.
  */
@@ -97,22 +98,13 @@ export const validateAsset = (filePath) => {
 
   // Handle unsupported filePath types
   if (!assetType) {
-    return Promise.reject('unsupportedError');
+    return Promise.reject(new Error('Asset type not supported'));
   }
 
-  // Don't validate non-network assets at this time
-  if (assetType !== 'network') { return Promise.resolve(); }
-
-  const networkType = getNetworkType(filePath);
+  const assetValidator = getAssetValidator(filePath);
 
   return readFile(filePath)
-    .then((data) => {
-      if (networkType === 'json') {
-        return validateJson(data);
-      }
-
-      return validateCsv(data);
-    });
+    .then(assetValidator);
 };
 
 export default importAsset;

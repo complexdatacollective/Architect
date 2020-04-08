@@ -23,14 +23,6 @@ export const COLOR_PALETTE_BY_ENTITY = {
 export const APP_SCHEMA_VERSION = 4;
 
 // Maps for supported asset types within the app. Used by asset chooser.
-// Remember to also update getNetworkType when changing these!
-export const SUPPORTED_MIME_TYPE_MAP = {
-  network: ['application/json', 'text/csv', 'application/vnd.ms-excel'],
-  image: ['image/*'],
-  audio: ['audio/*'],
-  video: ['video/*'],
-};
-
 export const SUPPORTED_EXTENSION_TYPE_MAP = {
   network: ['.csv', '.json'],
   image: ['.jpg', '.jpeg', '.gif', '.png'],
