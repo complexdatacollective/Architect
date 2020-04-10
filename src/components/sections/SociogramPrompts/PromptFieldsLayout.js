@@ -44,7 +44,7 @@ const PromptFields = ({
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={value => handleCreateVariable(value, 'layout')}
-        onDeleteOption={value => handleDeleteVariable(value, 'layout')}
+        onDeleteOption={value => handleDeleteVariable(value)}
         onKeyDown={normalizeKeyDown}
         formatCreateLabel={inputValue => (
           <span>Click here to create a new layout variable named &quot;{inputValue}&quot;.</span>

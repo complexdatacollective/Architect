@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { reduce, get, has } from 'lodash';
+import { get, has } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
 import {
   compose,
@@ -11,8 +11,7 @@ import INPUT_OPTIONS, {
   VARIABLE_TYPES_WITH_COMPONENTS,
 } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
-import { getVariablesForSubject } from '@selectors/codebook';
-import { makeOptionsWithIsUsed } from '@selectors/codebook/isUsed';
+import { getVariablesForSubject, getVariableOptionsForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -21,28 +20,13 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
 
+
   const existingVariables = getVariablesForSubject(state, { entity, type });
-
-  const variableOptions = reduce(
-    existingVariables,
-    (acc, { name, type: variableType }, variableId) => {
-      // If not a variable with corresponding component, we can't
-      // use it here.
-      if (variableType && !VARIABLE_TYPES_WITH_COMPONENTS.includes(variableType)) { return acc; }
-
-      return [
-        ...acc,
-        { label: name, value: variableId },
-      ];
-    },
-    [],
-  );
-
-  const variableOptionsWithIsUsed = makeOptionsWithIsUsed()(state, variableOptions);
-
-  const variableOptionsWithNewVariable = isNewVariable ?
-    [...variableOptionsWithIsUsed, { label: createNewVariable, value: createNewVariable }] :
-    variableOptionsWithIsUsed;
+  const variableOptions = getVariableOptionsForSubject(state, { entity, type })
+    // If not a variable with corresponding component, we can't use it here.
+    .filter(({ type: variableType }) => VARIABLE_TYPES_WITH_COMPONENTS.includes(variableType))
+    // with Nev variable
+    .concat(isNewVariable ? [{ label: createNewVariable, value: createNewVariable }] : []);
 
   // 1. If type defined use that (existing variable)
   // 2. Othewise derive it from component (new variable)
@@ -61,7 +45,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
   return {
     variable,
     variableType,
-    variableOptions: variableOptionsWithNewVariable,
+    variableOptions,
     componentOptions,
     component,
     existingVariables,

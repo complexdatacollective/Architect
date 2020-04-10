@@ -38,6 +38,7 @@ const variableHandlers = withHandlers({
     formValues,
   }) =>
     (variable, formPaths = []) => {
+      // TODO: share this functionality with enhancers?
       const variableDeleted = deleteVariable(entity, type, variable);
 
       if (!variableDeleted) { return; }
