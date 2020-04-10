@@ -3,7 +3,6 @@ import { change, formValueSelector } from 'redux-form';
 import { compose, lifecycle } from 'recompose';
 import { get } from 'lodash';
 import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors/codebook';
-import { makeGetIsUsedOptions } from '@selectors/variables';
 
 const mapStateToProps = (state, { form, type, entity }) => {
   const variableOptions = getVariableOptionsForSubject(state, { type, entity });
@@ -12,12 +11,11 @@ const mapStateToProps = (state, { form, type, entity }) => {
   const variables = getVariablesForSubject(state, { type, entity });
   const optionsForVariable = get(variables, [variable, 'options'], []);
   const optionsForVariableDraft = formValueSelector(form)(state, 'variableOptions');
-  const variableOptionsWithIsUsed = makeGetIsUsedOptions()(state, variableOptions);
 
   return {
     variable,
     otherVariable,
-    variableOptions: variableOptionsWithIsUsed,
+    variableOptions,
     optionsForVariable,
     optionsForVariableDraft,
   };

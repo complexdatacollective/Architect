@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { makeGetIsUsed, makeGetIsUsedOptions } from '../variables';
+import { makeGetIsUsed, makeOptionsWithIsUsed } from '../isUsed';
 
 const variable1 = '1234-1234-1234-1';
 const variable2 = '1234-1234-1234-2';
@@ -103,7 +103,7 @@ describe('makeGetIsUsed', () => {
   });
 });
 
-describe('makeGetIsUsedOptions', () => {
+describe('makeOptionsWithIsUsed', () => {
   it('appends used state to options', () => {
     const state = {
       protocol: {
@@ -129,7 +129,7 @@ describe('makeGetIsUsedOptions', () => {
     ];
 
     // Also check we can set form name
-    const result = makeGetIsUsedOptions(['formName'])(state, mockOptions);
+    const result = makeOptionsWithIsUsed(['formName'])(state, mockOptions);
 
     expect(result).toEqual([
       { value: variable1, label: '1', isUsed: true },

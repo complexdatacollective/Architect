@@ -1,7 +1,8 @@
 import { map } from 'lodash';
-import { getCodebook } from '../../../selectors/protocol';
-import { getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { getCodebook } from '@selectors/protocol';
+import { getVariableOptionsForSubject } from '@selectors/codebook';
 
+// TODO: isUsed combine these, the option bit
 export const getLayoutVariablesForSubject = (state, { entity, type }) => {
   const variables = getVariableOptionsForSubject(state, { entity, type });
 

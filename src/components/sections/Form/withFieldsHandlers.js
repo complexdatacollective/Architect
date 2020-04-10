@@ -12,7 +12,7 @@ import INPUT_OPTIONS, {
 } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { getVariablesForSubject } from '@selectors/codebook';
-import { makeGetIsUsedOptions } from '@selectors/variables';
+import { makeOptionsWithIsUsed } from '@selectors/codebook/isUsed';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -38,7 +38,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
     [],
   );
 
-  const variableOptionsWithIsUsed = makeGetIsUsedOptions()(state, variableOptions);
+  const variableOptionsWithIsUsed = makeOptionsWithIsUsed()(state, variableOptions);
 
   const variableOptionsWithNewVariable = isNewVariable ?
     [...variableOptionsWithIsUsed, { label: createNewVariable, value: createNewVariable }] :

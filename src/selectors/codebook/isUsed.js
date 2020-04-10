@@ -1,18 +1,7 @@
-import { flatMap, get } from 'lodash';
-import { getForms } from './reduxForm';
-import { getProtocol } from './protocol';
-
-const getIdsFromEntity = entity => Object.keys(entity.variables);
-
-const getIdsFromCodebook = codebook =>
-  flatMap(
-    codebook,
-    (entityOrEntities, type) => (
-      type === 'ego' ?
-        getIdsFromEntity(entityOrEntities) :
-        flatMap(entityOrEntities, getIdsFromEntity)
-    ),
-  );
+import { get } from 'lodash';
+import { getForms } from '../reduxForm';
+import { getProtocol } from '../protocol';
+import { getIdsFromCodebook } from './helpers';
 
 /**
  * Gets a key value object describing variables are
@@ -39,7 +28,7 @@ export const makeGetIsUsed = (formNames = ['edit-stage', 'editable-list-form']) 
     return isUsed;
   };
 
-export const makeGetIsUsedOptions = formNames =>
+export const makeOptionsWithIsUsed = formNames =>
   (state, options) => {
     const isUsed = makeGetIsUsed(formNames)(state);
     return options.map(

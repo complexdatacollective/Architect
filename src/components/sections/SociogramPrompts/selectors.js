@@ -1,5 +1,6 @@
-import { getCodebook } from '../../../selectors/protocol';
-import { utils as codebookUtils, getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { getCodebook } from '@selectors/protocol';
+import { getVariableOptionsForSubject } from '@selectors/codebook';
+import { asOptions } from '@selectors/utils';
 
 export const getLayoutVariablesForSubject = (state, { entity, type }) => {
   const variableOptions = getVariableOptionsForSubject(state, { entity, type });
@@ -28,7 +29,7 @@ export const getHighlightVariablesForSubject = (
 
 export const getEdgesForSubject = (state) => {
   const codebook = getCodebook(state);
-  const codebookOptions = codebookUtils.asOptions(codebook.edge);
+  const codebookOptions = asOptions(codebook.edge);
 
   return codebookOptions;
 };

@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { change } from 'redux-form';
+import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import {
   getLayoutVariablesForSubject,
   getHighlightVariablesForSubject,
   getGroupVariablesForSubject,
   getEdgesForSubject,
 } from './selectors';
-import { actionCreators as codebookActions } from '../../../ducks/modules/protocol/codebook';
 
 const mapStateToProps = (state, { entity, type }) => {
   const layoutVariblesForSubject = getLayoutVariablesForSubject(state, { entity, type });
