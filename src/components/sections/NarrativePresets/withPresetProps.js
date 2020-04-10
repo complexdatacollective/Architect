@@ -3,22 +3,16 @@ import { compose, withHandlers } from 'recompose';
 import { change } from 'redux-form';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import {
-  getLayoutVariablesForSubject,
-  getHighlightVariablesForSubject,
-  getGroupVariablesForSubject,
+  getNarrativeVariables,
   getEdgesForSubject,
 } from './selectors';
 
 const mapStateToProps = (state, { entity, type }) => {
-  const layoutVariblesForSubject = getLayoutVariablesForSubject(state, { entity, type });
-  const highlightVariablesForSubject = getHighlightVariablesForSubject(state, { entity, type });
-  const groupVariablesForSubject = getGroupVariablesForSubject(state, { entity, type });
+  const narrativeVariables = getNarrativeVariables(state, { entity, type });
   const edgesForSubject = getEdgesForSubject(state, { entity, type });
 
   return {
-    layoutVariblesForSubject,
-    highlightVariablesForSubject,
-    groupVariablesForSubject,
+    ...narrativeVariables,
     edgesForSubject,
   };
 };

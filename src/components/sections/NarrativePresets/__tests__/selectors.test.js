@@ -1,8 +1,6 @@
 /* eslint-env jest */
 import {
-  getLayoutVariablesForSubject,
-  getHighlightVariablesForSubject,
-  getGroupVariablesForSubject,
+  getNarrativeVariables,
   getEdgesForSubject,
 } from '../selectors';
 
@@ -48,35 +46,36 @@ const mockState = {
 
 describe('NarrativePresets', () => {
   describe('selectors', () => {
-    it('get layout variables for node type', () => {
-      const result = getLayoutVariablesForSubject(mockState, subject);
+    it('get narrative variables for node type', () => {
+      expect.assertions(3);
 
-      expect(result).toEqual([{
+      const {
+        layoutVariblesForSubject,
+        highlightVariablesForSubject,
+        groupVariablesForSubject,
+      } = getNarrativeVariables(mockState, subject);
+
+      expect(layoutVariblesForSubject).toEqual([{
         value: '1234-1234-1',
         label: 'my layout',
         type: 'layout',
+        isUsed: false,
       }]);
-    });
 
-    it('get highlight variables for node type', () => {
-      const result = getHighlightVariablesForSubject(mockState, subject);
-
-      expect(result).toEqual([{
+      expect(highlightVariablesForSubject).toEqual([{
         value: '1234-1234-3',
         label: 'my boolean',
         type: 'boolean',
+        isUsed: false,
       }]);
-    });
 
-    it('get group variables for node type', () => {
-      const result = getGroupVariablesForSubject(mockState, subject);
-
-      expect(result).toEqual([
+      expect(groupVariablesForSubject).toEqual([
         {
           value: '',
           label: '\u2014 None \u2014',
         },
         {
+          isUsed: false,
           value: '1234-1234-2',
           label: 'my category',
           type: 'categorical',
