@@ -20,7 +20,7 @@ const matchingPaths = (obj, paths, value) =>
   paths.filter(path => get(obj, path) === value);
 
 const variableHandlers = withHandlers({
-  handleCreateOtherVariable: ({
+  onCreateOtherVariable: ({
     createVariable,
     entity,
     type,
@@ -29,7 +29,7 @@ const variableHandlers = withHandlers({
       const { variable } = createVariable(entity, type, { type: 'text', name });
       return variable;
     },
-  handleDeleteVariable: ({
+  onDeleteVariable: ({
     entity,
     type,
     deleteVariable,

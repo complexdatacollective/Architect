@@ -30,8 +30,8 @@ const PromptFields = ({
   optionsForVariableDraft,
   form,
   changeForm,
-  handleDeleteVariable,
-  handleCreateOtherVariable,
+  onDeleteVariable,
+  onCreateOtherVariable,
   normalizeKeyDown,
   entity,
   type,
@@ -112,7 +112,7 @@ const PromptFields = ({
           label=""
           options={categoricalVariableOptions}
           onCreateOption={handleNewVariable}
-          onDeleteOption={v => handleDeleteVariable(v, 'variable')}
+          onDeleteOption={v => onDeleteVariable(v, 'variable')}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
@@ -182,8 +182,8 @@ const PromptFields = ({
             component={CreatableSelect}
             label="Variable to store response"
             options={otherVariableOptions}
-            onCreateOption={handleCreateOtherVariable}
-            onDeleteOption={v => handleDeleteVariable(v, 'otherVariable')}
+            onCreateOption={onCreateOtherVariable}
+            onDeleteOption={v => onDeleteVariable(v, 'otherVariable')}
             onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
             formatCreateLabel={inputValue => (
