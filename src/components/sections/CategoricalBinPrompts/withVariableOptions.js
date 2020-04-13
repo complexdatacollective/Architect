@@ -4,8 +4,18 @@ import { compose, lifecycle } from 'recompose';
 import { get } from 'lodash';
 import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors/codebook';
 
-const mapStateToProps = (state, { form, type, entity }) => {
-  const variableOptions = getVariableOptionsForSubject(state, { type, entity });
+const mapStateToProps = (state, { form, type, entity, stagePath, fieldId }) => {
+  const variableOptions = getVariableOptionsForSubject(
+    state,
+    { type, entity },
+    {
+      excludePaths: [
+        stagePath,
+        `forms.edit-stage.${fieldId}.variable`,
+      ],
+    },
+  );
+
   const variable = formValueSelector(form)(state, 'variable');
   const otherVariable = formValueSelector(form)(state, 'otherVariable');
   const variables = getVariablesForSubject(state, { type, entity });

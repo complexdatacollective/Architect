@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+import { get, omit, cloneDeep } from 'lodash';
 import { getForms } from '../reduxForm';
 import { getProtocol } from '../protocol';
 import { getIdsFromCodebook } from './helpers';
@@ -8,14 +8,20 @@ import { getIdsFromCodebook } from './helpers';
  * in use (including in redux forms)
  * @returns {object} in format: { [variableId]: boolean }
  */
-export const makeGetIsUsed = (formNames = ['edit-stage', 'editable-list-form']) =>
+export const makeGetIsUsed = ({
+  formNames = ['edit-stage', 'editable-list-form'],
+  excludePaths = [],
+}) =>
   (state) => {
     const protocol = getProtocol(state);
     const forms = getForms(formNames)(state);
-
     const variableIds = getIdsFromCodebook(protocol.codebook);
 
-    const flattenedData = JSON.stringify([protocol.stages, forms]);
+    const data = omit(cloneDeep({ stages: protocol.stages, forms }), excludePaths);
+
+    const flattenedData = JSON.stringify(data);
+
+    console.log(JSON.stringify(data, null, 2));
 
     const isUsed = variableIds.reduce(
       (memo, variableId) => ({
@@ -28,9 +34,9 @@ export const makeGetIsUsed = (formNames = ['edit-stage', 'editable-list-form']) 
     return isUsed;
   };
 
-export const makeOptionsWithIsUsed = formNames =>
+export const makeOptionsWithIsUsed = (isUsedOptions = {}) =>
   (state, options) => {
-    const isUsed = makeGetIsUsed(formNames)(state);
+    const isUsed = makeGetIsUsed(isUsedOptions)(state);
     return options.map(
       ({ value, ...rest }) =>
         ({ ...rest, value, isUsed: get(isUsed, value) }),

@@ -36,10 +36,10 @@ const getVariablesForSubject = (state, subject) =>
  * @param {object} state redux state
  * @param {object} subject subject object in format `{ entity, type }`
  */
-const getVariableOptionsForSubject = (state, subject, formNames) => {
+const getVariableOptionsForSubject = (state, subject, isUsedOptions = {}) => {
   const variables = getVariablesForSubject(state, subject);
   const options = asOptions(variables);
-  const optionsWithIsUsed = makeOptionsWithIsUsed(formNames)(state, options);
+  const optionsWithIsUsed = makeOptionsWithIsUsed(isUsedOptions)(state, options);
 
   return optionsWithIsUsed;
 };
