@@ -18,9 +18,7 @@ const acceptsPaths = (accepts, paths) => {
 };
 
 const getAcceptsExtensions = accepts =>
-  accepts
-    .filter(accept => /^\.[a-z]+$/.test(accept))
-    .map(accept => accept.substr(1));
+  accepts.map(accept => accept.substr(1));
 
 const initialState = {
   isActive: false, // is doing something

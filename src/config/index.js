@@ -26,6 +26,6 @@ export const APP_SCHEMA_VERSION = 4;
 export const SUPPORTED_EXTENSION_TYPE_MAP = {
   network: ['.csv', '.json'],
   image: ['.jpg', '.jpeg', '.gif', '.png'],
-  audio: ['.mp3', '.aiff'],
+  audio: ['.mp3', '.aiff', '.m4a'],
   video: ['.mov', '.mp4'],
 };
