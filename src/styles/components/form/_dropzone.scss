@@ -6,7 +6,7 @@
   height: unit(12);
   border-width: 2px;
   border-style: solid;
-  transition-duration: var(--animation-duration-fast);
+  transition-duration: var(--animation-duration-slow);
   transition-timing-function: var(--animation-easing);
   transition-property: border-color;
   border-color: transparent;
@@ -64,11 +64,15 @@
 
   &--active {
     cursor: initial;
-    // border-color: var(--notice);
 
     .form-dropzone__label {
       opacity: .5;
     }
+  }
+
+  &--hover {
+    border-color: var(--notice);
+    transition-duration: var(--animation-duration-fast);
   }
 
   &--loading {
@@ -84,10 +88,32 @@
   }
 
   &--error {
-    border-color: var(--error);
+    border-color: var(--warning);
+    transition-duration: var(--animation-duration-fast);
+  }
 
-    .form-dropzone__container {
-      background-color: var(--error);
+  &__error {
+    margin-top: unit(1);
+    overflow: hidden;
+    padding: unit(1) unit(2);
+    border-radius: unit(1);
+    background-color: var(--warning);
+    opacity: 0;
+    transform-origin: top center;
+    transition-duration: var(--animation-duration-fast);
+    transition-property: opacity;
+    display: flex;
+    align-items: center;
+    // justify-content: flex-end;
+
+    .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: .5rem;
+    }
+
+    &--show {
+      opacity: 1;
     }
   }
 }

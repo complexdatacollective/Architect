@@ -1,10 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { times } from 'lodash';
-import { Spinner } from '@codaco/ui';
+import { Spinner, Icon } from '@codaco/ui';
 
 const { dialog } = require('electron').remote;
+
+const getExtension = (path) => {
+  const match = /(.[a-z0-9]+)$/.exec(path);
+  if (!match) { return null; }
+  return match[1];
+};
 
 const matchExtension = (path, extension) =>
   RegExp(`${extension}$`).test(path);
@@ -17,6 +23,14 @@ const acceptsPaths = (accepts, paths) => {
   return paths.every(acceptsPath(accepts));
 };
 
+const getRejectedExtensions = (accepts, paths) =>
+  paths.reduce((memo, path) => {
+    if (acceptsPath(accepts)(path)) { return memo; }
+    const extension = getExtension(path);
+    if (memo.includes(extension)) { return memo; }
+    return [...memo, extension];
+  }, []);
+
 const getAcceptsExtensions = accepts =>
   accepts.map(accept => accept.substr(1));
 
@@ -25,7 +39,24 @@ const initialState = {
   isAcceptable: false, // can accept file
   isDisabled: false, // is disabled
   isLoading: false, // file is being imported
+  isError: false,
   error: null,
+};
+
+const useTimer = () => {
+  const timer = useRef();
+
+  const clearTimer = () => {
+    if (!timer.current) { return; }
+    clearTimeout(timer.current);
+  };
+
+  const setTimer = (callback, delay) => {
+    clearTimer();
+    timer.current = setTimeout(callback, delay);
+  };
+
+  return setTimer;
 };
 
 const Dropzone = ({
@@ -35,9 +66,16 @@ const Dropzone = ({
   disabled,
 }) => {
   const [state, setState] = useState(initialState);
+  const setTimer = useTimer();
 
   const acceptsKey = accepts.toString();
   const isDisabled = disabled || state.isActive;
+
+  useEffect(() => {
+    setTimer(() => {
+      setState(previousState => ({ ...previousState, isHover: false, isError: false }));
+    }, 1000);
+  }, [state.isHover, state.isError]);
 
   const startHandler = (e) => {
     e.preventDefault();
@@ -54,11 +92,24 @@ const Dropzone = ({
     const isAcceptable = acceptsPaths(accepts, filePaths);
 
     if (!isAcceptable) {
-      setState(previousState => ({ ...previousState, isActive: false }));
+      const extensions = getRejectedExtensions(accepts, filePaths);
+      const errorMessage = `This asset type does not support ${extensions.join(', ')} extension(s).`;
+      setState(previousState => ({
+        ...previousState,
+        isActive: false,
+        isError: true,
+        error: errorMessage,
+      }));
       return;
     }
 
-    setState(previousState => ({ ...previousState, isAcceptable: true, isLoading: true }));
+    setState(previousState => ({
+      ...previousState,
+      isAcceptable: true,
+      isError: false,
+      error: null,
+      isLoading: true,
+    }));
 
     onDrop(filePaths)
       .finally(() => {
@@ -98,14 +149,14 @@ const Dropzone = ({
     submitPaths(filePaths);
   }, [acceptsKey, isDisabled, submitPaths]);
 
+  const handleDragExit = useCallback(() => {
+    setState(previousState => ({ ...previousState, isHover: false }));
+  });
+
   const handleDragEnter = useCallback(() => {
     if (isDisabled) { return; }
     setState(previousState => ({ ...previousState, isHover: true }));
   }, [isDisabled]);
-
-  const handleDragExit = useCallback(() => {
-    setState(previousState => ({ ...previousState, isHover: false }));
-  });
 
   const dropzoneClasses = cx(
     className,
@@ -113,8 +164,15 @@ const Dropzone = ({
       [`${className}--active`]: state.isActive,
       [`${className}--hover`]: state.isHover,
       [`${className}--loading`]: state.isLoading,
+      [`${className}--error`]: state.isError,
       [`${className}--disabled`]: isDisabled,
-      [`${className}--error`]: state.error,
+    },
+  );
+
+  const errorClasses = cx(
+    `${className}__error`,
+    {
+      [`${className}__error--show`]: state.error,
     },
   );
 
@@ -133,6 +191,10 @@ const Dropzone = ({
         <div className={`${className}__loading`}>
           { state.isActive && <Spinner small /> }
         </div>
+      </div>
+      <div className={errorClasses}>
+        <Icon name="warning" />
+        {state.error}
       </div>
     </div>
   );

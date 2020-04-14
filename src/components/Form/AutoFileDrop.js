@@ -2,9 +2,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { has } from 'lodash';
 import { compose, withProps, withHandlers } from 'recompose';
+import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
+import { actionCreators as assetActions } from '@modules/protocol/assetManifest';
 import Dropzone from './Dropzone';
-import { SUPPORTED_EXTENSION_TYPE_MAP } from '../../config';
-import { actionCreators as assetActions } from '../../ducks/modules/protocol/assetManifest';
 
 const mapDispatchToProps = dispatch => ({
   importAsset: bindActionCreators(assetActions.importAsset, dispatch),
