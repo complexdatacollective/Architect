@@ -92,7 +92,7 @@ describe('makeGetIsUsed', () => {
     };
 
     // Also check we can set form name
-    const result = makeGetIsUsed(['formName'])(state);
+    const result = makeGetIsUsed({ formNames: ['formName'] })(state);
 
     expect(result).toEqual({
       [variable1]: true,
@@ -129,7 +129,7 @@ describe('makeOptionsWithIsUsed', () => {
     ];
 
     // Also check we can set form name
-    const result = makeOptionsWithIsUsed(['formName'])(state, mockOptions);
+    const result = makeOptionsWithIsUsed({ formNames: ['formName'] })(state, mockOptions);
 
     expect(result).toEqual([
       { value: variable1, label: '1', isUsed: true },

@@ -8,20 +8,22 @@ import { getIdsFromCodebook } from './helpers';
  * in use (including in redux forms)
  * @returns {object} in format: { [variableId]: boolean }
  */
-export const makeGetIsUsed = ({
-  formNames = ['edit-stage', 'editable-list-form'],
-  excludePaths = [],
-}) =>
+export const makeGetIsUsed = (isUsedOptions = {}) =>
   (state) => {
+    const {
+      formNames = ['edit-stage', 'editable-list-form'],
+      excludePaths = [],
+    } = isUsedOptions;
+
     const protocol = getProtocol(state);
     const forms = getForms(formNames)(state);
     const variableIds = getIdsFromCodebook(protocol.codebook);
 
-    const data = omit(cloneDeep({ stages: protocol.stages, forms }), excludePaths);
+    const data = excludePaths.length > 0 ?
+      omit(cloneDeep({ stages: protocol.stages, forms }), excludePaths) :
+      { stages: protocol.stages, forms };
 
     const flattenedData = JSON.stringify(data);
-
-    console.log(JSON.stringify(data, null, 2));
 
     const isUsed = variableIds.reduce(
       (memo, variableId) => ({
