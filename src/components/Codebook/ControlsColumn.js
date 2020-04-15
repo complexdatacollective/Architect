@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 
-const ControlsColumn = ({ rowData, columnData }) => {
-  if (rowData.inUse) { return null; }
+const ControlsColumn = ({ inUse, handleDelete }) => {
+  if (inUse) { return null; }
   return (
     <Button
       size="small"
       color="neon-coral"
-      onClick={() => columnData.handleDelete(rowData.id, rowData.name)}
+      // onClick={() => handleDelete(rowData.id, rowData.name)}
     >
       Delete variable
     </Button>
@@ -16,8 +16,8 @@ const ControlsColumn = ({ rowData, columnData }) => {
 };
 
 ControlsColumn.propTypes = {
-  rowData: PropTypes.object.isRequired,
-  columnData: PropTypes.object.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  inUse: PropTypes.bool.isRequired,
 };
 
 export { ControlsColumn };

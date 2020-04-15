@@ -62,6 +62,7 @@
 
   &__variables {
     margin-top: unit(2);
+    width: 100%;
 
     &-row {
       &--heading {
@@ -76,6 +77,11 @@
     &-column,
     &-heading {
       margin-right: 0;
+      vertical-align: middle;
+      height: 1.5rem;
+      padding: 1rem .5rem;
+      line-height: 1.5rem;
+      font-size: 1rem;
 
       &:last-child {
         text-align: right;
@@ -84,14 +90,42 @@
 
     &-heading {
       text-transform: none;
+
+      .sort-direction {
+        margin-left: .5rem;
+        position: relative;
+        display: inline-block;
+        height: 1rem;
+        width: 1rem;
+
+        &::after {
+          display: block;
+          position: absolute;
+          font-size: 1.5rem;
+          top: -.15rem;
+          color: var(--primary);
+          content: 'dir';
+        }
+
+        &--asc {
+          &::after {
+            content: '\25BE';
+          }
+        }
+
+        &--desc {
+          &::after {
+            content: '\25B4';
+          }
+        }
+      }
     }
 
     &-column {
-      padding: 3px 0;
+      width: 20%;
 
-      // TODO: would be better to set height based on contents of this column but quick fix for now
-      &--usage {
-        overflow-x: auto !important; // sass-lint:disable-line no-important
+      &--controls {
+        max-width: 200px;
       }
     }
   }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { compose, withHandlers, withStateHandlers, withProps } from 'recompose';
 import { get, tap, isString } from 'lodash';
 import cx from 'classnames';
-import { AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
@@ -13,80 +12,98 @@ import ControlsColumn from './ControlsColumn';
 const HEADER_HEIGHT = 50;
 const ROW_HEIGHT = 50;
 
-const rowClassName = ({ index }) => {
+const SortDirection = {
+  ASC: Symbol('ASC'),
+  DESC: Symbol('DESC'),
+};
+
+const reverseSort = direction =>
+  (direction === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC);
+
+const rowClassName = (index) => {
   const isEven = index % 2 === 0;
-  const isHeading = index === -1;
   return cx(
     'codebook__variables-row',
     {
-      'codebook__variables-row--even': isEven && !isHeading,
-      'codebook__variables-row--odd': !isEven && !isHeading,
-      'codebook__variables-row--heading': isHeading,
+      'codebook__variables-row--even': isEven,
+      'codebook__variables-row--odd': !isEven,
     },
   );
 };
 
-const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => {
-  // Set height to full content height (to prevent scrolling)
-  const height = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
+const Row = ({
+  id,
+  name,
+  type,
+  component,
+  inUse,
+  usage,
+  handleDelete,
+}, index) => (
+  <tr className={rowClassName(index)} key={id}>
+    <td className="codebook__variables-column">{name}</td>
+    <td className="codebook__variables-column">{type}</td>
+    <td className="codebook__variables-column">{component}</td>
+    <td className="codebook__variables-column codebook__variables-column--usage">
+      <UsageColumn inUse={inUse} usage={usage} />
+    </td>
+    <td className="codebook__variables-column codebook__variables-column--usage">
+      <ControlsColumn handleDelete={handleDelete} inUse={inUse} id={id} />
+    </td>
+  </tr>
+);
+
+const Heading = ({ children, name, sortBy, sortDirection, onSort }) => {
+  const isSorted = name === sortBy;
+  const newSortDirection = !isSorted ? SortDirection.ASC : reverseSort(sortDirection);
+  const sortClasses = cx(
+    'sort-direction',
+    {
+      'sort-direction--asc': sortDirection === SortDirection.ASC,
+      'sort-direction--desc': sortDirection === SortDirection.DESC,
+    },
+  );
 
   return (
-    <AutoSizer disableHeight>
-      {({ width }) => (
-        <Table
-          className="codebook__variables"
-          headerClassName="codebook__variables-heading"
-          rowClassName={rowClassName}
-          width={width}
-          height={height}
-          headerHeight={HEADER_HEIGHT}
-          rowHeight={ROW_HEIGHT}
-          rowCount={variables.length}
-          rowGetter={({ index }) => variables[index]}
-          sortBy={sortBy}
-          sortDirection={sortDirection}
-          sort={sort}
-        >
-          <Column
-            className="codebook__variables-column"
-            label="Name"
-            dataKey="name"
-            flexGrow={1}
-            width={200}
-          />
-          <Column
-            className="codebook__variables-column"
-            label="Type"
-            dataKey="type"
-            flexGrow={1}
-            width={200}
-          />
-          <Column
-            className="codebook__variables-column"
-            label="Component"
-            dataKey="component"
-            flexGrow={1}
-            width={200}
-          />
-          <Column
-            className="codebook__variables-column codebook__variables-column--usage"
-            width={100}
-            flexGrow={1}
-            label="Used in"
-            dataKey="inUse"
-            cellRenderer={UsageColumn}
-          />
-          <Column
-            className="codebook__variables-column"
-            width={200}
-            dataKey="controls"
-            label=""
-            columnData={{ handleDelete }}
-            cellRenderer={ControlsColumn}
-          />
-        </Table>
-      )}
-    </AutoSizer>
+    <th
+      className="codebook__variables-heading"
+      onClick={() => onSort({ sortBy: name, sortDirection: newSortDirection })}
+    >
+      {children}
+      {isSorted && <div className={sortClasses} />}
+    </th>
+  );
+}
+
+const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => {
+  // Set height to full content height (to prevent scrolling)
+  // const height = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
+
+  console.log(variables);
+
+  const headingProps = {
+    sortBy,
+    sortDirection,
+    onSort: sort,
+  };
+
+  return (
+    <div>
+      <table className="codebook__variables">
+        <thead>
+          <tr className="codebook__variables-row codebook__variables-row--heading">
+            <Heading name="name" {...headingProps}>Name</Heading>
+            <Heading name="type" {...headingProps}>Type</Heading>
+            <Heading name="component" {...headingProps}>Component</Heading>
+            <Heading name="usage" {...headingProps}>Usage</Heading>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {variables.map(Row) }
+        </tbody>
+      </table>
+    </div>
   );
 };
 
