@@ -77,10 +77,8 @@
     &-column,
     &-heading {
       margin-right: 0;
-      vertical-align: middle;
-      height: 1.5rem;
-      padding: 1rem .5rem;
-      line-height: 1.5rem;
+      height: 4rem;
+      padding: .75rem .5rem;
       font-size: 1rem;
 
       &:last-child {
@@ -88,7 +86,12 @@
       }
     }
 
+    &-column {
+      vertical-align: middle;
+    }
+
     &-heading {
+      vertical-align: middle;
       text-transform: none;
 
       .sort-direction {

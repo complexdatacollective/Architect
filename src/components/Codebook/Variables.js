@@ -9,9 +9,6 @@ import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
-const HEADER_HEIGHT = 50;
-const ROW_HEIGHT = 50;
-
 const SortDirection = {
   ASC: Symbol('ASC'),
   DESC: Symbol('DESC'),
@@ -30,28 +27,6 @@ const rowClassName = (index) => {
     },
   );
 };
-
-const Row = ({
-  id,
-  name,
-  type,
-  component,
-  inUse,
-  usage,
-  handleDelete,
-}, index) => (
-  <tr className={rowClassName(index)} key={id}>
-    <td className="codebook__variables-column">{name}</td>
-    <td className="codebook__variables-column">{type}</td>
-    <td className="codebook__variables-column">{component}</td>
-    <td className="codebook__variables-column codebook__variables-column--usage">
-      <UsageColumn inUse={inUse} usage={usage} />
-    </td>
-    <td className="codebook__variables-column codebook__variables-column--usage">
-      <ControlsColumn handleDelete={handleDelete} inUse={inUse} id={id} />
-    </td>
-  </tr>
-);
 
 const Heading = ({ children, name, sortBy, sortDirection, onSort }) => {
   const isSorted = name === sortBy;
@@ -73,14 +48,17 @@ const Heading = ({ children, name, sortBy, sortDirection, onSort }) => {
       {isSorted && <div className={sortClasses} />}
     </th>
   );
-}
+};
 
-const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => {
-  // Set height to full content height (to prevent scrolling)
-  // const height = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
+Heading.propTypes = {
+  children: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
+  onSort: PropTypes.func.isRequired,
+};
 
-  console.log(variables);
-
+const Variables = ({ variables, onDelete, sortBy, sortDirection, sort }) => {
   const headingProps = {
     sortBy,
     sortDirection,
@@ -100,7 +78,19 @@ const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => 
           </tr>
         </thead>
         <tbody>
-          {variables.map(Row) }
+          {variables.map(({ id, name, component, type, inUse, usage }, index) => (
+            <tr className={rowClassName(index)} key={id}>
+              <td className="codebook__variables-column">{name}</td>
+              <td className="codebook__variables-column">{type}</td>
+              <td className="codebook__variables-column">{component}</td>
+              <td className="codebook__variables-column codebook__variables-column--usage">
+                <UsageColumn inUse={inUse} usage={usage} />
+              </td>
+              <td className="codebook__variables-column codebook__variables-column--usage">
+                <ControlsColumn onDelete={onDelete} inUse={inUse} id={id} />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
@@ -109,7 +99,7 @@ const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => 
 
 Variables.propTypes = {
   variables: PropTypes.array,
-  handleDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   sortBy: PropTypes.string.isRequired,
   sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
   sort: PropTypes.func.isRequired,
@@ -117,7 +107,7 @@ Variables.propTypes = {
 
 Variables.defaultProps = {
   variables: [],
-  handleDelete: () => {},
+  onDelete: () => {},
 };
 
 const withVariableHandlers = compose(
@@ -126,8 +116,10 @@ const withVariableHandlers = compose(
     deleteVariable: codebookActionCreators.deleteVariable,
   }),
   withHandlers({
-    handleDelete: ({ deleteVariable, openDialog, entity, type }) =>
-      (id, name) => {
+    onDelete: ({ deleteVariable, openDialog, entity, type, variables }) =>
+      (id) => {
+        const { name } = variables.find(v => v.id === id);
+
         openDialog({
           type: 'Warning',
           title: `Delete ${name}`,
