@@ -1,6 +1,5 @@
 /* eslint-env jest */
 
-import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
 import { acceptsPaths, getRejectedExtensions, getAcceptsExtensions } from '../helpers';
 
 // acceptsPaths = (accepts, paths) =>
