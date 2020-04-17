@@ -1,4 +1,7 @@
 const { dialog } = require('electron');
+const log = require('./log');
+
+global.dialogOpen = false;
 
 const openDialogOptions = {
   buttonLabel: 'Open',
@@ -15,35 +18,49 @@ const saveDialogOptions = {
   filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
 };
 
-const openDialog = () =>
+const withOpenLock = callback =>
   new Promise((resolve, reject) => {
-    dialog.showOpenDialog(openDialogOptions, (filename) => {
-      if (filename === undefined) { reject(); return; }
-      resolve(filename[0]);
-    });
+    if (global.dialogOpen) { reject('DIALOG Already open'); return; }
+    resolve();
+  })
+    .then(() =>
+      new Promise((resolve, reject) => {
+        global.dialogOpen = true;
+
+        callback(resolve, reject);
+      })
+        .finally(() => { global.dialogOpen = false; }),
+    )
+    .catch((message) => { log.info(message); });
+
+const openDialog = () => withOpenLock((resolve, reject) => {
+  dialog.showOpenDialog(openDialogOptions, (filename) => {
+    if (filename === undefined) { reject('DIALOG Cancelled'); return; }
+    resolve(filename[0]);
   });
+});
 
 const saveDialog = (options = {}) =>
-  new Promise((resolve, reject) => {
+  withOpenLock((resolve, reject) => {
     dialog.showSaveDialog(
       {
         ...saveDialogOptions,
         ...options,
       },
       (filename) => {
-        if (filename === undefined) { reject(); return; }
+        if (filename === undefined) { reject('DIALOG Cancelled'); return; }
         resolve(filename);
       },
     );
   });
 
 const clearStorageDataDialog = () =>
-  new Promise((resolve, reject) => {
+  withOpenLock((resolve, reject) => {
     dialog.showMessageBox({
       message: 'This will reset all app data, are you sure?',
       buttons: ['OK', 'Cancel'],
     }, (response) => {
-      if (response !== 0) { reject(); return; }
+      if (response !== 0) { reject('DIALOG Cancelled'); return; }
       resolve();
     });
   });

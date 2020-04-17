@@ -4,30 +4,32 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Flipper } from 'react-flip-toolkit';
 import { compose, withHandlers } from 'recompose';
-import Icon from '@codaco/ui/lib/components/Icon';
-import { getActiveProtocolMeta } from '../selectors/protocol';
-import { actionCreators as dialogActions } from '../ducks/modules/dialogs';
-import history from '../history';
-import Start from './Start';
-import RecentProtocols from './RecentProtocols';
-import Overview from './Overview';
-import Timeline from './Timeline';
-import ProtocolControlBar from './ProtocolControlBar';
-import Screens from './Screens';
-import networkCanvasBrand from '../images/network-canvas-brand.svg';
+import { Icon } from '@codaco/ui';
+import history from '@app/history';
+import { getActiveProtocolMeta } from '@selectors/protocol';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+import Loading from '@components/Loading';
+import Start from '@components/Start';
+import RecentProtocols from '@components/RecentProtocols';
+import Overview from '@components/Overview';
+import Timeline from '@components/Timeline';
+import ProtocolControlBar from '@components/ProtocolControlBar';
+import Screens from '@components/Screens';
+import networkCanvasBrand from '@app/images/network-canvas-brand.svg';
 
 const Scene = ({
-  protocolMeta,
+  protocolId,
+  protocolPath,
+  isLoading,
+  hasProtocol,
   handleClickStart,
 }) => {
-  const protocolId = protocolMeta && protocolMeta.id;
   const flipKey = protocolId || 'start';
-  const showProtocol = !!protocolId;
-  const showStart = !protocolId;
 
   const sceneClasses = cx(
     'scene',
-    { 'scene--protocol': showProtocol },
+    { 'scene--protocol': hasProtocol },
+    { 'scene--loading': isLoading },
   );
 
   return (
@@ -40,27 +42,28 @@ const Scene = ({
         <Icon onClick={handleClickStart} className="start-button__arrow" name="back-arrow" />
       </div>
 
-      <Flipper flipKey={flipKey}>
+      { isLoading && <Loading /> }
 
+      <Flipper flipKey={flipKey}>
         <div className="scene__start">
-          <Start show={showStart} />
+          <Start show={!hasProtocol} />
         </div>
 
         <div className="scene__recent-protocols">
-          <RecentProtocols show={showStart} />
+          <RecentProtocols show={!hasProtocol} />
         </div>
 
         <div className="scene__protocol">
           <Overview
-            show={showProtocol}
-            flipId={protocolMeta && encodeURIComponent(protocolMeta.filePath)}
+            show={hasProtocol}
+            flipId={protocolPath}
           />
 
           <div className="scene__timeline">
-            <Timeline show={showProtocol} />
+            <Timeline show={hasProtocol} />
           </div>
 
-          <ProtocolControlBar show={showProtocol} />
+          <ProtocolControlBar show={hasProtocol} />
         </div>
       </Flipper>
 
@@ -70,18 +73,31 @@ const Scene = ({
 };
 
 Scene.propTypes = {
-  protocolMeta: PropTypes.object,
+  protocolId: PropTypes.string,
+  protocolPath: PropTypes.string,
+  isLoading: PropTypes.bool,
+  hasProtocol: PropTypes.bool,
   handleClickStart: PropTypes.func.isRequired,
 };
 
 Scene.defaultProps = {
-  protocolMeta: null,
+  protocolId: null,
+  protocolPath: null,
+  isLoading: false,
+  hasProtocol: false,
 };
 
-const mapStateToProps = state => ({
-  hasUnsavedChanges: (state.session.lastChanged > state.session.lastSaved),
-  protocolMeta: getActiveProtocolMeta(state),
-});
+const mapStateToProps = (state) => {
+  const protocolMeta = getActiveProtocolMeta(state);
+
+  return {
+    hasUnsavedChanges: (state.session.lastChanged > state.session.lastSaved),
+    protocolId: protocolMeta && protocolMeta.id,
+    protocolPath: protocolMeta && encodeURIComponent(protocolMeta.filePath),
+    hasProtocol: !!protocolMeta,
+    isLoading: state.ui.busy.length > 0,
+  };
+};
 
 const mapDispatchToProps = {
   openDialog: dialogActions.openDialog,
