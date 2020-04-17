@@ -1,38 +1,12 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { times } from 'lodash';
 import { Spinner, Icon } from '@codaco/ui';
+import useTimer from './useTimer';
+import { acceptsPaths, getRejectedExtensions, getAcceptsExtensions } from './helpers';
 
 const { dialog } = require('electron').remote;
-
-const getExtension = (path) => {
-  const match = /(.[A-Za-z0-9]+)$/.exec(path);
-  if (!match) { return null; }
-  return match[1];
-};
-
-const matchExtension = (path, extension) =>
-  RegExp(`${extension}$`).test(path.toLowerCase());
-
-const acceptsPath = accepts => path =>
-  accepts.some(accept => matchExtension(path, accept));
-
-const acceptsPaths = (accepts, paths) => {
-  if (!paths || paths.length === 0) { return false; }
-  return paths.every(acceptsPath(accepts));
-};
-
-const getRejectedExtensions = (accepts, paths) =>
-  paths.reduce((memo, path) => {
-    if (acceptsPath(accepts)(path)) { return memo; }
-    const extension = getExtension(path);
-    if (memo.includes(extension)) { return memo; }
-    return [...memo, extension];
-  }, []);
-
-const getAcceptsExtensions = accepts =>
-  accepts.map(accept => accept.substr(1));
 
 const initialState = {
   isActive: false, // is doing something
@@ -41,22 +15,6 @@ const initialState = {
   isLoading: false, // file is being imported
   isError: false,
   error: null,
-};
-
-const useTimer = () => {
-  const timer = useRef();
-
-  const clearTimer = () => {
-    if (!timer.current) { return; }
-    clearTimeout(timer.current);
-  };
-
-  const setTimer = (callback, delay) => {
-    clearTimer();
-    timer.current = setTimeout(callback, delay);
-  };
-
-  return setTimer;
 };
 
 const Dropzone = ({
@@ -88,12 +46,16 @@ const Dropzone = ({
     return true;
   };
 
+  const resetState = () => {
+    setState(previousState => ({ ...previousState, ...initialState }));
+  };
+
   const submitPaths = (filePaths) => {
     const isAcceptable = acceptsPaths(accepts, filePaths);
 
     if (!isAcceptable) {
       const extensions = getRejectedExtensions(accepts, filePaths);
-      const errorMessage = `This asset type does not support ${extensions.join(', ')} extension(s).`;
+      const errorMessage = `This asset type does not support ${extensions.join(', ')} extension(s). Supported types are: ${accepts.join(', ')}.`;
       setState(previousState => ({
         ...previousState,
         isActive: false,
@@ -112,9 +74,7 @@ const Dropzone = ({
     }));
 
     onDrop(filePaths)
-      .finally(() => {
-        setState(previousState => ({ ...previousState, ...initialState }));
-      });
+      .finally(resetState);
   };
 
   const handleClick = useCallback((e) => {
@@ -126,7 +86,10 @@ const Dropzone = ({
       filters: [
         { name: 'Asset', extensions },
       ],
-    }, filePaths => submitPaths(filePaths));
+    }, (filePaths) => {
+      if (filePaths === undefined) { resetState(); return; }
+      submitPaths(filePaths);
+    });
   }, [acceptsKey, isDisabled, submitPaths]);
 
   const handleDrop = useCallback((e) => {
