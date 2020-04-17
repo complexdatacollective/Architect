@@ -71,7 +71,7 @@ const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
   dispatch =>
     dispatch(mayUpgradeProtocolDialog(protocol.schemaVersion, APP_SCHEMA_VERSION))
       .then((confirm) => {
-        if (!confirm) { return Promise.reject(); }
+        if (!confirm) { return false; }
 
         return getNewFileName(filePath)
           .then((newFilePath) => {

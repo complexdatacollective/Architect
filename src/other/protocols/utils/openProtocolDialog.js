@@ -9,14 +9,16 @@ const openDialogOptions = {
 };
 
 /**
- * Shows a open dialog and returns a filename
+ * Shows a open dialog and resolves to (cancelled, filepath), which mirrors later
+ * versions of electron.
  * Can only select *.json files, but returns the path *without* 'protocol.json'
  */
 const openProtocolDialog = () =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     remote.dialog.showOpenDialog(openDialogOptions, (filename) => {
-      if (filename === undefined) { reject(); return; }
-      resolve(filename[0]);
+      const cancelled = filename === undefined;
+      const filePath = filename && filename[0];
+      resolve({ cancelled, filePath });
     });
   });
 

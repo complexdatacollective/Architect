@@ -18,6 +18,8 @@ const SAVE_COPY = 'PROTOCOLS/SAVE_COPY';
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
 const UNBUNDLE_AND_LOAD_ERROR = 'PROTOCOLS/UNBUNDLE_AND_LOAD_ERROR';
 const CREATE_AND_LOAD_ERROR = 'PROTOCOLS/CREATE_AND_LOAD_ERROR';
+const OPEN_START = 'PROTOCOLS/OPEN_START';
+const OPEN_COMPLETE = 'PROTOCOLS/OPEN_COMPLETE';
 const OPEN_ERROR = 'PROTOCOLS/OPEN_ERROR';
 
 const saveAndExportError = error => ({
@@ -33,6 +35,16 @@ const unbundleAndLoadError = error => ({
 const createAndLoadError = error => ({
   type: CREATE_AND_LOAD_ERROR,
   error,
+});
+
+const openStart = filePath => ({
+  type: OPEN_START,
+  payload: filePath,
+});
+
+const openComplete = filePath => ({
+  type: OPEN_COMPLETE,
+  payload: filePath,
 });
 
 const openError = error => ({
@@ -63,13 +75,15 @@ const saveAndBundleThunk = () =>
  */
 const unbundleAndLoadThunk = filePath =>
   (dispatch) => {
+    // TODO: Reset `screens` here?
     dispatch(previewActions.closePreview());
-    // TODO: Reset `screens` here.
+    dispatch(openStart(filePath));
     return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
       .then(({ id }) => {
         history.push(`/edit/${id}/`);
         return id;
       })
+      .finally(() => dispatch(openComplete(filePath)))
       .catch((e) => {
         dispatch(unbundleAndLoadError(e));
         dispatch(importErrorDialog(e, filePath));
@@ -99,7 +113,10 @@ const createAndLoadProtocolThunk = () =>
 const openProtocol = () =>
   dispatch =>
     openProtocolDialog()
-      .then(filePath => dispatch(unbundleAndLoadThunk(filePath)))
+      .then(({ cancelled, filePath }) => {
+        if (cancelled) { return false; }
+        return dispatch(unbundleAndLoadThunk(filePath));
+      })
       .catch(e => dispatch(openError(e)));
 
 /**
@@ -173,6 +190,8 @@ const actionCreators = {
   unbundleAndLoadProtocol: unbundleAndLoadThunk,
   openProtocol,
   saveCopy: saveCopyThunk,
+  openStart,
+  openComplete,
 };
 
 const actionTypes = {
@@ -180,6 +199,8 @@ const actionTypes = {
   UNBUNDLE_AND_LOAD_ERROR,
   CREATE_AND_LOAD_ERROR,
   OPEN_ERROR,
+  OPEN_START,
+  OPEN_COMPLETE,
 };
 
 export {
