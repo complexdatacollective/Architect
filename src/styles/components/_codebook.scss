@@ -86,10 +86,6 @@
       }
     }
 
-    &-column {
-      vertical-align: middle;
-    }
-
     &-heading {
       vertical-align: middle;
       text-transform: none;
@@ -125,6 +121,7 @@
     }
 
     &-column {
+      vertical-align: middle;
       width: 20%;
 
       &--controls {
