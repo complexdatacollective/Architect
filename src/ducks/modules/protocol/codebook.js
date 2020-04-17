@@ -2,7 +2,6 @@ import uuid from 'uuid';
 import { omit, get, has, isEmpty } from 'lodash';
 import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
-import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
 import safeName from '../../../utils/safeName';
