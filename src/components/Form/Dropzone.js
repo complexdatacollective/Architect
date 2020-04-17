@@ -7,13 +7,13 @@ import { Spinner, Icon } from '@codaco/ui';
 const { dialog } = require('electron').remote;
 
 const getExtension = (path) => {
-  const match = /(.[a-z0-9]+)$/.exec(path);
+  const match = /(.[A-Za-z0-9]+)$/.exec(path);
   if (!match) { return null; }
   return match[1];
 };
 
 const matchExtension = (path, extension) =>
-  RegExp(`${extension}$`).test(path);
+  RegExp(`${extension}$`).test(path.toLowerCase());
 
 const acceptsPath = accepts => path =>
   accepts.some(accept => matchExtension(path, accept));
