@@ -21,14 +21,24 @@ const initialState = {
   message: {},
 };
 
-const openScreen = (screen, params = {}, root = false) => ({
-  type: OPEN_SCREEN,
-  payload: {
-    screen,
-    params,
-    root,
-  },
-});
+const openScreen = (screen, params = {}, root = false) =>
+  (dispatch, getState) => {
+    const state = getState();
+    const latestLocus = state.protocol.timeline[state.protocol.timeline.length - 1];
+    const locus = params.locus || latestLocus;
+
+    dispatch({
+      type: OPEN_SCREEN,
+      payload: {
+        screen,
+        params: {
+          ...params,
+          locus,
+        },
+        root,
+      },
+    });
+  };
 
 const closeScreen = (screen, params = null) => ({
   type: CLOSE_SCREEN,

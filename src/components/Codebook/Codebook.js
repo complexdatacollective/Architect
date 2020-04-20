@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import EntityType from './EntityType';
 import EgoType from './EgoType';
 import CodebookCategory from './CodebookCategory';
-import { getUsage, getUsageAsStageName } from './helpers';
+import { getUsage, getUsageAsStageMeta } from './helpers';
 
 const Codebook = ({ nodes, edges }) => (
   <div className="codebook">
@@ -46,7 +46,7 @@ const getEntityWithUsage = (state, index, mergeProps) => {
     const inUse = search.has(id);
 
     const usage = inUse ?
-      getUsageAsStageName(state, getUsage(index, id)) :
+      getUsageAsStageMeta(state, getUsage(index, id)) :
       [];
 
     return {

@@ -12,6 +12,12 @@ const getStageNamesByIndex = (state) => {
     .map(({ label }) => label);
 };
 
+const getStageMetaByIndex = (state) => {
+  const protocol = getProtocol(state);
+  return protocol.stages
+    .map(({ label, id }) => ({ label, id }));
+};
+
 /**
  * Extract the stage name from a path string
  * @param {string} path {}
@@ -44,5 +50,11 @@ export const getUsage = (index, value) =>
 export const getUsageAsStageName = (state, usage) => {
   const stageNamesByIndex = getStageNamesByIndex(state);
   const stageIndexes = compact(uniq(usage.map(getStageIndexFromPath)));
-  return stageIndexes.map(stageIndex => get(stageNamesByIndex, stageIndex));
+  return stageIndexes.map(stageIndex => [get(stageNamesByIndex, stageIndex), stageIndex]);
+};
+
+export const getUsageAsStageMeta = (state, usage) => {
+  const stageMetaByIndex = getStageMetaByIndex(state);
+  const stageIndexes = compact(uniq(usage.map(getStageIndexFromPath)));
+  return stageIndexes.map(stageIndex => get(stageMetaByIndex , stageIndex));
 };

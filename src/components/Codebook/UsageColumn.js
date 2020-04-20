@@ -1,13 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ScreenLink from '@components/Screens/Link';
 import Tag from './Tag';
 
 const UsageColumn = ({
   inUse,
   usage,
 }) => {
-  if (inUse) { return (<div>{usage.join(', ')}</div>); }
-  return (<Tag>not in use</Tag>);
+  const stages = usage
+    .map(({ id, label }) => (
+      <ScreenLink screen="stage" id={id}>{label}</ScreenLink>
+    ));
+
+  return [
+    inUse && <div>{stages}</div>,
+    !inUse && <Tag>not in use</Tag>,
+  ];
 };
 
 UsageColumn.propTypes = {

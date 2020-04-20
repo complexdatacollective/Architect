@@ -8,10 +8,11 @@ import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
 import { Button } from '@codaco/ui/lib/components';
+import ScreenLink from '@components/Screens/Link';
 import Variables from './Variables';
 import Tag from './Tag';
 import EntityIcon from './EntityIcon';
-import { getUsage, getUsageAsStageName } from './helpers';
+import { getUsage, getUsageAsStageMeta } from './helpers';
 
 const EntityType = ({
   name,
@@ -22,43 +23,50 @@ const EntityType = ({
   type,
   variables,
   handleDelete,
-}) => (
-  <div className="codebook__entity">
-    <div className="codebook__entity-detail">
-      <div className="codebook__entity-icon">
-        <EntityIcon color={color} entity={entity} type={type} />
+}) => {
+  const stages = usage
+    .map(({ id, label }) => (
+      <ScreenLink screen="stage" id={id}>{label}</ScreenLink>
+    ));
+
+  return (
+    <div className="codebook__entity">
+      <div className="codebook__entity-detail">
+        <div className="codebook__entity-icon">
+          <EntityIcon color={color} entity={entity} type={type} />
+        </div>
+        <div className="codebook__entity-name">
+          <h2>
+            {name}
+          </h2>
+        </div>
+        <div className="codebook__entity-meta">
+          { !inUse && <Tag>not in use</Tag> }
+          { inUse && <React.Fragment><em>used in:</em> {stages}</React.Fragment> }
+        </div>
+        <div className="codebook__entity-control">
+          <Button
+            size="small"
+            color="neon-coral"
+            onClick={handleDelete}
+          >
+            Delete entity
+          </Button>
+        </div>
       </div>
-      <div className="codebook__entity-name">
-        <h2>
-          {name}
-        </h2>
-      </div>
-      <div className="codebook__entity-meta">
-        { !inUse && <Tag>not in use</Tag> }
-        { inUse && <React.Fragment><em>used in:</em> {usage.join(', ')}</React.Fragment> }
-      </div>
-      <div className="codebook__entity-control">
-        <Button
-          size="small"
-          color="neon-coral"
-          onClick={handleDelete}
-        >
-          Delete entity
-        </Button>
-      </div>
+      { variables.length > 0 &&
+        <div className="codebook__entity-variables">
+          <h3>Variables:</h3>
+          <Variables
+            variables={variables}
+            entity={entity}
+            type={type}
+          />
+        </div>
+      }
     </div>
-    { variables.length > 0 &&
-      <div className="codebook__entity-variables">
-        <h3>Variables:</h3>
-        <Variables
-          variables={variables}
-          entity={entity}
-          type={type}
-        />
-      </div>
-    }
-  </div>
-);
+  );
+};
 
 EntityType.propTypes = {
   entity: PropTypes.string.isRequired,
@@ -91,10 +99,7 @@ const mapStateToProps = (state, { entity, type }) => {
     variables,
     (variable, id) => {
       const inUse = variableLookup.has(id);
-
-      const usage = inUse ?
-        getUsageAsStageName(state, getUsage(variableIndex, id)) :
-        [];
+      const usage = inUse ? getUsageAsStageMeta(state, getUsage(variableIndex, id)) : [];
 
       return ({
         ...variable,
