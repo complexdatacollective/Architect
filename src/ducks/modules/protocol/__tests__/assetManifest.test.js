@@ -38,11 +38,10 @@ describe('protocol/assetManifest', () => {
   });
 
   describe('importAsset()', () => {
-    const file = new File(
-      ['image/data'],
-      'bazz.jpg',
-      { type: 'image/jpeg' },
-    );
+    const file = {
+      text: Promise.resolve('image/data'),
+      name: 'bazz.jpg',
+    };
 
     beforeEach(() => {
       importAsset.mockClear();
@@ -51,11 +50,11 @@ describe('protocol/assetManifest', () => {
     it('calls importAsset and fires complete action', () => {
       const store = getStore();
 
-      return store.dispatch(actionCreators.importAsset(file))
+      return store.dispatch(actionCreators.importAsset(file.name))
         .then(() => {
           expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
           expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_COMPLETE);
-          expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file]]);
+          expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file.name]]);
         });
     });
 
@@ -67,10 +66,10 @@ describe('protocol/assetManifest', () => {
 
       const store = getStore();
 
-      return store.dispatch(actionCreators.importAsset(file)).then(() => {
+      return store.dispatch(actionCreators.importAsset(file.name)).then(() => {
         expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
         expect(log.mock.calls[2][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
-        expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file]]);
+        expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file.name]]);
       });
     });
   });

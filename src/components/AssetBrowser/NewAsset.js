@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AutoFileDrop from '../Form/AutoFileDrop';
 
@@ -7,27 +7,18 @@ import AutoFileDrop from '../Form/AutoFileDrop';
  *
  * Value should be assetId
  */
-class NewAsset extends Component {
-  handleDrop = (assetId) => {
-    this.props.onCreate(assetId);
-  }
-
-  render() {
-    const {
-      type,
-    } = this.props;
-
-    return (
-      <div className="asset-browser-new-asset">
-        <h3>Create new asset</h3>
-        <AutoFileDrop
-          type={type}
-          onDrop={this.handleDrop}
-        />
-      </div>
-    );
-  }
-}
+const NewAsset = ({
+  type,
+  onCreate,
+}) => (
+  <div className="asset-browser-new-asset">
+    <h3>Create new asset</h3>
+    <AutoFileDrop
+      type={type}
+      onDrop={onCreate}
+    />
+  </div>
+);
 
 NewAsset.propTypes = {
   type: PropTypes.string,
