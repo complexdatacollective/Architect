@@ -16,7 +16,7 @@ const Link = ({
   }, ['openScreen', 'onClick']);
 
   return (
-    <div onClick={handleOpenStage}>
+    <div className="screen-link" onClick={handleOpenStage}>
       {children}
     </div>
   );

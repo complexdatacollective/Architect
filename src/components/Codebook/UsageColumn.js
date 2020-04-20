@@ -20,7 +20,7 @@ const UsageColumn = ({
     ));
 
   return [
-    inUse && <div>{stages}</div>,
+    inUse && <div className="codebook__variables-usage-container">{stages}</div>,
     !inUse && <Tag>not in use</Tag>,
   ];
 };
