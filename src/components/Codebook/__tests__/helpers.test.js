@@ -1,14 +1,14 @@
 /* eslint-env jest */
 
-import { getUsage, getUsageAsStageName } from '../helpers';
+import { getUsage, getUsageAsStageMeta } from '../helpers';
 
 const state = {
   protocol: {
     present: {
       stages: [
-        { label: 'foo' },
-        { label: 'bar' },
-        { label: 'bazz' },
+        { label: 'foo', id: 'abcd', other: 'ignored' },
+        { label: 'bar', id: 'efgh', other: 'ignored' },
+        { label: 'bazz', id: 'ijkl', other: 'ignored' },
       ],
     },
   },
@@ -28,8 +28,11 @@ it('getUsage() ', () => {
   expect(getUsage(index, value)).toEqual(expectedResult);
 });
 
-it('getUsageAsStageName()', () => {
+it('getUsageAsStageMeta()', () => {
   const usage = ['stages[0].foo.bar', 'stages[0].foo.bar.bazz', 'stages[1].foo.bar.bazz'];
-  const expectedResult = ['foo', 'bar'];
-  expect(getUsageAsStageName(state, usage)).toEqual(expectedResult);
+  const expectedResult = [
+    { label: 'foo', id: 'abcd' },
+    { label: 'bar', id: 'efgh' },
+  ];
+  expect(getUsageAsStageMeta(state, usage)).toEqual(expectedResult);
 });

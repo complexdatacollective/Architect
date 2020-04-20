@@ -6,7 +6,7 @@ import { compose } from 'recompose';
 import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
 import Variables from './Variables';
-import { getUsage, getUsageAsStageName } from './helpers';
+import { getUsage, getUsageAsStageMeta } from './helpers';
 
 const EgoType = ({
   variables,
@@ -47,9 +47,7 @@ const mapStateToProps = (state) => {
     (variable, id) => {
       const inUse = variableLookup.has(id);
 
-      const usage = inUse ?
-        getUsageAsStageName(state, getUsage(variableIndex, id)) :
-        [];
+      const usage = inUse ? getUsageAsStageMeta(state, getUsage(variableIndex, id)) : [];
 
       return ({
         ...variable,
