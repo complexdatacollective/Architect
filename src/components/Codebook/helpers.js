@@ -56,5 +56,5 @@ export const getUsageAsStageName = (state, usage) => {
 export const getUsageAsStageMeta = (state, usage) => {
   const stageMetaByIndex = getStageMetaByIndex(state);
   const stageIndexes = compact(uniq(usage.map(getStageIndexFromPath)));
-  return stageIndexes.map(stageIndex => get(stageMetaByIndex , stageIndex));
+  return stageIndexes.map(stageIndex => get(stageMetaByIndex, stageIndex));
 };

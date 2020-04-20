@@ -5,6 +5,7 @@ import { map } from 'lodash';
 import { compose, withHandlers } from 'recompose';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
+import { actionCreators as screenActionsCreators } from '@modules/ui/screens';
 import { getType } from '@selectors/codebook';
 import { utils, getVariableIndex } from '@selectors/indexes';
 import { Button } from '@codaco/ui/lib/components';
@@ -22,11 +23,12 @@ const EntityType = ({
   entity,
   type,
   variables,
+  closeCodebook,
   handleDelete,
 }) => {
   const stages = usage
     .map(({ id, label }) => (
-      <ScreenLink screen="stage" id={id}>{label}</ScreenLink>
+      <ScreenLink screen="stage" id={id} onClick={closeCodebook}>{label}</ScreenLink>
     ));
 
   return (
@@ -76,6 +78,7 @@ EntityType.propTypes = {
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool,
   handleDelete: PropTypes.func.isRequired,
+  closeCodebook: PropTypes.func.isRequired,
   variables: PropTypes.array,
 };
 
@@ -121,8 +124,11 @@ const withEntityHandlers = compose(
   connect(null, {
     openDialog: dialogActionCreators.openDialog,
     deleteType: codebookActionCreators.deleteType,
+    closeScreen: screenActionsCreators.closeScreen,
   }),
   withHandlers({
+    closeCodebook: ({ closeScreen }) =>
+      () => closeScreen('codebook'),
     handleDelete: ({ deleteType, openDialog, entity, type, name, inUse }) =>
       () => {
         if (inUse) {

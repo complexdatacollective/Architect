@@ -7,12 +7,13 @@ const Link = ({
   children,
   screen,
   openScreen,
+  onClick,
   ...options
 }) => {
   const handleOpenStage = useCallback(() => {
     openScreen(screen, options);
-    onClick();
-  }, ['openScreen']);
+    if (onClick) { onClick(); }
+  }, ['openScreen', 'onClick']);
 
   return (
     <div onClick={handleOpenStage}>
@@ -23,8 +24,13 @@ const Link = ({
 
 Link.propTypes = {
   openScreen: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   screen: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+};
+
+Link.defaultProps = {
+  onClick: null,
 };
 
 const mapDispatchToProps = {
