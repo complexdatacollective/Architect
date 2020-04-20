@@ -11,6 +11,8 @@ import {
 jest.mock('redux-form', () => ({
   formValueSelector: () =>
     () => '1234-1234-4',
+  getFormValues: () =>
+    () => ({}),
 }));
 
 const subject = {

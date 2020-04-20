@@ -2,18 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { compose } from 'recompose';
-import { getFieldId } from '../../../utils/issues';
-import { ValidatedField } from '../../Form';
-import * as ArchitectFields from '../../Form/Fields';
-import Row from '../Row';
-import Section from '../Section';
-import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
+import { getFieldId } from '@app/utils/issues';
+import { ValidatedField } from '@components/Form';
+import * as ArchitectFields from '@components/Form/Fields';
+import Tip from '@components/Tip';
+import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
+import Row from '@components/sections/Row';
+import Section from '@components/sections/Section';
 import withLayoutOptions from './withLayoutOptions';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
-import Tip from '../../Tip';
 
 const PromptFields = ({
   handleCreateVariable,
+  handleDeleteVariable,
   normalizeKeyDown,
   variablesForSubject,
   layoutVariablesForSubject,
@@ -43,6 +44,7 @@ const PromptFields = ({
         validation={{ required: true }}
         options={layoutVariablesForSubject}
         onCreateOption={value => handleCreateVariable(value, 'layout')}
+        onDeleteOption={value => handleDeleteVariable(value)}
         onKeyDown={normalizeKeyDown}
         formatCreateLabel={inputValue => (
           <span>Click here to create a new layout variable named &quot;{inputValue}&quot;.</span>
@@ -85,6 +87,7 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   handleCreateVariable: PropTypes.func.isRequired,
+  handleDeleteVariable: PropTypes.func.isRequired,
   normalizeKeyDown: PropTypes.func.isRequired,
   variablesForSubject: PropTypes.object.isRequired,
   layoutVariablesForSubject: PropTypes.array.isRequired,

@@ -7,7 +7,7 @@ const DefaultSelectOption = (props) => {
   const { data } = props;
   /* eslint-disable no-underscore-dangle */
   const showNew = !!data.__createNewOption__ || !!data.__isNew__;
-  const showDelete = !!props.onDeleteOption;
+  const showDelete = !data.__isNew__ && !!props.onDeleteOption && !data.isUsed;
   const label = data.__createNewOption__ ?
     data.__createNewOption__ :
     data.label;

@@ -31,8 +31,9 @@ class AppManager {
   }
 
   static send(...args) {
-    if (!global.appWindow) { return; }
+    if (!global.appWindow) { return false; }
     global.appWindow.webContents.send(...args);
+    return true;
   }
 
   // Check process.argv after startup (win)
@@ -106,6 +107,11 @@ class AppManager {
       log.info('receive: QUIT');
       AppManager.quit();
     });
+
+    ipcMain.on('CONFIRM_CLOSE_ACK', () => {
+      log.info('receive: CONFIRM_CLOSE_ACK');
+      global.confirmCloseAck = true;
+    });
   }
 
   start() {
@@ -117,9 +123,17 @@ class AppManager {
 
     global.appWindow.on('close', (e) => {
       if (!global.quit) {
-        log.info('send: CONFIRM_CLOSE');
         e.preventDefault();
+        global.confirmCloseAck = false;
+        log.info('send: CONFIRM_CLOSE');
         AppManager.send('CONFIRM_CLOSE');
+
+        setTimeout(() => {
+          if (!global.confirmCloseAck) {
+            // If renderer does not acknowledge, e.g. app content is not loaded/crashed.
+            AppManager.quit();
+          }
+        }, 500);
 
         return false;
       }

@@ -1,31 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 
-import { get, map, has, filter, pickBy } from 'lodash';
-import { getCodebook } from './protocol';
-import { getVariableIndex } from './indexes';
-
-const extraProperties = new Set(['type', 'color']);
-
-const asOption = (item, id) => {
-  const required = {
-    label: item.name,
-    value: id,
-  };
-  const extra = pickBy(
-    item,
-    (value, key) => value && extraProperties.has(key),
-  );
-  return {
-    ...extra,
-    ...required,
-  };
-};
-
-const asOptions = items =>
-  map(
-    items,
-    asOption,
-  );
+import { get } from 'lodash';
+import { getCodebook } from '../protocol';
+import { asOptions } from '../utils';
+import { makeOptionsWithIsUsed } from './isUsed';
 
 const getNodeTypes = state =>
   get(getCodebook(state), 'node', {});
@@ -52,36 +30,18 @@ const getVariablesForSubject = (state, subject) =>
   get(getType(state, subject), 'variables', {});
 
 /**
- * Given `subject` return a list of unused variables
- * for matching entity
- *
- * @param {object} state redux state
- * @param {object} subject subject object in format `{ entity, type }`
- */
-const getUnusedVariablesForSubject = (state, subject) => {
-  const variableIndex = getVariableIndex(state);
-  const variablesForSubject = getVariablesForSubject(state, subject);
-
-  const unusedVariables = filter(
-    variablesForSubject,
-    (_, variableId) => !has(variableIndex, variableId),
-  );
-
-  return unusedVariables;
-};
-
-/**
  * Given `subject` return a list of options (`{ label, value, ...}`)
  * for matching entity
  *
  * @param {object} state redux state
  * @param {object} subject subject object in format `{ entity, type }`
  */
-const getVariableOptionsForSubject = (state, subject) => {
+const getVariableOptionsForSubject = (state, subject, isUsedOptions = {}) => {
   const variables = getVariablesForSubject(state, subject);
   const options = asOptions(variables);
+  const optionsWithIsUsed = makeOptionsWithIsUsed(isUsedOptions)(state, options);
 
-  return options;
+  return optionsWithIsUsed;
 };
 
 /**
@@ -97,19 +57,12 @@ const getOptionsForVariable = (state, { entity, type, variable }) => {
   return get(variables, [variable, 'options'], []);
 };
 
-const utils = {
-  asOption,
-  asOptions,
-};
-
 export {
   getCodebook,
   getNodeTypes,
   getEdgeTypes,
   getType,
   getVariablesForSubject,
-  getUnusedVariablesForSubject,
   getVariableOptionsForSubject,
   getOptionsForVariable,
-  utils,
 };

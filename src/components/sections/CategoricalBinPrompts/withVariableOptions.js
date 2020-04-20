@@ -5,7 +5,11 @@ import { get } from 'lodash';
 import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { form, type, entity }) => {
-  const variableOptions = getVariableOptionsForSubject(state, { type, entity });
+  const variableOptions = getVariableOptionsForSubject(
+    state,
+    { type, entity },
+  );
+
   const variable = formValueSelector(form)(state, 'variable');
   const otherVariable = formValueSelector(form)(state, 'otherVariable');
   const variables = getVariablesForSubject(state, { type, entity });
@@ -37,7 +41,7 @@ const updateFormVariableOptions = lifecycle({
       variable,
     } = this.props;
     if (previousProps.variable === variable) { return; }
-    changeForm(form, 'variableOptions', optionsForVariable);
+    changeForm(form, 'variableOptions', optionsForVariable);// TODO: is this wrong field name?
   },
 });
 

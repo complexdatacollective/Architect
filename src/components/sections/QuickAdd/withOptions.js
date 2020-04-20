@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { getVariableOptionsForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { entity, type }) => {
   const variableOptionsForSubject = getVariableOptionsForSubject(state, { entity, type });
