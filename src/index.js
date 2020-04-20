@@ -13,7 +13,6 @@ import initPreventFileDrop from './utils/initPreventFileDrop';
 import initIPCListeners from './utils/initIPCListeners';
 import initFileOpener from './utils/initFileOpener';
 
-import 'react-virtualized/styles.css'; // eslint-disable-line import/first
 import './styles/main.scss';
 
 initIPCListeners();

@@ -4,95 +4,102 @@ import { connect } from 'react-redux';
 import { compose, withHandlers, withStateHandlers, withProps } from 'recompose';
 import { get, tap, isString } from 'lodash';
 import cx from 'classnames';
-import { AutoSizer, Column, Table, SortDirection } from 'react-virtualized';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import UsageColumn from './UsageColumn';
 import ControlsColumn from './ControlsColumn';
 
-const HEADER_HEIGHT = 50;
-const ROW_HEIGHT = 50;
+const SortDirection = {
+  ASC: Symbol('ASC'),
+  DESC: Symbol('DESC'),
+};
 
-const rowClassName = ({ index }) => {
+const reverseSort = direction =>
+  (direction === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC);
+
+const rowClassName = (index) => {
   const isEven = index % 2 === 0;
-  const isHeading = index === -1;
   return cx(
     'codebook__variables-row',
     {
-      'codebook__variables-row--even': isEven && !isHeading,
-      'codebook__variables-row--odd': !isEven && !isHeading,
-      'codebook__variables-row--heading': isHeading,
+      'codebook__variables-row--even': isEven,
+      'codebook__variables-row--odd': !isEven,
     },
   );
 };
 
-const Variables = ({ variables, handleDelete, sortBy, sortDirection, sort }) => {
-  // Set height to full content height (to prevent scrolling)
-  const height = (variables.length * ROW_HEIGHT) + HEADER_HEIGHT;
+const Heading = ({ children, name, sortBy, sortDirection, onSort }) => {
+  const isSorted = name === sortBy;
+  const newSortDirection = !isSorted ? SortDirection.ASC : reverseSort(sortDirection);
+  const sortClasses = cx(
+    'sort-direction',
+    {
+      'sort-direction--asc': sortDirection === SortDirection.ASC,
+      'sort-direction--desc': sortDirection === SortDirection.DESC,
+    },
+  );
 
   return (
-    <AutoSizer disableHeight>
-      {({ width }) => (
-        <Table
-          className="codebook__variables"
-          headerClassName="codebook__variables-heading"
-          rowClassName={rowClassName}
-          width={width}
-          height={height}
-          headerHeight={HEADER_HEIGHT}
-          rowHeight={ROW_HEIGHT}
-          rowCount={variables.length}
-          rowGetter={({ index }) => variables[index]}
-          sortBy={sortBy}
-          sortDirection={sortDirection}
-          sort={sort}
-        >
-          <Column
-            className="codebook__variables-column"
-            label="Name"
-            dataKey="name"
-            flexGrow={1}
-            width={200}
-          />
-          <Column
-            className="codebook__variables-column"
-            label="Type"
-            dataKey="type"
-            flexGrow={1}
-            width={200}
-          />
-          <Column
-            className="codebook__variables-column"
-            label="Component"
-            dataKey="component"
-            flexGrow={1}
-            width={200}
-          />
-          <Column
-            className="codebook__variables-column codebook__variables-column--usage"
-            width={100}
-            flexGrow={1}
-            label="Used in"
-            dataKey="inUse"
-            cellRenderer={UsageColumn}
-          />
-          <Column
-            className="codebook__variables-column"
-            width={200}
-            dataKey="controls"
-            label=""
-            columnData={{ handleDelete }}
-            cellRenderer={ControlsColumn}
-          />
-        </Table>
-      )}
-    </AutoSizer>
+    <th
+      className="codebook__variables-heading"
+      onClick={() => onSort({ sortBy: name, sortDirection: newSortDirection })}
+    >
+      {children}
+      {isSorted && <div className={sortClasses} />}
+    </th>
+  );
+};
+
+Heading.propTypes = {
+  children: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
+  onSort: PropTypes.func.isRequired,
+};
+
+const Variables = ({ variables, onDelete, sortBy, sortDirection, sort }) => {
+  const headingProps = {
+    sortBy,
+    sortDirection,
+    onSort: sort,
+  };
+
+  return (
+    <div>
+      <table className="codebook__variables">
+        <thead>
+          <tr className="codebook__variables-row codebook__variables-row--heading">
+            <Heading name="name" {...headingProps}>Name</Heading>
+            <Heading name="type" {...headingProps}>Type</Heading>
+            <Heading name="component" {...headingProps}>Component</Heading>
+            <Heading name="usage" {...headingProps}>Usage</Heading>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {variables.map(({ id, name, component, type, inUse, usage }, index) => (
+            <tr className={rowClassName(index)} key={id}>
+              <td className="codebook__variables-column">{name}</td>
+              <td className="codebook__variables-column">{type}</td>
+              <td className="codebook__variables-column">{component}</td>
+              <td className="codebook__variables-column codebook__variables-column--usage">
+                <UsageColumn inUse={inUse} usage={usage} />
+              </td>
+              <td className="codebook__variables-column codebook__variables-column--usage">
+                <ControlsColumn onDelete={onDelete} inUse={inUse} id={id} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
 Variables.propTypes = {
   variables: PropTypes.array,
-  handleDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   sortBy: PropTypes.string.isRequired,
   sortDirection: PropTypes.oneOf([SortDirection.ASC, SortDirection.DESC]).isRequired,
   sort: PropTypes.func.isRequired,
@@ -100,7 +107,7 @@ Variables.propTypes = {
 
 Variables.defaultProps = {
   variables: [],
-  handleDelete: () => {},
+  onDelete: () => {},
 };
 
 const withVariableHandlers = compose(
@@ -109,8 +116,10 @@ const withVariableHandlers = compose(
     deleteVariable: codebookActionCreators.deleteVariable,
   }),
   withHandlers({
-    handleDelete: ({ deleteVariable, openDialog, entity, type }) =>
-      (id, name) => {
+    onDelete: ({ deleteVariable, openDialog, entity, type, variables }) =>
+      (id) => {
+        const { name } = variables.find(v => v.id === id);
+
         openDialog({
           type: 'Warning',
           title: `Delete ${name}`,

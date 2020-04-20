@@ -17,13 +17,13 @@ const Codebook = ({ nodes, edges }) => (
 
     { nodes.length > 0 &&
       <CodebookCategory title="Node Types">
-        {nodes.map(node => (<EntityType {...node} />))}
+        {nodes.map(node => <EntityType {...node} key={node.type} />)}
       </CodebookCategory>
     }
 
     { edges.length > 0 &&
       <CodebookCategory title="Edge Types">
-        {edges.map(edge => (<EntityType {...edge} />))}
+        {edges.map(edge => <EntityType {...edge} key={edge.type} />)}
       </CodebookCategory>
     }
   </div>

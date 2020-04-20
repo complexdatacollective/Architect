@@ -68,7 +68,7 @@ EntityType.propTypes = {
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   usage: PropTypes.array.isRequired,
-  inUse: PropTypes.boolean,
+  inUse: PropTypes.bool,
   handleDelete: PropTypes.func.isRequired,
   variables: PropTypes.array,
 };
