@@ -38,15 +38,13 @@ const EntityType = ({
         { inUse && <React.Fragment><em>used in:</em> {usage.join(', ')}</React.Fragment> }
       </div>
       <div className="codebook__entity-control">
-        { !inUse &&
-          <Button
-            size="small"
-            color="neon-coral"
-            onClick={handleDelete}
-          >
-            Delete entity
-          </Button>
-        }
+        <Button
+          size="small"
+          color="neon-coral"
+          onClick={handleDelete}
+        >
+          Delete entity
+        </Button>
       </div>
     </div>
     { variables.length > 0 &&
@@ -120,8 +118,22 @@ const withEntityHandlers = compose(
     deleteType: codebookActionCreators.deleteType,
   }),
   withHandlers({
-    handleDelete: ({ deleteType, openDialog, entity, type, name }) =>
+    handleDelete: ({ deleteType, openDialog, entity, type, name, inUse }) =>
       () => {
+        if (inUse) {
+          openDialog({
+            type: 'Notice',
+            title: `Cannot delete ${name} ${entity}`,
+            message: (
+              <p>
+                The {name} {entity} cannot be deleted as it is currently in use.
+              </p>
+            ),
+          });
+
+          return;
+        }
+
         openDialog({
           type: 'Warning',
           title: `Delete ${name} ${entity}`,
