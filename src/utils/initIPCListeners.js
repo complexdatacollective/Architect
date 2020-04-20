@@ -20,6 +20,8 @@ const initIPCListeners = () => {
     const hasUnsavedChanges = state.session.lastChanged > state.session.lastSaved;
     const hasDraftChanges = isDirty(formName)(state);
 
+    ipcRenderer.send('CONFIRM_CLOSE_ACK');
+
     if (!hasUnsavedChanges && !hasDraftChanges) {
       ipcRenderer.send('QUIT');
       return;

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { change, formValueSelector } from 'redux-form';
 import { lifecycle, compose, withHandlers } from 'recompose';
-import { getCodebook } from '../../../selectors/protocol';
+import { getCodebook } from '@selectors/protocol';
 
 const mapStateToProps = (state, { form, type, entity }) => {
   const codebook = getCodebook(state);

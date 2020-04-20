@@ -15,7 +15,7 @@ import Form from '../Form';
 import Grid from './Grid';
 import withEditHandlers from './withEditHandlers';
 
-const formName = 'editiable-list-form';
+const formName = 'editable-list-form';
 
 const notEmpty = value => (
   value && value.length > 0 ? undefined : 'You must create at least one item'
