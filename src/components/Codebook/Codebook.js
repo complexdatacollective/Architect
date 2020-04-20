@@ -5,6 +5,7 @@ import { getCodebook } from '@selectors/codebook';
 import { getNodeIndex, getEdgeIndex, utils } from '@selectors/indexes';
 import PropTypes from 'prop-types';
 import EntityType from './EntityType';
+import EgoType from './EgoType';
 import CodebookCategory from './CodebookCategory';
 import { getUsage, getUsageAsStageName } from './helpers';
 
@@ -14,6 +15,10 @@ const Codebook = ({ nodes, edges }) => (
       Below you can find an overview of the node and edge types that you have
       defined while creating your interview. Entities that are unused may be deleted.
     </p>
+
+    <CodebookCategory title="Ego">
+      <EgoType entity="ego" type="ego" />
+    </CodebookCategory>
 
     { nodes.length > 0 &&
       <CodebookCategory title="Node Types">
