@@ -6,7 +6,7 @@ import { Flipper } from 'react-flip-toolkit';
 import { compose, withHandlers } from 'recompose';
 import { Icon } from '@codaco/ui';
 import history from '@app/history';
-import { getActiveProtocolMeta } from '@selectors/protocol';
+import { getActiveProtocolMeta } from '@selectors/protocols';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import Loading from '@components/Loading';
 import Start from '@components/Start';

@@ -1,17 +1,16 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
-import { find } from 'lodash';
 import { store } from '@app/ducks/store';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionCreators as protocolsActions } from '@modules/protocols';
+import { getActiveProtocolMeta } from '@selectors/protocols';
 
 const initFileOpener = () => {
   ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
     // eslint-disable-next-line no-console
     console.log(`Open file "${protocolPath}"`);
     const state = store.getState();
-    const activeProtocolId = state.session.activeProtocol;
-    const meta = find(state.protocols, ['id', activeProtocolId]);
+    const meta = getActiveProtocolMeta(state);
     const hasUnsavedChanges = state.session.lastChanged > state.session.lastSaved;
 
     // If the protocol is already open, no op

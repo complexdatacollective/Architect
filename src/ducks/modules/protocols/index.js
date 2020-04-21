@@ -21,6 +21,8 @@ const CREATE_AND_LOAD_ERROR = 'PROTOCOLS/CREATE_AND_LOAD_ERROR';
 const OPEN_START = 'PROTOCOLS/OPEN_START';
 const OPEN_COMPLETE = 'PROTOCOLS/OPEN_COMPLETE';
 const OPEN_ERROR = 'PROTOCOLS/OPEN_ERROR';
+const LOCK = 'PROTOCOLS/LOCK';
+const UNLOCK = 'PROTOCOLS/UNLOCK';
 
 const saveAndExportError = error => ({
   type: SAVE_AND_EXPORT_ERROR,
@@ -51,6 +53,19 @@ const openError = error => ({
   type: OPEN_ERROR,
   error,
 });
+
+const lockUnbundle = next =>
+  (dispatch, getState) => {
+    const state = getState();
+    if (state.lock) { return; }
+
+    dispatch({ type: LOCK });
+
+    next()
+      .finally(() => {
+        dispatch({ type: UNLOCK });
+      });
+  };
 
 /**
  * 1. Save - write protocol to protocol.json
@@ -136,20 +151,26 @@ const saveCopyThunk = filePath =>
     dispatch(saveAndBundleThunk());
   };
 
-const initialState = [];
+const initialState = {
+  lock: false,
+  protocols: [],
+};
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case registerActionTypes.REGISTER_PROTOCOL:
-      return [
+      return {
         ...state,
-        {
-          filePath: action.filePath,
-          id: action.id,
-          advanced: action.advanced,
-          workingPath: action.workingPath,
-        },
-      ].slice(-10);
+        protocols: [
+          ...state.protocols,
+          {
+            filePath: action.filePath,
+            id: action.id,
+            advanced: action.advanced,
+            workingPath: action.workingPath,
+          },
+        ].slice(-10),
+      };
     case SAVE_COPY: {
       /**
        * We modify the original to use the new filePath so we can effectively take the working
@@ -170,15 +191,28 @@ export default function reducer(state = initialState, action = {}) {
         workingPath: null,
       };
 
-      const newState = [
+      const newProtocols = [
         ...state.slice(0, originalProtocolIndex - 1),
         copyProtocolEntry,
         updatedOriginalEntry,
         ...state.slice(originalProtocolIndex + 1),
       ];
 
-      return newState;
+      return {
+        ...state,
+        protocols: newProtocols,
+      };
     }
+    case LOCK:
+      return {
+        ...state,
+        lock: true,
+      };
+    case UNLOCK:
+      return {
+        ...state,
+        lock: false,
+      };
     default:
       return state;
   }

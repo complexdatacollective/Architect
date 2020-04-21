@@ -4,18 +4,10 @@ import { createSelector } from 'reselect';
 import { find, reduce } from 'lodash';
 
 const propStageId = (_, props) => props.stageId;
-const activeProtocolId = state => state.session.activeProtocol;
-const protocolsMeta = state => state.protocols;
 
 export const getProtocol = state => state.protocol.present;
 export const getAssetManifest = state => state.protocol.present.assetManifest;
 export const getCodebook = state => state.protocol.present.codebook;
-
-export const getActiveProtocolMeta = createSelector(
-  protocolsMeta,
-  activeProtocolId,
-  (meta, id) => find(meta, ['id', id]),
-);
 
 export const makeGetStage = () =>
   createSelector(
