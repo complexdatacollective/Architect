@@ -13,28 +13,6 @@ const getValue = (options, value) => {
 };
 
 class Select extends PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    options: PropTypes.array,
-    selectOptionComponent: PropTypes.any,
-    onDeleteOption: PropTypes.func,
-    input: PropTypes.object,
-    label: PropTypes.string,
-    children: PropTypes.node,
-    meta: PropTypes.object,
-  };
-
-  static defaultProps = {
-    className: '',
-    selectOptionComponent: DefaultSelectOption,
-    onDeleteOption: null,
-    options: [],
-    input: {},
-    label: null,
-    children: null,
-    meta: { invalid: false, error: null, touched: false },
-  };
-
   get value() {
     return getValue(this.props.options, this.props.input.value);
   }
@@ -108,5 +86,28 @@ class Select extends PureComponent {
     );
   }
 }
+
+Select.propTypes = {
+  className: PropTypes.string,
+  options: PropTypes.array,
+  selectOptionComponent: PropTypes.any,
+  onDeleteOption: PropTypes.func,
+  input: PropTypes.object,
+  label: PropTypes.string,
+  children: PropTypes.node,
+  meta: PropTypes.object,
+};
+
+Select.defaultProps = {
+  className: '',
+  selectOptionComponent: DefaultSelectOption,
+  onDeleteOption: null,
+  options: [],
+  input: {},
+  label: null,
+  children: null,
+  meta: { invalid: false, error: null, touched: false },
+};
+
 
 export default Select;

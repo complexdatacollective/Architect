@@ -18,30 +18,7 @@ const getValue = (options, value) => {
   return foundValue;
 };
 
-class Select extends PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    options: PropTypes.array,
-    selectOptionComponent: PropTypes.any,
-    input: PropTypes.object,
-    onCreateOption: PropTypes.func.isRequired,
-    onDeleteOption: PropTypes.func,
-    label: PropTypes.string,
-    children: PropTypes.node,
-    meta: PropTypes.object,
-  };
-
-  static defaultProps = {
-    className: '',
-    selectOptionComponent: DefaultSelectOption,
-    onDeleteOption: null,
-    options: [],
-    input: {},
-    label: null,
-    children: null,
-    meta: { invalid: false, error: null, touched: false },
-  };
-
+class CreatableSelect extends PureComponent {
   get value() {
     return getValue(this.props.options, this.props.input.value);
   }
@@ -157,4 +134,27 @@ class Select extends PureComponent {
   }
 }
 
-export default Select;
+CreatableSelect.propTypes = {
+  className: PropTypes.string,
+  options: PropTypes.array,
+  selectOptionComponent: PropTypes.any,
+  input: PropTypes.object,
+  onCreateOption: PropTypes.func.isRequired,
+  onDeleteOption: PropTypes.func,
+  label: PropTypes.string,
+  children: PropTypes.node,
+  meta: PropTypes.object,
+};
+
+CreatableSelect.defaultProps = {
+  className: '',
+  selectOptionComponent: DefaultSelectOption,
+  onDeleteOption: null,
+  options: [],
+  input: {},
+  label: null,
+  children: null,
+  meta: { invalid: false, error: null, touched: false },
+};
+
+export default CreatableSelect;

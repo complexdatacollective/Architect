@@ -43,6 +43,7 @@ class StageEditor extends Component {
               <SectionComponent
                 key={index}
                 form={formName}
+                stagePath={this.props.stagePath}
                 hasSubmitFailed={submitFailed}
                 // `windowRoot` will ensure connect() components re-render
                 // when the window root changes

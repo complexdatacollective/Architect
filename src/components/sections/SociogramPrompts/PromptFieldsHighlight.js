@@ -17,6 +17,7 @@ const HighlightFields = ({
   highlightVariablesForSubject,
   handleEdgeHighlightChange,
   handleCreateVariable,
+  handleDeleteVariable,
   normalizeKeyDown,
   canCreateEdge,
   setCanCreateEdge,
@@ -55,6 +56,7 @@ const HighlightFields = ({
             component={ArchitectFields.CreatableSelect}
             label="Which boolean variable should be toggled?"
             onCreateOption={value => handleCreateVariable(value, 'boolean')}
+            onDeleteOption={value => handleDeleteVariable(value)}
             onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
             placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
@@ -75,6 +77,7 @@ HighlightFields.propTypes = {
   highlightVariablesForSubject: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
+  handleDeleteVariable: PropTypes.func.isRequired,
   normalizeKeyDown: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,

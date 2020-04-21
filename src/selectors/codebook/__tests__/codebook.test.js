@@ -1,9 +1,9 @@
 /* eslint-env jest */
 
-import testState from '../../__tests__/testState.json';
+import testState from '../../../__tests__/testState.json';
 import {
   getVariableOptionsForSubject,
-} from '../codebook';
+} from '..';
 
 describe('codebook selectors', () => {
   describe('getVariableOptionsForSubject()', () => {

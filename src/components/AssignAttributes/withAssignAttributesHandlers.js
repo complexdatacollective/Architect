@@ -12,6 +12,7 @@ const ALLOWED_TYPES = [
   'categorical',
 ];
 
+// TODO: isUsed
 const mapStateToProps = (state, { entity, type, form, fields }) => {
   const usedVariables = (formValueSelector(form)(state, fields.name) || [])
     .map(({ variable }) => variable);

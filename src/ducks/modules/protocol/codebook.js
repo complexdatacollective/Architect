@@ -2,7 +2,7 @@ import uuid from 'uuid';
 import { omit, get, has, isEmpty } from 'lodash';
 import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
-import { getVariableIndex, utils as indexUtils } from '../../../selectors/indexes';
+import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
 import safeName from '../../../utils/safeName';
 import { actionCreators as stageActions } from './stages';
@@ -164,8 +164,8 @@ const updateVariableThunk = (entity, type, variable, configuration, merge = fals
 
 const deleteVariableThunk = (entity, type, variable) =>
   (dispatch, getState) => {
-    const variableSearch = indexUtils.buildSearch([getVariableIndex(getState())]);
-    if (variableSearch.has(variable)) { return false; }
+    const isUsed = makeGetIsUsed({ formNames: [] })(getState());
+    if (get(isUsed, variable, false)) { return false; }
     dispatch(deleteVariable(entity, type, variable));
     return true;
   };

@@ -1,30 +1,22 @@
 import { map } from 'lodash';
-import { getCodebook } from '../../../selectors/protocol';
-import { getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { getCodebook } from '@selectors/protocol';
+import { getVariableOptionsForSubject } from '@selectors/codebook';
 
-export const getLayoutVariablesForSubject = (state, { entity, type }) => {
-  const variables = getVariableOptionsForSubject(state, { entity, type });
+const noneOption = { label: '\u2014 None \u2014', value: '' };
 
-  return variables.filter(item => item.type === 'layout');
-};
+export const getNarrativeVariables = (state, subject) => {
+  const variables = getVariableOptionsForSubject(state, subject);
 
-export const getHighlightVariablesForSubject = (state, { entity, type }) => {
-  const variables = getVariableOptionsForSubject(state, { entity, type });
+  const layoutVariblesForSubject = variables.filter(({ type }) => type === 'layout');
+  const highlightVariablesForSubject = variables.filter(({ type }) => type === 'boolean');
+  const categoricalOptions = variables.filter(({ type }) => type === 'categorical');
+  const groupVariablesForSubject = [noneOption, ...categoricalOptions];
 
-  return variables.filter(item => item.type === 'boolean');
-};
-
-export const getGroupVariablesForSubject = (state, { entity, type }) => {
-  const variables = getVariableOptionsForSubject(state, { entity, type });
-
-  const categoricalOptions = variables.filter(
-    item => item.type === 'categorical',
-  );
-
-  return [
-    { label: '\u2014 None \u2014', value: '' },
-    ...categoricalOptions,
-  ];
+  return {
+    layoutVariblesForSubject,
+    highlightVariablesForSubject,
+    groupVariablesForSubject,
+  };
 };
 
 export const getEdgesForSubject = (state) => {

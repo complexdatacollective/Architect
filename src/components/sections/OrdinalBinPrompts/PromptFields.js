@@ -19,7 +19,7 @@ import withVariableHandlers from '@components/sections/CategoricalBinPrompts/wit
 const PromptFields = ({
   variableOptions,
   normalizeKeyDown,
-  deleteVariable,
+  onDeleteVariable,
   entity,
   changeForm,
   form,
@@ -42,9 +42,6 @@ const PromptFields = ({
 
   const handleNewVariable = name =>
     openNewVariableWindow({ initialValues: { name, type: 'ordinal' } }, { field: 'variable' });
-
-  const handleDeleteVariable = v =>
-    deleteVariable(v, 'variable');
 
   const ordinalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'ordinal');
@@ -84,7 +81,7 @@ const PromptFields = ({
           label=""
           options={ordinalVariableOptions}
           onCreateOption={handleNewVariable}
-          onDeleteOption={handleDeleteVariable}
+          onDeleteOption={v => onDeleteVariable(v, 'variable')}
           onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (

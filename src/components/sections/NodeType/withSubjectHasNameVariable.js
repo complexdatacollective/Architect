@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
 import { formValueSelector } from 'redux-form';
-import { getVariableOptionsForSubject } from '../../../selectors/codebook';
+import { toPairs } from 'lodash';
+import { getVariablesForSubject } from '@selectors/codebook';
 
 const withSubjectNameVariablesState = connect(
   (state, { form }) => {
     const subject = formValueSelector(form)(state, 'subject');
     const entity = subject && subject.entity;
     const type = subject && subject.type;
-    const variablesCalledName = getVariableOptionsForSubject(state, { entity, type })
-      .filter(({ label: variableLabel }) => variableLabel === 'name');
+    const variablesCalledName = toPairs(getVariablesForSubject(state, { entity, type }))
+      .some(([, { name }]) => name === 'name');
 
     return {
       ...subject,
@@ -18,9 +18,4 @@ const withSubjectNameVariablesState = connect(
   },
 );
 
-
-const withSubjectVariables = compose(
-  withSubjectNameVariablesState,
-);
-
-export default withSubjectVariables;
+export default withSubjectNameVariablesState;

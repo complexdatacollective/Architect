@@ -3,17 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
-import * as Fields from '@codaco/ui/lib/components/Fields';
-import { getFieldId } from '../../../utils/issues';
-import { ValidatedField } from '../../Form';
-import * as ArchitectFields from '../../Form/Fields';
-import withPresetProps from './withPresetProps';
+import Text from '@codaco/ui/lib/components/Fields/Text';
+import CheckboxGroup from '@codaco/ui/lib/components/Fields/CheckboxGroup';
+import Select from '@components/Form/Fields/Select';
+import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import ValidatedField from '@components/Form/ValidatedField';
+import { getFieldId } from '@app/utils/issues';
 import withNewVariableWindowHandlers, {
   propTypes as newVariableWindowPropTypes,
-} from '../../enhancers/withNewVariableWindowHandlers';
-import Section from '../Section';
-import Row from '../Row';
-import { normalizeKeyDown } from '../../enhancers/withCreateVariableHandler';
+} from '@components/enhancers/withNewVariableWindowHandlers';
+import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
+import Section from '@components/sections/Section';
+import Row from '@components/sections/Row';
+import withPresetProps from './withPresetProps';
 
 const PresetFields = ({
   layoutVariblesForSubject,
@@ -28,7 +30,7 @@ const PresetFields = ({
       <h3 id={getFieldId('text')}>Preset label</h3>
       <ValidatedField
         name="label"
-        component={Fields.Text}
+        component={Text}
         label=""
         placeholder="Enter a label for the preset here"
         validation={{ required: true }}
@@ -37,7 +39,7 @@ const PresetFields = ({
     <Row>
       <ValidatedField
         name="layoutVariable"
-        component={ArchitectFields.CreatableSelect}
+        component={CreatableSelect}
         label="Layout variable"
         placeholder="&mdash; Select a layout variable &mdash;"
         validation={{ required: true }}
@@ -53,7 +55,7 @@ const PresetFields = ({
     <Row>
       <ValidatedField
         name="groupVariable"
-        component={ArchitectFields.Select}
+        component={Select}
         label="Group variable"
         options={groupVariablesForSubject}
       />
@@ -61,7 +63,7 @@ const PresetFields = ({
     <Row>
       <Field
         name="edges.display"
-        component={Fields.CheckboxGroup}
+        component={CheckboxGroup}
         label="Display the following edges:"
         placeholder="&mdash; Toggle an edge to display &mdash;"
         options={edgesForSubject}
@@ -70,7 +72,7 @@ const PresetFields = ({
     <Row>
       <Field
         name="highlight"
-        component={Fields.CheckboxGroup}
+        component={CheckboxGroup}
         label="Highlight nodes with the following attribute:"
         placeholder="&mdash; Toggle a variable to highlight &mdash;"
         options={highlightVariablesForSubject}
