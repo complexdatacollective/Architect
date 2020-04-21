@@ -2,7 +2,8 @@ import path from 'path';
 import { get, keys, uniq, flatMap } from 'lodash';
 import fs from 'fs-extra';
 import csv from 'csvtojson';
-import { getAssetManifest, getActiveProtocolMeta } from './protocol';
+import { getActiveProtocolMeta } from './protocols';
+import { getAssetManifest } from './protocol';
 
 /**
  * Generate asset path using the assetManifest and protocol meta

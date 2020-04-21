@@ -2,6 +2,7 @@ import uuid from 'uuid';
 import openProtocolDialog from '@app/other/protocols/utils/openProtocolDialog';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
+import { createLock } from '@modules/ui/status';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as unbundleActionCreators } from './unbundle';
 import { actionCreators as preflightActions } from './preflight';
@@ -14,12 +15,12 @@ import {
   actionTypes as registerActionTypes,
 } from './register';
 
+const protocolsLock = createLock('PROTOCOLS');
+
 const SAVE_COPY = 'PROTOCOLS/SAVE_COPY';
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
 const UNBUNDLE_AND_LOAD_ERROR = 'PROTOCOLS/UNBUNDLE_AND_LOAD_ERROR';
 const CREATE_AND_LOAD_ERROR = 'PROTOCOLS/CREATE_AND_LOAD_ERROR';
-const OPEN_START = 'PROTOCOLS/OPEN_START';
-const OPEN_COMPLETE = 'PROTOCOLS/OPEN_COMPLETE';
 const OPEN_ERROR = 'PROTOCOLS/OPEN_ERROR';
 
 const saveAndExportError = error => ({
@@ -35,16 +36,6 @@ const unbundleAndLoadError = error => ({
 const createAndLoadError = error => ({
   type: CREATE_AND_LOAD_ERROR,
   error,
-});
-
-const openStart = filePath => ({
-  type: OPEN_START,
-  payload: filePath,
-});
-
-const openComplete = filePath => ({
-  type: OPEN_COMPLETE,
-  payload: filePath,
 });
 
 const openError = error => ({
@@ -77,13 +68,11 @@ const unbundleAndLoadThunk = filePath =>
   (dispatch) => {
     // TODO: Reset `screens` here?
     dispatch(previewActions.closePreview());
-    dispatch(openStart(filePath));
     return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
       .then(({ id }) => {
         history.push(`/edit/${id}/`);
         return id;
       })
-      .finally(() => dispatch(openComplete(filePath)))
       .catch((e) => {
         dispatch(unbundleAndLoadError(e));
         dispatch(importErrorDialog(e, filePath));
@@ -110,14 +99,15 @@ const createAndLoadProtocolThunk = () =>
  * 1. Locate protocol in user space with Electron dialog
  * 2. Run unbundleAndLoadThunk on specified path
  */
-const openProtocol = () =>
+const openProtocol = protocolsLock(() =>
   dispatch =>
     openProtocolDialog()
       .then(({ cancelled, filePath }) => {
         if (cancelled) { return false; }
         return dispatch(unbundleAndLoadThunk(filePath));
       })
-      .catch(e => dispatch(openError(e)));
+      .catch(e => dispatch(openError(e))),
+);
 
 /**
  * 1. Create a duplicate entry in protocols, taking the original's working path
@@ -136,20 +126,26 @@ const saveCopyThunk = filePath =>
     dispatch(saveAndBundleThunk());
   };
 
-const initialState = [];
+const initialState = {
+  lock: false,
+  protocols: [],
+};
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case registerActionTypes.REGISTER_PROTOCOL:
-      return [
+      return {
         ...state,
-        {
-          filePath: action.filePath,
-          id: action.id,
-          advanced: action.advanced,
-          workingPath: action.workingPath,
-        },
-      ].slice(-10);
+        protocols: [
+          ...state.protocols,
+          {
+            filePath: action.filePath,
+            id: action.id,
+            advanced: action.advanced,
+            workingPath: action.workingPath,
+          },
+        ].slice(-10),
+      };
     case SAVE_COPY: {
       /**
        * We modify the original to use the new filePath so we can effectively take the working
@@ -170,14 +166,17 @@ export default function reducer(state = initialState, action = {}) {
         workingPath: null,
       };
 
-      const newState = [
+      const newProtocols = [
         ...state.slice(0, originalProtocolIndex - 1),
         copyProtocolEntry,
         updatedOriginalEntry,
         ...state.slice(originalProtocolIndex + 1),
       ];
 
-      return newState;
+      return {
+        ...state,
+        protocols: newProtocols,
+      };
     }
     default:
       return state;
@@ -185,13 +184,11 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  createAndLoadProtocol: createAndLoadProtocolThunk,
-  saveAndBundleProtocol: saveAndBundleThunk,
-  unbundleAndLoadProtocol: unbundleAndLoadThunk,
+  createAndLoadProtocol: protocolsLock(createAndLoadProtocolThunk),
+  saveAndBundleProtocol: protocolsLock(saveAndBundleThunk),
+  unbundleAndLoadProtocol: protocolsLock(unbundleAndLoadThunk),
   openProtocol,
-  saveCopy: saveCopyThunk,
-  openStart,
-  openComplete,
+  saveCopy: protocolsLock(saveCopyThunk),
 };
 
 const actionTypes = {
@@ -199,8 +196,6 @@ const actionTypes = {
   UNBUNDLE_AND_LOAD_ERROR,
   CREATE_AND_LOAD_ERROR,
   OPEN_ERROR,
-  OPEN_START,
-  OPEN_COMPLETE,
 };
 
 export {

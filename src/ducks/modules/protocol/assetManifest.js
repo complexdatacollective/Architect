@@ -3,7 +3,7 @@ import { omit } from 'lodash';
 import path from 'path';
 import log from 'electron-log';
 import { importAsset as fsImportAsset } from '@app/other/protocols';
-import { getActiveProtocolMeta } from '@selectors/protocol';
+import { getActiveProtocolMeta } from '@selectors/protocols';
 import { validateAsset } from '@app/other/protocols/importAsset';
 import { invalidAssetErrorDialog, importAssetErrorDialog } from '@modules/protocol/utils/dialogs';
 

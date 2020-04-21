@@ -1,6 +1,7 @@
 import { getFormValues } from 'redux-form';
-import { getActiveProtocolMeta, getProtocol } from '../../selectors/protocol';
-import previewDriver from '../../utils/previewDriver';
+import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getProtocol } from '@selectors/protocol';
+import previewDriver from '@app/utils/previewDriver';
 
 const getStageIndex = (protocol, stageMeta) => {
   switch (true) {

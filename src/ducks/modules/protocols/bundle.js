@@ -1,5 +1,5 @@
-import { getActiveProtocolId, getActiveProtocolMeta } from '../../../selectors/protocols';
-import { bundleProtocol } from '../../../other/protocols';
+import { getActiveProtocolId, getActiveProtocolMeta } from '@selectors/protocols';
+import { bundleProtocol } from '@app/other/protocols';
 
 const BUNDLE_PROTOCOL = 'PROTOCOLS/BUNDLE';
 const BUNDLE_PROTOCOL_SUCCESS = 'PROTOCOLS/BUNDLE_SUCCESS';

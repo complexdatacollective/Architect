@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { nth, find, get } from 'lodash';
 import { Route } from 'react-router-dom';
-import Scene from './components/Scene';
-import ProtocolLoader from './components/ProtocolLoader';
-import tween from './behaviours/Tweened/tween';
+import { getProtocols } from '@selectors/protocols';
+import Scene from '@components/Scene';
+import ProtocolLoader from '@components/ProtocolLoader';
+import tween from '@app/behaviours/Tweened/tween';
 
 const getProtocolPath = pathname =>
   decodeURIComponent(nth(/^\/edit\/([^/]+)$/.exec(pathname), 1));
@@ -82,7 +83,7 @@ Routes.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  protocols: state.protocols,
+  protocols: getProtocols(state),
 });
 
 export { Routes };
