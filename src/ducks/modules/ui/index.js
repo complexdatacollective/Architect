@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import screens, { actionCreators as screenActionCreators } from './screens';
-import busy from './busy';
+import status from './status';
 
 const ui = combineReducers({
   screens,
-  busy,
+  status,
 });
 
 export const actionCreators = {

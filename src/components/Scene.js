@@ -7,6 +7,7 @@ import { compose, withHandlers } from 'recompose';
 import { Icon } from '@codaco/ui';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
+import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import Loading from '@components/Loading';
 import Start from '@components/Start';
@@ -20,7 +21,7 @@ import networkCanvasBrand from '@app/images/network-canvas-brand.svg';
 const Scene = ({
   protocolId,
   protocolPath,
-  isLoading,
+  isBusy,
   hasProtocol,
   handleClickStart,
 }) => {
@@ -29,7 +30,7 @@ const Scene = ({
   const sceneClasses = cx(
     'scene',
     { 'scene--protocol': hasProtocol },
-    { 'scene--loading': isLoading },
+    { 'scene--loading': isBusy },
   );
 
   return (
@@ -42,7 +43,7 @@ const Scene = ({
         <Icon onClick={handleClickStart} className="start-button__arrow" name="back-arrow" />
       </div>
 
-      { isLoading && <Loading /> }
+      { isBusy && <Loading /> }
 
       <Flipper flipKey={flipKey}>
         <div className="scene__start">
@@ -75,7 +76,7 @@ const Scene = ({
 Scene.propTypes = {
   protocolId: PropTypes.string,
   protocolPath: PropTypes.string,
-  isLoading: PropTypes.bool,
+  isBusy: PropTypes.bool,
   hasProtocol: PropTypes.bool,
   handleClickStart: PropTypes.func.isRequired,
 };
@@ -83,7 +84,7 @@ Scene.propTypes = {
 Scene.defaultProps = {
   protocolId: null,
   protocolPath: null,
-  isLoading: false,
+  isBusy: false,
   hasProtocol: false,
 };
 
@@ -95,7 +96,7 @@ const mapStateToProps = (state) => {
     protocolId: protocolMeta && protocolMeta.id,
     protocolPath: protocolMeta && encodeURIComponent(protocolMeta.filePath),
     hasProtocol: !!protocolMeta,
-    isLoading: state.ui.busy.length > 0,
+    isBusy: statusSelectors.getIsBusy(state, 'PROTOCOLS'),
   };
 };
 
