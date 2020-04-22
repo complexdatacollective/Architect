@@ -10,6 +10,7 @@ import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionLocks as protocolsLocks } from '@modules/protocols';
 import Loading from '@components/Loading';
 import Start from '@components/Start';
 import RecentProtocols from '@components/RecentProtocols';
@@ -22,7 +23,7 @@ import networkCanvasBrand from '@app/images/network-canvas-brand.svg';
 const Scene = ({
   protocolId,
   protocolPath,
-  isBusy,
+  isLoading,
   hasProtocol,
   handleClickStart,
 }) => {
@@ -31,7 +32,7 @@ const Scene = ({
   const sceneClasses = cx(
     'scene',
     { 'scene--protocol': hasProtocol },
-    { 'scene--loading': isBusy },
+    { 'scene--loading': isLoading },
   );
 
   return (
@@ -45,7 +46,7 @@ const Scene = ({
       </div>
 
       <AnimatePresence>
-        { isBusy && <Loading /> }
+        { isLoading && <Loading /> }
       </AnimatePresence>
       {/* { isBusy && <Loading /> } */}
 
@@ -80,7 +81,7 @@ const Scene = ({
 Scene.propTypes = {
   protocolId: PropTypes.string,
   protocolPath: PropTypes.string,
-  isBusy: PropTypes.bool,
+  isLoading: PropTypes.bool,
   hasProtocol: PropTypes.bool,
   handleClickStart: PropTypes.func.isRequired,
 };
@@ -88,7 +89,7 @@ Scene.propTypes = {
 Scene.defaultProps = {
   protocolId: null,
   protocolPath: null,
-  isBusy: false,
+  isLoading: false,
   hasProtocol: false,
 };
 
@@ -100,7 +101,7 @@ const mapStateToProps = (state) => {
     protocolId: protocolMeta && protocolMeta.id,
     protocolPath: protocolMeta && encodeURIComponent(protocolMeta.filePath),
     hasProtocol: !!protocolMeta,
-    isBusy: statusSelectors.getIsBusy(state, 'PROTOCOLS'),
+    isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
   };
 };
 

@@ -2,7 +2,7 @@ const getStatus = state => state.ui.status;
 
 const getIsBusy = (state, type) => {
   const status = getStatus(state);
-  const isBusy = status.busy.some(busy => busy.type === type);
+  const isBusy = status.busy.some(busy => busy.type === type.toString());
   return isBusy;
 };
 
@@ -40,8 +40,8 @@ const myThrottledThunk = myLock(myThunk);
 const anotherThrottledThunk = myLock(anotherThunk);
 </code></pre>
  */
-export const createLock = type =>
-  nextAction =>
+export const createLock = (type) => {
+  const fn = nextAction =>
     (...args) =>
       (dispatch, getState) => {
         // If this type is already running, dispatch a noop and don't run action.
@@ -58,6 +58,13 @@ export const createLock = type =>
             dispatch(ready(type));
           });
       };
+
+  fn.toString = function toString() {
+    return type;
+  };
+
+  return fn;
+};
 
 const initialState = {
   busy: [],
