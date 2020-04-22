@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Spinner } from '@codaco/ui';
 
 const variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0, transition: { delay: 0.5, duration: 0.5 } },
   visible: { opacity: 1, transition: { delay: 0.5 } },
 };
 

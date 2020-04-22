@@ -16,6 +16,8 @@ import {
 } from './register';
 
 const protocolsLock = createLock('PROTOCOLS');
+const loadingLock = createLock('PROTOCOLS/LOADING');
+const savingLock = createLock('PROTOCOLS/SAVING');
 
 const SAVE_COPY = 'PROTOCOLS/SAVE_COPY';
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
@@ -48,36 +50,42 @@ const openError = error => ({
  * 2. Export - write /tmp/{working-path} to user space.
  */
 const saveAndBundleThunk = () =>
-  (dispatch, getState) => {
-    const { filePath } = getActiveProtocolMeta(getState());
+  (dispatch, getState) =>
+    Promise.resolve()
+      .then(() => new Promise((resolve) => { setTimeout(resolve, 5000); })) // fake delay
+      .then(() => {
+        const { filePath } = getActiveProtocolMeta(getState());
 
-    return dispatch(preflightActions.preflight())
-      .then(() => dispatch(saveActionCreators.saveProtocol()))
-      .then(() => dispatch(bundleActionCreators.bundleProtocol()))
-      .catch((e) => {
-        dispatch(saveAndExportError(e));
-        dispatch(saveErrorDialog(e, filePath));
+        return dispatch(preflightActions.preflight())
+          .then(() => dispatch(saveActionCreators.saveProtocol()))
+          .then(() => dispatch(bundleActionCreators.bundleProtocol()))
+          .catch((e) => {
+            dispatch(saveAndExportError(e));
+            dispatch(saveErrorDialog(e, filePath));
+          });
       });
-  };
 
 /**
  * 1. Import - extract/copy protocol to /tmp/{working-path}
  * 2. Load - redirect to /edit/ which should trigger load.
  */
 const unbundleAndLoadThunk = filePath =>
-  (dispatch) => {
-    // TODO: Reset `screens` here?
-    dispatch(previewActions.closePreview());
-    return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
-      .then(({ id }) => {
-        history.push(`/edit/${id}/`);
-        return id;
-      })
-      .catch((e) => {
-        dispatch(unbundleAndLoadError(e));
-        dispatch(importErrorDialog(e, filePath));
+  dispatch =>
+    Promise.resolve()
+      // .then(() => new Promise((resolve) => { setTimeout(resolve, 5000); })) // fake delay
+      .then(() => {
+        // TODO: Reset `screens` here?
+        dispatch(previewActions.closePreview());
+        return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
+          .then(({ id }) => {
+            history.push(`/edit/${id}/`);
+            return id;
+          })
+          .catch((e) => {
+            dispatch(unbundleAndLoadError(e));
+            dispatch(importErrorDialog(e, filePath));
+          });
       });
-  };
 
 /**
  * 1. Create - Create a new protocol from template
@@ -184,11 +192,11 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  createAndLoadProtocol: protocolsLock(createAndLoadProtocolThunk),
-  saveAndBundleProtocol: protocolsLock(saveAndBundleThunk),
-  unbundleAndLoadProtocol: protocolsLock(unbundleAndLoadThunk),
+  createAndLoadProtocol: protocolsLock(loadingLock(createAndLoadProtocolThunk)),
+  saveAndBundleProtocol: protocolsLock(savingLock(saveAndBundleThunk)),
+  unbundleAndLoadProtocol: protocolsLock(loadingLock(unbundleAndLoadThunk)),
   openProtocol,
-  saveCopy: protocolsLock(saveCopyThunk),
+  saveCopy: protocolsLock(savingLock(saveCopyThunk)),
 };
 
 const actionTypes = {
@@ -198,8 +206,15 @@ const actionTypes = {
   OPEN_ERROR,
 };
 
+const actionLocks = {
+  loading: loadingLock,
+  protocols: protocolsLock,
+  saving: savingLock,
+};
+
 export {
   actionCreators,
   actionTypes,
+  actionLocks,
 };
 

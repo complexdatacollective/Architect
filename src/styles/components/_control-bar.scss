@@ -19,6 +19,12 @@
     margin: 0 unit(1);
   }
 
+  .button[data-variant='save'] {
+    .spinner {
+      --circle-size: .5rem;
+    }
+  }
+
   &__primary-buttons {
     display: flex;
     align-items: center;
