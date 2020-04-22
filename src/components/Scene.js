@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import { AnimatePresence } from 'framer-motion';
 import { Flipper } from 'react-flip-toolkit';
 import { compose, withHandlers } from 'recompose';
 import { Icon } from '@codaco/ui';
@@ -43,7 +44,10 @@ const Scene = ({
         <Icon onClick={handleClickStart} className="start-button__arrow" name="back-arrow" />
       </div>
 
-      { isBusy && <Loading /> }
+      <AnimatePresence>
+        { isBusy && <Loading /> }
+      </AnimatePresence>
+      {/* { isBusy && <Loading /> } */}
 
       <Flipper flipKey={flipKey}>
         <div className="scene__start">
