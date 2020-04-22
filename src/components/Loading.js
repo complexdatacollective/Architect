@@ -4,7 +4,7 @@ import { Spinner } from '@codaco/ui';
 
 const variants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1 },
+  visible: { opacity: 1, transition: { delay: 0.5 } },
 };
 
 const Loading = () => (
