@@ -179,6 +179,7 @@
         "whatwg-fetch": "2.0.3",
         "xss": "^0.3.4"
     },
+    "dependencies": {},
     "homepage": ".",
     "main": "www/electron-starter.js",
     "browserslist": [
