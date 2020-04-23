@@ -1,7 +1,7 @@
 import { find } from 'lodash';
 
 export const getProtocols = state =>
-  state.protocols.protocols;
+  state.protocols;
 
 export const getProtocolMeta = (state, protocolId) =>
   find(getProtocols(state), ['id', protocolId]);

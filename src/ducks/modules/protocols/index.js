@@ -1,5 +1,6 @@
 import uuid from 'uuid';
 import openProtocolDialog from '@app/other/protocols/utils/openProtocolDialog';
+import saveProtocolDialog from '@app/other/protocols/utils/saveProtocolDialog';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { createLock } from '@modules/ui/status';
@@ -107,53 +108,52 @@ const createAndLoadProtocolThunk = () =>
  * 1. Locate protocol in user space with Electron dialog
  * 2. Run unbundleAndLoadThunk on specified path
  */
-const openProtocol = protocolsLock(() =>
+const openProtocol = () =>
   dispatch =>
     openProtocolDialog()
       .then(({ cancelled, filePath }) => {
         if (cancelled) { return false; }
         return dispatch(unbundleAndLoadThunk(filePath));
       })
-      .catch(e => dispatch(openError(e))),
-);
+      .catch(e => dispatch(openError(e)));
 
 /**
  * 1. Create a duplicate entry in protocols, taking the original's working path
  * 2. Save to the new location
  */
-const saveCopyThunk = filePath =>
+const saveCopyThunk = () =>
   (dispatch, getState) => {
     const activeProtocolMeta = getActiveProtocolMeta(getState());
+    // open dialog and then dispatch action!
+    saveProtocolDialog(activeProtocolMeta.filePath, true)
+      .then(({ cancelled, filePath }) => {
+        if (cancelled) { return false; }
 
-    dispatch({
-      type: SAVE_COPY,
-      id: activeProtocolMeta.id,
-      filePath,
-    });
+        dispatch({
+          type: SAVE_COPY,
+          id: activeProtocolMeta.id,
+          filePath,
+        });
 
-    dispatch(saveAndBundleThunk());
+        return dispatch(saveAndBundleThunk());
+      });
   };
 
-const initialState = {
-  lock: false,
-  protocols: [],
-};
+const initialState = [
+];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case registerActionTypes.REGISTER_PROTOCOL:
-      return {
+      return [
         ...state,
-        protocols: [
-          ...state.protocols,
-          {
-            filePath: action.filePath,
-            id: action.id,
-            advanced: action.advanced,
-            workingPath: action.workingPath,
-          },
-        ].slice(-10),
-      };
+        {
+          filePath: action.filePath,
+          id: action.id,
+          advanced: action.advanced,
+          workingPath: action.workingPath,
+        },
+      ].slice(-10);
     case SAVE_COPY: {
       /**
        * We modify the original to use the new filePath so we can effectively take the working
@@ -174,17 +174,14 @@ export default function reducer(state = initialState, action = {}) {
         workingPath: null,
       };
 
-      const newProtocols = [
+      const newState = [
         ...state.slice(0, originalProtocolIndex - 1),
         copyProtocolEntry,
         updatedOriginalEntry,
         ...state.slice(originalProtocolIndex + 1),
       ];
 
-      return {
-        ...state,
-        protocols: newProtocols,
-      };
+      return newState;
     }
     default:
       return state;
@@ -195,7 +192,7 @@ const actionCreators = {
   createAndLoadProtocol: protocolsLock(loadingLock(createAndLoadProtocolThunk)),
   saveAndBundleProtocol: protocolsLock(savingLock(saveAndBundleThunk)),
   unbundleAndLoadProtocol: protocolsLock(loadingLock(unbundleAndLoadThunk)),
-  openProtocol,
+  openProtocol: protocolsLock(openProtocol),
   saveCopy: protocolsLock(savingLock(saveCopyThunk)),
 };
 
