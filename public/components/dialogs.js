@@ -3,21 +3,6 @@ const log = require('./log');
 
 global.dialogOpen = false;
 
-const openDialogOptions = {
-  buttonLabel: 'Open',
-  nameFieldLabel: 'Open:',
-  defaultPath: 'Protocol.netcanvas',
-  filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
-  properties: ['openFile'],
-};
-
-const saveDialogOptions = {
-  buttonLabel: 'Save',
-  nameFieldLabel: 'Save:',
-  defaultPath: 'Protocol.netcanvas',
-  filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
-};
-
 const withOpenLock = callback =>
   new Promise((resolve, reject) => {
     if (global.dialogOpen) { reject('DIALOG Already open'); return; }
@@ -33,27 +18,7 @@ const withOpenLock = callback =>
     )
     .catch((message) => { log.info(message); });
 
-const openDialog = () => withOpenLock((resolve, reject) => {
-  dialog.showOpenDialog(openDialogOptions, (filename) => {
-    if (filename === undefined) { reject('DIALOG Cancelled'); return; }
-    resolve(filename[0]);
-  });
-});
-
-const saveDialog = (options = {}) =>
-  withOpenLock((resolve, reject) => {
-    dialog.showSaveDialog(
-      {
-        ...saveDialogOptions,
-        ...options,
-      },
-      (filename) => {
-        if (filename === undefined) { reject('DIALOG Cancelled'); return; }
-        resolve(filename);
-      },
-    );
-  });
-
+// TODO, should this be moved to renderer?
 const clearStorageDataDialog = () =>
   withOpenLock((resolve, reject) => {
     dialog.showMessageBox({
@@ -66,7 +31,5 @@ const clearStorageDataDialog = () =>
   });
 
 module.exports = {
-  openDialog,
-  saveDialog,
   clearStorageDataDialog,
 };

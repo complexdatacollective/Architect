@@ -1,6 +1,5 @@
 import uuid from 'uuid';
-import openProtocolDialog from '@app/other/protocols/utils/openProtocolDialog';
-import saveProtocolDialog from '@app/other/protocols/utils/saveProtocolDialog';
+import { openProtocolDialog, saveProtocolDialog } from '@app/other/dialogs';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { createLock } from '@modules/ui/status';
@@ -50,7 +49,7 @@ const openError = error => ({
  * 1. Save - write protocol to protocol.json
  * 2. Export - write /tmp/{working-path} to user space.
  */
-const saveAndBundleThunk = () =>
+const saveAndBundleThunk = savingLock(() =>
   (dispatch, getState) =>
     Promise.resolve()
       .then(() => new Promise((resolve) => { setTimeout(resolve, 5000); })) // fake delay
@@ -64,7 +63,7 @@ const saveAndBundleThunk = () =>
             dispatch(saveAndExportError(e));
             dispatch(saveErrorDialog(e, filePath));
           });
-      });
+      }));
 
 /**
  * 1. Import - extract/copy protocol to /tmp/{working-path}
@@ -124,8 +123,8 @@ const openProtocol = () =>
 const saveCopyThunk = () =>
   (dispatch, getState) => {
     const activeProtocolMeta = getActiveProtocolMeta(getState());
-    // open dialog and then dispatch action!
-    saveProtocolDialog(activeProtocolMeta.filePath, true)
+
+    return saveProtocolDialog(activeProtocolMeta.filePath, true)
       .then(({ cancelled, filePath }) => {
         if (cancelled) { return false; }
 
@@ -139,8 +138,7 @@ const saveCopyThunk = () =>
       });
   };
 
-const initialState = [
-];
+const initialState = [];
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -189,11 +187,11 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  createAndLoadProtocol: protocolsLock(loadingLock(createAndLoadProtocolThunk)),
-  saveAndBundleProtocol: protocolsLock(savingLock(saveAndBundleThunk)),
+  createAndLoadProtocol: protocolsLock(createAndLoadProtocolThunk),
+  saveAndBundleProtocol: protocolsLock(saveAndBundleThunk),
   unbundleAndLoadProtocol: protocolsLock(loadingLock(unbundleAndLoadThunk)),
   openProtocol: protocolsLock(openProtocol),
-  saveCopy: protocolsLock(savingLock(saveCopyThunk)),
+  saveCopy: protocolsLock(saveCopyThunk),
 };
 
 const actionTypes = {

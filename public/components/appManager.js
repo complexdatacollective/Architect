@@ -1,7 +1,7 @@
 const { ipcMain, app, Menu } = require('electron');
 const log = require('./log');
 const path = require('path');
-const { openDialog, saveDialog, clearStorageDataDialog } = require('./dialogs');
+const { clearStorageDataDialog } = require('./dialogs');
 const Updater = require('./Updater');
 const mainMenu = require('./mainMenu');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
