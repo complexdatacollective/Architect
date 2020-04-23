@@ -52,7 +52,6 @@ const openError = error => ({
 const saveAndBundleThunk = savingLock(() =>
   (dispatch, getState) =>
     Promise.resolve()
-      .then(() => new Promise((resolve) => { setTimeout(resolve, 5000); })) // fake delay
       .then(() => {
         const { filePath } = getActiveProtocolMeta(getState());
 
@@ -72,7 +71,6 @@ const saveAndBundleThunk = savingLock(() =>
 const unbundleAndLoadThunk = filePath =>
   dispatch =>
     Promise.resolve()
-      // .then(() => new Promise((resolve) => { setTimeout(resolve, 5000); })) // fake delay
       .then(() => {
         // TODO: Reset `screens` here?
         dispatch(previewActions.closePreview());

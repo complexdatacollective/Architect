@@ -5,12 +5,11 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Scene
     handleClickStart={[Function]}
+    hasProtocol={false}
+    isLoading={false}
     location={Object {}}
-    protocolMeta={
-      Object {
-        "filePath": "/foo/bar",
-      }
-    }
+    protocolId="foo"
+    protocolPath="/foo/bar"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -49,10 +48,11 @@ ShallowWrapper {
             style={Object {}}
           />
         </div>,
+        <AnimatePresence />,
         <n
           applyTransformOrigin={true}
           element="div"
-          flipKey="start"
+          flipKey="foo"
           retainTransform={false}
         >
           <div
@@ -164,6 +164,17 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": false,
+        },
+        "ref": null,
+        "rendered": false,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "applyTransformOrigin": true,
@@ -202,7 +213,7 @@ ShallowWrapper {
             </div>,
           ],
           "element": "div",
-          "flipKey": "start",
+          "flipKey": "foo",
           "retainTransform": false,
         },
         "ref": null,
@@ -374,10 +385,11 @@ ShallowWrapper {
               style={Object {}}
             />
           </div>,
+          <AnimatePresence />,
           <n
             applyTransformOrigin={true}
             element="div"
-            flipKey="start"
+            flipKey="foo"
             retainTransform={false}
           >
             <div
@@ -489,6 +501,17 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": false,
+          },
+          "ref": null,
+          "rendered": false,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "applyTransformOrigin": true,
@@ -527,7 +550,7 @@ ShallowWrapper {
               </div>,
             ],
             "element": "div",
-            "flipKey": "start",
+            "flipKey": "foo",
             "retainTransform": false,
           },
           "ref": null,
@@ -705,13 +728,11 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Scene
     handleClickStart={[Function]}
+    hasProtocol={true}
+    isLoading={false}
     location={Object {}}
-    protocolMeta={
-      Object {
-        "filePath": "/foo/bar",
-        "id": "foo",
-      }
-    }
+    protocolId="foo"
+    protocolPath="/foo/bar"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -750,6 +771,7 @@ ShallowWrapper {
             style={Object {}}
           />
         </div>,
+        <AnimatePresence />,
         <n
           applyTransformOrigin={true}
           element="div"
@@ -861,6 +883,17 @@ ShallowWrapper {
           "type": [Function],
         },
         "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": false,
+        },
+        "ref": null,
+        "rendered": false,
+        "type": [Function],
       },
       Object {
         "instance": null,
@@ -1075,6 +1108,7 @@ ShallowWrapper {
               style={Object {}}
             />
           </div>,
+          <AnimatePresence />,
           <n
             applyTransformOrigin={true}
             element="div"
@@ -1186,6 +1220,17 @@ ShallowWrapper {
             "type": [Function],
           },
           "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": false,
+          },
+          "ref": null,
+          "rendered": false,
+          "type": [Function],
         },
         Object {
           "instance": null,

@@ -48,7 +48,6 @@ const Scene = ({
       <AnimatePresence>
         { isLoading && <Loading /> }
       </AnimatePresence>
-      {/* { isBusy && <Loading /> } */}
 
       <Flipper flipKey={flipKey}>
         <div className="scene__start">
@@ -62,7 +61,7 @@ const Scene = ({
         <div className="scene__protocol">
           <Overview
             show={hasProtocol}
-            flipId={protocolPath}
+            flipId={protocolPath && encodeURIComponent(protocolPath)}
           />
 
           <div className="scene__timeline">
@@ -99,7 +98,7 @@ const mapStateToProps = (state) => {
   return {
     hasUnsavedChanges: (state.session.lastChanged > state.session.lastSaved),
     protocolId: protocolMeta && protocolMeta.id,
-    protocolPath: protocolMeta && encodeURIComponent(protocolMeta.filePath),
+    protocolPath: protocolMeta && protocolMeta.filePath,
     hasProtocol: !!protocolMeta,
     isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
   };

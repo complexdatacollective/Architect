@@ -96,6 +96,7 @@
         "eventemitter3": "^3.1.0",
         "faker": "^4.1.0",
         "file-loader": "^1.1.11",
+        "framer-motion": "^1.10.3",
         "fs-extra": "^3.0.1",
         "fuse.js": "^3.2.1",
         "history": "^4.7.2",
@@ -177,9 +178,6 @@
         "webpack-manifest-plugin": "^2.0.4",
         "whatwg-fetch": "2.0.3",
         "xss": "^0.3.4"
-    },
-    "dependencies": {
-        "framer-motion": "^1.10.3"
     },
     "homepage": ".",
     "main": "www/electron-starter.js",

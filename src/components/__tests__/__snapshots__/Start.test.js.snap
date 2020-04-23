@@ -54,6 +54,7 @@ ShallowWrapper {
           <Button
             color="platinum"
             content=""
+            disabled={false}
             icon={
               <Icon
                 className=""
@@ -73,6 +74,7 @@ ShallowWrapper {
           <Button
             color="cyber-grape"
             content=""
+            disabled={false}
             icon={
               <Icon
                 className=""
@@ -222,6 +224,7 @@ ShallowWrapper {
             <Button
               color="platinum"
               content=""
+              disabled={false}
               icon={
                 <Icon
                   className=""
@@ -241,6 +244,7 @@ ShallowWrapper {
             <Button
               color="cyber-grape"
               content=""
+              disabled={false}
               icon={
                 <Icon
                   className=""
@@ -270,6 +274,7 @@ ShallowWrapper {
               "children": "Create new",
               "color": "platinum",
               "content": "",
+              "disabled": false,
               "icon": <Icon
                 className=""
                 color="charcoal"
@@ -294,6 +299,7 @@ ShallowWrapper {
               "children": "Open existing",
               "color": "cyber-grape",
               "content": "",
+              "disabled": false,
               "icon": <Icon
                 className=""
                 color=""
@@ -354,6 +360,7 @@ ShallowWrapper {
             <Button
               color="platinum"
               content=""
+              disabled={false}
               icon={
                 <Icon
                   className=""
@@ -373,6 +380,7 @@ ShallowWrapper {
             <Button
               color="cyber-grape"
               content=""
+              disabled={false}
               icon={
                 <Icon
                   className=""
@@ -522,6 +530,7 @@ ShallowWrapper {
               <Button
                 color="platinum"
                 content=""
+                disabled={false}
                 icon={
                   <Icon
                     className=""
@@ -541,6 +550,7 @@ ShallowWrapper {
               <Button
                 color="cyber-grape"
                 content=""
+                disabled={false}
                 icon={
                   <Icon
                     className=""
@@ -570,6 +580,7 @@ ShallowWrapper {
                 "children": "Create new",
                 "color": "platinum",
                 "content": "",
+                "disabled": false,
                 "icon": <Icon
                   className=""
                   color="charcoal"
@@ -594,6 +605,7 @@ ShallowWrapper {
                 "children": "Open existing",
                 "color": "cyber-grape",
                 "content": "",
+                "disabled": false,
                 "icon": <Icon
                   className=""
                   color=""

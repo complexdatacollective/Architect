@@ -4,9 +4,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { advanceTo } from 'jest-date-mock';
 import thunk from 'redux-thunk';
 import { isMatch } from 'lodash';
+import history from '@app/history';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as registerActionCreators } from '../register';
-import history from '../../../../history';
 import testState from '../../../../__tests__/testState.json';
 import { loadProtocolConfiguration } from '../../../../other/protocols';
 import { APP_SCHEMA_VERSION } from '../../../../config';
@@ -100,13 +100,14 @@ describe('protocols', () => {
     it('triggers create and import actions', () =>
       store.dispatch(actionCreators.createAndLoadProtocol())
         .then(() => {
-          expect(log.mock.calls[0]).toEqual([{ type: 'PROTOCOLS/CREATE_PROTOCOL' }]);
-          expect(log.mock.calls[1]).toEqual([{
+          expect(log.mock.calls[0]).toEqual([{ payload: 'PROTOCOLS', type: 'STATUS/BUSY' }]);
+          expect(log.mock.calls[1]).toEqual([{ type: 'PROTOCOLS/CREATE_PROTOCOL' }]);
+          expect(log.mock.calls[2]).toEqual([{
             filePath: '/dev/null/fake/user/entered/path',
             workingPath: '/dev/null/fake/working/path',
             type: 'PROTOCOLS/CREATE_PROTOCOL_SUCCESS',
           }]);
-          expect(log.mock.calls[2]).toEqual([{
+          expect(log.mock.calls[3]).toEqual([{
             advanced: true,
             filePath: '/dev/null/fake/user/entered/path',
             id: '809895df-bbd7-4c76-ac58-e6ada2625f9b',
@@ -159,6 +160,7 @@ describe('protocols', () => {
     it('triggers import action and load redirect', done =>
       store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path'))
         .then(() => {
+          expect(log.mock.calls).containsAction({ payload: 'PROTOCOLS', type: 'STATUS/BUSY' });
           expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/UNBUNDLE_SUCCESS' });
           expect(log.mock.calls).containsAction({ type: 'PROTOCOLS/REGISTER' });
           expect(history.entries.pop()).toMatchObject({
