@@ -11,7 +11,6 @@ const openDialogOptions = {
 /**
  * Shows a open dialog and resolves to (cancelled, filepath), which mirrors later
  * versions of electron.
- * Can only select *.json files, but returns the path *without* 'protocol.json'
  */
 const openProtocolDialog = () =>
   new Promise((resolve) => {

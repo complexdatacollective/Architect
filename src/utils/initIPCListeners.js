@@ -7,8 +7,12 @@ import { actionCreators as dialogActions } from '@modules/dialogs';
 import { formName } from '@components/StageEditor/StageEditor';
 
 const initIPCListeners = () => {
-  ipcRenderer.on('SAVE_COPY', (e, filePath) => {
-    store.dispatch(protocolsActions.saveCopy(filePath));
+  ipcRenderer.on('SAVE_COPY', () => {
+    store.dispatch(protocolsActions.saveCopy());
+  });
+
+  ipcRenderer.on('OPEN', () => {
+    store.dispatch(protocolsActions.openProtocol());
   });
 
   ipcRenderer.on('SAVE', () => {
