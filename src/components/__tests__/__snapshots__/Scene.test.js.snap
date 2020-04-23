@@ -5,12 +5,16 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Scene
     handleClickStart={[Function]}
+    hasProtocol={false}
+    isLoading={false}
     location={Object {}}
+    protocolId={null}
     protocolMeta={
       Object {
         "filePath": "/foo/bar",
       }
     }
+    protocolPath={null}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -49,6 +53,7 @@ ShallowWrapper {
             style={Object {}}
           />
         </div>,
+        <AnimatePresence />,
         <n
           applyTransformOrigin={true}
           element="div"
@@ -73,7 +78,7 @@ ShallowWrapper {
             className="scene__protocol"
           >
             <Connect(Overview)
-              flipId="%2Ffoo%2Fbar"
+              flipId={null}
               show={false}
             />
             <div
@@ -164,6 +169,17 @@ ShallowWrapper {
       Object {
         "instance": null,
         "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": false,
+        },
+        "ref": null,
+        "rendered": false,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
         "nodeType": "class",
         "props": Object {
           "applyTransformOrigin": true,
@@ -186,7 +202,7 @@ ShallowWrapper {
               className="scene__protocol"
             >
               <Connect(Overview)
-                flipId="%2Ffoo%2Fbar"
+                flipId={null}
                 show={false}
               />
               <div
@@ -262,7 +278,7 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 <Connect(Overview)
-                  flipId="%2Ffoo%2Fbar"
+                  flipId={null}
                   show={false}
                 />,
                 <div
@@ -285,7 +301,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "flipId": "%2Ffoo%2Fbar",
+                  "flipId": null,
                   "show": false,
                 },
                 "ref": null,
@@ -374,6 +390,7 @@ ShallowWrapper {
               style={Object {}}
             />
           </div>,
+          <AnimatePresence />,
           <n
             applyTransformOrigin={true}
             element="div"
@@ -398,7 +415,7 @@ ShallowWrapper {
               className="scene__protocol"
             >
               <Connect(Overview)
-                flipId="%2Ffoo%2Fbar"
+                flipId={null}
                 show={false}
               />
               <div
@@ -489,6 +506,17 @@ ShallowWrapper {
         Object {
           "instance": null,
           "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": false,
+          },
+          "ref": null,
+          "rendered": false,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
           "nodeType": "class",
           "props": Object {
             "applyTransformOrigin": true,
@@ -511,7 +539,7 @@ ShallowWrapper {
                 className="scene__protocol"
               >
                 <Connect(Overview)
-                  flipId="%2Ffoo%2Fbar"
+                  flipId={null}
                   show={false}
                 />
                 <div
@@ -587,7 +615,7 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   <Connect(Overview)
-                    flipId="%2Ffoo%2Fbar"
+                    flipId={null}
                     show={false}
                   />,
                   <div
@@ -610,7 +638,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "flipId": "%2Ffoo%2Fbar",
+                    "flipId": null,
                     "show": false,
                   },
                   "ref": null,

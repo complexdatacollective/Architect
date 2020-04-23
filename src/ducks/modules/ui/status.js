@@ -13,7 +13,7 @@ const NOOP = 'STATUS/NOOP';
 const busy = (type = '', meta) => ({
   type: BUSY,
   payload: type,
-  meta,
+  ...(meta || {}),
 });
 
 const ready = (type = '') => ({

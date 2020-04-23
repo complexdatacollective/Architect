@@ -27,7 +27,7 @@ ShallowWrapper {
         <Button
           color="white"
           content=""
-          disabled={true}
+          data-variant="save"
           icon={
             <Icon
               className=""
@@ -41,13 +41,49 @@ ShallowWrapper {
           size=""
           type="button"
         >
-          Save
+          <ForwardRef(MotionComponent)
+            animate="ready"
+            initial="ready"
+          >
+            <ForwardRef(MotionComponent)
+              variants={
+                Object {
+                  "busy": Object {
+                    "opacity": 0,
+                  },
+                  "ready": Object {
+                    "opacity": 1,
+                  },
+                }
+              }
+            >
+              Save
+            </ForwardRef(MotionComponent)>
+            <ForwardRef(MotionComponent)
+              className="button__busy"
+              variants={
+                Object {
+                  "busy": Object {
+                    "opacity": 1,
+                  },
+                  "ready": Object {
+                    "opacity": 0,
+                  },
+                }
+              }
+            >
+              <Spinner
+                large={false}
+                small={false}
+              />
+            </ForwardRef(MotionComponent)>
+          </ForwardRef(MotionComponent)>
         </Button>,
       ],
       "className": "",
       "flip": false,
       "secondaryButtons": null,
-      "show": false,
+      "show": true,
     },
     "ref": null,
     "rendered": null,
@@ -63,7 +99,7 @@ ShallowWrapper {
           <Button
             color="white"
             content=""
-            disabled={true}
+            data-variant="save"
             icon={
               <Icon
                 className=""
@@ -77,13 +113,49 @@ ShallowWrapper {
             size=""
             type="button"
           >
-            Save
+            <ForwardRef(MotionComponent)
+              animate="ready"
+              initial="ready"
+            >
+              <ForwardRef(MotionComponent)
+                variants={
+                  Object {
+                    "busy": Object {
+                      "opacity": 0,
+                    },
+                    "ready": Object {
+                      "opacity": 1,
+                    },
+                  }
+                }
+              >
+                Save
+              </ForwardRef(MotionComponent)>
+              <ForwardRef(MotionComponent)
+                className="button__busy"
+                variants={
+                  Object {
+                    "busy": Object {
+                      "opacity": 1,
+                    },
+                    "ready": Object {
+                      "opacity": 0,
+                    },
+                  }
+                }
+              >
+                <Spinner
+                  large={false}
+                  small={false}
+                />
+              </ForwardRef(MotionComponent)>
+            </ForwardRef(MotionComponent)>
           </Button>,
         ],
         "className": "",
         "flip": false,
         "secondaryButtons": null,
-        "show": false,
+        "show": true,
       },
       "ref": null,
       "rendered": null,
