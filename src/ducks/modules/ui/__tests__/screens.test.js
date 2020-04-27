@@ -1,7 +1,11 @@
 /* eslint-env jest */
 
-import reducer, { actionCreators } from '../screens';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import reducer, { actionCreators, actionTypes } from '../screens';
 import { actionTypes as loadActionTypes } from '../../protocols/load';
+
+const mockStore = configureStore([thunk]);
 
 const initialState = {
   root: {
@@ -50,6 +54,38 @@ describe('ui', () => {
     });
   });
 
+  describe('openScreen()', () => {
+    it('creates an open screen action with the current locus', () => {
+      const screenName = 'edit-stage';
+      const params = { foo: 'bar' };
+
+      const mockStoreState = {
+        protocol: {
+          timeline: ['locus1'],
+        },
+      };
+
+      const store = mockStore(mockStoreState);
+
+      store.dispatch(actionCreators.openScreen(screenName, params));
+
+      const subject = store.getActions();
+
+      expect(subject).toEqual(
+        [
+          {
+            payload: {
+              params: { foo: 'bar', locus: 'locus1' },
+              root: false,
+              screen: 'edit-stage',
+            },
+            type: 'UI/OPEN_SCREEN',
+          },
+        ],
+      );
+    });
+  });
+
   describe('OPEN_SCREEN', () => {
     const screenName = 'edit-stage';
     const params = { foo: 'bar' };
@@ -63,7 +99,13 @@ describe('ui', () => {
         },
       };
 
-      const openAction = actionCreators.openScreen(screenName, params);
+      const openAction = ({
+        type: actionTypes.OPEN_SCREEN,
+        payload: {
+          screen: screenName,
+          params,
+        },
+      });
       const subject = reducer(initialStateWithMessage, openAction);
 
       it('adds screen to the list (with params)', () => {
@@ -87,7 +129,10 @@ describe('ui', () => {
     const screenName = 'edit-stage';
     const params = { foo: 'bar' };
 
-    const openAction = actionCreators.openScreen(screenName);
+    const openAction = ({
+      type: actionTypes.OPEN_SCREEN,
+      payload: { screen: screenName },
+    });
     const closeAction = actionCreators.closeScreen(screenName, params);
 
     const openState = reducer(undefined, openAction);
@@ -130,7 +175,10 @@ describe('ui', () => {
     const params2 = { bazz: 'buzz' };
 
     describe('not root', () => {
-      const openAction = actionCreators.openScreen(screenName);
+      const openAction = ({
+        type: actionTypes.OPEN_SCREEN,
+        payload: { screen: screenName },
+      });
       const updateAction1 = actionCreators.updateScreen(screenName, params1);
       const updateAction2 = actionCreators.updateScreen(screenName, params2);
 
