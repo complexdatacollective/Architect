@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { Button, Icon, Spinner } from '@codaco/ui';
 import { getProtocol } from '@selectors/protocol';
+import { getHasUnsavedChanges } from '@selectors/session';
 import { actionCreators as protocolsActions, actionLocks as protocolsLocks } from '@modules/protocols';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import ControlBar from './ControlBar';
@@ -70,7 +71,7 @@ ProtocolControlBar.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const hasUnsavedChanges = state.session.lastChanged > state.session.lastSaved;
+  const hasUnsavedChanges = getHasUnsavedChanges(state);
   const hasAnyStages = getProtocol(state).stages.length > 0;
   const isSaving = statusSelectors.getIsBusy(state, protocolsLocks.saving);
   const isDisabled = !hasAnyStages || isSaving;

@@ -1,5 +1,11 @@
 /* eslint-env jest */
 
+const callCallbackWith = (...resultArgs) =>
+  (...args) => {
+    const cb = args.pop();
+    cb(...resultArgs);
+  };
+
 const dialog = {
   showMessageBox: jest.fn(),
   showOpenDialog: jest.fn(),
@@ -7,13 +13,14 @@ const dialog = {
 
 const remote = {
   dialog: {
-    showSaveDialog: jest.fn((options, cb) => cb('filename.canvas')),
-    showOpenDialog: jest.fn((options, cb) => cb(['/dev/null/fake/explore/path'])),
+    showSaveDialog: jest.fn(callCallbackWith('filename.canvas')),
+    showOpenDialog: jest.fn(callCallbackWith(['/dev/null/fake/explore/path'])),
   },
   app: {
     getVersion: jest.fn(() => '0.0.0'),
     getPath: jest.fn(() => '/dev/null/get/electron/path'),
   },
+  getCurrentWindow: jest.fn(),
 };
 
 const ipcRenderer = {

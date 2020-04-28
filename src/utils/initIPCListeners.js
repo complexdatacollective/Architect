@@ -2,9 +2,11 @@ import React from 'react';
 import { ipcRenderer } from 'electron';
 import { isDirty } from 'redux-form';
 import { store } from '@app/ducks/store';
+import { getHasUnsavedChanges } from '@selectors/session';
 import { actionCreators as protocolsActions } from '@modules/protocols';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { formName } from '@components/StageEditor/StageEditor';
+import { UnsavedChanges } from '@components/Dialogs';
 
 const initIPCListeners = () => {
   ipcRenderer.on('SAVE_COPY', () => {
@@ -21,7 +23,7 @@ const initIPCListeners = () => {
 
   ipcRenderer.on('CONFIRM_CLOSE', () => {
     const state = store.getState();
-    const hasUnsavedChanges = state.session.lastChanged > state.session.lastSaved;
+    const hasUnsavedChanges = getHasUnsavedChanges(state);
     const hasDraftChanges = isDirty(formName)(state);
 
     ipcRenderer.send('CONFIRM_CLOSE_ACK');
@@ -31,22 +33,18 @@ const initIPCListeners = () => {
       return;
     }
 
-    store.dispatch(
-      dialogActions.openDialog({
-        type: 'Warning',
-        title: 'Unsaved changes',
-        message: (
-          <div>
-            Are you sure you want to exit the application?
-            <p><strong>Any unsaved changes will be lost!</strong></p>
-          </div>
-        ),
-        confirmLabel: 'Exit application',
-        onConfirm: () => {
-          ipcRenderer.send('QUIT');
-        },
-      }),
-    );
+    store.dispatch(dialogActions.openDialog(UnsavedChanges({
+      message: (
+        <div>
+          Are you sure you want to exit the application?
+          <p><strong>The current protocol has unsaved changes!</strong></p>
+        </div>
+      ),
+      confirmLabel: 'Exit application',
+    })))
+      .then((confirm) => {
+        if (confirm) { ipcRenderer.send('QUIT'); }
+      });
   });
 };
 

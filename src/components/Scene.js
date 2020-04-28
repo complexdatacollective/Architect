@@ -8,12 +8,14 @@ import { compose, withHandlers } from 'recompose';
 import { Icon } from '@codaco/ui';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getHasUnsavedChanges } from '@selectors/session';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionLocks as protocolsLocks } from '@modules/protocols';
 import Loading from '@components/Loading';
 import Start from '@components/Start';
 import RecentProtocols from '@components/RecentProtocols';
+import { UnsavedChanges } from '@components/Dialogs';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
 import ProtocolControlBar from '@components/ProtocolControlBar';
@@ -41,8 +43,8 @@ const Scene = ({
       <div className="scene__background scene__background--bottom" />
       <img className="scene__brand" src={networkCanvasBrand} alt="" />
 
-      <div className="scene__home">
-        <Icon onClick={handleClickStart} className="start-button__arrow" name="back-arrow" />
+      <div className="scene__home" onClick={handleClickStart}>
+        <Icon className="start-button__arrow" name="back-arrow" />
       </div>
 
       <AnimatePresence>
@@ -96,7 +98,7 @@ const mapStateToProps = (state) => {
   const protocolMeta = getActiveProtocolMeta(state);
 
   return {
-    hasUnsavedChanges: (state.session.lastChanged > state.session.lastSaved),
+    hasUnsavedChanges: getHasUnsavedChanges(state),
     protocolId: protocolMeta && protocolMeta.id,
     protocolPath: protocolMeta && protocolMeta.filePath,
     hasProtocol: !!protocolMeta,
@@ -113,27 +115,24 @@ const linkHandler = withHandlers({
     hasUnsavedChanges,
     openDialog,
   }) =>
-    () => {
-      const goToStartScreen = () => history.push('/');
+    () => Promise.resolve()
+      .then(() => {
+        if (!hasUnsavedChanges) { return true; }
 
-      if (!hasUnsavedChanges) {
-        goToStartScreen();
-        return;
-      }
-
-      openDialog({
-        type: 'Warning',
-        title: 'Unsaved changes',
-        message: (
-          <div>
-            Are you sure you want to go back to the start screen?
-            <p><strong>Any unsaved changes will be lost!</strong></p>
-          </div>
-        ),
-        confirmLabel: 'Go to start screen',
-        onConfirm: goToStartScreen,
-      });
-    },
+        return openDialog(UnsavedChanges({
+          message: (
+            <div>
+              Are you sure you want to go back to the start screen?
+              <p><strong>Unsaved changes will be lost!</strong></p>
+            </div>
+          ),
+          confirmLabel: 'Go to start screen',
+        }));
+      })
+      .then((confirm) => {
+        if (!confirm) { return; }
+        history.push('/');
+      }),
 });
 
 export { Scene };

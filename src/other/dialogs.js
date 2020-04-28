@@ -1,6 +1,6 @@
 import { remote } from 'electron';
 
-const openDialogOptions = {
+const defaultOpenDialogOptions = {
   buttonLabel: 'Open',
   nameFieldLabel: 'Open:',
   defaultPath: 'Protocol.netcanvas',
@@ -8,49 +8,74 @@ const openDialogOptions = {
   properties: ['openFile'],
 };
 
-/**
- * Shows a open dialog and resolves to (cancelled, filepath), which mirrors later
- * versions of electron.
- */
-const openProtocolDialog = () =>
-  new Promise((resolve) => {
-    remote.dialog.showOpenDialog(openDialogOptions, (filename) => {
-      const cancelled = filename === undefined;
-      const filePath = filename && filename[0];
-      resolve({ cancelled, filePath });
-    });
-  });
-
-const saveDialogOptions = {
+const defaultSaveDialogOptions = {
   buttonLabel: 'Save',
   nameFieldLabel: 'Save:',
   filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
   properties: ['saveFile'],
 };
 
-const saveCopyDialogOptions = {
+const defaultSaveCopyDialogOptions = {
   buttonLabel: 'Save Copy',
   nameFieldLabel: 'Save:',
   filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
   properties: ['saveFile'],
 };
 
+
+/**
+ * Shows a open dialog and resolves to (cancelled, filepath), which mirrors later
+ * versions of electron.
+ */
+const openDialog = (openDialogOptions = {}) =>
+  new Promise((resolve) => {
+    const options = {
+      ...defaultOpenDialogOptions,
+      ...openDialogOptions,
+    };
+
+    remote.dialog.showOpenDialog(
+      remote.getCurrentWindow(),
+      options,
+      (filename) => {
+        const cancelled = filename === undefined;
+        const filePath = filename && filename[0];
+        const filePaths = filename;
+        resolve({ cancelled, filePath, filePaths });
+      },
+    );
+  });
+
+
 /**
  * Shows a save dialog and resolves to (cancelled, filepath), which mirrors later
  * versions of electron.
  */
-const saveProtocolDialog = (defaultPath = 'Protocol.netcanvas', saveCopy = false) =>
+const saveDialog = (saveDialogOptions = {}) =>
   new Promise((resolve) => {
-    const options = saveCopy ? saveCopyDialogOptions : saveDialogOptions;
-    remote.dialog.showSaveDialog({ ...options, defaultPath }, (filePath) => {
-      const cancelled = filePath === undefined;
-      resolve({ cancelled, filePath });
-    });
+    const options = {
+      ...defaultSaveDialogOptions,
+      ...saveDialogOptions,
+    };
+
+    remote.dialog.showSaveDialog(
+      remote.getCurrentWindow(),
+      options,
+      (filePath) => {
+        const cancelled = filePath === undefined;
+        resolve({ cancelled, filePath });
+      },
+    );
   });
 
+const saveCopyDialog = (saveCopyOptions = {}) => {
+  const options = { ...defaultSaveCopyDialogOptions, ...saveCopyOptions };
+  return saveDialog(options);
+};
 
 export {
-  saveProtocolDialog,
-  openProtocolDialog,
+  saveDialog,
+  saveCopyDialog,
+  openDialog,
 };
 

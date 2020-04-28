@@ -199,7 +199,7 @@ describe('protocols', () => {
         });
     });
 
-    it('when the schema version is less than the app version it attempts to upgrade protocol and then imports it', () => {
+    it.only('when the schema version is less than the app version it attempts to upgrade protocol and then imports it', () => {
       const pastVersion = APP_SCHEMA_VERSION - 1;
 
       loadProtocolConfiguration.mockReturnValueOnce(

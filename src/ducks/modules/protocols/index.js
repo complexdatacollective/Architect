@@ -1,8 +1,11 @@
 import uuid from 'uuid';
-import { openProtocolDialog, saveProtocolDialog } from '@app/other/dialogs';
+import { openDialog, saveCopyDialog } from '@app/other/dialogs';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getHasUnsavedChanges } from '@selectors/session';
 import { createLock } from '@modules/ui/status';
+import { actionCreators as dialogsActions } from '@modules/dialogs';
+import { UnsavedChanges } from '@components/Dialogs';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as unbundleActionCreators } from './unbundle';
 import { actionCreators as preflightActions } from './preflight';
@@ -75,7 +78,9 @@ const unbundleAndLoadThunk = filePath =>
         // TODO: Reset `screens` here?
         dispatch(previewActions.closePreview());
         return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
-          .then(({ id }) => {
+          .then((result) => {
+            if (!result) { return false; }
+            const { id } = result;
             history.push(`/edit/${id}/`);
             return id;
           })
@@ -106,13 +111,29 @@ const createAndLoadProtocolThunk = () =>
  * 2. Run unbundleAndLoadThunk on specified path
  */
 const openProtocol = () =>
-  dispatch =>
-    openProtocolDialog()
-      .then(({ cancelled, filePath }) => {
-        if (cancelled) { return false; }
-        return dispatch(unbundleAndLoadThunk(filePath));
+  (dispatch, getState) => {
+    const hasUnsavedChanges = getHasUnsavedChanges(getState());
+
+    return Promise.resolve()
+      .then(() => {
+        if (!hasUnsavedChanges) { return true; }
+
+        return dispatch(dialogsActions.openDialog(UnsavedChanges({
+          confirmLabel: 'Save changes and continue?',
+        })));
+      })
+      .then((confirm) => {
+        if (!confirm) { return false; }
+
+        return dispatch(saveAndBundleThunk())
+          .then(openDialog)
+          .then(({ cancelled, filePath }) => {
+            if (cancelled) { return false; }
+            return dispatch(unbundleAndLoadThunk(filePath));
+          });
       })
       .catch(e => dispatch(openError(e)));
+  };
 
 /**
  * 1. Create a duplicate entry in protocols, taking the original's working path
@@ -122,7 +143,9 @@ const saveCopyThunk = () =>
   (dispatch, getState) => {
     const activeProtocolMeta = getActiveProtocolMeta(getState());
 
-    return saveProtocolDialog(activeProtocolMeta.filePath, true)
+    return saveCopyDialog({
+      defaultPath: activeProtocolMeta.filePath,
+    })
       .then(({ cancelled, filePath }) => {
         if (cancelled) { return false; }
 

@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { times } from 'lodash';
 import { Spinner, Icon } from '@codaco/ui';
+import { openDialog } from '@app/other/dialogs';
 import useTimer from './useTimer';
 import { acceptsPaths, getRejectedExtensions, getAcceptsExtensions } from './helpers';
-
-const { dialog } = require('electron').remote;
 
 const initialState = {
   isActive: false, // is doing something
@@ -82,14 +81,17 @@ const Dropzone = ({
 
     const extensions = getAcceptsExtensions(accepts);
 
-    dialog.showOpenDialog({
+    openDialog({
       filters: [
         { name: 'Asset', extensions },
       ],
-    }, (filePaths) => {
-      if (filePaths === undefined) { resetState(); return; }
-      submitPaths(filePaths);
-    });
+      defaultPath: '',
+    })
+      .then(({ cancelled, filePaths }) => {
+        if (cancelled) { resetState(); return; }
+
+        submitPaths(filePaths);
+      });
   }, [acceptsKey, isDisabled, submitPaths]);
 
   const handleDrop = useCallback((e) => {

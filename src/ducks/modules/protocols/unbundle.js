@@ -1,10 +1,10 @@
-import { remote } from 'electron';
 import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
 import unbundleProtocol from '@app/other/protocols/unbundleProtocol';
+import { saveDialog } from '@app/other/dialogs';
 import { loadProtocolConfiguration, saveProtocol, bundleProtocol } from '@app/other/protocols';
 import { actionCreators as registerActions } from './register';
 import { validationErrorDialog, appUpgradeRequiredDialog, mayUpgradeProtocolDialog } from './dialogs';
@@ -31,22 +31,15 @@ const unbundleProtocolError = (error, filePath) => ({
 });
 
 const getNewFileName = filePath =>
-  new Promise((resolve, reject) => {
-    const basename = path.basename(filePath, '.netcanvas');
-
-    remote.dialog.showSaveDialog(
-      {
+  Promise.resolve(path.basename(filePath, '.netcanvas'))
+    .then(basename =>
+      saveDialog({
         buttonLabel: 'Save',
         nameFieldLabel: 'Save:',
         defaultPath: `${basename} (schema version ${APP_SCHEMA_VERSION}).netcanvas`,
         filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
-      },
-      (filename) => {
-        if (filename === undefined) { reject(); return; }
-        resolve(filename);
-      },
+      }),
     );
-  });
 
 const upgradeAppThunk = ({ protocol }) =>
   dispatch =>
@@ -71,10 +64,11 @@ const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
   dispatch =>
     dispatch(mayUpgradeProtocolDialog(protocol.schemaVersion, APP_SCHEMA_VERSION))
       .then((confirm) => {
-        if (!confirm) { return false; }
+        if (!confirm) { return null; }
 
         return getNewFileName(filePath)
-          .then((newFilePath) => {
+          .then(({ cancelled, filePath: newFilePath }) => {
+            if (cancelled) { return null; }
             const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
 
             return saveProtocol(workingPath, updatedProtocol)
