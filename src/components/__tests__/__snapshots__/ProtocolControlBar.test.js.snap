@@ -4,10 +4,11 @@ exports[`<ProtocolControlBar /> can render 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ProtocolControlBar
-    hasAnyStages={false}
-    hasUnsavedChanges={false}
+    isDisabled={false}
+    isSaving={false}
     saveProtocol={[Function]}
     show={true}
+    showControlBar={true}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -28,6 +29,7 @@ ShallowWrapper {
           color="white"
           content=""
           data-variant="save"
+          disabled={false}
           icon={
             <Icon
               className=""
@@ -100,6 +102,7 @@ ShallowWrapper {
             color="white"
             content=""
             data-variant="save"
+            disabled={false}
             icon={
               <Icon
                 className=""
