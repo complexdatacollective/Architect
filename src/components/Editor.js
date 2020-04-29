@@ -4,10 +4,8 @@ import { reduxForm, Form, getFormSyncErrors, hasSubmitFailed } from 'redux-form'
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
-import { Guided } from './Guided';
 import { FormCodeView } from './CodeView';
 import Issues from './Issues';
-
 
 /**
  * Editor is a scaffold for specific editor components.
@@ -67,38 +65,36 @@ const Editor = ({
 }) => (
   <React.Fragment>
     <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
-    <Guided form={form}>
-      <div className="editor" ref={setWindowRoot}>
-        <div className="editor__window">
-          <div className="editor__container">
-            <div className="editor__content">
-              <Form onSubmit={handleSubmit}>
-                { title &&
-                  <React.Fragment>
-                    <h1 className="editor__heading">{title}</h1>
-                    <div className="code-button">
-                      <small>(<a onClick={toggleCodeView} alt="show the code view for this interface">&lt;/&gt;</a>)</small>
-                    </div>
-                  </React.Fragment>
+    <div className="editor" ref={setWindowRoot}>
+      <div className="editor__window">
+        <div className="editor__container">
+          <div className="editor__content">
+            <Form onSubmit={handleSubmit}>
+              { title &&
+                <React.Fragment>
+                  <h1 className="editor__heading">{title}</h1>
+                  <div className="code-button">
+                    <small>(<a onClick={toggleCodeView} alt="show the code view for this interface">&lt;/&gt;</a>)</small>
+                  </div>
+                </React.Fragment>
 
-                }
-                { typeof children === 'function' &&
-                  children({ form, toggleCodeView, ...rest })
-                }
-                { children && typeof children !== 'function' && children }
-                { !children &&
-                  <Component form={form} {...rest} />
-                }
-              </Form>
-            </div>
-            <Issues
-              issues={issues}
-              show={submitFailed}
-            />
+              }
+              { typeof children === 'function' &&
+                children({ form, toggleCodeView, ...rest })
+              }
+              { children && typeof children !== 'function' && children }
+              { !children &&
+                <Component form={form} {...rest} />
+              }
+            </Form>
           </div>
+          <Issues
+            issues={issues}
+            show={submitFailed}
+          />
         </div>
       </div>
-    </Guided>
+    </div>
   </React.Fragment>
 );
 
