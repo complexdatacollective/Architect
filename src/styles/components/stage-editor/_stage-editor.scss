@@ -8,23 +8,24 @@
   &__tablist {
     display: flex;
     justify-content: center;
+    background-color: grey;
   }
 
   &__tab {
     padding: unit(2);
-    border: 2px solid grey;
+    cursor: pointer;
 
     &--selected {
-      background: red;
+      background: white;
     }
   }
 
-  &__panel {
-    display: none;
+  &__panels {
+    position: relative;
+  }
 
-    &--selected {
-      display: block;
-    }
+  &__panel {
+    overflow: hidden;
   }
 
   &__window {
