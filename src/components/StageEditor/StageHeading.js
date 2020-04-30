@@ -1,37 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { getStage, getStageIndex } from '@selectors/protocol';
+import { getStageIndex } from '@selectors/protocol';
 
 const StageHeading = ({
   stageNumber,
   name,
   type,
-}) => {
-  return (
-    <div className="stage-heading">
-      <div className="stage-heading__location">
-        Stage {stageNumber}
-      </div>
-      <div className="stage-heading__name">
-        {name}
-      </div>
-      <div className="stage-heading__meta">
-        {type}
-      </div>
+}) => (
+  <div className="stage-heading">
+    <div className="stage-heading__location">
+      { stageNumber && `Stage ${stageNumber}` }
+      { !stageNumber && 'New Stage' }
     </div>
-  );
+    <div className="stage-heading__name">
+      {name}
+    </div>
+    <div className="stage-heading__meta">
+      {type}
+    </div>
+  </div>
+);
+
+StageHeading.propTypes = {
+  stageNumber: PropTypes.number,
+  name: PropTypes.string,
+  type: PropTypes.string,
+};
+
+StageHeading.defaultProps = {
+  stageNumber: null,
+  name: '',
+  type: '',
 };
 
 const mapStateToProps = (state, { id }) => {
-  const stage = getStage(state, id);
-  const stageNumber = getStageIndex(state, id) + 1;
+  const stageIndex = getStageIndex(state, id);
+  const stageNumber = stageIndex !== -1 && stageIndex + 1;
   const formValues = getFormValues('edit-stage')(state);
 
   return {
     stageNumber,
     name: formValues.label,
-    type: stage.type,
+    type: formValues.type,
   };
 };
 

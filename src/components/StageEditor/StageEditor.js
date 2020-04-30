@@ -5,6 +5,7 @@ import { compose, defaultProps } from 'recompose';
 import cx from 'classnames';
 import { motion } from 'framer-motion';
 import Editor from '@components/Editor';
+import SkipLogicFields from '@components/SkipLogicEditor/SkipLogicFields';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
@@ -95,7 +96,7 @@ const StageEditor = ({
                   variants={tabVariants}
                   animate={tab === 1 ? 'active' : 'inactive'}
                 >
-                  skip logic
+                  <SkipLogicFields />
                 </motion.div>
               </div>
             </div>
