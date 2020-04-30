@@ -21,6 +21,12 @@
       background: white;
       color: var(--text);
     }
+
+    .indicator {
+      display: inline;
+      margin-left: unit(1);
+      color: green;
+    }
   }
 
   &__panels {

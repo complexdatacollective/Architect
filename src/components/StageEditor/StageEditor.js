@@ -22,6 +22,7 @@ const StageEditor = ({
   id,
   previewStage,
   interfaceType,
+  hasSkipLogic,
   stagePath,
   ...props
 }) => {
@@ -53,14 +54,12 @@ const StageEditor = ({
       />
     ));
 
-  const panelClasses = selected => cx(
-    'stage-editor__panel',
-    { 'stage-editor__panel--selected': selected },
-  );
-
-  const tabClasses = selected => cx(
+  const tabClasses = ({ index }) => cx(
     'stage-editor__tab',
-    { 'stage-editor__tab--selected': selected },
+    {
+      'stage-editor__tab--selected': index === tab
+      'stage-editor__tab--inactive': index === tab
+    },
   );
 
   return (
@@ -75,24 +74,26 @@ const StageEditor = ({
             <div className="stage-editor__tabs">
               <div className="stage-editor__tablist">
                 <div
-                  className={tabClasses(tab === 0)}
+                  className={tabClasses({ index: 0 })}
                   onClick={() => setTab(0)}
                 >Stage</div>
                 <div
-                  className={tabClasses(tab === 1)}
+                  className={tabClasses({ index: 1, inactive: !hasSkipLogic })}
                   onClick={() => setTab(1)}
-                >Skip logic</div>
+                >
+                  Skip logic
+                </div>
               </div>
               <div className="stage-editor__panels">
                 <motion.div
-                  className={panelClasses()}
+                  className="stage-editor__panel"
                   variants={tabVariants}
                   animate={tab === 0 ? 'active' : 'inactive'}
                 >
                   {renderSections({ submitFailed, windowRoot })}
                 </motion.div>
                 <motion.div
-                  className={panelClasses()}
+                  className="stage-editor__panel"
                   variants={tabVariants}
                   animate={tab === 1 ? 'active' : 'inactive'}
                 >
