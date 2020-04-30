@@ -1,0 +1,27 @@
+.stage-heading {
+  height: 100px;
+  background: var(--primary);
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+
+  &__location,
+  &__name,
+  &__meta {
+    padding: 0 unit(4);
+    font-size: unit(2);
+  }
+
+  &__location {
+    text-align: left;
+  }
+
+  &__name {
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  &__meta {
+    text-align: right;
+  }
+}

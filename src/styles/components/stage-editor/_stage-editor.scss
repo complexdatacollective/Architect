@@ -5,6 +5,28 @@
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
 
+  &__tablist {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__tab {
+    padding: unit(2);
+    border: 2px solid grey;
+
+    &--selected {
+      background: red;
+    }
+  }
+
+  &__panel {
+    display: none;
+
+    &--selected {
+      display: block;
+    }
+  }
+
   &__window {
     background: var(--background);
     position: absolute;

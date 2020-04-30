@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { createSelector } from 'reselect';
-import { find, reduce } from 'lodash';
+import { find, findIndex, reduce } from 'lodash';
 
 const propStageId = (_, props) => props.stageId;
 const activeProtocolId = state => state.session.activeProtocol;
@@ -17,6 +17,21 @@ export const getActiveProtocolMeta = createSelector(
   (meta, id) => find(meta, ['id', id]),
 );
 
+export const getStage = (state, id) => {
+  const protocol = getProtocol(state);
+  const stage = find(protocol.stages, ['id', id]);
+
+  return stage;
+};
+
+export const getStageIndex = (state, id) => {
+  const protocol = getProtocol(state);
+  const stageIndex = findIndex(protocol.stages, ['id', id]);
+
+  return stageIndex;
+};
+
+// TODO: replace this with getStage
 export const makeGetStage = () =>
   createSelector(
     getProtocol,
