@@ -62,7 +62,7 @@ const SkipLogic = ({
         className="context-drawer__panel"
         variants={panelVariants}
       >
-        <div className="contezt-drawer__panel-container">
+        <div className="context-drawer__panel-container">
           <SkipLogicFields />
         </div>
       </motion.div>

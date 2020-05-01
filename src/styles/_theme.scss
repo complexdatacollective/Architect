@@ -64,6 +64,11 @@
   --architect-logic-guidance: var(--color-mustard--dark);
   --architect-logic-text: var(--color-white);
 
+  // Context drawer
+  --architect-context-controls: var(--color-cyber-grape);
+  --architect-context-panel: var(--color-navy-taupe);
+  --architect-context-text: var(--color-white);
+
   // Guidance
   --architect-guidance-background: var(--color-platinum);
   --architect-guidance-text: var(--text);
@@ -84,7 +89,7 @@
 
   --architect-drawer-background: var(--color-platinum);
   --architect-drawer-background--guidance: var(--color-platinum--dark);
-  --architect-drawer-text: var(--color-charcoal);
+
 
   --architect-panel-background: var(--color-platinum);
   --architect-panel-shadow: var(--color-shadow);

@@ -7,7 +7,7 @@ const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 
 const SkipLogicFields = () => (
   <React.Fragment>
-    <div className="stage-editor-section">
+    <div className="stage-editor-row">
       <h2>Show/Hide</h2>
       <Field
         component={Select}
@@ -18,7 +18,7 @@ const SkipLogicFields = () => (
         ]}
       />
     </div>
-    <div className="stage-editor-section">
+    <div className="stage-editor-row">
       <Field
         component={ConnectedQuery}
         name="skipLogic.filter"
