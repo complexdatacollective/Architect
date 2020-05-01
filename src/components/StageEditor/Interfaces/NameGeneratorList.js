@@ -5,7 +5,7 @@ import {
   CardDisplayOptions,
   SortOptionsForExternalData,
   NameGeneratorListPrompts,
-} from '../../sections';
+} from '@components/sections';
 
 const NameGeneratorList = {
   sections: [

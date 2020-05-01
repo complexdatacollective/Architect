@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import cx from 'classnames';
 import Button from '@codaco/ui/lib/components/Button';
-import { getFieldId } from '../../../utils/issues';
-import EdgeSelect from '../../Form/Fields/EdgeSelect';
-import ValidatedField from '../../Form/ValidatedField';
+import NetworkFilter from '@components/sections/NetworkFilter';
+import { getFieldId } from '@app/utils/issues';
+import EdgeSelect from '@components/Form/Fields/EdgeSelect';
+import ValidatedField from '@components/Form/ValidatedField';
+import Section from '@components/sections/Section';
+import Row from '@components/sections/Row';
 import withDisableAndReset from './withDisableAndReset';
 import withCreateNewType from './withCreateEdgeType';
 import withEdgeTypeOptions from './withEdgeTypeOptions';
-import Section from '../Section';
-import Row from '../Row';
 
 class EdgeType extends Component {
   static propTypes = {
@@ -79,6 +80,7 @@ class EdgeType extends Component {
             </div>
           </div>
         </Row>
+        <NetworkFilter />
       </Section>
     );
   }

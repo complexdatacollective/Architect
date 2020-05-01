@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { change, getFormValues } from 'redux-form';
 import { has } from 'lodash';
+import { change, getFormValues } from 'redux-form';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import ContextPanel from '@components/ContextPanel';
 import SkipLogicFields from '@components/SkipLogicEditor/SkipLogicFields';
@@ -28,7 +28,7 @@ const SkipLogic = ({
 
   return (
     <ContextPanel
-      title="Skip Logic"
+      title="Skip Logic (optional)"
       isActive={hasSkipLogic}
       onDeactivate={handleDeactivate}
     >

@@ -4,7 +4,7 @@ import {
   QuickAdd,
   NameGeneratorPrompts,
   NodePanels,
-} from '../../sections';
+} from '@components/sections';
 
 const NameGeneratorQuickAdd = {
   sections: [

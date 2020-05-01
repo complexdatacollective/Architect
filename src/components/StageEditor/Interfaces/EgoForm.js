@@ -2,7 +2,7 @@ import {
   Name,
   Form,
   IntroductionPanel,
-} from '../../sections';
+} from '@components/sections';
 
 const template = {
 };

@@ -5,7 +5,7 @@ import {
   CardDisplayOptions,
   SearchOptionsForExternalData,
   NameGeneratorAutoCompletePrompts,
-} from '../../sections';
+} from '@components/sections';
 
 const NameGeneratorAutoComplete = {
   sections: [

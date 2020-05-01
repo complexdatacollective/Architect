@@ -1,16 +1,14 @@
 import {
   Name,
-  NodeType,
-  Filter,
+  FilteredNodeType,
   Form,
   IntroductionPanel,
-} from '../../sections';
+} from '@components/sections';
 
 const AlterForm = {
   sections: [
     Name,
-    NodeType,
-    Filter,
+    FilteredNodeType,
     IntroductionPanel,
     Form,
   ],

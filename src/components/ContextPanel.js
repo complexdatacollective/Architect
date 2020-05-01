@@ -65,7 +65,7 @@ ContextPanel.propTypes = {
 };
 
 ContextPanel.defaultProps = {
-  onDeactivate: () => Promise.resolve(),
+  onDeactivate: () => Promise.resolve(true),
   children: null,
 };
 

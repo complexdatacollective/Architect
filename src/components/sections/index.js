@@ -10,6 +10,7 @@ export { default as Filter } from './Filter';
 export { default as Name } from './Name';
 export { default as ShowExistingNodes } from './ShowExistingNodes';
 export { default as NodeType } from './NodeType';
+export { default as FilteredNodeType } from './FilteredNodeType';
 export { default as EdgeType } from './EdgeType';
 export { default as Form } from './Form';
 export { default as FormWithQuickAdd } from './FormWithQuickAdd';

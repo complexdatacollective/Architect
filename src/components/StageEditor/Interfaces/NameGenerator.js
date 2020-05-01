@@ -4,7 +4,7 @@ import {
   Form,
   NameGeneratorPrompts,
   NodePanels,
-} from '../../sections';
+} from '@components/sections';
 
 const NameGenerator = {
   sections: [

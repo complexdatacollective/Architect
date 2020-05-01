@@ -1,15 +1,13 @@
 import {
   Name,
-  NodeType,
-  Filter,
+  FilteredNodeType,
   OrdinalBinPrompts,
-} from '../../sections';
+} from '@components/sections';
 
 const OrdinalBin = {
   sections: [
     Name,
-    NodeType,
-    Filter,
+    FilteredNodeType,
     OrdinalBinPrompts,
   ],
 };
