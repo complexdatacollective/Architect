@@ -1,6 +1,6 @@
 import {
   Name,
-  EdgeType,
+  FilteredEdgeType,
   Form,
   IntroductionPanel,
 } from '@components/sections';
@@ -11,7 +11,7 @@ const template = {
 const AlterEdgeForm = {
   sections: [
     Name,
-    EdgeType,
+    FilteredEdgeType,
     IntroductionPanel,
     Form,
   ],
