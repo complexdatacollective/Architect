@@ -1,33 +1,24 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
-import cx from 'classnames';
-import { motion } from 'framer-motion';
 import Editor from '@components/Editor';
-import SkipLogicFields from '@components/SkipLogicEditor/SkipLogicFields';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
 import StageHeading from './StageHeading';
+import SkipLogic from './SkipLogic';
 
 const formName = 'edit-stage';
-
-const tabVariants = {
-  active: { opacity: 1, height: 'auto', position: 'static' },
-  inactive: { opacity: 0, height: 0, position: 'absolute', top: 0 },
-};
 
 const StageEditor = ({
   id,
   previewStage,
   interfaceType,
-  hasSkipLogic,
   stagePath,
+  hasSkipLogic,
   ...props
 }) => {
-  const [tab, setTab] = useState(0);
-
   useEffect(() => {
     ipcRenderer.on('REFRESH_PREVIEW', previewStage);
 
@@ -54,14 +45,6 @@ const StageEditor = ({
       />
     ));
 
-  const tabClasses = ({ index }) => cx(
-    'stage-editor__tab',
-    {
-      'stage-editor__tab--selected': index === tab
-      'stage-editor__tab--inactive': index === tab
-    },
-  );
-
   return (
     <Editor
       formName={formName}
@@ -71,36 +54,10 @@ const StageEditor = ({
         ({ submitFailed, windowRoot }) => (
           <div className="stage-editor">
             <StageHeading id={id} />
-            <div className="stage-editor__tabs">
-              <div className="stage-editor__tablist">
-                <div
-                  className={tabClasses({ index: 0 })}
-                  onClick={() => setTab(0)}
-                >Stage</div>
-                <div
-                  className={tabClasses({ index: 1, inactive: !hasSkipLogic })}
-                  onClick={() => setTab(1)}
-                >
-                  Skip logic
-                </div>
-              </div>
-              <div className="stage-editor__panels">
-                <motion.div
-                  className="stage-editor__panel"
-                  variants={tabVariants}
-                  animate={tab === 0 ? 'active' : 'inactive'}
-                >
-                  {renderSections({ submitFailed, windowRoot })}
-                </motion.div>
-                <motion.div
-                  className="stage-editor__panel"
-                  variants={tabVariants}
-                  animate={tab === 1 ? 'active' : 'inactive'}
-                >
-                  <SkipLogicFields />
-                </motion.div>
-              </div>
+            <div className="stage-editor-section stage-editor-section--no-border">
+              <SkipLogic />
             </div>
+            {renderSections({ submitFailed, windowRoot })}
           </div>
         )
       }

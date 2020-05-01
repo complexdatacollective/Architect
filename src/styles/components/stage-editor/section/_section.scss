@@ -8,9 +8,9 @@
   overflow: hidden;
   margin: 0 unit(4);
   padding: unit(4) 0;
-  border-top: unit(0.2) solid var(--background-alt);
+  border-bottom: unit(0.2) solid var(--background-alt);
 
-  &:first-child {
+  &:last-child {
     margin-top: 0;
     border: 0;
   }
@@ -37,5 +37,6 @@
 
   &--no-border {
     border: none;
+    padding-bottom: 0; // because without border this looks like double padding
   }
 }
