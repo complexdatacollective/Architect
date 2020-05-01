@@ -1,6 +1,7 @@
 import uuid from 'uuid/v1';
 import { get, compact } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
+import prune from '@app/utils/prune';
 
 const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
 const UPDATE_STAGE = 'PROTOCOL/UPDATE_STAGE';
@@ -28,13 +29,15 @@ export default function reducer(state = initialState, action = {}) {
       return state.map((stage) => {
         if (stage.id !== action.id) { return stage; }
 
-        if (action.overwrite) { return { ...action.stage, id: stage.id }; }
+        const previousStage = !action.overwrite ? stage : {};
 
-        return {
-          ...stage,
+        const newStage = {
+          ...previousStage,
           ...action.stage,
           id: stage.id,
         };
+
+        return prune(newStage);
       });
     case MOVE_STAGE:
       return arrayMove(state, action.oldIndex, action.newIndex);
