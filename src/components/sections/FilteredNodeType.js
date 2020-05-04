@@ -1,11 +1,14 @@
 import React from 'react';
 import Section from '@components/sections/Section';
+import Row from '@components/sections/Row';
 import NetworkFilter from '@components/sections/NetworkFilter';
 import NodeTypeFields from '@components/sections/NodeTypeFields';
 
 const FilteredNodeType = props => (
   <Section>
-    <NodeTypeFields {...props} />
+    <Row>
+      <NodeTypeFields {...props} />
+    </Row>
     <NetworkFilter {...props} />
   </Section>
 );

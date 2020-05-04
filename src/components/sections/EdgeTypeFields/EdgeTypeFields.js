@@ -38,7 +38,10 @@ class EdgeTypeFields extends Component {
       handleOpenCreateNewType,
     } = this.props;
 
-    const nodeTypeClasses = cx('stage-editor-section-node-type', { 'stage-editor-section-node-type--disabled': disabled });
+    const nodeTypeClasses = cx(
+      'stage-editor-section-node-type',
+      { 'stage-editor-section-node-type--disabled': disabled },
+    );
 
     return (
       <div className={nodeTypeClasses}>
