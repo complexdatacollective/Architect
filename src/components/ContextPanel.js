@@ -1,18 +1,33 @@
 import React, { useMemo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
+import cx from 'classnames';
+import { motion, AnimatePresence } from 'framer-motion';
 import Checkbox from '@codaco/ui/lib/components/Fields/Checkbox';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 
 const ContextPanel = ({
   title,
+  variant,
   children,
   isActive,
   onDeactivate,
 }) => {
-  const panelVariants = useMemo(() => ({
-    activated: { height: '100%', opacity: 1 },
-    unactivated: { height: 0, opacity: 0 },
-  }), []);
+  const variants = useMemo(() => {
+    const transition = {
+      duration: getCSSVariableAsNumber('--animation-duration-standard-ms') * 0.001,
+    };
+
+    return {
+      panel: {
+        activated: { height: '100%', transition },
+        unactivated: { height: 0, transition },
+      },
+      content: {
+        activated: { opacity: 1, transition },
+        unactivated: { opacity: 0, transition },
+      },
+    };
+  }, []);
 
   const [open, setOpen] = useState(isActive);
 
@@ -28,16 +43,21 @@ const ContextPanel = ({
       });
   }, [onDeactivate, open, setOpen]);
 
-  const variant = open ? 'activated' : 'unactivated';
+  const animate = open ? 'activated' : 'unactivated';
+
+  const className = cx(
+    'context-panel',
+    { [`context-panel--${variant}`]: !!variant },
+  );
 
   return (
     <motion.div
       initial="unactivated"
-      animate={variant}
-      className="context-drawer"
+      animate={animate}
+      className={className}
     >
       <motion.div
-        className="context-drawer__controls"
+        className="context-panel__controls"
       >
         <Checkbox
           input={{ value: open }}
@@ -46,12 +66,23 @@ const ContextPanel = ({
         {title}
       </motion.div>
       <motion.div
-        className="context-drawer__panel"
-        variants={panelVariants}
+        className="context-panel__panel"
+        variants={variants.panel}
       >
-        <div className="context-drawer__panel-container">
-          {children}
-        </div>
+        <AnimatePresence>
+          {open &&
+            <motion.div
+              className="context-panel__panel-container"
+              key="content"
+              variants={variants.content}
+              initial="unactivated"
+              animate={animate}
+              exit="unactivated"
+            >
+              {children}
+            </motion.div>
+          }
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );

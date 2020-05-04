@@ -8,6 +8,7 @@
   transition-property: transform;
   overflow: hidden;
   color: var(--text-light);
+  z-index: var(--z-default);
 
   &__title-bar {
     @include typography(title-2);

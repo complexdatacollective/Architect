@@ -37,23 +37,3 @@
     overflow: hidden;
   }
 }
-
-.context-drawer {
-  background: var(--architect-context-panel);
-  color: var(--architect-context-text);
-
-  &__controls {
-    background: var(--architect-context-controls);
-    padding: unit(2);
-    display: flex;
-    align-items: center;
-  }
-
-  &__panel {
-    overflow: hidden;
-
-    &-container {
-      padding: unit(2) unit(2) unit(4) unit(2);
-    }
-  }
-}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import Select from '@components/Form/Fields/Select';
+import ValidatedField from '@components/Form/ValidatedField';
 import { Query, withStoreConnector, withFieldConnector, ruleValidator } from '@components/Query';
 
 const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
@@ -9,13 +10,14 @@ const SkipLogicFields = () => (
   <React.Fragment>
     <div className="stage-editor-row">
       <h2>Show/Hide</h2>
-      <Field
+      <ValidatedField
         component={Select}
         name="skipLogic.action"
         options={[
           { value: 'SHOW', label: 'Show this stage if' },
           { value: 'SKIP', label: 'Skip this stage if' },
         ]}
+        validation={{ required: true }}
       />
     </div>
     <div className="stage-editor-row">

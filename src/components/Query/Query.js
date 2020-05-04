@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rules from './Rules';
 
-const Query = ({ rules, join, codebook, onChange, openDialog, error }) => (
+const Query = ({ rules, join, codebook, onChange, openDialog, error, meta }) => (
   <Rules
+    meta={meta}
     rules={rules}
     join={join}
     onChange={onChange}
@@ -21,12 +22,14 @@ Query.propTypes = {
   codebook: PropTypes.object.isRequired,
   join: PropTypes.string,
   error: PropTypes.string,
+  meta: PropTypes.object,
 };
 
 Query.defaultProps = {
   rules: [],
   join: null,
   error: null,
+  meta: {},
 };
 
 export { Query };
