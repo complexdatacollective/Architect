@@ -7,20 +7,6 @@
     padding: unit(2) unit(3);
     display: flex;
     align-items: center;
-
-    // TODO: why is this broken?
-    .form-field-checkbox {
-      font-size: 0;
-
-      &__label {
-        font-size: 1rem;
-      }
-
-      &__input {
-        position: absolute;
-        z-index: -1;
-      }
-    }
   }
 
   &__panel {
@@ -31,12 +17,12 @@
     }
   }
 
-  &--skip {
-    background: var(--architect-context-panel--strong);
-    color: var(--architect-context-text--strong);
+  &--light {
+    background: var(--architect-context-panel--light);
+    color: var(--architect-context-text--light);
 
     .context-panel__controls {
-      background: var(--architect-context-controls--strong);
+      background: var(--architect-context-controls--light);
     }
   }
 }

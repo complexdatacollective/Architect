@@ -90,12 +90,14 @@ const ContextPanel = ({
 
 ContextPanel.propTypes = {
   title: PropTypes.string.isRequired,
+  variant: PropTypes.string,
   isActive: PropTypes.bool.isRequired,
   children: PropTypes.node,
   onDeactivate: PropTypes.func,
 };
 
 ContextPanel.defaultProps = {
+  variant: '',
   onDeactivate: () => Promise.resolve(true),
   children: null,
 };

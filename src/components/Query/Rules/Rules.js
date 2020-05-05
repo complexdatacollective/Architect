@@ -62,7 +62,7 @@ const Rules = ({
           onDeleteRule={handleDeleteRule}
           codebook={codebook}
         />
-        <FieldError show={!!error} error={error} />
+        <FieldError show={hasError} error={error} />
       </div>
 
       <div className="rules-rules__add-new">
@@ -90,7 +90,7 @@ const Rules = ({
 
       { rules.length > 1 &&
         <div className="rules-rules__join">
-          <h3>Must match:</h3>
+          <h2>Must match</h2>
           <DetachedField
             component={RadioGroup}
             options={[
