@@ -13,7 +13,7 @@ const initFileOpener = () => {
     console.log(`Open file "${protocolPath}"`);
     const state = store.getState();
     const meta = getActiveProtocolMeta(state);
-    const hasUnsavedChanges = getHasUnsavedChanges(state.session.lastChanged);
+    const hasUnsavedChanges = getHasUnsavedChanges(state);
 
     // If the protocol is already open, no op
     if (meta && meta.filePath === protocolPath) {

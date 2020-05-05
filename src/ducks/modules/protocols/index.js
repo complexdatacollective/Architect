@@ -56,14 +56,18 @@ const saveAndBundleThunk = savingLock(() =>
   (dispatch, getState) =>
     Promise.resolve()
       .then(() => {
-        const { filePath } = getActiveProtocolMeta(getState());
+        const activeProtocolMeta = getActiveProtocolMeta(getState());
+
+        if (!activeProtocolMeta) {
+          return dispatch(saveAndExportError('No active protocol found'));
+        }
 
         return dispatch(preflightActions.preflight())
           .then(() => dispatch(saveActionCreators.saveProtocol()))
           .then(() => dispatch(bundleActionCreators.bundleProtocol()))
           .catch((e) => {
             dispatch(saveAndExportError(e));
-            dispatch(saveErrorDialog(e, filePath));
+            dispatch(saveErrorDialog(e, activeProtocolMeta.filePath));
           });
       }));
 
@@ -118,15 +122,17 @@ const openProtocol = () =>
       .then(() => {
         if (!hasUnsavedChanges) { return true; }
 
-        return dispatch(dialogsActions.openDialog(UnsavedChanges({
+        const unsavedChangesDialog = UnsavedChanges({
           confirmLabel: 'Save changes and continue?',
-        })));
+        });
+
+        return dispatch(dialogsActions.openDialog(unsavedChangesDialog))
+          .then(saveAndBundleThunk());
       })
       .then((confirm) => {
         if (!confirm) { return false; }
 
-        return dispatch(saveAndBundleThunk())
-          .then(openDialog)
+        return openDialog()
           .then(({ cancelled, filePath }) => {
             if (cancelled) { return false; }
             return dispatch(unbundleAndLoadThunk(filePath));

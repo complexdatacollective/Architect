@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button, Icon } from '@codaco/ui';
-import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
+import { actionCreators as protocolsActions } from '@modules/protocols';
+import architectLogoIcon from '@app/images/architect-logo-icon.svg';
 import Version from './Version';
-import architectLogoIcon from '../images/architect-logo-icon.svg';
 
 const states = {
   BUSY: Symbol('BUSY'),
