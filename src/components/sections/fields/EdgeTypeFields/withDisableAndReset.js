@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { getFormValues, change } from 'redux-form';
 import { get, keys, difference } from 'lodash';
-import { actionCreators as dialogsActions } from '../../../ducks/modules/dialogs';
+import { actionCreators as dialogsActions } from '@modules/dialogs';
 
 const withResetState = connect(
   (state, { form }) => {

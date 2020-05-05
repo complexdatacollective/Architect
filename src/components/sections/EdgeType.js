@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from '@components/sections/Section';
-import EdgeTypeFields from '@components/sections/EdgeTypeFields';
+import EdgeTypeFields from '@components/sections/fields/EdgeTypeFields';
 
 const FilteredEdgeType = props => (
   <Section>

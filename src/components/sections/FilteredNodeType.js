@@ -1,8 +1,8 @@
 import React from 'react';
 import Section from '@components/sections/Section';
 import Row from '@components/sections/Row';
-import NetworkFilter from '@components/sections/NetworkFilter';
-import NodeTypeFields from '@components/sections/NodeTypeFields';
+import NetworkFilter from '@components/sections/fields/NetworkFilter';
+import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
 
 const FilteredNodeType = props => (
   <Section>

@@ -5,7 +5,7 @@ import { has } from 'lodash';
 import { change, getFormValues } from 'redux-form';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import ContextPanel from '@components/ContextPanel';
-import SkipLogicFields from '@components/SkipLogicEditor/SkipLogicFields';
+import SkipLogicFields from '@components/sections/fields/SkipLogicFields';
 
 const SkipLogic = ({
   hasSkipLogic,
