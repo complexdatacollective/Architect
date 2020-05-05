@@ -71,9 +71,6 @@ class Timeline extends Component {
     openScreen('stage', { id, locus });
   };
 
-  handleEditSkipLogic = id =>
-    this.props.openScreen('skip', { id });
-
   createStage = (type, insertAtIndex) => {
     const { openScreen, locus } = this.props;
     this.setState({ insertStageAtIndex: null, highlightHide: true });
@@ -116,7 +113,6 @@ class Timeline extends Component {
         onEditStage={() => this.handleEditStage(stage.id)}
         onDeleteStage={() => this.handleDeleteStage(stage.id)}
         onInsertStage={position => this.handleInsertStage(index + position)}
-        onEditSkipLogic={() => this.handleEditSkipLogic(stage.id)}
       />
     </None>
   );

@@ -4,8 +4,8 @@ import { SortableElement } from 'react-sortable-hoc';
 import { get } from 'lodash';
 import cx from 'classnames';
 import { getCSSVariableAsString } from '@codaco/ui/lib/utils/CSSVariables';
-import { Zoom } from '../../behaviours';
-import timelineImages from '../../images/timeline';
+import { Zoom } from '@app/behaviours';
+import timelineImages from '@app/images/timeline';
 
 const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];
 
@@ -44,20 +44,6 @@ const EditStageButton = Zoom(
   ),
 );
 
-const ConfigureSkipLogicButton = Zoom(
-  ({
-    onEditSkipLogic,
-  }) => (
-    <a
-      className="timeline-stage__control"
-      onClick={onEditSkipLogic}
-    >
-      <div className="timeline-stage__control-icon">&#9881;</div>
-      Configure skip logic
-    </a>
-  ),
-);
-
 class Stage extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
@@ -65,7 +51,6 @@ class Stage extends PureComponent {
     type: PropTypes.string.isRequired,
     onEditStage: PropTypes.func.isRequired,
     onDeleteStage: PropTypes.func.isRequired,
-    onEditSkipLogic: PropTypes.func.isRequired,
     onInsertStage: PropTypes.func.isRequired,
   };
 
@@ -79,7 +64,6 @@ class Stage extends PureComponent {
       className,
       onEditStage,
       onDeleteStage,
-      onEditSkipLogic,
       onInsertStage,
       type,
       label,
@@ -111,10 +95,6 @@ class Stage extends PureComponent {
             <div className="timeline-stage__control-icon">↑</div>
             Add stage before
           </a>
-          <ConfigureSkipLogicButton
-            onEditSkipLogic={onEditSkipLogic}
-            zoomColors={['#ffffff', '#f2b700']}
-          />
           <a
             className="timeline-stage__control"
             onClick={onDeleteStage}
