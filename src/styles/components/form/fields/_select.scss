@@ -133,6 +133,11 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     .form-fields-select__control {
       border: .1rem solid var(--error);
     }
+  }
 
+  &--light-background {
+    .form-fields-select__control {
+      background-color: var(--background);
+    }
   }
 }

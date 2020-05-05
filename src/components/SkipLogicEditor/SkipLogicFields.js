@@ -3,14 +3,16 @@ import { Field } from 'redux-form';
 import Select from '@components/Form/Fields/Select';
 import ValidatedField from '@components/Form/ValidatedField';
 import { Query, withStoreConnector, withFieldConnector, ruleValidator } from '@components/Query';
+import Row from '@components/sections/Row';
 
 const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 
 const SkipLogicFields = () => (
   <React.Fragment>
-    <div className="stage-editor-row">
+    <Row>
       <h2>Show/Hide</h2>
       <ValidatedField
+        className="form-fields-select--light-background"
         component={Select}
         name="skipLogic.action"
         options={[
@@ -19,14 +21,14 @@ const SkipLogicFields = () => (
         ]}
         validation={{ required: true }}
       />
-    </div>
-    <div className="stage-editor-row">
+    </Row>
+    <Row>
       <Field
         component={ConnectedQuery}
         name="skipLogic.filter"
         validate={ruleValidator}
       />
-    </div>
+    </Row>
   </React.Fragment>
 );
 

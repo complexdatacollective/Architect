@@ -54,7 +54,7 @@ const Rules = ({
       />
 
       <div className="rules-rules__preview">
-        <h3>Rules:</h3>
+        <h2>Rules</h2>
         <PreviewRules
           rules={rules}
           join={join}
