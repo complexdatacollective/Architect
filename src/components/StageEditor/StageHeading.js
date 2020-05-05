@@ -3,25 +3,40 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { getStageIndex } from '@selectors/protocol';
+import { getFieldId } from '@app/utils/issues';
+import scrollTo from '@app/utils/scrollTo';
 
 const StageHeading = ({
   stageNumber,
   name,
   type,
-}) => (
-  <div className="stage-heading">
-    <div className="stage-heading__location">
-      { stageNumber && `Stage ${stageNumber}` }
-      { !stageNumber && 'New Stage' }
+}) => {
+  const handleEditName = () => {
+    const nameFieldId = `#${getFieldId('label')}`;
+    const destination = document.querySelector(nameFieldId);
+    scrollTo(destination);
+  };
+
+  return (
+    <div className="stage-heading">
+      <div className="stage-heading__location">
+        { stageNumber && `Stage ${stageNumber}` }
+        { !stageNumber && 'New Stage' }
+      </div>
+      <div className="stage-heading__name">
+        <div
+          className="stage-heading__name-edit"
+          onClick={handleEditName}
+        >
+          {name}
+        </div>
+      </div>
+      <div className="stage-heading__meta">
+        {type}
+      </div>
     </div>
-    <div className="stage-heading__name">
-      {name}
-    </div>
-    <div className="stage-heading__meta">
-      {type}
-    </div>
-  </div>
-);
+  );
+};
 
 StageHeading.propTypes = {
   stageNumber: PropTypes.number,

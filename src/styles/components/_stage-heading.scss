@@ -1,6 +1,6 @@
 .stage-heading {
   height: 100px;
-  background: var(--primary);
+  background: var(--light-background);
   color: var(--text-light);
   display: flex;
   align-items: center;
@@ -9,19 +9,35 @@
   &__name,
   &__meta {
     padding: 0 unit(4);
-    font-size: unit(2);
+    font-size: unit(2.5);;
+    line-height: unit(2.5);
   }
 
   &__location {
     text-align: left;
+    color: var(--text-light-muted);;
   }
 
   &__name {
     flex-grow: 1;
     text-align: center;
+
+    &-edit {
+      display: inline-block;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: var(--animation-easing) border-color var(--animation-duration-standard);
+    }
+
+    &:hover {
+      .stage-heading__name-edit {
+        border-color: var(--text-light);
+      }
+    }
   }
 
   &__meta {
     text-align: right;
+    color: var(--text-light-muted);;
   }
 }
