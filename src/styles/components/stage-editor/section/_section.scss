@@ -8,7 +8,7 @@
   overflow: hidden;
   margin: 0 unit(4);
   padding: unit(4) 0;
-  border-bottom: unit(0.2) solid var(--background-alt);
+  border-bottom: unit(.2) solid var(--background-alt);
 
   &:last-child {
     margin-top: 0;
@@ -24,8 +24,8 @@
 
   // &--group {
   .stage-editor-section {
-    margin: unit(4) 0 0 0;
-    padding: unit(1) unit(2) unit(2) unit(2);
+    margin: unit(4) 0 0;
+    padding: unit(1) unit(2) unit(2);
     border: unit(.2) solid var(--background-alt);
     border-radius: unit(1);
   }
@@ -36,7 +36,7 @@
   }
 
   &--no-border {
-    border: none;
+    border: 0;
     padding-bottom: 0; // because without border this looks like double padding
   }
 }

@@ -4,36 +4,4 @@
   position: relative;
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
-
-  &__tablist {
-    display: flex;
-    justify-content: flex-start;
-    background-color: grey;
-  }
-
-  &__tab {
-    padding: unit(2);
-    cursor: pointer;
-    color: white;
-    background: silver;
-
-    &--selected {
-      background: white;
-      color: var(--text);
-    }
-
-    .indicator {
-      display: inline;
-      margin-left: unit(1);
-      color: green;
-    }
-  }
-
-  &__panels {
-    position: relative;
-  }
-
-  &__panel {
-    overflow: hidden;
-  }
 }

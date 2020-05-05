@@ -9,13 +9,13 @@
   &__name,
   &__meta {
     padding: 0 unit(4);
-    font-size: unit(2.5);;
+    font-size: unit(2.5);
     line-height: unit(2.5);
   }
 
   &__location {
     text-align: left;
-    color: var(--text-light-muted);;
+    color: var(--text-light-muted);
   }
 
   &__name {
@@ -38,6 +38,6 @@
 
   &__meta {
     text-align: right;
-    color: var(--text-light-muted);;
+    color: var(--text-light-muted);
   }
 }
