@@ -1,6 +1,8 @@
 .context-panel {
   background: var(--architect-context-panel);
   color: var(--architect-context-text);
+  border-radius: 1rem 1rem 0 0;
+  overflow: hidden;
 
   &__controls {
     background: var(--architect-context-controls);
@@ -17,12 +19,12 @@
     }
   }
 
-  &--light {
-    background: var(--architect-context-panel--light);
-    color: var(--architect-context-text--light);
+  &--contrast {
+    background: var(--architect-context-panel--contrast);
+    color: var(--architect-context-text--contrast);
 
     .context-panel__controls {
-      background: var(--architect-context-controls--light);
+      background: var(--architect-context-controls--contrast);
     }
   }
 }
