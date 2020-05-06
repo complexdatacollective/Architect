@@ -1015,7 +1015,13 @@ Array [
   ],
   Array [
     Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
+      "type": "PREVIEW/CLEAR_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "ipc": true,
+      "type": "SESSION/RESET",
     },
   ],
   Array [
