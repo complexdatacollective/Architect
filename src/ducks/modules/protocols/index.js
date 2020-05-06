@@ -5,13 +5,13 @@ import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { createLock } from '@modules/ui/status';
 import { actionCreators as dialogsActions } from '@modules/dialogs';
+import { actionCreators as sessionActions } from '@modules/session';
 import { UnsavedChanges } from '@components/Dialogs';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as unbundleActionCreators } from './unbundle';
 import { actionCreators as preflightActions } from './preflight';
 import { actionCreators as saveActionCreators } from './save';
 import { actionCreators as bundleActionCreators } from './bundle';
-import { actionCreators as previewActions } from '../preview';
 import { saveErrorDialog, importErrorDialog } from './dialogs';
 import {
   actionCreators as registerActionCreators,
@@ -79,8 +79,7 @@ const unbundleAndLoadThunk = filePath =>
   dispatch =>
     Promise.resolve()
       .then(() => {
-        // TODO: Reset `screens` here?
-        dispatch(previewActions.closePreview());
+        dispatch(sessionActions.resetSession());
         return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
           .then((result) => {
             if (!result) { return false; }
@@ -115,11 +114,9 @@ const createAndLoadProtocolThunk = () =>
  * 2. Run unbundleAndLoadThunk on specified path
  */
 const openProtocol = () =>
-  (dispatch, getState) => {
-    const hasUnsavedChanges = getHasUnsavedChanges(getState());
-
-    return Promise.resolve()
-      .then(() => {
+  (dispatch, getState) =>
+    Promise.resolve(getHasUnsavedChanges(getState()))
+      .then((hasUnsavedChanges) => {
         if (!hasUnsavedChanges) { return true; }
 
         const unsavedChangesDialog = UnsavedChanges({
@@ -127,7 +124,13 @@ const openProtocol = () =>
         });
 
         return dispatch(dialogsActions.openDialog(unsavedChangesDialog))
-          .then(saveAndBundleThunk());
+          .then((confirm) => {
+            if (!confirm) { return false; }
+
+            return dispatch(saveAndBundleThunk())
+              .then(() => dispatch(sessionActions.resetSession()))
+              .then(() => confirm);
+          });
       })
       .then((confirm) => {
         if (!confirm) { return false; }
@@ -139,7 +142,6 @@ const openProtocol = () =>
           });
       })
       .catch(e => dispatch(openError(e)));
-  };
 
 /**
  * 1. Create a duplicate entry in protocols, taking the original's working path
