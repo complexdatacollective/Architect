@@ -1,0 +1,12 @@
+<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><title>Skip Logic</title>
+    <g id="skip-logic" data-name="Skip Logic">
+        <line stroke="rgb(226, 33, 91)" x1="10.5" y1="11" x2="10.5" y2="31" stroke-width="3"></line>
+        <line stroke="rgb(226, 33, 91)" x1="49.5" y1="12" x2="49.5" y2="31" stroke-width="3"></line>
+        <line stroke="rgb(226, 33, 91)" x1="9" y1="10.5" x2="51" y2="10.5" stroke-width="3"></line>
+        <polygon fill="rgb(226, 33, 91)" transform="translate(10.500000, 33.000000) rotate(180.000000) translate(-10.500000, -33.000000) " points="10.5 28 18 38 3 38"></polygon>
+        <polygon fill="rgb(226, 33, 91)" transform="translate(49.500000, 33.000000) rotate(180.000000) translate(-49.500000, -33.000000) " points="49.5 28 57 38 42 38"></polygon>
+        <circle fill="rgb(226, 33, 91)" cx="49" cy="49" r="11"></circle>
+        <circle fill="rgb(0, 201, 162)" cx="11" cy="49" r="11"></circle>
+        <rect fill="rgb(242, 183, 0)" x="20" y="0" width="20" height="22"></rect>
+    </g>
+</svg>

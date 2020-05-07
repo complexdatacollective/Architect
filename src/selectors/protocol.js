@@ -9,6 +9,23 @@ export const getProtocol = state => state.protocol.present;
 export const getAssetManifest = state => state.protocol.present.assetManifest;
 export const getCodebook = state => state.protocol.present.codebook;
 
+export const getStageList = (state) => {
+  const protocol = getProtocol(state);
+  const stages = protocol ? protocol.stages : [];
+
+  const stagesWithMeta = stages.map(
+    stage => ({
+      id: stage.id,
+      type: stage.type,
+      label: stage.label,
+      hasFilter: !!stage.filter,
+      hasSkipLogic: !!stage.skipLogic,
+    }),
+  );
+
+  return stagesWithMeta;
+};
+
 export const getStage = (state, id) => {
   const protocol = getProtocol(state);
   const stage = find(protocol.stages, ['id', id]);

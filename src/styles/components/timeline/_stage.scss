@@ -56,11 +56,11 @@ $component-name: timeline-stage;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 
-    &-title {
-      margin: 0 0 0 $preview-offset;
-      width: $preview-width;
-    }
+  &__meta {
+    margin: 0 0 0 $preview-offset;
+    width: $preview-width;
   }
 
   &__screen {
@@ -87,6 +87,29 @@ $component-name: timeline-stage;
         max-width: 100%;
         pointer-events: none;
       }
+    }
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    margin-right: unit(1);
+    font-size: 1rem;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: unit(2.5);
+      height: unit(2.5);
+      margin-right: unit(1);
+    }
+
+    &:last-child {
+      margin: 0;
     }
   }
 

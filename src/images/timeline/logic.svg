@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>logic</title>
+    <g id="logic" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <line x1="10.5" y1="11" x2="10.5" y2="31.4473684" id="Line-4" stroke="#646464" stroke-width="3"></line>
+        <line x1="49.5" y1="12" x2="49.5" y2="31" id="Line-4" stroke="#646464" stroke-width="3"></line>
+        <line x1="9" y1="10.5" x2="51" y2="10.5" id="Line-2" stroke="#646464" stroke-width="3" fill="#000000"></line>
+        <circle id="Oval" fill="#000000" cx="49" cy="49" r="11"></circle>
+        <circle id="Oval" fill="#000000" cx="11" cy="49" r="11"></circle>
+        <rect id="Rectangle" fill="#000000" x="20" y="0" width="20" height="22"></rect>
+        <polygon id="Triangle" fill="#000000" transform="translate(10.500000, 33.000000) rotate(180.000000) translate(-10.500000, -33.000000) " points="10.5 28 18 38 3 38"></polygon>
+        <polygon id="Triangle" fill="#000000" transform="translate(49.500000, 33.000000) rotate(180.000000) translate(-49.500000, -33.000000) " points="49.5 28 57 38 42 38"></polygon>
+    </g>
+</svg>
