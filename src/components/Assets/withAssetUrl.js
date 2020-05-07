@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { compose, setPropTypes } from 'recompose';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import {
-  getActiveProtocolMeta,
-  getAssetManifest,
-} from '@selectors/protocol';
+import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getAssetManifest } from '@selectors/protocol';
 
 const mapStateToProps = (state, { id }) => {
   const activeProtocolMeta = getActiveProtocolMeta(state);

@@ -4,6 +4,18 @@ exports[`protocols saveAndBundleProtocol() invalid protocol dispatches an error 
 Array [
   Array [
     Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/SAVING",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
       "type": "PROTOCOLS/PREFLIGHT",
     },
   ],
@@ -261,11 +273,35 @@ Array [
       "type": "PROTOCOLS/BUNDLE_SUCCESS",
     },
   ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/SAVING",
+      "type": "STATUS/READY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/READY",
+    },
+  ],
 ]
 `;
 
 exports[`protocols saveAndBundleProtocol() triggers save and export actions 1`] = `
 Array [
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/SAVING",
+      "type": "STATUS/BUSY",
+    },
+  ],
   Array [
     Object {
       "type": "PROTOCOLS/PREFLIGHT",
@@ -816,11 +852,35 @@ Array [
       "type": "PROTOCOLS/BUNDLE_SUCCESS",
     },
   ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/SAVING",
+      "type": "STATUS/READY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/READY",
+    },
+  ],
 ]
 `;
 
 exports[`protocols unbundleAndLoadProtocol() when the protocol is invalid it dispatches an error when protocol is invalid (but still imports it) 1`] = `
 Array [
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/BUSY",
+    },
+  ],
   Array [
     Object {
       "type": "PREVIEW/CLOSE_PREVIEW",
@@ -862,11 +922,35 @@ Array [
       "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
     },
   ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/READY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/READY",
+    },
+  ],
 ]
 `;
 
 exports[`protocols unbundleAndLoadProtocol() when the schema version is greater than the app version it notifies user to upgrade the app 1`] = `
 Array [
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/BUSY",
+    },
+  ],
   Array [
     Object {
       "type": "PREVIEW/CLOSE_PREVIEW",
@@ -900,6 +984,18 @@ Array [
       "type": "PROTOCOL/OPEN_DIALOG",
     },
   ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/READY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/READY",
+    },
+  ],
 ]
 `;
 
@@ -907,7 +1003,25 @@ exports[`protocols unbundleAndLoadProtocol() when the schema version is less tha
 Array [
   Array [
     Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
+      "payload": "PROTOCOLS",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
+      "type": "PREVIEW/CLEAR_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "ipc": true,
+      "type": "SESSION/RESET",
     },
   ],
   Array [
@@ -957,11 +1071,35 @@ Array [
       "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
     },
   ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/READY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/READY",
+    },
+  ],
 ]
 `;
 
 exports[`protocols unbundleAndLoadProtocol() when the schema version is the same as the app version it imports the protocol 1`] = `
 Array [
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/BUSY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/BUSY",
+    },
+  ],
   Array [
     Object {
       "type": "PREVIEW/CLOSE_PREVIEW",
@@ -987,6 +1125,18 @@ Array [
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
       "type": "PROTOCOLS/REGISTER",
       "workingPath": "/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS/LOADING",
+      "type": "STATUS/READY",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "PROTOCOLS",
+      "type": "STATUS/READY",
     },
   ],
 ]

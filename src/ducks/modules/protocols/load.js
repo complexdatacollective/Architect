@@ -1,7 +1,7 @@
-import { find } from 'lodash';
-import { loadProtocolConfiguration } from '../../../other/protocols';
-import { actionCreators as protocolActions } from '../protocol';
-import history from '../../../history';
+import { getProtocolMeta } from '@selectors/protocols';
+import { loadProtocolConfiguration } from '@app/other/protocols';
+import history from '@app/history';
+import { actionCreators as protocolActions } from '@modules/protocol/index';
 
 const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';
 const LOAD_PROTOCOL_SUCCESS = 'PROTOCOLS/LOAD_SUCCESS';
@@ -40,7 +40,7 @@ const loadProtocolThunk = id =>
     dispatch(loadProtocol(id));
 
     const state = getState();
-    const meta = find(state.protocols, ['id', id]);
+    const meta = getProtocolMeta(state, id);
 
     if (!meta) {
       dispatch(loadProtocolError(`Protocol "${id}" not found in 'protocols'`));

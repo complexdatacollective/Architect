@@ -1,5 +1,6 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
+import { actionCreators as previewActions } from '@modules/preview';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as codebookActionTypes } from './protocol/codebook';
 import { actionTypes as assetManifestTypes } from './protocol/assetManifest';
@@ -28,10 +29,15 @@ const savableChanges = [
 const RESET_SESSION = 'SESSION/RESET';
 const PROTOCOL_CHANGED = 'SESSION/PROTOCOL_CHANGED';
 
-const resetSession = () => ({
-  type: RESET_SESSION,
-  ipc: true,
-});
+const resetSession = () =>
+  (dispatch) => {
+    dispatch(previewActions.clearPreview());
+
+    dispatch({
+      type: RESET_SESSION,
+      ipc: true,
+    });
+  };
 
 const protocolChanged = () => ({
   type: PROTOCOL_CHANGED,

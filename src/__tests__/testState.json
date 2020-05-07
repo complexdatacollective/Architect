@@ -2,6 +2,11 @@
   "session": {
     "activeProtocol": "1234-active-protocol"
   },
+  "ui": {
+    "status": {
+      "busy": []
+    }
+  },
   "protocols": [
     {
       "id": "1234-active-protocol",

@@ -1,5 +1,5 @@
-import { getActiveProtocolMeta } from '../../selectors/protocol';
-import history from '../../history';
+import { getActiveProtocolMeta } from '@selectors/protocols';
+import history from '@app/history';
 
 const pathTo = (location, edit = true) =>
   (_, getState) => {

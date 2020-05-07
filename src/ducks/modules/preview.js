@@ -1,6 +1,7 @@
 import { getFormValues } from 'redux-form';
-import { getActiveProtocolMeta, getProtocol } from '../../selectors/protocol';
-import previewDriver from '../../utils/previewDriver';
+import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getProtocol } from '@selectors/protocol';
+import previewDriver from '@app/utils/previewDriver';
 
 const getStageIndex = (protocol, stageMeta) => {
   switch (true) {
@@ -37,6 +38,7 @@ const SET_ZOOM = 'PREVIEW/ZOOM';
 const REFRESH_PREVIEW = 'PREVIEW/REFRESH_PREVIEW';
 const PREVIEW_DRAFT = 'PREVIEW/PREVIEW_DRAFT';
 const CLOSE_PREVIEW = 'PREVIEW/CLOSE_PREVIEW';
+const CLEAR_PREVIEW = 'PREVIEW/CLEAR_PREVIEW';
 
 const zoom = zoomFactor => ({
   type: SET_ZOOM,
@@ -47,13 +49,17 @@ const refresh = () => ({
   type: REFRESH_PREVIEW,
 });
 
-const closePreview = () =>
+const closePreview = () => ({
+  type: CLOSE_PREVIEW,
+});
+
+const clearPreview = () =>
   (dispatch) => {
     dispatch({
-      type: CLOSE_PREVIEW,
+      type: CLEAR_PREVIEW,
     });
 
-    previewDriver.close();
+    previewDriver.clear();
   };
 
 const previewDraft = (draft, stageIndex) =>
@@ -102,10 +108,12 @@ const actionTypes = {
   PREVIEW_DRAFT,
   SET_ZOOM,
   REFRESH_PREVIEW,
+  CLEAR_PREVIEW,
 };
 
 const actionCreators = {
   closePreview,
+  clearPreview,
   previewDraft,
   previewStageFromForm,
   zoom,
