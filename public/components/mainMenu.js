@@ -4,7 +4,7 @@ const MenuTemplate = (options) => {
     submenu: [
       {
         label: 'Open...',
-        click: options.openFile,
+        click: options.open,
       },
     ],
   };

@@ -1,18 +1,26 @@
 import uuid from 'uuid';
-import openProtocolDialog from '@app/other/protocols/utils/openProtocolDialog';
+import { openDialog, saveCopyDialog } from '@app/other/dialogs';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getHasUnsavedChanges } from '@selectors/session';
+import { createLock } from '@modules/ui/status';
+import { actionCreators as dialogsActions } from '@modules/dialogs';
+import { actionCreators as sessionActions } from '@modules/session';
+import { UnsavedChanges } from '@components/Dialogs';
 import { actionCreators as createActionCreators } from './create';
 import { actionCreators as unbundleActionCreators } from './unbundle';
 import { actionCreators as preflightActions } from './preflight';
 import { actionCreators as saveActionCreators } from './save';
 import { actionCreators as bundleActionCreators } from './bundle';
-import { actionCreators as previewActions } from '../preview';
 import { saveErrorDialog, importErrorDialog } from './dialogs';
 import {
   actionCreators as registerActionCreators,
   actionTypes as registerActionTypes,
 } from './register';
+
+const protocolsLock = createLock('PROTOCOLS');
+const loadingLock = createLock('PROTOCOLS/LOADING');
+const savingLock = createLock('PROTOCOLS/SAVING');
 
 const SAVE_COPY = 'PROTOCOLS/SAVE_COPY';
 const SAVE_AND_EXPORT_ERROR = 'PROTOCOLS/SAVE_AND_EXPORT_ERROR';
@@ -44,37 +52,46 @@ const openError = error => ({
  * 1. Save - write protocol to protocol.json
  * 2. Export - write /tmp/{working-path} to user space.
  */
-const saveAndBundleThunk = () =>
-  (dispatch, getState) => {
-    const { filePath } = getActiveProtocolMeta(getState());
+const saveAndBundleThunk = savingLock(() =>
+  (dispatch, getState) =>
+    Promise.resolve()
+      .then(() => {
+        const activeProtocolMeta = getActiveProtocolMeta(getState());
 
-    return dispatch(preflightActions.preflight())
-      .then(() => dispatch(saveActionCreators.saveProtocol()))
-      .then(() => dispatch(bundleActionCreators.bundleProtocol()))
-      .catch((e) => {
-        dispatch(saveAndExportError(e));
-        dispatch(saveErrorDialog(e, filePath));
-      });
-  };
+        if (!activeProtocolMeta) {
+          return dispatch(saveAndExportError('No active protocol found'));
+        }
+
+        return dispatch(preflightActions.preflight())
+          .then(() => dispatch(saveActionCreators.saveProtocol()))
+          .then(() => dispatch(bundleActionCreators.bundleProtocol()))
+          .catch((e) => {
+            dispatch(saveAndExportError(e));
+            dispatch(saveErrorDialog(e, activeProtocolMeta.filePath));
+          });
+      }));
 
 /**
  * 1. Import - extract/copy protocol to /tmp/{working-path}
  * 2. Load - redirect to /edit/ which should trigger load.
  */
 const unbundleAndLoadThunk = filePath =>
-  (dispatch) => {
-    dispatch(previewActions.closePreview());
-    // TODO: Reset `screens` here.
-    return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
-      .then(({ id }) => {
-        history.push(`/edit/${id}/`);
-        return id;
-      })
-      .catch((e) => {
-        dispatch(unbundleAndLoadError(e));
-        dispatch(importErrorDialog(e, filePath));
+  dispatch =>
+    Promise.resolve()
+      .then(() => {
+        dispatch(sessionActions.resetSession());
+        return dispatch(unbundleActionCreators.unbundleProtocol(filePath))
+          .then((result) => {
+            if (!result) { return false; }
+            const { id } = result;
+            history.push(`/edit/${id}/`);
+            return id;
+          })
+          .catch((e) => {
+            dispatch(unbundleAndLoadError(e));
+            dispatch(importErrorDialog(e, filePath));
+          });
       });
-  };
 
 /**
  * 1. Create - Create a new protocol from template
@@ -97,26 +114,57 @@ const createAndLoadProtocolThunk = () =>
  * 2. Run unbundleAndLoadThunk on specified path
  */
 const openProtocol = () =>
-  dispatch =>
-    openProtocolDialog()
-      .then(filePath => dispatch(unbundleAndLoadThunk(filePath)))
+  (dispatch, getState) =>
+    Promise.resolve(getHasUnsavedChanges(getState()))
+      .then((hasUnsavedChanges) => {
+        if (!hasUnsavedChanges) { return true; }
+
+        const unsavedChangesDialog = UnsavedChanges({
+          confirmLabel: 'Save changes and continue?',
+        });
+
+        return dispatch(dialogsActions.openDialog(unsavedChangesDialog))
+          .then((confirm) => {
+            if (!confirm) { return false; }
+
+            return dispatch(saveAndBundleThunk())
+              .then(() => dispatch(sessionActions.resetSession()))
+              .then(() => confirm);
+          });
+      })
+      .then((confirm) => {
+        if (!confirm) { return false; }
+
+        return openDialog()
+          .then(({ cancelled, filePath }) => {
+            if (cancelled) { return false; }
+            return dispatch(unbundleAndLoadThunk(filePath));
+          });
+      })
       .catch(e => dispatch(openError(e)));
 
 /**
  * 1. Create a duplicate entry in protocols, taking the original's working path
  * 2. Save to the new location
  */
-const saveCopyThunk = filePath =>
+const saveCopyThunk = () =>
   (dispatch, getState) => {
     const activeProtocolMeta = getActiveProtocolMeta(getState());
 
-    dispatch({
-      type: SAVE_COPY,
-      id: activeProtocolMeta.id,
-      filePath,
-    });
+    return saveCopyDialog({
+      defaultPath: activeProtocolMeta.filePath,
+    })
+      .then(({ cancelled, filePath }) => {
+        if (cancelled) { return false; }
 
-    dispatch(saveAndBundleThunk());
+        dispatch({
+          type: SAVE_COPY,
+          id: activeProtocolMeta.id,
+          filePath,
+        });
+
+        return dispatch(saveAndBundleThunk());
+      });
   };
 
 const initialState = [];
@@ -168,11 +216,11 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  createAndLoadProtocol: createAndLoadProtocolThunk,
-  saveAndBundleProtocol: saveAndBundleThunk,
-  unbundleAndLoadProtocol: unbundleAndLoadThunk,
-  openProtocol,
-  saveCopy: saveCopyThunk,
+  createAndLoadProtocol: protocolsLock(createAndLoadProtocolThunk),
+  saveAndBundleProtocol: protocolsLock(saveAndBundleThunk),
+  unbundleAndLoadProtocol: protocolsLock(loadingLock(unbundleAndLoadThunk)),
+  openProtocol: protocolsLock(openProtocol),
+  saveCopy: protocolsLock(saveCopyThunk),
 };
 
 const actionTypes = {
@@ -182,8 +230,15 @@ const actionTypes = {
   OPEN_ERROR,
 };
 
+const actionLocks = {
+  loading: loadingLock,
+  protocols: protocolsLock,
+  saving: savingLock,
+};
+
 export {
   actionCreators,
   actionTypes,
+  actionLocks,
 };
 

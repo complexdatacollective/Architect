@@ -2,6 +2,7 @@ import { remote } from 'electron';
 import fse from 'fs-extra';
 import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
+import { saveDialog } from '@app/other/dialogs';
 import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
 
 const saveDialogOptions = {
@@ -10,17 +11,6 @@ const saveDialogOptions = {
   defaultPath: 'Protocol.netcanvas',
   filters: [{ name: 'Protocols', extensions: ['netcanvas'] }],
 };
-
-/**
- * Shows a save dialog (wrapped in a promise)
- */
-const saveDialog = () =>
-  new Promise((resolve, reject) => {
-    remote.dialog.showSaveDialog(saveDialogOptions, (filename) => {
-      if (filename === undefined) { reject(); }
-      resolve(filename);
-    });
-  });
 
 /**
  * Creates an blank protocol directory at destinationPath, with correct directory structure.
@@ -65,10 +55,11 @@ export const createProtocolFiles = (destinationPath) => {
  * Shows a save dialog and then creates a blank protocol there
  */
 const createProtocol = () =>
-  saveDialog()
-    .then(filePath =>
-      createProtocolFiles(filePath)
-        .then(tempPath => ({ filePath, workingPath: tempPath })),
-    );
+  saveDialog(saveDialogOptions)
+    .then(({ cancelled, filePath }) => {
+      if (cancelled) { return null; }
+      return createProtocolFiles(filePath)
+        .then(tempPath => ({ filePath, workingPath: tempPath }));
+    });
 
 export default createProtocol;

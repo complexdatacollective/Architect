@@ -9,9 +9,14 @@ const close = () => {
   ipcRenderer.send('preview:close');
 };
 
+const clear = () => {
+  ipcRenderer.send('preview:clear');
+};
+
 const driver = {
   preview,
   close,
+  clear,
 };
 
 export default driver;

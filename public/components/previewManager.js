@@ -34,6 +34,11 @@ class PreviewManager {
       global.previewWindow.show();
     });
 
+    ipcMain.on('preview:clear', () => {
+      PreviewManager.send('remote:reset');
+      global.previewWindow.hide();
+    });
+
     ipcMain.on('preview:close', () => {
       global.previewWindow.hide();
     });
@@ -42,6 +47,7 @@ class PreviewManager {
       global.previewWindow.loadIndex();
       PreviewManager.send('remote:reset');
     });
+
     PreviewManager.send('remote:reset');
   }
 

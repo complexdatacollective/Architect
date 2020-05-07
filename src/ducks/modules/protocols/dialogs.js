@@ -38,14 +38,15 @@ export const saveErrorDialog = (e, filePath) => {
 };
 
 export const importErrorDialog = (e, filePath) => {
-  e.friendlyMessage = (
+  const error = e || new Error('An unknown error occured.');
+  error.friendlyMessage = (
     <React.Fragment>
       <em>{path.basename(filePath)}</em> could not be imported.
     </React.Fragment>
   );
   return dialogActions.openDialog({
     type: 'Error',
-    error: e,
+    error,
   });
 };
 

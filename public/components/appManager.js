@@ -1,7 +1,7 @@
 const { ipcMain, app, Menu } = require('electron');
 const log = require('./log');
 const path = require('path');
-const { openDialog, saveDialog, clearStorageDataDialog } = require('./dialogs');
+const { clearStorageDataDialog } = require('./dialogs');
 const Updater = require('./Updater');
 const mainMenu = require('./mainMenu');
 const registerAssetProtocol = require('./assetProtocol').registerProtocol;
@@ -73,8 +73,12 @@ class AppManager {
     });
   }
 
-  static saveCopy(filePath) {
-    AppManager.send('SAVE_COPY', filePath);
+  static open() {
+    AppManager.send('OPEN');
+  }
+
+  static saveCopy() {
+    AppManager.send('SAVE_COPY');
   }
 
   static save() {
@@ -168,12 +172,8 @@ class AppManager {
   updateMenu() {
     const menuOptions = {
       isProtocolOpen: !!this.activeProtocol,
-      openFile: () => openDialog().then(file => AppManager.openFile(file)),
-      saveCopy: () => {
-        const defaultPath = this.activeProtocol.filePath;
-        saveDialog({ defaultPath })
-          .then(filePath => AppManager.saveCopy(filePath));
-      },
+      open: () => AppManager.open(),
+      saveCopy: () => AppManager.saveCopy(),
       save: () => AppManager.save(),
       clearStorageData: () => clearStorageDataDialog().then(() => AppManager.clearStorageData()),
       checkForUpdates: () => this.updater.checkForUpdates(),

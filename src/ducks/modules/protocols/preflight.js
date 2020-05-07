@@ -1,21 +1,34 @@
 import log from 'electron-log';
-import { getProtocol } from '../../../selectors/protocol';
+import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getProtocol } from '@selectors/protocol';
+import prune from '@app/utils/prune';
 import { actionCreators as protocolActions } from '../protocol';
-import prune from '../../../utils/prune';
 
 const PREFLIGHT = 'PROTOCOLS/PREFLIGHT';
+const PREFLIGHT_ERROR = 'PROTOCOLS/PREFLIGHT_ERROR';
 
 const preflight = () => ({ type: PREFLIGHT });
+
+const preflightError = error => ({
+  type: PREFLIGHT_ERROR,
+  error,
+});
 
 const preflightThunk = () =>
   (dispatch, getState) =>
     new Promise((resolve, reject) => {
       log.debug('preflight action()');
       const state = getState();
+      const meta = getActiveProtocolMeta(state);
       const protocol = getProtocol(state);
-      dispatch(preflight());
+
+      if (!meta) {
+        resolve(dispatch(preflightError('No active protocol found')));
+      }
 
       try {
+        dispatch(preflight());
+
         log.debug('  prune');
         // Remove null and undefined nodes
         const prunedProtocol = prune(protocol);

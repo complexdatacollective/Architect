@@ -1,7 +1,7 @@
-import { find } from 'lodash';
-import { saveProtocol as saveProtocolFile } from '../../../other/protocols';
-import { getProtocol } from '../../../selectors/protocol';
-import validateProtocol from '../../../utils/validateProtocol';
+import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getProtocol } from '@selectors/protocol';
+import { saveProtocol as saveProtocolFile } from '@app/other/protocols';
+import validateProtocol from '@app/utils/validateProtocol';
 import { validationErrorDialog } from './dialogs';
 
 const SAVE_PROTOCOL = 'PROTOCOLS/SAVE';
@@ -25,15 +25,14 @@ const saveProtocolThunk = () =>
   (dispatch, getState) => {
     dispatch(saveProtocol());
     const state = getState();
-    const activeProtocolId = state.session.activeProtocol;
-    const meta = find(state.protocols, ['id', activeProtocolId]);
+    const meta = getActiveProtocolMeta(state);
     const protocol = getProtocol(state);
 
     protocol.lastModified = new Date().toJSON();
 
     if (!meta) {
       // Always return a promise
-      dispatch(saveProtocolError(`Protocol "${activeProtocolId}" not found in 'protocols'`));
+      dispatch(saveProtocolError('No active protocol found'));
       return Promise.resolve();
     }
 
