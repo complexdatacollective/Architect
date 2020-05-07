@@ -22,7 +22,7 @@ const PreviewFieldComponent = ({
       {value.prompt}
       <Badge color={getColorForType(codebookVariable.type)}>
         <strong>{codebookVariable.type}</strong> variable
-        using <strong>{codebookVariable.component}</strong> component
+        using <strong>{codebookVariable.component}</strong> input control
       </Badge>
     </div>
   );

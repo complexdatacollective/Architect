@@ -72,7 +72,7 @@ const Variables = ({ variables, onDelete, sortBy, sortDirection, sort }) => {
           <tr className="codebook__variables-row codebook__variables-row--heading">
             <Heading name="name" {...headingProps}>Name</Heading>
             <Heading name="type" {...headingProps}>Type</Heading>
-            <Heading name="component" {...headingProps}>Component</Heading>
+            <Heading name="component" {...headingProps}>Input control</Heading>
             <Heading name="usage" {...headingProps}>Usage</Heading>
             <th />
           </tr>

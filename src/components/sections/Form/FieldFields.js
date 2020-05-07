@@ -87,9 +87,9 @@ const PromptFields = ({
         { isNewVariable && variableType &&
           <Tip>
             <p>
-              The selected input component will cause this variable to be defined as
+              The selected input control will cause this variable to be defined as
               type <strong>{variableType}</strong>. Once set, this cannot be changed
-              (although you may change the input component within this type).
+              (although you may change the input control within this type).
             </p>
           </Tip>
         }
@@ -99,8 +99,8 @@ const PromptFields = ({
               <p>
                 A pre-existing variable is currently selected. You cannot change a variable
                 type after it has been created, so only <strong>{variableType}</strong> compatible
-                input components can be selected above. If you would like to use a different
-                component type, you will need to create a new variable.
+                input control can be selected above. If you would like to use a different
+                input control type, you will need to create a new variable.
               </p>
             </div>
           </Tip>
