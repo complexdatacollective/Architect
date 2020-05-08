@@ -8,18 +8,73 @@ $bottom-spacing: unit(12);
     transition-property: opacity;
     transition-duration: 500ms;
 
-    &__new {
-      position: relative;
-      display: flex;
-      justify-content: center;
+    &__insert {
       cursor: pointer;
+      position: relative;
+      left: 50%;
+      padding-left: unit(6);
+      height: unit(5);
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--heading-font-family);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.05rem;
+      line-height: 1.1;
 
-      &-label {
+      &::before {
+        content: '';
+        display: block;
         position: absolute;
-        top: calc(50% - 2rem);
-        left: calc(50% + 4.5rem);
-        height: 4rem;
-        line-height: 4rem;
+        left: 0;
+        top: 0;
+        width: unit(5);
+        height: unit(5);
+        border-radius: unit(5);
+        background-color: var(--architect-timeline-line);
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        transform-origin: center center;
+        transform: translateX(-50%) scale(0.4);
+        transition-property: transform, background-color;
+        transition-timing-function: var(--animation-easing);
+        transition-duration: var(--animation-duration-fast);
+      }
+
+      &::after {
+        position: absolute;
+        top: 0.05rem;
+        left: 0;
+        transform: translateX(-50%) scale(0.4);
+        font-weight: 500;
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+        content: '+';
+        display: block;
+        color: white;
+        height: 2.5rem;
+        opacity: 0;
+        transition-property: opacity, transform;
+        transition-timing-function: var(--animation-easing);
+        transition-duration: var(--animation-duration-standard);
+      }
+
+      &--new,
+      &:hover {
+        &::before {
+          transform: translateX(-50%);
+          background-color: var(--primary);
+        }
+        &::after {
+          opacity: 1;
+          transform: translateX(-50%);
+        }
+      }
+
+      &--new {
+        margin-top: 5rem;
       }
     }
 
@@ -41,7 +96,7 @@ $bottom-spacing: unit(12);
 
     &__stages {
       position: relative;
-      margin: unit(6) 0 $bottom-spacing;
+      margin: unit(6) 0 0;
 
       &-highlight {
         position: absolute;

@@ -2,21 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import cx from 'classnames';
+import { motion } from 'framer-motion';
 import { getCSSVariableAsString } from '@codaco/ui/lib/utils/CSSVariables';
 import EditStageButton from './EditStageButton';
 
 const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];
 
 const Stage = ({
+  id,
+  stageNumber,
   className,
   onEditStage,
   onDeleteStage,
-  onInsertStage,
   type,
   label,
   hasSkipLogic,
   hasFilter,
-  ...rest
 }) => {
   const componentClasses = cx(
     'timeline-stage',
@@ -24,13 +25,18 @@ const Stage = ({
   );
 
   return (
-    <div className={componentClasses} {...rest}>
+    <motion.div
+      className={componentClasses}
+      exit={{ opacity: 0 }}
+    >
       <div
         className="timeline-stage__notch"
-        onClick={onEditStage}
-      />
+        onClick={() => onEditStage(id)}
+      >
+        {stageNumber}
+      </div>
       <EditStageButton
-        onEditStage={onEditStage}
+        onEditStage={() => onEditStage(id)}
         type={type}
         label={label}
         hasSkipLogic={hasSkipLogic}
@@ -40,31 +46,19 @@ const Stage = ({
       <div className="timeline-stage__controls">
         <a
           className="timeline-stage__control"
-          onClick={() => onInsertStage(0)}
-        >
-          <div className="timeline-stage__control-icon">↑</div>
-          Add stage before
-        </a>
-        <a
-          className="timeline-stage__control"
-          onClick={onDeleteStage}
+          onClick={() => onDeleteStage(id)}
         >
           <div className="timeline-stage__control-icon">✕</div>
           Delete stage
         </a>
-        <a
-          className="timeline-stage__control"
-          onClick={() => onInsertStage(1)}
-        >
-          <div className="timeline-stage__control-icon">↓</div>
-          Add stage after
-        </a>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 Stage.propTypes = {
+  id: PropTypes.string.isRequired,
+  stageNumber: PropTypes.number.isRequired,
   className: PropTypes.string,
   label: PropTypes.string,
   type: PropTypes.string.isRequired,
@@ -72,7 +66,6 @@ Stage.propTypes = {
   hasFilter: PropTypes.bool,
   onEditStage: PropTypes.func.isRequired,
   onDeleteStage: PropTypes.func.isRequired,
-  onInsertStage: PropTypes.func.isRequired,
 };
 
 Stage.defaultProps = {
