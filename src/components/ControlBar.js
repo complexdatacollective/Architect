@@ -1,42 +1,47 @@
 import React from 'react';
-import { TransitionGroup } from 'react-transition-group';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Fade from '@codaco/ui/lib/components/Transitions/Fade';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 
 const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
   const buttonLayout = [
     <div className="control-bar__primary-buttons" key="primary">
-      <TransitionGroup component={null}>
-        { buttons &&
-          Array.from(buttons).map(button =>
-            <Fade key={button.key} in={show}>{button}</Fade>)
-        }
-      </TransitionGroup>
+      { buttons &&
+        Array.from(buttons).map(button =>
+          <motion.div key={button.key} in={show}>{button}</motion.div>)
+      }
     </div>,
     <div className="control-bar__secondary-buttons" key="secondary">
-      <TransitionGroup component={null}>
-        { secondaryButtons &&
-          Array.from(secondaryButtons).map(button =>
-            <Fade key={button.key} in={show}>{button}</Fade>)
-        }
-      </TransitionGroup>
+      { secondaryButtons &&
+        Array.from(secondaryButtons).map(button =>
+          <motion.div key={button.key} in={show}>{button}</motion.div>)
+      }
     </div>,
   ];
 
+  const transition = {
+    type: 'tween',
+    ease: 'easeOut',
+    duration: getCSSVariableAsNumber('--animation-duration-fast-ms') * 0.001,
+  };
+
   return (
-    <div
+    <motion.div
+      key="control-bar"
       className={cx(
         'control-bar',
-        {
-          'control-bar--show': show,
-          'control-bar--flip': flip,
-        },
         className,
       )}
+      transition={transition}
+      initial="hidden"
+      variants={{
+        hidden: { translateY: '100%' },
+        in: { translateY: '0%' },
+      }}
     >
       { flip ? buttonLayout.reverse() : buttonLayout }
-    </div>
+    </motion.div>
   );
 };
 

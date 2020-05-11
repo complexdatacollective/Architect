@@ -29,7 +29,6 @@ class Screen extends PureComponent {
     const {
       buttons,
       secondaryButtons,
-      transitionState,
       onAcknowledgeError,
       children,
       type,
@@ -37,8 +36,6 @@ class Screen extends PureComponent {
     } = this.props;
 
     const classes = cx('arch-card', `arch-card--${type}`);
-
-    const isEntering = transitionState === 'entering' || transitionState === 'entered';
 
     return (
       <div className={classes}>
@@ -48,8 +45,6 @@ class Screen extends PureComponent {
           </ScreenErrorBoundary>
         </div>
         <ControlBar
-          show={isEntering}
-          className="control-bar--delayed"
           flip
           buttons={buttons}
           secondaryButtons={secondaryButtons}

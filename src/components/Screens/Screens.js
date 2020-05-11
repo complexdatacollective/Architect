@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { motion } from 'framer-motion';
 import Window from '@codaco/ui/lib/components/window';
-import { getScreensStack } from '../../selectors/ui';
-import { actionCreators as uiActions } from '../../ducks/modules/ui';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
+import { getScreensStack } from '@selectors/ui';
+import { actionCreators as uiActions } from '@modules/ui';
 import { getScreenComponent } from './screenIndex';
 
 /**
@@ -27,8 +28,11 @@ const Screens = (props) => {
     const onComplete = result =>
       props.closeScreen(screen, result);
 
-    const animate = params.origin ?
-      (() => {
+    const variants = {
+      hidden: {
+        opacity: 0.5,
+      },
+      in: () => {
         const scaleY = params.origin.width / window.innerWidth;
         const scaleX = params.origin.height / window.innerHeight;
 
@@ -38,10 +42,15 @@ const Screens = (props) => {
           translateX: [params.origin.left, 0],
           scaleY: [scaleY, 1],
           scaleX: [scaleX, 1],
-          transition: { duration: 0.2 },
+          transition: {
+            duration: getCSSVariableAsNumber('--animation-duration-fast-ms') * 0.001,
+            when: 'beforeChildren',
+          },
         };
-      })() :
-      {};
+      },
+    };
+
+    console.log(variants.in());
 
     const style = {
       position: 'absolute',
@@ -51,18 +60,29 @@ const Screens = (props) => {
       height: '100vh',
       top: 0,
       left: 0,
+      background: 'white',
     };
 
     return (
       <motion.div
         key={screen}
         style={style}
-        animate={animate}
+        animate="in"
+        initial="hidden"
+        variants={variants}
       >
-        <ScreenComponent
-          {...params}
-          onComplete={onComplete}
-        />
+        <motion.div
+          key={`${screen}_content`}
+          variants={{
+            in: { opacity: 1 },
+            hidden: { opacity: 0 },
+          }}
+        >
+          <ScreenComponent
+            {...params}
+            onComplete={onComplete}
+          />
+        </motion.div>
       </motion.div>
     );
   });

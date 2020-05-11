@@ -9,10 +9,6 @@
   height: unit(8);
   padding: 0 unit(2);
   background-color: var(--architect-control-bar-background);
-  transform: translateZ(0) translateY(100%);
-  transition-property: transform;
-  transition-timing-function:  var(--animation-easing);
-  transition-duration:  var(--animation-duration-standard);
   z-index: var(--z-global-ui);
 
   .button {
