@@ -64,9 +64,9 @@ class Timeline extends Component {
     });
   }
 
-  handleEditStage = (id) => {
+  handleEditStage = (id, origin) => {
     const { openScreen, locus } = this.props;
-    openScreen('stage', { id, locus });
+    openScreen('stage', { locus, id, origin });
   };
 
   createStage = (type, insertAtIndex) => {
@@ -84,7 +84,9 @@ class Timeline extends Component {
         className="timeline__insert"
         onClick={() => this.handleInsertStage(index)}
         exit={{ opacity: 0 }}
-      />,
+      >
+        Add stage here
+      </motion.div>,
       this.renderStage(stage, index),
     ]));
 

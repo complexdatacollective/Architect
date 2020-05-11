@@ -21,6 +21,10 @@ $bottom-spacing: unit(12);
       font-weight: 600;
       letter-spacing: 0.05rem;
       line-height: 1.1;
+      color: transparent;
+      transition-property: color;
+      transition-timing-function: var(--animation-easing);
+      transition-duration: var(--animation-duration-standard);
 
       &::before {
         content: '';
@@ -63,6 +67,8 @@ $bottom-spacing: unit(12);
 
       &--new,
       &:hover {
+        color: var(--architext-text);
+
         &::before {
           transform: translateX(-50%);
           background-color: var(--primary);

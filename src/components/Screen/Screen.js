@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import window from '@codaco/ui/lib/components/window';
 import ControlBar from '../ControlBar';
 import { ScreenErrorBoundary } from '../Errors';
 
@@ -61,4 +60,4 @@ class Screen extends PureComponent {
 }
 
 export { Screen };
-export default window(Screen);
+export default Screen;

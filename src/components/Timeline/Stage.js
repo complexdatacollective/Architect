@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import cx from 'classnames';
 import { motion } from 'framer-motion';
-import { getCSSVariableAsString } from '@codaco/ui/lib/utils/CSSVariables';
+import getAbsoluteBoundingRect from '@app/utils/getAbsoluteBoundingRect';
 import EditStageButton from './EditStageButton';
 
-const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];
+const findPos = (node) => {
+  let curtop = 0;
+  let curtopscroll = 0;
+  if (node.offsetParent) {
+    do {
+      curtop += node.offsetTop;
+      curtopscroll += node.offsetParent ? node.offsetParent.scrollTop : 0;
+    } while (node = node.offsetParent);
+  }
+  return curtop - curtopscroll;
+};
+
+const variants = {
+  exit: {
+    opacity: 0, transition: { duration: 5 },
+  },
+};
 
 const Stage = ({
   id,
@@ -24,24 +40,39 @@ const Stage = ({
     className,
   );
 
+  const previewRef = useRef();
+
+  const handleEditStage = () => {
+    if (!previewRef.current) { return; }
+
+    const rect = getAbsoluteBoundingRect(previewRef.current);
+    const find = findPos(previewRef.current);
+
+    onEditStage(id, {
+      ...rect,
+      top: find,
+    });
+  };
+
   return (
     <motion.div
       className={componentClasses}
-      exit={{ opacity: 0 }}
+      variants={variants}
+      exit="exit"
     >
       <div
         className="timeline-stage__notch"
-        onClick={() => onEditStage(id)}
+        onClick={handleEditStage}
       >
         {stageNumber}
       </div>
       <EditStageButton
-        onEditStage={() => onEditStage(id)}
+        ref={previewRef}
+        onEditStage={handleEditStage}
         type={type}
         label={label}
         hasSkipLogic={hasSkipLogic}
         hasFilter={hasFilter}
-        zoomColors={zoomColors()}
       />
       <div className="timeline-stage__controls">
         <a

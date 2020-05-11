@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { TransitionGroup } from 'react-transition-group';
-import TimelineScreenTransition, { styles } from '@codaco/ui/lib/components/Transitions/TimelineScreen';
+import { compose } from 'recompose';
+import { motion } from 'framer-motion';
+import Window from '@codaco/ui/lib/components/window';
 import { getScreensStack } from '../../selectors/ui';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import { getScreenComponent } from './screenIndex';
@@ -23,32 +24,51 @@ import { getScreenComponent } from './screenIndex';
 const Screens = (props) => {
   const screens = props.screens.map(({ screen, params }, index) => {
     const ScreenComponent = getScreenComponent(screen);
-    const transitionStyle = index > 0 ? styles.WIPE : styles.FADE;
     const onComplete = result =>
       props.closeScreen(screen, result);
 
+    const centerY = params.origin.top + params.origin.height * 0.5;
+    const centerX = params.origin.left + params.origin.width * 0.5;
+
+    const animate = params.origin ?
+      (() => {
+        const scaleY = params.origin.width / window.innerWidth;
+        const scaleX = params.origin.height / window.innerHeight;
+
+        return {
+          position: 'absolute',
+          zIndex: 100 + index,
+          scaleY: [scaleY, 1],
+          scaleX: [scaleX, 1],
+          transition: { duration: 1 },
+        };
+      })() :
+      {};
+
+    console.table(params);
+    console.table(animate);
+
     return (
-      <TimelineScreenTransition
-        style={transitionStyle}
+      <motion.div
         key={screen}
+        style={{
+          transformOrigin: `${centerX}px ${centerY}px`,
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+        }}
+        animate={animate}
       >
-        {transitionState => (
-          <ScreenComponent
-            {...params}
-            show
-            transitionState={transitionState}
-            onComplete={onComplete}
-          />
-        )}
-      </TimelineScreenTransition>
+        <ScreenComponent
+          {...params}
+          onComplete={onComplete}
+        />
+      </motion.div>
     );
   });
 
-  return (
-    <TransitionGroup className="screens">
-      {screens}
-    </TransitionGroup>
-  );
+  return screens;
 };
 
 Screens.propTypes = {
@@ -66,4 +86,7 @@ const mapDispatchToProps = {
 
 export { Screens };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Screens);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  Window,
+)(Screens);
