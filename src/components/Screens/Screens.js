@@ -27,37 +27,36 @@ const Screens = (props) => {
     const onComplete = result =>
       props.closeScreen(screen, result);
 
-    const centerY = params.origin.top + params.origin.height * 0.5;
-    const centerX = params.origin.left + params.origin.width * 0.5;
-
     const animate = params.origin ?
       (() => {
         const scaleY = params.origin.width / window.innerWidth;
         const scaleX = params.origin.height / window.innerHeight;
 
         return {
-          position: 'absolute',
-          zIndex: 100 + index,
+          opacity: [0.5, 1],
+          translateY: [params.origin.top, 0],
+          translateX: [params.origin.left, 0],
           scaleY: [scaleY, 1],
           scaleX: [scaleX, 1],
-          transition: { duration: 1 },
+          transition: { duration: 0.2 },
         };
       })() :
       {};
 
-    console.table(params);
-    console.table(animate);
+    const style = {
+      position: 'absolute',
+      transformOrigin: 'top left',
+      zIndex: 100 + index,
+      width: '100vw',
+      height: '100vh',
+      top: 0,
+      left: 0,
+    };
 
     return (
       <motion.div
         key={screen}
-        style={{
-          transformOrigin: `${centerX}px ${centerY}px`,
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-        }}
+        style={style}
         animate={animate}
       >
         <ScreenComponent

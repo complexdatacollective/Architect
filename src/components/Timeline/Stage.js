@@ -9,12 +9,12 @@ import EditStageButton from './EditStageButton';
 const findPos = (node) => {
   let curtop = 0;
   let curtopscroll = 0;
-  if (node.offsetParent) {
-    do {
-      curtop += node.offsetTop;
-      curtopscroll += node.offsetParent ? node.offsetParent.scrollTop : 0;
-    } while (node = node.offsetParent);
-  }
+  let n = node;
+  do {
+    curtop += n.offsetTop;
+    curtopscroll += n.offsetParent ? n.offsetParent.scrollTop : 0;
+    n = n.offsetParent;
+  } while (n.offsetParent);
   return curtop - curtopscroll;
 };
 
