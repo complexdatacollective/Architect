@@ -19,6 +19,7 @@ const EditEgoRule = ({
   rule,
   variableType,
   variablesAsOptions,
+  variableOptions,
   operatorOptions,
   handleRuleChange,
 }) => {
@@ -58,6 +59,7 @@ const EditEgoRule = ({
             variableType={variableType}
             onChange={handleRuleChange}
             value={optionsWithDefaults.value}
+            options={variableOptions}
             validation={{ required: true }}
           />
         </div>
@@ -71,6 +73,7 @@ EditEgoRule.propTypes = {
     options: PropTypes.object,
   }).isRequired,
   variablesAsOptions: PropTypes.array.isRequired,
+  variableOptions: PropTypes.array,
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
   variableType: PropTypes.string,
