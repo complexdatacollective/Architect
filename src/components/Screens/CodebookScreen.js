@@ -35,11 +35,20 @@ class CodebookScreen extends Component {
         transitionState={transitionState}
         onAcknowledgeError={this.handleCancel}
       >
-        <div className="editor variable-registry">
+        <div className="editor">
           <div className="editor__window">
             <div className="editor__container">
               <div className="editor__content">
-                <Codebook />
+                <div className="stage-editor variable-registry">
+                  <div className="stage-heading">
+                    <div className="stage-heading__name">
+                      Codebook
+                    </div>
+                  </div>
+                  <div className="stage-editor-section">
+                    <Codebook />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
