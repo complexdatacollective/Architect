@@ -81,6 +81,7 @@ EditEgoRule.propTypes = {
 
 EditEgoRule.defaultProps = {
   variableType: null,
+  variableOptions: null,
 };
 
 export { EditEgoRule };
