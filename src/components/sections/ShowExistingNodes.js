@@ -2,10 +2,10 @@ import React from 'react';
 import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Checkbox from '@codaco/ui/lib/components/Fields/Checkbox';
+import { Section } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
 import withSubject from '../enhancers/withSubject';
 import withDisabledSubjectRequired from '../enhancers/withDisabledSubjectRequired';
-import Section from './Section';
 
 const ShowExistingNodes = props => (
   <Section contentId="guidance.editor.show-existing-nodes" {...props}>

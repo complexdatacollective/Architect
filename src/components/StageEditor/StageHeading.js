@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 import { getStageIndex } from '@selectors/protocol';
 import { getFieldId } from '@app/utils/issues';
 import scrollTo from '@app/utils/scrollTo';
-import SectionsHeading from '@app/components/sections/SectionsHeading';
+import { Heading } from '@app/components/EditorLayout';
 
 const StageHeading = ({
   stageNumber,
@@ -22,7 +22,7 @@ const StageHeading = ({
   const meta = type;
 
   return (
-    <SectionsHeading
+    <Heading
       location={location}
       meta={meta}
     >
@@ -32,7 +32,7 @@ const StageHeading = ({
       >
         {name}
       </div>
-    </SectionsHeading>
+    </Heading>
   );
 };
 

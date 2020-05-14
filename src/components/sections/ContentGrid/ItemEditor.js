@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import TextArea from '@codaco/ui/lib/components/Fields/TextArea';
+import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
 import { Image, Audio, Video } from '../../Form/Fields';
-import Row from '../Row';
-import Section from '../Section';
 import { typeOptions } from './options';
 import withItemHandlers from './withItemHandlers';
 

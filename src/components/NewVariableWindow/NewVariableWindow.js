@@ -9,7 +9,7 @@ import safeName from '@app/utils/safeName';
 import ValidatedField from '@components/Form/ValidatedField';
 import Select from '@components/Form/Fields/Select';
 import Options from '@components/Options';
-import Section from '@components/sections/Section';
+import { Section } from '@components/EditorLayout';
 import FormWindow from '@components/FormWindow';
 import withNewVariableHandler, { form } from './withNewVariableHandler';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const SectionsContainer = ({
+const Layout = ({
   children,
   className,
   ...rest
@@ -19,13 +19,13 @@ const SectionsContainer = ({
   );
 };
 
-SectionsContainer.propTypes = {
+Layout.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
-SectionsContainer.defaultProps = {
+Layout.defaultProps = {
   className: '',
 };
 
-export default SectionsContainer;
+export default Layout;

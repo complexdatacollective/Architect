@@ -5,12 +5,11 @@ import {
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import DetachedField from '../../DetachedField';
 import ValidatedField from '../../Form/ValidatedField';
 import * as ArchitectFields from '../../Form/Fields';
-import Section from '../Section';
-import Row from '../Row';
 import withBackgroundChangeHandler from './withBackgroundChangeHandler';
 
 class Background extends PureComponent {

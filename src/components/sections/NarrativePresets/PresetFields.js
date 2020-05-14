@@ -13,8 +13,7 @@ import withNewVariableWindowHandlers, {
   propTypes as newVariableWindowPropTypes,
 } from '@components/enhancers/withNewVariableWindowHandlers';
 import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
-import Section from '@components/sections/Section';
-import Row from '@components/sections/Row';
+import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
 
 const PresetFields = ({

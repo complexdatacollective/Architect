@@ -7,9 +7,9 @@ import {
 import { Flipper } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
+import { Section } from '@components/EditorLayout';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
-import Section from '../sections/Section'; // Should this exist out of sections if it's used here?
 import Window from '../Window';
 import Form from '../Form';
 import Grid from './Grid';

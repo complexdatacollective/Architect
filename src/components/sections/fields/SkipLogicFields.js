@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import Select from '@components/Form/Fields/Select';
 import ValidatedField from '@components/Form/ValidatedField';
 import { Query, withStoreConnector, withFieldConnector, ruleValidator } from '@components/Query';
-import Row from '@components/sections/Row';
+import { Row } from '@components/EditorLayout';
 
 const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 

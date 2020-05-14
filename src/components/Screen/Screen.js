@@ -50,8 +50,9 @@ Screen.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.node),
   secondaryButtons: PropTypes.arrayOf(PropTypes.node),
   type: PropTypes.string,
-  show: PropTypes.bool,
   onAcknowledgeError: PropTypes.func,
+  windowRoot: PropTypes.any.isRequired,
+  setWindowRoot: PropTypes.func.isRequired,
 };
 
 Screen.defaultProps = {
@@ -59,7 +60,6 @@ Screen.defaultProps = {
   transitionState: null,
   children: null,
   buttons: [],
-  show: true,
   secondaryButtons: [],
   onAcknowledgeError: () => {},
 };

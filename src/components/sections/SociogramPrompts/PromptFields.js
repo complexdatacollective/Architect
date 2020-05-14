@@ -1,9 +1,9 @@
 import React from 'react';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { Section } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import { ValidatedField } from '../../Form';
-import Section from '../Section';
 import FieldsLayout from './PromptFieldsLayout';
 import FieldsHighlight from './PromptFieldsHighlight';
 import FieldsEdges from './PromptFieldsEdges';

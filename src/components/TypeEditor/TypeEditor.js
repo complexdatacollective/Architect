@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import Section from '@components/sections/Section';
+import { Section } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
 import * as ArchitectFields from '../Form/Fields';
 import { ValidatedField } from '../Form';

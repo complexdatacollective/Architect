@@ -1,12 +1,12 @@
 import React from 'react';
-import Section from '@components/sections/Section';
+import { Section } from '@components/EditorLayout';
 import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
 
-const FilteredNodeType = props => (
+const NodeType = props => (
   <Section>
     <NodeTypeFields {...props} />
   </Section>
 );
 
-export default FilteredNodeType;
+export default NodeType;
 

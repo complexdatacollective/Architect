@@ -3,6 +3,7 @@ import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
+import Layout from '@components/EditorLayout';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
@@ -52,13 +53,13 @@ const StageEditor = ({
     >
       {
         ({ submitFailed, windowRoot }) => (
-          <div className="stage-editor">
+          <Layout>
             <StageHeading id={id} />
             <div className="stage-editor-section stage-editor-section--no-border">
               <SkipLogic />
             </div>
             {renderSections({ submitFailed, windowRoot })}
-          </div>
+          </Layout>
         )
       }
     </Editor>

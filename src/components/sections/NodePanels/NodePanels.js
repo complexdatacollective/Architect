@@ -6,9 +6,9 @@ import { formValueSelector, FieldArray, arrayPush } from 'redux-form';
 import uuid from 'uuid';
 import { has } from 'lodash';
 import { Button } from '@codaco/ui';
+import { Section } from '@components/EditorLayout';
 import OrderedList from '../../OrderedList';
 import { getFieldId } from '../../../utils/issues';
-import Section from '../Section';
 import NodePanel from './NodePanel';
 
 const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {

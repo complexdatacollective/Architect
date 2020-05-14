@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import { Section } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
 import { Filter as FilterQuery, withFieldConnector, withStoreConnector, ruleValidator } from '../Query';
-import Section from './Section';
 
 const FilterField = withFieldConnector(withStoreConnector(FilterQuery));
 

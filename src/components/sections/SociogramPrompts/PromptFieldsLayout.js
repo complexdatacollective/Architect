@@ -7,8 +7,7 @@ import { ValidatedField } from '@components/Form';
 import * as ArchitectFields from '@components/Form/Fields';
 import Tip from '@components/Tip';
 import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
-import Row from '@components/sections/Row';
-import Section from '@components/sections/Section';
+import { Section, Row } from '@components/EditorLayout';
 import withLayoutOptions from './withLayoutOptions';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
 

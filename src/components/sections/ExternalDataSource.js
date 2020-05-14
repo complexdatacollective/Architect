@@ -1,10 +1,9 @@
 import React from 'react';
 import { compose } from 'recompose';
+import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
 import DataSource from '../Form/Fields/DataSource';
 import ValidatedField from '../Form/ValidatedField';
-import Section from './Section';
-import Row from './Row';
 import withSubject from '../enhancers/withSubject';
 import withDisabledSubjectRequired from '../enhancers/withDisabledSubjectRequired';
 

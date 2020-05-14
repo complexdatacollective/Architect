@@ -2,9 +2,8 @@ import React from 'react';
 import { FormSection } from 'redux-form';
 import TextArea from '@codaco/ui/lib/components/Fields/TextArea';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
+import { Section, Row } from '@components/EditorLayout';
 import { ValidatedField } from '../Form';
-import Section from './Section';
-import Row from './Row';
 import IssueAnchor from '../IssueAnchor';
 
 const Name = () => (

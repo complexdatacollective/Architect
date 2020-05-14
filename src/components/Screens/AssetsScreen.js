@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import AssetBrowser from '@components/AssetBrowser';
-import SectionsContainer from '@components/sections/SectionsContainer';
-import Section from '@components/sections/Section';
-import SectionsHeading from '@components/sections/SectionsHeading';
+import Layout, { Section, Heading } from '@components/EditorLayout';
 
 const AssetBrowserScreen = ({
   show,
@@ -29,10 +27,10 @@ const AssetBrowserScreen = ({
       transitionState={transitionState}
       onAcknowledgeError={onComplete}
     >
-      <SectionsContainer>
-        <SectionsHeading>
+      <Layout>
+        <Heading>
             Assets
-        </SectionsHeading>
+        </Heading>
         <Section>
           <p>
             Welcome to the asset management screen. Here, you can load in images,
@@ -41,7 +39,7 @@ const AssetBrowserScreen = ({
           </p>
           <AssetBrowser />
         </Section>
-      </SectionsContainer>
+      </Layout>
     </Screen>
   );
 };

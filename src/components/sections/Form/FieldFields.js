@@ -12,8 +12,7 @@ import Parameters from '@components/Parameters';
 import Validations from '@components/Validations';
 import SelectOptionImage from '@components/Form/Fields/SelectOptionImage';
 import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
-import Row from '../Row';
-import Section from '../Section';
+import { Section, Row } from '@components/EditorLayout';
 import withFieldsHandlers from './withFieldsHandlers';
 import Tip from '../../Tip';
 

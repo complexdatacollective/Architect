@@ -1,6 +1,5 @@
 import React from 'react';
-import Section from '@components/sections/Section';
-import Row from '@components/sections/Row';
+import { Section, Row } from '@components/EditorLayout';
 import NetworkFilter from '@components/sections/fields/NetworkFilter';
 import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
 

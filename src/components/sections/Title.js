@@ -1,8 +1,8 @@
 import React from 'react';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { Section } from '@components/EditorLayout';
 import { ValidatedField } from '../Form';
 import { getFieldId } from '../../utils/issues';
-import Section from './Section';
 
 const Title = () => (
   <Section contentId="guidance.editor.title">
