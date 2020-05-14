@@ -12,11 +12,22 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
     options.attribute,
   );
 
+  const variableOptions = get(
+    codebook,
+    [...entityRoot, 'variables', options.attribute, 'options'],
+  );
+
+  const valueOption = variableOptions &&
+    variableOptions.find(({ value }) => value === options.value);
+
+  const value = valueOption ? valueOption.label : options.value;
+
   return {
     options: {
       ...options,
-      type: typeLabel,
+      ...(typeLabel ? { type: typeLabel } : {}),
       attribute: variableLabel,
+      value,
     },
   };
 });
