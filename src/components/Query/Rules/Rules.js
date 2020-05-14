@@ -33,7 +33,7 @@ const Rules = ({
   const isActive = get(meta, 'active', false);
   // Default to true as may not be defined if used without redux-form
   const isTouched = get(meta, 'touched', true);
-  const hasError = isTouched && error;
+  const hasError = isTouched && !!error;
 
   const classes = cx(
     'rules-rules',
