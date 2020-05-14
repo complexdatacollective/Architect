@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
-import Screen from '../Screen/Screen';
-import AssetBrowser from '../AssetBrowser';
+import Screen from '@components/Screen/Screen';
+import AssetBrowser from '@components/AssetBrowser';
+import SectionsContainer from '@components/sections/SectionsContainer';
+import Section from '@components/sections/Section';
+import SectionsHeading from '@components/sections/SectionsHeading';
 
 const AssetBrowserScreen = ({
   show,
@@ -26,29 +29,19 @@ const AssetBrowserScreen = ({
       transitionState={transitionState}
       onAcknowledgeError={onComplete}
     >
-      <div className="editor variable-registry">
-        <div className="editor__window">
-          <div className="editor__container">
-            <div className="editor__content">
-              <div className="stage-editor">
-                <div className="stage-heading">
-                  <div className="stage-heading__name">
-                    Assets
-                  </div>
-                </div>
-                <div className="stage-editor-section">
-                  <p>
-                    Welcome to the asset management screen. Here, you can load in images,
-                    video, audio, or even external network data which can be used elsewhere
-                    within your protocol.
-                  </p>
-                  <AssetBrowser />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <SectionsContainer>
+        <SectionsHeading>
+            Assets
+        </SectionsHeading>
+        <Section>
+          <p>
+            Welcome to the asset management screen. Here, you can load in images,
+            video, audio, or even external network data which can be used elsewhere
+            within your protocol.
+          </p>
+          <AssetBrowser />
+        </Section>
+      </SectionsContainer>
     </Screen>
   );
 };

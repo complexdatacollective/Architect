@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 import { getStageIndex } from '@selectors/protocol';
 import { getFieldId } from '@app/utils/issues';
 import scrollTo from '@app/utils/scrollTo';
+import SectionsHeading from '@app/components/sections/SectionsHeading';
 
 const StageHeading = ({
   stageNumber,
@@ -17,24 +18,21 @@ const StageHeading = ({
     scrollTo(destination);
   };
 
+  const location = stageNumber ? `Stage ${stageNumber}` : 'New Stage';
+  const meta = type;
+
   return (
-    <div className="stage-heading">
-      <div className="stage-heading__location">
-        { stageNumber && `Stage ${stageNumber}` }
-        { !stageNumber && 'New Stage' }
+    <SectionsHeading
+      location={location}
+      meta={meta}
+    >
+      <div
+        className="stage-heading__name-edit"
+        onClick={handleEditName}
+      >
+        {name}
       </div>
-      <div className="stage-heading__name">
-        <div
-          className="stage-heading__name-edit"
-          onClick={handleEditName}
-        >
-          {name}
-        </div>
-      </div>
-      <div className="stage-heading__meta">
-        {type}
-      </div>
-    </div>
+    </SectionsHeading>
   );
 };
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { reduxForm, Form, getFormSyncErrors, hasSubmitFailed } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
-import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import { FormCodeView } from './CodeView';
 import Issues from './Issues';
 
@@ -11,7 +10,6 @@ import Issues from './Issues';
  * Editor is a scaffold for specific editor components.
  *
  * It includes:
- * - `<Guided />` component (info sidebar)
  * - `<Issues />` component, which provides interactive form errors
  * - `<FormCodeView />` component, which reveals the form's working copy of the configuration
  * - A redux-form `<Form />` component, which allows us to dispatch submit from outside
@@ -60,41 +58,23 @@ const Editor = ({
   title,
   submitFailed,
   component: Component,
-  setWindowRoot,
   ...rest
 }) => (
   <React.Fragment>
     <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
-    <div className="editor" ref={setWindowRoot}>
-      <div className="editor__window">
-        <div className="editor__container">
-          <div className="editor__content">
-            <Form onSubmit={handleSubmit}>
-              { title &&
-                <React.Fragment>
-                  <h1 className="editor__heading">{title}</h1>
-                  <div className="code-button">
-                    <small>(<a onClick={toggleCodeView} alt="show the code view for this interface">&lt;/&gt;</a>)</small>
-                  </div>
-                </React.Fragment>
-
-              }
-              { typeof children === 'function' &&
-                children({ form, toggleCodeView, ...rest })
-              }
-              { children && typeof children !== 'function' && children }
-              { !children &&
-                <Component form={form} {...rest} />
-              }
-            </Form>
-          </div>
-          <Issues
-            issues={issues}
-            show={submitFailed}
-          />
-        </div>
-      </div>
-    </div>
+    <Form onSubmit={handleSubmit}>
+      { typeof children === 'function' &&
+        children({ form, toggleCodeView, ...rest })
+      }
+      { children && typeof children !== 'function' && children }
+      { !children &&
+        <Component form={form} {...rest} />
+      }
+    </Form>
+    <Issues
+      issues={issues}
+      show={submitFailed}
+    />
   </React.Fragment>
 );
 
@@ -134,5 +114,4 @@ export default compose(
     enableReinitialize: true,
   }),
   connect(mapStateToProps),
-  windowRootProvider,
 )(Editor);
