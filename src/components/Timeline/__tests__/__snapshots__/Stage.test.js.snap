@@ -5,6 +5,8 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Stage
     className=""
+    hasFilter={false}
+    hasSkipLogic={false}
     label=""
     onDeleteStage={[Function]}
     onEditSkipLogic={[Function]}
@@ -31,7 +33,9 @@ ShallowWrapper {
           className="timeline-stage__notch"
           onClick={[Function]}
         />,
-        <getContext(Draft(Component))
+        <getContext(Draft(EditStageButton))
+          hasFilter={false}
+          hasSkipLogic={false}
           label=""
           onEditStage={[Function]}
           type="Foo"
@@ -102,6 +106,8 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
+          "hasFilter": false,
+          "hasSkipLogic": false,
           "label": "",
           "onEditStage": [Function],
           "type": "Foo",
@@ -277,7 +283,9 @@ ShallowWrapper {
             className="timeline-stage__notch"
             onClick={[Function]}
           />,
-          <getContext(Draft(Component))
+          <getContext(Draft(EditStageButton))
+            hasFilter={false}
+            hasSkipLogic={false}
             label=""
             onEditStage={[Function]}
             type="Foo"
@@ -348,6 +356,8 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
+            "hasFilter": false,
+            "hasSkipLogic": false,
             "label": "",
             "onEditStage": [Function],
             "type": "Foo",
@@ -539,6 +549,5 @@ ShallowWrapper {
     Symbol(enzyme.__providerValues__): undefined,
   },
   Symbol(enzyme.__providerValues__): Map {},
-  Symbol(enzyme.__childContext__): null,
 }
 `;
