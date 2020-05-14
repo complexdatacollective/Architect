@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import Section from '@components/sections/Section';
 import { getFieldId } from '../../utils/issues';
 import * as ArchitectFields from '../Form/Fields';
 import { ValidatedField } from '../Form';
-import Guidance from '../Guidance';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
@@ -25,11 +25,17 @@ const TypeEditor = ({
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
   return (
-    <React.Fragment>
-      { type && <h1 className="editor__heading">Edit {entity}</h1> }
-      { !type && <h1 className="editor__heading">Create {entity}</h1> }
+    <div className="stage-editor">
+      <div className="stage-heading">
+        <div className="stage-heading__name">
+          { type ? `Edit ${entity}` : `Create ${entity}` }
+        </div>
+        <div className="stage-heading__meta">
+          {type}
+        </div>
+      </div>
 
-      <Guidance contentId="guidance.registry.type.label" className="editor__section">
+      <Section>
         <h3 id={getFieldId('name')}>{entity} Type</h3>
         <p>
           What type of {entity} is this?
@@ -41,9 +47,9 @@ const TypeEditor = ({
           name="name"
           validation={{ required: true }}
         />
-      </Guidance>
+      </Section>
 
-      <Guidance contentId="guidance.registry.type.color" className="editor__section">
+      <Section>
         <h2 id={getFieldId('color')}>Color</h2>
         <p>
           Choose a color for this {entity} type.
@@ -55,11 +61,11 @@ const TypeEditor = ({
           paletteRange={paletteSize}
           validation={{ required: true }}
         />
-      </Guidance>
+      </Section>
 
       { entity === 'node' &&
         <React.Fragment>
-          <Guidance contentId="guidance.registry.type.icon" className="editor__section">
+          <Section>
             <h2 id={getFieldId('iconVariant')}>Icon</h2>
             <p>
               Choose an icon to display on interfaces that create this {entity}.
@@ -71,10 +77,10 @@ const TypeEditor = ({
               optionComponent={IconOption}
               validation={{ required: true }}
             />
-          </Guidance>
+          </Section>
 
           {!isNew &&
-            <Guidance contentId="guidance.registry.type.displayVariable" className="editor__section">
+            <Section>
               <h2>Display Variable</h2>
               <p>
                 Select a variable to use as a label when displaying this {entity}.
@@ -86,13 +92,13 @@ const TypeEditor = ({
               >
                 <option value="">&mdash; Select display variable &mdash;</option>
               </Field>
-            </Guidance>
+            </Section>
           }
         </React.Fragment>
       }
 
       {!isNew &&
-        <Guidance contentId="guidance.registry.type.variables" className="editor__section">
+        <Section>
           <Variables
             form={form}
             name="variables"
@@ -102,9 +108,9 @@ const TypeEditor = ({
               property: 'name',
             }}
           />
-        </Guidance>
+        </Section>
       }
-    </React.Fragment>
+    </div>
   );
 };
 
