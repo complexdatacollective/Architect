@@ -60,8 +60,7 @@ const ContextPanel = ({
         className="context-panel__controls"
       >
         <Checkbox
-          input={{ value: open }}
-          onClick={handleActivate}
+          input={{ value: open, onChange: handleActivate }}
           label={title}
         />
       </motion.div>
