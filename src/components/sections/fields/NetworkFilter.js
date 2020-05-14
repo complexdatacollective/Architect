@@ -32,7 +32,7 @@ const NetworkFilter = ({
       })
         .then((confirm) => {
           if (confirm) {
-            changeField('edit-stage', 'filter', {});
+            changeField('edit-stage', name, {});
           }
           return confirm;
         }),
