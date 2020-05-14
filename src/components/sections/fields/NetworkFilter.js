@@ -31,7 +31,9 @@ const NetworkFilter = ({
         confirmLabel: 'Clear filter',
       })
         .then((confirm) => {
-          changeField('edit-stage', 'filter', {});
+          if (confirm) {
+            changeField('edit-stage', 'filter', {});
+          }
           return confirm;
         }),
     [openDialog, changeField],

@@ -40,6 +40,7 @@ const ContextPanel = ({
     onDeactivate()
       .then((confirm) => {
         if (confirm) { setOpen(false); }
+        return confirm;
       });
   }, [onDeactivate, open, setOpen]);
 

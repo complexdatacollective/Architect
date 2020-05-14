@@ -20,7 +20,9 @@ const SkipLogic = ({
         confirmLabel: 'Clear skip logic',
       })
         .then((confirm) => {
-          changeField('edit-stage', 'skipLogic', null);
+          if (confirm) {
+            changeField('edit-stage', 'skipLogic', null);
+          }
           return confirm;
         }),
     [openDialog, changeField],
