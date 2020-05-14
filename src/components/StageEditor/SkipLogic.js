@@ -16,7 +16,8 @@ const SkipLogic = ({
     () =>
       openDialog({
         type: 'Warning',
-        title: 'This will clear skip logic',
+        title: 'This will clear your skip logic',
+        message: 'This will clear your skip logic, and delete any rules you have created. Do you want to continue?',
         confirmLabel: 'Clear skip logic',
       })
         .then((confirm) => {

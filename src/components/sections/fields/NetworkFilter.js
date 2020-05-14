@@ -27,12 +27,13 @@ const NetworkFilter = ({
     () =>
       openDialog({
         type: 'Warning',
-        title: 'This will clear filter',
+        title: 'This will clear your filter',
+        message: 'This will clear your filter, and delete any rules you have created. Do you want to continue?',
         confirmLabel: 'Clear filter',
       })
         .then((confirm) => {
           if (confirm) {
-            changeField('edit-stage', name, {});
+            changeField('edit-stage', name, null);
           }
           return confirm;
         }),
