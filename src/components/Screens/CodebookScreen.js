@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
 import Codebook from '@components/Codebook/Codebook';
 import Screen from '@components/Screen/Screen';
+import Layout, { Section, Heading } from '@components/EditorLayout';
 
 /**
  * This component acts as an index for types. i.e. Nodes and Edges,
@@ -35,24 +36,14 @@ class CodebookScreen extends Component {
         transitionState={transitionState}
         onAcknowledgeError={this.handleCancel}
       >
-        <div className="editor variable-registry">
-          <div className="editor__window">
-            <div className="editor__container">
-              <div className="editor__content">
-                <div className="stage-editor">
-                  <div className="stage-heading">
-                    <div className="stage-heading__name">
-                      Codebook
-                    </div>
-                  </div>
-                  <div className="stage-editor-section">
-                    <Codebook />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Layout>
+          <Heading>
+            Codebook
+          </Heading>
+          <Section>
+            <Codebook />
+          </Section>
+        </Layout>
       </Screen>
     );
   }

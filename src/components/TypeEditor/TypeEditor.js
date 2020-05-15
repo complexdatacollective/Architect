@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Section } from '@components/EditorLayout';
+import Layout, { Heading, Section } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
 import * as ArchitectFields from '../Form/Fields';
 import { ValidatedField } from '../Form';
@@ -25,15 +25,10 @@ const TypeEditor = ({
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
   return (
-    <div className="stage-editor">
-      <div className="stage-heading">
-        <div className="stage-heading__name">
-          { type ? `Edit ${entity}` : `Create ${entity}` }
-        </div>
-        <div className="stage-heading__meta">
-          {type}
-        </div>
-      </div>
+    <Layout>
+      <Heading meta={type}>
+        { type ? `Edit ${entity}` : `Create ${entity}` }
+      </Heading>
 
       <Section>
         <h3 id={getFieldId('name')}>{entity} Type</h3>
@@ -110,7 +105,7 @@ const TypeEditor = ({
           />
         </Section>
       }
-    </div>
+    </Layout>
   );
 };
 
