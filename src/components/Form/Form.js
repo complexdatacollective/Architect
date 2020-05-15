@@ -4,8 +4,8 @@ import { compose } from 'recompose';
 import { Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
-import stopPropagationFromHandler from '../../utils/stopPropagationFromHandler';
-
+import { Section } from '@components/EditorLayout';
+import stopPropagationFromHandler from '@app/utils/stopPropagationFromHandler';
 
 const formOptions = {
   touchOnBlur: false,
@@ -23,10 +23,10 @@ const Form = ({
     <div className="editable-list-form">
       <div className="editable-list-form__container">
         <form onSubmit={stopPropagationFromHandler(handleSubmit)} className="editable-list-form__content">
-          <h1>{title}</h1>
-          <div className="editable-list-form__fields">
-            {children}
-          </div>
+          <Section>
+            <h1>{title}</h1>
+          </Section>
+          {children}
         </form>
         <div className="editable-list-form__controls">
           <Button onClick={handleSubmit} type="submit">Save and continue</Button>

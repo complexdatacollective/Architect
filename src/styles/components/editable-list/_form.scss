@@ -15,7 +15,6 @@
     @include no-scrollbars;
     height: calc(100% - #{unit(8)});
     overflow-y: scroll;
-    padding: unit(6);
   }
 
   &__fields {
