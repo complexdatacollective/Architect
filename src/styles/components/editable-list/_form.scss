@@ -1,9 +1,9 @@
 .editable-list-form {
   flex: 1 1 auto;
   background: var(--background-light);
-  border-radius: unit(1);
+  border-radius: unit(1) unit(1) unit(1.5) unit(1.5);
   box-shadow: 0 0 4rem 0 var(--modal-window-box-shadow);
-  overflow: hidden;
+  // overflow: hidden;
 
   &__container {
     width: 100%;
@@ -23,9 +23,11 @@
   }
 
   &__controls {
-    position: sticky;
+    position: absolute;
     bottom: 0;
     left: 0;
+    width: 100%;
+    border-radius: 0 0 unit(1) unit(1);
     padding: unit(1) unit(2);
     background: var(--architect-control-bar-background);
     display: flex;
