@@ -39,6 +39,7 @@ const NodePanel = ({ fieldId, ...rest }) => (
     <NetworkFilter
       variant="contrast"
       name={`${fieldId}.filter`}
+      title="Use node filter"
     />
   </Item>
 );

@@ -2,7 +2,7 @@ import React, { useMemo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
-import Checkbox from '@codaco/ui/lib/components/Fields/Checkbox';
+import Toggle from '@codaco/ui/lib/components/Fields/Toggle';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 
 const ContextPanel = ({
@@ -60,7 +60,7 @@ const ContextPanel = ({
       <motion.div
         className="context-panel__controls"
       >
-        <Checkbox
+        <Toggle
           input={{ value: open, onChange: handleActivate }}
           label={title}
         />
