@@ -44,40 +44,25 @@ ShallowWrapper {
           Continue
         </Button>,
       ],
-      "children": <div
-        className="editor variable-registry"
+      "children": <Layout
+        className=""
       >
-        <div
-          className="editor__window"
+        <SectionsHeading
+          location={null}
+          meta={null}
         >
-          <div
-            className="editor__container"
-          >
-            <div
-              className="editor__content"
-            >
-              <div
-                className="stage-editor"
-              >
-                <div
-                  className="stage-heading"
-                >
-                  <div
-                    className="stage-heading__name"
-                  >
-                    Codebook
-                  </div>
-                </div>
-                <div
-                  className="stage-editor-section"
-                >
-                  <Connect(Codebook) />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>,
+          Codebook
+        </SectionsHeading>
+        <Section
+          className=""
+          compactNext={false}
+          contentId={null}
+          disabled={false}
+          group={false}
+        >
+          <Connect(Codebook) />
+        </Section>
+      </Layout>,
       "onAcknowledgeError": [Function],
       "show": true,
       "transitionState": null,
@@ -86,213 +71,68 @@ ShallowWrapper {
     "rendered": Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "host",
+      "nodeType": "function",
       "props": Object {
-        "children": <div
-          className="editor__window"
-        >
-          <div
-            className="editor__container"
+        "children": Array [
+          <SectionsHeading
+            location={null}
+            meta={null}
           >
-            <div
-              className="editor__content"
-            >
-              <div
-                className="stage-editor"
-              >
-                <div
-                  className="stage-heading"
-                >
-                  <div
-                    className="stage-heading__name"
-                  >
-                    Codebook
-                  </div>
-                </div>
-                <div
-                  className="stage-editor-section"
-                >
-                  <Connect(Codebook) />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>,
-        "className": "editor variable-registry",
+            Codebook
+          </SectionsHeading>,
+          <Section
+            className=""
+            compactNext={false}
+            contentId={null}
+            disabled={false}
+            group={false}
+          >
+            <Connect(Codebook) />
+          </Section>,
+        ],
+        "className": "",
       },
       "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <div
-            className="editor__container"
-          >
-            <div
-              className="editor__content"
-            >
-              <div
-                className="stage-editor"
-              >
-                <div
-                  className="stage-heading"
-                >
-                  <div
-                    className="stage-heading__name"
-                  >
-                    Codebook
-                  </div>
-                </div>
-                <div
-                  className="stage-editor-section"
-                >
-                  <Connect(Codebook) />
-                </div>
-              </div>
-            </div>
-          </div>,
-          "className": "editor__window",
-        },
-        "ref": null,
-        "rendered": Object {
+      "rendered": Array [
+        Object {
           "instance": null,
           "key": undefined,
-          "nodeType": "host",
+          "nodeType": "function",
           "props": Object {
-            "children": <div
-              className="editor__content"
-            >
-              <div
-                className="stage-editor"
-              >
-                <div
-                  className="stage-heading"
-                >
-                  <div
-                    className="stage-heading__name"
-                  >
-                    Codebook
-                  </div>
-                </div>
-                <div
-                  className="stage-editor-section"
-                >
-                  <Connect(Codebook) />
-                </div>
-              </div>
-            </div>,
-            "className": "editor__container",
+            "children": "Codebook",
+            "location": null,
+            "meta": null,
+          },
+          "ref": null,
+          "rendered": "Codebook",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": <Connect(Codebook) />,
+            "className": "",
+            "compactNext": false,
+            "contentId": null,
+            "disabled": false,
+            "group": false,
           },
           "ref": null,
           "rendered": Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": <div
-                className="stage-editor"
-              >
-                <div
-                  className="stage-heading"
-                >
-                  <div
-                    className="stage-heading__name"
-                  >
-                    Codebook
-                  </div>
-                </div>
-                <div
-                  className="stage-editor-section"
-                >
-                  <Connect(Codebook) />
-                </div>
-              </div>,
-              "className": "editor__content",
-            },
+            "nodeType": "class",
+            "props": Object {},
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <div
-                    className="stage-heading"
-                  >
-                    <div
-                      className="stage-heading__name"
-                    >
-                      Codebook
-                    </div>
-                  </div>,
-                  <div
-                    className="stage-editor-section"
-                  >
-                    <Connect(Codebook) />
-                  </div>,
-                ],
-                "className": "stage-editor",
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <div
-                      className="stage-heading__name"
-                    >
-                      Codebook
-                    </div>,
-                    "className": "stage-heading",
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": "Codebook",
-                      "className": "stage-heading__name",
-                    },
-                    "ref": null,
-                    "rendered": "Codebook",
-                    "type": "div",
-                  },
-                  "type": "div",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": <Connect(Codebook) />,
-                    "className": "stage-editor-section",
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {},
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                  "type": "div",
-                },
-              ],
-              "type": "div",
-            },
-            "type": "div",
+            "rendered": null,
+            "type": [Function],
           },
-          "type": "div",
+          "type": [Function],
         },
-        "type": "div",
-      },
-      "type": "div",
+      ],
+      "type": [Function],
     },
     "type": [Function],
   },
@@ -315,40 +155,25 @@ ShallowWrapper {
             Continue
           </Button>,
         ],
-        "children": <div
-          className="editor variable-registry"
+        "children": <Layout
+          className=""
         >
-          <div
-            className="editor__window"
+          <SectionsHeading
+            location={null}
+            meta={null}
           >
-            <div
-              className="editor__container"
-            >
-              <div
-                className="editor__content"
-              >
-                <div
-                  className="stage-editor"
-                >
-                  <div
-                    className="stage-heading"
-                  >
-                    <div
-                      className="stage-heading__name"
-                    >
-                      Codebook
-                    </div>
-                  </div>
-                  <div
-                    className="stage-editor-section"
-                  >
-                    <Connect(Codebook) />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>,
+            Codebook
+          </SectionsHeading>
+          <Section
+            className=""
+            compactNext={false}
+            contentId={null}
+            disabled={false}
+            group={false}
+          >
+            <Connect(Codebook) />
+          </Section>
+        </Layout>,
         "onAcknowledgeError": [Function],
         "show": true,
         "transitionState": null,
@@ -357,213 +182,68 @@ ShallowWrapper {
       "rendered": Object {
         "instance": null,
         "key": undefined,
-        "nodeType": "host",
+        "nodeType": "function",
         "props": Object {
-          "children": <div
-            className="editor__window"
-          >
-            <div
-              className="editor__container"
+          "children": Array [
+            <SectionsHeading
+              location={null}
+              meta={null}
             >
-              <div
-                className="editor__content"
-              >
-                <div
-                  className="stage-editor"
-                >
-                  <div
-                    className="stage-heading"
-                  >
-                    <div
-                      className="stage-heading__name"
-                    >
-                      Codebook
-                    </div>
-                  </div>
-                  <div
-                    className="stage-editor-section"
-                  >
-                    <Connect(Codebook) />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>,
-          "className": "editor variable-registry",
+              Codebook
+            </SectionsHeading>,
+            <Section
+              className=""
+              compactNext={false}
+              contentId={null}
+              disabled={false}
+              group={false}
+            >
+              <Connect(Codebook) />
+            </Section>,
+          ],
+          "className": "",
         },
         "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <div
-              className="editor__container"
-            >
-              <div
-                className="editor__content"
-              >
-                <div
-                  className="stage-editor"
-                >
-                  <div
-                    className="stage-heading"
-                  >
-                    <div
-                      className="stage-heading__name"
-                    >
-                      Codebook
-                    </div>
-                  </div>
-                  <div
-                    className="stage-editor-section"
-                  >
-                    <Connect(Codebook) />
-                  </div>
-                </div>
-              </div>
-            </div>,
-            "className": "editor__window",
-          },
-          "ref": null,
-          "rendered": Object {
+        "rendered": Array [
+          Object {
             "instance": null,
             "key": undefined,
-            "nodeType": "host",
+            "nodeType": "function",
             "props": Object {
-              "children": <div
-                className="editor__content"
-              >
-                <div
-                  className="stage-editor"
-                >
-                  <div
-                    className="stage-heading"
-                  >
-                    <div
-                      className="stage-heading__name"
-                    >
-                      Codebook
-                    </div>
-                  </div>
-                  <div
-                    className="stage-editor-section"
-                  >
-                    <Connect(Codebook) />
-                  </div>
-                </div>
-              </div>,
-              "className": "editor__container",
+              "children": "Codebook",
+              "location": null,
+              "meta": null,
+            },
+            "ref": null,
+            "rendered": "Codebook",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": <Connect(Codebook) />,
+              "className": "",
+              "compactNext": false,
+              "contentId": null,
+              "disabled": false,
+              "group": false,
             },
             "ref": null,
             "rendered": Object {
               "instance": null,
               "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <div
-                  className="stage-editor"
-                >
-                  <div
-                    className="stage-heading"
-                  >
-                    <div
-                      className="stage-heading__name"
-                    >
-                      Codebook
-                    </div>
-                  </div>
-                  <div
-                    className="stage-editor-section"
-                  >
-                    <Connect(Codebook) />
-                  </div>
-                </div>,
-                "className": "editor__content",
-              },
+              "nodeType": "class",
+              "props": Object {},
               "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": Array [
-                    <div
-                      className="stage-heading"
-                    >
-                      <div
-                        className="stage-heading__name"
-                      >
-                        Codebook
-                      </div>
-                    </div>,
-                    <div
-                      className="stage-editor-section"
-                    >
-                      <Connect(Codebook) />
-                    </div>,
-                  ],
-                  "className": "stage-editor",
-                },
-                "ref": null,
-                "rendered": Array [
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <div
-                        className="stage-heading__name"
-                      >
-                        Codebook
-                      </div>,
-                      "className": "stage-heading",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "host",
-                      "props": Object {
-                        "children": "Codebook",
-                        "className": "stage-heading__name",
-                      },
-                      "ref": null,
-                      "rendered": "Codebook",
-                      "type": "div",
-                    },
-                    "type": "div",
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "host",
-                    "props": Object {
-                      "children": <Connect(Codebook) />,
-                      "className": "stage-editor-section",
-                    },
-                    "ref": null,
-                    "rendered": Object {
-                      "instance": null,
-                      "key": undefined,
-                      "nodeType": "class",
-                      "props": Object {},
-                      "ref": null,
-                      "rendered": null,
-                      "type": [Function],
-                    },
-                    "type": "div",
-                  },
-                ],
-                "type": "div",
-              },
-              "type": "div",
+              "rendered": null,
+              "type": [Function],
             },
-            "type": "div",
+            "type": [Function],
           },
-          "type": "div",
-        },
-        "type": "div",
+        ],
+        "type": [Function],
       },
       "type": [Function],
     },
