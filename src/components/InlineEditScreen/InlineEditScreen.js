@@ -27,26 +27,24 @@ const InlineEditScreen = ({
 
   return (
     <Fade in={show}>
-      <div className="editable-list-window" onClick={e => e.stopPropagation()}>
+      <div className="inline-edit-screen" onClick={e => e.stopPropagation()}>
         <Flipped flipId={flipId}>
-          <div className="editable-list-form">
-            <div className="editable-list-form__container">
-              <div className="editable-list-form__content">
-                <Layout>
-                  { title &&
-                    <Section>
-                      <h1>{title}</h1>
-                    </Section>
-                  }
-                  <Form form={form} onSubmit={onSubmit} {...rest}>
-                    {children}
-                  </Form>
-                </Layout>
-              </div>
-              <div className="editable-list-form__controls">
-                <Button onClick={handleSubmit} type="submit">Save and continue</Button>
-                <Button onClick={onCancel} color="platinum">Cancel</Button>
-              </div>
+          <div className="inline-edit-screen__container">
+            <div className="inline-edit-screen__content">
+              <Layout>
+                { title &&
+                  <Section>
+                    <h1>{title}</h1>
+                  </Section>
+                }
+                <Form form={form} onSubmit={onSubmit} {...rest}>
+                  {children}
+                </Form>
+              </Layout>
+            </div>
+            <div className="inline-edit-screen__controls">
+              <Button onClick={handleSubmit} type="submit">Save and continue</Button>
+              <Button onClick={onCancel} color="platinum">Cancel</Button>
             </div>
           </div>
         </Flipped>
