@@ -8,7 +8,7 @@ const FilteredNodeType = props => (
     <Row>
       <NodeTypeFields {...props} />
     </Row>
-    <NetworkFilter {...props} />
+    <NetworkFilter {...props} title="Use node filter" />
   </Section>
 );
 

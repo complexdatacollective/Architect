@@ -31,7 +31,7 @@ const SkipLogic = ({
 
   return (
     <ContextPanel
-      title="Skip Logic (optional)"
+      title="Use skip logic"
       isActive={hasSkipLogic}
       onDeactivate={handleDeactivate}
     >

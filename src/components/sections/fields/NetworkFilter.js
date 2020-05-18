@@ -21,6 +21,7 @@ const NetworkFilter = ({
   changeField,
   openDialog,
   name,
+  title,
   variant,
 }) => {
   const handleDeactivate = useCallback(
@@ -42,7 +43,7 @@ const NetworkFilter = ({
 
   return (
     <ContextPanel
-      title="Filter (optional)"
+      title={title}
       id={getFieldId(name)}
       isActive={hasFilter}
       onDeactivate={handleDeactivate}
@@ -67,10 +68,12 @@ NetworkFilter.propTypes = {
   openDialog: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   variant: PropTypes.string,
+  title: PropTypes.string,
 };
 
 NetworkFilter.defaultProps = {
   variant: null,
+  title: 'Use network filter',
 };
 
 const mapStateToProps = (state, props) => ({
