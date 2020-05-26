@@ -20,65 +20,56 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "host",
+    "nodeType": "function",
     "props": Object {
-      "children": <pre>
-        <code>
-          {}
-        </code>
-      </pre>,
+      "animate": "hide",
+      "children": Array [
+        <div
+          className="code-view__content"
+        >
+          <pre>
+            <code>
+              {}
+            </code>
+          </pre>
+        </div>,
+        <div
+          className="code-view__controls"
+          onClick={[Function]}
+        >
+          Close code view
+        </div>,
+      ],
       "className": "code-view",
-      "onClick": [Function],
+      "initial": "hide",
+      "transition": Object {
+        "duration": NaN,
+        "ease": "easeInOut",
+      },
+      "variants": Object {
+        "hide": Object {
+          "opacity": 0,
+          "translateY": "-100%",
+        },
+        "show": Object {
+          "opacity": 1,
+          "translateY": "0%",
+        },
+      },
     },
     "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": <code>
-          {}
-        </code>,
-      },
-      "ref": null,
-      "rendered": Object {
+    "rendered": Array [
+      Object {
         "instance": null,
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "children": "{}",
-        },
-        "ref": null,
-        "rendered": "{}",
-        "type": "code",
-      },
-      "type": "pre",
-    },
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": <pre>
-          <code>
-            {}
-          </code>
-        </pre>,
-        "className": "code-view",
-        "onClick": [Function],
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": <code>
-            {}
-          </code>,
+          "children": <pre>
+            <code>
+              {}
+            </code>
+          </pre>,
+          "className": "code-view__content",
         },
         "ref": null,
         "rendered": Object {
@@ -86,15 +77,144 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
-            "children": "{}",
+            "children": <code>
+              {}
+            </code>,
           },
           "ref": null,
-          "rendered": "{}",
-          "type": "code",
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "{}",
+            },
+            "ref": null,
+            "rendered": "{}",
+            "type": "code",
+          },
+          "type": "pre",
         },
-        "type": "pre",
+        "type": "div",
       },
-      "type": "div",
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Close code view",
+          "className": "code-view__controls",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "Close code view",
+        "type": "div",
+      },
+    ],
+    "type": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "animate": "hide",
+        "children": Array [
+          <div
+            className="code-view__content"
+          >
+            <pre>
+              <code>
+                {}
+              </code>
+            </pre>
+          </div>,
+          <div
+            className="code-view__controls"
+            onClick={[Function]}
+          >
+            Close code view
+          </div>,
+        ],
+        "className": "code-view",
+        "initial": "hide",
+        "transition": Object {
+          "duration": NaN,
+          "ease": "easeInOut",
+        },
+        "variants": Object {
+          "hide": Object {
+            "opacity": 0,
+            "translateY": "-100%",
+          },
+          "show": Object {
+            "opacity": 1,
+            "translateY": "0%",
+          },
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <pre>
+              <code>
+                {}
+              </code>
+            </pre>,
+            "className": "code-view__content",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <code>
+                {}
+              </code>,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "{}",
+              },
+              "ref": null,
+              "rendered": "{}",
+              "type": "code",
+            },
+            "type": "pre",
+          },
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Close code view",
+            "className": "code-view__controls",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "Close code view",
+          "type": "div",
+        },
+      ],
+      "type": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
     },
   ],
   Symbol(enzyme.__options__): Object {

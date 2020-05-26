@@ -1,64 +1,72 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { compose } from 'recompose';
 import window from '@codaco/ui/lib/components/window';
+import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import ControlBar from '../ControlBar';
 import { ScreenErrorBoundary } from '../Errors';
 
-class Screen extends PureComponent {
-  static propTypes = {
-    children: PropTypes.node,
-    transitionState: PropTypes.string,
-    buttons: PropTypes.arrayOf(PropTypes.node),
-    secondaryButtons: PropTypes.arrayOf(PropTypes.node),
-    type: PropTypes.string,
-    show: PropTypes.bool,
-    onAcknowledgeError: PropTypes.func,
-  };
+const Screen = ({
+  buttons,
+  secondaryButtons,
+  transitionState,
+  onAcknowledgeError,
+  children,
+  type,
+  setWindowRoot,
+  windowRoot,
+}) => {
+  const classes = cx('screen', `screen--${type}`);
 
-  static defaultProps = {
-    type: 'default',
-    transitionState: null,
-    children: null,
-    buttons: [],
-    show: true,
-    secondaryButtons: [],
-    onAcknowledgeError: () => {},
-  }
+  const isEntering = transitionState === 'entering' || transitionState === 'entered';
 
-  render() {
-    const {
-      buttons,
-      secondaryButtons,
-      transitionState,
-      onAcknowledgeError,
-      children,
-      type,
-      show,
-    } = this.props;
-
-    const classes = cx('arch-card', `arch-card--${type}`);
-
-    const isEntering = transitionState === 'entering' || transitionState === 'entered';
-
-    return (
-      <div className={classes}>
-        <div className="arch-card__content">
+  return (
+    <div className={classes}>
+      <div className="screen__container" ref={setWindowRoot}>
+        <div className="screen__content">
           <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
-            { show && children }
+            { typeof children === 'function' &&
+              children({ windowRoot })
+            }
+            { children && typeof children !== 'function' && children }
           </ScreenErrorBoundary>
         </div>
-        <ControlBar
-          show={isEntering}
-          className="control-bar--delayed"
-          flip
-          buttons={buttons}
-          secondaryButtons={secondaryButtons}
-        />
       </div>
-    );
-  }
-}
+      <ControlBar
+        show={isEntering}
+        className="screen__controls"
+        flip
+        buttons={buttons}
+        secondaryButtons={secondaryButtons}
+      />
+    </div>
+  );
+};
+
+Screen.propTypes = {
+  children: PropTypes.node,
+  transitionState: PropTypes.string,
+  buttons: PropTypes.arrayOf(PropTypes.node),
+  secondaryButtons: PropTypes.arrayOf(PropTypes.node),
+  type: PropTypes.string,
+  onAcknowledgeError: PropTypes.func,
+  windowRoot: PropTypes.any.isRequired,
+  setWindowRoot: PropTypes.func.isRequired,
+};
+
+Screen.defaultProps = {
+  type: 'default',
+  transitionState: null,
+  children: null,
+  buttons: [],
+  secondaryButtons: [],
+  onAcknowledgeError: () => {},
+};
 
 export { Screen };
-export default window(Screen);
+
+export default compose(
+  window,
+  windowRootProvider,
+)(Screen);

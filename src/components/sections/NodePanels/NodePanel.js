@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import DataSource from '@components/Form/Fields/DataSource';
-import { Filter, withFieldConnector, withStoreConnector, ruleValidator } from '@components/Query';
 import ValidatedField from '@components/Form/ValidatedField';
 import { Item, Row } from '@components/OrderedList';
 import { getFieldId } from '@app/utils/issues';
-
-const FilterField = withFieldConnector(withStoreConnector(Filter));
+import NetworkFilter from '@components/sections/fields/NetworkFilter';
 
 const NodePanel = ({ fieldId, ...rest }) => (
   <Item {...rest}>
@@ -39,23 +36,11 @@ const NodePanel = ({ fieldId, ...rest }) => (
         canUseExisting
       />
     </Row>
-    <Row>
-      <h3
-        id={getFieldId(`${fieldId}.filter`)}
-        data-name="Panel filter"
-      >
-        Filter <small>(optional)</small>
-      </h3>
-      <p>
-        You can optionally filter the data to be shown in this panel, by creating one or more rules
-        using the options below.
-      </p>
-      <Field
-        name={`${fieldId}.filter`}
-        component={FilterField}
-        validate={ruleValidator}
-      />
-    </Row>
+    <NetworkFilter
+      variant="contrast"
+      name={`${fieldId}.filter`}
+      title="Use node filter"
+    />
   </Item>
 );
 

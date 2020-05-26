@@ -1,15 +1,13 @@
 import {
   Name,
-  NodeType,
-  Filter,
+  FilteredNodeType,
   CategoricalBinPrompts,
-} from '../../sections';
+} from '@components/sections';
 
 const CategoricalBin = {
   sections: [
     Name,
-    NodeType,
-    Filter,
+    FilteredNodeType,
     CategoricalBinPrompts,
   ],
 };

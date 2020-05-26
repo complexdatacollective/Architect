@@ -5,14 +5,16 @@
 @import './components/rule';
 @import './components/filter-group';
 @import './components/stage-editor';
+@import './components/stage-heading';
 @import './components/type-editor';
+@import './components/context-panel';
 @import './components/guided';
 @import './components/overview';
 @import './components/timeline';
 @import './components/code-view';
 @import './components/control-bar';
 @import './components/panel';
-@import './components/card';
+@import './components/screen';
 @import './components/cards';
 @import './components/start';
 @import './components/items';
@@ -36,3 +38,4 @@
 @import './components/new-stage';
 @import './components/codebook';
 @import './components/screen-link';
+@import './components/inline-edit-screen';

@@ -7,11 +7,10 @@ import {
 import { Flipper } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
+import { Section } from '@components/EditorLayout';
+import InlineEditScreen from '@components/InlineEditScreen';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
-import Section from '../sections/Section'; // Should this exist out of sections if it's used here?
-import Window from '../Window';
-import Form from '../Form';
 import Grid from './Grid';
 import withEditHandlers from './withEditHandlers';
 
@@ -84,24 +83,23 @@ const GridManager = ({
             </div>
           }
         </div>
-        <Window show={!!editField}>
-          <Form
-            initialValues={initialValues}
-            flipId={editField}
-            title={title}
-            onSubmit={handleUpdate}
-            onSubmitFail={handleSubmitFail}
-            onCancel={handleResetEditField}
+        <InlineEditScreen
+          show={!!editField}
+          initialValues={initialValues}
+          flipId={editField}
+          title={title}
+          onSubmit={handleUpdate}
+          onSubmitFail={handleSubmitFail}
+          onCancel={handleResetEditField}
+          form={formName}
+        >
+          <EditComponent
+            {...rest}
             form={formName}
-          >
-            <EditComponent
-              {...rest}
-              form={formName}
-              fieldId={editField}
-              onComplete={handleResetEditField}
-            />
-          </Form>
-        </Window>
+            fieldId={editField}
+            onComplete={handleResetEditField}
+          />
+        </InlineEditScreen>
       </Flipper>
     </Section>
   );

@@ -9,8 +9,8 @@ import safeName from '@app/utils/safeName';
 import ValidatedField from '@components/Form/ValidatedField';
 import Select from '@components/Form/Fields/Select';
 import Options from '@components/Options';
-import Section from '@components/sections/Section';
-import FormWindow from '@components/FormWindow';
+import { Section } from '@components/EditorLayout';
+import InlineEditScreen from '@components/InlineEditScreen';
 import withNewVariableHandler, { form } from './withNewVariableHandler';
 
 
@@ -41,7 +41,7 @@ class NewVariableWindow extends Component {
     } = this.props;
 
     return (
-      <FormWindow
+      <InlineEditScreen
         show={show}
         form={form}
         onSubmit={handleCreateNewVariable}
@@ -85,7 +85,7 @@ class NewVariableWindow extends Component {
             />
           </Section>
         }
-      </FormWindow>
+      </InlineEditScreen>
     );
   }
 }

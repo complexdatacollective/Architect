@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '../Form/ValidatedField';
 import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
 import withMapFormToProps from '../enhancers/withMapFormToProps';
 import withExternalData from '../enhancers/withExternalData';
-import Section from './Section';
-import Row from './Row';
 import withVariableOptionsFromExternalData from '../enhancers/withVariableOptionsFromExternalData';
 import Tip from '../Tip';
 

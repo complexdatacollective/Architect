@@ -1,0 +1,51 @@
+.context-panel {
+  background: var(--architect-context-panel);
+  color: var(--architect-context-text);
+  border-radius: 1rem 1rem 0 0;
+  overflow: hidden;
+
+  &__controls {
+    background: var(--architect-context-controls);
+    padding: unit(2) unit(3);
+    display: flex;
+    align-items: center;
+
+    .form-field-container,
+    .form-field {
+      padding: 0;
+      margin: 0;
+      min-height: 0;
+      background: none;
+
+      .form-field-toggle__button {
+        background: var(--color-charcoal);
+
+        &::before {
+          background: var(--color-white);
+        }
+      }
+    }
+  }
+
+  &__panel {
+    overflow: hidden;
+
+    &-container {
+      padding: unit(2) unit(3) unit(4);
+    }
+  }
+
+  &--contrast {
+    background: var(--architect-context-panel--contrast);
+    color: var(--architect-context-text--contrast);
+
+    .context-panel__controls {
+      background: var(--architect-context-controls--contrast);
+
+      .form-field-container,
+      .form-field {
+        color: var(--text-light);
+      }
+    }
+  }
+}

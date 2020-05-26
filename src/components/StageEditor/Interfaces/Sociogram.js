@@ -1,16 +1,14 @@
 import {
   Name,
   Background,
-  NodeType,
-  Filter,
+  FilteredNodeType,
   SociogramPrompts,
-} from '../../sections';
+} from '@components/sections';
 
 const Sociogram = {
   sections: [
     Name,
-    NodeType,
-    Filter,
+    FilteredNodeType,
     Background,
     SociogramPrompts,
   ],

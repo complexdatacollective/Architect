@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { omit } from 'lodash';
-import prune from '../../utils/prune';
-import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
+import { actionCreators as stageActions } from '@modules/protocol/stages';
 
 const mapDispatchToProps = {
   updateStage: stageActions.updateStage,
@@ -12,7 +11,7 @@ const mapDispatchToProps = {
 const stageEditorHanders = withHandlers({
   onSubmit: ({ id, insertAtIndex, updateStage, createStage, onComplete }) =>
     (stage) => {
-      const normalizedStage = omit(prune(stage), '_modified');
+      const normalizedStage = omit(stage, '_modified');
 
       if (id) {
         updateStage(id, normalizedStage);

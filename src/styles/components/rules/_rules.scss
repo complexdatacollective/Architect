@@ -1,7 +1,7 @@
 .rules-rules {
   &__join,
   &__preview {
-    margin-top: unit(2);
+    margin-top: unit(4);
   }
 
   &__add-new {
@@ -12,19 +12,17 @@
     }
   }
 
-  &__error {
-    opacity: 0;
-    max-height: 0;
-    color: var(--error);
-    margin: unit(1) 0 0;
-    transition: opacity var(--animation-easing) var(--animation-duration-standard),
-    max-height var(--animation-easing) var(--animation-duration-standard);
+  .rules-preview-rules {
+    border: 1px solid transparent;
   }
 
   &--has-error {
-    .rules-rules__error {
-      opacity: 1;
-      max-height: 50px;
+    .rules-preview-rules {
+      border-color: var(--error);
     }
+  }
+
+  .form-field-radio-group {
+    background-color: var(--color-white);
   }
 }

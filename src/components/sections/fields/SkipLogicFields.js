@@ -1,33 +1,37 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import Select from '@components/Form/Fields/Select';
+import ValidatedField from '@components/Form/ValidatedField';
 import { Query, withStoreConnector, withFieldConnector, ruleValidator } from '@components/Query';
+import { Row } from '@components/EditorLayout';
 
 const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 
-const SkipLogicEditor = () => (
-  <div>
-    <h1>Edit Skip Logic</h1>
-    <div>
-      <Field
+const SkipLogicFields = () => (
+  <React.Fragment>
+    <Row>
+      <h2>Show/Hide</h2>
+      <ValidatedField
+        className="form-fields-select--light-background"
         component={Select}
-        name="action"
+        name="skipLogic.action"
         options={[
           { value: 'SHOW', label: 'Show this stage if' },
           { value: 'SKIP', label: 'Skip this stage if' },
         ]}
+        validation={{ required: true }}
       />
-    </div>
-    <div>
+    </Row>
+    <Row>
       <Field
         component={ConnectedQuery}
-        name="filter"
+        name="skipLogic.filter"
         validate={ruleValidator}
       />
-    </div>
-  </div>
+    </Row>
+  </React.Fragment>
 );
 
-export { SkipLogicEditor };
+export { SkipLogicFields };
 
-export default SkipLogicEditor;
+export default SkipLogicFields;

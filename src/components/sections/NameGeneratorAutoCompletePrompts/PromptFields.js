@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
 import AssignAttributes from '../../AssignAttributes';
-import Row from '../Row';
-import Section from '../Section';
 import Tip from '../../Tip';
 
 const PromptFields = ({

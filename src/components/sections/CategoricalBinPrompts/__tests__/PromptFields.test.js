@@ -71,6 +71,7 @@ export const testPromptFields = (PromptFieldsComponent) => {
             form={mockFormName}
             entity="node"
             type="person"
+            handleDeleteVariable={jest.fn()}
           />
         ),
         mockStore,
@@ -110,6 +111,7 @@ export const testPromptFields = (PromptFieldsComponent) => {
             form={mockFormName}
             entity="node"
             type="person"
+            handleDeleteVariable={jest.fn()}
           />
         ),
         mockStore,

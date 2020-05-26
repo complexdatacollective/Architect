@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { compose } from 'recompose';
 import { Toggle } from '@codaco/ui/lib/components/Fields';
+import { Section } from '@components/EditorLayout';
 import DetachedField from '../../DetachedField';
 import Form from '../Form';
 import QuickAdd from '../QuickAdd';
-import Section from '../Section';
 import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import withQuickAddState from './withQuickAddState';

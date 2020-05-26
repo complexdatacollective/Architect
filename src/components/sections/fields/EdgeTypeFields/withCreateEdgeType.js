@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { change } from 'redux-form';
 import { withHandlers, compose } from 'recompose';
-import { actionCreators as screenActions } from '../../../ducks/modules/ui/screens';
-import { makeScreenMessageListener } from '../../../selectors/ui';
+import { actionCreators as screenActions } from '@modules/ui/screens';
+import { makeScreenMessageListener } from '@selectors/ui';
 
 const mapStateToProps = () => {
   const screenMessageListener = makeScreenMessageListener('type');
@@ -30,7 +30,7 @@ const createTypeHandlers = withHandlers({
     },
   handleOpenCreateNewType: ({ openScreen }) =>
     () => {
-      openScreen('type', { entity: 'node' });
+      openScreen('type', { entity: 'edge' });
     },
 });
 

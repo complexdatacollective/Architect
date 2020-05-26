@@ -29,6 +29,23 @@ a {
   }
 }
 
+// TODO: why is this broken (ui)?
+.form-field-checkbox,
+.form-field-radio {
+  font-size: 0;
+
+  &__label {
+    font-size: 1rem;
+  }
+
+  &__input {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
+}
+
 .form-fields-textarea__error {
   max-height: initial;
   opacity: 1;

@@ -5,6 +5,8 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <Stage
     className=""
+    hasFilter={false}
+    hasSkipLogic={false}
     label=""
     onDeleteStage={[Function]}
     onEditSkipLogic={[Function]}
@@ -31,7 +33,9 @@ ShallowWrapper {
           className="timeline-stage__notch"
           onClick={[Function]}
         />,
-        <getContext(Draft(Component))
+        <getContext(Draft(EditStageButton))
+          hasFilter={false}
+          hasSkipLogic={false}
           label=""
           onEditStage={[Function]}
           type="Foo"
@@ -56,15 +60,6 @@ ShallowWrapper {
             </div>
             Add stage before
           </a>
-          <getContext(Draft(Component))
-            onEditSkipLogic={[Function]}
-            zoomColors={
-              Array [
-                "#ffffff",
-                "#f2b700",
-              ]
-            }
-          />
           <a
             className="timeline-stage__control"
             onClick={[Function]}
@@ -90,6 +85,7 @@ ShallowWrapper {
         </div>,
       ],
       "className": "timeline-stage",
+      "onEditSkipLogic": [Function],
     },
     "ref": null,
     "rendered": Array [
@@ -110,6 +106,8 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "function",
         "props": Object {
+          "hasFilter": false,
+          "hasSkipLogic": false,
           "label": "",
           "onEditStage": [Function],
           "type": "Foo",
@@ -139,15 +137,6 @@ ShallowWrapper {
               </div>
               Add stage before
             </a>,
-            <getContext(Draft(Component))
-              onEditSkipLogic={[Function]}
-              zoomColors={
-                Array [
-                  "#ffffff",
-                  "#f2b700",
-                ]
-              }
-            />,
             <a
               className="timeline-stage__control"
               onClick={[Function]}
@@ -208,21 +197,6 @@ ShallowWrapper {
               "Add stage before",
             ],
             "type": "a",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "onEditSkipLogic": [Function],
-              "zoomColors": Array [
-                "#ffffff",
-                "#f2b700",
-              ],
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
           },
           Object {
             "instance": null,
@@ -309,7 +283,9 @@ ShallowWrapper {
             className="timeline-stage__notch"
             onClick={[Function]}
           />,
-          <getContext(Draft(Component))
+          <getContext(Draft(EditStageButton))
+            hasFilter={false}
+            hasSkipLogic={false}
             label=""
             onEditStage={[Function]}
             type="Foo"
@@ -334,15 +310,6 @@ ShallowWrapper {
               </div>
               Add stage before
             </a>
-            <getContext(Draft(Component))
-              onEditSkipLogic={[Function]}
-              zoomColors={
-                Array [
-                  "#ffffff",
-                  "#f2b700",
-                ]
-              }
-            />
             <a
               className="timeline-stage__control"
               onClick={[Function]}
@@ -368,6 +335,7 @@ ShallowWrapper {
           </div>,
         ],
         "className": "timeline-stage",
+        "onEditSkipLogic": [Function],
       },
       "ref": null,
       "rendered": Array [
@@ -388,6 +356,8 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "function",
           "props": Object {
+            "hasFilter": false,
+            "hasSkipLogic": false,
             "label": "",
             "onEditStage": [Function],
             "type": "Foo",
@@ -417,15 +387,6 @@ ShallowWrapper {
                 </div>
                 Add stage before
               </a>,
-              <getContext(Draft(Component))
-                onEditSkipLogic={[Function]}
-                zoomColors={
-                  Array [
-                    "#ffffff",
-                    "#f2b700",
-                  ]
-                }
-              />,
               <a
                 className="timeline-stage__control"
                 onClick={[Function]}
@@ -486,21 +447,6 @@ ShallowWrapper {
                 "Add stage before",
               ],
               "type": "a",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "onEditSkipLogic": [Function],
-                "zoomColors": Array [
-                  "#ffffff",
-                  "#f2b700",
-                ],
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
             },
             Object {
               "instance": null,
@@ -603,6 +549,5 @@ ShallowWrapper {
     Symbol(enzyme.__providerValues__): undefined,
   },
   Symbol(enzyme.__providerValues__): Map {},
-  Symbol(enzyme.__childContext__): null,
 }
 `;

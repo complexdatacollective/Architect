@@ -1,0 +1,39 @@
+.screen {
+  position: absolute;
+  z-index: var(--z-modal);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--background);
+  color: var(--text);
+  transform: translateZ(0);
+
+  &__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - #{unit(8)}); // height of control bar
+    overflow: hidden;
+  }
+
+  &__content {
+    @include no-scrollbars;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  &__controls {
+    position: absolute;
+    bottom: 0;
+    height: unit(8);
+    width: 100%;
+  }
+}

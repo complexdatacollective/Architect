@@ -7,13 +7,14 @@ import { Flipper, Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import { startCase } from 'lodash';
 import { Button } from '@codaco/ui';
+import { Section } from '@components/EditorLayout';
+import InlineEditScreen from '@components/InlineEditScreen';
 import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import OrderedList from '../OrderedList';
 import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
-import Section from '../sections/Section'; // Should this exist out of sections if it's used here?
-import Window from '../Window';
-import Form from '../Form';
+// import Window from '../Window';
+// import Form from '../Form';
 import withEditHandlers from './withEditHandlers';
 
 const formName = 'editable-list-form';
@@ -90,26 +91,25 @@ class EditableList extends PureComponent {
               <Button onClick={handleAddNew} size="small" icon="add">Create new</Button>
             </Flipped>
           </div>
-          <Window show={!!editField}>
-            <Form
-              initialValues={initialValues}
-              flipId={editField}
-              title={title}
-              onSubmit={handleUpdate}
-              onSubmitFail={handleSubmitFail}
-              onCancel={handleCancelEditField}
-              form={formName}
+          <InlineEditScreen
+            show={!!editField}
+            initialValues={initialValues}
+            flipId={editField}
+            title={title}
+            onSubmit={handleUpdate}
+            onSubmitFail={handleSubmitFail}
+            onCancel={handleCancelEditField}
+            form={formName}
+            {...editProps}
+          >
+            <EditComponent
+              {...rest}
               {...editProps}
-            >
-              <EditComponent
-                {...rest}
-                {...editProps}
-                form={formName}
-                initialValues={initialValues}
-                fieldId={editField}
-              />
-            </Form>
-          </Window>
+              form={formName}
+              initialValues={initialValues}
+              fieldId={editField}
+            />
+          </InlineEditScreen>
         </Flipper>
       </Section>
     );

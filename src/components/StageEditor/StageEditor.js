@@ -1,61 +1,79 @@
-import React, { Component } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
-import Editor from '../Editor';
+import Editor from '@components/Editor';
+import Layout from '@components/EditorLayout';
+import FormCodeView from '@components/CodeView/FormCodeView';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
+import StageHeading from './StageHeading';
+import SkipLogic from './SkipLogic';
 
 const formName = 'edit-stage';
 
-class StageEditor extends Component {
-  componentDidMount() {
-    ipcRenderer.on('REFRESH_PREVIEW', this.handleRefresh);
-  }
+const StageEditor = ({
+  id,
+  previewStage,
+  interfaceType,
+  stagePath,
+  hasSkipLogic,
+  ...props
+}) => {
+  const [showCodeView, setShowCodeView] = useState(false);
+  const toggleShowCodeView = () => setShowCodeView(show => !show);
 
-  componentWillUnmount() {
-    ipcRenderer.removeListener('REFRESH_PREVIEW', this.handleRefresh);
-  }
+  useEffect(() => {
+    ipcRenderer.on('REFRESH_PREVIEW', previewStage);
 
-  sections() {
-    return getInterface(this.props.interfaceType).sections;
-  }
+    return () =>
+      ipcRenderer.removeListener('REFRESH_PREVIEW', previewStage);
+  }, []);
 
-  name() {
-    return getInterface(this.props.interfaceType).name || this.props.interfaceType;
-  }
+  const sections = useMemo(
+    () => getInterface(interfaceType).sections,
+    [interfaceType],
+  );
 
-  handleRefresh = () => {
-    this.props.previewStage();
-  }
+  const renderSections = ({ submitFailed, windowRoot }) =>
+    sections.map((SectionComponent, index) => (
+      <SectionComponent
+        key={index}
+        form={formName}
+        stagePath={stagePath}
+        hasSubmitFailed={submitFailed}
+        // `windowRoot` will ensure connect() components re-render
+        // when the window root changes
+        windowRoot={windowRoot}
+        interfaceType={interfaceType}
+      />
+    ));
 
-  render() {
-    return (
-      <Editor
-        formName={formName}
-        title={`Editing ${this.name()}`}
-        {...this.props}
-      >
-        {
-          ({ submitFailed, windowRoot }) =>
-            this.sections().map((SectionComponent, index) => (
-              <SectionComponent
-                key={index}
-                form={formName}
-                stagePath={this.props.stagePath}
-                hasSubmitFailed={submitFailed}
-                // `windowRoot` will ensure connect() components re-render
-                // when the window root changes
-                windowRoot={windowRoot}
-                interfaceType={this.props.interfaceType}
-              />
-            ))
-        }
-      </Editor>
-    );
-  }
-}
+  return (
+    <Editor
+      formName={formName}
+      {...props}
+    >
+      {
+        ({ submitFailed, windowRoot }) => (
+          <Layout>
+            <FormCodeView
+              form={formName}
+              show={showCodeView}
+              toggleCodeView={toggleShowCodeView}
+            />
+            <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
+            <div className="stage-editor-section stage-editor-section--no-border">
+              <SkipLogic />
+            </div>
+            {renderSections({ submitFailed, windowRoot })}
+          </Layout>
+        )
+      }
+    </Editor>
+  );
+};
 
 StageEditor.propTypes = {
   interfaceType: PropTypes.string.isRequired,

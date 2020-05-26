@@ -4,7 +4,7 @@ import {
   Background,
   NarrativePresets,
   NarrativeBehaviours,
-} from '../../sections';
+} from '@components/sections';
 
 const Narrative = {
   sections: [

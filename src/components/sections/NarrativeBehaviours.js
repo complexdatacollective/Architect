@@ -1,9 +1,9 @@
 import React from 'react';
 import { FormSection } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { Section } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
 import { ValidatedField } from '../Form';
-import Section from './Section';
 
 const NarrativeBehaviours = () => (
   <Section contentId="guidance.editor.narrative_behaviours">

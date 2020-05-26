@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Guidance from '../Guidance';
 
 const Section = ({
   disabled,
@@ -9,8 +8,6 @@ const Section = ({
   compactNext,
   children,
   className,
-  contentId,
-  focus,
 }) => {
   const sectionClasses = cx(
     className,
@@ -20,22 +17,8 @@ const Section = ({
     { 'stage-editor-section--compact-next': compactNext },
   );
 
-  if (contentId) {
-    return (
-      <Guidance
-        contentId={contentId}
-        className={sectionClasses}
-        focus={focus}
-      >
-        {children}
-      </Guidance>
-    );
-  }
-
   return (
-    <div
-      className={sectionClasses}
-    >
+    <div className={sectionClasses} >
       {children}
     </div>
   );
@@ -46,8 +29,6 @@ Section.propTypes = {
   group: PropTypes.bool,
   compactNext: PropTypes.bool,
   className: PropTypes.string,
-  contentId: PropTypes.string,
-  focus: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
@@ -56,7 +37,6 @@ Section.defaultProps = {
   disabled: false,
   group: false,
   className: '',
-  focus: false,
   compactNext: false,
 };
 

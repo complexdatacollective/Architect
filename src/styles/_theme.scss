@@ -4,6 +4,7 @@
   --color-shadow: rgba(0, 0, 0, .15);
   --color-modal-shadow: rgba(20, 0, 0, .2);
   --color-mid-grey: rgb(128, 128, 128);
+  --text-light-muted: rgba(255, 255, 255, .5);
 
   // UI overwrites
   --background: var(--color-white);
@@ -64,6 +65,14 @@
   --architect-logic-guidance: var(--color-mustard--dark);
   --architect-logic-text: var(--color-white);
 
+  // Context panel
+  --architect-context-controls: var(--color-platinum--dark);
+  --architect-context-panel: var(--color-platinum);
+  --architect-context-text: var(--text-dark);
+  --architect-context-controls--contrast: var(--color-navy-taupe);
+  --architect-context-panel--contrast: var(--color-cyber-grape);
+  --architect-context-text--contrast: var(--text-light);
+
   // Guidance
   --architect-guidance-background: var(--color-platinum);
   --architect-guidance-text: var(--text);
@@ -84,7 +93,6 @@
 
   --architect-drawer-background: var(--color-platinum);
   --architect-drawer-background--guidance: var(--color-platinum--dark);
-  --architect-drawer-text: var(--color-charcoal);
 
   --architect-panel-background: var(--color-platinum);
   --architect-panel-shadow: var(--color-shadow);
@@ -100,7 +108,6 @@
   --architect-timeline-highlight: rgba(216, 216, 216, .2);
   --architect-timeline-line: var(--color-neon-coral);
   --architect-timeline-screen: var(--color-navy-taupe);
-
 
   // rules
   --architect-rules-type: var(--color-neon-coral);

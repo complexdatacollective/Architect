@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { createSelector } from 'reselect';
-import { find, reduce } from 'lodash';
+import { find, findIndex, reduce } from 'lodash';
 
 const propStageId = (_, props) => props.stageId;
 
@@ -9,6 +9,38 @@ export const getProtocol = state => state.protocol.present;
 export const getAssetManifest = state => state.protocol.present.assetManifest;
 export const getCodebook = state => state.protocol.present.codebook;
 
+export const getStageList = (state) => {
+  const protocol = getProtocol(state);
+  const stages = protocol ? protocol.stages : [];
+
+  const stagesWithMeta = stages.map(
+    stage => ({
+      id: stage.id,
+      type: stage.type,
+      label: stage.label,
+      hasFilter: !!stage.filter,
+      hasSkipLogic: !!stage.skipLogic,
+    }),
+  );
+
+  return stagesWithMeta;
+};
+
+export const getStage = (state, id) => {
+  const protocol = getProtocol(state);
+  const stage = find(protocol.stages, ['id', id]);
+
+  return stage;
+};
+
+export const getStageIndex = (state, id) => {
+  const protocol = getProtocol(state);
+  const stageIndex = findIndex(protocol.stages, ['id', id]);
+
+  return stageIndex;
+};
+
+// TODO: replace this with getStage
 export const makeGetStage = () =>
   createSelector(
     getProtocol,

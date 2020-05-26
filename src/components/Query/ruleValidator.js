@@ -5,7 +5,11 @@ const validateRules = (value) => {
   const join = get(value, 'join');
 
   if (rules.length > 1 && !join) {
-    return 'Select an option above.';
+    return 'Please select a join type';
+  }
+
+  if (rules.length === 0) {
+    return 'Please create at least one rule';
   }
 
   return undefined;

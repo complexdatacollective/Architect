@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
-import { Guided } from '../Guided';
-import Guidance from '../Guidance';
-import Screen from '../Screen/Screen';
-import AssetBrowser from '../AssetBrowser';
+import Screen from '@components/Screen/Screen';
+import AssetBrowser from '@components/AssetBrowser';
+import Layout, { Section, Heading } from '@components/EditorLayout';
 
 const AssetBrowserScreen = ({
   show,
@@ -28,25 +27,19 @@ const AssetBrowserScreen = ({
       transitionState={transitionState}
       onAcknowledgeError={onComplete}
     >
-      <Guided>
-        <div className="editor variable-registry">
-          <div className="editor__window">
-            <div className="editor__container">
-              <div className="editor__content">
-                <h1 className="editor__heading">Assets</h1>
-                <p>
-                  Welcome to the asset management screen. Here, you can load in images,
-                  video, audio, or even external network data which can be used elsewhere
-                  within your protocol.
-                </p>
-                <Guidance contentId="guidance.screen.assets">
-                  <AssetBrowser />
-                </Guidance>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Guided>
+      <Layout>
+        <Heading>
+            Assets
+        </Heading>
+        <Section>
+          <p>
+            Welcome to the asset management screen. Here, you can load in images,
+            video, audio, or even external network data which can be used elsewhere
+            within your protocol.
+          </p>
+          <AssetBrowser />
+        </Section>
+      </Layout>
     </Screen>
   );
 };

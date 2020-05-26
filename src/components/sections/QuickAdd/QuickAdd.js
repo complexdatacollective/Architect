@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { Section } from '@components/EditorLayout';
 import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ValidatedField from '../../Form/ValidatedField';
-import Section from '../Section';
 import withOptions from './withOptions';
 import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';

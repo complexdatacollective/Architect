@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Text from '@codaco/ui/lib/components/Fields/Text';
+import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
 import AssignAttributes from '../../AssignAttributes';
-import Row from '../Row';
-import Section from '../Section';
 import Tip from '../../Tip';
 
 class PromptFields extends PureComponent {

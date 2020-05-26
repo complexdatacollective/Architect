@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { get } from 'lodash';
 import cx from 'classnames';
 import Button from '@codaco/ui/lib/components/Button';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import DetachedField from '@components/DetachedField';
+import FieldError from '@components/Form/FieldError';
 import PreviewRules from './PreviewRules';
 import EditRule from './EditRule';
 import withDraftRule from './withDraftRule';
@@ -15,6 +17,7 @@ const Rules = ({
   rules,
   join,
   error,
+  meta,
   codebook,
   draftRule,
   handleChangeJoin,
@@ -27,9 +30,17 @@ const Rules = ({
   handleCreateEdgeRule,
   handleCreateEgoRule,
 }) => {
+  const isActive = get(meta, 'active', false);
+  // Default to true as may not be defined if used without redux-form
+  const isTouched = get(meta, 'touched', true);
+  const hasError = isTouched && !!error;
+
   const classes = cx(
     'rules-rules',
-    { 'rules-rules--has-error': !!error },
+    {
+      'rules-rules--is-active': isActive,
+      'rules-rules--has-error': hasError,
+    },
   );
 
   return (
@@ -43,7 +54,7 @@ const Rules = ({
       />
 
       <div className="rules-rules__preview">
-        <h3>Rules:</h3>
+        <h2>Rules</h2>
         <PreviewRules
           rules={rules}
           join={join}
@@ -51,6 +62,7 @@ const Rules = ({
           onDeleteRule={handleDeleteRule}
           codebook={codebook}
         />
+        <FieldError show={hasError} error={error} />
       </div>
 
       <div className="rules-rules__add-new">
@@ -78,7 +90,7 @@ const Rules = ({
 
       { rules.length > 1 &&
         <div className="rules-rules__join">
-          <h3>Must match:</h3>
+          <h2>Must match</h2>
           <DetachedField
             component={RadioGroup}
             options={[
@@ -91,13 +103,6 @@ const Rules = ({
         </div>
       }
 
-      { error &&
-        <div className="rules-rules__error">
-          {error}
-
-
-        </div>
-      }
     </div>
   );
 };
@@ -107,6 +112,7 @@ Rules.propTypes = {
   rules: PropTypes.array,
   join: PropTypes.string,
   error: PropTypes.string,
+  meta: PropTypes.object,
   codebook: PropTypes.object.isRequired,
   draftRule: PropTypes.object,
   handleChangeJoin: PropTypes.func.isRequired,
@@ -124,6 +130,7 @@ Rules.defaultProps = {
   rules: [],
   join: null,
   error: null,
+  meta: {},
   type: 'filter',
   draftRule: {},
 };

@@ -9,11 +9,11 @@ import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
 import None from '@codaco/ui/lib/components/Transitions/None';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
+import { getStageList } from '@selectors/protocol';
+import { actionCreators as stageActions } from '@modules/protocol/stages';
+import { actionCreators as dialogsActions } from '@modules/dialogs';
+import { actionCreators as uiActions } from '@modules/ui';
 import Stage from './Stage';
-import { getProtocol } from '../../selectors/protocol';
-import { actionCreators as stageActions } from '../../ducks/modules/protocol/stages';
-import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
-import { actionCreators as uiActions } from '../../ducks/modules/ui';
 import NewButton from './NewButton';
 
 class Timeline extends Component {
@@ -71,9 +71,6 @@ class Timeline extends Component {
     openScreen('stage', { id, locus });
   };
 
-  handleEditSkipLogic = id =>
-    this.props.openScreen('skip', { id });
-
   createStage = (type, insertAtIndex) => {
     const { openScreen, locus } = this.props;
     this.setState({ insertStageAtIndex: null, highlightHide: true });
@@ -110,13 +107,14 @@ class Timeline extends Component {
         index={index}
         id={stage.id}
         type={stage.type}
+        hasFilter={stage.hasFilter}
+        hasSkipLogic={stage.hasSkipLogic}
         label={`${index + 1}. ${stage.label}`}
         onMouseEnter={this.handleMouseEnterStage}
         onMouseLeave={this.handleMouseLeaveStage}
         onEditStage={() => this.handleEditStage(stage.id)}
         onDeleteStage={() => this.handleDeleteStage(stage.id)}
         onInsertStage={position => this.handleInsertStage(index + position)}
-        onEditSkipLogic={() => this.handleEditSkipLogic(stage.id)}
       />
     </None>
   );
@@ -151,16 +149,12 @@ class Timeline extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const protocol = getProtocol(state);
-
-  return {
-    locus: state.protocol.timeline[state.protocol.timeline.length - 1],
-    activeProtocol: state.session.activeProtocol,
-    stages: protocol ? protocol.stages : [],
-    transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
-  };
-};
+const mapStateToProps = state => ({
+  locus: state.protocol.timeline[state.protocol.timeline.length - 1],
+  activeProtocol: state.session.activeProtocol,
+  stages: getStageList(state),
+  transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+});
 
 const mapDispatchToProps = (dispatch, props) => ({
   deleteStage: bindActionCreators(stageActions.deleteStage, dispatch),
