@@ -38,6 +38,9 @@ const stageEditorHanders = withHandlers({
     },
 });
 
+const invalidStageMessage = invalid =>
+  (invalid ? ['Preview requires a valid stage configuration'] : []);
+
 const stageEditorProps = withProps(({
   handlePreview,
   invalid,
@@ -52,6 +55,7 @@ const stageEditorProps = withProps(({
       disabled={invalid}
       title={invalid ? 'Preview requires a valid stage configuration' : ''}
     >Preview</Button>,
+    ...invalidStageMessage(invalid),
   ],
 }));
 
