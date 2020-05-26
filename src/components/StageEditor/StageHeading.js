@@ -11,6 +11,7 @@ const StageHeading = ({
   stageNumber,
   name,
   type,
+  toggleCodeView,
 }) => {
   const handleEditName = () => {
     const nameFieldId = `#${getFieldId('label')}`;
@@ -19,7 +20,7 @@ const StageHeading = ({
   };
 
   const location = stageNumber ? `Stage ${stageNumber}` : 'New Stage';
-  const meta = type;
+  const meta = (<div onClick={toggleCodeView}>{type}</div>);
 
   return (
     <Heading

@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
 import Layout from '@components/EditorLayout';
+import FormCodeView from '@components/CodeView/FormCodeView';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
@@ -20,6 +21,9 @@ const StageEditor = ({
   hasSkipLogic,
   ...props
 }) => {
+  const [showCodeView, setShowCodeView] = useState(false);
+  const toggleShowCodeView = () => setShowCodeView(show => !show);
+
   useEffect(() => {
     ipcRenderer.on('REFRESH_PREVIEW', previewStage);
 
@@ -54,7 +58,12 @@ const StageEditor = ({
       {
         ({ submitFailed, windowRoot }) => (
           <Layout>
-            <StageHeading id={id} />
+            <FormCodeView
+              form={formName}
+              show={showCodeView}
+              toggleCodeView={toggleShowCodeView}
+            />
+            <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
             <div className="stage-editor-section stage-editor-section--no-border">
               <SkipLogic />
             </div>
