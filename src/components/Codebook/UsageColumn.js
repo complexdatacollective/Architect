@@ -15,6 +15,16 @@ const UsageColumn = ({
   }, ['closeScreen']);
 
   const stages = usage
+    .sort((a, b) => {
+      if (a.label < b.label) {
+        return -1;
+      }
+      if (a.label > b.label) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    })
     .map(({ id, label }) => (
       <ScreenLink screen="stage" id={id} onClick={closeCodebook}>{label}</ScreenLink>
     ));

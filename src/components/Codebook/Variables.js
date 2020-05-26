@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withHandlers, withStateHandlers, withProps } from 'recompose';
-import { get, tap, isString } from 'lodash';
+import { get, isArray, isString } from 'lodash';
 import cx from 'classnames';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
@@ -135,17 +135,33 @@ const withVariableHandlers = compose(
   }),
 );
 
-const uppercaseString = prop =>
-  (isString(prop) ? prop.toUpperCase() : prop);
+const homogenizeValue = (v) => {
+  if (isString(v)) {
+    return v.toUpperCase();
+  }
+  if (isArray(v)) {
+    // 'usage' contains an array of objects [{ label }]
+    return v.map(({ label }) => label).sort().join(', ').toUpperCase();
+  }
+  return v;
+};
 
 const sortByProp = sortBy =>
   (a, b) => {
-    const sortPropA = tap(get(a, sortBy, ''), uppercaseString);
-    const sortPropB = tap(get(b, sortBy, ''), uppercaseString);
+    const sortPropA = homogenizeValue(get(a, sortBy, ''));
+    const sortPropB = homogenizeValue(get(b, sortBy, ''));
     if (sortPropA < sortPropB) { return -1; }
     if (sortPropA > sortPropB) { return 1; }
     return 0;
   };
+
+const sort = sortBy =>
+  list =>
+    list.sort(sortByProp(sortBy));
+
+const reverse = (sortDirection = SortDirection.ASC) =>
+  list =>
+    (sortDirection === SortDirection.DESC ? [...list].reverse() : list);
 
 const withSort = compose(
   withStateHandlers(
@@ -163,10 +179,10 @@ const withSort = compose(
   ),
   withProps(
     ({ sortBy, sortDirection, variables }) => ({
-      variables: tap(
-        variables.sort(sortByProp(sortBy)),
-        list => (sortDirection === SortDirection.DESC ? list.reverse() : list),
-      ),
+      variables: compose(
+        reverse(sortDirection),
+        sort(sortBy),
+      )(variables),
     }),
   ),
 );
