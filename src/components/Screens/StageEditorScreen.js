@@ -50,7 +50,7 @@ const stageEditorProps = withProps(({
       onClick={handlePreview}
       color="paradise-pink"
       disabled={invalid}
-      title={invalid ? 'Preview not available: stage configuration is invalid' : ''}
+      title={invalid ? 'Preview requires a valid stage configuration' : ''}
     >Preview</Button>,
   ],
 }));

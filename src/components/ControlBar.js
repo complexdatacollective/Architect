@@ -1,26 +1,38 @@
 import React from 'react';
-import { TransitionGroup } from 'react-transition-group';
+import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Fade from '@codaco/ui/lib/components/Transitions/Fade';
+
+const variants = {
+  show: { opacity: 1 },
+  hide: { opacity: 0 },
+};
+
+const animatedButton = (button, index) => (
+  <motion.div
+    key={(button && button.key) || index}
+    variants={variants}
+    initial="hide"
+    exit="hide"
+    animate="show"
+  >{button}</motion.div>
+);
 
 const ControlBar = ({ buttons, secondaryButtons, flip, show, className }) => {
   const buttonLayout = [
     <div className="control-bar__primary-buttons" key="primary">
-      <TransitionGroup component={null}>
+      <AnimatePresence>
         { buttons &&
-          Array.from(buttons).map(button =>
-            <Fade key={button.key} in={show}>{button}</Fade>)
+          Array.from(buttons).map(animatedButton)
         }
-      </TransitionGroup>
+      </AnimatePresence>
     </div>,
     <div className="control-bar__secondary-buttons" key="secondary">
-      <TransitionGroup component={null}>
+      <AnimatePresence>
         { secondaryButtons &&
-          Array.from(secondaryButtons).map(button =>
-            <Fade key={button.key} in={show}>{button}</Fade>)
+          Array.from(secondaryButtons).map(animatedButton)
         }
-      </TransitionGroup>
+      </AnimatePresence>
     </div>,
   ];
 
