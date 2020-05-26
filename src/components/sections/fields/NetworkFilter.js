@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { has } from 'lodash';
+import { get } from 'lodash';
 import { Field, change, getFormValues } from 'redux-form';
 import { compose, defaultProps } from 'recompose';
 import { actionCreators as dialogActions } from '@modules/dialogs';
@@ -77,7 +77,7 @@ NetworkFilter.defaultProps = {
 };
 
 const mapStateToProps = (state, props) => ({
-  hasFilter: has(getFormValues('edit-stage')(state), props.name),
+  hasFilter: get(getFormValues(props.form)(state), props.name, null) !== null,
 });
 
 const mapDispatchToProps = {
