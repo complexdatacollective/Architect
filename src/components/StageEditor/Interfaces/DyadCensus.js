@@ -2,6 +2,7 @@ import {
   Name,
   FilteredNodeType,
   IntroductionPanel,
+  DyadCensusPrompts,
 } from '@components/sections';
 
 const DyadCensus = {
@@ -9,6 +10,7 @@ const DyadCensus = {
     Name,
     FilteredNodeType,
     IntroductionPanel,
+    DyadCensusPrompts,
   ],
 };
 
