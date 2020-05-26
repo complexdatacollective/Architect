@@ -21,12 +21,13 @@ const createTypeState = connect(
 );
 
 const createTypeHandlers = withHandlers({
-  handleTypeScreenMessage: ({ changeForm, form }) =>
+  handleTypeScreenMessage: ({ changeForm, form, name, format }) =>
     (message) => {
       if (!message) { return; }
 
-      const { entity, type } = message;
-      changeForm(form, 'subject', { entity, type });
+      const { type } = message;
+      const value = format(type);
+      changeForm(form, name, value);
     },
   handleOpenCreateNewType: ({ openScreen }) =>
     () => {

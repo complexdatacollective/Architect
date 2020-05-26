@@ -1,14 +1,12 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-// import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import { identity } from 'lodash';
 import Text from '@codaco/ui/lib/components/Fields/Text';
-import EdgeTypeFields from '@components/sections/fields/EdgeTypeFields';
+import { EdgeTypeFieldsNoReset } from '@components/sections/fields/EdgeTypeFields';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import Tip from '@components/Tip';
-
-// TODO: EdgeTypeFields isn't quite right
 
 const PromptFields = props => (
   <Section>
@@ -34,7 +32,12 @@ const PromptFields = props => (
       />
     </Row>
     <Row>
-      <EdgeTypeFields {...props} />
+      <EdgeTypeFieldsNoReset
+        {...props}
+        name="createEdge"
+        parse={identity}
+        format={identity}
+      />
     </Row>
   </Section>
 );

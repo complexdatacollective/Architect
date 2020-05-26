@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import { compose } from 'recompose';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+import { noop } from 'lodash';
 import cx from 'classnames';
 import Button from '@codaco/ui/lib/components/Button';
 import { getFieldId } from '@app/utils/issues';
 import EdgeSelect from '@components/Form/Fields/EdgeSelect';
 import ValidatedField from '@components/Form/ValidatedField';
-import withDisableAndReset from './withDisableAndReset';
-import withCreateNewType from './withCreateEdgeType';
-import withEdgeTypeOptions from './withEdgeTypeOptions';
 
 class EdgeTypeFields extends Component {
   static propTypes = {
     edgeTypes: PropTypes.arrayOf(PropTypes.object),
     disabled: PropTypes.bool,
-    handleResetStage: PropTypes.func.isRequired,
+    handleResetStage: PropTypes.func,
     handleOpenCreateNewType: PropTypes.func.isRequired,
     handleTypeScreenMessage: PropTypes.func.isRequired,
+    parse: PropTypes.func.isRequired,
+    format: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
     edgeTypes: [],
     disabled: false,
     displayVariable: null,
+    handleResetStage: noop,
   };
 
   componentDidUpdate({ typeScreenMessage }) {
@@ -36,6 +36,9 @@ class EdgeTypeFields extends Component {
       disabled,
       handleResetStage,
       handleOpenCreateNewType,
+      parse,
+      format,
+      name,
     } = this.props;
 
     const nodeTypeClasses = cx(
@@ -54,9 +57,9 @@ class EdgeTypeFields extends Component {
         >
           <div className="stage-editor-section-node-type__edit-capture">
             <ValidatedField
-              name="subject"
-              parse={value => ({ type: value, entity: 'edge' })}
-              format={value => get(value, 'type')}
+              name={name}
+              parse={parse}
+              format={format}
               options={edgeTypes}
               component={EdgeSelect}
               validation={{ required: true }}
@@ -83,10 +86,4 @@ class EdgeTypeFields extends Component {
   }
 }
 
-export { EdgeTypeFields };
-
-export default compose(
-  withEdgeTypeOptions,
-  withDisableAndReset,
-  withCreateNewType,
-)(EdgeTypeFields);
+export default EdgeTypeFields;
