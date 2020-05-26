@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { noop } from 'lodash';
 import { getStageIndex } from '@selectors/protocol';
 import { getFieldId } from '@app/utils/issues';
 import scrollTo from '@app/utils/scrollTo';
@@ -41,12 +42,14 @@ StageHeading.propTypes = {
   stageNumber: PropTypes.number,
   name: PropTypes.string,
   type: PropTypes.string,
+  toggleCodeView: PropTypes.func,
 };
 
 StageHeading.defaultProps = {
   stageNumber: null,
   name: '',
   type: '',
+  toggleCodeView: noop,
 };
 
 const mapStateToProps = (state, { id }) => {
