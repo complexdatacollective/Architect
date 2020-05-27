@@ -17,16 +17,6 @@ const UsageColumn = ({
   if (!inUse) { return (<Tag key="unused">not in use</Tag>); }
 
   const stages = usage
-    .sort((a, b) => {
-      if (a.label < b.label) {
-        return -1;
-      }
-      if (a.label > b.label) {
-        return 1;
-      }
-      // a must be equal to b
-      return 0;
-    })
     .map(({ id, label }) => (
       <ScreenLink screen="stage" id={id} onClick={closeCodebook} key={id}>{label}</ScreenLink>
     ));

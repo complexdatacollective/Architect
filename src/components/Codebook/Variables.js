@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withHandlers, withStateHandlers, withProps } from 'recompose';
-import { get, isArray, isString } from 'lodash';
+import { get, isString } from 'lodash';
 import cx from 'classnames';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
@@ -73,7 +73,7 @@ const Variables = ({ variables, onDelete, sortBy, sortDirection, sort }) => {
             <Heading name="name" {...headingProps}>Name</Heading>
             <Heading name="type" {...headingProps}>Type</Heading>
             <Heading name="component" {...headingProps}>Input control</Heading>
-            <Heading name="usage" {...headingProps}>Usage</Heading>
+            <Heading name="usageString" {...headingProps}>Usage</Heading>
             <th />
           </tr>
         </thead>
@@ -135,33 +135,26 @@ const withVariableHandlers = compose(
   }),
 );
 
-const homogenizeValue = (v) => {
-  if (isString(v)) {
-    return v.toUpperCase();
-  }
-  if (isArray(v)) {
-    // 'usage' contains an array of objects [{ label }]
-    return v.map(({ label }) => label).sort().join(', ').toUpperCase();
-  }
-  return v;
+const homogenizedProp = (item, prop) => {
+  const v = get(item, prop, '');
+  if (!isString(v)) { return v; }
+  return v.toUpperCase();
 };
 
 const sortByProp = sortBy =>
   (a, b) => {
-    const sortPropA = homogenizeValue(get(a, sortBy, ''));
-    const sortPropB = homogenizeValue(get(b, sortBy, ''));
+    const sortPropA = homogenizedProp(a, sortBy);
+    const sortPropB = homogenizedProp(b, sortBy);
     if (sortPropA < sortPropB) { return -1; }
     if (sortPropA > sortPropB) { return 1; }
     return 0;
   };
 
 const sort = sortBy =>
-  list =>
-    list.sort(sortByProp(sortBy));
+  list => list.sort(sortByProp(sortBy));
 
 const reverse = (sortDirection = SortDirection.ASC) =>
-  list =>
-    (sortDirection === SortDirection.DESC ? [...list].reverse() : list);
+  list => (sortDirection === SortDirection.DESC ? [...list].reverse() : list);
 
 const withSort = compose(
   withStateHandlers(

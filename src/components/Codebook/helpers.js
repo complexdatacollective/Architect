@@ -1,4 +1,6 @@
-import { reduce, get, compact, uniq } from 'lodash';
+import { reduce, get, compact, uniq, map } from 'lodash';
+import { getType } from '@selectors/codebook';
+import { utils, getVariableIndex } from '@selectors/indexes';
 import { getProtocol } from '@selectors/protocol';
 
 /**
@@ -46,4 +48,48 @@ export const getUsageAsStageMeta = (state, usage) => {
   const stageMetaByIndex = getStageMetaByIndex(state);
   const stageIndexes = compact(uniq(usage.map(getStageIndexFromPath)));
   return stageIndexes.map(stageIndex => get(stageMetaByIndex, stageIndex));
+};
+
+const sortByLabel = (a, b) => {
+  if (a.label < b.label) { return -1; }
+  if (a.label > b.label) { return 1; }
+  return 0;
+};
+
+export const getEntityProperties = (state, { entity, type }) => {
+  const {
+    name,
+    color,
+    variables,
+  } = getType(state, { entity, type });
+
+  const variableIndex = getVariableIndex(state);
+  const variableLookup = utils.buildSearch([variableIndex]);
+
+  const variablesWithUsage = map(
+    variables,
+    (variable, id) => {
+      const inUse = variableLookup.has(id);
+
+      const usage = inUse ?
+        getUsageAsStageMeta(state, getUsage(variableIndex, id)).sort(sortByLabel) :
+        [];
+
+      const usageString = usage.map(({ label }) => label).join(', ').toUpperCase();
+
+      return ({
+        ...variable,
+        id,
+        inUse,
+        usage,
+        usageString,
+      });
+    },
+  );
+
+  return {
+    name,
+    color,
+    variables: variablesWithUsage,
+  };
 };
