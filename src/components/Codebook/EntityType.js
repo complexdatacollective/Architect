@@ -28,7 +28,7 @@ const EntityType = ({
 }) => {
   const stages = usage
     .map(({ id, label }) => (
-      <ScreenLink screen="stage" id={id} onClick={closeCodebook}>{label}</ScreenLink>
+      <ScreenLink screen="stage" id={id} onClick={closeCodebook} key={id}>{label}</ScreenLink>
     ));
 
   return (
@@ -102,6 +102,7 @@ const mapStateToProps = (state, { entity, type }) => {
     variables,
     (variable, id) => {
       const inUse = variableLookup.has(id);
+      // TODO: sort usage here
       const usage = inUse ? getUsageAsStageMeta(state, getUsage(variableIndex, id)) : [];
 
       return ({
