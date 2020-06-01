@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from 'react';
+import React, { useMemo, useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,6 +30,12 @@ const ContextPanel = ({
   }, []);
 
   const [open, setOpen] = useState(isActive);
+
+  useEffect(() => {
+    if (open === true && isActive === false) {
+      setOpen(false);
+    }
+  }, [isActive]);
 
   const handleActivate = useCallback(() => {
     if (!open) {

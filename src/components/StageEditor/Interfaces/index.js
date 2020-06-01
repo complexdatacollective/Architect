@@ -1,31 +1,33 @@
 /* eslint-disable import/prefer-default-export */
 import { get } from 'lodash';
+import AlterEdgeForm from './AlterEdgeForm';
+import AlterForm from './AlterForm';
+import CategoricalBin from './CategoricalBin';
+import DyadCensus from './DyadCensus';
+import EgoForm from './EgoForm';
 import Information from './Information';
 import NameGenerator from './NameGenerator';
-import NameGeneratorQuickAdd from './NameGeneratorQuickAdd';
-import NameGeneratorList from './NameGeneratorList';
 import NameGeneratorAutoComplete from './NameGeneratorAutoComplete';
-import Sociogram from './Sociogram';
-import CategoricalBin from './CategoricalBin';
-import OrdinalBin from './OrdinalBin';
-import AlterForm from './AlterForm';
-import AlterEdgeForm from './AlterEdgeForm';
-import EgoForm from './EgoForm';
+import NameGeneratorList from './NameGeneratorList';
+import NameGeneratorQuickAdd from './NameGeneratorQuickAdd';
 import Narrative from './Narrative';
+import OrdinalBin from './OrdinalBin';
+import Sociogram from './Sociogram';
 
 const interfaces = {
+  AlterEdgeForm,
+  AlterForm,
+  CategoricalBin,
+  DyadCensus,
+  EgoForm,
   Information,
   NameGenerator,
-  NameGeneratorQuickAdd,
-  NameGeneratorList,
   NameGeneratorAutoComplete,
-  Sociogram,
-  CategoricalBin,
-  OrdinalBin,
-  AlterForm,
-  AlterEdgeForm,
-  EgoForm,
+  NameGeneratorList,
+  NameGeneratorQuickAdd,
   Narrative,
+  OrdinalBin,
+  Sociogram,
 };
 
 const emptyInterface = {

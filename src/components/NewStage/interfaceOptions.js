@@ -56,6 +56,10 @@ const interfaceOptions = [
         type: 'EgoForm',
         title: 'Ego Form',
       },
+      {
+        type: 'DyadCensus',
+        title: 'Dyad Census',
+      },
     ],
   },
   {

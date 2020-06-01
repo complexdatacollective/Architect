@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Text from '@codaco/ui/lib/components/Fields/Text';
+import { getFieldId } from '@app/utils/issues';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '../../../utils/issues';
-import ValidatedField from '../../Form/ValidatedField';
+import ValidatedField from '@components/Form/ValidatedField';
 import AssignAttributes from '../../AssignAttributes';
 import Tip from '../../Tip';
 
