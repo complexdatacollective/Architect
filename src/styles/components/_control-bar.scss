@@ -8,6 +8,7 @@
   width: 100%;
   height: unit(8);
   padding: 0 unit(2);
+  color: var(--text-light);
   background-color: var(--architect-control-bar-background);
   transform: translateZ(0) translateY(100%);
   transition-property: transform;
