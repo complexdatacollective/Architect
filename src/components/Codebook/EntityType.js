@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { map } from 'lodash';
 import { compose, withHandlers } from 'recompose';
 import { actionCreators as codebookActionCreators } from '@modules/protocol/codebook';
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import { actionCreators as screenActionsCreators } from '@modules/ui/screens';
-import { getType } from '@selectors/codebook';
-import { utils, getVariableIndex } from '@selectors/indexes';
 import { Button } from '@codaco/ui/lib/components';
 import ScreenLink from '@components/Screens/Link';
 import Variables from './Variables';
 import Tag from './Tag';
 import EntityIcon from './EntityIcon';
-import { getUsage, getUsageAsStageMeta } from './helpers';
+import { getEntityProperties } from './helpers';
 
 const EntityType = ({
   name,
@@ -28,7 +25,7 @@ const EntityType = ({
 }) => {
   const stages = usage
     .map(({ id, label }) => (
-      <ScreenLink screen="stage" id={id} onClick={closeCodebook}>{label}</ScreenLink>
+      <ScreenLink screen="stage" id={id} onClick={closeCodebook} key={id}>{label}</ScreenLink>
     ));
 
   return (
@@ -89,35 +86,9 @@ EntityType.defaultProps = {
 };
 
 const mapStateToProps = (state, { entity, type }) => {
-  const {
-    name,
-    color,
-    variables,
-  } = getType(state, { entity, type });
+  const entityProperties = getEntityProperties(state, { entity, type });
 
-  const variableIndex = getVariableIndex(state);
-  const variableLookup = utils.buildSearch([variableIndex]);
-
-  const variablesWithUsage = map(
-    variables,
-    (variable, id) => {
-      const inUse = variableLookup.has(id);
-      const usage = inUse ? getUsageAsStageMeta(state, getUsage(variableIndex, id)) : [];
-
-      return ({
-        ...variable,
-        id,
-        inUse,
-        usage,
-      });
-    },
-  );
-
-  return {
-    name,
-    color,
-    variables: variablesWithUsage,
-  };
+  return entityProperties;
 };
 
 const withEntityHandlers = compose(

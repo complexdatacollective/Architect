@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { map } from 'lodash';
 import { compose } from 'recompose';
-import { getType } from '@selectors/codebook';
-import { utils, getVariableIndex } from '@selectors/indexes';
 import Variables from './Variables';
-import { getUsage, getUsageAsStageMeta } from './helpers';
+import { getEntityProperties } from './helpers';
 
 const EgoType = ({
   variables,
@@ -33,36 +30,9 @@ EgoType.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const {
-    name,
-    color,
-    variables,
-  } = getType(state, { entity: 'ego' });
+  const entityProperties = getEntityProperties(state, { entity: 'ego' });
 
-  const variableIndex = getVariableIndex(state);
-  const variableLookup = utils.buildSearch([variableIndex]);
-
-  const variablesWithUsage = map(
-    variables,
-    (variable, id) => {
-      const inUse = variableLookup.has(id);
-
-      const usage = inUse ? getUsageAsStageMeta(state, getUsage(variableIndex, id)) : [];
-
-      return ({
-        ...variable,
-        id,
-        inUse,
-        usage,
-      });
-    },
-  );
-
-  return {
-    name,
-    color,
-    variables: variablesWithUsage,
-  };
+  return entityProperties;
 };
 
 export { EgoType };

@@ -14,20 +14,24 @@ const UsageColumn = ({
     closeScreen('codebook');
   }, ['closeScreen']);
 
+  if (!inUse) { return (<Tag key="unused">not in use</Tag>); }
+
   const stages = usage
     .map(({ id, label }) => (
-      <ScreenLink screen="stage" id={id} onClick={closeCodebook}>{label}</ScreenLink>
+      <ScreenLink screen="stage" id={id} onClick={closeCodebook} key={id}>{label}</ScreenLink>
     ));
 
-  return [
-    inUse && <div className="codebook__variables-usage-container">{stages}</div>,
-    !inUse && <Tag>not in use</Tag>,
-  ];
+  return (
+    <div className="codebook__variables-usage-container" key="usage">
+      {stages}
+    </div>
+  );
 };
 
 UsageColumn.propTypes = {
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool.isRequired,
+  closeScreen: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
