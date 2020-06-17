@@ -5,7 +5,7 @@ import { getFieldId } from '@app/utils/issues';
 import { Text, Toggle } from '@codaco/ui/lib/components/Fields';
 import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
-import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import VariableSelect from '@components/Form/Fields/VariableSelect';
 import MultiSelect from '@components/Form/MultiSelect';
 import Options from '@components/Options';
 import { Section, Row } from '@components/EditorLayout';
@@ -25,17 +25,17 @@ const useToggle = (initialState) => {
 };
 
 const PromptFields = ({
-  variableOptions,
-  optionsForVariableDraft,
-  form,
   changeForm,
-  onDeleteVariable,
-  onCreateOtherVariable,
-  normalizeKeyDown,
   entity,
+  form,
+  normalizeKeyDown,
+  onCreateOtherVariable,
+  onDeleteVariable,
+  optionsForVariableDraft,
+  otherVariable,
   type,
   variable,
-  otherVariable,
+  variableOptions,
 }) => {
   const [otherVariableToggle, toggleOtherVariableToggle] = useToggle(!!otherVariable);
 
@@ -107,7 +107,9 @@ const PromptFields = ({
         <h3 id={getFieldId('variable')}>Categorical Variable</h3>
         <ValidatedField
           name="variable"
-          component={CreatableSelect}
+          component={VariableSelect}
+          type={type}
+          entity={entity}
           label=""
           options={categoricalVariableOptions}
           onCreateOption={handleNewVariable}
@@ -178,7 +180,9 @@ const PromptFields = ({
           />
           <ValidatedField
             name="otherVariable"
-            component={CreatableSelect}
+            component={VariableSelect}
+            entity={entity}
+            type={type}
             label="Variable to store response"
             options={otherVariableOptions}
             onCreateOption={onCreateOtherVariable}
@@ -239,9 +243,9 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   entity: PropTypes.string.isRequired,
+  otherVariable: PropTypes.string,
   type: PropTypes.string.isRequired,
   variable: PropTypes.string,
-  otherVariable: PropTypes.string,
   variableOptions: PropTypes.array,
 };
 

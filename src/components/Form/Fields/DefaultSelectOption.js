@@ -1,11 +1,13 @@
 import React from 'react';
 import { components as ReactSelectComponents } from 'react-select';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
 
 const DefaultSelectOption = (props) => {
   const { data } = props;
   /* eslint-disable no-underscore-dangle */
+  const isWarning = !!data.__isWarning__;
   const showNew = !!data.__createNewOption__ || !!data.__isNew__;
   const showDelete = !data.__isNew__ && !!props.onDeleteOption && !data.isUsed;
   const label = data.__createNewOption__ ?
@@ -17,12 +19,22 @@ const DefaultSelectOption = (props) => {
   };
   /* eslint-enable */
 
+  const classes = cx(
+    'form-fields-select__item',
+    { 'form-fields-select__item--warning': isWarning },
+  );
+
   return (
     <ReactSelectComponents.Option
       {...props}
-      className="form-fields-select__item"
+      className={classes}
       classNamePrefix="form-fields-select__item"
     >
+      { isWarning &&
+        <div className="form-fields-select__item-warning">
+          <Icon name="warning" />
+        </div>
+      }
       { showNew &&
         <div className="form-fields-select__item-add">
           <Icon name="add" />

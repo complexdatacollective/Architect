@@ -56,7 +56,8 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     }
 
     &-add,
-    &-delete {
+    &-delete,
+    &-warning {
       display: inline-flex;
       align-items: center;
       flex: 0 0 1rem;
@@ -82,10 +83,24 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
         height: 1rem;
       }
     }
+
+    &-warning {
+      .icon {
+        height: 2rem;
+        width: 2.5rem;
+        line-height: 1rem;
+        padding: .3rem;
+        margin-right: unit(1);
+      }
+    }
+
+    &--warning {
+      background: var(--warning) !important;
+      color: var(--color-white) !important;
+    }
   }
 
   &__option {
-
     width: 100%;
     font-size: var(--base-font-size);
 
@@ -101,7 +116,6 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     &--is-selected {
       background-color: var(--primary);
     }
-
   }
 
   &__full {

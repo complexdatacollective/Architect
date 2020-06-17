@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Section } from '@components/EditorLayout';
-import CreatableSelect from '../../Form/Fields/CreatableSelect';
+import VariableSelect from '../../Form/Fields/VariableSelect';
+// import CreatableSelect from '../../Form/Fields/CreatableSelect';
 import ValidatedField from '../../Form/ValidatedField';
 import withOptions from './withOptions';
 import withCreateVariableHandler from '../../enhancers/withCreateVariableHandler';
@@ -15,10 +16,12 @@ import Tip from '../../Tip';
 
 const QuickAdd = ({
   disabled,
-  options,
+  entity,
   handleCreateVariable,
   handleDeleteVariable,
   normalizeKeyDown,
+  options,
+  type,
 }) => (
   <Section disabled={disabled} group contentId="guidance.editor.quickAdd">
     <h3 id="issue-form">Quick Add Variable</h3>
@@ -37,13 +40,15 @@ const QuickAdd = ({
     <div className="stage-editor-section-form">
       <ValidatedField
         name="quickAdd"
-        component={CreatableSelect}
+        component={VariableSelect}
         placeholder="Select an existing variable, or type to create a new one..."
         options={options}
         onCreateOption={value => handleCreateVariable(value, 'text')}
         onDeleteOption={handleDeleteVariable}
         onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
+        type={type}
+        entity={entity}
         formatCreateLabel={inputValue => (
           <span>Click here to create a new variable named &quot;{inputValue}&quot;.</span>
         )}
@@ -54,10 +59,12 @@ const QuickAdd = ({
 
 QuickAdd.propTypes = {
   disabled: PropTypes.bool,
-  options: PropTypes.array,
+  entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
   normalizeKeyDown: PropTypes.func.isRequired,
+  options: PropTypes.array,
+  type: PropTypes.string.isRequired,
 };
 
 QuickAdd.defaultProps = {

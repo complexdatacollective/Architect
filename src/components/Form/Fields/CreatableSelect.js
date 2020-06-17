@@ -19,6 +19,12 @@ const getValue = (options, value) => {
 };
 
 class CreatableSelect extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = { reservedVariable: null };
+  }
+
   get value() {
     return getValue(this.props.options, this.props.input.value);
   }
@@ -74,6 +80,8 @@ class CreatableSelect extends PureComponent {
       ...rest
     } = this.props;
 
+    const reservedVariable = this.state.reservedVariable;
+
     const componentClasses = cx(
       className,
       'form-fields-select',
@@ -86,6 +94,19 @@ class CreatableSelect extends PureComponent {
       this.getOptionWithDeleteProp(SelectOptionComponent) :
       SelectOptionComponent;
 
+    const reservedOption = reservedVariable ?
+      [{
+        label: `"${reservedVariable}" is already used elsewhere in ${rest.entity}`,
+        value: null,
+        __isWarning__: true,
+      }] :
+      [];
+
+    const optionsWithWarnings = [
+      ...options,
+      ...reservedOption,
+    ];
+
     return (
       <div className={componentClasses}>
         { label &&
@@ -95,7 +116,7 @@ class CreatableSelect extends PureComponent {
           className="form-fields-select"
           classNamePrefix="form-fields-select"
           {...input}
-          options={options}
+          options={optionsWithWarnings}
           filterOption={createFilter({
             ignoreCase: true,
             trim: true,
@@ -119,10 +140,15 @@ class CreatableSelect extends PureComponent {
             const isEmpty = option.replace(/ /g, '').length === 0;
 
             // True if option matches the label prop of the supplied object
-            const matchLabel = ({ label: variableLabel }) => variableLabel === option;
+            const matchLabel = ({ label: variableLabel }) =>
+              variableLabel.toLowerCase() === option.toLowerCase();
             const alreadyExists = options.some(matchLabel);
-
             const isReserved = reserved.some(matchLabel);
+            if (!alreadyExists && isReserved) {
+              this.setState({ reservedVariable: option });
+            } else {
+              this.setState({ reservedVariable: null });
+            }
 
             return !isEmpty && !alreadyExists && !isReserved;
           }}
