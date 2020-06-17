@@ -66,6 +66,7 @@ class CreatableSelect extends PureComponent {
       input: { onBlur, ...input },
       children,
       options,
+      reserved,
       selectOptionComponent: SelectOptionComponent,
       label,
       onCreateOption,
@@ -121,7 +122,9 @@ class CreatableSelect extends PureComponent {
             const matchLabel = ({ label: variableLabel }) => variableLabel === option;
             const alreadyExists = options.some(matchLabel);
 
-            return !isEmpty && !alreadyExists;
+            const isReserved = reserved.some(matchLabel);
+
+            return !isEmpty && !alreadyExists && !isReserved;
           }}
 
           {...rest}
@@ -143,6 +146,7 @@ CreatableSelect.propTypes = {
   onDeleteOption: PropTypes.func,
   label: PropTypes.string,
   children: PropTypes.node,
+  reserved: PropTypes.array,
   meta: PropTypes.object,
 };
 
@@ -154,6 +158,7 @@ CreatableSelect.defaultProps = {
   input: {},
   label: null,
   children: null,
+  reserved: [],
   meta: { invalid: false, error: null, touched: false },
 };
 
