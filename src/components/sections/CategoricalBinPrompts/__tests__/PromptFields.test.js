@@ -19,10 +19,20 @@ const initialState = {
           person: {
             variables: {
               bazz: {
-                options: ['a', 'b', 'c', 'd'],
+                name: 'bazz',
+                options: [
+                  { value: 'a', label: 'a' },
+                  { value: 'b', label: 'b' },
+                  { value: 'c', label: 'c' },
+                  { value: 'd', label: 'd' },
+                ],
               },
               buzz: {
-                options: [1, 2],
+                name: 'buzz',
+                options: [
+                  { value: 1, label: '1' },
+                  { value: 2, label: '2' },
+                ],
               },
             },
           },
@@ -53,82 +63,104 @@ const getSubject = (node, store, { form }) =>
   ));
 
 // eslint-disable-next-line import/prefer-default-export
-export const testPromptFields = (PromptFieldsComponent) => {
+export const testPromptFields = (PromptFieldsComponent, name = '') => {
   let mockStore;
 
   beforeEach(() => {
     mockStore = getStore(initialState);
   });
 
-  describe('PromptFields', () => {
-    it('when variable is created, variable options are updated', () => {
-      const formProps = { initialValues: { variable: 'bazz', variableOptions: ['a', 'b', 'c', 'd'] } };
-      const additionalProps = { form: formProps };
+  // TODO This seems to test the wrong part of codebook
 
-      const subject = getSubject(
-        (
-          <PromptFieldsComponent
-            form={mockFormName}
-            entity="node"
-            type="person"
-            handleDeleteVariable={jest.fn()}
-          />
-        ),
-        mockStore,
-        additionalProps,
-      );
+  describe(name, () => {
+    describe('PromptFields', () => {
+      it('when variable is created, variable options are updated', () => {
+        const formProps = {
+          initialValues: {
+            variable: 'bazz',
+            variableOptions: [
+              { label: 'bazz', value: 'bazz' },
+              { label: 'buzz', value: 'buzz' },
+            ],
+          },
+        };
+        const additionalProps = { form: formProps };
 
-      expect(subject.find(Options).find(Item).length).toBe(4);
+        const subject = getSubject(
+          (
+            <PromptFieldsComponent
+              form={mockFormName}
+              entity="node"
+              type="person"
+              handleDeleteVariable={jest.fn()}
+              handleUpdate={jest.fn()}
+            />
+          ),
+          mockStore,
+          additionalProps,
+        );
 
-      mockStore.dispatch(codebookActions.createVariable(
-        'node',
-        'person',
-        {
-          name: 'fizz',
-          type: 'foo',
-          options: [1, 2, 3],
-        },
-      ));
+        expect(subject.find(Options).find(Item).length).toBe(2);
 
-      mockStore.dispatch(change(
-        mockFormName,
-        'variable',
-        '809895df-bbd7-4c76-ac58-e6ada2625f9b',
-      ));
+        mockStore.dispatch(codebookActions.createVariable(
+          'node',
+          'person',
+          {
+            name: 'fizz',
+            type: 'foo',
+            options: [1, 2, 3],
+          },
+        ));
 
-      subject.update();
+        mockStore.dispatch(change(
+          mockFormName,
+          'variable',
+          '809895df-bbd7-4c76-ac58-e6ada2625f9b',
+        ));
 
-      expect(subject.find(Options).find(Item).length).toBe(3);
-    });
+        subject.update();
 
-    it('when variable is changed, variable options are updated', () => {
-      const formProps = { initialValues: { variable: 'bazz', variableOptions: ['a', 'b', 'c', 'd'] } };
-      const additionalProps = { form: formProps };
+        expect(subject.find(Options).find(Item).length).toBe(3);
+      });
 
-      const subject = getSubject(
-        (
-          <PromptFieldsComponent
-            form={mockFormName}
-            entity="node"
-            type="person"
-            handleDeleteVariable={jest.fn()}
-          />
-        ),
-        mockStore,
-        additionalProps,
-      );
+      it('when variable is changed, variable options are updated', () => {
+        const formProps = {
+          initialValues: {
+            variable: 'bazz',
+            variableOptions: [
+              { label: 'bazz', value: 'bazz' },
+              { label: 'buzz', value: 'buzz' },
+            ],
+          },
+        };
+        const additionalProps = { form: formProps };
 
-      expect(subject.find(Options).find(Item).length).toBe(4);
+        const subject = getSubject(
+          (
+            <PromptFieldsComponent
+              form={mockFormName}
+              entity="node"
+              type="person"
+              handleDeleteVariable={jest.fn()}
+              handleUpdate={jest.fn()}
+            />
+          ),
+          mockStore,
+          additionalProps,
+        );
 
-      mockStore.dispatch(change(
-        mockFormName,
-        'variable',
-        'buzz',
-      ));
+        expect(subject.find(Options).find(Item).length).toBe(2);
 
-      subject.update();
+        mockStore.dispatch(change(
+          mockFormName,
+          'variable',
+          'buzz',
+        ));
 
-      expect(subject.find(Options).find(Item).length).toBe(2);
+        subject.update();
+
+        expect(subject.find(Options).find(Item).length).toBe(2);
+      });
     });
   });
 };

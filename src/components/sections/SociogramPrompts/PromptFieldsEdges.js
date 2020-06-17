@@ -4,13 +4,13 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import * as ArchitectFields from '../../Form/Fields';
-import DetachedField from '../../DetachedField';
+import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import DetachedField from '@components/DetachedField';
+import withCreateEdgeHandlers from '@components/enhancers/withCreateEdgeHandler';
+import { ValidatedField } from '@components/Form';
+import Tip from '@components/Tip';
 import withEdgesOptions from './withEdgesOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
-import withCreateEdgeHandlers from '../../enhancers/withCreateEdgeHandler';
-import { ValidatedField } from '../../Form';
-import Tip from '../../Tip';
 
 const EdgeFields = ({
   edgesForSubject,
@@ -62,7 +62,7 @@ const EdgeFields = ({
         { canCreateEdge &&
           <ValidatedField
             name="edges.create"
-            component={ArchitectFields.CreatableSelect}
+            component={CreatableSelect}
             options={edgesForSubject}
             onCreateOption={handleCreateEdge}
             onChange={handleChangeCreateEdge}

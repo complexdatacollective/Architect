@@ -39,6 +39,24 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     padding: 0;
   }
 
+  &__option {
+    width: 100%;
+    font-size: var(--base-font-size);
+
+    &:active {
+      background-color: var(--color-sea-green--dark);
+      color: var(--text-light);
+    }
+
+    &--is-focused {
+      background-color: var(--color-platinum);
+    }
+
+    &--is-selected {
+      background-color: var(--primary);
+    }
+  }
+
   &__item {
     padding: 0 1rem;
     display: flex;
@@ -95,26 +113,8 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     }
 
     &--warning {
-      background: var(--warning) !important;
-      color: var(--color-white) !important;
-    }
-  }
-
-  &__option {
-    width: 100%;
-    font-size: var(--base-font-size);
-
-    &:active {
-      background-color: var(--color-sea-green--dark);
-      color: var(--text-light);
-    }
-
-    &--is-focused {
-      background-color: var(--color-platinum);
-    }
-
-    &--is-selected {
-      background-color: var(--primary);
+      background: var(--warning);
+      color: var(--color-white);
     }
   }
 

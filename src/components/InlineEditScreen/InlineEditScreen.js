@@ -57,10 +57,10 @@ InlineEditScreen.propTypes = {
   show: PropTypes.bool,
   form: PropTypes.string.isRequired,
   flipId: PropTypes.string,
-  handleSubmit: PropTypes.func.isRequired,
   title: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
+  submitForm: PropTypes.func.isRequired,
   children: PropTypes.node,
 };
 

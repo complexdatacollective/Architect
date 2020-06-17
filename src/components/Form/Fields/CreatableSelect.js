@@ -38,6 +38,13 @@ class CreatableSelect extends PureComponent {
     );
 
   handleChange = (option) => {
+    // We are presenting a "fake" option to show an error message,
+    // if it is selected we ignore the action.
+    // eslint-disable-next-line no-underscore-dangle
+    if (option.__isWarning__) {
+      return;
+    }
+
     if (option && option.value) {
       this.props.input.onChange(option.value);
     } else {
@@ -141,6 +148,7 @@ class CreatableSelect extends PureComponent {
 
             // True if option matches the label prop of the supplied object
             const matchLabel = ({ label: variableLabel }) =>
+              variableLabel && option &&
               variableLabel.toLowerCase() === option.toLowerCase();
             const alreadyExists = options.some(matchLabel);
             const isReserved = reserved.some(matchLabel);

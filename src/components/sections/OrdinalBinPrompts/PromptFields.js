@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
-import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ColorPicker from '@components/Form/Fields/ColorPicker';
 import MultiSelect from '@components/Form/MultiSelect';
 import { Section, Row } from '@components/EditorLayout';
@@ -16,14 +16,14 @@ import withVariableOptions from '@components/sections/CategoricalBinPrompts/with
 import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers';
 
 const PromptFields = ({
-  variableOptions,
+  changeForm,
+  entity,
+  form,
   normalizeKeyDown,
   onDeleteVariable,
-  entity,
-  changeForm,
-  form,
   type,
   variable,
+  variableOptions,
 }) => {
   const newVariableWindowInitialProps = {
     entity,
@@ -76,7 +76,9 @@ const PromptFields = ({
         </p>
         <ValidatedField
           name="variable"
-          component={CreatableSelect}
+          component={VariableSelect}
+          entity={entity}
+          type={type}
           label=""
           options={ordinalVariableOptions}
           onCreateOption={handleNewVariable}
@@ -160,7 +162,6 @@ const PromptFields = ({
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
-
 
       <NewVariableWindow {...newVariableWindowProps} />
     </Section>

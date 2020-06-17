@@ -6,7 +6,7 @@ import { isVariableTypeWithOptions, isVariableTypeWithParameters } from '@app/co
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import Select from '@components/Form/Fields/Select';
-import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import VariableSelect from '@components/Form/Fields/VariableSelect';
 import Options from '@components/Options';
 import Parameters from '@components/Parameters';
 import Validations from '@components/Validations';
@@ -28,6 +28,8 @@ const PromptFields = ({
   handleChangeComponent,
   handleChangeVariable,
   handleDeleteVariable,
+  entity,
+  type,
 }) => (
   <Section>
     <Row contentId="guidance.section.form.field.name">
@@ -45,7 +47,9 @@ const PromptFields = ({
       }
       <ValidatedField
         name="variable"
-        component={CreatableSelect}
+        component={VariableSelect}
+        entity={entity}
+        type={type}
         options={variableOptions} // from variables
         onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
         onChange={handleChangeVariable} // read/reset component options validation
@@ -159,6 +163,8 @@ PromptFields.propTypes = {
   handleNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
+  entity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 PromptFields.defaultProps = {
