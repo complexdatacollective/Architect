@@ -121,20 +121,29 @@ export const ISODate = dateFormat =>
     return undefined;
   };
 
+export const allowedVariableName = () =>
+  (value) => {
+    if (!/^[a-zA-Z0-9._\-:]+$/.test(value)) {
+      return 'Not a valid variable name/value';
+    }
+    return undefined;
+  };
+
 const validations = {
-  required,
-  requiredAcceptsZero,
-  requiredAcceptsNull,
-  positiveNumber,
-  minLength,
+  ISODate,
+  allowedVariableName,
   maxLength,
-  minValue,
-  maxValue,
-  minSelected,
   maxSelected,
+  maxValue,
+  minLength,
+  minSelected,
+  minValue,
+  positiveNumber,
+  required,
+  requiredAcceptsNull,
+  requiredAcceptsZero,
   uniqueArrayAttribute,
   uniqueByList,
-  ISODate,
 };
 
 /**

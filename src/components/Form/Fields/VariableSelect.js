@@ -1,8 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { compose, withProps } from 'recompose';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
 import CreatableSelect from './CreatableSelect';
+
+const withVariableValidator = withProps(({ validation }) => ({
+  validation: { ...validation, allowedVariableName: true },
+}));
 
 const mapStateToProps = (state, { entity, type }) => {
   const existingVariables = getVariableOptionsForSubject(state, { entity, type });
@@ -25,4 +30,7 @@ VariableSelect.defaultProps = {
   reserved: [],
 };
 
-export default connect(mapStateToProps)(VariableSelect);
+export default compose(
+  connect(mapStateToProps),
+  withVariableValidator,
+)(VariableSelect);
