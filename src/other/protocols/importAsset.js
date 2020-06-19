@@ -1,9 +1,12 @@
 import path from 'path';
 import uuid from 'uuid/v1';
-import { findKey, get, toLower } from 'lodash';
+import { findKey, get, toLower, first } from 'lodash';
 import csvParse from 'csv-parse';
 import { copy, readFile } from 'fs-extra';
-import { SUPPORTED_EXTENSION_TYPE_MAP } from '../../config';
+import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
+import { allowedNMToken } from '@app/utils/validations';
+
+const variableValidator = allowedNMToken();
 
 /**
  * Function that determines the type of an asset file when importing. Types are defined
@@ -58,9 +61,22 @@ const validateJson = data =>
 const validateCsv = data =>
   new Promise((resolve, reject) => {
     try {
-      csvParse(data, (err) => {
+      csvParse(data, (err, tableData) => {
         if (err) {
-          throw new Error(err);
+          return reject(new Error(err));
+        }
+
+        const firstRow = first(tableData);
+
+        // TODO: no data, if no first row?
+
+        // Check heading (variables) are valid
+        const errors = firstRow
+          .filter(variableName => variableValidator(variableName) !== undefined);
+
+        if (errors.length > 0) {
+          const message = `Variable name not allowed ("${errors.join('", "')}"). Only letters, numbers and the symbols ._-: are supported.`;
+          return reject(new Error(message));
         }
 
         resolve(true);

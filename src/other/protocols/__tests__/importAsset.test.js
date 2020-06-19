@@ -30,6 +30,8 @@ const validCsvFile = {
   name: 'valid_foo.csv',
 };
 
+const invalidCsvVariableFile = { text: () => Promise.resolve('foo bar,bazz!'), name: 'invalid_variables.csv' };
+
 const invalidCsvFile = {
   text: () => Promise.resolve('foo,bar,bazz\nonlyonecol'),
   name: 'invalid_foo.csv',
@@ -42,6 +44,7 @@ const files = [
   invalidJsonFile,
   validCsvFile,
   invalidCsvFile,
+  invalidCsvVariableFile,
 ];
 
 const getFile = path =>
@@ -86,6 +89,12 @@ describe('importAsset', () => {
       expect.assertions(1);
       return expect(validateAsset(invalidCsvFile.name))
         .rejects.toThrow(Error);
+    });
+
+    it('rejects for invalid csv variable names', () => {
+      // expect.assertions(1);
+      return expect(validateAsset(invalidCsvVariableFile.name))
+        .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.'));
     });
   });
 });
