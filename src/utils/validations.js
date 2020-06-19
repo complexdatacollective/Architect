@@ -162,4 +162,18 @@ export const getValidations = validationOptions =>
     },
   );
 
+export const getValidator = (validation = []) => {
+  const validators = getValidations(validation);
+
+  return (value) => {
+    const errors = validators.reduce((result, validator) => {
+      if (!validator(value) || result) { return result; }
+
+      return validator(value);
+    }, undefined);
+
+    return errors;
+  };
+};
+
 export default validations;

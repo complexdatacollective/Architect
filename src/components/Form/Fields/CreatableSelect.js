@@ -4,7 +4,7 @@ import Creatable from 'react-select/creatable';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
-import { getValidations } from '@app/utils/validations';
+import { getValidator } from '@app/utils/validations';
 import DefaultSelectOption from './DefaultSelectOption';
 
 /**
@@ -128,6 +128,8 @@ class CreatableSelect extends PureComponent {
       ...options,
     ];
 
+    const validator = getValidator(this.props.validation);
+
     return (
       <div className={componentClasses}>
         { label &&
@@ -154,13 +156,7 @@ class CreatableSelect extends PureComponent {
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
           isValidNewOption={(option) => {
-            // TODO: encapsulate validator in utils
-            const validate = getValidations(this.props.validation || []);
-            const validationErrors = validate.reduce((result, validator) => {
-              if (!validator(option) || result) { return result; }
-
-              return validator(option);
-            }, undefined);
+            const validationErrors = validator(option);
 
             // True if option contains only spaces or no chars
             const isEmpty = option.replace(/ /g, '').length === 0;
