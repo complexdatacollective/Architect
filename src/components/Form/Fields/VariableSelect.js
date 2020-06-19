@@ -6,7 +6,7 @@ import { getVariableOptionsForSubject } from '@selectors/codebook';
 import CreatableSelect from './CreatableSelect';
 
 const withVariableValidator = withProps(({ validation }) => ({
-  validation: { ...validation, allowedVariableName: true },
+  validation: { ...validation, allowedVariableName: 'variable name' },
 }));
 
 const mapStateToProps = (state, { entity, type }) => {

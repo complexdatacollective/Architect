@@ -121,10 +121,12 @@ export const ISODate = dateFormat =>
     return undefined;
   };
 
-export const allowedVariableName = () =>
+// Variables and option values must respect NMTOKEN rules so that
+// they are compatable with XML export formats
+export const allowedVariableName = (name = 'variable name') =>
   (value) => {
     if (!/^[a-zA-Z0-9._\-:]+$/.test(value)) {
-      return 'Not a valid variable name/value';
+      return `Not a valid ${name}. Only letters, numbers and the symbols ._-: are supported.`;
     }
     return undefined;
   };
