@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { isVariableTypeWithOptions, VARIABLE_OPTIONS } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
-import { required, uniqueByList } from '@app/utils/validations';
+import { required, uniqueByList, allowedVariableName } from '@app/utils/validations';
 import safeName from '@app/utils/safeName';
 import ValidatedField from '@components/Form/ValidatedField';
 import Select from '@components/Form/Fields/Select';
@@ -14,6 +14,8 @@ import InlineEditScreen from '@components/InlineEditScreen';
 import withNewVariableHandler, { form } from './withNewVariableHandler';
 
 const isRequired = required();
+
+const isAllowedVariableName = allowedVariableName();
 
 class NewVariableWindow extends Component {
   filteredVariableOptions() {
@@ -58,7 +60,7 @@ class NewVariableWindow extends Component {
             name="name"
             component={Fields.Text}
             placeholder="e.g. Nickname"
-            validate={[isRequired, this.validateName]}
+            validate={[isRequired, this.validateName, isAllowedVariableName]}
             normalize={safeName}
           />
         </Section>
