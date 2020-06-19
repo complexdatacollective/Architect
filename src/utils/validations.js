@@ -131,9 +131,12 @@ export const allowedVariableName = (name = 'variable name') =>
     return undefined;
   };
 
+export const allowedNMToken = allowedVariableName;
+
 const validations = {
   ISODate,
   allowedVariableName,
+  allowedNMToken,
   maxLength,
   maxSelected,
   maxValue,
@@ -153,7 +156,7 @@ const validations = {
 * which will always fail.
 * @param {object} validationOptions The protocol config for the validations to return.
   */
-export const getValidations = validationOptions =>
+export const getValidations = (validationOptions = {}) =>
   map(
     toPairs(validationOptions),
     ([type, options]) => {
@@ -164,7 +167,7 @@ export const getValidations = validationOptions =>
     },
   );
 
-export const getValidator = (validation = []) => {
+export const getValidator = (validation = {}) => {
   const validators = getValidations(validation);
 
   return (value) => {
