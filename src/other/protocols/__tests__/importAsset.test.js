@@ -25,6 +25,11 @@ const invalidJsonFile = {
   name: 'invalid_foo.json',
 };
 
+const invalidVariablesJson = {
+  text: () => Promise.resolve('{ "nodes": [ { "foo bar": "foo", "bazz!": "buzz" } ] }'),
+  name: 'invalid_variables.json',
+};
+
 const validCsvFile = {
   text: () => Promise.resolve('foo'),
   name: 'valid_foo.csv',
@@ -42,6 +47,7 @@ const files = [
   validJsonFileWithEdges,
   emptyJsonFile,
   invalidJsonFile,
+  invalidVariablesJson,
   validCsvFile,
   invalidCsvFile,
   invalidCsvVariableFile,
@@ -69,13 +75,15 @@ describe('importAsset', () => {
     });
 
     it('rejects for invalid/empty json', () => {
-      expect.assertions(2);
+      expect.assertions(3);
 
       return Promise.all([
         expect(validateAsset(invalidJsonFile.name))
           .rejects.toThrow(Error),
         expect(validateAsset(emptyJsonFile.name))
           .rejects.toThrow(Error),
+        expect(validateAsset(invalidVariablesJson.name))
+          .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),
       ]);
     });
 
@@ -86,15 +94,14 @@ describe('importAsset', () => {
     });
 
     it('rejects for invalid csv', () => {
-      expect.assertions(1);
-      return expect(validateAsset(invalidCsvFile.name))
-        .rejects.toThrow(Error);
-    });
+      expect.assertions(2);
 
-    it('rejects for invalid csv variable names', () => {
-      // expect.assertions(1);
-      return expect(validateAsset(invalidCsvVariableFile.name))
-        .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.'));
+      return Promise.all([
+        expect(validateAsset(invalidCsvFile.name))
+          .rejects.toThrow(Error),
+        expect(validateAsset(invalidCsvVariableFile.name))
+          .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),
+      ]);
     });
   });
 });

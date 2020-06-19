@@ -42,6 +42,27 @@ const importAsset = (protocolPath, filePath) =>
       .then(resolve);
   });
 
+const getUniqueAttributes = (items) => {
+  const uniqueSet = items.reduce(
+    (acc, node) => {
+      Object.keys(node)
+        .forEach(key => acc.add(key));
+      return acc;
+    },
+    new Set([]),
+  );
+
+  return Array.from(uniqueSet);
+};
+
+const validateNames = (items) => {
+  const errors = items
+    .filter(item => variableValidator(item) !== undefined);
+
+  if (errors.length === 0) { return false; }
+
+  return `Variable name not allowed ("${errors.join('", "')}"). Only letters, numbers and the symbols ._-: are supported.`;
+};
 
 const validateJson = data =>
   new Promise((resolve, reject) => {
@@ -49,12 +70,23 @@ const validateJson = data =>
       const network = JSON.parse(data);
 
       if (get(network, 'nodes', []).length === 0 && get(network, 'edges', []).length === 0) {
-        throw new Error("JSON network asset doesn't include any nodes or edges");
+        return reject(new Error("JSON network asset doesn't include any nodes or edges"));
       }
 
-      resolve(true);
+      // check variable names
+      const variableNames = ['nodes', 'edges'].flatMap(
+        entity => getUniqueAttributes(get(network, entity, [])),
+      );
+
+      const error = validateNames(variableNames);
+
+      if (error) { return reject(new Error(error)); }
+
+      // check option values
+
+      return resolve(true);
     } catch (e) {
-      reject(e);
+      return reject(e);
     }
   });
 
@@ -68,18 +100,12 @@ const validateCsv = data =>
 
         const firstRow = first(tableData);
 
-        // TODO: no data, if no first row?
-
         // Check heading (variables) are valid
-        const errors = firstRow
-          .filter(variableName => variableValidator(variableName) !== undefined);
+        const error = validateNames(firstRow);
 
-        if (errors.length > 0) {
-          const message = `Variable name not allowed ("${errors.join('", "')}"). Only letters, numbers and the symbols ._-: are supported.`;
-          return reject(new Error(message));
-        }
+        if (error) { return reject(new Error(error)); }
 
-        resolve(true);
+        return resolve(true);
       });
     } catch (e) {
       reject(e);
