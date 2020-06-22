@@ -16,6 +16,9 @@ export const invalidAssetErrorDialog = (e, filePath) => {
         row comprising variable names, and be in the format of a node or edge list.
       </p>
       <p>
+        Variable names must use only letters, numbers, the symbols ._-: and contain no spaces.
+      </p>
+      <p>
         If you believe you are seeing this message in error, please help us to
         troubleshoot the issue by sharing the asset file with us at&nbsp;
         <code>info@networkcanvas.com</code>.

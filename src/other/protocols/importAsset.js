@@ -82,7 +82,8 @@ const validateJson = data =>
 
       if (error) { return reject(new Error(error)); }
 
-      // check option values
+      // Check option values
+      // Not needed at this point, as unsupported feature
 
       return resolve(true);
     } catch (e) {
