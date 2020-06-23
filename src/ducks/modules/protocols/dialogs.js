@@ -1,5 +1,6 @@
 import React from 'react';
 import path from 'path';
+import Markdown from 'react-markdown';
 import { actionCreators as dialogActions } from '../dialogs';
 
 export const validationErrorDialog = (e) => {
@@ -67,7 +68,11 @@ export const appUpgradeRequiredDialog = (protocol) => {
   });
 };
 
-export const mayUpgradeProtocolDialog = (protocolSchemaVersion, targetSchemaVersion) => {
+export const mayUpgradeProtocolDialog = (
+  protocolSchemaVersion,
+  targetSchemaVersion,
+  migrationNotes = [],
+) => {
   const message = (
     <React.Fragment>
       <p>This protocol uses an out-dated schema
@@ -76,6 +81,18 @@ export const mayUpgradeProtocolDialog = (protocolSchemaVersion, targetSchemaVers
       (schema version &quot;{targetSchemaVersion}&quot;).</p>
 
       <p>An upgraded copy of the protocol will be created and then opened.</p>
+
+      { migrationNotes.length > 0 &&
+        <React.Fragment>
+          <p>Information for specific migration changes are shown below:</p>
+          {migrationNotes.map(({ version, notes }) => (
+            <React.Fragment key={version}>
+              <h4>Schema Version {version}</h4>
+              <Markdown source={notes} />
+            </React.Fragment>
+          ))}
+        </React.Fragment>
+      }
     </React.Fragment>
   );
 

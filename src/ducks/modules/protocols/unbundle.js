@@ -1,6 +1,7 @@
 import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
+import getMigrationNotes from '@app/protocol-validation/migrations/getMigrationNotes';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
 import unbundleProtocol from '@app/other/protocols/unbundleProtocol';
@@ -61,8 +62,12 @@ const registerProtocolThunk = ({ protocol, filePath, workingPath }) =>
       });
 
 const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
-  dispatch =>
-    dispatch(mayUpgradeProtocolDialog(protocol.schemaVersion, APP_SCHEMA_VERSION))
+  (dispatch) => {
+    const migrationNotes = getMigrationNotes(protocol.schemaVersion, APP_SCHEMA_VERSION);
+
+    return dispatch(
+      mayUpgradeProtocolDialog(protocol.schemaVersion, APP_SCHEMA_VERSION, migrationNotes),
+    )
       .then((confirm) => {
         if (!confirm) { return null; }
 
@@ -82,6 +87,7 @@ const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
               );
           });
       });
+  };
 
 const unbundleProtocolThunk = filePath =>
   (dispatch) => {
