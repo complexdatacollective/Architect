@@ -14,19 +14,19 @@ exports[`SociogramPrompts selectors get highlight variables for node type 1`] = 
 Array [
   Object {
     "isUsed": false,
-    "label": "my boolean",
+    "label": "my_boolean",
     "type": "boolean",
     "value": "1234-1234-3",
   },
   Object {
     "isUsed": true,
-    "label": "other boolean 2",
+    "label": "other_boolean_2",
     "type": "boolean",
     "value": "1234-1234-4",
   },
   Object {
     "isUsed": true,
-    "label": "other boolean 4",
+    "label": "other_boolean_4",
     "type": "boolean",
     "value": "1234-1234-5",
   },
@@ -37,7 +37,7 @@ exports[`SociogramPrompts selectors get layout variables for node type 1`] = `
 Array [
   Object {
     "isUsed": false,
-    "label": "my layout",
+    "label": "my_layout",
     "type": "layout",
     "value": "1234-1234-1",
   },
