@@ -1,4 +1,4 @@
-import { isArray, values, reduce } from 'lodash';
+import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 import collectPaths, { PathCollector, collectMappedPaths } from '../utils/collectPaths';

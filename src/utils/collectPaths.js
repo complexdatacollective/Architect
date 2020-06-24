@@ -1,4 +1,4 @@
-import { get, map, reduce, isArray } from 'lodash';
+import { get, reduce, isArray } from 'lodash';
 
 /**
  * Collect nodes that match path from `obj`
@@ -67,7 +67,6 @@ const collectPaths = (paths, obj, memoPath) => {
 
   // special case to parse end array
   if (Array.isArray(nextObj) && scanArray) {
-
     const result = reduce(
       nextObj || [],
       (memo, item, index) => ({
@@ -76,8 +75,6 @@ const collectPaths = (paths, obj, memoPath) => {
       }),
       {},
     );
-
-    // console.log('special', nextObj, `${path}`, result);
 
     return result;
   }
