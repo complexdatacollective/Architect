@@ -1,11 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Field } from 'redux-form';
+import PropTypes from 'prop-types';
+import { capitalize } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
+import { getFieldId } from '@app/utils/issues';
+import { ValidatedField } from '@components/Form';
+import * as ArchitectFields from '@components/Form/Fields';
 import Layout, { Heading, Section } from '@components/EditorLayout';
-import { getFieldId } from '../../utils/issues';
-import * as ArchitectFields from '../Form/Fields';
-import { ValidatedField } from '../Form';
+import { getCodebook } from '@selectors/protocol';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
 import Variables from './Variables';
@@ -20,6 +23,7 @@ const TypeEditor = ({
   entity,
   type,
   displayVariables,
+  existingTypes,
   isNew,
 }) => {
   const { name: paletteName, size: paletteSize } = getPalette(entity);
@@ -31,7 +35,7 @@ const TypeEditor = ({
       </Heading>
 
       <Section>
-        <h3 id={getFieldId('name')}>{entity} Type</h3>
+        <h3 id={getFieldId('name')}>{capitalize(entity)} Type</h3>
         <p>
           What type of {entity} is this?
           { entity === 'node' && ' Some examples might be "Person", "Place", or "Agency".' }
@@ -40,7 +44,7 @@ const TypeEditor = ({
         <ValidatedField
           component={Fields.Text}
           name="name"
-          validation={{ required: true }}
+          validation={{ required: true, allowedNMToken: 'node type name', uniqueByList: existingTypes }}
         />
       </Section>
 
@@ -123,6 +127,24 @@ TypeEditor.defaultProps = {
   isNew: false,
 };
 
+const mapStateToProps = (state) => {
+  const codebook = getCodebook(state);
+  const existingTypes = [
+    ...Object.values(codebook.node).map(node => node.name),
+    ...Object.values(codebook.edge).map(edge => edge.name),
+  ];
+
+
+  console.log({
+    existingTypes,
+  });
+
+  return {
+    existingTypes,
+  };
+
+};
+
 export { TypeEditor };
 
-export default TypeEditor;
+export default connect(mapStateToProps)(TypeEditor);
