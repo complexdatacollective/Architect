@@ -118,6 +118,7 @@ TypeEditor.propTypes = {
   entity: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
   displayVariables: PropTypes.array.isRequired,
+  existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
 };
 
@@ -134,15 +135,9 @@ const mapStateToProps = (state) => {
     ...Object.values(codebook.edge).map(edge => edge.name),
   ];
 
-
-  console.log({
-    existingTypes,
-  });
-
   return {
     existingTypes,
   };
-
 };
 
 export { TypeEditor };

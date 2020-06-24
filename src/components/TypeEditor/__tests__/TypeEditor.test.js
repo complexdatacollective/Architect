@@ -14,6 +14,7 @@ const mockProps = {
   toggleCodeView: () => {},
   showCodeView: true,
   autofill: () => {},
+  existingTypes: [],
   nameTouched: false,
 };
 
