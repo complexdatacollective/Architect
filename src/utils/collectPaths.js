@@ -86,4 +86,26 @@ const collectPaths = (paths, obj, memoPath) => {
   return {};
 };
 
+class PathCollector {
+  constructor() {
+    this.attributePaths = new Set([]);
+  }
+
+  add(attributePath) {
+    this.attributePaths.add(attributePath);
+  }
+
+  collect(obj) {
+    return Array.from(this.attributePaths).reduce(
+      (acc, attributePath) => ({
+        ...acc,
+        ...collectPaths(attributePath, obj),
+      }),
+      {},
+    );
+  }
+}
+
+export { PathCollector };
+
 export default collectPaths;

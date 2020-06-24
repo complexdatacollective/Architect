@@ -1,7 +1,7 @@
 import { isArray, values, reduce } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
-import collectPaths from '../utils/collectPaths';
+import collectPaths, { PathCollector } from '../utils/collectPaths';
 
 /**
  * Returns index of used edges (entities)
@@ -92,47 +92,37 @@ const getNodeIndex = createSelector(
   },
 );
 
+const variablePathCollector = new PathCollector();
+
+variablePathCollector.add('stages[].quickAdd');
+variablePathCollector.add('stages[].form.fields[].variable');
+variablePathCollector.add('stages[].panels.filter.rules[].options.attribute');
+variablePathCollector.add('stages[].searchOptions.matchProperties[]');
+variablePathCollector.add('stages[].cardOptions.additionalProperties[].variable');
+variablePathCollector.add('stages[].prompts[].variable');
+variablePathCollector.add('stages[].prompts[].additionalAttributes[].variable');
+variablePathCollector.add('stages[].prompts[].highlight.variable');
+variablePathCollector.add('stages[].prompts[].layout.layoutVariable');
+variablePathCollector.add('stages[].prompts[].presets[].layoutVariable');
+variablePathCollector.add('stages[].prompts[].presets[].groupVariable');
+variablePathCollector.add('stages[].prompts[].presets[].edges.display[]');
+variablePathCollector.add('stages[].prompts[].presets[].highlight[]');
+variablePathCollector.add('stages[].prompts[].bucketSortOrder[].property');
+variablePathCollector.add('stages[].prompts[].binSortOrder[].property');
+variablePathCollector.add('stages[].skipLogic.filter.rules[].options.attribute');
+variablePathCollector.add('stages[].filter.rules[].options.attribute');
+variablePathCollector.add('stages[].presets[].layoutVariable');
+variablePathCollector.add('stages[].presets[].groupVariable');
+variablePathCollector.add('stages[].presets[].edges.display[]');
+variablePathCollector.add('stages[].presets[].highlight[]');
+
 /**
  * Returns index of used variables
- * Checks for usage in the following:
- * - `prompts[].variable`
- * - `prompts[].form.fields[].variable`
- * - `prompts[].highlight.variable`
  * @returns {object} in format: { [path]: variable }
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    // Generic prompt usage
-    const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
-    const additionalAttributes = collectPaths('stages[].prompts[].additionalAttributes[].variable', protocol);
-    const nameGeneratorIndex = collectPaths('stages[].panels.filter.rules[].options.attribute', protocol);
-    const categoricalIndex = collectPaths('stages[].prompts[].variable', protocol);
-    // Sociogram usage
-    const sociogramIndex = {
-      ...collectPaths('stages[].prompts[].highlight.variable', protocol),
-      ...collectPaths('stages[].prompts[].layout.layoutVariable', protocol),
-    };
-    const narrativeIndex = {
-      ...collectPaths('stages[].prompts[].presets[].layoutVariable', protocol),
-      ...collectPaths('stages[].prompts[].presets[].groupVariable', protocol),
-      ...collectPaths('stages[].prompts[].presets[].edges.display[]', protocol),
-      ...collectPaths('stages[].prompts[].presets[].highlight[]', protocol),
-    };
-    const skipLogicIndex = collectPaths('stages[].skipLogic.filter.rules[].options.attribute', protocol);
-    const filterIndex = collectPaths('stages[].filter.rules[].options.attribute', protocol);
-
-    return {
-      ...formIndex,
-      ...additionalAttributes,
-      ...categoricalIndex,
-      ...nameGeneratorIndex,
-      ...sociogramIndex,
-      ...narrativeIndex,
-      ...skipLogicIndex,
-      ...filterIndex,
-    };
-  },
+  protocol => variablePathCollector.collect(protocol),
 );
 
 /**
