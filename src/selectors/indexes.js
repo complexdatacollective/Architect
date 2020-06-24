@@ -1,7 +1,7 @@
 import { isArray, values, reduce } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
-import collectPaths, { PathCollector } from '../utils/collectPaths';
+import collectPaths, { PathCollector, collectMappedPaths } from '../utils/collectPaths';
 
 /**
  * Returns index of used edges (entities)
@@ -15,45 +15,18 @@ const getEdgeIndex = createSelector(
   getProtocol,
   (protocol) => {
     const createEdges = collectPaths('stages[].prompts[].edges.create', protocol);
+
     // TODO: This reducer shouldn't be necessary, look at updating collectPaths
-    const displayEdges = reduce(
-      collectPaths('stages[].prompts[].edges.display', protocol),
-      (memo, edges, path) => ({
-        ...memo,
-        ...edges.reduce((acc, edge, i) => ({
-          ...acc,
-          [`${path}[${i}]`]: edge,
-        }), {}),
-      }),
-      {},
-    );
+    const displayEdges = collectPaths('stages[].prompts[].edges.display[]', protocol);
 
-    const narrativeEdges = reduce(
-      collectPaths('stages[].presets[].edges.display', protocol),
-      (memo, edges, path) => ({
-        ...memo,
-        ...edges.reduce((acc, edge, i) => ({
-          ...acc,
-          [`${path}[${i}]`]: edge,
-        }), {}),
-      }),
-      {},
-    );
+    const narrativeEdges = collectPaths('stages[].presets[].edges.display[]', protocol);
 
-    // we only want subject of entity node
-    const alterEdgeFormEdges = reduce(
-      collectPaths('stages[].subject', protocol),
-      (memo, subject, path) => {
-        if (subject.entity !== 'edge') {
-          return memo;
-        }
-        return {
-          ...memo,
-          [`${path}.type`]: subject.type,
-        };
-      },
-      {},
-    );
+    const mapEdges = ({ type, entity }, path) => {
+      if (entity !== 'edge') { return undefined; }
+      return [`${path}.type`, type];
+    };
+
+    const alterEdgeFormEdges = collectMappedPaths('stages[].subject', protocol, mapEdges);
 
     return {
       ...createEdges,
@@ -73,22 +46,12 @@ const getEdgeIndex = createSelector(
 const getNodeIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const subjectIndex = collectPaths('stages[].subject', protocol);
+    const mapNodes = ({ type, entity }, path) => {
+      if (entity !== 'node') { return undefined; }
+      return [`${path}.type`, type];
+    };
 
-    // we only want subject of entity node
-    return reduce(
-      subjectIndex,
-      (memo, subject, path) => {
-        if (subject.entity !== 'node') {
-          return memo;
-        }
-        return {
-          ...memo,
-          [`${path}.type`]: subject.type,
-        };
-      },
-      {},
-    );
+    return collectMappedPaths('stages[].subject', protocol, mapNodes);
   },
 );
 
@@ -137,23 +100,18 @@ const getVariableIndex = createSelector(
 const getAssetIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const informationItems = reduce(
-      collectPaths('stages[].items[]', protocol),
-      (acc, { type, content }, index) => {
-        if (type === 'text') { return acc; }
-        return {
-          ...acc,
-          [`${index}.content`]: content,
-        };
-      },
-      {},
-    );
+    const mapAssets = ({ type, content }, path) => {
+      if (type === 'text') { return undefined; }
+      return [`${path}.content`, content];
+    };
+
+    const informationAssets = collectMappedPaths('stages[].items[]', protocol, mapAssets);
     const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
     const nameGeneratorDataSources = collectPaths('stages[].dataSource', protocol);
     const sociogramBackground = collectPaths('stages[].background.image', protocol);
 
     return {
-      ...informationItems,
+      ...informationAssets,
       ...nameGeneratorPanels,
       ...nameGeneratorDataSources,
       ...sociogramBackground,

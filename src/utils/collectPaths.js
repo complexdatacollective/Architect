@@ -1,4 +1,4 @@
-import { get, reduce, isArray } from 'lodash';
+import { get, map, reduce, isArray } from 'lodash';
 
 /**
  * Collect nodes that match path from `obj`
@@ -67,7 +67,8 @@ const collectPaths = (paths, obj, memoPath) => {
 
   // special case to parse end array
   if (Array.isArray(nextObj) && scanArray) {
-    return reduce(
+
+    const result = reduce(
       nextObj || [],
       (memo, item, index) => ({
         ...memo,
@@ -75,6 +76,10 @@ const collectPaths = (paths, obj, memoPath) => {
       }),
       {},
     );
+
+    // console.log('special', nextObj, `${path}`, result);
+
+    return result;
   }
 
   if (nextObj) {
@@ -86,7 +91,20 @@ const collectPaths = (paths, obj, memoPath) => {
   return {};
 };
 
-class PathCollector {
+export const collectMappedPaths = (paths, obj, mapFunc) => {
+  const collectedPaths = collectPaths(paths, obj);
+
+  return reduce(collectedPaths, (acc, value, path) => {
+    const result = mapFunc(value, path);
+    if (result === undefined) { return acc; }
+    return {
+      ...acc,
+      [result[0]]: result[1],
+    };
+  }, {});
+};
+
+export class PathCollector {
   constructor() {
     this.attributePaths = new Set([]);
   }
@@ -105,7 +123,5 @@ class PathCollector {
     );
   }
 }
-
-export { PathCollector };
 
 export default collectPaths;
