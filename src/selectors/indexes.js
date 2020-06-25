@@ -1,7 +1,7 @@
-import { isArray, values, reduce } from 'lodash';
+import { isArray, values } from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
-import collectPaths from '../utils/collectPaths';
+import collectPaths, { PathCollector, collectMappedPaths } from '../utils/collectPaths';
 
 /**
  * Returns index of used edges (entities)
@@ -15,45 +15,18 @@ const getEdgeIndex = createSelector(
   getProtocol,
   (protocol) => {
     const createEdges = collectPaths('stages[].prompts[].edges.create', protocol);
+
     // TODO: This reducer shouldn't be necessary, look at updating collectPaths
-    const displayEdges = reduce(
-      collectPaths('stages[].prompts[].edges.display', protocol),
-      (memo, edges, path) => ({
-        ...memo,
-        ...edges.reduce((acc, edge, i) => ({
-          ...acc,
-          [`${path}[${i}]`]: edge,
-        }), {}),
-      }),
-      {},
-    );
+    const displayEdges = collectPaths('stages[].prompts[].edges.display[]', protocol);
 
-    const narrativeEdges = reduce(
-      collectPaths('stages[].presets[].edges.display', protocol),
-      (memo, edges, path) => ({
-        ...memo,
-        ...edges.reduce((acc, edge, i) => ({
-          ...acc,
-          [`${path}[${i}]`]: edge,
-        }), {}),
-      }),
-      {},
-    );
+    const narrativeEdges = collectPaths('stages[].presets[].edges.display[]', protocol);
 
-    // we only want subject of entity node
-    const alterEdgeFormEdges = reduce(
-      collectPaths('stages[].subject', protocol),
-      (memo, subject, path) => {
-        if (subject.entity !== 'edge') {
-          return memo;
-        }
-        return {
-          ...memo,
-          [`${path}.type`]: subject.type,
-        };
-      },
-      {},
-    );
+    const mapEdges = ({ type, entity }, path) => {
+      if (entity !== 'edge') { return undefined; }
+      return [`${path}.type`, type];
+    };
+
+    const alterEdgeFormEdges = collectMappedPaths('stages[].subject', protocol, mapEdges);
 
     return {
       ...createEdges,
@@ -73,66 +46,46 @@ const getEdgeIndex = createSelector(
 const getNodeIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const subjectIndex = collectPaths('stages[].subject', protocol);
+    const mapNodes = ({ type, entity }, path) => {
+      if (entity !== 'node') { return undefined; }
+      return [`${path}.type`, type];
+    };
 
-    // we only want subject of entity node
-    return reduce(
-      subjectIndex,
-      (memo, subject, path) => {
-        if (subject.entity !== 'node') {
-          return memo;
-        }
-        return {
-          ...memo,
-          [`${path}.type`]: subject.type,
-        };
-      },
-      {},
-    );
+    return collectMappedPaths('stages[].subject', protocol, mapNodes);
   },
 );
 
+const variablePathCollector = new PathCollector();
+
+variablePathCollector.add('stages[].quickAdd');
+variablePathCollector.add('stages[].form.fields[].variable');
+variablePathCollector.add('stages[].panels.filter.rules[].options.attribute');
+variablePathCollector.add('stages[].searchOptions.matchProperties[]');
+variablePathCollector.add('stages[].cardOptions.additionalProperties[].variable');
+variablePathCollector.add('stages[].prompts[].variable');
+variablePathCollector.add('stages[].prompts[].additionalAttributes[].variable');
+variablePathCollector.add('stages[].prompts[].highlight.variable');
+variablePathCollector.add('stages[].prompts[].layout.layoutVariable');
+variablePathCollector.add('stages[].prompts[].presets[].layoutVariable');
+variablePathCollector.add('stages[].prompts[].presets[].groupVariable');
+variablePathCollector.add('stages[].prompts[].presets[].edges.display[]');
+variablePathCollector.add('stages[].prompts[].presets[].highlight[]');
+variablePathCollector.add('stages[].prompts[].bucketSortOrder[].property');
+variablePathCollector.add('stages[].prompts[].binSortOrder[].property');
+variablePathCollector.add('stages[].skipLogic.filter.rules[].options.attribute');
+variablePathCollector.add('stages[].filter.rules[].options.attribute');
+variablePathCollector.add('stages[].presets[].layoutVariable');
+variablePathCollector.add('stages[].presets[].groupVariable');
+variablePathCollector.add('stages[].presets[].edges.display[]');
+variablePathCollector.add('stages[].presets[].highlight[]');
+
 /**
  * Returns index of used variables
- * Checks for usage in the following:
- * - `prompts[].variable`
- * - `prompts[].form.fields[].variable`
- * - `prompts[].highlight.variable`
  * @returns {object} in format: { [path]: variable }
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  (protocol) => {
-    // Generic prompt usage
-    const formIndex = collectPaths('stages[].form.fields[].variable', protocol);
-    const additionalAttributes = collectPaths('stages[].prompts[].additionalAttributes[].variable', protocol);
-    const nameGeneratorIndex = collectPaths('stages[].panels.filter.rules[].options.attribute', protocol);
-    const categoricalIndex = collectPaths('stages[].prompts[].variable', protocol);
-    // Sociogram usage
-    const sociogramIndex = {
-      ...collectPaths('stages[].prompts[].highlight.variable', protocol),
-      ...collectPaths('stages[].prompts[].layout.layoutVariable', protocol),
-    };
-    const narrativeIndex = {
-      ...collectPaths('stages[].prompts[].presets[].layoutVariable', protocol),
-      ...collectPaths('stages[].prompts[].presets[].groupVariable', protocol),
-      ...collectPaths('stages[].prompts[].presets[].edges.display[]', protocol),
-      ...collectPaths('stages[].prompts[].presets[].highlight[]', protocol),
-    };
-    const skipLogicIndex = collectPaths('stages[].skipLogic.filter.rules[].options.attribute', protocol);
-    const filterIndex = collectPaths('stages[].filter.rules[].options.attribute', protocol);
-
-    return {
-      ...formIndex,
-      ...additionalAttributes,
-      ...categoricalIndex,
-      ...nameGeneratorIndex,
-      ...sociogramIndex,
-      ...narrativeIndex,
-      ...skipLogicIndex,
-      ...filterIndex,
-    };
-  },
+  protocol => variablePathCollector.collect(protocol),
 );
 
 /**
@@ -147,23 +100,18 @@ const getVariableIndex = createSelector(
 const getAssetIndex = createSelector(
   getProtocol,
   (protocol) => {
-    const informationItems = reduce(
-      collectPaths('stages[].items[]', protocol),
-      (acc, { type, content }, index) => {
-        if (type === 'text') { return acc; }
-        return {
-          ...acc,
-          [`${index}.content`]: content,
-        };
-      },
-      {},
-    );
+    const mapAssets = ({ type, content }, path) => {
+      if (type === 'text') { return undefined; }
+      return [`${path}.content`, content];
+    };
+
+    const informationAssets = collectMappedPaths('stages[].items[]', protocol, mapAssets);
     const nameGeneratorPanels = collectPaths('stages[].panels[].dataSource', protocol);
     const nameGeneratorDataSources = collectPaths('stages[].dataSource', protocol);
     const sociogramBackground = collectPaths('stages[].background.image', protocol);
 
     return {
-      ...informationItems,
+      ...informationAssets,
       ...nameGeneratorPanels,
       ...nameGeneratorDataSources,
       ...sociogramBackground,

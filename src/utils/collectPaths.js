@@ -67,7 +67,7 @@ const collectPaths = (paths, obj, memoPath) => {
 
   // special case to parse end array
   if (Array.isArray(nextObj) && scanArray) {
-    return reduce(
+    const result = reduce(
       nextObj || [],
       (memo, item, index) => ({
         ...memo,
@@ -75,6 +75,8 @@ const collectPaths = (paths, obj, memoPath) => {
       }),
       {},
     );
+
+    return result;
   }
 
   if (nextObj) {
@@ -85,5 +87,38 @@ const collectPaths = (paths, obj, memoPath) => {
 
   return {};
 };
+
+export const collectMappedPaths = (paths, obj, mapFunc) => {
+  const collectedPaths = collectPaths(paths, obj);
+
+  return reduce(collectedPaths, (acc, value, path) => {
+    const result = mapFunc(value, path);
+    if (result === undefined) { return acc; }
+    return {
+      ...acc,
+      [result[0]]: result[1],
+    };
+  }, {});
+};
+
+export class PathCollector {
+  constructor() {
+    this.attributePaths = new Set([]);
+  }
+
+  add(attributePath) {
+    this.attributePaths.add(attributePath);
+  }
+
+  collect(obj) {
+    return Array.from(this.attributePaths).reduce(
+      (acc, attributePath) => ({
+        ...acc,
+        ...collectPaths(attributePath, obj),
+      }),
+      {},
+    );
+  }
+}
 
 export default collectPaths;

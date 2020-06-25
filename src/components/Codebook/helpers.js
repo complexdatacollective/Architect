@@ -1,7 +1,10 @@
 import { reduce, get, compact, uniq, map } from 'lodash';
 import { getType } from '@selectors/codebook';
-import { utils, getVariableIndex } from '@selectors/indexes';
+import { makeGetIsUsed } from '@selectors/codebook/isUsed';
+import { getVariableIndex } from '@selectors/indexes';
 import { getProtocol } from '@selectors/protocol';
+
+const getIsUsed = makeGetIsUsed({ formNames: [] });
 
 /**
  * Extract basic stage meta by index from the app state
@@ -64,12 +67,12 @@ export const getEntityProperties = (state, { entity, type }) => {
   } = getType(state, { entity, type });
 
   const variableIndex = getVariableIndex(state);
-  const variableLookup = utils.buildSearch([variableIndex]);
+  const isUsedIndex = getIsUsed(state);
 
   const variablesWithUsage = map(
     variables,
     (variable, id) => {
-      const inUse = variableLookup.has(id);
+      const inUse = get(isUsedIndex, id, false);
 
       const usage = inUse ?
         getUsageAsStageMeta(state, getUsage(variableIndex, id)).sort(sortByLabel) :
