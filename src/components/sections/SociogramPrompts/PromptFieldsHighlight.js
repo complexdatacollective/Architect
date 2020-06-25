@@ -4,22 +4,24 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import * as ArchitectFields from '../../Form/Fields';
-import ValidatedField from '../../Form/ValidatedField';
-import withCreateVariableHandlers from '../../enhancers/withCreateVariableHandler';
+import VariableSelect from '@components/Form/Fields/VariableSelect';
+import ValidatedField from '@components/Form/ValidatedField';
+import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
+import Tip from '@components/Tip';
 import withHighlightOptions from './withHighlightOptions';
 import withEdgeHighlightChangeHandler from './withEdgeHighlightChangeHandler';
-import Tip from '../../Tip';
 
 const HighlightFields = ({
   allowHighlighting,
-  highlightVariablesForSubject,
-  handleEdgeHighlightChange,
+  canCreateEdge,
+  entity,
   handleCreateVariable,
   handleDeleteVariable,
+  handleEdgeHighlightChange,
+  highlightVariablesForSubject,
   normalizeKeyDown,
-  canCreateEdge,
   setCanCreateEdge,
+  type,
 }) => {
   const handleChangeAllowHighlighting = (value) => {
     handleEdgeHighlightChange();
@@ -52,7 +54,9 @@ const HighlightFields = ({
         { allowHighlighting &&
           <ValidatedField
             name="highlight.variable"
-            component={ArchitectFields.CreatableSelect}
+            component={VariableSelect}
+            entity={entity}
+            type={type}
             label="Which boolean variable should be toggled?"
             onCreateOption={value => handleCreateVariable(value, 'boolean')}
             onDeleteOption={value => handleDeleteVariable(value)}
@@ -73,14 +77,16 @@ const HighlightFields = ({
 };
 
 HighlightFields.propTypes = {
-  highlightVariablesForSubject: PropTypes.array.isRequired,
-  handleEdgeHighlightChange: PropTypes.func.isRequired,
+  allowHighlighting: PropTypes.bool,
+  canCreateEdge: PropTypes.bool.isRequired,
+  entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
+  handleEdgeHighlightChange: PropTypes.func.isRequired,
+  highlightVariablesForSubject: PropTypes.array.isRequired,
   normalizeKeyDown: PropTypes.func.isRequired,
-  canCreateEdge: PropTypes.bool.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
-  allowHighlighting: PropTypes.bool,
+  type: PropTypes.string.isRequired,
 };
 
 HighlightFields.defaultProps = {

@@ -19,6 +19,12 @@ const getValue = (options, value) => {
 };
 
 class CreatableSelect extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = { reservedVariable: null };
+  }
+
   get value() {
     return getValue(this.props.options, this.props.input.value);
   }
@@ -32,6 +38,13 @@ class CreatableSelect extends PureComponent {
     );
 
   handleChange = (option) => {
+    // We are presenting a "fake" option to show an error message,
+    // if it is selected we ignore the action.
+    // eslint-disable-next-line no-underscore-dangle
+    if (option.__isWarning__) {
+      return;
+    }
+
     if (option && option.value) {
       this.props.input.onChange(option.value);
     } else {
@@ -66,12 +79,15 @@ class CreatableSelect extends PureComponent {
       input: { onBlur, ...input },
       children,
       options,
+      reserved,
       selectOptionComponent: SelectOptionComponent,
       label,
       onCreateOption,
       meta: { invalid, error, touched },
       ...rest
     } = this.props;
+
+    const reservedVariable = this.state.reservedVariable;
 
     const componentClasses = cx(
       className,
@@ -85,6 +101,19 @@ class CreatableSelect extends PureComponent {
       this.getOptionWithDeleteProp(SelectOptionComponent) :
       SelectOptionComponent;
 
+    const reservedOption = reservedVariable ?
+      [{
+        label: `"${reservedVariable}" is already used elsewhere in ${rest.entity}`,
+        value: null,
+        __isWarning__: true,
+      }] :
+      [];
+
+    const optionsWithWarnings = [
+      ...options,
+      ...reservedOption,
+    ];
+
     return (
       <div className={componentClasses}>
         { label &&
@@ -94,7 +123,7 @@ class CreatableSelect extends PureComponent {
           className="form-fields-select"
           classNamePrefix="form-fields-select"
           {...input}
-          options={options}
+          options={optionsWithWarnings}
           filterOption={createFilter({
             ignoreCase: true,
             trim: true,
@@ -118,10 +147,18 @@ class CreatableSelect extends PureComponent {
             const isEmpty = option.replace(/ /g, '').length === 0;
 
             // True if option matches the label prop of the supplied object
-            const matchLabel = ({ label: variableLabel }) => variableLabel === option;
+            const matchLabel = ({ label: variableLabel }) =>
+              variableLabel && option &&
+              variableLabel.toLowerCase() === option.toLowerCase();
             const alreadyExists = options.some(matchLabel);
+            const isReserved = reserved.some(matchLabel);
+            if (!alreadyExists && isReserved) {
+              this.setState({ reservedVariable: option });
+            } else {
+              this.setState({ reservedVariable: null });
+            }
 
-            return !isEmpty && !alreadyExists;
+            return !isEmpty && !alreadyExists && !isReserved;
           }}
 
           {...rest}
@@ -143,6 +180,7 @@ CreatableSelect.propTypes = {
   onDeleteOption: PropTypes.func,
   label: PropTypes.string,
   children: PropTypes.node,
+  reserved: PropTypes.array,
   meta: PropTypes.object,
 };
 
@@ -154,6 +192,7 @@ CreatableSelect.defaultProps = {
   input: {},
   label: null,
   children: null,
+  reserved: [],
   meta: { invalid: false, error: null, touched: false },
 };
 

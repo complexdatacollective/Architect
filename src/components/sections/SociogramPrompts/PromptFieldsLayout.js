@@ -4,7 +4,8 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
-import * as ArchitectFields from '@components/Form/Fields';
+import VariableSelect from '@components/Form/Fields/VariableSelect';
+import OrderBy from '@components/Form/Fields/OrderBy';
 import Tip from '@components/Tip';
 import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
 import { Section, Row } from '@components/EditorLayout';
@@ -12,12 +13,14 @@ import withLayoutOptions from './withLayoutOptions';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
 
 const PromptFields = ({
+  allowPositioning,
+  entity,
   handleCreateVariable,
   handleDeleteVariable,
-  normalizeKeyDown,
-  variablesForSubject,
   layoutVariablesForSubject,
-  allowPositioning,
+  normalizeKeyDown,
+  type,
+  variablesForSubject,
 }) => (
   <Section contentId="guidance.editor.sociogram_prompt.layout" group>
     <Row>
@@ -38,7 +41,9 @@ const PromptFields = ({
 
       <ValidatedField
         name="layout.layoutVariable"
-        component={ArchitectFields.CreatableSelect}
+        type={type}
+        entity={entity}
+        component={VariableSelect}
         placeholder="&mdash; Select a new layout variable, or type to create a new one &mdash;"
         validation={{ required: true }}
         options={layoutVariablesForSubject}
@@ -76,7 +81,7 @@ const PromptFields = ({
         </p>
         <Field
           name="sortOrder"
-          component={ArchitectFields.OrderBy}
+          component={OrderBy}
           variables={variablesForSubject}
         />
       </Row>
@@ -85,12 +90,14 @@ const PromptFields = ({
 );
 
 PromptFields.propTypes = {
+  allowPositioning: PropTypes.bool,
+  entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
-  normalizeKeyDown: PropTypes.func.isRequired,
-  variablesForSubject: PropTypes.object.isRequired,
   layoutVariablesForSubject: PropTypes.array.isRequired,
-  allowPositioning: PropTypes.bool,
+  normalizeKeyDown: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  variablesForSubject: PropTypes.object.isRequired,
 };
 
 PromptFields.defaultProps = {

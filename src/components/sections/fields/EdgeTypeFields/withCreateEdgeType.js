@@ -4,6 +4,8 @@ import { withHandlers, compose } from 'recompose';
 import { actionCreators as screenActions } from '@modules/ui/screens';
 import { makeScreenMessageListener } from '@selectors/ui';
 
+// TODO: withCreateEdgeHandler
+
 const mapStateToProps = () => {
   const screenMessageListener = makeScreenMessageListener('type');
 

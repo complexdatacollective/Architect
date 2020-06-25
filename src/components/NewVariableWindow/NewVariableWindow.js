@@ -13,7 +13,6 @@ import { Section } from '@components/EditorLayout';
 import InlineEditScreen from '@components/InlineEditScreen';
 import withNewVariableHandler, { form } from './withNewVariableHandler';
 
-
 const isRequired = required();
 
 class NewVariableWindow extends Component {

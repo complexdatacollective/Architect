@@ -6,12 +6,10 @@ import { Field } from 'redux-form';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import CheckboxGroup from '@codaco/ui/lib/components/Fields/CheckboxGroup';
 import Select from '@components/Form/Fields/Select';
-import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { getFieldId } from '@app/utils/issues';
-import withNewVariableWindowHandlers, {
-  propTypes as newVariableWindowPropTypes,
-} from '@components/enhancers/withNewVariableWindowHandlers';
+import withNewVariableWindowHandlers from '@components/enhancers/withNewVariableWindowHandlers';
 import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
 import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
@@ -23,6 +21,8 @@ const PresetFields = ({
   highlightVariablesForSubject,
   handleCreateLayoutVariable,
   handleDeleteVariable,
+  entity,
+  type,
 }) => (
   <Section>
     <Row>
@@ -38,7 +38,9 @@ const PresetFields = ({
     <Row>
       <ValidatedField
         name="layoutVariable"
-        component={CreatableSelect}
+        component={VariableSelect}
+        entity={entity}
+        type={type}
         label="Layout variable"
         placeholder="&mdash; Select a layout variable &mdash;"
         validation={{ required: true }}
@@ -87,7 +89,8 @@ PresetFields.propTypes = {
   highlightVariablesForSubject: PropTypes.array,
   handleCreateLayoutVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
-  ...newVariableWindowPropTypes,
+  entity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 PresetFields.defaultProps = {

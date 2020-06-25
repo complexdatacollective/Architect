@@ -45,7 +45,6 @@ const createVariableHandler = {
   *   <div handler={() => handleCreateVarible(value, type)} />
   * )
   */
-
 const withCreateVariableHandler =
   compose(
     connect(null, mapDispatchToProps),
