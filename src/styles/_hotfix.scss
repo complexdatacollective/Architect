@@ -62,6 +62,27 @@ a {
   background: var(--color-platinum--dark);
 }
 
+.dialog {
+  .migration-panel {
+    background: var(--color-navy-taupe);
+    padding: 0 unit(2);
+    border-radius: .75rem;
+    overflow-y: auto;
+    max-height: 18rem;
+
+    code {
+      background: var(--color-paradise-pink);
+      padding: .1rem .25rem;
+      border-radius: .2rem;
+    }
+
+    li {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+  }
+}
+
 .dialog__additional-box {
   background-color: var(--background-dark);
 }

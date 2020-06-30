@@ -36,7 +36,7 @@ export const invalidAssetErrorDialog = (e, filePath) => {
 export const importAssetErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <React.Fragment>
-      <em>{path.basename(filePath)}</em> could not be imported.
+      The file <strong>{path.basename(filePath)}</strong> could not be imported.
     </React.Fragment>
   );
   return dialogActions.openDialog({

@@ -42,7 +42,7 @@ export const importErrorDialog = (e, filePath) => {
   const error = e || new Error('An unknown error occurred.');
   error.friendlyMessage = (
     <React.Fragment>
-      <em>{path.basename(filePath)}</em> could not be imported.
+      The file <strong>{path.basename(filePath)}</strong> could not be imported.
     </React.Fragment>
   );
   return dialogActions.openDialog({
@@ -83,33 +83,32 @@ export const mayUpgradeProtocolDialog = (
       <p>
         This protocol uses an older schema version
         (<strong>version {protocolSchemaVersion}</strong>) that is not compatible with
-        this version of architect.
-      </p>
-      <p>It can be automatically upgraded
+        this version of Architect. It can be automatically upgraded
         to schema <strong>version {targetSchemaVersion}</strong> using our migration feature.
       </p>
-
+      { migrationNotes.length > 0 &&
+        <React.Fragment>
+          <p>
+            Read the following notes about this migration carefully, as these actions
+            may affect your data.
+          </p>
+          <div className="migration-panel">
+            {migrationNotes.map(({ version, notes }) => (
+              <React.Fragment key={version}>
+                <h4>Migrating to schema Version {version} will:</h4>
+                <Markdown source={notes} />
+              </React.Fragment>
+            ))}
+          </div>
+        </React.Fragment>
+      }
       <p>
         If you choose to continue, an upgraded copy of your protocol
         will be created and then opened. Your original protocol will not be changed,
         and can still be opened and modified using an older version of Architect. Please
-        see our <a href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</a>
-        for more information on this topic.
+        see our <a href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</a> for
+        more information on this topic.
       </p>
-
-      { migrationNotes.length > 0 &&
-        <div className="migration-panel">
-          <h2>
-            Upgrading your protocol will perform the all of following actions:
-          </h2>
-          {migrationNotes.map(({ version, notes }) => (
-            <React.Fragment key={version}>
-              <h4>Migrating to schema Version {version} will:</h4>
-              <Markdown source={notes} />
-            </React.Fragment>
-          ))}
-        </div>
-      }
     </React.Fragment>
   );
 
