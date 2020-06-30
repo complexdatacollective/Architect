@@ -12,7 +12,7 @@ export const validationErrorDialog = (e) => {
         emailing <code>info@networkcanvas.com</code>.
       </p>
       <p>
-        You may still save and edit the protocol but it <strong>will not be compatable with
+        You may still save and edit the protocol but it <strong>will not be compatible with
         Network Canvas or Server</strong>.
       </p>
     </React.Fragment>
@@ -28,7 +28,7 @@ export const saveErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <p>
       <em>{path.basename(filePath)}</em> could not be saved. See
-      the information below for details about why this error occured.
+      the information below for details about why this error occurred.
     </p>
   );
 
@@ -39,7 +39,7 @@ export const saveErrorDialog = (e, filePath) => {
 };
 
 export const importErrorDialog = (e, filePath) => {
-  const error = e || new Error('An unknown error occured.');
+  const error = e || new Error('An unknown error occurred.');
   error.friendlyMessage = (
     <React.Fragment>
       <em>{path.basename(filePath)}</em> could not be imported.
@@ -57,7 +57,12 @@ export const appUpgradeRequiredDialog = (protocol) => {
       <p>This protocol is not compatible with the current version of Architect.</p>
 
       <p>In order to open it, you will need to install a version of Architect that
-        supports schema version {protocol.schemaVersion}.</p>
+        supports schema version {protocol.schemaVersion}.
+      </p>
+      <p>
+        Please see our <a href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</a>
+        to locate an appropriate version, and for further information on this topic.
+      </p>
     </React.Fragment>
   );
 
@@ -75,30 +80,42 @@ export const mayUpgradeProtocolDialog = (
 ) => {
   const message = (
     <React.Fragment>
-      <p>This protocol uses an out-dated schema
-      (schema version &quot;{protocolSchemaVersion}&quot;),
-      but can be upgraded to work with this version of Architect
-      (schema version &quot;{targetSchemaVersion}&quot;).</p>
+      <p>
+        This protocol uses an older schema version
+        (<strong>version {protocolSchemaVersion}</strong>) that is not compatible with
+        this version of architect.
+      </p>
+      <p>It can be automatically upgraded
+        to schema <strong>version {targetSchemaVersion}</strong> using our migration feature.
+      </p>
 
-      <p>An upgraded copy of the protocol will be created and then opened.</p>
+      <p>
+        If you choose to continue, an upgraded copy of your protocol
+        will be created and then opened. Your original protocol will not be changed,
+        and can still be opened and modified using an older version of Architect. Please
+        see our <a href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</a>
+        for more information on this topic.
+      </p>
 
       { migrationNotes.length > 0 &&
-        <React.Fragment>
-          <p>Information for specific migration changes are shown below:</p>
+        <div className="migration-panel">
+          <h2>
+            Upgrading your protocol will perform the all of following actions:
+          </h2>
           {migrationNotes.map(({ version, notes }) => (
             <React.Fragment key={version}>
-              <h4>Schema Version {version}</h4>
+              <h4>Migrating to schema Version {version} will:</h4>
               <Markdown source={notes} />
             </React.Fragment>
           ))}
-        </React.Fragment>
+        </div>
       }
     </React.Fragment>
   );
 
   return dialogActions.openDialog({
     type: 'Confirm',
-    title: 'Would you like to upgrade the protocol?',
+    title: 'Upgrade to continue',
     confirmLabel: 'Create upgraded copy',
     message,
   });
