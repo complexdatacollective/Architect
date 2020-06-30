@@ -54,7 +54,7 @@ class CreatableSelect extends PureComponent {
     // We are presenting a "fake" option to show an error message,
     // if it is selected we ignore the action.
     // eslint-disable-next-line no-underscore-dangle
-    if (option.__isWarning__) {
+    if (option && option.__isWarning__) {
       return;
     }
 

@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1000;
+  z-index: var(--z-panel);
   width: 30vw;
   height: 100%;
   background-color: var(--architect-guidance-background);

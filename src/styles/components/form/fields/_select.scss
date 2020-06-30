@@ -113,7 +113,7 @@ img.form-fields-select { // sass-lint:disable-line no-qualifying-elements, force
     }
 
     &--warning {
-      background: var(--warning);
+      background: var(--error);
       color: var(--color-white);
     }
   }
