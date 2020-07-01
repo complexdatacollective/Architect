@@ -22,6 +22,7 @@ const QuickAdd = ({
   options,
   type,
 }) => (
+  type &&
   <Section disabled={disabled} group contentId="guidance.editor.quickAdd">
     <h3 id="issue-form">Quick Add Variable</h3>
     <p>
@@ -63,11 +64,12 @@ QuickAdd.propTypes = {
   handleDeleteVariable: PropTypes.func.isRequired,
   normalizeKeyDown: PropTypes.func.isRequired,
   options: PropTypes.array,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
 
 QuickAdd.defaultProps = {
   disabled: false,
+  type: null,
   options: [],
 };
 
