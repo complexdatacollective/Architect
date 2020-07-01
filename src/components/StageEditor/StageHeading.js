@@ -54,7 +54,7 @@ StageHeading.defaultProps = {
 
 const mapStateToProps = (state, { id }) => {
   const stageIndex = getStageIndex(state, id);
-  const stageNumber = stageIndex !== -1 && stageIndex + 1;
+  const stageNumber = stageIndex !== -1 ? stageIndex + 1 : null;
   const formValues = getFormValues('edit-stage')(state);
 
   return {
