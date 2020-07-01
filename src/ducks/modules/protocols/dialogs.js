@@ -1,7 +1,8 @@
 import React from 'react';
 import path from 'path';
 import Markdown from 'react-markdown';
-import { actionCreators as dialogActions } from '../dialogs';
+import ExternalLink from '@components/ExternalLink';
+import { actionCreators as dialogActions } from '@modules/dialogs';
 
 export const validationErrorDialog = (e) => {
   e.friendlyMessage = (
@@ -60,7 +61,7 @@ export const appUpgradeRequiredDialog = (protocol) => {
         supports schema version {protocol.schemaVersion}.
       </p>
       <p>
-        Please see our <a href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</a>
+        Please see our <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink>
         to locate an appropriate version, and for further information on this topic.
       </p>
     </React.Fragment>
@@ -96,7 +97,7 @@ export const mayUpgradeProtocolDialog = (
             {migrationNotes.map(({ version, notes }) => (
               <React.Fragment key={version}>
                 <h4>Migrating to schema Version {version} will:</h4>
-                <Markdown source={notes} />
+                <Markdown source={notes} renderers={{ link: ExternalLink }} />
               </React.Fragment>
             ))}
           </div>
@@ -106,7 +107,7 @@ export const mayUpgradeProtocolDialog = (
         If you choose to continue, an upgraded copy of your protocol
         will be created and then opened. Your original protocol will not be changed,
         and can still be opened and modified using an older version of Architect. Please
-        see our <a href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</a> for
+        see our <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink> for
         more information on this topic.
       </p>
     </React.Fragment>
