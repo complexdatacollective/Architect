@@ -199,7 +199,7 @@ describe('protocols', () => {
         });
     });
 
-    it.only('when the schema version is less than the app version it attempts to upgrade protocol and then imports it', () => {
+    it('when the schema version is less than the app version it attempts to upgrade protocol and then imports it', () => {
       const pastVersion = APP_SCHEMA_VERSION - 1;
 
       loadProtocolConfiguration.mockReturnValueOnce(
@@ -209,7 +209,7 @@ describe('protocols', () => {
       return store.dispatch(actionCreators.unbundleAndLoadProtocol('/dev/null/mock/path/older-protocol'))
         .then(() => {
           expect(log.mock.calls).toMatchSnapshot();
-          expect(log.mock.calls).containsDialogAction({ title: 'Would you like to upgrade the protocol?', type: 'Confirm' });
+          expect(log.mock.calls).containsDialogAction({ title: 'Upgrade to continue', type: 'Confirm' });
         });
     });
 
