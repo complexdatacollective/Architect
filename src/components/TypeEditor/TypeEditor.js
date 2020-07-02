@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import { capitalize } from 'lodash';
+import { capitalize, values } from 'lodash';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
@@ -130,9 +130,13 @@ TypeEditor.defaultProps = {
 
 const mapStateToProps = (state) => {
   const codebook = getCodebook(state);
+
+  const nodes = values(codebook.node).map(node => node.name);
+  const edges = values(codebook.edge).map(edge => edge.name);
+
   const existingTypes = [
-    ...Object.values(codebook.node).map(node => node.name),
-    ...Object.values(codebook.edge).map(edge => edge.name),
+    ...nodes,
+    ...edges,
   ];
 
   return {
