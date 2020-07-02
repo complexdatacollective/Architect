@@ -4,9 +4,7 @@ import { findKey, get, toLower, first } from 'lodash';
 import csvParse from 'csv-parse';
 import { copy, readFile } from 'fs-extra';
 import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
-import { allowedNMToken } from '@app/utils/validations';
-
-const variableValidator = allowedNMToken();
+import { getVariableNamesFromNetwork, validateNames } from '@app/protocol-validation/validation/validateExternalData';
 
 /**
  * Function that determines the type of an asset file when importing. Types are defined
@@ -42,28 +40,6 @@ const importAsset = (protocolPath, filePath) =>
       .then(resolve);
   });
 
-const getUniqueAttributes = (items) => {
-  const uniqueSet = items.reduce(
-    (acc, node) => {
-      Object.keys(node)
-        .forEach(key => acc.add(key));
-      return acc;
-    },
-    new Set([]),
-  );
-
-  return Array.from(uniqueSet);
-};
-
-const validateNames = (items) => {
-  const errors = items
-    .filter(item => variableValidator(item) !== undefined);
-
-  if (errors.length === 0) { return false; }
-
-  return `Variable name not allowed ("${errors.join('", "')}"). Only letters, numbers and the symbols ._-: are supported.`;
-};
-
 const validateJson = data =>
   new Promise((resolve, reject) => {
     try {
@@ -74,9 +50,7 @@ const validateJson = data =>
       }
 
       // check variable names
-      const variableNames = ['nodes', 'edges'].flatMap(
-        entity => getUniqueAttributes(get(network, entity, [])),
-      );
+      const variableNames = getVariableNamesFromNetwork(network);
 
       const error = validateNames(variableNames);
 
