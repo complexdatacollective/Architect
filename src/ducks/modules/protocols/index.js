@@ -136,8 +136,9 @@ const openProtocol = () =>
         if (!confirm) { return false; }
 
         return openDialog()
-          .then(({ cancelled, filePath }) => {
-            if (cancelled) { return false; }
+          .then(({ cancelled, filePaths }) => {
+            const filePath = filePaths && filePaths[0];
+            if (cancelled || !filePath) { return false; }
             return dispatch(unbundleAndLoadThunk(filePath));
           });
       })

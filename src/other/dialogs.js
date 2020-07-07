@@ -27,46 +27,38 @@ const defaultSaveCopyDialogOptions = {
  * Shows a open dialog and resolves to (cancelled, filepath), which mirrors later
  * versions of electron.
  */
-const openDialog = (openDialogOptions = {}) =>
-  new Promise((resolve) => {
-    const options = {
-      ...defaultOpenDialogOptions,
-      ...openDialogOptions,
-    };
+const openDialog = (openDialogOptions = {}) => {
+  const options = {
+    ...defaultOpenDialogOptions,
+    ...openDialogOptions,
+  };
 
-    remote.dialog.showOpenDialog(
-      remote.getCurrentWindow(),
-      options,
-      (filename) => {
-        const cancelled = filename === undefined;
-        const filePath = filename && filename[0];
-        const filePaths = filename;
-        resolve({ cancelled, filePath, filePaths });
-      },
-    );
-  });
-
+  return remote.dialog.showOpenDialog(
+    remote.getCurrentWindow(),
+    options,
+  );
+};
 
 /**
  * Shows a save dialog and resolves to (cancelled, filepath), which mirrors later
  * versions of electron.
  */
-const saveDialog = (saveDialogOptions = {}) =>
-  new Promise((resolve) => {
-    const options = {
-      ...defaultSaveDialogOptions,
-      ...saveDialogOptions,
-    };
+const saveDialog = (saveDialogOptions = {}) => {
+  const options = {
+    ...defaultSaveDialogOptions,
+    ...saveDialogOptions,
+  };
 
-    remote.dialog.showSaveDialog(
-      remote.getCurrentWindow(),
-      options,
-      (filePath) => {
-        const cancelled = filePath === undefined;
-        resolve({ cancelled, filePath });
-      },
-    );
-  });
+  // (filePath) => {
+  //   const cancelled = filePath === undefined;
+  //   resolve({ cancelled, filePath });
+  // },
+
+  return remote.dialog.showSaveDialog(
+    remote.getCurrentWindow(),
+    options,
+  );
+};
 
 const saveCopyDialog = (saveCopyOptions = {}) => {
   const options = { ...defaultSaveCopyDialogOptions, ...saveCopyOptions };
