@@ -48,7 +48,7 @@ const HighlightFields = ({
         onChange={handleChangeAllowHighlighting}
         label="Enable variable toggling by tapping a node"
         disabled={canCreateEdge}
-        title={canCreateEdge && 'Create edge must be disabled to allow highlighting'}
+        title={canCreateEdge ? 'Create edge must be disabled to allow highlighting' : ''}
       />
       <Row disabled={!allowHighlighting}>
         { allowHighlighting &&
