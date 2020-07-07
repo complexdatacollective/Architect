@@ -68,7 +68,7 @@ const EdgeFields = ({
             onChange={handleChangeCreateEdge}
             placeholder="&mdash; Select an edge type from the list, or type a name to create a new one &mdash;"
             label="Create edges of the following type"
-            validation={{ required: true }}
+            validation={{ required: true, allowedNMToken: 'edge type name' }}
             formatCreateLabel={inputValue => (
               <span>Click here to create a edge type named &quot;{inputValue}&quot;.</span>
             )}
