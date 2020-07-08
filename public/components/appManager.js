@@ -116,6 +116,22 @@ class AppManager {
       log.info('receive: CONFIRM_CLOSE_ACK');
       global.confirmCloseAck = true;
     });
+
+    ipcMain.on('ACTION', (e, action) => {
+      log.info('receive: ACTION', action.type);
+      switch (action.type) {
+        case 'PROTOCOLS/LOAD_SUCCESS':
+          this.activeProtocol = action.meta;
+          this.updateMenu();
+          break;
+        case 'SESSION/RESET':
+          this.activeProtocol = null;
+          this.updateMenu();
+          break;
+        default:
+          log.info(JSON.stringify(action, null, 2));
+      }
+    });
   }
 
   start() {
@@ -145,28 +161,12 @@ class AppManager {
       return true;
     });
 
-    registerAssetProtocol();
-    this.initializeListeners();
+    console.log('start');
+
+    // registerAssetProtocol();
+    // this.initializeListeners();
     this.updateMenu();
     this.updater.checkForUpdates(true);
-  }
-
-  initializeListeners() {
-    ipcMain.on('ACTION', (e, action) => {
-      log.info('receive: ACTION', action.type);
-      switch (action.type) {
-        case 'PROTOCOLS/LOAD_SUCCESS':
-          this.activeProtocol = action.meta;
-          this.updateMenu();
-          break;
-        case 'SESSION/RESET':
-          this.activeProtocol = null;
-          this.updateMenu();
-          break;
-        default:
-          log.info(JSON.stringify(action, null, 2));
-      }
-    });
   }
 
   updateMenu() {

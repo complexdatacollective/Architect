@@ -5,6 +5,7 @@ const createPreviewWindow = require('./components/createPreviewWindow');
 const AppManager = require('./components/appManager');
 const PreviewManager = require('./components/previewManager');
 const loadDevTools = require('./components/loadDevTools');
+const registerAssetProtocol = require('./components/assetProtocol').registerProtocol;
 
 global.NETWORK_CANVAS_PREVIEW = true;
 
@@ -45,6 +46,8 @@ app.on('open-file', (event, filePath) => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+  registerAssetProtocol();
+
   Promise.all([
     createAppWindow(),
     createPreviewWindow(),
