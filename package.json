@@ -224,7 +224,6 @@
         "setupFiles": [
             "jest-date-mock",
             "<rootDir>/config/polyfills.js",
-            "<rootDir>/config/jest/log.js",
             "<rootDir>/config/jest/polyfills.js",
             "<rootDir>/config/jest/enzyme.js",
             "<rootDir>/config/jest/automock.js"
