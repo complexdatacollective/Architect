@@ -49,11 +49,6 @@ const saveDialog = (saveDialogOptions = {}) => {
     ...saveDialogOptions,
   };
 
-  // (filePath) => {
-  //   const cancelled = filePath === undefined;
-  //   resolve({ cancelled, filePath });
-  // },
-
   return remote.dialog.showSaveDialog(
     remote.getCurrentWindow(),
     options,

@@ -87,8 +87,8 @@ const Dropzone = ({
       ],
       defaultPath: '',
     })
-      .then(({ cancelled, filePaths }) => {
-        if (cancelled) { resetState(); return; }
+      .then(({ canceled, filePaths }) => {
+        if (canceled) { resetState(); return; }
 
         submitPaths(filePaths);
       });

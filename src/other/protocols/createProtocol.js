@@ -56,8 +56,8 @@ export const createProtocolFiles = (destinationPath) => {
  */
 const createProtocol = () =>
   saveDialog(saveDialogOptions)
-    .then(({ cancelled, filePath }) => {
-      if (cancelled) { return null; }
+    .then(({ canceled, filePath }) => {
+      if (canceled) { return null; }
       return createProtocolFiles(filePath)
         .then(tempPath => ({ filePath, workingPath: tempPath }));
     });
