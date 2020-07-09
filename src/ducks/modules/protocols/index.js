@@ -136,9 +136,9 @@ const openProtocol = () =>
         if (!confirm) { return false; }
 
         return openDialog()
-          .then(({ cancelled, filePaths }) => {
+          .then(({ canceled, filePaths }) => {
             const filePath = filePaths && filePaths[0];
-            if (cancelled || !filePath) { return false; }
+            if (canceled || !filePath) { return false; }
             return dispatch(unbundleAndLoadThunk(filePath));
           });
       })
@@ -155,8 +155,8 @@ const saveCopyThunk = () =>
     return saveCopyDialog({
       defaultPath: activeProtocolMeta.filePath,
     })
-      .then(({ cancelled, filePath }) => {
-        if (cancelled) { return false; }
+      .then(({ canceled, filePath }) => {
+        if (canceled) { return false; }
 
         dispatch({
           type: SAVE_COPY,

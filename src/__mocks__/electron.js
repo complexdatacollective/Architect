@@ -13,13 +13,13 @@ const remote = {
   dialog: {
     showSaveDialog: jest.fn(() =>
       Promise.resolve({
-        cancelled: false,
+        canceled: false,
         filePath: 'filename.canvas',
       }),
     ),
     showOpenDialog: jest.fn(() =>
       Promise.resolve({
-        cancelled: false,
+        canceled: false,
         filePaths: ['/dev/null/fake/explore/path'],
       }),
     ),

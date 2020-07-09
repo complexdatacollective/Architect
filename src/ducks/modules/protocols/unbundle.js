@@ -67,8 +67,8 @@ const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
         if (!confirm) { return null; }
 
         return getNewFileName(filePath)
-          .then(({ cancelled, filePath: newFilePath }) => {
-            if (cancelled) { return null; }
+          .then(({ canceled, filePath: newFilePath }) => {
+            if (canceled) { return null; }
             const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
 
             return saveProtocol(workingPath, updatedProtocol)
