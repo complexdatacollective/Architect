@@ -23,6 +23,7 @@ Link.propTypes = {
   children: PropTypes.node.isRequired,
   screen: PropTypes.string.isRequired,
   params: PropTypes.object,
+  openScreen: PropTypes.func.isRequired,
 };
 
 Link.defaultProps = {

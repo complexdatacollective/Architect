@@ -58,12 +58,17 @@ Assets.propTypes = {
   type: PropTypes.string,
   onSelect: PropTypes.func,
   onDelete: PropTypes.func,
+  assets: PropTypes.array,
+  assetType: PropTypes.string,
+  onUpdateAssetFilter: PropTypes.func.isRequired,
 };
 
 Assets.defaultProps = {
   type: null,
   onSelect: () => {},
   onDelete: null,
+  assets: [],
+  assetType: null,
 };
 
 export default compose(

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import Icon from '@codaco/ui/lib/components/Icon';
 
@@ -38,6 +39,15 @@ const GridItem = ({
       </Flipped>
     </div>
   );
+};
+
+GridItem.propTypes = {
+  fields: PropTypes.object.isRequired,
+  editField: PropTypes.string.isRequired,
+  onEditItem: PropTypes.func.isRequired,
+  previewComponent: PropTypes.any.isRequired,
+  index: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export { GridItem };

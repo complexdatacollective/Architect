@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import DefaultControls from './Controls';
 
 class List extends Component {
-  static defaultProps = {
-    controls: DefaultControls,
-    filter: items => items,
-    onDelete: () => {},
-    initialSortOrder: {},
-  };
-
   constructor(props) {
     super(props);
 
@@ -74,5 +68,25 @@ class List extends Component {
     );
   }
 }
+
+List.propTypes = {
+  initialSortOrder: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  filter: PropTypes.func.isRequired,
+  controls: PropTypes.any.isRequired,
+  item: PropTypes.any.isRequired,
+  sortableProperties: PropTypes.any.isRequired,
+  onDelete: PropTypes.func,
+  children: PropTypes.node,
+};
+
+List.defaultProps = {
+  children: null,
+  controls: DefaultControls,
+  filter: items => items,
+  onDelete: () => {},
+  initialSortOrder: {},
+};
+
 
 export default List;

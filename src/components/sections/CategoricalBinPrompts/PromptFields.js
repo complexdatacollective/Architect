@@ -247,6 +247,12 @@ PromptFields.propTypes = {
   type: PropTypes.string.isRequired,
   variable: PropTypes.string,
   variableOptions: PropTypes.array,
+  changeForm: PropTypes.func.isRequired,
+  form: PropTypes.string.isRequired,
+  normalizeKeyDown: PropTypes.func.isRequired,
+  onCreateOtherVariable: PropTypes.func.isRequired,
+  onDeleteVariable: PropTypes.func.isRequired,
+  optionsForVariableDraft: PropTypes.array.isRequired,
 };
 
 PromptFields.defaultProps = {

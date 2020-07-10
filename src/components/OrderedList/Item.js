@@ -25,6 +25,7 @@ Item.propTypes = {
   onDelete: PropTypes.func.isRequired,
   children: PropTypes.node,
   sortable: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
 };
 
 Item.defaultProps = {

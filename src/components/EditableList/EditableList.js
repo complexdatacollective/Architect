@@ -127,6 +127,17 @@ EditableList.propTypes = {
   previewComponent: PropTypes.any.isRequired,
   editComponent: PropTypes.any.isRequired,
   validation: PropTypes.object,
+  editField: PropTypes.string.isRequired,
+  handleEditField: PropTypes.func.isRequired,
+  handleCancelEditField: PropTypes.func.isRequired,
+  handleCompleteEditField: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
+  handleAddNew: PropTypes.func.isRequired,
+  upsert: PropTypes.func.isRequired,
+  itemCount: PropTypes.any.isRequired,
+  setEditField: PropTypes.func.isRequired,
+  initialValues: PropTypes.any,
+  editProps: PropTypes.any.isRequired,
 };
 
 EditableList.defaultProps = {
@@ -136,6 +147,7 @@ EditableList.defaultProps = {
   title: null,
   sortMode: 'manual',
   validation: { notEmpty },
+  initialValues: null,
 };
 
 export { EditableList };

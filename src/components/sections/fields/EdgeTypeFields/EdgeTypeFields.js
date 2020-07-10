@@ -8,24 +8,6 @@ import EdgeSelect from '@components/Form/Fields/EdgeSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 
 class EdgeTypeFields extends Component {
-  static propTypes = {
-    edgeTypes: PropTypes.arrayOf(PropTypes.object),
-    disabled: PropTypes.bool,
-    handleResetStage: PropTypes.func,
-    handleOpenCreateNewType: PropTypes.func.isRequired,
-    handleTypeScreenMessage: PropTypes.func.isRequired,
-    parse: PropTypes.func.isRequired,
-    format: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    edgeTypes: [],
-    disabled: false,
-    displayVariable: null,
-    handleResetStage: noop,
-  };
-
   componentDidUpdate({ typeScreenMessage }) {
     this.props.handleTypeScreenMessage(typeScreenMessage);
   }
@@ -85,5 +67,25 @@ class EdgeTypeFields extends Component {
     );
   }
 }
+
+EdgeTypeFields.propTypes = {
+  edgeTypes: PropTypes.arrayOf(PropTypes.object),
+  disabled: PropTypes.bool,
+  handleResetStage: PropTypes.func,
+  handleOpenCreateNewType: PropTypes.func.isRequired,
+  handleTypeScreenMessage: PropTypes.func.isRequired,
+  parse: PropTypes.func.isRequired,
+  format: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  typeScreenMessage: PropTypes.any.isRequired,
+};
+
+EdgeTypeFields.defaultProps = {
+  edgeTypes: [],
+  disabled: false,
+  displayVariable: null,
+  handleResetStage: noop,
+};
+
 
 export default EdgeTypeFields;

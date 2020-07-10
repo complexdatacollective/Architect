@@ -13,11 +13,6 @@ import {
 } from './helpers';
 
 class Grid extends Component {
-  static propTypes = {
-    fields: PropTypes.object.isRequired,
-    items: PropTypes.array.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -134,6 +129,15 @@ class Grid extends Component {
     );
   }
 }
+
+Grid.propTypes = {
+  fields: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  capacity: PropTypes.number.isRequired,
+  previewComponent: PropTypes.any.isRequired,
+  onEditItem: PropTypes.func.isRequired,
+  meta: PropTypes.object.isRequired,
+};
 
 export { Grid };
 

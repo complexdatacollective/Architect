@@ -85,11 +85,14 @@ Editor.propTypes = {
   issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
   form: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node,
   component: PropTypes.func,
 };
 
 Editor.defaultProps = {
   component: null,
+  children: null,
 };
 
 const mapStateToProps = (state, props) => {

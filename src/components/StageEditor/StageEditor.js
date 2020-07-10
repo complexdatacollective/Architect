@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ipcRenderer } from 'electron';
 import PropTypes from 'prop-types';
+import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
 import Layout from '@components/EditorLayout';
@@ -77,6 +77,14 @@ const StageEditor = ({
 
 StageEditor.propTypes = {
   interfaceType: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  previewStage: PropTypes.func.isRequired,
+  stagePath: PropTypes.any.isRequired,
+  hasSkipLogic: PropTypes.bool,
+};
+
+StageEditor.defaultProps = {
+  hasSkipLogic: false,
 };
 
 export {
