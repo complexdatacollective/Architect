@@ -11,8 +11,9 @@ export const validationErrorDialog = (e) => {
         emailing <code>info@networkcanvas.com</code>.
       </p>
       <p>
-        You may still save and edit the protocol but it <strong>will not be compatable with
-        Network Canvas or Server</strong>.
+        You may still save and edit the protocol but it <strong>
+          will not be compatable with
+          Network Canvas or Server</strong>.
       </p>
     </React.Fragment>
   );
@@ -71,9 +72,9 @@ export const mayUpgradeProtocolDialog = (protocolSchemaVersion, targetSchemaVers
   const message = (
     <React.Fragment>
       <p>This protocol uses an out-dated schema
-      (schema version &quot;{protocolSchemaVersion}&quot;),
-      but can be upgraded to work with this version of Architect
-      (schema version &quot;{targetSchemaVersion}&quot;).</p>
+        (schema version &quot;{protocolSchemaVersion}&quot;),
+        but can be upgraded to work with this version of Architect
+        (schema version &quot;{targetSchemaVersion}&quot;).</p>
 
       <p>An upgraded copy of the protocol will be created and then opened.</p>
     </React.Fragment>
