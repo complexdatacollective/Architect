@@ -62,6 +62,11 @@ const renderValidationOptions = ({ field, validationType }) => {
   }
 };
 
+renderValidationOptions.propTypes = {
+  field: PropTypes.string.isRequired,
+  validationType: PropTypes.string.isRequired,
+};
+
 const ItemDelete = props => (
   <div className="form-fields-multi-select__delete" {...props}>
     <Icon name="delete" />
@@ -159,9 +164,7 @@ const Items = ({ fields, variableType, ...rest }) => (
 );
 
 Items.propTypes = {
-  fields: PropTypes.shape({
-    map: PropTypes.func.isRequired,
-  }).isRequired,
+  fields: PropTypes.array.isRequired,
   variableType: PropTypes.string.isRequired,
 };
 

@@ -115,6 +115,24 @@ GridManager.propTypes = {
   previewComponent: PropTypes.any.isRequired,
   editComponent: PropTypes.any.isRequired,
   validation: PropTypes.object,
+
+  editField: PropTypes.string.isRequired,
+  handleEditField: PropTypes.func.isRequired,
+  handleAddNew: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
+  handleResetEditField: PropTypes.func.isRequired,
+  hasSpace: PropTypes.bool.isRequired,
+  capacity: PropTypes.number.isRequired,
+  initialValues: PropTypes.any,
+  itemCount: PropTypes.number.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  itemSelector: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
+  normalize: PropTypes.func.isRequired,
+  setEditField: PropTypes.func.isRequired,
+  template: PropTypes.any,
+  upsert: PropTypes.func.isRequired,
+  windowRoot: PropTypes.any.isRequired,
 };
 
 GridManager.defaultProps = {
@@ -123,6 +141,8 @@ GridManager.defaultProps = {
   children: null,
   title: null,
   validation: { notEmpty },
+  initialValues: null,
+  template: null,
 };
 
 const withDefaultFieldName = defaultProps({

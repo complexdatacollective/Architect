@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withHandlers, defaultProps } from 'recompose';
 import { actionCreators as guidedActionCreators } from '../ducks/modules/guidance';
@@ -49,6 +50,18 @@ const Guidance = ({
     {children}
   </div>
 );
+
+Guidance.propTypes = {
+  setGuidance: PropTypes.func.isRequired,
+  unsetGuidance: PropTypes.func.isRequired,
+  focus: PropTypes.bool,
+  contentId: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+Guidance.defaultProps = {
+  focus: false,
+};
 
 export { withGuidance };
 

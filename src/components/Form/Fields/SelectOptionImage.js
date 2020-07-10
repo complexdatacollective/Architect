@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { components as ReactSelectComponents } from 'react-select';
 import { get } from 'lodash';
 
@@ -24,5 +25,9 @@ const SelectOptionImage = props => (
     </div>
   </Option>
 );
+
+SelectOptionImage.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default SelectOptionImage;

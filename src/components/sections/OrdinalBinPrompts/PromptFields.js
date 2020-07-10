@@ -174,6 +174,11 @@ PromptFields.propTypes = {
   handleDeleteVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  changeForm: PropTypes.func.isRequired,
+  form: PropTypes.string.isRequired,
+  normalizeKeyDown: PropTypes.func.isRequired,
+  onDeleteVariable: PropTypes.func.isRequired,
+  variable: PropTypes.any.isRequired,
 };
 
 PromptFields.defaultProps = {

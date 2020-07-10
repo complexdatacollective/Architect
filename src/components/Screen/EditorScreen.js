@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { submit, isDirty, startSubmit, isSubmitting } from 'redux-form';
@@ -87,8 +88,24 @@ class EditorScreen extends Component {
   }
 }
 
+EditorScreen.propTypes = {
+  submitting: PropTypes.bool.isRequired,
+  submitForm: PropTypes.func.isRequired,
+  jump: PropTypes.func.isRequired,
+  locus: PropTypes.any.isRequired,
+  onComplete: PropTypes.func.isRequired,
+  hasUnsavedChanges: PropTypes.bool.isRequired,
+  openDialog: PropTypes.func.isRequired,
+  show: PropTypes.propTypes.bool,
+  secondaryButtons: PropTypes.array,
+  transitionState: PropTypes.string,
+  editor: PropTypes.any.isRequired,
+};
+
 EditorScreen.defaultProps = {
   secondaryButtons: null,
+  show: true,
+  transitionState: null,
 };
 
 const mapStateToProps = (state, { form }) => ({

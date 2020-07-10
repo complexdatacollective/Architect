@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import withAssetUrl from '@components/Assets/withAssetUrl';
 
-const ImageThumbnail = ({ url, contain, dispatch, ...props }) => {
+const ImageThumbnail = ({ url, contain, ...props }) => {
   const className = cx(
     'thumbnail',
     'thumbnail--image',
