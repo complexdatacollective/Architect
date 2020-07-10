@@ -29,7 +29,7 @@ const AssetBrowserScreen = ({
     >
       <Layout>
         <Heading>
-            Assets
+          Assets
         </Heading>
         <Section>
           <p>

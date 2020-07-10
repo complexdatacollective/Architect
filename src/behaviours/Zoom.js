@@ -15,6 +15,8 @@ const withConstraintContext = getContext(
 
 const Zoom = WrappedComponent =>
   class extends PureComponent {
+    static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
+
     static propTypes = {
       zoomColors: PropTypes.array,
       constraints: PropTypes.array,
@@ -24,8 +26,6 @@ const Zoom = WrappedComponent =>
       zoomColors: ['#ff6ec7', '#4cbb17'],
       constraints: [0, 0, 0, 0],
     };
-
-    static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
 
     componentDidMount() {
       this.root = document.getElementsByTagName('body')[0];
