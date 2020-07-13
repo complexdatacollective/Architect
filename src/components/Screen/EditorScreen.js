@@ -96,7 +96,7 @@ EditorScreen.propTypes = {
   onComplete: PropTypes.func.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
   openDialog: PropTypes.func.isRequired,
-  show: PropTypes.propTypes.bool,
+  show: PropTypes.bool,
   secondaryButtons: PropTypes.array,
   transitionState: PropTypes.string,
   editor: PropTypes.any.isRequired,
