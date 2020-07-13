@@ -55,7 +55,7 @@ const EdgeFields = ({
           onChange={handleToggleCreateEdge}
           label="Create edges by tapping on a node"
           disabled={allowHighlighting}
-          title={allowHighlighting && 'Allow highlighting must be disabled to create edge'}
+          title={allowHighlighting ? 'Allow highlighting must be disabled to create edge' : ''}
         />
       </Row>
       <Row disabled={!canCreateEdge}>
@@ -68,7 +68,7 @@ const EdgeFields = ({
             onChange={handleChangeCreateEdge}
             placeholder="&mdash; Select an edge type from the list, or type a name to create a new one &mdash;"
             label="Create edges of the following type"
-            validation={{ required: true }}
+            validation={{ required: true, allowedNMToken: 'edge type name' }}
             formatCreateLabel={inputValue => (
               <span>Click here to create a edge type named &quot;{inputValue}&quot;.</span>
             )}
@@ -97,7 +97,11 @@ EdgeFields.propTypes = {
   handleChangeCreateEdge: PropTypes.func.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
   canCreateEdge: PropTypes.bool.isRequired,
-  allowHighlighting: PropTypes.bool.isRequired,
+  allowHighlighting: PropTypes.bool,
+};
+
+EdgeFields.defaultProps = {
+  allowHighlighting: false,
 };
 
 export { EdgeFields };

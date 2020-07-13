@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import window from '@codaco/ui/lib/components/window';
 import Button from '@codaco/ui/lib/components/Button';
 import SimpleDialog from '@codaco/ui/lib/components/Dialog/Simple';
@@ -24,6 +25,8 @@ const AssetBrowserWindow = ({
     </Button>
   )];
 
+  const dialogZIndex = getCSSVariableAsNumber('--z-dialog');
+
   return (
     <Stackable stackKey={show}>
       {({ stackIndex }) => (
@@ -33,7 +36,7 @@ const AssetBrowserWindow = ({
           title="Asset Browser"
           options={cancelButton}
           style={{
-            zIndex: stackIndex + 10000,
+            zIndex: stackIndex + dialogZIndex,
           }}
           className="asset-browser__window"
         >

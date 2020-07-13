@@ -121,20 +121,34 @@ export const ISODate = dateFormat =>
     return undefined;
   };
 
+// Variables and option values must respect NMTOKEN rules so that
+// they are compatable with XML export formats
+export const allowedVariableName = (name = 'variable name') =>
+  (value) => {
+    if (!/^[a-zA-Z0-9._\-:]+$/.test(value)) {
+      return `Not a valid ${name}. Only letters, numbers and the symbols ._-: are supported.`;
+    }
+    return undefined;
+  };
+
+export const allowedNMToken = allowedVariableName;
+
 const validations = {
-  required,
-  requiredAcceptsZero,
-  requiredAcceptsNull,
-  positiveNumber,
-  minLength,
+  ISODate,
+  allowedVariableName,
+  allowedNMToken,
   maxLength,
-  minValue,
-  maxValue,
-  minSelected,
   maxSelected,
+  maxValue,
+  minLength,
+  minSelected,
+  minValue,
+  positiveNumber,
+  required,
+  requiredAcceptsNull,
+  requiredAcceptsZero,
   uniqueArrayAttribute,
   uniqueByList,
-  ISODate,
 };
 
 /**
@@ -142,7 +156,7 @@ const validations = {
 * which will always fail.
 * @param {object} validationOptions The protocol config for the validations to return.
   */
-export const getValidations = validationOptions =>
+export const getValidations = (validationOptions = {}) =>
   map(
     toPairs(validationOptions),
     ([type, options]) => {
@@ -152,5 +166,19 @@ export const getValidations = validationOptions =>
         () => (`Validation "${type}" not found`);
     },
   );
+
+export const getValidator = (validation = {}) => {
+  const validators = getValidations(validation);
+
+  return (value) => {
+    const errors = validators.reduce((result, validator) => {
+      if (!validator(value) || result) { return result; }
+
+      return validator(value);
+    }, undefined);
+
+    return errors;
+  };
+};
 
 export default validations;

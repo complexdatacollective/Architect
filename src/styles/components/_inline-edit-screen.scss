@@ -8,7 +8,7 @@
   color: var(--architect-text);
   display: flex;
   background-color: var(--modal-overlay);
-  z-index: 1000;
+  z-index: var(--z-modal);
 
   @supports (backdrop-filter: blur(.75rem)) {
     background: var(--modal-overlay);

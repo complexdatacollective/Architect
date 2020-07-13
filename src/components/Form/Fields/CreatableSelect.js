@@ -4,6 +4,7 @@ import Creatable from 'react-select/creatable';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
+import { getValidator } from '@app/utils/validations';
 import DefaultSelectOption from './DefaultSelectOption';
 
 /**
@@ -18,11 +19,23 @@ const getValue = (options, value) => {
   return foundValue;
 };
 
+const defaultFilter = createFilter({
+  ignoreCase: true,
+  trim: true,
+});
+
+const filterOptions = (candidate, value) => {
+  if (!value) { return true; }
+  // eslint-disable-next-line no-underscore-dangle
+  if (candidate.data.__isSticky__) { return true; }
+  return defaultFilter(candidate, value);
+};
+
 class CreatableSelect extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { reservedVariable: null };
+    this.state = { warnings: null };
   }
 
   get value() {
@@ -41,7 +54,7 @@ class CreatableSelect extends PureComponent {
     // We are presenting a "fake" option to show an error message,
     // if it is selected we ignore the action.
     // eslint-disable-next-line no-underscore-dangle
-    if (option.__isWarning__) {
+    if (option && option.__isWarning__) {
       return;
     }
 
@@ -87,7 +100,7 @@ class CreatableSelect extends PureComponent {
       ...rest
     } = this.props;
 
-    const reservedVariable = this.state.reservedVariable;
+    const warnings = this.state.warnings;
 
     const componentClasses = cx(
       className,
@@ -101,18 +114,21 @@ class CreatableSelect extends PureComponent {
       this.getOptionWithDeleteProp(SelectOptionComponent) :
       SelectOptionComponent;
 
-    const reservedOption = reservedVariable ?
+    const warningOption = warnings ?
       [{
-        label: `"${reservedVariable}" is already used elsewhere in ${rest.entity}`,
+        label: warnings,
         value: null,
         __isWarning__: true,
+        __isSticky__: true,
       }] :
       [];
 
     const optionsWithWarnings = [
+      ...warningOption,
       ...options,
-      ...reservedOption,
     ];
+
+    const validator = getValidator(this.props.validation);
 
     return (
       <div className={componentClasses}>
@@ -124,10 +140,7 @@ class CreatableSelect extends PureComponent {
           classNamePrefix="form-fields-select"
           {...input}
           options={optionsWithWarnings}
-          filterOption={createFilter({
-            ignoreCase: true,
-            trim: true,
-          })}
+          filterOption={filterOptions}
           isClearable
           isSearchable
           value={this.value}
@@ -143,6 +156,8 @@ class CreatableSelect extends PureComponent {
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
           isValidNewOption={(option) => {
+            const validationErrors = validator(option);
+
             // True if option contains only spaces or no chars
             const isEmpty = option.replace(/ /g, '').length === 0;
 
@@ -152,13 +167,16 @@ class CreatableSelect extends PureComponent {
               variableLabel.toLowerCase() === option.toLowerCase();
             const alreadyExists = options.some(matchLabel);
             const isReserved = reserved.some(matchLabel);
+
             if (!alreadyExists && isReserved) {
-              this.setState({ reservedVariable: option });
+              this.setState({ warnings: `"${option}" is already used elsewhere in ${rest.entity}` });
+            } else if (!isEmpty && validationErrors) {
+              this.setState({ warnings: validationErrors });
             } else {
-              this.setState({ reservedVariable: null });
+              this.setState({ warnings: null });
             }
 
-            return !isEmpty && !alreadyExists && !isReserved;
+            return !isEmpty && !validationErrors && !alreadyExists && !isReserved;
           }}
 
           {...rest}
@@ -182,6 +200,7 @@ CreatableSelect.propTypes = {
   children: PropTypes.node,
   reserved: PropTypes.array,
   meta: PropTypes.object,
+  // validate: PropTypes.func,
 };
 
 CreatableSelect.defaultProps = {
@@ -194,6 +213,7 @@ CreatableSelect.defaultProps = {
   children: null,
   reserved: [],
   meta: { invalid: false, error: null, touched: false },
+  // validate: () => false,
 };
 
 export default CreatableSelect;

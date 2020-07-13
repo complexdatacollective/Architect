@@ -1,9 +1,10 @@
 import path from 'path';
 import uuid from 'uuid/v1';
-import { findKey, get, toLower } from 'lodash';
+import { findKey, get, toLower, first } from 'lodash';
 import csvParse from 'csv-parse';
 import { copy, readFile } from 'fs-extra';
-import { SUPPORTED_EXTENSION_TYPE_MAP } from '../../config';
+import { SUPPORTED_EXTENSION_TYPE_MAP } from '@app/config';
+import { getVariableNamesFromNetwork, validateNames } from '@app/protocol-validation/validation/validateExternalData';
 
 /**
  * Function that determines the type of an asset file when importing. Types are defined
@@ -39,31 +40,47 @@ const importAsset = (protocolPath, filePath) =>
       .then(resolve);
   });
 
-
 const validateJson = data =>
   new Promise((resolve, reject) => {
     try {
       const network = JSON.parse(data);
 
       if (get(network, 'nodes', []).length === 0 && get(network, 'edges', []).length === 0) {
-        throw new Error("JSON network asset doesn't include any nodes or edges");
+        return reject(new Error("JSON network asset doesn't include any nodes or edges"));
       }
 
-      resolve(true);
+      // check variable names
+      const variableNames = getVariableNamesFromNetwork(network);
+
+      const error = validateNames(variableNames);
+
+      if (error) { return reject(new Error(error)); }
+
+      // Check option values
+      // Not needed at this point, as unsupported feature
+
+      return resolve(true);
     } catch (e) {
-      reject(e);
+      return reject(e);
     }
   });
 
 const validateCsv = data =>
   new Promise((resolve, reject) => {
     try {
-      csvParse(data, (err) => {
+      csvParse(data, (err, tableData) => {
         if (err) {
-          throw new Error(err);
+          return reject(new Error(err));
         }
 
-        resolve(true);
+        const firstRow = first(tableData);
+
+        // Check heading (variables) are valid
+        const error = validateNames(firstRow);
+
+        if (error) { return reject(new Error(error)); }
+
+        return resolve(true);
       });
     } catch (e) {
       reject(e);

@@ -63,7 +63,7 @@ ShallowWrapper {
                 style={Object {}}
               />
             }
-            iconPosition="right"
+            iconPosition="left"
             id="create-new-protocol-button"
             onClick={[Function]}
             size=""
@@ -83,7 +83,7 @@ ShallowWrapper {
                 style={Object {}}
               />
             }
-            iconPosition="right"
+            iconPosition="left"
             id="open-existing-protocol-button"
             onClick={[Function]}
             size=""
@@ -233,7 +233,7 @@ ShallowWrapper {
                   style={Object {}}
                 />
               }
-              iconPosition="right"
+              iconPosition="left"
               id="create-new-protocol-button"
               onClick={[Function]}
               size=""
@@ -253,7 +253,7 @@ ShallowWrapper {
                   style={Object {}}
                 />
               }
-              iconPosition="right"
+              iconPosition="left"
               id="open-existing-protocol-button"
               onClick={[Function]}
               size=""
@@ -281,7 +281,7 @@ ShallowWrapper {
                 name="arrow-right"
                 style={Object {}}
               />,
-              "iconPosition": "right",
+              "iconPosition": "left",
               "id": "create-new-protocol-button",
               "onClick": [Function],
               "size": "",
@@ -306,7 +306,7 @@ ShallowWrapper {
                 name="arrow-right"
                 style={Object {}}
               />,
-              "iconPosition": "right",
+              "iconPosition": "left",
               "id": "open-existing-protocol-button",
               "onClick": [Function],
               "size": "",
@@ -369,7 +369,7 @@ ShallowWrapper {
                   style={Object {}}
                 />
               }
-              iconPosition="right"
+              iconPosition="left"
               id="create-new-protocol-button"
               onClick={[Function]}
               size=""
@@ -389,7 +389,7 @@ ShallowWrapper {
                   style={Object {}}
                 />
               }
-              iconPosition="right"
+              iconPosition="left"
               id="open-existing-protocol-button"
               onClick={[Function]}
               size=""
@@ -539,7 +539,7 @@ ShallowWrapper {
                     style={Object {}}
                   />
                 }
-                iconPosition="right"
+                iconPosition="left"
                 id="create-new-protocol-button"
                 onClick={[Function]}
                 size=""
@@ -559,7 +559,7 @@ ShallowWrapper {
                     style={Object {}}
                   />
                 }
-                iconPosition="right"
+                iconPosition="left"
                 id="open-existing-protocol-button"
                 onClick={[Function]}
                 size=""
@@ -587,7 +587,7 @@ ShallowWrapper {
                   name="arrow-right"
                   style={Object {}}
                 />,
-                "iconPosition": "right",
+                "iconPosition": "left",
                 "id": "create-new-protocol-button",
                 "onClick": [Function],
                 "size": "",
@@ -612,7 +612,7 @@ ShallowWrapper {
                   name="arrow-right"
                   style={Object {}}
                 />,
-                "iconPosition": "right",
+                "iconPosition": "left",
                 "id": "open-existing-protocol-button",
                 "onClick": [Function],
                 "size": "",

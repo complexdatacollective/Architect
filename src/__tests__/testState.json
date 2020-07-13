@@ -73,23 +73,23 @@
             "color": "red",
             "variables": {
               "1234-1234-1": {
-                "name": "my layout",
+                "name": "my_layout",
                 "type": "layout"
               },
               "1234-1234-2": {
-                "name": "my category",
+                "name": "my_category",
                 "type": "categorical"
               },
               "1234-1234-3": {
-                "name": "my boolean",
+                "name": "my_boolean",
                 "type": "boolean"
               },
               "1234-1234-4": {
-                "name": "other boolean 2",
+                "name": "other_boolean_2",
                 "type": "boolean"
               },
               "1234-1234-5": {
-                "name": "other boolean 4",
+                "name": "other_boolean_4",
                 "type": "boolean"
               }
             }

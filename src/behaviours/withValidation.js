@@ -1,10 +1,10 @@
 import { withPropsOnChange } from 'recompose';
-import { getValidations } from '../utils/validations';
+import { getValidations } from '@app/utils/validations';
 
 const withValidation = withPropsOnChange(
   ['validation'],
   ({ validation }) => ({
-    validate: getValidations(validation || []),
+    validate: getValidations(validation),
   }),
 );
 

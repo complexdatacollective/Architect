@@ -91,7 +91,8 @@ export const Item = compose(
             name={`${field}.value`}
             parse={value => (isNumberLike(value) ? toNumber(value) : value)}
             placeholder="value"
-            validation={{ required: true, uniqueArrayAttribute: true }}
+            // option values must also respect allowedVariableName (NMTOKEN) rules
+            validation={{ required: true, uniqueArrayAttribute: true, allowedVariableName: 'option value' }}
           />
         </div>
       </div>

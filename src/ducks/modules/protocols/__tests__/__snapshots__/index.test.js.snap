@@ -65,23 +65,23 @@ Array [
               "name": "1234-1234-1234",
               "variables": Object {
                 "1234-1234-1": Object {
-                  "name": "my layout",
+                  "name": "my_layout",
                   "type": "layout",
                 },
                 "1234-1234-2": Object {
-                  "name": "my category",
+                  "name": "my_category",
                   "type": "categorical",
                 },
                 "1234-1234-3": Object {
-                  "name": "my boolean",
+                  "name": "my_boolean",
                   "type": "boolean",
                 },
                 "1234-1234-4": Object {
-                  "name": "other boolean 2",
+                  "name": "other_boolean_2",
                   "type": "boolean",
                 },
                 "1234-1234-5": Object {
-                  "name": "other boolean 4",
+                  "name": "other_boolean_4",
                   "type": "boolean",
                 },
               },
@@ -194,23 +194,23 @@ Array [
               "name": "1234-1234-1234",
               "variables": Object {
                 "1234-1234-1": Object {
-                  "name": "my layout",
+                  "name": "my_layout",
                   "type": "layout",
                 },
                 "1234-1234-2": Object {
-                  "name": "my category",
+                  "name": "my_category",
                   "type": "categorical",
                 },
                 "1234-1234-3": Object {
-                  "name": "my boolean",
+                  "name": "my_boolean",
                   "type": "boolean",
                 },
                 "1234-1234-4": Object {
-                  "name": "other boolean 2",
+                  "name": "other_boolean_2",
                   "type": "boolean",
                 },
                 "1234-1234-5": Object {
-                  "name": "other boolean 4",
+                  "name": "other_boolean_4",
                   "type": "boolean",
                 },
               },
@@ -353,23 +353,23 @@ Array [
               "name": "1234-1234-1234",
               "variables": Object {
                 "1234-1234-1": Object {
-                  "name": "my layout",
+                  "name": "my_layout",
                   "type": "layout",
                 },
                 "1234-1234-2": Object {
-                  "name": "my category",
+                  "name": "my_category",
                   "type": "categorical",
                 },
                 "1234-1234-3": Object {
-                  "name": "my boolean",
+                  "name": "my_boolean",
                   "type": "boolean",
                 },
                 "1234-1234-4": Object {
-                  "name": "other boolean 2",
+                  "name": "other_boolean_2",
                   "type": "boolean",
                 },
                 "1234-1234-5": Object {
-                  "name": "other boolean 4",
+                  "name": "other_boolean_4",
                   "type": "boolean",
                 },
               },
@@ -621,23 +621,23 @@ Array [
               "name": "1234-1234-1234",
               "variables": Object {
                 "1234-1234-1": Object {
-                  "name": "my layout",
+                  "name": "my_layout",
                   "type": "layout",
                 },
                 "1234-1234-2": Object {
-                  "name": "my category",
+                  "name": "my_category",
                   "type": "categorical",
                 },
                 "1234-1234-3": Object {
-                  "name": "my boolean",
+                  "name": "my_boolean",
                   "type": "boolean",
                 },
                 "1234-1234-4": Object {
-                  "name": "other boolean 2",
+                  "name": "other_boolean_2",
                   "type": "boolean",
                 },
                 "1234-1234-5": Object {
-                  "name": "other boolean 4",
+                  "name": "other_boolean_4",
                   "type": "boolean",
                 },
               },
@@ -883,7 +883,13 @@ Array [
   ],
   Array [
     Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
+      "type": "PREVIEW/CLEAR_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "ipc": true,
+      "type": "SESSION/RESET",
     },
   ],
   Array [
@@ -953,7 +959,13 @@ Array [
   ],
   Array [
     Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
+      "type": "PREVIEW/CLEAR_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "ipc": true,
+      "type": "SESSION/RESET",
     },
   ],
   Array [
@@ -973,6 +985,16 @@ Array [
             In order to open it, you will need to install a version of Architect that supports schema version 
             5
             .
+          </p>
+          <p>
+            Please see our 
+            <ExternalLink
+              href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/"
+              params={Object {}}
+            >
+              documentation on protocol schemas
+            </ExternalLink>
+            to locate an appropriate version, and for further information on this topic.
           </p>
         </React.Fragment>,
         "onCancel": [Function],
@@ -1036,19 +1058,32 @@ Array [
         "confirmLabel": "Create upgraded copy",
         "message": <React.Fragment>
           <p>
-            This protocol uses an out-dated schema (schema version "
-            3
-            "), but can be upgraded to work with this version of Architect (schema version "
-            4
-            ").
+            This protocol uses an older schema version (
+            <strong>
+              version 
+              3
+            </strong>
+            ) that is not compatible with this version of Architect. It can be automatically upgraded to schema 
+            <strong>
+              version 
+              4
+            </strong>
+             using our migration feature.
           </p>
           <p>
-            An upgraded copy of the protocol will be created and then opened.
+            If you choose to continue, an upgraded copy of your protocol will be created and then opened. Your original protocol will not be changed, and can still be opened and modified using an older version of Architect. Please see our 
+            <ExternalLink
+              href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/"
+              params={Object {}}
+            >
+              documentation on protocol schemas
+            </ExternalLink>
+             for more information on this topic.
           </p>
         </React.Fragment>,
         "onCancel": [Function],
         "onConfirm": [Function],
-        "title": "Would you like to upgrade the protocol?",
+        "title": "Upgrade to continue",
         "type": "Confirm",
       },
       "id": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
@@ -1102,7 +1137,13 @@ Array [
   ],
   Array [
     Object {
-      "type": "PREVIEW/CLOSE_PREVIEW",
+      "type": "PREVIEW/CLEAR_PREVIEW",
+    },
+  ],
+  Array [
+    Object {
+      "ipc": true,
+      "type": "SESSION/RESET",
     },
   ],
   Array [

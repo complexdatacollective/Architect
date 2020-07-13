@@ -45,7 +45,7 @@ const Screen = ({
 };
 
 Screen.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.oneOfType(PropTypes.node, PropTypes.func),
   transitionState: PropTypes.string,
   buttons: PropTypes.arrayOf(PropTypes.node),
   secondaryButtons: PropTypes.arrayOf(PropTypes.node),
