@@ -25,13 +25,14 @@ Item.propTypes = {
   onDelete: PropTypes.func.isRequired,
   children: PropTypes.node,
   sortable: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 Item.defaultProps = {
   className: null,
   children: null,
   sortable: true,
+  onClick: () => {},
 };
 
 export { Item };

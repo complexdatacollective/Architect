@@ -77,14 +77,16 @@ const StageEditor = ({
 
 StageEditor.propTypes = {
   interfaceType: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   previewStage: PropTypes.func.isRequired,
-  stagePath: PropTypes.any.isRequired,
+  stagePath: PropTypes.any,
   hasSkipLogic: PropTypes.bool,
 };
 
 StageEditor.defaultProps = {
   hasSkipLogic: false,
+  id: null,
+  stagePath: null,
 };
 
 export {

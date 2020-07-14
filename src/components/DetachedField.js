@@ -102,11 +102,17 @@ class DetachedField extends Component {
 
 DetachedField.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.any.isRequired,
-  name: PropTypes.any.isRequired,
+  value: PropTypes.any,
+  name: PropTypes.any,
   validate: PropTypes.array.isRequired,
   component: PropTypes.any.isRequired,
-  meta: PropTypes.object.isRequired,
+  meta: PropTypes.object,
+};
+
+DetachedField.defaultProps = {
+  name: null,
+  meta: {},
+  value: null,
 };
 
 export default compose(

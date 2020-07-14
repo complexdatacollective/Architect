@@ -21,13 +21,15 @@ const VariableSelect = ({ reserved, ...props }) => (
 );
 
 VariableSelect.propTypes = {
-  entity: PropTypes.string.isRequired,
+  entity: PropTypes.string,
   reserved: PropTypes.array,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
 };
 
 VariableSelect.defaultProps = {
   reserved: [],
+  entity: null,
+  type: null,
 };
 
 export default compose(

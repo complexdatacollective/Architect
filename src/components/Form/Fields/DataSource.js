@@ -42,6 +42,7 @@ class DataSource extends Component {
 
     const networkAssetInput = {
       value: input.value && !isInterviewNetwork,
+      onChange: () => {},
       onClick: this.handleClickUseNetworkAsset,
     };
 

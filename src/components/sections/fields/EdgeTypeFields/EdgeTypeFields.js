@@ -77,7 +77,7 @@ EdgeTypeFields.propTypes = {
   parse: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  typeScreenMessage: PropTypes.any.isRequired,
+  typeScreenMessage: PropTypes.any,
 };
 
 EdgeTypeFields.defaultProps = {
@@ -85,6 +85,7 @@ EdgeTypeFields.defaultProps = {
   disabled: false,
   displayVariable: null,
   handleResetStage: noop,
+  typeScreenMessage: null,
 };
 
 

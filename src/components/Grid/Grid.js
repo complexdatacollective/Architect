@@ -75,6 +75,7 @@ class Grid extends Component {
       onEditItem,
       fields,
       meta,
+      editField,
     } = this.props;
 
     const { error, submitFailed } = meta;
@@ -116,6 +117,7 @@ class Grid extends Component {
                 fields={fields}
                 previewComponent={previewComponent}
                 onEditItem={onEditItem}
+                editField={editField}
                 {...item}
               />
             </div>
@@ -137,6 +139,11 @@ Grid.propTypes = {
   previewComponent: PropTypes.any.isRequired,
   onEditItem: PropTypes.func.isRequired,
   meta: PropTypes.object.isRequired,
+  editField: PropTypes.string,
+};
+
+Grid.defaultProps = {
+  editField: '',
 };
 
 export { Grid };

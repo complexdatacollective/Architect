@@ -36,8 +36,13 @@ const OrdinalBinPrompts = ({ handleChangePrompt, ...props }) => (
 
 OrdinalBinPrompts.propTypes = {
   handleChangePrompt: PropTypes.func.isRequired,
-  entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  entity: PropTypes.string,
+  type: PropTypes.string,
+};
+
+OrdinalBinPrompts.defaultProps = {
+  entity: null,
+  type: null,
 };
 
 export { OrdinalBinPrompts };

@@ -86,7 +86,7 @@ Editor.propTypes = {
   submitFailed: PropTypes.bool.isRequired,
   form: PropTypes.string.isRequired,
   title: PropTypes.string,
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   component: PropTypes.func,
 };
 

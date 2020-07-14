@@ -28,7 +28,6 @@ const PromptFields = ({
   changeForm,
   entity,
   form,
-  normalizeKeyDown,
   onCreateOtherVariable,
   onDeleteVariable,
   optionsForVariableDraft,
@@ -114,7 +113,6 @@ const PromptFields = ({
           options={categoricalVariableOptions}
           onCreateOption={handleNewVariable}
           onDeleteOption={v => onDeleteVariable(v, 'variable')}
-          onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
             <span>
@@ -187,7 +185,6 @@ const PromptFields = ({
             options={otherVariableOptions}
             onCreateOption={onCreateOtherVariable}
             onDeleteOption={v => onDeleteVariable(v, 'otherVariable')}
-            onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
             formatCreateLabel={inputValue => (
               <span>
@@ -249,16 +246,16 @@ PromptFields.propTypes = {
   variableOptions: PropTypes.array,
   changeForm: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
-  normalizeKeyDown: PropTypes.func.isRequired,
   onCreateOtherVariable: PropTypes.func.isRequired,
   onDeleteVariable: PropTypes.func.isRequired,
-  optionsForVariableDraft: PropTypes.array.isRequired,
+  optionsForVariableDraft: PropTypes.array,
 };
 
 PromptFields.defaultProps = {
   variable: null,
   otherVariable: null,
   variableOptions: [],
+  optionsForVariableDraft: [],
 };
 
 export { PromptFields };

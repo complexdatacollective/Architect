@@ -34,10 +34,14 @@ const CategoricalBinPrompts = ({ handleChangePrompt, ...props }) => (
 
 CategoricalBinPrompts.propTypes = {
   handleChangePrompt: PropTypes.func.isRequired,
-  entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  entity: PropTypes.string,
+  type: PropTypes.string,
 };
 
+CategoricalBinPrompts.defaultProps = {
+  entity: null,
+  type: null,
+};
 export { CategoricalBinPrompts };
 
 export default compose(
