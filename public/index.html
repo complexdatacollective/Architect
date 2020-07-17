@@ -14,18 +14,6 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/icons/netCanvas-icon.ico">
     <title>Architect</title>
     <style type="text/css">
-    .preload {
-      position: absolute;
-      z-index: 0;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: silver;
-      display: flex;
-      /* justify-content: center;
-      align-items: center; */
-    }
     :root {
       --color-neon-coral: rgb(226, 33, 91);
       --color-neon-coral---rgb: 226, 33, 91;
@@ -43,6 +31,19 @@
       --color-sea-green---rgb: 0, 201, 162;
       --color-sea-green--dark: rgb(0, 160, 129);
       --color-sea-green--dark---rgb: 0, 160, 129;
+    }
+
+    #preload {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgb(218, 227, 229);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .spinner {
       --circle-size: 2rem;
@@ -151,26 +152,26 @@
     </style>
   </head>
   <body>
-    <div id="root"></div>
-    <div class="preload">
+    <div id="preload">
       <div class="spinner">
         <div class="circle">
-          <div class="half-circle" />
-          <div class="half-circle half-circle--rotated" />
+          <div class="half-circle"></div>
+          <div class="half-circle half-circle--rotated"></div>
         </div>
         <div class="circle">
-          <div class="half-circle" />
-          <div class="half-circle half-circle--rotated" />
+          <div class="half-circle"></div>
+          <div class="half-circle half-circle--rotated"></div>
         </div>
         <div class="circle">
-          <div class="half-circle" />
-          <div class="half-circle half-circle--rotated" />
+          <div class="half-circle"></div>
+          <div class="half-circle half-circle--rotated"></div>
         </div>
         <div class="circle">
-          <div class="half-circle" />
-          <div class="half-circle half-circle--rotated" />
+          <div class="half-circle"></div>
+          <div class="half-circle half-circle--rotated"></div>
         </div>
       </div>
     </div>
+    <div id="root"></div>
   </body>
 </html>
