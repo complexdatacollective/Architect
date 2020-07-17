@@ -7,13 +7,15 @@ import { isMacOS } from '../utils/platform';
 import { AppErrorBoundary } from './Errors';
 import DialogManager from './DialogManager';
 
-const App = ({ children }) => {
+const App = (props) => {
   const appClasses = cx(
     'app',
     {
       'app--macos': isMacOS(),
     },
   );
+
+  console.log(props);
 
   return (
     <div className={appClasses}>
@@ -22,18 +24,17 @@ const App = ({ children }) => {
       }
       <div className="app__window">
         <AppErrorBoundary>
-          { children }
+          {/* { children } */}
         </AppErrorBoundary>
       </div>
       <div id="page-wrap" />
-
       <DialogManager />
     </div>
   );
 };
 
 App.propTypes = {
-  children: PropTypes.element,
+  // children: PropTypes.element,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,

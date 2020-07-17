@@ -2,12 +2,11 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import initReactFastclick from 'react-fastclick';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import appHistory from './history';
 import { store, persistor } from './ducks/store';
 import App from './components/App';
-import Routes from './routes';
 import ClipPaths from './components/ClipPaths';
 import initPreventFileDrop from './utils/initPreventFileDrop';
 import initIPCListeners from './utils/initIPCListeners';
@@ -26,13 +25,15 @@ const startApp = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Router history={appHistory}>
+            <App />
+{/*
             <Route
               render={({ location, history }) => (
-                <App>
+
                   <Routes location={location} history={history} />
                 </App>
               )}
-            />
+            /> */}
           </Router>
         </PersistGate>
       </Provider>
