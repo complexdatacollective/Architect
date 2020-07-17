@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import architectLogoIcon from '@app/images/architect-logo-icon.svg';
+import architectLogoIcon from '@app/images/network-canvas-brand.svg';
 
 const splashDuration = 0;
 
@@ -128,6 +129,7 @@ const Home = () => (
         </div>
       </motion.div>
     </motion.div>
+
     <motion.div
       variants={splashVariants}
       transition={{ delay: splashDuration, duration: 1 }}
@@ -135,14 +137,17 @@ const Home = () => (
       animate="animate"
       className="home__splash"
     >
-      <img src={architectLogoIcon} alt="" />
+      <motion.div className="home__splash-logo">
+        <img className="home__splash-logo-image/" src={architectLogoIcon} alt="Architect" />
+        <div className="home__splash-logo-text">Architect</div>
+      </motion.div>
       <motion.div
         style={{ opacity: 1 }}
         animate={{ opacity: 0 }}
         transition={{ delay: splashDuration, duration: 1 }}
         className="home__splash-tag"
       >
-        TAG LINE GOES HERE
+        A tool for building Network Canvas interviews
       </motion.div>
     </motion.div>
 

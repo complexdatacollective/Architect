@@ -1,7 +1,7 @@
 $panel-color: var(--color-platinum);
 $panel-color-alt: var(--color-platinum--dark);
 $scrollbar-height: 1.25rem;
-$scrollbar-padding: 2rem;
+$scrollbar-padding: unit(2);
 
 @mixin scrollable($top-height: $scrollbar-padding) {
   $bottom-height: 2rem;
@@ -40,19 +40,43 @@ $scrollbar-padding: 2rem;
     top: 2.5rem;
     left: 50%;
     transform: translateX(-50%);
-    width: unit(12);
+
+    &-logo {
+      display: flex;
+      vertical-align: center;
+      align-items: center;
+
+      &-image {
+        width: unit(12);
+      }
+
+      &-text {
+        margin-left: unit(2);
+        letter-spacing: .75rem;
+        font-family: var(--heading-font-family);
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__project {
+    position: absolute;
+    top: 2.5rem;
+    right: unit(12);
+    transform: translateX(-50%);
   }
 
   &__main {
+    --top: #{unit(18)};
     @include scrollable;
     box-sizing: border-box;
     // margin: 0 5rem;
-    top: unit(16);
+    top: var(--top);
     left: 0;
     right: 0;
-    padding: unit(4) unit(12) unit(8);
+    padding: $scrollbar-padding unit(12) unit(8);
     position: absolute;
-    height: calc(100vh - #{unit(16)});
+    height: calc(100vh - var(--top));
     overflow-y: auto;
 
     &::after {
