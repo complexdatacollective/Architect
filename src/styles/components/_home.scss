@@ -37,16 +37,20 @@ $scrollbar-padding: unit(2);
 
   &__splash {
     position: absolute;
-    top: 2.5rem;
+    top: unit(4);
+    height: unit(12);
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &-logo {
       display: flex;
       vertical-align: center;
       align-items: center;
 
-      &-image {
+      &-icon {
         width: unit(12);
       }
 
@@ -57,13 +61,25 @@ $scrollbar-padding: unit(2);
         font-size: 2rem;
       }
     }
+
+    &-tag {
+      position: absolute;
+      top: 100%;
+    }
   }
 
   &__project {
     position: absolute;
-    top: 2.5rem;
+    top: unit(4);
     right: unit(12);
-    transform: translateX(-50%);
+    height: unit(12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-logo {
+      width: unit(12);
+    }
   }
 
   &__main {
@@ -106,7 +122,10 @@ $scrollbar-padding: unit(2);
   &__sub {
     padding: unit(4);
 
-    h1 {
+    h1:first-child,
+    h2:first-child,
+    h3:first-child,
+    h4:first-child {
       margin-top: 0;
     }
 
@@ -118,6 +137,10 @@ $scrollbar-padding: unit(2);
 
   &__main {
     flex: 3;
+  }
+
+  &__toggle-panel {
+    margin: unit(2) 0 0;
   }
 
   &__sub {
@@ -147,4 +170,106 @@ $scrollbar-padding: unit(2);
     width: 100%;
     height: 100%;
   }
+}
+
+$protocol-card-component: 'protocol-card';
+
+.#{$protocol-card-component} {
+  @include clickable(2);
+
+  background: var(--color-white);
+  color: var(--color-navy-taupe);
+  border-radius: var(--border-radius);
+  display: flex;
+  overflow: hidden;
+  margin: unit(2);
+  flex-direction: column-reverse;
+  max-height: 22rem;
+
+  &--server {
+    .#{$protocol-card-component}__icon-section {
+      background: var(--color-mustard);
+      color: var(--color-white);
+    }
+  }
+
+  &__icon-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aab0fd;
+    background: var(--color-slate-blue--dark);
+    flex-direction: row;
+    padding: unit(1) unit(4);
+
+    .protocol-icon {
+      height: 3rem;
+      width: 3rem;
+      display: flex;
+
+      .icon {
+        flex: 0 1 auto;
+        height: 100% !important;
+        width: 100% !important;
+      }
+    }
+
+    .protocol-meta {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h6 {
+        margin: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  &__main-section {
+    flex: 0 1 auto;
+    padding: unit(2) unit(4) 0;
+    flex-direction: column;
+
+    .protocol-name {
+      flex: 0 0 auto;
+      margin: 0;
+      align-items: center;
+      display: flex;
+      hyphens: auto;
+    }
+
+    .protocol-description {
+      height: unit(12);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: unit(2) 0;
+      margin: 0;
+      font-size: 0.85rem;
+    }
+
+  }
+
+  .status-icon {
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    background: var(--info);
+    padding: unit(1);
+    margin-left: unit(1);
+    border-radius: 50%;
+    display: inline-block;
+
+    .icon {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+
 }

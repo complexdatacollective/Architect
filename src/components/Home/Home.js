@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
-import architectLogoIcon from '@app/images/architect-logo-icon.svg';
-import architectLogoIcon from '@app/images/network-canvas-brand.svg';
+import architectIcon from '@app/images/architect-logo-icon.svg';
+import networkCanvasLogo from '@app/images/network-canvas-brand.svg';
 
-const splashDuration = 0;
+const splashDuration = 0.5;
 
 const splashVariants = {
   animate: {
@@ -13,18 +13,16 @@ const splashVariants = {
     translateY: '0vh',
   },
   initial: {
-    scale: 3,
-    left: '50%',
+    scale: 2,
     translateY: '30vh',
     translateX: '-50%',
   },
 };
 
 const mainVariants = {
-  hide: { opacity: 0, translateY: '100%' },
+  hide: { opacity: 0 },
   show: {
     opacity: 1,
-    translateY: 0,
     transition: {
       delay: splashDuration,
       duration: 1,
@@ -60,6 +58,10 @@ const Home = () => (
           <div className="aspect-ratio">
             <img src="https://placehold.it/160x80" alt="foo" />
           </div>
+
+          <label htmlFor="showOnStartup" className="home-section__toggle-panel">
+            <input type="checkbox" id="showOnStartup" checked="checked" /> Show on startup
+          </label>
         </div>
         <div className="home-section__sub">
           <h1>Further reading</h1>
@@ -76,7 +78,18 @@ const Home = () => (
         variants={sectionVariants}
       >
         <div className="home-section__main">
-          <h1>Resume editing a protocol</h1>
+          <h1>Start a new protocol</h1>
+          <Button size="large">Create a new protocol</Button>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="home-section"
+        variants={sectionVariants}
+      >
+        <div className="home-section__main">
+          <h1>Edit an existing protocol</h1>
+          <h4>Resume editing...</h4>
           <div className="protocol-card">
             <div className="protocol-card__icon-section">
               <div className="protocol-icon" />
@@ -93,25 +106,8 @@ const Home = () => (
           </div>
         </div>
         <div className="home-section__sub">
-          <h4>Resume editing</h4>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="home-section"
-        variants={sectionVariants}
-      >
-        <div className="home-section__main">
-          <h1>Start a new protocol</h1>
-          <div className="home-section__start">
-            <div className="home-section__start-left">
-              <h4>Start new protocol</h4>
-              <Button size="large">Create new protocol</Button>
-            </div>
-          </div>
-        </div>
-        <div className="home-section__sub">
-          <h4>Info about creating a protocol</h4>
+          <h4>Choose another protocol</h4>
+          <Button size="large">Open from computer</Button>
         </div>
       </motion.div>
 
@@ -121,13 +117,10 @@ const Home = () => (
       >
         <div className="home-section__main">
           <h1>Edit an existing protocol</h1>
-          <h4>Choose a protocol</h4>
           <Button size="large">Open from computer</Button>
         </div>
-        <div className="home-section__sub">
-          <h4>Info about editing a protocol</h4>
-        </div>
       </motion.div>
+
     </motion.div>
 
     <motion.div
@@ -137,10 +130,10 @@ const Home = () => (
       animate="animate"
       className="home__splash"
     >
-      <motion.div className="home__splash-logo">
-        <img className="home__splash-logo-image/" src={architectLogoIcon} alt="Architect" />
+      <div className="home__splash-logo">
+        <img className="home__splash-logo-icon" src={architectIcon} alt="Architect" />
         <div className="home__splash-logo-text">Architect</div>
-      </motion.div>
+      </div>
       <motion.div
         style={{ opacity: 1 }}
         animate={{ opacity: 0 }}
@@ -151,7 +144,9 @@ const Home = () => (
       </motion.div>
     </motion.div>
 
-    <motion.div className="home__project">project</motion.div>
+    <motion.div className="home__project">
+      <img className="home__project-logo" src={networkCanvasLogo} alt="Network Canvas" />
+    </motion.div>
   </motion.div>
 );
 
