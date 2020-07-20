@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { motion } from 'framer-motion';
 import { get } from 'lodash';
-import { Button, Icon } from '@codaco/ui';
+import { Button } from '@codaco/ui';
 import { actionCreators as protocolsActions } from '@modules/protocols';
 import architectIcon from '@app/images/architect-logo-icon.svg';
 import networkCanvasLogo from '@app/images/network-canvas-brand.svg';
-import Version from '../Version';
+import Version from '@components/Version';
 
 const getRecentProtocols = state =>
   get(state, 'recentProtocols', [])
@@ -56,6 +56,8 @@ const states = {
 const Home = ({
   openProtocol,
   createAndLoadProtocol,
+  resumeProtocol,
+  unbundleAndLoadProtocol,
 }) => {
   const [state, setState] = useState(states.READY);
 
@@ -68,6 +70,11 @@ const Home = ({
     setState(states.BUSY);
     createAndLoadProtocol().finally(() => setState(states.READY));
   }, [createAndLoadProtocol, setState]);
+
+  const handleLoadProtocol = useCallback((filePath) => {
+    setState(states.BUSY);
+    unbundleAndLoadProtocol(filePath).finally(() => setState(states.READY));
+  }, [unbundleAndLoadProtocol, setState]);
 
   const disableButtons = state !== states.READY;
 
@@ -128,18 +135,17 @@ const Home = ({
           <div className="home-section__main">
             <h1>Edit an existing protocol</h1>
             <h4>Resume editing...</h4>
-            <div className="protocol-card">
+            <div className="protocol-card" onClick={() => handleLoadProtocol(resumeProtocol.filePath)}>
               <div className="protocol-card__icon-section">
                 <div className="protocol-icon" />
                 <div className="protocol-meta">
-                  <h6>Installed: </h6>
-                  <h6>Last Modified: 26 June 2020, 10:28</h6>
-                  <h6>Schema Version: 4</h6>
+                  <h6>Last Modified: {resumeProtocol.lastModified} {/* 26 June 2020, 10:28 */}</h6>
+                  <h6>Schema Version: {resumeProtocol.schemaVersion}</h6>
                 </div>
               </div>
               <div className="protocol-card__main-section">
-                <h2 className="protocol-name">NetworkResolver</h2>
-                <div className="scrollable protocol-description">net resolver</div>
+                <h2 className="protocol-name">{resumeProtocol.name}</h2>
+                <div className="scrollable protocol-description">{resumeProtocol.description}</div>
               </div>
             </div>
           </div>
@@ -201,14 +207,21 @@ const Home = ({
 Home.propTypes = {
   openProtocol: PropTypes.func.isRequired,
   createAndLoadProtocol: PropTypes.func.isRequired,
+  resumeProtocol: PropTypes.object,
+};
+
+Home.defaultProps = {
+  resumeProtocol: null,
 };
 
 const mapStateToProps = state => ({
   recentProtocols: getRecentProtocols(state),
+  resumeProtocol: getRecentProtocols(state)[0],
 });
 
 const mapDispatchToProps = {
   createAndLoadProtocol: protocolsActions.createAndLoadProtocol,
+  unbundleAndLoadProtocol: protocolsActions.unbundleAndLoadProtocol,
   openProtocol: protocolsActions.openProtocol,
 };
 

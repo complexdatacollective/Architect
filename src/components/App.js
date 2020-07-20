@@ -4,10 +4,10 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withRouter } from 'react-router-dom';
-import { isMacOS } from '../utils/platform';
-import { AppErrorBoundary } from './Errors';
-import DialogManager from './DialogManager';
-import Home from './Home/Home';
+import { isMacOS } from '@app/utils/platform';
+import { AppErrorBoundary } from '@components/Errors';
+import DialogManager from '@components/DialogManager';
+import Routes from '@components/Routes';
 
 const appVariants = {
   visible: { opacity: 1, duration: 2 },
@@ -36,7 +36,7 @@ const App = (props) => {
         animate="visible"
       >
         <AppErrorBoundary>
-          <Home />
+          <Routes />
         </AppErrorBoundary>
       </motion.div>
       <DialogManager />

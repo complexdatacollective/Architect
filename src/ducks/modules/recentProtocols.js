@@ -1,3 +1,4 @@
+import path from 'path';
 import { uniqBy } from 'lodash';
 import { actionTypes as loadActionTypes } from './protocols/load';
 import { actionTypes as bundleActionTypes } from './protocols/bundle';
@@ -12,21 +13,27 @@ export default function reducer(state = initialState, action = {}) {
         protocol.filePath !== action.filePath,
       );
     case loadActionTypes.LOAD_PROTOCOL_SUCCESS:
-      return state.map((protocol) => {
-        if (protocol.filePath !== action.meta.filePath) { return protocol; }
-
-        return {
-          ...protocol,
-          lastOpened: new Date().getTime(),
-        };
-      }).sort((a, b) => a.lastOpened < b.lastOpened);
-    case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
-    case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
-      return uniqBy([
-        { filePath: action.filePath, lastOpened: new Date().getTime() },
-        ...state,
-      ], 'filePath')
+      return uniqBy(
+        [
+          {
+            filePath: action.meta.filePath,
+            lastOpened: new Date().getTime(),
+            name: path.basename(action.meta.filePath, '.netcanvas'),
+            description: action.protocol.description,
+            schemaVersion: action.protocol.schemaVersion,
+          },
+          ...state,
+        ].sort((a, b) => a.lastOpened < b.lastOpened),
+        'filePath',
+      )
         .slice(0, 50);
+    // case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
+    // case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
+    //   return uniqBy([
+    //     { filePath: action.filePath, lastOpened: new Date().getTime() },
+    //     ...state,
+    //   ], 'filePath')
+    //     .slice(0, 50);
     default:
       return state;
   }
