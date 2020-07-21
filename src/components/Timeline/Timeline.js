@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { TransitionGroup } from 'react-transition-group';
 import { compose, withStateHandlers, defaultProps } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
-import None from '@codaco/ui/lib/components/Transitions/None';
+import { AnimatePresence, motion } from 'framer-motion';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import { getStageList } from '@selectors/protocol';
 import { actionCreators as stageActions } from '@modules/protocol/stages';
 import { actionCreators as dialogsActions } from '@modules/dialogs';
 import { actionCreators as uiActions } from '@modules/ui';
 import Stage from './Stage';
-import NewButton from './NewButton';
 
 class Timeline extends Component {
   static propTypes = {
@@ -66,9 +64,9 @@ class Timeline extends Component {
     });
   }
 
-  handleEditStage = (id) => {
+  handleEditStage = (id, origin) => {
     const { openScreen, locus } = this.props;
-    openScreen('stage', { id, locus });
+    openScreen('stage', { locus, id, origin });
   };
 
   createStage = (type, insertAtIndex) => {
@@ -79,44 +77,35 @@ class Timeline extends Component {
 
   hasStages = () => this.props.stages.length > 0;
 
-  renderHighlight = () => {
-    const opacity = this.state.highlightHide ? 0 : 1;
-    const transform = this.state.highlightHide ? 'translateY(0px)' : `translateY(${this.state.highlightY}px)`;
-
-    const highlightStyles = {
-      transform,
-      opacity,
-    };
-
-    return (
-      <div
-        className="timeline__stages-highlight"
-        key="highlight"
-        style={highlightStyles}
-      />
-    );
-  }
-
   renderStages = () =>
-    this.props.stages.map(this.renderStage);
+    this.props.stages.flatMap((stage, index) => ([
+      <motion.div
+        key={`insert_${stage.id}`}
+        className="timeline__insert"
+        onClick={() => this.handleInsertStage(index)}
+        exit={{ opacity: 0 }}
+      >
+        Add stage here
+      </motion.div>,
+      this.renderStage(stage, index),
+    ]));
 
   renderStage = (stage, index) => (
-    <None key={`stage_${stage.id}`}>
-      <Stage
-        key={`stage_${stage.id}`}
-        index={index}
-        id={stage.id}
-        type={stage.type}
-        hasFilter={stage.hasFilter}
-        hasSkipLogic={stage.hasSkipLogic}
-        label={`${index + 1}. ${stage.label}`}
-        onMouseEnter={this.handleMouseEnterStage}
-        onMouseLeave={this.handleMouseLeaveStage}
-        onEditStage={() => this.handleEditStage(stage.id)}
-        onDeleteStage={() => this.handleDeleteStage(stage.id)}
-        onInsertStage={position => this.handleInsertStage(index + position)}
-      />
-    </None>
+    <Stage
+      key={`stage_${stage.id}_${index}`}
+      // foo={console.log(stage.id)}
+      index={index}
+      stageNumber={index + 1} // Because SortableElement strips index prop
+      id={stage.id}
+      type={stage.type}
+      hasFilter={stage.hasFilter}
+      hasSkipLogic={stage.hasSkipLogic}
+      label={stage.label}
+      onMouseEnter={this.handleMouseEnterStage}
+      onMouseLeave={this.handleMouseLeaveStage}
+      onEditStage={this.handleEditStage}
+      onDeleteStage={this.handleDeleteStage}
+    />
   );
 
   render() {
@@ -133,14 +122,11 @@ class Timeline extends Component {
     return (
       <div className={timelineStyles}>
         <div className="timeline__stages">
-          { this.hasStages() && this.renderHighlight() }
-          <TransitionGroup>
-            { this.renderStages() }
-          </TransitionGroup>
-        </div>
-        <div className="timeline__new" onClick={() => this.handleInsertStage()}>
-          <NewButton />
-          <div className="timeline__new-label">
+          { this.renderStages() }
+          <div
+            className="timeline__insert timeline__insert--new"
+            onClick={this.handleInsertStage}
+          >
             Add new stage
           </div>
         </div>

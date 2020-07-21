@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { Zoom } from '@app/behaviours';
+import { motion } from 'framer-motion';
 import timelineImages from '@app/images/timeline';
 import filterIcon from '@app/images/timeline/filter-icon.svg';
 import skipLogicIcon from '@app/images/timeline/skip-logic-icon.svg';
@@ -9,21 +9,33 @@ import skipLogicIcon from '@app/images/timeline/skip-logic-icon.svg';
 const getTimelineImage = type =>
   get(timelineImages, type, timelineImages.Default);
 
+const variants = {
+  edit: () => ({
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    transition: { duration: 5 },
+  }),
+};
+
 const EditStageButton = ({
   onEditStage,
   type,
   label,
   hasSkipLogic,
   hasFilter,
-}) => (
+}, ref) => (
   <div
     className="timeline-stage__edit-stage"
     onClick={onEditStage}
   >
-    <div
+    <motion.div
       className="timeline-stage__screen"
       role="button"
       tabIndex="0"
+      variants={variants}
+      ref={ref}
     >
       <div className="timeline-stage__screen-preview">
         {
@@ -39,7 +51,7 @@ const EditStageButton = ({
           `${type} Interface`
         }
       </div>
-    </div>
+    </motion.div>
     <div className="timeline-stage__meta">
       <h2 className="timeline-stage__title">{label || '\u00A0'}</h2>
       <div className="timeline-stage__icons">
@@ -74,4 +86,4 @@ EditStageButton.defaultProps = {
 
 export { EditStageButton };
 
-export default Zoom(EditStageButton);
+export default React.forwardRef(EditStageButton);

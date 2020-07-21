@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { TransitionGroup } from 'react-transition-group';
-import TimelineScreenTransition, { styles } from '@codaco/ui/lib/components/Transitions/TimelineScreen';
-import { getScreensStack } from '../../selectors/ui';
-import { actionCreators as uiActions } from '../../ducks/modules/ui';
+import { compose } from 'recompose';
+import { motion } from 'framer-motion';
+import { get } from 'lodash';
+import Window from '@codaco/ui/lib/components/window';
+import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
+import { getScreensStack } from '@selectors/ui';
+import { actionCreators as uiActions } from '@modules/ui';
 import { getScreenComponent } from './screenIndex';
 
 /**
@@ -23,32 +26,76 @@ import { getScreenComponent } from './screenIndex';
 const Screens = (props) => {
   const screens = props.screens.map(({ screen, params }, index) => {
     const ScreenComponent = getScreenComponent(screen);
-    const transitionStyle = index > 0 ? styles.WIPE : styles.FADE;
     const onComplete = result =>
       props.closeScreen(screen, result);
 
+    // Default animation from center?
+    const getOrigin = () => ({
+      width: get(params, 'origin.width', 1),
+      height: get(params, 'origin.height', 1),
+      top: get(params, 'origin.top', window.innerWidth / 2),
+      left: get(params, 'origin.left', window.innerHeight / 2),
+    });
+
+    const variants = {
+      hidden: {
+        opacity: 0.5,
+      },
+      in: () => {
+        const origin = getOrigin();
+        const scaleY = origin.width / window.innerWidth;
+        const scaleX = origin.height / window.innerHeight;
+
+        return {
+          opacity: [0.5, 1],
+          translateY: [origin.top, 0],
+          translateX: [origin.left, 0],
+          scaleY: [scaleY, 1],
+          scaleX: [scaleX, 1],
+          transition: {
+            duration: getCSSVariableAsNumber('--animation-duration-fast-ms') * 0.001,
+            when: 'beforeChildren',
+          },
+        };
+      },
+    };
+
+    const style = {
+      position: 'absolute',
+      transformOrigin: 'top left',
+      zIndex: 100 + index,
+      width: '100vw',
+      height: '100vh',
+      top: 0,
+      left: 0,
+      background: 'white',
+    };
+
     return (
-      <TimelineScreenTransition
-        style={transitionStyle}
+      <motion.div
         key={screen}
+        style={style}
+        animate="in"
+        initial="hidden"
+        variants={variants}
       >
-        {transitionState => (
+        <motion.div
+          key={`${screen}_content`}
+          variants={{
+            in: { opacity: 1 },
+            hidden: { opacity: 0 },
+          }}
+        >
           <ScreenComponent
             {...params}
-            show
-            transitionState={transitionState}
             onComplete={onComplete}
           />
-        )}
-      </TimelineScreenTransition>
+        </motion.div>
+      </motion.div>
     );
   });
 
-  return (
-    <TransitionGroup className="screens">
-      {screens}
-    </TransitionGroup>
-  );
+  return screens;
 };
 
 Screens.propTypes = {
@@ -66,4 +113,7 @@ const mapDispatchToProps = {
 
 export { Screens };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Screens);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  Window,
+)(Screens);
