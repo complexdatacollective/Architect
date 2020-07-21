@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { motion } from 'framer-motion';
+import { useHistory } from 'react-router-dom';
 import { get } from 'lodash';
 import { Button } from '@codaco/ui';
 import { actionCreators as protocolsActions } from '@modules/protocols';
@@ -13,38 +14,82 @@ const getRecentProtocols = state =>
   get(state, 'recentProtocols', [])
     .slice(0, 1);
 
-const splashDuration = 0.5;
+const splashDuration = 1.5;
 
 const splashVariants = {
-  animate: {
-    scale: 1,
-    translateX: '-50%',
-    translateY: '0vh',
-  },
-  initial: {
+  appStartInitial: {
     scale: 2,
     translateY: '30vh',
     translateX: '-50%',
   },
+  initial: {
+    opacity: 0,
+    translateX: '-50%',
+    translateY: '0vh',
+  },
+  enter: {
+    scale: 1,
+    opacity: 1,
+    translateX: '-50%',
+    translateY: '0vh',
+  },
+  appStartEnter: {
+    scale: 1,
+    opacity: 1,
+    translateX: '-50%',
+    translateY: '0vh',
+    transition: { delay: 0.5, duration: 1 },
+  },
+};
+
+const taglineVariants = {
+  appStartInitial: {
+    opacity: 1,
+  },
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 0,
+  },
+  appStartEnter: {
+    opacity: 0,
+  },
 };
 
 const mainVariants = {
-  hide: { opacity: 0 },
-  show: {
+  appStartInitial: { opacity: 0 },
+  initial: { opacity: 0 },
+  enter: {
     opacity: 1,
     transition: {
+      duration: 0,
+      delay: 0.5,
+      staggerChildren: 0.5,
+      when: 'beforeChildren',
+    },
+  },
+  appStartEnter: {
+    opacity: 1,
+    transition: {
+      duration: 0,
       delay: splashDuration,
-      duration: 1,
-      staggerChildren: 0.2,
+      staggerChildren: 0.5,
       when: 'beforeChildren',
     },
   },
 };
 
 const sectionVariants = {
-  hide: { opacity: 0, translateX: '50%' },
-  show: {
-    opacity: 1, translateX: 0,
+  initial: { opacity: 0, translateX: '50%' },
+  appStartInitial: { opacity: 0, translateX: '50%' },
+  enter: {
+    opacity: 1,
+    translateX: 0,
+  },
+  appStartEnter: {
+    opacity: 1,
+    translateX: 0,
   },
 };
 
@@ -60,6 +105,9 @@ const Home = ({
   unbundleAndLoadProtocol,
 }) => {
   const [state, setState] = useState(states.READY);
+  const history = useHistory();
+
+  const isAppStart = history.length === 1;
 
   const handleOpenProtocol = useCallback(() => {
     setState(states.BUSY);
@@ -78,12 +126,17 @@ const Home = ({
 
   const disableButtons = state !== states.READY;
 
+  const initial = isAppStart ? 'appStartInitial' : 'initial';
+  const animate = isAppStart ? 'appStartEnter' : 'enter';
+
   return (
-    <motion.div className="home">
+    <motion.div
+      className="home"
+      initial={initial}
+      animate={animate}
+    >
       <motion.div
         className="home__main"
-        initial="hide"
-        animate="show"
         variants={mainVariants}
       >
         <motion.div
@@ -177,9 +230,6 @@ const Home = ({
 
       <motion.div
         variants={splashVariants}
-        transition={{ delay: splashDuration, duration: 1 }}
-        initial="initial"
-        animate="animate"
         className="home__splash"
       >
         <div className="home__splash-logo">
@@ -188,9 +238,7 @@ const Home = ({
           <Version />
         </div>
         <motion.div
-          style={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ delay: splashDuration, duration: 1 }}
+          variants={taglineVariants}
           className="home__splash-tag"
         >
           A tool for creating Network Canvas interviews
@@ -207,6 +255,7 @@ const Home = ({
 Home.propTypes = {
   openProtocol: PropTypes.func.isRequired,
   createAndLoadProtocol: PropTypes.func.isRequired,
+  unbundleAndLoadProtocol: PropTypes.func.isRequired,
   resumeProtocol: PropTypes.object,
 };
 
