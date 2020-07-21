@@ -4,12 +4,6 @@ import history from '@app/history';
 import { createLock } from '@modules/ui/status';
 import { actionCreators as protocolActions } from '@modules/protocol/index';
 
-/* add latency for testing */
-const delay = (cb, duration) =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(cb()), duration);
-  });
-
 const loadingLock = createLock('PROTOCOLS/LOADING2');
 
 const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';

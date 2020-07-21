@@ -90,10 +90,13 @@ const unbundleAndLoadThunk = filePath =>
           .then((result) => {
             if (!result) { return false; }
             const { id } = result;
-            return delay(() => {
-              history.push(`/edit/${id}/`);
-              return id;
-            }, 3000);
+            // return delay(() => {
+            //   history.push(`/edit/${id}/`);
+            //   return id;
+            // }, 100);
+
+            history.push(`/edit/${id}/`);
+            return id;
           })
           .catch((e) => {
             dispatch(unbundleAndLoadError(e));
