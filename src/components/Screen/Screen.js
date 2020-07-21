@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { compose } from 'recompose';
-import window from '@codaco/ui/lib/components/window';
 import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import ControlBar from '../ControlBar';
 import { ScreenErrorBoundary } from '../Errors';
@@ -10,7 +9,6 @@ import { ScreenErrorBoundary } from '../Errors';
 const Screen = ({
   buttons,
   secondaryButtons,
-  transitionState,
   onAcknowledgeError,
   children,
   type,
@@ -18,8 +16,6 @@ const Screen = ({
   windowRoot,
 }) => {
   const classes = cx('screen', `screen--${type}`);
-
-  const isEntering = transitionState === 'entering' || transitionState === 'entered';
 
   return (
     <div className={classes}>
@@ -34,7 +30,6 @@ const Screen = ({
         </div>
       </div>
       <ControlBar
-        show={isEntering}
         className="screen__controls"
         flip
         buttons={buttons}
@@ -45,8 +40,7 @@ const Screen = ({
 };
 
 Screen.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  transitionState: PropTypes.string,
+  children: PropTypes.node,
   buttons: PropTypes.arrayOf(PropTypes.node),
   secondaryButtons: PropTypes.arrayOf(PropTypes.node),
   type: PropTypes.string,
@@ -67,6 +61,5 @@ Screen.defaultProps = {
 export { Screen };
 
 export default compose(
-  window,
   windowRootProvider,
 )(Screen);
