@@ -1,34 +1,51 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { connect } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Spinner } from '@codaco/ui';
+import { selectors as statusSelectors } from '@modules/ui/status';
+import { actionLocks as protocolsLocks } from '@modules/protocols';
 
 const variants = {
   hidden: { opacity: 0, transition: { delay: 0.5, duration: 0.5 } },
   visible: { opacity: 1, transition: { delay: 0.5 } },
 };
 
-const Loading = () => (
-  <motion.div
-    className="scene__loading"
-    style={{
-      width: '100%',
-      height: '100%',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      zIndex: 'var(--z-modal)',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(255, 255, 255, 1)',
-    }}
-    initial="hidden"
-    animate="visible"
-    exit="hidden"
-    variants={variants}
-  >
-    <Spinner />
-  </motion.div>
+const Loading = ({
+  isLoading,
+}) => (
+  <AnimatePresence>
+    { isLoading &&
+      <motion.div
+        className="scene__loading"
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 'var(--z-modal)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
+        }}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        variants={variants}
+      >
+        <Spinner />
+      </motion.div>
+    }
+  </AnimatePresence>
 );
 
-export default Loading;
+const mapStateToProps = state => ({
+  isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
+});
+
+const withState = connect(mapStateToProps);
+
+export { Loading };
+
+export default withState(Loading);

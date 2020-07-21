@@ -1,7 +1,16 @@
 import { getProtocolMeta } from '@selectors/protocols';
 import { loadProtocolConfiguration } from '@app/other/protocols';
 import history from '@app/history';
+import { createLock } from '@modules/ui/status';
 import { actionCreators as protocolActions } from '@modules/protocol/index';
+
+/* add latency for testing */
+const delay = (cb, duration) =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(cb()), duration);
+  });
+
+const loadingLock = createLock('PROTOCOLS/LOADING2');
 
 const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';
 const LOAD_PROTOCOL_SUCCESS = 'PROTOCOLS/LOAD_SUCCESS';
@@ -52,8 +61,12 @@ const loadProtocolThunk = id =>
       .catch(error => dispatch(loadProtocolError(error)));
   };
 
+const actionLocks = {
+  loading: loadingLock,
+};
+
 const actionCreators = {
-  loadProtocol: loadProtocolThunk,
+  loadProtocol: loadingLock(loadProtocolThunk),
   loadProtocolSuccess: loadProtocolSuccessThunk,
 };
 
@@ -64,6 +77,7 @@ const actionTypes = {
 };
 
 export {
+  actionLocks,
   actionCreators,
   actionTypes,
 };

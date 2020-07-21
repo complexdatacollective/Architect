@@ -18,6 +18,12 @@ import {
   actionTypes as registerActionTypes,
 } from './register';
 
+/* add latency for testing */
+const delay = (cb, duration) =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(cb()), duration);
+  });
+
 const protocolsLock = createLock('PROTOCOLS');
 const loadingLock = createLock('PROTOCOLS/LOADING');
 const savingLock = createLock('PROTOCOLS/SAVING');
@@ -84,8 +90,10 @@ const unbundleAndLoadThunk = filePath =>
           .then((result) => {
             if (!result) { return false; }
             const { id } = result;
-            history.push(`/edit/${id}/`);
-            return id;
+            return delay(() => {
+              history.push(`/edit/${id}/`);
+              return id;
+            }, 3000);
           })
           .catch((e) => {
             dispatch(unbundleAndLoadError(e));
@@ -139,6 +147,7 @@ const openProtocol = () =>
           .then(({ canceled, filePaths }) => {
             const filePath = filePaths && filePaths[0];
             if (canceled || !filePath) { return false; }
+
             return dispatch(unbundleAndLoadThunk(filePath));
           });
       })

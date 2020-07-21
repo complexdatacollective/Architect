@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { AnimatePresence } from 'framer-motion';
-import { Flipper } from 'react-flip-toolkit';
 import { compose, withHandlers } from 'recompose';
 import { Icon } from '@codaco/ui';
 import history from '@app/history';
@@ -12,9 +10,6 @@ import { getHasUnsavedChanges } from '@selectors/session';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionLocks as protocolsLocks } from '@modules/protocols';
-import Loading from '@components/Loading';
-import Start from '@components/Start';
-import RecentProtocols from '@components/RecentProtocols';
 import { UnsavedChanges } from '@components/Dialogs';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
@@ -23,14 +18,11 @@ import Screens from '@components/Screens';
 import networkCanvasBrand from '@app/images/network-canvas-brand.svg';
 
 const Scene = ({
-  protocolId,
   protocolPath,
   isLoading,
   hasProtocol,
   handleClickStart,
 }) => {
-  const flipKey = protocolId || 'start';
-
   const sceneClasses = cx(
     'scene',
     { 'scene--protocol': hasProtocol },
@@ -47,32 +39,18 @@ const Scene = ({
         <Icon className="start-button__arrow" name="back-arrow" />
       </div>
 
-      <AnimatePresence>
-        { isLoading && <Loading /> }
-      </AnimatePresence>
+      <div className="scene__protocol">
+        <Overview
+          show={hasProtocol}
+          flipId={protocolPath && encodeURIComponent(protocolPath)}
+        />
 
-      <Flipper flipKey={flipKey}>
-        <div className="scene__start">
-          <Start show={!hasProtocol} />
+        <div className="scene__timeline">
+          <Timeline show={hasProtocol} />
         </div>
 
-        <div className="scene__recent-protocols">
-          <RecentProtocols show={!hasProtocol} />
-        </div>
-
-        <div className="scene__protocol">
-          <Overview
-            show={hasProtocol}
-            flipId={protocolPath && encodeURIComponent(protocolPath)}
-          />
-
-          <div className="scene__timeline">
-            <Timeline show={hasProtocol} />
-          </div>
-
-          <ProtocolControlBar show={hasProtocol} />
-        </div>
-      </Flipper>
+        <ProtocolControlBar show={hasProtocol} />
+      </div>
 
       <Screens />
     </div>
@@ -80,7 +58,6 @@ const Scene = ({
 };
 
 Scene.propTypes = {
-  protocolId: PropTypes.string,
   protocolPath: PropTypes.string,
   isLoading: PropTypes.bool,
   hasProtocol: PropTypes.bool,
@@ -88,7 +65,6 @@ Scene.propTypes = {
 };
 
 Scene.defaultProps = {
-  protocolId: null,
   protocolPath: null,
   isLoading: false,
   hasProtocol: false,
@@ -97,9 +73,12 @@ Scene.defaultProps = {
 const mapStateToProps = (state) => {
   const protocolMeta = getActiveProtocolMeta(state);
 
+  console.log({
+    isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
+  });
+
   return {
     hasUnsavedChanges: getHasUnsavedChanges(state),
-    protocolId: protocolMeta && protocolMeta.id,
     protocolPath: protocolMeta && protocolMeta.filePath,
     hasProtocol: !!protocolMeta,
     isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
