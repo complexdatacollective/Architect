@@ -10,7 +10,8 @@ $bottom-spacing: unit(12);
 
     &__insert {
       cursor: pointer;
-      position: relative;
+      position: absolute;
+      // position: relative;
       left: 50%;
       padding-left: unit(6);
       height: unit(5);
@@ -19,16 +20,15 @@ $bottom-spacing: unit(12);
       font-family: var(--heading-font-family);
       font-size: 1.25rem;
       font-weight: 600;
-      letter-spacing: 0.05rem;
+      letter-spacing: .05rem;
       line-height: 1.1;
       color: transparent;
-      transition-property: color;
+      transition-property: color, opacity;
       transition-timing-function: var(--animation-easing);
       transition-duration: var(--animation-duration-standard);
 
       &::before {
         content: '';
-        display: block;
         position: absolute;
         left: 0;
         top: 0;
@@ -39,9 +39,9 @@ $bottom-spacing: unit(12);
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        color: white;
+        color: var(--color-white);
         transform-origin: center center;
-        transform: translateX(-50%) scale(0.4);
+        transform: translateX(-50%) scale(.4);
         transition-property: transform, background-color;
         transition-timing-function: var(--animation-easing);
         transition-duration: var(--animation-duration-fast);
@@ -49,15 +49,15 @@ $bottom-spacing: unit(12);
 
       &::after {
         position: absolute;
-        top: 0.05rem;
+        top: .05rem;
         left: 0;
-        transform: translateX(-50%) scale(0.4);
+        transform: translateX(-50%) scale(.4);
         font-weight: 500;
         font-size: 2.5rem;
         line-height: 2.5rem;
         content: '+';
         display: block;
-        color: white;
+        color: var(--color-white);
         height: 2.5rem;
         opacity: 0;
         transition-property: opacity, transform;
@@ -80,7 +80,8 @@ $bottom-spacing: unit(12);
       }
 
       &--new {
-        margin-top: 5rem;
+        margin-top: unit(3);
+        position: relative;
       }
     }
 
@@ -102,24 +103,7 @@ $bottom-spacing: unit(12);
 
     &__stages {
       position: relative;
-      margin: unit(6) 0 0;
-
-      &-highlight {
-        position: absolute;
-        z-index: -1;
-        height: 17rem;
-        width: 100%;
-        background-color: transparent;
-        transition: transform var(--animation-duration-standard) var(--animation-easing),
-        background-color var(--animation-duration-standard) var(--animation-easing);
-        transform: translateZ(0);
-      }
-
-      &:hover {
-        .timeline__stages-highlight {
-          background-color: var(--architect-timeline-highlight);
-        }
-      }
+      padding: unit(6) 0 0;
 
       &--show {
         opacity: 1;
@@ -129,6 +113,10 @@ $bottom-spacing: unit(12);
     &--sorting {
       .timeline__stages-highlight {
         background-color: transparent !important; // sass-lint:disable-line no-important
+      }
+
+      .timeline__insert {
+        opacity: 0;
       }
     }
   }

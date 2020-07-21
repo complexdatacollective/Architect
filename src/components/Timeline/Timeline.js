@@ -6,13 +6,13 @@ import { withRouter } from 'react-router-dom';
 import { compose, withStateHandlers, defaultProps } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
 import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import { getStageList } from '@selectors/protocol';
 import { actionCreators as stageActions } from '@modules/protocol/stages';
 import { actionCreators as dialogsActions } from '@modules/dialogs';
 import { actionCreators as uiActions } from '@modules/ui';
 import Stage from './Stage';
+import InsertButton from './InsertButton';
 
 class Timeline extends Component {
   static propTypes = {
@@ -79,14 +79,10 @@ class Timeline extends Component {
 
   renderStages = () =>
     this.props.stages.flatMap((stage, index) => ([
-      <motion.div
-        key={`insert_${stage.id}`}
-        className="timeline__insert"
+      <InsertButton
+        key={`insert_${index}`}
         onClick={() => this.handleInsertStage(index)}
-        exit={{ opacity: 0 }}
-      >
-        Add stage here
-      </motion.div>,
+      />,
       this.renderStage(stage, index),
     ]));
 
@@ -172,6 +168,7 @@ export default compose(
   defaultProps({
     lockAxis: 'y',
     distance: 5,
+    helperClass: 'timeline__sortable-element',
   }),
   connect(mapStateToProps, mapDispatchToProps),
   SortableContainer,

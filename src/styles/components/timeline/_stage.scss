@@ -6,6 +6,7 @@ $component-name: timeline-stage;
 .#{$component-name} {
   padding: unit(5) 0;
   position: relative;
+  margin-top: unit(5);
 
   &__notch {
     @include typography('title-2');
@@ -127,5 +128,9 @@ $component-name: timeline-stage;
       transition: opacity var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing),
       transform var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing);
     }
+  }
+
+  &.timeline__sortable-element {
+    z-index: var(--z-tooltip);
   }
 }
