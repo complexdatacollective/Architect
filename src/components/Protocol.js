@@ -14,7 +14,6 @@ import { UnsavedChanges } from '@components/Dialogs';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
 import ProtocolControlBar from '@components/ProtocolControlBar';
-import Screens from '@components/Screens';
 import networkCanvasBrand from '@app/images/network-canvas-brand.svg';
 
 const Scene = ({
@@ -51,8 +50,6 @@ const Scene = ({
 
         <ProtocolControlBar show={hasProtocol} />
       </div>
-
-      <Screens />
     </div>
   );
 };
@@ -72,10 +69,6 @@ Scene.defaultProps = {
 
 const mapStateToProps = (state) => {
   const protocolMeta = getActiveProtocolMeta(state);
-
-  console.log({
-    isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
-  });
 
   return {
     hasUnsavedChanges: getHasUnsavedChanges(state),
