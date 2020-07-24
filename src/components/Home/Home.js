@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import { actionCreators as protocolsActions } from '@modules/protocols';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
+import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
 import GraphicButton from '@components/GraphicButton';
 import Section from './Section';
 import Group from './Group';
@@ -55,18 +56,24 @@ const Home = ({
         className="home__container"
       >
         <Section>
-          <Group title="Resume Editing">
-            <ProtocolCard
-              description={resumeProtocol.description}
-              lastModified={resumeProtocol.lastModified}
-              name={resumeProtocol.name}
-              onClick={resumeProtocol.onClick}
-              schemaVersion={resumeProtocol.schemaVersion}
-            />
+          <Group
+            graphic={resumeBackgroundGraphic}
+            graphicPosition="bottom right"
+          >
+            <div className="home-left">
+              <h2>Resume Editing</h2>
+              <ProtocolCard
+                description={resumeProtocol.description}
+                lastModified={resumeProtocol.lastModified}
+                name={resumeProtocol.name}
+                onClick={() => handleLoadProtocol(resumeProtocol.filePath)}
+                schemaVersion={resumeProtocol.schemaVersion}
+              />
+            </div>
           </Group>
           <Group title="Create or Open" color="platinum">
-            <div className="home-section__split">
-              <div className="home-section__split-left">
+            <div className="home-split">
+              <div className="home-split__left">
                 <GraphicButton
                   graphic={createButtonGraphic}
                   graphicPosition="1rem 3.15rem"
@@ -76,13 +83,13 @@ const Home = ({
                   <h3>New Protocol</h3>
                 </GraphicButton>
               </div>
-              <div className="home-section__split-vr" />
-              <div className="home-section__split-right">
+              <div className="home-split__vr" />
+              <div className="home-split__right">
                 <GraphicButton
                   graphic={openButtonGraphic}
                   graphicPosition="1rem 3.15rem"
                   color="slate-blue--dark"
-                  onClick={handleCreateProtocol}
+                  onClick={handleOpenProtocol}
                 >
                   <h2>Open</h2>
                   <h3>from Computer</h3>

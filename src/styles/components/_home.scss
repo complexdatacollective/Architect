@@ -30,6 +30,13 @@ $font-sizes: (
 @function type-scale($name) {
   @return map-get($font-sizes, $name);
 }
+
+@mixin first-margin() {
+  :nth-child(1) {
+    margin-top: 0;
+  }
+}
+
 //8.4
 
 .graphic-button {
@@ -141,56 +148,48 @@ $font-sizes: (
 }
 
 .home-section {
+  @include first-margin;
   border-radius: var(--border-radius);
   margin: 4rem 0 0;
   overflow: hidden;
+}
 
-  &:first-child {
-    margin: 0;
+.home-left {
+  max-width: 50%;
+}
+
+.home-split {
+  display: flex;
+  width: 100%;
+
+  &__left,
+  &__right {
+    flex-grow: 1;
   }
 
-  &__split {
-    display: flex;
-    width: 100%;
+  &__vr {
+    $rule-width: px(5);
+    padding: unit(4);
+    position: relative;
+    flex-basis: calc(#{unit(4)} + #{$rule-width});
 
-    &-left,
-    &-right {
-      flex-grow: 1;
-    }
-
-    &-vr {
-      $rule-width: px(5);
-      padding: unit(4);
-      position: relative;
-      flex-basis: calc(#{unit(4)} + #{$rule-width});
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 2rem;
-        height: calc(100% - #{unit(2)});
-        border-radius: $rule-width;
-        width: $rule-width;
-        background-color: var(--color-platinum--dark);
-      }
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2rem;
+      height: calc(100% - #{unit(2)});
+      border-radius: $rule-width;
+      width: $rule-width;
+      background-color: var(--color-platinum--dark);
     }
   }
 }
 
 .home-group {
+  @include first-margin;
   padding: px(40) px(80);
   background-color: var(--color-platinum--dark);
-
-  h1:first-child,
-  h2:first-child,
-  h3:first-child,
-  h4:first-child {
-    margin-top: 0;
-  }
-
-  &--alt {
-    background-color: var(--color-platinum);
-  }
+  background-repeat: no-repeat;
 }
 
 .aspect-ratio {
@@ -217,7 +216,6 @@ $protocol-card-component: 'protocol-card';
   border-radius: var(--border-radius);
   display: flex;
   overflow: hidden;
-  margin: unit(2);
   flex-direction: column-reverse;
   max-height: px(300);
 
