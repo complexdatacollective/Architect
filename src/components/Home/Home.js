@@ -44,7 +44,7 @@ const Home = ({
     unbundleAndLoadProtocol(filePath).finally(() => setState(states.READY));
   }, [unbundleAndLoadProtocol, setState]);
 
-  const buttonsDisabled = state !== states.READY;
+  const disableButtons = state !== states.READY;
 
   return (
     <motion.div
@@ -67,6 +67,7 @@ const Home = ({
                 lastModified={resumeProtocol.lastModified}
                 name={resumeProtocol.name}
                 onClick={() => handleLoadProtocol(resumeProtocol.filePath)}
+                disabled={disableButtons}
                 schemaVersion={resumeProtocol.schemaVersion}
               />
             </div>
@@ -78,6 +79,7 @@ const Home = ({
                   graphic={createButtonGraphic}
                   graphicPosition="1rem 3.15rem"
                   onClick={handleCreateProtocol}
+                  disabled={disableButtons}
                 >
                   <h2>Create</h2>
                   <h3>New Protocol</h3>
@@ -90,6 +92,7 @@ const Home = ({
                   graphicPosition="1rem 3.15rem"
                   color="slate-blue--dark"
                   onClick={handleOpenProtocol}
+                  disabled={disableButtons}
                 >
                   <h2>Open</h2>
                   <h3>from Computer</h3>

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 const GraphicButton = ({
   children,
@@ -9,6 +10,7 @@ const GraphicButton = ({
   graphicSize,
   labelPosition,
   onClick,
+  disabled,
 }) => {
   const styles = {
     backgroundColor: `var(--color-${color})`,
@@ -21,9 +23,11 @@ const GraphicButton = ({
     ...labelPosition,
   };
 
+  const className = cx('graphic-button', { 'graphic-button--disabled': disabled });
+
   return (
     <div
-      className="graphic-button"
+      className={className}
       style={styles}
       onClick={onClick}
     >
@@ -45,6 +49,7 @@ GraphicButton.propTypes = {
   graphicSize: PropTypes.string,
   labelPosition: PropTypes.object,
   onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
 GraphicButton.defaultProps = {
@@ -53,6 +58,7 @@ GraphicButton.defaultProps = {
   graphicPosition: '50% 50%',
   graphicSize: 'contain',
   labelPosition: {},
+  disabled: false,
 };
 
 export default GraphicButton;
