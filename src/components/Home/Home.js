@@ -8,6 +8,8 @@ import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
 import GraphicButton from '@components/GraphicButton';
+import Welcome from './Welcome';
+import Sprite from './Sprite';
 import Section from './Section';
 import Group from './Group';
 import ProtocolCard from './ProtocolCard';
@@ -55,11 +57,20 @@ const Home = ({
       <motion.div
         className="home__container"
       >
+        <Welcome />
         <Section>
-          <Group
-            graphic={resumeBackgroundGraphic}
-            graphicPosition="bottom right"
-          >
+          <Group>
+            <Sprite
+              src={resumeBackgroundGraphic}
+              width="calc(50% - 7rem)"
+              height="90%"
+              position="absolute"
+              bottom={0}
+              right="5.7rem"
+              opacity="0.33"
+              backgroundPosition="top right"
+              backgroundSize="100% auto"
+            />
             <div className="home-left">
               <h2>Resume Editing</h2>
               <ProtocolCard

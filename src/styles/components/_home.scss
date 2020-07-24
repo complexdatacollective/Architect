@@ -45,6 +45,12 @@ $font-sizes: (
 
 //8.4
 
+.sprite {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .graphic-button {
   @include clickable;
   @include disabled-state;
@@ -156,6 +162,7 @@ $font-sizes: (
 
 .home-section {
   @include first-margin;
+  position: relative;
   border-radius: var(--border-radius);
   margin: 4rem 0 0;
   overflow: hidden;
@@ -194,6 +201,7 @@ $font-sizes: (
 
 .home-group {
   @include first-margin;
+  position: relative;
   padding: px(40) px(80);
   background-color: var(--color-platinum--dark);
   background-repeat: no-repeat;

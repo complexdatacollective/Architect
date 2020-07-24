@@ -5,7 +5,7 @@ import Section from './Section';
 
 const Welcome = () => (
   <Section>
-    <div className="home-section__main">
+    <div className="home-welcome__header">
       <h1>Welcome</h1>
       <h3>Some info about the project goes here</h3>
       <p>Welcome to Network Canvas Architect! To get started, use the buttons above to
