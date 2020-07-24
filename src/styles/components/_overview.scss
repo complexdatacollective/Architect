@@ -1,9 +1,6 @@
 .overview {
-  margin: 0;
-  width: 100%;
-  background-color: var(--architect-panel-background);
-  color: var(--architect-panel-text);
-  display: flex;
+  margin: unit(8) auto 0;
+  width: 75vw;
 
   .form-field-container {
     --input-background: var(--background);
@@ -19,28 +16,14 @@
     text-align: center;
   }
 
-  &__menu {
-    flex-basis: 200px;
-    background-color: var(--color-platinum--dark);
-    padding-top: unit(6);
-
-    a {
-      display: block;
-      width: 100%;
-      padding: unit(2);
-      border-top: 1px solid silver;
-    }
-  }
-
-  &__details {
-    flex-grow: 1;
-    padding: unit(2) unit(4);
-  }
-
   &__panel {
+    background-color: var(--architect-panel-background);
+    color: var(--architect-panel-text);
+    margin: 0 auto;
+    width: 75vw;
     padding: 20px 30px;
-    // border-radius: 10px;
-    // box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
+    border-radius: 10px;
+    box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
   }
 
   &__asset-group {
