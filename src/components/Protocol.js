@@ -30,13 +30,11 @@ const Scene = ({
 
   return (
     <div className={sceneClasses}>
-      <div className="scene__background scene__background--top" />
-      <div className="scene__background scene__background--bottom" />
-      <img className="scene__brand" src={networkCanvasBrand} alt="" />
+      {/* <img className="scene__brand" src={networkCanvasBrand} alt="" /> */}
 
-      <div className="scene__home" onClick={handleClickStart}>
+      {/* <div className="scene__home" onClick={handleClickStart}>
         <Icon className="start-button__arrow" name="back-arrow" />
-      </div>
+      </div> */}
 
       <div className="scene__protocol">
         <Overview

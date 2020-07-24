@@ -17,12 +17,62 @@ $scrollbar-padding: unit(2);
   padding-top: $top-height;
 }
 
+$font-sizes: (
+  l6: 4.36rem,
+  l5: 3.487857143rem,
+  l4: 2.79rem,
+  l3: 2.232142857rem,
+  l2: 1.785714286rem,
+  l1: 1.428571429rem,
+  body: 1.142857143rem,
+);
+
+@function type-scale($name) {
+  @return map-get($font-sizes, $name);
+}
+//8.4
+
+.graphic-button {
+  @include clickable;
+  display: inline-block;
+  width: 100%;
+  color: var(--color-white);
+  background-repeat: no-repeat;
+  height: 13.5rem;
+  border-radius: 1rem;
+  position: relative;
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    right: 4rem;
+    transform: translateY(-50%);
+
+    h2 {
+      font-size: type-scale(l2);
+      margin: 0;
+    }
+
+    h3 {
+      text-transform: none !important;
+      font-size: type-scale(body);
+      margin: .5rem 0 0;
+    }
+  }
+}
 
 .home {
+  @include scrollable;
   background-color: var(--color-white);
-  min-height: 100%;
+  height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &__container {
+    padding: 0 unit(8);
+  }
 
   &::before {
     content: '';
@@ -35,117 +85,111 @@ $scrollbar-padding: unit(2);
     opacity: .1;
   }
 
-  &__splash {
-    position: absolute;
-    top: unit(4);
-    height: unit(12);
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  // &__splash {
+  //   position: absolute;
+  //   top: unit(4);
+  //   height: unit(12);
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
 
-    &-logo {
-      display: flex;
-      vertical-align: center;
-      align-items: center;
+  //   &-logo {
+  //     display: flex;
+  //     vertical-align: center;
+  //     align-items: center;
 
-      &-icon {
-        width: unit(12);
-      }
+  //     &-icon {
+  //       width: unit(12);
+  //     }
 
-      &-text {
-        margin-left: unit(2);
-        letter-spacing: .75rem;
-        font-family: var(--heading-font-family);
-        font-size: 2rem;
-      }
-    }
+  //     &-text {
+  //       margin-left: unit(2);
+  //       letter-spacing: .75rem;
+  //       font-family: var(--heading-font-family);
+  //       font-size: 2rem;
+  //     }
+  //   }
 
-    &-tag {
-      position: absolute;
-      top: 100%;
-    }
-  }
+  //   &-tag {
+  //     position: absolute;
+  //     top: 100%;
+  //   }
+  // }
 
-  &__project {
-    position: absolute;
-    top: unit(4);
-    right: unit(12);
-    height: unit(12);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  // &__project {
+  //   position: absolute;
+  //   top: unit(4);
+  //   right: unit(12);
+  //   height: unit(12);
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
 
-    &-logo {
-      width: unit(12);
-    }
-  }
+  //   &-logo {
+  //     width: unit(12);
+  //   }
+  // }
 
-  &__main {
-    --top: #{unit(18)};
+  &__container {
     @include scrollable;
     box-sizing: border-box;
-    // margin: 0 5rem;
-    top: var(--top);
-    left: 0;
-    right: 0;
     padding: $scrollbar-padding unit(12) unit(8);
-    position: absolute;
-    height: calc(100vh - var(--top));
-    overflow-y: auto;
+    // overflow-y: auto;
   }
 }
 
 .home-section {
-  display: flex;
-  flex-direction: row;
   border-radius: var(--border-radius);
-  background: $panel-color;
-  margin: unit(8) 0 0;
+  margin: 4rem 0 0;
   overflow: hidden;
 
   &:first-child {
     margin: 0;
   }
 
-  &__main,
-  &__sub {
-    padding: unit(4);
+  &__split {
+    display: flex;
+    width: 100%;
 
-    h1:first-child,
-    h2:first-child,
-    h3:first-child,
-    h4:first-child {
-      margin-top: 0;
+    &-left,
+    &-right {
+      flex-grow: 1;
     }
 
-    h3,
-    h4 {
-      text-transform: uppercase;
+    &-vr {
+      $rule-width: px(5);
+      padding: unit(4);
+      position: relative;
+      flex-basis: calc(#{unit(4)} + #{$rule-width});
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 2rem;
+        height: calc(100% - #{unit(2)});
+        border-radius: $rule-width;
+        width: $rule-width;
+        background-color: var(--color-platinum--dark);
+      }
     }
   }
+}
 
-  &__main {
-    flex: 3;
+.home-group {
+  padding: px(40) px(80);
+  background-color: var(--color-platinum--dark);
+
+  h1:first-child,
+  h2:first-child,
+  h3:first-child,
+  h4:first-child {
+    margin-top: 0;
   }
 
-  &__toggle-panel {
-    margin: unit(2) 0 0;
-  }
-
-  &__sub {
-    flex: 2;
-    background: $panel-color-alt;
-  }
-
-  &__more {
-    flex: 2;
-    background: $panel-color-alt;
-  }
-
-  &--vertical {
-    flex-direction: column;
+  &--alt {
+    background-color: var(--color-platinum);
   }
 }
 
@@ -175,7 +219,7 @@ $protocol-card-component: 'protocol-card';
   overflow: hidden;
   margin: unit(2);
   flex-direction: column-reverse;
-  max-height: 22rem;
+  max-height: px(300);
 
   &--server {
     .#{$protocol-card-component}__icon-section {
@@ -191,7 +235,7 @@ $protocol-card-component: 'protocol-card';
     color: #aab0fd;
     background: var(--color-slate-blue--dark);
     flex-direction: row;
-    padding: unit(1) unit(4);
+    padding: px(10) px(30);
 
     .protocol-icon {
       height: 3rem;
@@ -225,7 +269,7 @@ $protocol-card-component: 'protocol-card';
 
   &__main-section {
     flex: 0 1 auto;
-    padding: unit(2) unit(4) 0;
+    padding: px(30) px(60) 0;
     flex-direction: column;
 
     .protocol-name {
@@ -237,10 +281,10 @@ $protocol-card-component: 'protocol-card';
     }
 
     .protocol-description {
-      height: unit(12);
+      height: px(150);
       overflow-y: auto;
       overflow-x: hidden;
-      padding: unit(2) 0;
+      padding: px(30) 0;
       margin: 0;
       font-size: 0.85rem;
     }
@@ -252,8 +296,8 @@ $protocol-card-component: 'protocol-card';
     width: 3rem;
     text-align: center;
     background: var(--info);
-    padding: unit(1);
-    margin-left: unit(1);
+    padding: px(10);
+    margin-left: px(10);
     border-radius: 50%;
     display: inline-block;
 

@@ -2,7 +2,6 @@ import path from 'path';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Flipped } from 'react-flip-toolkit';
 import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
 import { Node, Icon, Button } from '@codaco/ui';
@@ -71,37 +70,28 @@ class Overview extends Component {
     if (!show || !flipId) { return null; }
 
     return (
-      <React.Fragment>
-        <Flipped flipId={flipId}>
-          <div className="overview">
-            <div className="overview__panel">
-              <div className="overview__groups">
-                <div className="overview__group overview__group--title">
-                  <h1 className="overview__name">{name}</h1>
-                  <Fields.Text
-                    className="timeline-overview__name"
-                    placeholder="Enter a description for your protocol here"
-                    label="Protocol description"
-                    input={{
-                      value: description,
-                      onChange:
-                        ({ target: { value } }) => {
-                          updateOptions({ description: value });
-                        },
-                    }}
-                  />
-                </div>
-                <div style={{ padding: '1rem 0 0', width: '100%', textAlign: 'right' }}>
-                  <Link screen="assets"><Button size="small">Manage assets</Button></Link>
-                  <div style={{ padding: '0 0 0 1rem', display: 'inline-block' }}>
-                    <Link screen="codebook"><Button size="small" color="neon-coral">Manage codebook</Button></Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Flipped>
-      </React.Fragment>
+      <div className="overview">
+        <div className="overview__details">
+          <h1 className="overview__name">{name}</h1>
+          <Fields.Text
+            className="timeline-overview__name"
+            placeholder="Enter a description for your protocol here"
+            label="Protocol description"
+            input={{
+              value: description,
+              onChange:
+                ({ target: { value } }) => {
+                  updateOptions({ description: value });
+                },
+            }}
+          />
+        </div>
+        <div className="overview__menu">
+          <Link screen="home">Back</Link>
+          <Link screen="assets">Manage assets</Link>
+          <Link screen="codebook">Manage codebook</Link>
+        </div>
+      </div>
     );
   }
 }

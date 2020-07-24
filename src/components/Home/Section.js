@@ -1,29 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Section = ({ title, children, sidebar }) => (
-  <div className="home-section">
-    <div className="home-section__main">
-      <h2>{title}</h2>
+// const sectionVariants = {
+//   initial: { opacity: 0, translateX: '50%' },
+//   enter: {
+//     opacity: 1,
+//     translateX: 0,
+//   },
+// };
+
+const Section = ({
+  children,
+  color,
+  graphic,
+  graphicPosition,
+  graphicSize,
+}) => {
+  const styles = {
+    backgroundColor: `var(--color-${color})`,
+    backgroundImage: `url(${graphic})`,
+    backgroundPosition: graphicPosition,
+    backgroundSize: graphicSize,
+  };
+
+  return (
+    <div className="home-section" style={styles}>
       {children}
     </div>
-    { sidebar &&
-      <div className="home-section__sub">
-        {sidebar}
-      </div>
-    }
-  </div>
-);
+  );
+};
 
 Section.propTypes = {
-  title: PropTypes.string.isRequired,
-  sidebar: PropTypes.node,
   children: PropTypes.node,
+  color: PropTypes.string,
+  graphic: PropTypes.string,
+  graphicPosition: PropTypes.string,
+  graphicSize: PropTypes.string,
 };
 
 Section.defaultProps = {
   children: null,
-  sidebar: null,
+  color: 'platinum--dark',
+  graphic: null,
+  graphicPosition: '50% 50%',
+  graphicSize: 'contain',
 };
 
-export default React;
+export default Section;
