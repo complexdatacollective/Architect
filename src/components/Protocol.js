@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
-import { Icon } from '@codaco/ui';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getHasUnsavedChanges } from '@selectors/session';
@@ -14,13 +13,11 @@ import { UnsavedChanges } from '@components/Dialogs';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
 import ProtocolControlBar from '@components/ProtocolControlBar';
-import networkCanvasBrand from '@app/images/network-canvas-brand.svg';
 
-const Scene = ({
+const Protocol = ({
   protocolPath,
   isLoading,
   hasProtocol,
-  handleClickStart,
 }) => {
   const sceneClasses = cx(
     'scene',
@@ -30,12 +27,6 @@ const Scene = ({
 
   return (
     <div className={sceneClasses}>
-      {/* <img className="scene__brand" src={networkCanvasBrand} alt="" /> */}
-
-      {/* <div className="scene__home" onClick={handleClickStart}>
-        <Icon className="start-button__arrow" name="back-arrow" />
-      </div> */}
-
       <div className="scene__protocol">
         <Overview
           show={hasProtocol}
@@ -52,14 +43,14 @@ const Scene = ({
   );
 };
 
-Scene.propTypes = {
+Protocol.propTypes = {
   protocolPath: PropTypes.string,
   isLoading: PropTypes.bool,
   hasProtocol: PropTypes.bool,
   handleClickStart: PropTypes.func.isRequired,
 };
 
-Scene.defaultProps = {
+Protocol.defaultProps = {
   protocolPath: null,
   isLoading: false,
   hasProtocol: false,
@@ -105,9 +96,9 @@ const linkHandler = withHandlers({
       }),
 });
 
-export { Scene };
+export { Protocol };
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   linkHandler,
-)(Scene);
+)(Protocol);
