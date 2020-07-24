@@ -1,19 +1,13 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
-const useTimer = () => {
-  const timer = useRef();
+const useTimer = (callback, delay, props) => {
+  const f = useRef(callback);
 
-  const clearTimer = () => {
-    if (!timer.current) { return; }
-    clearTimeout(timer.current);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => f.current(), delay);
 
-  const setTimer = (callback, delay) => {
-    clearTimer();
-    timer.current = setTimeout(callback, delay);
-  };
-
-  return setTimer;
+    return () => clearTimeout(timer);
+  }, props);
 };
 
 export default useTimer;

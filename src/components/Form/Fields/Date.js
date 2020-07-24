@@ -46,6 +46,7 @@ class TextInput extends PureComponent {
     label: PropTypes.string,
     autoFocus: PropTypes.bool,
     fieldLabel: PropTypes.string,
+    dateFormat: PropTypes.string,
     className: PropTypes.string,
     placeholder: PropTypes.string,
     hidden: PropTypes.bool,

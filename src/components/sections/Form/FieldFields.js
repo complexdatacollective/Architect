@@ -163,8 +163,8 @@ PromptFields.propTypes = {
   handleNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
   handleDeleteVariable: PropTypes.func.isRequired,
-  entity: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  entity: PropTypes.string,
+  type: PropTypes.string,
 };
 
 PromptFields.defaultProps = {
@@ -173,6 +173,8 @@ PromptFields.defaultProps = {
   variableType: null,
   variableOptions: null,
   componentOptions: null,
+  entity: null,
+  type: null,
 };
 
 export { PromptFields };

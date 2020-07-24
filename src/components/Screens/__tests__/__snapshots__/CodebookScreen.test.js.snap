@@ -35,6 +35,7 @@ ShallowWrapper {
         <Button
           color=""
           content=""
+          disabled={false}
           icon=""
           iconPosition="right"
           onClick={[Function]}
@@ -146,6 +147,7 @@ ShallowWrapper {
           <Button
             color=""
             content=""
+            disabled={false}
             icon=""
             iconPosition="right"
             onClick={[Function]}

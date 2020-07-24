@@ -1,9 +1,8 @@
 import React from 'react';
-import { FormSection } from 'redux-form';
+import { FormSection, Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
-import { ValidatedField } from '../Form';
 
 const NarrativeBehaviours = () => (
   <Section contentId="guidance.editor.narrative_behaviours">
@@ -11,7 +10,7 @@ const NarrativeBehaviours = () => (
     <FormSection name="behaviours">
       <div id={getFieldId('freeDraw')} data-name="Free draw" />
       <h4>Free-draw</h4>
-      <ValidatedField
+      <Field
         name="freeDraw"
         label="Allow drawing on the canvas."
         component={Fields.Checkbox}
@@ -19,7 +18,7 @@ const NarrativeBehaviours = () => (
 
       <div id={getFieldId('allowRepositioning')} data-name="Allow repositioning" />
       <h4>Allow repositioning</h4>
-      <ValidatedField
+      <Field
         name="allowRepositioning"
         label="Allow repositioning of nodes."
         component={Fields.Checkbox}

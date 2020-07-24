@@ -13,11 +13,6 @@ import {
 } from './helpers';
 
 class Grid extends Component {
-  static propTypes = {
-    fields: PropTypes.object.isRequired,
-    items: PropTypes.array.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -80,6 +75,7 @@ class Grid extends Component {
       onEditItem,
       fields,
       meta,
+      editField,
     } = this.props;
 
     const { error, submitFailed } = meta;
@@ -121,6 +117,7 @@ class Grid extends Component {
                 fields={fields}
                 previewComponent={previewComponent}
                 onEditItem={onEditItem}
+                editField={editField}
                 {...item}
               />
             </div>
@@ -134,6 +131,20 @@ class Grid extends Component {
     );
   }
 }
+
+Grid.propTypes = {
+  fields: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
+  capacity: PropTypes.number.isRequired,
+  previewComponent: PropTypes.any.isRequired,
+  onEditItem: PropTypes.func.isRequired,
+  meta: PropTypes.object.isRequired,
+  editField: PropTypes.string,
+};
+
+Grid.defaultProps = {
+  editField: '',
+};
 
 export { Grid };
 

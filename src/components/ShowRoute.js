@@ -9,6 +9,8 @@ const ShowRoute = ({ component: Component, path, ...rest }) => (
 );
 
 ShowRoute.propTypes = {
+  path: PropTypes.string.isRequired,
+  match: PropTypes.any.isRequired, // TODO: hunt down react router dom docs
   component: PropTypes.func.isRequired,
 };
 

@@ -19,7 +19,6 @@ const PromptFields = ({
   changeForm,
   entity,
   form,
-  normalizeKeyDown,
   onDeleteVariable,
   type,
   variable,
@@ -83,7 +82,6 @@ const PromptFields = ({
           options={ordinalVariableOptions}
           onCreateOption={handleNewVariable}
           onDeleteOption={v => onDeleteVariable(v, 'variable')}
-          onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
           formatCreateLabel={inputValue => (
             <span>
@@ -111,8 +109,9 @@ const PromptFields = ({
           color gradient. Which color would you like to use for this scale?
         </p>
         <Tip>
-          <p>Consider using a color consistently throughout your interview protocol
-          to represent each theme, to help reenforce the idea to your participants.
+          <p>
+            Consider using a color consistently throughout your interview protocol
+            to represent each theme, to help reenforce the idea to your participants.
           </p>
         </Tip>
         <ValidatedField
@@ -170,13 +169,17 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   variableOptions: PropTypes.array,
-  handleDeleteVariable: PropTypes.func.isRequired,
+  onDeleteVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  changeForm: PropTypes.func.isRequired,
+  form: PropTypes.string.isRequired,
+  variable: PropTypes.string,
 };
 
 PromptFields.defaultProps = {
   variableOptions: [],
+  variable: null,
 };
 
 export { PromptFields };

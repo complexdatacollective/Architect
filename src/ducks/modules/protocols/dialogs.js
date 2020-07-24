@@ -13,8 +13,9 @@ export const validationErrorDialog = (e) => {
         emailing <code>info@networkcanvas.com</code>.
       </p>
       <p>
-        You may still save and edit the protocol but it <strong>will not be compatible with
-        Network Canvas or Server</strong>.
+        You may still save and edit the protocol but it <strong>
+          will not be compatable with
+          Network Canvas or Server</strong>.
       </p>
     </React.Fragment>
   );

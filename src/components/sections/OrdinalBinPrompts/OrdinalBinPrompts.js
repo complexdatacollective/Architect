@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import EditableList from '../../EditableList';
 import withSubject from '../../enhancers/withSubject';
@@ -32,6 +33,17 @@ const OrdinalBinPrompts = ({ handleChangePrompt, ...props }) => (
     </Tip>
   </EditableList>
 );
+
+OrdinalBinPrompts.propTypes = {
+  handleChangePrompt: PropTypes.func.isRequired,
+  entity: PropTypes.string,
+  type: PropTypes.string,
+};
+
+OrdinalBinPrompts.defaultProps = {
+  entity: null,
+  type: null,
+};
 
 export { OrdinalBinPrompts };
 

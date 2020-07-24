@@ -200,7 +200,7 @@ CreatableSelect.propTypes = {
   children: PropTypes.node,
   reserved: PropTypes.array,
   meta: PropTypes.object,
-  // validate: PropTypes.func,
+  validation: PropTypes.any,
 };
 
 CreatableSelect.defaultProps = {
@@ -213,7 +213,7 @@ CreatableSelect.defaultProps = {
   children: null,
   reserved: [],
   meta: { invalid: false, error: null, touched: false },
-  // validate: () => false,
+  validation: {},
 };
 
 export default CreatableSelect;

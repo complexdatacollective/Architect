@@ -26,7 +26,7 @@ const withAssetUrl = compose(
   setPropTypes({
     id: PropTypes.string.isRequired,
   }),
-  connect(mapStateToProps),
+  connect(mapStateToProps, {}),
 );
 
 export default withAssetUrl;

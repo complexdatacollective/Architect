@@ -60,6 +60,7 @@ EditValue.propTypes = {
     PropTypes.node,
     PropTypes.func,
   ]).isRequired,
+  variableType: PropTypes.string.isRequired,
 };
 
 EditValue.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import EditableList from '../../EditableList';
 import withSubject from '../../enhancers/withSubject';
@@ -31,6 +32,16 @@ const CategoricalBinPrompts = ({ handleChangePrompt, ...props }) => (
   </EditableList>
 );
 
+CategoricalBinPrompts.propTypes = {
+  handleChangePrompt: PropTypes.func.isRequired,
+  entity: PropTypes.string,
+  type: PropTypes.string,
+};
+
+CategoricalBinPrompts.defaultProps = {
+  entity: null,
+  type: null,
+};
 export { CategoricalBinPrompts };
 
 export default compose(

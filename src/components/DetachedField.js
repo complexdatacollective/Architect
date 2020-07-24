@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { compose, defaultProps } from 'recompose';
 import withValidation from './Form/withValidation';
@@ -98,6 +99,21 @@ class DetachedField extends Component {
     );
   }
 }
+
+DetachedField.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.any,
+  name: PropTypes.any,
+  validate: PropTypes.array.isRequired,
+  component: PropTypes.any.isRequired,
+  meta: PropTypes.object,
+};
+
+DetachedField.defaultProps = {
+  name: null,
+  meta: {},
+  value: null,
+};
 
 export default compose(
   defaultProps({ validation: {} }),

@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Flipped } from 'react-flip-toolkit';
 import { Item } from '../OrderedList';
 
-class Preview extends PureComponent {
+class Preview extends Component {
   render() {
     const {
       onClickPrompt,
@@ -43,6 +43,9 @@ class Preview extends PureComponent {
 Preview.propTypes = {
   fieldId: PropTypes.string.isRequired,
   sortable: PropTypes.bool,
+  onClickPrompt: PropTypes.func.isRequired,
+  editField: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 Preview.defaultProps = {

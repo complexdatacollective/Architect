@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { components as ReactSelectComponents } from 'react-select';
 
 const { Option } = ReactSelectComponents;
@@ -15,5 +16,9 @@ const SelectOptionVariable = props => (
     <p>{props.data.description}</p>
   </Option>
 );
+
+SelectOptionVariable.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default SelectOptionVariable;

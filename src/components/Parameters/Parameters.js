@@ -29,6 +29,7 @@ const Parameters = ({ type, component, ...rest }) => {
 
 Parameters.propTypes = {
   type: PropTypes.string.isRequired,
+  component: PropTypes.any.isRequired,
 };
 
 export default Parameters;
