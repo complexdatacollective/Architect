@@ -16,7 +16,7 @@ const ProtocolLoader = ({
 
     return () => resetSession();
   }, [protocol]);
-  return (<div>loader{protocol}</div>);
+  return null;
 };
 
 const mapDispatchToProps = dispatch => ({

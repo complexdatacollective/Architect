@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
+import { Icon } from '@codaco/ui';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getHasUnsavedChanges } from '@selectors/session';
@@ -18,6 +19,7 @@ const Protocol = ({
   protocolPath,
   isLoading,
   hasProtocol,
+  handleClickStart,
 }) => {
   const sceneClasses = cx(
     'scene',
@@ -27,6 +29,10 @@ const Protocol = ({
 
   return (
     <div className={sceneClasses}>
+      <div className="scene__home" onClick={handleClickStart}>
+        <Icon className="start-button__arrow" name="back-arrow" />
+      </div>
+
       <div className="scene__protocol">
         <Overview
           show={hasProtocol}
