@@ -59,30 +59,32 @@ const Home = ({
       >
         <Welcome />
         <Section>
-          <Group>
-            <Sprite
-              src={resumeBackgroundGraphic}
-              width="calc(50% - 7rem)"
-              height="90%"
-              position="absolute"
-              bottom={0}
-              right="5.7rem"
-              opacity="0.33"
-              backgroundPosition="top right"
-              backgroundSize="100% auto"
-            />
-            <div className="home-left">
-              <h2>Resume Editing</h2>
-              <ProtocolCard
-                description={resumeProtocol.description}
-                lastModified={resumeProtocol.lastModified}
-                name={resumeProtocol.name}
-                onClick={() => handleLoadProtocol(resumeProtocol.filePath)}
-                disabled={disableButtons}
-                schemaVersion={resumeProtocol.schemaVersion}
+          { resumeProtocol &&
+            <Group>
+              <Sprite
+                src={resumeBackgroundGraphic}
+                width="calc(50% - 7rem)"
+                height="90%"
+                position="absolute"
+                bottom={0}
+                right="5.7rem"
+                opacity="0.33"
+                backgroundPosition="top right"
+                backgroundSize="100% auto"
               />
-            </div>
-          </Group>
+              <div className="home-left">
+                <h2>Resume Editing</h2>
+                <ProtocolCard
+                  description={resumeProtocol.description}
+                  lastModified={resumeProtocol.lastModified}
+                  name={resumeProtocol.name}
+                  onClick={() => handleLoadProtocol(resumeProtocol.filePath)}
+                  disabled={disableButtons}
+                  schemaVersion={resumeProtocol.schemaVersion}
+                />
+              </div>
+            </Group>
+          }
           <Group title="Create or Open" color="platinum">
             <div className="home-split">
               <div className="home-split__left">
