@@ -202,7 +202,7 @@ $font-sizes: (
 .home-group {
   @include first-margin;
   position: relative;
-  padding: px(40) px(80);
+  padding: unit(4) unit(8) unit(5);
   background-color: var(--color-platinum--dark);
   background-repeat: no-repeat;
 }

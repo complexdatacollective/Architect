@@ -85,7 +85,8 @@ const Home = ({
               </div>
             </Group>
           }
-          <Group title="Create or Open" color="platinum">
+          <Group color="platinum">
+            <h2>Create or Open</h2>
             <div className="home-split">
               <div className="home-split__left">
                 <GraphicButton
