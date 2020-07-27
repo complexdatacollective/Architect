@@ -25,6 +25,7 @@ $font-sizes: (
   2: 1.785714286rem,
   1: 1.428571429rem,
   body: 1.142857143rem,
+  small: .914285714rem,
 );
 
 @function type-scale($name) {
@@ -162,6 +163,20 @@ $font-sizes: (
 
 .home-header {
   color: var(--color-white);
+  height: 14rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    font-size: type-scale(4);
+    margin: 0;
+  }
+
+  p {
+    margin-top: unit(1);
+    font-size: type-scale(1);
+  }
 
   .version {
     position: absolute;
@@ -185,18 +200,28 @@ $font-sizes: (
 
   &__video {
     flex: 1;
+    min-height: 15rem;
   }
 
   &__content {
     flex: 2;
-    padding-left: unit(2);
+    padding-left: unit(8);
+
+    h2 {
+      font-size: type-scale(1);
+    }
+  }
+
+  &__show-welcome {
+    position: absolute;
+    bottom: unit(3);
+    right: unit(8);
   }
 }
 
 .aspect-ratio {
   position: relative;
-  padding-bottom: 50%;
-  background: red;
+  padding-bottom: 75%; // 4:3
 
   & > div,
   & > video,

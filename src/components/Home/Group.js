@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 const Group = ({
   children,
   color,
-  roundedCorners,
+  className,
 }) => {
   const styles = {
     backgroundColor: `var(--color-${color})`,
-    borderRadius: roundedCorners
-      .map(rounded => (rounded ? 'var(--border-radius)' : '0'))
-      .join(' '),
   };
 
+  const classes = cx('home-group', className);
+
   return (
-    <div className="home-group" style={styles}>
+    <div className={classes} style={styles}>
       {children}
     </div>
   );
@@ -23,13 +23,13 @@ const Group = ({
 Group.propTypes = {
   children: PropTypes.node,
   color: PropTypes.string,
-  roundedCorners: PropTypes.array,
+  className: PropTypes.string,
 };
 
 Group.defaultProps = {
   children: null,
   color: 'platinum--dark',
-  roundedCorners: [false, false, false, false],
+  className: null,
 };
 
 export default Group;
