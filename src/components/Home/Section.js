@@ -11,16 +11,10 @@ import PropTypes from 'prop-types';
 
 const Section = ({
   children,
-  color,
-  graphic,
-  graphicPosition,
-  graphicSize,
+  allowOverflow,
 }) => {
   const styles = {
-    backgroundColor: `var(--color-${color})`,
-    backgroundImage: `url(${graphic})`,
-    backgroundPosition: graphicPosition,
-    backgroundSize: graphicSize,
+    overflow: allowOverflow ? 'visible' : 'hidden',
   };
 
   return (
@@ -32,18 +26,12 @@ const Section = ({
 
 Section.propTypes = {
   children: PropTypes.node,
-  color: PropTypes.string,
-  graphic: PropTypes.string,
-  graphicPosition: PropTypes.string,
-  graphicSize: PropTypes.string,
+  allowOverflow: PropTypes.bool,
 };
 
 Section.defaultProps = {
   children: null,
-  color: 'platinum--dark',
-  graphic: null,
-  graphicPosition: '50% 50%',
-  graphicSize: 'contain',
+  allowOverflow: false,
 };
 
 export default Section;

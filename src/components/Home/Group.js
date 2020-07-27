@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 const Group = ({
   children,
   color,
-  graphic,
-  graphicPosition,
-  graphicSize,
+  roundedCorners,
 }) => {
   const styles = {
     backgroundColor: `var(--color-${color})`,
-    backgroundImage: `url(${graphic})`,
-    backgroundPosition: graphicPosition,
-    backgroundSize: graphicSize,
+    borderRadius: roundedCorners
+      .map(rounded => (rounded ? 'var(--border-radius)' : '0'))
+      .join(' '),
   };
 
   return (
@@ -25,17 +23,13 @@ const Group = ({
 Group.propTypes = {
   children: PropTypes.node,
   color: PropTypes.string,
-  graphic: PropTypes.string,
-  graphicPosition: PropTypes.string,
-  graphicSize: PropTypes.string,
+  roundedCorners: PropTypes.array,
 };
 
 Group.defaultProps = {
   children: null,
   color: 'platinum--dark',
-  graphic: null,
-  graphicPosition: '50% 50%',
-  graphicSize: 'contain',
+  roundedCorners: [false, false, false, false],
 };
 
 export default Group;

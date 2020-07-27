@@ -8,7 +8,7 @@ import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
 import GraphicButton from '@components/GraphicButton';
-import Welcome from './Welcome';
+import Header from './Header';
 import Sprite from './Sprite';
 import Section from './Section';
 import Group from './Group';
@@ -57,7 +57,7 @@ const Home = ({
       <motion.div
         className="home__container"
       >
-        <Welcome />
+        <Header />
         <Section>
           { resumeProtocol &&
             <Group>
