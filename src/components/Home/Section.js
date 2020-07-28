@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 
-// const sectionVariants = {
-//   initial: { opacity: 0, translateX: '50%' },
-//   enter: {
-//     opacity: 1,
-//     translateX: 0,
-//   },
-// };
+const sectionVariants = {
+  initial: { opacity: 0, translateX: '50%' },
+  enter: {
+    opacity: 1,
+    translateX: 0,
+  },
+};
 
 const Section = ({
   children,
@@ -18,9 +19,13 @@ const Section = ({
   };
 
   return (
-    <div className="home-section" style={styles}>
+    <motion.div
+      className="home-section"
+      style={styles}
+      variants={sectionVariants}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 };
 

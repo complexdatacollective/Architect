@@ -1,16 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { get } from 'lodash';
+import { connect } from 'react-redux';
 import { Button } from '@codaco/ui';
+import { actionCreators } from '@modules/ui';
 import Section from './Section';
 import Group from './Group';
 import { appVersion } from '../../utils/appVersion';
 
-const WhatsNew = () => {
-
+const WhatsNew = ({ dismissedVersion, setProperty }) => {
   const handleDismiss = () => {
+    setProperty('dismissedVersion', appVersion);
   };
 
+  const isDismissed = dismissedVersion !== appVersion;
+
   return (
-    <Section>
+    !isDismissed &&
+    <Section key="whats-new">
       <Group color="cerulean-blue" className="release-notes" icon="info">
         <h2>Whats new in {appVersion}</h2>
 
@@ -44,4 +51,14 @@ const WhatsNew = () => {
   );
 };
 
-export default WhatsNew;
+WhatsNew.propTypes = {
+  dismissedVersion: PropTypes.string.isRequired,
+  setProperty: PropTypes.func.isRequired,
+};
+
+const withState = connect(
+  state => ({ dismissedVersion: get(state, 'ui.simple.dismissedVersion', '') }),
+  { setProperty: actionCreators.setProperty },
+);
+
+export default withState(WhatsNew);

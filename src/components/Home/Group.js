@@ -27,7 +27,7 @@ const Group = ({
           className="home-group__icon"
           initial={{ opacity: 0, translateY: '25%' }}
           animate={{ opacity: 1, translateY: '0%' }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.4 }}
         >
           <Icon name={icon} />
         </motion.div>
