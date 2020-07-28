@@ -8,10 +8,11 @@ import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
 import GraphicButton from '@components/GraphicButton';
-import Header from './Header';
-import Sprite from './Sprite';
 import Section from './Section';
 import Group from './Group';
+import Sprite from './Sprite';
+import Header from './Header';
+import ReleaseNotes from './ReleaseNotes';
 import ProtocolCard from './ProtocolCard';
 
 const getRecentProtocols = state =>
@@ -58,6 +59,7 @@ const Home = ({
         className="home__container"
       >
         <Header />
+        <ReleaseNotes />
         <Section>
           { resumeProtocol &&
             <Group>

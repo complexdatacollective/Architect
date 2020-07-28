@@ -159,6 +159,18 @@ $font-sizes: (
   padding: unit(4) unit(8) unit(5);
   background-color: var(--color-platinum--dark);
   background-repeat: no-repeat;
+
+  &--icon {
+    padding-left: unit(20);
+    min-height: unit(17);
+
+    .home-group__icon {
+      position: absolute;
+      top: unit(4);
+      left: unit(8);
+      width: unit(8);
+    }
+  }
 }
 
 .switch {
@@ -260,7 +272,12 @@ $font-sizes: (
   }
 }
 
+.release-notes {
+  color: var(--color-white);
+}
+
 .home-welcome {
+  padding-top: unit(2);
   display: flex;
   flex-direction: row;
   color: var(--color-white);

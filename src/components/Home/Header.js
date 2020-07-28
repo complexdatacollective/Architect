@@ -17,19 +17,18 @@ const Header = ({ showWelcome }) => {
     <motion.div style={{ position: 'relative' }}>
       <Sprite
         src={headerGraphic}
-        height="26rem"
-        width="26rem"
+        height="25rem"
+        width="25rem"
         position="absolute"
         top="7rem"
         left="40%"
         transform="translateY(-50%)"
         zIndex="1"
-        // animate={{ left: isOpen ? '50%' : '45%' }}
       />
       <Section>
         <Group color="slate-blue" className="home-header">
           <div className="home-header__container">
-            <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '.5rem' }} />
+            <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '2rem', width: '2rem'  }} />
             <h1>Architect</h1>
             <p>A tool for creating Network Canvas Interviews</p>
           </div>
