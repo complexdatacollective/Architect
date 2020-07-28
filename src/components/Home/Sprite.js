@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 
 const Sprite = ({
   src,
+  animate,
   ...styles
 }) => {
   const style = {
@@ -10,11 +12,22 @@ const Sprite = ({
     backgroundImage: `url(${src})`,
   };
 
-  return <div className="sprite" style={style} />;
+  return (
+    <motion.div
+      className="sprite"
+      style={style}
+      animate={animate}
+    />
+  );
 };
 
 Sprite.propTypes = {
   src: PropTypes.string.isRequired,
+  animate: PropTypes.object,
+};
+
+Sprite.defaultProps = {
+  animate: {},
 };
 
 export default Sprite;

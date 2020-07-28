@@ -8,9 +8,11 @@ import Version from '@components/Version';
 import Sprite from './Sprite';
 import Section from './Section';
 import Group from './Group';
+import Switch from './Switch';
 
 const Header = ({ showWelcome }) => {
   const [isOpen, setIsOpen] = useState(showWelcome);
+
   return (
     <motion.div style={{ position: 'relative' }}>
       <Sprite
@@ -19,21 +21,26 @@ const Header = ({ showWelcome }) => {
         width="26rem"
         position="absolute"
         top="7rem"
-        left="45%"
+        left="40%"
         transform="translateY(-50%)"
-        zIndex="2"
+        zIndex="1"
+        // animate={{ left: isOpen ? '50%' : '45%' }}
       />
       <Section>
         <Group color="slate-blue" className="home-header">
-          <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '.5rem' }} />
-          <h1>Architect</h1>
-          <p>A tool for creating Network Canvas Interviews</p>
+          <div className="home-header__container">
+            <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '.5rem' }} />
+            <h1>Architect</h1>
+            <p>A tool for creating Network Canvas Interviews</p>
+          </div>
           <Version />
-          { !isOpen &&
-            <label htmlFor="showOnStartupHeader" className="home-header__show-welcome">
-              <input type="checkbox" id="showOnStartupHeader" checked="checked" onClick={() => setIsOpen(true)} /> Show welcome
-            </label>
-          }
+          <motion.div
+            className="home-header__show-welcome"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isOpen ? 0 : 1 }}
+          >
+            <Switch label="Show welcome" on={isOpen} onChange={() => setIsOpen(true)} />
+          </motion.div>
         </Group>
         <motion.div
           initial={{ opacity: 1, height: 'auto' }}
@@ -53,16 +60,7 @@ const Header = ({ showWelcome }) => {
                   return to this screen later, recent protocols you have opened will be shown here.
                 </p>
 
-                { isOpen &&
-                  <motion.div
-                    initial={{ opacity: 1 }}
-                    animate={{ opacity: isOpen ? 1 : 0 }}
-                  >
-                    <label htmlFor="showOnStartup" className="home-welcome__show-welcome">
-                      <input type="checkbox" id="showOnStartup" checked="checked" onClick={() => setIsOpen(false)} /> Show welcome
-                    </label>
-                  </motion.div>
-                }
+                <Switch label="Show welcome" on={isOpen} onChange={() => setIsOpen(false)} />
               </div>
             </div>
           </Group>

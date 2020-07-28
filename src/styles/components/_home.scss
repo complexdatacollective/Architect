@@ -161,35 +161,102 @@ $font-sizes: (
   background-repeat: no-repeat;
 }
 
+.switch {
+  $size: 2rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  &__button {
+    cursor: pointer;
+    width: $size * 2;
+    height: $size;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      content: '';
+      border-radius: $size;
+      background-color: var(--color-rich-black);
+      transition: background var(--animation-duration-fast) var(--animation-easing);
+      width: $size * 2;
+      height: $size * .67;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      border-radius: 50%;
+      height: $size;
+      width: $size;
+      background-color: var(--color-white);
+      transform: translateX(-1px);
+      transition: transform var(--animation-duration-fast) var(--animation-easing);
+    }
+  }
+
+  &__input {
+    visibility: hidden;
+    position: absolute;
+    // left: -20px;
+
+    &:checked + .switch__button {
+      &::before {
+        background-color: var(--input-radio--fill);
+      }
+
+      &::after {
+        transform: translateX(calc(#{$size} + 1px));
+      }
+    }
+  }
+
+  &__label {
+    margin-left: 1rem;
+    font-family: var(--heading-font-family);
+  }
+}
+
 .home-header {
   color: var(--color-white);
   height: 14rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
 
-  h1 {
-    font-size: type-scale(4);
-    margin: 0;
-  }
+  &__container {
+    position: absolute;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    top: 0;
 
-  p {
-    margin-top: unit(1);
-    font-size: type-scale(1);
+    h1 {
+      font-size: type-scale(4);
+      margin: 0;
+    }
+
+    p {
+      font-family: var(--heading-font-family);
+      margin-top: unit(1);
+      font-size: type-scale(body);
+    }
   }
 
   .version {
     position: absolute;
     top: unit(4);
     right: unit(8);
-    z-index: 3;
+    z-index: 2;
   }
 
   &__show-welcome {
     position: absolute;
     bottom: unit(5);
     right: unit(8);
-    z-index: 3;
+    z-index: 2;
   }
 }
 
@@ -212,7 +279,7 @@ $font-sizes: (
     }
   }
 
-  &__show-welcome {
+  .switch {
     position: absolute;
     bottom: unit(3);
     right: unit(8);
