@@ -12,7 +12,7 @@ import Section from './Section';
 import Group from './Group';
 import Sprite from './Sprite';
 import Header from './Header';
-import ReleaseNotes from './ReleaseNotes';
+import UpdateAvailable from './UpdateAvailable';
 import ProtocolCard from './ProtocolCard';
 
 const getRecentProtocols = state =>
@@ -59,7 +59,7 @@ const Home = ({
         className="home__container"
       >
         <Header />
-        <ReleaseNotes />
+        <UpdateAvailable />
         <Section>
           { resumeProtocol &&
             <Group>

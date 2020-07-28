@@ -166,7 +166,7 @@ class AppManager {
     // registerAssetProtocol();
     // this.initializeListeners();
     this.updateMenu();
-    this.updater.checkForUpdates(true);
+    this.updater.checkForUpdates(false);
   }
 
   updateMenu() {
