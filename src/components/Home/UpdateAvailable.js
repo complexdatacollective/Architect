@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useState, useEffect } from 'react';
 import xss from 'xss';
 import { Button } from '@codaco/ui';
@@ -33,6 +34,7 @@ const handleUpdate = () => {
 };
 
 const ReleaseNotes = () => {
+  const [isDismissed, setIsDimissed] = useState(true);
   const [{ version, notes }, setUpdateInfo] = useState(intitialState);
 
   useEffect(() => {
@@ -41,23 +43,18 @@ const ReleaseNotes = () => {
         version: info.version,
         notes: xss(info.releaseNotes, xssOptions),
       });
+      setIsDimissed(false);
     });
 
     autoUpdater.checkForUpdates(true);
-
-    setTimeout(() => {
-      setUpdateInfo({
-        version: 123,
-        notes: 'not an update',
-      });
-    }, 3000);
   }, []);
 
   const handleDismiss = () => {
+    setIsDimissed(true);
   };
 
   return (
-    version &&
+    !isDismissed && version &&
     <Section key="update-available">
       <Group color="cerulean-blue" className="release-notes" icon="info">
         <h2>A new version is available! {version}</h2>
