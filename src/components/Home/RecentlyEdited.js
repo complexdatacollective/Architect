@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import { appVersion } from '@app/utils/appVersion';
 import Section from './Section';
 import Group from './Group';
+import ProtocolCard from './ProtocolCard';
 
 const getRecentProtocols = state =>
   get(state, 'recentProtocols', [])
@@ -16,7 +16,7 @@ const RecentlyEdited = ({ recentProtocols }) => {
     <Section key="recently-edited">
       <Group color="cerulean-blue" className="release-notes" icon="info">
         <h2>Recently Edited</h2>
-
+        {recentProtocols.map(ProtocolCard)}
       </Group>
     </Section>
   );
