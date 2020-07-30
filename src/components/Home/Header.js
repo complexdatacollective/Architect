@@ -14,7 +14,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', false);
 
   return (
-    <motion.div style={{ position: 'relative' }}>
+    <Section allowOverflow>
       <Sprite
         src={headerGraphic}
         height="25rem"
@@ -25,9 +25,9 @@ const Header = () => {
         transform="translateY(-50%)"
         zIndex="1"
       />
-      <Section>
-        <Group color="slate-blue" className="home-header">
-          <div className="home-header__container">
+      <div className="home-header">
+        <Group color="slate-blue" className="home-header__container">
+          <div className="home-header__title">
             <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '2rem', width: '2rem' }} />
             <h1>Architect</h1>
             <p>A tool for creating Network Canvas Interviews</p>
@@ -64,8 +64,8 @@ const Header = () => {
             </div>
           </Group>
         </motion.div>
-      </Section>
-    </motion.div>
+      </div>
+    </Section>
   );
 };
 

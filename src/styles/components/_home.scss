@@ -232,11 +232,16 @@ $font-sizes: (
 }
 
 .home-header {
-  color: var(--color-white);
-  height: 14rem;
-  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
 
   &__container {
+    position: relative;
+    color: var(--color-white);
+    height: 14rem;
+  }
+
+  &__title {
     position: absolute;
     height: 100%;
     display: flex;
