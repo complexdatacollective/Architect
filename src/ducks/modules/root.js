@@ -5,20 +5,24 @@ import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
 import createTimeline from '../middleware/timeline';
 // import undoable from 'redux-undo';
+import app from './app';
 import dialogs from './dialogs';
-import ui from './ui';
-import stacks from './stacks';
+import guidance from './guidance';
 import protocol from './protocol';
 import protocols from './protocols';
 import recentProtocols from './recentProtocols';
 import session, { epics as sessionEpics } from './session';
-import guidance from './guidance';
 import settings from './settings';
+import stacks from './stacks';
+import ui from './ui';
 
 export const rootEpic = combineEpics(
   sessionEpics,
 );
 
+const timelineOptions = {
+  filter: ({ type }) => /^PROTOCOL\//.test(type.toString()),
+};
 
 /*
  * state: {
@@ -28,20 +32,16 @@ export const rootEpic = combineEpics(
  * }
  */
 export const rootReducer = combineReducers({
-  form: formReducer,
-  session,
-  locale: () => 'en-US',
-  guidance,
+  app,
   dialogs,
-  ui,
-  settings,
-  stacks,
-  protocol: createTimeline(
-    protocol,
-    {
-      filter: ({ type }) => /^PROTOCOL\//.test(type.toString()),
-    },
-  ),
+  form: formReducer,
+  guidance,
+  locale: () => 'en-US',
+  protocol: createTimeline(protocol, timelineOptions),
   protocols,
   recentProtocols,
+  session,
+  settings,
+  stacks,
+  ui,
 });

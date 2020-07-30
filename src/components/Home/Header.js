@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { motion } from 'framer-motion';
 import networkCanvasLogo from '@app/images/network-canvas-brand.svg';
 import headerGraphic from '@app/images/home/header-icon.svg';
@@ -9,9 +8,10 @@ import Sprite from './Sprite';
 import Section from './Section';
 import Group from './Group';
 import Switch from './Switch';
+import useAppState from './useAppState';
 
-const Header = ({ showWelcome }) => {
-  const [isOpen, setIsOpen] = useState(showWelcome);
+const Header = () => {
+  const [isOpen, setIsOpen] = useAppState('showWelcome', false);
 
   return (
     <motion.div style={{ position: 'relative' }}>
@@ -28,7 +28,7 @@ const Header = ({ showWelcome }) => {
       <Section>
         <Group color="slate-blue" className="home-header">
           <div className="home-header__container">
-            <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '2rem', width: '2rem'  }} />
+            <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '2rem', width: '2rem' }} />
             <h1>Architect</h1>
             <p>A tool for creating Network Canvas Interviews</p>
           </div>
@@ -67,14 +67,6 @@ const Header = ({ showWelcome }) => {
       </Section>
     </motion.div>
   );
-};
-
-Header.propTypes = {
-  showWelcome: PropTypes.bool,
-};
-
-Header.defaultProps = {
-  showWelcome: true,
 };
 
 export default Header;

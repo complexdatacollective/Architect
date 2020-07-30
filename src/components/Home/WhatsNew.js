@@ -1,19 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { get } from 'lodash';
-import { connect } from 'react-redux';
 import { Button } from '@codaco/ui';
-import { actionCreators } from '@modules/ui';
+import { appVersion } from '@app/utils/appVersion';
 import Section from './Section';
 import Group from './Group';
-import { appVersion } from '../../utils/appVersion';
+import useAppState from './useAppState';
 
-const WhatsNew = ({ dismissedVersion, setProperty }) => {
+const WhatsNew = () => {
+  const [dismissedVersion, setDismissedVersion] = useAppState('dismissedVersion');
+
   const handleDismiss = () => {
-    setProperty('dismissedVersion', appVersion);
+    setDismissedVersion(appVersion);
   };
 
-  const isDismissed = dismissedVersion !== appVersion;
+  const isDismissed = dismissedVersion === appVersion;
 
   return (
     !isDismissed &&
@@ -36,7 +35,8 @@ const WhatsNew = ({ dismissedVersion, setProperty }) => {
             <ul>
               <li>Strategies for mediation: Avoid scrolling the main
                 page while a select item is open.</li>
-              <li>Long term resolution: Block body scrolling or adjust select children position relative to body scroll
+              <li>Long term resolution: Block body scrolling or adjust select children position
+                relative to body scroll
                 (<a href="https://github.com/codaco/Architect/issues/155">#155</a>)</li>
             </ul>
           </li>
@@ -51,14 +51,4 @@ const WhatsNew = ({ dismissedVersion, setProperty }) => {
   );
 };
 
-WhatsNew.propTypes = {
-  dismissedVersion: PropTypes.string.isRequired,
-  setProperty: PropTypes.func.isRequired,
-};
-
-const withState = connect(
-  state => ({ dismissedVersion: get(state, 'ui.simple.dismissedVersion', '') }),
-  { setProperty: actionCreators.setProperty },
-);
-
-export default withState(WhatsNew);
+export default WhatsNew;

@@ -1,7 +1,7 @@
-import { omit } from 'lodash';
+import { omit, get } from 'lodash';
 
-const SET_PROPERTY = 'UI/SET_PROPERTY';
-const CLEAR_PROPERTY = 'UI/CLEAR_PROPERTY';
+const SET_PROPERTY = 'APP/SET_PROPERTY';
+const CLEAR_PROPERTY = 'APP/CLEAR_PROPERTY';
 
 const initialState = {
 };
@@ -34,6 +34,13 @@ export default (state = initialState, { type, payload } = { type: null, payload:
     default:
       return state;
   }
+};
+
+const getProperty = key =>
+  state => get(state, ['app', key]);
+
+export const selectors = {
+  getProperty,
 };
 
 export const actionTypes = {
