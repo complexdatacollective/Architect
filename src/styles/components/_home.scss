@@ -158,15 +158,15 @@ $font-sizes: (
 
   &__action-divider {
     $rule-width: px(5);
-    padding: unit(4);
+    padding: 0 unit(4);
     position: relative;
     flex-basis: calc(#{unit(4)} + #{$rule-width});
 
     &::before {
       content: '';
       position: absolute;
-      top: 2rem;
-      height: calc(100% - #{unit(2)});
+      top: 1rem;
+      height: calc(100% - 2rem);
       border-radius: $rule-width;
       width: $rule-width;
       background-color: var(--color-platinum--dark);

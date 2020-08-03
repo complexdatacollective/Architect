@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 
-// transforms aren't compatible with layout animation
+// transforms aren't compatible with layout animation TODO link to docs
 const variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 1, when: 'beforeChildren' } },

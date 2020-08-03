@@ -42,8 +42,8 @@ const Header = () => {
           </motion.div>
         </Group>
         <motion.div
-          initial={{ opacity: 1, height: 'auto' }}
-          animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
+          initial={{ height: 'auto' }}
+          animate={{ height: isOpen ? 'auto' : 0 }}
         >
           <Group color="slate-blue--dark">
             <div className="home-welcome">
