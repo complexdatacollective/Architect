@@ -4,10 +4,16 @@ import cx from 'classnames';
 import { motion } from 'framer-motion';
 import { Icon } from '@codaco/ui';
 
+const baseVariant = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+};
+
 const Group = ({
   children,
   color,
   icon,
+  tada,
   className,
 }) => {
   const styles = {
@@ -20,20 +26,25 @@ const Group = ({
     { 'home-group--icon': icon },
   );
 
+  const iconVariant = tada ?
+    {
+      ...baseVariant,
+      animate: { opacity: [1, 1], rotate: [-15, 10, -7, 0] },
+    } :
+    baseVariant;
+
   return (
-    <div className={classes} style={styles}>
+    <motion.div className={classes} style={styles}>
       { icon &&
         <motion.div
           className="home-group__icon"
-          initial={{ opacity: 0, translateY: '25%' }}
-          animate={{ opacity: 1, translateY: '0%' }}
-          transition={{ delay: 0.4 }}
+          variants={iconVariant}
         >
           <Icon name={icon} />
         </motion.div>
       }
       {children}
-    </div>
+    </motion.div>
   );
 };
 
@@ -42,6 +53,7 @@ Group.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
   icon: PropTypes.string,
+  tada: PropTypes.bool,
 };
 
 Group.defaultProps = {
@@ -49,6 +61,7 @@ Group.defaultProps = {
   className: null,
   color: 'platinum--dark',
   icon: null,
+  tada: false,
 };
 
 export default Group;

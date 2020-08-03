@@ -123,6 +123,22 @@ $font-sizes: (
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+
+  &--allow-overflow {
+    overflow: visible;
+  }
+}
+
+.button-stack {
+  margin-top: 2rem;
+
+  .button {
+    margin-left: 1rem;
+
+    &:first-child {
+      margin: 0;
+    }
+  }
 }
 
 .launch-pad {

@@ -1,26 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import cx from 'classnames';
 
+// transforms aren't compatible with layout animation
 const variants = {
-  initial: { opacity: 0, translateY: '5rem' },
-  animate: { opacity: 1, translateY: '0rem', transition: { duration: 1 } },
-  exit: { opacity: 0 }, // transforms aren't compatible with layout animation
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 1, when: 'beforeChildren' } },
+  exit: { opacity: 0 },
 };
 
 const Section = ({
   children,
   allowOverflow,
 }) => {
-  const styles = {
-    overflow: allowOverflow ? 'visible' : 'hidden',
-  };
+  const classes = cx(
+    'home-section',
+    { 'home-section--allow-overflow': allowOverflow },
+  );
 
   return (
     <motion.div
-      className="home-section"
-      style={styles}
+      className={classes}
       variants={variants}
+      layout
     >
       {children}
     </motion.div>

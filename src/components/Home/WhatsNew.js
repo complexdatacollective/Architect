@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import Section from './Section';
 import Group from './Group';
 import useAppState from './useAppState';
+import ButtonStack from './ButtonStack';
 
 const WhatsNew = () => {
   const [dismissedVersion, setDismissedVersion] = useAppState('dismissedVersion');
@@ -18,8 +19,8 @@ const WhatsNew = () => {
   return (
     <AnimatePresence>
       { !isDismissed &&
-        <Section key="whats-new" id="whats-new">
-          <Group color="cerulean-blue" className="release-notes" icon="info">
+        <Section>
+          <Group color="cerulean-blue" className="release-notes" icon="info" tada>
             <h2>Whats new in {appVersion}</h2>
 
             <p>
@@ -44,10 +45,10 @@ const WhatsNew = () => {
               </li>
             </ul>
 
-            <p>
+            <ButtonStack>
               <Button size="small" color="sea-serpent" onClick={handleDismiss} >Dismiss</Button>
               <Button size="small" color="platinum" onClick={handleDismiss} >View full release notes</Button>
-            </p>
+            </ButtonStack>
           </Group>
         </Section>
       }

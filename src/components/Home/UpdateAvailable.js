@@ -58,7 +58,7 @@ const ReleaseNotes = () => {
     <AnimatePresence>
       { !isDismissed && version &&
         <Section key="update-available">
-          <Group color="cerulean-blue" className="release-notes" icon="info">
+          <Group color="cerulean-blue" className="release-notes" icon="info" tada>
             <h2>A new version is available! {version}</h2>
             <div dangerouslySetInnerHTML={{ __html: notes }} />
             <p>
