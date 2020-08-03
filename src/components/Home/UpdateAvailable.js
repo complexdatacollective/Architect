@@ -1,6 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, { useState, useEffect } from 'react';
 import xss from 'xss';
+import { AnimatePresence } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import Section from './Section';
 import Group from './Group';
@@ -54,17 +55,20 @@ const ReleaseNotes = () => {
   };
 
   return (
-    !isDismissed && version &&
-    <Section key="update-available">
-      <Group color="cerulean-blue" className="release-notes" icon="info">
-        <h2>A new version is available! {version}</h2>
-        <div dangerouslySetInnerHTML={{ __html: notes }} />
-        <p>
-          <Button size="small" color="sea-serpent" onClick={handleDismiss} >Dismiss</Button>
-          <Button size="small" color="platinum" onClick={handleUpdate} >Download and Restart</Button>
-        </p>
-      </Group>
-    </Section>
+    <AnimatePresence>
+      { !isDismissed && version &&
+        <Section key="update-available">
+          <Group color="cerulean-blue" className="release-notes" icon="info">
+            <h2>A new version is available! {version}</h2>
+            <div dangerouslySetInnerHTML={{ __html: notes }} />
+            <p>
+              <Button size="small" color="sea-serpent" onClick={handleDismiss} >Dismiss</Button>
+              <Button size="small" color="platinum" onClick={handleUpdate} >Download and Restart</Button>
+            </p>
+          </Group>
+        </Section>
+      }
+    </AnimatePresence>
   );
 };
 

@@ -122,6 +122,7 @@ $font-sizes: (
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .launch-pad {
