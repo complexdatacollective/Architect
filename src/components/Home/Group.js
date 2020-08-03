@@ -15,6 +15,7 @@ const Group = ({
   icon,
   tada,
   className,
+  center,
 }) => {
   const styles = {
     backgroundColor: `var(--color-${color})`,
@@ -23,7 +24,10 @@ const Group = ({
   const classes = cx(
     'home-group',
     className,
-    { 'home-group--icon': icon },
+    {
+      'home-group--icon': icon,
+      'home-group--center': center,
+    },
   );
 
   const iconVariant = tada ?
@@ -54,6 +58,7 @@ Group.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   tada: PropTypes.bool,
+  center: PropTypes.bool,
 };
 
 Group.defaultProps = {
@@ -62,6 +67,7 @@ Group.defaultProps = {
   color: 'platinum--dark',
   icon: null,
   tada: false,
+  center: false,
 };
 
 export default Group;

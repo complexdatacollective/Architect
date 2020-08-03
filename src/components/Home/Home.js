@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion, AnimateSharedLayout } from 'framer-motion';
-import Header from './Header';
+import WelcomeHeader from './WelcomeHeader';
+import Tips from './Tips';
 import UpdateAvailable from './UpdateAvailable';
 import WhatsNew from './WhatsNew';
 import LaunchPad from './LaunchPad';
-import RecentlyEdited from './RecentlyEdited';
 
 const variants = {
   initial: {
@@ -30,11 +30,11 @@ const Home = () => (
         animate="animate"
         exit="exit"
       >
-        <Header />
+        <WelcomeHeader />
         <UpdateAvailable />
         <WhatsNew />
         <LaunchPad />
-        <RecentlyEdited />
+        <Tips />
       </motion.div>
     </AnimateSharedLayout>
   </motion.div>

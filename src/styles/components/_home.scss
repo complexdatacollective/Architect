@@ -194,7 +194,7 @@ $font-sizes: (
 .home-group {
   @include first-margin;
   position: relative;
-  padding: unit(4) unit(8) unit(5);
+  padding: 2rem 4rem;
   background-color: var(--color-platinum--dark);
   background-repeat: no-repeat;
 
@@ -208,6 +208,12 @@ $font-sizes: (
       left: unit(8);
       width: unit(8);
     }
+  }
+
+  &--center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -317,6 +323,13 @@ $font-sizes: (
 
 .release-notes {
   color: var(--color-white);
+}
+
+.home-tips {
+  color: var(--color-white);
+
+  h3 { margin: 0 0 1rem; }
+  p { margin: 0; }
 }
 
 .home-welcome {

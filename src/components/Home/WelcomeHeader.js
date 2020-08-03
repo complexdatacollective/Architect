@@ -10,7 +10,7 @@ import Group from './Group';
 import Switch from './Switch';
 import useAppState from './useAppState';
 
-const Header = () => {
+const WelcomeHeader = () => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', false);
 
   return (
@@ -69,4 +69,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default WelcomeHeader;
