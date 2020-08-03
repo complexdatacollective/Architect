@@ -34,7 +34,7 @@ const LaunchPad = ({
   const disableButtons = isProtocolsBusy;
 
   return (
-    <Section>
+    <Section className="launch-pad">
       { resumeProtocol &&
         <Group>
           <Sprite
@@ -48,7 +48,7 @@ const LaunchPad = ({
             backgroundPosition="top right"
             backgroundSize="100% auto"
           />
-          <div className="home-left">
+          <div className="launch-pad__resume">
             <h2>Resume Editing</h2>
             <ProtocolCard
               description={resumeProtocol.description}
@@ -63,8 +63,8 @@ const LaunchPad = ({
       }
       <Group color="platinum">
         <h2>Create or Open</h2>
-        <div className="home-split">
-          <div className="home-split__left">
+        <div className="launch-pad__actions">
+          <div className="launch-pad__action">
             <GraphicButton
               graphic={createButtonGraphic}
               graphicPosition="1rem 3.15rem"
@@ -75,8 +75,8 @@ const LaunchPad = ({
               <h3>New Protocol</h3>
             </GraphicButton>
           </div>
-          <div className="home-split__vr" />
-          <div className="home-split__right">
+          <div className="launch-pad__action-divider" />
+          <div className="launch-pad__action">
             <GraphicButton
               graphic={openButtonGraphic}
               graphicPosition="1rem 3.15rem"

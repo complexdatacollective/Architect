@@ -8,19 +8,19 @@ import ProtocolCard from './ProtocolCard';
 
 const getRecentProtocols = state =>
   get(state, 'recentProtocols', [])
-    .slice(0, 10);
+    .slice(0, 9);
 
-const RecentlyEdited = ({ recentProtocols }) => {
-  return (
-    recentProtocols.length > 0 &&
-    <Section key="recently-edited">
-      <Group color="cerulean-blue" className="release-notes" icon="info">
-        <h2>Recently Edited</h2>
+const RecentlyEdited = ({ recentProtocols }) => (
+  recentProtocols.length > 0 &&
+  <Section key="recently-edited" className="recently-edited">
+    <Group>
+      <h2>Recently Edited</h2>
+      <div className="recently-edited__protocols">
         {recentProtocols.map(ProtocolCard)}
-      </Group>
-    </Section>
-  );
-};
+      </div>
+    </Group>
+  </Section>
+);
 
 RecentlyEdited.propTypes = {
   recentProtocols: PropTypes.array.isRequired,
