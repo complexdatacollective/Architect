@@ -46,8 +46,8 @@ const WhatsNew = () => {
             </ul>
 
             <ButtonStack>
-              <Button size="small" color="sea-serpent" onClick={handleDismiss} >Dismiss</Button>
-              <Button size="small" color="platinum" onClick={handleDismiss} >View full release notes</Button>
+              <Button color="sea-serpent" onClick={handleDismiss} >Dismiss</Button>
+              <Button color="platinum" onClick={handleDismiss} >View full release notes</Button>
             </ButtonStack>
           </Group>
         </Section>
