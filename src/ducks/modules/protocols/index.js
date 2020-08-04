@@ -77,6 +77,11 @@ const saveAndBundleThunk = savingLock(() =>
           });
       }));
 
+const editProtocol = (id) => {
+  history.push(`/edit/${id}/`);
+  return id;
+};
+
 /**
  * 1. Import - extract/copy protocol to /tmp/{working-path}
  * 2. Load - redirect to /edit/ which should trigger load.
@@ -90,13 +95,12 @@ const unbundleAndLoadThunk = filePath =>
           .then((result) => {
             if (!result) { return false; }
             const { id } = result;
-            // return delay(() => {
-            //   history.push(`/edit/${id}/`);
-            //   return id;
-            // }, 100);
 
-            history.push(`/edit/${id}/`);
-            return id;
+            // fake delay
+            return delay(() => editProtocol(id), 1000);
+
+            // no delay
+            // return editProtocol(id);
           })
           .catch((e) => {
             dispatch(unbundleAndLoadError(e));
