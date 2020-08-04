@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
+import { actionCreators as protocolsActions } from '@modules/protocols';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
