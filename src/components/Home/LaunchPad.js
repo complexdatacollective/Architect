@@ -68,7 +68,7 @@ const LaunchPad = ({
             <GraphicButton
               graphic={createButtonGraphic}
               graphicPosition="bottom left"
-              graphicSize="auto 80%"
+              graphicSize="auto 90%"
               onClick={handleCreateProtocol}
               disabled={disableButtons}
             >
@@ -80,9 +80,9 @@ const LaunchPad = ({
           <div className="launch-pad__action">
             <GraphicButton
               graphic={openButtonGraphic}
-              graphicPosition="bottom left"
+              graphicPosition="-4.5rem bottom"
               color="slate-blue--dark"
-              graphicSize="auto 80%"
+              graphicSize="auto 105%"
               onClick={handleOpenProtocol}
               disabled={disableButtons}
             >
