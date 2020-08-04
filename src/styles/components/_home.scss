@@ -38,12 +38,6 @@ $font-sizes: (
   }
 }
 
-@mixin disabled-state {
-  &--disabled {
-    filter: saturate(33%);
-  }
-}
-
 //8.4
 
 .sprite {
@@ -54,7 +48,6 @@ $font-sizes: (
 
 .graphic-button {
   @include clickable;
-  @include disabled-state;
   display: inline-block;
   width: 100%;
   color: var(--color-white);
@@ -395,7 +388,6 @@ $protocol-card-component: 'protocol-card';
 
 .#{$protocol-card-component} {
   @include clickable(2);
-  @include disabled-state;
 
   background: var(--color-white);
   color: var(--color-navy-taupe);

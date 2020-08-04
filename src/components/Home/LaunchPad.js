@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import { actionCreators as protocolsActions, actionLocks as protocolLocks } from '@modules/protocols';
-import { selectors as uiSelectors } from '@modules/ui';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
@@ -22,7 +20,6 @@ const LaunchPad = ({
   createAndLoadProtocol,
   resumeProtocol,
   unbundleAndLoadProtocol,
-  isProtocolsBusy,
 }) => {
   const handleOpenProtocol = () => openProtocol();
 
@@ -30,8 +27,6 @@ const LaunchPad = ({
 
   const handleLoadProtocol = filePath =>
     unbundleAndLoadProtocol(filePath);
-
-  const disableButtons = isProtocolsBusy;
 
   return (
     <Section className="launch-pad">
@@ -55,7 +50,6 @@ const LaunchPad = ({
               lastModified={resumeProtocol.lastModified}
               name={resumeProtocol.name}
               onClick={() => handleLoadProtocol(resumeProtocol.filePath)}
-              disabled={disableButtons}
               schemaVersion={resumeProtocol.schemaVersion}
             />
           </div>
@@ -70,7 +64,6 @@ const LaunchPad = ({
               graphicPosition="bottom left"
               graphicSize="auto 90%"
               onClick={handleCreateProtocol}
-              disabled={disableButtons}
             >
               <h2>Create</h2>
               <h3>New Protocol</h3>
@@ -84,7 +77,6 @@ const LaunchPad = ({
               color="slate-blue--dark"
               graphicSize="auto 105%"
               onClick={handleOpenProtocol}
-              disabled={disableButtons}
             >
               <h2>Open</h2>
               <h3>from Computer</h3>
@@ -101,17 +93,14 @@ LaunchPad.propTypes = {
   createAndLoadProtocol: PropTypes.func.isRequired,
   unbundleAndLoadProtocol: PropTypes.func.isRequired,
   resumeProtocol: PropTypes.object,
-  isProtocolsBusy: PropTypes.bool,
 };
 
 LaunchPad.defaultProps = {
   resumeProtocol: null,
-  isProtocolsBusy: false,
 };
 
 const mapStateToProps = state => ({
   resumeProtocol: getRecentProtocols(state)[0],
-  isProtocolsBusy: uiSelectors.getIsBusy(state, protocolLocks.protocols),
 });
 
 const mapDispatchToProps = {
