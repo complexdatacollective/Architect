@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';

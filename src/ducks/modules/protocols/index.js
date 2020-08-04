@@ -97,10 +97,10 @@ const unbundleAndLoadThunk = filePath =>
             const { id } = result;
 
             // fake delay
-            return delay(() => editProtocol(id), 1000);
+            // return delay(() => editProtocol(id), 1000);
 
             // no delay
-            // return editProtocol(id);
+            return editProtocol(id);
           })
           .catch((e) => {
             dispatch(unbundleAndLoadError(e));

@@ -1,6 +1,7 @@
 import path from 'path';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
@@ -11,6 +12,11 @@ import { getProtocol } from '../selectors/protocol';
 import Link from './Link';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 import { actionCreators as uiActions } from '../ducks/modules/ui';
+
+const variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+};
 
 class Overview extends Component {
   renderNodeTypes() {
@@ -69,7 +75,12 @@ class Overview extends Component {
     if (!show) { return null; }
 
     return (
-      <div className="overview">
+      <motion.div
+        className="overview"
+        variants={variants}
+        initial="initial"
+        animate="animate"
+      >
         <div className="overview__panel">
           <div className="overview__groups">
             <div className="overview__group overview__group--title">
@@ -95,7 +106,7 @@ class Overview extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 }
