@@ -275,19 +275,35 @@ $font-sizes: (
   }
 }
 
-.home-header {
-  border-radius: 1rem;
-  overflow: hidden;
-
-  &__container {
+.welcome-header {
+  &__header {
     position: relative;
+    height: 16rem;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: var(--color-white);
-    height: 14rem;
+    border-radius: 1rem;
+    transition-property: border-radius;
+    transition-duration: var(--animation-duration-standard);
+
+    .version {
+      position: absolute;
+      top: unit(4);
+      right: unit(8);
+      z-index: 2;
+    }
+
+    &-toggle {
+      position: absolute;
+      bottom: unit(2);
+      right: unit(4);
+      z-index: 2;
+    }
   }
 
   &__title {
-    position: absolute;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -306,18 +322,44 @@ $font-sizes: (
     }
   }
 
-  .version {
-    position: absolute;
-    top: unit(4);
-    right: unit(8);
-    z-index: 2;
+  &__panel {
+    overflow: hidden;
+    transform: translateY(-1.5rem); // tuck panel underneath welcome section
+    z-index: -1;
+    position: relative;
   }
 
-  &__show-welcome {
-    position: absolute;
-    bottom: unit(5);
-    right: unit(8);
-    z-index: 2;
+  &--is-open {
+    .welcome-header__header {
+      border-radius: 1rem 1rem 0 0;
+      transition-property: none; // on the way out, we don't use a transition. should still transition on close
+    }
+  }
+}
+
+.home-welcome {
+  display: flex;
+  flex-direction: row;
+  color: var(--color-white);
+  border-radius: 0 0 1rem 1rem;
+  padding-top: 3.5rem; // additional padding to match &__panel offset
+
+  &__video {
+    flex: 1;
+
+    .aspect-ratio {
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+  }
+
+  &__content {
+    flex: 2;
+    padding-left: unit(8);
+
+    h2 {
+      font-size: type-scale(1);
+    }
   }
 }
 
@@ -332,36 +374,9 @@ $font-sizes: (
   p { margin: 0; }
 }
 
-.home-welcome {
-  padding-top: unit(2);
-  display: flex;
-  flex-direction: row;
-  color: var(--color-white);
-
-  &__video {
-    flex: 1;
-    min-height: 15rem;
-  }
-
-  &__content {
-    flex: 2;
-    padding-left: unit(8);
-
-    h2 {
-      font-size: type-scale(1);
-    }
-  }
-
-  .switch {
-    position: absolute;
-    bottom: unit(3);
-    right: unit(8);
-  }
-}
-
 .aspect-ratio {
   position: relative;
-  padding-bottom: 75%; // 4:3
+  padding-bottom: 100%; // 1:1
 
   & > div,
   & > video,
@@ -370,6 +385,10 @@ $font-sizes: (
     width: 100%;
     height: 100%;
   }
+
+  &--4_3 { padding-bottom: 75%; } // 3/4
+  &--16_9 { padding-bottom: 56%; } // 9/16
+  &--16_10 { padding-bottom: 62%; } // 10/16
 }
 
 $protocol-card-component: 'protocol-card';

@@ -16,6 +16,7 @@ const Group = ({
   tada,
   className,
   center,
+  ...rest,
 }) => {
   const styles = {
     backgroundColor: `var(--color-${color})`,
@@ -38,7 +39,7 @@ const Group = ({
     baseVariant;
 
   return (
-    <motion.div className={classes} style={styles}>
+    <motion.div className={classes} style={styles} {...rest}>
       { icon &&
         <motion.div
           className="home-group__icon"

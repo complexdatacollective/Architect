@@ -13,10 +13,12 @@ const variants = {
 const Section = ({
   children,
   allowOverflow,
+  className,
 }) => {
   const classes = cx(
     'home-section',
     { 'home-section--allow-overflow': allowOverflow },
+    className,
   );
 
   return (
@@ -33,11 +35,13 @@ const Section = ({
 Section.propTypes = {
   children: PropTypes.node,
   allowOverflow: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 Section.defaultProps = {
   children: null,
   allowOverflow: false,
+  className: null,
 };
 
 export default Section;
