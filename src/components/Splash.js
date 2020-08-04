@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Version from '@components/Version';
 import architectIcon from '@app/images/architect-logo-icon.svg';
-import networkCanvasLogo from '@app/images/network-canvas-brand.svg';
+import networkCanvasLogo from '@app/images/NC-Mark.svg';
 
 const Splash = () => (
   <motion.div>

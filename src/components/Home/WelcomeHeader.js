@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { motion } from 'framer-motion';
-import networkCanvasLogo from '@app/images/network-canvas-brand.svg';
+import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import headerGraphic from '@app/images/home/header-icon.svg';
 import videoPlaceholder from '@app/images/home/video-placeholder.svg';
 import Version from '@components/Version';
@@ -23,7 +23,10 @@ const WelcomeHeader = () => {
     <Section className={classes} allowOverflow>
       <Group color="slate-blue" className="welcome-header__header">
         <div className="welcome-header__title">
-          <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '2rem', width: '2rem' }} />
+          <div className="project-tag">
+            <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '2.4rem', width: '2.4rem' }} />
+            <h5>Network Canvas</h5>
+          </div>
           <h1>Architect</h1>
           <p>A tool for creating Network Canvas Interviews</p>
         </div>
