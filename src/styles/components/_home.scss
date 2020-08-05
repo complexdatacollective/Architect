@@ -318,14 +318,14 @@ $font-sizes: (
 
   &__panel {
     overflow: hidden;
-    transform: translateY(-1.5rem); // tuck panel underneath welcome section
+    margin-top: -1.5rem; // tuck panel underneath welcome section
     z-index: -1;
     position: relative;
   }
 
   &--is-open {
     .welcome-header__header {
-      border-radius: 1rem 1rem 0 0;
+      border-radius: .75rem .75rem 0 0;
       transition-property: none; // on the way out, we don't use a transition. should still transition on close
     }
   }
@@ -335,11 +335,12 @@ $font-sizes: (
   display: flex;
   flex-direction: row;
   color: var(--color-white);
-  border-radius: 0 0 1rem 1rem;
-  padding-top: 3.5rem; // additional padding to match &__panel offset
+  border-radius: 0 0 .75rem .75rem;
+  padding-top: 5.5rem;
 
   &__video {
     flex: 1;
+    align-self: center;
 
     .aspect-ratio {
       border-radius: 1rem;
