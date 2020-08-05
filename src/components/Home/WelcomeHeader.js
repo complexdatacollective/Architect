@@ -11,6 +11,7 @@ import Section from './Section';
 import Group from './Group';
 import Switch from './Switch';
 import useAppState from './useAppState';
+import { openExternalLink } from '../ExternalLink';
 
 
 const WelcomeHeader = () => {
@@ -73,7 +74,7 @@ const WelcomeHeader = () => {
               have extensive tutorials and information on a range of topics on our
               documentation website, which you can visit using the link below.
             </p>
-            <Button>Visit Documentation Website</Button>
+            <Button onClick={e => openExternalLink(e, 'https://documentation.networkcanvas.com/')}>Visit Documentation Website</Button>
             <p>
               Alternatively, to get started right away use the buttons below to
               create a new interview protocol, or open an existing one from elsewhere

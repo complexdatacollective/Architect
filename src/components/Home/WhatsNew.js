@@ -6,6 +6,7 @@ import Section from './Section';
 import Group from './Group';
 import useAppState from './useAppState';
 import ButtonStack from './ButtonStack';
+import ExternalLink, { openExternalLink } from '../ExternalLink';
 
 const WhatsNew = () => {
   const [dismissedVersion, setDismissedVersion] = useAppState('dismissedVersion');
@@ -40,14 +41,14 @@ const WhatsNew = () => {
                     page while a select item is open.</li>
                   <li>Long term resolution: Block body scrolling or adjust select children position
                     relative to body scroll
-                    (<a href="https://github.com/codaco/Architect/issues/155">#155</a>)</li>
+                    (<ExternalLink href="https://github.com/codaco/Architect/issues/155">#155</ExternalLink>)</li>
                 </ul>
               </li>
             </ul>
 
             <ButtonStack>
               <Button color="sea-serpent" onClick={handleDismiss} >Dismiss</Button>
-              <Button color="platinum" onClick={handleDismiss} >View full release notes</Button>
+              <Button color="platinum" onClick={e => openExternalLink(e, 'https://github.com/codaco/Architect/releases')} >View full release notes</Button>
             </ButtonStack>
           </Group>
         </Section>
