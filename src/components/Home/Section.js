@@ -10,6 +10,30 @@ const variants = {
   exit: { opacity: 0 },
 };
 
+const springy = {
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'spring',
+    },
+  },
+  initial: {
+    opacity: 0,
+    scale: 0.5,
+    transition: {
+      type: 'spring',
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.5,
+    transition: {
+      type: 'spring',
+    },
+  },
+};
+
 const Section = ({
   children,
   allowOverflow,
@@ -24,7 +48,7 @@ const Section = ({
   return (
     <motion.div
       className={classes}
-      variants={variants}
+      variants={springy}
       layout
     >
       {children}
