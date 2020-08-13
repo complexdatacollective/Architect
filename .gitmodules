@@ -1,9 +1,9 @@
-[submodule "network-canvas"]
-	path = network-canvas
-	url = https://github.com/codaco/network-canvas.git
 [submodule "src/protocol-validation"]
 	path = src/protocol-validation
 	url = https://github.com/codaco/protocol-validation.git
 [submodule "development-protocol"]
 	path = development-protocol
 	url = https://github.com/codaco/development-protocol.git
+[submodule "network-canvas"]
+	path = network-canvas
+	url = https://github.com/complexdatacollective/network-canvas.git
