@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import { Button, Icon } from '@codaco/ui';
 import { actionCreators as protocolsActions } from '../ducks/modules/protocols';
@@ -22,9 +22,7 @@ const Start = ({
         <h2 className="start__welcome-lead">A tool for creating Network Canvas interviews</h2>
         <Version />
       </div>
-
     </div>
-
     <div className="start__call-to-action">
       <Button
         id="create-new-protocol-button"
