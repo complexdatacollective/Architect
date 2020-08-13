@@ -7,11 +7,6 @@ const MenuTemplate = (options) => {
         label: 'Open...',
         click: options.openFile,
       },
-      {
-        label: 'Check for updates...',
-        click: options.checkForUpdates,
-      },
-      { role: 'quit' },
     ],
   };
 
@@ -75,6 +70,11 @@ const MenuTemplate = (options) => {
 
   const appMenu = [
     { role: 'about' },
+    {
+      label: 'Check for updates...',
+      click: options.checkForUpdates,
+    },
+    { type: 'separator' },
     { role: 'quit' },
   ];
 
