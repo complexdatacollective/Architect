@@ -1,23 +1,32 @@
 const MenuTemplate = (options) => {
   const fileMenu = {
+    role: 'fileMenu',
     label: 'File',
     submenu: [
       {
         label: 'Open...',
         click: options.openFile,
       },
+      {
+        label: 'Check for updates...',
+        click: options.checkForUpdates,
+      },
+      { role: 'quit' },
     ],
   };
 
   if (options.isProtocolOpen) {
-    fileMenu.submenu.push({
-      label: 'Save',
-      click: options.save,
-    });
-    fileMenu.submenu.push({
-      label: 'Save a copy...',
-      click: options.saveCopy,
-    });
+    fileMenu.submenu.splice(1, 0,
+      {
+        label: 'Save',
+        click: options.save,
+      },
+      {
+        label: 'Save a copy...',
+        click: options.saveCopy,
+      },
+      { type: 'separator' },
+    );
   }
 
   const menu = [
@@ -65,16 +74,13 @@ const MenuTemplate = (options) => {
   ];
 
   const appMenu = [
-    {
-      label: 'Check for updates...',
-      click: options.checkForUpdates,
-    },
+    { role: 'about' },
     { role: 'quit' },
   ];
 
   if (process.platform !== 'darwin') {
     // Use File> menu for Windows
-    menu[0].submenu.concat(appMenu);
+    menu[0].submenu = menu[0].submenu.concat(appMenu);
   } else {
     // Use "App" menu for OS X
     menu.unshift({
