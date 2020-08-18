@@ -6,7 +6,7 @@ const log = require('./log');
 
 global.silentUpdates = false;
 
-const releasesUrl = 'https://github.com/codaco/Architect/releases';
+const releasesUrl = 'https://github.com/complexdatacollective/Architect/releases';
 
 const updateListeners = {
 };
