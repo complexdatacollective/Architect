@@ -14,7 +14,7 @@ const appVariants = {
   hidden: { opacity: 0, duration: 2 },
 };
 
-const App = (props) => {
+const App = () => {
   const appClasses = cx(
     'app',
     {

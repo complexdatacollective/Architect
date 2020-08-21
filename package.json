@@ -18,7 +18,7 @@
         "start:architect:electron": "node scripts/start.js",
         "start:network-canvas:electron": "npm run start:electron --prefix=network-canvas",
         "preelectron:dev": "node scripts/build-electron-dev.js",
-        "electron:dev": "cross-env NODE_ENV=development WEBPACK_NC_DEV_SERVER_PORT=3000 WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
+        "dev:electron": "cross-env NODE_ENV=development WEBPACK_NC_DEV_SERVER_PORT=3000 WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
         "build": "npm run build:architect && npm run build:network-canvas",
         "build:architect": "node scripts/build.js",
         "build:network-canvas": "cd network-canvas && npm install && npm run build:electron && cd ../ && node scripts/move-network-canvas-build.js",
@@ -31,10 +31,10 @@
         "electron": "env NODE_ENV=build electron ./app",
         "generate-icons": "node scripts/generate-app-icons.js",
         "dist": "electron-builder",
-        "dist:mac": "npm run build && electron-builder -m --publish=always",
-        "dist:linux": "npm run build && electron-builder -l --publish=always",
-        "dist:win": "npm run build && electron-builder -w --publish=always",
-        "dist:all": "npm run build && electron-builder -mlw --publish=always",
+        "dist:mac": "npm run build && electron-builder -m",
+        "dist:linux": "npm run build && electron-builder -l",
+        "dist:win": "npm run build && electron-builder -w",
+        "dist:all": "npm run build && electron-builder -mlw",
         "bump": "node scripts/bump.js",
         "preflight": "npm run lint:js && npm run lint:sass -- --max-warnings 0 && npm test -- --coverage"
     },
@@ -123,10 +123,10 @@
         "promise": "7.1.1",
         "prop-types": "^15.6.2",
         "query-string": "^6.13.1",
-        "react": "16.11.0",
+        "react": "^16.13.1",
         "react-compound-slider": "^2.4.0",
         "react-dev-utils": "9.1.0",
-        "react-dom": "16.11.0",
+        "react-dom": "^16.13.1",
         "react-draggable": "^2.2.3",
         "react-error-overlay": "^5.0.4",
         "react-fastclick": "^3.0.2",
@@ -208,7 +208,7 @@
         "publish": [
             {
                 "provider": "github",
-                "owner": "codaco",
+                "owner": "complexdatacollective",
                 "repo": "architect"
             }
         ]

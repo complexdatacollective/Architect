@@ -16,7 +16,7 @@ const Group = ({
   tada,
   className,
   center,
-  ...rest,
+  ...rest
 }) => {
   const styles = {
     backgroundColor: `var(--color-${color})`,
