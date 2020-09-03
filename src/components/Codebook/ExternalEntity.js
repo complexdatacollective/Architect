@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { readExternalData, getVariablesFromExternalData, getAssetPath } from '@selectors/assets';
 import VariableList from './VariableList';
+import EntityIcon from './EntityIcon';
 
 const ExternalEntity = ({
   id,
@@ -25,7 +26,9 @@ const ExternalEntity = ({
   return (
     <div className="codebook__entity">
       <div className="codebook__entity-detail">
-        <div className="codebook__entity-icon" />
+        <div className="codebook__entity-icon">
+          <EntityIcon entity="asset" />
+        </div>
         <div className="codebook__entity-name">
           <h2>
             {source}
