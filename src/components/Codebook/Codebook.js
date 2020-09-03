@@ -32,22 +32,6 @@ const Codebook = ({
         When you have created some interview stages, the types and variables will be shown here.
       </p>
     }
-
-    { hasNetworkAssets &&
-      <CodebookCategory title="Network Assets">
-        {networkAssets.map(
-          networkAsset => (
-            <ExternalEntity
-              id={networkAsset.id}
-              name={networkAsset.name}
-              source={networkAsset.source}
-              key={networkAsset.id}
-            />
-          ),
-        )}
-      </CodebookCategory>
-    }
-
     { hasEgoVariables &&
       <CodebookCategory title="Ego">
         <EgoType entity="ego" type="ego" />
@@ -65,6 +49,22 @@ const Codebook = ({
         {edges.map(edge => <EntityType {...edge} key={edge.type} />)}
       </CodebookCategory>
     }
+
+    { hasNetworkAssets &&
+      <CodebookCategory title="Network Assets">
+        {networkAssets.map(
+          networkAsset => (
+            <ExternalEntity
+              id={networkAsset.id}
+              name={networkAsset.name}
+              source={networkAsset.source}
+              key={networkAsset.id}
+            />
+          ),
+        )}
+      </CodebookCategory>
+    }
+
   </div>
 );
 
