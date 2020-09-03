@@ -10,24 +10,9 @@ const mockNodes = [
   { another: 'bar' },
 ];
 
-const mockEdges = [
-  { type: 'friend' },
-  { since: 'forever' },
-];
-
 const validJsonFileWithNodes = {
   text: () => Promise.resolve(JSON.stringify({ nodes: mockNodes })),
   name: 'valid_foo_nodes.json',
-};
-
-const validJsonFileWithEdges = {
-  text: () => Promise.resolve(JSON.stringify({ edges: mockEdges })),
-  name: 'valid_foo_edges.json',
-};
-
-const validJsonFileWithBoth = {
-  text: () => Promise.resolve(JSON.stringify({ nodes: mockNodes, edges: mockEdges })),
-  name: 'valid_foo_edges.json',
 };
 
 const validCsvFile = {
@@ -37,7 +22,6 @@ const validCsvFile = {
 
 const files = [
   validJsonFileWithNodes,
-  validJsonFileWithEdges,
   validCsvFile,
 ];
 
@@ -50,20 +34,13 @@ readFile.mockImplementation(
 );
 
 describe('networkAssetTools', () => {
-  it('collects json node types ', () => {
-    return expect(getVariables(validJsonFileWithNodes.name))
-      .resolves.toEqual(['name', 'another']);
-  });
+  it('collects json node types ', () =>
+    expect(getVariables(validJsonFileWithNodes.name))
+      .resolves.toEqual(['name', 'another']),
+  );
 
-  it('collects json edge types', () => {
-    return expect(getVariables(validJsonFileWithEdges.name))
-      .resolves.toEqual(['type', 'since']);
-  });
-
-
-  it('collects csv types', () => {
-    expect.assertions(1);
-    return expect(getVariables(validCsvFile.name))
-      .resolves.toEqual(['name', 'age', 'isFriend']);
-  });
+  it('collects csv types', () =>
+    expect(getVariables(validCsvFile.name))
+      .resolves.toEqual(['name', 'age', 'isFriend']),
+  );
 });

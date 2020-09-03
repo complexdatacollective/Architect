@@ -5,8 +5,6 @@ import { first, get } from 'lodash';
 import csvParse from 'csv-parse';
 import { readFile } from 'fs-extra';
 import { getVariableNamesFromNetwork } from '@app/protocol-validation/validation/validateExternalData';
-import { getSupportedAssetType } from '@app/other/protocols/importAsset';
-
 
 /**
 * Generate a switching function that takes a filepath as an argument
@@ -57,17 +55,10 @@ const getVariableReader = withExtensionSwitch({
 });
 
 /**
-* Checks that imported asset is valid
-* @param {buffer} file - The file to check.
+* Gets node variables from an external data source
+* @param {buffer} file - The external data source
 */
-export const getVariables = (filePath) => {
-  const assetType = getSupportedAssetType(filePath);
-
-  // Handle unsupported filePath types
-  if (!assetType) {
-    return Promise.reject(new Error('Asset type not supported'));
-  }
-
+export const getAssetVariables = (filePath) => {
   const variableReader = getVariableReader(filePath);
 
   return readFile(filePath)
