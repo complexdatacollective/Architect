@@ -21,15 +21,12 @@ const Variables = ({ variables, sortBy, sortDirection, sort }) => {
         <thead>
           <tr className="codebook__variables-row codebook__variables-row--heading">
             <Heading name="name" {...headingProps}>Name</Heading>
-            {/* <Heading name="type" {...headingProps}>Type</Heading> */}
-            <th />
           </tr>
         </thead>
         <tbody>
-          {variables.map(({ id, name }, index) => (
-            <tr className={rowClassName(index)} key={id}>
+          {variables.map((name, index) => (
+            <tr className={rowClassName(index)} key={name}>
               <td className="codebook__variables-column">{name}</td>
-              {/* <td className="codebook__variables-column">{type}</td> */}
             </tr>
           ))}
         </tbody>

@@ -7,6 +7,7 @@ import VariableList from './VariableList';
 const ExternalEntity = ({
   name,
   id,
+  source,
 }) => {
   const [variables, setVariables] = useState([]);
 
@@ -30,7 +31,7 @@ const ExternalEntity = ({
         </div>
         <div className="codebook__entity-name">
           <h2>
-            {name}
+            {source}
           </h2>
         </div>
         <div className="codebook__entity-meta">

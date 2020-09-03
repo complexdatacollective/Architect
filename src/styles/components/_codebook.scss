@@ -93,10 +93,6 @@
       height: 4rem;
       padding: .75rem .5rem;
       font-size: 1rem;
-
-      &:last-child {
-        text-align: right;
-      }
     }
 
     &-heading {
@@ -139,6 +135,7 @@
 
       &--controls {
         max-width: 200px;
+        text-align: right;
       }
     }
 
