@@ -3,18 +3,22 @@ import { connect } from 'react-redux';
 import { map, isEmpty } from 'lodash';
 import { getCodebook } from '@selectors/codebook';
 import { getNodeIndex, getEdgeIndex, utils } from '@selectors/indexes';
+import { getNetworkAssets } from '@selectors/protocol';
 import PropTypes from 'prop-types';
 import EntityType from './EntityType';
+import ExternalEntity from './ExternalEntity';
 import EgoType from './EgoType';
 import CodebookCategory from './CodebookCategory';
 import { getUsage, getUsageAsStageMeta } from './helpers';
 
 const Codebook = ({
-  nodes,
   edges,
-  hasEgoVariables,
-  hasNodes,
   hasEdges,
+  hasEgoVariables,
+  hasNetworkAssets,
+  hasNodes,
+  networkAssets,
+  nodes,
 }) => (
   <div className="codebook">
     <p>
@@ -27,6 +31,20 @@ const Codebook = ({
         There are currently no types or variables defined in this protocol.
         When you have created some interview stages, the types and variables will be shown here.
       </p>
+    }
+
+    { hasNetworkAssets &&
+      <CodebookCategory title="Network Assets">
+        {networkAssets.map(
+          networkAsset => (
+            <ExternalEntity
+              source={networkAsset.source}
+              name={networkAsset.name}
+              key={networkAsset.name}
+            />
+          ),
+        )}
+      </CodebookCategory>
     }
 
     { hasEgoVariables &&
@@ -50,11 +68,13 @@ const Codebook = ({
 );
 
 Codebook.propTypes = {
-  nodes: PropTypes.array.isRequired,
   edges: PropTypes.array.isRequired,
-  hasEgoVariables: PropTypes.bool.isRequired,
-  hasNodes: PropTypes.bool.isRequired,
   hasEdges: PropTypes.bool.isRequired,
+  hasEgoVariables: PropTypes.bool.isRequired,
+  hasNetworkAssets: PropTypes.bool.isRequired,
+  hasNodes: PropTypes.bool.isRequired,
+  networkAssets: PropTypes.array.isRequired,
+  nodes: PropTypes.array.isRequired,
 };
 
 const getEntityWithUsage = (state, index, mergeProps) => {
@@ -91,16 +111,21 @@ const mapStateToProps = (state) => {
     getEntityWithUsage(state, edgeIndex, { entity: 'edge' }),
   );
 
+  const networkAssets = Object.values(getNetworkAssets(state));
+
   const hasEgoVariables = !isEmpty(codebook.ego);
   const hasNodes = nodes.length > 0;
   const hasEdges = edges.length > 0;
+  const hasNetworkAssets = networkAssets.length > 0;
 
   return {
-    nodes,
     edges,
-    hasEgoVariables,
-    hasNodes,
     hasEdges,
+    hasEgoVariables,
+    hasNetworkAssets,
+    hasNodes,
+    networkAssets,
+    nodes,
   };
 };
 
