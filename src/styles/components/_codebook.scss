@@ -1,4 +1,13 @@
 .codebook {
+  &__notice {
+    margin-top: 2rem;
+    background-color: var(--background-alt);
+    padding: 2rem;
+    font-style: italic;
+    text-align: center;
+    border-radius: 1rem;
+  }
+
   &__tag {
     display: inline-block;
     border-radius: unit(.5);

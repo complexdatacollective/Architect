@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { map } from 'lodash';
+import { map, isEmpty } from 'lodash';
 import { getCodebook } from '@selectors/codebook';
 import { getNodeIndex, getEdgeIndex, utils } from '@selectors/indexes';
 import PropTypes from 'prop-types';
@@ -9,24 +9,39 @@ import EgoType from './EgoType';
 import CodebookCategory from './CodebookCategory';
 import { getUsage, getUsageAsStageMeta } from './helpers';
 
-const Codebook = ({ nodes, edges }) => (
+const Codebook = ({
+  nodes,
+  edges,
+  hasEgoVariables,
+  hasNodes,
+  hasEdges,
+}) => (
   <div className="codebook">
     <p>
       Below you can find an overview of the node and edge types that you have
       defined while creating your interview. Entities that are unused may be deleted.
     </p>
 
-    <CodebookCategory title="Ego">
-      <EgoType entity="ego" type="ego" />
-    </CodebookCategory>
+    { !hasEgoVariables && !hasNodes && !hasEdges &&
+      <p className="codebook__notice">
+        There are currently no types or variables defined in this protocol.
+        When you have created some interview stages, the types and variables will be shown here.
+      </p>
+    }
 
-    { nodes.length > 0 &&
+    { hasEgoVariables &&
+      <CodebookCategory title="Ego">
+        <EgoType entity="ego" type="ego" />
+      </CodebookCategory>
+    }
+
+    { hasNodes &&
       <CodebookCategory title="Node Types">
         {nodes.map(node => <EntityType {...node} key={node.type} />)}
       </CodebookCategory>
     }
 
-    { edges.length > 0 &&
+    { hasEdges &&
       <CodebookCategory title="Edge Types">
         {edges.map(edge => <EntityType {...edge} key={edge.type} />)}
       </CodebookCategory>
@@ -37,6 +52,9 @@ const Codebook = ({ nodes, edges }) => (
 Codebook.propTypes = {
   nodes: PropTypes.array.isRequired,
   edges: PropTypes.array.isRequired,
+  hasEgoVariables: PropTypes.bool.isRequired,
+  hasNodes: PropTypes.bool.isRequired,
+  hasEdges: PropTypes.bool.isRequired,
 };
 
 const getEntityWithUsage = (state, index, mergeProps) => {
@@ -73,9 +91,16 @@ const mapStateToProps = (state) => {
     getEntityWithUsage(state, edgeIndex, { entity: 'edge' }),
   );
 
+  const hasEgoVariables = !isEmpty(codebook.ego);
+  const hasNodes = nodes.length > 0;
+  const hasEdges = edges.length > 0;
+
   return {
     nodes,
     edges,
+    hasEgoVariables,
+    hasNodes,
+    hasEdges,
   };
 };
 
