@@ -56,7 +56,6 @@ const Codebook = ({
           networkAsset => (
             <ExternalEntity
               id={networkAsset.id}
-              name={networkAsset.name}
               source={networkAsset.source}
               key={networkAsset.id}
             />

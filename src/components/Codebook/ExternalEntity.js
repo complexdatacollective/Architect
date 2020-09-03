@@ -5,7 +5,6 @@ import { readExternalData, getVariablesFromExternalData, getAssetPath } from '@s
 import VariableList from './VariableList';
 
 const ExternalEntity = ({
-  name,
   id,
   source,
 }) => {
@@ -26,26 +25,11 @@ const ExternalEntity = ({
   return (
     <div className="codebook__entity">
       <div className="codebook__entity-detail">
-        <div className="codebook__entity-icon">
-          {/* <EntityIcon color={color} entity={entity} type={type} /> */}
-        </div>
+        <div className="codebook__entity-icon" />
         <div className="codebook__entity-name">
           <h2>
             {source}
           </h2>
-        </div>
-        <div className="codebook__entity-meta">
-          {/* { !inUse && <Tag>not in use</Tag> }
-          { inUse && <React.Fragment><em>used in:</em> {stages}</React.Fragment> } */}
-        </div>
-        <div className="codebook__entity-control">
-          {/* <Button
-            size="small"
-            color="neon-coral"
-            onClick={handleDelete}
-          >
-            Delete entity
-          </Button> */}
         </div>
       </div>
       { variables.length > 0 &&
@@ -61,7 +45,7 @@ const ExternalEntity = ({
 };
 
 ExternalEntity.propTypes = {
-  name: PropTypes.string.isRequired,
+  source: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 
