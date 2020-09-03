@@ -1,7 +1,5 @@
 import path from 'path';
 import { get, keys, uniq, flatMap } from 'lodash';
-import fs from 'fs-extra';
-import csv from 'csvtojson';
 import { getActiveProtocolMeta } from './protocols';
 import { getAssetManifest } from './protocol';
 
@@ -22,57 +20,60 @@ export const getAssetPath = (state, dataSource) => {
   return assetPath;
 };
 
-const getNeworkFromList = (nodes = [], edges = []) => {
-  const nodesWithAttributes = nodes.map(
-    node => ({ attributes: { ...node } }),
-  );
-  const edgesWithAttributes = edges.map(
-    edge => ({ attributes: { ...edge } }),
-  );
+// const getNeworkFromList = (nodes = [], edges = []) => {
+//   const nodesWithAttributes = nodes.map(
+//     node => ({ attributes: { ...node } }),
+//   );
+//   const edgesWithAttributes = edges.map(
+//     edge => ({ attributes: { ...edge } }),
+//   );
 
-  return {
-    nodes: nodesWithAttributes,
-    edges: edgesWithAttributes,
-  };
-};
+//   return {
+//     nodes: nodesWithAttributes,
+//     edges: edgesWithAttributes,
+//   };
+// };
 
-/**
- * Read external asset data and return as json network object
- *
- * @param {string} assetPath path to file on disk
- */
-export const readExternalData = async (assetPath) => {
-  const extname = path.extname(assetPath).toLowerCase();
+// /**
+//  * Read external asset data and return as json network object
+//  *
+//  * @param {string} assetPath path to file on disk
+//  */
+// export const readExternalData = async (assetPath) => {
+//   const extname = path.extname(assetPath).toLowerCase();
 
-  switch (extname) {
-    case '.csv': {
-      const csvData = await fs.readFile(assetPath);
-      const items = await csv().fromString(csvData.toString('utf8'));
-      // mock up network object that matches expected json format
-      const network = getNeworkFromList(items);
-      return network;
-    }
-    case '.json':
-      return fs.readJson(assetPath);
-    default:
-      throw Error(`Unrecognized format '${extname}'`);
-  }
-};
+//   switch (extname) {
+//     case '.csv': {
+//       const csvData = await fs.readFile(assetPath);
+//       const items = await csv().fromString(csvData.toString('utf8'));
+//       // mock up network object that matches expected json format
+//       const network = getNeworkFromList(items);
+//       return network;
+//     }
+//     case '.json':
+//       return fs.readJson(assetPath);
+//     default:
+//       throw Error(`Unrecognized format '${extname}'`);
+//   }
+// };
 
 /**
  * Extract all unique variables from an external data network asset
  *
  * @param {Object} externalData A network object { nodes: [], edges: [] }
  */
-export const getVariablesFromExternalData = (externalData, entity = 'nodes') => {
-  const items = externalData[entity] || [];
-  const allAttributes = flatMap(
-    items,
-    item => (item.attributes && keys(item.attributes)) || [],
-  );
-  const uniqueAttributes = uniq(allAttributes);
-  const variableOptions = uniqueAttributes
-    .map(attribute => ({ label: attribute, value: attribute }));
+export const getVariablesFromAsset = (state, dataSource) => {
+  const assetPath = getAssetPath(state, dataSource);
+  //   const variableOptions = uniqueAttributes
+  // .map(attribute => ({ label: attribute, value: attribute }));
+  const variables = getVariableNamesFromAsset(assetPath);
+  // const items = externalData[entity] || [];
+  // const allAttributes = flatMap(
+  //   items,
+  //   item => (item.attributes && keys(item.attributes)) || [],
+  // );
+  // const uniqueAttributes = uniq(allAttributes);
 
-  return variableOptions;
+
+  // return variableOptions;
 };

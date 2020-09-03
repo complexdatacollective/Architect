@@ -1,12 +1,12 @@
 /* eslint-env jest */
 
-import { readFile } from 'fs-extra';
-import validateAsset from '../validateAsset';
+import { readFile, readJson } from 'fs-extra';
+import { validateAsset } from '../assetTools';
 
 jest.mock('fs-extra');
 
 const validJsonFileWithNodes = {
-  text: () => Promise.resolve('{ "nodes": [ { "name": "foo", "variables": { } } ] }'),
+  text: () => Promise.resolve('{ "nodes": [ { "name": "foo" } ] }'),
   name: 'valid_foo_nodes.json',
 };
 
@@ -31,14 +31,16 @@ const invalidVariablesJson = {
 };
 
 const validCsvFile = {
-  text: () => Promise.resolve('foo'),
+  text: () => Promise.resolve('name\nfoo'),
   name: 'valid_foo.csv',
 };
 
-const invalidCsvVariableFile = { text: () => Promise.resolve('foo bar,bazz!'), name: 'invalid_variables.csv' };
+const emptyCsvFile = { text: () => Promise.resolve('foo'), name: 'empty_foo.csv' };
+
+const invalidCsvVariableFile = { text: () => Promise.resolve('foo bar,bazz!\ntest,test'), name: 'invalid_variables.csv' };
 
 const invalidCsvFile = {
-  text: () => Promise.resolve('foo,bar,bazz\nonlyonecol'),
+  text: () => Promise.resolve('foo,bar,bazz\ncolmismatch,,,'),
   name: 'invalid_foo.csv',
 };
 
@@ -49,6 +51,7 @@ const files = [
   invalidJsonFile,
   invalidVariablesJson,
   validCsvFile,
+  emptyCsvFile,
   invalidCsvFile,
   invalidCsvVariableFile,
 ];
@@ -59,6 +62,11 @@ const getFile = path =>
 readFile.mockImplementation(
   filePath =>
     getFile(filePath).text(),
+);
+
+readJson.mockImplementation(
+  filePath =>
+    getFile(filePath).text().then(data => JSON.parse(data)),
 );
 
 describe('validateAsset', () => {
@@ -92,11 +100,13 @@ describe('validateAsset', () => {
       .resolves.toBe(true);
   });
 
-  it('rejects for invalid csv', () => {
-    expect.assertions(2);
+  it.only('rejects for invalid csv', () => {
+    expect.assertions(3);
 
     return Promise.all([
       expect(validateAsset(invalidCsvFile.name))
+        .rejects.toThrow(/column_mismatched/),
+      expect(validateAsset(emptyCsvFile.name))
         .rejects.toThrow(Error),
       expect(validateAsset(invalidCsvVariableFile.name))
         .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),
