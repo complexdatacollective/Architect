@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { readExternalData, getVariablesFromExternalData } from '@selectors/assets';
-import { Variables } from './Variables';
+import { readExternalData, getVariablesFromExternalData, getAssetPath } from '@selectors/assets';
+import VariableList from './VariableList';
 
 const ExternalEntity = ({
   name,
-  source,
+  id,
 }) => {
   const [variables, setVariables] = useState([]);
 
-  useEffect(() => {
-    if (!source) { return; }
+  const assetPath = useSelector(state => getAssetPath(state, id));
 
-    readExternalData(source)
+  useEffect(() => {
+    if (!assetPath) { return; }
+
+    readExternalData(assetPath)
       .then(getVariablesFromExternalData)
+      .then(v => v.map(({ label }) => label))
       .then(setVariables);
-  }, [source]);
+  }, [id]);
 
 
   return (
@@ -46,7 +50,7 @@ const ExternalEntity = ({
       { variables.length > 0 &&
         <div className="codebook__entity-variables">
           <h3>Variables:</h3>
-          <Variables
+          <VariableList
             variables={variables}
           />
         </div>
@@ -57,7 +61,7 @@ const ExternalEntity = ({
 
 ExternalEntity.propTypes = {
   name: PropTypes.string.isRequired,
-  source: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export { ExternalEntity };

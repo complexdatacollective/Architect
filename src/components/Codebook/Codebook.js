@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { map, isEmpty } from 'lodash';
+import { map, isEmpty, reduce } from 'lodash';
 import { getCodebook } from '@selectors/codebook';
 import { getNodeIndex, getEdgeIndex, utils } from '@selectors/indexes';
 import { getNetworkAssets } from '@selectors/protocol';
@@ -38,9 +38,9 @@ const Codebook = ({
         {networkAssets.map(
           networkAsset => (
             <ExternalEntity
-              source={networkAsset.source}
+              id={networkAsset.id}
               name={networkAsset.name}
-              key={networkAsset.name}
+              key={networkAsset.id}
             />
           ),
         )}
@@ -111,7 +111,14 @@ const mapStateToProps = (state) => {
     getEntityWithUsage(state, edgeIndex, { entity: 'edge' }),
   );
 
-  const networkAssets = Object.values(getNetworkAssets(state));
+  const networkAssets = reduce(
+    getNetworkAssets(state),
+    (assets, asset, id) => ([
+      ...assets,
+      { ...asset, id },
+    ]),
+    [],
+  );
 
   const hasEgoVariables = !isEmpty(codebook.ego);
   const hasNodes = nodes.length > 0;
