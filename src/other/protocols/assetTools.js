@@ -12,10 +12,10 @@ import { getSupportedAssetType } from '@app/other/protocols/importAsset';
 * and returns match from configuration object.
 */
 const withExtensionSwitch = (configuration, fallback = () => Promise.resolve()) =>
-  (filePath) => {
+  (filePath, ...rest) => {
     const extension = path.extname(filePath).substr(1); // e.g. 'csv'
 
-    return get(configuration, [extension], fallback);
+    return get(configuration, [extension], fallback)(filePath, ...rest);
   };
 
 
@@ -37,7 +37,7 @@ const readCsvNetwork = async (assetPath) => {
 * @param {string} filepath - The filename of the network asset
 * @returns {string} - Returns a function that returns a promise.
 */
-const getNetworkReader = withExtensionSwitch({
+const networkReader = withExtensionSwitch({
   csv: readCsvNetwork,
   json: readJsonNetwork,
 });
@@ -46,8 +46,8 @@ const getNetworkReader = withExtensionSwitch({
 * Gets node variables from an external data source
 * @param {buffer} file - The external data source
 */
-export const getAssetVariables = async (filePath) => {
-  const network = await getNetworkReader(filePath)(filePath);
+export const getNetworkVariables = async (filePath) => {
+  const network = await networkReader(filePath);
   return getVariableNamesFromNetwork(network);
 };
 
@@ -55,14 +55,13 @@ export const getAssetVariables = async (filePath) => {
 * Checks that imported asset is valid
 * @param {buffer} file - The file to check.
 */
-export const validateAsset = async (filePath) => {
+export const validateNetworkAsset = async (filePath) => {
   const assetType = getSupportedAssetType(filePath);
 
   // Handle unsupported filePath types
   if (!assetType) {
     return Promise.reject(new Error('Asset type not supported'));
   }
-  const networkReader = getNetworkReader(filePath);
   const network = await networkReader(filePath);
 
   if (get(network, 'nodes', []).length === 0 && get(network, 'edges', []).length === 0) {
