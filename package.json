@@ -80,7 +80,7 @@
         "electron-winstaller": "^4.0.1",
         "emoji-dictionary": "^1.0.9",
         "enzyme": "^3.11.0",
-        "enzyme-adapter-react-16": "^1.15.2",
+        "enzyme-adapter-react-16": "^1.15.4",
         "es6-promise-plugin": "^4.1.0",
         "eslint": "^4.8.0",
         "eslint-config-airbnb": "^15.0.1",
