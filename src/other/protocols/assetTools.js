@@ -13,9 +13,11 @@ import { getSupportedAssetType } from '@app/other/protocols/importAsset';
 */
 const withExtensionSwitch = (configuration, fallback = () => Promise.resolve()) =>
   (filePath, ...rest) => {
+    if (!filePath) { return null; }
     const extension = path.extname(filePath).substr(1); // e.g. 'csv'
 
-    return get(configuration, [extension], fallback)(filePath, ...rest);
+    const f = get(configuration, [extension], fallback);
+    return f(filePath, ...rest);
   };
 
 
@@ -25,7 +27,10 @@ const readJsonNetwork = assetPath =>
 const readCsvNetwork = async (assetPath) => {
   const data = await fs.readFile(assetPath);
   const nodes = await csv({ checkColumn: true })
-    .fromString(data.toString('utf8'));
+    .fromString(data.toString('utf8'))
+    .then(
+      rows => rows.map(attributes => ({ attributes })),
+    );
 
   return {
     nodes,
@@ -48,20 +53,11 @@ const networkReader = withExtensionSwitch({
 */
 export const getNetworkVariables = async (filePath) => {
   const network = await networkReader(filePath);
+  if (!network) { return null; }
   return getVariableNamesFromNetwork(network);
 };
 
-/**
-* Checks that imported asset is valid
-* @param {buffer} file - The file to check.
-*/
-export const validateNetworkAsset = async (filePath) => {
-  const assetType = getSupportedAssetType(filePath);
-
-  // Handle unsupported filePath types
-  if (!assetType) {
-    return Promise.reject(new Error('Asset type not supported'));
-  }
+const validateNetwork = async (filePath) => {
   const network = await networkReader(filePath);
 
   if (get(network, 'nodes', []).length === 0 && get(network, 'edges', []).length === 0) {
@@ -74,6 +70,24 @@ export const validateNetworkAsset = async (filePath) => {
   const error = validateNames(variableNames);
 
   if (error) { throw new Error(error); }
+
+  return true;
+};
+
+/**
+* Checks that imported asset is valid
+* @param {buffer} file - The file to check.
+*/
+export const validateAsset = async (filePath) => {
+  const assetType = getSupportedAssetType(filePath);
+
+  if (!assetType) {
+    throw new Error('Asset type not supported');
+  }
+
+  if (assetType === 'network') {
+    await validateNetwork(filePath);
+  }
 
   return true;
 };

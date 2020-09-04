@@ -1,13 +1,13 @@
 /* eslint-env jest */
 
 import { readFile, readJson } from 'fs-extra';
-import { getNetworkVariables, validateNetworkAsset } from '../assetTools';
+import { getNetworkVariables, validateAsset } from '../assetTools';
 
 jest.mock('fs-extra');
 
 const mockNodes = [
-  { name: 'foo' },
-  { another: 'bar' },
+  { attributes: { name: 'foo' } },
+  { attributes: { another: 'bar' } },
 ];
 
 const validJsonFileWithNodes = {
@@ -16,7 +16,7 @@ const validJsonFileWithNodes = {
 };
 
 const validJsonFileWithEdges = {
-  text: () => Promise.resolve('{ "edges": [ { "type": "friend" } ] }'),
+  text: () => Promise.resolve('{ "edges": [ { "attributes": { "type": "friend" } } ] }'),
   name: 'valid_foo_edges.json',
 };
 
@@ -31,7 +31,7 @@ const invalidJsonFile = {
 };
 
 const invalidVariablesJson = {
-  text: () => Promise.resolve('{ "nodes": [ { "foo bar": "foo", "bazz!": "buzz" } ] }'),
+  text: () => Promise.resolve('{ "nodes": [ { "attributes": { "foo bar": "foo", "bazz!": "buzz" } } ] }'),
   name: 'invalid_variables.json',
 };
 
@@ -88,14 +88,14 @@ describe('assetTools', () => {
     );
   });
 
-  describe('validateNetworkAsset', () => {
+  describe('validateAsset', () => {
     it('passes for valid json ', () => {
       expect.assertions(2);
 
       return Promise.all([
-        expect(validateNetworkAsset(validJsonFileWithNodes.name))
+        expect(validateAsset(validJsonFileWithNodes.name))
           .resolves.toBe(true),
-        expect(validateNetworkAsset(validJsonFileWithEdges.name))
+        expect(validateAsset(validJsonFileWithEdges.name))
           .resolves.toBe(true),
       ]);
     });
@@ -104,18 +104,18 @@ describe('assetTools', () => {
       expect.assertions(3);
 
       return Promise.all([
-        expect(validateNetworkAsset(invalidJsonFile.name))
+        expect(validateAsset(invalidJsonFile.name))
           .rejects.toThrow(Error),
-        expect(validateNetworkAsset(emptyJsonFile.name))
+        expect(validateAsset(emptyJsonFile.name))
           .rejects.toThrow(Error),
-        expect(validateNetworkAsset(invalidVariablesJson.name))
+        expect(validateAsset(invalidVariablesJson.name))
           .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),
       ]);
     });
 
     it('passes for valid csv', () => {
       expect.assertions(1);
-      return expect(validateNetworkAsset(validCsvFile.name))
+      return expect(validateAsset(validCsvFile.name))
         .resolves.toBe(true);
     });
 
@@ -123,11 +123,11 @@ describe('assetTools', () => {
       expect.assertions(3);
 
       return Promise.all([
-        expect(validateNetworkAsset(invalidCsvFile.name))
+        expect(validateAsset(invalidCsvFile.name))
           .rejects.toThrow(/column_mismatched/),
-        expect(validateNetworkAsset(emptyCsvFile.name))
+        expect(validateAsset(emptyCsvFile.name))
           .rejects.toThrow(Error),
-        expect(validateNetworkAsset(invalidCsvVariableFile.name))
+        expect(validateAsset(invalidCsvVariableFile.name))
           .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),
       ]);
     });

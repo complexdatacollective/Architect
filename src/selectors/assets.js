@@ -30,6 +30,9 @@ export const getAssetPath = (state, dataSource) => {
 export const makeGetNetworkAssetVariables = state =>
   async (dataSource, asOptions = false) => {
     const assetPath = getAssetPath(state, dataSource);
+
+    if (!assetPath) { return null; }
+
     const variables = await getNetworkVariables(assetPath);
 
     if (asOptions) {
