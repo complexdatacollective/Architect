@@ -1,5 +1,5 @@
-# Architect [![Build Status](https://travis-ci.org/codaco/Architect.svg?branch=master)](https://travis-ci.org/codaco/Architect)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodaco%2FArchitect.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodaco%2FArchitect?ref=badge_shield)
+# Architect [![Build Status](https://travis-ci.org/complexdatacollective/Architect.svg?branch=master)](https://travis-ci.org/complexdatacollective/Architect)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcomplexdatacollective%2FArchitect.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcomplexdatacollective%2FArchitect?ref=badge_shield)
 
 Technologies used:
 ES6 (via Babel)
