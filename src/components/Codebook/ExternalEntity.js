@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { readExternalData, getVariablesFromExternalData, getAssetPath } from '@selectors/assets';
+import useVariablesFromExternalData from '../hooks/useVariablesFromExternalData';
 import VariableList from './VariableList';
 import EntityIcon from './EntityIcon';
 
@@ -9,19 +8,7 @@ const ExternalEntity = ({
   id,
   source,
 }) => {
-  const [variables, setVariables] = useState([]);
-
-  const assetPath = useSelector(state => getAssetPath(state, id));
-
-  useEffect(() => {
-    if (!assetPath) { return; }
-
-    readExternalData(assetPath)
-      .then(getVariablesFromExternalData)
-      .then(v => v.map(({ label }) => label))
-      .then(setVariables);
-  }, [id]);
-
+  const { variables } = useVariablesFromExternalData(id);
 
   return (
     <div className="codebook__entity">

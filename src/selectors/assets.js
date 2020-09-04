@@ -26,7 +26,7 @@ export const getAssetPath = (state, dataSource) => {
  *
  * @param {Object} dataSource id of entry in assetManifest
  */
-export const getNetworkAssetVariables = (state, dataSource, asOptions = true) => {
+export const makeGetNetworkAssetVariables = state => (dataSource, asOptions = false) => {
   const assetPath = getAssetPath(state, dataSource);
   const variables = getNetworkVariables(assetPath);
 

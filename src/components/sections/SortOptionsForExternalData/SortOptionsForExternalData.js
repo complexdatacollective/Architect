@@ -5,18 +5,18 @@ import { Text } from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
 import MultiSelect from '../../Form/MultiSelect';
 import withMapFormToProps from '../../enhancers/withMapFormToProps';
-import withExternalData from '../../enhancers/withExternalData';
+import useVariablesFromExternalData from '../../hooks/useVariablesFromExternalData';
+import getVariableOptionsGetter from '../SortOptionsForExternalData/getVariableOptionsGetter';
 import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
-import variableOptionsFromExternalData from '../../enhancers/withVariableOptionsFromExternalData';
 import getSortOrderOptionGetter from './getSortOrderOptionGetter';
-import withVariableOptionsGetter from './withVariableOptionsGetter';
 
 const SortOptions = ({
-  variableOptions,
-  maxVariableOptions,
-  variableOptionsGetter,
+  dataSource,
   disabled,
 }) => {
+  const { variables: variableOptions } = useVariablesFromExternalData(dataSource, true);
+  const variableOptionsGetter = getVariableOptionsGetter(variableOptions);
+  const maxVariableOptions = variableOptions.length;
   const sortOrderOptionGetter = getSortOrderOptionGetter(variableOptions);
 
   return (
@@ -70,9 +70,7 @@ const SortOptions = ({
 };
 
 SortOptions.propTypes = {
-  variableOptions: PropTypes.array.isRequired,
-  maxVariableOptions: PropTypes.number.isRequired,
-  variableOptionsGetter: PropTypes.func.isRequired,
+  dataSource: PropTypes.string.isRequired,
   disabled: PropTypes.bool.isRequired,
 };
 
@@ -81,8 +79,5 @@ export { SortOptions };
 export default compose(
   withMapFormToProps('dataSource'),
   withDisabledAssetRequired,
-  withExternalData,
-  variableOptionsFromExternalData,
-  withVariableOptionsGetter,
 )(SortOptions);
 

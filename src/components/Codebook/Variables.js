@@ -180,7 +180,7 @@ const withSort = compose(
   ),
 );
 
-export { Variables, withSort, Heading, rowClassName };
+export { Variables, withSort, Heading, rowClassName, SortDirection };
 
 export default compose(
   withVariableHandlers,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { getAssetPath, readExternalData } from '../../selectors/assets';
+import { getAssetPath, readExternalData } from '@selectors/assets';
 
 const mapStateToProps = (state, props) => {
   if (!props.dataSource) { return {}; }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { compose, withProps, defaultProps } from 'recompose';
-import { getVariablesFromExternalData } from '../../selectors/assets';
+import { getNetworkAssetVariables } from '@selectors/assets';
 
 const defaultVariableOptions = defaultProps({
   variableOptions: [],
@@ -9,7 +9,7 @@ const defaultVariableOptions = defaultProps({
 const variableOptionProps = withProps(({ externalData }) => {
   if (!externalData) { return {}; }
 
-  const variableOptions = getVariablesFromExternalData(externalData);
+  const variableOptions = getNetworkAssetVariables(externalData);
 
   return {
     variableOptions,
