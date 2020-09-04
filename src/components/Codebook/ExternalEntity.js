@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useVariablesFromExternalData from '../hooks/useVariablesFromExternalData';
+import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
 import VariableList from './VariableList';
 import EntityIcon from './EntityIcon';
 

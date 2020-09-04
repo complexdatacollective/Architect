@@ -3,11 +3,11 @@ import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { Text } from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import MultiSelect from '../../Form/MultiSelect';
-import withMapFormToProps from '../../enhancers/withMapFormToProps';
-import useVariablesFromExternalData from '../../hooks/useVariablesFromExternalData';
+import MultiSelect from '@components/Form/MultiSelect';
+import withMapFormToProps from '@components/enhancers/withMapFormToProps';
+import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
+import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
 import getVariableOptionsGetter from '../SortOptionsForExternalData/getVariableOptionsGetter';
-import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
 import getSortOrderOptionGetter from './getSortOrderOptionGetter';
 
 const SortOptions = ({

@@ -25,16 +25,18 @@ export const getAssetPath = (state, dataSource) => {
  * Extract all unique variables from an external data network asset
  *
  * @param {Object} dataSource id of entry in assetManifest
+ * @param {boolean} asOptions return variables as a label/value list
  */
-export const makeGetNetworkAssetVariables = state => (dataSource, asOptions = false) => {
-  const assetPath = getAssetPath(state, dataSource);
-  const variables = getNetworkVariables(assetPath);
+export const makeGetNetworkAssetVariables = state =>
+  async (dataSource, asOptions = false) => {
+    const assetPath = getAssetPath(state, dataSource);
+    const variables = await getNetworkVariables(assetPath);
 
-  if (asOptions) {
-    const variableOptions = variables
-      .map(attribute => ({ label: attribute, value: attribute }));
-    return variableOptions;
-  }
+    if (asOptions) {
+      const variableOptions = variables
+        .map(attribute => ({ label: attribute, value: attribute }));
+      return variableOptions;
+    }
 
-  return variables;
-};
+    return variables;
+  };

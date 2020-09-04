@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import ValidatedField from '../Form/ValidatedField';
-import withDisabledAssetRequired from '../enhancers/withDisabledAssetRequired';
-import withMapFormToProps from '../enhancers/withMapFormToProps';
-import useVariablesFromExternalData from '../hooks/useVariablesFromExternalData';
-// import withExternalData from '../enhancers/withExternalData';
-// import withVariableOptionsFromExternalData from '../enhancers/withVariableOptionsFromExternalData';
+import ValidatedField from '@components/Form/ValidatedField';
+import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
+import withMapFormToProps from '@components/enhancers/withMapFormToProps';
+import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
 import Tip from '../Tip';
 
 const SearchOptions = ({

@@ -257,6 +257,7 @@
             "@app/(.*)$": "<rootDir>/src/$1",
             "@components/(.*)$": "<rootDir>/src/components/$1",
             "@selectors/(.*)$": "<rootDir>/src/selectors/$1",
+            "@hooks/(.*)$": "<rootDir>/src/hooks/$1",
             "@modules/(.*)$": "<rootDir>/src/ducks/modules/$1",
             "^react-native$": "react-native-web"
         }

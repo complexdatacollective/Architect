@@ -264,6 +264,7 @@ module.exports = {
       '@app': paths.appSrc,
       '@components': path.join(paths.appSrc, 'components'),
       '@selectors': path.join(paths.appSrc, 'selectors'),
+      '@hooks': path.join(paths.appSrc, 'hooks'),
       '@modules': path.join(paths.appSrc, 'ducks', 'modules'),
     },
     plugins: [

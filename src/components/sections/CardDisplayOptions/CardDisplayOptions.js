@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import withDisabledAssetRequired from '../../enhancers/withDisabledAssetRequired';
-import MultiSelect from '../../Form/MultiSelect';
-import withMapFormToProps from '../../enhancers/withMapFormToProps';
-import useVariablesFromExternalData from '../../hooks/useVariablesFromExternalData';
+import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
+import withMapFormToProps from '@components/enhancers/withMapFormToProps';
+import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
+import MultiSelect from '@components/Form/MultiSelect';
 import getVariableOptionsGetter from '../SortOptionsForExternalData/getVariableOptionsGetter';
-// import withExternalData from '../../enhancers/withExternalData';
-// import withVariableOptionsFromExternalData from '../../enhancers/withVariableOptionsFromExternalData';
-// import withVariableOptionsGetter from '../SortOptionsForExternalData/withVariableOptionsGetter';
 
 const CardDisplayOptions = ({
   dataSource,
