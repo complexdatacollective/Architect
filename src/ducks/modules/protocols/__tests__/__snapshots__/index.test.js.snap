@@ -1082,41 +1082,6 @@ Array [
             </strong>
              using our migration feature.
           </p>
-          <React.Fragment>
-            <p>
-              Read the following notes about this migration carefully, as these actions may affect your data.
-            </p>
-            <div
-              className="migration-panel"
-            >
-              <React.Fragment>
-                <h4>
-                  Migrating to schema Version 
-                  4
-                   will:
-                </h4>
-                <ReactMarkdown
-                  astPlugins={Array []}
-                  escapeHtml={true}
-                  plugins={Array []}
-                  rawSourcePos={false}
-                  renderers={
-                    Object {
-                      "link": [Function],
-                    }
-                  }
-                  skipHtml={false}
-                  source="
-- Automatically rename **variable names** and **ordinal/categorical values** to meet stricter requirements. Only letters, numbers, and the symbols \`.\`, \`_\`, \`-\`, \`:\` will be permitted. Spaces will be replaced with underscore characters (\`_\`), and any other symbols will be removed. Variables that meet these requirements already **will not be modified**.
-- Add a numerical suffix (\`variable1\`, \`variable2\`, etc.) to any variables or categorical/ordinal values that clash as a result of these changes.
-- Rename node and edge types to ensure they are unique, and conform to the same requirements as variable names. Names that clash will get a numerical suffix, as above.
-- **NOTE:** If you are using external network data, you must ensure that you update your column headings manually to meet the same requirements regarding variable names outlined above. See our revised [documentation on variable naming](https://documentation.networkcanvas.com/docs/key-concepts/variable-naming/)."
-                  sourcePos={false}
-                  transformLinkUri={[Function]}
-                />
-              </React.Fragment>
-            </div>
-          </React.Fragment>
           <p>
             If you choose to continue, an upgraded copy of your protocol will be created and then opened. Your original protocol will not be changed, and can still be opened and modified using an older version of Architect. Please see our 
             <ExternalLink
