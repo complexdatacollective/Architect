@@ -1,659 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Start /> can render? 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Start
-    createAndLoadProtocol={[Function]}
-    openProtocol={[Function]}
-    show={true}
-  />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": Array [
-        <div
-          className="start__welcome"
-        >
-          <div
-            className="start__welcome-logo"
-          >
-            <img
-              alt=""
-              src="architect-logo-icon.svg"
-            />
-          </div>
-          <div>
-            <h1
-              className="start__welcome-title"
-            >
-              Architect
-            </h1>
-            <h2
-              className="start__welcome-lead"
-            >
-              A tool for creating Network Canvas interviews
-            </h2>
-            <Version />
-          </div>
-        </div>,
-        <div
-          className="start__call-to-action"
-        >
-          <Button
-            color="platinum"
-            content=""
-            disabled={false}
-            icon={
-              <Icon
-                className=""
-                color="charcoal"
-                name="arrow-right"
-                style={Object {}}
-              />
-            }
-            iconPosition="left"
-            id="create-new-protocol-button"
-            onClick={[Function]}
-            size=""
-            type="button"
-          >
-            Create new
-          </Button>
-          <Button
-            color="cyber-grape"
-            content=""
-            disabled={false}
-            icon={
-              <Icon
-                className=""
-                color=""
-                name="arrow-right"
-                style={Object {}}
-              />
-            }
-            iconPosition="left"
-            id="open-existing-protocol-button"
-            onClick={[Function]}
-            size=""
-            type="button"
-          >
-            Open existing
-          </Button>
-        </div>,
-      ],
-      "className": "start",
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <div
-              className="start__welcome-logo"
-            >
-              <img
-                alt=""
-                src="architect-logo-icon.svg"
-              />
-            </div>,
-            <div>
-              <h1
-                className="start__welcome-title"
-              >
-                Architect
-              </h1>
-              <h2
-                className="start__welcome-lead"
-              >
-                A tool for creating Network Canvas interviews
-              </h2>
-              <Version />
-            </div>,
-          ],
-          "className": "start__welcome",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": <img
-                alt=""
-                src="architect-logo-icon.svg"
-              />,
-              "className": "start__welcome-logo",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "alt": "",
-                "src": "architect-logo-icon.svg",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": "img",
-            },
-            "type": "div",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <h1
-                  className="start__welcome-title"
-                >
-                  Architect
-                </h1>,
-                <h2
-                  className="start__welcome-lead"
-                >
-                  A tool for creating Network Canvas interviews
-                </h2>,
-                <Version />,
-              ],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "Architect",
-                  "className": "start__welcome-title",
-                },
-                "ref": null,
-                "rendered": "Architect",
-                "type": "h1",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "A tool for creating Network Canvas interviews",
-                  "className": "start__welcome-lead",
-                },
-                "ref": null,
-                "rendered": "A tool for creating Network Canvas interviews",
-                "type": "h2",
-              },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "function",
-                "props": Object {},
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-            ],
-            "type": "div",
-          },
-        ],
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <Button
-              color="platinum"
-              content=""
-              disabled={false}
-              icon={
-                <Icon
-                  className=""
-                  color="charcoal"
-                  name="arrow-right"
-                  style={Object {}}
-                />
-              }
-              iconPosition="left"
-              id="create-new-protocol-button"
-              onClick={[Function]}
-              size=""
-              type="button"
-            >
-              Create new
-            </Button>,
-            <Button
-              color="cyber-grape"
-              content=""
-              disabled={false}
-              icon={
-                <Icon
-                  className=""
-                  color=""
-                  name="arrow-right"
-                  style={Object {}}
-                />
-              }
-              iconPosition="left"
-              id="open-existing-protocol-button"
-              onClick={[Function]}
-              size=""
-              type="button"
-            >
-              Open existing
-            </Button>,
-          ],
-          "className": "start__call-to-action",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Create new",
-              "color": "platinum",
-              "content": "",
-              "disabled": false,
-              "icon": <Icon
-                className=""
-                color="charcoal"
-                name="arrow-right"
-                style={Object {}}
-              />,
-              "iconPosition": "left",
-              "id": "create-new-protocol-button",
-              "onClick": [Function],
-              "size": "",
-              "type": "button",
-            },
-            "ref": null,
-            "rendered": "Create new",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": "Open existing",
-              "color": "cyber-grape",
-              "content": "",
-              "disabled": false,
-              "icon": <Icon
-                className=""
-                color=""
-                name="arrow-right"
-                style={Object {}}
-              />,
-              "iconPosition": "left",
-              "id": "open-existing-protocol-button",
-              "onClick": [Function],
-              "size": "",
-              "type": "button",
-            },
-            "ref": null,
-            "rendered": "Open existing",
-            "type": [Function],
-          },
-        ],
-        "type": "div",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            className="start__welcome"
-          >
-            <div
-              className="start__welcome-logo"
-            >
-              <img
-                alt=""
-                src="architect-logo-icon.svg"
-              />
-            </div>
-            <div>
-              <h1
-                className="start__welcome-title"
-              >
-                Architect
-              </h1>
-              <h2
-                className="start__welcome-lead"
-              >
-                A tool for creating Network Canvas interviews
-              </h2>
-              <Version />
-            </div>
-          </div>,
-          <div
-            className="start__call-to-action"
-          >
-            <Button
-              color="platinum"
-              content=""
-              disabled={false}
-              icon={
-                <Icon
-                  className=""
-                  color="charcoal"
-                  name="arrow-right"
-                  style={Object {}}
-                />
-              }
-              iconPosition="left"
-              id="create-new-protocol-button"
-              onClick={[Function]}
-              size=""
-              type="button"
-            >
-              Create new
-            </Button>
-            <Button
-              color="cyber-grape"
-              content=""
-              disabled={false}
-              icon={
-                <Icon
-                  className=""
-                  color=""
-                  name="arrow-right"
-                  style={Object {}}
-                />
-              }
-              iconPosition="left"
-              id="open-existing-protocol-button"
-              onClick={[Function]}
-              size=""
-              type="button"
-            >
-              Open existing
-            </Button>
-          </div>,
-        ],
-        "className": "start",
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <div
-                className="start__welcome-logo"
-              >
-                <img
-                  alt=""
-                  src="architect-logo-icon.svg"
-                />
-              </div>,
-              <div>
-                <h1
-                  className="start__welcome-title"
-                >
-                  Architect
-                </h1>
-                <h2
-                  className="start__welcome-lead"
-                >
-                  A tool for creating Network Canvas interviews
-                </h2>
-                <Version />
-              </div>,
-            ],
-            "className": "start__welcome",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <img
-                  alt=""
-                  src="architect-logo-icon.svg"
-                />,
-                "className": "start__welcome-logo",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "alt": "",
-                  "src": "architect-logo-icon.svg",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": "img",
-              },
-              "type": "div",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <h1
-                    className="start__welcome-title"
-                  >
-                    Architect
-                  </h1>,
-                  <h2
-                    className="start__welcome-lead"
-                  >
-                    A tool for creating Network Canvas interviews
-                  </h2>,
-                  <Version />,
-                ],
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "Architect",
-                    "className": "start__welcome-title",
-                  },
-                  "ref": null,
-                  "rendered": "Architect",
-                  "type": "h1",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "A tool for creating Network Canvas interviews",
-                    "className": "start__welcome-lead",
-                  },
-                  "ref": null,
-                  "rendered": "A tool for creating Network Canvas interviews",
-                  "type": "h2",
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "function",
-                  "props": Object {},
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-              ],
-              "type": "div",
-            },
-          ],
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <Button
-                color="platinum"
-                content=""
-                disabled={false}
-                icon={
-                  <Icon
-                    className=""
-                    color="charcoal"
-                    name="arrow-right"
-                    style={Object {}}
-                  />
-                }
-                iconPosition="left"
-                id="create-new-protocol-button"
-                onClick={[Function]}
-                size=""
-                type="button"
-              >
-                Create new
-              </Button>,
-              <Button
-                color="cyber-grape"
-                content=""
-                disabled={false}
-                icon={
-                  <Icon
-                    className=""
-                    color=""
-                    name="arrow-right"
-                    style={Object {}}
-                  />
-                }
-                iconPosition="left"
-                id="open-existing-protocol-button"
-                onClick={[Function]}
-                size=""
-                type="button"
-              >
-                Open existing
-              </Button>,
-            ],
-            "className": "start__call-to-action",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Create new",
-                "color": "platinum",
-                "content": "",
-                "disabled": false,
-                "icon": <Icon
-                  className=""
-                  color="charcoal"
-                  name="arrow-right"
-                  style={Object {}}
-                />,
-                "iconPosition": "left",
-                "id": "create-new-protocol-button",
-                "onClick": [Function],
-                "size": "",
-                "type": "button",
-              },
-              "ref": null,
-              "rendered": "Create new",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": "Open existing",
-                "color": "cyber-grape",
-                "content": "",
-                "disabled": false,
-                "icon": <Icon
-                  className=""
-                  color=""
-                  name="arrow-right"
-                  style={Object {}}
-                />,
-                "iconPosition": "left",
-                "id": "open-existing-protocol-button",
-                "onClick": [Function],
-                "size": "",
-                "type": "button",
-              },
-              "ref": null,
-              "rendered": "Open existing",
-              "type": [Function],
-            },
-          ],
-          "type": "div",
-        },
-      ],
-      "type": "div",
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromError": true,
-          "getDerivedStateFromProps": Object {
-            "hasShouldComponentUpdateBug": false,
-          },
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-    Symbol(enzyme.__providerValues__): undefined,
-  },
-  Symbol(enzyme.__providerValues__): Map {},
-}
+<div
+  className="start"
+>
+  <div
+    className="start__welcome"
+  >
+    <div
+      className="start__welcome-logo"
+    >
+      <img
+        alt=""
+        src="architect-logo-icon.svg"
+      />
+    </div>
+    <div>
+      <h1
+        className="start__welcome-title"
+      >
+        Architect
+      </h1>
+      <h2
+        className="start__welcome-lead"
+      >
+        A tool for creating Network Canvas interviews
+      </h2>
+      <Version />
+    </div>
+  </div>
+  <div
+    className="start__call-to-action"
+  >
+    <Button
+      color="platinum"
+      content=""
+      disabled={false}
+      icon={
+        <Icon
+          className=""
+          color="charcoal"
+          name="arrow-right"
+          style={Object {}}
+        />
+      }
+      iconPosition="left"
+      id="create-new-protocol-button"
+      onClick={[Function]}
+      size=""
+      type="button"
+    >
+      Create new
+    </Button>
+    <Button
+      color="cyber-grape"
+      content=""
+      disabled={false}
+      icon={
+        <Icon
+          className=""
+          color=""
+          name="arrow-right"
+          style={Object {}}
+        />
+      }
+      iconPosition="left"
+      id="open-existing-protocol-button"
+      onClick={[Function]}
+      size=""
+      type="button"
+    >
+      Open existing
+    </Button>
+  </div>
+</div>
 `;

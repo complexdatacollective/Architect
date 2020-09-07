@@ -1,553 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Stage /> can render 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Stage
-    className=""
+<div
+  className="timeline-stage"
+  onEditSkipLogic={[Function]}
+>
+  <div
+    className="timeline-stage__notch"
+    onClick={[Function]}
+  />
+  <getContext(Draft(EditStageButton))
     hasFilter={false}
     hasSkipLogic={false}
     label=""
-    onDeleteStage={[Function]}
-    onEditSkipLogic={[Function]}
     onEditStage={[Function]}
-    onInsertStage={[Function]}
     type="Foo"
-  />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "host",
-    "props": Object {
-      "children": Array [
-        <div
-          className="timeline-stage__notch"
-          onClick={[Function]}
-        />,
-        <getContext(Draft(EditStageButton))
-          hasFilter={false}
-          hasSkipLogic={false}
-          label=""
-          onEditStage={[Function]}
-          type="Foo"
-          zoomColors={
-            Array [
-              "#227733",
-              "#ffffff",
-            ]
-          }
-        />,
-        <div
-          className="timeline-stage__controls"
-        >
-          <a
-            className="timeline-stage__control"
-            onClick={[Function]}
-          >
-            <div
-              className="timeline-stage__control-icon"
-            >
-              ↑
-            </div>
-            Add stage before
-          </a>
-          <a
-            className="timeline-stage__control"
-            onClick={[Function]}
-          >
-            <div
-              className="timeline-stage__control-icon"
-            >
-              ✕
-            </div>
-            Delete stage
-          </a>
-          <a
-            className="timeline-stage__control"
-            onClick={[Function]}
-          >
-            <div
-              className="timeline-stage__control-icon"
-            >
-              ↓
-            </div>
-            Add stage after
-          </a>
-        </div>,
-      ],
-      "className": "timeline-stage",
-      "onEditSkipLogic": [Function],
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "className": "timeline-stage__notch",
-          "onClick": [Function],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": "div",
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "function",
-        "props": Object {
-          "hasFilter": false,
-          "hasSkipLogic": false,
-          "label": "",
-          "onEditStage": [Function],
-          "type": "Foo",
-          "zoomColors": Array [
-            "#227733",
-            "#ffffff",
-          ],
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
-            >
-              <div
-                className="timeline-stage__control-icon"
-              >
-                ↑
-              </div>
-              Add stage before
-            </a>,
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
-            >
-              <div
-                className="timeline-stage__control-icon"
-              >
-                ✕
-              </div>
-              Delete stage
-            </a>,
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
-            >
-              <div
-                className="timeline-stage__control-icon"
-              >
-                ↓
-              </div>
-              Add stage after
-            </a>,
-          ],
-          "className": "timeline-stage__controls",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <div
-                  className="timeline-stage__control-icon"
-                >
-                  ↑
-                </div>,
-                "Add stage before",
-              ],
-              "className": "timeline-stage__control",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "↑",
-                  "className": "timeline-stage__control-icon",
-                },
-                "ref": null,
-                "rendered": "↑",
-                "type": "div",
-              },
-              "Add stage before",
-            ],
-            "type": "a",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <div
-                  className="timeline-stage__control-icon"
-                >
-                  ✕
-                </div>,
-                "Delete stage",
-              ],
-              "className": "timeline-stage__control",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "✕",
-                  "className": "timeline-stage__control-icon",
-                },
-                "ref": null,
-                "rendered": "✕",
-                "type": "div",
-              },
-              "Delete stage",
-            ],
-            "type": "a",
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": Array [
-                <div
-                  className="timeline-stage__control-icon"
-                >
-                  ↓
-                </div>,
-                "Add stage after",
-              ],
-              "className": "timeline-stage__control",
-              "onClick": [Function],
-            },
-            "ref": null,
-            "rendered": Array [
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "children": "↓",
-                  "className": "timeline-stage__control-icon",
-                },
-                "ref": null,
-                "rendered": "↓",
-                "type": "div",
-              },
-              "Add stage after",
-            ],
-            "type": "a",
-          },
-        ],
-        "type": "div",
-      },
-    ],
-    "type": "div",
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <div
-            className="timeline-stage__notch"
-            onClick={[Function]}
-          />,
-          <getContext(Draft(EditStageButton))
-            hasFilter={false}
-            hasSkipLogic={false}
-            label=""
-            onEditStage={[Function]}
-            type="Foo"
-            zoomColors={
-              Array [
-                "#227733",
-                "#ffffff",
-              ]
-            }
-          />,
-          <div
-            className="timeline-stage__controls"
-          >
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
-            >
-              <div
-                className="timeline-stage__control-icon"
-              >
-                ↑
-              </div>
-              Add stage before
-            </a>
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
-            >
-              <div
-                className="timeline-stage__control-icon"
-              >
-                ✕
-              </div>
-              Delete stage
-            </a>
-            <a
-              className="timeline-stage__control"
-              onClick={[Function]}
-            >
-              <div
-                className="timeline-stage__control-icon"
-              >
-                ↓
-              </div>
-              Add stage after
-            </a>
-          </div>,
-        ],
-        "className": "timeline-stage",
-        "onEditSkipLogic": [Function],
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "className": "timeline-stage__notch",
-            "onClick": [Function],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": "div",
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "hasFilter": false,
-            "hasSkipLogic": false,
-            "label": "",
-            "onEditStage": [Function],
-            "type": "Foo",
-            "zoomColors": Array [
-              "#227733",
-              "#ffffff",
-            ],
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": Array [
-              <a
-                className="timeline-stage__control"
-                onClick={[Function]}
-              >
-                <div
-                  className="timeline-stage__control-icon"
-                >
-                  ↑
-                </div>
-                Add stage before
-              </a>,
-              <a
-                className="timeline-stage__control"
-                onClick={[Function]}
-              >
-                <div
-                  className="timeline-stage__control-icon"
-                >
-                  ✕
-                </div>
-                Delete stage
-              </a>,
-              <a
-                className="timeline-stage__control"
-                onClick={[Function]}
-              >
-                <div
-                  className="timeline-stage__control-icon"
-                >
-                  ↓
-                </div>
-                Add stage after
-              </a>,
-            ],
-            "className": "timeline-stage__controls",
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <div
-                    className="timeline-stage__control-icon"
-                  >
-                    ↑
-                  </div>,
-                  "Add stage before",
-                ],
-                "className": "timeline-stage__control",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "↑",
-                    "className": "timeline-stage__control-icon",
-                  },
-                  "ref": null,
-                  "rendered": "↑",
-                  "type": "div",
-                },
-                "Add stage before",
-              ],
-              "type": "a",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <div
-                    className="timeline-stage__control-icon"
-                  >
-                    ✕
-                  </div>,
-                  "Delete stage",
-                ],
-                "className": "timeline-stage__control",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "✕",
-                    "className": "timeline-stage__control-icon",
-                  },
-                  "ref": null,
-                  "rendered": "✕",
-                  "type": "div",
-                },
-                "Delete stage",
-              ],
-              "type": "a",
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": Array [
-                  <div
-                    className="timeline-stage__control-icon"
-                  >
-                    ↓
-                  </div>,
-                  "Add stage after",
-                ],
-                "className": "timeline-stage__control",
-                "onClick": [Function],
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "host",
-                  "props": Object {
-                    "children": "↓",
-                    "className": "timeline-stage__control-icon",
-                  },
-                  "ref": null,
-                  "rendered": "↓",
-                  "type": "div",
-                },
-                "Add stage after",
-              ],
-              "type": "a",
-            },
-          ],
-          "type": "div",
-        },
-      ],
-      "type": "div",
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromError": true,
-          "getDerivedStateFromProps": Object {
-            "hasShouldComponentUpdateBug": false,
-          },
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-    Symbol(enzyme.__providerValues__): undefined,
-  },
-  Symbol(enzyme.__providerValues__): Map {},
-}
+    zoomColors={
+      Array [
+        "#227733",
+        "#ffffff",
+      ]
+    }
+  />
+  <div
+    className="timeline-stage__controls"
+  >
+    <a
+      className="timeline-stage__control"
+      onClick={[Function]}
+    >
+      <div
+        className="timeline-stage__control-icon"
+      >
+        ↑
+      </div>
+      Add stage before
+    </a>
+    <a
+      className="timeline-stage__control"
+      onClick={[Function]}
+    >
+      <div
+        className="timeline-stage__control-icon"
+      >
+        ✕
+      </div>
+      Delete stage
+    </a>
+    <a
+      className="timeline-stage__control"
+      onClick={[Function]}
+    >
+      <div
+        className="timeline-stage__control-icon"
+      >
+        ↓
+      </div>
+      Add stage after
+    </a>
+  </div>
+</div>
 `;
