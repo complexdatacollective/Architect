@@ -50,7 +50,7 @@
         "axios": "^0.18.0",
         "babel-core": "6.25.0",
         "babel-eslint": "7.2.3",
-        "babel-jest": "20.0.3",
+        "babel-jest": "^20.0.3",
         "babel-loader": "^7.1.5",
         "babel-preset-react-app": "^3.1.2",
         "babel-preset-stage-3": "^6.24.1",
@@ -81,6 +81,7 @@
         "emoji-dictionary": "^1.0.9",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.4",
+        "enzyme-to-json": "^3.5.0",
         "es6-promise-plugin": "^4.1.0",
         "eslint": "^4.8.0",
         "eslint-config-airbnb": "^15.0.1",
@@ -102,7 +103,7 @@
         "http-proxy-middleware": "0.17.3",
         "i": "^0.3.6",
         "icon-gen": "^1.2.3",
-        "jest": "^23.6.0",
+        "jest": "^26.4.2",
         "jest-date-mock": "^1.0.8",
         "jsdoc": "^3.6.4",
         "jsdoc-babel": "^0.3.0",
@@ -221,6 +222,9 @@
             "!network-canvas/**",
             "!app/**",
             "!electron-dev/**"
+        ],
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
         ],
         "setupFiles": [
             "jest-date-mock",
