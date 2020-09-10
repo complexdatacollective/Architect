@@ -1,4 +1,13 @@
 .codebook {
+  &__notice {
+    margin-top: 2rem;
+    background-color: var(--background-alt);
+    padding: 2rem;
+    font-style: italic;
+    text-align: center;
+    border-radius: 1rem;
+  }
+
   &__tag {
     display: inline-block;
     border-radius: unit(.5);
@@ -84,10 +93,6 @@
       height: 4rem;
       padding: .75rem .5rem;
       font-size: 1rem;
-
-      &:last-child {
-        text-align: right;
-      }
     }
 
     &-heading {
@@ -130,6 +135,7 @@
 
       &--controls {
         max-width: 200px;
+        text-align: right;
       }
     }
 

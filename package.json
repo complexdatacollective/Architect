@@ -50,7 +50,7 @@
         "axios": "^0.18.0",
         "babel-core": "6.25.0",
         "babel-eslint": "7.2.3",
-        "babel-jest": "20.0.3",
+        "babel-jest": "^20.0.3",
         "babel-loader": "^7.1.5",
         "babel-preset-react-app": "^3.1.2",
         "babel-preset-stage-3": "^6.24.1",
@@ -67,7 +67,7 @@
         "cross-env": "^5.2.0",
         "css-loader": "^1.0.0",
         "csv-parse": "^4.10.1",
-        "csvtojson": "^2.0.8",
+        "csvtojson": "^2.0.10",
         "decompress": "^4.2.1",
         "detect-port": "1.1.0",
         "dotenv": "4.0.0",
@@ -80,7 +80,8 @@
         "electron-winstaller": "^4.0.1",
         "emoji-dictionary": "^1.0.9",
         "enzyme": "^3.11.0",
-        "enzyme-adapter-react-16": "^1.15.2",
+        "enzyme-adapter-react-16": "^1.15.4",
+        "enzyme-to-json": "^3.5.0",
         "es6-promise-plugin": "^4.1.0",
         "eslint": "^4.8.0",
         "eslint-config-airbnb": "^15.0.1",
@@ -102,7 +103,7 @@
         "http-proxy-middleware": "0.17.3",
         "i": "^0.3.6",
         "icon-gen": "^1.2.3",
-        "jest": "^23.6.0",
+        "jest": "^26.4.2",
         "jest-date-mock": "^1.0.8",
         "jsdoc": "^3.6.4",
         "jsdoc-babel": "^0.3.0",
@@ -135,7 +136,7 @@
         "react-hammerjs": "^1.0.1",
         "react-id-swiper": "^1.6.8",
         "react-markdown": "^3.6.0",
-        "react-redux": "^5.0.7",
+        "react-redux": "^7.2.1",
         "react-router-dom": "^4.3.1",
         "react-router-redux": "^5.0.0-alpha.9",
         "react-scripts": "^2.1.1",
@@ -146,7 +147,7 @@
         "react-transition-group": "^4.4.1",
         "recompose": "^0.26.0",
         "redux": "^3.6.0",
-        "redux-form": "^7.4.3",
+        "redux-form": "^8.3.6",
         "redux-logger": "^2.7.4",
         "redux-mock-store": "^1.5.4",
         "redux-observable": "^0.14.1",
@@ -222,6 +223,9 @@
             "!app/**",
             "!electron-dev/**"
         ],
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ],
         "setupFiles": [
             "jest-date-mock",
             "<rootDir>/config/polyfills.js",
@@ -257,6 +261,7 @@
             "@app/(.*)$": "<rootDir>/src/$1",
             "@components/(.*)$": "<rootDir>/src/components/$1",
             "@selectors/(.*)$": "<rootDir>/src/selectors/$1",
+            "@hooks/(.*)$": "<rootDir>/src/hooks/$1",
             "@modules/(.*)$": "<rootDir>/src/ducks/modules/$1",
             "^react-native$": "react-native-web"
         }

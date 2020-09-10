@@ -1,27 +1,29 @@
-import React from 'react';
-import path from 'path';
+import React from 'react'; import path from 'path';
 import { actionCreators as dialogActions } from '@modules/dialogs';
+import ExternalLink from '@components/ExternalLink';
+import { Button } from '@codaco/ui';
 
 export const invalidAssetErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <React.Fragment>
       <p>
-        The file you attmpted to import is not in a format supported by Network
-        Canvas.
-      </p>
-      <p>
-        <strong>Reminder:</strong> Network Canvas supports importing network data in
-        either JSON or CSV format. JSON files must contain a &quot;nodes&quot; and/or
-        &quot;edges&quot; list in the root object, and CSV data should contain a header
-        row comprising variable names, and be in the format of a node or edge list.
-      </p>
-      <p>
-        Variable names must use only letters, numbers, the symbols ._-: and contain no spaces.
+        The file you attempted to import is not in a format supported by
+        Network Canvas. Please see our <ExternalLink
+          href="https://documentation.networkcanvas.com/docs/key-concepts/assets/#supported-file-types"
+        >documentation page</ExternalLink> on using external data by clicking
+        the button below.
       </p>
       <p>
         If you believe you are seeing this message in error, please help us to
         troubleshoot the issue by sharing the asset file with us at&nbsp;
-        <code>info@networkcanvas.com</code>.
+        <ExternalLink href="mailto:info@networkcanvas.com">
+          <code>info@networkcanvas.com</code>
+        </ExternalLink>.
+      </p>
+      <p>
+        <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/assets/#supported-file-types">
+          <Button size="small">view documentation</Button>
+        </ExternalLink>
       </p>
     </React.Fragment>
   );
