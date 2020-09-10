@@ -58,41 +58,13 @@ const Select = ({
 }) => {
   const { value } = input;
   const { invalid, error, touched } = meta;
-
   const onChange = input.onChange || props.onChange;
-  const getValidationErrors = makeGetValidationErrors(validation, reserved);
 
   const [state, setState] = useState({
     ...initialState,
   });
 
-  const selected = options.findIndex(option => option.value === value);
-
-  const classes = cx(
-    className,
-    'chooser',
-    {
-      'chooser--has-error': invalid && touched && error,
-    },
-  );
-
-  const handleSaveNew = () => {
-    if (!state.isNewValid) { return; }
-    const result = onCreateOption(state.newValue);
-    setState(s => ({ ...s, isNewSaved: true }));
-    onChange(result);
-  };
-
-  const handleChooseCreateNew = () => {
-    onChange(null);
-    setState(s => ({ ...s, isNew: true, newValue: '', isNewValid: false, newWarnings: null }));
-  };
-
-  const handleDeleteNew = () => {
-    onDeleteOption(value);
-    setState(s => ({ ...s, isNewSaved: false, isNew: false }));
-    onChange(null);
-  };
+  const getValidationErrors = makeGetValidationErrors(validation, reserved);
 
   const handleSelect = (e) => {
     const index = e.target.value;
@@ -103,17 +75,43 @@ const Select = ({
     onChange(updatedValue);
   };
 
+  const handleChooseCreateNew = () => {
+    onChange(null);
+    setState(s => ({ ...s, isNew: true, newValue: '', isNewValid: false, newWarnings: null }));
+  };
+
   const handleChangeNew = (e) => {
     const newValue = e.target.value;
     const [isNewValid, newWarnings] = getValidationErrors(options, newValue);
     setState(s => ({ ...s, newValue, isNewValid, newWarnings }));
   };
 
+  const handleSaveNew = () => {
+    if (!state.isNewValid) { return; }
+    const result = onCreateOption(state.newValue);
+    setState(s => ({ ...s, isNewSaved: true }));
+    onChange(result);
+  };
+
   const handleCancelNew = () => {
     setState(s => ({ ...s, isNew: false, isNewValid: false, newWarnings: null }));
   };
 
+  const handleDeleteNew = () => {
+    onDeleteOption(value);
+    setState(s => ({ ...s, isNewSaved: false, isNew: false }));
+    onChange(null);
+  };
+
+  const selected = options.findIndex(option => option.value === value);
   const selectDisabled = disabled || state.isNew;
+  const classes = cx(
+    className,
+    'chooser',
+    {
+      'chooser--has-error': invalid && touched && error,
+    },
+  );
 
   return (
     <motion.div className={classes}>
@@ -123,6 +121,7 @@ const Select = ({
             onChange={handleSelect}
             value={selected}
             disabled={selectDisabled}
+            className="chooser__select"
           >
             <option>&mdash; Select an option &mdash;</option>
             {options.map((option, index) => (
@@ -148,12 +147,14 @@ const Select = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="chooser__new"
           >
             <input
               type="text"
               value={state.newValue}
               onChange={handleChangeNew}
               disabled={state.isNewSaved}
+              className="chooser__text"
             />
             { !state.isNewSaved &&
               <Fragment>
@@ -164,14 +165,10 @@ const Select = ({
           </motion.div>
         }
         { state.newWarnings &&
-          <motion.div key="warnings">
-            <div className="form-fields-select__error"><Icon name="warning" />{state.newWarnings}</div>
-          </motion.div>
+          <motion.div className="form-fields-select__error"><Icon name="warning" />{state.newWarnings}</motion.div>
         }
         { invalid && touched &&
-          <motion.div key="error">
-            <div className="form-fields-select__error"><Icon name="warning" />{error}</div>
-          </motion.div>
+          <motion.div className="form-fields-select__error"><Icon name="warning" />{error}</motion.div>
         }
       </AnimatePresence>
     </motion.div>
@@ -190,6 +187,8 @@ Select.propTypes = {
   onCreateOption: PropTypes.func,
   onDeleteOption: PropTypes.funx,
   options: PropTypes.array,
+  reserved: PropTypes.array,
+  validation: PropTypes.object,
 };
 
 Select.defaultProps = {
@@ -202,6 +201,8 @@ Select.defaultProps = {
   onCreateOption: noop,
   onDeleteOption: noop,
   options: [],
+  reserved: [],
+  validation: {},
 };
 
 

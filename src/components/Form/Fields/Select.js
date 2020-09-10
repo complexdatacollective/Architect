@@ -63,6 +63,7 @@ const Select = ({
             onChange={handleSelect}
             value={selected}
             disabled={disabled}
+            className="chooser__select"
           >
             <option>&mdash; Select an option &mdash;</option>
             {options.map((option, index) => (
@@ -79,9 +80,9 @@ const Select = ({
             >Create new</button>
           }
         </motion.div>
-        <motion.div key="error">
-          {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
-        </motion.div>
+        { invalid && touched &&
+          <motion.div key="error" className="chooser__error"><Icon name="warning" />{error}</motion.div>
+        }
       </AnimatePresence>
     </motion.div>
   );
