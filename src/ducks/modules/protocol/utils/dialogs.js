@@ -6,7 +6,7 @@ export const invalidAssetErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <React.Fragment>
       <p>
-        The file you attmpted to import is not in a format supported by Network
+        The file you attempted to import is not in a format supported by Network
         Canvas.
       </p>
       <p>

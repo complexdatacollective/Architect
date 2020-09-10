@@ -54,7 +54,7 @@ const SearchOptions = ({
           options={[
             { value: 0, label: 'Exact' },
             { value: 0.25, label: 'High accuracy' },
-            { value: 0.5, label: 'Medium accurary' },
+            { value: 0.5, label: 'Medium accuracy' },
             { value: 0.75, label: 'Low accuracy' },
           ]}
           validation={{ requiredAcceptsZero: true }}
