@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { get, noop } from 'lodash';
@@ -18,8 +18,9 @@ const Select = ({
   input,
   options,
   label,
-  createNewOption,
+  onCreateOption,
   meta,
+  disabled,
   ...props,
 }) => {
   const { value } = input;
@@ -42,7 +43,7 @@ const Select = ({
   );
 
   const handleClickCreateNew = () => {
-    setState(s => ({ ...s, isNew: true }));
+    onCreateOption();
   };
 
   const handleSelect = (e) => {
@@ -54,16 +55,15 @@ const Select = ({
     onChange(updatedValue);
   };
 
-  const handleChangeNew = (e) => {
-    const newValue = e.target.value;
-    setState(s => ({ ...s, newValue }));
-  };
-
   return (
     <motion.div className={classes}>
       <AnimatePresence>
         <motion.div key="options">
-          <select onChange={handleSelect} value={selected}>
+          <select
+            onChange={handleSelect}
+            value={selected}
+            disabled={disabled}
+          >
             <option>&mdash; Select an option &mdash;</option>
             {options.map((option, index) => (
               <option
@@ -72,29 +72,13 @@ const Select = ({
               >{option.label || option.value}</option>
             ))}
           </select>
-          { createNewOption &&
+          { onCreateOption &&
             <button
               onClick={handleClickCreateNew}
+              type="button"
             >Create new</button>
           }
         </motion.div>
-        { state.isNew &&
-          <motion.div
-            key="new"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <input
-              type="text"
-              value={state.newValue}
-              onChange={handleChangeNew}
-              disabled={state.isNewSaved}
-            />
-            { !state.isNewSaved && <button>Save</button> }
-            { state.isNewSaved && <button>Delete</button> }
-          </motion.div>
-        }
         <motion.div key="error">
           {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
         </motion.div>
@@ -108,6 +92,7 @@ Select.propTypes = {
   className: PropTypes.string,
   input: PropTypes.shape({
     onChange: PropTypes.func,
+    value: PropTypes.any,
   }),
   meta: PropTypes.shape({
     invalid: PropTypes.bool,
@@ -124,7 +109,10 @@ Select.defaultProps = {
     touched: false,
     error: null,
   },
-  input: { onChange: noop },
+  input: {
+    value: null,
+    onChange: noop,
+  },
 };
 
 

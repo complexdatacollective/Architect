@@ -1,219 +1,167 @@
-import React, { PureComponent } from 'react';
-import { createFilter } from 'react-select';
-import Creatable from 'react-select/creatable';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
+import { get, noop } from 'lodash';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
-import { getValidator } from '@app/utils/validations';
-import DefaultSelectOption from './DefaultSelectOption';
+import Text from '@codaco/ui/lib/components/Fields/Text';
 
-/**
- * Contains WIP changes to add inline delete, which is paused for now.
- */
-
-const getValue = (options, value) => {
-  const foundValue = options.find(option => option.value === value);
-
-  if (!foundValue) { return null; }
-
-  return foundValue;
+const initialState = {
+  isNew: false,
+  isNewSaved: false,
+  newValue: null,
+  value: null,
 };
 
-const defaultFilter = createFilter({
-  ignoreCase: true,
-  trim: true,
-});
+const Select = ({
+  className,
+  input,
+  options,
+  label,
+  onCreateOption,
+  onDeleteOption,
+  disabled,
+  meta,
+  ...props,
+}) => {
+  const { value } = input;
+  const { invalid, error, touched } = meta;
 
-const filterOptions = (candidate, value) => {
-  if (!value) { return true; }
-  // eslint-disable-next-line no-underscore-dangle
-  if (candidate.data.__isSticky__) { return true; }
-  return defaultFilter(candidate, value);
-};
+  const onChange = input.onChange || props.onChange;
 
-class CreatableSelect extends PureComponent {
-  constructor(props) {
-    super(props);
+  const [state, setState] = useState({
+    ...initialState,
+  });
 
-    this.state = { warnings: null };
-  }
+  const selected = options.findIndex(option => option.value === value);
 
-  get value() {
-    return getValue(this.props.options, this.props.input.value);
-  }
+  const classes = cx(
+    className,
+    'chooser',
+    {
+      'chooser--has-error': invalid && touched && error,
+    },
+  );
 
-  getOptionWithDeleteProp = WrappedComponent =>
-    props => (
-      <WrappedComponent
-        {...props}
-        onDeleteOption={this.handleDeleteOption}
-      />
-    );
-
-  handleChange = (option) => {
-    // We are presenting a "fake" option to show an error message,
-    // if it is selected we ignore the action.
-    // eslint-disable-next-line no-underscore-dangle
-    if (option && option.__isWarning__) {
-      return;
-    }
-
-    if (option && option.value) {
-      this.props.input.onChange(option.value);
-    } else {
-      this.props.input.onChange(null);
-    }
+  const handleSaveNew = () => {
+    const result = onCreateOption(state.newValue);
+    setState(s => ({ ...s, isNewSaved: true }));
+    onChange(result);
   };
 
-  handleCreateOption = (value) => {
-    const result = this.props.onCreateOption(value);
-    this.props.input.onChange(result);
-  }
-
-  handleDeleteOption = (value) => {
-    if (!this.props.onDeleteOption) { return; }
-
-    this.props.onDeleteOption(value);
-
-    // Reset input if current value
-    if (value === this.props.input.value) {
-      this.props.input.onChange(null);
-    }
+  const handleChooseCreateNew = () => {
+    setState(s => ({ ...s, isNew: true, newValue: '' }));
   };
 
-  handleBlur = () => {
-    if (!this.props.input.onBlur) { return; }
-    this.props.input.onBlur(this.props.input.value);
-  }
+  const handleDeleteNew = () => {
+    onDeleteOption(value);
+    setState(s => ({ ...s, isNewSaved: false, isNew: false }));
+    onChange(null);
+  };
 
-  render() {
-    const {
-      className,
-      input: { onBlur, ...input },
-      children,
-      options,
-      reserved,
-      selectOptionComponent: SelectOptionComponent,
-      label,
-      onCreateOption,
-      meta: { invalid, error, touched },
-      ...rest
-    } = this.props;
+  const handleSelect = (e) => {
+    const index = e.target.value;
+    // Redux form value handler needs the actual value
+    const valuePath = input.onChange ? [index, 'value'] : index;
+    const updatedValue = get(options, valuePath, null);
+    setState(s => ({ ...s, isNew: false }));
+    onChange(updatedValue);
+  };
 
-    const warnings = this.state.warnings;
+  const handleChangeNew = (e) => {
+    const newValue = e.target.value;
+    setState(s => ({ ...s, newValue }));
+  };
 
-    const componentClasses = cx(
-      className,
-      'form-fields-select',
-      {
-        'form-fields-select--has-error': invalid && touched && error,
-      },
-    );
+  const handleCancelNew = () => {
+    setState(s => ({ ...s, isNew: false }));
+  };
 
-    const Option = this.props.onDeleteOption ?
-      this.getOptionWithDeleteProp(SelectOptionComponent) :
-      SelectOptionComponent;
+  const selectDisabled = disabled || state.isNew;
 
-    const warningOption = warnings ?
-      [{
-        label: warnings,
-        value: null,
-        __isWarning__: true,
-        __isSticky__: true,
-      }] :
-      [];
-
-    const optionsWithWarnings = [
-      ...warningOption,
-      ...options,
-    ];
-
-    const validator = getValidator(this.props.validation);
-
-    return (
-      <div className={componentClasses}>
-        { label &&
-          <h4>{label}</h4>
-        }
-        <Creatable
-          className="form-fields-select"
-          classNamePrefix="form-fields-select"
-          {...input}
-          options={optionsWithWarnings}
-          filterOption={filterOptions}
-          isClearable
-          isSearchable
-          value={this.value}
-          components={{ Option }}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
-          menuPortalTarget={document.body}
-          onChange={this.handleChange}
-          onCreateOption={this.handleCreateOption}
-          // CreatableSelect has unusual onBlur that doesn't play nicely with redux-forms
-          // https://github.com/erikras/redux-form/issues/82#issuecomment-386108205
-          // Sending the old value on blur, and disabling blurInputOnSelect work in
-          // a round about way, and still allow us to use the `touched` property.
-          onBlur={this.handleBlur}
-          blurInputOnSelect={false}
-          isValidNewOption={(option) => {
-            const validationErrors = validator(option);
-
-            // True if option contains only spaces or no chars
-            const isEmpty = option.replace(/ /g, '').length === 0;
-
-            // True if option matches the label prop of the supplied object
-            const matchLabel = ({ label: variableLabel }) =>
-              variableLabel && option &&
-              variableLabel.toLowerCase() === option.toLowerCase();
-            const alreadyExists = options.some(matchLabel);
-            const isReserved = reserved.some(matchLabel);
-
-            if (!alreadyExists && isReserved) {
-              this.setState({ warnings: `"${option}" is already used elsewhere in ${rest.entity}` });
-            } else if (!isEmpty && validationErrors) {
-              this.setState({ warnings: validationErrors });
-            } else {
-              this.setState({ warnings: null });
+  return (
+    <motion.div className={classes}>
+      <AnimatePresence>
+        <motion.div key="options">
+          <select
+            onChange={handleSelect}
+            value={selected}
+            disabled={selectDisabled}
+          >
+            <option>&mdash; Select an option &mdash;</option>
+            {options.map((option, index) => (
+              <option
+                value={index}
+                key={`option_${index}`}
+              >{option.label || option.value}</option>
+            ))}
+          </select>
+          { !state.isNew &&
+            <button
+              onClick={handleChooseCreateNew}
+              type="button"
+              disabled={selectDisabled}
+            >Create new</button>
+          }
+          { state.isNewSaved &&
+            <button type="button" onClick={handleDeleteNew}>Delete</button> }
+        </motion.div>
+        { state.isNew && !state.isNewSaved &&
+          <motion.div
+            key="new"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <input
+              type="text"
+              value={state.newValue}
+              onChange={handleChangeNew}
+              disabled={state.isNewSaved}
+            />
+            { !state.isNewSaved &&
+              <Fragment>
+                <button type="button" onClick={handleSaveNew}>Save</button>
+                <button type="button" onClick={handleCancelNew}>Cancel</button>
+              </Fragment>
             }
+          </motion.div>
+        }
+        <motion.div key="error">
+          {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
+        </motion.div>
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
-            return !isEmpty && !validationErrors && !alreadyExists && !isReserved;
-          }}
-
-          {...rest}
-        >
-          {children}
-        </Creatable>
-        {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
-      </div>
-    );
-  }
-}
-
-CreatableSelect.propTypes = {
-  className: PropTypes.string,
+Select.propTypes = {
   options: PropTypes.array,
-  selectOptionComponent: PropTypes.any,
-  input: PropTypes.object,
-  onCreateOption: PropTypes.func.isRequired,
-  onDeleteOption: PropTypes.func,
-  label: PropTypes.string,
-  children: PropTypes.node,
-  reserved: PropTypes.array,
-  meta: PropTypes.object,
-  validation: PropTypes.any,
+  className: PropTypes.string,
+  input: PropTypes.shape({
+    onChange: PropTypes.func,
+    value: PropTypes.any,
+  }),
+  meta: PropTypes.shape({
+    invalid: PropTypes.bool,
+    error: PropTypes.string,
+    touched: PropTypes.bool,
+  }),
 };
 
-CreatableSelect.defaultProps = {
-  className: '',
-  selectOptionComponent: DefaultSelectOption,
-  onDeleteOption: null,
+Select.defaultProps = {
+  className: null,
   options: [],
-  input: {},
-  label: null,
-  children: null,
-  reserved: [],
-  meta: { invalid: false, error: null, touched: false },
-  validation: {},
+  meta: {
+    invalid: false,
+    touched: false,
+    error: null,
+  },
+  input: {
+    value: null,
+    onChange: noop,
+  },
 };
 
-export default CreatableSelect;
+
+export default Select;
