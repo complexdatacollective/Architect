@@ -6,7 +6,7 @@
     align-items: center;
 
     &-input {
-      width: 50%;
+      width: 100%;
     }
 
     &-controls {
@@ -84,6 +84,17 @@
       &__select,
       &__text {
         border: 0.1rem solid var(--error);
+      }
+    }
+  }
+
+  &--creatable {
+    .chooser {
+      &__section {
+        &-input {
+          flex-grow: 1;
+          flex-basis: 50%;
+        }
       }
     }
   }

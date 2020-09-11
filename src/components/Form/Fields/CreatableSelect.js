@@ -1,6 +1,6 @@
-import React, { Fragment, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { motion, AnimateSharedLayout } from 'framer-motion';
 import { get, noop } from 'lodash';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
@@ -131,6 +131,7 @@ const Select = ({
   const classes = cx(
     className,
     'chooser',
+    'chooser--creatable',
     { 'chooser--has-error': hasError },
   );
 
@@ -138,55 +139,57 @@ const Select = ({
     <div className={classes}>
       <div className="chooser__section">
         <motion.div className="chooser__section-input">
-          { !state.isNew &&
-            <motion.div
-              key="options"
-              initial={animationVariants.initial}
-              animate={animationVariants.animate}
-              exit={animationVariants.exit}
-            >
-              <select
-                onChange={handleSelect}
-                value={selected}
-                disabled={selectDisabled}
-                className="chooser__select"
-                ref={selectInput}
+          <AnimateSharedLayout>
+            { !state.isNew &&
+              <motion.div
+                key="options"
+                initial={animationVariants.initial}
+                animate={animationVariants.animate}
+                exit={animationVariants.exit}
               >
-                <option>&mdash; Select an option &mdash;</option>
-                {options.map((option, index) => (
-                  <option
-                    value={index}
-                    key={`option_${index}`}
-                  >{option.label || option.value}</option>
-                ))}
-              </select>
-            </motion.div>
-          }
-          { state.isNew &&
-            <motion.div
-              key="new"
-              className="chooser__section"
-              initial={animationVariants.initial}
-              animate={animationVariants.animate}
-              exit={animationVariants.exit}
-            >
-              <input
-                type="text"
-                value={state.newValue}
-                onChange={handleChangeNew}
-                onKeyUp={handleCheckSubmit}
-                disabled={state.isNewSaved}
-                className="chooser__text"
-                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-              />
-            </motion.div>
-          }
-          { state.newWarnings &&
-            <motion.div className="chooser__error"><Icon name="warning" />{state.newWarnings}</motion.div>
-          }
-          { invalid && touched && !state.isNew &&
-            <motion.div className="chooser__error"><Icon name="warning" />{error}</motion.div>
-          }
+                <select
+                  onChange={handleSelect}
+                  value={selected}
+                  disabled={selectDisabled}
+                  className="chooser__select"
+                  ref={selectInput}
+                >
+                  <option>&mdash; Select an option &mdash;</option>
+                  {options.map((option, index) => (
+                    <option
+                      value={index}
+                      key={`option_${index}`}
+                    >{option.label || option.value}</option>
+                  ))}
+                </select>
+              </motion.div>
+            }
+            { state.isNew &&
+              <motion.div
+                key="new"
+                className="chooser__section"
+                initial={animationVariants.initial}
+                animate={animationVariants.animate}
+                exit={animationVariants.exit}
+              >
+                <input
+                  type="text"
+                  value={state.newValue}
+                  onChange={handleChangeNew}
+                  onKeyUp={handleCheckSubmit}
+                  disabled={state.isNewSaved}
+                  className="chooser__text"
+                  autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+                />
+              </motion.div>
+            }
+            { state.newWarnings &&
+              <motion.div className="chooser__error"><Icon name="warning" />{state.newWarnings}</motion.div>
+            }
+            { invalid && touched && !state.isNew &&
+              <motion.div className="chooser__error"><Icon name="warning" />{error}</motion.div>
+            }
+          </AnimateSharedLayout>
         </motion.div>
         <motion.div className="chooser__section-controls">
           { !state.isNew &&

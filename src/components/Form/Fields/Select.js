@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimateSharedLayout } from 'framer-motion';
 import { get, noop } from 'lodash';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
-import Text from '@codaco/ui/lib/components/Fields/Text';
-
-const initialState = {
-  isNew: false,
-  isNewSaved: false,
-  newValue: null,
-  value: null,
-};
 
 const Select = ({
   className,
@@ -21,16 +13,12 @@ const Select = ({
   onCreateOption,
   meta,
   disabled,
-  ...props,
+  ...props
 }) => {
   const { value } = input;
   const { invalid, error, touched } = meta;
 
   const onChange = input.onChange || props.onChange;
-
-  const [state, setState] = useState({
-    ...initialState,
-  });
 
   const selected = options.findIndex(option => option.value === value);
 
@@ -51,40 +39,43 @@ const Select = ({
     // Redux form value handler needs the actual value
     const valuePath = input.onChange ? [index, 'value'] : index;
     const updatedValue = get(options, valuePath, null);
-    setState(s => ({ ...s, isNew: false }));
     onChange(updatedValue);
   };
 
   return (
-    <motion.div className={classes}>
-      <AnimatePresence>
-        <motion.div key="options">
-          <select
-            onChange={handleSelect}
-            value={selected}
-            disabled={disabled}
-            className="chooser__select"
-          >
-            <option>&mdash; Select an option &mdash;</option>
-            {options.map((option, index) => (
-              <option
-                value={index}
-                key={`option_${index}`}
-              >{option.label || option.value}</option>
-            ))}
-          </select>
-          { onCreateOption &&
-            <button
-              onClick={handleClickCreateNew}
-              type="button"
-            >Create new</button>
-          }
+    <div className={classes}>
+      <div className="chooser__section">
+        <motion.div className="chooser__section-input">
+          <AnimateSharedLayout>
+            <motion.div key="options">
+              <select
+                onChange={handleSelect}
+                value={selected}
+                disabled={disabled}
+                className="chooser__select"
+              >
+                <option>&mdash; Select an option &mdash;</option>
+                {options.map((option, index) => (
+                  <option
+                    value={index}
+                    key={`option_${index}`}
+                  >{option.label || option.value}</option>
+                ))}
+              </select>
+              { onCreateOption &&
+                <button
+                  onClick={handleClickCreateNew}
+                  type="button"
+                >Create new</button>
+              }
+            </motion.div>
+            { invalid && touched &&
+              <motion.div key="error" className="chooser__error"><Icon name="warning" />{error}</motion.div>
+            }
+          </AnimateSharedLayout>
         </motion.div>
-        { invalid && touched &&
-          <motion.div key="error" className="chooser__error"><Icon name="warning" />{error}</motion.div>
-        }
-      </AnimatePresence>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
