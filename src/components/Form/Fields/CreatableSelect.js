@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { get, noop } from 'lodash';
@@ -60,6 +60,8 @@ const Select = ({
   const { invalid, error, touched } = meta;
   const onChange = input.onChange || props.onChange;
 
+  const selectInput = useRef();
+
   const [state, setState] = useState({
     ...initialState,
   });
@@ -68,7 +70,7 @@ const Select = ({
 
   const handleSelect = (e) => {
     const index = e.target.value;
-    // Redux form value handler needs the actual value
+    // Redux form value handler needs the actual value, but the onChange prop uses the index...
     const valuePath = input.onChange ? [index, 'value'] : index;
     const updatedValue = get(options, valuePath, null);
     setState(s => ({ ...s, isNew: false }));
@@ -103,6 +105,12 @@ const Select = ({
     onChange(null);
   };
 
+  useEffect(() => {
+    if (!state.isNew && selectInput.current) {
+      selectInput.current.focus();
+    }
+  }, [state.isNew]);
+
   const selected = options.findIndex(option => option.value === value);
   const selectDisabled = disabled || state.isNew;
   const classes = cx(
@@ -122,6 +130,7 @@ const Select = ({
             value={selected}
             disabled={selectDisabled}
             className="chooser__select"
+            ref={selectInput}
           >
             <option>&mdash; Select an option &mdash;</option>
             {options.map((option, index) => (
@@ -149,19 +158,22 @@ const Select = ({
             exit={{ opacity: 0 }}
             className="chooser__new"
           >
-            <input
-              type="text"
-              value={state.newValue}
-              onChange={handleChangeNew}
-              disabled={state.isNewSaved}
-              className="chooser__text"
-            />
-            { !state.isNewSaved &&
-              <Fragment>
-                <button type="button" onClick={handleSaveNew} disabled={!state.isNewValid}>Save</button>
-                <button type="button" onClick={handleCancelNew}>Cancel</button>
-              </Fragment>
-            }
+            <form onSubmit={handleSaveNew}>
+              <input
+                type="text"
+                value={state.newValue}
+                onChange={handleChangeNew}
+                disabled={state.isNewSaved}
+                className="chooser__text"
+                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+              />
+              { !state.isNewSaved &&
+                <Fragment>
+                  <button type="submit" disabled={!state.isNewValid}>Save</button>
+                  <button type="button" onClick={handleCancelNew}>Cancel</button>
+                </Fragment>
+              }
+            </form>
           </motion.div>
         }
         { state.newWarnings &&
