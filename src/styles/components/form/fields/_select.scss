@@ -1,4 +1,57 @@
 .chooser {
+  &__section {
+    display: flex;
+    align-items: center;
+
+    &-controls {
+      flex-basis: 250px;
+      display: flex;
+
+      .button {
+        margin: 0 0 0 1rem;
+      }
+    }
+  }
+
   &__select {
+    display: block;
+    border: 0;
+    font-size: 14px; // TODO
+    -moz-appearance: none;  // sass-lint:disable-line no-vendor-prefixes
+    -webkit-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+    appearance: none;
+    max-width: 100%;
+    min-height: 4rem;
+    font-family: var(--body-font-family);
+    border-radius: 1rem 1rem 0 0;
+    background-color: var(--input-background);
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
+
+    &:hover {
+      border-bottom-color: var(--input-accent);
+    }
+  }
+
+  &__text {
+    display: block;
+    border: 0;
+    font-size: 14px; // TODO
+    -moz-appearance: none;  // sass-lint:disable-line no-vendor-prefixes
+    -webkit-appearance: none; // sass-lint:disable-line no-vendor-prefixes
+    appearance: none;
+    max-width: 100%;
+    min-height: 4rem;
+    font-family: var(--body-font-family);
+    border-radius: 1rem 1rem 0 0;
+    background-color: var(--input-background);
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
+
+    &:hover {
+      border-bottom-color: var(--input-accent);
+    }
   }
 }

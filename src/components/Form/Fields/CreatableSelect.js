@@ -1,10 +1,17 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { get, noop } from 'lodash';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
+import Button from '@codaco/ui/lib/components/Button';
 import { getValidator } from '@app/utils/validations';
+
+const animationVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 const makeGetValidationErrors = (validation = {}, reserved = []) =>
   (options, option) => {
@@ -66,6 +73,12 @@ const Select = ({
     ...initialState,
   });
 
+  useEffect(() => {
+    if (!state.isNew && selectInput.current) {
+      selectInput.current.focus();
+    }
+  }, [state.isNew]);
+
   const getValidationErrors = makeGetValidationErrors(validation, reserved);
 
   const handleSelect = (e) => {
@@ -105,11 +118,11 @@ const Select = ({
     onChange(null);
   };
 
-  useEffect(() => {
-    if (!state.isNew && selectInput.current) {
-      selectInput.current.focus();
-    }
-  }, [state.isNew]);
+  const handleCheckSubmit = (e) => {
+    const keycode = e.keyCode || e.which;
+    if (keycode !== 13) { return; }
+    handleSaveNew();
+  };
 
   const selected = options.findIndex(option => option.value === value);
   const selectDisabled = disabled || state.isNew;
@@ -123,57 +136,89 @@ const Select = ({
 
   return (
     <motion.div className={classes}>
-      <AnimatePresence>
-        <motion.div key="options">
-          <select
-            onChange={handleSelect}
-            value={selected}
-            disabled={selectDisabled}
-            className="chooser__select"
-            ref={selectInput}
+      <AnimateSharedLayout>
+        { !state.isNew &&
+          <motion.div
+            key="options"
+            className="chooser__section"
+            initial={animationVariants.initial}
+            animate={animationVariants.animate}
+            exit={animationVariants.exit}
           >
-            <option>&mdash; Select an option &mdash;</option>
-            {options.map((option, index) => (
-              <option
-                value={index}
-                key={`option_${index}`}
-              >{option.label || option.value}</option>
-            ))}
-          </select>
-          { !state.isNew &&
-            <button
-              onClick={handleChooseCreateNew}
-              type="button"
+            <select
+              onChange={handleSelect}
+              value={selected}
               disabled={selectDisabled}
-            >Create new</button>
-          }
-          { state.isNewSaved &&
-            <button type="button" onClick={handleDeleteNew}>Delete</button> }
-        </motion.div>
-        { state.isNew && !state.isNewSaved &&
+              className="chooser__select"
+              ref={selectInput}
+            >
+              <option>&mdash; Select an option &mdash;</option>
+              {options.map((option, index) => (
+                <option
+                  value={index}
+                  key={`option_${index}`}
+                >{option.label || option.value}</option>
+              ))}
+            </select>
+            <div className="chooser__section-controls">
+              <Button
+                size="small"
+                onClick={handleChooseCreateNew}
+                disabled={selectDisabled}
+              >Create new</Button>
+            </div>
+          </motion.div>
+        }
+        { state.isNew &&
           <motion.div
             key="new"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="chooser__new"
+            className="chooser__section"
+            initial={animationVariants.initial}
+            animate={animationVariants.animate}
+            exit={animationVariants.exit}
           >
-            <form onSubmit={handleSaveNew}>
-              <input
-                type="text"
-                value={state.newValue}
-                onChange={handleChangeNew}
-                disabled={state.isNewSaved}
-                className="chooser__text"
-                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-              />
-              { !state.isNewSaved &&
-                <Fragment>
-                  <button type="submit" disabled={!state.isNewValid}>Save</button>
-                  <button type="button" onClick={handleCancelNew}>Cancel</button>
-                </Fragment>
-              }
-            </form>
+            <input
+              type="text"
+              value={state.newValue}
+              onChange={handleChangeNew}
+              onKeyUp={handleCheckSubmit}
+              disabled={state.isNewSaved}
+              className="chooser__text"
+              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+            />
+            <motion.div className="chooser__section-controls">
+              <AnimateSharedLayout>
+                { !state.isNewSaved &&
+                  <motion.div
+                    key="save"
+                    initial={animationVariants.initial}
+                    animate={animationVariants.animate}
+                    exit={animationVariants.exit}
+                  >
+                    <Button size="small" onClick={handleSaveNew} disabled={!state.isNewValid}>
+                      Save
+                    </Button>
+                    <Button size="small" onClick={handleCancelNew} color="platinum">
+                      Cancel
+                    </Button>
+                  </motion.div>
+                }
+                { state.isNewSaved &&
+                  <motion.div
+                    key="delete"
+                    initial={animationVariants.initial}
+                    animate={animationVariants.animate}
+                    exit={animationVariants.exit}
+                  >
+                    <Button
+                      size="small"
+                      onClick={handleDeleteNew}
+                      color="platinum"
+                    >Delete</Button>
+                  </motion.div>
+                }
+              </AnimateSharedLayout>
+            </motion.div>
           </motion.div>
         }
         { state.newWarnings &&
@@ -182,7 +227,7 @@ const Select = ({
         { invalid && touched &&
           <motion.div className="form-fields-select__error"><Icon name="warning" />{error}</motion.div>
         }
-      </AnimatePresence>
+      </AnimateSharedLayout>
     </motion.div>
   );
 };
