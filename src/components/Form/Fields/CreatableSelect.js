@@ -135,100 +135,106 @@ const Select = ({
   );
 
   return (
-    <motion.div className={classes}>
-      <AnimateSharedLayout>
-        { !state.isNew &&
-          <motion.div
-            key="options"
-            className="chooser__section"
-            initial={animationVariants.initial}
-            animate={animationVariants.animate}
-            exit={animationVariants.exit}
-          >
-            <select
-              onChange={handleSelect}
-              value={selected}
-              disabled={selectDisabled}
-              className="chooser__select"
-              ref={selectInput}
+    <div className={classes}>
+      <div className="chooser__section">
+        <motion.div className="chooser__section-input">
+          { !state.isNew &&
+            <motion.div
+              key="options"
+              initial={animationVariants.initial}
+              animate={animationVariants.animate}
+              exit={animationVariants.exit}
             >
-              <option>&mdash; Select an option &mdash;</option>
-              {options.map((option, index) => (
-                <option
-                  value={index}
-                  key={`option_${index}`}
-                >{option.label || option.value}</option>
-              ))}
-            </select>
-            <div className="chooser__section-controls">
+              <select
+                onChange={handleSelect}
+                value={selected}
+                disabled={selectDisabled}
+                className="chooser__select"
+                ref={selectInput}
+              >
+                <option>&mdash; Select an option &mdash;</option>
+                {options.map((option, index) => (
+                  <option
+                    value={index}
+                    key={`option_${index}`}
+                  >{option.label || option.value}</option>
+                ))}
+              </select>
+            </motion.div>
+          }
+          { state.isNew &&
+            <motion.div
+              key="new"
+              className="chooser__section"
+              initial={animationVariants.initial}
+              animate={animationVariants.animate}
+              exit={animationVariants.exit}
+            >
+              <input
+                type="text"
+                value={state.newValue}
+                onChange={handleChangeNew}
+                onKeyUp={handleCheckSubmit}
+                disabled={state.isNewSaved}
+                className="chooser__text"
+                autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+              />
+            </motion.div>
+          }
+          { state.newWarnings &&
+            <motion.div className="chooser__error"><Icon name="warning" />{state.newWarnings}</motion.div>
+          }
+          { invalid && touched && !state.isNew &&
+            <motion.div className="chooser__error"><Icon name="warning" />{error}</motion.div>
+          }
+        </motion.div>
+        <motion.div className="chooser__section-controls">
+          { !state.isNew &&
+            <motion.div
+              key="new"
+              initial={animationVariants.initial}
+              animate={animationVariants.animate}
+              exit={animationVariants.exit}
+            >
               <Button
                 size="small"
                 onClick={handleChooseCreateNew}
                 disabled={selectDisabled}
-              >Create new</Button>
-            </div>
-          </motion.div>
-        }
-        { state.isNew &&
-          <motion.div
-            key="new"
-            className="chooser__section"
-            initial={animationVariants.initial}
-            animate={animationVariants.animate}
-            exit={animationVariants.exit}
-          >
-            <input
-              type="text"
-              value={state.newValue}
-              onChange={handleChangeNew}
-              onKeyUp={handleCheckSubmit}
-              disabled={state.isNewSaved}
-              className="chooser__text"
-              autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-            />
-            <motion.div className="chooser__section-controls">
-              <AnimateSharedLayout>
-                { !state.isNewSaved &&
-                  <motion.div
-                    key="save"
-                    initial={animationVariants.initial}
-                    animate={animationVariants.animate}
-                    exit={animationVariants.exit}
-                  >
-                    <Button size="small" onClick={handleSaveNew} disabled={!state.isNewValid}>
-                      Save
-                    </Button>
-                    <Button size="small" onClick={handleCancelNew} color="platinum">
-                      Cancel
-                    </Button>
-                  </motion.div>
-                }
-                { state.isNewSaved &&
-                  <motion.div
-                    key="delete"
-                    initial={animationVariants.initial}
-                    animate={animationVariants.animate}
-                    exit={animationVariants.exit}
-                  >
-                    <Button
-                      size="small"
-                      onClick={handleDeleteNew}
-                      color="platinum"
-                    >Delete</Button>
-                  </motion.div>
-                }
-              </AnimateSharedLayout>
+              >or Create New</Button>
             </motion.div>
-          </motion.div>
-        }
-        { state.newWarnings &&
-          <motion.div className="chooser__error"><Icon name="warning" />{state.newWarnings}</motion.div>
-        }
-        { invalid && touched && !state.isNew &&
-          <motion.div className="chooser__error"><Icon name="warning" />{error}</motion.div>
-        }
-      </AnimateSharedLayout>
-    </motion.div>
+          }
+          { state.isNew && !state.isNewSaved &&
+            <motion.div
+              key="save"
+              initial={animationVariants.initial}
+              animate={animationVariants.animate}
+              exit={animationVariants.exit}
+            >
+              <Button size="small" onClick={handleSaveNew} disabled={!state.isNewValid}>
+                Save
+              </Button>
+              <Button size="small" onClick={handleCancelNew} color="platinum">
+                Cancel
+              </Button>
+            </motion.div>
+          }
+          { state.isNew && state.isNewSaved &&
+            <motion.div
+              key="delete"
+              initial={animationVariants.initial}
+              animate={animationVariants.animate}
+              exit={animationVariants.exit}
+            >
+              <Button
+                size="small"
+                onClick={handleDeleteNew}
+                color="platinum"
+              >Delete</Button>
+            </motion.div>
+          }
+        </motion.div>
+      </div>
+    </div>
   );
 };
 
