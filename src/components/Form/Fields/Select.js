@@ -7,12 +7,12 @@ import Icon from '@codaco/ui/lib/components/Icon';
 
 const Select = ({
   className,
-  input,
-  options,
-  label,
-  onCreateOption,
-  meta,
   disabled,
+  input,
+  label,
+  meta,
+  onCreateOption,
+  options,
   ...props
 }) => {
   const { value } = input;
@@ -36,7 +36,7 @@ const Select = ({
 
   const handleSelect = (e) => {
     const index = e.target.value;
-    // Redux form value handler needs the actual value
+    // Redux form value handler needs the actual value, but the onChange prop uses the index...
     const valuePath = input.onChange ? [index, 'value'] : index;
     const updatedValue = get(options, valuePath, null);
     onChange(updatedValue);
@@ -80,31 +80,27 @@ const Select = ({
 };
 
 Select.propTypes = {
-  options: PropTypes.array,
   className: PropTypes.string,
-  input: PropTypes.shape({
-    onChange: PropTypes.func,
-    value: PropTypes.any,
-  }),
-  meta: PropTypes.shape({
-    invalid: PropTypes.bool,
-    error: PropTypes.string,
-    touched: PropTypes.bool,
-  }),
+  disabled: PropTypes.bool,
+  input: PropTypes
+    .shape({ onChange: PropTypes.func, value: PropTypes.any }),
+  label: PropTypes.string,
+  meta: PropTypes
+    .shape({ invalid: PropTypes.bool, error: PropTypes.string, touched: PropTypes.bool }),
+  onChange: PropTypes.func,
+  onCreateOption: PropTypes.func,
+  options: PropTypes.array,
 };
 
 Select.defaultProps = {
   className: null,
+  disabled: false,
+  input: { value: null, onChange: noop },
+  label: null,
+  meta: { invalid: false, touched: false, error: null },
+  onChange: noop,
+  onCreateOption: noop,
   options: [],
-  meta: {
-    invalid: false,
-    touched: false,
-    error: null,
-  },
-  input: {
-    value: null,
-    onChange: noop,
-  },
 };
 
 

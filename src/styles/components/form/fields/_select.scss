@@ -32,7 +32,7 @@
     font-family: var(--body-font-family);
     border-radius: 1rem 1rem 0 0;
     background-color: var(--input-background);
-    padding: 0.5rem 1rem;
+    padding: .5rem 1rem;
     border-bottom: 2px solid transparent;
     transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
 
@@ -54,7 +54,7 @@
     font-family: var(--body-font-family);
     border-radius: 1rem 1rem 0 0;
     background-color: var(--input-background);
-    padding: 0.5rem 1rem;
+    padding: .5rem 1rem;
     border-bottom: 2px solid transparent;
     transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
 
@@ -67,9 +67,10 @@
     background: var(--error);
     color: var(--form-error-text);
     transition: opacity var(--animation-easing) var(--animation-duration-standard), max-height var(--animation-easing) var(--animation-duration-standard);
-    padding: 0.5rem 0.25rem;
+    padding: .5rem .25rem;
     display: flex;
     align-items: center;
+
     svg {
       max-height: 1.2rem;
     }
@@ -81,9 +82,10 @@
         background: var(--error);
         color: var(--form-error-text);
       }
+
       &__select,
       &__text {
-        border: 0.1rem solid var(--error);
+        border: .1rem solid var(--error);
       }
     }
   }
