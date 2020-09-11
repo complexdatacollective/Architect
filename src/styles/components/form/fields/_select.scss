@@ -1,4 +1,6 @@
 .chooser {
+  border-radius: 1rem 1rem 0 0;
+
   &__section {
     display: flex;
     align-items: center;
@@ -52,6 +54,29 @@
 
     &:hover {
       border-bottom-color: var(--input-accent);
+    }
+  }
+
+  &__error {
+    background: var(--error);
+    color: var(--form-error-text);
+    transition: opacity var(--animation-easing) var(--animation-duration-standard), max-height var(--animation-easing) var(--animation-duration-standard);
+    padding: 0.5rem 0.25rem;
+    display: flex;
+    align-items: center;
+    svg {
+      max-height: 1.2rem;
+    }
+  }
+
+  &--has-error {
+    background: var(--error);
+    color: var(--form-error-text);
+    .chooser {
+      &__select,
+      &__text {
+        border: 0.1rem solid var(--error);
+      }
     }
   }
 }

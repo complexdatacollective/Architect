@@ -126,12 +126,12 @@ const Select = ({
 
   const selected = options.findIndex(option => option.value === value);
   const selectDisabled = disabled || state.isNew;
+  const hasError = (invalid && touched && error && !state.isNew)
+    || (state.isNew && state.newWarnings);
   const classes = cx(
     className,
     'chooser',
-    {
-      'chooser--has-error': invalid && touched && error,
-    },
+    { 'chooser--has-error': hasError },
   );
 
   return (
@@ -222,10 +222,10 @@ const Select = ({
           </motion.div>
         }
         { state.newWarnings &&
-          <motion.div className="form-fields-select__error"><Icon name="warning" />{state.newWarnings}</motion.div>
+          <motion.div className="chooser__error"><Icon name="warning" />{state.newWarnings}</motion.div>
         }
-        { invalid && touched &&
-          <motion.div className="form-fields-select__error"><Icon name="warning" />{error}</motion.div>
+        { invalid && touched && !state.isNew &&
+          <motion.div className="chooser__error"><Icon name="warning" />{error}</motion.div>
         }
       </AnimateSharedLayout>
     </motion.div>
