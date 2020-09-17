@@ -1,7 +1,8 @@
 import log from 'electron-log';
-import fs from 'fs-extra';
-import decompress from 'decompress';
+// import fs from 'fs-extra';
 import archiver from 'archiver';
+import extractZip from 'extract-zip';
+import { createWriteStream } from 'fs';
 
 // Since this will be compressed over the wire, we choose uncompressed for speed
 const archiveOptions = {
@@ -15,11 +16,8 @@ const archiveOptions = {
  * @param {string} destinationPath
  * @return Returns a promise that resolves to the destination path
  */
-const extract = (sourcePath, destinationPath) =>
-  decompress(
-    sourcePath,
-    destinationPath,
-  ).then(() => destinationPath);
+const extract = async (sourcePath, destinationPath) =>
+  extractZip(sourcePath, { dir: destinationPath });
 
 /**
  * Write a bundled (zip) protocol from sourcePath (working directory) to destinationPath
@@ -30,7 +28,7 @@ const extract = (sourcePath, destinationPath) =>
 const archive = (sourcePath, destinationPath) =>
   new Promise((resolve, reject) => {
     log.debug('archive()', sourcePath, destinationPath);
-    const output = fs.createWriteStream(destinationPath);
+    const output = createWriteStream(destinationPath);
     const zip = archiver('zip', archiveOptions);
 
     const handleError = (e) => {

@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { remote } from 'electron';
+import fse from 'fs-extra';
 import uuid from 'uuid';
 import path from 'path';
 
@@ -9,7 +10,10 @@ import path from 'path';
  *
  * @returns The destination path in /tmp/.
  */
-const getLocalDirectoryFromArchivePath = () =>
-  path.join(remote.app.getPath('temp'), 'protocols', uuid());
+const getLocalDirectoryFromArchivePath = () => {
+  const localDir = path.join(remote.app.getPath('temp'), 'complexdatacollective', 'architect', 'protocols', uuid());
+  fse.ensureDirSync(localDir);
+  return localDir;
+};
 
 export default getLocalDirectoryFromArchivePath;

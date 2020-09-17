@@ -1,5 +1,6 @@
 import path from 'path';
-import fs from 'fs-extra';
+import fs from 'fs';
+import { promisify } from 'util';
 import { extract } from './lib/archive';
 import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
 
@@ -14,7 +15,7 @@ import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchive
 const unbundleProtocol = (filePath) => {
   const destinationPath = getLocalDirectoryFromArchivePath(filePath);
 
-  return fs.access(filePath, fs.constants.R_OK)
+  return promisify(fs.access)(filePath, fs.constants.R_OK)
     .then(() => {
       if (path.extname(filePath) === '.netcanvas') {
         return extract(filePath, destinationPath);
