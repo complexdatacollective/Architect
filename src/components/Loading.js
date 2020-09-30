@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Spinner } from '@codaco/ui';
@@ -39,6 +40,10 @@ const Loading = ({
     }
   </AnimatePresence>
 );
+
+Loading.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = state => ({
   isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),

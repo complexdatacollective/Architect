@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, AnimateSharedLayout } from 'framer-motion';
+import { AnimateSharedLayout, motion } from 'framer-motion';
 import WelcomeHeader from './WelcomeHeader';
 import Tips from './Tips';
 import UpdateAvailable from './UpdateAvailable';
@@ -7,28 +7,25 @@ import WhatsNew from './WhatsNew';
 import LaunchPad from './LaunchPad';
 
 const variants = {
-  initial: {
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.32, when: 'beforeChildren' },
   },
-  animate: {
-    delay: 1,
-    transition: {
-      when: 'beforeChildren',
-      staggerChildren: 0.15,
-    },
+  hide: {
+    opacity: 0,
   },
 };
 
 const Home = () => (
-  <motion.div
-    className="home"
-  >
+  <div className="home">
     <AnimateSharedLayout>
       <motion.div
         className="home__container"
         variants={variants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
+        initial="hide"
+        animate="show"
+        key="start-screen"
+        layout
       >
         <WelcomeHeader />
         <UpdateAvailable />
@@ -37,7 +34,7 @@ const Home = () => (
         <Tips />
       </motion.div>
     </AnimateSharedLayout>
-  </motion.div>
+  </div>
 );
 
 export default Home;

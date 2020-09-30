@@ -66,11 +66,11 @@ class AppManager {
   }
 
   static clearStorageData() {
+    log.info('clearStorage', global.appWindow);
     if (!global.appWindow) { return; }
 
-    global.appWindow.webContents.session.clearStorageData(() => {
-      global.appWindow.webContents.reload();
-    });
+    global.appWindow.webContents.session.clearStorageData()
+      .then(() => global.appWindow.webContents.reload());
   }
 
   static open() {
@@ -161,12 +161,10 @@ class AppManager {
       return true;
     });
 
-    console.log('start');
-
     // registerAssetProtocol();
     // this.initializeListeners();
     this.updateMenu();
-    this.updater.checkForUpdates(false);
+    // this.updater.checkForUpdates(false);
   }
 
   updateMenu() {

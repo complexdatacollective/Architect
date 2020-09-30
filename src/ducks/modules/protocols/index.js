@@ -18,12 +18,6 @@ import {
   actionTypes as registerActionTypes,
 } from './register';
 
-/* add latency for testing */
-const delay = (cb, duration) =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(cb()), duration);
-  });
-
 const protocolsLock = createLock('PROTOCOLS');
 const loadingLock = createLock('PROTOCOLS/LOADING');
 const savingLock = createLock('PROTOCOLS/SAVING');
@@ -96,10 +90,6 @@ const unbundleAndLoadThunk = filePath =>
             if (!result) { return false; }
             const { id } = result;
 
-            // fake delay
-            // return delay(() => editProtocol(id), 1000);
-
-            // no delay
             return editProtocol(id);
           })
           .catch((e) => {

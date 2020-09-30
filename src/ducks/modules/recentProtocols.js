@@ -27,13 +27,13 @@ export default function reducer(state = initialState, action = {}) {
         'filePath',
       )
         .slice(0, 50);
-    // case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
-    // case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
-    //   return uniqBy([
-    //     { filePath: action.filePath, lastOpened: new Date().getTime() },
-    //     ...state,
-    //   ], 'filePath')
-    //     .slice(0, 50);
+    case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
+    case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
+      return uniqBy([
+        { filePath: action.filePath, lastOpened: new Date().getTime() },
+        ...state,
+      ], 'filePath')
+        .slice(0, 50);
     default:
       return state;
   }

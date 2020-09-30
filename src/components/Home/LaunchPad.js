@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
+import { GraphicButton } from '@codaco/ui';
+import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
 import { actionCreators as protocolsActions } from '@modules/protocols';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
-import GraphicButton from '@components/GraphicButton';
 import Section from './Section';
 import Group from './Group';
 import Sprite from './Sprite';
-import ProtocolCard from './ProtocolCard';
 
 const getRecentProtocols = state =>
   get(state, 'recentProtocols', [])
@@ -32,7 +32,7 @@ const LaunchPad = ({
   return (
     <Section className="launch-pad">
       { resumeProtocol &&
-        <Group>
+        <Group color="panel-grey--dark">
           <Sprite
             src={resumeBackgroundGraphic}
             width="calc(50% - 7rem)"
@@ -56,13 +56,13 @@ const LaunchPad = ({
           </div>
         </Group>
       }
-      <Group color="platinum">
+      <Group color="panel-grey--light">
         <h2>Create or Open</h2>
         <div className="launch-pad__actions">
           <div className="launch-pad__action">
             <GraphicButton
               graphic={createButtonGraphic}
-              graphicPosition="bottom left"
+              graphicPosition="20% bottom"
               graphicSize="auto 90%"
               onClick={handleCreateProtocol}
             >
@@ -74,9 +74,9 @@ const LaunchPad = ({
           <div className="launch-pad__action">
             <GraphicButton
               graphic={openButtonGraphic}
-              graphicPosition="-4.5rem bottom"
+              graphicPosition="0 bottom"
               color="slate-blue--dark"
-              graphicSize="auto 105%"
+              graphicSize="auto 115%"
               onClick={handleOpenProtocol}
             >
               <h2>Open</h2>

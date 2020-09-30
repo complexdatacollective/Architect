@@ -47,7 +47,7 @@ const ReleaseNotes = () => {
       setIsDimissed(false);
     });
 
-    autoUpdater.checkForUpdates(true);
+    // autoUpdater.checkForUpdates(true);
   }, []);
 
   const handleDismiss = () => {

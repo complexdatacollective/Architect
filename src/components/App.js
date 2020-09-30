@@ -10,8 +10,15 @@ import DialogManager from '@components/DialogManager';
 import Routes from '@components/Routes';
 
 const appVariants = {
-  visible: { opacity: 1, duration: 2 },
-  hidden: { opacity: 0, duration: 2 },
+  show: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+    },
+  },
+  hide: {
+    opacity: 0,
+  },
 };
 
 const App = () => {
@@ -32,8 +39,8 @@ const App = () => {
       <motion.div
         className={appClasses}
         variants={appVariants}
-        initial="hidden"
-        animate="visible"
+        initial="hide"
+        animate="show"
       >
         <AppErrorBoundary>
           <Routes />

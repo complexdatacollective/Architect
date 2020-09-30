@@ -14,7 +14,6 @@ $scrollbar-padding: unit(2);
   // sass-lint:disable no-vendor-prefixes
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  padding-top: $top-height;
 }
 
 $font-sizes: (
@@ -77,39 +76,24 @@ $font-sizes: (
 
 .home {
   @include scrollable;
-  background-color: var(--color-white);
   height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-
-  &__container {
-    padding: 0 unit(8);
-  }
-
-  &__container {
-    @include scrollable;
-    box-sizing: border-box;
-    padding: $scrollbar-padding unit(12) unit(8);
-    // overflow-y: auto;
-  }
 }
 
 .home-section {
   @include first-margin;
   position: relative;
   border-radius: var(--border-radius);
-  box-shadow: 0 unit(1) unit(1) 0 rgba(0, 0, 0, 0.25);
-  margin: 4rem 0 0;
+  box-shadow: 0 unit(1) unit(1) 0 rgba(0, 0, 0, 0.25); //sass-lint:disable-line no-color-literals
+  margin: unit(6) auto;
+  max-width: 80rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-
-  &--allow-overflow {
-    overflow: visible;
-  }
 }
 
 .button-stack {
@@ -260,16 +244,15 @@ $font-sizes: (
 
 .welcome-header {
   &__header {
-    position: relative;
     height: 12rem;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--color-white);
-    border-radius: 1rem;
     transition-property: border-radius;
     transition-duration: var(--animation-duration-standard);
+    background-color: var(--color-slate-blue--dark);
 
     .project-tag {
       h5 {
@@ -317,25 +300,14 @@ $font-sizes: (
   }
 
   &__panel {
-    overflow: hidden;
-    margin-top: -1.5rem; // tuck panel underneath welcome section
-    z-index: -1;
-    position: relative;
   }
 
-  &--is-open {
-    .welcome-header__header {
-      border-radius: .75rem .75rem 0 0;
-      transition-property: none; // on the way out, we don't use a transition. should still transition on close
-    }
-  }
 }
 
 .home-welcome {
   display: flex;
   flex-direction: row;
   color: var(--color-white);
-  border-radius: 0 0 .75rem .75rem;
   padding-top: 5.5rem;
 
   &__video {

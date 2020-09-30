@@ -5,10 +5,11 @@
   --color-modal-shadow: rgba(20, 0, 0, .2);
   --color-mid-grey: rgb(128, 128, 128);
   --text-light-muted: rgba(255, 255, 255, .5);
-  --color-slate-blue--dark: #3945B2;
+  --color-panel-grey--light: #e2e2e2;
+  --color-panel-grey--dark: #d8d8d8;
 
   // UI overwrites
-  --background: var(--color-white);
+  --background: var(--color-platinum);
   --text: var(--color-charcoal);
   --input-background: var(--color-platinum);
   --input-label: var(--color-charcoal);

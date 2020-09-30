@@ -26,14 +26,6 @@ const startApp = () => {
         <PersistGate loading={null} persistor={persistor}>
           <Router history={appHistory}>
             <App />
-{/*
-            <Route
-              render={({ location, history }) => (
-
-                  <Routes location={location} history={history} />
-                </App>
-              )}
-            /> */}
           </Router>
         </PersistGate>
       </Provider>

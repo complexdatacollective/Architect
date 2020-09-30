@@ -3,51 +3,35 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 
-// transforms aren't compatible with layout animation TODO link to docs
-const variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 1, when: 'beforeChildren' } },
-  exit: { opacity: 0 },
-};
-
 const springy = {
-  animate: {
+  show: {
     opacity: 1,
-    scale: 1,
+    y: 0,
     transition: {
       type: 'spring',
+      when: 'beforeChildren',
     },
   },
-  initial: {
+  hide: {
     opacity: 0,
-    scale: 0.5,
-    transition: {
-      type: 'spring',
-    },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.5,
-    transition: {
-      type: 'spring',
-    },
+    y: '5rem',
   },
 };
 
 const Section = ({
   children,
-  allowOverflow,
   className,
 }) => {
   const classes = cx(
     'home-section',
-    { 'home-section--allow-overflow': allowOverflow },
     className,
   );
 
   return (
     <motion.div
       className={classes}
+      initial="hide"
+      exit="hide"
       variants={springy}
       layout
     >
@@ -58,7 +42,6 @@ const Section = ({
 
 Section.propTypes = {
   children: PropTypes.node,
-  allowOverflow: PropTypes.bool,
   className: PropTypes.string,
 };
 
