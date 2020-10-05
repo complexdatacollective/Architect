@@ -31,12 +31,6 @@ $font-sizes: (
   @return map-get($font-sizes, $name);
 }
 
-@mixin first-margin {
-  :nth-child(1) {
-    margin-top: 0;
-  }
-}
-
 //8.4
 
 .sprite {
@@ -84,7 +78,6 @@ $font-sizes: (
 }
 
 .home-section {
-  @include first-margin;
   position: relative;
   border-radius: var(--border-radius);
   box-shadow: 0 unit(1) unit(1) 0 rgba(0, 0, 0, 0.25); //sass-lint:disable-line no-color-literals
@@ -159,9 +152,8 @@ $font-sizes: (
 }
 
 .home-group {
-  @include first-margin;
   position: relative;
-  padding: 2rem 4rem;
+  padding: unit(4) unit(6);
   background-color: var(--color-platinum--dark);
   background-repeat: no-repeat;
 
@@ -243,16 +235,18 @@ $font-sizes: (
 }
 
 .welcome-header {
+  background-color: var(--color-slate-blue--dark);
+  overflow: visible;
+  border-radius: none;
+
   &__header {
-    height: 12rem;
     padding: 0;
+    margin: unit(2) unit(6);
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--color-white);
-    transition-property: border-radius;
-    transition-duration: var(--animation-duration-standard);
-    background-color: var(--color-slate-blue--dark);
+    border-radius: var(--border-radius);
 
     .project-tag {
       h5 {
@@ -264,17 +258,26 @@ $font-sizes: (
       }
     }
 
+    .logo {
+      height: 8rem;
+      filter: drop-shadow(0 0.6rem 0.6rem rgba(0, 0, 0, 0.35));
+    }
+
     .version {
       position: absolute;
-      top: unit(4);
-      right: unit(8);
+      top: 0;
+      right: 0;
       z-index: 2;
+
+      h4 {
+        font-size: .8rem;
+      }
     }
 
     &-toggle {
       position: absolute;
-      bottom: unit(2);
-      right: unit(4);
+      bottom: 0;
+      right: 0;
       z-index: 2;
     }
   }
@@ -285,6 +288,7 @@ $font-sizes: (
     justify-content: center;
     z-index: 2;
     top: 0;
+    margin-right: unit(2);
 
     h1 {
       font-size: type-scale(5);
@@ -300,6 +304,7 @@ $font-sizes: (
   }
 
   &__panel {
+    overflow: hidden;
   }
 
 }
@@ -308,24 +313,39 @@ $font-sizes: (
   display: flex;
   flex-direction: row;
   color: var(--color-white);
-  padding-top: 5.5rem;
-
-  &__video {
-    flex: 1;
-    align-self: center;
-
-    .aspect-ratio {
-      border-radius: 1rem;
-      overflow: hidden;
-    }
-  }
+  padding-top: 0;
+  background-image: url(../images/home/undraw_prototyping_process.svg);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
 
   &__content {
     flex: 2;
-    padding-left: unit(8);
+    padding-right: 50%;
 
     h2 {
       font-size: type-scale(1);
+    }
+
+    .welcome-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: unit(2);
+
+      > .button {
+        flex: 1;
+        max-width: 50%;
+
+        &:first-child {
+          margin-right: unit(1);
+        }
+
+        .button__content {
+          padding: 0;
+          font-size: .75rem;
+        }
+      }
     }
   }
 }

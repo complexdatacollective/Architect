@@ -19,7 +19,7 @@ const Group = ({
   ...rest
 }) => {
   const styles = {
-    backgroundColor: `var(--color-${color})`,
+    backgroundColor: color ? `var(--color-${color})` : 'transparent',
   };
 
   const classes = cx(
@@ -65,7 +65,7 @@ Group.propTypes = {
 Group.defaultProps = {
   children: null,
   className: null,
-  color: 'platinum--dark',
+  color: null,
   icon: null,
   tada: false,
   center: false,
