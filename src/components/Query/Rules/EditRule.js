@@ -38,8 +38,8 @@ class EditRule extends Component {
               />
             }
             <div className="rules-edit-rule__controls">
-              <Button type="button" onClick={this.props.onSave} color="neon-coral">Save</Button>
               <Button type="button" onClick={this.props.onCancel} color="platinum">Cancel</Button>
+              <Button type="button" onClick={this.props.onSave} color="primary">Save Rule and Close</Button>
             </div>
           </div>
         </div>

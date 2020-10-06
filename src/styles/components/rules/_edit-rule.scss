@@ -34,7 +34,9 @@
     justify-content: flex-end;
 
     button {
-      margin-right: unit(2);
+      &:last-child {
+        margin-left: unit(2);
+      }
     }
   }
 }

@@ -36,7 +36,7 @@ const NodeType = ({
     <div className={nodeTypeClasses}>
       <div id={getFieldId('subject')} data-name="Node type" />
       <h2>Node Type</h2>
-      <p>Which node type is used on this stage?</p>
+      <p>Select the type of node you wish to use with this stage.</p>
       <div
         className="stage-editor-section-node-type__edit"
         onClick={handleResetStage}

@@ -6,9 +6,11 @@ import {
 } from '@components/sections';
 
 const Sociogram = {
-  sections: [
+  headerSections: [
     Name,
     FilteredNodeType,
+  ],
+  sections: [
     Background,
     SociogramPrompts,
   ],

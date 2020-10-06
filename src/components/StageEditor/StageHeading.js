@@ -6,13 +6,13 @@ import { noop } from 'lodash';
 import { getStageIndex } from '@selectors/protocol';
 import { getFieldId } from '@app/utils/issues';
 import scrollTo from '@app/utils/scrollTo';
-import { Heading } from '@app/components/EditorLayout';
 
 const StageHeading = ({
   stageNumber,
   name,
   type,
   toggleCodeView,
+  children,
 }) => {
   const handleEditName = () => {
     const nameFieldId = `#${getFieldId('label')}`;
@@ -24,17 +24,25 @@ const StageHeading = ({
   const meta = (<div onClick={toggleCodeView}>{type}</div>);
 
   return (
-    <Heading
-      location={location}
-      meta={meta}
-    >
-      <div
-        className="stage-heading__name-edit"
-        onClick={handleEditName}
-      >
-        {name}
+    <div className="stage-editor-section stage-heading">
+      <div className="stage-heading">
+        <div className="stage-heading__location">
+          {location}
+        </div>
+        <div className="stage-heading__name">
+          <div
+            className="stage-heading__name-edit"
+            onClick={handleEditName}
+          >
+            {name}
+          </div>
+        </div>
+        <div className="stage-heading__meta">
+          {meta}
+        </div>
       </div>
-    </Heading>
+      {children}
+    </div>
   );
 };
 
@@ -43,6 +51,7 @@ StageHeading.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   toggleCodeView: PropTypes.func,
+  children: PropTypes.any,
 };
 
 StageHeading.defaultProps = {
@@ -50,6 +59,7 @@ StageHeading.defaultProps = {
   name: '',
   type: '',
   toggleCodeView: noop,
+  children: null,
 };
 
 const mapStateToProps = (state, { id }) => {

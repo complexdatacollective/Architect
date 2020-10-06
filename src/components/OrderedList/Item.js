@@ -5,7 +5,7 @@ import Handle from './Handle';
 import DeleteButton from './DeleteButton';
 
 const Item = ({ children, onDelete, onClick, className, sortable, ...rest }) => (
-  <div className={cx('list-item', className)} {...rest} >
+  <div className={cx('list-item', { 'list-item--clickable': onClick }, className)} {...rest} >
     { sortable &&
       <div className="list-item__control list-item__control--left">
         <Handle />
@@ -32,7 +32,7 @@ Item.defaultProps = {
   className: null,
   children: null,
   sortable: true,
-  onClick: () => {},
+  onClick: null,
 };
 
 export { Item };

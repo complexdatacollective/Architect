@@ -32,7 +32,7 @@ class EdgeTypeFields extends Component {
       <div className={nodeTypeClasses}>
         <div id={getFieldId('subject')} data-name="Node type" />
         <h2>Edge Type</h2>
-        <p>Which edge type is used on this interface?</p>
+        <p>Select the type of edge you want to use with this stage.</p>
         <div
           className="stage-editor-section-node-type__edit"
           onClick={handleResetStage}

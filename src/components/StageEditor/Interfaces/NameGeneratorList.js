@@ -8,9 +8,11 @@ import {
 } from '@components/sections';
 
 const NameGeneratorList = {
-  sections: [
+  headerSections: [
     Name,
     NodeType,
+  ],
+  sections: [
     ExternalDataSource,
     CardDisplayOptions,
     SortOptionsForExternalData,

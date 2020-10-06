@@ -1,7 +1,6 @@
 $component-name: list-item;
 
 .#{$component-name} {
-  @include clickable;
   width: 100%;
   background-color: var(--architect-sortable-background);
   color: var(--architect-sortable-text);
@@ -9,6 +8,10 @@ $component-name: list-item;
   flex-direction: row;
   align-items: stretch;
   border-radius: unit(1.5);
+
+  &--clickable {
+    @include clickable;
+  }
 
   &__control {
     padding: unit(2);

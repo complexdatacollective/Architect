@@ -7,9 +7,11 @@ import {
 } from '@components/sections';
 
 const Narrative = {
-  sections: [
+  headerSections: [
     Name,
     NodeType,
+  ],
+  sections: [
     Background,
     NarrativePresets,
     NarrativeBehaviours,

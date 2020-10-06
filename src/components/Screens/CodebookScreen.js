@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
 import Codebook from '@components/Codebook/Codebook';
 import Screen from '@components/Screen/Screen';
-import Layout, { Section, Heading } from '@components/EditorLayout';
+import Layout, { Section } from '@components/EditorLayout';
 
 /**
  * This component acts as an index for types. i.e. Nodes and Edges,
@@ -37,9 +37,9 @@ class CodebookScreen extends Component {
         onAcknowledgeError={this.handleCancel}
       >
         <Layout>
-          <Heading>
+          <h1>
             Codebook
-          </Heading>
+          </h1>
           <Section>
             <Codebook />
           </Section>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import AssetBrowser from '@components/AssetBrowser';
-import Layout, { Section, Heading } from '@components/EditorLayout';
+import Layout, { Section } from '@components/EditorLayout';
 
 const AssetBrowserScreen = ({
   show,
@@ -28,9 +28,9 @@ const AssetBrowserScreen = ({
       onAcknowledgeError={onComplete}
     >
       <Layout>
-        <Heading>
+        <h1>
           Assets
-        </Heading>
+        </h1>
         <Section>
           <p>
             Welcome to the asset management screen. Here, you can load in images,

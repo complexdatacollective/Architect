@@ -5,9 +5,11 @@ import {
 } from '@components/sections';
 
 const CategoricalBin = {
-  sections: [
+  headerSections: [
     Name,
     FilteredNodeType,
+  ],
+  sections: [
     CategoricalBinPrompts,
   ],
 };

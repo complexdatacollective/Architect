@@ -12,7 +12,7 @@ const SkipLogicFields = () => (
     <Row>
       <h2>Show/Hide</h2>
       <ValidatedField
-        className="form-fields-select--light-background"
+        className="form-fields-select"
         component={Select}
         name="skipLogic.action"
         options={[

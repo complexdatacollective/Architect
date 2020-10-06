@@ -20,7 +20,7 @@ const ContextPanel = ({
     return {
       panel: {
         activated: { height: '100%', transition },
-        unactivated: { height: 0, transition },
+        unactivated: { height: '0', transition },
       },
       content: {
         activated: { opacity: 1, transition },

@@ -20,7 +20,7 @@ const NewStage = ({
         <Navigation categories={categories} />
       </div>
       <div className="new-stage__options">
-        <h1>Choose a stage to add to your interview</h1>
+        <h1>Choose an interface to create a stage from</h1>
         <p>
           Below you can find the available interfaces currently bundled in network canvas,
           grouped by type.

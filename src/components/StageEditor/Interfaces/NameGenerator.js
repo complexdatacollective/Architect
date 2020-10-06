@@ -7,9 +7,11 @@ import {
 } from '@components/sections';
 
 const NameGenerator = {
-  sections: [
+  headerSections: [
     Name,
     NodeType,
+  ],
+  sections: [
     Form,
     NameGeneratorPrompts,
     NodePanels,
