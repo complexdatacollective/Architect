@@ -1,7 +1,7 @@
 import path from 'path';
 import log from 'electron-log';
 import { writeFile } from 'fs-extra';
-import pruneAssets from './utils/pruneAssets';
+import pruneAssets from '@app/other/protocols/pruneAssets';
 
 /**
  * Save a protocol object to disk, and prune any unused assets from

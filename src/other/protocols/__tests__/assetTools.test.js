@@ -1,23 +1,28 @@
 /* eslint-env jest */
 
-import { readFile } from 'fs-extra';
-import { validateAsset } from '../importAsset';
+import { readFile, readJson } from 'fs-extra';
+import { getNetworkVariables, validateAsset } from '../assetTools';
 
 jest.mock('fs-extra');
 
+const mockNodes = [
+  { attributes: { name: 'foo' } },
+  { attributes: { another: 'bar' } },
+];
+
 const validJsonFileWithNodes = {
-  text: () => Promise.resolve('{ "nodes": [ { "name": "foo" } ] }'),
+  text: () => Promise.resolve(JSON.stringify({ nodes: mockNodes })),
   name: 'valid_foo_nodes.json',
 };
 
 const validJsonFileWithEdges = {
-  text: () => Promise.resolve('{ "edges": [ { "type": "friend" } ] }'),
+  text: () => Promise.resolve('{ "edges": [ { "attributes": { "type": "friend" } } ] }'),
   name: 'valid_foo_edges.json',
 };
 
-const emptyJsonFile = {
-  text: () => Promise.resolve('{ "foo": "bar" }'),
-  name: 'empty_foo.json',
+const validCsvFile = {
+  text: () => Promise.resolve('name, age, isFriend\nfoo,40,true'),
+  name: 'valid_foo.csv',
 };
 
 const invalidJsonFile = {
@@ -26,31 +31,34 @@ const invalidJsonFile = {
 };
 
 const invalidVariablesJson = {
-  text: () => Promise.resolve('{ "nodes": [ { "foo bar": "foo", "bazz!": "buzz" } ] }'),
+  text: () => Promise.resolve('{ "nodes": [ { "attributes": { "foo bar": "foo", "bazz!": "buzz" } } ] }'),
   name: 'invalid_variables.json',
 };
 
-const validCsvFile = {
-  text: () => Promise.resolve('foo'),
-  name: 'valid_foo.csv',
+const emptyJsonFile = {
+  text: () => Promise.resolve('{ "foo": "bar" }'),
+  name: 'empty_foo.json',
 };
 
-const invalidCsvVariableFile = { text: () => Promise.resolve('foo bar,bazz!'), name: 'invalid_variables.csv' };
+const emptyCsvFile = { text: () => Promise.resolve('foo'), name: 'empty_foo.csv' };
+
+const invalidCsvVariableFile = { text: () => Promise.resolve('foo bar,bazz!\ntest,test'), name: 'invalid_variables.csv' };
 
 const invalidCsvFile = {
-  text: () => Promise.resolve('foo,bar,bazz\nonlyonecol'),
+  text: () => Promise.resolve('foo,bar,bazz\ncolmismatch,,,'),
   name: 'invalid_foo.csv',
 };
 
 const files = [
-  validJsonFileWithNodes,
-  validJsonFileWithEdges,
+  emptyCsvFile,
   emptyJsonFile,
+  invalidCsvFile,
+  invalidCsvVariableFile,
   invalidJsonFile,
   invalidVariablesJson,
   validCsvFile,
-  invalidCsvFile,
-  invalidCsvVariableFile,
+  validJsonFileWithEdges,
+  validJsonFileWithNodes,
 ];
 
 const getFile = path =>
@@ -61,7 +69,25 @@ readFile.mockImplementation(
     getFile(filePath).text(),
 );
 
-describe('importAsset', () => {
+readJson.mockImplementation(
+  filePath =>
+    getFile(filePath).text().then(data => JSON.parse(data)),
+);
+
+
+describe('assetTools', () => {
+  describe('getNetworkVariables', () => {
+    it('collects json node types ', () =>
+      expect(getNetworkVariables(validJsonFileWithNodes.name))
+        .resolves.toEqual(['name', 'another']),
+    );
+
+    it('collects csv types', () =>
+      expect(getNetworkVariables(validCsvFile.name))
+        .resolves.toEqual(['name', 'age', 'isFriend']),
+    );
+  });
+
   describe('validateAsset', () => {
     it('passes for valid json ', () => {
       expect.assertions(2);
@@ -94,10 +120,12 @@ describe('importAsset', () => {
     });
 
     it('rejects for invalid csv', () => {
-      expect.assertions(2);
+      expect.assertions(3);
 
       return Promise.all([
         expect(validateAsset(invalidCsvFile.name))
+          .rejects.toThrow(/column_mismatched/),
+        expect(validateAsset(emptyCsvFile.name))
           .rejects.toThrow(Error),
         expect(validateAsset(invalidCsvVariableFile.name))
           .rejects.toThrow(Error('Variable name not allowed ("foo bar", "bazz!"). Only letters, numbers and the symbols ._-: are supported.')),

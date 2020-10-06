@@ -35,7 +35,8 @@
           ["@app", "./src"],
           ["@components", "./src/components"],
           ["@modules", "./src/ducks/modules"],
-          ["@selectors", "./src/selectors"]
+          ["@selectors", "./src/selectors"],
+          ["@hooks", "./src/hooks"]
         ]
       }
     }

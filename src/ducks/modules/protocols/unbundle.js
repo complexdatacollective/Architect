@@ -1,4 +1,5 @@
 import path from 'path';
+import log from 'electron-log';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import getMigrationNotes from '@app/protocol-validation/migrations/getMigrationNotes';
@@ -74,7 +75,9 @@ const migrateProtocolThunk = ({ protocol, filePath, workingPath }) =>
         return getNewFileName(filePath)
           .then(({ canceled, filePath: newFilePath }) => {
             if (canceled) { return null; }
-            const updatedProtocol = migrateProtocol(protocol, APP_SCHEMA_VERSION);
+            const [updatedProtocol, migrationSteps] = migrateProtocol(protocol, APP_SCHEMA_VERSION);
+
+            log.info(`Protocol ${filePath} migrated from ${protocol.schemaVersion} to ${APP_SCHEMA_VERSION}`, { migrationSteps });
 
             return saveProtocol(workingPath, updatedProtocol)
               .then(() => bundleProtocol(workingPath, newFilePath))

@@ -1,195 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProtocolControlBar /> can render 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ProtocolControlBar
-    isDisabled={false}
-    isSaving={false}
-    saveProtocol={[Function]}
-    show={true}
-    showControlBar={true}
-  />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "checkPropTypes": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "buttons": Array [
-        <Button
-          color="white"
-          content=""
-          data-variant="save"
-          disabled={false}
-          icon={
-            <Icon
-              className=""
-              color=""
-              name="arrow-right"
-              style={Object {}}
-            />
-          }
-          iconPosition="right"
-          onClick={[Function]}
-          size=""
-          type="button"
+<ControlBar
+  buttons={
+    Array [
+      <Button
+        color="white"
+        content=""
+        data-variant="save"
+        disabled={false}
+        icon={
+          <Icon
+            className=""
+            color=""
+            name="arrow-right"
+            style={Object {}}
+          />
+        }
+        iconPosition="right"
+        onClick={[Function]}
+        size=""
+        type="button"
+      >
+        <ForwardRef(MotionComponent)
+          animate="ready"
+          initial="ready"
         >
           <ForwardRef(MotionComponent)
-            animate="ready"
-            initial="ready"
-          >
-            <ForwardRef(MotionComponent)
-              variants={
-                Object {
-                  "busy": Object {
-                    "opacity": 0,
-                  },
-                  "ready": Object {
-                    "opacity": 1,
-                  },
-                }
+            variants={
+              Object {
+                "busy": Object {
+                  "opacity": 0,
+                },
+                "ready": Object {
+                  "opacity": 1,
+                },
               }
-            >
-              Save
-            </ForwardRef(MotionComponent)>
-            <ForwardRef(MotionComponent)
-              className="button__busy"
-              variants={
-                Object {
-                  "busy": Object {
-                    "opacity": 1,
-                  },
-                  "ready": Object {
-                    "opacity": 0,
-                  },
-                }
-              }
-            >
-              <Spinner
-                large={false}
-                small={false}
-              />
-            </ForwardRef(MotionComponent)>
-          </ForwardRef(MotionComponent)>
-        </Button>,
-      ],
-      "className": "",
-      "flip": false,
-      "secondaryButtons": null,
-      "show": true,
-    },
-    "ref": null,
-    "rendered": null,
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "buttons": Array [
-          <Button
-            color="white"
-            content=""
-            data-variant="save"
-            disabled={false}
-            icon={
-              <Icon
-                className=""
-                color=""
-                name="arrow-right"
-                style={Object {}}
-              />
             }
-            iconPosition="right"
-            onClick={[Function]}
-            size=""
-            type="button"
           >
-            <ForwardRef(MotionComponent)
-              animate="ready"
-              initial="ready"
-            >
-              <ForwardRef(MotionComponent)
-                variants={
-                  Object {
-                    "busy": Object {
-                      "opacity": 0,
-                    },
-                    "ready": Object {
-                      "opacity": 1,
-                    },
-                  }
-                }
-              >
-                Save
-              </ForwardRef(MotionComponent)>
-              <ForwardRef(MotionComponent)
-                className="button__busy"
-                variants={
-                  Object {
-                    "busy": Object {
-                      "opacity": 1,
-                    },
-                    "ready": Object {
-                      "opacity": 0,
-                    },
-                  }
-                }
-              >
-                <Spinner
-                  large={false}
-                  small={false}
-                />
-              </ForwardRef(MotionComponent)>
-            </ForwardRef(MotionComponent)>
-          </Button>,
-        ],
-        "className": "",
-        "flip": false,
-        "secondaryButtons": null,
-        "show": true,
-      },
-      "ref": null,
-      "rendered": null,
-      "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "legacyContextMode": "parent",
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getChildContext": Object {
-            "calledByRenderer": false,
-          },
-          "getDerivedStateFromError": true,
-          "getDerivedStateFromProps": Object {
-            "hasShouldComponentUpdateBug": false,
-          },
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-    Symbol(enzyme.__providerValues__): undefined,
-  },
-  Symbol(enzyme.__providerValues__): Map {},
-}
+            Save
+          </ForwardRef(MotionComponent)>
+          <ForwardRef(MotionComponent)
+            className="button__busy"
+            variants={
+              Object {
+                "busy": Object {
+                  "opacity": 1,
+                },
+                "ready": Object {
+                  "opacity": 0,
+                },
+              }
+            }
+          >
+            <Spinner
+              large={false}
+              small={false}
+            />
+          </ForwardRef(MotionComponent)>
+        </ForwardRef(MotionComponent)>
+      </Button>,
+    ]
+  }
+  className=""
+  flip={false}
+  secondaryButtons={null}
+  show={true}
+/>
 `;

@@ -86,7 +86,7 @@ const Variables = ({ variables, onDelete, sortBy, sortDirection, sort }) => {
               <td className="codebook__variables-column codebook__variables-column--usage">
                 <UsageColumn inUse={inUse} usage={usage} />
               </td>
-              <td className="codebook__variables-column codebook__variables-column--usage">
+              <td className="codebook__variables-column codebook__variables-column--controls">
                 <ControlsColumn onDelete={onDelete} inUse={inUse} id={id} />
               </td>
             </tr>
@@ -180,7 +180,7 @@ const withSort = compose(
   ),
 );
 
-export { Variables };
+export { Variables, withSort, Heading, rowClassName, SortDirection };
 
 export default compose(
   withVariableHandlers,

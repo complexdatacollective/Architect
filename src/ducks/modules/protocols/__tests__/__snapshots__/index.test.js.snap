@@ -39,6 +39,9 @@ Array [
           "1234-asset-5": Object {
             "source": "1234-4567-asset-5",
           },
+          "1234-asset-6": Object {
+            "source": "1234-4567-asset-6.json",
+          },
         },
         "codebook": Object {
           "edge": Object {
@@ -167,6 +170,9 @@ Array [
           },
           "1234-asset-5": Object {
             "source": "1234-4567-asset-5",
+          },
+          "1234-asset-6": Object {
+            "source": "1234-4567-asset-6.json",
           },
         },
         "codebook": Object {
@@ -326,6 +332,9 @@ Array [
           },
           "1234-asset-5": Object {
             "source": "1234-4567-asset-5",
+          },
+          "1234-asset-6": Object {
+            "source": "1234-4567-asset-6.json",
           },
         },
         "codebook": Object {
@@ -594,6 +603,9 @@ Array [
           },
           "1234-asset-5": Object {
             "source": "1234-4567-asset-5",
+          },
+          "1234-asset-6": Object {
+            "source": "1234-4567-asset-6.json",
           },
         },
         "codebook": Object {
