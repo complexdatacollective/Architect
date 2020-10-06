@@ -85,8 +85,8 @@ class Overview extends Component {
           <div className="overview__groups">
             <div className="overview__group overview__group--title">
               <h1 className="overview__name">{name}</h1>
-              <Fields.Text
-                className="timeline-overview__name"
+              <Fields.TextArea
+                className="overview__description"
                 placeholder="Enter a description for your protocol here"
                 label="Protocol description"
                 input={{
@@ -98,10 +98,10 @@ class Overview extends Component {
                 }}
               />
             </div>
-            <div style={{ padding: '1rem 0 0', width: '100%', textAlign: 'right' }}>
-              <Link screen="assets"><Button size="small">Manage assets</Button></Link>
+            <div className="overview__group--buttons">
+              <Link screen="assets"><Button>Manage assets</Button></Link>
               <div style={{ padding: '0 0 0 1rem', display: 'inline-block' }}>
-                <Link screen="codebook"><Button size="small" color="neon-coral">Manage codebook</Button></Link>
+                <Link screen="codebook"><Button color="neon-coral">Manage codebook</Button></Link>
               </div>
             </div>
           </div>

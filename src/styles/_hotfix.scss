@@ -1,7 +1,6 @@
 :root {
   --text: var(--color-charcoal);
   --input-label: var(--color-charcoal);
-  --input-background: var(--color-platinum);
   --input-placeholder: #{transparentize(rgb(0, 0, 0), .65)};
 }
 

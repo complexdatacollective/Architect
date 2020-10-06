@@ -19,7 +19,6 @@ $assets-per-row: 5;
 
 .dialog {
   .asset-browser-assets__assets {
-    @include no-scrollbars;
     max-height: 50vh;
     overflow-x: hidden;
     overflow-y: auto;

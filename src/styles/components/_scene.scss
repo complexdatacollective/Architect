@@ -1,11 +1,11 @@
 .scene {
-  @include no-scrollbars;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 
   &__brand {
     position: absolute;
@@ -94,12 +94,8 @@
   }
 
   &__protocol {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    visibility: hidden;
-    z-index: 2;
+    flex: 1 1 auto;
+    overflow-y: scroll;
   }
 
   &__timeline {

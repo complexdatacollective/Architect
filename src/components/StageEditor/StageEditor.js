@@ -64,7 +64,7 @@ const StageEditor = ({
               toggleCodeView={toggleShowCodeView}
             />
             <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
-            <div className="stage-editor-section stage-editor-section--no-border">
+            <div className="stage-editor-section">
               <SkipLogic />
             </div>
             {renderSections({ submitFailed, windowRoot })}

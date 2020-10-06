@@ -11,7 +11,7 @@
   // UI overwrites
   --background: var(--color-platinum);
   --text: var(--color-charcoal);
-  --input-background: var(--color-platinum);
+  --input-background: var(--color-white);
   --input-label: var(--color-charcoal);
   --text-light: var(--color-white); // actually this one is new
   --text-dark: var(--color-charcoal);
@@ -54,10 +54,10 @@
   --architect-dialog-background--dark: var(--color-platinum--dark);
 
   // sortable, rename?
-  --architect-sortable-text: var(--color-charcoal);
-  --architect-sortable-background: var(--color-platinum);
-  --architect-sortable-preview-background: var(--color-platinum);
-  --architect-sortable-preview-background--alt: var(--color-platinum--dark);
+  --architect-sortable-text: var(--color-white);
+  --architect-sortable-background: var(--color-slate-blue);
+  --architect-sortable-preview-background: var(--color-slate-blue);
+  --architect-sortable-preview-background--alt: var(--color-slate-blue--dark);
 
   // Modal
   --architect-modal-shadow: var(--modal-overlay);

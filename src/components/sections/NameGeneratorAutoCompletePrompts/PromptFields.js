@@ -12,52 +12,56 @@ const PromptFields = ({
   entity,
   type,
 }) => (
-  <Section>
-    <Row>
-      <h3 id={getFieldId('text')}>Prompt Text</h3>
-      <p>
-        The prompt text instructs your participant about the task on this stage.
-        Enter the text to use for your prompt below.
-      </p>
-      <Tip>
+  <React.Fragment>
+    <Section>
+      <Row>
+        <h3 id={getFieldId('text')}>Prompt Text</h3>
         <p>
-          You can use markdown formatting in this prompt to create bold or underlined text.
+          The prompt text instructs your participant about the task on this stage.
+          Enter the text to use for your prompt below.
         </p>
-      </Tip>
-      <ValidatedField
-        name="text"
-        component={Fields.Text}
-        label=""
-        placeholder="Enter text for the prompt here..."
-        validation={{ required: true, maxLength: 220 }}
-      />
-    </Row>
-    <Row>
-      <h3>Assign Additional Variables? <small>(optional)</small></h3>
-      <p>
-        You might also wish to assign additional variables to any nodes that are created by a
-        participant on this prompt. You can use this feature to keep track of meta-data,
-        such as where a node was elicited, or to reflect a name interpreter element of
-        your prompt (for example by adding a variable called &quot;close_tie&quot; to a
-        prompt that asks about closeness).
-      </p>
-      <Tip>
+        <Tip>
+          <p>
+            You can use markdown formatting in this prompt to create bold or underlined text.
+          </p>
+        </Tip>
+        <ValidatedField
+          name="text"
+          component={Fields.Text}
+          label=""
+          placeholder="Enter text for the prompt here..."
+          validation={{ required: true, maxLength: 220 }}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <h3>Assign Additional Variables? <small>(optional)</small></h3>
         <p>
-          Select an existing variable, or select &quot;create new variable&quot;
-          from the bottom of the list, and then assign a value. You can set different values
-          for this variable for nodes created on different prompts.
+          You might also wish to assign additional variables to any nodes that are created by a
+          participant on this prompt. You can use this feature to keep track of meta-data,
+          such as where a node was elicited, or to reflect a name interpreter element of
+          your prompt (for example by adding a variable called &quot;close_tie&quot; to a
+          prompt that asks about closeness).
         </p>
-      </Tip>
+        <Tip>
+          <p>
+            Select an existing variable, or select &quot;create new variable&quot;
+            from the bottom of the list, and then assign a value. You can set different values
+            for this variable for nodes created on different prompts.
+          </p>
+        </Tip>
 
-      <AssignAttributes
-        name="additionalAttributes"
-        id="additionalAttributes"
-        form={form}
-        type={type}
-        entity={entity}
-      />
-    </Row>
-  </Section>
+        <AssignAttributes
+          name="additionalAttributes"
+          id="additionalAttributes"
+          form={form}
+          type={type}
+          entity={entity}
+        />
+      </Row>
+    </Section>
+  </React.Fragment>
 );
 
 PromptFields.propTypes = {

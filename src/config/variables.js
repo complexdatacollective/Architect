@@ -102,7 +102,7 @@ export const VARIABLE_TYPES_COMPONENTS = [
   ['number', [COMPONENTS.NumberInput], 'var(--color-paradise-pink)'],
   ['scalar', [COMPONENTS.VisualAnalogScale], 'var(--color-cerulean-blue)'],
   ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker]],
-  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue)'],
+  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue--dark)'],
   ['boolean', [COMPONENTS.Toggle], 'var(--color-neon-carrot)'],
   ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], 'var(--color-sea-green--dark)'],
   ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], 'var(--color-sea-green--dark)'],

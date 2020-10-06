@@ -5,7 +5,6 @@
   z-index: var(--z-default);
 
   &__container {
-    @include no-scrollbars;
     position: absolute;
     overflow-x: hidden;
     overflow-y: scroll;

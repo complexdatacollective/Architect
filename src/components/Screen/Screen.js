@@ -31,7 +31,6 @@ const Screen = ({
       </div>
       <ControlBar
         className="screen__controls"
-        flip
         buttons={buttons}
         secondaryButtons={secondaryButtons}
       />

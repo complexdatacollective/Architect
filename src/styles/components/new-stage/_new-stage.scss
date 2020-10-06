@@ -1,7 +1,6 @@
 $new-stage-categories: [name-generators name-interpreters sociograms utilities];
 
 .new-stage {
-  @include no-scrollbars;
   --color-name-generators: var(--ord-color-seq-2);
   --color-sociograms: var(--ord-color-seq-3);
   --color-name-interpreters: var(--ord-color-seq-4);

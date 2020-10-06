@@ -40,7 +40,7 @@ const LaunchPad = ({
             position="absolute"
             bottom={0}
             right="5.7rem"
-            opacity="0.33"
+            opacity="0.07"
             backgroundPosition="top right"
             backgroundSize="100% auto"
           />
@@ -50,7 +50,7 @@ const LaunchPad = ({
               description={resumeProtocol.description}
               lastModified={resumeProtocol.lastModified}
               name={resumeProtocol.name}
-              onClick={() => handleLoadProtocol(resumeProtocol.filePath)}
+              onClickHandler={() => handleLoadProtocol(resumeProtocol.filePath)}
               schemaVersion={resumeProtocol.schemaVersion}
             />
           </div>

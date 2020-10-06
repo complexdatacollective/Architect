@@ -1,9 +1,11 @@
 .overview {
   margin: unit(8) auto 0;
-  width: 75vw;
+  width: 80rem;
 
   .form-field-container {
-    --input-background: var(--background);
+    --input-background: var(--color-slate-blue);
+    --input-text: var(--color-white);
+    margin-bottom: 0;
   }
 
   .icon {
@@ -16,14 +18,20 @@
     text-align: center;
   }
 
+  &__description {
+
+    textarea {
+      min-height: 8rem;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+
   &__panel {
-    background-color: var(--architect-panel-background);
-    color: var(--architect-panel-text);
-    margin: 0 auto;
-    width: 75vw;
-    padding: 20px 30px;
+    background-color: var(--color-slate-blue--dark);
+    color: var(--color-white);
     border-radius: 10px;
-    box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
+    box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
   }
 
   &__asset-group {
@@ -47,57 +55,25 @@
 
   &__groups {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
+    padding: unit(2) unit(4);
   }
 
   &__group {
     --base-node-size: 90px;
-    border: 1px solid var(--architect-panel-divider);
-    padding: unit(4) unit(4) unit(6);
-    margin: unit(1);
-    border-radius:  unit(1);
     text-align: left;
     position: relative;
-    flex: 0 0 calc(50% - #{unit(2)});
-
-    &--forms {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-
-      & > a {
-        flex: 0 0 50%;
-        padding: 0 .5rem;
-      }
-    }
-
-    &--variable-registry {
-      .overview__group-section {
-        margin-bottom: unit(4);
-      }
-    }
 
     &--title {
       flex: 100%;
-      padding: unit(2) unit(4);
     }
 
-    .node {
-      margin-bottom: 1rem;
-    }
-
-    .stage-editor-section-form__card {
-      flex: 0 0 auto;
-      height: 130px;
-      margin: 0 .6rem 1.6rem 0;
-      background-color: var(--background);
-      border-color: var(--background);
-      color: var(--text);
-
-      &:hover {
-        border-color: var(--color-mustard);
-      }
+    &--buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: unit(2);
+      flex: 1;
     }
   }
 

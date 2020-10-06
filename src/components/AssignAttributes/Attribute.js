@@ -37,6 +37,7 @@ const Attribute = ({
       <div className="assign-attributes-attribute__variable">
         <ValidatedField
           name={`${field}.variable`}
+          label="Variable:"
           component={Select}
           options={variableOptions}
           onCreateNew={handleCreateNew}
@@ -49,6 +50,7 @@ const Attribute = ({
         { variableType &&
           <ValidatedField
             name={`${field}.value`}
+            label="Value:"
             component={ValueComponent}
             options={options}
             validation={getValidationForType(variableType)}

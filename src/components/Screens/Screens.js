@@ -63,7 +63,7 @@ const Screens = (props) => {
     const style = {
       position: 'absolute',
       transformOrigin: 'top left',
-      zIndex: 100 + index,
+      zIndex: getCSSVariableAsNumber('--z-panel') + index,
       width: '100vw',
       height: '100vh',
       top: 0,

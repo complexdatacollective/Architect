@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shell } from 'electron';
 
-export const openExternalLink = (event, href) => {
-  event.preventDefault();
+export const openExternalLink = (href) => {
   shell.openExternal(href);
 };
 
 const ExternalLink = ({ children, href }) => {
   const handleClick = (event) => {
-    openExternalLink(event, href);
+    event.preventDefault();
+    openExternalLink(href);
   };
 
   return (

@@ -17,7 +17,7 @@ export default function reducer(state = initialState, action = {}) {
         [
           {
             filePath: action.meta.filePath,
-            lastOpened: new Date().getTime(),
+            lastModified: new Date().getTime(),
             name: path.basename(action.meta.filePath, '.netcanvas'),
             description: action.protocol.description,
             schemaVersion: action.protocol.schemaVersion,
