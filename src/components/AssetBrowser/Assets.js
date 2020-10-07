@@ -48,7 +48,7 @@ const Assets = ({
       }
 
       <div className="asset-browser-assets__assets">
-        {renderedAssets}
+        {assets.length > 0 ? renderedAssets : (<em>No assets to display.</em>)}
       </div>
     </div>
   );

@@ -1,14 +1,8 @@
 .context-panel {
-  --input-text: var(--architect-context-text);
-  background: var(--architect-context-panel);
-  color: var(--architect-context-text);
-  border-radius: var(--border-radius);
   overflow: hidden;
-  margin: unit(4) 0 0;
+  margin-bottom: unit(2);
 
   &__controls {
-    background: var(--architect-context-controls);
-    padding: unit(2) unit(3);
     display: flex;
     align-items: center;
 
@@ -20,7 +14,7 @@
       background: none;
 
       .form-field-toggle__button {
-        background: var(--color-charcoal);
+        // background: var(--color-charcoal);
 
         &::before {
           background: var(--color-white);

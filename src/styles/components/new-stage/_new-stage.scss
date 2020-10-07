@@ -17,11 +17,12 @@ $new-stage-categories: [name-generators name-interpreters sociograms utilities];
   }
 
   &__options {
-    padding: unit(5);
+    max-width: 80rem;
+    margin: 0 auto;
   }
 
   &__category {
-    margin-top: unit(5);
+    margin: unit(2) 0;
 
     &:first-child {
       margin: 0;

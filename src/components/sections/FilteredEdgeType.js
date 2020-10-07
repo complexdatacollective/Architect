@@ -4,7 +4,7 @@ import NetworkFilter from '@components/sections/fields/NetworkFilter';
 import EdgeTypeFields from '@components/sections/fields/EdgeTypeFields';
 
 const FilteredEdgeType = props => (
-  <Section className="stage-heading">
+  <Section>
     <Row>
       <EdgeTypeFields {...props} />
     </Row>

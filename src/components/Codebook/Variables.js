@@ -73,7 +73,7 @@ const Variables = ({ variables, onDelete, sortBy, sortDirection, sort }) => {
             <Heading name="name" {...headingProps}>Name</Heading>
             <Heading name="type" {...headingProps}>Type</Heading>
             <Heading name="component" {...headingProps}>Input control</Heading>
-            <Heading name="usageString" {...headingProps}>Usage</Heading>
+            <Heading name="usageString" {...headingProps}>Used In</Heading>
             <th />
           </tr>
         </thead>

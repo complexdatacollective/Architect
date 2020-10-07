@@ -1,7 +1,6 @@
 $component-name: 'form-fields-multi-select';
 
 .#{$component-name} {
-  --form-control: var(--color-platinum--dark);
   display: block;
 
   &__label {
@@ -23,6 +22,7 @@ $component-name: 'form-fields-multi-select';
     margin: unit(1) 0 0;
     display: flex;
     background-color: var(--form-control);
+    color: var(--architect-sortable-text);
     border-radius: unit(1);
     z-index: var(--z-fx);
     transition: background-color var(--animation-easing) var(--animation-duration-standard);

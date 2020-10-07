@@ -108,12 +108,12 @@ const PromptFields = ({
           Network Canvas will render each option in your ordinal variable using a
           color gradient. Which color would you like to use for this scale?
         </p>
-        <Tip>
+        {/* <Tip>
           <p>
             Consider using a color consistently throughout your interview protocol
             to represent each theme, to help reenforce the idea to your participants.
           </p>
-        </Tip>
+        </Tip> */}
         <ValidatedField
           component={ColorPicker}
           name="color"

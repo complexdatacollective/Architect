@@ -27,7 +27,7 @@ const AssetBrowser = ({
           />
         </div>
         <div className="asset-browser__assets">
-          <h3>Choose asset from library</h3>
+          <h3>Asset library</h3>
           <Assets
             onSelect={onSelect}
             onDelete={onDelete}

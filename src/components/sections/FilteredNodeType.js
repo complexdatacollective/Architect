@@ -4,7 +4,7 @@ import NetworkFilter from '@components/sections/fields/NetworkFilter';
 import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
 
 const FilteredNodeType = props => (
-  <Section className="stage-heading">
+  <Section>
     <Row>
       <NodeTypeFields {...props} />
     </Row>

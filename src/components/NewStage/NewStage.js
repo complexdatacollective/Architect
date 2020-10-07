@@ -16,16 +16,15 @@ const NewStage = ({
 }) => (
   <Guided defaultGuidance="guidance.new_stage">
     <div className="new-stage" ref={setWindowRoot}>
-      <div className="new-stage__navigation">
-        <Navigation categories={categories} />
-      </div>
       <div className="new-stage__options">
         <h1>Choose an interface to create a stage from</h1>
         <p>
           Below you can find the available interfaces currently bundled in network canvas,
           grouped by type.
         </p>
-
+        <div className="new-stage__navigation">
+          <Navigation categories={categories} />
+        </div>
         {interfaceOptions.map((props, index) => (
           <div className="new-stage__category" key={index}>
             <InterfaceCategory {...props} onSelect={handleCreateNew} />

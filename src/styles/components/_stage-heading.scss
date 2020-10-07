@@ -1,42 +1,61 @@
 .stage-heading {
-  // background: var(--light-background);
-  // color: var(--text-light);
+  background: var(--color-platinum--dark);
   display: flex;
-  flex-direction: column;
+  padding: 0;
+  box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
 
-  &__location,
-  &__name,
-  &__meta {
-    padding: 0 unit(4);
-    font-size: unit(2.5);
-    line-height: unit(2.5);
-  }
+  .stage-meta {
+    flex: 0 0 28rem;
+    padding: unit(4);
+    display: flex;
+    flex-direction: column;
+    background: var(--color-slate-blue--dark);
+    color: var(--color-white);
 
-  &__location {
-    text-align: left;
-    color: var(--text-light-muted);
-  }
+    .timeline-preview {
+      margin: unit(4) 0;
+      position: relative;
 
-  &__name {
-    flex-grow: 1;
-    text-align: center;
+      .timeline-stage__notch {
+        left: 19rem;
+      }
 
-    &-edit {
-      display: inline-block;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: var(--animation-easing) border-color var(--animation-duration-standard);
-    }
-
-    &:hover {
-      .stage-heading__name-edit {
-        border-color: var(--text-light);
+      &::before {
+        -webkit-mask-image: linear-gradient(180deg, transparent,  rgba(0, 0, 0, 1) 8rem,  rgba(0, 0, 0, 1) calc(100% - 8rem), transparent 100%);
+        content: '';
+        border-left: .5rem solid var(--architect-timeline-line);
+        position: absolute;
+        left: 18.8rem;
+        height: 16rem;
+        top: -2.4rem;
       }
     }
+
+
+    img {
+      display: block;
+      background: var(--color-navy-taupe);
+      padding: .5rem;
+      width: 16vw;
+      text-align: center;
+      border-radius: .5rem;
+      box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
+    }
   }
 
-  &__meta {
-    text-align: right;
-    color: var(--text-light-muted);
+  .stage-header-sections {
+    --input-text: var(--color-white);
+    display: flex;
+    flex: 1 auto;
+    flex-direction: column;
+    padding: unit(4);
+    background: var(--color-slate-blue);
+    color: var(--color-white);
+
+    .stage-editor-section {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
   }
 }

@@ -12,7 +12,7 @@ const NewAsset = ({
   onCreate,
 }) => (
   <div className="asset-browser-new-asset">
-    <h3>Create new asset</h3>
+    <h3>Import a new asset</h3>
     <AutoFileDrop
       type={type}
       onDrop={onCreate}

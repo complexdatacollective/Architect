@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
-import { Node, Icon, Button } from '@codaco/ui';
+import { Node, Icon, GraphicButton } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getProtocol } from '../selectors/protocol';
@@ -13,9 +13,9 @@ import Link from './Link';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 import { actionCreators as uiActions } from '../ducks/modules/ui';
 
-const variants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
+const panelVariants = {
+  initial: { opacity: 0, y: -100 },
+  animate: { opacity: 1, y: 0, transition: { type: 'spring', staggerChildren: 0.5 } },
 };
 
 class Overview extends Component {
@@ -69,44 +69,64 @@ class Overview extends Component {
       name,
       description,
       updateOptions,
+      openScreen,
       show,
     } = this.props;
 
     if (!show) { return null; }
 
     return (
-      <motion.div
-        className="overview"
-        variants={variants}
-        initial="initial"
-        animate="animate"
-      >
-        <div className="overview__panel">
-          <div className="overview__groups">
-            <div className="overview__group overview__group--title">
-              <h1 className="overview__name">{name}</h1>
-              <Fields.TextArea
-                className="overview__description"
-                placeholder="Enter a description for your protocol here"
-                label="Protocol description"
-                input={{
-                  value: description,
-                  onChange:
-                    ({ target: { value } }) => {
-                      updateOptions({ description: value });
-                    },
-                }}
-              />
-            </div>
-            <div className="overview__group--buttons">
-              <Link screen="assets"><Button>Manage assets</Button></Link>
-              <div style={{ padding: '0 0 0 1rem', display: 'inline-block' }}>
-                <Link screen="codebook"><Button color="neon-coral">Manage codebook</Button></Link>
+      <React.Fragment>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="protocol-name">
+          <h1 className="overview__name">{name}</h1>
+        </motion.div>
+        <motion.div
+          className="overview"
+          variants={panelVariants}
+          initial="initial"
+          animate="animate"
+        >
+          <div className="overview__panel">
+            <div className="overview__groups">
+              <div className="overview__group overview__group--title">
+                <Fields.TextArea
+                  className="overview__description"
+                  placeholder="Enter a description for your protocol here"
+                  label="Protocol description"
+                  input={{
+                    value: description,
+                    onChange:
+                      ({ target: { value } }) => {
+                        updateOptions({ description: value });
+                      },
+                  }}
+                />
+              </div>
+              <div className="overview__group--buttons">
+                <GraphicButton
+                  // graphic={createButtonGraphic}
+                  graphicPosition="20% bottom"
+                  graphicSize="auto 90%"
+                  onClick={() => openScreen('assets')}
+                >
+                  <h3>Manage Protocol</h3>
+                  <h2>Assets</h2>
+                </GraphicButton>
+                <GraphicButton
+                  // graphic={createButtonGraphic}
+                  color="neon-coral"
+                  graphicPosition="20% bottom"
+                  graphicSize="auto 90%"
+                  onClick={() => openScreen('codebook')}
+                >
+                  <h3>Manage</h3>
+                  <h2>Codebook</h2>
+                </GraphicButton>
               </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </React.Fragment>
     );
   }
 }
@@ -116,6 +136,7 @@ Overview.propTypes = {
   description: PropTypes.string,
   codebook: PropTypes.object.isRequired,
   updateOptions: PropTypes.func,
+  openScreen: PropTypes.func.isRequired,
   show: PropTypes.bool,
 };
 

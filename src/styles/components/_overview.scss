@@ -1,5 +1,13 @@
-.overview {
+.protocol-name {
   margin: unit(8) auto 0;
+
+  h1 {
+    margin: unit(4);
+  }
+}
+
+.overview {
+  margin: 0 auto;
   width: 80rem;
 
   .form-field-container {
@@ -21,7 +29,6 @@
   &__description {
 
     textarea {
-      min-height: 8rem;
       padding-bottom: 0;
       margin-bottom: 0;
     }
@@ -30,7 +37,7 @@
   &__panel {
     background-color: var(--color-slate-blue--dark);
     color: var(--color-white);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
   }
 
@@ -55,12 +62,11 @@
 
   &__groups {
     display: flex;
-    flex-direction: column;
-    padding: unit(2) unit(4);
+    padding: unit(4);
   }
 
   &__group {
-    --base-node-size: 90px;
+    padding: unit(2);
     text-align: left;
     position: relative;
 
@@ -70,10 +76,15 @@
 
     &--buttons {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: flex-end;
-      padding-top: unit(2);
-      flex: 1;
+      flex: 0 0 20rem;
+
+      .graphic-button {
+        height: 100%;
+        margin: unit(1);
+      }
     }
   }
 
