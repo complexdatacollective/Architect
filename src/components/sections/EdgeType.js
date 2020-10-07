@@ -3,7 +3,7 @@ import { Section } from '@components/EditorLayout';
 import EdgeTypeFields from '@components/sections/fields/EdgeTypeFields';
 
 const EdgeType = props => (
-  <Section>
+  <Section className="stage-heading">
     <EdgeTypeFields {...props} />
   </Section>
 );

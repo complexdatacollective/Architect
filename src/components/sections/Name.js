@@ -5,7 +5,7 @@ import { ValidatedField } from '../../components/Form';
 import { getFieldId } from '../../utils/issues';
 
 const Name = () => (
-  <Section contentId="guidance.editor.name">
+  <Section contentId="guidance.editor.name" className="stage-heading">
     <div id={getFieldId('label')} data-name="Stage name" />
     <h2>Stage Name</h2>
     <p>

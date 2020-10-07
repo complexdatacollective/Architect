@@ -11,6 +11,7 @@ export { default as Mode } from './Mode';
 export { default as NodeSelect } from './NodeSelect';
 export { default as OrderBy } from './OrderBy';
 export { default as Select } from './Select';
+export { default as NativeSelect } from './NativeSelect';
 export { default as TextArea } from './TextArea';
 export { default as VariableSelect } from './VariableSelect';
 export { default as Video } from './Video';

@@ -1,8 +1,10 @@
 .context-panel {
+  --input-text: var(--architect-context-text);
   background: var(--architect-context-panel);
   color: var(--architect-context-text);
-  border-radius: 1rem 1rem 0 0;
+  border-radius: var(--border-radius);
   overflow: hidden;
+  margin: unit(4) 0 0;
 
   &__controls {
     background: var(--architect-context-controls);
@@ -37,7 +39,7 @@
 
   &--contrast {
     background: var(--architect-context-panel--contrast);
-    color: var(--architect-context-text--contrast);
+    color: var(--color-white);
 
     .context-panel__controls {
       background: var(--architect-context-controls--contrast);

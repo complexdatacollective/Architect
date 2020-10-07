@@ -11,8 +11,8 @@ const alterRuleTypes = {
 };
 
 const alterRuleTypeOptions = [
-  { label: 'Alter type rule', value: TYPE_ALTER },
-  { label: 'Alter variable rule', value: VARIABLE_ALTER },
+  { label: 'Attribute - rule based on the value of this alter type\'s attributes.', value: VARIABLE_ALTER },
+  { label: 'Presence - based on the presence or absence of this alter type in the interview network.', value: TYPE_ALTER },
 ];
 
 const withAlterRuleType = compose(

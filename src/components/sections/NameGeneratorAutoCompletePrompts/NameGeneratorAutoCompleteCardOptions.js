@@ -20,9 +20,9 @@ const NameGeneratorAutoCompletePrompts = props => (
       Add one or more prompts below to frame the task for the user. You can reorder
       the prompts using the draggable handles on the left hand side.
     </p>
-    <Tip>
+    {/* <Tip>
       <p>Tap an existing prompt to edit it.</p>
-    </Tip>
+    </Tip> */}
   </EditableList>
 );
 

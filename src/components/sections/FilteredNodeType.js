@@ -4,11 +4,11 @@ import NetworkFilter from '@components/sections/fields/NetworkFilter';
 import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
 
 const FilteredNodeType = props => (
-  <Section>
+  <Section className="stage-heading">
     <Row>
       <NodeTypeFields {...props} />
     </Row>
-    <NetworkFilter {...props} title="Use node filter" />
+    <NetworkFilter {...props} title="Enable node filtering for this stage" />
   </Section>
 );
 

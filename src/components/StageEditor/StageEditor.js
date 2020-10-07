@@ -69,8 +69,8 @@ const StageEditor = ({
               toggleCodeView={toggleShowCodeView}
             />
             <StageHeading id={id} toggleCodeView={toggleShowCodeView}>
+              { headerSections && renderSections(headerSections, { submitFailed, windowRoot })}
               <SkipLogic />
-              {renderSections(headerSections, { submitFailed, windowRoot })}
             </StageHeading>
             {renderSections(sections, { submitFailed, windowRoot })}
           </Layout>

@@ -3,7 +3,7 @@ import { Section } from '@components/EditorLayout';
 import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
 
 const NodeType = props => (
-  <Section>
+  <Section className="stage-heading">
     <NodeTypeFields {...props} />
   </Section>
 );

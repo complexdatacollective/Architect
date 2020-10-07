@@ -34,5 +34,9 @@
     align-items: center;
     justify-content: flex-start;
     flex: 1;
+
+    >:not(:last-child) {
+      margin-right: unit(2);
+    }
   }
 }

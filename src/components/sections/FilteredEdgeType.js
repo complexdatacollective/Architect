@@ -4,11 +4,11 @@ import NetworkFilter from '@components/sections/fields/NetworkFilter';
 import EdgeTypeFields from '@components/sections/fields/EdgeTypeFields';
 
 const FilteredEdgeType = props => (
-  <Section>
+  <Section className="stage-heading">
     <Row>
       <EdgeTypeFields {...props} />
     </Row>
-    <NetworkFilter {...props} title="Filter edges displayed on this stage" />
+    <NetworkFilter {...props} title="Enable edge filtering for this stage" />
   </Section>
 );
 

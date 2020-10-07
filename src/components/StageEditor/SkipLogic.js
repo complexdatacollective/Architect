@@ -37,7 +37,7 @@ const SkipLogic = ({
 
   return (
     <ContextPanel
-      title="Use skip logic"
+      title="Enable skip logic for this stage"
       isActive={hasSkipLogic}
       onDeactivate={handleDeactivate}
     >

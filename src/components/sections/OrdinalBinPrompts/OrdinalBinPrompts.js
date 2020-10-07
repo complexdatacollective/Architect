@@ -8,7 +8,7 @@ import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 import { itemSelector } from '../CategoricalBinPrompts/helpers';
 import withPromptChangeHandler from '../CategoricalBinPrompts/withPromptChangeHandler';
-import Tip from '../../Tip';
+// import Tip from '../../Tip';
 
 const template = () => ({ color: 'ord-color-seq-1' });
 
@@ -28,9 +28,9 @@ const OrdinalBinPrompts = ({ handleChangePrompt, ...props }) => (
       Add one or more prompts below to frame the task for the user.
       You can reorder the prompts using the draggable handles on the left hand side.
     </p>
-    <Tip>
+    {/* <Tip>
       <p>Tap an existing prompt to edit it.</p>
-    </Tip>
+    </Tip> */}
   </EditableList>
 );
 
