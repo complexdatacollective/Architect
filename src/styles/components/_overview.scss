@@ -62,13 +62,16 @@
 
   &__groups {
     display: flex;
-    padding: unit(4);
+    padding: unit(6);
   }
 
   &__group {
-    padding: unit(2);
     text-align: left;
     position: relative;
+
+    &:first-child {
+      margin-right: unit(4);
+    }
 
     &--title {
       flex: 100%;
@@ -83,7 +86,10 @@
 
       .graphic-button {
         height: 100%;
-        margin: unit(1);
+
+        &:first-child {
+          margin-bottom: unit(2);
+        }
       }
     }
   }

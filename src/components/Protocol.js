@@ -13,7 +13,6 @@ import Timeline from '@components/Timeline';
 import ProtocolControlBar from '@components/ProtocolControlBar';
 
 const Protocol = ({
-  protocolPath,
   isLoading,
   hasProtocol,
 }) => {
@@ -28,7 +27,6 @@ const Protocol = ({
       <div className="scene__protocol">
         <Overview
           show={hasProtocol}
-          flipId={protocolPath && encodeURIComponent(protocolPath)}
         />
 
         <div className="scene__timeline">

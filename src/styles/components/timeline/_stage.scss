@@ -122,6 +122,7 @@ $component-name: timeline-stage;
   }
 
   &:hover {
+
     .#{$component-name}__controls {
       opacity: 1;
       transform: translateX(0);

@@ -8,6 +8,8 @@ import { compose } from 'recompose';
 import { Node, Icon, GraphicButton } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getActiveProtocolMeta } from '@selectors/protocols';
+import codebookGraphic from '@app/images/undraw_science.svg';
+import assetsGraphic from '@app/images/undraw_media.svg';
 import { getProtocol } from '../selectors/protocol';
 import Link from './Link';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
@@ -104,19 +106,22 @@ class Overview extends Component {
               </div>
               <div className="overview__group--buttons">
                 <GraphicButton
-                  // graphic={createButtonGraphic}
-                  graphicPosition="20% bottom"
+                  graphic={assetsGraphic}
+                  color="sea-serpent"
+                  graphicPosition="90% center"
                   graphicSize="auto 90%"
+                  labelPosition={{ left: '3rem' }}
                   onClick={() => openScreen('assets')}
                 >
                   <h3>Manage Protocol</h3>
                   <h2>Assets</h2>
                 </GraphicButton>
                 <GraphicButton
-                  // graphic={createButtonGraphic}
+                  graphic={codebookGraphic}
                   color="neon-coral"
-                  graphicPosition="20% bottom"
+                  graphicPosition="90% center"
                   graphicSize="auto 90%"
+                  labelPosition={{ left: '3rem' }}
                   onClick={() => openScreen('codebook')}
                 >
                   <h3>Manage</h3>
