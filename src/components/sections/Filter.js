@@ -10,10 +10,10 @@ const Filter = () => (
   <Section contentId="guidance.editor.filter">
     <div id={getFieldId('filter')} data-name="Filter text" />
     <h2>Filter <small>(optional)</small></h2>
-    <p>
+    {/* <p>
       You can optionally filter which nodes are shown on this stage, by creating
       one or more rules using the options below.
-    </p>
+    </p> */}
     <Field
       name="filter"
       component={FilterField}

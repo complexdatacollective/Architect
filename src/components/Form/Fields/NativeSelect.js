@@ -117,7 +117,7 @@ const NativeSelect = ({
               {...rest}
             >
               <option disabled value="_placeholder">-- {placeholder} --</option>
-              { onCreateOption && <option value="_create">-- {createLabelText} --</option>}
+              { onCreateOption && <option value="_create">{createLabelText}</option>}
               { sortedOptions.map((option, index) => (
                 <option
                   key={index}
@@ -153,7 +153,7 @@ NativeSelect.propTypes = {
 NativeSelect.defaultProps = {
   className: '',
   placeholder: 'Select an option',
-  createLabelText: '+ Create new',
+  createLabelText: '🆕 Create new',
   createInputLabel: 'New variable name',
   createInputPlaceholder: 'Enter a variable name...',
   options: [],

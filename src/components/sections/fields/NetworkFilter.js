@@ -49,10 +49,10 @@ const NetworkFilter = ({
       onDeactivate={handleDeactivate}
       variant={variant}
     >
-      <p>
+      {/* <p>
         You can optionally filter which nodes are shown on this stage, by creating
         one or more rules using the options below.
-      </p>
+      </p> */}
       <Field
         name={name}
         component={FilterField}

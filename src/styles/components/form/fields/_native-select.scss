@@ -3,7 +3,7 @@
   &__new-section {
     background: #d2d9da;
     padding: 1.2rem;
-    border-radius: var(--border-radius);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
   }
 
   &__error {

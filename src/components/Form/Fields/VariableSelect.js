@@ -20,7 +20,7 @@ const VariableSelect = ({ reserved, ...props }) => (
   <NativeSelect
     {...props}
     reserved={reserved}
-    placeholder="-- Select or create a variable --"
+    placeholder="Select or create a variable"
   />
 );
 

@@ -77,7 +77,7 @@ class Overview extends Component {
 
     return (
       <React.Fragment>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="protocol-name">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="protocol-name">
           <h1 className="overview__name">{name}</h1>
         </motion.div>
         <motion.div
