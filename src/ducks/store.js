@@ -15,7 +15,7 @@ const persistConfig = {
     'protocols',
     'settings',
     'app',
-    'ui',
+    // 'ui',
   ],
 };
 

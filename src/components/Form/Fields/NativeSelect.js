@@ -14,6 +14,9 @@ const NativeSelect = ({
   placeholder,
   className,
   onCreateOption,
+  createLabelText,
+  createInputLabel,
+  createInputPlaceholder,
   reserved,
   validation,
   input: { onBlur, ...input },
@@ -34,18 +37,10 @@ const NativeSelect = ({
     input.onChange(option.target.value);
   };
 
-  const handleCreateVariable = () => {
+  const handleCreateOption = () => {
     onCreateOption(newOptionValue);
     setShowCreateOptionForm(false);
   };
-
-  const componentClasses = cx(
-    className,
-    'form-fields-select-native',
-    {
-      'form-fields-select-native--has-error': invalid && touched && error,
-    },
-  );
 
   const isValidCreateOption = () => {
     const validationErrors = getValidator(validation)(newOptionValue);
@@ -54,9 +49,6 @@ const NativeSelect = ({
       setNewOptionError(validationErrors);
       return false;
     }
-
-    // // True if option contains only spaces or no chars
-    // if (newOptionValue.replace(/ /g, '').length === 0) return false;
 
     // True if option matches the label prop of the supplied object
     const matchLabel = ({ label: variableLabel }) =>
@@ -74,6 +66,12 @@ const NativeSelect = ({
     return true;
   };
 
+  const calculateMeta = useMemo(() => ({
+    touched: newOptionValue !== null,
+    invalid: !isValidCreateOption(newOptionValue),
+    error: newOptionError,
+  }), [newOptionValue, newOptionError]);
+
   const sortedOptions = useMemo(() => sortBy(options, 'label'), [options]);
 
   const variants = {
@@ -82,26 +80,28 @@ const NativeSelect = ({
     transition: { duration: 0.5 },
   };
 
-  const calculateMeta = useMemo(() => ({
-    touched: newOptionValue !== null,
-    invalid: !isValidCreateOption(newOptionValue),
-    error: newOptionError,
-  }), [newOptionValue, newOptionError]);
+  const componentClasses = cx(
+    className,
+    'form-fields-select-native',
+    {
+      'form-fields-select-native--has-error': invalid && touched && error,
+    },
+  );
 
   return (
-    <motion.div layout className="form-field-select-native__wrapper">
+    <motion.div className="form-fields-select-native__wrapper">
       <AnimatePresence initial={false} exitBeforeEnter>
         { showCreateOptionForm ? (
-          <motion.div className="form-field-select-native__new-section" key="new-section" variants={variants} initial="hide" exit="hide" animate="show">
+          <motion.div className="form-fields-select-native__new-section" key="new-section" variants={variants} initial="hide" exit="hide" animate="show">
             <Text
-              label="New variable name"
+              label={createInputLabel}
               autoFocus
               input={{ onChange: event => setNewOptionValue(event.target.value) }}
-              placeholder="Enter a variable name..."
+              placeholder={createInputPlaceholder}
               meta={calculateMeta}
             />
             <Button color="platinum" onClick={() => setShowCreateOptionForm(false)}>Cancel</Button>
-            <Button onClick={handleCreateVariable} disabled={calculateMeta.invalid}>Create</Button>
+            <Button onClick={handleCreateOption} disabled={calculateMeta.invalid}>Create</Button>
           </motion.div>
         ) : (
           <motion.div key="select-section" className={componentClasses} initial="hide" variants={variants} exit="hide" animate="show">
@@ -116,8 +116,8 @@ const NativeSelect = ({
               validation={validation}
               {...rest}
             >
-              <option disabled value="_placeholder">{placeholder}</option>
-              { onCreateOption && <option value="_create">+ Create new</option>}
+              <option disabled value="_placeholder">-- {placeholder} --</option>
+              { onCreateOption && <option value="_create">-- {createLabelText} --</option>}
               { sortedOptions.map((option, index) => (
                 <option
                   key={index}
@@ -138,6 +138,9 @@ const NativeSelect = ({
 NativeSelect.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
+  createLabelText: PropTypes.string,
+  createInputLabel: PropTypes.string,
+  createInputPlaceholder: PropTypes.string,
   options: PropTypes.array,
   input: PropTypes.object,
   label: PropTypes.string,
@@ -149,7 +152,10 @@ NativeSelect.propTypes = {
 
 NativeSelect.defaultProps = {
   className: '',
-  placeholder: '-- Select an option --',
+  placeholder: 'Select an option',
+  createLabelText: '+ Create new',
+  createInputLabel: 'New variable name',
+  createInputPlaceholder: 'Enter a variable name...',
   options: [],
   input: { value: '' },
   label: null,
