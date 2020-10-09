@@ -19,7 +19,6 @@ const PromptFields = ({
   changeForm,
   entity,
   form,
-  onDeleteVariable,
   type,
   variable,
   variableOptions,
@@ -69,10 +68,6 @@ const PromptFields = ({
       </Row>
       <Row>
         <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
-        <p>
-          Select an existing ordinal variable from the list below, or create a new one
-          by typing a name into the box and pressing enter.
-        </p>
         <ValidatedField
           name="variable"
           component={VariableSelect}
@@ -81,13 +76,7 @@ const PromptFields = ({
           label=""
           options={ordinalVariableOptions}
           onCreateOption={handleNewVariable}
-          onDeleteOption={v => onDeleteVariable(v, 'variable')}
           validation={{ required: true }}
-          formatCreateLabel={inputValue => (
-            <span>
-              Click here to create a new ordinal variable named &quot;{inputValue}&quot;.
-            </span>
-          )}
         />
       </Row>
       <Row>

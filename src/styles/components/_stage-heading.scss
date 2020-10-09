@@ -4,6 +4,11 @@
   padding: 0;
   box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
 
+  .form-field-toggle__label {
+    --input-text: var(--color-white);
+    color: var(--input-text);
+  }
+
   .stage-meta {
     flex: 0 0 28rem;
     padding: unit(4);
@@ -44,7 +49,6 @@
   }
 
   .stage-header-sections {
-    --input-text: var(--color-white);
     display: flex;
     flex: 1 auto;
     flex-direction: column;

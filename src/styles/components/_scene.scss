@@ -96,6 +96,7 @@
   &__protocol {
     flex: 1 1 auto;
     overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 
   &__timeline {

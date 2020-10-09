@@ -23,6 +23,7 @@
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 
   &__controls {

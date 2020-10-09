@@ -11,7 +11,6 @@ import Options from '@components/Options';
 import Parameters from '@components/Parameters';
 import Validations from '@components/Validations';
 import SelectOptionImage from '@components/Form/Fields/SelectOptionImage';
-import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
 import { Section, Row } from '@components/EditorLayout';
 import withFieldsHandlers from './withFieldsHandlers';
 import Tip from '../../Tip';
@@ -27,7 +26,6 @@ const PromptFields = ({
   handleNewVariable,
   handleChangeComponent,
   handleChangeVariable,
-  handleDeleteVariable,
   entity,
   type,
 }) => (
@@ -54,15 +52,7 @@ const PromptFields = ({
           options={variableOptions} // from variables
           onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
           onChange={handleChangeVariable} // read/reset component options validation
-          onDeleteOption={handleDeleteVariable}
-          onKeyDown={normalizeKeyDown}
           validation={{ required: true }}
-          placeholder="Type to create a variable..."
-          formatCreateLabel={inputValue => (
-            <span>
-              Click here to create a variable named &quot;{inputValue}&quot;.
-            </span>
-          )}
         />
       </Row>
     </Section>
@@ -176,7 +166,6 @@ PromptFields.propTypes = {
   isNewVariable: PropTypes.bool.isRequired,
   handleNewVariable: PropTypes.func.isRequired,
   handleChangeVariable: PropTypes.func.isRequired,
-  handleDeleteVariable: PropTypes.func.isRequired,
   entity: PropTypes.string,
   type: PropTypes.string,
 };

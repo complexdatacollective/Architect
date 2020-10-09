@@ -1,6 +1,8 @@
 .context-panel {
   overflow: hidden;
-  margin-bottom: unit(2);
+  margin: unit(1) 0;
+  padding: unit(1);
+  border-radius: var(--border-radius);
 
   &__controls {
     display: flex;
@@ -27,7 +29,7 @@
     overflow: hidden;
 
     &-container {
-      padding: unit(2) unit(3) unit(4);
+      padding: unit(2);
     }
   }
 

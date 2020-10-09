@@ -18,6 +18,10 @@ const ContextPanel = ({
     };
 
     return {
+      container: {
+        activated: { backgroundColor: 'var(--color-slate-blue--dark)', transition },
+        unactivated: { backgroundColor: 'transparent', transition },
+      },
       panel: {
         activated: { height: '100%', transition },
         unactivated: { height: '0', transition },
@@ -61,6 +65,7 @@ const ContextPanel = ({
     <motion.div
       initial="unactivated"
       animate={animate}
+      variants={variants.container}
       className={className}
     >
       <motion.div

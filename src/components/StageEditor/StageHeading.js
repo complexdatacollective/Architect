@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -5,8 +6,6 @@ import { getFormValues } from 'redux-form';
 import { noop, get } from 'lodash';
 import timelineImages from '@app/images/timeline';
 import { getStageIndex } from '@selectors/protocol';
-import { getFieldId } from '@app/utils/issues';
-import scrollTo from '@app/utils/scrollTo';
 
 const getTimelineImage = type =>
   get(timelineImages, type, timelineImages.Default);
@@ -17,31 +16,28 @@ const StageHeading = ({
   type,
   toggleCodeView,
   children,
-}) => {
-
-  return (
-    <div className="stage-editor-section stage-heading">
-      <div className="stage-meta">
-        <h1>{name}</h1>
-        {
-          getTimelineImage(type) &&
-            <div className="timeline-preview">
-              <img
-                src={getTimelineImage(type)}
-                alt={`${type} interface`}
-                title={`${type} interface`}
-                // onClick={toggleCodeView}
-              />
-              <div className="timeline-stage__notch">{stageNumber}</div>
-            </div>
-        }
-      </div>
-      <div className="stage-header-sections">
-        {children}
-      </div>
+}) => (
+  <div className="stage-editor-section stage-heading">
+    <div className="stage-meta">
+      <h1>{name}</h1>
+      {
+        getTimelineImage(type) &&
+          <div className="timeline-preview">
+            <img
+              src={getTimelineImage(type)}
+              alt={`${type} interface`}
+              title={`${type} interface`}
+              onClick={toggleCodeView}
+            />
+            <div className="timeline-stage__notch">{stageNumber}</div>
+          </div>
+      }
     </div>
-  );
-};
+    <div className="stage-header-sections">
+      {children}
+    </div>
+  </div>
+);
 
 StageHeading.propTypes = {
   stageNumber: PropTypes.number,

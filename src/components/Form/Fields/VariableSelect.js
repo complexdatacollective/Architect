@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { getVariableOptionsForSubject } from '@selectors/codebook';
-import CreatableSelect from './CreatableSelect';
+import NativeSelect from './NativeSelect';
 
 const withVariableValidator = withProps(({ validation }) => ({
   validation: { ...validation, allowedVariableName: 'variable name' },
@@ -17,7 +17,11 @@ const mapStateToProps = (state, { entity, type }) => {
 
 // TODO: For now just map existing variables, but later could also append create handlers!
 const VariableSelect = ({ reserved, ...props }) => (
-  <CreatableSelect {...props} reserved={reserved} />
+  <NativeSelect
+    {...props}
+    reserved={reserved}
+    placeholder="-- Select or create a variable --"
+  />
 );
 
 VariableSelect.propTypes = {

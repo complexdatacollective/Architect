@@ -36,6 +36,7 @@
   &__content {
     flex: 1 1 auto;
     overflow-y: scroll;
+    scroll-behavior: smooth;
     padding-top: unit(2);
   }
 

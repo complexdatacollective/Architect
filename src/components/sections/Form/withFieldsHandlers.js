@@ -103,6 +103,7 @@ const fieldsHandlers = withHandlers({
   handleNewVariable: ({ changeField, form }) =>
     (value) => {
       changeField(form, '_createNewVariable', value);
+      changeField(form, 'variable', value);
       return value;
     },
 });

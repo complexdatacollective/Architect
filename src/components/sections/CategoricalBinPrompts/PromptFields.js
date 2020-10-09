@@ -181,16 +181,9 @@ const PromptFields = ({
             component={VariableSelect}
             entity={entity}
             type={type}
-            label="Variable to store response"
             options={otherVariableOptions}
             onCreateOption={onCreateOtherVariable}
-            onDeleteOption={v => onDeleteVariable(v, 'otherVariable')}
             validation={{ required: true }}
-            formatCreateLabel={inputValue => (
-              <span>
-                Click here to create an other option named &quot;{inputValue}&quot;.
-              </span>
-            )}
           />
         </Row>
       }

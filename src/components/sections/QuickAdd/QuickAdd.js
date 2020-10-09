@@ -17,8 +17,6 @@ const QuickAdd = ({
   disabled,
   entity,
   handleCreateVariable,
-  handleDeleteVariable,
-  normalizeKeyDown,
   options,
   type,
 }) => (
@@ -26,8 +24,7 @@ const QuickAdd = ({
   <Section disabled={disabled} group contentId="guidance.editor.quickAdd">
     <h3 id="issue-form">Quick Add Variable</h3>
     <p>
-      Choose which variable to use to store the value of the quick add form. To create
-      a new variable, type a name into the box below.
+      Choose which variable to use to store the value of the quick add form.
     </p>
     <Tip type="warning">
       <p>
@@ -41,17 +38,11 @@ const QuickAdd = ({
       <ValidatedField
         name="quickAdd"
         component={VariableSelect}
-        placeholder="Select an existing variable, or type to create a new one..."
         options={options}
         onCreateOption={value => handleCreateVariable(value, 'text')}
-        onDeleteOption={handleDeleteVariable}
-        onKeyDown={normalizeKeyDown}
         validation={{ required: true }}
         type={type}
         entity={entity}
-        formatCreateLabel={inputValue => (
-          <span>Click here to create a new variable named &quot;{inputValue}&quot;.</span>
-        )}
       />
     </div>
   </Section>
@@ -61,8 +52,6 @@ QuickAdd.propTypes = {
   disabled: PropTypes.bool,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
-  handleDeleteVariable: PropTypes.func.isRequired,
-  normalizeKeyDown: PropTypes.func.isRequired,
   options: PropTypes.array,
   type: PropTypes.string,
 };

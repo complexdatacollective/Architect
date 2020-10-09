@@ -10,7 +10,6 @@ import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { getFieldId } from '@app/utils/issues';
 import withNewVariableWindowHandlers from '@components/enhancers/withNewVariableWindowHandlers';
-import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
 import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
 
@@ -20,7 +19,6 @@ const PresetFields = ({
   edgesForSubject,
   highlightVariablesForSubject,
   handleCreateLayoutVariable,
-  handleDeleteVariable,
   entity,
   type,
 }) => (
@@ -42,15 +40,9 @@ const PresetFields = ({
         entity={entity}
         type={type}
         label="Layout variable"
-        placeholder="&mdash; Select a layout variable &mdash;"
         validation={{ required: true }}
         options={layoutVariblesForSubject}
         onCreateOption={handleCreateLayoutVariable}
-        onKeyDown={normalizeKeyDown}
-        onDeleteOption={handleDeleteVariable}
-        formatCreateLabel={inputValue => (
-          <span>Click here to create a new layout variable named &quot;{inputValue}&quot;.</span>
-        )}
       />
     </Row>
     <Row>
@@ -88,7 +80,6 @@ PresetFields.propTypes = {
   edgesForSubject: PropTypes.array,
   highlightVariablesForSubject: PropTypes.array,
   handleCreateLayoutVariable: PropTypes.func.isRequired,
-  handleDeleteVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
