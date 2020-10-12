@@ -57,6 +57,12 @@ a {
   color: var(--text-light);
 }
 
+.form-field-checkbox--disabled {
+  font-style: italic;
+  opacity: .75;
+  cursor: not-allowed;
+}
+
 .form-field-toggle__button {
   background: var(--color-platinum--dark);
 }

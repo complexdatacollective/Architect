@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import CreatableSelect from '@components/Form/Fields/CreatableSelect';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import DetachedField from '@components/DetachedField';
 import withCreateEdgeHandlers from '@components/enhancers/withCreateEdgeHandler';
 import { ValidatedField } from '@components/Form';
@@ -62,16 +62,18 @@ const EdgeFields = ({
         { canCreateEdge &&
           <ValidatedField
             name="edges.create"
-            component={CreatableSelect}
+            component={NativeSelect}
             options={edgesForSubject}
-            onCreateOption={handleCreateEdge}
+            onCreateOption={(option) => {
+              handleChangeCreateEdge(handleCreateEdge(option));
+            }}
             onChange={handleChangeCreateEdge}
-            placeholder="&mdash; Select an edge type from the list, or type a name to create a new one &mdash;"
+            placeholder="Select or create an edge type"
+            createLabelText="✨ Create new edge type ✨"
+            createInputLabel="New edge type name"
+            createInputPlaceholder="Enter an edge type..."
             label="Create edges of the following type"
             validation={{ required: true, allowedNMToken: 'edge type name' }}
-            formatCreateLabel={inputValue => (
-              <span>Click here to create a edge type named &quot;{inputValue}&quot;.</span>
-            )}
           />
         }
       </Row>

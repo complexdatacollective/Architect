@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { map, isArray, toPairs } from 'lodash';
-import { Icon } from '@codaco/ui';
+import { Button, Icon } from '@codaco/ui';
 import Select from './Select';
 
 const NON_SORTABLE_TYPES = ['layout'];
@@ -27,12 +27,6 @@ const RuleHandle = compose(
 const RuleDelete = props => (
   <div className="form-fields-order-by__delete" {...props}>
     <Icon name="delete" />
-  </div>
-);
-
-const AddRule = props => (
-  <div className="form-fields-order-by__add" {...props}>
-    <Icon name="add" /> Add sorting rule
   </div>
 );
 
@@ -207,7 +201,13 @@ class OrderBy extends Component {
           onSortEnd={this.onSortEnd}
         />
         { !this.areRulesFull &&
-          <AddRule onClick={this.handleAddNewRule} />
+          <Button
+            onClick={this.handleAddNewRule}
+            content="Add Rule"
+            color="primary"
+            icon="add"
+            size="small"
+          />
         }
       </div>
     );

@@ -37,7 +37,7 @@ const PromptFields = ({
         component={VariableSelect}
         validation={{ required: true }}
         options={layoutVariablesForSubject}
-        onCreateOption={value => handleCreateVariable(value, 'layout')}
+        onCreateOption={value => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
       />
     </Row>
     {/* <Row>
