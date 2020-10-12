@@ -79,16 +79,17 @@ class Overview extends Component {
 
     return (
       <React.Fragment>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="protocol-name">
-          <h1 className="overview__name">{name}</h1>
-        </motion.div>
         <motion.div
           className="overview"
           variants={panelVariants}
           initial="initial"
           animate="animate"
         >
+
           <div className="overview__panel">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="protocol-name">
+              <h1 className="overview__name">{name}</h1>
+            </motion.div>
             <div className="overview__groups">
               <div className="overview__group overview__group--title">
                 <Fields.TextArea

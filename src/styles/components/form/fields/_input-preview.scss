@@ -1,0 +1,20 @@
+.input-preview {
+  display: flex;
+  padding: unit(2);
+  border-radius: var(--border-radius);
+  background: var(--color-platinum);
+
+  &__description {
+    flex: 0 0 50%;
+    padding-left: unit(4);
+  }
+
+  &__image {
+    flex: 0 0 50%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+}

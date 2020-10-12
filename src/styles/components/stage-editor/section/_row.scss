@@ -1,7 +1,20 @@
 .stage-editor-row {
-  margin: 0 0 unit(4);
-
-  &:last-child {
-    margin: 0;
+  &:not(:only-child) {
+    margin: 0 0 unit(4);
   }
+
+  >:first-child {
+    margin-top: 0;
+  }
+
+  >:last-child {
+    margin-bottom: 0;
+  }
+
+  > .form-field-container,
+  .form-field-text,
+  .form-field-radio-group {
+    margin-bottom: 0;
+  }
+
 }

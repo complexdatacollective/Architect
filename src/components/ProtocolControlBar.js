@@ -40,7 +40,7 @@ const ProtocolControlBar = ({
           color="primary"
           data-variant="save"
           disabled={isSaving}
-          content={isSaving ? 'Saving...' : 'Save Protocol Changes'}
+          content={isSaving ? 'Saving...' : 'Save Changed Protocol'}
           {...saveProps}
         />] : []),
       ]}

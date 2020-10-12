@@ -5,15 +5,16 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { isVariableTypeWithOptions, isVariableTypeWithParameters } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
-import Select from '@components/Form/Fields/Select';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
 import Options from '@components/Options';
 import Parameters from '@components/Parameters';
 import Validations from '@components/Validations';
-import SelectOptionImage from '@components/Form/Fields/SelectOptionImage';
 import { Section, Row } from '@components/EditorLayout';
 import withFieldsHandlers from './withFieldsHandlers';
 import Tip from '../../Tip';
+import ExternalLink from '../../ExternalLink';
+import InputPreview from '../../Form/Fields/InputPreview';
 
 const PromptFields = ({
   form,
@@ -23,6 +24,7 @@ const PromptFields = ({
   componentOptions,
   component,
   isNewVariable,
+  metaForType,
   handleNewVariable,
   handleChangeComponent,
   handleChangeVariable,
@@ -72,13 +74,15 @@ const PromptFields = ({
       <Section>
         <Row contentId="guidance.section.form.field.component">
           <h3 id={getFieldId('component')}>Input control</h3>
-          <p>Choose an input control that should be used to collect the answer.</p>
+          <p>
+            Choose an input control that should be used to collect the answer. For
+            detailed information about these options, see our <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/input-controls/">documentation</ExternalLink>.
+          </p>
           <ValidatedField
             name="component"
-            component={Select}
-            placeholder="Select component"
+            component={NativeSelect}
+            placeholder="Select an input control"
             options={componentOptions}
-            selectOptionComponent={SelectOptionImage}
             validation={{ required: true }}
             onChange={handleChangeComponent}
           />
@@ -104,6 +108,12 @@ const PromptFields = ({
             </Tip>
           }
         </Row>
+        { variableType &&
+        <Row contentId="guidance.section.form.field.component">
+          <h4>Preview</h4>
+          <InputPreview {...metaForType} />
+        </Row>
+        }
       </Section>
     }
     { isVariableTypeWithOptions(variableType) &&
@@ -161,6 +171,7 @@ PromptFields.propTypes = {
   component: PropTypes.string,
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
+  metaForType: PropTypes.object.isRequired,
   variableOptions: PropTypes.array,
   componentOptions: PropTypes.array,
   isNewVariable: PropTypes.bool.isRequired,

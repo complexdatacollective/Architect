@@ -28,10 +28,7 @@ const Protocol = ({
         <Overview
           show={hasProtocol}
         />
-
-        <div className="scene__timeline">
-          <Timeline show={hasProtocol} />
-        </div>
+        <Timeline show={hasProtocol} />
       </div>
       <ProtocolControlBar show={hasProtocol} />
     </div>
@@ -39,7 +36,6 @@ const Protocol = ({
 };
 
 Protocol.propTypes = {
-  protocolPath: PropTypes.string,
   isLoading: PropTypes.bool,
   hasProtocol: PropTypes.bool,
 };

@@ -1,14 +1,11 @@
-.protocol-name {
-  margin: unit(8) auto 0;
 
-  h1 {
-    margin: unit(4);
-  }
-}
 
 .overview {
   margin: 0 auto;
-  width: 80rem;
+  padding-top: unit(4);
+  width: 60rem;
+  z-index: var(--z-default);
+  position: relative;
 
   .form-field-container {
     --input-background: var(--color-slate-blue);
@@ -39,6 +36,15 @@
     color: var(--color-white);
     border-radius: var(--border-radius);
     box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+
+    .protocol-name {
+      padding-top: 2.4rem;
+      margin: 0;
+
+      h1 {
+        margin: 0;
+      }
+    }
   }
 
   &__asset-group {
@@ -63,6 +69,8 @@
   &__groups {
     display: flex;
     padding: unit(6);
+
+
   }
 
   &__group {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -13,6 +14,35 @@ import { actionCreators as dialogsActions } from '@modules/dialogs';
 import { actionCreators as uiActions } from '@modules/ui';
 import Stage from './Stage';
 import InsertButton from './InsertButton';
+
+
+const variants = {
+  outer: {
+    show: {
+      background: 'repeating-linear-gradient(to bottom, transparent, transparent 100%, var(--background) 100%, var(--background) 100% )',
+      transition: {
+        duration: 0.5,
+        ease: 'easeIn',
+        delay: 0.5,
+      },
+    },
+    hide: {
+      background: 'repeating-linear-gradient(to bottom, transparent, transparent 0%, var(--background) 0%, var(--background) 100% )',
+    },
+  },
+  items: {
+    show: {
+      scale: 1,
+      opacity: 1,
+      delay: 3,
+      transition: { type: 'spring' },
+    },
+    hide: {
+      scale: 0,
+      opacity: 0,
+    },
+  },
+};
 
 class Timeline extends Component {
   static propTypes = {
@@ -86,10 +116,10 @@ class Timeline extends Component {
       this.renderStage(stage, index),
     ]));
 
+
   renderStage = (stage, index) => (
     <Stage
       key={`stage_${stage.id}_${index}`}
-      // foo={console.log(stage.id)}
       index={index}
       stageNumber={index + 1} // Because SortableElement strips index prop
       id={stage.id}
@@ -116,16 +146,24 @@ class Timeline extends Component {
     );
 
     return (
-      <div className={timelineStyles}>
-        <div className="timeline__stages">
+      <div
+        className={timelineStyles}
+      >
+        <motion.div
+          className="timeline__stages"
+          initial="hide"
+          animate="show"
+          variants={variants.outer}
+        >
           { this.renderStages() }
-          <div
+          <motion.div
             className="timeline__insert timeline__insert--new"
             onClick={this.handleInsertStage}
+            variants={variants.item}
           >
             Add new stage
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     );
   }
@@ -135,7 +173,7 @@ const mapStateToProps = state => ({
   locus: state.protocol.timeline[state.protocol.timeline.length - 1],
   activeProtocol: state.session.activeProtocol,
   stages: getStageList(state),
-  transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'),
+  transitionDuration: getCSSVariableAsNumber('--animation-duration-standard-ms'), // Re-order transition
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

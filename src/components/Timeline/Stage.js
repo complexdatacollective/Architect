@@ -19,8 +19,14 @@ const findPos = (node) => {
 };
 
 const variants = {
-  exit: {
-    opacity: 0, transition: { duration: 5 },
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: { type: 'spring', delay: 1 },
+  },
+  hide: {
+    scale: 0,
+    opacity: 0,
   },
 };
 
@@ -58,7 +64,6 @@ const Stage = ({
     <motion.div
       className={componentClasses}
       variants={variants}
-      exit="exit"
     >
       <div
         className="timeline-stage__notch"

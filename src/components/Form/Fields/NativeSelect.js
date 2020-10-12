@@ -100,8 +100,10 @@ const NativeSelect = ({
               placeholder={createInputPlaceholder}
               meta={calculateMeta}
             />
-            <Button color="platinum" onClick={() => setShowCreateOptionForm(false)}>Cancel</Button>
-            <Button onClick={handleCreateOption} disabled={calculateMeta.invalid}>Create</Button>
+            <div className="button-footer">
+              <Button color="platinum" onClick={() => setShowCreateOptionForm(false)}>Cancel</Button>
+              <Button onClick={handleCreateOption} disabled={calculateMeta.invalid}>Create</Button>
+            </div>
           </motion.div>
         ) : (
           <motion.div key="select-section" className={componentClasses} initial="hide" variants={variants} exit="hide" animate="show">
@@ -153,7 +155,7 @@ NativeSelect.propTypes = {
 NativeSelect.defaultProps = {
   className: '',
   placeholder: 'Select an option',
-  createLabelText: '🆕 Create new',
+  createLabelText: '✨ Create new ✨',
   createInputLabel: 'New variable name',
   createInputPlaceholder: 'Enter a variable name...',
   options: [],

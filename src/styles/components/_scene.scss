@@ -99,20 +99,6 @@
     scroll-behavior: smooth;
   }
 
-  &__timeline {
-    left: 0;
-    width: 100%;
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition-duration: var(--animation-duration-standard);
-    transition-timing-function: var(--animation-easing);
-    transition-property: transform, opacity;
-    transform: translateY(50vh);
-    will-change: transform;
-    margin-bottom: 15rem;
-  }
-
   &--protocol {
     .scene {
       &__brand {
@@ -131,12 +117,6 @@
 
       &__protocol {
         visibility: visible;
-      }
-
-      &__timeline {
-        height: auto;
-        opacity: 1;
-        transform: translateY(0);
       }
 
       &__background--top {

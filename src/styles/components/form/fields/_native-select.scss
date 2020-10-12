@@ -3,7 +3,22 @@
   &__new-section {
     background: #d2d9da;
     padding: 1.2rem;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    border-radius: var(--border-radius);
+
+    .button-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .button {
+        min-width: 10rem;
+        margin-right: 1rem;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
   }
 
   &__error {
