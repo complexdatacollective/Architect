@@ -1,6 +1,7 @@
 $component-name: list-item;
 
 .#{$component-name} {
+  --input-border: var(--architect-sortable-text);
   width: 100%;
   background-color: var(--architect-sortable-background);
   color: var(--architect-sortable-text);

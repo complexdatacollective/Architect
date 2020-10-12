@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@codaco/ui';
 import Number from '@codaco/ui/lib/components/Fields/Number';
-import Select from '../Form/Fields/Select';
+import NativeSelect from '../Form/Fields/NativeSelect';
 import { isValidationWithValue } from './options';
 
 const Validation = ({
@@ -29,11 +29,11 @@ const Validation = ({
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
-          <Select
+          <NativeSelect
             options={options}
             input={keyInputProps}
             validation={{ required: true }}
-            placeholder="&mdash; Select &mdash;"
+            placeholder="Select validation rule"
             onChange={handleKeyChange}
           />
         </div>

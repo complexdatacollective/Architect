@@ -1,5 +1,9 @@
 .form-fields-select-native {
 
+  &__wrapper {
+    flex: 1;
+  }
+
   &__new-section {
     background: #d2d9da;
     padding: 1.2rem;
