@@ -17,6 +17,8 @@ const animatedButton = (button, index) => (
   <motion.div
     key={(button && button.key) || index}
     variants={buttonVariants}
+    initial="hide"
+    animate="show"
     exit="hide"
     layout
   >{button}</motion.div>
@@ -24,7 +26,7 @@ const animatedButton = (button, index) => (
 
 const ControlBar = ({ buttons, secondaryButtons, className }) => {
   const buttonLayout = [
-    <div className="control-bar__secondary-buttons" key="secondary">
+    <motion.div layout className="control-bar__secondary-buttons" key="secondary">
       <AnimateSharedLayout>
         <AnimatePresence>
           { secondaryButtons &&
@@ -32,8 +34,8 @@ const ControlBar = ({ buttons, secondaryButtons, className }) => {
           }
         </AnimatePresence>
       </AnimateSharedLayout>
-    </div>,
-    <div className="control-bar__primary-buttons" key="primary">
+    </motion.div>,
+    <motion.div layout className="control-bar__primary-buttons" key="primary">
       <AnimateSharedLayout>
         <AnimatePresence>
           { buttons &&
@@ -41,7 +43,7 @@ const ControlBar = ({ buttons, secondaryButtons, className }) => {
           }
         </AnimatePresence>
       </AnimateSharedLayout>
-    </div>,
+    </motion.div>,
   ];
 
   return (

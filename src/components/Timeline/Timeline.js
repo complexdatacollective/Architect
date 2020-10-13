@@ -30,6 +30,18 @@ const variants = {
       background: 'repeating-linear-gradient(to bottom, transparent, transparent 0%, var(--background) 0%, var(--background) 100% )',
     },
   },
+  newStage: {
+    show: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        delay: 1,
+      },
+    },
+    hide: {
+      opacity: 0,
+    },
+  },
 };
 
 class Timeline extends Component {
@@ -147,7 +159,7 @@ class Timeline extends Component {
           <motion.div
             className="timeline__insert timeline__insert--new"
             onClick={this.handleInsertStage}
-            variants={variants.item}
+            variants={variants.newStage}
           >
             Add new stage
           </motion.div>

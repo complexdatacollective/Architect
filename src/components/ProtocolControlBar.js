@@ -14,34 +14,29 @@ import ControlBar from './ControlBar';
 
 const ProtocolControlBar = ({
   saveProtocol,
-  show,
   isSaving,
   hasAnyStages,
   hasUnsavedChanges,
   handleClickStart,
 }) => {
-  const saveProps = !isSaving &&
-  {
-    icon: isSaving ? <Spinner size="0.5rem" /> : 'arrow-right',
-    iconPosition: 'right',
-  };
-
   const showSaveButton = hasAnyStages && hasUnsavedChanges;
 
   return (
     <ControlBar
-      show={show}
+      show
       secondaryButtons={[
-        <Button icon="menu-quit" color="platinum" onClick={handleClickStart}>Return to start screen</Button>,
+        <Button key="return-button" icon="menu-quit" color="platinum" onClick={handleClickStart}>Return to start screen</Button>,
       ]}
       buttons={[
         ...(showSaveButton ? [<Button
+          key="save-button"
           onClick={saveProtocol}
           color="primary"
           data-variant="save"
           disabled={isSaving}
           content={isSaving ? 'Saving...' : 'Save Changes'}
-          {...saveProps}
+          iconPosition="right"
+          icon={isSaving ? <div><Spinner size="0.5rem" /></div> : 'arrow-right'}
         />] : []),
       ]}
     />
@@ -51,16 +46,9 @@ const ProtocolControlBar = ({
 ProtocolControlBar.propTypes = {
   saveProtocol: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
-  showControlBar: PropTypes.bool.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
   hasAnyStages: PropTypes.bool.isRequired,
-  show: PropTypes.bool,
   handleClickStart: PropTypes.func.isRequired,
-};
-
-ProtocolControlBar.defaultProps = {
-  show: true,
 };
 
 const mapStateToProps = (state) => {
