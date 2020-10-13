@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import DetachedField from '@components/DetachedField';
 import ExternalLink from '@components/ExternalLink';
 import EdgeSelect from '@components/Form/Fields/EdgeSelect';
-import Select from '@components/Form/Fields/Select';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import withRuleChangeHandler from './withRuleChangeHandler';
 import withOptions from './withOptions';
 
@@ -77,7 +77,7 @@ const EditEdgeRule = ({
             key="step2"
           >
             <DetachedField
-              component={Select}
+              component={NativeSelect}
               name="operator"
               label="Step 2: Choose an operator"
               options={operatorOptions}

@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import CheckboxGroup from '@codaco/ui/lib/components/Fields/CheckboxGroup';
-import Select from '@components/Form/Fields/Select';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { getFieldId } from '@app/utils/issues';
@@ -48,7 +48,7 @@ const PresetFields = ({
     <Row>
       <ValidatedField
         name="groupVariable"
-        component={Select}
+        component={NativeSelect}
         label="Group variable"
         options={groupVariablesForSubject}
       />

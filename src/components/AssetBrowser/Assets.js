@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import Select from '../../components/Form/Fields/Select';
+import NativeSelect from '../../components/Form/Fields/NativeSelect';
 import withAssets from './withAssets';
 import Thumbnail from './Thumbnail';
 
@@ -43,7 +43,7 @@ const Assets = ({
     <div className="asset-browser-assets">
       { !type &&
         <div className="asset-browser-assets__controls">
-          <Select {...selectProps} />
+          <NativeSelect {...selectProps} />
         </div>
       }
 

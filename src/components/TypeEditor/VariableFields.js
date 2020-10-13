@@ -41,12 +41,12 @@ class VariableFields extends Component {
           <ValidatedField
             name="type"
             className="form-field-container"
-            component={ArchitectFields.Select}
+            component={ArchitectFields.NativeSelect}
             label="Variable type"
             options={variableTypes}
             validation={{ required: true }}
             onChange={resetOptions}
-            placeholder="&mdash; Select variable type &mdash;"
+            placeholder="Select variable type"
           />
         </Row>
         <Row>
