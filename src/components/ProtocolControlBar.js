@@ -10,6 +10,7 @@ import { getHasUnsavedChanges } from '@selectors/session';
 import { actionCreators as protocolsActions, actionLocks as protocolsLocks } from '@modules/protocols';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { selectors as statusSelectors } from '@modules/ui/status';
+import logoutIcon from '@app/images/home/log-out.svg';
 import ControlBar from './ControlBar';
 
 const ProtocolControlBar = ({
@@ -25,7 +26,14 @@ const ProtocolControlBar = ({
     <ControlBar
       show
       secondaryButtons={[
-        <Button key="return-button" icon="menu-quit" color="platinum" onClick={handleClickStart}>Return to start screen</Button>,
+        <Button
+          key="return-button"
+          icon={<div><img src={logoutIcon} alt="Return to start screen" /></div>}
+          color="platinum"
+          onClick={handleClickStart}
+        >
+          Return to start screen
+        </Button>,
       ]}
       buttons={[
         ...(showSaveButton ? [<Button

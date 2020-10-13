@@ -19,15 +19,15 @@ import InsertButton from './InsertButton';
 const variants = {
   outer: {
     show: {
-      background: 'repeating-linear-gradient(to bottom, transparent, transparent 100%, var(--background) 100%, var(--background) 100% )',
+      background: 'repeating-linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0) 100%, var(--background) 100%, var(--background) 100% )',
       transition: {
         duration: 0.5,
-        delay: 1,
+        delay: 0.75,
         when: 'beforeChildren',
       },
     },
     hide: {
-      background: 'repeating-linear-gradient(to bottom, transparent, transparent 0%, var(--background) 0%, var(--background) 100% )',
+      background: 'repeating-linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0) 0%, var(--background) 0%, var(--background) 100% )',
     },
   },
   newStage: {
