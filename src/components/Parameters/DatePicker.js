@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { formValues, change } from 'redux-form';
 import { DATE_FORMATS, DATE_TYPES } from '@codaco/ui/lib/components/Fields/DatePicker';
-import SelectField from '@components/Form/Fields/Select';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { DatePicker } from '@codaco/ui/lib/components/Fields';
 
@@ -33,7 +33,7 @@ const DateTimeParameters = ({ name, type, setSelectDefault, resetRangeFields }) 
       </p>
       <ValidatedField
         label=""
-        component={SelectField}
+        component={NativeSelect}
         name={`${name}.type`}
         options={dateTypes}
         validation={{ required: true }}

@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const panelVariants = {
-  show: { opacity: 1, y: 0, transition: { ease: 'easeOut', delay: 0.5, when: 'beforeChildren', staggerChildren: 0.3 } },
+  show: { opacity: 1, y: 0, transition: { ease: 'easeOut', when: 'beforeChildren', staggerChildren: 0.3 } },
   hide: { opacity: 0, y: 100 },
 };
 
 const buttonVariants = {
-  show: { opacity: 1, y: 0, transition: { type: 'spring', delay: 0.2 } },
+  show: { opacity: 1, y: 0, transition: { type: 'spring' } },
   hide: { opacity: 0, y: 10 },
 };
 
@@ -17,9 +17,7 @@ const animatedButton = (button, index) => (
   <motion.div
     key={(button && button.key) || index}
     variants={buttonVariants}
-    // initial="hide"
     exit="hide"
-    // animate="show"
     layout
   >{button}</motion.div>
 );

@@ -22,24 +22,12 @@ const variants = {
       background: 'repeating-linear-gradient(to bottom, transparent, transparent 100%, var(--background) 100%, var(--background) 100% )',
       transition: {
         duration: 0.5,
-        ease: 'easeIn',
-        delay: 0.5,
+        delay: 1,
+        when: 'beforeChildren',
       },
     },
     hide: {
       background: 'repeating-linear-gradient(to bottom, transparent, transparent 0%, var(--background) 0%, var(--background) 100% )',
-    },
-  },
-  items: {
-    show: {
-      scale: 1,
-      opacity: 1,
-      delay: 3,
-      transition: { type: 'spring' },
-    },
-    hide: {
-      scale: 0,
-      opacity: 0,
     },
   },
 };
@@ -88,7 +76,7 @@ class Timeline extends Component {
     this.props.openDialog({
       type: 'Warning',
       title: 'Delete stage',
-      message: 'Are you sure you want to remove this stage?',
+      message: 'Are you sure you want to delete this stage from your protocol? This action cannot be undone!',
       onConfirm: () => { this.props.deleteStage(stageId); },
       confirmLabel: 'Delete stage',
     });
@@ -119,7 +107,7 @@ class Timeline extends Component {
 
   renderStage = (stage, index) => (
     <Stage
-      key={`stage_${stage.id}_${index}`}
+      key={`stage_${stage.id}`}
       index={index}
       stageNumber={index + 1} // Because SortableElement strips index prop
       id={stage.id}
@@ -151,7 +139,7 @@ class Timeline extends Component {
       >
         <motion.div
           className="timeline__stages"
-          initial="hide"
+          initial={sorting ? false : 'hide'}
           animate="show"
           variants={variants.outer}
         >

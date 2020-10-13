@@ -22,7 +22,7 @@ const variants = {
   show: {
     scale: 1,
     opacity: 1,
-    transition: { type: 'spring', delay: 1 },
+    transition: { type: 'spring', delay: 1.2 },
   },
   hide: {
     scale: 0,

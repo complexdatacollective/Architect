@@ -16,8 +16,8 @@ import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 import { actionCreators as uiActions } from '../ducks/modules/ui';
 
 const panelVariants = {
-  initial: { opacity: 0, y: -100 },
-  animate: { opacity: 1, y: 0, transition: { type: 'spring', staggerChildren: 0.5 } },
+  initial: { opacity: 0, y: -200 },
+  animate: { opacity: 1, y: 0, transition: { type: 'spring', when: 'beforeChildren' } },
 };
 
 class Overview extends Component {
