@@ -19,6 +19,7 @@ const NativeSelect = ({
   createInputPlaceholder,
   reserved,
   validation,
+  disabled,
   input: { onBlur, ...input },
   meta: { invalid, error, touched },
   ...rest
@@ -85,6 +86,7 @@ const NativeSelect = ({
     'form-fields-select-native',
     {
       'form-fields-select-native--has-error': invalid && touched && error,
+      'form-fields-select-native--disabled': disabled,
     },
   );
 
@@ -116,6 +118,7 @@ const NativeSelect = ({
               value={input.value || '_placeholder'}
               onChange={handleChange}
               validation={validation}
+              disabled={!!disabled}
               {...rest}
             >
               <option disabled value="_placeholder">-- {placeholder} --</option>
@@ -148,6 +151,7 @@ NativeSelect.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   meta: PropTypes.object,
+  disabled: PropTypes.bool,
   onCreateOption: PropTypes.func,
   reserved: PropTypes.array,
   validation: PropTypes.any,
@@ -162,6 +166,7 @@ NativeSelect.defaultProps = {
   options: [],
   input: { value: '' },
   label: null,
+  disabled: false,
   meta: { invalid: false, error: null, touched: false },
   onCreateOption: null,
   reserved: [],
