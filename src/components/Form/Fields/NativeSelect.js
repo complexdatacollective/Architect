@@ -124,6 +124,7 @@ const NativeSelect = ({
                 <option
                   key={index}
                   value={option.value}
+                  disabled={!!option.disabled}
                 >
                   {option.label}
                 </option>

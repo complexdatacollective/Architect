@@ -30,10 +30,9 @@ const TypeEditor = ({
 
   return (
     <Layout>
-      <h1>
-        { type ? `Edit ${entity}` : `Create ${entity}` }
-      </h1>
-
+      <Section>
+        <h1>{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
+      </Section>
       <Section>
         <h3 id={getFieldId('name')}>{capitalize(entity)} Type</h3>
         <p>
@@ -44,7 +43,7 @@ const TypeEditor = ({
         <ValidatedField
           component={Fields.Text}
           name="name"
-          validation={{ required: true, allowedNMToken: 'node type name', uniqueByList: existingTypes }}
+          validation={{ required: true, allowedNMToken: `${entity} type name`, uniqueByList: existingTypes }}
         />
       </Section>
 

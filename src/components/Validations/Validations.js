@@ -27,7 +27,7 @@ const format = (value = {}) => toPairs(value);
 const getOptionsWithUsedDisabled = (options, used) =>
   options.map((option) => {
     if (!used.includes(option.value)) { return option; }
-    return { ...option, isDisabled: true };
+    return { ...option, disabled: true };
   });
 
 const AddItem = props => (

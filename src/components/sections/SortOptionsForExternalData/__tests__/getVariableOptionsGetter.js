@@ -20,7 +20,7 @@ describe('getVariableOptionsGetter()', () => {
     expect(subject).toEqual([
       { label: 'Name', value: '1234-1234-1234-1' },
       { label: 'Age', value: '1234-1234-1234-2' },
-      { label: 'Favourite Color', value: '1234-1234-1234-3', isDisabled: true },
+      { label: 'Favourite Color', value: '1234-1234-1234-3', disabled: true },
     ]);
   });
 });

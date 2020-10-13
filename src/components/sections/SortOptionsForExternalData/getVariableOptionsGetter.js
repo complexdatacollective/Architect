@@ -11,7 +11,7 @@ const getVariableOptionsGetter = variableOptions =>
 
     return variableOptions
       .map(
-        option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
+        option => (!used.includes(option.value) ? option : { ...option, disabled: true }),
       );
   };
 

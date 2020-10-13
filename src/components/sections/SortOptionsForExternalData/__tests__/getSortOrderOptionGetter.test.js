@@ -21,7 +21,7 @@ describe('getSortOrderOptionGetter', () => {
     expect(subject).toEqual([
       { label: '*', value: '*' },
       { label: 'Name', value: '1234-1234-1234-1' },
-      { label: 'Age', value: '1234-1234-1234-2', isDisabled: true },
+      { label: 'Age', value: '1234-1234-1234-2', disabled: true },
       { label: 'Favourite Color', value: '1234-1234-1234-3' },
     ]);
   });

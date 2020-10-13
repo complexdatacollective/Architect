@@ -38,10 +38,10 @@ class CodebookScreen extends Component {
         onAcknowledgeError={this.handleCancel}
       >
         <Layout>
-          <h1>
-            Codebook
-          </h1>
           <Section>
+            <h1>
+              Codebook
+            </h1>
             <Codebook />
           </Section>
         </Layout>

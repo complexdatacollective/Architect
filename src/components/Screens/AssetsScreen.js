@@ -29,10 +29,10 @@ const AssetBrowserScreen = ({
       onAcknowledgeError={onComplete}
     >
       <Layout>
-        <h1>
-          Assets
-        </h1>
         <Section>
+          <h1>
+            Assets
+          </h1>
           <p>
             Welcome to the asset management screen. Here, you can load in images,
             video, audio, or even external network data which can be used elsewhere

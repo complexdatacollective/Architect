@@ -39,7 +39,7 @@ const QuickAdd = ({
         name="quickAdd"
         component={VariableSelect}
         options={options}
-        onCreateOption={value => handleCreateVariable(value, 'text')}
+        onCreateOption={value => handleCreateVariable(value, 'text', 'quickAdd')}
         validation={{ required: true }}
         type={type}
         entity={entity}

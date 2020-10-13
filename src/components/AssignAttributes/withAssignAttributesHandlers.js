@@ -23,7 +23,7 @@ const mapStateToProps = (state, { entity, type, form, fields }) => {
     .map(({ value, ...rest }) => ({
       ...rest,
       value,
-      isDisabled: usedVariables.includes(value),
+      disabled: usedVariables.includes(value),
     }));
 
   return {

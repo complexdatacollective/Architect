@@ -7,7 +7,7 @@ import { get, map } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { Select } from '../Form/Fields';
+import { NativeSelect } from '../Form/Fields';
 import ValidatedField from '../Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
@@ -107,16 +107,16 @@ const Item = compose(
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
           <ValidatedField
-            component={Select}
+            component={NativeSelect}
             name={`${field}.type`}
             validation={{ required: true }}
-            placeholder="&mdash; Select type &mdash;"
+            placeholder="Select a type"
             options={getValidationTypesForVariable(variableType).map(
               validation => (
                 {
                   value: validation,
                   label: validation,
-                  isDisabled: map(allValues, 'type').includes(validation),
+                  disabled: map(allValues, 'type').includes(validation),
                 }
               ),
             )}

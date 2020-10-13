@@ -4,7 +4,7 @@ import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { map, isArray, toPairs } from 'lodash';
 import { Button, Icon } from '@codaco/ui';
-import Select from './Select';
+import NativeSelect from './NativeSelect';
 
 const NON_SORTABLE_TYPES = ['layout'];
 const ASC = 'asc';
@@ -47,30 +47,30 @@ const Rule = compose(
       </div>
       <div className="form-fields-order-by__rule-options">
         <div className="form-fields-order-by__rule-option">
-          <Select
+          <NativeSelect
             input={{
               onChange: value =>
                 handleChange(index, { property: value }),
               value: property,
             }}
-            placeholder="&mdash; select property &mdash;"
+            placeholder="Select a property"
             options={variables.map(({ label, value }) => (
               {
                 value,
-                isDisabled: disabledVariables.includes(value),
+                disabled: disabledVariables.includes(value),
                 label,
               }
             ))}
           />
         </div>
         <div className="form-fields-order-by__rule-option">
-          <Select
+          <NativeSelect
             input={{
               onChange: value =>
                 handleChange(index, { direction: value }),
               value: direction,
             }}
-            placeholder="&mdash; select direction &mdash;"
+            placeholder="Select a direction"
             options={DIRECTIONS.map(([value, label]) => (
               { value, label }
             ))}
