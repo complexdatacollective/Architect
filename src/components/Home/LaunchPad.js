@@ -12,14 +12,11 @@ import Section from './Section';
 import Group from './Group';
 import Sprite from './Sprite';
 
-const getRecentProtocols = state =>
-  get(state, 'recentProtocols', [])
-    .slice(0, 1);
-
 const LaunchPad = ({
   openProtocol,
   createAndLoadProtocol,
-  resumeProtocol,
+  lastEditedProtocol,
+  otherRecentProtocols,
   unbundleAndLoadProtocol,
 }) => {
   const handleOpenProtocol = () => openProtocol();
@@ -31,8 +28,8 @@ const LaunchPad = ({
 
   return (
     <Section className="launch-pad">
-      { resumeProtocol &&
-        <Group color="panel-grey--dark">
+      { lastEditedProtocol &&
+        <Group color="panel-grey--dark" className="home-group--flex">
           <Sprite
             src={resumeBackgroundGraphic}
             width="calc(50% - 7rem)"
@@ -47,12 +44,27 @@ const LaunchPad = ({
           <div className="launch-pad__resume">
             <h2>Resume Editing</h2>
             <ProtocolCard
-              description={resumeProtocol.description}
-              lastModified={resumeProtocol.lastModified}
-              name={resumeProtocol.name}
-              onClickHandler={() => handleLoadProtocol(resumeProtocol.filePath)}
-              schemaVersion={resumeProtocol.schemaVersion}
+              description={lastEditedProtocol.filePath}
+              lastModified={lastEditedProtocol.lastModified}
+              name={lastEditedProtocol.name}
+              onClickHandler={() => handleLoadProtocol(lastEditedProtocol.filePath)}
+              schemaVersion={lastEditedProtocol.schemaVersion}
             />
+          </div>
+          <div className="launch-pad__resume">
+            {
+              otherRecentProtocols.map(protocol => (
+                <ProtocolCard
+                  key={protocol.filePath}
+                  condensed
+                  description={protocol.filePath}
+                  lastModified={protocol.lastModified}
+                  name={protocol.name}
+                  onClickHandler={() => handleLoadProtocol(protocol.filePath)}
+                  schemaVersion={protocol.schemaVersion}
+                />
+              ))
+            }
           </div>
         </Group>
       }
@@ -93,15 +105,18 @@ LaunchPad.propTypes = {
   openProtocol: PropTypes.func.isRequired,
   createAndLoadProtocol: PropTypes.func.isRequired,
   unbundleAndLoadProtocol: PropTypes.func.isRequired,
-  resumeProtocol: PropTypes.object,
+  lastEditedProtocol: PropTypes.object,
+  otherRecentProtocols: PropTypes.object,
 };
 
 LaunchPad.defaultProps = {
-  resumeProtocol: null,
+  lastEditedProtocol: null,
+  otherRecentProtocols: [],
 };
 
 const mapStateToProps = state => ({
-  resumeProtocol: getRecentProtocols(state)[0],
+  lastEditedProtocol: get(state, 'recentProtocols', []).slice(0, 1)[0],
+  otherRecentProtocols: get(state, 'recentProtocols', []).slice(1, 4),
 });
 
 const mapDispatchToProps = {

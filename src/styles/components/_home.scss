@@ -83,7 +83,28 @@ $font-sizes: (
 
 .launch-pad {
   &__resume {
-    max-width: 50%;
+    flex: 0 0 50%;
+    width: 50%;
+    position: relative;
+
+    &:not(:last-of-type) {
+      padding-right: unit(4);
+    }
+
+    &:last-of-type {
+      display: flex;
+      flex-direction: column;
+      margin-top: unit(4);
+
+      .protocol-card {
+        width: 100%;
+
+        &:not(:last-of-type) {
+          margin-bottom: unit(2);
+        }
+      }
+    }
+
   }
 
   &__actions {
@@ -128,6 +149,10 @@ $font-sizes: (
   padding: unit(4) unit(6);
   background-color: var(--color-platinum--dark);
   background-repeat: no-repeat;
+
+  &--flex {
+    display: flex;
+  }
 
   &--icon {
     padding-left: unit(20);
