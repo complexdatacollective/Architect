@@ -17,7 +17,6 @@ const withValidation = WrappedComponent =>
 
     constructor(props) {
       super(props);
-
       this.state = { validate: getValidations(props.validation || []) };
     }
 

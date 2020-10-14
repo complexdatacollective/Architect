@@ -1,6 +1,8 @@
 .stage-editor-row {
   &:not(:only-child) {
-    margin: 0 0 unit(4);
+    &:not(:last-of-type) {
+      margin: 0 0 unit(4);
+    }
   }
 
   >:first-child {

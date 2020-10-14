@@ -34,8 +34,6 @@ const variants = {
     show: {
       opacity: 1,
       transition: {
-        duration: 0.5,
-        delay: 1,
       },
     },
     hide: {

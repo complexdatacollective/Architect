@@ -16,7 +16,6 @@ const Screen = ({
   windowRoot,
 }) => {
   const classes = cx('screen', `screen--${type}`);
-
   return (
     <div className={classes}>
       <div className="screen__container" ref={setWindowRoot}>
@@ -39,7 +38,7 @@ const Screen = ({
 };
 
 Screen.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.any,
   buttons: PropTypes.arrayOf(PropTypes.node),
   secondaryButtons: PropTypes.arrayOf(PropTypes.node),
   type: PropTypes.string,

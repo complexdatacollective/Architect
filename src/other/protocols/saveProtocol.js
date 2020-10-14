@@ -25,6 +25,7 @@ const saveProtocol = (workingPath, protocol) =>
           // Now that the protocol is commited to disk we can safely prune unused assets.
           pruneAssets(workingPath),
         )
+        .then(() => new Promise(res => setTimeout(res, 1000))) // Add a short artificial delay
         .then(() => resolve(destinationPath));
     } catch (e) {
       log.error(e);

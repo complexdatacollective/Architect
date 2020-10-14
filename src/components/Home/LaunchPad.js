@@ -106,7 +106,7 @@ LaunchPad.propTypes = {
   createAndLoadProtocol: PropTypes.func.isRequired,
   unbundleAndLoadProtocol: PropTypes.func.isRequired,
   lastEditedProtocol: PropTypes.object,
-  otherRecentProtocols: PropTypes.object,
+  otherRecentProtocols: PropTypes.array,
 };
 
 LaunchPad.defaultProps = {

@@ -20,7 +20,7 @@ const ContextPanel = ({
     return {
       container: {
         activated: { backgroundColor: 'var(--color-slate-blue--dark)', transition },
-        unactivated: { backgroundColor: 'rgba(0,0,0,0))', transition },
+        unactivated: { backgroundColor: 'rgba(0,0,0,0)', transition },
       },
       panel: {
         activated: { height: '100%', transition },

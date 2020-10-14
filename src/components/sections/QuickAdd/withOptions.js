@@ -12,6 +12,6 @@ const mapStateToProps = (state, { entity, type }) => {
   };
 };
 
-const withOptions = connect(mapStateToProps);
+const withOptions = connect(mapStateToProps, {});
 
 export default withOptions;
