@@ -13,8 +13,6 @@ import { getFieldId, scrollToFirstIssue } from '../../utils/issues';
 import OrderedList from '../OrderedList';
 import UnorderedList from '../UnorderedList';
 import ValidatedFieldArray from '../Form/ValidatedFieldArray';
-// import Window from '../Window';
-// import Form from '../Form';
 import withEditHandlers from './withEditHandlers';
 
 const formName = 'editable-list-form';
@@ -25,7 +23,7 @@ const sortModes = [
 ];
 
 const notEmpty = value => (
-  value && value.length > 0 ? undefined : 'You must create at least one item'
+  value && value.length > 0 ? undefined : 'You must create at least one item.'
 );
 
 const handleSubmitFail = (issues) => {

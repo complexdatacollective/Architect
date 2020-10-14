@@ -37,6 +37,6 @@ VariableSelect.defaultProps = {
 };
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, {}),
   withVariableValidator,
 )(VariableSelect);
