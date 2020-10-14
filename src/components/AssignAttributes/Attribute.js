@@ -40,9 +40,8 @@ const Attribute = ({
           label="Variable:"
           component={NativeSelect}
           options={variableOptions}
-          onCreateNew={handleCreateNew}
+          onCreateOption={handleCreateNew}
           disabled={!!variableType}
-          createNewOption="Create new variable"
           validation={{ required: true }}
         />
       </div>
