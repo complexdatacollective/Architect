@@ -12,13 +12,15 @@ const Validation = ({
   itemKey,
   itemValue,
 }) => {
-  const handleKeyChange = option =>
-    onUpdate(option.value, itemValue, itemKey);
+  const handleKeyChange = option => onUpdate(option, itemValue, itemKey);
 
   const handleValueChange = newValue =>
     onUpdate(itemKey, newValue, itemKey);
 
-  const keyInputProps = { value: itemKey };
+  const keyInputProps = {
+    value: itemKey,
+    onChange: handleKeyChange,
+  };
 
   const valueInputProps = {
     value: itemValue || '',
@@ -34,14 +36,13 @@ const Validation = ({
             input={keyInputProps}
             validation={{ required: true }}
             placeholder="Select validation rule"
-            onChange={handleKeyChange}
           />
         </div>
-        <div className="form-fields-multi-select__rule-option">
-          { isValidationWithValue(itemKey) &&
-            <Number input={valueInputProps} />
-          }
-        </div>
+        { isValidationWithValue(itemKey) &&
+          <div className="form-fields-multi-select__rule-option">
+            <Number input={valueInputProps} validation={{ required: true }} />
+          </div>
+        }
       </div>
       <div className="form-fields-multi-select__rule-control">
         <div className="form-fields-multi-select__delete" onClick={() => onDelete(itemKey)}>

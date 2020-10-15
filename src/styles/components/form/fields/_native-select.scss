@@ -6,6 +6,7 @@
 
   &__wrapper {
     flex: 1;
+    margin-bottom: 2rem;
   }
 
   &__new-section {
@@ -73,7 +74,6 @@
     background-repeat: no-repeat, repeat;
     background-position: right unit(4) top 50%, 0 0;
     background-size: unit(1.5) auto, 100%;
-    margin-bottom: 2rem;
 
     &:disabled {
       cursor: not-allowed;
