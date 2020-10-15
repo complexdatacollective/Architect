@@ -115,7 +115,7 @@ class Overview extends Component {
                   onClick={() => openScreen('assets')}
                 >
                   <h3>Manage Protocol</h3>
-                  <h2>Assets</h2>
+                  <h2>Resources</h2>
                 </GraphicButton>
                 <GraphicButton
                   graphic={codebookGraphic}

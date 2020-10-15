@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import NativeSelect from '../../components/Form/Fields/NativeSelect';
+import { RadioGroup } from '@codaco/ui/lib/components/Fields';
 import withAssets from './withAssets';
 import Thumbnail from './Thumbnail';
 
 const ASSET_TYPES = [
+  { label: 'All Types', value: null },
   { label: 'Image', value: 'image' },
   { label: 'Video', value: 'video' },
   { label: 'Audio', value: 'audio' },
@@ -35,20 +36,19 @@ const Assets = ({
     input: {
       onChange: onUpdateAssetFilter,
       value: assetType,
-      placeholder: 'Filter by asset type...',
     },
+    label: 'Show types:',
   };
 
   return (
     <div className="asset-browser-assets">
       { !type &&
         <div className="asset-browser-assets__controls">
-          <NativeSelect {...selectProps} />
+          <RadioGroup {...selectProps} />
         </div>
       }
-
       <div className="asset-browser-assets__assets">
-        {assets.length > 0 ? renderedAssets : (<em>No assets to display.</em>)}
+        {assets.length > 0 ? renderedAssets : (<em>No resources to display.</em>)}
       </div>
     </div>
   );

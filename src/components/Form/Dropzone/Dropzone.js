@@ -148,17 +148,19 @@ const Dropzone = ({
       >
         <div className={`${className}__container`} />
         <div className={`${className}__label`}>
-          Drop a file here or&nbsp;
-          <div className={`${className}__link`}>click to browse</div>
+          Drag and drop a file here to import it, or&nbsp;
+          <span className={`${className}__link`}>click here to select a file from your computer</span>.
         </div>
         <div className={`${className}__loading`}>
           { state.isActive && <Spinner small /> }
         </div>
       </div>
-      <div className={errorClasses}>
-        <Icon name="warning" />
-        {state.error}
-      </div>
+      { state.error && (
+        <div className={errorClasses}>
+          <Icon name="warning" />
+          {state.error}
+        </div>
+      )}
     </div>
   );
 };

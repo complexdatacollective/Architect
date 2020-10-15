@@ -32,7 +32,6 @@ class Asset extends Component {
       type,
       isUsed,
     } = this.props;
-
     const PreviewComponent = ASSET_COMPONENTS[type] || FallBackAssetComponent;
 
     const assetClasses = cx(

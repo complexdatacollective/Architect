@@ -12,6 +12,10 @@
   background: #e9edef;
   border-radius: var(--border-radius);
 
+  >:first-child {
+    margin-top: 0;
+  }
+
   &:last-child {
     margin-top: 0;
     border: 0;

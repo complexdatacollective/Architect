@@ -17,6 +17,7 @@ const NativeSelect = ({
   createLabelText,
   createInputLabel,
   createInputPlaceholder,
+  allowPlaceholderSelect,
   reserved,
   validation,
   disabled,
@@ -32,6 +33,11 @@ const NativeSelect = ({
     if (option.target.value === '_create') {
       input.onChange(null);
       setShowCreateOptionForm(true);
+      return;
+    }
+
+    if (option.target.value === '_placeholder') {
+      input.onChange(null);
       return;
     }
 
@@ -121,7 +127,7 @@ const NativeSelect = ({
               disabled={!!disabled}
               {...rest}
             >
-              <option disabled value="_placeholder">-- {placeholder} --</option>
+              <option disabled={!allowPlaceholderSelect} value="_placeholder">-- {placeholder} --</option>
               { onCreateOption && <option value="_create">{createLabelText}</option>}
               { sortedOptions.map((option, index) => (
                 <option
@@ -147,6 +153,7 @@ NativeSelect.propTypes = {
   createLabelText: PropTypes.string,
   createInputLabel: PropTypes.string,
   createInputPlaceholder: PropTypes.string,
+  allowPlaceholderSelect: PropTypes.bool,
   options: PropTypes.array,
   input: PropTypes.object,
   label: PropTypes.string,
@@ -163,6 +170,7 @@ NativeSelect.defaultProps = {
   createLabelText: '✨ Create new ✨',
   createInputLabel: 'New variable name',
   createInputPlaceholder: 'Enter a variable name...',
+  allowPlaceholderSelect: false,
   options: [],
   input: { value: '' },
   label: null,

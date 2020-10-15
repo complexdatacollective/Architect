@@ -63,6 +63,11 @@ a {
   cursor: not-allowed;
 }
 
+.form-field {
+  padding: 1rem unit(2);
+
+}
+
 .form-field-toggle__button {
   background: var(--color-platinum--dark);
 }

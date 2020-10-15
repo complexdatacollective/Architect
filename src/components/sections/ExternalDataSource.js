@@ -10,8 +10,8 @@ import withDisabledSubjectRequired from '../enhancers/withDisabledSubjectRequire
 const ExternalDataSource = props => (
   <Section contentId="guidance.editor.externalData" {...props}>
     <Row>
-      <div id={getFieldId('dataSource')} data-name="Roster data-source" />
       <h3>External Data-source for Roster</h3>
+      <div id={getFieldId('dataSource')} data-name="Roster data-source" />
       <p>
         This stage needs a source of nodes to populate the roster.
         Select a network data file to use.

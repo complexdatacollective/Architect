@@ -1,26 +1,37 @@
-$assets-per-row: 5;
-
 .asset-browser-assets {
   &__controls {
+    --input-background: transparent;
     margin-bottom: unit(2);
-    width: 50%;
+
+    .form-field-container {
+      display: flex;
+      align-items: center;
+
+      h4 {
+        flex: 0 0 auto;
+        margin: 0;
+      }
+
+      .form-field-radio-group {
+        flex-direction: row;
+        margin-bottom: 0;
+        width: unset;
+
+        .form-field-radio {
+          margin-bottom: 0;
+          margin-right: unit(2);
+        }
+      }
+
+    }
+
+
   }
 
   &__assets {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: unit(2);
   }
 
-  &__asset {
-    flex: 0 0 unit(35);
-    margin: 0 unit(2) unit(2) 0;
-  }
-}
-
-.dialog {
-  .asset-browser-assets__assets {
-    max-height: 50vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
 }

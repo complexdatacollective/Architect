@@ -1,17 +1,21 @@
 .asset-browser {
   &__window {
-    max-height: calc(95vh - #{unit(16)});
-    width: 85%;
-    max-width: initial;
+    width: 100rem;
+    max-width: 90%;
+    margin: 0 auto;
+    background: var(--background);
+    color: var(--text);
+    border: 0;
+    overflow: hidden;
 
     .dialog__footer {
-      text-align: right;
+      width: 100%;
+      padding: unit(1) unit(2);
+      background: var(--color-slate-blue);
+      display: flex;
+      justify-content: flex-end;
+      margin: 0;
     }
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
   }
 
   &__create {

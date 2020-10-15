@@ -47,13 +47,15 @@ const Attribute = ({
       </div>
       <div className="assign-attributes-attribute__value">
         { variableType &&
-          <ValidatedField
-            name={`${field}.value`}
-            label="Value:"
-            component={ValueComponent}
-            options={options}
-            validation={getValidationForType(variableType)}
-          />
+          <React.Fragment>
+            <h4>Value:</h4>
+            <ValidatedField
+              name={`${field}.value`}
+              component={ValueComponent}
+              options={options}
+              validation={getValidationForType(variableType)}
+            />
+          </React.Fragment>
         }
       </div>
       <div

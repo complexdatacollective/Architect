@@ -34,7 +34,6 @@ const filterHandlers = withHandlers({
 const mapStateToProps = (state, { assetType, selected }) => {
   const allAssets = getAssetManifest(state);
   const filteredAssets = filterAssets(assetType, allAssets);
-
   // Get asset usage index
   const assetIndex = getAssetIndex(state);
   const assetSearch = indexUtils.buildSearch([assetIndex]);

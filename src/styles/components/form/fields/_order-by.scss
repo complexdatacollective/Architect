@@ -4,6 +4,10 @@ $component-name: form-fields-order-by;
   @include form-field;
   display: block;
 
+  .form-fields-select-native__component {
+    margin-bottom: 0;
+  }
+
   &__label {
     @include preset('title-4');
     font-weight: 600;

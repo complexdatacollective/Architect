@@ -99,10 +99,10 @@ class FileInput extends PureComponent {
         <div className="form-fields-file__browse">
           <Button
             onClick={this.handleBrowseLibrary}
-            color="paradise-pink"
+            color="primary"
             size="small"
           >
-            { !value ? 'Select asset' : 'Update asset' }
+            { !value ? 'Select resource' : 'Update resource' }
           </Button>
         </div>
         <AssetBrowserWindow
