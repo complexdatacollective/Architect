@@ -42,8 +42,12 @@ class CodebookScreen extends Component {
             <h1>
               Codebook
             </h1>
-            <Codebook />
+            <p>
+              Below you can find an overview of the node and edge types that you have
+              defined while creating your interview. Entities that are unused may be deleted.
+            </p>
           </Section>
+          <Codebook />
         </Layout>
       </Screen>
     );
