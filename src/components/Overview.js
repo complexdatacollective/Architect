@@ -16,8 +16,8 @@ import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 import { actionCreators as uiActions } from '../ducks/modules/ui';
 
 const panelVariants = {
-  initial: { opacity: 0, y: -200 },
-  animate: { opacity: 1, y: 0, transition: { type: 'spring', when: 'beforeChildren' } },
+  hide: { opacity: 0, y: -200 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.2, when: 'beforeChildren' } },
 };
 
 class Overview extends Component {
@@ -72,18 +72,13 @@ class Overview extends Component {
       description,
       updateOptions,
       openScreen,
-      show,
     } = this.props;
-
-    if (!show) { return null; }
 
     return (
       <React.Fragment>
         <motion.div
           className="overview"
           variants={panelVariants}
-          initial="initial"
-          animate="animate"
         >
 
           <div className="overview__panel">
@@ -143,11 +138,9 @@ Overview.propTypes = {
   codebook: PropTypes.object.isRequired,
   updateOptions: PropTypes.func,
   openScreen: PropTypes.func.isRequired,
-  show: PropTypes.bool,
 };
 
 Overview.defaultProps = {
-  show: true,
   name: null,
   description: '',
   updateOptions: () => {},

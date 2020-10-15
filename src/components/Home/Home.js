@@ -9,7 +9,6 @@ import LaunchPad from './LaunchPad';
 const variants = {
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.32, when: 'beforeChildren' },
   },
   hide: {
     opacity: 0,
@@ -22,8 +21,6 @@ const Home = () => (
       <motion.div
         className="home__container"
         variants={variants}
-        initial="hide"
-        animate="show"
         key="start-screen"
       >
         <WelcomeHeader />

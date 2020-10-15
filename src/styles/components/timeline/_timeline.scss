@@ -6,6 +6,7 @@ $bottom-spacing: unit(12);
   position: relative;
   flex: 1 0 auto;
   overflow: hidden;
+  margin-bottom: 6rem;
 
   &__insert {
     cursor: pointer;

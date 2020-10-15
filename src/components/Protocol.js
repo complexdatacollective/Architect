@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
@@ -22,8 +23,23 @@ const Protocol = ({
     { 'scene--loading': isLoading },
   );
 
+  const variants = {
+    show: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+    hide: {
+      opacity: 0,
+    },
+  };
+
   return (
-    <div className={sceneClasses}>
+    <motion.div
+      className={sceneClasses}
+      variants={variants}
+    >
       <div className="scene__protocol">
         <Overview
           show={hasProtocol}
@@ -31,7 +47,7 @@ const Protocol = ({
         <Timeline show={hasProtocol} />
       </div>
       <ProtocolControlBar show={hasProtocol} />
-    </div>
+    </motion.div>
   );
 };
 

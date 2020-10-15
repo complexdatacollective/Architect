@@ -22,8 +22,7 @@ const variants = {
       background: 'repeating-linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0) 100%, var(--background) 100%, var(--background) 100% )',
       transition: {
         duration: 0.5,
-        delay: 0.75,
-        when: 'beforeChildren',
+        delay: 0.5,
       },
     },
     hide: {
@@ -150,7 +149,6 @@ class Timeline extends Component {
         <motion.div
           className="timeline__stages"
           initial={sorting ? false : 'hide'}
-          animate="show"
           variants={variants.outer}
         >
           { this.renderStages() }

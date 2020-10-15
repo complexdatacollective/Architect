@@ -9,7 +9,6 @@ import Screens from '@components/Screens';
 
 const Routes = () => (
   <Router history={appHistory}>
-    <Loading />
     <Screens />
     <Route path="/" exact>
       <Home />
@@ -18,6 +17,7 @@ const Routes = () => (
       <ProtocolLoader />
       <Protocol />
     </Route>
+    <Loading />
   </Router>
 );
 
