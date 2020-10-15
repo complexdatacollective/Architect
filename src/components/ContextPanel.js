@@ -15,6 +15,7 @@ const ContextPanel = ({
   const variants = useMemo(() => {
     const transition = {
       duration: getCSSVariableAsNumber('--animation-duration-standard-ms') * 0.001,
+      // type: 'spring',
     };
 
     return {
@@ -25,10 +26,6 @@ const ContextPanel = ({
       panel: {
         activated: { height: '100%', transition },
         unactivated: { height: '0', transition },
-      },
-      content: {
-        activated: { opacity: 1, transition },
-        unactivated: { opacity: 0, transition },
       },
     };
   }, []);
@@ -85,10 +82,9 @@ const ContextPanel = ({
             <motion.div
               className="context-panel__panel-container"
               key="content"
-              variants={variants.content}
-              initial="unactivated"
-              animate={animate}
-              exit="unactivated"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
               {children}
             </motion.div>
