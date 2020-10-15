@@ -22,56 +22,68 @@ const PresetFields = ({
   entity,
   type,
 }) => (
-  <Section>
-    <Row>
-      <h3 id={getFieldId('text')}>Preset label</h3>
-      <ValidatedField
-        name="label"
-        component={Text}
-        label=""
-        placeholder="Enter a label for the preset here"
-        validation={{ required: true }}
-      />
-    </Row>
-    <Row>
-      <ValidatedField
-        name="layoutVariable"
-        component={VariableSelect}
-        entity={entity}
-        type={type}
-        label="Layout variable"
-        validation={{ required: true }}
-        options={layoutVariblesForSubject}
-        onCreateOption={handleCreateLayoutVariable}
-      />
-    </Row>
-    <Row>
-      <ValidatedField
-        name="groupVariable"
-        component={NativeSelect}
-        label="Group variable"
-        options={groupVariablesForSubject}
-      />
-    </Row>
-    <Row>
-      <Field
-        name="edges.display"
-        component={CheckboxGroup}
-        label="Display the following edges:"
-        placeholder="&mdash; Toggle an edge to display &mdash;"
-        options={edgesForSubject}
-      />
-    </Row>
-    <Row>
-      <Field
-        name="highlight"
-        component={CheckboxGroup}
-        label="Highlight nodes with the following attribute:"
-        placeholder="&mdash; Toggle a variable to highlight &mdash;"
-        options={highlightVariablesForSubject}
-      />
-    </Row>
-  </Section>
+  <React.Fragment>
+    <Section>
+      <Row>
+        <h3 id={getFieldId('text')}>Preset label</h3>
+        <ValidatedField
+          name="label"
+          component={Text}
+          label=""
+          placeholder="Enter a label for the preset..."
+          validation={{ required: true }}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <ValidatedField
+          name="layoutVariable"
+          component={VariableSelect}
+          entity={entity}
+          type={type}
+          label="Layout variable"
+          validation={{ required: true }}
+          options={layoutVariblesForSubject}
+          onCreateOption={handleCreateLayoutVariable}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <ValidatedField
+          name="groupVariable"
+          component={NativeSelect}
+          allowPlaceholderSelect
+          placeholder="None"
+          label="Group variable"
+          options={groupVariablesForSubject}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <Field
+          name="edges.display"
+          component={CheckboxGroup}
+          label="Edge types to display"
+          placeholder="&mdash; Toggle an edge to display &mdash;"
+          options={edgesForSubject}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <Field
+          name="highlight"
+          component={CheckboxGroup}
+          label="Highlight nodes with the following attributes"
+          placeholder="&mdash; Toggle a variable to highlight &mdash;"
+          options={highlightVariablesForSubject}
+        />
+      </Row>
+    </Section>
+  </React.Fragment>
 );
 
 PresetFields.propTypes = {

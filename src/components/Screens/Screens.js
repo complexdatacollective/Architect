@@ -68,7 +68,7 @@ const Screens = (props) => {
       height: '100vh',
       top: 0,
       left: 0,
-      background: 'white',
+      background: 'var(--background)',
     };
 
     return (
@@ -84,6 +84,7 @@ const Screens = (props) => {
           variants={{
             in: { opacity: 1 },
             hidden: { opacity: 0 },
+            transition: { duration: 0.1 },
           }}
         >
           <ScreenComponent
