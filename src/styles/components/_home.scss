@@ -31,8 +31,6 @@ $font-sizes: (
   @return map-get($font-sizes, $name);
 }
 
-//8.4
-
 .sprite {
   background-size: contain;
   background-repeat: no-repeat;

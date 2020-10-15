@@ -53,6 +53,7 @@ const networkReader = withExtensionSwitch({
 */
 export const getNetworkVariables = async (filePath) => {
   const network = await networkReader(filePath);
+
   if (!network) { return null; }
   return getVariableNamesFromNetwork(network);
 };

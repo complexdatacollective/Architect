@@ -25,7 +25,6 @@ const Home = () => (
         initial="hide"
         animate="show"
         key="start-screen"
-        layout
       >
         <WelcomeHeader />
         <UpdateAvailable />

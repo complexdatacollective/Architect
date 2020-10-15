@@ -3,21 +3,6 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 
-const springy = {
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      when: 'beforeChildren',
-    },
-  },
-  hide: {
-    opacity: 0,
-    y: '5rem',
-  },
-};
-
 const Section = ({
   children,
   className,
@@ -30,9 +15,9 @@ const Section = ({
   return (
     <motion.div
       className={classes}
-      initial="hide"
-      exit="hide"
-      variants={springy}
+      initial={{ opacity: 0, y: 200 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
       layout
     >
       {children}

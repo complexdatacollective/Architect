@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@codaco/ui';
 import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import headerGraphic from '@app/images/Arc-Flat.svg';
@@ -65,43 +65,49 @@ const WelcomeHeader = () => {
         className="welcome-header__panel"
         variants={expand}
       >
-        <motion.div
-          variants={start}
-          animate={isOpen ? 'show' : 'hide'}
-        >
-          <Group
-            className="home-welcome"
-          >
-            <div className="home-welcome__content">
-              <h2>Welcome to Architect!</h2>
-              <p>
-                If you are new to the software, please consider watching the overview
-                video to the left. It will explain how the software works, and introduce
-                all the essential skills needed to build an interview protocol. We also
-                have extensive tutorials and information on a range of topics on our
-                documentation website, which you can visit using the link below.
-              </p>
-              <p>
-                Alternatively, to get started right away use the buttons below to
-                create a new interview protocol, or open an existing one from elsewhere
-              </p>
-              <div className="welcome-actions">
-                <Button
-                  color="primary"
-                  onClick={() => openExternalLink('https://www.youtube.com/watch?v=XzfE6j-LnII')}
-                >
-                  Watch overview video
-                </Button>
-                <Button
-                  color="sea-serpent"
-                  onClick={() => openExternalLink('https://documentation.networkcanvas.com')}
-                >
-                  Visit documentation website
-                </Button>
-              </div>
-            </div>
-          </Group>
-        </motion.div>
+        <AnimatePresence>
+          { isOpen && (
+            <motion.div
+              variants={start}
+              initial="hide"
+              animate="show"
+              exit="hide"
+            >
+              <Group
+                className="home-welcome"
+              >
+                <div className="home-welcome__content">
+                  <h2>Welcome to Architect!</h2>
+                  <p>
+                    If you are new to the software, please consider watching the overview
+                    video to the left. It will explain how the software works, and introduce
+                    all the essential skills needed to build an interview protocol. We also
+                    have extensive tutorials and information on a range of topics on our
+                    documentation website, which you can visit using the link below.
+                  </p>
+                  <p>
+                    Alternatively, to get started right away use the buttons below to
+                    create a new interview protocol, or open an existing one from elsewhere
+                  </p>
+                  <div className="welcome-actions">
+                    <Button
+                      color="primary"
+                      onClick={() => openExternalLink('https://www.youtube.com/watch?v=XzfE6j-LnII')}
+                    >
+                      Watch overview video
+                    </Button>
+                    <Button
+                      color="sea-serpent"
+                      onClick={() => openExternalLink('https://documentation.networkcanvas.com')}
+                    >
+                      Visit documentation website
+                    </Button>
+                  </div>
+                </div>
+              </Group>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.section>
     </Section>
   );

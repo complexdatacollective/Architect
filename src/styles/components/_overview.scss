@@ -1,5 +1,3 @@
-
-
 .overview {
   margin: 0 auto;
   padding-top: unit(4);
@@ -95,6 +93,22 @@
 
       .graphic-button {
         height: 100%;
+
+        &__label {
+
+          h2,
+          h3 {
+            text-shadow: 1px 1px 0 #000, 0 0 .5rem #00000073; // sass-lint:disable-line no-color-literals no-invalid-hex
+          }
+
+          h2 {
+            font-size: 1.53rem;
+          }
+
+          h3 {
+            font-size: .8rem;
+          }
+        }
 
         &:first-child {
           margin-bottom: unit(2);
