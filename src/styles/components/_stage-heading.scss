@@ -26,7 +26,8 @@
       }
 
       &::before {
-        -webkit-mask-image: linear-gradient(180deg, transparent,  rgba(0, 0, 0, 1) 8rem,  rgba(0, 0, 0, 1) calc(100% - 8rem), transparent 100%);
+        mask-image: linear-gradient(180deg, transparent,  rgba(0, 0, 0, 1) 8rem,  rgba(0, 0, 0, 1) calc(100% - 8rem), transparent 100%); // sass-lint:disable-line no-color-literals
+        -webkit-mask-image: linear-gradient(180deg, transparent,  rgba(0, 0, 0, 1) 8rem,  rgba(0, 0, 0, 1) calc(100% - 8rem), transparent 100%); // sass-lint:disable-line no-color-literals
         content: '';
         border-left: .5rem solid var(--architect-timeline-line);
         position: absolute;

@@ -76,7 +76,7 @@ $component-name: timeline-stage;
     padding: .5rem;
     width: $preview-width;
     position: relative;
-    left: -0.6rem; // To counter box shadow
+    left: -.6rem; // To counter box shadow
     z-index: var(--z-default);
     text-align: center;
     border-radius: .5rem;

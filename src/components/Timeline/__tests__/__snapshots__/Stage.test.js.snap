@@ -1,26 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Stage /> can render 1`] = `
-<div
+<ForwardRef(MotionComponent)
   className="timeline-stage"
-  onEditSkipLogic={[Function]}
+  variants={
+    Object {
+      "hide": Object {
+        "opacity": 0,
+        "scale": 0,
+      },
+      "show": Object {
+        "opacity": 1,
+        "scale": 1,
+        "transition": Object {
+          "delay": 0.75,
+          "type": "spring",
+        },
+      },
+    }
+  }
 >
   <div
     className="timeline-stage__notch"
     onClick={[Function]}
   />
-  <getContext(Draft(EditStageButton))
+  <ForwardRef(EditStageButton)
     hasFilter={false}
     hasSkipLogic={false}
     label=""
     onEditStage={[Function]}
     type="Foo"
-    zoomColors={
-      Array [
-        "#227733",
-        "#ffffff",
-      ]
-    }
   />
   <div
     className="timeline-stage__controls"
@@ -32,32 +41,10 @@ exports[`<Stage /> can render 1`] = `
       <div
         className="timeline-stage__control-icon"
       >
-        ↑
-      </div>
-      Add stage before
-    </a>
-    <a
-      className="timeline-stage__control"
-      onClick={[Function]}
-    >
-      <div
-        className="timeline-stage__control-icon"
-      >
         ✕
       </div>
       Delete stage
     </a>
-    <a
-      className="timeline-stage__control"
-      onClick={[Function]}
-    >
-      <div
-        className="timeline-stage__control-icon"
-      >
-        ↓
-      </div>
-      Add stage after
-    </a>
   </div>
-</div>
+</ForwardRef(MotionComponent)>
 `;

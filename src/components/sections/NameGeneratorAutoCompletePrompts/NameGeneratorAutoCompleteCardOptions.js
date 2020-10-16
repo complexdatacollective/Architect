@@ -5,7 +5,7 @@ import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
 import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
-import Tip from '../../Tip';
+// import Tip from '../../Tip';
 
 const NameGeneratorAutoCompletePrompts = props => (
   <EditableList

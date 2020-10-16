@@ -14,7 +14,7 @@ import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
 
 const PresetFields = ({
-  layoutVariblesForSubject,
+  layoutVariablesForSubject,
   groupVariablesForSubject,
   edgesForSubject,
   highlightVariablesForSubject,
@@ -44,7 +44,7 @@ const PresetFields = ({
           type={type}
           label="Layout variable"
           validation={{ required: true }}
-          options={layoutVariblesForSubject}
+          options={layoutVariablesForSubject}
           onCreateOption={handleCreateLayoutVariable}
         />
       </Row>
@@ -87,7 +87,7 @@ const PresetFields = ({
 );
 
 PresetFields.propTypes = {
-  layoutVariblesForSubject: PropTypes.array,
+  layoutVariablesForSubject: PropTypes.array,
   groupVariablesForSubject: PropTypes.array,
   edgesForSubject: PropTypes.array,
   highlightVariablesForSubject: PropTypes.array,
@@ -97,7 +97,7 @@ PresetFields.propTypes = {
 };
 
 PresetFields.defaultProps = {
-  layoutVariblesForSubject: [],
+  layoutVariablesForSubject: [],
   groupVariablesForSubject: [],
   edgesForSubject: [],
   highlightVariablesForSubject: [],

@@ -9,6 +9,9 @@ const mockProps = {
   isSaving: false,
   isDisabled: false,
   showControlBar: true,
+  hasUnsavedChanges: false,
+  hasAnyStages: true,
+  handleClickStart: () => {},
 };
 
 describe('<ProtocolControlBar />', () => {

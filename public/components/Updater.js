@@ -4,7 +4,7 @@ const { autoUpdater } = require('electron-updater');
 const { dialog } = require('electron');
 const log = require('./log');
 
-global.silentUpdates = false;
+global.silentUpdates = true;
 
 const releasesUrl = 'https://github.com/complexdatacollective/Architect/releases';
 
@@ -29,11 +29,16 @@ const onUpdateAvailable = (updateInfo) => {
 };
 
 const onUpdateNotAvailable = () => {
+  if (global.silentUpdates) {
+    log.info('Update not available (Did not notify user)');
+    return;
+  }
+
   updateListeners.cleanup();
 
   dialog.showMessageBox({
     title: 'No Updates Available',
-    message: 'Network Canvas is up-to-date.',
+    message: 'Architect is up-to-date.',
   });
 };
 

@@ -2,69 +2,31 @@
 
 exports[`<ProtocolControlBar /> can render 1`] = `
 <ControlBar
-  buttons={
+  buttons={Array []}
+  className=""
+  secondaryButtons={
     Array [
       <Button
-        color="white"
+        color="platinum"
         content=""
-        data-variant="save"
         disabled={false}
         icon={
-          <Icon
-            className=""
-            color=""
-            name="arrow-right"
-            style={Object {}}
-          />
+          <div>
+            <img
+              alt="Return to start screen"
+              src="log-out.svg"
+            />
+          </div>
         }
-        iconPosition="right"
+        iconPosition="left"
         onClick={[Function]}
         size=""
         type="button"
       >
-        <ForwardRef(MotionComponent)
-          animate="ready"
-          initial="ready"
-        >
-          <ForwardRef(MotionComponent)
-            variants={
-              Object {
-                "busy": Object {
-                  "opacity": 0,
-                },
-                "ready": Object {
-                  "opacity": 1,
-                },
-              }
-            }
-          >
-            Save
-          </ForwardRef(MotionComponent)>
-          <ForwardRef(MotionComponent)
-            className="button__busy"
-            variants={
-              Object {
-                "busy": Object {
-                  "opacity": 1,
-                },
-                "ready": Object {
-                  "opacity": 0,
-                },
-              }
-            }
-          >
-            <Spinner
-              large={false}
-              small={false}
-            />
-          </ForwardRef(MotionComponent)>
-        </ForwardRef(MotionComponent)>
+        Return to start screen
       </Button>,
     ]
   }
-  className=""
-  flip={false}
-  secondaryButtons={null}
   show={true}
 />
 `;

@@ -9,7 +9,7 @@
   overflow: hidden;
   margin: unit(4) auto;
   padding: unit(4);
-  background: #e9edef;
+  background: var(--architect-panel-grey);
   border-radius: var(--border-radius);
 
   >:first-child {
@@ -32,7 +32,7 @@
   .stage-editor-section {
     margin: unit(4) 0 0;
     padding: unit(1) unit(2) unit(2);
-    background: #dbe0e2;
+    background: var(--architect-panel-grey);
     border-radius: unit(1);
   }
 

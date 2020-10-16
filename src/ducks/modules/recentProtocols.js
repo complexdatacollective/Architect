@@ -27,7 +27,8 @@ export default function reducer(state = initialState, action = {}) {
         'filePath',
       )
         .slice(0, 50);
-    case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
+    // case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
+    // -- Why would we update lastOpened on unbundle, not load succcess (above)?
     case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
       return state.map((recent) => {
         if (recent.filePath === action.filePath) {

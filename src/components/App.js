@@ -52,14 +52,9 @@ const App = () => {
 };
 
 App.propTypes = {
-  // children: PropTypes.element,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
-};
-
-App.defaultProps = {
-  children: null,
 };
 
 export { App };

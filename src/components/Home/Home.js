@@ -2,7 +2,6 @@ import React from 'react';
 import { AnimateSharedLayout, motion } from 'framer-motion';
 import WelcomeHeader from './WelcomeHeader';
 import Tips from './Tips';
-import UpdateAvailable from './UpdateAvailable';
 import WhatsNew from './WhatsNew';
 import LaunchPad from './LaunchPad';
 
@@ -24,7 +23,6 @@ const Home = () => (
         key="start-screen"
       >
         <WelcomeHeader />
-        <UpdateAvailable />
         <WhatsNew />
         <LaunchPad />
         <Tips />

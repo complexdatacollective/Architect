@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CodebookScreen /> can render 1`] = `
-<getContext(Window(withState(withContext(Screen))))
+<withState(withContext(Screen))
   buttons={
     Array [
       <Button
         color=""
         content=""
         disabled={false}
-        icon=""
+        icon="arrow-right"
         iconPosition="right"
         onClick={[Function]}
         size=""
         type="button"
       >
-        Continue
+        Return to Timeline
       </Button>,
     ]
   }
@@ -25,12 +25,6 @@ exports[`<CodebookScreen /> can render 1`] = `
   <Layout
     className=""
   >
-    <SectionsHeading
-      location={null}
-      meta={null}
-    >
-      Codebook
-    </SectionsHeading>
     <Section
       className=""
       compactNext={false}
@@ -38,8 +32,14 @@ exports[`<CodebookScreen /> can render 1`] = `
       disabled={false}
       group={false}
     >
-      <Connect(Codebook) />
+      <h1>
+        Codebook
+      </h1>
+      <p>
+        Below you can find an overview of the node and edge types that you have defined while creating your interview. Entities that are unused may be deleted.
+      </p>
     </Section>
+    <Connect(Codebook) />
   </Layout>
-</getContext(Window(withState(withContext(Screen))))>
+</withState(withContext(Screen))>
 `;

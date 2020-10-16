@@ -255,7 +255,7 @@ $font-sizes: (
 
     .logo {
       height: 8rem;
-      filter: drop-shadow(0 0.6rem 0.6rem rgba(0, 0, 0, 0.35));
+      filter: drop-shadow(0 unit(1) unit(1) rgba(0, 0, 0, .35)); // sass-lint:disable-line no-color-literals
     }
 
     .version {
@@ -309,7 +309,7 @@ $font-sizes: (
   flex-direction: row;
   color: var(--color-white);
   padding-top: 0;
-  background-image: url(../images/home/undraw_prototyping_process.svg);
+  background-image: url('../images/home/undraw_prototyping_process.svg');
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: 100% 0;

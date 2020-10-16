@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Section, Row } from '@components/EditorLayout';
 import { change } from 'redux-form';
 import { connect } from 'react-redux';
@@ -15,12 +16,10 @@ const withChangeDataSourceHandler = connect(
 );
 
 const ExternalDataSource = (props) => {
-
-  const handleChangeDataSource = (things) => {
-    console.log('change', things, props);
+  const handleChangeDataSource = () => {
     props.changeForm('edit-stage', 'cardOptions', null);
     props.changeForm('edit-stage', 'sortOptions', null);
-  }
+  };
 
   return (
     <Section contentId="guidance.editor.externalData" {...props}>
@@ -41,6 +40,10 @@ const ExternalDataSource = (props) => {
       </Row>
     </Section>
   );
+};
+
+ExternalDataSource.propTypes = {
+  changeForm: PropTypes.func.isRequired,
 };
 
 export { ExternalDataSource };
