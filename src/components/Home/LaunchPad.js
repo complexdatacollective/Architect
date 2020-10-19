@@ -45,7 +45,7 @@ const LaunchPad = ({
             <h2>Resume Editing</h2>
             <ProtocolCard
               description={lastEditedProtocol.filePath}
-              lastModified={lastEditedProtocol.lastModified.toString()}
+              lastModified={lastEditedProtocol.lastModified}
               name={lastEditedProtocol.name}
               onClickHandler={() => handleLoadProtocol(lastEditedProtocol.filePath)}
               schemaVersion={lastEditedProtocol.schemaVersion}
@@ -58,7 +58,7 @@ const LaunchPad = ({
                   key={protocol.filePath}
                   condensed
                   description={protocol.filePath}
-                  lastModified={protocol.lastModified.toString()}
+                  lastModified={protocol.lastModified}
                   name={protocol.name}
                   onClickHandler={() => handleLoadProtocol(protocol.filePath)}
                   schemaVersion={protocol.schemaVersion}
