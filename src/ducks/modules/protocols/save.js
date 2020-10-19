@@ -10,10 +10,11 @@ const SAVE_PROTOCOL_ERROR = 'PROTOCOLS/SAVE_ERROR';
 
 const saveProtocol = () => ({ type: SAVE_PROTOCOL });
 
-const saveProtocolSuccess = (destinationPath, protocol) => ({
+const saveProtocolSuccess = (destinationPath, protocol, meta) => ({
   type: SAVE_PROTOCOL_SUCCESS,
   destinationPath,
   protocol,
+  meta,
 });
 
 const saveProtocolError = error => ({
@@ -43,7 +44,7 @@ const saveProtocolThunk = () =>
         dispatch(validationErrorDialog(e));
       })
       .then(() => saveProtocolFile(meta.workingPath, protocol))
-      .then(destinationPath => dispatch(saveProtocolSuccess(destinationPath, protocol)))
+      .then(destinationPath => dispatch(saveProtocolSuccess(destinationPath, protocol, meta)))
       .catch((e) => {
         dispatch(saveProtocolError(e));
         throw e;

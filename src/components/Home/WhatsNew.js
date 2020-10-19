@@ -48,7 +48,7 @@ const WhatsNew = () => {
 
               <ButtonStack>
                 <Button color="sea-serpent" onClick={handleDismiss} >Dismiss</Button>
-                <Button color="platinum" onClick={e => openExternalLink(e, 'https://github.com/complexdatacollective/Architect/releases')} >View full release notes</Button>
+                <Button color="platinum" onClick={() => openExternalLink('https://github.com/complexdatacollective/Architect/releases')} >View full release notes</Button>
               </ButtonStack>
             </Group>
           </Section>

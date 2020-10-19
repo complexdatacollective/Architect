@@ -66,7 +66,6 @@ class AppManager {
   }
 
   static clearStorageData() {
-    log.info('clearStorage', global.appWindow);
     if (!global.appWindow) { return; }
 
     global.appWindow.webContents.session.clearStorageData()
@@ -173,7 +172,12 @@ class AppManager {
       open: () => AppManager.open(),
       saveCopy: () => AppManager.saveCopy(),
       save: () => AppManager.save(),
-      clearStorageData: () => clearStorageDataDialog().then(() => AppManager.clearStorageData()),
+      clearStorageData: () =>
+        clearStorageDataDialog()
+          .then((shouldClearStorage) => {
+            if (!shouldClearStorage) { return; }
+            AppManager.clearStorageData();
+          }),
       checkForUpdates: () => this.updater.checkForUpdates(),
     };
 
