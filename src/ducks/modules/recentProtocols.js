@@ -2,7 +2,6 @@ import path from 'path';
 import { uniqBy, get } from 'lodash';
 import { actionTypes as loadActionTypes } from './protocols/load';
 import { actionTypes as saveActionTypes } from './protocols/save';
-import { actionTypes as bundleActionTypes } from './protocols/bundle';
 import { actionTypes as unbundleActionTypes } from './protocols/unbundle';
 
 const initialState = [];
@@ -24,7 +23,7 @@ export default function reducer(state = initialState, action = {}) {
           lastModified: new Date().getTime(),
         },
         ...state,
-      ])
+      ], 'filePath')
         .sort((a, b) => a.lastModified < b.lastModified)
         .slice(0, 50);
     }
@@ -57,7 +56,7 @@ export default function reducer(state = initialState, action = {}) {
           schemaVersion: action.protocol.schemaVersion,
         },
         ...state,
-      ])
+      ], 'filePath')
         .sort((a, b) => a.lastModified < b.lastModified)
         .slice(0, 50);
     }
