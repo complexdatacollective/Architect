@@ -71,7 +71,7 @@
         "decompress": "^4.2.1",
         "detect-port": "1.1.0",
         "dotenv": "4.0.0",
-        "electron": "^9.0.0",
+        "electron": "~9.2.1",
         "electron-builder": "^22.7.0",
         "electron-devtools-installer": "^2.2.4",
         "electron-log": "^4.2.2",
