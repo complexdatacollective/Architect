@@ -154,7 +154,7 @@ class Timeline extends Component {
           { this.renderStages() }
           <motion.div
             className="timeline__insert timeline__insert--new"
-            onClick={this.handleInsertStage}
+            onClick={() => this.handleInsertStage()}
             variants={variants.newStage}
           >
             Add new stage
