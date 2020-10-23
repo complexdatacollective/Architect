@@ -54,9 +54,13 @@ const ProtocolControlBar = ({
 ProtocolControlBar.propTypes = {
   saveProtocol: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
-  hasUnsavedChanges: PropTypes.bool.isRequired,
+  hasUnsavedChanges: PropTypes.bool,
   hasAnyStages: PropTypes.bool.isRequired,
   handleClickStart: PropTypes.func.isRequired,
+};
+
+ProtocolControlBar.defaultProps = {
+  hasUnsavedChanges: false,
 };
 
 const mapStateToProps = (state) => {
