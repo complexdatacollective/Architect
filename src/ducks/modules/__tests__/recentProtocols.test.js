@@ -7,7 +7,7 @@ import { actionCreators as unbundleActions } from '../protocols/unbundle';
 import reducer from '../recentProtocols';
 
 const protocol = {
-  description: 'lol',
+  description: 'test description',
   schemaVersion: 4,
 };
 
@@ -65,7 +65,7 @@ describe('recentProtocols', () => {
         expect(stateAfter[0]).toMatchObject({
           filePath: '/dev/null/mock/recent/path/2',
           name: '2',
-          description: 'lol',
+          description: 'test description',
           schemaVersion: 4,
         });
 
@@ -95,7 +95,7 @@ describe('recentProtocols', () => {
         expect(stateAfter[0]).toMatchObject({
           filePath: '/dev/null/mock/recent/path/2',
           name: '2',
-          description: 'lol',
+          description: 'test description',
           schemaVersion: 4,
         });
 

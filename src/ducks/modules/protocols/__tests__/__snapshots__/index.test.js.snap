@@ -154,6 +154,11 @@ Array [
   Array [
     Object {
       "destinationPath": "/dev/null/fake/user/protocol/path",
+      "meta": Object {
+        "filePath": "/dev/null/home/documents/1234-active-protocol",
+        "id": "1234-active-protocol",
+        "workingPath": "/dev/null/1234-active-protocol",
+      },
       "protocol": Object {
         "assetManifest": Object {
           "1234-asset-1": Object {
@@ -587,6 +592,11 @@ Array [
   Array [
     Object {
       "destinationPath": "/dev/null/fake/user/protocol/path",
+      "meta": Object {
+        "filePath": "/dev/null/home/documents/1234-active-protocol",
+        "id": "1234-active-protocol",
+        "workingPath": "/dev/null/1234-active-protocol",
+      },
       "protocol": Object {
         "assetManifest": Object {
           "1234-asset-1": Object {
