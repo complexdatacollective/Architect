@@ -2,8 +2,8 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { actionCreators as loadActions } from '../protocols/load';
-import { actionCreators as unbundleActions, actionTypes as unbundleActionTypes } from '../protocols/unbundle';
+import { testing as loadActions } from '../protocols/load';
+import { actionCreators as unbundleActions } from '../protocols/unbundle';
 import reducer from '../recentProtocols';
 
 const protocol = {
@@ -19,49 +19,7 @@ describe('recentProtocols', () => {
       store = createStore(reducer, applyMiddleware(thunk));
     });
 
-    it('LOAD_PROTOCOL_SUCCESS updates timestamp and sorts recent protocols', (done) => {
-      store.dispatch(loadActions.loadProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }, protocol));
-      store.dispatch(loadActions.loadProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }, protocol));
-      store.dispatch(loadActions.loadProtocolSuccess({ filePath: '/dev/null/mock/recent/path/3' }, protocol));
-
-      store.subscribe(() => {
-        const state = store.getState();
-        expect(state.length).toBe(3);
-
-        expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
-        expect(state[1]).toMatchObject({ filePath: '/dev/null/mock/recent/path/2' });
-        expect(state[2]).toMatchObject({ filePath: '/dev/null/mock/recent/path/1' });
-
-        done();
-      });
-
-      setTimeout(() => {
-        store.dispatch(loadActions.loadProtocolSuccess(
-          {
-            filePath: '/dev/null/mock/recent/path/3',
-          },
-          protocol,
-        ));
-      }, 2);
-    });
-
-    it('LOAD_PROTOCOL_SUCCESS adds to recentProtocolsList', (done) => {
-      store.dispatch(loadActions.loadProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }, protocol));
-
-      store.subscribe(() => {
-        const state = store.getState();
-
-        expect(state.length).toBe(2);
-        expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/2' }, protocol);
-        expect(state[1]).toMatchObject({ filePath: '/dev/null/mock/recent/path/1' }, protocol);
-
-        done();
-      });
-
-      store.dispatch(loadActions.loadProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }, protocol));
-    });
-
-    it(`${unbundleActionTypes.IMPORT_PROTOCOL_ERROR}`, () => {
+    it('Removes protocol on load error', () => {
       const missingFilePath = '/dev/null/non/existent';
 
       const initialState = [
@@ -77,6 +35,72 @@ describe('recentProtocols', () => {
       expect(result).toEqual([
         { filePath: '/dev/null/another/protocol' },
       ]);
+    });
+
+    it('Adds protocol to list on unbundle', () => {
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/7' }));
+      const state = store.getState();
+      expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/7' });
+    });
+
+    it('Updates protocol meta on load success', (done) => {
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }));
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/3' }));
+
+      const stateBefore = store.getState();
+
+      expect(stateBefore[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
+
+      setTimeout(() => {
+        store.dispatch(loadActions.loadProtocolSuccess(
+          {
+            filePath: '/dev/null/mock/recent/path/2',
+          },
+          protocol,
+        ));
+
+        const stateAfter = store.getState();
+
+        expect(stateAfter[0]).toMatchObject({
+          filePath: '/dev/null/mock/recent/path/2',
+          name: '2',
+          description: 'lol',
+          schemaVersion: 4,
+        });
+
+        done();
+      }, 1);
+    });
+
+    it('Updates protocol meta on save success', (done) => {
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }));
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
+      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/3' }));
+
+      const stateBefore = store.getState();
+
+      expect(stateBefore[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
+
+      setTimeout(() => {
+        store.dispatch(loadActions.loadProtocolSuccess(
+          {
+            filePath: '/dev/null/mock/recent/path/2',
+          },
+          protocol,
+        ));
+
+        const stateAfter = store.getState();
+
+        expect(stateAfter[0]).toMatchObject({
+          filePath: '/dev/null/mock/recent/path/2',
+          name: '2',
+          description: 'lol',
+          schemaVersion: 4,
+        });
+
+        done();
+      }, 1);
     });
   });
 });

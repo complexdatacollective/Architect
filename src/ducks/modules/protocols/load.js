@@ -64,6 +64,12 @@ const actionCreators = {
   loadProtocolSuccess: loadProtocolSuccessThunk,
 };
 
+// Ideally this wouldn't be exported.
+// Suggest refactoring to actionCreators and actionThunks?
+const testing = {
+  loadProtocolSuccess,
+};
+
 const actionTypes = {
   LOAD_PROTOCOL,
   LOAD_PROTOCOL_SUCCESS,
@@ -71,6 +77,7 @@ const actionTypes = {
 };
 
 export {
+  testing,
   actionLocks,
   actionCreators,
   actionTypes,

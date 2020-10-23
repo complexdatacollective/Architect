@@ -24,7 +24,7 @@ export default function reducer(state = initialState, action = {}) {
         },
         ...state,
       ], 'filePath')
-        .sort((a, b) => a.lastModified < b.lastModified)
+        .sort((a, b) => b.lastModified - a.lastModified)
         .slice(0, 50);
     }
     // 2. we loaded protocol from a working copy,
@@ -43,7 +43,7 @@ export default function reducer(state = initialState, action = {}) {
           description: action.protocol.description,
           schemaVersion: action.protocol.schemaVersion,
         };
-      }).sort((a, b) => a.lastModified < b.lastModified);
+      }).sort((a, b) => b.lastModified - a.lastModified);
     // We saved it, we know everything about the protocol
     case saveActionTypes.SAVE_PROTOCOL_SUCCESS: {
       const filePath = get(action, 'meta.filePath');
@@ -57,7 +57,7 @@ export default function reducer(state = initialState, action = {}) {
         },
         ...state,
       ], 'filePath')
-        .sort((a, b) => a.lastModified < b.lastModified)
+        .sort((a, b) => b.lastModified - a.lastModified)
         .slice(0, 50);
     }
     default:
