@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { get } from 'lodash';
+import { get, first } from 'lodash';
 import { GraphicButton } from '@codaco/ui';
 import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
 import { actionCreators as protocolsActions } from '@modules/protocols';
@@ -39,7 +39,7 @@ const LaunchPad = ({
             right="5.7rem"
             opacity="0.07"
             backgroundPosition="top right"
-            backgroundSize="100% auto"
+            ackgroundSize="100% auto"
           />
           <div className="launch-pad__resume">
             <h2>Resume Editing</h2>
@@ -114,10 +114,15 @@ LaunchPad.defaultProps = {
   otherRecentProtocols: [],
 };
 
-const mapStateToProps = state => ({
-  lastEditedProtocol: get(state, 'recentProtocols', []).slice(0, 1)[0],
-  otherRecentProtocols: get(state, 'recentProtocols', []).slice(1, 4),
-});
+const mapStateToProps = (state) => {
+  const recentProtocols = get(state, 'recentProtocols', [])
+    .filter(meta => !!meta.schemaVersion);
+
+  return {
+    lastEditedProtocol: first(recentProtocols),
+    otherRecentProtocols: recentProtocols.slice(1, 4),
+  };
+};
 
 const mapDispatchToProps = {
   createAndLoadProtocol: protocolsActions.createAndLoadProtocol,
