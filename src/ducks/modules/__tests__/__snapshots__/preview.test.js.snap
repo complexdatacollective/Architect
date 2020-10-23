@@ -159,6 +159,165 @@ Array [
 ]
 `;
 
+exports[`preview previewStageFromForm() dispatches previewDraft() for insert at index 0 1`] = `
+Array [
+  Object {
+    "bazz": "buzz",
+  },
+  Object {
+    "form": Object {
+      "fields": Array [
+        Object {
+          "prompt": "message",
+          "variable": "alpha",
+        },
+        Object {
+          "prompt": "message",
+          "variable": "1234-1234-4",
+        },
+      ],
+    },
+    "id": "bazz",
+    "label": "bazz",
+    "prompts": Array [
+      Object {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  Object {
+    "form": Object {
+      "fields": Array [
+        Object {
+          "prompt": "message",
+          "variable": "bravo",
+        },
+        Object {
+          "prompt": "message",
+          "variable": "1234-1234-5",
+        },
+      ],
+    },
+    "id": "pip",
+    "label": "pip",
+    "prompts": Array [
+      Object {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "bar",
+    },
+    "type": "NameGenerator",
+  },
+  Object {
+    "id": "buzz",
+    "label": "buzz",
+    "prompts": Array [
+      Object {
+        "id": "fizz",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "foo",
+    },
+    "type": "NameGenerator",
+  },
+  Object {
+    "id": "foxtrot",
+    "label": "foxtrot",
+    "prompts": Array [
+      Object {
+        "id": "golf",
+        "text": "not a prompt",
+      },
+      Object {
+        "id": "hotel",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": Object {
+      "entity": "node",
+      "type": "pop",
+    },
+    "type": "NameGenerator",
+  },
+  Object {
+    "id": "alpha",
+    "label": "alpha",
+    "prompts": Array [
+      Object {
+        "edges": Object {
+          "create": "1234-5",
+          "display": Array [
+            "1234-5",
+            "delta",
+            "echo",
+          ],
+        },
+        "id": "bravo",
+        "text": "not a prompt",
+      },
+    ],
+    "subject": Object {
+      "entity": "edge",
+      "type": "1234-5",
+    },
+    "type": "Sociogram",
+  },
+  Object {
+    "id": "mike",
+    "label": "mike",
+    "prompts": Array [
+      Object {
+        "id": "oscar",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Sociogram",
+  },
+  Object {
+    "background": Object {
+      "image": "1234-asset-5",
+    },
+    "dataSource": "1234-asset-3",
+    "id": "assets",
+    "items": Array [
+      Object {
+        "content": "1234-asset-4",
+        "id": "itemId",
+        "type": "asset",
+      },
+    ],
+    "label": "assets",
+    "panels": Array [
+      Object {
+        "dataSource": "1234-asset-2",
+        "id": "panelId",
+        "title": "",
+      },
+    ],
+    "prompts": Array [
+      Object {
+        "id": "promptId",
+        "text": "not a prompt",
+      },
+    ],
+    "type": "Information",
+  },
+]
+`;
+
 exports[`preview previewStageFromForm() dispatches previewDraft() for insert at index 1`] = `
 Array [
   Object {
