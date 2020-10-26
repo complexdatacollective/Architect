@@ -19,7 +19,7 @@ const variants = {
   }),
 };
 
-const EditStageButton = ({
+const EditStageButton = React.forwardRef(({
   onEditStage,
   type,
   label,
@@ -68,7 +68,7 @@ const EditStageButton = ({
       </div>
     </div>
   </div>
-);
+));
 
 EditStageButton.propTypes = {
   onEditStage: PropTypes.func.isRequired,
@@ -86,4 +86,4 @@ EditStageButton.defaultProps = {
 
 export { EditStageButton };
 
-export default React.forwardRef(EditStageButton);
+export default EditStageButton;
