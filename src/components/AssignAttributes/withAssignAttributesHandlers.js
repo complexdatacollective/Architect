@@ -10,6 +10,8 @@ const ALLOWED_TYPES = [
   'boolean',
   'ordinal',
   'categorical',
+  'scalar',
+  'datetime',
 ];
 
 // TODO: isUsed

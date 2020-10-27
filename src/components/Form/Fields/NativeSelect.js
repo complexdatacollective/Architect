@@ -13,7 +13,9 @@ const NativeSelect = ({
   options,
   placeholder,
   className,
-  onCreateOption,
+  // To create a new option, one or the other of the following:
+  onCreateOption, // Creating options inline, recieves value for option
+  onCreateNew, // Call a function immediately (typically opening a window with a form)
   createLabelText,
   createInputLabel,
   createInputPlaceholder,
@@ -32,6 +34,11 @@ const NativeSelect = ({
   const handleChange = (option) => {
     if (option.target.value === '_create') {
       input.onChange(null);
+      if (onCreateNew) {
+        onCreateNew();
+        return;
+      }
+
       setShowCreateOptionForm(true);
       return;
     }
@@ -128,7 +135,7 @@ const NativeSelect = ({
               {...rest}
             >
               <option disabled={!allowPlaceholderSelect} value="_placeholder">-- {placeholder} --</option>
-              { onCreateOption && <option value="_create">{createLabelText}</option>}
+              { (onCreateOption || onCreateNew) && <option value="_create">{createLabelText}</option>}
               { sortedOptions.map((option, index) => (
                 <option
                   key={index}
@@ -160,6 +167,7 @@ NativeSelect.propTypes = {
   meta: PropTypes.object,
   disabled: PropTypes.bool,
   onCreateOption: PropTypes.func,
+  onCreateNew: PropTypes.func,
   reserved: PropTypes.array,
   validation: PropTypes.any,
 };
@@ -177,6 +185,7 @@ NativeSelect.defaultProps = {
   disabled: false,
   meta: { invalid: false, error: null, touched: false },
   onCreateOption: null,
+  onCreateNew: null,
   reserved: [],
   validation: null,
 };
