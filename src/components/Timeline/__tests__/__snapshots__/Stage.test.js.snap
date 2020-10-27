@@ -24,7 +24,7 @@ exports[`<Stage /> can render 1`] = `
     className="timeline-stage__notch"
     onClick={[Function]}
   />
-  <ForwardRef(EditStageButton)
+  <ForwardRef
     hasFilter={false}
     hasSkipLogic={false}
     label=""
