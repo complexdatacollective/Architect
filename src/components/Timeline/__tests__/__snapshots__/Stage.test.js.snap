@@ -23,7 +23,9 @@ exports[`<Stage /> can render 1`] = `
   <div
     className="timeline-stage__notch"
     onClick={[Function]}
-  />
+  >
+    1
+  </div>
   <ForwardRef
     hasFilter={false}
     hasSkipLogic={false}
