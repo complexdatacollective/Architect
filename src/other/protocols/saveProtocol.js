@@ -3,33 +3,31 @@ import log from 'electron-log';
 import { writeFile } from 'fs-extra';
 import pruneAssets from '@app/other/protocols/pruneAssets';
 
+const getStringifiedProtocol = protocol =>
+  new Promise((resolve, reject) => {
+    try {
+      return resolve(JSON.stringify(protocol, null, 2));
+    } catch (e) {
+      log.error(e);
+      return reject(e);
+    }
+  });
+
 /**
  * Save a protocol object to disk, and prune any unused assets from
  * /assets/ sub directory.
  * @param {string} workingPath - working path in application /tmp/ dir
  * @param {object} protocol - The protocol object.
  */
-const saveProtocol = (workingPath, protocol) =>
-  new Promise((resolve, reject) => {
-    log.debug('saveProtocol()', workingPath);
-    // save json to temp dir
-    const destinationPath = path.join(workingPath, 'protocol.json');
+const saveProtocol = (workingPath, protocol) => {
+  // save json to temp dir
+  const destinationPath = path.join(workingPath, 'protocol.json');
+  log.info(`Save protocol to ${destinationPath}`);
 
-    try {
-      log.debug('  stringify protocol');
-      const protocolString = JSON.stringify(protocol, null, 2);
-
-      log.info(`save protocol to ${destinationPath}`);
-      writeFile(destinationPath, protocolString)
-        .then(() =>
-          // Now that the protocol is commited to disk we can safely prune unused assets.
-          pruneAssets(workingPath),
-        )
-        .then(() => resolve(destinationPath));
-    } catch (e) {
-      log.error(e);
-      reject(e);
-    }
-  });
+  return getStringifiedProtocol(protocol)
+    .then(protocolData => writeFile(destinationPath, protocolData))
+    .then(() => pruneAssets(workingPath))
+    .then(() => destinationPath);
+};
 
 export default saveProtocol;
