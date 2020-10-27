@@ -1,6 +1,6 @@
 import log from 'electron-log';
 import path from 'path';
-import fs from 'fs-extra';
+import fse from 'fs-extra';
 import { archive } from './lib/archive';
 
 /**
@@ -10,15 +10,13 @@ import { archive } from './lib/archive';
  * @param {string} filePath - The protocol path.
  */
 const bundleProtocol = (workingPath, filePath) => {
-  log.debug('bundleProtocol()', workingPath, filePath);
   if (path.extname(filePath) === '.netcanvas') {
-    // also save zip
-    log.debug('  treat as archive');
+    log.debug(`Save protocol ${filePath} as archive`);
     return archive(workingPath, filePath);
   }
 
-  log.debug('  treat as directory');
-  return fs.copy(workingPath, filePath);
+  log.debug(`Save protocol ${filePath} as directory`);
+  return fse.copy(workingPath, filePath);
 };
 
 export default bundleProtocol;
