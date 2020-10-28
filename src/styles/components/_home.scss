@@ -53,14 +53,20 @@ $font-sizes: (
   position: absolute;
   top: 0;
   left: 0;
+  display: flex;
+
+  &__container {
+    flex: 1;
+    margin: auto;
+  }
 }
 
 .home-section {
   position: relative;
   border-radius: var(--border-radius);
   box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
-  margin: unit(6) auto;
-  max-width: 80rem;
+  margin: unit(4) auto;
+  max-width: 70rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -81,21 +87,16 @@ $font-sizes: (
 
 .launch-pad {
   &__resume {
-    flex: 0 0 50%;
-    width: 50%;
+    $rule-width: px(5);
+    width: calc(50% - (#{unit(4)} - #{$rule-width}));
     position: relative;
-
-    &:not(:last-of-type) {
-      padding-right: unit(4);
-    }
 
     &:last-of-type {
       display: flex;
       flex-direction: column;
-      margin-top: unit(4);
 
       .protocol-card {
-        width: 100%;
+        flex: 1;
 
         &:not(:last-of-type) {
           margin-bottom: unit(2);
@@ -128,7 +129,7 @@ $font-sizes: (
       height: calc(100% - 2rem);
       border-radius: $rule-width;
       width: $rule-width;
-      background-color: var(--color-platinum--dark);
+      background-color: rgba(0, 0, 0, .05); // sass-lint:disable-line no-color-literals
     }
   }
 }
@@ -144,9 +145,13 @@ $font-sizes: (
 
 .home-group {
   position: relative;
-  padding: unit(4) unit(6);
+  padding: 2rem unit(6);
   background-color: var(--color-platinum--dark);
   background-repeat: no-repeat;
+
+  h2 {
+    margin-top: 0;
+  }
 
   &--flex {
     display: flex;
@@ -283,7 +288,7 @@ $font-sizes: (
     justify-content: center;
     z-index: 2;
     top: 0;
-    margin-right: unit(2);
+    margin-left: unit(2);
 
     h1 {
       font-size: type-scale(5);
@@ -312,11 +317,11 @@ $font-sizes: (
   background-image: url('../images/home/undraw_prototyping_process.svg');
   background-size: 50%;
   background-repeat: no-repeat;
-  background-position: 100% 0;
+  background-position: 115% 0;
 
   &__content {
     flex: 2;
-    padding-right: 50%;
+    padding-right: 40%;
 
     h2 {
       font-size: type-scale(1);

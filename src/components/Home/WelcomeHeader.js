@@ -44,6 +44,7 @@ const WelcomeHeader = () => {
   return (
     <Section className={classes}>
       <Group className="welcome-header__header">
+        <img className="logo" src={headerGraphic} alt="Network Canvas Architect" />
         <div className="welcome-header__title">
           <div className="project-tag">
             <img src={networkCanvasLogo} alt="A Network Canvas project" style={{ height: '2.4rem', width: '2.4rem' }} />
@@ -52,11 +53,10 @@ const WelcomeHeader = () => {
           <h1>Architect</h1>
           <p>A tool for creating Network Canvas Interviews</p>
         </div>
-        <img className="logo" src={headerGraphic} alt="Network Canvas Architect" />
         <Version />
         <Switch
           className="welcome-header__header-toggle"
-          label="Show welcome section"
+          label="Show welcome"
           on={isOpen}
           onChange={() => setIsOpen(!isOpen)}
         />
