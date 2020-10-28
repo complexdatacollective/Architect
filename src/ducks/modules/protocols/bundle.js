@@ -33,7 +33,10 @@ const bundleProtocolThunk = () =>
 
     return bundleProtocol(meta.workingPath, meta.filePath)
       .then(() => dispatch(bundleProtocolSuccess(meta.filePath)))
-      .catch(e => dispatch(bundleProtocolError(e)));
+      .catch((e) => {
+        dispatch(bundleProtocolError(e));
+        throw e;
+      });
   };
 
 const actionCreators = {

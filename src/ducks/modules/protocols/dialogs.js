@@ -40,6 +40,27 @@ export const saveErrorDialog = (e, filePath) => {
   });
 };
 
+export const writeErrorDialog = (e, filePath) => {
+  e.friendlyMessage = (
+    <React.Fragment>
+      <p>
+        <em>{path.basename(filePath)}</em> could not be saved due to a permissions issue.
+      </p>
+      <p>
+        <ol>
+          <li>Please check that the file is not &quot;read only&quot;</li>
+          <li>Rename the original file and Architect will recreate it</li>
+        </ol>
+      </p>
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'Error',
+    error: e,
+  });
+};
+
 export const importErrorDialog = (e, filePath) => {
   const error = e || new Error('An unknown error occurred.');
   error.friendlyMessage = (

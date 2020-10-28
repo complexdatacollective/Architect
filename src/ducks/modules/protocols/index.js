@@ -12,7 +12,7 @@ import { actionCreators as unbundleActionCreators } from './unbundle';
 import { actionCreators as preflightActions } from './preflight';
 import { actionCreators as saveActionCreators } from './save';
 import { actionCreators as bundleActionCreators } from './bundle';
-import { saveErrorDialog, importErrorDialog } from './dialogs';
+import { saveErrorDialog, writeErrorDialog, importErrorDialog } from './dialogs';
 import {
   actionCreators as registerActionCreators,
   actionTypes as registerActionTypes,
@@ -67,7 +67,12 @@ const saveAndBundleThunk = savingLock(() =>
           .then(() => dispatch(bundleActionCreators.bundleProtocol()))
           .catch((e) => {
             dispatch(saveAndExportError(e));
-            dispatch(saveErrorDialog(e, activeProtocolMeta.filePath));
+            switch (e.code) {
+              case 'EACCES':
+                return dispatch(writeErrorDialog(e, activeProtocolMeta.filePath));
+              default:
+                return dispatch(saveErrorDialog(e, activeProtocolMeta.filePath));
+            }
           });
       }));
 
