@@ -112,7 +112,7 @@ const withEntityHandlers = compose(
       () => closeScreen('codebook'),
     handleEdit: ({ openScreen, entity, type }) =>
       () => {
-        openScreen('type', { entity, type });
+        openScreen('type', { entity, type, metaOnly: true });
       },
     handleDelete: ({ deleteType, openDialog, entity, type, name, inUse }) =>
       () => {

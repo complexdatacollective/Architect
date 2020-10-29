@@ -25,6 +25,7 @@ const TypeEditor = ({
   displayVariables,
   existingTypes,
   isNew,
+  metaOnly,
 }) => {
   const { name: paletteName, size: paletteSize } = getPalette(entity);
 
@@ -96,7 +97,7 @@ const TypeEditor = ({
         </React.Fragment>
       }
 
-      {!isNew &&
+      {(!isNew && !metaOnly) &&
         <Section>
           <Variables
             form={form}
@@ -120,12 +121,14 @@ TypeEditor.propTypes = {
   displayVariables: PropTypes.array.isRequired,
   existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
+  metaOnly: PropTypes.bool,
 };
 
 TypeEditor.defaultProps = {
   type: null,
   colorOptions: { node: [], edge: [] },
   isNew: false,
+  metaOnly: false,
 };
 
 const mapStateToProps = (state) => {
