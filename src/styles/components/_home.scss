@@ -97,8 +97,6 @@ $font-sizes: (
       flex-direction: column;
 
       .protocol-card {
-        flex: 1;
-
         &:not(:last-of-type) {
           margin-bottom: unit(2);
         }
@@ -235,7 +233,6 @@ $font-sizes: (
 }
 
 .welcome-header {
-  background-color: var(--color-slate-blue--dark);
   overflow: visible;
   border-radius: none;
 
@@ -245,7 +242,6 @@ $font-sizes: (
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--color-white);
     border-radius: var(--border-radius);
 
     .project-tag {

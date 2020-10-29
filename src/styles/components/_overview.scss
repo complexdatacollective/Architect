@@ -1,173 +1,68 @@
 .overview {
   margin: 0 auto;
-  padding-top: unit(4);
+  margin-top: unit(4);
   width: 60rem;
   z-index: var(--z-default);
   position: relative;
-
-  .form-field-container {
-    --input-background: var(--color-slate-blue);
-    --input-text: var(--color-white);
-    margin-bottom: 0;
-  }
-
-  .icon {
-    &[name='links'] {
-      margin: 0 unit(2) unit(2) 0;
-    }
-  }
-
-  &__name {
-    text-align: center;
-  }
-
-  &__description {
-
-    textarea {
-      padding-bottom: 0;
-      margin-bottom: 0;
-      min-height: 10rem;
-    }
-  }
+  background: var(--color-platinum);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+  display: flex;
+  flex-direction: column;
 
   &__panel {
-    background-color: var(--color-slate-blue--dark);
-    color: var(--color-white);
-    border-radius: var(--border-radius);
-    box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
+    padding: unit(4);
 
-    .protocol-name {
-      padding-top: 2.4rem;
-      margin: 0;
+    .overview-name {
 
-      h1 {
-        margin: 0;
+    }
+
+    .overview-description {
+      textarea {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        min-height: 10rem;
+      }
+
+      .form-field-container {
+        margin-bottom: 0;
       }
     }
+
   }
 
-  &__asset-group {
-    display: block;
-    margin: unit(1) 0;
-  }
-
-  &__asset {
-    max-height: 100px;
-    display: inline-block;
-    margin: 0 unit(.5);
-  }
-
-  &__badge {
-    display: inline-block;
-    margin: unit(1) 0;
-    background: var(--color-mustard);
-    padding: unit(1);
-    border-radius: unit(1);
-  }
-
-  &__groups {
+  &__footer {
+    background: var(--color-slate-blue--dark);
     display: flex;
-    padding: unit(4) unit(6);
+    align-items: center;
+    justify-content: flex-end;
+    flex: 0 0 auto;
+    padding: unit(2);
 
+    .graphic-button {
+      flex: 1 auto;
+      height: 5rem;
 
-  }
+      &__label {
 
-  &__group {
-    text-align: left;
-    position: relative;
-
-    &:first-child {
-      margin-right: unit(4);
-    }
-
-    &--title {
-      flex: 100%;
-    }
-
-    &--buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      flex: 0 0 20rem;
-
-      .graphic-button {
-        height: 100%;
-
-        &__label {
-
-          h2,
-          h3 {
-            text-shadow: 1px 1px 0 #000, 0 0 .5rem #00000073; // sass-lint:disable-line no-color-literals no-invalid-hex
-          }
-
-          h2 {
-            font-size: 1.53rem;
-          }
-
-          h3 {
-            font-size: .8rem;
-          }
+        h2,
+        h3 {
+          text-shadow: 1px 1px 0 #000, 0 0 .5rem #00000073; // sass-lint:disable-line no-color-literals no-invalid-hex
         }
 
-        &:first-child {
-          margin-bottom: unit(2);
+        h2 {
+          font-size: 1.53rem;
+        }
+
+        h3 {
+          font-size: .8rem;
         }
       }
-    }
-  }
 
-  &__manage-button {
-    position: absolute;
-    bottom: unit(2);
-    right: unit(2);
-  }
-
-  &__group-title {
-    position: absolute;
-    top: -.5rem;
-    background: var(--architect-panel-background);
-    padding: 0 unit(2);
-  }
-
-  &__forms {
-    display: table;
-    width: 100%;
-  }
-
-  &__form {
-    display: table-row;
-
-    &-name,
-    &-edit {
-      display: table-cell;
-      text-align: left;
-      padding: unit(.5) 0;
-
-      a {
-        text-decoration: none;
-        margin: 0;
+      &:first-child {
+        margin-right: unit(2);
       }
-    }
-
-    &-name {
-      a {
-        display: block;
-        color: var(--text);
-      }
-    }
-
-    &-edit {
-      text-align: right;
-    }
-  }
-
-  &__new-form {
-    margin: unit(2) 0 0;
-
-    a {
-      text-decoration: none;
-      margin: 0;
     }
   }
 }

@@ -5,7 +5,6 @@ import { Button } from '@codaco/ui';
 import networkCanvasLogo from '@app/images/NC-Mark.svg';
 import headerGraphic from '@app/images/Arc-Flat.svg';
 import Version from '@components/Version';
-import Section from './Section';
 import Group from './Group';
 import Switch from './Switch';
 import useAppState from './useAppState';
@@ -15,9 +14,26 @@ const WelcomeHeader = () => {
   const [isOpen, setIsOpen] = useAppState('showWelcome', true);
 
   const classes = cx(
+    'home-section',
     'welcome-header',
     { 'welcome-header--is-open': isOpen },
   );
+
+  const headerVariants = {
+    open: {
+      background: 'rgba(85,91,188,1)',
+      color: 'var(--color-white)',
+      boxShadow: '0 0.6rem .2rem 0 var(--architect-panel-shadow)',
+    },
+    closed: {
+      background: 'rgba(85,91,188,0)',
+      boxShadow: '0 0rem 0rem 0 var(--architect-panel-shadow)',
+      color: 'var(--text-dark)',
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
 
   const start = {
     show: {
@@ -28,21 +44,29 @@ const WelcomeHeader = () => {
     },
     hide: {
       height: '0px',
+      transition: {
+        duration: 0.5,
+      },
     },
   };
 
   const expand = {
     show: {
-      height: '100%',
-      transition: { when: 'beforeChildren', type: 'spring' },
+      opacity: 1,
+      transition: { when: 'beforeChildren' },
     },
     hide: {
-      height: '0px',
+      opacity: 0,
     },
   };
 
   return (
-    <Section className={classes}>
+    <motion.div
+      className={classes}
+      variants={headerVariants}
+      initial="closed"
+      animate={isOpen ? 'open' : 'closed'}
+    >
       <Group className="welcome-header__header">
         <img className="logo" src={headerGraphic} alt="Network Canvas Architect" />
         <div className="welcome-header__title">
@@ -64,6 +88,8 @@ const WelcomeHeader = () => {
       <motion.section
         className="welcome-header__panel"
         variants={expand}
+        initial="hide"
+        animate="show"
       >
         <AnimatePresence>
           { isOpen && (
@@ -109,7 +135,7 @@ const WelcomeHeader = () => {
           )}
         </AnimatePresence>
       </motion.section>
-    </Section>
+    </motion.div>
   );
 };
 

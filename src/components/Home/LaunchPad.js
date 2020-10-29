@@ -30,7 +30,7 @@ const LaunchPad = ({
     <React.Fragment>
       { lastEditedProtocol &&
         <Section className="launch-pad">
-          <Group color="panel-grey--dark" className="home-group--flex">
+          <Group className="home-group--flex">
             <Sprite
               src={resumeBackgroundGraphic}
               width="calc(50% - 7rem)"

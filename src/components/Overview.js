@@ -75,59 +75,53 @@ class Overview extends Component {
     } = this.props;
 
     return (
-      <React.Fragment>
-        <motion.div
-          className="overview"
-          variants={panelVariants}
-        >
-
-          <div className="overview__panel">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="protocol-name">
-              <h1 className="overview__name">{name}</h1>
-            </motion.div>
-            <div className="overview__groups">
-              <div className="overview__group overview__group--title">
-                <Fields.TextArea
-                  className="overview__description"
-                  placeholder="Enter a description for your protocol here"
-                  label="Protocol description"
-                  input={{
-                    value: description,
-                    onChange:
-                      ({ target: { value } }) => {
-                        updateOptions({ description: value });
-                      },
-                  }}
-                />
-              </div>
-              <div className="overview__group--buttons">
-                <GraphicButton
-                  graphic={assetsGraphic}
-                  color="sea-serpent"
-                  graphicPosition="90% center"
-                  graphicSize="auto 90%"
-                  labelPosition={{ left: '3rem' }}
-                  onClick={() => openScreen('assets')}
-                >
-                  <h3>Manage Protocol</h3>
-                  <h2>Resources</h2>
-                </GraphicButton>
-                <GraphicButton
-                  graphic={codebookGraphic}
-                  color="neon-coral"
-                  graphicPosition="90% center"
-                  graphicSize="auto 90%"
-                  labelPosition={{ left: '3rem' }}
-                  onClick={() => openScreen('codebook')}
-                >
-                  <h3>Manage</h3>
-                  <h2>Codebook</h2>
-                </GraphicButton>
-              </div>
-            </div>
+      <motion.div
+        className="overview"
+        variants={panelVariants}
+      >
+        <div className="overview__panel">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="protocol-name">
+            <h1 className="overview-name">{name}</h1>
+          </motion.div>
+          <div className="overview-description">
+            <Fields.TextArea
+              className="overview-description__field"
+              placeholder="Enter a description for your protocol..."
+              input={{
+                value: description,
+                onChange:
+                  ({ target: { value } }) => {
+                    updateOptions({ description: value });
+                  },
+              }}
+            />
           </div>
-        </motion.div>
-      </React.Fragment>
+        </div>
+        <div className="overview__footer">
+          <GraphicButton
+            graphic={assetsGraphic}
+            color="sea-serpent"
+            graphicPosition="90% center"
+            graphicSize="auto 90%"
+            labelPosition={{ left: '3rem' }}
+            onClick={() => openScreen('assets')}
+          >
+            <h3>Manage Protocol</h3>
+            <h2>Resources</h2>
+          </GraphicButton>
+          <GraphicButton
+            graphic={codebookGraphic}
+            color="neon-coral"
+            graphicPosition="90% center"
+            graphicSize="auto 90%"
+            labelPosition={{ left: '3rem' }}
+            onClick={() => openScreen('codebook')}
+          >
+            <h3>Manage</h3>
+            <h2>Codebook</h2>
+          </GraphicButton>
+        </div>
+      </motion.div>
     );
   }
 }
