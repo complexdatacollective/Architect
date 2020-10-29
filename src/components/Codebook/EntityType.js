@@ -83,6 +83,7 @@ EntityType.propTypes = {
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool,
   handleDelete: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
   closeCodebook: PropTypes.func.isRequired,
   variables: PropTypes.array,
 };
