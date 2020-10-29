@@ -17,7 +17,7 @@ import { actionCreators as uiActions } from '../ducks/modules/ui';
 
 const panelVariants = {
   hide: { opacity: 0, y: -200 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.2, when: 'beforeChildren' } },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20, when: 'beforeChildren' } },
 };
 
 class Overview extends Component {
@@ -98,11 +98,12 @@ class Overview extends Component {
           </div>
         </div>
         <div className="overview__footer">
+          <Icon name="protocol-card" />
           <GraphicButton
             graphic={assetsGraphic}
-            color="sea-serpent"
-            graphicPosition="90% center"
-            graphicSize="auto 90%"
+            color="slate-blue"
+            graphicPosition="80% center"
+            graphicSize="auto 140%"
             labelPosition={{ left: '3rem' }}
             onClick={() => openScreen('assets')}
           >
@@ -111,9 +112,9 @@ class Overview extends Component {
           </GraphicButton>
           <GraphicButton
             graphic={codebookGraphic}
-            color="neon-coral"
+            color="slate-blue"
             graphicPosition="90% center"
-            graphicSize="auto 90%"
+            graphicSize="auto 180%"
             labelPosition={{ left: '3rem' }}
             onClick={() => openScreen('codebook')}
           >

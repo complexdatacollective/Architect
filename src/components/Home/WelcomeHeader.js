@@ -91,7 +91,7 @@ const WelcomeHeader = () => {
         initial="hide"
         animate="show"
       >
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           { isOpen && (
             <motion.div
               variants={start}

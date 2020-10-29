@@ -4,7 +4,7 @@
   width: 60rem;
   z-index: var(--z-default);
   position: relative;
-  background: var(--color-platinum);
+  background: var(--color-white);
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
@@ -12,17 +12,13 @@
   flex-direction: column;
 
   &__panel {
-    padding: unit(4);
-
-    .overview-name {
-
-    }
+    padding: unit(2) unit(6);
 
     .overview-description {
       textarea {
         padding-bottom: 0;
         margin-bottom: 0;
-        min-height: 10rem;
+        min-height: 5rem;
       }
 
       .form-field-container {
@@ -38,7 +34,13 @@
     align-items: center;
     justify-content: flex-end;
     flex: 0 0 auto;
-    padding: unit(2);
+    padding: unit(2) unit(6) ;
+
+    .icon {
+      height: 100%;
+      width: 8rem;
+      margin-right: unit(4);
+    }
 
     .graphic-button {
       flex: 1 auto;
@@ -60,7 +62,7 @@
         }
       }
 
-      &:first-child {
+      &:first-of-type {
         margin-right: unit(2);
       }
     }
