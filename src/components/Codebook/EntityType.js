@@ -47,7 +47,6 @@ const EntityType = ({
         <div className="codebook__entity-control">
           <Button
             size="small"
-            color="neon-coral"
             onClick={handleEdit}
           >
             Edit entity
