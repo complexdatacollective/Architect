@@ -33,7 +33,7 @@ const AssetBrowserWindow = ({
         <SimpleDialog
           show={show}
           onBlur={onCancel}
-          title="Asset Browser"
+          title="Resource Browser"
           options={cancelButton}
           style={{
             zIndex: stackIndex + dialogZIndex,

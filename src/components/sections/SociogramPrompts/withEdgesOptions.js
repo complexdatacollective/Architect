@@ -14,7 +14,6 @@ const mapStateToProps = (state, { entity, type, form }) => {
   const createEdges = formValueSelector(form)(state, 'edges.create');
   const displayEdgesOptions = edgesForSubject.map((edge) => {
     if (edge.value !== createEdges) { return edge; }
-
     return {
       ...edge,
       disabled: true,
@@ -31,7 +30,9 @@ const mapStateToProps = (state, { entity, type, form }) => {
 
 const handlers = withHandlers({
   handleChangeCreateEdge: ({ changeForm, form, displayEdges }) =>
-    (e, value) => {
+    (value) => {
+      if (!value) return;
+
       const newDisplayEdges = [
         ...displayEdges,
         value,

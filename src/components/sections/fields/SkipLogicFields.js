@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import Select from '@components/Form/Fields/Select';
+import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import ValidatedField from '@components/Form/ValidatedField';
 import { Query, withStoreConnector, withFieldConnector, ruleValidator } from '@components/Query';
 import { Row } from '@components/EditorLayout';
@@ -10,10 +10,9 @@ const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 const SkipLogicFields = () => (
   <React.Fragment>
     <Row>
-      <h2>Show/Hide</h2>
       <ValidatedField
-        className="form-fields-select--light-background"
-        component={Select}
+        className="form-fields-select"
+        component={RadioGroup}
         name="skipLogic.action"
         options={[
           { value: 'SHOW', label: 'Show this stage if' },

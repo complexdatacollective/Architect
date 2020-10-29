@@ -8,8 +8,10 @@ const template = {
 };
 
 const EgoForm = {
-  sections: [
+  headerSections: [
     Name,
+  ],
+  sections: [
     IntroductionPanel,
     Form,
   ],

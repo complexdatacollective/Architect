@@ -68,9 +68,8 @@ class AppManager {
   static clearStorageData() {
     if (!global.appWindow) { return; }
 
-    global.appWindow.webContents.session.clearStorageData(() => {
-      global.appWindow.webContents.reload();
-    });
+    global.appWindow.webContents.session.clearStorageData()
+      .then(() => global.appWindow.webContents.reload());
   }
 
   static open() {
@@ -161,12 +160,10 @@ class AppManager {
       return true;
     });
 
-    console.log('start');
-
     // registerAssetProtocol();
     // this.initializeListeners();
     this.updateMenu();
-    this.updater.checkForUpdates(true);
+    // this.updater.checkForUpdates(false);
   }
 
   updateMenu() {
@@ -175,7 +172,12 @@ class AppManager {
       open: () => AppManager.open(),
       saveCopy: () => AppManager.saveCopy(),
       save: () => AppManager.save(),
-      clearStorageData: () => clearStorageDataDialog().then(() => AppManager.clearStorageData()),
+      clearStorageData: () =>
+        clearStorageDataDialog()
+          .then((shouldClearStorage) => {
+            if (!shouldClearStorage) { return; }
+            AppManager.clearStorageData();
+          }),
       checkForUpdates: () => this.updater.checkForUpdates(),
     };
 

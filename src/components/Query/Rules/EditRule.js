@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import Modal from '@codaco/ui/lib/components/Modal';
 import Button from '@codaco/ui/lib/components/Button';
 import EditAlterRule from './EditAlterRule';
@@ -28,7 +29,7 @@ class EditRule extends Component {
   render() {
     return (
       <Modal show={!!this.props.rule}>
-        <div className="rules-edit-rule">
+        <motion.div layout className="rules-edit-rule">
           <div className="rules-edit-rule__container">
             { this.props.rule && this.props.rule.options &&
               <this.TypeComponent
@@ -38,11 +39,11 @@ class EditRule extends Component {
               />
             }
             <div className="rules-edit-rule__controls">
-              <Button type="button" onClick={this.props.onSave} color="neon-coral">Save</Button>
               <Button type="button" onClick={this.props.onCancel} color="platinum">Cancel</Button>
+              <Button type="button" onClick={this.props.onSave} color="primary">Finish and Close</Button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Modal>
     );
   }

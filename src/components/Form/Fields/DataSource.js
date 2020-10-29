@@ -47,45 +47,41 @@ class DataSource extends Component {
     };
 
     return (
-      <div className="form-fields-data-source">
-        { canUseExisting &&
-          <div className="form-field-data-source__options">
-            <div className="form-fields-data-source__option">
-              <Radio input={existingInput} label="Use the network from the in-progress interview" />
-            </div>
-            <div className="form-fields-data-source__option">
-              <Radio input={networkAssetInput} label="Use a network data file" />
-              <div
-                className={cx(
-                  'form-fields-data-source__option-file',
-                  { 'form-fields-data-source__option-file--hide': !networkAssetInput.value },
-                )}
-              >
-                { showNetworkAssetInput &&
-                  <File
-                    type="network"
-                    showBrowser={selectNetworkAsset}
-                    onCloseBrowser={this.handleCloseBrowser}
-                    selected={input.value}
-                    {...this.props}
-                  >
-                    { id => <NetworkThumbnail id={id} /> }
-                  </File>
-                }
-              </div>
+      canUseExisting ? (
+        <div className="form-field-data-source">
+          <div className="form-fields-data-source__option">
+            <Radio input={existingInput} label="Use the network from the in-progress interview" />
+          </div>
+          <div className="form-fields-data-source__option">
+            <Radio input={networkAssetInput} label="Use a network data file" />
+            <div
+              className={cx(
+                'form-fields-data-source__option-file',
+                { 'form-fields-data-source__option-file--hide': !networkAssetInput.value },
+              )}
+            >
+              { showNetworkAssetInput &&
+                <File
+                  type="network"
+                  showBrowser={selectNetworkAsset}
+                  onCloseBrowser={this.handleCloseBrowser}
+                  selected={input.value}
+                  {...this.props}
+                >
+                  { id => <NetworkThumbnail id={id} /> }
+                </File>
+              }
             </div>
           </div>
-        }
-        { !canUseExisting &&
-          <File
-            type="network"
-            selected={input.value}
-            {...this.props}
-          >
-            { id => <NetworkThumbnail id={id} /> }
-          </File>
-        }
-      </div>
+        </div>
+      ) : (
+        <File
+          type="network"
+          selected={input.value}
+          {...this.props}
+        >
+          { id => <NetworkThumbnail id={id} /> }
+        </File>)
     );
   }
 }

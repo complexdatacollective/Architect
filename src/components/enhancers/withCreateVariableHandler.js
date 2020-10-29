@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
+import { change } from 'redux-form';
 import { isEmpty } from 'lodash';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 import safeName from '../../utils/safeName';
@@ -7,6 +8,7 @@ import safeName from '../../utils/safeName';
 const mapDispatchToProps = {
   createVariable: codebookActions.createVariable,
   deleteVariable: codebookActions.deleteVariable,
+  changeField: change,
 };
 
 export const normalizeKeyDown = (event) => {
@@ -18,8 +20,8 @@ export const normalizeKeyDown = (event) => {
 };
 
 const createVariableHandler = {
-  handleCreateVariable: ({ createVariable, type, entity }) =>
-    (variableName, variableType) => {
+  handleCreateVariable: ({ changeField, createVariable, type, entity, form }) =>
+    (variableName, variableType, field) => {
       const withType = variableType ? { type: variableType } : {};
 
       const configuration = {
@@ -28,6 +30,11 @@ const createVariableHandler = {
       };
 
       const { variable } = createVariable(entity, type, configuration);
+
+      // If we supplied a field, update it with the result of the variable creation
+      if (field) {
+        changeField(form, field, variable);
+      }
 
       return variable;
     },

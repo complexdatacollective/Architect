@@ -9,6 +9,7 @@ import Validation from './Validation';
 
 const validate = (validations) => {
   const values = toPairs(validations);
+
   const check = values.reduce(
     (acc, [key, value]) => {
       if (!isNull(value)) { return acc; }
@@ -27,7 +28,7 @@ const format = (value = {}) => toPairs(value);
 const getOptionsWithUsedDisabled = (options, used) =>
   options.map((option) => {
     if (!used.includes(option.value)) { return option; }
-    return { ...option, isDisabled: true };
+    return { ...option, disabled: true };
   });
 
 const AddItem = props => (
@@ -62,7 +63,7 @@ const ValidationsField = ({
         )) }
         {children}
       </div>
-      <FieldError show={submitFailed && error} error={error} />
+      <FieldError show={!!(submitFailed && error)} error={error} />
     </div>
   );
 };

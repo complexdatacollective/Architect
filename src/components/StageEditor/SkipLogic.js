@@ -13,25 +13,31 @@ const SkipLogic = ({
   openDialog,
 }) => {
   const handleDeactivate = useCallback(
-    () =>
-      openDialog({
-        type: 'Warning',
-        title: 'This will clear your skip logic',
-        message: 'This will clear your skip logic, and delete any rules you have created. Do you want to continue?',
-        confirmLabel: 'Clear skip logic',
-      })
-        .then((confirm) => {
-          if (confirm) {
-            changeField('edit-stage', 'skipLogic', null);
-          }
-          return confirm;
-        }),
+    () => {
+      if (hasSkipLogic) {
+        return openDialog({
+          type: 'Warning',
+          title: 'This will clear your skip logic',
+          message: 'This will clear your skip logic, and delete any rules you have created. Do you want to continue?',
+          confirmLabel: 'Clear skip logic',
+        })
+          .then((confirm) => {
+            if (confirm) {
+              changeField('edit-stage', 'skipLogic', null);
+            }
+            return confirm;
+          });
+      }
+
+      changeField('edit-stage', 'skipLogic', null);
+      return Promise.resolve(true);
+    },
     [openDialog, changeField],
   );
 
   return (
     <ContextPanel
-      title="Use skip logic"
+      title="Enable skip logic for this stage"
       isActive={hasSkipLogic}
       onDeactivate={handleDeactivate}
     >

@@ -21,11 +21,6 @@ const Codebook = ({
   nodes,
 }) => (
   <div className="codebook">
-    <p>
-      Below you can find an overview of the node and edge types that you have
-      defined while creating your interview. Entities that are unused may be deleted.
-    </p>
-
     { !hasEgoVariables && !hasNodes && !hasEdges &&
       <p className="codebook__notice">
         There are currently no types or variables defined in this protocol.

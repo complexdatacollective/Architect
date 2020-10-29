@@ -1,6 +1,8 @@
 $component-name: stage-editor-section-node-type;
 
 .#{$component-name} {
+  margin-bottom: 2rem;
+
   &__edit {
     display: inline-block;
   }

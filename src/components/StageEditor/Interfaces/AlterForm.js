@@ -6,9 +6,11 @@ import {
 } from '@components/sections';
 
 const AlterForm = {
-  sections: [
+  headerSections: [
     Name,
     FilteredNodeType,
+  ],
+  sections: [
     IntroductionPanel,
     Form,
   ],

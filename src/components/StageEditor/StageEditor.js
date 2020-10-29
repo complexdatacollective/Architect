@@ -36,8 +36,13 @@ const StageEditor = ({
     [interfaceType],
   );
 
-  const renderSections = ({ submitFailed, windowRoot }) =>
-    sections.map((SectionComponent, index) => (
+  const headerSections = useMemo(
+    () => getInterface(interfaceType).headerSections,
+    [interfaceType],
+  );
+
+  const renderSections = (sectionList, { submitFailed, windowRoot }) =>
+    sectionList.map((SectionComponent, index) => (
       <SectionComponent
         key={index}
         form={formName}
@@ -63,11 +68,11 @@ const StageEditor = ({
               show={showCodeView}
               toggleCodeView={toggleShowCodeView}
             />
-            <StageHeading id={id} toggleCodeView={toggleShowCodeView} />
-            <div className="stage-editor-section stage-editor-section--no-border">
+            <StageHeading id={id} toggleCodeView={toggleShowCodeView}>
+              { headerSections && renderSections(headerSections, { submitFailed, windowRoot })}
               <SkipLogic />
-            </div>
-            {renderSections({ submitFailed, windowRoot })}
+            </StageHeading>
+            {renderSections(sections, { submitFailed, windowRoot })}
           </Layout>
         )
       }

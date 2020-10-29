@@ -49,6 +49,22 @@ describe('preview', () => {
       expect(draftStages).toMatchSnapshot();
     });
 
+    it('dispatches previewDraft() for insert at index 0', () => {
+      actionCreators.previewDraft = jest.fn();
+
+      store.dispatch(actionCreators.previewStageFromForm(
+        { insertAtIndex: 0 },
+        'draft-insert-at-index',
+      ));
+
+      const actions = store.getActions();
+      const draftStages = actions[0].draft.stages;
+      const stageIndex = actions[0].stageIndex;
+
+      expect(stageIndex).toBe(0);
+      expect(draftStages).toMatchSnapshot();
+    });
+
     it('dispatches previewDraft() for end of stages', () => {
       actionCreators.previewDraft = jest.fn();
 

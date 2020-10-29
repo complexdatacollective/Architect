@@ -98,7 +98,7 @@ const config = {
         // generate an explicit hash. In the latest version of these tools multiple levels
         // of indirection make getting at the code to hash very brittle.
         // For now, hardcode to current version (react-error-overlay@5.0.0-next.3e165448)
-        REACT_APP_SCRIPT_SRC_CSP: "'sha256-gDC0EVcPe9MimCS3ZP14teSHr0GtEx+ggc0VQBfyvRI='",
+        REACT_APP_SCRIPT_SRC_CSP: "'sha256-ZTm1tWnhbM2s4JJUnkN10rTulMMGll/bTXSlE3+y6Dg='",
         // Whitelist inlined content for the Content-Security-Policy header
         REACT_APP_CONNECT_SRC_CSP: 'ws://localhost:* wss://localhost:*',
       },
@@ -116,7 +116,7 @@ const config = {
     // to restart the development server for Webpack to discover it. This plugin
     // makes the discovery automatic so you don't have to restart.
     // See https://github.com/facebookincubator/create-react-app/issues/186
-    new WatchMissingNodeModulesPlugin(paths.appNodeModules),
+    // new WatchMissingNodeModulesPlugin(paths.appNodeModules),
   ],
   node: nodeConfig,
 };

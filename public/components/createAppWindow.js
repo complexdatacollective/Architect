@@ -43,7 +43,7 @@ function createAppWindow() {
       minHeight: 800,
       center: true,
       title: 'Network Canvas Architect',
-      show: false,
+      show: true,
       webPreferences: {
         nodeIntegration: true,
       },
@@ -65,9 +65,9 @@ function createAppWindow() {
       global.appWindow = null;
     });
 
-    global.appWindow.once('ready-to-show', () => {
-      global.appWindow.show();
-    });
+    // global.appWindow.once('ready-to-show', () => {
+    //   global.appWindow.show();
+    // });
 
     global.appWindow.webContents.on('did-finish-load', () => resolve(global.appWindow));
 

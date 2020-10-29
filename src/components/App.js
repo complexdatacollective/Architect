@@ -1,13 +1,27 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { withRouter } from 'react-router-dom';
-import { isMacOS } from '../utils/platform';
-import { AppErrorBoundary } from './Errors';
-import DialogManager from './DialogManager';
+import { isMacOS } from '@app/utils/platform';
+import { AppErrorBoundary } from '@components/Errors';
+import DialogManager from '@components/DialogManager';
+import Routes from '@components/Routes';
 
-const App = ({ children }) => {
+const appVariants = {
+  show: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+    },
+  },
+  hide: {
+    opacity: 0,
+  },
+};
+
+const App = () => {
   const appClasses = cx(
     'app',
     {
@@ -15,32 +29,32 @@ const App = ({ children }) => {
     },
   );
 
-  return (
-    <div className={appClasses}>
-      {isMacOS() &&
-        <div className="app__electron-titlebar" />
-      }
-      <div className="app__window">
-        <AppErrorBoundary>
-          { children }
-        </AppErrorBoundary>
-      </div>
-      <div id="page-wrap" />
+  // we can use location and history for router
 
+  return (
+    <React.Fragment>
+      {isMacOS() &&
+        <div className="electron-titlebar" />
+      }
+      <motion.div
+        className={appClasses}
+        variants={appVariants}
+        initial="hide"
+        animate="show"
+      >
+        <AppErrorBoundary>
+          <Routes />
+        </AppErrorBoundary>
+      </motion.div>
       <DialogManager />
-    </div>
+    </React.Fragment>
   );
 };
 
 App.propTypes = {
-  children: PropTypes.element,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
-};
-
-App.defaultProps = {
-  children: null,
 };
 
 export { App };

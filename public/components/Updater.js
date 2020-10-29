@@ -4,90 +4,96 @@ const { autoUpdater } = require('electron-updater');
 const { dialog } = require('electron');
 const log = require('./log');
 
-global.silentUpdates = false;
+global.silentUpdates = true;
 
-const releasesUrl = 'https://github.com/codaco/Architect/releases';
+const releasesUrl = 'https://github.com/complexdatacollective/Architect/releases';
 
-class Updater {
-  constructor() {
-    this.setup();
-  }
+const updateListeners = {
+};
 
-  setup() {
-    autoUpdater.autoDownload = false;
-    autoUpdater.on('error', this.onError);
-    autoUpdater.on('update-available', this.onUpdateAvailable);
-    autoUpdater.on('update-downloaded', this.onUpdateDownloaded);
-    autoUpdater.on('update-not-available', this.onUpdateNotAvailable);
-  }
+const onUpdateAvailable = (updateInfo) => {
+  updateListeners.cleanup();
 
-  onUpdateAvailable(updateInfo) {
-    dialog.showMessageBox({
-      type: 'question',
-      title: 'Update Available',
-      message: 'Do you want update now?',
-      detail: `Version ${updateInfo.releaseName} is available.\n\nRelease notes are available at:\n${releasesUrl}\n\nClick 'Download and Restart' to fetch this update and install it. Ensure you have exported or backed up any important data before continuing.`,
-      buttons: ['Download and Restart', 'Cancel'],
-    },
-    (buttonIndex) => {
-      if (buttonIndex === 0) {
-        autoUpdater.downloadUpdate();
-      }
-    });
-  }
-
-  onUpdateNotAvailable() {
-    if (global.silentUpdates) {
-      log.info('No updates available (did not notify user).');
-      return;
+  dialog.showMessageBox({
+    type: 'question',
+    title: 'Update Available',
+    message: 'Do you want update now?',
+    detail: `Version ${updateInfo.releaseName} is available.\n\nRelease notes are available at:\n${releasesUrl}\n\nClick 'Download and Restart' to fetch this update and install it. Ensure you have exported or backed up any important data before continuing.`,
+    buttons: ['Download and Restart', 'Cancel'],
+  },
+  (buttonIndex) => {
+    if (buttonIndex === 0) {
+      autoUpdater.downloadUpdate();
     }
+  });
+};
 
-    dialog.showMessageBox({
-      title: 'No Updates Available',
-      message: 'Network Canvas is up-to-date.',
-    });
+const onUpdateNotAvailable = () => {
+  if (global.silentUpdates) {
+    log.info('Update not available (Did not notify user)');
+    return;
   }
 
-  onUpdateDownloaded() {
-    dialog.showMessageBox({
-      title: 'Install Update',
-      message: 'Download Complete',
-      detail: 'Your update is ready to install. You must now restart the app and install the update.',
-      buttons: ['Restart'],
-    },
-    () => setImmediate(() => autoUpdater.quitAndInstall()));
+  updateListeners.cleanup();
+
+  dialog.showMessageBox({
+    title: 'No Updates Available',
+    message: 'Architect is up-to-date.',
+  });
+};
+
+const onUpdateDownloaded = () => {
+  dialog.showMessageBox({
+    title: 'Install Update',
+    message: 'Download Complete',
+    detail: 'Your update is ready to install. You must now restart the app and install the update.',
+    buttons: ['Restart'],
+  },
+  () => setImmediate(() => autoUpdater.quitAndInstall()));
+};
+
+const onError = (error) => {
+  const detail = error ? (error.stack || error).toString() : 'An unknown error occurred';
+
+  log.error(detail);
+
+  if (global.silentUpdates) {
+    log.info('Update Error (Did not notify user)');
+    return;
   }
 
-  onError(error) {
-    const detail = error ? (error.stack || error).toString() : 'An unknown error occurred';
+  dialog.showMessageBox({
+    title: 'Error',
+    message: 'Download Complete',
+    detail: 'There was an error checking for updates. You may need to update this app manually.',
+    buttons: ['Okay'],
+  });
+};
 
-    log.error(detail);
+updateListeners.setup = (notAvailable = true, available = true) => {
+  if (available) { autoUpdater.on('update-available', onUpdateAvailable); }
+  if (notAvailable) { autoUpdater.on('update-not-available', onUpdateNotAvailable); }
+};
 
-    if (global.silentUpdates) {
-      log.info('Update Error (Did not notify user)');
-      return;
-    }
+updateListeners.cleanup = () => {
+  autoUpdater.off('update-available', onUpdateAvailable);
+  autoUpdater.off('update-not-available', onUpdateNotAvailable);
+};
 
-    dialog.showMessageBox({
-      title: 'Error',
-      message: 'Download Complete',
-      detail: 'There was an error checking for updates. You may need to update this app manually.',
-      buttons: ['Okay'],
-    });
-  }
+const checkForUpdates = (notAvailable = true, available = true) => {
+  updateListeners.setup(notAvailable, available);
+  autoUpdater.checkForUpdates();
+};
 
-  checkForUpdates(silent = false) {
-    global.silentUpdates = !!silent;
+autoUpdater.autoDownload = false;
+autoUpdater.on('update-downloaded', onUpdateDownloaded);
+autoUpdater.on('error', onError);
 
-    autoUpdater.checkForUpdates();
-  }
-}
+global.updater = {
+  checkForUpdates,
+};
 
 const getUpdater = () => {
-  if (!global.updater) {
-    global.updater = new Updater();
-  }
-
   return global.updater;
 };
 

@@ -3,6 +3,10 @@
   @return .6rem * $units;
 }
 
+@function px($px: 1) {
+  @return (($px * 1px) / $base-font-size) * 1rem;
+}
+
 // rename these methods, since they are actually generalisable
 @mixin preset-set($type-name, $breakpoint-name, $type-properties) {
   @include type-set($type-name, $breakpoint-name, $type-properties);

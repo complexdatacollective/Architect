@@ -75,7 +75,7 @@ List.propTypes = {
   filter: PropTypes.func.isRequired,
   controls: PropTypes.any.isRequired,
   item: PropTypes.any.isRequired,
-  sortableProperties: PropTypes.any.isRequired,
+  sortableProperties: PropTypes.any,
   onDelete: PropTypes.func,
   children: PropTypes.node,
 };
@@ -83,6 +83,7 @@ List.propTypes = {
 List.defaultProps = {
   children: null,
   controls: DefaultControls,
+  sortableProperties: [],
   filter: items => items,
   onDelete: () => {},
   initialSortOrder: {},

@@ -1,70 +1,100 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';
 import cx from 'classnames';
-import { getCSSVariableAsString } from '@codaco/ui/lib/utils/CSSVariables';
+import { motion } from 'framer-motion';
+import getAbsoluteBoundingRect from '@app/utils/getAbsoluteBoundingRect';
 import EditStageButton from './EditStageButton';
 
-const zoomColors = () => [getCSSVariableAsString('--light-background'), '#ffffff'];
+const findPos = (node) => {
+  let curtop = 0;
+  let curtopscroll = 0;
+  let n = node;
+  do {
+    curtop += n.offsetTop;
+    curtopscroll += n.offsetParent ? n.offsetParent.scrollTop : 0;
+    n = n.offsetParent;
+  } while (n.offsetParent);
+  return curtop - curtopscroll;
+};
+
+const variants = {
+  show: {
+    scale: 1,
+    opacity: 1,
+    transition: { type: 'spring', delay: 0.75 },
+  },
+  hide: {
+    scale: 0,
+    opacity: 0,
+  },
+};
 
 const Stage = ({
+  id,
+  stageNumber,
   className,
   onEditStage,
   onDeleteStage,
-  onInsertStage,
   type,
   label,
   hasSkipLogic,
   hasFilter,
-  ...rest
 }) => {
   const componentClasses = cx(
     'timeline-stage',
     className,
   );
 
+  const previewRef = useRef();
+
+  const handleEditStage = () => {
+    if (!previewRef.current) { return; }
+
+    const rect = getAbsoluteBoundingRect(previewRef.current);
+    const find = findPos(previewRef.current);
+
+    onEditStage(id, {
+      ...rect,
+      top: find,
+    });
+  };
+
   return (
-    <div className={componentClasses} {...rest}>
+    <motion.div
+      className={componentClasses}
+      variants={variants}
+    >
       <div
         className="timeline-stage__notch"
-        onClick={onEditStage}
-      />
+        onClick={handleEditStage}
+      >
+        {stageNumber}
+      </div>
       <EditStageButton
-        onEditStage={onEditStage}
+        ref={previewRef}
+        onEditStage={handleEditStage}
         type={type}
         label={label}
         hasSkipLogic={hasSkipLogic}
         hasFilter={hasFilter}
-        zoomColors={zoomColors()}
       />
       <div className="timeline-stage__controls">
         <a
           className="timeline-stage__control"
-          onClick={() => onInsertStage(0)}
-        >
-          <div className="timeline-stage__control-icon">↑</div>
-          Add stage before
-        </a>
-        <a
-          className="timeline-stage__control"
-          onClick={onDeleteStage}
+          onClick={() => onDeleteStage(id)}
         >
           <div className="timeline-stage__control-icon">✕</div>
           Delete stage
         </a>
-        <a
-          className="timeline-stage__control"
-          onClick={() => onInsertStage(1)}
-        >
-          <div className="timeline-stage__control-icon">↓</div>
-          Add stage after
-        </a>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 Stage.propTypes = {
+  id: PropTypes.string.isRequired,
+  stageNumber: PropTypes.number.isRequired,
   className: PropTypes.string,
   label: PropTypes.string,
   type: PropTypes.string.isRequired,
@@ -72,7 +102,6 @@ Stage.propTypes = {
   hasFilter: PropTypes.bool,
   onEditStage: PropTypes.func.isRequired,
   onDeleteStage: PropTypes.func.isRequired,
-  onInsertStage: PropTypes.func.isRequired,
 };
 
 Stage.defaultProps = {

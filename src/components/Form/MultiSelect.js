@@ -6,7 +6,7 @@ import { compose, defaultProps, withProps, withHandlers } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { FieldArray, formValueSelector, change } from 'redux-form';
 import { Icon, Button } from '@codaco/ui';
-import Select from './Fields/Select';
+import NativeSelect from './Fields/NativeSelect';
 import ValidatedField from '../Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
@@ -86,11 +86,10 @@ const Item = compose(
           ({ fieldName, ...rest }, index) => (
             <div className="form-fields-multi-select__rule-option" key={fieldName}>
               <ValidatedField
-                component={Select}
+                component={NativeSelect}
                 name={`${field}.${fieldName}`}
                 options={options(fieldName, rowValues, allValues)}
                 validation={{ required: true }}
-                placeholder="&mdash; Select &mdash;"
                 onChange={() => handleChange(index)}
                 {...rest}
               />

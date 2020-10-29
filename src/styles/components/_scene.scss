@@ -1,11 +1,22 @@
 .scene {
-  @include no-scrollbars;
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+
+  &__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &__brand {
     position: absolute;
@@ -94,26 +105,9 @@
   }
 
   &__protocol {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    visibility: hidden;
-    z-index: 2;
-  }
-
-  &__timeline {
-    left: 0;
-    width: 100%;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    transition-duration: var(--animation-duration-standard);
-    transition-timing-function: var(--animation-easing);
-    transition-property: transform;
-    transform: translateY(50vh);
-    will-change: transform;
-    margin-bottom: 15rem;
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 
   &--protocol {
@@ -134,12 +128,6 @@
 
       &__protocol {
         visibility: visible;
-      }
-
-      &__timeline {
-        height: auto;
-        visibility: visible;
-        transform: translateY(0);
       }
 
       &__background--top {

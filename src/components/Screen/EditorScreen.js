@@ -41,9 +41,10 @@ class EditorScreen extends Component {
         key="save"
         onClick={this.handleSubmit}
         iconPosition="right"
+        icon="arrow-right"
         disabled={this.props.submitting}
       >
-        Continue
+        Save Stage and Return to Timeline
       </Button>
     );
 
@@ -58,7 +59,7 @@ class EditorScreen extends Component {
       </Button>
     );
 
-    return this.props.hasUnsavedChanges ? [saveButton, cancelButton] : [cancelButton];
+    return this.props.hasUnsavedChanges ? [cancelButton, saveButton] : [cancelButton];
   }
 
   render() {

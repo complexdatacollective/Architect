@@ -7,7 +7,7 @@ import Fade from '@codaco/ui/lib/components/Transitions/Fade';
 import window from '@codaco/ui/lib/components/window';
 import { compose } from 'recompose';
 import Button from '@codaco/ui/lib/components/Button';
-import Layout, { Section } from '@components/EditorLayout';
+import Layout from '@components/EditorLayout';
 import Form from './Form';
 
 const InlineEditScreen = ({
@@ -30,21 +30,19 @@ const InlineEditScreen = ({
       <div className="inline-edit-screen" onClick={e => e.stopPropagation()}>
         <Flipped flipId={flipId}>
           <div className="inline-edit-screen__container">
+            <div className="inline-edit-screen__header">
+              <h1>{title}</h1>
+            </div>
             <div className="inline-edit-screen__content">
               <Layout>
-                { title &&
-                  <Section>
-                    <h1>{title}</h1>
-                  </Section>
-                }
                 <Form form={form} onSubmit={onSubmit} {...rest}>
                   {children}
                 </Form>
               </Layout>
             </div>
             <div className="inline-edit-screen__controls">
-              <Button onClick={handleSubmit} type="submit">Save and continue</Button>
               <Button onClick={onCancel} color="platinum">Cancel</Button>
+              <Button onClick={handleSubmit} type="submit" icon="arrow-right" iconPosition="right">Save and Close</Button>
             </div>
           </div>
         </Flipped>

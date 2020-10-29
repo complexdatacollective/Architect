@@ -25,7 +25,7 @@ const withUpdateHandlers = withHandlers({
         title: 'Remove validation',
         message: 'Are you sure you want to remove this rule?',
         onConfirm: () => { update(newValue); },
-        confirmLabel: 'Remove item',
+        confirmLabel: 'Remove validation',
       });
     },
   handleChange: ({ update, value: previousValue }) =>

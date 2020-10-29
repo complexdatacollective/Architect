@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import AssetBrowser from '@components/AssetBrowser';
-import Layout, { Section, Heading } from '@components/EditorLayout';
+import Layout, { Section } from '@components/EditorLayout';
 
 const AssetBrowserScreen = ({
   show,
@@ -15,8 +15,9 @@ const AssetBrowserScreen = ({
       key="done"
       onClick={onComplete}
       iconPosition="right"
+      icon="arrow-right"
     >
-      Continue
+      Return to Timeline
     </Button>,
   ];
 
@@ -28,17 +29,17 @@ const AssetBrowserScreen = ({
       onAcknowledgeError={onComplete}
     >
       <Layout>
-        <Heading>
-          Assets
-        </Heading>
         <Section>
+          <h1>
+            Resources
+          </h1>
           <p>
-            Welcome to the asset management screen. Here, you can load in images,
+            Welcome to the resources screen. Here, you can import images,
             video, audio, or even external network data which can be used elsewhere
             within your protocol.
           </p>
-          <AssetBrowser />
         </Section>
+        <AssetBrowser />
       </Layout>
     </Screen>
   );

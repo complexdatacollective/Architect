@@ -7,9 +7,11 @@ import {
 } from '@components/sections';
 
 const NameGeneratorQuickAdd = {
-  sections: [
+  headerSections: [
     Name,
     NodeType,
+  ],
+  sections: [
     QuickAdd,
     NameGeneratorPrompts,
     NodePanels,

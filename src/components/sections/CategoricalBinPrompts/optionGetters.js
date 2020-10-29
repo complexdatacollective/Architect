@@ -28,7 +28,7 @@ const getSortOrderOptionGetter = variableOptions =>
           .map(option => (
             !used.includes(option.value) ?
               getOptionProperties(option) :
-              { ...getOptionProperties(option), isDisabled: true }
+              { ...getOptionProperties(option), disabled: true }
           ));
       }
       case 'direction':

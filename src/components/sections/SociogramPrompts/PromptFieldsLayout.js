@@ -6,7 +6,6 @@ import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
 import OrderBy from '@components/Form/Fields/OrderBy';
-import Tip from '@components/Tip';
 import withCreateVariableHandlers from '@components/enhancers/withCreateVariableHandler';
 import { Section, Row } from '@components/EditorLayout';
 import withLayoutOptions from './withLayoutOptions';
@@ -16,9 +15,7 @@ const PromptFields = ({
   allowPositioning,
   entity,
   handleCreateVariable,
-  handleDeleteVariable,
   layoutVariablesForSubject,
-  normalizeKeyDown,
   type,
   variablesForSubject,
 }) => (
@@ -33,26 +30,14 @@ const PromptFields = ({
     <Row>
       <h4>Layout Variable</h4>
       <p>Which variable should be used to store or retrieve the X/Y coordinates of nodes?</p>
-      <Tip>
-        <p>
-          Remember, you can create a new layout variable here by typing a name into the box.
-        </p>
-      </Tip>
-
       <ValidatedField
         name="layout.layoutVariable"
         type={type}
         entity={entity}
         component={VariableSelect}
-        placeholder="&mdash; Select a new layout variable, or type to create a new one &mdash;"
         validation={{ required: true }}
         options={layoutVariablesForSubject}
-        onCreateOption={value => handleCreateVariable(value, 'layout')}
-        onDeleteOption={value => handleDeleteVariable(value)}
-        onKeyDown={normalizeKeyDown}
-        formatCreateLabel={inputValue => (
-          <span>Click here to create a new layout variable named &quot;{inputValue}&quot;.</span>
-        )}
+        onCreateOption={value => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
       />
     </Row>
     {/* <Row>
@@ -93,9 +78,7 @@ PromptFields.propTypes = {
   allowPositioning: PropTypes.bool,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
-  handleDeleteVariable: PropTypes.func.isRequired,
   layoutVariablesForSubject: PropTypes.array.isRequired,
-  normalizeKeyDown: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   variablesForSubject: PropTypes.object.isRequired,
 };

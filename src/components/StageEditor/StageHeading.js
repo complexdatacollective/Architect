@@ -1,48 +1,50 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { noop } from 'lodash';
+import { noop, get } from 'lodash';
+import timelineImages from '@app/images/timeline';
 import { getStageIndex } from '@selectors/protocol';
-import { getFieldId } from '@app/utils/issues';
-import scrollTo from '@app/utils/scrollTo';
-import { Heading } from '@app/components/EditorLayout';
+
+const getTimelineImage = type =>
+  get(timelineImages, type, timelineImages.Default);
 
 const StageHeading = ({
   stageNumber,
   name,
   type,
   toggleCodeView,
-}) => {
-  const handleEditName = () => {
-    const nameFieldId = `#${getFieldId('label')}`;
-    const destination = document.querySelector(nameFieldId);
-    scrollTo(destination);
-  };
-
-  const location = stageNumber ? `Stage ${stageNumber}` : 'New Stage';
-  const meta = (<div onClick={toggleCodeView}>{type}</div>);
-
-  return (
-    <Heading
-      location={location}
-      meta={meta}
-    >
-      <div
-        className="stage-heading__name-edit"
-        onClick={handleEditName}
-      >
-        {name}
-      </div>
-    </Heading>
-  );
-};
+  children,
+}) => (
+  <div className="stage-editor-section stage-heading">
+    <div className="stage-meta">
+      <h1>{name}</h1>
+      {
+        getTimelineImage(type) &&
+          <div className="timeline-preview">
+            <img
+              src={getTimelineImage(type)}
+              alt={`${type} interface`}
+              title={`${type} interface`}
+              onClick={toggleCodeView}
+            />
+            <div className="timeline-stage__notch">{stageNumber}</div>
+          </div>
+      }
+    </div>
+    <div className="stage-header-sections">
+      {children}
+    </div>
+  </div>
+);
 
 StageHeading.propTypes = {
   stageNumber: PropTypes.number,
   name: PropTypes.string,
   type: PropTypes.string,
   toggleCodeView: PropTypes.func,
+  children: PropTypes.any,
 };
 
 StageHeading.defaultProps = {
@@ -50,6 +52,7 @@ StageHeading.defaultProps = {
   name: '',
   type: '',
   toggleCodeView: noop,
+  children: null,
 };
 
 const mapStateToProps = (state, { id }) => {

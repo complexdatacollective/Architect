@@ -5,10 +5,10 @@
   z-index: var(--z-default);
 
   &__container {
-    @include no-scrollbars;
     position: absolute;
     overflow-x: hidden;
     overflow-y: scroll;
+    scroll-behavior: smooth;
     top: 0;
     left: 0;
     width: 100%;

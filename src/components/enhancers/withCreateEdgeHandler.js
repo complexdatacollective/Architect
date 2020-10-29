@@ -1,18 +1,21 @@
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
+import { change } from 'redux-form';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 
 // TODO: withCreateEdgeType
 
 const mapDispatchToProps = {
+  changeField: change,
   createEdge: codebookActions.createEdge,
 };
 
 const createEdgeHandler = {
-  handleCreateEdge: ({ createEdge }) =>
+  handleCreateEdge: ({ changeField, createEdge, form }) =>
     (name) => {
       const { type } = createEdge({ name });
-
+      // Update select field to newly created edge
+      changeField(form, 'edges.create', type);
       return type;
     },
 };

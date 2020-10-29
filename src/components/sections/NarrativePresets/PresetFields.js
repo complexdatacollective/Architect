@@ -5,96 +5,99 @@ import { compose } from 'recompose';
 import { Field } from 'redux-form';
 import Text from '@codaco/ui/lib/components/Fields/Text';
 import CheckboxGroup from '@codaco/ui/lib/components/Fields/CheckboxGroup';
-import Select from '@components/Form/Fields/Select';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { getFieldId } from '@app/utils/issues';
 import withNewVariableWindowHandlers from '@components/enhancers/withNewVariableWindowHandlers';
-import { normalizeKeyDown } from '@components/enhancers/withCreateVariableHandler';
 import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
 
 const PresetFields = ({
-  layoutVariblesForSubject,
+  layoutVariablesForSubject,
   groupVariablesForSubject,
   edgesForSubject,
   highlightVariablesForSubject,
   handleCreateLayoutVariable,
-  handleDeleteVariable,
   entity,
   type,
 }) => (
-  <Section>
-    <Row>
-      <h3 id={getFieldId('text')}>Preset label</h3>
-      <ValidatedField
-        name="label"
-        component={Text}
-        label=""
-        placeholder="Enter a label for the preset here"
-        validation={{ required: true }}
-      />
-    </Row>
-    <Row>
-      <ValidatedField
-        name="layoutVariable"
-        component={VariableSelect}
-        entity={entity}
-        type={type}
-        label="Layout variable"
-        placeholder="&mdash; Select a layout variable &mdash;"
-        validation={{ required: true }}
-        options={layoutVariblesForSubject}
-        onCreateOption={handleCreateLayoutVariable}
-        onKeyDown={normalizeKeyDown}
-        onDeleteOption={handleDeleteVariable}
-        formatCreateLabel={inputValue => (
-          <span>Click here to create a new layout variable named &quot;{inputValue}&quot;.</span>
-        )}
-      />
-    </Row>
-    <Row>
-      <ValidatedField
-        name="groupVariable"
-        component={Select}
-        label="Group variable"
-        options={groupVariablesForSubject}
-      />
-    </Row>
-    <Row>
-      <Field
-        name="edges.display"
-        component={CheckboxGroup}
-        label="Display the following edges:"
-        placeholder="&mdash; Toggle an edge to display &mdash;"
-        options={edgesForSubject}
-      />
-    </Row>
-    <Row>
-      <Field
-        name="highlight"
-        component={CheckboxGroup}
-        label="Highlight nodes with the following attribute:"
-        placeholder="&mdash; Toggle a variable to highlight &mdash;"
-        options={highlightVariablesForSubject}
-      />
-    </Row>
-  </Section>
+  <React.Fragment>
+    <Section>
+      <Row>
+        <h3 id={getFieldId('text')}>Preset label</h3>
+        <ValidatedField
+          name="label"
+          component={Text}
+          label=""
+          placeholder="Enter a label for the preset..."
+          validation={{ required: true }}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <ValidatedField
+          name="layoutVariable"
+          component={VariableSelect}
+          entity={entity}
+          type={type}
+          label="Layout variable"
+          validation={{ required: true }}
+          options={layoutVariablesForSubject}
+          onCreateOption={handleCreateLayoutVariable}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <ValidatedField
+          name="groupVariable"
+          component={NativeSelect}
+          allowPlaceholderSelect
+          placeholder="None"
+          label="Group variable"
+          options={groupVariablesForSubject}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <Field
+          name="edges.display"
+          component={CheckboxGroup}
+          label="Edge types to display"
+          placeholder="&mdash; Toggle an edge to display &mdash;"
+          options={edgesForSubject}
+        />
+      </Row>
+    </Section>
+    <Section>
+      <Row>
+        <Field
+          name="highlight"
+          component={CheckboxGroup}
+          label="Highlight nodes with the following attributes"
+          placeholder="&mdash; Toggle a variable to highlight &mdash;"
+          options={highlightVariablesForSubject}
+        />
+      </Row>
+    </Section>
+  </React.Fragment>
 );
 
 PresetFields.propTypes = {
-  layoutVariblesForSubject: PropTypes.array,
+  layoutVariablesForSubject: PropTypes.array,
   groupVariablesForSubject: PropTypes.array,
   edgesForSubject: PropTypes.array,
   highlightVariablesForSubject: PropTypes.array,
   handleCreateLayoutVariable: PropTypes.func.isRequired,
-  handleDeleteVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
 
 PresetFields.defaultProps = {
-  layoutVariblesForSubject: [],
+  layoutVariablesForSubject: [],
   groupVariablesForSubject: [],
   edgesForSubject: [],
   highlightVariablesForSubject: [],

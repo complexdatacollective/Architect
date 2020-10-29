@@ -5,8 +5,10 @@ import {
 } from '@components/sections';
 
 const Information = {
-  sections: [
+  headerSections: [
     Name,
+  ],
+  sections: [
     Title,
     ContentGrid,
   ],

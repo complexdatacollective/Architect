@@ -1,17 +1,24 @@
 import path from 'path';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { Flipped } from 'react-flip-toolkit';
 import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
-import { Node, Icon, Button } from '@codaco/ui';
+import { Node, Icon, GraphicButton } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getActiveProtocolMeta } from '@selectors/protocols';
+import codebookGraphic from '@app/images/undraw_science.svg';
+import assetsGraphic from '@app/images/undraw_media.svg';
 import { getProtocol } from '../selectors/protocol';
 import Link from './Link';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
 import { actionCreators as uiActions } from '../ducks/modules/ui';
+
+const panelVariants = {
+  hide: { opacity: 0, y: -200 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', damping: 20, when: 'beforeChildren' } },
+};
 
 class Overview extends Component {
   renderNodeTypes() {
@@ -64,44 +71,58 @@ class Overview extends Component {
       name,
       description,
       updateOptions,
-      show,
-      flipId,
+      openScreen,
     } = this.props;
 
-    if (!show || !flipId) { return null; }
-
     return (
-      <React.Fragment>
-        <Flipped flipId={flipId}>
-          <div className="overview">
-            <div className="overview__panel">
-              <div className="overview__groups">
-                <div className="overview__group overview__group--title">
-                  <h1 className="overview__name">{name}</h1>
-                  <Fields.Text
-                    className="timeline-overview__name"
-                    placeholder="Enter a description for your protocol here"
-                    label="Protocol description"
-                    input={{
-                      value: description,
-                      onChange:
-                        ({ target: { value } }) => {
-                          updateOptions({ description: value });
-                        },
-                    }}
-                  />
-                </div>
-                <div style={{ padding: '1rem 0 0', width: '100%', textAlign: 'right' }}>
-                  <Link screen="assets"><Button size="small">Manage assets</Button></Link>
-                  <div style={{ padding: '0 0 0 1rem', display: 'inline-block' }}>
-                    <Link screen="codebook"><Button size="small" color="neon-coral">Manage codebook</Button></Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <motion.div
+        className="overview"
+        variants={panelVariants}
+      >
+        <div className="overview__panel">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="protocol-name">
+            <h1 className="overview-name">{name}</h1>
+          </motion.div>
+          <div className="overview-description">
+            <Fields.TextArea
+              className="overview-description__field"
+              placeholder="Enter a description for your protocol..."
+              input={{
+                value: description,
+                onChange:
+                  ({ target: { value } }) => {
+                    updateOptions({ description: value });
+                  },
+              }}
+            />
           </div>
-        </Flipped>
-      </React.Fragment>
+        </div>
+        <div className="overview__footer">
+          <Icon name="protocol-card" />
+          <GraphicButton
+            graphic={assetsGraphic}
+            color="slate-blue"
+            graphicPosition="80% center"
+            graphicSize="auto 140%"
+            labelPosition={{ left: '3rem' }}
+            onClick={() => openScreen('assets')}
+          >
+            <h3>Manage Protocol</h3>
+            <h2>Resources</h2>
+          </GraphicButton>
+          <GraphicButton
+            graphic={codebookGraphic}
+            color="slate-blue"
+            graphicPosition="90% center"
+            graphicSize="auto 180%"
+            labelPosition={{ left: '3rem' }}
+            onClick={() => openScreen('codebook')}
+          >
+            <h3>Manage</h3>
+            <h2>Codebook</h2>
+          </GraphicButton>
+        </div>
+      </motion.div>
     );
   }
 }
@@ -111,15 +132,12 @@ Overview.propTypes = {
   description: PropTypes.string,
   codebook: PropTypes.object.isRequired,
   updateOptions: PropTypes.func,
-  flipId: PropTypes.string,
-  show: PropTypes.bool,
+  openScreen: PropTypes.func.isRequired,
 };
 
 Overview.defaultProps = {
-  show: true,
   name: null,
   description: '',
-  flipId: null,
   updateOptions: () => {},
 };
 

@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { Section } from '@components/EditorLayout';
 import Assets from './Assets';
 import NewAsset from './NewAsset';
 import withAssetActions from './withAssetActions';
@@ -18,25 +19,23 @@ const AssetBrowser = ({
   }, [onSelect]);
 
   return (
-    <div className="asset-browser">
-      <div className="asset-browser__content">
-        <div className="asset-browser__create">
-          <NewAsset
-            onCreate={handleCreate}
-            type={type}
-          />
-        </div>
-        <div className="asset-browser__assets">
-          <h3>Choose asset from library</h3>
-          <Assets
-            onSelect={onSelect}
-            onDelete={onDelete}
-            selected={selected}
-            type={type}
-          />
-        </div>
-      </div>
-    </div>
+    <React.Fragment>
+      <Section>
+        <NewAsset
+          onCreate={handleCreate}
+          type={type}
+        />
+      </Section>
+      <Section>
+        <h3>Resource library { type && (<span>(showing type: {type})</span>)}</h3>
+        <Assets
+          onSelect={onSelect}
+          onDelete={onDelete}
+          selected={selected}
+          type={type}
+        />
+      </Section>
+    </React.Fragment>
   );
 };
 

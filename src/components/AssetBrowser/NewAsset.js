@@ -11,13 +11,13 @@ const NewAsset = ({
   type,
   onCreate,
 }) => (
-  <div className="asset-browser-new-asset">
-    <h3>Create new asset</h3>
+  <React.Fragment>
+    <h3>Import a new resource</h3>
     <AutoFileDrop
       type={type}
       onDrop={onCreate}
     />
-  </div>
+  </React.Fragment>
 );
 
 NewAsset.propTypes = {

@@ -10,6 +10,8 @@ const ALLOWED_TYPES = [
   'boolean',
   'ordinal',
   'categorical',
+  'scalar',
+  'datetime',
 ];
 
 // TODO: isUsed
@@ -23,7 +25,7 @@ const mapStateToProps = (state, { entity, type, form, fields }) => {
     .map(({ value, ...rest }) => ({
       ...rest,
       value,
-      isDisabled: usedVariables.includes(value),
+      disabled: usedVariables.includes(value),
     }));
 
   return {

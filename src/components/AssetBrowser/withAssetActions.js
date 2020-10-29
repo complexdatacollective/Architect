@@ -20,18 +20,18 @@ const assetHandlers = withHandlers({
       if (isUsed) {
         openDialog({
           type: 'Notice',
-          title: 'Cannot delete asset',
-          message: 'Cannot delete this asset because it is used by the protocol.',
+          title: 'Cannot delete resource',
+          message: 'Cannot delete this resource because it is used within your interview. Remove any uses of the resource, and try again.',
           confirmLabel: 'Ok',
         });
         return;
       }
 
       openDialog({
-        type: 'Confirm',
-        title: 'Delete Asset',
-        message: 'Are you sure you want to delete this asset?',
-        confirmLabel: 'Delete asset',
+        type: 'Warning',
+        title: 'Delete Resource?',
+        message: 'Are you sure you want to delete this resource? This action cannot be undone.',
+        confirmLabel: 'Delete Resource',
         onConfirm: () => deleteAsset(assetId),
       });
     },

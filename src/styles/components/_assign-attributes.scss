@@ -18,6 +18,9 @@
   flex-direction: row;
   width: 100%;
   margin-top: unit(2);
+  padding: 0 unit(2);
+  border-radius: var(--border-radius);
+  background: var(--color-panel-grey--dark);
 
   &:first-child {
     margin-top: 0;
@@ -41,6 +44,7 @@
 
     .icon {
       height: 1rem;
+      cursor: pointer;
 
       .cls-1 {
         fill: var(--text-dark);

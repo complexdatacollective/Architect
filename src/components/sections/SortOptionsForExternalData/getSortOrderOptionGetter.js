@@ -22,7 +22,7 @@ const getSortOrderOptionGetter = externalDataPropertyOptions =>
             option => !NON_SORTABLE_TYPES.includes(option.value),
           )
           .map(
-            option => (!used.includes(option.value) ? option : { ...option, isDisabled: true }),
+            option => (!used.includes(option.value) ? option : { ...option, disabled: true }),
           );
       }
       case 'direction':

@@ -25,19 +25,25 @@ const NetworkFilter = ({
   variant,
 }) => {
   const handleDeactivate = useCallback(
-    () =>
-      openDialog({
-        type: 'Warning',
-        title: 'This will clear your filter',
-        message: 'This will clear your filter, and delete any rules you have created. Do you want to continue?',
-        confirmLabel: 'Clear filter',
-      })
-        .then((confirm) => {
-          if (confirm) {
-            changeField('edit-stage', name, null);
-          }
-          return confirm;
-        }),
+    () => {
+      if (hasFilter) {
+        return openDialog({
+          type: 'Warning',
+          title: 'This will clear your filter',
+          message: 'This will clear your filter, and delete any rules you have created. Do you want to continue?',
+          confirmLabel: 'Clear filter',
+        })
+          .then((confirm) => {
+            if (confirm) {
+              changeField('edit-stage', name, null);
+            }
+            return confirm;
+          });
+      }
+
+      changeField('edit-stage', name, null);
+      return Promise.resolve(true);
+    },
     [openDialog, changeField],
   );
 
@@ -49,10 +55,10 @@ const NetworkFilter = ({
       onDeactivate={handleDeactivate}
       variant={variant}
     >
-      <p>
+      {/* <p>
         You can optionally filter which nodes are shown on this stage, by creating
         one or more rules using the options below.
-      </p>
+      </p> */}
       <Field
         name={name}
         component={FilterField}

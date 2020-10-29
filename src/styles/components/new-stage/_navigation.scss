@@ -1,12 +1,12 @@
 .new-stage-navigation {
-  background: var(--background-dark);
-  color: var(--text-light);
+  background: var(--color-slate-blue--dark);
   display: flex;
+  color: var(--text-light);
   padding: 0 2rem;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
 
   &__category {
     padding: 0 1rem;
-    color: var(--text-light);
     height: 5rem;
     line-height: 5rem;
     background-color: transparent;
@@ -19,6 +19,7 @@
       &--#{$category} {
         &:hover {
           background-color: var(--color-#{$category});
+          color: var(--text-light);
         }
       }
     }

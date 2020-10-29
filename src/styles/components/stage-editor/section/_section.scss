@@ -4,11 +4,17 @@
   transition-timing-function: var(--animation-easing);
   opacity: 1;
   max-height: auto;
+  max-width: 70rem;
   transform: translateX(0);
   overflow: hidden;
-  margin: 0 unit(4);
-  padding: unit(4) 0;
-  border-bottom: unit(.2) solid var(--background-alt);
+  margin: unit(4) auto;
+  padding: unit(4);
+  background: var(--architect-panel-grey);
+  border-radius: var(--border-radius);
+
+  >:first-child {
+    margin-top: 0;
+  }
 
   &:last-child {
     margin-top: 0;
@@ -26,17 +32,12 @@
   .stage-editor-section {
     margin: unit(4) 0 0;
     padding: unit(1) unit(2) unit(2);
-    border: unit(.2) solid var(--background-alt);
+    background: var(--architect-panel-grey);
     border-radius: unit(1);
   }
 
   &--compact-next {
     margin-bottom: -2.5rem;
     padding-bottom: 0;
-  }
-
-  &--no-border {
-    border: 0;
-    padding-bottom: 0; // because without border this looks like double padding
   }
 }

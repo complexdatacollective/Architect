@@ -19,7 +19,6 @@ const PromptFields = ({
   changeForm,
   entity,
   form,
-  onDeleteVariable,
   type,
   variable,
   variableOptions,
@@ -47,123 +46,122 @@ const PromptFields = ({
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
 
   return (
-    <Section>
-      <Row>
-        <h3 id={getFieldId('text')}>Prompt Text</h3>
-        <p>
-          The prompt text instructs your participant about the task on this stage.
-          Enter the text to use for your prompt below.
-        </p>
-        <Tip>
+    <React.Fragment>
+      <Section>
+        <Row>
+          <h3 id={getFieldId('text')}>Prompt Text</h3>
           <p>
-            You can use markdown formatting in this prompt to create bold or underlined text.
+            The prompt text instructs your participant about the task on this stage.
+            Enter the text to use for your prompt below.
           </p>
-        </Tip>
-        <ValidatedField
-          name="text"
-          component={Text}
-          label=""
-          placeholder="Enter text for the prompt here..."
-          validation={{ required: true, maxLength: 220 }}
-        />
-      </Row>
-      <Row>
-        <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
-        <p>
-          Select an existing ordinal variable from the list below, or create a new one
-          by typing a name into the box and pressing enter.
-        </p>
-        <ValidatedField
-          name="variable"
-          component={VariableSelect}
-          entity={entity}
-          type={type}
-          label=""
-          options={ordinalVariableOptions}
-          onCreateOption={handleNewVariable}
-          onDeleteOption={v => onDeleteVariable(v, 'variable')}
-          validation={{ required: true }}
-          formatCreateLabel={inputValue => (
-            <span>
-              Click here to create a new ordinal variable named &quot;{inputValue}&quot;.
-            </span>
-          )}
-        />
-      </Row>
-      <Row>
-        { variable &&
-          <Section>
+          <Tip>
+            <p>
+              You can use markdown formatting in this prompt to create bold or underlined text.
+            </p>
+          </Tip>
+          <ValidatedField
+            name="text"
+            component={Text}
+            label=""
+            placeholder="Enter text for the prompt here..."
+            validation={{ required: true, maxLength: 220 }}
+          />
+        </Row>
+      </Section>
+      <Section>
+        <Row>
+          <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
+          <ValidatedField
+            name="variable"
+            component={VariableSelect}
+            entity={entity}
+            type={type}
+            label=""
+            options={ordinalVariableOptions}
+            onCreateOption={handleNewVariable}
+            validation={{ required: true }}
+          />
+        </Row>
+      </Section>
+      { variable &&
+        <Section>
+          <Row>
             <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
             <p>Create some options for this variable</p>
             <Options
               name="variableOptions"
               label="Options"
             />
-          </Section>
-        }
-      </Row>
-      <Row>
-        <h3 id={getFieldId('color')} data-name="Gradient color">Color</h3>
-        <p>
-          Network Canvas will render each option in your ordinal variable using a
-          color gradient. Which color would you like to use for this scale?
-        </p>
-        <Tip>
+          </Row>
+        </Section>
+      }
+      <Section>
+        <Row>
+          <h3 id={getFieldId('color')} data-name="Gradient color">Color</h3>
           <p>
-            Consider using a color consistently throughout your interview protocol
-            to represent each theme, to help reenforce the idea to your participants.
+            Network Canvas will render each option in your ordinal variable using a
+            color gradient. Which color would you like to use for this scale?
           </p>
-        </Tip>
-        <ValidatedField
-          component={ColorPicker}
-          name="color"
-          palette="ord-color-seq"
-          paletteRange={8}
-          validation={{ required: true }}
-        />
-      </Row>
-      <Row>
-        <h3>Bucket Sort Order <small>(optional)</small></h3>
-        <p>
-          Nodes are stacked in the bucket before they are placed by the participant. You may
-          optionally configure a list of rules to determine how nodes are sorted in the bucket
-          when the task starts, which will determine the order that your participant places them
-          into bins. Network Canvas will default to using the order in which nodes were named.
-        </p>
-        <Tip>
+          {/* <Tip>
+            <p>
+              Consider using a color consistently throughout your interview protocol
+              to represent each theme, to help reenforce the idea to your participants.
+            </p>
+          </Tip> */}
+          <ValidatedField
+            component={ColorPicker}
+            name="color"
+            palette="ord-color-seq"
+            paletteRange={8}
+            validation={{ required: true }}
+          />
+        </Row>
+      </Section>
+      <Section>
+        <Row>
+          <h3>Bucket Sort Order <small>(optional)</small></h3>
           <p>
-            Use the asterisk property to sort by the order that nodes were created.
+            Nodes are stacked in the bucket before they are placed by the participant. You may
+            optionally configure a list of rules to determine how nodes are sorted in the bucket
+            when the task starts, which will determine the order that your participant places them
+            into bins. Network Canvas will default to using the order in which nodes were named.
           </p>
-        </Tip>
-        <MultiSelect
-          name="bucketSortOrder"
-          properties={[
-            { fieldName: 'property' },
-            { fieldName: 'direction' },
-          ]}
-          maxItems={sortMaxItems}
-          options={getSortOrderOptionGetter(variableOptions)}
-        />
-      </Row>
-      <Row>
-        <h3>Bin Sort Order <small>(optional)</small></h3>
-        <p>
-          You may also configure one or more sort rules that determine the order that nodes
-          are listed after they have been placed into a bin.
-        </p>
-        <MultiSelect
-          name="binSortOrder"
-          properties={[
-            { fieldName: 'property' },
-            { fieldName: 'direction' },
-          ]}
-          maxItems={sortMaxItems}
-          options={getSortOrderOptionGetter(variableOptions)}
-        />
-      </Row>
-
+          <Tip>
+            <p>
+              Use the asterisk property to sort by the order that nodes were created.
+            </p>
+          </Tip>
+          <MultiSelect
+            name="bucketSortOrder"
+            properties={[
+              { fieldName: 'property' },
+              { fieldName: 'direction' },
+            ]}
+            maxItems={sortMaxItems}
+            options={getSortOrderOptionGetter(variableOptions)}
+          />
+        </Row>
+      </Section>
+      <Section>
+        <Row>
+          <h3>Bin Sort Order <small>(optional)</small></h3>
+          <p>
+            You may also configure one or more sort rules that determine the order that nodes
+            are listed after they have been placed into a bin.
+          </p>
+          <MultiSelect
+            name="binSortOrder"
+            properties={[
+              { fieldName: 'property' },
+              { fieldName: 'direction' },
+            ]}
+            maxItems={sortMaxItems}
+            options={getSortOrderOptionGetter(variableOptions)}
+          />
+        </Row>
+      </Section>
       <NewVariableWindow {...newVariableWindowProps} />
-    </Section>
+    </React.Fragment>
   );
 };
 

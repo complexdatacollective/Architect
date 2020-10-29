@@ -26,14 +26,14 @@ export const operators = {
 
 // List of operator options with labels
 export const operatorsAsOptions = [
-  [operators.EXACTLY, 'is Exactly'],
-  [operators.EXISTS, 'Exists'],
-  [operators.NOT_EXISTS, 'Not Exists'],
-  [operators.NOT, 'is Not'],
-  [operators.GREATER_THAN, 'is Greater Than'],
-  [operators.GREATER_THAN_OR_EQUAL, 'is Greater Than or Exactly'],
-  [operators.LESS_THAN, 'is Less Than'],
-  [operators.LESS_THAN_OR_EQUAL, 'is Less Than or Exactly'],
+  [operators.EXACTLY, 'is exactly'],
+  [operators.EXISTS, 'exists'],
+  [operators.NOT_EXISTS, 'does not Exist'],
+  [operators.NOT, 'is not'],
+  [operators.GREATER_THAN, 'is greater than'],
+  [operators.GREATER_THAN_OR_EQUAL, 'is greater than or exactly'],
+  [operators.LESS_THAN, 'is less than'],
+  [operators.LESS_THAN_OR_EQUAL, 'is less than or exactly'],
   [operators.INCLUDES, 'includes'],
   [operators.EXCLUDES, 'excludes'],
 ].map(([value, label]) => ({ value, label }));

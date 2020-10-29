@@ -5,9 +5,11 @@ import {
 } from '@components/sections';
 
 const OrdinalBin = {
-  sections: [
+  headerSections: [
     Name,
     FilteredNodeType,
+  ],
+  sections: [
     OrdinalBinPrompts,
   ],
 };

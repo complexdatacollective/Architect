@@ -8,7 +8,7 @@ import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 import { itemSelector, normalizeField } from './helpers';
 import withPromptChangeHandler from './withPromptChangeHandler';
-import Tip from '../../Tip';
+// import Tip from '../../Tip';
 
 const CategoricalBinPrompts = ({ handleChangePrompt, ...props }) => (
   <EditableList
@@ -26,9 +26,9 @@ const CategoricalBinPrompts = ({ handleChangePrompt, ...props }) => (
       Add one or more prompts below to frame the task for the user. You can reorder
       the prompts using the draggable handles on the left hand side.
     </p>
-    <Tip>
+    {/* <Tip>
       <p>Tap an existing prompt to edit it.</p>
-    </Tip>
+    </Tip> */}
   </EditableList>
 );
 

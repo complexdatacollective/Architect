@@ -1,15 +1,17 @@
 import {
   Name,
-  NodeType,
+  FilteredNodeType,
   Background,
   NarrativePresets,
   NarrativeBehaviours,
 } from '@components/sections';
 
 const Narrative = {
-  sections: [
+  headerSections: [
     Name,
-    NodeType,
+    FilteredNodeType,
+  ],
+  sections: [
     Background,
     NarrativePresets,
     NarrativeBehaviours,

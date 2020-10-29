@@ -9,9 +9,11 @@ const template = {
 };
 
 const AlterEdgeForm = {
-  sections: [
+  headerSections: [
     Name,
     FilteredEdgeType,
+  ],
+  sections: [
     IntroductionPanel,
     Form,
   ],

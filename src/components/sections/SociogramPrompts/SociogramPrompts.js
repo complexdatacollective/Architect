@@ -6,13 +6,14 @@ import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequ
 import withFormUsedVariableIndex from './withFormUsedVariableIndex';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
-import Tip from '../../Tip';
+// import Tip from '../../Tip';
 
 const template = () => ({ sortOrder: [] });
 
 const SociogramPrompts = props => (
   <EditableList
     contentId="guidance.editor.sociogram_prompts"
+    title="Edit Prompt"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     template={template}
@@ -20,9 +21,9 @@ const SociogramPrompts = props => (
   >
     <h2>Prompts</h2>
     <p>Add prompts to your Sociogram:</p>
-    <Tip>
+    {/* <Tip>
       <p>Tap an existing prompt to edit it.</p>
-    </Tip>
+    </Tip> */}
   </EditableList>
 );
 

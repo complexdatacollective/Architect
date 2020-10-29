@@ -13,7 +13,7 @@ const IMPORT_ASSET_FAILED = 'PROTOCOL/IMPORT_ASSET_FAILED';
 const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
 
 const getNameFromFilename = filename =>
-  path.parse(filename).name;
+  path.parse(filename).base;
 
 const deleteAsset = id =>
   ({

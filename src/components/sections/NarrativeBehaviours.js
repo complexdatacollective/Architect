@@ -12,16 +12,16 @@ const NarrativeBehaviours = () => (
       <h4>Free-draw</h4>
       <Field
         name="freeDraw"
-        label="Allow drawing on the canvas."
-        component={Fields.Checkbox}
+        label="Allow drawing on the canvas"
+        component={Fields.Toggle}
       />
 
       <div id={getFieldId('allowRepositioning')} data-name="Allow repositioning" />
       <h4>Allow repositioning</h4>
       <Field
         name="allowRepositioning"
-        label="Allow repositioning of nodes."
-        component={Fields.Checkbox}
+        label="Allow nodes to be repositioned"
+        component={Fields.Toggle}
       />
     </FormSection>
   </Section>

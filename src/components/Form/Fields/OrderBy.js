@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
 import { map, isArray, toPairs } from 'lodash';
-import { Icon } from '@codaco/ui';
-import Select from './Select';
+import { Button, Icon } from '@codaco/ui';
+import NativeSelect from './NativeSelect';
 
 const NON_SORTABLE_TYPES = ['layout'];
 const ASC = 'asc';
@@ -30,12 +30,6 @@ const RuleDelete = props => (
   </div>
 );
 
-const AddRule = props => (
-  <div className="form-fields-order-by__add" {...props}>
-    <Icon name="add" /> Add sorting rule
-  </div>
-);
-
 const Rule = compose(
   SortableElement,
 )(
@@ -53,30 +47,30 @@ const Rule = compose(
       </div>
       <div className="form-fields-order-by__rule-options">
         <div className="form-fields-order-by__rule-option">
-          <Select
+          <NativeSelect
             input={{
               onChange: value =>
                 handleChange(index, { property: value }),
               value: property,
             }}
-            placeholder="&mdash; select property &mdash;"
+            placeholder="Select a property"
             options={variables.map(({ label, value }) => (
               {
                 value,
-                isDisabled: disabledVariables.includes(value),
+                disabled: disabledVariables.includes(value),
                 label,
               }
             ))}
           />
         </div>
         <div className="form-fields-order-by__rule-option">
-          <Select
+          <NativeSelect
             input={{
               onChange: value =>
                 handleChange(index, { direction: value }),
               value: direction,
             }}
-            placeholder="&mdash; select direction &mdash;"
+            placeholder="Select a direction"
             options={DIRECTIONS.map(([value, label]) => (
               { value, label }
             ))}
@@ -207,7 +201,13 @@ class OrderBy extends Component {
           onSortEnd={this.onSortEnd}
         />
         { !this.areRulesFull &&
-          <AddRule onClick={this.handleAddNewRule} />
+          <Button
+            onClick={this.handleAddNewRule}
+            content="Add Rule"
+            color="primary"
+            icon="add"
+            size="small"
+          />
         }
       </div>
     );

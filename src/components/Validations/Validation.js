@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@codaco/ui';
 import Number from '@codaco/ui/lib/components/Fields/Number';
-import Select from '../Form/Fields/Select';
+import NativeSelect from '../Form/Fields/NativeSelect';
 import { isValidationWithValue } from './options';
 
 const Validation = ({
@@ -12,13 +12,15 @@ const Validation = ({
   itemKey,
   itemValue,
 }) => {
-  const handleKeyChange = option =>
-    onUpdate(option.value, itemValue, itemKey);
+  const handleKeyChange = option => onUpdate(option, itemValue, itemKey);
 
   const handleValueChange = newValue =>
     onUpdate(itemKey, newValue, itemKey);
 
-  const keyInputProps = { value: itemKey };
+  const keyInputProps = {
+    value: itemKey,
+    onChange: handleKeyChange,
+  };
 
   const valueInputProps = {
     value: itemValue || '',
@@ -29,19 +31,18 @@ const Validation = ({
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
-          <Select
+          <NativeSelect
             options={options}
             input={keyInputProps}
             validation={{ required: true }}
-            placeholder="&mdash; Select &mdash;"
-            onChange={handleKeyChange}
+            placeholder="Select validation rule"
           />
         </div>
-        <div className="form-fields-multi-select__rule-option">
-          { isValidationWithValue(itemKey) &&
-            <Number input={valueInputProps} />
-          }
-        </div>
+        { isValidationWithValue(itemKey) &&
+          <div className="form-fields-multi-select__rule-option">
+            <Number input={valueInputProps} validation={{ required: true }} />
+          </div>
+        }
       </div>
       <div className="form-fields-multi-select__rule-control">
         <div className="form-fields-multi-select__delete" onClick={() => onDelete(itemKey)}>

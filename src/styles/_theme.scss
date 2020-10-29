@@ -5,11 +5,13 @@
   --color-modal-shadow: rgba(20, 0, 0, .2);
   --color-mid-grey: rgb(128, 128, 128);
   --text-light-muted: rgba(255, 255, 255, .5);
+  --color-panel-grey--light: #e2e2e2;
+  --color-panel-grey--dark: #d8d8d8;
 
   // UI overwrites
-  --background: var(--color-white);
+  --background: var(--color-platinum);
   --text: var(--color-charcoal);
-  --input-background: var(--color-platinum);
+  --input-background: var(--color-white);
   --input-label: var(--color-charcoal);
   --text-light: var(--color-white); // actually this one is new
   --text-dark: var(--color-charcoal);
@@ -39,23 +41,24 @@
   --architect-divider: var(--color-platinum);
   --architect-selected: var(--color-sea-green);
   --architect-active: var(--color-sea-green);
+  --architect-panel-grey: #e9edef;
 
   // Control bar
   --architect-control-bar-background: var(--color-cyber-grape);
   --architect-control-bar-text: var(--color-white);
 
   // forms
-  --form-control: var(--color-platinum);
+  --form-control: var(--color-sea-serpent);
 
   // dialog
   --architect-dialog-background: var(--color-platinum);
   --architect-dialog-background--dark: var(--color-platinum--dark);
 
   // sortable, rename?
-  --architect-sortable-text: var(--color-charcoal);
-  --architect-sortable-background: var(--color-platinum);
-  --architect-sortable-preview-background: var(--color-platinum);
-  --architect-sortable-preview-background--alt: var(--color-platinum--dark);
+  --architect-sortable-text: var(--color-white);
+  --architect-sortable-background: var(--color-slate-blue);
+  --architect-sortable-preview-background: var(--color-slate-blue);
+  --architect-sortable-preview-background--alt: var(--color-slate-blue--dark);
 
   // Modal
   --architect-modal-shadow: var(--modal-overlay);
@@ -66,9 +69,9 @@
   --architect-logic-text: var(--color-white);
 
   // Context panel
-  --architect-context-controls: var(--color-platinum--dark);
-  --architect-context-panel: var(--color-platinum);
-  --architect-context-text: var(--text-dark);
+  --architect-context-controls: var(--color-slate-blue--dark);
+  --architect-context-panel: var(--color-slate-blue);
+  --architect-context-text: var(--text-light);
   --architect-context-controls--contrast: var(--color-navy-taupe);
   --architect-context-panel--contrast: var(--color-cyber-grape);
   --architect-context-text--contrast: var(--text-light);

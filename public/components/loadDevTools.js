@@ -2,7 +2,7 @@ const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = req
 const log = require('./log');
 
 const loadDevTools = () => {
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV !== 'development' || process.env.DISABLE_DEV_TOOLS === 'true') {
     return Promise.resolve(null);
   }
 
@@ -12,7 +12,7 @@ const loadDevTools = () => {
   ])
     .then(tools => log.info(`Added Extension:  ${tools.toString()}`))
     .catch((err) => {
-      log.warn('An error occurred: ', err)
+      log.warn('An error occurred: ', err);
     });
 };
 

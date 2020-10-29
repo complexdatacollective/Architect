@@ -16,7 +16,6 @@ const HighlightFields = ({
   canCreateEdge,
   entity,
   handleCreateVariable,
-  handleDeleteVariable,
   handleEdgeHighlightChange,
   highlightVariablesForSubject,
   normalizeKeyDown,
@@ -59,16 +58,9 @@ const HighlightFields = ({
             type={type}
             label="Which boolean variable should be toggled?"
             onCreateOption={value => handleCreateVariable(value, 'boolean')}
-            onDeleteOption={value => handleDeleteVariable(value)}
             onKeyDown={normalizeKeyDown}
             validation={{ required: true }}
-            placeholder="&mdash; Select a variable to toggle, or type a name to create a new one &mdash;"
             options={highlightVariablesForSubject}
-            formatCreateLabel={inputValue => (
-              <span>
-                Click here to create a new boolean variable named &quot;{inputValue}&quot;.
-              </span>
-            )}
           />
         }
       </Row>
@@ -81,7 +73,6 @@ HighlightFields.propTypes = {
   canCreateEdge: PropTypes.bool.isRequired,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
-  handleDeleteVariable: PropTypes.func.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   highlightVariablesForSubject: PropTypes.array.isRequired,
   normalizeKeyDown: PropTypes.func.isRequired,

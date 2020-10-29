@@ -1,6 +1,7 @@
-import { uniqBy } from 'lodash';
+import path from 'path';
+import { uniqBy, get } from 'lodash';
 import { actionTypes as loadActionTypes } from './protocols/load';
-import { actionTypes as bundleActionTypes } from './protocols/bundle';
+import { actionTypes as saveActionTypes } from './protocols/save';
 import { actionTypes as unbundleActionTypes } from './protocols/unbundle';
 
 const initialState = [];
@@ -11,22 +12,54 @@ export default function reducer(state = initialState, action = {}) {
       return state.filter(protocol =>
         protocol.filePath !== action.filePath,
       );
+    // 1. we unbundled it from disk so we can be sure this
+    // is an existing protocol. But we don't know the meta
+    // so we just add the file entry for now.
+    case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS: {
+      const filePath = action.filePath;
+      return uniqBy([
+        {
+          filePath,
+          lastModified: new Date().getTime(),
+        },
+        ...state,
+      ], 'filePath')
+        .sort((a, b) => b.lastModified - a.lastModified)
+        .slice(0, 50);
+    }
+    // 2. we loaded protocol from a working copy,
+    // it may be from a file entry, but it might not
+    // be so only add meta if it exists in recentProtocols
+    // already (e.g. added in UNBUNDLE_PROTOCOL_SUCCESS)
     case loadActionTypes.LOAD_PROTOCOL_SUCCESS:
       return state.map((protocol) => {
-        if (protocol.filePath !== action.meta.filePath) { return protocol; }
+        const filePath = get(action, 'meta.filePath');
+        if (protocol.filePath !== filePath) { return protocol; }
 
         return {
           ...protocol,
-          lastOpened: new Date().getTime(),
+          lastModified: new Date().getTime(),
+          name: path.basename(filePath, '.netcanvas'),
+          description: action.protocol.description,
+          schemaVersion: action.protocol.schemaVersion,
         };
-      }).sort((a, b) => a.lastOpened < b.lastOpened);
-    case unbundleActionTypes.UNBUNDLE_PROTOCOL_SUCCESS:
-    case bundleActionTypes.BUNDLE_PROTOCOL_SUCCESS:
+      }).sort((a, b) => b.lastModified - a.lastModified);
+    // We saved it, we know everything about the protocol
+    case saveActionTypes.SAVE_PROTOCOL_SUCCESS: {
+      const filePath = get(action, 'meta.filePath');
       return uniqBy([
-        { filePath: action.filePath, lastOpened: new Date().getTime() },
+        {
+          filePath,
+          lastModified: new Date().getTime(),
+          name: path.basename(filePath, '.netcanvas'),
+          description: action.protocol.description,
+          schemaVersion: action.protocol.schemaVersion,
+        },
         ...state,
       ], 'filePath')
+        .sort((a, b) => b.lastModified - a.lastModified)
         .slice(0, 50);
+    }
     default:
       return state;
   }

@@ -1,58 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose, withHandlers } from 'recompose';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
-import { Button, Icon, Spinner } from '@codaco/ui';
+import history from '@app/history';
+import { UnsavedChanges } from '@components/Dialogs';
+import { Button, Spinner } from '@codaco/ui';
 import { getProtocol } from '@selectors/protocol';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { actionCreators as protocolsActions, actionLocks as protocolsLocks } from '@modules/protocols';
+import { actionCreators as dialogActions } from '@modules/dialogs';
 import { selectors as statusSelectors } from '@modules/ui/status';
+import logoutIcon from '@app/images/home/log-out.svg';
 import ControlBar from './ControlBar';
-
-const RightArrow = <Icon name="arrow-right" />;
-
-const labelVariants = {
-  ready: { opacity: 1 },
-  busy: { opacity: 0 },
-};
-
-const spinnerVariants = {
-  ready: { opacity: 0 },
-  busy: { opacity: 1 },
-};
 
 const ProtocolControlBar = ({
   saveProtocol,
-  show,
-  showControlBar,
-  isDisabled,
   isSaving,
+  hasAnyStages,
+  hasUnsavedChanges,
+  handleClickStart,
 }) => {
-  const saveProps = !isSaving &&
-  {
-    icon: RightArrow,
-    iconPosition: 'right',
-  };
+  const showSaveButton = hasAnyStages && hasUnsavedChanges;
 
   return (
     <ControlBar
-      show={show && showControlBar}
-      buttons={[
+      show
+      secondaryButtons={[
         <Button
-          onClick={saveProtocol}
-          color="white"
-          data-variant="save"
-          disabled={isDisabled}
-          {...saveProps}
+          key="return-button"
+          icon={<div><img src={logoutIcon} alt="Return to start screen" /></div>}
+          color="platinum"
+          onClick={handleClickStart}
         >
-          <motion.div
-            initial="ready"
-            animate={isSaving ? 'busy' : 'ready'}
-          >
-            <motion.div variants={labelVariants}>Save</motion.div>
-            <motion.div className="button__busy" variants={spinnerVariants}><Spinner /></motion.div>
-          </motion.div>
+          Return to start screen
         </Button>,
+      ]}
+      buttons={[
+        ...(showSaveButton ? [<Button
+          key="save-button"
+          onClick={saveProtocol}
+          color="primary"
+          data-variant="save"
+          disabled={isSaving}
+          content={isSaving ? 'Saving...' : 'Save Changes'}
+          iconPosition="right"
+          icon={isSaving ? <div><Spinner size="0.5rem" /></div> : 'arrow-right'}
+        />] : []),
       ]}
     />
   );
@@ -61,36 +54,60 @@ const ProtocolControlBar = ({
 ProtocolControlBar.propTypes = {
   saveProtocol: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
-  showControlBar: PropTypes.bool.isRequired,
-  show: PropTypes.bool,
+  hasUnsavedChanges: PropTypes.bool,
+  hasAnyStages: PropTypes.bool.isRequired,
+  handleClickStart: PropTypes.func.isRequired,
 };
 
 ProtocolControlBar.defaultProps = {
-  show: true,
+  hasUnsavedChanges: false,
 };
 
 const mapStateToProps = (state) => {
   const hasUnsavedChanges = getHasUnsavedChanges(state);
   const hasAnyStages = getProtocol(state).stages.length > 0;
   const isSaving = statusSelectors.getIsBusy(state, protocolsLocks.saving);
-  const isDisabled = !hasAnyStages || isSaving;
-  const showControlBar = hasUnsavedChanges || isSaving;
 
   return {
     isSaving,
-    isDisabled,
-    showControlBar,
+    hasUnsavedChanges,
+    hasAnyStages,
   };
 };
 
+const linkHandler = withHandlers({
+  handleClickStart: ({
+    hasUnsavedChanges,
+    openDialog,
+  }) =>
+    () => Promise.resolve()
+      .then(() => {
+        if (!hasUnsavedChanges) { return true; }
+
+        return openDialog(UnsavedChanges({
+          message: (
+            <div>
+              Are you sure you want to go back to the start screen?
+              <p><strong>Unsaved changes will be lost!</strong></p>
+            </div>
+          ),
+          confirmLabel: 'Go to start screen',
+        }));
+      })
+      .then((confirm) => {
+        if (!confirm) { return; }
+        history.push('/');
+      }),
+});
+
 const mapDispatchToProps = {
   saveProtocol: protocolsActions.saveAndBundleProtocol,
+  openDialog: dialogActions.openDialog,
 };
 
 export { ProtocolControlBar };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  linkHandler,
 )(ProtocolControlBar);

@@ -1,5 +1,9 @@
 .new-stage-interface {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
   &__title {
     margin: 0;
@@ -7,7 +11,7 @@
 
   &__preview {
     margin-top: 1rem;
-    width: 20vw;
+    width: 100%;
     min-width: unit(30);
     border-width: .4rem;
     border-style: solid;

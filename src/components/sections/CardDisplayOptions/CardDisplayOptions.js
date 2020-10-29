@@ -8,6 +8,7 @@ import withMapFormToProps from '@components/enhancers/withMapFormToProps';
 import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
 import MultiSelect from '@components/Form/MultiSelect';
 import getVariableOptionsGetter from '../SortOptionsForExternalData/getVariableOptionsGetter';
+import Tip from '../../Tip';
 
 const CardDisplayOptions = ({
   dataSource,
@@ -18,17 +19,19 @@ const CardDisplayOptions = ({
   const maxVariableOptions = variableOptions.length;
 
   return (
-    <Section group contentId="guidance.editor.cardDisplayOptions" disabled={disabled}>
+    <Section key={dataSource} group contentId="guidance.editor.cardDisplayOptions" disabled={disabled}>
       <Row>
         <h3>Card Display Options</h3>
         <p>
           This section controls how the cards (which represent each item in your roster
           data file) are displayed to the participant.
         </p>
-        <p>
-          Cards will use the <strong>name</strong> attribute from your external data as
-          the main card title.
-        </p>
+        <Tip>
+          <p>
+            Cards will use the <strong>name</strong> attribute from your external data as
+            the main card title.
+          </p>
+        </Tip>
       </Row>
       <Row>
         <h4>Additional Display Properties</h4>

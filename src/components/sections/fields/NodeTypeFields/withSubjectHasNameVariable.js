@@ -10,10 +10,9 @@ const withSubjectNameVariablesState = connect(
     const type = subject && subject.type;
     const variablesCalledName = toPairs(getVariablesForSubject(state, { entity, type }))
       .some(([, { name }]) => name === 'name');
-
     return {
       ...subject,
-      subjectHasVariableCalledName: !!variablesCalledName.length > 0,
+      subjectHasVariableCalledName: !!variablesCalledName,
     };
   },
 );

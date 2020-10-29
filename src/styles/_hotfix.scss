@@ -1,7 +1,6 @@
 :root {
   --text: var(--color-charcoal);
   --input-label: var(--color-charcoal);
-  --input-background: var(--color-platinum);
   --input-placeholder: #{transparentize(rgb(0, 0, 0), .65)};
 }
 
@@ -58,6 +57,17 @@ a {
   color: var(--text-light);
 }
 
+.form-field-checkbox--disabled {
+  font-style: italic;
+  opacity: .75;
+  cursor: not-allowed;
+}
+
+.form-field {
+  padding: 1rem unit(2);
+
+}
+
 .form-field-toggle__button {
   background: var(--color-platinum--dark);
 }
@@ -89,4 +99,8 @@ a {
 
 .modal {
   height: 100vh;
+}
+
+.protocol-card {
+  background: var(--color-white);
 }

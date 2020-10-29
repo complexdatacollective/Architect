@@ -1,8 +1,11 @@
 $component-name: 'form-fields-multi-select';
 
 .#{$component-name} {
-  --form-control: var(--color-platinum--dark);
   display: block;
+
+  .form-fields-select-native__component {
+    margin-bottom: 0;
+  }
 
   &__label {
     @include preset('title-4');
@@ -16,16 +19,20 @@ $component-name: 'form-fields-multi-select';
   }
 
   &__rules {
-    margin: 0 0 unit(1);
+    margin: 0 0 unit(2);
   }
 
   &__rule {
-    margin: unit(1) 0 0;
     display: flex;
     background-color: var(--form-control);
+    color: var(--architect-sortable-text);
     border-radius: unit(1);
     z-index: var(--z-fx);
     transition: background-color var(--animation-easing) var(--animation-duration-standard);
+
+    &:not(:last-of-type) {
+      margin-bottom: unit(1);
+    }
 
     &-control {
       flex-grow: 0;
@@ -35,8 +42,9 @@ $component-name: 'form-fields-multi-select';
     }
 
     &-options {
-      flex-grow: 1;
+      flex: 1;
       display: flex;
+      align-items: flex-start;
       padding: unit(1) unit(2);
     }
 
@@ -44,8 +52,7 @@ $component-name: 'form-fields-multi-select';
       display: flex;
       align-items: center;
       margin-left: unit(1);
-      flex-grow: 1;
-      flex-shrink: 0;
+      flex: 1 1 100%;
 
       &:first-child {
         margin-left: 0;
@@ -57,7 +64,7 @@ $component-name: 'form-fields-multi-select';
       }
 
       .form-field-container,
-      .form-fields-select {
+      .form-fields-select-native__wrapper {
         margin: 0;
         width: 100%;
         position: relative;
@@ -68,18 +75,9 @@ $component-name: 'form-fields-multi-select';
 
         .form-field-text__error,
         .form-fields-select__error  {
-          position: absolute;
           z-index: 1;
-          opacity: 0;
+          opacity: 1;
           width: 100%;
-        }
-
-        &:hover {
-          .form-field-text__error,
-          .form-fields-select__error  {
-            display: flex;
-            opacity: 1;
-          }
         }
 
         .form-field-text--has-focus {

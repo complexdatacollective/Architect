@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { get, has } from 'lodash';
+import { find, get, has } from 'lodash';
 import { formValueSelector, change } from 'redux-form';
 import {
   compose,
@@ -20,7 +20,6 @@ const mapStateToProps = (state, { form, entity, type }) => {
   const createNewVariable = formSelector(state, '_createNewVariable');
   const isNewVariable = !!createNewVariable;
 
-
   const existingVariables = getVariablesForSubject(state, { entity, type });
   const variableOptions = getVariableOptionsForSubject(state, { entity, type })
     // If not a variable with corresponding component, we can't use it here.
@@ -37,10 +36,12 @@ const mapStateToProps = (state, { form, entity, type }) => {
   );
 
   // 1. If type defined, show components that match (existing variable)
-  // 2. Othewise list all INPUT_OPTIONS (new variable)
+  // 2. Otherwise list all INPUT_OPTIONS (new variable)
   const componentOptions = variableType && !isNewVariable ?
     getComponentsForType(variableType) :
     INPUT_OPTIONS;
+
+  const metaForType = find(componentOptions, { value: component });
 
   return {
     variable,
@@ -48,6 +49,7 @@ const mapStateToProps = (state, { form, entity, type }) => {
     variableOptions,
     componentOptions,
     component,
+    metaForType,
     existingVariables,
     isNewVariable,
   };
@@ -103,6 +105,7 @@ const fieldsHandlers = withHandlers({
   handleNewVariable: ({ changeField, form }) =>
     (value) => {
       changeField(form, '_createNewVariable', value);
+      changeField(form, 'variable', value);
       return value;
     },
 });

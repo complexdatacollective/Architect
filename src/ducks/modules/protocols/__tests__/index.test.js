@@ -122,7 +122,7 @@ describe('protocols', () => {
     );
   });
 
-  describe('saveAndBundleProtocol()', () => {
+  describe.only('saveAndBundleProtocol()', () => {
     advanceTo(Date.UTC(2017, 5, 27, 0, 0, 0));
 
     describe('invalid protocol', () => {

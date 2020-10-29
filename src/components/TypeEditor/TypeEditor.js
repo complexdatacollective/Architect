@@ -7,7 +7,7 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import * as ArchitectFields from '@components/Form/Fields';
-import Layout, { Heading, Section } from '@components/EditorLayout';
+import Layout, { Section } from '@components/EditorLayout';
 import { getCodebook } from '@selectors/protocol';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
@@ -31,10 +31,9 @@ const TypeEditor = ({
 
   return (
     <Layout>
-      <Heading meta={type}>
-        { type ? `Edit ${entity}` : `Create ${entity}` }
-      </Heading>
-
+      <Section>
+        <h1>{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
+      </Section>
       <Section>
         <h3 id={getFieldId('name')}>{capitalize(entity)} Type</h3>
         <p>
@@ -45,7 +44,7 @@ const TypeEditor = ({
         <ValidatedField
           component={Fields.Text}
           name="name"
-          validation={{ required: true, allowedNMToken: 'node type name', uniqueByList: existingTypes }}
+          validation={{ required: true, allowedNMToken: `${entity} type name`, uniqueByList: existingTypes }}
         />
       </Section>
 

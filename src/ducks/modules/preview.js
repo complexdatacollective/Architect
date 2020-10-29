@@ -4,14 +4,15 @@ import { getProtocol } from '@selectors/protocol';
 import previewDriver from '@app/utils/previewDriver';
 
 const getStageIndex = (protocol, stageMeta) => {
-  switch (true) {
-    case !!stageMeta.id:
-      return protocol.stages.findIndex(({ id }) => id === stageMeta.id);
-    case !!stageMeta.insertAtIndex:
-      return stageMeta.insertAtIndex;
-    default:
-      return protocol.stages.length;
+  if (stageMeta.id) {
+    return protocol.stages.findIndex(({ id }) => id === stageMeta.id);
   }
+
+  if (stageMeta.insertAtIndex !== undefined) {
+    return stageMeta.insertAtIndex;
+  }
+
+  return protocol.stages.length;
 };
 
 const getDraftStages = (protocol, stageMeta, draftStage) => {

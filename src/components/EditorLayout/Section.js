@@ -10,11 +10,11 @@ const Section = ({
   className,
 }) => {
   const sectionClasses = cx(
-    className,
     'stage-editor-section',
     { 'stage-editor-section--disabled': disabled },
     { 'stage-editor-section--group': group },
     { 'stage-editor-section--compact-next': compactNext },
+    className,
   );
 
   return (

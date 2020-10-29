@@ -6,7 +6,6 @@ import { App } from '../App';
 
 const mockProps = {
   location: { pathname: '' },
-  resetActiveProtocol: () => {},
 };
 
 const process = global.process;
@@ -20,17 +19,15 @@ describe('<App />', () => {
     global.process = { ...global.process, platform: 'darwin' };
 
     const component = shallow(<App {...mockProps} />);
-
-    expect(component.hasClass('app--macos')).toBe(true);
-    expect(component.contains(<div className="app__electron-titlebar" />)).toBe(true);
+    expect(component.find('.app').hasClass('app--macos')).toBe(true);
+    expect(component.find('.electron-titlebar').length).toBe(1);
   });
 
   it('renders without titlebar on not darwin', () => {
     global.process = { ...global.process, platform: 'windows' };
 
     const component = shallow(<App {...mockProps} />);
-
-    expect(component.hasClass('app--macos')).toBe(false);
-    expect(component.contains(<div className="app__electron-titlebar" />)).toBe(false);
+    expect(component.find('.app').hasClass('app--macos')).toBe(false);
+    expect(component.find('.electron-titlebar').length).toBe(0);
   });
 });

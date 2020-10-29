@@ -6,9 +6,11 @@ import {
 } from '@components/sections';
 
 const DyadCensus = {
-  sections: [
+  headerSections: [
     Name,
     FilteredNodeType,
+  ],
+  sections: [
     IntroductionPanel,
     DyadCensusPrompts,
   ],

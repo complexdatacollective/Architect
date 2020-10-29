@@ -8,9 +8,11 @@ import {
 } from '@components/sections';
 
 const NameGeneratorAutoComplete = {
-  sections: [
+  headerSections: [
     Name,
     NodeType,
+  ],
+  sections: [
     ExternalDataSource,
     CardDisplayOptions,
     SearchOptionsForExternalData,

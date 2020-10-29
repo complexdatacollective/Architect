@@ -1,7 +1,6 @@
 $new-stage-categories: [name-generators name-interpreters sociograms utilities];
 
 .new-stage {
-  @include no-scrollbars;
   --color-name-generators: var(--ord-color-seq-2);
   --color-sociograms: var(--ord-color-seq-3);
   --color-name-interpreters: var(--ord-color-seq-4);
@@ -17,15 +16,13 @@ $new-stage-categories: [name-generators name-interpreters sociograms utilities];
     left: 0;
   }
 
-  &__options {
-    padding: unit(5);
+  &__category {
+    padding: unit(2) unit(4) ;
+    background: var(--architect-panel-grey);
   }
 
-  &__category {
-    margin-top: unit(5);
-
-    &:first-child {
-      margin: 0;
-    }
+  &__options {
+    max-width: 70rem;
+    margin: 0 auto;
   }
 }

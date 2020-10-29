@@ -5,7 +5,7 @@ import Icon from '@codaco/ui/lib/components/Icon';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getComponentsForType } from '@app/config/variables';
 import ValidatedField from '@components/Form/ValidatedField';
-import Select from '@components/Form/Fields/Select';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import withAttributeHandlers from './withAttributeHandlers';
 
 const getInputComponentForType = (type) => {
@@ -37,22 +37,25 @@ const Attribute = ({
       <div className="assign-attributes-attribute__variable">
         <ValidatedField
           name={`${field}.variable`}
-          component={Select}
+          label="Variable:"
+          component={NativeSelect}
           options={variableOptions}
           onCreateNew={handleCreateNew}
-          isDisabled={!!variableType}
-          createNewOption="Create new variable"
+          disabled={!!variableType}
           validation={{ required: true }}
         />
       </div>
       <div className="assign-attributes-attribute__value">
         { variableType &&
-          <ValidatedField
-            name={`${field}.value`}
-            component={ValueComponent}
-            options={options}
-            validation={getValidationForType(variableType)}
-          />
+          <React.Fragment>
+            <h4>Value:</h4>
+            <ValidatedField
+              name={`${field}.value`}
+              component={ValueComponent}
+              options={options}
+              validation={getValidationForType(variableType)}
+            />
+          </React.Fragment>
         }
       </div>
       <div

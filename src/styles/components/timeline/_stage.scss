@@ -1,4 +1,4 @@
-$preview-offset: unit(8);
+$preview-offset: unit(12);
 $preview-width: 16vw;
 $preview-ratio: 10 / 16;
 $component-name: timeline-stage;
@@ -6,17 +6,24 @@ $component-name: timeline-stage;
 .#{$component-name} {
   padding: unit(5) 0;
   position: relative;
+  margin-top: unit(5);
 
   &__notch {
-    cursor: pointer;
+    @include typography('title-2');
+    font-family: var(--heading-font-family);
+    font-weight: 600;
     left: 50%;
-    width: unit(3);
-    height: unit(3);
-    border-radius: unit(3);
+    width: unit(5);
+    height: unit(5);
+    border-radius: unit(5);
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--architect-timeline-line);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
   }
 
   &__controls {
@@ -69,6 +76,7 @@ $component-name: timeline-stage;
     padding: .5rem;
     width: $preview-width;
     position: relative;
+    left: -.6rem; // To counter box shadow
     z-index: var(--z-default);
     text-align: center;
     border-radius: .5rem;
@@ -114,11 +122,16 @@ $component-name: timeline-stage;
   }
 
   &:hover {
+
     .#{$component-name}__controls {
       opacity: 1;
       transform: translateX(0);
       transition: opacity var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing),
       transform var(--animation-duration-fast) var(--animation-duration-fast) var(--animation-easing);
     }
+  }
+
+  &.timeline__sortable-element {
+    z-index: var(--z-tooltip);
   }
 }

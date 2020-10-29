@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
 import Codebook from '@components/Codebook/Codebook';
 import Screen from '@components/Screen/Screen';
-import Layout, { Section, Heading } from '@components/EditorLayout';
+import Layout, { Section } from '@components/EditorLayout';
 
 /**
  * This component acts as an index for types. i.e. Nodes and Edges,
@@ -24,8 +24,9 @@ class CodebookScreen extends Component {
         key="done"
         onClick={onComplete}
         iconPosition="right"
+        icon="arrow-right"
       >
-        Continue
+        Return to Timeline
       </Button>,
     ];
 
@@ -37,12 +38,16 @@ class CodebookScreen extends Component {
         onAcknowledgeError={this.handleCancel}
       >
         <Layout>
-          <Heading>
-            Codebook
-          </Heading>
           <Section>
-            <Codebook />
+            <h1>
+              Codebook
+            </h1>
+            <p>
+              Below you can find an overview of the node and edge types that you have
+              defined while creating your interview. Entities that are unused may be deleted.
+            </p>
           </Section>
+          <Codebook />
         </Layout>
       </Screen>
     );

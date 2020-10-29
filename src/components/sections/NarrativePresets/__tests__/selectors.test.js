@@ -50,12 +50,12 @@ describe('NarrativePresets', () => {
       expect.assertions(3);
 
       const {
-        layoutVariblesForSubject,
+        layoutVariablesForSubject,
         highlightVariablesForSubject,
         groupVariablesForSubject,
       } = getNarrativeVariables(mockState, subject);
 
-      expect(layoutVariblesForSubject).toEqual([{
+      expect(layoutVariablesForSubject).toEqual([{
         value: '1234-1234-1',
         label: 'my layout',
         type: 'layout',
@@ -70,10 +70,6 @@ describe('NarrativePresets', () => {
       }]);
 
       expect(groupVariablesForSubject).toEqual([
-        {
-          value: '',
-          label: '\u2014 None \u2014',
-        },
         {
           isUsed: false,
           value: '1234-1234-2',
