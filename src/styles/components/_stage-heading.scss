@@ -4,7 +4,8 @@
   padding: 0;
   box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
 
-  .form-field-toggle__label {
+  .form-field-toggle__label,
+  .form-fields-edge-select {
     --input-text: var(--color-white);
     color: var(--input-text);
   }
