@@ -16,16 +16,13 @@ $new-stage-categories: [name-generators name-interpreters sociograms utilities];
     left: 0;
   }
 
+  &__category {
+    padding: unit(2) unit(4) ;
+    background: var(--architect-panel-grey);
+  }
+
   &__options {
     max-width: 70rem;
     margin: 0 auto;
-  }
-
-  &__category {
-    margin: unit(2) 0;
-
-    &:first-child {
-      margin: 0;
-    }
   }
 }

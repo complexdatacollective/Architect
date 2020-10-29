@@ -2,26 +2,20 @@
   border-left-color: transparent;
   border-left-width: unit(1);
   border-left-style: solid;
-  background-color: var(--architect-panel-grey);
-  border-radius: var(--border-radius);
-  padding: 2rem;
+  padding: unit(4) 0;
 
   &__title {
-    margin: 0;
+    margin-top: 0;
+    margin-bottom: unit(4);
   }
 
   &__interfaces {
-    display: flex;
-    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: unit(4);
+    display: grid;
   }
 
   &__interface {
-    margin: 4rem 4rem 0 0;
-  }
-
-  @each $category in $new-stage-categories {
-    &--#{$category} {
-      border-left-color: var(--color-#{$category});
-    }
+    display: inline-flex;
   }
 }

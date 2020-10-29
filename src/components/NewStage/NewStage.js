@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 import interfaceOptions from './interfaceOptions';
 import InterfaceCategory from './InterfaceCategory';
 import withCreateNewStage from './withCreateNewStage';
+import ExternalLink from '../ExternalLink';
 
 const categories = interfaceOptions.map(({ category }) => category);
 
@@ -18,10 +19,11 @@ const NewStage = ({
   <Guided defaultGuidance="guidance.new_stage">
     <div className="new-stage" ref={setWindowRoot}>
       <Section>
-        <h1>Choose an interface to create a stage from</h1>
+        <h1>Add a Stage</h1>
         <p>
           Below you can find the available interfaces currently bundled in network canvas,
-          grouped by type.
+          grouped by type. For further details about each of these interfaces, please visit
+          our <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>.
         </p>
       </Section>
       <div className="new-stage__options">
