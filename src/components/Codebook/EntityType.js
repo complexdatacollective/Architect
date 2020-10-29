@@ -21,6 +21,7 @@ const EntityType = ({
   type,
   variables,
   closeCodebook,
+  handleEdit,
   handleDelete,
 }) => {
   const stages = usage
@@ -44,6 +45,13 @@ const EntityType = ({
           { inUse && <React.Fragment><em>used in:</em> {stages}</React.Fragment> }
         </div>
         <div className="codebook__entity-control">
+          <Button
+            size="small"
+            color="neon-coral"
+            onClick={handleEdit}
+          >
+            Edit entity
+          </Button>
           <Button
             size="small"
             color="neon-coral"
@@ -83,6 +91,7 @@ EntityType.defaultProps = {
   variables: [],
   inUse: true, // Don't allow delete unless we explicitly say so
   handleDelete: () => {},
+  handleEdit: () => {},
 };
 
 const mapStateToProps = (state, { entity, type }) => {
@@ -96,10 +105,15 @@ const withEntityHandlers = compose(
     openDialog: dialogActionCreators.openDialog,
     deleteType: codebookActionCreators.deleteType,
     closeScreen: screenActionsCreators.closeScreen,
+    openScreen: screenActionsCreators.openScreen,
   }),
   withHandlers({
     closeCodebook: ({ closeScreen }) =>
       () => closeScreen('codebook'),
+    handleEdit: ({ openScreen, entity, type }) =>
+      () => {
+        openScreen('type', { entity, type });
+      },
     handleDelete: ({ deleteType, openDialog, entity, type, name, inUse }) =>
       () => {
         if (inUse) {
