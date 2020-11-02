@@ -7,6 +7,7 @@ import NewVariableWindow from '../NewVariableWindow';
 
 const AssignAttributes = ({
   variableOptions,
+  allowedVariableTypes,
   fields,
   type,
   entity,
@@ -48,6 +49,7 @@ const AssignAttributes = ({
     </div>
 
     <NewVariableWindow
+      allowVariableTypes={allowedVariableTypes}
       show={showNewVariableWindow}
       onComplete={handleCreateNewVariable}
       onCancel={handleCompleteCreateNewVariable}
@@ -59,6 +61,7 @@ const AssignAttributes = ({
 
 AssignAttributes.propTypes = {
   variableOptions: PropTypes.array.isRequired,
+  allowedVariableTypes: PropTypes.array.isRequired,
   fields: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
   entity: PropTypes.string.isRequired,

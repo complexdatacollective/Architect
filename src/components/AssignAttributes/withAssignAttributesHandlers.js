@@ -5,13 +5,7 @@ import { getVariableOptionsForSubject } from '../../selectors/codebook';
 import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 
 const ALLOWED_TYPES = [
-  'text',
-  'number',
   'boolean',
-  'ordinal',
-  'categorical',
-  'scalar',
-  'datetime',
 ];
 
 // TODO: isUsed
@@ -30,6 +24,7 @@ const mapStateToProps = (state, { entity, type, form, fields }) => {
 
   return {
     variableOptions: variableOptionsWithUsedDisabled,
+    allowedVariableTypes: ALLOWED_TYPES,
   };
 };
 
