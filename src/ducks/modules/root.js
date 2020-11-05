@@ -15,6 +15,7 @@ import session, { epics as sessionEpics } from './session';
 import settings from './settings';
 import stacks from './stacks';
 import ui from './ui';
+import toasts from './toasts';
 
 export const rootEpic = combineEpics(
   sessionEpics,
@@ -44,4 +45,5 @@ export const rootReducer = combineReducers({
   settings,
   stacks,
   ui,
+  toasts,
 });

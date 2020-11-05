@@ -10,6 +10,8 @@ const mockProps = {
 
 const process = global.process;
 
+jest.mock('../../hooks/useUpdater');
+
 describe('<App />', () => {
   afterAll(() => {
     global.process = process;
