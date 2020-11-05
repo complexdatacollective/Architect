@@ -68,10 +68,6 @@ const MenuTemplate = (options) => {
   ];
 
   const appMenu = [
-    {
-      label: 'Check for updates...',
-      click: options.checkForUpdates,
-    },
     { role: 'quit' },
   ];
 
