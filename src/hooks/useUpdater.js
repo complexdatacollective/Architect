@@ -94,7 +94,7 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
       confirmLabel: buttonText,
       onConfirm: onClickHandler,
       message: (
-        <div className="dialog-release-notes">
+        <div className="dialog-release-notes allow-text-selection">
           <p>
             Please read the following release notes carefully, as changes in the software
             may impact which protocols you are able to open in Architect.

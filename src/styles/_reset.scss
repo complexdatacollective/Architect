@@ -80,11 +80,16 @@ h6 {
   width: 50rem;
 }
 
+// Dialog override
+.dialog {
+  --text: var(--color-white);
+}
+
 .dialog-release-notes {
   &__notes {
     max-height: 50vh;
-    overflow-y: scroll;
-    background: var(--background);
+    overflow-y: auto;
+    background: var(--color-navy-taupe);
     padding: 0 1.2rem;
     border-radius: var(--border-radius);
   }

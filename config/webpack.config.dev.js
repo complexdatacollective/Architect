@@ -100,7 +100,7 @@ const config = {
         // For now, hardcode to current version (react-error-overlay@5.0.0-next.3e165448)
         REACT_APP_SCRIPT_SRC_CSP: "'sha256-ZTm1tWnhbM2s4JJUnkN10rTulMMGll/bTXSlE3+y6Dg='",
         // Whitelist inlined content for the Content-Security-Policy header
-        REACT_APP_CONNECT_SRC_CSP: 'ws://localhost:* wss://localhost:*',
+        REACT_APP_CONNECT_SRC_CSP: 'ws://*:* wss://*:*',
       },
     ),
     // Add module names to factory functions so they appear in browser profiler.
