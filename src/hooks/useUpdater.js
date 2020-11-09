@@ -44,6 +44,13 @@ const getPlatformSpecificContent = (assets) => {
     };
   }
 
+  if (isLinux()) {
+    return {
+      buttonText: 'Open GitHub Release',
+      onClickHandler: () => openExternalLink('https://github.com/complexdatacollective/Architect/releases/latest'),
+    };
+  }
+
   return {
     buttonText: 'Open Download Page',
     onClickHandler: () => openExternalLink('https://networkcanvas.com/download.html'),
