@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button } from '@codaco/ui';
 import { find } from 'lodash';
-import { remote } from 'electron';
 import compareVersions from 'compare-versions';
 import ReactMarkdown from 'react-markdown';
 import { isMacOS, isWindows, isLinux } from '@app/utils/platform';
