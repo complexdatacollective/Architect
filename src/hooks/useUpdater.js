@@ -156,7 +156,7 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
     const delay = setTimeout(checkForUpdate, timeout);
 
     return () => clearTimeout(delay);
-  }, [updateEndpoint]);
+  }, [updateEndpoint, dismissedVersion]);
 };
 
 export default useUpdater;
