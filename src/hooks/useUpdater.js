@@ -6,6 +6,7 @@ import { find } from 'lodash';
 import compareVersions from 'compare-versions';
 import ReactMarkdown from 'react-markdown';
 import { isMacOS, isWindows, isLinux } from '@app/utils/platform';
+import { remote } from 'electron';
 import { actionCreators as toastActions } from '../ducks/modules/toasts';
 import { actionCreators as dialogActions } from '../ducks/modules/dialogs';
 import ExternalLink, { openExternalLink } from '../components/ExternalLink';
@@ -60,6 +61,7 @@ export const checkEndpoint = (updateEndpoint, currentVersion) =>
   fetch(updateEndpoint)
     .then(response => response.json())
     .then(({ name, body, assets }) => {
+      console.log({ currentVersion, name });
       if (compareVersions.compare(currentVersion, name, '<')) {
         return {
           newVersion: name,
@@ -77,7 +79,6 @@ export const checkEndpoint = (updateEndpoint, currentVersion) =>
       // Don't reject, as we don't want to handle this error - just fail silently.
       return Promise.resolve(false);
     });
-
 
 const useUpdater = (updateEndpoint, timeout = 0) => {
   const dispatch = useDispatch();
@@ -113,7 +114,8 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
   };
 
   const checkForUpdate = async () => {
-    const updateAvailable = await checkEndpoint(updateEndpoint);
+    const version = remote.app.getVersion();
+    const updateAvailable = await checkEndpoint(updateEndpoint, version);
     if (!updateAvailable) { return; }
 
     const {
