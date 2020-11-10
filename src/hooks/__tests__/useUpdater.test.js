@@ -128,7 +128,10 @@ describe('checkEndpoint()', () => {
     expect(subject).toEqual({
       newVersion: '1.0.0',
       releaseNotes: 'This is a newer version probably',
-      releaseAssets: mockAssets, // eslint-disable-line
+      releaseButtonContent: {
+        buttonLink: 'https://networkcanvas.com/download.html',
+        buttonText: 'Open Download Page',
+      },
     });
   });
 
