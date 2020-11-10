@@ -65,7 +65,7 @@ export const checkEndpoint = (updateEndpoint, currentVersion) =>
         return {
           newVersion: name,
           releaseNotes: body,
-          releaseAssets: assets,
+          releaseButtonContent: getPlatformSpecificContent(assets),
         };
       }
       // eslint-disable-next-line no-console
