@@ -252,6 +252,7 @@ if (isProduction) {
 module.exports = {
   externals: {
     archiver: 'require("archiver")',
+    'fs-extra': 'commonjs2 fs-extra',
   },
   resolve: {
     modules: ['node_modules'].concat(

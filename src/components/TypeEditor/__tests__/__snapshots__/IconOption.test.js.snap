@@ -4,6 +4,7 @@ exports[`<IconOption /> can render 1`] = `
 <Radio
   className="type-editor-icon-option"
   disabled={false}
+  fieldLabel={null}
   input={Object {}}
   label={
     <Icon

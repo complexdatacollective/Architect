@@ -12,9 +12,9 @@
     "homepage": ".",
     "main": "electron-starter.js",
     "dependencies": {
+        "fs-extra": "^8.1.0",
         "archiver": "^3.1.1",
         "electron-log": "^3.0.7",
-        "electron-updater": "^4.1.2",
         "electron-devtools-installer": "^2.2.4"
     },
     "browser": {

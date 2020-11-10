@@ -8,6 +8,8 @@ import { isMacOS } from '@app/utils/platform';
 import { AppErrorBoundary } from '@components/Errors';
 import DialogManager from '@components/DialogManager';
 import Routes from '@components/Routes';
+import ToastManager from './ToastManager';
+import useUpdater from '../hooks/useUpdater';
 
 const appVariants = {
   show: {
@@ -29,7 +31,7 @@ const App = () => {
     },
   );
 
-  // we can use location and history for router
+  useUpdater('https://api.github.com/repos/complexdatacollective/Architect/releases/latest', 2500);
 
   return (
     <React.Fragment>
@@ -47,6 +49,7 @@ const App = () => {
         </AppErrorBoundary>
       </motion.div>
       <DialogManager />
+      <ToastManager />
     </React.Fragment>
   );
 };
