@@ -1,7 +1,7 @@
 import path from 'path';
 import log from 'electron-log';
 import { writeFile } from 'fs-extra';
-import pruneAssets from '@app/other/protocols/pruneAssets';
+import pruneAssets from '@app/utils/protocols/pruneAssets';
 
 const getStringifiedProtocol = protocol =>
   new Promise((resolve, reject) => {

@@ -1,10 +1,10 @@
 import { getProtocolMeta } from '@selectors/protocols';
-import { loadProtocolConfiguration } from '@app/other/protocols';
+import { loadProtocolConfiguration } from '@app/utils/protocols';
 import history from '@app/history';
 import { createLock } from '@modules/ui/status';
 import { actionCreators as protocolActions } from '@modules/protocol/index';
 
-const loadingLock = createLock('PROTOCOLS/LOADING2');
+const loadingLock = createLock('PROTOCOLS/LOADING');
 
 const LOAD_PROTOCOL = 'PROTOCOLS/LOAD';
 const LOAD_PROTOCOL_SUCCESS = 'PROTOCOLS/LOAD_SUCCESS';

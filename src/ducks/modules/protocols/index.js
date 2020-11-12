@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import { openDialog, saveCopyDialog } from '@app/other/dialogs';
+import { openDialog, saveCopyDialog } from '@app/utils/dialogs';
 import history from '@app/history';
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getHasUnsavedChanges } from '@selectors/session';

@@ -2,10 +2,10 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { importAsset } from '@app/utils/protocols';
 import reducer, { actionCreators, actionTypes } from '../assetManifest';
-import { importAsset } from '../../../../other/protocols';
 
-jest.mock('../../../../other/protocols');
+jest.mock('@app/utils/protocols');
 
 const mockState = {
   session: {

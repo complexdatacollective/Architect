@@ -8,10 +8,10 @@ import history from '@app/history';
 import reducer, { actionCreators } from '../index';
 import { actionCreators as registerActionCreators } from '../register';
 import testState from '../../../../__tests__/testState.json';
-import { loadProtocolConfiguration } from '../../../../other/protocols';
+import { loadProtocolConfiguration } from '../../../../utils/protocols';
 import { APP_SCHEMA_VERSION } from '../../../../config';
 
-jest.mock('../../../../other/protocols');
+jest.mock('../../../../utils/protocols');
 jest.mock('../../dialogs');
 jest.mock('../../../../config');
 jest.mock(

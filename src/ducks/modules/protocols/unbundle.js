@@ -5,9 +5,9 @@ import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import getMigrationNotes from '@app/protocol-validation/migrations/getMigrationNotes';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
-import unbundleProtocol from '@app/other/protocols/unbundleProtocol';
-import { saveDialog } from '@app/other/dialogs';
-import { loadProtocolConfiguration, saveProtocol, bundleProtocol } from '@app/other/protocols';
+import unbundleProtocol from '@app/utils/protocols/unbundleProtocol';
+import { saveDialog } from '@app/utils/dialogs';
+import { loadProtocolConfiguration, saveProtocol, bundleProtocol } from '@app/utils/protocols';
 import { actionCreators as registerActions } from './register';
 import { validationErrorDialog, appUpgradeRequiredDialog, mayUpgradeProtocolDialog } from './dialogs';
 

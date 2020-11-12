@@ -1,6 +1,6 @@
 import path from 'path';
 import { get } from 'lodash';
-import { getNetworkVariables } from '@app/other/protocols/assetTools';
+import { getNetworkVariables } from '@app/utils/protocols/assetTools';
 import { getActiveProtocolMeta } from './protocols';
 import { getAssetManifest } from './protocol';
 

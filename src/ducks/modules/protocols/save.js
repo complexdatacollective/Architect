@@ -1,6 +1,6 @@
 import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getProtocol } from '@selectors/protocol';
-import { saveProtocol as saveProtocolFile } from '@app/other/protocols';
+import { saveProtocol as saveProtocolFile } from '@app/utils/protocols';
 import validateProtocol from '@app/utils/validateProtocol';
 import { validationErrorDialog } from './dialogs';
 
