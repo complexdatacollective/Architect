@@ -6,6 +6,7 @@ import { extract } from '@app/utils/protocols/lib/archive';
 import {
   errors,
   importNetcanvas,
+  exportNetcanvas,
 } from '../file';
 
 jest.mock('fs-extra');
@@ -38,8 +39,18 @@ describe('utils/file', () => {
   });
 
   describe('exportNetcanvas(workingPath, protocol)', () => {
-    it.todo('rejects with a readable error when protocol cannot be stringified');
-    it.todo('rejects with a readable error when protocol cannot be written to working copy');
+    it('rejects with a readable error when protocol cannot be saved', async () => {
+      const circularProtocol = {};
+      circularProtocol.a = { b: circularProtocol };
+
+      await expect(() => exportNetcanvas(path.join('/dev/null'), circularProtocol))
+        .rejects.toThrow(errors.SaveFailed);
+
+      fse.writeFile.mockRejectedValueOnce(new Error());
+
+      await expect(() => exportNetcanvas(path.join('/dev/null'), {}))
+        .rejects.toThrow(errors.SaveFailed);
+    });
     it.todo('rejects with a readable error when asset pruning fails');
     it.todo('rejects with a readable error when archive fails');
     it.todo('resolves to a uuid path in temp');

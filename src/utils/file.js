@@ -12,6 +12,7 @@ export const errors = {
   ExtractFailed: new Error('Protocol could not be extracted'),
   BackupFailed: new Error('Protocol could not be backed up'),
   SaveFailed: new Error('Protocol could not be saved to destination'),
+  ArchiveFailed: new Error('Protocol could not be archived'),
 };
 
 const throwHumanReadableError = readableError =>
@@ -41,6 +42,7 @@ export const exportNetcanvas = (workingPath, protocol) => {
 
   return getStringifiedProtocol(protocol)
     .then(protocolData => fse.writeFile(protocolJsonPath, protocolData))
+    .catch(throwHumanReadableError(errors.SaveFailed))
     .then(() => pruneAssets(workingPath))
     .then(() => archive(workingPath, exportPath))
     .then(() => exportPath);
