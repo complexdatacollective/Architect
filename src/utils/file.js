@@ -59,8 +59,9 @@ export const importNetcanvas = (filePath) => {
 
   return fse.access(filePath, fse.constants.W_OK)
     .catch(throwHumanReadableError(errors.MissingPermissions))
-    .then(() => extract(filePath, destinationPath))
-    .catch(throwHumanReadableError(errors.ExtractFailed))
+    .then(() =>
+      extract(filePath, destinationPath)
+        .catch(throwHumanReadableError(errors.ExtractFailed)))
     .then(() => destinationPath);
 };
 
