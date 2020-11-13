@@ -7,6 +7,19 @@ import pruneAssets from '@app/utils/protocols/pruneAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 import validateProtocol from '@app/utils/validateProtocol';
 
+export const errors = {
+  MissingPermissions: new Error('Protocol does not have read/write permissions'),
+  ExtractFailed: new Error('Protocol could not be extracted'),
+  BackupFailed: new Error('Protocol could not be backed up'),
+  SaveFailed: new Error('Protocol could not be saved to destination'),
+};
+
+const throwHumanReadableError = readableError =>
+  (e) => {
+    log.error(e);
+    throw readableError;
+  };
+
 const getStringifiedProtocol = protocol =>
   new Promise((resolve, reject) => {
     try {
@@ -33,7 +46,6 @@ export const exportNetcanvas = (workingPath, protocol) => {
     .then(() => exportPath);
 };
 
-
 /**
  * Create a working copy of a protocol in the application
  * tmp directory. If bundled, extract it, if not, copy it.
@@ -45,17 +57,21 @@ export const exportNetcanvas = (workingPath, protocol) => {
 export const importNetcanvas = (filePath) => {
   const destinationPath = path.join(remote.app.getPath('temp'), 'protocols', uuid());
 
-  return fse.access(filePath, fse.constants.R_OK)
-    .then(() => {
-      if (path.extname(filePath) === '.netcanvas') {
-        return extract(filePath, destinationPath);
-      }
-
-      return fse.copy(filePath, destinationPath);
-    })
+  return fse.access(filePath, fse.constants.W_OK)
+    .catch(throwHumanReadableError(errors.MissingPermissions))
+    .then(() => extract(filePath, destinationPath))
+    .catch(throwHumanReadableError(errors.ExtractFailed))
     .then(() => destinationPath);
 };
 
+export const backupAndReplace = (exportPath, destinationPath) => {
+  const backupPath = `${destinationPath}.backup-${new Date().getTime()}`;
+  return fse.rename(destinationPath, backupPath)
+    .catch(throwHumanReadableError(errors.BackupFailed))
+    .then(() => fse.rename(exportPath, destinationPath))
+    .catch(throwHumanReadableError(errors.SaveFailed))
+    .then(() => ({ savePath: destinationPath, backupPath }));
+};
 
 /**
  * Given the working path for a protocol (in /tmp/protocols `protocol.json`,
