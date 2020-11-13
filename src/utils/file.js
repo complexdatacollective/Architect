@@ -12,6 +12,7 @@ export const errors = {
   ExtractFailed: new Error('Protocol could not be extracted'),
   BackupFailed: new Error('Protocol could not be backed up'),
   SaveFailed: new Error('Protocol could not be saved to destination'),
+  PruneFailed: new Error('Protocol assets could not be updated'),
   ArchiveFailed: new Error('Protocol could not be archived'),
 };
 
@@ -40,11 +41,18 @@ export const exportNetcanvas = (workingPath, protocol) => {
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
   log.info(`Save protocol object to ${protocolJsonPath}`);
 
-  return getStringifiedProtocol(protocol)
-    .then(protocolData => fse.writeFile(protocolJsonPath, protocolData))
-    .catch(throwHumanReadableError(errors.SaveFailed))
-    .then(() => pruneAssets(workingPath))
-    .then(() => archive(workingPath, exportPath))
+  return Promise.resolve(protocol)
+    .then(data =>
+      getStringifiedProtocol(data)
+        .then(protocolData => fse.writeFile(protocolJsonPath, protocolData))
+        .catch(throwHumanReadableError(errors.SaveFailed)),
+    )
+    .then(() =>
+      pruneAssets(workingPath)
+        .catch(throwHumanReadableError(errors.PruneFailed)))
+    .then(() =>
+      archive(workingPath, exportPath)
+        .catch(throwHumanReadableError(errors.ArchiveFailed)))
     .then(() => exportPath);
 };
 

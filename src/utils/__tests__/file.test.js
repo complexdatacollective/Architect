@@ -2,7 +2,8 @@
 
 import fse from 'fs-extra';
 import path from 'path';
-import { extract } from '@app/utils/protocols/lib/archive';
+import { extract, archive } from '@app/utils/protocols/lib/archive';
+import pruneAssets from '@app/utils/protocols/pruneAssets';
 import {
   errors,
   importNetcanvas,
@@ -11,6 +12,7 @@ import {
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
+jest.mock('@app/utils/protocols/pruneAssets');
 
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 
@@ -51,8 +53,24 @@ describe('utils/file', () => {
       await expect(() => exportNetcanvas(path.join('/dev/null'), {}))
         .rejects.toThrow(errors.SaveFailed);
     });
-    it.todo('rejects with a readable error when asset pruning fails');
-    it.todo('rejects with a readable error when archive fails');
+
+    it('rejects with a readable error when asset pruning fails', async () => {
+      fse.writeFile.mockResolvedValueOnce(true);
+      pruneAssets.mockRejectedValueOnce(new Error());
+
+      await expect(exportNetcanvas(path.join('/dev/null'), {}))
+        .rejects.toThrow(errors.PruneFailed);
+    });
+
+    it('rejects with a readable error when archive fails', async () => {
+      fse.writeFile.mockResolvedValueOnce(true);
+      pruneAssets.mockResolvedValueOnce(true);
+      archive.mockRejectedValueOnce(new Error());
+
+      await expect(exportNetcanvas(path.join('/dev/null'), {}))
+        .rejects.toThrow(errors.ArchiveFailed);
+    });
+
     it.todo('resolves to a uuid path in temp');
   });
 });
