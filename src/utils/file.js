@@ -75,7 +75,7 @@ export const importNetcanvas = (filePath) => {
     .then(() => destinationPath);
 };
 
-export const backupAndReplace = (exportPath, destinationPath) => {
+export const backupAndSubstitute = (exportPath, destinationPath) => {
   const backupPath = `${destinationPath}.backup-${new Date().getTime()}`;
   return fse.rename(destinationPath, backupPath)
     .catch(throwHumanReadableError(errors.BackupFailed))

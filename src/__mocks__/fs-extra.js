@@ -17,21 +17,23 @@ export const existsSync = jest.fn(() => true);
 export const createWriteStream = () => {};
 export const access = jest.fn(() => Promise.resolve());
 export const copy = jest.fn(() => Promise.resolve());
+export const rename = jest.fn(() => Promise.resolve());
 
 export const constants = {
   R_OK: Symbol('R_OK'),
 };
 
 export default {
-  copySync,
-  emptyDirSync,
-  readJson,
-  readFile,
-  writeFile,
-  readdirSync,
-  existsSync,
-  createWriteStream,
   access,
-  copy,
   constants,
+  copy,
+  copySync,
+  createWriteStream,
+  emptyDirSync,
+  existsSync,
+  readdirSync,
+  readFile,
+  readJson,
+  rename,
+  writeFile,
 };

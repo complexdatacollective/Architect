@@ -82,6 +82,26 @@ describe('utils/file', () => {
         .resolves.toEqual('/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b');
     });
   });
+
+  describe('backupAndSubstitute(exportPath, destinationPath)', () => {
+    it.todo('reject with a readable error if cannot be backed up');
+    it.todo('reject with a readable error if cannot be substituted');
+    it.only('resolves to { savePath, backupPath }', async () => {
+      fse.rename.mockClear();
+      fse.rename.mockResolvedValue(true);
+      const result = await backupAndSubstitute(exportPath, destinationPath);
+      expect(result).toEqual(null);
+
+    });
+  });
+
+  describe('readProtocol(protocolPath)', () => {
+
+  });
+
+  describe('verifyNetcanvas(filePath)', () => {
+
+  });
 });
 
 
