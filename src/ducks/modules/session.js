@@ -28,6 +28,36 @@ const savableChanges = [
 
 const RESET_SESSION = 'SESSION/RESET';
 const PROTOCOL_CHANGED = 'SESSION/PROTOCOL_CHANGED';
+const IMPORT_NETCANVAS = 'SESSION/IMPORT_NETCANVAS';
+const SAVE_NETCANVAS = 'SESSION/SAVE_NETCANVAS';
+const SAVE_COPY = 'SESSION/SAVE_COPY';
+
+const exportNetcanvas = () =>
+  (dispatch, getState) => {
+    const state = getState();
+    const session = state.session;
+    const protocol = state.protocol;
+    dispatch({ type: SAVE_PROTOCOL, protocolId: session.activeProtocol });
+
+    // export protocol to random temp location
+    file.exportNetcanvas(session.workingPath, protocol)
+      .then(exportPath =>
+        // open and validate the completed export
+        file.verifyNetcanvas(exportPath)
+          // rename existing file to backup location, and move export to this location
+          // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
+          .then(() => file.backupAndReplace(exportPath, session.filePath)),
+      )
+      .then(({ savePath, backupPath }) =>
+        dispatch({ type: SAVE_PROTOCOL_SUCCESS, payload: { savePath, backupPath } }),
+      )
+      .catch(error => {
+        switch (error.code) {
+          default:
+            dispatch({ type: SAVE_PROTOCOL_ERROR, payload: { error } }),
+        }
+      });
+  };
 
 const resetSession = () =>
   (dispatch) => {
@@ -45,6 +75,8 @@ const protocolChanged = () => ({
 
 const initialState = {
   activeProtocol: null,
+  workingPath: null,
+  filePath: null,
   lastSaved: 0,
   lastChanged: 0,
 };
