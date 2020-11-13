@@ -36,21 +36,23 @@ describe('utils/file', () => {
       fse.access.mockResolvedValueOnce(true);
       extract.mockResolvedValueOnce(true);
       await expect(importNetcanvas(mockProtocol))
-        .resolves.toEqual('/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b');
+        .resolves.toEqual('/dev/null/get/electron/path/architect/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b');
     });
   });
 
   describe('exportNetcanvas(workingPath, protocol)', () => {
-    it('rejects with a readable error when protocol cannot be saved', async () => {
-      const circularProtocol = {};
-      circularProtocol.a = { b: circularProtocol };
 
-      await expect(() => exportNetcanvas(path.join('/dev/null'), circularProtocol))
+    const workingPath = path.join('dev', 'null');
+    const circularProtocol = {};
+    circularProtocol.a = { b: circularProtocol };
+
+    it('rejects with a readable error when protocol cannot be saved', async () => {
+      await expect(() => exportNetcanvas(workingPath, circularProtocol))
         .rejects.toThrow(errors.SaveFailed);
 
       fse.writeFile.mockRejectedValueOnce(new Error());
 
-      await expect(() => exportNetcanvas(path.join('/dev/null'), {}))
+      await expect(() => exportNetcanvas(workingPath, {}))
         .rejects.toThrow(errors.SaveFailed);
     });
 
@@ -58,7 +60,7 @@ describe('utils/file', () => {
       fse.writeFile.mockResolvedValueOnce(true);
       pruneAssets.mockRejectedValueOnce(new Error());
 
-      await expect(exportNetcanvas(path.join('/dev/null'), {}))
+      await expect(exportNetcanvas(workingPath, {}))
         .rejects.toThrow(errors.PruneFailed);
     });
 
@@ -67,11 +69,18 @@ describe('utils/file', () => {
       pruneAssets.mockResolvedValueOnce(true);
       archive.mockRejectedValueOnce(new Error());
 
-      await expect(exportNetcanvas(path.join('/dev/null'), {}))
+      await expect(exportNetcanvas(workingPath, {}))
         .rejects.toThrow(errors.ArchiveFailed);
     });
 
-    it.todo('resolves to a uuid path in temp');
+    it('resolves to a uuid path in temp', async () => {
+      fse.writeFile.mockResolvedValueOnce(true);
+      pruneAssets.mockResolvedValueOnce(true);
+      archive.mockResolvedValueOnce(true);
+
+      await expect(exportNetcanvas(workingPath, {}))
+        .resolves.toEqual('/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b');
+    });
   });
 });
 

@@ -37,7 +37,7 @@ const getStringifiedProtocol = protocol =>
  * @param {object} protocol - The protocol object.
  */
 export const exportNetcanvas = (workingPath, protocol) => {
-  const exportPath = path.join(remote.app.getPath('temp'), 'export', uuid());
+  const exportPath = path.join(remote.app.getPath('temp'), 'architect', 'exports', uuid());
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
   log.info(`Save protocol object to ${protocolJsonPath}`);
 
@@ -65,7 +65,7 @@ export const exportNetcanvas = (workingPath, protocol) => {
  * @returns A promise which resolves to the destination path.
  */
 export const importNetcanvas = (filePath) => {
-  const destinationPath = path.join(remote.app.getPath('temp'), 'protocols', uuid());
+  const destinationPath = path.join(remote.app.getPath('temp'), 'architect', 'protocols', uuid());
 
   return fse.access(filePath, fse.constants.W_OK)
     .catch(throwHumanReadableError(errors.MissingPermissions))
