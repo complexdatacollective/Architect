@@ -36,6 +36,14 @@ describe('utils/file', () => {
         .resolves.toEqual('/dev/null/get/electron/path/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b');
     });
   });
+
+  describe('exportNetcanvas(workingPath, protocol)', () => {
+    it.todo('rejects with a readable error when protocol cannot be stringified');
+    it.todo('rejects with a readable error when protocol cannot be written to working copy');
+    it.todo('rejects with a readable error when asset pruning fails');
+    it.todo('rejects with a readable error when archive fails');
+    it.todo('resolves to a uuid path in temp');
+  });
 });
 
 
