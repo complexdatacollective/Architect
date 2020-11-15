@@ -67,9 +67,11 @@ export const createNetcanvasExport = (workingPath, protocol) => {
 export const createNetcanvasImport = (filePath) => {
   const destinationPath = path.join(remote.app.getPath('temp'), 'architect', 'protocols', uuid());
 
-  // TODO: This should fail when missing permissions...
-  return fse.access(filePath, fse.constants.W_OK)
-    .catch(throwHumanReadableError(errors.MissingPermissions))
+  return Promise.resolve()
+    .then(() =>
+      fse.access(filePath, fse.constants.W_OK)
+        .catch(throwHumanReadableError(errors.MissingPermissions)),
+    )
     .then(() =>
       extract(filePath, destinationPath)
         .catch(throwHumanReadableError(errors.ExtractFailed)))

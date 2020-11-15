@@ -6,7 +6,7 @@ import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
 import {
   errors,
-  createNetCanvasImport,
+  createNetcanvasImport,
   createNetcanvasExport,
   deployNetcanvasExport,
 } from '../file';
@@ -18,31 +18,30 @@ jest.mock('@app/utils/protocols/pruneAssets');
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 
 describe('utils/file', () => {
-  describe('createNetCanvasImport(filePath)', () => {
+  describe.only('createNetcanvasImport(filePath)', () => {
     it('rejects with a readable error when permissions are wrong', async () => {
       fse.access.mockRejectedValueOnce(new Error());
 
-      await expect(() => createNetCanvasImport(mockProtocol))
+      await expect(() => createNetcanvasImport(mockProtocol))
         .rejects.toThrow(errors.MissingPermissions);
     });
 
     it('rejects with a readable error when it cannot extract a protocol', async () => {
       extract.mockRejectedValueOnce(new Error());
 
-      await expect(createNetCanvasImport(mockProtocol))
+      await expect(createNetcanvasImport(mockProtocol))
         .rejects.toThrow(errors.ExtractFailed);
     });
 
     it('resolves to a uuid path in temp', async () => {
       fse.access.mockResolvedValueOnce(true);
       extract.mockResolvedValueOnce(true);
-      await expect(createNetCanvasImport(mockProtocol))
+      await expect(createNetcanvasImport(mockProtocol))
         .resolves.toEqual('/dev/null/get/electron/path/architect/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b');
     });
   });
 
   describe('createNetcanvasExport(workingPath, protocol)', () => {
-
     const workingPath = path.join('dev', 'null');
     const circularProtocol = {};
     circularProtocol.a = { b: circularProtocol };
