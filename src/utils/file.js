@@ -14,6 +14,8 @@ export const errors = {
   SaveFailed: new Error('Protocol could not be saved to destination'),
   PruneFailed: new Error('Protocol assets could not be updated'),
   ArchiveFailed: new Error('Protocol could not be archived'),
+  MissingProtocolJson: new Error('Protocol does not have a json file'),
+  ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
 };
 
 const throwHumanReadableError = readableError =>
@@ -102,7 +104,16 @@ export const deployNetcanvasExport = (netcanvasExportPath, destinationUserPath) 
 export const readProtocol = (protocolPath) => {
   const protocolFile = path.join(protocolPath, 'protocol.json');
 
-  return fse.readJson(protocolFile);
+  // Promise.resolve()
+  //   .then(() =>
+  //     fse.access(protocolFile, fse.constants.R_OK)
+  //       .catch(throwHumanReadableError(errors.MissingProtocolJson)),
+  //   )
+  //   .then(() =>
+  return fse.readJson(protocolFile)
+    .catch((e) => {
+      throw new Error(e.code);
+    });
 };
 
 /**

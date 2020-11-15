@@ -9,7 +9,11 @@ import {
   createNetcanvasImport,
   createNetcanvasExport,
   deployNetcanvasExport,
+  readProtocol,
+  verifyNetcanvas,
 } from '../file';
+
+const fseActual = jest.requireActual('fs-extra');
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
@@ -18,7 +22,7 @@ jest.mock('@app/utils/protocols/pruneAssets');
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 
 describe('utils/file', () => {
-  describe.only('createNetcanvasImport(filePath)', () => {
+  describe('createNetcanvasImport(filePath)', () => {
     it('rejects with a readable error when permissions are wrong', async () => {
       fse.access.mockRejectedValueOnce(new Error());
 
@@ -121,7 +125,10 @@ describe('utils/file', () => {
   });
 
   describe('readProtocol(protocolPath)', () => {
-
+    // see file_real_fs
+    it('', () => {
+      fseActual.readJson('var/null').then(console.log);
+    });
   });
 
   describe('verifyNetcanvas(filePath)', () => {
