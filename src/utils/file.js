@@ -104,15 +104,14 @@ export const deployNetcanvasExport = (netcanvasExportPath, destinationUserPath) 
 export const readProtocol = (protocolPath) => {
   const protocolFile = path.join(protocolPath, 'protocol.json');
 
-  // Promise.resolve()
-  //   .then(() =>
-  //     fse.access(protocolFile, fse.constants.R_OK)
-  //       .catch(throwHumanReadableError(errors.MissingProtocolJson)),
-  //   )
-  //   .then(() =>
   return fse.readJson(protocolFile)
     .catch((e) => {
-      throw new Error(e.code);
+      switch (e.code) {
+        case 'ENOENT':
+          return throwHumanReadableError(errors.MissingProtocolJson)(e);
+        default:
+          return throwHumanReadableError(errors.ProtocolJsonParseError)(e);
+      }
     });
 };
 

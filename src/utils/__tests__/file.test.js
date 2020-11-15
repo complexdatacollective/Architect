@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
+import fs from 'fs';
 import path from 'path';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
@@ -12,8 +13,6 @@ import {
   readProtocol,
   verifyNetcanvas,
 } from '../file';
-
-const fseActual = jest.requireActual('fs-extra');
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
@@ -125,9 +124,37 @@ describe('utils/file', () => {
   });
 
   describe('readProtocol(protocolPath)', () => {
-    // see file_real_fs
-    it('', () => {
-      fseActual.readJson('var/null').then(console.log);
+    it('Rejects with a human readable error when protocol cannot be read', async () => {
+      fse.readJson.mockReset();
+      fse.readJson.mockImplementation(() => {
+        const e = new Error();
+        e.code = 'ENOENT';
+
+        return Promise.reject(e);
+      });
+
+      await expect(
+        readProtocol('/non/existing/path'),
+      ).rejects.toThrow(errors.MissingProtocolJson);
+    });
+
+    it('Rejects with a human readable error when protocol cannot be parsed', async () => {
+      fse.readJson.mockReset();
+      fse.readJson.mockImplementation(() =>
+        new Promise((resolve, reject) => {
+          try {
+            JSON.parse('malformatted json');
+          } catch (e) {
+            return reject(e);
+          }
+
+          return resolve();
+        }),
+      );
+
+      await expect(
+        readProtocol('/var/null/'),
+      ).rejects.toThrow(errors.ProtocolJsonParseError);
     });
   });
 
