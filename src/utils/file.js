@@ -36,7 +36,7 @@ const getStringifiedProtocol = protocol =>
  * @param {string} workingPath - working path in application /tmp/protocols/ dir
  * @param {object} protocol - The protocol object.
  */
-export const exportNetcanvas = (workingPath, protocol) => {
+export const createNetcanvasExport = (workingPath, protocol) => {
   const exportPath = path.join(remote.app.getPath('temp'), 'architect', 'exports', uuid());
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
   log.info(`Save protocol object to ${protocolJsonPath}`);
@@ -64,9 +64,10 @@ export const exportNetcanvas = (workingPath, protocol) => {
  *
  * @returns A promise which resolves to the destination path.
  */
-export const importNetcanvas = (filePath) => {
+export const createNetcanvasImport = (filePath) => {
   const destinationPath = path.join(remote.app.getPath('temp'), 'architect', 'protocols', uuid());
 
+  // TODO: This should fail when missing permissions...
   return fse.access(filePath, fse.constants.W_OK)
     .catch(throwHumanReadableError(errors.MissingPermissions))
     .then(() =>
@@ -75,13 +76,19 @@ export const importNetcanvas = (filePath) => {
     .then(() => destinationPath);
 };
 
-export const backupAndSubstitute = (exportPath, destinationPath) => {
-  const backupPath = `${destinationPath}.backup-${new Date().getTime()}`;
-  return fse.rename(destinationPath, backupPath)
-    .catch(throwHumanReadableError(errors.BackupFailed))
-    .then(() => fse.rename(exportPath, destinationPath))
-    .catch(throwHumanReadableError(errors.SaveFailed))
-    .then(() => ({ savePath: destinationPath, backupPath }));
+export const deployNetcanvasExport = (netcanvasExportPath, destinationUserPath) => {
+  const backupPath = `${destinationUserPath}.backup-${new Date().getTime()}`;
+  return Promise.resolve()
+    .then(() =>
+      fse.rename(destinationUserPath, backupPath)
+        .catch(throwHumanReadableError(errors.BackupFailed)),
+    )
+    .then(() =>
+      fse.rename(netcanvasExportPath, destinationUserPath)
+        .then(() => new Error('should throw'))
+        .catch(throwHumanReadableError(errors.SaveFailed)),
+    )
+    .then(() => ({ savePath: destinationUserPath, backupPath }));
 };
 
 /**
@@ -102,7 +109,7 @@ export const readProtocol = (protocolPath) => {
  * @returns {Promise} Resolves to true if protocol is read successfully
  */
 export const verifyNetcanvas = filePath =>
-  importNetcanvas(filePath)
+  createNetcanvasImport(filePath)
     .then(readProtocol)
     .then(validateProtocol)
     .then(() => true);
