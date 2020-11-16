@@ -1,10 +1,10 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
-import fs from 'fs';
 import path from 'path';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
+import validateProtocol from '@app/utils/validateProtocol';
 import {
   errors,
   createNetcanvasImport,
@@ -17,6 +17,7 @@ import {
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
 jest.mock('@app/utils/protocols/pruneAssets');
+jest.mock('@app/utils/validateProtocol');
 
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 
@@ -168,11 +169,40 @@ describe('utils/file', () => {
   });
 
   describe('verifyNetcanvas(filePath)', () => {
-    it('Rejects with a human readable error when netcanvas cannot be validated', async () => {
-
+    beforeEach(() => {
+      fse.access.mockReset();
+      fse.readJson.mockReset();
+      extract.mockReset();
+      validateProtocol.mockReset();
     });
-    it.todo('Rejects with a human readable error when validaiton fails');
-    it.todo('Resolves to true if validation passes');
+
+    it('Rejects with a human readable error when netcanvas cannot be validated', async () => {
+      fse.access.mockResolvedValueOnce(true);
+      fse.readJson.mockRejectedValueOnce(new Error());
+
+      await expect(verifyNetcanvas(mockProtocol))
+        .rejects.toThrow(errors.NetcanvasCouldNotValidate);
+    });
+
+    it('Rejects with a human readable error when validation fails', async () => {
+      fse.access.mockResolvedValueOnce(true);
+      extract.mockResolvedValueOnce(true);
+      fse.readJson.mockResolvedValueOnce({});
+      validateProtocol.mockRejectedValueOnce(new Error());
+
+      await expect(verifyNetcanvas(mockProtocol))
+        .rejects.toThrow(errors.NetcanvasValidationError);
+    });
+
+    it('Resolves to true if validation passes', async () => {
+      fse.access.mockResolvedValueOnce(true);
+      extract.mockResolvedValueOnce(true);
+      fse.readJson.mockResolvedValueOnce({});
+      validateProtocol.mockResolvedValueOnce(true);
+
+      await expect(verifyNetcanvas(mockProtocol))
+        .resolves.toEqual(true);
+    });
   });
 });
 

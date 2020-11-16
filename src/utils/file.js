@@ -123,7 +123,7 @@ export const readProtocol = (protocolPath) => {
  * @returns {Promise} Resolves to true if protocol is read successfully
  */
 export const verifyNetcanvas = filePath =>
-  Promise.resolve
+  Promise.resolve()
     .then(() =>
       createNetcanvasImport(filePath)
         .then(readProtocol)
@@ -131,6 +131,6 @@ export const verifyNetcanvas = filePath =>
     )
     .then(protocol =>
       validateProtocol(protocol)
-        .catch(throwHumanReadableError(errors.NetcanvasValidationFailed)),
+        .catch(throwHumanReadableError(errors.NetcanvasValidationError)),
     )
     .then(() => true);
