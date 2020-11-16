@@ -16,6 +16,8 @@ export const errors = {
   ArchiveFailed: new Error('Protocol could not be archived'),
   MissingProtocolJson: new Error('Protocol does not have a json file'),
   ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
+  NetcanvasCouldNotValidate: new Error('Netcanvas file could not be validated'),
+  NetcanvasValidationError: new Error('Netcanvas file did not validate'),
 };
 
 const throwHumanReadableError = readableError =>
@@ -121,7 +123,14 @@ export const readProtocol = (protocolPath) => {
  * @returns {Promise} Resolves to true if protocol is read successfully
  */
 export const verifyNetcanvas = filePath =>
-  createNetcanvasImport(filePath)
-    .then(readProtocol)
-    .then(validateProtocol)
+  Promise.resolve
+    .then(() =>
+      createNetcanvasImport(filePath)
+        .then(readProtocol)
+        .catch(throwHumanReadableError(errors.NetcanvasCouldNotValidate)),
+    )
+    .then(protocol =>
+      validateProtocol(protocol)
+        .catch(throwHumanReadableError(errors.NetcanvasValidationFailed)),
+    )
     .then(() => true);

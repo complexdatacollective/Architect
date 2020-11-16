@@ -156,10 +156,23 @@ describe('utils/file', () => {
         readProtocol('/var/null/'),
       ).rejects.toThrow(errors.ProtocolJsonParseError);
     });
+
+    it('Resolves to protocol', async () => {
+      fse.readJson.mockReset();
+      fse.readJson.mockResolvedValueOnce({});
+
+      await expect(
+        readProtocol('/var/null/'),
+      ).resolves.toEqual({});
+    });
   });
 
   describe('verifyNetcanvas(filePath)', () => {
+    it('Rejects with a human readable error when netcanvas cannot be validated', async () => {
 
+    });
+    it.todo('Rejects with a human readable error when validaiton fails');
+    it.todo('Resolves to true if validation passes');
   });
 });
 
