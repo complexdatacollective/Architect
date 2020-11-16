@@ -9,10 +9,10 @@ import {
   errors,
   createNetcanvasImport,
   createNetcanvasExport,
-  deployNetcanvasExport,
+  deployNetcanvas,
   readProtocol,
   verifyNetcanvas,
-} from '../file';
+} from '../netcanvasFile';
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
@@ -87,7 +87,7 @@ describe('utils/file', () => {
     });
   });
 
-  describe('deployNetcanvasExport(exportPath, destinationPath)', () => {
+  describe('deployNetcanvas(exportPath, destinationPath)', () => {
     const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
     const userDestinationPath = '/dev/null/user/path/export/destination';
 
@@ -95,7 +95,7 @@ describe('utils/file', () => {
       fse.rename.mockReset();
       fse.rename.mockRejectedValueOnce(new Error());
       fse.rename.mockResolvedValueOnce(true);
-      await expect(deployNetcanvasExport(
+      await expect(deployNetcanvas(
         netcanvasFilePath,
         userDestinationPath,
       )).rejects.toThrow(errors.BackupFailed);
@@ -105,7 +105,7 @@ describe('utils/file', () => {
       fse.rename.mockResolvedValueOnce(true);
       fse.rename.mockRejectedValueOnce(new Error());
 
-      await expect(deployNetcanvasExport(
+      await expect(deployNetcanvas(
         netcanvasFilePath,
         userDestinationPath,
       )).rejects.toThrow(errors.SaveFailed);
@@ -113,7 +113,7 @@ describe('utils/file', () => {
     it('resolves to { savePath, backupPath }', async () => {
       fse.rename.mockReset();
       fse.rename.mockResolvedValue(true);
-      const result = await deployNetcanvasExport(
+      const result = await deployNetcanvas(
         netcanvasFilePath,
         userDestinationPath,
       );

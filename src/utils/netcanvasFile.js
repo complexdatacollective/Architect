@@ -82,7 +82,7 @@ export const createNetcanvasImport = (filePath) => {
     .then(() => destinationPath);
 };
 
-export const deployNetcanvasExport = (netcanvasExportPath, destinationUserPath) => {
+export const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
   const backupPath = `${destinationUserPath}.backup-${new Date().getTime()}`;
   return Promise.resolve()
     .then(() =>
@@ -133,4 +133,4 @@ export const verifyNetcanvas = filePath =>
       validateProtocol(protocol)
         .catch(throwHumanReadableError(errors.NetcanvasValidationError)),
     )
-    .then(() => true);
+    .then(() => filePath);
