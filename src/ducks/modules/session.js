@@ -43,8 +43,39 @@ const SAVE_NETCANVAS = 'SESSION/SAVE_NETCANVAS';
 const SAVE_NETCANVAS_SUCCESS = 'SESSION/SAVE_NETCANVAS_SUCCESS';
 const SAVE_NETCANVAS_ERROR = 'SESSION/SAVE_NETCANVAS_ERROR';
 const SAVE_NETCANVAS_COPY = 'SESSION/SAVE_NETCANVAS_COPY';
-const SAVE_NETCANVAS_SUCCESS = 'SESSION/SAVE_NETCANVAS_SUCCESS';
-const SAVE_NETCANVAS_ERROR = 'SESSION/SAVE_NETCANVAS_ERROR';
+const SAVE_NETCANVAS_COPY_SUCCESS = 'SESSION/SAVE_NETCANVAS_COPY_SUCCESS';
+const SAVE_NETCANVAS_COPY_ERROR = 'SESSION/SAVE_NETCANVAS_COPY_ERROR';
+
+const openNetcanvas = filePath =>
+  (dispatch) => {
+    dispatch({ type: OPEN_NETCANVAS, payload: { filePath } })
+      // export protocol to random temp location
+      .then(() => createNetcanvasImport(filePath))
+      .then(workingPath =>
+        readProtocol(workingPath)
+          .then(protocol => dispatch({
+            type: OPEN_NETCANVAS_SUCCESS,
+            payload: { protocol, filePath, workingPath },
+          })),
+      )
+      .catch((error) => {
+        switch (error.code) {
+          default:
+            dispatch({ type: OPEN_NETCANVAS_ERROR, payload: { error, filePath } });
+        }
+      });
+  };
+
+const exportAndDeploy = ({ workingPath, filePath, protocol }) =>
+  // export protocol to random temp location
+  exportNetcanvas(workingPath, protocol)
+    .then(exportPath =>
+      // open and validate the completed export
+      verifyNetcanvas(exportPath)
+        // rename existing file to backup location, and move export to this location
+        // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
+        .then(() => deployNetcanvas(exportPath, filePath)),
+    );
 
 const saveNetcanvas = () =>
   (dispatch, getState) => {
@@ -52,17 +83,11 @@ const saveNetcanvas = () =>
     const session = state.session;
     const protocol = state.protocol;
     const protocolId = session.activeProtocol;
+    const workingPath = session.workingPath;
+    const filePath = session.filePath;
 
-    dispatch({ type: SAVE_NETCANVAS, payload: { protocolId }})
-      // export protocol to random temp location
-      .then(() => exportNetcanvas(session.workingPath, protocol))
-      .then(exportPath =>
-        // open and validate the completed export
-        verifyNetcanvas(exportPath)
-          // rename existing file to backup location, and move export to this location
-          // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
-          .then(() => deployNetcanvas(exportPath, session.filePath)),
-      )
+    dispatch({ type: SAVE_NETCANVAS, payload: { protocolId } })
+      .then(() => exportAndDeploy({ workingPath, filePath, protocol }))
       .then(({ savePath, backupPath }) =>
         dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath } }),
       )
@@ -74,24 +99,25 @@ const saveNetcanvas = () =>
       });
   };
 
-const openNetcanvas = filePath =>
-  (dispatch) => {
-    dispatch({ type: OPEN_NETCANVAS, payload: { filePath }})
+const saveAsNetcanvas = () =>
+  (dispatch, getState) => {
+    const state = getState();
+    const session = state.session;
+    const protocol = state.protocol;
+    const protocolId = session.activeProtocol;
+    const workingPath = session.workingPath;
+    const filePath = session.filePath; // TODO, use save dialog
+
+    dispatch({ type: SAVE_NETCANVAS_COPY, payload: { protocolId } })
       // export protocol to random temp location
-      .then(() => createNetcanvasImport(filePath))
-      .then(workingPath =>
-        readProtocol(workingPath)
-          .then((protocol) => {
-            // get protocol meta
-          })
-          .then(() =>
-            dispatch({ type: OPEN_NETCANVAS_SUCCESS, payload: { filePath, workingPath } }),
-          ),
+      .then(() => exportAndDeploy({ workingPath, filePath, protocol }))
+      .then(({ savePath, backupPath }) =>
+        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } }),
       )
       .catch((error) => {
         switch (error.code) {
           default:
-            dispatch({ type: OPEN_NETCANVAS_ERROR, payload: { error, filePath } });
+            dispatch({ type: SAVE_NETCANVAS_COPY_ERROR, payload: { error, protocolId } });
         }
       });
   };
@@ -157,6 +183,9 @@ export default function reducer(state = initialState, action = {}) {
 const actionCreators = {
   resetSession,
   protocolChanged,
+  saveNetcanvas,
+  saveAsNetcanvas,
+  openNetcanvas,
 };
 
 const actionTypes = {
