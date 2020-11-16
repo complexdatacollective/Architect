@@ -1,5 +1,12 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
+import {
+  exportNetcanvas,
+  verifyNetcanvas,
+  deployNetcanvas,
+  createNetcanvasImport,
+  readProtocol,
+} from '@app/utils/netcanvasFile';
 import { actionCreators as previewActions } from '@modules/preview';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as codebookActionTypes } from './protocol/codebook';
@@ -28,33 +35,63 @@ const savableChanges = [
 
 const RESET_SESSION = 'SESSION/RESET';
 const PROTOCOL_CHANGED = 'SESSION/PROTOCOL_CHANGED';
-const IMPORT_NETCANVAS = 'SESSION/IMPORT_NETCANVAS';
-const SAVE_NETCANVAS = 'SESSION/SAVE_NETCANVAS';
-const SAVE_COPY = 'SESSION/SAVE_COPY';
 
-const exportNetcanvas = () =>
+const OPEN_NETCANVAS = 'SESSION/OPEN_NETCANVAS';
+const OPEN_NETCANVAS_SUCCESS = 'SESSION/OPEN_NETCANVAS_SUCCESS';
+const OPEN_NETCANVAS_ERROR = 'SESSION/OPEN_NETCANVAS_ERROR';
+const SAVE_NETCANVAS = 'SESSION/SAVE_NETCANVAS';
+const SAVE_NETCANVAS_SUCCESS = 'SESSION/SAVE_NETCANVAS_SUCCESS';
+const SAVE_NETCANVAS_ERROR = 'SESSION/SAVE_NETCANVAS_ERROR';
+const SAVE_NETCANVAS_COPY = 'SESSION/SAVE_NETCANVAS_COPY';
+const SAVE_NETCANVAS_SUCCESS = 'SESSION/SAVE_NETCANVAS_SUCCESS';
+const SAVE_NETCANVAS_ERROR = 'SESSION/SAVE_NETCANVAS_ERROR';
+
+const saveNetcanvas = () =>
   (dispatch, getState) => {
     const state = getState();
     const session = state.session;
     const protocol = state.protocol;
-    dispatch({ type: SAVE_PROTOCOL, protocolId: session.activeProtocol });
+    const protocolId = session.activeProtocol;
 
-    // export protocol to random temp location
-    file.exportNetcanvas(session.workingPath, protocol)
+    dispatch({ type: SAVE_NETCANVAS, payload: { protocolId }})
+      // export protocol to random temp location
+      .then(() => exportNetcanvas(session.workingPath, protocol))
       .then(exportPath =>
         // open and validate the completed export
-        file.verifyNetcanvas(exportPath)
+        verifyNetcanvas(exportPath)
           // rename existing file to backup location, and move export to this location
           // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
-          .then(() => file.backupAndReplace(exportPath, session.filePath)),
+          .then(() => deployNetcanvas(exportPath, session.filePath)),
       )
       .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_PROTOCOL_SUCCESS, payload: { savePath, backupPath } }),
+        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath } }),
       )
-      .catch(error => {
+      .catch((error) => {
         switch (error.code) {
           default:
-            dispatch({ type: SAVE_PROTOCOL_ERROR, payload: { error } }),
+            dispatch({ type: SAVE_NETCANVAS_ERROR, payload: { error, protocolId } });
+        }
+      });
+  };
+
+const openNetcanvas = filePath =>
+  (dispatch) => {
+    dispatch({ type: OPEN_NETCANVAS, payload: { filePath }})
+      // export protocol to random temp location
+      .then(() => createNetcanvasImport(filePath))
+      .then(workingPath =>
+        readProtocol(workingPath)
+          .then((protocol) => {
+            // get protocol meta
+          })
+          .then(() =>
+            dispatch({ type: OPEN_NETCANVAS_SUCCESS, payload: { filePath, workingPath } }),
+          ),
+      )
+      .catch((error) => {
+        switch (error.code) {
+          default:
+            dispatch({ type: OPEN_NETCANVAS_ERROR, payload: { error, filePath } });
         }
       });
   };
