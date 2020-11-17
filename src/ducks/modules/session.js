@@ -6,11 +6,15 @@ import {
   createNetcanvasImport,
   readProtocol,
 } from '@app/utils/netcanvasFile';
+import { getHasUnsavedChanges } from '@selectors/session';
+import { openDialog, saveCopyDialog } from '@app/utils/dialogs';
+import { UnsavedChanges } from '@components/Dialogs';
+import { actionCreators as dialogsActions } from '@modules/dialogs';
 import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionCreators as previewActions } from '@modules/preview';
-import { actionTypes as protocolStageActionTypes } from './protocol/stages';
-import { actionTypes as codebookActionTypes } from './protocol/codebook';
-import { actionTypes as assetManifestTypes } from './protocol/assetManifest';
+import { actionTypes as protocolStageActionTypes } from '@modules/protocol/stages';
+import { actionTypes as codebookActionTypes } from '@modules/protocol/codebook';
+import { actionTypes as assetManifestTypes } from '@modules/protocol/assetManifest';
 
 // All these actions are considered saveable changes:
 const savableChanges = [
@@ -127,6 +131,37 @@ const protocolChanged = () => ({
   type: PROTOCOL_CHANGED,
 });
 
+
+const openNetcanvasFromDialog = () =>
+  (dispatch, getState) =>
+    Promise.resolve(getHasUnsavedChanges(getState()))
+      .then((hasUnsavedChanges) => {
+        if (!hasUnsavedChanges) { return true; }
+
+        const unsavedChangesDialog = UnsavedChanges({
+          confirmLabel: 'Save changes and continue?',
+        });
+
+        return dispatch(dialogsActions.openDialog(unsavedChangesDialog))
+          .then((confirm) => {
+            if (!confirm) { return false; }
+
+            return dispatch(saveNetcanvas())
+              .then(() => confirm);
+          });
+      })
+      .then((confirm) => {
+        if (!confirm) { return false; }
+
+        return openDialog()
+          .then(({ canceled, filePaths }) => {
+            const filePath = filePaths && filePaths[0];
+            if (canceled || !filePath) { return false; }
+
+            return dispatch(openNetcanvas(filePath));
+          });
+      });
+
 const initialState = {
   workingPath: null,
   filePath: null,
@@ -182,6 +217,7 @@ const actionCreators = {
   saveNetcanvas,
   saveAsNetcanvas,
   openNetcanvas,
+  openNetcanvasFromDialog,
 };
 
 const actionTypes = {

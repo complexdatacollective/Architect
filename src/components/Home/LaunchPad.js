@@ -15,18 +15,13 @@ import Sprite from './Sprite';
 
 const LaunchPad = ({
   openNetcanvas,
-  openProtocol,
+  openNetcanvasFromDialog,
   createAndLoadProtocol,
   lastEditedProtocol,
   otherRecentProtocols,
   unbundleAndLoadProtocol,
 }) => {
-  const handleOpenProtocol = () => openProtocol();
-
   const handleCreateProtocol = () => createAndLoadProtocol();
-
-  const handleLoadProtocol = filePath =>
-    unbundleAndLoadProtocol(filePath);
 
   return (
     <React.Fragment>
@@ -95,7 +90,7 @@ const LaunchPad = ({
                 graphicPosition="0 bottom"
                 color="slate-blue--dark"
                 graphicSize="auto 115%"
-                onClick={handleOpenProtocol}
+                onClick={openNetcanvasFromDialog}
               >
                 <h2>Open</h2>
                 <h3>from Computer</h3>
@@ -136,6 +131,7 @@ const mapDispatchToProps = {
   unbundleAndLoadProtocol: protocolsActions.unbundleAndLoadProtocol,
   openProtocol: protocolsActions.openProtocol,
   openNetcanvas: sessionActions.openNetcanvas,
+  openNetcanvasFromDialog: sessionActions.openNetcanvasFromDialog,
 };
 
 const withState = connect(mapStateToProps, mapDispatchToProps);
