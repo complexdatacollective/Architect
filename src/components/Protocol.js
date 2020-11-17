@@ -1,14 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
-import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionLocks as protocolsLocks } from '@modules/protocols';
+import { actionCreators as sessionActions } from '@modules/session';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
 import ProtocolControlBar from '@components/ProtocolControlBar';
@@ -16,7 +15,13 @@ import ProtocolControlBar from '@components/ProtocolControlBar';
 const Protocol = ({
   isLoading,
   hasProtocol,
+  protocolPath,
 }) => {
+  const dispatch = useDispatch();
+  useEffect(() =>
+    () => dispatch(sessionActions.resetSession()),
+  [protocolPath]);
+
   const sceneClasses = cx(
     'scene',
     { 'scene--protocol': hasProtocol },
@@ -54,6 +59,7 @@ const Protocol = ({
 Protocol.propTypes = {
   isLoading: PropTypes.bool,
   hasProtocol: PropTypes.bool,
+  protocolPath: PropTypes.string,
 };
 
 Protocol.defaultProps = {
@@ -63,12 +69,12 @@ Protocol.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const protocolMeta = getActiveProtocolMeta(state);
+  const activeProtocol = state.session.filePath;
 
   return {
     hasUnsavedChanges: getHasUnsavedChanges(state),
-    protocolPath: protocolMeta && protocolMeta.filePath,
-    hasProtocol: !!protocolMeta,
+    protocolPath: activeProtocol,
+    hasProtocol: !!activeProtocol,
     isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
   };
 };
@@ -77,8 +83,8 @@ const mapDispatchToProps = {
   openDialog: dialogActions.openDialog,
 };
 
+const withStore = connect(mapStateToProps, mapDispatchToProps);
+
 export { Protocol };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(Protocol);
+export default withStore(Protocol);
