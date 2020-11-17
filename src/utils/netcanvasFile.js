@@ -134,3 +134,20 @@ export const verifyNetcanvas = filePath =>
         .catch(throwHumanReadableError(errors.NetcanvasValidationError)),
     )
     .then(() => filePath);
+
+
+/**
+ * Save the protocol to the target filepath, verify before moving to userspace
+ * @param filePath - .netcanvas file path
+ * @returns {Promise} Resolves to { savePath, backupPath } if successful
+ */
+export const exportNetcanvas = (workingPath, protocol, filePath) =>
+  // export protocol to random temp location
+  createNetcanvasExport(workingPath, protocol)
+    .then(exportPath =>
+      // open and validate the completed export
+      verifyNetcanvas(exportPath)
+        // rename existing file to backup location, and move export to this location
+        // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
+        .then(() => deployNetcanvas(exportPath, filePath)),
+    );

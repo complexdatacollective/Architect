@@ -12,6 +12,9 @@ import {
 } from '../protocol/codebook';
 import { testing as assetManifestTesting } from '../protocol/assetManifest';
 import { rootEpic } from '../../modules/root';
+import { createNetcanvasImport, readProtocol } from '../../../utils/netcanvasFile';
+
+jest.mock('../../../utils/netcanvasFile');
 
 const epics = createEpicMiddleware(rootEpic);
 const middlewares = [epics, thunk];
@@ -27,47 +30,105 @@ const itTracksActionAsChange = (action) => {
   expect(actions.pop()).toEqual({ type: 'SESSION/PROTOCOL_CHANGED' });
 };
 
-describe('session reducer', () => {
-  it('has an initial state', () => {
-    expect(reducer(undefined))
-      .toEqual({
-        lastSaved: 0,
-        lastChanged: 0,
-        activeProtocol: null,
-        filePath: null,
-        workingPath: null,
-      });
-  });
-
-  describe('PROTOCOL_CHANGED', () => {
-    it('it updates the lastChanged value', () => {
-      const result = reducer(
-        undefined,
-        actionCreators.protocolChanged(),
-      );
-
-      expect(result.lastChanged > 0).toBe(true);
+describe('session module', () => {
+  describe('reducer', () => {
+    it('has an initial state', () => {
+      expect(reducer(undefined))
+        .toEqual({
+          lastSaved: 0,
+          lastChanged: 0,
+          activeProtocol: null,
+          filePath: null,
+          workingPath: null,
+        });
     });
 
-    it('tracks actions as changes', () => {
-      const actions = [
-        [stageActions.updateStage, [{}]],
-        [stageActions.moveStage, [0, 0]],
-        [stageActions.deleteStage, [0]],
-        [protocolActions.updateOptions, [{}]],
-        [codebookActions.createType],
-        [codebookActions.updateType],
-        [codebookTesting.deleteType],
-        [codebookTesting.createVariable],
-        [codebookTesting.updateVariable],
-        [codebookTesting.deleteVariable],
-        [assetManifestTesting.importAssetComplete],
-        [assetManifestTesting.deleteAsset],
-      ];
+    describe('PROTOCOL_CHANGED', () => {
+      it('it updates the lastChanged value', () => {
+        const result = reducer(
+          undefined,
+          actionCreators.protocolChanged(),
+        );
 
-      actions.forEach(([action, args = []]) => {
-        itTracksActionAsChange(action(...args));
+        expect(result.lastChanged > 0).toBe(true);
+      });
+
+      it('tracks actions as changes', () => {
+        const actions = [
+          [stageActions.updateStage, [{}]],
+          [stageActions.moveStage, [0, 0]],
+          [stageActions.deleteStage, [0]],
+          [protocolActions.updateOptions, [{}]],
+          [codebookActions.createType],
+          [codebookActions.updateType],
+          [codebookTesting.deleteType],
+          [codebookTesting.createVariable],
+          [codebookTesting.updateVariable],
+          [codebookTesting.deleteVariable],
+          [assetManifestTesting.importAssetComplete],
+          [assetManifestTesting.deleteAsset],
+        ];
+
+        actions.forEach(([action, args = []]) => {
+          itTracksActionAsChange(action(...args));
+        });
       });
     });
+
+    it.only('SESSION/OPEN_NETCANVAS_SUCCESS updates state', () => {
+      const initialState = reducer(undefined);
+      const action = {
+        type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
+        payload: {
+          protocol: {},
+          id: 'mock.protocol',
+          filePath: '/dev/null/mock.netcanvas',
+          workingPath: '/dev/null/working/path',
+        },
+      };
+      expect(reducer(initialState, action))
+        .toEqual({
+          lastSaved: 0,
+          lastChanged: 0,
+          activeProtocol: 'mock.protocol',
+          filePath: '/dev/null/mock.netcanvas',
+          workingPath: '/dev/null/working/path',
+        });
+    });
   });
+
+  it('open netcanvas dispatches the correct actions and side-effects', async () => {
+    const store = mockStore();
+    createNetcanvasImport.mockResolvedValueOnce('/dev/null/working/path');
+    readProtocol.mockResolvedValueOnce({});
+
+    await store.dispatch(actionCreators.openNetcanvas('/dev/null/mock.netcanvas'));
+    const actions = store.getActions();
+
+    expect(createNetcanvasImport.mock.calls).toEqual([
+      ['/dev/null/mock.netcanvas'],
+    ]);
+
+    expect(readProtocol.mock.calls).toEqual([
+      ['/dev/null/working/path'],
+    ]);
+
+    expect(actions).toEqual([
+      {
+        type: 'SESSION/OPEN_NETCANVAS',
+        payload: {
+          filePath: '/dev/null/mock.netcanvas',
+        },
+      },
+      {
+        type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
+        payload: {
+          protocol: {},
+          filePath: '/dev/null/mock.netcanvas',
+          workingPath: '/dev/null/working/path',
+        },
+      },
+    ]);
+  });
+
 });
