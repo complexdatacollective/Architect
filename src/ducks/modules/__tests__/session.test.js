@@ -34,6 +34,8 @@ describe('session reducer', () => {
         lastSaved: 0,
         lastChanged: 0,
         activeProtocol: null,
+        filePath: null,
+        workingPath: null,
       });
   });
 
@@ -47,52 +49,25 @@ describe('session reducer', () => {
       expect(result.lastChanged > 0).toBe(true);
     });
 
-    it('tracks stage updates as change', () => {
-      itTracksActionAsChange(stageActions.updateStage({}));
-    });
+    it('tracks actions as changes', () => {
+      const actions = [
+        [stageActions.updateStage, [{}]],
+        [stageActions.moveStage, [0, 0]],
+        [stageActions.deleteStage, [0]],
+        [protocolActions.updateOptions, [{}]],
+        [codebookActions.createType],
+        [codebookActions.updateType],
+        [codebookTesting.deleteType],
+        [codebookTesting.createVariable],
+        [codebookTesting.updateVariable],
+        [codebookTesting.deleteVariable],
+        [assetManifestTesting.importAssetComplete],
+        [assetManifestTesting.deleteAsset],
+      ];
 
-    it('tracks stage move as change', () => {
-      itTracksActionAsChange(stageActions.moveStage(0, 0));
-    });
-
-    it('tracks delete stage as change', () => {
-      itTracksActionAsChange(stageActions.deleteStage(0));
-    });
-
-    it('tracks update options as change', () => {
-      itTracksActionAsChange(protocolActions.updateOptions({}));
-    });
-
-    it('tracks create type as change', () => {
-      itTracksActionAsChange(codebookActions.createType());
-    });
-
-    it('tracks update type as change', () => {
-      itTracksActionAsChange(codebookActions.updateType());
-    });
-
-    it('tracks delete type as change', () => {
-      itTracksActionAsChange(codebookTesting.deleteType());
-    });
-
-    it('tracks create variable as change', () => {
-      itTracksActionAsChange(codebookTesting.createVariable());
-    });
-
-    it('tracks update variable as change', () => {
-      itTracksActionAsChange(codebookTesting.updateVariable());
-    });
-
-    it('tracks delete variable as change', () => {
-      itTracksActionAsChange(codebookTesting.deleteVariable());
-    });
-
-    it('tracks new asset as change', () => {
-      itTracksActionAsChange(assetManifestTesting.importAssetComplete());
-    });
-
-    it('tracks delete asset as change', () => {
-      itTracksActionAsChange(assetManifestTesting.deleteAsset());
+      actions.forEach(([action, args = []]) => {
+        itTracksActionAsChange(action(...args));
+      });
     });
   });
 });
