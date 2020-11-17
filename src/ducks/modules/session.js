@@ -69,14 +69,14 @@ const saveNetcanvas = () =>
     const state = getState();
     const session = state.session;
     const protocol = state.protocol;
-    const protocolId = session.activeProtocol;
+    const protocolId = session.activeProtocolId;
     const workingPath = session.workingPath;
     const filePath = session.filePath;
 
     dispatch({ type: SAVE_NETCANVAS, payload: { protocolId } })
       .then(() => exportNetcanvas(workingPath, protocol, filePath))
       .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath } }),
+        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath, protocolId } }),
       )
       .catch((error) => {
         switch (error.code) {
@@ -123,9 +123,10 @@ const protocolChanged = () => ({
 });
 
 const initialState = {
-  activeProtocol: null,
+  activeProtocolId: null,
   workingPath: null,
   filePath: null,
+  backupPath: null,
   lastSaved: 0,
   lastChanged: 0,
 };
@@ -144,16 +145,17 @@ export default function reducer(state = initialState, action = {}) {
 
       return {
         ...state,
-        activeProtocol: id,
+        activeProtocolId: id,
         filePath,
         workingPath,
         lastSaved: 0,
         lastChanged: 0,
       };
     }
-    case bundleProtocolActionTypes.BUNDLE_PROTOCOL_SUCCESS:
+    case SAVE_NETCANVAS_SUCCESS:
       return {
         ...state,
+        backupPath: action.payload.backupPath,
         lastSaved: new Date().getTime(),
       };
     case PROTOCOL_CHANGED:

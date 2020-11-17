@@ -12,7 +12,13 @@ import {
 } from '../protocol/codebook';
 import { testing as assetManifestTesting } from '../protocol/assetManifest';
 import { rootEpic } from '../../modules/root';
-import { createNetcanvasImport, readProtocol } from '../../../utils/netcanvasFile';
+import {
+  createNetcanvasImport,
+  readProtocol,
+  createNetcanvasExport,
+  verifyNetcanvas,
+  deployNetcanvas,
+} from '../../../utils/netcanvasFile';
 
 jest.mock('../../../utils/netcanvasFile');
 
@@ -37,9 +43,10 @@ describe('session module', () => {
         .toEqual({
           lastSaved: 0,
           lastChanged: 0,
-          activeProtocol: null,
+          activeProtocolId: null,
           filePath: null,
           workingPath: null,
+          backupPath: null,
         });
     });
 
@@ -75,7 +82,7 @@ describe('session module', () => {
       });
     });
 
-    it.only('SESSION/OPEN_NETCANVAS_SUCCESS updates state', () => {
+    it('SESSION/OPEN_NETCANVAS_SUCCESS updates state', () => {
       const initialState = reducer(undefined);
       const action = {
         type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
@@ -90,10 +97,40 @@ describe('session module', () => {
         .toEqual({
           lastSaved: 0,
           lastChanged: 0,
-          activeProtocol: 'mock.protocol',
+          activeProtocolId: 'mock.protocol',
           filePath: '/dev/null/mock.netcanvas',
           workingPath: '/dev/null/working/path',
         });
+    });
+
+    it('SESSION/SAVE_NETCANVAS_SUCCESS updates state', () => {
+      const initialState = reducer({
+        lastSaved: 0,
+        lastChanged: 0,
+        activeProtocolId: 'mock.protocol',
+        filePath: '/dev/null/mock.netcanvas',
+        workingPath: '/dev/null/working/path',
+      });
+
+      const action = {
+        type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
+        payload: {
+          savePath: '/dev/null/mock.netcanvas',
+          backupPath: '/dev/null/mock.netcanvas.backup',
+          protocolId: 'mock.protocol',
+        },
+      };
+
+      const resultState = reducer(initialState, action);
+
+      expect(resultState)
+        .toMatchObject({
+          filePath: '/dev/null/mock.netcanvas',
+          backupPath: '/dev/null/mock.netcanvas.backup',
+        });
+
+      const aSecondAgo = new Date().getTime() - 1000;
+      expect(resultState.lastSaved).toBeGreaterThan(aSecondAgo);
     });
   });
 
