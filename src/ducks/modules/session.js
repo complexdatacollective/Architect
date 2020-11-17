@@ -5,11 +5,11 @@ import {
   createNetcanvasImport,
   readProtocol,
 } from '@app/utils/netcanvasFile';
+import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionCreators as previewActions } from '@modules/preview';
 import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as codebookActionTypes } from './protocol/codebook';
 import { actionTypes as assetManifestTypes } from './protocol/assetManifest';
-import { actionTypes as protocolActionTypes } from './protocol';
 
 // All these actions are considered saveable changes:
 const savableChanges = [
@@ -31,7 +31,6 @@ const savableChanges = [
 
 const RESET_SESSION = 'SESSION/RESET';
 const PROTOCOL_CHANGED = 'SESSION/PROTOCOL_CHANGED';
-
 const OPEN_NETCANVAS = 'SESSION/OPEN_NETCANVAS';
 const OPEN_NETCANVAS_SUCCESS = 'SESSION/OPEN_NETCANVAS_SUCCESS';
 const OPEN_NETCANVAS_ERROR = 'SESSION/OPEN_NETCANVAS_ERROR';
@@ -92,7 +91,10 @@ const saveAsNetcanvas = newFilePath =>
     const workingPath = session.workingPath;
 
     return Promise.resolve()
-      .then(() => dispatch({ type: SAVE_NETCANVAS_COPY, payload: { workingPath, filePath: newFilePath } }))
+      .then(() => dispatch({
+        type: SAVE_NETCANVAS_COPY,
+        payload: { workingPath, filePath: newFilePath },
+      }))
       // export protocol to random temp location
       .then(() => netcanvasExport(workingPath, protocol, newFilePath))
       .then(({ savePath, backupPath }) =>
@@ -101,7 +103,10 @@ const saveAsNetcanvas = newFilePath =>
       .catch((error) => {
         switch (error.code) {
           default:
-            dispatch({ type: SAVE_NETCANVAS_COPY_ERROR, payload: { error, workingPath, filePath: newFilePath } });
+            dispatch({
+              type: SAVE_NETCANVAS_COPY_ERROR,
+              payload: { error, workingPath, filePath: newFilePath },
+            });
         }
       });
   };
@@ -179,6 +184,16 @@ const actionCreators = {
 
 const actionTypes = {
   RESET_SESSION,
+  PROTOCOL_CHANGED,
+  OPEN_NETCANVAS,
+  OPEN_NETCANVAS_SUCCESS,
+  OPEN_NETCANVAS_ERROR,
+  SAVE_NETCANVAS,
+  SAVE_NETCANVAS_SUCCESS,
+  SAVE_NETCANVAS_ERROR,
+  SAVE_NETCANVAS_COPY,
+  SAVE_NETCANVAS_COPY_SUCCESS,
+  SAVE_NETCANVAS_COPY_ERROR,
 };
 
 const epics = combineEpics(

@@ -21,10 +21,14 @@ const setProtocol = (meta, protocol) => ({
 
 function protocolReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case 'SESSION/RESET':
+    case 'SESSION/RESET_SESSION':
       return initialState;
     case SET_PROTOCOL:
       return { ...action.protocol };
+    case 'SESSION/OPEN_NETCANVAS_SUCCESS':
+      return {
+        ...action.payload.protocol,
+      };
     case UPDATE_OPTIONS:
       return {
         ...state,
