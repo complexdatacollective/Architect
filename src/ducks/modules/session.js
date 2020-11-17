@@ -76,8 +76,8 @@ const saveNetcanvas = () =>
     return Promise.resolve()
       .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { protocolId } }))
       .then(() => netcanvasExport(workingPath, protocol, filePath))
-      .then(({ savePath, backupPath, id }) =>
-        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath, id } }),
+      .then(({ savePath, backupPath }) =>
+        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath, id: protocolId } }),
       )
       .catch((error) => {
         switch (error.code) {
@@ -92,7 +92,7 @@ const saveAsNetcanvas = newFilePath =>
     const state = getState();
     const session = state.session;
     const protocol = state.protocol;
-    const protocolId = session.activeProtocol;
+    const protocolId = session.activeProtocolId;
     const workingPath = session.workingPath;
 
     return Promise.resolve()
@@ -100,7 +100,7 @@ const saveAsNetcanvas = newFilePath =>
       // export protocol to random temp location
       .then(() => netcanvasExport(workingPath, protocol, newFilePath))
       .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } }),
+        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath, id: protocolId } }),
       )
       .catch((error) => {
         switch (error.code) {

@@ -167,7 +167,7 @@ describe('session module', () => {
     ]);
   });
 
-  it.only('save netcanvas dispatches the correct actions and side-effects', async () => {
+  it('save netcanvas dispatches the correct actions and side-effects', async () => {
     const mockId = uuid();
 
     const store = mockStore({
@@ -214,6 +214,59 @@ describe('session module', () => {
           savePath: '/dev/null/user/file/path.netcanvas',
         },
         type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
+      },
+    ]);
+  });
+
+  it.only('saveAs netcanvas dispatches the correct actions and side-effects', async () => {
+    const mockId = uuid();
+
+    const store = mockStore({
+      session: {
+        activeProtocolId: mockId,
+        workingPath: '/dev/null/working/path',
+        filePath: '/dev/null/user/file/path.netcanvas',
+      },
+      protocol: { schemaVersion: 4 },
+    });
+
+    netcanvasExport.mockImplementation((
+      workingPath,
+      protocol,
+      savePath,
+    ) =>
+      Promise.resolve({
+        id: mockId,
+        savePath,
+        backupPath: `${savePath}.backup`,
+      }),
+    );
+
+    await store.dispatch(
+      actionCreators.saveAsNetcanvas('/dev/null/user/file/new_path.netcanvas'),
+    );
+    const actions = store.getActions();
+
+    expect(netcanvasExport.mock.calls).toEqual([
+      [
+        '/dev/null/working/path',
+        { schemaVersion: 4 },
+        '/dev/null/user/file/new_path.netcanvas',
+      ],
+    ]);
+
+    expect(actions).toEqual([
+      {
+        payload: { protocolId: mockId },
+        type: 'SESSION/SAVE_NETCANVAS_COPY',
+      },
+      {
+        payload: {
+          backupPath: '/dev/null/user/file/new_path.netcanvas.backup',
+          id: '809895df-bbd7-4c76-ac58-e6ada2625f9b',
+          savePath: '/dev/null/user/file/new_path.netcanvas',
+        },
+        type: 'SESSION/SAVE_NETCANVAS_COPY_SUCCESS',
       },
     ]);
   });
