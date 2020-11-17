@@ -3,6 +3,7 @@
 import configureStore from 'redux-mock-store';
 import { createEpicMiddleware } from 'redux-observable';
 import thunk from 'redux-thunk';
+import uuid from 'uuid';
 import reducer, { actionCreators } from '../session';
 import { actionCreators as protocolActions } from '../protocol';
 import { actionCreators as stageActions } from '../protocol/stages';
@@ -15,9 +16,7 @@ import { rootEpic } from '../../modules/root';
 import {
   createNetcanvasImport,
   readProtocol,
-  createNetcanvasExport,
-  verifyNetcanvas,
-  deployNetcanvas,
+  netcanvasExport,
 } from '../../../utils/netcanvasFile';
 
 jest.mock('../../../utils/netcanvasFile');
@@ -164,6 +163,57 @@ describe('session module', () => {
           filePath: '/dev/null/mock.netcanvas',
           workingPath: '/dev/null/working/path',
         },
+      },
+    ]);
+  });
+
+  it.only('save netcanvas dispatches the correct actions and side-effects', async () => {
+    const mockId = uuid();
+
+    const store = mockStore({
+      session: {
+        activeProtocolId: mockId,
+        workingPath: '/dev/null/working/path',
+        filePath: '/dev/null/user/file/path.netcanvas',
+      },
+      protocol: { schemaVersion: 4 },
+    });
+
+    netcanvasExport.mockImplementation((
+      workingPath,
+      protocol,
+      savePath,
+    ) =>
+      Promise.resolve({
+        id: mockId,
+        savePath,
+        backupPath: `${savePath}.backup`,
+      }),
+    );
+
+    await store.dispatch(actionCreators.saveNetcanvas());
+    const actions = store.getActions();
+
+    expect(netcanvasExport.mock.calls).toEqual([
+      [
+        '/dev/null/working/path',
+        { schemaVersion: 4 },
+        '/dev/null/user/file/path.netcanvas',
+      ],
+    ]);
+
+    expect(actions).toEqual([
+      {
+        payload: { protocolId: mockId },
+        type: 'SESSION/SAVE_NETCANVAS',
+      },
+      {
+        payload: {
+          backupPath: '/dev/null/user/file/path.netcanvas.backup',
+          id: '809895df-bbd7-4c76-ac58-e6ada2625f9b',
+          savePath: '/dev/null/user/file/path.netcanvas',
+        },
+        type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
       },
     ]);
   });

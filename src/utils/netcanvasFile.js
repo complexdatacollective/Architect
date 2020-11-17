@@ -141,7 +141,7 @@ export const verifyNetcanvas = filePath =>
  * @param filePath - .netcanvas file path
  * @returns {Promise} Resolves to { savePath, backupPath } if successful
  */
-export const exportNetcanvas = (workingPath, protocol, filePath) =>
+export const netcanvasExport = (workingPath, protocol, filePath) =>
   // export protocol to random temp location
   createNetcanvasExport(workingPath, protocol)
     .then(exportPath =>

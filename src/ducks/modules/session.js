@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
 import {
-  exportNetcanvas,
+  netcanvasExport,
   createNetcanvasImport,
   readProtocol,
 } from '@app/utils/netcanvasFile';
@@ -73,10 +73,11 @@ const saveNetcanvas = () =>
     const workingPath = session.workingPath;
     const filePath = session.filePath;
 
-    dispatch({ type: SAVE_NETCANVAS, payload: { protocolId } })
-      .then(() => exportNetcanvas(workingPath, protocol, filePath))
-      .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath, protocolId } }),
+    return Promise.resolve()
+      .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { protocolId } }))
+      .then(() => netcanvasExport(workingPath, protocol, filePath))
+      .then(({ savePath, backupPath, id }) =>
+        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath, id } }),
       )
       .catch((error) => {
         switch (error.code) {
@@ -94,9 +95,10 @@ const saveAsNetcanvas = newFilePath =>
     const protocolId = session.activeProtocol;
     const workingPath = session.workingPath;
 
-    dispatch({ type: SAVE_NETCANVAS_COPY, payload: { protocolId } })
+    return Promise.resolve()
+      .then(() => dispatch({ type: SAVE_NETCANVAS_COPY, payload: { protocolId } }))
       // export protocol to random temp location
-      .then(() => exportNetcanvas(workingPath, protocol, newFilePath))
+      .then(() => netcanvasExport(workingPath, protocol, newFilePath))
       .then(({ savePath, backupPath }) =>
         dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } }),
       )
