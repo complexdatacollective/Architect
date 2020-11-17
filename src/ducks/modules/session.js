@@ -10,8 +10,6 @@ import { actionTypes as protocolStageActionTypes } from './protocol/stages';
 import { actionTypes as codebookActionTypes } from './protocol/codebook';
 import { actionTypes as assetManifestTypes } from './protocol/assetManifest';
 import { actionTypes as protocolActionTypes } from './protocol';
-import { actionTypes as bundleProtocolActionTypes } from './protocols/bundle';
-import { actionTypes as loadProtocolActionTypes } from './protocols/load';
 
 // All these actions are considered saveable changes:
 const savableChanges = [
@@ -69,20 +67,19 @@ const saveNetcanvas = () =>
     const state = getState();
     const session = state.session;
     const protocol = state.protocol;
-    const protocolId = session.activeProtocolId;
     const workingPath = session.workingPath;
     const filePath = session.filePath;
 
     return Promise.resolve()
-      .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { protocolId } }))
+      .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { workingPath, filePath } }))
       .then(() => netcanvasExport(workingPath, protocol, filePath))
       .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath, id: protocolId } }),
+        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath } }),
       )
       .catch((error) => {
         switch (error.code) {
           default:
-            dispatch({ type: SAVE_NETCANVAS_ERROR, payload: { error, protocolId } });
+            dispatch({ type: SAVE_NETCANVAS_ERROR, payload: { error, workingPath, filePath } });
         }
       });
   };
@@ -92,20 +89,19 @@ const saveAsNetcanvas = newFilePath =>
     const state = getState();
     const session = state.session;
     const protocol = state.protocol;
-    const protocolId = session.activeProtocolId;
     const workingPath = session.workingPath;
 
     return Promise.resolve()
-      .then(() => dispatch({ type: SAVE_NETCANVAS_COPY, payload: { protocolId } }))
+      .then(() => dispatch({ type: SAVE_NETCANVAS_COPY, payload: { workingPath, filePath: newFilePath } }))
       // export protocol to random temp location
       .then(() => netcanvasExport(workingPath, protocol, newFilePath))
       .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath, id: protocolId } }),
+        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } }),
       )
       .catch((error) => {
         switch (error.code) {
           default:
-            dispatch({ type: SAVE_NETCANVAS_COPY_ERROR, payload: { error, protocolId } });
+            dispatch({ type: SAVE_NETCANVAS_COPY_ERROR, payload: { error, workingPath, filePath: newFilePath } });
         }
       });
   };
@@ -125,7 +121,6 @@ const protocolChanged = () => ({
 });
 
 const initialState = {
-  activeProtocolId: null,
   workingPath: null,
   filePath: null,
   backupPath: null,
@@ -143,11 +138,10 @@ const protocolChangedEpic = action$ =>
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case OPEN_NETCANVAS_SUCCESS: {
-      const { id, filePath, workingPath } = action.payload;
+      const { filePath, workingPath } = action.payload;
 
       return {
         ...state,
-        activeProtocolId: id,
         filePath,
         workingPath,
         lastSaved: 0,
@@ -158,6 +152,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         backupPath: action.payload.backupPath,
+        filePath: action.payload.savePath,
         lastSaved: new Date().getTime(),
       };
     case PROTOCOL_CHANGED:
