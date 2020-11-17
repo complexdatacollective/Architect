@@ -5,6 +5,7 @@ import { get, first } from 'lodash';
 import { GraphicButton } from '@codaco/ui';
 import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
 import { actionCreators as protocolsActions } from '@modules/protocols';
+import { actionCreators as sessionActions } from '@modules/session';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
@@ -13,6 +14,7 @@ import Group from './Group';
 import Sprite from './Sprite';
 
 const LaunchPad = ({
+  openNetcanvas,
   openProtocol,
   createAndLoadProtocol,
   lastEditedProtocol,
@@ -48,7 +50,7 @@ const LaunchPad = ({
                 description={lastEditedProtocol.filePath}
                 lastModified={lastEditedProtocol.lastModified}
                 name={lastEditedProtocol.name}
-                onClickHandler={() => handleLoadProtocol(lastEditedProtocol.filePath)}
+                onClickHandler={() => openNetcanvas(lastEditedProtocol.filePath)}
                 schemaVersion={lastEditedProtocol.schemaVersion}
               />
             </div>
@@ -62,7 +64,7 @@ const LaunchPad = ({
                     description={protocol.filePath}
                     lastModified={protocol.lastModified}
                     name={protocol.name}
-                    onClickHandler={() => handleLoadProtocol(protocol.filePath)}
+                    onClickHandler={() => openNetcanvas(protocol.filePath)}
                     schemaVersion={protocol.schemaVersion}
                   />
                 ))
@@ -133,6 +135,7 @@ const mapDispatchToProps = {
   createAndLoadProtocol: protocolsActions.createAndLoadProtocol,
   unbundleAndLoadProtocol: protocolsActions.unbundleAndLoadProtocol,
   openProtocol: protocolsActions.openProtocol,
+  openNetcanvas: sessionActions.openNetcanvas,
 };
 
 const withState = connect(mapStateToProps, mapDispatchToProps);

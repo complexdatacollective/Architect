@@ -66,7 +66,7 @@ describe('protocol', () => {
         {
           type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
           payload: { protocol: newProtocol },
-        }
+        },
       );
 
       expect(newStateFromFileAction)

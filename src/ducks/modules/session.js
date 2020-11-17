@@ -1,5 +1,6 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
+import history from '@app/history';
 import {
   netcanvasExport,
   createNetcanvasImport,
@@ -54,6 +55,7 @@ const openNetcanvas = filePath =>
             payload: { protocol, filePath, workingPath },
           })),
       )
+      .then(() => history.push('/edit'))
       .catch((error) => {
         switch (error.code) {
           default:

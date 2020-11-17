@@ -10,15 +10,18 @@ import { UnsavedChanges } from '@components/Dialogs';
 
 const initIPCListeners = () => {
   ipcRenderer.on('SAVE_COPY', () => {
-    store.dispatch(protocolsActions.saveCopy());
+    // TODO: ROBUST SAVE
+    // store.dispatch(protocolsActions.saveCopy());
   });
 
   ipcRenderer.on('OPEN', () => {
-    store.dispatch(protocolsActions.openProtocol());
+    // TODO: ROBUST SAVE
+    // store.dispatch(protocolsActions.openProtocol());
   });
 
   ipcRenderer.on('SAVE', () => {
-    store.dispatch(protocolsActions.saveAndBundleProtocol());
+    // TODO: ROBUST SAVE
+    // store.dispatch(protocolsActions.saveAndBundleProtocol());
   });
 
   ipcRenderer.on('CONFIRM_CLOSE', () => {

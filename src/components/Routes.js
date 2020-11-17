@@ -3,7 +3,6 @@ import { Router, Route } from 'react-router-dom';
 import appHistory from '@app/history';
 import Home from '@components/Home/Home';
 import Protocol from '@components/Protocol';
-import ProtocolLoader from '@components/ProtocolLoader';
 import Loading from '@components/Loading';
 import Screens from '@components/Screens';
 
@@ -13,8 +12,7 @@ const Routes = () => (
     <Route path="/" exact>
       <Home />
     </Route>
-    <Route path="/edit/:protocol">
-      <ProtocolLoader />
+    <Route path="/edit">
       <Protocol />
     </Route>
     <Loading />
