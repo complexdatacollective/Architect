@@ -4,7 +4,6 @@ import { isDirty } from 'redux-form';
 import { store } from '@app/ducks/store';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { actionCreators as userActions } from '@modules/userActions';
-import { actionCreators as sessionActions } from '@modules/session';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { formName } from '@components/StageEditor/StageEditor';
 import { UnsavedChanges } from '@components/Dialogs';
@@ -19,7 +18,7 @@ const initIPCListeners = () => {
   });
 
   ipcRenderer.on('SAVE', () => {
-    store.dispatch(sessionActions.saveNetcanvas());
+    store.dispatch(userActions.saveNetcanvas());
   });
 
   ipcRenderer.on('CONFIRM_CLOSE', () => {

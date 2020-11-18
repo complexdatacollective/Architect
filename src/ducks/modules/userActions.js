@@ -69,9 +69,15 @@ const saveAsNetcanvas = () =>
       })
       .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
 
+const saveNetcanvas = () =>
+  dispatch =>
+    Promise.resolve()
+      .then(() => dispatch(sessionActions.saveNetcanvas()));
+
 
 export const actionCreators = {
   openNetcanvas,
   createNetcanvas,
   saveAsNetcanvas,
+  saveNetcanvas,
 };
