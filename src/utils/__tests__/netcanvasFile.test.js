@@ -4,7 +4,6 @@ import fse from 'fs-extra';
 import path from 'path';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
-import validateProtocol from '@app/utils/validateProtocol';
 import {
   errors,
   createNetcanvasImport,
@@ -17,7 +16,6 @@ import {
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
 jest.mock('@app/utils/protocols/pruneAssets');
-jest.mock('@app/utils/validateProtocol');
 
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 
@@ -210,10 +208,9 @@ describe('utils/file', () => {
       fse.access.mockReset();
       fse.readJson.mockReset();
       extract.mockReset();
-      validateProtocol.mockReset();
     });
 
-    it('Rejects with a human readable error when netcanvas cannot be validated', async () => {
+    it('Rejects with a human readable error when netcanvas cannot be verified', async () => {
       fse.access.mockResolvedValue(true);
       fse.readJson.mockRejectedValue(new Error());
 
@@ -221,23 +218,21 @@ describe('utils/file', () => {
         .rejects.toThrow(errors.NetcanvasCouldNotValidate);
     });
 
-    it('Rejects with a human readable error when validation fails', async () => {
+    it('Rejects with a human readable error when verification fails', async () => {
       fse.access.mockResolvedValue(true);
       extract.mockResolvedValue(true);
-      fse.readJson.mockResolvedValue({});
-      validateProtocol.mockRejectedValue(new Error());
+      fse.readJson.mockResolvedValue({ schemaVersion: 4 });
 
-      await expect(verifyNetcanvas(mockProtocol))
-        .rejects.toThrow(errors.NetcanvasValidationError);
+      await expect(verifyNetcanvas(mockProtocol, {}))
+        .rejects.toThrow(errors.NetcanvasVerificationError);
     });
 
     it('Resolves to filePath if validation passes', async () => {
       fse.access.mockResolvedValue(true);
       extract.mockResolvedValue(true);
-      fse.readJson.mockResolvedValue({});
-      validateProtocol.mockResolvedValue(true);
+      fse.readJson.mockResolvedValue({ schemaVersion: 4 });
 
-      await expect(verifyNetcanvas(mockProtocol))
+      await expect(verifyNetcanvas(mockProtocol, { schemaVersion: 4 }))
         .resolves.toEqual(mockProtocol);
     });
   });

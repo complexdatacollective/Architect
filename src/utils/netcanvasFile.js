@@ -3,10 +3,10 @@ import fse from 'fs-extra';
 import log from 'electron-log';
 import path from 'path';
 import uuid from 'uuid';
+import { isEqual } from 'lodash';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
-import validateProtocol from '@app/utils/validateProtocol';
 
 export const errors = {
   MissingPermissions: new Error('Protocol does not have read/write permissions'),
@@ -18,7 +18,7 @@ export const errors = {
   MissingProtocolJson: new Error('Protocol does not have a json file'),
   ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
   NetcanvasCouldNotValidate: new Error('Netcanvas file could not be validated'),
-  NetcanvasValidationError: new Error('Netcanvas file did not validate'),
+  NetcanvasVerificationError: new Error('Netcanvas file could not be verifed'),
 };
 
 const throwHumanReadableError = readableError =>
@@ -168,21 +168,26 @@ export const readProtocol = (protocolPath) => {
 };
 
 /**
- * Read a netcanvas file, extract it and try to read protocol.json
+ * Verify that a netcanvas file matches a protocol object
  * @param filePath - .netcanvas file path
  * @returns {Promise} Resolves to true if protocol is read successfully
  */
-export const verifyNetcanvas = filePath =>
+export const verifyNetcanvas = (filePath, protocol) =>
   Promise.resolve()
     .then(() =>
       createNetcanvasImport(filePath)
         .then(readProtocol)
         .catch(throwHumanReadableError(errors.NetcanvasCouldNotValidate)),
     )
-    .then(protocol =>
-      validateProtocol(protocol)
-        .catch(throwHumanReadableError(errors.NetcanvasValidationError)),
-    )
+    .then((fileProtocol) => {
+      const match = isEqual(fileProtocol, protocol);
+
+      if (!match) {
+        return throwHumanReadableError(errors.NetcanvasVerificationError)();
+      }
+
+      return true;
+    })
     .then(() => filePath);
 
 
