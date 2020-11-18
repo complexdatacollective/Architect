@@ -91,8 +91,11 @@ describe('utils/file', () => {
     const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
     const userDestinationPath = '/dev/null/user/path/export/destination';
 
-    it('reject with a readable error if cannot be backed up', async () => {
+    beforeEach(() => {
       fse.rename.mockReset();
+    });
+
+    it('reject with a readable error if cannot be backed up', async () => {
       fse.rename.mockRejectedValueOnce(new Error());
       fse.rename.mockResolvedValueOnce(true);
       await expect(deployNetcanvas(
@@ -100,8 +103,8 @@ describe('utils/file', () => {
         userDestinationPath,
       )).rejects.toThrow(errors.BackupFailed);
     });
+
     it('reject with a readable error if cannot be substituted', async () => {
-      fse.rename.mockReset();
       fse.rename.mockResolvedValueOnce(true);
       fse.rename.mockRejectedValueOnce(new Error());
 
@@ -110,13 +113,35 @@ describe('utils/file', () => {
         userDestinationPath,
       )).rejects.toThrow(errors.SaveFailed);
     });
-    it('resolves to { savePath, backupPath }', async () => {
-      fse.rename.mockReset();
+
+    it.only('does not create a backup if destination does not already exist', async () => {
       fse.rename.mockResolvedValue(true);
+      fse.access.mockRejectedValue(new Error());
+
       const result = await deployNetcanvas(
         netcanvasFilePath,
         userDestinationPath,
       );
+
+      expect(fse.rename.mock.calls).toBe(null);
+
+      expect(result).toEqual({
+        backupPath: null,
+        savePath: userDestinationPath,
+      });
+    });
+
+    it.only('creates a backup if destination does exist', async () => {
+      fse.rename.mockResolvedValue(true);
+      fse.access.mockResolvedValue(true);
+
+      const result = await deployNetcanvas(
+        netcanvasFilePath,
+        userDestinationPath,
+      );
+
+      expect(fse.rename.mock.calls).toBe(null);
+
       expect(result).toEqual({
         backupPath: expect.stringMatching(/\/dev\/null\/user\/path\/export\/destination\.backup-[0-9]+/),
         savePath: userDestinationPath,
@@ -177,31 +202,31 @@ describe('utils/file', () => {
     });
 
     it('Rejects with a human readable error when netcanvas cannot be validated', async () => {
-      fse.access.mockResolvedValueOnce(true);
-      fse.readJson.mockRejectedValueOnce(new Error());
+      fse.access.mockResolvedValue(true);
+      fse.readJson.mockRejectedValue(new Error());
 
       await expect(verifyNetcanvas(mockProtocol))
         .rejects.toThrow(errors.NetcanvasCouldNotValidate);
     });
 
     it('Rejects with a human readable error when validation fails', async () => {
-      fse.access.mockResolvedValueOnce(true);
-      extract.mockResolvedValueOnce(true);
-      fse.readJson.mockResolvedValueOnce({});
-      validateProtocol.mockRejectedValueOnce(new Error());
+      fse.access.mockResolvedValue(true);
+      extract.mockResolvedValue(true);
+      fse.readJson.mockResolvedValue({});
+      validateProtocol.mockRejectedValue(new Error());
 
       await expect(verifyNetcanvas(mockProtocol))
         .rejects.toThrow(errors.NetcanvasValidationError);
     });
 
-    it('Resolves to true if validation passes', async () => {
-      fse.access.mockResolvedValueOnce(true);
-      extract.mockResolvedValueOnce(true);
-      fse.readJson.mockResolvedValueOnce({});
-      validateProtocol.mockResolvedValueOnce(true);
+    it('Resolves to filePath if validation passes', async () => {
+      fse.access.mockResolvedValue(true);
+      extract.mockResolvedValue(true);
+      fse.readJson.mockResolvedValue({});
+      validateProtocol.mockResolvedValue(true);
 
       await expect(verifyNetcanvas(mockProtocol))
-        .resolves.toEqual(true);
+        .resolves.toEqual(mockProtocol);
     });
   });
 });

@@ -18,6 +18,7 @@ export const createWriteStream = () => {};
 export const access = jest.fn(() => Promise.resolve());
 export const copy = jest.fn(() => Promise.resolve());
 export const rename = jest.fn(() => Promise.resolve());
+export const mkdirp = jest.fn(() => Promise.resolve());
 
 export const constants = {
   R_OK: Symbol('R_OK'),
@@ -36,4 +37,5 @@ export default {
   readJson,
   rename,
   writeFile,
+  mkdirp,
 };
