@@ -1,7 +1,9 @@
 /* eslint-disable import/prefer-default-export */
-
+import path from 'path';
+import { APP_SCHEMA_VERSION } from '@app/config';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import validateProtocol from '@app/utils/validateProtocol';
+import getMigrationNotes from '@app/protocol-validation/migrations/getMigrationNotes';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { getProtocol } from '@selectors/protocol';
 import {
@@ -50,6 +52,46 @@ const checkUnsavedChanges = () =>
           });
       });
 
+
+const getNewFileName = filePath =>
+  Promise.resolve(path.basename(filePath, '.netcanvas'))
+    .then(basename =>
+      saveDialog({
+        buttonLabel: 'Save',
+        nameFieldLabel: 'Save:',
+        defaultPath: `${basename} (schema version ${APP_SCHEMA_VERSION}).netcanvas`,
+        filters: [{ name: 'Network Canvas', extensions: ['netcanvas'] }],
+      }),
+    );
+
+const upgradeProtocol = (filePath, protocolSchemaVersion) =>
+  (dispatch) => {
+    const migrationNotes = getMigrationNotes(protocolSchemaVersion, APP_SCHEMA_VERSION);
+    const upgradeDialog = mayUpgradeProtocolDialog(
+      protocolSchemaVersion,
+      APP_SCHEMA_VERSION,
+      migrationNotes,
+    );
+
+    return Promise.resolve()
+      .then(() => dispatch(upgradeDialog))
+      .then((confirm) => {
+        if (!confirm) { throw dialogCancelledError; }
+
+        return getNewFileName(filePath);
+      })
+      .then(({ canceled, filePath: newFilePath }) => {
+        if (canceled || !newFilePath) { throw dialogCancelledError; }
+
+        return netcanvasFile.migrateProtocol(filePath, newFilePath, APP_SCHEMA_VERSION);
+      })
+      .then(() => sessionActions.openNetcanvas(filePath))
+      .catch((e) => {
+        if (e === dialogCancelledError) { return; }
+        throw e;
+      });
+  };
+
 const openNetcanvas = () =>
   dispatch =>
     Promise.resolve()
@@ -61,27 +103,21 @@ const openNetcanvas = () =>
       })
       .then(({ canceled, filePaths }) => {
         const filePath = filePaths && filePaths[0];
-        if (canceled || !filePath) { throw dialogCancelledError ; }
+        if (canceled || !filePath) { throw dialogCancelledError; }
 
-        return netcanvasFile.checkSchemaVersion(filePath);
-      })
-      .then(([protocolSchemaVersion, schemaVersionStatus]) => {
-        switch (schemaVersionStatus) {
-          case schemaVersionStates.OK:
-            return dispatch(sessionActions.openNetcanvas(filePath));
-          case schemaVersionStates.UPGRADE_PROTOCOL:
-            return null;
-            // return migrateProtocolThunk({ protocol, filePath, workingPath })
-            // get the notes,
-            // confirm the migration
-            // get a new file path
-            // migrate protocol
-            // open it
-          case schemaVersionStates.UPGRADE_APP:
-            return dispatch(appUpgradeRequiredDialog(protocolSchemaVersion));
-          default:
-            return null;
-        }
+        return netcanvasFile.checkSchemaVersion(filePath)
+          .then(([protocolSchemaVersion, schemaVersionStatus]) => {
+            switch (schemaVersionStatus) {
+              case schemaVersionStates.OK:
+                return dispatch(sessionActions.openNetcanvas(filePath));
+              case schemaVersionStates.UPGRADE_PROTOCOL:
+                return dispatch(upgradeProtocol(filePath, protocolSchemaVersion));
+              case schemaVersionStates.UPGRADE_APP:
+                return dispatch(appUpgradeRequiredDialog(protocolSchemaVersion));
+              default:
+                return null;
+            }
+          });
       })
       .catch((e) => {
         if (e === dialogCancelledError) { return; }

@@ -6,6 +6,7 @@ import uuid from 'uuid';
 import { isEqual } from 'lodash';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
+import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 
@@ -147,8 +148,6 @@ export const createNetcanvas = (destinationUserPath) => {
           fse.readJson(path.join(templatePath, 'protocol.json')))
         .then(protocolTemplate => ({ schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate }))
         .then(protocol => createNetcanvasExport(workingPath, protocol))
-        // .then(console.log)
-        //   .then((...args) => { throw new Error(...args); })
         .then(netcanvasExportPath =>
           deployNetcanvas(netcanvasExportPath, destinationUserPath),
         );
@@ -198,14 +197,6 @@ export const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSI
       return [protocol.schemaVersion, schemaVersionStates.UPGRADE_APP];
     });
 
-// createNetcanvasImport
-// export const migrateNetcanvas = (protocol, targetVersion = APP_SCHEMA_VERSION) => {
-//   const migrationNotes = getMigrationNotes(protocol.schemaVersion, targetVersion);
-//   const [updatedProtocol, migrationSteps] = migrateProtocol(protocol, targetVersion);
-
-//   return Promise.resolve({ updatedProtocol, migrationSteps, migrationNotes });
-// };
-
 /**
  * Verify that a netcanvas file matches a protocol object
  * @param filePath - .netcanvas file path
@@ -245,3 +236,17 @@ export const netcanvasExport = (workingPath, protocol, filePath) =>
         // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
         .then(() => deployNetcanvas(exportPath, filePath)),
     );
+
+
+export const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERSION) => {
+  createNetcanvasImport(filePath)
+    .then(workingPath =>
+      readProtocol(workingPath)
+        .then(protocol => migrateProtocol(protocol, targetVersion))
+        .then(([updatedProtocol, migrationSteps]) => {
+          log.info('Migrated protocol', { migrationSteps });
+          return netcanvasExport(workingPath, updatedProtocol, newFilePath);
+        }),
+    )
+    .then(() => newFilePath);
+};
