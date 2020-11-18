@@ -4,11 +4,24 @@ import * as netcanvasFile from '@app/utils/netcanvasFile';
 import validateProtocol from '@app/utils/validateProtocol';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { getProtocol } from '@selectors/protocol';
-import { openDialog, saveCopyDialog, saveDialog, createDialogOptions } from '@app/utils/dialogs';
+import {
+  openDialog,
+  saveCopyDialog,
+  saveDialog,
+  createDialogOptions,
+} from '@app/utils/dialogs';
 import { UnsavedChanges } from '@components/Dialogs';
 import { actionCreators as sessionActions } from '@modules/session';
 import { actionCreators as dialogsActions } from '@modules/dialogs';
-import { validationErrorDialog } from '@modules/protocols/dialogs';
+import {
+  validationErrorDialog,
+  appUpgradeRequiredDialog,
+  mayUpgradeProtocolDialog,
+} from '@modules/protocols/dialogs';
+
+const { schemaVersionStates } = netcanvasFile;
+
+const dialogCancelledError = new Error('Dialog cancelled');
 
 const validateActiveProtocol = () =>
   (dispatch, getState) => {
@@ -42,15 +55,37 @@ const openNetcanvas = () =>
     Promise.resolve()
       .then(() => dispatch(checkUnsavedChanges))
       .then((confirm) => {
-        if (!confirm) { return false; }
+        if (!confirm) { throw dialogCancelledError; }
 
-        return openDialog()
-          .then(({ canceled, filePaths }) => {
-            const filePath = filePaths && filePaths[0];
-            if (canceled || !filePath) { return false; }
+        return openDialog();
+      })
+      .then(({ canceled, filePaths }) => {
+        const filePath = filePaths && filePaths[0];
+        if (canceled || !filePath) { throw dialogCancelledError ; }
 
+        return netcanvasFile.checkSchemaVersion(filePath);
+      })
+      .then(([protocolSchemaVersion, schemaVersionStatus]) => {
+        switch (schemaVersionStatus) {
+          case schemaVersionStates.OK:
             return dispatch(sessionActions.openNetcanvas(filePath));
-          });
+          case schemaVersionStates.UPGRADE_PROTOCOL:
+            return null;
+            // return migrateProtocolThunk({ protocol, filePath, workingPath })
+            // get the notes,
+            // confirm the migration
+            // get a new file path
+            // migrate protocol
+            // open it
+          case schemaVersionStates.UPGRADE_APP:
+            return dispatch(appUpgradeRequiredDialog(protocolSchemaVersion));
+          default:
+            return null;
+        }
+      })
+      .catch((e) => {
+        if (e === dialogCancelledError) { return; }
+        throw e;
       });
 
 const createNetcanvas = () =>

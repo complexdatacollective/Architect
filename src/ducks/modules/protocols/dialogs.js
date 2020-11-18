@@ -74,13 +74,13 @@ export const importErrorDialog = (e, filePath) => {
   });
 };
 
-export const appUpgradeRequiredDialog = (protocol) => {
+export const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
   const message = (
     <React.Fragment>
       <p>This protocol is not compatible with the current version of Architect.</p>
 
       <p>In order to open it, you will need to install a version of Architect that
-        supports schema version {protocol.schemaVersion}.
+        supports schema version {protocolSchemaVersion}.
       </p>
       <p>
         Please see our <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink>

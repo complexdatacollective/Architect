@@ -5,10 +5,12 @@ import path from 'path';
 import uuid from 'uuid';
 import { isEqual } from 'lodash';
 import { APP_SCHEMA_VERSION } from '@app/config';
+import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 
 export const errors = {
+  MissingSchemaVersion: new Error('Schema version not defined in protocol'),
   MissingPermissions: new Error('Protocol does not have read/write permissions'),
   ExtractFailed: new Error('Protocol could not be extracted'),
   BackupFailed: new Error('Protocol could not be backed up'),
@@ -19,6 +21,12 @@ export const errors = {
   ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
   NetcanvasCouldNotValidate: new Error('Netcanvas file could not be validated'),
   NetcanvasVerificationError: new Error('Netcanvas file could not be verifed'),
+};
+
+export const schemaVersionStates = {
+  UPGRADE_APP: 'UPGRADE_APP',
+  UPGRADE_PROTOCOL: 'UPGRADE_PROTOCOL',
+  OK: 'OK',
 };
 
 const throwHumanReadableError = readableError =>
@@ -166,6 +174,37 @@ export const readProtocol = (protocolPath) => {
       }
     });
 };
+
+export const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSION) =>
+  createNetcanvasImport(filePath)
+    .then(readProtocol)
+    .then((protocol) => {
+      if (!protocol.schemaVersion) {
+        throw errors.MissingSchemaVersion;
+      }
+
+      // If the version matches, then we can open it!
+      if (referenceVersion === protocol.schemaVersion) {
+        return [protocol.schemaVersion, schemaVersionStates.OK];
+      }
+
+      // If the schema is potentially upgradable then try to migrate it
+      if (canUpgrade(protocol.schemaVersion, referenceVersion)) {
+        return [protocol.schemaVersion, schemaVersionStates.UPGRADE_PROTOCOL];
+      }
+
+      // If the schema version is higher than the app, or
+      // we can't find an upgrade path user may need to upgrade the app
+      return [protocol.schemaVersion, schemaVersionStates.UPGRADE_APP];
+    });
+
+// createNetcanvasImport
+// export const migrateNetcanvas = (protocol, targetVersion = APP_SCHEMA_VERSION) => {
+//   const migrationNotes = getMigrationNotes(protocol.schemaVersion, targetVersion);
+//   const [updatedProtocol, migrationSteps] = migrateProtocol(protocol, targetVersion);
+
+//   return Promise.resolve({ updatedProtocol, migrationSteps, migrationNotes });
+// };
 
 /**
  * Verify that a netcanvas file matches a protocol object
