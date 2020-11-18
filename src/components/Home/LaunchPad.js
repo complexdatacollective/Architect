@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { get, first } from 'lodash';
 import { GraphicButton } from '@codaco/ui';
 import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
-import { actionCreators as protocolsActions } from '@modules/protocols';
 import { actionCreators as userActions } from '@modules/userActions';
 import { actionCreators as sessionActions } from '@modules/session';
 import createButtonGraphic from '@app/images/home/create-button.svg';
@@ -15,16 +14,12 @@ import Group from './Group';
 import Sprite from './Sprite';
 
 const LaunchPad = ({
+  openNetcanvasFile,
   openNetcanvas,
-  openNetcanvasFromDialog,
   createNetcanvas,
-  createAndLoadProtocol,
   lastEditedProtocol,
   otherRecentProtocols,
-  unbundleAndLoadProtocol,
 }) => {
-  const handleCreateProtocol = () => createAndLoadProtocol();
-
   return (
     <React.Fragment>
       { lastEditedProtocol &&
@@ -47,7 +42,7 @@ const LaunchPad = ({
                 description={lastEditedProtocol.filePath}
                 lastModified={lastEditedProtocol.lastModified}
                 name={lastEditedProtocol.name}
-                onClickHandler={() => openNetcanvas(lastEditedProtocol.filePath)}
+                onClickHandler={() => openNetcanvasFile(lastEditedProtocol.filePath)}
                 schemaVersion={lastEditedProtocol.schemaVersion}
               />
             </div>
@@ -61,7 +56,7 @@ const LaunchPad = ({
                     description={protocol.filePath}
                     lastModified={protocol.lastModified}
                     name={protocol.name}
-                    onClickHandler={() => openNetcanvas(protocol.filePath)}
+                    onClickHandler={() => openNetcanvasFile(protocol.filePath)}
                     schemaVersion={protocol.schemaVersion}
                   />
                 ))
@@ -92,7 +87,7 @@ const LaunchPad = ({
                 graphicPosition="0 bottom"
                 color="slate-blue--dark"
                 graphicSize="auto 115%"
-                onClick={openNetcanvasFromDialog}
+                onClick={openNetcanvas}
               >
                 <h2>Open</h2>
                 <h3>from Computer</h3>
@@ -106,9 +101,9 @@ const LaunchPad = ({
 };
 
 LaunchPad.propTypes = {
-  openProtocol: PropTypes.func.isRequired,
-  createAndLoadProtocol: PropTypes.func.isRequired,
-  unbundleAndLoadProtocol: PropTypes.func.isRequired,
+  openNetcanvasFile: PropTypes.func.isRequired,
+  openNetcanvas: PropTypes.func.isRequired,
+  createNetcanvas: PropTypes.func.isRequired,
   lastEditedProtocol: PropTypes.object,
   otherRecentProtocols: PropTypes.array,
 };
@@ -130,10 +125,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   createNetcanvas: userActions.createNetcanvas,
-  unbundleAndLoadProtocol: protocolsActions.unbundleAndLoadProtocol,
-  openProtocol: protocolsActions.openProtocol,
-  openNetcanvas: sessionActions.openNetcanvas,
-  openNetcanvasFromDialog: userActions.openNetcanvas,
+  openNetcanvasFile: sessionActions.openNetcanvas,
+  openNetcanvas: userActions.openNetcanvas,
 };
 
 const withState = connect(mapStateToProps, mapDispatchToProps);

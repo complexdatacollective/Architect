@@ -59,7 +59,19 @@ const createNetcanvas = () =>
       .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
 
 
+const saveAsNetcanvas = () =>
+  dispatch =>
+    saveCopyDialog()
+      .then(({ canceled, filePath }) => {
+        if (canceled) { return false; }
+
+        return dispatch(sessionActions.saveAsNetcanvas(filePath));
+      })
+      .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
+
+
 export const actionCreators = {
   openNetcanvas,
   createNetcanvas,
+  saveAsNetcanvas,
 };
