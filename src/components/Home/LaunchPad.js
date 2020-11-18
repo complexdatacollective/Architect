@@ -5,6 +5,7 @@ import { get, first } from 'lodash';
 import { GraphicButton } from '@codaco/ui';
 import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
 import { actionCreators as protocolsActions } from '@modules/protocols';
+import { actionCreators as userActions } from '@modules/userActions';
 import { actionCreators as sessionActions } from '@modules/session';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
@@ -16,6 +17,7 @@ import Sprite from './Sprite';
 const LaunchPad = ({
   openNetcanvas,
   openNetcanvasFromDialog,
+  createNetcanvas,
   createAndLoadProtocol,
   lastEditedProtocol,
   otherRecentProtocols,
@@ -77,7 +79,7 @@ const LaunchPad = ({
                 graphic={createButtonGraphic}
                 graphicPosition="20% bottom"
                 graphicSize="auto 90%"
-                onClick={handleCreateProtocol}
+                onClick={createNetcanvas}
               >
                 <h2>Create</h2>
                 <h3>New Protocol</h3>
@@ -127,11 +129,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  createAndLoadProtocol: protocolsActions.createAndLoadProtocol,
+  createNetcanvas: userActions.createNetcanvas,
   unbundleAndLoadProtocol: protocolsActions.unbundleAndLoadProtocol,
   openProtocol: protocolsActions.openProtocol,
   openNetcanvas: sessionActions.openNetcanvas,
-  openNetcanvasFromDialog: sessionActions.openNetcanvasFromDialog,
+  openNetcanvasFromDialog: userActions.openNetcanvas,
 };
 
 const withState = connect(mapStateToProps, mapDispatchToProps);

@@ -3,6 +3,7 @@ import fse from 'fs-extra';
 import log from 'electron-log';
 import path from 'path';
 import uuid from 'uuid';
+import { APP_SCHEMA_VERSION } from '@app/config';
 import pruneAssets from '@app/utils/protocols/pruneAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 import validateProtocol from '@app/utils/validateProtocol';
@@ -36,28 +37,38 @@ const getStringifiedProtocol = protocol =>
     }
   });
 
+const getTempDir = (...args) => {
+  const dirPath = path.join(remote.app.getPath('temp'), 'architect', ...args);
+  return fse.mkdirp(dirPath)
+    .then(() => dirPath);
+};
+
 /**
  * @param {string} workingPath - working path in application /tmp/protocols/ dir
- * @param {object} protocol - The protocol object.
+ * @param {object} protocol - The protocol object (optional)
  */
 export const createNetcanvasExport = (workingPath, protocol) => {
-  const exportPath = path.join(remote.app.getPath('temp'), 'architect', 'exports', uuid());
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
-  log.info(`Save protocol object to ${protocolJsonPath}`);
 
-  return Promise.resolve(protocol)
-    .then(data =>
-      getStringifiedProtocol(data)
-        .then(protocolData => fse.writeFile(protocolJsonPath, protocolData))
-        .catch(throwHumanReadableError(errors.SaveFailed)),
-    )
-    .then(() =>
-      pruneAssets(workingPath)
-        .catch(throwHumanReadableError(errors.PruneFailed)))
-    .then(() =>
-      archive(workingPath, exportPath)
-        .catch(throwHumanReadableError(errors.ArchiveFailed)))
-    .then(() => exportPath);
+  return getTempDir('exports')
+    .then((exportDir) => {
+      const exportPath = path.join(exportDir, uuid());
+      return Promise.resolve()
+        .then(() => {
+          if (!protocol) { return null; }
+
+          return getStringifiedProtocol(protocol)
+            .then(protocolData => fse.writeFile(protocolJsonPath, protocolData))
+            .catch(throwHumanReadableError(errors.SaveFailed));
+        })
+        .then(() =>
+          pruneAssets(workingPath)
+            .catch(throwHumanReadableError(errors.PruneFailed)))
+        .then(() =>
+          archive(workingPath, exportPath)
+            .catch(throwHumanReadableError(errors.ArchiveFailed)))
+        .then(() => exportPath);
+    });
 };
 
 /**
@@ -68,25 +79,37 @@ export const createNetcanvasExport = (workingPath, protocol) => {
  *
  * @returns A promise which resolves to the destination path.
  */
-export const createNetcanvasImport = (filePath) => {
-  const destinationPath = path.join(remote.app.getPath('temp'), 'architect', 'protocols', uuid());
+export const createNetcanvasImport = filePath =>
+  getTempDir('protocols')
+    .then((protocolsDir) => {
+      const destinationPath = path.join(protocolsDir, uuid());
 
-  return Promise.resolve()
-    .then(() =>
-      fse.access(filePath, fse.constants.W_OK)
-        .catch(throwHumanReadableError(errors.MissingPermissions)),
-    )
-    .then(() =>
-      extract(filePath, destinationPath)
-        .catch(throwHumanReadableError(errors.ExtractFailed)))
-    .then(() => destinationPath);
-};
+      return Promise.resolve()
+        .then(() =>
+          fse.access(filePath, fse.constants.W_OK)
+            .catch(throwHumanReadableError(errors.MissingPermissions)),
+        )
+        .then(() =>
+          extract(filePath, destinationPath)
+            .catch(throwHumanReadableError(errors.ExtractFailed)))
+        .then(() => destinationPath);
+    });
+
+const checkExists = filePath =>
+  fse.access(filePath, fse.constants.R_OK)
+    .then(() => true)
+    .catch(() => false);
 
 export const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
   const backupPath = `${destinationUserPath}.backup-${new Date().getTime()}`;
+
   return Promise.resolve()
     .then(() =>
-      fse.rename(destinationUserPath, backupPath)
+      checkExists()
+        .then((exists) => {
+          if (!exists) { return null; }
+          return fse.rename(destinationUserPath, backupPath);
+        })
         .catch(throwHumanReadableError(errors.BackupFailed)),
     )
     .then(() =>
@@ -95,6 +118,29 @@ export const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
         .catch(throwHumanReadableError(errors.SaveFailed)),
     )
     .then(() => ({ savePath: destinationUserPath, backupPath }));
+};
+
+// TODO: add tests
+// TODO: add readable errors
+export const createNetcanvas = (destinationUserPath) => {
+  const appPath = remote.app.getAppPath();
+  const templatePath = path.join(appPath, 'template');
+
+  return getTempDir('new')
+    .then((newDir) => {
+      const workingPath = path.join(newDir, uuid());
+
+      return fse.copy(templatePath, workingPath)
+        .then(() =>
+          fse.readJson(path.join(templatePath, 'protocol.json')))
+        .then(protocolTemplate => ({ schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate }))
+        .then(protocol => createNetcanvasExport(workingPath, protocol))
+        // .then(console.log)
+        //   .then((...args) => { throw new Error(...args); })
+        .then(netcanvasExportPath =>
+          deployNetcanvas(netcanvasExportPath, destinationUserPath),
+        );
+    });
 };
 
 /**
