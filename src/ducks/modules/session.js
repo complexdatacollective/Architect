@@ -6,6 +6,7 @@ import {
   createNetcanvasImport,
   readProtocol,
 } from '@app/utils/netcanvasFile';
+import { getProtocol } from '@selectors/protocol';
 import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionCreators as previewActions } from '@modules/preview';
 import { actionTypes as protocolStageActionTypes } from '@modules/protocol/stages';
@@ -67,7 +68,7 @@ const saveNetcanvas = () =>
   (dispatch, getState) => {
     const state = getState();
     const session = state.session;
-    const protocol = state.protocol;
+    const protocol = getProtocol(state);
     const workingPath = session.workingPath;
     const filePath = session.filePath;
 
