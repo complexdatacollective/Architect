@@ -1,26 +1,50 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { compose, withHandlers } from 'recompose';
-import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import history from '@app/history';
 import { UnsavedChanges } from '@components/Dialogs';
 import { Button, Spinner } from '@codaco/ui';
 import { getProtocol } from '@selectors/protocol';
 import { getHasUnsavedChanges } from '@selectors/session';
-import { actionCreators as protocolsActions, actionLocks as protocolsLocks } from '@modules/protocols';
+import { actionLocks as protocolsLocks } from '@modules/protocols';
 import { actionCreators as dialogActions } from '@modules/dialogs';
+import { actionCreators as userActions } from '@modules/userActions';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import logoutIcon from '@app/images/home/log-out.svg';
-import ControlBar from './ControlBar';
+import ControlBar from '@components/ControlBar';
 
-const ProtocolControlBar = ({
-  saveProtocol,
-  isSaving,
-  hasAnyStages,
-  hasUnsavedChanges,
-  handleClickStart,
-}) => {
+const unsavedChangesDialog = UnsavedChanges({
+  message: (
+    <div>
+      Are you sure you want to go back to the start screen?
+      <p><strong>Unsaved changes will be lost!</strong></p>
+    </div>
+  ),
+  confirmLabel: 'Go to start screen',
+});
+
+const ProtocolControlBar = () => {
+  const dispatch = useDispatch();
+
+  const hasUnsavedChanges = useSelector(state => getHasUnsavedChanges(state));
+  const hasAnyStages = useSelector(state => getProtocol(state).stages.length > 0);
+  const isSaving = useSelector(state => statusSelectors.getIsBusy(state, protocolsLocks.saving));
   const showSaveButton = hasAnyStages && hasUnsavedChanges;
+
+  const saveNetcanvas = useCallback(() => dispatch(userActions.saveNetcanvas()), [dispatch]);
+
+  const handleClickStart = useCallback(
+    () => Promise.resolve()
+      .then(() => {
+        if (!hasUnsavedChanges) { return true; }
+
+        return dispatch(dialogActions.openDialog(unsavedChangesDialog));
+      })
+      .then((confirm) => {
+        if (!confirm) { return; }
+        history.push('/');
+      }),
+    [dispatch, hasUnsavedChanges],
+  );
 
   return (
     <ControlBar
@@ -38,7 +62,7 @@ const ProtocolControlBar = ({
       buttons={[
         ...(showSaveButton ? [<Button
           key="save-button"
-          onClick={saveProtocol}
+          onClick={saveNetcanvas}
           color="primary"
           data-variant="save"
           disabled={isSaving}
@@ -51,63 +75,4 @@ const ProtocolControlBar = ({
   );
 };
 
-ProtocolControlBar.propTypes = {
-  saveProtocol: PropTypes.func.isRequired,
-  isSaving: PropTypes.bool.isRequired,
-  hasUnsavedChanges: PropTypes.bool,
-  hasAnyStages: PropTypes.bool.isRequired,
-  handleClickStart: PropTypes.func.isRequired,
-};
-
-ProtocolControlBar.defaultProps = {
-  hasUnsavedChanges: false,
-};
-
-const mapStateToProps = (state) => {
-  const hasUnsavedChanges = getHasUnsavedChanges(state);
-  const hasAnyStages = getProtocol(state).stages.length > 0;
-  const isSaving = statusSelectors.getIsBusy(state, protocolsLocks.saving);
-
-  return {
-    isSaving,
-    hasUnsavedChanges,
-    hasAnyStages,
-  };
-};
-
-const linkHandler = withHandlers({
-  handleClickStart: ({
-    hasUnsavedChanges,
-    openDialog,
-  }) =>
-    () => Promise.resolve()
-      .then(() => {
-        if (!hasUnsavedChanges) { return true; }
-
-        return openDialog(UnsavedChanges({
-          message: (
-            <div>
-              Are you sure you want to go back to the start screen?
-              <p><strong>Unsaved changes will be lost!</strong></p>
-            </div>
-          ),
-          confirmLabel: 'Go to start screen',
-        }));
-      })
-      .then((confirm) => {
-        if (!confirm) { return; }
-        history.push('/');
-      }),
-});
-
-const mapDispatchToProps = {
-  saveProtocol: protocolsActions.saveAndBundleProtocol,
-  openDialog: dialogActions.openDialog,
-};
-
-export { ProtocolControlBar };
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  linkHandler,
-)(ProtocolControlBar);
+export default ProtocolControlBar;
