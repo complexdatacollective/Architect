@@ -114,7 +114,7 @@ describe('utils/file', () => {
       )).rejects.toThrow(errors.SaveFailed);
     });
 
-    it.only('does not create a backup if destination does not already exist', async () => {
+    it('does not create a backup if destination does not already exist', async () => {
       fse.rename.mockResolvedValue(true);
       fse.access.mockRejectedValue(new Error());
 
@@ -123,7 +123,11 @@ describe('utils/file', () => {
         userDestinationPath,
       );
 
-      expect(fse.rename.mock.calls).toBe(null);
+      expect(fse.rename.mock.calls.length).toBe(1);
+      expect(fse.rename.mock.calls[0]).toEqual([
+        '/dev/null/get/electron/path/architect/exports/pendingExport',
+        '/dev/null/user/path/export/destination',
+      ]);
 
       expect(result).toEqual({
         backupPath: null,
@@ -131,7 +135,7 @@ describe('utils/file', () => {
       });
     });
 
-    it.only('creates a backup if destination does exist', async () => {
+    it('creates a backup if destination does exist', async () => {
       fse.rename.mockResolvedValue(true);
       fse.access.mockResolvedValue(true);
 
@@ -140,7 +144,15 @@ describe('utils/file', () => {
         userDestinationPath,
       );
 
-      expect(fse.rename.mock.calls).toBe(null);
+      expect(fse.rename.mock.calls.length).toBe(2);
+      expect(fse.rename.mock.calls[0]).toEqual([
+        '/dev/null/user/path/export/destination',
+        expect.stringMatching(/\/dev\/null\/user\/path\/export\/destination\.backup-[0-9]+/),
+      ]);
+      expect(fse.rename.mock.calls[1]).toEqual([
+        '/dev/null/get/electron/path/architect/exports/pendingExport',
+        '/dev/null/user/path/export/destination',
+      ]);
 
       expect(result).toEqual({
         backupPath: expect.stringMatching(/\/dev\/null\/user\/path\/export\/destination\.backup-[0-9]+/),

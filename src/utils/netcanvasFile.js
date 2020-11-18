@@ -107,17 +107,21 @@ export const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
     .then(() =>
       checkExists()
         .then((exists) => {
-          if (!exists) { return null; }
-          return fse.rename(destinationUserPath, backupPath);
+          if (!exists) { return false; }
+          return fse.rename(destinationUserPath, backupPath)
+            .then(() => true);
         })
         .catch(throwHumanReadableError(errors.BackupFailed)),
     )
-    .then(() =>
+    .then(createdBackup =>
       fse.rename(netcanvasExportPath, destinationUserPath)
-        .then(() => new Error('should throw'))
+        .then(() => createdBackup)
         .catch(throwHumanReadableError(errors.SaveFailed)),
     )
-    .then(() => ({ savePath: destinationUserPath, backupPath }));
+    .then(createdBackup => ({
+      savePath: destinationUserPath,
+      backupPath: createdBackup ? backupPath : null,
+    }));
 };
 
 // TODO: add tests
