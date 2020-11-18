@@ -7,6 +7,7 @@ import { getActiveProtocolMeta } from '@selectors/protocols';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { UnsavedChanges } from '@components/Dialogs';
 
+// TODO: robust save update
 const initFileOpener = () => {
   ipcRenderer.on('OPEN_FILE', (event, protocolPath) => {
     // eslint-disable-next-line no-console

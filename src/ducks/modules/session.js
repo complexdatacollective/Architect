@@ -75,7 +75,14 @@ const saveNetcanvas = () =>
       .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { workingPath, filePath } }))
       .then(() => netcanvasExport(workingPath, protocol, filePath))
       .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_NETCANVAS_SUCCESS, payload: { savePath, backupPath } }),
+        dispatch({
+          type: SAVE_NETCANVAS_SUCCESS,
+          payload: {
+            savePath,
+            backupPath,
+            protocol,
+          },
+        }),
       )
       .catch((error) => {
         switch (error.code) {
