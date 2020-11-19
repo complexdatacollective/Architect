@@ -85,7 +85,7 @@ const upgradeProtocol = (filePath, protocolSchemaVersion) =>
 
         return netcanvasFile.migrateNetcanvas(filePath, newFilePath, APP_SCHEMA_VERSION);
       })
-      .then(() => sessionActions.openNetcanvas(filePath))
+      .then(migratedFilePath => dispatch(sessionActions.openNetcanvas(migratedFilePath)))
       .catch((e) => {
         if (e === dialogCancelledError) { return; }
         throw e;

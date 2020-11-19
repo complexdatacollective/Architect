@@ -231,22 +231,21 @@ export const netcanvasExport = (workingPath, protocol, filePath) =>
   createNetcanvasExport(workingPath, protocol)
     .then(exportPath =>
       // open and validate the completed export
-      verifyNetcanvas(exportPath)
+      verifyNetcanvas(exportPath, protocol)
         // rename existing file to backup location, and move export to this location
         // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
         .then(() => deployNetcanvas(exportPath, filePath)),
     );
 
 
-export const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERSION) => {
+export const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERSION) =>
   createNetcanvasImport(filePath)
     .then(workingPath =>
       readProtocol(workingPath)
         .then(protocol => migrateProtocol(protocol, targetVersion))
         .then(([updatedProtocol, migrationSteps]) => {
-          log.info('Migrated protocol', { migrationSteps });
+          log.info('Migrated protocol', { migrationSteps, updatedProtocol });
           return netcanvasExport(workingPath, updatedProtocol, newFilePath);
         }),
     )
-    .then(() => newFilePath);
-};
+    .then(({ savePath }) => savePath);
