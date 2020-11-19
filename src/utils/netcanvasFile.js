@@ -7,7 +7,8 @@ import { isEqual } from 'lodash';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
-import pruneAssets from '@app/utils/protocols/pruneAssets';
+import pruneProtocol from '@app/utils/pruneProtocol';
+import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 
 export const errors = {
@@ -16,7 +17,7 @@ export const errors = {
   ExtractFailed: new Error('Protocol could not be extracted'),
   BackupFailed: new Error('Protocol could not be backed up'),
   SaveFailed: new Error('Protocol could not be saved to destination'),
-  PruneFailed: new Error('Protocol assets could not be updated'),
+  PreflightFailed: new Error('Protocol preflight checks failed'),
   ArchiveFailed: new Error('Protocol could not be archived'),
   MissingProtocolJson: new Error('Protocol does not have a json file'),
   ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
@@ -53,26 +54,57 @@ const getTempDir = (...args) => {
 };
 
 /**
+ * Given the working path for a protocol (in /tmp/protocols `protocol.json`,
+ * returns a promise that resolves to the parsed json object
+ * @param {string} workingPath - The protocol directory.
+ * @returns {object} The protocol as an object
+ */
+export const readProtocol = (workingPath) => {
+  const protocolJsonPath = path.join(workingPath, 'protocol.json');
+
+  return fse.readJson(protocolJsonPath)
+    .catch((e) => {
+      switch (e.code) {
+        case 'ENOENT':
+          return throwHumanReadableError(errors.MissingProtocolJson)(e);
+        default:
+          return throwHumanReadableError(errors.ProtocolJsonParseError)(e);
+      }
+    });
+};
+
+const writeProtocol = (workingPath, protocol) => {
+  const protocolJsonPath = path.join(workingPath, 'protocol.json');
+
+  return getStringifiedProtocol(protocol)
+    .then(protocolData => fse.writeFile(protocolJsonPath, protocolData));
+};
+
+const preflight = workingPath =>
+  pruneProtocolAssets(workingPath)
+    .then(() => readProtocol(workingPath))
+    .then(pruneProtocol)
+    .then(prunedProtocol => writeProtocol(workingPath, prunedProtocol));
+
+/**
  * @param {string} workingPath - working path in application /tmp/protocols/ dir
  * @param {object} protocol - The protocol object (optional)
  */
 export const createNetcanvasExport = (workingPath, protocol) => {
-  const protocolJsonPath = path.join(workingPath, 'protocol.json');
+  if (!protocol) { return Promise.reject(); }
 
   return getTempDir('exports')
     .then((exportDir) => {
       const exportPath = path.join(exportDir, uuid());
       return Promise.resolve()
-        .then(() => {
-          if (!protocol) { return null; }
-
-          return getStringifiedProtocol(protocol)
-            .then(protocolData => fse.writeFile(protocolJsonPath, protocolData))
-            .catch(throwHumanReadableError(errors.SaveFailed));
-        })
         .then(() =>
-          pruneAssets(workingPath)
-            .catch(throwHumanReadableError(errors.PruneFailed)))
+          writeProtocol(workingPath, protocol)
+            .catch(throwHumanReadableError(errors.SaveFailed)),
+        )
+        .then(() =>
+          preflight(workingPath)
+            .catch(throwHumanReadableError(errors.PreflightFailed)),
+        )
         .then(() =>
           archive(workingPath, exportPath)
             .catch(throwHumanReadableError(errors.ArchiveFailed)))
@@ -151,26 +183,6 @@ export const createNetcanvas = (destinationUserPath) => {
         .then(netcanvasExportPath =>
           deployNetcanvas(netcanvasExportPath, destinationUserPath),
         );
-    });
-};
-
-/**
- * Given the working path for a protocol (in /tmp/protocols `protocol.json`,
- * returns a promise that resolves to the parsed json object
- * @param {string} protocolPath - The protocol directory.
- * @returns {object} The protocol as an object
- */
-export const readProtocol = (protocolPath) => {
-  const protocolFile = path.join(protocolPath, 'protocol.json');
-
-  return fse.readJson(protocolFile)
-    .catch((e) => {
-      switch (e.code) {
-        case 'ENOENT':
-          return throwHumanReadableError(errors.MissingProtocolJson)(e);
-        default:
-          return throwHumanReadableError(errors.ProtocolJsonParseError)(e);
-      }
     });
 };
 
