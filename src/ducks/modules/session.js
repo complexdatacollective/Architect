@@ -7,6 +7,7 @@ import {
   readProtocol,
 } from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
+import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
 import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionCreators as previewActions } from '@modules/preview';
 import { actionTypes as protocolStageActionTypes } from '@modules/protocol/stages';
@@ -56,6 +57,7 @@ const openNetcanvas = filePath =>
             payload: { protocol, filePath, workingPath },
           })),
       )
+      .then(() => dispatch(timelineActions.reset()))
       .then(() => history.push('/edit'))
       .catch((error) => {
         switch (error.code) {
