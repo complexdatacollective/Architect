@@ -86,7 +86,7 @@ const LaunchPad = ({
               graphicPosition="0 bottom"
               color="slate-blue--dark"
               graphicSize="auto 115%"
-              onClick={openNetcanvas}
+              onClick={() => openNetcanvas()}
             >
               <h2>Open</h2>
               <h3>from Computer</h3>

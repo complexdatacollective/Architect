@@ -18,9 +18,9 @@ const Protocol = ({
   protocolPath,
 }) => {
   const dispatch = useDispatch();
-  useEffect(() =>
-    () => dispatch(sessionActions.resetSession()),
-  [protocolPath]);
+  // useEffect(() =>
+  //   () => dispatch(sessionActions.resetSession()),
+  // [protocolPath]);
 
   const sceneClasses = cx(
     'scene',

@@ -64,6 +64,8 @@ const openNetcanvas = filePath =>
           default:
             dispatch({ type: OPEN_NETCANVAS_ERROR, payload: { error, filePath } });
         }
+
+        throw error;
       });
 
 const saveNetcanvas = () =>
@@ -92,6 +94,8 @@ const saveNetcanvas = () =>
           default:
             dispatch({ type: SAVE_NETCANVAS_ERROR, payload: { error, workingPath, filePath } });
         }
+
+        throw error;
       });
   };
 
@@ -120,6 +124,8 @@ const saveAsNetcanvas = newFilePath =>
               payload: { error, workingPath, filePath: newFilePath },
             });
         }
+
+        throw error;
       });
   };
 
