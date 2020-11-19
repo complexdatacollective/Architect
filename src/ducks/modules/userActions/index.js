@@ -19,7 +19,12 @@ import {
   validationErrorDialog,
   appUpgradeRequiredDialog,
   mayUpgradeProtocolDialog,
-} from '@modules/protocols/dialogs';
+} from '@modules/userActions/dialogs';
+import { createLock } from '@modules/ui/status';
+
+const protocolsLock = createLock('PROTOCOLS');
+const loadingLock = createLock('PROTOCOLS/LOADING');
+const savingLock = createLock('PROTOCOLS/SAVING');
 
 const { schemaVersionStates } = netcanvasFile;
 
@@ -92,14 +97,18 @@ const upgradeProtocol = (filePath, protocolSchemaVersion) =>
       });
   };
 
-const openNetcanvas = () =>
+const openNetcanvas = netcanvasFilePath =>
   dispatch =>
     Promise.resolve()
       .then(() => dispatch(checkUnsavedChanges))
       .then((confirm) => {
         if (!confirm) { throw dialogCancelledError; }
 
-        return openDialog();
+        if (!netcanvasFilePath) {
+          return openDialog();
+        }
+
+        return { cancelled: null, filePaths: [netcanvasFilePath] };
       })
       .then(({ canceled, filePaths }) => {
         const filePath = filePaths && filePaths[0];
@@ -158,6 +167,11 @@ const saveNetcanvas = () =>
       .then(() => dispatch(validateActiveProtocol()))
       .then(() => dispatch(sessionActions.saveNetcanvas()));
 
+export const actionLocks = {
+  loading: loadingLock,
+  protocols: protocolsLock,
+  saving: savingLock,
+};
 
 export const actionCreators = {
   openNetcanvas,

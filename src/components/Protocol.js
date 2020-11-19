@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
-import { actionLocks as protocolsLocks } from '@modules/protocols';
+import { actionLocks as protocolsLocks } from '@modules/userActions';
 import { actionCreators as sessionActions } from '@modules/session';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
