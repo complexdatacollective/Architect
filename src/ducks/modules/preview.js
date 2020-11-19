@@ -1,5 +1,5 @@
 import { getFormValues } from 'redux-form';
-import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getWorkingPath } from '@selectors/session';
 import { getProtocol } from '@selectors/protocol';
 import previewDriver from '@app/utils/previewDriver';
 
@@ -67,8 +67,7 @@ const previewDraft = (draft, stageIndex) =>
   (dispatch, getState) => {
     const state = getState();
 
-    const activeProtocolMeta = getActiveProtocolMeta(state);
-    const workingPath = activeProtocolMeta && activeProtocolMeta.workingPath;
+    const workingPath = getWorkingPath(state);
 
     const draftProtocol = {
       ...draft,

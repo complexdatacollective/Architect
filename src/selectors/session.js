@@ -6,6 +6,12 @@ export const getActiveProtocol = (state) => {
   return session.filePath;
 };
 
+export const getWorkingPath = (state) => {
+  const session = getSession(state);
+
+  return session.workingPath;
+};
+
 export const getHasUnsavedChanges = (state) => {
   const session = getSession(state);
   const activeProtocol = getActiveProtocol(state);

@@ -7,7 +7,7 @@ import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
 import { Node, Icon, GraphicButton } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getActiveProtocol } from '@selectors/session';
 import codebookGraphic from '@app/images/undraw_science.svg';
 import assetsGraphic from '@app/images/undraw_media.svg';
 import { getProtocol } from '../selectors/protocol';
@@ -148,11 +148,11 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   const protocol = getProtocol(state);
-  const meta = getActiveProtocolMeta(state);
-  const filePath = meta && meta.filePath && path.basename(meta.filePath);
+  const filePath = getActiveProtocol(state);
+  const fileName = filePath && path.basename(filePath);
 
   return {
-    name: filePath,
+    name: fileName,
     description: protocol && protocol.description,
     codebook: protocol && protocol.codebook,
   };

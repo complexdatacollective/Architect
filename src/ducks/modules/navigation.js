@@ -1,14 +1,15 @@
-import { getActiveProtocolMeta } from '@selectors/protocols';
+import { getActiveProtocol } from '@selectors/session';
 import history from '@app/history';
+
+// TODO: are these used anywhere?
 
 const pathTo = (location, edit = true) =>
   (_, getState) => {
     if (!edit) { return `/${location}`; }
     const state = getState();
-    const protocolMeta = getActiveProtocolMeta(state);
-    const protocolId = protocolMeta && protocolMeta.id;
-    if (!protocolId) { return null; }
-    return `/edit/${protocolId}/${location}`;
+    const filePath = getActiveProtocol(state);
+    if (!filePath) { return null; }
+    return `/edit/${location}`;
   };
 
 /**

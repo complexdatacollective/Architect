@@ -3,8 +3,7 @@ import { ipcRenderer } from 'electron';
 import { store } from '@app/ducks/store';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionCreators as protocolsActions } from '@modules/protocols';
-import { getActiveProtocolMeta } from '@selectors/protocols';
-import { getHasUnsavedChanges } from '@selectors/session';
+import { getActiveProtocol, getHasUnsavedChanges } from '@selectors/session';
 import { UnsavedChanges } from '@components/Dialogs';
 
 // TODO: robust save update
@@ -13,11 +12,11 @@ const initFileOpener = () => {
     // eslint-disable-next-line no-console
     console.log(`Open file "${protocolPath}"`);
     const state = store.getState();
-    const meta = getActiveProtocolMeta(state);
+    const filePath = getActiveProtocol(state);
     const hasUnsavedChanges = getHasUnsavedChanges(state);
 
     // If the protocol is already open, no op
-    if (meta && meta.filePath === protocolPath) {
+    if (filePath === protocolPath) {
       // eslint-disable-next-line no-console
       console.log('Already open, do nothing.');
       return;
