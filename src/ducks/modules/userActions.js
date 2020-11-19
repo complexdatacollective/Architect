@@ -83,7 +83,7 @@ const upgradeProtocol = (filePath, protocolSchemaVersion) =>
       .then(({ canceled, filePath: newFilePath }) => {
         if (canceled || !newFilePath) { throw dialogCancelledError; }
 
-        return netcanvasFile.migrateProtocol(filePath, newFilePath, APP_SCHEMA_VERSION);
+        return netcanvasFile.migrateNetcanvas(filePath, newFilePath, APP_SCHEMA_VERSION);
       })
       .then(() => sessionActions.openNetcanvas(filePath))
       .catch((e) => {
