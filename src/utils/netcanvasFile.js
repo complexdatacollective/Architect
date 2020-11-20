@@ -93,23 +93,22 @@ const preflight = workingPath =>
 export const createNetcanvasExport = (workingPath, protocol) => {
   if (!protocol) { return Promise.reject(); }
 
-  return getTempDir('exports')
-    .then((exportDir) => {
-      const exportPath = path.join(exportDir, uuid());
-      return Promise.resolve()
+  return getTempDir('exports', uuid())
+    .then(exportPath =>
+      Promise.resolve()
         .then(() =>
-          writeProtocol(workingPath, protocol)
+          writeProtocol(exportPath, protocol)
             .catch(throwHumanReadableError(errors.SaveFailed)),
         )
         .then(() =>
-          preflight(workingPath)
+          preflight(exportPath)
             .catch(throwHumanReadableError(errors.PreflightFailed)),
         )
         .then(() =>
           archive(workingPath, exportPath)
             .catch(throwHumanReadableError(errors.ArchiveFailed)))
-        .then(() => exportPath);
-    });
+        .then(() => exportPath),
+    );
 };
 
 /**

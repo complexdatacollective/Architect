@@ -3,7 +3,8 @@
 import fse from 'fs-extra';
 import path from 'path';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
-import pruneAssets from '@app/utils/protocols/pruneAssets';
+import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
+import pruneProtocol from '@app/utils/pruneProtocol';
 import {
   errors,
   createNetcanvasImport,
@@ -15,7 +16,8 @@ import {
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
-jest.mock('@app/utils/protocols/pruneAssets');
+jest.mock('@app/utils/pruneProtocolAssets');
+jest.mock('@app/utils/pruneProtocol');
 
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 
@@ -55,29 +57,31 @@ describe('utils/file', () => {
       fse.writeFile.mockRejectedValueOnce(new Error());
 
       await expect(() => createNetcanvasExport(workingPath, {}))
-        .rejects.toThrow(errors.SaveFailed);
+        .rejects.toThrowError(errors.SaveFailed);
     });
 
-    it('rejects with a readable error when asset pruning fails', async () => {
+    it('rejects with a readable error when preflight checks fails', async () => {
       fse.writeFile.mockResolvedValueOnce(true);
-      pruneAssets.mockRejectedValueOnce(new Error());
+      pruneProtocolAssets.mockRejectedValueOnce(new Error());
 
       await expect(createNetcanvasExport(workingPath, {}))
-        .rejects.toThrow(errors.PruneFailed);
+        .rejects.toThrowError(errors.PreflightFailed);
     });
 
     it('rejects with a readable error when archive fails', async () => {
-      fse.writeFile.mockResolvedValueOnce(true);
-      pruneAssets.mockResolvedValueOnce(true);
+      fse.writeFile.mockImplementation(() => Promise.resolve());
+      fse.readJson.mockResolvedValueOnce({});
+      pruneProtocolAssets.mockResolvedValueOnce(true);
+      pruneProtocol.mockResolvedValueOnce({});
       archive.mockRejectedValueOnce(new Error());
 
       await expect(createNetcanvasExport(workingPath, {}))
-        .rejects.toThrow(errors.ArchiveFailed);
+        .rejects.toThrowError(errors.ArchiveFailed);
     });
 
     it('resolves to a uuid path in temp', async () => {
       fse.writeFile.mockResolvedValueOnce(true);
-      pruneAssets.mockResolvedValueOnce(true);
+      pruneProtocolAssets.mockResolvedValueOnce(true);
       archive.mockResolvedValueOnce(true);
 
       await expect(createNetcanvasExport(workingPath, {}))
