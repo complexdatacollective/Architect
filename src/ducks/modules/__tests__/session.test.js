@@ -105,7 +105,6 @@ describe('session module', () => {
   });
 
   describe('actions', () => {
-
     it('open netcanvas dispatches the correct actions and side-effects', async () => {
       const store = mockStore();
       createNetcanvasImport.mockResolvedValueOnce('/dev/null/working/path');
@@ -137,6 +136,9 @@ describe('session module', () => {
             workingPath: '/dev/null/working/path',
           },
         },
+        {
+          type: 'TIMELINE/RESET',
+        },
       ]);
     });
 
@@ -146,7 +148,7 @@ describe('session module', () => {
           workingPath: '/dev/null/working/path',
           filePath: '/dev/null/user/file/path.netcanvas',
         },
-        protocol: { schemaVersion: 4 },
+        protocol: { present: { schemaVersion: 4 } },
       });
       netcanvasExport.mockReset();
       netcanvasExport.mockImplementation((
@@ -182,6 +184,7 @@ describe('session module', () => {
         {
           payload: {
             backupPath: '/dev/null/user/file/path.netcanvas.backup',
+            protocol: { schemaVersion: 4 },
             savePath: '/dev/null/user/file/path.netcanvas',
           },
           type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
