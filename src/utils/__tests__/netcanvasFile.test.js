@@ -27,14 +27,14 @@ describe('utils/file', () => {
       fse.access.mockRejectedValueOnce(new Error());
 
       await expect(() => createNetcanvasImport(mockProtocol))
-        .rejects.toThrow(errors.MissingPermissions);
+        .rejects.toThrowError(errors.MissingPermissions);
     });
 
     it('rejects with a readable error when it cannot extract a protocol', async () => {
       extract.mockRejectedValueOnce(new Error());
 
       await expect(createNetcanvasImport(mockProtocol))
-        .rejects.toThrow(errors.ExtractFailed);
+        .rejects.toThrowError(errors.ExtractFailed);
     });
 
     it('resolves to a uuid path in temp', async () => {
@@ -52,7 +52,7 @@ describe('utils/file', () => {
 
     it('rejects with a readable error when protocol cannot be saved', async () => {
       await expect(() => createNetcanvasExport(workingPath, circularProtocol))
-        .rejects.toThrow(errors.SaveFailed);
+        .rejects.toThrowError(errors.SaveFailed);
 
       fse.writeFile.mockRejectedValueOnce(new Error());
 
@@ -103,7 +103,7 @@ describe('utils/file', () => {
       await expect(deployNetcanvas(
         netcanvasFilePath,
         userDestinationPath,
-      )).rejects.toThrow(errors.BackupFailed);
+      )).rejects.toThrowError(errors.BackupFailed);
     });
 
     it('reject with a readable error if cannot be substituted', async () => {
@@ -113,7 +113,7 @@ describe('utils/file', () => {
       await expect(deployNetcanvas(
         netcanvasFilePath,
         userDestinationPath,
-      )).rejects.toThrow(errors.SaveFailed);
+      )).rejects.toThrowError(errors.SaveFailed);
     });
 
     it('does not create a backup if destination does not already exist', async () => {
@@ -175,7 +175,7 @@ describe('utils/file', () => {
 
       await expect(
         readProtocol('/non/existing/path'),
-      ).rejects.toThrow(errors.MissingProtocolJson);
+      ).rejects.toThrowError(errors.MissingProtocolJson);
     });
 
     it('Rejects with a human readable error when protocol cannot be parsed', async () => {
@@ -194,7 +194,7 @@ describe('utils/file', () => {
 
       await expect(
         readProtocol('/var/null/'),
-      ).rejects.toThrow(errors.ProtocolJsonParseError);
+      ).rejects.toThrowError(errors.ProtocolJsonParseError);
     });
 
     it('Resolves to protocol', async () => {
@@ -219,7 +219,7 @@ describe('utils/file', () => {
       fse.readJson.mockRejectedValue(new Error());
 
       await expect(verifyNetcanvas(mockProtocol))
-        .rejects.toThrow(errors.NetcanvasCouldNotValidate);
+        .rejects.toThrowError(errors.NetcanvasCouldNotValidate);
     });
 
     it('Rejects with a human readable error when verification fails', async () => {
@@ -228,7 +228,7 @@ describe('utils/file', () => {
       fse.readJson.mockResolvedValue({ schemaVersion: 4 });
 
       await expect(verifyNetcanvas(mockProtocol, {}))
-        .rejects.toThrow(errors.NetcanvasVerificationError);
+        .rejects.toThrowError(errors.NetcanvasVerificationError);
     });
 
     it('Resolves to filePath if validation passes', async () => {
