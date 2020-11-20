@@ -31,12 +31,24 @@ const schemaVersionStates = {
   OK: 'OK',
 };
 
+/**
+ * Helper function generator for use with `.catch()`. The original error
+ * is logged, and then substituted for the custom error object, which is
+ * thrown.
+ * @param readableError An error object
+ * @returns {function} A function that can be used inside .catch();
+ */
 const throwHumanReadableError = readableError =>
   (e) => {
     log.error(e);
     throw readableError;
   };
 
+/**
+ * Stringify a protocol with pretty formatting
+ * @param protocol Protocol object
+ * @returns {Promise} Resolves to protocol as a string
+ */
 const getStringifiedProtocol = protocol =>
   new Promise((resolve, reject) => {
     try {
@@ -47,12 +59,21 @@ const getStringifiedProtocol = protocol =>
     }
   });
 
+/**
+ * Essentially the same as path.join, but also creates the directory.
+ * @returns {Promise} Resolves to path as a string
+ */
 const getTempDir = (...args) => {
   const dirPath = path.join(remote.app.getPath('temp'), 'architect', ...args);
   return fse.mkdirp(dirPath)
     .then(() => dirPath);
 };
 
+/**
+ * Check that a given file has read access (R_OK)
+ * @param {string} filePath
+ * @returns {Promise} Resolves to true if file is readable or false otherwise
+ */
 const checkExists = filePath =>
   fse.access(filePath, fse.constants.R_OK)
     .then(() => true)
@@ -61,7 +82,7 @@ const checkExists = filePath =>
 /**
  * Given the working path for a protocol (in /tmp/protocols `protocol.json`,
  * returns a promise that resolves to the parsed json object
- * @param {string} workingPath - The protocol directory.
+ * @param {string} workingPath The protocol directory.
  * @returns {object} The protocol as an object
  */
 const readProtocol = (workingPath) => {
@@ -78,6 +99,13 @@ const readProtocol = (workingPath) => {
     });
 };
 
+/**
+ * Given the working path for a protocol (in /tmp/protocols `protocol.json`,
+ * returns a promise that resolves to the parsed json object
+ * @param {string} workingPath The protocol directory.
+ * @param {object} protocol the protocol data to write
+ * @returns {Promise}
+ */
 const writeProtocol = (workingPath, protocol) => {
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
 
@@ -85,15 +113,24 @@ const writeProtocol = (workingPath, protocol) => {
     .then(protocolData => fse.writeFile(protocolJsonPath, protocolData));
 };
 
+/**
+ * Removes assets that aren't referenced in the protocol, and removes any
+ * unsuported JSON values.
+ *
+ * @param workingPath directory of uncompressed .netcanvas file
+ * @returns {Promise} Resolves to true
+ */
 const preflight = workingPath =>
   pruneProtocolAssets(workingPath)
     .then(() => readProtocol(workingPath))
     .then(pruneProtocol)
-    .then(prunedProtocol => writeProtocol(workingPath, prunedProtocol));
+    .then(prunedProtocol => writeProtocol(workingPath, prunedProtocol))
+    .then(() => true);
 
 /**
  * @param {string} workingPath - working path in application /tmp/protocols/ dir
  * @param {object} protocol - The protocol object (optional)
+ * @returns {Promise} Resolves to a path in temp (random)
  */
 const createNetcanvasExport = (workingPath, protocol) => {
   if (!protocol) { return Promise.reject(); }
@@ -121,8 +158,7 @@ const createNetcanvasExport = (workingPath, protocol) => {
  * tmp directory. If bundled, extract it, if not, copy it.
  *
  * @param filePath .netcanvas file path
- *
- * @returns A promise which resolves to the destination path.
+ * @returns {Promise} Resolves to a path in temp (random)
  */
 const createNetcanvasImport = filePath =>
   getTempDir('protocols')
@@ -140,6 +176,14 @@ const createNetcanvasImport = filePath =>
         .then(() => destinationPath);
     });
 
+/**
+ * Move a netcanvas file located in temporary directory into user space.
+ * If the destination exists, make a backup copy of that file.
+ *
+ * @param netcanvasExportPath .netcanvas file path in temp
+ * @param destinationUserPath Destination path
+ * @returns {Promise} Resolves to { savePath, backupPath } if successful
+ */
 const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
   const backupPath = `${destinationUserPath}.backup-${new Date().getTime()}`;
 
@@ -164,6 +208,12 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
     }));
 };
 
+/**
+ * Create a new .netcanvas file at the target location.
+ *
+ * @param destinationUserPath Destination path
+ * @returns {Promise} Resolves to { savePath, backupPath }
+ */
 // TODO: add tests
 // TODO: add readable errors
 const createNetcanvas = (destinationUserPath) => {
@@ -185,6 +235,14 @@ const createNetcanvas = (destinationUserPath) => {
     });
 };
 
+/**
+ * Asseses a .netcanvas file schema version against the app schema version (or
+ * optional specified version). Returns a status code from `schemaVersionStates`.
+ *
+ * @param filePath .netcanvas file path
+ * @param referenceVersion (optional) schema version for comparison
+ * @returns {Promise} Resolves to a `schemaVersionStatus`
+ */
 const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSION) =>
   createNetcanvasImport(filePath)
     .then(readProtocol)
@@ -211,7 +269,7 @@ const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSION) =>
 /**
  * Verify that a netcanvas file matches a protocol object
  * @param filePath - .netcanvas file path
- * @returns {Promise} Resolves to true if protocol is read successfully
+ * @returns {Promise} Resolves to `filePath`
  */
 const verifyNetcanvas = (filePath, protocol) =>
   Promise.resolve()
@@ -234,8 +292,8 @@ const verifyNetcanvas = (filePath, protocol) =>
 
 /**
  * Save the protocol to the target filepath, verify before moving to userspace
- * @param filePath - .netcanvas file path
- * @returns {Promise} Resolves to { savePath, backupPath } if successful
+ * @param filePath .netcanvas file path
+ * @returns {Promise} Resolves to { savePath, backupPath }
  */
 const netcanvasExport = (workingPath, protocol, filePath) =>
   // export protocol to random temp location
@@ -248,7 +306,15 @@ const netcanvasExport = (workingPath, protocol, filePath) =>
         .then(() => deployNetcanvas(exportPath, filePath)),
     );
 
-
+/**
+ * Upgrades a .netcanvas file to the app schema version (or optional specified version).
+ * Creates a new file for the updated .netcanvas
+ *
+ * @param filePath .netcanvas file path
+ * @param newFilePath destination file path
+ * @param targetVersion (optional) target version to migrate to
+ * @returns {Promise} Resolves to `newFilePath`
+ */
 const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERSION) =>
   createNetcanvasImport(filePath)
     .then(workingPath =>

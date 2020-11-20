@@ -147,7 +147,7 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  describe.only('deployNetcanvas(exportPath, destinationPath)', () => {
+  describe('deployNetcanvas(exportPath, destinationPath)', () => {
     const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
     const userDestinationPath = '/dev/null/user/path/export/destination';
 

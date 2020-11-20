@@ -1,4 +1,4 @@
-import { toPairs, isArray, isEmpty, isObject, isNull } from 'lodash';
+import { toPairs, isArray, isEmpty, isObject, isNull, isUndefined } from 'lodash';
 
 const assignForType = (memo, key, value) => {
   if (isArray(memo)) {
@@ -15,7 +15,7 @@ const assignForType = (memo, key, value) => {
 };
 
 const shouldPrune = x =>
-  isNull(x) || (isObject(x) && isEmpty(x)) || (isArray(x) && x.length === 0);
+  isNull(x) || isUndefined(x) || (isObject(x) && isEmpty(x)) || (isArray(x) && x.length === 0);
 
 const pruneObjects = (obj) => {
   const getNextValue = (value) => {
@@ -41,12 +41,12 @@ const pruneObjects = (obj) => {
 
 const pruneProtocol = protocol =>
   new Promise((resolve) => {
-    const simplifiedProtocol = pruneObjects(protocol);
+    const prunedObjects = pruneObjects(protocol);
 
-    const protocolJson = JSON.stringify(simplifiedProtocol);
-    const protocolObject = JSON.parse(protocolJson);
+    const protocolString = JSON.stringify(prunedObjects);
+    const result = JSON.parse(protocolString);
 
-    return resolve(protocolObject);
+    return resolve(result);
   });
 
 export default pruneProtocol;
