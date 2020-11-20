@@ -3,7 +3,7 @@
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import reducer, { actionCreators, actionTypes } from '../screens';
-import { actionTypes as loadActionTypes } from '../../protocols/load';
+import { actionTypes as sessionActionTypes } from '../../session';
 
 const mockStore = configureStore([thunk]);
 
@@ -27,7 +27,7 @@ describe('ui', () => {
 
   describe('LOAD_PROTOCOL_SUCCESS', () => {
     it('resets screens', () => {
-      const loadAction = { type: loadActionTypes.LOAD_PROTOCOL_SUCCESS };
+      const loadAction = { type: sessionActionTypes.OPEN_PROTOCOL_SUCCESS };
       const stateWithScreens = {
         ...initialState,
         screens: [
