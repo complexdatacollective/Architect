@@ -24,6 +24,7 @@ export const readFile = jest.fn(callbackOrPromise);
 export const readJson = jest.fn(() => Promise.resolve());
 export const rename = jest.fn(() => Promise.resolve());
 export const writeFile = jest.fn((filename, content, cb) => cb());
+export const writeJson = jest.fn(() => Promise.reject());
 
 export const constants = {
   R_OK: Symbol('R_OK'),
@@ -44,4 +45,5 @@ export default {
   readJson,
   rename,
   writeFile,
+  writeJson,
 };

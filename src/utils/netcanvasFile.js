@@ -17,7 +17,6 @@ const errors = {
   ExtractFailed: new Error('Protocol could not be extracted'),
   BackupFailed: new Error('Protocol could not be backed up'),
   SaveFailed: new Error('Protocol could not be saved to destination'),
-  PreflightFailed: new Error('Protocol preflight checks failed'),
   ArchiveFailed: new Error('Protocol could not be archived'),
   MissingProtocolJson: new Error('Protocol does not have a json file'),
   ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
@@ -43,21 +42,6 @@ const throwHumanReadableError = readableError =>
     log.error(e);
     throw readableError;
   };
-
-/**
- * Stringify a protocol with pretty formatting
- * @param protocol Protocol object
- * @returns {Promise} Resolves to protocol as a string
- */
-const getStringifiedProtocol = protocol =>
-  new Promise((resolve, reject) => {
-    try {
-      return resolve(JSON.stringify(protocol, null, 2));
-    } catch (e) {
-      log.error(e);
-      return reject(e);
-    }
-  });
 
 /**
  * Essentially the same as path.join, but also creates the directory.
@@ -100,8 +84,9 @@ const readProtocol = (workingPath) => {
 };
 
 /**
- * Given the working path for a protocol (in /tmp/protocols `protocol.json`,
- * returns a promise that resolves to the parsed json object
+ * Given the working path for a protocol (in /tmp/protocols `protocol.json`.
+ * Removes assets that aren't referenced in the protocol, and removes any
+ * unsuported JSON values.
  * @param {string} workingPath The protocol directory.
  * @param {object} protocol the protocol data to write
  * @returns {Promise}
@@ -109,23 +94,14 @@ const readProtocol = (workingPath) => {
 const writeProtocol = (workingPath, protocol) => {
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
 
-  return getStringifiedProtocol(protocol)
-    .then(protocolData => fse.writeFile(protocolJsonPath, protocolData));
+  return Promise.resolve()
+    .then(() => pruneProtocol(protocol))
+    .then(prunedProtocol =>
+      fse.writeJson(protocolJsonPath, prunedProtocol, { spaces: 2 })
+        .then(() => pruneProtocolAssets(workingPath))
+        .then(() => prunedProtocol),
+    );
 };
-
-/**
- * Removes assets that aren't referenced in the protocol, and removes any
- * unsuported JSON values.
- *
- * @param workingPath directory of uncompressed .netcanvas file
- * @returns {Promise} Resolves to true
- */
-const preflight = workingPath =>
-  pruneProtocolAssets(workingPath)
-    .then(() => readProtocol(workingPath))
-    .then(pruneProtocol)
-    .then(prunedProtocol => writeProtocol(workingPath, prunedProtocol))
-    .then(() => true);
 
 /**
  * @param {string} workingPath - working path in application /tmp/protocols/ dir
@@ -135,22 +111,16 @@ const preflight = workingPath =>
 const createNetcanvasExport = (workingPath, protocol) => {
   if (!protocol) { return Promise.reject(); }
 
-  return getTempDir('exports', uuid())
-    .then(exportPath =>
-      Promise.resolve()
-        .then(() =>
-          writeProtocol(exportPath, protocol)
-            .catch(throwHumanReadableError(errors.SaveFailed)),
-        )
-        .then(() =>
-          preflight(exportPath)
-            .catch(throwHumanReadableError(errors.PreflightFailed)),
-        )
-        .then(() =>
-          archive(workingPath, exportPath)
-            .catch(throwHumanReadableError(errors.ArchiveFailed)))
-        .then(() => exportPath),
-    );
+  return writeProtocol(workingPath, protocol)
+    .catch(throwHumanReadableError(errors.SaveFailed))
+    .then(() => getTempDir('exports'))
+    .then((exportDir) => {
+      const exportPath = path.join(exportDir, uuid());
+
+      return archive(workingPath, exportPath)
+        .catch(throwHumanReadableError(errors.ArchiveFailed))
+        .then(() => exportPath);
+    });
 };
 
 /**
@@ -332,7 +302,6 @@ export {
   schemaVersionStates,
   writeProtocol,
   readProtocol,
-  preflight,
   createNetcanvas,
   createNetcanvasExport,
   createNetcanvasImport,

@@ -29,6 +29,7 @@ describe('utils/netcanvasFile', () => {
     fse.readJson.mockReset();
     fse.rename.mockReset();
     fse.writeFile.mockReset();
+    fse.writeJson.mockReset();
     pruneProtocol.mockReset();
     pruneProtocolAssets.mockReset();
   });
@@ -92,19 +93,11 @@ describe('utils/netcanvasFile', () => {
         .rejects.toThrowError(errors.SaveFailed);
     });
 
-    it('rejects with a readable error when preflight checks fails', async () => {
-      fse.writeFile.mockResolvedValueOnce(true);
-      pruneProtocolAssets.mockRejectedValueOnce(new Error());
-
-      await expect(createNetcanvasExport(workingPath, {}))
-        .rejects.toThrowError(errors.PreflightFailed);
-    });
-
     it('rejects with a readable error when archive fails', async () => {
-      fse.writeFile.mockImplementation(() => Promise.resolve());
+      fse.writeJson.mockResolvedValue(true);
       fse.readJson.mockResolvedValueOnce({});
       pruneProtocolAssets.mockResolvedValueOnce(true);
-      pruneProtocol.mockResolvedValueOnce({});
+      pruneProtocol.mockReturnValueOnce({});
       archive.mockRejectedValueOnce(new Error());
 
       await expect(createNetcanvasExport(workingPath, {}))
@@ -112,10 +105,10 @@ describe('utils/netcanvasFile', () => {
     });
 
     it('resolves to a uuid path in temp', async () => {
-      fse.writeFile.mockImplementation(() => Promise.resolve());
       fse.readJson.mockResolvedValueOnce({});
+      fse.writeJson.mockResolvedValue(true);
       pruneProtocolAssets.mockResolvedValueOnce(true);
-      pruneProtocol.mockResolvedValueOnce({});
+      pruneProtocol.mockReturnValueOnce({});
       archive.mockResolvedValueOnce(true);
 
       await expect(createNetcanvasExport(workingPath, {}))

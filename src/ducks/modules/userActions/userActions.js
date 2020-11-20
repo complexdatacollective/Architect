@@ -58,7 +58,6 @@ const checkUnsavedChanges = () =>
           });
       });
 
-
 const getNewFileName = filePath =>
   Promise.resolve(path.basename(filePath, '.netcanvas'))
     .then(basename =>
@@ -139,28 +138,36 @@ const createNetcanvas = () =>
     Promise.resolve()
       .then(() => dispatch(checkUnsavedChanges))
       .then((confirm) => {
-        if (!confirm) { return false; }
+        if (!confirm) { throw dialogCancelledError; }
 
         return saveDialog(createDialogOptions);
       })
       .then(({ canceled, filePath }) => {
-        if (canceled) { return false; }
+        if (canceled) { throw dialogCancelledError; }
 
         return netcanvasFile.createNetcanvas(filePath);
       })
-      .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
+      .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
+      .catch((e) => {
+        if (e === dialogCancelledError) { return; }
+        throw e;
+      });
 
 
 const saveAsNetcanvas = () =>
   dispatch =>
     saveCopyDialog()
       .then(({ canceled, filePath }) => {
-        if (canceled) { return false; }
+        if (canceled) { throw dialogCancelledError; }
 
         return dispatch(sessionActions.saveAsNetcanvas(filePath));
       })
       .then(() => dispatch(validateActiveProtocol()))
-      .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
+      .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
+      .catch((e) => {
+        if (e === dialogCancelledError) { return; }
+        throw e;
+      });
 
 const saveNetcanvas = () =>
   dispatch =>
