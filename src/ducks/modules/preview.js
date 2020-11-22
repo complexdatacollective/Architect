@@ -50,9 +50,11 @@ const refresh = () => ({
   type: REFRESH_PREVIEW,
 });
 
-const closePreview = () => ({
-  type: CLOSE_PREVIEW,
-});
+const closePreview = () =>
+  (dispatch) => {
+    dispatch({ type: CLOSE_PREVIEW });
+    previewDriver.close();
+  };
 
 const clearPreview = () =>
   (dispatch) => {

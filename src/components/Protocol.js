@@ -7,7 +7,8 @@ import { getHasUnsavedChanges } from '@selectors/session';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionLocks as protocolsLocks } from '@modules/userActions';
-import { actionCreators as sessionActions } from '@modules/session';
+// import { actionCreators as sessionActions } from '@modules/session';
+import { actionCreators as previewActions } from '@modules/preview';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
 import ProtocolControlBar from '@components/ProtocolControlBar';
@@ -18,9 +19,12 @@ const Protocol = ({
   protocolPath,
 }) => {
   const dispatch = useDispatch();
-  // useEffect(() =>
-  //   () => dispatch(sessionActions.resetSession()),
-  // [protocolPath]);
+  useEffect(() =>
+    () => {
+      // dispatch(sessionActions.resetSession());
+      dispatch(previewActions.closePreview());
+    },
+  [protocolPath]);
 
   const sceneClasses = cx(
     'scene',

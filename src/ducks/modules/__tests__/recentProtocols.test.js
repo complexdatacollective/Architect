@@ -30,7 +30,7 @@ describe('recentProtocols', () => {
         initialState,
         {
           type: sessionActionTypes.OPEN_NETCANVAS_ERROR,
-          payload: {filePath: missingFilePath },
+          payload: { filePath: missingFilePath },
         },
       );
 
