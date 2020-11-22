@@ -1,10 +1,51 @@
 import React from 'react';
 import path from 'path';
 import Markdown from 'react-markdown';
+import { errors as netcanvasFileErrors } from '@app/utils/netcanvasFile';
 import ExternalLink from '@components/ExternalLink';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 
-export const validationErrorDialog = (e) => {
+const getFriendlyMessage = (e) => {
+  switch (e) {
+    case netcanvasFileErrors.CreateTemplateFailed:
+      return (<p>New protocol could not be created</p>);
+    case netcanvasFileErrors.MissingSchemaVersion:
+      return (<p>Schema version not defined in protocol</p>);
+    case netcanvasFileErrors.MissingPermissions:
+      return (<p>Protocol does not have read/write permissions</p>);
+    case netcanvasFileErrors.ExtractFailed:
+      return (<p>Protocol could not be extracted</p>);
+    case netcanvasFileErrors.BackupFailed:
+      return (<p>Protocol could not be backed up</p>);
+    case netcanvasFileErrors.SaveFailed:
+      return (<p>Protocol could not be saved to destination</p>);
+    case netcanvasFileErrors.ArchiveFailed:
+      return (<p>Protocol could not be archived</p>);
+    case netcanvasFileErrors.MissingProtocolJson:
+      return (<p>Protocol does not have a json file</p>);
+    case netcanvasFileErrors.ProtocolJsonParseError:
+      return (<p>Protocol json could not be parsed</p>);
+    case netcanvasFileErrors.NetcanvasCouldNotValidate:
+      return (<p>Netcanvas file could not be validated</p>);
+    case netcanvasFileErrors.NetcanvasVerificationError:
+      return (<p>Netcanvas file could not be verifed</p>);
+    default:
+      return null;
+  }
+};
+
+const fileErrorHandler = (e) => {
+  const friendlyMessage = getFriendlyMessage(e);
+
+  if (friendlyMessage) { e.friendlyMessage = friendlyMessage; }
+
+  return dialogActions.openDialog({
+    type: 'Error',
+    error: e,
+  });
+};
+
+const validationErrorDialog = (e) => {
   e.friendlyMessage = (
     <React.Fragment>
       <p>
@@ -26,7 +67,7 @@ export const validationErrorDialog = (e) => {
   });
 };
 
-export const saveErrorDialog = (e, filePath) => {
+const saveErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <p>
       <em>{path.basename(filePath)}</em> could not be saved. See
@@ -40,7 +81,7 @@ export const saveErrorDialog = (e, filePath) => {
   });
 };
 
-export const writeErrorDialog = (e, filePath) => {
+const writeErrorDialog = (e, filePath) => {
   e.friendlyMessage = (
     <React.Fragment>
       <p>
@@ -61,7 +102,7 @@ export const writeErrorDialog = (e, filePath) => {
   });
 };
 
-export const importErrorDialog = (e, filePath) => {
+const importErrorDialog = (e, filePath) => {
   const error = e || new Error('An unknown error occurred.');
   error.friendlyMessage = (
     <React.Fragment>
@@ -74,7 +115,7 @@ export const importErrorDialog = (e, filePath) => {
   });
 };
 
-export const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
+const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
   const message = (
     <React.Fragment>
       <p>This protocol is not compatible with the current version of Architect.</p>
@@ -96,7 +137,7 @@ export const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
   });
 };
 
-export const mayUpgradeProtocolDialog = (
+const mayUpgradeProtocolDialog = (
   protocolSchemaVersion,
   targetSchemaVersion,
   migrationNotes = [],
@@ -141,4 +182,14 @@ export const mayUpgradeProtocolDialog = (
     confirmLabel: 'Create upgraded copy',
     message,
   });
+};
+
+export {
+  fileErrorHandler,
+  validationErrorDialog,
+  appUpgradeRequiredDialog,
+  saveErrorDialog,
+  writeErrorDialog,
+  importErrorDialog,
+  mayUpgradeProtocolDialog,
 };

@@ -12,6 +12,7 @@ import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 
 const errors = {
+  CreateTemplateFailed: new Error('New protocol template could not be created'),
   MissingSchemaVersion: new Error('Schema version not defined in protocol'),
   MissingPermissions: new Error('Protocol does not have read/write permissions'),
   ExtractFailed: new Error('Protocol could not be extracted'),
@@ -195,9 +196,9 @@ const createNetcanvas = (destinationUserPath) => {
       const workingPath = path.join(newDir, uuid());
 
       return fse.copy(templatePath, workingPath)
-        .then(() =>
-          fse.readJson(path.join(templatePath, 'protocol.json')))
+        .then(() => fse.readJson(path.join(templatePath, 'protocol.json')))
         .then(protocolTemplate => ({ schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate }))
+        .catch(throwHumanReadableError(errors.CreateTemplateFailed))
         .then(protocol => createNetcanvasExport(workingPath, protocol))
         .then(netcanvasExportPath =>
           deployNetcanvas(netcanvasExportPath, destinationUserPath),

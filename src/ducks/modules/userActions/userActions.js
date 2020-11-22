@@ -19,6 +19,7 @@ import {
   validationErrorDialog,
   appUpgradeRequiredDialog,
   mayUpgradeProtocolDialog,
+  fileErrorHandler,
 } from '@modules/userActions/dialogs';
 import { createLock } from '@modules/ui/status';
 
@@ -130,7 +131,7 @@ const openNetcanvas = netcanvasFilePath =>
       })
       .catch((e) => {
         if (e === dialogCancelledError) { return; }
-        throw e;
+        dispatch(fileErrorHandler(e));
       });
 
 const createNetcanvas = () =>
@@ -150,7 +151,7 @@ const createNetcanvas = () =>
       .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
       .catch((e) => {
         if (e === dialogCancelledError) { return; }
-        throw e;
+        dispatch(fileErrorHandler(e));
       });
 
 
@@ -166,14 +167,15 @@ const saveAsNetcanvas = () =>
       .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
       .catch((e) => {
         if (e === dialogCancelledError) { return; }
-        throw e;
+        dispatch(fileErrorHandler(e));
       });
 
 const saveNetcanvas = () =>
   dispatch =>
     Promise.resolve()
       .then(() => dispatch(validateActiveProtocol()))
-      .then(() => dispatch(sessionActions.saveNetcanvas()));
+      .then(() => dispatch(sessionActions.saveNetcanvas()))
+      .catch(e => dispatch(fileErrorHandler(e)));
 
 export const actionLocks = {
   loading: loadingLock,
