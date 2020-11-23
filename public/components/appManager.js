@@ -115,8 +115,8 @@ class AppManager {
     ipcMain.on('ACTION', (e, action) => {
       log.info('receive: ACTION', action.type);
       switch (action.type) {
-        case 'PROTOCOLS/LOAD_SUCCESS':
-          this.activeProtocol = action.meta;
+        case 'SESSION/OPEN_NETCANVAS_SUCCESS':
+          this.activeProtocol = action.payload.filePath;
           this.updateMenu();
           break;
         case 'SESSION/RESET':

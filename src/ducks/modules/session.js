@@ -51,6 +51,7 @@ const openNetcanvas = filePath =>
           .then(protocol => dispatch({
             type: OPEN_NETCANVAS_SUCCESS,
             payload: { protocol, filePath, workingPath },
+            ipc: true,
           })),
       )
       .then(() => dispatch(timelineActions.reset()))
