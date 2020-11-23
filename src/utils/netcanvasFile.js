@@ -7,6 +7,7 @@ import { isEqual } from 'lodash';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
+import validateProtocol from '@app/utils/validateProtocol';
 import pruneProtocol from '@app/utils/pruneProtocol';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
@@ -21,7 +22,7 @@ const errors = {
   ArchiveFailed: new Error('Protocol could not be archived'),
   MissingProtocolJson: new Error('Protocol does not have a json file'),
   ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
-  NetcanvasCouldNotValidate: new Error('Netcanvas file could not be validated'),
+  NetcanvasCouldNotBeOpened: new Error('Netcanvas file could not be opened'),
   NetcanvasVerificationError: new Error('Netcanvas file could not be verifed'),
 };
 
@@ -249,7 +250,7 @@ const verifyNetcanvas = (filePath, protocol) =>
     .then(() =>
       importNetcanvas(filePath)
         .then(readProtocol)
-        .catch(throwHumanReadableError(errors.NetcanvasCouldNotValidate)),
+        .catch(throwHumanReadableError(errors.NetcanvasCouldNotBeOpened)),
     )
     .then((fileProtocol) => {
       const match = isEqual(fileProtocol, protocol);
@@ -262,6 +263,20 @@ const verifyNetcanvas = (filePath, protocol) =>
     })
     .then(() => filePath);
 
+/**
+ * Validate a netcanvas file
+ * @param filePath - .netcanvas file path
+ * @returns {Promise} Resolves to `filePath`
+ */
+const validateNetcanvas = filePath =>
+  Promise.resolve()
+    .then(() =>
+      importNetcanvas(filePath)
+        .then(readProtocol)
+        .catch(throwHumanReadableError(errors.NetcanvasCouldNotBeOpened)),
+    )
+    .then(protocol => validateProtocol(protocol))
+    .then(() => filePath);
 
 /**
  * Save the protocol to the target filepath, verify before moving to userspace
@@ -313,4 +328,5 @@ export {
   verifyNetcanvas,
   saveNetcanvas,
   migrateNetcanvas,
+  validateNetcanvas,
 };

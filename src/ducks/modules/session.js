@@ -56,6 +56,7 @@ const openNetcanvas = filePath =>
       )
       .then(() => dispatch(timelineActions.reset()))
       .then(() => history.push('/edit'))
+      .then(() => filePath)
       .catch((error) => {
         switch (error.code) {
           default:
@@ -77,7 +78,7 @@ const saveNetcanvas = () =>
     return Promise.resolve()
       .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { workingPath, filePath } }))
       .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, filePath, createBackup))
-      .then(({ savePath, backupPath }) =>
+      .then(({ savePath, backupPath }) => {
         dispatch({
           type: SAVE_NETCANVAS_SUCCESS,
           payload: {
@@ -85,8 +86,9 @@ const saveNetcanvas = () =>
             backupPath,
             protocol,
           },
-        }),
-      )
+        });
+        return { savePath, backupPath };
+      })
       .catch((error) => {
         switch (error.code) {
           default:
@@ -112,9 +114,10 @@ const saveAsNetcanvas = newFilePath =>
       }))
       // export protocol to random temp location
       .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, newFilePath, createBackup))
-      .then(({ savePath, backupPath }) =>
-        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } }),
-      )
+      .then(({ savePath, backupPath }) => {
+        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } });
+        return { savePath, backupPath };
+      })
       .catch((error) => {
         switch (error.code) {
           default:

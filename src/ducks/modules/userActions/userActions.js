@@ -31,13 +31,18 @@ const { schemaVersionStates } = netcanvasFile;
 
 const dialogCancelledError = new Error('Dialog cancelled');
 
-const validateActiveProtocol = () =>
-  (dispatch, getState) => {
-    const state = getState();
-    const protocol = getProtocol(state);
-    return validateProtocol(protocol)
-      .catch(e => dispatch(validationErrorDialog(e)));
-  };
+const catchDialogCancel = (e) => {
+  if (e === dialogCancelledError) { return; }
+  throw e;
+};
+
+const sessionOpenWithValidationCheck = filePath =>
+  dispatch =>
+    Promise.resolve()
+      .then(() => netcanvasFile.validateNetcanvas(filePath))
+      .catch(e => dispatch(validationErrorDialog(e)))
+      .then(() => sessionActions.openNetcanvas(filePath))
+      .catch(e => dispatch(fileErrorHandler(e)));
 
 const checkUnsavedChanges = () =>
   (dispatch, getState) =>
@@ -91,11 +96,8 @@ const upgradeProtocol = (filePath, protocolSchemaVersion) =>
 
         return netcanvasFile.migrateNetcanvas(filePath, newFilePath, APP_SCHEMA_VERSION);
       })
-      .then(migratedFilePath => dispatch(sessionActions.openNetcanvas(migratedFilePath)))
-      .catch((e) => {
-        if (e === dialogCancelledError) { return; }
-        throw e;
-      });
+      .catch(catchDialogCancel)
+      .then(migratedFilePath => dispatch(sessionOpenWithValidationCheck(migratedFilePath)));
   };
 
 const openNetcanvas = netcanvasFilePath =>
@@ -119,7 +121,7 @@ const openNetcanvas = netcanvasFilePath =>
           .then(([protocolSchemaVersion, schemaVersionStatus]) => {
             switch (schemaVersionStatus) {
               case schemaVersionStates.OK:
-                return dispatch(sessionActions.openNetcanvas(filePath));
+                return dispatch(sessionOpenWithValidationCheck(filePath));
               case schemaVersionStates.UPGRADE_PROTOCOL:
                 return dispatch(upgradeProtocol(filePath, protocolSchemaVersion));
               case schemaVersionStates.UPGRADE_APP:
@@ -129,10 +131,7 @@ const openNetcanvas = netcanvasFilePath =>
             }
           });
       })
-      .catch((e) => {
-        if (e === dialogCancelledError) { return; }
-        dispatch(fileErrorHandler(e));
-      });
+      .catch(catchDialogCancel);
 
 const createNetcanvas = () =>
   dispatch =>
@@ -148,12 +147,9 @@ const createNetcanvas = () =>
 
         return netcanvasFile.createNetcanvas(filePath);
       })
-      .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
-      .catch((e) => {
-        if (e === dialogCancelledError) { return; }
-        dispatch(fileErrorHandler(e));
-      });
-
+      .catch(catchDialogCancel)
+      .then(({ savePath }) => dispatch(sessionOpenWithValidationCheck(savePath)))
+      .catch(e => dispatch(fileErrorHandler(e)));
 
 const saveAsNetcanvas = () =>
   dispatch =>
@@ -163,19 +159,20 @@ const saveAsNetcanvas = () =>
 
         return dispatch(sessionActions.saveAsNetcanvas(filePath));
       })
-      .then(() => dispatch(validateActiveProtocol()))
-      .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
-      .catch((e) => {
-        if (e === dialogCancelledError) { return; }
-        dispatch(fileErrorHandler(e));
-      });
+      .catch(catchDialogCancel)
+      .then(({ savePath }) => dispatch(sessionOpenWithValidationCheck(savePath)))
+      .catch(e => dispatch(fileErrorHandler(e)));
 
 const saveNetcanvas = () =>
-  dispatch =>
-    Promise.resolve()
-      .then(() => dispatch(validateActiveProtocol()))
+  (dispatch, getState) => {
+    const state = getState();
+    const protocol = getProtocol(state);
+
+    return validateProtocol(protocol)
+      .catch(e => dispatch(validationErrorDialog(e)))
       .then(() => dispatch(sessionActions.saveNetcanvas()))
       .catch(e => dispatch(fileErrorHandler(e)));
+  };
 
 export const actionLocks = {
   loading: loadingLock,
