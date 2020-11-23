@@ -13,9 +13,9 @@ import {
 import { testing as assetManifestTesting } from '../protocol/assetManifest';
 import { rootEpic } from '../../modules/root';
 import {
-  createNetcanvasImport,
+  importNetcanvas,
   readProtocol,
-  netcanvasExport,
+  saveNetcanvas,
 } from '../../../utils/netcanvasFile';
 
 jest.mock('../../../utils/netcanvasFile');
@@ -107,13 +107,13 @@ describe('session module', () => {
   describe('actions', () => {
     it('open netcanvas dispatches the correct actions and side-effects', async () => {
       const store = mockStore();
-      createNetcanvasImport.mockResolvedValueOnce('/dev/null/working/path');
+      importNetcanvas.mockResolvedValueOnce('/dev/null/working/path');
       readProtocol.mockResolvedValueOnce({});
 
       await store.dispatch(actionCreators.openNetcanvas('/dev/null/mock.netcanvas'));
       const actions = store.getActions();
 
-      expect(createNetcanvasImport.mock.calls).toEqual([
+      expect(importNetcanvas.mock.calls).toEqual([
         ['/dev/null/mock.netcanvas'],
       ]);
 
@@ -150,8 +150,8 @@ describe('session module', () => {
         },
         protocol: { present: { schemaVersion: 4 } },
       });
-      netcanvasExport.mockReset();
-      netcanvasExport.mockImplementation((
+      saveNetcanvas.mockReset();
+      saveNetcanvas.mockImplementation((
         workingPath,
         protocol,
         savePath,
@@ -165,11 +165,12 @@ describe('session module', () => {
       await store.dispatch(actionCreators.saveNetcanvas());
       const actions = store.getActions();
 
-      expect(netcanvasExport.mock.calls).toEqual([
+      expect(saveNetcanvas.mock.calls).toEqual([
         [
           '/dev/null/working/path',
           { schemaVersion: 4 },
           '/dev/null/user/file/path.netcanvas',
+          false,
         ],
       ]);
 
@@ -200,8 +201,8 @@ describe('session module', () => {
         },
         protocol: { schemaVersion: 4 },
       });
-      netcanvasExport.mockReset();
-      netcanvasExport.mockImplementation((
+      saveNetcanvas.mockReset();
+      saveNetcanvas.mockImplementation((
         workingPath,
         protocol,
         savePath,
@@ -217,11 +218,12 @@ describe('session module', () => {
       );
       const actions = store.getActions();
 
-      expect(netcanvasExport.mock.calls).toEqual([
+      expect(saveNetcanvas.mock.calls).toEqual([
         [
           '/dev/null/working/path',
           { schemaVersion: 4 },
           '/dev/null/user/file/new_path.netcanvas',
+          false,
         ],
       ]);
 

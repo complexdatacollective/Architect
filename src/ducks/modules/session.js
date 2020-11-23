@@ -1,11 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
 import history from '@app/history';
-import {
-  netcanvasExport,
-  createNetcanvasImport,
-  readProtocol,
-} from '@app/utils/netcanvasFile';
+import * as netcanvasFile from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
 import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
 import { actionTypes as protocolActionTypes } from '@modules/protocol';
@@ -49,9 +45,9 @@ const openNetcanvas = filePath =>
     Promise.resolve()
       .then(() => dispatch({ type: OPEN_NETCANVAS, payload: { filePath } }))
       // export protocol to random temp location
-      .then(() => createNetcanvasImport(filePath))
+      .then(() => netcanvasFile.importNetcanvas(filePath))
       .then(workingPath =>
-        readProtocol(workingPath)
+        netcanvasFile.readProtocol(workingPath)
           .then(protocol => dispatch({
             type: OPEN_NETCANVAS_SUCCESS,
             payload: { protocol, filePath, workingPath },
@@ -75,10 +71,11 @@ const saveNetcanvas = () =>
     const protocol = getProtocol(state);
     const workingPath = session.workingPath;
     const filePath = session.filePath;
+    const createBackup = session.backupPath === null;
 
     return Promise.resolve()
       .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { workingPath, filePath } }))
-      .then(() => netcanvasExport(workingPath, protocol, filePath))
+      .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, filePath, createBackup))
       .then(({ savePath, backupPath }) =>
         dispatch({
           type: SAVE_NETCANVAS_SUCCESS,
@@ -105,6 +102,7 @@ const saveAsNetcanvas = newFilePath =>
     const session = state.session;
     const protocol = state.protocol;
     const workingPath = session.workingPath;
+    const createBackup = session.backupPath === null;
 
     return Promise.resolve()
       .then(() => dispatch({
@@ -112,7 +110,7 @@ const saveAsNetcanvas = newFilePath =>
         payload: { workingPath, filePath: newFilePath },
       }))
       // export protocol to random temp location
-      .then(() => netcanvasExport(workingPath, protocol, newFilePath))
+      .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, newFilePath, createBackup))
       .then(({ savePath, backupPath }) =>
         dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } }),
       )
