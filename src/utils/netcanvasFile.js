@@ -131,7 +131,7 @@ const createNetcanvasExport = (workingPath, protocol) => {
  * @param filePath .netcanvas file path
  * @returns {Promise} Resolves to a path in temp (random)
  */
-const createNetcanvasImport = filePath =>
+const importNetcanvas = filePath =>
   getTempDir('protocols')
     .then((protocolsDir) => {
       const destinationPath = path.join(protocolsDir, uuid());
@@ -155,19 +155,21 @@ const createNetcanvasImport = filePath =>
  * @param destinationUserPath Destination path
  * @returns {Promise} Resolves to { savePath, backupPath } if successful
  */
-const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
+const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup = true) => {
   const backupPath = `${destinationUserPath}.backup-${new Date().getTime()}`;
 
   return Promise.resolve()
-    .then(() =>
-      checkExists()
+    .then(() => {
+      if (!createBackup) { return false; }
+
+      return checkExists()
         .then((exists) => {
           if (!exists) { return false; }
           return fse.rename(destinationUserPath, backupPath)
             .then(() => true);
         })
-        .catch(throwHumanReadableError(errors.BackupFailed)),
-    )
+        .catch(throwHumanReadableError(errors.BackupFailed));
+    })
     .then(createdBackup =>
       fse.rename(netcanvasExportPath, destinationUserPath)
         .then(() => createdBackup)
@@ -215,7 +217,7 @@ const createNetcanvas = (destinationUserPath) => {
  * @returns {Promise} Resolves to a `schemaVersionStatus`
  */
 const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSION) =>
-  createNetcanvasImport(filePath)
+  importNetcanvas(filePath)
     .then(readProtocol)
     .then((protocol) => {
       if (!protocol.schemaVersion) {
@@ -245,7 +247,7 @@ const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSION) =>
 const verifyNetcanvas = (filePath, protocol) =>
   Promise.resolve()
     .then(() =>
-      createNetcanvasImport(filePath)
+      importNetcanvas(filePath)
         .then(readProtocol)
         .catch(throwHumanReadableError(errors.NetcanvasCouldNotValidate)),
     )
@@ -266,7 +268,7 @@ const verifyNetcanvas = (filePath, protocol) =>
  * @param filePath .netcanvas file path
  * @returns {Promise} Resolves to { savePath, backupPath }
  */
-const netcanvasExport = (workingPath, protocol, filePath) =>
+const saveNetcanvas = (workingPath, protocol, filePath, createBackup = true) =>
   // export protocol to random temp location
   createNetcanvasExport(workingPath, protocol)
     .then(exportPath =>
@@ -274,7 +276,7 @@ const netcanvasExport = (workingPath, protocol, filePath) =>
       verifyNetcanvas(exportPath, protocol)
         // rename existing file to backup location, and move export to this location
         // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
-        .then(() => deployNetcanvas(exportPath, filePath)),
+        .then(() => deployNetcanvas(exportPath, filePath, createBackup)),
     );
 
 /**
@@ -287,13 +289,13 @@ const netcanvasExport = (workingPath, protocol, filePath) =>
  * @returns {Promise} Resolves to `newFilePath`
  */
 const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERSION) =>
-  createNetcanvasImport(filePath)
+  importNetcanvas(filePath)
     .then(workingPath =>
       readProtocol(workingPath)
         .then(protocol => migrateProtocol(protocol, targetVersion))
         .then(([updatedProtocol, migrationSteps]) => {
           log.info('Migrated protocol', { migrationSteps, updatedProtocol });
-          return netcanvasExport(workingPath, updatedProtocol, newFilePath);
+          return saveNetcanvas(workingPath, updatedProtocol, newFilePath);
         }),
     )
     .then(({ savePath }) => savePath);
@@ -305,10 +307,10 @@ export {
   readProtocol,
   createNetcanvas,
   createNetcanvasExport,
-  createNetcanvasImport,
+  importNetcanvas,
   deployNetcanvas,
   checkSchemaVersion,
   verifyNetcanvas,
-  netcanvasExport,
+  saveNetcanvas,
   migrateNetcanvas,
 };

@@ -7,7 +7,7 @@ import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import pruneProtocol from '@app/utils/pruneProtocol';
 import {
   errors,
-  createNetcanvasImport,
+  importNetcanvas,
   createNetcanvasExport,
   deployNetcanvas,
   readProtocol,
@@ -116,11 +116,11 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  describe('createNetcanvasImport(filePath)', () => {
+  describe('importNetcanvas(filePath)', () => {
     it('rejects with a readable error when permissions are wrong', async () => {
       fse.access.mockRejectedValueOnce(new Error());
 
-      await expect(() => createNetcanvasImport(mockProtocol))
+      await expect(() => importNetcanvas(mockProtocol))
         .rejects.toThrowError(errors.MissingPermissions);
     });
 
@@ -128,23 +128,23 @@ describe('utils/netcanvasFile', () => {
       fse.access.mockResolvedValueOnce(true);
       extract.mockRejectedValueOnce(new Error());
 
-      await expect(createNetcanvasImport(mockProtocol))
+      await expect(importNetcanvas(mockProtocol))
         .rejects.toThrowError(errors.ExtractFailed);
     });
 
     it('resolves to a uuid path in temp', async () => {
       fse.access.mockResolvedValueOnce(true);
       extract.mockResolvedValueOnce(true);
-      await expect(createNetcanvasImport(mockProtocol))
+      await expect(importNetcanvas(mockProtocol))
         .resolves.toEqual('/dev/null/get/electron/path/architect/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b');
     });
   });
 
-  describe('deployNetcanvas(exportPath, destinationPath)', () => {
+  describe('deployNetcanvas(exportPath, destinationPath, createBackup = true)', () => {
     const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
     const userDestinationPath = '/dev/null/user/path/export/destination';
 
-    it('reject with a readable error if cannot be backed up', async () => {
+    it('rejects with a readable error if cannot be backed up', async () => {
       fse.access.mockResolvedValueOnce(true);
       fse.rename.mockRejectedValueOnce(new Error());
       fse.rename.mockResolvedValueOnce(true);
@@ -154,7 +154,7 @@ describe('utils/netcanvasFile', () => {
       )).rejects.toThrowError(errors.BackupFailed);
     });
 
-    it('reject with a readable error if cannot be substituted', async () => {
+    it('rejects with a readable error if cannot be substituted', async () => {
       fse.access.mockRejectedValueOnce(new Error());
       fse.rename.mockRejectedValueOnce(new Error());
 
@@ -209,6 +209,28 @@ describe('utils/netcanvasFile', () => {
         savePath: userDestinationPath,
       });
     });
+
+    it('does not create a backup if specified not to', async () => {
+      fse.rename.mockResolvedValue(true);
+      fse.access.mockResolvedValue(true);
+
+      const result = await deployNetcanvas(
+        netcanvasFilePath,
+        userDestinationPath,
+        false,
+      );
+
+      expect(fse.rename.mock.calls.length).toBe(1);
+      expect(fse.rename.mock.calls[0]).toEqual([
+        '/dev/null/get/electron/path/architect/exports/pendingExport',
+        '/dev/null/user/path/export/destination',
+      ]);
+
+      expect(result).toEqual({
+        backupPath: null,
+        savePath: userDestinationPath,
+      });
+    });
   });
 
   it.todo('createNetcanvas()');
@@ -243,6 +265,11 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  it.todo('netcanvasExport()');
+  describe('saveNetcanvas(workingPath, protocol, filePath, createBackup = true)', () => {
+    it.todo('Does not create a backup if specified not to');
+    it.todo('Resolves to { savePath, backupPath }');
+  });
+
+
   it.todo('migrateNetcanvas()');
 });
