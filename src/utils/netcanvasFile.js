@@ -56,16 +56,6 @@ const getTempDir = (...args) => {
 };
 
 /**
- * Check that a given file has read access (R_OK)
- * @param {string} filePath
- * @returns {Promise} Resolves to true if file is readable or false otherwise
- */
-const checkExists = filePath =>
-  fse.access(filePath, fse.constants.R_OK)
-    .then(() => true)
-    .catch(() => false);
-
-/**
  * Given the working path for a protocol (in /tmp/protocols `protocol.json`,
  * returns a promise that resolves to the parsed json object
  * @param {string} workingPath The protocol directory.
@@ -157,13 +147,14 @@ const importNetcanvas = filePath =>
  * @returns {Promise} Resolves to { savePath, backupPath } if successful
  */
 const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup = true) => {
-  const backupPath = `${destinationUserPath}.backup-${new Date().getTime()}`;
+  const f = path.parse(destinationUserPath);
+  const backupPath = path.join(f.dir, `${f.name}.backup-${new Date().getTime()}.${f.ext}`);
 
   return Promise.resolve()
     .then(() => {
       if (!createBackup) { return false; }
 
-      return checkExists()
+      return fse.pathExists(destinationUserPath)
         .then((exists) => {
           if (!exists) { return false; }
           return fse.rename(destinationUserPath, backupPath)
@@ -173,13 +164,12 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup 
     })
     .then(createdBackup =>
       fse.rename(netcanvasExportPath, destinationUserPath)
-        .then(() => createdBackup)
+        .then(() => ({
+          savePath: destinationUserPath,
+          backupPath: createdBackup ? backupPath : null,
+        }))
         .catch(throwHumanReadableError(errors.SaveFailed)),
-    )
-    .then(createdBackup => ({
-      savePath: destinationUserPath,
-      backupPath: createdBackup ? backupPath : null,
-    }));
+    );
 };
 
 /**
