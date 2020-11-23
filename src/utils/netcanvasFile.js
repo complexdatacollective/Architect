@@ -19,6 +19,7 @@ const errors = {
   ExtractFailed: new Error('Protocol could not be extracted'),
   BackupFailed: new Error('Protocol could not be backed up'),
   SaveFailed: new Error('Protocol could not be saved to destination'),
+  DeployFailed: new Error('Netcanvas file could not be saved to destination'),
   ArchiveFailed: new Error('Protocol could not be archived'),
   MissingProtocolJson: new Error('Protocol does not have a json file'),
   ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
@@ -168,7 +169,7 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup 
           savePath: destinationUserPath,
           backupPath: createdBackup ? backupPath : null,
         }))
-        .catch(throwHumanReadableError(errors.SaveFailed)),
+        .catch(throwHumanReadableError(errors.DeployFailed)),
     );
 };
 

@@ -74,7 +74,6 @@ const saveNetcanvas = () =>
     const workingPath = session.workingPath;
     const filePath = session.filePath;
     const createBackup = session.backupPath === null;
-    console.log({ createBackup, session });
 
     return Promise.resolve()
       .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { workingPath, filePath } }))

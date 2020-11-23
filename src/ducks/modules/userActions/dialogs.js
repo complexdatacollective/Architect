@@ -5,6 +5,15 @@ import { errors as netcanvasFileErrors } from '@app/utils/netcanvasFile';
 import ExternalLink from '@components/ExternalLink';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 
+// File couldn't be saved
+// File couldn't be opened
+// Backup couldn't be created
+// File didn't have write access
+// File was corrupted
+// Protocol could not be validated
+// Save could not be verified as successful
+// Protocol could not be created.
+
 const getFriendlyMessage = (e) => {
   switch (e) {
     case netcanvasFileErrors.CreateTemplateFailed:
@@ -12,17 +21,19 @@ const getFriendlyMessage = (e) => {
     case netcanvasFileErrors.MissingSchemaVersion:
       return (<p>Schema version not defined in protocol</p>);
     case netcanvasFileErrors.MissingPermissions:
-      return (<p>Protocol does not have read/write permissions</p>);
+      return (<p>Netcanvas file does not have write permissions, changes will not be savable, so file was not opened</p>);
     case netcanvasFileErrors.ExtractFailed:
-      return (<p>Protocol could not be extracted</p>);
+      return (<p>Netcanvas file could not be opened, it may be corrupted</p>);
     case netcanvasFileErrors.BackupFailed:
-      return (<p>Protocol could not be backed up</p>);
+      return (<p>Netcanvas backup could not be created, save aborted, original file unchanged</p>);
     case netcanvasFileErrors.SaveFailed:
-      return (<p>Protocol could not be saved to destination</p>);
+      return (<p>Protocol data could not be saved</p>);
     case netcanvasFileErrors.ArchiveFailed:
-      return (<p>Protocol could not be archived</p>);
+      return (<p>Netcanvas file could not be created</p>); // same as SaveFailed?
+    case netcanvasFileErrors.DeployFailed:
+      return (<p>Deployment failed, final file could not be moved</p>);
     case netcanvasFileErrors.MissingProtocolJson:
-      return (<p>Protocol does not have a json file</p>);
+      return (<p>Protocol does not have a json file</p>); // TODO not suitable for user?
     case netcanvasFileErrors.ProtocolJsonParseError:
       return (<p>Protocol json could not be parsed</p>);
     case netcanvasFileErrors.NetcanvasCouldNotValidate:
