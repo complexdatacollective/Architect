@@ -100,7 +100,7 @@ const saveAsNetcanvas = newFilePath =>
   (dispatch, getState) => {
     const state = getState();
     const session = state.session;
-    const protocol = state.protocol;
+    const protocol = getProtocol(state);
     const workingPath = session.workingPath;
     const createBackup = session.backupPath === null;
 
@@ -165,6 +165,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         filePath,
         workingPath,
+        backupPath: null,
         lastSaved: 0,
         lastChanged: 0,
       };
@@ -172,7 +173,7 @@ export default function reducer(state = initialState, action = {}) {
     case SAVE_NETCANVAS_SUCCESS:
       return {
         ...state,
-        backupPath: action.payload.backupPath,
+        backupPath: action.payload.backupPath || state.backupPath,
         filePath: action.payload.savePath,
         lastSaved: new Date().getTime(),
       };
