@@ -42,7 +42,7 @@
         "type": "git"
     },
     "devDependencies": {
-        "@codaco/ui": "^3.8.2",
+        "@codaco/ui": "^3.9.1",
         "@zippytech/sorty": "^2.0.0",
         "animejs": "^2.2.0",
         "archiver": "^3.1.1",
@@ -224,7 +224,7 @@
                         "arm64"
                     ]
                 }
-              ]
+            ]
         },
         "fileAssociations": {
             "ext": "netcanvas",
