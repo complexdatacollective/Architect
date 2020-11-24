@@ -13,14 +13,14 @@ import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 
 const errors = {
-  NotFound: 'NotFound', // New protocol template could not be created
-  IncorrectPermissions: 'IncorrectPermissions', // Protocol does not have read/write permissions
-  ReadError: 'ReadError', // File could not be opened or read
+  NotFound: 'NotFound', // File could not be found
+  IncorrectPermissions: 'IncorrectPermissions', // File does not have read/write permissions
+  ReadError: 'ReadError', // File could not be read
   WriteError: 'WriteError', // File could not be written
-  CreateFailed: 'CreateFailed', // Netcanvas file could not be generated
-  SaveFailed: 'SaveFailed', // Netcanvas file could not be saved to destination
-  OpenFailed: 'OpenFailed', // Netcanvas file could not be opened
   MigrationFailed: 'MigrationFailed', // Protocol could not be migrated
+  CreateFailed: 'CreateFailed', // Netcanvas file could not be generated
+  SaveFailed: 'SaveFailed', // Netcanvas file could not be saved
+  OpenFailed: 'OpenFailed', // Netcanvas file could not be opened
   VerificationFailed: 'VerificationFailed', // Netcanvas file could not be verifed
 };
 
