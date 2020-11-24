@@ -27,12 +27,12 @@ const getFriendlyMessage = (e, meta = {}) => {
       return (
         <React.Fragment>
           <p>
-            Could not save {fileName} due to a permissions issue.
+            Could not save/open {fileName} due to a permissions issue.
           </p>
           <p>
             <ol>
               <li>Please check that the file is not &quot;read only&quot;</li>
-              <li>Rename the original file and Architect will recreate it</li>
+              <li>Or rename the original file and Architect will recreate it</li>
             </ol>
           </p>
         </React.Fragment>
