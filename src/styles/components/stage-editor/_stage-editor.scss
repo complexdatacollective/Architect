@@ -2,4 +2,5 @@
   position: relative;
   z-index: var(--z-default);
   transition: padding-top var(--animation-duration-standard) var(--animation-easing);
+  margin: 0 unit(4);
 }

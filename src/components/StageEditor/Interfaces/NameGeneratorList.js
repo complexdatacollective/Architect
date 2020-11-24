@@ -1,5 +1,4 @@
 import {
-  Name,
   NodeType,
   ExternalDataSource,
   CardDisplayOptions,
@@ -9,7 +8,6 @@ import {
 
 const NameGeneratorList = {
   headerSections: [
-    Name,
     NodeType,
   ],
   sections: [

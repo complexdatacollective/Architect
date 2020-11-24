@@ -7,10 +7,8 @@ import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
 import { actionCreators as protocolsActions } from '@modules/protocols';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
-import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
 import Section from './Section';
 import Group from './Group';
-import Sprite from './Sprite';
 
 const LaunchPad = ({
   openProtocol,
@@ -30,18 +28,7 @@ const LaunchPad = ({
     <React.Fragment>
       { lastEditedProtocol &&
         <Section className="launch-pad">
-          <Group className="home-group--flex">
-            <Sprite
-              src={resumeBackgroundGraphic}
-              width="calc(50% - 7rem)"
-              height="90%"
-              position="absolute"
-              bottom={0}
-              right="5.7rem"
-              opacity="0.07"
-              backgroundPosition="top right"
-              backgroundSize="100% auto"
-            />
+          <Group color="sea-green" className="resume-group home-group--flex">
             <div className="launch-pad__resume">
               <h2>Resume Editing</h2>
               <ProtocolCard
@@ -72,7 +59,7 @@ const LaunchPad = ({
         </Section>
       }
       <Section className="launch-pad">
-        <Group color="panel-grey--light">
+        <Group>
           <h2>Create or Open</h2>
           <div className="launch-pad__actions">
             <div className="launch-pad__action">

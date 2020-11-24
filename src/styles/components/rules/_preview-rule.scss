@@ -5,11 +5,11 @@
   transition: background-color var(--animation-duration-standard) var(--animation-easing);
   display: flex;
   border-radius: unit(5);
+  width: 100%;
+  align-items: center;
 
   &__text {
-    font-size: 1.5rem;
     flex-grow: 1;
-    display: flex;
     color: var(--text-dark);
     transition: color var(--animation-duration-fast) var(--animation-easing);
   }

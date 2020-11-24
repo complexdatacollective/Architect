@@ -1,5 +1,4 @@
 import {
-  Name,
   FilteredNodeType,
   Background,
   NarrativePresets,
@@ -8,7 +7,6 @@ import {
 
 const Narrative = {
   headerSections: [
-    Name,
     FilteredNodeType,
   ],
   sections: [

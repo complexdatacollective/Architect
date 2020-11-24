@@ -5,11 +5,9 @@ import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { map, get, size } from 'lodash';
 import { compose } from 'recompose';
-import { Node, Icon, GraphicButton } from '@codaco/ui';
+import { Node, Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getActiveProtocolMeta } from '@selectors/protocols';
-import codebookGraphic from '@app/images/undraw_science.svg';
-import assetsGraphic from '@app/images/undraw_media.svg';
 import { getProtocol } from '../selectors/protocol';
 import Link from './Link';
 import { actionCreators as protocolActions } from '../ducks/modules/protocol';
@@ -99,28 +97,8 @@ class Overview extends Component {
         </div>
         <div className="overview__footer">
           <Icon name="protocol-card" />
-          <GraphicButton
-            graphic={assetsGraphic}
-            color="slate-blue"
-            graphicPosition="80% center"
-            graphicSize="auto 140%"
-            labelPosition={{ left: '3rem' }}
-            onClick={() => openScreen('assets')}
-          >
-            <h3>Manage Protocol</h3>
-            <h2>Resources</h2>
-          </GraphicButton>
-          <GraphicButton
-            graphic={codebookGraphic}
-            color="slate-blue"
-            graphicPosition="90% center"
-            graphicSize="auto 180%"
-            labelPosition={{ left: '3rem' }}
-            onClick={() => openScreen('codebook')}
-          >
-            <h3>Manage</h3>
-            <h2>Codebook</h2>
-          </GraphicButton>
+          <Button onClick={() => openScreen('assets')} color="neon-coral">Manage Resources</Button>
+          <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
         </div>
       </motion.div>
     );

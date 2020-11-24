@@ -1,7 +1,7 @@
 .overview {
   margin: 0 auto;
   margin-top: unit(4);
-  width: 60rem;
+  width: 70rem;
   z-index: var(--z-default);
   position: relative;
   background: var(--color-white);
@@ -19,6 +19,7 @@
         padding-bottom: 0;
         margin-bottom: 0;
         min-height: 5rem;
+        background: var(--color-white);
       }
 
       .form-field-container {
@@ -38,13 +39,13 @@
 
     .icon {
       height: 100%;
-      width: 8rem;
-      margin-right: unit(4);
+      width: 3rem;
+      margin-right: 25rem; // Lazy - sorry!
     }
 
-    .graphic-button {
+    .button {
       flex: 1 auto;
-      height: 5rem;
+      height: 3rem;
 
       &__label {
 

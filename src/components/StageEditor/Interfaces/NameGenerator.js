@@ -1,5 +1,4 @@
 import {
-  Name,
   NodeType,
   Form,
   NameGeneratorPrompts,
@@ -8,7 +7,6 @@ import {
 
 const NameGenerator = {
   headerSections: [
-    Name,
     NodeType,
   ],
   sections: [

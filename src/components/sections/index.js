@@ -11,7 +11,6 @@ export { default as FilteredNodeType } from './FilteredNodeType';
 export { default as Form } from './Form';
 export { default as FormWithQuickAdd } from './FormWithQuickAdd';
 export { default as IntroductionPanel } from './IntroductionPanel';
-export { default as Name } from './Name';
 export { default as NameGeneratorAutoCompletePrompts } from './NameGeneratorAutoCompletePrompts';
 export { default as NameGeneratorListPrompts } from './NameGeneratorListPrompts';
 export { default as NameGeneratorPrompts } from './NameGeneratorPrompts';
