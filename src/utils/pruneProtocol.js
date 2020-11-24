@@ -42,9 +42,16 @@ const pruneObjects = (obj) => {
 // TODO: Should not remove top-level elements like stages or codebook
 const pruneProtocol = protocol =>
   new Promise((resolve) => {
-    const prunedObjects = pruneObjects(protocol);
+    const { stages, codebook, assetManifest, ...rest } = protocol;
 
-    const protocolString = JSON.stringify(prunedObjects);
+    const prunedProtocol = {
+      stages: stages.map(pruneObjects),
+      codebook: pruneObjects(codebook),
+      assetManifest: pruneObjects(assetManifest),
+      ...pruneObjects(rest),
+    };
+
+    const protocolString = JSON.stringify(prunedProtocol);
     const result = JSON.parse(protocolString);
 
     return resolve(result);
