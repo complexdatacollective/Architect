@@ -24,8 +24,8 @@ import {
 import { createLock } from '@modules/ui/status';
 
 const protocolsLock = createLock('PROTOCOLS');
-const loadingLock = createLock('PROTOCOLS/LOADING');
-const savingLock = createLock('PROTOCOLS/SAVING');
+const loadingLock = createLock('LOADING');
+const savingLock = createLock('SAVING');
 
 const { schemaVersionStates } = netcanvasFile;
 
@@ -136,7 +136,7 @@ const createNetcanvas = () =>
             if (canceled) { return null; }
 
             return netcanvasFile.createNetcanvas(filePath)
-              .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)))
+              .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
               .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
           });
       })
@@ -173,8 +173,8 @@ export const actionLocks = {
 };
 
 export const actionCreators = {
-  openNetcanvas,
-  createNetcanvas,
-  saveAsNetcanvas,
-  saveNetcanvas,
+  openNetcanvas: protocolsLock(loadingLock(openNetcanvas)),
+  createNetcanvas: protocolsLock(createNetcanvas),
+  saveAsNetcanvas: protocolsLock(savingLock(saveAsNetcanvas)),
+  saveNetcanvas: protocolsLock(savingLock(saveNetcanvas)),
 };
