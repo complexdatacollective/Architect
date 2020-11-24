@@ -174,6 +174,7 @@ describe('session module', () => {
         },
         {
           type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
+          ipc: true,
           payload: {
             protocol: {},
             filePath: '/dev/null/mock.netcanvas',

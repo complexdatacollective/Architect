@@ -13,19 +13,19 @@ import {
   createDialogOptions,
 } from '@app/utils/dialogs';
 import { UnsavedChanges } from '@components/Dialogs';
-import { actionCreators as sessionActions } from '@modules/session';
+import { actionCreators as sessionActions, actionTypes as sessionActionTypes } from '@modules/session';
 import { actionCreators as dialogsActions } from '@modules/dialogs';
 import {
   validationErrorDialog,
   appUpgradeRequiredDialog,
   mayUpgradeProtocolDialog,
-  fileErrorHandler,
+  netcanvasFileErrorHandler,
 } from '@modules/userActions/dialogs';
 import { createLock } from '@modules/ui/status';
 
 const protocolsLock = createLock('PROTOCOLS');
-const loadingLock = createLock('PROTOCOLS/LOADING');
-const savingLock = createLock('PROTOCOLS/SAVING');
+const loadingLock = createLock('LOADING');
+const savingLock = createLock('SAVING');
 
 const { schemaVersionStates } = netcanvasFile;
 
@@ -120,9 +120,16 @@ const openNetcanvas = netcanvasFilePath =>
               default:
                 return null;
             }
+          })
+          .catch((e) => {
+            dispatch(netcanvasFileErrorHandler(e, { filePath }));
+            dispatch({
+              type: sessionActionTypes.OPEN_NETCANVAS_ERROR,
+              payload: { error: e, filePath },
+            });
           });
       })
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath: netcanvasFilePath })));
 
 const createNetcanvas = () =>
   dispatch =>
@@ -136,10 +143,10 @@ const createNetcanvas = () =>
             if (canceled) { return null; }
 
             return netcanvasFile.createNetcanvas(filePath)
-              .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)));
+              .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
           });
       })
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e)));
 
 const saveAsNetcanvas = () =>
   dispatch =>
@@ -148,19 +155,21 @@ const saveAsNetcanvas = () =>
         if (canceled) { return false; }
 
         return dispatch(sessionActions.saveAsNetcanvas(filePath))
-          .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)));
+          .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)))
+          .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
       })
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e)));
 
 const saveNetcanvas = () =>
   (dispatch, getState) => {
     const state = getState();
     const protocol = getProtocol(state);
+    const filePath = state.session.filePath;
 
     return validateProtocol(protocol)
       .catch(e => dispatch(validationErrorDialog(e)))
       .then(() => dispatch(sessionActions.saveNetcanvas()))
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
   };
 
 export const actionLocks = {
@@ -170,8 +179,8 @@ export const actionLocks = {
 };
 
 export const actionCreators = {
-  openNetcanvas,
-  createNetcanvas,
-  saveAsNetcanvas,
-  saveNetcanvas,
+  openNetcanvas: protocolsLock(loadingLock(openNetcanvas)),
+  createNetcanvas: protocolsLock(createNetcanvas),
+  saveAsNetcanvas: protocolsLock(savingLock(saveAsNetcanvas)),
+  saveNetcanvas: protocolsLock(savingLock(saveNetcanvas)),
 };

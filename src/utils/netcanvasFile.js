@@ -13,18 +13,15 @@ import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 
 const errors = {
-  CreateTemplateFailed: new Error('New protocol template could not be created'),
-  MissingSchemaVersion: new Error('Schema version not defined in protocol'),
-  MissingPermissions: new Error('Protocol does not have read/write permissions'),
-  ExtractFailed: new Error('Protocol could not be extracted'),
-  BackupFailed: new Error('Protocol could not be backed up'),
-  SaveFailed: new Error('Protocol could not be saved to destination'),
-  DeployFailed: new Error('Netcanvas file could not be saved to destination'),
-  ArchiveFailed: new Error('Protocol could not be archived'),
-  MissingProtocolJson: new Error('Protocol does not have a json file'),
-  ProtocolJsonParseError: new Error('Protocol json could not be parsed'),
-  NetcanvasCouldNotBeOpened: new Error('Netcanvas file could not be opened'),
-  NetcanvasVerificationError: new Error('Netcanvas file could not be verifed'),
+  NotFound: 'NotFound', // File could not be found
+  IncorrectPermissions: 'IncorrectPermissions', // File does not have read/write permissions
+  ReadError: 'ReadError', // File could not be read
+  WriteError: 'WriteError', // File could not be written
+  MigrationFailed: 'MigrationFailed', // Protocol could not be migrated
+  CreateFailed: 'CreateFailed', // Netcanvas file could not be generated
+  SaveFailed: 'SaveFailed', // Netcanvas file could not be saved
+  OpenFailed: 'OpenFailed', // Netcanvas file could not be opened
+  VerificationFailed: 'VerificationFailed', // Netcanvas file could not be verifed
 };
 
 const schemaVersionStates = {
@@ -33,6 +30,8 @@ const schemaVersionStates = {
   OK: 'OK',
 };
 
+const ProtocolsDidNotMatchError = new Error('Protocols did not match');
+
 /**
  * Helper function generator for use with `.catch()`. The original error
  * is logged, and then substituted for the custom error object, which is
@@ -40,10 +39,23 @@ const schemaVersionStates = {
  * @param readableError An error object
  * @returns {function} A function that can be used inside .catch();
  */
-const throwHumanReadableError = readableError =>
+const getFriendlyError = (e, friendlyCode) => {
+  e.friendlyCode = friendlyCode;
+  return e;
+};
+
+const handleError = defaultError =>
   (e) => {
     log.error(e);
-    throw readableError;
+
+    switch (e.code) {
+      case 'EACCES':
+        throw getFriendlyError(e, errors.IncorrectPermissions);
+      case 'ENOENT':
+        throw getFriendlyError(e, errors.NotFound);
+      default:
+        throw getFriendlyError(e, defaultError);
+    }
   };
 
 /**
@@ -66,14 +78,7 @@ const readProtocol = (workingPath) => {
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
 
   return fse.readJson(protocolJsonPath)
-    .catch((e) => {
-      switch (e.code) {
-        case 'ENOENT':
-          return throwHumanReadableError(errors.MissingProtocolJson)(e);
-        default:
-          return throwHumanReadableError(errors.ProtocolJsonParseError)(e);
-      }
-    });
+    .catch(handleError(errors.ReadError));
 };
 
 /**
@@ -91,6 +96,7 @@ const writeProtocol = (workingPath, protocol) => {
     .then(() => pruneProtocol(protocol))
     .then(prunedProtocol =>
       fse.writeJson(protocolJsonPath, prunedProtocol, { spaces: 2 })
+        .catch(handleError(errors.WriteError))
         .then(() => pruneProtocolAssets(workingPath))
         .then(() => prunedProtocol),
     );
@@ -105,13 +111,11 @@ const createNetcanvasExport = (workingPath, protocol) => {
   if (!protocol) { return Promise.reject(); }
 
   return writeProtocol(workingPath, protocol)
-    .catch(throwHumanReadableError(errors.SaveFailed))
     .then(() => getTempDir('exports'))
     .then((exportDir) => {
       const exportPath = path.join(exportDir, uuid());
 
       return archive(workingPath, exportPath)
-        .catch(throwHumanReadableError(errors.ArchiveFailed))
         .then(() => exportPath);
     });
 };
@@ -128,15 +132,10 @@ const importNetcanvas = filePath =>
     .then((protocolsDir) => {
       const destinationPath = path.join(protocolsDir, uuid());
 
-      return Promise.resolve()
-        .then(() =>
-          fse.access(filePath, fse.constants.W_OK)
-            .catch(throwHumanReadableError(errors.MissingPermissions)),
-        )
-        .then(() =>
-          extract(filePath, destinationPath)
-            .catch(throwHumanReadableError(errors.ExtractFailed)))
-        .then(() => destinationPath);
+      return fse.access(filePath, fse.constants.W_OK)
+        .then(() => extract(filePath, destinationPath))
+        .then(() => destinationPath)
+        .catch(handleError(errors.OpenFailed));
     });
 
 /**
@@ -151,25 +150,19 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup 
   const f = path.parse(destinationUserPath);
   const backupPath = path.join(f.dir, `${f.name}.backup-${new Date().getTime()}.${f.ext}`);
 
-  return Promise.resolve()
-    .then(() => {
-      if (!createBackup) { return false; }
+  return fse.pathExists(destinationUserPath)
+    .then((exists) => {
+      if (!exists || !createBackup) { return false; }
 
-      return fse.pathExists(destinationUserPath)
-        .then((exists) => {
-          if (!exists) { return false; }
-          return fse.rename(destinationUserPath, backupPath)
-            .then(() => true);
-        })
-        .catch(throwHumanReadableError(errors.BackupFailed));
+      return fse.rename(destinationUserPath, backupPath)
+        .then(() => true);
     })
     .then(createdBackup =>
       fse.rename(netcanvasExportPath, destinationUserPath)
         .then(() => ({
           savePath: destinationUserPath,
           backupPath: createdBackup ? backupPath : null,
-        }))
-        .catch(throwHumanReadableError(errors.DeployFailed)),
+        })),
     );
 };
 
@@ -179,8 +172,6 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup 
  * @param destinationUserPath Destination path
  * @returns {Promise} Resolves to { savePath, backupPath }
  */
-// TODO: add tests
-// TODO: add readable errors
 const createNetcanvas = (destinationUserPath) => {
   const appPath = remote.app.getAppPath();
   const templatePath = path.join(appPath, 'template');
@@ -192,12 +183,12 @@ const createNetcanvas = (destinationUserPath) => {
       return fse.copy(templatePath, workingPath)
         .then(() => fse.readJson(path.join(templatePath, 'protocol.json')))
         .then(protocolTemplate => ({ schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate }))
-        .catch(throwHumanReadableError(errors.CreateTemplateFailed))
         .then(protocol => createNetcanvasExport(workingPath, protocol))
         .then(netcanvasExportPath =>
           deployNetcanvas(netcanvasExportPath, destinationUserPath),
         );
-    });
+    })
+    .catch(handleError(errors.CreateFailed));
 };
 
 /**
@@ -237,22 +228,22 @@ const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSION) =>
  * @returns {Promise} Resolves to `filePath`
  */
 const verifyNetcanvas = (filePath, protocol) =>
-  Promise.resolve()
-    .then(() =>
-      importNetcanvas(filePath)
-        .then(readProtocol)
-        .catch(throwHumanReadableError(errors.NetcanvasCouldNotBeOpened)),
-    )
-    .then((fileProtocol) => {
-      const match = isEqual(fileProtocol, protocol);
+  Promise.all([
+    pruneProtocol(protocol),
+    importNetcanvas(filePath)
+      .then(readProtocol),
+  ])
+    .then(([prunedProtocol, fileProtocol]) => {
+      const match = isEqual(fileProtocol, prunedProtocol);
 
       if (!match) {
-        return throwHumanReadableError(errors.NetcanvasVerificationError)();
+        throw ProtocolsDidNotMatchError;
       }
 
       return true;
     })
-    .then(() => filePath);
+    .then(() => filePath)
+    .catch(handleError(errors.VerificationFailed));
 
 /**
  * Validate a netcanvas file
@@ -261,11 +252,8 @@ const verifyNetcanvas = (filePath, protocol) =>
  */
 const validateNetcanvas = filePath =>
   Promise.resolve()
-    .then(() =>
-      importNetcanvas(filePath)
-        .then(readProtocol)
-        .catch(throwHumanReadableError(errors.NetcanvasCouldNotBeOpened)),
-    )
+    .then(() => importNetcanvas(filePath))
+    .then(readProtocol)
     .then(protocol => validateProtocol(protocol))
     .then(() => filePath);
 
@@ -283,7 +271,8 @@ const saveNetcanvas = (workingPath, protocol, filePath, createBackup = true) =>
         // rename existing file to backup location, and move export to this location
         // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
         .then(() => deployNetcanvas(exportPath, filePath, createBackup)),
-    );
+    )
+    .catch(handleError(errors.SaveFailed));
 
 /**
  * Upgrades a .netcanvas file to the app schema version (or optional specified version).
@@ -304,7 +293,8 @@ const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERS
           return saveNetcanvas(workingPath, updatedProtocol, newFilePath);
         }),
     )
-    .then(({ savePath }) => savePath);
+    .then(({ savePath }) => savePath)
+    .catch(handleError(errors.MigrationFailed));
 
 export {
   errors,

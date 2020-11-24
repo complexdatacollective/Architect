@@ -5,7 +5,6 @@ import { get, first } from 'lodash';
 import { GraphicButton } from '@codaco/ui';
 import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
 import { actionCreators as userActions } from '@modules/userActions';
-import { actionCreators as sessionActions } from '@modules/session';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
 import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
@@ -14,7 +13,6 @@ import Group from './Group';
 import Sprite from './Sprite';
 
 const LaunchPad = ({
-  openNetcanvasFile,
   openNetcanvas,
   createNetcanvas,
   lastEditedProtocol,
@@ -41,7 +39,7 @@ const LaunchPad = ({
               description={lastEditedProtocol.filePath}
               lastModified={lastEditedProtocol.lastModified}
               name={lastEditedProtocol.name}
-              onClickHandler={() => openNetcanvasFile(lastEditedProtocol.filePath)}
+              onClickHandler={() => openNetcanvas(lastEditedProtocol.filePath)}
               schemaVersion={lastEditedProtocol.schemaVersion}
             />
           </div>
@@ -55,7 +53,7 @@ const LaunchPad = ({
                   description={protocol.filePath}
                   lastModified={protocol.lastModified}
                   name={protocol.name}
-                  onClickHandler={() => openNetcanvasFile(protocol.filePath)}
+                  onClickHandler={() => openNetcanvas(protocol.filePath)}
                   schemaVersion={protocol.schemaVersion}
                 />
               ))
@@ -99,7 +97,6 @@ const LaunchPad = ({
 );
 
 LaunchPad.propTypes = {
-  openNetcanvasFile: PropTypes.func.isRequired,
   openNetcanvas: PropTypes.func.isRequired,
   createNetcanvas: PropTypes.func.isRequired,
   lastEditedProtocol: PropTypes.object,
@@ -123,7 +120,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   createNetcanvas: userActions.createNetcanvas,
-  openNetcanvasFile: sessionActions.openNetcanvas,
   openNetcanvas: userActions.openNetcanvas,
 };
 

@@ -5,106 +5,104 @@ import { errors as netcanvasFileErrors } from '@app/utils/netcanvasFile';
 import ExternalLink from '@components/ExternalLink';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 
-// File couldn't be saved
-// File couldn't be opened
-// Backup couldn't be created
-// File didn't have write access
-// File was corrupted
-// Protocol could not be validated
-// Save could not be verified as successful
-// Protocol could not be created.
+const getFriendlyMessage = (e, meta = {}) => {
+  const collectedMeta = {
+    ...e.meta,
+    ...meta,
+  };
 
-const getFriendlyMessage = (e) => {
-  switch (e) {
-    case netcanvasFileErrors.CreateTemplateFailed:
+  const fileName = collectedMeta.filePath ?
+    (<em>{path.basename(collectedMeta.filePath)}</em>) :
+    'file';
+
+  switch (e.friendlyCode) {
+    case netcanvasFileErrors.NotFound:
       return (
         <p>
-          Architect failed to create a new protocol from the template file. This may mean
+          Could not find {fileName}. See the information below for details about
+          why this error occurred.
+        </p>
+      );
+    case netcanvasFileErrors.IncorrectPermissions:
+      return (
+        <React.Fragment>
+          <p>
+            Could not save/open &quot;{fileName}&quot; due to a permissions issue. Please
+            check that the file is not &quot;read only&quot;.
+          </p>
+          <p>
+            If you are attempting to save this file, you can try renaming it so
+            that Architect can recreate the file when you save again.
+          </p>
+          <p>
+            Please contact the Network Canvas team if you need support with
+            this issue.
+          </p>
+        </React.Fragment>
+      );
+    case netcanvasFileErrors.ReadError:
+      return (
+        <p>
+          Could not read the file &quot;{fileName}&quot;. See the information below
+          for details about why this error occurred. Please contact the Network
+          Canvas team if you need support with this issue.
+        </p>
+      );
+    case netcanvasFileErrors.WriteError:
+      return (
+        <React.Fragment>
+          <p>
+            Saving failed because there was an error writing the file. Check that you have enough
+            disk space, or try saving to a different location. The original file has not been
+            changed. See the information below for details about why this error occurred.
+          </p>
+          <p>
+            If you continue to encounter this error, please contact the Network Canvas team for
+            support.
+          </p>
+        </React.Fragment>
+      );
+    case netcanvasFileErrors.CreateFailed:
+      return (
+        <p>
+          Architect failed to create a new protocol file. This may mean
           it could not write to the temporary directory, or it could not read the template
-          file. Please contact the Network Canvas team for support with this issue.
+          file. Please contact the Network Canvas team for support with this issue. See the
+          information below for details about why this error occurred.
         </p>
       );
-    case netcanvasFileErrors.MissingSchemaVersion:
-      return (
-        <p>
-          The protocol file is invalid because it does not contain a schema version.
-          For support, please contact the Network Canvas team and provide a copy of your
-          protocol file.
-        </p>
-      );
-    case netcanvasFileErrors.MissingPermissions:
-      return (
-        <p>
-          Architect does not have permission to write to this protocol file. Write permission
-          is needed for saving changes, so the protocol could not be opened. Please change
-          the permissions on this file, and try again.
-        </p>
-      );
-    case netcanvasFileErrors.ExtractFailed:
-      return (
-        <p>
-          An error ocurred extracting the protocol file, and it may be corrupted. If you downloaded
-          the file or copied it from another device, try repeating the process. For support, email
-          the Network Canvas team with a copy of your protocol file.
-        </p>
-      );
-    case netcanvasFileErrors.BackupFailed:
-      return (
-        <p>
-          Opening failed because a backup file could not be created. Check that you have enough disk
-          space, and that your protocol file is not in a read-only location. Your protocol file has
-          not been modified.
-        </p>);
     case netcanvasFileErrors.SaveFailed:
       return (
-        <p>
-          Saving failed because the protocol data could not be written. Check that you have enough
-          disk space, or try saving to a different location. If you continue to encounter this
-          error, please contact the Network Canvas team for support.
-        </p>);
-    case netcanvasFileErrors.ArchiveFailed:
-      return (
-        <p>
-          Saving failed because the protocol data could not be compressed. Check that you
-          have enough disk space, or try saving to a different location. If you continue to
-          encounter this error, please contact the Network Canvas team for support.
-        </p>
-      ); // same as SaveFailed?
-    case netcanvasFileErrors.DeployFailed:
-      return (
-        <p>
-          Saving failed, because the working copy could not be moved to the location you
-          specified. Try saving the protocol to a different location. If you continue to
-          encounter this error, please contact the Network Canvas team for support.
-        </p>
+        <React.Fragment>
+          <p>
+            Saving failed. Check that you have enough
+            disk space, or try saving to a different location. The original file has not been
+            changed. See the information below for details about why this error occurred.
+          </p>
+          <p>
+            If you continue to encounter this error, please contact the Network Canvas team for
+            support.
+          </p>
+        </React.Fragment>
       );
-    case netcanvasFileErrors.MissingProtocolJson:
+    case netcanvasFileErrors.OpenFailed:
       return (
-        <p>
-          This protocol file is corrupt or invalid. For support, please email
-          the Network Canvas team with a copy of your protocol file.
-        </p>
-      ); // TODO not suitable for user?
-    case netcanvasFileErrors.ProtocolJsonParseError:
-      return (
-        <p>
-          This protocol file is corrupt or invalid. For support, please email
-          the Network Canvas team with a copy of your protocol file.
-        </p>
+        <React.Fragment>
+          <p>
+            Opening this protocol file failed. See the information below for details about why
+            this error occurred.
+          </p>
+          <p>
+            If you continue to encounter this error, please contact the Network Canvas team for
+            support, including a copy of your protocol file.
+          </p>
+        </React.Fragment>
       );
-    case netcanvasFileErrors.NetcanvasCouldNotValidate:
+    case netcanvasFileErrors.VerificationFailed:
       return (
         <p>
-          This protocol file failed validation. For support, please email
-          the Network Canvas team with a copy of your protocol file.
-        </p>
-      );
-    case netcanvasFileErrors.NetcanvasVerificationError:
-      return (
-        <p>
-          The process failed because the file written did not match what was
-          expected. For support, please email the Network Canvas team with
-          a copy of your protocol file.
+          Saving failed because the result could not be verified. Your original netcanvas file
+          has not been changed. See the information below for details about why this error occurred.
         </p>
       );
     default:
@@ -112,8 +110,8 @@ const getFriendlyMessage = (e) => {
   }
 };
 
-const fileErrorHandler = (e) => {
-  const friendlyMessage = getFriendlyMessage(e);
+const netcanvasFileErrorHandler = (e, meta = {}) => {
+  const friendlyMessage = getFriendlyMessage(e, meta);
 
   if (friendlyMessage) { e.friendlyMessage = friendlyMessage; }
 
@@ -142,54 +140,6 @@ const validationErrorDialog = (e) => {
   return dialogActions.openDialog({
     type: 'Error',
     error: e,
-  });
-};
-
-const saveErrorDialog = (e, filePath) => {
-  e.friendlyMessage = (
-    <p>
-      <em>{path.basename(filePath)}</em> could not be saved. See
-      the information below for details about why this error occurred.
-    </p>
-  );
-
-  return dialogActions.openDialog({
-    type: 'Error',
-    error: e,
-  });
-};
-
-const writeErrorDialog = (e, filePath) => {
-  e.friendlyMessage = (
-    <React.Fragment>
-      <p>
-        <em>{path.basename(filePath)}</em> could not be saved due to a permissions issue.
-      </p>
-      <p>
-        <ol>
-          <li>Please check that the file is not &quot;read only&quot;</li>
-          <li>Rename the original file and Architect will recreate it</li>
-        </ol>
-      </p>
-    </React.Fragment>
-  );
-
-  return dialogActions.openDialog({
-    type: 'Error',
-    error: e,
-  });
-};
-
-const importErrorDialog = (e, filePath) => {
-  const error = e || new Error('An unknown error occurred.');
-  error.friendlyMessage = (
-    <React.Fragment>
-      The file <strong>{path.basename(filePath)}</strong> could not be imported.
-    </React.Fragment>
-  );
-  return dialogActions.openDialog({
-    type: 'Error',
-    error,
   });
 };
 
@@ -263,11 +213,8 @@ const mayUpgradeProtocolDialog = (
 };
 
 export {
-  fileErrorHandler,
+  netcanvasFileErrorHandler,
   validationErrorDialog,
   appUpgradeRequiredDialog,
-  saveErrorDialog,
-  writeErrorDialog,
-  importErrorDialog,
   mayUpgradeProtocolDialog,
 };
