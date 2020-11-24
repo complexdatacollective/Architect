@@ -224,7 +224,7 @@
                         "arm64"
                     ]
                 }
-              ]
+            ]
         },
         "fileAssociations": {
             "ext": "netcanvas",
