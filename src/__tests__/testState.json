@@ -1,19 +1,13 @@
 {
   "session": {
-    "activeProtocol": "1234-active-protocol"
+    "filePath": "/dev/null/home/documents/1234-active-protocol",
+    "workingPath": "/dev/null/1234-active-protocol"
   },
   "ui": {
     "status": {
       "busy": []
     }
   },
-  "protocols": [
-    {
-      "id": "1234-active-protocol",
-      "workingPath": "/dev/null/1234-active-protocol",
-      "filePath": "/dev/null/home/documents/1234-active-protocol"
-    }
-  ],
   "form": {
     "draft-by-id": {
       "values": {
