@@ -39,6 +39,7 @@ const pruneObjects = (obj) => {
   );
 };
 
+// TODO: Should not remove top-level elements like stages or codebook
 const pruneProtocol = protocol =>
   new Promise((resolve) => {
     const prunedObjects = pruneObjects(protocol);

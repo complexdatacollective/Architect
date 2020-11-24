@@ -19,7 +19,7 @@ import {
   validationErrorDialog,
   appUpgradeRequiredDialog,
   mayUpgradeProtocolDialog,
-  fileErrorHandler,
+  netcanvasFileErrorHandler,
 } from '@modules/userActions/dialogs';
 import { createLock } from '@modules/ui/status';
 
@@ -122,7 +122,7 @@ const openNetcanvas = netcanvasFilePath =>
             }
           });
       })
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath: netcanvasFilePath })));
 
 const createNetcanvas = () =>
   dispatch =>
@@ -136,10 +136,11 @@ const createNetcanvas = () =>
             if (canceled) { return null; }
 
             return netcanvasFile.createNetcanvas(filePath)
-              .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)));
+              .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)))
+              .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
           });
       })
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e)));
 
 const saveAsNetcanvas = () =>
   dispatch =>
@@ -148,19 +149,21 @@ const saveAsNetcanvas = () =>
         if (canceled) { return false; }
 
         return dispatch(sessionActions.saveAsNetcanvas(filePath))
-          .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)));
+          .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)))
+          .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
       })
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e)));
 
 const saveNetcanvas = () =>
   (dispatch, getState) => {
     const state = getState();
     const protocol = getProtocol(state);
+    const filePath = state.session.filePath;
 
     return validateProtocol(protocol)
       .catch(e => dispatch(validationErrorDialog(e)))
       .then(() => dispatch(sessionActions.saveNetcanvas()))
-      .catch(e => dispatch(fileErrorHandler(e)));
+      .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
   };
 
 export const actionLocks = {
