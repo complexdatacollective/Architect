@@ -13,7 +13,7 @@ import {
   createDialogOptions,
 } from '@app/utils/dialogs';
 import { UnsavedChanges } from '@components/Dialogs';
-import { actionCreators as sessionActions } from '@modules/session';
+import { actionCreators as sessionActions, actionTypes as sessionActionTypes } from '@modules/session';
 import { actionCreators as dialogsActions } from '@modules/dialogs';
 import {
   validationErrorDialog,
@@ -120,6 +120,13 @@ const openNetcanvas = netcanvasFilePath =>
               default:
                 return null;
             }
+          })
+          .catch((e) => {
+            dispatch(netcanvasFileErrorHandler(e, { filePath }));
+            dispatch({
+              type: sessionActionTypes.OPEN_NETCANVAS_ERROR,
+              payload: { error: e, filePath },
+            });
           });
       })
       .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath: netcanvasFilePath })));
@@ -136,8 +143,7 @@ const createNetcanvas = () =>
             if (canceled) { return null; }
 
             return netcanvasFile.createNetcanvas(filePath)
-              .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)))
-              .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
+              .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
           });
       })
       .catch(e => dispatch(netcanvasFileErrorHandler(e)));
