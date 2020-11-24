@@ -148,7 +148,7 @@ const importNetcanvas = filePath =>
  */
 const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup = true) => {
   const f = path.parse(destinationUserPath);
-  const backupPath = path.join(f.dir, `${f.name}.backup-${new Date().getTime()}.${f.ext}`);
+  const backupPath = path.join(f.dir, `${f.name}.backup-${new Date().getTime()}${f.ext}`);
 
   return fse.pathExists(destinationUserPath)
     .then((exists) => {
