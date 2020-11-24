@@ -11,6 +11,7 @@ import validateProtocol from '@app/utils/validateProtocol';
 import pruneProtocol from '@app/utils/pruneProtocol';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
+import protocolTemplate from '@app/utils/protocolTemplate.json';
 
 const errors = {
   NotFound: 'NotFound', // File could not be found
@@ -172,24 +173,20 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup 
  * @param destinationUserPath Destination path
  * @returns {Promise} Resolves to { savePath, backupPath }
  */
-const createNetcanvas = (destinationUserPath) => {
-  const appPath = remote.app.getAppPath();
-  const templatePath = path.join(appPath, 'template');
-
-  return getTempDir('new')
+const createNetcanvas = destinationUserPath =>
+  getTempDir('new')
     .then((newDir) => {
       const workingPath = path.join(newDir, uuid());
+      const assetPath = path.join(workingPath, 'assets');
 
-      return fse.copy(templatePath, workingPath)
-        .then(() => fse.readJson(path.join(templatePath, 'protocol.json')))
-        .then(protocolTemplate => ({ schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate }))
+      return fse.mkdirp(assetPath)
+        .then(() => ({ schemaVersion: APP_SCHEMA_VERSION, ...protocolTemplate }))
         .then(protocol => createNetcanvasExport(workingPath, protocol))
         .then(netcanvasExportPath =>
           deployNetcanvas(netcanvasExportPath, destinationUserPath),
         );
     })
     .catch(handleError(errors.CreateFailed));
-};
 
 /**
  * Asseses a .netcanvas file schema version against the app schema version (or
