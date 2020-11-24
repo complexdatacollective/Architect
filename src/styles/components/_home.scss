@@ -141,8 +141,8 @@ $font-sizes: (
       position: absolute;
       top: 1rem;
       height: calc(100% - 2rem);
-      border-radius: 0.33rem;
-      width: 0.33rem;
+      border-radius: .33rem;
+      width: .33rem;
       background-color: rgba(0, 0, 0, .05); // sass-lint:disable-line no-color-literals
     }
   }
