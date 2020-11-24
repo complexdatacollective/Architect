@@ -26,28 +26,15 @@ describe('utils/netcanvasFile', () => {
     archive.mockReset();
     extract.mockReset();
     fse.access.mockReset();
+    fse.pathExists.mockReset();
     fse.readJson.mockReset();
     fse.rename.mockReset();
     fse.writeFile.mockReset();
-    fse.writeJson.mockReset();
     pruneProtocol.mockReset();
     pruneProtocolAssets.mockReset();
   });
 
   describe('readProtocol(protocolPath)', () => {
-    it('Rejects with a human readable error when protocol cannot be read', async () => {
-      fse.readJson.mockImplementation(() => {
-        const e = new Error();
-        e.code = 'ENOENT';
-
-        return Promise.reject(e);
-      });
-
-      await expect(
-        readProtocol('/non/existing/path'),
-      ).rejects.toThrowError(errors.MissingProtocolJson);
-    });
-
     it('Rejects with a human readable error when protocol cannot be parsed', async () => {
       fse.readJson.mockImplementation(() =>
         new Promise((resolve, reject) => {
@@ -63,7 +50,7 @@ describe('utils/netcanvasFile', () => {
 
       await expect(
         readProtocol('/var/null/'),
-      ).rejects.toThrowError(errors.ProtocolJsonParseError);
+      ).rejects.toMatchObject({ friendlyCode: errors.ReadError });
     });
 
     it('Resolves to protocol', async () => {
@@ -83,27 +70,6 @@ describe('utils/netcanvasFile', () => {
     const circularProtocol = {};
     circularProtocol.a = { b: circularProtocol };
 
-    it('rejects with a readable error when protocol cannot be saved', async () => {
-      await expect(() => createNetcanvasExport(workingPath, circularProtocol))
-        .rejects.toThrowError(errors.SaveFailed);
-
-      fse.writeFile.mockRejectedValueOnce(new Error());
-
-      await expect(() => createNetcanvasExport(workingPath, {}))
-        .rejects.toThrowError(errors.SaveFailed);
-    });
-
-    it('rejects with a readable error when archive fails', async () => {
-      fse.writeJson.mockResolvedValue(true);
-      fse.readJson.mockResolvedValueOnce({});
-      pruneProtocolAssets.mockResolvedValueOnce(true);
-      pruneProtocol.mockReturnValueOnce({});
-      archive.mockRejectedValueOnce(new Error());
-
-      await expect(createNetcanvasExport(workingPath, {}))
-        .rejects.toThrowError(errors.ArchiveFailed);
-    });
-
     it('resolves to a uuid path in temp', async () => {
       fse.readJson.mockResolvedValueOnce({});
       fse.writeJson.mockResolvedValue(true);
@@ -118,10 +84,13 @@ describe('utils/netcanvasFile', () => {
 
   describe('importNetcanvas(filePath)', () => {
     it('rejects with a readable error when permissions are wrong', async () => {
-      fse.access.mockRejectedValueOnce(new Error());
+      const accessError = new Error();
+      accessError.code = 'EACCES';
+
+      fse.access.mockRejectedValueOnce(accessError);
 
       await expect(() => importNetcanvas(mockProtocol))
-        .rejects.toThrowError(errors.MissingPermissions);
+        .rejects.toMatchObject({ friendlyCode: errors.IncorrectPermissions });
     });
 
     it('rejects with a readable error when it cannot extract a protocol', async () => {
@@ -129,7 +98,7 @@ describe('utils/netcanvasFile', () => {
       extract.mockRejectedValueOnce(new Error());
 
       await expect(importNetcanvas(mockProtocol))
-        .rejects.toThrowError(errors.ExtractFailed);
+        .rejects.toMatchObject({ friendlyCode: errors.OpenFailed });
     });
 
     it('resolves to a uuid path in temp', async () => {
@@ -144,29 +113,9 @@ describe('utils/netcanvasFile', () => {
     const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
     const userDestinationPath = '/dev/null/user/path/export/destination';
 
-    it('rejects with a readable error if cannot be backed up', async () => {
-      fse.access.mockResolvedValueOnce(true);
-      fse.rename.mockRejectedValueOnce(new Error());
-      fse.rename.mockResolvedValueOnce(true);
-      await expect(deployNetcanvas(
-        netcanvasFilePath,
-        userDestinationPath,
-      )).rejects.toThrowError(errors.BackupFailed);
-    });
-
-    it('rejects with a readable error if cannot be substituted', async () => {
-      fse.access.mockRejectedValueOnce(new Error());
-      fse.rename.mockRejectedValueOnce(new Error());
-
-      await expect(deployNetcanvas(
-        netcanvasFilePath,
-        userDestinationPath,
-      )).rejects.toThrowError(errors.SaveFailed);
-    });
-
     it('does not create a backup if destination does not already exist', async () => {
       fse.rename.mockResolvedValueOnce(true);
-      fse.access.mockRejectedValueOnce(new Error());
+      fse.pathExists.mockResolvedValueOnce(false);
 
       const result = await deployNetcanvas(
         netcanvasFilePath,
@@ -187,7 +136,7 @@ describe('utils/netcanvasFile', () => {
 
     it('creates a backup if destination does exist', async () => {
       fse.rename.mockResolvedValue(true);
-      fse.access.mockResolvedValue(true);
+      fse.pathExists.mockResolvedValue(true);
 
       const result = await deployNetcanvas(
         netcanvasFilePath,
@@ -212,7 +161,7 @@ describe('utils/netcanvasFile', () => {
 
     it('does not create a backup if specified not to', async () => {
       fse.rename.mockResolvedValue(true);
-      fse.access.mockResolvedValue(true);
+      fse.pathExists.mockResolvedValue(true);
 
       const result = await deployNetcanvas(
         netcanvasFilePath,
@@ -238,12 +187,8 @@ describe('utils/netcanvasFile', () => {
   it.todo('checkSchemaVersion()');
 
   describe('verifyNetcanvas(filePath)', () => {
-    it('Rejects with a human readable error when netcanvas cannot be verified', async () => {
-      fse.access.mockResolvedValue(true);
-      fse.readJson.mockRejectedValue(new Error());
-
-      await expect(verifyNetcanvas(mockProtocol))
-        .rejects.toThrowError(errors.NetcanvasCouldNotValidate);
+    beforeEach(() => {
+      pruneProtocol.mockImplementation(p => Promise.resolve(p));
     });
 
     it('Rejects with a human readable error when verification fails', async () => {
@@ -252,7 +197,7 @@ describe('utils/netcanvasFile', () => {
       fse.readJson.mockResolvedValue({ schemaVersion: 4 });
 
       await expect(verifyNetcanvas(mockProtocol, {}))
-        .rejects.toThrowError(errors.NetcanvasVerificationError);
+        .rejects.toMatchObject({ friendlyCode: errors.VerificationFailed });
     });
 
     it('Resolves to filePath if validation passes', async () => {

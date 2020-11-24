@@ -150,16 +150,12 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup 
   const f = path.parse(destinationUserPath);
   const backupPath = path.join(f.dir, `${f.name}.backup-${new Date().getTime()}.${f.ext}`);
 
-  return Promise.resolve()
-    .then(() => {
-      if (!createBackup) { return false; }
+  return fse.pathExists(destinationUserPath)
+    .then((exists) => {
+      if (!exists || !createBackup) { return false; }
 
-      return fse.pathExists(destinationUserPath)
-        .then((exists) => {
-          if (!exists) { return false; }
-          return fse.rename(destinationUserPath, backupPath)
-            .then(() => true);
-        });
+      return fse.rename(destinationUserPath, backupPath)
+        .then(() => true);
     })
     .then(createdBackup =>
       fse.rename(netcanvasExportPath, destinationUserPath)
