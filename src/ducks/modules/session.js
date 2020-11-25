@@ -1,6 +1,5 @@
 import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
-import history from '@app/history';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
 import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
@@ -55,7 +54,6 @@ const openNetcanvas = filePath =>
           })),
       )
       .then(() => dispatch(timelineActions.reset()))
-      .then(() => history.push('/edit'))
       .then(() => filePath)
       .catch((error) => {
         switch (error.code) {
@@ -131,6 +129,7 @@ const saveAsNetcanvas = newFilePath =>
 const resetSession = () =>
   (dispatch) => {
     dispatch(previewActions.clearPreview());
+    dispatch(previewActions.closePreview());
 
     dispatch({
       type: RESET_SESSION,

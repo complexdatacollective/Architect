@@ -1,25 +1,24 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
-import appHistory from '@app/history';
+import { useSelector } from 'react-redux';
 import Home from '@components/Home/Home';
 import Protocol from '@components/Protocol';
-import CheckProtocolLoaded from '@components/CheckProtocolLoaded';
 import Loading from '@components/Loading';
 import Screens from '@components/Screens';
+import { getActiveProtocol } from '@selectors/session';
 
-const Routes = () => (
-  <Router history={appHistory}>
-    <Screens />
-    <Route path="/" exact>
-      <Home />
-    </Route>
-    <Route path="/edit">
-      <CheckProtocolLoaded />
-      <Protocol />
-    </Route>
-    <Loading />
-  </Router>
-);
+const Routes = () => {
+  const activeProtocol = useSelector(getActiveProtocol);
+
+  const route = activeProtocol ? <Protocol /> : <Home />;
+
+  return (
+    <React.Fragment>
+      <Screens />
+      {route}
+      <Loading />
+    </React.Fragment>
+  );
+};
 
 export { Routes };
 

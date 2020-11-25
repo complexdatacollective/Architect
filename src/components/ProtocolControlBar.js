@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import history from '@app/history';
 import { UnsavedChanges } from '@components/Dialogs';
 import { Button, Spinner } from '@codaco/ui';
 import { getProtocol } from '@selectors/protocol';
 import { getHasUnsavedChanges } from '@selectors/session';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionCreators as userActions, actionLocks as protocolsLocks } from '@modules/userActions';
+import { actionCreators as sessionActions } from '@modules/session';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import logoutIcon from '@app/images/home/log-out.svg';
 import ControlBar from '@components/ControlBar';
@@ -40,7 +40,7 @@ const ProtocolControlBar = () => {
       })
       .then((confirm) => {
         if (!confirm) { return; }
-        history.push('/');
+        dispatch(sessionActions.resetSession());
       }),
     [dispatch, hasUnsavedChanges],
   );
