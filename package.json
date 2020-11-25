@@ -246,7 +246,8 @@
             "!src/protocol-validation/**",
             "!network-canvas/**",
             "!app/**",
-            "!electron-dev/**"
+            "!electron-dev/**",
+            "!release-builds/**"
         ],
         "snapshotSerializers": [
             "enzyme-to-json/serializer"
@@ -269,7 +270,8 @@
             "<rootDir>[/\\\\](network-canvas)[/\\\\]",
             "<rootDir>[/\\\\](electron-dev)[/\\\\]",
             "<rootDir>[/\\\\](app)[/\\\\]",
-            "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]"
+            "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]",
+            "<rootDir>[/\\\\](release-builds)[/\\\\]"
         ],
         "testEnvironment": "node",
         "testURL": "http://localhost",
