@@ -29,7 +29,6 @@ const PromptFields = ({
   entity,
   form,
   onCreateOtherVariable,
-  onDeleteVariable,
   optionsForVariableDraft,
   otherVariable,
   type,
@@ -112,17 +111,11 @@ const PromptFields = ({
           label=""
           options={categoricalVariableOptions}
           onCreateOption={handleNewVariable}
-          onDeleteOption={v => onDeleteVariable(v, 'variable')}
           validation={{ required: true }}
-          formatCreateLabel={inputValue => (
-            <span>
-              Click here to create a new categorical variable named &quot;{inputValue}&quot;.
-            </span>
-          )}
         />
       </Row>
       { variable &&
-        <Section>
+        <Row>
           <h3 id={getFieldId('options')}>Variable Options</h3>
           <p>Create some options for this variable</p>
           <Options
@@ -140,7 +133,7 @@ const PromptFields = ({
               </p>
             </Tip>
           }
-        </Section>
+        </Row>
       }
       { variable &&
         <Row>
@@ -161,31 +154,38 @@ const PromptFields = ({
         </Row>
       }
       { otherVariableToggle &&
-        <Row>
-          <ValidatedField
-            name="otherOptionLabel"
-            component={Text}
-            placeholder="Enter a label (such as &quot;other&quot;) for the bin..."
-            label="Other bin label"
-            validation={{ required: true }}
-          />
-          <ValidatedField
-            name="otherVariablePrompt"
-            component={Text}
-            placeholder="Enter a question prompt to show to the participant..."
-            label="Follow-up dialog prompt"
-            validation={{ required: true }}
-          />
-          <ValidatedField
-            name="otherVariable"
-            component={VariableSelect}
-            entity={entity}
-            type={type}
-            options={otherVariableOptions}
-            onCreateOption={onCreateOtherVariable}
-            validation={{ required: true }}
-          />
-        </Row>
+        <Section>
+          <Row>
+            <ValidatedField
+              name="otherOptionLabel"
+              component={Text}
+              placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
+              label="Label for Bin"
+              validation={{ required: true }}
+            />
+          </Row>
+          <Row>
+            <ValidatedField
+              name="otherVariablePrompt"
+              component={Text}
+              placeholder="Enter a question prompt to show when the other option is triggered..."
+              label="Question Prompt for Dialog"
+              validation={{ required: true }}
+            />
+          </Row>
+          <Row>
+            <ValidatedField
+              name="otherVariable"
+              component={VariableSelect}
+              entity={entity}
+              label="Variable"
+              type={type}
+              options={otherVariableOptions}
+              onCreateOption={value => onCreateOtherVariable(value, 'otherVariable')}
+              validation={{ required: true }}
+            />
+          </Row>
+        </Section>
       }
       <Row>
         <h3>Bucket Sort Order <small>(optional)</small></h3>

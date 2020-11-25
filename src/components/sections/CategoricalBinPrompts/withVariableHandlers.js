@@ -9,9 +9,9 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = {
-  changeForm: change,
   deleteVariable: codebookActions.deleteVariable,
   createVariable: codebookActions.createVariable,
+  changeForm: change,
 };
 
 const deleteVariableState = connect(mapStateToProps, mapDispatchToProps);
@@ -24,18 +24,26 @@ const variableHandlers = withHandlers({
     createVariable,
     entity,
     type,
+    form,
+    changeForm,
   }) =>
-    (name) => {
+    (name, field) => {
       const { variable } = createVariable(entity, type, { type: 'text', name });
+
+      // If we supplied a field, update it with the result of the variable creation
+      if (field) {
+        changeForm(form, field, variable);
+      }
+
       return variable;
     },
   onDeleteVariable: ({
     entity,
     type,
     deleteVariable,
-    changeForm,
     form,
     formValues,
+    changeForm,
   }) =>
     (variable, formPaths = []) => {
       // TODO: share this functionality with enhancers?
