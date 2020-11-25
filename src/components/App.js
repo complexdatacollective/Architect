@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { isMacOS } from '@app/utils/platform';
 import { AppErrorBoundary } from '@components/Errors';
