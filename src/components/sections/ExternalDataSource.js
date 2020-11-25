@@ -17,8 +17,8 @@ const withChangeDataSourceHandler = connect(
 
 const ExternalDataSource = (props) => {
   const handleChangeDataSource = () => {
-    props.changeForm('edit-stage', 'cardOptions', null);
-    props.changeForm('edit-stage', 'sortOptions', null);
+    props.changeForm('edit-stage', 'cardOptions', {});
+    props.changeForm('edit-stage', 'sortOptions', {});
   };
 
   return (
