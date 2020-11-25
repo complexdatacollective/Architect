@@ -44,7 +44,7 @@ class EditorScreen extends Component {
         icon="arrow-right"
         disabled={this.props.submitting}
       >
-        Save Stage and Return to Timeline
+        Save and Return
       </Button>
     );
 
