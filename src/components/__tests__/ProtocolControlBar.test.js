@@ -1,8 +1,11 @@
 /* eslint-env jest */
 
 import React from 'react';
-import { shallow } from 'enzyme';
-import { ProtocolControlBar } from '../ProtocolControlBar';
+import { mount } from 'enzyme';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import ProtocolControlBar from '../ProtocolControlBar';
+import testState from '../../__tests__/testState.json';
 
 const mockProps = {
   saveProtocol: () => {},
@@ -14,10 +17,16 @@ const mockProps = {
   handleClickStart: () => {},
 };
 
+const mockStore = createStore(() => testState);
+
 describe('<ProtocolControlBar />', () => {
   it('can render', () => {
-    const component = shallow(<ProtocolControlBar {...mockProps} />);
+    const component = mount(
+      <Provider store={mockStore}>
+        <ProtocolControlBar {...mockProps} />
+      </Provider>,
+    );
 
-    expect(component).toMatchSnapshot();
+    expect(component.html()).toMatchSnapshot();
   });
 });

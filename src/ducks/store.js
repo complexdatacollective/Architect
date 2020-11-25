@@ -12,7 +12,7 @@ const persistConfig = {
   storage,
   whitelist: [
     'recentProtocols',
-    'protocols',
+    // 'protocols',
     'settings',
     'app',
     // 'ui',

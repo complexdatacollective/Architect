@@ -1,7 +1,7 @@
 import path from 'path';
 import { get } from 'lodash';
-import { getNetworkVariables } from '@app/other/protocols/assetTools';
-import { getActiveProtocolMeta } from './protocols';
+import { getNetworkVariables } from '@app/utils/protocols/assetTools';
+import { getWorkingPath } from './session';
 import { getAssetManifest } from './protocol';
 
 /**
@@ -11,7 +11,7 @@ import { getAssetManifest } from './protocol';
  * @param {string} dataSource id of entry in assetManifest
  */
 export const getAssetPath = (state, dataSource) => {
-  const { workingPath } = getActiveProtocolMeta(state);
+  const workingPath = getWorkingPath(state);
   const assetManifest = getAssetManifest(state);
   const asset = get(assetManifest, dataSource);
 

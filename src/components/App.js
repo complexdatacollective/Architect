@@ -1,9 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { compose } from 'recompose';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { withRouter } from 'react-router-dom';
 import { isMacOS } from '@app/utils/platform';
 import { AppErrorBoundary } from '@components/Errors';
 import DialogManager from '@components/DialogManager';
@@ -54,14 +51,6 @@ const App = () => {
   );
 };
 
-App.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
 export { App };
 
-export default compose(
-  withRouter,
-)(App);
+export default App;

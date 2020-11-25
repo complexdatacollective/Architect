@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { compose, withStateHandlers, defaultProps } from 'recompose';
 import { SortableContainer } from 'react-sortable-hoc';
 import cx from 'classnames';
@@ -188,7 +187,6 @@ const mapDispatchToProps = (dispatch, props) => ({
 export { Timeline };
 
 export default compose(
-  withRouter,
   withStateHandlers(
     ({ sorting = false }) => ({
       sorting,

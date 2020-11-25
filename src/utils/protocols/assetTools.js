@@ -5,7 +5,7 @@ import { get } from 'lodash';
 import csv from 'csvtojson';
 import fs from 'fs-extra';
 import { getVariableNamesFromNetwork, validateNames } from '@app/protocol-validation/validation/validateExternalData';
-import { getSupportedAssetType } from '@app/other/protocols/importAsset';
+import { getSupportedAssetType } from '@app/utils/protocols/importAsset';
 
 /**
 * Generate a switching function that takes a filepath as an argument

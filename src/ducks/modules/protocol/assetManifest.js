@@ -2,9 +2,9 @@ import uuid from 'uuid';
 import { omit } from 'lodash';
 import path from 'path';
 import log from 'electron-log';
-import { importAsset as fsImportAsset } from '@app/other/protocols';
-import { getActiveProtocolMeta } from '@selectors/protocols';
-import { validateAsset } from '@app/other/protocols/assetTools';
+import { importAsset as fsImportAsset } from '@app/utils/protocols';
+import { getWorkingPath } from '@selectors/session';
+import { validateAsset } from '@app/utils/protocols/assetTools';
 import { invalidAssetErrorDialog, importAssetErrorDialog } from '@modules/protocol/utils/dialogs';
 
 const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';
@@ -59,7 +59,7 @@ const importAssetFailed = (filename, error) =>
 const importAssetThunk = filePath =>
   (dispatch, getState) => {
     const state = getState();
-    const { workingPath } = getActiveProtocolMeta(state);
+    const workingPath = getWorkingPath(state);
     const name = getNameFromFilename(filePath);
 
     dispatch(importAsset(name));

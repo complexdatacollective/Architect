@@ -2,7 +2,7 @@ import { remote } from 'electron';
 import fse from 'fs-extra';
 import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
-import { saveDialog } from '@app/other/dialogs';
+import { saveDialog } from '@app/utils/dialogs';
 import getLocalDirectoryFromArchivePath from './lib/getLocalDirectoryFromArchivePath';
 
 const saveDialogOptions = {
