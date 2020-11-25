@@ -43,7 +43,6 @@ describe('session module', () => {
           lastChanged: 0,
           filePath: null,
           workingPath: null,
-          backupPath: null,
         });
     });
 
@@ -62,7 +61,6 @@ describe('session module', () => {
         lastChanged: 2000,
         filePath: '/dev/null/previous.netcanvas',
         workingPath: '/dev/null/previous/working/path',
-        backupPath: '/dev/null/previous.netcanvas-backup',
       });
       const action = {
         type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
@@ -78,67 +76,33 @@ describe('session module', () => {
           lastChanged: 0,
           filePath: '/dev/null/mock.netcanvas',
           workingPath: '/dev/null/working/path',
-          backupPath: null,
         });
     });
 
-    describe('SESSION/SAVE_NETCANVAS_SUCCESS', () => {
-      it('when no existing backup', () => {
-        const initialState = reducer({
-          lastSaved: 0,
-          lastChanged: 0,
-          filePath: '/dev/null/mock.netcanvas',
-          workingPath: '/dev/null/working/path',
-        });
-
-        const action = {
-          type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
-          payload: {
-            savePath: '/dev/null/mock.netcanvas',
-            backupPath: '/dev/null/mock.netcanvas.backup',
-          },
-        };
-
-        const resultState = reducer(initialState, action);
-
-        expect(resultState)
-          .toMatchObject({
-            filePath: '/dev/null/mock.netcanvas',
-            backupPath: '/dev/null/mock.netcanvas.backup',
-          });
-
-        const aSecondAgo = new Date().getTime() - 1000;
-        expect(resultState.lastSaved).toBeGreaterThan(aSecondAgo);
+    it('SESSION/SAVE_NETCANVAS_SUCCESS', () => {
+      const initialState = reducer({
+        lastSaved: 0,
+        lastChanged: 0,
+        filePath: '/dev/null/mock.netcanvas',
+        workingPath: '/dev/null/working/path',
       });
 
-      it('when existing backup', () => {
-        const initialState = reducer({
-          lastSaved: 0,
-          lastChanged: 0,
+      const action = {
+        type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
+        payload: {
+          savePath: '/dev/null/mock.netcanvas',
+        },
+      };
+
+      const resultState = reducer(initialState, action);
+
+      expect(resultState)
+        .toMatchObject({
           filePath: '/dev/null/mock.netcanvas',
-          workingPath: '/dev/null/working/path',
-          backupPath: '/dev/null/mock.netcanvas.backup',
         });
 
-        const action = {
-          type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
-          payload: {
-            savePath: '/dev/null/mock.netcanvas',
-            backupPath: null,
-          },
-        };
-
-        const resultState = reducer(initialState, action);
-
-        expect(resultState)
-          .toMatchObject({
-            filePath: '/dev/null/mock.netcanvas',
-            backupPath: '/dev/null/mock.netcanvas.backup',
-          });
-
-        const aSecondAgo = new Date().getTime() - 1000;
-        expect(resultState.lastSaved).toBeGreaterThan(aSecondAgo);
-      });
+      const aSecondAgo = new Date().getTime() - 1000;
+      expect(resultState.lastSaved).toBeGreaterThan(aSecondAgo);
     });
   });
 
@@ -193,166 +157,82 @@ describe('session module', () => {
           session: {
             workingPath: '/dev/null/working/path',
             filePath: '/dev/null/user/file/path.netcanvas',
-            backupPath: null,
             ...session,
           },
           protocol: { present: { schemaVersion: 4 } },
         });
+
+      const store = getStore();
 
       beforeEach(() => {
         saveNetcanvas.mockImplementation((
           workingPath,
           protocol,
           savePath,
-          createBackup = true,
-        ) => {
-          const backupPath = createBackup ? `${savePath}.backup` : null;
+        ) => Promise.resolve(savePath));
 
-          return Promise.resolve({
-            savePath,
-            backupPath,
-          });
-        });
+        store.clearActions();
       });
 
-      describe('when no existing backup', () => {
-        const store = getStore();
-        beforeEach(() => store.clearActions());
+      it('saveNetcanvas()', async () => {
+        await store.dispatch(actionCreators.saveNetcanvas());
+        const actions = store.getActions();
 
-        it('saveNetcanvas() dispatches the correct actions and side-effects', async () => {
-          await store.dispatch(actionCreators.saveNetcanvas());
-          const actions = store.getActions();
+        expect(saveNetcanvas.mock.calls).toEqual([
+          [
+            '/dev/null/working/path',
+            { schemaVersion: 4 },
+            '/dev/null/user/file/path.netcanvas',
+          ],
+        ]);
 
-          expect(saveNetcanvas.mock.calls).toEqual([
-            [
-              '/dev/null/working/path',
-              { schemaVersion: 4 },
-              '/dev/null/user/file/path.netcanvas',
-              true,
-            ],
-          ]);
-
-          expect(actions).toEqual([
-            {
-              payload: {
-                workingPath: '/dev/null/working/path',
-                filePath: '/dev/null/user/file/path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS',
+        expect(actions).toEqual([
+          {
+            payload: {
+              workingPath: '/dev/null/working/path',
+              filePath: '/dev/null/user/file/path.netcanvas',
             },
-            {
-              payload: {
-                backupPath: '/dev/null/user/file/path.netcanvas.backup',
-                protocol: { schemaVersion: 4 },
-                savePath: '/dev/null/user/file/path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
+            type: 'SESSION/SAVE_NETCANVAS',
+          },
+          {
+            payload: {
+              protocol: { schemaVersion: 4 },
+              savePath: '/dev/null/user/file/path.netcanvas',
             },
-          ]);
-        });
-
-        it('saveAsNetcanvas() netcanvas dispatches the correct actions and side-effects', async () => {
-          await store.dispatch(
-            actionCreators.saveAsNetcanvas('/dev/null/user/file/new_path.netcanvas'),
-          );
-          const actions = store.getActions();
-
-          expect(saveNetcanvas.mock.calls).toEqual([
-            [
-              '/dev/null/working/path',
-              { schemaVersion: 4 },
-              '/dev/null/user/file/new_path.netcanvas',
-              true,
-            ],
-          ]);
-
-          expect(actions).toEqual([
-            {
-              payload: {
-                workingPath: '/dev/null/working/path',
-                filePath: '/dev/null/user/file/new_path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS_COPY',
-            },
-            {
-              payload: {
-                backupPath: '/dev/null/user/file/new_path.netcanvas.backup',
-                savePath: '/dev/null/user/file/new_path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS_COPY_SUCCESS',
-            },
-          ]);
-        });
+            type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
+          },
+        ]);
       });
 
-      describe('when existing backup', () => {
-        const store = getStore({ backupPath: '/dev/null/user/file/path.netcanvas-backup' });
-        beforeEach(() => store.clearActions());
+      it('saveAsNetcanvas()', async () => {
+        await store.dispatch(
+          actionCreators.saveAsNetcanvas('/dev/null/user/file/new_path.netcanvas'),
+        );
+        const actions = store.getActions();
 
-        it('saveNetcanvas() does not specify createBackup if it already exists in state', async () => {
-          await store.dispatch(actionCreators.saveNetcanvas());
-          const actions = store.getActions();
+        expect(saveNetcanvas.mock.calls).toEqual([
+          [
+            '/dev/null/working/path',
+            { schemaVersion: 4 },
+            '/dev/null/user/file/new_path.netcanvas',
+          ],
+        ]);
 
-          expect(saveNetcanvas.mock.calls).toEqual([
-            [
-              '/dev/null/working/path',
-              { schemaVersion: 4 },
-              '/dev/null/user/file/path.netcanvas',
-              false,
-            ],
-          ]);
-
-          expect(actions).toEqual([
-            {
-              payload: {
-                workingPath: '/dev/null/working/path',
-                filePath: '/dev/null/user/file/path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS',
+        expect(actions).toEqual([
+          {
+            payload: {
+              workingPath: '/dev/null/working/path',
+              filePath: '/dev/null/user/file/new_path.netcanvas',
             },
-            {
-              payload: {
-                backupPath: null,
-                protocol: { schemaVersion: 4 },
-                savePath: '/dev/null/user/file/path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS_SUCCESS',
+            type: 'SESSION/SAVE_NETCANVAS_COPY',
+          },
+          {
+            payload: {
+              savePath: '/dev/null/user/file/new_path.netcanvas',
             },
-          ]);
-        });
-
-        it('saveAsNetcanvas()  does not specify createBackup if it already exists in state', async () => {
-          await store.dispatch(
-            actionCreators.saveAsNetcanvas('/dev/null/user/file/new_path.netcanvas'),
-          );
-          const actions = store.getActions();
-
-          expect(saveNetcanvas.mock.calls).toEqual([
-            [
-              '/dev/null/working/path',
-              { schemaVersion: 4 },
-              '/dev/null/user/file/new_path.netcanvas',
-              false,
-            ],
-          ]);
-
-          expect(actions).toEqual([
-            {
-              payload: {
-                workingPath: '/dev/null/working/path',
-                filePath: '/dev/null/user/file/new_path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS_COPY',
-            },
-            {
-              payload: {
-                backupPath: null,
-                savePath: '/dev/null/user/file/new_path.netcanvas',
-              },
-              type: 'SESSION/SAVE_NETCANVAS_COPY_SUCCESS',
-            },
-          ]);
-        });
+            type: 'SESSION/SAVE_NETCANVAS_COPY_SUCCESS',
+          },
+        ]);
       });
     });
   });

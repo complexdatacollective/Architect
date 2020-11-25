@@ -109,7 +109,7 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  describe('deployNetcanvas(exportPath, destinationPath, createBackup = true)', () => {
+  describe('deployNetcanvas(exportPath, destinationPath)', () => {
     const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
     const userDestinationPath = '/dev/null/user/path/export/destination';
 
@@ -158,28 +158,6 @@ describe('utils/netcanvasFile', () => {
         savePath: userDestinationPath,
       });
     });
-
-    it('does not create a backup if specified not to', async () => {
-      fse.rename.mockResolvedValue(true);
-      fse.pathExists.mockResolvedValue(true);
-
-      const result = await deployNetcanvas(
-        netcanvasFilePath,
-        userDestinationPath,
-        false,
-      );
-
-      expect(fse.rename.mock.calls.length).toBe(1);
-      expect(fse.rename.mock.calls[0]).toEqual([
-        '/dev/null/get/electron/path/architect/exports/pendingExport',
-        '/dev/null/user/path/export/destination',
-      ]);
-
-      expect(result).toEqual({
-        backupPath: null,
-        savePath: userDestinationPath,
-      });
-    });
   });
 
   it.todo('createNetcanvas()');
@@ -210,9 +188,8 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  describe('saveNetcanvas(workingPath, protocol, filePath, createBackup = true)', () => {
-    it.todo('Does not create a backup if specified not to');
-    it.todo('Resolves to { savePath, backupPath }');
+  describe('saveNetcanvas(workingPath, protocol, filePath)', () => {
+    it.todo('Resolves to filePath');
   });
 
 

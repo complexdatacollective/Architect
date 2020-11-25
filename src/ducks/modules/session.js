@@ -73,21 +73,19 @@ const saveNetcanvas = () =>
     const protocol = getProtocol(state);
     const workingPath = session.workingPath;
     const filePath = session.filePath;
-    const createBackup = session.backupPath === null;
 
     return Promise.resolve()
       .then(() => dispatch({ type: SAVE_NETCANVAS, payload: { workingPath, filePath } }))
-      .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, filePath, createBackup))
-      .then(({ savePath, backupPath }) => {
+      .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, filePath))
+      .then((savePath) => {
         dispatch({
           type: SAVE_NETCANVAS_SUCCESS,
           payload: {
             savePath,
-            backupPath,
             protocol,
           },
         });
-        return { savePath, backupPath };
+        return savePath;
       })
       .catch((error) => {
         switch (error.code) {
@@ -105,7 +103,6 @@ const saveAsNetcanvas = newFilePath =>
     const session = state.session;
     const protocol = getProtocol(state);
     const workingPath = session.workingPath;
-    const createBackup = session.backupPath === null;
 
     return Promise.resolve()
       .then(() => dispatch({
@@ -113,10 +110,10 @@ const saveAsNetcanvas = newFilePath =>
         payload: { workingPath, filePath: newFilePath },
       }))
       // export protocol to random temp location
-      .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, newFilePath, createBackup))
-      .then(({ savePath, backupPath }) => {
-        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath, backupPath } });
-        return { savePath, backupPath };
+      .then(() => netcanvasFile.saveNetcanvas(workingPath, protocol, newFilePath))
+      .then((savePath) => {
+        dispatch({ type: SAVE_NETCANVAS_COPY_SUCCESS, payload: { savePath } });
+        return savePath;
       })
       .catch((error) => {
         switch (error.code) {
@@ -148,7 +145,6 @@ const protocolChanged = () => ({
 const initialState = {
   workingPath: null,
   filePath: null,
-  backupPath: null,
   lastSaved: 0,
   lastChanged: 0,
 };
@@ -169,7 +165,6 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         filePath,
         workingPath,
-        backupPath: null,
         lastSaved: 0,
         lastChanged: 0,
       };
@@ -177,7 +172,6 @@ export default function reducer(state = initialState, action = {}) {
     case SAVE_NETCANVAS_SUCCESS:
       return {
         ...state,
-        backupPath: action.payload.backupPath || state.backupPath,
         filePath: action.payload.savePath,
         lastSaved: new Date().getTime(),
       };

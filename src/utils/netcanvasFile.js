@@ -147,7 +147,8 @@ const importNetcanvas = filePath =>
  * @param destinationUserPath Destination path
  * @returns {Promise} Resolves to { savePath, backupPath } if successful
  */
-const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup = true) => {
+const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
+  const createBackup = true;
   const f = path.parse(destinationUserPath);
   const backupPath = path.join(f.dir, `${f.name}.backup-${new Date().getTime()}${f.ext}`);
 
@@ -165,6 +166,17 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath, createBackup 
           backupPath: createdBackup ? backupPath : null,
         })),
     );
+};
+
+const commitNetcanvas = ({ savePath, backupPath }) => {
+  if (!backupPath) { return savePath; }
+  // Check the new file definitely exists before deleting backup
+  return fse.stat(savePath)
+    .then((stat) => {
+      if (!stat.isFile()) { return null; }
+      return fse.unlink(backupPath)
+        .then(() => savePath);
+    });
 };
 
 /**
@@ -259,16 +271,18 @@ const validateNetcanvas = filePath =>
  * @param filePath .netcanvas file path
  * @returns {Promise} Resolves to { savePath, backupPath }
  */
-const saveNetcanvas = (workingPath, protocol, filePath, createBackup = true) =>
+const saveNetcanvas = (workingPath, protocol, filePath) =>
   // export protocol to random temp location
   createNetcanvasExport(workingPath, protocol)
-    .then(exportPath =>
-      // open and validate the completed export
-      verifyNetcanvas(exportPath, protocol)
-        // rename existing file to backup location, and move export to this location
-        // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
-        .then(() => deployNetcanvas(exportPath, filePath, createBackup)),
+    // rename existing file to backup location, and move export to this location
+    // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
+    .then(exportPath => deployNetcanvas(exportPath, filePath))
+    // open and validate the completed export
+    .then(({ savePath, backupPath }) =>
+      verifyNetcanvas(filePath, protocol)
+        .then(commitNetcanvas({ savePath, backupPath })),
     )
+    .then(() => filePath)
     .catch(handleError(errors.SaveFailed));
 
 /**
