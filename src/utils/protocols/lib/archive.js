@@ -1,5 +1,5 @@
 import log from 'electron-log';
-import fs from 'fs-extra';
+import fse from 'fs-extra';
 import decompress from 'decompress';
 import archiver from 'archiver';
 
@@ -30,7 +30,7 @@ const extract = (sourcePath, destinationPath) =>
 const archive = (sourcePath, destinationPath) =>
   new Promise((resolve, reject) => {
     log.debug('archive()', sourcePath, destinationPath);
-    const output = fs.createWriteStream(destinationPath);
+    const output = fse.createWriteStream(destinationPath);
     const zip = archiver('zip', archiveOptions);
 
     const handleError = (e) => {

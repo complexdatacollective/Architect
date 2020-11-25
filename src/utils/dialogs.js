@@ -22,6 +22,13 @@ const defaultSaveCopyDialogOptions = {
   properties: ['saveFile'],
 };
 
+const createDialogOptions = {
+  buttonLabel: 'Create',
+  nameFieldLabel: 'Create as:',
+  defaultPath: 'Protocol.netcanvas',
+  filters: [{ name: 'Protocols', extensions: ['netcanvas'] }],
+};
+
 
 /**
  * Shows a open dialog and resolves to (cancelled, filepath), which mirrors later
@@ -64,5 +71,6 @@ export {
   saveDialog,
   saveCopyDialog,
   openDialog,
+  createDialogOptions,
 };
 

@@ -1,0 +1,220 @@
+import React from 'react';
+import path from 'path';
+import Markdown from 'react-markdown';
+import { errors as netcanvasFileErrors } from '@app/utils/netcanvasFile';
+import ExternalLink from '@components/ExternalLink';
+import { actionCreators as dialogActions } from '@modules/dialogs';
+
+const getFriendlyMessage = (e, meta = {}) => {
+  const collectedMeta = {
+    ...e.meta,
+    ...meta,
+  };
+
+  const fileName = collectedMeta.filePath ?
+    (<em>{path.basename(collectedMeta.filePath)}</em>) :
+    'file';
+
+  switch (e.friendlyCode) {
+    case netcanvasFileErrors.NotFound:
+      return (
+        <p>
+          Could not find {fileName}. See the information below for details about
+          why this error occurred.
+        </p>
+      );
+    case netcanvasFileErrors.IncorrectPermissions:
+      return (
+        <React.Fragment>
+          <p>
+            Could not save/open &quot;{fileName}&quot; due to a permissions issue. Please
+            check that the file is not &quot;read only&quot;.
+          </p>
+          <p>
+            If you are attempting to save this file, you can try renaming it so
+            that Architect can recreate the file when you save again.
+          </p>
+          <p>
+            Please contact the Network Canvas team if you need support with
+            this issue.
+          </p>
+        </React.Fragment>
+      );
+    case netcanvasFileErrors.ReadError:
+      return (
+        <p>
+          Could not read the file &quot;{fileName}&quot;. See the information below
+          for details about why this error occurred. Please contact the Network
+          Canvas team if you need support with this issue.
+        </p>
+      );
+    case netcanvasFileErrors.WriteError:
+      return (
+        <React.Fragment>
+          <p>
+            Saving failed because there was an error writing the file. Check that you have enough
+            disk space, or try saving to a different location. The original file has not been
+            changed. See the information below for details about why this error occurred.
+          </p>
+          <p>
+            If you continue to encounter this error, please contact the Network Canvas team for
+            support.
+          </p>
+        </React.Fragment>
+      );
+    case netcanvasFileErrors.CreateFailed:
+      return (
+        <p>
+          Architect failed to create a new protocol file. This may mean
+          it could not write to the temporary directory, or it could not read the template
+          file. Please contact the Network Canvas team for support with this issue. See the
+          information below for details about why this error occurred.
+        </p>
+      );
+    case netcanvasFileErrors.SaveFailed:
+      return (
+        <React.Fragment>
+          <p>
+            Saving failed. Check that you have enough
+            disk space, or try saving to a different location. The original file has not been
+            changed. See the information below for details about why this error occurred.
+          </p>
+          <p>
+            If you continue to encounter this error, please contact the Network Canvas team for
+            support.
+          </p>
+        </React.Fragment>
+      );
+    case netcanvasFileErrors.OpenFailed:
+      return (
+        <React.Fragment>
+          <p>
+            Opening this protocol file failed. See the information below for details about why
+            this error occurred.
+          </p>
+          <p>
+            If you continue to encounter this error, please contact the Network Canvas team for
+            support, including a copy of your protocol file.
+          </p>
+        </React.Fragment>
+      );
+    case netcanvasFileErrors.VerificationFailed:
+      return (
+        <p>
+          Saving failed because the result could not be verified. Your original netcanvas file
+          has not been changed. See the information below for details about why this error occurred.
+        </p>
+      );
+    default:
+      return null;
+  }
+};
+
+const netcanvasFileErrorHandler = (e, meta = {}) => {
+  const friendlyMessage = getFriendlyMessage(e, meta);
+
+  if (friendlyMessage) { e.friendlyMessage = friendlyMessage; }
+
+  return dialogActions.openDialog({
+    type: 'Error',
+    error: e,
+  });
+};
+
+const validationErrorDialog = (e) => {
+  e.friendlyMessage = (
+    <React.Fragment>
+      <p>
+        The protocol format seems to be invalid. Please help us to troubleshoot this issue
+        by sharing your protocol file (or the steps to reproduce this problem) with us by
+        emailing <code>info@networkcanvas.com</code>.
+      </p>
+      <p>
+        You may still save and edit the protocol but it <strong>
+          will not be compatible with
+          Network Canvas or Server</strong>.
+      </p>
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'Error',
+    error: e,
+  });
+};
+
+const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
+  const message = (
+    <React.Fragment>
+      <p>This protocol is not compatible with the current version of Architect.</p>
+
+      <p>In order to open it, you will need to install a version of Architect that
+        supports schema version {protocolSchemaVersion}.
+      </p>
+      <p>
+        Please see our <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink>
+        to locate an appropriate version, and for further information on this topic.
+      </p>
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'UserError',
+    title: 'Protocol not compatible with current version',
+    message,
+  });
+};
+
+const mayUpgradeProtocolDialog = (
+  protocolSchemaVersion,
+  targetSchemaVersion,
+  migrationNotes = [],
+) => {
+  const message = (
+    <React.Fragment>
+      <p>
+        This protocol uses an older schema version
+        (<strong>version {protocolSchemaVersion}</strong>) that is not compatible with
+        this version of Architect. It can be automatically upgraded
+        to schema <strong>version {targetSchemaVersion}</strong> using our migration feature.
+      </p>
+      { migrationNotes.length > 0 &&
+        <React.Fragment>
+          <p>
+            Read the following notes about this migration carefully, as these actions
+            may affect your data.
+          </p>
+          <div className="migration-panel">
+            {migrationNotes.map(({ version, notes }) => (
+              <React.Fragment key={version}>
+                <h4>Migrating to schema Version {version} will:</h4>
+                <Markdown source={notes} renderers={{ link: ExternalLink }} />
+              </React.Fragment>
+            ))}
+          </div>
+        </React.Fragment>
+      }
+      <p>
+        If you choose to continue, an upgraded copy of your protocol
+        will be created and then opened. Your original protocol will not be changed,
+        and can still be opened and modified using an older version of Architect. Please
+        see our <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink> for
+        more information on this topic.
+      </p>
+    </React.Fragment>
+  );
+
+  return dialogActions.openDialog({
+    type: 'Confirm',
+    title: 'Upgrade to continue',
+    confirmLabel: 'Create upgraded copy',
+    message,
+  });
+};
+
+export {
+  netcanvasFileErrorHandler,
+  validationErrorDialog,
+  appUpgradeRequiredDialog,
+  mayUpgradeProtocolDialog,
+};

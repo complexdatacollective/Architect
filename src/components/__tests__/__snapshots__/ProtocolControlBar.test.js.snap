@@ -1,32 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProtocolControlBar /> can render 1`] = `
-<ControlBar
-  buttons={Array []}
-  className=""
-  secondaryButtons={
-    Array [
-      <Button
-        color="platinum"
-        content=""
-        disabled={false}
-        icon={
-          <div>
-            <img
-              alt="Return to start screen"
-              src="log-out.svg"
-            />
-          </div>
-        }
-        iconPosition="left"
-        onClick={[Function]}
-        size=""
-        type="button"
-      >
-        Return to start screen
-      </Button>,
-    ]
-  }
-  show={true}
-/>
-`;
+exports[`<ProtocolControlBar /> can render 1`] = `"<div class=\\"control-bar\\" style=\\"opacity: 0; transform: translateY(100px) translateZ(0);\\"><div class=\\"control-bar__secondary-buttons\\"><div style=\\"opacity: 0; transform: translateY(10px) translateZ(0);\\"><button type=\\"button\\" class=\\"button button--platinum button--has-icon\\"><div class=\\"button__icon\\"><img src=\\"log-out.svg\\" alt=\\"Return to start screen\\"></div><span class=\\"button__content\\">Return to start screen</span></button></div></div><div class=\\"control-bar__primary-buttons\\"></div></div>"`;

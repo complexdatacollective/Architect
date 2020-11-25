@@ -37,15 +37,14 @@ class AppManager {
   // Check process.argv after startup (win)
   static checkAndOpenFileFromArgs() {
     log.info('checkAndOpenFileFromArgs', process.argv);
-    if (process.platform === 'win32') {
+    if (process.platform === 'win32' || process.platform === 'linux') {
       AppManager.openFileFromArgs(process.argv);
     }
   }
 
   static openFileFromArgs(argv) {
     log.info('openFileFromArgs', argv);
-
-    if (process.platform === 'win32') {
+    if (process.platform === 'win32' || process.platform === 'linux') {
       const filePath = getFileFromArgs(argv);
 
       if (filePath) {
@@ -116,8 +115,8 @@ class AppManager {
     ipcMain.on('ACTION', (e, action) => {
       log.info('receive: ACTION', action.type);
       switch (action.type) {
-        case 'PROTOCOLS/LOAD_SUCCESS':
-          this.activeProtocol = action.meta;
+        case 'SESSION/OPEN_NETCANVAS_SUCCESS':
+          this.activeProtocol = action.payload.filePath;
           this.updateMenu();
           break;
         case 'SESSION/RESET':

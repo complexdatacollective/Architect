@@ -2,8 +2,7 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { testing as loadActions } from '../protocols/load';
-import { actionCreators as unbundleActions } from '../protocols/unbundle';
+import { actionTypes as sessionActionTypes } from '../session';
 import reducer from '../recentProtocols';
 
 const protocol = {
@@ -19,7 +18,7 @@ describe('recentProtocols', () => {
       store = createStore(reducer, applyMiddleware(thunk));
     });
 
-    it('Removes protocol on load error', () => {
+    it('Removes protocol on open error', () => {
       const missingFilePath = '/dev/null/non/existent';
 
       const initialState = [
@@ -29,7 +28,10 @@ describe('recentProtocols', () => {
 
       const result = reducer(
         initialState,
-        unbundleActions.unbundleProtocolError(new Error('File not found'), missingFilePath),
+        {
+          type: sessionActionTypes.OPEN_NETCANVAS_ERROR,
+          payload: { filePath: missingFilePath },
+        },
       );
 
       expect(result).toEqual([
@@ -37,28 +39,38 @@ describe('recentProtocols', () => {
       ]);
     });
 
-    it('Adds protocol to list on unbundle', () => {
-      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/7' }));
+    it('Adds protocol to list on open', () => {
+      store.dispatch({
+        type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
+        payload: { filePath: '/dev/null/mock/recent/path/7', protocol } },
+      );
       const state = store.getState();
       expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/7' });
     });
 
-    it('Updates protocol meta on load success', (done) => {
-      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }));
-      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
-      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/3' }));
+    it('Updates existing protocol meta on open', (done) => {
+      store.dispatch({
+        type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
+        payload: { filePath: '/dev/null/mock/recent/path/1', protocol } },
+      );
+      store.dispatch({
+        type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
+        payload: { filePath: '/dev/null/mock/recent/path/2', protocol } },
+      );
+      store.dispatch({
+        type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
+        payload: { filePath: '/dev/null/mock/recent/path/3', protocol } },
+      );
 
       const stateBefore = store.getState();
 
       expect(stateBefore[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
 
       setTimeout(() => {
-        store.dispatch(loadActions.loadProtocolSuccess(
-          {
-            filePath: '/dev/null/mock/recent/path/2',
-          },
-          protocol,
-        ));
+        store.dispatch({
+          type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
+          payload: { filePath: '/dev/null/mock/recent/path/2', protocol } },
+        );
 
         const stateAfter = store.getState();
 
@@ -74,21 +86,28 @@ describe('recentProtocols', () => {
     });
 
     it('Updates protocol meta on save success', (done) => {
-      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/1' }));
-      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/2' }));
-      store.dispatch(unbundleActions.unbundleProtocolSuccess({ filePath: '/dev/null/mock/recent/path/3' }));
+      store.dispatch({
+        type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
+        payload: { savePath: '/dev/null/mock/recent/path/1', protocol } },
+      );
+      store.dispatch({
+        type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
+        payload: { savePath: '/dev/null/mock/recent/path/2', protocol } },
+      );
+      store.dispatch({
+        type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
+        payload: { savePath: '/dev/null/mock/recent/path/3', protocol } },
+      );
 
       const stateBefore = store.getState();
 
       expect(stateBefore[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/3' });
 
       setTimeout(() => {
-        store.dispatch(loadActions.loadProtocolSuccess(
-          {
-            filePath: '/dev/null/mock/recent/path/2',
-          },
-          protocol,
-        ));
+        store.dispatch({
+          type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
+          payload: { savePath: '/dev/null/mock/recent/path/2', protocol } },
+        );
 
         const stateAfter = store.getState();
 

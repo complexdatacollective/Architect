@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { times } from 'lodash';
 import { Spinner, Icon } from '@codaco/ui';
-import { openDialog } from '@app/other/dialogs';
+import { openDialog } from '@app/utils/dialogs';
 import useTimer from './useTimer';
 import { acceptsPaths, getRejectedExtensions, getAcceptsExtensions } from './helpers';
 

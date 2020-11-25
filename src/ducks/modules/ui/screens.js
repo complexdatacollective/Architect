@@ -1,4 +1,3 @@
-import { actionTypes as loadActionTypes } from '@modules/protocols/load';
 import { actionTypes as sessionActionTypes } from '@modules/session';
 
 const OPEN_SCREEN = 'UI/OPEN_SCREEN';
@@ -67,7 +66,7 @@ const getUpdatedScreen = (screen, params) => ({
 
 export default (state = initialState, { type, payload } = { type: null, payload: null }) => {
   switch (type) {
-    case loadActionTypes.LOAD_PROTOCOL_SUCCESS:
+    case sessionActionTypes.OPEN_PROTOCOL_SUCCESS:
     case sessionActionTypes.RESET_SESSION:
       return {
         ...initialState,

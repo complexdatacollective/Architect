@@ -2,18 +2,15 @@
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { importAsset } from '@app/utils/protocols';
 import reducer, { actionCreators, actionTypes } from '../assetManifest';
-import { importAsset } from '../../../../other/protocols';
 
-jest.mock('../../../../other/protocols');
+jest.mock('@app/utils/protocols');
 
 const mockState = {
   session: {
-    activeProtocol: '3c70bbaf-7ef8-4fd9-afaf-6ecd318ecb09',
+    workingPath: '/tmp/foo/bar',
   },
-  protocols: [
-    { id: '3c70bbaf-7ef8-4fd9-afaf-6ecd318ecb09', workingPath: '/tmp/foo/bar', filePath: '/foo/bar' },
-  ],
 };
 
 const log = jest.fn();

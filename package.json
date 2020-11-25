@@ -137,7 +137,6 @@
         "react-id-swiper": "^1.6.8",
         "react-markdown": "^3.6.0",
         "react-redux": "^7.2.1",
-        "react-router-dom": "^5.2.0",
         "react-scripts": "^2.1.1",
         "react-select": "^3.1.0",
         "react-sortable-hoc": "^0.6.8",
@@ -246,7 +245,8 @@
             "!src/protocol-validation/**",
             "!network-canvas/**",
             "!app/**",
-            "!electron-dev/**"
+            "!electron-dev/**",
+            "!release-builds/**"
         ],
         "snapshotSerializers": [
             "enzyme-to-json/serializer"
@@ -269,7 +269,8 @@
             "<rootDir>[/\\\\](network-canvas)[/\\\\]",
             "<rootDir>[/\\\\](electron-dev)[/\\\\]",
             "<rootDir>[/\\\\](app)[/\\\\]",
-            "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]"
+            "<rootDir>[/\\\\](src/protocol-validation)[/\\\\]",
+            "<rootDir>[/\\\\](release-builds)[/\\\\]"
         ],
         "testEnvironment": "node",
         "testURL": "http://localhost",
