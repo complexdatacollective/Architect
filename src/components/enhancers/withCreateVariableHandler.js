@@ -49,7 +49,7 @@ const createVariableHandler = {
   * withCreateVariableHandler(MyComponent)
   *
   * MyComponent = (handleCreateVariable) => (
-  *   <div handler={() => handleCreateVarible(value, type)} />
+  *   <div handler={() => handleCreateVariable(value, type)} />
   * )
   */
 const withCreateVariableHandler =

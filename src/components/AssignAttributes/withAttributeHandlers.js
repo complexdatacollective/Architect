@@ -22,8 +22,6 @@ const store = connect(
 const handlers = withHandlers({
   handleDelete: ({ onDelete, index }) =>
     () => onDelete(index),
-  handleCreateNew: ({ index, onCreateNew }) =>
-    () => onCreateNew(index),
 });
 
 export default compose(

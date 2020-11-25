@@ -1,4 +1,4 @@
-import { compose, withProps, withStateHandlers, withHandlers } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { getVariableOptionsForSubject } from '../../selectors/codebook';
@@ -31,27 +31,6 @@ const mapStateToProps = (state, { entity, type, form, fields }) => {
 const mapDispatchToProps = {
   deleteVariable: codebookActions.deleteVariable,
 };
-const assignAttributesStateHandlers = withStateHandlers(
-  {
-    createNewVariableAtIndex: null,
-    newVariables: [],
-  },
-  {
-    addNewVariable: ({ newVariables }) =>
-      variable => ({
-        newVariables: [...newVariables, variable],
-      }),
-    removeNewVariable: ({ newVariables }) =>
-      variable => ({
-        newVariables: newVariables
-          .filter(id => id !== variable),
-      }),
-    handleOpenCreateNew: () =>
-      createNewVariableAtIndex => ({ createNewVariableAtIndex }),
-    handleCompleteCreateNewVariable: () =>
-      () => ({ createNewVariableAtIndex: null }),
-  },
-);
 
 const assignAttributesHandlers = withHandlers({
   handleDelete: ({
@@ -79,17 +58,9 @@ const assignAttributesHandlers = withHandlers({
     () => fields.push({}),
 });
 
-const showNewVariableWindow = withProps(
-  ({ createNewVariableAtIndex }) => ({
-    showNewVariableWindow: createNewVariableAtIndex !== null,
-  }),
-);
-
 const withNewVariableHandlers = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  assignAttributesStateHandlers,
   assignAttributesHandlers,
-  showNewVariableWindow,
 );
 
 export default withNewVariableHandlers;
