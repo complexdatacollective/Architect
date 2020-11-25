@@ -6,7 +6,7 @@ import { getValidations } from '@app/utils/validations';
 /*
  * This converts our `validation` object into redux-form compatible `validate` prop.
  * Using `constructor()` is a requirement as redux-form will re-register a field component
- * if validate appears to change, and since we use function generators, identites will not match
+ * if validate appears to change, and since we use function generators, identities will not match
  * if we fetch this directly in the render method.
  */
 const withValidation = WrappedComponent =>

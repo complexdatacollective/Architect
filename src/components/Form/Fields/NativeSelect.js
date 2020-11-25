@@ -7,6 +7,8 @@ import { Text } from '@codaco/ui/lib/components/Fields';
 import { Button } from '@codaco/ui';
 import { sortBy } from 'lodash';
 import { AnimatePresence, motion } from 'framer-motion';
+import { untouch } from 'redux-form';
+import { useDispatch } from 'react-redux';
 
 const NativeSelect = ({
   label,
@@ -24,16 +26,21 @@ const NativeSelect = ({
   validation,
   disabled,
   input: { onBlur, ...input },
-  meta: { invalid, error, touched },
+  meta: { invalid, error, touched, form },
   ...rest
 }) => {
   const [showCreateOptionForm, setShowCreateOptionForm] = useState(false);
   const [newOptionValue, setNewOptionValue] = useState(null);
   const [newOptionError, setNewOptionError] = useState(false);
+  const dispatch = useDispatch();
 
   const handleChange = (option) => {
     if (option.target.value === '_create') {
       input.onChange(null);
+
+      // Setting input to null above will 'touch' the select, triggering validation
+      // which we don't want yet. We untoucn the input to resolve this.
+      dispatch(untouch(form, input.name));
       if (onCreateNew) {
         onCreateNew();
         return;
@@ -68,6 +75,7 @@ const NativeSelect = ({
     const matchLabel = ({ label: variableLabel }) =>
       variableLabel && newOptionValue &&
       variableLabel.toLowerCase() === newOptionValue.toLowerCase();
+
     const alreadyExists = options.some(matchLabel);
     const isReserved = reserved.some(matchLabel);
 
@@ -80,11 +88,13 @@ const NativeSelect = ({
     return true;
   };
 
+  // This passes through validation errors from the select to the Text field for
+  // creating new options
   const calculateMeta = useMemo(() => ({
-    touched: newOptionValue !== null,
-    invalid: !isValidCreateOption(newOptionValue),
-    error: newOptionError,
-  }), [newOptionValue, newOptionError]);
+    touched: newOptionValue !== null || touched,
+    invalid: !isValidCreateOption(newOptionValue) || (newOptionValue === null && invalid),
+    error: newOptionError || (newOptionValue === null && error),
+  }), [touched, invalid, error, newOptionValue, newOptionError]);
 
   const sortedOptions = useMemo(() => sortBy(options, 'label'), [options]);
 

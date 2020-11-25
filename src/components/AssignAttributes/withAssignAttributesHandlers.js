@@ -34,15 +34,10 @@ const mapDispatchToProps = {
 
 const assignAttributesHandlers = withHandlers({
   handleDelete: ({
-    fields, entity, type, deleteVariable, newVariables, removeNewVariable,
+    fields,
   }) =>
     (index) => {
-      const field = fields.get(index);
       fields.remove(index);
-      if (field.variable && newVariables.includes(field.variable)) {
-        deleteVariable(entity, type, field.variable);
-        removeNewVariable(field.variable);
-      }
       return undefined;
     },
   handleCreateNewVariable: ({
