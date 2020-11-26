@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { motion } from 'framer-motion';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -7,8 +7,6 @@ import { getHasUnsavedChanges } from '@selectors/session';
 import { selectors as statusSelectors } from '@modules/ui/status';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionLocks as protocolsLocks } from '@modules/userActions';
-// import { actionCreators as sessionActions } from '@modules/session';
-import { actionCreators as previewActions } from '@modules/preview';
 import Overview from '@components/Overview';
 import Timeline from '@components/Timeline';
 import ProtocolControlBar from '@components/ProtocolControlBar';
@@ -16,16 +14,7 @@ import ProtocolControlBar from '@components/ProtocolControlBar';
 const Protocol = ({
   isLoading,
   hasProtocol,
-  protocolPath,
 }) => {
-  const dispatch = useDispatch();
-  useEffect(() =>
-    () => {
-      // dispatch(sessionActions.resetSession());
-      dispatch(previewActions.closePreview());
-    },
-  [protocolPath]);
-
   const sceneClasses = cx(
     'scene',
     { 'scene--protocol': hasProtocol },
@@ -63,11 +52,9 @@ const Protocol = ({
 Protocol.propTypes = {
   isLoading: PropTypes.bool,
   hasProtocol: PropTypes.bool,
-  protocolPath: PropTypes.string,
 };
 
 Protocol.defaultProps = {
-  protocolPath: null,
   isLoading: false,
   hasProtocol: false,
 };
