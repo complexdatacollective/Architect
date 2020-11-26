@@ -4,7 +4,7 @@ import fse from 'fs-extra';
 import path from 'path';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
-import pruneProtocol from '@app/utils/pruneProtocol';
+import { pruneProtocol } from '@app/utils/prune';
 import {
   errors,
   importNetcanvas,
@@ -17,7 +17,7 @@ import {
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
 jest.mock('@app/utils/pruneProtocolAssets');
-jest.mock('@app/utils/pruneProtocol');
+jest.mock('@app/utils/prune');
 
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 

@@ -8,7 +8,7 @@ import { APP_SCHEMA_VERSION } from '@app/config';
 import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
-import pruneProtocol from '@app/utils/pruneProtocol';
+import { pruneProtocol } from '@app/utils/prune';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive, extract } from '@app/utils/protocols/lib/archive';
 import protocolTemplate from '@app/utils/protocolTemplate.json';
