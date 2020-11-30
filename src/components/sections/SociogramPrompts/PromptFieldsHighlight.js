@@ -18,7 +18,6 @@ const HighlightFields = ({
   handleCreateVariable,
   handleEdgeHighlightChange,
   highlightVariablesForSubject,
-  normalizeKeyDown,
   setCanCreateEdge,
   type,
 }) => {
@@ -58,8 +57,7 @@ const HighlightFields = ({
           type={type}
           label="Variable to be toggled"
           placeholder="Select or create a boolean variable"
-          onCreateOption={value => handleCreateVariable(value, 'boolean')}
-          onKeyDown={normalizeKeyDown}
+          onCreateOption={value => handleCreateVariable(value, 'boolean', 'highlight.variable')}
           validation={{ required: true }}
           options={highlightVariablesForSubject}
         />
@@ -76,7 +74,6 @@ HighlightFields.propTypes = {
   handleCreateVariable: PropTypes.func.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   highlightVariablesForSubject: PropTypes.array.isRequired,
-  normalizeKeyDown: PropTypes.func.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
 };
