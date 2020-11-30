@@ -21,8 +21,8 @@ const PromptFields = ({
 }) => (
   <Section contentId="guidance.editor.sociogram_prompt.layout" group>
     <Row>
-      <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
       <h3>Layout</h3>
+      <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
       <p>
         This section controls the position of nodes on this sociogram prompt.
       </p>

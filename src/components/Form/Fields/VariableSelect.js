@@ -18,9 +18,9 @@ const mapStateToProps = (state, { entity, type }) => {
 // TODO: For now just map existing variables, but later could also append create handlers!
 const VariableSelect = ({ reserved, ...props }) => (
   <NativeSelect
+    placeholder="Select or create a variable"
     {...props}
     reserved={reserved}
-    placeholder="Select or create a variable"
   />
 );
 

@@ -28,6 +28,19 @@
     margin-top: 0;
   }
 
+  > .form-field-container,
+  .form-field-text,
+  .form-field-checkbox-group,
+  .form-field-radio-group {
+    &:last-child {
+      margin-bottom: 0;
+
+      .form-field {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   // &--group {
   .stage-editor-section {
     margin: unit(4) 0;
