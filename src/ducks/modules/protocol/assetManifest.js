@@ -76,15 +76,15 @@ const importAssetThunk = filePath =>
       .then(() =>
         validateAsset(filePath)
           .catch((error) => {
-            log.error('  INVALID ASSET', error);
             dispatch(invalidAssetErrorDialog(error, filePath));
+            log.error('Validation error', error);
             throw error;
           }),
       )
       .then(() =>
         fsImportAsset(workingPath, filePath)
           .catch((error) => {
-            log.error('  IMPORT ERROR', error);
+            log.error('Import error', error);
             dispatch(importAssetErrorDialog(error, filePath));
             throw error;
           }),
