@@ -4,14 +4,20 @@ const path = require('path');
 const log = require('./log');
 
 const windowParameters = {
-  resizable: false,
   center: true,
-  show: false,
-  width: 1024,
+  enableLargerThanScreen: true,
   height: 768,
-  webPreferences: {
-    nodeIntegration: true,
-  },
+  // resizeable:
+  // This doesn't work as expected. It stops the user from
+  // manually resizing the window, but also seems to prevent
+  // setSize from *reducing* the window size. Currently
+  // setContentSize doesn't seem to have this limitation and
+  // is a better fit for purpose.
+  resizable: false,
+  show: false,
+  useContentSize: true,
+  webPreferences: { nodeIntegration: true },
+  width: 1024,
 };
 
 function getAppUrl() {
