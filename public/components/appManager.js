@@ -174,7 +174,12 @@ class AppManager {
     };
 
     const appMenu = Menu.buildFromTemplate(mainMenu(menuOptions));
-    Menu.setApplicationMenu(appMenu);
+
+    if (process.platform === 'win32' || process.platform === 'linux') {
+      global.appWindow.setMenu(appMenu);
+    } else {
+      Menu.setApplicationMenu(appMenu);
+    }
   }
 }
 
