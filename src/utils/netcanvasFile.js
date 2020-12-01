@@ -289,7 +289,7 @@ const saveNetcanvas = (workingPath, protocol, filePath) =>
     // open and validate the completed export
     .then(({ savePath, backupPath }) =>
       verifyNetcanvas(filePath, protocol)
-        .then(commitNetcanvas({ savePath, backupPath })),
+        .then(() => commitNetcanvas({ savePath, backupPath })),
     )
     .then(() => filePath)
     .catch(handleError(errors.SaveFailed));
