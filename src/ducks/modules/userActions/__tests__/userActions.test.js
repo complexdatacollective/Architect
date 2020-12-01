@@ -1,6 +1,9 @@
 /* eslint-env jest */
 
-import { actionCreators, actionLocks } from '../userActions';
+import {
+  // actionCreators,
+  actionLocks,
+} from '../userActions';
 
 describe('userActions', () => {
   it('exports actionLocks', () => {
