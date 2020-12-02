@@ -2,18 +2,19 @@
 
 import fse from 'fs-extra';
 import path from 'path';
+import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { pruneProtocol } from '@app/utils/prune';
 import {
-  // checkSchemaVersion,
+  checkSchemaVersion,
   // createNetcanvas,
   errors,
   importNetcanvas,
   // migrateNetcanvas,
   readProtocol,
   saveNetcanvas,
-  // schemaVersionStates,
+  schemaVersionStates,
   utils,
   // validateNetcanvas,
 } from '../netcanvasFile';
@@ -74,6 +75,64 @@ describe('utils/netcanvasFile', () => {
   it.todo('commitNetcanvas()');
   it.todo('revertNetcanvas()');
   it.todo('writeProtocol()');
+
+  describe('checkSchemaVersion(protocol, schemaVersion [optional])', () => {
+    const defaultMocks = {
+      mkdirp: [fse.mkdirp, Promise.resolve()],
+      access: [fse.access, Promise.resolve()],
+      extract: [extract, Promise.resolve()],
+    };
+
+    it('returns errors.MissingSchemaVersion if no schema version in protocol', async () => {
+      mockAndLog({
+        ...defaultMocks,
+        readJson: [fse.readJson, Promise.resolve({})],
+      });
+
+      await expect(checkSchemaVersion('/dev/null/netcanvas/file'))
+        .rejects.toEqual(errors.MissingSchemaVersion);
+    });
+
+    it('returns [, schemaVersionStates.OK] if protocol is a match', async () => {
+      mockAndLog({
+        ...defaultMocks,
+        readJson: [fse.readJson, Promise.resolve({ schemaVersion: 3 })],
+      });
+
+      await expect(checkSchemaVersion('/dev/null/netcanvas/file', 3))
+        .resolves.toEqual([3, schemaVersionStates.OK]);
+    });
+
+    it('returns [, schemaVersionStates.UPGRADE_PROTOCOL] if protocol can upgrade', async () => {
+      mockAndLog({
+        ...defaultMocks,
+        readJson: [fse.readJson, Promise.resolve({ schemaVersion: 2 })],
+      });
+
+      await expect(checkSchemaVersion('/dev/null/netcanvas/file', 3))
+        .resolves.toEqual([2, schemaVersionStates.UPGRADE_PROTOCOL]);
+    });
+
+    it('returns [, schemaVersionStates.UPGRADE_AGG] if protocol cannot upgrade', async () => {
+      mockAndLog({
+        ...defaultMocks,
+        readJson: [fse.readJson, Promise.resolve({ schemaVersion: 4 })],
+      });
+
+      await expect(checkSchemaVersion('/dev/null/netcanvas/file', 3))
+        .resolves.toEqual([4, schemaVersionStates.UPGRADE_APP]);
+    });
+
+    it('defaults to APP_SCHEMA_VERSION', async () => {
+      mockAndLog({
+        ...defaultMocks,
+        readJson: [fse.readJson, Promise.resolve({ schemaVersion: APP_SCHEMA_VERSION })],
+      });
+
+      await expect(checkSchemaVersion('/dev/null/netcanvas/file'))
+        .resolves.toEqual([APP_SCHEMA_VERSION, schemaVersionStates.OK]);
+    });
+  });
 
   describe('saveNetcanvas(workingPath, protocol, filePath)', () => {
     const expectBackupPath = expect.stringMatching(/\/dev\/null\/destination\/path\.backup-[0-9]+/);

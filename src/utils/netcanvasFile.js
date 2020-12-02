@@ -14,15 +14,16 @@ import { archive, extract } from '@app/utils/protocols/lib/archive';
 import protocolTemplate from '@app/utils/protocolTemplate.json';
 
 const errors = {
-  NotFound: 'NotFound', // File could not be found
-  IncorrectPermissions: 'IncorrectPermissions', // File does not have read/write permissions
-  ReadError: 'ReadError', // File could not be read
-  WriteError: 'WriteError', // File could not be written
-  MigrationFailed: 'MigrationFailed', // Protocol could not be migrated
   CreateFailed: 'CreateFailed', // Netcanvas file could not be generated
-  SaveFailed: 'SaveFailed', // Netcanvas file could not be saved
+  IncorrectPermissions: 'IncorrectPermissions', // File does not have read/write permissions
+  MigrationFailed: 'MigrationFailed', // Protocol could not be migrated
+  MissingSchemaVersion: 'MissingSchemaVersion', // Protocol does not contain schema version
+  NotFound: 'NotFound', // File could not be found
   OpenFailed: 'OpenFailed', // Netcanvas file could not be opened
+  ReadError: 'ReadError', // File could not be read
+  SaveFailed: 'SaveFailed', // Netcanvas file could not be saved
   VerificationFailed: 'VerificationFailed', // Netcanvas file could not be verifed
+  WriteError: 'WriteError', // File could not be written
 };
 
 const schemaVersionStates = {
