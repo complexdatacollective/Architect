@@ -2,7 +2,7 @@
     "name": "network-canvas-architect",
     "version": "6.0.0",
     "productName": "Network Canvas Architect",
-    "description": "A tool for creating Network Canvas interviews.",
+    "description": "A tool for building Network Canvas interviews.",
     "author": "Complex Data Collective <info@networkcanvas.com>",
     "private": true,
     "engines": {
