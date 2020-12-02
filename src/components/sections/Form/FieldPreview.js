@@ -18,13 +18,13 @@ const PreviewFieldComponent = ({
 }) => {
   const codebookVariable = get(subjectVariables, value.variable, {});
   return (
-    <div>
+    <span className="field-preview">
       {value.prompt}
       <Badge color={getColorForType(codebookVariable.type)}>
         <strong>{codebookVariable.type}</strong> variable
         using <strong>{codebookVariable.component}</strong> input control
       </Badge>
-    </div>
+    </span>
   );
 };
 

@@ -20,13 +20,12 @@ const EntityType = ({
   entity,
   type,
   variables,
-  closeCodebook,
   handleEdit,
   handleDelete,
 }) => {
   const stages = usage
     .map(({ id, label }) => (
-      <ScreenLink screen="stage" id={id} onClick={closeCodebook} key={id}>{label}</ScreenLink>
+      <ScreenLink screen="stage" id={id} key={id}>{label}</ScreenLink>
     ));
 
   return (
@@ -83,7 +82,6 @@ EntityType.propTypes = {
   inUse: PropTypes.bool,
   handleDelete: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
-  closeCodebook: PropTypes.func.isRequired,
   variables: PropTypes.array,
 };
 
@@ -108,8 +106,6 @@ const withEntityHandlers = compose(
     openScreen: screenActionsCreators.openScreen,
   }),
   withHandlers({
-    closeCodebook: ({ closeScreen }) =>
-      () => closeScreen('codebook'),
     handleEdit: ({ openScreen, entity, type }) =>
       () => {
         openScreen('type', { entity, type, metaOnly: true });

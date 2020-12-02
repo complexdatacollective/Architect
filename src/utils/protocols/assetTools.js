@@ -30,7 +30,13 @@ const readCsvNetwork = async (assetPath) => {
     .fromString(data.toString('utf8'))
     .then(
       rows => rows.map(attributes => ({ attributes })),
-    );
+    )
+    .catch((e) => {
+      if (e.toString().includes('column_mismatched')) {
+        e.code = 'COLUMN_MISMATCHED';
+      }
+      throw e;
+    });
 
   return {
     nodes,
@@ -68,9 +74,13 @@ const validateNetwork = async (filePath) => {
   // check variable names
   const variableNames = getVariableNamesFromNetwork(network);
 
-  const error = validateNames(variableNames);
+  const errorString = validateNames(variableNames);
 
-  if (error) { throw new Error(error); }
+  if (errorString) {
+    const error = new Error(errorString);
+    error.code = 'VARIABLE_NAME';
+    throw error;
+  }
 
   return true;
 };

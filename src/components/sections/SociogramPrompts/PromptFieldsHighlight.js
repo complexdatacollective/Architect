@@ -18,7 +18,6 @@ const HighlightFields = ({
   handleCreateVariable,
   handleEdgeHighlightChange,
   highlightVariablesForSubject,
-  normalizeKeyDown,
   setCanCreateEdge,
   type,
 }) => {
@@ -49,21 +48,21 @@ const HighlightFields = ({
         disabled={canCreateEdge}
         title={canCreateEdge ? 'Create edge must be disabled to allow highlighting' : ''}
       />
+      { allowHighlighting &&
       <Row disabled={!allowHighlighting}>
-        { allowHighlighting &&
-          <ValidatedField
-            name="highlight.variable"
-            component={VariableSelect}
-            entity={entity}
-            type={type}
-            label="Which boolean variable should be toggled?"
-            onCreateOption={value => handleCreateVariable(value, 'boolean')}
-            onKeyDown={normalizeKeyDown}
-            validation={{ required: true }}
-            options={highlightVariablesForSubject}
-          />
-        }
+        <ValidatedField
+          name="highlight.variable"
+          component={VariableSelect}
+          entity={entity}
+          type={type}
+          label="Variable to be toggled"
+          placeholder="Select or create a boolean variable"
+          onCreateOption={value => handleCreateVariable(value, 'boolean', 'highlight.variable')}
+          validation={{ required: true }}
+          options={highlightVariablesForSubject}
+        />
       </Row>
+      }
     </Section>
   );
 };
@@ -75,7 +74,6 @@ HighlightFields.propTypes = {
   handleCreateVariable: PropTypes.func.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   highlightVariablesForSubject: PropTypes.array.isRequired,
-  normalizeKeyDown: PropTypes.func.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
 };

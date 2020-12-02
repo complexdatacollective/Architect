@@ -7,7 +7,7 @@ import { Text } from '@codaco/ui/lib/components/Fields';
 import { Button } from '@codaco/ui';
 import { sortBy } from 'lodash';
 import { AnimatePresence, motion } from 'framer-motion';
-import { untouch } from 'redux-form';
+import { untouch, touch } from 'redux-form';
 import { useDispatch } from 'react-redux';
 
 const NativeSelect = ({
@@ -39,7 +39,7 @@ const NativeSelect = ({
       input.onChange(null);
 
       // Setting input to null above will 'touch' the select, triggering validation
-      // which we don't want yet. We untoucn the input to resolve this.
+      // which we don't want yet. We 'un-touch' the input to resolve this.
       dispatch(untouch(form, input.name));
       if (onCreateNew) {
         onCreateNew();
@@ -88,13 +88,42 @@ const NativeSelect = ({
     return true;
   };
 
-  // This passes through validation errors from the select to the Text field for
-  // creating new options
+  // Do we have a value in the create new Text field that is not submitted?
+  const valueButNotSubmitted = newOptionValue !== null && showCreateOptionForm;
+
+  const notSubmittedError = useMemo(() => valueButNotSubmitted && 'You must click "create" to finish creating this variable.', [valueButNotSubmitted]);
+
+  /**
+   * This passes through validation errors from the select to the Text field for
+   * creating new options. It also has to handle when the create new option form
+   * hasn't been shown
+   *
+   * touched:
+   *   - touched: controlled by parent input, and triggered/reset from child as needed
+   * invalid:
+   *   - !isValidCreateOption: validate the new variable Text field value
+   *   - valueButNotSubmitted: true if value entered in Text field but not submitted
+   *   - invalid: parent select invalid prop. Will be set to true when validation is
+   *     triggered and we have no value set
+   * error:
+   *   - newOptionError: error message from Text field variable validation
+   *   - error: parent select error message. Will usually be "Required"
+   */
   const calculateMeta = useMemo(() => ({
-    touched: newOptionValue !== null || touched,
-    invalid: !isValidCreateOption(newOptionValue) || (newOptionValue === null && invalid),
-    error: newOptionError || (newOptionValue === null && error),
-  }), [touched, invalid, error, newOptionValue, newOptionError]);
+    touched,
+    invalid: !isValidCreateOption(newOptionValue) ||
+      valueButNotSubmitted || (newOptionValue === null && invalid),
+    localInvalid: !isValidCreateOption(newOptionValue),
+    error: newOptionError || notSubmittedError || error,
+  }), [
+    touched,
+    invalid,
+    error,
+    newOptionValue,
+    newOptionError,
+    valueButNotSubmitted,
+    notSubmittedError,
+  ]);
 
   const sortedOptions = useMemo(() => sortBy(options, 'label'), [options]);
 
@@ -121,13 +150,26 @@ const NativeSelect = ({
             <Text
               label={createInputLabel}
               autoFocus
-              input={{ onChange: event => setNewOptionValue(event.target.value) }}
+              input={{
+                // Make interaction with this input also touch the parent so we can control
+                // validation better.
+                onChange: (event) => {
+                  dispatch(untouch(form, input.name));
+                  setNewOptionValue(event.target.value);
+                },
+                onBlur: () => {
+                  dispatch(touch(form, input.name));
+                },
+              }}
               placeholder={createInputPlaceholder}
               meta={calculateMeta}
             />
             <div className="button-footer">
               <Button color="platinum" onClick={() => setShowCreateOptionForm(false)}>Cancel</Button>
-              <Button onClick={handleCreateOption} disabled={calculateMeta.invalid}>Create</Button>
+              <Button
+                onClick={handleCreateOption}
+                disabled={calculateMeta.localInvalid}
+              >Create</Button>
             </div>
           </motion.div>
         ) : (

@@ -93,8 +93,13 @@ const readProtocol = (workingPath) => {
 const writeProtocol = (workingPath, protocol) => {
   const protocolJsonPath = path.join(workingPath, 'protocol.json');
 
+  const protocolWithDate = {
+    ...protocol,
+    lastModified: new Date().toISOString(),
+  };
+
   return Promise.resolve()
-    .then(() => pruneProtocol(protocol))
+    .then(() => pruneProtocol(protocolWithDate))
     .then(prunedProtocol =>
       fse.writeJson(protocolJsonPath, prunedProtocol, { spaces: 2 })
         .catch(handleError(errors.WriteError))
@@ -243,7 +248,11 @@ const verifyNetcanvas = (filePath, protocol) =>
       .then(readProtocol),
   ])
     .then(([prunedProtocol, fileProtocol]) => {
-      const match = isEqual(fileProtocol, prunedProtocol);
+      const match = isEqual(
+        // fileProtocol, prunedProtocol,
+        { ...fileProtocol, lastModified: null },
+        { ...prunedProtocol, lastModified: null },
+      );
 
       if (!match) {
         throw ProtocolsDidNotMatchError;
@@ -280,7 +289,7 @@ const saveNetcanvas = (workingPath, protocol, filePath) =>
     // open and validate the completed export
     .then(({ savePath, backupPath }) =>
       verifyNetcanvas(filePath, protocol)
-        .then(commitNetcanvas({ savePath, backupPath })),
+        .then(() => commitNetcanvas({ savePath, backupPath })),
     )
     .then(() => filePath)
     .catch(handleError(errors.SaveFailed));

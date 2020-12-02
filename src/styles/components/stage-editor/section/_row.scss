@@ -16,7 +16,9 @@
   > .form-field-container,
   .form-field-text,
   .form-field-radio-group {
-    margin-bottom: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
 }

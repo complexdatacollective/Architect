@@ -46,7 +46,7 @@ const DateTimeParameters = ({ name, type, setSelectDefault, resetRangeFields }) 
       <h4>Start Range</h4>
       <p>
         The start range is the earliest date available for the participant to select.
-        If left empty, it will default to starting at {'1970-01-01'.slice(0, dateFormat.length)}.
+        If left empty, it will default to starting in the year 1920.
       </p>
       <ValidatedField
         label=""
