@@ -8,7 +8,7 @@
   transition-property: background-color;
   transition-duration: var(--animation-duration-standard);
   transition-timing-function: var(--animation-easing);
-  height: 7rem;
+  height: 12rem;
   width: 25rem;
 
   &__icon {
@@ -28,7 +28,7 @@
 
   &--image {
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
 
     &.thumbnail--contain {
