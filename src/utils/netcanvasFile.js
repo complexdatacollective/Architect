@@ -184,16 +184,15 @@ const commitNetcanvas = ({ savePath, backupPath }) => {
     });
 };
 
-const revertNetcanvas = ({ savePath, backupPath }) => {
+const revertNetcanvas = ({ savePath, backupPath }) =>
   // Check the backup definitely exists before deleting original file
-  return fse.stat(backupPath)
+  fse.stat(backupPath)
     .then((stat) => {
       if (!stat.isFile()) { throw new Error('`backupPath` does not exist'); }
       return fse.unlink(savePath)
         .then(() => fse.rename(backupPath, savePath))
         .then(() => savePath);
     });
-};
 
 /**
  * Create a new .netcanvas file at the target location.
@@ -330,18 +329,24 @@ const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERS
     .then(({ savePath }) => savePath)
     .catch(handleError(errors.MigrationFailed));
 
-export {
-  errors,
-  schemaVersionStates,
-  writeProtocol,
-  readProtocol,
-  createNetcanvas,
+const utils = {
+  commitNetcanvas,
   createNetcanvasExport,
-  importNetcanvas,
   deployNetcanvas,
-  checkSchemaVersion,
+  revertNetcanvas,
   verifyNetcanvas,
-  saveNetcanvas,
+  writeProtocol,
+};
+
+export {
+  checkSchemaVersion,
+  createNetcanvas,
+  errors,
+  importNetcanvas,
   migrateNetcanvas,
+  readProtocol,
+  saveNetcanvas,
+  schemaVersionStates,
+  utils,
   validateNetcanvas,
 };
