@@ -174,15 +174,25 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
 };
 
 const commitNetcanvas = ({ savePath, backupPath }) => {
-  if (!backupPath) { return savePath; }
+  if (!backupPath) { return Promise.resolve(savePath); }
   // Check the new file definitely exists before deleting backup
   return fse.stat(savePath)
     .then((stat) => {
-      if (!stat.isFile()) { return null; }
+      if (!stat.isFile()) { throw new Error('`savePath` does not exist'); }
       return fse.unlink(backupPath)
         .then(() => savePath);
     });
 };
+
+const revertNetcanvas = ({ savePath, backupPath }) =>
+  // Check the backup definitely exists before deleting original file
+  fse.stat(backupPath)
+    .then((stat) => {
+      if (!stat.isFile()) { throw new Error('`backupPath` does not exist'); }
+      return fse.unlink(savePath)
+        .then(() => fse.rename(backupPath, savePath))
+        .then(() => savePath);
+    });
 
 /**
  * Create a new .netcanvas file at the target location.
@@ -249,7 +259,6 @@ const verifyNetcanvas = (filePath, protocol) =>
   ])
     .then(([prunedProtocol, fileProtocol]) => {
       const match = isEqual(
-        // fileProtocol, prunedProtocol,
         { ...fileProtocol, lastModified: null },
         { ...prunedProtocol, lastModified: null },
       );
@@ -289,7 +298,11 @@ const saveNetcanvas = (workingPath, protocol, filePath) =>
     // open and validate the completed export
     .then(({ savePath, backupPath }) =>
       verifyNetcanvas(filePath, protocol)
-        .then(() => commitNetcanvas({ savePath, backupPath })),
+        .then(() => commitNetcanvas({ savePath, backupPath }))
+        .catch(e =>
+          revertNetcanvas({ savePath, backupPath })
+            .then(() => { throw e; }),
+        ),
     )
     .then(() => filePath)
     .catch(handleError(errors.SaveFailed));
@@ -316,18 +329,24 @@ const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERS
     .then(({ savePath }) => savePath)
     .catch(handleError(errors.MigrationFailed));
 
-export {
-  errors,
-  schemaVersionStates,
-  writeProtocol,
-  readProtocol,
-  createNetcanvas,
+const utils = {
+  commitNetcanvas,
   createNetcanvasExport,
-  importNetcanvas,
   deployNetcanvas,
-  checkSchemaVersion,
+  revertNetcanvas,
   verifyNetcanvas,
-  saveNetcanvas,
+  writeProtocol,
+};
+
+export {
+  checkSchemaVersion,
+  createNetcanvas,
+  errors,
+  importNetcanvas,
   migrateNetcanvas,
+  readProtocol,
+  saveNetcanvas,
+  schemaVersionStates,
+  utils,
   validateNetcanvas,
 };

@@ -19,7 +19,7 @@ export default function reducer(state = initialState, action = {}) {
       const { filePath, protocol } = action.payload;
       return addProtocol(state, {
         filePath,
-        lastModified: new Date().getTime(),
+        lastModified: protocol.lastModified,
         name: path.basename(filePath, '.netcanvas'),
         description: protocol.description,
         schemaVersion: protocol.schemaVersion,

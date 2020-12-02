@@ -6,18 +6,31 @@ import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { pruneProtocol } from '@app/utils/prune';
 import {
+  // checkSchemaVersion,
+  // createNetcanvas,
   errors,
   importNetcanvas,
-  createNetcanvasExport,
-  deployNetcanvas,
+  // migrateNetcanvas,
   readProtocol,
-  verifyNetcanvas,
+  // saveNetcanvas,
+  // schemaVersionStates,
+  utils,
+  // validateNetcanvas,
 } from '../netcanvasFile';
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
 jest.mock('@app/utils/pruneProtocolAssets');
 jest.mock('@app/utils/prune');
+
+const {
+  // commitNetcanvas,
+  createNetcanvasExport,
+  deployNetcanvas,
+  // revertNetcanvas,
+  verifyNetcanvas,
+  // writeProtocol,
+} = utils;
 
 const mockProtocol = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
 
@@ -33,6 +46,15 @@ describe('utils/netcanvasFile', () => {
     pruneProtocol.mockReset();
     pruneProtocolAssets.mockReset();
   });
+
+  it.todo('errors');
+  it.todo('createNetcanvas()');
+  it.todo('migrateNetcanvas()');
+  it.todo('saveNetcanvas()');
+  it.todo('schemaVersionStates');
+  it.todo('commitNetcanvas()');
+  it.todo('revertNetcanvas()');
+  it.todo('writeProtocol()');
 
   describe('readProtocol(protocolPath)', () => {
     it('Rejects with a human readable error when protocol cannot be parsed', async () => {
@@ -61,9 +83,6 @@ describe('utils/netcanvasFile', () => {
       ).resolves.toEqual({});
     });
   });
-
-  it.todo('writeProtocol()');
-  it.todo('preflight()');
 
   describe('createNetcanvasExport(workingPath, protocol)', () => {
     const workingPath = path.join('dev', 'null');
@@ -160,10 +179,6 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  it.todo('createNetcanvas()');
-
-  it.todo('checkSchemaVersion()');
-
   describe('verifyNetcanvas(filePath)', () => {
     beforeEach(() => {
       pruneProtocol.mockImplementation(p => Promise.resolve(p));
@@ -187,11 +202,4 @@ describe('utils/netcanvasFile', () => {
         .resolves.toEqual(mockProtocol);
     });
   });
-
-  describe('saveNetcanvas(workingPath, protocol, filePath)', () => {
-    it.todo('Resolves to filePath');
-  });
-
-
-  it.todo('migrateNetcanvas()');
 });
