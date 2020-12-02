@@ -74,7 +74,7 @@ const LaunchPad = ({
               onClick={() => openNetcanvas()}
             >
               <h2>Open</h2>
-              <h3>existing protocol</h3>
+              <h3>Existing Protocol</h3>
             </GraphicButton>
           </div>
         </div>
