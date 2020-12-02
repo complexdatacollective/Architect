@@ -47,7 +47,7 @@ const ContentGrid = props => (
       Items can be resized by dragging.
     </p>
     <p>
-      Available sizes are: Small (2 spaces), Medium (2 spaces) and large (1 space).
+      Available sizes are: Small (4 spaces), Medium (2 spaces) and large (1 space).
     </p>
   </Grid>
 );

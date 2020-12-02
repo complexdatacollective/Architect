@@ -97,7 +97,7 @@ class Overview extends Component {
         </div>
         <div className="overview__footer">
           <Icon name="protocol-card" />
-          <Button onClick={() => openScreen('assets')} color="neon-coral">Manage Resources</Button>
+          <Button onClick={() => openScreen('assets')} color="neon-coral">Resource Library</Button>
           <Button onClick={() => openScreen('codebook')} color="sea-serpent">Manage Codebook</Button>
         </div>
       </motion.div>
