@@ -94,6 +94,7 @@ $font-sizes: (
     background-position: 100% -2rem;
     background-repeat: no-repeat;
     color: var(--color-white);
+    align-items: center;
 
     .launch-pad__action-divider {
       visibility: hidden;
@@ -105,6 +106,10 @@ $font-sizes: (
     $rule-width: px(5);
     width: calc(50% - (#{unit(4)} - #{$rule-width}));
     position: relative;
+
+    &:not(:last-of-type) {
+      margin-bottom: unit(1);
+    }
 
     &:last-of-type {
       display: flex;
