@@ -51,7 +51,7 @@ const LaunchPad = ({
     }
     <Section className="launch-pad">
       <Group>
-        <h2>Create or Open</h2>
+        <h2>Tasks</h2>
         <div className="launch-pad__actions">
           <div className="launch-pad__action">
             <GraphicButton
@@ -74,7 +74,7 @@ const LaunchPad = ({
               onClick={() => openNetcanvas()}
             >
               <h2>Open</h2>
-              <h3>from Computer</h3>
+              <h3>existing protocol</h3>
             </GraphicButton>
           </div>
         </div>
