@@ -76,7 +76,9 @@ describe('utils/netcanvasFile', () => {
   it.todo('writeProtocol()');
 
   describe('saveNetcanvas(workingPath, protocol, filePath)', () => {
-    const defaultMocks = {
+    const expectBackupPath = expect.stringMatching(/\/dev\/null\/destination\/path\.backup-[0-9]+/);
+
+    const successfulMocks = {
       'fse.writeJson': [fse.writeJson, Promise.resolve()],
       pruneProtocolAssets: [pruneProtocolAssets, Promise.resolve()],
       pruneProtocol: [pruneProtocol, Promise.resolve(mockProtocol)],
@@ -87,7 +89,7 @@ describe('utils/netcanvasFile', () => {
     };
 
     it('successful save', async () => {
-      mockAndLog(defaultMocks);
+      mockAndLog(successfulMocks);
 
       const logger = mockAndLog({
         'fse.rename': [fse.rename, Promise.resolve()],
@@ -95,8 +97,6 @@ describe('utils/netcanvasFile', () => {
         'fse.writeJson': [fse.writeJson, Promise.resolve()],
         archive: [archive, Promise.resolve()],
       });
-
-      const expectBackupPath = expect.stringMatching(/\/dev\/null\/destination\/path\.backup-[0-9]+/);
 
       await saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path');
 
@@ -121,25 +121,19 @@ describe('utils/netcanvasFile', () => {
        * Mocks to get to verifyNetcanvas step and then return mismatching
        * values for comparison failing the test
        */
-      fse.writeJson.mockResolvedValue();
-      pruneProtocolAssets.mockResolvedValueOnce();
-      pruneProtocol
-        .mockReturnValueOnce(mockProtocol)
-        .mockReturnValueOnce({ second: 'attempt' });
-      fse.readJson.mockResolvedValueOnce({ first: 'attempt' });
-      fse.pathExists.mockResolvedValueOnce(true);
-      fse.stat.mockResolvedValueOnce({ isFile: () => Promise.resolve(true) });
-      fse.access.mockResolvedValueOnce();
-      const logger = mockAndLog([
-        [fse.rename, 'fse.rename', Promise.resolve()],
-        [fse.unlink, 'fse.unlink', Promise.resolve()],
-        [fse.writeJson, 'fse.writeJson', Promise.resolve()],
-        [archive, 'archive', Promise.resolve()],
-      ]);
+      mockAndLog({
+        ...successfulMocks,
+        'fse.readJson': [fse.readJson, Promise.resolve({ first: 'attempt' })],
+      });
+
+      const logger = mockAndLog({
+        'fse.rename': [fse.rename, Promise.resolve()],
+        'fse.unlink': [fse.unlink, Promise.resolve()],
+        'fse.writeJson': [fse.writeJson, Promise.resolve()],
+        archive: [archive, Promise.resolve()],
+      });
 
       await expect(saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path')).rejects.toThrow();
-
-      const expectBackupPath = expect.stringMatching(/\/dev\/null\/destination\/path\.backup-[0-9]+/);
 
       expect(logger.mock.calls).toEqual(
         [
@@ -160,21 +154,16 @@ describe('utils/netcanvasFile', () => {
     });
 
     it('if deployNetcanvas fails it aborts the save', async () => {
-      fse.writeJson.mockResolvedValue();
-      pruneProtocolAssets.mockResolvedValueOnce();
-      pruneProtocol
-        .mockReturnValueOnce(mockProtocol)
-        .mockReturnValueOnce({ second: 'attempt' });
-      fse.readJson.mockResolvedValueOnce({ first: 'attempt' });
-      fse.pathExists.mockRejectedValueOnce();
-      fse.stat.mockResolvedValueOnce({ isFile: () => Promise.resolve(true) });
-      fse.access.mockResolvedValueOnce();
-      const logger = mockAndLog([
-        [fse.rename, 'fse.rename', Promise.resolve()],
-        [fse.unlink, 'fse.unlink', Promise.resolve()],
-        [fse.writeJson, 'fse.writeJson', Promise.resolve()],
-        [archive, 'archive', Promise.resolve()],
-      ]);
+      mockAndLog({
+        ...successfulMocks,
+      });
+
+      const logger = mockAndLog({
+        'fse.rename': [fse.rename, Promise.reject()],
+        'fse.unlink': [fse.unlink, Promise.resolve()],
+        'fse.writeJson': [fse.writeJson, Promise.resolve()],
+        archive: [archive, Promise.resolve()],
+      });
 
       await expect(saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path')).rejects.toThrow();
 
@@ -184,31 +173,29 @@ describe('utils/netcanvasFile', () => {
             ['/dev/null/working/path/protocol.json', { description: 'test protocol' }, { spaces: 2 }]],
           ['archive',
             ['/dev/null/working/path', '/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b']],
+          // `fse.rename` is the call that was made to fail, so no changes have been made to disk:
+          ['fse.rename',
+            ['/dev/null/destination/path', expectBackupPath]],
         ],
       );
     });
 
     describe('when path does not already exist', () => {
-      beforeEach(() => {
-        fse.pathExists.mockResolvedValueOnce(false);
-      });
+      const pathDoesNotExistMock = {
+        'fse.pathExists': [fse.pathExists, Promise.resolve(false)],
+      };
 
       it('successful save', async () => {
-        fse.writeJson.mockResolvedValue();
-        pruneProtocolAssets.mockResolvedValueOnce();
-        pruneProtocol
-          .mockReturnValueOnce(mockProtocol)
-          .mockReturnValueOnce(mockProtocol);
-        fse.readJson.mockResolvedValueOnce(mockProtocol);
-        fse.stat.mockResolvedValueOnce({ isFile: () => Promise.resolve(true) });
-        fse.access.mockResolvedValueOnce();
-
-        const logger = mockAndLog([
-          [fse.rename, 'fse.rename', Promise.resolve()],
-          [fse.unlink, 'fse.unlink', Promise.resolve()],
-          [fse.writeJson, 'fse.writeJson', Promise.resolve()],
-          [archive, 'archive', Promise.resolve()],
-        ]);
+        mockAndLog({
+          ...successfulMocks,
+          ...pathDoesNotExistMock,
+        });
+        const logger = mockAndLog({
+          'fse.rename': [fse.rename, Promise.resolve()],
+          'fse.unlink': [fse.unlink, Promise.resolve()],
+          'fse.writeJson': [fse.writeJson, Promise.resolve()],
+          archive: [archive, Promise.resolve()],
+        });
 
         await saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path');
 
@@ -225,24 +212,18 @@ describe('utils/netcanvasFile', () => {
       });
 
       it('when verifyNetcanvas fails, throws but does not revert', async () => {
-        /**
-         * Mocks to get to verifyNetcanvas step and then return mismatching
-         * values for comparison failing the test
-         */
-        fse.writeJson.mockResolvedValue();
-        pruneProtocolAssets.mockResolvedValueOnce();
-        pruneProtocol
-          .mockReturnValueOnce(mockProtocol)
-          .mockReturnValueOnce({ second: 'attempt' });
-        fse.readJson.mockResolvedValueOnce({ first: 'attempt' });
-        fse.stat.mockResolvedValueOnce({ isFile: () => Promise.resolve(true) });
-        fse.access.mockResolvedValueOnce();
-        const logger = mockAndLog([
-          [fse.rename, 'fse.rename', Promise.resolve()],
-          [fse.unlink, 'fse.unlink', Promise.resolve()],
-          [fse.writeJson, 'fse.writeJson', Promise.resolve()],
-          [archive, 'archive', Promise.resolve()],
-        ]);
+        mockAndLog({
+          ...successfulMocks,
+          ...pathDoesNotExistMock,
+          'fse.readJson': [fse.readJson, Promise.resolve({ first: 'attempt' })],
+        });
+
+        const logger = mockAndLog({
+          'fse.rename': [fse.rename, Promise.resolve()],
+          'fse.unlink': [fse.unlink, Promise.resolve()],
+          'fse.writeJson': [fse.writeJson, Promise.resolve()],
+          archive: [archive, Promise.resolve()],
+        });
 
         await expect(saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path')).rejects.toThrow();
 
@@ -252,6 +233,34 @@ describe('utils/netcanvasFile', () => {
               ['/dev/null/working/path/protocol.json', { description: 'test protocol' }, { spaces: 2 }]],
             ['archive',
               ['/dev/null/working/path', '/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b']],
+            ['fse.rename',
+              ['/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b', '/dev/null/destination/path']],
+          ],
+        );
+      });
+
+      it('if deployNetcanvas fails it aborts the save', async () => {
+        mockAndLog({
+          ...successfulMocks,
+          ...pathDoesNotExistMock,
+        });
+
+        const logger = mockAndLog({
+          'fse.rename': [fse.rename, Promise.reject()],
+          'fse.unlink': [fse.unlink, Promise.resolve()],
+          'fse.writeJson': [fse.writeJson, Promise.resolve()],
+          archive: [archive, Promise.resolve()],
+        });
+
+        await expect(saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path')).rejects.toThrow();
+
+        expect(logger.mock.calls).toEqual(
+          [
+            ['fse.writeJson',
+              ['/dev/null/working/path/protocol.json', { description: 'test protocol' }, { spaces: 2 }]],
+            ['archive',
+              ['/dev/null/working/path', '/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b']],
+            // `fse.rename` is the call that was made to fail, so no changes have been made to disk:
             ['fse.rename',
               ['/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b', '/dev/null/destination/path']],
           ],
