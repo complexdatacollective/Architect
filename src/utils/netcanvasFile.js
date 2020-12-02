@@ -188,15 +188,17 @@ const commitNetcanvas = ({ savePath, backupPath }) => {
     });
 };
 
-const revertNetcanvas = ({ savePath, backupPath }) =>
-  // Check the backup definitely exists before deleting original file
-  fse.stat(backupPath)
+const revertNetcanvas = ({ savePath, backupPath }) => {
+  if (!backupPath) { return Promise.resolve(savePath); } // Nothing to revert
+  // Check the backup definitely exists before deleting other file
+  return fse.stat(backupPath)
     .then((stat) => {
       if (!stat.isFile()) { throw new Error('`backupPath` does not exist'); }
       return fse.unlink(savePath)
         .then(() => fse.rename(backupPath, savePath))
         .then(() => savePath);
     });
+};
 
 /**
  * Create a new .netcanvas file at the target location.
@@ -270,8 +272,6 @@ const verifyNetcanvas = (filePath, protocol) =>
       if (!match) {
         throw ProtocolsDidNotMatchError;
       }
-
-      return true;
     })
     .then(() => filePath)
     .catch(handleError(errors.VerificationFailed));
