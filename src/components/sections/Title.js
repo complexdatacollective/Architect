@@ -5,7 +5,7 @@ import { ValidatedField } from '../Form';
 import { getFieldId } from '../../utils/issues';
 
 const Title = () => (
-  <Section contentId="guidance.editor.title">
+  <Section>
     <div id={getFieldId('title')} data-name="Title text" />
     <h2>Page Heading</h2>
     <p>

@@ -50,7 +50,7 @@ class NewVariableWindow extends Component {
         initialValues={initialValues}
         title="Create New Variable"
       >
-        <Section contentId="guidance.newVariable.name">
+        <Section>
           <h3 id={getFieldId('name')}>Variable name</h3>
           <p>
             Enter a name for this variable. The variable name is how you will reference
@@ -64,7 +64,7 @@ class NewVariableWindow extends Component {
             normalize={safeName}
           />
         </Section>
-        <Section contentId="guidance.newVariable.type">
+        <Section>
           <h3 id={getFieldId('type')}>Variable type</h3>
           <p>Choose a variable type</p>
           <ValidatedField
@@ -76,7 +76,7 @@ class NewVariableWindow extends Component {
           />
         </Section>
         { isVariableTypeWithOptions(variableType) &&
-          <Section contentId="guidance.newVariable.options">
+          <Section>
             <h3 id={getFieldId('options')}>Options</h3>
             <p>Create some options for this input control</p>
             <Options

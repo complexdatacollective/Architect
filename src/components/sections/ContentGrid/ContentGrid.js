@@ -30,7 +30,6 @@ const denormalizeType = (state, { form, editField }) => {
 
 const ContentGrid = props => (
   <Grid
-    contentId="guidance.editor.content_items"
     previewComponent={ItemPreview}
     editComponent={ItemEditor}
     normalize={normalizeType}

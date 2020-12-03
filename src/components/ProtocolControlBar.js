@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { UnsavedChanges } from '@components/Dialogs';
 import { Button, Spinner } from '@codaco/ui';
 import { getProtocol } from '@selectors/protocol';
 import { getHasUnsavedChanges } from '@selectors/session';
+import validateProtocol from '@app/utils/validateProtocol';
 import { actionCreators as dialogActions } from '@modules/dialogs';
 import { actionCreators as userActions, actionLocks as protocolsLocks } from '@modules/userActions';
 import { actionCreators as sessionActions } from '@modules/session';
@@ -25,9 +26,8 @@ const ProtocolControlBar = () => {
   const dispatch = useDispatch();
 
   const hasUnsavedChanges = useSelector(state => getHasUnsavedChanges(state));
-  const hasAnyStages = useSelector(state => getProtocol(state).stages.length > 0);
   const isSaving = useSelector(state => statusSelectors.getIsBusy(state, protocolsLocks.saving));
-  const showSaveButton = hasAnyStages && hasUnsavedChanges;
+  const protocol = useSelector(state => getProtocol(state));
 
   const saveNetcanvas = useCallback(() => dispatch(userActions.saveNetcanvas()), [dispatch]);
 
@@ -45,6 +45,14 @@ const ProtocolControlBar = () => {
     [dispatch, hasUnsavedChanges],
   );
 
+  const [protocolIsValid, setProtocolIsValid] = useState(false);
+
+  useEffect(() => {
+    validateProtocol(protocol)
+      .then(() => { setProtocolIsValid(true); })
+      .catch(() => { setProtocolIsValid(false); });
+  }, [protocol]);
+
   return (
     <ControlBar
       show
@@ -59,7 +67,7 @@ const ProtocolControlBar = () => {
         </Button>,
       ]}
       buttons={[
-        ...(showSaveButton ? [<Button
+        ...(protocolIsValid && hasUnsavedChanges ? [<Button
           key="save-button"
           onClick={saveNetcanvas}
           color="primary"

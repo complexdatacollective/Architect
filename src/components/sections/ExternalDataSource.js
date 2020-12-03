@@ -22,7 +22,7 @@ const ExternalDataSource = (props) => {
   };
 
   return (
-    <Section contentId="guidance.editor.externalData" {...props}>
+    <Section {...props}>
       <Row>
         <h3>External Data Source for Roster</h3>
         <div id={getFieldId('dataSource')} data-name="Roster data-source" />

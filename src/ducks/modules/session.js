@@ -139,6 +139,7 @@ const resetSession = () =>
 
 const protocolChanged = () => ({
   type: PROTOCOL_CHANGED,
+  ipc: true,
 });
 
 const initialState = {

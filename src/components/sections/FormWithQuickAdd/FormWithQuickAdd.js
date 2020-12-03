@@ -16,7 +16,7 @@ const FormWithQuickAdd = ({
   disabled,
 }) => (
   <React.Fragment>
-    <Section disabled={disabled} contentId="guidance.editor.quickAdd">
+    <Section disabled={disabled}>
       <h2>Quick Add</h2>
       <p>
         The quick add mode is an alternative to using a node form that allows

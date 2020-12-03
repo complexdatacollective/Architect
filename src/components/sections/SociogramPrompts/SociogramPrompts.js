@@ -12,7 +12,6 @@ const template = () => ({ sortOrder: [] });
 
 const SociogramPrompts = props => (
   <EditableList
-    contentId="guidance.editor.sociogram_prompts"
     title="Edit Prompt"
     previewComponent={PromptPreview}
     editComponent={PromptFields}

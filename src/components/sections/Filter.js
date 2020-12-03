@@ -7,7 +7,7 @@ import { Filter as FilterQuery, withFieldConnector, withStoreConnector, ruleVali
 const FilterField = withFieldConnector(withStoreConnector(FilterQuery));
 
 const Filter = () => (
-  <Section contentId="guidance.editor.filter">
+  <Section>
     <div id={getFieldId('filter')} data-name="Filter text" />
     <h2>Filter <small>(optional)</small></h2>
     {/* <p>

@@ -13,7 +13,6 @@ const template = () => ({});
 
 const NameGeneratorListPrompts = props => (
   <EditableList
-    contentId="guidance.editor.name_generator_list_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"

@@ -5,6 +5,7 @@ const MenuTemplate = (options) => {
       {
         label: 'Open...',
         click: options.open,
+        accelerator: 'CommandOrControl+O',
       },
     ],
   };
@@ -12,10 +13,13 @@ const MenuTemplate = (options) => {
   if (options.isProtocolOpen) {
     fileMenu.submenu.push({
       label: 'Save',
+      enabled: options.isProtocolValid,
       click: options.save,
+      accelerator: 'CommandOrControl+S',
     });
     fileMenu.submenu.push({
       label: 'Save a copy...',
+      enabled: options.isProtocolValid,
       click: options.saveCopy,
     });
   }

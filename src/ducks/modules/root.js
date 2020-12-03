@@ -6,11 +6,9 @@ import { reducer as formReducer } from 'redux-form';
 import createTimeline from '../middleware/timeline';
 import app from './app';
 import dialogs from './dialogs';
-import guidance from './guidance';
 import protocol from './protocol';
 import recentProtocols from './recentProtocols';
 import session, { epics as sessionEpics } from './session';
-import settings from './settings';
 import stacks from './stacks';
 import ui from './ui';
 import toasts from './toasts';
@@ -34,12 +32,10 @@ export const rootReducer = combineReducers({
   app,
   dialogs,
   form: formReducer,
-  guidance,
   locale: () => 'en-US',
   protocol: createTimeline(protocol, timelineOptions),
   recentProtocols,
   session,
-  settings,
   stacks,
   ui,
   toasts,

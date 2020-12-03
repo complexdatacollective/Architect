@@ -20,7 +20,7 @@ const SortOptions = ({
   const sortOrderOptionGetter = getSortOrderOptionGetter(variableOptions);
 
   return (
-    <Section group contentId="guidance.editor.SortOptions" disabled={disabled}>
+    <Section group disabled={disabled}>
       <Row>
         <h3>Sort Options</h3>
         <p>

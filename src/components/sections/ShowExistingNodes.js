@@ -8,7 +8,7 @@ import withSubject from '../enhancers/withSubject';
 import withDisabledSubjectRequired from '../enhancers/withDisabledSubjectRequired';
 
 const ShowExistingNodes = props => (
-  <Section contentId="guidance.editor.show-existing-nodes" {...props}>
+  <Section {...props}>
     <h3 id={getFieldId('showExistingNodes')}>Show existing nodes</h3>
     <p>
       Show nodes added from other prompts, otherwise only nodes added on this

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import windowRootProvider from '@codaco/ui/lib/components/windowRootProvider';
 import { Section } from '@components/EditorLayout';
-import Guided from '../Guided';
 import Navigation from './Navigation';
 import interfaceOptions from './interfaceOptions';
 import InterfaceCategory from './InterfaceCategory';
@@ -16,28 +15,26 @@ const NewStage = ({
   handleCreateNew,
   setWindowRoot,
 }) => (
-  <Guided defaultGuidance="guidance.new_stage">
-    <div className="new-stage" ref={setWindowRoot}>
-      <Section>
-        <h1>Add a Stage</h1>
-        <p>
-          Below you can find the available interfaces currently bundled in Interviewer,
-          grouped by type. For further details about each of these interfaces, please visit
-          our <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>.
-        </p>
-      </Section>
-      <div className="new-stage__options">
-        <div className="new-stage__navigation">
-          <Navigation categories={categories} />
-        </div>
-        {interfaceOptions.map((props, index) => (
-          <div className="new-stage__category" key={index}>
-            <InterfaceCategory {...props} onSelect={handleCreateNew} />
-          </div>
-        ))}
+  <div className="new-stage" ref={setWindowRoot}>
+    <Section>
+      <h1>Add a Stage</h1>
+      <p>
+        Below you can find the available interfaces currently bundled in Interviewer,
+        grouped by type. For further details about each of these interfaces, please visit
+        our <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>.
+      </p>
+    </Section>
+    <div className="new-stage__options">
+      <div className="new-stage__navigation">
+        <Navigation categories={categories} />
       </div>
+      {interfaceOptions.map((props, index) => (
+        <div className="new-stage__category" key={index}>
+          <InterfaceCategory {...props} onSelect={handleCreateNew} />
+        </div>
+      ))}
     </div>
-  </Guided>
+  </div>
 );
 
 NewStage.propTypes = {

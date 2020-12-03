@@ -19,7 +19,7 @@ const PromptFields = ({
   type,
   variablesForSubject,
 }) => (
-  <Section contentId="guidance.editor.sociogram_prompt.layout" group>
+  <Section group>
     <Row>
       <h3>Layout</h3>
       <div id={getFieldId('layout.layoutVariable')} data-name="Layout Variable" />
@@ -57,7 +57,7 @@ const PromptFields = ({
       />
     </Row> */}
     { allowPositioning &&
-      <Row contentId="guidance.editor.sociogram_prompt.sortOrder">
+      <Row>
         <h4>Sort Unplaced Nodes <small>(optional)</small></h4>
         <p>
           Nodes without any coordinates are stacked in a bucket until your participant drags them

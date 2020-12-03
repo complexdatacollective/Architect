@@ -33,7 +33,7 @@ const PromptFields = ({
 }) => (
   <React.Fragment>
     <Section>
-      <Row contentId="guidance.section.form.field.name">
+      <Row>
         <h3 id={getFieldId('variable')}>Variable</h3>
         <p>
           Create a variable below, or choose from existing variables in the drop-down list.
@@ -59,7 +59,7 @@ const PromptFields = ({
       </Row>
     </Section>
     <Section>
-      <Row contentId="guidance.section.form.field.prompt">
+      <Row>
         <h3 id={getFieldId('prompt')}>Question prompt</h3>
         <p>Enter question for the participant. e.g. What is this person&apos;s name?</p>
         <ValidatedField
@@ -72,7 +72,7 @@ const PromptFields = ({
     </Section>
     { variable &&
       <Section>
-        <Row contentId="guidance.section.form.field.component">
+        <Row>
           <h3 id={getFieldId('component')}>Input control</h3>
           <p>
             Choose an input control that should be used to collect the answer. For
@@ -109,7 +109,7 @@ const PromptFields = ({
           }
         </Row>
         { variableType &&
-        <Row contentId="guidance.section.form.field.component">
+        <Row>
           <h4>Preview</h4>
           <InputPreview {...metaForType} />
         </Row>
@@ -118,7 +118,7 @@ const PromptFields = ({
     }
     { isVariableTypeWithOptions(variableType) &&
       <Section>
-        <Row contentId="guidance.section.form.field.Options">
+        <Row>
           <h3 id={getFieldId('options')}>Categorical/Ordinal options</h3>
           <p>
             The input type you selected indicates that this is a categorical or ordinal variable.
@@ -135,7 +135,7 @@ const PromptFields = ({
     }
     { isVariableTypeWithParameters(variableType) &&
       <Section>
-        <Row contentId="guidance.section.form.field.Parameters">
+        <Row>
           <h3 id={getFieldId('parameters')}>Input Options</h3>
           <Parameters
             type={variableType}
@@ -148,7 +148,7 @@ const PromptFields = ({
     }
     { variableType &&
       <Section>
-        <Row contentId="guidance.section.form.field.validation">
+        <Row>
           <h3 id={getFieldId('validation')}>Validation</h3>
           <p>
             Add one or more validation rules to require that participants complete

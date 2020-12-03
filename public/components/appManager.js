@@ -91,6 +91,7 @@ class AppManager {
   constructor() {
     this.openFileWhenReady = null;
     this.activeProtocol = null;
+    this.validProtocol = false;
 
     ipcMain.on('READY', () => {
       log.info('receive: READY');
@@ -121,6 +122,14 @@ class AppManager {
           break;
         case 'SESSION/RESET':
           this.activeProtocol = null;
+          this.updateMenu();
+          break;
+        case 'UI/OPEN_SCREEN':
+          this.validProtocol = false;
+          this.updateMenu();
+          break;
+        case 'SESSION/PROTOCOL_CHANGED':
+          this.validProtocol = true;
           this.updateMenu();
           break;
         default:
@@ -162,6 +171,7 @@ class AppManager {
   updateMenu() {
     const menuOptions = {
       isProtocolOpen: !!this.activeProtocol,
+      isProtocolValid: !!this.validProtocol,
       open: () => AppManager.open(),
       saveCopy: () => AppManager.saveCopy(),
       save: () => AppManager.save(),

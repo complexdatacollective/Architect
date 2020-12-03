@@ -27,7 +27,7 @@ const HighlightFields = ({
   };
 
   return (
-    <Section contentId="guidance.editor.sociogram_prompt.attributes" group>
+    <Section group>
       <h3>Variable Toggling</h3>
       <p>
         The sociogram can be configured to allow the participant to toggle

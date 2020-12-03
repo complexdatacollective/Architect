@@ -25,7 +25,7 @@ class Background extends PureComponent {
     } = this.props;
 
     return (
-      <Section contentId="guidance.editor.background">
+      <Section>
         <Row>
           <h3>Background</h3>
           <p>
