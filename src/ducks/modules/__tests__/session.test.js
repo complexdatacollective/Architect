@@ -31,7 +31,7 @@ const itTracksActionAsChange = (action) => {
 
   const actions = store.getActions();
 
-  expect(actions.pop()).toEqual({ type: 'SESSION/PROTOCOL_CHANGED' });
+  expect(actions.pop()).toEqual({ type: 'SESSION/PROTOCOL_CHANGED', ipc: true });
 };
 
 describe('session module', () => {

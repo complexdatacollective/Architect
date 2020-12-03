@@ -80,6 +80,7 @@ describe('ui', () => {
               screen: 'edit-stage',
             },
             type: 'UI/OPEN_SCREEN',
+            ipc: true,
           },
         ],
       );
