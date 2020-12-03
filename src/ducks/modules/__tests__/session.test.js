@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-env jest */
 import configureStore from 'redux-mock-store';
 import { createEpicMiddleware } from 'redux-observable';
@@ -54,7 +55,7 @@ describe('session module', () => {
           ipc: true,
         },
       );
-      console.log(result);
+
       expect(result.lastChanged > 0).toBe(true);
     });
 
