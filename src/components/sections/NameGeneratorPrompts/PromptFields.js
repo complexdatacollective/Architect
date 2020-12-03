@@ -44,19 +44,14 @@ class PromptFields extends PureComponent {
           <Row>
             <h3>Assign Additional Variables? <small>(optional)</small></h3>
             <p>
-              You might also wish to assign additional variables to any nodes that are created by a
-              participant on this prompt. You can use this feature to keep track of meta-data,
-              such as where a node was elicited, or to reflect a name interpreter element of
-              your prompt (for example by adding a variable called &quot;close_tie&quot; to a
-              prompt that asks about closeness).
+              This feature allows you to assign a variable and associated value to
+              any nodes created on this prompt. You can use this to
+              keep track of where a node was elicited, or to reflect a name interpreter element of
+              your prompt. For example, if you have a prompt that asks &apos;Who are you
+              close to?&apos;, you could add an additional variable called close_tie
+              and set it to true. You could then use this variable in your skip logic or
+              stage filtering rules.
             </p>
-            <Tip>
-              <p>
-                Select an existing variable, or select &quot;create new variable&quot;
-                from the bottom of the list, and then assign a value. You can set different values
-                for this variable for nodes created on different prompts.
-              </p>
-            </Tip>
             <AssignAttributes
               form={form}
               name="additionalAttributes"
