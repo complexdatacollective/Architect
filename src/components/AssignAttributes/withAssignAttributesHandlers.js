@@ -44,7 +44,7 @@ const assignAttributesHandlers = withHandlers({
     handleCompleteCreateNewVariable, createNewVariableAtIndex, fields, addNewVariable,
   }) =>
     (variable) => {
-      const newAttribute = { variable, value: true };
+      const newAttribute = { variable, value: null };
       fields.splice(createNewVariableAtIndex, 1, newAttribute);
       handleCompleteCreateNewVariable();
       addNewVariable(variable);
