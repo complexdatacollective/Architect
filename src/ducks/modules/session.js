@@ -2,6 +2,7 @@ import { combineEpics } from 'redux-observable';
 import { filter, mapTo } from 'rxjs/operators';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
+import validateProtocol from '@app/utils/validateProtocol';
 import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
 import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionCreators as previewActions } from '@modules/preview';
@@ -82,6 +83,7 @@ const saveNetcanvas = () =>
             savePath,
             protocol,
           },
+          ipc: true,
         });
         return savePath;
       })
@@ -137,10 +139,22 @@ const resetSession = () =>
     });
   };
 
-const protocolChanged = () => ({
-  type: PROTOCOL_CHANGED,
-  ipc: true,
-});
+// Decorate this event with the current protocol validation
+// status so that we can selectively enable/disable the
+// native save function.
+const protocolChanged = () => (dispatch, getState) => {
+  const protocol = getProtocol(getState());
+
+  const action = valid => ({
+    type: PROTOCOL_CHANGED,
+    protocolIsValid: valid,
+    ipc: true,
+  });
+
+  validateProtocol(protocol)
+    .then(() => { dispatch(action(true)); })
+    .catch(() => { dispatch(action(false)); });
+};
 
 const initialState = {
   workingPath: null,
@@ -179,6 +193,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         lastChanged: new Date().getTime(),
+        protocolIsValid: action.protocolIsValid,
       };
     case RESET_SESSION:
       return {

@@ -37,7 +37,6 @@ const openScreen = (screen, params = {}, root = false) =>
         },
         root,
       },
-      ipc: true,
     });
   };
 

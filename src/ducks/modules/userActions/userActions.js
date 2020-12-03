@@ -44,15 +44,14 @@ const checkUnsavedChanges = () =>
         if (!hasUnsavedChanges) { return Promise.resolve(true); }
 
         const unsavedChangesDialog = UnsavedChanges({
-          confirmLabel: 'Save changes and continue?',
+          confirmLabel: 'Discard changes and continue',
         });
 
         return dispatch(dialogsActions.openDialog(unsavedChangesDialog))
           .then((confirm) => {
             if (!confirm) { return Promise.resolve(false); }
 
-            return dispatch(sessionActions.saveNetcanvas())
-              .then(() => confirm);
+            return confirm;
           });
       });
 

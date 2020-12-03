@@ -2,11 +2,12 @@ import React from 'react';
 
 const UnsavedChanges = options => ({
   type: 'Warning',
-  title: 'Unsaved changes',
+  title: 'Unsaved changes will be lost',
   message: (
-    <div>
-      <p><strong>The current protocol has unsaved changes!</strong></p>
-    </div>
+    <p>
+      Your protocol has changes that have not yet been saved. Continuing will
+      discard these changes!
+    </p>
   ),
   ...options,
 });
