@@ -29,7 +29,7 @@ const QuickAdd = ({
     <Tip type="warning">
       <p>
         Create a variable called &quot;name&quot; here, unless you have a good reason not to.
-        Network Canvas will then automatically use this variable as the label for the node in
+        Interviewer will then automatically use this variable as the label for the node in
         the interview.
       </p>
     </Tip>

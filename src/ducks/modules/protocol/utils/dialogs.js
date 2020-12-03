@@ -48,7 +48,7 @@ const assetErrorMessages = {
     <React.Fragment>
       <p>
         The file you attempted to import is not in a format supported by
-        Network Canvas.
+        Interviewer.
       </p>
       {genericAssetMessage}
     </React.Fragment>

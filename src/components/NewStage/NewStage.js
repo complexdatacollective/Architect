@@ -21,7 +21,7 @@ const NewStage = ({
       <Section>
         <h1>Add a Stage</h1>
         <p>
-          Below you can find the available interfaces currently bundled in network canvas,
+          Below you can find the available interfaces currently bundled in Interviewer,
           grouped by type. For further details about each of these interfaces, please visit
           our <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>.
         </p>

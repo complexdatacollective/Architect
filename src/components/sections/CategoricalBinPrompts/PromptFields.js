@@ -193,7 +193,7 @@ const PromptFields = ({
           Nodes are stacked in the bucket before they are placed by the participant. You may
           optionally configure a list of rules to determine how nodes are sorted in the bucket
           when the task starts, which will determine the order that your participant places them
-          into bins. Network Canvas will default to using the order in which nodes were named.
+          into bins. Interviewer will default to using the order in which nodes were named.
         </p>
         <Tip>
           <p>

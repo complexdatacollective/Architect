@@ -160,9 +160,8 @@ const saveAsNetcanvas = () => {
     ({ canceled, filePath }) =>
       (dispatch) => {
         if (canceled) { return Promise.resolve(null); }
-
         return dispatch(sessionActions.saveAsNetcanvas(filePath))
-          .then(({ savePath }) => dispatch(validateAndOpenNetcanvas(savePath)))
+          .then(savePath => dispatch(validateAndOpenNetcanvas(savePath)))
           .catch(e => dispatch(netcanvasFileErrorHandler(e, { filePath })));
       },
   );

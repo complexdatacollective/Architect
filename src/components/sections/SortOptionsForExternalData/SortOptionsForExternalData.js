@@ -31,7 +31,7 @@ const SortOptions = ({
         <h4>Initial Sort Order <small>(optional)</small></h4>
         <p>
           Create one or more rules to determine the default sort order or the roster,
-          when it is first shown to the participant. By default, Network Canvas will
+          when it is first shown to the participant. By default, Interviewer will
           use the order that nodes are defined in your data file.
         </p>
         <MultiSelect

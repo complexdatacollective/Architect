@@ -69,7 +69,7 @@ const NodeType = ({
           <Tip type="warning">
             <p>
               Ensure you create and assign a variable called &quot;name&quot; for this
-              node type, unless you have a good reason not to. Network Canvas will then
+              node type, unless you have a good reason not to. Interviewer will then
               automatically use this variable as the label for the node in the interview.
             </p>
           </Tip>
