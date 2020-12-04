@@ -153,6 +153,7 @@ const initialState = {
   filePath: null,
   lastSaved: 0,
   lastChanged: 0,
+  protocolIsValid: false,
 };
 
 // Track savable changes, and emit changed action
@@ -179,6 +180,7 @@ export default function reducer(state = initialState, action = {}) {
         workingPath,
         lastSaved: 0,
         lastChanged: 0,
+        protocolIsValid: false,
       };
     }
     case SAVE_NETCANVAS_SUCCESS:
