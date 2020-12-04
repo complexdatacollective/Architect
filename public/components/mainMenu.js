@@ -18,7 +18,8 @@ const MenuTemplate = (options) => {
       accelerator: 'CommandOrControl+S',
     });
     fileMenu.submenu.push({
-      label: 'Save a copy...',
+      label: 'Save as...',
+      accelerator: process.platform === 'darwin' ? 'cmd+shift+s' : 'ctrl+shift+s',
       enabled: options.isProtocolValid,
       click: options.saveCopy,
     });
