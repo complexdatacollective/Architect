@@ -1,5 +1,5 @@
 import { combineEpics } from 'redux-observable';
-import { filter, mapTo } from 'rxjs/operators';
+import { filter, mergeMap } from 'rxjs/operators';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
 import validateProtocol from '@app/utils/validateProtocol';
@@ -142,19 +142,11 @@ const resetSession = () =>
 // Decorate this event with the current protocol validation
 // status so that we can selectively enable/disable the
 // native save function.
-export const protocolChanged = () => (dispatch, getState) => {
-  const protocol = getProtocol(getState());
-
-  const action = valid => ({
-    type: PROTOCOL_CHANGED,
-    protocolIsValid: valid,
-    ipc: true,
-  });
-
-  validateProtocol(protocol)
-    .then(() => { dispatch(action(true)); })
-    .catch(() => { dispatch(action(false)); });
-};
+export const protocolChanged = protocolIsValid => ({
+  type: PROTOCOL_CHANGED,
+  protocolIsValid,
+  ipc: true,
+});
 
 const initialState = {
   workingPath: null,
@@ -164,10 +156,16 @@ const initialState = {
 };
 
 // Track savable changes, and emit changed action
-const protocolChangedEpic = action$ =>
+const protocolChangedEpic = (action$, { getState }) =>
   action$.pipe(
     filter(({ type }) => savableChanges.includes(type)),
-    mapTo(protocolChanged()),
+    mergeMap(async () => {
+      const protocol = getProtocol(getState());
+
+      return validateProtocol(protocol)
+        .then(() => protocolChanged(true))
+        .catch(() => protocolChanged(false));
+    }),
   );
 
 export default function reducer(state = initialState, action = {}) {
