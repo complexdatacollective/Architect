@@ -29,12 +29,19 @@ const savingLock = createLock('SAVING');
 
 const { schemaVersionStates } = netcanvasFile;
 
+// TODO: move this to sessions
 const validateAndOpenNetcanvas = filePath =>
   dispatch =>
     Promise.resolve()
-      .then(() => netcanvasFile.validateNetcanvas(filePath))
-      .catch(e => dispatch(validationErrorDialog(e)))
-      .then(() => dispatch(sessionActions.openNetcanvas(filePath)));
+      .then(() =>
+        netcanvasFile.validateNetcanvas(filePath)
+          .then(() => true),
+      )
+      .catch((e) => {
+        dispatch(validationErrorDialog(e));
+        return false;
+      })
+      .then(isProtocolValid => dispatch(sessionActions.openNetcanvas(filePath, isProtocolValid)));
 
 const checkUnsavedChanges = () =>
   (dispatch, getState) =>

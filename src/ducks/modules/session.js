@@ -40,7 +40,8 @@ const SAVE_NETCANVAS_COPY = 'SESSION/SAVE_NETCANVAS_COPY';
 const SAVE_NETCANVAS_COPY_SUCCESS = 'SESSION/SAVE_NETCANVAS_COPY_SUCCESS';
 const SAVE_NETCANVAS_COPY_ERROR = 'SESSION/SAVE_NETCANVAS_COPY_ERROR';
 
-const openNetcanvas = filePath =>
+// TODO: This should handle validation rather than in userActions
+const openNetcanvas = (filePath, protocolIsValid = false) =>
   dispatch =>
     Promise.resolve()
       .then(() => dispatch({ type: OPEN_NETCANVAS, payload: { filePath } }))
@@ -50,7 +51,7 @@ const openNetcanvas = filePath =>
         netcanvasFile.readProtocol(workingPath)
           .then(protocol => dispatch({
             type: OPEN_NETCANVAS_SUCCESS,
-            payload: { protocol, filePath, workingPath },
+            payload: { protocol, filePath, workingPath, protocolIsValid },
             ipc: true,
           })),
       )
@@ -172,7 +173,7 @@ const protocolChangedEpic = (action$, { getState }) =>
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case OPEN_NETCANVAS_SUCCESS: {
-      const { filePath, workingPath } = action.payload;
+      const { filePath, workingPath, protocolIsValid } = action.payload;
 
       return {
         ...state,
@@ -180,7 +181,7 @@ export default function reducer(state = initialState, action = {}) {
         workingPath,
         lastSaved: 0,
         lastChanged: 0,
-        protocolIsValid: false,
+        protocolIsValid,
       };
     }
     case SAVE_NETCANVAS_SUCCESS:

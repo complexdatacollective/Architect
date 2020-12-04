@@ -13,7 +13,7 @@ const MenuTemplate = (options) => {
   if (options.isProtocolOpen) {
     fileMenu.submenu.push({
       label: 'Save',
-      enabled: options.isProtocolValid,
+      enabled: options.isProtocolValid && options.hasChanges,
       click: options.save,
       accelerator: 'CommandOrControl+S',
     });
