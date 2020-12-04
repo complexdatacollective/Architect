@@ -28,6 +28,7 @@ describe('session module', () => {
           lastChanged: 0,
           filePath: null,
           workingPath: null,
+          protocolIsValid: false,
         });
     });
 
@@ -42,6 +43,7 @@ describe('session module', () => {
       );
 
       expect(result.lastChanged > 0).toBe(true);
+      expect(result.protocolIsValid).toBe(true);
     });
 
     it('SESSION/OPEN_NETCANVAS_SUCCESS', () => {
@@ -50,6 +52,7 @@ describe('session module', () => {
         lastChanged: 2000,
         filePath: '/dev/null/previous.netcanvas',
         workingPath: '/dev/null/previous/working/path',
+        protocolIsValid: false,
       });
       const action = {
         type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
@@ -57,6 +60,7 @@ describe('session module', () => {
           protocol: {},
           filePath: '/dev/null/mock.netcanvas',
           workingPath: '/dev/null/working/path',
+          protocolIsValid: true,
         },
       };
       expect(reducer(initialState, action))
@@ -65,6 +69,7 @@ describe('session module', () => {
           lastChanged: 0,
           filePath: '/dev/null/mock.netcanvas',
           workingPath: '/dev/null/working/path',
+          protocolIsValid: true,
         });
     });
 
@@ -132,6 +137,7 @@ describe('session module', () => {
             protocol: {},
             filePath: '/dev/null/mock.netcanvas',
             workingPath: '/dev/null/working/path',
+            protocolIsValid: false,
           },
         },
         {
