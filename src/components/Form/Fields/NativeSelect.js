@@ -7,7 +7,7 @@ import { Text } from '@codaco/ui/lib/components/Fields';
 import { Button } from '@codaco/ui';
 import { sortBy } from 'lodash';
 import { AnimatePresence, motion } from 'framer-motion';
-import { untouch, touch } from 'redux-form';
+import { untouch } from 'redux-form';
 import { useDispatch } from 'react-redux';
 
 const NativeSelect = ({
@@ -100,6 +100,8 @@ const NativeSelect = ({
    *
    * touched:
    *   - touched: controlled by parent input, and triggered/reset from child as needed
+   *   - new option isn't null (prevents "required" immediately showing) AND new option
+   *     isn't valid. Combined this allows the correct error to be shown.
    * invalid:
    *   - !isValidCreateOption: validate the new variable Text field value
    *   - valueButNotSubmitted: true if value entered in Text field but not submitted
@@ -110,7 +112,7 @@ const NativeSelect = ({
    *   - error: parent select error message. Will usually be "Required"
    */
   const calculateMeta = useMemo(() => ({
-    touched,
+    touched: touched || (newOptionValue !== null && !isValidCreateOption(newOptionValue)),
     invalid: !isValidCreateOption(newOptionValue) ||
       valueButNotSubmitted || (newOptionValue === null && invalid),
     localInvalid: !isValidCreateOption(newOptionValue),
@@ -156,9 +158,6 @@ const NativeSelect = ({
                 onChange: (event) => {
                   dispatch(untouch(form, input.name));
                   setNewOptionValue(event.target.value);
-                },
-                onBlur: () => {
-                  dispatch(touch(form, input.name));
                 },
               }}
               placeholder={createInputPlaceholder}
