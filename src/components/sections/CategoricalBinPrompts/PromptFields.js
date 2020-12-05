@@ -77,7 +77,7 @@ const PromptFields = ({
     (!!otherVariableToggle && 1)
   );
 
-  const showVariableOptionsTip = totalOptionsLength >= 8;
+  const showVariableOptionsTip = totalOptionsLength > 8;
 
   return (
     <Section>
@@ -117,22 +117,23 @@ const PromptFields = ({
       { variable &&
         <Row>
           <h3 id={getFieldId('options')}>Variable Options</h3>
-          <p>Create some options for this variable</p>
+          <p>Create <strong>up to 8</strong> options for this variable.</p>
+          { showVariableOptionsTip &&
+            <Tip type="error">
+              <p>
+                The categorical bin interface is designed to use <strong>up to 8 option
+                  values</strong> (
+                including an &quot;other&quot; variable). Using more will create
+                a sub-optimal experience for participants, and might reduce data quality.
+                Consider grouping your variable options and capturing further detail with
+                follow-up questions.
+              </p>
+            </Tip>
+          }
           <Options
             name="variableOptions"
             label="Options"
           />
-          { showVariableOptionsTip &&
-            <Tip>
-              <p>
-                The categorical interface is designed to use up to 8 items
-                (including an optional &quot;other&quot; variable).<br />
-                <br />
-                Using more will create a sub-optimal experience for participants,
-                and might reduce data quality.
-              </p>
-            </Tip>
-          }
         </Row>
       }
       { variable &&

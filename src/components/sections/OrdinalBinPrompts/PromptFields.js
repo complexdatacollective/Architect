@@ -22,6 +22,7 @@ const PromptFields = ({
   type,
   variable,
   variableOptions,
+  optionsForVariableDraft,
 }) => {
   const newVariableWindowInitialProps = {
     entity,
@@ -44,6 +45,10 @@ const PromptFields = ({
     .filter(({ type: variableType }) => variableType === 'ordinal');
 
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
+
+  const totalOptionsLength = (optionsForVariableDraft && optionsForVariableDraft.length);
+
+  const showVariableOptionsTip = totalOptionsLength > 5;
 
   return (
     <React.Fragment>
@@ -87,7 +92,16 @@ const PromptFields = ({
         <Section>
           <Row>
             <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
-            <p>Create some options for this variable</p>
+            <p>Create <strong>up to 5</strong> options for this variable.</p>
+            { showVariableOptionsTip &&
+            <Tip type="error">
+              <p>
+                The ordinal bin interface is designed to use <strong>up to 5 option
+                  values </strong>. Using more will create
+                a sub-optimal experience for participants, and might reduce data quality.
+              </p>
+            </Tip>
+            }
             <Options
               name="variableOptions"
               label="Options"
@@ -173,11 +187,13 @@ PromptFields.propTypes = {
   changeForm: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   variable: PropTypes.string,
+  optionsForVariableDraft: PropTypes.array,
 };
 
 PromptFields.defaultProps = {
   variableOptions: [],
   variable: null,
+  optionsForVariableDraft: [],
 };
 
 export { PromptFields };
