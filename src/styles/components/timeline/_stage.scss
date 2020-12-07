@@ -1,5 +1,5 @@
 $preview-offset: unit(12);
-$preview-width: 16vw;
+$preview-width: unit(26);
 $preview-ratio: 10 / 16;
 $component-name: timeline-stage;
 
@@ -73,7 +73,7 @@ $component-name: timeline-stage;
   &__screen {
     display: block;
     background: var(--color-navy-taupe);
-    padding: .5rem;
+    padding: 1rem;
     width: $preview-width;
     position: relative;
     left: -.6rem; // To counter box shadow
