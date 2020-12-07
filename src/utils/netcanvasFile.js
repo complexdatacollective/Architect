@@ -331,7 +331,6 @@ const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERS
           return saveNetcanvas(workingPath, updatedProtocol, newFilePath);
         }),
     )
-    .then(({ savePath }) => savePath)
     .catch(handleError(errors.MigrationFailed));
 
 const utils = {
