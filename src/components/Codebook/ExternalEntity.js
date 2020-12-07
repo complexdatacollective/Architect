@@ -6,7 +6,7 @@ import EntityIcon from './EntityIcon';
 
 const ExternalEntity = ({
   id,
-  source,
+  name,
 }) => {
   const { variables } = useVariablesFromExternalData(id);
 
@@ -18,7 +18,7 @@ const ExternalEntity = ({
         </div>
         <div className="codebook__entity-name">
           <h2>
-            {source}
+            {name}
           </h2>
         </div>
       </div>
@@ -35,7 +35,7 @@ const ExternalEntity = ({
 };
 
 ExternalEntity.propTypes = {
-  source: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 
