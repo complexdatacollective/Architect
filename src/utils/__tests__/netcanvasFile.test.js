@@ -5,13 +5,14 @@ import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
+import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import { pruneProtocol } from '@app/utils/prune';
 import {
   checkSchemaVersion,
   // createNetcanvas,
   errors,
   importNetcanvas,
-  // migrateNetcanvas,
+  migrateNetcanvas,
   readProtocol,
   saveNetcanvas,
   schemaVersionStates,
@@ -21,6 +22,7 @@ import {
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
+jest.mock('@app/protocol-validation/migrations/migrateProtocol');
 jest.mock('@app/utils/pruneProtocolAssets');
 jest.mock('@app/utils/prune');
 
@@ -45,7 +47,11 @@ const mockAndLog = (targets) => {
     target.mockImplementation((...args) => {
       logger(name, args);
       count += 1;
-      return result.length ? result[count] : result;
+      const r = result.length ? result[count] : result;
+      if (typeof r === 'function') {
+        return r(...args);
+      }
+      return r;
     });
   });
 
@@ -71,7 +77,42 @@ describe('utils/netcanvasFile', () => {
   it.todo('schemaVersionStates');
 
   it.todo('createNetcanvas()');
-  it.todo('migrateNetcanvas()');
+
+  describe('migrateNetcanvas()', () => {
+    it('resolves to new file path', async () => {
+      const successfulMocks = {
+        pruneProtocolAssets: [pruneProtocolAssets, Promise.resolve()],
+        pruneProtocol: [pruneProtocol, (protocol = {}) => Promise.resolve(protocol)],
+        'fse.readJson': [fse.readJson, [
+          Promise.resolve({ ...mockProtocol, schemaVersion: 2 }),
+          Promise.resolve({ ...mockProtocol, schemaVersion: 2 }),
+          Promise.resolve({ ...mockProtocol, schemaVersion: 4 }),
+        ]],
+        migrateProtocol: [
+          migrateProtocol,
+          Promise.resolve([{ ...mockProtocol, schemaVersion: 4 }, []]),
+        ],
+        'fse.pathExists': [fse.pathExists, Promise.resolve(true)],
+        'fse.stat': [fse.stat, Promise.resolve({ isFile: () => Promise.resolve(true) })],
+        'fse.access': [fse.access, Promise.resolve()],
+        'fse.unlink': [fse.unlink, Promise.resolve()],
+        'fse.rename': [fse.rename, Promise.resolve()],
+        archive: [archive, Promise.resolve()],
+      };
+
+      mockAndLog(successfulMocks);
+
+      const logger = mockAndLog({
+        'fse.writeJson': [fse.writeJson, Promise.resolve()],
+      });
+
+      const result = await migrateNetcanvas('/dev/null/original/path', '/dev/null/destination/path2');
+
+      expect(result).toBe('/dev/null/destination/path2');
+
+      expect(logger.mock.calls[0][1][1]).toMatchObject({ schemaVersion: 4 });
+    });
+  });
   it.todo('commitNetcanvas()');
   it.todo('revertNetcanvas()');
   it.todo('writeProtocol()');
@@ -157,7 +198,9 @@ describe('utils/netcanvasFile', () => {
         archive: [archive, Promise.resolve()],
       });
 
-      await saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path');
+      const result = await saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path');
+
+      expect(result).toBe('/dev/null/destination/path');
 
       expect(logger.mock.calls).toEqual(
         [
