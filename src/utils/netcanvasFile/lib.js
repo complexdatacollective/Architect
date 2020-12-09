@@ -1,8 +1,10 @@
 import { remote } from 'electron';
 import fse from 'fs-extra';
 import path from 'path';
+import uuid from 'uuid';
 import { pruneProtocol } from '@app/utils/prune';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
+import { archive } from '@app/utils/protocols/lib/archive';
 import { errors, handleError } from './errors';
 
 /**
@@ -106,11 +108,30 @@ const revertNetcanvas = ({ savePath, backupPath }) => {
     });
 };
 
+/**
+ * @param {string} workingPath - working path in application /tmp/protocols/ dir
+ * @param {object} protocol - The protocol object (optional)
+ * @returns {Promise} Resolves to a path in temp (random)
+ */
+const createNetcanvasExport = (workingPath, protocol) => {
+  if (!protocol) { return Promise.reject(); }
+
+  return writeProtocol(workingPath, protocol)
+    .then(() => getTempDir('exports'))
+    .then((exportDir) => {
+      const exportPath = path.join(exportDir, uuid());
+
+      return archive(workingPath, exportPath)
+        .then(() => exportPath);
+    });
+};
+
 export {
+  commitNetcanvas,
+  createNetcanvasExport,
+  deployNetcanvas,
   getTempDir,
   readProtocol,
-  writeProtocol,
-  deployNetcanvas,
-  commitNetcanvas,
   revertNetcanvas,
+  writeProtocol,
 };

@@ -8,18 +8,18 @@ import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
 import { pruneProtocol } from '@app/utils/prune';
-import { archive, extract } from '@app/utils/protocols/lib/archive';
+import { extract } from '@app/utils/protocols/lib/archive';
 import protocolTemplate from '@app/utils/protocolTemplate.json';
 import {
   errors,
   handleError,
 } from './errors';
 import {
+  commitNetcanvas,
+  createNetcanvasExport,
+  deployNetcanvas,
   getTempDir,
   readProtocol,
-  writeProtocol,
-  deployNetcanvas,
-  commitNetcanvas,
   revertNetcanvas,
 } from './lib';
 
@@ -30,24 +30,6 @@ const schemaVersionStates = {
 };
 
 const ProtocolsDidNotMatchError = new Error('Protocols did not match');
-
-/**
- * @param {string} workingPath - working path in application /tmp/protocols/ dir
- * @param {object} protocol - The protocol object (optional)
- * @returns {Promise} Resolves to a path in temp (random)
- */
-const createNetcanvasExport = (workingPath, protocol) => {
-  if (!protocol) { return Promise.reject(); }
-
-  return writeProtocol(workingPath, protocol)
-    .then(() => getTempDir('exports'))
-    .then((exportDir) => {
-      const exportPath = path.join(exportDir, uuid());
-
-      return archive(workingPath, exportPath)
-        .then(() => exportPath);
-    });
-};
 
 /**
  * Create a working copy of a protocol in the application
@@ -130,6 +112,8 @@ const verifyNetcanvas = (filePath, protocol) =>
       .then(readProtocol),
   ])
     .then(([prunedProtocol, fileProtocol]) => {
+      console.log({ prunedProtocol, fileProtocol });
+
       const match = isEqual(
         { ...fileProtocol, lastModified: null },
         { ...prunedProtocol, lastModified: null },
