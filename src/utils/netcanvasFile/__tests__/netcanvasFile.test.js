@@ -27,7 +27,7 @@ import { errors } from '../errors';
 import {
   mockProtocolPath,
   mockProtocol,
-  mockAndLog,
+  // mockAndLog,
 } from './helpers';
 
 jest.mock('fs-extra');
