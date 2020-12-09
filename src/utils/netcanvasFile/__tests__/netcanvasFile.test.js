@@ -4,7 +4,6 @@ import fse from 'fs-extra';
 import uuid from 'uuid';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
-import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
 import { pruneProtocol } from '@app/utils/prune';
@@ -113,7 +112,6 @@ describe('netcanvasFile/netcanvasFile', () => {
         '/dev/null/new/user/netcanvas/path',
       ]]);
     });
-
   });
 
   describe('validateNetcanvas(filePath)', () => {

@@ -219,7 +219,6 @@ describe('netcanvasFile/lib', () => {
   });
 
   describe('createNetcanvasExport(workingPath, protocol)', () => {
-
     it('resolves to a uuid path in temp', async () => {
       fse.mkdirp.mockResolvedValue();
       pruneProtocol.mockImplementation(protocol => Promise.resolve(protocol));
