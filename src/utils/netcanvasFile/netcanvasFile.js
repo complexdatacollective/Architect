@@ -48,7 +48,8 @@ const createNetcanvas = destinationUserPath =>
         .then(protocol => createNetcanvasExport(workingPath, protocol))
         .then(netcanvasExportPath =>
           deployNetcanvas(netcanvasExportPath, destinationUserPath),
-        );
+        )
+        .then(() => destinationUserPath);
     })
     .catch(handleError(errors.CreateFailed));
 

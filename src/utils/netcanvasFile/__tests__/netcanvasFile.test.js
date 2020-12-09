@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
+import uuid from 'uuid';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
@@ -46,19 +47,9 @@ const {
 
 describe('netcanvasFile/netcanvasFile', () => {
   beforeEach(() => {
-    archive.mockReset();
-    extract.mockReset();
-    pruneProtocol.mockReset();
-    pruneProtocolAssets.mockReset();
-    fse.access.mockReset();
-    getTempDir.mockReset();
-    writeProtocol.mockReset();
-    deployNetcanvas.mockReset();
-    revertNetcanvas.mockReset();
-    commitNetcanvas.mockReset();
-    readProtocol.mockReset();
-    createNetcanvasExport.mockReset();
-    importNetcanvas.mockReset();
+    jest.resetAllMocks();
+
+    uuid.mockImplementation(jest.fn(() => '809895df-bbd7-4c76-ac58-e6ada2625f9b'));
 
     fse.access.mockResolvedValue(Promise.resolve());
     archive.mockImplementation(() => Promise.resolve());
@@ -81,9 +72,49 @@ describe('netcanvasFile/netcanvasFile', () => {
       Promise.resolve('/dev/null/export/working/path'),
     );
     importNetcanvas.mockImplementation(netcanvasPath => Promise.resolve(netcanvasPath));
+    fse.mkdirp.mockResolvedValue();
   });
 
   it.todo('schemaVersionStates');
+
+  describe('createNetcanvas(destinationPath)', () => {
+    it('creates an assetPath and workingPath', async () => {
+      await createNetcanvas('/dev/null/new/user/netcanvas/path');
+
+      expect(fse.mkdirp.mock.calls).toEqual([[
+        '/dev/null/working/path/1/809895df-bbd7-4c76-ac58-e6ada2625f9b/assets',
+      ]]);
+    });
+
+    it('creates a protocol with te current APP_SCHEMA_VERSION', async () => {
+      await createNetcanvas('/dev/null/new/user/netcanvas/path');
+
+      expect(createNetcanvasExport.mock.calls).toMatchObject([[
+        '/dev/null/working/path/1/809895df-bbd7-4c76-ac58-e6ada2625f9b',
+        {
+          assetManifest: {},
+          codebook: {
+            edge: {},
+            ego: {},
+            node: {},
+          },
+          schemaVersion: APP_SCHEMA_VERSION,
+          stages: [],
+        },
+      ]]);
+    });
+
+    it('deploys the export and resolves to destinationPath', async () => {
+      await expect(createNetcanvas('/dev/null/new/user/netcanvas/path'))
+        .resolves.toBe('/dev/null/new/user/netcanvas/path');
+
+      expect(deployNetcanvas.mock.calls).toEqual([[
+        '/dev/null/export/working/path',
+        '/dev/null/new/user/netcanvas/path',
+      ]]);
+    });
+
+  });
 
   describe('validateNetcanvas(filePath)', () => {
     it('imports and validates protocol then resolves to filePath', async () => {
