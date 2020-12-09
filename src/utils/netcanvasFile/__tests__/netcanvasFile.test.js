@@ -1,11 +1,11 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
-import path from 'path';
 import { APP_SCHEMA_VERSION } from '@app/config';
 import { extract, archive } from '@app/utils/protocols/lib/archive';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
+import validateProtocol from '@app/utils/validateProtocol';
 import { pruneProtocol } from '@app/utils/prune';
 import {
   checkSchemaVersion,
@@ -13,6 +13,8 @@ import {
   migrateNetcanvas,
   saveNetcanvas,
   schemaVersionStates,
+  createNetcanvas,
+  validateNetcanvas,
   utils,
 } from '../netcanvasFile';
 import {
@@ -22,12 +24,12 @@ import {
   readProtocol,
   revertNetcanvas,
   writeProtocol,
+  createNetcanvasExport,
 } from '../lib';
 import { errors } from '../errors';
 import {
   mockProtocolPath,
   mockProtocol,
-  // mockAndLog,
 } from './helpers';
 
 jest.mock('fs-extra');
@@ -36,9 +38,9 @@ jest.mock('@app/protocol-validation/migrations/migrateProtocol');
 jest.mock('@app/utils/pruneProtocolAssets');
 jest.mock('@app/utils/prune');
 jest.mock('../lib');
+jest.mock('@app/utils/validateProtocol');
 
 const {
-  createNetcanvasExport,
   verifyNetcanvas,
 } = utils;
 
@@ -56,6 +58,7 @@ describe('netcanvasFile/netcanvasFile', () => {
     commitNetcanvas.mockReset();
     readProtocol.mockReset();
     createNetcanvasExport.mockReset();
+    importNetcanvas.mockReset();
 
     fse.access.mockResolvedValue(Promise.resolve());
     archive.mockImplementation(() => Promise.resolve());
@@ -77,13 +80,24 @@ describe('netcanvasFile/netcanvasFile', () => {
     createNetcanvasExport.mockImplementation(() =>
       Promise.resolve('/dev/null/export/working/path'),
     );
-
+    importNetcanvas.mockImplementation(netcanvasPath => Promise.resolve(netcanvasPath));
   });
 
-  it.todo('errors');
   it.todo('schemaVersionStates');
 
-  it.todo('createNetcanvas()');
+  describe('validateNetcanvas(filePath)', () => {
+    it('imports and validates protocol then resolves to filePath', async () => {
+      const testProtocol = { test: 'protocol' };
+      readProtocol.mockResolvedValue(testProtocol);
+      importNetcanvas.mockResolvedValue('/dev/null/netcanvas/file');
+      await expect(validateNetcanvas('/dev/null/netcanvas/file'))
+        .resolves.toEqual('/dev/null/netcanvas/file');
+
+      expect(importNetcanvas.mock.calls).toEqual([['/dev/null/netcanvas/file']]);
+      expect(readProtocol.mock.calls).toEqual([['/dev/null/netcanvas/file']]);
+      expect(validateProtocol.mock.calls).toEqual([[testProtocol]]);
+    });
+  });
 
   describe('migrateNetcanvas()', () => {
     it('resolves to new file path', async () => {
@@ -278,31 +292,6 @@ describe('netcanvasFile/netcanvasFile', () => {
       });
     });
   });
-
-  describe('importNetcanvas(filePath)', () => {
-    it('rejects with a readable error when permissions are wrong', async () => {
-      const accessError = new Error();
-      accessError.code = 'EACCES';
-
-      fse.access.mockRejectedValueOnce(accessError);
-
-      await expect(() => importNetcanvas(mockProtocolPath))
-        .rejects.toMatchObject({ friendlyCode: errors.IncorrectPermissions });
-    });
-
-    it('rejects with a readable error when it cannot extract a protocol', async () => {
-      extract.mockRejectedValueOnce(new Error());
-
-      await expect(importNetcanvas(mockProtocolPath))
-        .rejects.toMatchObject({ friendlyCode: errors.OpenFailed });
-    });
-
-    it('resolves to a uuid path in temp', async () => {
-      await expect(importNetcanvas(mockProtocolPath))
-        .resolves.toEqual('/dev/null/working/path/1/809895df-bbd7-4c76-ac58-e6ada2625f9b');
-    });
-  });
-
 
   describe('verifyNetcanvas(filePath)', () => {
     it('Rejects with a human readable error when verification fails', async () => {

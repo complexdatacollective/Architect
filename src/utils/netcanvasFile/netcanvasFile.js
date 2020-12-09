@@ -8,7 +8,6 @@ import canUpgrade from '@app/protocol-validation/migrations/canUpgrade';
 import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol';
 import validateProtocol from '@app/utils/validateProtocol';
 import { pruneProtocol } from '@app/utils/prune';
-import { extract } from '@app/utils/protocols/lib/archive';
 import protocolTemplate from '@app/utils/protocolTemplate.json';
 import {
   errors,
@@ -21,6 +20,7 @@ import {
   getTempDir,
   readProtocol,
   revertNetcanvas,
+  importNetcanvas,
 } from './lib';
 
 const schemaVersionStates = {
@@ -31,23 +31,6 @@ const schemaVersionStates = {
 
 const ProtocolsDidNotMatchError = new Error('Protocols did not match');
 
-/**
- * Create a working copy of a protocol in the application
- * tmp directory. If bundled, extract it, if not, copy it.
- *
- * @param filePath .netcanvas file path
- * @returns {Promise} Resolves to a path in temp (random)
- */
-const importNetcanvas = filePath =>
-  getTempDir('protocols')
-    .then((protocolsDir) => {
-      const destinationPath = path.join(protocolsDir, uuid());
-
-      return fse.access(filePath, fse.constants.W_OK)
-        .then(() => extract(filePath, destinationPath))
-        .then(() => destinationPath)
-        .catch(handleError(errors.OpenFailed));
-    });
 /**
  * Create a new .netcanvas file at the target location.
  *
@@ -183,9 +166,7 @@ const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERS
     .catch(handleError(errors.MigrationFailed));
 
 // `utils` for functions that aren't expected to be used outside of module
-
 const utils = {
-  createNetcanvasExport,
   verifyNetcanvas,
 };
 

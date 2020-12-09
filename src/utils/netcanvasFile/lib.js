@@ -4,7 +4,7 @@ import path from 'path';
 import uuid from 'uuid';
 import { pruneProtocol } from '@app/utils/prune';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
-import { archive } from '@app/utils/protocols/lib/archive';
+import { archive, extract } from '@app/utils/protocols/lib/archive';
 import { errors, handleError } from './errors';
 
 /**
@@ -126,6 +126,25 @@ const createNetcanvasExport = (workingPath, protocol) => {
     });
 };
 
+
+/**
+ * Create a working copy of a protocol in the application
+ * tmp directory. If bundled, extract it, if not, copy it.
+ *
+ * @param filePath .netcanvas file path
+ * @returns {Promise} Resolves to a path in temp (random)
+ */
+const importNetcanvas = filePath =>
+  getTempDir('protocols')
+    .then((protocolsDir) => {
+      const destinationPath = path.join(protocolsDir, uuid());
+
+      return fse.access(filePath, fse.constants.W_OK)
+        .then(() => extract(filePath, destinationPath))
+        .then(() => destinationPath)
+        .catch(handleError(errors.OpenFailed));
+    });
+
 export {
   commitNetcanvas,
   createNetcanvasExport,
@@ -134,4 +153,5 @@ export {
   readProtocol,
   revertNetcanvas,
   writeProtocol,
+  importNetcanvas,
 };

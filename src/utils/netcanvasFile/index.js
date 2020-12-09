@@ -2,12 +2,12 @@ export { errors } from './errors';
 
 export {
   readProtocol,
+  importNetcanvas,
 } from './lib';
 
 export {
   checkSchemaVersion,
   createNetcanvas,
-  importProtocol,
   migrateNetcanvas,
   saveNetcanvas,
   validateNetcanvas,

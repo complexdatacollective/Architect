@@ -10,6 +10,7 @@ const deployNetcanvas = jest.fn(defaultImplementation('deployNetcanvas'));
 const commitNetcanvas = jest.fn(defaultImplementation('commitNetcanvas'));
 const revertNetcanvas = jest.fn(defaultImplementation('revertNetcanvas'));
 const createNetcanvasExport = jest.fn(defaultImplementation('createNetcanvasExport'));
+const importNetcanvas = jest.fn(defaultImplementation('importNetcanvas'));
 
 export {
   getTempDir,
@@ -19,4 +20,5 @@ export {
   commitNetcanvas,
   revertNetcanvas,
   createNetcanvasExport,
+  importNetcanvas,
 };

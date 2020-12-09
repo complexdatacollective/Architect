@@ -3,7 +3,7 @@
 import fse from 'fs-extra';
 import { pruneProtocol } from '@app/utils/prune';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
-import { archive } from '@app/utils/protocols/lib/archive';
+import { archive, extract } from '@app/utils/protocols/lib/archive';
 import {
   readProtocol,
   deployNetcanvas,
@@ -11,8 +11,10 @@ import {
   writeProtocol,
   revertNetcanvas,
   commitNetcanvas,
+  importNetcanvas,
 } from '../lib';
 import { errors } from '../errors';
+import { mockProtocolPath } from './helpers';
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
@@ -37,6 +39,7 @@ describe('netcanvasFile/lib', () => {
     fse.stat.mockImplementation(() => Promise.resolve(({
       isFile: jest.fn(() => false),
     })));
+    fse.mkdirp.mockResolvedValue();
   });
 
   describe('commitNetcanvas({ savePath, backupPath })', () => {
@@ -226,6 +229,38 @@ describe('netcanvasFile/lib', () => {
 
       await expect(createNetcanvasExport('/dev/null/existing/working/path', {}))
         .resolves.toEqual('/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b');
+    });
+  });
+
+  describe('importNetcanvas(filePath)', () => {
+    beforeEach(() => {
+      archive.mockRejectedValue();
+    });
+
+    it('rejects with a readable error when permissions are wrong', async () => {
+      const accessError = new Error();
+      accessError.code = 'EACCES';
+
+      fse.access.mockRejectedValue(accessError);
+
+      await expect(() => importNetcanvas(mockProtocolPath))
+        .rejects.toMatchObject({ friendlyCode: errors.IncorrectPermissions });
+    });
+
+    it('rejects with a readable error when it cannot extract a protocol', async () => {
+      extract.mockRejectedValue(new Error());
+      fse.access.mockResolvedValue();
+
+      await expect(importNetcanvas(mockProtocolPath))
+        .rejects.toMatchObject({ friendlyCode: errors.OpenFailed });
+    });
+
+    it('resolves to a uuid path in temp', async () => {
+      fse.access.mockResolvedValue();
+      extract.mockResolvedValue();
+
+      await expect(importNetcanvas(mockProtocolPath))
+        .resolves.toEqual('/dev/null/get/electron/path/architect/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b');
     });
   });
 });
