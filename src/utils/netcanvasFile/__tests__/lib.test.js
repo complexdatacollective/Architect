@@ -1,17 +1,17 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
+import path from 'path';
+import { pruneProtocol } from '@app/utils/prune';
+import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
+import { archive } from '@app/utils/protocols/lib/archive';
 import {
   readProtocol,
   deployNetcanvas,
+  createNetcanvasExport,
+  writeProtocol,
 } from '../lib';
 import { errors } from '../errors';
-
-// import {
-//   mockProtocolPath,
-//   mockProtocol,
-//   mockAndLog,
-// } from './helpers';
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
@@ -26,13 +26,34 @@ describe('netcanvasFile/lib', () => {
     fse.readJson.mockReset();
     fse.rename.mockReset();
     fse.writeFile.mockReset();
+    fse.writeJson.mockReset();
     fse.unlink.mockReset();
     fse.access.mockReset();
+    fse.mkdirp.mockReset();
+
+    fse.writeJson.mockResolvedValue();
   });
 
   it.todo('commitNetcanvas()');
   it.todo('revertNetcanvas()');
-  it.todo('writeProtocol()');
+
+  describe('writeProtocol(workingPath, protocol)', () => {
+    it('rejects to a write error if write fails', async () => {
+      fse.writeJson.mockRejectedValue(new Error('oh no'));
+
+      await expect(
+        writeProtocol('/dev/null/working/path', {}),
+      ).rejects.toMatchObject({ friendlyCode: errors.WriteError });
+    });
+
+    it('resolves to pruned version of protocol', async () => {
+      pruneProtocol.mockImplementation(protocol => ({ ...protocol, pruned: true }));
+
+      await expect(
+        writeProtocol('/dev/null/working/path', {}),
+      ).resolves.toMatchObject({ pruned: true });
+    });
+  });
 
   describe('readProtocol(protocolPath)', () => {
     it('Rejects with a human readable error when protocol cannot be parsed', async () => {
@@ -114,20 +135,17 @@ describe('netcanvasFile/lib', () => {
     });
   });
 
-  // describe.only('createNetcanvasExport(workingPath, protocol)', () => {
-  //   const workingPath = path.join('dev', 'null');
-  //   // const circularProtocol = {};
-  //   // circularProtocol.a = { b: circularProtocol };
+  describe('createNetcanvasExport(workingPath, protocol)', () => {
 
-  //   it('resolves to a uuid path in temp', async () => {
-  //     fse.readJson.mockResolvedValueOnce({});
-  //     fse.writeJson.mockResolvedValue(true);
-  //     pruneProtocolAssets.mockResolvedValueOnce(true);
-  //     pruneProtocol.mockReturnValueOnce({});
-  //     archive.mockResolvedValueOnce(true);
+    it('resolves to a uuid path in temp', async () => {
+      fse.mkdirp.mockResolvedValue();
+      pruneProtocol.mockImplementation(protocol => Promise.resolve(protocol));
+      fse.writeJson.mockResolvedValue();
+      pruneProtocolAssets.mockResolvedValueOnce();
+      archive.mockResolvedValueOnce();
 
-  //     await expect(createNetcanvasExport(workingPath, {}))
-  //       .resolves.toEqual('/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b');
-  //   });
-  // });
+      await expect(createNetcanvasExport('/dev/null/existing/working/path', {}))
+        .resolves.toEqual('/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b');
+    });
+  });
 });
