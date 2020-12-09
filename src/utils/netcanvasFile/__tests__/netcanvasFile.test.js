@@ -205,96 +205,82 @@ describe('netcanvasFile/netcanvasFile', () => {
     });
 
     describe('when path does not already exist', () => {
-      const pathDoesNotExistMock = {
-        'fse.pathExists': [fse.pathExists, Promise.resolve(false)],
-      };
+      beforeEach(() => {
+        deployNetcanvas.mockImplementation((sourcePath, savePath) => Promise.resolve({
+          savePath,
+          backupPath: null,
+        }));
+      });
 
       it('successful save', async () => {
-        mockAndLog({
-          ...successfulMocks,
-          ...pathDoesNotExistMock,
-        });
-        const logger = mockAndLog({
-          'fse.rename': [fse.rename, Promise.resolve()],
-          'fse.unlink': [fse.unlink, Promise.resolve()],
-          'fse.writeJson': [fse.writeJson, Promise.resolve()],
-          archive: [archive, Promise.resolve()],
-        });
-
-        await saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path');
-
-        expect(logger.mock.calls).toEqual(
-          [
-            ['fse.writeJson',
-              ['/dev/null/working/path/protocol.json', { description: 'test protocol' }, { spaces: 2 }]],
-            ['archive',
-              ['/dev/null/working/path', '/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b']],
-            ['fse.rename',
-              ['/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b', '/dev/null/destination/path']],
-          ],
+        const result = await saveNetcanvas(
+          '/dev/null/existing/working/path',
+          mockProtocol,
+          '/dev/null/save/destination/path',
         );
+
+        expect(result).toBe('/dev/null/save/destination/path');
+
+        expect(createNetcanvasExport.mock.calls).toEqual([[
+          '/dev/null/existing/working/path',
+          mockProtocol,
+        ]]);
+        expect(deployNetcanvas.mock.calls).toEqual([[
+          '/dev/null/export/working/path',
+          '/dev/null/save/destination/path',
+        ]]);
+        expect(commitNetcanvas.mock.calls).toEqual([[{
+          backupPath: null,
+          savePath: '/dev/null/save/destination/path',
+        }]]);
+        expect(revertNetcanvas.mock.calls).toHaveLength(0);
       });
 
       it('when verifyNetcanvas fails, throws but does not revert', async () => {
-        mockAndLog({
-          ...successfulMocks,
-          ...pathDoesNotExistMock,
-          'fse.readJson': [fse.readJson, Promise.resolve({ first: 'attempt' })],
-        });
+        readProtocol.mockResolvedValue({});
 
-        const logger = mockAndLog({
-          'fse.rename': [fse.rename, Promise.resolve()],
-          'fse.unlink': [fse.unlink, Promise.resolve()],
-          'fse.writeJson': [fse.writeJson, Promise.resolve()],
-          archive: [archive, Promise.resolve()],
-        });
+        await expect(
+          saveNetcanvas(
+            '/dev/null/existing/working/path',
+            mockProtocol,
+            '/dev/null/save/destination/path',
+          ),
+        ).rejects.toThrow();
 
-        await expect(saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path')).rejects.toThrow();
-
-        expect(logger.mock.calls).toEqual(
-          [
-            ['fse.writeJson',
-              ['/dev/null/working/path/protocol.json', { description: 'test protocol' }, { spaces: 2 }]],
-            ['archive',
-              ['/dev/null/working/path', '/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b']],
-            ['fse.rename',
-              ['/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b', '/dev/null/destination/path']],
-          ],
-        );
+        expect(deployNetcanvas.mock.calls).toEqual([[
+          '/dev/null/export/working/path',
+          '/dev/null/save/destination/path',
+        ]]);
+        expect(commitNetcanvas.mock.calls).toHaveLength(0);
+        expect(revertNetcanvas.mock.calls).toEqual([[{
+          backupPath: null,
+          savePath: '/dev/null/save/destination/path',
+        }]]);
       });
 
       it('if deployNetcanvas fails it aborts the save', async () => {
-        mockAndLog({
-          ...successfulMocks,
-          ...pathDoesNotExistMock,
-        });
+        deployNetcanvas.mockRejectedValue(new Error('oh no'));
 
-        const logger = mockAndLog({
-          'fse.rename': [fse.rename, Promise.reject()],
-          'fse.unlink': [fse.unlink, Promise.resolve()],
-          'fse.writeJson': [fse.writeJson, Promise.resolve()],
-          archive: [archive, Promise.resolve()],
-        });
+        await expect(
+          saveNetcanvas(
+            '/dev/null/existing/working/path',
+            mockProtocol,
+            '/dev/null/save/destination/path',
+          ),
+        ).rejects.toThrow();
 
-        await expect(saveNetcanvas('/dev/null/working/path', mockProtocol, '/dev/null/destination/path')).rejects.toThrow();
-
-        expect(logger.mock.calls).toEqual(
-          [
-            ['fse.writeJson',
-              ['/dev/null/working/path/protocol.json', { description: 'test protocol' }, { spaces: 2 }]],
-            ['archive',
-              ['/dev/null/working/path', '/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b']],
-            // `fse.rename` is the call that was made to fail, so no changes have been made to disk:
-            ['fse.rename',
-              ['/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b', '/dev/null/destination/path']],
-          ],
-        );
+        expect(deployNetcanvas.mock.calls).toEqual([[
+          '/dev/null/export/working/path',
+          '/dev/null/save/destination/path',
+        ]]);
+        expect(commitNetcanvas.mock.calls).toHaveLength(0);
+        expect(revertNetcanvas.mock.calls).toHaveLength(0);
       });
     });
   });
 
 
-  describe('createNetcanvasExport(workingPath, protocol)', () => {
+  describe.only('createNetcanvasExport(workingPath, protocol)', () => {
     const workingPath = path.join('dev', 'null');
     const circularProtocol = {};
     circularProtocol.a = { b: circularProtocol };

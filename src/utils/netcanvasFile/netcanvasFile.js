@@ -112,7 +112,7 @@ const verifyNetcanvas = (filePath, protocol) =>
       .then(readProtocol),
   ])
     .then(([prunedProtocol, fileProtocol]) => {
-      console.log({ prunedProtocol, fileProtocol });
+      // console.log({ prunedProtocol, fileProtocol });
 
       const match = isEqual(
         { ...fileProtocol, lastModified: null },
