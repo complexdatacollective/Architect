@@ -1,7 +1,6 @@
 /* eslint-env jest */
 
 import fse from 'fs-extra';
-import path from 'path';
 import { pruneProtocol } from '@app/utils/prune';
 import pruneProtocolAssets from '@app/utils/pruneProtocolAssets';
 import { archive } from '@app/utils/protocols/lib/archive';
@@ -10,6 +9,8 @@ import {
   deployNetcanvas,
   createNetcanvasExport,
   writeProtocol,
+  revertNetcanvas,
+  commitNetcanvas,
 } from '../lib';
 import { errors } from '../errors';
 
@@ -30,12 +31,91 @@ describe('netcanvasFile/lib', () => {
     fse.unlink.mockReset();
     fse.access.mockReset();
     fse.mkdirp.mockReset();
+    fse.stat.mockReset();
 
     fse.writeJson.mockResolvedValue();
+    fse.stat.mockImplementation(() => Promise.resolve(({
+      isFile: jest.fn(() => false),
+    })));
   });
 
-  it.todo('commitNetcanvas()');
-  it.todo('revertNetcanvas()');
+  describe('commitNetcanvas({ savePath, backupPath })', () => {
+    it('resolves to savePath when no backupPath provided', async () => {
+      await expect(
+        commitNetcanvas({ savePath: '/dev/null/user/save/path' }),
+      )
+        .resolves.toEqual('/dev/null/user/save/path');
+    });
+
+    it('rejects to an error if savePath does not exist on filesystem', async () => {
+      await expect(
+        commitNetcanvas({
+          savePath: '/dev/null/user/save/path',
+          backupPath: '/dev/null/user/save/path.backup',
+        }),
+      )
+        .rejects.toThrow('"/dev/null/user/save/path" (savePath) does not exist');
+    });
+
+    it('unlinks backupPath and resolves to savePath', async () => {
+      fse.stat.mockImplementation(() => Promise.resolve(({
+        isFile: jest.fn(() => true),
+      })));
+
+      fse.unlink.mockResolvedValue();
+
+      await expect(
+        commitNetcanvas({
+          savePath: '/dev/null/user/save/path',
+          backupPath: '/dev/null/user/save/path.backup',
+        }),
+      )
+        .resolves.toEqual('/dev/null/user/save/path');
+
+      expect(fse.unlink.mock.calls).toEqual([['/dev/null/user/save/path.backup']]);
+    });
+  });
+
+  describe('revertNetcanvas({ savePath, backupPath })', () => {
+    it('resolves to savePath when no backupPath provided', async () => {
+      await expect(
+        revertNetcanvas({ savePath: '/dev/null/user/save/path' }),
+      )
+        .resolves.toEqual('/dev/null/user/save/path');
+    });
+
+    it('rejects to an error if backupPath does not exist on filesystem', async () => {
+      await expect(
+        revertNetcanvas({
+          savePath: '/dev/null/user/save/path',
+          backupPath: '/dev/null/user/save/path.backup',
+        }),
+      )
+        .rejects.toThrow('"/dev/null/user/save/path.backup" (backupPath) does not exist');
+    });
+
+    it('unlinks savePath, renames backup, and resolves to savePath', async () => {
+      fse.stat.mockImplementation(() => Promise.resolve(({
+        isFile: jest.fn(() => true),
+      })));
+
+      fse.unlink.mockResolvedValue();
+
+      await expect(
+        revertNetcanvas({
+          savePath: '/dev/null/user/save/path',
+          backupPath: '/dev/null/user/save/path.backup',
+        }),
+      )
+        .resolves.toEqual('/dev/null/user/save/path');
+
+      expect(fse.unlink.mock.calls).toEqual([['/dev/null/user/save/path']]);
+      expect(fse.rename.mock.calls).toEqual([[
+        '/dev/null/user/save/path.backup',
+        '/dev/null/user/save/path',
+      ]]);
+    });
+  });
 
   describe('writeProtocol(workingPath, protocol)', () => {
     it('rejects to a write error if write fails', async () => {

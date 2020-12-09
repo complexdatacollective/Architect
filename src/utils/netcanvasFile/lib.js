@@ -90,7 +90,7 @@ const commitNetcanvas = ({ savePath, backupPath }) => {
   // Check the new file definitely exists before deleting backup
   return fse.stat(savePath)
     .then((stat) => {
-      if (!stat.isFile()) { throw new Error('`savePath` does not exist'); }
+      if (!stat.isFile()) { throw new Error(`"${savePath}" (savePath) does not exist`); }
       return fse.unlink(backupPath)
         .then(() => savePath);
     });
@@ -101,7 +101,7 @@ const revertNetcanvas = ({ savePath, backupPath }) => {
   // Check the backup definitely exists before deleting other file
   return fse.stat(backupPath)
     .then((stat) => {
-      if (!stat.isFile()) { throw new Error('`backupPath` does not exist'); }
+      if (!stat.isFile()) { throw new Error(`"${backupPath}" (backupPath) does not exist`); }
       return fse.unlink(savePath)
         .then(() => fse.rename(backupPath, savePath))
         .then(() => savePath);
