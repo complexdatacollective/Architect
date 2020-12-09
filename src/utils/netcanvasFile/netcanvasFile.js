@@ -23,7 +23,6 @@ import {
   revertNetcanvas,
 } from './lib';
 
-
 const schemaVersionStates = {
   UPGRADE_APP: 'UPGRADE_APP',
   UPGRADE_PROTOCOL: 'UPGRADE_PROTOCOL',
@@ -199,14 +198,21 @@ const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERS
     )
     .catch(handleError(errors.MigrationFailed));
 
+// `utils` for functions that aren't expected to be used outside of module
+
+const utils = {
+  createNetcanvasExport,
+  verifyNetcanvas,
+};
+
 export {
   checkSchemaVersion,
   createNetcanvas,
-  createNetcanvasExport,
   verifyNetcanvas,
   importNetcanvas,
   migrateNetcanvas,
   saveNetcanvas,
   schemaVersionStates,
   validateNetcanvas,
+  utils,
 };

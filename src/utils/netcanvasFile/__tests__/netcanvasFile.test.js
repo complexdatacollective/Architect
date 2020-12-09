@@ -9,56 +9,40 @@ import migrateProtocol from '@app/protocol-validation/migrations/migrateProtocol
 import { pruneProtocol } from '@app/utils/prune';
 import {
   checkSchemaVersion,
-  // createNetcanvas,
   errors,
   importNetcanvas,
   migrateNetcanvas,
-  readProtocol,
   saveNetcanvas,
   schemaVersionStates,
   utils,
-  // validateNetcanvas,
 } from '../netcanvasFile';
+import {
+  commitNetcanvas,
+  deployNetcanvas,
+  getTempDir,
+  readProtocol,
+  revertNetcanvas,
+  writeProtocol,
+} from '../lib';
+import {
+  mockProtocolPath,
+  mockProtocol,
+  mockAndLog,
+} from './helpers';
 
 jest.mock('fs-extra');
 jest.mock('@app/utils/protocols/lib/archive');
 jest.mock('@app/protocol-validation/migrations/migrateProtocol');
 jest.mock('@app/utils/pruneProtocolAssets');
 jest.mock('@app/utils/prune');
+jest.mock('../lib');
 
 const {
-  // commitNetcanvas,
   createNetcanvasExport,
-  deployNetcanvas,
-  // revertNetcanvas,
   verifyNetcanvas,
-  // writeProtocol,
 } = utils;
 
-const mockProtocolPath = path.join(__dirname, '..', '..', 'network-canvas', 'integration-tests', 'data', 'mock.netcanvas');
-const mockProtocol = { description: 'test protocol' };
-
-const mockAndLog = (targets) => {
-  const logger = jest.fn();
-
-  Object.keys(targets).forEach((name) => {
-    const [target, result] = targets[name];
-    let count = 0;
-    target.mockImplementation((...args) => {
-      logger(name, args);
-      count += 1;
-      const r = result.length ? result[count] : result;
-      if (typeof r === 'function') {
-        return r(...args);
-      }
-      return r;
-    });
-  });
-
-  return logger;
-};
-
-describe('utils/netcanvasFile', () => {
+describe('netcanvasFile/netcanvasFile', () => {
   beforeEach(() => {
     archive.mockReset();
     extract.mockReset();
@@ -71,6 +55,12 @@ describe('utils/netcanvasFile', () => {
     pruneProtocolAssets.mockReset();
     fse.unlink.mockReset();
     fse.access.mockReset();
+
+    let count = 0;
+    getTempDir.mockImplementation(() => {
+      count += 1;
+      return Promise.resolve(`/dev/null/working/path/${count}`);
+    });
   });
 
   it.todo('errors');
@@ -78,44 +68,30 @@ describe('utils/netcanvasFile', () => {
 
   it.todo('createNetcanvas()');
 
-  describe('migrateNetcanvas()', () => {
+  describe.only('migrateNetcanvas()', () => {
     it('resolves to new file path', async () => {
-      const successfulMocks = {
-        pruneProtocolAssets: [pruneProtocolAssets, Promise.resolve()],
-        pruneProtocol: [pruneProtocol, (protocol = {}) => Promise.resolve(protocol)],
-        'fse.readJson': [fse.readJson, [
-          Promise.resolve({ ...mockProtocol, schemaVersion: 2 }),
-          Promise.resolve({ ...mockProtocol, schemaVersion: 2 }),
-          Promise.resolve({ ...mockProtocol, schemaVersion: 4 }),
-        ]],
-        migrateProtocol: [
-          migrateProtocol,
-          Promise.resolve([{ ...mockProtocol, schemaVersion: 4 }, []]),
-        ],
-        'fse.pathExists': [fse.pathExists, Promise.resolve(true)],
-        'fse.stat': [fse.stat, Promise.resolve({ isFile: () => Promise.resolve(true) })],
-        'fse.access': [fse.access, Promise.resolve()],
-        'fse.unlink': [fse.unlink, Promise.resolve()],
-        'fse.rename': [fse.rename, Promise.resolve()],
-        archive: [archive, Promise.resolve()],
-      };
-
-      mockAndLog(successfulMocks);
-
-      const logger = mockAndLog({
-        'fse.writeJson': [fse.writeJson, Promise.resolve()],
-      });
+      readProtocol
+        .mockResolvedValueOnce({ ...mockProtocol, schemaVersion: 2 })
+        .mockResolvedValueOnce({ ...mockProtocol, schemaVersion: 4 });
+      writeProtocol.mockResolvedValueOnce();
+      deployNetcanvas.mockImplementation((sourcePath, savePath) => Promise.resolve({
+        savePath,
+        backupPath: `${savePath}.backup`,
+      }));
+      revertNetcanvas.mockImplementation(({ savePath }) => Promise.resolve(savePath));
+      migrateProtocol.mockResolvedValueOnce(
+        [{ ...mockProtocol, schemaVersion: 4 }, []],
+      );
+      commitNetcanvas.mockImplementation(({ savePath }) => Promise.resolve(savePath));
+      fse.access.mockResolvedValue(Promise.resolve());
+      archive.mockImplementation(() => Promise.resolve());
+      pruneProtocol.mockImplementation((protocol = {}) => Promise.resolve(protocol));
 
       const result = await migrateNetcanvas('/dev/null/original/path', '/dev/null/destination/path2');
 
       expect(result).toBe('/dev/null/destination/path2');
-
-      expect(logger.mock.calls[0][1][1]).toMatchObject({ schemaVersion: 4 });
     });
   });
-  it.todo('commitNetcanvas()');
-  it.todo('revertNetcanvas()');
-  it.todo('writeProtocol()');
 
   describe('checkSchemaVersion(protocol, schemaVersion [optional])', () => {
     const defaultMocks = {
@@ -371,33 +347,6 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  describe('readProtocol(protocolPath)', () => {
-    it('Rejects with a human readable error when protocol cannot be parsed', async () => {
-      fse.readJson.mockImplementation(() =>
-        new Promise((resolve, reject) => {
-          try {
-            JSON.parse('malformatted json');
-          } catch (e) {
-            return reject(e);
-          }
-
-          return resolve();
-        }),
-      );
-
-      await expect(
-        readProtocol('/var/null/'),
-      ).rejects.toMatchObject({ friendlyCode: errors.ReadError });
-    });
-
-    it('Resolves to protocol', async () => {
-      fse.readJson.mockResolvedValueOnce({});
-
-      await expect(
-        readProtocol('/var/null/'),
-      ).resolves.toEqual({});
-    });
-  });
 
   describe('createNetcanvasExport(workingPath, protocol)', () => {
     const workingPath = path.join('dev', 'null');
@@ -443,56 +392,6 @@ describe('utils/netcanvasFile', () => {
     });
   });
 
-  describe('deployNetcanvas(exportPath, destinationPath)', () => {
-    const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
-    const userDestinationPath = '/dev/null/user/path/export/destination';
-
-    it('does not create a backup if destination does not already exist', async () => {
-      fse.rename.mockResolvedValueOnce(true);
-      fse.pathExists.mockResolvedValueOnce(false);
-
-      const result = await deployNetcanvas(
-        netcanvasFilePath,
-        userDestinationPath,
-      );
-
-      expect(fse.rename.mock.calls.length).toBe(1);
-      expect(fse.rename.mock.calls[0]).toEqual([
-        '/dev/null/get/electron/path/architect/exports/pendingExport',
-        '/dev/null/user/path/export/destination',
-      ]);
-
-      expect(result).toEqual({
-        backupPath: null,
-        savePath: userDestinationPath,
-      });
-    });
-
-    it('creates a backup if destination does exist', async () => {
-      fse.rename.mockResolvedValue(true);
-      fse.pathExists.mockResolvedValue(true);
-
-      const result = await deployNetcanvas(
-        netcanvasFilePath,
-        userDestinationPath,
-      );
-
-      expect(fse.rename.mock.calls.length).toBe(2);
-      expect(fse.rename.mock.calls[0]).toEqual([
-        '/dev/null/user/path/export/destination',
-        expect.stringMatching(/\/dev\/null\/user\/path\/export\/destination\.backup-[0-9]+/),
-      ]);
-      expect(fse.rename.mock.calls[1]).toEqual([
-        '/dev/null/get/electron/path/architect/exports/pendingExport',
-        '/dev/null/user/path/export/destination',
-      ]);
-
-      expect(result).toEqual({
-        backupPath: expect.stringMatching(/\/dev\/null\/user\/path\/export\/destination\.backup-[0-9]+/),
-        savePath: userDestinationPath,
-      });
-    });
-  });
 
   describe('verifyNetcanvas(filePath)', () => {
     beforeEach(() => {
