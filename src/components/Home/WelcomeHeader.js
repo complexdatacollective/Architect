@@ -113,7 +113,7 @@ const WelcomeHeader = () => {
                   </p>
                   <p>
                     Alternatively, to get started right away use the buttons below to
-                    create a new interview protocol, or open an existing one from elsewhere
+                    create a new interview protocol, or open an existing one from elsewhere.
                   </p>
                   <div className="welcome-actions">
                     <Button
