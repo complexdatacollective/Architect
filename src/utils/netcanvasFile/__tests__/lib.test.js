@@ -113,4 +113,21 @@ describe('netcanvasFile/lib', () => {
       });
     });
   });
+
+  // describe.only('createNetcanvasExport(workingPath, protocol)', () => {
+  //   const workingPath = path.join('dev', 'null');
+  //   // const circularProtocol = {};
+  //   // circularProtocol.a = { b: circularProtocol };
+
+  //   it('resolves to a uuid path in temp', async () => {
+  //     fse.readJson.mockResolvedValueOnce({});
+  //     fse.writeJson.mockResolvedValue(true);
+  //     pruneProtocolAssets.mockResolvedValueOnce(true);
+  //     pruneProtocol.mockReturnValueOnce({});
+  //     archive.mockResolvedValueOnce(true);
+
+  //     await expect(createNetcanvasExport(workingPath, {}))
+  //       .resolves.toEqual('/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b');
+  //   });
+  // });
 });

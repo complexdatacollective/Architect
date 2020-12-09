@@ -279,24 +279,6 @@ describe('netcanvasFile/netcanvasFile', () => {
     });
   });
 
-
-  describe.only('createNetcanvasExport(workingPath, protocol)', () => {
-    const workingPath = path.join('dev', 'null');
-    const circularProtocol = {};
-    circularProtocol.a = { b: circularProtocol };
-
-    it('resolves to a uuid path in temp', async () => {
-      fse.readJson.mockResolvedValueOnce({});
-      fse.writeJson.mockResolvedValue(true);
-      pruneProtocolAssets.mockResolvedValueOnce(true);
-      pruneProtocol.mockReturnValueOnce({});
-      archive.mockResolvedValueOnce(true);
-
-      await expect(createNetcanvasExport(workingPath, {}))
-        .resolves.toEqual('/dev/null/get/electron/path/architect/exports/809895df-bbd7-4c76-ac58-e6ada2625f9b');
-    });
-  });
-
   describe('importNetcanvas(filePath)', () => {
     it('rejects with a readable error when permissions are wrong', async () => {
       const accessError = new Error();
@@ -309,7 +291,6 @@ describe('netcanvasFile/netcanvasFile', () => {
     });
 
     it('rejects with a readable error when it cannot extract a protocol', async () => {
-      fse.access.mockResolvedValueOnce(true);
       extract.mockRejectedValueOnce(new Error());
 
       await expect(importNetcanvas(mockProtocolPath))
@@ -317,32 +298,22 @@ describe('netcanvasFile/netcanvasFile', () => {
     });
 
     it('resolves to a uuid path in temp', async () => {
-      fse.access.mockResolvedValueOnce(true);
-      extract.mockResolvedValueOnce(true);
       await expect(importNetcanvas(mockProtocolPath))
-        .resolves.toEqual('/dev/null/get/electron/path/architect/protocols/809895df-bbd7-4c76-ac58-e6ada2625f9b');
+        .resolves.toEqual('/dev/null/working/path/1/809895df-bbd7-4c76-ac58-e6ada2625f9b');
     });
   });
 
 
   describe('verifyNetcanvas(filePath)', () => {
-    beforeEach(() => {
-      pruneProtocol.mockImplementation(p => Promise.resolve(p));
-    });
-
     it('Rejects with a human readable error when verification fails', async () => {
-      fse.access.mockResolvedValue(true);
-      extract.mockResolvedValue(true);
-      fse.readJson.mockResolvedValue({ schemaVersion: 4 });
+      readProtocol.mockResolvedValue({ schemaVersion: 4 });
 
       await expect(verifyNetcanvas(mockProtocolPath, {}))
         .rejects.toMatchObject({ friendlyCode: errors.VerificationFailed });
     });
 
     it('Resolves to filePath if validation passes', async () => {
-      fse.access.mockResolvedValue(true);
-      extract.mockResolvedValue(true);
-      fse.readJson.mockResolvedValue({ schemaVersion: 4 });
+      readProtocol.mockResolvedValue({ schemaVersion: 4 });
 
       await expect(verifyNetcanvas(mockProtocolPath, { schemaVersion: 4 }))
         .resolves.toEqual(mockProtocolPath);
