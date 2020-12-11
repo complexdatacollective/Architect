@@ -8,7 +8,7 @@ const FilteredNodeType = props => (
     <Row>
       <NodeTypeFields {...props} />
     </Row>
-    <NetworkFilter {...props} title="Enable node filtering for this stage" />
+    <NetworkFilter {...props} title="Enable stage-level network filtering" />
   </Section>
 );
 
