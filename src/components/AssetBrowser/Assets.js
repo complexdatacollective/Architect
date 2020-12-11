@@ -64,6 +64,7 @@ Assets.propTypes = {
   assets: PropTypes.array,
   assetType: PropTypes.string,
   onUpdateAssetFilter: PropTypes.func.isRequired,
+  disableDelete: PropTypes.bool,
 };
 
 Assets.defaultProps = {
@@ -72,6 +73,7 @@ Assets.defaultProps = {
   onDelete: null,
   assets: [],
   assetType: null,
+  disableDelete: false,
 };
 
 export default compose(
