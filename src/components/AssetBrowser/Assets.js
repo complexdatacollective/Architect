@@ -20,13 +20,16 @@ const Assets = ({
   onUpdateAssetFilter,
   onSelect,
   onDelete,
+  disableDelete,
 }) => {
+  const handleDelete = !disableDelete && onDelete;
+
   const renderedAssets = assets.map(asset => (
     <div className="asset-browser-assets__asset" key={asset.id}>
       <Thumbnail
         {...asset}
         onClick={onSelect}
-        onDelete={onDelete}
+        onDelete={handleDelete}
       />
     </div>
   ));

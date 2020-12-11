@@ -11,6 +11,7 @@ const AssetBrowser = ({
   selected,
   onSelect,
   onDelete,
+  disableDelete,
 }) => {
   const handleCreate = useCallback((assetIds) => {
     if (assetIds.length !== 1) { return; } // if multiple files were uploaded
@@ -31,6 +32,7 @@ const AssetBrowser = ({
         <Assets
           onSelect={onSelect}
           onDelete={onDelete}
+          disableDelete={disableDelete}
           selected={selected}
           type={type}
         />
@@ -44,6 +46,7 @@ AssetBrowser.propTypes = {
   selected: PropTypes.string,
   onSelect: PropTypes.func,
   onDelete: PropTypes.func,
+  disableDelete: PropTypes.bool,
 };
 
 AssetBrowser.defaultProps = {
@@ -53,6 +56,7 @@ AssetBrowser.defaultProps = {
   onSelect: () => {},
   onDelete: () => {},
   stackIndex: null,
+  disableDelete: false,
 };
 
 export default compose(
