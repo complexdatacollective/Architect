@@ -14,7 +14,6 @@ const template = () => ({ color: 'ord-color-seq-1' });
 
 const OrdinalBinPrompts = ({ handleChangePrompt, ...props }) => (
   <EditableList
-    contentId="guidance.editor.ordinal_bin_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"

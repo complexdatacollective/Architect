@@ -17,12 +17,12 @@ const withChangeDataSourceHandler = connect(
 
 const ExternalDataSource = (props) => {
   const handleChangeDataSource = () => {
-    props.changeForm('edit-stage', 'cardOptions', null);
-    props.changeForm('edit-stage', 'sortOptions', null);
+    props.changeForm('edit-stage', 'cardOptions', {});
+    props.changeForm('edit-stage', 'sortOptions', {});
   };
 
   return (
-    <Section contentId="guidance.editor.externalData" {...props}>
+    <Section {...props}>
       <Row>
         <h3>External Data Source for Roster</h3>
         <div id={getFieldId('dataSource')} data-name="Roster data-source" />

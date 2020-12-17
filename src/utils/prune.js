@@ -1,4 +1,4 @@
-import { toPairs, isArray, isEmpty, isObject, isNull } from 'lodash';
+import { toPairs, isArray, isEmpty, isObject, isNull, isUndefined } from 'lodash';
 
 const assignForType = (memo, key, value) => {
   if (isArray(memo)) {
@@ -15,12 +15,12 @@ const assignForType = (memo, key, value) => {
 };
 
 const shouldPrune = x =>
-  isNull(x) || (isObject(x) && isEmpty(x)) || (isArray(x) && x.length === 0);
+  isNull(x) || isUndefined(x) || (isObject(x) && isEmpty(x)) || (isArray(x) && x.length === 0);
 
-const prune = (obj) => {
+const pruneObjects = (obj) => {
   const getNextValue = (value) => {
     if (isObject(value) || isArray(value)) {
-      return prune(value);
+      return pruneObjects(value);
     }
 
     return value;
@@ -39,4 +39,24 @@ const prune = (obj) => {
   );
 };
 
-export default prune;
+// TODO: Should not remove top-level elements like stages or codebook
+const pruneProtocol = protocol =>
+  new Promise((resolve) => {
+    const { stages, codebook, assetManifest, ...rest } = protocol;
+
+    const prunedProtocol = {
+      stages: stages.map(pruneObjects),
+      codebook: pruneObjects(codebook),
+      assetManifest: pruneObjects(assetManifest),
+      ...pruneObjects(rest),
+    };
+
+    const protocolString = JSON.stringify(prunedProtocol);
+    const result = JSON.parse(protocolString);
+
+    return resolve(result);
+  });
+
+export { pruneProtocol };
+
+export default pruneObjects;

@@ -1,5 +1,4 @@
 import {
-  Name,
   FilteredEdgeType,
   Form,
   IntroductionPanel,
@@ -10,7 +9,6 @@ const template = {
 
 const AlterEdgeForm = {
   headerSections: [
-    Name,
     FilteredEdgeType,
   ],
   sections: [

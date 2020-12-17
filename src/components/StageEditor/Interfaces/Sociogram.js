@@ -1,5 +1,4 @@
 import {
-  Name,
   Background,
   FilteredNodeType,
   SociogramPrompts,
@@ -7,7 +6,6 @@ import {
 
 const Sociogram = {
   headerSections: [
-    Name,
     FilteredNodeType,
   ],
   sections: [

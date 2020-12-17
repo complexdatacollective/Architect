@@ -54,12 +54,19 @@
     }
 
     &-meta {
-      flex-grow: 1;
+      flex: 1;
       padding-left: unit(4);
     }
 
     &-control {
       flex-grow: 0;
+      display: flex;
+
+      button {
+        &:not(:last-of-type) {
+          margin-right: unit(1);
+        }
+      }
     }
 
     &-variables {

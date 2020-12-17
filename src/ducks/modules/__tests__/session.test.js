@@ -1,38 +1,23 @@
+/* eslint-disable no-unused-vars */
 /* eslint-env jest */
-
 import configureStore from 'redux-mock-store';
-import { createEpicMiddleware } from 'redux-observable';
+import Rx from 'rxjs';
+import { toArray } from 'rxjs/operators';
+import { times } from 'lodash';
 import thunk from 'redux-thunk';
-import reducer, { actionCreators } from '../session';
-import { actionCreators as protocolActions } from '../protocol';
-import { actionCreators as stageActions } from '../protocol/stages';
-import {
-  actionCreators as codebookActions,
-  testing as codebookTesting,
-} from '../protocol/codebook';
-import { testing as assetManifestTesting } from '../protocol/assetManifest';
-import { rootEpic } from '../../modules/root';
+import validateProtocol from '@app/utils/validateProtocol';
 import {
   importNetcanvas,
   readProtocol,
   saveNetcanvas,
-} from '../../../utils/netcanvasFile';
+} from '@app/utils/netcanvasFile';
+import reducer, { actionCreators, epics } from '../session';
 
-jest.mock('../../../utils/netcanvasFile');
+jest.mock('@app/utils/netcanvasFile');
+jest.mock('@app/utils/validateProtocol');
 
-const epics = createEpicMiddleware(rootEpic);
-const middlewares = [epics, thunk];
+const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
-
-const itTracksActionAsChange = (action) => {
-  const store = mockStore({});
-
-  store.dispatch(action);
-
-  const actions = store.getActions();
-
-  expect(actions.pop()).toEqual({ type: 'SESSION/PROTOCOL_CHANGED' });
-};
 
 describe('session module', () => {
   describe('reducer', () => {
@@ -43,16 +28,22 @@ describe('session module', () => {
           lastChanged: 0,
           filePath: null,
           workingPath: null,
+          protocolIsValid: false,
         });
     });
 
     it('SESSION/PROTOCOL_CHANGED', () => {
       const result = reducer(
         undefined,
-        actionCreators.protocolChanged(),
+        {
+          type: 'SESSION/PROTOCOL_CHANGED',
+          protocolIsValid: true,
+          ipc: true,
+        },
       );
 
       expect(result.lastChanged > 0).toBe(true);
+      expect(result.protocolIsValid).toBe(true);
     });
 
     it('SESSION/OPEN_NETCANVAS_SUCCESS', () => {
@@ -61,6 +52,7 @@ describe('session module', () => {
         lastChanged: 2000,
         filePath: '/dev/null/previous.netcanvas',
         workingPath: '/dev/null/previous/working/path',
+        protocolIsValid: false,
       });
       const action = {
         type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
@@ -68,6 +60,7 @@ describe('session module', () => {
           protocol: {},
           filePath: '/dev/null/mock.netcanvas',
           workingPath: '/dev/null/working/path',
+          protocolIsValid: true,
         },
       };
       expect(reducer(initialState, action))
@@ -76,6 +69,7 @@ describe('session module', () => {
           lastChanged: 0,
           filePath: '/dev/null/mock.netcanvas',
           workingPath: '/dev/null/working/path',
+          protocolIsValid: true,
         });
     });
 
@@ -137,12 +131,13 @@ describe('session module', () => {
           },
         },
         {
-          type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
           ipc: true,
+          type: 'SESSION/OPEN_NETCANVAS_SUCCESS',
           payload: {
             protocol: {},
             filePath: '/dev/null/mock.netcanvas',
             workingPath: '/dev/null/working/path',
+            protocolIsValid: false,
           },
         },
         {
@@ -195,6 +190,7 @@ describe('session module', () => {
             type: 'SESSION/SAVE_NETCANVAS',
           },
           {
+            ipc: true,
             payload: {
               protocol: { schemaVersion: 4 },
               savePath: '/dev/null/user/file/path.netcanvas',
@@ -238,25 +234,69 @@ describe('session module', () => {
   });
 
   describe('epics', () => {
-    it('tracks actions as changes', () => {
+    const store = mockStore({
+      protocol: {
+        present: {},
+      },
+    });
+
+    const getState = () => store.getState();
+
+    beforeEach(() => {
+      validateProtocol.mockReset();
+    });
+
+    it('tracks actions as changes', (done) => {
+      validateProtocol.mockResolvedValue();
+
       const actions = [
-        [stageActions.updateStage, [{}]],
-        [stageActions.moveStage, [0, 0]],
-        [stageActions.deleteStage, [0]],
-        [protocolActions.updateOptions, [{}]],
-        [codebookActions.createType],
-        [codebookActions.updateType],
-        [codebookTesting.deleteType],
-        [codebookTesting.createVariable],
-        [codebookTesting.updateVariable],
-        [codebookTesting.deleteVariable],
-        [assetManifestTesting.importAssetComplete],
-        [assetManifestTesting.deleteAsset],
+        { type: 'DO_NOT_TRACK_AS_CHANGE' },
+        { type: 'PROTOCOL/UPDATE_STAGE' },
+        { type: 'PROTOCOL/MOVE_STAGE' },
+        { type: 'PROTOCOL/DELETE_STAGE' },
+        { type: 'PROTOCOL/UPDATE_OPTIONS' },
+        { type: 'PROTOCOL/UPDATE_TYPE' },
+        { type: 'PROTOCOL/CREATE_TYPE' },
+        { type: 'PROTOCOL/DELETE_TYPE' },
+        { type: 'PROTOCOL/UPDATE_VARIABLE' },
+        { type: 'PROTOCOL/CREATE_VARIABLE' },
+        { type: 'PROTOCOL/DELETE_VARIABLE' },
+        { type: 'PROTOCOL/IMPORT_ASSET_COMPLETE' },
+        { type: 'PROTOCOL/DELETE_ASSET' },
       ];
 
-      actions.forEach(([action, args = []]) => {
-        itTracksActionAsChange(action(...args));
-      });
+      const expectedTrackedActionsCount = actions.length - 1; // because of DO_NOT_TRACK_AS_CHANGE
+
+      const expectedResult = times(
+        expectedTrackedActionsCount,
+        () => ({ ipc: true, protocolIsValid: true, type: 'SESSION/PROTOCOL_CHANGED' }),
+      );
+
+      epics(Rx.Observable.from(actions), { getState })
+        .pipe(toArray())
+        .subscribe((result) => {
+          expect(result).toEqual(expectedResult);
+          expect(validateProtocol.mock.calls.length).toEqual(expectedTrackedActionsCount);
+          done();
+        });
+    });
+
+    it('when protocol is invalid it tracks change with protocolIsValid = false', (done) => {
+      validateProtocol.mockRejectedValue();
+
+      const actions = [
+        { type: 'PROTOCOL/UPDATE_STAGE' },
+      ];
+
+      epics(Rx.Observable.from(actions), { getState })
+        .pipe(toArray())
+        .subscribe((result) => {
+          expect(result).toEqual([
+            { ipc: true, protocolIsValid: false, type: 'SESSION/PROTOCOL_CHANGED' },
+          ]);
+          expect(validateProtocol.mock.calls.length).toEqual(actions.length);
+          done();
+        });
     });
   });
 });

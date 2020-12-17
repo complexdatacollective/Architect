@@ -1,5 +1,4 @@
 import {
-  Name,
   FilteredNodeType,
   Form,
   IntroductionPanel,
@@ -7,7 +6,6 @@ import {
 
 const AlterForm = {
   headerSections: [
-    Name,
     FilteredNodeType,
   ],
   sections: [

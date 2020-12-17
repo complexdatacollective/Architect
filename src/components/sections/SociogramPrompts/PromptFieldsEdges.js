@@ -28,7 +28,7 @@ const EdgeFields = ({
   };
 
   return (
-    <Section contentId="guidance.editor.sociogram_prompt.edges" group>
+    <Section group>
       <Row>
         <h3>Edge Display and Creation</h3>
         <p>

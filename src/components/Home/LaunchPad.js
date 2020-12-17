@@ -7,10 +7,8 @@ import { ProtocolCard } from '@codaco/ui/lib/components/Cards';
 import { actionCreators as userActions } from '@modules/userActions';
 import createButtonGraphic from '@app/images/home/create-button.svg';
 import openButtonGraphic from '@app/images/home/open-button.svg';
-import resumeBackgroundGraphic from '@app/images/home/resume-background.svg';
 import Section from './Section';
 import Group from './Group';
-import Sprite from './Sprite';
 
 const LaunchPad = ({
   openNetcanvas,
@@ -21,18 +19,7 @@ const LaunchPad = ({
   <React.Fragment>
     { lastEditedProtocol &&
       <Section className="launch-pad">
-        <Group className="home-group--flex">
-          <Sprite
-            src={resumeBackgroundGraphic}
-            width="calc(50% - 7rem)"
-            height="90%"
-            position="absolute"
-            bottom={0}
-            right="5.7rem"
-            opacity="0.07"
-            backgroundPosition="top right"
-            backgroundSize="100% auto"
-          />
+        <Group color="sea-green" className="resume-group home-group--flex">
           <div className="launch-pad__resume">
             <h2>Resume Editing</h2>
             <ProtocolCard
@@ -63,8 +50,8 @@ const LaunchPad = ({
       </Section>
     }
     <Section className="launch-pad">
-      <Group color="panel-grey--light">
-        <h2>Create or Open</h2>
+      <Group>
+        <h2>Tasks</h2>
         <div className="launch-pad__actions">
           <div className="launch-pad__action">
             <GraphicButton
@@ -87,7 +74,7 @@ const LaunchPad = ({
               onClick={() => openNetcanvas()}
             >
               <h2>Open</h2>
-              <h3>from Computer</h3>
+              <h3>Existing Protocol</h3>
             </GraphicButton>
           </div>
         </div>

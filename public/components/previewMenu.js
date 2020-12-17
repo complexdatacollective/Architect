@@ -16,7 +16,8 @@ const setSize = (window, options) => {
   const adjustedHeight = Math.floor(height * scale);
 
   dispatch(window.webContents, actionCreators.setInterfaceScale(scale));
-  window.setSize(adjustedWidth, adjustedHeight);
+  window.setContentSize(adjustedWidth, adjustedHeight);
+
 
   settings = {
     ...settings,

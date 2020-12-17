@@ -1,5 +1,4 @@
 import {
-  Name,
   FilteredNodeType,
   IntroductionPanel,
   DyadCensusPrompts,
@@ -7,7 +6,6 @@ import {
 
 const DyadCensus = {
   headerSections: [
-    Name,
     FilteredNodeType,
   ],
   sections: [

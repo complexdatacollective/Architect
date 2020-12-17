@@ -8,7 +8,7 @@ const FilteredEdgeType = props => (
     <Row>
       <EdgeTypeFields {...props} />
     </Row>
-    <NetworkFilter {...props} title="Enable edge filtering for this stage" />
+    <NetworkFilter {...props} title="Enable stage-level network filtering" />
   </Section>
 );
 

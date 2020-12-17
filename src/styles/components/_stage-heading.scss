@@ -1,6 +1,7 @@
 .stage-heading {
   background: var(--color-platinum--dark);
   display: flex;
+  flex-direction: column;
   padding: 0;
   box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
 
@@ -11,15 +12,20 @@
   }
 
   .stage-meta {
-    flex: 0 0 28rem;
+    flex: 0 0 auto;
     padding: unit(4);
     display: flex;
-    flex-direction: column;
+    align-items: center;
     background: var(--color-slate-blue--dark);
     color: var(--color-white);
+    overflow: hidden;
+
+    .stage-name-container {
+      flex: 1;
+      margin-left: 8rem;
+    }
 
     .timeline-preview {
-      margin: unit(4) 0 0 2rem;
       position: relative;
 
       .timeline-stage__notch {
@@ -43,7 +49,7 @@
       display: block;
       background: var(--color-navy-taupe);
       padding: .5rem;
-      width: 16vw;
+      width: 15rem;
       text-align: center;
       border-radius: .5rem;
       box-shadow: unit(1) unit(1) 0 0 var(--architect-panel-shadow);
@@ -54,7 +60,7 @@
     display: flex;
     flex: 1 auto;
     flex-direction: column;
-    padding: unit(4);
+    padding: unit(2) unit(4);
     background: var(--color-slate-blue);
     color: var(--color-white);
 

@@ -21,7 +21,7 @@ export default function reducer(state = initialState, action = {}) {
 
       return [
         ...state.slice(0, insertAtIndex),
-        action.stage,
+        prune(action.stage),
         ...state.slice(insertAtIndex),
       ];
     }

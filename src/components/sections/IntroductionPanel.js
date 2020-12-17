@@ -7,7 +7,7 @@ import { ValidatedField } from '../Form';
 import IssueAnchor from '../IssueAnchor';
 
 const Name = () => (
-  <Section contentId="guidance.editor.introduction_panel">
+  <Section>
     <FormSection name="introductionPanel">
       <h2>Introduction Panel</h2>
       <p>

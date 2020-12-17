@@ -1,4 +1,4 @@
-const { BrowserWindow } = require('electron');
+const { BrowserWindow, Menu, MenuItem } = require('electron');
 const url = require('url');
 const path = require('path');
 const log = require('./log');
@@ -50,6 +50,32 @@ function createAppWindow() {
     }, titlebarParameters);
 
     global.appWindow = new BrowserWindow(windowParameters);
+
+    // Enable right click menu for spelling suggestions
+    global.appWindow.webContents.on('context-menu', (_, params) => {
+      const menu = new Menu();
+
+      // Add each spelling suggestion
+      params.dictionarySuggestions.forEach((suggestion) => {
+        menu.append(new MenuItem({
+          label: suggestion,
+          click: () => global.appWindow.webContents.replaceMisspelling(suggestion),
+        }));
+      });
+
+      // Allow users to add the misspelled word to the dictionary
+      if (params.misspelledWord) {
+        menu.append(
+          new MenuItem({
+            label: 'Add to dictionary',
+            // eslint-disable-next-line max-len
+            click: () => global.appWindow.webContents.session.addWordToSpellCheckerDictionary(params.misspelledWord),
+          }),
+        );
+      }
+
+      menu.popup();
+    });
 
     global.appWindow.webContents.on('new-window', (evt) => {
       // A user may have tried to open a new window (shift|cmd-click); ignore action

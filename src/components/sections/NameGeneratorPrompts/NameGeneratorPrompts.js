@@ -9,7 +9,6 @@ import PromptFields from './PromptFields';
 
 const NameGeneratorPrompts = props => (
   <EditableList
-    contentId="guidance.editor.name_generator_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"

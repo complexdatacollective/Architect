@@ -1,5 +1,4 @@
 import {
-  Name,
   NodeType,
   QuickAdd,
   NameGeneratorPrompts,
@@ -8,7 +7,6 @@ import {
 
 const NameGeneratorQuickAdd = {
   headerSections: [
-    Name,
     NodeType,
   ],
   sections: [

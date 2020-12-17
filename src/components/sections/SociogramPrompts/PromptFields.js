@@ -12,7 +12,7 @@ import Tip from '../../Tip';
 
 const PromptFields = props => (
   <div>
-    <Section contentId="guidance.editor.sociogram_prompt.text">
+    <Section>
       <h3 id={getFieldId('text')}>Prompt Text</h3>
       <p>
         The prompt text instructs your participant about the task on this stage.

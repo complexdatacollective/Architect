@@ -25,7 +25,6 @@ const template = () => ({
 
 const NarrativePresets = props => (
   <EditableList
-    contentId="guidance.editor.narrative_presets"
     previewComponent={PresetPreview}
     editComponent={PresetFields}
     title="Edit Preset"

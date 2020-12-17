@@ -29,7 +29,6 @@ const PromptFields = ({
   entity,
   form,
   onCreateOtherVariable,
-  onDeleteVariable,
   optionsForVariableDraft,
   otherVariable,
   type,
@@ -78,7 +77,7 @@ const PromptFields = ({
     (!!otherVariableToggle && 1)
   );
 
-  const showVariableOptionsTip = totalOptionsLength >= 8;
+  const showVariableOptionsTip = totalOptionsLength > 8;
 
   return (
     <Section>
@@ -112,35 +111,30 @@ const PromptFields = ({
           label=""
           options={categoricalVariableOptions}
           onCreateOption={handleNewVariable}
-          onDeleteOption={v => onDeleteVariable(v, 'variable')}
           validation={{ required: true }}
-          formatCreateLabel={inputValue => (
-            <span>
-              Click here to create a new categorical variable named &quot;{inputValue}&quot;.
-            </span>
-          )}
         />
       </Row>
       { variable &&
-        <Section>
+        <Row>
           <h3 id={getFieldId('options')}>Variable Options</h3>
-          <p>Create some options for this variable</p>
+          <p>Create <strong>up to 8</strong> options for this variable.</p>
+          { showVariableOptionsTip &&
+            <Tip type="error">
+              <p>
+                The categorical bin interface is designed to use <strong>up to 8 option
+                  values</strong> (
+                including an &quot;other&quot; variable). Using more will create
+                a sub-optimal experience for participants, and might reduce data quality.
+                Consider grouping your variable options and capturing further detail with
+                follow-up questions.
+              </p>
+            </Tip>
+          }
           <Options
             name="variableOptions"
             label="Options"
           />
-          { showVariableOptionsTip &&
-            <Tip>
-              <p>
-                The categorical interface is designed to use up to 8 items
-                (including an optional &quot;other&quot; variable).<br />
-                <br />
-                Using more will create a sub-optimal experience for participants,
-                and might reduce data quality.
-              </p>
-            </Tip>
-          }
-        </Section>
+        </Row>
       }
       { variable &&
         <Row>
@@ -161,31 +155,38 @@ const PromptFields = ({
         </Row>
       }
       { otherVariableToggle &&
-        <Row>
-          <ValidatedField
-            name="otherOptionLabel"
-            component={Text}
-            placeholder="Enter a label (such as &quot;other&quot;) for the bin..."
-            label="Other bin label"
-            validation={{ required: true }}
-          />
-          <ValidatedField
-            name="otherVariablePrompt"
-            component={Text}
-            placeholder="Enter a question prompt to show to the participant..."
-            label="Follow-up dialog prompt"
-            validation={{ required: true }}
-          />
-          <ValidatedField
-            name="otherVariable"
-            component={VariableSelect}
-            entity={entity}
-            type={type}
-            options={otherVariableOptions}
-            onCreateOption={onCreateOtherVariable}
-            validation={{ required: true }}
-          />
-        </Row>
+        <Section>
+          <Row>
+            <ValidatedField
+              name="otherOptionLabel"
+              component={Text}
+              placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
+              label="Label for Bin"
+              validation={{ required: true }}
+            />
+          </Row>
+          <Row>
+            <ValidatedField
+              name="otherVariablePrompt"
+              component={Text}
+              placeholder="Enter a question prompt to show when the other option is triggered..."
+              label="Question Prompt for Dialog"
+              validation={{ required: true }}
+            />
+          </Row>
+          <Row>
+            <ValidatedField
+              name="otherVariable"
+              component={VariableSelect}
+              entity={entity}
+              label="Variable"
+              type={type}
+              options={otherVariableOptions}
+              onCreateOption={value => onCreateOtherVariable(value, 'otherVariable')}
+              validation={{ required: true }}
+            />
+          </Row>
+        </Section>
       }
       <Row>
         <h3>Bucket Sort Order <small>(optional)</small></h3>
@@ -193,7 +194,7 @@ const PromptFields = ({
           Nodes are stacked in the bucket before they are placed by the participant. You may
           optionally configure a list of rules to determine how nodes are sorted in the bucket
           when the task starts, which will determine the order that your participant places them
-          into bins. Network Canvas will default to using the order in which nodes were named.
+          into bins. Interviewer will default to using the order in which nodes were named.
         </p>
         <Tip>
           <p>

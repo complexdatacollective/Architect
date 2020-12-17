@@ -5,7 +5,7 @@ import { Section } from '@components/EditorLayout';
 import { getFieldId } from '../../utils/issues';
 
 const NarrativeBehaviours = () => (
-  <Section contentId="guidance.editor.narrative_behaviours">
+  <Section>
     <h2>Narrative Behaviours</h2>
     <FormSection name="behaviours">
       <div id={getFieldId('freeDraw')} data-name="Free draw" />

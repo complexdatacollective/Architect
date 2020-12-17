@@ -1,4 +1,3 @@
-import React from 'react';
 import { ipcRenderer } from 'electron';
 import { isDirty } from 'redux-form';
 import { store } from '@app/ducks/store';
@@ -34,12 +33,6 @@ const initIPCListeners = () => {
     }
 
     store.dispatch(dialogActions.openDialog(UnsavedChanges({
-      message: (
-        <div>
-          Are you sure you want to exit the application?
-          <p><strong>The current protocol has unsaved changes!</strong></p>
-        </div>
-      ),
       confirmLabel: 'Exit application',
     })))
       .then((confirm) => {

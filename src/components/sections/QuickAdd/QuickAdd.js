@@ -21,7 +21,7 @@ const QuickAdd = ({
   type,
 }) => (
   type &&
-  <Section disabled={disabled} group contentId="guidance.editor.quickAdd">
+  <Section disabled={disabled} group>
     <h3 id="issue-form">Quick Add Variable</h3>
     <p>
       Choose which variable to use to store the value of the quick add form.
@@ -29,7 +29,7 @@ const QuickAdd = ({
     <Tip type="warning">
       <p>
         Create a variable called &quot;name&quot; here, unless you have a good reason not to.
-        Network Canvas will then automatically use this variable as the label for the node in
+        Interviewer will then automatically use this variable as the label for the node in
         the interview.
       </p>
     </Tip>

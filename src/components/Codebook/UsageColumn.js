@@ -1,24 +1,17 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { actionCreators as screenActions } from '@modules/ui/screens';
 import ScreenLink from '@components/Screens/Link';
 import Tag from './Tag';
 
 const UsageColumn = ({
   inUse,
   usage,
-  closeScreen,
 }) => {
-  const closeCodebook = useCallback(() => {
-    closeScreen('codebook');
-  }, ['closeScreen']);
-
   if (!inUse) { return (<Tag key="unused">not in use</Tag>); }
 
   const stages = usage
     .map(({ id, label }) => (
-      <ScreenLink screen="stage" id={id} onClick={closeCodebook} key={id}>{label}</ScreenLink>
+      <ScreenLink screen="stage" id={id} key={id}>{label}</ScreenLink>
     ));
 
   return (
@@ -31,13 +24,8 @@ const UsageColumn = ({
 UsageColumn.propTypes = {
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool.isRequired,
-  closeScreen: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = {
-  closeScreen: screenActions.closeScreen,
 };
 
 export { UsageColumn };
 
-export default connect(null, mapDispatchToProps)(UsageColumn);
+export default UsageColumn;

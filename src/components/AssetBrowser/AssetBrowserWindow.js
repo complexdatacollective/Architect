@@ -44,6 +44,7 @@ const AssetBrowserWindow = ({
             type={type}
             onSelect={onSelect}
             selected={selected}
+            disableDelete
           />
         </SimpleDialog>
       )}

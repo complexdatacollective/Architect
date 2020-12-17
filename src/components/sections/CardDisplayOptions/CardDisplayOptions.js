@@ -19,7 +19,7 @@ const CardDisplayOptions = ({
   const maxVariableOptions = variableOptions.length;
 
   return (
-    <Section key={dataSource} group contentId="guidance.editor.cardDisplayOptions" disabled={disabled}>
+    <Section key={dataSource} group disabled={disabled}>
       <Row>
         <h3>Card Display Options</h3>
         <p>

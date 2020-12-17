@@ -32,6 +32,7 @@ class PreviewManager {
     ipcMain.on('preview:preview', (event, protocol, stageId) => {
       PreviewManager.send('remote:preview', protocol, stageId);
       global.previewWindow.show();
+      this.updateMenu();
     });
 
     ipcMain.on('preview:clear', () => {
@@ -52,7 +53,11 @@ class PreviewManager {
   }
 
   updateMenu() {
-    Menu.setApplicationMenu(this.menu);
+    if (process.platform === 'win32' || process.platform === 'linux') {
+      global.previewWindow.setMenu(this.menu);
+    } else {
+      Menu.setApplicationMenu(this.menu);
+    }
   }
 }
 

@@ -65,7 +65,7 @@ $font-sizes: (
   position: relative;
   border-radius: var(--border-radius);
   box-shadow: 0 unit(1) .2rem 0 var(--architect-panel-shadow);
-  background: var(--architect-panel-grey);
+  background: var(--color-platinum--dark);
   margin: unit(4) auto;
   max-width: 70rem;
   overflow: hidden;
@@ -87,10 +87,29 @@ $font-sizes: (
 }
 
 .launch-pad {
+
+  .resume-group {
+    background-image: url('../images/home/wave.svg');
+    background-size: cover;
+    background-position: 100% -2rem;
+    background-repeat: no-repeat;
+    color: var(--color-white);
+    align-items: center;
+
+    .launch-pad__action-divider {
+      visibility: hidden;
+    }
+  }
+
+
   &__resume {
     $rule-width: px(5);
     width: calc(50% - (#{unit(4)} - #{$rule-width}));
     position: relative;
+
+    &:not(:last-of-type) {
+      margin-bottom: unit(1);
+    }
 
     &:last-of-type {
       display: flex;
@@ -116,18 +135,19 @@ $font-sizes: (
   }
 
   &__action-divider {
-    $rule-width: px(5);
-    padding: 0 unit(4);
     position: relative;
-    flex-basis: calc(#{unit(4)} + #{$rule-width});
+    flex-basis: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &::before {
       content: '';
       position: absolute;
       top: 1rem;
       height: calc(100% - 2rem);
-      border-radius: $rule-width;
-      width: $rule-width;
+      border-radius: .33rem;
+      width: .33rem;
       background-color: rgba(0, 0, 0, .05); // sass-lint:disable-line no-color-literals
     }
   }

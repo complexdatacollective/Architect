@@ -132,7 +132,7 @@ const validationErrorDialog = (e) => {
       <p>
         You may still save and edit the protocol but it <strong>
           will not be compatible with
-          Network Canvas or Server</strong>.
+          Interviewer or Server</strong>.
       </p>
     </React.Fragment>
   );

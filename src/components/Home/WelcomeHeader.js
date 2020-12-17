@@ -75,7 +75,7 @@ const WelcomeHeader = () => {
             <h5>Network Canvas</h5>
           </div>
           <h1>Architect</h1>
-          <p>A tool for creating Network Canvas Interviews</p>
+          <p>A tool for building Network Canvas Interviews</p>
         </div>
         <Version />
         <Switch
@@ -113,7 +113,7 @@ const WelcomeHeader = () => {
                   </p>
                   <p>
                     Alternatively, to get started right away use the buttons below to
-                    create a new interview protocol, or open an existing one from elsewhere
+                    create a new interview protocol, or open an existing one from elsewhere.
                   </p>
                   <div className="welcome-actions">
                     <Button

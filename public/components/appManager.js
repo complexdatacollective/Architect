@@ -91,6 +91,9 @@ class AppManager {
   constructor() {
     this.openFileWhenReady = null;
     this.activeProtocol = null;
+    // this.enableSaving = false;
+    this.hasChanges = false;
+    this.isProtocolValid = false;
 
     ipcMain.on('READY', () => {
       log.info('receive: READY');
@@ -117,10 +120,23 @@ class AppManager {
       switch (action.type) {
         case 'SESSION/OPEN_NETCANVAS_SUCCESS':
           this.activeProtocol = action.payload.filePath;
+          this.hasChanges = false;
+          this.isProtocolValid = action.payload.protocolIsValid;
+          this.updateMenu();
+          break;
+        case 'SESSION/SAVE_NETCANVAS_SUCCESS':
+          this.hasChanges = false;
           this.updateMenu();
           break;
         case 'SESSION/RESET':
           this.activeProtocol = null;
+          this.hasChanges = false;
+          this.isProtocolValid = false;
+          this.updateMenu();
+          break;
+        case 'SESSION/PROTOCOL_CHANGED':
+          this.hasChanges = true;
+          this.isProtocolValid = action.protocolIsValid;
           this.updateMenu();
           break;
         default:
@@ -162,6 +178,9 @@ class AppManager {
   updateMenu() {
     const menuOptions = {
       isProtocolOpen: !!this.activeProtocol,
+      // isProtocolValid: !!this.enableSaving,
+      isProtocolValid: this.isProtocolValid,
+      hasChanges: this.hasChanges,
       open: () => AppManager.open(),
       saveCopy: () => AppManager.saveCopy(),
       save: () => AppManager.save(),
@@ -174,7 +193,12 @@ class AppManager {
     };
 
     const appMenu = Menu.buildFromTemplate(mainMenu(menuOptions));
-    Menu.setApplicationMenu(appMenu);
+
+    if (process.platform === 'win32' || process.platform === 'linux') {
+      global.appWindow.setMenu(appMenu);
+    } else {
+      Menu.setApplicationMenu(appMenu);
+    }
   }
 }
 

@@ -22,7 +22,7 @@ const Form = ({
   entity,
   disableFormTitle,
 }) => (
-  <Section disabled={disabled} group contentId="guidance.section.form">
+  <Section disabled={disabled} group>
     <div id={getFieldId('form.title')} data-name="Form title" />
     <h2>Form</h2>
     <p>

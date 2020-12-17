@@ -16,7 +16,7 @@ const SearchOptions = ({
   const { variables: variableOptions } = useVariablesFromExternalData(dataSource, true);
 
   return (
-    <Section group contentId="guidance.editor.SearchOptions" disabled={disabled}>
+    <Section group disabled={disabled}>
       <Row>
         <h3>Search Options</h3>
         <p>

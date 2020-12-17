@@ -4,7 +4,7 @@
   transition-timing-function: var(--animation-easing);
   opacity: 1;
   max-height: auto;
-  max-width: 70rem;
+  max-width: 80rem;
   transform: translateX(0);
   overflow: hidden;
   margin: unit(4) auto;
@@ -28,11 +28,23 @@
     margin-top: 0;
   }
 
+  > .form-field-container,
+  .form-field-text,
+  .form-field-checkbox-group,
+  .form-field-radio-group {
+    &:last-child {
+      margin-bottom: 0;
+
+      .form-field {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   // &--group {
   .stage-editor-section {
-    margin: unit(4) 0 0;
-    padding: unit(1) unit(2) unit(2);
-    background: var(--architect-panel-grey);
+    margin: unit(4) 0;
+    background: var(--color-panel-grey--dark);
     border-radius: unit(1);
   }
 

@@ -25,7 +25,7 @@ class Background extends PureComponent {
     } = this.props;
 
     return (
-      <Section contentId="guidance.editor.background">
+      <Section>
         <Row>
           <h3>Background</h3>
           <p>
@@ -71,10 +71,12 @@ class Background extends PureComponent {
         { (useImage) &&
           <Row>
             <div style={{ position: 'relative', minHeight: '100px' }}>
-              <Field
+              <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
+              <ValidatedField
                 name="background.image"
                 component={ArchitectFields.Image}
                 label="Background image"
+                validation={{ required: true }}
               />
             </div>
           </Row>

@@ -2,7 +2,7 @@
     "name": "network-canvas-architect",
     "version": "6.0.0",
     "productName": "Network Canvas Architect",
-    "description": "A tool for creating Network Canvas interviews.",
+    "description": "A tool for building Network Canvas interviews.",
     "author": "Complex Data Collective <info@networkcanvas.com>",
     "private": true,
     "engines": {
@@ -42,7 +42,7 @@
         "type": "git"
     },
     "devDependencies": {
-        "@codaco/ui": "^3.8.2",
+        "@codaco/ui": "^4.0.2",
         "@zippytech/sorty": "^2.0.0",
         "animejs": "^2.2.0",
         "archiver": "^3.1.1",

@@ -202,7 +202,7 @@ export default {
         <code>[TYPE]: [VARIABLE]</code>
       </p>
       <p>
-        This text is displayed in the menu within Network Canvas, and on the timeline in Architect.
+        This text is displayed in the menu within Interviewer, and on the timeline in Architect.
       </p>
     </Fragment>
   ),
@@ -244,7 +244,7 @@ export default {
         what it may be, ask yourself what the node represents. For example, is it a person? A place?
       </p>
       <p>
-        Node types are fundamental to the way that Network Canvas works. A node&apos;s type
+        Node types are fundamental to the way that Interviewer works. A node&apos;s type
         determines its visual properties, as well as the variables available to assign on
         other interfaces.
       </p>
@@ -648,7 +648,7 @@ export default {
     <Fragment>
       <h3>Skip Logic</h3>
       <p>
-        Skip logic tells Network Canvas when to skip past a stage. Using it, you can create
+        Skip logic tells Interviewer when to skip past a stage. Using it, you can create
         different pathways through your interview.
       </p>
     </Fragment>

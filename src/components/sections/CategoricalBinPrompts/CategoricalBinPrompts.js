@@ -12,7 +12,6 @@ import withPromptChangeHandler from './withPromptChangeHandler';
 
 const CategoricalBinPrompts = ({ handleChangePrompt, ...props }) => (
   <EditableList
-    contentId="guidance.editor.categorical_bin_prompts"
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"

@@ -11,7 +11,6 @@ import withMapFormToProps from '../../enhancers/withMapFormToProps';
 
 const NameGeneratorAutoCompletePrompts = props => (
   <EditableList
-    contentId="guidance.editor.name_generator_auto_complete_prompts"
     editComponent={PromptFields}
     previewComponent={PromptPreview}
     title="Edit Prompt"

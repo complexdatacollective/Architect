@@ -1,7 +1,8 @@
 import { combineEpics } from 'redux-observable';
-import { filter, mapTo } from 'rxjs/operators';
+import { filter, mergeMap } from 'rxjs/operators';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
+import validateProtocol from '@app/utils/validateProtocol';
 import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
 import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionCreators as previewActions } from '@modules/preview';
@@ -39,7 +40,8 @@ const SAVE_NETCANVAS_COPY = 'SESSION/SAVE_NETCANVAS_COPY';
 const SAVE_NETCANVAS_COPY_SUCCESS = 'SESSION/SAVE_NETCANVAS_COPY_SUCCESS';
 const SAVE_NETCANVAS_COPY_ERROR = 'SESSION/SAVE_NETCANVAS_COPY_ERROR';
 
-const openNetcanvas = filePath =>
+// TODO: This should handle validation rather than in userActions
+const openNetcanvas = (filePath, protocolIsValid = false) =>
   dispatch =>
     Promise.resolve()
       .then(() => dispatch({ type: OPEN_NETCANVAS, payload: { filePath } }))
@@ -49,7 +51,7 @@ const openNetcanvas = filePath =>
         netcanvasFile.readProtocol(workingPath)
           .then(protocol => dispatch({
             type: OPEN_NETCANVAS_SUCCESS,
-            payload: { protocol, filePath, workingPath },
+            payload: { protocol, filePath, workingPath, protocolIsValid },
             ipc: true,
           })),
       )
@@ -82,6 +84,7 @@ const saveNetcanvas = () =>
             savePath,
             protocol,
           },
+          ipc: true,
         });
         return savePath;
       })
@@ -137,8 +140,13 @@ const resetSession = () =>
     });
   };
 
-const protocolChanged = () => ({
+// Decorate this event with the current protocol validation
+// status so that we can selectively enable/disable the
+// native save function.
+export const protocolChanged = protocolIsValid => ({
   type: PROTOCOL_CHANGED,
+  protocolIsValid,
+  ipc: true,
 });
 
 const initialState = {
@@ -146,19 +154,26 @@ const initialState = {
   filePath: null,
   lastSaved: 0,
   lastChanged: 0,
+  protocolIsValid: false,
 };
 
 // Track savable changes, and emit changed action
-const protocolChangedEpic = action$ =>
+const protocolChangedEpic = (action$, { getState }) =>
   action$.pipe(
     filter(({ type }) => savableChanges.includes(type)),
-    mapTo(protocolChanged()),
+    mergeMap(async () => {
+      const protocol = getProtocol(getState());
+
+      return validateProtocol(protocol)
+        .then(() => protocolChanged(true))
+        .catch(() => protocolChanged(false));
+    }),
   );
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case OPEN_NETCANVAS_SUCCESS: {
-      const { filePath, workingPath } = action.payload;
+      const { filePath, workingPath, protocolIsValid } = action.payload;
 
       return {
         ...state,
@@ -166,6 +181,7 @@ export default function reducer(state = initialState, action = {}) {
         workingPath,
         lastSaved: 0,
         lastChanged: 0,
+        protocolIsValid,
       };
     }
     case SAVE_NETCANVAS_SUCCESS:
@@ -178,6 +194,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         lastChanged: new Date().getTime(),
+        protocolIsValid: action.protocolIsValid,
       };
     case RESET_SESSION:
       return {

@@ -7,7 +7,7 @@ $new-stage-categories: [name-generators name-interpreters sociograms utilities];
   --color-utilities: var(--ord-color-seq-5);
 
   width: 100%;
-  overflow-y: auto;
+  padding: 0 0 4rem;
 
   &__navigation {
     position: sticky;
@@ -19,10 +19,14 @@ $new-stage-categories: [name-generators name-interpreters sociograms utilities];
   &__category {
     padding: unit(2) unit(4) ;
     background: var(--architect-panel-grey);
+
+    &:last-child {
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
   }
 
   &__options {
-    max-width: 70rem;
+    max-width: 80rem;
     margin: 0 auto;
   }
 }

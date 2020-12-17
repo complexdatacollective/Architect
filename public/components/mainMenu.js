@@ -5,6 +5,7 @@ const MenuTemplate = (options) => {
       {
         label: 'Open...',
         click: options.open,
+        accelerator: 'CommandOrControl+O',
       },
     ],
   };
@@ -12,10 +13,14 @@ const MenuTemplate = (options) => {
   if (options.isProtocolOpen) {
     fileMenu.submenu.push({
       label: 'Save',
+      enabled: options.isProtocolValid && options.hasChanges,
       click: options.save,
+      accelerator: 'CommandOrControl+S',
     });
     fileMenu.submenu.push({
-      label: 'Save a copy...',
+      label: 'Save as...',
+      accelerator: process.platform === 'darwin' ? 'cmd+shift+s' : 'ctrl+shift+s',
+      enabled: options.isProtocolValid,
       click: options.saveCopy,
     });
   }
