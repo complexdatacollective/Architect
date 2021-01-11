@@ -77,7 +77,7 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
         .then(() => true);
     })
     .then(createdBackup =>
-      fse.rename(netcanvasExportPath, destinationUserPath)
+      fse.copy(netcanvasExportPath, destinationUserPath)
         .then(() => ({
           savePath: destinationUserPath,
           backupPath: createdBackup ? backupPath : null,

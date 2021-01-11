@@ -174,14 +174,15 @@ describe('netcanvasFile/lib', () => {
     it('does not create a backup if destination does not already exist', async () => {
       fse.rename.mockResolvedValueOnce(true);
       fse.pathExists.mockResolvedValueOnce(false);
+      fse.copy.mockResolvedValueOnce(true);
 
       const result = await deployNetcanvas(
         netcanvasFilePath,
         userDestinationPath,
       );
 
-      expect(fse.rename.mock.calls.length).toBe(1);
-      expect(fse.rename.mock.calls[0]).toEqual([
+      expect(fse.rename.mock.calls.length).toBe(0);
+      expect(fse.copy.mock.calls[0]).toEqual([
         '/dev/null/get/electron/path/architect/exports/pendingExport',
         '/dev/null/user/path/export/destination',
       ]);
@@ -201,12 +202,12 @@ describe('netcanvasFile/lib', () => {
         userDestinationPath,
       );
 
-      expect(fse.rename.mock.calls.length).toBe(2);
+      expect(fse.rename.mock.calls.length).toBe(1);
       expect(fse.rename.mock.calls[0]).toEqual([
         '/dev/null/user/path/export/destination',
         expect.stringMatching(/\/dev\/null\/user\/path\/export\/destination\.backup-[0-9]+/),
       ]);
-      expect(fse.rename.mock.calls[1]).toEqual([
+      expect(fse.copy.mock.calls[0]).toEqual([
         '/dev/null/get/electron/path/architect/exports/pendingExport',
         '/dev/null/user/path/export/destination',
       ]);
