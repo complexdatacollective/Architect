@@ -130,7 +130,7 @@ const validateNetcanvas = filePath =>
 const saveNetcanvas = (workingPath, protocol, filePath) =>
   // export protocol to random temp location
   createNetcanvasExport(workingPath, protocol)
-    // rename existing file to backup location, and move export to this location
+    // copy existing file to backup location, and move export to this location
     // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
     .then(exportPath => deployNetcanvas(exportPath, filePath))
     // open and validate the completed export
