@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
@@ -50,8 +50,6 @@ import Issues from './Issues';
  */
 const Editor = ({
   handleSubmit,
-  toggleCodeView,
-  showCodeView,
   updateShowIssues,
   showIssues,
   form,
@@ -62,6 +60,9 @@ const Editor = ({
   component: Component,
   ...rest
 }) => {
+  const [showCodeView, setCodeView] = useState(false);
+  const toggleCodeView = () => setCodeView(value => !value);
+
   useEffect(() => {
     if (Object.keys(issues).length === 0) {
       updateShowIssues(false);
@@ -89,8 +90,6 @@ const Editor = ({
 };
 
 Editor.propTypes = {
-  toggleCodeView: PropTypes.func.isRequired,
-  showCodeView: PropTypes.bool.isRequired,
   updateShowIssues: PropTypes.func.isRequired,
   showIssues: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
@@ -119,10 +118,8 @@ const mapStateToProps = (state, props) => {
 export { Editor };
 
 export default compose(
-  withState('showCodeView', 'updateCodeView', false),
   withState('showIssues', 'updateShowIssues', false),
   withHandlers({
-    toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
     onSubmitFail: ({ updateShowIssues }) => () => { updateShowIssues(true); },
   }),
   reduxForm({
