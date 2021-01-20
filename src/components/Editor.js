@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
@@ -52,6 +52,8 @@ const Editor = ({
   handleSubmit,
   toggleCodeView,
   showCodeView,
+  updateShowIssues,
+  showIssues,
   form,
   children,
   issues,
@@ -59,28 +61,38 @@ const Editor = ({
   submitFailed,
   component: Component,
   ...rest
-}) => (
-  <React.Fragment>
-    <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
-    <Form onSubmit={handleSubmit}>
-      { typeof children === 'function' &&
-        children({ form, toggleCodeView, submitFailed, ...rest })
-      }
-      { children && typeof children !== 'function' && children }
-      { !children &&
-        <Component form={form} submitFailed={submitFailed} {...rest} />
-      }
-    </Form>
-    <Issues
-      issues={issues}
-      show={submitFailed}
-    />
-  </React.Fragment>
-);
+}) => {
+  useEffect(() => {
+    if (Object.keys(issues).length === 0) {
+      updateShowIssues(false);
+    }
+  }, [Object.keys(issues).length]);
+
+  return (
+    <React.Fragment>
+      <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
+      <Form onSubmit={handleSubmit}>
+        { typeof children === 'function' &&
+          children({ form, toggleCodeView, submitFailed, ...rest })
+        }
+        { children && typeof children !== 'function' && children }
+        { !children &&
+          <Component form={form} submitFailed={submitFailed} {...rest} />
+        }
+      </Form>
+      <Issues
+        issues={issues}
+        show={showIssues}
+      />
+    </React.Fragment>
+  );
+};
 
 Editor.propTypes = {
   toggleCodeView: PropTypes.func.isRequired,
   showCodeView: PropTypes.bool.isRequired,
+  updateShowIssues: PropTypes.func.isRequired,
+  showIssues: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
@@ -108,8 +120,10 @@ export { Editor };
 
 export default compose(
   withState('showCodeView', 'updateCodeView', false),
+  withState('showIssues', 'updateShowIssues', false),
   withHandlers({
     toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
+    onSubmitFail: ({ updateShowIssues }) => () => { updateShowIssues(true); },
   }),
   reduxForm({
     touchOnBlur: false,
