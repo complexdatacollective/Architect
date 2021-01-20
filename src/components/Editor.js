@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
-import { compose, withState, withHandlers } from 'recompose';
+import { compose, withStateHandlers } from 'recompose';
 import { FormCodeView } from './CodeView';
 import Issues from './Issues';
 
@@ -50,8 +50,8 @@ import Issues from './Issues';
  */
 const Editor = ({
   handleSubmit,
-  updateShowIssues,
-  showIssues,
+  hideIssues,
+  isIssuesVisible,
   form,
   children,
   issues,
@@ -61,13 +61,15 @@ const Editor = ({
   ...rest
 }) => {
   const [showCodeView, setCodeView] = useState(false);
-  const toggleCodeView = () => setCodeView(value => !value);
+  const toggleCodeView = useCallback(() => setCodeView(value => !value));
+
+  const hasOutstandingIssues = Object.keys(issues).length !== 0;
 
   useEffect(() => {
-    if (Object.keys(issues).length === 0) {
-      updateShowIssues(false);
+    if (!hasOutstandingIssues) {
+      hideIssues();
     }
-  }, [Object.keys(issues).length]);
+  }, [hasOutstandingIssues]);
 
   return (
     <React.Fragment>
@@ -83,15 +85,15 @@ const Editor = ({
       </Form>
       <Issues
         issues={issues}
-        show={showIssues}
+        show={isIssuesVisible}
       />
     </React.Fragment>
   );
 };
 
 Editor.propTypes = {
-  updateShowIssues: PropTypes.func.isRequired,
-  showIssues: PropTypes.bool.isRequired,
+  hideIssues: PropTypes.func.isRequired,
+  isIssuesVisible: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
@@ -118,10 +120,13 @@ const mapStateToProps = (state, props) => {
 export { Editor };
 
 export default compose(
-  withState('showIssues', 'updateShowIssues', false),
-  withHandlers({
-    onSubmitFail: ({ updateShowIssues }) => () => { updateShowIssues(true); },
-  }),
+  withStateHandlers(
+    { isIssuesVisible: false },
+    {
+      hideIssues: () => () => ({ isIssuesVisible: false }),
+      onSubmitFail: () => () => ({ isIssuesVisible: true }),
+    },
+  ),
   reduxForm({
     touchOnBlur: false,
     touchOnChange: true,
