@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Form, getFormSyncErrors, hasSubmitFailed } from 'redux-form';
+import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
 import { compose, withState, withHandlers } from 'recompose';
 import { FormCodeView } from './CodeView';
@@ -64,11 +64,11 @@ const Editor = ({
     <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
     <Form onSubmit={handleSubmit}>
       { typeof children === 'function' &&
-        children({ form, toggleCodeView, ...rest })
+        children({ form, toggleCodeView, submitFailed, ...rest })
       }
       { children && typeof children !== 'function' && children }
       { !children &&
-        <Component form={form} {...rest} />
+        <Component form={form} submitFailed={submitFailed} {...rest} />
       }
     </Form>
     <Issues
@@ -101,7 +101,6 @@ const mapStateToProps = (state, props) => {
 
   return {
     issues,
-    hasSubmitFailed: hasSubmitFailed(props.form)(state),
   };
 };
 
