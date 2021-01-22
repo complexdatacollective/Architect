@@ -20,13 +20,16 @@ const Assets = ({
   onUpdateAssetFilter,
   onSelect,
   onDelete,
+  disableDelete,
 }) => {
+  const handleDelete = !disableDelete && onDelete;
+
   const renderedAssets = assets.map(asset => (
     <div className="asset-browser-assets__asset" key={asset.id}>
       <Thumbnail
         {...asset}
         onClick={onSelect}
-        onDelete={onDelete}
+        onDelete={handleDelete}
       />
     </div>
   ));
@@ -61,6 +64,7 @@ Assets.propTypes = {
   assets: PropTypes.array,
   assetType: PropTypes.string,
   onUpdateAssetFilter: PropTypes.func.isRequired,
+  disableDelete: PropTypes.bool,
 };
 
 Assets.defaultProps = {
@@ -69,6 +73,7 @@ Assets.defaultProps = {
   onDelete: null,
   assets: [],
   assetType: null,
+  disableDelete: false,
 };
 
 export default compose(
