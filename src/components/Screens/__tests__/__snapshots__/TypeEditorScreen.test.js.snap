@@ -7,7 +7,7 @@ exports[`<TypeEditorScreen /> can render 1`] = `
       "$$typeof": Symbol(react.memo),
       "WrappedComponent": [Function],
       "compare": null,
-      "displayName": "Connect(withProps(withHandlers(withState(withHandlers(ReduxForm)))))",
+      "displayName": "Connect(withProps(withHandlers(withStateHandlers(ReduxForm))))",
       "type": [Function],
     }
   }
