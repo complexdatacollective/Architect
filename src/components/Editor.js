@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Form, getFormSyncErrors, hasSubmitFailed } from 'redux-form';
+import { reduxForm, Form, getFormSyncErrors } from 'redux-form';
 import PropTypes from 'prop-types';
-import { compose, withState, withHandlers } from 'recompose';
+import { compose, withStateHandlers } from 'recompose';
 import { FormCodeView } from './CodeView';
 import Issues from './Issues';
 
@@ -50,8 +50,8 @@ import Issues from './Issues';
  */
 const Editor = ({
   handleSubmit,
-  toggleCodeView,
-  showCodeView,
+  hideIssues,
+  isIssuesVisible,
   form,
   children,
   issues,
@@ -59,28 +59,41 @@ const Editor = ({
   submitFailed,
   component: Component,
   ...rest
-}) => (
-  <React.Fragment>
-    <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
-    <Form onSubmit={handleSubmit}>
-      { typeof children === 'function' &&
-        children({ form, toggleCodeView, ...rest })
-      }
-      { children && typeof children !== 'function' && children }
-      { !children &&
-        <Component form={form} {...rest} />
-      }
-    </Form>
-    <Issues
-      issues={issues}
-      show={submitFailed}
-    />
-  </React.Fragment>
-);
+}) => {
+  const [showCodeView, setCodeView] = useState(false);
+  const toggleCodeView = useCallback(() => setCodeView(value => !value));
+
+  const hasOutstandingIssues = Object.keys(issues).length !== 0;
+
+  useEffect(() => {
+    if (!hasOutstandingIssues) {
+      hideIssues();
+    }
+  }, [hasOutstandingIssues]);
+
+  return (
+    <React.Fragment>
+      <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
+      <Form onSubmit={handleSubmit}>
+        { typeof children === 'function' &&
+          children({ form, toggleCodeView, submitFailed, ...rest })
+        }
+        { children && typeof children !== 'function' && children }
+        { !children &&
+          <Component form={form} submitFailed={submitFailed} {...rest} />
+        }
+      </Form>
+      <Issues
+        issues={issues}
+        show={isIssuesVisible}
+      />
+    </React.Fragment>
+  );
+};
 
 Editor.propTypes = {
-  toggleCodeView: PropTypes.func.isRequired,
-  showCodeView: PropTypes.bool.isRequired,
+  hideIssues: PropTypes.func.isRequired,
+  isIssuesVisible: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
@@ -101,17 +114,19 @@ const mapStateToProps = (state, props) => {
 
   return {
     issues,
-    hasSubmitFailed: hasSubmitFailed(props.form)(state),
   };
 };
 
 export { Editor };
 
 export default compose(
-  withState('showCodeView', 'updateCodeView', false),
-  withHandlers({
-    toggleCodeView: ({ updateCodeView }) => () => updateCodeView(current => !current),
-  }),
+  withStateHandlers(
+    { isIssuesVisible: false },
+    {
+      hideIssues: () => () => ({ isIssuesVisible: false }),
+      onSubmitFail: () => () => ({ isIssuesVisible: true }),
+    },
+  ),
   reduxForm({
     touchOnBlur: false,
     touchOnChange: true,
