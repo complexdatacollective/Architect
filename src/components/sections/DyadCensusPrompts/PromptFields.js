@@ -1,14 +1,20 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { identity } from 'lodash';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import NativeSelect from '@components/Form/Fields/NativeSelect';
 import Text from '@codaco/ui/lib/components/Fields/Text';
-import { EdgeTypeFieldsNoReset } from '@components/sections/fields/EdgeTypeFields';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import Tip from '@components/Tip';
+import withCreateEdgeHandlers from '@components/enhancers/withCreateEdgeHandler';
+import withEdgesOptions from './withEdgesOptions';
 
-const PromptFields = props => (
+const PromptFields = ({
+  edgesForSubject,
+  handleCreateEdge,
+  handleChangeCreateEdge,
+}) => (
   <Section>
     <Row>
       <h3 id={getFieldId('text')}>Prompt Text</h3>
@@ -32,16 +38,34 @@ const PromptFields = props => (
       />
     </Row>
     <Row>
-      <EdgeTypeFieldsNoReset
-        {...props}
+      <ValidatedField
         name="createEdge"
-        parse={identity}
-        format={identity}
+        component={NativeSelect}
+        options={edgesForSubject}
+        onCreateOption={(option) => {
+          handleChangeCreateEdge(handleCreateEdge(option));
+        }}
+        onChange={handleChangeCreateEdge}
+        placeholder="Select or create an edge type"
+        createLabelText="✨ Create new edge type ✨"
+        createInputLabel="New edge type name"
+        createInputPlaceholder="Enter an edge type..."
+        label="Create edges of the following type"
+        validation={{ required: true, allowedNMToken: 'edge type name' }}
       />
     </Row>
   </Section>
 );
 
+PromptFields.propTypes = {
+  edgesForSubject: PropTypes.array.isRequired,
+  handleCreateEdge: PropTypes.func.isRequired,
+  handleChangeCreateEdge: PropTypes.func.isRequired,
+};
+
 export { PromptFields };
 
-export default PromptFields;
+export default compose(
+  withCreateEdgeHandlers,
+  withEdgesOptions,
+)(PromptFields);
