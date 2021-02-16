@@ -1,22 +1,19 @@
 import { connect } from 'react-redux';
 import { withHandlers, compose } from 'recompose';
-import { change } from 'redux-form';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 
-// TODO: withCreateEdgeType
 
 const mapDispatchToProps = {
-  changeField: change,
   createEdge: codebookActions.createEdge,
 };
 
+// TODO: This should be the top level withCreateEdgeHandler enhancer but currently
+// contains an edge case for sociogram
+
 const createEdgeHandler = {
-  handleCreateEdge: ({ changeField, createEdge, form }) =>
+  handleCreateEdge: ({ createEdge }) =>
     (name) => {
       const { type } = createEdge({ name });
-
-      // Update select field to newly created edge
-      changeField(form, 'edges.create', type);
 
       return type;
     },

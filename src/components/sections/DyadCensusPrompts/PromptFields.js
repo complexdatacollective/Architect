@@ -7,7 +7,7 @@ import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import Tip from '@components/Tip';
-import withCreateEdgeHandlers from '@components/enhancers/withCreateEdgeHandler';
+import withCreateEdgeHandlers from './withCreateEdgeHandler';
 import withEdgesOptions from './withEdgesOptions';
 
 const PromptFields = ({
