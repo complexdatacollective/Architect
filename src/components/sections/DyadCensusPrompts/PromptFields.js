@@ -50,7 +50,7 @@ const PromptFields = ({
         createLabelText="✨ Create new edge type ✨"
         createInputLabel="New edge type name"
         createInputPlaceholder="Enter an edge type..."
-        label="Create edges of the following type"
+        label="Query edges of the following type"
         validation={{ required: true, allowedNMToken: 'edge type name' }}
       />
     </Row>
