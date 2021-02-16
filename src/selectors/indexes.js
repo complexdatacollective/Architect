@@ -21,6 +21,8 @@ const getEdgeIndex = createSelector(
 
     const narrativeEdges = collectPaths('stages[].presets[].edges.display[]', protocol);
 
+    const dyadCensusEdges = collectPaths('stages[].prompts[].createEdge', protocol);
+
     const mapEdges = ({ type, entity }, path) => {
       if (entity !== 'edge') { return undefined; }
       return [`${path}.type`, type];
@@ -32,6 +34,7 @@ const getEdgeIndex = createSelector(
       ...createEdges,
       ...displayEdges,
       ...narrativeEdges,
+      ...dyadCensusEdges,
       ...alterEdgeFormEdges,
     };
   },
