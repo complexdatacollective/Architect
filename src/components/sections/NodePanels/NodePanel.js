@@ -7,8 +7,8 @@ import { Item, Row } from '@components/OrderedList';
 import { getFieldId } from '@app/utils/issues';
 import NetworkFilter from '@components/sections/fields/NetworkFilter';
 
-const NodePanel = ({ fieldId, ...rest }) => (
-  <Item {...rest}>
+const NodePanel = ({ fieldId, form, ...rest }) => (
+  <Item form={form} {...rest}>
     <Row>
       <h3 id={getFieldId(`${fieldId}.title`)}>Panel title</h3>
       <p>The panel title will be shown above the list of nodes within the panel.</p>
@@ -37,6 +37,7 @@ const NodePanel = ({ fieldId, ...rest }) => (
       />
     </Row>
     <NetworkFilter
+      form={form}
       variant="contrast"
       name={`${fieldId}.filter`}
       title="Filter nodes displayed in this panel"
@@ -46,6 +47,7 @@ const NodePanel = ({ fieldId, ...rest }) => (
 
 NodePanel.propTypes = {
   fieldId: PropTypes.string.isRequired,
+  form: PropTypes.string.isRequired,
 };
 
 export { NodePanel };
