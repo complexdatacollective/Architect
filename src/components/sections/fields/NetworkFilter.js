@@ -17,6 +17,7 @@ import {
 const FilterField = withFieldConnector(withStoreConnector(FilterQuery));
 
 const NetworkFilter = ({
+  form,
   hasFilter,
   changeField,
   openDialog,
@@ -35,13 +36,13 @@ const NetworkFilter = ({
         })
           .then((confirm) => {
             if (confirm) {
-              changeField('edit-stage', name, null);
+              changeField(form, name, null);
             }
             return confirm;
           });
       }
 
-      changeField('edit-stage', name, null);
+      changeField(form, name, null);
       return Promise.resolve(true);
     },
     [openDialog, changeField],
@@ -69,6 +70,7 @@ const NetworkFilter = ({
 };
 
 NetworkFilter.propTypes = {
+  form: PropTypes.string.isRequired,
   hasFilter: PropTypes.bool.isRequired,
   changeField: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
