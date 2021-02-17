@@ -83,7 +83,7 @@ const EdgeFields = ({
             name="edges.display"
             component={Fields.CheckboxGroup}
             options={displayEdgesOptions}
-            label="Display edges of the following type(s):"
+            label="Display edges of the following type(s)"
           />
         }
       </Row>
