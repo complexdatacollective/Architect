@@ -155,7 +155,9 @@ const createNetcanvas = () =>
             if (canceled) { return Promise.resolve(null); }
 
             return netcanvasFile.createNetcanvas(filePath)
-              .then(({ savePath }) => dispatch(sessionActions.openNetcanvas(savePath)));
+              .then(destinationPath =>
+                dispatch(sessionActions.openNetcanvas(destinationPath)),
+              );
           });
       })
       .catch(e => dispatch(netcanvasFileErrorHandler(e)));

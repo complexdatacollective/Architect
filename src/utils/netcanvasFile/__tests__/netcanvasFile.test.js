@@ -105,7 +105,7 @@ describe('netcanvasFile/netcanvasFile', () => {
 
     it('deploys the export and resolves to destinationPath', async () => {
       await expect(createNetcanvas('/dev/null/new/user/netcanvas/path'))
-        .resolves.toBe('/dev/null/new/user/netcanvas/path');
+        .resolves.toEqual('/dev/null/new/user/netcanvas/path');
 
       expect(deployNetcanvas.mock.calls).toEqual([[
         '/dev/null/export/working/path',
