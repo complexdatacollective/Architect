@@ -131,6 +131,8 @@
         "sass-lint": "^1.13.0",
         "sass-loader": "^7.1.0",
         "scrollparent": "^2.0.1",
+        "slate": "^0.59.0",
+        "slate-react": "^0.59.0",
         "style-loader": "^0.21.0",
         "svg2png": "^3.0.1",
         "thread-loader": "^1.2.0",
