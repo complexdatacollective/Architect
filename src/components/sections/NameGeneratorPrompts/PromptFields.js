@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Text from '@codaco/ui/lib/components/Fields/Text';
+import { RichTextField } from '@components/RichText';
 import { getFieldId } from '@app/utils/issues';
 import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
@@ -32,7 +33,7 @@ class PromptFields extends PureComponent {
 
             <ValidatedField
               name="text"
-              component={Text}
+              component={RichTextField}
               className="stage-editor-section-prompt__textarea"
               label=""
               placeholder="Enter text for the prompt here..."
