@@ -42,7 +42,7 @@ const Toolbar = ({ controls }) => (
 
 const initialValue = [];
 
-const RichTextExample = ({ value, onChange, allow }) => {
+const RichText = ({ value, onChange, allow }) => {
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -65,9 +65,9 @@ const RichTextExample = ({ value, onChange, allow }) => {
   );
 };
 
-RichTextExample.defaultProps = {
-  value: initialValue,
+RichText.defaultProps = {
+  value: [],
   allow: types,
 };
 
-export default RichTextExample;
+export default RichText;
