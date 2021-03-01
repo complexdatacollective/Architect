@@ -1,0 +1,26 @@
+.rich-text {
+  &__toolbar {
+    background: silver;
+    border-radius: 1rem 1rem 0 0;
+    padding: .6rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &__editable {
+    background: white;
+    padding: 1rem 1.2rem;
+    border-bottom: 2px solid var(--input-accent);
+  }
+
+  &__button {
+    border: 0;
+    outline: none;
+    background: transparent;
+
+    &--is-active {
+      font-weight: bold;
+    }
+  }
+}
