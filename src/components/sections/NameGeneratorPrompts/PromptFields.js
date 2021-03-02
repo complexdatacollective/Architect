@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Text from '@codaco/ui/lib/components/Fields/Text';
-import { RichTextField } from '@components/RichText';
+import { Field as RichTextField } from '@components/RichText';
 import { getFieldId } from '@app/utils/issues';
 import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';

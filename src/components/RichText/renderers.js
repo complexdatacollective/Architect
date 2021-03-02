@@ -2,17 +2,17 @@ import React from 'react';
 
 const Element = ({ attributes, children, element }) => {
   switch (element.type) {
-    case 'block-quote':
+    case 'block_quote':
       return <blockquote {...attributes}>{children}</blockquote>;
-    case 'bulleted-list':
+    case 'bulleted_list':
       return <ul {...attributes}>{children}</ul>;
-    case 'heading-one':
+    case 'heading_one':
       return <h1 {...attributes}>{children}</h1>;
-    case 'heading-two':
+    case 'heading_two':
       return <h2 {...attributes}>{children}</h2>;
-    case 'list-item':
+    case 'list_item':
       return <li {...attributes}>{children}</li>;
-    case 'numbered-list':
+    case 'numbered_list':
       return <ol {...attributes}>{children}</ol>;
     default:
       return <p {...attributes}>{children}</p>;
