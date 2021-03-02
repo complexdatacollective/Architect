@@ -25,7 +25,7 @@ const defaultValue = [{
 }];
 
 const parseValue = (value) => {
-  if (!value || value === '') { return defaultValue; }
+  if (!value || value === '') { return Promise.resolve(defaultValue); }
 
   return parse(value);
 };
@@ -38,6 +38,7 @@ const RichText = ({ allow, onChange, value: initialValue }) => {
   useEffect(() => {
     parseValue(initialValue)
       .then((result) => {
+        console.log({ initialValue, result });
         setValue(result);
       });
   }, []);
@@ -72,7 +73,7 @@ RichText.propTypes = {
 };
 
 RichText.defaultProps = {
-  value: [],
+  value: '',
   onChange: () => {},
   allow: types,
 };
