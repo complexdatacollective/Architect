@@ -46,7 +46,7 @@ RichTextField.propTypes = {
     error: PropTypes.bool,
     invalid: PropTypes.bool,
     touched: PropTypes.bool,
-  }).isRequired,
+  }),
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
 };
@@ -55,6 +55,7 @@ RichTextField.defaultProps = {
   autoFocus: false,
   placeholder: null,
   label: null,
+  meta: {},
 };
 
 export default RichTextField;

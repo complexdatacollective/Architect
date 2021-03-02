@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
 import { Editable, withReact, Slate } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
@@ -8,7 +9,7 @@ import { Element, Leaf } from './renderers';
 import serialize from './serialize';
 import parse from './parse';
 
-const types = [
+const ALLOW_DEFAULT = [
   'bold',
   'italic',
   'underline',
@@ -25,7 +26,9 @@ const defaultValue = [{
 }];
 
 const parseValue = (value) => {
-  if (!value || value === '') { return Promise.resolve(defaultValue); }
+  if (!value || isEmpty(value)) {
+    return Promise.resolve(defaultValue);
+  }
 
   return parse(value);
 };
@@ -37,10 +40,7 @@ const RichText = ({ allow, onChange, value: initialValue }) => {
   // Initial prop on startup
   useEffect(() => {
     parseValue(initialValue)
-      .then((result) => {
-        console.log({ initialValue, result });
-        setValue(result);
-      });
+      .then(setValue);
   }, []);
 
   // Update upstream on change
@@ -75,7 +75,7 @@ RichText.propTypes = {
 RichText.defaultProps = {
   value: '',
   onChange: () => {},
-  allow: types,
+  allow: ALLOW_DEFAULT,
 };
 
 export default RichText;
