@@ -8,7 +8,7 @@ import {
 } from 'slate';
 import cx from 'classnames';
 
-const LIST_TYPES = ['numbered-list', 'bulleted-list'];
+const LIST_TYPES = ['ul_list', 'ol_list'];
 
 const isBlockActive = (editor, format) => {
   const [match] = Editor.nodes(editor, {
