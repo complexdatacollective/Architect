@@ -7,6 +7,7 @@ import {
   Element as SlateElement,
 } from 'slate';
 import cx from 'classnames';
+import * as icons from './icons';
 
 const LIST_TYPES = ['ul_list', 'ol_list'];
 
@@ -64,8 +65,15 @@ const toggleMark = (editor, format) => {
   }
 };
 
+const getIcon = icon => (
+  icons[icon] ?
+    <div><img src={icons[icon]} alt={icon} /></div> :
+    <div>{icon}</div>
+);
+
 const BlockButton = ({ format, icon }) => {
   const editor = useSlate();
+
   return (
     <button
       active={isBlockActive(editor, format)}
@@ -79,7 +87,7 @@ const BlockButton = ({ format, icon }) => {
         { 'rich-text__button--is-active': isBlockActive(editor, format) },
       )}
     >
-      <div>{icon}</div>
+      {getIcon(icon)}
     </button>
   );
 };
@@ -108,7 +116,7 @@ const MarkButton = ({ format, icon }) => {
         { 'rich-text__button--is-active': isMarkActive(editor, format) },
       )}
     >
-      <div>{icon}</div>
+      {getIcon(icon)}
     </button>
   );
 };
