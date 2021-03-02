@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Element = ({ attributes, children, element }) => {
   switch (element.type) {
@@ -19,24 +20,56 @@ const Element = ({ attributes, children, element }) => {
   }
 };
 
-const Leaf = ({ attributes, children, leaf }) => {
+Element.propTypes = {
+  attributes: PropTypes.object,
+  children: PropTypes.node,
+  element: PropTypes.shape({
+    type: PropTypes.string,
+  }).isRequired,
+};
+
+Element.defaultProps = {
+  attributes: {},
+  children: null,
+};
+
+const withMarks = (content, leaf) => {
   if (leaf.bold) {
-    children = <strong>{children}</strong>;
+    return <strong>{content}</strong>;
   }
 
   if (leaf.code) {
-    children = <code>{children}</code>;
+    return <code>{content}</code>;
   }
 
   if (leaf.italic) {
-    children = <em>{children}</em>;
+    return <em>{content}</em>;
   }
 
   if (leaf.underline) {
-    children = <u>{children}</u>;
+    return <u>{content}</u>;
   }
 
-  return <span {...attributes}>{children}</span>;
+  return content;
+};
+
+const Leaf = ({ attributes, children, leaf }) =>
+  <span {...attributes}>{withMarks(children, leaf)}</span>;
+
+Leaf.propTypes = {
+  attributes: PropTypes.object,
+  children: PropTypes.node,
+  leaf: PropTypes.shape({
+    bold: PropTypes.bool,
+    italic: PropTypes.bool,
+    underline: PropTypes.bool,
+    code: PropTypes.bool,
+  }).isRequired,
+};
+
+Leaf.defaultProps = {
+  attributes: {},
+  children: null,
 };
 
 export {

@@ -1,12 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { Editable, withReact, useSlate, Slate } from 'slate-react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useSlate } from 'slate-react';
 import {
   Editor,
   Transforms,
-  createEditor,
   Element as SlateElement,
 } from 'slate';
-import { withHistory } from 'slate-history';
 import cx from 'classnames';
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list'];
@@ -25,6 +24,12 @@ const isMarkActive = (editor, format) => {
   return marks ? marks[format] === true : false;
 };
 
+const getNewType = ({ isActive, isList, format }) => {
+  if (isActive) { return 'paragraph'; }
+  if (isList) { return 'list_item'; }
+  return format;
+};
+
 const toggleBlock = (editor, format) => {
   const isActive = isBlockActive(editor, format);
   const isList = LIST_TYPES.includes(format);
@@ -32,13 +37,13 @@ const toggleBlock = (editor, format) => {
   Transforms.unwrapNodes(editor, {
     match: n =>
       LIST_TYPES.includes(
-        !Editor.isEditor(n) && SlateElement.isElement(n) && n.type
+        !Editor.isEditor(n) && SlateElement.isElement(n) && n.type,
       ),
     split: true,
   });
 
   const newProperties = {
-    type: (isActive ? 'paragraph' : (isList ? 'list-item' : format)),
+    type: getNewType({ isActive, isList, format }),
   };
 
   Transforms.setNodes(editor, newProperties);
@@ -79,6 +84,15 @@ const BlockButton = ({ format, icon }) => {
   );
 };
 
+BlockButton.propTypes = {
+  format: PropTypes.any.isRequired,
+  icon: PropTypes.any,
+};
+
+BlockButton.defaultProps = {
+  icon: null,
+};
+
 const MarkButton = ({ format, icon }) => {
   const editor = useSlate();
   return (
@@ -97,6 +111,15 @@ const MarkButton = ({ format, icon }) => {
       <div>{icon}</div>
     </button>
   );
+};
+
+MarkButton.propTypes = {
+  format: PropTypes.any.isRequired,
+  icon: PropTypes.any,
+};
+
+MarkButton.defaultProps = {
+  icon: null,
 };
 
 export {
