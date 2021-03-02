@@ -1,10 +1,12 @@
-import React, { Fragment, useCallback, useMemo } from 'react';
+import React, { useCallback, useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { Editable, withReact, Slate } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
-import { includes } from 'lodash';
-import { MarkButton, BlockButton } from './buttons';
+import Toolbar from './Toolbar';
 import { Element, Leaf } from './renderers';
+import serialize from './serialize';
+import parse from './parse';
 
 const types = [
   'bold',
@@ -16,39 +18,39 @@ const types = [
   'lists',
 ];
 
-const Toolbar = ({ controls }) => (
-  <div className="rich-text__toolbar">
-    { includes(controls, 'bold') && <MarkButton format="bold" icon="format_bold" /> }
-    { includes(controls, 'italic') && <MarkButton format="italic" icon="format_italic" /> }
-    { includes(controls, 'underline') && <MarkButton format="underline" icon="format_underlined" /> }
-    { includes(controls, 'code') && <MarkButton format="code" icon="code" /> }
-    { includes(controls, 'headings') && (
-      <Fragment>
-        <BlockButton format="heading-one" icon="looks_one" />
-        <BlockButton format="heading-two" icon="looks_two" />
-      </Fragment>
-    )}
-    { includes(controls, 'quote') &&
-      <BlockButton format="block-quote" icon="format_quote" />
-    }
-    { includes(controls, 'list') && (
-      <Fragment>
-        <BlockButton format="numbered-list" icon="format_list_numbered" />
-        <BlockButton format="bulleted-list" icon="format_list_bulleted" />
-      </Fragment>
-    )}
-  </div>
-);
+const defaultValue = [{
+  children: [
+    { text: '' },
+  ],
+}];
 
-const initialValue = [];
+const parseValue = (value) => {
+  if (!value || value === '') { return defaultValue; }
 
-const RichText = ({ value, onChange, allow }) => {
+  return parse(value);
+};
+
+const RichText = ({ allow, onChange, value: initialValue }) => {
+  const [value, setValue] = useState(defaultValue);
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
+  // Initial prop on startup
+  useEffect(() => {
+    parseValue(initialValue)
+      .then((result) => {
+        setValue(result);
+      });
+  }, []);
+
+  // Update upstream on change
+  useEffect(() => {
+    onChange(serialize(value));
+  }, [onChange, value]);
+
   return (
-    <Slate editor={editor} value={value} onChange={onChange}>
+    <Slate editor={editor} value={value} onChange={setValue}>
       <div className="rich-text">
         <Toolbar controls={allow} />
         <div className="rich-text__editable">
@@ -65,8 +67,15 @@ const RichText = ({ value, onChange, allow }) => {
   );
 };
 
+RichText.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  allow: PropTypes.arrayOf(PropTypes.string),
+};
+
 RichText.defaultProps = {
   value: [],
+  onChange: () => {},
   allow: types,
 };
 

@@ -1,62 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import slate, { serialize as serializeMarkdown } from 'remark-slate';
-import { Node, Text } from 'slate';
-import unified from 'unified';
-import markdown from 'remark-parse';
-
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import uuid from 'uuid/v4';
+import { Icon } from '@codaco/ui';
 import RichText from './RichText';
 
-const initialValue = [{
-  children: [
-    { text: '' },
-  ],
-}];
 
-const parse = (value) => {
-  const data = unified()
-    .use(markdown)
-    .use(slate)
-    .parse(value);
-  console.log({ value, data });
+const RichTextField = ({
+  input,
+  meta: { error, invalid, touched },
+  label,
+  placeholder,
+  autoFocus,
+}) => {
+  const id = useRef(uuid());
 
-  return [data];
+  const anyLabel = label;
+
+  return (
+    <div className="form-field-container">
+      { anyLabel &&
+        <h4>{anyLabel}</h4>
+      }
+      <div className="form-field-rich-text">
+        <RichText
+          id={id.current}
+          value={input.value}
+          onChange={input.onChange}
+          placeholder={placeholder || label}
+          autoFocus={autoFocus} // eslint-disable-line
+        />
+        {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div>}
+      </div>
+
+    </div>
+  );
 };
 
-const serialize = (node) => {
-  return '';
-  // console.log({ node });
-
-  // if (Text.isText(node)) {
-  //   // return escapeHtml(node.text)
-  //   return node.text;
-  // }
-
-  // return node.map(n => serializeMarkdown(n)).join('\n');
+RichTextField.propTypes = {
+  input: PropTypes.shape({
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+  }).isRequired,
+  label: PropTypes.string,
+  meta: PropTypes.shape({
+    error: PropTypes.bool,
+    invalid: PropTypes.bool,
+    touched: PropTypes.bool,
+  }).isRequired,
+  placeholder: PropTypes.string,
+  autoFocus: PropTypes.bool,
 };
 
-const getValue = (value) => {
-  if (value && value !== '') {
-    // TODO: parse value
-    return parse(value);
-  }
-
-  return initialValue;
-};
-
-const RichTextField = ({ input, ...props }) => {
-  const [value, setValue] = useState(getValue(input.value));
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-
-  const markdownValue = serialize(value);
-
-  useEffect(() => {
-    input.onChange(markdownValue);
-  }, [input.onChange, markdownValue]);
-
-  return <RichText value={value} onChange={setValue} />;
+RichTextField.defaultProps = {
+  autoFocus: false,
+  placeholder: null,
+  label: null,
 };
 
 export default RichTextField;

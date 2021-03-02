@@ -1,4 +1,7 @@
 .rich-text {
+  user-select: all;
+  pointer-events: all;
+
   &__toolbar {
     background: silver;
     border-radius: 1rem 1rem 0 0;
