@@ -21,9 +21,11 @@
     border: 0;
     outline: none;
     background: transparent;
+    filter: invert(50%);
 
     &--is-active {
       font-weight: bold;
+      filter: invert(0%);
     }
   }
 }

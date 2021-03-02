@@ -9,7 +9,7 @@ const Toolbar = ({ controls }) => (
   <div className="rich-text__toolbar">
     { includes(controls, 'bold') && <MarkButton format="bold" icon="bold" /> }
     { includes(controls, 'italic') && <MarkButton format="italic" icon="italic" /> }
-    { includes(controls, 'underline') && <MarkButton format="underline" icon="underlined" /> }
+    { includes(controls, 'underline') && <MarkButton format="underline" icon="underline" /> }
     { includes(controls, 'code') && <MarkButton format="code" icon="code" /> }
     { includes(controls, 'headings') && (
       <Fragment>
