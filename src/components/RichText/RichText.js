@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Editable, withReact, Slate } from 'slate-react';
 import { createEditor } from 'slate';
@@ -32,8 +32,6 @@ const parseValue = (value) => {
 
 const RichText = ({ allow, onChange, value: initialValue }) => {
   const [value, setValue] = useState(defaultValue);
-  const renderElement = useCallback(props => <Element {...props} />, []);
-  const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   // Initial prop on startup
@@ -55,8 +53,8 @@ const RichText = ({ allow, onChange, value: initialValue }) => {
         <Toolbar controls={allow} />
         <div className="rich-text__editable">
           <Editable
-            renderElement={renderElement}
-            renderLeaf={renderLeaf}
+            renderElement={Element}
+            renderLeaf={Leaf}
             placeholder=""
             spellCheck
             autoFocus
