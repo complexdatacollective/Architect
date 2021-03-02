@@ -7,23 +7,26 @@ const DEFAULT_CONTROLS = ['bold', 'italic', 'underline'];
 
 const Toolbar = ({ controls }) => (
   <div className="rich-text__toolbar">
-    { includes(controls, 'bold') && <MarkButton format="bold" icon="format_bold" /> }
-    { includes(controls, 'italic') && <MarkButton format="italic" icon="format_italic" /> }
-    { includes(controls, 'underline') && <MarkButton format="underline" icon="format_underlined" /> }
+    { includes(controls, 'bold') && <MarkButton format="bold" icon="bold" /> }
+    { includes(controls, 'italic') && <MarkButton format="italic" icon="italic" /> }
+    { includes(controls, 'underline') && <MarkButton format="underline" icon="underlined" /> }
     { includes(controls, 'code') && <MarkButton format="code" icon="code" /> }
     { includes(controls, 'headings') && (
       <Fragment>
-        <BlockButton format="heading_one" icon="looks_one" />
-        <BlockButton format="heading_two" icon="looks_two" />
+        <BlockButton format="heading_one" icon="h1" />
+        <BlockButton format="heading_two" icon="h2" />
+        <BlockButton format="heading_three" icon="h3" />
+        <BlockButton format="heading_four" icon="h4" />
+        <BlockButton format="heading_five" icon="h5" />
       </Fragment>
     )}
     { includes(controls, 'quote') &&
-      <BlockButton format="block-quote" icon="format_quote" />
+      <BlockButton format="block_quote" icon="quote" />
     }
-    { includes(controls, 'list') && (
+    { includes(controls, 'lists') && (
       <Fragment>
-        <BlockButton format="numbered_list" icon="format_list_numbered" />
-        <BlockButton format="bulleted_list" icon="format_list_bulleted" />
+        <BlockButton format="ol_list" icon="ol" />
+        <BlockButton format="ul_list" icon="ul" />
       </Fragment>
     )}
   </div>
