@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import { Editable, withReact, Slate } from 'slate-react';
+import cx from 'classnames';
+import { Editable, withReact, Slate, useFocused } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import Toolbar from './Toolbar';
@@ -33,8 +34,23 @@ const parseValue = (value) => {
   return parse(value);
 };
 
-const RichText = ({ allow, onChange, value: initialValue }) => {
+const RichTextContainer = ({ children }) => {
+  const focused = useFocused();
+
+  return (
+    <div className={cx('rich-text', { 'rich-text--is-active': focused })}>
+      {children}
+    </div>
+  );
+};
+
+RichTextContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+const RichText = ({ allow, onChange, value: initialValue, autoFocus }) => {
   const [value, setValue] = useState(defaultValue);
+  const [focused, setFocused] = useState(false);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   // Initial prop on startup
@@ -50,7 +66,7 @@ const RichText = ({ allow, onChange, value: initialValue }) => {
 
   return (
     <Slate editor={editor} value={value} onChange={setValue}>
-      <div className="rich-text">
+      <RichTextContainer>
         <Toolbar controls={allow} />
         <div className="rich-text__editable">
           <Editable
@@ -58,10 +74,12 @@ const RichText = ({ allow, onChange, value: initialValue }) => {
             renderLeaf={Leaf}
             placeholder=""
             spellCheck
-            autoFocus
+            autoFocus={autoFocus}
+            onBlur={console.log}
+            onFocus={console.log}
           />
         </div>
-      </div>
+      </RichTextContainer>
     </Slate>
   );
 };
@@ -70,12 +88,14 @@ RichText.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   allow: PropTypes.arrayOf(PropTypes.string),
+  autoFocus: PropTypes.bool,
 };
 
 RichText.defaultProps = {
   value: '',
   onChange: () => {},
   allow: ALLOW_DEFAULT,
+  autoFocus: false,
 };
 
 export default RichText;

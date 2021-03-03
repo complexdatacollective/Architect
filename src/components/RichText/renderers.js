@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import escapeHtml from 'escape-html';
 
 const Element = ({ attributes, children, element }) => {
   switch (element.type) {

@@ -12,20 +12,36 @@
   }
 
   &__editable {
+    cursor: text;
     background: white;
     padding: 1rem 1.2rem;
-    border-bottom: 2px solid var(--input-accent);
+    border-bottom-width: unit(.25);
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
   }
 
   &__button {
     border: 0;
     outline: none;
     background: transparent;
+    transition: filter var(--animation-easing) var(--animation-duration-fast);
     filter: invert(50%);
+    cursor: pointer;
+
+    &:hover {
+      filter: invert(100%);
+    }
 
     &--is-active {
       font-weight: bold;
-      filter: invert(0%);
+      filter: invert(0%) !important;
+    }
+  }
+
+  &--is-active {
+    .rich-text__editable {
+      border-bottom: 2px solid var(--input-accent);
     }
   }
 }
