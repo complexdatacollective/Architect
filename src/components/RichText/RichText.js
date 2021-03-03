@@ -31,6 +31,8 @@ const parseValue = (value) => {
     return Promise.resolve(defaultValue);
   }
 
+  console.log({ parse: parse(value) });
+
   return parse(value);
 };
 
@@ -50,7 +52,6 @@ RichTextContainer.propTypes = {
 
 const RichText = ({ allow, onChange, value: initialValue, autoFocus }) => {
   const [value, setValue] = useState(defaultValue);
-  const [focused, setFocused] = useState(false);
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   // Initial prop on startup
@@ -61,6 +62,7 @@ const RichText = ({ allow, onChange, value: initialValue, autoFocus }) => {
 
   // Update upstream on change
   useEffect(() => {
+    console.log({ value, serialize: serialize(value) });
     onChange(serialize(value));
   }, [onChange, value]);
 
@@ -75,8 +77,6 @@ const RichText = ({ allow, onChange, value: initialValue, autoFocus }) => {
             placeholder=""
             spellCheck
             autoFocus={autoFocus}
-            onBlur={console.log}
-            onFocus={console.log}
           />
         </div>
       </RichTextContainer>
