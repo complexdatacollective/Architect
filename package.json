@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "6.0.0",
+    "version": "6.0.1",
     "productName": "Network Canvas Architect",
     "description": "A tool for building Network Canvas interviews.",
     "author": "Complex Data Collective <info@networkcanvas.com>",
@@ -200,30 +200,37 @@
             "certificateSha1": "512E5573B1961B0ADCAFB21288935F8A3E6E656F"
         },
         "linux": {
-            "maintainer": "Joshua Melville <joshmelville@gmail.com>",
-            "target": [
-                {
-                    "target": "deb",
-                    "arch": [
-                        "x64",
-                        "arm64"
-                    ]
-                },
-                {
-                    "target": "rpm",
-                    "arch": [
-                        "x64",
-                        "arm64"
-                    ]
-                },
-                {
-                    "target": "snap",
-                    "arch": [
-                        "x64",
-                        "arm64"
-                    ]
-                }
-            ]
+          "maintainer": "Joshua Melville <joshmelville@gmail.com>",
+          "target": [
+            {
+              "target": "deb",
+              "arch": [
+                "x64",
+                "arm64"
+              ]
+            },
+            {
+              "target": "rpm",
+              "arch": [
+                "x64",
+                "arm64"
+              ]
+            },
+            {
+              "target": "AppImage",
+              "arch": [
+                "x64",
+                "arm64"
+              ]
+            },
+            {
+              "target": "tar.gz",
+              "arch": [
+                "x64",
+                "arm64"
+              ]
+            }
+          ]
         },
         "fileAssociations": {
             "ext": "netcanvas",
