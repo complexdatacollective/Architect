@@ -10,16 +10,7 @@ import Toolbar from './Toolbar';
 import { Element, Leaf } from './renderers';
 import serialize from './serialize';
 import parse from './parse';
-
-const ALLOW_DEFAULT = [
-  'bold',
-  'italic',
-  'underline',
-  'code',
-  'quote',
-  'headings',
-  'lists',
-];
+import { MODES, TOOLBAR_MODES } from './options';
 
 const defaultValue = [{
   children: [
@@ -50,15 +41,14 @@ RichTextContainer.propTypes = {
 };
 
 const RichText = ({
-  allow,
+  mode,
   onChange,
   value: initialValue,
   autoFocus,
-  multiline,
 }) => {
   const [value, setValue] = useState(defaultValue);
   const normalizeOptions = {
-    multiline,
+    mode,
   };
   const editor = useMemo(
     () => withNormalize(withHistory(withReact(createEditor())), normalizeOptions),
@@ -76,10 +66,12 @@ const RichText = ({
     onChange(serialize(value));
   }, [onChange, value]);
 
+  const controls = TOOLBAR_MODES[mode];
+
   return (
     <Slate editor={editor} value={value} onChange={setValue}>
       <RichTextContainer>
-        <Toolbar controls={allow} />
+        <Toolbar controls={controls} />
         <div className="rich-text__editable">
           <Editable
             renderElement={Element}
@@ -97,17 +89,15 @@ const RichText = ({
 RichText.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
-  allow: PropTypes.arrayOf(PropTypes.string),
+  mode: PropTypes.oneOf(Object.values(MODES)),
   autoFocus: PropTypes.bool,
-  multiline: PropTypes.bool,
 };
 
 RichText.defaultProps = {
   value: '',
   onChange: () => {},
-  allow: ALLOW_DEFAULT,
+  mode: MODES.full,
   autoFocus: false,
-  multiline: true,
 };
 
 export default RichText;

@@ -2,8 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { includes } from 'lodash';
 import { MarkButton, BlockButton } from './buttons';
+import { TOOLBAR_MODES } from './options';
 
-const DEFAULT_CONTROLS = ['bold', 'italic', 'underline'];
+const DEFAULT_CONTROLS = TOOLBAR_MODES.full;
+
+console.log({ DEFAULT_CONTROLS });
 
 const Toolbar = ({ controls }) => (
   <div className="rich-text__toolbar">

@@ -1,18 +1,17 @@
 /* eslint-disable no-param-reassign,no-restricted-syntax */
 import { Transforms, Node, Element } from 'slate';
+import { MODES } from './options';
 
 const defaultOptions = {
-  multiline: true,
+  mode: MODES.full,
 };
 
 const withNormalize = (editor, userOptions) => {
   const { normalizeNode } = editor;
   const options = { ...defaultOptions, ...userOptions };
 
-  console.log({ options });
-
   editor.normalizeNode = ([node, path]) => {
-    if (options.multiline === false) {
+    if (options.mode === MODES.single) {
       if (path.length === 0) { // for top level path only
         // If empty, insert a blank paragraph node
         if (editor.children.length < 1) {
