@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import { Icon } from '@codaco/ui';
 import RichText from './RichText';
-
+import { MODES } from './options';
 
 const RichTextField = ({
   input,
@@ -11,6 +11,7 @@ const RichTextField = ({
   label,
   placeholder,
   autoFocus,
+  mode,
 }) => {
   const id = useRef(uuid());
 
@@ -28,6 +29,7 @@ const RichTextField = ({
           onChange={input.onChange}
           placeholder={placeholder || label}
           autoFocus={autoFocus} // eslint-disable-line
+          mode={mode}
         />
         {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div>}
       </div>
@@ -49,6 +51,7 @@ RichTextField.propTypes = {
   }),
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
+  mode: PropTypes.oneOf(Object.values(MODES)),
 };
 
 RichTextField.defaultProps = {
@@ -56,6 +59,7 @@ RichTextField.defaultProps = {
   placeholder: null,
   label: null,
   meta: {},
+  mode: MODES.full,
 };
 
 export default RichTextField;

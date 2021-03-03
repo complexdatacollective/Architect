@@ -11,6 +11,17 @@ const withNormalize = (editor, userOptions) => {
   const options = { ...defaultOptions, ...userOptions };
 
   editor.normalizeNode = ([node, path]) => {
+    // Filter allowed Elements
+    if (options.mode !== MODES.full) {
+      if (Element.isElement(node) && node.type !== 'paragraph') {
+        Transforms.setNodes(
+          editor,
+          { ...node, type: 'paragraph' },
+          { at: path },
+        );
+      }
+    }
+
     if (options.mode === MODES.single) {
       if (path.length === 0) { // for top level path only
         // If empty, insert a blank paragraph node
@@ -25,7 +36,7 @@ const withNormalize = (editor, userOptions) => {
           if (Element.isElement(child) && childPath[0] === 0) {
             Transforms.setNodes(
               editor,
-              { type: 'paragraph', break: false },
+              { ...node, type: 'paragraph', break: false },
               { at: childPath },
             );
           } else if (Element.isElement(child)) {
