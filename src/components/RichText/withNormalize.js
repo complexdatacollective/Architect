@@ -20,28 +20,28 @@ const withNormalize = (editor, userOptions) => {
           Transforms.insertNodes(editor, defaultNode, { at: path.concat(0) });
         }
 
-      //   // Force the first node to always be a paragraph and merge any
-      //   // later nodes
-      //   for (const [child, childPath] of Node.children(editor, path)) {
-      //     if (Element.isElement(child) && childPath[0] === 0 && node.type !== 'paragraph') {
-      //       Transforms.setNodes(
-      //         editor,
-      //         { ...node, type: 'paragraph', break: false },
-      //         { at: childPath },
-      //       );
-      //     } else if (Element.isElement(child)) {
-      //       Transforms.mergeNodes(editor, { at: childPath });
-      //     }
-      //   }
+        // Force the first node to always be a paragraph and merge any
+        // later nodes
+        for (const [child, childPath] of Node.children(editor, path)) {
+          if (Element.isElement(child) && childPath[0] === 0 && node.type !== 'paragraph') {
+            Transforms.setNodes(
+              editor,
+              { type: 'paragraph', break: false },
+              { at: childPath },
+            );
+          } else if (Element.isElement(child)) {
+            Transforms.mergeNodes(editor, { at: childPath });
+          }
+        }
       }
     }
 
     // Filter allowed Elements
-    if (options.mode !== MODES.full) {
+    if (options.mode === MODES.marks) {
       if (Element.isElement(node) && node.type !== 'paragraph') {
         Transforms.setNodes(
           editor,
-          { ...node, type: 'paragraph' },
+          { type: 'paragraph' },
           { at: path },
         );
       }
