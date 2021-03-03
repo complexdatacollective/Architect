@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { Editable, withReact, Slate, useFocused } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
+import withNormalize from './withNormalize';
 import Toolbar from './Toolbar';
 import { Element, Leaf } from './renderers';
 import serialize from './serialize';
@@ -31,8 +32,6 @@ const parseValue = (value) => {
     return Promise.resolve(defaultValue);
   }
 
-  console.log({ parse: parse(value) });
-
   return parse(value);
 };
 
@@ -50,9 +49,21 @@ RichTextContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const RichText = ({ allow, onChange, value: initialValue, autoFocus }) => {
+const RichText = ({
+  allow,
+  onChange,
+  value: initialValue,
+  autoFocus,
+  multiline,
+}) => {
   const [value, setValue] = useState(defaultValue);
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const normalizeOptions = {
+    multiline,
+  };
+  const editor = useMemo(
+    () => withNormalize(withHistory(withReact(createEditor())), normalizeOptions),
+    [],
+  );
 
   // Initial prop on startup
   useEffect(() => {
@@ -62,7 +73,6 @@ const RichText = ({ allow, onChange, value: initialValue, autoFocus }) => {
 
   // Update upstream on change
   useEffect(() => {
-    console.log({ value, serialize: serialize(value) });
     onChange(serialize(value));
   }, [onChange, value]);
 
@@ -89,6 +99,7 @@ RichText.propTypes = {
   onChange: PropTypes.func,
   allow: PropTypes.arrayOf(PropTypes.string),
   autoFocus: PropTypes.bool,
+  multiline: PropTypes.bool,
 };
 
 RichText.defaultProps = {
@@ -96,6 +107,7 @@ RichText.defaultProps = {
   onChange: () => {},
   allow: ALLOW_DEFAULT,
   autoFocus: false,
+  multiline: true,
 };
 
 export default RichText;
