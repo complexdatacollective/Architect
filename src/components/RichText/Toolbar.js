@@ -6,8 +6,6 @@ import { TOOLBAR_MODES } from './options';
 
 const DEFAULT_CONTROLS = TOOLBAR_MODES.full;
 
-console.log({ DEFAULT_CONTROLS });
-
 const Toolbar = ({ controls }) => (
   <div className="rich-text__toolbar">
     { includes(controls, 'bold') && <MarkButton format="bold" icon="bold" /> }
