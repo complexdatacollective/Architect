@@ -45,7 +45,7 @@ RichTextField.propTypes = {
   }).isRequired,
   label: PropTypes.string,
   meta: PropTypes.shape({
-    error: PropTypes.bool,
+    error: PropTypes.string,
     invalid: PropTypes.bool,
     touched: PropTypes.bool,
   }),

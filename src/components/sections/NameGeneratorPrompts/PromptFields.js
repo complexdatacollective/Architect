@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Field as RichTextField } from '@components/RichText';
+import { Field as RichTextField, MODES } from '@components/RichText';
 import { getFieldId } from '@app/utils/issues';
 import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
@@ -37,6 +37,7 @@ class PromptFields extends PureComponent {
               label=""
               placeholder="Enter text for the prompt here..."
               validation={{ required: true, maxLength: 220 }}
+              mode={MODES.single}
             />
           </Row>
         </Section>
