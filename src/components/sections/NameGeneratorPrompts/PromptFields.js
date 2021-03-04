@@ -4,8 +4,8 @@ import { Field as RichTextField, MODES } from '@components/RichText';
 import { getFieldId } from '@app/utils/issues';
 import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
-import AssignAttributes from '../../AssignAttributes';
-import Tip from '../../Tip';
+import AssignAttributes from '@components/AssignAttributes';
+import Tip from '@components/Tip';
 
 class PromptFields extends PureComponent {
   render() {
@@ -33,11 +33,11 @@ class PromptFields extends PureComponent {
             <ValidatedField
               name="text"
               component={RichTextField}
+              mode={MODES.single}
               className="stage-editor-section-prompt__textarea"
               label=""
               placeholder="Enter text for the prompt here..."
               validation={{ required: true, maxLength: 220 }}
-              mode={MODES.single}
             />
           </Row>
         </Section>

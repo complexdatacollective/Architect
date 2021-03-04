@@ -2,22 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
-import TextArea from '@codaco/ui/lib/components/Fields/TextArea';
+import { Field as RichTextField, MODES } from '@components/RichText';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '../../../utils/issues';
-import ValidatedField from '../../Form/ValidatedField';
-import { Image, Audio, Video } from '../../Form/Fields';
+import ValidatedField from '@components/Form/ValidatedField';
+import { Image, Audio, Video } from '@components/Form/Fields';
+import { getFieldId } from '@app/utils/issues';
 import { typeOptions } from './options';
 import withItemHandlers from './withItemHandlers';
 
 const contentInputs = {
-  text: TextArea,
+  text: RichTextField,
   image: Image,
   audio: Audio,
   video: Video,
 };
 
-const getInputComponent = (type) => get(contentInputs, type, TextArea);
+const getInputProps = (type) => {
+  const component = get(contentInputs, type, RichTextField);
+  const props = type !== 'text' ? {} : { mode: MODES.full };
+  return {
+    component,
+    ...props,
+  };
+};
 
 const ItemEditor = ({
   type,
@@ -38,8 +45,7 @@ const ItemEditor = ({
       <h3 id={getFieldId('content')}>Content</h3>
       <ValidatedField
         name="content"
-        component={getInputComponent(type)}
-        validation={{ required: true }}
+        {...getInputProps(type)}
       />
     </Row>
   </Section>

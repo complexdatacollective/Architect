@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
 import { Text, Toggle } from '@codaco/ui/lib/components/Fields';
+import { Field as RichTextField, MODES } from '@components/RichText';
 import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
@@ -92,7 +93,8 @@ const PromptFields = ({
 
         <ValidatedField
           name="text"
-          component={Text}
+          component={RichTextField}
+          mode={MODES.single}
           label=""
           placeholder="Enter text for the prompt here..."
           validation={{ required: true, maxLength: 220 }}
