@@ -52,10 +52,6 @@ const withMarks = (content, leaf) => {
     return <em>{content}</em>;
   }
 
-  if (leaf.underline) {
-    return <u>{content}</u>;
-  }
-
   return content;
 };
 
