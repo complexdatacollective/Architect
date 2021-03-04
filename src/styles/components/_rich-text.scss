@@ -3,7 +3,7 @@
   pointer-events: all;
 
   &__toolbar {
-    background: silver;
+    background: var(--color-platinum);
     border-radius: 1rem 1rem 0 0;
     padding: .6rem 1.2rem;
     display: flex;
@@ -13,7 +13,7 @@
 
   &__editable {
     cursor: text;
-    background: white;
+    background: var(--color-white);
     padding: 1rem 1.2rem;
     border-bottom-width: unit(.25);
     border-bottom-style: solid;
@@ -36,6 +36,9 @@
     &--is-active {
       font-weight: bold;
       filter: invert(0%) !important;
+      &:hover {
+        filter: grayscale(100%) brightness(0);
+      }
     }
   }
 
