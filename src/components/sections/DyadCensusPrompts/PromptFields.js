@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
-import Text from '@codaco/ui/lib/components/Fields/Text';
+import { Field as RichTextField, MODES } from '@components/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
@@ -44,7 +44,8 @@ const PromptFields = ({
 
       <ValidatedField
         name="text"
-        component={Text}
+        component={RichTextField}
+        mode={MODES.single}
         className="stage-editor-section-prompt__textarea"
         label="Prompt Text"
         placeholder="Enter text for the prompt here..."

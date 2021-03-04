@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@codaco/ui/lib/components/Fields';
+import { Field as RichTextField, MODES } from '@components/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
@@ -28,7 +28,8 @@ const PromptFields = ({
 
         <ValidatedField
           name="text"
-          component={Text}
+          component={RichTextField}
+          mode={MODES.single}
           label=""
           placeholder="Enter text for the prompt here..."
           validation={{ required: true, maxLength: 220 }}
