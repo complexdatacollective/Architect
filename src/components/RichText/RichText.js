@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
 import cx from 'classnames';
 import { Editable, withReact, Slate, useFocused } from 'slate-react';
 import { createEditor } from 'slate';
@@ -9,22 +8,8 @@ import withNormalize from './withNormalize';
 import Toolbar from './Toolbar';
 import { Element, Leaf } from './renderers';
 import serialize from './serialize';
-import parse from './parse';
+import parse, { defaultValue } from './parse';
 import { MODES, TOOLBAR_MODES } from './options';
-
-const defaultValue = [{
-  children: [
-    { text: '' },
-  ],
-}];
-
-const parseValue = (value) => {
-  if (!value || isEmpty(value)) {
-    return Promise.resolve(defaultValue);
-  }
-
-  return parse(value);
-};
 
 const RichTextContainer = ({ children }) => {
   const focused = useFocused();
@@ -57,7 +42,7 @@ const RichText = ({
 
   // Initial prop on startup
   useEffect(() => {
-    parseValue(initialValue)
+    parse(initialValue)
       .then(setValue);
   }, []);
 
