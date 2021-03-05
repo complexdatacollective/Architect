@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { Editable, withReact, Slate, useFocused } from 'slate-react';
+import { Editable, withReact, Slate } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import withNormalize from './withNormalize';
@@ -10,20 +9,7 @@ import { Element, Leaf } from './renderers';
 import serialize from './serialize';
 import parse, { defaultValue } from './parse';
 import { MODES, TOOLBAR_MODES } from './options';
-
-const RichTextContainer = ({ children }) => {
-  const focused = useFocused();
-
-  return (
-    <div className={cx('rich-text', { 'rich-text--is-active': focused })}>
-      {children}
-    </div>
-  );
-};
-
-RichTextContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+import RichTextContainer from './RichTextContainer';
 
 const RichText = ({
   mode,
