@@ -16,3 +16,5 @@ const RichTextContainer = ({ children }) => {
 RichTextContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export default RichTextContainer;
