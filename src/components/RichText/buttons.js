@@ -7,7 +7,29 @@ import {
   Element as SlateElement,
 } from 'slate';
 import cx from 'classnames';
-import * as icons from './icons';
+import BoldIcon from '@material-ui/icons/FormatBoldRounded';
+import ItalicIcon from '@material-ui/icons/FormatItalicRounded';
+import QuoteIcon from '@material-ui/icons/FormatQuoteRounded';
+import H1Icon from '@material-ui/icons/LooksOneRounded';
+import H2Icon from '@material-ui/icons/LooksTwoRounded';
+import H3Icon from '@material-ui/icons/Looks3Rounded';
+import H4Icon from '@material-ui/icons/Looks4Rounded';
+import H5Icon from '@material-ui/icons/Looks5Rounded';
+import ULIcon from '@material-ui/icons/FormatListBulletedRounded';
+import OLIcon from '@material-ui/icons/FormatListNumberedRounded';
+
+const icons = {
+  bold: BoldIcon,
+  italic: ItalicIcon,
+  quote: QuoteIcon,
+  h1: H1Icon,
+  h2: H2Icon,
+  h3: H3Icon,
+  h4: H4Icon,
+  h5: H5Icon,
+  ul: ULIcon,
+  ol: OLIcon,
+}
 
 const LIST_TYPES = ['ul_list', 'ol_list'];
 
@@ -65,11 +87,11 @@ const toggleMark = (editor, format) => {
   }
 };
 
-const getIcon = icon => (
-  icons[icon] ?
-    <div><img src={icons[icon]} alt={icon} /></div> :
-    <div>{icon}</div>
-);
+const getIcon = icon => {
+  const Icon = icons[icon];
+  if (!Icon) { return <span>{icon}</span>; }
+  return <Icon />;
+};
 
 const BlockButton = ({ format, icon }) => {
   const editor = useSlate();
