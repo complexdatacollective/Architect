@@ -14,6 +14,7 @@ const FormWithQuickAdd = ({
   quickAddEnabled,
   handleChangeQuickAdd,
   disabled,
+  ...props
 }) => (
   <>
     <Section disabled={disabled}>
@@ -36,11 +37,11 @@ const FormWithQuickAdd = ({
     { quickAddEnabled
       && (
       <QuickAdd
-        {...this.props}
+        {...props}
         disabled={disabled}
       />
       )}
-    { !quickAddEnabled && <Form {...this.props} disabled={disabled} /> }
+    { !quickAddEnabled && <Form {...props} disabled={disabled} /> }
   </>
 );
 

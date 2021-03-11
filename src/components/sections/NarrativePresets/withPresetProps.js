@@ -32,7 +32,9 @@ const variableHandlers = withHandlers({
     changeForm(form, 'groupVariable', variable);
     closeNewVariableWindow();
   },
-  handleDeleteVariable: ({ entity, type, deleteVariable }) => (variable) => deleteVariable(entity, type, variable),
+  handleDeleteVariable: (
+    { entity, type, deleteVariable },
+  ) => (variable) => deleteVariable(entity, type, variable),
 });
 
 const withPresetProps = compose(

@@ -96,7 +96,6 @@ NodeType.propTypes = {
 NodeType.defaultProps = {
   nodeTypes: [],
   disabled: false,
-  displayVariable: null,
   typeScreenMessage: null,
   type: null,
 };

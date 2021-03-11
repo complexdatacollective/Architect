@@ -77,7 +77,6 @@ PromptFields.propTypes = {
 PromptFields.defaultProps = {
   type: null,
   entity: null,
-  dataSource: null,
 };
 
 export { PromptFields };

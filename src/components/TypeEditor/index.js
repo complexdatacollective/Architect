@@ -42,7 +42,9 @@ function mapStateToProps(state, props) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateType: (entity, type, form) => dispatch(codebookActions.updateType(entity, type, parse(form))),
+  updateType: (
+    entity, type, form,
+  ) => dispatch(codebookActions.updateType(entity, type, parse(form))),
   createType: (entity, form) => dispatch(codebookActions.createType(entity, parse(form))),
 });
 

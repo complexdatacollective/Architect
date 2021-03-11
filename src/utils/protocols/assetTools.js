@@ -11,7 +11,9 @@ import { getSupportedAssetType } from '@app/utils/protocols/importAsset';
 * Generate a switching function that takes a filepath as an argument
 * and returns match from configuration object.
 */
-const withExtensionSwitch = (configuration, fallback = () => Promise.resolve()) => (filePath, ...rest) => {
+const withExtensionSwitch = (
+  configuration, fallback = () => Promise.resolve(),
+) => (filePath, ...rest) => {
   if (!filePath) { return null; }
   const extension = path.extname(filePath).substr(1); // e.g. 'csv'
 

@@ -27,7 +27,6 @@ export const getPlatformSpecificContent = (assets) => {
   }
 
   if (isMacOS()) {
-    // eslint-disable-next-line @codaco/spellcheck/spell-checker
     const dmg = find(assets, (value) => value.name.split('.').pop() === 'dmg');
     return {
       buttonText: 'Download Installer',
@@ -36,7 +35,6 @@ export const getPlatformSpecificContent = (assets) => {
   }
 
   if (isWindows()) {
-    // eslint-disable-next-line @codaco/spellcheck/spell-checker
     const exe = find(assets, (value) => value.name.split('.').pop() === 'exe');
     return {
       buttonText: 'Download Installer',

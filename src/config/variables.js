@@ -125,9 +125,13 @@ export const INPUT_OPTIONS = Object.values(COMPONENTS);
 
 export const VARIABLE_OPTIONS = Object.values(VARIABLE_TYPES);
 
-const isVariableTypeWithOptions = (variableType) => VARIABLE_TYPES_WITH_OPTIONS.includes(variableType);
+const isVariableTypeWithOptions = (
+  variableType,
+) => VARIABLE_TYPES_WITH_OPTIONS.includes(variableType);
 
-const isVariableTypeWithParameters = (variableType) => VARIABLE_TYPES_WITH_PARAMETERS.includes(variableType);
+const isVariableTypeWithParameters = (
+  variableType,
+) => VARIABLE_TYPES_WITH_PARAMETERS.includes(variableType);
 
 const findByType = (type) => ([t]) => t === type;
 const findByComponent = (component) => ([, c]) => c.some(({ value }) => value === component);

@@ -7,6 +7,7 @@ const IconOption = (props) => (
   <Radio
     {...props}
     className="type-editor-icon-option"
+    // eslint-disable-next-line react/destructuring-assignment
     label={<Icon name={props.label} />}
   />
 );

@@ -16,7 +16,10 @@ const assignForType = (memo, key, value) => {
   };
 };
 
-const shouldPrune = (x) => isNull(x) || isUndefined(x) || (isObject(x) && isEmpty(x)) || (isArray(x) && x.length === 0);
+const shouldPrune = (x) => isNull(x)
+  || isUndefined(x)
+  || (isObject(x) && isEmpty(x))
+  || (isArray(x) && x.length === 0);
 
 const pruneObjects = (obj) => {
   const getNextValue = (value) => {

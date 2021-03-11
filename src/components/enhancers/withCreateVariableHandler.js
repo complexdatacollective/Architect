@@ -39,7 +39,9 @@ const createVariableHandler = {
 
     return variable;
   },
-  handleDeleteVariable: ({ deleteVariable, type, entity }) => (variableId) => deleteVariable(entity, type, variableId),
+  handleDeleteVariable: (
+    { deleteVariable, type, entity },
+  ) => (variableId) => deleteVariable(entity, type, variableId),
   normalizeKeyDown: () => normalizeKeyDown,
 };
 

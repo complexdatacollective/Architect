@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { SortableElement } from 'react-sortable-hoc';

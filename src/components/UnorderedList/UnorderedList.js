@@ -6,20 +6,22 @@ class List extends Component {
   constructor(props) {
     super(props);
 
+    const { initialSortOrder } = this.props;
+
     this.state = {
       parameters: {
-        sortOrder: this.props.initialSortOrder,
+        sortOrder: initialSortOrder,
       },
     };
   }
 
   handleUpdateParameters = (parameters) => {
-    this.setState({
+    this.setState((prevState) => ({
       parameters: {
-        ...this.state.parameters,
+        ...prevState.parameters,
         ...parameters,
       },
-    });
+    }));
   }
 
   filteredItems() {
@@ -74,8 +76,8 @@ class List extends Component {
 List.propTypes = {
   initialSortOrder: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-  filter: PropTypes.func.isRequired,
-  controls: PropTypes.any.isRequired,
+  filter: PropTypes.func,
+  controls: PropTypes.any,
   item: PropTypes.any.isRequired,
   sortableProperties: PropTypes.any,
   onDelete: PropTypes.func,
@@ -88,7 +90,6 @@ List.defaultProps = {
   sortableProperties: [],
   filter: (items) => items,
   onDelete: () => {},
-  initialSortOrder: {},
 };
 
 export default List;

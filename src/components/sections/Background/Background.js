@@ -13,11 +13,6 @@ import * as ArchitectFields from '../../Form/Fields';
 import withBackgroundChangeHandler from './withBackgroundChangeHandler';
 
 class Background extends PureComponent {
-  static propTypes = {
-    handleChooseBackgroundType: PropTypes.func.isRequired,
-    useImage: PropTypes.bool.isRequired,
-  };
-
   render() {
     const {
       handleChooseBackgroundType,
@@ -87,6 +82,11 @@ class Background extends PureComponent {
     );
   }
 }
+
+Background.propTypes = {
+  handleChooseBackgroundType: PropTypes.func.isRequired,
+  useImage: PropTypes.bool.isRequired,
+};
 
 export { Background };
 
