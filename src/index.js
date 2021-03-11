@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import initReactFastclick from 'react-fastclick';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './ducks/store';
@@ -14,7 +13,6 @@ import './styles/main.scss';
 
 initIPCListeners();
 initPreventFileDrop();
-initReactFastclick();
 
 const startApp = () => {
   ReactDOM.render(
