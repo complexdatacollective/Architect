@@ -19,6 +19,11 @@
     border-bottom-style: solid;
     border-bottom-color: transparent;
     transition: border-bottom-color var(--animation-easing) var(--animation-duration-standard);
+
+    blockquote {
+      border-left: 3px solid var(--color-platinum);
+      padding-left: 1.2rem;
+    }
   }
 
   &__button {
@@ -28,6 +33,10 @@
     transition: filter var(--animation-easing) var(--animation-duration-fast);
     filter: grayscale(100%);
     cursor: pointer;
+
+    img {
+      height: 1.75rem;
+    }
 
     &:hover {
       filter: none;
