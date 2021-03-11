@@ -21,12 +21,11 @@ const withQuickAddHandlers = withHandlers({
     quickAddEnabled,
     form,
     changeForm,
-  }) =>
-    () => {
-      setQuickAddEnabled(!quickAddEnabled);
-      changeForm(form, 'form', null);
-      changeForm(form, 'quickAdd', null);
-    },
+  }) => () => {
+    setQuickAddEnabled(!quickAddEnabled);
+    changeForm(form, 'form', null);
+    changeForm(form, 'quickAdd', null);
+  },
 });
 
 const withQuickAdd = compose(

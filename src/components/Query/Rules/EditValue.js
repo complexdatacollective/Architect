@@ -4,7 +4,9 @@ import React from 'react';
 import { withProps } from 'recompose';
 import PropTypes from 'prop-types';
 import DetachedField from '@components/DetachedField';
-import { Text, Toggle, Number, RadioGroup } from '@codaco/ui/lib/components/Fields';
+import {
+  Text, Toggle, Number, RadioGroup,
+} from '@codaco/ui/lib/components/Fields';
 
 const INPUT_TYPES = {
   string: Text,
@@ -19,8 +21,8 @@ const INPUT_TYPES = {
  */
 const withMappedFieldComponent = withProps(
   ({ variableType }) => ({
-    fieldComponent: variableType &&
-      INPUT_TYPES[variableType] ? INPUT_TYPES[variableType] : Text,
+    fieldComponent: variableType
+      && INPUT_TYPES[variableType] ? INPUT_TYPES[variableType] : Text,
   }),
 );
 

@@ -61,7 +61,7 @@ const Editor = ({
   ...rest
 }) => {
   const [showCodeView, setCodeView] = useState(false);
-  const toggleCodeView = useCallback(() => setCodeView(value => !value));
+  const toggleCodeView = useCallback(() => setCodeView((value) => !value));
 
   const hasOutstandingIssues = Object.keys(issues).length !== 0;
 
@@ -72,22 +72,22 @@ const Editor = ({
   }, [hasOutstandingIssues]);
 
   return (
-    <React.Fragment>
+    <>
       <FormCodeView toggleCodeView={toggleCodeView} form={form} show={showCodeView} />
       <Form onSubmit={handleSubmit}>
-        { typeof children === 'function' &&
-          children({ form, toggleCodeView, submitFailed, ...rest })
-        }
+        { typeof children === 'function'
+          && children({
+            form, toggleCodeView, submitFailed, ...rest,
+          })}
         { children && typeof children !== 'function' && children }
-        { !children &&
-          <Component form={form} submitFailed={submitFailed} {...rest} />
-        }
+        { !children
+          && <Component form={form} submitFailed={submitFailed} {...rest} />}
       </Form>
       <Issues
         issues={issues}
         show={isIssuesVisible}
       />
-    </React.Fragment>
+    </>
   );
 };
 

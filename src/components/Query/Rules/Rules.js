@@ -71,24 +71,32 @@ const Rules = ({
           size="small"
           color="sea-serpent"
           onClick={handleCreateAlterRule}
-        >Add alter rule</Button>
+        >
+          Add alter rule
+        </Button>
         <Button
           type="button"
           size="small"
           color="paradise-pink"
           onClick={handleCreateEdgeRule}
-        >Add edge rule</Button>
-        { type === 'query' &&
+        >
+          Add edge rule
+        </Button>
+        { type === 'query'
+          && (
           <Button
             type="button"
             size="small"
             color="neon-carrot"
             onClick={handleCreateEgoRule}
-          >Add ego rule</Button>
-        }
+          >
+            Add ego rule
+          </Button>
+          )}
       </div>
 
-      { rules.length > 1 &&
+      { rules.length > 1
+        && (
         <div className="rules-rules__join">
           <h2>Must match</h2>
           <DetachedField
@@ -101,7 +109,7 @@ const Rules = ({
             onChange={handleChangeJoin}
           />
         </div>
-      }
+        )}
 
     </div>
   );

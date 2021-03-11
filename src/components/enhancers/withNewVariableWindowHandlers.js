@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import { withState, withHandlers, mapProps, compose } from 'recompose';
+import {
+  withState, withHandlers, mapProps, compose,
+} from 'recompose';
 import { get } from 'lodash';
 import { normalizeKeyDown } from './withCreateVariableHandler';
 
@@ -20,21 +22,18 @@ const newVariableInitialState = {
   variableOptions: {},
 };
 
-const parseVariableName = variableName =>
-  (typeof variableName === 'string' ? variableName : '');
+const parseVariableName = (variableName) => (typeof variableName === 'string' ? variableName : '');
 
 const newVariablePropertiesState = withState(
   'newVariableProperties', 'setNewVariableProperties', newVariableInitialState,
 );
 
 const newVariableHandlers = withHandlers({
-  openNewVariableWindow: ({ setNewVariableProperties }) =>
-    (variableName, variableOptions = {}) => setNewVariableProperties({
-      variableName: parseVariableName(variableName),
-      variableOptions,
-    }),
-  closeNewVariableWindow: ({ setNewVariableProperties }) =>
-    () => setNewVariableProperties(newVariableInitialState),
+  openNewVariableWindow: ({ setNewVariableProperties }) => (variableName, variableOptions = {}) => setNewVariableProperties({
+    variableName: parseVariableName(variableName),
+    variableOptions,
+  }),
+  closeNewVariableWindow: ({ setNewVariableProperties }) => () => setNewVariableProperties(newVariableInitialState),
   normalizeKeyDown: () => normalizeKeyDown,
 });
 

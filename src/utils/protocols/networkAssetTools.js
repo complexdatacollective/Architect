@@ -10,39 +10,35 @@ import { getVariableNamesFromNetwork } from '@app/protocol-validation/validation
 * Generate a switching function that takes a filepath as an argument
 * and returns match from configuration object.
 */
-const withExtensionSwitch = (configuration, fallback = () => Promise.resolve()) =>
-  (filePath) => {
-    const extension = path.extname(filePath).substr(1); // e.g. 'csv'
+const withExtensionSwitch = (configuration, fallback = () => Promise.resolve()) => (filePath) => {
+  const extension = path.extname(filePath).substr(1); // e.g. 'csv'
 
-    return get(configuration, [extension], fallback);
-  };
+  return get(configuration, [extension], fallback);
+};
 
+const readJsonVariables = (data) => new Promise((resolve, reject) => {
+  try {
+    const network = JSON.parse(data);
 
-const readJsonVariables = data =>
-  new Promise((resolve, reject) => {
-    try {
-      const network = JSON.parse(data);
+    const variableNames = getVariableNamesFromNetwork(network);
 
-      const variableNames = getVariableNamesFromNetwork(network);
+    return resolve(variableNames);
+  } catch (e) {
+    return reject(e);
+  }
+});
 
-      return resolve(variableNames);
-    } catch (e) {
-      return reject(e);
-    }
-  });
+const readCsvVariables = (data) => new Promise((resolve, reject) => {
+  try {
+    csvParse(data, { trim: true }, (err, tableData) => {
+      const firstRow = first(tableData);
 
-const readCsvVariables = data =>
-  new Promise((resolve, reject) => {
-    try {
-      csvParse(data, { trim: true }, (err, tableData) => {
-        const firstRow = first(tableData);
-
-        return resolve(firstRow);
-      });
-    } catch (e) {
-      reject(e);
-    }
-  });
+      return resolve(firstRow);
+    });
+  } catch (e) {
+    reject(e);
+  }
+});
 
 /**
 * Get validator based on filePath, if no validator available it resolves by default

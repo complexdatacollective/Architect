@@ -27,11 +27,10 @@ const newVariableHandlers = withHandlers({
     type,
     createVariable,
     onComplete,
-  }) =>
-    (configuration) => {
-      const { variable } = createVariable(entity, type, configuration);
-      onComplete(variable);
-    },
+  }) => (configuration) => {
+    const { variable } = createVariable(entity, type, configuration);
+    onComplete(variable);
+  },
 });
 
 const withNewVariableHandler = compose(

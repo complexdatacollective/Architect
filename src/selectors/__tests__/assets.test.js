@@ -35,7 +35,7 @@ describe('assets', () => {
       };
 
       const expectedOptions = ['foo', 'bazz', 'fizz']
-        .map(attribute => ({ label: attribute, value: attribute }));
+        .map((attribute) => ({ label: attribute, value: attribute }));
 
       const getNetworkAssetVariables = assets.makeGetNetworkAssetVariables(mockState);
 

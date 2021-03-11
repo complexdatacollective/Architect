@@ -11,18 +11,14 @@ const dialog = {
 
 const remote = {
   dialog: {
-    showSaveDialog: jest.fn(() =>
-      Promise.resolve({
-        canceled: false,
-        filePath: 'filename.canvas',
-      }),
-    ),
-    showOpenDialog: jest.fn(() =>
-      Promise.resolve({
-        canceled: false,
-        filePaths: ['/dev/null/fake/explore/path'],
-      }),
-    ),
+    showSaveDialog: jest.fn(() => Promise.resolve({
+      canceled: false,
+      filePath: 'filename.canvas',
+    })),
+    showOpenDialog: jest.fn(() => Promise.resolve({
+      canceled: false,
+      filePaths: ['/dev/null/fake/explore/path'],
+    })),
   },
   app: {
     getVersion: jest.fn(() => '0.0.0'),

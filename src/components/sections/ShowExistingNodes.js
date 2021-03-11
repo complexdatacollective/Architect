@@ -7,7 +7,7 @@ import { getFieldId } from '../../utils/issues';
 import withSubject from '../enhancers/withSubject';
 import withDisabledSubjectRequired from '../enhancers/withDisabledSubjectRequired';
 
-const ShowExistingNodes = props => (
+const ShowExistingNodes = (props) => (
   <Section {...props}>
     <h3 id={getFieldId('showExistingNodes')}>Show existing nodes</h3>
     <p>

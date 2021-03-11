@@ -27,46 +27,45 @@ const getOperatorsForType = (type) => {
   return operatorsAsOptions.filter(({ value }) => operatorsForType.has(value));
 };
 
-const withOptions = entityCategory =>
-  withProps((props) => {
-    const entityId = get(props.rule, 'options.type', null);
-    const variableId = get(props.rule, 'options.attribute', null);
+const withOptions = (entityCategory) => withProps((props) => {
+  const entityId = get(props.rule, 'options.type', null);
+  const variableId = get(props.rule, 'options.attribute', null);
 
-    const variablesRoot = entityCategory === 'ego' ?
-      ['ego', 'variables'] :
-      [entityCategory, entityId, 'variables'];
+  const variablesRoot = entityCategory === 'ego'
+    ? ['ego', 'variables']
+    : [entityCategory, entityId, 'variables'];
 
-    const entityTypes = get(props.codebook, entityCategory, {});
+  const entityTypes = get(props.codebook, entityCategory, {});
 
-    const typeOptions = map(entityTypes, (entity, id) => ({
-      value: id,
-      label: entity.name,
-      color: entity.color,
-    }));
+  const typeOptions = map(entityTypes, (entity, id) => ({
+    value: id,
+    label: entity.name,
+    color: entity.color,
+  }));
 
-    const variablesAsOptions = getVariablesAsOptions(get(props.codebook, variablesRoot, {}));
+  const variablesAsOptions = getVariablesAsOptions(get(props.codebook, variablesRoot, {}));
 
-    const variableType = get(
-      props.codebook,
-      [...variablesRoot, variableId, 'type'],
-      null,
-    );
+  const variableType = get(
+    props.codebook,
+    [...variablesRoot, variableId, 'type'],
+    null,
+  );
 
-    const variableOptions = get(
-      props.codebook,
-      [...variablesRoot, variableId, 'options'],
-      null,
-    );
+  const variableOptions = get(
+    props.codebook,
+    [...variablesRoot, variableId, 'options'],
+    null,
+  );
 
-    const operatorOptions = getOperatorsForType(variableType);
+  const operatorOptions = getOperatorsForType(variableType);
 
-    return {
-      typeOptions,
-      variablesAsOptions,
-      variableOptions,
-      operatorOptions,
-      variableType,
-    };
-  });
+  return {
+    typeOptions,
+    variablesAsOptions,
+    variableOptions,
+    operatorOptions,
+    variableType,
+  };
+});
 
 export default withOptions;

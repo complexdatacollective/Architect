@@ -9,6 +9,6 @@ const mockProps = {
 
 describe('<Zoom />', () => {
   it('can render', () => {
-    shallow(<Zoom {...mockProps} >Foo</Zoom>);
+    shallow(<Zoom {...mockProps}>Foo</Zoom>);
   });
 });

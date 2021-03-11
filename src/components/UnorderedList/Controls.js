@@ -42,7 +42,8 @@ class Controls extends Component {
             }}
           />
         </div>
-        { this.props.sortableProperties.length > 0 &&
+        { this.props.sortableProperties.length > 0
+          && (
           <div className="list-controls__section">
             <div className="list-controls__section-name">
               Sort by:
@@ -53,7 +54,7 @@ class Controls extends Component {
               onChange={this.handleUpdateSortOrder}
             />
           </div>
-        }
+          )}
       </div>
     );
   }

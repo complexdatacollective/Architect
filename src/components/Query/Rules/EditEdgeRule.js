@@ -41,7 +41,14 @@ const EditEdgeRule = ({
         <h1>Construct an Edge Rule</h1>
         <p>
           For help with constructing rules, see our documentation articles
-          on <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/skip-logic/">skip logic</ExternalLink> and <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/filtering/">network filtering</ExternalLink>.
+          on
+          {' '}
+          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/skip-logic/">skip logic</ExternalLink>
+          {' '}
+          and
+          {' '}
+          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/filtering/">network filtering</ExternalLink>
+          .
         </p>
         <motion.div
           className="rules-edit-rule__row"
@@ -66,7 +73,8 @@ const EditEdgeRule = ({
             validation={{ required: true }}
           />
         </motion.div>
-        { optionsWithDefaults.type &&
+        { optionsWithDefaults.type
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -86,7 +94,7 @@ const EditEdgeRule = ({
               validation={{ required: true }}
             />
           </motion.div>
-        }
+          )}
       </motion.div>
     </AnimatePresence>
   );

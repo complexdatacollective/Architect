@@ -5,5 +5,4 @@ import locales from '../locales';
 /*
  * get content from locales, currently hard-coded to en-US.
  */
-export const getContent = (state, contentId) =>
-  get(locales, [state.locale, contentId], '');
+export const getContent = (state, contentId) => get(locales, [state.locale, contentId], '');

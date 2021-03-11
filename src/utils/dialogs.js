@@ -29,7 +29,6 @@ const createDialogOptions = {
   filters: [{ name: 'Protocols', extensions: ['netcanvas'] }],
 };
 
-
 /**
  * Shows a open dialog and resolves to (cancelled, filepath), which mirrors later
  * versions of electron.
@@ -73,4 +72,3 @@ export {
   openDialog,
   createDialogOptions,
 };
-

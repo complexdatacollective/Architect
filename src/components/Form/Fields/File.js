@@ -36,7 +36,7 @@ class FileInput extends PureComponent {
     onChange: () => {},
     onCloseBrowser: () => {},
     type: null,
-    children: value => value,
+    children: (value) => value,
   };
 
   componentWillMount() {
@@ -89,10 +89,14 @@ class FileInput extends PureComponent {
 
     return (
       <div className={fieldClasses}>
-        { label &&
-          <h4 className="form-fields-file__label">{label}</h4>
-        }
-        {invalid && touched && <div className="form-fields-file__error"><Icon name="warning" />{error}</div>}
+        { label
+          && <h4 className="form-fields-file__label">{label}</h4>}
+        {invalid && touched && (
+        <div className="form-fields-file__error">
+          <Icon name="warning" />
+          {error}
+        </div>
+        )}
         <div className="form-fields-file__preview">
           {this.props.children(value)}
         </div>

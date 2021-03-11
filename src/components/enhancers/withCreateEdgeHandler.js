@@ -11,15 +11,14 @@ const mapDispatchToProps = {
 };
 
 const createEdgeHandler = {
-  handleCreateEdge: ({ changeField, createEdge, form }) =>
-    (name) => {
-      const { type } = createEdge({ name });
+  handleCreateEdge: ({ changeField, createEdge, form }) => (name) => {
+    const { type } = createEdge({ name });
 
-      // Update select field to newly created edge
-      changeField(form, 'edges.create', type);
+    // Update select field to newly created edge
+    changeField(form, 'edges.create', type);
 
-      return type;
-    },
+    return type;
+  },
 };
 
 /**
@@ -30,11 +29,9 @@ const createEdgeHandler = {
   *   <div handler={() => handleCreateEdge(name)} />
   * )
   */
-const withCreateEdgeHandler =
-  compose(
-    connect(null, mapDispatchToProps),
-    withHandlers(createEdgeHandler),
-  );
+const withCreateEdgeHandler = compose(
+  connect(null, mapDispatchToProps),
+  withHandlers(createEdgeHandler),
+);
 
 export default withCreateEdgeHandler;
-

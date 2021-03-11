@@ -5,8 +5,7 @@ import { compose, defaultProps } from 'recompose';
 import { Zoom } from '../../behaviours';
 import timelineImages from '../../images/timeline';
 
-const getTimelineImage = type =>
-  get(timelineImages, type);
+const getTimelineImage = (type) => get(timelineImages, type);
 
 const Interface = ({
   type,

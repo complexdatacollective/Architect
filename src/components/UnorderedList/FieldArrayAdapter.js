@@ -18,8 +18,7 @@ import UnorderedList from './UnorderedList';
  */
 
 const fieldHandlers = withHandlers({
-  handleDelete: ({ fields }) => index =>
-    fields.remove(index),
+  handleDelete: ({ fields }) => (index) => fields.remove(index),
 });
 
 const FieldArrayAdapter = ({

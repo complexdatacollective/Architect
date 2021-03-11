@@ -20,10 +20,10 @@ const useVariablesFromExternalData = (dataSource, asOptions = false) => {
 
     getNetworkAssetVariables(dataSource, asOptions)
       .then((variables) => {
-        setState(s => ({ ...s, isVariablesLoading: false, variables }));
+        setState((s) => ({ ...s, isVariablesLoading: false, variables }));
       })
       .catch((e) => {
-        setState(s => ({
+        setState((s) => ({
           ...s,
           isVariablesLoading: false,
           variablesError: e.toString(),

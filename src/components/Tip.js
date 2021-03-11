@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
 
-
 const Tip = ({ type, icon, children }) => {
   const classes = cx('tip', `tip__${type}`);
 
   return (
     <div className={classes}>
-      { icon &&
-        <Icon name={type} />
-      }
+      { icon
+        && <Icon name={type} />}
       {children}
     </div>
   );

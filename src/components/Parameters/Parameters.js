@@ -13,8 +13,7 @@ const definitions = [
 
 const getComponent = (options) => {
   const [component] = definitions.find(
-    ([, pattern]) =>
-      isMatch(options, pattern),
+    ([, pattern]) => isMatch(options, pattern),
   );
 
   return component;

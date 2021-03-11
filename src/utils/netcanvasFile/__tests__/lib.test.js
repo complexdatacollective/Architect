@@ -130,7 +130,7 @@ describe('netcanvasFile/lib', () => {
     });
 
     it('resolves to pruned version of protocol', async () => {
-      pruneProtocol.mockImplementation(protocol => ({ ...protocol, pruned: true }));
+      pruneProtocol.mockImplementation((protocol) => ({ ...protocol, pruned: true }));
 
       await expect(
         writeProtocol('/dev/null/working/path', {}),
@@ -140,17 +140,15 @@ describe('netcanvasFile/lib', () => {
 
   describe('readProtocol(protocolPath)', () => {
     it('Rejects with a human readable error when protocol cannot be parsed', async () => {
-      fse.readJson.mockImplementation(() =>
-        new Promise((resolve, reject) => {
-          try {
-            JSON.parse('malformatted json');
-          } catch (e) {
-            return reject(e);
-          }
+      fse.readJson.mockImplementation(() => new Promise((resolve, reject) => {
+        try {
+          JSON.parse('malformatted json');
+        } catch (e) {
+          return reject(e);
+        }
 
-          return resolve();
-        }),
-      );
+        return resolve();
+      }));
 
       await expect(
         readProtocol('/var/null/'),
@@ -165,7 +163,6 @@ describe('netcanvasFile/lib', () => {
       ).resolves.toEqual({});
     });
   });
-
 
   describe('deployNetcanvas(exportPath, destinationPath)', () => {
     const netcanvasFilePath = '/dev/null/get/electron/path/architect/exports/pendingExport';
@@ -222,7 +219,7 @@ describe('netcanvasFile/lib', () => {
   describe('createNetcanvasExport(workingPath, protocol)', () => {
     it('resolves to a uuid path in temp', async () => {
       fse.mkdirp.mockResolvedValue();
-      pruneProtocol.mockImplementation(protocol => Promise.resolve(protocol));
+      pruneProtocol.mockImplementation((protocol) => Promise.resolve(protocol));
       fse.writeJson.mockResolvedValue();
       pruneProtocolAssets.mockResolvedValueOnce();
       archive.mockResolvedValueOnce();

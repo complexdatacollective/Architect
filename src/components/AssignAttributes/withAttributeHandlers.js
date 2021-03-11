@@ -5,7 +5,9 @@ import { withHandlers, compose } from 'recompose';
 import { getVariablesForSubject } from '../../selectors/codebook';
 
 const store = connect(
-  (state, { entity, type, form, field }) => {
+  (state, {
+    entity, type, form, field,
+  }) => {
     const variable = formValueSelector(form)(state, `${field}.variable`);
     const codebookVariables = getVariablesForSubject(state, { entity, type });
     const variableType = get(codebookVariables, [variable, 'type']);
@@ -20,8 +22,7 @@ const store = connect(
 );
 
 const handlers = withHandlers({
-  handleDelete: ({ onDelete, index }) =>
-    () => onDelete(index),
+  handleDelete: ({ onDelete, index }) => () => onDelete(index),
 });
 
 export default compose(

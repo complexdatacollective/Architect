@@ -18,8 +18,7 @@ import withVariableHandlers from './withVariableHandlers';
 const useToggle = (initialState) => {
   const [value, setValue] = useState(initialState);
 
-  const toggleValue = () =>
-    setValue(!value);
+  const toggleValue = () => setValue(!value);
 
   return [value, toggleValue, setValue];
 };
@@ -43,8 +42,7 @@ const PromptFields = ({
     initialValues: { name: null, type: null },
   };
 
-  const handleCreatedNewVariable = (id, { field }) =>
-    changeForm(form, field, id);
+  const handleCreatedNewVariable = (id, { field }) => changeForm(form, field, id);
 
   const handleToggleOtherVariable = () => {
     if (otherVariableToggle) {
@@ -61,8 +59,7 @@ const PromptFields = ({
     handleCreatedNewVariable,
   );
 
-  const handleNewVariable = name =>
-    openNewVariableWindow({ initialValues: { name, type: 'categorical' } }, { field: 'variable' });
+  const handleNewVariable = (name) => openNewVariableWindow({ initialValues: { name, type: 'categorical' } }, { field: 'variable' });
 
   const categoricalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'categorical');
@@ -73,8 +70,8 @@ const PromptFields = ({
   const sortMaxItems = getSortOrderOptionGetter(variableOptions)('property').length;
 
   const totalOptionsLength = (
-    optionsForVariableDraft && optionsForVariableDraft.length +
-    (!!otherVariableToggle && 1)
+    optionsForVariableDraft && optionsForVariableDraft.length
+    + (!!otherVariableToggle && 1)
   );
 
   const showVariableOptionsTip = totalOptionsLength > 8;
@@ -114,29 +111,43 @@ const PromptFields = ({
           validation={{ required: true }}
         />
       </Row>
-      { variable &&
+      { variable
+        && (
         <Row>
           <h3 id={getFieldId('options')}>Variable Options</h3>
-          <p>Create <strong>up to 8</strong> options for this variable.</p>
-          { showVariableOptionsTip &&
+          <p>
+            Create
+            <strong>up to 8</strong>
+            {' '}
+            options for this variable.
+          </p>
+          { showVariableOptionsTip
+            && (
             <Tip type="error">
               <p>
-                The categorical bin interface is designed to use <strong>up to 8 option
-                  values</strong> (
+                The categorical bin interface is designed to use
+                {' '}
+                <strong>
+                  up to 8 option
+                  values
+                </strong>
+                {' '}
+                (
                 including an &quot;other&quot; variable). Using more will create
                 a sub-optimal experience for participants, and might reduce data quality.
                 Consider grouping your variable options and capturing further detail with
                 follow-up questions.
               </p>
             </Tip>
-          }
+            )}
           <Options
             name="variableOptions"
             label="Options"
           />
         </Row>
-      }
-      { variable &&
+        )}
+      { variable
+        && (
         <Row>
           <h3 id={getFieldId('toggleOtherVariable')}>Follow-up &quot;Other&quot; Option</h3>
           <p>
@@ -153,8 +164,9 @@ const PromptFields = ({
             onChange={handleToggleOtherVariable}
           />
         </Row>
-      }
-      { otherVariableToggle &&
+        )}
+      { otherVariableToggle
+        && (
         <Section>
           <Row>
             <ValidatedField
@@ -182,14 +194,17 @@ const PromptFields = ({
               label="Variable"
               type={type}
               options={otherVariableOptions}
-              onCreateOption={value => onCreateOtherVariable(value, 'otherVariable')}
+              onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
               validation={{ required: true }}
             />
           </Row>
         </Section>
-      }
+        )}
       <Row>
-        <h3>Bucket Sort Order <small>(optional)</small></h3>
+        <h3>
+          Bucket Sort Order
+          <small>(optional)</small>
+        </h3>
         <p>
           Nodes are stacked in the bucket before they are placed by the participant. You may
           optionally configure a list of rules to determine how nodes are sorted in the bucket
@@ -202,7 +217,7 @@ const PromptFields = ({
           </p>
         </Tip>
         <MultiSelect
-          name={'bucketSortOrder'}
+          name="bucketSortOrder"
           properties={[
             { fieldName: 'property' },
             { fieldName: 'direction' },
@@ -212,13 +227,16 @@ const PromptFields = ({
         />
       </Row>
       <Row>
-        <h3>Bin Sort Order <small>(optional)</small></h3>
+        <h3>
+          Bin Sort Order
+          <small>(optional)</small>
+        </h3>
         <p>
           You may also configure one or more sort rules that determine the order that nodes
           are listed after they have been placed into a bin.
         </p>
         <MultiSelect
-          name={'binSortOrder'}
+          name="binSortOrder"
           properties={[
             { fieldName: 'property' },
             { fieldName: 'direction' },

@@ -5,7 +5,7 @@ import { range } from 'lodash';
 import { fieldPropTypes } from 'redux-form';
 import Icon from '@codaco/ui/lib/components/Icon';
 
-const asColorOption = name => ({
+const asColorOption = (name) => ({
   label: name,
   value: name,
 });
@@ -24,10 +24,10 @@ class ColorPicker extends PureComponent {
 
   get colors() {
     if (this.props.palette) {
-      const paletteRange = this.props.paletteRange;
+      const { paletteRange } = this.props;
 
       return range(1, paletteRange)
-        .map(index => asColorOption(`${this.props.palette}-${index}`));
+        .map((index) => asColorOption(`${this.props.palette}-${index}`));
     }
 
     return this.props.options;
@@ -72,17 +72,20 @@ class ColorPicker extends PureComponent {
     return (
       <div className="form-field-container">
         <div className={pickerStyles}>
-          { label &&
-            <div className="form-fields-color-picker__label">{label}</div>
-          }
+          { label
+            && <div className="form-fields-color-picker__label">{label}</div>}
           <div className="form-fields-color-picker__edit">
             <div className="form-fields-color-picker__colors">
               {colors}
             </div>
           </div>
-          {showError &&
-            <div className="form-fields-color-picker__error"><Icon name="warning" />{error}</div>
-          }
+          {showError
+            && (
+            <div className="form-fields-color-picker__error">
+              <Icon name="warning" />
+              {error}
+            </div>
+            )}
         </div>
       </div>
     );

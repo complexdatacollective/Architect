@@ -25,23 +25,22 @@ const getFriendlyError = (e, friendlyCode) => {
   return e;
 };
 
-const handleError = defaultError =>
-  (e) => {
-    log.error(e);
+const handleError = (defaultError) => (e) => {
+  log.error(e);
 
-    if (!e) {
-      throw getFriendlyError(new Error('No error to handle'), defaultError);
-    }
+  if (!e) {
+    throw getFriendlyError(new Error('No error to handle'), defaultError);
+  }
 
-    switch (e.code) {
-      case 'EACCES':
-        throw getFriendlyError(e, errors.IncorrectPermissions);
-      case 'ENOENT':
-        throw getFriendlyError(e, errors.NotFound);
-      default:
-        throw getFriendlyError(e, defaultError);
-    }
-  };
+  switch (e.code) {
+    case 'EACCES':
+      throw getFriendlyError(e, errors.IncorrectPermissions);
+    case 'ENOENT':
+      throw getFriendlyError(e, errors.NotFound);
+    default:
+      throw getFriendlyError(e, defaultError);
+  }
+};
 
 export {
   handleError,

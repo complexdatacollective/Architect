@@ -16,7 +16,7 @@ const getStageIndex = (protocol, stageMeta) => {
 };
 
 const getDraftStages = (protocol, stageMeta, draftStage) => {
-  const stages = protocol.stages;
+  const { stages } = protocol;
 
   if (stageMeta.id) {
     return stages.map((stage) => {
@@ -41,7 +41,7 @@ const PREVIEW_DRAFT = 'PREVIEW/PREVIEW_DRAFT';
 const CLOSE_PREVIEW = 'PREVIEW/CLOSE_PREVIEW';
 const CLEAR_PREVIEW = 'PREVIEW/CLEAR_PREVIEW';
 
-const zoom = zoomFactor => ({
+const zoom = (zoomFactor) => ({
   type: SET_ZOOM,
   zoom: zoomFactor,
 });
@@ -50,30 +50,27 @@ const refresh = () => ({
   type: REFRESH_PREVIEW,
 });
 
-const closePreview = () =>
-  (dispatch) => {
-    dispatch({ type: CLOSE_PREVIEW });
-    previewDriver.close();
-  };
+const closePreview = () => (dispatch) => {
+  dispatch({ type: CLOSE_PREVIEW });
+  previewDriver.close();
+};
 
-const clearPreview = () =>
-  (dispatch) => {
-    dispatch({
-      type: CLEAR_PREVIEW,
-    });
+const clearPreview = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_PREVIEW,
+  });
 
-    previewDriver.clear();
-  };
+  previewDriver.clear();
+};
 
-const previewDraft = (draft, stageIndex) =>
-  (dispatch, getState) => {
-    const state = getState();
+const previewDraft = (draft, stageIndex) => (dispatch, getState) => {
+  const state = getState();
 
-    const workingPath = getWorkingPath(state);
+  const workingPath = getWorkingPath(state);
 
-    const draftProtocol = {
-      ...draft,
-      /**
+  const draftProtocol = {
+    ...draft,
+    /**
        * This allows assets to work correctly in the Network Canvas preview.
        *
        * Network canvas uses relative paths for the assets:// protocol, whereas
@@ -81,30 +78,29 @@ const previewDraft = (draft, stageIndex) =>
        * `assets://${protocolUID}/assets/${asset}` this allows us to load files
        * from the correct location.
        */
-      uid: workingPath,
-    };
-
-    dispatch({
-      type: PREVIEW_DRAFT,
-      draft: draftProtocol,
-      stageIndex,
-    });
-
-    previewDriver.preview(draftProtocol, stageIndex);
+    uid: workingPath,
   };
 
-const previewStageFromForm = (stageMeta, formName) =>
-  (dispatch, getState) => {
-    const state = getState();
-    const protocol = getProtocol(state);
+  dispatch({
+    type: PREVIEW_DRAFT,
+    draft: draftProtocol,
+    stageIndex,
+  });
 
-    const draftStage = getFormValues(formName)(state);
-    const stageIndex = getStageIndex(protocol, stageMeta);
-    const draftStages = getDraftStages(protocol, stageMeta, draftStage);
-    const draftProtocol = { ...protocol, stages: draftStages };
+  previewDriver.preview(draftProtocol, stageIndex);
+};
 
-    dispatch(previewDraft(draftProtocol, stageIndex));
-  };
+const previewStageFromForm = (stageMeta, formName) => (dispatch, getState) => {
+  const state = getState();
+  const protocol = getProtocol(state);
+
+  const draftStage = getFormValues(formName)(state);
+  const stageIndex = getStageIndex(protocol, stageMeta);
+  const draftStages = getDraftStages(protocol, stageMeta, draftStage);
+  const draftProtocol = { ...protocol, stages: draftStages };
+
+  dispatch(previewDraft(draftProtocol, stageIndex));
+};
 
 const actionTypes = {
   PREVIEW_DRAFT,

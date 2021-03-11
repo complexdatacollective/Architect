@@ -52,15 +52,13 @@ const MockForm = reduxForm({
   ),
 );
 
-
-const getSubject = (node, store, { form }) =>
-  mount((
-    <Provider store={store}>
-      <MockForm {...form}>
-        {node}
-      </MockForm>
-    </Provider>
-  ));
+const getSubject = (node, store, { form }) => mount((
+  <Provider store={store}>
+    <MockForm {...form}>
+      {node}
+    </MockForm>
+  </Provider>
+));
 
 // eslint-disable-next-line import/prefer-default-export
 export const testPromptFields = (PromptFieldsComponent, name = '') => {

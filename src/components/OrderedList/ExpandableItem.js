@@ -65,13 +65,14 @@ class ExpandableItem extends Component {
     return (
       <div className={componentClasses}>
         <div className="list-expandable-item__preview">
-          { sortable &&
+          { sortable
+            && (
             <div
               className="list-expandable-item__control list-expandable-item__control--left"
             >
               <Handle />
             </div>
-          }
+            )}
           <div className="list-expandable-item__preview-content">
             {preview}
           </div>

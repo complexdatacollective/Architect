@@ -42,7 +42,7 @@ export default function reducer(state = initialState, action = {}) {
     case MOVE_STAGE:
       return arrayMove(state, action.oldIndex, action.newIndex);
     case DELETE_STAGE:
-      return state.filter(stage => (stage.id !== action.id));
+      return state.filter((stage) => (stage.id !== action.id));
     case DELETE_PROMPT:
       return compact(
         state.map((stage) => {
@@ -83,7 +83,7 @@ const updateStage = (stageId, stage, overwrite = false) => ({
   overwrite,
 });
 
-const deleteStage = stageId => ({
+const deleteStage = (stageId) => ({
   type: DELETE_STAGE,
   id: stageId,
 });
@@ -95,13 +95,12 @@ const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
   deleteEmptyStage,
 });
 
-const createStageThunk = (options, index) =>
-  (dispatch) => {
-    const stageId = uuid();
-    const stage = { ...initialStage, ...options, id: stageId };
-    dispatch(createStage(stage, index));
-    return stage;
-  };
+const createStageThunk = (options, index) => (dispatch) => {
+  const stageId = uuid();
+  const stage = { ...initialStage, ...options, id: stageId };
+  dispatch(createStage(stage, index));
+  return stage;
+};
 
 const actionCreators = {
   createStage: createStageThunk,

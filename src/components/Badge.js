@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Badge = ({ color, children }) => {
-  const style = color ?
-    { backgroundColor: color } :
-    {};
+  const style = color
+    ? { backgroundColor: color }
+    : {};
 
   return (
     <div className="badge" style={style}>

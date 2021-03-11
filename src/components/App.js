@@ -31,10 +31,9 @@ const App = () => {
   useUpdater('https://api.github.com/repos/complexdatacollective/Architect/releases/latest', 2500);
 
   return (
-    <React.Fragment>
-      {isMacOS() &&
-        <div className="electron-titlebar" />
-      }
+    <>
+      {isMacOS()
+        && <div className="electron-titlebar" />}
       <motion.div
         className={appClasses}
         variants={appVariants}
@@ -47,7 +46,7 @@ const App = () => {
       </motion.div>
       <DialogManager />
       <ToastManager />
-    </React.Fragment>
+    </>
   );
 };
 

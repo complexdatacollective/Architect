@@ -48,7 +48,8 @@ class Asset extends Component {
           <PreviewComponent id={id} />
         </div>
 
-        { onDelete &&
+        { onDelete
+          && (
           <div
             className="asset-browser-asset__delete"
             onClick={this.handleDelete}
@@ -56,7 +57,7 @@ class Asset extends Component {
           >
             <Icon name="delete" />
           </div>
-        }
+          )}
       </div>
     );
   }

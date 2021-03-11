@@ -20,27 +20,26 @@ export const normalizeKeyDown = (event) => {
 };
 
 const createVariableHandler = {
-  handleCreateVariable: ({ changeField, createVariable, type, entity, form }) =>
-    (variableName, variableType, field) => {
-      const withType = variableType ? { type: variableType } : {};
+  handleCreateVariable: ({
+    changeField, createVariable, type, entity, form,
+  }) => (variableName, variableType, field) => {
+    const withType = variableType ? { type: variableType } : {};
 
-      const configuration = {
-        name: variableName,
-        ...withType,
-      };
+    const configuration = {
+      name: variableName,
+      ...withType,
+    };
 
-      const { variable } = createVariable(entity, type, configuration);
+    const { variable } = createVariable(entity, type, configuration);
 
-      // If we supplied a field, update it with the result of the variable creation
-      if (field) {
-        changeField(form, field, variable);
-      }
+    // If we supplied a field, update it with the result of the variable creation
+    if (field) {
+      changeField(form, field, variable);
+    }
 
-      return variable;
-    },
-  handleDeleteVariable: ({ deleteVariable, type, entity }) =>
-    variableId =>
-      deleteVariable(entity, type, variableId),
+    return variable;
+  },
+  handleDeleteVariable: ({ deleteVariable, type, entity }) => (variableId) => deleteVariable(entity, type, variableId),
   normalizeKeyDown: () => normalizeKeyDown,
 };
 
@@ -52,11 +51,9 @@ const createVariableHandler = {
   *   <div handler={() => handleCreateVariable(value, type)} />
   * )
   */
-const withCreateVariableHandler =
-  compose(
-    connect(null, mapDispatchToProps),
-    withHandlers(createVariableHandler),
-  );
+const withCreateVariableHandler = compose(
+  connect(null, mapDispatchToProps),
+  withHandlers(createVariableHandler),
+);
 
 export default withCreateVariableHandler;
-

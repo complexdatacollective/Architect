@@ -21,7 +21,11 @@ class AppErrorBoundary extends Component {
           <div className="error__layout">
             <h1 className="error__title">Something went wrong.</h1>
             <div className="error__message">
-              <p>The following &quot;{error.message}&quot; error occurred:</p>
+              <p>
+                The following &quot;
+                {error.message}
+                &quot; error occurred:
+              </p>
             </div>
             <pre className="error__stack"><code>{error.stack}</code></pre>
           </div>

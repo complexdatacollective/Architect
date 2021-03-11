@@ -67,10 +67,8 @@ describe('netcanvasFile/netcanvasFile', () => {
     revertNetcanvas.mockImplementation(({ savePath }) => Promise.resolve(savePath));
     commitNetcanvas.mockImplementation(({ savePath }) => Promise.resolve(savePath));
     readProtocol.mockResolvedValue(mockProtocol);
-    createNetcanvasExport.mockImplementation(() =>
-      Promise.resolve('/dev/null/export/working/path'),
-    );
-    importNetcanvas.mockImplementation(netcanvasPath => Promise.resolve(netcanvasPath));
+    createNetcanvasExport.mockImplementation(() => Promise.resolve('/dev/null/export/working/path'));
+    importNetcanvas.mockImplementation((netcanvasPath) => Promise.resolve(netcanvasPath));
     fse.mkdirp.mockResolvedValue();
   });
 

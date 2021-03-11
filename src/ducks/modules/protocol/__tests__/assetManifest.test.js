@@ -15,19 +15,16 @@ const mockState = {
 
 const log = jest.fn();
 
-const logger = () =>
-  next =>
-    (action) => {
-      log(action);
-      return next(action);
-    };
+const logger = () => (next) => (action) => {
+  log(action);
+  return next(action);
+};
 
-const getStore = () =>
-  createStore(
-    state => state,
-    mockState,
-    applyMiddleware(thunk, logger),
-  );
+const getStore = () => createStore(
+  (state) => state,
+  mockState,
+  applyMiddleware(thunk, logger),
+);
 
 describe('protocol/assetManifest', () => {
   beforeEach(() => {
@@ -57,8 +54,7 @@ describe('protocol/assetManifest', () => {
 
     it('when importAsset throws an error it fires failed action', () => {
       importAsset.mockImplementation(
-        () =>
-          new Promise(() => { throw new Error(); }),
+        () => new Promise(() => { throw new Error(); }),
       );
 
       const store = getStore();

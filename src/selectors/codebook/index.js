@@ -5,11 +5,9 @@ import { getCodebook } from '../protocol';
 import { asOptions } from '../utils';
 import { makeOptionsWithIsUsed } from './isUsed';
 
-const getNodeTypes = state =>
-  get(getCodebook(state), 'node', {});
+const getNodeTypes = (state) => get(getCodebook(state), 'node', {});
 
-const getEdgeTypes = state =>
-  get(getCodebook(state), 'edge', {});
+const getEdgeTypes = (state) => get(getCodebook(state), 'edge', {});
 
 const getType = (state, subject) => {
   if (!subject) { return {}; }
@@ -26,8 +24,7 @@ const getType = (state, subject) => {
  * @param {object} state redux state
  * @param {object} subject subject object in format `{ entity, type }`
  */
-const getVariablesForSubject = (state, subject) =>
-  get(getType(state, subject), 'variables', {});
+const getVariablesForSubject = (state, subject) => get(getType(state, subject), 'variables', {});
 
 /**
  * Given `subject` return a list of options (`{ label, value, ...}`)

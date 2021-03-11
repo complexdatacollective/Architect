@@ -24,18 +24,15 @@ const mapDispatchToProps = {
 };
 
 const variableHandlers = withHandlers({
-  handleCreateLayoutVariable: ({ createVariable, entity, type }) =>
-    (name) => {
-      const { variable } = createVariable(entity, type, { type: 'layout', name });
-      return variable;
-    },
-  handleCreateGroupVariable: ({ changeForm, form, closeNewVariableWindow }) =>
-    (variable) => {
-      changeForm(form, 'groupVariable', variable);
-      closeNewVariableWindow();
-    },
-  handleDeleteVariable: ({ entity, type, deleteVariable }) =>
-    variable => deleteVariable(entity, type, variable),
+  handleCreateLayoutVariable: ({ createVariable, entity, type }) => (name) => {
+    const { variable } = createVariable(entity, type, { type: 'layout', name });
+    return variable;
+  },
+  handleCreateGroupVariable: ({ changeForm, form, closeNewVariableWindow }) => (variable) => {
+    changeForm(form, 'groupVariable', variable);
+    closeNewVariableWindow();
+  },
+  handleDeleteVariable: ({ entity, type, deleteVariable }) => (variable) => deleteVariable(entity, type, variable),
 });
 
 const withPresetProps = compose(

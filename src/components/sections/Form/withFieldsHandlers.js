@@ -37,9 +37,9 @@ const mapStateToProps = (state, { form, entity, type }) => {
 
   // 1. If type defined, show components that match (existing variable)
   // 2. Otherwise list all INPUT_OPTIONS (new variable)
-  const componentOptions = variableType && !isNewVariable ?
-    getComponentsForType(variableType) :
-    INPUT_OPTIONS;
+  const componentOptions = variableType && !isNewVariable
+    ? getComponentsForType(variableType)
+    : INPUT_OPTIONS;
 
   const metaForType = find(componentOptions, { value: component });
 
@@ -63,51 +63,47 @@ const mapDispatchToProps = {
 const fieldsState = connect(mapStateToProps, mapDispatchToProps);
 
 const fieldsHandlers = withHandlers({
-  handleChangeComponent: ({ changeField, form, variableType }) =>
-    (e, value) => {
-      // Only reset if type not defined yet (new variable)
-      const typeForComponent = getTypeForComponent(value);
+  handleChangeComponent: ({ changeField, form, variableType }) => (e, value) => {
+    // Only reset if type not defined yet (new variable)
+    const typeForComponent = getTypeForComponent(value);
 
-      if (variableType !== typeForComponent) {
-        changeField(form, 'options', null);
-        changeField(form, 'validation', {});
-      }
+    if (variableType !== typeForComponent) {
+      changeField(form, 'options', null);
+      changeField(form, 'validation', {});
+    }
 
-      // Always reset this, since it is at least partly related
-      // to the component
-      changeField(form, 'parameters', null);
-    },
-  handleChangeVariable: ({ existingVariables, changeField, form }) =>
-    (_, value) => {
-      // Either load settings from codebook, or reset
-      const options = get(existingVariables, [value, 'options'], null);
-      const parameters = get(existingVariables, [value, 'parameters'], null);
-      const validation = get(existingVariables, [value, 'validation'], {});
-      const component = get(existingVariables, [value, 'component'], null);
+    // Always reset this, since it is at least partly related
+    // to the component
+    changeField(form, 'parameters', null);
+  },
+  handleChangeVariable: ({ existingVariables, changeField, form }) => (_, value) => {
+    // Either load settings from codebook, or reset
+    const options = get(existingVariables, [value, 'options'], null);
+    const parameters = get(existingVariables, [value, 'parameters'], null);
+    const validation = get(existingVariables, [value, 'validation'], {});
+    const component = get(existingVariables, [value, 'component'], null);
 
-      // If value was set to something from codebook, reset this flag
-      if (has(existingVariables, value)) {
-        changeField(form, '_createNewVariable', null);
-      }
-      changeField(form, 'component', component);
-      changeField(form, 'options', options);
-      changeField(form, 'parameters', parameters);
-      changeField(form, 'validation', validation);
-    },
+    // If value was set to something from codebook, reset this flag
+    if (has(existingVariables, value)) {
+      changeField(form, '_createNewVariable', null);
+    }
+    changeField(form, 'component', component);
+    changeField(form, 'options', options);
+    changeField(form, 'parameters', parameters);
+    changeField(form, 'validation', validation);
+  },
   handleDeleteVariable: ({
     entity,
     type,
     deleteVariable,
-  }) =>
-    (variable) => {
-      deleteVariable(entity, type, variable);
-    },
-  handleNewVariable: ({ changeField, form }) =>
-    (value) => {
-      changeField(form, '_createNewVariable', value);
-      changeField(form, 'variable', value);
-      return value;
-    },
+  }) => (variable) => {
+    deleteVariable(entity, type, variable);
+  },
+  handleNewVariable: ({ changeField, form }) => (value) => {
+    changeField(form, '_createNewVariable', value);
+    changeField(form, 'variable', value);
+    return value;
+  },
 });
 
 export {
@@ -119,4 +115,3 @@ export default compose(
   fieldsState,
   fieldsHandlers,
 );
-

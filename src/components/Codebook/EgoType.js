@@ -9,7 +9,8 @@ const EgoType = ({
   variables,
 }) => (
   <div className="codebook__entity">
-    { variables.length > 0 &&
+    { variables.length > 0
+      && (
       <div className="codebook__entity-variables codebook__entity-variables--no-border">
         <h3>Variables:</h3>
         <Variables
@@ -17,7 +18,7 @@ const EgoType = ({
           entity="ego"
         />
       </div>
-    }
+      )}
   </div>
 );
 

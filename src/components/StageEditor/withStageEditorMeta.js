@@ -12,9 +12,9 @@ import { getInterface } from './Interfaces';
 const getStagePathById = (state, id) => {
   const stageIndex = getStageIndex(state, id);
 
-  const stagePath = stageIndex !== -1 ?
-    `stages[${stageIndex}]` :
-    null;
+  const stagePath = stageIndex !== -1
+    ? `stages[${stageIndex}]`
+    : null;
 
   return stagePath;
 };

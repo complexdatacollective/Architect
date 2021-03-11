@@ -17,8 +17,8 @@ const withDisplayOptions = withProps(({ type, options, codebook }) => {
     [...entityRoot, 'variables', options.attribute, 'options'],
   );
 
-  const valueOption = variableOptions &&
-    variableOptions.find(({ value }) => value === options.value);
+  const valueOption = variableOptions
+    && variableOptions.find(({ value }) => value === options.value);
 
   const value = valueOption ? valueOption.label : options.value;
 

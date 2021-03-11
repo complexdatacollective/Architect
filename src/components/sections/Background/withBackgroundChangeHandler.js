@@ -21,17 +21,16 @@ const withBackgroundChangeHandlers = withHandlers({
     useImage,
     form,
     changeForm,
-  }) =>
-    () => {
-      if (useImage) {
-        changeForm(form, 'background.image', null);
-      } else {
-        changeForm(form, 'background.concentricCircles', null);
-        changeForm(form, 'background.skewedTowardCenter', null);
-      }
+  }) => () => {
+    if (useImage) {
+      changeForm(form, 'background.image', null);
+    } else {
+      changeForm(form, 'background.concentricCircles', null);
+      changeForm(form, 'background.skewedTowardCenter', null);
+    }
 
-      setUseImage(!useImage);
-    },
+    setUseImage(!useImage);
+  },
 });
 
 const withBackgroundChangeHandler = compose(

@@ -16,14 +16,14 @@ initPreventFileDrop();
 
 const startApp = () => {
   ReactDOM.render(
-    <Fragment>
+    <>
       <ClipPaths />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <App />
         </PersistGate>
       </Provider>
-    </Fragment>,
+    </>,
     document.getElementById('root'),
   );
 };

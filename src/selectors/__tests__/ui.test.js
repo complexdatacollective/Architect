@@ -4,8 +4,7 @@ import { makeScreenMessageListener } from '../ui';
 
 jest.mock('fs-extra');
 
-const getStateWithMessage = (message = {}) =>
-  ({ ui: { screens: { message } } });
+const getStateWithMessage = (message = {}) => ({ ui: { screens: { message } } });
 
 describe('ui', () => {
   describe('makeScreenMessageListener()', () => {

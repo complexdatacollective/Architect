@@ -12,89 +12,79 @@ const IMPORT_ASSET_COMPLETE = 'PROTOCOL/IMPORT_ASSET_COMPLETE';
 const IMPORT_ASSET_FAILED = 'PROTOCOL/IMPORT_ASSET_FAILED';
 const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
 
-const getNameFromFilename = filename =>
-  path.parse(filename).base;
+const getNameFromFilename = (filename) => path.parse(filename).base;
 
-const deleteAsset = id =>
-  ({
-    type: DELETE_ASSET,
-    id,
-  });
+const deleteAsset = (id) => ({
+  type: DELETE_ASSET,
+  id,
+});
 
 /**
  * @param {string} filename - Name of file
  */
-const importAsset = filename =>
-  ({
-    type: IMPORT_ASSET,
-    filename,
-  });
+const importAsset = (filename) => ({
+  type: IMPORT_ASSET,
+  filename,
+});
 
 /**
  * @param {string} filename - Name of file
  * @param {string} fileType - File MIME type
  */
-const importAssetComplete = (filename, name, assetType) =>
-  ({
-    id: uuid(),
-    type: IMPORT_ASSET_COMPLETE,
-    name,
-    filename,
-    assetType,
-  });
+const importAssetComplete = (filename, name, assetType) => ({
+  id: uuid(),
+  type: IMPORT_ASSET_COMPLETE,
+  name,
+  filename,
+  assetType,
+});
 
 /**
  * @param {string} filename - Name of file
  */
-const importAssetFailed = (filename, error) =>
-  ({
-    type: IMPORT_ASSET_FAILED,
-    filename,
-    error,
-  });
+const importAssetFailed = (filename, error) => ({
+  type: IMPORT_ASSET_FAILED,
+  filename,
+  error,
+});
 
 /**
  * @param {File} filePath - File path to import
  */
-const importAssetThunk = filePath =>
-  (dispatch, getState) => {
-    const state = getState();
-    const workingPath = getWorkingPath(state);
-    const name = getNameFromFilename(filePath);
+const importAssetThunk = (filePath) => (dispatch, getState) => {
+  const state = getState();
+  const workingPath = getWorkingPath(state);
+  const name = getNameFromFilename(filePath);
 
-    dispatch(importAsset(name));
-    log.info('Import asset', filePath);
+  dispatch(importAsset(name));
+  log.info('Import asset', filePath);
 
-    if (!workingPath) {
-      const error = new Error('No working path found, possibly no active protocol.');
-      dispatch(importAssetFailed(filePath, error));
-      dispatch(importAssetErrorDialog(error, filePath));
-      return Promise.reject(error);
-    }
+  if (!workingPath) {
+    const error = new Error('No working path found, possibly no active protocol.');
+    dispatch(importAssetFailed(filePath, error));
+    dispatch(importAssetErrorDialog(error, filePath));
+    return Promise.reject(error);
+  }
 
-    return Promise.resolve()
-      .then(() =>
-        validateAsset(filePath)
-          .catch((error) => {
-            dispatch(invalidAssetErrorDialog(error, filePath));
-            log.error('Validation error', error);
-            throw error;
-          }),
-      )
-      .then(() =>
-        fsImportAsset(workingPath, filePath)
-          .catch((error) => {
-            log.error('Import error', error);
-            dispatch(importAssetErrorDialog(error, filePath));
-            throw error;
-          }),
-      )
-      .then((result) => {
-        log.info('  OK');
-        return dispatch(importAssetComplete(result.filePath, name, result.assetType));
-      })
-      .catch(error => dispatch(importAssetFailed(filePath, error)));
-  };
+  return Promise.resolve()
+    .then(() => validateAsset(filePath)
+      .catch((error) => {
+        dispatch(invalidAssetErrorDialog(error, filePath));
+        log.error('Validation error', error);
+        throw error;
+      }))
+    .then(() => fsImportAsset(workingPath, filePath)
+      .catch((error) => {
+        log.error('Import error', error);
+        dispatch(importAssetErrorDialog(error, filePath));
+        throw error;
+      }))
+    .then((result) => {
+      log.info('  OK');
+      return dispatch(importAssetComplete(result.filePath, name, result.assetType));
+    })
+    .catch((error) => dispatch(importAssetFailed(filePath, error)));
+};
 
 const initialState = {};
 

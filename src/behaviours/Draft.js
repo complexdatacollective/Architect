@@ -6,8 +6,7 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-const Draft = WrappedComponent =>
-  class extends Component {
+const Draft = (WrappedComponent) => class extends Component {
     static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
 
     static propTypes = {
@@ -35,9 +34,9 @@ const Draft = WrappedComponent =>
     updateDraft = (value, replace = false) => {
       this.setState(
         (state) => {
-          const draft = replace ?
-            { ...value } :
-            { ...state.draft, ...value };
+          const draft = replace
+            ? { ...value }
+            : { ...state.draft, ...value };
 
           return { draft };
         },
@@ -69,6 +68,6 @@ const Draft = WrappedComponent =>
         />
       );
     }
-  };
+};
 
 export default Draft;

@@ -16,30 +16,29 @@ const saveDialogOptions = {
  * Creates an blank protocol directory at destinationPath, with correct directory structure.
  * @param {string} destinationPath - destination for skeleton protocol.
  */
-const createProtocolWorkingPath = destinationPath =>
-  new Promise((resolve) => {
-    const appPath = remote.app.getAppPath();
-    const templatePath = path.join(appPath, 'template');
-    fse.copySync(templatePath, destinationPath);
+const createProtocolWorkingPath = (destinationPath) => new Promise((resolve) => {
+  const appPath = remote.app.getAppPath();
+  const templatePath = path.join(appPath, 'template');
+  fse.copySync(templatePath, destinationPath);
 
-    const protocolTemplate = fse.readJsonSync(
-      path.join(templatePath, 'protocol.json'),
-    );
+  const protocolTemplate = fse.readJsonSync(
+    path.join(templatePath, 'protocol.json'),
+  );
 
-    const protocol = {
-      schemaVersion: APP_SCHEMA_VERSION,
-      ...protocolTemplate,
-    };
+  const protocol = {
+    schemaVersion: APP_SCHEMA_VERSION,
+    ...protocolTemplate,
+  };
 
-    fse.writeJsonSync(
-      path.join(destinationPath, 'protocol.json'),
-      protocol,
-    );
+  fse.writeJsonSync(
+    path.join(destinationPath, 'protocol.json'),
+    protocol,
+  );
 
-    // TODO: update protocol with version number
+  // TODO: update protocol with version number
 
-    resolve(destinationPath);
-  });
+  resolve(destinationPath);
+});
 
 /**
  * Creates a blank protocol in a tempory path
@@ -54,12 +53,11 @@ export const createProtocolFiles = (destinationPath) => {
 /**
  * Shows a save dialog and then creates a blank protocol there
  */
-const createProtocol = () =>
-  saveDialog(saveDialogOptions)
-    .then(({ canceled, filePath }) => {
-      if (canceled) { return null; }
-      return createProtocolFiles(filePath)
-        .then(tempPath => ({ filePath, workingPath: tempPath }));
-    });
+const createProtocol = () => saveDialog(saveDialogOptions)
+  .then(({ canceled, filePath }) => {
+    if (canceled) { return null; }
+    return createProtocolFiles(filePath)
+      .then((tempPath) => ({ filePath, workingPath: tempPath }));
+  });
 
 export default createProtocol;

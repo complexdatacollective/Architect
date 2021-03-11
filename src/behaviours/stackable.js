@@ -9,7 +9,7 @@ import { actionCreators as stackActions } from '../ducks/modules/stacks';
 
 const stackableHandlers = connect(
   null,
-  dispatch => ({
+  (dispatch) => ({
     registerStackable: bindActionCreators(stackActions.registerStackable, dispatch),
     unregisterStackable: bindActionCreators(stackActions.unregisterStackable, dispatch),
   }),
@@ -17,7 +17,7 @@ const stackableHandlers = connect(
 
 const stackableLifecycle = lifecycle({
   componentWillMount() {
-    const group = this.props.group;
+    const { group } = this.props;
     const id = uuid();
     this.props.registerStackable(id, group);
     this.setState({ stackableId: id });
@@ -38,7 +38,6 @@ const withStackIndex = connect(
     stackIndex: state.stacks[stackableId].index,
   }),
 );
-
 
 const stackable = compose(
   withRegisterStackable,

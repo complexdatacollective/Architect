@@ -31,13 +31,14 @@ class EditRule extends Component {
       <Modal show={!!this.props.rule}>
         <motion.div layout className="rules-edit-rule">
           <div className="rules-edit-rule__container">
-            { this.props.rule && this.props.rule.options &&
+            { this.props.rule && this.props.rule.options
+              && (
               <this.TypeComponent
                 rule={this.props.rule}
                 codebook={this.props.codebook}
                 onChange={this.props.onChange}
               />
-            }
+              )}
             <div className="rules-edit-rule__controls">
               <Button type="button" onClick={this.props.onCancel} color="platinum">Cancel</Button>
               <Button type="button" onClick={this.props.onSave} color="primary">Finish and Close</Button>

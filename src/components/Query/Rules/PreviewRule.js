@@ -6,15 +6,16 @@ import RuleText, { Join } from './PreviewText';
 import withDisplayOptions from './withDisplayOptions';
 
 const withDeleteHandler = withHandlers({
-  handleDelete: props =>
-    (e) => {
-      e.stopPropagation();
+  handleDelete: (props) => (e) => {
+    e.stopPropagation();
 
-      props.onDelete();
-    },
+    props.onDelete();
+  },
 });
 
-const PreviewRule = ({ type, options, join, onClick, handleDelete }) => (
+const PreviewRule = ({
+  type, options, join, onClick, handleDelete,
+}) => (
   <div
     className="rules-preview-rule"
     onClick={onClick}

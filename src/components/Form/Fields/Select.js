@@ -6,7 +6,7 @@ import Icon from '@codaco/ui/lib/components/Icon';
 import DefaultSelectOption from './DefaultSelectOption';
 
 const getValue = (options, value) => {
-  const foundValue = options.find(option => option.value === value);
+  const foundValue = options.find((option) => option.value === value);
   if (!foundValue) { return null; }
 
   return foundValue;
@@ -45,9 +45,9 @@ class Select extends PureComponent {
       ...rest
     } = this.props;
 
-    const optionsWithNew = createNewOption ?
-      [...this.props.options, { __createNewOption__: createNewOption }] :
-      this.props.options;
+    const optionsWithNew = createNewOption
+      ? [...this.props.options, { __createNewOption__: createNewOption }]
+      : this.props.options;
 
     const componentClasses = cx(
       className,
@@ -58,9 +58,8 @@ class Select extends PureComponent {
     );
     return (
       <div className={componentClasses}>
-        { label &&
-          <h4>{label}</h4>
-        }
+        { label
+          && <h4>{label}</h4>}
         <ReactSelect
           className="form-fields-select"
           classNamePrefix="form-fields-select"
@@ -68,7 +67,7 @@ class Select extends PureComponent {
           options={optionsWithNew}
           value={this.value}
           components={{ Option: selectOptionComponent }}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+          styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
           // ReactSelect has unusual onBlur that doesn't play nicely with redux-forms
@@ -81,7 +80,12 @@ class Select extends PureComponent {
         >
           {children}
         </ReactSelect>
-        {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
+        {invalid && touched && (
+        <div className="form-fields-select__error">
+          <Icon name="warning" />
+          {error}
+        </div>
+        )}
       </div>
     );
   }
@@ -112,6 +116,5 @@ Select.defaultProps = {
   children: null,
   meta: { invalid: false, error: null, touched: false },
 };
-
 
 export default Select;

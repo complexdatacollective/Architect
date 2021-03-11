@@ -18,8 +18,7 @@ const SCREEN_INDEX = {
   assets: AssetsScreen,
 };
 
-const getScreenComponent = screen =>
-  get(SCREEN_INDEX, screen, NotFound);
+const getScreenComponent = (screen) => get(SCREEN_INDEX, screen, NotFound);
 
 export { getScreenComponent };
 

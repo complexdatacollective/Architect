@@ -52,7 +52,7 @@ SkipLogic.propTypes = {
   openDialog: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   hasSkipLogic: has(getFormValues('edit-stage')(state), 'skipLogic.action'),
 });
 

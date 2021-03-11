@@ -22,7 +22,7 @@ const ipc = (store) => {
     store.dispatch(ipcAction);
   });
 
-  return next => (action) => {
+  return (next) => (action) => {
     if (action.ipc === true) {
       ipcRenderer.send('ACTION', action);
     }

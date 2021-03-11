@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
-import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
+import {
+  SortableElement, SortableHandle, SortableContainer, arrayMove,
+} from 'react-sortable-hoc';
 import { map, isArray, toPairs } from 'lodash';
 import { Button, Icon } from '@codaco/ui';
 import NativeSelect from './NativeSelect';
@@ -24,7 +26,7 @@ const RuleHandle = compose(
   ),
 );
 
-const RuleDelete = props => (
+const RuleDelete = (props) => (
   <div className="form-fields-order-by__delete" {...props}>
     <Icon name="delete" />
   </div>
@@ -49,8 +51,7 @@ const Rule = compose(
         <div className="form-fields-order-by__rule-option">
           <NativeSelect
             input={{
-              onChange: value =>
-                handleChange(index, { property: value }),
+              onChange: (value) => handleChange(index, { property: value }),
               value: property,
             }}
             placeholder="Select a property"
@@ -66,8 +67,7 @@ const Rule = compose(
         <div className="form-fields-order-by__rule-option">
           <NativeSelect
             input={{
-              onChange: value =>
-                handleChange(index, { direction: value }),
+              onChange: (value) => handleChange(index, { direction: value }),
               value: direction,
             }}
             placeholder="Select a direction"
@@ -91,7 +91,9 @@ const Rules = compose(
   }),
   SortableContainer,
 )(
-  ({ variables, rules, handleChange, handleDelete }) => (
+  ({
+    variables, rules, handleChange, handleDelete,
+  }) => (
     <div className="form-fields-order-by">
       <div className="form-fields-order-by__rules">
         {
@@ -190,9 +192,8 @@ class OrderBy extends Component {
 
     return (
       <div className="form-fields-order-by">
-        { this.props.label &&
-          <div className="form-fields-order-by__label">{this.props.label}</div>
-        }
+        { this.props.label
+          && <div className="form-fields-order-by__label">{this.props.label}</div>}
         <Rules
           rules={this.value}
           variables={this.variables}
@@ -200,7 +201,8 @@ class OrderBy extends Component {
           handleDelete={this.handleDelete}
           onSortEnd={this.onSortEnd}
         />
-        { !this.areRulesFull &&
+        { !this.areRulesFull
+          && (
           <Button
             onClick={this.handleAddNewRule}
             content="Add Rule"
@@ -208,7 +210,7 @@ class OrderBy extends Component {
             icon="add"
             size="small"
           />
-        }
+          )}
       </div>
     );
   }

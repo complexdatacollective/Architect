@@ -28,7 +28,7 @@ const Dropzone = ({
   const isDisabled = disabled || state.isActive;
 
   useTimer(() => {
-    setState(previousState => ({ ...previousState, isHover: false, isError: false }));
+    setState((previousState) => ({ ...previousState, isHover: false, isError: false }));
   }, 1000, [state.isHover, state.isError]);
 
   const startHandler = (e) => {
@@ -37,13 +37,13 @@ const Dropzone = ({
 
     if (isDisabled) { return false; }
 
-    setState(previousState => ({ ...previousState, isActive: true }));
+    setState((previousState) => ({ ...previousState, isActive: true }));
 
     return true;
   };
 
   const resetState = () => {
-    setState(previousState => ({ ...previousState, ...initialState }));
+    setState((previousState) => ({ ...previousState, ...initialState }));
   };
 
   const submitPaths = (filePaths) => {
@@ -52,7 +52,7 @@ const Dropzone = ({
     if (!isAcceptable) {
       const extensions = getRejectedExtensions(accepts, filePaths);
       const errorMessage = `This asset type does not support ${extensions.join(', ')} extension(s). Supported types are: ${accepts.join(', ')}.`;
-      setState(previousState => ({
+      setState((previousState) => ({
         ...previousState,
         isActive: false,
         isError: true,
@@ -61,7 +61,7 @@ const Dropzone = ({
       return;
     }
 
-    setState(previousState => ({
+    setState((previousState) => ({
       ...previousState,
       isAcceptable: true,
       isError: false,
@@ -94,8 +94,8 @@ const Dropzone = ({
   const handleDrop = useCallback((e) => {
     if (!startHandler(e)) { return; }
 
-    const files = e.dataTransfer.files;
-    const filePaths = times(files.length, i => files.item(i).path);
+    const { files } = e.dataTransfer;
+    const filePaths = times(files.length, (i) => files.item(i).path);
 
     // If the user drags a file attachment from a browser, we get a url instead of a file
     if (!files || filePaths.length < 1) {
@@ -103,7 +103,7 @@ const Dropzone = ({
 
       if (urlName) {
         const errorMessage = 'Dragging files from this source is not currently supported. Please download the file to your computer and try again.';
-        setState(previousState => ({ ...previousState, isActive: false, error: errorMessage }));
+        setState((previousState) => ({ ...previousState, isActive: false, error: errorMessage }));
         return;
       }
     }
@@ -112,12 +112,12 @@ const Dropzone = ({
   }, [acceptsKey, isDisabled, submitPaths]);
 
   const handleDragLeave = useCallback(() => {
-    setState(previousState => ({ ...previousState, isHover: false }));
+    setState((previousState) => ({ ...previousState, isHover: false }));
   });
 
   const handleDragEnter = useCallback(() => {
     if (isDisabled) { return; }
-    setState(previousState => ({ ...previousState, isHover: true }));
+    setState((previousState) => ({ ...previousState, isHover: true }));
   }, [isDisabled]);
 
   const dropzoneClasses = cx(
@@ -149,7 +149,8 @@ const Dropzone = ({
         <div className={`${className}__container`} />
         <div className={`${className}__label`}>
           Drag and drop a file here to import it, or&nbsp;
-          <span className={`${className}__link`}>click here to select a file from your computer</span>.
+          <span className={`${className}__link`}>click here to select a file from your computer</span>
+          .
         </div>
         <div className={`${className}__loading`}>
           { state.isActive && <Spinner small /> }

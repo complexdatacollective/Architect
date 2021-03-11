@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@codaco/ui/lib/components';
 
-const getDirectionLabel = direction =>
-  (direction === 'asc' ? '\u25B2' : '\u25BC');
+const getDirectionLabel = (direction) => (direction === 'asc' ? '\u25B2' : '\u25BC');
 
 class SortControl extends Component {
   getIsSorted(checkedProperty) {
@@ -24,9 +23,9 @@ class SortControl extends Component {
   renderButton = (property) => {
     const isSorted = this.getIsSorted(property);
     const color = isSorted ? 'primary' : 'platinum';
-    const label = isSorted ?
-      `${property} ${getDirectionLabel(this.props.sortOrder.direction)}` :
-      property;
+    const label = isSorted
+      ? `${property} ${getDirectionLabel(this.props.sortOrder.direction)}`
+      : property;
 
     return (
       <Button

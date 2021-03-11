@@ -12,8 +12,8 @@ import TypeEditor from './TypeEditor';
 const formName = 'TYPE_EDITOR';
 
 function mapStateToProps(state, props) {
-  const entity = props.entity;
-  const type = props.type;
+  const { entity } = props;
+  const { type } = props;
   const getFormValue = formValueSelector(formName);
   const protocol = getProtocol(state);
 
@@ -29,7 +29,7 @@ function mapStateToProps(state, props) {
   const isNew = !type;
 
   const variables = getFormValue(state, 'variables') || {};
-  const displayVariables = compact(map(variables, variable => ({
+  const displayVariables = compact(map(variables, (variable) => ({
     label: variable.name,
     value: variable.id,
   })));
@@ -41,11 +41,9 @@ function mapStateToProps(state, props) {
   };
 }
 
-const mapDispatchToProps = dispatch => ({
-  updateType: (entity, type, form) =>
-    dispatch(codebookActions.updateType(entity, type, parse(form))),
-  createType: (entity, form) =>
-    dispatch(codebookActions.createType(entity, parse(form))),
+const mapDispatchToProps = (dispatch) => ({
+  updateType: (entity, type, form) => dispatch(codebookActions.updateType(entity, type, parse(form))),
+  createType: (entity, form) => dispatch(codebookActions.createType(entity, parse(form))),
 });
 
 const withTypeProps = withProps({
@@ -56,17 +54,18 @@ const withTypeProps = withProps({
 const withTypeState = connect(mapStateToProps, mapDispatchToProps);
 
 const withTypeHandlers = withHandlers({
-  onSubmit: ({ createType, updateType, onComplete, entity, type }) =>
-    (values) => {
-      let result;
-      if (!type) {
-        result = createType(entity, values);
-      } else {
-        result = updateType(entity, type, values);
-      }
+  onSubmit: ({
+    createType, updateType, onComplete, entity, type,
+  }) => (values) => {
+    let result;
+    if (!type) {
+      result = createType(entity, values);
+    } else {
+      result = updateType(entity, type, values);
+    }
 
-      onComplete(result);
-    },
+    onComplete(result);
+  },
 });
 
 export { formName };

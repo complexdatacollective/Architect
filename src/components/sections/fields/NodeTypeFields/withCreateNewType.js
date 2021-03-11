@@ -7,7 +7,7 @@ import { makeScreenMessageListener } from '@selectors/ui';
 const mapStateToProps = () => {
   const screenMessageListener = makeScreenMessageListener('type');
 
-  return state => ({
+  return (state) => ({
     typeScreenMessage: screenMessageListener(state),
   });
 };
@@ -21,17 +21,15 @@ const createTypeState = connect(
 );
 
 const createTypeHandlers = withHandlers({
-  handleTypeScreenMessage: ({ changeForm, form }) =>
-    (message) => {
-      if (!message) { return; }
+  handleTypeScreenMessage: ({ changeForm, form }) => (message) => {
+    if (!message) { return; }
 
-      const { entity, type } = message;
-      changeForm(form, 'subject', { entity, type });
-    },
-  handleOpenCreateNewType: ({ openScreen }) =>
-    () => {
-      openScreen('type', { entity: 'node' });
-    },
+    const { entity, type } = message;
+    changeForm(form, 'subject', { entity, type });
+  },
+  handleOpenCreateNewType: ({ openScreen }) => () => {
+    openScreen('type', { entity: 'node' });
+  },
 });
 
 const withCreateNewType = compose(

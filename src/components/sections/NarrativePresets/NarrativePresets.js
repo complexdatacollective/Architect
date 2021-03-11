@@ -23,7 +23,7 @@ const template = () => ({
   highlight: [],
 });
 
-const NarrativePresets = props => (
+const NarrativePresets = (props) => (
   <EditableList
     previewComponent={PresetPreview}
     editComponent={PresetFields}

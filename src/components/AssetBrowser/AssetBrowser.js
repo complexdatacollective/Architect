@@ -20,7 +20,7 @@ const AssetBrowser = ({
   }, [onSelect]);
 
   return (
-    <React.Fragment>
+    <>
       <Section>
         <NewAsset
           onCreate={handleCreate}
@@ -28,7 +28,16 @@ const AssetBrowser = ({
         />
       </Section>
       <Section>
-        <h3>Resource library { type && (<span>(showing type: {type})</span>)}</h3>
+        <h3>
+          Resource library
+          { type && (
+          <span>
+            (showing type:
+            {type}
+            )
+          </span>
+          )}
+        </h3>
         <Assets
           onSelect={onSelect}
           onDelete={onDelete}
@@ -37,7 +46,7 @@ const AssetBrowser = ({
           type={type}
         />
       </Section>
-    </React.Fragment>
+    </>
   );
 };
 

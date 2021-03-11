@@ -13,8 +13,7 @@ const withConstraintContext = getContext(
   { constraints: PropTypes.array },
 );
 
-const Zoom = WrappedComponent =>
-  class extends PureComponent {
+const Zoom = (WrappedComponent) => class extends PureComponent {
     static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
 
     static propTypes = {
@@ -102,7 +101,7 @@ const Zoom = WrappedComponent =>
         <WrappedComponent {...this.props} />
       );
     }
-  };
+};
 
 // export const Zoomer = ({ children, ...rest }) => {
 //   const Zoomable = Zoom(props => children(props));

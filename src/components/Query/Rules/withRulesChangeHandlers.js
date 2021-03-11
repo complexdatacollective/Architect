@@ -4,11 +4,10 @@ import validateRule from './validateRule';
 
 const withRulesChangeHandlers = compose(
   withHandlers({
-    updateJoin: props => join =>
-      props.onChange({
-        join,
-        rules: props.rules,
-      }),
+    updateJoin: (props) => (join) => props.onChange({
+      join,
+      rules: props.rules,
+    }),
     updateRule: ({ rules, join, onChange }) => (rule) => {
       let updatedRules = [];
 
@@ -32,7 +31,7 @@ const withRulesChangeHandlers = compose(
       });
     },
     deleteRule: ({ join, rules, onChange }) => (ruleId) => {
-      const updateRules = rules.filter(rule => rule.id !== ruleId);
+      const updateRules = rules.filter((rule) => rule.id !== ruleId);
 
       if (updateRules.length < 2) {
         onChange({
@@ -49,9 +48,11 @@ const withRulesChangeHandlers = compose(
     },
   }),
   withHandlers({
-    handleChangeJoin: ({ updateJoin }) => join => updateJoin(join),
-    handleSaveDraft: props => () => {
-      const { draftRule, openDialog, updateRule, resetDraft } = props;
+    handleChangeJoin: ({ updateJoin }) => (join) => updateJoin(join),
+    handleSaveDraft: (props) => () => {
+      const {
+        draftRule, openDialog, updateRule, resetDraft,
+      } = props;
 
       if (!validateRule(draftRule)) {
         openDialog({
@@ -66,12 +67,11 @@ const withRulesChangeHandlers = compose(
       updateRule(draftRule);
       resetDraft();
     },
-    handleDeleteRule: ({ openDialog, deleteRule }) => ruleId =>
-      openDialog({
-        type: 'Confirm',
-        title: 'Are you sure you want to delete this rule?',
-        onConfirm: () => deleteRule(ruleId),
-      }),
+    handleDeleteRule: ({ openDialog, deleteRule }) => (ruleId) => openDialog({
+      type: 'Confirm',
+      title: 'Are you sure you want to delete this rule?',
+      onConfirm: () => deleteRule(ruleId),
+    }),
   }),
 );
 

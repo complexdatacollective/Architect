@@ -2,13 +2,15 @@ import React from 'react';
 import { Field } from 'redux-form';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
 import ValidatedField from '@components/Form/ValidatedField';
-import { Query, withStoreConnector, withFieldConnector, ruleValidator } from '@components/Query';
+import {
+  Query, withStoreConnector, withFieldConnector, ruleValidator,
+} from '@components/Query';
 import { Row } from '@components/EditorLayout';
 
 const ConnectedQuery = withFieldConnector(withStoreConnector(Query));
 
 const SkipLogicFields = () => (
-  <React.Fragment>
+  <>
     <Row>
       <ValidatedField
         className="form-fields-select"
@@ -28,7 +30,7 @@ const SkipLogicFields = () => (
         validate={ruleValidator}
       />
     </Row>
-  </React.Fragment>
+  </>
 );
 
 export { SkipLogicFields };

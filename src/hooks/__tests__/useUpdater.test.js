@@ -57,7 +57,6 @@ const mockJson = jest.fn(() => ({
   assets: mockAssets, // eslint-disable-line
 }));
 
-
 describe('getPlatformSpecificContent()', () => {
   beforeEach(() => {
     Env.isWindows = jest.fn().mockReturnValue(false);
@@ -99,7 +98,6 @@ describe('getPlatformSpecificContent()', () => {
     expect(content.buttonLink).toBe('https://networkcanvas.com/download.html');
   });
 });
-
 
 describe('checkEndpoint()', () => {
   let originalFetch;

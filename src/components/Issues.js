@@ -34,7 +34,7 @@ class Issues extends Component {
 
   componentWillReceiveProps(newProps) {
     const noIssues = isEmpty(newProps.issues);
-    const show = newProps.show;
+    const { show } = newProps;
 
     this.flatIssues = flattenIssues(newProps.issues);
 
@@ -71,14 +71,11 @@ class Issues extends Component {
     });
   }
 
-  isVisible = () =>
-    this.props.show && this.flatIssues.length > 0;
+  isVisible = () => this.props.show && this.flatIssues.length > 0;
 
-  isOpen = () =>
-    this.state.open;
+  isOpen = () => this.state.open;
 
-  handleClickTitleBar = () =>
-    this.setState({ open: !this.state.open });
+  handleClickTitleBar = () => this.setState({ open: !this.state.open });
 
   handleClickIssue = (e) => {
     e.preventDefault();
@@ -103,13 +100,17 @@ class Issues extends Component {
               href={`#${fieldId}`}
               onClick={this.handleClickIssue}
             >
-              <span ref={el => this.setIssueRef(el, fieldId)}>
+              <span ref={(el) => this.setIssueRef(el, fieldId)}>
                 {field}
-              </span> - {issue}
+              </span>
+              {' '}
+              -
+              {issue}
             </a>
           </li>
         );
-      });
+      },
+    );
 
     const issuesClasses = cx(
       'issues',
@@ -127,7 +128,9 @@ class Issues extends Component {
               <Icon name="info" color="white" />
             </div>
             <div className="issues__title-bar-text">
-              Issues ({this.flatIssues.length})
+              Issues (
+              {this.flatIssues.length}
+              )
             </div>
             <div className="issues__title-bar-toggle">
               <Icon

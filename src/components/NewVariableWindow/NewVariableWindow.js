@@ -21,16 +21,14 @@ class NewVariableWindow extends Component {
   filteredVariableOptions() {
     const { allowVariableTypes } = this.props;
 
-    return allowVariableTypes ?
-      VARIABLE_OPTIONS.filter(
-        ({ value: optionVariableType }) =>
-          allowVariableTypes.includes(optionVariableType),
-      ) :
-      VARIABLE_OPTIONS;
+    return allowVariableTypes
+      ? VARIABLE_OPTIONS.filter(
+        ({ value: optionVariableType }) => allowVariableTypes.includes(optionVariableType),
+      )
+      : VARIABLE_OPTIONS;
   }
 
-  validateName = value =>
-    uniqueByList(this.props.existingVariableNames)(value);
+  validateName = (value) => uniqueByList(this.props.existingVariableNames)(value);
 
   render() {
     const {
@@ -75,7 +73,8 @@ class NewVariableWindow extends Component {
             validation={{ required: true }}
           />
         </Section>
-        { isVariableTypeWithOptions(variableType) &&
+        { isVariableTypeWithOptions(variableType)
+          && (
           <Section>
             <h3 id={getFieldId('options')}>Options</h3>
             <p>Create some options for this input control</p>
@@ -85,7 +84,7 @@ class NewVariableWindow extends Component {
               form={form}
             />
           </Section>
-        }
+          )}
       </InlineEditScreen>
     );
   }

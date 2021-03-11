@@ -27,7 +27,7 @@ const InlineEditScreen = ({
 
   return (
     <Fade in={show}>
-      <div className="inline-edit-screen" onClick={e => e.stopPropagation()}>
+      <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
         <Flipped flipId={flipId}>
           <div className="inline-edit-screen__container">
             <div className="inline-edit-screen__header">
@@ -77,4 +77,3 @@ export default compose(
   window,
   connect(null, mapDispatchToProps),
 )(InlineEditScreen);
-

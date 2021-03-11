@@ -22,14 +22,15 @@ const ExternalEntity = ({
           </h2>
         </div>
       </div>
-      { variables.length > 0 &&
+      { variables.length > 0
+        && (
         <div className="codebook__entity-variables">
           <h3>Variables:</h3>
           <VariableList
             variables={variables}
           />
         </div>
-      }
+        )}
     </div>
   );
 };

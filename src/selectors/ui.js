@@ -1,8 +1,8 @@
 import { isEqual } from 'lodash';
 
-export const getScreensMessage = state => state.ui.screens.message;
+export const getScreensMessage = (state) => state.ui.screens.message;
 
-export const getScreensStack = state => state.ui.screens.screens;
+export const getScreensStack = (state) => state.ui.screens.screens;
 
 export const makeScreenMessageListener = (screen) => {
   let previousMessage = null;

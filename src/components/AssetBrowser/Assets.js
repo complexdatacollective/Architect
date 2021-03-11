@@ -24,7 +24,7 @@ const Assets = ({
 }) => {
   const handleDelete = !disableDelete && onDelete;
 
-  const renderedAssets = assets.map(asset => (
+  const renderedAssets = assets.map((asset) => (
     <div className="asset-browser-assets__asset" key={asset.id}>
       <Thumbnail
         {...asset}
@@ -45,11 +45,12 @@ const Assets = ({
 
   return (
     <div className="asset-browser-assets">
-      { !type &&
+      { !type
+        && (
         <div className="asset-browser-assets__controls">
           <RadioGroup {...selectProps} />
         </div>
-      }
+        )}
       <div className="asset-browser-assets__assets">
         {assets.length > 0 ? renderedAssets : (<em>No resources to display.</em>)}
       </div>

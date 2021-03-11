@@ -20,11 +20,9 @@ class Mode extends PureComponent {
     disabled: false,
   };
 
-  handleClickMode = index =>
-    this.props.input.onChange(getValue(this.props.options[index]));
+  handleClickMode = (index) => this.props.input.onChange(getValue(this.props.options[index]));
 
-  isModeSelected = option =>
-    this.props.input.value === option;
+  isModeSelected = (option) => this.props.input.value === option;
 
   renderMode = (option, index) => {
     const { input: { value } } = this.props;
@@ -69,9 +67,8 @@ class Mode extends PureComponent {
 
     return (
       <div className={classNames}>
-        { label &&
-          <h4 className="form-fields-mode__label">{label}</h4>
-        }
+        { label
+          && <h4 className="form-fields-mode__label">{label}</h4>}
         <div className="form-fields-mode__options">
           { options.map(this.renderMode) }
         </div>

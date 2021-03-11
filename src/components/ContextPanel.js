@@ -1,4 +1,6 @@
-import React, { useMemo, useCallback, useState, useEffect } from 'react';
+import React, {
+  useMemo, useCallback, useState, useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -78,7 +80,8 @@ const ContextPanel = ({
         variants={variants.panel}
       >
         <AnimatePresence>
-          {open &&
+          {open
+            && (
             <motion.div
               className="context-panel__panel-container"
               key="content"
@@ -88,7 +91,7 @@ const ContextPanel = ({
             >
               {children}
             </motion.div>
-          }
+            )}
         </AnimatePresence>
       </motion.div>
     </motion.div>

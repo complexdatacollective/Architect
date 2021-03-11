@@ -5,7 +5,7 @@ import { get } from 'lodash';
 import Node from '@codaco/ui/lib/components/Node';
 import { getNodeTypes } from '../selectors/codebook';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   nodeTypes: getNodeTypes(state),
 });
 

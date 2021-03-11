@@ -2,12 +2,12 @@ import React from 'react';
 import File from './File';
 import { Audio } from '../../Assets';
 
-const AudioInput = props => (
+const AudioInput = (props) => (
   <File
     type="audio"
     {...props}
   >
-    { id => (
+    { (id) => (
       <div className="form-fields-audio">
         <Audio id={id} controls />
       </div>

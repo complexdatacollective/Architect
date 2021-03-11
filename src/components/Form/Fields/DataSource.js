@@ -60,7 +60,8 @@ class DataSource extends Component {
                 { 'form-fields-data-source__option-file--hide': !networkAssetInput.value },
               )}
             >
-              { showNetworkAssetInput &&
+              { showNetworkAssetInput
+                && (
                 <File
                   type="network"
                   showBrowser={selectNetworkAsset}
@@ -68,9 +69,9 @@ class DataSource extends Component {
                   selected={input.value}
                   {...this.props}
                 >
-                  { id => <NetworkThumbnail id={id} /> }
+                  { (id) => <NetworkThumbnail id={id} /> }
                 </File>
-              }
+                )}
             </div>
           </div>
         </div>
@@ -80,8 +81,9 @@ class DataSource extends Component {
           selected={input.value}
           {...this.props}
         >
-          { id => <NetworkThumbnail id={id} /> }
-        </File>)
+          { (id) => <NetworkThumbnail id={id} /> }
+        </File>
+      )
     );
   }
 }

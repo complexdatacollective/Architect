@@ -5,16 +5,16 @@ import { find, findIndex, reduce } from 'lodash';
 
 const propStageId = (_, props) => props.stageId;
 
-export const getProtocol = state => state.protocol.present;
-export const getAssetManifest = state => state.protocol.present.assetManifest;
-export const getCodebook = state => state.protocol.present.codebook;
+export const getProtocol = (state) => state.protocol.present;
+export const getAssetManifest = (state) => state.protocol.present.assetManifest;
+export const getCodebook = (state) => state.protocol.present.codebook;
 
 export const getStageList = (state) => {
   const protocol = getProtocol(state);
   const stages = protocol ? protocol.stages : [];
 
   const stagesWithMeta = stages.map(
-    stage => ({
+    (stage) => ({
       id: stage.id,
       type: stage.type,
       label: stage.label,
@@ -41,12 +41,11 @@ export const getStageIndex = (state, id) => {
 };
 
 // TODO: replace this with getStage
-export const makeGetStage = () =>
-  createSelector(
-    getProtocol,
-    propStageId,
-    (protocol, stageId) => find(protocol.stages, ['id', stageId]),
-  );
+export const makeGetStage = () => createSelector(
+  getProtocol,
+  propStageId,
+  (protocol, stageId) => find(protocol.stages, ['id', stageId]),
+);
 
 const networkTypes = new Set([
   'network',
@@ -56,15 +55,13 @@ const networkTypes = new Set([
 // TODO: Does this method make sense here?
 export const getNetworkAssets = createSelector(
   getAssetManifest,
-  assetManifest =>
-    reduce(
-      assetManifest,
-      (memo, asset, name) => {
-        if (!networkTypes.has(asset.type)) { return memo; }
+  (assetManifest) => reduce(
+    assetManifest,
+    (memo, asset, name) => {
+      if (!networkTypes.has(asset.type)) { return memo; }
 
-        return { ...memo, [name]: asset };
-      },
-      {},
-    ),
+      return { ...memo, [name]: asset };
+    },
+    {},
+  ),
 );
-

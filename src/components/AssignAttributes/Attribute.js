@@ -25,10 +25,11 @@ const Attribute = (props) => {
           component={VariableSelect}
           validation={{ required: true }}
           options={variableOptions}
-          onCreateOption={value => handleCreateVariable(value, 'boolean', `${field}.variable`)}
+          onCreateOption={(value) => handleCreateVariable(value, 'boolean', `${field}.variable`)}
         />
       </div>
-      { variable &&
+      { variable
+        && (
         <div className="assign-attributes-attribute__value">
           <h4>Value:</h4>
           <ValidatedField
@@ -37,7 +38,7 @@ const Attribute = (props) => {
             validation={null}
           />
         </div>
-      }
+        )}
       <div
         className="assign-attributes-attribute__delete"
         onClick={handleDelete}

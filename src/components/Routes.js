@@ -12,11 +12,11 @@ const Routes = () => {
   const route = activeProtocol ? <Protocol /> : <Home />;
 
   return (
-    <React.Fragment>
+    <>
       <Screens />
       {route}
       <Loading />
-    </React.Fragment>
+    </>
   );
 };
 

@@ -5,9 +5,8 @@ import { Flipped } from 'react-flip-toolkit';
 import PropTypes from 'prop-types';
 import ProtocolStack from './ProtocolStack';
 
-const getRecentProtocols = state =>
-  get(state, 'recentProtocols', [])
-    .slice(0, 4);
+const getRecentProtocols = (state) => get(state, 'recentProtocols', [])
+  .slice(0, 4);
 
 class RecentProtocols extends Component {
   static propTypes = {
@@ -19,7 +18,7 @@ class RecentProtocols extends Component {
     show: true,
   };
 
-  renderRecentProtocol = protocol => (
+  renderRecentProtocol = (protocol) => (
     <div
       key={encodeURIComponent(protocol.filePath)}
       className="recent-protocols__protocol"
@@ -43,13 +42,13 @@ class RecentProtocols extends Component {
     </div>
   );
 
-  renderProtocolList = recentProtocols => (
-    <React.Fragment>
+  renderProtocolList = (recentProtocols) => (
+    <>
       <h3 className="recent-protocols__title" key="heading">Recently Opened Protocols</h3>
       <div className="recent-protocols__wrapper">
         {recentProtocols.map(this.renderRecentProtocol)}
       </div>
-    </React.Fragment>
+    </>
   );
 
   render() {
@@ -59,19 +58,17 @@ class RecentProtocols extends Component {
 
     return (
       <div className="recent-protocols">
-        { (recentProtocols.length === 0) ?
-          this.renderWelcomeText() : this.renderProtocolList(recentProtocols)
-        }
+        { (recentProtocols.length === 0)
+          ? this.renderWelcomeText() : this.renderProtocolList(recentProtocols)}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   recentProtocols: getRecentProtocols(state),
 });
 
 export { RecentProtocols };
 
 export default connect(mapStateToProps)(RecentProtocols);
-

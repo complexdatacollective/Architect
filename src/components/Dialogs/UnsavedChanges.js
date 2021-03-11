@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UnsavedChanges = options => ({
+const UnsavedChanges = (options) => ({
   type: 'Warning',
   title: 'Unsaved changes will be lost',
   message: (

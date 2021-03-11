@@ -5,12 +5,12 @@ import Preview from '../EditableList/Preview';
 
 class VariablePreview extends Preview {
   preview() {
-    const fieldId = this.props.fieldId;
+    const { fieldId } = this.props;
 
     return (
       <Field
         name={`${fieldId}.name`}
-        component={field => field.input.value}
+        component={(field) => field.input.value}
       />
     );
   }

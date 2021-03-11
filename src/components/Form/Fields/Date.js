@@ -8,36 +8,34 @@ const dashIndex = [4, 7];
 
 // - ignore dashes (they are auto-populated)
 // - ignore letters
-const filterInput = currentValue =>
-  (e) => {
-    const ignoreList = 'abcdefghijklmnopqrstuvwxyz-'.split('');
-    if (dashIndex.includes(currentValue.length) && e.key === '-') {
-      return;
-    }
-    if (!ignoreList.includes(e.key)) { return; }
-    e.preventDefault();
-  };
+const filterInput = (currentValue) => (e) => {
+  const ignoreList = 'abcdefghijklmnopqrstuvwxyz-'.split('');
+  if (dashIndex.includes(currentValue.length) && e.key === '-') {
+    return;
+  }
+  if (!ignoreList.includes(e.key)) { return; }
+  e.preventDefault();
+};
 
-const getParsedValue = dateFormat =>
-  (value = '', previousValue = '') => {
-    const parsedValue = value.split('')
-      .slice(0, dateFormat.length)
-      .map((char, index) => {
-        if (dashIndex.includes(index)) { return '-'; }
-        return parseInt(char, 10) || '0';
-      })
-      .join('');
+const getParsedValue = (dateFormat) => (value = '', previousValue = '') => {
+  const parsedValue = value.split('')
+    .slice(0, dateFormat.length)
+    .map((char, index) => {
+      if (dashIndex.includes(index)) { return '-'; }
+      return parseInt(char, 10) || '0';
+    })
+    .join('');
 
-    if (
-      dashIndex.includes(value.length) &&
-      previousValue.length < value.length &&
-      value.length < dateFormat.length
-    ) {
-      return `${parsedValue}-`;
-    }
+  if (
+    dashIndex.includes(value.length)
+      && previousValue.length < value.length
+      && value.length < dateFormat.length
+  ) {
+    return `${parsedValue}-`;
+  }
 
-    return parsedValue;
-  };
+  return parsedValue;
+};
 
 class TextInput extends PureComponent {
   static propTypes = {
@@ -78,7 +76,9 @@ class TextInput extends PureComponent {
   render() {
     const {
       input,
-      meta: { error, active, invalid, touched },
+      meta: {
+        error, active, invalid, touched,
+      },
       label,
       fieldLabel,
       className,
@@ -106,9 +106,8 @@ class TextInput extends PureComponent {
 
     return (
       <div className="form-field-container" hidden={hidden}>
-        { anyLabel &&
-          <h4>{anyLabel}</h4>
-        }
+        { anyLabel
+          && <h4>{anyLabel}</h4>}
         <div className={seamlessClasses}>
           <input
             id={this.id}
@@ -120,7 +119,12 @@ class TextInput extends PureComponent {
             onKeyDown={filterInput(input.value)}
             onChange={handleChange}
           />
-          {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div> }
+          {invalid && touched && (
+          <div className="form-field-text__error">
+            <Icon name="warning" />
+            {error}
+          </div>
+          ) }
         </div>
 
       </div>
