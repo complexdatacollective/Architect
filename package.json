@@ -126,7 +126,7 @@
         "query-string": "^6.13.1",
         "react": "^16.13.1",
         "react-compound-slider": "^2.4.0",
-        "react-dev-utils": "9.1.0",
+        "react-dev-utils": "11.0.4",
         "react-dom": "^16.13.1",
         "react-draggable": "^2.2.3",
         "react-error-overlay": "^5.0.4",
