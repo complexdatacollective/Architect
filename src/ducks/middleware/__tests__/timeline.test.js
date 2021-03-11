@@ -14,7 +14,9 @@ const defaultReducer = jest.fn(() => ({
   randomProperty: crypto.randomBytes(20).toString('hex'),
 }));
 
-const getRewindableReducer = (reducer = defaultReducer, options = {}) => createTimeline(reducer, options);
+const getRewindableReducer = (
+  reducer = defaultReducer, options = {},
+) => createTimeline(reducer, options);
 
 describe('timeline middleware', () => {
   let rewindableReducer;

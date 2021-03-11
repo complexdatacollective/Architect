@@ -40,7 +40,9 @@ const StageEditor = ({
     [interfaceType],
   );
 
-  const renderSections = (sectionList, { submitFailed, windowRoot }) => sectionList.map((SectionComponent, index) => (
+  const renderSections = (
+    sectionList, { submitFailed, windowRoot },
+  ) => sectionList.map((SectionComponent, index) => (
     <SectionComponent
       key={index}
       form={formName}

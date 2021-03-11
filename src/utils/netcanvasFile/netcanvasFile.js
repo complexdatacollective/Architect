@@ -58,7 +58,9 @@ const createNetcanvas = (destinationUserPath) => getTempDir('new')
  * @param referenceVersion (optional) schema version for comparison
  * @returns {Promise} Resolves to a `schemaVersionStatus`
  */
-const checkSchemaVersion = (filePath, referenceVersion = APP_SCHEMA_VERSION) => importNetcanvas(filePath)
+const checkSchemaVersion = (
+  filePath, referenceVersion = APP_SCHEMA_VERSION,
+) => importNetcanvas(filePath)
   .then(readProtocol)
   .then((protocol) => {
     if (!protocol.schemaVersion) {
@@ -121,19 +123,19 @@ const validateNetcanvas = (filePath) => Promise.resolve()
  * @param filePath .netcanvas file path
  * @returns {Promise} Resolves to { savePath, backupPath }
  */
-const saveNetcanvas = (workingPath, protocol, filePath) =>
-  // export protocol to random temp location
-  createNetcanvasExport(workingPath, protocol)
-    // copy existing file to backup location, and move export to this location
-    // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
-    .then((exportPath) => deployNetcanvas(exportPath, filePath))
-    // open and validate the completed export
-    .then(({ savePath, backupPath }) => verifyNetcanvas(filePath, protocol)
-      .then(() => commitNetcanvas({ savePath, backupPath }))
-      .catch((e) => revertNetcanvas({ savePath, backupPath })
-        .then(() => { throw e; })))
-    .then(() => filePath)
-    .catch(handleError(errors.SaveFailed));
+const saveNetcanvas = (
+  workingPath, protocol, filePath,
+) => createNetcanvasExport(workingPath, protocol) // export protocol to random temp location
+  // copy existing file to backup location, and move export to this location
+  // resolves to `{ savePath: [destination i.e. filePath], backupPath: [backup path] }`
+  .then((exportPath) => deployNetcanvas(exportPath, filePath))
+  // open and validate the completed export
+  .then(({ savePath, backupPath }) => verifyNetcanvas(filePath, protocol)
+    .then(() => commitNetcanvas({ savePath, backupPath }))
+    .catch((e) => revertNetcanvas({ savePath, backupPath })
+      .then(() => { throw e; })))
+  .then(() => filePath)
+  .catch(handleError(errors.SaveFailed));
 
 /**
  * Upgrades a .netcanvas file to the app schema version (or optional specified version).
@@ -144,7 +146,9 @@ const saveNetcanvas = (workingPath, protocol, filePath) =>
  * @param targetVersion (optional) target version to migrate to
  * @returns {Promise} Resolves to `newFilePath`
  */
-const migrateNetcanvas = (filePath, newFilePath, targetVersion = APP_SCHEMA_VERSION) => importNetcanvas(filePath)
+const migrateNetcanvas = (
+  filePath, newFilePath, targetVersion = APP_SCHEMA_VERSION,
+) => importNetcanvas(filePath)
   .then((workingPath) => readProtocol(workingPath)
     .then((protocol) => migrateProtocol(protocol, targetVersion))
     .then(([updatedProtocol, migrationSteps]) => {

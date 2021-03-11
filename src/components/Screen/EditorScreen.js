@@ -12,23 +12,20 @@ import Screen from './Screen';
 
 class EditorScreen extends Component {
   handleSubmit = () => {
-    if (this.props.submitting) { return; }
+    const { submitting, submitForm } = this.props;
+    if (submitting) { return; }
 
-    this.props.submitForm();
-  }
-
-  cancel() {
-    this.props.jump(this.props.locus);
-    this.props.onComplete();
+    submitForm();
   }
 
   handleCancel = () => {
-    if (!this.props.hasUnsavedChanges) {
+    const { hasUnsavedChanges, openDialog } = this.props;
+    if (!hasUnsavedChanges) {
       this.cancel();
       return;
     }
 
-    this.props.openDialog({
+    openDialog({
       type: 'Warning',
       title: 'Unsaved changes will be lost',
       message: 'Unsaved changes will be lost, do you want to continue?',
@@ -37,14 +34,21 @@ class EditorScreen extends Component {
     });
   };
 
+  cancel() {
+    const { jump, onComplete, locus } = this.props;
+    jump(locus);
+    onComplete();
+  }
+
   buttons() {
+    const { submitting, hasUnsavedChanges } = this.props;
     const saveButton = (
       <Button
         key="save"
         onClick={this.handleSubmit}
         iconPosition="right"
         icon="arrow-right"
-        disabled={this.props.submitting}
+        disabled={submitting}
       >
         Save and Return
       </Button>
@@ -61,7 +65,7 @@ class EditorScreen extends Component {
       </Button>
     );
 
-    return this.props.hasUnsavedChanges ? [cancelButton, saveButton] : [cancelButton];
+    return hasUnsavedChanges ? [cancelButton, saveButton] : [cancelButton];
   }
 
   render() {

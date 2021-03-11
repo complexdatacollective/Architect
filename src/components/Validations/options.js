@@ -43,7 +43,9 @@ const isValidationWithValue = (validation) => VALIDATIONS_WITH_VALUES.includes(v
 
 const getValidationsForVariableType = (variableType) => get(VALIDATIONS, variableType, []);
 
-const getValidationOptionsForVariableType = (variableType) => getValidationsForVariableType(variableType)
+const getValidationOptionsForVariableType = (
+  variableType,
+) => getValidationsForVariableType(variableType)
   .map((validation) => ({ label: validation, value: validation }));
 
 export {

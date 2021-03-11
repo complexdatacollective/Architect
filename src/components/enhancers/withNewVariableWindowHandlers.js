@@ -29,11 +29,15 @@ const newVariablePropertiesState = withState(
 );
 
 const newVariableHandlers = withHandlers({
-  openNewVariableWindow: ({ setNewVariableProperties }) => (variableName, variableOptions = {}) => setNewVariableProperties({
+  openNewVariableWindow: (
+    { setNewVariableProperties },
+  ) => (variableName, variableOptions = {}) => setNewVariableProperties({
     variableName: parseVariableName(variableName),
     variableOptions,
   }),
-  closeNewVariableWindow: ({ setNewVariableProperties }) => () => setNewVariableProperties(newVariableInitialState),
+  closeNewVariableWindow: (
+    { setNewVariableProperties },
+  ) => () => setNewVariableProperties(newVariableInitialState),
   normalizeKeyDown: () => normalizeKeyDown,
 });
 

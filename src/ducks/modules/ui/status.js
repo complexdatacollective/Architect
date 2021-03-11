@@ -74,7 +74,7 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case BUSY:
       return {
-        ...status,
+        ...state,
         busy: [...filterType(state.busy, action.payload), { type: action.payload }],
       };
     case READY:

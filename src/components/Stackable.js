@@ -12,11 +12,12 @@ import { actionCreators as stackActions } from '../ducks/modules/stacks';
 const withStackableId = withState('stackableId', 'setStackableId', null);
 
 class Stackable extends Component {
-  componentWillMount() {
-    const { group } = this.props;
+  constructor(props) {
+    super(props);
+    const { group, registerStackable, setStackableId } = this.props;
     const id = uuid();
-    this.props.registerStackable(id, group);
-    this.props.setStackableId(id);
+    registerStackable(id, group);
+    setStackableId(id);
   }
 
   componentWillReceiveProps(newProps) {

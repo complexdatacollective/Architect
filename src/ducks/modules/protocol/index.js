@@ -54,7 +54,9 @@ export {
   actionTypes,
 };
 
-const reduceReducers = (...reducers) => (previousState, action) => reducers.reduce((state, reducer) => reducer(state, action), previousState);
+const reduceReducers = (...reducers) => (
+  previousState, action,
+) => reducers.reduce((state, reducer) => reducer(state, action), previousState);
 
 export default reduceReducers(
   protocolReducer,

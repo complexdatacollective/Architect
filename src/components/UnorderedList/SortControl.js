@@ -6,25 +6,28 @@ const getDirectionLabel = (direction) => (direction === 'asc' ? '\u25B2' : '\u25
 
 class SortControl extends Component {
   getIsSorted(checkedProperty) {
-    return this.props.sortOrder.property === checkedProperty;
+    const { sortOrder: { property } } = this.props;
+    return property === checkedProperty;
   }
 
   toggleSort = (property) => {
-    const option = this.props.sortOrder;
+    const { sortOrder, onChange } = this.props;
+    const option = sortOrder;
     const newDirection = option.direction === 'desc' ? 'asc' : 'desc';
     const newSortOrder = {
       property,
       direction: newDirection,
     };
 
-    this.props.onChange(newSortOrder);
+    onChange(newSortOrder);
   }
 
   renderButton = (property) => {
+    const { sortOrder } = this.props;
     const isSorted = this.getIsSorted(property);
     const color = isSorted ? 'primary' : 'platinum';
     const label = isSorted
-      ? `${property} ${getDirectionLabel(this.props.sortOrder.direction)}`
+      ? `${property} ${getDirectionLabel(sortOrder.direction)}`
       : property;
 
     return (

@@ -9,15 +9,6 @@ const getRecentProtocols = (state) => get(state, 'recentProtocols', [])
   .slice(0, 4);
 
 class RecentProtocols extends Component {
-  static propTypes = {
-    recentProtocols: PropTypes.array.isRequired,
-    show: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    show: true,
-  };
-
   renderRecentProtocol = (protocol) => (
     <div
       key={encodeURIComponent(protocol.filePath)}
@@ -68,6 +59,15 @@ class RecentProtocols extends Component {
 const mapStateToProps = (state) => ({
   recentProtocols: getRecentProtocols(state),
 });
+
+RecentProtocols.propTypes = {
+  recentProtocols: PropTypes.array.isRequired,
+  show: PropTypes.bool,
+};
+
+RecentProtocols.defaultProps = {
+  show: true,
+};
 
 export { RecentProtocols };
 

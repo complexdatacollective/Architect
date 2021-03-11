@@ -9,7 +9,8 @@ import ValidatedField from '@components/Form/ValidatedField';
 
 class EdgeTypeFields extends Component {
   componentDidUpdate({ typeScreenMessage }) {
-    this.props.handleTypeScreenMessage(typeScreenMessage);
+    const { handleTypeScreenMessage } = this.props;
+    handleTypeScreenMessage(typeScreenMessage);
   }
 
   render() {
@@ -84,7 +85,6 @@ EdgeTypeFields.propTypes = {
 EdgeTypeFields.defaultProps = {
   edgeTypes: [],
   disabled: false,
-  displayVariable: null,
   handleResetStage: noop,
   typeScreenMessage: null,
 };

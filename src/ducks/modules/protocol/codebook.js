@@ -149,7 +149,9 @@ const createVariableThunk = (entity, type, configuration) => (dispatch, getState
   };
 };
 
-const updateVariableThunk = (entity, type, variable, configuration, merge = false) => (dispatch, getState) => {
+const updateVariableThunk = (
+  entity, type, variable, configuration, merge = false,
+) => (dispatch, getState) => {
   const state = getState();
   const variableExists = has(getVariablesForSubject(state, { entity, type }), variable);
 

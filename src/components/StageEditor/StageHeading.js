@@ -62,7 +62,6 @@ StageHeading.propTypes = {
 
 StageHeading.defaultProps = {
   stageNumber: null,
-  name: '',
   type: '',
   toggleCodeView: noop,
   children: null,
@@ -75,7 +74,6 @@ const mapStateToProps = (state, { id }) => {
 
   return {
     stageNumber,
-    name: formValues.label,
     type: formValues.type,
   };
 };

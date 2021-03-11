@@ -146,7 +146,6 @@ TypeEditor.propTypes = {
 
 TypeEditor.defaultProps = {
   type: null,
-  colorOptions: { node: [], edge: [] },
   isNew: false,
   metaOnly: false,
 };
