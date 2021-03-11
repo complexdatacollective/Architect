@@ -19,8 +19,7 @@ const persistConfig = {
   ],
 };
 
-const getReducer = () =>
-  persistReducer(persistConfig, rootReducer);
+const getReducer = () => persistReducer(persistConfig, rootReducer);
 
 const rootEpic = combineEpics(
   architectRootEpic,
@@ -40,17 +39,15 @@ const getMiddleware = () => {
   return [thunk, logger, ipc, epics];
 };
 
-const getEnhancers = () =>
-  composeEnhancers(
-    applyMiddleware(...getMiddleware()),
-  );
+const getEnhancers = () => composeEnhancers(
+  applyMiddleware(...getMiddleware()),
+);
 
-const getStore = initialState =>
-  createStore(
-    getReducer(),
-    initialState,
-    getEnhancers(),
-  );
+const getStore = (initialState) => createStore(
+  getReducer(),
+  initialState,
+  getEnhancers(),
+);
 
 const store = getStore(undefined);
 

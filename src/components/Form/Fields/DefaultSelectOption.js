@@ -10,9 +10,9 @@ const DefaultSelectOption = (props) => {
   const isWarning = !!data.__isWarning__;
   const showNew = !!data.__createNewOption__ || !!data.__isNew__;
   const showDelete = !isWarning && !data.__isNew__ && !!props.onDeleteOption && !data.isUsed;
-  const label = data.__createNewOption__ ?
-    data.__createNewOption__ :
-    data.label;
+  const label = data.__createNewOption__
+    ? data.__createNewOption__
+    : data.label;
   const handleClickDelete = (e) => {
     e.stopPropagation();
     props.onDeleteOption(data.value);
@@ -30,29 +30,32 @@ const DefaultSelectOption = (props) => {
       className={classes}
       classNamePrefix="form-fields-select__item"
     >
-      { isWarning &&
+      { isWarning
+        && (
         <div className="form-fields-select__item-warning">
           <Icon name="warning" />
         </div>
-      }
-      { showNew &&
+        )}
+      { showNew
+        && (
         <div className="form-fields-select__item-add">
           <Icon name="add" />
         </div>
-      }
+        )}
 
       <div className="form-fields-select__item-label">
         {label}
       </div>
 
-      { showDelete &&
+      { showDelete
+        && (
         <div
           className="form-fields-select__item-delete"
           onClick={handleClickDelete}
         >
           <Icon name="delete" />
         </div>
-      }
+        )}
     </ReactSelectComponents.Option>
   );
 };

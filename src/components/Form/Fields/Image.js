@@ -2,12 +2,12 @@ import React from 'react';
 import File from './File';
 import { BackgroundImage } from '../../Assets';
 
-const ImageInput = props => (
+const ImageInput = (props) => (
   <File
     type="image"
     {...props}
   >
-    { id => (
+    { (id) => (
       <div className="form-fields-image">
         <BackgroundImage id={id} className="form-fields-image__image" />
       </div>

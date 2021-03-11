@@ -44,7 +44,9 @@ class MarkdownInput extends PureComponent {
   render() {
     const {
       input: { value },
-      meta: { touched, invalid, error, active },
+      meta: {
+        touched, invalid, error, active,
+      },
       label,
     } = this.props;
 
@@ -61,9 +63,8 @@ class MarkdownInput extends PureComponent {
         htmlFor={this.id}
         className={markdownClasses}
       >
-        { label &&
-          <h4>{label}</h4>
-        }
+        { label
+          && <h4>{label}</h4>}
         <div className="form-fields-markdown__edit">
           <Markdown className="form-fields-markdown__preview" source={value} />
           <div className="form-fields-markdown__input-container">

@@ -42,8 +42,8 @@ describe('recentProtocols', () => {
     it('Adds protocol to list on open', () => {
       store.dispatch({
         type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
-        payload: { filePath: '/dev/null/mock/recent/path/7', protocol } },
-      );
+        payload: { filePath: '/dev/null/mock/recent/path/7', protocol },
+      });
       const state = store.getState();
       expect(state[0]).toMatchObject({ filePath: '/dev/null/mock/recent/path/7' });
     });
@@ -51,16 +51,16 @@ describe('recentProtocols', () => {
     it('Updates existing protocol meta on open', (done) => {
       store.dispatch({
         type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
-        payload: { filePath: '/dev/null/mock/recent/path/1', protocol } },
-      );
+        payload: { filePath: '/dev/null/mock/recent/path/1', protocol },
+      });
       store.dispatch({
         type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
-        payload: { filePath: '/dev/null/mock/recent/path/2', protocol } },
-      );
+        payload: { filePath: '/dev/null/mock/recent/path/2', protocol },
+      });
       store.dispatch({
         type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
-        payload: { filePath: '/dev/null/mock/recent/path/3', protocol } },
-      );
+        payload: { filePath: '/dev/null/mock/recent/path/3', protocol },
+      });
 
       const stateBefore = store.getState();
 
@@ -69,8 +69,8 @@ describe('recentProtocols', () => {
       setTimeout(() => {
         store.dispatch({
           type: sessionActionTypes.OPEN_NETCANVAS_SUCCESS,
-          payload: { filePath: '/dev/null/mock/recent/path/2', protocol } },
-        );
+          payload: { filePath: '/dev/null/mock/recent/path/2', protocol },
+        });
 
         const stateAfter = store.getState();
 
@@ -88,16 +88,16 @@ describe('recentProtocols', () => {
     it('Updates protocol meta on save success', (done) => {
       store.dispatch({
         type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
-        payload: { savePath: '/dev/null/mock/recent/path/1', protocol } },
-      );
+        payload: { savePath: '/dev/null/mock/recent/path/1', protocol },
+      });
       store.dispatch({
         type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
-        payload: { savePath: '/dev/null/mock/recent/path/2', protocol } },
-      );
+        payload: { savePath: '/dev/null/mock/recent/path/2', protocol },
+      });
       store.dispatch({
         type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
-        payload: { savePath: '/dev/null/mock/recent/path/3', protocol } },
-      );
+        payload: { savePath: '/dev/null/mock/recent/path/3', protocol },
+      });
 
       const stateBefore = store.getState();
 
@@ -106,8 +106,8 @@ describe('recentProtocols', () => {
       setTimeout(() => {
         store.dispatch({
           type: sessionActionTypes.SAVE_NETCANVAS_SUCCESS,
-          payload: { savePath: '/dev/null/mock/recent/path/2', protocol } },
-        );
+          payload: { savePath: '/dev/null/mock/recent/path/2', protocol },
+        });
 
         const stateAfter = store.getState();
 

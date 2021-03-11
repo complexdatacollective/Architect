@@ -12,7 +12,7 @@ import DefaultSelectOption from './DefaultSelectOption';
  */
 
 const getValue = (options, value) => {
-  const foundValue = options.find(option => option.value === value);
+  const foundValue = options.find((option) => option.value === value);
 
   if (!foundValue) { return null; }
 
@@ -42,13 +42,12 @@ class CreatableSelect extends PureComponent {
     return getValue(this.props.options, this.props.input.value);
   }
 
-  getOptionWithDeleteProp = WrappedComponent =>
-    props => (
-      <WrappedComponent
-        {...props}
-        onDeleteOption={this.handleDeleteOption}
-      />
-    );
+  getOptionWithDeleteProp = (WrappedComponent) => (props) => (
+    <WrappedComponent
+      {...props}
+      onDeleteOption={this.handleDeleteOption}
+    />
+  );
 
   handleChange = (option) => {
     // We are presenting a "fake" option to show an error message,
@@ -100,7 +99,7 @@ class CreatableSelect extends PureComponent {
       ...rest
     } = this.props;
 
-    const warnings = this.state.warnings;
+    const { warnings } = this.state;
 
     const componentClasses = cx(
       className,
@@ -110,18 +109,18 @@ class CreatableSelect extends PureComponent {
       },
     );
 
-    const Option = this.props.onDeleteOption ?
-      this.getOptionWithDeleteProp(SelectOptionComponent) :
-      SelectOptionComponent;
+    const Option = this.props.onDeleteOption
+      ? this.getOptionWithDeleteProp(SelectOptionComponent)
+      : SelectOptionComponent;
 
-    const warningOption = warnings ?
-      [{
+    const warningOption = warnings
+      ? [{
         label: warnings,
         value: null,
         __isWarning__: true,
         __isSticky__: true,
-      }] :
-      [];
+      }]
+      : [];
 
     const optionsWithWarnings = [
       ...warningOption,
@@ -132,9 +131,8 @@ class CreatableSelect extends PureComponent {
 
     return (
       <div className={componentClasses}>
-        { label &&
-          <h4>{label}</h4>
-        }
+        { label
+          && <h4>{label}</h4>}
         <Creatable
           className="form-fields-select"
           classNamePrefix="form-fields-select"
@@ -145,7 +143,7 @@ class CreatableSelect extends PureComponent {
           isSearchable
           value={this.value}
           components={{ Option }}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+          styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
           onCreateOption={this.handleCreateOption}
@@ -162,9 +160,8 @@ class CreatableSelect extends PureComponent {
             const isEmpty = option.replace(/ /g, '').length === 0;
 
             // True if option matches the label prop of the supplied object
-            const matchLabel = ({ label: variableLabel }) =>
-              variableLabel && option &&
-              variableLabel.toLowerCase() === option.toLowerCase();
+            const matchLabel = ({ label: variableLabel }) => variableLabel && option
+              && variableLabel.toLowerCase() === option.toLowerCase();
             const alreadyExists = options.some(matchLabel);
             const isReserved = reserved.some(matchLabel);
 
@@ -183,7 +180,12 @@ class CreatableSelect extends PureComponent {
         >
           {children}
         </Creatable>
-        {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
+        {invalid && touched && (
+        <div className="form-fields-select__error">
+          <Icon name="warning" />
+          {error}
+        </div>
+        )}
       </div>
     );
   }

@@ -12,7 +12,7 @@ const PromptFields = ({
   entity,
   form,
 }) => (
-  <React.Fragment>
+  <>
     <Section>
       <Row>
         <h3 id={getFieldId('text')}>Prompt Text</h3>
@@ -37,7 +37,10 @@ const PromptFields = ({
     </Section>
     <Section>
       <Row>
-        <h3>Assign Additional Variables? <small>(optional)</small></h3>
+        <h3>
+          Assign Additional Variables?
+          <small>(optional)</small>
+        </h3>
         <p>
           You can assign additional variables to any nodes that are created by a
           participant on this prompt. You can use this feature to keep track of meta-data,
@@ -62,7 +65,7 @@ const PromptFields = ({
         />
       </Row>
     </Section>
-  </React.Fragment>
+  </>
 );
 
 PromptFields.propTypes = {

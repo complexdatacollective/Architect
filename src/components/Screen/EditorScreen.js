@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { submit, isDirty, startSubmit, isSubmitting } from 'redux-form';
+import {
+  submit, isDirty, startSubmit, isSubmitting,
+} from 'redux-form';
 import { Button } from '@codaco/ui';
 import { actionCreators as timelineActions } from '../../ducks/middleware/timeline';
 import { actionCreators as dialogActions } from '../../ducks/modules/dialogs';

@@ -7,7 +7,7 @@ import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 // import Tip from '../../Tip';
 
-const NameGeneratorAutoCompletePrompts = props => (
+const NameGeneratorAutoCompletePrompts = (props) => (
   <EditableList
     editComponent={PromptFields}
     previewComponent={PromptPreview}

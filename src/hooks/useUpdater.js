@@ -28,7 +28,7 @@ export const getPlatformSpecificContent = (assets) => {
 
   if (isMacOS()) {
     // eslint-disable-next-line @codaco/spellcheck/spell-checker
-    const dmg = find(assets, value => value.name.split('.').pop() === 'dmg');
+    const dmg = find(assets, (value) => value.name.split('.').pop() === 'dmg');
     return {
       buttonText: 'Download Installer',
       buttonLink: dmg.browser_download_url,
@@ -37,7 +37,7 @@ export const getPlatformSpecificContent = (assets) => {
 
   if (isWindows()) {
     // eslint-disable-next-line @codaco/spellcheck/spell-checker
-    const exe = find(assets, value => value.name.split('.').pop() === 'exe');
+    const exe = find(assets, (value) => value.name.split('.').pop() === 'exe');
     return {
       buttonText: 'Download Installer',
       buttonLink: exe.browser_download_url,
@@ -57,27 +57,26 @@ export const getPlatformSpecificContent = (assets) => {
   };
 };
 
-export const checkEndpoint = (updateEndpoint, currentVersion) =>
-  fetch(updateEndpoint)
-    .then(response => response.json())
-    .then(({ name, body, assets }) => {
-      if (compareVersions.compare(currentVersion, name, '<')) {
-        return {
-          newVersion: name,
-          releaseNotes: body,
-          releaseButtonContent: getPlatformSpecificContent(assets),
-        };
-      }
-      // eslint-disable-next-line no-console
-      console.info(`No update available (current: ${currentVersion}, latest: ${name}).`);
-      return false;
-    })
-    .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.warn('Error checking for updates:', error);
-      // Don't reject, as we don't want to handle this error - just fail silently.
-      return Promise.resolve(false);
-    });
+export const checkEndpoint = (updateEndpoint, currentVersion) => fetch(updateEndpoint)
+  .then((response) => response.json())
+  .then(({ name, body, assets }) => {
+    if (compareVersions.compare(currentVersion, name, '<')) {
+      return {
+        newVersion: name,
+        releaseNotes: body,
+        releaseButtonContent: getPlatformSpecificContent(assets),
+      };
+    }
+    // eslint-disable-next-line no-console
+    console.info(`No update available (current: ${currentVersion}, latest: ${name}).`);
+    return false;
+  })
+  .catch((error) => {
+    // eslint-disable-next-line no-console
+    console.warn('Error checking for updates:', error);
+    // Don't reject, as we don't want to handle this error - just fail silently.
+    return Promise.resolve(false);
+  });
 
 const useUpdater = (updateEndpoint, timeout = 0) => {
   const dispatch = useDispatch();
@@ -135,7 +134,7 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
       title: `Version ${newVersion} available`,
       autoDismiss: false,
       content: (
-        <React.Fragment>
+        <>
           <p>
             A new version of Architect is available. To
             upgrade, see the link in the release notes.
@@ -144,7 +143,7 @@ const useUpdater = (updateEndpoint, timeout = 0) => {
             <Button color="platinum--dark" onClick={() => handleDismiss(newVersion)}>Hide for this release</Button>
             <Button color="neon-coral" onClick={() => showReleaseNotes(releaseNotes, releaseButtonContent)}>Show Release Notes</Button>
           </div>
-        </React.Fragment>
+        </>
       ),
     }));
   };

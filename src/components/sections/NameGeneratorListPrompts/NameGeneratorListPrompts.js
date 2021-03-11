@@ -11,7 +11,7 @@ import PromptFields from './PromptFields';
 
 const template = () => ({});
 
-const NameGeneratorListPrompts = props => (
+const NameGeneratorListPrompts = (props) => (
   <EditableList
     previewComponent={PromptPreview}
     editComponent={PromptFields}

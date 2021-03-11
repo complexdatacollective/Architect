@@ -124,9 +124,14 @@ class Grid extends Component {
           ))}
         </GridLayout>
 
-        { submitFailed && error &&
-          <p className="grid__error"><Icon name="warning" /> {error}</p>
-        }
+        { submitFailed && error
+          && (
+          <p className="grid__error">
+            <Icon name="warning" />
+            {' '}
+            {error}
+          </p>
+          )}
       </div>
     );
   }

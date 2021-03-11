@@ -20,7 +20,8 @@ const QuickAdd = ({
   options,
   type,
 }) => (
-  type &&
+  type
+  && (
   <Section disabled={disabled} group>
     <h3 id="issue-form">Quick Add Variable</h3>
     <p>
@@ -39,13 +40,14 @@ const QuickAdd = ({
         name="quickAdd"
         component={VariableSelect}
         options={options}
-        onCreateOption={value => handleCreateVariable(value, 'text', 'quickAdd')}
+        onCreateOption={(value) => handleCreateVariable(value, 'text', 'quickAdd')}
         validation={{ required: true }}
         type={type}
         entity={entity}
       />
     </div>
   </Section>
+  )
 );
 
 QuickAdd.propTypes = {
@@ -71,4 +73,3 @@ export default compose(
   withOptions,
   withCreateVariableHandler,
 )(QuickAdd);
-

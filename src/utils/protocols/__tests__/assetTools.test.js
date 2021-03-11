@@ -61,31 +61,23 @@ const files = [
   validJsonFileWithNodes,
 ];
 
-const getFile = path =>
-  files.find(f => f.name === path);
+const getFile = (path) => files.find((f) => f.name === path);
 
 readFile.mockImplementation(
-  filePath =>
-    getFile(filePath).text(),
+  (filePath) => getFile(filePath).text(),
 );
 
 readJson.mockImplementation(
-  filePath =>
-    getFile(filePath).text().then(data => JSON.parse(data)),
+  (filePath) => getFile(filePath).text().then((data) => JSON.parse(data)),
 );
-
 
 describe('assetTools', () => {
   describe('getNetworkVariables', () => {
-    it('collects json node types ', () =>
-      expect(getNetworkVariables(validJsonFileWithNodes.name))
-        .resolves.toEqual(['name', 'another']),
-    );
+    it('collects json node types ', () => expect(getNetworkVariables(validJsonFileWithNodes.name))
+      .resolves.toEqual(['name', 'another']));
 
-    it('collects csv types', () =>
-      expect(getNetworkVariables(validCsvFile.name))
-        .resolves.toEqual(['name', 'age', 'isFriend']),
-    );
+    it('collects csv types', () => expect(getNetworkVariables(validCsvFile.name))
+      .resolves.toEqual(['name', 'age', 'isFriend']));
   });
 
   describe('validateAsset', () => {

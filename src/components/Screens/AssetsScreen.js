@@ -37,7 +37,11 @@ const AssetBrowserScreen = ({
           <p>
             Welcome to the resource library. Here, you can import external data resources which
             can be used in building your protocol. These resources might include images,
-            video, audio, or even external network data. See our <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/resources/">documentation</ExternalLink> for more information.
+            video, audio, or even external network data. See our
+            {' '}
+            <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/resources/">documentation</ExternalLink>
+            {' '}
+            for more information.
           </p>
         </Section>
         <AssetBrowser />

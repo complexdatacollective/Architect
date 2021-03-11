@@ -20,10 +20,9 @@ const itemHandlers = withHandlers({
   handleChangeType: ({
     changeForm,
     form,
-  }) =>
-    () => {
-      changeForm(form, 'content', null);
-    },
+  }) => () => {
+    changeForm(form, 'content', null);
+  },
 });
 
 const withItemHandlers = compose(

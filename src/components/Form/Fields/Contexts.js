@@ -5,9 +5,9 @@ import { get, isString } from 'lodash';
 import cx from 'classnames';
 import uuid from 'uuid';
 
-const toString = value => (isString(value) ? value : JSON.stringify(value));
-const getValue = option => get(option, 'value', option);
-const getLabel = option => get(option, 'label', toString(getValue(option)));
+const toString = (value) => (isString(value) ? value : JSON.stringify(value));
+const getValue = (option) => get(option, 'value', option);
+const getLabel = (option) => get(option, 'label', toString(getValue(option)));
 
 class Contexts extends Component {
   static propTypes = {
@@ -29,8 +29,7 @@ class Contexts extends Component {
     this.id = uuid();
   }
 
-  onChange = ({ target: { value: index } }) =>
-    this.props.input.onChange(getValue(this.props.options[index]));
+  onChange = ({ target: { value: index } }) => this.props.input.onChange(getValue(this.props.options[index]));
 
   renderOption = (option, index) => {
     const {

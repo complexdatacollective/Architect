@@ -23,7 +23,10 @@ class Overview extends Component {
     const nodeTypes = get(this.props.codebook, 'node', {});
     if (size(nodeTypes) === 0) {
       return (
-        <em>No node types defined, yet. <Link screen="type" params={{ category: 'node' }}>Create one?</Link></em>
+        <em>
+          No node types defined, yet.
+          <Link screen="type" params={{ category: 'node' }}>Create one?</Link>
+        </em>
       );
     }
 
@@ -46,7 +49,10 @@ class Overview extends Component {
 
     if (size(edgeTypes) === 0) {
       return (
-        <em>No edge types defined, yet. <Link screen="type" params={{ category: 'edge' }}>Create one?</Link></em>
+        <em>
+          No edge types defined, yet.
+          <Link screen="type" params={{ category: 'edge' }}>Create one?</Link>
+        </em>
       );
     }
 

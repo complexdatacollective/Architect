@@ -46,8 +46,9 @@ class Background extends PureComponent {
             label="Choose a background type"
           />
         </Row>
-        { (!useImage) &&
-          <React.Fragment>
+        { (!useImage)
+          && (
+          <>
             <Row>
               <div id={getFieldId('background.concentricCircles')} data-name="Background &gt; Concentric Circles" />
               <ValidatedField
@@ -55,7 +56,7 @@ class Background extends PureComponent {
                 component={Fields.Number}
                 label="Number of concentric circles to use:"
                 type="number"
-                normalize={value => parseInt(value, 10) || value}
+                normalize={(value) => parseInt(value, 10) || value}
                 validation={{ required: true, positiveNumber: true }}
               />
             </Row>
@@ -66,9 +67,10 @@ class Background extends PureComponent {
                 label="Skew the size of the circles so that the middle is proportionally larger."
               />
             </Row>
-          </React.Fragment>
-        }
-        { (useImage) &&
+          </>
+          )}
+        { (useImage)
+          && (
           <Row>
             <div style={{ position: 'relative', minHeight: '100px' }}>
               <div id={getFieldId('background.image')} data-name="Background &gt; Image" />
@@ -80,7 +82,7 @@ class Background extends PureComponent {
               />
             </div>
           </Row>
-        }
+          )}
       </Section>
     );
   }

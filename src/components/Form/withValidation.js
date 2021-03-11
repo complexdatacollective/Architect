@@ -9,8 +9,7 @@ import { getValidations } from '@app/utils/validations';
  * if validate appears to change, and since we use function generators, identities will not match
  * if we fetch this directly in the render method.
  */
-const withValidation = WrappedComponent =>
-  class Validated extends Component {
+const withValidation = (WrappedComponent) => class Validated extends Component {
     static propTypes = {
       validation: PropTypes.object.isRequired,
     };
@@ -32,6 +31,6 @@ const withValidation = WrappedComponent =>
     render() {
       return <WrappedComponent {...this.props} validate={this.state.validate} />;
     }
-  };
+};
 
 export default withValidation;

@@ -19,7 +19,9 @@ const defaultRect = {
 };
 
 const tween = (options, { clone, fromBounds }) => {
-  const { name, from, to, before, after, duration } = { ...defaults, ...options };
+  const {
+    name, from, to, before, after, duration,
+  } = { ...defaults, ...options };
   const root = document.getElementsByTagName('body')[0];
   const state = store.getState();
 
@@ -109,6 +111,5 @@ const captureStartAndDefer = (options) => {
 
   tween(options, { clone, fromBounds });
 };
-
 
 export default captureStartAndDefer;

@@ -1,4 +1,6 @@
-import { reduce, get, compact, uniq, map } from 'lodash';
+import {
+  reduce, get, compact, uniq, map,
+} from 'lodash';
 import { getType } from '@selectors/codebook';
 import { makeGetIsUsed } from '@selectors/codebook/isUsed';
 import { getVariableIndex } from '@selectors/indexes';
@@ -33,11 +35,10 @@ const getStageIndexFromPath = (path) => {
  * @param {any} value Value to match in usage index
  * @returns {string[]} List of paths ("usage array")
  */
-export const getUsage = (index, value) =>
-  reduce(index, (acc, indexValue, path) => {
-    if (indexValue !== value) { return acc; }
-    return [...acc, path];
-  }, []);
+export const getUsage = (index, value) => reduce(index, (acc, indexValue, path) => {
+  if (indexValue !== value) { return acc; }
+  return [...acc, path];
+}, []);
 
 /**
  * Get stage meta that matches "usage array" (deduped).
@@ -50,7 +51,7 @@ export const getUsage = (index, value) =>
 export const getUsageAsStageMeta = (state, usage) => {
   const stageMetaByIndex = getStageMetaByIndex(state);
   const stageIndexes = compact(uniq(usage.map(getStageIndexFromPath)));
-  return stageIndexes.map(stageIndex => get(stageMetaByIndex, stageIndex));
+  return stageIndexes.map((stageIndex) => get(stageMetaByIndex, stageIndex));
 };
 
 const sortByLabel = (a, b) => {
@@ -74,9 +75,9 @@ export const getEntityProperties = (state, { entity, type }) => {
     (variable, id) => {
       const inUse = get(isUsedIndex, id, false);
 
-      const usage = inUse ?
-        getUsageAsStageMeta(state, getUsage(variableIndex, id)).sort(sortByLabel) :
-        [];
+      const usage = inUse
+        ? getUsageAsStageMeta(state, getUsage(variableIndex, id)).sort(sortByLabel)
+        : [];
 
       const usageString = usage.map(({ label }) => label).join(', ').toUpperCase();
 

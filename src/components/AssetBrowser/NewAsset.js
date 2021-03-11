@@ -11,13 +11,13 @@ const NewAsset = ({
   type,
   onCreate,
 }) => (
-  <React.Fragment>
+  <>
     <h3>Import a new resource</h3>
     <AutoFileDrop
       type={type}
       onDrop={onCreate}
     />
-  </React.Fragment>
+  </>
 );
 
 NewAsset.propTypes = {

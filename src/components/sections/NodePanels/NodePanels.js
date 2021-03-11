@@ -11,7 +11,9 @@ import OrderedList from '../../OrderedList';
 import { getFieldId } from '../../../utils/issues';
 import NodePanel from './NodePanel';
 
-const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
+const NodePanels = ({
+  form, createNewPanel, panels, ...rest
+}) => {
   const isFull = panels && panels.length === 2;
 
   return (
@@ -26,11 +28,12 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
           form={form}
         />
 
-        { !isFull &&
+        { !isFull
+          && (
           <div className="stage-editor-section-content-items__controls">
             <Button onClick={() => createNewPanel()} size="small" icon="add">Add new panel</Button>
           </div>
-        }
+          )}
       </div>
     </Section>
   );
@@ -61,7 +64,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewPanel: bindActionCreators(
-    () => arrayPush(form, 'panels', { id: uuid(), title: null, dataSource: 'existing', filter: null }),
+    () => arrayPush(form, 'panels', {
+      id: uuid(), title: null, dataSource: 'existing', filter: null,
+    }),
     dispatch,
   ),
 });

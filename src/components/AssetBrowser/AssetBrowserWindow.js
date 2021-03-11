@@ -5,7 +5,7 @@ import { getCSSVariableAsNumber } from '@codaco/ui/lib/utils/CSSVariables';
 import window from '@codaco/ui/lib/components/window';
 import Button from '@codaco/ui/lib/components/Button';
 import SimpleDialog from '@codaco/ui/lib/components/Dialog/Simple';
-import Stackable from '../../components/Stackable';
+import Stackable from '../Stackable';
 import AssetBrowser from './AssetBrowser';
 
 const AssetBrowserWindow = ({

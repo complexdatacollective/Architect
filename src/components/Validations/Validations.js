@@ -25,13 +25,12 @@ const validate = (validations) => {
 
 const format = (value = {}) => toPairs(value);
 
-const getOptionsWithUsedDisabled = (options, used) =>
-  options.map((option) => {
-    if (!used.includes(option.value)) { return option; }
-    return { ...option, disabled: true };
-  });
+const getOptionsWithUsedDisabled = (options, used) => options.map((option) => {
+  if (!used.includes(option.value)) { return option; }
+  return { ...option, disabled: true };
+});
 
-const AddItem = props => (
+const AddItem = (props) => (
   <Button color="primary" icon="add" size="small" {...props}>
     Add new
   </Button>
@@ -105,18 +104,18 @@ const Validations = ({
         onDelete={handleDelete}
         validate={validate}
       >
-        { addNew &&
+        { addNew
+          && (
           <Validation
             onUpdate={handleAddNew}
             onDelete={() => setAddNew(false)}
             options={availableOptions}
           />
-        }
+          )}
       </Field>
 
-      { !isFull &&
-        <AddItem onClick={() => setAddNew(true)} />
-      }
+      { !isFull
+        && <AddItem onClick={() => setAddNew(true)} />}
     </div>
   );
 };

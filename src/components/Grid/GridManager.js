@@ -16,7 +16,7 @@ import withEditHandlers from './withEditHandlers';
 
 const formName = 'editable-list-form';
 
-const notEmpty = value => (
+const notEmpty = (value) => (
   value && value.length > 0 ? undefined : 'You must create at least one item'
 );
 
@@ -74,13 +74,14 @@ const GridManager = ({
               {...rest}
             />
           </div>
-          { hasSpace &&
+          { hasSpace
+            && (
             <div className="grid-manager__add">
               <Button onClick={handleAddNew} size="small" icon="add">
                 Add new item
               </Button>
             </div>
-          }
+            )}
         </div>
         <InlineEditScreen
           show={!!editField}

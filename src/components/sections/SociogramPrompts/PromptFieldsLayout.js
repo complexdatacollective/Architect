@@ -37,7 +37,7 @@ const PromptFields = ({
         component={VariableSelect}
         validation={{ required: true }}
         options={layoutVariablesForSubject}
-        onCreateOption={value => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
+        onCreateOption={(value) => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
       />
     </Row>
     {/* <Row>
@@ -56,9 +56,13 @@ const PromptFields = ({
         label="Allow positioning?"
       />
     </Row> */}
-    { allowPositioning &&
+    { allowPositioning
+      && (
       <Row>
-        <h4>Sort Unplaced Nodes <small>(optional)</small></h4>
+        <h4>
+          Sort Unplaced Nodes
+          <small>(optional)</small>
+        </h4>
         <p>
           Nodes without any coordinates are stacked in a bucket until your participant drags them
           into position. You can control the order of this stack, which will determine the order
@@ -70,7 +74,7 @@ const PromptFields = ({
           variables={variablesForSubject}
         />
       </Row>
-    }
+      )}
   </Section>
 );
 

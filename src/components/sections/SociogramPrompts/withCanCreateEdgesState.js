@@ -10,7 +10,8 @@ const edgesState = connect(
     return {
       createEdge,
     };
-  });
+  },
+);
 
 const edgesToggleState = withState(
   'canCreateEdge',

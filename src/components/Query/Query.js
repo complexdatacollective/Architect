@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rules from './Rules';
 
-const Query = ({ rules, join, codebook, onChange, openDialog, error, meta }) => (
+const Query = ({
+  rules, join, codebook, onChange, openDialog, error, meta,
+}) => (
   <Rules
     meta={meta}
     rules={rules}

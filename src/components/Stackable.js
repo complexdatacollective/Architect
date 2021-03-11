@@ -13,7 +13,7 @@ const withStackableId = withState('stackableId', 'setStackableId', null);
 
 class Stackable extends Component {
   componentWillMount() {
-    const group = this.props.group;
+    const { group } = this.props;
     const id = uuid();
     this.props.registerStackable(id, group);
     this.props.setStackableId(id);
@@ -37,9 +37,9 @@ class Stackable extends Component {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         {children({ stackIndex })}
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -63,16 +63,16 @@ Stackable.defaultProps = {
 };
 
 const mapStateToProps = (state, { stackableId }) => {
-  const stackIndex = state.stacks[stackableId] ?
-    state.stacks[stackableId].index :
-    0;
+  const stackIndex = state.stacks[stackableId]
+    ? state.stacks[stackableId].index
+    : 0;
 
   return ({
     stackIndex,
   });
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   moveToTop: bindActionCreators(stackActions.moveToTop, dispatch),
   registerStackable: bindActionCreators(stackActions.registerStackable, dispatch),
   unregisterStackable: bindActionCreators(stackActions.unregisterStackable, dispatch),

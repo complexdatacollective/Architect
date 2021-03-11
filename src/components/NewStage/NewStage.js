@@ -21,7 +21,10 @@ const NewStage = ({
       <p>
         Below you can find the available interfaces currently bundled in Interviewer,
         grouped by type. For further details about each of these interfaces, please visit
-        our <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>.
+        our
+        {' '}
+        <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>
+        .
       </p>
     </Section>
     <div className="new-stage__options">

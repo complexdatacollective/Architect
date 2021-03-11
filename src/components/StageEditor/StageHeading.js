@@ -10,8 +10,7 @@ import { getStageIndex } from '@selectors/protocol';
 import { ValidatedField } from '../Form';
 import { getFieldId } from '../../utils/issues';
 
-const getTimelineImage = type =>
-  get(timelineImages, type, timelineImages.Default);
+const getTimelineImage = (type) => get(timelineImages, type, timelineImages.Default);
 
 const StageHeading = ({
   stageNumber,
@@ -22,7 +21,8 @@ const StageHeading = ({
   <div className="stage-editor-section stage-heading">
     <div className="stage-meta">
       {
-        getTimelineImage(type) &&
+        getTimelineImage(type)
+          && (
           <div className="timeline-preview">
             <img
               src={getTimelineImage(type)}
@@ -32,6 +32,7 @@ const StageHeading = ({
             />
             <div className="timeline-stage__notch">{stageNumber}</div>
           </div>
+          )
       }
       <div className="stage-name-container">
         <div id={getFieldId('label')} data-name="Stage name" />

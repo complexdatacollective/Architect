@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Node from '@codaco/ui/lib/components/Node';
 
-const PreviewNode = ({ label, color, onClick, selected }) => (
+const PreviewNode = ({
+  label, color, onClick, selected,
+}) => (
   <div className="preview-node" onClick={onClick}>
     <Node label={label} selected={selected} color={color} />
   </div>
@@ -68,4 +70,3 @@ NodeSelect.defaultProps = {
 };
 
 export default NodeSelect;
-

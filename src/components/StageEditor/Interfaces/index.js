@@ -35,5 +35,4 @@ const emptyInterface = {
   template: {},
 };
 
-export const getInterface = interfaceType =>
-  get(interfaces, interfaceType, emptyInterface);
+export const getInterface = (interfaceType) => get(interfaces, interfaceType, emptyInterface);

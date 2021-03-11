@@ -23,7 +23,9 @@ const NodePanel = ({ fieldId, form, ...rest }) => (
       <h3
         id={getFieldId(`${fieldId}.dataSource`)}
         data-name="Panel data source"
-      >Data source</h3>
+      >
+        Data source
+      </h3>
       <p>
         Choose where the data for this panel should come from (either the in-progress interview
         session [&quot;People you have already named&quot;], or an external network data file

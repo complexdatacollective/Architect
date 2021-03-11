@@ -8,7 +8,7 @@ const mockProps = {
   location: { pathname: '' },
 };
 
-const process = global.process;
+const { process } = global;
 
 jest.mock('../../hooks/useUpdater');
 

@@ -22,7 +22,7 @@ const sortModes = [
   'manual',
 ];
 
-const notEmpty = value => (
+const notEmpty = (value) => (
   value && value.length > 0 ? undefined : 'You must create at least one item.'
 );
 

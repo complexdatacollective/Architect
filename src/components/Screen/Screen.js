@@ -21,9 +21,8 @@ const Screen = ({
       <div className="screen__container" ref={setWindowRoot}>
         <div className="screen__content">
           <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
-            { typeof children === 'function' &&
-              children({ windowRoot })
-            }
+            { typeof children === 'function'
+              && children({ windowRoot })}
             { children && typeof children !== 'function' && children }
           </ScreenErrorBoundary>
         </div>

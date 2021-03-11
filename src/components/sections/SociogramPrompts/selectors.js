@@ -5,8 +5,7 @@ import { asOptions } from '@selectors/utils';
 export const getLayoutVariablesForSubject = (state, { entity, type }) => {
   const variableOptions = getVariableOptionsForSubject(state, { entity, type });
   const layoutOptions = variableOptions.filter(
-    ({ type: variableType }) =>
-      variableType === 'layout',
+    ({ type: variableType }) => variableType === 'layout',
   );
 
   return layoutOptions;

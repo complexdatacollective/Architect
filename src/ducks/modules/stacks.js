@@ -3,17 +3,16 @@ import {
   omit,
 } from 'lodash';
 
-const getNextIndexForGroup = (indexes, group) =>
-  reduce(
-    indexes,
-    (memo, stackable) => {
-      if (group === stackable.group && stackable.index >= memo) {
-        return stackable.index + 1;
-      }
-      return memo;
-    },
-    0,
-  );
+const getNextIndexForGroup = (indexes, group) => reduce(
+  indexes,
+  (memo, stackable) => {
+    if (group === stackable.group && stackable.index >= memo) {
+      return stackable.index + 1;
+    }
+    return memo;
+  },
+  0,
+);
 
 const defaultGroup = 'GLOBAL';
 
@@ -27,12 +26,12 @@ const registerStackable = (id, group = defaultGroup) => ({
   group,
 });
 
-const unregisterStackable = id => ({
+const unregisterStackable = (id) => ({
   type: UNREGISTER_STACKABLE,
   id,
 });
 
-const moveToTop = id => ({
+const moveToTop = (id) => ({
   type: MOVE_TO_TOP,
   id,
 });

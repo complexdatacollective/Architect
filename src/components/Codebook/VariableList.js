@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Heading, withSort, rowClassName, SortDirection } from './Variables';
+import {
+  Heading, withSort, rowClassName, SortDirection,
+} from './Variables';
 
-const Variables = ({ variables, sortBy, sortDirection, sort }) => {
+const Variables = ({
+  variables, sortBy, sortDirection, sort,
+}) => {
   const headingProps = {
     sortBy,
     sortDirection,

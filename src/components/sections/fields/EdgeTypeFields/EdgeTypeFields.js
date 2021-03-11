@@ -47,11 +47,12 @@ class EdgeTypeFields extends Component {
               validation={{ required: true }}
             />
 
-            { edgeTypes.length === 0 &&
+            { edgeTypes.length === 0
+              && (
               <p className="stage-editor-section-node-type__empty">
                 No edge types currently defined. Use the button below to create one.
               </p>
-            }
+              )}
 
             <Button
               color="primary"
@@ -87,6 +88,5 @@ EdgeTypeFields.defaultProps = {
   handleResetStage: noop,
   typeScreenMessage: null,
 };
-
 
 export default EdgeTypeFields;

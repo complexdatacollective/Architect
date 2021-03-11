@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Icon } from '@codaco/ui';
 
-const RoundButton = ({ icon, content, size, className, ...props }) => (
+const RoundButton = ({
+  icon, content, size, className, ...props
+}) => (
   <button
     className={cx('form-round-button', className, { [`form-round-button--${size}`]: !!size })}
     {...props}

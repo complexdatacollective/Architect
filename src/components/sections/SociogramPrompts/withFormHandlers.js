@@ -10,13 +10,12 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 const formHandlers = withHandlers({
-  clearFieldIfEmpty: ({ clearField }) =>
-    (event, name, value) => {
-      if (isEmpty(value)) {
-        clearField(name);
-        event.preventDefault();
-      }
-    },
+  clearFieldIfEmpty: ({ clearField }) => (event, name, value) => {
+    if (isEmpty(value)) {
+      clearField(name);
+      event.preventDefault();
+    }
+  },
 });
 
 const withFormHandlers = compose(

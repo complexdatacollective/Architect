@@ -14,8 +14,7 @@ const defaultReducer = jest.fn(() => ({
   randomProperty: crypto.randomBytes(20).toString('hex'),
 }));
 
-const getRewindableReducer = (reducer = defaultReducer, options = {}) =>
-  createTimeline(reducer, options);
+const getRewindableReducer = (reducer = defaultReducer, options = {}) => createTimeline(reducer, options);
 
 describe('timeline middleware', () => {
   let rewindableReducer;
@@ -42,7 +41,7 @@ describe('timeline middleware', () => {
     it('each subsequent call adds an event to the timeline', () => {
       const nextState = times(3)
         .reduce(
-          state => rewindableReducer(state, {}),
+          (state) => rewindableReducer(state, {}),
           undefined,
         );
 
@@ -57,7 +56,7 @@ describe('timeline middleware', () => {
 
       const nextState = times(3)
         .reduce(
-          state => timelineReducer(state, {}),
+          (state) => timelineReducer(state, {}),
           undefined,
         );
 
@@ -70,7 +69,7 @@ describe('timeline middleware', () => {
     it('can revert to a specific point on the timeline', () => {
       const nextState = times(10)
         .reduce(
-          state => rewindableReducer(state, {}),
+          (state) => rewindableReducer(state, {}),
           undefined,
         );
 
@@ -89,7 +88,7 @@ describe('timeline middleware', () => {
     it('can revert to an unused state', () => {
       const nextState = times(10)
         .reduce(
-          state => rewindableReducer(state, {}),
+          (state) => rewindableReducer(state, {}),
           undefined,
         );
 
@@ -125,7 +124,7 @@ describe('timeline middleware', () => {
       it('timeline is limited to 3 items', () => {
         const nextState = times(10)
           .reduce(
-            state => rewindableReducer(state, {}),
+            (state) => rewindableReducer(state, {}),
             undefined,
           );
 
@@ -139,7 +138,7 @@ describe('timeline middleware', () => {
 
       beforeEach(() => {
         const options = {
-          filter: action => action.type === ignoredType,
+          filter: (action) => action.type === ignoredType,
         };
         rewindableReducer = getRewindableReducer(undefined, options);
       });
@@ -148,14 +147,14 @@ describe('timeline middleware', () => {
         // Add some regular actions
         const nextState = times(3)
           .reduce(
-            state => rewindableReducer(state, {}),
+            (state) => rewindableReducer(state, {}),
             undefined,
           );
 
         // Add some ignored actions
         const filteredState = times(3)
           .reduce(
-            state => rewindableReducer(state, { type: ignoredType }),
+            (state) => rewindableReducer(state, { type: ignoredType }),
             nextState,
           );
 

@@ -32,8 +32,7 @@ const sort = (list, sortOrder) => {
   return orderBy(list, sortOrder.property, sortOrder.direction);
 };
 
-const filter = (list, { query, sortOrder }) =>
-  sort(search(list, query), sortOrder);
+const filter = (list, { query, sortOrder }) => sort(search(list, query), sortOrder);
 
 const Variables = ({
   form,

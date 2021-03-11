@@ -9,7 +9,7 @@ import PromptFields from './PromptFields';
 import withMapFormToProps from '../../enhancers/withMapFormToProps';
 // import Tip from '../../Tip';
 
-const NameGeneratorAutoCompletePrompts = props => (
+const NameGeneratorAutoCompletePrompts = (props) => (
   <EditableList
     editComponent={PromptFields}
     previewComponent={PromptPreview}

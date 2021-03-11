@@ -9,7 +9,9 @@ const ALLOWED_TYPES = [
 ];
 
 // TODO: isUsed
-const mapStateToProps = (state, { entity, type, form, fields }) => {
+const mapStateToProps = (state, {
+  entity, type, form, fields,
+}) => {
   const usedVariables = (formValueSelector(form)(state, fields.name) || [])
     .map(({ variable }) => variable);
   const variableOptions = getVariableOptionsForSubject(state, { entity, type });
@@ -35,22 +37,19 @@ const mapDispatchToProps = {
 const assignAttributesHandlers = withHandlers({
   handleDelete: ({
     fields,
-  }) =>
-    (index) => {
-      fields.remove(index);
-      return undefined;
-    },
+  }) => (index) => {
+    fields.remove(index);
+    return undefined;
+  },
   handleCreateNewVariable: ({
     handleCompleteCreateNewVariable, createNewVariableAtIndex, fields, addNewVariable,
-  }) =>
-    (variable) => {
-      const newAttribute = { variable, value: null };
-      fields.splice(createNewVariableAtIndex, 1, newAttribute);
-      handleCompleteCreateNewVariable();
-      addNewVariable(variable);
-    },
-  handleAddNew: ({ fields }) =>
-    () => fields.push({}),
+  }) => (variable) => {
+    const newAttribute = { variable, value: null };
+    fields.splice(createNewVariableAtIndex, 1, newAttribute);
+    handleCompleteCreateNewVariable();
+    addNewVariable(variable);
+  },
+  handleAddNew: ({ fields }) => () => fields.push({}),
 });
 
 const withNewVariableHandlers = compose(

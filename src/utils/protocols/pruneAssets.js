@@ -3,8 +3,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import log from 'electron-log';
 
-const contains = (protocol, string) =>
-  protocol.indexOf(string) !== -1;
+const contains = (protocol, string) => protocol.indexOf(string) !== -1;
 
 const isInTempPath = (filePath) => {
   const tempPath = remote.app.getPath('temp');

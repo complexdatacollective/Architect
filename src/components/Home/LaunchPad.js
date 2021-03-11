@@ -16,8 +16,9 @@ const LaunchPad = ({
   lastEditedProtocol,
   otherRecentProtocols,
 }) => (
-  <React.Fragment>
-    { lastEditedProtocol &&
+  <>
+    { lastEditedProtocol
+      && (
       <Section className="launch-pad">
         <Group color="sea-green" className="resume-group home-group--flex">
           <div className="launch-pad__resume">
@@ -33,7 +34,7 @@ const LaunchPad = ({
           <div className="launch-pad__action-divider" />
           <div className="launch-pad__resume">
             {
-              otherRecentProtocols.map(protocol => (
+              otherRecentProtocols.map((protocol) => (
                 <ProtocolCard
                   key={protocol.filePath}
                   condensed
@@ -48,7 +49,7 @@ const LaunchPad = ({
           </div>
         </Group>
       </Section>
-    }
+      )}
     <Section className="launch-pad">
       <Group>
         <h2>Tasks</h2>
@@ -80,7 +81,7 @@ const LaunchPad = ({
         </div>
       </Group>
     </Section>
-  </React.Fragment>
+  </>
 );
 
 LaunchPad.propTypes = {
@@ -97,7 +98,7 @@ LaunchPad.defaultProps = {
 
 const mapStateToProps = (state) => {
   const recentProtocols = get(state, 'recentProtocols', [])
-    .filter(meta => !!meta.schemaVersion);
+    .filter((meta) => !!meta.schemaVersion);
 
   return {
     lastEditedProtocol: first(recentProtocols),

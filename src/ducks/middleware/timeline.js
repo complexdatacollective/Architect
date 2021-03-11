@@ -9,7 +9,7 @@ const defaultOptions = {
 const JUMP = 'TIMELINE/JUMP';
 const RESET = 'TIMELINE/RESET';
 
-const jump = locus => ({
+const jump = (locus) => ({
   type: JUMP,
   payload: { locus },
 });

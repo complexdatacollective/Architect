@@ -10,7 +10,7 @@ import { actionCreators as previewActions } from '../../ducks/modules/preview';
 import EditorScreen from '../Screen/EditorScreen';
 import StageEditor, { formName } from '../StageEditor';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   invalid: isFormInvalid(formName)(state),
 });
 
@@ -29,17 +29,14 @@ const mapDispatchToProps = (dispatch, props) => {
 const stageEditorState = connect(mapStateToProps, mapDispatchToProps);
 
 const stageEditorHanders = withHandlers({
-  handlePreview: ({ previewStage }) =>
-    () => previewStage(),
-  onComplete: ({ onComplete, closePreview }) =>
-    (...args) => {
-      closePreview();
-      onComplete(...args);
-    },
+  handlePreview: ({ previewStage }) => () => previewStage(),
+  onComplete: ({ onComplete, closePreview }) => (...args) => {
+    closePreview();
+    onComplete(...args);
+  },
 });
 
-const invalidStageMessage = invalid =>
-  (invalid ? ['Preview requires a valid stage configuration'] : []);
+const invalidStageMessage = (invalid) => (invalid ? ['Preview requires a valid stage configuration'] : []);
 
 const stageEditorProps = withProps(({
   handlePreview,
@@ -54,7 +51,9 @@ const stageEditorProps = withProps(({
       color="paradise-pink"
       disabled={invalid}
       title={invalid ? 'Preview requires a valid stage configuration' : ''}
-    >Preview</Button>,
+    >
+      Preview
+    </Button>,
     ...invalidStageMessage(invalid),
   ],
 }));

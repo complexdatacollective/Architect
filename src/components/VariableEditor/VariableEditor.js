@@ -21,7 +21,7 @@ const mapStateToProps = (state, { entity, type, ...props }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   updateVariable: bindActionCreators(actions.updateVariable, dispatch),
   createVariable: bindActionCreators(actions.createVariable, dispatch),
 });
@@ -31,7 +31,9 @@ const mapDispatchToProps = dispatch => ({
  */
 const VariableEditor = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withProps(({ entity, type, onComplete, createVariable, updateVariable }) => ({
+  withProps(({
+    entity, type, onComplete, createVariable, updateVariable,
+  }) => ({
     form: formName,
     component: VariableFields,
     onSubmit: (options) => {
@@ -39,7 +41,7 @@ const VariableEditor = compose(
         const newVariable = createVariable(entity, type, options);
         onComplete(newVariable);
       } else {
-        const id = options.id;
+        const { id } = options;
         updateVariable(entity, type, id, options);
         onComplete({ entity, type, variable: id });
       }

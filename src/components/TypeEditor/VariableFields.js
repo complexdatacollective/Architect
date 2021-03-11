@@ -15,7 +15,7 @@ import Options from './Options';
 const variableTypes = Object.values(VARIABLE_TYPES);
 
 class VariableFields extends Component {
-  handleNormalizeName = value => safeName(value);
+  handleNormalizeName = (value) => safeName(value);
 
   render() {
     const {
@@ -25,7 +25,7 @@ class VariableFields extends Component {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Row>
           <div id={getFieldId('name')} data-name="Variable name" />
           <ValidatedField
@@ -50,24 +50,26 @@ class VariableFields extends Component {
           />
         </Row>
         <Row>
-          { VARIABLE_TYPES_WITH_OPTIONS.includes(variableType) &&
+          { VARIABLE_TYPES_WITH_OPTIONS.includes(variableType)
+            && (
             <Options
               name="options"
               label="Options"
               form={form}
             />
-          }
+            )}
 
-          { variableType &&
+          { variableType
+            && (
             <Validations
               name="validation"
               label="Validations"
               variableType={variableType}
               form={form}
             />
-          }
+            )}
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -93,8 +95,7 @@ const mapStateToProps = (state, { form }) => {
 };
 
 const mapDispatchToProps = (dispatch, { form }) => ({
-  autofill: (field, value) =>
-    dispatch(autofill(form, field, value)),
+  autofill: (field, value) => dispatch(autofill(form, field, value)),
 });
 
 export { VariableFields };

@@ -6,12 +6,12 @@ import Preview from '../../EditableList/Preview';
 
 class PromptPreview extends Preview {
   preview() {
-    const fieldId = this.props.fieldId;
+    const { fieldId } = this.props;
 
     return (
       <Field
         name={`${fieldId}.text`}
-        component={field => <Markdown source={field.input.value} />}
+        component={(field) => <Markdown source={field.input.value} />}
       />
     );
   }

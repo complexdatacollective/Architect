@@ -31,23 +31,24 @@ const Group = ({
     },
   );
 
-  const iconVariant = tada ?
-    {
+  const iconVariant = tada
+    ? {
       ...baseVariant,
       animate: { opacity: [1, 1], rotate: [-15, 10, -7, 0] },
-    } :
-    baseVariant;
+    }
+    : baseVariant;
 
   return (
     <motion.div className={classes} style={styles} {...rest}>
-      { icon &&
+      { icon
+        && (
         <motion.div
           className="home-group__icon"
           variants={iconVariant}
         >
           <Icon name={icon} />
         </motion.div>
-      }
+        )}
       {children}
     </motion.div>
   );

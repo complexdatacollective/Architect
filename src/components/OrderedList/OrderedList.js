@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers, defaultProps, renameProp } from 'recompose';
+import {
+  compose, withHandlers, defaultProps, renameProp,
+} from 'recompose';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 
 const SortableItem = SortableElement(
@@ -55,7 +57,7 @@ export default compose(
   }),
   renameProp('sortable', 'disabled'),
   withHandlers({
-    onSortEnd: props => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
+    onSortEnd: (props) => ({ oldIndex, newIndex }) => props.fields.move(oldIndex, newIndex),
   }),
   SortableContainer,
 )(OrderedList);

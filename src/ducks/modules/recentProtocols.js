@@ -4,17 +4,14 @@ import { actionTypes as sessionActionTypes } from '@modules/session';
 
 const initialState = [];
 
-const addProtocol = (state, protocol) =>
-  uniqBy([protocol, ...state], 'filePath')
-    .sort((a, b) => b.lastModified - a.lastModified)
-    .slice(0, 50);
+const addProtocol = (state, protocol) => uniqBy([protocol, ...state], 'filePath')
+  .sort((a, b) => b.lastModified - a.lastModified)
+  .slice(0, 50);
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case sessionActionTypes.OPEN_NETCANVAS_ERROR:
-      return state.filter(protocol =>
-        protocol.filePath !== action.payload.filePath,
-      );
+      return state.filter((protocol) => protocol.filePath !== action.payload.filePath);
     case sessionActionTypes.OPEN_NETCANVAS_SUCCESS: {
       const { filePath, protocol } = action.payload;
       return addProtocol(state, {
@@ -52,4 +49,3 @@ export {
   actionCreators,
   actionTypes,
 };
-

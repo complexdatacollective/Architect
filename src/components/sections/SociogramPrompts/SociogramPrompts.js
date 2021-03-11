@@ -10,7 +10,7 @@ import PromptFields from './PromptFields';
 
 const template = () => ({ sortOrder: [] });
 
-const SociogramPrompts = props => (
+const SociogramPrompts = (props) => (
   <EditableList
     title="Edit Prompt"
     previewComponent={PromptPreview}

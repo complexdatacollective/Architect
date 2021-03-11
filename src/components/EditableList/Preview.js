@@ -21,7 +21,7 @@ class Preview extends Component {
 
     return (
       <Flipped flipId={flipId}>
-        {flipProps => (
+        {(flipProps) => (
           <Item
             {...flipProps}
             sortable={sortable}

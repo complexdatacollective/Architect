@@ -4,8 +4,7 @@ import { get } from 'lodash';
 
 import inputImages from '../../../images/inputs';
 
-const getInputImage = type =>
-  get(inputImages, type);
+const getInputImage = (type) => get(inputImages, type);
 
 const InputPreview = ({
   image,

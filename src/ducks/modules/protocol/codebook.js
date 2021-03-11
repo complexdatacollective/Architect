@@ -1,5 +1,7 @@
 import uuid from 'uuid';
-import { omit, get, has, isEmpty } from 'lodash';
+import {
+  omit, get, has, isEmpty,
+} from 'lodash';
 import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
@@ -83,106 +85,100 @@ const deleteVariable = (entity, type, variable) => ({
   },
 });
 
-const createTypeThunk = (entity, configuration) =>
-  (dispatch) => {
-    const type = uuid();
+const createTypeThunk = (entity, configuration) => (dispatch) => {
+  const type = uuid();
 
-    dispatch(createType(entity, type, configuration));
+  dispatch(createType(entity, type, configuration));
 
-    return {
-      type,
-      entity,
-    };
+  return {
+    type,
+    entity,
+  };
+};
+
+const createEdgeThunk = (configuration) => (dispatch, getState) => {
+  const entity = 'edge';
+  const state = getState();
+  const protocol = state.protocol.present;
+  const color = configuration.color || getNextCategoryColor(protocol, entity);
+  const type = uuid();
+
+  dispatch(createType(entity, type, { ...configuration, color }));
+
+  return {
+    type,
+    entity,
+  };
+};
+
+const createVariableThunk = (entity, type, configuration) => (dispatch, getState) => {
+  if (!configuration.name) {
+    throw new Error('Cannot create a new variable without a name');
+  }
+
+  if (!configuration.type) {
+    throw new Error('Cannot create a new variable without a type');
+  }
+
+  const safeConfiguration = {
+    ...configuration,
+    name: safeName(configuration.name),
   };
 
-const createEdgeThunk = configuration =>
-  (dispatch, getState) => {
-    const entity = 'edge';
-    const state = getState();
-    const protocol = state.protocol.present;
-    const color = configuration.color || getNextCategoryColor(protocol, entity);
-    const type = uuid();
+  if (isEmpty(safeConfiguration.name)) {
+    throw new Error('Variable name contains no valid characters');
+  }
 
-    dispatch(createType(entity, type, { ...configuration, color }));
+  const variables = getVariablesForSubject(getState(), { entity, type });
+  const variableNameExists = Object.values(variables)
+    .some(({ name }) => name === safeConfiguration.name);
 
-    return {
-      type,
-      entity,
-    };
+  // We can't use same variable name twice.
+  if (variableNameExists) {
+    throw new Error(`Variable with name "${safeConfiguration.name}" already exists`);
+  }
+
+  const variable = uuid();
+
+  dispatch(createVariable(entity, type, variable, safeConfiguration));
+
+  return {
+    entity,
+    type,
+    variable,
+  };
+};
+
+const updateVariableThunk = (entity, type, variable, configuration, merge = false) => (dispatch, getState) => {
+  const state = getState();
+  const variableExists = has(getVariablesForSubject(state, { entity, type }), variable);
+
+  if (!variableExists) {
+    throw new Error(`Variable "${variable}" does not exist`);
+  }
+
+  dispatch(updateVariable(entity, type, variable, configuration, merge));
+};
+
+const deleteVariableThunk = (entity, type, variable) => (dispatch, getState) => {
+  const isUsed = makeGetIsUsed({ formNames: [] })(getState());
+  if (get(isUsed, variable, false)) { return false; }
+  dispatch(deleteVariable(entity, type, variable));
+  return true;
+};
+
+const updateDisplayVariableThunk = (entity, type, variable) => (dispatch, getState) => {
+  const codebook = getCodebook(getState());
+
+  const previousConfiguration = get(codebook, [entity, type], {});
+
+  const updatedConfiguration = {
+    ...previousConfiguration,
+    displayVariable: variable,
   };
 
-const createVariableThunk = (entity, type, configuration) =>
-  (dispatch, getState) => {
-    if (!configuration.name) {
-      throw new Error('Cannot create a new variable without a name');
-    }
-
-    if (!configuration.type) {
-      throw new Error('Cannot create a new variable without a type');
-    }
-
-    const safeConfiguration = {
-      ...configuration,
-      name: safeName(configuration.name),
-    };
-
-    if (isEmpty(safeConfiguration.name)) {
-      throw new Error('Variable name contains no valid characters');
-    }
-
-    const variables = getVariablesForSubject(getState(), { entity, type });
-    const variableNameExists = Object.values(variables)
-      .some(({ name }) => name === safeConfiguration.name);
-
-    // We can't use same variable name twice.
-    if (variableNameExists) {
-      throw new Error(`Variable with name "${safeConfiguration.name}" already exists`);
-    }
-
-    const variable = uuid();
-
-    dispatch(createVariable(entity, type, variable, safeConfiguration));
-
-    return {
-      entity,
-      type,
-      variable,
-    };
-  };
-
-const updateVariableThunk = (entity, type, variable, configuration, merge = false) =>
-  (dispatch, getState) => {
-    const state = getState();
-    const variableExists = has(getVariablesForSubject(state, { entity, type }), variable);
-
-    if (!variableExists) {
-      throw new Error(`Variable "${variable}" does not exist`);
-    }
-
-    dispatch(updateVariable(entity, type, variable, configuration, merge));
-  };
-
-const deleteVariableThunk = (entity, type, variable) =>
-  (dispatch, getState) => {
-    const isUsed = makeGetIsUsed({ formNames: [] })(getState());
-    if (get(isUsed, variable, false)) { return false; }
-    dispatch(deleteVariable(entity, type, variable));
-    return true;
-  };
-
-const updateDisplayVariableThunk = (entity, type, variable) =>
-  (dispatch, getState) => {
-    const codebook = getCodebook(getState());
-
-    const previousConfiguration = get(codebook, [entity, type], {});
-
-    const updatedConfiguration = {
-      ...previousConfiguration,
-      displayVariable: variable,
-    };
-
-    dispatch(updateType(entity, type, updatedConfiguration));
-  };
+  dispatch(updateType(entity, type, updatedConfiguration));
+};
 
 const getDeleteAction = ({ type, ...owner }) => {
   switch (type) {
@@ -196,20 +192,19 @@ const getDeleteAction = ({ type, ...owner }) => {
   }
 };
 
-const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) =>
-  (dispatch, getState) => {
-    dispatch(deleteType(entity, type));
+const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) => (dispatch, getState) => {
+  dispatch(deleteType(entity, type));
 
-    if (!deleteRelatedObjects) { return; }
+  if (!deleteRelatedObjects) { return; }
 
-    // check usage elsewhere, and delete related stages/forms
-    const getUsageForType = makeGetUsageForType(getState());
-    const usageForType = getUsageForType(entity, type);
+  // check usage elsewhere, and delete related stages/forms
+  const getUsageForType = makeGetUsageForType(getState());
+  const usageForType = getUsageForType(entity, type);
 
-    usageForType
-      .map(({ owner }) => getDeleteAction(owner))
-      .forEach(dispatch);
-  };
+  usageForType
+    .map(({ owner }) => getDeleteAction(owner))
+    .forEach(dispatch);
+};
 
 /**
  * Reducer helpers
@@ -218,9 +213,9 @@ const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) =>
 const getStateWithUpdatedType = (state, entity, type, configuration) => {
   if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
 
-  const entityConfiguration = entity === 'ego' ?
-    configuration :
-    {
+  const entityConfiguration = entity === 'ego'
+    ? configuration
+    : {
       ...state[entity],
       [type]: configuration,
     };
@@ -241,16 +236,16 @@ const getStateWithUpdatedVariable = (
 ) => {
   if (entity !== 'ego' && !type) { throw Error('Type must be specified for non ego nodes'); }
 
-  const entityPath = entity === 'ego' ?
-    [entity] :
-    [entity, type];
+  const entityPath = entity === 'ego'
+    ? [entity]
+    : [entity, type];
 
-  const variableConfiguration = merge ?
-    {
+  const variableConfiguration = merge
+    ? {
       ...get(state, [...entityPath, 'variables', variable], {}),
       ...configuration,
-    } :
-    configuration;
+    }
+    : configuration;
 
   const newVariables = {
     ...get(state, [...entityPath, 'variables'], {}),
@@ -294,9 +289,9 @@ export default function reducer(state = initialState, action = {}) {
         action.merge,
       );
     case DELETE_VARIABLE: {
-      const variablePath = action.meta.entity !== 'ego' ?
-        `${action.meta.type}.variables.${action.meta.variable}` :
-        `variables.${action.meta.variable}`;
+      const variablePath = action.meta.entity !== 'ego'
+        ? `${action.meta.type}.variables.${action.meta.variable}`
+        : `variables.${action.meta.variable}`;
 
       return {
         ...state,

@@ -10,9 +10,11 @@ class Link extends Component {
   }
 
   render() {
-    const { screen, params, openScreen, children, ...rest } = this.props;
+    const {
+      screen, params, openScreen, children, ...rest
+    } = this.props;
     return (
-      <a {...rest} onClick={this.handleClick} >
+      <a {...rest} onClick={this.handleClick}>
         {children}
       </a>
     );

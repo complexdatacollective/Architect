@@ -22,13 +22,12 @@ const StageEditor = ({
   ...props
 }) => {
   const [showCodeView, setShowCodeView] = useState(false);
-  const toggleShowCodeView = () => setShowCodeView(show => !show);
+  const toggleShowCodeView = () => setShowCodeView((show) => !show);
 
   useEffect(() => {
     ipcRenderer.on('REFRESH_PREVIEW', previewStage);
 
-    return () =>
-      ipcRenderer.removeListener('REFRESH_PREVIEW', previewStage);
+    return () => ipcRenderer.removeListener('REFRESH_PREVIEW', previewStage);
   }, []);
 
   const sections = useMemo(
@@ -41,19 +40,18 @@ const StageEditor = ({
     [interfaceType],
   );
 
-  const renderSections = (sectionList, { submitFailed, windowRoot }) =>
-    sectionList.map((SectionComponent, index) => (
-      <SectionComponent
-        key={index}
-        form={formName}
-        stagePath={stagePath}
-        hasSubmitFailed={submitFailed}
+  const renderSections = (sectionList, { submitFailed, windowRoot }) => sectionList.map((SectionComponent, index) => (
+    <SectionComponent
+      key={index}
+      form={formName}
+      stagePath={stagePath}
+      hasSubmitFailed={submitFailed}
         // `windowRoot` will ensure connect() components re-render
         // when the window root changes
-        windowRoot={windowRoot}
-        interfaceType={interfaceType}
-      />
-    ));
+      windowRoot={windowRoot}
+      interfaceType={interfaceType}
+    />
+  ));
 
   return (
     <Editor

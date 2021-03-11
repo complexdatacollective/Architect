@@ -13,13 +13,13 @@ import FieldError from './Form/FieldError';
 import ValidatedField from './Form/ValidatedField';
 import { actionCreators as dialogsActions } from '../ducks/modules/dialogs';
 
-const isNumberLike = value =>
+const isNumberLike = (value) =>
   parseInt(value, 10) == value; // eslint-disable-line
 
-const minTwoOptions = value => (
-  !value || value.length < 2 ?
-    'Requires a minimum of two options. If you need fewer options, consider using a boolean variable.' :
-    undefined
+const minTwoOptions = (value) => (
+  !value || value.length < 2
+    ? 'Requires a minimum of two options. If you need fewer options, consider using a boolean variable.'
+    : undefined
 );
 
 const ItemHandle = compose(
@@ -32,35 +32,34 @@ const ItemHandle = compose(
   ),
 );
 
-const ItemDelete = props => (
+const ItemDelete = (props) => (
   <div className="form-fields-multi-select__delete" {...props}>
     <Icon name="delete" />
   </div>
 );
 
-const AddItem = props => (
+const AddItem = (props) => (
   <Button color="primary" icon="add" size="small" {...props}>
     Add new
   </Button>
 );
 
-const mapDispatchToItemProps = dispatch => ({
+const mapDispatchToItemProps = (dispatch) => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
 export const Item = compose(
   connect(null, mapDispatchToItemProps),
   withHandlers({
-    handleDelete: ({ fields, openDialog, index }) =>
-      () => {
-        openDialog({
-          type: 'Warning',
-          title: 'Remove item',
-          message: 'Are you sure you want to remove this item?',
-          onConfirm: () => { fields.remove(index); },
-          confirmLabel: 'Remove item',
-        });
-      },
+    handleDelete: ({ fields, openDialog, index }) => () => {
+      openDialog({
+        type: 'Warning',
+        title: 'Remove item',
+        message: 'Are you sure you want to remove this item?',
+        onConfirm: () => { fields.remove(index); },
+        confirmLabel: 'Remove item',
+      });
+    },
   }),
   SortableElement,
 )(
@@ -89,7 +88,7 @@ export const Item = compose(
             component={Fields.Text}
             type="text"
             name={`${field}.value`}
-            parse={value => (isNumberLike(value) ? toNumber(value) : value)}
+            parse={(value) => (isNumberLike(value) ? toNumber(value) : value)}
             placeholder="value"
             // option values must also respect allowedVariableName (NMTOKEN) rules
             validation={{ required: true, uniqueArrayAttribute: true, allowedVariableName: 'option value' }}
@@ -115,8 +114,7 @@ export const Items = compose(
     useDragHandle: true,
   }),
   withHandlers({
-    onSortEnd: ({ fields }) =>
-      ({ oldIndex, newIndex }) => fields.move(oldIndex, newIndex),
+    onSortEnd: ({ fields }) => ({ oldIndex, newIndex }) => fields.move(oldIndex, newIndex),
   }),
   SortableContainer,
 )(

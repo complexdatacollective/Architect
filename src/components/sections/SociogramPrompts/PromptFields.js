@@ -10,7 +10,7 @@ import FieldsEdges from './PromptFieldsEdges';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
 import Tip from '../../Tip';
 
-const PromptFields = props => (
+const PromptFields = (props) => (
   <div>
     <Section>
       <h3 id={getFieldId('text')}>Prompt Text</h3>

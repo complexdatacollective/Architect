@@ -8,7 +8,7 @@ const initialState = {};
 const UPDATE_OPTIONS = 'PROTOCOL/UPDATE_OPTIONS';
 const SET_PROTOCOL = 'PROTOCOL/SET';
 
-const updateOptions = options => ({
+const updateOptions = (options) => ({
   type: UPDATE_OPTIONS,
   options,
 });
@@ -54,9 +54,7 @@ export {
   actionTypes,
 };
 
-const reduceReducers = (...reducers) =>
-  (previousState, action) =>
-    reducers.reduce((state, reducer) => reducer(state, action), previousState);
+const reduceReducers = (...reducers) => (previousState, action) => reducers.reduce((state, reducer) => reducer(state, action), previousState);
 
 export default reduceReducers(
   protocolReducer,

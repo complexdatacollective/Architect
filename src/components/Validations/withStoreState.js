@@ -15,7 +15,7 @@ const mapStateToProps = (state, { form, name, variableType }) => {
 
 const mapDispatchToProps = (dispatch, { form, name }) => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
-  update: value => dispatch(change(form, name, value)),
+  update: (value) => dispatch(change(form, name, value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);

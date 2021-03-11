@@ -26,8 +26,7 @@ import { getScreenComponent } from './screenIndex';
 const Screens = (props) => {
   const screens = props.screens.map(({ screen, params }, index) => {
     const ScreenComponent = getScreenComponent(screen);
-    const onComplete = result =>
-      props.closeScreen(screen, result);
+    const onComplete = (result) => props.closeScreen(screen, result);
 
     // Default animation from center?
     const getOrigin = () => ({
@@ -104,7 +103,7 @@ Screens.propTypes = {
   closeScreen: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   screens: getScreensStack(state),
 });
 

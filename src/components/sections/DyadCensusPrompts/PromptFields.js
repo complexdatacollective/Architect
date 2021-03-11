@@ -27,8 +27,12 @@ const PromptFields = ({
       <p>
         Remember to write your prompt text to take into account that the participant will be
         looking at pairs of prompts in sequence. Use phrases such
-        as &apos;<strong>these people</strong>&apos;,
-        or &apos;<strong>the two people shown</strong>&apos; to
+        as &apos;
+        <strong>these people</strong>
+        &apos;,
+        or &apos;
+        <strong>the two people shown</strong>
+        &apos; to
         indicate that the participant should focus on the visible pair.
       </p>
       <p>

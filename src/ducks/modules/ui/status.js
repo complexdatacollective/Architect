@@ -1,8 +1,8 @@
-const getStatus = state => state.ui.status;
+const getStatus = (state) => state.ui.status;
 
 const getIsBusy = (state, type) => {
   const status = getStatus(state);
-  const isBusy = status.busy.some(busy => busy.type === type.toString());
+  const isBusy = status.busy.some((busy) => busy.type === type.toString());
   return isBusy;
 };
 
@@ -41,23 +41,21 @@ const anotherThrottledThunk = myLock(anotherThunk);
 </code></pre>
  */
 export const createLock = (type) => {
-  const fn = nextAction =>
-    (...args) =>
-      (dispatch, getState) => {
-        // If this type is already running, dispatch a noop and don't run action.
-        const isBusy = getIsBusy(getState(), type);
-        if (isBusy) { dispatch(noop(type)); return Promise.resolve(); }
+  const fn = (nextAction) => (...args) => (dispatch, getState) => {
+    // If this type is already running, dispatch a noop and don't run action.
+    const isBusy = getIsBusy(getState(), type);
+    if (isBusy) { dispatch(noop(type)); return Promise.resolve(); }
 
-        // Mark this type as busy
-        dispatch(busy(type));
+    // Mark this type as busy
+    dispatch(busy(type));
 
-        // Run the action as normal
-        return dispatch(nextAction(...args))
-          .finally(() => {
-            // Once it's complete, mark this type as ready
-            dispatch(ready(type));
-          });
-      };
+    // Run the action as normal
+    return dispatch(nextAction(...args))
+      .finally(() => {
+        // Once it's complete, mark this type as ready
+        dispatch(ready(type));
+      });
+  };
 
   fn.toString = function toString() {
     return type;
@@ -70,8 +68,7 @@ const initialState = {
   busy: [],
 };
 
-const filterType = (state, type) =>
-  state.filter(item => item.type !== type);
+const filterType = (state, type) => state.filter((item) => item.type !== type);
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {

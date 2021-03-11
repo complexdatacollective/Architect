@@ -14,7 +14,7 @@ const setProperty = (key, value) => ({
   },
 });
 
-const clearProperty = key => ({
+const clearProperty = (key) => ({
   type: CLEAR_PROPERTY,
   payload: {
     key,
@@ -36,8 +36,7 @@ export default (state = initialState, { type, payload } = { type: null, payload:
   }
 };
 
-const getProperty = key =>
-  state => get(state, ['app', key]);
+const getProperty = (key) => (state) => get(state, ['app', key]);
 
 export const selectors = {
   getProperty,

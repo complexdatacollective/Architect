@@ -27,13 +27,16 @@ class CardErrorBoundary extends Component {
             <h1 className="error__title">Something went wrong.</h1>
             <div className="error__message">
               { error.message && <p>{error.message}</p> }
-              { this.canAcknowledge() &&
+              { this.canAcknowledge()
+                && (
                 <Button
                   size="small"
                   color="platinum"
                   onClick={this.handleAcknowledge}
-                >OK</Button>
-              }
+                >
+                  OK
+                </Button>
+                )}
             </div>
           </div>
         </div>

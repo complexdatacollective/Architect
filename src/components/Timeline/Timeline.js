@@ -14,7 +14,6 @@ import { actionCreators as uiActions } from '@modules/ui';
 import Stage from './Stage';
 import InsertButton from './InsertButton';
 
-
 const variants = {
   outer: {
     show: {
@@ -77,8 +76,7 @@ class Timeline extends Component {
     this.setState({ highlightHide: true });
   };
 
-  handleInsertStage = index =>
-    this.props.openScreen('newStage', { insertAtIndex: index });
+  handleInsertStage = (index) => this.props.openScreen('newStage', { insertAtIndex: index });
 
   handleDeleteStage = (stageId) => {
     this.props.openDialog({
@@ -103,15 +101,13 @@ class Timeline extends Component {
 
   hasStages = () => this.props.stages.length > 0;
 
-  renderStages = () =>
-    this.props.stages.flatMap((stage, index) => ([
-      <InsertButton
-        key={`insert_${index}`}
-        onClick={() => this.handleInsertStage(index)}
-      />,
-      this.renderStage(stage, index),
-    ]));
-
+  renderStages = () => this.props.stages.flatMap((stage, index) => ([
+    <InsertButton
+      key={`insert_${index}`}
+      onClick={() => this.handleInsertStage(index)}
+    />,
+    this.renderStage(stage, index),
+  ]));
 
   renderStage = (stage, index) => (
     <Stage
@@ -164,7 +160,7 @@ class Timeline extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   locus: state.protocol.timeline[state.protocol.timeline.length - 1],
   activeProtocol: state.session.activeProtocol,
   stages: getStageList(state),
@@ -192,7 +188,7 @@ export default compose(
       sorting,
     }),
     {
-      setSorting: () => sortingState => ({
+      setSorting: () => (sortingState) => ({
         sorting: sortingState,
       }),
     },

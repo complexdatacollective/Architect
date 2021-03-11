@@ -14,10 +14,12 @@ class List extends Component {
   }
 
   handleUpdateParameters = (parameters) => {
-    this.setState({ parameters: {
-      ...this.state.parameters,
-      ...parameters,
-    } });
+    this.setState({
+      parameters: {
+        ...this.state.parameters,
+        ...parameters,
+      },
+    });
   }
 
   filteredItems() {
@@ -84,10 +86,9 @@ List.defaultProps = {
   children: null,
   controls: DefaultControls,
   sortableProperties: [],
-  filter: items => items,
+  filter: (items) => items,
   onDelete: () => {},
   initialSortOrder: {},
 };
-
 
 export default List;

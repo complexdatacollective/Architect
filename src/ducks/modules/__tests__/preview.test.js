@@ -27,7 +27,7 @@ describe('preview', () => {
 
       const actions = store.getActions();
       const draftStages = actions[0].draft.stages;
-      const stageIndex = actions[0].stageIndex;
+      const { stageIndex } = actions[0];
 
       expect(stageIndex).toBe(1);
       expect(draftStages).toMatchSnapshot();
@@ -43,7 +43,7 @@ describe('preview', () => {
 
       const actions = store.getActions();
       const draftStages = actions[0].draft.stages;
-      const stageIndex = actions[0].stageIndex;
+      const { stageIndex } = actions[0];
 
       expect(stageIndex).toBe(2);
       expect(draftStages).toMatchSnapshot();
@@ -59,7 +59,7 @@ describe('preview', () => {
 
       const actions = store.getActions();
       const draftStages = actions[0].draft.stages;
-      const stageIndex = actions[0].stageIndex;
+      const { stageIndex } = actions[0];
 
       expect(stageIndex).toBe(0);
       expect(draftStages).toMatchSnapshot();
@@ -78,7 +78,7 @@ describe('preview', () => {
 
       const actions = store.getActions();
       const draftStages = actions[0].draft.stages;
-      const stageIndex = actions[0].stageIndex;
+      const { stageIndex } = actions[0];
 
       expect(stageIndex).toBe(expectedStageIndex);
       expect(draftStages).toMatchSnapshot();

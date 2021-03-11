@@ -21,8 +21,13 @@ const PreviewFieldComponent = ({
     <span className="field-preview">
       {value.prompt}
       <Badge color={getColorForType(codebookVariable.type)}>
-        <strong>{codebookVariable.type}</strong> variable
-        using <strong>{codebookVariable.component}</strong> input control
+        <strong>{codebookVariable.type}</strong>
+        {' '}
+        variable
+        using
+        <strong>{codebookVariable.component}</strong>
+        {' '}
+        input control
       </Badge>
     </span>
   );
@@ -35,7 +40,7 @@ PreviewFieldComponent.propTypes = {
 
 class PromptPreview extends Preview {
   preview() {
-    const fieldId = this.props.fieldId;
+    const { fieldId } = this.props;
     return (
       <Field
         name={fieldId}
@@ -61,4 +66,3 @@ export default compose(
   withSubject,
   connect(mapStateToProps),
 )(PromptPreview);
-

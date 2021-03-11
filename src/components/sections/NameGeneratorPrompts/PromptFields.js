@@ -16,7 +16,7 @@ class PromptFields extends PureComponent {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Section>
           <Row>
             <h3 id={getFieldId('text')}>Prompt Text</h3>
@@ -42,7 +42,10 @@ class PromptFields extends PureComponent {
         </Section>
         <Section>
           <Row>
-            <h3>Assign Additional Variables? <small>(optional)</small></h3>
+            <h3>
+              Assign Additional Variables?
+              <small>(optional)</small>
+            </h3>
             <p>
               This feature allows you to assign a variable and associated value to
               any nodes created on this prompt. You can use this to
@@ -61,7 +64,7 @@ class PromptFields extends PureComponent {
             />
           </Row>
         </Section>
-      </React.Fragment>
+      </>
     );
   }
 }

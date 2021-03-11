@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '@codaco/ui/lib/components/Icon';
 import Radio from '@codaco/ui/lib/components/Fields/Radio';
 
-const IconOption = props => (
+const IconOption = (props) => (
   <Radio
     {...props}
     className="type-editor-icon-option"

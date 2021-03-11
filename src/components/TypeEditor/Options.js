@@ -10,7 +10,7 @@ import { Icon, Button } from '@codaco/ui';
 import * as Fields from '@codaco/ui/lib/components/Fields';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 
-const isNumberLike = value =>
+const isNumberLike = (value) =>
   parseInt(value, 10) == value; // eslint-disable-line
 
 const ItemHandle = compose(
@@ -23,19 +23,19 @@ const ItemHandle = compose(
   ),
 );
 
-const ItemDelete = props => (
+const ItemDelete = (props) => (
   <div className="form-fields-multi-select__delete" {...props}>
     <Icon name="delete" />
   </div>
 );
 
-const AddItem = props => (
+const AddItem = (props) => (
   <Button color="primary" icon="add" size="small" {...props}>
     Add new
   </Button>
 );
 
-const mapDispatchToItemProps = dispatch => ({
+const mapDispatchToItemProps = (dispatch) => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
@@ -68,7 +68,7 @@ const Item = compose(
         </div>
         <div className="form-fields-multi-select__rule-option">
           <div className="form-fields-multi-select__rule-option-label">Value</div>
-          <Field component={Fields.Text} type="text" name={`${field}.value`} parse={value => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
+          <Field component={Fields.Text} type="text" name={`${field}.value`} parse={(value) => (isNumberLike(value) ? toNumber(value) : value)} placeholder="value" />
         </div>
       </div>
       <div className="form-fields-multi-select__rule-control">
@@ -131,9 +131,8 @@ const Options = ({
   ...rest
 }) => (
   <div className="form-fields-multi-select type-editor__subsection">
-    { label &&
-      <h4>{label}</h4>
-    }
+    { label
+      && <h4>{label}</h4>}
     <FieldArray
       name={name}
       component={Items}

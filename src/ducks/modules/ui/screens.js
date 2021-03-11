@@ -21,24 +21,23 @@ const initialState = {
   message: {},
 };
 
-const openScreen = (screen, params = {}, root = false) =>
-  (dispatch, getState) => {
-    const state = getState();
-    const latestLocus = state.protocol.timeline[state.protocol.timeline.length - 1];
-    const locus = params.locus || latestLocus;
+const openScreen = (screen, params = {}, root = false) => (dispatch, getState) => {
+  const state = getState();
+  const latestLocus = state.protocol.timeline[state.protocol.timeline.length - 1];
+  const locus = params.locus || latestLocus;
 
-    dispatch({
-      type: OPEN_SCREEN,
-      payload: {
-        screen,
-        params: {
-          ...params,
-          locus,
-        },
-        root,
+  dispatch({
+    type: OPEN_SCREEN,
+    payload: {
+      screen,
+      params: {
+        ...params,
+        locus,
       },
-    });
-  };
+      root,
+    },
+  });
+};
 
 const closeScreen = (screen, params = null) => ({
   type: CLOSE_SCREEN,
@@ -85,13 +84,13 @@ export default (state = initialState, { type, payload } = { type: null, payload:
         message: {},
       };
     case CLOSE_SCREEN: {
-      const message = payload.params ?
-        {
+      const message = payload.params
+        ? {
           ...state.message,
           screen: payload.screen,
           params: payload.params,
-        } :
-        state.message;
+        }
+        : state.message;
 
       return {
         ...state,
@@ -103,9 +102,9 @@ export default (state = initialState, { type, payload } = { type: null, payload:
     case UPDATE_SCREEN:
       return {
         ...state,
-        root: state.root.screen === payload.screen ?
-          getUpdatedScreen(state.root, payload.params) :
-          state.root,
+        root: state.root.screen === payload.screen
+          ? getUpdatedScreen(state.root, payload.params)
+          : state.root,
         screens: state.screens
           .map((screen) => {
             if (screen.screen !== payload.screen) { return screen; }

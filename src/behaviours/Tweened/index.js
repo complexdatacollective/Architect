@@ -10,8 +10,7 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-const Tweenable = WrappedComponent =>
-  class extends PureComponent {
+const Tweenable = (WrappedComponent) => class extends PureComponent {
     static displayName = `Tweened(${getDisplayName(WrappedComponent)})`;
 
     static propTypes = {
@@ -64,23 +63,24 @@ const Tweenable = WrappedComponent =>
         <WrappedComponent {...this.props} />
       );
     }
-  };
+};
 
-const Tweened = ({ tweenName, tweenElement, before, duration, after }) =>
-  (WrappedComponent) => {
-    const TweenedWrappedComponent = Tweenable(WrappedComponent);
+const Tweened = ({
+  tweenName, tweenElement, before, duration, after,
+}) => (WrappedComponent) => {
+  const TweenedWrappedComponent = Tweenable(WrappedComponent);
 
-    return props => (
-      <TweenedWrappedComponent
-        tweenName={tweenName}
-        tweenElement={tweenElement}
-        before={before || 500}
-        duration={duration || 500}
-        after={after || 500}
-        {...props}
-      />
-    );
-  };
+  return (props) => (
+    <TweenedWrappedComponent
+      tweenName={tweenName}
+      tweenElement={tweenElement}
+      before={before || 500}
+      duration={duration || 500}
+      after={after || 500}
+      {...props}
+    />
+  );
+};
 
 export { Tweened };
 

@@ -20,7 +20,9 @@ class TextArea extends PureComponent {
 
   render() {
     const {
-      meta: { active, touched, invalid, error },
+      meta: {
+        active, touched, invalid, error,
+      },
       label,
     } = this.props;
 
@@ -37,9 +39,8 @@ class TextArea extends PureComponent {
         htmlFor={this.id}
         className={textareaClasses}
       >
-        { label &&
-          <div className="form-fields-textarea__label">{label}</div>
-        }
+        { label
+          && <div className="form-fields-textarea__label">{label}</div>}
         <div className="form-fields-textarea__edit">
           <textarea
             className={cx('form-fields-textarea__input')}

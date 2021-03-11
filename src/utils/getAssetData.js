@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import { memoize } from 'lodash';
 
-const resolver = sourcePath => sourcePath;
+const resolver = (sourcePath) => sourcePath;
 
 const getAssetData = (sourcePath, type) => {
   switch (type) {

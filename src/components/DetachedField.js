@@ -9,7 +9,7 @@ const getValue = (eventOrValue) => {
     return eventOrValue;
   }
 
-  const target = eventOrValue.target;
+  const { target } = eventOrValue;
   const value = target.type === 'checkbox' ? target.checked : target.value;
 
   return value;

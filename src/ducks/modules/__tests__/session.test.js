@@ -147,15 +147,14 @@ describe('session module', () => {
     });
 
     describe('save actions', () => {
-      const getStore = (session = {}) =>
-        mockStore({
-          session: {
-            workingPath: '/dev/null/working/path',
-            filePath: '/dev/null/user/file/path.netcanvas',
-            ...session,
-          },
-          protocol: { present: { schemaVersion: 4 } },
-        });
+      const getStore = (session = {}) => mockStore({
+        session: {
+          workingPath: '/dev/null/working/path',
+          filePath: '/dev/null/user/file/path.netcanvas',
+          ...session,
+        },
+        protocol: { present: { schemaVersion: 4 } },
+      });
 
       const store = getStore();
 
