@@ -13,7 +13,6 @@ export const BLOCKS = {
 export const MARKS = {
   bold: 'bold',
   italic: 'italic',
-  code: 'code',
 };
 
 export const MODES = {
