@@ -14,6 +14,7 @@ class AppErrorBoundary extends Component {
 
   render() {
     const { error } = this.state;
+    const { children } = this.props;
 
     if (error) {
       return (
@@ -33,7 +34,7 @@ class AppErrorBoundary extends Component {
       );
     }
 
-    return this.props.children;
+    return children;
   }
 }
 
