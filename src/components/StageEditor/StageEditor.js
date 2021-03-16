@@ -10,8 +10,7 @@ import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
 import StageHeading from './StageHeading';
 import SkipLogic from './SkipLogic';
-
-const formName = 'edit-stage';
+import { formName } from './configuration';
 
 const StageEditor = ({
   id,
