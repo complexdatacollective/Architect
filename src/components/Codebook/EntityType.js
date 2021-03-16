@@ -6,7 +6,7 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import { actionCreators as screenActionsCreators } from '@modules/ui/screens';
 import { Button } from '@codaco/ui/lib/components';
-import ScreenLink from '@components/Screens/Link';
+import ScreenLink from '@components/Screens/ScreenLink';
 import Variables from './Variables';
 import Tag from './Tag';
 import EntityIcon from './EntityIcon';
