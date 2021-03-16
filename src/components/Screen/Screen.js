@@ -48,7 +48,6 @@ Screen.propTypes = {
 
 Screen.defaultProps = {
   type: 'default',
-  transitionState: null,
   children: null,
   buttons: [],
   secondaryButtons: [],

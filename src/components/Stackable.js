@@ -11,6 +11,8 @@ import { actionCreators as stackActions } from '../ducks/modules/stacks';
 
 const withStackableId = withState('stackableId', 'setStackableId', null);
 
+// TODO: Make functional component or potentially could be handled
+// by screens module
 class Stackable extends Component {
   constructor(props) {
     super(props);
@@ -20,15 +22,26 @@ class Stackable extends Component {
     setStackableId(id);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.stackKey !== this.props.stackKey) {
-      this.props.moveToTop();
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(newProps) {
+    const {
+      stackKey,
+      moveToTop,
+    } = this.props;
+
+    if (newProps.stackKey !== stackKey) {
+      moveToTop();
     }
   }
 
   componentWillUnmount() {
-    const id = this.props.stackableId;
-    this.props.unregisterStackable(id);
+    const {
+      stackableId,
+      unregisterStackable,
+    } = this.props;
+
+    const id = stackableId;
+    unregisterStackable(id);
   }
 
   render() {

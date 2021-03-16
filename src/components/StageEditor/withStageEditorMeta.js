@@ -6,8 +6,8 @@ import {
 } from 'redux-form';
 import { has } from 'lodash';
 import { getStage, getStageIndex } from '@selectors/protocol';
-import { formName } from './StageEditor';
 import { getInterface } from './Interfaces';
+import { formName } from './configuration';
 
 const getStagePathById = (state, id) => {
   const stageIndex = getStageIndex(state, id);
