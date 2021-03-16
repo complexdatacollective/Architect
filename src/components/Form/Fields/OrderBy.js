@@ -116,38 +116,21 @@ const Rules = compose(
 );
 
 class OrderBy extends Component {
-  static propTypes = {
-    variables: PropTypes.object,
-    input: PropTypes.shape({
-      value: PropTypes.oneOfType([
-        PropTypes.array,
-        PropTypes.string,
-      ]),
-      onChange: PropTypes.func,
-    }),
-    label: PropTypes.string,
-  };
-
-  static defaultProps = {
-    variables: {},
-    input: {
-      value: [],
-      onChange: () => {},
-    },
-    label: '',
-  };
-
   onSortEnd = ({ oldIndex, newIndex }) => {
+    const { input } = this.props;
+
     const updatedRules = arrayMove(this.value, oldIndex, newIndex);
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   }
 
   get value() {
-    return isArray(this.props.input.value) ? this.props.input.value : [];
+    const { input } = this.props;
+    return isArray(input.value) ? input.value : [];
   }
 
   get sortableVariableNames() {
-    return toPairs(this.props.variables).filter(
+    const { variables } = this.props;
+    return toPairs(variables).filter(
       ([, { type }]) => !NON_SORTABLE_TYPES.includes(type),
     ).map(
       ([id, { name }]) => ({ label: name, value: id }),
@@ -163,37 +146,41 @@ class OrderBy extends Component {
   }
 
   handleChange = (index, updatedRule) => {
+    const { input } = this.props;
     const updatedRules = this.value.map(
       (rule, i) => {
         if (i !== index) { return rule; }
         return { ...rule, ...updatedRule };
       },
     );
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   }
 
   handleAddNewRule = () => {
+    const { input } = this.props;
     const updatedRules = [
       ...this.value,
       { property: '', direction: '' },
     ];
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   };
 
   handleDelete = (index) => {
+    const { input } = this.props;
     const updatedRules = this.value.filter(
       (rule, i) => i !== index,
     );
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   };
 
   render() {
+    const { label } = this.props;
     if (this.variables.length === 0) { return null; }
 
     return (
       <div className="form-fields-order-by">
-        { this.props.label
-          && <div className="form-fields-order-by__label">{this.props.label}</div>}
+        { label
+          && <div className="form-fields-order-by__label">{label}</div>}
         <Rules
           rules={this.value}
           variables={this.variables}
@@ -215,5 +202,26 @@ class OrderBy extends Component {
     );
   }
 }
+
+OrderBy.propTypes = {
+  variables: PropTypes.object,
+  input: PropTypes.shape({
+    value: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+    ]),
+    onChange: PropTypes.func,
+  }),
+  label: PropTypes.string,
+};
+
+OrderBy.defaultProps = {
+  variables: {},
+  input: {
+    value: [],
+    onChange: () => {},
+  },
+  label: '',
+};
 
 export default OrderBy;

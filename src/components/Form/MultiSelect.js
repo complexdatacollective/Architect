@@ -173,6 +173,7 @@ MultiSelect.propTypes = {
   properties: PropTypes.array.isRequired,
   options: PropTypes.func.isRequired,
   label: PropTypes.string,
+  maxItems: PropTypes.number,
 };
 
 MultiSelect.defaultProps = {

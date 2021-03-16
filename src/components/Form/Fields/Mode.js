@@ -4,25 +4,18 @@ import cx from 'classnames';
 import { asOptionObject, getValue } from '@codaco/ui/lib/components/Fields/utils/options';
 
 class Mode extends PureComponent {
-  static propTypes = {
-    options: PropTypes.array,
-    label: PropTypes.string,
-    meta: PropTypes.object,
-    className: PropTypes.string,
-    input: PropTypes.object.isRequired,
-  };
+  handleClickMode = (index) => {
+    const {
+      input,
+      options,
+    } = this.props;
+    return input.onChange(getValue(options[index]));
+  }
 
-  static defaultProps = {
-    className: null,
-    label: null,
-    meta: { invalid: false, error: null, touched: false },
-    options: [],
-    disabled: false,
-  };
-
-  handleClickMode = (index) => this.props.input.onChange(getValue(this.props.options[index]));
-
-  isModeSelected = (option) => this.props.input.value === option;
+  isModeSelected = (option) => {
+    const { input } = this.props;
+    return input.value === option;
+  }
 
   renderMode = (option, index) => {
     const { input: { value } } = this.props;
@@ -77,5 +70,20 @@ class Mode extends PureComponent {
     );
   }
 }
+
+Mode.propTypes = {
+  options: PropTypes.array,
+  label: PropTypes.string,
+  meta: PropTypes.object,
+  className: PropTypes.string,
+  input: PropTypes.object.isRequired,
+};
+
+Mode.defaultProps = {
+  className: null,
+  label: null,
+  meta: { invalid: false, error: null, touched: false },
+  options: [],
+};
 
 export default Mode;

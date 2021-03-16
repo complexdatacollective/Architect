@@ -25,7 +25,8 @@ PreviewNode.defaultProps = {
 
 class NodeSelect extends Component {
   handleClickNode = (value) => {
-    this.props.input.onChange(value);
+    const { input } = this.props;
+    input.onChange(value);
   };
 
   render() {

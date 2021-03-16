@@ -14,22 +14,29 @@ const getValue = (options, value) => {
 
 class Select extends PureComponent {
   get value() {
-    return getValue(this.props.options, this.props.input.value);
+    const { options, input } = this.props;
+    return getValue(options, input.value);
   }
 
   handleChange = (option) => {
+    const {
+      onCreateNew,
+      input,
+    } = this.props;
+
     /* eslint-disable no-underscore-dangle */
     if (option.__createNewOption__) {
-      this.props.onCreateNew();
+      onCreateNew();
       return;
     }
     /* eslint-enable */
-    this.props.input.onChange(option.value);
+    input.onChange(option.value);
   }
 
   handleBlur = () => {
-    if (!this.props.input.onBlur) { return; }
-    this.props.input.onBlur(this.props.input.value);
+    const { input } = this.props;
+    if (!input.onBlur) { return; }
+    input.onBlur(input.value);
   }
 
   render() {
@@ -46,8 +53,8 @@ class Select extends PureComponent {
     } = this.props;
 
     const optionsWithNew = createNewOption
-      ? [...this.props.options, { __createNewOption__: createNewOption }]
-      : this.props.options;
+      ? [...options, { __createNewOption__: createNewOption }]
+      : options;
 
     const componentClasses = cx(
       className,

@@ -50,7 +50,6 @@ Section.propTypes = {
 
 Section.defaultProps = {
   children: null,
-  allowOverflow: false,
   className: null,
 };
 

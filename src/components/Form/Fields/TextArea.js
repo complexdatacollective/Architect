@@ -1,57 +1,49 @@
-import React, { PureComponent } from 'react';
-import { uniqueId } from 'lodash';
+import React, { useRef } from 'react';
+import uuid from 'uuid/v4';
 import cx from 'classnames';
 import { fieldPropTypes } from 'redux-form';
 
-class TextArea extends PureComponent {
-  static propTypes = {
-    ...fieldPropTypes,
-  };
+const TextArea = ({
+  meta,
+  label,
+  input,
+}) => {
+  const id = useRef(uuid());
 
-  constructor(props) {
-    super(props);
+  const {
+    active,
+    touched,
+    invalid,
+    error,
+  } = meta;
 
-    this.state = { isFocussed: false };
-  }
+  const textareaClasses = cx(
+    'form-fields-textarea',
+    {
+      'form-fields-textarea--is-focussed': active,
+      'form-fields-textarea--has-error': touched && invalid,
+    },
+  );
 
-  componentWillMount() {
-    this.id = uniqueId('label');
-  }
+  return (
+    <label
+      htmlFor={id.current}
+      className={textareaClasses}
+    >
+      { label
+        && <div className="form-fields-textarea__label">{label}</div>}
+      <div className="form-fields-textarea__edit">
+        <textarea
+          className={cx('form-fields-textarea__input')}
+          id={id.current}
+          {...input}
+        />
+      </div>
+      { touched && invalid && <p className="form-fields-markdown__error">{error}</p> }
+    </label>
+  );
+};
 
-  render() {
-    const {
-      meta: {
-        active, touched, invalid, error,
-      },
-      label,
-    } = this.props;
-
-    const textareaClasses = cx(
-      'form-fields-textarea',
-      {
-        'form-fields-textarea--is-focussed': active,
-        'form-fields-textarea--has-error': touched && invalid,
-      },
-    );
-
-    return (
-      <label
-        htmlFor={this.id}
-        className={textareaClasses}
-      >
-        { label
-          && <div className="form-fields-textarea__label">{label}</div>}
-        <div className="form-fields-textarea__edit">
-          <textarea
-            className={cx('form-fields-textarea__input')}
-            id={this.id}
-            {...this.props.input}
-          />
-        </div>
-        { touched && invalid && <p className="form-fields-markdown__error">{error}</p> }
-      </label>
-    );
-  }
-}
+TextArea.propTypes = fieldPropTypes;
 
 export default TextArea;
