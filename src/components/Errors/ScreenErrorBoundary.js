@@ -13,12 +13,17 @@ class CardErrorBoundary extends Component {
     console.log(error); // eslint-disable-line no-console
   }
 
-  canAcknowledge = () => !!this.props.onAcknowledge;
-
-  handleAcknowledge = this.props.onAcknowledge;
+  canAcknowledge = () => {
+    const { onAcknowledge } = this.props;
+    return !!onAcknowledge;
+  };
 
   render() {
     const { error } = this.state;
+    const {
+      onAcknowledge,
+      children,
+    } = this.props;
 
     if (error) {
       return (
@@ -32,7 +37,7 @@ class CardErrorBoundary extends Component {
                 <Button
                   size="small"
                   color="platinum"
-                  onClick={this.handleAcknowledge}
+                  onClick={onAcknowledge}
                 >
                   OK
                 </Button>
@@ -43,7 +48,7 @@ class CardErrorBoundary extends Component {
       );
     }
 
-    return this.props.children;
+    return children;
   }
 }
 

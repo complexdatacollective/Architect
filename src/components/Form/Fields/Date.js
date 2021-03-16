@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import uuid from 'uuid';
@@ -37,100 +37,92 @@ const getParsedValue = (dateFormat) => (value = '', previousValue = '') => {
   return parsedValue;
 };
 
-class TextInput extends PureComponent {
-  static propTypes = {
-    input: PropTypes.object,
-    meta: PropTypes.object,
-    label: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    fieldLabel: PropTypes.string,
-    dateFormat: PropTypes.string,
-    className: PropTypes.string,
-    placeholder: PropTypes.string,
-    hidden: PropTypes.bool,
+const TextInput = ({
+  input,
+  meta: {
+    error, active, invalid, touched,
+  },
+  label,
+  fieldLabel,
+  className,
+  autoFocus,
+  hidden,
+  dateFormat,
+}) => {
+  const id = useRef(uuid());
+
+  useEffect(() => {
+    const newValue = getParsedValue(dateFormat)(input.value);
+    input.onChange(newValue);
+  }, [dateFormat]);
+
+  const seamlessClasses = cx(
+    className,
+    'form-field-text',
+    {
+      'form-field-text--has-focus': active,
+      'form-field-text--has-error': invalid && touched && error,
+    },
+  );
+
+  const anyLabel = fieldLabel || label;
+
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+    const parsedValue = getParsedValue(dateFormat)(newValue, input.value);
+    input.onChange(parsedValue);
   };
 
-  static defaultProps = {
-    input: {},
-    meta: {},
-    autoFocus: false,
-    dateFormat: 'YYYY-MM-DD',
-    label: null,
-    fieldLabel: null,
-    placeholder: '',
-    className: '',
-    hidden: false,
-  };
-
-  componentWillMount() {
-    this.id = uuid();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.dateFormat !== this.props.dateFormat) {
-      const newValue = getParsedValue(this.props.dateFormat)(this.props.input.value);
-      this.props.input.onChange(newValue);
-    }
-  }
-
-  render() {
-    const {
-      input,
-      meta: {
-        error, active, invalid, touched,
-      },
-      label,
-      fieldLabel,
-      className,
-      autoFocus,
-      hidden,
-      dateFormat,
-    } = this.props;
-
-    const seamlessClasses = cx(
-      className,
-      'form-field-text',
-      {
-        'form-field-text--has-focus': active,
-        'form-field-text--has-error': invalid && touched && error,
-      },
-    );
-
-    const anyLabel = fieldLabel || label;
-
-    const handleChange = (e) => {
-      const newValue = e.target.value;
-      const parsedValue = getParsedValue(dateFormat)(newValue, input.value);
-      input.onChange(parsedValue);
-    };
-
-    return (
-      <div className="form-field-container" hidden={hidden}>
-        { anyLabel
-          && <h4>{anyLabel}</h4>}
-        <div className={seamlessClasses}>
-          <input
-            id={this.id}
-            name={input.name}
-            className="form-field form-field-text form-field-text__input"
-            placeholder={dateFormat.toUpperCase()}
-            autoFocus={autoFocus} // eslint-disable-line
-            {...input}
-            onKeyDown={filterInput(input.value)}
-            onChange={handleChange}
-          />
-          {invalid && touched && (
-          <div className="form-field-text__error">
-            <Icon name="warning" />
-            {error}
-          </div>
-          ) }
+  return (
+    <div className="form-field-container" hidden={hidden}>
+      { anyLabel
+        && <h4>{anyLabel}</h4>}
+      <div className={seamlessClasses}>
+        <input
+          id={id.current}
+          name={input.name}
+          className="form-field form-field-text form-field-text__input"
+          placeholder={dateFormat.toUpperCase()}
+          autoFocus={autoFocus} // eslint-disable-line
+          {...input}
+          onKeyDown={filterInput(input.value)}
+          onChange={handleChange}
+        />
+        {invalid && touched && (
+        <div className="form-field-text__error">
+          <Icon name="warning" />
+          {error}
         </div>
-
+        ) }
       </div>
 
-    );
-  }
-}
+    </div>
+
+  );
+};
+
+TextInput.propTypes = {
+  input: PropTypes.object,
+  meta: PropTypes.object,
+  label: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  fieldLabel: PropTypes.string,
+  dateFormat: PropTypes.string,
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+  hidden: PropTypes.bool,
+};
+
+TextInput.defaultProps = {
+  input: {},
+  meta: {},
+  autoFocus: false,
+  dateFormat: 'YYYY-MM-DD',
+  label: null,
+  fieldLabel: null,
+  placeholder: '',
+  className: '',
+  hidden: false,
+};
 
 export default TextInput;

@@ -1,7 +1,6 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withState } from 'recompose';
-import uuid from 'uuid';
 import cx from 'classnames';
 import Button from '@codaco/ui/lib/components/Button';
 import Icon from '@codaco/ui/lib/components/Icon';
@@ -13,113 +12,109 @@ const withShowBrowser = withState(
   ({ showBrowser }) => !!showBrowser,
 );
 
-class FileInput extends PureComponent {
-  static propTypes = {
-    children: PropTypes.func,
-    onChange: PropTypes.func,
-    onCloseBrowser: PropTypes.func,
-    showBrowser: PropTypes.bool.isRequired,
-    setShowBrowser: PropTypes.func.isRequired,
-    type: PropTypes.string,
-    label: PropTypes.string,
-    className: PropTypes.string,
-    selected: PropTypes.string,
-    meta: PropTypes.object.isRequired,
-    input: PropTypes.object.isRequired,
+const FileInput = ({
+  setShowBrowser,
+  onCloseBrowser,
+  input: { value, onChange },
+  meta: { error, invalid, touched },
+  showBrowser,
+  label,
+  type,
+  selected,
+  className,
+  children,
+}) => {
+  const closeBrowser = () => {
+    setShowBrowser(false);
+    onCloseBrowser();
   };
 
-  static defaultProps = {
-    value: '',
-    label: '',
-    className: null,
-    selected: null,
-    onChange: () => {},
-    onCloseBrowser: () => {},
-    type: null,
-    children: (value) => value,
+  const openBrowser = () => {
+    setShowBrowser(true);
   };
 
-  componentWillMount() {
-    this.id = uuid();
-  }
-
-  closeBrowser() {
-    this.props.setShowBrowser(false);
-    this.props.onCloseBrowser();
-  }
-
-  openBrowser() {
-    this.props.setShowBrowser(true);
-  }
-
-  handleBrowseLibrary = (e) => {
+  const handleBrowseLibrary = (e) => {
     e.stopPropagation();
-    this.openBrowser();
-  }
+    openBrowser();
+  };
 
-  handleBlurBrowser = () => {
-    this.closeBrowser();
-  }
+  const handleBlurBrowser = () => {
+    closeBrowser();
+  };
 
-  handleSelectAsset = (assetId) => {
-    this.closeBrowser();
-    this.props.input.onChange(assetId);
-  }
+  const handleSelectAsset = (assetId) => {
+    closeBrowser();
+    onChange(assetId);
+  };
 
-  render() {
-    const {
-      input: { value },
-      meta: { error, invalid, touched },
-      showBrowser,
-      label,
-      type,
-      selected,
-      className,
-    } = this.props;
+  const fieldClasses = cx(
+    'form-fields-file',
+    className,
+    'form-field-container',
+    {
+      'form-fields-file--replace': !!value,
+      'form-fields-file--has-error': error,
+    },
+  );
 
-    const fieldClasses = cx(
-      'form-fields-file',
-      className,
-      'form-field-container',
-      {
-        'form-fields-file--replace': !!value,
-        'form-fields-file--has-error': error,
-      },
-    );
-
-    return (
-      <div className={fieldClasses}>
-        { label
-          && <h4 className="form-fields-file__label">{label}</h4>}
-        {invalid && touched && (
-        <div className="form-fields-file__error">
-          <Icon name="warning" />
-          {error}
-        </div>
-        )}
-        <div className="form-fields-file__preview">
-          {this.props.children(value)}
-        </div>
-        <div className="form-fields-file__browse">
-          <Button
-            onClick={this.handleBrowseLibrary}
-            color="primary"
-            size="small"
-          >
-            { !value ? 'Select resource' : 'Update resource' }
-          </Button>
-        </div>
-        <AssetBrowserWindow
-          show={showBrowser}
-          type={type}
-          selected={selected}
-          onSelect={this.handleSelectAsset}
-          onCancel={this.handleBlurBrowser}
-        />
+  return (
+    <div className={fieldClasses}>
+      { label
+        && <h4 className="form-fields-file__label">{label}</h4>}
+      {invalid && touched && (
+      <div className="form-fields-file__error">
+        <Icon name="warning" />
+        {error}
       </div>
-    );
-  }
-}
+      )}
+      <div className="form-fields-file__preview">
+        {children(value)}
+      </div>
+      <div className="form-fields-file__browse">
+        <Button
+          onClick={handleBrowseLibrary}
+          color="primary"
+          size="small"
+        >
+          { !value ? 'Select resource' : 'Update resource' }
+        </Button>
+      </div>
+      <AssetBrowserWindow
+        show={showBrowser}
+        type={type}
+        selected={selected}
+        onSelect={handleSelectAsset}
+        onCancel={handleBlurBrowser}
+      />
+    </div>
+  );
+};
+
+FileInput.propTypes = {
+  children: PropTypes.func,
+  onChange: PropTypes.func,
+  onCloseBrowser: PropTypes.func,
+  showBrowser: PropTypes.bool.isRequired,
+  setShowBrowser: PropTypes.func.isRequired,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  className: PropTypes.string,
+  selected: PropTypes.string,
+  meta: PropTypes.object.isRequired,
+  input: PropTypes.object.isRequired,
+  value: PropTypes.string,
+};
+
+FileInput.defaultProps = {
+  value: '',
+  label: '',
+  className: null,
+  selected: null,
+  onChange: () => {},
+  onCloseBrowser: () => {},
+  type: null,
+  children: (value) => value,
+};
 
 export { FileInput };
 

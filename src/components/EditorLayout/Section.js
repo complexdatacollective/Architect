@@ -33,7 +33,6 @@ Section.propTypes = {
 };
 
 Section.defaultProps = {
-  contentId: null,
   disabled: false,
   group: false,
   className: '',

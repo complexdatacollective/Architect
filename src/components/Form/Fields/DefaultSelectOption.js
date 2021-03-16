@@ -5,11 +5,14 @@ import cx from 'classnames';
 import Icon from '@codaco/ui/lib/components/Icon';
 
 const DefaultSelectOption = (props) => {
-  const { data } = props;
+  const {
+    data,
+    onDeleteOption,
+  } = props;
   /* eslint-disable no-underscore-dangle */
   const isWarning = !!data.__isWarning__;
   const showNew = !!data.__createNewOption__ || !!data.__isNew__;
-  const showDelete = !isWarning && !data.__isNew__ && !!props.onDeleteOption && !data.isUsed;
+  const showDelete = !isWarning && !data.__isNew__ && !!onDeleteOption && !data.isUsed;
   const label = data.__createNewOption__
     ? data.__createNewOption__
     : data.label;

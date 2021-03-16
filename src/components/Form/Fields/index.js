@@ -1,8 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 export { default as Audio } from './Audio';
 export { default as ColorPicker } from './ColorPicker';
-export { default as Contexts } from './Contexts';
-export { default as CreatableSelect } from './CreatableSelect';
 export { default as Date } from './Date';
 export { default as File } from './File';
 export { default as Image } from './Image';
