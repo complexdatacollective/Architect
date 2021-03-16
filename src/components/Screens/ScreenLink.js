@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionCreators as screenActions } from '@modules/ui/screens';
 
-const Link = ({
+const ScreenLink = ({
   children,
   screen,
   openScreen,
@@ -22,14 +22,14 @@ const Link = ({
   );
 };
 
-Link.propTypes = {
+ScreenLink.propTypes = {
   openScreen: PropTypes.func.isRequired,
   onClick: PropTypes.func,
   screen: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
-Link.defaultProps = {
+ScreenLink.defaultProps = {
   onClick: null,
 };
 
@@ -37,4 +37,4 @@ const mapDispatchToProps = {
   openScreen: screenActions.openScreen,
 };
 
-export default connect(null, mapDispatchToProps)(Link);
+export default connect(null, mapDispatchToProps)(ScreenLink);
