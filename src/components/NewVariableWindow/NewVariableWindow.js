@@ -18,6 +18,11 @@ const isRequired = required();
 const isAllowedVariableName = allowedVariableName();
 
 class NewVariableWindow extends Component {
+  validateName = (value) => {
+    const { existingVariableNames } = this.props;
+    return uniqueByList(existingVariableNames)(value);
+  };
+
   filteredVariableOptions() {
     const { allowVariableTypes } = this.props;
 
@@ -27,8 +32,6 @@ class NewVariableWindow extends Component {
       )
       : VARIABLE_OPTIONS;
   }
-
-  validateName = (value) => uniqueByList(this.props.existingVariableNames)(value);
 
   render() {
     const {

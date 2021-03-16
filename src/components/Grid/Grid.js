@@ -58,12 +58,13 @@ class Grid extends Component {
   };
 
   checkSize = () => {
+    const { width } = this.state;
     if (!this.ref.current) { return; }
 
-    const width = this.ref.current.parentElement.offsetWidth;
+    const nextWidth = this.ref.current.parentElement.offsetWidth;
 
-    if (this.state.width !== width) {
-      this.setWidth(width);
+    if (width !== nextWidth) {
+      this.setWidth(nextWidth);
     }
   };
 
@@ -79,6 +80,8 @@ class Grid extends Component {
     } = this.props;
 
     const { error, submitFailed } = meta;
+
+    const { width } = this.state;
 
     const gridClasses = cx(
       'grid',
@@ -104,7 +107,7 @@ class Grid extends Component {
           rowHeight={100}
           autoSize={false}
           height={500}
-          width={this.state.width}
+          width={width}
           onDragStop={this.handleDragStop}
           onResizeStop={this.handleResizeStop}
           onLayoutChange={this.handleLayoutChange}

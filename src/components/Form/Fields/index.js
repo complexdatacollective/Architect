@@ -6,7 +6,6 @@ export { default as CreatableSelect } from './CreatableSelect';
 export { default as Date } from './Date';
 export { default as File } from './File';
 export { default as Image } from './Image';
-export { default as Markdown } from './Markdown';
 export { default as Mode } from './Mode';
 export { default as NodeSelect } from './NodeSelect';
 export { default as OrderBy } from './OrderBy';
