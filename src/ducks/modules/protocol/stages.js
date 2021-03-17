@@ -2,6 +2,7 @@ import uuid from 'uuid/v1';
 import { get, compact } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import prune from '@app/utils/prune';
+import { saveableChange } from '../session';
 
 const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
 const UPDATE_STAGE = 'PROTOCOL/UPDATE_STAGE';
@@ -64,36 +65,36 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const createStage = (stage, index) => ({
+const createStage = saveableChange((stage, index) => ({
   type: CREATE_STAGE,
   stage,
   index,
-});
+}));
 
-const moveStage = (oldIndex, newIndex) => ({
+const moveStage = saveableChange((oldIndex, newIndex) => ({
   type: MOVE_STAGE,
   oldIndex,
   newIndex,
-});
+}));
 
-const updateStage = (stageId, stage, overwrite = false) => ({
+const updateStage = saveableChange((stageId, stage, overwrite = false) => ({
   type: UPDATE_STAGE,
   id: stageId,
   stage,
   overwrite,
-});
+}));
 
-const deleteStage = (stageId) => ({
+const deleteStage = saveableChange((stageId) => ({
   type: DELETE_STAGE,
   id: stageId,
-});
+}));
 
-const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
+const deletePrompt = saveableChange((stageId, promptId, deleteEmptyStage = false) => ({
   type: DELETE_PROMPT,
   stageId,
   promptId,
   deleteEmptyStage,
-});
+}));
 
 const createStageThunk = (options, index) => (dispatch) => {
   const stageId = uuid();
