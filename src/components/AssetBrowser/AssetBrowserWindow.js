@@ -66,7 +66,6 @@ AssetBrowserWindow.defaultProps = {
   selected: null,
   onSelect: () => {},
   onCancel: () => {},
-  stackIndex: null,
 };
 
 export default compose(

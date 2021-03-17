@@ -59,12 +59,10 @@ AssetBrowser.propTypes = {
 };
 
 AssetBrowser.defaultProps = {
-  show: true,
   type: null,
   selected: null,
   onSelect: () => {},
   onDelete: () => {},
-  stackIndex: null,
   disableDelete: false,
 };
 
