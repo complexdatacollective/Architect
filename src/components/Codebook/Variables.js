@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,7 +17,9 @@ const SortDirection = {
   DESC: Symbol('DESC'),
 };
 
-const reverseSort = (direction) => (direction === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC);
+const reverseSort = (direction) => (
+  direction === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC
+);
 
 const rowClassName = (index) => {
   const isEven = index % 2 === 0;
@@ -162,7 +165,9 @@ const sortByProp = (sortBy) => (a, b) => {
 
 const sort = (sortBy) => (list) => list.sort(sortByProp(sortBy));
 
-const reverse = (sortDirection = SortDirection.ASC) => (list) => (sortDirection === SortDirection.DESC ? [...list].reverse() : list);
+const reverse = (sortDirection = SortDirection.ASC) => (list) => (
+  sortDirection === SortDirection.DESC ? [...list].reverse() : list
+);
 
 const withSort = compose(
   withStateHandlers(

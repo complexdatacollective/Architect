@@ -16,7 +16,14 @@ const ASSET_COMPONENTS = {
 };
 
 class Asset extends Component {
-  handleClick = () => this.props.onClick(this.props.id);
+  handleClick = () => {
+    const {
+      onClick,
+      id,
+    } = this.props;
+
+    return onClick(id);
+  };
 
   handleDelete = (e) => {
     const { isUsed, onDelete, id } = this.props;

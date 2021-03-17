@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { compose, defaultProps } from 'recompose';
-import { Zoom } from '../../behaviours';
+import Zoom from '../../behaviours/Zoom';
 import timelineImages from '../../images/timeline';
 
 const getTimelineImage = (type) => get(timelineImages, type);
