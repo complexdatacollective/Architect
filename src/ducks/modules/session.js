@@ -1,32 +1,32 @@
-import { combineEpics } from 'redux-observable';
-import { filter, mergeMap } from 'rxjs/operators';
+// import { combineEpics } from 'redux-observable';
+// import { filter, mergeMap } from 'rxjs/operators';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
-import validateProtocol from '@app/utils/validateProtocol';
+// import validateProtocol from '@app/utils/validateProtocol';
 import { actionCreators as timelineActions } from '@app/ducks/middleware/timeline';
-import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionCreators as previewActions } from '@modules/preview';
+import { actionTypes as protocolActionTypes } from '@modules/protocol';
 import { actionTypes as protocolStageActionTypes } from '@modules/protocol/stages';
 import { actionTypes as codebookActionTypes } from '@modules/protocol/codebook';
 import { actionTypes as assetManifestTypes } from '@modules/protocol/assetManifest';
 
 // All these actions are considered saveable changes:
-const savableChanges = [
-  protocolStageActionTypes.CREATE_STAGE,
-  protocolStageActionTypes.MOVE_STAGE,
-  protocolStageActionTypes.UPDATE_STAGE,
-  protocolStageActionTypes.DELETE_STAGE,
-  protocolStageActionTypes.DELETE_PROMPT,
-  codebookActionTypes.UPDATE_TYPE,
-  codebookActionTypes.CREATE_TYPE,
-  codebookActionTypes.DELETE_TYPE,
-  codebookActionTypes.CREATE_VARIABLE,
-  codebookActionTypes.UPDATE_VARIABLE,
-  codebookActionTypes.DELETE_VARIABLE,
-  protocolActionTypes.UPDATE_OPTIONS,
-  assetManifestTypes.IMPORT_ASSET_COMPLETE,
-  assetManifestTypes.DELETE_ASSET,
-];
+// const savableChanges = [
+//   protocolStageActionTypes.CREATE_STAGE,
+//   protocolStageActionTypes.MOVE_STAGE,
+//   protocolStageActionTypes.UPDATE_STAGE,
+//   protocolStageActionTypes.DELETE_STAGE,
+//   protocolStageActionTypes.DELETE_PROMPT,
+//   codebookActionTypes.UPDATE_TYPE,
+//   codebookActionTypes.CREATE_TYPE,
+//   codebookActionTypes.DELETE_TYPE,
+//   codebookActionTypes.CREATE_VARIABLE,
+//   codebookActionTypes.UPDATE_VARIABLE,
+//   codebookActionTypes.DELETE_VARIABLE,
+//   protocolActionTypes.UPDATE_OPTIONS,
+//   assetManifestTypes.IMPORT_ASSET_COMPLETE,
+//   assetManifestTypes.DELETE_ASSET,
+// ];
 
 const RESET_SESSION = 'SESSION/RESET';
 const PROTOCOL_CHANGED = 'SESSION/PROTOCOL_CHANGED';
@@ -153,16 +153,16 @@ const initialState = {
 };
 
 // Track savable changes, and emit changed action
-const protocolChangedEpic = (action$, { getState }) => action$.pipe(
-  filter(({ type }) => savableChanges.includes(type)),
-  mergeMap(async () => {
-    const protocol = getProtocol(getState());
+// const protocolChangedEpic = (action$, { getState }) => action$.pipe(
+//   filter(({ type }) => savableChanges.includes(type)),
+//   mergeMap(async () => {
+//     const protocol = getProtocol(getState());
 
-    return validateProtocol(protocol)
-      .then(() => protocolChanged(true))
-      .catch(() => protocolChanged(false));
-  }),
-);
+//     return validateProtocol(protocol)
+//       .then(() => protocolChanged(true))
+//       .catch(() => protocolChanged(false));
+//   }),
+// );
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -221,12 +221,12 @@ const actionTypes = {
   SAVE_NETCANVAS_COPY_ERROR,
 };
 
-const epics = combineEpics(
-  protocolChangedEpic,
-);
+// const epics = combineEpics(
+//   protocolChangedEpic,
+// );
 
 export {
   actionCreators,
   actionTypes,
-  epics,
+  // epics,
 };
