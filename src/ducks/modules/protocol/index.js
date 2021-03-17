@@ -2,16 +2,17 @@ import { pick } from 'lodash';
 import stages from './stages';
 import codebook from './codebook';
 import assetManifest from './assetManifest';
+import { saveableChange } from '../session';
 
 const initialState = {};
 
 const UPDATE_OPTIONS = 'PROTOCOL/UPDATE_OPTIONS';
 const SET_PROTOCOL = 'PROTOCOL/SET';
 
-const updateOptions = (options) => ({
+const updateOptions = saveableChange((options) => ({
   type: UPDATE_OPTIONS,
   options,
-});
+}));
 
 const setProtocol = (meta, protocol) => ({
   type: SET_PROTOCOL,

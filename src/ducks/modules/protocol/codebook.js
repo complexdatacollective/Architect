@@ -8,6 +8,7 @@ import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
 import safeName from '../../../utils/safeName';
 import { actionCreators as stageActions } from './stages';
+import { saveableChange } from '../session';
 
 const UPDATE_TYPE = 'PROTOCOL/UPDATE_TYPE';
 const CREATE_TYPE = 'PROTOCOL/CREATE_TYPE';
@@ -26,7 +27,7 @@ const defaultTypeTemplate = {
   variables: {},
 };
 
-const createType = (entity, type, configuration) => ({
+const createType = saveableChange((entity, type, configuration) => ({
   type: CREATE_TYPE,
   meta: {
     type,
@@ -36,26 +37,26 @@ const createType = (entity, type, configuration) => ({
     ...defaultTypeTemplate,
     ...configuration,
   },
-});
+}));
 
-const updateType = (entity, type, configuration) => ({
+const updateType = saveableChange((entity, type, configuration) => ({
   type: UPDATE_TYPE,
   meta: {
     entity,
     type,
   },
   configuration,
-});
+}));
 
-const deleteType = (entity, type) => ({
+const deleteType = saveableChange((entity, type) => ({
   type: DELETE_TYPE,
   meta: {
     entity,
     type,
   },
-});
+}));
 
-const createVariable = (entity, type, variable, configuration) => ({
+const createVariable = saveableChange((entity, type, variable, configuration) => ({
   type: CREATE_VARIABLE,
   meta: {
     type,
@@ -63,9 +64,9 @@ const createVariable = (entity, type, variable, configuration) => ({
     variable,
   },
   configuration,
-});
+}));
 
-const updateVariable = (entity, type, variable, configuration, merge = false) => ({
+const updateVariable = saveableChange((entity, type, variable, configuration, merge = false) => ({
   type: UPDATE_VARIABLE,
   meta: {
     entity,
@@ -74,16 +75,16 @@ const updateVariable = (entity, type, variable, configuration, merge = false) =>
   },
   configuration,
   merge,
-});
+}));
 
-const deleteVariable = (entity, type, variable) => ({
+const deleteVariable = saveableChange((entity, type, variable) => ({
   type: DELETE_VARIABLE,
   meta: {
     type,
     entity,
     variable,
   },
-});
+}));
 
 const createTypeThunk = (entity, configuration) => (dispatch) => {
   const type = uuid();

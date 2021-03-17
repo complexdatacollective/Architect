@@ -6,6 +6,7 @@ import { importAsset as fsImportAsset } from '@app/utils/protocols';
 import { getWorkingPath } from '@selectors/session';
 import { validateAsset } from '@app/utils/protocols/assetTools';
 import { invalidAssetErrorDialog, importAssetErrorDialog } from '@modules/protocol/utils/dialogs';
+import { saveableChange } from '../session';
 
 const IMPORT_ASSET = 'PROTOCOL/IMPORT_ASSET';
 const IMPORT_ASSET_COMPLETE = 'PROTOCOL/IMPORT_ASSET_COMPLETE';
@@ -14,10 +15,10 @@ const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
 
 const getNameFromFilename = (filename) => path.parse(filename).base;
 
-const deleteAsset = (id) => ({
+const deleteAsset = saveableChange((id) => ({
   type: DELETE_ASSET,
   id,
-});
+}));
 
 /**
  * @param {string} filename - Name of file
@@ -31,13 +32,13 @@ const importAsset = (filename) => ({
  * @param {string} filename - Name of file
  * @param {string} fileType - File MIME type
  */
-const importAssetComplete = (filename, name, assetType) => ({
+const importAssetComplete = saveableChange((filename, name, assetType) => ({
   id: uuid(),
   type: IMPORT_ASSET_COMPLETE,
   name,
   filename,
   assetType,
-});
+}));
 
 /**
  * @param {string} filename - Name of file
