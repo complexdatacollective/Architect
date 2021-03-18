@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '@codaco/ui/lib/components/Icon';
-import Radio from '@codaco/ui/lib/components/Fields/Radio';
+import Radio from '../Form/Fields/Radio';
 
 const IconOption = props => (
   <Radio
