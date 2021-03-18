@@ -85,7 +85,18 @@ describe('protocol.codebook', () => {
           testing.createVariable('node', 'foo', 'bar', { baz: 'buzz' }),
         );
 
-        expect(result).toMatchSnapshot();
+        expect(result).toEqual({
+          edge: {},
+          node: {
+            foo: {
+              variables: {
+                bar: {
+                  baz: 'buzz',
+                },
+              },
+            },
+          },
+        });
       });
 
       it('CREATE_VARIABLE for ego entity', () => {
@@ -96,7 +107,15 @@ describe('protocol.codebook', () => {
           testing.createVariable('ego', undefined, 'bar', { baz: 'buzz' }),
         );
 
-        expect(result).toMatchSnapshot();
+        expect(result).toEqual({
+          ego: {
+            variables: {
+              bar: {
+                baz: 'buzz',
+              },
+            },
+          },
+        });
       });
     });
 
@@ -110,7 +129,18 @@ describe('protocol.codebook', () => {
           testing.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
         );
 
-        expect(result).toMatchSnapshot();
+        expect(result).toEqual({
+          edge: {},
+          node: {
+            foo: {
+              variables: {
+                bar: {
+                  fizz: 'pop',
+                },
+              },
+            },
+          },
+        });
       });
 
       it('UPDATE_VARIABLE for ego entity', () => {
@@ -121,7 +151,15 @@ describe('protocol.codebook', () => {
           testing.updateVariable('ego', undefined, 'bar', { fizz: 'pop' }),
         );
 
-        expect(result).toMatchSnapshot();
+        expect(result).toEqual({
+          ego: {
+            variables: {
+              bar: {
+                fizz: 'pop',
+              },
+            },
+          },
+        });
       });
     });
   });
@@ -136,10 +174,13 @@ describe('protocol.codebook', () => {
         testing.deleteVariable('node', 'foo', 'bar'),
       );
 
-      expect(result).toMatchSnapshot();
+      expect(result).toEqual({
+        node: { foo: { variables: {} } },
+        edge: {},
+      });
     });
 
-    it.skip('DELETE_VARIABLE for ego entity', () => {
+    it('DELETE_VARIABLE for ego entity', () => {
       const result = reducer(
         {
           ego: { variables: { bar: { baz: 'buzz' } } },
@@ -148,29 +189,93 @@ describe('protocol.codebook', () => {
         testing.deleteVariable('ego', undefined, 'bar'),
       );
 
-      expect(result).toMatchSnapshot();
+      expect(result).toEqual({
+        ego: { variables: {} },
+        edge: {},
+      });
     });
   });
 
   describe('async actions', () => {
     describe('createType()', () => {
-      it('dispatches the CREATE_TYPE action with a type id', () => {
-        const store = mockStore(testState);
+      it('dispatches the CREATE_TYPE action with a type id', async () => {
+        const getState = jest.fn(() => ({
+          protocol: {
+            present: {},
+          },
+        }));
 
-        store.dispatch(actionCreators.createType(
+        const dispatch = jest.fn((action) => {
+          if (typeof action === 'function') {
+            return action(dispatch, getState);
+          }
+
+          return action;
+        });
+
+        await actionCreators.createType(
           'node',
           { fizz: 'buzz' },
-        ));
+        )(dispatch, getState);
 
-        const actions = store.getActions();
-
-        expect(actions[0]).toMatchObject({
+        expect(dispatch).toHaveBeenCalledWith({
           type: actionTypes.CREATE_TYPE,
           meta: {
             entity: 'node',
             type: uuid(),
           },
-          configuration: { fizz: 'buzz' },
+          configuration: {
+            color: '',
+            variables: {},
+            fizz: 'buzz',
+          },
+        });
+
+        expect(dispatch).toHaveBeenCalledWith({
+          type: 'SESSION/PROTOCOL_CHANGED',
+          protocolIsValid: false,
+          ipc: true,
+        });
+      });
+    });
+
+    describe('updateType()', () => {
+      it('dispatches the UPDATE_TYPE action', async () => {
+        const getState = jest.fn(() => ({
+          protocol: {
+            present: {},
+          },
+        }));
+
+        const dispatch = jest.fn((action) => {
+          if (typeof action === 'function') {
+            return action(dispatch, getState);
+          }
+
+          return action;
+        });
+
+        await actionCreators.updateType(
+          'node',
+          'person',
+          { fizz: 'buzz' },
+        )(dispatch, getState);
+
+        expect(dispatch).toHaveBeenCalledWith({
+          type: actionTypes.UPDATE_TYPE,
+          meta: {
+            entity: 'node',
+            type: 'person',
+          },
+          configuration: {
+            fizz: 'buzz',
+          },
+        });
+
+        expect(dispatch).toHaveBeenCalledWith({
+          type: 'SESSION/PROTOCOL_CHANGED',
+          protocolIsValid: false,
+          ipc: true,
         });
       });
     });

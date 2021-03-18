@@ -1,5 +1,3 @@
-// import { combineEpics } from 'redux-observable';
-// import { filter, mergeMap } from 'rxjs/operators';
 import * as netcanvasFile from '@app/utils/netcanvasFile';
 import { getProtocol } from '@selectors/protocol';
 import validateProtocol from '@app/utils/validateProtocol';

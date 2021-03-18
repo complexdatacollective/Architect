@@ -27,7 +27,7 @@ const defaultTypeTemplate = {
   variables: {},
 };
 
-const createType = saveableChange((entity, type, configuration) => ({
+const createType = (entity, type, configuration) => ({
   type: CREATE_TYPE,
   meta: {
     type,
@@ -37,26 +37,26 @@ const createType = saveableChange((entity, type, configuration) => ({
     ...defaultTypeTemplate,
     ...configuration,
   },
-}));
+});
 
-const updateType = saveableChange((entity, type, configuration) => ({
+const updateType = (entity, type, configuration) => ({
   type: UPDATE_TYPE,
   meta: {
     entity,
     type,
   },
   configuration,
-}));
+});
 
-const deleteType = saveableChange((entity, type) => ({
+const deleteType = (entity, type) => ({
   type: DELETE_TYPE,
   meta: {
     entity,
     type,
   },
-}));
+});
 
-const createVariable = saveableChange((entity, type, variable, configuration) => ({
+const createVariable = (entity, type, variable, configuration) => ({
   type: CREATE_VARIABLE,
   meta: {
     type,
@@ -64,9 +64,9 @@ const createVariable = saveableChange((entity, type, variable, configuration) =>
     variable,
   },
   configuration,
-}));
+});
 
-const updateVariable = saveableChange((entity, type, variable, configuration, merge = false) => ({
+const updateVariable = (entity, type, variable, configuration, merge = false) => ({
   type: UPDATE_VARIABLE,
   meta: {
     entity,
@@ -75,27 +75,34 @@ const updateVariable = saveableChange((entity, type, variable, configuration, me
   },
   configuration,
   merge,
-}));
+});
 
-const deleteVariable = saveableChange((entity, type, variable) => ({
+const deleteVariable = (entity, type, variable) => ({
   type: DELETE_VARIABLE,
   meta: {
     type,
     entity,
     variable,
   },
-}));
+});
 
 const createTypeThunk = (entity, configuration) => (dispatch) => {
   const type = uuid();
 
-  dispatch(createType(entity, type, configuration));
-
-  return {
-    type,
-    entity,
-  };
+  return dispatch(saveableChange(createType)(entity, type, configuration))
+    .then(() => ({
+      type,
+      entity,
+    }));
 };
+
+const updateTypeThunk = (entity, type, configuration) => (dispatch) => (
+  dispatch(saveableChange(updateType)(entity, type, configuration))
+    .then(() => ({
+      type,
+      entity,
+    }))
+);
 
 const createEdgeThunk = (configuration) => (dispatch, getState) => {
   const entity = 'edge';
@@ -104,7 +111,7 @@ const createEdgeThunk = (configuration) => (dispatch, getState) => {
   const color = configuration.color || getNextCategoryColor(protocol, entity);
   const type = uuid();
 
-  dispatch(createType(entity, type, { ...configuration, color }));
+  dispatch(saveableChange(createType)(entity, type, { ...configuration, color }));
 
   return {
     type,
@@ -141,7 +148,7 @@ const createVariableThunk = (entity, type, configuration) => (dispatch, getState
 
   const variable = uuid();
 
-  dispatch(createVariable(entity, type, variable, safeConfiguration));
+  dispatch(saveableChange(createVariable)(entity, type, variable, safeConfiguration));
 
   return {
     entity,
@@ -160,13 +167,13 @@ const updateVariableThunk = (
     throw new Error(`Variable "${variable}" does not exist`);
   }
 
-  dispatch(updateVariable(entity, type, variable, configuration, merge));
+  dispatch(saveableChange(updateVariable)(entity, type, variable, configuration, merge));
 };
 
 const deleteVariableThunk = (entity, type, variable) => (dispatch, getState) => {
   const isUsed = makeGetIsUsed({ formNames: [] })(getState());
   if (get(isUsed, variable, false)) { return false; }
-  dispatch(deleteVariable(entity, type, variable));
+  dispatch(saveableChange(deleteVariable)(entity, type, variable));
   return true;
 };
 
@@ -180,7 +187,7 @@ const updateDisplayVariableThunk = (entity, type, variable) => (dispatch, getSta
     displayVariable: variable,
   };
 
-  dispatch(updateType(entity, type, updatedConfiguration));
+  dispatch(saveableChange(updateType)(entity, type, updatedConfiguration));
 };
 
 const getDeleteAction = ({ type, ...owner }) => {
@@ -196,7 +203,7 @@ const getDeleteAction = ({ type, ...owner }) => {
 };
 
 const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) => (dispatch, getState) => {
-  dispatch(deleteType(entity, type));
+  dispatch(saveableChange(deleteType)(entity, type));
 
   if (!deleteRelatedObjects) { return; }
 
@@ -309,7 +316,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  updateType,
+  updateType: updateTypeThunk,
   createType: createTypeThunk,
   createEdge: createEdgeThunk,
   deleteType: deleteTypeThunk,

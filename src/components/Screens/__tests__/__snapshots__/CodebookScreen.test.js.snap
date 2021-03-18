@@ -28,7 +28,6 @@ exports[`<CodebookScreen /> can render 1`] = `
     <Section
       className=""
       compactNext={false}
-      contentId={null}
       disabled={false}
       group={false}
     >

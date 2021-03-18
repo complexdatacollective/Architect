@@ -1,16 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`protocol.codebook DELETE_VARIABLE DELETE_VARIABLE for node entity 1`] = `
-Object {
-  "edge": Object {},
-  "node": Object {
-    "foo": Object {
-      "variables": Object {},
-    },
-  },
-}
-`;
-
 exports[`protocol.codebook async actions createVariable() dispatches the CREATE_VARIABLE action with a variable id for ego 1`] = `
 Object {
   "configuration": Object {
@@ -40,59 +29,5 @@ Object {
     "variable": "809895df-bbd7-4c76-ac58-e6ada2625f9b",
   },
   "type": "PROTOCOL/CREATE_VARIABLE",
-}
-`;
-
-exports[`protocol.codebook reducer CREATE_VARIABLE CREATE_VARIABLE for ego entity 1`] = `
-Object {
-  "ego": Object {
-    "variables": Object {
-      "bar": Object {
-        "baz": "buzz",
-      },
-    },
-  },
-}
-`;
-
-exports[`protocol.codebook reducer CREATE_VARIABLE CREATE_VARIABLE for node entity 1`] = `
-Object {
-  "edge": Object {},
-  "node": Object {
-    "foo": Object {
-      "variables": Object {
-        "bar": Object {
-          "baz": "buzz",
-        },
-      },
-    },
-  },
-}
-`;
-
-exports[`protocol.codebook reducer UPDATE_VARIABLE UPDATE_VARIABLE for ego entity 1`] = `
-Object {
-  "ego": Object {
-    "variables": Object {
-      "bar": Object {
-        "fizz": "pop",
-      },
-    },
-  },
-}
-`;
-
-exports[`protocol.codebook reducer UPDATE_VARIABLE UPDATE_VARIABLE for node entity 1`] = `
-Object {
-  "edge": Object {},
-  "node": Object {
-    "foo": Object {
-      "variables": Object {
-        "bar": Object {
-          "fizz": "pop",
-        },
-      },
-    },
-  },
 }
 `;
