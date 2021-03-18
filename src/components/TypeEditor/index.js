@@ -57,16 +57,18 @@ const withTypeState = connect(mapStateToProps, mapDispatchToProps);
 
 const withTypeHandlers = withHandlers({
   onSubmit: ({
-    createType, updateType, onComplete, entity, type,
-  }) => (values) => {
-    let result;
+    createType,
+    updateType,
+    onComplete,
+    entity,
+    type,
+  }) => async (values) => {
     if (!type) {
-      result = createType(entity, values);
-    } else {
-      result = updateType(entity, type, values);
+      return createType(entity, values)
+        .then(onComplete);
     }
-
-    onComplete(result);
+    return updateType(entity, type, values)
+      .then(onComplete);
   },
 });
 
