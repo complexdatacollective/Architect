@@ -25,8 +25,8 @@ const variableHandlers = withHandlers({
     type,
     form,
     changeForm,
-  }) => (name, field) => {
-    const { variable } = createVariable(entity, type, { type: 'text', name });
+  }) => async (name, field) => {
+    const { variable } = await createVariable(entity, type, { type: 'text', name });
 
     // If we supplied a field, update it with the result of the variable creation
     if (field) {

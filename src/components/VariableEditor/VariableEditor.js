@@ -38,13 +38,12 @@ const VariableEditor = compose(
     component: VariableFields,
     onSubmit: (options) => {
       if (!options.id) {
-        const newVariable = createVariable(entity, type, options);
-        onComplete(newVariable);
-      } else {
-        const { id } = options;
-        updateVariable(entity, type, id, options);
-        onComplete({ entity, type, variable: id });
+        return createVariable(entity, type, options)
+          .then(onComplete);
       }
+      const { id } = options;
+      return updateVariable(entity, type, id, options)
+        .then(() => onComplete({ entity, type, variable: id }));
     },
   })),
 )(Editor);
