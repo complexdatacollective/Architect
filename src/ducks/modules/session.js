@@ -127,15 +127,25 @@ const initialState = {
   lastChanged: 0,
   protocolIsValid: false,
 };
-export const saveableChange = (actionCreator) => (...args) => (dispatch, getState) => {
-  const action = actionCreator(...args);
-  dispatch(action);
 
+export const checkChanged = (dispatch, getState) => {
   const protocol = getProtocol(getState());
 
   return validateProtocol(protocol)
     .then(() => dispatch(protocolChanged(true)))
     .catch(() => dispatch(protocolChanged(false)));
+};
+
+export const saveableChange = (actionCreator) => (...args) => (dispatch) => {
+  const action = actionCreator(...args);
+  const dispatchedAction = dispatch(action);
+
+  if (dispatchedAction.then) {
+    return dispatchedAction
+      .then(() => dispatch(checkChanged));
+  }
+
+  return dispatch(checkChanged);
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -195,12 +205,7 @@ const actionTypes = {
   SAVE_NETCANVAS_COPY_ERROR,
 };
 
-// const epics = combineEpics(
-//   protocolChangedEpic,
-// );
-
 export {
   actionCreators,
   actionTypes,
-  // epics,
 };

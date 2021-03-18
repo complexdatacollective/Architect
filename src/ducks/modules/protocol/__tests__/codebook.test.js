@@ -3,14 +3,11 @@
 import uuid from 'uuid';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import { sortBy } from 'lodash/fp';
-import { actionCreators as stageActions } from '../stages';
-import reducer, { actionTypes, actionCreators, testing } from '../codebook';
+import { test as stageActions } from '../stages';
+import reducer, { actionTypes, actionCreators, test } from '../codebook';
 import testState from '../../../../__tests__/testState.json';
 
 jest.mock('uuid');
-
-const sortByType = sortBy('type');
 
 const mockStore = configureStore([thunk]);
 
@@ -22,12 +19,14 @@ const mockStore = configureStore([thunk]);
 //   edge: { },
 // };
 
-const getThunkMocks = () => {
-  const getState = jest.fn(() => ({
-    protocol: {
-      present: {},
-    },
-  }));
+const defaultMockState = {
+  protocol: {
+    present: {},
+  },
+};
+
+const getThunkMocks = (state = defaultMockState) => {
+  const getState = jest.fn(() => state);
 
   const dispatch = jest.fn((action) => {
     if (typeof action === 'function') {
@@ -54,7 +53,7 @@ describe('protocol.codebook', () => {
     it('CREATE_TYPE', () => {
       const result = reducer(
         undefined,
-        testing.createType('node', 'foo', { bar: 'bazz' }),
+        test.createType('node', 'foo', { bar: 'bazz' }),
       );
 
       expect(result).toEqual({
@@ -69,7 +68,7 @@ describe('protocol.codebook', () => {
           node: { foo: { bar: 'bazz' } },
           edge: {},
         },
-        actionCreators.updateType('node', 'foo', { fizz: 'pop' }),
+        test.updateType('node', 'foo', { fizz: 'pop' }),
       );
 
       expect(result).toEqual({
@@ -84,7 +83,7 @@ describe('protocol.codebook', () => {
           node: { foo: { bar: 'bazz' } },
           edge: {},
         },
-        testing.deleteType('node', 'foo'),
+        test.deleteType('node', 'foo'),
       );
 
       expect(result).toEqual({
@@ -100,7 +99,7 @@ describe('protocol.codebook', () => {
             node: { foo: { variables: {} } },
             edge: {},
           },
-          testing.createVariable('node', 'foo', 'bar', { baz: 'buzz' }),
+          test.createVariable('node', 'foo', 'bar', { baz: 'buzz' }),
         );
 
         expect(result).toEqual({
@@ -122,7 +121,7 @@ describe('protocol.codebook', () => {
           {
             ego: { variables: {} },
           },
-          testing.createVariable('ego', undefined, 'bar', { baz: 'buzz' }),
+          test.createVariable('ego', undefined, 'bar', { baz: 'buzz' }),
         );
 
         expect(result).toEqual({
@@ -144,7 +143,7 @@ describe('protocol.codebook', () => {
             node: { foo: { variables: { bar: { baz: 'buzz' } } } },
             edge: {},
           },
-          testing.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
+          test.updateVariable('node', 'foo', 'bar', { fizz: 'pop' }),
         );
 
         expect(result).toEqual({
@@ -166,7 +165,7 @@ describe('protocol.codebook', () => {
           {
             ego: { variables: { bar: { baz: 'buzz' } } },
           },
-          testing.updateVariable('ego', undefined, 'bar', { fizz: 'pop' }),
+          test.updateVariable('ego', undefined, 'bar', { fizz: 'pop' }),
         );
 
         expect(result).toEqual({
@@ -189,7 +188,7 @@ describe('protocol.codebook', () => {
           node: { foo: { variables: { bar: { baz: 'buzz' } } } },
           edge: {},
         },
-        testing.deleteVariable('node', 'foo', 'bar'),
+        test.deleteVariable('node', 'foo', 'bar'),
       );
 
       expect(result).toEqual({
@@ -204,7 +203,7 @@ describe('protocol.codebook', () => {
           ego: { variables: { bar: { baz: 'buzz' } } },
           edge: {},
         },
-        testing.deleteVariable('ego', undefined, 'bar'),
+        test.deleteVariable('ego', undefined, 'bar'),
       );
 
       expect(result).toEqual({
@@ -215,16 +214,16 @@ describe('protocol.codebook', () => {
   });
 
   describe('async actions', () => {
-    describe('createType()', () => {
+    describe.only('createType()', () => {
       it('dispatches the CREATE_TYPE action with a type id', async () => {
-        const [dispatch, getState] = getThunkMocks();
+        const [dispatch, getState] = getThunkMocks(testState);
 
         await actionCreators.createType(
           'node',
           { fizz: 'buzz' },
         )(dispatch, getState);
 
-        expect(dispatch).toHaveBeenCalledWith({
+        expect(dispatch).toHaveBeenNthCalledWith({
           type: actionTypes.CREATE_TYPE,
           meta: {
             entity: 'node',
@@ -237,7 +236,7 @@ describe('protocol.codebook', () => {
           },
         });
 
-        expect(dispatch).toHaveBeenCalledWith({
+        expect(dispatch).toHaveBeenNthCalledWith({
           type: 'SESSION/PROTOCOL_CHANGED',
           protocolIsValid: false,
           ipc: true,
@@ -247,7 +246,7 @@ describe('protocol.codebook', () => {
 
     describe('updateType()', () => {
       it('dispatches the UPDATE_TYPE action', async () => {
-        const [dispatch, getState] = getThunkMocks();
+        const [dispatch, getState] = getThunkMocks(testState);
 
         await actionCreators.updateType(
           'node',
@@ -298,7 +297,7 @@ describe('protocol.codebook', () => {
       });
 
       it('dispatches the CREATE_VARIABLE action with a variable id for node', async () => {
-        const [dispatch, getState] = getThunkMocks();
+        const [dispatch, getState] = getThunkMocks(testState);
 
         await actionCreators.createVariable(
           'node',
@@ -306,21 +305,24 @@ describe('protocol.codebook', () => {
           { fizz: 'buzz', name: 'bar', type: 'text' },
         )(dispatch, getState);
 
-        expect(dispatch).toHaveBeenCalledWith({
-          type: actionTypes.CREATE_VARIABLE,
-          meta: {
-            entity: 'node',
-            type: 'foo',
-            variable: uuid(),
-          },
-          configuration: {
-            fizz: 'buzz',
-            name: 'bar',
-            type: 'text',
-          },
-        });
+        expect(dispatch).toHaveBeenNthCalledWith(
+          1,
+            {
+            type: actionTypes.CREATE_VARIABLE,
+            meta: {
+              entity: 'node',
+              type: 'foo',
+              variable: uuid(),
+            },
+            configuration: {
+              fizz: 'buzz',
+              name: 'bar',
+              type: 'text',
+            },
+          }
+        );
 
-        expect(dispatch).toHaveBeenCalledWith({
+        expect(dispatch).toHaveBeenNthCalledWith({
           type: 'SESSION/PROTOCOL_CHANGED',
           protocolIsValid: false,
           ipc: true,
@@ -328,7 +330,7 @@ describe('protocol.codebook', () => {
       });
 
       it('dispatches the CREATE_VARIABLE action with a variable id for ego', async () => {
-        const [dispatch, getState] = getThunkMocks();
+        const [dispatch, getState] = getThunkMocks(testState);
 
         await actionCreators.createVariable(
           'ego',
@@ -367,28 +369,36 @@ describe('protocol.codebook', () => {
       });
     });
 
-    describe.only('updateVariable()', () => {
-      it('dispatches the UPDATE_VARIABLE action', () => {
-        const store = mockStore(testState);
+    describe('updateVariable()', () => {
+      it('dispatches the UPDATE_VARIABLE action', async () => {
+        const [dispatch, getState] = getThunkMocks(testState);
 
-        store.dispatch(actionCreators.updateVariable(
+        await actionCreators.updateVariable(
           'node',
           'bar',
           'alpha',
           { fizz: 'buzz' },
-        ));
+        )(dispatch, getState);
 
-        const actions = store.getActions();
-
-        expect(actions[0]).toMatchObject({
+        expect(dispatch).toHaveBeenCalledWith({
           type: actionTypes.UPDATE_VARIABLE,
           meta: {
             entity: 'node',
             type: 'bar',
             variable: 'alpha',
           },
+          merge: false,
           configuration: { fizz: 'buzz' },
         });
+
+        expect(dispatch).toHaveBeenNthCalledWith(
+          4,
+          {
+            type: 'SESSION/PROTOCOL_CHANGED',
+            protocolIsValid: true,
+            ipc: true,
+          },
+        );
       });
 
       it('throws an error if the variable does not already exist', () => {
@@ -402,7 +412,7 @@ describe('protocol.codebook', () => {
     });
 
     describe('deleteType()', () => {
-      it('Dispatches delete actions for all related objects', () => {
+      it('Dispatches delete actions for all related objects', async () => {
         const mockStateWithProtocol = {
           protocol: {
             present: {
@@ -425,19 +435,25 @@ describe('protocol.codebook', () => {
           },
         };
 
-        const store = mockStore(mockStateWithProtocol);
+        const [dispatch, getState] = getThunkMocks(mockStateWithProtocol);
 
-        store.dispatch(actionCreators.deleteType('node', 'foo', true));
+        await actionCreators.deleteType('node', 'foo', true)(dispatch, getState);
 
-        const actions = store.getActions();
-
-        const expectedActions = sortByType([
-          testing.deleteType('node', 'foo'),
-          stageActions.deleteStage('bazz'),
+        expect(dispatch).toHaveBeenCalledWith(test.deleteType('node', 'foo'));
+        expect(dispatch).toHaveBeenNthCalledWith(3, stageActions.deleteStage('bazz'));
+        expect(dispatch).toHaveBeenNthCalledWith(
+          6,
           stageActions.deletePrompt('buzz', 'fizz', true),
-        ]);
+        );
 
-        expect(sortByType(actions)).toEqual(expectedActions);
+        expect(dispatch).toHaveBeenNthCalledWith(
+          9,
+          {
+            type: 'SESSION/PROTOCOL_CHANGED',
+            protocolIsValid: false,
+            ipc: true,
+          },
+        );
       });
     });
   });

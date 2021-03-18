@@ -8,7 +8,7 @@ import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
 import safeName from '../../../utils/safeName';
 import { actionCreators as stageActions } from './stages';
-import { saveableChange } from '../session';
+import { saveableChange, checkChanged } from '../session';
 
 const UPDATE_TYPE = 'PROTOCOL/UPDATE_TYPE';
 const CREATE_TYPE = 'PROTOCOL/CREATE_TYPE';
@@ -166,7 +166,7 @@ const updateVariableThunk = (
     throw new Error(`Variable "${variable}" does not exist`);
   }
 
-  dispatch(saveableChange(updateVariable)(entity, type, variable, configuration, merge));
+  return dispatch(saveableChange(updateVariable)(entity, type, variable, configuration, merge));
 };
 
 const deleteVariableThunk = (entity, type, variable) => (dispatch, getState) => {
@@ -202,17 +202,19 @@ const getDeleteAction = ({ type, ...owner }) => {
 };
 
 const deleteTypeThunk = (entity, type, deleteRelatedObjects = false) => (dispatch, getState) => {
-  dispatch(saveableChange(deleteType)(entity, type));
+  dispatch(deleteType(entity, type));
 
-  if (!deleteRelatedObjects) { return; }
+  if (!deleteRelatedObjects) { return Promise.resolve(); }
 
   // check usage elsewhere, and delete related stages/forms
   const getUsageForType = makeGetUsageForType(getState());
   const usageForType = getUsageForType(entity, type);
 
-  usageForType
-    .map(({ owner }) => getDeleteAction(owner))
-    .forEach(dispatch);
+  return Promise.all(
+    usageForType
+      .map(({ owner }) => dispatch(getDeleteAction(owner))),
+  )
+    .then(() => dispatch(checkChanged));
 };
 
 /**
@@ -334,8 +336,9 @@ const actionTypes = {
   DELETE_TYPE,
 };
 
-const testing = {
+const test = {
   createType,
+  updateType,
   deleteType,
   createVariable,
   updateVariable,
@@ -345,5 +348,5 @@ const testing = {
 export {
   actionCreators,
   actionTypes,
-  testing,
+  test,
 };
