@@ -65,50 +65,55 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-const createStage = saveableChange((stage, index) => ({
+const createStage = (stage, index) => ({
   type: CREATE_STAGE,
   stage,
   index,
-}));
+});
 
-const moveStage = saveableChange((oldIndex, newIndex) => ({
+const moveStage = (oldIndex, newIndex) => ({
   type: MOVE_STAGE,
   oldIndex,
   newIndex,
-}));
+});
 
-const updateStage = saveableChange((stageId, stage, overwrite = false) => ({
+const updateStage = (stageId, stage, overwrite = false) => ({
   type: UPDATE_STAGE,
   id: stageId,
   stage,
   overwrite,
-}));
+});
 
-const deleteStage = saveableChange((stageId) => ({
+const deleteStage = (stageId) => ({
   type: DELETE_STAGE,
   id: stageId,
-}));
+});
 
-const deletePrompt = saveableChange((stageId, promptId, deleteEmptyStage = false) => ({
+const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
   type: DELETE_PROMPT,
   stageId,
   promptId,
   deleteEmptyStage,
-}));
+});
 
 const createStageThunk = (options, index) => (dispatch) => {
   const stageId = uuid();
   const stage = { ...initialStage, ...options, id: stageId };
-  dispatch(createStage(stage, index));
+  dispatch(saveableChange(createStage)(stage, index));
   return stage;
 };
 
+const moveStageThunk = saveableChange(moveStage);
+const updateStageThunk = saveableChange(updateStage);
+const deleteStageThunk = saveableChange(deleteStage);
+const deletePromptThunk = saveableChange(deletePrompt);
+
 const actionCreators = {
   createStage: createStageThunk,
-  updateStage,
-  deleteStage,
-  moveStage,
-  deletePrompt,
+  updateStage: updateStageThunk,
+  deleteStage: deleteStageThunk,
+  moveStage: moveStageThunk,
+  deletePrompt: deletePromptThunk,
 };
 
 const actionTypes = {
@@ -119,11 +124,16 @@ const actionTypes = {
   DELETE_PROMPT,
 };
 
-export const test = {
+const test = {
   createStage,
+  updateStage,
+  deleteStage,
+  moveStage,
+  deletePrompt,
 };
 
 export {
   actionCreators,
   actionTypes,
+  test,
 };
