@@ -22,6 +22,24 @@ const mockStore = configureStore([thunk]);
 //   edge: { },
 // };
 
+const getThunkMocks = () => {
+  const getState = jest.fn(() => ({
+    protocol: {
+      present: {},
+    },
+  }));
+
+  const dispatch = jest.fn((action) => {
+    if (typeof action === 'function') {
+      return action(dispatch, getState);
+    }
+
+    return action;
+  });
+
+  return [dispatch, getState];
+};
+
 describe('protocol.codebook', () => {
   describe('reducer', () => {
     it('initialState', () => {
@@ -199,19 +217,7 @@ describe('protocol.codebook', () => {
   describe('async actions', () => {
     describe('createType()', () => {
       it('dispatches the CREATE_TYPE action with a type id', async () => {
-        const getState = jest.fn(() => ({
-          protocol: {
-            present: {},
-          },
-        }));
-
-        const dispatch = jest.fn((action) => {
-          if (typeof action === 'function') {
-            return action(dispatch, getState);
-          }
-
-          return action;
-        });
+        const [dispatch, getState] = getThunkMocks();
 
         await actionCreators.createType(
           'node',
@@ -241,19 +247,7 @@ describe('protocol.codebook', () => {
 
     describe('updateType()', () => {
       it('dispatches the UPDATE_TYPE action', async () => {
-        const getState = jest.fn(() => ({
-          protocol: {
-            present: {},
-          },
-        }));
-
-        const dispatch = jest.fn((action) => {
-          if (typeof action === 'function') {
-            return action(dispatch, getState);
-          }
-
-          return action;
-        });
+        const [dispatch, getState] = getThunkMocks();
 
         await actionCreators.updateType(
           'node',
@@ -303,32 +297,64 @@ describe('protocol.codebook', () => {
         }).toThrow(new Error('Cannot create a new variable without a type'));
       });
 
-      it('dispatches the CREATE_VARIABLE action with a variable id for node', () => {
-        const store = mockStore(testState);
+      it('dispatches the CREATE_VARIABLE action with a variable id for node', async () => {
+        const [dispatch, getState] = getThunkMocks();
 
-        store.dispatch(actionCreators.createVariable(
+        await actionCreators.createVariable(
           'node',
           'foo',
           { fizz: 'buzz', name: 'bar', type: 'text' },
-        ));
+        )(dispatch, getState);
 
-        const actions = store.getActions();
+        expect(dispatch).toHaveBeenCalledWith({
+          type: actionTypes.CREATE_VARIABLE,
+          meta: {
+            entity: 'node',
+            type: 'foo',
+            variable: uuid(),
+          },
+          configuration: {
+            fizz: 'buzz',
+            name: 'bar',
+            type: 'text',
+          },
+        });
 
-        expect(actions[0]).toMatchSnapshot();
+        expect(dispatch).toHaveBeenCalledWith({
+          type: 'SESSION/PROTOCOL_CHANGED',
+          protocolIsValid: false,
+          ipc: true,
+        });
       });
 
-      it('dispatches the CREATE_VARIABLE action with a variable id for ego', () => {
-        const store = mockStore(testState);
+      it('dispatches the CREATE_VARIABLE action with a variable id for ego', async () => {
+        const [dispatch, getState] = getThunkMocks();
 
-        store.dispatch(actionCreators.createVariable(
+        await actionCreators.createVariable(
           'ego',
-          undefined,
+          null,
           { fizz: 'buzz', name: 'bar', type: 'text' },
-        ));
+        )(dispatch, getState);
 
-        const actions = store.getActions();
+        expect(dispatch).toHaveBeenCalledWith({
+          type: actionTypes.CREATE_VARIABLE,
+          meta: {
+            entity: 'ego',
+            type: null,
+            variable: uuid(),
+          },
+          configuration: {
+            fizz: 'buzz',
+            name: 'bar',
+            type: 'text',
+          },
+        });
 
-        expect(actions[0]).toMatchSnapshot();
+        expect(dispatch).toHaveBeenCalledWith({
+          type: 'SESSION/PROTOCOL_CHANGED',
+          protocolIsValid: false,
+          ipc: true,
+        });
       });
 
       it('throws an error if a variable with the same name already exists', () => {
@@ -341,7 +367,7 @@ describe('protocol.codebook', () => {
       });
     });
 
-    describe('updateVariable()', () => {
+    describe.only('updateVariable()', () => {
       it('dispatches the UPDATE_VARIABLE action', () => {
         const store = mockStore(testState);
 

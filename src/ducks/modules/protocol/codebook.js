@@ -148,13 +148,12 @@ const createVariableThunk = (entity, type, configuration) => (dispatch, getState
 
   const variable = uuid();
 
-  dispatch(saveableChange(createVariable)(entity, type, variable, safeConfiguration));
-
-  return {
-    entity,
-    type,
-    variable,
-  };
+  return dispatch(saveableChange(createVariable)(entity, type, variable, safeConfiguration))
+    .then(() => ({
+      entity,
+      type,
+      variable,
+    }));
 };
 
 const updateVariableThunk = (

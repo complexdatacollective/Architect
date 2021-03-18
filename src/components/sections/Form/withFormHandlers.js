@@ -39,23 +39,19 @@ const formHandlers = withHandlers({
       };
     }
 
-    try {
-      const { variable: newVariable } = createVariable(
-        entity,
-        type,
-        {
-          ...configuration,
-          name: _createNewVariable,
-        },
-      );
-
-      return {
-        variable: newVariable,
-        ...rest,
-      };
-    } catch (e) {
+    return createVariable(
+      entity,
+      type,
+      {
+        ...configuration,
+        name: _createNewVariable,
+      },
+    ).then(({ variable: newVariable }) => ({
+      variable: newVariable,
+      ...rest,
+    })).catch((e) => {
       throw new SubmissionError({ variable: e.toString() });
-    }
+    });
   },
 });
 

@@ -22,7 +22,7 @@ export const normalizeKeyDown = (event) => {
 const createVariableHandler = {
   handleCreateVariable: ({
     changeField, createVariable, type, entity, form,
-  }) => (variableName, variableType, field) => {
+  }) => async (variableName, variableType, field) => {
     const withType = variableType ? { type: variableType } : {};
 
     const configuration = {
@@ -30,7 +30,7 @@ const createVariableHandler = {
       ...withType,
     };
 
-    const { variable } = createVariable(entity, type, configuration);
+    const { variable } = await createVariable(entity, type, configuration);
 
     // If we supplied a field, update it with the result of the variable creation
     if (field) {

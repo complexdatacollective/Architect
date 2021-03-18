@@ -27,8 +27,8 @@ const newVariableHandlers = withHandlers({
     type,
     createVariable,
     onComplete,
-  }) => (configuration) => {
-    const { variable } = createVariable(entity, type, configuration);
+  }) => async (configuration) => {
+    const { variable } = await createVariable(entity, type, configuration);
     onComplete(variable);
   },
 });
