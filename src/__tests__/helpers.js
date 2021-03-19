@@ -11,3 +11,17 @@ export const getMockState = (mergeProps) => ({
   },
   ...mergeProps,
 });
+
+export const getThunkMocks = (state = testState) => {
+  const getState = jest.fn(() => state);
+
+  const dispatch = jest.fn((action) => {
+    if (typeof action === 'function') {
+      return action(dispatch, getState);
+    }
+
+    return action;
+  });
+
+  return [dispatch, getState];
+};
