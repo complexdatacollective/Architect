@@ -51,7 +51,7 @@ class Timeline extends Component {
       type: 'Warning',
       title: 'Delete stage',
       message: 'Are you sure you want to delete this stage from your protocol? This action cannot be undone!',
-      onConfirm: () => { deleteStage(stageId); },
+      onConfirm: () => deleteStage(stageId),
       confirmLabel: 'Delete stage',
     });
   }

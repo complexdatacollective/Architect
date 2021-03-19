@@ -15,12 +15,12 @@ const stageEditorHanders = withHandlers({
     const normalizedStage = omit(stage, '_modified');
 
     if (id) {
-      updateStage(id, normalizedStage);
-    } else {
-      createStage(normalizedStage, insertAtIndex);
+      return updateStage(id, normalizedStage)
+        .then(onComplete);
     }
 
-    onComplete();
+    return createStage(normalizedStage, insertAtIndex)
+      .then(onComplete);
   },
 });
 
