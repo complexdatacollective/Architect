@@ -142,7 +142,7 @@ const withVariableHandlers = compose(
             ? This cannot be undone.
           </p>
         ),
-        onConfirm: () => { deleteVariable(entity, type, id); },
+        onConfirm: () => deleteVariable(entity, type, id),
         confirmLabel: `Delete ${name}`,
       });
     },

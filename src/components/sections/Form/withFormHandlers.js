@@ -13,7 +13,7 @@ const formHandlers = withHandlers({
     entity,
     changeForm,
     form,
-  }) => (values) => {
+  }) => async (values) => {
     const {
       variable, component, _createNewVariable, ...rest
     } = values;
@@ -31,7 +31,7 @@ const formHandlers = withHandlers({
     changeForm(form, '_modified', new Date().getTime());
 
     if (!_createNewVariable) {
-      updateVariable(entity, type, variable, configuration, true);
+      await updateVariable(entity, type, variable, configuration, true);
 
       return {
         variable,

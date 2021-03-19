@@ -42,9 +42,9 @@ const variableHandlers = withHandlers({
     form,
     formValues,
     changeForm,
-  }) => (variable, formPaths = []) => {
+  }) => async (variable, formPaths = []) => {
     // TODO: share this functionality with enhancers?
-    const variableDeleted = deleteVariable(entity, type, variable);
+    const variableDeleted = await deleteVariable(entity, type, variable);
 
     if (!variableDeleted) { return; }
 

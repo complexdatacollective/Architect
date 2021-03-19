@@ -96,9 +96,7 @@ const fieldsHandlers = withHandlers({
     entity,
     type,
     deleteVariable,
-  }) => (variable) => {
-    deleteVariable(entity, type, variable);
-  },
+  }) => (variable) => deleteVariable(entity, type, variable),
   handleNewVariable: ({ changeField, form }) => (value) => {
     changeField(form, '_createNewVariable', value);
     changeField(form, 'variable', value);

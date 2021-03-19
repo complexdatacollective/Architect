@@ -198,7 +198,6 @@ const PromptFields = ({
 
 PromptFields.propTypes = {
   variableOptions: PropTypes.array,
-  onDeleteVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   changeForm: PropTypes.func.isRequired,
