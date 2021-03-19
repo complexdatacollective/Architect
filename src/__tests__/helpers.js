@@ -1,6 +1,7 @@
 /* eslint-env jest */
 /* eslint-disable import/prefer-default-export */
 
+import { isMatch } from 'lodash';
 import testState from './testState.json';
 import developmentProtocol from '../../development-protocol/protocol.json';
 
@@ -24,4 +25,34 @@ export const getThunkMocks = (state = testState) => {
   });
 
   return [dispatch, getState];
+};
+
+export const toHaveDispatched = (received, actions) => {
+  if (!received.mock) {
+    throw new Error('Must be called with jest mock function `jest.fn()`');
+  }
+  const dispatched = received.mock.calls.reduce((acc, [call]) => {
+    if (!call.type) { return acc; }
+    return [...acc, call];
+  }, []);
+
+  const error = actions.reduce((errorMessage, action, index) => {
+    if (errorMessage) { return errorMessage; }
+    if (!isMatch(dispatched[index], action)) {
+      return `Expected actions to match (partial comparison)\n\nDispatched:\n${JSON.stringify(dispatched[index], null, 2)}\n\nMatcher:\n${JSON.stringify(action, null, 2)}`;
+    }
+    return null;
+  }, null);
+
+  if (!error) {
+    return {
+      message: () => 'expected dispatch mock to have been called with actions',
+      pass: true,
+    };
+  }
+
+  return {
+    message: () => error,
+    pass: false,
+  };
 };

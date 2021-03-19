@@ -99,8 +99,8 @@ const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
 const createStageThunk = (options, index) => (dispatch) => {
   const stageId = uuid();
   const stage = { ...initialStage, ...options, id: stageId };
-  dispatch(saveableChange(createStage)(stage, index));
-  return stage;
+  return dispatch(saveableChange(createStage)(stage, index))
+    .then(() => stage);
 };
 
 const moveStageThunk = saveableChange(moveStage);
