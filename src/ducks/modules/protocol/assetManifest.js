@@ -15,10 +15,10 @@ const DELETE_ASSET = 'PROTOCOL/DELETE_ASSET';
 
 const getNameFromFilename = (filename) => path.parse(filename).base;
 
-const deleteAsset = saveableChange((id) => ({
+const deleteAsset = (id) => ({
   type: DELETE_ASSET,
   id,
-}));
+});
 
 /**
  * @param {string} filename - Name of file
@@ -32,13 +32,13 @@ const importAsset = (filename) => ({
  * @param {string} filename - Name of file
  * @param {string} fileType - File MIME type
  */
-const importAssetComplete = saveableChange((filename, name, assetType) => ({
+const importAssetComplete = (filename, name, assetType) => ({
   id: uuid(),
   type: IMPORT_ASSET_COMPLETE,
   name,
   filename,
   assetType,
-}));
+});
 
 /**
  * @param {string} filename - Name of file
@@ -112,8 +112,8 @@ export default function reducer(state = initialState, action = {}) {
 
 const actionCreators = {
   importAsset: importAssetThunk,
-  importAssetComplete,
-  deleteAsset,
+  importAssetComplete: saveableChange(importAssetComplete),
+  deleteAsset: saveableChange(deleteAsset),
 };
 
 const actionTypes = {
@@ -123,7 +123,7 @@ const actionTypes = {
   DELETE_ASSET,
 };
 
-const testing = {
+const test = {
   importAssetComplete,
   deleteAsset,
 };
@@ -131,5 +131,5 @@ const testing = {
 export {
   actionCreators,
   actionTypes,
-  testing,
+  test,
 };
