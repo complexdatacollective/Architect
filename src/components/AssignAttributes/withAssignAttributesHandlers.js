@@ -2,7 +2,6 @@ import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { getVariableOptionsForSubject } from '../../selectors/codebook';
-import { actionCreators as codebookActions } from '../../ducks/modules/protocol/codebook';
 
 const ALLOWED_TYPES = [
   'boolean',
@@ -30,9 +29,7 @@ const mapStateToProps = (state, {
   };
 };
 
-const mapDispatchToProps = {
-  deleteVariable: codebookActions.deleteVariable,
-};
+const mapDispatchToProps = {};
 
 const assignAttributesHandlers = withHandlers({
   handleDelete: ({

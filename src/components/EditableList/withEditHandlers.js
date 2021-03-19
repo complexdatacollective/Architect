@@ -79,11 +79,13 @@ const handlers = withHandlers(
     handleUpdate: ({
       editField, upsert, normalize, onChange, clearEditField,
     }) => (value) => {
-      // TODO: It seems like a mistake to use the onChange value, is this really necessary?
-      const newValue = onChange ? normalize(onChange(value)) : normalize(value);
-      upsert(editField, newValue);
+      // Using onChange allows us to do some intermediate processing if necessary
+      const newValue = onChange ? onChange(value) : Promise.resolve(value);
 
-      setImmediate(() => clearEditField());
+      return newValue
+        .then(normalize)
+        .then((fieldValue) => upsert(editField, fieldValue))
+        .then(clearEditField);
     },
   },
 );

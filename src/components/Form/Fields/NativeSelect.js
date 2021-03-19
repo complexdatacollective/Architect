@@ -61,8 +61,8 @@ const NativeSelect = ({
   };
 
   const handleCreateOption = () => {
-    onCreateOption(newOptionValue);
-    setShowCreateOptionForm(false);
+    onCreateOption(newOptionValue)
+      .then(() => setShowCreateOptionForm(false));
   };
 
   const isValidCreateOption = () => {

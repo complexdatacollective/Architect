@@ -14,10 +14,10 @@ const store = connect(
 const handlers = withHandlers({
   handleChangePrompt: ({
     updateVariable, changeForm, form, entity, type,
-  }) => ({ variable, variableOptions, ...rest }) => {
+  }) => async ({ variable, variableOptions, ...rest }) => {
     changeForm(form, '_modified', new Date().getTime()); // TODO: can we avoid this?
 
-    updateVariable(entity, type, variable, { options: variableOptions }, true);
+    await updateVariable(entity, type, variable, { options: variableOptions }, true);
 
     return { variable, ...rest };
   },
