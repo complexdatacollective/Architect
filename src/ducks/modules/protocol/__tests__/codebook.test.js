@@ -4,6 +4,7 @@ import uuid from 'uuid';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { set } from 'lodash';
+import { getThunkMocks } from '@app/__tests__/helpers';
 import { test as stageActions } from '../stages';
 import reducer, { actionTypes, actionCreators, test } from '../codebook';
 import testState from '../../../../__tests__/testState.json';
@@ -11,34 +12,6 @@ import testState from '../../../../__tests__/testState.json';
 jest.mock('uuid');
 
 const mockStore = configureStore([thunk]);
-
-// const mockState = {
-//   node: {
-//     place: { foo: 'bar' },
-//     person: { hello: 'world' },
-//   },
-//   edge: { },
-// };
-
-const defaultMockState = {
-  protocol: {
-    present: {},
-  },
-};
-
-const getThunkMocks = (state = defaultMockState) => {
-  const getState = jest.fn(() => state);
-
-  const dispatch = jest.fn((action) => {
-    if (typeof action === 'function') {
-      return action(dispatch, getState);
-    }
-
-    return action;
-  });
-
-  return [dispatch, getState];
-};
 
 describe('protocol.codebook', () => {
   describe('reducer', () => {

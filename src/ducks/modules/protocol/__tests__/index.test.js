@@ -1,6 +1,7 @@
 /* eslint-env jest */
 
-import reducer, { actionCreators } from '../index';
+import { getThunkMocks } from '@app/__tests__/helpers';
+import reducer, { actionCreators, test } from '../index';
 
 describe('protocol', () => {
   describe('reducer', () => {
@@ -29,7 +30,7 @@ describe('protocol', () => {
 
       const newStateFromFileAction = reducer(
         currentProtocol,
-        actionCreators.updateOptions({
+        test.updateOptions({
           name: 'bar',
         }),
       );
@@ -77,6 +78,35 @@ describe('protocol', () => {
           stages: [{ type: 'foobar' }],
           codebook: { fooVar: { baz: 'buzz' } },
         });
+    });
+  });
+
+  describe('thunks', () => {
+    it('PROTOCOL/UPDATE_OPTIONS', async () => {
+      const [dispatch] = getThunkMocks();
+
+      await actionCreators.updateOptions({
+        name: 'bar',
+      })(dispatch);
+
+      expect(dispatch).toHaveBeenNthCalledWith(
+        1,
+        {
+          options: {
+            name: 'bar',
+          },
+          type: 'PROTOCOL/UPDATE_OPTIONS',
+        },
+      );
+
+      expect(dispatch).toHaveBeenNthCalledWith(
+        3,
+        {
+          type: 'SESSION/PROTOCOL_CHANGED',
+          ipc: true,
+          protocolIsValid: true,
+        },
+      );
     });
   });
 });

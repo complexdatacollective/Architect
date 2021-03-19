@@ -37,9 +37,8 @@ const Overview = ({
           input={{
             value: description,
             onChange:
-              ({ target: { value } }) => {
-                updateOptions({ description: value });
-              },
+              ({ target: { value } }) =>
+                updateOptions({ description: value }),
           }}
         />
       </div>

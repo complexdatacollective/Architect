@@ -9,10 +9,10 @@ const initialState = {};
 const UPDATE_OPTIONS = 'PROTOCOL/UPDATE_OPTIONS';
 const SET_PROTOCOL = 'PROTOCOL/SET';
 
-const updateOptions = saveableChange((options) => ({
+const updateOptions = (options) => ({
   type: UPDATE_OPTIONS,
   options,
-}));
+});
 
 const setProtocol = (meta, protocol) => ({
   type: SET_PROTOCOL,
@@ -41,7 +41,7 @@ function protocolReducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  updateOptions,
+  updateOptions: saveableChange(updateOptions),
   setProtocol,
 };
 
@@ -50,9 +50,8 @@ const actionTypes = {
   SET_PROTOCOL,
 };
 
-export {
-  actionCreators,
-  actionTypes,
+const test = {
+  updateOptions,
 };
 
 const reduceReducers = (...reducers) => (
@@ -68,3 +67,9 @@ export default reduceReducers(
     assetManifest: assetManifest(state.assetManifest, action),
   }),
 );
+
+export {
+  actionCreators,
+  actionTypes,
+  test,
+};
