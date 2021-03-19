@@ -126,6 +126,7 @@ describe('protocol.stages', () => {
         { type: 'SESSION/PROTOCOL_CHANGED' },
       ]);
     });
+
     it('updateStage', async () => {
       const [dispatch] = getThunkMocks(mockState);
 
@@ -136,6 +137,7 @@ describe('protocol.stages', () => {
         { type: 'SESSION/PROTOCOL_CHANGED' },
       ]);
     });
+
     it('deleteStage', async () => {
       const [dispatch] = getThunkMocks();
 
@@ -146,6 +148,7 @@ describe('protocol.stages', () => {
         { type: 'SESSION/PROTOCOL_CHANGED' },
       ]);
     });
+
     it('moveStage', async () => {
       const [dispatch] = getThunkMocks();
 
@@ -156,6 +159,7 @@ describe('protocol.stages', () => {
         { type: 'SESSION/PROTOCOL_CHANGED' },
       ]);
     });
+
     it('deletePrompt', async () => {
       const [dispatch] = getThunkMocks();
 
