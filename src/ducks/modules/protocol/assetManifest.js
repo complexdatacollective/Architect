@@ -82,7 +82,7 @@ const importAssetThunk = (filePath) => (dispatch, getState) => {
       }))
     .then((result) => {
       log.info('  OK');
-      return dispatch(importAssetComplete(result.filePath, name, result.assetType));
+      return dispatch(saveableChange(importAssetComplete)(result.filePath, name, result.assetType));
     })
     .catch((error) => dispatch(importAssetFailed(filePath, error)));
 };
@@ -112,7 +112,6 @@ export default function reducer(state = initialState, action = {}) {
 
 const actionCreators = {
   importAsset: importAssetThunk,
-  importAssetComplete: saveableChange(importAssetComplete),
   deleteAsset: saveableChange(deleteAsset),
 };
 
