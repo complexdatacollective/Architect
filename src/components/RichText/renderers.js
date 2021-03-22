@@ -55,8 +55,9 @@ const withMarks = (content, leaf) => {
   return content;
 };
 
-const Leaf = ({ attributes, children, leaf }) =>
-  <span {...attributes}>{withMarks(children, leaf)}</span>;
+const Leaf = ({ attributes, children, leaf }) => (
+  <span {...attributes}>{withMarks(children, leaf)}</span>
+);
 
 Leaf.propTypes = {
   attributes: PropTypes.object,

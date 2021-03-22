@@ -19,9 +19,9 @@ const RichTextField = ({
 
   return (
     <div className="form-field-container">
-      { anyLabel &&
+      { anyLabel && (
         <h4>{anyLabel}</h4>
-      }
+      )}
       <div className="form-field-rich-text">
         <RichText
           id={id.current}
@@ -31,7 +31,12 @@ const RichTextField = ({
           autoFocus={autoFocus} // eslint-disable-line
           mode={mode}
         />
-        {invalid && touched && <div className="form-field-text__error"><Icon name="warning" />{error}</div>}
+        {invalid && touched && (
+          <div className="form-field-text__error">
+            <Icon name="warning" />
+            {error}
+          </div>
+        )}
       </div>
 
     </div>

@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 import { Editable, withReact, Slate } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
+import isHotkey from 'is-hotkey';
 import withNormalize from './withNormalize';
 import Toolbar from './Toolbar';
+import { toggleMark } from './actions';
 import { Element, Leaf } from './renderers';
 import serialize from './serialize';
 import parse, { defaultValue } from './parse';
 import { MODES, TOOLBAR_MODES } from './options';
 import RichTextContainer from './RichTextContainer';
+
+const HOTKEYS = {
+  'mod+b': 'bold',
+  'mod+i': 'italic',
+  'mod+u': 'underline',
+};
 
 /**
  * This rich text component is UI for editing markdown.
@@ -74,6 +82,16 @@ const RichText = ({
     onChange(serialize(value));
   }, [onChange, value]);
 
+  const handleKeyDown = (event) => {
+    Object.keys(HOTKEYS).forEach((hotkey) => {
+      if (isHotkey(hotkey, event)) {
+        event.preventDefault();
+        const mark = HOTKEYS[hotkey];
+        toggleMark(editor, mark);
+      }
+    });
+  };
+
   const controls = TOOLBAR_MODES[mode];
 
   return (
@@ -87,6 +105,7 @@ const RichText = ({
             placeholder=""
             spellCheck
             autoFocus={autoFocus}
+            onKeyDown={handleKeyDown}
           />
         </div>
       </RichTextContainer>
