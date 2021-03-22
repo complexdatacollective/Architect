@@ -19,7 +19,7 @@ const parse = (value) => {
     .use(markdown)
     .use(slate)
     .process(value)
-    .then(({ result }) => result);
+    .then(({ contents }) => contents);
 };
 
 export default parse;
