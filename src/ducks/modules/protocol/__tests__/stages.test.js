@@ -23,7 +23,7 @@ const mockStages = [
 ];
 
 const mockState = { ...testState };
-mockState.protocol.present.stages = [ ...mockStages ];
+mockState.protocol.present.stages = [...mockStages];
 
 describe('protocol.stages', () => {
   describe('reducer', () => {

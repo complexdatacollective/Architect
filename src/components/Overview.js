@@ -36,9 +36,9 @@ const Overview = ({
           placeholder="Enter a description for your protocol..."
           input={{
             value: description,
-            onChange:
-              ({ target: { value } }) =>
-                updateOptions({ description: value }),
+            onChange: ({ target: { value } }) => (
+              updateOptions({ description: value })
+            ),
           }}
         />
       </div>
