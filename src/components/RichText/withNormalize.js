@@ -11,7 +11,7 @@ const defaultOptions = {
  * function to support 'single' line, and 'marks' only
  * modes.
  */
-const withNormalize = (editor, userOptions) => {
+const withNormalize = (userOptions) => (editor) => {
   const { normalizeNode } = editor;
   const options = { ...defaultOptions, ...userOptions };
 

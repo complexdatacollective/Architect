@@ -4,7 +4,9 @@ import { Editable, withReact, Slate } from 'slate-react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey';
+import { compose } from 'lodash/fp';
 import withNormalize from './withNormalize';
+import withShortcuts from './withShortcuts';
 import Toolbar from './Toolbar';
 import { toggleMark } from './actions';
 import { Element, Leaf } from './renderers';
@@ -67,7 +69,12 @@ const RichText = ({
     mode,
   };
   const editor = useMemo(
-    () => withNormalize(withHistory(withReact(createEditor())), normalizeOptions),
+    () => compose(
+      withShortcuts,
+      withNormalize(normalizeOptions),
+      withHistory,
+      withReact,
+    )(createEditor()),
     [],
   );
 
