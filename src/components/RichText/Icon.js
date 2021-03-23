@@ -27,7 +27,7 @@ const icons = {
 const Icon = ({ name }) => {
   const IconComponent = icons[name];
   if (!IconComponent) { return <span>{name}</span>; }
-  return <IconComponent />;
+  return <IconComponent style={{ color: 'var(--input-accent)' }} />;
 };
 
 Icon.propTypes = {
