@@ -81,12 +81,17 @@ const RichText = ({
   // Set starting state from prop value on start up
   useEffect(() => {
     parse(initialValue)
+      .then((newValue) => {
+        console.log(JSON.stringify({ parsed: newValue, initialValue }, null, 2));
+        return newValue;
+      })
       .then(setValue);
   }, []);
 
   // Update upstream on change
   useEffect(() => {
     onChange(serialize(value));
+    console.log(JSON.stringify({ serialized: serialize(value), value }, null, 2));
   }, [onChange, value]);
 
   const handleKeyDown = (event) => {
