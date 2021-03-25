@@ -16,7 +16,7 @@ const NativeSelect = ({
   placeholder,
   className,
   // To create a new option, one or the other of the following:
-  onCreateOption, // Creating options inline, recieves value for option
+  onCreateOption, // Creating options inline, receives value for option (promise)
   onCreateNew, // Call a function immediately (typically opening a window with a form)
   createLabelText,
   createInputLabel,
@@ -61,8 +61,13 @@ const NativeSelect = ({
   };
 
   const handleCreateOption = () => {
-    onCreateOption(newOptionValue)
-      .then(() => setShowCreateOptionForm(false));
+    const result = onCreateOption(newOptionValue);
+
+    if (!result.then) {
+      return setShowCreateOptionForm(false);
+    }
+
+    return result.then(() => setShowCreateOptionForm(false));
   };
 
   const isValidCreateOption = () => {
