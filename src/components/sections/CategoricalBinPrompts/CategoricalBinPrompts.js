@@ -11,7 +11,10 @@ import withPromptChangeHandler from './withPromptChangeHandler';
 // import Tip from '../../Tip';
 
 const CategoricalBinPrompts = ({
-  handleChangePrompt, entity, type, ...props
+  handleChangePrompt,
+  entity,
+  type,
+  ...props
 }) => (
   <EditableList
     previewComponent={PromptPreview}
@@ -20,6 +23,8 @@ const CategoricalBinPrompts = ({
     onChange={handleChangePrompt}
     normalize={normalizeField}
     itemSelector={itemSelector(entity, type)}
+    entity={entity}
+    type={type}
     {...props}
   >
     <h2>Edit Prompts</h2>

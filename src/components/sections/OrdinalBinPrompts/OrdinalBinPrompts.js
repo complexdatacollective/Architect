@@ -13,7 +13,10 @@ import withPromptChangeHandler from '../CategoricalBinPrompts/withPromptChangeHa
 const template = () => ({ color: 'ord-color-seq-1' });
 
 const OrdinalBinPrompts = ({
-  handleChangePrompt, entity, type, ...props
+  handleChangePrompt,
+  entity,
+  type,
+  ...props
 }) => (
   <EditableList
     previewComponent={PromptPreview}
@@ -22,6 +25,8 @@ const OrdinalBinPrompts = ({
     template={template}
     onChange={handleChangePrompt}
     itemSelector={itemSelector(entity, type)}
+    entity={entity}
+    type={type}
     {...props}
   >
     <h2>Prompts</h2>
