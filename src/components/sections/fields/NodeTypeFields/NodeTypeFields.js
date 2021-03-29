@@ -90,7 +90,7 @@ NodeType.propTypes = {
   type: PropTypes.string,
   disabled: PropTypes.bool,
   handleTypeScreenMessage: PropTypes.func.isRequired,
-  typeScreenMessage: PropTypes.any,
+  typeScreenMessage: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 };
 
 NodeType.defaultProps = {

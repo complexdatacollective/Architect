@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 import withAssetUrl from './withAssetUrl';
 
 const Video = ({ url, description, ...props }) => (
-  <video src={url} {...props} playsInline>{description}</video>
+  <video
+    src={url}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+    playsInline
+  >
+    {description}
+  </video>
 );
 
 Video.propTypes = {

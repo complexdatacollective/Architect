@@ -23,7 +23,7 @@ class Preview extends Component {
       <Flipped flipId={flipId}>
         {(flipProps) => (
           <Item
-            {...flipProps}
+            {...flipProps} // eslint-disable-line react/jsx-props-no-spreading
             sortable={sortable}
             onDelete={onDelete}
             onClick={handleClick}
@@ -51,7 +51,5 @@ Preview.propTypes = {
 Preview.defaultProps = {
   sortable: true,
 };
-
-export { Preview };
 
 export default Preview;
