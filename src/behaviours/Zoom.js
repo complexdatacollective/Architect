@@ -91,17 +91,16 @@ const Zoom = (WrappedComponent) => {
     }
 
     render() {
-      return (
-        <WrappedComponent {...this.props} />
-      );
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      return <WrappedComponent {...this.props} />;
     }
   }
 
   Zoomable.displayName = `Zoomable(${getDisplayName(WrappedComponent)})`;
 
   Zoomable.propTypes = {
-    zoomColors: PropTypes.array,
-    constraints: PropTypes.array,
+    zoomColors: PropTypes.arrayOf(PropTypes.string),
+    constraints: PropTypes.arrayOf(PropTypes.number),
   };
 
   Zoomable.defaultProps = {

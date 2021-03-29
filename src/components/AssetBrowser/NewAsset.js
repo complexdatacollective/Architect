@@ -30,6 +30,4 @@ NewAsset.defaultProps = {
   onCreate: () => {},
 };
 
-export { NewAsset };
-
 export default NewAsset;

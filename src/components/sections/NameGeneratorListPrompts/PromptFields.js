@@ -79,6 +79,4 @@ PromptFields.defaultProps = {
   entity: null,
 };
 
-export { PromptFields };
-
 export default PromptFields;

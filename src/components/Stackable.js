@@ -60,7 +60,11 @@ class Stackable extends Component {
 
 Stackable.propTypes = {
   group: PropTypes.string,
-  stackKey: PropTypes.any,
+  stackKey: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
   stackIndex: PropTypes.number.isRequired,
   children: PropTypes.func.isRequired,
   stackableId: PropTypes.string,
@@ -91,8 +95,6 @@ const mapDispatchToProps = (dispatch) => ({
   registerStackable: bindActionCreators(stackActions.registerStackable, dispatch),
   unregisterStackable: bindActionCreators(stackActions.unregisterStackable, dispatch),
 });
-
-export { Stackable };
 
 export default compose(
   withStackableId,

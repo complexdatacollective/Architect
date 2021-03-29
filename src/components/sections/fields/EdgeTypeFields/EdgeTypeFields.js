@@ -79,7 +79,7 @@ EdgeTypeFields.propTypes = {
   parse: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  typeScreenMessage: PropTypes.any,
+  typeScreenMessage: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 };
 
 EdgeTypeFields.defaultProps = {

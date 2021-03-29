@@ -9,7 +9,13 @@ const backgroundStyles = (url) => ({
   backgroundPosition: 'center',
 });
 
-const BackgroundImage = ({ url, ...props }) => <div style={backgroundStyles(url)} {...props} />;
+const BackgroundImage = ({ url, ...props }) => (
+  <div
+    style={backgroundStyles(url)}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  />
+);
 
 BackgroundImage.propTypes = {
   url: PropTypes.string.isRequired,
