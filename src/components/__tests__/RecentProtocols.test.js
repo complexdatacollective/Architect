@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { RecentProtocols } from '../RecentProtocols';
+import { UnconnectedRecentProtocols } from '../RecentProtocols';
 
 const mockProps = {
   recentProtocols: [],
@@ -10,7 +10,7 @@ const mockProps = {
 
 describe('<RecentProtocols />', () => {
   it('can render?', () => {
-    const component = shallow(<RecentProtocols {...mockProps} />);
+    const component = shallow(<UnconnectedRecentProtocols {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });

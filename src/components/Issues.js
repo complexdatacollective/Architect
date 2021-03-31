@@ -139,4 +139,6 @@ Issues.defaultProps = {
   issues: {},
 };
 
+export { Issues as UnconnectedIssues };
+
 export default Issues;

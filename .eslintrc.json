@@ -36,5 +36,13 @@
           ["@hooks", "./src/hooks"]
         ]
       }
-    }
+    },
+    "overrides": [
+      {
+        "files": "*.test.js",
+        "rules": {
+          "react/jsx-props-no-spreading": "off"
+        }
+      }
+    ]
 }

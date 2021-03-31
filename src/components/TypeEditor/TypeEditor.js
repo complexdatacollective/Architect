@@ -177,4 +177,6 @@ const mapStateToProps = (state, { type, isNew }) => {
   };
 };
 
+export { TypeEditor as UnconnectedTypeEditor };
+
 export default connect(mapStateToProps)(TypeEditor);

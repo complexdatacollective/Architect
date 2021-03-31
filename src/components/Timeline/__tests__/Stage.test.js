@@ -3,7 +3,7 @@
 import React from 'react';
 import uuid from 'uuid';
 import { shallow } from 'enzyme';
-import { Stage } from '../Stage';
+import { UnconnectedStage } from '../Stage';
 
 jest.mock('@codaco/ui/lib/utils/CSSVariables');
 
@@ -19,7 +19,7 @@ const mockProps = {
 
 describe('<Stage />', () => {
   it('can render', () => {
-    const component = shallow(<Stage {...mockProps} />);
+    const component = shallow(<UnconnectedStage {...mockProps} />);
 
     expect(component).toMatchSnapshot();
   });
