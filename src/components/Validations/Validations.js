@@ -68,8 +68,11 @@ const ValidationsField = ({
 };
 
 ValidationsField.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   children: PropTypes.node,
 };
@@ -122,7 +125,9 @@ const Validations = ({
 
 Validations.propTypes = {
   name: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   validationOptions: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   value: PropTypes.object,
   addNew: PropTypes.bool.isRequired,
   setAddNew: PropTypes.func.isRequired,

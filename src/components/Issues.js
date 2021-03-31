@@ -130,6 +130,7 @@ const Issues = ({
 
 Issues.propTypes = {
   show: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   issues: PropTypes.object,
 };
 

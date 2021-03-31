@@ -204,11 +204,16 @@ const EditAlterRule = ({
 
 EditAlterRule.propTypes = {
   rule: PropTypes.shape({
+    // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   typeOptions: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variablesAsOptions: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
   alterRuleType: PropTypes.string,

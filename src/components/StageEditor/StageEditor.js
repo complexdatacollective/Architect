@@ -83,6 +83,7 @@ StageEditor.propTypes = {
   interfaceType: PropTypes.string.isRequired,
   id: PropTypes.string,
   previewStage: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   stagePath: PropTypes.any,
   hasSkipLogic: PropTypes.bool,
 };

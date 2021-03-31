@@ -74,11 +74,16 @@ class List extends Component {
 }
 
 List.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   initialSortOrder: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array.isRequired,
   filter: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   controls: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   item: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   sortableProperties: PropTypes.any,
   onDelete: PropTypes.func,
   children: PropTypes.node,

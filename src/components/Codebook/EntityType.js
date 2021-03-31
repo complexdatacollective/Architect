@@ -85,10 +85,12 @@ EntityType.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool,
   handleDelete: PropTypes.func,
   handleEdit: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.array,
 };
 

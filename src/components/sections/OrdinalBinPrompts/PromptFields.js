@@ -197,12 +197,14 @@ const PromptFields = ({
 };
 
 PromptFields.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   changeForm: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   variable: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   optionsForVariableDraft: PropTypes.array,
 };
 

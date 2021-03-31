@@ -36,6 +36,7 @@ const PreviewRule = ({
 
 PreviewRule.propTypes = {
   type: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.object.isRequired,
   join: PropTypes.string,
   onClick: PropTypes.func.isRequired,

@@ -35,6 +35,7 @@ const Variables = ({
 };
 
 Variables.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.array,
   onDelete: PropTypes.func,
   sortBy: PropTypes.string.isRequired,

@@ -22,6 +22,7 @@ const PreviewNode = ({
 };
 
 PreviewNode.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   nodeTypes: PropTypes.object.isRequired,
   type: PropTypes.string,
 };

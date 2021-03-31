@@ -61,7 +61,9 @@ class NodeSelect extends Component {
 
 NodeSelect.propTypes = {
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
 };
 

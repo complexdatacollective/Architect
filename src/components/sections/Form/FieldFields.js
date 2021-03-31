@@ -189,8 +189,11 @@ PromptFields.propTypes = {
   component: PropTypes.string,
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   metaForType: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   componentOptions: PropTypes.array,
   isNewVariable: PropTypes.bool.isRequired,
   handleNewVariable: PropTypes.func.isRequired,

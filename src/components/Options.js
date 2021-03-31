@@ -103,6 +103,7 @@ export const Item = compose(
 );
 
 Item.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
   field: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,

@@ -122,8 +122,11 @@ EditableList.propTypes = {
   contentId: PropTypes.string,
   title: PropTypes.string,
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   previewComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   editComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   validation: PropTypes.object,
   editField: PropTypes.string,
   handleEditField: PropTypes.func.isRequired,
@@ -132,9 +135,12 @@ EditableList.propTypes = {
   handleUpdate: PropTypes.func.isRequired,
   handleAddNew: PropTypes.func.isRequired,
   upsert: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   itemCount: PropTypes.any.isRequired,
   setEditField: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialValues: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   editProps: PropTypes.any,
 };
 

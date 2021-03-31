@@ -73,7 +73,9 @@ class Controls extends Component {
 
 Controls.propTypes = {
   onChange: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   sortableProperties: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   initialSortOrder: PropTypes.object,
 };
 

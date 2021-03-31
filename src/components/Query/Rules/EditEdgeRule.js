@@ -102,9 +102,12 @@ const EditEdgeRule = ({
 
 EditEdgeRule.propTypes = {
   rule: PropTypes.shape({
+    // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   typeOptions: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
 };

@@ -87,7 +87,9 @@ const LaunchPad = ({
 LaunchPad.propTypes = {
   openNetcanvas: PropTypes.func.isRequired,
   createNetcanvas: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   lastEditedProtocol: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   otherRecentProtocols: PropTypes.array,
 };
 

@@ -40,8 +40,10 @@ const OrderedList = ({
 );
 
 OrderedList.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
   form: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
   item: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,

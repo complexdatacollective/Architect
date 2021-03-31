@@ -23,6 +23,7 @@ const EgoType = ({
 );
 
 EgoType.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.array,
 };
 

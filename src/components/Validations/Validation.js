@@ -56,6 +56,7 @@ const Validation = ({
 Validation.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   itemKey: PropTypes.string,
   itemValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),

@@ -57,7 +57,9 @@ const Variables = ({
 Variables.propTypes = {
   form: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   sortableProperties: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialSortOrder: PropTypes.object.isRequired,
 };
 

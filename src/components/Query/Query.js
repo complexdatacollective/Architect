@@ -20,10 +20,13 @@ const Query = ({
 Query.propTypes = {
   onChange: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   rules: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   codebook: PropTypes.object.isRequired,
   join: PropTypes.string,
   error: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 

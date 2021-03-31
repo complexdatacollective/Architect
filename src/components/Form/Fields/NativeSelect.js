@@ -235,14 +235,19 @@ NativeSelect.propTypes = {
   createInputLabel: PropTypes.string,
   createInputPlaceholder: PropTypes.string,
   allowPlaceholderSelect: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object,
   label: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
   disabled: PropTypes.bool,
   onCreateOption: PropTypes.func,
   onCreateNew: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   reserved: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   validation: PropTypes.any,
 };
 

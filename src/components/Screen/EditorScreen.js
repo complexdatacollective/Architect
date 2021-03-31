@@ -99,13 +99,16 @@ EditorScreen.propTypes = {
   submitting: PropTypes.bool.isRequired,
   submitForm: PropTypes.func.isRequired,
   jump: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   locus: PropTypes.any.isRequired,
   onComplete: PropTypes.func.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
   openDialog: PropTypes.func.isRequired,
   show: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   secondaryButtons: PropTypes.array,
   transitionState: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   editor: PropTypes.any.isRequired,
 };
 

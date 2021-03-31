@@ -33,6 +33,7 @@ const InterfaceCategory = ({
 };
 
 InterfaceCategory.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   interfaces: PropTypes.array,
   category: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,

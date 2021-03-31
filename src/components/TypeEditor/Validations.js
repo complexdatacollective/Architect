@@ -164,6 +164,7 @@ const Items = ({ fields, variableType, ...rest }) => (
 );
 
 Items.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.array.isRequired,
   variableType: PropTypes.string.isRequired,
 };

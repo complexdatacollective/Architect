@@ -170,6 +170,7 @@ const MultiSelect = ({
 
 MultiSelect.propTypes = {
   name: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   properties: PropTypes.array.isRequired,
   options: PropTypes.func.isRequired,
   label: PropTypes.string,

@@ -37,11 +37,13 @@ const Screen = ({
 };
 
 Screen.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any,
   buttons: PropTypes.arrayOf(PropTypes.node),
   secondaryButtons: PropTypes.arrayOf(PropTypes.node),
   type: PropTypes.string,
   onAcknowledgeError: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   windowRoot: PropTypes.any.isRequired,
   setWindowRoot: PropTypes.func.isRequired,
 };

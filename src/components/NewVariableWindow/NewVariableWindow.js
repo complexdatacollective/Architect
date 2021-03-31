@@ -96,12 +96,15 @@ class NewVariableWindow extends Component {
 NewVariableWindow.propTypes = {
   show: PropTypes.bool,
   variableType: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   allowVariableTypes: PropTypes.array,
   // eslint-disable-next-line
   onComplete: PropTypes.func.isRequired, // This prop is required by withNewVariableHandler
   handleCreateNewVariable: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialValues: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   existingVariableNames: PropTypes.array.isRequired,
 };
 

@@ -49,6 +49,7 @@ const Attribute = ({
 Attribute.propTypes = {
   field: PropTypes.string.isRequired,
   variable: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,

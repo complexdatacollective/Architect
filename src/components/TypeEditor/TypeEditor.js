@@ -138,7 +138,9 @@ TypeEditor.propTypes = {
   type: PropTypes.string,
   entity: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   displayVariables: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
   metaOnly: PropTypes.bool,

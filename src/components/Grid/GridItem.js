@@ -46,9 +46,11 @@ const GridItem = ({
 };
 
 GridItem.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
   editField: PropTypes.string,
   onEditItem: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   previewComponent: PropTypes.any.isRequired,
   index: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,

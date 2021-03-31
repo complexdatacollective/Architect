@@ -29,6 +29,7 @@ const Navigation = ({
 );
 
 Navigation.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   categories: PropTypes.array,
 };
 

@@ -34,7 +34,9 @@ const PreviewFieldComponent = ({
 };
 
 PreviewFieldComponent.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   subjectVariables: PropTypes.object.isRequired,
 };
 

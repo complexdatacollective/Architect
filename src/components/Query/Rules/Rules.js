@@ -117,11 +117,15 @@ const Rules = ({
 
 Rules.propTypes = {
   type: PropTypes.oneOf(['filter', 'query']),
+  // eslint-disable-next-line react/forbid-prop-types
   rules: PropTypes.array,
   join: PropTypes.string,
   error: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   codebook: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   draftRule: PropTypes.object,
   handleChangeJoin: PropTypes.func.isRequired,
   handleChangeDraft: PropTypes.func.isRequired,

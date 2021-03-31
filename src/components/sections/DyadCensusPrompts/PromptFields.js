@@ -76,6 +76,7 @@ const PromptFields = ({
 );
 
 PromptFields.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   edgesForSubject: PropTypes.array.isRequired,
   handleCreateEdge: PropTypes.func.isRequired,
   handleChangeCreateEdge: PropTypes.func.isRequired,

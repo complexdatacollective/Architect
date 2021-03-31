@@ -94,7 +94,9 @@ const EdgeFields = ({
 };
 
 EdgeFields.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   edgesForSubject: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   displayEdgesOptions: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateEdge: PropTypes.func.isRequired,
