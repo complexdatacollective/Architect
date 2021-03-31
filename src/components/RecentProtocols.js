@@ -61,6 +61,7 @@ const mapStateToProps = (state) => ({
 });
 
 RecentProtocols.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   recentProtocols: PropTypes.array.isRequired,
   show: PropTypes.bool,
 };

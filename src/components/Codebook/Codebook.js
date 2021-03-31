@@ -68,12 +68,15 @@ const Codebook = ({
 );
 
 Codebook.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   edges: PropTypes.array.isRequired,
   hasEdges: PropTypes.bool.isRequired,
   hasEgoVariables: PropTypes.bool.isRequired,
   hasNetworkAssets: PropTypes.bool.isRequired,
   hasNodes: PropTypes.bool.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   networkAssets: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   nodes: PropTypes.array.isRequired,
 };
 

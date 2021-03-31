@@ -102,7 +102,9 @@ const TextInput = ({
 };
 
 TextInput.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
   label: PropTypes.string,
   autoFocus: PropTypes.bool,

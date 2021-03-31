@@ -148,6 +148,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 Timeline.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   stages: PropTypes.array,
   sorting: PropTypes.bool,
   deleteStage: PropTypes.func.isRequired,

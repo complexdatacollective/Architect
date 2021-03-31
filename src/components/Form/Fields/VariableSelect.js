@@ -26,6 +26,7 @@ const VariableSelect = ({ reserved, ...props }) => (
 
 VariableSelect.propTypes = {
   entity: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   reserved: PropTypes.array,
   type: PropTypes.string,
 };

@@ -204,6 +204,7 @@ class OrderBy extends Component {
 }
 
 OrderBy.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.object,
   input: PropTypes.shape({
     value: PropTypes.oneOfType([

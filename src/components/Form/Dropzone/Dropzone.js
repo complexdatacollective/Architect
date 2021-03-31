@@ -175,6 +175,7 @@ Dropzone.defaultProps = {
 Dropzone.propTypes = {
   onDrop: PropTypes.func.isRequired,
   className: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   accepts: PropTypes.array,
   disabled: PropTypes.bool,
 };

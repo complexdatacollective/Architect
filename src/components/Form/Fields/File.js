@@ -100,7 +100,9 @@ FileInput.propTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
   selected: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
   value: PropTypes.string,
 };

@@ -95,6 +95,7 @@ Editor.propTypes = {
   hideIssues: PropTypes.func.isRequired,
   isIssuesVisible: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   issues: PropTypes.object.isRequired,
   submitFailed: PropTypes.bool.isRequired,
   form: PropTypes.string.isRequired,

@@ -35,7 +35,9 @@ const PreviewRules = ({
 
 PreviewRules.propTypes = {
   join: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   rules: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   codebook: PropTypes.object.isRequired,
   onClickRule: PropTypes.func.isRequired,
   onDeleteRule: PropTypes.func.isRequired,

@@ -64,6 +64,7 @@ const DefaultSelectOption = (props) => {
 };
 
 DefaultSelectOption.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object.isRequired,
   onDeleteOption: PropTypes.func,
 };

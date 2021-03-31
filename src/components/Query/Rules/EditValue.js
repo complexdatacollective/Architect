@@ -56,6 +56,7 @@ EditValue.propTypes = {
     PropTypes.number,
     PropTypes.bool,
   ]).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   onChange: PropTypes.func,
   fieldComponent: PropTypes.oneOfType([

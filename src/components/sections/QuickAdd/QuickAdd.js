@@ -54,6 +54,7 @@ QuickAdd.propTypes = {
   disabled: PropTypes.bool,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   type: PropTypes.string,
 };

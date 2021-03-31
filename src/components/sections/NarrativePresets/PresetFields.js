@@ -87,9 +87,13 @@ const PresetFields = ({
 );
 
 PresetFields.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   layoutVariablesForSubject: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   groupVariablesForSubject: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   edgesForSubject: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   highlightVariablesForSubject: PropTypes.array,
   handleCreateLayoutVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,

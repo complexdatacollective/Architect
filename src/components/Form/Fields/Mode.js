@@ -72,10 +72,13 @@ class Mode extends PureComponent {
 }
 
 Mode.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   label: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
   className: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
 };
 

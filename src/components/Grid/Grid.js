@@ -141,11 +141,15 @@ class Grid extends Component {
 }
 
 Grid.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array.isRequired,
   capacity: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   previewComponent: PropTypes.any.isRequired,
   onEditItem: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
   editField: PropTypes.string,
 };

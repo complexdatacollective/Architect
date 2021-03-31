@@ -42,6 +42,7 @@ const NodePanels = ({
 NodePanels.propTypes = {
   createNewPanel: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   panels: PropTypes.array,
   form: PropTypes.string.isRequired,
 };

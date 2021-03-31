@@ -58,8 +58,10 @@ class EditRule extends Component {
 EditRule.propTypes = {
   rule: PropTypes.shape({
     type: PropTypes.string,
+    // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object,
   }),
+  // eslint-disable-next-line react/forbid-prop-types
   codebook: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,

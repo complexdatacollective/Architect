@@ -34,6 +34,7 @@ const withValidation = (WrappedComponent) => {
   }
 
   Validated.propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
     validation: PropTypes.object.isRequired,
   };
 

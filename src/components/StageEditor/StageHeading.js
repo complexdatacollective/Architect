@@ -57,6 +57,7 @@ StageHeading.propTypes = {
   stageNumber: PropTypes.number,
   type: PropTypes.string,
   toggleCodeView: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any,
 };
 

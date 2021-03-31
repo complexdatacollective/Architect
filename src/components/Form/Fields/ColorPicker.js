@@ -76,6 +76,7 @@ const ColorPicker = ({
 
 ColorPicker.propTypes = {
   ...fieldPropTypes,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   paletteRange: PropTypes.number,
 };

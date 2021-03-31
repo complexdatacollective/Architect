@@ -100,14 +100,18 @@ class Select extends PureComponent {
 
 Select.propTypes = {
   className: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   selectOptionComponent: PropTypes.any,
   onDeleteOption: PropTypes.func,
   createNewOption: PropTypes.bool,
   onCreateNew: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object,
   label: PropTypes.string,
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 

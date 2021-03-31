@@ -112,8 +112,11 @@ GridManager.propTypes = {
   contentId: PropTypes.string,
   title: PropTypes.string,
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   previewComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   editComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   validation: PropTypes.object,
   editField: PropTypes.string,
   handleEditField: PropTypes.func.isRequired,
@@ -122,14 +125,18 @@ GridManager.propTypes = {
   handleResetEditField: PropTypes.func.isRequired,
   hasSpace: PropTypes.bool.isRequired,
   capacity: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialValues: PropTypes.any,
   itemCount: PropTypes.number.isRequired,
   itemSelector: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array.isRequired,
   normalize: PropTypes.func.isRequired,
   setEditField: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   template: PropTypes.any,
   upsert: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   windowRoot: PropTypes.any.isRequired,
 };
 

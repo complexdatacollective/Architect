@@ -34,6 +34,7 @@ const SelectOptionVariable = (props) => {
 };
 
 SelectOptionVariable.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   data: PropTypes.object.isRequired,
 };
 

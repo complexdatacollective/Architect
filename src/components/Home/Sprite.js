@@ -23,6 +23,7 @@ const Sprite = ({
 
 Sprite.propTypes = {
   src: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   animate: PropTypes.object,
 };
 

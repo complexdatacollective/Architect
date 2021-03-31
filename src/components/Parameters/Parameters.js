@@ -28,6 +28,7 @@ const Parameters = ({ type, component, ...rest }) => {
 
 Parameters.propTypes = {
   type: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   component: PropTypes.any.isRequired,
 };
 

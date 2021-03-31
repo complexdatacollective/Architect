@@ -99,6 +99,7 @@ const Screens = (props) => {
 };
 
 Screens.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   screens: PropTypes.array.isRequired,
   closeScreen: PropTypes.func.isRequired,
 };

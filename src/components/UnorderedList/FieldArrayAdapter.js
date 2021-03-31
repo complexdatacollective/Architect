@@ -39,8 +39,11 @@ const FieldArrayAdapter = ({
 );
 
 FieldArrayAdapter.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };

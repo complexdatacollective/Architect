@@ -108,10 +108,15 @@ class DetachedField extends Component {
 
 DetachedField.propTypes = {
   onChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   value: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   name: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   validate: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   component: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 

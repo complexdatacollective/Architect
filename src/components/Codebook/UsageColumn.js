@@ -22,6 +22,7 @@ const UsageColumn = ({
 };
 
 UsageColumn.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool.isRequired,
 };
