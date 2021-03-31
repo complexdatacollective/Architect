@@ -58,6 +58,4 @@ Attribute.defaultProps = {
   variable: null,
 };
 
-export { Attribute };
-
 export default compose(withAttributeHandlers, withCreateVariableHandler)(Attribute);
