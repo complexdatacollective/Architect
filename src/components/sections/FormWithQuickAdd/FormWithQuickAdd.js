@@ -37,11 +37,18 @@ const FormWithQuickAdd = ({
     { quickAddEnabled
       && (
       <QuickAdd
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         disabled={disabled}
       />
       )}
-    { !quickAddEnabled && <Form {...props} disabled={disabled} /> }
+    { !quickAddEnabled && (
+      <Form
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        disabled={disabled}
+      />
+    )}
   </>
 );
 

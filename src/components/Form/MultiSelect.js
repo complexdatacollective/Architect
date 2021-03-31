@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import {
-  compose, defaultProps, withProps, withHandlers,
+  compose,
+  defaultProps,
+  withProps,
+  withHandlers,
 } from 'recompose';
 import { SortableElement, SortableHandle, SortableContainer } from 'react-sortable-hoc';
 import { FieldArray, formValueSelector, change } from 'redux-form';
@@ -23,13 +26,23 @@ const ItemHandle = compose(
 );
 
 const ItemDelete = (props) => (
-  <div className="form-fields-multi-select__delete" {...props}>
+  <div
+    className="form-fields-multi-select__delete"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     <Icon name="delete" />
   </div>
 );
 
 const AddItem = (props) => (
-  <Button color="primary" icon="add" size="small" {...props}>
+  <Button
+    color="primary"
+    icon="add"
+    size="small"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     Add new
   </Button>
 );
@@ -90,6 +103,7 @@ const Item = compose(
                 options={options(fieldName, rowValues, allValues)}
                 validation={{ required: true }}
                 onChange={() => handleChange(index)}
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...rest}
               />
             </div>
@@ -128,9 +142,10 @@ const Items = compose(
               fields.map((field, index) => (
                 <Item
                   index={index}
-                  key={index}
+                  key={field}
                   field={field}
                   fields={fields}
+                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...rest}
                 />
               ))
@@ -163,6 +178,7 @@ const MultiSelect = ({
       component={Items}
       properties={properties}
       options={options}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
     />
   </div>

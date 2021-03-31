@@ -4,7 +4,10 @@ import NodeTypeFields from '@components/sections/fields/NodeTypeFields';
 
 const NodeType = (props) => (
   <Section>
-    <NodeTypeFields {...props} />
+    <NodeTypeFields
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    />
   </Section>
 );
 

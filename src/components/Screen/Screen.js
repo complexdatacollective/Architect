@@ -56,8 +56,6 @@ Screen.defaultProps = {
   onAcknowledgeError: () => {},
 };
 
-export { Screen };
-
 export default compose(
   windowRootProvider,
 )(Screen);

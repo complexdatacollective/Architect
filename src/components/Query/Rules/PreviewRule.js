@@ -47,7 +47,6 @@ PreviewRule.defaultProps = {
   join: null,
 };
 
-export { PreviewRule };
 export default compose(
   withDeleteHandler,
   withDisplayOptions,

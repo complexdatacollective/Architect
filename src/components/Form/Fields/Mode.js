@@ -34,6 +34,7 @@ class Mode extends PureComponent {
         className={optionClasses}
         onClick={disabled ? null : () => this.handleClickMode(index)}
         key={optionValue}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...optionRest}
       >
         {optionLabel}

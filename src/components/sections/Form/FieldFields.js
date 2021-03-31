@@ -126,7 +126,10 @@ const PromptFields = ({
         && (
         <Row>
           <h4>Preview</h4>
-          <InputPreview {...metaForType} />
+          <InputPreview
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...metaForType}
+          />
         </Row>
         )}
       </Section>

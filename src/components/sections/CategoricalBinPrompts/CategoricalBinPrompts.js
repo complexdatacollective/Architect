@@ -8,7 +8,6 @@ import { PromptPreview } from '../NameGeneratorPrompts';
 import PromptFields from './PromptFields';
 import { itemSelector, normalizeField } from './helpers';
 import withPromptChangeHandler from './withPromptChangeHandler';
-// import Tip from '../../Tip';
 
 const CategoricalBinPrompts = ({
   handleChangePrompt,
@@ -25,6 +24,7 @@ const CategoricalBinPrompts = ({
     itemSelector={itemSelector(entity, type)}
     entity={entity}
     type={type}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <h2>Edit Prompts</h2>
@@ -32,9 +32,6 @@ const CategoricalBinPrompts = ({
       Add one or more prompts below to frame the task for the user. You can reorder
       the prompts using the draggable handles on the left hand side.
     </p>
-    {/* <Tip>
-      <p>Tap an existing prompt to edit it.</p>
-    </Tip> */}
   </EditableList>
 );
 

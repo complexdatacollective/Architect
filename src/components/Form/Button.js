@@ -11,6 +11,7 @@ const Button = ({
   <button
     className={cx('form-button', className)}
     type={type} // eslint-disable-line react/button-has-type
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     {children}

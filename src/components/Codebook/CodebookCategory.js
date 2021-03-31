@@ -21,6 +21,4 @@ CodebookCategory.defaultProps = {
   children: null,
 };
 
-export { CodebookCategory };
-
 export default CodebookCategory;

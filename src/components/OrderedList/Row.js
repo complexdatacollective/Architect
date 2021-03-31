@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Row = ({ children, ...rest }) => (
-  <div className="list-row" {...rest}>
+  <div
+    className="list-row"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...rest}
+  >
     {children}
   </div>
 );

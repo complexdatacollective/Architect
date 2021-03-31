@@ -48,6 +48,7 @@ const Variables = ({
     filter={filter}
     sortMode="auto"
     validation={{}}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   >
     <h2>Variables</h2>
@@ -62,7 +63,5 @@ Variables.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   initialSortOrder: PropTypes.object.isRequired,
 };
-
-export { Variables };
 
 export default Variables;

@@ -86,6 +86,7 @@ class EditorScreen extends Component {
       >
         {({ windowRoot }) => (
           <EditorComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
             windowRoot={windowRoot}
           />
@@ -131,7 +132,5 @@ const mapDispatchToProps = (dispatch, { form }) => ({
   jump: bindActionCreators(timelineActions.jump, dispatch),
   openDialog: bindActionCreators(dialogActions.openDialog, dispatch),
 });
-
-export { EditorScreen };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditorScreen);

@@ -22,7 +22,11 @@ const GridItem = ({
       <Flipped flipId={flipId}>
         <div className="grid-item">
           <div className="grid-item__content">
-            <PreviewComponent id={id} {...rest} />
+            <PreviewComponent
+              id={id}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...rest}
+            />
           </div>
           <div className="grid-item__controls">
             <div
@@ -59,7 +63,5 @@ GridItem.propTypes = {
 GridItem.defaultProps = {
   editField: null,
 };
-
-export { GridItem };
 
 export default GridItem;

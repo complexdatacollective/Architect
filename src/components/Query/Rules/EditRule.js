@@ -75,6 +75,4 @@ EditRule.defaultProps = {
   },
 };
 
-export { EditRule };
-
 export default EditRule;

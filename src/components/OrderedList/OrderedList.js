@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  compose, withHandlers, defaultProps, renameProp,
+  compose,
+  withHandlers,
+  defaultProps,
+  renameProp,
 } from 'recompose';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 
@@ -24,7 +27,10 @@ const OrderedList = ({
   <div className="list">
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
     { fields.map((fieldId, index) => (
-      <SortableItem index={index} key={index}>
+      <SortableItem
+        index={index}
+        key={fieldId}
+      >
         <Item
           fieldId={fieldId}
           index={index}
@@ -32,6 +38,7 @@ const OrderedList = ({
           onDelete={() => { fields.remove(index); }}
           sortable={sortable}
           form={form}
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...rest}
         />
       </SortableItem>

@@ -8,7 +8,11 @@ import { getFieldId } from '@app/utils/issues';
 import NetworkFilter from '@components/sections/fields/NetworkFilter';
 
 const NodePanel = ({ fieldId, form, ...rest }) => (
-  <Item form={form} {...rest}>
+  <Item
+    form={form}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...rest}
+  >
     <Row>
       <h3 id={getFieldId(`${fieldId}.title`)}>Panel title</h3>
       <p>The panel title will be shown above the list of nodes within the panel.</p>
@@ -51,7 +55,5 @@ NodePanel.propTypes = {
   fieldId: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
 };
-
-export { NodePanel };
 
 export default NodePanel;

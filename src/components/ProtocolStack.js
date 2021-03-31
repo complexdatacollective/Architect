@@ -37,6 +37,4 @@ const mapDispatchToProps = {
   openNetcanvas: userActions.openNetcanvas,
 };
 
-export { ProtocolStack };
-
 export default connect(null, mapDispatchToProps)(ProtocolStack);

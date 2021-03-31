@@ -33,13 +33,23 @@ const ItemHandle = compose(
 );
 
 const ItemDelete = (props) => (
-  <div className="form-fields-multi-select__delete" {...props}>
+  <div
+    className="form-fields-multi-select__delete"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     <Icon name="delete" />
   </div>
 );
 
 const AddItem = (props) => (
-  <Button color="primary" icon="add" size="small" {...props}>
+  <Button
+    color="primary"
+    icon="add"
+    size="small"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     Add new
   </Button>
 );
@@ -137,8 +147,9 @@ export const Items = compose(
               {
                 fields.map((field, index) => (
                   <Item
+                    // eslint-disable-next-line react/jsx-props-no-spreading
                     {...rest}
-                    key={index}
+                    key={field}
                     index={index}
                     field={field}
                     fields={fields}
@@ -174,6 +185,7 @@ const Options = ({
       name={name}
       component={Items}
       validate={minTwoOptions}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
     />
   </div>

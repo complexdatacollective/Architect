@@ -87,6 +87,7 @@ const Screens = (props) => {
           }}
         >
           <ScreenComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...params}
             onComplete={onComplete}
           />

@@ -32,6 +32,7 @@ const FieldArrayAdapter = ({
     items={items}
     onDelete={handleDelete}
     name={name}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   >
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }

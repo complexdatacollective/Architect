@@ -75,6 +75,4 @@ ControlBar.defaultProps = {
   className: '',
 };
 
-export { ControlBar };
-
 export default ControlBar;

@@ -5,6 +5,7 @@ import { BackgroundImage } from '../../Assets';
 const ImageInput = (props) => (
   <File
     type="image"
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     { (id) => (

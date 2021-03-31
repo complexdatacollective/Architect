@@ -67,6 +67,7 @@ const DataSource = (props) => {
                 showBrowser={selectNetworkAsset}
                 onCloseBrowser={handleCloseBrowser}
                 selected={input.value}
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...props}
               >
                 { (id) => <NetworkThumbnail id={id} /> }
@@ -79,6 +80,7 @@ const DataSource = (props) => {
       <File
         type="network"
         selected={input.value}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       >
         { (id) => <NetworkThumbnail id={id} /> }
@@ -95,7 +97,5 @@ DataSource.propTypes = {
 DataSource.defaultProps = {
   canUseExisting: false,
 };
-
-export { DataSource };
 
 export default withSelectNetworkAsset(DataSource);

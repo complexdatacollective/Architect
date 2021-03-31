@@ -6,6 +6,7 @@ import { Video } from '../../Assets';
 const VideoInput = (props) => (
   <File
     type="video"
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     { (id) => (

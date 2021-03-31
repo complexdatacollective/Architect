@@ -16,11 +16,11 @@ const Navigation = ({
   categories,
 }) => (
   <div className="new-stage-navigation">
-    {categories.map((category, index) => (
+    {categories.map((category) => (
       <div
         className={`new-stage-navigation__category new-stage-navigation__category--${changeCase.param(category)}`}
         onClick={() => scrollToCategory(category)}
-        key={index}
+        key={category}
       >
         { category }
       </div>

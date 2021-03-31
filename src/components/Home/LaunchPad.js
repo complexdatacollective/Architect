@@ -115,6 +115,4 @@ const mapDispatchToProps = {
 
 const withState = connect(mapStateToProps, mapDispatchToProps);
 
-export { LaunchPad };
-
 export default withState(LaunchPad);

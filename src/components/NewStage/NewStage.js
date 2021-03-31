@@ -32,8 +32,16 @@ const NewStage = ({
         <Navigation categories={categories} />
       </div>
       {interfaceOptions.map((props, index) => (
-        <div className="new-stage__category" key={index}>
-          <InterfaceCategory {...props} onSelect={handleCreateNew} />
+        <div
+          className="new-stage__category"
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+        >
+          <InterfaceCategory
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...props}
+            onSelect={handleCreateNew}
+          />
         </div>
       ))}
     </div>

@@ -27,7 +27,10 @@ const NewStageScreen = ({
       transitionState={transitionState}
       buttons={buttons}
     >
-      <NewStage {...rest} />
+      <NewStage
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest}
+      />
     </Screen>
   );
 };
@@ -42,7 +45,5 @@ NewStageScreen.defaultProps = {
   show: false,
   transitionState: null,
 };
-
-export { NewStageScreen };
 
 export default NewStageScreen;

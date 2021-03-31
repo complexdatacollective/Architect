@@ -21,6 +21,4 @@ PromptPreview.propTypes = {
   fieldId: PropTypes.string.isRequired,
 };
 
-export { PromptPreview };
-
 export default PromptPreview;

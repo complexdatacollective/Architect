@@ -11,6 +11,7 @@ const Disable = ({
       { 'disable--disabled': disabled },
       className,
     )}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   >
     <div className="disable__capture">

@@ -20,7 +20,7 @@ const AssignAttributes = ({
       <div className="assign-attributes__attributes">
         {fields.map((field, index) => (
           <Attribute
-            key={index}
+            key={field}
             index={index}
             entity={entity}
             type={type}
@@ -64,7 +64,5 @@ AssignAttributes.propTypes = {
   handleCreateNewVariable: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
 };
-
-export { AssignAttributes };
 
 export default withAssignAttributesHandlers(AssignAttributes);

@@ -54,6 +54,4 @@ ItemEditor.defaultProps = {
   type: null,
 };
 
-export { ItemEditor };
-
 export default withItemHandlers(ItemEditor);

@@ -112,8 +112,6 @@ EditEdgeRule.propTypes = {
   handleRuleChange: PropTypes.func.isRequired,
 };
 
-export { EditEdgeRule };
-
 export default compose(
   withOptions('edge'),
   withRuleChangeHandler,

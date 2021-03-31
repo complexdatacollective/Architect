@@ -227,8 +227,6 @@ EditAlterRule.defaultProps = {
   variableType: null,
 };
 
-export { EditAlterRule };
-
 export default compose(
   withAlterRuleType,
   withRuleChangeHandler,

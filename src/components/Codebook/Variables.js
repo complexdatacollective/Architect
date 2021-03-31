@@ -3,7 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  compose, withHandlers, withStateHandlers, withProps,
+  compose,
+  withHandlers,
+  withStateHandlers,
+  withProps,
 } from 'recompose';
 import { get, isString } from 'lodash';
 import cx from 'classnames';
@@ -78,10 +81,34 @@ const Variables = ({
       <table className="codebook__variables">
         <thead>
           <tr className="codebook__variables-row codebook__variables-row--heading">
-            <Heading name="name" {...headingProps}>Name</Heading>
-            <Heading name="type" {...headingProps}>Type</Heading>
-            <Heading name="component" {...headingProps}>Input control</Heading>
-            <Heading name="usageString" {...headingProps}>Used In</Heading>
+            <Heading
+              name="name"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...headingProps}
+            >
+              Name
+            </Heading>
+            <Heading
+              name="type"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...headingProps}
+            >
+              Type
+            </Heading>
+            <Heading
+              name="component"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...headingProps}
+            >
+              Input control
+            </Heading>
+            <Heading
+              name="usageString"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...headingProps}
+            >
+              Used In
+            </Heading>
             <th />
           </tr>
         </thead>
@@ -194,7 +221,10 @@ const withSort = compose(
 );
 
 export {
-  Variables, withSort, Heading, rowClassName, SortDirection,
+  withSort,
+  Heading,
+  rowClassName,
+  SortDirection,
 };
 
 export default compose(

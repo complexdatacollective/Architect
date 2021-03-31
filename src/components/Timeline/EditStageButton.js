@@ -87,6 +87,4 @@ EditStageButton.defaultProps = {
   hasFilter: false,
 };
 
-export { EditStageButton };
-
 export default EditStageButton;

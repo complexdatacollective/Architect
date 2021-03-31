@@ -139,6 +139,4 @@ Issues.defaultProps = {
   issues: {},
 };
 
-export { Issues };
-
 export default Issues;

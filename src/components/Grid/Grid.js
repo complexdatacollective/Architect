@@ -121,6 +121,7 @@ class Grid extends Component {
                 previewComponent={previewComponent}
                 onEditItem={onEditItem}
                 editField={editField}
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...item}
               />
             </div>
@@ -157,7 +158,5 @@ Grid.propTypes = {
 Grid.defaultProps = {
   editField: '',
 };
-
-export { Grid };
 
 export default withItems(Grid);

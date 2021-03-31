@@ -107,8 +107,6 @@ PresetFields.defaultProps = {
   highlightVariablesForSubject: [],
 };
 
-export { PresetFields };
-
 export default compose(
   withNewVariableWindowHandlers,
   withPresetProps,

@@ -18,7 +18,13 @@ const Item = ({
   };
 
   return (
-    <motion.div {...motionProps} className={cx('list-item', { 'list-item--clickable': onClick }, className)} {...rest}>
+    <motion.div
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...motionProps}
+      className={cx('list-item', { 'list-item--clickable': onClick }, className)}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+    >
       { sortable
         && (
         <div className="list-item__control list-item__control--left">
@@ -49,7 +55,5 @@ Item.defaultProps = {
   sortable: true,
   onClick: null,
 };
-
-export { Item };
 
 export default Item;

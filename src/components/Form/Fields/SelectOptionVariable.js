@@ -15,6 +15,7 @@ const SelectOptionVariable = (props) => {
 
   return (
     <Option
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       className="form-fields-select__item"
       classNamePrefix="form-fields-select__item"

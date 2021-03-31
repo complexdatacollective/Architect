@@ -22,7 +22,10 @@ const ExternalDataSource = (props) => {
   };
 
   return (
-    <Section {...props}>
+    <Section
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    >
       <Row>
         <h3>External Data Source for Roster</h3>
         <div id={getFieldId('dataSource')} data-name="Roster data-source" />

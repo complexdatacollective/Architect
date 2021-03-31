@@ -27,7 +27,11 @@ const RuleHandle = compose(
 );
 
 const RuleDelete = (props) => (
-  <div className="form-fields-order-by__delete" {...props}>
+  <div
+    className="form-fields-order-by__delete"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     <Icon name="delete" />
   </div>
 );
@@ -104,7 +108,7 @@ const Rules = compose(
               handleChange={handleChange}
               handleDelete={handleDelete}
               index={index}
-              key={index}
+              key={index} // eslint-disable-line react/no-array-index-key
               rule={rule}
               sortIndex={index}
             />

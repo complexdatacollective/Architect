@@ -61,6 +61,4 @@ const mapDispatchToProps = {
   changeField: change,
 };
 
-export { SkipLogic };
-
 export default connect(mapStateToProps, mapDispatchToProps)(SkipLogic);

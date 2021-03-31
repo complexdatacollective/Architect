@@ -27,6 +27,7 @@ const OrdinalBinPrompts = ({
     itemSelector={itemSelector(entity, type)}
     entity={entity}
     type={type}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <h2>Prompts</h2>

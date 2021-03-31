@@ -81,6 +81,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export { Overview };
-
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Overview);

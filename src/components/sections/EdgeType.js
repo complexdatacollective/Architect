@@ -4,7 +4,10 @@ import EdgeTypeFields from '@components/sections/fields/EdgeTypeFields';
 
 const EdgeType = (props) => (
   <Section>
-    <EdgeTypeFields {...props} />
+    <EdgeTypeFields
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    />
   </Section>
 );
 

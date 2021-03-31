@@ -93,8 +93,6 @@ const mapDispatchToProps = {
   changeField: change,
 };
 
-export { NetworkFilter };
-
 export default compose(
   defaultProps({ name: 'filter' }),
   connect(mapStateToProps, mapDispatchToProps),

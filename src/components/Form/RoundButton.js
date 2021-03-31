@@ -14,6 +14,7 @@ const RoundButton = ({
   <button
     className={cx('form-round-button', className, { [`form-round-button--${size}`]: !!size })}
     type={type} // eslint-disable-line react/button-has-type
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     { (icon && <Icon name={icon} />) || content }

@@ -29,6 +29,7 @@ const DefaultSelectOption = (props) => {
 
   return (
     <ReactSelectComponents.Option
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       className={classes}
       classNamePrefix="form-fields-select__item"

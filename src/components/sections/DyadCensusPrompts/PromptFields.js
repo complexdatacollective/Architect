@@ -82,8 +82,6 @@ PromptFields.propTypes = {
   handleChangeCreateEdge: PropTypes.func.isRequired,
 };
 
-export { PromptFields };
-
 export default compose(
   withCreateEdgeHandlers,
   withEdgesOptions,

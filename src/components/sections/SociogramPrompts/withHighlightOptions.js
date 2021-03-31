@@ -12,6 +12,4 @@ const withHighlightOptions = (state, props) => {
   };
 };
 
-export { withHighlightOptions };
-
 export default connect(withHighlightOptions);
