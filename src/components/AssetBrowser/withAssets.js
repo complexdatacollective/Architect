@@ -37,13 +37,15 @@ const mapStateToProps = (state, { assetType, selected }) => {
 
   // Check for asset usage
   const assets = filteredAssets.map((asset) => {
-    if (!assetSearch.has(asset.id) && asset.id !== selected) { return asset; }
+    const isUsed = assetSearch.has(asset.id) || asset.id === selected;
 
     return {
       ...asset,
-      isUsed: true,
+      isUsed,
     };
   });
+
+  console.log({ assets });
 
   return {
     assets,
