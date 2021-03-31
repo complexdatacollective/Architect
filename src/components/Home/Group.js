@@ -39,7 +39,12 @@ const Group = ({
     : baseVariant;
 
   return (
-    <motion.div className={classes} style={styles} {...rest}>
+    <motion.div
+      className={classes}
+      style={styles}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+    >
       { icon
         && (
         <motion.div

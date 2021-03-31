@@ -21,6 +21,4 @@ PresetPreview.propTypes = {
   fieldId: PropTypes.string.isRequired,
 };
 
-export { PresetPreview };
-
 export default PresetPreview;

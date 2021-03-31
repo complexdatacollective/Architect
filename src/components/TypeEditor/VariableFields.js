@@ -98,6 +98,4 @@ const mapDispatchToProps = (dispatch, { form }) => ({
   autofill: (field, value) => dispatch(autofill(form, field, value)),
 });
 
-export { VariableFields };
-
 export default connect(mapStateToProps, mapDispatchToProps)(VariableFields);

@@ -38,14 +38,26 @@ const Codebook = ({
     { hasNodes
       && (
       <CodebookCategory title="Node Types">
-        {nodes.map((node) => <EntityType {...node} key={node.type} />)}
+        {nodes.map((node) => (
+          <EntityType
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...node}
+            key={node.type}
+          />
+        ))}
       </CodebookCategory>
       )}
 
     { hasEdges
       && (
       <CodebookCategory title="Edge Types">
-        {edges.map((edge) => <EntityType {...edge} key={edge.type} />)}
+        {edges.map((edge) => (
+          <EntityType
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...edge}
+            key={edge.type}
+          />
+        ))}
       </CodebookCategory>
       )}
 
@@ -138,7 +150,5 @@ const mapStateToProps = (state) => {
     nodes,
   };
 };
-
-export { Codebook };
 
 export default connect(mapStateToProps)(Codebook);

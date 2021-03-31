@@ -144,8 +144,6 @@ EditEgoRule.defaultProps = {
   variableOptions: null,
 };
 
-export { EditEgoRule };
-
 export default compose(
   withOptions('ego'),
   withRuleChangeHandler,

@@ -161,8 +161,6 @@ const withEntityHandlers = compose(
   }),
 );
 
-export { EntityType };
-
 export default compose(
   connect(mapStateToProps),
   withEntityHandlers,

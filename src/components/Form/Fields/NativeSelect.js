@@ -191,11 +191,13 @@ const NativeSelect = ({
               && <h4>{label}</h4>}
             <select
               className="form-fields-select-native__component"
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...input}
               value={input.value || '_placeholder'}
               onChange={handleChange}
               validation={validation}
               disabled={!!disabled}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...rest}
             >
               <option disabled={!allowPlaceholderSelect} value="_placeholder">
@@ -205,9 +207,9 @@ const NativeSelect = ({
                 --
               </option>
               { (onCreateOption || onCreateNew) && <option value="_create">{createLabelText}</option>}
-              { sortedOptions.map((option, index) => (
+              { sortedOptions.map((option) => (
                 <option
-                  key={index}
+                  key={`${option.label}_${option.value}`}
                   value={option.value}
                   disabled={!!option.disabled}
                 >

@@ -245,7 +245,10 @@ const PromptFields = ({
           options={getSortOrderOptionGetter(variableOptions)}
         />
       </Row>
-      <NewVariableWindow {...newVariableWindowProps} />
+      <NewVariableWindow
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...newVariableWindowProps}
+      />
     </Section>
   );
 };
@@ -271,8 +274,6 @@ PromptFields.defaultProps = {
   variableOptions: [],
   optionsForVariableDraft: [],
 };
-
-export { PromptFields };
 
 export default compose(
   withVariableOptions,

@@ -18,6 +18,7 @@ const PreviewRules = ({
             (rule, index) => (
               <div className="rules-preview-rules__rule" key={rule.id}>
                 <PreviewRule
+                  // eslint-disable-next-line react/jsx-props-no-spreading
                   {...rule}
                   join={getJoin(index)}
                   codebook={codebook}
@@ -46,7 +47,5 @@ PreviewRules.propTypes = {
 PreviewRules.defaultProps = {
   join: null,
 };
-
-export { PreviewRules };
 
 export default PreviewRules;

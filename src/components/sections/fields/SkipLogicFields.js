@@ -33,6 +33,4 @@ const SkipLogicFields = () => (
   </>
 );
 
-export { SkipLogicFields };
-
 export default SkipLogicFields;

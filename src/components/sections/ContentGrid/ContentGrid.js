@@ -36,6 +36,7 @@ const ContentGrid = (props) => (
     itemSelector={denormalizeType}
     title="Edit Items"
     capacity={capacity}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <h2>Edit Items</h2>

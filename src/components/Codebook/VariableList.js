@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import {
-  Heading, withSort, rowClassName, SortDirection,
+  Heading,
+  withSort,
+  rowClassName,
+  SortDirection,
 } from './Variables';
 
 const Variables = ({
@@ -19,7 +22,13 @@ const Variables = ({
       <table className="codebook__variables">
         <thead>
           <tr className="codebook__variables-row codebook__variables-row--heading">
-            <Heading name="name" {...headingProps}>Name</Heading>
+            <Heading
+              name="name"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...headingProps}
+            >
+              Name
+            </Heading>
           </tr>
         </thead>
         <tbody>

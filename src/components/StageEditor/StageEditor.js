@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
-import Layout from '@components/EditorLayout';
+import { Layout } from '@components/EditorLayout';
 import FormCodeView from '@components/CodeView/FormCodeView';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
@@ -41,14 +41,14 @@ const StageEditor = ({
 
   const renderSections = (
     sectionList, { submitFailed, windowRoot },
-  ) => sectionList.map((SectionComponent, index) => (
+  ) => sectionList.map((SectionComponent) => (
     <SectionComponent
-      key={index}
+      key={stagePath}
       form={formName}
       stagePath={stagePath}
       hasSubmitFailed={submitFailed}
-        // `windowRoot` will ensure connect() components re-render
-        // when the window root changes
+      // `windowRoot` will ensure connect() components re-render
+      // when the window root changes
       windowRoot={windowRoot}
       interfaceType={interfaceType}
     />
@@ -57,6 +57,7 @@ const StageEditor = ({
   return (
     <Editor
       formName={formName}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {

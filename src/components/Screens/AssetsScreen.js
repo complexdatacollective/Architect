@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import AssetBrowser from '@components/AssetBrowser';
-import Layout, { Section } from '@components/EditorLayout';
+import { Layout, Section } from '@components/EditorLayout';
 import ExternalLink from '../ExternalLink';
 
 const AssetBrowserScreen = ({

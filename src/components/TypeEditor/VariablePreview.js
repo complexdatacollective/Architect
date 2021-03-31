@@ -20,6 +20,4 @@ VariablePreview.propTypes = {
   fieldId: PropTypes.string.isRequired,
 };
 
-export { VariablePreview };
-
 export default VariablePreview;

@@ -7,7 +7,7 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import * as ArchitectFields from '@components/Form/Fields';
-import Layout, { Section } from '@components/EditorLayout';
+import { Layout, Section } from '@components/EditorLayout';
 import { getCodebook } from '@selectors/protocol';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
@@ -176,7 +176,5 @@ const mapStateToProps = (state, { type, isNew }) => {
     existingTypes,
   };
 };
-
-export { TypeEditor };
 
 export default connect(mapStateToProps)(TypeEditor);

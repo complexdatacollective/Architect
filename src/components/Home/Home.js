@@ -1,8 +1,6 @@
 import React from 'react';
 import { AnimateSharedLayout, motion } from 'framer-motion';
 import WelcomeHeader from './WelcomeHeader';
-// import Tips from './Tips';
-// import WhatsNew from './WhatsNew';
 import LaunchPad from './LaunchPad';
 
 const variants = {
@@ -23,9 +21,7 @@ const Home = () => (
         key="start-screen"
       >
         <WelcomeHeader />
-        {/* <WhatsNew /> */}
         <LaunchPad />
-        {/* <Tips /> */}
       </motion.div>
     </AnimateSharedLayout>
   </div>

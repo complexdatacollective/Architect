@@ -40,6 +40,4 @@ ExternalEntity.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export { ExternalEntity };
-
 export default ExternalEntity;

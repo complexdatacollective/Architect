@@ -79,6 +79,4 @@ const mapStateToProps = (state, { id }) => {
   };
 };
 
-export { StageHeading };
-
 export default connect(mapStateToProps)(StageHeading);

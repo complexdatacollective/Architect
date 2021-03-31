@@ -112,6 +112,4 @@ Stage.defaultProps = {
   hasSkipLogic: false,
 };
 
-export { Stage };
-
 export default SortableElement(Stage);

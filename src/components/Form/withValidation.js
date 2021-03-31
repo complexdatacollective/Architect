@@ -29,7 +29,13 @@ const withValidation = (WrappedComponent) => {
 
     render() {
       const { validate } = this.state;
-      return <WrappedComponent {...this.props} validate={validate} />;
+      return (
+        <WrappedComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...this.props}
+          validate={validate}
+        />
+      );
     }
   }
 

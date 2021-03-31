@@ -73,6 +73,4 @@ const interfaceOptions = [
   },
 ];
 
-export { interfaceOptions };
-
 export default interfaceOptions;

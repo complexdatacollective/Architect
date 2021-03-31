@@ -5,6 +5,7 @@ import { Audio } from '../../Assets';
 const AudioInput = (props) => (
   <File
     type="audio"
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     { (id) => (

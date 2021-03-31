@@ -70,6 +70,7 @@ class Select extends PureComponent {
         <ReactSelect
           className="form-fields-select"
           classNamePrefix="form-fields-select"
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...input}
           options={optionsWithNew}
           value={this.value}
@@ -83,6 +84,7 @@ class Select extends PureComponent {
           // a round about way, and still allow us to use the `touched` property.
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...rest}
         >
           {children}

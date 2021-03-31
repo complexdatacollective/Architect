@@ -27,6 +27,4 @@ UsageColumn.propTypes = {
   inUse: PropTypes.bool.isRequired,
 };
 
-export { UsageColumn };
-
 export default UsageColumn;

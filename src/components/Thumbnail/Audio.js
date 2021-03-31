@@ -25,8 +25,4 @@ AudioThumbnail.defaultProps = {
   },
 };
 
-export {
-  AudioThumbnail,
-};
-
 export default withAssetMeta(AudioThumbnail);

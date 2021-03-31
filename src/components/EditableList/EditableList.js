@@ -82,6 +82,7 @@ class EditableList extends PureComponent {
                 onClickPrompt={handleEditField}
                 editField={editField}
                 form={formName}
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...rest}
               />
             </div>
@@ -98,10 +99,13 @@ class EditableList extends PureComponent {
             onSubmitFail={handleSubmitFail}
             onCancel={handleCancelEditField}
             form={formName}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...editProps}
           >
             <EditComponent
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...rest}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...editProps}
               form={formName}
               initialValues={initialValues}

@@ -71,6 +71,7 @@ const GridManager = ({
               onEditItem={handleEditField}
               editField={editField}
               capacity={capacity}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...rest}
             />
           </div>
@@ -94,6 +95,7 @@ const GridManager = ({
           form={formName}
         >
           <EditComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
             form={formName}
             fieldId={editField}

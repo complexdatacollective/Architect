@@ -52,6 +52,4 @@ const mapStateToProps = (state) => ({
 
 const withState = connect(mapStateToProps);
 
-export { Loading };
-
 export default withState(Loading);

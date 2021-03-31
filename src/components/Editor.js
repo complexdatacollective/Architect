@@ -80,8 +80,14 @@ const Editor = ({
             form, toggleCodeView, submitFailed, ...rest,
           })}
         { children && typeof children !== 'function' && children }
-        { !children
-          && <Component form={form} submitFailed={submitFailed} {...rest} />}
+        { !children && (
+          <Component
+            form={form}
+            submitFailed={submitFailed}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...rest}
+          />
+        )}
       </Form>
       <Issues
         issues={issues}
@@ -117,8 +123,6 @@ const mapStateToProps = (state, props) => {
     issues,
   };
 };
-
-export { Editor };
 
 export default compose(
   withStateHandlers(

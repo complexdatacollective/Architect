@@ -23,7 +23,12 @@ const Parameters = ({ type, component, ...rest }) => {
   const ParameterComponent = getComponent({ type, component });
   if (!ParameterComponent) { return null; }
 
-  return <ParameterComponent {...rest} />;
+  return (
+    <ParameterComponent
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+    />
+  );
 };
 
 Parameters.propTypes = {

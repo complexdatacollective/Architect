@@ -30,6 +30,7 @@ const EdgeSelect = ({ className, ...rest }) => (
   <Fields.RadioGroup
     optionComponent={PreviewEdge}
     className={cx('form-fields-edge-select', className)}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   />
 );

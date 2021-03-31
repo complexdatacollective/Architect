@@ -19,8 +19,13 @@ const InterfaceCategory = ({
 
       <div className="new-stage-interface-category__interfaces">
         {interfaces.map((props, index) => (
-          <div className="new-stage-interface-category__interface" key={index}>
+          <div
+            className="new-stage-interface-category__interface"
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+          >
             <Interface
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...props}
               onSelect={onSelect}
               tags={[category]}

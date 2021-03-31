@@ -36,6 +36,7 @@ const TextArea = ({
         <textarea
           className={cx('form-fields-textarea__input')}
           id={id.current}
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...input}
         />
       </div>

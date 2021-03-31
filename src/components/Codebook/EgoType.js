@@ -37,8 +37,6 @@ const mapStateToProps = (state) => {
   return entityProperties;
 };
 
-export { EgoType };
-
 export default compose(
   connect(mapStateToProps),
 )(EgoType);

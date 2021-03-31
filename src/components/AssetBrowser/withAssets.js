@@ -45,8 +45,6 @@ const mapStateToProps = (state, { assetType, selected }) => {
     };
   });
 
-  console.log({ assets });
-
   return {
     assets,
   };

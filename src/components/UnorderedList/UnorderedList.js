@@ -63,6 +63,7 @@ class List extends Component {
                 sortable={false}
                 onDelete={() => onDelete(index)}
                 fieldId={fieldId}
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...rest}
               />
             </div>

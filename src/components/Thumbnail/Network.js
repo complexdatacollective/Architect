@@ -25,6 +25,4 @@ NetworkThumbnail.defaultProps = {
   },
 };
 
-export { NetworkThumbnail };
-
 export default withAssetMeta(NetworkThumbnail);

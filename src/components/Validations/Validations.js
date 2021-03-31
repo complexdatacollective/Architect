@@ -31,7 +31,13 @@ const getOptionsWithUsedDisabled = (options, used) => options.map((option) => {
 });
 
 const AddItem = (props) => (
-  <Button color="primary" icon="add" size="small" {...props}>
+  <Button
+    color="primary"
+    icon="add"
+    size="small"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     Add new
   </Button>
 );
@@ -57,6 +63,7 @@ const ValidationsField = ({
             itemKey={key}
             itemValue={value}
             options={options}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
           />
         )) }

@@ -5,6 +5,7 @@ import Radio from '@codaco/ui/lib/components/Fields/Radio';
 
 const IconOption = (props) => (
   <Radio
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
     className="type-editor-icon-option"
     // eslint-disable-next-line react/destructuring-assignment

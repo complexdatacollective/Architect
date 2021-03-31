@@ -19,6 +19,7 @@ const mapStateToProps = (state, { entity, type }) => {
 const VariableSelect = ({ reserved, ...props }) => (
   <NativeSelect
     placeholder="Select or create a variable"
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
     reserved={reserved}
   />

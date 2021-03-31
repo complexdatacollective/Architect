@@ -95,6 +95,7 @@ class DetachedField extends Component {
 
     return (
       <FieldComponent
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         input={input}
         meta={{
