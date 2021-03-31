@@ -62,6 +62,4 @@ CodebookScreen.defaultProps = {
   onComplete: () => {},
 };
 
-export { CodebookScreen };
-
 export default CodebookScreen;

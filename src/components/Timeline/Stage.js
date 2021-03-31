@@ -112,4 +112,6 @@ Stage.defaultProps = {
   hasSkipLogic: false,
 };
 
+export { Stage as UnconnectedStage };
+
 export default SortableElement(Stage);

@@ -24,8 +24,6 @@ const SociogramPrompts = (props) => (
   </EditableList>
 );
 
-export { SociogramPrompts };
-
 export default compose(
   withSubject,
   withFormUsedVariableIndex,

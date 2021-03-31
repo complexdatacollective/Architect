@@ -70,4 +70,6 @@ RecentProtocols.defaultProps = {
   show: true,
 };
 
+export { RecentProtocols as UnconnectedRecentProtocols };
+
 export default connect(mapStateToProps)(RecentProtocols);
