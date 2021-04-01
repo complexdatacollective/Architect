@@ -9,6 +9,7 @@ import { getVariablesForSubject } from '@selectors/codebook';
 import withSubject from '@components/enhancers/withSubject';
 import Preview from '@components/EditableList/Preview';
 import Badge from '@components/Badge';
+import ReactMarkdown from 'react-markdown';
 
 const PreviewFieldComponent = ({
   input: {
@@ -19,7 +20,7 @@ const PreviewFieldComponent = ({
   const codebookVariable = get(subjectVariables, value.variable, {});
   return (
     <span className="field-preview">
-      {value.prompt}
+      <ReactMarkdown>{value.prompt}</ReactMarkdown>
       <Badge color={getColorForType(codebookVariable.type)}>
         <strong>{codebookVariable.type}</strong>
         {' '}

@@ -11,7 +11,7 @@ class PresetPreview extends Preview {
     return (
       <Field
         name={`${fieldId}.label`}
-        component={(field) => <Markdown source={field.input.value} />}
+        component={(field) => <Markdown>{field.input.value}</Markdown>}
       />
     );
   }

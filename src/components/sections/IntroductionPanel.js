@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormSection } from 'redux-form';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
-import { Field as RichTextField, MODES } from '@components/RichText';
+import { Field as RichTextField } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import { ValidatedField } from '../Form';
 import IssueAnchor from '../IssueAnchor';
@@ -37,7 +37,6 @@ const Name = () => (
           label="Introduction text"
           component={RichTextField}
           validation={{ required: true }}
-          mode={MODES.full}
         />
       </Row>
     </FormSection>

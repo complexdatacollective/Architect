@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
-import { Field as RichTextField, MODES } from '@components/RichText';
+import { Field as RichTextField } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import ValidatedField from '@components/Form/ValidatedField';
 import { Image, Audio, Video } from '@components/Form/Fields';
@@ -19,10 +19,8 @@ const contentInputs = {
 
 const getInputProps = (type) => {
   const component = get(contentInputs, type, RichTextField);
-  const props = type !== 'text' ? {} : { mode: MODES.full };
   return {
     component,
-    ...props,
   };
 };
 

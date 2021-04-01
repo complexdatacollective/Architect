@@ -11,7 +11,7 @@ class PromptPreview extends Preview {
     return (
       <Field
         name={`${fieldId}.text`}
-        component={(field) => <Markdown source={field.input.value} />}
+        component={(field) => <Markdown>{field.input.value}</Markdown>}
       />
     );
   }

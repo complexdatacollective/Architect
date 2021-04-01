@@ -225,7 +225,7 @@ const mayUpgradeProtocolDialog = (
                   {' '}
                   will:
                 </h4>
-                <Markdown source={notes} renderers={{ link: ExternalLink }} />
+                <Markdown renderers={{ link: ExternalLink }}>{notes}</Markdown>
               </React.Fragment>
             ))}
           </div>

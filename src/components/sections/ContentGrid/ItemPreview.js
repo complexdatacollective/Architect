@@ -25,7 +25,7 @@ const ItemPreview = ({ content, assetType }) => {
     case 'audio':
       return <Audio id={content} controls />;
     default:
-      return <Markdown source={content} />;
+      return <Markdown>{content}</Markdown>;
   }
 };
 
