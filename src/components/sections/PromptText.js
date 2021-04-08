@@ -1,0 +1,37 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
+import { getFieldId } from '@app/utils/issues';
+import { Section, Row } from '@components/EditorLayout';
+import ValidatedField from '@components/Form/ValidatedField';
+
+const PromptText = ({ name }) => (
+  <Section>
+    <Row>
+      <h3 id={getFieldId(name)}>Prompt Text</h3>
+      <p>
+        The prompt text instructs your participant about the task on this stage.
+        Enter the text to use for your prompt below.
+      </p>
+      <ValidatedField
+        name={name}
+        component={RichText}
+        inline
+        className="stage-editor-section-prompt__textarea"
+        label=""
+        placeholder="Enter text for the prompt here..."
+        validation={{ required: true, maxLength: 220 }}
+      />
+    </Row>
+  </Section>
+);
+
+PromptText.defaultProps = {
+  name: 'text',
+};
+
+PromptText.propTypes = {
+  name: PropTypes.string,
+};
+
+export default PromptText;

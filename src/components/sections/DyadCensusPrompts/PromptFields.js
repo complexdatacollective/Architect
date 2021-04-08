@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
-import Text from '@codaco/ui/lib/components/Fields/Text';
+import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
-import Tip from '@components/Tip';
 import withCreateEdgeHandlers from './withCreateEdgeHandler';
 import withEdgesOptions from './withEdgesOptions';
 
@@ -40,15 +39,10 @@ const PromptFields = ({
         either a &apos;yes&apos; or a &apos;no&apos; by the participant, since these
         are the user-interface options that are shown.
       </p>
-      <Tip>
-        <p>
-          You can use markdown formatting in this prompt to create bold or underlined text.
-        </p>
-      </Tip>
 
       <ValidatedField
         name="text"
-        component={Text}
+        component={RichText}
         className="stage-editor-section-prompt__textarea"
         label="Prompt Text"
         placeholder="Enter text for the prompt here..."

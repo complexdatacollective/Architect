@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import Text from '@codaco/ui/lib/components/Fields/Text';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
@@ -11,6 +10,7 @@ import { Section, Row } from '@components/EditorLayout';
 import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import Options from '@components/Options';
 import Tip from '@components/Tip';
+import PromptText from '@components/sections/PromptText';
 import { getSortOrderOptionGetter } from '@components/sections/CategoricalBinPrompts/optionGetters';
 import withVariableOptions from '@components/sections/CategoricalBinPrompts/withVariableOptions';
 import withVariableHandlers from '@components/sections/CategoricalBinPrompts/withVariableHandlers';
@@ -50,27 +50,7 @@ const PromptFields = ({
 
   return (
     <>
-      <Section>
-        <Row>
-          <h3 id={getFieldId('text')}>Prompt Text</h3>
-          <p>
-            The prompt text instructs your participant about the task on this stage.
-            Enter the text to use for your prompt below.
-          </p>
-          <Tip>
-            <p>
-              You can use markdown formatting in this prompt to create bold or underlined text.
-            </p>
-          </Tip>
-          <ValidatedField
-            name="text"
-            component={Text}
-            label=""
-            placeholder="Enter text for the prompt here..."
-            validation={{ required: true, maxLength: 220 }}
-          />
-        </Row>
-      </Section>
+      <PromptText />
       <Section>
         <Row>
           <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
