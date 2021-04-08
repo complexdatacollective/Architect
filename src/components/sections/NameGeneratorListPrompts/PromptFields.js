@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@codaco/ui/lib/components/Fields';
 import { Section, Row } from '@components/EditorLayout';
-import { getFieldId } from '../../../utils/issues';
-import ValidatedField from '../../Form/ValidatedField';
-import AssignAttributes from '../../AssignAttributes';
-import Tip from '../../Tip';
+import PromptText from '@components/sections/PromptText';
+import AssignAttributes from '@components/AssignAttributes';
+import Tip from '@components/Tip';
 
 const PromptFields = ({
   type,
@@ -13,28 +11,7 @@ const PromptFields = ({
   form,
 }) => (
   <>
-    <Section>
-      <Row>
-        <h3 id={getFieldId('text')}>Prompt Text</h3>
-        <p>
-          The prompt text instructs your participant about the task on this stage.
-          Enter the text to use for your prompt below.
-        </p>
-        <Tip>
-          <p>
-            You can use markdown formatting in this prompt to create bold or underlined text.
-          </p>
-        </Tip>
-
-        <ValidatedField
-          name="text"
-          component={Text}
-          label=""
-          placeholder="Enter text for the prompt here..."
-          validation={{ required: true, maxLength: 220 }}
-        />
-      </Row>
-    </Section>
+    <PromptText />
     <Section>
       <Row>
         <h3>
