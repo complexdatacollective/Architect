@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormSection } from 'redux-form';
-import TextArea from '@codaco/ui/lib/components/Fields/TextArea';
+import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import TextField from '@codaco/ui/lib/components/Fields/Text';
 import { Section, Row } from '@components/EditorLayout';
 import { ValidatedField } from '../Form';
@@ -35,7 +35,7 @@ const Name = () => (
         <ValidatedField
           name="text"
           label="Introduction text"
-          component={TextArea}
+          component={RichText}
           validation={{ required: true }}
         />
       </Row>
