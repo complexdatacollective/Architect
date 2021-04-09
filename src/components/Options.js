@@ -179,17 +179,20 @@ Items.propTypes = {
 const Options = ({
   name,
   ...rest
-}) => (
-  <div className="form-fields-multi-select type-editor__subsection">
-    <FieldArray
-      name={name}
-      component={Items}
-      validate={minTwoOptions}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}
-    />
-  </div>
-);
+}) => {
+  console.log('optioms', name, rest);
+  return (
+    <div className="form-fields-multi-select type-editor__subsection">
+      <FieldArray
+        name={name}
+        component={Items}
+        validate={minTwoOptions}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...rest}
+      />
+    </div>
+  );
+};
 
 Options.propTypes = {
   name: PropTypes.string.isRequired,
