@@ -1,64 +1,61 @@
-import React, { PureComponent } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import uuid from 'uuid';
+import { fieldPropTypes } from 'redux-form';
 
-class Radio extends PureComponent {
-  static propTypes = {
-    label: PropTypes.node,
-    fieldLabel: PropTypes.string,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    input: PropTypes.object.isRequired,
-  };
+const Radio = ({
+  label,
+  className,
+  input,
+  disabled,
+  fieldLabel,
+  ...rest
+}) => {
+  const id = useRef(uuid());
 
-  static defaultProps = {
-    className: '',
-    label: null,
-    fieldLabel: null,
-    disabled: false,
-  };
+  const componentClasses = cx(
+    'form-field-radio',
+    className,
+    {
+      'form-field-radio--disabled': disabled,
+    },
+  );
 
-  componentWillMount() {
-    this.id = uuid();
-  }
+  return (
+    <label className={componentClasses} htmlFor={id}>
+      <input
+        type="radio"
+        className="form-field-radio__input"
+        id={id}
+        // input.checked is only provided by redux form if type="checkbox" or type="radio" is
+        // provided to <Field />, so for the case that it isn't we can rely on the more reliable
+        // input.value
+        checked={!!input.value}
+        {...input}
+        {...rest}
+      />
+      <div className="form-field-radio__radio" />
+      {label}
+    </label>
+  );
+};
 
-  render() {
-    const {
-      label,
-      className,
-      input,
-      disabled,
-      fieldLabel,
-      ...rest
-    } = this.props;
+Radio.propTypes = {
+  label: PropTypes.node,
+  fieldLabel: PropTypes.string,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  ...fieldPropTypes,
+};
 
-    const componentClasses = cx(
-      'form-field-radio',
-      className,
-      {
-        'form-field-radio--disabled': disabled,
-      },
-    );
-
-    return (
-      <label className={componentClasses} htmlFor={this.id}>
-        <input
-          type="radio"
-          className="form-field-radio__input"
-          id={this.id}
-          // input.checked is only provided by redux form if type="checkbox" or type="radio" is
-          // provided to <Field />, so for the case that it isn't we can rely on the more reliable
-          // input.value
-          checked={!!input.value}
-          {...input}
-          {...rest}
-        />
-        <div className="form-field-radio__radio" />
-        {label}
-      </label>
-    );
-  }
-}
+Radio.defaultProps = {
+  className: '',
+  label: null,
+  fieldLabel: null,
+  disabled: false,
+};
 
 export default Radio;
