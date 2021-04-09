@@ -42,7 +42,7 @@ const interfaceOptions = [
     ],
   },
   {
-    category: 'Name Interpreters',
+    category: 'Name and Edge Interpreters',
     interfaces: [
       {
         type: 'OrdinalBin',
