@@ -5,6 +5,7 @@
   border-radius: var(--border-radius);
 
   &__controls {
+    --input-text: var(--color-white);
     display: flex;
     align-items: center;
 
