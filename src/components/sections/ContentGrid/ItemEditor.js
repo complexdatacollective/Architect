@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import RadioGroup from '@codaco/ui/lib/components/Fields/RadioGroup';
-import TextArea from '@codaco/ui/lib/components/Fields/TextArea';
+import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { Section, Row } from '@components/EditorLayout';
 import { getFieldId } from '../../../utils/issues';
 import ValidatedField from '../../Form/ValidatedField';
@@ -11,13 +11,13 @@ import { typeOptions } from './options';
 import withItemHandlers from './withItemHandlers';
 
 const contentInputs = {
-  text: TextArea,
+  text: RichText,
   image: Image,
   audio: Audio,
   video: Video,
 };
 
-const getInputComponent = (type) => get(contentInputs, type, TextArea);
+const getInputComponent = (type) => get(contentInputs, type, RichText);
 
 const ItemEditor = ({
   type,

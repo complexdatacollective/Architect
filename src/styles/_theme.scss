@@ -120,4 +120,8 @@
     --tooltip-color: var(--color-navy-taupe);
     --tooltip-label: var(--color-white);
   }
+
+  .rich-text {
+    --blockquote-border-color: var(--transparent-md);
+  }
 }

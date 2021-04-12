@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import * as Fields from '@codaco/ui/lib/components/Fields';
+import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { isVariableTypeWithOptions, isVariableTypeWithParameters } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
@@ -65,7 +65,8 @@ const PromptFields = ({
         <p>Enter question for the participant. e.g. What is this person&apos;s name?</p>
         <ValidatedField
           name="prompt"
-          component={Fields.Text}
+          component={RichText}
+          inline
           placeholder="What is this person's name?"
           validation={{ required: true }}
         />
