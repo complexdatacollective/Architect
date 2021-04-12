@@ -13,7 +13,11 @@ const Layout = ({
   );
 
   return (
-    <div className={containerClasses} {...rest}>
+    <div
+      className={containerClasses}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+    >
       {children}
     </div>
   );

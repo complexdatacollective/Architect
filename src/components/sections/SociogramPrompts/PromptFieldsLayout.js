@@ -37,28 +37,16 @@ const PromptFields = ({
         component={VariableSelect}
         validation={{ required: true }}
         options={layoutVariablesForSubject}
-        onCreateOption={value => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
+        onCreateOption={(value) => handleCreateVariable(value, 'layout', 'layout.layoutVariable')}
       />
     </Row>
-    {/* <Row>
-      <h4>Can nodes be positioned by the participant?</h4>
-      <p>
-        Nodes without any coordinates are stacked in a bucket in the bottom-center of the screen,
-        until your participant drags them into a position.
-      </p>
-      <p>
-        Disable this when your nodes already have coordinates (e.g from a previous interface), and
-        you wish to prevent your participant moving them.
-      </p>
-      <Field
-        name="layout.allowPositioning"
-        component={Fields.Toggle}
-        label="Allow positioning?"
-      />
-    </Row> */}
-    { allowPositioning &&
+    { allowPositioning
+      && (
       <Row>
-        <h4>Sort Unplaced Nodes <small>(optional)</small></h4>
+        <h4>
+          Sort Unplaced Nodes
+          <small>(optional)</small>
+        </h4>
         <p>
           Nodes without any coordinates are stacked in a bucket until your participant drags them
           into position. You can control the order of this stack, which will determine the order
@@ -70,16 +58,24 @@ const PromptFields = ({
           variables={variablesForSubject}
         />
       </Row>
-    }
+      )}
   </Section>
 );
+
+const layoutVariablesForSubjectShape = PropTypes.shape({
+  isUsed: PropTypes.bool,
+  label: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+});
 
 PromptFields.propTypes = {
   allowPositioning: PropTypes.bool,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
-  layoutVariablesForSubject: PropTypes.array.isRequired,
+  layoutVariablesForSubject: PropTypes.arrayOf(layoutVariablesForSubjectShape).isRequired,
   type: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variablesForSubject: PropTypes.object.isRequired,
 };
 

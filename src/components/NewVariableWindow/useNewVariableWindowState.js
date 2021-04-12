@@ -6,8 +6,7 @@ const useNewVariableWindowState = (initialProps, onComplete) => {
   const [windowOpen, setWindowOpen] = useState(false);
   const handleOnComplete = useRef();
 
-  const closeWindow = () =>
-    setWindowOpen(false);
+  const closeWindow = () => setWindowOpen(false);
 
   useEffect(() => {
     handleOnComplete.current = (...args) => {
@@ -17,7 +16,7 @@ const useNewVariableWindowState = (initialProps, onComplete) => {
   }, [meta]);
 
   const openWindow = (newProps, newMeta) => {
-    setDynamicProps(prevProps => ({
+    setDynamicProps((prevProps) => ({
       ...prevProps,
       ...newProps,
     }));
@@ -26,7 +25,7 @@ const useNewVariableWindowState = (initialProps, onComplete) => {
   };
 
   const windowProps = {
-    onComplete: id => handleOnComplete.current(id),
+    onComplete: (id) => handleOnComplete.current(id),
     onCancel: closeWindow,
     show: windowOpen,
     ...initialProps,

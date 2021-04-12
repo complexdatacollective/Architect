@@ -20,7 +20,8 @@ const QuickAdd = ({
   options,
   type,
 }) => (
-  type &&
+  type
+  && (
   <Section disabled={disabled} group>
     <h3 id="issue-form">Quick Add Variable</h3>
     <p>
@@ -39,19 +40,21 @@ const QuickAdd = ({
         name="quickAdd"
         component={VariableSelect}
         options={options}
-        onCreateOption={value => handleCreateVariable(value, 'text', 'quickAdd')}
+        onCreateOption={(value) => handleCreateVariable(value, 'text', 'quickAdd')}
         validation={{ required: true }}
         type={type}
         entity={entity}
       />
     </div>
   </Section>
+  )
 );
 
 QuickAdd.propTypes = {
   disabled: PropTypes.bool,
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   type: PropTypes.string,
 };
@@ -71,4 +74,3 @@ export default compose(
   withOptions,
   withCreateVariableHandler,
 )(QuickAdd);
-

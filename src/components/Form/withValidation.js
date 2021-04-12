@@ -9,29 +9,42 @@ import { getValidations } from '@app/utils/validations';
  * if validate appears to change, and since we use function generators, identities will not match
  * if we fetch this directly in the render method.
  */
-const withValidation = WrappedComponent =>
+const withValidation = (WrappedComponent) => {
   class Validated extends Component {
-    static propTypes = {
-      validation: PropTypes.object.isRequired,
-    };
-
     constructor(props) {
       super(props);
-      this.state = { validate: getValidations(props.validation || []) };
+      const { validation } = this.props;
+      this.state = { validate: getValidations(validation || []) };
     }
 
     componentDidUpdate(prevProps) {
-      if (!isEqual(prevProps.validation, this.props.validation)) {
+      const { validation } = this.props;
+      if (!isEqual(prevProps.validation, validation)) {
         // eslint-disable-next-line
         this.setState({
-          validate: getValidations(this.props.validation || []),
+          validate: getValidations(validation || []),
         });
       }
     }
 
     render() {
-      return <WrappedComponent {...this.props} validate={this.state.validate} />;
+      const { validate } = this.state;
+      return (
+        <WrappedComponent
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...this.props}
+          validate={validate}
+        />
+      );
     }
+  }
+
+  Validated.propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
+    validation: PropTypes.object.isRequired,
   };
+
+  return Validated;
+};
 
 export default withValidation;

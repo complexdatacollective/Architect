@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import { Heading, withSort, rowClassName, SortDirection } from './Variables';
+import {
+  Heading,
+  withSort,
+  rowClassName,
+  SortDirection,
+} from './Variables';
 
-const Variables = ({ variables, sortBy, sortDirection, sort }) => {
+const Variables = ({
+  variables, sortBy, sortDirection, sort,
+}) => {
   const headingProps = {
     sortBy,
     sortDirection,
@@ -15,7 +22,13 @@ const Variables = ({ variables, sortBy, sortDirection, sort }) => {
       <table className="codebook__variables">
         <thead>
           <tr className="codebook__variables-row codebook__variables-row--heading">
-            <Heading name="name" {...headingProps}>Name</Heading>
+            <Heading
+              name="name"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...headingProps}
+            >
+              Name
+            </Heading>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +44,7 @@ const Variables = ({ variables, sortBy, sortDirection, sort }) => {
 };
 
 Variables.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.array,
   onDelete: PropTypes.func,
   sortBy: PropTypes.string.isRequired,

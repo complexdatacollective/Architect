@@ -76,6 +76,4 @@ const mapDispatchToProps = {
 
 const withStore = connect(mapStateToProps, mapDispatchToProps);
 
-export { Protocol };
-
 export default withStore(Protocol);

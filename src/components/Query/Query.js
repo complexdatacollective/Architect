@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rules from './Rules';
 
-const Query = ({ rules, join, codebook, onChange, openDialog, error, meta }) => (
+const Query = ({
+  rules, join, codebook, onChange, openDialog, error, meta,
+}) => (
   <Rules
     meta={meta}
     rules={rules}
@@ -18,10 +20,13 @@ const Query = ({ rules, join, codebook, onChange, openDialog, error, meta }) => 
 Query.propTypes = {
   onChange: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   rules: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   codebook: PropTypes.object.isRequired,
   join: PropTypes.string,
   error: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 

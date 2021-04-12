@@ -17,8 +17,9 @@ const valididateField = (value) => {
   }
 };
 
-const validateFields = (fields = [], options = {}) =>
-  fields.every(field => valididateField(options[field]));
+const validateFields = (fields = [], options = {}) => (
+  fields.every((field) => valididateField(options[field]))
+);
 
 const validateRule = (rule) => {
   const options = rule.options || {};

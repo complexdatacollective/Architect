@@ -9,6 +9,7 @@ import EditEgoRule from './EditEgoRule';
 
 class EditRule extends Component {
   get TypeComponent() {
+    // eslint-disable-next-line react/destructuring-assignment
     switch (this.props.rule.type) {
       case 'ego':
         return EditEgoRule;
@@ -23,24 +24,29 @@ class EditRule extends Component {
   }
 
   handleSave = () => {
-    this.props.onSave();
+    const { onSave } = this.props;
+    onSave();
   }
 
   render() {
+    const {
+      rule, codebook, onChange, onCancel, onSave,
+    } = this.props;
     return (
-      <Modal show={!!this.props.rule}>
+      <Modal show={!!rule}>
         <motion.div layout className="rules-edit-rule">
           <div className="rules-edit-rule__container">
-            { this.props.rule && this.props.rule.options &&
+            { rule && rule.options
+              && (
               <this.TypeComponent
-                rule={this.props.rule}
-                codebook={this.props.codebook}
-                onChange={this.props.onChange}
+                rule={rule}
+                codebook={codebook}
+                onChange={onChange}
               />
-            }
+              )}
             <div className="rules-edit-rule__controls">
-              <Button type="button" onClick={this.props.onCancel} color="platinum">Cancel</Button>
-              <Button type="button" onClick={this.props.onSave} color="primary">Finish and Close</Button>
+              <Button type="button" onClick={onCancel} color="platinum">Cancel</Button>
+              <Button type="button" onClick={onSave} color="primary">Finish and Close</Button>
             </div>
           </div>
         </motion.div>
@@ -52,8 +58,10 @@ class EditRule extends Component {
 EditRule.propTypes = {
   rule: PropTypes.shape({
     type: PropTypes.string,
+    // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object,
   }),
+  // eslint-disable-next-line react/forbid-prop-types
   codebook: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
@@ -66,7 +74,5 @@ EditRule.defaultProps = {
     options: null,
   },
 };
-
-export { EditRule };
 
 export default EditRule;

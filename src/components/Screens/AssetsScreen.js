@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@codaco/ui/lib/components/Button';
 import Screen from '@components/Screen/Screen';
 import AssetBrowser from '@components/AssetBrowser';
-import Layout, { Section } from '@components/EditorLayout';
+import { Layout, Section } from '@components/EditorLayout';
 import ExternalLink from '../ExternalLink';
 
 const AssetBrowserScreen = ({
@@ -37,7 +37,11 @@ const AssetBrowserScreen = ({
           <p>
             Welcome to the resource library. Here, you can import external data resources which
             can be used in building your protocol. These resources might include images,
-            video, audio, or even external network data. See our <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/resources/">documentation</ExternalLink> for more information.
+            video, audio, or even external network data. See our
+            {' '}
+            <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/resources/">documentation</ExternalLink>
+            {' '}
+            for more information.
           </p>
         </Section>
         <AssetBrowser />

@@ -8,7 +8,7 @@ const Window = ({
   children,
 }) => (
   <Fade in={show}>
-    <div className="editable-list-window" onClick={e => e.stopPropagation()}>
+    <div className="editable-list-window" onClick={(e) => e.stopPropagation()}>
       {show && children}
     </div>
   </Fade>
@@ -25,4 +25,3 @@ Window.defaultProps = {
 };
 
 export default window(Window);
-

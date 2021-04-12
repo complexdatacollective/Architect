@@ -88,7 +88,7 @@ variablePathCollector.add('stages[].presets[].highlight[]');
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  protocol => variablePathCollector.collect(protocol),
+  (protocol) => variablePathCollector.collect(protocol),
 );
 
 /**
@@ -122,10 +122,9 @@ const getAssetIndex = createSelector(
   },
 );
 
-const combineLists = lists =>
-  lists
-    .map(list => (!isArray(list) ? values(list) : list))
-    .reduce((acc, list) => [...acc, ...list], []);
+const combineLists = (lists) => lists
+  .map((list) => (!isArray(list) ? values(list) : list))
+  .reduce((acc, list) => [...acc, ...list], []);
 
 /**
  * Creates a Set of items from arrays or path objects
@@ -140,7 +139,7 @@ const buildSearch = (include = [], exclude = []) => {
   const combinedExclude = combineLists(exclude);
   const lookup = new Set(combinedInclude);
 
-  combinedExclude.forEach(value => lookup.delete(value));
+  combinedExclude.forEach((value) => lookup.delete(value));
 
   return lookup;
 };

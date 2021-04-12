@@ -25,14 +25,19 @@ const validate = (validations) => {
 
 const format = (value = {}) => toPairs(value);
 
-const getOptionsWithUsedDisabled = (options, used) =>
-  options.map((option) => {
-    if (!used.includes(option.value)) { return option; }
-    return { ...option, disabled: true };
-  });
+const getOptionsWithUsedDisabled = (options, used) => options.map((option) => {
+  if (!used.includes(option.value)) { return option; }
+  return { ...option, disabled: true };
+});
 
-const AddItem = props => (
-  <Button color="primary" icon="add" size="small" {...props}>
+const AddItem = (props) => (
+  <Button
+    color="primary"
+    icon="add"
+    size="small"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     Add new
   </Button>
 );
@@ -58,6 +63,7 @@ const ValidationsField = ({
             itemKey={key}
             itemValue={value}
             options={options}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
           />
         )) }
@@ -69,8 +75,11 @@ const ValidationsField = ({
 };
 
 ValidationsField.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   children: PropTypes.node,
 };
@@ -105,25 +114,27 @@ const Validations = ({
         onDelete={handleDelete}
         validate={validate}
       >
-        { addNew &&
+        { addNew
+          && (
           <Validation
             onUpdate={handleAddNew}
             onDelete={() => setAddNew(false)}
             options={availableOptions}
           />
-        }
+          )}
       </Field>
 
-      { !isFull &&
-        <AddItem onClick={() => setAddNew(true)} />
-      }
+      { !isFull
+        && <AddItem onClick={() => setAddNew(true)} />}
     </div>
   );
 };
 
 Validations.propTypes = {
   name: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   validationOptions: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   value: PropTypes.object,
   addNew: PropTypes.bool.isRequired,
   setAddNew: PropTypes.func.isRequired,

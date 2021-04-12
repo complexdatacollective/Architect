@@ -75,4 +75,3 @@ export default compose(
   withMapFormToProps(['dataSource']),
   withDisabledAssetRequired,
 )(SearchOptions);
-

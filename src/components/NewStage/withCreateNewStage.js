@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { actionCreators as uiActions } from '../../ducks/modules/ui';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   locus: state.protocol.timeline[state.protocol.timeline.length - 1],
 });
 
@@ -12,11 +12,12 @@ const mapDispatchToProps = {
 };
 
 const createNewHandlers = withHandlers({
-  handleCreateNew: ({ openScreen, closeScreen, insertAtIndex, locus }) =>
-    (type) => {
-      closeScreen('newStage');
-      openScreen('stage', { type, locus, insertAtIndex });
-    },
+  handleCreateNew: ({
+    openScreen, closeScreen, insertAtIndex, locus,
+  }) => (type) => {
+    closeScreen('newStage');
+    openScreen('stage', { type, locus, insertAtIndex });
+  },
 });
 
 const withCreateNewStage = compose(

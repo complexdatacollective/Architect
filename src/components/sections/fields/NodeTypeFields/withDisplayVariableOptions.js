@@ -27,12 +27,10 @@ const withDisplayVariableState = connect(
 );
 
 const withDisplayVariableHandlers = withHandlers({
-  handleChangeDisplayVariable: ({ entity, type, updateDisplayVariable }) =>
-    (variable) => {
-      updateDisplayVariable(entity, type, variable);
-    },
+  handleChangeDisplayVariable: ({ entity, type, updateDisplayVariable }) => (variable) => (
+    updateDisplayVariable(entity, type, variable)
+  ),
 });
-
 
 const withDisplayVariableOptions = compose(
   withDisplayVariableState,

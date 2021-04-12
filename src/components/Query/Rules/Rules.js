@@ -71,24 +71,32 @@ const Rules = ({
           size="small"
           color="sea-serpent"
           onClick={handleCreateAlterRule}
-        >Add alter rule</Button>
+        >
+          Add alter rule
+        </Button>
         <Button
           type="button"
           size="small"
           color="paradise-pink"
           onClick={handleCreateEdgeRule}
-        >Add edge rule</Button>
-        { type === 'query' &&
+        >
+          Add edge rule
+        </Button>
+        { type === 'query'
+          && (
           <Button
             type="button"
             size="small"
             color="neon-carrot"
             onClick={handleCreateEgoRule}
-          >Add ego rule</Button>
-        }
+          >
+            Add ego rule
+          </Button>
+          )}
       </div>
 
-      { rules.length > 1 &&
+      { rules.length > 1
+        && (
         <div className="rules-rules__join">
           <h2>Must match</h2>
           <DetachedField
@@ -101,7 +109,7 @@ const Rules = ({
             onChange={handleChangeJoin}
           />
         </div>
-      }
+        )}
 
     </div>
   );
@@ -109,11 +117,15 @@ const Rules = ({
 
 Rules.propTypes = {
   type: PropTypes.oneOf(['filter', 'query']),
+  // eslint-disable-next-line react/forbid-prop-types
   rules: PropTypes.array,
   join: PropTypes.string,
   error: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   codebook: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   draftRule: PropTypes.object,
   handleChangeJoin: PropTypes.func.isRequired,
   handleChangeDraft: PropTypes.func.isRequired,

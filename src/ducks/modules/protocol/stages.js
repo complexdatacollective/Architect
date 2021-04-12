@@ -2,6 +2,7 @@ import uuid from 'uuid/v1';
 import { get, compact } from 'lodash';
 import { arrayMove } from 'react-sortable-hoc';
 import prune from '@app/utils/prune';
+import { saveableChange } from '../session';
 
 const CREATE_STAGE = 'PROTOCOL/CREATE_STAGE';
 const UPDATE_STAGE = 'PROTOCOL/UPDATE_STAGE';
@@ -42,7 +43,7 @@ export default function reducer(state = initialState, action = {}) {
     case MOVE_STAGE:
       return arrayMove(state, action.oldIndex, action.newIndex);
     case DELETE_STAGE:
-      return state.filter(stage => (stage.id !== action.id));
+      return state.filter((stage) => (stage.id !== action.id));
     case DELETE_PROMPT:
       return compact(
         state.map((stage) => {
@@ -83,7 +84,7 @@ const updateStage = (stageId, stage, overwrite = false) => ({
   overwrite,
 });
 
-const deleteStage = stageId => ({
+const deleteStage = (stageId) => ({
   type: DELETE_STAGE,
   id: stageId,
 });
@@ -95,20 +96,24 @@ const deletePrompt = (stageId, promptId, deleteEmptyStage = false) => ({
   deleteEmptyStage,
 });
 
-const createStageThunk = (options, index) =>
-  (dispatch) => {
-    const stageId = uuid();
-    const stage = { ...initialStage, ...options, id: stageId };
-    dispatch(createStage(stage, index));
-    return stage;
-  };
+const createStageThunk = (options, index) => (dispatch) => {
+  const stageId = uuid();
+  const stage = { ...initialStage, ...options, id: stageId };
+  return dispatch(saveableChange(createStage)(stage, index))
+    .then(() => stage);
+};
+
+const moveStageThunk = saveableChange(moveStage);
+const updateStageThunk = saveableChange(updateStage);
+const deleteStageThunk = saveableChange(deleteStage);
+const deletePromptThunk = saveableChange(deletePrompt);
 
 const actionCreators = {
   createStage: createStageThunk,
-  updateStage,
-  deleteStage,
-  moveStage,
-  deletePrompt,
+  updateStage: updateStageThunk,
+  deleteStage: deleteStageThunk,
+  moveStage: moveStageThunk,
+  deletePrompt: deletePromptThunk,
 };
 
 const actionTypes = {
@@ -119,11 +124,16 @@ const actionTypes = {
   DELETE_PROMPT,
 };
 
-export const test = {
+const test = {
   createStage,
+  updateStage,
+  deleteStage,
+  moveStage,
+  deletePrompt,
 };
 
 export {
   actionCreators,
   actionTypes,
+  test,
 };

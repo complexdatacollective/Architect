@@ -12,10 +12,9 @@ const Validation = ({
   itemKey,
   itemValue,
 }) => {
-  const handleKeyChange = option => onUpdate(option, itemValue, itemKey);
+  const handleKeyChange = (option) => onUpdate(option, itemValue, itemKey);
 
-  const handleValueChange = newValue =>
-    onUpdate(itemKey, newValue, itemKey);
+  const handleValueChange = (newValue) => onUpdate(itemKey, newValue, itemKey);
 
   const keyInputProps = {
     value: itemKey,
@@ -38,11 +37,12 @@ const Validation = ({
             placeholder="Select validation rule"
           />
         </div>
-        { isValidationWithValue(itemKey) &&
+        { isValidationWithValue(itemKey)
+          && (
           <div className="form-fields-multi-select__rule-option">
             <Number input={valueInputProps} validation={{ required: true }} />
           </div>
-        }
+          )}
       </div>
       <div className="form-fields-multi-select__rule-control">
         <div className="form-fields-multi-select__delete" onClick={() => onDelete(itemKey)}>
@@ -56,6 +56,7 @@ const Validation = ({
 Validation.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   itemKey: PropTypes.string,
   itemValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),

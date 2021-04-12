@@ -28,6 +28,7 @@ const ProtocolStack = ({ openNetcanvas, protocol: { filePath } }) => (
 );
 
 ProtocolStack.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   protocol: PropTypes.object.isRequired,
   openNetcanvas: PropTypes.func.isRequired,
 };
@@ -35,7 +36,5 @@ ProtocolStack.propTypes = {
 const mapDispatchToProps = {
   openNetcanvas: userActions.openNetcanvas,
 };
-
-export { ProtocolStack };
 
 export default connect(null, mapDispatchToProps)(ProtocolStack);

@@ -39,6 +39,4 @@ ItemPreview.defaultProps = {
   assetType: null,
 };
 
-export { ItemPreview };
-
 export default connect(mapStateToProps)(ItemPreview);

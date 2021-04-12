@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, defaultProps } from 'recompose';
-import { SortableElement, SortableHandle, SortableContainer, arrayMove } from 'react-sortable-hoc';
+import {
+  SortableElement, SortableHandle, SortableContainer, arrayMove,
+} from 'react-sortable-hoc';
 import { map, isArray, toPairs } from 'lodash';
 import { Button, Icon } from '@codaco/ui';
 import NativeSelect from './NativeSelect';
@@ -24,8 +26,12 @@ const RuleHandle = compose(
   ),
 );
 
-const RuleDelete = props => (
-  <div className="form-fields-order-by__delete" {...props}>
+const RuleDelete = (props) => (
+  <div
+    className="form-fields-order-by__delete"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     <Icon name="delete" />
   </div>
 );
@@ -49,8 +55,7 @@ const Rule = compose(
         <div className="form-fields-order-by__rule-option">
           <NativeSelect
             input={{
-              onChange: value =>
-                handleChange(index, { property: value }),
+              onChange: (value) => handleChange(index, { property: value }),
               value: property,
             }}
             placeholder="Select a property"
@@ -66,8 +71,7 @@ const Rule = compose(
         <div className="form-fields-order-by__rule-option">
           <NativeSelect
             input={{
-              onChange: value =>
-                handleChange(index, { direction: value }),
+              onChange: (value) => handleChange(index, { direction: value }),
               value: direction,
             }}
             placeholder="Select a direction"
@@ -91,7 +95,9 @@ const Rules = compose(
   }),
   SortableContainer,
 )(
-  ({ variables, rules, handleChange, handleDelete }) => (
+  ({
+    variables, rules, handleChange, handleDelete,
+  }) => (
     <div className="form-fields-order-by">
       <div className="form-fields-order-by__rules">
         {
@@ -102,7 +108,7 @@ const Rules = compose(
               handleChange={handleChange}
               handleDelete={handleDelete}
               index={index}
-              key={index}
+              key={index} // eslint-disable-line react/no-array-index-key
               rule={rule}
               sortIndex={index}
             />
@@ -114,38 +120,21 @@ const Rules = compose(
 );
 
 class OrderBy extends Component {
-  static propTypes = {
-    variables: PropTypes.object,
-    input: PropTypes.shape({
-      value: PropTypes.oneOfType([
-        PropTypes.array,
-        PropTypes.string,
-      ]),
-      onChange: PropTypes.func,
-    }),
-    label: PropTypes.string,
-  };
-
-  static defaultProps = {
-    variables: {},
-    input: {
-      value: [],
-      onChange: () => {},
-    },
-    label: '',
-  };
-
   onSortEnd = ({ oldIndex, newIndex }) => {
+    const { input } = this.props;
+
     const updatedRules = arrayMove(this.value, oldIndex, newIndex);
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   }
 
   get value() {
-    return isArray(this.props.input.value) ? this.props.input.value : [];
+    const { input } = this.props;
+    return isArray(input.value) ? input.value : [];
   }
 
   get sortableVariableNames() {
-    return toPairs(this.props.variables).filter(
+    const { variables } = this.props;
+    return toPairs(variables).filter(
       ([, { type }]) => !NON_SORTABLE_TYPES.includes(type),
     ).map(
       ([id, { name }]) => ({ label: name, value: id }),
@@ -161,38 +150,41 @@ class OrderBy extends Component {
   }
 
   handleChange = (index, updatedRule) => {
+    const { input } = this.props;
     const updatedRules = this.value.map(
       (rule, i) => {
         if (i !== index) { return rule; }
         return { ...rule, ...updatedRule };
       },
     );
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   }
 
   handleAddNewRule = () => {
+    const { input } = this.props;
     const updatedRules = [
       ...this.value,
       { property: '', direction: '' },
     ];
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   };
 
   handleDelete = (index) => {
+    const { input } = this.props;
     const updatedRules = this.value.filter(
       (rule, i) => i !== index,
     );
-    this.props.input.onChange(updatedRules);
+    input.onChange(updatedRules);
   };
 
   render() {
+    const { label } = this.props;
     if (this.variables.length === 0) { return null; }
 
     return (
       <div className="form-fields-order-by">
-        { this.props.label &&
-          <div className="form-fields-order-by__label">{this.props.label}</div>
-        }
+        { label
+          && <div className="form-fields-order-by__label">{label}</div>}
         <Rules
           rules={this.value}
           variables={this.variables}
@@ -200,7 +192,8 @@ class OrderBy extends Component {
           handleDelete={this.handleDelete}
           onSortEnd={this.onSortEnd}
         />
-        { !this.areRulesFull &&
+        { !this.areRulesFull
+          && (
           <Button
             onClick={this.handleAddNewRule}
             content="Add Rule"
@@ -208,10 +201,32 @@ class OrderBy extends Component {
             icon="add"
             size="small"
           />
-        }
+          )}
       </div>
     );
   }
 }
+
+OrderBy.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  variables: PropTypes.object,
+  input: PropTypes.shape({
+    value: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+    ]),
+    onChange: PropTypes.func,
+  }),
+  label: PropTypes.string,
+};
+
+OrderBy.defaultProps = {
+  variables: {},
+  input: {
+    value: [],
+    onChange: () => {},
+  },
+  label: '',
+};
 
 export default OrderBy;

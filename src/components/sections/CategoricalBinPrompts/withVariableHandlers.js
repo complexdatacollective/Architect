@@ -16,8 +16,7 @@ const mapDispatchToProps = {
 
 const deleteVariableState = connect(mapStateToProps, mapDispatchToProps);
 
-const matchingPaths = (obj, paths, value) =>
-  paths.filter(path => get(obj, path) === value);
+const matchingPaths = (obj, paths, value) => paths.filter((path) => get(obj, path) === value);
 
 const variableHandlers = withHandlers({
   onCreateOtherVariable: ({
@@ -26,17 +25,16 @@ const variableHandlers = withHandlers({
     type,
     form,
     changeForm,
-  }) =>
-    (name, field) => {
-      const { variable } = createVariable(entity, type, { type: 'text', name });
+  }) => async (name, field) => {
+    const { variable } = await createVariable(entity, type, { type: 'text', name });
 
-      // If we supplied a field, update it with the result of the variable creation
-      if (field) {
-        changeForm(form, field, variable);
-      }
+    // If we supplied a field, update it with the result of the variable creation
+    if (field) {
+      changeForm(form, field, variable);
+    }
 
-      return variable;
-    },
+    return variable;
+  },
   onDeleteVariable: ({
     entity,
     type,
@@ -44,20 +42,19 @@ const variableHandlers = withHandlers({
     form,
     formValues,
     changeForm,
-  }) =>
-    (variable, formPaths = []) => {
-      // TODO: share this functionality with enhancers?
-      const variableDeleted = deleteVariable(entity, type, variable);
+  }) => async (variable, formPaths = []) => {
+    // TODO: share this functionality with enhancers?
+    const variableDeleted = await deleteVariable(entity, type, variable);
 
-      if (!variableDeleted) { return; }
+    if (!variableDeleted) { return; }
 
-      const formPathsArray = Array.isArray(formPaths) ?
-        formPaths :
-        [formPaths];
+    const formPathsArray = Array.isArray(formPaths)
+      ? formPaths
+      : [formPaths];
 
-      matchingPaths(formValues, formPathsArray, variable)
-        .forEach(path => changeForm(form, path, null));
-    },
+    matchingPaths(formValues, formPathsArray, variable)
+      .forEach((path) => changeForm(form, path, null));
+  },
 });
 
 const withVariableHandlers = compose(

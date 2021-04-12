@@ -38,8 +38,7 @@ const VALIDATION_TYPES = {
   ],
 };
 
-const getValidationTypesForVariable = variableType =>
-  get(VALIDATION_TYPES, variableType, []);
+const getValidationTypesForVariable = (variableType) => get(VALIDATION_TYPES, variableType, []);
 
 const renderValidationOptions = ({ field, validationType }) => {
   switch (validationType) {
@@ -54,7 +53,7 @@ const renderValidationOptions = ({ field, validationType }) => {
           name={`${field}.value`}
           component={Fields.Text}
           type="number"
-          parse={value => parseInt(value, 10)}
+          parse={(value) => parseInt(value, 10)}
         />
       );
     default:
@@ -67,14 +66,24 @@ renderValidationOptions.propTypes = {
   validationType: PropTypes.string.isRequired,
 };
 
-const ItemDelete = props => (
-  <div className="form-fields-multi-select__delete" {...props}>
+const ItemDelete = (props) => (
+  <div
+    className="form-fields-multi-select__delete"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     <Icon name="delete" />
   </div>
 );
 
-const AddItem = props => (
-  <Button color="primary" icon="add" size="small" {...props}>
+const AddItem = (props) => (
+  <Button
+    color="primary"
+    icon="add"
+    size="small"
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...props}
+  >
     Add new
   </Button>
 );
@@ -84,7 +93,7 @@ const mapStateToItemProps = (state, { fields, index }) => ({
   allValues: fields.getAll(),
 });
 
-const mapDispatchToItemProps = dispatch => ({
+const mapDispatchToItemProps = (dispatch) => ({
   openDialog: bindActionCreators(dialogsActions.openDialog, dispatch),
 });
 
@@ -102,7 +111,9 @@ const Item = compose(
     },
   })),
 )(
-  ({ field, variableType, rowValues, allValues, handleDelete }) => (
+  ({
+    field, variableType, rowValues, allValues, handleDelete,
+  }) => (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-options">
         <div className="form-fields-multi-select__rule-option">
@@ -112,7 +123,7 @@ const Item = compose(
             validation={{ required: true }}
             placeholder="Select a type"
             options={getValidationTypesForVariable(variableType).map(
-              validation => (
+              (validation) => (
                 {
                   value: validation,
                   label: validation,
@@ -145,8 +156,9 @@ const Items = ({ fields, variableType, ...rest }) => (
         {
           fields.map((field, index) => (
             <Item
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...rest}
-              key={index}
+              key={field}
               index={index}
               field={field}
               fields={fields}
@@ -157,13 +169,13 @@ const Items = ({ fields, variableType, ...rest }) => (
       </div>
     </div>
 
-    { (fields.length < getValidationTypesForVariable(variableType).length) &&
-      <AddItem onClick={() => fields.push({})} />
-    }
+    { (fields.length < getValidationTypesForVariable(variableType).length)
+      && <AddItem onClick={() => fields.push({})} />}
   </div>
 );
 
 Items.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.array.isRequired,
   variableType: PropTypes.string.isRequired,
 };
@@ -178,13 +190,13 @@ const Validations = ({
 
   return (
     <div className="form-fields-multi-select type-editor__subsection">
-      { label &&
-        <h4>{label}</h4>
-      }
+      { label
+        && <h4>{label}</h4>}
       <FieldArray
         name={name}
         component={Items}
         variableType={variableType}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       />
     </div>

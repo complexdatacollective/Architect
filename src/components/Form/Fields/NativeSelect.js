@@ -16,7 +16,7 @@ const NativeSelect = ({
   placeholder,
   className,
   // To create a new option, one or the other of the following:
-  onCreateOption, // Creating options inline, recieves value for option
+  onCreateOption, // Creating options inline, receives value for option (promise)
   onCreateNew, // Call a function immediately (typically opening a window with a form)
   createLabelText,
   createInputLabel,
@@ -26,7 +26,9 @@ const NativeSelect = ({
   validation,
   disabled,
   input: { onBlur, ...input },
-  meta: { invalid, error, touched, form },
+  meta: {
+    invalid, error, touched, form,
+  },
   ...rest
 }) => {
   const [showCreateOptionForm, setShowCreateOptionForm] = useState(false);
@@ -59,8 +61,19 @@ const NativeSelect = ({
   };
 
   const handleCreateOption = () => {
-    onCreateOption(newOptionValue);
+    const result = onCreateOption(newOptionValue);
+
+    if (result && result.then) {
+      return result
+        .then((value) => {
+          setShowCreateOptionForm(false);
+
+          return value;
+        });
+    }
+
     setShowCreateOptionForm(false);
+    return result;
   };
 
   const isValidCreateOption = () => {
@@ -72,9 +85,8 @@ const NativeSelect = ({
     }
 
     // True if option matches the label prop of the supplied object
-    const matchLabel = ({ label: variableLabel }) =>
-      variableLabel && newOptionValue &&
-      variableLabel.toLowerCase() === newOptionValue.toLowerCase();
+    const matchLabel = ({ label: variableLabel }) => variableLabel && newOptionValue
+      && variableLabel.toLowerCase() === newOptionValue.toLowerCase();
 
     const alreadyExists = options.some(matchLabel);
     const isReserved = reserved.some(matchLabel);
@@ -113,8 +125,8 @@ const NativeSelect = ({
    */
   const calculateMeta = useMemo(() => ({
     touched: touched || (newOptionValue !== null && !isValidCreateOption(newOptionValue)),
-    invalid: !isValidCreateOption(newOptionValue) ||
-      valueButNotSubmitted || (newOptionValue === null && invalid),
+    invalid: !isValidCreateOption(newOptionValue)
+      || valueButNotSubmitted || (newOptionValue === null && invalid),
     localInvalid: !isValidCreateOption(newOptionValue),
     error: newOptionError || notSubmittedError || error,
   }), [
@@ -168,28 +180,36 @@ const NativeSelect = ({
               <Button
                 onClick={handleCreateOption}
                 disabled={calculateMeta.localInvalid}
-              >Create</Button>
+              >
+                Create
+              </Button>
             </div>
           </motion.div>
         ) : (
           <motion.div key="select-section" className={componentClasses} initial="hide" variants={variants} exit="hide" animate="show">
-            { label &&
-              <h4>{label}</h4>
-            }
+            { label
+              && <h4>{label}</h4>}
             <select
               className="form-fields-select-native__component"
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...input}
               value={input.value || '_placeholder'}
               onChange={handleChange}
               validation={validation}
               disabled={!!disabled}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...rest}
             >
-              <option disabled={!allowPlaceholderSelect} value="_placeholder">-- {placeholder} --</option>
+              <option disabled={!allowPlaceholderSelect} value="_placeholder">
+                --
+                {placeholder}
+                {' '}
+                --
+              </option>
               { (onCreateOption || onCreateNew) && <option value="_create">{createLabelText}</option>}
-              { sortedOptions.map((option, index) => (
+              { sortedOptions.map((option) => (
                 <option
-                  key={index}
+                  key={`${option.label}_${option.value}`}
                   value={option.value}
                   disabled={!!option.disabled}
                 >
@@ -197,7 +217,12 @@ const NativeSelect = ({
                 </option>
               ))}
             </select>
-            {invalid && touched && <div className="form-fields-select-native__error"><Icon name="warning" />{error}</div>}
+            {invalid && touched && (
+            <div className="form-fields-select-native__error">
+              <Icon name="warning" />
+              {error}
+            </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -212,14 +237,19 @@ NativeSelect.propTypes = {
   createInputLabel: PropTypes.string,
   createInputPlaceholder: PropTypes.string,
   allowPlaceholderSelect: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object,
   label: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
   disabled: PropTypes.bool,
   onCreateOption: PropTypes.func,
   onCreateNew: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   reserved: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   validation: PropTypes.any,
 };
 

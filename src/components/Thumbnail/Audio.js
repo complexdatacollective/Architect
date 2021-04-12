@@ -15,6 +15,7 @@ const AudioThumbnail = ({ id, meta }) => (
 
 AudioThumbnail.propTypes = {
   id: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 
@@ -22,10 +23,6 @@ AudioThumbnail.defaultProps = {
   meta: {
     name: '',
   },
-};
-
-export {
-  AudioThumbnail,
 };
 
 export default withAssetMeta(AudioThumbnail);

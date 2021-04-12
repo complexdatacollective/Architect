@@ -16,7 +16,14 @@ const ASSET_COMPONENTS = {
 };
 
 class Asset extends Component {
-  handleClick = () => this.props.onClick(this.props.id);
+  handleClick = () => {
+    const {
+      onClick,
+      id,
+    } = this.props;
+
+    return onClick(id);
+  };
 
   handleDelete = (e) => {
     const { isUsed, onDelete, id } = this.props;
@@ -48,7 +55,8 @@ class Asset extends Component {
           <PreviewComponent id={id} />
         </div>
 
-        { onDelete &&
+        { onDelete
+          && (
           <div
             className="asset-browser-asset__delete"
             onClick={this.handleDelete}
@@ -56,7 +64,7 @@ class Asset extends Component {
           >
             <Icon name="delete" />
           </div>
-        }
+          )}
       </div>
     );
   }

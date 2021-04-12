@@ -22,17 +22,25 @@ const GridItem = ({
       <Flipped flipId={flipId}>
         <div className="grid-item">
           <div className="grid-item__content">
-            <PreviewComponent id={id} {...rest} />
+            <PreviewComponent
+              id={id}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...rest}
+            />
           </div>
           <div className="grid-item__controls">
             <div
               className="grid-item__edit"
               onClick={() => onEditItem(fieldId)}
-            ><Icon name="edit" /></div>
+            >
+              <Icon name="edit" />
+            </div>
             <div
               className="grid-item__delete"
               onClick={() => fields.remove(index)}
-            ><Icon name="delete" /></div>
+            >
+              <Icon name="delete" />
+            </div>
           </div>
 
         </div>
@@ -42,9 +50,11 @@ const GridItem = ({
 };
 
 GridItem.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
   editField: PropTypes.string,
   onEditItem: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   previewComponent: PropTypes.any.isRequired,
   index: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
@@ -53,7 +63,5 @@ GridItem.propTypes = {
 GridItem.defaultProps = {
   editField: null,
 };
-
-export { GridItem };
 
 export default GridItem;

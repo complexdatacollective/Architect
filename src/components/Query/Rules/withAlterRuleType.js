@@ -25,33 +25,32 @@ const withAlterRuleType = compose(
 
       if (!type) { return null; }
 
-      const alterRuleType = attribute ?
-        VARIABLE_ALTER :
-        TYPE_ALTER;
+      const alterRuleType = attribute
+        ? VARIABLE_ALTER
+        : TYPE_ALTER;
 
       return alterRuleType;
     },
   ),
   withHandlers({
     handleChangeAlterRuleType:
-      ({ setAlterRuleType, onChange, rule }) =>
-        (alterRuleType) => {
-          setAlterRuleType(alterRuleType);
+      ({ setAlterRuleType, onChange, rule }) => (alterRuleType) => {
+        setAlterRuleType(alterRuleType);
 
-          const ruleTemplate = alterRuleType === TYPE_ALTER ?
-            templates.alterTypeRule :
-            templates.alterVariableRule;
+        const ruleTemplate = alterRuleType === TYPE_ALTER
+          ? templates.alterTypeRule
+          : templates.alterVariableRule;
 
-          // 'reset' rule options, but keep type
-          const options = makeGetOptionsWithDefaults(ruleTemplate)({
-            type: rule.options.type,
-          });
+        // 'reset' rule options, but keep type
+        const options = makeGetOptionsWithDefaults(ruleTemplate)({
+          type: rule.options.type,
+        });
 
-          onChange({
-            ...rule,
-            options,
-          });
-        },
+        onChange({
+          ...rule,
+          options,
+        });
+      },
   }),
 );
 

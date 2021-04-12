@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ScreenLink from '@components/Screens/Link';
+import ScreenLink from '@components/Screens/ScreenLink';
 import Tag from './Tag';
 
 const UsageColumn = ({
@@ -22,10 +22,9 @@ const UsageColumn = ({
 };
 
 UsageColumn.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool.isRequired,
 };
-
-export { UsageColumn };
 
 export default UsageColumn;

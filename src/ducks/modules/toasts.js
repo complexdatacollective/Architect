@@ -6,32 +6,29 @@ const REMOVE_TOAST = Symbol('PROTOCOL/REMOVE_TOAST');
 
 const initialState = [];
 
-const addToast = toast =>
-  (dispatch) => {
-    const id = toast.id || uuid();
-    dispatch({
-      type: ADD_TOAST,
-      toast: {
-        ...toast,
-        id,
-      },
-    });
-
-    return id;
-  };
-
-const updateToast = (id, toast) =>
-  ({
-    type: UPDATE_TOAST,
-    id,
-    toast,
+const addToast = (toast) => (dispatch) => {
+  const id = toast.id || uuid();
+  dispatch({
+    type: ADD_TOAST,
+    toast: {
+      ...toast,
+      id,
+    },
   });
 
-const removeToast = id =>
-  ({
-    type: REMOVE_TOAST,
-    id,
-  });
+  return id;
+};
+
+const updateToast = (id, toast) => ({
+  type: UPDATE_TOAST,
+  id,
+  toast,
+});
+
+const removeToast = (id) => ({
+  type: REMOVE_TOAST,
+  id,
+});
 
 function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -53,7 +50,7 @@ function reducer(state = initialState, action = {}) {
     }
     case REMOVE_TOAST:
       return [
-        ...state.filter(toast => toast.id !== action.id),
+        ...state.filter((toast) => toast.id !== action.id),
       ];
     default:
       return state;

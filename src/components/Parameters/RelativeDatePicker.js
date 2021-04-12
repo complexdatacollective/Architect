@@ -13,8 +13,9 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
   const dateFormat = DATE_FORMATS.full;
   const [useInterviewDate, setUseInterviewDate] = useState(!anchorValue);
   return (
-    <React.Fragment>
-      <p>This input type has three options for you to set.</p><br />
+    <>
+      <p>This input type has three options for you to set.</p>
+      <br />
       <h4>Anchor Date</h4>
       <p>
         The anchor date defines the point that the participant can select a date relative to.
@@ -37,7 +38,8 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         label="Use interview date"
         fieldLabel=" "
       />
-      { !useInterviewDate &&
+      { !useInterviewDate
+      && (
       <ValidatedField
         label="Specific Anchor Date"
         component={DatePicker}
@@ -49,7 +51,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
           max: '3000-01-01',
         }}
       />
-      }
+      )}
       <h4>Days Before</h4>
       <p>
         Days before is the number of days prior to the anchor
@@ -74,7 +76,7 @@ const RelativeDatePickerParameters = ({ name, anchorValue, resetField }) => {
         name={`${name}.after`}
         placeholder="0"
       />
-    </React.Fragment>
+    </>
   );
 };
 

@@ -11,11 +11,16 @@ import OrderedList from '../../OrderedList';
 import { getFieldId } from '../../../utils/issues';
 import NodePanel from './NodePanel';
 
-const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
+const NodePanels = ({
+  form, createNewPanel, panels, ...rest
+}) => {
   const isFull = panels && panels.length === 2;
 
   return (
-    <Section {...rest}>
+    <Section
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+    >
       <div className="stage-editor-section-content-items">
         <h2 id={getFieldId('panels')}>Side Panels</h2>
         <p>Use this section to configure up to two side panels on this name generator.</p>
@@ -26,11 +31,12 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
           form={form}
         />
 
-        { !isFull &&
+        { !isFull
+          && (
           <div className="stage-editor-section-content-items__controls">
             <Button onClick={() => createNewPanel()} size="small" icon="add">Add new panel</Button>
           </div>
-        }
+          )}
       </div>
     </Section>
   );
@@ -39,6 +45,7 @@ const NodePanels = ({ form, createNewPanel, panels, ...rest }) => {
 NodePanels.propTypes = {
   createNewPanel: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   panels: PropTypes.array,
   form: PropTypes.string.isRequired,
 };
@@ -61,7 +68,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, { form }) => ({
   createNewPanel: bindActionCreators(
-    () => arrayPush(form, 'panels', { id: uuid(), title: null, dataSource: 'existing', filter: null }),
+    () => arrayPush(form, 'panels', {
+      id: uuid(), title: null, dataSource: 'existing', filter: null,
+    }),
     dispatch,
   ),
 });

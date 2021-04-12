@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withState } from 'recompose';
 import cx from 'classnames';
@@ -9,82 +9,85 @@ import File from './File';
 
 const withSelectNetworkAsset = withState('selectNetworkAsset', 'setSelectNetworkAsset', false);
 
-class DataSource extends Component {
-  handleClickUseExisting = () => {
-    if (this.props.input.value === 'existing') { return; }
-    this.props.input.onChange('existing');
-  }
+const DataSource = (props) => {
+  const {
+    input,
+    setSelectNetworkAsset,
+    canUseExisting,
+    selectNetworkAsset,
+  } = props;
 
-  handleClickUseNetworkAsset = () => {
+  const handleClickUseExisting = () => {
+    if (input.value === 'existing') { return; }
+    input.onChange('existing');
+  };
+
+  const handleClickUseNetworkAsset = () => {
     // if (this.props.input.value === 'existing') { return; }
     // this.props.input.onChange('existing');
-    this.props.setSelectNetworkAsset(true);
-  }
+    setSelectNetworkAsset(true);
+  };
 
-  handleCloseBrowser = () => {
-    this.props.setSelectNetworkAsset(false);
-  }
+  const handleCloseBrowser = () => {
+    setSelectNetworkAsset(false);
+  };
 
-  render() {
-    const {
-      canUseExisting,
-      selectNetworkAsset,
-      input,
-    } = this.props;
+  const isInterviewNetwork = input.value === 'existing';
+  const showNetworkAssetInput = selectNetworkAsset || !isInterviewNetwork;
 
-    const isInterviewNetwork = input.value === 'existing';
-    const showNetworkAssetInput = selectNetworkAsset || !isInterviewNetwork;
+  const existingInput = {
+    value: input.value && isInterviewNetwork,
+    onChange: handleClickUseExisting,
+  };
 
-    const existingInput = {
-      value: input.value && isInterviewNetwork,
-      onChange: this.handleClickUseExisting,
-    };
+  const networkAssetInput = {
+    value: input.value && !isInterviewNetwork,
+    onChange: () => {},
+    onClick: handleClickUseNetworkAsset,
+  };
 
-    const networkAssetInput = {
-      value: input.value && !isInterviewNetwork,
-      onChange: () => {},
-      onClick: this.handleClickUseNetworkAsset,
-    };
-
-    return (
-      canUseExisting ? (
-        <div className="form-field-data-source">
-          <div className="form-fields-data-source__option">
-            <Radio input={existingInput} label="Use the network from the in-progress interview" />
-          </div>
-          <div className="form-fields-data-source__option">
-            <Radio input={networkAssetInput} label="Use a network data file" />
-            <div
-              className={cx(
-                'form-fields-data-source__option-file',
-                { 'form-fields-data-source__option-file--hide': !networkAssetInput.value },
+  return (
+    canUseExisting ? (
+      <div className="form-field-data-source">
+        <div className="form-fields-data-source__option">
+          <Radio input={existingInput} label="Use the network from the in-progress interview" />
+        </div>
+        <div className="form-fields-data-source__option">
+          <Radio input={networkAssetInput} label="Use a network data file" />
+          <div
+            className={cx(
+              'form-fields-data-source__option-file',
+              { 'form-fields-data-source__option-file--hide': !networkAssetInput.value },
+            )}
+          >
+            { showNetworkAssetInput
+              && (
+              <File
+                type="network"
+                showBrowser={selectNetworkAsset}
+                onCloseBrowser={handleCloseBrowser}
+                selected={input.value}
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                {...props}
+              >
+                { (id) => <NetworkThumbnail id={id} /> }
+              </File>
               )}
-            >
-              { showNetworkAssetInput &&
-                <File
-                  type="network"
-                  showBrowser={selectNetworkAsset}
-                  onCloseBrowser={this.handleCloseBrowser}
-                  selected={input.value}
-                  {...this.props}
-                >
-                  { id => <NetworkThumbnail id={id} /> }
-                </File>
-              }
-            </div>
           </div>
         </div>
-      ) : (
-        <File
-          type="network"
-          selected={input.value}
-          {...this.props}
-        >
-          { id => <NetworkThumbnail id={id} /> }
-        </File>)
-    );
-  }
-}
+      </div>
+    ) : (
+      <File
+        type="network"
+        selected={input.value}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      >
+        { (id) => <NetworkThumbnail id={id} /> }
+      </File>
+    )
+  );
+};
 
 DataSource.propTypes = {
   ...fieldPropTypes,
@@ -94,7 +97,5 @@ DataSource.propTypes = {
 DataSource.defaultProps = {
   canUseExisting: false,
 };
-
-export { DataSource };
 
 export default withSelectNetworkAsset(DataSource);

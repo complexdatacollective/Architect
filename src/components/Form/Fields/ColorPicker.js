@@ -1,92 +1,89 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { range } from 'lodash';
 import { fieldPropTypes } from 'redux-form';
 import Icon from '@codaco/ui/lib/components/Icon';
 
-const asColorOption = name => ({
+const asColorOption = (name) => ({
   label: name,
   value: name,
 });
 
-class ColorPicker extends PureComponent {
-  static propTypes = {
-    ...fieldPropTypes,
-    options: PropTypes.array,
-    paletteRange: PropTypes.number,
+const ColorPicker = ({
+  palette,
+  paletteRange,
+  options,
+  input,
+  label,
+  meta: { error, invalid, touched },
+}) => {
+  const colors = palette
+    ? range(1, paletteRange)
+      .map((index) => asColorOption(`${palette}-${index}`))
+    : options;
+
+  const handleClick = (value) => {
+    input.onChange(value);
   };
 
-  static defaultProps = {
-    options: [],
-    paletteRange: 0,
-  };
-
-  get colors() {
-    if (this.props.palette) {
-      const paletteRange = this.props.paletteRange;
-
-      return range(1, paletteRange)
-        .map(index => asColorOption(`${this.props.palette}-${index}`));
-    }
-
-    return this.props.options;
-  }
-
-  handleClick = (value) => {
-    this.props.input.onChange(value);
-  };
-
-  renderColor = ({ label, value }) => {
+  const renderColor = (color) => {
     const colorClasses = cx(
       'form-fields-color-picker__color',
-      { 'form-fields-color-picker__color--selected': this.props.input.value === value },
+      { 'form-fields-color-picker__color--selected': input.value === color.value },
     );
 
     return (
       <div
         className={colorClasses}
-        onClick={() => this.handleClick(value)}
-        style={{ '--color': `var(--${value})` }}
-        key={value}
+        onClick={() => handleClick(color.value)}
+        style={{ '--color': `var(--${color.value})` }}
+        key={color.value}
       >
-        <div className="form-fields-color-picker__color-label">{label}</div>
+        <div className="form-fields-color-picker__color-label">{color.label}</div>
       </div>
     );
-  }
+  };
 
-  render() {
-    const {
-      label,
-      meta: { error, invalid, touched },
-    } = this.props;
+  const showError = invalid && touched && error;
 
-    const colors = this.colors.map(this.renderColor);
-    const showError = invalid && touched && error;
+  const pickerStyles = cx(
+    'form-fields-color-picker',
+    { 'form-fields-color-picker--has-error': showError },
+  );
 
-    const pickerStyles = cx(
-      'form-fields-color-picker',
-      { 'form-fields-color-picker--has-error': showError },
-    );
-
-    return (
-      <div className="form-field-container">
-        <div className={pickerStyles}>
-          { label &&
-            <div className="form-fields-color-picker__label">{label}</div>
-          }
-          <div className="form-fields-color-picker__edit">
-            <div className="form-fields-color-picker__colors">
-              {colors}
-            </div>
+  return (
+    <div className="form-field-container">
+      <div className={pickerStyles}>
+        { label
+          && <div className="form-fields-color-picker__label">{label}</div>}
+        <div className="form-fields-color-picker__edit">
+          <div className="form-fields-color-picker__colors">
+            {colors.map(renderColor)}
           </div>
-          {showError &&
-            <div className="form-fields-color-picker__error"><Icon name="warning" />{error}</div>
-          }
         </div>
+        {showError
+          && (
+          <div className="form-fields-color-picker__error">
+            <Icon name="warning" />
+            {error}
+          </div>
+          )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+ColorPicker.propTypes = {
+  ...fieldPropTypes,
+  // eslint-disable-next-line react/forbid-prop-types
+  options: PropTypes.array,
+  paletteRange: PropTypes.number,
+};
+
+ColorPicker.defaultProps = {
+  options: [],
+  paletteRange: 0,
+};
 
 export default ColorPicker;

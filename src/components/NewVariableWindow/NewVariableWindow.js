@@ -18,19 +18,20 @@ const isRequired = required();
 const isAllowedVariableName = allowedVariableName();
 
 class NewVariableWindow extends Component {
+  validateName = (value) => {
+    const { existingVariableNames } = this.props;
+    return uniqueByList(existingVariableNames)(value);
+  };
+
   filteredVariableOptions() {
     const { allowVariableTypes } = this.props;
 
-    return allowVariableTypes ?
-      VARIABLE_OPTIONS.filter(
-        ({ value: optionVariableType }) =>
-          allowVariableTypes.includes(optionVariableType),
-      ) :
-      VARIABLE_OPTIONS;
+    return allowVariableTypes
+      ? VARIABLE_OPTIONS.filter(
+        ({ value: optionVariableType }) => allowVariableTypes.includes(optionVariableType),
+      )
+      : VARIABLE_OPTIONS;
   }
-
-  validateName = value =>
-    uniqueByList(this.props.existingVariableNames)(value);
 
   render() {
     const {
@@ -75,7 +76,8 @@ class NewVariableWindow extends Component {
             validation={{ required: true }}
           />
         </Section>
-        { isVariableTypeWithOptions(variableType) &&
+        { isVariableTypeWithOptions(variableType)
+          && (
           <Section>
             <h3 id={getFieldId('options')}>Options</h3>
             <p>Create some options for this input control</p>
@@ -85,7 +87,7 @@ class NewVariableWindow extends Component {
               form={form}
             />
           </Section>
-        }
+          )}
       </InlineEditScreen>
     );
   }
@@ -94,12 +96,15 @@ class NewVariableWindow extends Component {
 NewVariableWindow.propTypes = {
   show: PropTypes.bool,
   variableType: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   allowVariableTypes: PropTypes.array,
   // eslint-disable-next-line
   onComplete: PropTypes.func.isRequired, // This prop is required by withNewVariableHandler
   handleCreateNewVariable: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialValues: PropTypes.object,
+  // eslint-disable-next-line react/forbid-prop-types
   existingVariableNames: PropTypes.array.isRequired,
 };
 

@@ -34,6 +34,7 @@ const CodeView = ({ toggleCodeView, code, show }) => (
 );
 
 CodeView.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   code: PropTypes.object,
   toggleCodeView: PropTypes.func.isRequired,
   show: PropTypes.bool,

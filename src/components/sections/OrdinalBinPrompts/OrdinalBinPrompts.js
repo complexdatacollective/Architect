@@ -12,14 +12,22 @@ import withPromptChangeHandler from '../CategoricalBinPrompts/withPromptChangeHa
 
 const template = () => ({ color: 'ord-color-seq-1' });
 
-const OrdinalBinPrompts = ({ handleChangePrompt, ...props }) => (
+const OrdinalBinPrompts = ({
+  handleChangePrompt,
+  entity,
+  type,
+  ...props
+}) => (
   <EditableList
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
     template={template}
     onChange={handleChangePrompt}
-    itemSelector={itemSelector(props.entity, props.type)}
+    itemSelector={itemSelector(entity, type)}
+    entity={entity}
+    type={type}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <h2>Prompts</h2>

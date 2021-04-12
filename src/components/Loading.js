@@ -15,7 +15,8 @@ const Loading = ({
   isLoading,
 }) => (
   <AnimatePresence>
-    { isLoading &&
+    { isLoading
+      && (
       <motion.div
         className="scene__loading"
         style={{
@@ -37,7 +38,7 @@ const Loading = ({
       >
         <Spinner />
       </motion.div>
-    }
+      )}
   </AnimatePresence>
 );
 
@@ -45,12 +46,10 @@ Loading.propTypes = {
   isLoading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoading: statusSelectors.getIsBusy(state, protocolsLocks.loading),
 });
 
 const withState = connect(mapStateToProps);
-
-export { Loading };
 
 export default withState(Loading);

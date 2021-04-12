@@ -9,18 +9,19 @@ const mapDispatchToProps = {
 };
 
 const stageEditorHanders = withHandlers({
-  onSubmit: ({ id, insertAtIndex, updateStage, createStage, onComplete }) =>
-    (stage) => {
-      const normalizedStage = omit(stage, '_modified');
+  onSubmit: ({
+    id, insertAtIndex, updateStage, createStage, onComplete,
+  }) => (stage) => {
+    const normalizedStage = omit(stage, '_modified');
 
-      if (id) {
-        updateStage(id, normalizedStage);
-      } else {
-        createStage(normalizedStage, insertAtIndex);
-      }
+    if (id) {
+      return updateStage(id, normalizedStage)
+        .then(onComplete);
+    }
 
-      onComplete();
-    },
+    return createStage(normalizedStage, insertAtIndex)
+      .then(onComplete);
+  },
 });
 
 const withStageEditorHandlers = compose(

@@ -48,7 +48,8 @@ const HighlightFields = ({
         disabled={canCreateEdge}
         title={canCreateEdge ? 'Create edge must be disabled to allow highlighting' : ''}
       />
-      { allowHighlighting &&
+      { allowHighlighting
+      && (
       <Row disabled={!allowHighlighting}>
         <ValidatedField
           name="highlight.variable"
@@ -57,12 +58,12 @@ const HighlightFields = ({
           type={type}
           label="Variable to be toggled"
           placeholder="Select or create a boolean variable"
-          onCreateOption={value => handleCreateVariable(value, 'boolean', 'highlight.variable')}
+          onCreateOption={(value) => handleCreateVariable(value, 'boolean', 'highlight.variable')}
           validation={{ required: true }}
           options={highlightVariablesForSubject}
         />
       </Row>
-      }
+      )}
     </Section>
   );
 };
@@ -73,6 +74,7 @@ HighlightFields.propTypes = {
   entity: PropTypes.string.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   highlightVariablesForSubject: PropTypes.array.isRequired,
   setCanCreateEdge: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,

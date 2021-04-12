@@ -14,6 +14,7 @@ const ImageThumbnail = ({ url, contain, ...props }) => {
     <div
       className={className}
       style={{ backgroundImage: `url(${url})` }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );

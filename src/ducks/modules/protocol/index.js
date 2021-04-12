@@ -2,13 +2,14 @@ import { pick } from 'lodash';
 import stages from './stages';
 import codebook from './codebook';
 import assetManifest from './assetManifest';
+import { saveableChange } from '../session';
 
 const initialState = {};
 
 const UPDATE_OPTIONS = 'PROTOCOL/UPDATE_OPTIONS';
 const SET_PROTOCOL = 'PROTOCOL/SET';
 
-const updateOptions = options => ({
+const updateOptions = (options) => ({
   type: UPDATE_OPTIONS,
   options,
 });
@@ -40,7 +41,7 @@ function protocolReducer(state = initialState, action = {}) {
 }
 
 const actionCreators = {
-  updateOptions,
+  updateOptions: saveableChange(updateOptions),
   setProtocol,
 };
 
@@ -49,14 +50,13 @@ const actionTypes = {
   SET_PROTOCOL,
 };
 
-export {
-  actionCreators,
-  actionTypes,
+const test = {
+  updateOptions,
 };
 
-const reduceReducers = (...reducers) =>
-  (previousState, action) =>
-    reducers.reduce((state, reducer) => reducer(state, action), previousState);
+const reduceReducers = (...reducers) => (
+  previousState, action,
+) => reducers.reduce((state, reducer) => reducer(state, action), previousState);
 
 export default reduceReducers(
   protocolReducer,
@@ -67,3 +67,9 @@ export default reduceReducers(
     assetManifest: assetManifest(state.assetManifest, action),
   }),
 );
+
+export {
+  actionCreators,
+  actionTypes,
+  test,
+};

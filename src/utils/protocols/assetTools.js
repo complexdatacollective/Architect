@@ -11,25 +11,24 @@ import { getSupportedAssetType } from '@app/utils/protocols/importAsset';
 * Generate a switching function that takes a filepath as an argument
 * and returns match from configuration object.
 */
-const withExtensionSwitch = (configuration, fallback = () => Promise.resolve()) =>
-  (filePath, ...rest) => {
-    if (!filePath) { return null; }
-    const extension = path.extname(filePath).substr(1); // e.g. 'csv'
+const withExtensionSwitch = (
+  configuration, fallback = () => Promise.resolve(),
+) => (filePath, ...rest) => {
+  if (!filePath) { return null; }
+  const extension = path.extname(filePath).substr(1); // e.g. 'csv'
 
-    const f = get(configuration, [extension], fallback);
-    return f(filePath, ...rest);
-  };
+  const f = get(configuration, [extension], fallback);
+  return f(filePath, ...rest);
+};
 
-
-const readJsonNetwork = assetPath =>
-  fs.readJson(assetPath);
+const readJsonNetwork = (assetPath) => fs.readJson(assetPath);
 
 const readCsvNetwork = async (assetPath) => {
   const data = await fs.readFile(assetPath);
   const nodes = await csv({ checkColumn: true })
     .fromString(data.toString('utf8'))
     .then(
-      rows => rows.map(attributes => ({ attributes })),
+      (rows) => rows.map((attributes) => ({ attributes })),
     )
     .catch((e) => {
       if (e.toString().includes('column_mismatched')) {

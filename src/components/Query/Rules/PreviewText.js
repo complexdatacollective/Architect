@@ -83,27 +83,27 @@ const PreviewText = ({ type, options }) => {
     case 'alter': {
       if (isNil(options.attribute)) {
         return (
-          <Fragment>
+          <>
             <TypeOperator value={options.operator} />
             <Entity>alter</Entity>
             <Copy>of type</Copy>
             <Type>{options.type}</Type>
-          </Fragment>
+          </>
         );
       }
       if (isNil(options.value)) {
         return (
-          <Fragment>
+          <>
             <Entity>alter</Entity>
             <Copy>of type</Copy>
             <Type>{options.type}</Type>
             <Operator value={options.operator} />
             <Variable>{options.attribute}</Variable>
-          </Fragment>
+          </>
         );
       }
       return (
-        <Fragment>
+        <>
           <Entity>alter</Entity>
           <Copy>of type</Copy>
           <Type>{options.type}</Type>
@@ -111,27 +111,27 @@ const PreviewText = ({ type, options }) => {
           <Variable>{options.attribute}</Variable>
           <Operator value={options.operator} />
           <Value value={options.value} />
-        </Fragment>
+        </>
       );
     }
     case 'edge':
       return (
-        <Fragment>
+        <>
           <Operator value={options.operator} />
           <Entity>edge</Entity>
           <Copy>of type</Copy>
           <Type>{options.type}</Type>
-        </Fragment>
+        </>
       );
     case 'ego':
       return (
-        <Fragment>
+        <>
           <Entity>ego</Entity>
           <Copy>has</Copy>
           <Variable>{options.attribute}</Variable>
           <Operator value={options.operator} />
           <Value value={options.value} />
-        </Fragment>
+        </>
       );
     default:
       return `Syntax for "${type}" is not defined`;

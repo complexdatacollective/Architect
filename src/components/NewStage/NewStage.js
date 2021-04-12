@@ -21,7 +21,10 @@ const NewStage = ({
       <p>
         Below you can find the available interfaces currently bundled in Interviewer,
         grouped by type. For further details about each of these interfaces, please visit
-        our <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>.
+        our
+        {' '}
+        <ExternalLink href="https://documentation.networkcanvas.com/docs/interface-documentation/">documentation</ExternalLink>
+        .
       </p>
     </Section>
     <div className="new-stage__options">
@@ -29,8 +32,16 @@ const NewStage = ({
         <Navigation categories={categories} />
       </div>
       {interfaceOptions.map((props, index) => (
-        <div className="new-stage__category" key={index}>
-          <InterfaceCategory {...props} onSelect={handleCreateNew} />
+        <div
+          className="new-stage__category"
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+        >
+          <InterfaceCategory
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...props}
+            onSelect={handleCreateNew}
+          />
         </div>
       ))}
     </div>

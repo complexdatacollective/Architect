@@ -8,13 +8,14 @@ import NativeSelect from '@components/Form/Fields/NativeSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { DatePicker } from '@codaco/ui/lib/components/Fields';
 
-const dateTypes = DATE_TYPES.map(type => ({
+const dateTypes = DATE_TYPES.map((type) => ({
   ...type,
   label: `${type.label} (${DATE_FORMATS[type.value].toUpperCase()})`,
 }));
 
-
-const DateTimeParameters = ({ name, type, setSelectDefault, resetRangeFields }) => {
+const DateTimeParameters = ({
+  name, type, setSelectDefault, resetRangeFields,
+}) => {
   const dateFormat = type ? DATE_FORMATS[type] : DATE_FORMATS.full;
   const [useDateFormat, setUseDateFormat] = useState(type);
 
@@ -23,7 +24,7 @@ const DateTimeParameters = ({ name, type, setSelectDefault, resetRangeFields }) 
   }
 
   return (
-    <React.Fragment>
+    <>
       <p>This input type has three options for you to set.</p>
       <h4>Date Resolution</h4>
       <p>
@@ -76,7 +77,7 @@ const DateTimeParameters = ({ name, type, setSelectDefault, resetRangeFields }) 
           max: '3000-12-31',
         }}
       />
-    </React.Fragment>
+    </>
   );
 };
 

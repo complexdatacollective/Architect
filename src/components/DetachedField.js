@@ -9,7 +9,7 @@ const getValue = (eventOrValue) => {
     return eventOrValue;
   }
 
-  const target = eventOrValue.target;
+  const { target } = eventOrValue;
   const value = target.type === 'checkbox' ? target.checked : target.value;
 
   return value;
@@ -39,10 +39,16 @@ class DetachedField extends Component {
   }
 
   handleChange = (eventOrValue) => {
-    const value = getValue(eventOrValue);
+    const {
+      onChange,
+      name,
+      value,
+    } = this.props;
+
+    const nextValue = getValue(eventOrValue);
     this.setState({ touched: true });
-    this.validate(value);
-    this.props.onChange(eventOrValue, value, this.props.value, this.props.name);
+    this.validate(nextValue);
+    onChange(eventOrValue, nextValue, value, name);
   }
 
   validate(value) {
@@ -89,6 +95,7 @@ class DetachedField extends Component {
 
     return (
       <FieldComponent
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
         input={input}
         meta={{
@@ -102,10 +109,15 @@ class DetachedField extends Component {
 
 DetachedField.propTypes = {
   onChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   value: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   name: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   validate: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   component: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 

@@ -6,18 +6,22 @@ class List extends Component {
   constructor(props) {
     super(props);
 
+    const { initialSortOrder } = this.props;
+
     this.state = {
       parameters: {
-        sortOrder: this.props.initialSortOrder,
+        sortOrder: initialSortOrder,
       },
     };
   }
 
   handleUpdateParameters = (parameters) => {
-    this.setState({ parameters: {
-      ...this.state.parameters,
-      ...parameters,
-    } });
+    this.setState((prevState) => ({
+      parameters: {
+        ...prevState.parameters,
+        ...parameters,
+      },
+    }));
   }
 
   filteredItems() {
@@ -59,6 +63,7 @@ class List extends Component {
                 sortable={false}
                 onDelete={() => onDelete(index)}
                 fieldId={fieldId}
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...rest}
               />
             </div>
@@ -70,11 +75,16 @@ class List extends Component {
 }
 
 List.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   initialSortOrder: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array.isRequired,
-  filter: PropTypes.func.isRequired,
-  controls: PropTypes.any.isRequired,
+  filter: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  controls: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   item: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   sortableProperties: PropTypes.any,
   onDelete: PropTypes.func,
   children: PropTypes.node,
@@ -84,10 +94,8 @@ List.defaultProps = {
   children: null,
   controls: DefaultControls,
   sortableProperties: [],
-  filter: items => items,
+  filter: (items) => items,
   onDelete: () => {},
-  initialSortOrder: {},
 };
-
 
 export default List;

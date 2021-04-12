@@ -3,15 +3,14 @@ import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import { compose, defaultProps } from 'recompose';
 import Editor from '@components/Editor';
-import Layout from '@components/EditorLayout';
+import { Layout } from '@components/EditorLayout';
 import FormCodeView from '@components/CodeView/FormCodeView';
 import { getInterface } from './Interfaces';
 import withStageEditorHandlers from './withStageEditorHandlers';
 import withStageEditorMeta from './withStageEditorMeta';
 import StageHeading from './StageHeading';
 import SkipLogic from './SkipLogic';
-
-const formName = 'edit-stage';
+import { formName } from './configuration';
 
 const StageEditor = ({
   id,
@@ -22,13 +21,12 @@ const StageEditor = ({
   ...props
 }) => {
   const [showCodeView, setShowCodeView] = useState(false);
-  const toggleShowCodeView = () => setShowCodeView(show => !show);
+  const toggleShowCodeView = () => setShowCodeView((show) => !show);
 
   useEffect(() => {
     ipcRenderer.on('REFRESH_PREVIEW', previewStage);
 
-    return () =>
-      ipcRenderer.removeListener('REFRESH_PREVIEW', previewStage);
+    return () => ipcRenderer.removeListener('REFRESH_PREVIEW', previewStage);
   }, []);
 
   const sections = useMemo(
@@ -41,23 +39,25 @@ const StageEditor = ({
     [interfaceType],
   );
 
-  const renderSections = (sectionList, { submitFailed, windowRoot }) =>
-    sectionList.map((SectionComponent, index) => (
-      <SectionComponent
-        key={index}
-        form={formName}
-        stagePath={stagePath}
-        hasSubmitFailed={submitFailed}
-        // `windowRoot` will ensure connect() components re-render
-        // when the window root changes
-        windowRoot={windowRoot}
-        interfaceType={interfaceType}
-      />
-    ));
+  const renderSections = (
+    sectionList, { submitFailed, windowRoot },
+  ) => sectionList.map((SectionComponent) => (
+    <SectionComponent
+      key={stagePath}
+      form={formName}
+      stagePath={stagePath}
+      hasSubmitFailed={submitFailed}
+      // `windowRoot` will ensure connect() components re-render
+      // when the window root changes
+      windowRoot={windowRoot}
+      interfaceType={interfaceType}
+    />
+  ));
 
   return (
     <Editor
       formName={formName}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
       {
@@ -84,6 +84,7 @@ StageEditor.propTypes = {
   interfaceType: PropTypes.string.isRequired,
   id: PropTypes.string,
   previewStage: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   stagePath: PropTypes.any,
   hasSkipLogic: PropTypes.bool,
 };

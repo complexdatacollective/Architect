@@ -14,7 +14,6 @@ import { actionCreators as uiActions } from '@modules/ui';
 import Stage from './Stage';
 import InsertButton from './InsertButton';
 
-
 const variants = {
   outer: {
     show: {
@@ -41,51 +40,18 @@ const variants = {
 };
 
 class Timeline extends Component {
-  static propTypes = {
-    stages: PropTypes.array,
-    sorting: PropTypes.bool,
-    deleteStage: PropTypes.func.isRequired,
-    openDialog: PropTypes.func.isRequired,
-    openScreen: PropTypes.func.isRequired,
-    show: PropTypes.bool,
-    locus: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  handleInsertStage = (index) => {
+    const { openScreen } = this.props;
+    openScreen('newStage', { insertAtIndex: index });
   };
-
-  static defaultProps = {
-    show: true,
-    sorting: false,
-    stages: [],
-    overview: {},
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      highlightY: 0,
-      highlightHide: false,
-      insertStageAtIndex: null,
-    };
-  }
-
-  handleMouseEnterStage = (e) => {
-    const offset = e.target.closest('.timeline-stage').offsetTop;
-    this.setState({ highlightY: offset, highlightHide: false });
-  };
-
-  handleMouseLeaveStage = () => {
-    this.setState({ highlightHide: true });
-  };
-
-  handleInsertStage = index =>
-    this.props.openScreen('newStage', { insertAtIndex: index });
 
   handleDeleteStage = (stageId) => {
-    this.props.openDialog({
+    const { openDialog, deleteStage } = this.props;
+    openDialog({
       type: 'Warning',
       title: 'Delete stage',
       message: 'Are you sure you want to delete this stage from your protocol? This action cannot be undone!',
-      onConfirm: () => { this.props.deleteStage(stageId); },
+      onConfirm: () => deleteStage(stageId),
       confirmLabel: 'Delete stage',
     });
   }
@@ -97,21 +63,20 @@ class Timeline extends Component {
 
   createStage = (type, insertAtIndex) => {
     const { openScreen, locus } = this.props;
-    this.setState({ insertStageAtIndex: null, highlightHide: true });
     openScreen('stage', { type, insertAtIndex, locus });
   };
 
+  // eslint-disable-next-line react/destructuring-assignment
   hasStages = () => this.props.stages.length > 0;
 
-  renderStages = () =>
-    this.props.stages.flatMap((stage, index) => ([
-      <InsertButton
-        key={`insert_${index}`}
-        onClick={() => this.handleInsertStage(index)}
-      />,
-      this.renderStage(stage, index),
-    ]));
-
+  // eslint-disable-next-line react/destructuring-assignment
+  renderStages = () => this.props.stages.flatMap((stage, index) => ([
+    <InsertButton
+      key={`insert_${index}`}
+      onClick={() => this.handleInsertStage(index)}
+    />,
+    this.renderStage(stage, index),
+  ]));
 
   renderStage = (stage, index) => (
     <Stage
@@ -123,8 +88,6 @@ class Timeline extends Component {
       hasFilter={stage.hasFilter}
       hasSkipLogic={stage.hasSkipLogic}
       label={stage.label}
-      onMouseEnter={this.handleMouseEnterStage}
-      onMouseLeave={this.handleMouseLeaveStage}
       onEditStage={this.handleEditStage}
       onDeleteStage={this.handleDeleteStage}
     />
@@ -164,7 +127,7 @@ class Timeline extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   locus: state.protocol.timeline[state.protocol.timeline.length - 1],
   activeProtocol: state.session.activeProtocol,
   stages: getStageList(state),
@@ -184,6 +147,23 @@ const mapDispatchToProps = (dispatch, props) => ({
   },
 });
 
+Timeline.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  stages: PropTypes.array,
+  sorting: PropTypes.bool,
+  deleteStage: PropTypes.func.isRequired,
+  openDialog: PropTypes.func.isRequired,
+  openScreen: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+  locus: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+};
+
+Timeline.defaultProps = {
+  show: true,
+  sorting: false,
+  stages: [],
+};
+
 export { Timeline };
 
 export default compose(
@@ -192,7 +172,7 @@ export default compose(
       sorting,
     }),
     {
-      setSorting: () => sortingState => ({
+      setSorting: () => (sortingState) => ({
         sorting: sortingState,
       }),
     },

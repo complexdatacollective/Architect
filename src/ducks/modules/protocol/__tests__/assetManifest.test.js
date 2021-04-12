@@ -1,40 +1,46 @@
 /* eslint-env jest */
 
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import uuid from 'uuid';
+import { getThunkMocks, toHaveDispatched } from '@app/__tests__/helpers';
+import testState from '@app/__tests__/testState.json';
 import { importAsset } from '@app/utils/protocols';
-import reducer, { actionCreators, actionTypes } from '../assetManifest';
+import reducer, { actionCreators, test } from '../assetManifest';
+
+expect.extend({
+  toHaveDispatched,
+});
 
 jest.mock('@app/utils/protocols');
 
-const mockState = {
-  session: {
-    workingPath: '/tmp/foo/bar',
-  },
-};
-
-const log = jest.fn();
-
-const logger = () =>
-  next =>
-    (action) => {
-      log(action);
-      return next(action);
-    };
-
-const getStore = () =>
-  createStore(
-    state => state,
-    mockState,
-    applyMiddleware(thunk, logger),
-  );
-
 describe('protocol/assetManifest', () => {
-  beforeEach(() => {
-    log.mockClear();
+  describe('reducer', () => {
+    it('IMPORT_ASSET_COMPLETE correctly updates state', () => {
+      const result = reducer(null, test.importAssetComplete('uuid-file-location-in-protocol', 'my-original-filename.jpg', 'image'));
+      expect(result).toMatchObject({
+        [uuid()]: {
+          id: uuid(),
+          name: 'my-original-filename.jpg',
+          source: 'uuid-file-location-in-protocol',
+          type: 'image',
+        },
+      });
+    });
+
+    it('DELETE_ASSET correctly updates state', () => {
+      const state = {
+        [uuid()]: {
+          id: uuid(),
+          name: 'my-original-filename.jpg',
+          source: 'uuid-file-location-in-protocol',
+          type: 'image',
+        },
+      };
+      const result = reducer(state, test.deleteAsset(uuid()));
+      expect(result).toEqual({});
+    });
   });
 
-  describe('importAsset()', () => {
+  describe('actionCreators', () => {
     const file = {
       text: Promise.resolve('image/data'),
       name: 'bazz.jpg',
@@ -44,49 +50,47 @@ describe('protocol/assetManifest', () => {
       importAsset.mockClear();
     });
 
-    it('calls importAsset and fires complete action', () => {
-      const store = getStore();
+    it('importAsset() dispatches correct actions', async () => {
+      const [dispatch, getState] = getThunkMocks(testState);
 
-      return store.dispatch(actionCreators.importAsset(file.name))
-        .then(() => {
-          expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
-          expect(log.mock.calls[1][0].type).toEqual(actionTypes.IMPORT_ASSET_COMPLETE);
-          expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file.name]]);
-        });
+      await actionCreators.importAsset(file.name)(dispatch, getState);
+
+      expect(dispatch).toHaveDispatched([
+        { type: 'PROTOCOL/IMPORT_ASSET', filename: 'bazz.jpg' },
+        { type: 'PROTOCOL/IMPORT_ASSET_COMPLETE', name: 'bazz.jpg', id: uuid() },
+        { type: 'SESSION/PROTOCOL_CHANGED' },
+      ]);
+
+      expect(importAsset.mock.calls).toEqual([['/dev/null/1234-active-protocol', file.name]]);
     });
 
-    it('when importAsset throws an error it fires failed action', () => {
-      importAsset.mockImplementation(
-        () =>
-          new Promise(() => { throw new Error(); }),
+    it('importAsset() dispatches correct actions when util/importAsset fails', async () => {
+      const [dispatch, getState] = getThunkMocks(testState);
+
+      importAsset.mockImplementationOnce(
+        () => new Promise(() => { throw new Error(); }),
       );
 
-      const store = getStore();
+      await actionCreators.importAsset(file.name)(dispatch, getState);
 
-      return store.dispatch(actionCreators.importAsset(file.name)).then(() => {
-        expect(log.mock.calls[0][0].type).toEqual(actionTypes.IMPORT_ASSET);
-        expect(log.mock.calls[2][0].type).toEqual(actionTypes.IMPORT_ASSET_FAILED);
-        expect(importAsset.mock.calls).toEqual([['/tmp/foo/bar', file.name]]);
-      });
+      expect(dispatch).toHaveDispatched([
+        { type: 'PROTOCOL/IMPORT_ASSET', filename: 'bazz.jpg' },
+        { type: 'PROTOCOL/OPEN_DIALOG' },
+        { type: 'PROTOCOL/IMPORT_ASSET_FAILED' },
+      ]);
+
+      expect(importAsset.mock.calls).toEqual([['/dev/null/1234-active-protocol', file.name]]);
     });
-  });
 
-  describe('importAssetComplete', () => {
-    it('calls importAsset and fires complete action', () => {
-      const filename = '577925e0e0f72582f4d2ea8ac29150057197aed4';
-      const name = 'foo.jpg';
-      const assetType = 'bar';
+    it('deleteAsset() dispatches correct actions', async () => {
+      const [dispatch, getState] = getThunkMocks(testState);
 
-      const action = actionCreators.importAssetComplete(filename, name, assetType);
+      await actionCreators.deleteAsset(uuid())(dispatch, getState);
 
-      const result = reducer(null, action);
-
-      expect(result[action.id]).toMatchObject({
-        id: action.id,
-        name,
-        source: filename,
-        type: assetType,
-      });
+      expect(dispatch).toHaveDispatched([
+        { type: 'PROTOCOL/DELETE_ASSET', id: uuid() },
+        { type: 'SESSION/PROTOCOL_CHANGED' },
+      ]);
     });
   });
 });

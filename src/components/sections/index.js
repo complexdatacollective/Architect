@@ -21,7 +21,6 @@ export { default as NodeType } from './NodeType';
 export { default as OrdinalBinPrompts } from './OrdinalBinPrompts';
 export { default as QuickAdd } from './QuickAdd';
 export { default as SearchOptionsForExternalData } from './SearchOptionsForExternalData';
-export { default as ShowExistingNodes } from './ShowExistingNodes';
 export { default as SociogramPrompts } from './SociogramPrompts';
 export { default as SortOptionsForExternalData } from './SortOptionsForExternalData';
 export { default as Title } from './Title';

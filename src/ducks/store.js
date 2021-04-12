@@ -1,11 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import logger from './middleware/logger';
 import ipc from './ipc';
-import { rootReducer, rootEpic as architectRootEpic } from './modules/root';
+import { rootReducer } from './modules/root';
 
 const persistConfig = {
   key: 'architect',
@@ -19,14 +18,7 @@ const persistConfig = {
   ],
 };
 
-const getReducer = () =>
-  persistReducer(persistConfig, rootReducer);
-
-const rootEpic = combineEpics(
-  architectRootEpic,
-);
-
-const epics = createEpicMiddleware(rootEpic);
+const getReducer = () => persistReducer(persistConfig, rootReducer);
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -34,23 +26,21 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const getMiddleware = () => {
   if (process.env.TEST) {
-    return [thunk, epics];
+    return [thunk];
   }
 
-  return [thunk, logger, ipc, epics];
+  return [thunk, logger, ipc];
 };
 
-const getEnhancers = () =>
-  composeEnhancers(
-    applyMiddleware(...getMiddleware()),
-  );
+const getEnhancers = () => composeEnhancers(
+  applyMiddleware(...getMiddleware()),
+);
 
-const getStore = initialState =>
-  createStore(
-    getReducer(),
-    initialState,
-    getEnhancers(),
-  );
+const getStore = (initialState) => createStore(
+  getReducer(),
+  initialState,
+  getEnhancers(),
+);
 
 const store = getStore(undefined);
 

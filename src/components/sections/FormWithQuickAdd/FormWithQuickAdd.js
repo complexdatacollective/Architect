@@ -14,8 +14,9 @@ const FormWithQuickAdd = ({
   quickAddEnabled,
   handleChangeQuickAdd,
   disabled,
+  ...props
 }) => (
-  <React.Fragment>
+  <>
     <Section disabled={disabled}>
       <h2>Quick Add</h2>
       <p>
@@ -33,14 +34,22 @@ const FormWithQuickAdd = ({
         />
       </div>
     </Section>
-    { quickAddEnabled &&
+    { quickAddEnabled
+      && (
       <QuickAdd
-        {...this.props}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
         disabled={disabled}
       />
-    }
-    { !quickAddEnabled && <Form {...this.props} disabled={disabled} /> }
-  </React.Fragment>
+      )}
+    { !quickAddEnabled && (
+      <Form
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+        disabled={disabled}
+      />
+    )}
+  </>
 );
 
 FormWithQuickAdd.propTypes = {

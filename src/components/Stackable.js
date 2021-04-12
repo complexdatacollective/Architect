@@ -11,23 +11,37 @@ import { actionCreators as stackActions } from '../ducks/modules/stacks';
 
 const withStackableId = withState('stackableId', 'setStackableId', null);
 
+// TODO: Make functional component or potentially could be handled
+// by screens module
 class Stackable extends Component {
-  componentWillMount() {
-    const group = this.props.group;
+  constructor(props) {
+    super(props);
+    const { group, registerStackable, setStackableId } = this.props;
     const id = uuid();
-    this.props.registerStackable(id, group);
-    this.props.setStackableId(id);
+    registerStackable(id, group);
+    setStackableId(id);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.stackKey !== this.props.stackKey) {
-      this.props.moveToTop();
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(newProps) {
+    const {
+      stackKey,
+      moveToTop,
+    } = this.props;
+
+    if (newProps.stackKey !== stackKey) {
+      moveToTop();
     }
   }
 
   componentWillUnmount() {
-    const id = this.props.stackableId;
-    this.props.unregisterStackable(id);
+    const {
+      stackableId,
+      unregisterStackable,
+    } = this.props;
+
+    const id = stackableId;
+    unregisterStackable(id);
   }
 
   render() {
@@ -37,16 +51,20 @@ class Stackable extends Component {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         {children({ stackIndex })}
-      </React.Fragment>
+      </>
     );
   }
 }
 
 Stackable.propTypes = {
   group: PropTypes.string,
-  stackKey: PropTypes.any,
+  stackKey: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
   stackIndex: PropTypes.number.isRequired,
   children: PropTypes.func.isRequired,
   stackableId: PropTypes.string,
@@ -63,22 +81,20 @@ Stackable.defaultProps = {
 };
 
 const mapStateToProps = (state, { stackableId }) => {
-  const stackIndex = state.stacks[stackableId] ?
-    state.stacks[stackableId].index :
-    0;
+  const stackIndex = state.stacks[stackableId]
+    ? state.stacks[stackableId].index
+    : 0;
 
   return ({
     stackIndex,
   });
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   moveToTop: bindActionCreators(stackActions.moveToTop, dispatch),
   registerStackable: bindActionCreators(stackActions.registerStackable, dispatch),
   unregisterStackable: bindActionCreators(stackActions.unregisterStackable, dispatch),
 });
-
-export { Stackable };
 
 export default compose(
   withStackableId,

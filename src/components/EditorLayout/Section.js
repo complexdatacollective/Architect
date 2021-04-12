@@ -18,7 +18,7 @@ const Section = ({
   );
 
   return (
-    <div className={sectionClasses} >
+    <div className={sectionClasses}>
       {children}
     </div>
   );
@@ -33,7 +33,6 @@ Section.propTypes = {
 };
 
 Section.defaultProps = {
-  contentId: null,
   disabled: false,
   group: false,
   className: '',

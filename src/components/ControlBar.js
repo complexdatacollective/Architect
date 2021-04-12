@@ -21,7 +21,9 @@ const animatedButton = (button, index) => (
     animate="show"
     exit="hide"
     layout
-  >{button}</motion.div>
+  >
+    {button}
+  </motion.div>
 );
 
 const ControlBar = ({ buttons, secondaryButtons, className }) => {
@@ -29,18 +31,16 @@ const ControlBar = ({ buttons, secondaryButtons, className }) => {
     <motion.div layout className="control-bar__secondary-buttons" key="secondary">
       <AnimateSharedLayout>
         <AnimatePresence>
-          { secondaryButtons &&
-            Array.from(secondaryButtons).map(animatedButton)
-          }
+          { secondaryButtons
+            && Array.from(secondaryButtons).map(animatedButton)}
         </AnimatePresence>
       </AnimateSharedLayout>
     </motion.div>,
     <motion.div layout className="control-bar__primary-buttons" key="primary">
       <AnimateSharedLayout>
         <AnimatePresence>
-          { buttons &&
-            Array.from(buttons).map(animatedButton)
-          }
+          { buttons
+            && Array.from(buttons).map(animatedButton)}
         </AnimatePresence>
       </AnimateSharedLayout>
     </motion.div>,
@@ -74,7 +74,5 @@ ControlBar.defaultProps = {
   secondaryButtons: null,
   className: '',
 };
-
-export { ControlBar };
 
 export default ControlBar;

@@ -57,7 +57,14 @@ const EditAlterRule = ({
         <h1>Construct an Alter Rule</h1>
         <p>
           For help with constructing rules, see our documentation articles
-          on <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/skip-logic/">skip logic</ExternalLink> and <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/filtering/">network filtering</ExternalLink>.
+          on
+          {' '}
+          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/skip-logic/">skip logic</ExternalLink>
+          {' '}
+          and
+          {' '}
+          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/filtering/">network filtering</ExternalLink>
+          .
         </p>
         <motion.div
           className="rules-edit-rule__row"
@@ -82,7 +89,8 @@ const EditAlterRule = ({
             validation={{ required: true }}
           />
         </motion.div>
-        { optionsWithDefaults.type &&
+        { optionsWithDefaults.type
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -100,8 +108,9 @@ const EditAlterRule = ({
               onChange={handleChangeAlterRuleType}
             />
           </motion.div>
-        }
-        { isTypeRule && optionsWithDefaults.type &&
+          )}
+        { isTypeRule && optionsWithDefaults.type
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -121,8 +130,9 @@ const EditAlterRule = ({
               validation={{ required: true }}
             />
           </motion.div>
-        }
-        { isVariableRule && optionsWithDefaults.type &&
+          )}
+        { isVariableRule && optionsWithDefaults.type
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -142,8 +152,9 @@ const EditAlterRule = ({
               validation={{ required: true }}
             />
           </motion.div>
-        }
-        { isVariableRule && optionsWithDefaults.attribute &&
+          )}
+        { isVariableRule && optionsWithDefaults.attribute
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -163,8 +174,9 @@ const EditAlterRule = ({
               validation={{ required: true }}
             />
           </motion.div>
-        }
-        { isVariableRule && operatorNeedsValue &&
+          )}
+        { isVariableRule && operatorNeedsValue
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -184,7 +196,7 @@ const EditAlterRule = ({
               validation={{ required: true }}
             />
           </motion.div>
-        }
+          )}
       </motion.div>
     </AnimatePresence>
   );
@@ -192,11 +204,16 @@ const EditAlterRule = ({
 
 EditAlterRule.propTypes = {
   rule: PropTypes.shape({
+    // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   typeOptions: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variablesAsOptions: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
   alterRuleType: PropTypes.string,
@@ -209,8 +226,6 @@ EditAlterRule.defaultProps = {
   alterRuleType: null,
   variableType: null,
 };
-
-export { EditAlterRule };
 
 export default compose(
   withAlterRuleType,

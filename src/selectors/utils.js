@@ -19,8 +19,7 @@ const asOption = (item, id) => {
   };
 };
 
-export const asOptions = items =>
-  map(
-    items,
-    asOption,
-  );
+export const asOptions = (items) => map(
+  items,
+  asOption,
+);

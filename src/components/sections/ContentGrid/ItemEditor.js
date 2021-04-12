@@ -17,8 +17,7 @@ const contentInputs = {
   video: Video,
 };
 
-const getInputComponent = type =>
-  get(contentInputs, type, TextArea);
+const getInputComponent = (type) => get(contentInputs, type, TextArea);
 
 const ItemEditor = ({
   type,
@@ -54,7 +53,5 @@ ItemEditor.propTypes = {
 ItemEditor.defaultProps = {
   type: null,
 };
-
-export { ItemEditor };
 
 export default withItemHandlers(ItemEditor);

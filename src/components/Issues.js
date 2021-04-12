@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { map, isEmpty } from 'lodash';
@@ -6,57 +6,25 @@ import { Icon } from '@codaco/ui';
 import { flattenIssues, getFieldId } from '../utils/issues';
 import scrollTo from '../utils/scrollTo';
 
-class Issues extends Component {
-  static propTypes = {
-    show: PropTypes.bool,
-    issues: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+const Issues = ({
+  issues,
+  show,
+}) => {
+  const [open, setOpen] = useState(true);
+  const flatIssues = flattenIssues(issues);
+  const issueRefs = useRef({});
+
+  const setIssueRef = (el, fieldId) => {
+    issueRefs.current[fieldId] = el;
   };
-
-  static defaultProps = {
-    show: true,
-    issues: {},
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: true,
-    };
-
-    this.flatIssues = flattenIssues(props.issues);
-    this.issueRefs = {};
-  }
-
-  componentDidMount() {
-    this.updateFieldNames();
-  }
-
-  componentWillReceiveProps(newProps) {
-    const noIssues = isEmpty(newProps.issues);
-    const show = newProps.show;
-
-    this.flatIssues = flattenIssues(newProps.issues);
-
-    // when panel hidden by parent reset collapsed state
-    if (noIssues || !show) { this.setState({ open: true }); }
-  }
-
-  componentDidUpdate() {
-    this.updateFieldNames();
-  }
-
-  setIssueRef = (el, fieldId) => {
-    this.issueRefs[fieldId] = el;
-  }
 
   /**
    * Because display information for fields is essentially stored in the dom
    * we use that as our data source for the field labels in the issue list.
    */
-  updateFieldNames() {
+  const updateFieldNames = () => {
     // for each issue get friendly title from dom
-    this.flatIssues.forEach(({ field }) => {
+    flatIssues.forEach(({ field }) => {
       const fieldId = getFieldId(field);
 
       const targetField = document.querySelector(`#${fieldId}`);
@@ -66,91 +34,111 @@ class Issues extends Component {
       const fieldName = targetField.getAttribute('data-name') || targetField.textContent;
 
       if (fieldName) {
-        this.issueRefs[fieldId].textContent = fieldName;
+        issueRefs.current[fieldId].textContent = fieldName;
       }
     });
-  }
+  };
 
-  isVisible = () =>
-    this.props.show && this.flatIssues.length > 0;
+  useEffect(() => {
+    updateFieldNames();
+  });
 
-  isOpen = () =>
-    this.state.open;
+  // when panel hidden by parent reset collapsed state
+  const noIssues = isEmpty(issues);
+  useEffect(() => {
+    if (noIssues || !show) { setOpen(true); }
+  }, [show, noIssues]);
 
-  handleClickTitleBar = () =>
-    this.setState({ open: !this.state.open });
+  const handleClickTitleBar = () => setOpen((toggle) => !toggle);
 
-  handleClickIssue = (e) => {
+  const handleClickIssue = (e) => {
     e.preventDefault();
 
     const link = e.target.closest('a').getAttribute('href');
     const destination = document.querySelector(link);
     scrollTo(destination);
-  }
+  };
 
-  render() {
-    const issues = map(
-      this.flatIssues,
-      ({ field, issue }) => {
-        const fieldId = getFieldId(field);
+  const renderedIssues = map(
+    flatIssues,
+    ({ field, issue }) => {
+      const fieldId = getFieldId(field);
 
-        return (
-          <li
-            key={fieldId}
-            className="issues__issue"
+      return (
+        <li
+          key={fieldId}
+          className="issues__issue"
+        >
+          <a
+            href={`#${fieldId}`}
+            onClick={handleClickIssue}
           >
-            <a
-              href={`#${fieldId}`}
-              onClick={this.handleClickIssue}
-            >
-              <span ref={el => this.setIssueRef(el, fieldId)}>
-                {field}
-              </span> - {issue}
-            </a>
-          </li>
-        );
-      });
+            <span ref={(el) => setIssueRef(el, fieldId)}>
+              {field}
+            </span>
+            {' '}
+            -
+            {issue}
+          </a>
+        </li>
+      );
+    },
+  );
 
-    const issuesClasses = cx(
-      'issues',
-      {
-        'issues--show': this.isVisible(),
-        'issues--open': this.isOpen(),
-      },
-    );
+  const isVisible = show && flatIssues.length > 0;
 
-    return (
-      <div className={issuesClasses}>
-        <div className="issues__panel">
-          <div className="issues__title-bar" onClick={this.handleClickTitleBar}>
-            <div className="issues__title-bar-icon">
-              <Icon name="info" color="white" />
-            </div>
-            <div className="issues__title-bar-text">
-              Issues ({this.flatIssues.length})
-            </div>
-            <div className="issues__title-bar-toggle">
-              <Icon
-                name="chevron-down"
-                color="white"
-                className="issues__toggle--open"
-              />
-              <Icon
-                name="chevron-up"
-                color="white"
-                className="issues__toggle--close"
-              />
-            </div>
+  const issuesClasses = cx(
+    'issues',
+    {
+      'issues--show': isVisible,
+      'issues--open': open,
+    },
+  );
+
+  return (
+    <div className={issuesClasses}>
+      <div className="issues__panel">
+        <div className="issues__title-bar" onClick={handleClickTitleBar}>
+          <div className="issues__title-bar-icon">
+            <Icon name="info" color="white" />
           </div>
-          <ol className="issues__issues">
-            {issues}
-          </ol>
+          <div className="issues__title-bar-text">
+            Issues (
+            {flatIssues.length}
+            )
+          </div>
+          <div className="issues__title-bar-toggle">
+            <Icon
+              name="chevron-down"
+              color="white"
+              className="issues__toggle--open"
+            />
+            <Icon
+              name="chevron-up"
+              color="white"
+              className="issues__toggle--close"
+            />
+          </div>
         </div>
+        <ol className="issues__issues">
+          {renderedIssues}
+        </ol>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export { Issues };
+Issues.propTypes = {
+  show: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  issues: PropTypes.object,
+};
+
+Issues.defaultProps = {
+  show: true,
+  issues: {},
+};
+
+export { Issues as UnconnectedIssues };
 
 export default Issues;

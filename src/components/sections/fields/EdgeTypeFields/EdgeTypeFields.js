@@ -9,7 +9,8 @@ import ValidatedField from '@components/Form/ValidatedField';
 
 class EdgeTypeFields extends Component {
   componentDidUpdate({ typeScreenMessage }) {
-    this.props.handleTypeScreenMessage(typeScreenMessage);
+    const { handleTypeScreenMessage } = this.props;
+    handleTypeScreenMessage(typeScreenMessage);
   }
 
   render() {
@@ -47,11 +48,12 @@ class EdgeTypeFields extends Component {
               validation={{ required: true }}
             />
 
-            { edgeTypes.length === 0 &&
+            { edgeTypes.length === 0
+              && (
               <p className="stage-editor-section-node-type__empty">
                 No edge types currently defined. Use the button below to create one.
               </p>
-            }
+              )}
 
             <Button
               color="primary"
@@ -77,16 +79,14 @@ EdgeTypeFields.propTypes = {
   parse: PropTypes.func.isRequired,
   format: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  typeScreenMessage: PropTypes.any,
+  typeScreenMessage: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 };
 
 EdgeTypeFields.defaultProps = {
   edgeTypes: [],
   disabled: false,
-  displayVariable: null,
   handleResetStage: noop,
   typeScreenMessage: null,
 };
-
 
 export default EdgeTypeFields;

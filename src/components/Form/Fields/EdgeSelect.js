@@ -16,6 +16,7 @@ const PreviewEdge = ({ label, color, input: { value, checked, onChange } }) => (
 );
 
 PreviewEdge.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
   color: PropTypes.string,
@@ -29,6 +30,7 @@ const EdgeSelect = ({ className, ...rest }) => (
   <Fields.RadioGroup
     optionComponent={PreviewEdge}
     className={cx('form-fields-edge-select', className)}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   />
 );

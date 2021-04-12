@@ -11,7 +11,9 @@ const FieldError = ({ error, show }) => {
 
   return (
     <div className={errorClasses}>
-      <Icon name="warning" /> { error }
+      <Icon name="warning" />
+      {' '}
+      { error }
     </div>
   );
 };

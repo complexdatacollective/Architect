@@ -9,7 +9,6 @@ import path from 'path';
  *
  * @returns The destination path in /tmp/.
  */
-const getLocalDirectoryFromArchivePath = () =>
-  path.join(remote.app.getPath('temp'), 'protocols', uuid());
+const getLocalDirectoryFromArchivePath = () => path.join(remote.app.getPath('temp'), 'protocols', uuid());
 
 export default getLocalDirectoryFromArchivePath;

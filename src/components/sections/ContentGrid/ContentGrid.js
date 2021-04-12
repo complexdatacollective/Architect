@@ -7,7 +7,7 @@ import ItemEditor from './ItemEditor';
 import { capacity } from './options';
 import { getAssetManifest } from '../../../selectors/protocol';
 
-const normalizeType = item => ({
+const normalizeType = (item) => ({
   ...item,
   type: item.type === 'text' ? 'text' : 'asset',
 });
@@ -28,7 +28,7 @@ const denormalizeType = (state, { form, editField }) => {
   };
 };
 
-const ContentGrid = props => (
+const ContentGrid = (props) => (
   <Grid
     previewComponent={ItemPreview}
     editComponent={ItemEditor}
@@ -36,6 +36,7 @@ const ContentGrid = props => (
     itemSelector={denormalizeType}
     title="Edit Items"
     capacity={capacity}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <h2>Edit Items</h2>

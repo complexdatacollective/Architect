@@ -22,7 +22,7 @@ const PresetFields = ({
   entity,
   type,
 }) => (
-  <React.Fragment>
+  <>
     <Section>
       <Row>
         <h3 id={getFieldId('text')}>Preset label</h3>
@@ -83,13 +83,17 @@ const PresetFields = ({
         />
       </Row>
     </Section>
-  </React.Fragment>
+  </>
 );
 
 PresetFields.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   layoutVariablesForSubject: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   groupVariablesForSubject: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   edgesForSubject: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   highlightVariablesForSubject: PropTypes.array,
   handleCreateLayoutVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
@@ -102,8 +106,6 @@ PresetFields.defaultProps = {
   edgesForSubject: [],
   highlightVariablesForSubject: [],
 };
-
-export { PresetFields };
 
 export default compose(
   withNewVariableWindowHandlers,

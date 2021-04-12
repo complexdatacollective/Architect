@@ -21,21 +21,28 @@ const PreviewFieldComponent = ({
     <span className="field-preview">
       {value.prompt}
       <Badge color={getColorForType(codebookVariable.type)}>
-        <strong>{codebookVariable.type}</strong> variable
-        using <strong>{codebookVariable.component}</strong> input control
+        <strong>{codebookVariable.type}</strong>
+        {' '}
+        variable
+        using
+        <strong>{codebookVariable.component}</strong>
+        {' '}
+        input control
       </Badge>
     </span>
   );
 };
 
 PreviewFieldComponent.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   subjectVariables: PropTypes.object.isRequired,
 };
 
 class PromptPreview extends Preview {
   preview() {
-    const fieldId = this.props.fieldId;
+    const { fieldId } = this.props;
     return (
       <Field
         name={fieldId}
@@ -61,4 +68,3 @@ export default compose(
   withSubject,
   connect(mapStateToProps),
 )(PromptPreview);
-

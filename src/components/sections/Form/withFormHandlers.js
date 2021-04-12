@@ -13,49 +13,46 @@ const formHandlers = withHandlers({
     entity,
     changeForm,
     form,
-  }) =>
-    (values) => {
-      const { variable, component, _createNewVariable, ...rest } = values;
-      const variableType = getTypeForComponent(component);
-      // prune properties that are not part of the codebook:
-      const codebookProperties = getCodebookProperties(rest);
-      const configuration = {
-        type: variableType,
-        component,
-        ...codebookProperties,
+  }) => async (values) => {
+    const {
+      variable, component, _createNewVariable, ...rest
+    } = values;
+    const variableType = getTypeForComponent(component);
+    // prune properties that are not part of the codebook:
+    const codebookProperties = getCodebookProperties(rest);
+    const configuration = {
+      type: variableType,
+      component,
+      ...codebookProperties,
+    };
+
+    // Register a change in the stage editor
+    // `form` here refers to the `section/` parent form, not the fields form
+    changeForm(form, '_modified', new Date().getTime());
+
+    if (!_createNewVariable) {
+      await updateVariable(entity, type, variable, configuration, true);
+
+      return {
+        variable,
+        ...rest,
       };
+    }
 
-      // Register a change in the stage editor
-      // `form` here refers to the `section/` parent form, not the fields form
-      changeForm(form, '_modified', new Date().getTime());
-
-      if (!_createNewVariable) {
-        updateVariable(entity, type, variable, configuration, true);
-
-        return {
-          variable,
-          ...rest,
-        };
-      }
-
-      try {
-        const { variable: newVariable } = createVariable(
-          entity,
-          type,
-          {
-            ...configuration,
-            name: _createNewVariable,
-          },
-        );
-
-        return {
-          variable: newVariable,
-          ...rest,
-        };
-      } catch (e) {
-        throw new SubmissionError({ variable: e.toString() });
-      }
-    },
+    return createVariable(
+      entity,
+      type,
+      {
+        ...configuration,
+        name: _createNewVariable,
+      },
+    ).then(({ variable: newVariable }) => ({
+      variable: newVariable,
+      ...rest,
+    })).catch((e) => {
+      throw new SubmissionError({ variable: e.toString() });
+    });
+  },
 });
 
 const mapDispatchToProps = {

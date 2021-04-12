@@ -34,7 +34,9 @@ const mapDispatchToProps = (dispatch, { form }) => ({
   jump: bindActionCreators(timelineActions.jump, dispatch),
 });
 
-const mapItemStateToProps = (state, { form, itemSelector, editField, template }) => {
+const mapItemStateToProps = (state, {
+  form, itemSelector, editField, template,
+}) => {
   const item = itemSelector(state, { form, editField });
   const initialValues = item || { ...template(), id: uuid() };
 
@@ -47,56 +49,52 @@ const stateHandlers = withStateHandlers(
     locus: null,
   },
   {
-    setEditField: (_, { locus }) =>
-      fieldId => ({
-        editField: fieldId,
-        locus,
-      }),
-    clearEditField: () =>
-      () => ({
+    setEditField: (_, { locus }) => (fieldId) => ({
+      editField: fieldId,
+      locus,
+    }),
+    clearEditField: () => () => ({
+      editField: null,
+      locus: null,
+    }),
+    resetEditField: ({ locus }, { jump }) => () => {
+      jump(locus);
+
+      return {
         editField: null,
         locus: null,
-      }),
-    resetEditField: ({ locus }, { jump }) =>
-      () => {
-        jump(locus);
-
-        return {
-          editField: null,
-          locus: null,
-        };
-      },
+      };
+    },
   },
 );
 
 const handlers = withHandlers(
   {
-    handleEditField: ({ setEditField }) =>
-      setEditField,
-    handleCancelEditField: ({ resetEditField }) =>
-      resetEditField,
-    handleAddNew: ({ itemCount, fieldName, setEditField }) =>
-      () => {
-        const newItemFieldName = `${fieldName}[${itemCount}]`;
-        setEditField(newItemFieldName);
-      },
-    handleUpdate: ({ editField, upsert, normalize, onChange, clearEditField }) =>
-      (value) => {
-        // TODO: It seems like a mistake to use the onChange value, is this really necessary?
-        const newValue = onChange ? normalize(onChange(value)) : normalize(value);
-        upsert(editField, newValue);
+    handleEditField: ({ setEditField }) => setEditField,
+    handleCancelEditField: ({ resetEditField }) => resetEditField,
+    handleAddNew: ({ itemCount, fieldName, setEditField }) => () => {
+      const newItemFieldName = `${fieldName}[${itemCount}]`;
+      setEditField(newItemFieldName);
+    },
+    handleUpdate: ({
+      editField, upsert, normalize, onChange, clearEditField,
+    }) => (value) => {
+      // Using onChange allows us to do some intermediate processing if necessary
+      const newValue = onChange ? onChange(value) : Promise.resolve(value);
 
-        setImmediate(() => clearEditField());
-      },
+      return newValue
+        .then(normalize)
+        .then((fieldValue) => upsert(editField, fieldValue))
+        .then(clearEditField);
+    },
   },
 );
 
 const withEditHandlers = compose(
   defaultProps({
-    normalize: value => value,
+    normalize: (value) => value,
     template: () => {},
-    itemSelector: (state, { form, editField }) =>
-      formValueSelector(form)(state, editField),
+    itemSelector: (state, { form, editField }) => formValueSelector(form)(state, editField),
   }),
   connect(mapStateToProps, mapDispatchToProps),
   stateHandlers,

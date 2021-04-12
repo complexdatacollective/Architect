@@ -14,6 +14,7 @@ class AppErrorBoundary extends Component {
 
   render() {
     const { error } = this.state;
+    const { children } = this.props;
 
     if (error) {
       return (
@@ -21,7 +22,11 @@ class AppErrorBoundary extends Component {
           <div className="error__layout">
             <h1 className="error__title">Something went wrong.</h1>
             <div className="error__message">
-              <p>The following &quot;{error.message}&quot; error occurred:</p>
+              <p>
+                The following &quot;
+                {error.message}
+                &quot; error occurred:
+              </p>
             </div>
             <pre className="error__stack"><code>{error.stack}</code></pre>
           </div>
@@ -29,7 +34,7 @@ class AppErrorBoundary extends Component {
       );
     }
 
-    return this.props.children;
+    return children;
   }
 }
 

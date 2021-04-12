@@ -28,7 +28,11 @@ const CardDisplayOptions = ({
         </p>
         <Tip>
           <p>
-            Cards will use the <strong>name</strong> attribute from your external data as
+            Cards will use the
+            {' '}
+            <strong>name</strong>
+            {' '}
+            attribute from your external data as
             the main card title.
           </p>
         </Tip>
@@ -39,13 +43,17 @@ const CardDisplayOptions = ({
           Would you like to display any other attributes to help the participant recognize
           a roster alter?
         </p>
-        { maxVariableOptions === 0 &&
-          <p><em>
-            Your external data does not seem to contain any usable attributes.
-            Is it correctly formatted?
-          </em></p>
-        }
-        { maxVariableOptions > 0 &&
+        { maxVariableOptions === 0
+          && (
+          <p>
+            <em>
+              Your external data does not seem to contain any usable attributes.
+              Is it correctly formatted?
+            </em>
+          </p>
+          )}
+        { maxVariableOptions > 0
+          && (
           <MultiSelect
             name="cardOptions.additionalProperties"
             maxItems={maxVariableOptions}
@@ -61,7 +69,7 @@ const CardDisplayOptions = ({
             ]}
             options={variableOptionsGetter}
           />
-        }
+          )}
       </Row>
     </Section>
   );
@@ -78,4 +86,3 @@ export default compose(
   withMapFormToProps('dataSource'),
   withDisabledAssetRequired,
 )(CardDisplayOptions);
-

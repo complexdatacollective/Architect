@@ -34,29 +34,28 @@ import scrollTo from './scrollTo';
  * //   { issue: 'bop', field: 'baz[0].beep.boop' },
  * // ]"
  */
-const flattenIssues = (issues, path = '') =>
-  compact(
-    flatMap(
-      issues,
-      (issue, field) => {
-        // field array
-        if (Array.isArray(issue)) {
-          return flatMap(issue, (item, index) => flattenIssues(item, `${path}${field}[${index}].`));
-        }
-        // nested field
-        if (isPlainObject(issue)) {
-          return flattenIssues(issue, `${path}${field}.`);
-        }
+const flattenIssues = (issues, path = '') => compact(
+  flatMap(
+    issues,
+    (issue, field) => {
+      // field array
+      if (Array.isArray(issue)) {
+        return flatMap(issue, (item, index) => flattenIssues(item, `${path}${field}[${index}].`));
+      }
+      // nested field
+      if (isPlainObject(issue)) {
+        return flattenIssues(issue, `${path}${field}.`);
+      }
 
-        if (issue === undefined) {
-          return null;
-        }
+      if (issue === undefined) {
+        return null;
+      }
 
-        // we've found the issue node!
-        return { issue, field: `${path}${field}` };
-      },
-    ),
-  );
+      // we've found the issue node!
+      return { issue, field: `${path}${field}` };
+    },
+  ),
+);
 
 const getFieldId = (field) => {
   // Needs to be safe for urls and ids
@@ -69,7 +68,7 @@ const getTopOffsetById = (fieldId) => {
 
   if (!target) { return null; }
 
-  const top = target.getBoundingClientRect().top;
+  const { top } = target.getBoundingClientRect();
 
   return top;
 };

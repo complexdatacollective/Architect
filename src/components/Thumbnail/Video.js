@@ -15,6 +15,7 @@ const VideoThumbnail = ({ id, meta }) => (
 
 VideoThumbnail.propTypes = {
   id: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 

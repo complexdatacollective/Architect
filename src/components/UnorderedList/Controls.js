@@ -7,9 +7,10 @@ class Controls extends Component {
   constructor(props) {
     super(props);
 
+    const { initialSortOrder } = this.props;
     this.state = {
       query: '',
-      sortOrder: this.props.initialSortOrder,
+      sortOrder: initialSortOrder,
     };
   }
 
@@ -25,10 +26,20 @@ class Controls extends Component {
 
   updateParameter(parameter) {
     this.setState(parameter);
-    this.props.onChange(parameter);
+    const { onChange } = this.props;
+    onChange(parameter);
   }
 
   render() {
+    const {
+      query,
+      sortOrder,
+    } = this.state;
+
+    const {
+      sortableProperties,
+    } = this.props;
+
     return (
       <div className="list-controls">
         <div className="list-controls__section list-controls__section--search">
@@ -37,23 +48,24 @@ class Controls extends Component {
           </div>
           <TextField
             input={{
-              value: this.state.query,
+              value: query,
               onChange: this.handleUpdateQuery,
             }}
           />
         </div>
-        { this.props.sortableProperties.length > 0 &&
+        { sortableProperties.length > 0
+          && (
           <div className="list-controls__section">
             <div className="list-controls__section-name">
               Sort by:
             </div>
             <SortControl
-              sortableProperties={this.props.sortableProperties}
-              sortOrder={this.state.sortOrder}
+              sortableProperties={sortableProperties}
+              sortOrder={sortOrder}
               onChange={this.handleUpdateSortOrder}
             />
           </div>
-        }
+          )}
       </div>
     );
   }
@@ -61,7 +73,9 @@ class Controls extends Component {
 
 Controls.propTypes = {
   onChange: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   sortableProperties: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   initialSortOrder: PropTypes.object,
 };
 

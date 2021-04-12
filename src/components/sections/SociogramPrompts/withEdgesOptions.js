@@ -29,17 +29,16 @@ const mapStateToProps = (state, { entity, type, form }) => {
 };
 
 const handlers = withHandlers({
-  handleChangeCreateEdge: ({ changeForm, form, displayEdges }) =>
-    (value) => {
-      if (!value) return;
+  handleChangeCreateEdge: ({ changeForm, form, displayEdges }) => (value) => {
+    if (!value) return;
 
-      const newDisplayEdges = [
-        ...displayEdges,
-        value,
-      ];
+    const newDisplayEdges = [
+      ...displayEdges,
+      value,
+    ];
 
-      changeForm(form, 'edges.display', newDisplayEdges);
-    },
+    changeForm(form, 'edges.display', newDisplayEdges);
+  },
 });
 
 const withEdgesOptions = compose(
@@ -48,4 +47,3 @@ const withEdgesOptions = compose(
 );
 
 export default withEdgesOptions;
-

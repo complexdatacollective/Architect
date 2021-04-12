@@ -24,10 +24,4 @@ ExternalLink.propTypes = {
   href: PropTypes.string.isRequired,
 };
 
-ExternalLink.defaultProps = {
-  params: {},
-};
-
-export { ExternalLink };
-
 export default ExternalLink;

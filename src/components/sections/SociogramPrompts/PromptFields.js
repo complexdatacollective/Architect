@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { compose } from 'recompose';
 import * as Fields from '@codaco/ui/lib/components/Fields';
@@ -10,7 +11,8 @@ import FieldsEdges from './PromptFieldsEdges';
 import withCanCreateEdgesState from './withCanCreateEdgesState';
 import Tip from '../../Tip';
 
-const PromptFields = props => (
+// TODO no prop spreading
+const PromptFields = (props) => (
   <div>
     <Section>
       <h3 id={getFieldId('text')}>Prompt Text</h3>
@@ -36,8 +38,6 @@ const PromptFields = props => (
     <FieldsHighlight {...props} />
   </div>
 );
-
-export { PromptFields };
 
 export default compose(
   withCanCreateEdgesState,

@@ -80,37 +80,45 @@ const getStyleLoaders = (preProcessor) => {
       // package.json
       loader: require.resolve('postcss-loader'),
       options: {
-        // Necessary for external CSS imports to work
-        // https://github.com/facebook/create-react-app/issues/2677
-        ident: 'postcss',
-        plugins: () => [
-          autoprefixer({
-            flexbox: 'no-2009',
-          }),
-          postUrl({
-            url: ({ url }) => {
-              /**
-               * If file exists in the Network Canvas submodule, update path to
-               * resolve there relatively from Architect.
-               */
-              const ncPath = path.resolve('src', 'network-canvas', 'src', 'styles', url);
-              const ncCSSPath = `../network-canvas/src/styles/${url}`;
+        postcssOptions: {
+          plugins: [
+            [
+              'autoprefixer',
+              {
+                flexbox: 'no-2009',
+              },
+            ],
+            [
+              'postcss-url',
+              {
+                url: ({ url }) => {
+                  /**
+                   * If file exists in the Network Canvas submodule, update path to
+                   * resolve there relatively from Architect.
+                   */
+                  const ncPath = path.resolve('src', 'network-canvas', 'src', 'styles', url);
+                  const ncCSSPath = `../network-canvas/src/styles/${url}`;
 
-              try {
-                fs.accessSync(ncPath, fs.constants.R_OK);
-                return ncCSSPath;
-              } catch (err) {
-                return url;
-              }
-            },
-          }),
-        ],
+                  try {
+                    fs.accessSync(ncPath, fs.constants.R_OK);
+                    return ncCSSPath;
+                  } catch (err) {
+                    return url;
+                  }
+                },
+              },
+            ],
+          ],
+        },
         sourceMap: shouldUseSourceMap,
       },
     },
   ];
   if (preProcessor) {
-    loaders.push(require.resolve(preProcessor));
+    loaders.push({
+      loader: require.resolve(preProcessor),
+    });
+    // loaders.push(require.resolve(preProcessor));
   }
   return loaders;
 };
@@ -221,6 +229,9 @@ const loaderRules = Object.freeze([
     ],
   },
 ]);
+
+// console.log(JSON.stringify(loaderRules, null, 2));
+// process.exit();
 
 const webpackPlugins = [
   // Generates an `index.html` file with the <script> injected.

@@ -21,34 +21,51 @@ const Codebook = ({
   nodes,
 }) => (
   <div className="codebook">
-    { !hasEgoVariables && !hasNodes && !hasEdges &&
+    { !hasEgoVariables && !hasNodes && !hasEdges
+      && (
       <p className="codebook__notice">
         There are currently no types or variables defined in this protocol.
         When you have created some interview stages, the types and variables will be shown here.
       </p>
-    }
-    { hasEgoVariables &&
+      )}
+    { hasEgoVariables
+      && (
       <CodebookCategory title="Ego">
         <EgoType entity="ego" type="ego" />
       </CodebookCategory>
-    }
+      )}
 
-    { hasNodes &&
+    { hasNodes
+      && (
       <CodebookCategory title="Node Types">
-        {nodes.map(node => <EntityType {...node} key={node.type} />)}
+        {nodes.map((node) => (
+          <EntityType
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...node}
+            key={node.type}
+          />
+        ))}
       </CodebookCategory>
-    }
+      )}
 
-    { hasEdges &&
+    { hasEdges
+      && (
       <CodebookCategory title="Edge Types">
-        {edges.map(edge => <EntityType {...edge} key={edge.type} />)}
+        {edges.map((edge) => (
+          <EntityType
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...edge}
+            key={edge.type}
+          />
+        ))}
       </CodebookCategory>
-    }
+      )}
 
-    { hasNetworkAssets &&
+    { hasNetworkAssets
+      && (
       <CodebookCategory title="Network Assets">
         {networkAssets.map(
-          networkAsset => (
+          (networkAsset) => (
             <ExternalEntity
               id={networkAsset.id}
               name={networkAsset.name}
@@ -57,18 +74,21 @@ const Codebook = ({
           ),
         )}
       </CodebookCategory>
-    }
+      )}
 
   </div>
 );
 
 Codebook.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   edges: PropTypes.array.isRequired,
   hasEdges: PropTypes.bool.isRequired,
   hasEgoVariables: PropTypes.bool.isRequired,
   hasNetworkAssets: PropTypes.bool.isRequired,
   hasNodes: PropTypes.bool.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   networkAssets: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   nodes: PropTypes.array.isRequired,
 };
 
@@ -78,9 +98,9 @@ const getEntityWithUsage = (state, index, mergeProps) => {
   return (_, id) => {
     const inUse = search.has(id);
 
-    const usage = inUse ?
-      getUsageAsStageMeta(state, getUsage(index, id)) :
-      [];
+    const usage = inUse
+      ? getUsageAsStageMeta(state, getUsage(index, id))
+      : [];
 
     return {
       ...mergeProps,
@@ -130,7 +150,5 @@ const mapStateToProps = (state) => {
     nodes,
   };
 };
-
-export { Codebook };
 
 export default connect(mapStateToProps)(Codebook);

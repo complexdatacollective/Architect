@@ -7,7 +7,7 @@ import Fade from '@codaco/ui/lib/components/Transitions/Fade';
 import window from '@codaco/ui/lib/components/window';
 import { compose } from 'recompose';
 import Button from '@codaco/ui/lib/components/Button';
-import Layout from '@components/EditorLayout';
+import { Layout } from '@components/EditorLayout';
 import Form from './Form';
 
 const InlineEditScreen = ({
@@ -27,7 +27,7 @@ const InlineEditScreen = ({
 
   return (
     <Fade in={show}>
-      <div className="inline-edit-screen" onClick={e => e.stopPropagation()}>
+      <div className="inline-edit-screen" onClick={(e) => e.stopPropagation()}>
         <Flipped flipId={flipId}>
           <div className="inline-edit-screen__container">
             <div className="inline-edit-screen__header">
@@ -35,7 +35,12 @@ const InlineEditScreen = ({
             </div>
             <div className="inline-edit-screen__content">
               <Layout>
-                <Form form={form} onSubmit={onSubmit} {...rest}>
+                <Form
+                  form={form}
+                  onSubmit={onSubmit}
+                  // eslint-disable-next-line react/jsx-props-no-spreading
+                  {...rest}
+                >
                   {children}
                 </Form>
               </Layout>
@@ -77,4 +82,3 @@ export default compose(
   window,
   connect(null, mapDispatchToProps),
 )(InlineEditScreen);
-

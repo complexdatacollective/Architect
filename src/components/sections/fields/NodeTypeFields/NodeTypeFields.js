@@ -44,18 +44,19 @@ const NodeType = ({
         <div className="stage-editor-section-node-type__edit-capture">
           <ValidatedField
             name="subject"
-            parse={value => ({ type: value, entity: 'node' })}
-            format={value => get(value, 'type')}
+            parse={(value) => ({ type: value, entity: 'node' })}
+            format={(value) => get(value, 'type')}
             options={nodeTypes}
             component={NodeSelect}
             validation={{ required: true }}
           />
 
-          { nodeTypes.length === 0 &&
+          { nodeTypes.length === 0
+            && (
             <p className="stage-editor-section-node-type__empty">
               No node types currently defined. Use the button below to create one.
             </p>
-          }
+            )}
 
           <Button
             color="primary"
@@ -65,7 +66,8 @@ const NodeType = ({
           >
             Create new node type
           </Button>
-          { nodeTypes.length !== 0 && type && !subjectHasVariableCalledName &&
+          { nodeTypes.length !== 0 && type && !subjectHasVariableCalledName
+          && (
           <Tip type="warning">
             <p>
               Ensure you create and assign a variable called &quot;name&quot; for this
@@ -73,7 +75,7 @@ const NodeType = ({
               automatically use this variable as the label for the node in the interview.
             </p>
           </Tip>
-          }
+          )}
         </div>
       </div>
     </div>
@@ -88,13 +90,12 @@ NodeType.propTypes = {
   type: PropTypes.string,
   disabled: PropTypes.bool,
   handleTypeScreenMessage: PropTypes.func.isRequired,
-  typeScreenMessage: PropTypes.any,
+  typeScreenMessage: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 };
 
 NodeType.defaultProps = {
   nodeTypes: [],
   disabled: false,
-  displayVariable: null,
   typeScreenMessage: null,
   type: null,
 };

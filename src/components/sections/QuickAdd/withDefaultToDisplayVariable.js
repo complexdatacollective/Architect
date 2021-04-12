@@ -20,12 +20,13 @@ const mapDispatchToProps = { changeForm: change };
 const withAutoSetDefaultState = connect(mapStateToProps, mapDispatchToProps);
 
 const withAutoSetDefaultHandlers = withHandlers({
-  autoSetDefault: ({ form, changeForm, quickAdd, displayVariable }) =>
-    () => {
-      if (!quickAdd && displayVariable) {
-        changeForm(form, 'quickAdd', displayVariable);
-      }
-    },
+  autoSetDefault: ({
+    form, changeForm, quickAdd, displayVariable,
+  }) => () => {
+    if (!quickAdd && displayVariable) {
+      changeForm(form, 'quickAdd', displayVariable);
+    }
+  },
 });
 
 const withAutoSetDefaultLifecycle = lifecycle({

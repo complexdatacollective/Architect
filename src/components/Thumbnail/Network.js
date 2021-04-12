@@ -15,6 +15,7 @@ const NetworkThumbnail = ({ id, meta }) => (
 
 NetworkThumbnail.propTypes = {
   id: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 
@@ -23,7 +24,5 @@ NetworkThumbnail.defaultProps = {
     name: '',
   },
 };
-
-export { NetworkThumbnail };
 
 export default withAssetMeta(NetworkThumbnail);

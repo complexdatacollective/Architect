@@ -8,8 +8,7 @@ const mockData = {
 };
 
 fs.readFile = jest.fn(
-  (path, format, resolve) =>
-    resolve(null, JSON.stringify(mockData)),
+  (path, format, resolve) => resolve(null, JSON.stringify(mockData)),
 );
 
 describe('getAssetData', () => {

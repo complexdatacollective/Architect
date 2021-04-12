@@ -6,7 +6,7 @@ import Icon from '@codaco/ui/lib/components/Icon';
 import DefaultSelectOption from './DefaultSelectOption';
 
 const getValue = (options, value) => {
-  const foundValue = options.find(option => option.value === value);
+  const foundValue = options.find((option) => option.value === value);
   if (!foundValue) { return null; }
 
   return foundValue;
@@ -14,22 +14,29 @@ const getValue = (options, value) => {
 
 class Select extends PureComponent {
   get value() {
-    return getValue(this.props.options, this.props.input.value);
+    const { options, input } = this.props;
+    return getValue(options, input.value);
   }
 
   handleChange = (option) => {
+    const {
+      onCreateNew,
+      input,
+    } = this.props;
+
     /* eslint-disable no-underscore-dangle */
     if (option.__createNewOption__) {
-      this.props.onCreateNew();
+      onCreateNew();
       return;
     }
     /* eslint-enable */
-    this.props.input.onChange(option.value);
+    input.onChange(option.value);
   }
 
   handleBlur = () => {
-    if (!this.props.input.onBlur) { return; }
-    this.props.input.onBlur(this.props.input.value);
+    const { input } = this.props;
+    if (!input.onBlur) { return; }
+    input.onBlur(input.value);
   }
 
   render() {
@@ -45,9 +52,9 @@ class Select extends PureComponent {
       ...rest
     } = this.props;
 
-    const optionsWithNew = createNewOption ?
-      [...this.props.options, { __createNewOption__: createNewOption }] :
-      this.props.options;
+    const optionsWithNew = createNewOption
+      ? [...options, { __createNewOption__: createNewOption }]
+      : options;
 
     const componentClasses = cx(
       className,
@@ -58,17 +65,17 @@ class Select extends PureComponent {
     );
     return (
       <div className={componentClasses}>
-        { label &&
-          <h4>{label}</h4>
-        }
+        { label
+          && <h4>{label}</h4>}
         <ReactSelect
           className="form-fields-select"
           classNamePrefix="form-fields-select"
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...input}
           options={optionsWithNew}
           value={this.value}
           components={{ Option: selectOptionComponent }}
-          styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+          styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
           menuPortalTarget={document.body}
           onChange={this.handleChange}
           // ReactSelect has unusual onBlur that doesn't play nicely with redux-forms
@@ -77,11 +84,17 @@ class Select extends PureComponent {
           // a round about way, and still allow us to use the `touched` property.
           onBlur={this.handleBlur}
           blurInputOnSelect={false}
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...rest}
         >
           {children}
         </ReactSelect>
-        {invalid && touched && <div className="form-fields-select__error"><Icon name="warning" />{error}</div>}
+        {invalid && touched && (
+        <div className="form-fields-select__error">
+          <Icon name="warning" />
+          {error}
+        </div>
+        )}
       </div>
     );
   }
@@ -89,14 +102,18 @@ class Select extends PureComponent {
 
 Select.propTypes = {
   className: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   selectOptionComponent: PropTypes.any,
   onDeleteOption: PropTypes.func,
   createNewOption: PropTypes.bool,
   onCreateNew: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object,
   label: PropTypes.string,
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object,
 };
 
@@ -112,6 +129,5 @@ Select.defaultProps = {
   children: null,
   meta: { invalid: false, error: null, touched: false },
 };
-
 
 export default Select;

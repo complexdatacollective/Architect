@@ -6,7 +6,7 @@ import { actionCreators as codebookActionCreators } from '@modules/protocol/code
 import { actionCreators as dialogActionCreators } from '@modules/dialogs';
 import { actionCreators as screenActionsCreators } from '@modules/ui/screens';
 import { Button } from '@codaco/ui/lib/components';
-import ScreenLink from '@components/Screens/Link';
+import ScreenLink from '@components/Screens/ScreenLink';
 import Variables from './Variables';
 import Tag from './Tag';
 import EntityIcon from './EntityIcon';
@@ -41,7 +41,13 @@ const EntityType = ({
         </div>
         <div className="codebook__entity-meta">
           { !inUse && <Tag>not in use</Tag> }
-          { inUse && <React.Fragment><em>used in:</em> {stages}</React.Fragment> }
+          { inUse && (
+          <>
+            <em>used in:</em>
+            {' '}
+            {stages}
+          </>
+          ) }
         </div>
         <div className="codebook__entity-control">
           <Button
@@ -59,7 +65,8 @@ const EntityType = ({
           </Button>
         </div>
       </div>
-      { variables.length > 0 &&
+      { variables.length > 0
+        && (
         <div className="codebook__entity-variables">
           <h3>Variables:</h3>
           <Variables
@@ -68,7 +75,7 @@ const EntityType = ({
             type={type}
           />
         </div>
-      }
+        )}
     </div>
   );
 };
@@ -78,10 +85,12 @@ EntityType.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   usage: PropTypes.array.isRequired,
   inUse: PropTypes.bool,
-  handleDelete: PropTypes.func.isRequired,
-  handleEdit: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func,
+  handleEdit: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   variables: PropTypes.array,
 };
 
@@ -106,42 +115,51 @@ const withEntityHandlers = compose(
     openScreen: screenActionsCreators.openScreen,
   }),
   withHandlers({
-    handleEdit: ({ openScreen, entity, type }) =>
-      () => {
-        openScreen('type', { entity, type, metaOnly: true });
-      },
-    handleDelete: ({ deleteType, openDialog, entity, type, name, inUse }) =>
-      () => {
-        if (inUse) {
-          openDialog({
-            type: 'Notice',
-            title: `Cannot delete ${name} ${entity}`,
-            message: (
-              <p>
-                The {name} {entity} cannot be deleted as it is currently in use.
-              </p>
-            ),
-          });
-
-          return;
-        }
-
+    handleEdit: ({ openScreen, entity, type }) => () => {
+      openScreen('type', { entity, type, metaOnly: true });
+    },
+    handleDelete: ({
+      deleteType, openDialog, entity, type, name, inUse,
+    }) => () => {
+      if (inUse) {
         openDialog({
-          type: 'Warning',
-          title: `Delete ${name} ${entity}`,
+          type: 'Notice',
+          title: `Cannot delete ${name} ${entity}`,
           message: (
             <p>
-              Are you sure you want to delete the {name} {entity}? This cannot be undone.
+              The
+              {' '}
+              {name}
+              {' '}
+              {entity}
+              {' '}
+              cannot be deleted as it is currently in use.
             </p>
           ),
-          onConfirm: () => { deleteType(entity, type); },
-          confirmLabel: `Delete ${name} ${entity}`,
         });
-      },
+
+        return;
+      }
+
+      openDialog({
+        type: 'Warning',
+        title: `Delete ${name} ${entity}`,
+        message: (
+          <p>
+            Are you sure you want to delete the
+            {' '}
+            {name}
+            {' '}
+            {entity}
+            ? This cannot be undone.
+          </p>
+        ),
+        onConfirm: () => deleteType(entity, type),
+        confirmLabel: `Delete ${name} ${entity}`,
+      });
+    },
   }),
 );
-
-export { EntityType };
 
 export default compose(
   connect(mapStateToProps),

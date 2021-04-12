@@ -1,4 +1,6 @@
-import { map, compact, flatMap, uniqBy, memoize } from 'lodash';
+import {
+  map, compact, flatMap, uniqBy, memoize,
+} from 'lodash';
 import { createSelector } from 'reselect';
 import { getProtocol } from './protocol';
 
@@ -8,8 +10,7 @@ import { getProtocol } from './protocol';
  */
 const getFormTypeUsageIndex = createSelector(
   getProtocol,
-  protocol =>
-    map(protocol.forms, ({ entity, type }, id) => ({ subject: { entity, type }, owner: { id, type: 'form' } })),
+  (protocol) => map(protocol.forms, ({ entity, type }, id) => ({ subject: { entity, type }, owner: { id, type: 'form' } })),
 );
 
 /**
@@ -17,8 +18,7 @@ const getFormTypeUsageIndex = createSelector(
  */
 const getStagesWithSubject = createSelector(
   getProtocol,
-  protocol =>
-    protocol.stages.filter(stage => !!stage.subject),
+  (protocol) => protocol.stages.filter((stage) => !!stage.subject),
 );
 
 /**
@@ -27,35 +27,30 @@ const getStagesWithSubject = createSelector(
  */
 const getStageTypeUsageIndex = createSelector(
   getStagesWithSubject,
-  stagesWithSubject =>
-    map(
-      stagesWithSubject,
-      ({ subject: { entity, type }, id }) =>
-        ({ subject: { entity, type }, owner: { type: 'stage', id } }),
-    ),
+  (stagesWithSubject) => map(
+    stagesWithSubject,
+    ({ subject: { entity, type }, id }) => ({ subject: { entity, type }, owner: { type: 'stage', id } }),
+  ),
 );
 
 /**
  * Returns flattened prompts (with stageId) from all stages
  * @param {array} stages Stage array
  */
-const flattenPromptsFromStages = stages =>
-  compact(
-    flatMap(
-      stages,
-      ({ prompts, id: stageId }) =>
-        prompts && prompts.map(prompt => ({ ...prompt, stageId })),
-    ),
-  );
+const flattenPromptsFromStages = (stages) => compact(
+  flatMap(
+    stages,
+    ({ prompts, id: stageId }) => prompts && prompts.map((prompt) => ({ ...prompt, stageId })),
+  ),
+);
 
 /**
  * Returns array of flattened prompts (with stageId) that have a subject property
  */
 const getPromptsWithSubject = createSelector(
   getProtocol,
-  protocol =>
-    flattenPromptsFromStages(protocol.stages)
-      .filter(prompt => !!prompt.subject),
+  (protocol) => flattenPromptsFromStages(protocol.stages)
+    .filter((prompt) => !!prompt.subject),
 );
 
 /**
@@ -64,12 +59,10 @@ const getPromptsWithSubject = createSelector(
  */
 const getPromptTypeUsageIndex = createSelector(
   getPromptsWithSubject,
-  promptsWithSubject =>
-    map(
-      promptsWithSubject,
-      ({ subject: { entity, type }, stageId, id: promptId }) =>
-        ({ subject: { entity, type }, owner: { type: 'prompt', promptId, stageId } }),
-    ),
+  (promptsWithSubject) => map(
+    promptsWithSubject,
+    ({ subject: { entity, type }, stageId, id: promptId }) => ({ subject: { entity, type }, owner: { type: 'prompt', promptId, stageId } }),
+  ),
 );
 
 /**
@@ -78,27 +71,26 @@ const getPromptTypeUsageIndex = createSelector(
  */
 const getSociogramTypeUsageIndex = createSelector(
   getProtocol,
-  protocol =>
-    flatMap(
-      flattenPromptsFromStages(protocol.stages.filter(({ type }) => type === 'Sociogram')),
-      ({ stageId, id: promptId, ...prompt }) => {
-        if (!prompt.edges) { return []; }
+  (protocol) => flatMap(
+    flattenPromptsFromStages(protocol.stages.filter(({ type }) => type === 'Sociogram')),
+    ({ stageId, id: promptId, ...prompt }) => {
+      if (!prompt.edges) { return []; }
 
-        const { display, creates } = prompt.edges;
-        let usage = [];
+      const { display, creates } = prompt.edges;
+      let usage = [];
 
-        if (creates) {
-          usage = usage.concat({ subject: { entity: 'edge', type: creates }, owner: { type: 'prompt', promptId, stageId } });
-        }
-        if (display) {
-          usage = usage.concat(
-            display.map(edge => ({ subject: { entity: 'edge', type: edge }, owner: { type: 'prompt', promptId, stageId } })),
-          );
-        }
+      if (creates) {
+        usage = usage.concat({ subject: { entity: 'edge', type: creates }, owner: { type: 'prompt', promptId, stageId } });
+      }
+      if (display) {
+        usage = usage.concat(
+          display.map((edge) => ({ subject: { entity: 'edge', type: edge }, owner: { type: 'prompt', promptId, stageId } })),
+        );
+      }
 
-        return usage;
-      },
-    ),
+      return usage;
+    },
+  ),
 );
 
 /**
@@ -129,17 +121,13 @@ const getTypeUsageIndex = createSelector(
  */
 const makeGetUsageForType = createSelector(
   getTypeUsageIndex,
-  typeUsageIndex =>
-    memoize(
-      (searchEntity, searchType) =>
-        typeUsageIndex.filter(
-          ({ subject: { type, entity } }) =>
-            type === searchType && entity === searchEntity,
-        ),
-      (searchEntity, searchType) => `${searchEntity}:${searchType}`,
+  (typeUsageIndex) => memoize(
+    (searchEntity, searchType) => typeUsageIndex.filter(
+      ({ subject: { type, entity } }) => type === searchType && entity === searchEntity,
     ),
+    (searchEntity, searchType) => `${searchEntity}:${searchType}`,
+  ),
 );
-
 
 /**
  * Counts each unique promptId stageId pair, grouped by stageId
@@ -165,41 +153,40 @@ const perStagePromptCountFromUsage = (usage) => {
 const makeGetDeleteImpact = createSelector(
   getProtocol,
   makeGetUsageForType,
-  (protocol, getUsageForType) =>
-    memoize(
-      (searchEntity, searchType) => {
-        const usage = getUsageForType(searchEntity, searchType);
+  (protocol, getUsageForType) => memoize(
+    (searchEntity, searchType) => {
+      const usage = getUsageForType(searchEntity, searchType);
 
-        const perStagePromptCount = perStagePromptCountFromUsage(usage);
+      const perStagePromptCount = perStagePromptCountFromUsage(usage);
 
-        const additionallyDeletedStageIds = protocol.stages
-          .reduce((memo, { id, prompts }) => {
-            if (!prompts || prompts.length !== perStagePromptCount[id]) { return memo; }
-            return [
-              ...memo,
-              id,
-            ];
-          }, []);
+      const additionallyDeletedStageIds = protocol.stages
+        .reduce((memo, { id, prompts }) => {
+          if (!prompts || prompts.length !== perStagePromptCount[id]) { return memo; }
+          return [
+            ...memo,
+            id,
+          ];
+        }, []);
 
-        const deletedObjects = uniqBy(
-          usage
-            .map(({ owner }) => {
-              if (
-                owner.type === 'prompt' &&
-                additionallyDeletedStageIds.includes(owner.stageId)
-              ) {
-                return { id: owner.stageId, type: 'stage' };
-              }
+      const deletedObjects = uniqBy(
+        usage
+          .map(({ owner }) => {
+            if (
+              owner.type === 'prompt'
+                && additionallyDeletedStageIds.includes(owner.stageId)
+            ) {
+              return { id: owner.stageId, type: 'stage' };
+            }
 
-              return owner;
-            }),
-          ({ type, ...owner }) => (owner.id ? `${owner.id}:${type}` : `${owner.stageId}:${owner.promptId}:${type}`),
-        );
+            return owner;
+          }),
+        ({ type, ...owner }) => (owner.id ? `${owner.id}:${type}` : `${owner.stageId}:${owner.promptId}:${type}`),
+      );
 
-        return deletedObjects;
-      },
-      (searchEntity, searchType) => `${searchEntity}:${searchType}`,
-    ),
+      return deletedObjects;
+    },
+    (searchEntity, searchType) => `${searchEntity}:${searchType}`,
+  ),
 );
 
 /**
@@ -208,44 +195,39 @@ const makeGetDeleteImpact = createSelector(
  */
 const getTypes = createSelector(
   getProtocol,
-  protocol =>
-    flatMap(
-      protocol.codebook,
-      (entityTypes, entity) =>
-        map(entityTypes, (_, type) => ({ entity, type })),
-    ),
+  (protocol) => flatMap(
+    protocol.codebook,
+    (entityTypes, entity) => map(entityTypes, (_, type) => ({ entity, type })),
+  ),
 );
 
 const makeGetObjectLabel = createSelector(
   getProtocol,
-  protocol =>
-    memoize(
-      (protocolObject) => {
-        switch (protocolObject.type) {
-          case 'form':
-            return protocol.forms[protocolObject.id].title;
-          case 'stage':
-            return protocol.stages.find(({ id }) => id === protocolObject.id).label;
-          case 'prompt': {
-            const stageLabel = protocol.stages.find(({ id }) =>
-              id === protocolObject.stageId).label;
-            const promptLabel = protocol.stages
-              .find(({ id }) => id === protocolObject.stageId).prompts
-              .find(({ id }) => id === protocolObject.promptId).text;
-            return `${stageLabel} -> ${promptLabel}`;
-          }
-          default:
-            return '';
+  (protocol) => memoize(
+    (protocolObject) => {
+      switch (protocolObject.type) {
+        case 'form':
+          return protocol.forms[protocolObject.id].title;
+        case 'stage':
+          return protocol.stages.find(({ id }) => id === protocolObject.id).label;
+        case 'prompt': {
+          const stageLabel = protocol.stages.find(({ id }) => id === protocolObject.stageId).label;
+          const promptLabel = protocol.stages
+            .find(({ id }) => id === protocolObject.stageId).prompts
+            .find(({ id }) => id === protocolObject.promptId).text;
+          return `${stageLabel} -> ${promptLabel}`;
         }
-      },
-      protocolObject => `${protocolObject.type}: ${
-        protocolObject.type === 'prompt' ?
-          `${protocolObject.stageId}:${protocolObject.promptId}` :
-          protocolObject.id
-      }`,
-    ),
+        default:
+          return '';
+      }
+    },
+    (protocolObject) => `${protocolObject.type}: ${
+      protocolObject.type === 'prompt'
+        ? `${protocolObject.stageId}:${protocolObject.promptId}`
+        : protocolObject.id
+    }`,
+  ),
 );
-
 
 export {
   getTypeUsageIndex,

@@ -23,7 +23,7 @@ const template = () => ({
   highlight: [],
 });
 
-const NarrativePresets = props => (
+const NarrativePresets = (props) => (
   <EditableList
     previewComponent={PresetPreview}
     editComponent={PresetFields}
@@ -31,6 +31,7 @@ const NarrativePresets = props => (
     fieldName="presets"
     template={template}
     normalize={normalizePreset}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
     <h2>Narrative Presets</h2>

@@ -47,7 +47,14 @@ const EditEgoRule = ({
         <h1>Construct an Ego Rule</h1>
         <p>
           For help with constructing rules, see our documentation articles
-          on <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/skip-logic/">skip logic</ExternalLink> and <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/filtering/">network filtering</ExternalLink>.
+          on
+          {' '}
+          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/skip-logic/">skip logic</ExternalLink>
+          {' '}
+          and
+          {' '}
+          <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/filtering/">network filtering</ExternalLink>
+          .
         </p>
         <motion.div
           className="rules-edit-rule__row"
@@ -68,7 +75,8 @@ const EditEgoRule = ({
             validation={{ required: true }}
           />
         </motion.div>
-        { optionsWithDefaults.attribute &&
+        { optionsWithDefaults.attribute
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -88,8 +96,9 @@ const EditEgoRule = ({
               validation={{ required: true }}
             />
           </motion.div>
-        }
-        { operatorNeedsValue &&
+          )}
+        { operatorNeedsValue
+          && (
           <motion.div
             className="rules-edit-rule__row"
             variants={rowVariants}
@@ -109,7 +118,7 @@ const EditEgoRule = ({
               validation={{ required: true }}
             />
           </motion.div>
-        }
+          )}
       </motion.div>
     </AnimatePresence>
   );
@@ -117,10 +126,14 @@ const EditEgoRule = ({
 
 EditEgoRule.propTypes = {
   rule: PropTypes.shape({
+    // eslint-disable-next-line react/forbid-prop-types
     options: PropTypes.object,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variablesAsOptions: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   operatorOptions: PropTypes.array.isRequired,
   handleRuleChange: PropTypes.func.isRequired,
   variableType: PropTypes.string,
@@ -130,8 +143,6 @@ EditEgoRule.defaultProps = {
   variableType: null,
   variableOptions: null,
 };
-
-export { EditEgoRule };
 
 export default compose(
   withOptions('ego'),

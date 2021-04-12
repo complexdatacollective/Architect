@@ -5,7 +5,7 @@ import { get } from 'lodash';
 import Node from '@codaco/ui/lib/components/Node';
 import { getNodeTypes } from '../selectors/codebook';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   nodeTypes: getNodeTypes(state),
 });
 
@@ -22,6 +22,7 @@ const PreviewNode = ({
 };
 
 PreviewNode.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   nodeTypes: PropTypes.object.isRequired,
   type: PropTypes.string,
 };

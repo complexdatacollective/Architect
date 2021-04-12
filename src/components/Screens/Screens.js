@@ -26,8 +26,7 @@ import { getScreenComponent } from './screenIndex';
 const Screens = (props) => {
   const screens = props.screens.map(({ screen, params }, index) => {
     const ScreenComponent = getScreenComponent(screen);
-    const onComplete = result =>
-      props.closeScreen(screen, result);
+    const onComplete = (result) => props.closeScreen(screen, result);
 
     // Default animation from center?
     const getOrigin = () => ({
@@ -88,6 +87,7 @@ const Screens = (props) => {
           }}
         >
           <ScreenComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...params}
             onComplete={onComplete}
           />
@@ -100,11 +100,12 @@ const Screens = (props) => {
 };
 
 Screens.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   screens: PropTypes.array.isRequired,
   closeScreen: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   screens: getScreensStack(state),
 });
 

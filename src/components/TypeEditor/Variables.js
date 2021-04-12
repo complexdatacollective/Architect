@@ -32,8 +32,7 @@ const sort = (list, sortOrder) => {
   return orderBy(list, sortOrder.property, sortOrder.direction);
 };
 
-const filter = (list, { query, sortOrder }) =>
-  sort(search(list, query), sortOrder);
+const filter = (list, { query, sortOrder }) => sort(search(list, query), sortOrder);
 
 const Variables = ({
   form,
@@ -49,6 +48,7 @@ const Variables = ({
     filter={filter}
     sortMode="auto"
     validation={{}}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   >
     <h2>Variables</h2>
@@ -58,10 +58,10 @@ const Variables = ({
 Variables.propTypes = {
   form: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   sortableProperties: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialSortOrder: PropTypes.object.isRequired,
 };
-
-export { Variables };
 
 export default Variables;

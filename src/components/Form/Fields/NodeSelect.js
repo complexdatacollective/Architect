@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Node from '@codaco/ui/lib/components/Node';
 
-const PreviewNode = ({ label, color, onClick, selected }) => (
+const PreviewNode = ({
+  label, color, onClick, selected,
+}) => (
   <div className="preview-node" onClick={onClick}>
     <Node label={label} selected={selected} color={color} />
   </div>
@@ -23,7 +25,8 @@ PreviewNode.defaultProps = {
 
 class NodeSelect extends Component {
   handleClickNode = (value) => {
-    this.props.input.onChange(value);
+    const { input } = this.props;
+    input.onChange(value);
   };
 
   render() {
@@ -58,7 +61,9 @@ class NodeSelect extends Component {
 
 NodeSelect.propTypes = {
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   input: PropTypes.object.isRequired,
 };
 
@@ -68,4 +73,3 @@ NodeSelect.defaultProps = {
 };
 
 export default NodeSelect;
-

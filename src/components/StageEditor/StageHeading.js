@@ -10,8 +10,7 @@ import { getStageIndex } from '@selectors/protocol';
 import { ValidatedField } from '../Form';
 import { getFieldId } from '../../utils/issues';
 
-const getTimelineImage = type =>
-  get(timelineImages, type, timelineImages.Default);
+const getTimelineImage = (type) => get(timelineImages, type, timelineImages.Default);
 
 const StageHeading = ({
   stageNumber,
@@ -22,7 +21,8 @@ const StageHeading = ({
   <div className="stage-editor-section stage-heading">
     <div className="stage-meta">
       {
-        getTimelineImage(type) &&
+        getTimelineImage(type)
+          && (
           <div className="timeline-preview">
             <img
               src={getTimelineImage(type)}
@@ -32,6 +32,7 @@ const StageHeading = ({
             />
             <div className="timeline-stage__notch">{stageNumber}</div>
           </div>
+          )
       }
       <div className="stage-name-container">
         <div id={getFieldId('label')} data-name="Stage name" />
@@ -56,12 +57,12 @@ StageHeading.propTypes = {
   stageNumber: PropTypes.number,
   type: PropTypes.string,
   toggleCodeView: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any,
 };
 
 StageHeading.defaultProps = {
   stageNumber: null,
-  name: '',
   type: '',
   toggleCodeView: noop,
   children: null,
@@ -74,11 +75,8 @@ const mapStateToProps = (state, { id }) => {
 
   return {
     stageNumber,
-    name: formValues.label,
     type: formValues.type,
   };
 };
-
-export { StageHeading };
 
 export default connect(mapStateToProps)(StageHeading);

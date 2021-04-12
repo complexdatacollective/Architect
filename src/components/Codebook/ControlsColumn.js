@@ -21,6 +21,4 @@ ControlsColumn.propTypes = {
   inUse: PropTypes.bool.isRequired,
 };
 
-export { ControlsColumn };
-
 export default ControlsColumn;

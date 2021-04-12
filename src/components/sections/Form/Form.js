@@ -28,7 +28,8 @@ const Form = ({
     <p>
       Use this section to define the fields to collect when this form is shown.
     </p>
-    {!disableFormTitle &&
+    {!disableFormTitle
+    && (
     <ValidatedField
       name="form.title"
       label="Form heading text (e.g 'Add a person')"
@@ -37,7 +38,7 @@ const Form = ({
       className="stage-editor-section-title"
       validation={{ required: true }}
     />
-    }
+    )}
     <EditableList
       editComponent={FieldFields}
       editProps={{

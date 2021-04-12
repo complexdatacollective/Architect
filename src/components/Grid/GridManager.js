@@ -16,7 +16,7 @@ import withEditHandlers from './withEditHandlers';
 
 const formName = 'editable-list-form';
 
-const notEmpty = value => (
+const notEmpty = (value) => (
   value && value.length > 0 ? undefined : 'You must create at least one item'
 );
 
@@ -71,16 +71,18 @@ const GridManager = ({
               onEditItem={handleEditField}
               editField={editField}
               capacity={capacity}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...rest}
             />
           </div>
-          { hasSpace &&
+          { hasSpace
+            && (
             <div className="grid-manager__add">
               <Button onClick={handleAddNew} size="small" icon="add">
                 Add new item
               </Button>
             </div>
-          }
+            )}
         </div>
         <InlineEditScreen
           show={!!editField}
@@ -93,6 +95,7 @@ const GridManager = ({
           form={formName}
         >
           <EditComponent
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
             form={formName}
             fieldId={editField}
@@ -111,8 +114,11 @@ GridManager.propTypes = {
   contentId: PropTypes.string,
   title: PropTypes.string,
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   previewComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   editComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   validation: PropTypes.object,
   editField: PropTypes.string,
   handleEditField: PropTypes.func.isRequired,
@@ -121,14 +127,18 @@ GridManager.propTypes = {
   handleResetEditField: PropTypes.func.isRequired,
   hasSpace: PropTypes.bool.isRequired,
   capacity: PropTypes.number.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialValues: PropTypes.any,
   itemCount: PropTypes.number.isRequired,
   itemSelector: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array.isRequired,
   normalize: PropTypes.func.isRequired,
   setEditField: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   template: PropTypes.any,
   upsert: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   windowRoot: PropTypes.any.isRequired,
 };
 

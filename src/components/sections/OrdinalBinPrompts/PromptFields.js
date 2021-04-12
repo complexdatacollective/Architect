@@ -30,16 +30,14 @@ const PromptFields = ({
     initialValues: { name: null, type: null },
   };
 
-  const handleCreatedNewVariable = (id, { field }) =>
-    changeForm(form, field, id);
+  const handleCreatedNewVariable = (id, { field }) => changeForm(form, field, id);
 
   const [newVariableWindowProps, openNewVariableWindow] = useNewVariableWindowState(
     newVariableWindowInitialProps,
     handleCreatedNewVariable,
   );
 
-  const handleNewVariable = name =>
-    openNewVariableWindow({ initialValues: { name, type: 'ordinal' } }, { field: 'variable' });
+  const handleNewVariable = (name) => openNewVariableWindow({ initialValues: { name, type: 'ordinal' } }, { field: 'variable' });
 
   const ordinalVariableOptions = variableOptions
     .filter(({ type: variableType }) => variableType === 'ordinal');
@@ -51,7 +49,7 @@ const PromptFields = ({
   const showVariableOptionsTip = totalOptionsLength > 5;
 
   return (
-    <React.Fragment>
+    <>
       <Section>
         <Row>
           <h3 id={getFieldId('text')}>Prompt Text</h3>
@@ -88,27 +86,40 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      { variable &&
+      { variable
+        && (
         <Section>
           <Row>
             <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
-            <p>Create <strong>up to 5</strong> options for this variable.</p>
-            { showVariableOptionsTip &&
+            <p>
+              Create
+              <strong>up to 5</strong>
+              {' '}
+              options for this variable.
+            </p>
+            { showVariableOptionsTip
+            && (
             <Tip type="error">
               <p>
-                The ordinal bin interface is designed to use <strong>up to 5 option
-                  values </strong>. Using more will create
+                The ordinal bin interface is designed to use
+                {' '}
+                <strong>
+                  up to 5 option
+                  values
+                  {' '}
+                </strong>
+                . Using more will create
                 a sub-optimal experience for participants, and might reduce data quality.
               </p>
             </Tip>
-            }
+            )}
             <Options
               name="variableOptions"
               label="Options"
             />
           </Row>
         </Section>
-      }
+        )}
       <Section>
         <Row>
           <h3 id={getFieldId('color')} data-name="Gradient color">Color</h3>
@@ -116,12 +127,6 @@ const PromptFields = ({
             Interviewer will render each option in your ordinal variable using a
             color gradient. Which color would you like to use for this scale?
           </p>
-          {/* <Tip>
-            <p>
-              Consider using a color consistently throughout your interview protocol
-              to represent each theme, to help reenforce the idea to your participants.
-            </p>
-          </Tip> */}
           <ValidatedField
             component={ColorPicker}
             name="color"
@@ -133,7 +138,10 @@ const PromptFields = ({
       </Section>
       <Section>
         <Row>
-          <h3>Bucket Sort Order <small>(optional)</small></h3>
+          <h3>
+            Bucket Sort Order
+            <small>(optional)</small>
+          </h3>
           <p>
             Nodes are stacked in the bucket before they are placed by the participant. You may
             optionally configure a list of rules to determine how nodes are sorted in the bucket
@@ -158,7 +166,10 @@ const PromptFields = ({
       </Section>
       <Section>
         <Row>
-          <h3>Bin Sort Order <small>(optional)</small></h3>
+          <h3>
+            Bin Sort Order
+            <small>(optional)</small>
+          </h3>
           <p>
             You may also configure one or more sort rules that determine the order that nodes
             are listed after they have been placed into a bin.
@@ -174,19 +185,23 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-      <NewVariableWindow {...newVariableWindowProps} />
-    </React.Fragment>
+      <NewVariableWindow
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...newVariableWindowProps}
+      />
+    </>
   );
 };
 
 PromptFields.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array,
-  onDeleteVariable: PropTypes.func.isRequired,
   entity: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   changeForm: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   variable: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
   optionsForVariableDraft: PropTypes.array,
 };
 
@@ -195,8 +210,6 @@ PromptFields.defaultProps = {
   variable: null,
   optionsForVariableDraft: [],
 };
-
-export { PromptFields };
 
 export default compose(
   withVariableOptions,

@@ -24,32 +24,41 @@ const Assets = ({
 }) => {
   const handleDelete = !disableDelete && onDelete;
 
-  const renderedAssets = assets.map(asset => (
-    <div className="asset-browser-assets__asset" key={asset.id}>
+  const renderedAssets = assets.map(({
+    id,
+    name,
+    source,
+    type: thumbnailType,
+    isUsed,
+  }) => (
+    <div className="asset-browser-assets__asset" key={id}>
       <Thumbnail
-        {...asset}
+        id={id}
+        name={name}
+        source={source}
+        type={thumbnailType}
+        isUsed={isUsed}
         onClick={onSelect}
         onDelete={handleDelete}
       />
     </div>
   ));
 
-  const selectProps = {
-    options: ASSET_TYPES,
-    input: {
-      onChange: onUpdateAssetFilter,
-      value: assetType,
-    },
-    label: 'Show types:',
-  };
-
   return (
     <div className="asset-browser-assets">
-      { !type &&
+      { !type
+        && (
         <div className="asset-browser-assets__controls">
-          <RadioGroup {...selectProps} />
+          <RadioGroup
+            options={ASSET_TYPES}
+            input={{
+              onChange: onUpdateAssetFilter,
+              value: assetType,
+            }}
+            label="Show types:"
+          />
         </div>
-      }
+        )}
       <div className="asset-browser-assets__assets">
         {assets.length > 0 ? renderedAssets : (<em>No resources to display.</em>)}
       </div>
@@ -57,11 +66,24 @@ const Assets = ({
   );
 };
 
+const asset = PropTypes.shape({
+  id: PropTypes.string,
+  isUsed: PropTypes.bool,
+  name: PropTypes.string,
+  source: PropTypes.string,
+  type: PropTypes.oneOf([
+    'image',
+    'video',
+    'audio',
+    'network',
+  ]),
+});
+
 Assets.propTypes = {
   type: PropTypes.string,
   onSelect: PropTypes.func,
   onDelete: PropTypes.func,
-  assets: PropTypes.array,
+  assets: PropTypes.arrayOf(asset),
   assetType: PropTypes.string,
   onUpdateAssetFilter: PropTypes.func.isRequired,
   disableDelete: PropTypes.bool,

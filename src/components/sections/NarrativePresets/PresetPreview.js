@@ -6,12 +6,12 @@ import Preview from '../../EditableList/Preview';
 
 class PresetPreview extends Preview {
   preview() {
-    const fieldId = this.props.fieldId;
+    const { fieldId } = this.props;
 
     return (
       <Field
         name={`${fieldId}.label`}
-        component={field => <Markdown source={field.input.value} />}
+        component={(field) => <Markdown source={field.input.value} />}
       />
     );
   }
@@ -20,7 +20,5 @@ class PresetPreview extends Preview {
 PresetPreview.propTypes = {
   fieldId: PropTypes.string.isRequired,
 };
-
-export { PresetPreview };
 
 export default PresetPreview;

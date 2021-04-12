@@ -7,7 +7,7 @@ import MultiSelect from '@components/Form/MultiSelect';
 import withMapFormToProps from '@components/enhancers/withMapFormToProps';
 import withDisabledAssetRequired from '@components/enhancers/withDisabledAssetRequired';
 import useVariablesFromExternalData from '@hooks/useVariablesFromExternalData';
-import getVariableOptionsGetter from '../SortOptionsForExternalData/getVariableOptionsGetter';
+import getVariableOptionsGetter from './getVariableOptionsGetter';
 import getSortOrderOptionGetter from './getSortOrderOptionGetter';
 
 const SortOptions = ({
@@ -28,7 +28,10 @@ const SortOptions = ({
         </p>
       </Row>
       <Row>
-        <h4>Initial Sort Order <small>(optional)</small></h4>
+        <h4>
+          Initial Sort Order
+          <small>(optional)</small>
+        </h4>
         <p>
           Create one or more rules to determine the default sort order or the roster,
           when it is first shown to the participant. By default, Interviewer will
@@ -45,7 +48,10 @@ const SortOptions = ({
         />
       </Row>
       <Row>
-        <h4>Participant Sortable Properties <small>(optional)</small></h4>
+        <h4>
+          Participant Sortable Properties
+          <small>(optional)</small>
+        </h4>
         <p>
           This interface allows the participant to sort the roster, to help with locating
           a specific member. Select one or more attributes from your roster that the
@@ -80,4 +86,3 @@ export default compose(
   withMapFormToProps('dataSource'),
   withDisabledAssetRequired,
 )(SortOptions);
-

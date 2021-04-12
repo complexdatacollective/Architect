@@ -11,8 +11,7 @@ const DEFAULT_VALUES = {
   categorical: [],
 };
 
-const getDefaultValue = variableType =>
-  DEFAULT_VALUES[variableType] || '';
+const getDefaultValue = (variableType) => DEFAULT_VALUES[variableType] || '';
 
 export const getDefaultOptions = (attributes, variableType) => {
   // generate default options object with all possible attributes
@@ -27,8 +26,7 @@ export const getDefaultOptions = (attributes, variableType) => {
   return pick(defaultOptions, attributes);
 };
 
-export const makeGetOptionsWithDefaults = (attributes, variableType) =>
-  options => ({
-    ...getDefaultOptions(attributes, variableType),
-    ...options,
-  });
+export const makeGetOptionsWithDefaults = (attributes, variableType) => (options) => ({
+  ...getDefaultOptions(attributes, variableType),
+  ...options,
+});

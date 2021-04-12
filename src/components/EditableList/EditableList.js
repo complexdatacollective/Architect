@@ -22,7 +22,7 @@ const sortModes = [
   'manual',
 ];
 
-const notEmpty = value => (
+const notEmpty = (value) => (
   value && value.length > 0 ? undefined : 'You must create at least one item.'
 );
 
@@ -82,6 +82,7 @@ class EditableList extends PureComponent {
                 onClickPrompt={handleEditField}
                 editField={editField}
                 form={formName}
+                // eslint-disable-next-line react/jsx-props-no-spreading
                 {...rest}
               />
             </div>
@@ -98,10 +99,13 @@ class EditableList extends PureComponent {
             onSubmitFail={handleSubmitFail}
             onCancel={handleCancelEditField}
             form={formName}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...editProps}
           >
             <EditComponent
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...rest}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...editProps}
               form={formName}
               initialValues={initialValues}
@@ -122,8 +126,11 @@ EditableList.propTypes = {
   contentId: PropTypes.string,
   title: PropTypes.string,
   children: PropTypes.node,
+  // eslint-disable-next-line react/forbid-prop-types
   previewComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   editComponent: PropTypes.any.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   validation: PropTypes.object,
   editField: PropTypes.string,
   handleEditField: PropTypes.func.isRequired,
@@ -132,9 +139,12 @@ EditableList.propTypes = {
   handleUpdate: PropTypes.func.isRequired,
   handleAddNew: PropTypes.func.isRequired,
   upsert: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   itemCount: PropTypes.any.isRequired,
   setEditField: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   initialValues: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
   editProps: PropTypes.any,
 };
 

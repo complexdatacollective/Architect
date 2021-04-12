@@ -11,12 +11,12 @@ class PromptPreview extends Preview {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Field
           name={`${fieldId}.text`}
-          component={field => <Markdown source={field.input.value} />}
+          component={(field) => <Markdown source={field.input.value} />}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

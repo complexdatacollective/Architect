@@ -1,7 +1,6 @@
 /* eslint-env jest */
 
-const defaultImplementation = name =>
-  () => Promise.reject(new Error(`lib mock ${name}`));
+const defaultImplementation = (name) => () => Promise.reject(new Error(`lib mock ${name}`));
 
 const getTempDir = jest.fn(defaultImplementation('getTempDir'));
 const readProtocol = jest.fn(defaultImplementation('readProtocol'));

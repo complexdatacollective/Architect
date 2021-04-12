@@ -4,10 +4,18 @@ import TextField from '@codaco/ui/lib/components/Fields/Text';
 import ValidatedField from '@components/Form/ValidatedField';
 
 const ScalarParameters = ({ name }) => (
-  <React.Fragment>
+  <>
     <p>
       This input type requires you to
-      specify a <strong>minimum</strong> and <strong>maximum</strong> label,
+      specify a
+      {' '}
+      <strong>minimum</strong>
+      {' '}
+      and
+      {' '}
+      <strong>maximum</strong>
+      {' '}
+      label,
       which will be displayed at each end of the scale.
     </p>
     <ValidatedField
@@ -21,7 +29,7 @@ const ScalarParameters = ({ name }) => (
       component={TextField}
       name={`${name}.maxLabel`}
     />
-  </React.Fragment>
+  </>
 );
 
 ScalarParameters.propTypes = {

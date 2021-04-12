@@ -2,25 +2,23 @@ import log from 'electron-log';
 import { validateSchema, validateLogic } from '../protocol-validation/validation';
 import { errToString } from '../protocol-validation/validation/helpers';
 
-const asyncValidateSchema = async protocol =>
-  new Promise((resolve, reject) => {
-    try {
-      const schemaErrors = validateSchema(protocol);
-      resolve(schemaErrors);
-    } catch (e) {
-      reject(e);
-    }
-  });
+const asyncValidateSchema = async (protocol) => new Promise((resolve, reject) => {
+  try {
+    const schemaErrors = validateSchema(protocol);
+    resolve(schemaErrors);
+  } catch (e) {
+    reject(e);
+  }
+});
 
-const asyncValidateLogic = async protocol =>
-  new Promise((resolve, reject) => {
-    try {
-      const logicErrors = validateLogic(protocol);
-      resolve(logicErrors);
-    } catch (e) {
-      reject(e);
-    }
-  });
+const asyncValidateLogic = async (protocol) => new Promise((resolve, reject) => {
+  try {
+    const logicErrors = validateLogic(protocol);
+    resolve(logicErrors);
+  } catch (e) {
+    reject(e);
+  }
+});
 
 const validateProtocol = (protocol) => {
   log.debug('validateProtocol()');

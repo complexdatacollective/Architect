@@ -18,8 +18,7 @@ import UnorderedList from './UnorderedList';
  */
 
 const fieldHandlers = withHandlers({
-  handleDelete: ({ fields }) => index =>
-    fields.remove(index),
+  handleDelete: ({ fields }) => (index) => fields.remove(index),
 });
 
 const FieldArrayAdapter = ({
@@ -33,6 +32,7 @@ const FieldArrayAdapter = ({
     items={items}
     onDelete={handleDelete}
     name={name}
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...rest}
   >
     { (dirty || submitFailed) && error && <p className="list__error">{error}</p> }
@@ -40,8 +40,11 @@ const FieldArrayAdapter = ({
 );
 
 FieldArrayAdapter.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   items: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   fields: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   meta: PropTypes.object.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };

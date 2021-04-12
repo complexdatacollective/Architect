@@ -1,21 +1,16 @@
 /* eslint-disable import/prefer-default-export */
 
 import { combineReducers } from 'redux';
-import { combineEpics } from 'redux-observable';
 import { reducer as formReducer } from 'redux-form';
 import createTimeline from '../middleware/timeline';
 import app from './app';
 import dialogs from './dialogs';
 import protocol from './protocol';
 import recentProtocols from './recentProtocols';
-import session, { epics as sessionEpics } from './session';
+import session from './session';
 import stacks from './stacks';
 import ui from './ui';
 import toasts from './toasts';
-
-export const rootEpic = combineEpics(
-  sessionEpics,
-);
 
 const timelineOptions = {
   filter: ({ type }) => /^PROTOCOL\//.test(type.toString()),

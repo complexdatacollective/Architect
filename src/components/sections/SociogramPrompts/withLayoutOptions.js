@@ -15,6 +15,4 @@ const withLayoutOptions = (state, { entity, type, form }) => {
   };
 };
 
-export { withLayoutOptions };
-
 export default connect(withLayoutOptions);

@@ -7,7 +7,7 @@ import * as Fields from '@codaco/ui/lib/components/Fields';
 import { getFieldId } from '@app/utils/issues';
 import { ValidatedField } from '@components/Form';
 import * as ArchitectFields from '@components/Form/Fields';
-import Layout, { Section } from '@components/EditorLayout';
+import { Layout, Section } from '@components/EditorLayout';
 import { getCodebook } from '@selectors/protocol';
 import IconOption from './IconOption';
 import getPalette from './getPalette';
@@ -35,9 +35,17 @@ const TypeEditor = ({
         <h1>{ type ? `Edit ${entity}` : `Create ${entity}` }</h1>
       </Section>
       <Section>
-        <h3 id={getFieldId('name')}>{capitalize(entity)} Type</h3>
+        <h3 id={getFieldId('name')}>
+          {capitalize(entity)}
+          {' '}
+          Type
+        </h3>
         <p>
-          What type of {entity} is this?
+          What type of
+          {' '}
+          {entity}
+          {' '}
+          is this?
           { entity === 'node' && ' Some examples might be "Person", "Place", or "Agency".' }
           { entity === 'edge' && ' Some examples might be "Friend" or "Colleague".' }
         </p>
@@ -51,7 +59,11 @@ const TypeEditor = ({
       <Section>
         <h2 id={getFieldId('color')}>Color</h2>
         <p>
-          Choose a color for this {entity} type.
+          Choose a color for this
+          {' '}
+          {entity}
+          {' '}
+          type.
         </p>
         <ValidatedField
           component={ArchitectFields.ColorPicker}
@@ -62,12 +74,16 @@ const TypeEditor = ({
         />
       </Section>
 
-      { entity === 'node' &&
-        <React.Fragment>
+      { entity === 'node'
+        && (
+        <>
           <Section>
             <h2 id={getFieldId('iconVariant')}>Icon</h2>
             <p>
-              Choose an icon to display on interfaces that create this {entity}.
+              Choose an icon to display on interfaces that create this
+              {' '}
+              {entity}
+              .
             </p>
             <ValidatedField
               component={Fields.RadioGroup}
@@ -78,11 +94,15 @@ const TypeEditor = ({
             />
           </Section>
 
-          {!isNew &&
+          {!isNew
+            && (
             <Section>
               <h2>Display Variable</h2>
               <p>
-                Select a variable to use as a label when displaying this {entity}.
+                Select a variable to use as a label when displaying this
+                {' '}
+                {entity}
+                .
               </p>
               <Field
                 component={ArchitectFields.Select}
@@ -92,11 +112,12 @@ const TypeEditor = ({
                 <option value="">&mdash; Select display variable &mdash;</option>
               </Field>
             </Section>
-          }
-        </React.Fragment>
-      }
+            )}
+        </>
+        )}
 
-      {(!isNew && !metaOnly) &&
+      {(!isNew && !metaOnly)
+        && (
         <Section>
           <Variables
             form={form}
@@ -108,7 +129,7 @@ const TypeEditor = ({
             }}
           />
         </Section>
-      }
+        )}
     </Layout>
   );
 };
@@ -117,7 +138,9 @@ TypeEditor.propTypes = {
   type: PropTypes.string,
   entity: PropTypes.string.isRequired,
   form: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   displayVariables: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   existingTypes: PropTypes.array.isRequired,
   isNew: PropTypes.bool,
   metaOnly: PropTypes.bool,
@@ -125,7 +148,6 @@ TypeEditor.propTypes = {
 
 TypeEditor.defaultProps = {
   type: null,
-  colorOptions: { node: [], edge: [] },
   isNew: false,
   metaOnly: false,
 };
@@ -133,15 +155,14 @@ TypeEditor.defaultProps = {
 const mapStateToProps = (state, { type, isNew }) => {
   const codebook = getCodebook(state);
 
-  const getNames = (codebookTypeDefinitions, excludeType) =>
-    toPairs(codebookTypeDefinitions)
-      .reduce((acc, [id, definition]) => {
-        if (excludeType && id === excludeType) { return acc; }
-        return [
-          ...acc,
-          definition.name,
-        ];
-      }, []);
+  const getNames = (codebookTypeDefinitions, excludeType) => toPairs(codebookTypeDefinitions)
+    .reduce((acc, [id, definition]) => {
+      if (excludeType && id === excludeType) { return acc; }
+      return [
+        ...acc,
+        definition.name,
+      ];
+    }, []);
 
   const nodes = getNames(codebook.node, !isNew && type);
   const edges = getNames(codebook.edge, !isNew && type);
@@ -156,6 +177,6 @@ const mapStateToProps = (state, { type, isNew }) => {
   };
 };
 
-export { TypeEditor };
+export { TypeEditor as UnconnectedTypeEditor };
 
 export default connect(mapStateToProps)(TypeEditor);

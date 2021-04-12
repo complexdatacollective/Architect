@@ -31,21 +31,22 @@ const PromptFields = ({
   entity,
   type,
 }) => (
-  <React.Fragment>
+  <>
     <Section>
       <Row>
         <h3 id={getFieldId('variable')}>Variable</h3>
         <p>
           Create a variable below, or choose from existing variables in the drop-down list.
         </p>
-        { variable && !isNewVariable &&
+        { variable && !isNewVariable
+          && (
           <Tip>
             <p>
               When selecting an existing variable, changes you make to the input control or
               validation options will also change other uses of this variable.
             </p>
           </Tip>
-        }
+          )}
         <ValidatedField
           name="variable"
           component={VariableSelect}
@@ -70,13 +71,17 @@ const PromptFields = ({
         />
       </Row>
     </Section>
-    { variable &&
+    { variable
+      && (
       <Section>
         <Row>
           <h3 id={getFieldId('component')}>Input control</h3>
           <p>
             Choose an input control that should be used to collect the answer. For
-            detailed information about these options, see our <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/input-controls/">documentation</ExternalLink>.
+            detailed information about these options, see our
+            {' '}
+            <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/input-controls/">documentation</ExternalLink>
+            .
           </p>
           <ValidatedField
             name="component"
@@ -86,37 +91,51 @@ const PromptFields = ({
             validation={{ required: true }}
             onChange={handleChangeComponent}
           />
-          { isNewVariable && variableType &&
+          { isNewVariable && variableType
+            && (
             <Tip>
               <p>
                 The selected input control will cause this variable to be defined as
-                type <strong>{variableType}</strong>. Once set, this cannot be changed
+                type
+                {' '}
+                <strong>{variableType}</strong>
+                . Once set, this cannot be changed
                 (although you may change the input control within this type).
               </p>
             </Tip>
-          }
-          { !isNewVariable && variableType &&
+            )}
+          { !isNewVariable && variableType
+            && (
             <Tip type="warning">
               <div>
                 <p>
                   A pre-existing variable is currently selected. You cannot change a variable
-                  type after it has been created, so only <strong>{variableType}</strong> compatible
+                  type after it has been created, so only
+                  {' '}
+                  <strong>{variableType}</strong>
+                  {' '}
+                  compatible
                   input control can be selected above. If you would like to use a different
                   input control type, you will need to create a new variable.
                 </p>
               </div>
             </Tip>
-          }
+            )}
         </Row>
-        { variableType &&
+        { variableType
+        && (
         <Row>
           <h4>Preview</h4>
-          <InputPreview {...metaForType} />
+          <InputPreview
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...metaForType}
+          />
         </Row>
-        }
+        )}
       </Section>
-    }
-    { isVariableTypeWithOptions(variableType) &&
+      )}
+    { isVariableTypeWithOptions(variableType)
+      && (
       <Section>
         <Row>
           <h3 id={getFieldId('options')}>Categorical/Ordinal options</h3>
@@ -132,8 +151,9 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-    }
-    { isVariableTypeWithParameters(variableType) &&
+      )}
+    { isVariableTypeWithParameters(variableType)
+      && (
       <Section>
         <Row>
           <h3 id={getFieldId('parameters')}>Input Options</h3>
@@ -145,8 +165,9 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-    }
-    { variableType &&
+      )}
+    { variableType
+      && (
       <Section>
         <Row>
           <h3 id={getFieldId('validation')}>Validation</h3>
@@ -161,8 +182,8 @@ const PromptFields = ({
           />
         </Row>
       </Section>
-    }
-  </React.Fragment>
+      )}
+  </>
 );
 
 PromptFields.propTypes = {
@@ -171,8 +192,11 @@ PromptFields.propTypes = {
   component: PropTypes.string,
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   metaForType: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   variableOptions: PropTypes.array,
+  // eslint-disable-next-line react/forbid-prop-types
   componentOptions: PropTypes.array,
   isNewVariable: PropTypes.bool.isRequired,
   handleNewVariable: PropTypes.func.isRequired,

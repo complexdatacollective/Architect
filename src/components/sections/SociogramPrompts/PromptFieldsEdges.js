@@ -59,7 +59,8 @@ const EdgeFields = ({
         />
       </Row>
       <Row disabled={!canCreateEdge}>
-        { canCreateEdge &&
+        { canCreateEdge
+          && (
           <ValidatedField
             name="edges.create"
             component={NativeSelect}
@@ -75,24 +76,27 @@ const EdgeFields = ({
             label="Create edges of the following type"
             validation={{ required: true, allowedNMToken: 'edge type name' }}
           />
-        }
+          )}
       </Row>
       <Row disabled={edgesForSubject.length === 0}>
-        { edgesForSubject.length > 0 &&
+        { edgesForSubject.length > 0
+          && (
           <Field
             name="edges.display"
             component={Fields.CheckboxGroup}
             options={displayEdgesOptions}
             label="Display edges of the following type(s)"
           />
-        }
+          )}
       </Row>
     </Section>
   );
 };
 
 EdgeFields.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   edgesForSubject: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   displayEdgesOptions: PropTypes.array.isRequired,
   handleEdgeHighlightChange: PropTypes.func.isRequired,
   handleCreateEdge: PropTypes.func.isRequired,

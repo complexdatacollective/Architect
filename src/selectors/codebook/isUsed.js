@@ -8,39 +8,36 @@ import { getIdsFromCodebook } from './helpers';
  * in use (including in redux forms)
  * @returns {object} in format: { [variableId]: boolean }
  */
-export const makeGetIsUsed = (isUsedOptions = {}) =>
-  (state) => {
-    const {
-      formNames = ['edit-stage', 'editable-list-form'],
-      excludePaths = [],
-    } = isUsedOptions;
+export const makeGetIsUsed = (isUsedOptions = {}) => (state) => {
+  const {
+    formNames = ['edit-stage', 'editable-list-form'],
+    excludePaths = [],
+  } = isUsedOptions;
 
-    const protocol = getProtocol(state);
-    const forms = getForms(formNames)(state);
-    const variableIds = getIdsFromCodebook(protocol.codebook);
+  const protocol = getProtocol(state);
+  const forms = getForms(formNames)(state);
+  const variableIds = getIdsFromCodebook(protocol.codebook);
 
-    const data = excludePaths.length > 0 ?
-      omit(cloneDeep({ stages: protocol.stages, forms }), excludePaths) :
-      { stages: protocol.stages, forms };
+  const data = excludePaths.length > 0
+    ? omit(cloneDeep({ stages: protocol.stages, forms }), excludePaths)
+    : { stages: protocol.stages, forms };
 
-    const flattenedData = JSON.stringify(data);
+  const flattenedData = JSON.stringify(data);
 
-    const isUsed = variableIds.reduce(
-      (memo, variableId) => ({
-        ...memo,
-        [variableId]: flattenedData.includes(`"${variableId}"`),
-      }),
-      {},
-    );
+  const isUsed = variableIds.reduce(
+    (memo, variableId) => ({
+      ...memo,
+      [variableId]: flattenedData.includes(`"${variableId}"`),
+    }),
+    {},
+  );
 
-    return isUsed;
-  };
+  return isUsed;
+};
 
-export const makeOptionsWithIsUsed = (isUsedOptions = {}) =>
-  (state, options) => {
-    const isUsed = makeGetIsUsed(isUsedOptions)(state);
-    return options.map(
-      ({ value, ...rest }) =>
-        ({ ...rest, value, isUsed: get(isUsed, value) }),
-    );
-  };
+export const makeOptionsWithIsUsed = (isUsedOptions = {}) => (state, options) => {
+  const isUsed = makeGetIsUsed(isUsedOptions)(state);
+  return options.map(
+    ({ value, ...rest }) => ({ ...rest, value, isUsed: get(isUsed, value) }),
+  );
+};

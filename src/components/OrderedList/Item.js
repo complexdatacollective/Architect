@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import Handle from './Handle';
 import DeleteButton from './DeleteButton';
 
-const Item = ({ children, onDelete, onClick, className, sortable, ...rest }) => {
+const Item = ({
+  children, onDelete, onClick, className, sortable, ...rest
+}) => {
   const motionProps = {
     // initial: { boxShadow: '0 0.4rem 0 0 rgba(17, 21, 27, 0.664)' },
     whileHover: onClick ? {
@@ -16,12 +18,19 @@ const Item = ({ children, onDelete, onClick, className, sortable, ...rest }) => 
   };
 
   return (
-    <motion.div {...motionProps} className={cx('list-item', { 'list-item--clickable': onClick }, className)} {...rest} >
-      { sortable &&
+    <motion.div
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...motionProps}
+      className={cx('list-item', { 'list-item--clickable': onClick }, className)}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+    >
+      { sortable
+        && (
         <div className="list-item__control list-item__control--left">
           <Handle />
         </div>
-      }
+        )}
       <div className="list-item__content" onClick={onClick}>
         {children}
       </div>
@@ -46,7 +55,5 @@ Item.defaultProps = {
   sortable: true,
   onClick: null,
 };
-
-export { Item };
 
 export default Item;

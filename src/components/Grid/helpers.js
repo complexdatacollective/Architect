@@ -20,11 +20,10 @@ export const parseSize = (size) => {
   }
 };
 
-export const getRemainingSpace = (items = [], capacity = 0) =>
-  items.reduce(
-    (acc, { size }) => acc - parseSize(size),
-    capacity,
-  );
+export const getRemainingSpace = (items = [], capacity = 0) => items.reduce(
+  (acc, { size }) => acc - parseSize(size),
+  capacity,
+);
 
 export const trimSize = (from, to, items, capacity) => {
   const remainingSpace = getRemainingSpace(items, capacity);

@@ -48,12 +48,10 @@ const writeProtocol = (workingPath, protocol) => {
 
   return Promise.resolve()
     .then(() => pruneProtocol(protocolWithDate))
-    .then(prunedProtocol =>
-      fse.writeJson(protocolJsonPath, prunedProtocol, { spaces: 2 })
-        .catch(handleError(errors.WriteError))
-        .then(() => pruneProtocolAssets(workingPath))
-        .then(() => prunedProtocol),
-    );
+    .then((prunedProtocol) => fse.writeJson(protocolJsonPath, prunedProtocol, { spaces: 2 })
+      .catch(handleError(errors.WriteError))
+      .then(() => pruneProtocolAssets(workingPath))
+      .then(() => prunedProtocol));
 };
 
 /**
@@ -76,13 +74,11 @@ const deployNetcanvas = (netcanvasExportPath, destinationUserPath) => {
       return fse.rename(destinationUserPath, backupPath)
         .then(() => true);
     })
-    .then(createdBackup =>
-      fse.copy(netcanvasExportPath, destinationUserPath)
-        .then(() => ({
-          savePath: destinationUserPath,
-          backupPath: createdBackup ? backupPath : null,
-        })),
-    );
+    .then((createdBackup) => fse.copy(netcanvasExportPath, destinationUserPath)
+      .then(() => ({
+        savePath: destinationUserPath,
+        backupPath: createdBackup ? backupPath : null,
+      })));
 };
 
 const commitNetcanvas = ({ savePath, backupPath }) => {
@@ -126,7 +122,6 @@ const createNetcanvasExport = (workingPath, protocol) => {
     });
 };
 
-
 /**
  * Create a working copy of a protocol in the application
  * tmp directory. If bundled, extract it, if not, copy it.
@@ -134,16 +129,15 @@ const createNetcanvasExport = (workingPath, protocol) => {
  * @param filePath .netcanvas file path
  * @returns {Promise} Resolves to a path in temp (random)
  */
-const importNetcanvas = filePath =>
-  getTempDir('protocols')
-    .then((protocolsDir) => {
-      const destinationPath = path.join(protocolsDir, uuid());
+const importNetcanvas = (filePath) => getTempDir('protocols')
+  .then((protocolsDir) => {
+    const destinationPath = path.join(protocolsDir, uuid());
 
-      return fse.access(filePath, fse.constants.W_OK)
-        .then(() => extract(filePath, destinationPath))
-        .then(() => destinationPath)
-        .catch(handleError(errors.OpenFailed));
-    });
+    return fse.access(filePath, fse.constants.W_OK)
+      .then(() => extract(filePath, destinationPath))
+      .then(() => destinationPath)
+      .catch(handleError(errors.OpenFailed));
+  });
 
 export {
   commitNetcanvas,

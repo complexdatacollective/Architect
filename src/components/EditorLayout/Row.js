@@ -24,8 +24,6 @@ Row.propTypes = {
 };
 
 Row.defaultProps = {
-  focus: false,
-  contentId: null,
   disabled: false,
   children: null,
 };

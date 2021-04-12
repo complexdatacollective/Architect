@@ -21,9 +21,8 @@ const Screen = ({
       <div className="screen__container" ref={setWindowRoot}>
         <div className="screen__content">
           <ScreenErrorBoundary onAcknowledge={onAcknowledgeError}>
-            { typeof children === 'function' &&
-              children({ windowRoot })
-            }
+            { typeof children === 'function'
+              && children({ windowRoot })}
             { children && typeof children !== 'function' && children }
           </ScreenErrorBoundary>
         </div>
@@ -38,25 +37,24 @@ const Screen = ({
 };
 
 Screen.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any,
   buttons: PropTypes.arrayOf(PropTypes.node),
   secondaryButtons: PropTypes.arrayOf(PropTypes.node),
   type: PropTypes.string,
   onAcknowledgeError: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
   windowRoot: PropTypes.any.isRequired,
   setWindowRoot: PropTypes.func.isRequired,
 };
 
 Screen.defaultProps = {
   type: 'default',
-  transitionState: null,
   children: null,
   buttons: [],
   secondaryButtons: [],
   onAcknowledgeError: () => {},
 };
-
-export { Screen };
 
 export default compose(
   windowRootProvider,

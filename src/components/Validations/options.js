@@ -39,15 +39,14 @@ const VALIDATIONS_WITH_VALUES = [
   'maxSelected',
 ];
 
-const isValidationWithValue = validation =>
-  VALIDATIONS_WITH_VALUES.includes(validation);
+const isValidationWithValue = (validation) => VALIDATIONS_WITH_VALUES.includes(validation);
 
-const getValidationsForVariableType = variableType =>
-  get(VALIDATIONS, variableType, []);
+const getValidationsForVariableType = (variableType) => get(VALIDATIONS, variableType, []);
 
-const getValidationOptionsForVariableType = variableType =>
-  getValidationsForVariableType(variableType)
-    .map(validation => ({ label: validation, value: validation }));
+const getValidationOptionsForVariableType = (
+  variableType,
+) => getValidationsForVariableType(variableType)
+  .map((validation) => ({ label: validation, value: validation }));
 
 export {
   getValidationsForVariableType,

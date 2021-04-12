@@ -1,4 +1,4 @@
-export const getSession = state => state.session;
+export const getSession = (state) => state.session;
 
 export const getActiveProtocol = (state) => {
   const session = getSession(state);

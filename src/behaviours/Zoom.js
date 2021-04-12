@@ -13,22 +13,11 @@ const withConstraintContext = getContext(
   { constraints: PropTypes.array },
 );
 
-const Zoom = WrappedComponent =>
-  class extends PureComponent {
-    static displayName = `Draft(${getDisplayName(WrappedComponent)})`;
-
-    static propTypes = {
-      zoomColors: PropTypes.array,
-      constraints: PropTypes.array,
-    };
-
-    static defaultProps = {
-      zoomColors: ['#ff6ec7', '#4cbb17'],
-      constraints: [0, 0, 0, 0],
-    };
-
+const Zoom = (WrappedComponent) => {
+  class Zoomable extends PureComponent {
     componentDidMount() {
-      this.root = document.getElementsByTagName('body')[0];
+      const [root] = document.getElementsByTagName('body');
+      this.root = root;
       this.node = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
       this.node.addEventListener('click', this.onClick);
     }
@@ -38,7 +27,11 @@ const Zoom = WrappedComponent =>
     }
 
     onClick = () => {
-      const [top, right, bottom, left] = this.props.constraints;
+      const {
+        constraints,
+        zoomColors,
+      } = this.props;
+      const [top, right, bottom, left] = constraints;
 
       const start = this.node.getBoundingClientRect();
       const pseudoElement = document.createElement('div');
@@ -82,7 +75,7 @@ const Zoom = WrappedComponent =>
         translateY: [translateY, 0],
         scaleY: [scaleY, 1],
         scaleX: [scaleX, 1],
-        backgroundColor: this.props.zoomColors,
+        backgroundColor: zoomColors,
       })
         .add({
           targets: pseudoElement,
@@ -98,16 +91,25 @@ const Zoom = WrappedComponent =>
     }
 
     render() {
-      return (
-        <WrappedComponent {...this.props} />
-      );
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      return <WrappedComponent {...this.props} />;
     }
+  }
+
+  Zoomable.displayName = `Zoomable(${getDisplayName(WrappedComponent)})`;
+
+  Zoomable.propTypes = {
+    zoomColors: PropTypes.arrayOf(PropTypes.string),
+    constraints: PropTypes.arrayOf(PropTypes.number),
   };
 
-// export const Zoomer = ({ children, ...rest }) => {
-//   const Zoomable = Zoom(props => children(props));
-//   return <Zoomable {...rest} />;
-// };
+  Zoomable.defaultProps = {
+    zoomColors: ['#ff6ec7', '#4cbb17'],
+    constraints: [0, 0, 0, 0],
+  };
+
+  return Zoomable;
+};
 
 export default compose(
   withConstraintContext,
