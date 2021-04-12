@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
-import { Text, Toggle } from '@codaco/ui/lib/components/Fields';
+import ToggleField from '@codaco/ui/lib/components/Fields/Toggle';
+import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
 import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
@@ -10,6 +11,7 @@ import MultiSelect from '@components/Form/MultiSelect';
 import Options from '@components/Options';
 import { Section, Row } from '@components/EditorLayout';
 import Tip from '@components/Tip';
+import PromptText from '@components/sections/PromptText';
 import NewVariableWindow, { useNewVariableWindowState } from '@components/NewVariableWindow';
 import { getSortOrderOptionGetter } from './optionGetters';
 import withVariableOptions from './withVariableOptions';
@@ -77,179 +79,165 @@ const PromptFields = ({
   const showVariableOptionsTip = totalOptionsLength > 8;
 
   return (
-    <Section>
-      <Row>
-        <h3 id={getFieldId('text')}>Prompt Text</h3>
-        <p>
-          The prompt text instructs your participant about the task on this stage.
-          Enter the text to use for your prompt below.
-        </p>
-        <Tip>
+    <>
+      <PromptText />
+      <Section>
+        <Row>
+          <h3 id={getFieldId('variable')}>Categorical Variable</h3>
+          <ValidatedField
+            name="variable"
+            component={VariableSelect}
+            type={type}
+            entity={entity}
+            label=""
+            options={categoricalVariableOptions}
+            onCreateOption={handleNewVariable}
+            validation={{ required: true }}
+          />
+        </Row>
+        { variable
+          && (
+          <Row>
+            <h3 id={getFieldId('options')}>Variable Options</h3>
+            <p>
+              Create
+              <strong>up to 8</strong>
+              {' '}
+              options for this variable.
+            </p>
+            { showVariableOptionsTip
+              && (
+              <Tip type="error">
+                <p>
+                  The categorical bin interface is designed to use
+                  {' '}
+                  <strong>
+                    up to 8 option
+                    values
+                  </strong>
+                  {' '}
+                  (
+                  including an &quot;other&quot; variable). Using more will create
+                  a sub-optimal experience for participants, and might reduce data quality.
+                  Consider grouping your variable options and capturing further detail with
+                  follow-up questions.
+                </p>
+              </Tip>
+              )}
+            <Options
+              name="variableOptions"
+              label="Options"
+            />
+          </Row>
+          )}
+        { variable
+          && (
+          <Row>
+            <h3 id={getFieldId('toggleOtherVariable')}>Follow-up &quot;Other&quot; Option</h3>
+            <p>
+              You can optionally create an &quot;other&quot; option that triggers a follow-up dialog
+              when nodes are dropped within it, and stores the value the participant enters in a
+              designated variable. This feature may be useful in order to collect values
+              you might not have listed above.
+            </p>
+            <DetachedField
+              component={ToggleField}
+              label="Use follow-up &quot;other&quot; option?"
+              name="toggleOtherVariable"
+              value={otherVariableToggle}
+              onChange={handleToggleOtherVariable}
+            />
+          </Row>
+          )}
+        { otherVariableToggle
+          && (
+          <Section>
+            <Row>
+              <ValidatedField
+                name="otherOptionLabel"
+                component={RichTextField}
+                inline
+                placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
+                label="Label for Bin"
+                validation={{ required: true }}
+              />
+            </Row>
+            <Row>
+              <ValidatedField
+                name="otherVariablePrompt"
+                component={RichTextField}
+                inline
+                placeholder="Enter a question prompt to show when the other option is triggered..."
+                label="Question Prompt for Dialog"
+                validation={{ required: true }}
+              />
+            </Row>
+            <Row>
+              <ValidatedField
+                name="otherVariable"
+                component={VariableSelect}
+                entity={entity}
+                label="Variable"
+                type={type}
+                options={otherVariableOptions}
+                onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
+                validation={{ required: true }}
+              />
+            </Row>
+          </Section>
+          )}
+        <Row>
+          <h3>
+            Bucket Sort Order
+            <small>(optional)</small>
+          </h3>
           <p>
-            You can use markdown formatting in this prompt to create bold or underlined text.
+            Nodes are stacked in the bucket before they are placed by the participant. You may
+            optionally configure a list of rules to determine how nodes are sorted in the bucket
+            when the task starts, which will determine the order that your participant places them
+            into bins. Interviewer will default to using the order in which nodes were named.
           </p>
-        </Tip>
+          <Tip>
+            <p>
+              Use the asterisk property to sort by the order that nodes were created.
+            </p>
+          </Tip>
+          <MultiSelect
+            name="bucketSortOrder"
+            properties={[
+              { fieldName: 'property' },
+              { fieldName: 'direction' },
+            ]}
+            maxItems={sortMaxItems}
+            options={getSortOrderOptionGetter(variableOptions)}
+          />
+        </Row>
+        <Row>
+          <h3>
+            Bin Sort Order
+            <small>(optional)</small>
+          </h3>
+          <p>
+            You may also configure one or more sort rules that determine the order that nodes
+            are listed after they have been placed into a bin.
+          </p>
+          <MultiSelect
+            name="binSortOrder"
+            properties={[
+              { fieldName: 'property' },
+              { fieldName: 'direction' },
+            ]}
+            maxItems={sortMaxItems}
+            options={getSortOrderOptionGetter(variableOptions)}
+          />
+        </Row>
+      </Section>
 
-        <ValidatedField
-          name="text"
-          component={Text}
-          label=""
-          placeholder="Enter text for the prompt here..."
-          validation={{ required: true, maxLength: 220 }}
-        />
-      </Row>
-      <Row>
-        <h3 id={getFieldId('variable')}>Categorical Variable</h3>
-        <ValidatedField
-          name="variable"
-          component={VariableSelect}
-          type={type}
-          entity={entity}
-          label=""
-          options={categoricalVariableOptions}
-          onCreateOption={handleNewVariable}
-          validation={{ required: true }}
-        />
-      </Row>
-      { variable
-        && (
-        <Row>
-          <h3 id={getFieldId('options')}>Variable Options</h3>
-          <p>
-            Create
-            <strong>up to 8</strong>
-            {' '}
-            options for this variable.
-          </p>
-          { showVariableOptionsTip
-            && (
-            <Tip type="error">
-              <p>
-                The categorical bin interface is designed to use
-                {' '}
-                <strong>
-                  up to 8 option
-                  values
-                </strong>
-                {' '}
-                (
-                including an &quot;other&quot; variable). Using more will create
-                a sub-optimal experience for participants, and might reduce data quality.
-                Consider grouping your variable options and capturing further detail with
-                follow-up questions.
-              </p>
-            </Tip>
-            )}
-          <Options
-            name="variableOptions"
-            label="Options"
-          />
-        </Row>
-        )}
-      { variable
-        && (
-        <Row>
-          <h3 id={getFieldId('toggleOtherVariable')}>Follow-up &quot;Other&quot; Option</h3>
-          <p>
-            You can optionally create an &quot;other&quot; option that triggers a follow-up dialog
-            when nodes are dropped within it, and stores the value the participant enters in a
-            designated variable. This feature may be useful in order to collect values
-            you might not have listed above.
-          </p>
-          <DetachedField
-            component={Toggle}
-            label="Use follow-up &quot;other&quot; option?"
-            name="toggleOtherVariable"
-            value={otherVariableToggle}
-            onChange={handleToggleOtherVariable}
-          />
-        </Row>
-        )}
-      { otherVariableToggle
-        && (
-        <Section>
-          <Row>
-            <ValidatedField
-              name="otherOptionLabel"
-              component={Text}
-              placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
-              label="Label for Bin"
-              validation={{ required: true }}
-            />
-          </Row>
-          <Row>
-            <ValidatedField
-              name="otherVariablePrompt"
-              component={Text}
-              placeholder="Enter a question prompt to show when the other option is triggered..."
-              label="Question Prompt for Dialog"
-              validation={{ required: true }}
-            />
-          </Row>
-          <Row>
-            <ValidatedField
-              name="otherVariable"
-              component={VariableSelect}
-              entity={entity}
-              label="Variable"
-              type={type}
-              options={otherVariableOptions}
-              onCreateOption={(value) => onCreateOtherVariable(value, 'otherVariable')}
-              validation={{ required: true }}
-            />
-          </Row>
-        </Section>
-        )}
-      <Row>
-        <h3>
-          Bucket Sort Order
-          <small>(optional)</small>
-        </h3>
-        <p>
-          Nodes are stacked in the bucket before they are placed by the participant. You may
-          optionally configure a list of rules to determine how nodes are sorted in the bucket
-          when the task starts, which will determine the order that your participant places them
-          into bins. Interviewer will default to using the order in which nodes were named.
-        </p>
-        <Tip>
-          <p>
-            Use the asterisk property to sort by the order that nodes were created.
-          </p>
-        </Tip>
-        <MultiSelect
-          name="bucketSortOrder"
-          properties={[
-            { fieldName: 'property' },
-            { fieldName: 'direction' },
-          ]}
-          maxItems={sortMaxItems}
-          options={getSortOrderOptionGetter(variableOptions)}
-        />
-      </Row>
-      <Row>
-        <h3>
-          Bin Sort Order
-          <small>(optional)</small>
-        </h3>
-        <p>
-          You may also configure one or more sort rules that determine the order that nodes
-          are listed after they have been placed into a bin.
-        </p>
-        <MultiSelect
-          name="binSortOrder"
-          properties={[
-            { fieldName: 'property' },
-            { fieldName: 'direction' },
-          ]}
-          maxItems={sortMaxItems}
-          options={getSortOrderOptionGetter(variableOptions)}
-        />
-      </Row>
       <NewVariableWindow
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...newVariableWindowProps}
       />
-    </Section>
+    </>
   );
 };
 
