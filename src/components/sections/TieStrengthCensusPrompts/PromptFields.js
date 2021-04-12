@@ -11,15 +11,11 @@ import VariableSelect from '@components/Form/Fields/VariableSelect';
 import Tip from '@components/Tip';
 import Options from '@components/Options';
 import withVariableOptions from './withVariableOptions';
-import withVariableHandlers from './withVariableHandlers';
 import withCreateEdgeHandlers from './withCreateEdgeHandler';
 import withEdgesOptions from './withEdgesOptions';
 
 const PromptFields = ({
   changeForm,
-  entity,
-  form,
-  type,
   edgesForSubject,
   handleCreateEdge,
   handleChangeCreateEdge,
@@ -29,8 +25,8 @@ const PromptFields = ({
   optionsForVariableDraft,
 }) => {
   const newVariableWindowInitialProps = {
-    entity,
-    type,
+    entity: 'edge',
+    type: edgeVariable,
     initialValues: { name: null, type: null },
   };
 
@@ -45,7 +41,7 @@ const PromptFields = ({
     handleCreatedNewVariable,
   );
 
-  const handleNewVariable = (name) => openNewVariableWindow({ initialValues: { name, type: 'ordinal' } }, { field: 'variable' });
+  const handleNewVariable = (name) => openNewVariableWindow({ initialValues: { name, type: 'ordinal' } }, { field: 'edgeVariable' });
 
   const totalOptionsLength = (optionsForVariableDraft && optionsForVariableDraft.length);
   const showVariableOptionsTip = totalOptionsLength > 5;
@@ -113,20 +109,6 @@ const PromptFields = ({
             />
           </Row>
         </Section>
-        <Section>
-          <Row>
-            <h3 id={getFieldId('negativeLabel')}>Negative Label</h3>
-            <p>Enter text to display in the option that will <strong>cancel edge creation</strong>.</p>
-            <ValidatedField
-              name="negativeLabel"
-              component={RichText}
-              className="stage-editor-section-prompt__textarea"
-              label=""
-              placeholder="Enter text for the negative label here..."
-              validation={{ required: true, maxLength: 220 }}
-            />
-          </Row>
-        </Section>
         { edgeVariable
           && (
           <Section>
@@ -157,6 +139,21 @@ const PromptFields = ({
             </Row>
           </Section>
           )}
+        <Section>
+          <Row>
+            <h3 id={getFieldId('negativeLabel')}>Negative Label</h3>
+            <p>Enter text to display in the option that will <strong>cancel edge creation</strong>.</p>
+            <ValidatedField
+              name="negativeLabel"
+              component={RichText}
+              inline
+              className="stage-editor-section-prompt__textarea"
+              label=""
+              placeholder="Enter text for the negative label here..."
+              validation={{ required: true, maxLength: 220 }}
+            />
+          </Row>
+        </Section>
       </Section>
       <NewVariableWindow
         // eslint-disable-next-line react/jsx-props-no-spreading
@@ -177,5 +174,4 @@ export default compose(
   withCreateEdgeHandlers,
   withEdgesOptions,
   withVariableOptions,
-  withVariableHandlers,
 )(PromptFields);

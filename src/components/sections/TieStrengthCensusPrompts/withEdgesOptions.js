@@ -7,8 +7,8 @@ const mapDispatchToProps = {
   changeForm: change,
 };
 
-const mapStateToProps = (state, { entity, type }) => {
-  const edgesForSubject = getEdgesForSubject(state, { entity, type });
+const mapStateToProps = (state) => {
+  const edgesForSubject = getEdgesForSubject(state);
 
   return {
     edgesForSubject,
