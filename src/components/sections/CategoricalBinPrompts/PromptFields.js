@@ -100,6 +100,7 @@ const PromptFields = ({
             <h3 id={getFieldId('options')}>Variable Options</h3>
             <p>
               Create
+              { ' ' }
               <strong>up to 8</strong>
               {' '}
               options for this variable.
@@ -111,8 +112,7 @@ const PromptFields = ({
                   The categorical bin interface is designed to use
                   {' '}
                   <strong>
-                    up to 8 option
-                    values
+                    up to 8 option values
                   </strong>
                   {' '}
                   (

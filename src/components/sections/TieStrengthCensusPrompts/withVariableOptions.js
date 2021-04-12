@@ -5,19 +5,21 @@ import { get } from 'lodash';
 import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { form }) => {
-  const edgeType = formValueSelector(form)(state, 'createEdge');
+  console.log('mapState with variable options');
+  const createEdge = formValueSelector(form)(state, 'createEdge');
 
   const variableOptions = getVariableOptionsForSubject(
     state,
-    { type: edgeType, entity: 'edge' },
+    { type: createEdge, entity: 'edge' },
   ).filter(({ type }) => type === 'ordinal');
 
   const edgeVariable = formValueSelector(form)(state, 'edgeVariable');
-  const variables = getVariablesForSubject(state, { type: edgeType, entity: 'edge' });
+  const variables = getVariablesForSubject(state, { type: createEdge, entity: 'edge' });
   const optionsForVariable = get(variables, [edgeVariable, 'options'], []);
   const optionsForVariableDraft = formValueSelector(form)(state, 'variableOptions');
 
   return {
+    createEdge,
     edgeVariable,
     variableOptions,
     optionsForVariable,

@@ -16,9 +16,12 @@ const mapStateToProps = (state) => {
 };
 
 const handlers = withHandlers({
+  // createEdge select has changed value, so we must reset rest
+  // of the dependent fields.
   handleChangeCreateEdge: ({ changeForm, form }) => (value) => {
+    console.log('handlechangeCreateEdge', value);
     if (!value) return;
-
+    changeForm(form, 'edgeVariable', value);
     changeForm(form, 'createEdge', value);
   },
 });

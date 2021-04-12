@@ -15,10 +15,12 @@ import withCreateEdgeHandlers from './withCreateEdgeHandler';
 import withEdgesOptions from './withEdgesOptions';
 
 const PromptFields = ({
+  form,
   changeForm,
   edgesForSubject,
   handleCreateEdge,
   handleChangeCreateEdge,
+  createEdge,
   edgeVariable,
   variableOptions,
   optionsForVariable,
@@ -26,7 +28,7 @@ const PromptFields = ({
 }) => {
   const newVariableWindowInitialProps = {
     entity: 'edge',
-    type: edgeVariable,
+    type: createEdge,
     initialValues: { name: null, type: null },
   };
 
@@ -77,72 +79,93 @@ const PromptFields = ({
             validation={{ required: true, maxLength: 220 }}
           />
         </Row>
-        <Row>
-          <ValidatedField
-            name="createEdge"
-            component={NativeSelect}
-            options={edgesForSubject}
-            onCreateOption={(option) => {
-              handleChangeCreateEdge(handleCreateEdge(option));
-            }}
-            onChange={handleChangeCreateEdge}
-            placeholder="Select or create an edge type"
-            createLabelText="✨ Create new edge type ✨"
-            createInputLabel="New edge type name"
-            createInputPlaceholder="Enter an edge type..."
-            label="Create edges of the following type"
-            validation={{ required: true, allowedNMToken: 'edge type name' }}
-          />
-        </Row>
         <Section>
+          <h2 id={getFieldId('set-ordinal-value')}>Tie Strength Configuration</h2>
+          <p>This interface works by presenting the user with a choice to either:</p>
+          <ul>
+            <li>
+              Create an edge between two alters, and simultaneously assign a value to
+              an ordinal variable.
+            </li>
+            <li>
+              Decline to create an edge
+            </li>
+          </ul>
+          <p>
+            Begin by selecting or creating an edge type. You will then be able to select
+            or create an ordinal variable on this edge type. The options of this ordinal
+            variable will represent the choices provided to the user when creating an edge.
+          </p>
           <Row>
-            <h3 id={getFieldId('variable')}>Ordinal Variable</h3>
             <ValidatedField
-              name="edgeVariable"
-              component={VariableSelect}
-              entity="edge"
-              type="ordinal"
-              label=""
-              options={variableOptions}
-              onCreateOption={handleNewVariable}
-              validation={{ required: true }}
+              name="createEdge"
+              component={NativeSelect}
+              options={edgesForSubject}
+              onCreateOption={(option) => {
+                handleChangeCreateEdge(handleCreateEdge(option));
+              }}
+              onChange={handleChangeCreateEdge}
+              placeholder="Select or create an edge type"
+              createLabelText="✨ Create new edge type ✨"
+              createInputLabel="New edge type name"
+              createInputPlaceholder="Enter an edge type..."
+              label="Select an edge type"
+              validation={{ required: true, allowedNMToken: 'edge type name' }}
             />
           </Row>
-        </Section>
-        { edgeVariable
+          { createEdge
           && (
-          <Section>
-            <Row>
-              <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
-              <p>
-                Create
-                <strong>up to 5</strong>
-                options for this variable.
-              </p>
-              { showVariableOptionsTip
-              && (
-              <Tip type="error">
+            <>
+              <Row>
+                <ValidatedField
+                  name="edgeVariable"
+                  component={VariableSelect}
+                  entity="edge"
+                  type="ordinal"
+                  label="Select an ordinal variable for this edge type"
+                  options={variableOptions}
+                  onCreateOption={handleNewVariable}
+                  validation={{ required: true }}
+                />
+              </Row>
+              { edgeVariable && (
+              <Row>
+                <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
                 <p>
-                  The ordinal bin interface is designed to use
-                  <strong>
-                    up to 5 option values
-                  </strong>
-                  . Using more will create
-                  a sub-optimal experience for participants, and might reduce data quality.
+                  The following choices or &apos;options&apos; are configured for this variable.
+                  We suggest no more than four options should be used on this interface.
                 </p>
-              </Tip>
+                { showVariableOptionsTip
+                && (
+                <Tip type="error">
+                  <p>
+                    The ordinal bin interface is designed to use
+                    { ' ' }
+                    <strong>
+                      up to 5 option values
+                    </strong>
+                    including the negative label. Using more will create
+                    a sub-optimal experience for participants, and might reduce data quality.
+                  </p>
+                </Tip>
+                )}
+                <Options
+                  name="variableOptions"
+                  label="Options"
+                />
+              </Row>
               )}
-              <Options
-                name="variableOptions"
-                label="Options"
-              />
-            </Row>
-          </Section>
+            </>
           )}
-        <Section>
           <Row>
-            <h3 id={getFieldId('negativeLabel')}>Negative Label</h3>
-            <p>Enter text to display in the option that will <strong>cancel edge creation</strong>.</p>
+            <h3 id={getFieldId('negativeLabel')}>Label for decline option</h3>
+            <p>
+              Enter text to display in the option that will
+              { ' ' }
+              <strong>cancel edge creation</strong>
+              . This option will be shown on the far right of the screen. Use
+              the preview mode to verify the visual display of your text.
+            </p>
             <ValidatedField
               name="negativeLabel"
               component={RichText}
