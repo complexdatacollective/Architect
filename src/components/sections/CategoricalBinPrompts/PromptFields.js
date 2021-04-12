@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
-import { Text, Toggle } from '@codaco/ui/lib/components/Fields';
+import ToggleField from '@codaco/ui/lib/components/Fields/Toggle'
+import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
 import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
@@ -140,7 +141,7 @@ const PromptFields = ({
               you might not have listed above.
             </p>
             <DetachedField
-              component={Toggle}
+              component={ToggleField}
               label="Use follow-up &quot;other&quot; option?"
               name="toggleOtherVariable"
               value={otherVariableToggle}
@@ -154,7 +155,8 @@ const PromptFields = ({
             <Row>
               <ValidatedField
                 name="otherOptionLabel"
-                component={Text}
+                component={RichTextField}
+                inline
                 placeholder="Enter a label (such as &quot;other&quot;) for this bin..."
                 label="Label for Bin"
                 validation={{ required: true }}
@@ -163,7 +165,8 @@ const PromptFields = ({
             <Row>
               <ValidatedField
                 name="otherVariablePrompt"
-                component={Text}
+                component={RichTextField}
+                inline
                 placeholder="Enter a question prompt to show when the other option is triggered..."
                 label="Question Prompt for Dialog"
                 validation={{ required: true }}
