@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import EditableList from '../../EditableList';
 import withSubject from '../../enhancers/withSubject';
@@ -6,14 +7,19 @@ import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequ
 import { itemSelector } from './helpers';
 import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
+import withPromptChangeHandler from './withPromptChangeHandler';
 
-const TieStrengthCensusPrompts = (props) => (
+const TieStrengthCensusPrompts = ({
+  handleChangePrompt,
+  ...props
+}) => (
   <EditableList
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
     fieldName="prompts"
     itemSelector={itemSelector()}
+    onChange={handleChangePrompt}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
@@ -25,9 +31,17 @@ const TieStrengthCensusPrompts = (props) => (
   </EditableList>
 );
 
+TieStrengthCensusPrompts.propTypes = {
+  handleChangePrompt: PropTypes.func.isRequired,
+};
+
+TieStrengthCensusPrompts.defaultProps = {
+};
+
 export { TieStrengthCensusPrompts };
 
 export default compose(
   withSubject,
   withDisabledSubjectRequired,
+  withPromptChangeHandler,
 )(TieStrengthCensusPrompts);

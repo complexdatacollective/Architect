@@ -5,7 +5,6 @@ import { get } from 'lodash';
 import { getVariableOptionsForSubject, getVariablesForSubject } from '@selectors/codebook';
 
 const mapStateToProps = (state, { form }) => {
-  console.log('mapState with variable options');
   const createEdge = formValueSelector(form)(state, 'createEdge');
 
   const variableOptions = getVariableOptionsForSubject(
@@ -43,6 +42,7 @@ const updateFormVariableOptions = lifecycle({
       edgeVariable,
     } = this.props;
     if (previousProps.edgeVariable === edgeVariable) { return; }
+
     changeForm(form, 'variableOptions', optionsForVariable);// TODO: is this wrong field name?
   },
 });

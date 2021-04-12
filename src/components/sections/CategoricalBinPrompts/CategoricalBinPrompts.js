@@ -45,6 +45,7 @@ CategoricalBinPrompts.defaultProps = {
   entity: null,
   type: null,
 };
+
 export { CategoricalBinPrompts };
 
 export default compose(

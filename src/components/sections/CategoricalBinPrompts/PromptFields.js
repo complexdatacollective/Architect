@@ -238,18 +238,25 @@ const PromptFields = ({
   );
 };
 
+const selectOptionProps = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.bool,
+  ]),
+});
+
 PromptFields.propTypes = {
   entity: PropTypes.string.isRequired,
   otherVariable: PropTypes.string,
   type: PropTypes.string.isRequired,
   variable: PropTypes.string,
-  // eslint-disable-next-line react/forbid-prop-types
-  variableOptions: PropTypes.array,
+  variableOptions: PropTypes.arrayOf(selectOptionProps),
   changeForm: PropTypes.func.isRequired,
   form: PropTypes.string.isRequired,
   onCreateOtherVariable: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  optionsForVariableDraft: PropTypes.array,
+  optionsForVariableDraft: PropTypes.arrayOf(selectOptionProps),
 };
 
 PromptFields.defaultProps = {

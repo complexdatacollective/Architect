@@ -23,7 +23,6 @@ const PromptFields = ({
   createEdge,
   edgeVariable,
   variableOptions,
-  optionsForVariable,
   optionsForVariableDraft,
 }) => {
   const newVariableWindowInitialProps = {
@@ -31,10 +30,6 @@ const PromptFields = ({
     type: createEdge,
     initialValues: { name: null, type: null },
   };
-
-  console.log('blah', {
-    edgeVariable, variableOptions, optionsForVariable, optionsForVariableDraft,
-  });
 
   const handleCreatedNewVariable = (id, { field }) => changeForm(form, field, id);
 
@@ -73,6 +68,7 @@ const PromptFields = ({
           <ValidatedField
             name="text"
             component={RichText}
+            inline
             className="stage-editor-section-prompt__textarea"
             label="Prompt Text"
             placeholder="Enter text for the prompt here..."
@@ -160,11 +156,10 @@ const PromptFields = ({
           <Row>
             <h3 id={getFieldId('negativeLabel')}>Label for decline option</h3>
             <p>
-              Enter text to display in the option that will
+              Enter text to display for the option that will
               { ' ' }
               <strong>cancel edge creation</strong>
-              . This option will be shown on the far right of the screen. Use
-              the preview mode to verify the visual display of your text.
+              . This option will be shown on the far right of the screen.
             </p>
             <ValidatedField
               name="negativeLabel"
@@ -186,11 +181,33 @@ const PromptFields = ({
   );
 };
 
+const selectOptionProps = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.bool,
+  ]),
+});
+
 PromptFields.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  edgesForSubject: PropTypes.array.isRequired,
+  form: PropTypes.string.isRequired,
+  changeForm: PropTypes.func.isRequired,
+  edgeVariable: PropTypes.string,
+  createEdge: PropTypes.string,
+  variableOptions: PropTypes.arrayOf(selectOptionProps),
+  optionsForVariableDraft: PropTypes.arrayOf(selectOptionProps),
   handleCreateEdge: PropTypes.func.isRequired,
   handleChangeCreateEdge: PropTypes.func.isRequired,
+  edgesForSubject: PropTypes.arrayOf(PropTypes.string),
+};
+
+PromptFields.defaultProps = {
+  edgeVariable: null,
+  createEdge: null,
+  variableOptions: [],
+  optionsForVariableDraft: [],
+  edgesForSubject: [],
 };
 
 export default compose(
