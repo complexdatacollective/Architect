@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { getFieldId } from '@app/utils/issues';
-import ToggleField from '@codaco/ui/lib/components/Fields/Toggle'
+import ToggleField from '@codaco/ui/lib/components/Fields/Toggle';
 import RichTextField from '@codaco/ui/lib/components/Fields/RichText';
 import DetachedField from '@components/DetachedField';
 import { ValidatedField } from '@components/Form';
