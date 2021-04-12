@@ -84,15 +84,13 @@ const Options = ({
   name,
   ...rest
 }) => (
-  <div className="form-fields-multi-select type-editor__subsection">
-    <FieldArray
-      name={name}
-      component={OptionsField}
-      validate={minTwoOptions}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}
-    />
-  </div>
+  <FieldArray
+    name={name}
+    component={OptionsField}
+    validate={minTwoOptions}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    {...rest}
+  />
 );
 
 Options.propTypes = {
