@@ -13,6 +13,7 @@ const Filter = () => (
     <div id={getFieldId('filter')} data-name="Filter text" />
     <h2>
       Filter
+      { ' ' }
       <small>(optional)</small>
     </h2>
     {/* <p>

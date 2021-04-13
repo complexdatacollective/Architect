@@ -45,6 +45,7 @@ const PromptFields = ({
       <Row>
         <h4>
           Sort Unplaced Nodes
+          { ' ' }
           <small>(optional)</small>
         </h4>
         <p>
