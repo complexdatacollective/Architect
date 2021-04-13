@@ -172,6 +172,7 @@ const appUpgradeRequiredDialog = (protocolSchemaVersion) => {
         Please see our
         {' '}
         <ExternalLink href="https://documentation.networkcanvas.com/docs/technical-documentation/protocol-schema-information/">documentation on protocol schemas</ExternalLink>
+        {' '}
         to locate an appropriate version, and for further information on this topic.
       </p>
     </>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { omit } from 'lodash';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
 import { isVariableTypeWithOptions, isVariableTypeWithParameters } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
@@ -19,6 +20,7 @@ import InputPreview from '../../Form/Fields/InputPreview';
 const PromptFields = ({
   form,
   variable,
+  existingVariables,
   variableType,
   variableOptions,
   componentOptions,
@@ -180,6 +182,8 @@ const PromptFields = ({
             form={form}
             name="validation"
             variableType={variableType}
+            entity={entity}
+            existingVariables={omit(existingVariables, variable)}
           />
         </Row>
       </Section>
@@ -190,6 +194,11 @@ const PromptFields = ({
 PromptFields.propTypes = {
   form: PropTypes.string.isRequired,
   variable: PropTypes.string,
+  existingVariables: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ),
   component: PropTypes.string,
   variableType: PropTypes.string,
   handleChangeComponent: PropTypes.func.isRequired,
@@ -208,6 +217,7 @@ PromptFields.propTypes = {
 
 PromptFields.defaultProps = {
   variable: null,
+  existingVariables: null,
   component: null,
   variableType: null,
   variableOptions: null,
