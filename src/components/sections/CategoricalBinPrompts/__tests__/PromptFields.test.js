@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { reduxForm, change } from 'redux-form';
 import { mount } from 'enzyme';
 import { getStore } from '../../../../ducks/store';
-import Options, { Item } from '../../../Options';
+import Options from '../../../Options/Options';
+import Option from '../../../Options/Option';
 import { actionCreators as codebookActions } from '../../../../ducks/modules/protocol/codebook';
 import PromptFields from '../PromptFields';
 
@@ -98,7 +99,7 @@ export const testPromptFields = (PromptFieldsComponent, name = '') => {
           additionalProps,
         );
 
-        expect(subject.find(Options).find(Item).length).toBe(2);
+        expect(subject.find(Options).find(Option).length).toBe(2);
 
         mockStore.dispatch(codebookActions.createVariable(
           'node',
@@ -118,7 +119,7 @@ export const testPromptFields = (PromptFieldsComponent, name = '') => {
 
         subject.update();
 
-        expect(subject.find(Options).find(Item).length).toBe(3);
+        expect(subject.find(Options).find(Option).length).toBe(3);
       });
 
       it('when variable is changed, variable options are updated', () => {
@@ -147,7 +148,7 @@ export const testPromptFields = (PromptFieldsComponent, name = '') => {
           additionalProps,
         );
 
-        expect(subject.find(Options).find(Item).length).toBe(2);
+        expect(subject.find(Options).find(Option).length).toBe(2);
 
         mockStore.dispatch(change(
           mockFormName,
@@ -157,7 +158,7 @@ export const testPromptFields = (PromptFieldsComponent, name = '') => {
 
         subject.update();
 
-        expect(subject.find(Options).find(Item).length).toBe(2);
+        expect(subject.find(Options).find(Option).length).toBe(2);
       });
     });
   });
