@@ -57,6 +57,7 @@ const PromptFields = ({
           onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
           onChange={handleChangeVariable} // read/reset component options validation
           validation={{ required: true }}
+
         />
       </Row>
     </Section>
@@ -92,6 +93,7 @@ const PromptFields = ({
             options={componentOptions}
             validation={{ required: true }}
             onChange={handleChangeComponent}
+            sortOptionsByLabel={!isNewVariable}
           />
           { isNewVariable && variableType
             && (
@@ -117,7 +119,7 @@ const PromptFields = ({
                   <strong>{variableType}</strong>
                   {' '}
                   compatible
-                  input control can be selected above. If you would like to use a different
+                  input controls can be selected above. If you would like to use a different
                   input control type, you will need to create a new variable.
                 </p>
               </div>

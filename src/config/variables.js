@@ -105,13 +105,13 @@ export const COMPONENTS = {
 };
 
 export const VARIABLE_TYPES_COMPONENTS = [
-  ['number', [COMPONENTS.NumberInput], 'var(--color-paradise-pink)'],
-  ['scalar', [COMPONENTS.VisualAnalogScale], 'var(--color-cerulean-blue)'],
-  ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker], 'var(--color-tomato)'],
-  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue--dark)'],
-  ['boolean', [COMPONENTS.BooleanChoice, COMPONENTS.Toggle], 'var(--color-neon-carrot)'],
-  ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], 'var(--color-sea-green)'],
-  ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], 'var(--color-sea-green--dark)'],
+  ['number', [COMPONENTS.NumberInput], 'var(--color-paradise-pink)', '-- Number Types -- '],
+  ['scalar', [COMPONENTS.VisualAnalogScale], 'var(--color-cerulean-blue)', '-- Scalar Types --'],
+  ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker], 'var(--color-tomato)', '-- Date Types --'],
+  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue--dark)', '-- Text Types --'],
+  ['boolean', [COMPONENTS.BooleanChoice, COMPONENTS.Toggle], 'var(--color-neon-carrot)', '-- Boolean Types --'],
+  ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], 'var(--color-sea-green)', '-- Ordinal Types --'],
+  ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], 'var(--color-sea-green--dark)', '-- Categorical Types --'],
 ];
 
 export const VARIABLE_TYPES_WITH_OPTIONS = [
@@ -128,6 +128,12 @@ export const VARIABLE_TYPES_WITH_COMPONENTS = VARIABLE_TYPES_COMPONENTS
   .map(([type]) => type);
 
 export const INPUT_OPTIONS = Object.values(COMPONENTS);
+
+const formattedInputOptions = VARIABLE_TYPES_COMPONENTS.reduce((accumulator, currentValue) => ([
+  ...accumulator,
+  { label: currentValue[3], value: null, disabled: true },
+  ...currentValue[1],
+]), []);
 
 export const VARIABLE_OPTIONS = Object.values(VARIABLE_TYPES);
 
@@ -168,6 +174,7 @@ const getColorForType = (type) => {
 
 export {
   INPUT_OPTIONS as inputOptions,
+  formattedInputOptions,
   VARIABLE_OPTIONS as variableOptions,
   getTypeForComponent,
   getComponentsForType,

@@ -6,6 +6,7 @@ import {
   withHandlers,
 } from 'recompose';
 import {
+  formattedInputOptions,
   getTypeForComponent,
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
@@ -40,9 +41,9 @@ const mapStateToProps = (state, { form, entity, type }) => {
   // 2. Otherwise list all INPUT_OPTIONS (new variable)
   const componentOptions = variableType && !isNewVariable
     ? getComponentsForType(variableType)
-    : INPUT_OPTIONS;
+    : formattedInputOptions;
 
-  const metaForType = find(componentOptions, { value: component });
+  const metaForType = find(INPUT_OPTIONS, { value: component });
 
   return {
     variable,
