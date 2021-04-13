@@ -69,13 +69,12 @@ const fieldsHandlers = withHandlers({
     const typeForComponent = getTypeForComponent(value);
 
     if (variableType !== typeForComponent) {
-      changeField(form, 'options', null);
       changeField(form, 'validation', {});
     }
 
-    // Always reset this, since it is at least partly related
-    // to the component
+    // Always reset these, since they depend on the component
     changeField(form, 'parameters', null);
+    changeField(form, 'options', null);
   },
   handleChangeVariable: ({ existingVariables, changeField, form }) => (_, value) => {
     // Either load settings from codebook, or reset

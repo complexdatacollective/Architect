@@ -139,6 +139,8 @@ const isVariableTypeWithParameters = (
   variableType,
 ) => VARIABLE_TYPES_WITH_PARAMETERS.includes(variableType);
 
+const isBooleanWithOptions = (component) => component === COMPONENTS.BooleanChoice.value;
+
 const findByType = (type) => ([t]) => t === type;
 const findByComponent = (component) => ([, c]) => c.some(({ value }) => value === component);
 const findTypeIndex = (findBy) => VARIABLE_TYPES_COMPONENTS.find(findBy) || [null, null, null];
@@ -172,6 +174,7 @@ export {
   getColorForType,
   isVariableTypeWithOptions,
   isVariableTypeWithParameters,
+  isBooleanWithOptions,
 };
 
 export default INPUT_OPTIONS;
