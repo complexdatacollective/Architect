@@ -1,0 +1,93 @@
+$component-name: 'options';
+
+.#{$component-name} {
+  display: block;
+
+  &__options {
+    margin-bottom: 1rem;
+  }
+
+  &__option {
+    display: flex;
+    background-color: var(--form-control);
+    color: var(--architect-sortable-text);
+    z-index: var(--z-fx);
+    transition: background-color var(--animation-easing) var(--animation-duration-standard);
+    border-radius: 1rem;
+
+    &:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+
+    &-controls {
+      flex-grow: 0;
+      display: flex;
+      padding: 1rem;
+
+      &--center {
+        align-items: center;
+      }
+    }
+
+    &-values {
+      flex: 1;
+    }
+
+    &-value {
+      margin: 2rem 0;
+    }
+
+    &-label {
+      margin: 0 0 1rem;
+      transition: color var(--animation-easing) var(--animation-duration-standard);
+    }
+
+    &-delete,
+    &-handle {
+      cursor: pointer;
+      background-color: transparent; //var(--form-control);
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--architect-sortable-text);
+
+      .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+
+        .cls-1,
+        .cls-2 {
+          fill: var(--architect-sortable-text);
+        }
+      }
+    }
+
+    .form-field-container {
+      margin: 0;
+    }
+  }
+
+  &--has-error {
+    .form-field-error {
+      margin: 1rem 0;
+      border-radius: unit(1);
+    }
+
+    .#{$component-name}__option {
+      background-color: var(--error);
+
+      &-label {
+        color: var(--text-light);
+      }
+    }
+
+    .#{$component-name}__delete,
+    .#{$component-name}__handle {
+      background-color: transparent;
+      filter: brightness(100);
+    }
+  }
+
+}

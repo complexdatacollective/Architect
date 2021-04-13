@@ -43,6 +43,7 @@ const PromptFields = ({
       <ValidatedField
         name="text"
         component={RichText}
+        inline
         className="stage-editor-section-prompt__textarea"
         label="Prompt Text"
         placeholder="Enter text for the prompt here..."
