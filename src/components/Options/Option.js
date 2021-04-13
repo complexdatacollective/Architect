@@ -59,7 +59,7 @@ const Option = ({
           inline
           type="text"
           name={`${field}.label`}
-          placeholder="label"
+          placeholder="Enter a label..."
           validation={{ required: true, uniqueArrayAttribute: true }}
         />
       </div>
@@ -70,7 +70,7 @@ const Option = ({
           type="text"
           name={`${field}.value`}
           parse={(value) => (isNumberLike(value) ? toNumber(value) : value)}
-          placeholder="value"
+          placeholder="Enter a value..."
           // option values must also respect allowedVariableName (NMTOKEN) rules
           validation={{ required: true, uniqueArrayAttribute: true, allowedVariableName: 'option value' }}
         />

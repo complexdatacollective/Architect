@@ -31,10 +31,16 @@ $component-name: 'options';
 
     &-values {
       flex: 1;
+      display: flex;
     }
 
     &-value {
-      margin: 2rem 0;
+      margin: unit(2) 0;
+      flex: 1;
+
+      &:last-of-type {
+        margin-left: unit(2);
+      }
     }
 
     &-label {
@@ -47,7 +53,6 @@ $component-name: 'options';
       cursor: pointer;
       background-color: transparent; //var(--form-control);
       width: 3rem;
-      height: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
