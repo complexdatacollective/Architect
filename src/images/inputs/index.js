@@ -9,6 +9,7 @@ import DatePicker from './DatePicker.png';
 import RelativeDatePicker from './RelativeDatePicker.png';
 import LikertScale from './LikertScale.png';
 import VisualAnalogScale from './VisualAnalogScale.png';
+import BooleanChoice from './BooleanChoice.png';
 
 export default {
   CheckboxGroup,
@@ -22,4 +23,5 @@ export default {
   RelativeDatePicker,
   LikertScale,
   VisualAnalogScale,
+  BooleanChoice,
 };

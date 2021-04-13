@@ -57,7 +57,7 @@ export const COMPONENTS = {
   Toggle: {
     label: 'Toggle',
     value: 'Toggle',
-    description: 'This component renders a switch, which can be tapped or clicked to indicate "on" or "off".',
+    description: 'This component renders a switch, which can be tapped or clicked to indicate "on" or "off". By default it is in the "off" position. If you require a boolean input without a default, use the BooleanChoice component',
     image: 'Toggle',
   },
   RadioGroup: {
@@ -96,6 +96,12 @@ export const COMPONENTS = {
     description: 'A calendar date picker that automatically limits available dates relative to an "anchor date", which can be configured to the date of the interview session. ',
     image: 'RelativeDatePicker',
   },
+  BooleanChoice: {
+    label: 'BooleanChoice',
+    value: 'Boolean',
+    description: 'A component for boolean variables that requires the participant to actively select an option. Unlike the toggle component, this component accepts the "required" validation.',
+    image: 'BooleanChoice',
+  },
 };
 
 export const VARIABLE_TYPES_COMPONENTS = [
@@ -103,7 +109,7 @@ export const VARIABLE_TYPES_COMPONENTS = [
   ['scalar', [COMPONENTS.VisualAnalogScale], 'var(--color-cerulean-blue)'],
   ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker], 'var(--color-tomato)'],
   ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue--dark)'],
-  ['boolean', [COMPONENTS.Toggle], 'var(--color-neon-carrot)'],
+  ['boolean', [COMPONENTS.BooleanChoice, COMPONENTS.Toggle], 'var(--color-neon-carrot)'],
   ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], 'var(--color-sea-green)'],
   ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], 'var(--color-sea-green--dark)'],
 ];
