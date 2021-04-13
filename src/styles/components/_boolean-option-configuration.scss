@@ -1,6 +1,6 @@
 .boolean-option-configuration {
   display: grid;
-  column-gap: unit(1);
+  column-gap: unit(2);
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 
   &__item {

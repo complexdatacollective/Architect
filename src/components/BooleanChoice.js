@@ -65,10 +65,10 @@ const Options = compose(
           </p>
           <ValidatedField
             label="Label"
-            inline
             component={RichText}
             name="options[0].label"
             validation={{ required: true }}
+            disallowedTypes={['history', 'quote']}
           />
           <Field
             label="Style option as negative"
@@ -87,10 +87,10 @@ const Options = compose(
           </p>
           <ValidatedField
             label="Label"
-            inline
             component={RichText}
             name="options[1].label"
             validation={{ required: true }}
+            disallowedTypes={['history', 'quote']}
           />
           <Field
             label="Style option as negative"
