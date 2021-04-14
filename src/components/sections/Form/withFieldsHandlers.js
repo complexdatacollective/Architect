@@ -11,10 +11,11 @@ import {
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
   INPUT_OPTIONS,
+  isOrdinalOrCategoricalType,
+  isVariableTypeWithParameters,
 } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { getVariablesForSubject, getVariableOptionsForSubject } from '@selectors/codebook';
-import { isOrdinalOrCategoricalType, isVariableTypeWithParameters } from '../../../config/variables';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
