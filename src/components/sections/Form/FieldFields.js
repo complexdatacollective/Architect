@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { isVariableTypeWithOptions, isVariableTypeWithParameters, isBooleanWithOptions } from '@app/config/variables';
+import { isOrdinalOrCategoricalType, isVariableTypeWithParameters, isBooleanWithOptions } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
@@ -138,7 +138,7 @@ const PromptFields = ({
         )}
       </Section>
       )}
-    { isVariableTypeWithOptions(variableType)
+    { isOrdinalOrCategoricalType(variableType)
       && (
       <Section>
         <Row>

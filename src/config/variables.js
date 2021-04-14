@@ -137,7 +137,7 @@ const formattedInputOptions = VARIABLE_TYPES_COMPONENTS.reduce((accumulator, cur
 
 export const VARIABLE_OPTIONS = Object.values(VARIABLE_TYPES);
 
-const isVariableTypeWithOptions = (
+const isOrdinalOrCategoricalType = (
   variableType,
 ) => VARIABLE_TYPES_WITH_OPTIONS.includes(variableType);
 
@@ -179,7 +179,7 @@ export {
   getTypeForComponent,
   getComponentsForType,
   getColorForType,
-  isVariableTypeWithOptions,
+  isOrdinalOrCategoricalType,
   isVariableTypeWithParameters,
   isBooleanWithOptions,
 };

@@ -14,6 +14,7 @@ import {
 } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { getVariablesForSubject, getVariableOptionsForSubject } from '@selectors/codebook';
+import { isOrdinalOrCategoricalType, isVariableTypeWithParameters } from '../../../config/variables';
 
 const mapStateToProps = (state, { form, entity, type }) => {
   const formSelector = formValueSelector(form);
@@ -66,7 +67,6 @@ const fieldsState = connect(mapStateToProps, mapDispatchToProps);
 
 const fieldsHandlers = withHandlers({
   handleChangeComponent: ({ changeField, form, variableType }) => (e, value) => {
-    console.log('handleChangeComponent', { changeField, form, variableType, value });
     // Only reset if type not defined yet (new variable)
     const typeForComponent = getTypeForComponent(value);
 
@@ -76,9 +76,14 @@ const fieldsHandlers = withHandlers({
       changeField(form, 'validation', {});
     }
 
-    // Always reset these, since they depend on the component
-    changeField(form, 'parameters', null);
-    changeField(form, 'options', null);
+    // Options and parameters should be reset, since they depend on the component
+    if (isVariableTypeWithParameters(variableType)) {
+      changeField(form, 'parameters', null);
+    }
+
+    if (isOrdinalOrCategoricalType(variableType) || variableType === 'boolean') {
+      changeField(form, 'options', null);
+    }
   },
   handleChangeVariable: ({ existingVariables, changeField, form }) => (_, value) => {
     // Either load settings from codebook, or reset

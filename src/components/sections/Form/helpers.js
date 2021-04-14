@@ -8,7 +8,7 @@ export const getCodebookProperties = (properties) => reduce(
   CODEBOOK_PROPERTIES,
   (memo, key) => {
     const property = properties[key];
-    if (!property) { return memo; }
+    if (!Object.keys(properties).includes(key)) { return memo; }
     return {
       ...memo,
       [key]: property,
