@@ -66,9 +66,12 @@ const fieldsState = connect(mapStateToProps, mapDispatchToProps);
 
 const fieldsHandlers = withHandlers({
   handleChangeComponent: ({ changeField, form, variableType }) => (e, value) => {
+    console.log('handleChangeComponent', { changeField, form, variableType, value });
     // Only reset if type not defined yet (new variable)
     const typeForComponent = getTypeForComponent(value);
 
+    // If we have changed type, also reset validation since options may not be
+    // applicable.
     if (variableType !== typeForComponent) {
       changeField(form, 'validation', {});
     }

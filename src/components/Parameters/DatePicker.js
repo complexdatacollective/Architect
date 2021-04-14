@@ -54,6 +54,7 @@ const DateTimeParameters = ({
         component={DatePicker}
         name={`${name}.min`}
         validation={{ ISODate: dateFormat }}
+        placeholder="Select a start range date..."
         parameters={{
           type: useDateFormat,
           min: '1000-01-01',
@@ -71,6 +72,7 @@ const DateTimeParameters = ({
         component={DatePicker}
         name={`${name}.max`}
         validation={{ ISODate: dateFormat }}
+        placeholder="Select an end range date, or leave empty to use interview date..."
         parameters={{
           type: useDateFormat,
           min: '1000-01-01',
