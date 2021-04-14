@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { map } from 'lodash';
 import { Icon } from '@codaco/ui';
 import Number from '@codaco/ui/lib/components/Fields/Number';
 import NativeSelect from '../Form/Fields/NativeSelect';
-import { isValidationWithValue } from './options';
+import { isValidationWithNumberValue, isValidationWithListValue } from './options';
 
 const Validation = ({
   onDelete,
@@ -11,6 +12,7 @@ const Validation = ({
   options,
   itemKey,
   itemValue,
+  existingVariables,
 }) => {
   const handleKeyChange = (option) => onUpdate(option, itemValue, itemKey);
 
@@ -26,6 +28,8 @@ const Validation = ({
     onChange: handleValueChange,
   };
 
+  const existingVariableOptions = map(existingVariables, (variableValue, variableKey) => (
+    { label: variableValue.name, value: variableKey }));
   return (
     <div className="form-fields-multi-select__rule">
       <div className="form-fields-multi-select__rule-options">
@@ -37,10 +41,21 @@ const Validation = ({
             placeholder="Select validation rule"
           />
         </div>
-        { isValidationWithValue(itemKey)
+        { isValidationWithNumberValue(itemKey)
           && (
           <div className="form-fields-multi-select__rule-option">
             <Number input={valueInputProps} validation={{ required: true }} />
+          </div>
+          )}
+        { isValidationWithListValue(itemKey)
+          && (
+          <div className="form-fields-multi-select__rule-option">
+            <NativeSelect
+              options={existingVariableOptions}
+              input={valueInputProps}
+              validation={{ required: true }}
+              placeholder="Select comparison variable"
+            />
           </div>
           )}
       </div>
@@ -59,7 +74,12 @@ Validation.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   itemKey: PropTypes.string,
-  itemValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  itemValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
+  existingVariables: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 Validation.defaultProps = {

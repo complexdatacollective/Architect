@@ -1,9 +1,9 @@
 import { omit } from 'lodash';
 import { withHandlers } from 'recompose';
-import { isValidationWithValue } from './options';
+import { isValidationWithListValue, isValidationWithNumberValue } from './options';
 
 const getUpdatedValue = (previousValue, key, value, oldKey = null) => {
-  const autoValue = isValidationWithValue(key)
+  const autoValue = isValidationWithNumberValue(key) || isValidationWithListValue(key)
     ? value
     : true;
 

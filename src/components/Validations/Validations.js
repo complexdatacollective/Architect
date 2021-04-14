@@ -45,6 +45,7 @@ const AddItem = (props) => (
 const ValidationsField = ({
   input,
   options,
+  existingVariables,
   meta: { submitFailed, error },
   children,
   ...rest
@@ -63,6 +64,7 @@ const ValidationsField = ({
             itemKey={key}
             itemValue={value}
             options={options}
+            existingVariables={existingVariables}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...rest}
           />
@@ -81,6 +83,11 @@ ValidationsField.propTypes = {
   meta: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
+  existingVariables: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   children: PropTypes.node,
 };
 
@@ -92,6 +99,7 @@ ValidationsField.defaultProps = {
 const Validations = ({
   name,
   validationOptions,
+  existingVariables,
   value,
   addNew,
   setAddNew,
@@ -110,6 +118,7 @@ const Validations = ({
         component={ValidationsField}
         format={format}
         options={availableOptions}
+        existingVariables={existingVariables}
         onUpdate={handleChange}
         onDelete={handleDelete}
         validate={validate}
@@ -120,6 +129,7 @@ const Validations = ({
             onUpdate={handleAddNew}
             onDelete={() => setAddNew(false)}
             options={availableOptions}
+            existingVariables={existingVariables}
           />
           )}
       </Field>
@@ -141,11 +151,17 @@ Validations.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   handleAddNew: PropTypes.func.isRequired,
+  existingVariables: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ),
 };
 
 Validations.defaultProps = {
   validationOptions: [],
   value: {},
+  existingVariables: {},
 };
 
 export default Validations;

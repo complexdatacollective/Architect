@@ -4,8 +4,10 @@ import { formValueSelector, change } from 'redux-form';
 import { actionCreators as dialogsActions } from '../../ducks/modules/dialogs';
 import { getValidationOptionsForVariableType } from './options';
 
-const mapStateToProps = (state, { form, name, variableType }) => {
-  const validationOptions = getValidationOptionsForVariableType(variableType);
+const mapStateToProps = (state, {
+  form, name, variableType, entity,
+}) => {
+  const validationOptions = getValidationOptionsForVariableType(variableType, entity);
 
   return {
     validationOptions,
