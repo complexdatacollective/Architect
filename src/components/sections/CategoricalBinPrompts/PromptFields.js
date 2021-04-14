@@ -113,8 +113,7 @@ const PromptFields = ({
                   The categorical bin interface is designed to use
                   {' '}
                   <strong>
-                    up to 8 option
-                    values
+                    up to 8 option values
                   </strong>
                   {' '}
                   (
