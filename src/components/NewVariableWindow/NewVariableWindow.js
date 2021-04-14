@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import * as Fields from '@codaco/ui/lib/components/Fields';
-import { isVariableTypeWithOptions, VARIABLE_OPTIONS } from '@app/config/variables';
+import { isOrdinalOrCategoricalType, VARIABLE_OPTIONS } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import { required, uniqueByList, allowedVariableName } from '@app/utils/validations';
 import safeName from '@app/utils/safeName';
@@ -76,7 +76,7 @@ class NewVariableWindow extends Component {
             validation={{ required: true }}
           />
         </Section>
-        { isVariableTypeWithOptions(variableType)
+        { isOrdinalOrCategoricalType(variableType)
           && (
           <Section>
             <h3 id={getFieldId('options')}>Options</h3>

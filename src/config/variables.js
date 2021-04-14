@@ -57,7 +57,7 @@ export const COMPONENTS = {
   Toggle: {
     label: 'Toggle',
     value: 'Toggle',
-    description: 'This component renders a switch, which can be tapped or clicked to indicate "on" or "off".',
+    description: 'This component renders a switch, which can be tapped or clicked to indicate "on" or "off". By default it is in the "off" position. If you require a boolean input without a default, use the BooleanChoice component',
     image: 'Toggle',
   },
   RadioGroup: {
@@ -96,16 +96,22 @@ export const COMPONENTS = {
     description: 'A calendar date picker that automatically limits available dates relative to an "anchor date", which can be configured to the date of the interview session. ',
     image: 'RelativeDatePicker',
   },
+  BooleanChoice: {
+    label: 'BooleanChoice',
+    value: 'Boolean',
+    description: 'A component for boolean variables that requires the participant to actively select an option. Unlike the toggle component, this component accepts the "required" validation.',
+    image: 'BooleanChoice',
+  },
 };
 
 export const VARIABLE_TYPES_COMPONENTS = [
-  ['number', [COMPONENTS.NumberInput], 'var(--color-paradise-pink)'],
-  ['scalar', [COMPONENTS.VisualAnalogScale], 'var(--color-cerulean-blue)'],
-  ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker], 'var(--color-tomato)'],
-  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue--dark)'],
-  ['boolean', [COMPONENTS.Toggle], 'var(--color-neon-carrot)'],
-  ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], 'var(--color-sea-green)'],
-  ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], 'var(--color-sea-green--dark)'],
+  ['number', [COMPONENTS.NumberInput], 'var(--color-paradise-pink)', '-- Number Types -- '],
+  ['scalar', [COMPONENTS.VisualAnalogScale], 'var(--color-cerulean-blue)', '-- Scalar Types --'],
+  ['datetime', [COMPONENTS.DatePicker, COMPONENTS.RelativeDatePicker], 'var(--color-tomato)', '-- Date Types --'],
+  ['text', [COMPONENTS.TextInput, COMPONENTS.TextArea], 'var(--color-slate-blue--dark)', '-- Text Types --'],
+  ['boolean', [COMPONENTS.BooleanChoice, COMPONENTS.Toggle], 'var(--color-neon-carrot)', '-- Boolean Types --'],
+  ['ordinal', [COMPONENTS.RadioGroup, COMPONENTS.LikertScale], 'var(--color-sea-green)', '-- Ordinal Types --'],
+  ['categorical', [COMPONENTS.CheckboxGroup, COMPONENTS.ToggleButtonGroup], 'var(--color-sea-green--dark)', '-- Categorical Types --'],
 ];
 
 export const VARIABLE_TYPES_WITH_OPTIONS = [
@@ -123,15 +129,23 @@ export const VARIABLE_TYPES_WITH_COMPONENTS = VARIABLE_TYPES_COMPONENTS
 
 export const INPUT_OPTIONS = Object.values(COMPONENTS);
 
+const formattedInputOptions = VARIABLE_TYPES_COMPONENTS.reduce((accumulator, currentValue) => ([
+  ...accumulator,
+  { label: currentValue[3], value: null, disabled: true },
+  ...currentValue[1],
+]), []);
+
 export const VARIABLE_OPTIONS = Object.values(VARIABLE_TYPES);
 
-const isVariableTypeWithOptions = (
+const isOrdinalOrCategoricalType = (
   variableType,
 ) => VARIABLE_TYPES_WITH_OPTIONS.includes(variableType);
 
 const isVariableTypeWithParameters = (
   variableType,
 ) => VARIABLE_TYPES_WITH_PARAMETERS.includes(variableType);
+
+const isBooleanWithOptions = (component) => component === COMPONENTS.BooleanChoice.value;
 
 const findByType = (type) => ([t]) => t === type;
 const findByComponent = (component) => ([, c]) => c.some(({ value }) => value === component);
@@ -160,12 +174,14 @@ const getColorForType = (type) => {
 
 export {
   INPUT_OPTIONS as inputOptions,
+  formattedInputOptions,
   VARIABLE_OPTIONS as variableOptions,
   getTypeForComponent,
   getComponentsForType,
   getColorForType,
-  isVariableTypeWithOptions,
+  isOrdinalOrCategoricalType,
   isVariableTypeWithParameters,
+  isBooleanWithOptions,
 };
 
 export default INPUT_OPTIONS;

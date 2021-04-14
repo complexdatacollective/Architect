@@ -16,27 +16,34 @@ const Attribute = ({
   handleDelete,
 }) => (
   <div className="assign-attributes-attribute">
-    <div className="assign-attributes-attribute__variable">
-      <ValidatedField
-        name={`${field}.variable`}
-        label="Variable:"
-        component={VariableSelect}
-        validation={{ required: true }}
-        options={variableOptions}
-        onCreateOption={(value) => handleCreateVariable(value, 'boolean', `${field}.variable`)}
-      />
-    </div>
-    { variable
-      && (
-      <div className="assign-attributes-attribute__value">
-        <h4>Value:</h4>
+    <div className="assign-attributes-attribute__wrapper">
+      <div className="assign-attributes-attribute__variable">
         <ValidatedField
-          name={`${field}.value`}
-          component={Fields.Toggle}
-          validation={null}
+          name={`${field}.variable`}
+          label="Variable:"
+          component={VariableSelect}
+          validation={{ required: true }}
+          options={variableOptions}
+          onCreateOption={(value) => handleCreateVariable(value, 'boolean', `${field}.variable`)}
         />
       </div>
-      )}
+      { variable
+        && (
+        <div className="assign-attributes-attribute__value">
+          <h4>Value:</h4>
+          <ValidatedField
+            name={`${field}.value`}
+            options={[
+              { label: 'True', value: true },
+              { label: 'False', value: false, negative: true },
+            ]}
+            component={Fields.Boolean}
+            validation={{ required: true }}
+            noReset
+          />
+        </div>
+        )}
+    </div>
     <div
       className="assign-attributes-attribute__delete"
       onClick={handleDelete}

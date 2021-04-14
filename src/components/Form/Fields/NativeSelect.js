@@ -22,6 +22,7 @@ const NativeSelect = ({
   createInputLabel,
   createInputPlaceholder,
   allowPlaceholderSelect,
+  sortOptionsByLabel,
   reserved,
   validation,
   disabled,
@@ -139,7 +140,7 @@ const NativeSelect = ({
     notSubmittedError,
   ]);
 
-  const sortedOptions = useMemo(() => sortBy(options, 'label'), [options]);
+  const sortedOptions = sortOptionsByLabel ? useMemo(() => sortBy(options, 'label'), [options]) : options;
 
   const variants = {
     show: { opacity: 1 },
@@ -202,6 +203,7 @@ const NativeSelect = ({
             >
               <option disabled={!allowPlaceholderSelect} value="_placeholder">
                 --
+                {' '}
                 {placeholder}
                 {' '}
                 --
@@ -237,6 +239,7 @@ NativeSelect.propTypes = {
   createInputLabel: PropTypes.string,
   createInputPlaceholder: PropTypes.string,
   allowPlaceholderSelect: PropTypes.bool,
+  sortOptionsByLabel: PropTypes.bool,
   // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array,
   // eslint-disable-next-line react/forbid-prop-types
@@ -260,6 +263,7 @@ NativeSelect.defaultProps = {
   createInputLabel: 'New variable name',
   createInputPlaceholder: 'Enter a variable name...',
   allowPlaceholderSelect: false,
+  sortOptionsByLabel: true,
   options: [],
   input: { value: '' },
   label: null,

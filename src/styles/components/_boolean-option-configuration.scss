@@ -1,0 +1,22 @@
+.boolean-option-configuration {
+  display: grid;
+  column-gap: unit(2);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  &__item {
+    padding: unit(3);
+    border-radius: var(--border-radius);
+    background: var(--color-panel-grey--dark);
+
+    h3 {
+      margin-top: 0;
+    }
+
+    .form-field,
+    .form-field-container {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
