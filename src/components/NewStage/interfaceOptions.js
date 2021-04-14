@@ -1,6 +1,6 @@
 const interfaceOptions = [
   {
-    category: 'Name Generators',
+    category: 'Name and Edge Generators',
     interfaces: [
       {
         type: 'NameGenerator',
@@ -18,6 +18,14 @@ const interfaceOptions = [
         type: 'NameGeneratorAutoComplete',
         title: 'Large Roster Name Generator',
       },
+      {
+        type: 'DyadCensus',
+        title: 'Dyad Census',
+      },
+      {
+        type: 'TieStrengthCensus',
+        title: 'Tie-Strength Census',
+      },
     ],
   },
   {
@@ -34,7 +42,7 @@ const interfaceOptions = [
     ],
   },
   {
-    category: 'Name Interpreters',
+    category: 'Name and Edge Interpreters',
     interfaces: [
       {
         type: 'OrdinalBin',
@@ -55,10 +63,6 @@ const interfaceOptions = [
       {
         type: 'EgoForm',
         title: 'Ego Form',
-      },
-      {
-        type: 'DyadCensus',
-        title: 'Dyad Census',
       },
     ],
   },

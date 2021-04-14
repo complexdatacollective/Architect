@@ -73,6 +73,7 @@ const PromptFields = ({
             <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
             <p>
               Create
+              { ' ' }
               <strong>up to 5</strong>
               {' '}
               options for this variable.

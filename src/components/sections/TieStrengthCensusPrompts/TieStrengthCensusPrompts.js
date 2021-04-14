@@ -4,30 +4,26 @@ import { compose } from 'recompose';
 import EditableList from '../../EditableList';
 import withSubject from '../../enhancers/withSubject';
 import withDisabledSubjectRequired from '../../enhancers/withDisabledSubjectRequired';
-import { PromptPreview } from '../NameGeneratorPrompts';
+import { itemSelector } from './helpers';
+import PromptPreview from './PromptPreview';
 import PromptFields from './PromptFields';
-import { itemSelector, normalizeField } from './helpers';
 import withPromptChangeHandler from './withPromptChangeHandler';
 
-const CategoricalBinPrompts = ({
+const TieStrengthCensusPrompts = ({
   handleChangePrompt,
-  entity,
-  type,
   ...props
 }) => (
   <EditableList
     previewComponent={PromptPreview}
     editComponent={PromptFields}
     title="Edit Prompt"
+    fieldName="prompts"
+    itemSelector={itemSelector()}
     onChange={handleChangePrompt}
-    normalize={normalizeField}
-    itemSelector={itemSelector(entity, type)}
-    entity={entity}
-    type={type}
     // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
   >
-    <h2>Edit Prompts</h2>
+    <h2>Prompts</h2>
     <p>
       Add one or more prompts below to frame the task for the user. You can reorder
       the prompts using the draggable handles on the left hand side.
@@ -35,21 +31,17 @@ const CategoricalBinPrompts = ({
   </EditableList>
 );
 
-CategoricalBinPrompts.propTypes = {
+TieStrengthCensusPrompts.propTypes = {
   handleChangePrompt: PropTypes.func.isRequired,
-  entity: PropTypes.string,
-  type: PropTypes.string,
 };
 
-CategoricalBinPrompts.defaultProps = {
-  entity: null,
-  type: null,
+TieStrengthCensusPrompts.defaultProps = {
 };
 
-export { CategoricalBinPrompts };
+export { TieStrengthCensusPrompts };
 
 export default compose(
   withSubject,
   withDisabledSubjectRequired,
   withPromptChangeHandler,
-)(CategoricalBinPrompts);
+)(TieStrengthCensusPrompts);

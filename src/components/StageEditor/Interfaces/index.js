@@ -4,6 +4,7 @@ import AlterEdgeForm from './AlterEdgeForm';
 import AlterForm from './AlterForm';
 import CategoricalBin from './CategoricalBin';
 import DyadCensus from './DyadCensus';
+import TieStrengthCensus from './TieStrengthCensus';
 import EgoForm from './EgoForm';
 import Information from './Information';
 import NameGenerator from './NameGenerator';
@@ -19,6 +20,7 @@ const interfaces = {
   AlterForm,
   CategoricalBin,
   DyadCensus,
+  TieStrengthCensus,
   EgoForm,
   Information,
   NameGenerator,
