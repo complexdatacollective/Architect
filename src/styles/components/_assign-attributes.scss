@@ -15,15 +15,23 @@
 
 .assign-attributes-attribute {
   display: flex;
-  flex-direction: row;
-  width: 100%;
   margin-top: unit(2);
   padding: unit(2);
   border-radius: var(--border-radius);
   background: var(--color-panel-grey--dark);
 
+  .form-field {
+    background: var(--color-panel-grey--light);
+  }
+
   &:first-child {
     margin-top: 0;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
   }
 
   &__variable {
@@ -32,7 +40,6 @@
 
   &__value {
     flex: 1 0 auto;
-    padding-left: unit(2);
   }
 
   &__delete {

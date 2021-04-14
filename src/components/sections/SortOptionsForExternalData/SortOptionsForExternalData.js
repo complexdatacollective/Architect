@@ -30,6 +30,7 @@ const SortOptions = ({
       <Row>
         <h4>
           Initial Sort Order
+          { ' ' }
           <small>(optional)</small>
         </h4>
         <p>
@@ -50,6 +51,7 @@ const SortOptions = ({
       <Row>
         <h4>
           Participant Sortable Properties
+          { ' ' }
           <small>(optional)</small>
         </h4>
         <p>

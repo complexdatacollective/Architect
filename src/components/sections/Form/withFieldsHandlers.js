@@ -6,10 +6,13 @@ import {
   withHandlers,
 } from 'recompose';
 import {
+  formattedInputOptions,
   getTypeForComponent,
   getComponentsForType,
   VARIABLE_TYPES_WITH_COMPONENTS,
   INPUT_OPTIONS,
+  isOrdinalOrCategoricalType,
+  isVariableTypeWithParameters,
 } from '@app/config/variables';
 import { actionCreators as codebookActions } from '@modules/protocol/codebook';
 import { getVariablesForSubject, getVariableOptionsForSubject } from '@selectors/codebook';
@@ -40,9 +43,9 @@ const mapStateToProps = (state, { form, entity, type }) => {
   // 2. Otherwise list all INPUT_OPTIONS (new variable)
   const componentOptions = variableType && !isNewVariable
     ? getComponentsForType(variableType)
-    : INPUT_OPTIONS;
+    : formattedInputOptions;
 
-  const metaForType = find(componentOptions, { value: component });
+  const metaForType = find(INPUT_OPTIONS, { value: component });
 
   return {
     variable,
@@ -68,14 +71,20 @@ const fieldsHandlers = withHandlers({
     // Only reset if type not defined yet (new variable)
     const typeForComponent = getTypeForComponent(value);
 
+    // If we have changed type, also reset validation since options may not be
+    // applicable.
     if (variableType !== typeForComponent) {
-      changeField(form, 'options', null);
       changeField(form, 'validation', {});
     }
 
-    // Always reset this, since it is at least partly related
-    // to the component
-    changeField(form, 'parameters', null);
+    // Options and parameters should be reset, since they depend on the component
+    if (isVariableTypeWithParameters(variableType)) {
+      changeField(form, 'parameters', null);
+    }
+
+    if (isOrdinalOrCategoricalType(variableType) || variableType === 'boolean') {
+      changeField(form, 'options', null);
+    }
   },
   handleChangeVariable: ({ existingVariables, changeField, form }) => (_, value) => {
     // Either load settings from codebook, or reset

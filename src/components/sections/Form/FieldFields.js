@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { omit } from 'lodash';
 import { Field as RichText } from '@codaco/ui/lib/components/Fields/RichText';
-import { isVariableTypeWithOptions, isVariableTypeWithParameters } from '@app/config/variables';
+import { isOrdinalOrCategoricalType, isVariableTypeWithParameters, isBooleanWithOptions } from '@app/config/variables';
 import { getFieldId } from '@app/utils/issues';
 import ValidatedField from '@components/Form/ValidatedField';
 import NativeSelect from '@components/Form/Fields/NativeSelect';
@@ -16,6 +16,7 @@ import withFieldsHandlers from './withFieldsHandlers';
 import Tip from '../../Tip';
 import ExternalLink from '../../ExternalLink';
 import InputPreview from '../../Form/Fields/InputPreview';
+import BooleanChoice from '../../BooleanChoice';
 
 const PromptFields = ({
   form,
@@ -58,6 +59,7 @@ const PromptFields = ({
           onCreateOption={handleNewVariable} // reset later fields, create variable of no type?
           onChange={handleChangeVariable} // read/reset component options validation
           validation={{ required: true }}
+
         />
       </Row>
     </Section>
@@ -93,6 +95,7 @@ const PromptFields = ({
             options={componentOptions}
             validation={{ required: true }}
             onChange={handleChangeComponent}
+            sortOptionsByLabel={!isNewVariable}
           />
           { isNewVariable && variableType
             && (
@@ -118,7 +121,7 @@ const PromptFields = ({
                   <strong>{variableType}</strong>
                   {' '}
                   compatible
-                  input control can be selected above. If you would like to use a different
+                  input controls can be selected above. If you would like to use a different
                   input control type, you will need to create a new variable.
                 </p>
               </div>
@@ -137,7 +140,7 @@ const PromptFields = ({
         )}
       </Section>
       )}
-    { isVariableTypeWithOptions(variableType)
+    { isOrdinalOrCategoricalType(variableType)
       && (
       <Section>
         <Row>
@@ -154,6 +157,15 @@ const PromptFields = ({
           />
         </Row>
       </Section>
+      )}
+    { isBooleanWithOptions(component)
+      && (
+        <Section>
+          <Row>
+            <h3 id={getFieldId('parameters')}>BooleanChoice Options</h3>
+            <BooleanChoice form={form} />
+          </Row>
+        </Section>
       )}
     { isVariableTypeWithParameters(variableType)
       && (

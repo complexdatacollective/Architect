@@ -16,6 +16,7 @@ const PromptFields = ({
       <Row>
         <h3>
           Assign Additional Variables?
+          { ' ' }
           <small>(optional)</small>
         </h3>
         <p>

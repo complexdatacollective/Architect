@@ -73,6 +73,7 @@ const PromptFields = ({
             <h3 id={getFieldId('variableOptions')}>Variable Options</h3>
             <p>
               Create
+              { ' ' }
               <strong>up to 5</strong>
               {' '}
               options for this variable.
@@ -120,6 +121,7 @@ const PromptFields = ({
         <Row>
           <h3>
             Bucket Sort Order
+            { ' ' }
             <small>(optional)</small>
           </h3>
           <p>
@@ -148,6 +150,7 @@ const PromptFields = ({
         <Row>
           <h3>
             Bin Sort Order
+            { ' ' }
             <small>(optional)</small>
           </h3>
           <p>

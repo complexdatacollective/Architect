@@ -3,6 +3,7 @@ export { default as CardDisplayOptions } from './CardDisplayOptions';
 export { default as CategoricalBinPrompts } from './CategoricalBinPrompts';
 export { default as ContentGrid } from './ContentGrid';
 export { default as DyadCensusPrompts } from './DyadCensusPrompts';
+export { default as TieStrengthCensusPrompts } from './TieStrengthCensusPrompts';
 export { default as EdgeType } from './EdgeType';
 export { default as ExternalDataSource } from './ExternalDataSource';
 export { default as Filter } from './Filter';

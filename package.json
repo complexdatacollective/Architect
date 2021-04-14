@@ -1,6 +1,6 @@
 {
     "name": "network-canvas-architect",
-    "version": "6.0.1",
+    "version": "6.1.0",
     "productName": "Network Canvas Architect",
     "description": "A tool for building Network Canvas interviews.",
     "author": "Complex Data Collective <info@networkcanvas.com>",
@@ -16,7 +16,7 @@
         "start": "cross-env BUILD_TARGET=web node scripts/start.js",
         "start:electron": "npm run start:architect:electron",
         "start:architect:electron": "node scripts/start.js",
-        "start:network-canvas:electron": "npm run start:electron --prefix=network-canvas",
+        "start:network-canvas:electron": "cd network-canvas && npm run start:electron",
         "preelectron:dev": "node scripts/build-electron-dev.js",
         "dev:electron": "cross-env NODE_ENV=development WEBPACK_NC_DEV_SERVER_PORT=3000 WEBPACK_DEV_SERVER_PORT=3003 electron electron-dev/",
         "build": "npm run build:architect && npm run build:network-canvas",
@@ -48,7 +48,7 @@
         "@babel/eslint-plugin": "^7.13.10",
         "@babel/plugin-proposal-class-properties": "^7.12.1",
         "@babel/preset-react": "^7.12.1",
-        "@codaco/ui": "5.3.1-alpha.11",
+        "@codaco/ui": "^5.3.1-alpha.18",
         "animejs": "^2.2.0",
         "archiver": "^3.1.1",
         "autoprefixer": "10.2.5",
@@ -263,7 +263,6 @@
         }
     },
     "dependencies": {
-        "@codaco/ui": "^5.3.1-alpha.11",
         "postcss": "^8.2.8"
     }
 }

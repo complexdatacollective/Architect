@@ -30,16 +30,19 @@ class Background extends PureComponent {
           </p>
         </Row>
         <Row>
-          <DetachedField
-            component={ArchitectFields.Mode}
-            value={useImage}
-            options={[
-              { value: false, label: 'Circles' },
-              { value: true, label: 'Image' },
-            ]}
-            onChange={handleChooseBackgroundType}
-            label="Choose a background type"
-          />
+          <div style={{ maxWidth: '40rem' }}>
+            <DetachedField
+              component={Fields.Boolean}
+              value={useImage}
+              options={[
+                { value: false, label: 'Circles' },
+                { value: true, label: 'Image' },
+              ]}
+              onChange={handleChooseBackgroundType}
+              label="Choose a background type"
+              noReset
+            />
+          </div>
         </Row>
         { (!useImage)
           && (

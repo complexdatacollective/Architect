@@ -31,6 +31,8 @@ const formHandlers = withHandlers({
     changeForm(form, '_modified', new Date().getTime());
 
     if (!_createNewVariable) {
+      // Merge is set to false below so that properties that were removed, such
+      // as 'options: []' and 'parameters: {}' get deleted.
       await updateVariable(entity, type, variable, configuration, true);
 
       return {

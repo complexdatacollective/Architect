@@ -66,6 +66,7 @@ variablePathCollector.add('stages[].panels.filter.rules[].options.attribute');
 variablePathCollector.add('stages[].searchOptions.matchProperties[]');
 variablePathCollector.add('stages[].cardOptions.additionalProperties[].variable');
 variablePathCollector.add('stages[].prompts[].variable');
+variablePathCollector.add('stages[].prompts[].edgeVariable');
 variablePathCollector.add('stages[].prompts[].additionalAttributes[].variable');
 variablePathCollector.add('stages[].prompts[].highlight.variable');
 variablePathCollector.add('stages[].prompts[].layout.layoutVariable');

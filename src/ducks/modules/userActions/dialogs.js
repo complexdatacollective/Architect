@@ -197,6 +197,7 @@ const mayUpgradeProtocolDialog = (
         (
         <strong>
           version
+          { ' ' }
           {protocolSchemaVersion}
         </strong>
         ) that is not compatible with
@@ -205,6 +206,7 @@ const mayUpgradeProtocolDialog = (
         {' '}
         <strong>
           version
+          { ' ' }
           {targetSchemaVersion}
         </strong>
         {' '}
