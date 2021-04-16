@@ -2,6 +2,7 @@ import uuid from 'uuid';
 import {
   omit, get, has, isEmpty,
 } from 'lodash';
+import prune from '@app/utils/prune';
 import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
@@ -56,7 +57,7 @@ const deleteType = (entity, type) => ({
   },
 });
 
-const createVariable = (entity, type, variable, configuration) => ({
+const createVariable = (entity, type, variable, configuration) => prune({
   type: CREATE_VARIABLE,
   meta: {
     type,
@@ -66,7 +67,7 @@ const createVariable = (entity, type, variable, configuration) => ({
   configuration,
 });
 
-const updateVariable = (entity, type, variable, configuration, merge = false) => ({
+const updateVariable = (entity, type, variable, configuration, merge = false) => prune({
   type: UPDATE_VARIABLE,
   meta: {
     entity,

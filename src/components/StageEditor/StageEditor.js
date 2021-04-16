@@ -12,14 +12,16 @@ import StageHeading from './StageHeading';
 import SkipLogic from './SkipLogic';
 import { formName } from './configuration';
 
-const StageEditor = ({
-  id,
-  previewStage,
-  interfaceType,
-  stagePath,
-  hasSkipLogic,
-  ...props
-}) => {
+const StageEditor = (props) => {
+  const {
+    id,
+    previewStage,
+    interfaceType,
+    stagePath,
+    hasSkipLogic,
+    ...rest
+  } = props;
+
   const [showCodeView, setShowCodeView] = useState(false);
   const toggleShowCodeView = () => setShowCodeView((show) => !show);
 
@@ -40,25 +42,28 @@ const StageEditor = ({
   );
 
   const renderSections = (
-    sectionList, { submitFailed, windowRoot },
-  ) => sectionList.map((SectionComponent) => (
-    <SectionComponent
-      key={stagePath}
-      form={formName}
-      stagePath={stagePath}
-      hasSubmitFailed={submitFailed}
-      // `windowRoot` will ensure connect() components re-render
-      // when the window root changes
-      windowRoot={windowRoot}
-      interfaceType={interfaceType}
-    />
-  ));
+    sectionsList, { submitFailed, windowRoot },
+  ) => sectionsList.map((SectionComponent, sectionIndex) => {
+    const sectionKey = `${interfaceType}-${sectionIndex}`;
+    return (
+      <SectionComponent
+        key={sectionKey}
+        form={formName}
+        stagePath={stagePath}
+        hasSubmitFailed={submitFailed}
+        // `windowRoot` will ensure connect() components re-render
+        // when the window root changes
+        windowRoot={windowRoot}
+        interfaceType={interfaceType}
+      />
+    );
+  });
 
   return (
     <Editor
       formName={formName}
       // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
+      {...rest}
     >
       {
         ({ submitFailed, windowRoot }) => (
