@@ -1,14 +1,11 @@
 /* eslint-disable import/prefer-default-export */
+import { omit } from 'lodash';
+import { VARIABLE_TYPES } from '../../../config/variables';
 
-// Variable types that can be used in rules
-export const validTypes = new Set([
-  'text',
-  'number',
-  'datetime',
-  'boolean',
-  'categorical',
-  'ordinal',
-]);
+// Variable types that can't be used in rules
+const disallowedVariableTypes = ['scalar'];
+
+export const validTypes = new Set(Object.keys(omit(VARIABLE_TYPES, disallowedVariableTypes)));
 
 // List of operators
 export const operators = {
@@ -53,7 +50,7 @@ export const operatorsWithValue = new Set([
 export const operatorsByType = {
   text: new Set(['EXACTLY', 'NOT']),
   number: new Set(['EXACTLY', 'NOT', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL']),
-  boolean: new Set(['EXACTLY']),
+  boolean: new Set(['EXACTLY', 'NOT']),
   ordinal: new Set(['EXACTLY', 'NOT']),
   categorical: new Set(['INCLUDES', 'EXCLUDES']),
   exists: new Set(['EXISTS', 'NOT_EXISTS']), // TODO: Better words for these?
