@@ -84,6 +84,23 @@ describe('timeline middleware', () => {
       expect(rollbackState.timeline).toEqual(nextState.timeline.slice(0, 5));
       expect(rollbackState.present).toEqual(nextState.past[4]);
     });
+
+    it('if point does not exist it ignores action', () => {
+      const nextState = times(10)
+        .reduce(
+          (state) => rewindableReducer(state, {}),
+          undefined,
+        );
+
+      const rollbackState = rewindableReducer(
+        nextState,
+        actionCreators.jump('NON_EXISTENT_POINT'),
+      );
+
+      expect(rollbackState.past).toEqual(nextState.past);
+      expect(rollbackState.timeline).toEqual(nextState.timeline);
+      expect(rollbackState.present).toEqual(nextState.present);
+    });
   });
 
   describe('reset() action', () => {
