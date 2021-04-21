@@ -73,6 +73,7 @@ class NewVariableWindow extends Component {
             component={Select}
             placeholder="Select variable type"
             options={this.filteredVariableOptions()}
+            isDisabled={!!initialValues.type}
             validation={{ required: true }}
           />
         </Section>
