@@ -24,13 +24,16 @@ const mapDispatchToProps = {
 };
 
 const variableHandlers = withHandlers({
-  handleCreateLayoutVariable: ({ createVariable, entity, type }) => async (name) => {
+  handleCreateLayoutVariable: ({
+    form,
+    changeForm,
+    createVariable,
+    entity,
+    type,
+  }) => async (name) => {
     const { variable } = await createVariable(entity, type, { type: 'layout', name });
+    changeForm(form, 'layoutVariable', variable);
     return variable;
-  },
-  handleCreateGroupVariable: ({ changeForm, form, closeNewVariableWindow }) => (variable) => {
-    changeForm(form, 'groupVariable', variable);
-    closeNewVariableWindow();
   },
   handleDeleteVariable: (
     { entity, type, deleteVariable },
