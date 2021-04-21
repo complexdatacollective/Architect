@@ -9,7 +9,6 @@ import NativeSelect from '@components/Form/Fields/NativeSelect';
 import VariableSelect from '@components/Form/Fields/VariableSelect';
 import ValidatedField from '@components/Form/ValidatedField';
 import { getFieldId } from '@app/utils/issues';
-import withNewVariableWindowHandlers from '@components/enhancers/withNewVariableWindowHandlers';
 import { Section, Row } from '@components/EditorLayout';
 import withPresetProps from './withPresetProps';
 
@@ -108,6 +107,5 @@ PresetFields.defaultProps = {
 };
 
 export default compose(
-  withNewVariableWindowHandlers,
   withPresetProps,
 )(PresetFields);
