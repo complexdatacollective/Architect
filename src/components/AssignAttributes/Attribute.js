@@ -14,6 +14,8 @@ const Attribute = ({
   variableOptions,
   handleCreateVariable,
   handleDelete,
+  entity,
+  type,
 }) => (
   <div className="assign-attributes-attribute">
     <div className="assign-attributes-attribute__wrapper">
@@ -25,6 +27,8 @@ const Attribute = ({
           validation={{ required: true }}
           options={variableOptions}
           onCreateOption={(value) => handleCreateVariable(value, 'boolean', `${field}.variable`)}
+          entity={entity}
+          type={type}
         />
       </div>
       { variable
@@ -60,6 +64,8 @@ Attribute.propTypes = {
   variableOptions: PropTypes.array.isRequired,
   handleCreateVariable: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
+  entity: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 Attribute.defaultProps = {
