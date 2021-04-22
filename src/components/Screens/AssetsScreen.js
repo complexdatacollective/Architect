@@ -39,7 +39,7 @@ const AssetBrowserScreen = ({
             can be used in building your protocol. These resources might include images,
             video, audio, or even external network data. See our
             {' '}
-            <ExternalLink href="https://documentation.networkcanvas.com/docs/key-concepts/resources/">documentation</ExternalLink>
+            <ExternalLink href="https://documentation.networkcanvas.com/reference/key-concepts/resources/">documentation</ExternalLink>
             {' '}
             for more information.
           </p>
