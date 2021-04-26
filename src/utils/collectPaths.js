@@ -1,7 +1,9 @@
 import { get, reduce, isArray } from 'lodash';
 
 /**
- * Collect nodes that match path from `obj`
+ * Collect _values_ that match path from `obj`. We are using this
+ * to collect variableIds from the protocol object, but it could
+ * be used to collect any value from a list of paths.
  *
  * Example usage:
  *
@@ -31,7 +33,7 @@ import { get, reduce, isArray } from 'lodash';
  * // };
  * ```
  *
- * @returns {object} in format: { [path]: node }
+ * @returns {object} in format: { [path]: value }
  */
 const collectPaths = (paths, obj, memoPath) => {
   // We expect a string notation for paths, but it's actually converted to array automatically:
@@ -88,6 +90,35 @@ const collectPaths = (paths, obj, memoPath) => {
   return {};
 };
 
+/**
+ *  This applies a function to the value of each mapped function,
+ * for the case where we need to apply additional logic to the
+ * _value_ at the path.
+ *
+ * For example:
+ * ```
+ * const obj = {
+ *   foos: [
+ *     { bar: { entity: 'node', type: 'NODE_UUID_1' } },
+ *     { bar: { entity: 'edge', type: 'NODE_UUID_2' } },
+ *   ],
+ * };
+ *
+ * const filterFunction = ({ entity, type }) => {
+ *   // skip values which aren't nodes
+ *   if (entity !== 'node) { return undefined; }
+ *
+ *   // just return the uuid, and not the whole value
+ *   return type;
+ * };
+ *
+ * const r = collectMappedPaths(['foos[].bar', obj, filterFunction);
+ *
+ * // r = {
+ * //   'foos[0].bar.type', 'NODE_UUID_1',
+ * // };
+ * ```
+ */
 export const collectMappedPaths = (paths, obj, mapFunc) => {
   const collectedPaths = collectPaths(paths, obj);
 
@@ -101,6 +132,7 @@ export const collectMappedPaths = (paths, obj, mapFunc) => {
   }, {});
 };
 
+// Helper object for collecting paths
 export class PathCollector {
   constructor() {
     this.attributePaths = new Set([]);

@@ -110,6 +110,7 @@ Object {
   "stages[14].searchOptions.matchProperties[2]": "67132d2b-c371-4c57-a5eb-6520083f9d22",
   "stages[15].filter.rules[0].options.attribute": "6be95f85-c2d9-4daf-9de1-3939418af888",
   "stages[15].prompts[0].variable": "e343a91f-628d-4175-870c-957beffa0152",
+  "stages[15].prompts[1].otherVariable": "979c9ad7-74cb-402d-8574-3f0a91c9174d",
   "stages[15].prompts[1].variable": "e343a91f-628d-4175-870c-957beffa0153",
   "stages[15].prompts[2].variable": "e343a91f-628d-4175-870c-957beffa0154",
   "stages[15].prompts[3].binSortOrder[0].property": "0e75ec18-2cb1-4606-9f18-034d28b07c19",
