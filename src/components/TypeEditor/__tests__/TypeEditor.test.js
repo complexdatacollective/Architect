@@ -9,7 +9,6 @@ const mockProps = {
   dirty: false,
   valid: true,
   handleSubmit: () => {},
-  displayVariables: [],
   form: 'TYPE_EDITOR',
   toggleCodeView: () => {},
   showCodeView: true,
@@ -51,7 +50,6 @@ describe('<TypeEditor />', () => {
     expect(subject.containsAllMatchingElements([
       <h2>Color</h2>,
       <h2>Icon</h2>,
-      <h2>Display Variable</h2>,
       <Variables {...variablesProps} />,
     ])).toBe(true);
   });
@@ -66,11 +64,10 @@ describe('<TypeEditor />', () => {
 
     expect(subject.containsAllMatchingElements([
       <h2>Icon</h2>,
-      <h2>Display Variable</h2>,
     ])).toBe(false);
   });
 
-  it('if "new" hides variable secion', () => {
+  it('if "new" hides variable section', () => {
     const subject = shallow(<UnconnectedTypeEditor {...mockProps} entity="node" isNew />);
 
     expect(subject.containsAllMatchingElements([

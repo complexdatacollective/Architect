@@ -3,7 +3,7 @@ import {
   omit, get, has, isEmpty,
 } from 'lodash';
 import prune from '@app/utils/prune';
-import { getCodebook, getVariablesForSubject } from '../../../selectors/codebook';
+import { getVariablesForSubject } from '../../../selectors/codebook';
 import { makeGetUsageForType } from '../../../selectors/usage';
 import { makeGetIsUsed } from '../../../selectors/codebook/isUsed';
 import { getNextCategoryColor } from './utils/helpers';
@@ -181,19 +181,6 @@ const deleteVariableThunk = (entity, type, variable) => (dispatch, getState) => 
   return true;
 };
 
-const updateDisplayVariableThunk = (entity, type, variable) => (dispatch, getState) => {
-  const codebook = getCodebook(getState());
-
-  const previousConfiguration = get(codebook, [entity, type], {});
-
-  const updatedConfiguration = {
-    ...previousConfiguration,
-    displayVariable: variable,
-  };
-
-  dispatch(saveableChange(updateType)(entity, type, updatedConfiguration));
-};
-
 const getDeleteAction = ({ type, ...owner }) => {
   switch (type) {
     case 'stage':
@@ -329,7 +316,6 @@ const actionCreators = {
   createVariable: createVariableThunk,
   deleteVariable: deleteVariableThunk,
   updateVariable: updateVariableThunk,
-  updateDisplayVariable: updateDisplayVariableThunk,
 };
 
 const actionTypes = {
