@@ -84,13 +84,40 @@ variablePathCollector.add('stages[].presets[].groupVariable');
 variablePathCollector.add('stages[].presets[].edges.display[]');
 variablePathCollector.add('stages[].presets[].highlight[]');
 
+const variablePaths = [
+  'stages[].quickAdd',
+  'stages[].form.fields[].variable',
+  'stages[].panels.filter.rules[].options.attribute',
+  'stages[].searchOptions.matchProperties[]',
+  'stages[].cardOptions.additionalProperties[].variable',
+  'stages[].prompts[].variable',
+  'stages[].prompts[].edgeVariable',
+  'stages[].prompts[].otherVariable',
+  'stages[].prompts[].additionalAttributes[].variable',
+  'stages[].prompts[].highlight.variable',
+  'stages[].prompts[].layout.layoutVariable',
+  'stages[].prompts[].presets[].layoutVariable',
+  'stages[].prompts[].presets[].groupVariable',
+  'stages[].prompts[].presets[].edges.display[]',
+  'stages[].prompts[].presets[].highlight[]',
+  'stages[].prompts[].bucketSortOrder[].property',
+  'stages[].prompts[].binSortOrder[].property',
+  'stages[].skipLogic.filter.rules[].options.attribute',
+  'stages[].filter.rules[].options.attribute',
+  'stages[].presets[].layoutVariable',
+  'stages[].presets[].groupVariable',
+  'stages[].presets[].edges.display[]',
+  'stages[].presets[].highlight[]',
+];
+
 /**
  * Returns index of used variables
  * @returns {object} in format: { [path]: variable }
  */
 const getVariableIndex = createSelector(
   getProtocol,
-  (protocol) => variablePathCollector.collect(protocol),
+  (protocol) => collectPaths(variablePaths, protocol),
+  // variablePathCollector.collect(protocol),
 );
 
 /**
